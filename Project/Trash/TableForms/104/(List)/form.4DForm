@@ -1,0 +1,297 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 20,
+	"bottomMargin": 20,
+	"markerHeader": 30,
+	"markerBody": 60,
+	"events": [
+		"onLoad"
+	],
+	"windowTitle": "window title",
+	"destination": "listScreen",
+	"pages": [
+		{
+			"objects": {}
+		},
+		{
+			"objects": {
+				"background": {
+					"type": "rectangle",
+					"fill": "automatic",
+					"stroke": "transparent",
+					"top": 30,
+					"height": 30,
+					"left": 0,
+					"right": 2610
+				},
+				"label_UUID": {
+					"type": "text",
+					"text": "UUID",
+					"top": 10,
+					"left": 10,
+					"height": 17,
+					"width": 250,
+					"fontWeight": "bold",
+					"textAlign": "center"
+				},
+				"field_UUID": {
+					"type": "input",
+					"dataSource": "[PlanificationSlot:104]UUID:1",
+					"top": 37,
+					"left": 10,
+					"width": 250,
+					"height": 17,
+					"borderStyle": "none"
+				},
+				"line_1": {
+					"type": "line",
+					"top": 0,
+					"height": 60,
+					"left": 265
+				},
+				"label_UUID_Staff": {
+					"type": "text",
+					"text": "UUID_Staff",
+					"top": 10,
+					"left": 270,
+					"height": 17,
+					"width": 250,
+					"fontWeight": "bold",
+					"textAlign": "center"
+				},
+				"field_UUID_Staff": {
+					"type": "input",
+					"dataSource": "[PlanificationSlot:104]UUID_Staff:2",
+					"top": 37,
+					"left": 270,
+					"width": 250,
+					"height": 17,
+					"borderStyle": "none"
+				},
+				"line_2": {
+					"type": "line",
+					"top": 0,
+					"height": 60,
+					"left": 525
+				},
+				"label_UUID_Project": {
+					"type": "text",
+					"text": "UUID_Project",
+					"top": 10,
+					"left": 530,
+					"height": 17,
+					"width": 250,
+					"fontWeight": "bold",
+					"textAlign": "center"
+				},
+				"field_UUID_Project": {
+					"type": "input",
+					"dataSource": "[PlanificationSlot:104]UUID_Project:3",
+					"top": 37,
+					"left": 530,
+					"width": 250,
+					"height": 17,
+					"borderStyle": "none"
+				},
+				"line_3": {
+					"type": "line",
+					"top": 0,
+					"height": 60,
+					"left": 785
+				},
+				"label_UUID_Phase": {
+					"type": "text",
+					"text": "UUID_Phase",
+					"top": 10,
+					"left": 790,
+					"height": 17,
+					"width": 250,
+					"fontWeight": "bold",
+					"textAlign": "center"
+				},
+				"field_UUID_Phase": {
+					"type": "input",
+					"dataSource": "[PlanificationSlot:104]UUID_Phase:4",
+					"top": 37,
+					"left": 790,
+					"width": 250,
+					"height": 17,
+					"borderStyle": "none"
+				},
+				"line_4": {
+					"type": "line",
+					"top": 0,
+					"height": 60,
+					"left": 1045
+				},
+				"label_UUID_Affectation": {
+					"type": "text",
+					"text": "UUID_Affectation",
+					"top": 10,
+					"left": 1050,
+					"height": 17,
+					"width": 250,
+					"fontWeight": "bold",
+					"textAlign": "center"
+				},
+				"field_UUID_Affectation": {
+					"type": "input",
+					"dataSource": "[PlanificationSlot:104]UUID_Affectation:5",
+					"top": 37,
+					"left": 1050,
+					"width": 250,
+					"height": 17,
+					"borderStyle": "none"
+				},
+				"line_5": {
+					"type": "line",
+					"top": 0,
+					"height": 60,
+					"left": 1305
+				},
+				"label_UUID_Meeting": {
+					"type": "text",
+					"text": "UUID_Meeting",
+					"top": 10,
+					"left": 1310,
+					"height": 17,
+					"width": 250,
+					"fontWeight": "bold",
+					"textAlign": "center"
+				},
+				"field_UUID_Meeting": {
+					"type": "input",
+					"dataSource": "[PlanificationSlot:104]UUID_Meeting:6",
+					"top": 37,
+					"left": 1310,
+					"width": 250,
+					"height": 17,
+					"borderStyle": "none"
+				},
+				"line_6": {
+					"type": "line",
+					"top": 0,
+					"height": 60,
+					"left": 1565
+				},
+				"label_UUID_TrainingSession": {
+					"type": "text",
+					"text": "UUID_TrainingSession",
+					"top": 10,
+					"left": 1570,
+					"height": 17,
+					"width": 250,
+					"fontWeight": "bold",
+					"textAlign": "center"
+				},
+				"field_UUID_TrainingSession": {
+					"type": "input",
+					"dataSource": "[PlanificationSlot:104]UUID_TrainingSession:7",
+					"top": 37,
+					"left": 1570,
+					"width": 250,
+					"height": 17,
+					"borderStyle": "none"
+				},
+				"line_7": {
+					"type": "line",
+					"top": 0,
+					"height": 60,
+					"left": 1825
+				},
+				"label_stmpStart": {
+					"type": "text",
+					"text": "stmpStart",
+					"top": 10,
+					"left": 1830,
+					"height": 17,
+					"width": 250,
+					"fontWeight": "bold",
+					"textAlign": "center"
+				},
+				"field_stmpStart": {
+					"type": "input",
+					"dataSource": "String:C10(cs:C1710.sfw_stmp.me.getDate([PlanificationSlot:104]stmpStart:8))+\"  \"+String:C10(cs:C1710.sfw_stmp.me.getTime([PlanificationSlot:104]stmpStart:8))",
+					"dataSourceTypeHint": "integer",
+					"entryFilter": "&\"0-9;-\"",
+					"top": 37,
+					"left": 1830,
+					"width": 250,
+					"height": 17,
+					"borderStyle": "none"
+				},
+				"line_8": {
+					"type": "line",
+					"top": 0,
+					"height": 60,
+					"left": 2085
+				},
+				"label_stmpDuration": {
+					"type": "text",
+					"text": "stmpDuration",
+					"top": 10,
+					"left": 2090,
+					"height": 17,
+					"width": 250,
+					"fontWeight": "bold",
+					"textAlign": "center"
+				},
+				"field_stmpDuration": {
+					"type": "input",
+					"dataSource": "[PlanificationSlot:104]stmpDuration:9",
+					"dataSourceTypeHint": "integer",
+					"entryFilter": "&\"0-9;-\"",
+					"top": 37,
+					"left": 2090,
+					"width": 250,
+					"height": 17,
+					"borderStyle": "none"
+				},
+				"line_9": {
+					"type": "line",
+					"top": 0,
+					"height": 60,
+					"left": 2345
+				},
+				"label_IDStatus": {
+					"type": "text",
+					"text": "IDStatus",
+					"top": 10,
+					"left": 2350,
+					"height": 17,
+					"width": 250,
+					"fontWeight": "bold",
+					"textAlign": "center"
+				},
+				"field_IDStatus": {
+					"type": "input",
+					"dataSource": "[PlanificationSlot:104]IDStatus:12",
+					"dataSourceTypeHint": "integer",
+					"entryFilter": "&\"0-9;-\"",
+					"top": 37,
+					"left": 2350,
+					"width": 250,
+					"height": 17,
+					"borderStyle": "none"
+				}
+			}
+		}
+	],
+	"geometryStamp": 1,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
+}

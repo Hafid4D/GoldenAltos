@@ -1,0 +1,283 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 0,
+	"bottomMargin": 0,
+	"events": [
+		"onLoad",
+		"onValidate",
+		"onClick",
+		"onOutsideCall",
+		"onDoubleClick",
+		"onLosingFocus",
+		"onGettingFocus",
+		"onDrop",
+		"onMenuSelect",
+		"onPluginArea",
+		"onDragOver",
+		"onTimer",
+		"onAfterKeystroke",
+		"onAfterEdit",
+		"onBeginDragOver",
+		"onBoundVariableChange",
+		"onPageChange"
+	],
+	"windowTitle": "window title",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {
+				"header_bkgd": {
+					"type": "rectangle",
+					"top": 0,
+					"left": 0,
+					"width": 853,
+					"height": 91,
+					"sizingX": "grow",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"label_0_1": {
+					"type": "text",
+					"top": 12,
+					"left": 12,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "First name"
+				},
+				"entryField_firstName": {
+					"type": "input",
+					"top": 12,
+					"left": 132,
+					"width": 200,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.firstName",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"label_0_2": {
+					"type": "text",
+					"top": 37,
+					"left": 12,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Last name"
+				},
+				"entryField_lastName": {
+					"type": "input",
+					"top": 37,
+					"left": 132,
+					"width": 200,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.lastName",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"label_0_3": {
+					"type": "text",
+					"top": 62,
+					"left": 12,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Login"
+				},
+				"entryField_login": {
+					"type": "input",
+					"top": 62,
+					"left": 132,
+					"width": 200,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.login",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"vTabBar_subform": {
+					"type": "subform",
+					"top": 90,
+					"left": 0,
+					"width": 50,
+					"height": 450,
+					"dataSource": "Form:C1466.vTabBar",
+					"detailForm": "sfw_vTabBar",
+					"hideFocusRing": true,
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "sfw_main_vTabBar_sfo"
+				},
+				"cb_asDesigner": {
+					"type": "checkbox",
+					"text": "Acts as designer",
+					"top": 11,
+					"left": 399,
+					"width": 144,
+					"height": 18,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.current_item.asDesigner",
+					"dataSourceTypeHint": "boolean",
+					"method": "ObjectMethods/cb_asDesigner.4dm"
+				},
+				"btn_reset": {
+					"type": "button",
+					"text": "Reset user password",
+					"top": 6,
+					"left": 808,
+					"width": 31,
+					"height": 29,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"icon": "/RESOURCES/sfw/image/skin/rainbow/btn4states/reset-password-24x24.png",
+					"textPlacement": "left",
+					"method": "ObjectMethods/btn_reset.4dm",
+					"iconFrames": 4,
+					"imageHugsTitle": false,
+					"textAlign": "center",
+					"popupPlacement": "linked",
+					"sizingX": "move"
+				},
+				"cb_isInactive": {
+					"type": "checkbox",
+					"text": "Inactive user",
+					"top": 38,
+					"left": 399,
+					"width": 144,
+					"height": 18,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.current_item.isInactive",
+					"dataSourceTypeHint": "boolean"
+				}
+			}
+		},
+		{
+			"objects": {
+				"bkgd_lb_inscriptions": {
+					"type": "rectangle",
+					"top": 94,
+					"left": 50,
+					"width": 323,
+					"height": 450,
+					"stroke": "#c0c0c0",
+					"fill": "#F7F9FC"
+				},
+				"lb_inscriptions": {
+					"type": "listbox",
+					"top": 91,
+					"left": 50,
+					"width": 322,
+					"height": 418,
+					"resizingMode": "legacy",
+					"listboxType": "collection",
+					"focusable": false,
+					"movableRows": false,
+					"dataSource": "Form:C1466.lb_inscriptions",
+					"currentItemSource": "Form:C1466.inscription",
+					"currentItemPositionSource": "Form:C1466.inscription_position",
+					"metaSource": "This:C1470.meta",
+					"scrollbarHorizontal": "hidden",
+					"horizontalLineStroke": "transparent",
+					"verticalLineStroke": "#C0C0C0",
+					"events": [
+						"onClick",
+						"onDataChange",
+						"onSelectionChange",
+						"onHeaderClick"
+					],
+					"fill": "#FFFFFF",
+					"alternateFill": "#F7F9FC",
+					"method": "",
+					"columns": [
+						{
+							"name": "Colonne3",
+							"dataSource": "This:C1470.userProfile.name",
+							"width": 172,
+							"minWidth": 10,
+							"maxWidth": 32000,
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"header": {
+								"name": "Entête3",
+								"text": "Profil",
+								"fontTheme": "normal",
+								"textAlign": "left"
+							},
+							"footer": {
+								"name": "Pied3",
+								"timeFormat": "hh_mm_ss",
+								"fontFamily": "System Font Regular",
+								"fontSize": 10
+							},
+							"fontTheme": "normal"
+						}
+					]
+				},
+				"bActionInscriptions": {
+					"type": "button",
+					"text": "Actions",
+					"top": 515,
+					"left": 56,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionInscriptions.4dm"
+				}
+			}
+		}
+	],
+	"method": "method.4dm",
+	"geometryStamp": 93,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
+}

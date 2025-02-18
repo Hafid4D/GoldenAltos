@@ -1,0 +1,28 @@
+{
+	"Classes par défaut": {},
+	"Dossier par défaut": {
+		"groups": [
+			"Classes par défaut",
+			"Formulaires par défaut",
+			"Méthodes projet par défaut",
+			"Tables par défaut"
+		]
+	},
+	"Formulaires par défaut": {
+		"forms": [
+			"sfw_eventPalette1",
+			"sfw_wizard_notification",
+			"sfw_wizard_scheduler"
+		]
+	},
+	"Méthodes projet par défaut": {},
+	"Tables par défaut": {},
+	"Web": {
+		"methods": [
+			"sfw_w_home_page",
+			"sfw_w_login",
+			"sfw_w_logout"
+		]
+	},
+	"trash": {}
+}

@@ -1,0 +1,212 @@
+{
+	"forms": {
+		"panel_emailTemplate": {
+			"timeStamp": "2025-01-22T15:53:46Z",
+			"destination": "detailScreen"
+		},
+		"zzzEventList1": {
+			"timeStamp": "2025-01-07T08:02:50Z",
+			"destination": "detailScreen"
+		},
+		"panel_currency": {
+			"timeStamp": "2024-12-17T20:24:04Z",
+			"destination": "detailScreen"
+		},
+		"sfw_vTabBar": {
+			"timeStamp": "2024-12-17T20:24:04Z",
+			"destination": "detailScreen"
+		},
+		"zzzEmail": {
+			"timeStamp": "2024-12-17T20:24:04Z",
+			"destination": "detailScreen"
+		},
+		"sfw_entryTBPup": {
+			"timeStamp": "2024-12-17T20:24:04Z",
+			"destination": "detailScreen"
+		},
+		"sfw_globalSearch": {
+			"timeStamp": "2024-12-17T20:24:04Z",
+			"destination": "detailScreen"
+		},
+		"sfw_dial_alert": {
+			"timeStamp": "2025-01-06T16:09:44Z",
+			"destination": "detailScreen"
+		},
+		"sfw_subpanel_schedule": {
+			"timeStamp": "2024-12-17T20:24:04Z",
+			"destination": "detailScreen"
+		},
+		"sfw_panel_default": {
+			"timeStamp": "2024-12-17T20:24:04Z",
+			"destination": "detailScreen"
+		},
+		"Form1": {
+			"timeStamp": "2024-12-17T20:24:04Z",
+			"destination": "detailScreen"
+		},
+		"sfw_dial_CreateRenounceContinue": {
+			"timeStamp": "2025-01-09T08:24:14Z",
+			"destination": "detailScreen"
+		},
+		"sfw_user_newPassword": {
+			"timeStamp": "2025-01-30T11:17:24Z",
+			"destination": "detailScreen"
+		},
+		"sfw_eventPalette1": {
+			"timeStamp": "2025-01-07T08:02:50Z",
+			"destination": "detailScreen"
+		},
+		"sfw_subpanel_communication": {
+			"timeStamp": "2025-01-07T08:02:44Z",
+			"destination": "detailScreen"
+		},
+		"sfw_dial_export": {
+			"timeStamp": "2025-02-06T14:15:52Z",
+			"destination": "detailScreen"
+		},
+		"sfw_dial_info": {
+			"timeStamp": "2025-01-06T16:09:44Z",
+			"destination": "detailScreen"
+		},
+		"zzz_fact": {
+			"timeStamp": "2025-01-16T10:01:10Z",
+			"destination": "detailScreen"
+		},
+		"sfw_dial_request": {
+			"timeStamp": "2025-01-06T16:09:44Z",
+			"destination": "detailScreen"
+		},
+		"sfw_selector_callback": {
+			"timeStamp": "2025-01-09T13:57:10Z",
+			"destination": "detailScreen"
+		},
+		"sfw_compilation_syntaxCheck": {
+			"timeStamp": "2024-12-17T20:24:04Z",
+			"destination": "detailScreen"
+		},
+		"sfw_toolbar": {
+			"timeStamp": "2025-02-11T15:59:42Z",
+			"destination": "detailScreen"
+		},
+		"panel_notificationType": {
+			"timeStamp": "2025-01-23T11:38:02Z",
+			"destination": "detailScreen"
+		},
+		"sfw_panel_counter": {
+			"timeStamp": "2025-01-09T15:02:30Z",
+			"destination": "detailScreen"
+		},
+		"sfw_dial_SaveCancelContinue": {
+			"timeStamp": "2025-01-09T08:24:14Z",
+			"destination": "detailScreen"
+		},
+		"sfw_wizard_notification": {
+			"timeStamp": "2025-01-24T09:38:44Z",
+			"destination": "detailScreen"
+		},
+		"sfw_dial_confirm": {
+			"timeStamp": "2025-01-06T16:09:44Z",
+			"destination": "detailScreen"
+		},
+		"zzzEventList2": {
+			"timeStamp": "2025-01-07T08:02:50Z",
+			"destination": "detailScreen"
+		},
+		"sfw_searchHelper": {
+			"timeStamp": "2024-12-17T20:24:04Z",
+			"destination": "detailScreen"
+		},
+		"sfw_panel_setting": {
+			"timeStamp": "2024-12-17T20:24:04Z",
+			"destination": "detailScreen"
+		},
+		"sfw_main": {
+			"timeStamp": "2025-02-05T16:03:14Z",
+			"destination": "detailScreen"
+		},
+		"sfw_lbXliff": {
+			"timeStamp": "2024-12-17T20:24:04Z",
+			"destination": "detailScreen"
+		},
+		"sfw_panel_country": {
+			"timeStamp": "2025-01-09T08:24:14Z",
+			"destination": "detailScreen"
+		},
+		"Form2": {
+			"timeStamp": "2024-12-17T20:24:04Z",
+			"destination": "detailScreen"
+		},
+		"sfw_commentPalette": {
+			"timeStamp": "2025-01-06T09:02:04Z",
+			"destination": "detailScreen"
+		},
+		"sfw_panel_user": {
+			"timeStamp": "2025-02-05T11:19:46Z",
+			"destination": "detailScreen"
+		},
+		"zzzMessageList": {
+			"timeStamp": "2025-01-03T15:42:58Z",
+			"destination": "detailScreen"
+		},
+		"panel__": {
+			"timeStamp": "2024-12-17T20:24:04Z",
+			"destination": "detailScreen"
+		},
+		"sfw_subpanel_addressSingle": {
+			"timeStamp": "2025-01-08T08:21:32Z",
+			"destination": "detailScreen"
+		},
+		"sfw_eventPalette": {
+			"timeStamp": "2025-01-07T08:02:50Z",
+			"destination": "detailScreen"
+		},
+		"sfw_wizard_scheduler": {
+			"timeStamp": "2025-01-22T08:20:34Z",
+			"destination": "detailScreen"
+		},
+		"sfw_subpanel_communicationSingle": {
+			"timeStamp": "2024-12-26T13:51:04Z",
+			"destination": "detailScreen"
+		},
+		"zzzMessageList1": {
+			"timeStamp": "2025-01-08T08:21:32Z",
+			"destination": "detailScreen"
+		},
+		"sfw_spiderWizard": {
+			"timeStamp": "2024-12-27T09:05:48Z",
+			"destination": "detailScreen"
+		},
+		"sfw_item": {
+			"timeStamp": "2025-02-05T16:03:14Z",
+			"destination": "detailScreen"
+		},
+		"sfw_trackerList": {
+			"timeStamp": "2024-12-17T20:24:04Z",
+			"destination": "detailScreen"
+		},
+		"sfw_login": {
+			"timeStamp": "2024-12-27T13:26:00Z",
+			"destination": "detailScreen"
+		},
+		"zzzForm": {
+			"timeStamp": "2025-02-06T10:13:54Z",
+			"destination": "detailScreen"
+		},
+		"sfw_subpanel_address": {
+			"timeStamp": "2024-12-17T20:24:04Z",
+			"destination": "detailScreen"
+		},
+		"zz4Colors": {
+			"timeStamp": "2024-12-17T20:24:04Z",
+			"destination": "detailScreen"
+		},
+		"zzzEventList": {
+			"timeStamp": "2025-01-07T08:02:50Z",
+			"destination": "detailScreen"
+		},
+		"sfw_panel_eventType": {
+			"timeStamp": "2024-12-17T20:24:04Z",
+			"destination": "detailScreen"
+		}
+	}
+}

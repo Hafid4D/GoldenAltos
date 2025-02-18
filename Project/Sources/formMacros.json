@@ -1,0 +1,12 @@
+﻿{
+    "macros": {
+        "Create a panel from zero": {
+            "class": "sfw_formMacro",
+            "type": "createAPanelFromZero"
+        },
+        "Select none xliff text": {
+            "class": "sfw_formMacro",
+            "type": "SelectNoneXliffText"
+        }
+    }
+}

@@ -1,0 +1,12 @@
+{
+	"forms": {
+		"Sortie": {
+			"timeStamp": "2024-12-17T20:24:06Z",
+			"destination": "listScreen"
+		},
+		"Entrée": {
+			"timeStamp": "2024-12-17T20:24:06Z",
+			"destination": "detailScreen"
+		}
+	}
+}

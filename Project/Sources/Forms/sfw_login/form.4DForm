@@ -1,0 +1,158 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "fixed",
+	"windowSizingY": "fixed",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"events": [
+		"onLoad",
+		"onValidate",
+		"onClick",
+		"onOutsideCall",
+		"onDoubleClick",
+		"onDrop",
+		"onMenuSelect",
+		"onPluginArea",
+		"onDataChange",
+		"onDragOver",
+		"onTimer",
+		"onAfterKeystroke",
+		"onAfterEdit",
+		"onBeginDragOver",
+		"onBoundVariableChange",
+		"onPageChange"
+	],
+	"windowTitle": "Login",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {
+				"bkgd_topBar": {
+					"type": "rectangle",
+					"top": 0,
+					"left": 0,
+					"width": 381,
+					"height": 423,
+					"sizingX": "fixed",
+					"fill": "#FFFFFF",
+					"stroke": "transparent",
+					"sizingY": "fixed"
+				},
+				"imgLogo": {
+					"type": "input",
+					"left": 14,
+					"top": 10,
+					"width": 356,
+					"height": 97,
+					"dataSourceTypeHint": "picture",
+					"borderStyle": "none",
+					"enterable": false,
+					"contextMenu": "none",
+					"focusable": false,
+					"dataSource": "Form:C1466.logo",
+					"pictureFormat": "truncatedCenter"
+				}
+			}
+		},
+		{
+			"objects": {
+				"pup_users": {
+					"type": "dropdown",
+					"left": 153,
+					"top": 162,
+					"width": 194,
+					"height": 27,
+					"events": [
+						"onDataChange"
+					],
+					"dataSource": "Form:C1466.pup_users",
+					"dataSourceTypeHint": "object",
+					"sizingX": "fixed",
+					"sizingY": "fixed"
+				},
+				"input_password": {
+					"type": "input",
+					"left": 153,
+					"top": 213,
+					"width": 194,
+					"height": 17,
+					"textAlign": "automatic",
+					"sizingX": "fixed",
+					"sizingY": "fixed",
+					"dataSource": "Form:C1466.password",
+					"events": [
+						"onLosingFocus",
+						"onAfterEdit"
+					],
+					"method": "ObjectMethods/input_password.4dm"
+				},
+				"btn_login": {
+					"type": "button",
+					"text": ":xliff:user.login.button.login",
+					"top": 316,
+					"left": 54,
+					"width": 276,
+					"height": 36,
+					"events": [
+						"onClick"
+					],
+					"sizingX": "fixed",
+					"sizingY": "fixed",
+					"method": "ObjectMethods/btn_login.4dm",
+					"shortcutAccel": false,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": false,
+					"shortcutKey": "[Return]"
+				},
+				"Text": {
+					"type": "text",
+					"text": ":xliff:user.login.field.user",
+					"top": 167,
+					"left": 30,
+					"width": 124,
+					"height": 16,
+					"stroke": "#808080"
+				},
+				"Text1": {
+					"type": "text",
+					"text": ":xliff:user.login.field.password",
+					"top": 214,
+					"left": 30,
+					"width": 124,
+					"height": 16,
+					"stroke": "#808080"
+				},
+				"input_error": {
+					"type": "input",
+					"left": 30,
+					"top": 250,
+					"width": 317,
+					"height": 33,
+					"textAlign": "center",
+					"sizingX": "fixed",
+					"sizingY": "fixed",
+					"enterable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"stroke": "#ff6347",
+					"dataSource": "Form:C1466.error"
+				}
+			}
+		}
+	],
+	"geometryStamp": 180,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	},
+	"method": "method.4dm"
+}

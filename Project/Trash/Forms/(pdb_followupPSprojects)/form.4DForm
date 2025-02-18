@@ -1,0 +1,114 @@
+{
+	"destination": "detailScreen",
+	"rightMargin": 0,
+	"bottomMargin": 0,
+	"markerHeader": 15,
+	"markerBody": 200,
+	"markerBreak": 220,
+	"markerFooter": 240,
+	"events": [
+		"onLoad",
+		"onPluginArea",
+		"onBoundVariableChange"
+	],
+	"method": "method.4dm",
+	"pageFormat": {
+		"paperName": "A4",
+		"paperWidth": "595pt",
+		"paperHeight": "841pt"
+	},
+	"pages": [
+		null,
+		{
+			"objects": {
+				"ViewProArea": {
+					"type": "view",
+					"top": 42,
+					"left": 0,
+					"width": 897,
+					"height": 490,
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"dataSourceTypeHint": "object",
+					"method": "ObjectMethods/ViewProArea.4dm",
+					"withFormulaBar": true,
+					"events": [
+						"onVPReady"
+					],
+					"userInterface": "ribbon"
+				},
+				"pup_month": {
+					"type": "dropdown",
+					"top": 12,
+					"left": 358,
+					"width": 96,
+					"height": 19,
+					"focusable": false,
+					"method": "ObjectMethods/pup_month.4dm",
+					"events": [
+						"onDataChange"
+					],
+					"dataSourceTypeHint": "object",
+					"numberFormat": "",
+					"dataSource": "Form:C1466.months",
+					"visibility": "visible"
+				},
+				"pup_years": {
+					"type": "dropdown",
+					"top": 12,
+					"left": 474,
+					"width": 96,
+					"height": 19,
+					"focusable": false,
+					"method": "ObjectMethods/pup_years.4dm",
+					"events": [
+						"onDataChange"
+					],
+					"dataSourceTypeHint": "object",
+					"numberFormat": "",
+					"dataSource": "Form:C1466.years",
+					"visibility": "visible"
+				},
+				"Button": {
+					"type": "button",
+					"text": "Apply",
+					"top": 12,
+					"left": 595,
+					"width": 128,
+					"height": 19,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/Button.4dm",
+					"visibility": "hidden"
+				},
+				"closing": {
+					"type": "button",
+					"text": "Clôturer",
+					"top": 12,
+					"left": 9,
+					"width": 128,
+					"height": 19,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/closing.4dm",
+					"visibility": "visible"
+				}
+			}
+		}
+	],
+	"geometryStamp": 37,
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"formSizeAnchor": "ViewProArea",
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
+}

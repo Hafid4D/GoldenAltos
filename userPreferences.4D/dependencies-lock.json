@@ -1,0 +1,24 @@
+{
+	"dependencies": {
+		"4DPop": {
+			"github": "vdelachaux/4DPop",
+			"version": "latest",
+			"tag": "20.7.3",
+			"htmlURL": "https://github.com/vdelachaux/4DPop/releases/tag/20.7.3",
+			"archiveURL": "https://github.com/vdelachaux/4DPop/releases/download/20.7.3/4DPop.zip",
+			"loaded": true,
+			"found": true,
+			"path": "macOS:Users:4d1:Library:Caches:4D:Dependencies:.github:vdelachaux:4DPop:20.7.3:"
+		},
+		"4DPop XLIFF Pro": {
+			"github": "vdelachaux/4DPop-XLIFF-Pro",
+			"tag": "20.7.3",
+			"version": null,
+			"htmlURL": "https://github.com/vdelachaux/4DPop-XLIFF-Pro/releases/tag/20.7.3",
+			"archiveURL": "https://github.com/vdelachaux/4DPop-XLIFF-Pro/releases/download/20.7.3/4DPop-XLIFF-Pro.zip",
+			"loaded": true,
+			"found": true,
+			"path": "macOS:Users:4d1:Library:Caches:4D:Dependencies:.github:vdelachaux:4DPop-XLIFF-Pro:20.7.3:"
+		}
+	}
+}
