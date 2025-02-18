@@ -338,7 +338,7 @@
 			"displayable_fields_count": 19,
 			"fields_ordering": 2,
 			"fields": {
-				"idt_status": {
+				"IDT_status": {
 					"position": 4
 				},
 				"resale_license_number": {
@@ -350,7 +350,7 @@
 				"address": {
 					"position": 6
 				},
-				"idt_carrier": {
+				"IDT_carrier": {
 					"position": 5
 				},
 				"code": {

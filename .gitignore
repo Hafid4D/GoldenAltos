@@ -1,3 +1,5 @@
 /Data
 /Logs
-/*userPrefereces.4D
+/userPreferences.*
+/*.4BK
+/backupHistory.json
