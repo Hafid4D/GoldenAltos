@@ -1264,10 +1264,13 @@
 		<field name="name" uuid="6408BE6907C146339726DEB3047C211E" type="10" limiting_length="255" never_null="true" id="2"/>
 		<field name="code" uuid="AF9DE89990E540D5986DAACE7A507FB0" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="IDT_carrier" uuid="C597A4092E2E4812ABE088A99BB5ADF5" type="3" never_null="true" id="4"/>
-		<field name="address" uuid="F3B5F489FCA349E798ABFC436DDD823C" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
-		<field name="account_number" uuid="5A3BBA99C17E4183BE08F3A2B8EC43BF" type="10" limiting_length="255" never_null="true" id="6"/>
-		<field name="resale_license_number" uuid="CA916083E95D431CB2D94D2DA814C36A" type="10" limiting_length="255" never_null="true" id="7"/>
+		<field name="contactDetails" uuid="F3B5F489FCA349E798ABFC436DDD823C" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
+		<field name="accountNumber" uuid="5A3BBA99C17E4183BE08F3A2B8EC43BF" type="10" limiting_length="255" never_null="true" id="6"/>
+		<field name="resaleLicenseNumber" uuid="CA916083E95D431CB2D94D2DA814C36A" type="10" limiting_length="255" never_null="true" id="7"/>
 		<field name="IDT_status" uuid="C667491D1DBD4A238DB7F4B0766ADDB4" type="3" never_null="true" id="8"/>
+		<field name="carrier" uuid="D963356B60AA42A3A44E61021998FB1E" type="10" limiting_length="255" never_null="true" id="9"/>
+		<field name="accountNum" uuid="2B66CF6D4B0349D99F372D1F4BAD6F4F" type="10" limiting_length="255" never_null="true" id="10"/>
+		<field name="ftp" uuid="4D0C1F15F7D742BFB42D5259BA6576F6" type="21" blob_switch_size="2147483647" never_null="true" id="11"/>
 		<primary_key field_name="UUID" field_uuid="37676CD94E8B423595ED98B5C0E9CF89"/>
 	</table>
 	<table name="PurchaseOrder" uuid="CCC415D8C3C546D09E90E672FE1988CF" id="115">

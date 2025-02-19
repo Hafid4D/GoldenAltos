@@ -45,6 +45,9 @@
 		"sfw_macro_callbackEntry": {
 			"timeStamp": "2025-01-09T15:59:22Z"
 		},
+		"__import_data_customer": {
+			"timeStamp": "2025-02-19T12:38:02Z"
+		},
 		"sfw_compilation_importFile": {
 			"timeStamp": "2024-12-17T20:24:06Z"
 		},
@@ -124,7 +127,7 @@
 			"timeStamp": "2024-12-17T20:24:06Z"
 		},
 		"sfw_on_startup_database": {
-			"timeStamp": "2025-01-23T09:18:42Z"
+			"timeStamp": "2025-02-18T14:45:08Z"
 		},
 		"sfw_subpanel_schedule_init": {
 			"timeStamp": "2024-12-17T20:24:06Z"

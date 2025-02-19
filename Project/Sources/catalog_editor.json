@@ -336,18 +336,17 @@
 				"height": 449.06891886393
 			},
 			"displayable_fields_count": 19,
-			"fields_ordering": 2,
 			"fields": {
 				"IDT_status": {
 					"position": 4
 				},
-				"resale_license_number": {
+				"resaleLicenseNumber": {
 					"position": 8
 				},
-				"account_number": {
+				"accountNumber": {
 					"position": 7
 				},
-				"address": {
+				"contactDetails": {
 					"position": 6
 				},
 				"IDT_carrier": {
