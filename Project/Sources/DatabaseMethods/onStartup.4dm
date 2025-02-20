@@ -8,8 +8,3 @@ End if
 
 sfw_on_startup_database("goldenAltos_definition")
 
-
-
-//appointments_cleaner
-
-//sfw_w_load_routes

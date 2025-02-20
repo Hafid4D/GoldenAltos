@@ -1,10 +1,37 @@
 //%attributes = {}
 var $eCustomer : cs:C1710.CustomerEntity
+var $eCustomerStatus : cs:C1710.CustomerStatusEntity
 
 $customer_Log:=Folder:C1567(fk data folder:K87:12).file("Customer_Log.json")
 If ($customer_Log.exists)
 	$customers:=JSON Parse:C1218($customer_Log.getText())
 	TRUNCATE TABLE:C1051([Customer:114])
+	TRUNCATE TABLE:C1051([CustomerStatus:130])
+	
+	
+	$eCustomerStatus:=ds:C1482.CustomerStatus.new()
+	$eCustomerStatus.statusID:=1
+	$eCustomerStatus.name:="Active"
+	$eCustomerStatus.color:=""
+	$eCustomerStatus.save()
+	
+	$eCustomerStatus:=ds:C1482.CustomerStatus.new()
+	$eCustomerStatus.statusID:=2
+	$eCustomerStatus.name:="Hold"
+	$eCustomerStatus.color:=""
+	$eCustomerStatus.save()
+	
+	$eCustomerStatus:=ds:C1482.CustomerStatus.new()
+	$eCustomerStatus.statusID:=3
+	$eCustomerStatus.name:="Retired"
+	$eCustomerStatus.color:=""
+	$eCustomerStatus.save()
+	
+	$eCustomerStatus:=ds:C1482.CustomerStatus.new()
+	$eCustomerStatus.statusID:=4
+	$eCustomerStatus.name:="Void"
+	$eCustomerStatus.color:=""
+	$eCustomerStatus.save()
 	
 	For each ($customer; $customers)
 		$eCustomer:=ds:C1482.Customer.new()
@@ -18,12 +45,13 @@ If ($customer_Log.exists)
 		$address:=New object:C1471()
 		$address.type:="billing"
 		$address.detail:=New object:C1471()
-		$address.detail.country:=$customer.BillAddressCountry
+		$address.detail.country:="US"
 		$address.detail.street_1:=$customer.Bill_Address1
 		If (String:C10($customer.Bill_Address2)#"")
 			$address.detail.street_2:=$customer.Bill_Address2
 		End if 
 		$address.detail.postcode:=$customer.Bill_addr_zip
+		$address.detail.iso_code_2:="US"
 		$address.detail.city:=$customer.Bill_add_city
 		$eCustomer.contactDetails.addresses.push($address)
 		
@@ -31,13 +59,14 @@ If ($customer_Log.exists)
 		$address:=New object:C1471()
 		$address.type:="shipping"
 		$address.detail:=New object:C1471()
-		$address.detail.country:=$customer.ShipAddressCountry
+		$address.detail.country:="US"
 		$address.detail.street_1:=$customer.Ship_Address1
 		If (String:C10($customer.Ship_Address2)#"")
 			$address.detail.street_2:=$customer.Ship_Address2
 		End if 
 		$address.detail.postcode:=$customer.Ship_Addr_zip
 		$address.detail.city:=$customer.Ship_addr_city
+		$address.detail.iso_code_2:="US"
 		$eCustomer.contactDetails.addresses.push($address)
 		
 		$eCustomer.contactDetails.communications:=New collection:C1472()

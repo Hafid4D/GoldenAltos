@@ -1,1 +1,0 @@
-OBJECT SET ENABLED:C1123(*; "bOk"; (Form:C1466.templateProject#Null:C1517))

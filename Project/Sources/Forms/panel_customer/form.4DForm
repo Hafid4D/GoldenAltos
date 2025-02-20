@@ -9,8 +9,8 @@
 	"windowMinHeight": 0,
 	"windowMaxWidth": 32767,
 	"windowMaxHeight": 32767,
-	"rightMargin": 20,
-	"bottomMargin": 20,
+	"rightMargin": 0,
+	"bottomMargin": 0,
 	"events": [
 		"onLoad",
 		"onPageChange",
@@ -32,21 +32,176 @@
 	"destination": "detailScreen",
 	"pages": [
 		{
-			"objects": {}
-		},
-		{
 			"objects": {
-				"Text": {
+				"header_bkgd": {
+					"type": "rectangle",
+					"top": 0,
+					"left": 0,
+					"width": 878,
+					"height": 69,
+					"sizingX": "grow",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"label_name": {
 					"type": "text",
-					"text": "test",
-					"top": 30,
-					"left": 90,
-					"width": 156,
-					"height": 31
+					"top": 12,
+					"left": 12,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Name"
+				},
+				"entryField_name": {
+					"type": "input",
+					"top": 12,
+					"left": 132,
+					"width": 256,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.name",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"label_code": {
+					"type": "text",
+					"top": 37,
+					"left": 12,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Code"
+				},
+				"entryField_code": {
+					"type": "input",
+					"top": 37,
+					"left": 132,
+					"width": 256,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.code",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"label_status": {
+					"type": "text",
+					"top": 12,
+					"left": 419,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Status"
+				},
+				"vTabBar_subform": {
+					"type": "subform",
+					"top": 69,
+					"left": 0,
+					"width": 50,
+					"height": 450,
+					"dataSource": "Form:C1466.vTabBar",
+					"detailForm": "sfw_vTabBar",
+					"hideFocusRing": true,
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "sfw_main_vTabBar_sfo"
+				},
+				"pup_CustomerStatus": {
+					"type": "button",
+					"top": 9,
+					"left": 508,
+					"width": 200,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Status",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_CustomerStatus.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"subFormAddress": {
+					"type": "subform",
+					"left": 57,
+					"top": 99,
+					"width": 735,
+					"height": 246,
+					"detailForm": "sfw_subpanel_addressSingle",
+					"borderStyle": "sunken",
+					"dataSource": "Form:C1466.subFormAddress"
+				},
+				"rbBilling": {
+					"type": "radio",
+					"text": "Billing",
+					"top": 74,
+					"left": 57,
+					"width": 127,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "bevel",
+					"dataSource": "Form:C1466.addressBilling",
+					"radioGroup": "address",
+					"fontSize": 11,
+					"focusable": false,
+					"method": "ObjectMethods/rbBilling.4dm",
+					"icon": "Images/user.png",
+					"iconFrames": 1,
+					"textPlacement": "right"
+				},
+				"rbShipping": {
+					"type": "radio",
+					"text": "Shipping",
+					"top": 74,
+					"left": 183,
+					"width": 127,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "bevel",
+					"dataSource": "Form:C1466.addressShipping",
+					"radioGroup": "address",
+					"fontSize": 11,
+					"focusable": false,
+					"method": "ObjectMethods/rbShipping.4dm",
+					"icon": "Images/building.png",
+					"iconFrames": 1,
+					"textPlacement": "right"
 				}
 			}
+		},
+		{
+			"objects": {}
 		}
 	],
-	"geometryStamp": 2,
-	"method": "method.4dm"
+	"geometryStamp": 47,
+	"method": "method.4dm",
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
 }
