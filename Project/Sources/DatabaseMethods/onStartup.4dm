@@ -6,7 +6,7 @@ If (Num:C11(Application version:C493)<2060)  // Compatibility starting with 4D 2
 	End if 
 End if 
 
-sfw_on_startup_database("ProjectName_definition")
+sfw_on_startup_database("goldenAltos_definition")
 
 
 
