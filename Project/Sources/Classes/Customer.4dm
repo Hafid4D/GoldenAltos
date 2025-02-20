@@ -9,9 +9,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setIcon("image/entry/customers-50x50.png")
 	$entry.setSearchboxField("name")
 	$entry.setPanel("panel_customer")
-	$entry.setPanelPage(1; "address-32x32.png")
+	$entry.setPanelPage(1; "address-32x32.png"; "address")
 	
-	$entry.setLBItemsColumn("name"; "Name"; "xliff:entry.customer.field.name"; "width:200")
+	$entry.setLBItemsColumn("name"; "Name"; "xliff:entry.customer.field.name"; "width:300")
+	$entry.setLBItemsColumn("code"; "Code"; "xliff:entry.customer.field.name"; "width:200")
 	
 	$entry.setLBItemsOrderBy("name")
 	

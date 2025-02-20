@@ -43,7 +43,7 @@
 					"fill": "#A2C6D8",
 					"stroke": "transparent"
 				},
-				"label_name": {
+				"label_0_1": {
 					"type": "text",
 					"top": 12,
 					"left": 12,
@@ -69,7 +69,7 @@
 					"fill": "transparent",
 					"borderStyle": "none"
 				},
-				"label_code": {
+				"label_0_2": {
 					"type": "text",
 					"top": 37,
 					"left": 12,
@@ -95,7 +95,7 @@
 					"fill": "transparent",
 					"borderStyle": "none"
 				},
-				"label_status": {
+				"label_0_3": {
 					"type": "text",
 					"top": 12,
 					"left": 419,
@@ -138,13 +138,27 @@
 					"events": [
 						"onClick"
 					]
+				}
+			}
+		},
+		{
+			"objects": {
+				"main_bkgd": {
+					"type": "rectangle",
+					"top": 258,
+					"left": 57,
+					"width": 819,
+					"height": 120,
+					"sizingX": "grow",
+					"fill": "#EBEBEB",
+					"stroke": "transparent"
 				},
 				"subFormAddress": {
 					"type": "subform",
 					"left": 57,
 					"top": 99,
 					"width": 735,
-					"height": 246,
+					"height": 150,
 					"detailForm": "sfw_subpanel_addressSingle",
 					"borderStyle": "sunken",
 					"dataSource": "Form:C1466.subFormAddress"
@@ -188,14 +202,205 @@
 					"icon": "Images/building.png",
 					"iconFrames": 1,
 					"textPlacement": "right"
+				},
+				"label_0_4": {
+					"type": "text",
+					"top": 302,
+					"left": 62,
+					"width": 111,
+					"height": 16,
+					"stroke": "#808080",
+					"text": "Ship Via{Carrier}"
+				},
+				"entryField_name1": {
+					"type": "input",
+					"top": 302,
+					"left": 193,
+					"width": 256,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.carrier",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"label_0_5": {
+					"type": "text",
+					"top": 327,
+					"left": 62,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Account#"
+				},
+				"entryField_code1": {
+					"type": "input",
+					"top": 327,
+					"left": 193,
+					"width": 256,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.accountNum",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"label_0_6": {
+					"type": "text",
+					"top": 351,
+					"left": 62,
+					"width": 111,
+					"height": 16,
+					"stroke": "#808080",
+					"text": "Resale License#"
+				},
+				"entryField_code2": {
+					"type": "input",
+					"top": 351,
+					"left": 193,
+					"width": 256,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.resaleLicenseNumber",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"shipping_bkgd": {
+					"type": "rectangle",
+					"top": 258,
+					"left": 59,
+					"width": 402,
+					"height": 34,
+					"sizingX": "grow",
+					"fill": "#b1c4dd",
+					"stroke": "transparent"
+				},
+				"ftp_bkgd": {
+					"type": "rectangle",
+					"top": 258,
+					"left": 462,
+					"width": 412,
+					"height": 34,
+					"sizingX": "grow",
+					"fill": "#b1c4dd",
+					"stroke": "transparent"
+				},
+				"Text": {
+					"type": "text",
+					"text": "Shipping",
+					"top": 268,
+					"left": 62,
+					"width": 119,
+					"height": 16,
+					"fontWeight": "bold"
+				},
+				"Text1": {
+					"type": "text",
+					"text": "FTP Info",
+					"top": 267,
+					"left": 467,
+					"width": 119,
+					"height": 16,
+					"fontWeight": "bold"
+				},
+				"label_0_7": {
+					"type": "text",
+					"top": 303,
+					"left": 467,
+					"width": 111,
+					"height": 16,
+					"stroke": "#808080",
+					"text": "Domain"
+				},
+				"entryField_name2": {
+					"type": "input",
+					"top": 303,
+					"left": 598,
+					"width": 256,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.ftp.domain",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"label_0_8": {
+					"type": "text",
+					"top": 328,
+					"left": 467,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "User"
+				},
+				"entryField_code3": {
+					"type": "input",
+					"top": 328,
+					"left": 598,
+					"width": 256,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.ftp.user",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"label_0_9": {
+					"type": "text",
+					"top": 352,
+					"left": 467,
+					"width": 111,
+					"height": 16,
+					"stroke": "#808080",
+					"text": "Password"
+				},
+				"entryField_code4": {
+					"type": "input",
+					"top": 352,
+					"left": 598,
+					"width": 256,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.ftp.password",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
 				}
 			}
-		},
-		{
-			"objects": {}
 		}
 	],
-	"geometryStamp": 47,
+	"geometryStamp": 144,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
