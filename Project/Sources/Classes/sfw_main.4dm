@@ -250,6 +250,9 @@ Function lb_items_search()
 		: (This:C1470.view.displayType="hierarchical")
 			This:C1470._drawHierarchicalList()
 			
+		: (This:C1470.view.displayType="hierarchicalEntries")
+			This:C1470._drawHierarchicalEntries()
+			
 	End case 
 	
 Function lb_items_counter_format()
@@ -326,6 +329,26 @@ Function lb_items_doEvent()
 	var $previousItem : 4D:C1709.Entity
 	
 	Case of 
+		: (FORM Event:C1606.code=On Clicked:K2:4) & (Right click:C712)
+			
+			$refMenus:=New collection:C1472
+			$refMenu:=Create menu:C408
+			$refMenus.push($refMenu)
+			
+			APPEND MENU ITEM:C411($refMenu; "Open in a new window..."; *)
+			//SET MENU ITEM PARAMETER($refMenu; -1; )
+			
+			$choose:=Dynamic pop up menu:C1006($refMenu)
+			For each ($refMenu; $refMenus)
+				RELEASE MENU:C978($refMenu)
+			End for each 
+			
+			Case of 
+				: ($choose#"")
+					
+			End case 
+			
+			
 		: (FORM Event:C1606.code=On Clicked:K2:4)
 			If (This:C1470.nothingToSave())
 				Form:C1466.previous_current_lb_item_pos:=Form:C1466.current_lb_item_pos
@@ -636,7 +659,7 @@ Function _displayPupViews()
 	$headerBarHeight:=$bottom-$top
 	OBJECT GET COORDINATES:C663(*; "entry_label"; $left; $top; $right; $bottom)
 	$entryLabelHeight:=$bottom-$top
-	$entry_label:=ds:C1482.sfw_readXliff(Form:C1466.sfw.entry.xliff; Form:C1466.sfw.entry.label)
+	$entry_label:=" "+ds:C1482.sfw_readXliff(Form:C1466.sfw.entry.xliff; Form:C1466.sfw.entry.label)
 	If (Form:C1466.projection) && (Form:C1466.filterByProjection)
 		$entry_label+=" ("+Form:C1466.projection.label+")"
 	End if 
@@ -644,8 +667,9 @@ Function _displayPupViews()
 		$topLabel:=($headerBarHeight-($entryLabelHeight*2))/3
 		OBJECT SET COORDINATES:C1248(*; "entry_label"; $left; $topLabel; $right; $topLabel+$entryLabelHeight)
 		
-		OBJECT SET FORMAT:C236(*; "pupViews"; This:C1470.view.label+";path:"+This:C1470.view.picto+";")
-		OBJECT GET BEST SIZE:C717(*; "pupViews"; $bestWidth; $bestHeight; 150)
+		OBJECT SET FORMAT:C236(*; "pupViews"; " "+This:C1470.view.label+";path:"+This:C1470.view.picto+";")
+		OBJECT GET BEST SIZE:C717(*; "pupViews"; $bestWidth; $bestHeight; 350)
+		$bestWidth+=5
 		OBJECT GET COORDINATES:C663(*; "pupViews"; $left; $top; $right; $bottom)
 		OBJECT SET COORDINATES:C1248(*; "pupViews"; $left; $topLabel+$entryLabelHeight+$topLabel; $left+$bestWidth; $topLabel+$entryLabelHeight+$topLabel+$entryLabelHeight)
 		
@@ -660,7 +684,7 @@ Function _displayPupViews()
 		//End if 
 		
 		$popup:=(Form:C1466.sfw.entry.allowFavorite) || (Form:C1466.projection) ? "1" : "0"
-		$picto:="book-brown.png"
+		$picto:="book-white.png"
 		Case of 
 			: (Form:C1466.sfw.entry.allowFavorite) && (Form:C1466.filterByFavorite)
 				$picto:="star.png"
@@ -672,24 +696,16 @@ Function _displayPupViews()
 		
 		
 		OBJECT GET BEST SIZE:C717(*; "entry_label"; $bestWidth; $bestHeight; 150)
+		$bestWidth+=5
 		OBJECT GET COORDINATES:C663(*; "entry_label"; $left; $top; $right; $bottom)
 		OBJECT SET COORDINATES:C1248(*; "entry_label"; $left; $top; $left+$bestWidth; $bottom)
 		
 	Else 
 		$topLabel:=($headerBarHeight-$entryLabelHeight)/2
 		OBJECT SET COORDINATES:C1248(*; "entry_label"; $left; $topLabel; $right; $topLabel+$entryLabelHeight)
-		//If (Form.sfw.entry.allowFavorite)
-		//If (Form.filterByFavorite)
-		//OBJECT SET FORMAT(*; "entry_label"; $entry_label+";path:/RESOURCES/sfw/image/picto/star.png;;;;;;;;;1;")
-		//Else 
-		//OBJECT SET FORMAT(*; "entry_label"; $entry_label+";path:/RESOURCES/sfw/image/picto/book-brown.png;;;;;;;;;1;")
-		//End if 
-		//Else 
-		//OBJECT SET FORMAT(*; "entry_label"; $entry_label+";;;;;;;;;;0;")
-		//End if 
 		
 		$popup:=(Form:C1466.sfw.entry.allowFavorite) || (Form:C1466.projection) ? "1" : "0"
-		$picto:=($popup="1") ? "book-brown.png" : ""
+		$picto:=($popup="1") ? "book-white.png" : ""
 		Case of 
 			: (Form:C1466.sfw.entry.allowFavorite) && (Form:C1466.filterByFavorite)
 				$picto:="star.png"
@@ -709,6 +725,8 @@ Function _displayPupViews()
 		: (This:C1470.view.displayType="listbox")
 			$target:="lb_items"
 		: (This:C1470.view.displayType="hierarchical")
+			$target:="hl_items"
+		: (This:C1470.view.displayType="hierarchicalEntries")
 			$target:="hl_items"
 		Else 
 			$target:="lb_items"
@@ -854,6 +872,83 @@ Function hl_items_manage()
 			
 	End case 
 	
+	//Mark:- Hierarchical entries
+	
+Function clearHierarchicalEntries()
+	If (Form:C1466.sfw#Null:C1517) && (Form:C1466.sfw.hl_items#Null:C1517)
+		If (Is a list:C621(Form:C1466.sfw.hl_items))
+			CLEAR LIST:C377(Form:C1466.sfw.hl_items; *)
+		End if 
+	End if 
+	
+Function _drawHierarchicalEntries
+	
+	This:C1470.clearHierarchicalEntries()
+	Form:C1466.sfw.hl_items:=New list:C375
+	This:C1470.lastRefItemInList:=0
+	If (Form:C1466.sfw.view.HLEntries#Null:C1517)
+		
+		This:C1470.HLEntries:=This:C1470.HLEntries || New object:C1471
+		This:C1470.HLEntries.currentLevelInDrawing:=-1
+		This:C1470.HLEntries.lastCount:=0
+		Form:C1466.sfw.hl_items:=This:C1470._drawHierarchicalEntriesLevel()
+	End if 
+	
+Function _drawHierarchicalEntriesLevel($parentItem : 4D:C1709.Entity)->$list : Integer
+	
+	
+	This:C1470.HLEntries.currentLevelInDrawing+=1
+	$hierarchicalLevels:=Form:C1466.sfw.view.HLEntries.levels
+	$hierarchicalLevel:=$hierarchicalLevels[This:C1470.HLEntries.currentLevelInDrawing]
+	$entryIdent:=$hierarchicalLevel.entryIdent
+	$entryOfTheLevel:=cs:C1710.sfw_definition.me.getEntryByIdent($entryIdent)
+	$dataclassOfTheLevel:=$entryOfTheLevel.dataclass
+	$mainAttributeOfTheLevel:=$hierarchicalLevel.attributeTodisplay
+	
+	If (Count parameters:C259=0)
+		$items:=ds:C1482[$dataclassOfTheLevel].all()
+	Else 
+		$items:=$parentItem[$hierarchicalLevel.linkToFollow]
+	End if 
+	
+	If ($items.length=0)
+		$list:=0
+	Else 
+		$list:=New list:C375
+		If ($hierarchicalLevel.orderBy#Null:C1517)
+			$items:=$items.orderBy($hierarchicalLevel.orderBy)
+		End if 
+		For each ($item; $items)
+			If ((This:C1470.HLEntries.currentLevelInDrawing+1)<$hierarchicalLevels.length)
+				$sublist:=This:C1470._drawHierarchicalEntriesLevel($item)
+			Else 
+				$subList:=0
+			End if 
+			$label:=$item[$mainAttributeOfTheLevel]
+			$displayItem:=True:C214
+			Case of 
+				: ((This:C1470.HLEntries.currentLevelInDrawing+1)=$hierarchicalLevels.length)
+				: ($subList#0)
+				: ($subList=0) && (Not:C34(Bool:C1537($hierarchicalLevel.displayOnlyIfChildren)))
+				Else 
+					$displayItem:=False:C215
+			End case 
+			//
+			If ($displayItem)
+				This:C1470.lastRefItemInList+=1
+				APPEND TO LIST:C376($list; $label; This:C1470.lastRefItemInList; $subList; Bool:C1537($hierarchicalLevel.collapsed))
+				SET LIST ITEM PARAMETER:C986($list; This:C1470.lastRefItemInList; "UUID"; $item.getKey())
+				If ($hierarchicalLevel.displayCount)
+					SET LIST ITEM PARAMETER:C986($list; This:C1470.lastRefItemInList; Additional text:K28:7; String:C10(This:C1470.HLEntries.lastCount))
+				End if 
+				SET LIST ITEM PROPERTIES:C386($list; This:C1470.lastRefItemInList; False:C215; $hierarchicalLevel.style; ""; $hierarchicalLevel.color)
+			End if 
+		End for each 
+	End if 
+	This:C1470.HLEntries.lastCount:=$items.length
+	This:C1470.HLEntries.currentLevelInDrawing-=1
+	
+	
 	
 	//mark:-Filters
 	
@@ -864,23 +959,16 @@ Function displayFilter()
 	End if 
 	
 	If (Form:C1466.filters#Null:C1517)
-		OBJECT GET COORDINATES:C663(*; "pupFilter_1"; $gpf; $hpf; $dpf; $bpf)
+		$verticalGap:=5
 		If (Form:C1466.filters.length<4)
-			OBJECT GET COORDINATES:C663(*; "lb_items"; $glb; $hlb; $dlb; $blb)
-			$verticalGap:=$hpf-$hlb
-			OBJECT SET COORDINATES:C1248(*; "lb_items"; $glb; $bpf+$verticalGap; $dlb; $blb)
-			OBJECT GET COORDINATES:C663(*; "hl_items"; $ghl; $hhl; $dhl; $bhl)
-			$verticalGap:=$hpf-$hhl
-			OBJECT SET COORDINATES:C1248(*; "hl_items"; $ghl; $bpf+$verticalGap; $dhl; $bhl)
+			OBJECT GET COORDINATES:C663(*; "pupFilter_1"; $gpf; $hpf; $dpf; $bpf)
 		Else 
-			OBJECT GET COORDINATES:C663(*; "lb_items"; $glb; $hlb; $dlb; $blb)
-			$verticalGap:=$hpf-$hlb
-			OBJECT SET COORDINATES:C1248(*; "lb_items"; $glb; $bpf+$verticalGap+$verticalGap+$bpf-$hpf; $dlb; $blb)
-			OBJECT GET COORDINATES:C663(*; "hl_items"; $ghl; $hhl; $dhl; $bhl)
-			$verticalGap:=$hpf-$hhl
-			OBJECT SET COORDINATES:C1248(*; "hl_items"; $ghl; $bpf+$verticalGap+$verticalGap+$bpf-$hpf; $dhl; $bhl)
+			OBJECT GET COORDINATES:C663(*; "pupFilter_4"; $gpf; $hpf; $dpf; $bpf)
 		End if 
-		
+		OBJECT GET COORDINATES:C663(*; "lb_items"; $glb; $hlb; $dlb; $blb)
+		OBJECT SET COORDINATES:C1248(*; "lb_items"; $glb; $bpf+$verticalGap; $dlb; $blb)
+		OBJECT GET COORDINATES:C663(*; "hl_items"; $ghl; $hhl; $dhl; $bhl)
+		OBJECT SET COORDINATES:C1248(*; "hl_items"; $ghl; $bpf+$verticalGap; $dhl; $bhl)
 		$i:=0
 		For each ($filter; This:C1470.entry.filters)
 			$i+=1

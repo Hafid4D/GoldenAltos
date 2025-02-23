@@ -28,6 +28,11 @@ shared Function defineUser()
 			This:C1470.info.email:=""
 		End if 
 		
+		$dcName:=cs:C1710.sfw_definition.me.globalParameters.users.linkedDataclass
+		$formula:=Formula from string:C1601("ds."+$dcName+".query(\"UUID_User = :1\";$1).first().UUID")
+		This:C1470.info["UUID_"+$dcName]:=$formula.call(Null:C1517; This:C1470.info.UUID)
+		
+		
 	Else 
 		This:C1470.info.asDesigner:=True:C214
 		This:C1470.info.login:="Designer"
@@ -166,7 +171,7 @@ shared Function storeAccess()
 				$infoToStore.hashPassword:=$eUser.accesses.password.hash
 				$infoToStore.hashPassword2:=Generate password hash:C1533($eUser.UUID; $hashOptions)
 				$infoToStore.hashPassword3:=Generate password hash:C1533($logFolder.platformPath; $hashOptions)
-				$applicationInfo:=Get application info:C1599
+				$applicationInfo:=Application info:C1599
 				$file:=Folder:C1567(fk user preferences folder:K87:10).file("myAccess.json")
 				$file.setText(JSON Stringify:C1217($infoToStore; *))
 			End if 

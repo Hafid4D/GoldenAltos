@@ -37,7 +37,7 @@ Function _openFormInProcess($formData : Object)
 		: (OB Class:C1730($formData.sfw).name="sfw_item")
 			$dialogName:="sfw_item"
 		Else 
-			$dialogName:="sfw_main"
+			$dialogName:="sfw_main_new"  //"sfw_main"
 	End case 
 	$formData.dialogName:=$dialogName
 	
@@ -1414,7 +1414,7 @@ Function bMode()
 				End if 
 			End if 
 			
-			If (Form:C1466.dialogName="sfw_main")
+			If (Form:C1466.dialogName="sfw_main") || (Form:C1466.dialogName="sfw_main_new")
 				APPEND MENU ITEM:C411($refMenu; "-")  //XLIFF
 				APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("crud.mode.openNewWindow"; "Open in a new window"); *)  //XLIFF
 				SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/openWindow-24x24.png")
@@ -2080,8 +2080,17 @@ Function panelFormMethod()
 			Form:C1466.useAddressSubSubForm:=(Find in array:C230($_objectNames; "address_subsubform")>0)
 			Form:C1466.useCommunicationSubSubForm:=(Find in array:C230($_objectNames; "communication_subform")>0)
 			Form:C1466.usePageTab:=(Find in array:C230($_objectNames; "page_tab")>0)
+			Form:C1466.useHTab:=(Find in array:C230($_objectNames; "hTabBar")>0)
 			Form:C1466.useHeaderBkgd:=(Find in array:C230($_objectNames; "header_bkgd")>0)
 			Form:C1466.useTabBar:=(Find in array:C230($_objectNames; "vTabBar_subform")>0)
+			
+			For each ($page; Form:C1466.sfw.entry.panel.pages)
+				OBJECT SET TITLE:C194(*; "TextWidthCalculator"; $page.label)
+				OBJECT GET BEST SIZE:C717(*; "TextWidthCalculator"; $bestWidth; $bestHeight)
+				Use ($page)
+					$page.width:=$bestWidth
+				End use 
+			End for each 
 			
 			If (Form:C1466.useTabBar)
 				If (Form:C1466.vTabBar=Null:C1517)
@@ -2095,6 +2104,9 @@ Function panelFormMethod()
 				Form:C1466.calculation:=New object:C1471
 			End if 
 			
+			If (Form:C1466.useHTab)
+				Form:C1466.useHTab_current_page:=0
+			End if 
 			
 		: (FORM Event:C1606.code=On Bound Variable Change:K2:52)
 			$resetWidgetDesign:=True:C214
@@ -2257,6 +2269,11 @@ Function panelFormMethod()
 		OBJECT SET COORDINATES:C1248(*; "vTabBar_subform"; 0; $h; $d; $height_subform)
 	End if 
 	
+	If (Bool:C1537(Form:C1466.useHTab)) && (FORM Get current page:C276(*)#Form:C1466.useHTab_current_page)
+		Form:C1466.useHTab_current_page:=FORM Get current page:C276(*)
+		Form:C1466.sfw.drawHTab()
+	End if 
+	
 	Form:C1466.sfw.redrawButtons()
 	
 	
@@ -2304,6 +2321,13 @@ Function recalculationOfPanelPageNeeded()->$calcNeeded : Boolean
 			
 	End case 
 	If ($calcNeeded)
+		$continue:=True:C214
+		For each ($panelPage; This:C1470.entry.panel.pages) While ($continue)
+			If ($panelPage.page=FORM Get current page:C276(*)) && ($panelPage.dynamicSource#Null:C1517)
+				$panelPage.dynamicSource._setDataSourceForDynamicPage()
+			End if 
+		End for each 
+		
 		cs:C1710.sfw_tracker.me.internal("recalculationOfPanelPageNeeded")
 	End if 
 	
@@ -2315,7 +2339,7 @@ Function displayItemPanel()
 	
 	If (This:C1470.entry.panel.asDynamicSources)
 		$folderForm:=Folder:C1567(fk database folder:K87:14).folder("Project/Sources/Forms/"+This:C1470.entry.panel.name)
-		$file:=$folderForm.file("Form.4DForm")
+		$file:=$folderForm.file("form.4DForm")
 		$formDefinition:=JSON Parse:C1218($file.getText())
 		$formDefinition.method:=$folderForm.path+$formDefinition.method
 		//refresh for object method paths
@@ -2332,7 +2356,7 @@ Function displayItemPanel()
 				$dynamicClass:=OB Class:C1730($panelPage.dynamicSource).name
 				Case of 
 					: ($dynamicClass="sfw_definitionPageListbox")
-						This:C1470.insertDynamicListbox($formDefinition; $panelPage)
+						$panelPage.dynamicSource._insertDynamicListbox($formDefinition; $panelPage)
 				End case 
 			End if 
 		End for each 
@@ -2345,95 +2369,6 @@ Function displayItemPanel()
 	
 	
 	
-Function insertDynamicListbox($formDefinition : Object; $panelPage : Object)
-	$dynamicSource:=$panelPage.dynamicSource
-	OBJECT GET COORDINATES:C663(*; "detail_panel"; $g; $h; $d; $b)
-	$widthDetailPanel:=$d-$g
-	$heightDetailPanel:=$b-$h
-	$offsetHorizontal:=0
-	$offsetVertical:=0
-	For each ($page; $formDefinition.pages)
-		For each ($objectName; $page.objects)
-			$object:=$page.objects[$objectName]
-			Case of 
-				: ($objectName="header_bkgd")
-					$offsetVertical:=$object.top+$object.height
-				: ($objectName="vTabBar_subform")
-					$offsetHorizontal:=$object.left+$object.width
-			End case 
-		End for each 
-	End for each 
-	
-	If ($panelPage.page<$formDefinition.pages.length)
-		$pageDefinition:=$formDefinition.pages[$panelPage.page]
-	Else 
-		$pageDefinition:=New object:C1471("objects"; New object:C1471)
-		$formDefinition.pages[$panelPage.page]:=$pageDefinition
-	End if 
-	
-	$marginVertical:=0
-	$gutter:=5
-	If ($dynamicSource.actions.length>0)
-		$bActionproperties:=New object:C1471
-		$bActionproperties.type:="button"
-		$bActionproperties.text:="Actions"
-		$bActionproperties.width:=80
-		$bActionproperties.height:=21
-		$bActionproperties.top:=$heightDetailPanel-$gutter-$bActionproperties.height
-		$marginVertical:=$gutter+$bActionproperties.height+$gutter
-		$bActionproperties.left:=$gutter+$offsetHorizontal
-		$bActionproperties.events:=["onClick"]
-		$bActionproperties.style:="custom"
-		$bActionproperties.popupPlacement:="linked"
-		$bActionproperties.icon:="/RESOURCES/sfw/image/picto/gear.png"
-		$bActionproperties.textPlacement:="right"
-		$bActionproperties.method:="sfw_dynamicPage_bAction"
-		$bActionproperties.sizingY:="move"
-		$pageDefinition.objects["bAction_"+$dynamicSource.ident]:=$bActionproperties
-	End if 
-	
-	$listboxProperties:=New object:C1471()
-	$listboxProperties.type:="listbox"
-	$listboxProperties.listboxType:="collection"
-	$listboxProperties.left:=$offsetHorizontal
-	$listboxProperties.top:=$offsetVertical
-	$listboxProperties.width:=$widthDetailPanel-$offsetHorizontal
-	$listboxProperties.height:=$heightDetailPanel-$offsetVertical-$marginVertical
-	$listboxProperties.sizingX:="grow"
-	$listboxProperties.sizingY:="grow"
-	$listboxProperties.resizingMode:="legacy"
-	$listboxProperties.focusable:=False:C215
-	$listboxProperties.scrollbarHorizontal:="hidden"
-	$listboxProperties.horizontalLineStroke:="transparent"
-	$listboxProperties.verticalLineStroke:="#FFFFFF"
-	$listboxProperties.fill:="#FFFFFF"
-	$listboxProperties.alternateFill:="#F5F5F5"
-	$listboxProperties.dataSource:=$dynamicSource.dataSource
-	$listboxProperties.currentItemSource:="Form.current_"+$dynamicSource.ident+"_item"
-	$listboxProperties.currentItemPositionSource:="Form.current_"+$dynamicSource.ident+"_position"
-	$listboxProperties.selectedItemsSource:="Form.selected_"+$dynamicSource.ident+"_items"
-	$listboxProperties.events:=New collection:C1472
-	$listboxProperties.columns:=New collection:C1472
-	$c:=0
-	For each ($columnDef; $dynamicSource.columns)
-		$c+=1
-		$column:=New object:C1471
-		$header:=New object:C1471
-		$header.name:="header_"+$dynamicSource.ident+"_"+String:C10($c)
-		$header.text:=$columnDef.headerLabel || Substring:C12($columnDef.expression; 6)
-		$column.header:=$header
-		$column.name:="col_"+$dynamicSource.ident+"_"+String:C10($c)
-		$column.dataSource:=$columnDef.expression
-		$column.width:=$columnDef.width || 100
-		$column.dataSourceTypeHint:=$columnDef.dataSourceTypeHint
-		If ($columnDef.numberFormat#Null:C1517)
-			$column.numberFormat:=$columnDef.numberFormat
-		End if 
-		$listboxProperties.columns.push($column)
-	End for each 
-	
-	
-	$pageDefinition.objects[$dynamicSource.ident]:=$listboxProperties
 	
 	
 Function dynamicPage_bAction()
@@ -2449,190 +2384,87 @@ Function dynamicPage_bAction()
 		End if 
 	End for each 
 	
-	$actions:=$panelPage.dynamicSource.actions
-	If ($actions.length>0)
-		
-		$menu:=Create menu:C408
-		
-		For each ($action; $actions)
-			Case of 
-				: ($action.predefinedType="splitLine")
-					APPEND MENU ITEM:C411($menu; "-")
-					
-				: ($action.predefinedType="openInWindow")
-					APPEND MENU ITEM:C411($menu; "Open selected item in a new window..."; *)  //XLIFF
-					SET MENU ITEM PARAMETER:C1004($menu; -1; "--openInWindow")
-					SET MENU ITEM ICON:C984($menu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/openWindow-24x24.png")
-					If (Form:C1466["current_"+$ident+"_item"]=Null:C1517) || (Form:C1466["selected_"+$ident+"_items"].length>1)
-						DISABLE MENU ITEM:C150($menu; -1)
-					End if 
-					
-				: ($action.predefinedType="openAProjection")
-					If (Form:C1466["selected_"+$ident+"_items"].length>0)
-						APPEND MENU ITEM:C411($menu; "Open a projection with selected items..."; *)  //XLIFF
-					Else 
-						APPEND MENU ITEM:C411($menu; "Open a projection with all items..."; *)  //XLIFF
-					End if 
-					SET MENU ITEM ICON:C984($menu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/projection-24x24.png")
-					SET MENU ITEM PARAMETER:C1004($menu; -1; "--openAProjection")
-					
-				: ($action.predefinedType="export")
-					If (Form:C1466["selected_"+$ident+"_items"].length>0)
-						APPEND MENU ITEM:C411($menu; "Export the selected items..."; *)  //XLIFF
-					Else 
-						APPEND MENU ITEM:C411($menu; "Export all items..."; *)  //XLIFF
-					End if 
-					SET MENU ITEM ICON:C984($menu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/outside-24x24.png")
-					SET MENU ITEM PARAMETER:C1004($menu; -1; "--export")
-					
-				: ($action.specificAction)
-					APPEND MENU ITEM:C411($menu; $action.label; *)
-					SET MENU ITEM ICON:C984($menu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/action-24x24.png")
-					SET MENU ITEM PARAMETER:C1004($menu; -1; "--specific:"+$action.ident)
-					Case of 
-						: (Bool:C1537($action.needAnEntity)) && (Form:C1466["current_"+$ident+"_item"]=Null:C1517)
-							DISABLE MENU ITEM:C150($menu; -1)
-						Else 
-							If ($action.formulaToActivate#Null:C1517)
-								If ($action.formulaToActivate.call())
-									DISABLE MENU ITEM:C150($menu; -1)
-								End if 
-							End if 
-					End case 
-			End case 
-		End for each 
-		$choose:=Dynamic pop up menu:C1006($menu)
-		RELEASE MENU:C978($menu)
-		
-		Case of 
-			: ($choose="--openInWindow")
-				$action:=$actions.query("predefinedType = :1"; "openInWindow").first()
-				$item:=Form:C1466["current_"+$ident+"_item"]
-				Form:C1466.sfw.openInANewWindow($item; $action.visionIdent; $action.entryIdent)
-				
-			: ($choose="--openAProjection")
-				$action:=$actions.query("predefinedType = :1"; "openInWindow").first()
-				$item:=Form:C1466["current_"+$ident+"_item"]
-				$formData:=New object:C1471()
-				$formData.sfw:=cs:C1710.sfw_main.new()
-				$formData.sfw.vision:=cs:C1710.sfw_definition.me.getVisionByIdent($action.visionIdent)
-				$formData.sfw.entry:=cs:C1710.sfw_definition.me.getEntryByIdent($action.entryIdent)
-				$formData.projection:=New object:C1471
-				$formData.projection.label:="<- "+Form:C1466.sfw.entry.label  //XLIFF
-				If (Form:C1466["selected_"+$ident+"_items"].length>0)
-					$formData.projection.entitiesSelection:=Form:C1466["selected_"+$ident+"_items"]
-				Else 
-					$formData.projection.entitiesSelection:=Formula from string:C1601($panelPage.dynamicSource.dataSource).call()
-				End if 
-				$formData.window:=New object:C1471
-				GET WINDOW RECT:C443($left; $top; $right; $bottom)
-				$formData.window.left:=$left+50
-				$formData.window.top:=$top+50
-				$formData.sfw.openForm($formData)
-				
-			: ($choose="--export")
-				This:C1470.dynamicPage_bAction_export($ident; $panelPage)
-				
-			: ($choose="--specific:@")
-				$ident:=Split string:C1554($choose; ":").pop()
-				$action:=$actions.query("ident = :1"; $ident).first()
-				$action.formulaToCall.call()
-				
-		End case 
-	End if 
+	$panelPage.dynamicSource._bAction()
 	
-Function dynamicPage_bAction_export($ident : Text; $panelPage : Object)
-	var $file : 4D:C1709.File
 	
-	$form:=New object:C1471
-	$form.message:="Export the values"
-	$form.bFile:=1
-	$form.bPasteboard:=0
-	$form.bTTR:=1
-	$form.bCSV:=0
-	$form.bXLS:=0
-	$form.bOpen:=0
-	$form.bShow:=0
-	$form.bAddHeader:=1
-	$form.folderToExport:=cs:C1710.sfw_dialog.me._getLastExportFolder()
-	$form.fileName:="export"
-	$form.lb_columsToExport:=New collection:C1472
-	For each ($columnDef; $panelPage.dynamicSource.columns)
-		$column:=OB Copy:C1225($columnDef)
-		$column.__selected:=True:C214
-		$column.name:=$columnDef.headerLabel || Substring:C12($columnDef.expression; 6)
-		$form.lb_columsToExport.push($column)
+	
+	
+Function dynamicPage_pupFilter()
+	
+	$pupFilterName:=FORM Event:C1606.objectName
+	//$pageDefinition.objects["pupFilter_"+$dynamicSource.ident+"_"+$filter.ident]:=$bFilterproperties
+	$pupFilterName:=Substring:C12($pupFilterName; 11)
+	
+	$continue:=True:C214
+	For each ($panelPage; This:C1470.entry.panel.pages) While ($continue)
+		If ($panelPage.dynamicSource#Null:C1517)
+			If ($pupFilterName=($panelPage.dynamicSource.ident+"_@"))
+				For each ($filter; $panelPage.dynamicSource.filters) While ($continue)
+					If ($pupFilterName=($panelPage.dynamicSource.ident+"_"+$filter.ident))
+						$continue:=False:C215
+					End if 
+				End for each 
+			End if 
+		End if 
 	End for each 
 	
-	If (Is Windows:C1573)
-		$refWindow:=Open form window:C675("sfw_dial_export"; Modal form dialog box:K39:7)
-	Else 
-		$refWindow:=Open form window:C675("sfw_dial_export"; Sheet form window:K39:12)
-	End if 
-	DIALOG:C40("sfw_dial_export"; $form)
-	CLOSE WINDOW:C154($refWindow)
+	$panelPage.dynamicSource._pupFilter()
 	
-	If (ok=1)
-		If (Form:C1466["selected_"+$ident+"_items"].length>0)
-			$sourceItems:=Form:C1466["selected_"+$ident+"_items"]
+	
+	
+Function drawHTab()
+	
+	var $pict : Picture
+	$svg:=SVG_New()
+	
+	$authorizedProfiles:=cs:C1710.sfw_userManager.me.authorizedProfiles
+	$hGutter:=2
+	$hOffset:=$hGutter*2
+	For each ($tab; Form:C1466.sfw.entry.panel.pages)
+		If ($tab.allowedProfiles#Null:C1517) && ($tab.allowedProfiles.length>0)
+			$tabAllowed:=False:C215
+			For each ($authorizedProfile; $authorizedProfiles)
+				$tabAllowed:=$tabAllowed || ($tab.allowedProfiles.indexOf($authorizedProfile)#-1)
+			End for each 
 		Else 
-			$sourceItems:=Formula from string:C1601($panelPage.dynamicSource.dataSource).call()
+			$tabAllowed:=True:C214
 		End if 
-		
-		Case of 
-			: ($form.bTTR=1)
-				$columnSeparator:="\t"
-				$lineSeparator:="\r"
-				$extension:=".txt"
-			: ($form.bCSV=1)
-				$columnSeparator:="\t"
-				$lineSeparator:=";"
-				$extension:=".csv"
-		End case 
-		$lines:=New collection:C1472
-		
-		If ($form.bAddHeader=1)
-			$headerColumns:=New collection:C1472
-			For each ($columnDef; $panelPage.dynamicSource.columns)
-				$headerColumns.push($columnDef.headerLabel || Substring:C12($columnDef.expression; 6))
-			End for each 
-			$lines.push($headerColumns.join($columnSeparator))
+		If ($tabAllowed)
+			//$button.page
+			//$button.label
+			If (FORM Get current page:C276(*)=$tab.page)
+				$fill:="RoyalBlue"
+				$stroke:="grey"
+				$top:=0
+				$style:=Bold:K14:2
+				$strokeText:="white"
+				$hText:=5
+			Else 
+				$fill:="deepskyblue"
+				$stroke:="none"
+				$top:=4
+				$style:=Normal:K14:15
+				$strokeText:="DimGray"
+				$hText:=7
+			End if 
+			$withTab:=$tab.width+20
+			$rect:=SVG_New_rect($svg; $hOffset; $top; $withTab; 27; 5; 5; $stroke; $fill; 1)
+			SVG_SET_ID($rect; "page:"+String:C10($tab.page))
+			$text:=SVG_New_text($svg; $tab.label; $hOffset+($withTab/2); $hText; "Helvetica"; 12; $style; Align center:K42:3; $strokeText)
+			$hOffset+=$hGutter+$withTab
 		End if 
-		
-		For each ($item; $sourceItems)
-			$columns:=New collection:C1472
-			For each ($columnDef; $form.lb_columsToExport)
-				$expressionParts:=Split string:C1554($columnDef.expression; ".")
-				If ($expressionParts[0]="This")
-					$this:=$expressionParts.shift()
-				End if 
-				$lastAttribute:=$expressionParts.pop()
-				$objectSource:=$item
-				For each ($part; $expressionParts)
-					$objectSource:=$objectSource[$part]
-				End for each 
-				$value:=$objectSource[$lastAttribute]
-				$columns.push($value)
-			End for each 
-			$lines.push($columns.join($columnSeparator))
-			
-		End for each 
-		
-		Case of 
-			: ($form.bPasteboard=1)
-				SET TEXT TO PASTEBOARD:C523($lines.join($lineSeparator))
-				
-			: ($form.bTTR=1) || ($form.bCSV=1)
-				$file:=$form.folderToExport.file($form.fileName+$extension)
-				$contentText:=$lines.join($lineSeparator)
-				$file.setText($contentText)
-				If ($form.bShow=1)
-					SHOW ON DISK:C922($file.platformPath)
-				End if 
-				If ($form.bOpen=1)
-					OPEN URL:C673($file.platformPath)
-				End if 
-		End case 
-		
+	End for each 
+	
+	SVG EXPORT TO PICTURE:C1017($svg; $pict)
+	SVG_CLEAR($svg)
+	Form:C1466.hTabBar:=$pict
+	
+	
+Function clicHTab()
+	$id:=SVG Find element ID by coordinates:C1054(*; FORM Event:C1606.objectName; mouseX; mouseY)
+	If ($id="page:@")
+		FORM GOTO PAGE:C247(Num:C11(Substring:C12($id; 6)); *)
+		//Form.sfw.drawHTab()
 	End if 
+	
 	

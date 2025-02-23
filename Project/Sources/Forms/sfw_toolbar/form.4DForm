@@ -50,11 +50,20 @@
 		},
 		{
 			"objects": {
+				"Rectangle rond1": {
+					"type": "rectangle",
+					"top": 10,
+					"left": 12,
+					"width": 113,
+					"height": 48,
+					"stroke": "transparent",
+					"borderRadius": 10
+				},
 				"Rectangle rond": {
 					"type": "rectangle",
 					"top": 10,
-					"left": 15,
-					"width": 113,
+					"left": 135,
+					"width": 129,
 					"height": 48,
 					"stroke": "transparent",
 					"borderRadius": 10
@@ -84,38 +93,6 @@
 				"bToolbar_1": {
 					"type": "button",
 					"top": 6,
-					"left": 148,
-					"width": 60,
-					"height": 64,
-					"focusable": false,
-					"icon": "/RESOURCES/image/entry/doctor-50x50.png",
-					"style": "custom",
-					"events": [
-						"onClick"
-					],
-					"text": "Title",
-					"imageHugsTitle": true,
-					"fontSize": 9
-				},
-				"bToolbar_2": {
-					"type": "button",
-					"top": 6,
-					"left": 208,
-					"width": 60,
-					"height": 64,
-					"focusable": false,
-					"icon": "/RESOURCES/image/entry/doctor-50x50.png",
-					"style": "custom",
-					"events": [
-						"onClick"
-					],
-					"text": "Title",
-					"imageHugsTitle": true,
-					"fontSize": 9
-				},
-				"bToolbar_3": {
-					"type": "button",
-					"top": 6,
 					"left": 268,
 					"width": 60,
 					"height": 64,
@@ -127,9 +104,11 @@
 					],
 					"text": "Title",
 					"imageHugsTitle": true,
-					"fontSize": 9
+					"fontSize": 9,
+					"stroke": "#FFFFFF",
+					"iconFrames": 1
 				},
-				"bToolbar_4": {
+				"bToolbar_2": {
 					"type": "button",
 					"top": 6,
 					"left": 328,
@@ -143,9 +122,10 @@
 					],
 					"text": "Title",
 					"imageHugsTitle": true,
-					"fontSize": 9
+					"fontSize": 9,
+					"stroke": "#FFFFFF"
 				},
-				"bToolbar_5": {
+				"bToolbar_3": {
 					"type": "button",
 					"top": 6,
 					"left": 388,
@@ -159,9 +139,10 @@
 					],
 					"text": "Title",
 					"imageHugsTitle": true,
-					"fontSize": 9
+					"fontSize": 9,
+					"stroke": "#FFFFFF"
 				},
-				"bToolbar_6": {
+				"bToolbar_4": {
 					"type": "button",
 					"top": 6,
 					"left": 448,
@@ -175,9 +156,10 @@
 					],
 					"text": "Title",
 					"imageHugsTitle": true,
-					"fontSize": 9
+					"fontSize": 9,
+					"stroke": "#FFFFFF"
 				},
-				"bToolbar_7": {
+				"bToolbar_5": {
 					"type": "button",
 					"top": 6,
 					"left": 508,
@@ -191,9 +173,10 @@
 					],
 					"text": "Title",
 					"imageHugsTitle": true,
-					"fontSize": 9
+					"fontSize": 9,
+					"stroke": "#FFFFFF"
 				},
-				"bToolbar_8": {
+				"bToolbar_6": {
 					"type": "button",
 					"top": 6,
 					"left": 568,
@@ -207,9 +190,10 @@
 					],
 					"text": "Title",
 					"imageHugsTitle": true,
-					"fontSize": 9
+					"fontSize": 9,
+					"stroke": "#FFFFFF"
 				},
-				"bToolbar_9": {
+				"bToolbar_7": {
 					"type": "button",
 					"top": 6,
 					"left": 628,
@@ -223,9 +207,10 @@
 					],
 					"text": "Title",
 					"imageHugsTitle": true,
-					"fontSize": 9
+					"fontSize": 9,
+					"stroke": "#FFFFFF"
 				},
-				"bToolbar_10": {
+				"bToolbar_8": {
 					"type": "button",
 					"top": 6,
 					"left": 688,
@@ -239,9 +224,10 @@
 					],
 					"text": "Title",
 					"imageHugsTitle": true,
-					"fontSize": 9
+					"fontSize": 9,
+					"stroke": "#FFFFFF"
 				},
-				"bToolbar_11": {
+				"bToolbar_9": {
 					"type": "button",
 					"top": 6,
 					"left": 748,
@@ -255,9 +241,10 @@
 					],
 					"text": "Title",
 					"imageHugsTitle": true,
-					"fontSize": 9
+					"fontSize": 9,
+					"stroke": "#FFFFFF"
 				},
-				"bToolbar_12": {
+				"bToolbar_10": {
 					"type": "button",
 					"top": 6,
 					"left": 808,
@@ -271,9 +258,10 @@
 					],
 					"text": "Title",
 					"imageHugsTitle": true,
-					"fontSize": 9
+					"fontSize": 9,
+					"stroke": "#FFFFFF"
 				},
-				"bToolbar_13": {
+				"bToolbar_11": {
 					"type": "button",
 					"top": 6,
 					"left": 868,
@@ -287,9 +275,10 @@
 					],
 					"text": "Title",
 					"imageHugsTitle": true,
-					"fontSize": 9
+					"fontSize": 9,
+					"stroke": "#FFFFFF"
 				},
-				"bToolbar_14": {
+				"bToolbar_12": {
 					"type": "button",
 					"top": 6,
 					"left": 928,
@@ -303,11 +292,46 @@
 					],
 					"text": "Title",
 					"imageHugsTitle": true,
-					"fontSize": 9
+					"fontSize": 9,
+					"stroke": "#FFFFFF"
+				},
+				"bToolbar_13": {
+					"type": "button",
+					"top": 6,
+					"left": 988,
+					"width": 60,
+					"height": 64,
+					"focusable": false,
+					"icon": "/RESOURCES/image/entry/doctor-50x50.png",
+					"style": "custom",
+					"events": [
+						"onClick"
+					],
+					"text": "Title",
+					"imageHugsTitle": true,
+					"fontSize": 9,
+					"stroke": "#FFFFFF"
+				},
+				"bToolbar_14": {
+					"type": "button",
+					"top": 6,
+					"left": 1048,
+					"width": 60,
+					"height": 64,
+					"focusable": false,
+					"icon": "/RESOURCES/image/entry/doctor-50x50.png",
+					"style": "custom",
+					"events": [
+						"onClick"
+					],
+					"text": "Title",
+					"imageHugsTitle": true,
+					"fontSize": 9,
+					"stroke": "#FFFFFF"
 				},
 				"bToolbar_15": {
 					"type": "button",
-					"top": 6,
+					"top": 126,
 					"left": 989,
 					"width": 60,
 					"height": 64,
@@ -319,11 +343,12 @@
 					],
 					"text": "Title",
 					"imageHugsTitle": true,
-					"fontSize": 9
+					"fontSize": 9,
+					"stroke": "#FFFFFF"
 				},
 				"bToolbar_16": {
 					"type": "button",
-					"top": 6,
+					"top": 126,
 					"left": 1050,
 					"width": 60,
 					"height": 64,
@@ -335,12 +360,13 @@
 					],
 					"text": "Title",
 					"imageHugsTitle": true,
-					"fontSize": 9
+					"fontSize": 9,
+					"stroke": "#FFFFFF"
 				},
 				"Image9": {
 					"type": "picture",
 					"top": 45,
-					"left": 111,
+					"left": 245,
 					"width": 11,
 					"height": 11,
 					"pictureFormat": "scaled",
@@ -348,8 +374,8 @@
 				},
 				"pup_visions": {
 					"type": "button",
-					"top": 15,
-					"left": 25,
+					"top": 14,
+					"left": 22,
 					"width": 92,
 					"height": 39,
 					"focusable": false,
@@ -358,7 +384,8 @@
 					"method": "ObjectMethods/pup_visions.4dm",
 					"events": [
 						"onClick"
-					]
+					],
+					"stroke": "#FFFFFF"
 				},
 				"bLangage": {
 					"type": "button",
@@ -374,7 +401,8 @@
 					"icon": "/RESOURCES/image/flags/tiny/FR.png",
 					"popupPlacement": "linked",
 					"method": "ObjectMethods/bLangage.4dm",
-					"sizingX": "move"
+					"sizingX": "move",
+					"stroke": "#FFFFFF"
 				},
 				"searchbox_variable": {
 					"type": "input",
@@ -406,7 +434,7 @@
 					"height": 18,
 					"sizingX": "move",
 					"fontWeight": "bold",
-					"stroke": "#FF0000",
+					"stroke": "#FFFFFF",
 					"focusable": false,
 					"text": "X",
 					"iconFrames": 4,
@@ -423,7 +451,7 @@
 					"width": 60,
 					"height": 64,
 					"focusable": false,
-					"icon": "/RESOURCES/sfw/entry/notifications-50x50.png",
+					"icon": "/RESOURCES/sfw/entry/notifications-50x50-white.png",
 					"style": "custom",
 					"events": [
 						"onClick"
@@ -431,7 +459,8 @@
 					"text": "Notifications",
 					"imageHugsTitle": true,
 					"fontSize": 9,
-					"sizingX": "move"
+					"sizingX": "move",
+					"stroke": "#FFFFFF"
 				},
 				"bkgdNotifications": {
 					"type": "rectangle",
@@ -467,7 +496,7 @@
 					"width": 60,
 					"height": 64,
 					"focusable": false,
-					"icon": "/RESOURCES/sfw/entry/currentUserMale.png",
+					"icon": "/RESOURCES/sfw/entry/user-50x50-white.png",
 					"style": "custom",
 					"events": [
 						"onClick"
@@ -476,7 +505,8 @@
 					"imageHugsTitle": true,
 					"fontSize": 9,
 					"sizingX": "move",
-					"popupPlacement": "linked"
+					"popupPlacement": "linked",
+					"stroke": "#FFFFFF"
 				},
 				"bToDoList": {
 					"type": "button",
@@ -485,7 +515,7 @@
 					"width": 60,
 					"height": 64,
 					"focusable": false,
-					"icon": "/RESOURCES/sfw/entry/todoList-50x50.png",
+					"icon": "/RESOURCES/sfw/entry/todoList-50x50-white.png",
 					"style": "custom",
 					"events": [
 						"onClick"
@@ -493,7 +523,8 @@
 					"text": "To do list",
 					"imageHugsTitle": true,
 					"fontSize": 9,
-					"sizingX": "move"
+					"sizingX": "move",
+					"stroke": "#FFFFFF"
 				},
 				"bkgdToDoList": {
 					"type": "rectangle",
@@ -521,6 +552,24 @@
 					"stroke": "#FFFFFF",
 					"textAlign": "center",
 					"sizingX": "move"
+				},
+				"pupVisions": {
+					"type": "input",
+					"left": 145,
+					"top": 17,
+					"width": 112,
+					"height": 33,
+					"dataSource": "Form:C1466.vision.label",
+					"multiline": "yes",
+					"enterable": false,
+					"focusable": false,
+					"contextMenu": "none",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"method": "ObjectMethods/pupVisions.4dm",
+					"events": [
+						"onClick"
+					]
 				}
 			}
 		}
@@ -529,7 +578,7 @@
 		"version": "1",
 		"kind": "form"
 	},
-	"geometryStamp": 200,
+	"geometryStamp": 369,
 	"editor": {
 		"groups": {
 			"Group": [

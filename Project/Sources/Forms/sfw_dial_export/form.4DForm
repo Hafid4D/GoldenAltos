@@ -287,9 +287,10 @@
 					"height": 181,
 					"events": [
 						"onClick",
-						"onHeaderClick",
+						"onDrop",
 						"onDataChange",
-						"onSelectionChange"
+						"onSelectionChange",
+						"onHeaderClick"
 					],
 					"dataSource": "Form:C1466.lb_columsToExport",
 					"resizingMode": "legacy",
@@ -303,6 +304,9 @@
 					"alternateFill": "#F1F7FF",
 					"metaSource": "This:C1470.meta",
 					"focusable": false,
+					"dragging": "none",
+					"dropping": "none",
+					"sortable": true,
 					"columns": [
 						{
 							"header": {

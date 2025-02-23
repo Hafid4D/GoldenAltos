@@ -35,7 +35,7 @@ Function stringCapitalize($text : Text)->$result : Text
 	End for 
 	$result:=$particuleToAdd+$result
 	
-Function stringIsAnEmptyUUID($uuid : Text)->$isEmpty : Boolean
+Function isAnEmptyUUID($uuid : Text)->$isEmpty : Boolean
 	
 	$isEmpty:=True:C214
 	Case of 
@@ -52,3 +52,5 @@ Function stringIsAnEmptyUUID($uuid : Text)->$isEmpty : Boolean
 Function trimSpace($stringToTrim : Text)->$stringTrimmed : Text
 	
 	$stringTrimmed:=Split string:C1554($stringToTrim; " ").join(" "; ck ignore null or empty:K85:5)
+	
+	

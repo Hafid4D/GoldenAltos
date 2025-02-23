@@ -24,6 +24,7 @@ shared Function load()
 			End if 
 			Use ($color)
 				$color.picture:=$pict
+				$color.rgb:=Formula from string:C1601("0x"+Substring:C12($color.hex; 2)).call()
 			End use 
 		End for each 
 	End if 

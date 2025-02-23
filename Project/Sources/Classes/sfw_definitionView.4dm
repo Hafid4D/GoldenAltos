@@ -1,4 +1,4 @@
-Class constructor($ident : Text; $label : Text;  ...  : Text)
+Class constructor($ident : Text; $label : Text;  ...  : Variant)
 	var $view : cs:C1710.sfw_definitionView
 	
 	
@@ -7,21 +7,23 @@ Class constructor($ident : Text; $label : Text;  ...  : Text)
 	This:C1470.lb_items.counter.unit1:="item"
 	This:C1470.lb_items.counter.unitN:="items"
 	This:C1470.lb_items.metaExpression:=""
-	This:C1470.picto:="/RESOURCES/sfw/image/picto/table-medium.png"
+	This:C1470.picto:="/RESOURCES/sfw/image/picto/view-white.png"
 	This:C1470.displayType:="listbox"
 	
 	For ($i; 3; Count parameters:C259)
-		$params:=Split string:C1554(${$i}; ":")
+		$params:=Split string:C1554(String:C10(${$i}); ":")
 		$selector:=$params.shift()
 		Case of 
 			: ($selector="derivedFrom")
-				$view:=This:C1470.views.query("ident = :1"; $params[0]).first()
+				$i+=1
+				$entry:=${$i}
+				$view:=$entry.views.query("ident = :1"; $params[0]).first()
 				If ($view#Null:C1517)
 					For each ($attributeName; $view)
 						Case of 
-							: (Type:C295(This:C1470[$attributeName])=Is object:K8:27)
+							: (Value type:C1509(This:C1470[$attributeName])=Is object:K8:27)
 								This:C1470[$attributeName]:=OB Copy:C1225($view[$attributeName])
-							: (Type:C295(This:C1470[$attributeName])=Is collection:K8:32)
+							: (Value type:C1509(This:C1470[$attributeName])=Is collection:K8:32)
 								This:C1470[$attributeName]:=$view[$attributeName].copy()
 							Else 
 								This:C1470[$attributeName]:=$view[$attributeName]
@@ -131,18 +133,17 @@ Function setSubset($functionName : Text;  ...  : Variant)
 		End for 
 	End if 
 	
-	This:C1470.picto:="/RESOURCES/sfw/image/picto/table-medium-subset.png"
+	This:C1470.picto:="/RESOURCES/sfw/image/picto/view-white-subset.png"
 	
 	
 Function setDisplayType($type : Text)
 	
-	$availableTypes:=Split string:C1554("listbox;hierarchical"; ";")
+	$availableTypes:=Split string:C1554("listbox;hierarchical;hierarchicalEntries"; ";")
 	If ($availableTypes.indexOf($type)#-1)
 		This:C1470.displayType:=$type
 	Else 
 		cs:C1710.sfw_dialog.me.alert("This type \""+$type+"\" is unknow !")
 	End if 
-	
 	
 Function setPictoLabel($pictopath : Text)
 	
@@ -167,3 +168,78 @@ Function setAllowedProfiles( ...  : Text)
 		This:C1470.allowedProfiles.push(${$p})
 	End for 
 	
+Function addEntryMainLevel($attributeTodisplay : Text; $entryIdent : Text;  ...  : Text)
+	This:C1470.HLEntries:=New object:C1471("levels"; New collection:C1472)
+	$hierarchicalLevel:=New object:C1471
+	$hierarchicalLevel.attributeTodisplay:=$attributeTodisplay
+	$hierarchicalLevel.entryIdent:=$entryIdent
+	$hierarchicalLevel.style:=0
+	$hierarchicalLevel.color:=0
+	This:C1470.HLEntries.levels.push($hierarchicalLevel)
+	For ($p; 3; Count parameters:C259)
+		$params:=Split string:C1554(${$p}; ":")
+		$selector:=$params.shift()
+		Case of 
+			: ($selector="displayOnlyIfChildren")
+				$hierarchicalLevel.displayOnlyIfChildren:=True:C214
+			: ($selector="displayCount")
+				$hierarchicalLevel.displayCount:=True:C214
+			: ($selector="style")
+				For each ($param; $params)
+					Case of 
+						: ($param="bold")
+							$hierarchicalLevel.style+=Bold:K14:2
+						: ($param="italic")
+							$hierarchicalLevel.style+=Italic:K14:3
+						: ($param="underline")
+							$hierarchicalLevel.style+=Underline:K14:4
+					End case 
+				End for each 
+			: ($selector="color")
+				$colorName:=$params.first()
+				$hierarchicalLevel.color:=cs:C1710.sfw_htmlColor.me.colors.query("name = :1"; $colorName).first().rgb
+			: ($selector="collapsed")
+				$hierarchicalLevel.collapsed:=True:C214
+			: ($selector="orderBy")
+				$hierarchicalLevel.orderBy:=$params.join(":")
+		End case 
+	End for 
+	
+Function addEntryLevel($attributeTodisplay : Text; $entryIdent : Text;  ...  : Text)
+	$hierarchicalLevel:=New object:C1471
+	$hierarchicalLevel.attributeTodisplay:=$attributeTodisplay
+	$hierarchicalLevel.entryIdent:=$entryIdent
+	$hierarchicalLevel.style:=0
+	$hierarchicalLevel.color:=0
+	For ($p; 3; Count parameters:C259)
+		$params:=Split string:C1554(${$p}; ":")
+		$selector:=$params.shift()
+		Case of 
+			: ($selector="linkToFollow")
+				$hierarchicalLevel.linkToFollow:=$params[0]
+			: ($selector="displayOnlyIfChildren")
+				$hierarchicalLevel.displayOnlyIfChildren:=True:C214
+			: ($selector="displayCount")
+				$hierarchicalLevel.displayCount:=True:C214
+			: ($selector="style")
+				For each ($param; $params)
+					Case of 
+						: ($param="bold")
+							$hierarchicalLevel.style+=Bold:K14:2
+						: ($param="italic")
+							$hierarchicalLevel.style+=Italic:K14:3
+						: ($param="underline")
+							$hierarchicalLevel.style+=Underline:K14:4
+						: ($selector="color")
+							$colorName:=$params.first()
+							$hierarchicalLevel.color:=cs:C1710.sfw_htmlColor.me.colors.query("name = :1"; $colorName).first().rgb
+					End case 
+				End for each 
+			: ($selector="collapsed")
+				$hierarchicalLevel.collapsed:=True:C214
+			: ($selector="orderBy")
+				$hierarchicalLevel.orderBy:=$params.join(":")
+		End case 
+	End for 
+	
+	This:C1470.HLEntries.levels.push($hierarchicalLevel)

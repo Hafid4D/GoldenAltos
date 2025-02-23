@@ -15,15 +15,17 @@ Class constructor
 	
 	$vision:=cs:C1710.sfw_definitionVision.new("administration"; "Administration")
 	$vision.setXliffLabel("vision.administration")
+	$vision.setToolbarBackgroundColor("Gray")
 	$vision.setDisplayOrder(-1003)
-	//$vision.setAllowedProfiles("admin")
-	$vision.setIcon("sfw/vision/administration-50x50.png")
+	$vision.setAllowedProfiles("admin")
+	$vision.setIcon("sfw/vision/administration-24x24.png")
 	This:C1470._push_vision($vision)
 	
 	$vision:=cs:C1710.sfw_definitionVision.new("userManagement"; "User management")
+	$vision.setToolbarBackgroundColor("darkKhaki")
 	$vision.setXliffLabel("vision.userManagement")
 	$vision.setDisplayOrder(-1004)
-	$vision.setIcon("sfw/vision/user-50x50.png")
+	$vision.setIcon("sfw/vision/user-24x24.png")
 	This:C1470._push_vision($vision)
 	
 	

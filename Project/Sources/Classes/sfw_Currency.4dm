@@ -73,7 +73,7 @@ Function trigger()
 	If (Application type:C494=4D Local mode:K5:1)
 		This:C1470.cacheClear()
 	Else 
-		EXECUTE ON CLIENT:C651("@"; "sfw_cacheManager"; "clear"; "currency")
+		EXECUTE ON CLIENT:C651("@"; "sfw_cacheManager"; "clear"; "sfw_Currency")
 	End if 
 	
 Function _loadAsCollection()->$currencies : Collection
