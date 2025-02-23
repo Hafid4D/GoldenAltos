@@ -2,8 +2,6 @@ Class extends Entity
 
 local Function rebuildAddress()->$address : Object
 	
-	$address:=New object:C1471()
-	
 	Case of 
 		: (Form:C1466.addressBilling=1)
 			$type:="billing"
@@ -11,4 +9,8 @@ local Function rebuildAddress()->$address : Object
 			$type:="shipping"
 	End case 
 	
-	$address:=Form:C1466.current_item.contactDetails.addresses.query("type = :1"; $type).first()
+	If (Form:C1466.current_item.contactDetails#Null:C1517) && (Form:C1466.current_item.contactDetails.addresses#Null:C1517)
+		$address:=Form:C1466.current_item.contactDetails.addresses.query("type = :1"; $type).first()
+	End if 
+	
+	

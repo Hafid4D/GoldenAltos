@@ -4,7 +4,7 @@
 	<schema name="DEFAULT_SCHEMA"/>
 	<table name="Contact" uuid="694C4B7F93874E5BA8093878C35952BF" id="1">
 		<field name="UUID" uuid="8EFDF2BE837542E3849ECB064F30C5BD" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="UUID_Customer" uuid="02F77BF6D13440FDA7D868C17307EDBE" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="UUID_Customer" uuid="02F77BF6D13440FDA7D868C17307EDBE" type="10" store_as_UUID="true" never_null="true" id="2"/>
 		<field name="firstName" uuid="C6919856BA484AA8A838776B5BE82888" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="lastName" uuid="5653CC4F74FB4A1EA57050E7251F1DBB" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="contactDetails" uuid="7B2BE752FE4343B1A18596793976CEBB" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
@@ -273,7 +273,7 @@
 	</table>
 	<table name="Quote" uuid="98A20403539048D2B775AEAED975966B" id="128">
 		<field name="UUID" uuid="DDEAA2AF9B9A44BD99857817933C03AA" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="UUID_Customer" uuid="0D7F5C74CB3B4D0A88D4C320686F13E3" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="UUID_Customer" uuid="0D7F5C74CB3B4D0A88D4C320686F13E3" type="10" store_as_UUID="true" never_null="true" id="2"/>
 		<field name="code" uuid="413566DF139D4D7993079083DDF8180F" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="currentStatusID" uuid="FB1C1924172C43E68738DAC7FEC97333" type="3" never_null="true" id="4"/>
 		<field name="subject" uuid="F703E617E1FA419A91679E7701D982DA" type="10" limiting_length="255" never_null="true" id="5"/>
