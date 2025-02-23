@@ -23,12 +23,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1217.6794433594,
-				"top": 493.72979736328,
-				"width": 120,
-				"height": 167.33203125
+				"left": 1056.492553711,
+				"top": 581.60656738281,
+				"width": 161.513671875,
+				"height": 235.72998046875
 			},
-			"displayable_fields_count": 6,
+			"displayable_fields_count": 9,
 			"fields": {
 				"UUID_Quote": {
 					"color": {
@@ -48,13 +48,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1437.8089192708,
-				"top": 494.04372151693,
-				"width": 120,
-				"height": 167.33203125
+				"left": 1439.3158772786,
+				"top": 490.94991048177,
+				"width": 190.36975097656,
+				"height": 237.13458251953
 			},
-			"displayable_fields_count": 6,
-			"fields_ordering": 1
+			"displayable_fields_count": 9
 		},
 		"InventoryPull": {
 			"color": {
@@ -64,8 +63,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1288.4776611328,
-				"top": 892.49509684245,
+				"left": 1303.2257080078,
+				"top": 938.67881266276,
 				"width": 165.38045247396,
 				"height": 161.54541015625
 			},
@@ -79,8 +78,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1594.994140625,
-				"top": 766.49859619141,
+				"left": 1613.9382324219,
+				"top": 802.35803222657,
 				"width": 172.04638671875,
 				"height": 290.50187174479
 			},
@@ -279,8 +278,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1458.801961263,
-				"top": 48.962041219076,
+				"left": 1506.9772542318,
+				"top": 47.789082845053,
 				"width": 187.0771484375,
 				"height": 253.17391967773
 			},
@@ -312,21 +311,13 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1207.2668457031,
-				"top": 42.890502929688,
+				"left": 1314.3920898437,
+				"top": 23.768661499024,
 				"width": 152.69836425781,
 				"height": 186.17767333984
 			},
 			"displayable_fields_count": 6,
 			"fields": {
-				"UUID_Quote": {
-					"color": {
-						"red": 255,
-						"green": 255,
-						"blue": 255,
-						"alpha": 0
-					}
-				},
 				"UUID_Customer": {
 					"color": {
 						"red": 255,
@@ -345,12 +336,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 938.60260009766,
-				"top": 42.509429931641,
-				"width": 184.87125651042,
-				"height": 449.06891886393
+				"left": 1019.3984375,
+				"top": 76.161727905274,
+				"width": 168,
+				"height": 272.33203125
 			},
-			"displayable_fields_count": 19,
+			"displayable_fields_count": 11,
 			"fields": {
 				"IDT_status": {
 					"position": 4
@@ -656,10 +647,48 @@
 			},
 			"displayable_fields_count": 8,
 			"fields_ordering": 1
+		},
+		"Assumption": {
+			"color": {
+				"red": 226,
+				"green": 158,
+				"blue": 214,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 840.70373535156,
+				"top": 794.6273651123,
+				"width": 165.36242675781,
+				"height": 185.09155273438
+			},
+			"displayable_fields_count": 6
+		},
+		"Contact": {
+			"color": {
+				"red": 249,
+				"green": 130,
+				"blue": 127,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 761.36254882812,
+				"top": 0,
+				"width": 144.080078125,
+				"height": 183.83081054688
+			},
+			"displayable_fields_count": 6
 		}
 	},
 	"relations": {
-		"84464275E0D449D289E0441BBE81096A": {
+		"CF3063584FFE4334AC18A5B8B1445D95": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"C713A6B92EB645E094C43F0B26AEC225": {
 			"color": {
 				"red": 255,
 				"green": 255,
