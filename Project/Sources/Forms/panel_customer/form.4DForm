@@ -398,9 +398,10 @@
 					"borderStyle": "none"
 				}
 			}
-		}
+		},
+		null
 	],
-	"geometryStamp": 144,
+	"geometryStamp": 146,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
