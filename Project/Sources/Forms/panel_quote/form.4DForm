@@ -201,9 +201,32 @@
 				}
 			}
 		},
-		null
+		{
+			"objects": {
+				"Text": {
+					"type": "text",
+					"text": "test page 2",
+					"top": 90,
+					"left": 82,
+					"width": 145,
+					"height": 46
+				}
+			}
+		},
+		{
+			"objects": {
+				"Text1": {
+					"type": "text",
+					"text": "test oage 3",
+					"top": 75,
+					"left": 62,
+					"width": 175,
+					"height": 46
+				}
+			}
+		}
 	],
-	"geometryStamp": 152,
+	"geometryStamp": 159,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
