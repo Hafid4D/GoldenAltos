@@ -20,7 +20,7 @@ Function selectionChange()
 	If (Form:C1466.current_item#Null:C1517)
 		Form:C1466.current_clone:=Form:C1466.current_item.clone()
 		OBJECT GET SUBFORM:C1139(*; "detail_panel"; $table; $current_panel)
-		If ($current_panel#This:C1470.entry.panel.name)
+		If ($current_panel#This:C1470.entry.panel.name) && (Form:C1466.lastPanelDisplayed#This:C1470.entry.panel.name)
 			This:C1470.displayItemPanel()
 		Else 
 			Form:C1466.subForm:=Form:C1466.subForm

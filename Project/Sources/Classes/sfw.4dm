@@ -2336,12 +2336,27 @@ Function recalculationOfPanelPageNeeded()->$calcNeeded : Boolean
 Function displayItemPanel()
 	var $folderForm : 4D:C1709.Folder
 	var $formDefinition : Object
+	var $file : 4D:C1709.File
+	var $cacheFile : 4D:C1709.File
+	var $blob : Blob
+	var $key : Blob
 	
 	If (This:C1470.entry.panel.asDynamicSources)
 		$folderForm:=Folder:C1567(fk database folder:K87:14).folder("Project/Sources/Forms/"+This:C1470.entry.panel.name)
 		$file:=$folderForm.file("form.4DForm")
-		$formDefinition:=JSON Parse:C1218($file.getText())
-		$formDefinition.method:=$folderForm.path+$formDefinition.method
+		$cacheFile:=Folder:C1567(fk resources folder:K87:11).file("DynamicForm/"+This:C1470.entry.panel.name+"form.4XForm")
+		If ($file.exists)
+			$formDefinition:=JSON Parse:C1218($file.getText())
+			$formDefinition.method:=$folderForm.path+$formDefinition.method
+			TEXT TO BLOB:C554(JSON Stringify:C1217($formDefinition); $blob; UTF8 text without length:K22:17)
+			COMPRESS BLOB:C534($blob; Fast compression mode:K22:13)
+			$cacheFile.setContent($blob)
+		Else 
+			$blob:=$cacheFile.getContent()
+			EXPAND BLOB:C535($blob)
+			$json:=BLOB to text:C555($blob; UTF8 text without length:K22:17)
+			$formDefinition:=JSON Parse:C1218($json)
+		End if 
 		//refresh for object method paths
 		For each ($page; $formDefinition.pages)
 			For each ($objectName; $page.objects)
@@ -2361,11 +2376,13 @@ Function displayItemPanel()
 			End if 
 		End for each 
 		
+		$formDefinition.method:="sfw_dynamicForm_method"
 		
 		OBJECT SET SUBFORM:C1138(*; "detail_panel"; $formDefinition)
 	Else 
 		OBJECT SET SUBFORM:C1138(*; "detail_panel"; String:C10(This:C1470.entry.panel.name))
 	End if 
+	Form:C1466.lastPanelDisplayed:=String:C10(This:C1470.entry.panel.name)
 	
 	
 	

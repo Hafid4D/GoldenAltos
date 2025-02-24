@@ -193,20 +193,22 @@ Function displayDefaultPanel()
 	
 	OBJECT GET SUBFORM:C1139(*; "detail_panel"; $table; $current_panel)
 	Case of 
-		: (Form:C1466.sfw.entry.panelAfterProjectionIfNoItemSelected#Null:C1517) && (Form:C1466.filterByProjection)
+		: (Form:C1466.sfw.entry.panelAfterProjectionIfNoItemSelected#Null:C1517) && (Form:C1466.filterByProjection) && (Form:C1466.lastPanelDisplayed#Form:C1466.sfw.entry.panelAfterProjectionIfNoItemSelected)
 			Form:C1466.subForm:=New object:C1471
 			Form:C1466.subForm.sfw:=Form:C1466.sfw
 			$panel:=Form:C1466.sfw.entry.panelAfterProjectionIfNoItemSelected
 			OBJECT SET SUBFORM:C1138(*; "detail_panel"; $panel)
+			Form:C1466.lastPanelDisplayed:=String:C10($panel)
 			
-		: (Form:C1466.sfw.entry.panelIfNoItemSelected#Null:C1517) && (Form:C1466.filterByProjection=False:C215) && ((Form:C1466.current_lb_item_selected.length=0) || (Form:C1466.current_item=Null:C1517))
-			Form:C1466.subForm:=New object:C1471
+		: (Form:C1466.sfw.entry.panelIfNoItemSelected#Null:C1517) && (Form:C1466.filterByProjection=False:C215) && ((Form:C1466.current_lb_item_selected.length=0) || (Form:C1466.current_item=Null:C1517)) && (Form:C1466.lastPanelDisplayed#Form:C1466.sfw.entry.panelIfNoItemSelected)
 			Form:C1466.subForm.sfw:=Form:C1466.sfw
 			$panel:=Form:C1466.sfw.entry.panelIfNoItemSelected
 			OBJECT SET SUBFORM:C1138(*; "detail_panel"; $panel)
+			Form:C1466.lastPanelDisplayed:=String:C10($panel)
 			
 		: ($current_panel#"sfw_panel_default")
 			OBJECT SET SUBFORM:C1138(*; "detail_panel"; "sfw_panel_default")
+			Form:C1466.lastPanelDisplayed:=String:C10("sfw_panel_default")
 			
 	End case 
 	
@@ -291,7 +293,7 @@ Function lb_items_selectionChange()
 			Form:C1466.subForm.current_item:=Form:C1466.current_item
 			Form:C1466.current_clone:=Form:C1466.current_item.clone()
 			OBJECT GET SUBFORM:C1139(*; "detail_panel"; $table; $current_panel)
-			If ($current_panel#This:C1470.entry.panel.name)
+			If ($current_panel#This:C1470.entry.panel.name) && (Form:C1466.lastPanelDisplayed#This:C1470.entry.panel.name)
 				This:C1470.callbackOnCurrentItem("panelUnload")
 				This:C1470.callbackOnCurrentItem("itemLoad")
 				This:C1470.displayItemPanel()
@@ -606,8 +608,9 @@ Function virtual_lb_items_selChange()
 	Form:C1466.subForm.current_item:=Form:C1466.current_item
 	If (Form:C1466.current_item#Null:C1517)
 		OBJECT GET SUBFORM:C1139(*; "detail_panel"; $table; $current_panel)
-		If ($current_panel#Form:C1466.current_item.panel.name)
+		If ($current_panel#Form:C1466.current_item.panel.name) && (Form:C1466.lastPanelDisplayed#Form:C1466.current_item.panel.name)
 			OBJECT SET SUBFORM:C1138(*; "detail_panel"; String:C10(Form:C1466.current_item.panel.name))  // String is mandatory to help the compilator
+			Form:C1466.lastPanelDisplayed:=String:C10(Form:C1466.current_item.panel.name)
 		Else 
 			Form:C1466.subForm:=Form:C1466.subForm
 		End if 

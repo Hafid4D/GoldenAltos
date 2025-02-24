@@ -546,9 +546,27 @@ Function pushCurrentUserButton()
 		: ($choice="--microsoftGraphSendMail")
 			If (String:C10(cs:C1710.sfw_userManager.me.info.email)#"")
 				
-				$graphAPI:=cs:C1710.microsoftGraphAPI.new()
-				$token:=$graphAPI.getToken()
-				$OAuth2:=$graphAPI.oAuth2
+				//$graphAPI:=cs.microsoftGraphAPI.new()
+				//$token:=$graphAPI.getToken()
+				//$OAuth2:=$graphAPI.oAuth2
+				
+				//$email:=New object
+				
+				//$recipients:=New collection
+				//$recipients.push({emailAddress: {address: cs.sfw_userManager.me.info.email}})
+				
+				//$email.body:=New object()
+				//$email.body.content:="This is a mail test from Kairos Application"
+				//$email.body.contentType:="HTML"  // si HTML, mettre HTML
+				//$email.toRecipients:=$recipients
+				//$email.subject:="Kairos - Test email"
+				
+				//$status:=$graphAPI.sendMail($email)
+				//If ($status.success=False)
+				//cs.sfw_dialog.me.alert($status.statusText)
+				//Else 
+				//cs.sfw_dialog.me.info("The email has been sent!")
+				//End if 
 				
 				$email:=New object:C1471
 				
@@ -561,12 +579,9 @@ Function pushCurrentUserButton()
 				$email.toRecipients:=$recipients
 				$email.subject:="Kairos - Test email"
 				
-				$status:=$graphAPI.sendMail($email)
-				If ($status.success=False:C215)
-					cs:C1710.sfw_dialog.me.alert($status.statusText)
-				Else 
-					cs:C1710.sfw_dialog.me.info("The email has been sent!")
-				End if 
+				cs:C1710.sfw_eMailManager.me.sendAnEMail($email)
+				
+				
 			End if 
 		: ($choice="--changePassword")
 			var $eUser : cs:C1710.sfw_UserEntity
