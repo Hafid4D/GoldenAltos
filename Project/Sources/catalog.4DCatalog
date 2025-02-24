@@ -290,6 +290,7 @@
 		<field name="quantity" uuid="988697C238D447C8A614F7A4548289C8" type="4" never_null="true" id="3"/>
 		<field name="unitPrice" uuid="126E581B1DD0412C95B1B2129E2F0197" type="6" never_null="true" id="4"/>
 		<field name="description" uuid="14E872702E7249AFBA7A6BF1CF53D2A2" type="10" never_null="true" id="5"/>
+		<field name="num" uuid="F3B0D504DDC3476E858B2D6367A94F0C" type="4" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="5520537F6684489F9BB29D56C4A9F2C6"/>
 	</table>
 	<table name="CustomerStatus" uuid="CF8DC4373C97487884111398B4383812" id="130">
@@ -563,7 +564,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="BFB648A1B4284EB9883ECA906D5FBF4B" name_Nto1="Link_23" name_1toN="Link_23_return" state="1">
+	<relation uuid="BFB648A1B4284EB9883ECA906D5FBF4B" name_Nto1="quote" name_1toN="lines" state="1">
 		<related_field kind="source">
 			<field_ref uuid="252F726A4DA54A89B97834C4A86C2301" name="UUID_Quote">
 				<table_ref uuid="348628FCA4DC451085D7519B226BD509" name="QuoteLine"/>

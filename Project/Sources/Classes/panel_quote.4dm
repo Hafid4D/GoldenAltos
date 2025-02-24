@@ -4,17 +4,28 @@ singleton Class constructor
 Function formMethod()
 	//This function manages the main logic for updating and refreshing the form
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
-	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
+	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh
+		
 	End if 
+	
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
-				// add load functions
+				This:C1470.loadQuoteLines()
 		End case 
 	End if 
+	
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())  //It's time to resize the object or set visible
 		This:C1470.redrawAndSetVisible()
 	End if 
+	
+	
+	Case of 
+		: (FORM Event:C1606.code=On Bound Variable Change:K2:52)
+			This:C1470.onBoundVariableChange()
+			
+	End case 
+	
 	
 	
 Function drawPup_XXX()
@@ -32,9 +43,46 @@ Function pup_XXX()
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	
-Function loadXXX()
-	//Loads and initializes a list
+Function loadQuoteLines()
+	Form:C1466.lb_quoteLines:=Form:C1466.current_item.lines
+	If (Form:C1466.current_quoteLine=Null:C1517)
+		OBJECT SET VISIBLE:C603(*; "label_quoteLine@"; False:C215)
+		OBJECT SET VISIBLE:C603(*; "entryField_quoteLineD@"; False:C215)
+		
+	Else 
+		OBJECT SET VISIBLE:C603(*; "label_quoteLine@"; True:C214)
+		OBJECT SET VISIBLE:C603(*; "entryField_quoteLineD@"; True:C214)
+		
+	End if 
 	
-Function bActionXXX()
-	//Manages actions: add, or remove, using dynamic menus and modification checks
+Function bActionQuoteLines()
+	
+Function lb_quoteLines()
+	If (Form:C1466.current_quoteLine=Null:C1517)
+		OBJECT SET VISIBLE:C603(*; "label_quoteLine@"; False:C215)
+		OBJECT SET VISIBLE:C603(*; "entryField_quoteLineD@"; False:C215)
+		
+	Else 
+		OBJECT SET VISIBLE:C603(*; "label_quoteLine@"; True:C214)
+		OBJECT SET VISIBLE:C603(*; "entryField_quoteLineD@"; True:C214)
+		
+	End if 
+	
+	
+Function _activate_save_cancel_button()
+	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+	
+Function onBoundVariableChange()
+	This:C1470.loadQuoteLines()
+	
+	If (Form:C1466.current_quoteLine#Null:C1517)
+		$index:=Form:C1466.current_quoteLine.indexOf()
+		If ($index=-1)
+			LISTBOX SELECT ROW:C912(*; "lb_quoteLines"; 0; lk remove from selection:K53:3)
+		Else 
+			LISTBOX SELECT ROW:C912(*; "lb_quoteLines"; $index+1; lk replace selection:K53:1)
+		End if 
+	Else 
+		LISTBOX SELECT ROW:C912(*; "lb_quoteLines"; 0; lk remove from selection:K53:3)
+	End if 
 	

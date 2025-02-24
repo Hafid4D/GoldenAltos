@@ -13,36 +13,29 @@
 	"bottomMargin": 0,
 	"events": [
 		"onLoad",
-		"onPageChange",
 		"onValidate",
 		"onClick",
-		"onDoubleClick",
 		"onOutsideCall",
-		"onBeginDragOver",
-		"onDragOver",
+		"onDoubleClick",
 		"onDrop",
-		"onAfterKeystroke",
 		"onMenuSelect",
 		"onPluginArea",
-		"onAfterEdit",
+		"onDataChange",
+		"onDragOver",
 		"onTimer",
-		"onBoundVariableChange"
+		"onAfterKeystroke",
+		"onMouseEnter",
+		"onMouseLeave",
+		"onAfterEdit",
+		"onBeginDragOver",
+		"onBoundVariableChange",
+		"onPageChange"
 	],
 	"windowTitle": "window title",
 	"destination": "detailScreen",
 	"pages": [
 		{
 			"objects": {
-				"header_bkgd": {
-					"type": "rectangle",
-					"top": 0,
-					"left": 0,
-					"width": 878,
-					"height": 69,
-					"sizingX": "grow",
-					"fill": "#A2C6D8",
-					"stroke": "transparent"
-				},
 				"label_0_1": {
 					"type": "text",
 					"top": 12,
@@ -78,7 +71,7 @@
 					"stroke": "#808080",
 					"text": "Subject"
 				},
-				"entryField_code": {
+				"entryField_subject": {
 					"type": "input",
 					"top": 37,
 					"left": 132,
@@ -103,22 +96,6 @@
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Status"
-				},
-				"vTabBar_subform": {
-					"type": "subform",
-					"top": 69,
-					"left": 0,
-					"width": 50,
-					"height": 450,
-					"dataSource": "Form:C1466.vTabBar",
-					"detailForm": "sfw_vTabBar",
-					"hideFocusRing": true,
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "sfw_main_vTabBar_sfo"
 				},
 				"pup_CustomerStatus": {
 					"type": "button",
@@ -148,7 +125,7 @@
 					"stroke": "#808080",
 					"text": "Contact"
 				},
-				"entryField_code1": {
+				"entryField_contact": {
 					"type": "input",
 					"top": 37,
 					"left": 539,
@@ -169,35 +146,280 @@
 		},
 		{
 			"objects": {
-				"subFormAddress": {
-					"type": "subform",
-					"left": 57,
-					"top": 99,
-					"width": 735,
-					"height": 150,
-					"detailForm": "sfw_subpanel_addressSingle",
-					"borderStyle": "sunken",
-					"dataSource": "Form:C1466.subFormAddress"
+				"bkgd_lb_consumptions": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 0,
+					"width": 529,
+					"height": 238,
+					"stroke": "#c0c0c0",
+					"fill": "#F7F9FC"
 				},
-				"rbMain": {
-					"type": "radio",
-					"text": "Main",
-					"top": 74,
-					"left": 57,
-					"width": 127,
+				"lb_quoteLines": {
+					"type": "listbox",
+					"top": 136,
+					"left": 2,
+					"width": 522,
+					"height": 183,
+					"resizingMode": "legacy",
+					"listboxType": "collection",
+					"focusable": false,
+					"movableRows": false,
+					"dataSource": "Form:C1466.lb_quoteLines",
+					"currentItemSource": "Form:C1466.current_quoteLine",
+					"currentItemPositionSource": "",
+					"metaSource": "This:C1470.meta",
+					"scrollbarHorizontal": "hidden",
+					"horizontalLineStroke": "transparent",
+					"verticalLineStroke": "#C0C0C0",
+					"events": [
+						"onClick",
+						"onDataChange",
+						"onSelectionChange",
+						"onHeaderClick"
+					],
+					"fill": "#FFFFFF",
+					"alternateFill": "#F7F9FC",
+					"borderStyle": "system",
+					"method": "ObjectMethods/lb_quoteLines.4dm",
+					"columns": [
+						{
+							"name": "Colonne2",
+							"dataSource": "This:C1470.description",
+							"width": 271,
+							"minWidth": 10,
+							"maxWidth": 32000,
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"header": {
+								"name": "Entête2",
+								"text": "Description",
+								"fontTheme": "normal",
+								"textAlign": "left"
+							},
+							"footer": {
+								"name": "Pied2",
+								"timeFormat": "hh_mm_ss",
+								"fontFamily": "System Font Regular",
+								"fontSize": 10
+							},
+							"fontTheme": "normal",
+							"enterable": false
+						},
+						{
+							"name": "Colonne9",
+							"dataSource": "This:C1470.quantity",
+							"width": 79,
+							"minWidth": 10,
+							"maxWidth": 32000,
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"header": {
+								"name": "Entête11",
+								"text": "Quantity",
+								"fontTheme": "normal",
+								"textAlign": "center",
+								"verticalAlign": "automatic"
+							},
+							"footer": {
+								"name": "Pied11",
+								"timeFormat": "hh_mm_ss",
+								"fontFamily": "System Font Regular",
+								"fontSize": 10
+							},
+							"fontTheme": "normal",
+							"dataSourceTypeHint": "number"
+						},
+						{
+							"name": "Colonne4",
+							"dataSource": "This:C1470.unitPrice",
+							"width": 79,
+							"minWidth": 10,
+							"maxWidth": 32000,
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"header": {
+								"name": "Entête4",
+								"text": "Unit price",
+								"fontTheme": "normal",
+								"textAlign": "center",
+								"verticalAlign": "automatic"
+							},
+							"footer": {
+								"name": "Pied4",
+								"timeFormat": "hh_mm_ss",
+								"fontFamily": "System Font Regular",
+								"fontSize": 10
+							},
+							"fontTheme": "normal",
+							"dataSourceTypeHint": "number"
+						},
+						{
+							"header": {
+								"name": "Header2",
+								"text": "Amount"
+							},
+							"name": "Column1",
+							"class": "",
+							"dataSource": "This:C1470.amount",
+							"width": 20,
+							"footer": {
+								"name": "Footer2"
+							},
+							"minWidth": 20,
+							"maxWidth": 20,
+							"dataSourceTypeHint": "number"
+						}
+					]
+				},
+				"bkgd_lb_consumptions_detail": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 528,
+					"width": 412,
+					"height": 238,
+					"stroke": "#c0c0c0",
+					"fill": "#F7F9FC"
+				},
+				"bActionConsumptions": {
+					"type": "button",
+					"text": "Actions",
+					"top": 325,
+					"left": 7,
+					"width": 80,
 					"height": 21,
 					"events": [
 						"onClick"
 					],
-					"style": "bevel",
-					"dataSource": "Form:C1466.addressMain",
-					"radioGroup": "address",
-					"fontSize": 11,
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionConsumptions.4dm"
+				},
+				"label_quoteLine_quantity": {
+					"type": "text",
+					"top": 136,
+					"left": 539,
+					"width": 68,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Quantity"
+				},
+				"entryField_quoteLineQuantity": {
+					"type": "input",
+					"top": 136,
+					"left": 637,
+					"width": 153,
+					"height": 17,
+					"dataSource": "Form:C1466.current_quoteLine.quantity",
 					"focusable": false,
-					"method": "ObjectMethods/rbMain.4dm",
-					"icon": "Images/user.png",
-					"iconFrames": 1,
-					"textPlacement": "right"
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"method": "ObjectMethods/entryField_quoteLineQuantity.4dm",
+					"dataSourceTypeHint": "number",
+					"textAlign": "left"
+				},
+				"label_quoteLine_unitPrice": {
+					"type": "text",
+					"top": 160,
+					"left": 539,
+					"width": 68,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Unit price"
+				},
+				"entryField_quoteLineUnitPrice": {
+					"type": "input",
+					"top": 160,
+					"left": 637,
+					"width": 153,
+					"height": 17,
+					"dataSource": "Form:C1466.current_quoteLine.unitPrice",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"method": "ObjectMethods/entryField_quoteLineUnitPrice.4dm",
+					"dataSourceTypeHint": "number",
+					"textAlign": "left"
+				},
+				"label_quoteLine_amount": {
+					"type": "text",
+					"top": 184,
+					"left": 539,
+					"width": 68,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Amount"
+				},
+				"entryField_quoteLineAmount": {
+					"type": "input",
+					"top": 184,
+					"left": 637,
+					"width": 153,
+					"height": 17,
+					"dataSource": "Form:C1466.current_quoteLine.amount",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"method": "ObjectMethods/entryField_quoteLineAmount.4dm",
+					"dataSourceTypeHint": "number",
+					"textAlign": "left"
+				},
+				"label_quoteLine_description": {
+					"type": "text",
+					"top": 206,
+					"left": 539,
+					"width": 79,
+					"height": 16,
+					"stroke": "#808080",
+					"text": "Description"
+				},
+				"entryField_quoteLineDescription": {
+					"type": "input",
+					"top": 206,
+					"left": 637,
+					"width": 277,
+					"height": 97,
+					"dataSource": "Form:C1466.current_quoteLine.description",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"method": "ObjectMethods/entryField_quoteLineDescription.4dm",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left",
+					"scrollbarHorizontal": "hidden",
+					"scrollbarVertical": "automatic"
 				}
 			}
 		},
@@ -206,8 +428,8 @@
 				"Text": {
 					"type": "text",
 					"text": "test page 2",
-					"top": 90,
-					"left": 82,
+					"top": 178,
+					"left": 106,
 					"width": 145,
 					"height": 46
 				}
@@ -218,15 +440,15 @@
 				"Text1": {
 					"type": "text",
 					"text": "test oage 3",
-					"top": 75,
-					"left": 62,
+					"top": 132,
+					"left": 144,
 					"width": 175,
 					"height": 46
 				}
 			}
 		}
 	],
-	"geometryStamp": 159,
+	"geometryStamp": 280,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
@@ -234,5 +456,6 @@
 		"views": {
 			"View 1": {}
 		}
-	}
+	},
+	"inheritedForm": "sfw_bkgd_header_3lines"
 }
