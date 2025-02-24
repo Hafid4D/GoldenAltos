@@ -88,6 +88,19 @@ Function bActionQuoteLines()
 			LISTBOX SELECT ROW:C912(*; "lb_quoteLines"; Form:C1466.lb_quoteLines.length; lk replace selection:K53:1)
 			GOTO OBJECT:C206(*; "entryField_quoteLineQuantity")
 			
+		: ($choose="--deleteQuoteLine")
+			$ok:=cs:C1710.sfw_dialog.me.confirm("Do you really want to delete this quote line? "; "Delete"; "CANCEL")
+			If ($ok)
+				
+				
+				
+				$info:=Form:C1466.current_quoteLine.drop()
+				This:C1470._activate_save_cancel_button()
+				LISTBOX SELECT ROW:C912(*; "lb_quoteLines"; 0; lk remove from selection:K53:3)
+				Form:C1466.current_quoteLine:=Null:C1517
+				This:C1470.lb_quoteLines()
+			End if 
+			
 	End case 
 	
 	
