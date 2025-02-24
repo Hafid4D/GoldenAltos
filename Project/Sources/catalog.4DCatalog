@@ -273,7 +273,7 @@
 	</table>
 	<table name="Quote" uuid="98A20403539048D2B775AEAED975966B" id="128">
 		<field name="UUID" uuid="DDEAA2AF9B9A44BD99857817933C03AA" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="UUID_Customer" uuid="0D7F5C74CB3B4D0A88D4C320686F13E3" type="10" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="UUID_Contact" uuid="0D7F5C74CB3B4D0A88D4C320686F13E3" type="10" store_as_UUID="true" never_null="true" id="2"/>
 		<field name="code" uuid="413566DF139D4D7993079083DDF8180F" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="currentStatusID" uuid="FB1C1924172C43E68738DAC7FEC97333" type="3" never_null="true" id="4"/>
 		<field name="subject" uuid="F703E617E1FA419A91679E7701D982DA" type="10" limiting_length="255" never_null="true" id="5"/>
@@ -575,15 +575,15 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="C713A6B92EB645E094C43F0B26AEC225" name_Nto1="customer" name_1toN="quotes" state="1">
+	<relation uuid="5AF1197C37DC4B28BCC4BE28D9409233" name_Nto1="contact" name_1toN="quotes" state="1">
 		<related_field kind="source">
-			<field_ref uuid="0D7F5C74CB3B4D0A88D4C320686F13E3" name="UUID_Customer">
+			<field_ref uuid="0D7F5C74CB3B4D0A88D4C320686F13E3" name="UUID_Contact">
 				<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
 			</field_ref>
 		</related_field>
 		<related_field kind="destination">
-			<field_ref uuid="37676CD94E8B423595ED98B5C0E9CF89" name="UUID">
-				<table_ref uuid="96D1CE81460A4F75B3F4275138C8F778" name="Customer"/>
+			<field_ref uuid="8EFDF2BE837542E3849ECB064F30C5BD" name="UUID">
+				<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
 			</field_ref>
 		</related_field>
 	</relation>
@@ -670,7 +670,7 @@
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="24CCA01D7871416B98F1F1728F40CE6D" type="3">
-		<field_ref uuid="0D7F5C74CB3B4D0A88D4C320686F13E3" name="UUID_Customer">
+		<field_ref uuid="0D7F5C74CB3B4D0A88D4C320686F13E3" name="UUID_Contact">
 			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
 		</field_ref>
 	</index>

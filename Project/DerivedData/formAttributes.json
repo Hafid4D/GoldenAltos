@@ -36,6 +36,10 @@
 			"timeStamp": "2025-02-23T10:03:58Z",
 			"destination": "detailScreen"
 		},
+		"panel_quote": {
+			"timeStamp": "2025-02-24T09:54:39Z",
+			"destination": "detailScreen"
+		},
 		"panel_customer": {
 			"timeStamp": "2025-02-20T15:28:56Z",
 			"destination": "detailScreen"

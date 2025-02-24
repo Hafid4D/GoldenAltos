@@ -1,0 +1,215 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 0,
+	"bottomMargin": 0,
+	"events": [
+		"onLoad",
+		"onPageChange",
+		"onValidate",
+		"onClick",
+		"onDoubleClick",
+		"onOutsideCall",
+		"onBeginDragOver",
+		"onDragOver",
+		"onDrop",
+		"onAfterKeystroke",
+		"onMenuSelect",
+		"onPluginArea",
+		"onAfterEdit",
+		"onTimer",
+		"onBoundVariableChange"
+	],
+	"windowTitle": "window title",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {
+				"header_bkgd": {
+					"type": "rectangle",
+					"top": 0,
+					"left": 0,
+					"width": 878,
+					"height": 69,
+					"sizingX": "grow",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"label_0_1": {
+					"type": "text",
+					"top": 12,
+					"left": 12,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Quote number"
+				},
+				"entryField_name": {
+					"type": "input",
+					"top": 12,
+					"left": 132,
+					"width": 256,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.code",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"label_0_2": {
+					"type": "text",
+					"top": 37,
+					"left": 12,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Subject"
+				},
+				"entryField_code": {
+					"type": "input",
+					"top": 37,
+					"left": 132,
+					"width": 256,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.subject",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"label_0_3": {
+					"type": "text",
+					"top": 12,
+					"left": 419,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Status"
+				},
+				"vTabBar_subform": {
+					"type": "subform",
+					"top": 69,
+					"left": 0,
+					"width": 50,
+					"height": 450,
+					"dataSource": "Form:C1466.vTabBar",
+					"detailForm": "sfw_vTabBar",
+					"hideFocusRing": true,
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "sfw_main_vTabBar_sfo"
+				},
+				"pup_CustomerStatus": {
+					"type": "button",
+					"top": 9,
+					"left": 508,
+					"width": 200,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Status",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_CustomerStatus.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"label_0_4": {
+					"type": "text",
+					"top": 37,
+					"left": 419,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Contact"
+				},
+				"entryField_code1": {
+					"type": "input",
+					"top": 37,
+					"left": 539,
+					"width": 182,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.contact.fullName",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				}
+			}
+		},
+		{
+			"objects": {
+				"subFormAddress": {
+					"type": "subform",
+					"left": 57,
+					"top": 99,
+					"width": 735,
+					"height": 150,
+					"detailForm": "sfw_subpanel_addressSingle",
+					"borderStyle": "sunken",
+					"dataSource": "Form:C1466.subFormAddress"
+				},
+				"rbMain": {
+					"type": "radio",
+					"text": "Main",
+					"top": 74,
+					"left": 57,
+					"width": 127,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "bevel",
+					"dataSource": "Form:C1466.addressMain",
+					"radioGroup": "address",
+					"fontSize": 11,
+					"focusable": false,
+					"method": "ObjectMethods/rbMain.4dm",
+					"icon": "Images/user.png",
+					"iconFrames": 1,
+					"textPlacement": "right"
+				}
+			}
+		},
+		null
+	],
+	"geometryStamp": 152,
+	"method": "method.4dm",
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
+}

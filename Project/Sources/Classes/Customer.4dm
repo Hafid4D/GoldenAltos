@@ -2,7 +2,6 @@ Class extends DataClass
 
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
-	
 	//Mark: entry : Customer
 	$entry:=cs:C1710.sfw_definitionEntry.new("customer"; ["customerService"]; "Customers")
 	$entry.setDataclass("Customer")

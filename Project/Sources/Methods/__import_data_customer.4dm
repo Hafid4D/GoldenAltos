@@ -138,5 +138,5 @@ If ($customer_Log.exists)
 		TRACE:C157
 	End if 
 	
-	ALERT:C41("Import done.")
+	
 End if 

@@ -52,7 +52,7 @@
 			"timeStamp": "2025-01-16T09:57:28Z"
 		},
 		"__import_data_customer": {
-			"timeStamp": "2025-02-23T11:50:48Z"
+			"timeStamp": "2025-02-24T10:36:48Z"
 		},
 		"sfw_compilation_importFile": {
 			"timeStamp": "2024-12-09T09:38:13Z"
@@ -74,6 +74,9 @@
 		},
 		"sfw_checkIsInModification": {
 			"timeStamp": "2024-12-17T10:54:03Z"
+		},
+		"__import_data": {
+			"timeStamp": "2025-02-24T10:29:48Z"
 		},
 		"sfw_userUpdate": {
 			"timeStamp": "2025-02-05T08:38:57Z"
@@ -133,7 +136,7 @@
 			"timeStamp": "2024-12-09T09:38:13Z"
 		},
 		"__import_data_quote": {
-			"timeStamp": "2025-02-23T13:42:52Z"
+			"timeStamp": "2025-02-24T10:48:52Z"
 		},
 		"sfw_on_startup_database": {
 			"timeStamp": "2025-01-23T09:27:42Z"

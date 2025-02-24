@@ -2,7 +2,8 @@
 var $eAssumption : cs:C1710.AssumptionEntity
 var $eQuote : cs:C1710.QuoteEntity
 var $eQuoteLine : cs:C1710.QuoteLineEntity
-var $eCustomer : cs:C1710.CustomerEntity
+var $eContact : cs:C1710.ContactEntity
+var $eCostumer : cs:C1710.CustomerEntity
 
 $assumptions_file:=Folder:C1567(fk data folder:K87:12).file("DataJson/quote_assumptions.json")
 If ($assumptions_file.exists)
@@ -15,13 +16,51 @@ If ($assumptions_file.exists)
 		$quotes:=JSON Parse:C1218($quote_file.getText())
 		For each ($quote; $quotes)
 			$eQuote:=ds:C1482.Quote.new()
-			$eCustomer:=ds:C1482.Customer.query("name == :1"; $quote.Company).first()
-			If ($eCustomer=Null:C1517)
-				$eCustomer:=ds:C1482.Customer.new()
-				$eCustomer.name:=$quote.Company
-				$eCustomer.save()
+			
+			
+			$eCostumer:=ds:C1482.Customer.query("name == :1"; $quote.Company).first()
+			If ($eCostumer=Null:C1517)
+				$eCostumer:=ds:C1482.Customer.new()
+				$eCostumer.name:=$quote.Company
+				$reslt:=$eCostumer.save()
 			End if 
-			$eQuote.UUID_Customer:=$eCustomer.UUID
+			
+			$eContact:=ds:C1482.Contact.query("code == :1"; $quote.ContactCode).first()
+			If ($eContact=Null:C1517)
+				$eContact:=ds:C1482.Contact.new()
+				$eContact.UUID_Customer:=$eCostumer.UUID
+				$eContact.firstName:=$quote.Fname
+				$eContact.lastName:=$quote.Lname
+				$eContact.code:=$quote.ContactCode
+				
+				$eContact.contactDetails:=New object:C1471()
+				$eContact.contactDetails.addresses:=New collection:C1472()
+				$address:=New object:C1471()
+				$address.type:="main"
+				$address.detail:=New object:C1471()
+				$address.detail.country:="US"
+				$address.detail.street_1:=$quote.add1
+				If (String:C10($quote.add2)#"")
+					$address.detail.street_2:=$quote.add2
+				End if 
+				$address.detail.postcode:=$quote.zip
+				$address.detail.iso_code_2:="US"
+				$address.detail.city:=$quote.add3
+				$address.detail.state:=$quote.ST
+				$eContact.contactDetails.addresses.push($address)
+				
+				$eContact.contactDetails.communications:=New collection:C1472()
+				$comm:=New object:C1471()
+				$comm.phone:=$quote.tel_num
+				$comm.fax:=$quote.fax_num
+				$comm.email:=$quote.CopyToEmailAddr
+				$eContact.contactDetails.communications.push($comm)
+				
+				$eContact.save()
+			End if 
+			
+			
+			$eQuote.UUID_Contact:=$eContact.UUID
 			$eQuote.code:=$quote.QuoteNumber
 			$eQuote.currentStatusID:=1
 			$eQuote.subject:=$quote.Subject
@@ -31,6 +70,8 @@ If ($assumptions_file.exists)
 			$eQuote.save()
 		End for each 
 	End if 
+	
+	
 	
 	
 	$assumptions:=JSON Parse:C1218($assumptions_file.getText())
@@ -75,5 +116,5 @@ If ($assumptions_file.exists)
 	End if 
 	
 	
-	ALERT:C41("Import done.")
+	
 End if 
