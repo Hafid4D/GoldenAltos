@@ -287,7 +287,7 @@
 					"stroke": "#c0c0c0",
 					"fill": "#F7F9FC"
 				},
-				"bActionConsumptions": {
+				"bActionQuoteLines": {
 					"type": "button",
 					"text": "Actions",
 					"top": 325,
@@ -301,7 +301,7 @@
 					"popupPlacement": "linked",
 					"icon": "/RESOURCES/sfw/image/picto/gear.png",
 					"textPlacement": "right",
-					"method": "ObjectMethods/bActionConsumptions.4dm"
+					"method": "ObjectMethods/bActionQuoteLines.4dm"
 				},
 				"label_quoteLine_quantity": {
 					"type": "text",
@@ -448,7 +448,7 @@
 			}
 		}
 	],
-	"geometryStamp": 280,
+	"geometryStamp": 281,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
