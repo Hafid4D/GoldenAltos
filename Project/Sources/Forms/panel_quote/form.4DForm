@@ -128,7 +128,7 @@
 				"entryField_contact": {
 					"type": "input",
 					"top": 37,
-					"left": 539,
+					"left": 508,
 					"width": 182,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.contact.fullName",
@@ -448,7 +448,7 @@
 			}
 		}
 	],
-	"geometryStamp": 281,
+	"geometryStamp": 282,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
