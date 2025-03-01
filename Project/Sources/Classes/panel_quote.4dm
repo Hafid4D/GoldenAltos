@@ -15,6 +15,7 @@ Function formMethod()
 				
 			: (FORM Get current page:C276(*)=2)
 				This:C1470.loadAssumptions()
+				
 		End case 
 	End if 
 	

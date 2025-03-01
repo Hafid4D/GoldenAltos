@@ -66,7 +66,11 @@ If ($assumptions_file.exists)
 			$eQuote.subject:=$quote.Subject
 			$eQuote.reference:=$quote.Reference
 			$eQuote.assumptions:=New object:C1471("UUIDs"; New collection:C1472())
-			$eQuote.optionalPreliminaryTxt_wr:=$quote.wr_areaWP_
+			
+			$wpFile:=Folder:C1567(fk data folder:K87:12).file("DataJson/wpQuotes/"+$quote.QuoteNumber+".4wp")
+			If ($wpFile.exists)
+				$eQuote.optionalPreliminaryTxt_wr:=WP Import document:C1318($wpFile.platformPath)
+			End if 
 			$eQuote.save()
 		End for each 
 	End if 

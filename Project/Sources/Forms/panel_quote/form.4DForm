@@ -535,18 +535,49 @@
 		},
 		{
 			"objects": {
-				"Text1": {
-					"type": "text",
-					"text": "test oage 3",
-					"top": 132,
-					"left": 144,
-					"width": 175,
-					"height": 46
+				"entryField_WParea": {
+					"type": "write",
+					"top": 204,
+					"left": 0,
+					"width": 880,
+					"height": 590,
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"dataSource": "Form:C1466.current_item.optionalPreliminaryTxt_wr",
+					"hideFocusRing": true,
+					"scrollbarVertical": "automatic",
+					"scrollbarHorizontal": "automatic",
+					"dpi": 0,
+					"borderStyle": "none",
+					"method": "ObjectMethods/entryField_WParea.4dm",
+					"events": [
+						"onLoad",
+						"onLosingFocus",
+						"onGettingFocus",
+						"onDataChange",
+						"onSelectionChange",
+						"onAfterEdit"
+					]
+				},
+				"WPtoolbar": {
+					"type": "subform",
+					"top": 114,
+					"left": 0,
+					"width": 880,
+					"height": 90,
+					"sizingX": "grow",
+					"detailForm": "WP_Toolbar",
+					"focusable": false,
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable"
 				}
 			}
 		}
 	],
-	"geometryStamp": 340,
+	"geometryStamp": 351,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
