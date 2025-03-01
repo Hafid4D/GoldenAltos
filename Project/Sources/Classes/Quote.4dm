@@ -9,6 +9,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setSearchboxField("subject")
 	$entry.setPanel("panel_quote")
 	$entry.setPanelPage(1; "staff-32x32.png"; "Lines")
+	$entry.setPanelPage(2; "staff-32x32.png"; "Assumptions")
 	
 	$entry.setLBItemsColumn("subject"; "Subject"; "subject"; "width:300")
 	$entry.setLBItemsColumn("code"; "Code"; "code"; "width:100")

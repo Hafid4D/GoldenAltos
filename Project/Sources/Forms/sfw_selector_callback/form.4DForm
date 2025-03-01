@@ -85,6 +85,7 @@
 					"fill": "#E9FFF1",
 					"alternateFill": "#FFFFFF",
 					"metaSource": "This:C1470.meta",
+					"method": "ObjectMethods/lb_callbacks.4dm",
 					"columns": [
 						{
 							"header": {
@@ -97,7 +98,8 @@
 							"width": 24,
 							"footer": {
 								"name": "Footer3"
-							}
+							},
+							"method": "ObjectMethods/Column3.4dm"
 						},
 						{
 							"header": {

@@ -37,7 +37,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_quote": {
-			"timeStamp": "2025-02-24T16:54:44Z",
+			"timeStamp": "2025-02-25T16:09:05Z",
 			"destination": "detailScreen"
 		},
 		"panel_customer": {
@@ -72,6 +72,10 @@
 			"timeStamp": "2025-02-20T08:35:40Z",
 			"destination": "detailScreen"
 		},
+		"Quote_chooseAssumption": {
+			"timeStamp": "2025-02-25T16:35:56Z",
+			"destination": "detailScreen"
+		},
 		"sfw_subpanel_communication": {
 			"timeStamp": "2024-12-27T09:11:38Z",
 			"destination": "detailScreen"
@@ -93,7 +97,7 @@
 			"destination": "detailScreen"
 		},
 		"sfw_selector_callback": {
-			"timeStamp": "2025-01-16T09:57:28Z",
+			"timeStamp": "2025-02-28T21:29:12Z",
 			"destination": "detailScreen"
 		},
 		"sfw_compilation_syntaxCheck": {
