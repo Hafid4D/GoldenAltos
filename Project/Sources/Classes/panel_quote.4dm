@@ -101,13 +101,17 @@ Function loadAssumptions()
 	
 Function bActionAssumptions()
 	$mainMenu:=Create menu:C408
+	$plurial:=Form:C1466.selected_assumptions.length>1 ? True:C214 : False:C215
 	
 	APPEND MENU ITEM:C411($mainMenu; "Add assumption..."; *)
 	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--addAssumption")
 	APPEND MENU ITEM:C411($mainMenu; "-")
 	
-	APPEND MENU ITEM:C411($mainMenu; "Delete quote line..."; *)
+	APPEND MENU ITEM:C411($mainMenu; "Remove the assumption"+($plurial ? "s" : "")+"..."; *)
 	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--deleteAssumption")
+	If (Form:C1466.current_assumption=Null:C1517)
+		DISABLE MENU ITEM:C150($mainMenu; -1)
+	End if 
 	
 	$choose:=Dynamic pop up menu:C1006($mainMenu)
 	RELEASE MENU:C978($mainMenu)
@@ -122,11 +126,6 @@ Function bActionAssumptions()
 				$assumption:=$eAssumption.toObject()
 				$selected:=(Form:C1466.current_item.assumptions.UUIDs.indexOf($eAssumption.UUID)#-1)
 				$assumption.selected:=False:C215
-				//$assumption.meta:=New object
-				//If ($selected)
-				//$assumption.meta.unselectable:=True
-				//$assumption.meta.disabled:=True
-				//End if 
 				
 				$form.lb_assumptions.push($assumption)
 			End for each 
@@ -143,17 +142,18 @@ Function bActionAssumptions()
 				cs:C1710.panel_quote.me._activate_save_cancel_button()
 			End if 
 			
-		: ($choose="--deleteQuoteLine") & False:C215
-			$ok:=cs:C1710.sfw_dialog.me.confirm("Do you really want to delete this quote line? "; "Delete"; "CANCEL")
+		: ($choose="--deleteAssumption")
+			$ok:=cs:C1710.sfw_dialog.me.confirm("Do you really want to remove the assumption"+($plurial ? "s" : "")+" from the quote? "; "Delete"; "CANCEL")
+			
 			If ($ok)
-				
-				
-				
-				$info:=Form:C1466.current_quoteLine.drop()
-				This:C1470._activate_save_cancel_button()
-				LISTBOX SELECT ROW:C912(*; "lb_quoteLines"; 0; lk remove from selection:K53:3)
-				Form:C1466.current_quoteLine:=Null:C1517
-				This:C1470.displayQuoteLine()
+				For each ($selected_assumption; Form:C1466.selected_assumptions)
+					$index:=Form:C1466.current_item.assumptions.UUIDs.indexOf($selected_assumption.UUID)
+					If ($index#-1)
+						Form:C1466.current_item.assumptions.UUIDs.remove($index)
+					End if 
+				End for each 
+				This:C1470.loadAssumptions()
+				cs:C1710.panel_quote.me._activate_save_cancel_button()
 			End if 
 			
 	End case 

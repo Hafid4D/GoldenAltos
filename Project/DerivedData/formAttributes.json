@@ -37,7 +37,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_quote": {
-			"timeStamp": "2025-02-25T16:09:05Z",
+			"timeStamp": "2025-03-01T11:11:14Z",
 			"destination": "detailScreen"
 		},
 		"panel_customer": {
@@ -73,7 +73,7 @@
 			"destination": "detailScreen"
 		},
 		"Quote_chooseAssumption": {
-			"timeStamp": "2025-02-25T16:35:56Z",
+			"timeStamp": "2025-03-01T11:11:15Z",
 			"destination": "detailScreen"
 		},
 		"sfw_subpanel_communication": {

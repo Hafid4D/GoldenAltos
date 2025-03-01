@@ -470,6 +470,7 @@
 					"alternateFill": "#F7F9FC",
 					"borderStyle": "system",
 					"method": "ObjectMethods/lb_assumptions1.4dm",
+					"selectedItemsSource": "Form:C1466.selected_assumptions",
 					"columns": [
 						{
 							"name": "Colonne3",

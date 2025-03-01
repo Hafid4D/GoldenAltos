@@ -71,6 +71,7 @@
 					"alternateFill": "#F7F9FC",
 					"borderStyle": "system",
 					"method": "ObjectMethods/lb_assumptions.4dm",
+					"selectedItemsSource": "",
 					"columns": [
 						{
 							"header": {
