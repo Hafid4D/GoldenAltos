@@ -4,6 +4,7 @@ var $eQuote : cs:C1710.QuoteEntity
 var $eQuoteLine : cs:C1710.QuoteLineEntity
 var $eContact : cs:C1710.ContactEntity
 var $eCostumer : cs:C1710.CustomerEntity
+var $eTermConditon : cs:C1710.TermConditionEntity
 
 $assumptions_file:=Folder:C1567(fk data folder:K87:12).file("DataJson/quote_assumptions.json")
 If ($assumptions_file.exists)
@@ -66,6 +67,7 @@ If ($assumptions_file.exists)
 			$eQuote.subject:=$quote.Subject
 			$eQuote.reference:=$quote.Reference
 			$eQuote.assumptions:=New object:C1471("UUIDs"; New collection:C1472())
+			$eQuote.termsConditions:=New object:C1471("UUIDs"; New collection:C1472())
 			
 			$wpFile:=Folder:C1567(fk data folder:K87:12).file("DataJson/wpQuotes/"+$quote.QuoteNumber+".4wp")
 			If ($wpFile.exists)
@@ -74,8 +76,6 @@ If ($assumptions_file.exists)
 			$eQuote.save()
 		End for each 
 	End if 
-	
-	
 	
 	
 	$assumptions:=JSON Parse:C1218($assumptions_file.getText())
@@ -100,6 +100,34 @@ If ($assumptions_file.exists)
 			End if 
 		End if 
 	End for each 
+	
+	$terms_file:=Folder:C1567(fk data folder:K87:12).file("DataJson/termsConditions.json")
+	If ($terms_file.exists)
+		$quoteTerms:=JSON Parse:C1218($terms_file.getText())
+		For each ($quoteTerm; $quoteTerms)
+			
+			For each ($term; $quoteTerm.items)
+				$eTermConditon:=ds:C1482.TermCondition.query("code == :1 and value == :2"; $term.code; $term.value).first()
+				If ($eTermConditon=Null:C1517)
+					$eTermConditon:=ds:C1482.TermCondition.new()
+					$eTermConditon.code:=$term.code
+					$eTermConditon.value:=$term.value
+					$eTermConditon.save()
+				End if 
+				
+				$eQuote:=ds:C1482.Quote.query("code == :1"; $quoteTerm.quoteNumber).first()
+				If ($eQuote#Null:C1517)
+					$eQuote.termsConditions.UUIDs.push($eTermConditon.UUID)
+					$result:=$eQuote.save()
+					If ($result.success=False:C215)
+						TRACE:C157
+					End if 
+				Else 
+					TRACE:C157
+				End if 
+			End for each 
+		End for each 
+	End if 
 	
 	
 	$quoteLine_file:=Folder:C1567(fk data folder:K87:12).file("DataJson/quote_lines.json")

@@ -50,8 +50,8 @@
 			"coordinates": {
 				"left": 1439.3158772786,
 				"top": 490.94991048177,
-				"width": 190.36975097656,
-				"height": 237.13458251953
+				"width": 196.06713867187,
+				"height": 250.5640258789
 			},
 			"displayable_fields_count": 9
 		},
@@ -648,6 +648,21 @@
 			"displayable_fields_count": 8,
 			"fields_ordering": 1
 		},
+		"TermCondition": {
+			"color": {
+				"red": 226,
+				"green": 158,
+				"blue": 214,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 1006.9212646484,
+				"top": 889.44183349609,
+				"width": 155.59558105468,
+				"height": 169.22039794922
+			},
+			"displayable_fields_count": 6
+		},
 		"Assumption": {
 			"color": {
 				"red": 226,
@@ -656,8 +671,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 840.70373535156,
-				"top": 794.6273651123,
+				"left": 829.71606445312,
+				"top": 784.4535369873,
 				"width": 165.36242675781,
 				"height": 185.09155273438
 			},

@@ -15,6 +15,7 @@ Function formMethod()
 				
 			: (FORM Get current page:C276(*)=2)
 				This:C1470.loadAssumptions()
+				This:C1470.loadTermsConditions()
 				
 		End case 
 	End if 
@@ -36,6 +37,7 @@ Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	OBJECT SET VISIBLE:C603(*; "bActionQuoteLines"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET VISIBLE:C603(*; "bActionAssumptions"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "bActionTerms"; Form:C1466.sfw.checkIsInModification())
 	
 Function loadQuoteLines()
 	Form:C1466.lb_quoteLines:=Form:C1466.current_item.lines
@@ -154,6 +156,68 @@ Function bActionAssumptions()
 					End if 
 				End for each 
 				This:C1470.loadAssumptions()
+				cs:C1710.panel_quote.me._activate_save_cancel_button()
+			End if 
+			
+	End case 
+	
+Function loadTermsConditions()
+	Form:C1466.lb_terms:=ds:C1482.TermCondition.query("UUID in :1"; Form:C1466.current_item.termsConditions.UUIDs)
+	
+Function bActionTerms()
+	$mainMenu:=Create menu:C408
+	$plurial:=Form:C1466.selected_assumptions.length>1 ? True:C214 : False:C215
+	
+	APPEND MENU ITEM:C411($mainMenu; "Add term and condition..."; *)
+	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--addTermCondition")
+	APPEND MENU ITEM:C411($mainMenu; "-")
+	
+	APPEND MENU ITEM:C411($mainMenu; "Remove the term"+($plurial ? "s" : "")+"..."; *)
+	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--deleteTermCondition")
+	If (Form:C1466.current_term=Null:C1517)
+		DISABLE MENU ITEM:C150($mainMenu; -1)
+	End if 
+	
+	$choose:=Dynamic pop up menu:C1006($mainMenu)
+	RELEASE MENU:C978($mainMenu)
+	
+	
+	Case of 
+		: ($choose="--addTermCondition")
+			$form:=New object:C1471()
+			
+			$form.lb_terms:=New collection:C1472()
+			For each ($eTerm; ds:C1482.TermCondition.query("not(UUID in :1)"; Form:C1466.current_item.termsConditions.UUIDs))
+				$term:=$eTerm.toObject()
+				$selected:=(Form:C1466.current_item.termsConditions.UUIDs.indexOf($eTerm.UUID)#-1)
+				$term.selected:=False:C215
+				
+				$form.lb_terms.push($term)
+			End for each 
+			$ref:=Open form window:C675("Quote_chooseTerm"; Sheet form window:K39:12)
+			DIALOG:C40("Quote_chooseTerm"; $form)
+			CLOSE WINDOW:C154($ref)
+			If (ok=1)
+				For each ($term; $form.lb_terms)
+					If ($term.selected)
+						Form:C1466.current_item.termsConditions.UUIDs.push($term.UUID)
+					End if 
+				End for each 
+				This:C1470.loadTermsConditions()
+				cs:C1710.panel_quote.me._activate_save_cancel_button()
+			End if 
+			
+		: ($choose="--deleteTermCondition")
+			$ok:=cs:C1710.sfw_dialog.me.confirm("Do you really want to remove the term"+($plurial ? "s" : "")+" from the quote? "; "Delete"; "CANCEL")
+			
+			If ($ok)
+				For each ($selected_term; Form:C1466.selected_terms)
+					$index:=Form:C1466.current_item.termsConditions.UUIDs.indexOf($selected_term.UUID)
+					If ($index#-1)
+						Form:C1466.current_item.termsConditions.UUIDs.remove($index)
+					End if 
+				End for each 
+				This:C1470.loadTermsConditions()
 				cs:C1710.panel_quote.me._activate_save_cancel_button()
 			End if 
 			

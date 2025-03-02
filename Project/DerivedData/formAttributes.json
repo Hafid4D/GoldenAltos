@@ -37,7 +37,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_quote": {
-			"timeStamp": "2025-03-01T14:40:40Z",
+			"timeStamp": "2025-03-02T17:02:26Z",
 			"destination": "detailScreen"
 		},
 		"panel_customer": {
@@ -238,6 +238,10 @@
 		},
 		"sfw_subpanel_address": {
 			"timeStamp": "2024-12-09T09:38:13Z",
+			"destination": "detailScreen"
+		},
+		"Quote_chooseAssumption1": {
+			"timeStamp": "2025-03-01T11:11:15Z",
 			"destination": "detailScreen"
 		},
 		"zz4Colors": {

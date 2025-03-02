@@ -18,6 +18,12 @@
 		<field name="value" uuid="B8D9648C48A94FC19B2A146E4591876F" type="10" never_null="true" id="3"/>
 		<primary_key field_name="UUID" field_uuid="EA4BF9CC573745C5BF902F88DA00BD6E"/>
 	</table>
+	<table name="TermCondition" uuid="C426BFF1DD3F4326A89BD125EFA71348" id="3">
+		<field name="UUID" uuid="5ABBAB6EFCCD482ABFEA64F31B89770D" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="code" uuid="1F05536B569C49CEBE5484847CE8D4D7" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="value" uuid="C99A01CCBFF04219BBB18E97E966B065" type="10" never_null="true" id="3"/>
+		<primary_key field_name="UUID" field_uuid="5ABBAB6EFCCD482ABFEA64F31B89770D"/>
+	</table>
 	<table name="sfw_Country" uuid="4C0E0D9D33D246BAB1FACEEC19ABF144" id="15" prevent_journaling="true">
 		<field name="UUID" uuid="FDA14E8A26704F7091EC668E332108FB" type="10" unique="true" autogenerate="true" store_as_UUID="true" id="1"/>
 		<field name="name" uuid="FEDEAAD3F9A64D8AA7049B2EA9699D2C" type="10" limiting_length="255" id="2"/>
@@ -280,6 +286,7 @@
 		<field name="reference" uuid="3654B390DF5B4BC9869CCFFE02253DC9" type="10" limiting_length="255" never_null="true" id="6"/>
 		<field name="assumptions" uuid="1CF6DB165ED94D8EBA82D57E81B086DD" type="21" blob_switch_size="2147483647" never_null="true" id="7"/>
 		<field name="optionalPreliminaryTxt_wr" uuid="7ECA3501E5544BD88FD49E982E900EC0" type="21" blob_switch_size="2147483647" never_null="true" id="8"/>
+		<field name="termsConditions" uuid="841C2C0BB623401EA6087977440B07D8" type="21" blob_switch_size="2147483647" never_null="true" id="9"/>
 		<primary_key field_name="UUID" field_uuid="DDEAA2AF9B9A44BD99857817933C03AA"/>
 	</table>
 	<table name="QuoteLine" uuid="348628FCA4DC451085D7519B226BD509" id="129">
@@ -678,6 +685,11 @@
 	<index kind="regular" uuid="2A8FF9A5455141689A96101C4A7D5338" type="3">
 		<field_ref uuid="2E2FF42359124C978D041A838CB8866E" name="UUID_User">
 			<table_ref uuid="0A7AAD6A6AAB448E9F91A0CF0CC592C6" name="sfw_SchedulerLog"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="2BD6999E814B4F2E97D229C0D7DACB7C" type="1">
+		<field_ref uuid="5ABBAB6EFCCD482ABFEA64F31B89770D" name="UUID">
+			<table_ref uuid="C426BFF1DD3F4326A89BD125EFA71348" name="TermCondition"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="2F43555942CD426DA98581247C28392E" type="3">

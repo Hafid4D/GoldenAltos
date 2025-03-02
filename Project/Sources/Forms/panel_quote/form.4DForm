@@ -439,13 +439,13 @@
 					"top": 113,
 					"left": 0,
 					"width": 907,
-					"height": 192,
+					"height": 224,
 					"stroke": "#c0c0c0",
 					"fill": "#F7F9FC"
 				},
 				"lb_assumptions1": {
 					"type": "listbox",
-					"top": 126,
+					"top": 153,
 					"left": 1,
 					"width": 867,
 					"height": 146,
@@ -518,7 +518,7 @@
 				"bActionAssumptions": {
 					"type": "button",
 					"text": "Actions",
-					"top": 278,
+					"top": 307,
 					"left": 5,
 					"width": 80,
 					"height": 21,
@@ -530,6 +530,125 @@
 					"icon": "/RESOURCES/sfw/image/picto/gear.png",
 					"textPlacement": "right",
 					"method": "ObjectMethods/bActionAssumptions.4dm"
+				},
+				"Text": {
+					"type": "text",
+					"text": "Assumptions",
+					"top": 128,
+					"left": 5,
+					"width": 133,
+					"height": 16,
+					"fontWeight": "bold",
+					"textDecoration": "underline"
+				},
+				"bkgd_lb_consumptions3": {
+					"type": "rectangle",
+					"top": 336,
+					"left": 0,
+					"width": 907,
+					"height": 224,
+					"stroke": "#c0c0c0",
+					"fill": "#F7F9FC"
+				},
+				"lb_terms": {
+					"type": "listbox",
+					"top": 376,
+					"left": 1,
+					"width": 244,
+					"height": 146,
+					"resizingMode": "legacy",
+					"listboxType": "collection",
+					"focusable": false,
+					"movableRows": false,
+					"dataSource": "Form:C1466.lb_terms",
+					"currentItemSource": "Form:C1466.current_term",
+					"currentItemPositionSource": "",
+					"metaSource": "This:C1470.meta",
+					"scrollbarHorizontal": "hidden",
+					"horizontalLineStroke": "transparent",
+					"verticalLineStroke": "#C0C0C0",
+					"events": [
+						"onClick",
+						"onDataChange",
+						"onSelectionChange",
+						"onHeaderClick"
+					],
+					"fill": "#FFFFFF",
+					"alternateFill": "#F7F9FC",
+					"borderStyle": "system",
+					"method": "ObjectMethods/lb_terms.4dm",
+					"selectedItemsSource": "Form:C1466.selected_terms",
+					"columns": [
+						{
+							"name": "Colonne1",
+							"dataSource": "This:C1470.code",
+							"width": 139,
+							"minWidth": 10,
+							"maxWidth": 32000,
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"header": {
+								"name": "Entête1",
+								"text": "Code",
+								"fontTheme": "normal",
+								"textAlign": "left"
+							},
+							"footer": {
+								"name": "Pied1",
+								"timeFormat": "hh_mm_ss",
+								"fontFamily": "System Font Regular",
+								"fontSize": 10
+							},
+							"fontTheme": "normal",
+							"enterable": false
+						}
+					]
+				},
+				"bActionTerms": {
+					"type": "button",
+					"text": "Actions",
+					"top": 530,
+					"left": 5,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionTerms.4dm"
+				},
+				"Text1": {
+					"type": "text",
+					"text": "Terms and conditions",
+					"top": 351,
+					"left": 5,
+					"width": 169,
+					"height": 16,
+					"fontWeight": "bold",
+					"textDecoration": "underline"
+				},
+				"description": {
+					"type": "input",
+					"top": 376,
+					"left": 253,
+					"width": 604,
+					"height": 145,
+					"dataSource": "Form:C1466.current_term.value",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"scrollbarVertical": "automatic"
 				}
 			}
 		},
@@ -577,7 +696,7 @@
 			}
 		}
 	],
-	"geometryStamp": 351,
+	"geometryStamp": 421,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
