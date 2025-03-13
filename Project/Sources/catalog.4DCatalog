@@ -239,6 +239,7 @@
 	</table>
 	<table name="StepTemplate" uuid="6330FD4D08D74130BF3869222CDECBA6" id="121">
 		<field name="UUID" uuid="3E46CC22F2F34DC0B68C304E1BC47991" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="name" uuid="CF1A2CBF37710C44B4CB331A0ADB7A47" type="10" limiting_length="255" never_null="true" id="2"/>
 		<primary_key field_name="UUID" field_uuid="3E46CC22F2F34DC0B68C304E1BC47991"/>
 	</table>
 	<table name="Tool" uuid="C0C5EF5A4CD04FF7BB3897793A9DE6ED" id="122">

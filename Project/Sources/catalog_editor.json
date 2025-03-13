@@ -163,13 +163,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2252.9500325521,
-				"top": 386.62320963542,
+				"left": 2252.9499511719,
+				"top": 386.62319946289,
 				"width": 120,
 				"height": 167.33203125
 			},
-			"displayable_fields_count": 6,
-			"fields_ordering": 1
+			"displayable_fields_count": 6
 		},
 		"Step": {
 			"color": {
@@ -179,10 +178,10 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1919.3287760417,
+				"left": 1919.3287353516,
 				"top": 382.79040527344,
-				"width": 158.02115885417,
-				"height": 187.29870605469
+				"width": 179.02116394043,
+				"height": 176.29870605469
 			},
 			"displayable_fields_count": 6,
 			"fields": {
