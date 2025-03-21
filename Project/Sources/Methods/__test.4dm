@@ -1,5 +1,6 @@
 //%attributes = {}
 
+//TRACE
 
 $e:=ds:C1482.Quote.query("code == :1"; "Q294").first()
 
