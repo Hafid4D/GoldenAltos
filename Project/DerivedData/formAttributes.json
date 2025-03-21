@@ -37,7 +37,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_quote": {
-			"timeStamp": "2025-03-02T17:02:26Z",
+			"timeStamp": "2025-03-03T15:11:19Z",
 			"destination": "detailScreen"
 		},
 		"panel_customer": {
@@ -192,6 +192,10 @@
 			"timeStamp": "2025-01-16T09:57:28Z",
 			"destination": "detailScreen"
 		},
+		"Quote_chooseTerm": {
+			"timeStamp": "2025-03-02T17:07:00Z",
+			"destination": "detailScreen"
+		},
 		"sfw_wizard_scheduler": {
 			"timeStamp": "2025-01-23T09:27:42Z",
 			"destination": "detailScreen"
@@ -238,10 +242,6 @@
 		},
 		"sfw_subpanel_address": {
 			"timeStamp": "2024-12-09T09:38:13Z",
-			"destination": "detailScreen"
-		},
-		"Quote_chooseAssumption1": {
-			"timeStamp": "2025-03-01T11:11:15Z",
 			"destination": "detailScreen"
 		},
 		"zz4Colors": {

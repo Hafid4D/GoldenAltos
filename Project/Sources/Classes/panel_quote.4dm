@@ -17,6 +17,9 @@ Function formMethod()
 				This:C1470.loadAssumptions()
 				This:C1470.loadTermsConditions()
 				
+			: (FORM Get current page:C276(*)=4)
+				This:C1470.buildQuotePreview()
+				
 		End case 
 	End if 
 	
@@ -222,6 +225,25 @@ Function bActionTerms()
 			End if 
 			
 	End case 
+	
+Function buildQuotePreview()
+	Form:C1466.preview:=WP New:C1317()
+	$headerLogoFile:=Folder:C1567(fk resources folder:K87:11).file("picts_GA/HeaderPortrait.jpeg")
+	If ($headerLogoFile.exists)
+		$headerLogoBlob:=$headerLogoFile.getContent()
+		BLOB TO PICTURE:C682($headerLogoBlob; $headerLogoPict)
+	End if 
+	
+	$section:=WP Get section:C1581(Form:C1466.preview; 1)
+	
+	$header:=WP New header:C1586($section)
+	WP INSERT PICTURE:C1437($header; $headerLogoPict; wk append:K81:179)
+	
+	//$footer:=WP New footer($section)
+	//$text:=
+	//WP SET TEXT($footer; "OK OK"; wk append) 
+	
+	
 	
 Function _activate_save_cancel_button()
 	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID

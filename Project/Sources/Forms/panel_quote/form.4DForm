@@ -694,9 +694,51 @@
 					"printFrame": "variable"
 				}
 			}
+		},
+		{
+			"objects": {
+				"entryField_preview": {
+					"type": "write",
+					"top": 204,
+					"left": 0,
+					"width": 880,
+					"height": 590,
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"dataSource": "Form:C1466.preview",
+					"hideFocusRing": true,
+					"scrollbarVertical": "automatic",
+					"scrollbarHorizontal": "automatic",
+					"dpi": 0,
+					"borderStyle": "none",
+					"method": "ObjectMethods/entryField_preview.4dm",
+					"events": [
+						"onLoad",
+						"onLosingFocus",
+						"onGettingFocus",
+						"onSelectionChange",
+						"onAfterEdit"
+					]
+				},
+				"WPtoolbar1": {
+					"type": "subform",
+					"top": 114,
+					"left": 0,
+					"width": 880,
+					"height": 90,
+					"sizingX": "grow",
+					"detailForm": "WP_Toolbar",
+					"focusable": false,
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable"
+				}
+			}
 		}
 	],
-	"geometryStamp": 421,
+	"geometryStamp": 436,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
