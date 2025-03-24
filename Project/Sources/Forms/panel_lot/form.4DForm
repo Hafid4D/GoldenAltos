@@ -1,0 +1,766 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 0,
+	"bottomMargin": 0,
+	"events": [
+		"onLoad",
+		"onPageChange",
+		"onValidate",
+		"onClick",
+		"onDoubleClick",
+		"onOutsideCall",
+		"onBeginDragOver",
+		"onDragOver",
+		"onDrop",
+		"onAfterKeystroke",
+		"onMenuSelect",
+		"onPluginArea",
+		"onAfterEdit",
+		"onTimer",
+		"onBoundVariableChange"
+	],
+	"windowTitle": "window title",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {
+				"header_bkgd": {
+					"type": "rectangle",
+					"top": 0,
+					"left": 0,
+					"width": 913,
+					"height": 94,
+					"sizingX": "grow",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"label_0_1": {
+					"type": "text",
+					"top": 12,
+					"left": 12,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Lot #"
+				},
+				"entryField_lotNumber": {
+					"type": "input",
+					"top": 12,
+					"left": 132,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.lotNumber",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold"
+				},
+				"vTabBar_subform": {
+					"type": "subform",
+					"top": 94,
+					"left": 0,
+					"width": 50,
+					"height": 450,
+					"dataSource": "Form:C1466.vTabBar",
+					"detailForm": "sfw_vTabBar",
+					"hideFocusRing": true,
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "sfw_main_vTabBar_sfo"
+				},
+				"label_jobNumber": {
+					"type": "text",
+					"top": 12,
+					"left": 572,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Device"
+				},
+				"entryField_device": {
+					"type": "input",
+					"top": 12,
+					"left": 692,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.device",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left"
+				},
+				"label_0_4": {
+					"type": "text",
+					"top": 37,
+					"left": 12,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Csutomer"
+				},
+				"entryField_customer": {
+					"type": "input",
+					"top": 37,
+					"left": 132,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.customer",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold"
+				},
+				"label_jobNumber1": {
+					"type": "text",
+					"top": 37,
+					"left": 572,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Alt. Lot #"
+				},
+				"entryField_altLotNumber": {
+					"type": "input",
+					"top": 37,
+					"left": 692,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.altLotNumber",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left"
+				},
+				"label_0_5": {
+					"type": "text",
+					"top": 62,
+					"left": 12,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "PO #"
+				},
+				"entryField_poNumber": {
+					"type": "input",
+					"top": 62,
+					"left": 132,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.poNumber",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold"
+				},
+				"label_jobNumber2": {
+					"type": "text",
+					"top": 62,
+					"left": 572,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Device Table Link"
+				},
+				"entryField_deviceTableLink": {
+					"type": "input",
+					"top": 62,
+					"left": 692,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.deviceTableLink",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left"
+				},
+				"label_jobNumber3": {
+					"type": "text",
+					"top": 12,
+					"left": 312,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Job #"
+				},
+				"entryField_device1": {
+					"type": "input",
+					"top": 12,
+					"left": 392,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.job.jobNumber",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left"
+				}
+			}
+		},
+		{
+			"objects": {
+				"header_bkgd2": {
+					"type": "rectangle",
+					"top": 100,
+					"left": 57,
+					"width": 332,
+					"height": 30,
+					"sizingX": "grow",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 389
+				},
+				"lbl_dates": {
+					"type": "text",
+					"top": 107,
+					"left": 64,
+					"width": 250,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Dates",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"header_bkgd4": {
+					"type": "rectangle",
+					"top": 133,
+					"left": 57,
+					"width": 332,
+					"height": 57,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"right": 389
+				},
+				"label_0_15": {
+					"type": "text",
+					"top": 141,
+					"left": 65,
+					"width": 60,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Date In"
+				},
+				"label_0_16": {
+					"type": "text",
+					"top": 165,
+					"left": 65,
+					"width": 60,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Commit 1"
+				},
+				"entryField_commit": {
+					"type": "input",
+					"top": 165,
+					"left": 125,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.commit",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "date",
+					"dateFormat": "short"
+				},
+				"entryField_dateIn": {
+					"type": "input",
+					"top": 141,
+					"left": 125,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.dateIn",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "date",
+					"dateFormat": "short"
+				},
+				"label_dateOut": {
+					"type": "text",
+					"top": 141,
+					"left": 233,
+					"width": 60,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Date Out"
+				},
+				"label_reCommit": {
+					"type": "text",
+					"top": 165,
+					"left": 233,
+					"width": 60,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Re Commit"
+				},
+				"entryField_reCommit": {
+					"type": "input",
+					"top": 165,
+					"left": 301,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.reCommit",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "date",
+					"dateFormat": "short"
+				},
+				"entryField_dateOut": {
+					"type": "input",
+					"top": 141,
+					"left": 301,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.dateOut",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "date",
+					"dateFormat": "short"
+				},
+				"header_bkgd1": {
+					"type": "rectangle",
+					"top": 100,
+					"left": 396,
+					"width": 510,
+					"height": 30,
+					"sizingX": "grow",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 906
+				},
+				"lbl_dates1": {
+					"type": "text",
+					"top": 107,
+					"left": 403,
+					"width": 250,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Counts",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"header_bkgd3": {
+					"type": "rectangle",
+					"top": 133,
+					"left": 396,
+					"width": 510,
+					"height": 57,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"right": 906
+				},
+				"label_0_2": {
+					"type": "text",
+					"top": 141,
+					"left": 402,
+					"width": 60,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Original"
+				},
+				"entryField_original": {
+					"type": "input",
+					"top": 141,
+					"left": 474,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.original",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "integer",
+					"textAlign": "right"
+				},
+				"label_dateOut1": {
+					"type": "text",
+					"top": 141,
+					"left": 581,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Our"
+				},
+				"entryField_ourCount": {
+					"type": "input",
+					"top": 141,
+					"left": 659,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.ourCount",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "integer",
+					"textAlign": "right"
+				},
+				"label_dateOut2": {
+					"type": "text",
+					"top": 141,
+					"left": 770,
+					"width": 40,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "AZ%"
+				},
+				"entryField_az": {
+					"type": "input",
+					"top": 141,
+					"left": 818,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.az",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "number",
+					"numberFormat": "###,##0.00",
+					"textAlign": "right"
+				},
+				"label_0_3": {
+					"type": "text",
+					"top": 165,
+					"left": 402,
+					"width": 60,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Progressive"
+				},
+				"entryField_progressive": {
+					"type": "input",
+					"top": 165,
+					"left": 474,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.progressive",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "integer",
+					"textAlign": "right"
+				},
+				"label_dateOut3": {
+					"type": "text",
+					"top": 165,
+					"left": 581,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Total Tested"
+				},
+				"entryField_totalTested": {
+					"type": "input",
+					"top": 165,
+					"left": 659,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.totalTested",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "integer",
+					"textAlign": "right"
+				},
+				"label_dateOut4": {
+					"type": "text",
+					"top": 165,
+					"left": 770,
+					"width": 40,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "ET%"
+				},
+				"entryField_et": {
+					"type": "input",
+					"top": 165,
+					"left": 818,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.et",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "number",
+					"numberFormat": "###,##0.00",
+					"textAlign": "right"
+				},
+				"header_bkgd5": {
+					"type": "rectangle",
+					"top": 197,
+					"left": 57,
+					"width": 332,
+					"height": 30,
+					"sizingX": "grow",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 389
+				},
+				"lbl_dates2": {
+					"type": "text",
+					"top": 204,
+					"left": 64,
+					"width": 250,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Hold",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"header_bkgd6": {
+					"type": "rectangle",
+					"top": 230,
+					"left": 57,
+					"width": 332,
+					"height": 57,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"right": 389
+				},
+				"label_0_6": {
+					"type": "text",
+					"top": 238,
+					"left": 65,
+					"width": 60,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Hold"
+				},
+				"label_0_7": {
+					"type": "text",
+					"top": 262,
+					"left": 65,
+					"width": 60,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Hold Date"
+				},
+				"entryField_holdDate": {
+					"type": "input",
+					"top": 262,
+					"left": 125,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.holdDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "date",
+					"dateFormat": "short"
+				},
+				"label_reCommit1": {
+					"type": "text",
+					"top": 262,
+					"left": 233,
+					"width": 60,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Hold Time"
+				},
+				"entryField_holdTime": {
+					"type": "input",
+					"top": 262,
+					"left": 301,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.holdTime",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "time",
+					"timeFormat": "hh_mm_ss"
+				},
+				"Check Box": {
+					"type": "checkbox",
+					"text": "Lot on Hold",
+					"top": 233,
+					"left": 126,
+					"width": 254,
+					"height": 24,
+					"events": [
+						"onClick"
+					]
+				}
+			}
+		},
+		{
+			"objects": {
+				"Text3": {
+					"type": "text",
+					"text": "Lot Steps",
+					"top": 101,
+					"left": 57,
+					"width": 224,
+					"height": 17,
+					"fontWeight": "bold"
+				}
+			}
+		},
+		{
+			"objects": {
+				"Text2": {
+					"type": "text",
+					"text": "Inventory",
+					"top": 101,
+					"left": 57,
+					"width": 224,
+					"height": 17,
+					"fontWeight": "bold"
+				}
+			}
+		}
+	],
+	"geometryStamp": 702,
+	"method": "method.4dm",
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
+}
