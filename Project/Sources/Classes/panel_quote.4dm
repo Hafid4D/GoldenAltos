@@ -239,10 +239,129 @@ Function buildQuotePreview()
 	$header:=WP New header:C1586($section)
 	WP INSERT PICTURE:C1437($header; $headerLogoPict; wk append:K81:179)
 	
-	//$footer:=WP New footer($section)
-	//$text:=
-	//WP SET TEXT($footer; "OK OK"; wk append) 
+	$footer:=WP New footer:C1587($section)
+	WP SET TEXT:C1574($footer; "CONFIDENTIAL. For the exclusive use og the customer named herein. Please destroy or return to sender immediately if you are not the customer named."; wk append:K81:179)
 	
+	$leftTxtBox:=WP New text box:C1797(Form:C1466.preview; 1)
+	WP SET ATTRIBUTES:C1342($leftTxtBox; wk margin top:K81:13; "100pt")
+	WP SET ATTRIBUTES:C1342($leftTxtBox; wk margin left:K81:11; "11cm")
+	WP SET ATTRIBUTES:C1342($leftTxtBox; wk border color:K81:34; "white")
+	WP SET ATTRIBUTES:C1342($leftTxtBox; wk width:K81:45; "9cm")
+	WP SET TEXT:C1574($leftTxtBox; "Quotation#: Q294\tRevision: R\tDated: 6/9/2023"; wk append:K81:179)
+	WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
+	WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
+	WP SET TEXT:C1574($leftTxtBox; "From: Ben Mendoza"; wk append:K81:179)
+	WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
+	WP SET TEXT:C1574($leftTxtBox; "\tbmendoza@goldenaltos.com"; wk append:K81:179)
+	WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
+	WP SET TEXT:C1574($leftTxtBox; "\tel: 408-569-1010"; wk append:K81:179)
+	WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
+	WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
+	WP SET TEXT:C1574($leftTxtBox; "Copy: Rosie Medina"; wk append:K81:179)
+	WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
+	WP SET TEXT:C1574($leftTxtBox; "\trosimedina@goldenaltos.com"; wk append:K81:179)
+	
+	$paragraph:=WP Get elements:C1550($section; wk type paragraph:K81:191)[0]
+	WP SET ATTRIBUTES:C1342($paragraph; wk width:K81:45; "7cm")
+	
+	WP SET TEXT:C1574($paragraph; Form:C1466.current_item.contact.fullName; wk append:K81:179)
+	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP SET TEXT:C1574($paragraph; "Sandia National Laboratories"; wk append:K81:179)
+	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP SET TEXT:C1574($paragraph; "Po Box 5800, Albuqyerque NM97 185-1484 Po Box 5800, Albuqyerque "; wk append:K81:179)
+	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP SET TEXT:C1574($paragraph; "Tel: (505)845-0596"; wk append:K81:179)
+	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP SET TEXT:C1574($paragraph; "Email: mcline@sandia.gov"; wk append:K81:179)
+	
+	WP INSERT BREAK:C1413($section; wk paragraph break:K81:259; wk append:K81:179)
+	$paragraph:=WP Get elements:C1550($section; wk type paragraph:K81:191)[1]
+	WP SET ATTRIBUTES:C1342($paragraph; wk width:K81:45; "auto")
+	
+	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP SET TEXT:C1574($paragraph; "Subject:\tPlastic Qualification And DPA"; wk append:K81:179)
+	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP SET TEXT:C1574($paragraph; "Reference:\tPS4A2702"; wk append:K81:179)
+	
+	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP SET TEXT:C1574($paragraph; "  Dear Mellisa"; wk append:K81:179)
+	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP SET TEXT:C1574($paragraph; "We are pleased to submit to you the following quotation:"; wk append:K81:179)
+	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	
+	$table:=WP Insert table:C1473($paragraph; wk append:K81:179; wk include in range:K81:180)
+	$tableHeaders:=WP Table append row:C1474($table; "Item#"; "Description"; "Qty"; "Unit-Price"; "Amount")
+	
+	$numCol:=WP Table get columns:C1476($table; 1)
+	$descCol:=WP Table get columns:C1476($table; 2)
+	$qtyCol:=WP Table get columns:C1476($table; 3)
+	$amountcols:=WP Table get columns:C1476($table; 4; 2)
+	
+	WP SET ATTRIBUTES:C1342($numCol; wk width:K81:45; "1cm")
+	WP SET ATTRIBUTES:C1342($descCol; wk width:K81:45; "9cm")
+	WP SET ATTRIBUTES:C1342($qtyCol; wk width:K81:45; "1.5cm")
+	WP SET ATTRIBUTES:C1342($amountcols; wk width:K81:45; "2.5cm")
+	$index:=1
+	For each ($line; Form:C1466.current_item.lines)
+		$row:=WP Table append row:C1474($table; String:C10($index); $line.description; $line.quantity; $line.unitPrice; $line.quantity*$line.unitPrice)
+		$index+=1
+	End for each 
+	
+	
+	WP INSERT BREAK:C1413($section; wk paragraph break:K81:259; wk append:K81:179)
+	$paragraphs:=WP Get elements:C1550($section; wk type paragraph:K81:191)
+	$paragraph:=$paragraphs[$paragraphs.length-1]
+	WP SET ATTRIBUTES:C1342($paragraph; wk width:K81:45; "auto")
+	WP INSERT DOCUMENT:C1411($paragraph; Form:C1466.current_item.optionalPreliminaryTxt_wr; wk append:K81:179)
+	
+	
+	$paragraphs:=WP Get elements:C1550($section; wk type paragraph:K81:191)
+	$paragraph:=$paragraphs[$paragraphs.length-1]
+	
+	$assumptions:=ds:C1482.Assumption.query("UUID in :1"; Form:C1466.current_item.assumptions.UUIDs)
+	If ($assumptions.length#0)
+		WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+		WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+		WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+		WP SET TEXT:C1574($paragraph; "Assumptions:"; wk append:K81:179)
+		WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+		
+		For each ($assumption; $assumptions)
+			WP SET TEXT:C1574($paragraph; " - "+$assumption.value; wk append:K81:179)
+			WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+		End for each 
+	End if 
+	
+	
+	$conditions:=ds:C1482.TermCondition.query("UUID in :1"; Form:C1466.current_item.termsConditions.UUIDs)
+	If ($conditions.length#0)
+		WP INSERT BREAK:C1413($section; wk page break:K81:188; wk append:K81:179)
+		WP INSERT BREAK:C1413($section; wk paragraph break:K81:259; wk append:K81:179)
+		$paragraphs:=WP Get elements:C1550($section; wk type paragraph:K81:191)
+		$paragraph:=$paragraphs[$paragraphs.length-1]
+		WP SET TEXT:C1574($paragraph; "GOLDEN ALTOS"; wk append:K81:179)
+		WP SET ATTRIBUTES:C1342($paragraph; wk text align:K81:49; wk center:K81:99)
+		WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+		WP SET TEXT:C1574($paragraph; "Terms and conditions of sales"; wk append:K81:179)
+		WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+		
+		WP SET ATTRIBUTES:C1342($paragraph; wk text color:K81:64; "grey")
+		
+		WP INSERT BREAK:C1413($section; wk paragraph break:K81:259; wk append:K81:179)
+		$paragraphs:=WP Get elements:C1550($section; wk type paragraph:K81:191)
+		$paragraph:=$paragraphs[$paragraphs.length-1]
+		
+		$index:=1
+		For each ($condition; $conditions)
+			WP SET TEXT:C1574($paragraph; String:C10($index)+".  "+$condition.code+": "+$condition.value; wk append:K81:179)
+			WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+			$index+=1
+		End for each 
+		WP SET ATTRIBUTES:C1342($paragraph; wk text align:K81:49; wk left:K81:95)
+	End if 
 	
 	
 Function _activate_save_cancel_button()
