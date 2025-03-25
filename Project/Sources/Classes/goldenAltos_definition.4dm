@@ -14,8 +14,8 @@ Class constructor
 Function _global_parameters()
 	
 	This:C1470.globalParameters:=New object:C1471
-	This:C1470.globalParameters.toolbar:=New object:C1471("visionsLogo"; "/RESOURCES/image/logo/Kairos-logo-100x25.png"; "visionsLogoLocal"; "/RESOURCES/image/logo/Kairos-logo-local-100x25.png")
-	This:C1470.globalParameters.panel:=New object:C1471("defaultLogo"; "/RESOURCES/image/logo/Kairos-512x452.png"; "defaultLogoLocal"; "/RESOURCES/image/logo/Kairos-local-512x452.png")
+	This:C1470.globalParameters.toolbar:=New object:C1471("visionsLogo"; "/RESOURCES/image/logo/golden_atos_100x25.png"; "visionsLogoLocal"; "/RESOURCES/image/logo/golden_atos_100x25.png")
+	This:C1470.globalParameters.panel:=New object:C1471("defaultLogo"; "/RESOURCES/image/logo/logoGATransparent.png"; "defaultLogoLocal"; "/RESOURCES/image/logo/logoGATransparent.png")
 	This:C1470.globalParameters.users:=New object:C1471("passwordLength"; 12)
 	This:C1470.globalParameters.users.linkedDataclass:="Staff"
 	This:C1470.globalParameters.users.linkedObject:="staff"
@@ -138,7 +138,7 @@ Function _visions_definition()
 	$vision:=cs:C1710.sfw_definitionVision.new("customerService"; "Customer service")
 	$vision.setToolbarBackgroundColor("#52ABD8")
 	$vision.setFocusRingColor("navy")
-	$vision.setIcon("image/vision/staff-management-50x50.png")
+	$vision.setIcon("image/vision/customer-service-24x24.png")
 	This:C1470._push_vision($vision)
 	
 	

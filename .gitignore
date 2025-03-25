@@ -1,5 +1,12 @@
+# 4D
 /Data
 /Logs
 /userPreferences.*
 /*.4BK
 /backupHistory.json
+**/DerivedData/
+
+# System files
+.DS_Store
+ehthumbs.db
+Thumbs.db
