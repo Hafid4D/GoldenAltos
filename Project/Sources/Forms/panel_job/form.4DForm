@@ -78,7 +78,7 @@
 					"width": 70,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Ref #"
+					"text": "PO #"
 				},
 				"entryField_shippers": {
 					"type": "input",
@@ -86,7 +86,7 @@
 					"left": 92,
 					"width": 140,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.shippers",
+					"dataSource": "Form:C1466.current_item.poNumber",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -106,7 +106,7 @@
 					"width": 70,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "PO #"
+					"text": "Archived"
 				},
 				"entryField_poNumber": {
 					"type": "input",
@@ -114,7 +114,7 @@
 					"left": 92,
 					"width": 140,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.poNumber",
+					"dataSource": "Form:C1466.current_item.archived",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -149,7 +149,7 @@
 					"width": 130,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Device #"
+					"text": "Customer"
 				},
 				"entryField_deviceNumber": {
 					"type": "input",
@@ -157,7 +157,7 @@
 					"left": 432,
 					"width": 140,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.deviceNumber",
+					"dataSource": "Form:C1466.current_item.customer",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -177,7 +177,7 @@
 					"width": 130,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Customer's Shipper"
+					"text": "Process"
 				},
 				"entryField_customerShipper": {
 					"type": "input",
@@ -185,7 +185,7 @@
 					"left": 432,
 					"width": 140,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.customerShipper",
+					"dataSource": "Form:C1466.current_item.process",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -205,7 +205,7 @@
 					"width": 70,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Division"
+					"text": "Shipped"
 				},
 				"entryField_division": {
 					"type": "input",
@@ -213,7 +213,7 @@
 					"left": 432,
 					"width": 140,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.division",
+					"dataSource": "Form:C1466.current_item.shipped",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -397,7 +397,7 @@
 					"width": 130,
 					"height": 17,
 					"stroke": "#000000",
-					"text": "Totals",
+					"text": "Quantity",
 					"fontSize": 12,
 					"fontWeight": "bold"
 				},
@@ -567,57 +567,6 @@
 					"sizingX": "grow",
 					"dataSource": "Form:C1466.current_item.lineItem"
 				},
-				"header_bkgd7": {
-					"type": "rectangle",
-					"top": 333,
-					"left": 546,
-					"width": 360,
-					"height": 30,
-					"sizingX": "grow",
-					"fill": "#A2C6D8",
-					"stroke": "transparent"
-				},
-				"lbl_address3": {
-					"type": "text",
-					"top": 340,
-					"left": 553,
-					"width": 250,
-					"height": 17,
-					"stroke": "#000000",
-					"text": "Ship Memo",
-					"fontSize": 12,
-					"fontWeight": "bold"
-				},
-				"header_bkgd8": {
-					"type": "rectangle",
-					"top": 366,
-					"left": 546,
-					"width": 360,
-					"height": 186,
-					"sizingX": "grow",
-					"fill": "#E4E4E4",
-					"stroke": "transparent",
-					"sizingY": "grow"
-				},
-				"entryField_shipMemo": {
-					"type": "input",
-					"top": 375,
-					"left": 554,
-					"width": 333,
-					"height": 167,
-					"dataSource": "Form:C1466.current_item.shipMemo",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"sizingX": "fixed",
-					"scrollbarVertical": "automatic"
-				},
 				"header_bkgd9": {
 					"type": "rectangle",
 					"top": 333,
@@ -692,6 +641,184 @@
 					"dataSourceTypeHint": "boolean",
 					"sizingX": "grow",
 					"dataSource": "Form:C1466.current_item.noLots"
+				},
+				"header_bkgd7": {
+					"type": "rectangle",
+					"top": 332,
+					"left": 546,
+					"width": 360,
+					"height": 30,
+					"sizingX": "grow",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 906
+				},
+				"lbl_address3": {
+					"type": "text",
+					"top": 339,
+					"left": 553,
+					"width": 250,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Dates",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"header_bkgd8": {
+					"type": "rectangle",
+					"top": 365,
+					"left": 546,
+					"width": 360,
+					"height": 140,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"right": 906
+				},
+				"label_0_8": {
+					"type": "text",
+					"top": 373,
+					"left": 554,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Created Date"
+				},
+				"label_0_17": {
+					"type": "text",
+					"top": 400,
+					"left": 554,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Expected"
+				},
+				"label_0_18": {
+					"type": "text",
+					"top": 427,
+					"left": 554,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Invoice Date"
+				},
+				"label_0_19": {
+					"type": "text",
+					"top": 454,
+					"left": 554,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Last Ship Date"
+				},
+				"label_0_21": {
+					"type": "text",
+					"top": 481,
+					"left": 554,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Archived Date"
+				},
+				"entryField_qty1": {
+					"type": "input",
+					"top": 373,
+					"left": 678,
+					"width": 220,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.dateCreated",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "date",
+					"dateFormat": "short"
+				},
+				"entryField_qty2": {
+					"type": "input",
+					"top": 400,
+					"left": 678,
+					"width": 220,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.expectedDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "date",
+					"dateFormat": "short"
+				},
+				"entryField_qty3": {
+					"type": "input",
+					"top": 427,
+					"left": 678,
+					"width": 220,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.invoiceDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "date",
+					"dateFormat": "short"
+				},
+				"entryField_qty4": {
+					"type": "input",
+					"top": 454,
+					"left": 678,
+					"width": 220,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.lastShipDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "date",
+					"dateFormat": "short"
+				},
+				"entryField_qty5": {
+					"type": "input",
+					"top": 481,
+					"left": 678,
+					"width": 220,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.archivedDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "date",
+					"dateFormat": "short"
 				}
 			}
 		},
@@ -1026,7 +1153,7 @@
 			}
 		}
 	],
-	"geometryStamp": 659,
+	"geometryStamp": 860,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

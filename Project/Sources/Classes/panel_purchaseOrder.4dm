@@ -96,6 +96,8 @@ Function bActionLineItems()
 		$refMenu:=Create menu:C408
 		APPEND MENU ITEM:C411($refMenu; "Create Line Item")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--create")
+		APPEND MENU ITEM:C411($refMenu; "Edit Line Item")
+		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--edit")
 		APPEND MENU ITEM:C411($refMenu; "-")
 		APPEND MENU ITEM:C411($refMenu; "Delete")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")
@@ -130,9 +132,36 @@ Function bActionLineItems()
 					End if 
 				End if 
 				
+			: ($choose="--edit")
+				$form:=New object:C1471("poLine"; Form:C1466.selectedPoLine)
+				
+				$winRef:=Open form window:C675("createPoLine"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+				DIALOG:C40("createPoLine"; $form)
+				CLOSE WINDOW:C154($winRef)
+				
+				If (OK=1)
+					$lineItem:=$form.poLine
+					
+					$res:=$lineItem.save()
+					
+					If ($res.success)
+						Form:C1466.lb_lineItems:=ds:C1482.PurchaseOrderLine.query("UUID_PurchaseOrder = :1"; Form:C1466.current_item.UUID)
+						Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+					End if 
+				End if 
+				
 			: ($choose="--delete")
 				If (Form:C1466.selectedPoLine#Null:C1517)
-					
+					CONFIRM:C162("Are you sure ?")
+					If (OK=1)
+						$res:=Form:C1466.selectedPoLine.drop()
+						
+						If (Not:C34($res.success))
+							ALERT:C41("Something wen wrong !!")
+						Else 
+							Form:C1466.lb_lineItems:=ds:C1482.PurchaseOrderLine.query("UUID_PurchaseOrder = :1"; Form:C1466.current_item.UUID)
+						End if 
+					End if 
 				Else 
 					ALERT:C41("Select a PO line item !")
 				End if 
@@ -141,6 +170,8 @@ Function bActionLineItems()
 		$refMenu:=Create menu:C408
 		APPEND MENU ITEM:C411($refMenu; "(Create Line Item")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--create")
+		APPEND MENU ITEM:C411($refMenu; "(Edit Line Item")
+		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--edit")
 		APPEND MENU ITEM:C411($refMenu; "-")
 		APPEND MENU ITEM:C411($refMenu; "(Delete")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")

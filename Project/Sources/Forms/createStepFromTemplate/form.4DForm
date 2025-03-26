@@ -109,7 +109,7 @@
 				},
 				"Text": {
 					"type": "text",
-					"text": "Purchase Order",
+					"text": "Step Template",
 					"top": 85,
 					"left": 7,
 					"width": 102,
@@ -138,7 +138,7 @@
 				},
 				"Text2": {
 					"type": "text",
-					"text": "Item Number",
+					"text": "Order",
 					"top": 117,
 					"left": 7,
 					"width": 102,
@@ -167,103 +167,8 @@
 				},
 				"Text16": {
 					"type": "text",
-					"text": "Item Description",
+					"text": "Description",
 					"top": 149,
-					"left": 7,
-					"width": 102,
-					"height": 15,
-					"fontWeight": "bold"
-				},
-				"header_bkgd14": {
-					"type": "rectangle",
-					"top": 239,
-					"left": 0,
-					"width": 140,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Text17": {
-					"type": "text",
-					"text": "Quantity Ordered",
-					"top": 245,
-					"left": 7,
-					"width": 102,
-					"height": 15,
-					"fontWeight": "bold"
-				},
-				"header_bkgd15": {
-					"type": "rectangle",
-					"top": 271,
-					"left": 0,
-					"width": 140,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Text18": {
-					"type": "text",
-					"text": "Date Ordered",
-					"top": 277,
-					"left": 7,
-					"width": 102,
-					"height": 15,
-					"fontWeight": "bold"
-				},
-				"header_bkgd16": {
-					"type": "rectangle",
-					"top": 303,
-					"left": 0,
-					"width": 140,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Text19": {
-					"type": "text",
-					"text": "Requested Date",
-					"top": 309,
-					"left": 7,
-					"width": 102,
-					"height": 15,
-					"fontWeight": "bold"
-				},
-				"header_bkgd17": {
-					"type": "rectangle",
-					"top": 335,
-					"left": 0,
-					"width": 140,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Text20": {
-					"type": "text",
-					"text": "Unit Price",
-					"top": 341,
-					"left": 7,
-					"width": 102,
-					"height": 15,
-					"fontWeight": "bold"
-				},
-				"header_bkgd18": {
-					"type": "rectangle",
-					"top": 367,
-					"left": 0,
-					"width": 140,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Text21": {
-					"type": "text",
-					"text": "Currency",
-					"top": 373,
 					"left": 7,
 					"width": 102,
 					"height": 15,
@@ -279,56 +184,6 @@
 					"textAlign": "right",
 					"fontWeight": "bold"
 				},
-				"Text4": {
-					"type": "text",
-					"text": ":",
-					"top": 245,
-					"left": 114,
-					"width": 22,
-					"height": 15,
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"Text6": {
-					"type": "text",
-					"text": ":",
-					"top": 277,
-					"left": 114,
-					"width": 22,
-					"height": 15,
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"Text8": {
-					"type": "text",
-					"text": ":",
-					"top": 309,
-					"left": 114,
-					"width": 22,
-					"height": 15,
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"Text10": {
-					"type": "text",
-					"text": ":",
-					"top": 341,
-					"left": 114,
-					"width": 22,
-					"height": 15,
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"Text12": {
-					"type": "text",
-					"text": ":",
-					"top": 373,
-					"left": 114,
-					"width": 22,
-					"height": 15,
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
 				"Input": {
 					"type": "input",
 					"left": 151,
@@ -337,8 +192,8 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.poLine.purchaseOrder.poNumber",
-					"enterable": false
+					"dataSource": "Form:C1466.searchStep",
+					"enterable": true
 				},
 				"header_bkgd5": {
 					"type": "rectangle",
@@ -368,7 +223,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.poLine.itemNum"
+					"dataSource": "Form:C1466.lotStep.order"
 				},
 				"header_bkgd8": {
 					"type": "rectangle",
@@ -398,203 +253,7 @@
 					"height": 82,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.poLine.description"
-				},
-				"header_bkgd10": {
-					"type": "rectangle",
-					"top": 239,
-					"left": 144,
-					"width": 306,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#FFFFFF",
-					"stroke": "transparent"
-				},
-				"header_bkgd11": {
-					"type": "rectangle",
-					"top": 239,
-					"left": 450,
-					"width": 32,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Input3": {
-					"type": "input",
-					"left": 151,
-					"top": 244,
-					"width": 293,
-					"height": 18,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.poLine.qtyOrdered"
-				},
-				"header_bkgd12": {
-					"type": "rectangle",
-					"top": 367,
-					"left": 144,
-					"width": 306,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#FFFFFF",
-					"stroke": "transparent"
-				},
-				"header_bkgd19": {
-					"type": "rectangle",
-					"top": 367,
-					"left": 450,
-					"width": 32,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Input4": {
-					"type": "input",
-					"left": 151,
-					"top": 372,
-					"width": 293,
-					"height": 18,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.poLine.currency"
-				},
-				"header_bkgd20": {
-					"type": "rectangle",
-					"top": 271,
-					"left": 144,
-					"width": 306,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#FFFFFF",
-					"stroke": "transparent"
-				},
-				"header_bkgd21": {
-					"type": "rectangle",
-					"top": 271,
-					"left": 450,
-					"width": 32,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Input5": {
-					"type": "input",
-					"left": 151,
-					"top": 276,
-					"width": 293,
-					"height": 18,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.poLine.dateOrdered",
-					"dataSourceTypeHint": "date",
-					"enterable": false
-				},
-				"header_bkgd22": {
-					"type": "rectangle",
-					"top": 303,
-					"left": 144,
-					"width": 306,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#FFFFFF",
-					"stroke": "transparent"
-				},
-				"header_bkgd23": {
-					"type": "rectangle",
-					"top": 303,
-					"left": 450,
-					"width": 32,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Input6": {
-					"type": "input",
-					"left": 151,
-					"top": 308,
-					"width": 293,
-					"height": 18,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.poLine.customerRequestedDate",
-					"dataSourceTypeHint": "date",
-					"enterable": false
-				},
-				"header_bkgd24": {
-					"type": "rectangle",
-					"top": 335,
-					"left": 144,
-					"width": 306,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#FFFFFF",
-					"stroke": "transparent"
-				},
-				"header_bkgd25": {
-					"type": "rectangle",
-					"top": 335,
-					"left": 450,
-					"width": 32,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Input7": {
-					"type": "input",
-					"left": 151,
-					"top": 340,
-					"width": 293,
-					"height": 18,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.poLine.unitPrice",
-					"dataSourceTypeHint": "number",
-					"numberFormat": "$##,###,###,##0.00"
-				},
-				"PopupDate": {
-					"type": "subform",
-					"top": 309,
-					"left": 457,
-					"width": 19,
-					"height": 16,
-					"dataSource": "Form:C1466.poLine.customerRequestedDate",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/PopupDate.4dm",
-					"events": [
-						"onLoad"
-					],
-					"focusable": true
-				},
-				"PopupDate1": {
-					"type": "subform",
-					"top": 277,
-					"left": 457,
-					"width": 19,
-					"height": 16,
-					"dataSource": "Form:C1466.poLine.dateOrdered",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/PopupDate1.4dm",
-					"events": [
-						"onLoad"
-					],
-					"focusable": true
+					"dataSource": "Form:C1466.lotStep.description"
 				},
 				"Button": {
 					"type": "button",
@@ -669,7 +328,7 @@
 				},
 				"Text5": {
 					"type": "text",
-					"text": "Quote Lines",
+					"text": "Template",
 					"top": 53,
 					"left": 7,
 					"width": 102,
@@ -694,8 +353,8 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.searchQuoteLine",
-					"enterable": false,
+					"dataSource": "Form:C1466.searchTemplate",
+					"enterable": true,
 					"events": [
 						"onClick",
 						"onMouseEnter",
@@ -703,21 +362,235 @@
 					],
 					"method": "ObjectMethods/Input8.4dm"
 				},
-				"sf_quotesSearch": {
+				"header_bkgd10": {
+					"type": "rectangle",
+					"top": 239,
+					"left": 0,
+					"width": 140,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
+				"Text4": {
+					"type": "text",
+					"text": "Alert",
+					"top": 245,
+					"left": 7,
+					"width": 102,
+					"height": 15,
+					"fontWeight": "bold"
+				},
+				"Text6": {
+					"type": "text",
+					"text": ":",
+					"top": 246,
+					"left": 114,
+					"width": 22,
+					"height": 15,
+					"textAlign": "right",
+					"fontWeight": "bold"
+				},
+				"header_bkgd11": {
+					"type": "rectangle",
+					"top": 239,
+					"left": 144,
+					"width": 306,
+					"height": 92,
+					"sizingX": "fixed",
+					"fill": "#FFFFFF",
+					"stroke": "transparent"
+				},
+				"header_bkgd12": {
+					"type": "rectangle",
+					"top": 239,
+					"left": 450,
+					"width": 32,
+					"height": 92,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
+				"Input3": {
+					"type": "input",
+					"left": 151,
+					"top": 244,
+					"width": 293,
+					"height": 82,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.lotStep.alert"
+				},
+				"header_bkgd14": {
+					"type": "rectangle",
+					"top": 367,
+					"left": 0,
+					"width": 140,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
+				"header_bkgd15": {
+					"type": "rectangle",
+					"top": 367,
+					"left": 144,
+					"width": 306,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#FFFFFF",
+					"stroke": "transparent"
+				},
+				"header_bkgd16": {
+					"type": "rectangle",
+					"top": 367,
+					"left": 450,
+					"width": 32,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
+				"Text8": {
+					"type": "text",
+					"text": "Date OUT",
+					"top": 373,
+					"left": 7,
+					"width": 102,
+					"height": 15,
+					"fontWeight": "bold"
+				},
+				"Text10": {
+					"type": "text",
+					"text": ":",
+					"top": 373,
+					"left": 114,
+					"width": 22,
+					"height": 15,
+					"textAlign": "right",
+					"fontWeight": "bold"
+				},
+				"Input4": {
+					"type": "input",
+					"left": 151,
+					"top": 372,
+					"width": 293,
+					"height": 18,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.lotStep.dateOut",
+					"enterable": false
+				},
+				"header_bkgd17": {
+					"type": "rectangle",
+					"top": 335,
+					"left": 0,
+					"width": 140,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
+				"header_bkgd18": {
+					"type": "rectangle",
+					"top": 335,
+					"left": 144,
+					"width": 306,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#FFFFFF",
+					"stroke": "transparent"
+				},
+				"header_bkgd19": {
+					"type": "rectangle",
+					"top": 335,
+					"left": 450,
+					"width": 32,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
+				"Text11": {
+					"type": "text",
+					"text": "Date IN",
+					"top": 341,
+					"left": 7,
+					"width": 102,
+					"height": 15,
+					"fontWeight": "bold"
+				},
+				"Text12": {
+					"type": "text",
+					"text": ":",
+					"top": 341,
+					"left": 114,
+					"width": 22,
+					"height": 15,
+					"textAlign": "right",
+					"fontWeight": "bold"
+				},
+				"Input5": {
+					"type": "input",
+					"left": 151,
+					"top": 340,
+					"width": 293,
+					"height": 18,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.lotStep.dateIn",
+					"enterable": false,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"method": "ObjectMethods/Input5.4dm"
+				},
+				"PopupDate": {
 					"type": "subform",
-					"left": 142,
-					"top": 45,
-					"width": 340,
-					"height": 350,
-					"detailForm": "",
-					"visibility": "visible",
-					"method": "ObjectMethods/sf_quotesSearch.4dm",
-					"dataSource": "Form:C1466.sf_quotesSearch"
+					"top": 373,
+					"left": 457,
+					"width": 19,
+					"height": 16,
+					"dataSource": "Form:C1466.lotStep.dateOut",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/PopupDate.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true
+				},
+				"PopupDate1": {
+					"type": "subform",
+					"top": 341,
+					"left": 457,
+					"width": 19,
+					"height": 16,
+					"dataSource": "Form:C1466.lotStep.dateIn",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/PopupDate1.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true
 				}
 			}
 		}
 	],
-	"geometryStamp": 3400,
+	"geometryStamp": 3541,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

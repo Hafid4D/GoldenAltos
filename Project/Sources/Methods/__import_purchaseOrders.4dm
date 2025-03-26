@@ -93,6 +93,7 @@ import jobs & lot (job <-- lots)
 If (True:C214)
 	TRUNCATE TABLE:C1051([Job:117])
 	TRUNCATE TABLE:C1051([Lot:118])
+	TRUNCATE TABLE:C1051([LotStep:5])
 	
 	$file:=Folder:C1567(fk database folder:K87:14).file("job_log_export.json")
 	
@@ -105,6 +106,10 @@ If (True:C214)
 		$job.poNumber:=$record.poNumber
 		$job.division:=$record.division
 		$job.dateCreated:=$record.dateCreated
+		$job.expectedDate:=$record.expectedDate
+		$job.invoiceDate:=$record.invoiceDate
+		$job.lastShipDate:=$record.lastShipDate
+		$job.archivedDate:=$record.archivedDate
 		$job.deviceNumber:=$record.deviceNumber
 		$job.process:=$record.process
 		$job.salesTax:=$record.salesTax
@@ -117,11 +122,12 @@ If (True:C214)
 		$job.address:=$record.address
 		$job.alternateShipAddress:=$record.alternateShipAddress
 		$job.shippers:=$record.shippers
-		$job.customerShipper:=$record.customerShipper
+		$job.customer:=$record.customer
 		$job.qty:=$record.qty
 		$job.qtyOnHand:=$record.qtyOnHand
 		$job.shipMemo:=$record.shipMemo
 		$job.jobComment:=$record.jobComment
+		$job.archived:=$record.archived
 		
 		$res:=$job.save()
 		
@@ -172,6 +178,16 @@ If (True:C214)
 			$lot_e.totalTested:=$lot.totalTested
 			$lot_e.az:=$lot.az
 			$lot_e.et:=$lot.et
+			$lot_e.OQADone:=$lot.OQADone
+			$lot_e.OQADate:=$lot.OQADate
+			$lot_e.OQASimpleSize:=$lot.OQASimpleSize
+			$lot_e.releaseNumber:=$lot.releaseNumber
+			$lot_e.trackingNumber:=$lot.trackingNumber
+			$lot_e.readyToShipDate:=$lot.readyToShipDate
+			$lot_e.shippingMemo:=$lot.shippingMemo
+			$lot_e.location:=$lot.location
+			$lot_e.comment:=$lot.comment
+			$lot_e.status:=$lot.status
 			
 			$lot_e.UUID_Job:=$job.UUID
 			
@@ -179,6 +195,27 @@ If (True:C214)
 			
 			If (Not:C34($res.success))
 				TRACE:C157
+			Else 
+				
+				For each ($step; $lot.steps)
+					$lotStep_e:=ds:C1482.LotStep.new()
+					
+					$lotStep_e.order:=$step.order
+					$lotStep_e.description:=$step.description
+					$lotStep_e.alert:=$step.alert
+					$lotStep_e.qtyIn:=$step.qtyIn
+					$lotStep_e.qtyOut:=$step.qtyOut
+					$lotStep_e.dateIn:=$step.dateIn
+					$lotStep_e.dateOut:=$step.dateOut
+					
+					$lotStep_e.UUID_Lot:=$lot_e.UUID
+					
+					$res:=$lotStep_e.save()
+					
+					If (Not:C34($res.success))
+						TRACE:C157
+					End if 
+				End for each 
 			End if 
 		End for each 
 		

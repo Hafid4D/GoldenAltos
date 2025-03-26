@@ -89,7 +89,7 @@
 				"label_jobNumber": {
 					"type": "text",
 					"top": 12,
-					"left": 572,
+					"left": 576,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
@@ -98,7 +98,7 @@
 				"entryField_device": {
 					"type": "input",
 					"top": 12,
-					"left": 692,
+					"left": 696,
 					"width": 140,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.device",
@@ -121,7 +121,7 @@
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Csutomer"
+					"text": "Job #"
 				},
 				"entryField_customer": {
 					"type": "input",
@@ -129,7 +129,7 @@
 					"left": 132,
 					"width": 140,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.customer",
+					"dataSource": "Form:C1466.current_item.job.jobNumber",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -139,24 +139,25 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold"
+					"fontWeight": "bold",
+					"textAlign": "left"
 				},
 				"label_jobNumber1": {
 					"type": "text",
 					"top": 37,
-					"left": 572,
+					"left": 576,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Alt. Lot #"
+					"text": "Process"
 				},
 				"entryField_altLotNumber": {
 					"type": "input",
 					"top": 37,
-					"left": 692,
+					"left": 696,
 					"width": 140,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.altLotNumber",
+					"dataSource": "Form:C1466.current_item.process",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -199,19 +200,19 @@
 				"label_jobNumber2": {
 					"type": "text",
 					"top": 62,
-					"left": 572,
+					"left": 576,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Device Table Link"
+					"text": "Status"
 				},
 				"entryField_deviceTableLink": {
 					"type": "input",
 					"top": 62,
-					"left": 692,
+					"left": 696,
 					"width": 140,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.deviceTableLink",
+					"dataSource": "Form:C1466.current_item.status",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -228,18 +229,74 @@
 					"type": "text",
 					"top": 12,
 					"left": 312,
-					"width": 70,
+					"width": 78,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Job #"
+					"text": "Customer"
 				},
 				"entryField_device1": {
 					"type": "input",
 					"top": 12,
-					"left": 392,
+					"left": 396,
 					"width": 140,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.job.jobNumber",
+					"dataSource": "Form:C1466.current_item.job.customer",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left"
+				},
+				"label_jobNumber4": {
+					"type": "text",
+					"top": 37,
+					"left": 312,
+					"width": 78,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Location"
+				},
+				"entryField_device2": {
+					"type": "input",
+					"top": 37,
+					"left": 396,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.location",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left"
+				},
+				"label_jobNumber5": {
+					"type": "text",
+					"top": 62,
+					"left": 312,
+					"width": 78,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Lot Comment"
+				},
+				"entryField_device3": {
+					"type": "input",
+					"top": 62,
+					"left": 396,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.comment",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -262,7 +319,7 @@
 					"left": 57,
 					"width": 332,
 					"height": 30,
-					"sizingX": "grow",
+					"sizingX": "fixed",
 					"fill": "#A2C6D8",
 					"stroke": "transparent",
 					"right": 389
@@ -274,7 +331,7 @@
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
-					"text": "Dates",
+					"text": "Lot Dates",
 					"fontSize": 12,
 					"fontWeight": "bold"
 				},
@@ -284,7 +341,7 @@
 					"left": 57,
 					"width": 332,
 					"height": 57,
-					"sizingX": "grow",
+					"sizingX": "fixed",
 					"fill": "#E4E4E4",
 					"stroke": "transparent",
 					"right": 389
@@ -293,24 +350,26 @@
 					"type": "text",
 					"top": 141,
 					"left": 65,
-					"width": 60,
+					"width": 65,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Date In"
+					"text": "Date In",
+					"right": 130
 				},
 				"label_0_16": {
 					"type": "text",
 					"top": 165,
 					"left": 65,
-					"width": 60,
+					"width": 65,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Commit 1"
+					"text": "Commit 1",
+					"right": 130
 				},
 				"entryField_commit": {
 					"type": "input",
 					"top": 165,
-					"left": 125,
+					"left": 130,
 					"width": 80,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.commit",
@@ -330,7 +389,7 @@
 				"entryField_dateIn": {
 					"type": "input",
 					"top": 141,
-					"left": 125,
+					"left": 130,
 					"width": 80,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.dateIn",
@@ -411,7 +470,7 @@
 					"left": 396,
 					"width": 510,
 					"height": 30,
-					"sizingX": "grow",
+					"sizingX": "fixed",
 					"fill": "#A2C6D8",
 					"stroke": "transparent",
 					"right": 906
@@ -433,7 +492,7 @@
 					"left": 396,
 					"width": 510,
 					"height": 57,
-					"sizingX": "grow",
+					"sizingX": "fixed",
 					"fill": "#E4E4E4",
 					"stroke": "transparent",
 					"right": 906
@@ -620,7 +679,7 @@
 					"left": 57,
 					"width": 332,
 					"height": 30,
-					"sizingX": "grow",
+					"sizingX": "fixed",
 					"fill": "#A2C6D8",
 					"stroke": "transparent",
 					"right": 389
@@ -642,7 +701,7 @@
 					"left": 57,
 					"width": 332,
 					"height": 57,
-					"sizingX": "grow",
+					"sizingX": "fixed",
 					"fill": "#E4E4E4",
 					"stroke": "transparent",
 					"right": 389
@@ -651,24 +710,26 @@
 					"type": "text",
 					"top": 238,
 					"left": 65,
-					"width": 60,
+					"width": 65,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Hold"
+					"text": "Hold",
+					"right": 130
 				},
 				"label_0_7": {
 					"type": "text",
 					"top": 262,
 					"left": 65,
-					"width": 60,
+					"width": 65,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Hold Date"
+					"text": "Hold Date",
+					"right": 130
 				},
 				"entryField_holdDate": {
 					"type": "input",
 					"top": 262,
-					"left": 125,
+					"left": 130,
 					"width": 80,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.holdDate",
@@ -718,24 +779,451 @@
 					"type": "checkbox",
 					"text": "Lot on Hold",
 					"top": 233,
-					"left": 126,
-					"width": 254,
+					"left": 131,
+					"width": 249,
 					"height": 24,
 					"events": [
 						"onClick"
-					]
+					],
+					"dataSourceTypeHint": "boolean",
+					"dataSource": "Form:C1466.current_item.onHold"
+				},
+				"header_bkgd7": {
+					"type": "rectangle",
+					"top": 294,
+					"left": 57,
+					"width": 332,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 389
+				},
+				"lbl_dates3": {
+					"type": "text",
+					"top": 301,
+					"left": 64,
+					"width": 250,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "OQA Info",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"header_bkgd8": {
+					"type": "rectangle",
+					"top": 327,
+					"left": 57,
+					"width": 332,
+					"height": 77,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"right": 389
+				},
+				"label_0_8": {
+					"type": "text",
+					"top": 335,
+					"left": 65,
+					"width": 65,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "OQA Done",
+					"right": 130
+				},
+				"label_0_9": {
+					"type": "text",
+					"top": 359,
+					"left": 65,
+					"width": 65,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "OQA Date",
+					"right": 130
+				},
+				"entryField_holdDate1": {
+					"type": "input",
+					"top": 359,
+					"left": 130,
+					"width": 250,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.OQADate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "date",
+					"dateFormat": "short",
+					"right": 380
+				},
+				"Check Box1": {
+					"type": "checkbox",
+					"text": "OQA Done",
+					"top": 330,
+					"left": 131,
+					"width": 249,
+					"height": 24,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"dataSource": "Form:C1466.current_item.OQADone"
+				},
+				"label_0_11": {
+					"type": "text",
+					"top": 383,
+					"left": 65,
+					"width": 65,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Sample Size"
+				},
+				"entryField_holdDate2": {
+					"type": "input",
+					"top": 383,
+					"left": 130,
+					"width": 250,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.OQASimpleSize",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "integer",
+					"right": 380
+				},
+				"header_bkgd9": {
+					"type": "rectangle",
+					"top": 197,
+					"left": 396,
+					"width": 510,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 906
+				},
+				"lbl_dates4": {
+					"type": "text",
+					"top": 204,
+					"left": 403,
+					"width": 250,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Shipping Info",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"header_bkgd10": {
+					"type": "rectangle",
+					"top": 230,
+					"left": 396,
+					"width": 510,
+					"height": 262,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"right": 906
+				},
+				"label_0_10": {
+					"type": "text",
+					"top": 238,
+					"left": 402,
+					"width": 83,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Release #",
+					"right": 485
+				},
+				"label_0_12": {
+					"type": "text",
+					"top": 262,
+					"left": 402,
+					"width": 83,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Tracking #",
+					"right": 485
+				},
+				"entryField_commit1": {
+					"type": "input",
+					"top": 262,
+					"left": 493,
+					"width": 406,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.trackingNumber",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "text"
+				},
+				"entryField_dateIn1": {
+					"type": "input",
+					"top": 238,
+					"left": 493,
+					"width": 406,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.releaseNumber",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "integer"
+				},
+				"label_0_14": {
+					"type": "text",
+					"top": 286,
+					"left": 402,
+					"width": 83,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Ready to Ship",
+					"right": 485
+				},
+				"entryField_commit2": {
+					"type": "input",
+					"top": 286,
+					"left": 493,
+					"width": 406,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.readyToShipDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "date",
+					"dateFormat": "short"
+				},
+				"label_0_17": {
+					"type": "text",
+					"top": 310,
+					"left": 402,
+					"width": 91,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Shipping Memo",
+					"right": 493
+				},
+				"entryField_jobComment": {
+					"type": "input",
+					"top": 310,
+					"left": 493,
+					"width": 388,
+					"height": 171,
+					"dataSource": "Form:C1466.current_item.shippingMemo",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "fixed",
+					"scrollbarHorizontal": "hidden",
+					"scrollbarVertical": "automatic"
 				}
 			}
 		},
 		{
 			"objects": {
-				"Text3": {
-					"type": "text",
-					"text": "Lot Steps",
-					"top": 101,
+				"lb_invoices": {
+					"type": "listbox",
 					"left": 57,
-					"width": 224,
-					"height": 17,
+					"top": 143,
+					"width": 842,
+					"height": 370,
+					"events": [
+						"onClick",
+						"onHeaderClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"headerHeight": "24px",
+					"listboxType": "collection",
+					"visibility": "visible",
+					"dataSource": "Form:C1466.lb_steps",
+					"columns": [
+						{
+							"header": {
+								"text": "Order",
+								"name": "Header28",
+								"fontWeight": "bold"
+							},
+							"name": "Column28",
+							"footer": {
+								"name": "Footer28"
+							},
+							"width": 50,
+							"dataSource": "This:C1470.order",
+							"textAlign": "center",
+							"dataSourceTypeHint": "number"
+						},
+						{
+							"header": {
+								"name": "Header29",
+								"text": "Description",
+								"fontWeight": "bold"
+							},
+							"name": "Column29",
+							"footer": {
+								"name": "Footer29"
+							},
+							"dataSource": "This:C1470.description",
+							"width": 255
+						},
+						{
+							"header": {
+								"name": "Header30",
+								"text": "Alert",
+								"fontWeight": "bold"
+							},
+							"name": "Column30",
+							"footer": {
+								"name": "Footer30"
+							},
+							"dataSource": "This:C1470.alert",
+							"width": 200
+						},
+						{
+							"header": {
+								"name": "Header31",
+								"text": "Qty IN",
+								"fontWeight": "bold"
+							},
+							"name": "Column31",
+							"footer": {
+								"name": "Footer31"
+							},
+							"dataSource": "This:C1470.qtyIn",
+							"width": 80,
+							"dataSourceTypeHint": "number",
+							"dateFormat": "short",
+							"textAlign": "center"
+						},
+						{
+							"header": {
+								"name": "Header32",
+								"text": "Qty OUT",
+								"fontWeight": "bold"
+							},
+							"name": "Column32",
+							"footer": {
+								"name": "Footer32"
+							},
+							"dataSource": "This:C1470.qtyOut",
+							"width": 80,
+							"textAlign": "center",
+							"dataSourceTypeHint": "number",
+							"dateFormat": "short"
+						},
+						{
+							"header": {
+								"name": "Header33",
+								"text": "Date IN",
+								"fontWeight": "bold"
+							},
+							"name": "Column33",
+							"footer": {
+								"name": "Footer33"
+							},
+							"dataSource": "This:C1470.dateIn",
+							"width": 80,
+							"dateFormat": "short",
+							"textAlign": "center",
+							"dataSourceTypeHint": "date"
+						},
+						{
+							"header": {
+								"name": "Header34",
+								"text": "Date OUT",
+								"fontWeight": "bold"
+							},
+							"name": "Column34",
+							"footer": {
+								"name": "Footer34"
+							},
+							"dataSource": "This:C1470.dateOut",
+							"width": 80,
+							"dateFormat": "short",
+							"textAlign": "center",
+							"dataSourceTypeHint": "date"
+						}
+					]
+				},
+				"bActionLineItems1": {
+					"type": "button",
+					"text": "Actions",
+					"top": 522,
+					"left": 56,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionLineItems1.4dm",
+					"visibility": "visible"
+				},
+				"header_bkgd16": {
+					"type": "rectangle",
+					"top": 102,
+					"left": 57,
+					"width": 856,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"Input3": {
+					"type": "input",
+					"left": 63,
+					"top": 109,
+					"width": 187,
+					"height": 15,
+					"right": 250,
+					"bottom": 124,
+					"enterable": false,
+					"contextMenu": "none",
+					"multiline": "no",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSource": "\"Lot Steps (\"+String:C10(Form:C1466.lb_steps.length)+\")\"",
 					"fontWeight": "bold"
 				}
 			}
@@ -754,7 +1242,7 @@
 			}
 		}
 	],
-	"geometryStamp": 702,
+	"geometryStamp": 1078,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
