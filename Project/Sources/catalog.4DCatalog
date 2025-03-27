@@ -36,17 +36,17 @@
 		<field name="slip" uuid="ACB341797FCC114CBE36E4B05EACDB06" type="4" never_null="true" id="9"/>
 		<primary_key field_name="UUID" field_uuid="D4F459308B965340B21C8A6DE2F2F78F"/>
 	</table>
-	<table name="LotStep" uuid="21C997F4FF841640B547868BE38C05ED" id="5">
-		<field name="UUID" uuid="EE9C517A8C59724B8559A5DCB59FE560" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="UUID_Lot" uuid="B31124481979DC4687A97B0CB724679E" type="10" store_as_UUID="true" never_null="true" id="2"/>
-		<field name="order" uuid="4BBC569F9C525A41AC40200B87D2EDDD" type="4" never_null="true" id="3"/>
-		<field name="description" uuid="1693227786AA904C881AFFEE2A68BF65" type="10" never_null="true" id="4"/>
-		<field name="alert" uuid="A9F20FEB4D942748B0AD482CBAA5A71A" type="10" never_null="true" id="5"/>
-		<field name="qtyIn" uuid="22FCEF7157108746964FCC91790E35C0" type="4" never_null="true" id="6"/>
-		<field name="qtyOut" uuid="49CF31FBDA2BD9458DC6B5BEC1AA52F7" type="4" never_null="true" id="7"/>
-		<field name="dateIn" uuid="1A63DAA259BB124D96F431FBC66AF678" type="8" never_null="true" id="8"/>
-		<field name="dateOut" uuid="C9A218A39984844F91FB5BD26AB1AA1A" type="8" never_null="true" id="9"/>
-		<primary_key field_name="UUID" field_uuid="EE9C517A8C59724B8559A5DCB59FE560"/>
+	<table name="QuoteStatus" uuid="6059D6A0DACF42889F97EAD171DE9723" id="5">
+		<field name="UUID" uuid="6A2CE8BD47C44B8EAC7B0C5C14CD21DB" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="statusID" uuid="99CE84AECAF14A26A0A94AA7F009FCF9" type="3" never_null="true" id="2"/>
+		<field name="code" uuid="7A66277DCA564FBBA49650BAA65EF1AF" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="name" uuid="B17EA848376F4ECAA1743A510F420888" type="10" limiting_length="255" never_null="true" id="4">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="color" uuid="089809E0229C476BA6EA9DA1F9788B9C" type="10" limiting_length="255" never_null="true" id="5">
+			<field_extra multi_line="false"/>
+		</field>
+		<primary_key field_name="UUID" field_uuid="6A2CE8BD47C44B8EAC7B0C5C14CD21DB"/>
 	</table>
 	<table name="sfw_Country" uuid="4C0E0D9D33D246BAB1FACEEC19ABF144" id="15" prevent_journaling="true">
 		<field name="UUID" uuid="FDA14E8A26704F7091EC668E332108FB" type="10" unique="true" autogenerate="true" store_as_UUID="true" id="1"/>
@@ -284,18 +284,13 @@
 		<field name="noLots" uuid="92F9F5E9A01EF643811107631ACD1FCE" type="1" never_null="true" id="17"/>
 		<field name="alternateShipAddress" uuid="4CC67AFF99829B44A25ADAAF14BBC184" type="1" never_null="true" id="18"/>
 		<field name="shippers" uuid="68D06CFB734F00408D8B88E555FDBC24" type="4" never_null="true" id="19"/>
-		<field name="customer" uuid="CC2070838A81634AAF3697A90E8219DA" type="10" limiting_length="255" never_null="true" id="20"/>
+		<field name="customerShipper" uuid="CC2070838A81634AAF3697A90E8219DA" type="10" limiting_length="255" never_null="true" id="20"/>
 		<field name="qty" uuid="C0DF144C2E0D8E44AEBF939E37841A3B" type="4" never_null="true" id="21"/>
 		<field name="qtyOnHand" uuid="CA086E06A7CE3344B87651AB65FBF225" type="4" never_null="true" id="22"/>
 		<field name="shipMemo" uuid="8693F8D5DEA83E4F94859DD68174D2FB" type="10" never_null="true" id="23"/>
 		<field name="jobComment" uuid="7CCEE9BC5241CC44A238C6CAE279DBA5" type="10" never_null="true" id="24">
 			<field_extra multi_line="true"/>
 		</field>
-		<field name="archived" uuid="77227527298C3F469BEAFE9D191D2689" type="1" never_null="true" id="25"/>
-		<field name="expectedDate" uuid="580CC9E1B864CD4FB422BDFBA8643B10" type="8" never_null="true" id="26"/>
-		<field name="invoiceDate" uuid="AEB29DFEDBC2BB459951D70176EE4977" type="8" never_null="true" id="27"/>
-		<field name="lastShipDate" uuid="8B39A43798850E449C946B0ECDB60979" type="8" never_null="true" id="28"/>
-		<field name="archivedDate" uuid="A310D42571F1E9449B87A88E35E1734E" type="8" never_null="true" id="29"/>
 		<primary_key field_name="UUID" field_uuid="D70DED62813D485DA8CFB0CFD1FF994C"/>
 	</table>
 	<table name="Lot" uuid="67220A81398C4000A84C1F180E368020" id="118">
@@ -325,16 +320,6 @@
 		<field name="totalTested" uuid="2CB41BA2B925164893B494251F5B868C" type="4" never_null="true" id="22"/>
 		<field name="az" uuid="0F68C7832CD3214CB4333AA046AEC57E" type="6" never_null="true" id="23"/>
 		<field name="et" uuid="A4CDFC4BD0F9834093733E4194031B2F" type="6" never_null="true" id="24"/>
-		<field name="OQADone" uuid="E99443E827F24D47A8A967CF3D1A2660" type="1" never_null="true" id="25"/>
-		<field name="OQADate" uuid="979044E79AA1E5469327147E3C477F05" type="8" never_null="true" id="26"/>
-		<field name="OQASimpleSize" uuid="1DC4BB5608BECC4291C1F4349771615F" type="4" never_null="true" id="27"/>
-		<field name="releaseNumber" uuid="947396EF4ABD364AB5CE6244B5BAE522" type="4" never_null="true" id="28"/>
-		<field name="trackingNumber" uuid="D2584905788FA1418103D20FEB83C964" type="10" limiting_length="255" never_null="true" id="29"/>
-		<field name="readyToShipDate" uuid="9B3A63399CCF23428B2DC8DEB6795CA2" type="8" never_null="true" id="30"/>
-		<field name="shippingMemo" uuid="DCA47DF91424DD4894BC10AF89D2D09E" type="10" never_null="true" id="31"/>
-		<field name="location" uuid="E71C67E4282EA742B952D10FA12855F2" type="10" limiting_length="255" never_null="true" id="32"/>
-		<field name="status" uuid="A4CF20D716CEAA43B1BE11D28352EB13" type="10" limiting_length="255" never_null="true" id="33"/>
-		<field name="comment" uuid="CC820B6502BD5C4AB32C77A17C8B6F16" type="10" limiting_length="255" never_null="true" id="34"/>
 		<primary_key field_name="UUID" field_uuid="AEF78036FB7D429A96DF35BE53A0E0AF"/>
 	</table>
 	<table name="StepFile" uuid="A6301A2C994D4680A851FC2AE85118BE" id="119">
@@ -767,18 +752,6 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="D0AB84DBDDAA7243893F06784A12F571" name_Nto1="lot" name_1toN="steps" state="1">
-		<related_field kind="source">
-			<field_ref uuid="B31124481979DC4687A97B0CB724679E" name="UUID_Lot">
-				<table_ref uuid="21C997F4FF841640B547868BE38C05ED" name="LotStep"/>
-			</field_ref>
-		</related_field>
-		<related_field kind="destination">
-			<field_ref uuid="AEF78036FB7D429A96DF35BE53A0E0AF" name="UUID">
-				<table_ref uuid="67220A81398C4000A84C1F180E368020" name="Lot"/>
-			</field_ref>
-		</related_field>
-	</relation>
 	<index kind="regular" uuid="01619F9BF52940F3AFF8C52A4A82535D" type="3">
 		<field_ref uuid="951D3770910B43BBBFCAB95E4B3A1C65" name="UUID_Tool">
 			<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
@@ -1009,19 +982,14 @@
 			<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="949D5C41464945D69DD038414B2711A6" type="7">
+		<field_ref uuid="6A2CE8BD47C44B8EAC7B0C5C14CD21DB" name="UUID">
+			<table_ref uuid="6059D6A0DACF42889F97EAD171DE9723" name="QuoteStatus"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="985254F1376146EDB0D3323C4F45E4B6" type="3">
 		<field_ref uuid="A7943680C19E475EAD597B6951750765" name="UUID_StepFile">
 			<table_ref uuid="73EFE2D78C61400397353509CBA87D18" name="Step"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="9CEE78492358F54D8FAE398F35A45555" type="7">
-		<field_ref uuid="EE9C517A8C59724B8559A5DCB59FE560" name="UUID">
-			<table_ref uuid="21C997F4FF841640B547868BE38C05ED" name="LotStep"/>
-		</field_ref>
-	</index>
-	<index kind="regular" uuid="A0852CCA129D2C44A8BCDEDF3B506C8A" type="3">
-		<field_ref uuid="B31124481979DC4687A97B0CB724679E" name="UUID_Lot">
-			<table_ref uuid="21C997F4FF841640B547868BE38C05ED" name="LotStep"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="A3289A6EBF0C432BACE45C8F4D39ECE8" type="1">

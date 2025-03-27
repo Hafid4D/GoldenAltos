@@ -97,25 +97,6 @@
 					"stroke": "#808080",
 					"text": "Status"
 				},
-				"pup_CustomerStatus": {
-					"type": "button",
-					"top": 9,
-					"left": 508,
-					"width": 200,
-					"height": 23,
-					"fontFamily": "System Font",
-					"fontSize": 13,
-					"focusable": false,
-					"text": "Status",
-					"icon": "",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/pup_CustomerStatus.4dm",
-					"events": [
-						"onClick"
-					]
-				},
 				"label_0_4": {
 					"type": "text",
 					"top": 37,
@@ -141,6 +122,25 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none"
+				},
+				"pup_QuoteStatus": {
+					"type": "button",
+					"top": 9,
+					"left": 508,
+					"width": 200,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Status",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_QuoteStatus.4dm",
+					"events": [
+						"onClick"
+					]
 				}
 			}
 		},
@@ -738,7 +738,7 @@
 			}
 		}
 	],
-	"geometryStamp": 436,
+	"geometryStamp": 440,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

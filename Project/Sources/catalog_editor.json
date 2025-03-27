@@ -48,10 +48,10 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1439.3158772786,
-				"top": 490.94991048177,
-				"width": 196.06713867187,
-				"height": 250.5640258789
+				"left": 1434.8394368489,
+				"top": 527.98256429036,
+				"width": 188,
+				"height": 230.33203125
 			},
 			"displayable_fields_count": 9
 		},
@@ -80,10 +80,10 @@
 			"coordinates": {
 				"left": 1613.9382324219,
 				"top": 802.35803222657,
-				"width": 172.04638671875,
-				"height": 290.50187174479
+				"width": 154,
+				"height": 461.33203125
 			},
-			"displayable_fields_count": 11
+			"displayable_fields_count": 20
 		},
 		"StepTemplateCertification": {
 			"color": {
@@ -95,10 +95,10 @@
 			"coordinates": {
 				"left": 2144.1264648438,
 				"top": 632.0214436849,
-				"width": 191.4580078125,
-				"height": 178.04305013021
+				"width": 176,
+				"height": 104.33203125
 			},
-			"displayable_fields_count": 6,
+			"displayable_fields_count": 3,
 			"fields": {
 				"UUID_StepTemplate": {
 					"color": {
@@ -120,10 +120,10 @@
 			"coordinates": {
 				"left": 1900.6971028646,
 				"top": 631.59912109375,
-				"width": 120,
-				"height": 167.33203125
+				"width": 95,
+				"height": 83.33203125
 			},
-			"displayable_fields_count": 6
+			"displayable_fields_count": 2
 		},
 		"StepTemplateTool": {
 			"color": {
@@ -135,10 +135,10 @@
 			"coordinates": {
 				"left": 2468.75,
 				"top": 381.32503255208,
-				"width": 166.69905598958,
-				"height": 184.49849446615
+				"width": 165,
+				"height": 104.33203125
 			},
-			"displayable_fields_count": 6
+			"displayable_fields_count": 3
 		},
 		"Tool": {
 			"color": {
@@ -150,10 +150,10 @@
 			"coordinates": {
 				"left": 2476.7522786458,
 				"top": 622.06270345052,
-				"width": 120,
-				"height": 167.33203125
+				"width": 86,
+				"height": 125.33203125
 			},
-			"displayable_fields_count": 6
+			"displayable_fields_count": 4
 		},
 		"StepTemplate": {
 			"color": {
@@ -165,10 +165,10 @@
 			"coordinates": {
 				"left": 2252.9499511719,
 				"top": 386.62319946289,
-				"width": 120,
-				"height": 167.33203125
+				"width": 106,
+				"height": 83.33203125
 			},
-			"displayable_fields_count": 6
+			"displayable_fields_count": 2
 		},
 		"Step": {
 			"color": {
@@ -178,12 +178,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1919.3287353516,
-				"top": 382.79040527344,
-				"width": 179.02116394043,
-				"height": 176.29870605469
+				"left": 1990.890991211,
+				"top": 345.01351928711,
+				"width": 165,
+				"height": 104.33203125
 			},
-			"displayable_fields_count": 6,
+			"displayable_fields_count": 3,
 			"fields": {
 				"UUID_StepTemplate": {
 					"color": {
@@ -211,12 +211,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1719.9798990885,
-				"top": 389.70882161458,
-				"width": 120,
-				"height": 167.33203125
+				"left": 1671.018778483,
+				"top": 491.74403889974,
+				"width": 85,
+				"height": 62.33203125
 			},
-			"displayable_fields_count": 6,
+			"displayable_fields_count": 1,
 			"fields_ordering": 1
 		},
 		"Lot": {
@@ -227,12 +227,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2024.1284179688,
-				"top": 86.840657552083,
-				"width": 120,
-				"height": 167.33203125
+				"left": 2071.0021972657,
+				"top": 73.845403035481,
+				"width": 153,
+				"height": 545.33203125
 			},
-			"displayable_fields_count": 6,
+			"displayable_fields_count": 24,
 			"fields": {
 				"UUID_Job": {
 					"color": {
@@ -254,10 +254,10 @@
 			"coordinates": {
 				"left": 1780.7734985352,
 				"top": 91.186330159505,
-				"width": 138.12036132812,
-				"height": 195.34598795573
+				"width": 166,
+				"height": 545.33203125
 			},
-			"displayable_fields_count": 7,
+			"displayable_fields_count": 24,
 			"fields": {
 				"UUID_StepFile": {
 					"color": {
@@ -279,10 +279,10 @@
 			"coordinates": {
 				"left": 1506.9772542318,
 				"top": 47.789082845053,
-				"width": 187.0771484375,
-				"height": 253.17391967773
+				"width": 183,
+				"height": 398.33203125
 			},
-			"displayable_fields_count": 10,
+			"displayable_fields_count": 17,
 			"fields": {
 				"UUID_Job": {
 					"color": {
@@ -312,10 +312,10 @@
 			"coordinates": {
 				"left": 1314.3920898437,
 				"top": 23.768661499024,
-				"width": 152.69836425781,
-				"height": 186.17767333984
+				"width": 152,
+				"height": 482.33203125
 			},
-			"displayable_fields_count": 6,
+			"displayable_fields_count": 21,
 			"fields": {
 				"UUID_Customer": {
 					"color": {
@@ -647,6 +647,37 @@
 			"displayable_fields_count": 8,
 			"fields_ordering": 1
 		},
+		"QuoteStatus": {
+			"color": {
+				"red": 226,
+				"green": 158,
+				"blue": 214,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 799.36492919922,
+				"top": 1046.3305664062,
+				"width": 143.60327148438,
+				"height": 160.00689697266
+			},
+			"displayable_fields_count": 5
+		},
+		"Invoice": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 40,
+				"top": 40,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
 		"TermCondition": {
 			"color": {
 				"red": 226,
@@ -655,7 +686,7 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1006.9212646484,
+				"left": 1018.208618164,
 				"top": 889.44183349609,
 				"width": 155.59558105468,
 				"height": 169.22039794922
@@ -670,8 +701,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 829.71606445312,
-				"top": 784.4535369873,
+				"left": 784.30474853515,
+				"top": 763.08580017089,
 				"width": 165.36242675781,
 				"height": 185.09155273438
 			},

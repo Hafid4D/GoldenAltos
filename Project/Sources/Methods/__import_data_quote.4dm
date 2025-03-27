@@ -5,12 +5,58 @@ var $eQuoteLine : cs:C1710.QuoteLineEntity
 var $eContact : cs:C1710.ContactEntity
 var $eCostumer : cs:C1710.CustomerEntity
 var $eTermConditon : cs:C1710.TermConditionEntity
+var $eQuoteStatus : cs:C1710.QuoteStatusEntity
 
 $assumptions_file:=Folder:C1567(fk data folder:K87:12).file("DataJson/quote_assumptions.json")
 If ($assumptions_file.exists)
 	TRUNCATE TABLE:C1051([QuoteLine:129])
 	TRUNCATE TABLE:C1051([Quote:128])
 	TRUNCATE TABLE:C1051([Assumption:2])
+	TRUNCATE TABLE:C1051([QuoteStatus:5])
+	
+	If (True:C214)  //fill QuoteStatus table
+		$eQuoteStatus:=ds:C1482.QuoteStatus.new()
+		$eQuoteStatus.name:="Active"
+		$eQuoteStatus.code:="A"
+		$eQuoteStatus.statusID:=1
+		$eQuoteStatus.save()
+		
+		$eQuoteStatus:=ds:C1482.QuoteStatus.new()
+		$eQuoteStatus.name:="Close"
+		$eQuoteStatus.code:="C"
+		$eQuoteStatus.statusID:=2
+		$eQuoteStatus.save()
+		
+		$eQuoteStatus:=ds:C1482.QuoteStatus.new()
+		$eQuoteStatus.name:="Closed successfully"
+		$eQuoteStatus.code:="CS"
+		$eQuoteStatus.statusID:=3
+		$eQuoteStatus.save()
+		
+		$eQuoteStatus:=ds:C1482.QuoteStatus.new()
+		$eQuoteStatus.name:="Received Order"
+		$eQuoteStatus.code:="RO"
+		$eQuoteStatus.statusID:=4
+		$eQuoteStatus.save()
+		
+		$eQuoteStatus:=ds:C1482.QuoteStatus.new()
+		$eQuoteStatus.name:="Lost Order"
+		$eQuoteStatus.code:="LO"
+		$eQuoteStatus.statusID:=5
+		$eQuoteStatus.save()
+		
+		$eQuoteStatus:=ds:C1482.QuoteStatus.new()
+		$eQuoteStatus.name:="Require Follow-Up"
+		$eQuoteStatus.code:="RFU"
+		$eQuoteStatus.statusID:=6
+		$eQuoteStatus.save()
+		
+		$eQuoteStatus:=ds:C1482.QuoteStatus.new()
+		$eQuoteStatus.name:="Under Customer Review"
+		$eQuoteStatus.code:="UCR"
+		$eQuoteStatus.statusID:=7
+		$eQuoteStatus.save()
+	End if 
 	
 	$quote_file:=Folder:C1567(fk data folder:K87:12).file("DataJson/quotes.json")
 	If ($quote_file.exists)
@@ -63,7 +109,16 @@ If ($assumptions_file.exists)
 			
 			$eQuote.UUID_Contact:=$eContact.UUID
 			$eQuote.code:=$quote.QuoteNumber
-			$eQuote.currentStatusID:=1
+			
+			If ($quote.Status#"")
+				$eQuoteStatus:=ds:C1482.QuoteStatus.query("name == :1"; $quote.Status).first()
+				If ($eQuoteStatus=Null:C1517)
+					TRACE:C157
+				End if 
+				$eQuote.currentStatusID:=$eQuoteStatus.statusID
+			Else 
+				$eQuote.currentStatusID:=0
+			End if 
 			$eQuote.subject:=$quote.Subject
 			$eQuote.reference:=$quote.Reference
 			$eQuote.assumptions:=New object:C1471("UUIDs"; New collection:C1472())
