@@ -110,7 +110,7 @@
 					"type": "input",
 					"top": 37,
 					"left": 508,
-					"width": 182,
+					"width": 200,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.contact.fullName",
 					"focusable": false,
@@ -118,10 +118,13 @@
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
+						"onClick",
+						"onGettingFocus",
 						"onDataChange"
 					],
 					"fill": "transparent",
-					"borderStyle": "none"
+					"borderStyle": "none",
+					"method": "ObjectMethods/entryField_contact.4dm"
 				},
 				"pup_QuoteStatus": {
 					"type": "button",
@@ -738,7 +741,7 @@
 			}
 		}
 	],
-	"geometryStamp": 440,
+	"geometryStamp": 441,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

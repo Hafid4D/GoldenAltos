@@ -41,7 +41,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_quote": {
-			"timeStamp": "2025-03-27T11:21:17Z",
+			"timeStamp": "2025-03-27T13:03:55Z",
 			"destination": "detailScreen"
 		},
 		"panel_customer": {
@@ -102,6 +102,10 @@
 		},
 		"sfw_dial_request": {
 			"timeStamp": "2025-01-16T09:57:28Z",
+			"destination": "detailScreen"
+		},
+		"selectContact": {
+			"timeStamp": "2025-03-27T14:48:47Z",
 			"destination": "detailScreen"
 		},
 		"sfw_selector_callback": {
