@@ -8,12 +8,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 693.94885253909,
-				"top": 419.40922546387,
-				"width": 146.23315429688,
-				"height": 168.10174560547
+				"left": 907.39685058597,
+				"top": 1109.3525238037,
+				"width": 120,
+				"height": 125.33203125
 			},
-			"displayable_fields_count": 6
+			"displayable_fields_count": 4
 		},
 		"QuoteLine": {
 			"color": {
@@ -51,9 +51,45 @@
 				"left": 1434.8394368489,
 				"top": 527.98256429036,
 				"width": 188,
-				"height": 230.33203125
+				"height": 308.466796875
 			},
-			"displayable_fields_count": 9
+			"displayable_fields_count": 12,
+			"fields_ordering": 2,
+			"fields": {
+				"UUID_Employee": {
+					"position": 3
+				},
+				"stmpCreation": {
+					"position": 11
+				},
+				"termsConditions": {
+					"position": 10
+				},
+				"optionalPreliminaryTxt_wr": {
+					"position": 9
+				},
+				"assumptions": {
+					"position": 8
+				},
+				"reference": {
+					"position": 7
+				},
+				"subject": {
+					"position": 6
+				},
+				"currentStatusID": {
+					"position": 5
+				},
+				"code": {
+					"position": 4
+				},
+				"UUID_Contact": {
+					"position": 2
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
 		},
 		"InventoryPull": {
 			"color": {
@@ -647,6 +683,53 @@
 			"displayable_fields_count": 8,
 			"fields_ordering": 1
 		},
+		"Department": {
+			"color": {
+				"red": 252,
+				"green": 191,
+				"blue": 73,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 542.73851013184,
+				"top": 509.98980712891,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6
+		},
+		"Employee": {
+			"color": {
+				"red": 252,
+				"green": 191,
+				"blue": 73,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 798.39227294922,
+				"top": 461.08068847656,
+				"width": 204.23901367188,
+				"height": 258.08233642578
+			},
+			"displayable_fields_count": 10,
+			"fields": {
+				"UUID_Department": {
+					"position": 2
+				},
+				"contactDetails": {
+					"position": 5
+				},
+				"lastName": {
+					"position": 4
+				},
+				"firstName": {
+					"position": 3
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
+		},
 		"QuoteStatus": {
 			"color": {
 				"red": 226,
@@ -655,10 +738,10 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 799.36492919922,
-				"top": 1046.3305664062,
-				"width": 143.60327148438,
-				"height": 160.00689697266
+				"left": 703.32427978516,
+				"top": 1112.6636962891,
+				"width": 99,
+				"height": 146.33203125
 			},
 			"displayable_fields_count": 5
 		},
@@ -686,12 +769,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1018.208618164,
-				"top": 889.44183349609,
-				"width": 155.59558105468,
-				"height": 169.22039794922
+				"left": 693.17889404293,
+				"top": 1313.1608886719,
+				"width": 110,
+				"height": 104.33203125
 			},
-			"displayable_fields_count": 6
+			"displayable_fields_count": 3
 		},
 		"Assumption": {
 			"color": {
@@ -701,12 +784,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 784.30474853515,
-				"top": 763.08580017089,
-				"width": 165.36242675781,
-				"height": 185.09155273438
+				"left": 890.92907714843,
+				"top": 1311.8513641357,
+				"width": 94,
+				"height": 104.33203125
 			},
-			"displayable_fields_count": 6
+			"displayable_fields_count": 3
 		},
 		"Contact": {
 			"color": {
@@ -725,6 +808,22 @@
 		}
 	},
 	"relations": {
+		"733BCB38E504454780D181B6F4FBB6AF": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"2923914761FA499394703B43C4952B1B": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
 		"CF3063584FFE4334AC18A5B8B1445D95": {
 			"color": {
 				"red": 255,

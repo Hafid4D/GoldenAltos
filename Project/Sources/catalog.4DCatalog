@@ -48,6 +48,21 @@
 		</field>
 		<primary_key field_name="UUID" field_uuid="6A2CE8BD47C44B8EAC7B0C5C14CD21DB"/>
 	</table>
+	<table name="Employee" uuid="80CC55684C2F4451AC0751964F071A71" id="6">
+		<field name="UUID" uuid="DD376712F0CC41AFA671F1D6AF7D83D7" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="firstName" uuid="2CC86DA71CBD443597A55DEAD02293E6" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="lastName" uuid="C5E159F86F5F473EB861D2B6B346BFCB" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="contactDetails" uuid="C80C8A2497674891A6EBA4908DD06B32" type="21" blob_switch_size="2147483647" never_null="true" id="4"/>
+		<field name="UUID_Department" uuid="0A9BA78388B14E569AB76C2955F3E5E3" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="5"/>
+		<field name="code" uuid="FF31D98C3A224153ADB23907CD5B9570" type="10" limiting_length="255" never_null="true" id="6"/>
+		<field name="active" uuid="9EB7F40C76914F4A92E90EDF5924EF36" type="1" never_null="true" id="7"/>
+		<primary_key field_name="UUID" field_uuid="DD376712F0CC41AFA671F1D6AF7D83D7"/>
+	</table>
+	<table name="Department" uuid="894004274A3B4909A39584EC0B879D18" id="7">
+		<field name="UUID" uuid="8D9FB8C795534689B56DE1CC69FD3D14" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="name" uuid="99BB28C34588457F89FCF838E93A19BD" type="10" limiting_length="255" never_null="true" id="2"/>
+		<primary_key field_name="UUID" field_uuid="8D9FB8C795534689B56DE1CC69FD3D14"/>
+	</table>
 	<table name="sfw_Country" uuid="4C0E0D9D33D246BAB1FACEEC19ABF144" id="15" prevent_journaling="true">
 		<field name="UUID" uuid="FDA14E8A26704F7091EC668E332108FB" type="10" unique="true" autogenerate="true" store_as_UUID="true" id="1"/>
 		<field name="name" uuid="FEDEAAD3F9A64D8AA7049B2EA9699D2C" type="10" limiting_length="255" id="2"/>
@@ -420,6 +435,8 @@
 		<field name="assumptions" uuid="1CF6DB165ED94D8EBA82D57E81B086DD" type="21" blob_switch_size="2147483647" never_null="true" id="7"/>
 		<field name="optionalPreliminaryTxt_wr" uuid="7ECA3501E5544BD88FD49E982E900EC0" type="21" blob_switch_size="2147483647" never_null="true" id="8"/>
 		<field name="termsConditions" uuid="841C2C0BB623401EA6087977440B07D8" type="21" blob_switch_size="2147483647" never_null="true" id="9"/>
+		<field name="stmpCreation" uuid="F97449D28C8C45E9A331B9D93BEBB59F" type="4" never_null="true" id="10"/>
+		<field name="UUID_Employee" uuid="0EACB0E17BBD4F639E0C142211979D18" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="11"/>
 		<primary_key field_name="UUID" field_uuid="DDEAA2AF9B9A44BD99857817933C03AA"/>
 	</table>
 	<table name="QuoteLine" uuid="348628FCA4DC451085D7519B226BD509" id="129">
@@ -752,6 +769,30 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="2923914761FA499394703B43C4952B1B" name_Nto1="employee" name_1toN="quotes" state="1">
+		<related_field kind="source">
+			<field_ref uuid="0EACB0E17BBD4F639E0C142211979D18" name="UUID_Employee">
+				<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="DD376712F0CC41AFA671F1D6AF7D83D7" name="UUID">
+				<table_ref uuid="80CC55684C2F4451AC0751964F071A71" name="Employee"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="733BCB38E504454780D181B6F4FBB6AF" name_Nto1="department" name_1toN="employees" state="1">
+		<related_field kind="source">
+			<field_ref uuid="0A9BA78388B14E569AB76C2955F3E5E3" name="UUID_Department">
+				<table_ref uuid="80CC55684C2F4451AC0751964F071A71" name="Employee"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="8D9FB8C795534689B56DE1CC69FD3D14" name="UUID">
+				<table_ref uuid="894004274A3B4909A39584EC0B879D18" name="Department"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="01619F9BF52940F3AFF8C52A4A82535D" type="3">
 		<field_ref uuid="951D3770910B43BBBFCAB95E4B3A1C65" name="UUID_Tool">
 			<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
@@ -847,6 +888,11 @@
 			<table_ref uuid="348628FCA4DC451085D7519B226BD509" name="QuoteLine"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="31B8C7FE4F9B4DC19CB63BCB85B9FA5D" type="7">
+		<field_ref uuid="0EACB0E17BBD4F639E0C142211979D18" name="UUID_Employee">
+			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="3DD65150DC0A4F1DB46965D05DB4CD68" type="3">
 		<field_ref uuid="D92164B4310D4A74A5E486B390AE1787" name="UUID_StepTemplate">
 			<table_ref uuid="73EFE2D78C61400397353509CBA87D18" name="Step"/>
@@ -932,9 +978,19 @@
 			<table_ref uuid="0A7AAD6A6AAB448E9F91A0CF0CC592C6" name="sfw_SchedulerLog"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="786461533CE74E1BB02CAF6F9EF991DC" type="7">
+		<field_ref uuid="DD376712F0CC41AFA671F1D6AF7D83D7" name="UUID">
+			<table_ref uuid="80CC55684C2F4451AC0751964F071A71" name="Employee"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="78A3E0E59CD449B095A5C975019E16B2" type="3">
 		<field_ref uuid="08FD758BD6AB464B9EB0561E7BA918A3" name="UUID_User">
 			<table_ref uuid="BBA10D61B3A54D38A2C335D8A5A1BF6E" name="sfw_Favorite"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="7D69503F90CE4CCFA43B5503B33A3D13" type="3">
+		<field_ref uuid="0A9BA78388B14E569AB76C2955F3E5E3" name="UUID_Department">
+			<table_ref uuid="80CC55684C2F4451AC0751964F071A71" name="Employee"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="81B92667ECA840CC88E29D368B48B43D" type="7">
@@ -1075,6 +1131,11 @@
 	<index kind="regular" unique_keys="true" uuid="EE181190B6294457AB1F760A7E8FFB4D" type="7">
 		<field_ref uuid="EA4BF9CC573745C5BF902F88DA00BD6E" name="UUID">
 			<table_ref uuid="F74C797683A840F69C35777C0FF641E7" name="Assumption"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="F135837D253C4495AD7DBF47CED63D71" type="7">
+		<field_ref uuid="8D9FB8C795534689B56DE1CC69FD3D14" name="UUID">
+			<table_ref uuid="894004274A3B4909A39584EC0B879D18" name="Department"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="F20E165F0BE847BE813BD9F4E3EC7C7E" type="3">

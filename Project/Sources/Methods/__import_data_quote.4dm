@@ -100,7 +100,7 @@ If ($assumptions_file.exists)
 				$comm:=New object:C1471()
 				$comm.phone:=$quote.tel_num
 				$comm.fax:=$quote.fax_num
-				$comm.email:=$quote.CopyToEmailAddr
+				$comm.email:=$quote.email_addr
 				$eContact.contactDetails.communications.push($comm)
 				
 				$eContact.save()
