@@ -6,6 +6,7 @@ var $eContact : cs:C1710.ContactEntity
 var $eCostumer : cs:C1710.CustomerEntity
 var $eTermConditon : cs:C1710.TermConditionEntity
 var $eQuoteStatus : cs:C1710.QuoteStatusEntity
+var $eEmployee : cs:C1710.EmployeeEntity
 
 $assumptions_file:=Folder:C1567(fk data folder:K87:12).file("DataJson/quote_assumptions.json")
 If ($assumptions_file.exists)
@@ -123,6 +124,49 @@ If ($assumptions_file.exists)
 			$eQuote.reference:=$quote.Reference
 			$eQuote.assumptions:=New object:C1471("UUIDs"; New collection:C1472())
 			$eQuote.termsConditions:=New object:C1471("UUIDs"; New collection:C1472())
+			
+			$motifs:=Split string:C1554($quote.PreparedBy; " "; sk ignore empty strings:K86:1+sk trim spaces:K86:2)
+			$eEmployee:=ds:C1482.Employee.query("lastName == :1"; $motifs[1]).first()
+			If ($eEmployee=Null:C1517)
+				$eEmployee:=ds:C1482.Employee.new()
+				$eEmployee.firstName:=$motifs[0]
+				$eEmployee.lastName:=$motifs[1]
+				$eEmployee.contactDetails:=New object:C1471()
+				$eEmployee.contactDetails.communications:=New collection:C1472()
+			End if 
+			
+			If ($eEmployee.contactDetails.communications.length=0) && ($quote.PreparerEmailAndTel#"")
+				$motifsPreparer:=Split string:C1554($quote.PreparerEmailAndTel; "\r"; sk ignore empty strings:K86:1+sk trim spaces:K86:2)
+				If (Position:C15("@"; $motifsPreparer[0])>0)
+					$email:=$motifsPreparer[0]
+					$telTmp:=$motifsPreparer[1]
+				Else 
+					$email:=$motifsPreparer[1]
+					$telTmp:=$motifsPreparer[0]
+				End if 
+				$tel:=Replace string:C233($telTmp; "Tel: "; "")
+				If (Position:C15("ext"; $tel)>0)
+					$motifs:=Split string:C1554($tel; "ext"; sk ignore empty strings:K86:1+sk trim spaces:K86:2)
+					$tel:=$motifs[0]
+					$ext:=$motifs[1]
+				End if 
+				If (Position:C15("x"; $tel)>0)
+					$motifs:=Split string:C1554($tel; "x"; sk ignore empty strings:K86:1+sk trim spaces:K86:2)
+					$tel:=$motifs[0]
+					$ext:=$motifs[1]
+				End if 
+				
+				$comm:=New object:C1471()
+				$comm.email:=$email
+				$comm.mobile:=$tel
+				$comm.ext:=$ext
+				$eEmployee.contactDetails.communications.push($comm)
+				
+				$rss:=$eEmployee.save()
+				If ($rss.success=False:C215)
+					TRACE:C157
+				End if 
+			End if 
 			
 			$wpFile:=Folder:C1567(fk data folder:K87:12).file("DataJson/wpQuotes/"+$quote.QuoteNumber+".4wp")
 			If ($wpFile.exists)
