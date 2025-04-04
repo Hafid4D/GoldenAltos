@@ -99,7 +99,7 @@ If ($assumptions_file.exists)
 				
 				$eContact.contactDetails.communications:=New collection:C1472()
 				$comm:=New object:C1471()
-				$comm.phone:=$quote.tel_num
+				$comm.mobile:=$quote.tel_num
 				$comm.fax:=$quote.fax_num
 				$comm.email:=$quote.email_addr
 				$eContact.contactDetails.communications.push($comm)
@@ -120,8 +120,8 @@ If ($assumptions_file.exists)
 			Else 
 				$eQuote.currentStatusID:=0
 			End if 
-			$eQuote.subject:=$quote.Subject
-			$eQuote.reference:=$quote.Reference
+			$eQuote.subject:=cs:C1710.Util.me.trim($quote.Subject; [" "; "\r"])
+			$eQuote.reference:=cs:C1710.Util.me.trim($quote.Reference; [" "; "\r"])
 			$eQuote.assumptions:=New object:C1471("UUIDs"; New collection:C1472())
 			$eQuote.termsConditions:=New object:C1471("UUIDs"; New collection:C1472())
 			
@@ -168,10 +168,12 @@ If ($assumptions_file.exists)
 				End if 
 			End if 
 			
+			$eQuote.UUID_Employee:=$eEmployee.UUID
 			$wpFile:=Folder:C1567(fk data folder:K87:12).file("DataJson/wpQuotes/"+$quote.QuoteNumber+".4wp")
 			If ($wpFile.exists)
 				$eQuote.optionalPreliminaryTxt_wr:=WP Import document:C1318($wpFile.platformPath)
 			End if 
+			$eQuote.stmpCreation:=cs:C1710.sfw_stmp.me.build(Date:C102($quote.Qdate))
 			$eQuote.save()
 		End for each 
 	End if 

@@ -53,7 +53,7 @@
 		<field name="firstName" uuid="2CC86DA71CBD443597A55DEAD02293E6" type="10" limiting_length="255" never_null="true" id="2"/>
 		<field name="lastName" uuid="C5E159F86F5F473EB861D2B6B346BFCB" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="contactDetails" uuid="C80C8A2497674891A6EBA4908DD06B32" type="21" blob_switch_size="2147483647" never_null="true" id="4"/>
-		<field name="UUID_Department" uuid="0A9BA78388B14E569AB76C2955F3E5E3" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="5"/>
+		<field name="UUID_Department" uuid="0A9BA78388B14E569AB76C2955F3E5E3" type="10" store_as_UUID="true" never_null="true" id="5"/>
 		<field name="code" uuid="FF31D98C3A224153ADB23907CD5B9570" type="10" limiting_length="255" never_null="true" id="6"/>
 		<field name="active" uuid="9EB7F40C76914F4A92E90EDF5924EF36" type="1" never_null="true" id="7"/>
 		<primary_key field_name="UUID" field_uuid="DD376712F0CC41AFA671F1D6AF7D83D7"/>
@@ -436,7 +436,7 @@
 		<field name="optionalPreliminaryTxt_wr" uuid="7ECA3501E5544BD88FD49E982E900EC0" type="21" blob_switch_size="2147483647" never_null="true" id="8"/>
 		<field name="termsConditions" uuid="841C2C0BB623401EA6087977440B07D8" type="21" blob_switch_size="2147483647" never_null="true" id="9"/>
 		<field name="stmpCreation" uuid="F97449D28C8C45E9A331B9D93BEBB59F" type="4" never_null="true" id="10"/>
-		<field name="UUID_Employee" uuid="0EACB0E17BBD4F639E0C142211979D18" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="11"/>
+		<field name="UUID_Employee" uuid="0EACB0E17BBD4F639E0C142211979D18" type="10" store_as_UUID="true" never_null="true" id="11"/>
 		<primary_key field_name="UUID" field_uuid="DDEAA2AF9B9A44BD99857817933C03AA"/>
 	</table>
 	<table name="QuoteLine" uuid="348628FCA4DC451085D7519B226BD509" id="129">
