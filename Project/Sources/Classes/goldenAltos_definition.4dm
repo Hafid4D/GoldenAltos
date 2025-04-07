@@ -141,6 +141,12 @@ Function _visions_definition()
 	$vision.setIcon("image/vision/customer-service-24x24.png")
 	This:C1470._push_vision($vision)
 	
+	$vision:=cs:C1710.sfw_definitionVision.new("housekeeping"; "Housekeeping")
+	$vision.setToolbarBackgroundColor("SlateBlue")
+	$vision.setFocusRingColor("darkred")
+	$vision.setIcon("image/vision/housekeeping-24x24.png")
+	This:C1470._push_vision($vision)
+	
 	
 	//Mark:-Entries defintion
 Function _entries_definition()

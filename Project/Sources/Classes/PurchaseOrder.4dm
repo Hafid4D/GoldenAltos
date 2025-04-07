@@ -9,7 +9,6 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setSearchboxField("poNumber")
 	
-	
 	$entry.setPanel("panel_purchaseOrder")
 	$entry.setPanelPage(1; "po-infos-32x32.png"; "Infos")
 	$entry.setPanelPage(2; "line-items-32x32.png"; "Line Items")
