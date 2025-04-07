@@ -2,12 +2,12 @@
 /**
 import po & po lines (po <-- po_lines)
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([PurchaseOrder:115])
 	TRUNCATE TABLE:C1051([PurchaseOrderLine:116])
 	TRUNCATE TABLE:C1051([Invoice:4])
 	
-	$file:=Folder:C1567(fk database folder:K87:14).file("po_log_export.json")
+	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/po_log_export.json")
 	
 	$records:=JSON Parse:C1218($file.getText())
 	
@@ -90,12 +90,12 @@ End if
 /**
 import jobs & lot (job <-- lots)
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([Job:117])
 	TRUNCATE TABLE:C1051([Lot:118])
 	TRUNCATE TABLE:C1051([LotStep:5])
 	
-	$file:=Folder:C1567(fk database folder:K87:14).file("job_log_export.json")
+	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/job_log_export.json")
 	
 	$records:=JSON Parse:C1218($file.getText())
 	
@@ -225,10 +225,10 @@ End if
 /**
 import inventories
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([Inventory:126])
 	
-	$file:=Folder:C1567(fk database folder:K87:14).file("inventory_export.json")
+	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/inventory_export.json")
 	
 	$records:=JSON Parse:C1218($file.getText())
 	
@@ -288,6 +288,37 @@ If (True:C214)
 			End for each 
 		End if 
 		
+	End for each 
+End if 
+
+/**
+import step template
+**/
+If (True:C214)
+	TRUNCATE TABLE:C1051([StepTemplate:121])
+	
+	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/step_template_export.json")
+	
+	$records:=JSON Parse:C1218($file.getText())
+	
+	For each ($record; $records)
+		$stepTemplate_e:=ds:C1482.StepTemplate.new()
+		
+		$stepTemplate_e.name:=$record.name
+		$stepTemplate_e.operation:=$record.operation
+		$stepTemplate_e.division:=$record.division
+		$stepTemplate_e.status:=$record.status
+		$stepTemplate_e.binning:=$record.binning
+		$stepTemplate_e.smallLayout:=$record.smallLayout
+		$stepTemplate_e.largeLayout:=$record.largeLayout
+		$stepTemplate_e.comment1:=$record.comment1
+		$stepTemplate_e.comment2:=$record.comment2
+		
+		$res:=$stepTemplate_e.save()
+		
+		If (Not:C34($res.success))
+			
+		End if 
 	End for each 
 End if 
 

@@ -354,6 +354,14 @@
 	<table name="StepTemplate" uuid="6330FD4D08D74130BF3869222CDECBA6" id="121">
 		<field name="UUID" uuid="3E46CC22F2F34DC0B68C304E1BC47991" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="name" uuid="CF1A2CBF37710C44B4CB331A0ADB7A47" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="operation" uuid="1754789D73705F41A353FBCB012C4283" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="division" uuid="72DA41DEB169DF46B1B384015640754B" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="status" uuid="A9AD90B0A5506E409BB48FE4B219C01A" type="1" never_null="true" id="5"/>
+		<field name="binning" uuid="B2C3C551F5EB9B4094BF2B8C0B3B5CA7" type="1" never_null="true" id="6"/>
+		<field name="smallLayout" uuid="E692454F40F16F4AA982D1B2B2955EC9" type="10" limiting_length="255" never_null="true" id="7"/>
+		<field name="largeLayout" uuid="CD5AA4FB574CBF4CB36F9274DE50375E" type="10" limiting_length="255" never_null="true" id="8"/>
+		<field name="comment1" uuid="8BB0BEEBAB42CE4BB75167E78C1DFA87" type="10" limiting_length="255" never_null="true" id="9"/>
+		<field name="comment2" uuid="6035172B450A3A439FD3A26DE1B62B3F" type="10" limiting_length="255" never_null="true" id="10"/>
 		<primary_key field_name="UUID" field_uuid="3E46CC22F2F34DC0B68C304E1BC47991"/>
 	</table>
 	<table name="Tool" uuid="C0C5EF5A4CD04FF7BB3897793A9DE6ED" id="122">
