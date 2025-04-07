@@ -51,10 +51,9 @@
 				"left": 1434.8394368489,
 				"top": 527.98256429036,
 				"width": 188,
-				"height": 308.466796875
+				"height": 363.64437866211
 			},
-			"displayable_fields_count": 12,
-			"fields_ordering": 2,
+			"displayable_fields_count": 15,
 			"fields": {
 				"UUID_Employee": {
 					"position": 3

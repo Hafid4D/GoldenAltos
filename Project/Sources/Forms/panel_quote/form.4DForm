@@ -144,6 +144,58 @@
 					"events": [
 						"onClick"
 					]
+				},
+				"label_0_5": {
+					"type": "text",
+					"top": 62,
+					"left": 12,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Revision"
+				},
+				"entryField_subject1": {
+					"type": "input",
+					"top": 62,
+					"left": 132,
+					"width": 256,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.revision",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"label_0_6": {
+					"type": "text",
+					"top": 62,
+					"left": 419,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Division"
+				},
+				"entryField_subject2": {
+					"type": "input",
+					"top": 62,
+					"left": 508,
+					"width": 200,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.division",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
 				}
 			}
 		},
@@ -741,7 +793,7 @@
 			}
 		}
 	],
-	"geometryStamp": 441,
+	"geometryStamp": 447,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
