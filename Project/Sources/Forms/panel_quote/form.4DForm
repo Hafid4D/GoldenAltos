@@ -97,25 +97,6 @@
 					"stroke": "#808080",
 					"text": "Status"
 				},
-				"pup_CustomerStatus": {
-					"type": "button",
-					"top": 9,
-					"left": 508,
-					"width": 200,
-					"height": 23,
-					"fontFamily": "System Font",
-					"fontSize": 13,
-					"focusable": false,
-					"text": "Status",
-					"icon": "",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/pup_CustomerStatus.4dm",
-					"events": [
-						"onClick"
-					]
-				},
 				"label_0_4": {
 					"type": "text",
 					"top": 37,
@@ -129,7 +110,7 @@
 					"type": "input",
 					"top": 37,
 					"left": 508,
-					"width": 182,
+					"width": 200,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.contact.fullName",
 					"focusable": false,
@@ -137,10 +118,32 @@
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
+						"onClick",
+						"onGettingFocus",
 						"onDataChange"
 					],
 					"fill": "transparent",
-					"borderStyle": "none"
+					"borderStyle": "none",
+					"method": "ObjectMethods/entryField_contact.4dm"
+				},
+				"pup_QuoteStatus": {
+					"type": "button",
+					"top": 9,
+					"left": 508,
+					"width": 200,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Status",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_QuoteStatus.4dm",
+					"events": [
+						"onClick"
+					]
 				}
 			}
 		},
@@ -738,7 +741,7 @@
 			}
 		}
 	],
-	"geometryStamp": 436,
+	"geometryStamp": 441,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

@@ -42,9 +42,13 @@ Function redrawAndSetVisible()
 	OBJECT SET VISIBLE:C603(*; "bActionAssumptions"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET VISIBLE:C603(*; "bActionTerms"; Form:C1466.sfw.checkIsInModification())
 	
+	This:C1470.drawPup_quoteStatus()
+	
 Function loadQuoteLines()
-	Form:C1466.lb_quoteLines:=Form:C1466.current_item.lines
-	This:C1470.displayQuoteLine()
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.lb_quoteLines:=Form:C1466.current_item.lines
+		This:C1470.displayQuoteLine()
+	End if 
 	
 Function bActionQuoteLines()
 	$mainMenu:=Create menu:C408
@@ -227,6 +231,9 @@ Function bActionTerms()
 	End case 
 	
 Function buildQuotePreview()
+	$preview:=Form:C1466.current_item.preview()
+	
+	
 	Form:C1466.preview:=WP New:C1317()
 	$headerLogoFile:=Folder:C1567(fk resources folder:K87:11).file("picts_GA/HeaderPortrait.jpeg")
 	If ($headerLogoFile.exists)
@@ -247,33 +254,43 @@ Function buildQuotePreview()
 	WP SET ATTRIBUTES:C1342($leftTxtBox; wk margin left:K81:11; "11cm")
 	WP SET ATTRIBUTES:C1342($leftTxtBox; wk border color:K81:34; "white")
 	WP SET ATTRIBUTES:C1342($leftTxtBox; wk width:K81:45; "9cm")
-	WP SET TEXT:C1574($leftTxtBox; "Quotation#: Q294\tRevision: R\tDated: 6/9/2023"; wk append:K81:179)
+	WP SET TEXT:C1574($leftTxtBox; "Quotation#: "+$preview.quoteNumber+"\tRevision: "+$preview.quoteRevision+"\tDated: "+$preview.quoteDate; wk append:K81:179)
 	WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
 	WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
-	WP SET TEXT:C1574($leftTxtBox; "From: Ben Mendoza"; wk append:K81:179)
+	WP SET TEXT:C1574($leftTxtBox; "From: "+$preview.preparerName; wk append:K81:179)
 	WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
-	WP SET TEXT:C1574($leftTxtBox; "\tbmendoza@goldenaltos.com"; wk append:K81:179)
+	If ($preview.preparerEmail#"")
+		WP SET TEXT:C1574($leftTxtBox; "\t"+$preview.preparerEmail; wk append:K81:179)
+		WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
+	End if 
+	If ($preview.preparerMobile#"")
+		WP SET TEXT:C1574($leftTxtBox; "\tTel: "+$preview.preparerMobile; wk append:K81:179)
+		WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
+	End if 
+	If ($preview.preparerExt#"")
+		WP SET TEXT:C1574($leftTxtBox; "\t"+$preview.preparerExt; wk append:K81:179)
+		WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
+	End if 
 	WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
-	WP SET TEXT:C1574($leftTxtBox; "\tel: 408-569-1010"; wk append:K81:179)
 	WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
+	WP SET TEXT:C1574($leftTxtBox; "Copy: "+$preview.copyName; wk append:K81:179)
 	WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
-	WP SET TEXT:C1574($leftTxtBox; "Copy: Rosie Medina"; wk append:K81:179)
-	WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
-	WP SET TEXT:C1574($leftTxtBox; "\trosimedina@goldenaltos.com"; wk append:K81:179)
+	WP SET TEXT:C1574($leftTxtBox; "\t"+$preview.copyCommMeans; wk append:K81:179)
 	
 	$paragraph:=WP Get elements:C1550($section; wk type paragraph:K81:191)[0]
 	WP SET ATTRIBUTES:C1342($paragraph; wk width:K81:45; "7cm")
 	
-	WP SET TEXT:C1574($paragraph; Form:C1466.current_item.contact.fullName; wk append:K81:179)
+	WP SET TEXT:C1574($paragraph; $preview.contactName; wk append:K81:179)
 	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
-	WP SET TEXT:C1574($paragraph; "Sandia National Laboratories"; wk append:K81:179)
+	WP SET TEXT:C1574($paragraph; $preview.contactCompany; wk append:K81:179)
 	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
-	WP SET TEXT:C1574($paragraph; "Po Box 5800, Albuqyerque NM97 185-1484 Po Box 5800, Albuqyerque "; wk append:K81:179)
+	WP SET TEXT:C1574($paragraph; $preview.contactAddress; wk append:K81:179)
 	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
-	WP SET TEXT:C1574($paragraph; "Tel: (505)845-0596"; wk append:K81:179)
+	WP SET TEXT:C1574($paragraph; "Tel: "+$preview.contactTel+" ext: "+$preview.contactExt+" Fax: "+$preview.contactFax; wk append:K81:179)
 	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
-	WP SET TEXT:C1574($paragraph; "Email: mcline@sandia.gov"; wk append:K81:179)
+	WP SET TEXT:C1574($paragraph; "Email: "+$preview.contactEmail; wk append:K81:179)
+	
 	
 	WP INSERT BREAK:C1413($section; wk paragraph break:K81:259; wk append:K81:179)
 	$paragraph:=WP Get elements:C1550($section; wk type paragraph:K81:191)[1]
@@ -281,13 +298,17 @@ Function buildQuotePreview()
 	
 	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
-	WP SET TEXT:C1574($paragraph; "Subject:\tPlastic Qualification And DPA"; wk append:K81:179)
 	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
-	WP SET TEXT:C1574($paragraph; "Reference:\tPS4A2702"; wk append:K81:179)
+	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP SET TEXT:C1574($paragraph; "Subject:\t"+$preview.quoteSubject; wk append:K81:179)
+	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP SET TEXT:C1574($paragraph; "Reference:\t"+$preview.quoteReference; wk append:K81:179)
 	
 	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
-	WP SET TEXT:C1574($paragraph; "  Dear Mellisa"; wk append:K81:179)
+	WP SET TEXT:C1574($paragraph; "  Dear "+$preview.contactFirstName; wk append:K81:179)
 	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 	WP SET TEXT:C1574($paragraph; "We are pleased to submit to you the following quotation:"; wk append:K81:179)
 	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
@@ -305,7 +326,7 @@ Function buildQuotePreview()
 	WP SET ATTRIBUTES:C1342($qtyCol; wk width:K81:45; "1.5cm")
 	WP SET ATTRIBUTES:C1342($amountcols; wk width:K81:45; "2.5cm")
 	$index:=1
-	For each ($line; Form:C1466.current_item.lines)
+	For each ($line; $preview.quoteLines)
 		$row:=WP Table append row:C1474($table; String:C10($index); $line.description; $line.quantity; $line.unitPrice; $line.quantity*$line.unitPrice)
 		$index+=1
 	End for each 
@@ -321,23 +342,21 @@ Function buildQuotePreview()
 	$paragraphs:=WP Get elements:C1550($section; wk type paragraph:K81:191)
 	$paragraph:=$paragraphs[$paragraphs.length-1]
 	
-	$assumptions:=ds:C1482.Assumption.query("UUID in :1"; Form:C1466.current_item.assumptions.UUIDs)
-	If ($assumptions.length#0)
+	If ($preview.assumptions.length#0)
 		WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 		WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 		WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 		WP SET TEXT:C1574($paragraph; "Assumptions:"; wk append:K81:179)
 		WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 		
-		For each ($assumption; $assumptions)
+		For each ($assumption; $preview.assumptions)
 			WP SET TEXT:C1574($paragraph; " - "+$assumption.value; wk append:K81:179)
 			WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 		End for each 
 	End if 
 	
 	
-	$conditions:=ds:C1482.TermCondition.query("UUID in :1"; Form:C1466.current_item.termsConditions.UUIDs)
-	If ($conditions.length#0)
+	If ($preview.conditions.length#0)
 		WP INSERT BREAK:C1413($section; wk page break:K81:188; wk append:K81:179)
 		WP INSERT BREAK:C1413($section; wk paragraph break:K81:259; wk append:K81:179)
 		$paragraphs:=WP Get elements:C1550($section; wk type paragraph:K81:191)
@@ -355,14 +374,13 @@ Function buildQuotePreview()
 		$paragraph:=$paragraphs[$paragraphs.length-1]
 		
 		$index:=1
-		For each ($condition; $conditions)
+		For each ($condition; $preview.conditions)
 			WP SET TEXT:C1574($paragraph; String:C10($index)+".  "+$condition.code+": "+$condition.value; wk append:K81:179)
 			WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 			$index+=1
 		End for each 
 		WP SET ATTRIBUTES:C1342($paragraph; wk text align:K81:49; wk left:K81:95)
 	End if 
-	
 	
 Function _activate_save_cancel_button()
 	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
@@ -381,3 +399,46 @@ Function onBoundVariableChange()
 		LISTBOX SELECT ROW:C912(*; "lb_quoteLines"; 0; lk remove from selection:K53:3)
 	End if 
 	
+Function pup_status()
+	var $eQuoteStatus : cs:C1710.QuoteStatusEntity
+	
+	If (Form:C1466.sfw.checkIsInModification())
+		$menu:=Create menu:C408
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.quoteStatus=Null:C1517)
+			ds:C1482.QuoteStatus.cacheLoad()
+		End if 
+		
+		For each ($eQuoteStatus; Storage:C1525.cache.quoteStatus)
+			APPEND MENU ITEM:C411($menu; $eQuoteStatus.code+" - "+$eQuoteStatus.name; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $eQuoteStatus.UUID)
+			If ($eQuoteStatus.statusID=Form:C1466.current_item.currentStatusID)
+				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+				If (Is Windows:C1573)
+					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+				End if 
+			End if 
+		End for each 
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		Case of 
+			: ($choose#"")
+				$eQuoteStatus:=ds:C1482.QuoteStatus.get($choose)
+				Form:C1466.current_item.currentStatusID:=$eQuoteStatus.statusID
+		End case 
+		
+	End if 
+	This:C1470.drawPup_quoteStatus()
+	
+Function drawPup_quoteStatus()
+	If (Form:C1466.current_item#Null:C1517)
+		$quoteStatus:=ds:C1482.QuoteStatus.query("statusID= :1"; Form:C1466.current_item.currentStatusID).first() || New object:C1471()
+		$parts:=New collection:C1472($quoteStatus.code; $quoteStatus.name)
+		$statusName:=$parts.join(" - "; ck ignore null or empty:K85:5)
+		If ($statusName="")
+			$statusName:="Status"
+		End if 
+		$color:=cs:C1710.sfw_htmlColor.me.getName($quoteStatus.color)
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_quoteStatus"; $statusName; $pathIcon; ($quoteStatus=Null:C1517))
+	End if 
