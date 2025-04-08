@@ -176,6 +176,7 @@ If ($assumptions_file.exists)
 			$eQuote.stmpCreation:=cs:C1710.sfw_stmp.me.build(Date:C102($quote.Qdate))
 			$eQuote.revision:=$quote.Revision
 			$eQuote.division:=$quote.Division
+			$eQuote.voided:=$quote.void
 			$eQuote.save()
 		End for each 
 	End if 
