@@ -174,6 +174,8 @@ If ($assumptions_file.exists)
 				$eQuote.optionalPreliminaryTxt_wr:=WP Import document:C1318($wpFile.platformPath)
 			End if 
 			$eQuote.stmpCreation:=cs:C1710.sfw_stmp.me.build(Date:C102($quote.Qdate))
+			$eQuote.revision:=$quote.Revision
+			$eQuote.division:=$quote.Division
 			$eQuote.save()
 		End for each 
 	End if 

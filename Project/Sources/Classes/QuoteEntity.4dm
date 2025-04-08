@@ -62,7 +62,7 @@ Function preview()->$preview : Object
 	$preview.copyCommMeans:=""  // to get from the old database
 	
 	$preview.quoteNumber:=This:C1470.code
-	$preview.quoteRevision:="R"  // to get from the old database
+	$preview.quoteRevision:=This:C1470.revision
 	$preview.quoteDate:=String:C10(cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpCreation))
 	$preview.quoteSubject:=This:C1470.subject
 	$preview.quoteReference:=This:C1470.reference

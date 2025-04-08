@@ -41,11 +41,15 @@
 			"destination": "detailScreen"
 		},
 		"panel_quote": {
-			"timeStamp": "2025-03-27T14:52:09Z",
+			"timeStamp": "2025-04-07T14:38:18Z",
 			"destination": "detailScreen"
 		},
 		"panel_customer": {
-			"timeStamp": "2025-02-20T15:28:56Z",
+			"timeStamp": "2025-04-07T14:40:07Z",
+			"destination": "detailScreen"
+		},
+		"panel_stepTemplate": {
+			"timeStamp": "2025-04-07T14:40:07Z",
 			"destination": "detailScreen"
 		},
 		"sfw_subpanel_schedule": {
@@ -161,7 +165,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_job": {
-			"timeStamp": "2025-03-27T10:37:54Z",
+			"timeStamp": "2025-04-07T14:40:07Z",
 			"destination": "detailScreen"
 		},
 		"sfw_panel_setting": {
@@ -169,7 +173,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_purchaseOrder": {
-			"timeStamp": "2025-03-27T10:37:54Z",
+			"timeStamp": "2025-04-07T14:40:07Z",
 			"destination": "detailScreen"
 		},
 		"sfw_main": {
