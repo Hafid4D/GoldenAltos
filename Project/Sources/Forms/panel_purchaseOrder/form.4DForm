@@ -876,7 +876,7 @@
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
-					"text": "PO -Identifier for broadcast",
+					"text": "PO - Identifier for broadcast",
 					"fontSize": 12,
 					"fontWeight": "bold"
 				},
@@ -940,6 +940,7 @@
 					"dataSource": "Form:C1466.lb_lineItems",
 					"selectionMode": "single",
 					"currentItemSource": "Form:C1466.selectedPoLine",
+					"alternateFill": "#F7F9FC",
 					"columns": [
 						{
 							"header": {
@@ -1161,6 +1162,7 @@
 					"listboxType": "collection",
 					"visibility": "visible",
 					"dataSource": "Form:C1466.lb_jobs",
+					"alternateFill": "#F7F9FC",
 					"columns": [
 						{
 							"header": {
@@ -1361,6 +1363,7 @@
 					"listboxType": "collection",
 					"visibility": "visible",
 					"dataSource": "Form:C1466.lb_lots",
+					"alternateFill": "#F7F9FC",
 					"columns": [
 						{
 							"header": {
@@ -1505,6 +1508,7 @@
 					"listboxType": "collection",
 					"visibility": "visible",
 					"dataSource": "Form:C1466.lb_invoices",
+					"alternateFill": "#F7F9FC",
 					"columns": [
 						{
 							"header": {
@@ -1667,7 +1671,7 @@
 			}
 		}
 	],
-	"geometryStamp": 2620,
+	"geometryStamp": 2621,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

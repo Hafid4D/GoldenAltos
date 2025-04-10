@@ -2,7 +2,7 @@
 /**
 import po & po lines (po <-- po_lines)
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([PurchaseOrder:115])
 	TRUNCATE TABLE:C1051([PurchaseOrderLine:116])
 	TRUNCATE TABLE:C1051([Invoice:4])
@@ -90,7 +90,7 @@ End if
 /**
 import jobs & lot (job <-- lots)
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([Job:117])
 	TRUNCATE TABLE:C1051([Lot:118])
 	TRUNCATE TABLE:C1051([LotStep:5])
@@ -225,7 +225,7 @@ End if
 /**
 import inventories
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([Inventory:126])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/inventory_export.json")
@@ -294,7 +294,7 @@ End if
 /**
 import step template
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([StepTemplate:121])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/step_template_export.json")
@@ -318,6 +318,68 @@ If (True:C214)
 		
 		If (Not:C34($res.success))
 			
+		End if 
+	End for each 
+End if 
+
+/**
+import tools
+**/
+If (True:C214)
+	TRUNCATE TABLE:C1051([ToolType:122])
+	
+	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/tools_export.json")
+	
+	$records:=JSON Parse:C1218($file.getText())
+	
+	For each ($record; $records)
+		$toolType_e:=ds:C1482.ToolType.new()
+		
+		$toolType_e.name:=$record.name
+		$toolType_e.type:=$record.type
+		$toolType_e.date:=$record.date
+		
+		$res:=$toolType_e.save()
+		
+		If (Not:C34($res.success))
+			TRACE:C157
+		Else 
+			For each ($tool; $record.tools)
+				$tool_e:=ds:C1482.Tool.new()
+				
+				$tool_e.name:=$tool
+				$tool_e.UUID_ToolType:=$toolType_e.UUID
+				
+				$res:=$tool_e.save()
+				
+				If (Not:C34($res.success))
+					TRACE:C157
+				End if 
+			End for each 
+		End if 
+	End for each 
+End if 
+
+/**
+import cetifications
+**/
+If (True:C214)
+	TRUNCATE TABLE:C1051([Certification:124])
+	
+	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/certifications_export.json")
+	
+	$records:=JSON Parse:C1218($file.getText())
+	
+	For each ($record; $records)
+		$certification_e:=ds:C1482.Certification.new()
+		
+		$certification_e.ref:=$record.ref
+		$certification_e.name:=$record.name
+		
+		$res:=$certification_e.save()
+		
+		If (Not:C34($res.success))
+			TRACE:C157
 		End if 
 	End for each 
 End if 

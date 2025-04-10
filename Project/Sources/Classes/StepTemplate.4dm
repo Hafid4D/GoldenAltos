@@ -9,8 +9,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setSearchboxField("name")
 	
 	$entry.setPanel("panel_stepTemplate")
-	$entry.setPanelPage(1; "po-infos-32x32.png"; "Main")
-	$entry.setPanelPage(2; "po-infos-32x32.png"; "Main 2")
+	$entry.setPanelPage(1; ""; "Main")
+	$entry.setPanelPage(2; ""; "Steps")
 	
 	$entry.setLBItemsColumn("name"; "Step Template Name"; "width:100")
 	

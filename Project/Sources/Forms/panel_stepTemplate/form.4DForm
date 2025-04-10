@@ -89,18 +89,18 @@
 				},
 				"label_division": {
 					"type": "text",
-					"top": 62,
-					"left": 12,
-					"width": 90,
+					"top": 12,
+					"left": 582,
+					"width": 70,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Division"
 				},
 				"entryField_division": {
 					"type": "input",
-					"top": 62,
-					"left": 132,
-					"width": 140,
+					"top": 12,
+					"left": 682,
+					"width": 100,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.division",
 					"focusable": false,
@@ -117,7 +117,7 @@
 				"label_status": {
 					"type": "text",
 					"top": 12,
-					"left": 372,
+					"left": 352,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
@@ -126,7 +126,7 @@
 				"label_binning": {
 					"type": "text",
 					"top": 37,
-					"left": 372,
+					"left": 352,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
@@ -136,8 +136,8 @@
 					"type": "checkbox",
 					"text": "Status",
 					"top": 7,
-					"left": 496,
-					"width": 212,
+					"left": 436,
+					"width": 72,
 					"height": 24,
 					"events": [
 						"onClick"
@@ -150,8 +150,8 @@
 					"type": "checkbox",
 					"text": "Binning",
 					"top": 32,
-					"left": 496,
-					"width": 212,
+					"left": 436,
+					"width": 72,
 					"height": 24,
 					"events": [
 						"onClick"
@@ -164,134 +164,51 @@
 		},
 		{
 			"objects": {
-				"header_bkgd7": {
+				"header_bkgd4": {
 					"type": "rectangle",
-					"top": 142,
-					"left": 57,
-					"width": 420,
-					"height": 30,
-					"sizingX": "fixed",
-					"fill": "#A2C6D8",
-					"stroke": "transparent"
-				},
-				"lbl_layout": {
-					"type": "text",
-					"top": 149,
-					"left": 63,
-					"width": 250,
-					"height": 17,
-					"stroke": "#000000",
-					"text": "Layout",
-					"fontSize": 12,
-					"fontWeight": "bold"
-				},
-				"header_bkgd8": {
-					"type": "rectangle",
-					"top": 175,
-					"left": 57,
-					"width": 420,
-					"height": 56,
+					"top": 129,
+					"left": 4,
+					"width": 450,
+					"height": 53,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
 					"stroke": "transparent"
 				},
-				"label_smallLayout": {
-					"type": "text",
-					"top": 183,
-					"left": 65,
-					"width": 110,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Small Layout"
-				},
-				"entryField_smallLayout": {
-					"type": "input",
-					"top": 183,
-					"left": 190,
-					"width": 280,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.smallLayout",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none"
-				},
-				"label_largeLayout": {
-					"type": "text",
-					"top": 207,
-					"left": 65,
-					"width": 110,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Large Layout"
-				},
-				"entryField_largeLayout": {
-					"type": "input",
-					"top": 207,
-					"left": 190,
-					"width": 280,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.largeLayout",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none"
-				},
-				"header_bkgd1": {
+				"header_bkgd3": {
 					"type": "rectangle",
-					"top": 142,
-					"left": 484,
-					"width": 420,
+					"top": 96,
+					"left": 4,
+					"width": 450,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
 					"stroke": "transparent"
 				},
-				"lbl_comments": {
+				"lbl_comments1": {
 					"type": "text",
-					"top": 149,
-					"left": 490,
-					"width": 250,
+					"top": 103,
+					"left": 10,
+					"width": 277,
 					"height": 17,
 					"stroke": "#000000",
 					"text": "Formatted Comments",
 					"fontSize": 12,
 					"fontWeight": "bold"
 				},
-				"header_bkgd2": {
-					"type": "rectangle",
-					"top": 175,
-					"left": 484,
-					"width": 420,
-					"height": 56,
-					"sizingX": "fixed",
-					"fill": "#E4E4E4",
-					"stroke": "transparent"
-				},
-				"label_comment1": {
+				"label_comment3": {
 					"type": "text",
-					"top": 183,
-					"left": 492,
-					"width": 110,
+					"top": 137,
+					"left": 10,
+					"width": 119,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Comment 1"
 				},
-				"entryField_comment1": {
+				"entryField_comment3": {
 					"type": "input",
-					"top": 183,
-					"left": 617,
-					"width": 280,
+					"top": 137,
+					"left": 137,
+					"width": 307,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.comment1",
 					"focusable": false,
@@ -304,20 +221,20 @@
 					"fill": "transparent",
 					"borderStyle": "none"
 				},
-				"label_comment2": {
+				"label_comment4": {
 					"type": "text",
-					"top": 207,
-					"left": 492,
-					"width": 110,
+					"top": 161,
+					"left": 10,
+					"width": 119,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Comment 2"
 				},
-				"entryField_comment2": {
+				"entryField_comment4": {
 					"type": "input",
-					"top": 207,
-					"left": 617,
-					"width": 280,
+					"top": 161,
+					"left": 137,
+					"width": 307,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.comment2",
 					"focusable": false,
@@ -329,12 +246,560 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none"
+				},
+				"header_bkgd6": {
+					"type": "rectangle",
+					"top": 188,
+					"left": 4,
+					"width": 450,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"lbl_dataTable1": {
+					"type": "text",
+					"top": 195,
+					"left": 10,
+					"width": 278,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Skills",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"header_bkgd9": {
+					"type": "rectangle",
+					"top": 221,
+					"left": 4,
+					"width": 450,
+					"height": 85,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"bottom": 306
+				},
+				"List Box1": {
+					"type": "listbox",
+					"left": 7,
+					"top": 224,
+					"width": 443,
+					"height": 79,
+					"events": [
+						"onClick",
+						"onHeaderClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"scrollbarVertical": "visible",
+					"scrollbarHorizontal": "hidden",
+					"showHeaders": false,
+					"listboxType": "collection",
+					"alternateFill": "#F7F9FC",
+					"dataSource": "Form:C1466.lb_skills",
+					"currentItemSource": "Form:C1466.currentSkill",
+					"selectionMode": "single",
+					"columns": [
+						{
+							"header": {
+								"text": "Name",
+								"name": "Header2"
+							},
+							"name": "Column2",
+							"footer": {
+								"name": "Footer2"
+							},
+							"width": 426
+						}
+					]
+				},
+				"bActionSkills": {
+					"type": "button",
+					"text": " ",
+					"top": 192,
+					"left": 422,
+					"width": 26,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionSkills.4dm",
+					"visibility": "visible"
+				},
+				"header_bkgd1": {
+					"type": "rectangle",
+					"top": 313,
+					"left": 4,
+					"width": 450,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"lbl_dataTable2": {
+					"type": "text",
+					"top": 320,
+					"left": 10,
+					"width": 278,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Tools",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"header_bkgd2": {
+					"type": "rectangle",
+					"top": 346,
+					"left": 4,
+					"width": 450,
+					"height": 85,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"bottom": 431
+				},
+				"List Box2": {
+					"type": "listbox",
+					"left": 7,
+					"top": 349,
+					"width": 443,
+					"height": 78,
+					"events": [
+						"onClick",
+						"onHeaderClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"scrollbarVertical": "visible",
+					"scrollbarHorizontal": "hidden",
+					"showHeaders": false,
+					"listboxType": "collection",
+					"alternateFill": "#F7F9FC",
+					"dataSource": "Form:C1466.lb_tools",
+					"selectionMode": "single",
+					"currentItemSource": "Form:C1466.currentTool",
+					"columns": [
+						{
+							"header": {
+								"text": "Name",
+								"name": "Header1"
+							},
+							"name": "Column1",
+							"footer": {
+								"name": "Footer1"
+							},
+							"width": 36,
+							"textAlign": "center"
+						},
+						{
+							"header": {
+								"name": "Header6",
+								"text": "Header6"
+							},
+							"name": "Column6",
+							"width": 390,
+							"footer": {
+								"name": "Footer6"
+							}
+						}
+					]
+				},
+				"bActionTools": {
+					"type": "button",
+					"text": " ",
+					"top": 317,
+					"left": 422,
+					"width": 26,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionTools.4dm",
+					"visibility": "visible"
+				},
+				"header_bkgd7": {
+					"type": "rectangle",
+					"top": 438,
+					"left": 4,
+					"width": 450,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"lbl_dataTable3": {
+					"type": "text",
+					"top": 445,
+					"left": 10,
+					"width": 278,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Parametric Measurement",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"header_bkgd8": {
+					"type": "rectangle",
+					"top": 471,
+					"left": 4,
+					"width": 450,
+					"height": 85,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"bottom": 556
+				},
+				"List Box3": {
+					"type": "listbox",
+					"left": 7,
+					"top": 474,
+					"width": 443,
+					"height": 78,
+					"events": [
+						"onClick",
+						"onHeaderClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"scrollbarVertical": "visible",
+					"scrollbarHorizontal": "hidden",
+					"showHeaders": false,
+					"listboxType": "collection",
+					"alternateFill": "#F7F9FC",
+					"dataSource": "Form:C1466.lb_pms",
+					"selectionMode": "single",
+					"currentItemSource": "Form:C1466.currentPM",
+					"columns": [
+						{
+							"header": {
+								"text": "Name",
+								"name": "Header3"
+							},
+							"name": "Column3",
+							"footer": {
+								"name": "Footer3"
+							},
+							"width": 426
+						}
+					]
+				},
+				"bActionPMs": {
+					"type": "button",
+					"text": " ",
+					"top": 442,
+					"left": 422,
+					"width": 26,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionPMs.4dm",
+					"visibility": "visible"
+				},
+				"header_bkgd10": {
+					"type": "rectangle",
+					"top": 129,
+					"left": 459,
+					"width": 450,
+					"height": 53,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent"
+				},
+				"header_bkgd11": {
+					"type": "rectangle",
+					"top": 96,
+					"left": 459,
+					"width": 450,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"lbl_comments2": {
+					"type": "text",
+					"top": 103,
+					"left": 465,
+					"width": 277,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Formatted Comments",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"label_smallLayout": {
+					"type": "text",
+					"top": 137,
+					"left": 467,
+					"width": 107,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Small Layout"
+				},
+				"entryField_smallLayout": {
+					"type": "input",
+					"top": 137,
+					"left": 580,
+					"width": 317,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.smallLayout",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "normal"
+				},
+				"label_largeLayout": {
+					"type": "text",
+					"top": 161,
+					"left": 467,
+					"width": 107,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Large Layout"
+				},
+				"entryField_largeLayout": {
+					"type": "input",
+					"top": 161,
+					"left": 580,
+					"width": 317,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.largeLayout",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "normal"
+				},
+				"header_bkgd12": {
+					"type": "rectangle",
+					"top": 188,
+					"left": 459,
+					"width": 450,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"lbl_dataTable4": {
+					"type": "text",
+					"top": 195,
+					"left": 465,
+					"width": 278,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Data Table",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"header_bkgd13": {
+					"type": "rectangle",
+					"top": 221,
+					"left": 459,
+					"width": 450,
+					"height": 85,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"bottom": 306
+				},
+				"List Box4": {
+					"type": "listbox",
+					"left": 462,
+					"top": 224,
+					"width": 443,
+					"height": 79,
+					"events": [
+						"onClick",
+						"onHeaderClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"scrollbarVertical": "visible",
+					"scrollbarHorizontal": "hidden",
+					"showHeaders": false,
+					"listboxType": "collection",
+					"alternateFill": "#F7F9FC",
+					"dataSource": "Form:C1466.lb_dataTables",
+					"selectionMode": "single",
+					"currentItemSource": "Form:C1466.currentDataTable",
+					"columns": [
+						{
+							"header": {
+								"text": "Name",
+								"name": "Header4"
+							},
+							"name": "Column4",
+							"footer": {
+								"name": "Footer4"
+							},
+							"width": 426
+						}
+					]
+				},
+				"bActionDataTables": {
+					"type": "button",
+					"text": " ",
+					"top": 192,
+					"left": 877,
+					"width": 26,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionDataTables.4dm",
+					"visibility": "visible"
+				},
+				"header_bkgd14": {
+					"type": "rectangle",
+					"top": 313,
+					"left": 459,
+					"width": 450,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"lbl_dataTable5": {
+					"type": "text",
+					"top": 320,
+					"left": 465,
+					"width": 278,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Bins Definition",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"header_bkgd15": {
+					"type": "rectangle",
+					"top": 346,
+					"left": 459,
+					"width": 450,
+					"height": 208,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"bottom": 554
+				},
+				"List Box5": {
+					"type": "listbox",
+					"left": 462,
+					"top": 349,
+					"width": 443,
+					"height": 202,
+					"events": [
+						"onClick",
+						"onHeaderClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"scrollbarVertical": "visible",
+					"scrollbarHorizontal": "hidden",
+					"showHeaders": false,
+					"listboxType": "collection",
+					"alternateFill": "#F7F9FC",
+					"dataSource": "Form:C1466.lb_bins",
+					"selectionMode": "single",
+					"currentItemSource": "Form:C1466.currentBin",
+					"columns": [
+						{
+							"header": {
+								"name": "Header7",
+								"text": "Header7"
+							},
+							"name": "Column7",
+							"width": 36,
+							"textAlign": "center",
+							"footer": {
+								"name": "Footer7"
+							}
+						},
+						{
+							"header": {
+								"text": "Name",
+								"name": "Header5"
+							},
+							"name": "Column5",
+							"footer": {
+								"name": "Footer5"
+							},
+							"width": 390
+						}
+					]
+				},
+				"bActionBins": {
+					"type": "button",
+					"text": " ",
+					"top": 317,
+					"left": 877,
+					"width": 26,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionBins.4dm",
+					"visibility": "visible"
 				}
 			}
 		},
-		null
+		{
+			"objects": {
+				"header_bkgd5": {
+					"type": "rectangle",
+					"top": 118,
+					"left": 4,
+					"width": 450,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"lbl_steps": {
+					"type": "text",
+					"top": 125,
+					"left": 10,
+					"width": 282,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Steps",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				}
+			}
+		}
 	],
-	"geometryStamp": 288,
+	"geometryStamp": 1511,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
@@ -343,5 +808,5 @@
 		}
 	},
 	"method": "method.4dm",
-	"inheritedForm": "sfw_bkgd_header_3lines"
+	"inheritedForm": "sfw_bkgd_header_2lines"
 }

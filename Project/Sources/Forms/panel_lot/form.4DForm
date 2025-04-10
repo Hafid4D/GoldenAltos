@@ -33,16 +33,6 @@
 	"pages": [
 		{
 			"objects": {
-				"header_bkgd": {
-					"type": "rectangle",
-					"top": 0,
-					"left": 0,
-					"width": 913,
-					"height": 94,
-					"sizingX": "grow",
-					"fill": "#A2C6D8",
-					"stroke": "transparent"
-				},
 				"label_0_1": {
 					"type": "text",
 					"top": 12,
@@ -69,22 +59,6 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"fontWeight": "bold"
-				},
-				"vTabBar_subform": {
-					"type": "subform",
-					"top": 94,
-					"left": 0,
-					"width": 50,
-					"height": 450,
-					"dataSource": "Form:C1466.vTabBar",
-					"detailForm": "sfw_vTabBar",
-					"hideFocusRing": true,
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "sfw_main_vTabBar_sfo"
 				},
 				"label_jobNumber": {
 					"type": "text",
@@ -315,7 +289,7 @@
 			"objects": {
 				"header_bkgd2": {
 					"type": "rectangle",
-					"top": 100,
+					"top": 118,
 					"left": 57,
 					"width": 332,
 					"height": 30,
@@ -326,7 +300,7 @@
 				},
 				"lbl_dates": {
 					"type": "text",
-					"top": 107,
+					"top": 125,
 					"left": 64,
 					"width": 250,
 					"height": 17,
@@ -337,7 +311,7 @@
 				},
 				"header_bkgd4": {
 					"type": "rectangle",
-					"top": 133,
+					"top": 151,
 					"left": 57,
 					"width": 332,
 					"height": 57,
@@ -348,7 +322,7 @@
 				},
 				"label_0_15": {
 					"type": "text",
-					"top": 141,
+					"top": 159,
 					"left": 65,
 					"width": 65,
 					"height": 17,
@@ -358,7 +332,7 @@
 				},
 				"label_0_16": {
 					"type": "text",
-					"top": 165,
+					"top": 183,
 					"left": 65,
 					"width": 65,
 					"height": 17,
@@ -368,7 +342,7 @@
 				},
 				"entryField_commit": {
 					"type": "input",
-					"top": 165,
+					"top": 183,
 					"left": 130,
 					"width": 80,
 					"height": 17,
@@ -388,7 +362,7 @@
 				},
 				"entryField_dateIn": {
 					"type": "input",
-					"top": 141,
+					"top": 159,
 					"left": 130,
 					"width": 80,
 					"height": 17,
@@ -408,7 +382,7 @@
 				},
 				"label_dateOut": {
 					"type": "text",
-					"top": 141,
+					"top": 159,
 					"left": 233,
 					"width": 60,
 					"height": 17,
@@ -417,7 +391,7 @@
 				},
 				"label_reCommit": {
 					"type": "text",
-					"top": 165,
+					"top": 183,
 					"left": 233,
 					"width": 60,
 					"height": 17,
@@ -426,7 +400,7 @@
 				},
 				"entryField_reCommit": {
 					"type": "input",
-					"top": 165,
+					"top": 183,
 					"left": 301,
 					"width": 80,
 					"height": 17,
@@ -446,7 +420,7 @@
 				},
 				"entryField_dateOut": {
 					"type": "input",
-					"top": 141,
+					"top": 159,
 					"left": 301,
 					"width": 80,
 					"height": 17,
@@ -466,7 +440,7 @@
 				},
 				"header_bkgd1": {
 					"type": "rectangle",
-					"top": 100,
+					"top": 118,
 					"left": 396,
 					"width": 510,
 					"height": 30,
@@ -477,7 +451,7 @@
 				},
 				"lbl_dates1": {
 					"type": "text",
-					"top": 107,
+					"top": 125,
 					"left": 403,
 					"width": 250,
 					"height": 17,
@@ -488,7 +462,7 @@
 				},
 				"header_bkgd3": {
 					"type": "rectangle",
-					"top": 133,
+					"top": 151,
 					"left": 396,
 					"width": 510,
 					"height": 57,
@@ -499,7 +473,7 @@
 				},
 				"label_0_2": {
 					"type": "text",
-					"top": 141,
+					"top": 159,
 					"left": 402,
 					"width": 60,
 					"height": 17,
@@ -508,7 +482,7 @@
 				},
 				"entryField_original": {
 					"type": "input",
-					"top": 141,
+					"top": 159,
 					"left": 474,
 					"width": 80,
 					"height": 17,
@@ -528,7 +502,7 @@
 				},
 				"label_dateOut1": {
 					"type": "text",
-					"top": 141,
+					"top": 159,
 					"left": 581,
 					"width": 70,
 					"height": 17,
@@ -537,7 +511,7 @@
 				},
 				"entryField_ourCount": {
 					"type": "input",
-					"top": 141,
+					"top": 159,
 					"left": 659,
 					"width": 80,
 					"height": 17,
@@ -557,7 +531,7 @@
 				},
 				"label_dateOut2": {
 					"type": "text",
-					"top": 141,
+					"top": 159,
 					"left": 770,
 					"width": 40,
 					"height": 17,
@@ -566,7 +540,7 @@
 				},
 				"entryField_az": {
 					"type": "input",
-					"top": 141,
+					"top": 159,
 					"left": 818,
 					"width": 80,
 					"height": 17,
@@ -587,7 +561,7 @@
 				},
 				"label_0_3": {
 					"type": "text",
-					"top": 165,
+					"top": 183,
 					"left": 402,
 					"width": 60,
 					"height": 17,
@@ -596,7 +570,7 @@
 				},
 				"entryField_progressive": {
 					"type": "input",
-					"top": 165,
+					"top": 183,
 					"left": 474,
 					"width": 80,
 					"height": 17,
@@ -616,7 +590,7 @@
 				},
 				"label_dateOut3": {
 					"type": "text",
-					"top": 165,
+					"top": 183,
 					"left": 581,
 					"width": 70,
 					"height": 17,
@@ -625,7 +599,7 @@
 				},
 				"entryField_totalTested": {
 					"type": "input",
-					"top": 165,
+					"top": 183,
 					"left": 659,
 					"width": 80,
 					"height": 17,
@@ -645,7 +619,7 @@
 				},
 				"label_dateOut4": {
 					"type": "text",
-					"top": 165,
+					"top": 183,
 					"left": 770,
 					"width": 40,
 					"height": 17,
@@ -654,7 +628,7 @@
 				},
 				"entryField_et": {
 					"type": "input",
-					"top": 165,
+					"top": 183,
 					"left": 818,
 					"width": 80,
 					"height": 17,
@@ -675,7 +649,7 @@
 				},
 				"header_bkgd5": {
 					"type": "rectangle",
-					"top": 197,
+					"top": 215,
 					"left": 57,
 					"width": 332,
 					"height": 30,
@@ -686,7 +660,7 @@
 				},
 				"lbl_dates2": {
 					"type": "text",
-					"top": 204,
+					"top": 222,
 					"left": 64,
 					"width": 250,
 					"height": 17,
@@ -697,7 +671,7 @@
 				},
 				"header_bkgd6": {
 					"type": "rectangle",
-					"top": 230,
+					"top": 248,
 					"left": 57,
 					"width": 332,
 					"height": 57,
@@ -708,7 +682,7 @@
 				},
 				"label_0_6": {
 					"type": "text",
-					"top": 238,
+					"top": 256,
 					"left": 65,
 					"width": 65,
 					"height": 17,
@@ -718,7 +692,7 @@
 				},
 				"label_0_7": {
 					"type": "text",
-					"top": 262,
+					"top": 280,
 					"left": 65,
 					"width": 65,
 					"height": 17,
@@ -728,7 +702,7 @@
 				},
 				"entryField_holdDate": {
 					"type": "input",
-					"top": 262,
+					"top": 280,
 					"left": 130,
 					"width": 80,
 					"height": 17,
@@ -748,7 +722,7 @@
 				},
 				"label_reCommit1": {
 					"type": "text",
-					"top": 262,
+					"top": 280,
 					"left": 233,
 					"width": 60,
 					"height": 17,
@@ -757,7 +731,7 @@
 				},
 				"entryField_holdTime": {
 					"type": "input",
-					"top": 262,
+					"top": 280,
 					"left": 301,
 					"width": 80,
 					"height": 17,
@@ -778,7 +752,7 @@
 				"Check Box": {
 					"type": "checkbox",
 					"text": "Lot on Hold",
-					"top": 233,
+					"top": 251,
 					"left": 131,
 					"width": 249,
 					"height": 24,
@@ -790,7 +764,7 @@
 				},
 				"header_bkgd7": {
 					"type": "rectangle",
-					"top": 294,
+					"top": 312,
 					"left": 57,
 					"width": 332,
 					"height": 30,
@@ -801,7 +775,7 @@
 				},
 				"lbl_dates3": {
 					"type": "text",
-					"top": 301,
+					"top": 319,
 					"left": 64,
 					"width": 250,
 					"height": 17,
@@ -812,7 +786,7 @@
 				},
 				"header_bkgd8": {
 					"type": "rectangle",
-					"top": 327,
+					"top": 345,
 					"left": 57,
 					"width": 332,
 					"height": 77,
@@ -823,7 +797,7 @@
 				},
 				"label_0_8": {
 					"type": "text",
-					"top": 335,
+					"top": 353,
 					"left": 65,
 					"width": 65,
 					"height": 17,
@@ -833,7 +807,7 @@
 				},
 				"label_0_9": {
 					"type": "text",
-					"top": 359,
+					"top": 377,
 					"left": 65,
 					"width": 65,
 					"height": 17,
@@ -843,7 +817,7 @@
 				},
 				"entryField_holdDate1": {
 					"type": "input",
-					"top": 359,
+					"top": 377,
 					"left": 130,
 					"width": 250,
 					"height": 17,
@@ -865,7 +839,7 @@
 				"Check Box1": {
 					"type": "checkbox",
 					"text": "OQA Done",
-					"top": 330,
+					"top": 348,
 					"left": 131,
 					"width": 249,
 					"height": 24,
@@ -877,7 +851,7 @@
 				},
 				"label_0_11": {
 					"type": "text",
-					"top": 383,
+					"top": 401,
 					"left": 65,
 					"width": 65,
 					"height": 17,
@@ -886,7 +860,7 @@
 				},
 				"entryField_holdDate2": {
 					"type": "input",
-					"top": 383,
+					"top": 401,
 					"left": 130,
 					"width": 250,
 					"height": 17,
@@ -906,7 +880,7 @@
 				},
 				"header_bkgd9": {
 					"type": "rectangle",
-					"top": 197,
+					"top": 215,
 					"left": 396,
 					"width": 510,
 					"height": 30,
@@ -917,7 +891,7 @@
 				},
 				"lbl_dates4": {
 					"type": "text",
-					"top": 204,
+					"top": 222,
 					"left": 403,
 					"width": 250,
 					"height": 17,
@@ -928,7 +902,7 @@
 				},
 				"header_bkgd10": {
 					"type": "rectangle",
-					"top": 230,
+					"top": 248,
 					"left": 396,
 					"width": 510,
 					"height": 262,
@@ -939,7 +913,7 @@
 				},
 				"label_0_10": {
 					"type": "text",
-					"top": 238,
+					"top": 256,
 					"left": 402,
 					"width": 83,
 					"height": 17,
@@ -949,7 +923,7 @@
 				},
 				"label_0_12": {
 					"type": "text",
-					"top": 262,
+					"top": 280,
 					"left": 402,
 					"width": 83,
 					"height": 17,
@@ -959,7 +933,7 @@
 				},
 				"entryField_commit1": {
 					"type": "input",
-					"top": 262,
+					"top": 280,
 					"left": 493,
 					"width": 406,
 					"height": 17,
@@ -978,7 +952,7 @@
 				},
 				"entryField_dateIn1": {
 					"type": "input",
-					"top": 238,
+					"top": 256,
 					"left": 493,
 					"width": 406,
 					"height": 17,
@@ -997,7 +971,7 @@
 				},
 				"label_0_14": {
 					"type": "text",
-					"top": 286,
+					"top": 304,
 					"left": 402,
 					"width": 83,
 					"height": 17,
@@ -1007,7 +981,7 @@
 				},
 				"entryField_commit2": {
 					"type": "input",
-					"top": 286,
+					"top": 304,
 					"left": 493,
 					"width": 406,
 					"height": 17,
@@ -1027,7 +1001,7 @@
 				},
 				"label_0_17": {
 					"type": "text",
-					"top": 310,
+					"top": 328,
 					"left": 402,
 					"width": 91,
 					"height": 17,
@@ -1037,7 +1011,7 @@
 				},
 				"entryField_jobComment": {
 					"type": "input",
-					"top": 310,
+					"top": 328,
 					"left": 493,
 					"width": 388,
 					"height": 171,
@@ -1062,7 +1036,7 @@
 				"lb_invoices": {
 					"type": "listbox",
 					"left": 57,
-					"top": 143,
+					"top": 159,
 					"width": 842,
 					"height": 370,
 					"events": [
@@ -1075,6 +1049,7 @@
 					"listboxType": "collection",
 					"visibility": "visible",
 					"dataSource": "Form:C1466.lb_steps",
+					"alternateFill": "#F7F9FC",
 					"columns": [
 						{
 							"header": {
@@ -1186,7 +1161,7 @@
 				"bActionLineItems1": {
 					"type": "button",
 					"text": "Actions",
-					"top": 522,
+					"top": 538,
 					"left": 56,
 					"width": 80,
 					"height": 21,
@@ -1202,7 +1177,7 @@
 				},
 				"header_bkgd16": {
 					"type": "rectangle",
-					"top": 102,
+					"top": 118,
 					"left": 57,
 					"width": 856,
 					"height": 30,
@@ -1213,11 +1188,11 @@
 				"Input3": {
 					"type": "input",
 					"left": 63,
-					"top": 109,
+					"top": 125,
 					"width": 187,
 					"height": 15,
 					"right": 250,
-					"bottom": 124,
+					"bottom": 140,
 					"enterable": false,
 					"contextMenu": "none",
 					"multiline": "no",
@@ -1229,20 +1204,10 @@
 			}
 		},
 		{
-			"objects": {
-				"Text2": {
-					"type": "text",
-					"text": "Inventory",
-					"top": 101,
-					"left": 57,
-					"width": 224,
-					"height": 17,
-					"fontWeight": "bold"
-				}
-			}
+			"objects": {}
 		}
 	],
-	"geometryStamp": 1078,
+	"geometryStamp": 1124,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
@@ -1250,5 +1215,6 @@
 		"views": {
 			"View 1": {}
 		}
-	}
+	},
+	"inheritedForm": "sfw_bkgd_header_3lines"
 }

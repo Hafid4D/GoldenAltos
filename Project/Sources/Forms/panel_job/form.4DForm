@@ -814,6 +814,7 @@
 					"listboxType": "collection",
 					"visibility": "visible",
 					"dataSource": "Form:C1466.lb_lineItems",
+					"alternateFill": "#F7F9FC",
 					"columns": [
 						{
 							"header": {
@@ -991,6 +992,7 @@
 					"visibility": "visible",
 					"dataSource": "Form:C1466.lb_lots",
 					"bottom": 528,
+					"alternateFill": "#F7F9FC",
 					"columns": [
 						{
 							"header": {
