@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE base SYSTEM "http://www.4d.com/dtd/2007/base.dtd" >
-<base name="golden_atos_erp" uuid="0710C58D863E45BD97ACF1AA415F7604" collation_locale="fr">
+<base name="golden_altos_erp" uuid="0710C58D863E45BD97ACF1AA415F7604" collation_locale="fr">
 	<schema name="DEFAULT_SCHEMA"/>
 	<table name="Contact" uuid="694C4B7F93874E5BA8093878C35952BF" id="1">
 		<field name="UUID" uuid="8EFDF2BE837542E3849ECB064F30C5BD" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -368,6 +368,9 @@
 		<field name="largeLayout" uuid="CD5AA4FB574CBF4CB36F9274DE50375E" type="10" limiting_length="255" never_null="true" id="8"/>
 		<field name="comment1" uuid="8BB0BEEBAB42CE4BB75167E78C1DFA87" type="10" limiting_length="255" never_null="true" id="9"/>
 		<field name="comment2" uuid="6035172B450A3A439FD3A26DE1B62B3F" type="10" limiting_length="255" never_null="true" id="10"/>
+		<field name="dataTables" uuid="468EEB0CF147B142864EBFD9A3055821" type="21" blob_switch_size="2147483647" never_null="true" id="11"/>
+		<field name="parametricMeasurements" uuid="47D9EF2D2F80E341AAB6B04FA7D076A0" type="21" blob_switch_size="2147483647" never_null="true" id="12"/>
+		<field name="bins" uuid="6B94872039983E44AE583BF9A056484B" type="21" blob_switch_size="2147483647" never_null="true" id="13"/>
 		<primary_key field_name="UUID" field_uuid="3E46CC22F2F34DC0B68C304E1BC47991"/>
 	</table>
 	<table name="ToolType" uuid="C0C5EF5A4CD04FF7BB3897793A9DE6ED" id="122">
@@ -381,6 +384,7 @@
 		<field name="UUID" uuid="4040F42F6150451FA3FB8EB06B445ED9" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_Tool" uuid="951D3770910B43BBBFCAB95E4B3A1C65" type="10" store_as_UUID="true" never_null="true" id="2"/>
 		<field name="UUID_StepTemplate" uuid="ABAA4737CB084A23A5749664C3DD08B2" type="10" store_as_UUID="true" never_null="true" id="3"/>
+		<field name="order" uuid="1B372B89F4C1BA40BB4A115CEEA3743E" type="4" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="4040F42F6150451FA3FB8EB06B445ED9"/>
 	</table>
 	<table name="Certification" uuid="71FD451F60934C9995C7A6D899CA2B51" id="124">
@@ -678,7 +682,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="11F0C8076E4447F69CE41059EC85B05C" name_Nto1="Link_18" name_1toN="Link_18_return" state="1">
+	<relation uuid="11F0C8076E4447F69CE41059EC85B05C" name_Nto1="toolType" name_1toN="stepTemplateTools" state="1">
 		<related_field kind="source">
 			<field_ref uuid="951D3770910B43BBBFCAB95E4B3A1C65" name="UUID_Tool">
 				<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
@@ -690,7 +694,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="50773C61D0C54171872ABA4C41154F1C" name_Nto1="Link_19" name_1toN="Link_19_return" state="1">
+	<relation uuid="50773C61D0C54171872ABA4C41154F1C" name_Nto1="stepTemplate" name_1toN="stepTemplateTools" state="1">
 		<related_field kind="source">
 			<field_ref uuid="ABAA4737CB084A23A5749664C3DD08B2" name="UUID_StepTemplate">
 				<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
