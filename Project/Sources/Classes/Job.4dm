@@ -20,4 +20,5 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("dateCreated"; "Created"; "width:100")
 	
 	$entry.setLBItemsOrderBy("jobNumber")
+	$entry.enableTransaction()
 	

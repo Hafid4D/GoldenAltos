@@ -21,4 +21,5 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("dateIn"; "Date In"; "width:80")
 	
 	$entry.setLBItemsOrderBy("stockNum")
+	$entry.enableTransaction()
 	

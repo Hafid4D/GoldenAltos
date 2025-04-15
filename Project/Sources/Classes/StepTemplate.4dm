@@ -15,3 +15,4 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("name"; "Step Template Name"; "width:100")
 	
 	$entry.setLBItemsOrderBy("name")
+	$entry.enableTransaction()

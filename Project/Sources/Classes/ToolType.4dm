@@ -19,5 +19,6 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("date"; "Date"; "width:100")
 	
 	$entry.setLBItemsOrderBy("name")
+	$entry.enableTransaction()
 	
 	

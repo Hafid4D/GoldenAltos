@@ -22,4 +22,5 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("dateOut"; "Date OUT"; "width:75"; "center")
 	
 	$entry.setLBItemsOrderBy("lotNumber")
+	$entry.enableTransaction()
 	
