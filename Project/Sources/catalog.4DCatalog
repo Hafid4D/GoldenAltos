@@ -854,6 +854,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="E53C2765B75493449D395F55702F48DB" name_Nto1="employee" name_1toN="quotes" state="1">
+		<related_field kind="source">
+			<field_ref uuid="0EACB0E17BBD4F639E0C142211979D18" name="UUID_Employee">
+				<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="DD376712F0CC41AFA671F1D6AF7D83D7" name="UUID">
+				<table_ref uuid="80CC55684C2F4451AC0751964F071A71" name="Employee"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="01619F9BF52940F3AFF8C52A4A82535D" type="3">
 		<field_ref uuid="951D3770910B43BBBFCAB95E4B3A1C65" name="UUID_Tool">
 			<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
@@ -1062,6 +1074,11 @@
 	<index kind="regular" uuid="8339E28F3F5B41FA858598E61416982E" type="3">
 		<field_ref uuid="97A931C563904FE28FBCA918138C2CAB" name="UUID_Job">
 			<table_ref uuid="2CC1E163267E4DFE808464C271CC4C9F" name="PurchaseOrderLine"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="878B8D90A6C2644D89B8883B80E40549" type="3">
+		<field_ref uuid="0EACB0E17BBD4F639E0C142211979D18" name="UUID_Employee">
+			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="896FD4EE0132488CA456E5EB29CC722B" type="7">
