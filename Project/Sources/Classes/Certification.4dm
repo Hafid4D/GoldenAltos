@@ -11,7 +11,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setSearchboxField("name")
 	
 	$entry.setPanel("panel_certification")
-	$entry.setPanelPage(1; ""; "Tools")
+	$entry.setPanelPage(1; ""; "Main")
 	
 	
 	$entry.setLBItemsColumn("ref"; "Ref #"; "width:50"; "center")
