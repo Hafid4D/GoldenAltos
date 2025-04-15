@@ -5,8 +5,8 @@ var $eDepartment : cs:C1710.DepartmentEntity
 $employee_Log:=Folder:C1567(fk data folder:K87:12).file("DataJson/employees.json")
 If ($employee_Log.exists)
 	$employees:=JSON Parse:C1218($employee_Log.getText())
-	TRUNCATE TABLE:C1051([Employee:6])
-	TRUNCATE TABLE:C1051([Department:7])
+	TRUNCATE TABLE:C1051([Employee:131])
+	TRUNCATE TABLE:C1051([Department:132])
 	
 	For each ($employee; $employees)
 		$eemployee:=ds:C1482.Employee.new()
