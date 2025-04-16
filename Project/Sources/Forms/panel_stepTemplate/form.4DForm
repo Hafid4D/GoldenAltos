@@ -144,7 +144,7 @@
 					],
 					"fontWeight": "bold",
 					"dataSourceTypeHint": "boolean",
-					"dataSource": "Form:C1466.current_item.binning"
+					"dataSource": "Form:C1466.current_item.status"
 				},
 				"entryField_binning": {
 					"type": "checkbox",
