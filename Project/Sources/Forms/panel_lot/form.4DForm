@@ -1033,23 +1033,30 @@
 		},
 		{
 			"objects": {
-				"lb_invoices": {
+				"lb_steps": {
 					"type": "listbox",
-					"left": 57,
-					"top": 159,
+					"left": 4,
+					"top": 160,
 					"width": 842,
 					"height": 370,
 					"events": [
 						"onClick",
-						"onHeaderClick",
+						"onDrop",
 						"onDataChange",
-						"onSelectionChange"
+						"onSelectionChange",
+						"onBeginDragOver"
 					],
 					"headerHeight": "24px",
 					"listboxType": "collection",
 					"visibility": "visible",
 					"dataSource": "Form:C1466.lb_steps",
 					"alternateFill": "#F7F9FC",
+					"method": "ObjectMethods/lb_steps.4dm",
+					"selectionMode": "single",
+					"dragging": "custom",
+					"dropping": "custom",
+					"currentItemSource": "Form:C1466.selectedLot",
+					"currentItemPositionSource": "Form:C1466.selectedLotPos",
 					"columns": [
 						{
 							"header": {
@@ -1161,8 +1168,8 @@
 				"bActionLineItems1": {
 					"type": "button",
 					"text": "Actions",
-					"top": 538,
-					"left": 56,
+					"top": 537,
+					"left": 4,
 					"width": 80,
 					"height": 21,
 					"events": [
@@ -1177,9 +1184,9 @@
 				},
 				"header_bkgd16": {
 					"type": "rectangle",
-					"top": 118,
-					"left": 57,
-					"width": 856,
+					"top": 119,
+					"left": 4,
+					"width": 904,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
@@ -1187,12 +1194,12 @@
 				},
 				"Input3": {
 					"type": "input",
-					"left": 63,
-					"top": 125,
+					"left": 10,
+					"top": 126,
 					"width": 187,
 					"height": 15,
-					"right": 250,
-					"bottom": 140,
+					"right": 197,
+					"bottom": 141,
 					"enterable": false,
 					"contextMenu": "none",
 					"multiline": "no",
@@ -1200,6 +1207,90 @@
 					"borderStyle": "none",
 					"dataSource": "\"Lot Steps (\"+String:C10(Form:C1466.lb_steps.length)+\")\"",
 					"fontWeight": "bold"
+				},
+				"btnMoveTop": {
+					"type": "button",
+					"text": " ",
+					"top": 204,
+					"left": 869,
+					"width": 26,
+					"height": 26,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/arrow-top.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnMoveTop.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
+				},
+				"btnMoveUp": {
+					"type": "button",
+					"text": " ",
+					"top": 237,
+					"left": 869,
+					"width": 26,
+					"height": 26,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/arrow-up.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnMoveUp.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
+				},
+				"btnMoveDown": {
+					"type": "button",
+					"text": " ",
+					"top": 270,
+					"left": 869,
+					"width": 26,
+					"height": 26,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/arrow-down.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnMoveDown.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
+				},
+				"btnMoveBottom": {
+					"type": "button",
+					"text": " ",
+					"top": 303,
+					"left": 869,
+					"width": 26,
+					"height": 26,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/arrow-bottom.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnMoveBottom.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
 				}
 			}
 		},
@@ -1207,7 +1298,7 @@
 			"objects": {}
 		}
 	],
-	"geometryStamp": 1124,
+	"geometryStamp": 1268,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
