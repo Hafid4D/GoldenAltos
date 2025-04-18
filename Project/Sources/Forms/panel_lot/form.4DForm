@@ -1071,7 +1071,8 @@
 							"width": 50,
 							"dataSource": "This:C1470.order",
 							"textAlign": "center",
-							"dataSourceTypeHint": "number"
+							"dataSourceTypeHint": "number",
+							"enterable": false
 						},
 						{
 							"header": {
@@ -1084,7 +1085,8 @@
 								"name": "Footer29"
 							},
 							"dataSource": "This:C1470.description",
-							"width": 255
+							"width": 255,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -1097,7 +1099,8 @@
 								"name": "Footer30"
 							},
 							"dataSource": "This:C1470.alert",
-							"width": 200
+							"width": 200,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -1113,7 +1116,8 @@
 							"width": 80,
 							"dataSourceTypeHint": "number",
 							"dateFormat": "short",
-							"textAlign": "center"
+							"textAlign": "center",
+							"enterable": false
 						},
 						{
 							"header": {
@@ -1129,7 +1133,8 @@
 							"width": 80,
 							"textAlign": "center",
 							"dataSourceTypeHint": "number",
-							"dateFormat": "short"
+							"dateFormat": "short",
+							"enterable": false
 						},
 						{
 							"header": {
@@ -1145,7 +1150,8 @@
 							"width": 80,
 							"dateFormat": "short",
 							"textAlign": "center",
-							"dataSourceTypeHint": "date"
+							"dataSourceTypeHint": "date",
+							"enterable": false
 						},
 						{
 							"header": {
@@ -1161,7 +1167,8 @@
 							"width": 80,
 							"dateFormat": "short",
 							"textAlign": "center",
-							"dataSourceTypeHint": "date"
+							"dataSourceTypeHint": "date",
+							"enterable": false
 						}
 					]
 				},

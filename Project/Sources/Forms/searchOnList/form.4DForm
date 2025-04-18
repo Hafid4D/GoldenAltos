@@ -81,7 +81,7 @@
 					"dataSource": "Form:C1466.lb_values",
 					"borderStyle": "solid",
 					"fill": "automatic",
-					"alternateFill": "#E8E8E8",
+					"alternateFill": "#F7F9FC",
 					"columns": [
 						{
 							"header": {
@@ -100,7 +100,8 @@
 						{
 							"header": {
 								"name": "Header2",
-								"text": "Description"
+								"text": "Description",
+								"fontWeight": "bold"
 							},
 							"name": "Column2",
 							"footer": {
@@ -109,7 +110,7 @@
 							"width": 267,
 							"resizable": false,
 							"enterable": false,
-							"dataSource": "This:C1470.description"
+							"dataSource": "This:C1470[Form:C1466.colName]"
 						}
 					]
 				},
@@ -151,13 +152,13 @@
 					"height": 16,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.searchQuoteLine",
+					"dataSource": "Form:C1466.searchLine",
 					"enterable": true,
 					"events": [
 						"onAfterKeystroke"
 					],
 					"method": "ObjectMethods/Input8.4dm",
-					"placeholder": "Quotes Search"
+					"placeholder": "Search ..."
 				},
 				"Button": {
 					"type": "button",

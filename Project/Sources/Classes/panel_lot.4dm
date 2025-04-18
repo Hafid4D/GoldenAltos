@@ -38,7 +38,8 @@ Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	
 Function loadLotSteps()
-	Form:C1466.lb_steps:=Form:C1466.current_item.steps.orderBy("order asc")
+	//Form.lb_steps:=Form.current_item.steps.orderBy("order asc")
+	Form:C1466.lb_steps:=ds:C1482.LotStep.query("UUID_Lot = :1"; Form:C1466.current_item.UUID).orderBy("order asc")
 	
 Function bActionSteps()
 	//Manages actions: add, or remove, using dynamic menus and modification checks
@@ -58,17 +59,43 @@ Function bActionSteps()
 		
 		APPEND MENU ITEM:C411($refMenu; "Add steps from step file")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--create_from_step_file")
-		DISABLE MENU ITEM:C150($refMenu; -1)
 		
 		$choose:=Dynamic pop up menu:C1006($refMenu)
 		
 		Case of 
 			: ($choose="--create_from_template")
+				$form:=New object:C1471()
+				
 				$winRef:=Open form window:C675("createStepFromTemplate"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 				DIALOG:C40("createStepFromTemplate"; $form)
 				CLOSE WINDOW:C154($winRef)
 				
 			: ($choose="--create_from_step_file")
+				$form:=New object:C1471("lotInfo"; New object:C1471("customer"; Form:C1466.current_item.customer))
+				
+				$winRef:=Open form window:C675("createStepFromStepFile"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+				DIALOG:C40("createStepFromStepFile"; $form)
+				CLOSE WINDOW:C154($winRef)
+				
+				If (ok=1)
+					For each ($step; $form.selectedSteps)
+						$step_o:=$step.toObject("description, alert, qtyIn, qtyOut, dateIn, dateOut")
+						
+						$step_new:=ds:C1482.LotStep.new()
+						
+						$step_new.fromObject($step_o)
+						
+						$step_new.UUID_Lot:=Form:C1466.current_item.UUID
+						$step_new.order:=Form:C1466.lb_steps.length+1
+						
+						$res:=$step_new.save()
+					End for each 
+					
+					This:C1470.loadLotSteps()
+					
+					This:C1470._activate_save_cancel_button()
+				End if 
+				
 			: ($choose="--edit")
 			: ($choose="--remove")
 		End case 

@@ -177,6 +177,7 @@
 					"dataSource": "Form:C1466.lots",
 					"method": "ObjectMethods/List Box.4dm",
 					"selectedItemsSource": "Form:C1466.selectedLots",
+					"alternateFill": "#F7F9FC",
 					"columns": [
 						{
 							"header": {
