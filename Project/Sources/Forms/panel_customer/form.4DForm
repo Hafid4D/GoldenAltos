@@ -393,7 +393,8 @@
 						"$ref": "/SOURCES/lists.json#/Carriers"
 					},
 					"saveAs": "value",
-					"focusable": true
+					"focusable": true,
+					"visibility": "hidden"
 				},
 				"Text2": {
 					"type": "text",
@@ -710,6 +711,25 @@
 					"borderStyle": "none",
 					"right": 1390,
 					"method": "ObjectMethods/entryField_statusContactType.4dm"
+				},
+				"pup_customerCarrier": {
+					"type": "button",
+					"top": 623,
+					"left": 143,
+					"width": 222,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Carrier",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_customerCarrier.4dm",
+					"events": [
+						"onClick"
+					]
 				}
 			},
 			"entryOrder": [
@@ -727,7 +747,8 @@
 				"entryField_statusContactType",
 				"entryField_statusContactValue",
 				"bActionApContact",
-				"bActionStatusContact"
+				"bActionStatusContact",
+				"pup_customerCarrier"
 			]
 		},
 		{
@@ -739,7 +760,7 @@
 		null,
 		null
 	],
-	"geometryStamp": 538,
+	"geometryStamp": 543,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

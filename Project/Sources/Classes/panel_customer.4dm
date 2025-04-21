@@ -41,7 +41,7 @@ Function pup_status()
 	//Create pop up menu
 	If (Form:C1466.sfw.checkIsInModification())
 		$menu:=Create menu:C408
-		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.quoteStatus=Null:C1517)
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.customerStatus=Null:C1517)
 			ds:C1482.CustomerStatus.cacheLoad()
 		End if 
 		
@@ -67,6 +67,50 @@ Function pup_status()
 	End if 
 	This:C1470.drawPup_CustomerStatus()
 	
+	
+	
+Function drawPup_CustomerCarrier()
+	If (Form:C1466.current_item#Null:C1517)
+		$customerCarrier:=ds:C1482.CustomerCarrier.query("carrierID= :1"; Form:C1466.current_item.IDT_carrier).first() || New object:C1471()
+		$statusName:=$customerCarrier.name
+		If ($statusName="")
+			$statusName:="Carrier"
+		End if 
+		$color:=cs:C1710.sfw_htmlColor.me.getName($customerCarrier.color)
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_customerCarrier"; $statusName; $pathIcon; ($customerCarrier=Null:C1517))
+	End if 
+	
+Function pup_carrier()
+	//Create pop up menu
+	If (Form:C1466.sfw.checkIsInModification())
+		$menu:=Create menu:C408
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.customerCarriers=Null:C1517)
+			ds:C1482.CustomerCarrier.cacheLoad()
+		End if 
+		
+		For each ($eCustomerCarrier; Storage:C1525.cache.customerCarriers)
+			APPEND MENU ITEM:C411($menu; $eCustomerCarrier.name; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $eCustomerCarrier.UUID)
+			If ($eCustomerCarrier.carrierID=Form:C1466.current_item.IDT_carrier)
+				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+				If (Is Windows:C1573)
+					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+				End if 
+			End if 
+		End for each 
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		Case of 
+			: ($choose#"")
+				$eCustomerCarrier:=ds:C1482.CustomerCarrier.get($choose)
+				Form:C1466.current_item.IDT_carrier:=$eCustomerCarrier.carrierID
+		End case 
+		
+	End if 
+	This:C1470.drawPup_CustomerCarrier()
+	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
@@ -76,6 +120,8 @@ Function redrawAndSetVisible()
 	OBJECT SET VISIBLE:C603(*; "bActionApContact"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET VISIBLE:C603(*; "bActionStatusContact"; Form:C1466.sfw.checkIsInModification())
 	This:C1470.drawPup_CustomerStatus()
+	This:C1470.drawPup_CustomerCarrier()
+	
 	
 Function contactDetails()
 	If (Form:C1466.current_item#Null:C1517)

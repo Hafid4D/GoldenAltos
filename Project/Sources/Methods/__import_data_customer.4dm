@@ -9,6 +9,7 @@ If ($customer_Log.exists)
 	TRUNCATE TABLE:C1051([Contact:1])
 	TRUNCATE TABLE:C1051([Customer:114])
 	TRUNCATE TABLE:C1051([CustomerStatus:130])
+	TRUNCATE TABLE:C1051([CustomerCarrier:7])
 	
 	$eCustomerStatus:=ds:C1482.CustomerStatus.new()
 	$eCustomerStatus.statusID:=1
@@ -33,6 +34,69 @@ If ($customer_Log.exists)
 	$eCustomerStatus.name:="Void"
 	$eCustomerStatus.color:=""
 	$eCustomerStatus.save()
+	
+	//----CustomerCarrier 
+	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
+	$eCustomerCarrier.carrierID:=1
+	$eCustomerCarrier.name:="GAC Driver"
+	$eCustomerCarrier.color:=""
+	$eCustomerCarrier.save()
+	
+	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
+	$eCustomerCarrier.carrierID:=2
+	$eCustomerCarrier.name:="Fed-Ex Priority"
+	$eCustomerCarrier.color:=""
+	$eCustomerCarrier.save()
+	
+	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
+	$eCustomerCarrier.carrierID:=3
+	$eCustomerCarrier.name:="fedex Std Overnight"
+	$eCustomerCarrier.color:=""
+	$eCustomerCarrier.save()
+	
+	
+	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
+	$eCustomerCarrier.carrierID:=4
+	$eCustomerCarrier.name:="fedex"
+	$eCustomerCarrier.color:=""
+	$eCustomerCarrier.save()
+	
+	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
+	$eCustomerCarrier.carrierID:=5
+	$eCustomerCarrier.name:="fedex Ground"
+	$eCustomerCarrier.color:=""
+	$eCustomerCarrier.save()
+	
+	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
+	$eCustomerCarrier.carrierID:=6
+	$eCustomerCarrier.name:="Customer Pickup"
+	$eCustomerCarrier.color:=""
+	$eCustomerCarrier.save()
+	
+	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
+	$eCustomerCarrier.carrierID:=7
+	$eCustomerCarrier.name:="UPS 2nd Day"
+	$eCustomerCarrier.color:=""
+	$eCustomerCarrier.save()
+	
+	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
+	$eCustomerCarrier.carrierID:=8
+	$eCustomerCarrier.name:="DHL"
+	$eCustomerCarrier.color:=""
+	$eCustomerCarrier.save()
+	
+	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
+	$eCustomerCarrier.carrierID:=9
+	$eCustomerCarrier.name:="UPS Next Day"
+	$eCustomerCarrier.color:=""
+	$eCustomerCarrier.save()
+	
+	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
+	$eCustomerCarrier.carrierID:=10
+	$eCustomerCarrier.name:="UPS Ground"
+	$eCustomerCarrier.color:=""
+	$eCustomerCarrier.save()
+	
 	
 	For each ($customer; $customers)
 		$eCustomer:=ds:C1482.Customer.new()
@@ -89,6 +153,13 @@ If ($customer_Log.exists)
 		$eCustomer.contactDetails.communications.push($comm)
 		
 		//--------------------------------------------------
+		$carrier:=ds:C1482.CustomerCarrier.query("name =:1"; Split string:C1554($customer.Carrier; "\r"; sk trim spaces:K86:2).join("\r"))
+		
+		If ($carrier.length>0)
+			$eCustomer.IDT_carrier:=$carrier[0].carrierID
+		Else 
+			$eCustomer.IDT_carrier:=0
+		End if 
 		
 		$eCustomer.carrier:=$customer.Carrier
 		$eCustomer.accountNum:=$customer.Account_num
@@ -155,6 +226,5 @@ If ($customer_Log.exists)
 	Else 
 		TRACE:C157
 	End if 
-	
 	
 End if 
