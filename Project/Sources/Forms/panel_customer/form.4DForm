@@ -115,6 +115,16 @@
 		},
 		{
 			"objects": {
+				"header_bkgd2": {
+					"type": "rectangle",
+					"top": 457,
+					"left": 482,
+					"width": 934,
+					"height": 384,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent"
+				},
 				"main_bkgd1": {
 					"type": "rectangle",
 					"top": 580,
@@ -383,17 +393,7 @@
 						"$ref": "/SOURCES/lists.json#/Carriers"
 					},
 					"saveAs": "value",
-					"focusable": false
-				},
-				"header_bkgd2": {
-					"type": "rectangle",
-					"top": 486,
-					"left": 482,
-					"width": 934,
-					"height": 355,
-					"sizingX": "fixed",
-					"fill": "#E4E4E4",
-					"stroke": "transparent"
+					"focusable": true
 				},
 				"Text2": {
 					"type": "text",
@@ -739,7 +739,7 @@
 		null,
 		null
 	],
-	"geometryStamp": 536,
+	"geometryStamp": 538,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

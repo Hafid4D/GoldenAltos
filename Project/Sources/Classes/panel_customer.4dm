@@ -21,19 +21,51 @@ Function formMethod()
 	End if 
 	
 	
-	
-	
 Function drawPup_XXX()
 	//This function updates the dropdown by displaying the name
 	Form:C1466.sfw.drawButtonPup("pup_xxx"; $xxxName; "xxxx.png"; (Form:C1466.current_item.xxxx=Null:C1517))
 	
+Function drawPup_CustomerStatus()
+	If (Form:C1466.current_item#Null:C1517)
+		$customerStatus:=ds:C1482.CustomerStatus.query("statusID= :1"; Form:C1466.current_item.IDT_status).first() || New object:C1471()
+		$statusName:=$customerStatus.name
+		If ($statusName="")
+			$statusName:="Status"
+		End if 
+		$color:=cs:C1710.sfw_htmlColor.me.getName($customerStatus.color)
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_customerStatus"; $statusName; $pathIcon; ($customerStatus=Null:C1517))
+	End if 
 	
 Function pup_status()
 	//Create pop up menu
 	If (Form:C1466.sfw.checkIsInModification())
+		$menu:=Create menu:C408
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.quoteStatus=Null:C1517)
+			ds:C1482.CustomerStatus.cacheLoad()
+		End if 
+		
+		For each ($eCustomerStatus; Storage:C1525.cache.customerStatus)
+			APPEND MENU ITEM:C411($menu; $eCustomerStatus.name; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $eCustomerStatus.UUID)
+			If ($eCustomerStatus.statusID=Form:C1466.current_item.IDT_status)
+				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+				If (Is Windows:C1573)
+					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+				End if 
+			End if 
+		End for each 
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		Case of 
+			: ($choose#"")
+				$eCustomerStatus:=ds:C1482.CustomerStatus.get($choose)
+				Form:C1466.current_item.IDT_status:=$eCustomerStatus.statusID
+		End case 
+		
 	End if 
-	This:C1470.drawPup_XXX()
-	
+	This:C1470.drawPup_CustomerStatus()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
@@ -43,7 +75,7 @@ Function redrawAndSetVisible()
 	This:C1470.contactDetails()
 	OBJECT SET VISIBLE:C603(*; "bActionApContact"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET VISIBLE:C603(*; "bActionStatusContact"; Form:C1466.sfw.checkIsInModification())
-	
+	This:C1470.drawPup_CustomerStatus()
 	
 Function contactDetails()
 	If (Form:C1466.current_item#Null:C1517)
@@ -82,7 +114,6 @@ Function LoadStatusContact()
 	
 Function bActionXXX()
 	//Manages actions: add, or remove, using dynamic menus and modification checks
-	
 	
 Function bActionApContact()
 	
@@ -130,7 +161,6 @@ Function bActionApContact()
 			End if 
 			
 	End case 
-	
 	
 Function bActionStatusContact()
 	
@@ -288,7 +318,6 @@ Function saveStatusContact()
 							$detail:=New object:C1471()
 							OB SET:C1220($detail; Form:C1466.current_statusContact.name; Form:C1466.current_statusContact.value)
 							OB SET:C1220(Form:C1466.current_item.contactDetails.communications[$i]; "detail"; $detail)
-							
 							
 						End if 
 						
