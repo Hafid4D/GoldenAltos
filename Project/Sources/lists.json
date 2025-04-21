@@ -1,0 +1,62 @@
+{
+	"Carriers": {
+		"editable": false,
+		"items": [
+			{
+				"text": "GAC Driver",
+				"ref": 1,
+				"editable": true
+			},
+			{
+				"text": "Fed-Ex Priority ",
+				"ref": 2,
+				"editable": true
+			},
+			{
+				"text": "fedex Std Overnight",
+				"ref": 3,
+				"editable": true
+			},
+			{
+				"text": "fedex",
+				"ref": 4,
+				"editable": true
+			},
+			{
+				"text": "fedex Ground",
+				"ref": 5,
+				"editable": true
+			},
+			{
+				"text": "Customer Pickup",
+				"ref": 6,
+				"editable": true
+			},
+			{
+				"text": "Fed-Ex Priority",
+				"ref": 7,
+				"editable": true
+			},
+			{
+				"text": "UPS 2nd Day",
+				"ref": 8,
+				"editable": true
+			},
+			{
+				"text": "DHL",
+				"ref": 9,
+				"editable": true
+			},
+			{
+				"text": "UPS Next Day",
+				"ref": 10,
+				"editable": true
+			},
+			{
+				"text": "UPS Ground",
+				"ref": 11,
+				"editable": true
+			}
+		]
+	}
+}

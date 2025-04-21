@@ -10,7 +10,6 @@ If ($customer_Log.exists)
 	TRUNCATE TABLE:C1051([Customer:114])
 	TRUNCATE TABLE:C1051([CustomerStatus:130])
 	
-	
 	$eCustomerStatus:=ds:C1482.CustomerStatus.new()
 	$eCustomerStatus.statusID:=1
 	$eCustomerStatus.name:="Active"
@@ -72,6 +71,25 @@ If ($customer_Log.exists)
 		$eCustomer.contactDetails.addresses.push($address)
 		
 		$eCustomer.contactDetails.communications:=New collection:C1472()
+		
+		//AP Contacts 
+		$comm:=New object:C1471()
+		$comm.type:="AP Contact"
+		$comm.detail:=New object:C1471()
+		$comm.detail.email:=$customer.AP_email
+		$eCustomer.contactDetails.communications.push($comm)
+		
+		//Status Contacts
+		$comm:=New object:C1471()
+		$comm.type:="Status Contact"
+		$comm.detail:=New object:C1471()
+		$comm.detail.ContactName:=$customer.Status_Contact
+		$comm.detail.phone:=$customer.Status_Tel
+		$comm.detail.email:=$customer.StatusEmailAddresses
+		$eCustomer.contactDetails.communications.push($comm)
+		
+		//--------------------------------------------------
+		
 		$eCustomer.carrier:=$customer.Carrier
 		$eCustomer.accountNum:=$customer.Account_num
 		$eCustomer.resaleLicenseNumber:=$customer.resaleLicenseNumber
