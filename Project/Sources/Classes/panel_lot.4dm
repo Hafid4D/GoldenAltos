@@ -39,7 +39,14 @@ Function redrawAndSetVisible()
 	
 Function loadLotSteps()
 	//Form.lb_steps:=Form.current_item.steps.orderBy("order asc")
+	Form:C1466.currentstep:=0
+	
 	Form:C1466.lb_steps:=ds:C1482.LotStep.query("UUID_Lot = :1"; Form:C1466.current_item.UUID).orderBy("order asc")
+	$currentstep:=Form:C1466.lb_steps.query("qtyIn = :1 AND qtyOut = :1 AND dateIn = :2 AND dateOut = :2"; 0; !00-00-00!).orderBy("order asc")
+	
+	If ($currentstep.length>0)
+		Form:C1466.currentstep:=$currentstep[0].order
+	End if 
 	
 Function bActionSteps()
 	//Manages actions: add, or remove, using dynamic menus and modification checks

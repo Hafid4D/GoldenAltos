@@ -1057,6 +1057,8 @@
 					"dropping": "custom",
 					"currentItemSource": "Form:C1466.selectedLot",
 					"currentItemPositionSource": "Form:C1466.selectedLotPos",
+					"metaSource": "",
+					"rowFillSource": "highlightCurrentStep",
 					"columns": [
 						{
 							"header": {
@@ -1298,6 +1300,22 @@
 					"visibility": "visible",
 					"iconFrames": 4,
 					"focusable": false
+				},
+				"Input1": {
+					"type": "input",
+					"left": 670,
+					"top": 126,
+					"width": 187,
+					"height": 15,
+					"right": 857,
+					"bottom": 141,
+					"enterable": false,
+					"contextMenu": "none",
+					"multiline": "no",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSource": "Form:C1466.currentstep",
+					"fontWeight": "bold"
 				}
 			}
 		},
@@ -1305,7 +1323,7 @@
 			"objects": {}
 		}
 	],
-	"geometryStamp": 1268,
+	"geometryStamp": 1302,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
