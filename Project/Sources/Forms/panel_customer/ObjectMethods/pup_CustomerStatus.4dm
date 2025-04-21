@@ -1,3 +1,3 @@
-//cs.panel_customer.me.pup_status()
+cs:C1710.panel_customer.me.pup_status()
 
 
