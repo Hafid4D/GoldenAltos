@@ -56,9 +56,12 @@ Function loadXXX()
 	//Loads and initializes a list
 	
 Function LoadApContact()
+	
 	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.lb_apContact:=New collection:C1472()
+		
 		If (Form:C1466.current_item.contactDetails#Null:C1517)
-			Form:C1466.lb_apContact:=New collection:C1472()
+			
 			Form:C1466.lb_apContact:=Form:C1466.current_item.rebuidComunications("AP Contact")
 			This:C1470.displayApContact()
 		End if 
@@ -67,8 +70,10 @@ Function LoadApContact()
 	
 Function LoadStatusContact()
 	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.lb_statusContact:=New collection:C1472()
+		
 		If (Form:C1466.current_item.contactDetails#Null:C1517)
-			Form:C1466.lb_statusContact:=New collection:C1472()
+			
 			Form:C1466.lb_statusContact:=Form:C1466.current_item.rebuidComunications("Status Contact")
 			This:C1470.displayStatusContact()
 		End if 
@@ -101,35 +106,7 @@ Function bActionApContact()
 	
 	Case of 
 		: ($choose="--addApContact")
-/*
-//$customer:=ds.Customer.query("UUID = :1"; Form.current_item.UUID).first()
-//OB SET($customer.contactDetails.communications[$i].detail; "type"; "contact value")
-//$info:=$customer.save()
-//Form.lb_apContact:=Form.current_item.rebuidComunications("AP Contact")
 			
-//$communications:=Form.current_item.contactDetails.communications
-//If ($communications#Null)
-//$contacts:=New collection()
-//For ($i; 0; $communications.length-1)
-			
-//If ($communications[$i].type="AP Contact")
-//End if 
-//End for 
-			
-//End if 
-			
-			
-			
-//$eQuoteLine:=ds.QuoteLine.new()
-//$eQuoteLine.UUID_Quote:=Form.current_item.UUID
-//$info:=$eQuoteLine.save()
-//This._activate_save_cancel_button()
-//Form.current_apContact:=$eQuoteLine
-//This.displayQuoteLine()
-//Form.apContact:=ds.QuoteLine.query("UUID_Quote == :1"; Form.current_item.UUID)
-//LISTBOX SELECT ROW(*; "lb_quoteLines"; Form.apContact.length; lk replace selection)
-//GOTO OBJECT(*; "entryField_quoteLineQuantity")
-*/
 			$contact:=New object:C1471()
 			
 			OB SET:C1220($contact; "name"; "type")
@@ -137,7 +114,7 @@ Function bActionApContact()
 			
 			Form:C1466.lb_apContact.push($contact)
 			LISTBOX INSERT ROWS:C913(*; "lb_apContact"; Form:C1466.lb_apContact.length; 1)
-			
+			This:C1470._activate_save_cancel_button()
 			LISTBOX SELECT ROW:C912(*; "lb_apContact"; Form:C1466.lb_apContact.length; lk replace selection:K53:1)
 			Form:C1466.current_apContact:=$contact
 			This:C1470.displayApContact()
@@ -150,16 +127,9 @@ Function bActionApContact()
 			If ($ok)
 				
 				
-				//Drop code
-				//$info:=Form.current_apContact.drop()
-				//This._activate_save_cancel_button()
-				//LISTBOX SELECT ROW(*; "lb_quoteLines"; 0; lk remove from selection)
-				Form:C1466.current_apContact:=Null:C1517
-				//This.displayQuoteLine()
 			End if 
 			
 	End case 
-*/
 	
 	
 Function bActionStatusContact()
@@ -181,7 +151,19 @@ Function bActionStatusContact()
 	$choose:=Dynamic pop up menu:C1006($mainMenu)
 	RELEASE MENU:C978($mainMenu)
 	
+	$contact:=New object:C1471()
 	
+	OB SET:C1220($contact; "name"; "type")
+	OB SET:C1220($contact; "value"; "contact value")
+	
+	Form:C1466.lb_statusContact.push($contact)
+	LISTBOX INSERT ROWS:C913(*; "lb_statusContact"; Form:C1466.lb_statusContact.length; 1)
+	This:C1470._activate_save_cancel_button()
+	LISTBOX SELECT ROW:C912(*; "lb_statusContact"; Form:C1466.lb_statusContact.length; lk replace selection:K53:1)
+	Form:C1466.current_statusContact:=$contact
+	This:C1470.displayStatusContact()
+	
+	GOTO OBJECT:C206(*; "entryField_statusContactType")
 	
 Function loadDpAddress()
 	Form:C1466.dpAddress:=New object:C1471(\
@@ -189,7 +171,6 @@ Function loadDpAddress()
 		"index"; 0; \
 		"currentValue"; "Billing Address"\
 		)
-	
 	
 Function displayApContact()
 	
@@ -200,9 +181,7 @@ Function displayApContact()
 		OBJECT SET VISIBLE:C603(*; "label_apContact@"; True:C214)
 		OBJECT SET VISIBLE:C603(*; "entryField_apContact@"; True:C214)
 		
-		
 	End if 
-	
 	
 Function displayStatusContact()
 	
@@ -213,13 +192,143 @@ Function displayStatusContact()
 		OBJECT SET VISIBLE:C603(*; "label_statusContact@"; True:C214)
 		OBJECT SET VISIBLE:C603(*; "entryField_statusContact@"; True:C214)
 		
+	End if 
+	
+Function _activate_save_cancel_button()
+	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+	
+Function saveAPContact()
+	var $detail : Object
+	var $communications : Collection
+	
+	If (Form:C1466.current_item.contactDetails=Null:C1517)
+		Form:C1466.current_item.contactDetails:=New object:C1471()
+	End if 
+	
+	If (OB Is defined:C1231(Form:C1466.current_item.contactDetails; "communications"))
+		$communications:=Form:C1466.current_item.contactDetails.communications
+		If ($communications.length>0)
+			$contacts:=New collection:C1472()
+			For ($i; 0; $communications.length-1)
+				If (OB Is defined:C1231($communications[$i]; "type"))
+					If ($communications[$i].type="AP Contact")
+						
+						If (OB Is defined:C1231($communications[$i]; "detail"))
+							
+							OB SET:C1220(Form:C1466.current_item.contactDetails.communications[$i].detail; Form:C1466.current_apContact.name; Form:C1466.current_apContact.value)
+							
+						Else 
+							
+							$detail:=New object:C1471()
+							OB SET:C1220($detail; Form:C1466.current_apContact.name; Form:C1466.current_apContact.value)
+							OB SET:C1220(Form:C1466.current_item.contactDetails.communications[$i]; "detail"; $detail)
+							
+						End if 
+						
+					End if 
+					
+				Else 
+					
+					OB SET:C1220(Form:C1466.current_item.contactDetails.communications[$i]; "type"; "AP Contact")
+					
+					$detail:=New object:C1471()
+					OB SET:C1220($detail; Form:C1466.current_apContact.name; Form:C1466.current_apContact.value)
+					OB SET:C1220(Form:C1466.current_item.contactDetails.communications[$i]; "detail"; $detail)
+					
+				End if 
+				
+			End for 
+			
+		Else 
+			
+			$comm:=New object:C1471()
+			$comm.type:="AP Contact"
+			$detail:=New object:C1471()
+			OB SET:C1220($detail; Form:C1466.current_apContact.name; Form:C1466.current_apContact.value)
+			$comm.detail:=$detail
+			Form:C1466.current_item.contactDetails.communications.push($comm)
+			
+		End if 
+		
+	Else 
+		
+		$comm:=New object:C1471()
+		$comm.type:="AP Contact"
+		$detail:=New object:C1471()
+		OB SET:C1220($detail; Form:C1466.current_apContact.name; Form:C1466.current_apContact.value)
+		$comm.detail:=$detail
+		$communications:=New collection:C1472()
+		$communications.push($comm)
+		Form:C1466.current_item.contactDetails.communications:=$communications
 		
 	End if 
 	
+Function saveStatusContact()
+	var $detail : Object
+	var $communications : Collection
 	
+	If (Form:C1466.current_item.contactDetails=Null:C1517)
+		Form:C1466.current_item.contactDetails:=New object:C1471()
+	End if 
 	
-	
-	
+	If (OB Is defined:C1231(Form:C1466.current_item.contactDetails; "communications"))
+		$communications:=Form:C1466.current_item.contactDetails.communications
+		If ($communications.length>0)
+			$contacts:=New collection:C1472()
+			For ($i; 0; $communications.length-1)
+				If (OB Is defined:C1231($communications[$i]; "type"))
+					If ($communications[$i].type="Status Contact")
+						
+						If (OB Is defined:C1231($communications[$i]; "detail"))
+							
+							OB SET:C1220(Form:C1466.current_item.contactDetails.communications[$i].detail; Form:C1466.current_statusContact.name; Form:C1466.current_statusContact.value)
+							
+						Else 
+							
+							$detail:=New object:C1471()
+							OB SET:C1220($detail; Form:C1466.current_statusContact.name; Form:C1466.current_statusContact.value)
+							OB SET:C1220(Form:C1466.current_item.contactDetails.communications[$i]; "detail"; $detail)
+							
+							
+						End if 
+						
+					End if 
+					
+				Else 
+					
+					OB SET:C1220(Form:C1466.current_item.contactDetails.communications[$i]; "type"; "Status Contact")
+					
+					$detail:=New object:C1471()
+					OB SET:C1220($detail; Form:C1466.current_statusContact.name; Form:C1466.current_statusContact.value)
+					OB SET:C1220(Form:C1466.current_item.contactDetails.communications[$i]; "detail"; $detail)
+					
+				End if 
+				
+			End for 
+			
+		Else 
+			
+			$comm:=New object:C1471()
+			$comm.type:="Status Contact"
+			$detail:=New object:C1471()
+			OB SET:C1220($detail; Form:C1466.current_statusContact.name; Form:C1466.current_statusContact.value)
+			$comm.detail:=$detail
+			Form:C1466.current_item.contactDetails.communications.push($comm)
+			
+		End if 
+		
+	Else 
+		
+		$comm:=New object:C1471()
+		$comm.type:="Status Contact"
+		$detail:=New object:C1471()
+		OB SET:C1220($detail; Form:C1466.current_statusContact.name; Form:C1466.current_statusContact.value)
+		$comm.detail:=$detail
+		$communications:=New collection:C1472()
+		$communications.push($comm)
+		Form:C1466.current_item.contactDetails.communications:=$communications
+		
+	End if 
 	
 	
 	

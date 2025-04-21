@@ -158,8 +158,8 @@
 				},
 				"header_bkgd3": {
 					"type": "rectangle",
-					"top": 124,
-					"left": 0,
+					"top": 122,
+					"left": 2,
 					"width": 1415,
 					"height": 337,
 					"sizingX": "fixed",
@@ -425,7 +425,7 @@
 				"lb_apContact": {
 					"type": "listbox",
 					"left": 599,
-					"top": 496,
+					"top": 503,
 					"width": 337,
 					"height": 124,
 					"events": [
@@ -631,7 +631,8 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"right": 1390
+					"right": 1390,
+					"method": "ObjectMethods/entryField_apContactValue.4dm"
 				},
 				"entryField_statusContactValue": {
 					"type": "input",
@@ -649,7 +650,8 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"right": 1390
+					"right": 1390,
+					"method": "ObjectMethods/entryField_statusContactValue.4dm"
 				},
 				"entryField_apContactType": {
 					"type": "input",
@@ -667,7 +669,8 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"right": 1390
+					"right": 1390,
+					"method": "ObjectMethods/entryField_apContactType.4dm"
 				},
 				"label_apContactValue": {
 					"type": "text",
@@ -705,21 +708,27 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"right": 1390
-				},
-				"bSave": {
-					"type": "button",
-					"text": "Save",
-					"top": 566,
-					"left": 1334,
-					"width": 50,
-					"height": 30,
-					"events": [
-						"onClick"
-					],
-					"method": "ObjectMethods/bSave.4dm"
+					"right": 1390,
+					"method": "ObjectMethods/entryField_statusContactType.4dm"
 				}
-			}
+			},
+			"entryOrder": [
+				"Popup Dropdown List",
+				"entryField_name2",
+				"entryField_code3",
+				"entryField_code4",
+				"entryField_code1",
+				"entryField_code2",
+				"Popup Dropdown List1",
+				"lb_apContact",
+				"entryField_apContactType",
+				"entryField_apContactValue",
+				"lb_statusContact",
+				"entryField_statusContactType",
+				"entryField_statusContactValue",
+				"bActionApContact",
+				"bActionStatusContact"
+			]
 		},
 		{
 			"objects": {}
@@ -730,7 +739,7 @@
 		null,
 		null
 	],
-	"geometryStamp": 528,
+	"geometryStamp": 536,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
