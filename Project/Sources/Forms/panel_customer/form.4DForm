@@ -108,7 +108,8 @@
 					"style": "bevel",
 					"method": "ObjectMethods/pup_CustomerStatus.4dm",
 					"events": [
-						"onClick"
+						"onClick",
+						"onDisplayDetail"
 					]
 				}
 			}
@@ -119,7 +120,7 @@
 					"type": "rectangle",
 					"top": 457,
 					"left": 482,
-					"width": 934,
+					"width": 1087,
 					"height": 384,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
@@ -145,49 +146,15 @@
 					"fill": "#E4E4E4",
 					"stroke": "transparent"
 				},
-				"header_bkgd1": {
-					"type": "rectangle",
-					"top": 91,
-					"left": 1,
-					"width": 1415,
-					"height": 30,
-					"sizingX": "fixed",
-					"fill": "#A2C6D8",
-					"stroke": "transparent"
-				},
-				"lbl_address": {
-					"type": "text",
-					"top": 99,
-					"left": 12,
-					"width": 250,
-					"height": 17,
-					"stroke": "#000000",
-					"text": "Addresses",
-					"fontSize": 12,
-					"fontWeight": "bold"
-				},
 				"header_bkgd3": {
 					"type": "rectangle",
-					"top": 122,
-					"left": 2,
-					"width": 1415,
+					"top": 121,
+					"left": 0,
+					"width": 1569,
 					"height": 337,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
 					"stroke": "transparent"
-				},
-				"Popup Dropdown List": {
-					"type": "dropdown",
-					"left": 12,
-					"top": 136,
-					"width": 125,
-					"height": 18,
-					"events": [
-						"onLoad",
-						"onDataChange"
-					],
-					"method": "ObjectMethods/Popup Dropdown List.4dm",
-					"dataSource": "Form:C1466.dpAddress"
 				},
 				"shipping_bkgd": {
 					"type": "rectangle",
@@ -290,7 +257,7 @@
 					"type": "rectangle",
 					"top": 458,
 					"left": 482,
-					"width": 934,
+					"width": 1087,
 					"height": 30,
 					"sizingX": "grow",
 					"fill": "#A2C6D8",
@@ -728,12 +695,83 @@
 					"style": "bevel",
 					"method": "ObjectMethods/pup_customerCarrier.4dm",
 					"events": [
+						"onLoad",
 						"onClick"
 					]
+				},
+				"header_bkgd1": {
+					"type": "rectangle",
+					"top": 92,
+					"left": 0,
+					"width": 1569,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"lbl_address": {
+					"type": "text",
+					"top": 99,
+					"left": 12,
+					"width": 250,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Addresses",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"subFormAddress": {
+					"type": "subform",
+					"left": 12,
+					"top": 154,
+					"width": 779,
+					"height": 261,
+					"detailForm": "sfw_subpanel_addressSingle",
+					"borderStyle": "none",
+					"dataSource": "Form:C1466.subFormAddress"
+				},
+				"rbBilling1": {
+					"type": "radio",
+					"text": "Billing",
+					"top": 128,
+					"left": 12,
+					"width": 127,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "bevel",
+					"dataSource": "Form:C1466.addressBilling",
+					"radioGroup": "address",
+					"fontSize": 11,
+					"focusable": false,
+					"method": "ObjectMethods/rbBilling1.4dm",
+					"icon": "Images/user.png",
+					"iconFrames": 1,
+					"textPlacement": "right"
+				},
+				"rbShipping1": {
+					"type": "radio",
+					"text": "Shipping",
+					"top": 127,
+					"left": 138,
+					"width": 127,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "bevel",
+					"dataSource": "Form:C1466.addressShipping",
+					"radioGroup": "address",
+					"fontSize": 11,
+					"focusable": false,
+					"method": "ObjectMethods/rbShipping1.4dm",
+					"icon": "Images/building.png",
+					"iconFrames": 1,
+					"textPlacement": "right"
 				}
 			},
 			"entryOrder": [
-				"Popup Dropdown List",
 				"entryField_name2",
 				"entryField_code3",
 				"entryField_code4",
@@ -748,7 +786,10 @@
 				"entryField_statusContactValue",
 				"bActionApContact",
 				"bActionStatusContact",
-				"pup_customerCarrier"
+				"pup_customerCarrier",
+				"subFormAddress",
+				"rbBilling1",
+				"rbShipping1"
 			]
 		},
 		{
@@ -760,7 +801,7 @@
 		null,
 		null
 	],
-	"geometryStamp": 543,
+	"geometryStamp": 585,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

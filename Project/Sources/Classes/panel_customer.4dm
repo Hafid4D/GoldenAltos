@@ -29,7 +29,7 @@ Function drawPup_CustomerStatus()
 	If (Form:C1466.current_item#Null:C1517)
 		$customerStatus:=ds:C1482.CustomerStatus.query("statusID= :1"; Form:C1466.current_item.IDT_status).first() || New object:C1471()
 		$statusName:=$customerStatus.name
-		If ($statusName="")
+		If ($statusName=Null:C1517)
 			$statusName:="Status"
 		End if 
 		$color:=cs:C1710.sfw_htmlColor.me.getName($customerStatus.color)
@@ -72,13 +72,13 @@ Function pup_status()
 Function drawPup_CustomerCarrier()
 	If (Form:C1466.current_item#Null:C1517)
 		$customerCarrier:=ds:C1482.CustomerCarrier.query("carrierID= :1"; Form:C1466.current_item.IDT_carrier).first() || New object:C1471()
-		$statusName:=$customerCarrier.name
-		If ($statusName="")
-			$statusName:="Carrier"
+		$carrierName:=$customerCarrier.name
+		If ($carrierName=Null:C1517)
+			$carrierName:="Carrier"
 		End if 
 		$color:=cs:C1710.sfw_htmlColor.me.getName($customerCarrier.color)
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
-		Form:C1466.sfw.drawButtonPup("pup_customerCarrier"; $statusName; $pathIcon; ($customerCarrier=Null:C1517))
+		Form:C1466.sfw.drawButtonPup("pup_customerCarrier"; $carrierName; $pathIcon; ($customerCarrier=Null:C1517))
 	End if 
 	
 Function pup_carrier()

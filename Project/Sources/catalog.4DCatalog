@@ -54,6 +54,15 @@
 		<field name="name" uuid="4ABD00DB48B7A1459C049A14E6C57F14" type="10" limiting_length="255" never_null="true" id="3"/>
 		<primary_key field_name="UUID" field_uuid="E33DA69061AB7744853A3E6B6DF6BB8D"/>
 	</table>
+	<table name="CustomerCarrier" uuid="4EB6C9D117A3DC4B91D031D6BC0C7DA9" id="7">
+		<field name="UUID" uuid="319814755AB5A945864EA37F29F3FDE1" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="carrierID" uuid="B16B9E9117F74E4D836B97A7A8CDE8F6" type="3" unique="true" never_null="true" id="2">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="name" uuid="7350D8E27C53FF449E9F614B54838D45" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="color" uuid="5023C7854EFE3C439CCC1FC54AC8A82B" type="10" limiting_length="255" never_null="true" id="4"/>
+		<primary_key field_name="UUID" field_uuid="319814755AB5A945864EA37F29F3FDE1"/>
+	</table>
 	<table name="sfw_Country" uuid="4C0E0D9D33D246BAB1FACEEC19ABF144" id="15" prevent_journaling="true">
 		<field name="UUID" uuid="FDA14E8A26704F7091EC668E332108FB" type="10" unique="true" autogenerate="true" store_as_UUID="true" id="1"/>
 		<field name="name" uuid="FEDEAAD3F9A64D8AA7049B2EA9699D2C" type="10" limiting_length="255" id="2"/>
@@ -474,7 +483,7 @@
 	</table>
 	<table name="CustomerStatus" uuid="CF8DC4373C97487884111398B4383812" id="130">
 		<field name="UUID" uuid="9C6030E6F9384C39A4FDB9E6453F235A" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="statusID" uuid="F4CD905FEF414ED89C867A2B79E6A86C" type="3" never_null="true" id="2"/>
+		<field name="statusID" uuid="F4CD905FEF414ED89C867A2B79E6A86C" type="3" unique="true" never_null="true" id="2"/>
 		<field name="name" uuid="D70524542D0D493384E1685A954A93FB" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="color" uuid="8DC2C4691C634726B48B6698EC206261" type="10" limiting_length="255" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="9C6030E6F9384C39A4FDB9E6453F235A"/>
@@ -1011,6 +1020,11 @@
 			<table_ref uuid="B0A466FC99334B96B5FE810BAE186DC4" name="InventoryPull"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="56055D62FB10E34284F6A64FDAB1B5C4" type="7">
+		<field_ref uuid="319814755AB5A945864EA37F29F3FDE1" name="UUID">
+			<table_ref uuid="4EB6C9D117A3DC4B91D031D6BC0C7DA9" name="CustomerCarrier"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="57F95AF53AB44C97AAA2C51262041B51" type="7">
 		<field_ref uuid="5520537F6684489F9BB29D56C4A9F2C6" name="UUID">
 			<table_ref uuid="348628FCA4DC451085D7519B226BD509" name="QuoteLine"/>
@@ -1029,6 +1043,11 @@
 	<index kind="regular" unique_keys="true" uuid="6718C9EE46DA4250ADE66AB7BAA72EEB" type="7">
 		<field_ref uuid="8EFDF2BE837542E3849ECB064F30C5BD" name="UUID">
 			<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="6B32C8DEC9CEEB449F96F5750E84D233" type="3">
+		<field_ref uuid="B16B9E9117F74E4D836B97A7A8CDE8F6" name="carrierID">
+			<table_ref uuid="4EB6C9D117A3DC4B91D031D6BC0C7DA9" name="CustomerCarrier"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="6BA10E032C4043CBA47A614905563474" type="1">
@@ -1079,6 +1098,11 @@
 	<index kind="regular" uuid="878B8D90A6C2644D89B8883B80E40549" type="3">
 		<field_ref uuid="0EACB0E17BBD4F639E0C142211979D18" name="UUID_Employee">
 			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="88B26D6CFC3F2E4CA5FCF09883CCA88D" type="3">
+		<field_ref uuid="F4CD905FEF414ED89C867A2B79E6A86C" name="statusID">
+			<table_ref uuid="CF8DC4373C97487884111398B4383812" name="CustomerStatus"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="896FD4EE0132488CA456E5EB29CC722B" type="7">
