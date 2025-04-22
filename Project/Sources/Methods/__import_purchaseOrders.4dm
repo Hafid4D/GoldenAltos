@@ -2,7 +2,7 @@
 /**
 import po & po lines (po <-- po_lines)
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([PurchaseOrder:115])
 	TRUNCATE TABLE:C1051([PurchaseOrderLine:116])
 	TRUNCATE TABLE:C1051([Invoice:4])
@@ -32,6 +32,13 @@ If (False:C215)
 		$po.timeBillingRate:=$record.timeBillingRate
 		$po.timeBilling:=$record.timeBilling
 		$po.description:=$record.description
+		
+		var $customer : Object
+		$customer:=ds:C1482.Customer.query("name =:1"; $record.customer_name).first()
+		If ($customer#Null:C1517)
+			$po.UUID_Customer:=$customer.UUID
+			
+		End if 
 		
 		$res:=$po.save()
 		

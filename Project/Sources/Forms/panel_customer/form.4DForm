@@ -793,15 +793,219 @@
 			]
 		},
 		{
-			"objects": {}
+			"objects": {
+				"lb_POs": {
+					"type": "listbox",
+					"left": 2,
+					"top": 92,
+					"width": 1718,
+					"height": 700,
+					"events": [
+						"onClick",
+						"onDataChange",
+						"onSelectionChange",
+						"onHeaderClick",
+						"onBeginDragOver"
+					],
+					"listboxType": "collection",
+					"currentItemPositionSource": "Form:C1466.selectedPOPos",
+					"currentItemSource": "Form:C1466.selectedPO",
+					"dataSource": "Form:C1466.lb_POs",
+					"method": "ObjectMethods/lb_POs.4dm",
+					"selectionMode": "single",
+					"resizingMode": "rightToLeft",
+					"alternateFill": "#E6E6E6",
+					"horizontalLineStroke": "transparent",
+					"borderStyle": "none",
+					"verticalLineStroke": "transparent",
+					"headerHeight": "2em",
+					"columns": [
+						{
+							"header": {
+								"text": "Division",
+								"name": "Header5",
+								"fontWeight": "bold"
+							},
+							"name": "Column5",
+							"footer": {
+								"name": "Footer5"
+							},
+							"dataSource": "This:C1470.division"
+						},
+						{
+							"header": {
+								"name": "Header6",
+								"text": "PO Date",
+								"fontWeight": "bold"
+							},
+							"name": "Column6",
+							"footer": {
+								"name": "Footer6"
+							},
+							"dataSource": "This:C1470.PO_date"
+						},
+						{
+							"header": {
+								"name": "Header7",
+								"text": "PO Number",
+								"fontWeight": "bold"
+							},
+							"name": "Column7",
+							"footer": {
+								"name": "Footer7"
+							},
+							"dataSource": "This:C1470.poNumber"
+						},
+						{
+							"header": {
+								"name": "Header8",
+								"text": "PO Identifier",
+								"fontWeight": "bold"
+							},
+							"name": "Column8",
+							"footer": {
+								"name": "Footer8"
+							},
+							"dataSource": "This:C1470.identifier"
+						},
+						{
+							"header": {
+								"name": "Header9",
+								"text": "Original Amount",
+								"fontWeight": "bold"
+							},
+							"name": "Column9",
+							"footer": {
+								"name": "Footer9"
+							},
+							"dataSource": "This:C1470.poAmount"
+						},
+						{
+							"header": {
+								"name": "Header10",
+								"text": "Billed Amount",
+								"fontWeight": "bold"
+							},
+							"name": "Column10",
+							"footer": {
+								"name": "Footer10"
+							},
+							"dataSource": "This:C1470.amountBilled"
+						},
+						{
+							"header": {
+								"name": "Header11",
+								"text": "Invoices",
+								"fontWeight": "bold"
+							},
+							"name": "Column11",
+							"footer": {
+								"name": "Footer11"
+							},
+							"dataSource": "This:C1470.Invoices"
+						}
+					]
+				}
+			}
 		},
-		null,
+		{
+			"objects": {
+				"lb_Jobs": {
+					"type": "listbox",
+					"left": 2,
+					"top": 92,
+					"width": 1718,
+					"height": 700,
+					"events": [
+						"onClick",
+						"onDataChange",
+						"onSelectionChange",
+						"onHeaderClick",
+						"onBeginDragOver"
+					],
+					"listboxType": "collection",
+					"currentItemPositionSource": "Form:C1466.selectedJobPos",
+					"currentItemSource": "Form:C1466.selectedJob",
+					"dataSource": "Form:C1466.lb_Jobs",
+					"method": "ObjectMethods/lb_Jobs.4dm",
+					"selectionMode": "single",
+					"resizingMode": "rightToLeft",
+					"horizontalLineStroke": "transparent",
+					"alternateFill": "#E6E6E6",
+					"borderStyle": "none",
+					"verticalLineStroke": "transparent",
+					"right": 1720,
+					"columns": [
+						{
+							"header": {
+								"text": "Date Created",
+								"name": "Header12",
+								"fontWeight": "bold"
+							},
+							"name": "Column12",
+							"footer": {
+								"name": "Footer12"
+							},
+							"dataSource": "This:C1470.dateCreated"
+						},
+						{
+							"header": {
+								"name": "Header13",
+								"text": "Job Number",
+								"fontWeight": "bold"
+							},
+							"name": "Column13",
+							"footer": {
+								"name": "Footer13"
+							},
+							"dataSource": "This:C1470.jobNumber"
+						},
+						{
+							"header": {
+								"name": "Header14",
+								"text": "PO Number",
+								"fontWeight": "bold"
+							},
+							"name": "Column14",
+							"footer": {
+								"name": "Footer14"
+							},
+							"dataSource": "This:C1470.poNumber"
+						},
+						{
+							"header": {
+								"name": "Header15",
+								"text": "Process",
+								"fontWeight": "bold"
+							},
+							"name": "Column15",
+							"footer": {
+								"name": "Footer15"
+							},
+							"dataSource": "This:C1470.process"
+						},
+						{
+							"header": {
+								"name": "Header16",
+								"text": "Qualifier",
+								"fontWeight": "bold"
+							},
+							"name": "Column16",
+							"footer": {
+								"name": "Footer16"
+							},
+							"dataSource": "This:C1470.poAmount"
+						}
+					]
+				}
+			}
+		},
 		null,
 		null,
 		null,
 		null
 	],
-	"geometryStamp": 585,
+	"geometryStamp": 626,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
