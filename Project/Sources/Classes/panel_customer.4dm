@@ -16,10 +16,21 @@ Function formMethod()
 				This:C1470.LoadStatusContact()
 				
 			: (FORM Get current page:C276(*)=2)
-				This:C1470.LoadPOs()
+				This:C1470.loadPOs()
 				
 			: (FORM Get current page:C276(*)=3)
-				This:C1470.LoadJobs()
+				This:C1470.loadJobs()
+				
+			: (FORM Get current page:C276(*)=4)
+				This:C1470.loadPlaning()
+				
+			: (FORM Get current page:C276(*)=5)
+				
+				
+			: (FORM Get current page:C276(*)=6)
+				
+				
+			: (FORM Get current page:C276(*)=7)
 				
 				
 		End case 
@@ -166,106 +177,29 @@ Function LoadStatusContact()
 	End if 
 	
 	
-Function LoadPOs()
+Function loadPOs()
 	If (Form:C1466.current_item#Null:C1517)
 		Form:C1466.lb_POs:=ds:C1482.PurchaseOrder.query("UUID_Customer = :1"; Form:C1466.current_item.UUID).orderBy("poNumber")
 		
 	End if 
 	
-	
-Function LoadJobs()
+Function loadJobs()
 	
 	If (Form:C1466.current_item#Null:C1517)
 		Form:C1466.lb_Jobs:=ds:C1482.Job.query("customer = :1"; Form:C1466.current_item.name).orderBy("dateCreated")
 		
 	End if 
 	
+Function loadPlaning()
+	
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.lb_Planning:=ds:C1482.Lot.query("customer = :1"; Form:C1466.current_item.name).orderBy("lotNumber")
+		
+	End if 
+	
 	
 Function bActionXXX()
 	//Manages actions: add, or remove, using dynamic menus and modification checks
-	
-Function bActionPOs()
-/*
-If (Form.sfw.checkIsInModification())
-$refMenu:=Create menu
-	
-APPEND MENU ITEM($refMenu; "Create a P from template")
-SET MENU ITEM PARAMETER($refMenu; -1; "--create_from_template")
-	
-APPEND MENU ITEM($refMenu; "Edit a step")
-SET MENU ITEM PARAMETER($refMenu; -1; "--edit")
-DISABLE MENU ITEM($refMenu; -1)
-	
-APPEND MENU ITEM($refMenu; "Remove a step")
-SET MENU ITEM PARAMETER($refMenu; -1; "--remove")
-DISABLE MENU ITEM($refMenu; -1)
-	
-APPEND MENU ITEM($refMenu; "Add steps from step file")
-SET MENU ITEM PARAMETER($refMenu; -1; "--create_from_step_file")
-	
-$choose:=Dynamic pop up menu($refMenu)
-	
-Case of 
-: ($choose="--create_from_template")
-$form:=New object()
-	
-$winRef:=Open form window("createStepFromTemplate"; Plain form window; Horizontally centered; Vertically centered)
-DIALOG("createStepFromTemplate"; $form)
-CLOSE WINDOW($winRef)
-	
-: ($choose="--create_from_step_file")
-$form:=New object("lotInfo"; New object("customer"; Form.current_item.customer))
-	
-$winRef:=Open form window("createStepFromStepFile"; Plain form window; Horizontally centered; Vertically centered)
-DIALOG("createStepFromStepFile"; $form)
-CLOSE WINDOW($winRef)
-	
-If (ok=1)
-For each ($step; $form.selectedSteps)
-$step_o:=$step.toObject("description, alert, qtyIn, qtyOut, dateIn, dateOut")
-	
-$step_new:=ds.LotStep.new()
-	
-$step_new.fromObject($step_o)
-	
-$step_new.UUID_Lot:=Form.current_item.UUID
-$step_new.order:=Form.lb_steps.length+1
-	
-$res:=$step_new.save()
-End for each 
-	
-This.loadLotSteps()
-	
-This._activate_save_cancel_button()
-End if 
-	
-: ($choose="--edit")
-: ($choose="--remove")
-End case 
-	
-Else 
-$refMenu:=Create menu
-	
-APPEND MENU ITEM($refMenu; "Create a step from template")
-SET MENU ITEM PARAMETER($refMenu; -1; "--create_from_template")
-DISABLE MENU ITEM($refMenu; -1)
-	
-APPEND MENU ITEM($refMenu; "(Edit a step")
-SET MENU ITEM PARAMETER($refMenu; -1; "--edit")
-DISABLE MENU ITEM($refMenu; -1)
-	
-APPEND MENU ITEM($refMenu; "(Remove a step")
-SET MENU ITEM PARAMETER($refMenu; -1; "--remove")
-DISABLE MENU ITEM($refMenu; -1)
-	
-APPEND MENU ITEM($refMenu; "(Add steps from step file")
-SET MENU ITEM PARAMETER($refMenu; -1; "--create_from_step_file")
-DISABLE MENU ITEM($refMenu; -1)
-	
-$choose:=Dynamic pop up menu($refMenu)
-End if 
-*/
-	
 	
 Function bActionApContact()
 	
