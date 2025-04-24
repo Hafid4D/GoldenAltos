@@ -7,4 +7,8 @@ End use
 $visions:=cs:C1710.sfw_definition.me.visions
 cs:C1710.sfw_userManager.me.onStartup()
 cs:C1710.sfw_notificationManager.me.onStartup()
+
+//set default language to english
+SET DATABASE LOCALIZATION:C1104("en")
+
 sfw_scheduler_delayedLaunch
