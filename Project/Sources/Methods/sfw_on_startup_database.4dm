@@ -13,6 +13,9 @@ ds:C1482.dataMaintenance()
 cs:C1710.sfw_userManager.me.onStartup()
 cs:C1710.sfw_notificationManager.me.onStartup()
 
+//set default language to english
+SET DATABASE LOCALIZATION:C1104("en")
+
 sfw_cs_register_client
 sfw_toolbar_launch
 sfw_scheduler_delayedLaunch
