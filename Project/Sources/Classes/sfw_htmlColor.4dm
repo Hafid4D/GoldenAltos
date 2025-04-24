@@ -1,3 +1,6 @@
+property colors : Collection
+
+
 shared singleton Class constructor
 	
 	This:C1470.load()
@@ -27,6 +30,22 @@ shared Function load()
 				$color.rgb:=Formula from string:C1601("0x"+Substring:C12($color.hex; 2)).call()
 			End use 
 		End for each 
+		For each ($color; This:C1470.colors)
+			$file:=File:C1566("/RESOURCES/sfw/colors/"+$color.name+"-circle.png"; fk posix path:K87:1)
+			If (Not:C34($file.exists))
+				$svg:=SVG_New(22; 22)  // SVG_New(24; 24)
+				$rect:=SVG_New_circle($svg; 11; 11; 6; $color.name; $color.name; 1)
+				SVG EXPORT TO PICTURE:C1017($svg; $pict; Copy XML data source:K45:17)
+				SVG_CLEAR($svg)
+				PICTURE TO BLOB:C692($pict; $blob; ".png")
+				$file.setContent($blob)
+			Else 
+				READ PICTURE FILE:C678($file.platformPath; $pict)
+			End if 
+			Use ($color)
+				$color.pictureCircle:=$pict
+			End use 
+		End for each 
 	End if 
 	
 shared Function getColorPictureByColor($color : Text)->$pict : Picture
@@ -50,8 +69,7 @@ shared Function getName($hex : Text)->$name : Text
 	End if 
 	
 shared Function deployPup($hex : Text)->$color : Object
-	
-	If (sfw_checkIsInModification)
+	If (Form:C1466.sfw.checkIsInModification())
 		
 		$lastDominant:=""
 		$menusToRelease:=New collection:C1472

@@ -33,16 +33,6 @@
 	"pages": [
 		{
 			"objects": {
-				"header_bkgd": {
-					"type": "rectangle",
-					"top": 0,
-					"left": 0,
-					"width": 713,
-					"height": 93,
-					"sizingX": "grow",
-					"fill": "#D9D9D9",
-					"stroke": "transparent"
-				},
 				"Texte": {
 					"type": "text",
 					"top": 9,
@@ -149,22 +139,6 @@
 					"events": [
 						"onDataChange"
 					]
-				},
-				"vTabBar_subform": {
-					"type": "subform",
-					"top": 92,
-					"left": 0,
-					"width": 50,
-					"height": 187,
-					"dataSource": "Form:C1466.vTabBar",
-					"detailForm": "sfw_vTabBar",
-					"hideFocusRing": true,
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/vTabBar_subform.4dm"
 				}
 			}
 		},
@@ -172,10 +146,10 @@
 			"objects": {
 				"address_L1C1": {
 					"type": "button",
-					"top": 121,
-					"left": 127,
-					"width": 102,
-					"height": 20,
+					"top": 154,
+					"left": 83,
+					"width": 106,
+					"height": 21,
 					"fontFamily": "System Font",
 					"fontSize": 11,
 					"focusable": false,
@@ -191,10 +165,10 @@
 				},
 				"Texte4": {
 					"type": "text",
-					"top": 99,
-					"left": 57,
+					"top": 133,
+					"left": 15,
 					"width": 270,
-					"height": 17,
+					"height": 21,
 					"stroke": "#888888",
 					"text": ":xliff:address.format"
 				}
@@ -202,16 +176,23 @@
 		},
 		null
 	],
-	"geometryStamp": 2,
+	"geometryStamp": 5,
 	"$4d": {
 		"version": "1",
 		"kind": "form"
 	},
 	"editor": {
+		"groups": {
+			"Group": [
+				"address_L1C1",
+				"Texte4"
+			]
+		},
 		"activeView": "View 1",
 		"defaultView": "View 1",
 		"views": {
 			"View 1": {}
 		}
-	}
+	},
+	"inheritedForm": "sfw_bkgd_header_3lines"
 }

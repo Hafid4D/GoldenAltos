@@ -1,6 +1,12 @@
 property ident : Text
 property label : Text
 property xliff : Text
+property labelSingle : Text
+property searchfields : Collection
+property dataclass : Text
+property searchbox : Object
+property icon : Text
+property launchingExpression : Text
 
 Class constructor($ident : Text; $vision_ident : Variant; $labelPlurial : Text; $labelSingle : Text)
 	
@@ -27,6 +33,7 @@ Class constructor($ident : Text; $vision_ident : Variant; $labelPlurial : Text; 
 	This:C1470.itemListOutsides:=New collection:C1472
 	This:C1470.views:=New collection:C1472
 	This:C1470.allowFavorite:=True:C214
+	This:C1470.allowDocument:=False:C215
 	This:C1470.multiselection:=False:C215
 	This:C1470.allowedProfiles:=New collection:C1472
 	This:C1470.allowedProfilesForCreation:=New collection:C1472
@@ -45,8 +52,9 @@ Function setDataclass($dataclass : Text)
 	End if 
 	
 	
-Function setIcon($iconRelativePath : Text)
+Function setIcon($iconRelativePath : Text; $iconAlternativePath : Text)
 	This:C1470.icon:=$iconRelativePath
+	This:C1470.iconAlternative:=$iconAlternativePath
 	
 	
 Function setToolBarGroup($ident : Text; $label : Text; $icon : Text; $displayOrder : Integer)
@@ -553,6 +561,12 @@ Function activateFavorite($activate : Boolean)
 	End if 
 	
 	
+Function activateDocument()
+	This:C1470.allowDocument:=True:C214
+	$pageDocuments:=cs:C1710.sfw_definitionPageDocuments.new("pageDocument")
+	This:C1470.setPanelDynamicPage(This:C1470.panel.pages.length+1; ""; "Documents"; $pageDocuments)  //XLIFF
+	
+	
 Function allowMultiSelectionInLB($allow : Boolean)
 	
 	If (Count parameters:C259=0)
@@ -589,4 +603,44 @@ Function setAllowedProfilesForModification( ...  : Text)
 		This:C1470.allowedProfilesForModification.push(${$p})
 	End for 
 	
+	
+	
+Function setSearchField( ...  : Text)
+	var $searchfield : Object:=New object:C1471
+	var $p : Integer
+	
+	This:C1470.searchfields:=This:C1470.searchfields || New collection:C1472
+	
+	For ($p; 1; Count parameters:C259)
+		$param:=${$p}
+		$parts:=Split string:C1554($param; ":")
+		$selector:=$parts.shift()
+		Case of 
+			: ($selector="attribute")
+				$searchfield.attribute:=$parts[0]
+			: ($selector="path")
+				$searchfield.path:=$parts[0]
+			: ($selector="placeHolder")
+				$searchfield.placeHolder:=$parts[0]
+			: ($selector="tag") || ($selector="tags")
+				If ($parts.length=1)
+					$searchfield.tag:=$parts[0]
+				Else 
+					$searchfield.tags:=$parts
+				End if 
+			: ($selector="onlyWithTag")
+				$searchfield.onlyWithTag:=True:C214
+			: ($selector="time")
+				$searchfield.type:=Is time:K8:8
+			: ($selector="date")
+				$searchfield.type:=Is date:K8:7
+		End case 
+	End for 
+	This:C1470.searchfields.push($searchfield)
+	
+	
+	
+Function setLaunchingExpression($expression : Text)
+	
+	This:C1470.launchingExpression:=$expression
 	

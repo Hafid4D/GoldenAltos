@@ -1,3 +1,7 @@
+property lb_items : Collection
+property searchbox : Text
+property entry : cs:C1710.sfw_definitionEntry
+
 Class extends sfw
 
 Class constructor()
@@ -13,13 +17,19 @@ Function initOnLoad()
 	OBJECT SET VISIBLE:C603(*; "searchbox_@"; (This:C1470.entry.searchbox#Null:C1517))
 	OBJECT SET BORDER STYLE:C1262(*; "searchbox_roundRectangle"; Border None:K42:27)
 	
-	OBJECT SET FORMAT:C236(*; "bIcon_entry"; This:C1470.entry.label+";#"+This:C1470.entry.icon+";0;0;0;1;0;0;0;0;0;0;1")
+	$file:=Folder:C1567(fk resources folder:K87:11).file(This:C1470.entry.icon)
+	READ PICTURE FILE:C678($file.platformPath; vIcon)
+	vIcon:=vIcon*0.75
+	OBJECT SET FORMAT:C236(*; "bIcon_entry"; This:C1470.entry.label+";vIcon;0;0;0;1;0;0;0;0;0;0;1")
+	//OBJECT SET FORMAT(*; "bIcon_entry"; This.entry.label+";#"+This.entry.icon+";0;0;0;1;0;0;0;0;0;0;1")
 	
 	$color:=This:C1470.vision.toolbar.color
 	
 	This:C1470.changeTopBarColor($color)
 	
 	cs:C1710.sfw_window.me.setWindowTitle()
+	
+	This:C1470._resizeMainWindow()
 	
 	
 Function lb_items_define()
@@ -116,6 +126,14 @@ Function lb_items_define()
 				
 				$columnFormula:="String:C10(This."+$column.attribute+";"+String:C10($column.formatDate+Blank if null date:K1:9)+")"
 				
+			: ($column.type="bool") || ($column.type="boolean")
+				$columnType:=Is boolean:K8:9
+				If ($column.formula=Null:C1517)
+					$columnFormula:="Bool(This."+$column.attribute+")"
+				Else 
+					$columnFormula:=$column.formula
+				End if 
+				
 			: ($column.type="flag")
 				$columnType:=Is picture:K8:10
 				Use ($column)
@@ -138,10 +156,13 @@ Function lb_items_define()
 		End if 
 		
 		LISTBOX INSERT COLUMN FORMULA:C970(*; "lb_items"; 1000; $columnName; $columnFormula; $columnType; $headerName; $nil)
-		If ($columnType=Is text:K8:3)
-			LISTBOX SET PROPERTY:C1440(*; $columnName; lk multi style:K53:71; lk yes:K53:69)
-			LISTBOX SET PROPERTY:C1440(*; $columnName; lk truncate:K53:37; lk without ellipsis:K53:64)
-		End if 
+		Case of 
+			: ($columnType=Is text:K8:3)
+				LISTBOX SET PROPERTY:C1440(*; $columnName; lk multi style:K53:71; lk yes:K53:69)
+				LISTBOX SET PROPERTY:C1440(*; $columnName; lk truncate:K53:37; lk without ellipsis:K53:64)
+			: ($columnType=Is boolean:K8:9)
+				OBJECT SET FORMAT:C236(*; $columnName; " ")
+		End case 
 		OBJECT SET TITLE:C194(*; $headerName; ds:C1482.sfw_readXliff($column.xliff; $column.label))
 		If ($column.width#Null:C1517)
 			LISTBOX SET COLUMN WIDTH:C833(*; $columnName; Num:C11($column.width))
@@ -200,17 +221,21 @@ Function displayDefaultPanel()
 			OBJECT SET SUBFORM:C1138(*; "detail_panel"; $panel)
 			Form:C1466.lastPanelDisplayed:=String:C10($panel)
 			
-		: (Form:C1466.sfw.entry.panelIfNoItemSelected#Null:C1517) && (Form:C1466.filterByProjection=False:C215) && ((Form:C1466.current_lb_item_selected.length=0) || (Form:C1466.current_item=Null:C1517)) && (Form:C1466.lastPanelDisplayed#Form:C1466.sfw.entry.panelIfNoItemSelected)
-			Form:C1466.subForm.sfw:=Form:C1466.sfw
-			$panel:=Form:C1466.sfw.entry.panelIfNoItemSelected
-			OBJECT SET SUBFORM:C1138(*; "detail_panel"; $panel)
-			Form:C1466.lastPanelDisplayed:=String:C10($panel)
+		: (Form:C1466.sfw.entry.panelIfNoItemSelected#Null:C1517) && (Form:C1466.filterByProjection=False:C215) && ((Form:C1466.current_lb_item_selected.length=0) || (Form:C1466.current_item=Null:C1517))
+			
+			If (Form:C1466.lastPanelDisplayed#Form:C1466.sfw.entry.panelIfNoItemSelected)
+				Form:C1466.subForm.sfw:=Form:C1466.sfw
+				$panel:=Form:C1466.sfw.entry.panelIfNoItemSelected
+				OBJECT SET SUBFORM:C1138(*; "detail_panel"; $panel)
+				Form:C1466.lastPanelDisplayed:=String:C10($panel)
+			End if 
 			
 		: ($current_panel#"sfw_panel_default")
 			OBJECT SET SUBFORM:C1138(*; "detail_panel"; "sfw_panel_default")
 			Form:C1466.lastPanelDisplayed:=String:C10("sfw_panel_default")
 			
 	End case 
+	
 	
 	
 Function lb_items_search()
@@ -331,22 +356,58 @@ Function lb_items_doEvent()
 	var $previousItem : 4D:C1709.Entity
 	
 	Case of 
-		: (FORM Event:C1606.code=On Clicked:K2:4) & (Right click:C712)
+		: (FORM Event:C1606.code=On Double Clicked:K2:5)
+			If (Form:C1466.current_lb_item_pos#0) & (Not:C34(Bool:C1537(cs:C1710.sfw_definition.me.globalParameters.mainInterface.disableDoubleClickLbItems)))
+				Form:C1466.sfw.openInANewWindow(Form:C1466.sfw.lb_items[Form:C1466.current_lb_item_pos-1]; Form:C1466.sfw.vision.ident; Form:C1466.sfw.entry.ident)
+			End if 
+			
+		: (FORM Event:C1606.code=On Clicked:K2:4) & (Right click:C712) & (Not:C34(Bool:C1537(cs:C1710.sfw_definition.me.globalParameters.mainInterface.disableContectualMenuLbItems)))
 			
 			$refMenus:=New collection:C1472
 			$refMenu:=Create menu:C408
 			$refMenus.push($refMenu)
+			APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("main.unselectedAll"; "Unselect all"); *)  //XLIFF OK
+			SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--unselectAll")
+			SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/unselectAll-24x24.png")
 			
-			APPEND MENU ITEM:C411($refMenu; "Open in a new window..."; *)
-			//SET MENU ITEM PARAMETER($refMenu; -1; )
+			APPEND MENU ITEM:C411($refMenu; "-")
+			APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("main.openNewWindow"; "Open in a new window..."); *)  //XLIFF OK
+			SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/openWindow-24x24.png")
+			SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--open")
+			If (Form:C1466.current_lb_item_pos=0)
+				DISABLE MENU ITEM:C150($refMenu; -1)
+			End if 
+			
+			$refMenuAction:=This:C1470._buildMenuAction($refMenus)
+			If (Count menu items:C405($refMenuAction)>0)
+				APPEND MENU ITEM:C411($refMenu; "-")
+				APPEND MENU ITEM:C411($refMenu; "Actions"; $refMenuAction; *)  //XLIFF OK
+				SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/action-24x24.png")
+			End if 
+			
+			$refMenuProjection:=This:C1470._buildMenuProjection($refMenus)
+			If (Count menu items:C405($refMenuProjection)>0)
+				APPEND MENU ITEM:C411($refMenu; "-")
+				APPEND MENU ITEM:C411($refMenu; "Projection"; $refMenuProjection; *)  //XLIFF OK
+				SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/projection-24x24.png")
+			End if 
 			
 			$choose:=Dynamic pop up menu:C1006($refMenu)
 			For each ($refMenu; $refMenus)
 				RELEASE MENU:C978($refMenu)
 			End for each 
 			
+			This:C1470._executeMenuAction($choose)
+			This:C1470._executeMenuProjection($choose)
 			Case of 
-				: ($choose#"")
+				: ($choose="--unselectAll")
+					Form:C1466.current_lb_item_pos:=0
+					Form:C1466.current_item:=Null:C1517
+					LISTBOX SELECT ROW:C912(*; "lb_items"; 0; lk remove from selection:K53:3)
+					This:C1470.lb_items_selectionChange()
+					
+				: ($choose="--open")
+					Form:C1466.sfw.openInANewWindow(Form:C1466.sfw.lb_items[Form:C1466.current_lb_item_pos-1]; Form:C1466.sfw.vision.ident; Form:C1466.sfw.entry.ident)
 					
 			End case 
 			
@@ -460,8 +521,12 @@ Function lb_items_doEvent()
 		: (FORM Event:C1606.code=On Header Click:K2:40)
 			$headerButton:=OBJECT Get pointer:C1124(Object named:K67:5; FORM Event:C1606.headerName)
 			$columnNum:=Num:C11(Split string:C1554(FORM Event:C1606.headerName; "_").pop())
-			$column:=This:C1470.view.lb_items.columns[$columnNum-1]
-			
+			$group:=Form:C1466.itemListColumnGroups.query("columnNum = :1"; FORM Event:C1606.column).first()
+			If ($group=Null:C1517)
+				$column:=This:C1470.view.lb_items.columns[$columnNum-1]
+			Else 
+				$column:=Form:C1466.sfw.view.lb_items.columns.query("group=:1"; $group.group)[$group.case-1]
+			End if 
 			$orderBy:=""
 			If ($column.orderBy#Null:C1517)
 				Case of 
@@ -656,6 +721,39 @@ Function virtual_lb_items_doEvent_rightClick()
 Function vSplitter()
 	Form:C1466.subForm:=Form:C1466.subForm
 	
+Function _resizeMainWindow()
+	var $windowSize : Object
+	var $toolbarHeight:=76
+	
+	$windowSize:=cs:C1710.sfw_definition.me.globalParameters.mainInterface.window
+	If ($windowSize#Null:C1517)
+		GET WINDOW RECT:C443($winLeft; $winTop; $winRight; $winBottom)
+		$width:=$windowSize.width-($winRight-$winLeft)
+		$height:=$windowSize.height-($winBottom-$winTop)
+		RESIZE FORM WINDOW:C890($width; $height)
+		
+		GET WINDOW RECT:C443($winLeft; $winTop; $winRight; $winBottom)
+		$winWidth:=$winRight-$winLeft
+		$winHeight:=$winBottom-$winTop
+		
+		If ($windowSize.left#Null:C1517)
+			SET WINDOW RECT:C444($windowSize.left; $windowSize.top; $windowSize.left+$winWidth; $windowSize.top+$winHeight)
+			
+		Else 
+			SCREEN COORDINATES:C438($screenLeft; $screenTop; $screenRight; $screenBottom; Screen work area:K27:10)
+			
+			$screenWidth:=$screenRight-$screenLeft
+			$screenHeight:=$screenBottom-$screenTop
+			
+			$newLeft:=($screenWidth-$winWidth)/2
+			$newRight:=$newLeft+$winWidth
+			$newTop:=($screenHeight-$winHeight)/2+$toolbarHeight
+			$newBottom:=$newTop+$winHeight-$toolbarHeight
+			SET WINDOW RECT:C444($newLeft; $newTop; $newRight; $newBottom)
+		End if 
+	End if 
+	
+	
 	//mark:- PupViews management
 Function _displayPupViews()
 	OBJECT GET COORDINATES:C663(*; "bkgd_topBar"; $left; $top; $right; $bottom)
@@ -776,7 +874,7 @@ Function clicEntryLabel()
 	If (Form:C1466.sfw.entry.allowFavorite) || (Form:C1466.projection#Null:C1517)
 		
 		$refMenu:=Create menu:C408
-		APPEND MENU ITEM:C411($refMenu; "No restriction"; *)  //xliff
+		APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("entry.noResctriction"; "No restriction"); *)  //xliff OK
 		If (Form:C1466.filterByFavorite=False:C215) && (Form:C1466.filterByProjection=False:C215)
 			SET MENU ITEM MARK:C208($refMenu; -1; Char:C90(18))
 		End if 
@@ -784,7 +882,7 @@ Function clicEntryLabel()
 		SET MENU ITEM ICON:C984($refMenu; -1; "path:/RESOURCES/sfw/image/picto/book-brown.png")
 		
 		If (Form:C1466.sfw.entry.allowFavorite)
-			APPEND MENU ITEM:C411($refMenu; "Only my favorites"; *)  //xliff
+			APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("entry.onlyFavorites"; "Only my favorites"); *)  //xliff OK
 			If (Form:C1466.filterByFavorite)
 				SET MENU ITEM MARK:C208($refMenu; -1; Char:C90(18))
 			End if 
@@ -1290,6 +1388,60 @@ Function pupFilterClic()
 				End case 
 			End for 
 			
+			
+		: ($filter.filterByBooleanExpression)
+			$refMenu:=Create menu:C408
+			
+			APPEND MENU ITEM:C411($refMenu; $filter.defaultTitle; *)
+			SET MENU ITEM PARAMETER:C1004($refMenu; -1; "all")
+			If ($filter.selectedBooleanValue=Null:C1517)
+				SET MENU ITEM MARK:C208($refMenu; -1; Char:C90(18))
+			End if 
+			APPEND MENU ITEM:C411($refMenu; "-")
+			APPEND MENU ITEM:C411($refMenu; $filter.labelForTrue; *)
+			SET MENU ITEM PARAMETER:C1004($refMenu; -1; "true")
+			If ($filter.selectedBooleanValue=True:C214)
+				SET MENU ITEM MARK:C208($refMenu; -1; Char:C90(18))
+			End if 
+			APPEND MENU ITEM:C411($refMenu; $filter.labelForFalse; *)
+			SET MENU ITEM PARAMETER:C1004($refMenu; -1; "false")
+			If ($filter.selectedBooleanValue=False:C215)
+				SET MENU ITEM MARK:C208($refMenu; -1; Char:C90(18))
+			End if 
+			
+			$choice:=Dynamic pop up menu:C1006($refMenu)
+			RELEASE MENU:C978($refMenu)
+			
+			Case of 
+				: ($choice="all")
+					OB REMOVE:C1226($filter; "selectedBooleanValue")
+					OB REMOVE:C1226($filter; "queryString")
+					OB REMOVE:C1226($filter; "queryParameters")
+					OBJECT SET TITLE:C194(*; $objectName; $filter.defaultTitle)
+					OBJECT SET FONT STYLE:C166(*; $objectName; Plain:K14:1)
+					OBJECT SET RGB COLORS:C628(*; $objectName; "grey")
+					Form:C1466.sfw.lb_items_search()
+				: ($choice="true")
+					$filter.selectedBooleanValue:=True:C214
+					$filter.queryString:=Replace string:C233($filter.expression; ":1"; ":selectedBooleanValue")
+					$filter.queryParameters:=$filter.queryParameters || New object:C1471
+					$filter.queryParameters.selectedBooleanValue:=$filter.selectedBooleanValue
+					OBJECT SET TITLE:C194(*; $objectName; $filter.labelForTrue)
+					OBJECT SET FONT STYLE:C166(*; $objectName; Bold:K14:2)
+					OBJECT SET RGB COLORS:C628(*; $objectName; "red")
+					Form:C1466.sfw.lb_items_search()
+				: ($choice="false")
+					$filter.selectedBooleanValue:=False:C215
+					$filter.queryString:=Replace string:C233($filter.expression; ":1"; ":selectedBooleanValue")
+					$filter.queryParameters:=$filter.queryParameters || New object:C1471
+					$filter.queryParameters.selectedBooleanValue:=$filter.selectedBooleanValue
+					OBJECT SET TITLE:C194(*; $objectName; $filter.labelForFalse)
+					OBJECT SET FONT STYLE:C166(*; $objectName; Bold:K14:2)
+					OBJECT SET RGB COLORS:C628(*; $objectName; "red")
+					Form:C1466.sfw.lb_items_search()
+			End case 
+			
+			
 	End case 
 	
 	
@@ -1415,9 +1567,11 @@ Function searchBox()
 	
 	
 Function searchBox_cross()
-	
-	Form:C1466.sfw.searchbox:=""
-	Form:C1466.sfw.searchHighlightParts:=Null:C1517
-	Form:C1466.sfw.lb_items_search()
-	
-	GOTO OBJECT:C206(*; "")
+	If (This:C1470.nothingToSave())
+		Form:C1466.sfw.searchbox:=""
+		Form:C1466.sfw.searchHighlightParts:=Null:C1517
+		Form:C1466.sfw.lb_items_search()
+		
+		GOTO OBJECT:C206(*; "")
+		
+	End if 

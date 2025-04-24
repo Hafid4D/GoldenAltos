@@ -403,7 +403,7 @@
 			},
 			"coordinates": {
 				"left": 0,
-				"top": 1540,
+				"top": 1592.9031982422,
 				"width": 173,
 				"height": 167.33203125
 			},
@@ -420,10 +420,10 @@
 			"coordinates": {
 				"left": 0,
 				"top": 1382,
-				"width": 173,
-				"height": 125.33203125
+				"width": 136.10581970215,
+				"height": 193.15533447266
 			},
-			"displayable_fields_count": 4,
+			"displayable_fields_count": 7,
 			"fields_ordering": 1
 		},
 		"sfw_EMailQueue": {
@@ -677,6 +677,60 @@
 			"displayable_fields_count": 7,
 			"fields_ordering": 1
 		},
+		"sfw_DocumentFolder": {
+			"color": {
+				"red": 181,
+				"green": 145,
+				"blue": 209,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 852.66918945312,
+				"top": 952.59005737305,
+				"width": 173.94140625,
+				"height": 151.8125
+			},
+			"displayable_fields_count": 5,
+			"fields": {
+				"UUID_ParentFolder": {
+					"position": 2
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
+		},
+		"sfw_Document": {
+			"color": {
+				"red": 181,
+				"green": 145,
+				"blue": 209,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 518.36059570312,
+				"top": 937.27981567383,
+				"width": 180.57421875,
+				"height": 218.08984375
+			},
+			"displayable_fields_count": 8
+		},
+		"CustomerCarrier": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 40,
+				"top": 40,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
 		"Tool": {
 			"color": {
 				"red": 181,
@@ -775,6 +829,22 @@
 		}
 	},
 	"relations": {
+		"DB8D79B14BDE42479CDD27271248450D": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"2AD91F4788D14BC589D0DC658413CE3C": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
 		"E53C2765B75493449D395F55702F48DB": {
 			"color": {
 				"red": 240,

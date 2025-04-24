@@ -57,9 +57,6 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "lb_inscriptions"; $g; $h; $d; $heightSubform-$verticalMargin-$heightButton-$verticalMargin)
 			OBJECT SET COORDINATES:C1248(*; "bkgd_lb_inscriptions"; $g; $h; $d; $heightSubform)
 			
-			
-			
-			
 	End case 
 	
 	
@@ -85,24 +82,24 @@ Function bActionInscriptions()
 			SET MENU ITEM PARAMETER:C1004($subMenuProfiles; -1; "Profile:"+$eProfile.UUID)
 		End for each 
 		If ($esProfiles.length#0)
-			APPEND MENU ITEM:C411($menu; "Add a profile"; $subMenuProfiles; *)  //XLIFF
+			APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("profil.addProfile"; "Add a profile"); $subMenuProfiles; *)  //XLIFF OK
 		Else 
-			APPEND MENU ITEM:C411($menu; "Add a profile"; *)  //XLIFF
+			APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("profil.addProfile"; "Add a profile"); *)  //XLIFF OK
 			DISABLE MENU ITEM:C150($menu; -1)
 		End if 
 	Else 
-		APPEND MENU ITEM:C411($menu; "Add a profile"; *)  //XLIFF
+		APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("profil.addProfile"; "Add a profile"); *)  //XLIFF OK
 		DISABLE MENU ITEM:C150($menu; -1)
 	End if 
 	If (Form:C1466.inscription#Null:C1517)
-		APPEND MENU ITEM:C411($menu; "Delete the profil \""+Form:C1466.inscription.userProfile.name+"\""; *)
+		APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("profil.deleteProfile"; "Delete the profil")+" \""+Form:C1466.inscription.userProfile.name+"\""; *)  // add xliff
 		If (Form:C1466.sfw.checkIsInModification()) && (Form:C1466.inscription.moreData.autoCreation=Null:C1517)
 			SET MENU ITEM PARAMETER:C1004($menu; -1; "Delete:"+Form:C1466.inscription.UUID)
 		Else 
 			DISABLE MENU ITEM:C150($menu; -1)
 		End if 
 	Else 
-		APPEND MENU ITEM:C411($menu; "Delete the profil"; *)
+		APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("profil.deleteProfile"; "Delete the profil"); *)  // add xliff
 		DISABLE MENU ITEM:C150($menu; -1)
 	End if 
 	$choose:=Dynamic pop up menu:C1006($menu)

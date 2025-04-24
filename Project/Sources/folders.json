@@ -20,7 +20,6 @@
 	"Web": {
 		"methods": [
 			"sfw_w_home_page",
-			"sfw_w_login",
 			"sfw_w_logout"
 		]
 	},

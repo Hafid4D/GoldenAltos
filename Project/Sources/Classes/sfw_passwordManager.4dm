@@ -58,6 +58,7 @@ Function newPasswordFormCheckPasswords()->$correct : Boolean
 	Form:C1466.error:=""
 	Case of 
 		: (Form:C1466.currentPassword="")
+			Form:C1466.isValidatable:=False:C215
 		: (Verify password hash:C1534(Form:C1466.currentPassword; String:C10(Form:C1466.user.accesses.password.hash))=False:C215)
 			Form:C1466.error+="Your current password is incorrect.\r"
 			Form:C1466.checkCurrentPassword:="❌"

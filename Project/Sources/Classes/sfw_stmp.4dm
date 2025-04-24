@@ -338,18 +338,17 @@ Function getHour($stmp : Integer)->$hour : Integer
 Function queryFunction($storageAttribute : Text; $event : Object)->$result : Object
 	
 	$operator:=$event.operator
+	$parameters:=New collection:C1472
 	Case of 
 		: ($operator="==")
 			$date:=$event.value
 			$query:=$storageAttribute+" >= :1 AND "+$storageAttribute+" < :2"
-			$parameters:=New collection:C1472
 			$parameters.push(cs:C1710.sfw_stmp.me.build($date; ?00:00:00?))
 			$parameters.push(cs:C1710.sfw_stmp.me.build($date+1; ?00:00:00?))
 			
 		: ($operator=">")
 			$date:=$event.value
 			$query:=$storageAttribute+" > :1"
-			$parameters:=New collection:C1472
 			$parameters.push(cs:C1710.sfw_stmp.me.build($date; ?00:00:00?))
 			
 		: ($operator=">=")
@@ -361,25 +360,21 @@ Function queryFunction($storageAttribute : Text; $event : Object)->$result : Obj
 		: ($operator="<")
 			$date:=$event.value
 			$query:=$storageAttribute+" < :1"
-			$parameters:=New collection:C1472
 			$parameters.push(cs:C1710.sfw_stmp.me.build($date; ?00:00:00?))
 			
 		: ($operator="<=")
 			$date:=$event.value
 			$query:=$storageAttribute+" <= :1"
-			$parameters:=New collection:C1472
 			$parameters.push(cs:C1710.sfw_stmp.me.build($date; ?00:00:00?))
 			
 		: ($operator="!=")
 			$date:=$event.value
 			$query:="NOT("+$storageAttribute+" >= :1 AND "+$storageAttribute+" < :2)"
-			$parameters:=New collection:C1472
 			$parameters.push(cs:C1710.sfw_stmp.me.build($date; ?00:00:00?))
 			$parameters.push(cs:C1710.sfw_stmp.me.build($date+1; ?00:00:00?))
 			
 		: ($operator="IN")
 			$queryParts:=New collection:C1472
-			$parameters:=New collection:C1472
 			$p:=0
 			For each ($date; $event.value)
 				$queryParts.push("( "+$storageAttribute+" >= :"+String:C10($p+1)+" AND "+$storageAttribute+" < :"+String:C10($p+2)+" )")

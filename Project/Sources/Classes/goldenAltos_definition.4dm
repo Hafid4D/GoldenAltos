@@ -26,6 +26,7 @@ Function _global_parameters()
 	This:C1470.globalParameters.preferedCountriesInPup:=New collection:C1472("ma"; "fr"; "us")
 	
 	
+	
 Function _event_definition()
 	
 	cs:C1710.sfw_eventManager.me.createIfNotExist("addSkill"; "Add skill to a staff")

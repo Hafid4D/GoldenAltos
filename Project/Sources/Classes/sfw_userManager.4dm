@@ -1,3 +1,5 @@
+property info : Object
+
 shared singleton Class constructor
 	
 	This:C1470.info:=New shared object:C1526
@@ -145,6 +147,10 @@ shared Function login()
 					End if 
 				End if 
 			End if 
+			
+			If ($form.storeAccess)
+				cs:C1710.sfw_userManager.me.storeAccess()
+			End if 
 		Else 
 			QUIT 4D:C291
 		End if 
@@ -156,27 +162,19 @@ shared Function storeAccess()
 	var $file : 4D:C1709.File
 	var $logFolder : 4D:C1709.Folder:=Folder:C1567(fk logs folder:K87:17)
 	
-	$ok:=cs:C1710.sfw_dialog.me.confirm("Do you really want to store your accès on this computer ?"; "Yes I want"; "No")  //XLIFF
-	If ($ok)
-		$answer:=cs:C1710.sfw_dialog.me.request("Enter your password to be able to store the access:"; ""; "Store the access"; "Cancel")
-		If ($answer.ok)
-			$eUser:=ds:C1482.sfw_User.get(cs:C1710.sfw_userManager.me.info.UUID)
-			$hashOptions:=New object:C1471("algorithm"; "bcrypt"; "cost"; 10)
-			If (Verify password hash:C1534($answer.answer; String:C10($eUser.accesses.password.hash)))
-				
-				
-				$infoToStore:=New object:C1471
-				$infoToStore.stmp:=cs:C1710.sfw_stmp.me.now()
-				$infoToStore.login:=cs:C1710.sfw_userManager.me.info.login
-				$infoToStore.hashPassword:=$eUser.accesses.password.hash
-				$infoToStore.hashPassword2:=Generate password hash:C1533($eUser.UUID; $hashOptions)
-				$infoToStore.hashPassword3:=Generate password hash:C1533($logFolder.platformPath; $hashOptions)
-				$applicationInfo:=Application info:C1599
-				$file:=Folder:C1567(fk user preferences folder:K87:10).file("myAccess.json")
-				$file.setText(JSON Stringify:C1217($infoToStore; *))
-			End if 
-		End if 
-	End if 
+	// todo: supp les dialogs + supp item du menu dans la toolbar
+	$eUser:=ds:C1482.sfw_User.get(cs:C1710.sfw_userManager.me.info.UUID)
+	$hashOptions:=New object:C1471("algorithm"; "bcrypt"; "cost"; 10)
+	
+	$infoToStore:=New object:C1471
+	$infoToStore.stmp:=cs:C1710.sfw_stmp.me.now()
+	$infoToStore.login:=cs:C1710.sfw_userManager.me.info.login
+	$infoToStore.hashPassword:=$eUser.accesses.password.hash
+	$infoToStore.hashPassword2:=Generate password hash:C1533($eUser.UUID; $hashOptions)
+	$infoToStore.hashPassword3:=Generate password hash:C1533($logFolder.platformPath; $hashOptions)
+	$applicationInfo:=Application info:C1599
+	$file:=Folder:C1567(fk user preferences folder:K87:10).file("myAccess.json")
+	$file.setText(JSON Stringify:C1217($infoToStore; *))
 	
 	
 shared Function getAuthorizedProfiles()

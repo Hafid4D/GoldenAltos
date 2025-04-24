@@ -56,8 +56,8 @@ Function bOpenRelatedRecord()
 	$visionIdent:=$entry.visions[0]
 	
 	If (ds:C1482[Form:C1466.current_notification.moreData.targetDataclass].get(Form:C1466.current_notification.UUID_target)=Null:C1517)
-		$notificaions:=ds:C1482.sfw_Notification.query("UUID_target =:1"; Form:C1466.current_notification.UUID_target)
-		$info:=$notificaions.drop()
+		$notifications:=ds:C1482.sfw_Notification.query("UUID_target =:1"; Form:C1466.current_notification.UUID_target)
+		$info:=$notifications.drop()
 		cs:C1710.sfw_notificationManager.me.updateNodifications()
 	Else 
 		$entity:=ds:C1482[Form:C1466.current_notification.moreData.targetDataclass].get(Form:C1466.current_notification.UUID_target)
@@ -92,8 +92,11 @@ Function _notify($ident : Text; $users : Collection; $context : Object)
 	var $eNotification : cs:C1710.sfw_NotificationEntity
 	
 	$eNotificationType:=ds:C1482.sfw_NotificationType.query("ident = :1"; $ident).first()
+	$staff:=ds:C1482.Staff.query("UUID_User = :1"; cs:C1710.sfw_userManager.me.info.UUID).first()
 	If ($eNotificationType#Null:C1517)
 		For each ($user; $users)
+			
+			//If ($user#$staff.user.UUID)
 			$eNotification:=ds:C1482.sfw_Notification.new()
 			$eNotification.UUID:=Generate UUID:C1066
 			$eNotification.UUID_NotificationType:=$eNotificationType.UUID
@@ -119,6 +122,8 @@ Function _notify($ident : Text; $users : Collection; $context : Object)
 					sfw_notificationUpdate
 				End if 
 			End if 
+			
+			//End if 
 		End for each 
 	End if 
 	

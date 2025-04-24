@@ -3,7 +3,7 @@ var $file : 4D:C1709.File
 $inModification:=sfw_checkIsInModification
 $setActivation:=False:C215
 $rebuildDisplayedLB:=False:C215
-If (Form:C1466.communicationTypes=Null:C1517)
+If (Form:C1466#Null:C1517) && (Form:C1466.communicationTypes=Null:C1517)
 	$file:=Folder:C1567(fk resources folder:K87:11).file("sfw/communication/communicationTypes.json")
 	If ($file.exists)
 		$json:=$file.getText()
@@ -127,17 +127,19 @@ If ($rebuildDisplayedLB)
 	OBJECT SET COORDINATES:C1248(*; "lb_communications"; $horizontalMargin; $verticalMargin; $width_subform-$horizontalMargin; $height_subform-$verticalMargin-$heightButton-$verticalMargin)
 	
 	
-	Form:C1466.lb_communications:=New collection:C1472
-	For each ($mean; Form:C1466.communications)
-		$item:=New object:C1471
-		$item.contact:=$mean.contact
-		$item.comment:=$mean.comment
-		$item.type:=$mean.type || "phone"
-		$indices:=Form:C1466.communicationTypes.indices("type = :1"; $item.type)
-		If ($indices.length>0)
-			$item.displayedType:=Form:C1466.communicationTypes[$indices[0]].label
-			$item.displayedIcon:=Form:C1466.communicationTypes[$indices[0]].displayedIcon
-		End if 
-		Form:C1466.lb_communications.push($item)
-	End for each 
+	If (Form:C1466#Null:C1517)
+		Form:C1466.lb_communications:=New collection:C1472
+		For each ($mean; Form:C1466.communications)
+			$item:=New object:C1471
+			$item.contact:=$mean.contact
+			$item.comment:=$mean.comment
+			$item.type:=$mean.type || "phone"
+			$indices:=Form:C1466.communicationTypes.indices("type = :1"; $item.type)
+			If ($indices.length>0)
+				$item.displayedType:=Form:C1466.communicationTypes[$indices[0]].label
+				$item.displayedIcon:=Form:C1466.communicationTypes[$indices[0]].displayedIcon
+			End if 
+			Form:C1466.lb_communications.push($item)
+		End for each 
+	End if 
 End if 

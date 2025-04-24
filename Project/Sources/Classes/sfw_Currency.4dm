@@ -5,7 +5,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry:=cs:C1710.sfw_definitionEntry.new("currency"; "administration"; "Currencies")
 	$entry.setDataclass("sfw_Currency")
 	$entry.setDisplayOrder(100)
-	$entry.setIcon("image/entry/currency-50x50.png")
+	$entry.setIcon("image/entry/currency-50x50-1.png"; "image/entry/currency-50x50.png")
 	$entry.setDisplayOrder(-2000)
 	
 	$entry.setSearchboxField("symbol")

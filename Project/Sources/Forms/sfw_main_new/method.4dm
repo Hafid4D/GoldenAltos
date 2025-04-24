@@ -64,7 +64,7 @@ Case of
 		
 	: (FORM Event:C1606.code=On Clicked:K2:4)
 		Case of 
-			: (FORM Event:C1606.objectName="headerTabFavorite_title")
+			: (FORM Event:C1606.objectName="headerTabFavorite_button")
 				cs:C1710.sfw_favoriteManager.me.clicOnHeader()
 			: (FORM Event:C1606.objectName="headerTabComment_title")
 				cs:C1710.sfw_commentManager.me.clicOnHeader(Form:C1466.current_item.UUID)
