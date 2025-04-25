@@ -77,6 +77,10 @@ Function bActionSteps()
 				DIALOG:C40("createStepFromTemplate"; $form)
 				CLOSE WINDOW:C154($winRef)
 				
+				If (ok=1)
+					
+				End if 
+				
 			: ($choose="--create_from_step_file")
 				$form:=New object:C1471("lotInfo"; New object:C1471("customer"; Form:C1466.current_item.customer))
 				

@@ -46,6 +46,17 @@
 		<field name="qtyOut" uuid="49CF31FBDA2BD9458DC6B5BEC1AA52F7" type="4" never_null="true" id="7"/>
 		<field name="dateIn" uuid="1A63DAA259BB124D96F431FBC66AF678" type="8" never_null="true" id="8"/>
 		<field name="dateOut" uuid="C9A218A39984844F91FB5BD26AB1AA1A" type="8" never_null="true" id="9"/>
+		<field name="UUID_StepTemplate" uuid="19DFC27C6FB94D4C8E072F5F3D2E1EF2" type="10" store_as_UUID="true" never_null="true" id="10"/>
+		<field name="lotSpecs" uuid="C021671B87623049AA7819B83C90C571" type="10" limiting_length="255" never_null="true" id="11"/>
+		<field name="specRevision" uuid="E1F9F9F4D356F541BAD671DB70CE2C33" type="10" limiting_length="255" never_null="true" id="12"/>
+		<field name="timeOut" uuid="3901AA21C1F6964F91E804B784A59923" type="9" never_null="true" id="13"/>
+		<field name="timeIn" uuid="9AA20B8E51006D4BA61155F362CF4117" type="9" never_null="true" id="14"/>
+		<field name="rejects" uuid="8797F43B6B612F4186E4C8E1E2DAD963" type="4" never_null="true" id="15"/>
+		<field name="good" uuid="ABF3A0DB7F8DA646B8863BB27130D7D1" type="10" limiting_length="255" never_null="true" id="16"/>
+		<field name="tools" uuid="C11BB5A25ACF4C4D8FCAD95AC5471B17" type="21" blob_switch_size="2147483647" never_null="true" id="17"/>
+		<field name="parametricMeasurements" uuid="F78707BDAC3AB14696337A57061E5F05" type="21" blob_switch_size="2147483647" never_null="true" id="18"/>
+		<field name="stepInterruptions" uuid="37F7A5D60F88784BBAD8AFE7C6179BDB" type="21" blob_switch_size="2147483647" never_null="true" id="19"/>
+		<field name="dataTables" uuid="29E9FA20260666448E481AC83B07485F" type="21" blob_switch_size="2147483647" never_null="true" id="20"/>
 		<primary_key field_name="UUID" field_uuid="EE9C517A8C59724B8559A5DCB59FE560"/>
 	</table>
 	<table name="Tool" uuid="0FF66E5E37EDD74B8E6E39F15644C85F" id="6">
@@ -355,6 +366,11 @@
 		<field name="UUID_StepTemplate" uuid="D92164B4310D4A74A5E486B390AE1787" type="10" store_as_UUID="true" never_null="true" id="3">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="description" uuid="2F632A7EA108834BBFEA19CA848D5BF8" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="alert" uuid="2C35678C2AF0C5499A0298DFCD9C0EE8" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="specification" uuid="A684F2EC1DBB1D4F8990A0E8430D6BF3" type="10" limiting_length="255" never_null="true" id="6"/>
+		<field name="Comment1" uuid="1145B8200CA4B7409BCC1F5327AB0B57" type="10" limiting_length="255" never_null="true" id="7"/>
+		<field name="Comment2" uuid="B275453187A73E47B9AA6EEFBE286769" type="10" limiting_length="255" never_null="true" id="8"/>
 		<primary_key field_name="UUID" field_uuid="3C357DD66006453994A5995B3E57D007"/>
 	</table>
 	<table name="StepTemplate" uuid="6330FD4D08D74130BF3869222CDECBA6" id="121">
@@ -866,6 +882,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="B21D5E45DC54FE4697545F4CA28DF238" name_Nto1="Link_32" name_1toN="Link_32_return" state="1">
+		<related_field kind="source">
+			<field_ref uuid="19DFC27C6FB94D4C8E072F5F3D2E1EF2" name="UUID_StepTemplate">
+				<table_ref uuid="21C997F4FF841640B547868BE38C05ED" name="LotStep"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="3C357DD66006453994A5995B3E57D007" name="UUID">
+				<table_ref uuid="73EFE2D78C61400397353509CBA87D18" name="Step"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="01619F9BF52940F3AFF8C52A4A82535D" type="3">
 		<field_ref uuid="951D3770910B43BBBFCAB95E4B3A1C65" name="UUID_Tool">
 			<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
@@ -1128,6 +1156,11 @@
 	</index>
 	<index kind="regular" unique_keys="true" uuid="9CEE78492358F54D8FAE398F35A45555" type="7">
 		<field_ref uuid="EE9C517A8C59724B8559A5DCB59FE560" name="UUID">
+			<table_ref uuid="21C997F4FF841640B547868BE38C05ED" name="LotStep"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="9D26C381981E764992A429538C89C7AA" type="3">
+		<field_ref uuid="19DFC27C6FB94D4C8E072F5F3D2E1EF2" name="UUID_StepTemplate">
 			<table_ref uuid="21C997F4FF841640B547868BE38C05ED" name="LotStep"/>
 		</field_ref>
 	</index>

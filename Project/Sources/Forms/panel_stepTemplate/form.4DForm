@@ -134,7 +134,7 @@
 				},
 				"entryField_status": {
 					"type": "checkbox",
-					"text": "Status",
+					"text": "Active",
 					"top": 7,
 					"left": 436,
 					"width": 72,

@@ -156,7 +156,45 @@ Function _visions_definition()
 	
 	//Mark:-Entries defintion
 Function _entries_definition()
+	$entry:=cs:C1710.sfw_definitionEntry.new("punchIn"; ["production"]; " Punch IN")
+	$entry.setDataclass("Lot")
+	$entry.setDisplayOrder(-300)
+	$entry.setIcon("image/entry/punsh-in-50x50.png")
 	
+	$entry.setSearchboxField("lotNumber")
+	
+	
+	$entry.setPanel("panel_punchIn")
+	$entry.setPanelPage(1; "po-infos-32x32.png"; "Main")
+	//$entry.setPanelPage(3; "inventories-32x32.png"; "Inventories")
+	
+	
+	$entry.setLBItemsColumn("lotNumber"; "Lot #"; "width:450")
+	
+	$entry.setLBItemsOrderBy("lotNumber")
+	$entry.enableTransaction()
+	
+	This:C1470._push_entry($entry)
+	
+	$entry:=cs:C1710.sfw_definitionEntry.new("punchOut"; ["production"]; "Punch OUT")
+	$entry.setDataclass("Lot")
+	$entry.setDisplayOrder(-400)
+	$entry.setIcon("image/entry/punsh-out-50x50.png")
+	
+	$entry.setSearchboxField("lotNumber")
+	
+	
+	$entry.setPanel("panel_punchOut")
+	$entry.setPanelPage(1; "po-infos-32x32.png"; "Main")
+	//$entry.setPanelPage(3; "inventories-32x32.png"; "Inventories")
+	
+	
+	$entry.setLBItemsColumn("lotNumber"; "Lot #"; "width:450")
+	
+	$entry.setLBItemsOrderBy("lotNumber")
+	$entry.enableTransaction()
+	
+	This:C1470._push_entry($entry)
 	
 	
 Function _profiles_definition()
