@@ -95,9 +95,9 @@ If (True:C214)
 End if 
 
 /**
-import jobs & lot (job <-- lots)
+import jobs & lot (job <-- lots) & Archives
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([Job:117])
 	TRUNCATE TABLE:C1051([Lot:118])
 	TRUNCATE TABLE:C1051([LotStep:5])
@@ -232,7 +232,7 @@ End if
 /**
 import inventories
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([Inventory:126])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/inventory_export.json")
@@ -301,7 +301,7 @@ End if
 /**
 import step template
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([StepTemplate:121])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/step_template_export.json")

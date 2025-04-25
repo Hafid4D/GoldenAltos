@@ -595,7 +595,9 @@
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
-						"onDataChange"
+						"onClick",
+						"onDataChange",
+						"onSelectionChange"
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
@@ -614,7 +616,9 @@
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
-						"onDataChange"
+						"onClick",
+						"onDataChange",
+						"onSelectionChange"
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
@@ -633,7 +637,9 @@
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
-						"onDataChange"
+						"onClick",
+						"onDataChange",
+						"onSelectionChange"
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
@@ -672,7 +678,9 @@
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
-						"onDataChange"
+						"onClick",
+						"onDataChange",
+						"onSelectionChange"
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
@@ -798,7 +806,7 @@
 					"type": "listbox",
 					"left": 2,
 					"top": 92,
-					"width": 1718,
+					"width": 1443,
 					"height": 700,
 					"events": [
 						"onClick",
@@ -819,6 +827,8 @@
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
 					"headerHeight": "2em",
+					"right": 1445,
+					"scrollbarHorizontal": "hidden",
 					"columns": [
 						{
 							"header": {
@@ -842,7 +852,8 @@
 							"footer": {
 								"name": "Footer6"
 							},
-							"dataSource": "This:C1470.PO_date"
+							"dataSource": "This:C1470.PO_date",
+							"dataSourceTypeHint": "date"
 						},
 						{
 							"header": {
@@ -878,7 +889,8 @@
 							"footer": {
 								"name": "Footer9"
 							},
-							"dataSource": "This:C1470.poAmount"
+							"dataSource": "This:C1470.poAmount",
+							"dataSourceTypeHint": "number"
 						},
 						{
 							"header": {
@@ -890,7 +902,8 @@
 							"footer": {
 								"name": "Footer10"
 							},
-							"dataSource": "This:C1470.amountBilled"
+							"dataSource": "This:C1470.amountBilled",
+							"dataSourceTypeHint": "number"
 						},
 						{
 							"header": {
@@ -902,7 +915,8 @@
 							"footer": {
 								"name": "Footer11"
 							},
-							"dataSource": "This:C1470.Invoices"
+							"dataSource": "This:C1470.invoices",
+							"dataSourceTypeHint": "number"
 						}
 					]
 				}
@@ -912,9 +926,9 @@
 			"objects": {
 				"lb_Jobs": {
 					"type": "listbox",
-					"left": 2,
-					"top": 92,
-					"width": 1718,
+					"left": 17,
+					"top": 108,
+					"width": 1428,
 					"height": 700,
 					"events": [
 						"onClick",
@@ -934,7 +948,8 @@
 					"alternateFill": "#E6E6E6",
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
-					"right": 1720,
+					"right": 1445,
+					"scrollbarHorizontal": "hidden",
 					"columns": [
 						{
 							"header": {
@@ -946,7 +961,8 @@
 							"footer": {
 								"name": "Footer12"
 							},
-							"dataSource": "This:C1470.dateCreated"
+							"dataSource": "This:C1470.dateCreated",
+							"dataSourceTypeHint": "date"
 						},
 						{
 							"header": {
@@ -958,7 +974,8 @@
 							"footer": {
 								"name": "Footer13"
 							},
-							"dataSource": "This:C1470.jobNumber"
+							"dataSource": "This:C1470.jobNumber",
+							"dataSourceTypeHint": "number"
 						},
 						{
 							"header": {
@@ -1006,7 +1023,7 @@
 					"type": "listbox",
 					"left": 2,
 					"top": 92,
-					"width": 1718,
+					"width": 1443,
 					"height": 700,
 					"events": [
 						"onClick",
@@ -1026,7 +1043,8 @@
 					"alternateFill": "#E6E6E6",
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
-					"right": 1720,
+					"right": 1445,
+					"scrollbarHorizontal": "hidden",
 					"columns": [
 						{
 							"header": {
@@ -1050,7 +1068,8 @@
 							"footer": {
 								"name": "Footer18"
 							},
-							"dataSource": "This:C1470.jobNumber"
+							"dataSource": "This:C1470.jobNumber",
+							"dataSourceTypeHint": "text"
 						},
 						{
 							"header": {
@@ -1075,7 +1094,7 @@
 							"footer": {
 								"name": "Footer20"
 							},
-							"dataSource": "This:C1470.dataIn",
+							"dataSource": "This:C1470.dateIn",
 							"dataSourceTypeHint": "date"
 						},
 						{
@@ -1126,7 +1145,7 @@
 					"type": "listbox",
 					"left": 2,
 					"top": 92,
-					"width": 1718,
+					"width": 1443,
 					"height": 700,
 					"events": [
 						"onClick",
@@ -1146,7 +1165,8 @@
 					"alternateFill": "#E6E6E6",
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
-					"right": 1720,
+					"right": 1445,
+					"scrollbarHorizontal": "hidden",
 					"columns": [
 						{
 							"header": {
@@ -1182,7 +1202,7 @@
 							"footer": {
 								"name": "Footer24"
 							},
-							"dataSource": "This:C1470.qtyInStock"
+							"dataSource": "This:C1470.qty"
 						},
 						{
 							"header": {
@@ -1194,7 +1214,7 @@
 							"footer": {
 								"name": "Footer25"
 							},
-							"dataSource": "This:C1470.process"
+							"dataSource": "This:C1470.qtyInStock"
 						},
 						{
 							"header": {
@@ -1211,7 +1231,8 @@
 						{
 							"header": {
 								"name": "Header34",
-								"text": "Description"
+								"text": "Description",
+								"fontWeight": "bold"
 							},
 							"name": "Column34",
 							"footer": {
@@ -1229,7 +1250,7 @@
 					"type": "listbox",
 					"left": 2,
 					"top": 92,
-					"width": 1718,
+					"width": 1443,
 					"height": 700,
 					"events": [
 						"onClick",
@@ -1249,7 +1270,8 @@
 					"alternateFill": "#E6E6E6",
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
-					"right": 1720,
+					"right": 1445,
+					"scrollbarHorizontal": "hidden",
 					"columns": [
 						{
 							"header": {
@@ -1317,7 +1339,7 @@
 		},
 		null
 	],
-	"geometryStamp": 632,
+	"geometryStamp": 652,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
