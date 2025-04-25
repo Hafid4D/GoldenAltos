@@ -33,16 +33,6 @@
 	"pages": [
 		{
 			"objects": {
-				"header_bkgd": {
-					"type": "rectangle",
-					"top": 0,
-					"left": 0,
-					"width": 813,
-					"height": 69,
-					"sizingX": "grow",
-					"fill": "#A2C6D8",
-					"stroke": "transparent"
-				},
 				"label_0_1": {
 					"type": "text",
 					"top": 12,
@@ -96,22 +86,6 @@
 					"borderStyle": "none",
 					"dataSourceTypeHint": "integer",
 					"textAlign": "left"
-				},
-				"vTabBar_subform": {
-					"type": "subform",
-					"top": 69,
-					"left": 0,
-					"width": 50,
-					"height": 450,
-					"dataSource": "Form:C1466.vTabBar",
-					"detailForm": "sfw_vTabBar",
-					"hideFocusRing": true,
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "sfw_main_vTabBar_sfo"
 				}
 			}
 		},
@@ -119,7 +93,7 @@
 			"objects": {}
 		}
 	],
-	"geometryStamp": 2,
+	"geometryStamp": 6,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
@@ -127,5 +101,6 @@
 			"View 1": {}
 		}
 	},
-	"method": "method.4dm"
+	"method": "method.4dm",
+	"inheritedForm": "sfw_bkgd_header_2lines"
 }

@@ -5,12 +5,72 @@ Class constructor($macro : Object)
 Function onInvoke($editor : Object)->$result : Object
 	
 	Case of 
+		: (This:C1470.typeOfMacro="createAPanelFromZeroWithInherited")
+			$result:=This:C1470._createAPanelFromZeroWithInherited($editor)
 		: (This:C1470.typeOfMacro="createAPanelFromZero")
 			$result:=This:C1470._createAPanelFromZero($editor)
 		: (This:C1470.typeOfMacro="SelectNoneXliffText")
 			$result:=This:C1470._selectNoneXliffText($editor)
 	End case 
 	
+Function _createAPanelFromZeroWithInherited($editor : Object)->$result : Object
+	If ($editor.editor.currentPageNumber#0)
+		cs:C1710.sfw_dialog.me.alert("This macro is usable in page 0 only")
+	Else 
+		$answer:=Request:C163("Enter the number of field to create")
+		
+		$parts:=Split string:C1554($answer; ";")
+		$numbers:=New collection:C1472()
+		For each ($part; $parts)
+			$numbers.push(Num:C11($part))
+		End for each 
+		
+		$editor.editor.formProperties.rightMargin:=0
+		$editor.editor.formProperties.bottomMargin:=0
+		
+		$height:=$numbers.max()
+		If ($height>5)
+			$height:=5
+		End if 
+		$editor.editor.formProperties.inheritedForm:="sfw_bkgd_header_"+String:C10($height)+"lines"
+		
+		
+		$column:=0
+		For each ($number; $numbers)
+			
+			For ($i; 1; $number)
+				$label:=New object:C1471
+				$label.type:="text"
+				$label.top:=12+(($i-1)*25)
+				$label.left:=12+(287*$column)
+				$label.width:=90
+				$label.height:=17
+				$label.stroke:="#808080"
+				$label.text:="label "+String:C10($column)+"_"+String:C10($i)
+				$editor.editor.currentPage.objects["label_"+String:C10($column)+"_"+String:C10($i)]:=$label
+				
+				$input:=New object:C1471
+				$input.type:="input"
+				$input.top:=12+(($i-1)*25)
+				$input.left:=132+(287*$column)
+				$input.width:=140
+				$input.height:=17
+				$input.dataSource:="Form:C1466.current_item.field"+String:C10($i)
+				$input.focusable:=False:C215
+				$input.enterable:=False:C215
+				$input.dragging:="none"
+				$input.dropping:="custom"
+				$input.events:=New collection:C1472("onDataChange")
+				$input.fill:="transparent"
+				$input.borderStyle:="none"
+				$editor.editor.currentPage.objects["entryField_"+String:C10($column)+"_"+String:C10($i)]:=$input
+				
+			End for 
+			
+			$column:=$column+1
+		End for each 
+		$result:=New object:C1471("currentPage"; $editor.editor.currentPage; "formProperties"; $editor.editor.formProperties)
+	End if 
 	
 Function _createAPanelFromZero($editor : Object)->$result : Object
 	
@@ -18,6 +78,7 @@ Function _createAPanelFromZero($editor : Object)->$result : Object
 		cs:C1710.sfw_dialog.me.alert("This macro is usable in page 0 only")
 	Else 
 		$answer:=Request:C163("Enter the number of field to create")
+		
 		
 		If (ok=1)
 			

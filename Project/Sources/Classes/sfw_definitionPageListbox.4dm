@@ -112,54 +112,78 @@ Function addFilter($ident : Text;  ...  : Text)
 	
 	//Mark:-dynamic page management functions
 	
-Function _insertDynamicListbox($formDefinition : Object; $panelPage : Object)
+Function _insertDynamicListbox($formDefinition : Object; $panelPage : Object; $offsetHorizontal : Integer; $offsetVertical : Integer)
+	var $pageDefinition : Object
 	$dynamicSource:=$panelPage.dynamicSource
 	OBJECT GET COORDINATES:C663(*; "detail_panel"; $g; $h; $d; $b)
 	$widthDetailPanel:=$d-$g
 	$heightDetailPanel:=$b-$h
-	$offsetHorizontal:=0
-	$offsetVertical:=0
 	
-	$definitions:=New collection:C1472($formDefinition)
-	If ($formDefinition.inheritedForm#Null:C1517)
-		$folderForm:=Folder:C1567(fk database folder:K87:14).folder("Project/Sources/Forms/"+$formDefinition.inheritedForm)
-		$file:=$folderForm.file("form.4DForm")
-		$cacheFile:=Folder:C1567(fk resources folder:K87:11).file("DynamicForm/"+$formDefinition.inheritedForm+"form.4XForm")
-		If ($file.exists)
-			$file:=$folderForm.file("form.4DForm")
-			$definition:=JSON Parse:C1218($file.getText())
-			$definitions.push($definition)
-			TEXT TO BLOB:C554(JSON Stringify:C1217($definition); $blob; UTF8 text without length:K22:17)
-			COMPRESS BLOB:C534($blob; Fast compression mode:K22:13)
-			$cacheFile.setContent($blob)
-		Else 
-			$blob:=$cacheFile.getContent()
-			EXPAND BLOB:C535($blob)
-			$json:=BLOB to text:C555($blob; UTF8 text without length:K22:17)
-			$definition:=JSON Parse:C1218($json)
-			$definitions.push($definition)
-		End if 
+	If (123#123)
+		//$offsetHorizontal:=0
+		//$offsetVertical:=0
+		//$definitions:=New collection($formDefinition)
+		//If ($formDefinition.inheritedForm#Null)
+		//$folderForm:=Folder(fk database folder).folder("Project/Sources/Forms/"+$formDefinition.inheritedForm)
+		//$file:=$folderForm.file("form.4DForm")
+		//$cacheFile:=Folder(fk resources folder).file("DynamicForm/"+$formDefinition.inheritedForm+"form.4XForm")
+		//If ($file.exists)
+		//$file:=$folderForm.file("form.4DForm")
+		//$definition:=JSON Parse($file.getText())
+		//$definitions.push($definition)
+		//TEXT TO BLOB(JSON Stringify($definition); $blob; UTF8 text without length)
+		//COMPRESS BLOB($blob; Fast compression mode)
+		//$cacheFile.setContent($blob)
+		//Else 
+		//$blob:=$cacheFile.getContent()
+		//EXPAND BLOB($blob)
+		//$json:=BLOB to text($blob; UTF8 text without length)
+		//$definition:=JSON Parse($json)
+		//$definitions.push($definition)
+		//End if 
+		//End if 
+		//For each ($definition; $definitions)
+		//For each ($page; $definition.pages)
+		//$page:=$page || New object
+		//$page.objects:=$page.objects || New object
+		//For each ($objectName; $page.objects)
+		//$object:=$page.objects[$objectName]
+		//Case of 
+		//: ($objectName="header_bkgd")
+		//$offsetVertical:=$object.top+$object.height
+		//: ($objectName="vTabBar_subform")
+		//$offsetHorizontal:=$object.left+$object.width
+		//End case 
+		//Case of 
+		//: ($object.type="listbox")
+		//If ($object.method="ObjectMethods@")
+		//$object.method:="sfw_dynamicForm_script"
+		//End if 
+		//For each ($column; $page.objects[$objectName].columns)
+		//If ($column.method="ObjectMethods@")
+		//$column.method:="sfw_dynamicForm_script"
+		//End if 
+		//End for each 
+		//: ($object.method#Null)
+		//$object.method:="sfw_dynamicForm_script"
+		//End case 
+		
+		//End for each 
+		//End for each 
+		//End for each 
+		
+		//If ($panelPage.page<$formDefinition.pages.length)
+		//$pageDefinition:=$formDefinition.pages[$panelPage.page]
+		//If ($pageDefinition=Null)
+		//$pageDefinition:=New object("objects"; New object)
+		//$formDefinition.pages[$panelPage.page]:=$pageDefinition
+		//End if 
+		//Else 
+		//$pageDefinition:=New object("objects"; New object)
+		//$formDefinition.pages[$panelPage.page]:=$pageDefinition
+		//End if 
 	End if 
-	For each ($definition; $definitions)
-		For each ($page; $definition.pages)
-			For each ($objectName; $page.objects)
-				$object:=$page.objects[$objectName]
-				Case of 
-					: ($objectName="header_bkgd")
-						$offsetVertical:=$object.top+$object.height
-					: ($objectName="vTabBar_subform")
-						$offsetHorizontal:=$object.left+$object.width
-				End case 
-			End for each 
-		End for each 
-	End for each 
-	
-	If ($panelPage.page<$formDefinition.pages.length)
-		$pageDefinition:=$formDefinition.pages[$panelPage.page]
-	Else 
-		$pageDefinition:=New object:C1471("objects"; New object:C1471)
-		$formDefinition.pages[$panelPage.page]:=$pageDefinition
-	End if 
+	$pageDefinition:=$formDefinition.pages[$panelPage.page]
 	
 	$gutter:=5
 	$filterHeight:=18
@@ -222,7 +246,7 @@ Function _insertDynamicListbox($formDefinition : Object; $panelPage : Object)
 	$listboxProperties.horizontalLineStroke:="transparent"
 	$listboxProperties.verticalLineStroke:="#FFFFFF"
 	$listboxProperties.fill:="#FFFFFF"
-	$listboxProperties.alternateFill:="#F5F5F5"
+	$listboxProperties.alternateFill:="#F7FBFF"  //alice blue
 	$listboxProperties.dataSource:="Form."+$dynamicSource.ident
 	$listboxProperties.currentItemSource:="Form.current_"+$dynamicSource.ident+"_item"
 	$listboxProperties.currentItemPositionSource:="Form.current_"+$dynamicSource.ident+"_position"
@@ -252,7 +276,6 @@ Function _insertDynamicListbox($formDefinition : Object; $panelPage : Object)
 		End if 
 	End for each 
 	
-	
 	$pageDefinition.objects[$dynamicSource.ident]:=$listboxProperties
 	This:C1470._setDataSourceForDynamicPage()
 	
@@ -270,7 +293,7 @@ Function _bAction()
 					APPEND MENU ITEM:C411($menu; "-")
 					
 				: ($action.predefinedType="openInWindow")
-					APPEND MENU ITEM:C411($menu; "Open selected item in a new window..."; *)  //XLIFF
+					APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("definitionPageLB.openSelectedItem"; "Open selected item in a new window..."); *)  //XLIFF OK
 					SET MENU ITEM PARAMETER:C1004($menu; -1; "--openInWindow")
 					SET MENU ITEM ICON:C984($menu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/openWindow-24x24.png")
 					If (Form:C1466["current_"+$ident+"_item"]=Null:C1517) || (Form:C1466["selected_"+$ident+"_items"].length>1)
@@ -279,18 +302,18 @@ Function _bAction()
 					
 				: ($action.predefinedType="openAProjection")
 					If (Form:C1466["selected_"+$ident+"_items"].length>0)
-						APPEND MENU ITEM:C411($menu; "Open a projection with selected items..."; *)  //XLIFF
+						APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("definitionPageLB.openProjectionSelectedItem"; "Open a projection with selected items..."); *)  //XLIFF OK
 					Else 
-						APPEND MENU ITEM:C411($menu; "Open a projection with all items..."; *)  //XLIFF
+						APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("definitionPageLB.openProjectionAllItem"; "Open a projection with all items..."); *)  //XLIFF OK
 					End if 
 					SET MENU ITEM ICON:C984($menu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/projection-24x24.png")
 					SET MENU ITEM PARAMETER:C1004($menu; -1; "--openAProjection")
 					
 				: ($action.predefinedType="export")
 					If (Form:C1466["selected_"+$ident+"_items"].length>0)
-						APPEND MENU ITEM:C411($menu; "Export the selected items..."; *)  //XLIFF
+						APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("definitionPageLB.exportSelectedItem"; "Export the selected items..."); *)  //XLIFF OK
 					Else 
-						APPEND MENU ITEM:C411($menu; "Export all items..."; *)  //XLIFF
+						APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("definitionPageLB.exportAll"; "Export all items..."); *)  //XLIFF OK
 					End if 
 					SET MENU ITEM ICON:C984($menu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/outside-24x24.png")
 					SET MENU ITEM PARAMETER:C1004($menu; -1; "--export")

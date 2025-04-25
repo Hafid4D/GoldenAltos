@@ -43,7 +43,7 @@
 					"width": 5000,
 					"height": 90,
 					"sizingX": "fixed",
-					"fill": "#A2C6D8",
+					"fill": "#89CFF0",
 					"stroke": "transparent"
 				},
 				"hTabBar": {

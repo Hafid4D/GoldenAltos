@@ -52,13 +52,10 @@ Function _displayHeaderTabFavorite()
 		Else 
 			$esFavorite:=ds:C1482.sfw_Favorite.query("UUID_target = :1 and UUID_User = :2 and entryIdent = :3"; Form:C1466.current_item.UUID; cs:C1710.sfw_userManager.me.info.UUID; Form:C1466.sfw.entry.ident)
 		End if 
-		$title:=($esFavorite.length=0) ? "Add as favorite" : "Is a favorite"
-		$picto:=($esFavorite.length=0) ? "star-empty.png" : "star.png"
-		OBJECT SET VALUE:C1742("headerTabFavorite_title"; $title)
-		$parts:=Split string:C1554(OBJECT Get format:C894(*; "headerTabFavorite_picto"); "/")
-		$last:=$parts.pop()
-		$format:=$parts.push($picto).join("/")
-		OBJECT SET FORMAT:C236(*; "headerTabFavorite_picto"; $format)
+		$title:=($esFavorite.length=0) ? ds:C1482.sfw_readXliff("favorite.addFavorite"; "Add as favorite") : ds:C1482.sfw_readXliff("favorite.isFavorite"; "Is a favorite")  //XLIFF OK
+		OBJECT SET HELP TIP:C1181(*; "headerTabFavorite_button"; $title)
+		$format:=($esFavorite.length=0) ? ";path:/RESOURCES/sfw/image/picto/star-empty.png;;4;1;1;4;0;0;0;0;0;1;1" : ";path:/RESOURCES/sfw/image/picto/star.png;;4;1;1;4;0;0;0;0;0;1;1"
+		OBJECT SET FORMAT:C236(*; "headerTabFavorite_button"; $format)
 		$favoriteTabVisible:=(Form:C1466.current_item#Null:C1517) && (Bool:C1537(Form:C1466.sfw.entry.allowFavorite))
 		OBJECT SET VISIBLE:C603(*; "headerTabFavorite@"; $favoriteTabVisible)
 	Else 

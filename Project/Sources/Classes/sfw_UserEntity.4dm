@@ -47,6 +47,8 @@ local Function askForNewPassword()->$result : Object
 	$result:=cs:C1710.sfw_passwordManager.me.askForNewPassword(This:C1470)
 	If ($result.success)
 		This:C1470.accesses.password.temporary:=False:C215
+		This:C1470.accesses.password.temporaryPassword:=""
+		This:C1470.accesses.password.sendTemporaryByMail:=False:C215
 		This:C1470.accesses.password.lastChange:=cs:C1710.sfw_stmp.me.now()
 		This:C1470.accesses.password.hash:=$result.hash
 		$info:=This:C1470.save()
@@ -57,17 +59,43 @@ local Function askForNewPassword()->$result : Object
 	
 	
 local Function generateTemporaryPassword()->$password : Text
+	var $emailTemplate : cs:C1710.sfw_EmailTemplateEntity
+	var $emailBody : Text
+	
 	$password:=cs:C1710.sfw_passwordManager.me.generateTemporaryPassword()
 	
 	This:C1470.accesses:=(This:C1470.accesses=Null:C1517) ? New object:C1471 : This:C1470.accesses
 	This:C1470.accesses.password:=(This:C1470.accesses.password=Null:C1517) ? New object:C1471 : This:C1470.accesses.password
 	This:C1470.accesses.password.temporary:=True:C214
+	This:C1470.accesses.password.sendTemporaryByMail:=True:C214
+	This:C1470.accesses.password.temporaryPassword:=$password
+	
 	This:C1470.accesses.password.lastReset:=cs:C1710.sfw_stmp.me.now()
 	
 	This:C1470.accesses.password.hash:=Generate password hash:C1533($password; cs:C1710.sfw_passwordManager.me.hashOptions)
 	
+	
+local Function sendTemporaryPassword()
 	// todo: send an email with the temporary password
 	
+	$formula:=Formula from string:C1601("ds.sfw_User.get($1)."+cs:C1710.sfw_definition.me.globalParameters.users.linkedPathToEmailFromUserEntity)
+	$userEmail:=$formula.call(Null:C1517; This:C1470.UUID)
+	
+	If ($userEmail#"")
+		$email:=New object:C1471
+		$dataContext:={userName: This:C1470.login; temporaryPassword: This:C1470.accesses.password.temporaryPassword}
+		$email:=ds:C1482.sfw_EmailTemplate.prepareEmail("UserPasswordTempo"; $dataContext)
+		
+		If ($email#Null:C1517)
+			// To
+			$addressTo:=New object:C1471
+			$addressTo.emailAddress:=New object:C1471
+			$addressto.emailAddress.address:=$userEmail
+			$email.toRecipients:=New collection:C1472($addressTo)
+			
+			cs:C1710.sfw_eMailManager.me.sendAnEMail($email)
+		End if 
+	End if 
 	
 local Function setLogin()->$login : Text
 	$i:=0
@@ -83,7 +111,6 @@ local Function setLogin()->$login : Text
 	Until ($isUnique)
 	
 	This:C1470.login:=cs:C1710.sfw_string.me.stringCapitalize(This:C1470.login)
-	
 	
 	
 local Function beforeSaveCreation()
@@ -105,7 +132,6 @@ local Function beforeSaveCreation()
 	
 local Function afterSave()
 	// This callback is called after saving the current item
-	
 	If (Application type:C494=4D Local mode:K5:1)
 		If (Form:C1466.current_item.UUID=cs:C1710.sfw_userManager.me.info.UUID)
 			cs:C1710.sfw_userManager.me.getAuthorizedProfiles()
@@ -113,3 +139,11 @@ local Function afterSave()
 	Else 
 		EXECUTE ON CLIENT:C651("@"; "sfw_userUpdate"; "getAuthorizedProfiles")
 	End if 
+	
+	If (Bool:C1537(This:C1470.accesses.password.sendTemporaryByMail)=True:C214)
+		This:C1470.sendTemporaryPassword()
+		This:C1470.accesses.password.sendTemporaryByMail:=False:C215
+		OB REMOVE:C1226(This:C1470.accesses.password; "temporaryPassword")
+		$info:=This:C1470.save()
+	End if 
+	

@@ -1,169 +1,181 @@
 {
 	"methods": {
-		"sfw_cacheManager": {
-			"timeStamp": "2024-12-09T09:38:13Z"
-		},
-		"sfw_w_login": {
-			"timeStamp": "2024-12-09T09:38:13Z"
-		},
-		"sfw_User_capitalize_all": {
-			"timeStamp": "2024-12-12T09:56:35Z"
-		},
-		"sfw_wp_addStyleSheet": {
-			"timeStamp": "2024-12-09T09:38:13Z"
-		},
-		"__test": {
-			"timeStamp": "2025-04-04T11:33:17Z"
-		},
-		"sfw_commentManager_sfm": {
-			"timeStamp": "2024-12-09T10:06:16Z"
-		},
-		"sfw_Time": {
-			"timeStamp": "2024-12-09T09:38:13Z"
-		},
-		"__import_data_employees": {
-			"timeStamp": "2025-03-28T09:40:01Z"
-		},
-		"sfw_menu_windows": {
-			"timeStamp": "2024-12-14T22:26:02Z"
-		},
-		"sfw_dynamicForm_method": {
-			"timeStamp": "2025-02-24T11:05:28Z"
-		},
-		"sfw_dynamicPage_pupFilter": {
-			"timeStamp": "2025-02-17T15:35:26Z"
-		},
-		"sfw_on_web_authentification": {
-			"timeStamp": "2024-12-09T09:38:13Z"
-		},
-		"sfw_toolbar_searchBox_cross": {
-			"timeStamp": "2024-12-09T09:38:13Z"
-		},
-		"sfw_compilation_exportFile": {
-			"timeStamp": "2024-12-09T09:38:13Z"
-		},
-		"sfw_toolbar_closeTBPup": {
-			"timeStamp": "2024-12-14T22:26:02Z"
-		},
-		"sfw_macro_panelClass": {
-			"timeStamp": "2025-02-05T08:38:57Z"
-		},
-		"sfw_main_vTabBar_sfo": {
-			"timeStamp": "2024-12-09T09:38:13Z"
-		},
-		"sfw_country_tmpt_address": {
-			"timeStamp": "2025-01-16T09:57:28Z"
-		},
-		"sfw_macro_callbackEntry": {
-			"timeStamp": "2025-01-16T09:57:28Z"
+		"__import_data": {
+			"timeStamp": "2025-04-24T08:50:57Z"
 		},
 		"__import_data_customer": {
-			"timeStamp": "2025-02-24T10:36:48Z"
+			"timeStamp": "2025-04-24T08:50:57Z"
 		},
-		"sfw_compilation_importFile": {
-			"timeStamp": "2024-12-09T09:38:13Z"
-		},
-		"sfw_tool_icon_create4states": {
-			"timeStamp": "2024-12-09T09:38:13Z"
-		},
-		"sfw_cs_register_client": {
-			"timeStamp": "2024-12-09T09:38:13Z"
-		},
-		"sfw_subpanel_schedule_draw": {
-			"timeStamp": "2024-12-09T09:38:13Z"
-		},
-		"sfw_compilation_metaInfo": {
-			"timeStamp": "2024-12-09T09:38:13Z"
-		},
-		"sfw_eventManager_sfm": {
-			"timeStamp": "2025-01-16T09:57:28Z"
-		},
-		"sfw_checkIsInModification": {
-			"timeStamp": "2024-12-17T10:54:03Z"
-		},
-		"__import_purchaseOrders": {
-			"timeStamp": "2025-04-07T14:40:07Z"
-		},
-		"__import_data": {
-			"timeStamp": "2025-03-28T09:34:56Z"
-		},
-		"sfw_userUpdate": {
-			"timeStamp": "2025-02-05T08:38:57Z"
-		},
-		"sfw_panel_formMethod": {
-			"timeStamp": "2025-02-21T09:32:27Z"
-		},
-		"zzz_generateMail": {
-			"timeStamp": "2025-02-20T08:35:40Z"
-		},
-		"sfw_compile_getInfo": {
-			"timeStamp": "2024-12-09T09:38:13Z"
-		},
-		"sfw_subpanel_schedule_period": {
-			"timeStamp": "2024-12-09T09:38:13Z"
-		},
-		"sfw_toolbar_searchBox": {
-			"timeStamp": "2024-12-09T09:38:13Z"
-		},
-		"sfw_globalSearchManager": {
-			"timeStamp": "2024-12-09T09:38:13Z"
-		},
-		"sfw_dynamicPage_bAction": {
-			"timeStamp": "2025-02-11T08:21:04Z"
-		},
-		"sfw_toolbar_launch": {
-			"timeStamp": "2025-01-16T09:57:28Z"
-		},
-		"sfw_macro_callbackEntity": {
-			"timeStamp": "2025-01-16T09:57:28Z"
-		},
-		"xliff_launch_editor": {
-			"timeStamp": "2025-02-20T08:35:40Z"
-		},
-		"sfw_colorize_inputField": {
-			"timeStamp": "2024-12-09T09:38:13Z"
-		},
-		"sfw_w_load_routes": {
-			"timeStamp": "2024-12-09T09:38:13Z"
-		},
-		"sfw_wp_addTable": {
-			"timeStamp": "2024-12-09T09:38:13Z"
-		},
-		"sfw_scheduler_delayedLaunch": {
-			"timeStamp": "2025-01-16T09:57:28Z"
-		},
-		"sfw_w_home_page": {
-			"timeStamp": "2024-12-09T09:38:13Z"
-		},
-		"sfw_w_logout": {
-			"timeStamp": "2024-12-09T09:38:13Z"
-		},
-		"zzzzsfw_stmp_read_date1": {
-			"timeStamp": "2025-02-20T08:35:40Z"
-		},
-		"sfw_dropbox_update_Btn4States": {
-			"timeStamp": "2024-12-09T09:38:13Z"
+		"__import_data_employees": {
+			"timeStamp": "2025-04-24T08:50:57Z"
 		},
 		"__import_data_quote": {
-			"timeStamp": "2025-04-08T12:17:54Z"
+			"timeStamp": "2025-04-24T08:50:57Z"
 		},
-		"sfw_on_startup_database": {
-			"timeStamp": "2025-01-23T09:27:42Z"
+		"__import_purchaseOrders": {
+			"timeStamp": "2025-04-24T08:50:57Z"
 		},
-		"sfw_subpanel_schedule_init": {
-			"timeStamp": "2024-12-09T09:38:13Z"
+		"__test": {
+			"timeStamp": "2025-04-24T08:50:57Z"
 		},
-		"sfw_on_server_startup_database": {
-			"timeStamp": "2025-02-05T08:38:57Z"
+		"highlightCurrentStep": {
+			"timeStamp": "2025-04-24T08:50:57Z"
 		},
-		"sfw_notificationUpdate": {
-			"timeStamp": "2025-02-05T08:38:57Z"
+		"sfw_Time": {
+			"timeStamp": "2025-03-11T18:21:46Z"
 		},
-		"sfw_openForm": {
-			"timeStamp": "2024-12-17T10:54:03Z"
+		"sfw_User_capitalize_all": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_cacheManager": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_checkIsInModification": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_colorize_inputField": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_commentManager_sfm": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_compilation_exportFile": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_compilation_importFile": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_compilation_metaInfo": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_compile_getInfo": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_country_tmpt_address": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_cs_register_client": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_dropbox_update_Btn4States": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_dynamicForm_method": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_dynamicForm_script": {
+			"timeStamp": "2025-03-14T17:42:04Z"
+		},
+		"sfw_dynamicPage_bAction": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_dynamicPage_hl_document": {
+			"timeStamp": "2025-03-20T07:52:39Z"
+		},
+		"sfw_dynamicPage_pupFilter": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_eventManager_sfm": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_globalSearchManager": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_macro_callbackEntity": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_macro_callbackEntry": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_macro_entryDefinition": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_macro_panelClass": {
+			"timeStamp": "2025-03-11T18:21:46Z"
 		},
 		"sfw_main_draw_button": {
-			"timeStamp": "2024-12-09T09:38:13Z"
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_main_vTabBar_sfo": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_menu_windows": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_notificationUpdate": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_on_server_startup_database": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_on_startup_database": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_on_web_authentification": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_openForm": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_panel_formMethod": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_scheduler_delayedLaunch": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_subpanel_schedule_draw": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_subpanel_schedule_init": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_subpanel_schedule_period": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_tool_icon_create4states": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_toolbar_closeTBPup": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_toolbar_launch": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_toolbar_searchBox": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_toolbar_searchBox_cross": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_userUpdate": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_w_home_page": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_w_load_routes": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_w_login": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_w_logout": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_wp_addStyleSheet": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"sfw_wp_addTable": {
+			"timeStamp": "2025-03-11T18:21:46Z"
+		},
+		"xliff_launch_editor": {
+			"timeStamp": "2025-04-24T08:50:57Z"
+		},
+		"zzz_generateMail": {
+			"timeStamp": "2025-04-24T08:50:57Z"
+		},
+		"zzzzsfw_stmp_read_date1": {
+			"timeStamp": "2025-04-24T08:50:57Z"
 		}
 	}
 }

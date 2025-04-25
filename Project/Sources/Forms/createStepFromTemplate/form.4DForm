@@ -39,7 +39,7 @@
 					"top": 0,
 					"left": 0,
 					"width": 480,
-					"height": 440,
+					"height": 430,
 					"fill": "#E6E6E6",
 					"stroke": "transparent",
 					"strokeWidth": 0
@@ -184,17 +184,6 @@
 					"textAlign": "right",
 					"fontWeight": "bold"
 				},
-				"Input": {
-					"type": "input",
-					"left": 151,
-					"top": 84,
-					"width": 293,
-					"height": 18,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.searchStep",
-					"enterable": true
-				},
 				"header_bkgd5": {
 					"type": "rectangle",
 					"top": 111,
@@ -230,7 +219,7 @@
 					"top": 143,
 					"left": 144,
 					"width": 306,
-					"height": 92,
+					"height": 124,
 					"sizingX": "fixed",
 					"fill": "#FFFFFF",
 					"stroke": "transparent"
@@ -240,7 +229,7 @@
 					"top": 143,
 					"left": 450,
 					"width": 32,
-					"height": 92,
+					"height": 124,
 					"sizingX": "fixed",
 					"fill": "#B1CFDE",
 					"stroke": "transparent"
@@ -250,14 +239,14 @@
 					"left": 151,
 					"top": 148,
 					"width": 293,
-					"height": 82,
+					"height": 114,
 					"borderStyle": "none",
 					"fill": "transparent",
 					"dataSource": "Form:C1466.lotStep.description"
 				},
 				"Button": {
 					"type": "button",
-					"top": 407,
+					"top": 402,
 					"left": 322,
 					"width": 70,
 					"height": 20,
@@ -277,7 +266,7 @@
 				},
 				"Button1": {
 					"type": "button",
-					"top": 407,
+					"top": 402,
 					"left": 402,
 					"width": 70,
 					"height": 20,
@@ -345,26 +334,9 @@
 					"textAlign": "right",
 					"fontWeight": "bold"
 				},
-				"Input8": {
-					"type": "input",
-					"left": 151,
-					"top": 52,
-					"width": 293,
-					"height": 18,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.searchTemplate",
-					"enterable": true,
-					"events": [
-						"onClick",
-						"onMouseEnter",
-						"onMouseLeave"
-					],
-					"method": "ObjectMethods/Input8.4dm"
-				},
 				"header_bkgd10": {
 					"type": "rectangle",
-					"top": 239,
+					"top": 271,
 					"left": 0,
 					"width": 140,
 					"height": 28,
@@ -375,7 +347,7 @@
 				"Text4": {
 					"type": "text",
 					"text": "Alert",
-					"top": 245,
+					"top": 277,
 					"left": 7,
 					"width": 102,
 					"height": 15,
@@ -384,7 +356,7 @@
 				"Text6": {
 					"type": "text",
 					"text": ":",
-					"top": 246,
+					"top": 278,
 					"left": 114,
 					"width": 22,
 					"height": 15,
@@ -393,20 +365,20 @@
 				},
 				"header_bkgd11": {
 					"type": "rectangle",
-					"top": 239,
+					"top": 271,
 					"left": 144,
 					"width": 306,
-					"height": 92,
+					"height": 124,
 					"sizingX": "fixed",
 					"fill": "#FFFFFF",
 					"stroke": "transparent"
 				},
 				"header_bkgd12": {
 					"type": "rectangle",
-					"top": 239,
+					"top": 271,
 					"left": 450,
 					"width": 32,
-					"height": 92,
+					"height": 124,
 					"sizingX": "fixed",
 					"fill": "#B1CFDE",
 					"stroke": "transparent"
@@ -414,183 +386,73 @@
 				"Input3": {
 					"type": "input",
 					"left": 151,
-					"top": 244,
+					"top": 276,
 					"width": 293,
-					"height": 82,
+					"height": 114,
 					"borderStyle": "none",
 					"fill": "transparent",
 					"dataSource": "Form:C1466.lotStep.alert"
 				},
-				"header_bkgd14": {
-					"type": "rectangle",
-					"top": 367,
-					"left": 0,
-					"width": 140,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
+				"sf_templateSearch": {
+					"type": "subform",
+					"left": 142,
+					"top": 45,
+					"width": 340,
+					"height": 350,
+					"detailForm": "",
+					"visibility": "visible",
+					"method": "ObjectMethods/sf_templateSearch.4dm",
+					"dataSource": "Form:C1466.sf_templateSearch"
 				},
-				"header_bkgd15": {
-					"type": "rectangle",
-					"top": 367,
-					"left": 144,
-					"width": 306,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#FFFFFF",
-					"stroke": "transparent"
+				"sf_stepTemplateSearch": {
+					"type": "subform",
+					"left": 142,
+					"top": 45,
+					"width": 340,
+					"height": 350,
+					"detailForm": "",
+					"visibility": "visible",
+					"method": "ObjectMethods/sf_stepTemplateSearch.4dm",
+					"dataSource": "Form:C1466.sf_stepTemplateSearch"
 				},
-				"header_bkgd16": {
-					"type": "rectangle",
-					"top": 367,
-					"left": 450,
-					"width": 32,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Text8": {
-					"type": "text",
-					"text": "Date OUT",
-					"top": 373,
-					"left": 7,
-					"width": 102,
-					"height": 15,
-					"fontWeight": "bold"
-				},
-				"Text10": {
-					"type": "text",
-					"text": ":",
-					"top": 373,
-					"left": 114,
-					"width": 22,
-					"height": 15,
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"Input4": {
+				"Input": {
 					"type": "input",
 					"left": 151,
-					"top": 372,
+					"top": 84,
 					"width": 293,
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.lotStep.dateOut",
-					"enterable": false
+					"dataSource": "Form:C1466.searchStep",
+					"enterable": false,
+					"method": "ObjectMethods/Input.4dm",
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					]
 				},
-				"header_bkgd17": {
-					"type": "rectangle",
-					"top": 335,
-					"left": 0,
-					"width": 140,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"header_bkgd18": {
-					"type": "rectangle",
-					"top": 335,
-					"left": 144,
-					"width": 306,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#FFFFFF",
-					"stroke": "transparent"
-				},
-				"header_bkgd19": {
-					"type": "rectangle",
-					"top": 335,
-					"left": 450,
-					"width": 32,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Text11": {
-					"type": "text",
-					"text": "Date IN",
-					"top": 341,
-					"left": 7,
-					"width": 102,
-					"height": 15,
-					"fontWeight": "bold"
-				},
-				"Text12": {
-					"type": "text",
-					"text": ":",
-					"top": 341,
-					"left": 114,
-					"width": 22,
-					"height": 15,
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"Input5": {
+				"Input8": {
 					"type": "input",
 					"left": 151,
-					"top": 340,
+					"top": 52,
 					"width": 293,
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.lotStep.dateIn",
+					"dataSource": "Form:C1466.searchTemplate",
 					"enterable": false,
 					"events": [
 						"onClick",
 						"onMouseEnter",
 						"onMouseLeave"
 					],
-					"method": "ObjectMethods/Input5.4dm"
-				},
-				"PopupDate": {
-					"type": "subform",
-					"top": 373,
-					"left": 457,
-					"width": 19,
-					"height": 16,
-					"dataSource": "Form:C1466.lotStep.dateOut",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/PopupDate.4dm",
-					"events": [
-						"onLoad"
-					],
-					"focusable": true
-				},
-				"PopupDate1": {
-					"type": "subform",
-					"top": 341,
-					"left": 457,
-					"width": 19,
-					"height": 16,
-					"dataSource": "Form:C1466.lotStep.dateIn",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/PopupDate1.4dm",
-					"events": [
-						"onLoad"
-					],
-					"focusable": true
+					"method": "ObjectMethods/Input8.4dm"
 				}
 			}
 		}
 	],
-	"geometryStamp": 3541,
+	"geometryStamp": 3914,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

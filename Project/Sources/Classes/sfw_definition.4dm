@@ -6,7 +6,7 @@ shared singleton Class constructor
 	
 	
 shared Function get visions->$visions : Collection
-	If (This:C1470.storedVision=Null:C1517) || (Not:C34(Is compiled mode:C492))
+	If (This:C1470.storedVision=Null:C1517) || ((Not:C34(Is compiled mode:C492)) && ((FORM Event:C1606.objectName="bToolbar@") || (FORM Event:C1606.objectName="pupVision")))
 		$visions:=cs:C1710[This:C1470.definitionClassName].new().visions
 		This:C1470.storedVisions:=$visions.copy(ck shared:K85:29; This:C1470)
 	Else 
@@ -15,7 +15,7 @@ shared Function get visions->$visions : Collection
 	
 shared Function get entries->$entries : Collection
 	
-	If (This:C1470.storedEntries=Null:C1517) || (Not:C34(Is compiled mode:C492))
+	If (This:C1470.storedEntries=Null:C1517) || (Not:C34(Is compiled mode:C492)) || ((Not:C34(Is compiled mode:C492)) || (Application type:C494#4D Remote mode:K5:5) && ((FORM Event:C1606.objectName="bToolbar@") || (FORM Event:C1606.objectName="pupVision")))
 		$entries:=cs:C1710[This:C1470.definitionClassName].new().entries
 		This:C1470.storedEntries:=$entries.copy(ck shared:K85:29; This:C1470)
 	Else 
@@ -24,7 +24,7 @@ shared Function get entries->$entries : Collection
 	
 shared Function get globalParameters->$globalParameters : Object
 	
-	If (This:C1470.storedGlobalParameters=Null:C1517) || (Not:C34(Is compiled mode:C492))
+	If (This:C1470.storedGlobalParameters=Null:C1517) || ((Not:C34(Is compiled mode:C492)) && ((FORM Event:C1606.objectName="bToolbar@") || (FORM Event:C1606.objectName="pupVision")))
 		$globalParameters:=cs:C1710[This:C1470.definitionClassName].new().globalParameters
 		This:C1470.storedGlobalParameters:=OB Copy:C1225($globalParameters; ck shared:K85:29; This:C1470)
 	Else 
