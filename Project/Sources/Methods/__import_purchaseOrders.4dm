@@ -11,10 +11,20 @@ If (False:C215)
 	
 	$records:=JSON Parse:C1218($file.getText())
 	
+	$erreur:=New collection:C1472()
+	
 	For each ($record; $records)
 		$po:=ds:C1482.PurchaseOrder.new()
 		
-		$po.customer_name:=$record.customer_name
+		$customer_es:=ds:C1482.Customer.query("name = :1"; $record.customer_name)
+		
+		If ($customer_es.length>0)
+			$po.UUID_Customer:=$customer_es[0].UUID
+		Else 
+			$erreur.push($record.customer_name)
+		End if 
+		
+		//$po.customer_name:=$record.customer_name
 		$po.poNumber:=$record.poNumber
 		$po.poAmount:=$record.poAmount
 		$po.amountBilled:=$record.amountBilled
@@ -85,12 +95,16 @@ If (False:C215)
 			End for each 
 		End if 
 	End for each 
+	
+	If ($erreur.length>0)
+		TRACE:C157
+	End if 
 End if 
 
 /**
 import jobs & lot (job <-- lots)
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([Job:117])
 	TRUNCATE TABLE:C1051([Lot:118])
 	TRUNCATE TABLE:C1051([LotStep:5])
@@ -202,6 +216,8 @@ If (False:C215)
 					
 					$lotStep_e.order:=$step.order
 					$lotStep_e.description:=$step.description
+					$lotStep_e.lotSpecs:=$step.lotSpecs
+					$lotStep_e.specRevision:=$step.specRevision
 					$lotStep_e.alert:=$step.alert
 					$lotStep_e.qtyIn:=$step.qtyIn
 					$lotStep_e.qtyOut:=$step.qtyOut
@@ -325,7 +341,7 @@ End if
 /**
 import tools
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([ToolType:122])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/tools_export.json")
@@ -363,7 +379,7 @@ End if
 /**
 import cetifications
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([Certification:124])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/certifications_export.json")
