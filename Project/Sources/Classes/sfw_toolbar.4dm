@@ -1,5 +1,8 @@
 Class extends sfw
 
+
+property vision : Object
+
 Class constructor()
 	Super:C1705()
 	
@@ -55,6 +58,19 @@ Function formMethod()
 			CALL FORM:C1391(Form:C1466.tb_pupwindow; "sfw_toolbar_closeTBPup")
 			
 	End case 
+	OBJECT GET COORDINATES:C663(*; "bkgd_vision"; $left; $top; $right; $bottom)
+	$rectHeight:=$bottom-$top
+	
+	OBJECT GET COORDINATES:C663(*; "pupVisions"; $leftP; $topP; $rightP; $bottomP)
+	OBJECT GET BEST SIZE:C717(*; "pupVisions"; $bestWidth; $bestHeight; 112)
+	$newTop:=($rectHeight-$bestHeight)/2+10
+	
+	OBJECT SET COORDINATES:C1248(*; "pupVisions"; $leftP; $newTop; $rightP; $newTop+$bestHeight)
+	
+	
+	OBJECT SET FONT STYLE:C166(*; "pupVisions"; Bold:K14:2)
+	$color:=Form:C1466.vision.toolbar.color
+	OBJECT SET RGB COLORS:C628(*; "pupVisions"; $color; Background color none:K23:10)
 	
 	
 Function init()
@@ -71,6 +87,10 @@ Function drawToolbar($identVision : Text)
 	var $i : Integer
 	var $iconNum : Integer
 	var $format : Text
+	var $icon : Picture
+	var vToolBarIcon01; vToolBarIcon02; vToolBarIcon03; vToolBarIcon04; vToolBarIcon05; vToolBarIcon06; vToolBarIcon07; vToolBarIcon08; vToolBarIcon09; vToolBarIcon10 : Picture
+	var vToolBarIcon11; vToolBarIcon12; vToolBarIcon13; vToolBarIcon14; vToolBarIcon15; vToolBarIcon16; vToolBarIcon17; vToolBarIcon18; vToolBarIcon19; vToolBarIcon20 : Picture
+	var $iconFile : 4D:C1709.File
 	
 	Form:C1466.currentTB:=$identVision
 	
@@ -96,7 +116,17 @@ Function drawToolbar($identVision : Text)
 			$displayEntry:=True:C214
 		End if 
 		If ($displayEntry)
-			OBJECT SET FORMAT:C236(*; "bToolbar_"+String:C10($iconNum); ds:C1482.sfw_readXliff($entry.xliff; $entry.toolbarLabel)+";#"+$entry.icon+";0;4;1;1;0;0;0;0;0;0;1;0")
+			$iconFile:=Folder:C1567(fk resources folder:K87:11).file($entry.icon)
+			READ PICTURE FILE:C678($iconFile.platformPath; $icon)
+			$iconVariableName:="vToolBarIcon"+String:C10($iconNum; "00")
+			
+			If (Bool:C1537(cs:C1710.sfw_definition.me.globalParameters.toolbar.entryIconsResize)=True:C214)
+				(Get pointer:C304($iconVariableName))->:=$icon*0.75
+			Else 
+				(Get pointer:C304($iconVariableName))->:=$icon
+			End if 
+			
+			OBJECT SET FORMAT:C236(*; "bToolbar_"+String:C10($iconNum); ds:C1482.sfw_readXliff($entry.xliff; $entry.toolbarLabel)+";"+$iconVariableName+";0;4;1;1;0;0;0;0;0;0;1;0")
 			OBJECT SET VISIBLE:C603(*; "bToolbar_"+String:C10($iconNum); True:C214)
 			OBJECT SET HELP TIP:C1181(*; "bToolbar_"+String:C10($iconNum); ds:C1482.sfw_readXliff($entry.xliff; $entry.label))
 			$iconNum:=$iconNum+1
@@ -119,7 +149,12 @@ Function drawToolbar($identVision : Text)
 			If ($indices.length=0)
 				$group:=$entry.toolBarGroup
 				Form:C1466.toolBarGroups.push($group)
-				OBJECT SET FORMAT:C236(*; "bToolbar_"+String:C10($iconNum); ds:C1482.sfw_readXliff($group.xliff; $group.label)+";#"+$group.icon+";0;4;1;1;0;0;0;0;1;0;1;0")
+				$iconFile:=Folder:C1567(fk resources folder:K87:11).file($group.icon)
+				READ PICTURE FILE:C678($iconFile.platformPath; $icon)
+				$iconVariableName:="vToolBarIcon"+String:C10($iconNum; "00")
+				(Get pointer:C304($iconVariableName))->:=$icon*0.75
+				OBJECT SET FORMAT:C236(*; "bToolbar_"+String:C10($iconNum); ds:C1482.sfw_readXliff($entry.xliff; $group.label)+";"+$iconVariableName+";0;4;1;1;0;0;0;0;1;0;1;0")
+				//OBJECT SET FORMAT(*; "bToolbar_"+String($iconNum); ds.sfw_readXliff($group.xliff; $group.label)+";#"+$group.icon+";0;4;1;1;0;0;0;0;1;0;1;0")
 				OBJECT SET VISIBLE:C603(*; "bToolbar_"+String:C10($iconNum); True:C214)
 				OBJECT SET HELP TIP:C1181(*; "bToolbar_"+String:C10($iconNum); ds:C1482.sfw_readXliff($group.xliff; $group.label))
 				$iconNum:=$iconNum+1
@@ -198,69 +233,77 @@ Function pushEntryButton()
 	
 	If ($iconNum<=Form:C1466.toolBarEntries.length)
 		$entry:=Form:C1466.entries.query("toolBarGroup = null").orderBy("displayOrder desc")[$iconNum-1]
-		
-		$windows:=cs:C1710.sfw_window.me.windows.query("process.name = :1"; $entry.ident).orderBy("title")
-		If (cs:C1710.sfw_userManager.me.info.UUID=("00"*16))
-			$favorites:=ds:C1482.sfw_Favorite.query("entryIdent = :1"; $entry.ident)
-		Else 
-			$favorites:=ds:C1482.sfw_Favorite.query("entryIdent = :1 and UUID_User = :2"; $entry.ident; cs:C1710.sfw_userManager.me.info.UUID)
-		End if 
-		If ($windows.length>0) || ($favorites.length>0)
-			$launch:=False:C215
-			$refMenu:=Create menu:C408
-			
-			For each ($window; $windows)
-				APPEND MENU ITEM:C411($refMenu; $window.title; *)
-				SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--window:"+String:C10($window.reference))
-				SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/picto/applications.png")
-			End for each 
-			APPEND MENU ITEM:C411($refMenu; "-")
-			APPEND MENU ITEM:C411($refMenu; "New main window")  //XLIFF
-			SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--newWindow")
-			SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/picto/application-sidebar-list.png")
-			
-			If ($favorites.length>0)
-				APPEND MENU ITEM:C411($refMenu; "-")
-				APPEND MENU ITEM:C411($refMenu; "Favorites")  //XLIFF
-				DISABLE MENU ITEM:C150($refMenu; -1)
-				$favoritesItem:=ds:C1482[$entry.dataclass].query("UUID in :1 order by nameInWindowTitle"; $favorites.UUID_target)
-				For each ($favorite; $favoritesItem)
-					APPEND MENU ITEM:C411($refMenu; $favorite.nameInWindowTitle; *)
-					SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--favorite:"+String:C10($favorite.UUID))
-					SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/picto/star.png")
-				End for each 
-			End if 
-			OBJECT GET COORDINATES:C663(*; $formEvent.objectName; $left; $top; $right; $bottom)
-			
-			$choice:=Dynamic pop up menu:C1006($refMenu; ""; $left; $bottom)
-			RELEASE MENU:C978($refMenu)
-			
-			Case of 
-				: ($choice="")
+		Case of 
+			: ($entry.launchingExpression#Null:C1517)
+				$launch:=False:C215
+				
+				Formula from string:C1601($entry.launchingExpression).call()
+				
+			Else 
+				$windows:=cs:C1710.sfw_window.me.windows.query("process.name = :1"; $entry.ident).orderBy("title")
+				If (cs:C1710.sfw_userManager.me.info.UUID=("00"*16))
+					$favorites:=ds:C1482.sfw_Favorite.query("entryIdent = :1"; $entry.ident)
+				Else 
+					$favorites:=ds:C1482.sfw_Favorite.query("entryIdent = :1 and UUID_User = :2"; $entry.ident; cs:C1710.sfw_userManager.me.info.UUID)
+				End if 
+				If ($windows.length>0) || ($favorites.length>0)
 					$launch:=False:C215
+					$refMenu:=Create menu:C408
 					
-				: ($choice="--newWindow")
-					$launch:=True:C214
+					For each ($window; $windows)
+						APPEND MENU ITEM:C411($refMenu; $window.title; *)
+						SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--window:"+String:C10($window.reference))
+						SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/picto/applications.png")
+					End for each 
+					APPEND MENU ITEM:C411($refMenu; "-")
+					APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("toolbar.newMainWindow"; "New main window"))  //XLIFF OK
+					SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--newWindow")
+					SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/picto/application-sidebar-list.png")
 					
-				: ($choice="--window:@")
-					$refWindow:=Num:C11(Split string:C1554($choice; ":").pop())
-					$window:=cs:C1710.sfw_window.me.windows.query("process.name = :1 & reference = :2"; $entry.ident; $refWindow).first()
-					BRING TO FRONT:C326($window.process.number)
-					SHOW PROCESS:C325($window.process.number)
+					If ($favorites.length>0)
+						APPEND MENU ITEM:C411($refMenu; "-")
+						APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("toolbar.favorites"; "Favorites"))  //XLIFF OK
+						DISABLE MENU ITEM:C150($refMenu; -1)
+						$favoritesItem:=ds:C1482[$entry.dataclass].query("UUID in :1 order by nameInWindowTitle"; $favorites.UUID_target)
+						For each ($favorite; $favoritesItem)
+							APPEND MENU ITEM:C411($refMenu; $favorite.nameInWindowTitle; *)
+							SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--favorite:"+String:C10($favorite.UUID))
+							SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/picto/star.png")
+						End for each 
+					End if 
+					OBJECT GET COORDINATES:C663(*; $formEvent.objectName; $left; $top; $right; $bottom)
 					
-				: ($choice="--favorite:@")
-					$uuid:=Split string:C1554($choice; ":").pop()
-					$visionIdent:=Form:C1466.vision.ident
-					$entryIdent:=$entry.ident
-					$formData:=New object:C1471()
-					$formData.sfw:=cs:C1710.sfw_item.new()
-					$formData.sfw.vision:=cs:C1710.sfw_definition.me.visions.query("ident = :1"; $visionIdent).first()
-					$formData.sfw.entry:=cs:C1710.sfw_definition.me.entries.query("ident = :1"; $entryIdent).first()
-					$formData.current_item:=ds:C1482[$entry.dataclass].get($uuid)
-					$formData.sfw.openForm($formData)
-			End case 
-			
-		End if 
+					$choose:=Dynamic pop up menu:C1006($refMenu; ""; $left; $bottom)
+					RELEASE MENU:C978($refMenu)
+					
+					Case of 
+						: ($choose="")
+							$launch:=False:C215
+							
+						: ($choose="--newWindow")
+							$launch:=True:C214
+							
+						: ($choose="--window:@")
+							$refWindow:=Num:C11(Split string:C1554($choose; ":").pop())
+							$window:=cs:C1710.sfw_window.me.windows.query("process.name = :1 & reference = :2"; $entry.ident; $refWindow).first()
+							BRING TO FRONT:C326($window.process.number)
+							SHOW PROCESS:C325($window.process.number)
+							
+						: ($choose="--favorite:@")
+							$uuid:=Split string:C1554($choose; ":").pop()
+							$visionIdent:=Form:C1466.vision.ident
+							$entryIdent:=$entry.ident
+							$formData:=New object:C1471()
+							$formData.sfw:=cs:C1710.sfw_item.new()
+							$formData.sfw.vision:=cs:C1710.sfw_definition.me.visions.query("ident = :1"; $visionIdent).first()
+							$formData.sfw.entry:=cs:C1710.sfw_definition.me.entries.query("ident = :1"; $entryIdent).first()
+							$formData.current_item:=ds:C1482[$entry.dataclass].get($uuid)
+							$formData.sfw.openForm($formData)
+					End case 
+					
+				End if 
+		End case 
+		
 		
 	Else 
 		$numGroup:=$iconNum-Form:C1466.toolBarEntries.length
@@ -288,13 +331,13 @@ Function pushEntryButton()
 				End for each 
 				
 				APPEND MENU ITEM:C411($refClassesMenu; "-")
-				APPEND MENU ITEM:C411($refClassesMenu; "New main window")  //XLIFF
+				APPEND MENU ITEM:C411($refClassesMenu; ds:C1482.sfw_readXliff("toolbar.newMainWindow"; "New main window"))  //XLIFF OK
 				SET MENU ITEM PARAMETER:C1004($refClassesMenu; -1; "--newWindow:"+$entry.ident)
 				SET MENU ITEM ICON:C984($refClassesMenu; -1; "Path:/RESOURCES/sfw/image/picto/application-sidebar-list.png")
 				
 				If ($favorites.length>0)
 					APPEND MENU ITEM:C411($refClassesMenu; "-")
-					APPEND MENU ITEM:C411($refClassesMenu; "Favorites")  //XLIFF
+					APPEND MENU ITEM:C411($refClassesMenu; ds:C1482.sfw_readXliff("toolbar.favorites"; "Favorites"))  //XLIFF OK
 					DISABLE MENU ITEM:C150($refClassesMenu; -1)
 					$favoritesItem:=ds:C1482[$entry.dataclass].query("UUID in :1 order by nameInWindowTitle"; $favorites.UUID_target)
 					For each ($favorite; $favoritesItem)
@@ -309,12 +352,16 @@ Function pushEntryButton()
 				SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--newWindow:"+$entry.ident)
 				
 			End if 
-			SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/"+$entry.icon)
+			If ($entry.iconAlternative#"")
+				SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/"+$entry.iconAlternative)
+			Else 
+				SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/"+$entry.icon)
+			End if 
 		End for each 
 		
 		OBJECT GET COORDINATES:C663(*; $formEvent.objectName; $left; $top; $right; $bottom)
 		
-		$choice:=Dynamic pop up menu:C1006($refMenu; ""; $left; $bottom)
+		$choose:=Dynamic pop up menu:C1006($refMenu; ""; $left; $bottom)
 		For each ($refMenu; This:C1470.refMenus)
 			RELEASE MENU:C978($refMenu)
 		End for each 
@@ -322,21 +369,21 @@ Function pushEntryButton()
 		
 		
 		Case of 
-			: ($choice="")
+			: ($choose="")
 				$launch:=False:C215
-			: ($choice="--newWindow:@")
-				$ident:=Substring:C12($choice; 13)
+			: ($choose="--newWindow:@")
+				$ident:=Substring:C12($choose; 13)
 				$launch:=True:C214
 				$entry:=Form:C1466.entries.query("ident = :1"; $ident).first()
 				
-			: ($choice="--window:@")
-				$refWindow:=Num:C11(Split string:C1554($choice; ":").pop())
+			: ($choose="--window:@")
+				$refWindow:=Num:C11(Split string:C1554($choose; ":").pop())
 				$window:=cs:C1710.sfw_window.me.windows.query("reference = :1"; $refWindow).first()
 				BRING TO FRONT:C326($window.process.number)
 				SHOW PROCESS:C325($window.process.number)
 				
-			: ($choice="--favorite:@")
-				$parts:=Split string:C1554($choice; ":")
+			: ($choose="--favorite:@")
+				$parts:=Split string:C1554($choose; ":")
 				$entryIdent:=$parts.pop()
 				$uuid:=$parts.pop()
 				$visionIdent:=Form:C1466.vision.ident
@@ -377,14 +424,16 @@ Function pushCurrentUserButton()
 	DISABLE MENU ITEM:C150($refMenu; -1)
 	APPEND MENU ITEM:C411($refMenu; "-")
 	
-	APPEND MENU ITEM:C411($refMenu; "Store access in preferences..."; *)  //XLIFF
-	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--storeAccess")
-	APPEND MENU ITEM:C411($refMenu; "Change my password..."; *)  //XLIFF
+	////mark: Store access in preferences
+	//APPEND MENU ITEM($refMenu; ds.sfw_readXliff("toolbar.storeAccess"; "Store access in preferences..."); *)  //XLIFF OK
+	//SET MENU ITEM PARAMETER($refMenu; -1; "--storeAccess")
+	//mark: Change my password
+	APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("toolbar.changePassword"; "Change my password..."); *)  //XLIFF OK
 	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--changePassword")
 	
 	If (cs:C1710.sfw_userManager.me.info.asDesigner) && (Not:C34(Is compiled mode:C492))
 		APPEND MENU ITEM:C411($refMenu; "-")
-		APPEND MENU ITEM:C411($refMenu; "only for designer")
+		APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("toolbar.onlyForDesigner"; "only for designer"))  // add xliff
 		DISABLE MENU ITEM:C150($refMenu; -1)
 		
 		$refClassesMenu:=Create menu:C408
@@ -395,47 +444,57 @@ Function pushCurrentUserButton()
 		ARRAY TEXT:C222($_paths; 0)
 		METHOD GET PATHS:C1163(Path class:K72:19; $_paths)
 		
+		//mark: SFW user classes
 		$refSFWUSerClassesMenu:=Create menu:C408
 		This:C1470.refMenus.push($refSFWUSerClassesMenu)
 		For each ($className; $classNames)
 			If ($className="sfw@")
 				If (cs:C1710[$className].superclass.name="Object") || (cs:C1710[$className].superclass.name="sfw@")
 					If (Find in array:C230($_paths; "[class]/"+$className)>0) && ($classNamesDisplayed.indexOf($className)=-1)
-						$refMenuFunction:=This:C1470._menuFunction($className)
+						$refMenuFunction:=This:C1470._menuFunction($className; "file:sfw/image/menu/class.png")
 						APPEND MENU ITEM:C411($refSFWUSerClassesMenu; $className; $refMenuFunction; *)
 						SET MENU ITEM PARAMETER:C1004($refSFWUSerClassesMenu; -1; "--class:"+$className)
+						SET MENU ITEM ICON:C984($refSFWUSerClassesMenu; -1; "file:sfw/image/menu/class.png")
 						$classNamesDisplayed.push($className)
 					End if 
 				End if 
 			End if 
 		End for each 
-		APPEND MENU ITEM:C411($refClassesMenu; "SFW user classes"; $refSFWUSerClassesMenu; *)  //XLIFF
+		APPEND MENU ITEM:C411($refClassesMenu; ds:C1482.sfw_readXliff("toolbar.sfwUserClasses"; "SFW user classes"); $refSFWUSerClassesMenu; *)  //XLIFF OK
+		SET MENU ITEM ICON:C984($refClassesMenu; -1; "file:sfw/image/menu/class.png")
 		
+		//mark: SFW data classes
 		$refSFWDataclassesMenu:=Create menu:C408
 		This:C1470.refMenus.push($refSFWDataclassesMenu)
 		For each ($className; $classNames)
 			If ($className="sfw@")
 				If (cs:C1710[$className].superclass.name#"Object") && (cs:C1710[$className].superclass.name#"sfw@")
 					If (Find in array:C230($_paths; "[class]/"+$className)>0) && ($classNamesDisplayed.indexOf($className)=-1)
-						$refMenuFunction:=This:C1470._menuFunction($className)
+						$refMenuFunction:=This:C1470._menuFunction($className; "file:sfw/image/menu/extendDataclass.png")
 						APPEND MENU ITEM:C411($refSFWDataclassesMenu; $className; $refMenuFunction; *)
 						SET MENU ITEM PARAMETER:C1004($refSFWDataclassesMenu; -1; "--class:"+$className)
+						SET MENU ITEM ICON:C984($refSFWDataclassesMenu; -1; "file:sfw/image/menu/extendDataclass.png")
 						$classNamesDisplayed.push($className)
 					End if 
 				End if 
 			End if 
 		End for each 
-		APPEND MENU ITEM:C411($refClassesMenu; "SFW dataclasses"; $refSFWDataclassesMenu; *)  //XLIFF
+		APPEND MENU ITEM:C411($refClassesMenu; ds:C1482.sfw_readXliff("toolbar.sfwSataclasses"; "SFW dataclasses"); $refSFWDataclassesMenu; *)  //XLIFF OK
+		SET MENU ITEM ICON:C984($refClassesMenu; -1; "file:sfw/image/menu/extendDataclass.png")
 		
+		//mark: Project definition classes
 		$refSFWDefinitionclassesMenu:=Create menu:C408
 		This:C1470.refMenus.push($refSFWDefinitionclassesMenu)
 		$className:=Storage:C1525.definitionClass.name
-		$refMenuFunction:=This:C1470._menuFunction($className)
+		$refMenuFunction:=This:C1470._menuFunction($className; "file:sfw/image/menu/puzzle.png")
 		APPEND MENU ITEM:C411($refSFWDefinitionclassesMenu; $className; $refMenuFunction; *)
 		SET MENU ITEM PARAMETER:C1004($refSFWDefinitionclassesMenu; -1; "--class:"+$className)
+		SET MENU ITEM ICON:C984($refSFWDefinitionclassesMenu; -1; "file:sfw/image/menu/puzzle.png")
 		$classNamesDisplayed.push($className)
-		APPEND MENU ITEM:C411($refClassesMenu; "Project definition class"; $refSFWDefinitionclassesMenu; *)  //XLIFF
+		APPEND MENU ITEM:C411($refClassesMenu; ds:C1482.sfw_readXliff("toolbar.projectDefinitionClass"; "Project definition class"); $refSFWDefinitionclassesMenu; *)  //XLIFF OK
+		SET MENU ITEM ICON:C984($refClassesMenu; -1; "file:sfw/image/menu/puzzle.png")
 		
+		//mark: Entry classes
 		$refentryclassesMenu:=Create menu:C408
 		This:C1470.refMenus.push($refSFWDataclassesMenu)
 		$entries:=cs:C1710.sfw_definition.me.entries.orderBy("dataclass")
@@ -444,16 +503,19 @@ Function pushCurrentUserButton()
 				$className:=String:C10($entry.dataclass)+$suffix
 				If ($className#"") && (cs:C1710[$className]#Null:C1517)
 					If (Find in array:C230($_paths; "[class]/"+$className)>0) && ($classNamesDisplayed.indexOf($className)=-1)
-						$refMenuFunction:=This:C1470._menuFunction($className)
+						$refMenuFunction:=This:C1470._menuFunction($className; "file:sfw/image/menu/entry.png")
 						APPEND MENU ITEM:C411($refentryclassesMenu; $className; $refMenuFunction; *)
 						SET MENU ITEM PARAMETER:C1004($refentryclassesMenu; -1; "--class:"+$className)
+						SET MENU ITEM ICON:C984($refentryclassesMenu; -1; "file:sfw/image/menu/entry.png")
 						$classNamesDisplayed.push($className)
 					End if 
 				End if 
 			End for each 
 		End for each 
-		APPEND MENU ITEM:C411($refClassesMenu; "Entry classes"; $refentryclassesMenu; *)  //XLIFF
+		APPEND MENU ITEM:C411($refClassesMenu; ds:C1482.sfw_readXliff("toolbar.entryClasses"; "Entry classes"); $refentryclassesMenu; *)  //XLIFF ok 
+		SET MENU ITEM ICON:C984($refClassesMenu; -1; "file:sfw/image/menu/entry.png")
 		
+		//mark: Panel classes
 		$refpanelclassesMenu:=Create menu:C408
 		This:C1470.refMenus.push($refSFWDataclassesMenu)
 		$entries:=cs:C1710.sfw_definition.me.entries.orderBy("panel.name")
@@ -461,74 +523,94 @@ Function pushCurrentUserButton()
 			$className:=String:C10($entry.panel.name)
 			If ($className#"") && (cs:C1710[$className]#Null:C1517)
 				If (Find in array:C230($_paths; "[class]/"+$className)>0) && ($classNamesDisplayed.indexOf($className)=-1)
-					$refMenuFunction:=This:C1470._menuFunction($className)
+					$refMenuFunction:=This:C1470._menuFunction($className; "file:sfw/image/menu/panel.png")
 					APPEND MENU ITEM:C411($refpanelclassesMenu; $className; $refMenuFunction; *)
 					SET MENU ITEM PARAMETER:C1004($refpanelclassesMenu; -1; "--class:"+$className)
+					SET MENU ITEM ICON:C984($refpanelclassesMenu; -1; "file:sfw/image/menu/panel.png")
 					$classNamesDisplayed.push($className)
 				End if 
 			End if 
 		End for each 
-		APPEND MENU ITEM:C411($refClassesMenu; "Panel classes"; $refpanelclassesMenu; *)  //XLIFF
+		APPEND MENU ITEM:C411($refClassesMenu; ds:C1482.sfw_readXliff("toolbar.panelClasses"; "Panel classes"); $refpanelclassesMenu; *)  //XLIFF
+		SET MENU ITEM ICON:C984($refClassesMenu; -1; "file:sfw/image/menu/panel.png")
 		
+		//mark: Other classes
 		$refotherclassesMenu:=Create menu:C408
 		This:C1470.refMenus.push($refSFWDataclassesMenu)
 		For each ($className; $classNames)
 			If ($classNamesDisplayed.indexOf($className)=-1)
-				If (cs:C1710[$className].superclass.name#"Object") && (cs:C1710[$className].superclass.name#"sfw@")
+				If (cs:C1710[$className].superclass.name#"Object") && (cs:C1710[$className].superclass.name#"sfw@") && ($className#"DataStore")
 					If (Find in array:C230($_paths; "[class]/"+$className)>0) && ($classNamesDisplayed.indexOf($className)=-1)
-						$refMenuFunction:=This:C1470._menuFunction($className)
+						$refMenuFunction:=This:C1470._menuFunction($className; "file:sfw/image/menu/extendDataclass.png")
 						APPEND MENU ITEM:C411($refotherclassesMenu; $className; $refMenuFunction; *)
 						SET MENU ITEM PARAMETER:C1004($refotherclassesMenu; -1; "--class:"+$className)
+						SET MENU ITEM ICON:C984($refotherclassesMenu; -1; "file:sfw/image/menu/extendDataclass.png")
 						$classNamesDisplayed.push($className)
 					End if 
 				End if 
 			End if 
 		End for each 
-		APPEND MENU ITEM:C411($refClassesMenu; "Other dataclasses"; $refotherclassesMenu; *)  //XLIFF
+		APPEND MENU ITEM:C411($refClassesMenu; ds:C1482.sfw_readXliff("toolbar.otherDataclasses"; "Other dataclasses"); $refotherclassesMenu; *)  //XLIFF ok
+		SET MENU ITEM ICON:C984($refClassesMenu; -1; "file:sfw/image/menu/extendDataclass.png")
 		
 		$refotheruserclassesMenu:=Create menu:C408
 		This:C1470.refMenus.push($refSFWDataclassesMenu)
 		For each ($className; $classNames)
 			If ($classNamesDisplayed.indexOf($className)=-1)
-				If (cs:C1710[$className].superclass.name="Object")
-					If (Find in array:C230($_paths; "[class]/"+$className)>0) && ($classNamesDisplayed.indexOf($className)=-1)
-						$refMenuFunction:=This:C1470._menuFunction($className)
-						APPEND MENU ITEM:C411($refotheruserclassesMenu; $className; $refMenuFunction; *)
-						SET MENU ITEM PARAMETER:C1004($refotheruserclassesMenu; -1; "--class:"+$className)
-						$classNamesDisplayed.push($className)
-					End if 
-				End if 
+				Case of 
+					: ($className="DataStore")
+						If (Find in array:C230($_paths; "[class]/"+$className)>0) && ($classNamesDisplayed.indexOf($className)=-1)
+							$refMenuFunction:=This:C1470._menuFunction($className; "file:sfw/image/menu/datastore.png")
+							APPEND MENU ITEM:C411($refotheruserclassesMenu; $className; $refMenuFunction; *)
+							SET MENU ITEM PARAMETER:C1004($refotheruserclassesMenu; -1; "--class:"+$className)
+							SET MENU ITEM ICON:C984($refotheruserclassesMenu; -1; "file:sfw/image/menu/datastore.png")
+							$classNamesDisplayed.push($className)
+						End if 
+					: (cs:C1710[$className].superclass.name="Object")
+						If (Find in array:C230($_paths; "[class]/"+$className)>0) && ($classNamesDisplayed.indexOf($className)=-1)
+							$refMenuFunction:=This:C1470._menuFunction($className; "file:sfw/image/menu/class.png")
+							APPEND MENU ITEM:C411($refotheruserclassesMenu; $className; $refMenuFunction; *)
+							SET MENU ITEM PARAMETER:C1004($refotheruserclassesMenu; -1; "--class:"+$className)
+							SET MENU ITEM ICON:C984($refotheruserclassesMenu; -1; "file:sfw/image/menu/class.png")
+							$classNamesDisplayed.push($className)
+						End if 
+				End case 
 			End if 
 		End for each 
+		APPEND MENU ITEM:C411($refClassesMenu; ds:C1482.sfw_readXliff("toolbar.otherDataclasses"; "Other dataclasses"); $refotheruserclassesMenu; *)  //XLIFF ok
+		SET MENU ITEM ICON:C984($refClassesMenu; -1; "file:sfw/image/menu/class.png")
 		
-		APPEND MENU ITEM:C411($refClassesMenu; "Other user classes"; $refotheruserclassesMenu; *)  //XLIFF
-		APPEND MENU ITEM:C411($refMenu; "Classes"; $refClassesMenu; *)  //XLIFF
 		
-		APPEND MENU ITEM:C411($refMenu; "Test Microsoft Office 365 : send mail"; *)  //XLIFF
+		APPEND MENU ITEM:C411($refMenu; "Classes"; $refClassesMenu; *)  //XLIFF OK
+		SET MENU ITEM ICON:C984($refMenu; -1; "file:sfw/image/menu/classes.png")
+		
+		//mark: Test Microsoft Office 365 
+		APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("toolbar.testMOMail"; "Test Microsoft Office 365 : send mail"); *)  //XLIFF OK
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--microsoftGraphSendMail")
 		
 		APPEND MENU ITEM:C411($refMenu; "-")
 		$colorMenu:=cs:C1710.sfw_htmlColor.me.buildMenu(This:C1470.refMenus)
 		
-		APPEND MENU ITEM:C411($refMenu; "Colors"; $colorMenu; *)  //XLIFF
+		//mark: Colors 
+		APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("toolbar.colors"; "Colors"); $colorMenu; *)  //XLIFF OK
 		
 		
 	End if 
 	
 	
-	$choice:=Dynamic pop up menu:C1006($refMenu; ""; $left; $bottom)
+	$choose:=Dynamic pop up menu:C1006($refMenu; ""; $left; $bottom)
 	For each ($refMenu; This:C1470.refMenus)
 		RELEASE MENU:C978($refMenu)
 	End for each 
 	This:C1470.refMenus:=New collection:C1472
 	
 	Case of 
-		: ($choice="")
-		: ($choice="--storeAccess")
+		: ($choose="")
+		: ($choose="--storeAccess")
 			cs:C1710.sfw_userManager.me.storeAccess()
 			
-		: ($choice="--class:@")
-			$class:=Substring:C12($choice; 9)
+		: ($choose="--class:@")
+			$class:=Substring:C12($choose; 9)
 			METHOD GET PATHS:C1163(Path class:K72:19; $_paths)
 			$classParts:=Split string:C1554($class; "/")
 			If (Find in array:C230($_paths; "[class]/"+$classParts[0])>0)
@@ -543,7 +625,7 @@ Function pushCurrentUserButton()
 				End if 
 			End if 
 			
-		: ($choice="--microsoftGraphSendMail")
+		: ($choose="--microsoftGraphSendMail")
 			If (String:C10(cs:C1710.sfw_userManager.me.info.email)#"")
 				
 				//$graphAPI:=cs.microsoftGraphAPI.new()
@@ -583,16 +665,16 @@ Function pushCurrentUserButton()
 				
 				
 			End if 
-		: ($choice="--changePassword")
+		: ($choose="--changePassword")
 			var $eUser : cs:C1710.sfw_UserEntity
 			$eUser:=ds:C1482.sfw_User.query("login = :1"; Current user:C182).first()
 			If ($eUser#Null:C1517)
 				$eUser.askForNewPassword()
 			End if 
 			
-		: ($choice="#@") && (Length:C16($choice)=7)
+		: ($choose="#@") && (Length:C16($choose)=7)
 			var $color : Object
-			$color:=cs:C1710.sfw_htmlColor.me.colors.query("hex = :1"; $choice).first()
+			$color:=cs:C1710.sfw_htmlColor.me.colors.query("hex = :1"; $choose).first()
 			OB REMOVE:C1226($color; "picture")
 			SET TEXT TO PASTEBOARD:C523(JSON Stringify:C1217($color; *))
 			
@@ -602,16 +684,29 @@ Function pushCurrentUserButton()
 	End case 
 	
 	
-Function _menuFunction($className : Text)->$refMenu : Text
+Function _menuFunction($className : Text; $pathIcon : Text)->$refMenu : Text
 	$refMenu:=Create menu:C408
 	This:C1470.refMenus.push($refMenu)
 	$memberFunctions:=OB Keys:C1719(cs:C1710[$className].__prototype).sort()
 	APPEND MENU ITEM:C411($refMenu; $className; *)
 	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--class:"+$className)
+	SET MENU ITEM ICON:C984($refMenu; -1; $pathIcon)
 	APPEND MENU ITEM:C411($refMenu; "-")
 	For each ($memberFunction; $memberFunctions)
 		APPEND MENU ITEM:C411($refMenu; $memberFunction; *)
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--class:"+$className+"/"+$memberFunction)
+		Case of 
+			: ($memberFunction="get @")
+				SET MENU ITEM ICON:C984($refMenu; -1; "file:sfw/image/menu/database--arrow.png")
+			: ($memberFunction="set @")
+				SET MENU ITEM ICON:C984($refMenu; -1; "file:sfw/image/menu/database-import.png")
+			: ($memberFunction="query @")
+				SET MENU ITEM ICON:C984($refMenu; -1; "file:sfw/image/menu/magnifier.png")
+			: ($memberFunction="orderBy @")
+				SET MENU ITEM ICON:C984($refMenu; -1; "file:sfw/image/menu/sort.png")
+			Else 
+				SET MENU ITEM ICON:C984($refMenu; -1; "file:sfw/image/menu/function.png")
+		End case 
 	End for each 
 	
 	
@@ -710,7 +805,7 @@ Function pupVisions()
 		
 	End if 
 	
-	OBJECT GET COORDINATES:C663(*; FORM Event:C1606.objectName; $left; $top; $right; $bottom)
+	OBJECT GET COORDINATES:C663(*; "bkgd_vision"; $left; $top; $right; $bottom)
 	$choose:=Dynamic pop up menu:C1006($mainMenu; ""; $left; $bottom)
 	For each ($menuToRelease; $menusToRelease)
 		RELEASE MENU:C978($menuToRelease)
@@ -736,6 +831,81 @@ Function pupVisions()
 			
 		: ($choose="--reload")
 			ds:C1482.sfw_reloadProjectOnServer()
+	End case 
+	
+	
+Function pupLogo()
+	
+	
+	$refMenus:=New collection:C1472
+	$refMenu:=Create menu:C408
+	$refMenus.push($refMenu)
+	
+	$identFavoriteEntries:=ds:C1482.sfw_Favorite.getIdentFavoriteEntries()
+	If ($identFavoriteEntries.length>0)
+		$refSubMenuEntry:=Create menu:C408
+		$refMenus.push($refSubMenuEntry)
+		For each ($ident; $identFavoriteEntries)
+			$entry:=cs:C1710.sfw_definition.me.getEntryByIdent($ident)
+			APPEND MENU ITEM:C411($refSubMenuEntry; $entry.label; *)
+			SET MENU ITEM PARAMETER:C1004($refSubMenuEntry; -1; "--entry:"+$ident)
+		End for each 
+		APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("toolbar.favoriteEntries"; "Favorite entries"); $refSubMenuEntry; *)  //XLIFF OK
+	End if 
+	If (cs:C1710.sfw_userManager.me.info.UUID=("00"*16))
+		$esFavorites:=ds:C1482.sfw_Favorite.query("UUID_target # null order by entryIdent")
+	Else 
+		$esFavorites:=ds:C1482.sfw_Favorite.query("UUID_target # null and UUID_User = :1 order by entryIdent"; cs:C1710.sfw_userManager.me.info.UUID)
+	End if 
+	If ($esFavorites.length>0)
+		$refSubMenuFavorite:=Create menu:C408
+		$refMenus.push($refSubMenuFavorite)
+		For each ($eFavorite; $esFavorites)
+			$entry:=cs:C1710.sfw_definition.me.getEntryByIdent($eFavorite.entryIdent)
+			$favoritesItem:=ds:C1482[$entry.dataclass].get($eFavorite.UUID_target)
+			APPEND MENU ITEM:C411($refSubMenuFavorite; $entry.label+": "+$favoritesItem.nameInWindowTitle; *)
+			SET MENU ITEM PARAMETER:C1004($refSubMenuFavorite; -1; "--favorite:"+String:C10($favoritesItem.UUID)+":"+$entry.ident)
+			SET MENU ITEM ICON:C984($refSubMenuFavorite; -1; "Path:/RESOURCES/sfw/image/picto/star.png")
+		End for each 
+		APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("toolbar.favoriteItems"; "Favorite items"); $refSubMenuFavorite; *)  //XLIFF OK
+	End if 
+	
+	OBJECT GET COORDINATES:C663(*; "bkgd_logo"; $g; $h; $d; $b)
+	
+	$choose:=Dynamic pop up menu:C1006($refMenu; ""; $g; $b)
+	For each ($refMenu; $refMenus)
+		RELEASE MENU:C978($refMenu)
+	End for each 
+	
+	Case of 
+		: ($choose="--entry:@")
+			$ident:=Split string:C1554($choose; ":").pop()
+			$entry:=cs:C1710.sfw_definition.me.getEntryByIdent($ident)
+			$visionIdent:=$entry.visions.first()
+			$formData:=New object:C1471()
+			Case of 
+				: ($entry.wizard#Null:C1517)
+					$formData.sfw:=cs:C1710.sfw_wizard.new()
+				Else 
+					$formData.sfw:=cs:C1710.sfw_main.new()
+			End case 
+			$formData.sfw.vision:=cs:C1710.sfw_definition.me.getVisionByIdent($visionIdent)
+			$formData.sfw.entry:=$entry
+			$formData.sfw.openForm($formData)
+			
+		: ($choose="--favorite:@")
+			$parts:=Split string:C1554($choose; ":")
+			$entryIdent:=$parts.pop()
+			$uuid:=$parts.pop()
+			$entry:=cs:C1710.sfw_definition.me.getEntryByIdent($entryIdent)
+			$visionIdent:=$entry.visions.first()
+			$formData:=New object:C1471()
+			$formData.sfw:=cs:C1710.sfw_item.new()
+			$formData.sfw.vision:=cs:C1710.sfw_definition.me.getVisionByIdent($visionIdent)
+			$formData.sfw.entry:=$entry
+			$formData.current_item:=ds:C1482[$entry.dataclass].get($uuid)
+			$formData.sfw.openForm($formData)
+			
 	End case 
 	
 	

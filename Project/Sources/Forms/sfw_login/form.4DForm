@@ -37,7 +37,7 @@
 					"top": 0,
 					"left": 0,
 					"width": 381,
-					"height": 423,
+					"height": 344,
 					"sizingX": "fixed",
 					"fill": "#FFFFFF",
 					"stroke": "transparent",
@@ -55,7 +55,7 @@
 					"contextMenu": "none",
 					"focusable": false,
 					"dataSource": "Form:C1466.logo",
-					"pictureFormat": "truncatedCenter"
+					"pictureFormat": "proportionalCenter"
 				}
 			}
 		},
@@ -73,7 +73,8 @@
 					"dataSource": "Form:C1466.pup_users",
 					"dataSourceTypeHint": "object",
 					"sizingX": "fixed",
-					"sizingY": "fixed"
+					"sizingY": "fixed",
+					"method": "ObjectMethods/pup_users.4dm"
 				},
 				"input_password": {
 					"type": "input",
@@ -90,25 +91,6 @@
 						"onAfterEdit"
 					],
 					"method": "ObjectMethods/input_password.4dm"
-				},
-				"btn_login": {
-					"type": "button",
-					"text": ":xliff:user.login.button.login",
-					"top": 316,
-					"left": 54,
-					"width": 276,
-					"height": 36,
-					"events": [
-						"onClick"
-					],
-					"sizingX": "fixed",
-					"sizingY": "fixed",
-					"method": "ObjectMethods/btn_login.4dm",
-					"shortcutAccel": false,
-					"shortcutControl": false,
-					"shortcutShift": false,
-					"shortcutAlt": false,
-					"shortcutKey": "[Return]"
 				},
 				"Text": {
 					"type": "text",
@@ -131,7 +113,7 @@
 				"input_error": {
 					"type": "input",
 					"left": 30,
-					"top": 250,
+					"top": 273,
 					"width": 317,
 					"height": 33,
 					"textAlign": "center",
@@ -142,11 +124,86 @@
 					"borderStyle": "none",
 					"stroke": "#ff6347",
 					"dataSource": "Form:C1466.error"
+				},
+				"checkbox_storeAccess": {
+					"type": "checkbox",
+					"text": ":xliff:user.login.checkbox.rememberMe",
+					"top": 233,
+					"left": 30,
+					"width": 340,
+					"height": 31,
+					"events": [
+						"onClick"
+					],
+					"fontSize": 10,
+					"dataSourceTypeHint": "boolean",
+					"dataSource": "Form:C1466.storeAccess"
+				},
+				"Button": {
+					"type": "button",
+					"text": "shortcut",
+					"top": 319,
+					"left": 295,
+					"width": 75,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"visibility": "hidden",
+					"shortcutAccel": false,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": false,
+					"shortcutKey": "[Enter]"
+				},
+				"bCancel": {
+					"type": "button",
+					"top": 348,
+					"left": 142,
+					"width": 100,
+					"height": 32,
+					"sizingY": "move",
+					"focusable": false,
+					"text": ":xliff:user.login.button.quit",
+					"icon": "/RESOURCES/sfw/image/skin/rainbow/btn4states/return-24x24.png",
+					"iconFrames": 4,
+					"textPlacement": "right",
+					"style": "custom",
+					"events": [
+						"onClick"
+					],
+					"action": "cancel",
+					"sizingX": "move"
+				},
+				"bOk": {
+					"type": "button",
+					"top": 348,
+					"left": 270,
+					"width": 100,
+					"height": 32,
+					"sizingY": "move",
+					"focusable": false,
+					"text": ":xliff:user.login.button.login",
+					"icon": "/RESOURCES/sfw/image/skin/rainbow/btn4states/check-24x24.png",
+					"iconFrames": 4,
+					"textPlacement": "right",
+					"style": "custom",
+					"events": [
+						"onClick"
+					],
+					"action": "",
+					"sizingX": "move",
+					"method": "ObjectMethods/bOk.4dm",
+					"shortcutAccel": false,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": false,
+					"shortcutKey": "[Return]"
 				}
 			}
 		}
 	],
-	"geometryStamp": 180,
+	"geometryStamp": 260,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

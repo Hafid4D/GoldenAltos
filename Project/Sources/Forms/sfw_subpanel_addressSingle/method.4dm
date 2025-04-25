@@ -26,7 +26,7 @@ If (Form:C1466#Null:C1517)
 			Form:C1466.address.detail:=New object:C1471
 		End if 
 		If (Form:C1466.address.detail.country=Null:C1517)
-			Form:C1466.address.detail.country:=cs:C1710.sfw_definition.me.globalParameters.defaultCountry  //"fr"
+			Form:C1466.address.detail.country:=cs:C1710.sfw_definition.me.globalParameters.address.defaultCountry  //"fr"
 		End if 
 		$countryCode:=Form:C1466.address.detail.country
 		$countryColl:=cs:C1710.sfw_countryManager.me.countries.query("iso_code_2 = :1"; $countryCode)

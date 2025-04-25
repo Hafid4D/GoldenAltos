@@ -65,6 +65,34 @@
 		<field name="name" uuid="4ABD00DB48B7A1459C049A14E6C57F14" type="10" limiting_length="255" never_null="true" id="3"/>
 		<primary_key field_name="UUID" field_uuid="E33DA69061AB7744853A3E6B6DF6BB8D"/>
 	</table>
+	<table name="CustomerCarrier" uuid="4EB6C9D117A3DC4B91D031D6BC0C7DA9" id="7">
+		<field name="UUID" uuid="319814755AB5A945864EA37F29F3FDE1" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="carrierID" uuid="B16B9E9117F74E4D836B97A7A8CDE8F6" type="3" unique="true" never_null="true" id="2">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="name" uuid="7350D8E27C53FF449E9F614B54838D45" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="color" uuid="5023C7854EFE3C439CCC1FC54AC8A82B" type="10" limiting_length="255" never_null="true" id="4"/>
+		<primary_key field_name="UUID" field_uuid="319814755AB5A945864EA37F29F3FDE1"/>
+	</table>
+	<table name="sfw_Document" uuid="5E1C3E25225441628E3DBCF58BFAABF4" id="8">
+		<field name="UUID" uuid="1220A37BE5DC40168EEC02C61B1D51FC" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="UUID_DocumentFolder" uuid="CACC091D0D6247B385C4B1F8772EE52B" type="10" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="UUID_target" uuid="8E8814A889814010890030637A9BFFF5" type="10" store_as_UUID="true" id="3"/>
+		<field name="UUID_User" uuid="4463613D81E24EFBA7FEC15654FA732C" type="10" store_as_UUID="true" id="4"/>
+		<field name="name" uuid="232A9E7F99ED483CAC6DA9C1DBE4A8F4" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="extension" uuid="ACDED19B16D5474D9EDD0487F37697F1" type="10" limiting_length="255" never_null="true" id="6"/>
+		<field name="stmp" uuid="DAB7EE0187F140E29CAE47D001BAEDAA" type="4" never_null="true" id="7"/>
+		<field name="moreData" uuid="EBF096AA221543D59956F8268859F11F" type="21" blob_switch_size="2147483647" never_null="true" id="8"/>
+		<primary_key field_name="UUID" field_uuid="1220A37BE5DC40168EEC02C61B1D51FC"/>
+	</table>
+	<table name="sfw_DocumentFolder" uuid="A718BF77C87A4DB4AB861A00287FBC68" id="9">
+		<field name="UUID" uuid="BA314E8B13754390B2700B893AD65AB1" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="UUID_ParentFolder" uuid="6CF43FD208B343539B29EFBB6A145917" type="10" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="ident" uuid="B9D09FAC525C4309ADFBBAB6203AC1F2" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="name" uuid="8BEE8E68B1B14AF98D001ABDC222689D" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="moreData" uuid="D4E7E70B55474B3995389C232C22CB42" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
+		<primary_key field_name="UUID" field_uuid="BA314E8B13754390B2700B893AD65AB1"/>
+	</table>
 	<table name="sfw_Country" uuid="4C0E0D9D33D246BAB1FACEEC19ABF144" id="15" prevent_journaling="true">
 		<field name="UUID" uuid="FDA14E8A26704F7091EC668E332108FB" type="10" unique="true" autogenerate="true" store_as_UUID="true" id="1"/>
 		<field name="name" uuid="FEDEAAD3F9A64D8AA7049B2EA9699D2C" type="10" limiting_length="255" id="2"/>
@@ -194,6 +222,8 @@
 		<field name="stmpExpedition" uuid="085B21AAD7C24042A8C9466D254C8F0E" type="4" never_null="true" id="2"/>
 		<field name="mailData" uuid="ADB0CCAC28254F3485694CA00F3B3B62" type="21" blob_switch_size="2147483647" never_null="true" id="3"/>
 		<field name="UUID_User" uuid="BE17FB9FF7BF49AABC4ABF0B78936BD8" type="10" store_as_UUID="true" id="4"/>
+		<field name="extraData" uuid="5CE238DB83AE4D7BB0E637996773B9E0" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
+		<field name="sendMailStatus" uuid="74C410240CD745FAA134BB2C154F653B" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="8FC82746020F4EB6BA85B431DFE019A8"/>
 	</table>
 	<table name="sfw_EmailTemplate" uuid="46D5D228874048E390B37970A681AAD0" id="85">
@@ -490,7 +520,7 @@
 	</table>
 	<table name="CustomerStatus" uuid="CF8DC4373C97487884111398B4383812" id="130">
 		<field name="UUID" uuid="9C6030E6F9384C39A4FDB9E6453F235A" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="statusID" uuid="F4CD905FEF414ED89C867A2B79E6A86C" type="3" never_null="true" id="2"/>
+		<field name="statusID" uuid="F4CD905FEF414ED89C867A2B79E6A86C" type="3" unique="true" never_null="true" id="2"/>
 		<field name="name" uuid="D70524542D0D493384E1685A954A93FB" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="color" uuid="8DC2C4691C634726B48B6698EC206261" type="10" limiting_length="255" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="9C6030E6F9384C39A4FDB9E6453F235A"/>
@@ -894,6 +924,30 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="2AD91F4788D14BC589D0DC658413CE3C" name_Nto1="documentFolder" name_1toN="documents" state="1">
+		<related_field kind="source">
+			<field_ref uuid="CACC091D0D6247B385C4B1F8772EE52B" name="UUID_DocumentFolder">
+				<table_ref uuid="5E1C3E25225441628E3DBCF58BFAABF4" name="sfw_Document"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="BA314E8B13754390B2700B893AD65AB1" name="UUID">
+				<table_ref uuid="A718BF77C87A4DB4AB861A00287FBC68" name="sfw_DocumentFolder"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="DB8D79B14BDE42479CDD27271248450D" name_Nto1="parentFolder" name_1toN="childrenFolders" state="1">
+		<related_field kind="source">
+			<field_ref uuid="6CF43FD208B343539B29EFBB6A145917" name="UUID_ParentFolder">
+				<table_ref uuid="A718BF77C87A4DB4AB861A00287FBC68" name="sfw_DocumentFolder"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="BA314E8B13754390B2700B893AD65AB1" name="UUID">
+				<table_ref uuid="A718BF77C87A4DB4AB861A00287FBC68" name="sfw_DocumentFolder"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="01619F9BF52940F3AFF8C52A4A82535D" type="3">
 		<field_ref uuid="951D3770910B43BBBFCAB95E4B3A1C65" name="UUID_Tool">
 			<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
@@ -979,6 +1033,11 @@
 			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="26B5486B90AD42B8B4DE300E4F87D8DE" type="3">
+		<field_ref uuid="CACC091D0D6247B385C4B1F8772EE52B" name="UUID_DocumentFolder">
+			<table_ref uuid="5E1C3E25225441628E3DBCF58BFAABF4" name="sfw_Document"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="2A8FF9A5455141689A96101C4A7D5338" type="3">
 		<field_ref uuid="2E2FF42359124C978D041A838CB8866E" name="UUID_User">
 			<table_ref uuid="0A7AAD6A6AAB448E9F91A0CF0CC592C6" name="sfw_SchedulerLog"/>
@@ -1039,6 +1098,11 @@
 			<table_ref uuid="B0A466FC99334B96B5FE810BAE186DC4" name="InventoryPull"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="56055D62FB10E34284F6A64FDAB1B5C4" type="7">
+		<field_ref uuid="319814755AB5A945864EA37F29F3FDE1" name="UUID">
+			<table_ref uuid="4EB6C9D117A3DC4B91D031D6BC0C7DA9" name="CustomerCarrier"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="57F95AF53AB44C97AAA2C51262041B51" type="7">
 		<field_ref uuid="5520537F6684489F9BB29D56C4A9F2C6" name="UUID">
 			<table_ref uuid="348628FCA4DC451085D7519B226BD509" name="QuoteLine"/>
@@ -1057,6 +1121,11 @@
 	<index kind="regular" unique_keys="true" uuid="6718C9EE46DA4250ADE66AB7BAA72EEB" type="7">
 		<field_ref uuid="8EFDF2BE837542E3849ECB064F30C5BD" name="UUID">
 			<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="6B32C8DEC9CEEB449F96F5750E84D233" type="3">
+		<field_ref uuid="B16B9E9117F74E4D836B97A7A8CDE8F6" name="carrierID">
+			<table_ref uuid="4EB6C9D117A3DC4B91D031D6BC0C7DA9" name="CustomerCarrier"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="6BA10E032C4043CBA47A614905563474" type="1">
@@ -1107,6 +1176,11 @@
 	<index kind="regular" uuid="878B8D90A6C2644D89B8883B80E40549" type="3">
 		<field_ref uuid="0EACB0E17BBD4F639E0C142211979D18" name="UUID_Employee">
 			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="88B26D6CFC3F2E4CA5FCF09883CCA88D" type="3">
+		<field_ref uuid="F4CD905FEF414ED89C867A2B79E6A86C" name="statusID">
+			<table_ref uuid="CF8DC4373C97487884111398B4383812" name="CustomerStatus"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="896FD4EE0132488CA456E5EB29CC722B" type="7">
@@ -1199,6 +1273,11 @@
 			<table_ref uuid="6330FD4D08D74130BF3869222CDECBA6" name="StepTemplate"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="BBF91AE719024421B605BF3E85D8B491" type="1">
+		<field_ref uuid="1220A37BE5DC40168EEC02C61B1D51FC" name="UUID">
+			<table_ref uuid="5E1C3E25225441628E3DBCF58BFAABF4" name="sfw_Document"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="BDA8800349B14D4D92A8B670F01E0E74" type="7">
 		<field_ref uuid="06082B4C48E941B1831630EDE47BA25D" name="UUID">
 			<table_ref uuid="7A8F1179566C46A6AB8E4B04DD19B496" name="StepTemplateCertification"/>
@@ -1237,6 +1316,11 @@
 	<index kind="regular" unique_keys="true" uuid="DA644052E5E745D2A0EBE32E584543F8" type="7">
 		<field_ref uuid="46A023E9F16E49DBA21C7DCCBAA82770" name="UUID">
 			<table_ref uuid="71FD451F60934C9995C7A6D899CA2B51" name="Certification"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="DD147E408EF248D69FB08922B01E48D8" type="7">
+		<field_ref uuid="BA314E8B13754390B2700B893AD65AB1" name="UUID">
+			<table_ref uuid="A718BF77C87A4DB4AB861A00287FBC68" name="sfw_DocumentFolder"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="DD8B8F9C843946ACB59CD44A8F78E0EC" type="1">

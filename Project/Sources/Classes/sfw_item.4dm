@@ -7,8 +7,11 @@ Class constructor
 Function initOnLoad()
 	
 	var $color : Text
-	
-	OBJECT SET FORMAT:C236(*; "bIcon_entry"; This:C1470.entry.label+";#"+This:C1470.entry.icon+";0;0;0;1;0;0;0;0;0;0;1")
+	$file:=Folder:C1567(fk resources folder:K87:11).file(This:C1470.entry.icon)
+	READ PICTURE FILE:C678($file.platformPath; vIcon)
+	vIcon:=vIcon*0.75
+	OBJECT SET FORMAT:C236(*; "bIcon_entry"; This:C1470.entry.label+";vIcon;0;0;0;1;0;0;0;0;0;0;1")
+	//OBJECT SET FORMAT(*; "bIcon_entry"; This.entry.label+";#"+This.entry.icon+";0;0;0;1;0;0;0;0;0;0;1")
 	
 	$color:=This:C1470.vision.toolbar.color
 	This:C1470.changeTopBarColor($color)

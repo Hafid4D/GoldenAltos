@@ -4,7 +4,7 @@ singleton Class constructor
 	//This.serverSMTP.logFile:="LogMail.txt"  //Extended log to save in the Logs folder
 	This:C1470.SMTP_object:=cs:C1710.microsoftGraphAPI.new()  //SMTP New transporter(This.serverSMTP)
 	
-	This:C1470.launch()
+	//This.launch()
 	
 	
 Function launch()
@@ -25,36 +25,50 @@ Function initEmailObject()->$email : Object
 	
 	$email:=New object:C1471
 	
-	// From
-	$email.from:=New object:C1471
-	$email.from.emailAddress:=New object:C1471("name"; "Kairos"; "address"; "noreply.kairos@4d.com")
-	
 	// To
 	$addressTo:=New object:C1471
 	$addressTo.emailAddress:=New object:C1471
-	$addressto.emailAddress.address:="berengere.lagrange@4d.com"
+	$addressTo.emailAddress.address:="recipient@4d.com"
 	$email.toRecipients:=New collection:C1472($addressTo)
-	$email.subject:="Test"
+	$email.subject:="subject"
 	
-	$CorpsMessage:="Ceci est un test qui fonctionne depuis un service"
 	$email.body:=New object:C1471()
-	$email.body.content:=$CorpsMessage
+	$email.body.content:="body"
 	$email.body.contentType:="text"  // or HTML, 
 	
 Function _sendItemInQueue($uuid : Text)
 	var $eEMailQueue : cs:C1710.sfw_EMailQueueEntity
-	SMTP_object
+	var $eMailLog : cs:C1710.sfw_EMailLogEntity
+	
 	$eEMailQueue:=ds:C1482.sfw_EMailQueue.get($uuid)
 	
 	$status:=This:C1470.SMTP_object.sendMail($eEMailQueue.mailData)
 	If (Not:C34($status.success))
-		ALERT:C41("An error occurred sending the mail: "+$status.message)
+		//ALERT("An error occurred sending the mail: "+$status.message)
 	End if 
+	$eMailLog:=ds:C1482.sfw_EMailLog.new()
+	$eMailLog.stmpExpedition:=cs:C1710.sfw_stmp.me.now()
+	$eMailLog.mailData:=$eEMailQueue.mailData
+	$eMailLog.extraData:=$eEMailQueue.extraData
+	$eMailLog.user:=$extraData.user.name
+	$eMailLog.UUID_User:=$extraData.user.UUID_User
+	$eMailLog.sendMailStatus:=$status
+	$info:=$eMailLog.save()
+	$info:=$eEMailQueue.drop()
 	
 Function sendAnEMail($mailData : Object; $extraData : Object)
 	var $eEMailQueue : cs:C1710.sfw_EMailQueueEntity
 	
-	$eEMailQueue:=ds:C1482.sfw_EMailLog.new()
+	If ($extraData=Null:C1517)
+		$extraData:=New object:C1471
+	End if 
+	If ($extraData.user=Null:C1517)
+		$extraData.user:=New object:C1471
+		$extraData.user.UUID_User:=cs:C1710.sfw_userManager.me.info.UUID
+		$extraData.user.name:=Current user:C182
+	End if 
+	
+	$eEMailQueue:=ds:C1482.sfw_EMailQueue.new()
 	$eEMailQueue.UUID:=Generate UUID:C1066
 	$eEMailQueue.stmpEntranceInQueue:=cs:C1710.sfw_stmp.me.now()
 	$eEMailQueue.mailData:=$mailData

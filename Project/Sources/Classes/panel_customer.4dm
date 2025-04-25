@@ -14,6 +14,25 @@ Function formMethod()
 				// add load functions
 				This:C1470.LoadApContact()
 				This:C1470.LoadStatusContact()
+				
+			: (FORM Get current page:C276(*)=2)
+				This:C1470.loadPOs()
+				
+			: (FORM Get current page:C276(*)=3)
+				This:C1470.loadJobs()
+				
+			: (FORM Get current page:C276(*)=4)
+				This:C1470.loadPlaning()
+				
+			: (FORM Get current page:C276(*)=5)
+				
+				
+			: (FORM Get current page:C276(*)=6)
+				
+				
+			: (FORM Get current page:C276(*)=7)
+				
+				
 		End case 
 	End if 
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())  //It's time to resize the object or set visible
@@ -21,19 +40,95 @@ Function formMethod()
 	End if 
 	
 	
-	
-	
 Function drawPup_XXX()
 	//This function updates the dropdown by displaying the name
 	Form:C1466.sfw.drawButtonPup("pup_xxx"; $xxxName; "xxxx.png"; (Form:C1466.current_item.xxxx=Null:C1517))
 	
+Function drawPup_CustomerStatus()
+	If (Form:C1466.current_item#Null:C1517)
+		$customerStatus:=ds:C1482.CustomerStatus.query("statusID= :1"; Form:C1466.current_item.IDT_status).first() || New object:C1471()
+		$statusName:=$customerStatus.name
+		If ($statusName=Null:C1517)
+			$statusName:="Status"
+		End if 
+		$color:=cs:C1710.sfw_htmlColor.me.getName($customerStatus.color)
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_customerStatus"; $statusName; $pathIcon; ($customerStatus=Null:C1517))
+	End if 
 	
 Function pup_status()
 	//Create pop up menu
 	If (Form:C1466.sfw.checkIsInModification())
+		$menu:=Create menu:C408
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.customerStatus=Null:C1517)
+			ds:C1482.CustomerStatus.cacheLoad()
+		End if 
+		
+		For each ($eCustomerStatus; Storage:C1525.cache.customerStatus)
+			APPEND MENU ITEM:C411($menu; $eCustomerStatus.name; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $eCustomerStatus.UUID)
+			If ($eCustomerStatus.statusID=Form:C1466.current_item.IDT_status)
+				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+				If (Is Windows:C1573)
+					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+				End if 
+			End if 
+		End for each 
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		Case of 
+			: ($choose#"")
+				$eCustomerStatus:=ds:C1482.CustomerStatus.get($choose)
+				Form:C1466.current_item.IDT_status:=$eCustomerStatus.statusID
+		End case 
+		
 	End if 
-	This:C1470.drawPup_XXX()
+	This:C1470.drawPup_CustomerStatus()
 	
+	
+	
+Function drawPup_CustomerCarrier()
+	If (Form:C1466.current_item#Null:C1517)
+		$customerCarrier:=ds:C1482.CustomerCarrier.query("carrierID= :1"; Form:C1466.current_item.IDT_carrier).first() || New object:C1471()
+		$carrierName:=$customerCarrier.name
+		If ($carrierName=Null:C1517)
+			$carrierName:="Carrier"
+		End if 
+		$color:=cs:C1710.sfw_htmlColor.me.getName($customerCarrier.color)
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_customerCarrier"; $carrierName; $pathIcon; ($customerCarrier=Null:C1517))
+	End if 
+	
+Function pup_carrier()
+	//Create pop up menu
+	If (Form:C1466.sfw.checkIsInModification())
+		$menu:=Create menu:C408
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.customerCarriers=Null:C1517)
+			ds:C1482.CustomerCarrier.cacheLoad()
+		End if 
+		
+		For each ($eCustomerCarrier; Storage:C1525.cache.customerCarriers)
+			APPEND MENU ITEM:C411($menu; $eCustomerCarrier.name; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $eCustomerCarrier.UUID)
+			If ($eCustomerCarrier.carrierID=Form:C1466.current_item.IDT_carrier)
+				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+				If (Is Windows:C1573)
+					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+				End if 
+			End if 
+		End for each 
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		Case of 
+			: ($choose#"")
+				$eCustomerCarrier:=ds:C1482.CustomerCarrier.get($choose)
+				Form:C1466.current_item.IDT_carrier:=$eCustomerCarrier.carrierID
+		End case 
+		
+	End if 
+	This:C1470.drawPup_CustomerCarrier()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
@@ -43,6 +138,8 @@ Function redrawAndSetVisible()
 	This:C1470.contactDetails()
 	OBJECT SET VISIBLE:C603(*; "bActionApContact"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET VISIBLE:C603(*; "bActionStatusContact"; Form:C1466.sfw.checkIsInModification())
+	This:C1470.drawPup_CustomerStatus()
+	This:C1470.drawPup_CustomerCarrier()
 	
 	
 Function contactDetails()
@@ -80,9 +177,29 @@ Function LoadStatusContact()
 	End if 
 	
 	
+Function loadPOs()
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.lb_POs:=ds:C1482.PurchaseOrder.query("UUID_Customer = :1"; Form:C1466.current_item.UUID).orderBy("poNumber")
+		
+	End if 
+	
+Function loadJobs()
+	
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.lb_Jobs:=ds:C1482.Job.query("customer = :1"; Form:C1466.current_item.name).orderBy("dateCreated")
+		
+	End if 
+	
+Function loadPlaning()
+	
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.lb_Planning:=ds:C1482.Lot.query("customer = :1"; Form:C1466.current_item.name).orderBy("lotNumber")
+		
+	End if 
+	
+	
 Function bActionXXX()
 	//Manages actions: add, or remove, using dynamic menus and modification checks
-	
 	
 Function bActionApContact()
 	
@@ -130,7 +247,6 @@ Function bActionApContact()
 			End if 
 			
 	End case 
-	
 	
 Function bActionStatusContact()
 	
@@ -288,7 +404,6 @@ Function saveStatusContact()
 							$detail:=New object:C1471()
 							OB SET:C1220($detail; Form:C1466.current_statusContact.name; Form:C1466.current_statusContact.value)
 							OB SET:C1220(Form:C1466.current_item.contactDetails.communications[$i]; "detail"; $detail)
-							
 							
 						End if 
 						

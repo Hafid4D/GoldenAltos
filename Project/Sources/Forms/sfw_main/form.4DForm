@@ -15,6 +15,7 @@
 		"onClick",
 		"onActivate",
 		"onDeactivate",
+		"onDoubleClick",
 		"onLosingFocus",
 		"onDataChange",
 		"onCloseBox",
@@ -36,8 +37,8 @@
 					"width": 1380,
 					"height": 60,
 					"sizingX": "grow",
-					"fill": "#A6C1D5",
-					"stroke": "transparent"
+					"stroke": "transparent",
+					"fill": "#6AB0E8"
 				},
 				"bkgd_bottomBar": {
 					"type": "rectangle",
@@ -82,13 +83,11 @@
 					"scrollbarHorizontal": "hidden",
 					"scrollbarVertical": "automatic",
 					"horizontalLineStroke": "transparent",
-					"verticalLineStroke": "transparent",
-					"fill": "#F5F5F5",
-					"alternateFill": "#FAFAFA",
 					"borderStyle": "none",
 					"method": "ObjectMethods/lb_items.4dm",
 					"events": [
 						"onClick",
+						"onDoubleClick",
 						"onSelectionChange",
 						"onHeaderClick"
 					],
@@ -96,6 +95,9 @@
 					"headerHeight": "20px",
 					"metaSource": "This:C1470.meta",
 					"selectedItemsSource": "Form:C1466.current_lb_item_selected",
+					"alternateFill": "#FAFAFA",
+					"fill": "#F5F5F5",
+					"verticalLineStroke": "transparent",
 					"columns": []
 				},
 				"detail_panel": {
@@ -568,7 +570,7 @@
 				"hl_items": {
 					"type": "list",
 					"left": 0,
-					"top": 60,
+					"top": 80,
 					"width": 464,
 					"height": 559,
 					"events": [
@@ -882,5 +884,5 @@
 			"View 1": {}
 		}
 	},
-	"geometryStamp": 576
+	"geometryStamp": 589
 }

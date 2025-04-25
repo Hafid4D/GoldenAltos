@@ -33,11 +33,6 @@
 				"editable": true
 			},
 			{
-				"text": "Fed-Ex Priority",
-				"ref": 7,
-				"editable": true
-			},
-			{
 				"text": "UPS 2nd Day",
 				"ref": 8,
 				"editable": true

@@ -4,10 +4,10 @@ shared singleton Class constructor
 	This:C1470.callingWindow:=0
 	This:C1470.longtext:="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce volutpat auctor faucibus. Donec nec consectetur nunc. Sed pharetra a enim ac dignissim. Maecenas lacinia ligula vitae diam feugiat, a elementum nisl commodo. Suspendisse non eros at nunc f"+"eugiat facilisis at eget risus. Cras scelerisque nisl tellus, sit amet tempor mi semper non. Integer diam metus, finibus ac est vel, ultricies tempus nibh. Sed eget sagittis tortor. Integer ante odio, porta semper ex et, molestie aliquet quam. Phasell"+"us tincidunt, odio a congue placerat, nisl sem volutpat enim, eu pharetra leo nunc non nisl. Donec eu sagittis ipsum. Integer lacinia accumsan tempor. Vivamus mattis nisl ut dui pellentesque tincidunt. Orci varius natoque penatibus et magnis dis partu"+"rient montes, nascetur ridiculus mus. Quisque sollicitudin hendrerit diam ac posuere.\n\nDuis mattis, massa non consequat malesuada, lorem velit tincidunt nunc, nec ultricies nunc sapien vel nunc. Cras sed rhoncus metus, vitae lobortis libero. Fusce vol"+"utpat quis nunc in tincidunt. Aenean consectetur nibh et metus placerat tempus et vitae augue. Vestibulum eu elit ut sem euismod maximus eget rhoncus lacus. Nulla venenatis, dui id pretium consequat, libero ex dapibus neque, in hendrerit arcu odio id "+"est. Mauris eu magna ut est imperdiet hendrerit ac vitae ante. Nulla facilisi. Praesent euismod cursus facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nulla ullamcorper vitae turpis sit amet elementum"+"."
 	This:C1470.levels:=New shared object:C1526
-	This:C1470.levels["0"]:=New shared object:C1526("header"; "HoneyDew"; "body"; "MintCream"; "label"; "Low")  //XLIFF
-	This:C1470.levels["1"]:=New shared object:C1526("header"; "LemonChiffon"; "body"; "LightYellow"; "label"; "Normal")  //XLIFF
-	This:C1470.levels["2"]:=New shared object:C1526("header"; "LightPink"; "body"; "MistyRose"; "label"; "Important")  //XLIFF
-	This:C1470.levels["3"]:=New shared object:C1526("header"; "Wheat"; "body"; "Bisque"; "label"; "Critical")  //XLIFF
+	This:C1470.levels["0"]:=New shared object:C1526("header"; "HoneyDew"; "body"; "MintCream"; "label"; ds:C1482.sfw_readXliff("comment.level.low"; "Low"))  //XLIFF OK
+	This:C1470.levels["1"]:=New shared object:C1526("header"; "LemonChiffon"; "body"; "LightYellow"; "label"; ds:C1482.sfw_readXliff("comment.level.normal"; "Normal"))  //XLIFF OK
+	This:C1470.levels["2"]:=New shared object:C1526("header"; "LightPink"; "body"; "MistyRose"; "label"; ds:C1482.sfw_readXliff("comment.level.important"; "Important"))  //XLIFF OK
+	This:C1470.levels["3"]:=New shared object:C1526("header"; "Wheat"; "body"; "Bisque"; "label"; ds:C1482.sfw_readXliff("comment.level.critical"; "Critical"))  //XLIFF OK
 	
 	
 Function launch()
@@ -74,7 +74,6 @@ Function _drawCommentContainer()
 	var $bestWidth : Integer
 	var $bestHeight : Integer
 	var $formDefinition : Object
-	
 	OBJECT SET VISIBLE:C603(*; "subFormCommentList"; Form:C1466.comments.length>0)
 	OBJECT SET VISIBLE:C603(*; "noComment_@"; Form:C1466.comments.length=0)
 	
@@ -113,7 +112,7 @@ Function _drawCommentContainer()
 				End if 
 				If ($comment.add)
 					$widget:=$widgets["pup_priority_"+String:C10($lineNum)]
-					$widget.text:="Priority: "+This:C1470.levels["1"].label  //XLIFF
+					$widget.text:=ds:C1482.sfw_readXliff("comment.priority"; "Priority")+" : "+This:C1470.levels["1"].label  //XLIFF"
 				End if 
 				$widget:=$widgets["header_bkgd_"+String:C10($lineNum)]
 				$widget.fill:=This:C1470.levels[String:C10($comment.level)].header
@@ -168,9 +167,9 @@ Function bAction()
 	$refMenu:=Create menu:C408
 	$refMenus.push($refMenu)
 	
-	APPEND MENU ITEM:C411($refMenu; "Expand all"; *)  //XLIFF
+	APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("comment.expandAll"; "Expand all"); *)  //XLIFF OK
 	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--expandAll")
-	APPEND MENU ITEM:C411($refMenu; "Collapse all"; *)  //XLIFF
+	APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("comment.collapseAll"; "Collapse all"); *)  //XLIFF OK
 	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--collapseAll")
 	
 	$refSubMenu:=Create menu:C408
@@ -178,10 +177,10 @@ Function bAction()
 	$i:=-1
 	For each ($level; This:C1470.levels)
 		$i+=1
-		APPEND MENU ITEM:C411($refSubMenu; This:C1470.levels[$level].label; *)
+		APPEND MENU ITEM:C411($refSubMenu; ds:C1482.sfw_readXliff("comment.level."+Lowercase:C14(This:C1470.levels[$level].label); This:C1470.levels[$level].label); *)  //XLIFF OK
 		SET MENU ITEM PARAMETER:C1004($refSubMenu; -1; "level:"+String:C10($i))
 	End for each 
-	APPEND MENU ITEM:C411($refMenu; "Limit to level"; $refSubMenu; *)  //XLIFF
+	APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("comment.limitToLevel"; "Limit to level"); $refSubMenu; *)  //XLIFF OK
 	
 	$choice:=Dynamic pop up menu:C1006($refMenu)
 	For each ($refMenu; $refMenus)
@@ -222,7 +221,7 @@ Function subFormMethod()
 					Form:C1466.messages[0].level:=Num:C11($choice)
 					OBJECT SET RGB COLORS:C628(*; "header_bkgd_0"; This:C1470.levels[$choice].header; This:C1470.levels[$choice].header)
 					OBJECT SET RGB COLORS:C628(*; "message_bkgd_0"; This:C1470.levels[$choice].body; This:C1470.levels[$choice].body)
-					OBJECT SET TITLE:C194(*; "pup_priority_0"; "Priority: "+This:C1470.levels[$choice].label)  //XLIFF
+					OBJECT SET TITLE:C194(*; "pup_priority_0"; ds:C1482.sfw_readXliff("comment.priority"; "Priority")+": "+ds:C1482.sfw_readXliff("comment.level."+Lowercase:C14(This:C1470.levels[$choice].label); This:C1470.levels[$choice].label))  //XLIFF  OK
 			End case 
 			
 			

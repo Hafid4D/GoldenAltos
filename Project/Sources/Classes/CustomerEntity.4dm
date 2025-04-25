@@ -11,7 +11,9 @@ local Function rebuildAddress()->$address : Object
 	
 	If (Form:C1466.current_item.contactDetails#Null:C1517) && (Form:C1466.current_item.contactDetails.addresses#Null:C1517)
 		$address:=Form:C1466.current_item.contactDetails.addresses.query("type = :1"; $type).first()
+		Form:C1466.subFormAddress.address:=$address
 	End if 
+	Form:C1466.subFormAddress:=Form:C1466.subFormAddress
 	
 	
 local Function rebuidComunications($contactType)->$contacts : Collection

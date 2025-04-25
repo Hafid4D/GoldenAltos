@@ -17,6 +17,8 @@ Class constructor
 	
 	This:C1470.getPathReferenceFolder()
 	
+	This:C1470.sfw_files:={Classes: []; Methods: []; Forms: []; Resources: []; Documentation: []; Triggers: []}
+	
 	
 Function getPathReferenceFolder()
 	var $referenceFolderPath : Text
@@ -100,12 +102,14 @@ Function _pushResources($folderReference : 4D:C1709.Folder; $date : Date; $time 
 				End case 
 				If ($copy)
 					$fileCopied:=$file.copyTo($lprojFolder; fk overwrite:K87:5)
+					This:C1470.sfw_files.Resources.push({file: $file.fullName})
 				End if 
 			End for each 
 		End if 
 		
 		If ($folder.name="sfw")
 			$sfwFolder:=$folder.copyTo($targetFolder; fk overwrite:K87:5)
+			This:C1470.sfw_files.Resources.push({folder: $folder.fullName})
 		End if 
 		
 	End for each 
@@ -167,6 +171,7 @@ Function _pushDocumentation($folderReference : 4D:C1709.Folder; $date : Date; $t
 			End case 
 			If ($copy)
 				$fileCopied:=$file.copyTo($folderToUpdate; fk overwrite:K87:5)
+				This:C1470.sfw_files.Documentation.push({file: $fileCopied.fullName})
 			End if 
 		End for each 
 	End while 
@@ -244,6 +249,8 @@ Function _pushProject($folderReference : 4D:C1709.Folder; $date : Date; $time : 
 			$copy:=True:C214
 			Case of 
 				: ($file.fullName="form.4DForm")
+					This:C1470.sfw_files.Forms.push({folder: $file.parent.fullName})
+					
 				: ($file.fullName="method.4dm") & (String:C10($file.parent.parent.name)="Forms")
 					
 				: ($file.name="DataStore")
@@ -259,7 +266,7 @@ Function _pushProject($folderReference : 4D:C1709.Folder; $date : Date; $time : 
 					$functionNames:=OB Keys:C1719($classPrototype)
 					
 					$copy:=False:C215
-					$file:=$folderToUpdate.file("DataStore")
+					$file:=$folderToUpdate.file("DataStore.4dm")
 					If (Not:C34($file.exists))
 						$file.create()
 					End if 
@@ -299,9 +306,18 @@ Function _pushProject($folderReference : 4D:C1709.Folder; $date : Date; $time : 
 					
 					$file.setText($classCode)
 					
+					This:C1470.sfw_files.Classes.push({file: $file.name})
+					
 					
 				: ($file.name="sfw")
+					
+					This:C1470.sfw_files[$file.parent.fullName].push({file: $file.name})
+					
 				: ($file.name="sfw_@")
+					
+					This:C1470.sfw_files[$file.parent.fullName].push({file: $file.name})
+					
+					
 				: ($file.parent.name="ObjectMethods")
 				: ($file.parent.name="Images")
 				: ($file.name="table_@") & ($file.parent.name="Triggers")
@@ -316,6 +332,7 @@ Function _pushProject($folderReference : 4D:C1709.Folder; $date : Date; $time : 
 					Else 
 						$copy:=False:C215
 					End if 
+					
 				Else 
 					$copy:=False:C215
 			End case 
@@ -363,6 +380,7 @@ Function _pushModifyTableNum($folderReference : 4D:C1709.Folder; $date : Date; $
 		$file.create()
 	End if 
 	$file.setText(JSON Stringify:C1217($codes; *); "UTF-8")
+	This:C1470.sfw_files.Triggers.push({file: $file.fullName; table: Table name:C256($tableNum)})
 	
 	
 Function _storeAttributes($folderReference : 4D:C1709.Folder; $date : Date; $time : Time)
@@ -582,7 +600,7 @@ Function _pullProject($folderReference : 4D:C1709.Folder; $date : Date; $time : 
 	For each ($code; $codes)
 		$tableName:=$codes[$code].tableName
 		$tableNum:=0
-		For ($t; 1; Get last table number:C254)
+		For ($t; 1; Last table number:C254)
 			If (Is table number valid:C999($t))
 				If ($tableName=Table name:C256($t))
 					$tableNum:=$t
@@ -733,7 +751,7 @@ Function _restoreAttributes($folderReference : 4D:C1709.Folder; $date : Date; $t
 Function export()
 	var $sourceControler : cs:C1710.sfw_sourceControler
 	
-	$ok:=cs:C1710.sfw_dialog.me.confirm("Do you want to export all the source for the framework ?")  //XLIFF
+	$ok:=cs:C1710.sfw_dialog.me.confirm(ds:C1482.sfw_readXliff("export.sfw"; "Do you want to export all the source for the framework ?"))  //XLIFF OK
 	If ($ok)
 		$sourceControler:=cs:C1710.sfw_sourceControler.new()
 		$sourceControler.fullPush()
@@ -743,11 +761,11 @@ Function export()
 Function import()
 	var $sourceControler : cs:C1710.sfw_sourceControler
 	
-	$ok:=cs:C1710.sfw_dialog.me.confirm("Do you want to import all the source for the framework ?")  //XLIFF
+	$ok:=cs:C1710.sfw_dialog.me.confirm(ds:C1482.sfw_readXliff("import.sfw"; "Do you want to import all the source for the framework ?"))  //XLIFF OK
 	If ($ok)
 		$sourceControler:=cs:C1710.sfw_sourceControler.new()
 		
 		$sourceControler.fullPull()
 		
-		cs:C1710.sfw_dialog.me.alert("Full Import is done ! I wish you a good work with this new version of the framework.")  //XLIFF 
+		cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("import.sfwDone"; "Full Import is done ! I wish you a good work with this new version of the framework."))  //XLIFF OK
 	End if 
