@@ -34,6 +34,13 @@
 		<field name="total" uuid="A28F510F0F750441B9DEE242958C2E92" type="6" never_null="true" id="7"/>
 		<field name="due" uuid="071B8BD366061D4385AAC0027D3795BF" type="6" never_null="true" id="8"/>
 		<field name="slip" uuid="ACB341797FCC114CBE36E4B05EACDB06" type="4" never_null="true" id="9"/>
+		<field name="customerId" uuid="0E43A89E3F74DA4EB2774D0A1FF0CE36" type="10" limiting_length="255" never_null="true" id="10"/>
+		<field name="saleAmount" uuid="2DFC3E9483BEF342B2470EBA1611DA7A" type="6" never_null="true" id="11">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="amountPaid" uuid="53B35AEBD9C14342A82084876D885D90" type="6" never_null="true" id="12">
+			<field_extra multi_line="false"/>
+		</field>
 		<primary_key field_name="UUID" field_uuid="D4F459308B965340B21C8A6DE2F2F78F"/>
 	</table>
 	<table name="LotStep" uuid="21C997F4FF841640B547868BE38C05ED" id="5">
@@ -451,6 +458,8 @@
 		<field name="division" uuid="3B36AA8AEA145345BFD60A6766EE5D0A" type="10" limiting_length="255" never_null="true" id="18"/>
 		<field name="totalCost" uuid="C2F5F2B701CD3341A9EC72DD48CCC78E" type="6" never_null="true" id="19"/>
 		<field name="property" uuid="CC532A7D1109F548B5ED16D57A454170" type="4" never_null="true" id="20"/>
+		<field name="originalQty" uuid="278B776A227C1747B9F17B74015545CB" type="4" never_null="true" id="21"/>
+		<field name="availableQty" uuid="24618F62DA07C04BB02943E2884D2F67" type="6" never_null="true" id="22"/>
 		<primary_key field_name="UUID" field_uuid="F8D9EC71ECF843689AA0D416563422DC"/>
 	</table>
 	<table name="InventoryPull" uuid="B0A466FC99334B96B5FE810BAE186DC4" id="127">
@@ -1009,6 +1018,11 @@
 	<index kind="regular" unique_keys="true" uuid="2326405CF23D4F73AE58A1BE574B97D5" type="7">
 		<field_ref uuid="EB0656993E0B478582FC3B4868BE55FC" name="UUID">
 			<table_ref uuid="2CC1E163267E4DFE808464C271CC4C9F" name="PurchaseOrderLine"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="240C79D84DAAA94D8B6DC743A052830D" type="7">
+		<field_ref uuid="0FA357DE65EF304D84620E34A9B9F37C" name="jobNumber">
+			<table_ref uuid="D3AC71CFD00F4948816121AA74EF8DFE" name="Job"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="24CCA01D7871416B98F1F1728F40CE6D" type="3">

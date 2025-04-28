@@ -67,7 +67,9 @@ If (True:C214)
 				$invoice_e.due:=$invoice.due
 				$invoice_e.slip:=$invoice.slip
 				$invoice_e.UUID_PurchaseOrder:=$po.UUID
-				
+				$invoice_e.customerId:=$invoice.customerId
+				$invoice_e.amountPaid:=$invoice.amountPaid
+				$invoice_e.saleAmount:=$invoice.saleAmount
 				$res:=$invoice_e.save()
 				
 				If (Not:C34($res.success))
@@ -102,6 +104,7 @@ If (True:C214)
 			End for each 
 		End if 
 	End for each 
+	
 	
 	If ($erreur.length>0)
 		TRACE:C157
@@ -276,6 +279,8 @@ If (True:C214)
 		$inventory_e.division:=$record.division
 		$inventory_e.totalCost:=$record.totalCost
 		$inventory_e.property:=$record.property
+		$inventory_e.availableQty:=$record.AvailableQty
+		$inventory_e.originalQty:=$record.originalQty
 		
 		$res:=$inventory_e.save()
 		
@@ -348,7 +353,7 @@ End if
 /**
 import tools
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([ToolType:122])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/tools_export.json")
@@ -386,7 +391,7 @@ End if
 /**
 import cetifications
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([Certification:124])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/certifications_export.json")
@@ -407,4 +412,4 @@ If (False:C215)
 	End for each 
 End if 
 
-ALERT:C41("END!!")
+

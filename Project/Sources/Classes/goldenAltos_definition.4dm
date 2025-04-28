@@ -99,6 +99,13 @@ Function _event_definition()
 	cs:C1710.sfw_eventManager.me.createIfNotExist("deleteCustomerStatusContact"; "Delete customer StatusContact")
 	
 	
+	// customerStatusContact
+	//cs.sfw_eventManager.me.createIfNotExist("addCustomerStatusContact"; "Add customer ftp password")
+	cs:C1710.sfw_eventManager.me.createIfNotExist("modifyCustomerStatusContact"; "Modify customer ftp password")
+	//cs.sfw_eventManager.me.createIfNotExist("deleteCustomerStatusContact"; "Delete customer StatusContact")
+	
+	
+	
 Function _scheduler_definition()
 	var $periodicity : cs:C1710.sfw_definitionScheduler
 	

@@ -1,7 +1,7 @@
 //%attributes = {}
 
 
-If (False:C215)
+If (True:C214)
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/archives_export.json")
 	
@@ -47,28 +47,24 @@ End if
 
 If (True:C214)
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/receiver_export.json")
-	READ WRITE:C146([Job:117])
-	C_OBJECT:C1216($job)
+	
 	$records:=JSON Parse:C1218($file.getText())
+	var $job : cs:C1710.JobEntity
 	
 	For each ($record; $records)
 		
 		$jobNumber:=$record.ErpJobNumber
 		
-		$job:=ds:C1482.Job.query("jobNumber=:1"; $jobNumber)
+		$job:=ds:C1482.Job.query("jobNumber=:1"; $jobNumber).first()
 		
-		If ($job.length>0)
+		If ($record.Pr_qualifier#"")
 			
-			If ($record.Pr_qualifier#"")
-				
-			End if 
-			
-			$job[0].pr_qualifier:=$record.Pr_qualifier
-			$success:=$job[0].save(dk auto merge:K85:24)
-			If ($success.success=False:C215)
-				
-				TRACE:C157
-			End if 
+		End if 
+		
+		$job.pr_qualifier:=$record.Pr_qualifier
+		$success:=$job.save()
+		If ($success.success=False:C215)
+			TRACE:C157
 		End if 
 		
 	End for each 
@@ -76,5 +72,5 @@ If (True:C214)
 	
 End if 
 
-
+ALERT:C41("END!!")
 
