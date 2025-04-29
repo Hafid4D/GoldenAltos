@@ -3,73 +3,134 @@
 
 If (True:C214)
 	
-	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/archives_export.json")
+	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/archived_jobs_export.json")
 	
 	$records:=JSON Parse:C1218($file.getText())
 	
 	For each ($record; $records)
 		$job:=ds:C1482.Job.new()
 		
-		$job.jobNumber:=$record.ErpJobNumber
-		$job.poNumber:=$record.Purchase_Order
-		$job.division:=$record.Division
-		$job.dateCreated:=$record.Datein
-		$job.expectedDate:=$record.expectedDate  //1
-		$job.invoiceDate:=$record.Invoice_Date
-		$job.lastShipDate:=$record.Last_lot_ship_date
-		$job.archivedDate:=$record.Archive_Date
-		$job.deviceNumber:=$record.Device_Number
-		$job.process:=$record.Process
-		$job.salesTax:=$record.Sales_Tax
-		$job.totalCharge:=$record.Total_Charge
-		$job.shipped:=$record.Shipped
-		$job.lineItem:=$record.line_item
-		$job.noLots:=$record.No_Lots
-		$job.postToPO:=$record.postToPO  //2
-		$job.parentJobNumber:=$record.ParentJobNumber
-		$job.address:=$record.address  //3
-		$job.alternateShipAddress:=$record.AlternateAddress
-		$job.shippers:=$record.Shippers
-		$job.customer:=$record.Customer
-		$job.qty:=$record.Qty
-		$job.qtyOnHand:=0  //$record.qtyOnHand  
-		$job.shipMemo:=$record.Ship_Memo
-		$job.jobComment:=""  //$record.jobComment
-		$job.archived:=True:C214  //$record.archived
-		
+		$job.jobNumber:=$record.jobNumber
+		$job.poNumber:=$record.poNumber
+		$job.division:=$record.division
+		$job.dateCreated:=$record.dateCreated
+		$job.expectedDate:=$record.expectedDate
+		$job.invoiceDate:=$record.invoiceDate
+		$job.lastShipDate:=$record.lastShipDate
+		$job.archivedDate:=$record.archivedDate
+		$job.deviceNumber:=$record.deviceNumber
+		$job.process:=$record.process
+		$job.salesTax:=$record.salesTax
+		$job.totalCharge:=$record.totalCharge
+		$job.shipped:=$record.shipped
+		$job.lineItem:=$record.lineItem
+		$job.noLots:=$record.noLots
+		$job.postToPO:=$record.postToPO
+		$job.parentJobNumber:=$record.parentJobNumber
+		$job.address:=$record.address
+		$job.alternateShipAddress:=$record.alternateShipAddress
+		$job.shippers:=$record.shippers
+		$job.customer:=$record.customer
+		$job.qty:=$record.qty
+		$job.qtyOnHand:=$record.qtyOnHand
+		$job.shipMemo:=$record.shipMemo
+		$job.jobComment:=$record.jobComment
+		$job.archived:=True:C214
+		$job.pr_qualifier:=$record.pr_qualifier
+		If ($record.pr_qualifier#"")
+			
+		End if 
 		$res:=$job.save()
 		
 		
-		
-	End for each 
-End if 
-
-
-If (True:C214)
-	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/receiver_export.json")
-	
-	$records:=JSON Parse:C1218($file.getText())
-	var $job : cs:C1710.JobEntity
-	
-	For each ($record; $records)
-		
-		$jobNumber:=$record.ErpJobNumber
-		
-		$job:=ds:C1482.Job.query("jobNumber=:1"; $jobNumber).first()
-		
-		If ($record.Pr_qualifier#"")
+		For each ($poline; $record.poLines)
+			$poLine_es:=ds:C1482.PurchaseOrderLine.query("seqNum = :1"; $poLine.seqNum)
 			
-		End if 
+			If ($poLine_es.length>0)
+				$poLine_e:=$poLine_es[0]
+				
+				If ($poLine_e.purchaseOrder.poNumber=$record.poNumber) & ($poline.description=$poLine_e.description)
+					$poLine_e.UUID_Job:=$job.UUID
+					
+					$res:=$poLine_e.save()
+					
+					If (Not:C34($res.success))
+						TRACE:C157
+					End if 
+				End if 
+			End if 
+		End for each 
 		
-		$job.pr_qualifier:=$record.Pr_qualifier
-		$success:=$job.save()
-		If ($success.success=False:C215)
-			TRACE:C157
-		End if 
+		
+		For each ($lot; $record.lots)
+			$lot_e:=ds:C1482.Lot.new()
+			
+			$lot_e.lotNumber:=$lot.lotNum
+			$lot_e.dateIn:=$lot.dateIn
+			$lot_e.dateOut:=$lot.dateOut
+			$lot_e.process:=$lot.process
+			$lot_e.device:=$lot.device
+			$lot_e.altLotNumber:=$lot.altLotNumber
+			$lot_e.deviceTableLink:=$lot.deviceTableLink
+			$lot_e.currentOrNextArea:=$lot.currentOrNextArea
+			$lot_e.onHold:=$lot.onHold
+			$lot_e.holdDate:=$lot.holdDate
+			$lot_e.holdTime:=$lot.holdTime
+			$lot_e.poNumber:=$lot.poNumber
+			$lot_e.customer:=$lot.customer
+			$lot_e.commit:=$lot.commit
+			$lot_e.reCommit:=$lot.reCommit
+			$lot_e.original:=$lot.original
+			$lot_e.progressive:=$lot.progressive
+			$lot_e.ourCount:=$lot.ourCount
+			$lot_e.totalTested:=$lot.totalTested
+			$lot_e.az:=$lot.az
+			$lot_e.et:=$lot.et
+			$lot_e.OQADone:=$lot.OQADone
+			$lot_e.OQADate:=$lot.OQADate
+			$lot_e.OQASimpleSize:=$lot.OQASimpleSize
+			$lot_e.releaseNumber:=$lot.releaseNumber
+			$lot_e.trackingNumber:=$lot.trackingNumber
+			$lot_e.readyToShipDate:=$lot.readyToShipDate
+			$lot_e.shippingMemo:=$lot.shippingMemo
+			$lot_e.location:=$lot.location
+			$lot_e.comment:=$lot.comment
+			$lot_e.status:=$lot.status
+			
+			$lot_e.UUID_Job:=$job.UUID
+			
+			$res:=$lot_e.save()
+			
+			If (Not:C34($res.success))
+				TRACE:C157
+			Else 
+				
+				For each ($step; $lot.steps)
+					$lotStep_e:=ds:C1482.LotStep.new()
+					
+					$lotStep_e.order:=$step.order
+					$lotStep_e.description:=$step.description
+					$lotStep_e.lotSpecs:=$step.lotSpecs
+					$lotStep_e.specRevision:=$step.specRevision
+					$lotStep_e.alert:=$step.alert
+					$lotStep_e.qtyIn:=$step.qtyIn
+					$lotStep_e.qtyOut:=$step.qtyOut
+					$lotStep_e.dateIn:=$step.dateIn
+					$lotStep_e.dateOut:=$step.dateOut
+					
+					$lotStep_e.UUID_Lot:=$lot_e.UUID
+					
+					$res:=$lotStep_e.save()
+					
+					If (Not:C34($res.success))
+						TRACE:C157
+					End if 
+				End for each 
+			End if 
+		End for each 
+		
 		
 	End for each 
-	
-	
 End if 
 
 ALERT:C41("END!!")

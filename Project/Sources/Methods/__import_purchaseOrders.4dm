@@ -42,6 +42,7 @@ If (True:C214)
 		$po.timeBillingRate:=$record.timeBillingRate
 		$po.timeBilling:=$record.timeBilling
 		$po.description:=$record.description
+		$po.log_date:=$record.Log_date
 		
 		var $customer : Object
 		$customer:=ds:C1482.Customer.query("name =:1"; $record.customer_name).first()
@@ -152,7 +153,10 @@ If (True:C214)
 		$job.shipMemo:=$record.shipMemo
 		$job.jobComment:=$record.jobComment
 		$job.archived:=$record.archived
-		
+		$job.pr_qualifier:=$record.pr_qualifier
+		If ($record.pr_qualifier#"")
+			
+		End if 
 		$res:=$job.save()
 		
 		If (Not:C34($res.success))

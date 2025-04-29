@@ -43,6 +43,7 @@ Function drawPup_XXX()
 	//This function updates the dropdown by displaying the name
 	Form:C1466.sfw.drawButtonPup("pup_xxx"; $xxxName; "xxxx.png"; (Form:C1466.current_item.xxxx=Null:C1517))
 	
+	
 Function drawPup_CustomerStatus()
 	If (Form:C1466.current_item#Null:C1517)
 		$customerStatus:=ds:C1482.CustomerStatus.query("statusID= :1"; Form:C1466.current_item.IDT_status).first() || New object:C1471()
@@ -54,6 +55,7 @@ Function drawPup_CustomerStatus()
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
 		Form:C1466.sfw.drawButtonPup("pup_customerStatus"; $statusName; $pathIcon; ($customerStatus=Null:C1517))
 	End if 
+	
 	
 Function pup_status()
 	//Create pop up menu
@@ -86,7 +88,6 @@ Function pup_status()
 	This:C1470.drawPup_CustomerStatus()
 	
 	
-	
 Function drawPup_CustomerCarrier()
 	If (Form:C1466.current_item#Null:C1517)
 		$customerCarrier:=ds:C1482.CustomerCarrier.query("carrierID= :1"; Form:C1466.current_item.IDT_carrier).first() || New object:C1471()
@@ -98,6 +99,7 @@ Function drawPup_CustomerCarrier()
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
 		Form:C1466.sfw.drawButtonPup("pup_customerCarrier"; $carrierName; $pathIcon; ($customerCarrier=Null:C1517))
 	End if 
+	
 	
 Function pup_carrier()
 	//Create pop up menu
@@ -129,6 +131,7 @@ Function pup_carrier()
 	End if 
 	This:C1470.drawPup_CustomerCarrier()
 	
+	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
@@ -147,6 +150,7 @@ Function contactDetails()
 		Form:C1466.subFormAddress.address:=Form:C1466.current_item.rebuildAddress()
 		Form:C1466.subFormAddress.situation:=Form:C1466.situation
 	End if 
+	
 	
 Function loadXXX()
 	//Loads and initializes a list
@@ -182,13 +186,14 @@ Function loadPOs()
 		Form:C1466.lb_POs:=New collection:C1472()
 		
 		$PurchaseOrders:=ds:C1482.PurchaseOrder.query("UUID_Customer = :1"; Form:C1466.current_item.UUID).orderBy("poNumber")
+		
 		For ($i; 0; $PurchaseOrders.length-1)
 			
 			$POLines:=$PurchaseOrders[$i].lineItems
 			
 			$PO_item:=New object:C1471()
 			$PO_item.division:=$PurchaseOrders[$i].division
-			$PO_item.PO_date:=$PurchaseOrders[$i].lineItems.customerRequestedDate
+			$PO_item.PO_date:=$PurchaseOrders[$i].log_date
 			$PO_item.poNumber:=$PurchaseOrders[$i].poNumber
 			$PO_item.identifier:=$PurchaseOrders[$i].identifier
 			$PO_item.poAmount:=$PurchaseOrders[$i].poAmount
@@ -202,9 +207,11 @@ Function loadPOs()
 		
 	End if 
 	
+	
 Function loadJobs()
 	
 	If (Form:C1466.current_item#Null:C1517)
+		
 		Form:C1466.lb_Jobs:=ds:C1482.Job.query("customer = :1"; Form:C1466.current_item.name).orderBy("dateCreated")
 		
 	End if 

@@ -878,7 +878,8 @@
 							"footer": {
 								"name": "Footer8"
 							},
-							"dataSource": "This:C1470.identifier"
+							"dataSource": "This:C1470.identifier",
+							"width": 234
 						},
 						{
 							"header": {
@@ -1000,7 +1001,8 @@
 							"footer": {
 								"name": "Footer15"
 							},
-							"dataSource": "This:C1470.process"
+							"dataSource": "This:C1470.process",
+							"width": 175
 						},
 						{
 							"header": {
@@ -1066,11 +1068,10 @@
 								"fontWeight": "bold"
 							},
 							"name": "Column18",
+							"dataSource": "This:C1470.jobNumber",
 							"footer": {
 								"name": "Footer18"
-							},
-							"dataSource": "This:C1470.jobNumber",
-							"dataSourceTypeHint": "text"
+							}
 						},
 						{
 							"header": {
@@ -1167,7 +1168,7 @@
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
 					"right": 1445,
-					"scrollbarHorizontal": "hidden",
+					"scrollbarHorizontal": "automatic",
 					"columns": [
 						{
 							"header": {
@@ -1229,7 +1230,8 @@
 							"footer": {
 								"name": "Footer26"
 							},
-							"dataSource": "This:C1470.binLocation"
+							"dataSource": "This:C1470.binLocation",
+							"width": 219
 						},
 						{
 							"header": {
@@ -1241,7 +1243,8 @@
 							"footer": {
 								"name": "Footer34"
 							},
-							"dataSource": "This:C1470.description"
+							"dataSource": "This:C1470.description",
+							"width": 353
 						}
 					]
 				}
@@ -1287,18 +1290,6 @@
 								"name": "Footer27"
 							},
 							"dataSource": "This:C1470.date"
-						},
-						{
-							"header": {
-								"name": "Header28",
-								"text": "Customer ID",
-								"fontWeight": "bold"
-							},
-							"name": "Column28",
-							"footer": {
-								"name": "Footer28"
-							},
-							"dataSource": "This:C1470.customerId"
 						},
 						{
 							"header": {
@@ -1354,7 +1345,7 @@
 		},
 		null
 	],
-	"geometryStamp": 655,
+	"geometryStamp": 656,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
