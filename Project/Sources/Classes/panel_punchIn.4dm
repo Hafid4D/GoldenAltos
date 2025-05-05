@@ -18,6 +18,7 @@ Function formMethod()
 		Case of 
 			: (FORM Get current page:C276(*)=1)
 				// add load functions
+				This:C1470.loadTools()
 		End case 
 	End if 
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())  //It's time to resize the object or set visible
@@ -60,6 +61,9 @@ Function loadCurrentStep()
 			
 			Form:C1466.currentStepOrder:=Form:C1466.currentStep.order
 			
+			OBJECT SET FORMAT:C236(*; "EntryField_comment1"; "Blade Size:#### Die Size(mils):########  ")
+			OBJECT SET FILTER:C235(*; "EntryField_comment1"; "Blade Size : ####Die Size(mils) : ########")
+			
 			If (Form:C1466.currentStep.tools=Null:C1517)
 				Form:C1466.currentStep.tools:=New object:C1471("items"; New collection:C1472())
 				
@@ -97,7 +101,9 @@ Function loadCurrentStep()
 	End if 
 	
 Function loadTools()
-	Form:C1466.lb_tools:=Form:C1466.currentStep.tools.items
+	If (Form:C1466.currentStep#Null:C1517) && (Form:C1466.currentStep.tools#Null:C1517)
+		Form:C1466.lb_tools:=Form:C1466.currentStep.tools.items
+	End if 
 	
 Function displayBannerLotOnHold
 	var $pict : Picture

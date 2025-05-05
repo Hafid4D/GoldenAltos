@@ -71,14 +71,26 @@ Function bActionSteps()
 		
 		Case of 
 			: ($choose="--create_from_template")
-				$form:=New object:C1471()
+				$form:=New object:C1471(\
+					"lotStep"; ds:C1482.LotStep.new()\
+					)
 				
-				$winRef:=Open form window:C675("createStepFromTemplate"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
-				DIALOG:C40("createStepFromTemplate"; $form)
+				$form.lotStep.UUID_Lot:=Form:C1466.current_item.UUID
+				$form.lotStep.order:=Form:C1466.lb_steps.length+1
+				
+				$winRef:=Open form window:C675("createStep_StepTemplate"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+				DIALOG:C40("createStep_StepTemplate"; $form)
 				CLOSE WINDOW:C154($winRef)
 				
 				If (ok=1)
+					$lotStep_e:=$form.lotStep
 					
+					$res:=$lotStep_e.save()
+					
+					If ($res.success)
+						This:C1470.loadLotSteps()
+						This:C1470._activate_save_cancel_button()
+					End if 
 				End if 
 				
 			: ($choose="--create_from_step_file")

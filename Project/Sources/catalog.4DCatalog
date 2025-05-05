@@ -46,7 +46,7 @@
 		<field name="qtyOut" uuid="49CF31FBDA2BD9458DC6B5BEC1AA52F7" type="4" never_null="true" id="7"/>
 		<field name="dateIn" uuid="1A63DAA259BB124D96F431FBC66AF678" type="8" never_null="true" id="8"/>
 		<field name="dateOut" uuid="C9A218A39984844F91FB5BD26AB1AA1A" type="8" never_null="true" id="9"/>
-		<field name="UUID_StepTemplate" uuid="19DFC27C6FB94D4C8E072F5F3D2E1EF2" type="10" store_as_UUID="true" never_null="true" id="10"/>
+		<field name="bins" uuid="8F5942412FAF104093CF12D191C58A66" type="21" blob_switch_size="2147483647" never_null="true" id="10"/>
 		<field name="lotSpecs" uuid="C021671B87623049AA7819B83C90C571" type="10" limiting_length="255" never_null="true" id="11"/>
 		<field name="specRevision" uuid="E1F9F9F4D356F541BAD671DB70CE2C33" type="10" limiting_length="255" never_null="true" id="12"/>
 		<field name="timeOut" uuid="3901AA21C1F6964F91E804B784A59923" type="9" never_null="true" id="13"/>
@@ -57,6 +57,8 @@
 		<field name="parametricMeasurements" uuid="F78707BDAC3AB14696337A57061E5F05" type="21" blob_switch_size="2147483647" never_null="true" id="18"/>
 		<field name="stepInterruptions" uuid="37F7A5D60F88784BBAD8AFE7C6179BDB" type="21" blob_switch_size="2147483647" never_null="true" id="19"/>
 		<field name="dataTables" uuid="29E9FA20260666448E481AC83B07485F" type="21" blob_switch_size="2147483647" never_null="true" id="20"/>
+		<field name="comment1" uuid="325AD175007F3C4C9EA15C15CB3FF64D" type="10" limiting_length="255" never_null="true" id="21"/>
+		<field name="comment2" uuid="4886F340A8C9024DB8C80D2450956D0F" type="10" limiting_length="255" never_null="true" id="22"/>
 		<primary_key field_name="UUID" field_uuid="EE9C517A8C59724B8559A5DCB59FE560"/>
 	</table>
 	<table name="Tool" uuid="0FF66E5E37EDD74B8E6E39F15644C85F" id="6">
@@ -92,6 +94,15 @@
 		<field name="name" uuid="8BEE8E68B1B14AF98D001ABDC222689D" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="moreData" uuid="D4E7E70B55474B3995389C232C22CB42" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
 		<primary_key field_name="UUID" field_uuid="BA314E8B13754390B2700B893AD65AB1"/>
+	</table>
+	<table name="Specification" uuid="B187BEFD3CC6B147886F91E311E96B3A" id="10">
+		<field name="UUID" uuid="2A671DFB01797B4DBB6EC2EB4216DB75" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="spec" uuid="503731601352984F9BF5FB041C0CAC3E" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="title" uuid="C957B882F419D841AC29C05D4B2E8D85" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="revisionDate" uuid="73D94A9309F8BF44B438A516ECF1EBF3" type="8" never_null="true" id="4"/>
+		<field name="rev" uuid="2A87C313C2550F45961A1D4291FAF99A" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="division" uuid="C4DB48A00B34314089C60749A12362E7" type="10" limiting_length="255" never_null="true" id="6"/>
+		<primary_key field_name="UUID" field_uuid="2A671DFB01797B4DBB6EC2EB4216DB75"/>
 	</table>
 	<table name="sfw_Country" uuid="4C0E0D9D33D246BAB1FACEEC19ABF144" id="15" prevent_journaling="true">
 		<field name="UUID" uuid="FDA14E8A26704F7091EC668E332108FB" type="10" unique="true" autogenerate="true" store_as_UUID="true" id="1"/>
@@ -390,17 +401,14 @@
 	</table>
 	<table name="Step" uuid="73EFE2D78C61400397353509CBA87D18" id="120">
 		<field name="UUID" uuid="3C357DD66006453994A5995B3E57D007" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="UUID_StepFile" uuid="A7943680C19E475EAD597B6951750765" type="10" store_as_UUID="true" never_null="true" id="2">
+		<field name="alert" uuid="99E6A566FCC6874A9AABC563F7454111" type="10" limiting_length="255" never_null="true" id="2">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="UUID_StepTemplate" uuid="D92164B4310D4A74A5E486B390AE1787" type="10" store_as_UUID="true" never_null="true" id="3">
-			<field_extra multi_line="false"/>
-		</field>
-		<field name="description" uuid="2F632A7EA108834BBFEA19CA848D5BF8" type="10" limiting_length="255" never_null="true" id="4"/>
-		<field name="alert" uuid="2C35678C2AF0C5499A0298DFCD9C0EE8" type="10" limiting_length="255" never_null="true" id="5"/>
-		<field name="specification" uuid="A684F2EC1DBB1D4F8990A0E8430D6BF3" type="10" limiting_length="255" never_null="true" id="6"/>
-		<field name="Comment1" uuid="1145B8200CA4B7409BCC1F5327AB0B57" type="10" limiting_length="255" never_null="true" id="7"/>
-		<field name="Comment2" uuid="B275453187A73E47B9AA6EEFBE286769" type="10" limiting_length="255" never_null="true" id="8"/>
+		<field name="description" uuid="CF97C41065B9C24391123C7337F8C7CB" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="UUID_StepTemplate" uuid="95C3CA62BD079647A666AAE41D7B984A" type="10" store_as_UUID="true" never_null="true" id="4"/>
+		<field name="specification" uuid="200CC3EEAB9DEA419A347C450B5123A4" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="areas" uuid="874E3CD01538034CAE6F623D6FE639AF" type="10" limiting_length="255" never_null="true" id="6"/>
+		<field name="operationCode" uuid="30C8C57D94AFE7499EF72CA3A15D8650" type="10" limiting_length="255" never_null="true" id="7"/>
 		<primary_key field_name="UUID" field_uuid="3C357DD66006453994A5995B3E57D007"/>
 	</table>
 	<table name="StepTemplate" uuid="6330FD4D08D74130BF3869222CDECBA6" id="121">
@@ -732,21 +740,9 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="BBD7119D479840569D64C167DEDCDF9B" name_Nto1="Link_16" name_1toN="Link_16_return" state="1">
+	<relation uuid="9FD8DE349FF6BE42B935C2539539EA6F" name_Nto1="stepTemplate" name_1toN="steps" state="1">
 		<related_field kind="source">
-			<field_ref uuid="A7943680C19E475EAD597B6951750765" name="UUID_StepFile">
-				<table_ref uuid="73EFE2D78C61400397353509CBA87D18" name="Step"/>
-			</field_ref>
-		</related_field>
-		<related_field kind="destination">
-			<field_ref uuid="B1C018048ECD473CB25C3F879D15164C" name="UUID">
-				<table_ref uuid="A6301A2C994D4680A851FC2AE85118BE" name="StepFile"/>
-			</field_ref>
-		</related_field>
-	</relation>
-	<relation uuid="8D4FB4AF3BC84E2D9947997982D1197A" name_Nto1="Link_17" name_1toN="Link_17_return" state="1">
-		<related_field kind="source">
-			<field_ref uuid="D92164B4310D4A74A5E486B390AE1787" name="UUID_StepTemplate">
+			<field_ref uuid="95C3CA62BD079647A666AAE41D7B984A" name="UUID_StepTemplate">
 				<table_ref uuid="73EFE2D78C61400397353509CBA87D18" name="Step"/>
 			</field_ref>
 		</related_field>
@@ -912,18 +908,6 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="B21D5E45DC54FE4697545F4CA28DF238" name_Nto1="Link_32" name_1toN="Link_32_return" state="1">
-		<related_field kind="source">
-			<field_ref uuid="19DFC27C6FB94D4C8E072F5F3D2E1EF2" name="UUID_StepTemplate">
-				<table_ref uuid="21C997F4FF841640B547868BE38C05ED" name="LotStep"/>
-			</field_ref>
-		</related_field>
-		<related_field kind="destination">
-			<field_ref uuid="3C357DD66006453994A5995B3E57D007" name="UUID">
-				<table_ref uuid="73EFE2D78C61400397353509CBA87D18" name="Step"/>
-			</field_ref>
-		</related_field>
-	</relation>
 	<relation uuid="2AD91F4788D14BC589D0DC658413CE3C" name_Nto1="documentFolder" name_1toN="documents" state="1">
 		<related_field kind="source">
 			<field_ref uuid="CACC091D0D6247B385C4B1F8772EE52B" name="UUID_DocumentFolder">
@@ -993,6 +977,11 @@
 			<table_ref uuid="AC225FD836FF49F7841FC1B78EC96243" name="sfw_UserInscription"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="111598E1CC456F47B5CF1913ED4BC852" type="7">
+		<field_ref uuid="2A671DFB01797B4DBB6EC2EB4216DB75" name="UUID">
+			<table_ref uuid="B187BEFD3CC6B147886F91E311E96B3A" name="Specification"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="1244B3D707B44F92951833C39F497055" type="7">
 		<field_ref uuid="9C6030E6F9384C39A4FDB9E6453F235A" name="UUID">
 			<table_ref uuid="CF8DC4373C97487884111398B4383812" name="CustomerStatus"/>
@@ -1051,11 +1040,6 @@
 	<index kind="regular" uuid="2F43555942CD426DA98581247C28392E" type="3">
 		<field_ref uuid="252F726A4DA54A89B97834C4A86C2301" name="UUID_Quote">
 			<table_ref uuid="348628FCA4DC451085D7519B226BD509" name="QuoteLine"/>
-		</field_ref>
-	</index>
-	<index kind="regular" uuid="3DD65150DC0A4F1DB46965D05DB4CD68" type="3">
-		<field_ref uuid="D92164B4310D4A74A5E486B390AE1787" name="UUID_StepTemplate">
-			<table_ref uuid="73EFE2D78C61400397353509CBA87D18" name="Step"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="40A9EAD691134D62B6DCAA9836F141F0" type="3">
@@ -1173,6 +1157,11 @@
 			<table_ref uuid="2CC1E163267E4DFE808464C271CC4C9F" name="PurchaseOrderLine"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="866AC73A0570C443A12494C3DF0771C5" type="3">
+		<field_ref uuid="95C3CA62BD079647A666AAE41D7B984A" name="UUID_StepTemplate">
+			<table_ref uuid="73EFE2D78C61400397353509CBA87D18" name="Step"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="878B8D90A6C2644D89B8883B80E40549" type="3">
 		<field_ref uuid="0EACB0E17BBD4F639E0C142211979D18" name="UUID_Employee">
 			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
@@ -1223,18 +1212,8 @@
 			<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
 		</field_ref>
 	</index>
-	<index kind="regular" uuid="985254F1376146EDB0D3323C4F45E4B6" type="3">
-		<field_ref uuid="A7943680C19E475EAD597B6951750765" name="UUID_StepFile">
-			<table_ref uuid="73EFE2D78C61400397353509CBA87D18" name="Step"/>
-		</field_ref>
-	</index>
 	<index kind="regular" unique_keys="true" uuid="9CEE78492358F54D8FAE398F35A45555" type="7">
 		<field_ref uuid="EE9C517A8C59724B8559A5DCB59FE560" name="UUID">
-			<table_ref uuid="21C997F4FF841640B547868BE38C05ED" name="LotStep"/>
-		</field_ref>
-	</index>
-	<index kind="regular" uuid="9D26C381981E764992A429538C89C7AA" type="3">
-		<field_ref uuid="19DFC27C6FB94D4C8E072F5F3D2E1EF2" name="UUID_StepTemplate">
 			<table_ref uuid="21C997F4FF841640B547868BE38C05ED" name="LotStep"/>
 		</field_ref>
 	</index>

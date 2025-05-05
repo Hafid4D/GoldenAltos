@@ -340,7 +340,7 @@
 					"text": ":",
 					"fontWeight": "normal"
 				},
-				"Check Box": {
+				"Field_onHold": {
 					"type": "checkbox",
 					"text": "Lot On Hold",
 					"top": 86,
@@ -352,7 +352,8 @@
 					],
 					"fontWeight": "bold",
 					"dataSourceTypeHint": "boolean",
-					"dataSource": "Form:C1466.current_item.onHold"
+					"dataSource": "Form:C1466.current_item.onHold",
+					"enterable": false
 				},
 				"label_0_8": {
 					"type": "text",
@@ -372,7 +373,7 @@
 					"type": "rectangle",
 					"top": 188,
 					"left": 5,
-					"width": 450,
+					"width": 290,
 					"height": 53,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
@@ -382,7 +383,7 @@
 					"type": "rectangle",
 					"top": 155,
 					"left": 5,
-					"width": 450,
+					"width": 290,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
@@ -412,7 +413,7 @@
 					"type": "input",
 					"top": 196,
 					"left": 138,
-					"width": 307,
+					"width": 147,
 					"height": 17,
 					"dataSource": "Form:C1466.currentStep.qtyIn",
 					"focusable": false,
@@ -439,7 +440,7 @@
 					"type": "input",
 					"top": 220,
 					"left": 138,
-					"width": 307,
+					"width": 147,
 					"height": 17,
 					"dataSource": "Form:C1466.currentStep.dateIn",
 					"focusable": false,
@@ -456,27 +457,27 @@
 				"header_bkgd10": {
 					"type": "rectangle",
 					"top": 188,
-					"left": 460,
-					"width": 450,
+					"left": 300,
+					"width": 610,
 					"height": 53,
-					"sizingX": "fixed",
+					"sizingX": "grow",
 					"fill": "#E4E4E4",
 					"stroke": "transparent"
 				},
 				"header_bkgd11": {
 					"type": "rectangle",
 					"top": 155,
-					"left": 460,
-					"width": 450,
+					"left": 300,
+					"width": 610,
 					"height": 30,
-					"sizingX": "fixed",
+					"sizingX": "grow",
 					"fill": "#A2C6D8",
 					"stroke": "transparent"
 				},
 				"lbl_comments2": {
 					"type": "text",
 					"top": 162,
-					"left": 466,
+					"left": 306,
 					"width": 277,
 					"height": 17,
 					"stroke": "#000000",
@@ -487,19 +488,19 @@
 				"label_smallLayout": {
 					"type": "text",
 					"top": 196,
-					"left": 468,
+					"left": 308,
 					"width": 107,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Comment 1"
 				},
-				"Field_smallLayout": {
+				"EntryField_comment1": {
 					"type": "input",
 					"top": 196,
-					"left": 581,
-					"width": 317,
+					"left": 421,
+					"width": 477,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.stepTemplate.comment1",
+					"dataSource": "Form:C1466.currentStep.comment1",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -509,24 +510,26 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "normal"
+					"fontWeight": "normal",
+					"method": "ObjectMethods/EntryField_comment1.4dm",
+					"sizingX": "grow"
 				},
 				"label_largeLayout": {
 					"type": "text",
 					"top": 220,
-					"left": 468,
+					"left": 308,
 					"width": 107,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Comment 2"
 				},
-				"Field_largeLayout": {
+				"EntryField_comment2": {
 					"type": "input",
 					"top": 220,
-					"left": 581,
-					"width": 317,
+					"left": 421,
+					"width": 477,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.stepTemplate.comment2",
+					"dataSource": "Form:C1466.currentStep.comment2",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -536,7 +539,9 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "normal"
+					"fontWeight": "normal",
+					"sizingX": "grow",
+					"method": "ObjectMethods/EntryField_comment2.4dm"
 				},
 				"header_bkgd6": {
 					"type": "rectangle",
@@ -602,7 +607,8 @@
 								"name": "Footer2"
 							},
 							"width": 50,
-							"dataSource": "This:C1470.order"
+							"dataSource": "This:C1470.order",
+							"enterable": false
 						},
 						{
 							"header": {
@@ -614,19 +620,8 @@
 								"name": "Footer5"
 							},
 							"width": 200,
-							"dataSource": "This:C1470.toolType"
-						},
-						{
-							"header": {
-								"name": "Header6",
-								"text": "Header6"
-							},
-							"name": "Column6",
-							"footer": {
-								"name": "Footer6"
-							},
-							"width": 88,
-							"dataSource": "This:C1470.tool"
+							"dataSource": "This:C1470.name",
+							"enterable": false
 						},
 						{
 							"header": {
@@ -640,7 +635,22 @@
 							"width": 88,
 							"dataSource": "This:C1470.date",
 							"dataSourceTypeHint": "date",
-							"textAlign": "left"
+							"textAlign": "left",
+							"method": "ObjectMethods/Column7.4dm",
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "Header6",
+								"text": "Header6"
+							},
+							"name": "Column6",
+							"footer": {
+								"name": "Footer6"
+							},
+							"width": 88,
+							"dataSource": "This:C1470.tool.name",
+							"enterable": false
 						}
 					]
 				},
@@ -724,7 +734,8 @@
 								"name": "Footer1"
 							},
 							"width": 426,
-							"dataSource": "This:C1470.certification.name"
+							"dataSource": "This:C1470.certification.name",
+							"enterable": false
 						}
 					]
 				},
@@ -808,7 +819,8 @@
 							"dataSource": "This:C1470.definition",
 							"footer": {
 								"name": "Footer8"
-							}
+							},
+							"resizable": false
 						},
 						{
 							"header": {
@@ -820,7 +832,8 @@
 								"name": "Footer3"
 							},
 							"width": 376,
-							"dataSource": "This:C1470.value"
+							"dataSource": "This:C1470.value",
+							"resizable": false
 						}
 					]
 				},
@@ -903,7 +916,8 @@
 							"width": 50,
 							"footer": {
 								"name": "Footer9"
-							}
+							},
+							"enterable": false
 						},
 						{
 							"header": {
@@ -915,7 +929,8 @@
 								"name": "Footer4"
 							},
 							"width": 376,
-							"dataSource": "This:C1470.certification.name"
+							"dataSource": "This:C1470.certification.name",
+							"enterable": false
 						}
 					]
 				},
@@ -1013,7 +1028,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_4lines",
-	"geometryStamp": 577,
+	"geometryStamp": 609,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

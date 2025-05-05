@@ -2,7 +2,7 @@
 /**
 import po & po lines (po <-- po_lines)
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([PurchaseOrder:115])
 	TRUNCATE TABLE:C1051([PurchaseOrderLine:116])
 	TRUNCATE TABLE:C1051([Invoice:4])
@@ -111,7 +111,7 @@ End if
 /**
 import jobs & lot (job <-- lots)
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([Job:117])
 	TRUNCATE TABLE:C1051([Lot:118])
 	TRUNCATE TABLE:C1051([LotStep:5])
@@ -400,6 +400,33 @@ If (False:C215)
 		$certification_e.name:=$record.name
 		
 		$res:=$certification_e.save()
+		
+		If (Not:C34($res.success))
+			TRACE:C157
+		End if 
+	End for each 
+End if 
+
+/**
+import specifications
+**/
+If (True:C214)
+	TRUNCATE TABLE:C1051([Specification:10])
+	
+	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/specification_export.json")
+	
+	$records:=JSON Parse:C1218($file.getText())
+	
+	For each ($record; $records)
+		$specification_e:=ds:C1482.Specification.new()
+		
+		$specification_e.spec:=$record.spec
+		$specification_e.title:=$record.title
+		$specification_e.revisionDate:=$record.revisionDate
+		$specification_e.rev:=$record.rev
+		$specification_e.division:=$record.division
+		
+		$res:=$specification_e.save()
 		
 		If (Not:C34($res.success))
 			TRACE:C157

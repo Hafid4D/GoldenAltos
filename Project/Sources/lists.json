@@ -53,5 +53,325 @@
 				"editable": true
 			}
 		]
+	},
+	"Areas": {
+		"editable": false,
+		"items": [
+			{
+				"text": "LAB",
+				"ref": 1,
+				"editable": true
+			},
+			{
+				"text": "BACK-END",
+				"ref": 2,
+				"editable": true
+			},
+			{
+				"text": "VENDOR",
+				"ref": 3,
+				"editable": true
+			},
+			{
+				"text": "CSI",
+				"ref": 4,
+				"editable": true
+			},
+			{
+				"text": "QC",
+				"ref": 5,
+				"editable": true
+			},
+			{
+				"text": "LAB_BACK-END",
+				"ref": 6,
+				"editable": true
+			},
+			{
+				"text": "PACKING",
+				"ref": 7,
+				"editable": true
+			},
+			{
+				"text": "FRONT LINE",
+				"ref": 8,
+				"editable": true
+			},
+			{
+				"text": "TEST",
+				"ref": 9,
+				"editable": true
+			},
+			{
+				"text": "BURN-IN",
+				"ref": 10,
+				"editable": true
+			},
+			{
+				"text": "LAB_BACK-END QC",
+				"ref": 11,
+				"editable": true
+			}
+		]
+	},
+	"OperationCodes": {
+		"editable": false,
+		"items": [
+			{
+				"text": "2nd Optical",
+				"ref": 1,
+				"editable": true
+			},
+			{
+				"text": "3rd Optical",
+				"ref": 2,
+				"editable": true
+			},
+			{
+				"text": "4th Optical",
+				"ref": 3,
+				"editable": true
+			},
+			{
+				"text": "Adhesion",
+				"ref": 4,
+				"editable": true
+			},
+			{
+				"text": "Burn In",
+				"ref": 5,
+				"editable": true
+			},
+			{
+				"text": "Centrifuge",
+				"ref": 6,
+				"editable": true
+			},
+			{
+				"text": "Component Attach",
+				"ref": 7,
+				"editable": true
+			},
+			{
+				"text": "Conv Heat Solder",
+				"ref": 8,
+				"editable": true
+			},
+			{
+				"text": "CSI",
+				"ref": 9,
+				"editable": true
+			},
+			{
+				"text": "Dest Phy Analysis",
+				"ref": 10,
+				"editable": true
+			},
+			{
+				"text": "Die Attach",
+				"ref": 11,
+				"editable": true
+			},
+			{
+				"text": "Die Attach Cure",
+				"ref": 12,
+				"editable": true
+			},
+			{
+				"text": "Die Attach Monitor",
+				"ref": 13,
+				"editable": true
+			},
+			{
+				"text": "Electrical Test",
+				"ref": 14,
+				"editable": true
+			},
+			{
+				"text": "ESD Class",
+				"ref": 15,
+				"editable": true
+			},
+			{
+				"text": "Fine Leak",
+				"ref": 16,
+				"editable": true
+			},
+			{
+				"text": "Forming Gas",
+				"ref": 17,
+				"editable": true
+			},
+			{
+				"text": "Frame Attach",
+				"ref": 18,
+				"editable": true
+			},
+			{
+				"text": "Gross Leak",
+				"ref": 19,
+				"editable": true
+			},
+			{
+				"text": "High Temp Stor",
+				"ref": 20,
+				"editable": true
+			},
+			{
+				"text": "Incoming QC",
+				"ref": 21,
+				"editable": true
+			},
+			{
+				"text": "Lead Integrity",
+				"ref": 22,
+				"editable": true
+			},
+			{
+				"text": "Lid Pull",
+				"ref": 23,
+				"editable": true
+			},
+			{
+				"text": "Marking",
+				"ref": 24,
+				"editable": true
+			},
+			{
+				"text": "Mech Shock",
+				"ref": 25,
+				"editable": true
+			},
+			{
+				"text": "Moisture Res",
+				"ref": 26,
+				"editable": true
+			},
+			{
+				"text": "Non Destructive",
+				"ref": 27,
+				"editable": true
+			},
+			{
+				"text": "Organic Burn Out",
+				"ref": 28,
+				"editable": true
+			},
+			{
+				"text": "Others",
+				"ref": 29,
+				"editable": true
+			},
+			{
+				"text": "Outgoing QC",
+				"ref": 30,
+				"editable": true
+			},
+			{
+				"text": "Outside Service",
+				"ref": 31,
+				"editable": true
+			},
+			{
+				"text": "Photo",
+				"ref": 32,
+				"editable": true
+			},
+			{
+				"text": "Phy Dim",
+				"ref": 33,
+				"editable": true
+			},
+			{
+				"text": "PIND",
+				"ref": 34,
+				"editable": true
+			},
+			{
+				"text": "Plasma Clean",
+				"ref": 35,
+				"editable": true
+			},
+			{
+				"text": "Random Vib",
+				"ref": 36,
+				"editable": true
+			},
+			{
+				"text": "Reflow",
+				"ref": 37,
+				"editable": true
+			},
+			{
+				"text": "Res to Solder",
+				"ref": 38,
+				"editable": true
+			},
+			{
+				"text": "Salt",
+				"ref": 39,
+				"editable": true
+			},
+			{
+				"text": "Sealing",
+				"ref": 40,
+				"editable": true
+			},
+			{
+				"text": "Solder Dip",
+				"ref": 41,
+				"editable": true
+			},
+			{
+				"text": "Solderability",
+				"ref": 42,
+				"editable": true
+			},
+			{
+				"text": "Sta Bake",
+				"ref": 43,
+				"editable": true
+			},
+			{
+				"text": "Temp Cycle",
+				"ref": 44,
+				"editable": true
+			},
+			{
+				"text": "Temp Hum",
+				"ref": 45,
+				"editable": true
+			},
+			{
+				"text": "Thermal Shock",
+				"ref": 46,
+				"editable": true
+			},
+			{
+				"text": "Trim",
+				"ref": 47,
+				"editable": true
+			},
+			{
+				"text": "Vib Var Freq",
+				"ref": 48,
+				"editable": true
+			},
+			{
+				"text": "Wafer Saw",
+				"ref": 49,
+				"editable": true
+			},
+			{
+				"text": "Wirebond",
+				"ref": 50,
+				"editable": true
+			},
+			{
+				"text": "Wirebond Monitor",
+				"ref": 51,
+				"editable": true
+			}
+		]
 	}
 }

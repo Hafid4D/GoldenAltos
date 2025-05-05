@@ -258,13 +258,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3030.6667480469,
-				"top": 619.66668701172,
-				"width": 193.048828125,
-				"height": 314.33203125
+				"left": 3031.6667480469,
+				"top": 630.66668701172,
+				"width": 197.048828125,
+				"height": 356.33203125
 			},
-			"displayable_fields_count": 13,
-			"fields_ordering": 1
+			"displayable_fields_count": 15
 		},
 		"Step": {
 			"color": {
@@ -274,26 +273,30 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3019,
-				"top": 1035,
-				"width": 192.80078125,
-				"height": 241.33203125
+				"left": 2725,
+				"top": 776,
+				"width": 170.80078125,
+				"height": 188.33203125
 			},
-			"displayable_fields_count": 9,
+			"displayable_fields_count": 7,
+			"fields_ordering": 2,
 			"fields": {
-				"specification": {
+				"operationCode": {
+					"position": 7
+				},
+				"areas": {
 					"position": 6
 				},
-				"alert": {
+				"specification": {
 					"position": 5
-				},
-				"description": {
-					"position": 4
 				},
 				"UUID_StepTemplate": {
 					"position": 2
 				},
-				"UUID_StepFile": {
+				"description": {
+					"position": 4
+				},
+				"alert": {
 					"position": 3
 				},
 				"UUID": {
@@ -309,10 +312,10 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2586,
-				"top": 788,
+				"left": 2405,
+				"top": 761,
 				"width": 161.33203125,
-				"height": 212.33203125
+				"height": 209.33203125
 			},
 			"displayable_fields_count": 8,
 			"fields_ordering": 1
@@ -440,7 +443,7 @@
 				"left": 0,
 				"top": 1382,
 				"width": 136.10581970215,
-				"height": 193.15533447266
+				"height": 188.33203125
 			},
 			"displayable_fields_count": 7,
 			"fields_ordering": 1
@@ -595,7 +598,7 @@
 				"left": 358,
 				"top": 496,
 				"width": 179,
-				"height": 147.33203125
+				"height": 146.33203125
 			},
 			"displayable_fields_count": 5,
 			"fields_ordering": 1
@@ -696,6 +699,21 @@
 			"displayable_fields_count": 7,
 			"fields_ordering": 1
 		},
+		"Specification": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 3091.015625,
+				"top": 0,
+				"width": 123.697265625,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6
+		},
 		"sfw_DocumentFolder": {
 			"color": {
 				"red": 181,
@@ -705,9 +723,9 @@
 			},
 			"coordinates": {
 				"left": 852.66918945312,
-				"top": 952.59005737305,
+				"top": 952.59008789062,
 				"width": 173.94140625,
-				"height": 151.8125
+				"height": 146.33203125
 			},
 			"displayable_fields_count": 5,
 			"fields": {
@@ -728,9 +746,9 @@
 			},
 			"coordinates": {
 				"left": 518.36059570312,
-				"top": 937.27981567383,
+				"top": 937.27984619141,
 				"width": 180.57421875,
-				"height": 218.08984375
+				"height": 209.33203125
 			},
 			"displayable_fields_count": 8
 		},
@@ -774,13 +792,32 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2733,
-				"top": 1126.3332519531,
-				"width": 193.048828125,
-				"height": 461.33203125
+				"left": 2734,
+				"top": 1127.3332519531,
+				"width": 212.048828125,
+				"height": 526.33203125
 			},
-			"displayable_fields_count": 20,
+			"displayable_fields_count": 23,
+			"fields_ordering": 2,
 			"fields": {
+				"comment2": {
+					"position": 17
+				},
+				"comment1": {
+					"position": 16
+				},
+				"dataTables": {
+					"position": 20
+				},
+				"stepInterruptions": {
+					"position": 18
+				},
+				"parametricMeasurements": {
+					"position": 21
+				},
+				"tools": {
+					"position": 19
+				},
 				"good": {
 					"position": 15
 				},
@@ -788,34 +825,34 @@
 					"position": 14
 				},
 				"timeIn": {
-					"position": 11
-				},
-				"timeOut": {
 					"position": 13
 				},
-				"specRevision": {
-					"position": 6
-				},
-				"lotSpecs": {
-					"position": 5
-				},
-				"UUID_StepTemplate": {
-					"position": 16
-				},
-				"dateOut": {
+				"timeOut": {
 					"position": 12
 				},
-				"dateIn": {
+				"specRevision": {
+					"position": 11
+				},
+				"lotSpecs": {
 					"position": 10
 				},
-				"qtyOut": {
+				"bins": {
+					"position": 22
+				},
+				"dateOut": {
 					"position": 9
 				},
-				"qtyIn": {
+				"dateIn": {
 					"position": 8
 				},
-				"alert": {
+				"qtyOut": {
 					"position": 7
+				},
+				"qtyIn": {
+					"position": 6
+				},
+				"alert": {
+					"position": 5
 				},
 				"description": {
 					"position": 4
@@ -897,14 +934,6 @@
 		}
 	},
 	"relations": {
-		"B21D5E45DC54FE4697545F4CA28DF238": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
 		"DB8D79B14BDE42479CDD27271248450D": {
 			"color": {
 				"red": 255,
@@ -934,6 +963,14 @@
 				"red": 255,
 				"green": 255,
 				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"9FD8DE349FF6BE42B935C2539539EA6F": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
 				"alpha": 0
 			}
 		}

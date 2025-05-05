@@ -19,10 +19,17 @@ Function formMethod()
 				This:C1470.loadDataTables()
 				This:C1470.loadPMs()
 				This:C1470.loadBins()
+				
+			: (FORM Get current page:C276(*)=2)
+				This:C1470.loadSteps()
 		End case 
 	End if 
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())  //It's time to resize the object or set visible
-		This:C1470.redrawAndSetVisible()
+		Case of 
+			: (FORM Get current page:C276(*)=1)
+			: (FORM Get current page:C276(*)=2)
+				This:C1470.redrawAndSetVisible()
+		End case 
 	End if 
 	
 	
@@ -40,6 +47,7 @@ Function pup_XXX()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
+	This:C1470.displayStepLine()
 	
 	
 Function bActionSkills()
@@ -328,3 +336,64 @@ Function loadBins
 	End if 
 	
 	Form:C1466.lb_bins:=Form:C1466.current_item.bins.items
+	
+	
+Function loadSteps
+	Form:C1466.selectedStep:=Null:C1517
+	
+	Form:C1466.lb_steps:=ds:C1482.Step.query("UUID_StepTemplate = :1"; Form:C1466.current_item.UUID)
+	
+	
+Function displayStepLine()
+	OBJECT SET VISIBLE:C603(*; "label_stepLine@"; Not:C34((Form:C1466.selectedStep=Null:C1517)))
+	OBJECT SET VISIBLE:C603(*; "entryField_stepLine@"; Not:C34((Form:C1466.selectedStep=Null:C1517)))
+	
+	
+Function bActionSteps()
+	$refMenu:=Create menu:C408
+	
+	APPEND MENU ITEM:C411($refMenu; "Create a step from template")
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--add")
+	SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/image/button/add.png")
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	APPEND MENU ITEM:C411($refMenu; "Delete a Step")
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")
+	SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/image/button/delete.png")
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	Else 
+		If (Form:C1466.currentPM=Null:C1517)
+			DISABLE MENU ITEM:C150($refMenu; -1)
+		End if 
+	End if 
+	
+	$choose:=Dynamic pop up menu:C1006($refMenu)
+	
+	Case of 
+		: ($choose="--add")
+			$form:=New object:C1471(\
+				"step"; ds:C1482.Step.new()\
+				)
+			
+			$form.step.UUID_StepTemplate:=Form:C1466.current_item.UUID
+			
+			$winRef:=Open form window:C675("createStepFromTemplate"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("createStepFromTemplate"; $form)
+			CLOSE WINDOW:C154($winRef)
+			
+			If (ok=1)
+				$step_e:=$form.step
+				
+				$res:=$step_e.save()
+				
+				If ($res.success)
+					This:C1470.loadSteps()
+					This:C1470._activate_save_cancel_button()
+				End if 
+			End if 
+			
+		: ($choose="--delete")
+	End case 

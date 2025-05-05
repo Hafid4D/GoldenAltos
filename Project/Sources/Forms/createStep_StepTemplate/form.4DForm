@@ -39,7 +39,7 @@
 					"top": 0,
 					"left": 0,
 					"width": 480,
-					"height": 356,
+					"height": 430,
 					"fill": "#E6E6E6",
 					"stroke": "transparent",
 					"strokeWidth": 0
@@ -61,7 +61,7 @@
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
-					"text": "Create a step form a template",
+					"text": "Add a line",
 					"fontSize": 12,
 					"fontWeight": "bold"
 				},
@@ -72,13 +72,185 @@
 					"width": 24,
 					"height": 24,
 					"picture": "/RESOURCES/image/button/add-24x24.png"
+				}
+			}
+		},
+		{
+			"objects": {
+				"header_bkgd2": {
+					"type": "rectangle",
+					"top": 79,
+					"left": 0,
+					"width": 140,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
+				"header_bkgd4": {
+					"type": "rectangle",
+					"top": 79,
+					"left": 144,
+					"width": 306,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#FFFFFF",
+					"stroke": "transparent"
+				},
+				"header_bkgd6": {
+					"type": "rectangle",
+					"top": 79,
+					"left": 450,
+					"width": 32,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
+				"Text": {
+					"type": "text",
+					"text": "Step Template",
+					"top": 85,
+					"left": 7,
+					"width": 102,
+					"height": 15,
+					"fontWeight": "bold"
+				},
+				"Text1": {
+					"type": "text",
+					"text": ":",
+					"top": 85,
+					"left": 114,
+					"width": 22,
+					"height": 15,
+					"textAlign": "right",
+					"fontWeight": "bold"
+				},
+				"header_bkgd3": {
+					"type": "rectangle",
+					"top": 111,
+					"left": 0,
+					"width": 140,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
+				"Text2": {
+					"type": "text",
+					"text": "Order",
+					"top": 117,
+					"left": 7,
+					"width": 102,
+					"height": 15,
+					"fontWeight": "bold"
+				},
+				"Text3": {
+					"type": "text",
+					"text": ":",
+					"top": 117,
+					"left": 114,
+					"width": 22,
+					"height": 15,
+					"textAlign": "right",
+					"fontWeight": "bold"
+				},
+				"header_bkgd13": {
+					"type": "rectangle",
+					"top": 143,
+					"left": 0,
+					"width": 140,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
+				"Text16": {
+					"type": "text",
+					"text": "Description",
+					"top": 149,
+					"left": 7,
+					"width": 102,
+					"height": 15,
+					"fontWeight": "bold"
+				},
+				"Text7": {
+					"type": "text",
+					"text": ":",
+					"top": 150,
+					"left": 114,
+					"width": 22,
+					"height": 15,
+					"textAlign": "right",
+					"fontWeight": "bold"
+				},
+				"header_bkgd5": {
+					"type": "rectangle",
+					"top": 111,
+					"left": 144,
+					"width": 306,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#FFFFFF",
+					"stroke": "transparent"
+				},
+				"header_bkgd7": {
+					"type": "rectangle",
+					"top": 111,
+					"left": 450,
+					"width": 32,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
+				"Input1": {
+					"type": "input",
+					"left": 151,
+					"top": 116,
+					"width": 293,
+					"height": 18,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.lotStep.order",
+					"enterable": false
+				},
+				"header_bkgd8": {
+					"type": "rectangle",
+					"top": 143,
+					"left": 144,
+					"width": 306,
+					"height": 124,
+					"sizingX": "fixed",
+					"fill": "#FFFFFF",
+					"stroke": "transparent"
+				},
+				"header_bkgd9": {
+					"type": "rectangle",
+					"top": 143,
+					"left": 450,
+					"width": 32,
+					"height": 124,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
+				"Input2": {
+					"type": "input",
+					"left": 151,
+					"top": 148,
+					"width": 293,
+					"height": 114,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.lotStep.description"
 				},
 				"Button": {
 					"type": "button",
-					"top": 324,
+					"top": 402,
 					"left": 322,
 					"width": 70,
-					"height": 21,
+					"height": 20,
 					"sizingX": "move",
 					"sizingY": "move",
 					"dataSource": "Button",
@@ -95,10 +267,10 @@
 				},
 				"Button1": {
 					"type": "button",
-					"top": 324,
+					"top": 402,
 					"left": 402,
 					"width": 70,
-					"height": 21,
+					"height": 20,
 					"sizingX": "move",
 					"sizingY": "move",
 					"dataSource": "Button",
@@ -113,189 +285,10 @@
 					"shortcutControl": false,
 					"shortcutShift": false,
 					"shortcutAlt": false
-				}
-			}
-		},
-		{
-			"objects": {
-				"header_bkgd2": {
-					"type": "rectangle",
-					"top": 256,
-					"left": 0,
-					"width": 140,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"header_bkgd4": {
-					"type": "rectangle",
-					"top": 256,
-					"left": 144,
-					"width": 306,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#FFFFFF",
-					"stroke": "transparent"
-				},
-				"header_bkgd6": {
-					"type": "rectangle",
-					"top": 256,
-					"left": 450,
-					"width": 32,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Text": {
-					"type": "text",
-					"text": "Areas",
-					"top": 262,
-					"left": 7,
-					"width": 102,
-					"height": 15,
-					"fontWeight": "bold"
-				},
-				"Text1": {
-					"type": "text",
-					"text": ":",
-					"top": 262,
-					"left": 114,
-					"width": 22,
-					"height": 15,
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"header_bkgd3": {
-					"type": "rectangle",
-					"top": 288,
-					"left": 0,
-					"width": 140,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Text2": {
-					"type": "text",
-					"text": "Operation Code",
-					"top": 294,
-					"left": 7,
-					"width": 102,
-					"height": 15,
-					"fontWeight": "bold"
-				},
-				"Text3": {
-					"type": "text",
-					"text": ":",
-					"top": 294,
-					"left": 114,
-					"width": 22,
-					"height": 15,
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"header_bkgd13": {
-					"type": "rectangle",
-					"top": 48,
-					"left": 0,
-					"width": 140,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Text16": {
-					"type": "text",
-					"text": "Description",
-					"top": 54,
-					"left": 7,
-					"width": 102,
-					"height": 15,
-					"fontWeight": "bold"
-				},
-				"Text7": {
-					"type": "text",
-					"text": ":",
-					"top": 55,
-					"left": 114,
-					"width": 22,
-					"height": 15,
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"header_bkgd5": {
-					"type": "rectangle",
-					"top": 288,
-					"left": 144,
-					"width": 306,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#FFFFFF",
-					"stroke": "transparent"
-				},
-				"header_bkgd7": {
-					"type": "rectangle",
-					"top": 288,
-					"left": 450,
-					"width": 32,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Input1": {
-					"type": "input",
-					"left": 151,
-					"top": 293,
-					"width": 293,
-					"height": 18,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.step.operationCode",
-					"method": "ObjectMethods/Input1.4dm",
-					"choiceList": {
-						"$ref": "/SOURCES/lists.json#/OperationCodes"
-					},
-					"enterable": true,
-					"requiredList": {
-						"$ref": "/SOURCES/lists.json#/OperationCodes"
-					}
-				},
-				"header_bkgd8": {
-					"type": "rectangle",
-					"top": 48,
-					"left": 144,
-					"width": 306,
-					"height": 84,
-					"sizingX": "fixed",
-					"fill": "#FFFFFF",
-					"stroke": "transparent"
-				},
-				"header_bkgd9": {
-					"type": "rectangle",
-					"top": 48,
-					"left": 450,
-					"width": 32,
-					"height": 84,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Input2": {
-					"type": "input",
-					"left": 151,
-					"top": 53,
-					"width": 293,
-					"height": 74,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.step.description"
 				},
 				"header_bkgd26": {
 					"type": "rectangle",
-					"top": 224,
+					"top": 47,
 					"left": 0,
 					"width": 140,
 					"height": 28,
@@ -305,7 +298,7 @@
 				},
 				"header_bkgd27": {
 					"type": "rectangle",
-					"top": 224,
+					"top": 47,
 					"left": 144,
 					"width": 306,
 					"height": 28,
@@ -315,7 +308,7 @@
 				},
 				"header_bkgd28": {
 					"type": "rectangle",
-					"top": 224,
+					"top": 47,
 					"left": 450,
 					"width": 32,
 					"height": 28,
@@ -325,8 +318,8 @@
 				},
 				"Text5": {
 					"type": "text",
-					"text": "Specification",
-					"top": 230,
+					"text": "Template",
+					"top": 53,
 					"left": 7,
 					"width": 102,
 					"height": 15,
@@ -335,7 +328,7 @@
 				"Text9": {
 					"type": "text",
 					"text": ":",
-					"top": 230,
+					"top": 53,
 					"left": 114,
 					"width": 22,
 					"height": 15,
@@ -344,7 +337,7 @@
 				},
 				"header_bkgd10": {
 					"type": "rectangle",
-					"top": 136,
+					"top": 271,
 					"left": 0,
 					"width": 140,
 					"height": 28,
@@ -355,7 +348,7 @@
 				"Text4": {
 					"type": "text",
 					"text": "Alert",
-					"top": 142,
+					"top": 277,
 					"left": 7,
 					"width": 102,
 					"height": 15,
@@ -364,7 +357,7 @@
 				"Text6": {
 					"type": "text",
 					"text": ":",
-					"top": 143,
+					"top": 278,
 					"left": 114,
 					"width": 22,
 					"height": 15,
@@ -373,20 +366,20 @@
 				},
 				"header_bkgd11": {
 					"type": "rectangle",
-					"top": 136,
+					"top": 271,
 					"left": 144,
 					"width": 306,
-					"height": 84,
+					"height": 124,
 					"sizingX": "fixed",
 					"fill": "#FFFFFF",
 					"stroke": "transparent"
 				},
 				"header_bkgd12": {
 					"type": "rectangle",
-					"top": 136,
+					"top": 271,
 					"left": 450,
 					"width": 32,
-					"height": 84,
+					"height": 124,
 					"sizingX": "fixed",
 					"fill": "#B1CFDE",
 					"stroke": "transparent"
@@ -394,46 +387,62 @@
 				"Input3": {
 					"type": "input",
 					"left": 151,
-					"top": 141,
+					"top": 276,
 					"width": 293,
-					"height": 74,
+					"height": 114,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.step.alert"
+					"dataSource": "Form:C1466.lotStep.alert"
+				},
+				"sf_templateSearch": {
+					"type": "subform",
+					"left": 522,
+					"top": 45,
+					"width": 340,
+					"height": 350,
+					"detailForm": "",
+					"visibility": "visible",
+					"method": "ObjectMethods/sf_templateSearch.4dm",
+					"dataSource": "Form:C1466.sf_templateSearch"
+				},
+				"sf_stepTemplateSearch": {
+					"type": "subform",
+					"left": 602,
+					"top": 45,
+					"width": 340,
+					"height": 350,
+					"detailForm": "",
+					"visibility": "visible",
+					"method": "ObjectMethods/sf_stepTemplateSearch.4dm",
+					"dataSource": "Form:C1466.sf_stepTemplateSearch"
 				},
 				"Input": {
 					"type": "input",
 					"left": 151,
-					"top": 261,
+					"top": 84,
 					"width": 293,
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.step.areas",
-					"enterable": true,
+					"dataSource": "Form:C1466.searchStep",
+					"enterable": false,
 					"method": "ObjectMethods/Input.4dm",
 					"events": [
 						"onClick",
 						"onMouseEnter",
 						"onMouseLeave"
-					],
-					"choiceList": {
-						"$ref": "/SOURCES/lists.json#/Areas"
-					},
-					"requiredList": {
-						"$ref": "/SOURCES/lists.json#/Areas"
-					}
+					]
 				},
 				"Input8": {
 					"type": "input",
 					"left": 151,
-					"top": 229,
+					"top": 52,
 					"width": 293,
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.step.specification",
-					"enterable": true,
+					"dataSource": "Form:C1466.searchTemplate",
+					"enterable": false,
 					"events": [
 						"onClick",
 						"onMouseEnter",
@@ -441,17 +450,10 @@
 					],
 					"method": "ObjectMethods/Input8.4dm"
 				}
-			},
-			"entryOrder": [
-				"Input2",
-				"Input3",
-				"Input8",
-				"Input",
-				"Input1"
-			]
+			}
 		}
 	],
-	"geometryStamp": 4018,
+	"geometryStamp": 3939,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

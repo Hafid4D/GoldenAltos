@@ -13,20 +13,16 @@
 	"bottomMargin": 0,
 	"events": [
 		"onLoad",
-		"onPageChange",
 		"onValidate",
 		"onClick",
-		"onDoubleClick",
-		"onOutsideCall",
-		"onBeginDragOver",
-		"onDragOver",
-		"onDrop",
-		"onAfterKeystroke",
-		"onMenuSelect",
-		"onPluginArea",
-		"onAfterEdit",
+		"onDataChange",
 		"onTimer",
-		"onBoundVariableChange"
+		"onResize",
+		"onSelectionChange",
+		"onMouseEnter",
+		"onMouseLeave",
+		"onBoundVariableChange",
+		"onPageChange"
 	],
 	"windowTitle": "window title",
 	"destination": "detailScreen",
@@ -112,7 +108,8 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold"
+					"fontWeight": "bold",
+					"sizingX": "fixed"
 				},
 				"label_status": {
 					"type": "text",
@@ -168,7 +165,7 @@
 					"type": "rectangle",
 					"top": 129,
 					"left": 4,
-					"width": 450,
+					"width": 610,
 					"height": 53,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
@@ -178,7 +175,7 @@
 					"type": "rectangle",
 					"top": 96,
 					"left": 4,
-					"width": 450,
+					"width": 610,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
@@ -199,16 +196,16 @@
 					"type": "text",
 					"top": 137,
 					"left": 10,
-					"width": 119,
+					"width": 79,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Comment 1"
 				},
-				"entryField_comment3": {
+				"EntryField_comment3": {
 					"type": "input",
 					"top": 137,
-					"left": 137,
-					"width": 307,
+					"left": 97,
+					"width": 507,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.comment1",
 					"focusable": false,
@@ -216,16 +213,18 @@
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
+						"onClick",
 						"onDataChange"
 					],
 					"fill": "transparent",
-					"borderStyle": "none"
+					"borderStyle": "none",
+					"method": "ObjectMethods/EntryField_comment3.4dm"
 				},
 				"label_comment4": {
 					"type": "text",
 					"top": 161,
 					"left": 10,
-					"width": 119,
+					"width": 79,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Comment 2"
@@ -233,8 +232,8 @@
 				"entryField_comment4": {
 					"type": "input",
 					"top": 161,
-					"left": 137,
-					"width": 307,
+					"left": 97,
+					"width": 507,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.comment2",
 					"focusable": false,
@@ -242,6 +241,7 @@
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
+						"onClick",
 						"onDataChange"
 					],
 					"fill": "transparent",
@@ -516,8 +516,8 @@
 				"header_bkgd10": {
 					"type": "rectangle",
 					"top": 129,
-					"left": 459,
-					"width": 450,
+					"left": 619,
+					"width": 290,
 					"height": 53,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
@@ -526,8 +526,8 @@
 				"header_bkgd11": {
 					"type": "rectangle",
 					"top": 96,
-					"left": 459,
-					"width": 450,
+					"left": 619,
+					"width": 290,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
@@ -536,7 +536,7 @@
 				"lbl_comments2": {
 					"type": "text",
 					"top": 103,
-					"left": 465,
+					"left": 625,
 					"width": 277,
 					"height": 17,
 					"stroke": "#000000",
@@ -547,7 +547,7 @@
 				"label_smallLayout": {
 					"type": "text",
 					"top": 137,
-					"left": 467,
+					"left": 627,
 					"width": 107,
 					"height": 17,
 					"stroke": "#808080",
@@ -556,8 +556,8 @@
 				"entryField_smallLayout": {
 					"type": "input",
 					"top": 137,
-					"left": 580,
-					"width": 317,
+					"left": 720,
+					"width": 180,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.smallLayout",
 					"focusable": false,
@@ -574,7 +574,7 @@
 				"label_largeLayout": {
 					"type": "text",
 					"top": 161,
-					"left": 467,
+					"left": 627,
 					"width": 107,
 					"height": 17,
 					"stroke": "#808080",
@@ -583,8 +583,8 @@
 				"entryField_largeLayout": {
 					"type": "input",
 					"top": 161,
-					"left": 580,
-					"width": 317,
+					"left": 720,
+					"width": 180,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.largeLayout",
 					"focusable": false,
@@ -783,31 +783,259 @@
 		},
 		{
 			"objects": {
-				"header_bkgd5": {
+				"lb_invoices": {
+					"type": "listbox",
+					"left": 6,
+					"top": 137,
+					"width": 507,
+					"height": 370,
+					"events": [
+						"onClick",
+						"onHeaderClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"headerHeight": "24px",
+					"listboxType": "collection",
+					"visibility": "visible",
+					"dataSource": "Form:C1466.lb_steps",
+					"alternateFill": "#F7F9FC",
+					"selectionMode": "single",
+					"currentItemSource": "Form:C1466.selectedStep",
+					"method": "ObjectMethods/lb_invoices.4dm",
+					"columns": [
+						{
+							"header": {
+								"name": "Header29",
+								"text": "Description",
+								"fontWeight": "bold"
+							},
+							"name": "Column29",
+							"footer": {
+								"name": "Footer29"
+							},
+							"dataSource": "This:C1470.description",
+							"width": 200,
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "Header30",
+								"text": "Customer",
+								"fontWeight": "bold"
+							},
+							"name": "Column30",
+							"footer": {
+								"name": "Footer30"
+							},
+							"dataSource": "This:C1470.alert",
+							"width": 200,
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "Header31",
+								"text": "Specification",
+								"fontWeight": "bold"
+							},
+							"name": "Column31",
+							"footer": {
+								"name": "Footer31"
+							},
+							"dataSource": "This:C1470.specification",
+							"width": 90,
+							"dataSourceTypeHint": "date",
+							"dateFormat": "short",
+							"textAlign": "center",
+							"enterable": false
+						}
+					]
+				},
+				"bActionLineItems1": {
+					"type": "button",
+					"text": "Actions",
+					"top": 513,
+					"left": 5,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionLineItems1.4dm",
+					"visibility": "visible"
+				},
+				"header_bkgd16": {
 					"type": "rectangle",
-					"top": 118,
-					"left": 4,
-					"width": 450,
+					"top": 96,
+					"left": 6,
+					"width": 903,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
 					"stroke": "transparent"
 				},
-				"lbl_steps": {
-					"type": "text",
-					"top": 125,
-					"left": 10,
-					"width": 282,
-					"height": 17,
-					"stroke": "#000000",
-					"text": "Steps",
-					"fontSize": 12,
+				"Input3": {
+					"type": "input",
+					"left": 12,
+					"top": 103,
+					"width": 187,
+					"height": 15,
+					"right": 199,
+					"bottom": 118,
+					"enterable": false,
+					"contextMenu": "none",
+					"multiline": "no",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSource": "\"Steps (\"+String:C10(Form:C1466.lb_steps.length)+\")\"",
 					"fontWeight": "bold"
+				},
+				"bkgd_lb_consumptions_detail": {
+					"type": "rectangle",
+					"top": 136,
+					"left": 513,
+					"width": 396,
+					"height": 371,
+					"stroke": "#c0c0c0",
+					"fill": "#F7F9FC",
+					"right": 909,
+					"bottom": 507
+				},
+				"label_stepLine_areas": {
+					"type": "text",
+					"text": "Areas",
+					"top": 385,
+					"left": 523,
+					"width": 102,
+					"height": 15,
+					"fontWeight": "bold"
+				},
+				"label_stepLine_operationCode": {
+					"type": "text",
+					"text": "Operation Code",
+					"top": 417,
+					"left": 523,
+					"width": 102,
+					"height": 15,
+					"fontWeight": "bold"
+				},
+				"label_stepLine_description": {
+					"type": "text",
+					"text": "Description",
+					"top": 177,
+					"left": 523,
+					"width": 102,
+					"height": 15,
+					"fontWeight": "bold"
+				},
+				"entryField_stepLine_operationCode": {
+					"type": "input",
+					"left": 627,
+					"top": 416,
+					"width": 273,
+					"height": 18,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.selectedStep.operationCode",
+					"choiceList": {
+						"$ref": "/SOURCES/lists.json#/OperationCodes"
+					},
+					"enterable": false,
+					"events": [
+						"onDataChange"
+					],
+					"right": 900,
+					"method": "ObjectMethods/entryField_stepLine_operationCode.4dm"
+				},
+				"entryField_stepLine_description": {
+					"type": "input",
+					"left": 627,
+					"top": 176,
+					"width": 273,
+					"height": 74,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.selectedStep.description",
+					"method": "ObjectMethods/entryField_stepLine_description.4dm",
+					"events": [
+						"onDataChange"
+					]
+				},
+				"label_stepLine_specification": {
+					"type": "text",
+					"text": "Specification",
+					"top": 353,
+					"left": 523,
+					"width": 102,
+					"height": 15,
+					"fontWeight": "bold"
+				},
+				"label_stepLine_alert": {
+					"type": "text",
+					"text": "Alert",
+					"top": 265,
+					"left": 523,
+					"width": 102,
+					"height": 15,
+					"fontWeight": "bold"
+				},
+				"entryField_stepLine_alert": {
+					"type": "input",
+					"left": 627,
+					"top": 264,
+					"width": 273,
+					"height": 74,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.selectedStep.alert",
+					"method": "ObjectMethods/entryField_stepLine_alert.4dm",
+					"events": [
+						"onDataChange"
+					]
+				},
+				"entryField_stepLine_areas": {
+					"type": "input",
+					"left": 627,
+					"top": 384,
+					"width": 273,
+					"height": 18,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.selectedStep.areas",
+					"enterable": false,
+					"method": "ObjectMethods/entryField_stepLine_areas.4dm",
+					"events": [
+						"onDataChange"
+					],
+					"choiceList": {
+						"$ref": "/SOURCES/lists.json#/Areas"
+					},
+					"right": 900
+				},
+				"entryField_stepLine_specification": {
+					"type": "input",
+					"left": 627,
+					"top": 352,
+					"width": 273,
+					"height": 18,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.selectedStep.specification",
+					"enterable": false,
+					"events": [
+						"onDataChange"
+					],
+					"method": "ObjectMethods/entryField_stepLine_specification.4dm",
+					"right": 900
 				}
 			}
 		}
 	],
-	"geometryStamp": 1515,
+	"geometryStamp": 1871,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
