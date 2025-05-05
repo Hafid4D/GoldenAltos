@@ -42,6 +42,7 @@ If (False:C215)
 		$po.timeBillingRate:=$record.timeBillingRate
 		$po.timeBilling:=$record.timeBilling
 		$po.description:=$record.description
+		$po.log_date:=$record.Log_date
 		
 		var $customer : Object
 		$customer:=ds:C1482.Customer.query("name =:1"; $record.customer_name).first()
@@ -67,7 +68,9 @@ If (False:C215)
 				$invoice_e.due:=$invoice.due
 				$invoice_e.slip:=$invoice.slip
 				$invoice_e.UUID_PurchaseOrder:=$po.UUID
-				
+				$invoice_e.customerId:=$invoice.customerId
+				$invoice_e.amountPaid:=$invoice.amountPaid
+				$invoice_e.saleAmount:=$invoice.saleAmount
 				$res:=$invoice_e.save()
 				
 				If (Not:C34($res.success))
@@ -103,13 +106,14 @@ If (False:C215)
 		End if 
 	End for each 
 	
+	
 	If ($erreur.length>0)
 		TRACE:C157
 	End if 
 End if 
 
 /**
-import jobs & lot (job <-- lots)
+import jobs & lot (job <-- lots) & Archives
 **/
 If (False:C215)
 	TRUNCATE TABLE:C1051([Job:117])
@@ -149,7 +153,10 @@ If (False:C215)
 		$job.shipMemo:=$record.shipMemo
 		$job.jobComment:=$record.jobComment
 		$job.archived:=$record.archived
-		
+		$job.pr_qualifier:=$record.pr_qualifier
+		If ($record.pr_qualifier#"")
+			
+		End if 
 		$res:=$job.save()
 		
 		If (Not:C34($res.success))
@@ -248,7 +255,7 @@ End if
 /**
 import inventories
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([Inventory:126])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/inventory_export.json")
@@ -276,6 +283,8 @@ If (False:C215)
 		$inventory_e.division:=$record.division
 		$inventory_e.totalCost:=$record.totalCost
 		$inventory_e.property:=$record.property
+		$inventory_e.availableQty:=$record.AvailableQty
+		$inventory_e.originalQty:=$record.originalQty
 		
 		$res:=$inventory_e.save()
 		
@@ -317,7 +326,7 @@ End if
 /**
 import step template
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([StepTemplate:121])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/step_template_export.json")
@@ -348,7 +357,7 @@ End if
 /**
 import tools
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([ToolType:122])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/tools_export.json")
@@ -386,7 +395,7 @@ End if
 /**
 import cetifications
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([Certification:124])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/certifications_export.json")
@@ -434,4 +443,4 @@ If (True:C214)
 	End for each 
 End if 
 
-ALERT:C41("END!!")
+
