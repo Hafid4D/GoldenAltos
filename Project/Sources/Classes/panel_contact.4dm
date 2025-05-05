@@ -130,7 +130,6 @@ Function displayContact()
 Function bActionXXX()
 	//Manages actions: add, or remove, using dynamic menus and modification checks
 	
-	
 Function bActionContact()
 	
 	$mainMenu:=Create menu:C408
@@ -198,7 +197,6 @@ Function bActionContact()
 	End case 
 	
 	
-	
 Function _activate_save_cancel_button()
 	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
 	
@@ -236,8 +234,9 @@ Function saveContact()
 		OBJECT SET VISIBLE:C603(*; "label_contact@"; False:C215)
 		OBJECT SET VISIBLE:C603(*; "entryField_contact@"; False:C215)
 		OBJECT SET VISIBLE:C603(*; "bSave"; False:C215)
-		
 	Else 
+		
+		cs:C1710.sfw_dialog.me.alert("'contact type' and 'contact value' are default values. Please enter valid value")
 		
 	End if 
 	

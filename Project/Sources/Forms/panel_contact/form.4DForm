@@ -119,7 +119,7 @@
 					"type": "subform",
 					"left": 0,
 					"top": 465,
-					"width": 948,
+					"width": 998,
 					"height": 268,
 					"detailForm": "sfw_subpanel_addressSingle",
 					"borderStyle": "none",
@@ -139,7 +139,7 @@
 					"left": 0,
 					"top": 118,
 					"width": 482,
-					"height": 266,
+					"height": 264,
 					"events": [
 						"onClick",
 						"onDataChange",
@@ -166,6 +166,7 @@
 					"hideFocusRing": false,
 					"lockedColumnCount": 0,
 					"focusable": false,
+					"bottom": 382,
 					"columns": [
 						{
 							"header": {
@@ -368,7 +369,7 @@
 			}
 		}
 	],
-	"geometryStamp": 173,
+	"geometryStamp": 183,
 	"method": "method.4dm",
 	"inheritedForm": "sfw_bkgd_header_2lines",
 	"editor": {

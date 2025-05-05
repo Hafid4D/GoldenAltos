@@ -345,25 +345,6 @@
 					"fill": "transparent",
 					"borderStyle": "none"
 				},
-				"Popup Dropdown List1": {
-					"type": "dropdown",
-					"left": 141,
-					"top": 623,
-					"width": 224,
-					"height": 22,
-					"events": [
-						"onLoad",
-						"onDataChange"
-					],
-					"dataSource": "Form:C1466.current_item.carrier",
-					"dataSourceTypeHint": "text",
-					"choiceList": {
-						"$ref": "/SOURCES/lists.json#/Carriers"
-					},
-					"saveAs": "value",
-					"focusable": true,
-					"visibility": "hidden"
-				},
 				"Text2": {
 					"type": "text",
 					"text": "Contacts",
@@ -792,7 +773,6 @@
 				"entryField_code4",
 				"entryField_code1",
 				"entryField_code2",
-				"Popup Dropdown List1",
 				"lb_apContact",
 				"entryField_apContactType",
 				"entryField_apContactValue",
@@ -1351,7 +1331,7 @@
 		},
 		null
 	],
-	"geometryStamp": 666,
+	"geometryStamp": 672,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
