@@ -1,230 +1,226 @@
 //%attributes = {}
-var $eCustomer : cs:C1710.CustomerEntity
-var $eCustomerStatus : cs:C1710.CustomerStatusEntity
-var $eContact : cs:C1710.ContactEntity
 
-$customer_Log:=Folder:C1567(fk data folder:K87:12).file("DataJson/Customer_Log.json")
-If ($customer_Log.exists)
-	$customers:=JSON Parse:C1218($customer_Log.getText())
-	TRUNCATE TABLE:C1051([Contact:1])
-	TRUNCATE TABLE:C1051([Customer:114])
-	TRUNCATE TABLE:C1051([CustomerStatus:130])
-	TRUNCATE TABLE:C1051([CustomerCarrier:7])
+If (False:C215)
 	
-	$eCustomerStatus:=ds:C1482.CustomerStatus.new()
-	$eCustomerStatus.statusID:=1
-	$eCustomerStatus.name:="Active"
-	$eCustomerStatus.color:=""
-	$eCustomerStatus.save()
+	var $eCustomer : cs:C1710.CustomerEntity
+	var $eCustomerStatus : cs:C1710.CustomerStatusEntity
+	//var $eContact : cs.ContactEntity
+	var $carriers; $status : Collection
+	$carriers:=New collection:C1472("GAC Driver"; "Fed-Ex Priority"; "fedex Std Overnight"; "fedex"; "fedex Ground"; "Customer Pickup"; "UPS 2nd Day"; "UPS Ground"; "UPS Next Day"; "DHL")
+	$status:=New collection:C1472("Active"; "Hold"; "Retired"; "Void")
 	
-	$eCustomerStatus:=ds:C1482.CustomerStatus.new()
-	$eCustomerStatus.statusID:=2
-	$eCustomerStatus.name:="Hold"
-	$eCustomerStatus.color:=""
-	$eCustomerStatus.save()
-	
-	$eCustomerStatus:=ds:C1482.CustomerStatus.new()
-	$eCustomerStatus.statusID:=3
-	$eCustomerStatus.name:="Retired"
-	$eCustomerStatus.color:=""
-	$eCustomerStatus.save()
-	
-	$eCustomerStatus:=ds:C1482.CustomerStatus.new()
-	$eCustomerStatus.statusID:=4
-	$eCustomerStatus.name:="Void"
-	$eCustomerStatus.color:=""
-	$eCustomerStatus.save()
-	
-	//----CustomerCarrier 
-	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
-	$eCustomerCarrier.carrierID:=1
-	$eCustomerCarrier.name:="GAC Driver"
-	$eCustomerCarrier.color:=""
-	$eCustomerCarrier.save()
-	
-	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
-	$eCustomerCarrier.carrierID:=2
-	$eCustomerCarrier.name:="Fed-Ex Priority"
-	$eCustomerCarrier.color:=""
-	$eCustomerCarrier.save()
-	
-	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
-	$eCustomerCarrier.carrierID:=3
-	$eCustomerCarrier.name:="fedex Std Overnight"
-	$eCustomerCarrier.color:=""
-	$eCustomerCarrier.save()
-	
-	
-	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
-	$eCustomerCarrier.carrierID:=4
-	$eCustomerCarrier.name:="fedex"
-	$eCustomerCarrier.color:=""
-	$eCustomerCarrier.save()
-	
-	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
-	$eCustomerCarrier.carrierID:=5
-	$eCustomerCarrier.name:="fedex Ground"
-	$eCustomerCarrier.color:=""
-	$eCustomerCarrier.save()
-	
-	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
-	$eCustomerCarrier.carrierID:=6
-	$eCustomerCarrier.name:="Customer Pickup"
-	$eCustomerCarrier.color:=""
-	$eCustomerCarrier.save()
-	
-	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
-	$eCustomerCarrier.carrierID:=7
-	$eCustomerCarrier.name:="UPS 2nd Day"
-	$eCustomerCarrier.color:=""
-	$eCustomerCarrier.save()
-	
-	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
-	$eCustomerCarrier.carrierID:=8
-	$eCustomerCarrier.name:="DHL"
-	$eCustomerCarrier.color:=""
-	$eCustomerCarrier.save()
-	
-	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
-	$eCustomerCarrier.carrierID:=9
-	$eCustomerCarrier.name:="UPS Next Day"
-	$eCustomerCarrier.color:=""
-	$eCustomerCarrier.save()
-	
-	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
-	$eCustomerCarrier.carrierID:=10
-	$eCustomerCarrier.name:="UPS Ground"
-	$eCustomerCarrier.color:=""
-	$eCustomerCarrier.save()
-	
-	
-	For each ($customer; $customers)
-		$eCustomer:=ds:C1482.Customer.new()
-		$eCustomer.name:=$customer.Customer
-		$eCustomer.code:=$customer.Cust_Code
-		$eCustomer.IDT_status:=$customer.idt_status
+	$customer_Log:=Folder:C1567(fk data folder:K87:12).file("DataJson/Customer_Log.json")
+	If ($customer_Log.exists)
+		$customers:=JSON Parse:C1218($customer_Log.getText())
+		TRUNCATE TABLE:C1051([Contact:1])
+		TRUNCATE TABLE:C1051([Customer:114])
+		TRUNCATE TABLE:C1051([CustomerStatus:130])
+		TRUNCATE TABLE:C1051([CustomerCarrier:7])
 		
-		$eCustomer.contactDetails:=New object:C1471()
-		$eCustomer.contactDetails.addresses:=New collection:C1472()
-		
-		$address:=New object:C1471()
-		$address.type:="billing"
-		$address.detail:=New object:C1471()
-		$address.detail.country:="US"
-		$address.detail.street_1:=$customer.Bill_Address1
-		If (String:C10($customer.Bill_Address2)#"")
-			$address.detail.street_2:=$customer.Bill_Address2
-		End if 
-		$address.detail.postcode:=$customer.Bill_addr_zip
-		$address.detail.iso_code_2:="US"
-		$address.detail.city:=$customer.Bill_add_city
-		$eCustomer.contactDetails.addresses.push($address)
-		
-		
-		$address:=New object:C1471()
-		$address.type:="shipping"
-		$address.detail:=New object:C1471()
-		$address.detail.country:="US"
-		$address.detail.street_1:=$customer.Ship_Address1
-		If (String:C10($customer.Ship_Address2)#"")
-			$address.detail.street_2:=$customer.Ship_Address2
-		End if 
-		$address.detail.postcode:=$customer.Ship_Addr_zip
-		$address.detail.city:=$customer.Ship_addr_city
-		$address.detail.iso_code_2:="US"
-		$eCustomer.contactDetails.addresses.push($address)
-		
-		$eCustomer.contactDetails.communications:=New collection:C1472()
-		
-		//AP Contacts 
-		$comm:=New object:C1471()
-		$comm.type:="AP Contact"
-		$comm.detail:=New object:C1471()
-		$comm.detail.email:=$customer.AP_email
-		$eCustomer.contactDetails.communications.push($comm)
-		
-		//Status Contacts
-		$comm:=New object:C1471()
-		$comm.type:="Status Contact"
-		$comm.detail:=New object:C1471()
-		$comm.detail.ContactName:=$customer.Status_Contact
-		$comm.detail.phone:=$customer.Status_Tel
-		$comm.detail.email:=$customer.StatusEmailAddresses
-		$eCustomer.contactDetails.communications.push($comm)
-		
-		//--------------------------------------------------
-		$carrier:=ds:C1482.CustomerCarrier.query("name =:1"; Split string:C1554($customer.Carrier; "\r"; sk trim spaces:K86:2).join("\r"))
-		
-		If ($carrier.length>0)
-			$eCustomer.IDT_carrier:=$carrier[0].carrierID
-		Else 
-			$eCustomer.IDT_carrier:=0
-		End if 
-		
-		$eCustomer.carrier:=$customer.Carrier
-		$eCustomer.accountNum:=$customer.Account_num
-		$eCustomer.resaleLicenseNumber:=$customer.resaleLicenseNumber
-		$eCustomer.ftp:=New object:C1471()
-		$eCustomer.ftp.domain:=$customer.FTPRepositoryDomain
-		$eCustomer.ftp.user:=$customer.FTPRepositoryUser
-		$eCustomer.ftp.password:=$customer.FTPRepositoryPass
-		
-		$result:=$eCustomer.save()
-		If ($result.success=False:C215)
-			TRACE:C157
-		End if 
-	End for each 
-	
-	$contacts_file:=Folder:C1567(fk data folder:K87:12).file("DataJson/contacts.json")
-	If ($contacts_file.exists)
-		$contacts:=JSON Parse:C1218($contacts_file.getText())
-		For each ($contact; $contacts)
-			$eContact:=ds:C1482.Contact.new()
-			$eContact.firstName:=$contact.FirstName
-			$eContact.lastName:=$contact.LastName
-			$eContact.code:=$contact.Contactcode
-			$eContact.title:=$contact.Title
+		//----> [CustomerStatus]
+		For ($i; 0; $status.length-1)
 			
-			$eContact.contactDetails:=New object:C1471()
-			$eContact.contactDetails.addresses:=New collection:C1472()
+			$eCustomerStatus:=ds:C1482.CustomerStatus.new()
+			$eCustomerStatus.statusID:=$i+1
+			$eCustomerStatus.name:=$status[$i]
+			$eCustomerStatus.color:=""
+			$eCustomerStatus.save()
+			
+		End for 
+		
+		//----> [CustomerCarrier]
+		For ($i; 0; $carriers.length-1)
+			
+			$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
+			$eCustomerCarrier.carrierID:=$i+1
+			$eCustomerCarrier.name:=$carriers[$i]
+			$eCustomerCarrier.color:=""
+			$eCustomerCarrier.save()
+		End for 
+		
+		//----> [Customer]
+		For each ($customer; $customers)
+			$eCustomer:=ds:C1482.Customer.new()
+			$eCustomer.name:=$customer.Customer
+			$eCustomer.code:=$customer.Cust_Code
+			$eCustomer.IDT_status:=$customer.idt_status
+			
+			//-----------------------------------------------------------
+			$eCustomer.contactDetails:=New object:C1471()
+			$eCustomer.contactDetails.addresses:=New collection:C1472()
+			
 			$address:=New object:C1471()
-			$address.type:="main"
+			$address.type:="billing"
 			$address.detail:=New object:C1471()
 			$address.detail.country:="US"
-			$address.detail.street_1:=$contact.CtAddress1
-			If (String:C10($contact.CtAddress2)#"")
-				$address.detail.street_2:=$contact.CtAddress2
+			$address.detail.street_1:=$customer.Bill_Address1
+			If (String:C10($customer.Bill_Address2)#"")
+				$address.detail.street_2:=$customer.Bill_Address2
 			End if 
-			$address.detail.postcode:=$contact.CtZip
+			$address.detail.postcode:=$customer.Bill_addr_zip
 			$address.detail.iso_code_2:="US"
-			$address.detail.city:=$contact.CtCity
-			$address.detail.state:=$contact.CtState
-			$eContact.contactDetails.addresses.push($address)
+			$address.detail.city:=$customer.Bill_add_city
+			$eCustomer.contactDetails.addresses.push($address)
 			
 			
-			$eContact.contactDetails.communications:=New collection:C1472()
-			$comm:=New object:C1471()
-			$comm.phone:=$contact.Tel
-			$comm.fax:=$contact.Fax
-			$comm.mobile:=$contact.MobileNum
-			$comm.email:=$contact.Email_address
-			$eContact.contactDetails.communications.push($comm)
-			
-			$eCustomer:=ds:C1482.Customer.query("name == :1"; $contact.Company_Name).first()
-			If ($eCustomer=Null:C1517)
-				$eCustomer:=ds:C1482.Customer.new()
-				$eCustomer.name:=$contact.Company_Name
-				$eCustomer.save()
+			$address:=New object:C1471()
+			$address.type:="shipping"
+			$address.detail:=New object:C1471()
+			$address.detail.country:="US"
+			$address.detail.street_1:=$customer.Ship_Address1
+			If (String:C10($customer.Ship_Address2)#"")
+				$address.detail.street_2:=$customer.Ship_Address2
 			End if 
-			$eContact.UUID_Customer:=$eCustomer.UUID
+			$address.detail.postcode:=$customer.Ship_Addr_zip
+			$address.detail.city:=$customer.Ship_addr_city
+			$address.detail.iso_code_2:="US"
+			$eCustomer.contactDetails.addresses.push($address)
 			
-			$result:=$eContact.save()
+			$eCustomer.contactDetails.communications:=New collection:C1472()
+			
+			//AP Contacts -> TODO : TO BE REMOVED LATER
+			$comm:=New object:C1471()
+			$comm.type:="AP Contact"
+			$comm.detail:=New object:C1471()
+			$comm.detail.email:=$customer.AP_email
+			$eCustomer.contactDetails.communications.push($comm)
+			
+			//Status Contacts -> TODO : TO BE REMOVED LATER
+			$comm:=New object:C1471()
+			$comm.type:="Status Contact"
+			$comm.detail:=New object:C1471()
+			$comm.detail.ContactName:=$customer.Status_Contact
+			$comm.detail.phone:=$customer.Status_Tel
+			$comm.detail.email:=$customer.StatusEmailAddresses
+			$eCustomer.contactDetails.communications.push($comm)
+			
+			//Checkand assign a Carrier if needed
+			$carrier:=ds:C1482.CustomerCarrier.query("name =:1"; Split string:C1554($customer.Carrier; "\r"; sk trim spaces:K86:2).join("\r"))
+			
+			If ($carrier.length>0)
+				$eCustomer.IDT_carrier:=$carrier[0].carrierID
+			Else 
+				$eCustomer.IDT_carrier:=0
+			End if 
+			
+			$eCustomer.carrier:=$customer.Carrier
+			$eCustomer.accountNum:=$customer.Account_num
+			$eCustomer.resaleLicenseNumber:=$customer.resaleLicenseNumber
+			$eCustomer.ftp:=New object:C1471()
+			$eCustomer.ftp.domain:=$customer.FTPRepositoryDomain
+			$eCustomer.ftp.user:=$customer.FTPRepositoryUser
+			$eCustomer.ftp.password:=$customer.FTPRepositoryPass
+			
+			$result:=$eCustomer.save()
 			If ($result.success=False:C215)
 				TRACE:C157
 			End if 
 		End for each 
-	Else 
-		TRACE:C157
+		
+		//----> [Contact]
+		$contacts_file:=Folder:C1567(fk data folder:K87:12).file("DataJson/contacts.json")
+		If ($contacts_file.exists)
+			
+			//All sales and Main contactS  From Contact_log table in the older database
+			$contacts:=JSON Parse:C1218($contacts_file.getText())
+			For each ($contact; $contacts)
+				$eContact:=ds:C1482.Contact.new()
+				$eContact.firstName:=$contact.FirstName
+				$eContact.lastName:=$contact.LastName
+				$eContact.code:=$contact.Contactcode
+				$eContact.title:=$contact.Title
+				
+				$eContact.contactDetails:=New object:C1471()
+				$eContact.contactDetails.addresses:=New collection:C1472()
+				$address:=New object:C1471()
+				$address.type:="main"
+				$address.detail:=New object:C1471()
+				$address.detail.country:="US"
+				$address.detail.street_1:=$contact.CtAddress1
+				If (String:C10($contact.CtAddress2)#"")
+					$address.detail.street_2:=$contact.CtAddress2
+				End if 
+				$address.detail.postcode:=$contact.CtZip
+				$address.detail.iso_code_2:="US"
+				$address.detail.city:=$contact.CtCity
+				$address.detail.state:=$contact.CtState
+				$eContact.contactDetails.addresses.push($address)
+				
+				
+				$eContact.contactDetails.communications:=New collection:C1472()
+				$comm:=New object:C1471()
+				
+				$comm.phone:=$contact.Tel
+				$comm.fax:=$contact.Fax
+				$comm.mobile:=$contact.MobileNum
+				$comm.email:=$contact.Email_address
+				$eContact.contactDetails.communications.push($comm)
+				
+				$eCustomer:=ds:C1482.Customer.query("name = :1"; $contact.Company_Name).first()
+				If ($eCustomer=Null:C1517)
+					$eCustomer:=ds:C1482.Customer.new()
+					$eCustomer.name:=$contact.Company_Name
+					$eCustomer.save()
+				End if 
+				$eContact.UUID_Customer:=$eCustomer.UUID
+				
+				$result:=$eContact.save()
+				If ($result.success=False:C215)
+					TRACE:C157
+				End if 
+			End for each 
+			
+			//AP and Status Contact
+			For each ($customer; $customers)
+				
+				$eCustomer:=ds:C1482.Customer.query("name = :1"; $customer.Company_Name).first()
+				
+				//AP Contact
+				$cContact:=ds:C1482.Contact.new()
+				$cContact.title:="AP"
+				$cContact.UUID_Customer:=$eCustomer.UUID
+				$cContact.contactDetails:=New object:C1471()
+				$cContact.contactDetails.addresses:=New collection:C1472()
+				
+				$cContact.contactDetails.communications:=New collection:C1472()
+				
+				$comm:=New object:C1471()
+				$comm.email:=$customer.AP_email
+				$cContact.contactDetails.communications.push($comm)
+				
+				$result:=$cContact.save()
+				If ($result.success=False:C215)
+					TRACE:C157
+				End if 
+				
+				//Status Contact
+				$cContact:=ds:C1482.Contact.new()
+				$cContact.title:="Status"
+				$cContact.UUID_Customer:=$eCustomer.UUID
+				$cContact.contactDetails:=New object:C1471()
+				$cContact.contactDetails.addresses:=New collection:C1472()
+				
+				$cContact.contactDetails.communications:=New collection:C1472()
+				
+				$comm:=New object:C1471()
+				$comm.ContactName:=$customer.Status_Contact
+				$comm.phone:=$customer.Status_Tel
+				$comm.email:=$customer.StatusEmailAddresses
+				$cContact.contactDetails.communications.push($comm)
+				
+				$result:=$cContact.save()
+				If ($result.success=False:C215)
+					TRACE:C157
+				End if 
+				
+			End for each 
+			
+			
+		Else 
+			TRACE:C157
+		End if 
+		
 	End if 
+	
 	
 End if 

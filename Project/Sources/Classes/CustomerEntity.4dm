@@ -18,24 +18,21 @@ local Function rebuildAddress()->$address : Object
 	
 local Function rebuidComunications($contactType)->$contacts : Collection
 	
-	$communications:=Form:C1466.current_item.contactDetails.communications
+	$communications:=Form:C1466.current_item.contacts.query("title=:1"; $contactType).first().contactDetails.communications
 	If ($communications#Null:C1517)
 		$contacts:=New collection:C1472()
 		For ($i; 0; $communications.length-1)
 			
-			If ($communications[$i].type=$contactType)
-				OB GET PROPERTY NAMES:C1232($communications[$i].detail; arrNames; arrTypes)
-				For ($j; 1; Size of array:C274(arrNames))
-					$object:=New object:C1471
-					$Object.name:=arrNames{$j}
-					$Object.value:=OB Get:C1224($communications[$i].detail; $Object.name)
-					$contacts.push($Object)
-				End for 
-				
-			End if 
+			OB GET PROPERTY NAMES:C1232($communications[$i]; arrNames; arrTypes)
+			For ($j; 1; Size of array:C274(arrNames))
+				$object:=New object:C1471
+				$Object.name:=arrNames{$j}
+				$Object.value:=OB Get:C1224($communications[$i]; $Object.name)
+				$contacts.push($Object)
+			End for 
+			
 		End for 
 		
 	End if 
-	
 	
 	

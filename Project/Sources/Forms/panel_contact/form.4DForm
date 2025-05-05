@@ -1,0 +1,381 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 1,
+	"bottomMargin": 1,
+	"events": [
+		"onLoad",
+		"onValidate",
+		"onClick",
+		"onOutsideCall",
+		"onActivate",
+		"onDoubleClick",
+		"onDrop",
+		"onMenuSelect",
+		"onPluginArea",
+		"onDragOver",
+		"onTimer",
+		"onAfterKeystroke",
+		"onBeginDragOver",
+		"onBoundVariableChange",
+		"onPageChange"
+	],
+	"windowTitle": "window title",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {}
+		},
+		{
+			"objects": {
+				"entryField_name2": {
+					"type": "input",
+					"top": 10,
+					"left": 125,
+					"width": 300,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.firstName",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"entryField_code3": {
+					"type": "input",
+					"top": 39,
+					"left": 125,
+					"width": 300,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.lastName",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"entryField_code4": {
+					"type": "input",
+					"top": 10,
+					"left": 698,
+					"width": 300,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.title",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"method": "ObjectMethods/entryField_code4.4dm"
+				},
+				"label_0_7": {
+					"type": "text",
+					"top": 10,
+					"left": 11,
+					"width": 111,
+					"height": 16,
+					"stroke": "#808080",
+					"text": "Firstname"
+				},
+				"label_0_8": {
+					"type": "text",
+					"top": 39,
+					"left": 11,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Lastname"
+				},
+				"label_0_9": {
+					"type": "text",
+					"top": 10,
+					"left": 581,
+					"width": 111,
+					"height": 16,
+					"stroke": "#808080",
+					"text": "title"
+				},
+				"subFormAddress": {
+					"type": "subform",
+					"left": 0,
+					"top": 465,
+					"width": 948,
+					"height": 268,
+					"detailForm": "sfw_subpanel_addressSingle",
+					"borderStyle": "none",
+					"dataSource": "Form:C1466.subFormAddress"
+				},
+				"label_0_1": {
+					"type": "text",
+					"top": 39,
+					"left": 581,
+					"width": 111,
+					"height": 16,
+					"stroke": "#808080",
+					"text": "Customer Name"
+				},
+				"lb_contact": {
+					"type": "listbox",
+					"left": 0,
+					"top": 118,
+					"width": 482,
+					"height": 266,
+					"events": [
+						"onClick",
+						"onDataChange",
+						"onSelectionChange",
+						"onHeaderClick"
+					],
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.lb_contact",
+					"selectionMode": "single",
+					"resizingMode": "legacy",
+					"scrollbarHorizontal": "automatic",
+					"scrollbarVertical": "automatic",
+					"fill": "#FFFFFF",
+					"borderStyle": "none",
+					"alternateFill": "#E4E4E4",
+					"horizontalLineStroke": "transparent",
+					"verticalLineStroke": "#C0C0C0",
+					"method": "ObjectMethods/lb_contact.4dm",
+					"currentItemSource": "Form:C1466.current_contact",
+					"showHeaders": true,
+					"hideExtraBlankRows": false,
+					"singleClickEdit": false,
+					"hideSystemHighlight": false,
+					"hideFocusRing": false,
+					"lockedColumnCount": 0,
+					"focusable": false,
+					"columns": [
+						{
+							"header": {
+								"text": "Type",
+								"name": "Header1",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column1",
+							"footer": {
+								"name": "Footer1"
+							},
+							"dataSource": "This:C1470.name",
+							"textAlign": "left",
+							"events": [
+								"onClick",
+								"onDataChange"
+							]
+						},
+						{
+							"header": {
+								"name": "Header2",
+								"text": "#",
+								"fontWeight": "bold",
+								"textAlign": "left",
+								"stroke": "automatic"
+							},
+							"name": "Column2",
+							"footer": {
+								"name": "Footer2"
+							},
+							"textAlign": "left",
+							"dataSource": "This:C1470.value",
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"enterable": false
+						}
+					]
+				},
+				"entryField_contactValue": {
+					"type": "input",
+					"top": 154,
+					"left": 568,
+					"width": 380,
+					"height": 17,
+					"dataSource": "Form:C1466.current_contact.value",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"right": 948,
+					"method": "ObjectMethods/entryField_contactValue.4dm"
+				},
+				"entryField_contactType": {
+					"type": "input",
+					"top": 118,
+					"left": 568,
+					"width": 380,
+					"height": 17,
+					"dataSource": "Form:C1466.current_contact.name",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"right": 948,
+					"method": "ObjectMethods/entryField_contactType.4dm"
+				},
+				"header_bkgd1": {
+					"type": "rectangle",
+					"top": 91,
+					"left": 0,
+					"width": 482,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"header_bkgd2": {
+					"type": "rectangle",
+					"top": 434,
+					"left": 0,
+					"width": 998,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"lbl_mainContact": {
+					"type": "text",
+					"top": 98,
+					"left": 11,
+					"width": 250,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Communication",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"label_contactType": {
+					"type": "text",
+					"top": 118,
+					"left": 515,
+					"width": 40,
+					"height": 16,
+					"stroke": "#808080",
+					"text": "type",
+					"visibility": "hidden"
+				},
+				"label_contactValue": {
+					"type": "text",
+					"top": 154,
+					"left": 515,
+					"width": 40,
+					"height": 16,
+					"stroke": "#808080",
+					"text": "value",
+					"visibility": "hidden"
+				},
+				"bActionContact": {
+					"type": "button",
+					"text": "Actions",
+					"top": 404,
+					"left": 0,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionContact.4dm"
+				},
+				"bSave": {
+					"type": "button",
+					"text": "",
+					"top": 384,
+					"left": 968,
+					"width": 30,
+					"height": 30,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"icon": "/RESOURCES/Images/Buttons/LightGrey/Validate.png",
+					"iconFrames": 4,
+					"imageHugsTitle": true,
+					"borderStyle": "raised",
+					"method": "ObjectMethods/bSave.4dm",
+					"visibility": "visible"
+				},
+				"lbl_address": {
+					"type": "text",
+					"top": 441,
+					"left": 11,
+					"width": 250,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Addresses",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"pup_Customer": {
+					"type": "button",
+					"top": 36,
+					"left": 698,
+					"width": 300,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Customer",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_Customer.4dm",
+					"events": [
+						"onLoad",
+						"onClick"
+					]
+				}
+			}
+		}
+	],
+	"geometryStamp": 173,
+	"method": "method.4dm",
+	"inheritedForm": "sfw_bkgd_header_2lines",
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
+}
