@@ -20,6 +20,8 @@ Case of
 					))
 			End for each 
 			
+			Form:C1466.lotStep.commentFormat1:=Form:C1466.sf_templateSearch.selectedItem.comment1
+			Form:C1466.lotStep.commentFormat2:=Form:C1466.sf_templateSearch.selectedItem.comment2
 			Form:C1466.lotStep.dataTables:=Form:C1466.sf_templateSearch.selectedItem.dataTables
 			Form:C1466.lotStep.parametricMeasurements:=Form:C1466.sf_templateSearch.selectedItem.parametricMeasurements
 			Form:C1466.lotStep.bins:=Form:C1466.sf_templateSearch.selectedItem.bins

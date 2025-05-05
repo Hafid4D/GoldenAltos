@@ -61,8 +61,11 @@ Function loadCurrentStep()
 			
 			Form:C1466.currentStepOrder:=Form:C1466.currentStep.order
 			
-			OBJECT SET FORMAT:C236(*; "EntryField_comment1"; "Blade Size:#### Die Size(mils):########  ")
-			OBJECT SET FILTER:C235(*; "EntryField_comment1"; "Blade Size : ####Die Size(mils) : ########")
+			OBJECT SET FORMAT:C236(*; "EntryField_comment1"; Form:C1466.currentStep.commentFormat1)
+			OBJECT SET FILTER:C235(*; "EntryField_comment1"; Form:C1466.currentStep.commentFormat1)
+			
+			OBJECT SET FORMAT:C236(*; "EntryField_comment2"; Form:C1466.currentStep.commentFormat2)
+			OBJECT SET FILTER:C235(*; "EntryField_comment2"; Form:C1466.currentStep.commentFormat2)
 			
 			If (Form:C1466.currentStep.tools=Null:C1517)
 				Form:C1466.currentStep.tools:=New object:C1471("items"; New collection:C1472())
