@@ -37,11 +37,11 @@ If (True:C214)
 		$job.jobComment:=$record.jobComment
 		$job.archived:=True:C214
 		$job.pr_qualifier:=$record.pr_qualifier
-		If ($record.pr_qualifier#"")
-			
-		End if 
-		$res:=$job.save()
 		
+		$res:=$job.save()
+		If (Not:C34($res.success))
+			TRACE:C157
+		End if 
 		
 		For each ($poline; $record.poLines)
 			$poLine_es:=ds:C1482.PurchaseOrderLine.query("seqNum = :1"; $poLine.seqNum)

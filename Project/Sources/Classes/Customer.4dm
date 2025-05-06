@@ -29,3 +29,22 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setEventOptions("dontCreateModifyEventIfNoTrackingAttribute")
 	
 	
+	
+local Function cacheLoad()
+	
+	If (Storage:C1525.cache=Null:C1517)
+		Use (Storage:C1525)
+			Storage:C1525.cache:=New shared object:C1526
+		End use 
+	End if 
+	If (Storage:C1525.cache.customers=Null:C1517)
+		$customers:=This:C1470._loadAsCollection()
+		Use (Storage:C1525.cache)
+			Storage:C1525.cache.customers:=$customers.copy(ck shared:K85:29; Storage:C1525.cache)
+		End use 
+	End if 
+	
+	
+Function _loadAsCollection()->$customers : Collection
+	$customers:=This:C1470.all().toCollection("UUID,name").orderBy("name")
+	

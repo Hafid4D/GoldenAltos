@@ -83,26 +83,11 @@ Function _event_definition()
 	cs:C1710.sfw_eventManager.me.createIfNotExist("modifyAdminTime"; "Modify administrative time")
 	cs:C1710.sfw_eventManager.me.createIfNotExist("deleteAdminTime"; "Delete administrative time")
 	
-	// customerAddresses
-	cs:C1710.sfw_eventManager.me.createIfNotExist("addCustomerAddress"; "Add customer Address")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("modifyCustomerAddress"; "Modify customer Address")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("deleteCustomerAddress"; "Delete customer Address")
 	
-	// customerAPContact
-	cs:C1710.sfw_eventManager.me.createIfNotExist("addCustomerAPContact"; "Add customer APContact")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("modifyCustomerAPContact"; "Modify customer APContact")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("deleteCustomerAPContact"; "Delete customer APContact")
-	
-	// customerStatusContact
-	cs:C1710.sfw_eventManager.me.createIfNotExist("addCustomerStatusContact"; "Add customer StatusContact")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("modifyCustomerStatusContact"; "Modify customer StatusContact")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("deleteCustomerStatusContact"; "Delete customer StatusContact")
-	
-	
-	// customerStatusContact
-	//cs.sfw_eventManager.me.createIfNotExist("addCustomerStatusContact"; "Add customer ftp password")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("modifyCustomerStatusContact"; "Modify customer ftp password")
-	//cs.sfw_eventManager.me.createIfNotExist("deleteCustomerStatusContact"; "Delete customer StatusContact")
+	// Contact
+	cs:C1710.sfw_eventManager.me.createIfNotExist("addContact"; "Add contact")
+	cs:C1710.sfw_eventManager.me.createIfNotExist("modifyContact"; "Modify contact")
+	cs:C1710.sfw_eventManager.me.createIfNotExist("deleteContact"; "Delete contact")
 	
 	
 	
