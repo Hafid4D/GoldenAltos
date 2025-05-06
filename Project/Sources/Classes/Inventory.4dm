@@ -5,7 +5,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry:=cs:C1710.sfw_definitionEntry.new("inventories"; ["customerService"]; "Inventories"; "Inventory")
 	$entry.setDataclass("Inventory")
 	$entry.setDisplayOrder(-400)
-	$entry.setIcon("image/entry/inventories-50x50.png")
+	$entry.setIcon("image/entry/inventories-white-50x50.png")
 	
 	$entry.setSearchboxField("stockNum")
 	

@@ -4,7 +4,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry:=cs:C1710.sfw_definitionEntry.new("stepTemplate"; ["housekeeping"]; "Step Template"; "Step Templates")
 	$entry.setDataclass("StepTemplate")
 	$entry.setDisplayOrder(100)
-	$entry.setIcon("image/entry/step-template-52x52.png")
+	$entry.setIcon("image/entry/step-template-white-52x52.png")
 	
 	$entry.setSearchboxField("name")
 	
