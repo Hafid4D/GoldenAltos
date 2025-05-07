@@ -161,7 +161,7 @@ Function LoadApContact()
 		Form:C1466.lb_apContact:=New collection:C1472()
 		If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()#Null:C1517)
 			
-			Form:C1466.lb_apContact:=Form:C1466.current_item.rebuidComunications("AP")
+			Form:C1466.lb_apContact:=Form:C1466.current_item.rebuidComunications("AP Contact")
 			This:C1470.displayApContact()
 		End if 
 	End if 
@@ -172,7 +172,7 @@ Function LoadStatusContact()
 		Form:C1466.lb_statusContact:=New collection:C1472()
 		If (Form:C1466.current_item.contacts.query("title=:1"; "Status").first()#Null:C1517)
 			
-			Form:C1466.lb_statusContact:=Form:C1466.current_item.rebuidComunications("Status")
+			Form:C1466.lb_statusContact:=Form:C1466.current_item.rebuidComunications("Status Contact")
 			This:C1470.displayStatusContact()
 		End if 
 	End if 

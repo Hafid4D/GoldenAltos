@@ -118,7 +118,7 @@
 			"objects": {
 				"header_bkgd2": {
 					"type": "rectangle",
-					"top": 457,
+					"top": 478,
 					"left": 482,
 					"width": 1087,
 					"height": 384,
@@ -128,7 +128,7 @@
 				},
 				"main_bkgd1": {
 					"type": "rectangle",
-					"top": 580,
+					"top": 601,
 					"left": 2,
 					"width": 479,
 					"height": 261,
@@ -148,7 +148,7 @@
 				},
 				"header_bkgd3": {
 					"type": "rectangle",
-					"top": 121,
+					"top": 142,
 					"left": 0,
 					"width": 1569,
 					"height": 337,
@@ -158,7 +158,7 @@
 				},
 				"shipping_bkgd": {
 					"type": "rectangle",
-					"top": 458,
+					"top": 479,
 					"left": 0,
 					"width": 480,
 					"height": 30,
@@ -169,7 +169,7 @@
 				"Text1": {
 					"type": "text",
 					"text": "FTP Info",
-					"top": 465,
+					"top": 486,
 					"left": 12,
 					"width": 119,
 					"height": 16,
@@ -177,7 +177,7 @@
 				},
 				"label_0_7": {
 					"type": "text",
-					"top": 501,
+					"top": 522,
 					"left": 12,
 					"width": 111,
 					"height": 16,
@@ -186,7 +186,7 @@
 				},
 				"entryField_name2": {
 					"type": "input",
-					"top": 501,
+					"top": 522,
 					"left": 143,
 					"width": 256,
 					"height": 17,
@@ -203,7 +203,7 @@
 				},
 				"label_0_8": {
 					"type": "text",
-					"top": 526,
+					"top": 547,
 					"left": 12,
 					"width": 90,
 					"height": 17,
@@ -212,7 +212,7 @@
 				},
 				"entryField_code3": {
 					"type": "input",
-					"top": 526,
+					"top": 547,
 					"left": 143,
 					"width": 256,
 					"height": 17,
@@ -229,7 +229,7 @@
 				},
 				"label_0_9": {
 					"type": "text",
-					"top": 550,
+					"top": 571,
 					"left": 12,
 					"width": 111,
 					"height": 16,
@@ -238,7 +238,7 @@
 				},
 				"entryField_code4": {
 					"type": "input",
-					"top": 552,
+					"top": 573,
 					"left": 143,
 					"width": 256,
 					"height": 17,
@@ -256,7 +256,7 @@
 				},
 				"shipping_bkgd1": {
 					"type": "rectangle",
-					"top": 458,
+					"top": 479,
 					"left": 482,
 					"width": 1087,
 					"height": 30,
@@ -266,7 +266,7 @@
 				},
 				"shipping_bkgd2": {
 					"type": "rectangle",
-					"top": 580,
+					"top": 601,
 					"left": 2,
 					"width": 480,
 					"height": 30,
@@ -277,7 +277,7 @@
 				"Text3": {
 					"type": "text",
 					"text": "Carrier Info",
-					"top": 587,
+					"top": 608,
 					"left": 12,
 					"width": 119,
 					"height": 16,
@@ -285,7 +285,7 @@
 				},
 				"label_0_4": {
 					"type": "text",
-					"top": 626,
+					"top": 647,
 					"left": 12,
 					"width": 111,
 					"height": 16,
@@ -294,7 +294,7 @@
 				},
 				"label_0_5": {
 					"type": "text",
-					"top": 653,
+					"top": 674,
 					"left": 12,
 					"width": 108,
 					"height": 17,
@@ -304,7 +304,7 @@
 				},
 				"label_0_6": {
 					"type": "text",
-					"top": 679,
+					"top": 700,
 					"left": 12,
 					"width": 111,
 					"height": 16,
@@ -313,7 +313,7 @@
 				},
 				"entryField_code1": {
 					"type": "input",
-					"top": 653,
+					"top": 674,
 					"left": 143,
 					"width": 256,
 					"height": 17,
@@ -330,7 +330,7 @@
 				},
 				"entryField_code2": {
 					"type": "input",
-					"top": 679,
+					"top": 700,
 					"left": 143,
 					"width": 256,
 					"height": 17,
@@ -348,7 +348,7 @@
 				"Text2": {
 					"type": "text",
 					"text": "Contacts",
-					"top": 465,
+					"top": 486,
 					"left": 494,
 					"width": 119,
 					"height": 16,
@@ -356,7 +356,7 @@
 				},
 				"label_0_11": {
 					"type": "text",
-					"top": 641,
+					"top": 662,
 					"left": 494,
 					"width": 85,
 					"height": 16,
@@ -365,7 +365,7 @@
 				},
 				"label_0_12": {
 					"type": "text",
-					"top": 496,
+					"top": 517,
 					"left": 494,
 					"width": 85,
 					"height": 16,
@@ -375,7 +375,7 @@
 				"lb_apContact": {
 					"type": "listbox",
 					"left": 599,
-					"top": 503,
+					"top": 524,
 					"width": 337,
 					"height": 124,
 					"events": [
@@ -448,7 +448,7 @@
 				"lb_statusContact": {
 					"type": "listbox",
 					"left": 599,
-					"top": 641,
+					"top": 662,
 					"width": 337,
 					"height": 123,
 					"events": [
@@ -516,7 +516,7 @@
 				"bActionApContact": {
 					"type": "button",
 					"text": "Actions",
-					"top": 606,
+					"top": 627,
 					"left": 494,
 					"width": 80,
 					"height": 21,
@@ -533,7 +533,7 @@
 				"bActionStatusContact": {
 					"type": "button",
 					"text": "Actions",
-					"top": 743,
+					"top": 764,
 					"left": 494,
 					"width": 80,
 					"height": 21,
@@ -549,7 +549,7 @@
 				},
 				"label_apContactType": {
 					"type": "text",
-					"top": 508,
+					"top": 529,
 					"left": 966,
 					"width": 40,
 					"height": 16,
@@ -559,7 +559,7 @@
 				},
 				"label_statusContactType": {
 					"type": "text",
-					"top": 641,
+					"top": 662,
 					"left": 966,
 					"width": 40,
 					"height": 16,
@@ -569,7 +569,7 @@
 				},
 				"entryField_apContactValue": {
 					"type": "input",
-					"top": 545,
+					"top": 566,
 					"left": 1010,
 					"width": 380,
 					"height": 17,
@@ -591,7 +591,7 @@
 				},
 				"entryField_statusContactValue": {
 					"type": "input",
-					"top": 679,
+					"top": 700,
 					"left": 1010,
 					"width": 380,
 					"height": 17,
@@ -613,7 +613,7 @@
 				},
 				"entryField_apContactType": {
 					"type": "input",
-					"top": 508,
+					"top": 529,
 					"left": 1010,
 					"width": 380,
 					"height": 17,
@@ -635,7 +635,7 @@
 				},
 				"label_apContactValue": {
 					"type": "text",
-					"top": 546,
+					"top": 567,
 					"left": 966,
 					"width": 40,
 					"height": 16,
@@ -645,7 +645,7 @@
 				},
 				"label_statusContactValue": {
 					"type": "text",
-					"top": 677,
+					"top": 698,
 					"left": 966,
 					"width": 40,
 					"height": 16,
@@ -655,7 +655,7 @@
 				},
 				"entryField_statusContactType": {
 					"type": "input",
-					"top": 641,
+					"top": 662,
 					"left": 1010,
 					"width": 380,
 					"height": 17,
@@ -677,7 +677,7 @@
 				},
 				"pup_customerCarrier": {
 					"type": "button",
-					"top": 623,
+					"top": 644,
 					"left": 143,
 					"width": 222,
 					"height": 23,
@@ -697,7 +697,7 @@
 				},
 				"header_bkgd1": {
 					"type": "rectangle",
-					"top": 92,
+					"top": 113,
 					"left": 0,
 					"width": 1569,
 					"height": 30,
@@ -707,7 +707,7 @@
 				},
 				"lbl_address": {
 					"type": "text",
-					"top": 99,
+					"top": 120,
 					"left": 12,
 					"width": 250,
 					"height": 17,
@@ -719,7 +719,7 @@
 				"subFormAddress": {
 					"type": "subform",
 					"left": 12,
-					"top": 154,
+					"top": 175,
 					"width": 779,
 					"height": 261,
 					"detailForm": "sfw_subpanel_addressSingle",
@@ -729,7 +729,7 @@
 				"rbBilling1": {
 					"type": "radio",
 					"text": "Billing",
-					"top": 128,
+					"top": 149,
 					"left": 12,
 					"width": 127,
 					"height": 21,
@@ -749,7 +749,7 @@
 				"rbShipping1": {
 					"type": "radio",
 					"text": "Shipping",
-					"top": 127,
+					"top": 148,
 					"left": 138,
 					"width": 127,
 					"height": 21,
@@ -791,8 +791,8 @@
 			"objects": {
 				"lb_POs": {
 					"type": "listbox",
-					"left": 2,
-					"top": 92,
+					"left": 3,
+					"top": 115,
 					"width": 1443,
 					"height": 700,
 					"events": [
@@ -814,7 +814,7 @@
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
 					"headerHeight": "2em",
-					"right": 1445,
+					"right": 1446,
 					"scrollbarHorizontal": "hidden",
 					"columns": [
 						{
@@ -914,8 +914,8 @@
 			"objects": {
 				"lb_Jobs": {
 					"type": "listbox",
-					"left": 17,
-					"top": 108,
+					"left": 0,
+					"top": 114,
 					"width": 1428,
 					"height": 700,
 					"events": [
@@ -936,7 +936,7 @@
 					"alternateFill": "#E6E6E6",
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
-					"right": 1445,
+					"right": 1428,
 					"scrollbarHorizontal": "hidden",
 					"columns": [
 						{
@@ -1010,8 +1010,8 @@
 			"objects": {
 				"lb_Planning": {
 					"type": "listbox",
-					"left": 2,
-					"top": 92,
+					"left": 0,
+					"top": 114,
 					"width": 1443,
 					"height": 700,
 					"events": [
@@ -1032,7 +1032,7 @@
 					"alternateFill": "#E6E6E6",
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
-					"right": 1445,
+					"right": 1443,
 					"scrollbarHorizontal": "hidden",
 					"columns": [
 						{
@@ -1131,8 +1131,8 @@
 			"objects": {
 				"lb_CFM_Receiving": {
 					"type": "listbox",
-					"left": 2,
-					"top": 92,
+					"left": 0,
+					"top": 115,
 					"width": 1443,
 					"height": 700,
 					"events": [
@@ -1153,7 +1153,7 @@
 					"alternateFill": "#E6E6E6",
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
-					"right": 1445,
+					"right": 1443,
 					"scrollbarHorizontal": "automatic",
 					"columns": [
 						{
@@ -1240,8 +1240,8 @@
 			"objects": {
 				"lb_Invoices": {
 					"type": "listbox",
-					"left": 2,
-					"top": 92,
+					"left": 0,
+					"top": 114,
 					"width": 1443,
 					"height": 700,
 					"events": [
@@ -1262,7 +1262,7 @@
 					"alternateFill": "#E6E6E6",
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
-					"right": 1445,
+					"right": 1443,
 					"scrollbarHorizontal": "hidden",
 					"columns": [
 						{
@@ -1331,7 +1331,7 @@
 		},
 		null
 	],
-	"geometryStamp": 672,
+	"geometryStamp": 680,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
@@ -1340,5 +1340,5 @@
 			"View 1": {}
 		}
 	},
-	"inheritedForm": "sfw_bkgd_header_2lines"
+	"inheritedForm": "sfw_bkgd_header_3lines"
 }

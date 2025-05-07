@@ -59,7 +59,7 @@
 				"left": 3324.9997558594,
 				"top": 263.33334350586,
 				"width": 210.2592010498,
-				"height": 125.33203125
+				"height": 131.33203125
 			},
 			"displayable_fields_count": 4,
 			"fields_ordering": 1
@@ -167,10 +167,9 @@
 				"left": 717.33325195312,
 				"top": 1156.9998779297,
 				"width": 159.052734375,
-				"height": 461.33203125
+				"height": 507.33203125
 			},
-			"displayable_fields_count": 20,
-			"fields_ordering": 1
+			"displayable_fields_count": 22
 		},
 		"StepTemplateCertification": {
 			"color": {
@@ -281,12 +280,6 @@
 			"displayable_fields_count": 7,
 			"fields_ordering": 2,
 			"fields": {
-				"operationCode": {
-					"position": 7
-				},
-				"areas": {
-					"position": 6
-				},
 				"specification": {
 					"position": 5
 				},
@@ -347,10 +340,9 @@
 				"left": 2079.0002441406,
 				"top": 1021.6667480469,
 				"width": 171.73828125,
-				"height": 650.33203125
+				"height": 686.33203125
 			},
-			"displayable_fields_count": 29,
-			"fields_ordering": 1
+			"displayable_fields_count": 30
 		},
 		"PurchaseOrderLine": {
 			"color": {
@@ -379,10 +371,9 @@
 				"left": 1578,
 				"top": 503,
 				"width": 157.048828125,
-				"height": 482.33203125
+				"height": 575.33203125
 			},
-			"displayable_fields_count": 21,
-			"fields_ordering": 1
+			"displayable_fields_count": 25
 		},
 		"Customer": {
 			"color": {
@@ -395,7 +386,7 @@
 				"left": 1296,
 				"top": 686,
 				"width": 173.724609375,
-				"height": 272.33203125
+				"height": 292.33203125
 			},
 			"displayable_fields_count": 11,
 			"fields_ordering": 1
@@ -553,8 +544,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 359,
-				"top": 37,
+				"left": 297,
+				"top": 671,
 				"width": 180,
 				"height": 230.33203125
 			},
@@ -691,13 +682,43 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 0,
-				"top": 1,
+				"left": 15,
+				"top": 6,
 				"width": 187.373046875,
 				"height": 188.33203125
 			},
 			"displayable_fields_count": 7,
 			"fields_ordering": 1
+		},
+		"ContactEvent": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 2836,
+				"top": 228,
+				"width": 169,
+				"height": 193.33203125
+			},
+			"displayable_fields_count": 7
+		},
+		"CustomerEvent": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 2836,
+				"top": 17,
+				"width": 167,
+				"height": 190.33203125
+			},
+			"displayable_fields_count": 7
 		},
 		"Specification": {
 			"color": {
@@ -716,41 +737,35 @@
 		},
 		"sfw_DocumentFolder": {
 			"color": {
-				"red": 181,
-				"green": 145,
-				"blue": 209,
-				"alpha": 255
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
 			},
 			"coordinates": {
-				"left": 852.66918945312,
-				"top": 952.59008789062,
-				"width": 173.94140625,
-				"height": 146.33203125
+				"left": 440,
+				"top": 40,
+				"width": 120,
+				"height": 167.33203125
 			},
-			"displayable_fields_count": 5,
-			"fields": {
-				"UUID_ParentFolder": {
-					"position": 2
-				},
-				"UUID": {
-					"position": 1
-				}
-			}
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
 		},
 		"sfw_Document": {
 			"color": {
-				"red": 181,
-				"green": 145,
-				"blue": 209,
-				"alpha": 255
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
 			},
 			"coordinates": {
-				"left": 518.36059570312,
-				"top": 937.27984619141,
-				"width": 180.57421875,
-				"height": 209.33203125
+				"left": 240,
+				"top": 40,
+				"width": 120,
+				"height": 167.33203125
 			},
-			"displayable_fields_count": 8
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
 		},
 		"CustomerCarrier": {
 			"color": {
@@ -760,13 +775,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 40,
-				"top": 40,
-				"width": 120,
-				"height": 167.33203125
+				"left": 3102,
+				"top": 375,
+				"width": 153,
+				"height": 170.33203125
 			},
-			"displayable_fields_count": 6,
-			"fields_ordering": 1
+			"displayable_fields_count": 6
 		},
 		"Tool": {
 			"color": {
@@ -800,12 +814,6 @@
 			"displayable_fields_count": 23,
 			"fields_ordering": 2,
 			"fields": {
-				"comment2": {
-					"position": 17
-				},
-				"comment1": {
-					"position": 16
-				},
 				"dataTables": {
 					"position": 20
 				},
@@ -835,9 +843,6 @@
 				},
 				"lotSpecs": {
 					"position": 10
-				},
-				"bins": {
-					"position": 22
 				},
 				"dateOut": {
 					"position": 9
@@ -879,10 +884,9 @@
 				"left": 1297,
 				"top": 378,
 				"width": 179.712890625,
-				"height": 230.33203125
+				"height": 301.33203125
 			},
-			"displayable_fields_count": 9,
-			"fields_ordering": 1
+			"displayable_fields_count": 12
 		},
 		"TermCondition": {
 			"color": {
@@ -924,21 +928,61 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 951,
-				"top": 200,
+				"left": 692,
+				"top": 423,
 				"width": 149.015625,
-				"height": 188.33203125
+				"height": 210.33203125
 			},
-			"displayable_fields_count": 7,
+			"displayable_fields_count": 8,
 			"fields_ordering": 1
 		}
 	},
 	"relations": {
-		"DB8D79B14BDE42479CDD27271248450D": {
+		"56B1E8D230D91442852CB8C58942C19A": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"1A0886A82A88F541A7DE80A0FAAF88CE": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"D4257CC29A3F0A4D8CD61A1B1BA72D5B": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"8B69B2A25682C34BBF8DDE3FD2A1096D": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"C999B2B79A28894BBBBA3CDD64C6B585": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"83314A01941F4F48A77B60A20607A36D": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
 				"alpha": 0
 			}
 		},
@@ -963,14 +1007,6 @@
 				"red": 255,
 				"green": 255,
 				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"9FD8DE349FF6BE42B935C2539539EA6F": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
 				"alpha": 0
 			}
 		}

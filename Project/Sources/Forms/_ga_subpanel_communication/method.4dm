@@ -3,6 +3,20 @@ var $file : 4D:C1709.File
 $inModification:=sfw_checkIsInModification
 $setActivation:=False:C215
 $rebuildDisplayedLB:=False:C215
+If (Form:C1466#Null:C1517) && (Form:C1466.communicationTypes=Null:C1517)
+	$file:=Folder:C1567(fk resources folder:K87:11).file("sfw/communication/communicationTypes.json")
+	If ($file.exists)
+		$json:=$file.getText()
+		Form:C1466.communicationTypes:=JSON Parse:C1218($json)
+		For each ($type; Form:C1466.communicationTypes)
+			$file:=Folder:C1567(fk resources folder:K87:11).file("sfw/communication/"+$type.icon)
+			$blob:=$file.getContent()
+			BLOB TO PICTURE:C682($blob; $pict; ".png")
+			$type.displayedIcon:=$pict
+		End for each 
+		
+	End if 
+End if 
 
 Case of 
 	: (FORM Event:C1606.code=On Load:K2:1)
@@ -17,9 +31,9 @@ Case of
 	: (FORM Event:C1606.code=On Data Change:K2:15)
 		Case of 
 			: (FORM Event:C1606.columnName="col_contact")
-				Form:C1466.lb_contact[Form:C1466.current_contactPos-1].contact:=Form:C1466.communicationMean.contact
+				Form:C1466.communications[Form:C1466.communicationMeanPosition-1].contact:=Form:C1466.communicationMean.contact
 			: (FORM Event:C1606.columnName="col_comment")
-				Form:C1466.lb_contact[Form:C1466.current_contactPos-1].comment:=Form:C1466.communicationMean.comment
+				Form:C1466.communications[Form:C1466.communicationMeanPosition-1].comment:=Form:C1466.communicationMean.comment
 		End case 
 		CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 		
@@ -45,8 +59,6 @@ Case of
 			End if 
 		End if 
 		
-		
-		
 		OBJECT GET COORDINATES:C663(*; "bActions"; $g; $h; $d; $b)
 		CONVERT COORDINATES:C1365($g; $b; XY Current form:K27:5; XY Current window:K27:6)
 		$choose:=Dynamic pop up menu:C1006($mainMenu; ""; $g; $b)
@@ -56,11 +68,16 @@ Case of
 		Case of 
 			: ($choose="")
 			: ($choose="--delete")
-				Form:C1466.lb_contact.remove(Form:C1466.current_contactPos-1)
+				Form:C1466.communications.remove(Form:C1466.communicationMeanPosition-1)
 				$rebuildDisplayedLB:=True:C214
 				CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 			: ($choose="--add")
-				Form:C1466.lb_contact.push(New object:C1471("type"; Form:C1466.communicationTypes[0].type))
+				
+				$winRef:=Open form window:C675("sfw_subpanel_communicationSingle"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+				DIALOG:C40("sfw_subpanel_communicationSingle"; $form)
+				CLOSE WINDOW:C154($winRef)
+				
+				Form:C1466.communications.push(New object:C1471("type"; Form:C1466.communicationTypes[0].type))
 				$rebuildDisplayedLB:=True:C214
 				CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 				
@@ -68,7 +85,7 @@ Case of
 		
 	: (FORM Event:C1606.code=On Clicked:K2:4)
 		
-		If (FORM Event:C1606.columnName="col_type") && ($inModification) && (Form:C1466.current_contactPos>0)
+		If (FORM Event:C1606.columnName="col_type") && ($inModification) && (Form:C1466.communicationMeanPosition>0)
 			$refMenus:=New collection:C1472
 			$mainMenu:=Create menu:C408
 			$refMenus.push($mainMenu)
@@ -86,7 +103,7 @@ Case of
 				: ($choose="")
 				Else 
 					
-					Form:C1466.lb_contact[Form:C1466.current_contactPos-1].type:=$choose
+					Form:C1466.communications[Form:C1466.communicationMeanPosition-1].type:=$choose
 					$rebuildDisplayedLB:=True:C214
 					
 					CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
@@ -102,6 +119,30 @@ If ($setActivation)
 	OBJECT SET ENTERABLE:C238(*; "col_comment"; $inModification)
 End if 
 
-
-//cs.panel_contact.me.displayContact()
-
+If ($rebuildDisplayedLB)
+	//OBJECT GET SUBFORM CONTAINER SIZE($width_subform; $height_subform)
+	//OBJECT SET COORDINATES(*; "communication_bkgd"; 0; 0; $width_subform; $height_subform)
+	//OBJECT GET COORDINATES(*; "bActions"; $g; $h; $d; $b)
+	//$heightButton:=$b-$h
+	//$verticalMargin:=5
+	//$horizontalMargin:=5
+	//OBJECT SET COORDINATES(*; "bActions"; $horizontalMargin; $height_subform-$verticalMargin-$heightButton; $horizontalMargin+$d-$g; $height_subform-$verticalMargin)
+	//OBJECT SET COORDINATES(*; "lb_communications"; $horizontalMargin; $verticalMargin; $width_subform-$horizontalMargin; $height_subform-$verticalMargin-$heightButton-$verticalMargin)
+	
+	
+	If (Form:C1466#Null:C1517)
+		Form:C1466.lb_communications:=New collection:C1472
+		For each ($mean; Form:C1466.communications)
+			$item:=New object:C1471
+			$item.contact:=$mean.contact
+			$item.comment:=$mean.comment
+			$item.type:=$mean.type || "phone"
+			$indices:=Form:C1466.communicationTypes.indices("type = :1"; $item.type)
+			If ($indices.length>0)
+				$item.displayedType:=Form:C1466.communicationTypes[$indices[0]].label
+				$item.displayedIcon:=Form:C1466.communicationTypes[$indices[0]].displayedIcon
+			End if 
+			Form:C1466.lb_communications.push($item)
+		End for each 
+	End if 
+End if 

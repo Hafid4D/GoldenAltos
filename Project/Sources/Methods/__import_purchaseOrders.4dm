@@ -395,7 +395,7 @@ End if
 /**
 import cetifications
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([Certification:124])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/certifications_export.json")
@@ -419,7 +419,7 @@ End if
 /**
 import specifications
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([Specification:10])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/specification_export.json")
