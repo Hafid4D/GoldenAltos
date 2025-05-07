@@ -73,10 +73,6 @@ Case of
 				CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 			: ($choose="--add")
 				
-				$winRef:=Open form window:C675("sfw_subpanel_communicationSingle"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
-				DIALOG:C40("sfw_subpanel_communicationSingle"; $form)
-				CLOSE WINDOW:C154($winRef)
-				
 				Form:C1466.communications.push(New object:C1471("type"; Form:C1466.communicationTypes[0].type))
 				$rebuildDisplayedLB:=True:C214
 				CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")

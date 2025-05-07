@@ -138,7 +138,7 @@
 				},
 				"main_bkgd": {
 					"type": "rectangle",
-					"top": 460,
+					"top": 479,
 					"left": 0,
 					"width": 481,
 					"height": 120,
@@ -1331,7 +1331,7 @@
 		},
 		null
 	],
-	"geometryStamp": 680,
+	"geometryStamp": 685,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
