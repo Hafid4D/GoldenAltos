@@ -29,6 +29,7 @@ Case of
 		$rebuildDisplayedLB:=True:C214
 		
 	: (FORM Event:C1606.code=On Data Change:K2:15)
+		
 		Case of 
 			: (FORM Event:C1606.columnName="col_contact")
 				Form:C1466.communications[Form:C1466.communicationMeanPosition-1].contact:=Form:C1466.communicationMean.contact
@@ -73,7 +74,15 @@ Case of
 				CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 			: ($choose="--add")
 				
-				Form:C1466.communications.push(New object:C1471("type"; Form:C1466.communicationTypes[0].type))
+				$form:=New object:C1471()
+				
+				$winRef:=Open form window:C675("_ga_subpanelCommunicationSingle"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+				DIALOG:C40("_ga_subpanelCommunicationSingle"; $form)
+				
+				If (OK=1)
+					Form:C1466.communications.push($form.com)
+				End if 
+				
 				$rebuildDisplayedLB:=True:C214
 				CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 				
@@ -81,29 +90,43 @@ Case of
 		
 	: (FORM Event:C1606.code=On Clicked:K2:4)
 		
-		If (FORM Event:C1606.columnName="col_type") && ($inModification) && (Form:C1466.communicationMeanPosition>0)
-			$refMenus:=New collection:C1472
-			$mainMenu:=Create menu:C408
-			$refMenus.push($mainMenu)
+		If ($inModification) && (Form:C1466.communicationMeanPosition>0)  //(FORM Event.columnName="col_type") && 
+			$form:=New object:C1471
 			
-			For each ($type; Form:C1466.communicationTypes)
-				APPEND MENU ITEM:C411($mainMenu; $type.label; *)
-				SET MENU ITEM PARAMETER:C1004($mainMenu; -1; $type.type)
-				SET MENU ITEM ICON:C984($mainMenu; -1; "path:/RESOURCES/sfw/communication/"+$type.icon)
-			End for each 
-			$choose:=Dynamic pop up menu:C1006($mainMenu)
-			For each ($refMenu; $refMenus)
-				RELEASE MENU:C978($refMenu)
-			End for each 
-			Case of 
-				: ($choose="")
-				Else 
-					
-					Form:C1466.communications[Form:C1466.communicationMeanPosition-1].type:=$choose
-					$rebuildDisplayedLB:=True:C214
-					
-					CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
-			End case 
+			$form.com:=Form:C1466.communications[Form:C1466.communicationMeanPosition-1]
+			
+			$winRef:=Open form window:C675("_ga_subpanelCommunicationSingle"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("_ga_subpanelCommunicationSingle"; $form)
+			
+			If (OK=1)
+				Form:C1466.communications[Form:C1466.communicationMeanPosition-1]:=$form.com
+				
+			Else 
+				
+			End if 
+			
+			//$refMenus:=New collection
+			//$mainMenu:=Create menu
+			//$refMenus.push($mainMenu)
+			
+			//For each ($type; Form.communicationTypes)
+			//APPEND MENU ITEM($mainMenu; $type.label; *)
+			//SET MENU ITEM PARAMETER($mainMenu; -1; $type.type)
+			//SET MENU ITEM ICON($mainMenu; -1; "path:/RESOURCES/sfw/communication/"+$type.icon)
+			//End for each 
+			//$choose:=Dynamic pop up menu($mainMenu)
+			//For each ($refMenu; $refMenus)
+			//RELEASE MENU($refMenu)
+			//End for each 
+			//Case of 
+			//: ($choose="")
+			//Else 
+			
+			//Form.communications[Form.communicationMeanPosition-1].type:=$choose
+			$rebuildDisplayedLB:=True:C214
+			
+			CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
+			//End case 
 			
 		End if 
 		

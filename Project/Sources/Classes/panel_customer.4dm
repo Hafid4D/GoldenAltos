@@ -49,7 +49,7 @@ Function drawPup_CustomerStatus()
 		$customerStatus:=ds:C1482.CustomerStatus.query("statusID= :1"; Form:C1466.current_item.IDT_status).first() || New object:C1471()
 		$statusName:=$customerStatus.name
 		If ($statusName=Null:C1517)
-			$statusName:="Status"
+			$statusName:=""
 		End if 
 		$color:=cs:C1710.sfw_htmlColor.me.getName($customerStatus.color)
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
@@ -93,7 +93,7 @@ Function drawPup_CustomerCarrier()
 		$customerCarrier:=ds:C1482.CustomerCarrier.query("carrierID= :1"; Form:C1466.current_item.IDT_carrier).first() || New object:C1471()
 		$carrierName:=$customerCarrier.name
 		If ($carrierName=Null:C1517)
-			$carrierName:="Carrier"
+			$carrierName:=""
 		End if 
 		$color:=cs:C1710.sfw_htmlColor.me.getName($customerCarrier.color)
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"

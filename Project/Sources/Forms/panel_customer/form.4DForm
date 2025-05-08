@@ -31,6 +31,16 @@
 	"pages": [
 		{
 			"objects": {
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 0,
+					"width": 5000,
+					"height": 704,
+					"fill": "#B1CFDE",
+					"strokeWidth": 2,
+					"stroke": "#FFFFFF"
+				},
 				"label_0_1": {
 					"type": "text",
 					"top": 12,
@@ -684,7 +694,7 @@
 					"fontFamily": "System Font",
 					"fontSize": 13,
 					"focusable": false,
-					"text": "Carrier",
+					"text": "",
 					"icon": "",
 					"popupPlacement": "linked",
 					"textPlacement": "right",
@@ -791,8 +801,8 @@
 			"objects": {
 				"lb_POs": {
 					"type": "listbox",
-					"left": 3,
-					"top": 115,
+					"left": 132,
+					"top": 114,
 					"width": 1443,
 					"height": 700,
 					"events": [
@@ -814,8 +824,9 @@
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
 					"headerHeight": "2em",
-					"right": 1446,
+					"right": 1575,
 					"scrollbarHorizontal": "hidden",
+					"hideFocusRing": false,
 					"columns": [
 						{
 							"header": {
@@ -907,6 +918,18 @@
 							"dataSourceTypeHint": "number"
 						}
 					]
+				},
+				"Input": {
+					"type": "input",
+					"left": 11,
+					"top": 128,
+					"width": 106,
+					"height": 16,
+					"dataSource": "\"POs (\"+String:C10(Form:C1466.lb_POs.length)+\")\"",
+					"enterable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold"
 				}
 			}
 		},
@@ -914,7 +937,7 @@
 			"objects": {
 				"lb_Jobs": {
 					"type": "listbox",
-					"left": 0,
+					"left": 132,
 					"top": 114,
 					"width": 1428,
 					"height": 700,
@@ -936,7 +959,7 @@
 					"alternateFill": "#E6E6E6",
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
-					"right": 1428,
+					"right": 1560,
 					"scrollbarHorizontal": "hidden",
 					"columns": [
 						{
@@ -1003,6 +1026,18 @@
 							"dataSource": "This:C1470.pr_qualifier"
 						}
 					]
+				},
+				"Input1": {
+					"type": "input",
+					"left": 11,
+					"top": 128,
+					"width": 106,
+					"height": 16,
+					"dataSource": "\"Jobs (\"+String:C10(Form:C1466.lb_Jobs.length)+\")\"",
+					"enterable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold"
 				}
 			}
 		},
@@ -1010,7 +1045,7 @@
 			"objects": {
 				"lb_Planning": {
 					"type": "listbox",
-					"left": 0,
+					"left": 132,
 					"top": 114,
 					"width": 1443,
 					"height": 700,
@@ -1032,7 +1067,7 @@
 					"alternateFill": "#E6E6E6",
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
-					"right": 1443,
+					"right": 1575,
 					"scrollbarHorizontal": "hidden",
 					"columns": [
 						{
@@ -1124,6 +1159,18 @@
 							"dataSourceTypeHint": "number"
 						}
 					]
+				},
+				"Input2": {
+					"type": "input",
+					"left": 11,
+					"top": 128,
+					"width": 106,
+					"height": 16,
+					"dataSource": "\"Planning (\"+String:C10(Form:C1466.lb_Planning.length)+\")\"",
+					"enterable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold"
 				}
 			}
 		},
@@ -1131,8 +1178,8 @@
 			"objects": {
 				"lb_CFM_Receiving": {
 					"type": "listbox",
-					"left": 0,
-					"top": 115,
+					"left": 132,
+					"top": 114,
 					"width": 1443,
 					"height": 700,
 					"events": [
@@ -1153,7 +1200,7 @@
 					"alternateFill": "#E6E6E6",
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
-					"right": 1443,
+					"right": 1575,
 					"scrollbarHorizontal": "automatic",
 					"columns": [
 						{
@@ -1233,6 +1280,21 @@
 							"width": 353
 						}
 					]
+				},
+				"Input3": {
+					"type": "input",
+					"left": 11,
+					"top": 128,
+					"width": 106,
+					"height": 16,
+					"dataSource": "\"CFM Receiving (\"+String:C10(Form:C1466.lb_CFM_Receiving.length)+\")\"",
+					"enterable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"events": [
+						"onLoad"
+					],
+					"fontWeight": "bold"
 				}
 			}
 		},
@@ -1240,7 +1302,7 @@
 			"objects": {
 				"lb_Invoices": {
 					"type": "listbox",
-					"left": 0,
+					"left": 132,
 					"top": 114,
 					"width": 1443,
 					"height": 700,
@@ -1262,7 +1324,7 @@
 					"alternateFill": "#E6E6E6",
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
-					"right": 1443,
+					"right": 1575,
 					"scrollbarHorizontal": "hidden",
 					"columns": [
 						{
@@ -1326,12 +1388,24 @@
 							"dataSource": "This:C1470.saleAmount"
 						}
 					]
+				},
+				"Input4": {
+					"type": "input",
+					"left": 11,
+					"top": 128,
+					"width": 106,
+					"height": 16,
+					"dataSource": "\"Invoices (\"+String:C10(Form:C1466.lb_Invoices.length)+\")\"",
+					"enterable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold"
 				}
 			}
 		},
 		null
 	],
-	"geometryStamp": 685,
+	"geometryStamp": 738,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

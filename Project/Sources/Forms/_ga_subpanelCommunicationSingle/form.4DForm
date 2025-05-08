@@ -106,16 +106,6 @@
 					"fill": "#FFFFFF",
 					"stroke": "transparent"
 				},
-				"header_bkgd6": {
-					"type": "rectangle",
-					"top": 40,
-					"left": 450,
-					"width": 32,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
 				"Text3": {
 					"type": "text",
 					"text": "Type",
@@ -164,19 +154,6 @@
 					"textAlign": "right",
 					"fontWeight": "bold"
 				},
-				"Input": {
-					"type": "input",
-					"left": 151,
-					"top": 45,
-					"width": 293,
-					"height": 18,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.newCommunication.type",
-					"enterable": false,
-					"contextMenu": "none",
-					"method": "ObjectMethods/Input.4dm"
-				},
 				"header_bkgd5": {
 					"type": "rectangle",
 					"top": 72,
@@ -187,17 +164,7 @@
 					"fill": "#FFFFFF",
 					"stroke": "transparent"
 				},
-				"header_bkgd7": {
-					"type": "rectangle",
-					"top": 72,
-					"left": 450,
-					"width": 32,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Input1": {
+				"communication_item_contact": {
 					"type": "input",
 					"left": 151,
 					"top": 77,
@@ -205,7 +172,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.newCommunication.contact"
+					"dataSource": "Form:C1466.com.contact"
 				},
 				"Button": {
 					"type": "button",
@@ -249,21 +216,6 @@
 					"shortcutAlt": false,
 					"method": "ObjectMethods/Button1.4dm"
 				},
-				"Button2": {
-					"type": "button",
-					"text": "",
-					"top": 42,
-					"left": 451,
-					"width": 29,
-					"height": 24,
-					"events": [
-						"onClick"
-					],
-					"style": "custom",
-					"popupPlacement": "none",
-					"icon": "/RESOURCES/image/element/MacCollapse.png",
-					"method": "ObjectMethods/Button2.4dm"
-				},
 				"header_bkgd8": {
 					"type": "rectangle",
 					"top": 105,
@@ -303,17 +255,7 @@
 					"fill": "#FFFFFF",
 					"stroke": "transparent"
 				},
-				"header_bkgd10": {
-					"type": "rectangle",
-					"top": 105,
-					"left": 450,
-					"width": 32,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Input2": {
+				"communication_item_comment": {
 					"type": "input",
 					"left": 151,
 					"top": 110,
@@ -321,53 +263,14 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.newCommunication.comment"
-				}
-			}
-		},
-		{
-			"objects": {
-				"communication_item_contact": {
-					"type": "input",
-					"top": 50,
-					"left": 176,
-					"width": 141,
-					"height": 16,
-					"visibility": "hidden",
-					"dataSource": "Form:C1466.communication.contact",
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"enterable": true,
-					"borderStyle": "system",
-					"fill": "automatic",
-					"focusable": false
-				},
-				"communication_item_comment": {
-					"type": "input",
-					"top": 80,
-					"left": 176,
-					"width": 141,
-					"height": 16,
-					"visibility": "hidden",
-					"dataSource": "Form:C1466.communication.comment",
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"enterable": true,
-					"borderStyle": "system",
-					"fill": "automatic"
+					"dataSource": "Form:C1466.com.comment"
 				},
 				"communication_item_type": {
 					"type": "button",
-					"top": 17,
-					"left": 176,
-					"width": 141,
-					"height": 24,
+					"top": 40,
+					"left": 151,
+					"width": 299,
+					"height": 28,
 					"fontFamily": "System Font",
 					"fontSize": 13,
 					"focusable": false,
@@ -381,38 +284,14 @@
 						"onClick"
 					],
 					"textAlign": "left"
-				},
-				"Text": {
-					"type": "text",
-					"text": "Type of Communication:",
-					"top": 22,
-					"left": 29,
-					"width": 142,
-					"height": 15,
-					"stroke": "#808080"
-				},
-				"Text1": {
-					"type": "text",
-					"text": "Contact:",
-					"top": 51,
-					"left": 29,
-					"width": 92,
-					"height": 15,
-					"stroke": "#808080"
-				},
-				"Text2": {
-					"type": "text",
-					"text": "Comment:",
-					"top": 80,
-					"left": 29,
-					"width": 92,
-					"height": 15,
-					"stroke": "#808080"
 				}
 			}
+		},
+		{
+			"objects": {}
 		}
 	],
-	"geometryStamp": 128,
+	"geometryStamp": 148,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

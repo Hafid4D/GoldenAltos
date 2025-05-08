@@ -43,6 +43,7 @@ If (True:C214)
 			$eCustomer:=ds:C1482.Customer.new()
 			$eCustomer.name:=$customer.Customer
 			$eCustomer.code:=$customer.Cust_Code
+			
 			$eCustomer.IDT_status:=$customer.idt_status
 			
 			//-----------------------------------------------------------

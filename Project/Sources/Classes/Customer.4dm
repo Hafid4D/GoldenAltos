@@ -11,7 +11,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setSearchboxField("name")
 	
 	$entry.setPanel("panel_customer")
-	$entry.setPanelPage(1; "staff-32x32.png"; "Main")
+	$entry.setPanelPage(1; "staff-32x32.png"; "Main"+String:C10(Count))
 	$entry.setPanelPage(2; "staff-32x32.png"; "POs")
 	$entry.setPanelPage(3; "staff-32x32.png"; "Jobs")
 	$entry.setPanelPage(4; "staff-32x32.png"; "Planning")
@@ -29,6 +29,12 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setEventOptions("dontCreateModifyEventIfNoTrackingAttribute")
 	
 	
+	// MARK: -Filters
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterCustomerStatus")
+	$filter.setDefaultTitle("All status")
+	$filter.setFilterByIDInTable("CustomerStatus"; "statusID"; "IDT_status")
+	$filter.setDynamicTitle("name"; "## customer status")
+	$entry.addFilter($filter)
 	
 local Function cacheLoad()
 	
