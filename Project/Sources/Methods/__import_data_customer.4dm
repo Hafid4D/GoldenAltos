@@ -5,9 +5,10 @@ If (True:C214)
 	var $eCustomer : cs:C1710.CustomerEntity
 	var $eCustomerStatus : cs:C1710.CustomerStatusEntity
 	//var $eContact : cs.ContactEntity
-	var $carriers; $status : Collection
+	var $carriers; $status; $colors : Collection
 	$carriers:=New collection:C1472("GAC Driver"; "Fed-Ex Priority"; "fedex Std Overnight"; "fedex"; "fedex Ground"; "Customer Pickup"; "UPS 2nd Day"; "UPS Ground"; "UPS Next Day"; "DHL")
 	$status:=New collection:C1472("Active"; "Hold"; "Retired"; "Void")
+	$colors:=New collection:C1472("#32CD32"; "#1E90FF"; "#FF0000"; "#FFFF00")
 	
 	$customer_Log:=Folder:C1567(fk data folder:K87:12).file("DataJson/Customer_Log.json")
 	If ($customer_Log.exists)
@@ -23,7 +24,7 @@ If (True:C214)
 			$eCustomerStatus:=ds:C1482.CustomerStatus.new()
 			$eCustomerStatus.statusID:=$i+1
 			$eCustomerStatus.name:=$status[$i]
-			$eCustomerStatus.color:=""
+			$eCustomerStatus.color:=$colors[$i]
 			$eCustomerStatus.save()
 			
 		End for 
@@ -187,6 +188,7 @@ If (True:C214)
 				If ($eCustomer=Null:C1517)
 					$eCustomer:=ds:C1482.Customer.new()
 					$eCustomer.name:=$contact.Company_Name
+					$eCustomer.IDT_status:=1
 					$eCustomer.save()
 				End if 
 				$eContact.UUID_Customer:=$eCustomer.UUID

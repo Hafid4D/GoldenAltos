@@ -42,10 +42,10 @@
 					"width": 641,
 					"height": 305,
 					"events": [
-						"onClick",
-						"onHeaderClick",
+						"onDoubleClick",
 						"onDataChange",
-						"onSelectionChange"
+						"onSelectionChange",
+						"onHeaderClick"
 					],
 					"lockedColumnCount": 0,
 					"showHeaders": true,
@@ -62,7 +62,7 @@
 					"resizingMode": "legacy",
 					"selectionMode": "single",
 					"headerHeight": "1em",
-					"singleClickEdit": true,
+					"singleClickEdit": false,
 					"columns": [
 						{
 							"header": {
@@ -171,7 +171,7 @@
 			}
 		}
 	],
-	"geometryStamp": 56,
+	"geometryStamp": 57,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

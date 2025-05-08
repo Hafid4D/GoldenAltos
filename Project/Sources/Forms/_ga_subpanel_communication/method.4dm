@@ -28,15 +28,15 @@ Case of
 		$setActivation:=True:C214
 		$rebuildDisplayedLB:=True:C214
 		
-	: (FORM Event:C1606.code=On Data Change:K2:15)
+		//: (FORM Event.code=On Data Change)
 		
-		Case of 
-			: (FORM Event:C1606.columnName="col_contact")
-				Form:C1466.communications[Form:C1466.communicationMeanPosition-1].contact:=Form:C1466.communicationMean.contact
-			: (FORM Event:C1606.columnName="col_comment")
-				Form:C1466.communications[Form:C1466.communicationMeanPosition-1].comment:=Form:C1466.communicationMean.comment
-		End case 
-		CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
+		//Case of 
+		//: (FORM Event.columnName="col_contact")
+		//Form.communications[Form.communicationMeanPosition-1].contact:=Form.communicationMean.contact
+		//: (FORM Event.columnName="col_comment")
+		//Form.communications[Form.communicationMeanPosition-1].comment:=Form.communicationMean.comment
+		//End case 
+		//CALL FORM(Current form window; "sfw_main_draw_button")
 		
 		
 	: (FORM Event:C1606.code=On Clicked:K2:4) && (FORM Event:C1606.objectName="bActions")
@@ -52,6 +52,17 @@ Case of
 		
 		APPEND MENU ITEM:C411($mainMenu; "Delete a communication means"; *)
 		SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--delete")
+		If (sfw_checkIsInModification)=False:C215
+			DISABLE MENU ITEM:C150($mainMenu; -1)
+		Else 
+			If (Form:C1466.communicationMean=Null:C1517)
+				DISABLE MENU ITEM:C150($mainMenu; -1)
+			End if 
+		End if 
+		
+		APPEND MENU ITEM:C411($mainMenu; "modify a communication means"; *)
+		SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--update")
+		
 		If (sfw_checkIsInModification)=False:C215
 			DISABLE MENU ITEM:C150($mainMenu; -1)
 		Else 
@@ -78,6 +89,7 @@ Case of
 				
 				$winRef:=Open form window:C675("_ga_subpanelCommunicationSingle"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 				DIALOG:C40("_ga_subpanelCommunicationSingle"; $form)
+				CLOSE WINDOW:C154($winRef)
 				
 				If (OK=1)
 					Form:C1466.communications.push($form.com)
@@ -86,68 +98,74 @@ Case of
 				$rebuildDisplayedLB:=True:C214
 				CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 				
+			: ($choose="--update")
+				
+				If ($inModification) && (Form:C1466.communicationMeanPosition>0)  //(FORM Event.columnName="col_type") && 
+					$form:=New object:C1471
+					
+					$form.com:=OB Copy:C1225(Form:C1466.communications[Form:C1466.communicationMeanPosition-1])
+					
+					$winRef:=Open form window:C675("_ga_subpanelCommunicationSingle"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+					DIALOG:C40("_ga_subpanelCommunicationSingle"; $form)
+					
+					If (OK=1)
+						Form:C1466.communications[Form:C1466.communicationMeanPosition-1]:=$form.com
+					End if 
+					
+					$rebuildDisplayedLB:=True:C214
+					
+					CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
+					
+				End if 
+				
 		End case 
 		
-	: (FORM Event:C1606.code=On Clicked:K2:4)
+		//: (FORM Event.code=On Clicked)
+/*
+If ($inModification) && (Form.communicationMeanPosition>0)  //(FORM Event.columnName="col_type") && 
+$form:=New object
 		
-		If ($inModification) && (Form:C1466.communicationMeanPosition>0)  //(FORM Event.columnName="col_type") && 
-			$form:=New object:C1471
-			
-			$form.com:=Form:C1466.communications[Form:C1466.communicationMeanPosition-1]
-			
-			$winRef:=Open form window:C675("_ga_subpanelCommunicationSingle"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
-			DIALOG:C40("_ga_subpanelCommunicationSingle"; $form)
-			
-			If (OK=1)
-				Form:C1466.communications[Form:C1466.communicationMeanPosition-1]:=$form.com
-				
-			Else 
-				
-			End if 
-			
-			//$refMenus:=New collection
-			//$mainMenu:=Create menu
-			//$refMenus.push($mainMenu)
-			
-			//For each ($type; Form.communicationTypes)
-			//APPEND MENU ITEM($mainMenu; $type.label; *)
-			//SET MENU ITEM PARAMETER($mainMenu; -1; $type.type)
-			//SET MENU ITEM ICON($mainMenu; -1; "path:/RESOURCES/sfw/communication/"+$type.icon)
-			//End for each 
-			//$choose:=Dynamic pop up menu($mainMenu)
-			//For each ($refMenu; $refMenus)
-			//RELEASE MENU($refMenu)
-			//End for each 
-			//Case of 
-			//: ($choose="")
-			//Else 
-			
-			//Form.communications[Form.communicationMeanPosition-1].type:=$choose
-			$rebuildDisplayedLB:=True:C214
-			
-			CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
-			//End case 
-			
-		End if 
+$form.com:=Form.communications[Form.communicationMeanPosition-1]
 		
+$winRef:=Open form window("_ga_subpanelCommunicationSingle"; Plain form window; Horizontally centered; Vertically centered)
+DIALOG("_ga_subpanelCommunicationSingle"; $form)
+		
+If (OK=1)
+Form.communications[Form.communicationMeanPosition-1]:=$form.com
+		
+Else 
+		
+End if 
+		
+//$refMenus:=New collection
+//$mainMenu:=Create menu
+//$refMenus.push($mainMenu)
+		
+//For each ($type; Form.communicationTypes)
+//APPEND MENU ITEM($mainMenu; $type.label; *)
+//SET MENU ITEM PARAMETER($mainMenu; -1; $type.type)
+//SET MENU ITEM ICON($mainMenu; -1; "path:/RESOURCES/sfw/communication/"+$type.icon)
+//End for each 
+//$choose:=Dynamic pop up menu($mainMenu)
+//For each ($refMenu; $refMenus)
+//RELEASE MENU($refMenu)
+//End for each 
+//Case of 
+//: ($choose="")
+//Else 
+		
+//Form.communications[Form.communicationMeanPosition-1].type:=$choose
+$rebuildDisplayedLB:=True
+		
+CALL FORM(Current form window; "sfw_main_draw_button")
+//End case 
+		
+End if 
+*/
 End case 
 
-//OBJECT SET ENTERABLE(*; "col_@"; False)
-If ($setActivation)
-	OBJECT SET ENTERABLE:C238(*; "col_contact"; $inModification)
-	OBJECT SET ENTERABLE:C238(*; "col_comment"; $inModification)
-End if 
 
 If ($rebuildDisplayedLB)
-	//OBJECT GET SUBFORM CONTAINER SIZE($width_subform; $height_subform)
-	//OBJECT SET COORDINATES(*; "communication_bkgd"; 0; 0; $width_subform; $height_subform)
-	//OBJECT GET COORDINATES(*; "bActions"; $g; $h; $d; $b)
-	//$heightButton:=$b-$h
-	//$verticalMargin:=5
-	//$horizontalMargin:=5
-	//OBJECT SET COORDINATES(*; "bActions"; $horizontalMargin; $height_subform-$verticalMargin-$heightButton; $horizontalMargin+$d-$g; $height_subform-$verticalMargin)
-	//OBJECT SET COORDINATES(*; "lb_communications"; $horizontalMargin; $verticalMargin; $width_subform-$horizontalMargin; $height_subform-$verticalMargin-$heightButton-$verticalMargin)
-	
 	
 	If (Form:C1466#Null:C1517)
 		Form:C1466.lb_communications:=New collection:C1472

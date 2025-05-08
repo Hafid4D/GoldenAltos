@@ -71,13 +71,13 @@ Function pup_Customer()
 	This:C1470.drawPup_Customer()
 	
 	
-	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	
 	This:C1470.contactDetails()
 	This:C1470.drawPup_Customer()
 	OBJECT SET VISIBLE:C603(*; "bActionContact"; Form:C1466.sfw.checkIsInModification())
+	
 	
 	
 Function contactDetails()

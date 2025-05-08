@@ -9,7 +9,7 @@
 	"windowMinHeight": 0,
 	"windowMaxWidth": 32767,
 	"windowMaxHeight": 32767,
-	"rightMargin": 1,
+	"rightMargin": 0,
 	"bottomMargin": 1,
 	"events": [
 		"onLoad",
@@ -192,7 +192,7 @@
 			"objects": {}
 		}
 	],
-	"geometryStamp": 323,
+	"geometryStamp": 324,
 	"method": "method.4dm",
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"editor": {

@@ -2794,7 +2794,7 @@ Function drawHTab()
 				$strokeText:="222222"
 				$hText:=7
 			End if 
-			$withTab:=$tab.width+20
+			$withTab:=$tab.width+25  //20
 			$rect:=SVG_New_rect($svg; $hOffset; $top; $withTab; 27; 5; 5; $stroke; $fill; 1)
 			SVG_SET_ID($rect; "page:"+String:C10($tab.page))
 			$text:=SVG_New_text($svg; $tab.label; $hOffset+($withTab/2); $hText; $fonFamily; 12; $style; Align center:K42:3; $strokeText)

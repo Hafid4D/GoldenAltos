@@ -9,8 +9,8 @@ If (Form:C1466#Null:C1517)
 			$rebuildForm:=True:C214
 			
 			
-		: (FORM Event:C1606.code=On Bound Variable Change:K2:52)
-			$rebuildForm:=False:C215
+			//: (FORM Event.code=On Bound Variable Change)
+			//$rebuildForm:=False
 			
 		: (FORM Event:C1606.objectName="communication_item_type")
 			$rebuildForm:=True:C214

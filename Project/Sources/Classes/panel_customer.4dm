@@ -7,6 +7,7 @@ Function formMethod()
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		Form:C1466.addressBilling:=1
 		Form:C1466.addressShipping:=0
+		This:C1470.LoadAllTabs()
 		
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
@@ -143,6 +144,15 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_CustomerStatus()
 	This:C1470.drawPup_CustomerCarrier()
 	
+	Use (Form:C1466.sfw.entry.panel.pages)
+		Form:C1466.sfw.entry.panel.pages[1].label:="POs ("+String:C10(Form:C1466.lb_POs.length)+")"
+		Form:C1466.sfw.entry.panel.pages[2].label:="Jobs ("+String:C10(Form:C1466.lb_Jobs.length)+")"
+		Form:C1466.sfw.entry.panel.pages[3].label:="Planning ("+String:C10(Form:C1466.lb_Planning.length)+")"
+		Form:C1466.sfw.entry.panel.pages[4].label:="CFM_Receiving ("+String:C10(Form:C1466.lb_CFM_Receiving.length)+")"
+		Form:C1466.sfw.entry.panel.pages[5].label:="Invoices ("+String:C10(Form:C1466.lb_Invoices.length)+")"
+	End use 
+	Form:C1466.sfw.drawHTab()
+	
 	
 Function contactDetails()
 	If (Form:C1466.current_item#Null:C1517)
@@ -154,6 +164,16 @@ Function contactDetails()
 	
 Function loadXXX()
 	//Loads and initializes a list
+	
+	
+Function LoadAllTabs()
+	
+	This:C1470.loadPOs()
+	This:C1470.loadJobs()
+	This:C1470.loadPlannings()
+	This:C1470.loadCFMReceiving()
+	This:C1470.loadInvoices()
+	
 	
 Function LoadApContact()
 	
