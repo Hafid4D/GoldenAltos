@@ -114,23 +114,6 @@
 		<field name="division" uuid="C4DB48A00B34314089C60749A12362E7" type="10" limiting_length="255" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="2A671DFB01797B4DBB6EC2EB4216DB75"/>
 	</table>
-	<table name="CertificationAssignment" uuid="061A7E4F30DD8C46A92C801EB9B9ACC5" id="134">
-		<field name="UUID" uuid="5692BDD57E88304092FB8E31BA284F2D" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="UUID_Staff" uuid="EE187104965B1348AA53D2C2A3B28529" type="10" store_as_UUID="true" never_null="true" id="2"/>
-		<field name="UUID_Certification" uuid="76DD5A5DDBC91146A24857EF820BB589" type="10" store_as_UUID="true" never_null="true" id="3"/>
-		<primary_key field_name="UUID" field_uuid="5692BDD57E88304092FB8E31BA284F2D"/>
-	</table>
-	<table name="Staff" uuid="FD10D10C9E0015458AFF59F988A373BB" id="135">
-		<field name="UUID" uuid="6941AB4C41898A4A9FBF25D5AC27CA2B" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="UUID_User" uuid="4348C8943690B243AFF8327DE0DA1368" type="10" store_as_UUID="true" never_null="true" id="2"/>
-		<field name="civility" uuid="178C1284FE2FFD479D3A8AAD31AF15EF" type="10" limiting_length="255" never_null="true" id="3"/>
-		<field name="firstName" uuid="A922C209EFD24B41BE6B687860BE3C78" type="10" limiting_length="255" never_null="true" id="4"/>
-		<field name="lastName" uuid="30C1F33ACB30EE4CBA2D2DD6218EF823" type="10" limiting_length="255" never_null="true" id="5">
-			<field_extra multi_line="false"/>
-		</field>
-		<field name="inactive" uuid="20CEA4B6D6E1A645AEC79369DCC34F13" type="1" never_null="true" id="6"/>
-		<field name="title" uuid="D3AD88037F66C948AA12662C8D4338C4" type="10" limiting_length="255" never_null="true" id="7"/>
-		<primary_key field_name="UUID" field_uuid="6941AB4C41898A4A9FBF25D5AC27CA2B"/>
 	<table name="CustomerEvent" uuid="0846217DF6043D4ABB7910378EBDF68A" id="11">
 		<field name="UUID" uuid="12101E337C1C8E429DD09A227F3F2A37" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_Customer" uuid="CB00FE253D56FC44B1CF00C8DEBB198C" type="10" store_as_UUID="true" never_null="true" id="2"/>
@@ -624,6 +607,24 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<primary_key field_name="UUID" field_uuid="6A2CE8BD47C44B8EAC7B0C5C14CD21DB"/>
+	</table>
+	<table name="CertificationAssignment" uuid="061A7E4F30DD8C46A92C801EB9B9ACC5" id="134">
+		<field name="UUID" uuid="5692BDD57E88304092FB8E31BA284F2D" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="UUID_Staff" uuid="EE187104965B1348AA53D2C2A3B28529" type="10" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="UUID_Certification" uuid="76DD5A5DDBC91146A24857EF820BB589" type="10" store_as_UUID="true" never_null="true" id="3"/>
+		<primary_key field_name="UUID" field_uuid="5692BDD57E88304092FB8E31BA284F2D"/>
+	</table>
+	<table name="Staff" uuid="FD10D10C9E0015458AFF59F988A373BB" id="135">
+		<field name="UUID" uuid="6941AB4C41898A4A9FBF25D5AC27CA2B" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="UUID_User" uuid="4348C8943690B243AFF8327DE0DA1368" type="10" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="civility" uuid="178C1284FE2FFD479D3A8AAD31AF15EF" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="firstName" uuid="A922C209EFD24B41BE6B687860BE3C78" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="lastName" uuid="30C1F33ACB30EE4CBA2D2DD6218EF823" type="10" limiting_length="255" never_null="true" id="5">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="inactive" uuid="20CEA4B6D6E1A645AEC79369DCC34F13" type="1" never_null="true" id="6"/>
+		<field name="title" uuid="D3AD88037F66C948AA12662C8D4338C4" type="10" limiting_length="255" never_null="true" id="7"/>
+		<primary_key field_name="UUID" field_uuid="6941AB4C41898A4A9FBF25D5AC27CA2B"/>
 	</table>
 	<relation uuid="28F035FB298D4CB6988212AA82A48186" name_Nto1="user" name_1toN="comments" state="1">
 		<related_field kind="source">
