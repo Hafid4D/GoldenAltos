@@ -2,7 +2,7 @@
 /**
 import po & po lines (po <-- po_lines)
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([PurchaseOrder:115])
 	TRUNCATE TABLE:C1051([PurchaseOrderLine:116])
 	TRUNCATE TABLE:C1051([Invoice:4])
@@ -115,7 +115,7 @@ End if
 /**
 import jobs & lot (job <-- lots) & Archives
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([Job:117])
 	TRUNCATE TABLE:C1051([Lot:118])
 	TRUNCATE TABLE:C1051([LotStep:5])
@@ -255,7 +255,7 @@ End if
 /**
 import inventories
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([Inventory:126])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/inventory_export.json")
@@ -326,7 +326,7 @@ End if
 /**
 import step template
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([StepTemplate:121])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/step_template_export.json")
@@ -357,8 +357,9 @@ End if
 /**
 import tools
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([ToolType:122])
+	TRUNCATE TABLE:C1051([Tool:6])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/tools_export.json")
 	
@@ -379,7 +380,9 @@ If (True:C214)
 			For each ($tool; $record.tools)
 				$tool_e:=ds:C1482.Tool.new()
 				
-				$tool_e.name:=$tool
+				$tool_e.name:=Split string:C1554($tool; "*")[0]
+				$tool_e.date:=Date:C102(Split string:C1554($tool; "*")[1])
+				
 				$tool_e.UUID_ToolType:=$toolType_e.UUID
 				
 				$res:=$tool_e.save()
@@ -395,7 +398,7 @@ End if
 /**
 import cetifications
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([Certification:124])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/certifications_export.json")
@@ -419,7 +422,7 @@ End if
 /**
 import specifications
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([Specification:10])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/specification_export.json")
@@ -443,4 +446,36 @@ If (True:C214)
 	End for each 
 End if 
 
-
+/**
+Create user: sfw_User & Staff tables
+**/
+If (True:C214)
+	TRUNCATE TABLE:C1051([sfw_User:16])
+	TRUNCATE TABLE:C1051([Staff:12])
+	
+	$user:=ds:C1482.sfw_User.new()
+	$user.firstName:="Hassan"
+	$user.lastName:="Sribet"
+	$user.login:="hassansribet"
+	$user.accesses:=JSON Parse:C1218("{\"asDesigner\":true,\"password\":{\"temporary\":false,\"sendTemporaryByMail\":false,\"lastReset\":705253775,\"hash\":\"$2b$10$cLpZxBy5QcJCQ0K5DbscjuC3KC2bUblf0l5IJLtByF342d6OFlmFS\",\"lastChange\":705253879}}")
+	$user.asDesigner:=True:C214
+	
+	$res:=$user.save()
+	
+	If (Not:C34($res.success))
+		TRACE:C157
+	End if 
+	
+	$staff:=ds:C1482.Staff.new()
+	$staff.UUID_User:=$user.UUID
+	$staff.firstName:="Hassan"
+	$staff.lastName:="Sribet"
+	$staff.civility:="Mr"
+	$staff.title:="Engineer"
+	
+	$res:=$staff.save()
+	
+	If (Not:C34($res.success))
+		TRACE:C157
+	End if 
+End if 
