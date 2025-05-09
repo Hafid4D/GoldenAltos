@@ -7,6 +7,7 @@ Function formMethod()
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		Form:C1466.addressBilling:=1
 		Form:C1466.addressShipping:=0
+		This:C1470.LoadAllTabs()
 		
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
@@ -49,7 +50,7 @@ Function drawPup_CustomerStatus()
 		$customerStatus:=ds:C1482.CustomerStatus.query("statusID= :1"; Form:C1466.current_item.IDT_status).first() || New object:C1471()
 		$statusName:=$customerStatus.name
 		If ($statusName=Null:C1517)
-			$statusName:="Status"
+			$statusName:=""
 		End if 
 		$color:=cs:C1710.sfw_htmlColor.me.getName($customerStatus.color)
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
@@ -93,7 +94,7 @@ Function drawPup_CustomerCarrier()
 		$customerCarrier:=ds:C1482.CustomerCarrier.query("carrierID= :1"; Form:C1466.current_item.IDT_carrier).first() || New object:C1471()
 		$carrierName:=$customerCarrier.name
 		If ($carrierName=Null:C1517)
-			$carrierName:="Carrier"
+			$carrierName:=""
 		End if 
 		$color:=cs:C1710.sfw_htmlColor.me.getName($customerCarrier.color)
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
@@ -143,6 +144,15 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_CustomerStatus()
 	This:C1470.drawPup_CustomerCarrier()
 	
+	Use (Form:C1466.sfw.entry.panel.pages)
+		Form:C1466.sfw.entry.panel.pages[1].label:="POs ("+String:C10(Form:C1466.lb_POs.length)+")"
+		Form:C1466.sfw.entry.panel.pages[2].label:="Jobs ("+String:C10(Form:C1466.lb_Jobs.length)+")"
+		Form:C1466.sfw.entry.panel.pages[3].label:="Planning ("+String:C10(Form:C1466.lb_Planning.length)+")"
+		Form:C1466.sfw.entry.panel.pages[4].label:="CFM_Receiving ("+String:C10(Form:C1466.lb_CFM_Receiving.length)+")"
+		Form:C1466.sfw.entry.panel.pages[5].label:="Invoices ("+String:C10(Form:C1466.lb_Invoices.length)+")"
+	End use 
+	Form:C1466.sfw.drawHTab()
+	
 	
 Function contactDetails()
 	If (Form:C1466.current_item#Null:C1517)
@@ -155,13 +165,23 @@ Function contactDetails()
 Function loadXXX()
 	//Loads and initializes a list
 	
+	
+Function LoadAllTabs()
+	
+	This:C1470.loadPOs()
+	This:C1470.loadJobs()
+	This:C1470.loadPlannings()
+	This:C1470.loadCFMReceiving()
+	This:C1470.loadInvoices()
+	
+	
 Function LoadApContact()
 	
 	If (Form:C1466.current_item#Null:C1517)
 		Form:C1466.lb_apContact:=New collection:C1472()
 		If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()#Null:C1517)
 			
-			Form:C1466.lb_apContact:=Form:C1466.current_item.rebuidComunications("AP")
+			Form:C1466.lb_apContact:=Form:C1466.current_item.rebuidComunications("AP Contact")
 			This:C1470.displayApContact()
 		End if 
 	End if 
@@ -172,7 +192,7 @@ Function LoadStatusContact()
 		Form:C1466.lb_statusContact:=New collection:C1472()
 		If (Form:C1466.current_item.contacts.query("title=:1"; "Status").first()#Null:C1517)
 			
-			Form:C1466.lb_statusContact:=Form:C1466.current_item.rebuidComunications("Status")
+			Form:C1466.lb_statusContact:=Form:C1466.current_item.rebuidComunications("Status Contact")
 			This:C1470.displayStatusContact()
 		End if 
 	End if 

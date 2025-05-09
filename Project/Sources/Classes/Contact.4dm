@@ -8,7 +8,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry:=cs:C1710.sfw_definitionEntry.new("contact"; ["customerService"]; "Contacts")
 	$entry.setDataclass("Contact")
 	$entry.setDisplayOrder(-700)
-	$entry.setIcon("image/entry/contact-50x50.png")
+	$entry.setIcon("image/entry/contact-white-50x50.png")
 	
 	$entry.setSearchboxField("customer.name"; "placeholder:customerName")
 	

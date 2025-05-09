@@ -29,30 +29,67 @@ local Function rebuildAddress()->$address : Object
 	
 local Function rebuidComunications->$contacts : Collection
 	
-	
-	If (OB Is defined:C1231(Form:C1466.current_item.contactDetails; "addresses"))
+	If (OB Is defined:C1231(Form:C1466.current_item.contactDetails; "communications"))
 		$communications:=Form:C1466.current_item.contactDetails.communications
 	Else 
 		$communications:=New collection:C1472()
 	End if 
 	$contacts:=New collection:C1472()
 	
-	If ($communications#Null:C1517)
+	If (True:C214)
 		
-		For ($i; 0; $communications.length-1)
+		If (Form:C1466#Null:C1517) && (Form:C1466.communicationTypes=Null:C1517)
+			$file:=Folder:C1567(fk resources folder:K87:11).file("sfw/communication/communicationTypes.json")
+			If ($file.exists)
+				$json:=$file.getText()
+				Form:C1466.communicationTypes:=JSON Parse:C1218($json)
+				For each ($type; Form:C1466.communicationTypes)
+					$file:=Folder:C1567(fk resources folder:K87:11).file("sfw/communication/"+$type.icon)
+					$blob:=$file.getContent()
+					BLOB TO PICTURE:C682($blob; $pict; ".png")
+					$type.displayedIcon:=$pict
+				End for each 
+				
+			End if 
+		End if 
+		
+		For each ($mean; $communications)
+			$item:=New object:C1471
+			$item.contact:=$mean.contact
+			$item.comment:=$mean.comment
+			$item.type:=$mean.type || "phone"
+			$indices:=Form:C1466.communicationTypes.indices("type = :1"; $item.type)
+			If ($indices.length>0)
+				$item.displayedType:=Form:C1466.communicationTypes[$indices[0]].label
+				$item.displayedIcon:=Form:C1466.communicationTypes[$indices[0]].displayedIcon
+				
+			Else 
+				$item.displayedType:=_Capitalize_text($mean.type)
+			End if 
+			$contacts.push($item)
+		End for each 
+		
+	Else 
+		
+		
+		
+		If ($communications#Null:C1517)
 			
-			OB GET PROPERTY NAMES:C1232($communications[$i]; arrNames; arrTypes)
-			For ($j; 1; Size of array:C274(arrNames))
-				$object:=New object:C1471
-				$Object.name:=arrNames{$j}
-				$Object.value:=OB Get:C1224($communications[$i]; $Object.name)
-				$contacts.push($Object)
+			For ($i; 0; $communications.length-1)
+				
+				OB GET PROPERTY NAMES:C1232($communications[$i]; arrNames; arrTypes)
+				For ($j; 1; Size of array:C274(arrNames))
+					$object:=New object:C1471
+					$Object.name:=arrNames{$j}
+					$Object.value:=OB Get:C1224($communications[$i]; $Object.name)
+					$contacts.push($Object)
+				End for 
+				
 			End for 
 			
-		End for 
+		End if 
 		
 	End if 
-	
 	
 	
 	//mark:-Callbacks
@@ -82,7 +119,15 @@ local Function _initCommunication()
 	If (This:C1470.contactDetails.communications=Null:C1517)
 		This:C1470.contactDetails.communications:=New collection:C1472
 	End if 
-	
+	If (This:C1470.contactDetails.communications.length=0)
+		$comm:=New object:C1471()
+		$comm.phone:=""
+		$comm.fax:=""
+		$comm.mobile:=""
+		$comm.email:=""
+		$comm.email_cc:=""
+		This:C1470.contactDetails.communications.push($comm)
+	End if 
 	
 local Function _initAddress()
 	// This callback is called when the item is selected in the itemList

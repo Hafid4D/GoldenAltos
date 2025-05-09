@@ -34,6 +34,11 @@
 		<field name="total" uuid="A28F510F0F750441B9DEE242958C2E92" type="6" never_null="true" id="7"/>
 		<field name="due" uuid="071B8BD366061D4385AAC0027D3795BF" type="6" never_null="true" id="8"/>
 		<field name="slip" uuid="ACB341797FCC114CBE36E4B05EACDB06" type="4" never_null="true" id="9"/>
+		<field name="customerId" uuid="E2F0E7C7A9F9304398E7C5A9F58B4012" type="10" limiting_length="255" never_null="true" id="10"/>
+		<field name="amountPaid" uuid="36AB41BFB0B2184EBE059A8C18FB247E" type="6" never_null="true" id="11">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="saleAmount" uuid="ECE4D03D5B04824CA8A4D50031BCB86E" type="6" never_null="true" id="12"/>
 		<primary_key field_name="UUID" field_uuid="D4F459308B965340B21C8A6DE2F2F78F"/>
 	</table>
 	<table name="LotStep" uuid="21C997F4FF841640B547868BE38C05ED" id="5">
@@ -109,13 +114,13 @@
 		<field name="division" uuid="C4DB48A00B34314089C60749A12362E7" type="10" limiting_length="255" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="2A671DFB01797B4DBB6EC2EB4216DB75"/>
 	</table>
-	<table name="CertificationAssignment" uuid="061A7E4F30DD8C46A92C801EB9B9ACC5" id="11">
+	<table name="CertificationAssignment" uuid="061A7E4F30DD8C46A92C801EB9B9ACC5" id="134">
 		<field name="UUID" uuid="5692BDD57E88304092FB8E31BA284F2D" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_Staff" uuid="EE187104965B1348AA53D2C2A3B28529" type="10" store_as_UUID="true" never_null="true" id="2"/>
 		<field name="UUID_Certification" uuid="76DD5A5DDBC91146A24857EF820BB589" type="10" store_as_UUID="true" never_null="true" id="3"/>
 		<primary_key field_name="UUID" field_uuid="5692BDD57E88304092FB8E31BA284F2D"/>
 	</table>
-	<table name="Staff" uuid="FD10D10C9E0015458AFF59F988A373BB" id="12">
+	<table name="Staff" uuid="FD10D10C9E0015458AFF59F988A373BB" id="135">
 		<field name="UUID" uuid="6941AB4C41898A4A9FBF25D5AC27CA2B" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_User" uuid="4348C8943690B243AFF8327DE0DA1368" type="10" store_as_UUID="true" never_null="true" id="2"/>
 		<field name="civility" uuid="178C1284FE2FFD479D3A8AAD31AF15EF" type="10" limiting_length="255" never_null="true" id="3"/>
@@ -126,6 +131,39 @@
 		<field name="inactive" uuid="20CEA4B6D6E1A645AEC79369DCC34F13" type="1" never_null="true" id="6"/>
 		<field name="title" uuid="D3AD88037F66C948AA12662C8D4338C4" type="10" limiting_length="255" never_null="true" id="7"/>
 		<primary_key field_name="UUID" field_uuid="6941AB4C41898A4A9FBF25D5AC27CA2B"/>
+	<table name="CustomerEvent" uuid="0846217DF6043D4ABB7910378EBDF68A" id="11">
+		<field name="UUID" uuid="12101E337C1C8E429DD09A227F3F2A37" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="UUID_Customer" uuid="CB00FE253D56FC44B1CF00C8DEBB198C" type="10" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="UUID_EventType" uuid="698D73D9F68090418CB94E860829F882" type="10" store_as_UUID="true" never_null="true" id="3">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="UUID_User" uuid="F0D4AF95207D2642951A363048285FCE" type="10" store_as_UUID="true" never_null="true" id="4">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="stmp" uuid="7DEB8FFE91414B43AF072864CB8146D0" type="4" never_null="true" id="5">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="moreData" uuid="A9A7FF728072ED4CA51769B716DD96F3" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
+		<primary_key field_name="UUID" field_uuid="12101E337C1C8E429DD09A227F3F2A37"/>
+	</table>
+	<table name="ContactEvent" uuid="756B4D1A24E97648A2025B11766FF873" id="12">
+		<field name="UUID" uuid="E4C77F026FEDD243992C221D3EF12291" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="UUID_Contact" uuid="60124B20690F5747A2BBC8F70DDA3EC8" type="10" store_as_UUID="true" never_null="true" id="2">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="UUID_EventType" uuid="FCB619F3AFBA5A429F9E00016BDC214C" type="10" store_as_UUID="true" never_null="true" id="3">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="UUID_User" uuid="05D4F1C022E68C4CA9162BF3CCD702A0" type="10" store_as_UUID="true" never_null="true" id="4">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="stmp" uuid="67984A598B290F45BE743E92EC8910AB" type="4" never_null="true" id="5">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="moreData" uuid="FF2764DF1DDBC24A9C26972DA89A4793" type="21" blob_switch_size="2147483647" never_null="true" id="6">
+			<field_extra multi_line="false"/>
+		</field>
+		<primary_key field_name="UUID" field_uuid="E4C77F026FEDD243992C221D3EF12291"/>
 	</table>
 	<table name="sfw_Country" uuid="4C0E0D9D33D246BAB1FACEEC19ABF144" id="15" prevent_journaling="true">
 		<field name="UUID" uuid="FDA14E8A26704F7091EC668E332108FB" type="10" unique="true" autogenerate="true" store_as_UUID="true" id="1"/>
@@ -317,6 +355,7 @@
 		<field name="timeBillingRate" uuid="0B39D6A1C0EBC141886CFED624EA267B" type="10" limiting_length="255" never_null="true" id="19"/>
 		<field name="timeBilling" uuid="8FB9356998351D44AE1BB4A77C1C5DB0" type="1" never_null="true" id="20"/>
 		<field name="description" uuid="E2E6A8AC0C569C44B38ECE9A7F1E68C0" type="10" limiting_length="255" never_null="true" id="21"/>
+		<field name="log_date" uuid="EDECD6CDEB33AA4EAFAC878522C7B8BE" type="8" never_null="true" id="22"/>
 		<primary_key field_name="UUID" field_uuid="9C187AB4BBD84246AF62E935FF20415E"/>
 	</table>
 	<table name="PurchaseOrderLine" uuid="2CC1E163267E4DFE808464C271CC4C9F" id="116">
@@ -377,6 +416,7 @@
 		<field name="invoiceDate" uuid="AEB29DFEDBC2BB459951D70176EE4977" type="8" never_null="true" id="27"/>
 		<field name="lastShipDate" uuid="8B39A43798850E449C946B0ECDB60979" type="8" never_null="true" id="28"/>
 		<field name="archivedDate" uuid="A310D42571F1E9449B87A88E35E1734E" type="8" never_null="true" id="29"/>
+		<field name="pr_qualifier" uuid="C05E81445733BF4399D0F30ABA121A1D" type="10" limiting_length="255" never_null="true" id="30"/>
 		<primary_key field_name="UUID" field_uuid="D70DED62813D485DA8CFB0CFD1FF994C"/>
 	</table>
 	<table name="Lot" uuid="67220A81398C4000A84C1F180E368020" id="118">
@@ -499,6 +539,8 @@
 		<field name="division" uuid="3B36AA8AEA145345BFD60A6766EE5D0A" type="10" limiting_length="255" never_null="true" id="18"/>
 		<field name="totalCost" uuid="C2F5F2B701CD3341A9EC72DD48CCC78E" type="6" never_null="true" id="19"/>
 		<field name="property" uuid="CC532A7D1109F548B5ED16D57A454170" type="4" never_null="true" id="20"/>
+		<field name="originalQty" uuid="1625C64236086A498DF44C365A2DAF9F" type="10" limiting_length="255" never_null="true" id="21"/>
+		<field name="availableQty" uuid="D23A44CD0E3D3C4D80014A343D5FC1E4" type="10" limiting_length="255" never_null="true" id="22"/>
 		<primary_key field_name="UUID" field_uuid="F8D9EC71ECF843689AA0D416563422DC"/>
 	</table>
 	<table name="InventoryPull" uuid="B0A466FC99334B96B5FE810BAE186DC4" id="127">
@@ -1171,6 +1213,11 @@
 			<table_ref uuid="E82BBE2952C449BE995135760C788E8F" name="sfw_Comment"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="600ACB50FB7D97468EEBEA94AB7BB795" type="7">
+		<field_ref uuid="E4C77F026FEDD243992C221D3EF12291" name="UUID">
+			<table_ref uuid="756B4D1A24E97648A2025B11766FF873" name="ContactEvent"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="6718C9EE46DA4250ADE66AB7BAA72EEB" type="7">
 		<field_ref uuid="8EFDF2BE837542E3849ECB064F30C5BD" name="UUID">
 			<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
@@ -1364,6 +1411,11 @@
 	<index kind="regular" uuid="CB0ACD854FAC41D28B8D5CAFA97ACD43" type="3">
 		<field_ref uuid="DCE62294319F4F3BBFEAAD4987F584A7" name="UUID_Job">
 			<table_ref uuid="67220A81398C4000A84C1F180E368020" name="Lot"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="CF02C199CE74CF4EA5346EF478379634" type="7">
+		<field_ref uuid="12101E337C1C8E429DD09A227F3F2A37" name="UUID">
+			<table_ref uuid="0846217DF6043D4ABB7910378EBDF68A" name="CustomerEvent"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="D4CC8B0748494261824D0B7ABD37C4BD" type="1">

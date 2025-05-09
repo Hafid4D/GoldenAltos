@@ -71,28 +71,31 @@ Function pup_Customer()
 	This:C1470.drawPup_Customer()
 	
 	
-	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
-	If (Form:C1466.current_item#Null:C1517)
-		$visibility_bool:=(Form:C1466.current_item.title#"Status") && (Form:C1466.current_item.title#"AP")
-	Else 
-		$visibility_bool:=False:C215
-	End if 
 	
-	OBJECT SET VISIBLE:C603(*; "lbl_address"; $visibility_bool)
-	OBJECT SET VISIBLE:C603(*; "header_bkgd2"; $visibility_bool)
-	OBJECT SET VISIBLE:C603(*; "subFormAddress"; $visibility_bool)
-	
-	OBJECT SET VISIBLE:C603(*; "bActionContact"; Form:C1466.sfw.checkIsInModification())
 	This:C1470.contactDetails()
 	This:C1470.drawPup_Customer()
+	OBJECT SET VISIBLE:C603(*; "bActionContact"; Form:C1466.sfw.checkIsInModification())
+	
+	
 	
 Function contactDetails()
 	If (Form:C1466.current_item#Null:C1517)
 		Form:C1466.subFormAddress:=New object:C1471()
 		Form:C1466.subFormAddress.address:=Form:C1466.current_item.rebuildAddress()
 		Form:C1466.subFormAddress.situation:=Form:C1466.situation
+		
+		Form:C1466.subFormCommunication:=New object:C1471
+		If (Form:C1466.current_item.contactDetails.communications=Null:C1517)
+			Form:C1466.current_item.contactDetails.communications:=New collection:C1472
+		End if 
+		
+		Form:C1466.subFormCommunication.communications:=Form:C1466.current_item.contactDetails.communications
+		Form:C1466.subFormCommunication.situation:=Form:C1466.situation
+		Form:C1466.subFormCommunication:=Form:C1466.subFormCommunication
+		
+		
 	End if 
 	
 	
@@ -112,6 +115,7 @@ Function loadContact()
 	End if 
 	
 Function displayContact()
+	
 	
 	OBJECT SET ENTERABLE:C238(*; "entryField_contact@"; False:C215)
 	
@@ -157,6 +161,12 @@ Function bActionContact()
 	
 	Case of 
 		: ($choose="--addContact")
+			
+			//$refWindow:=Open form window("sfw_subpanel_communicationSingle"; Modal form dialog box)
+			$winRef:=Open form window:C675("sfw_subpanel_communicationSingle"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("sfw_subpanel_communicationSingle"; $form)
+			CLOSE WINDOW:C154($winRef)
+			
 			
 			$contact:=New object:C1471()
 			

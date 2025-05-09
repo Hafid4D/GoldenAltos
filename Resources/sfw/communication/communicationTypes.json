@@ -2,5 +2,6 @@
     {"type":"phone", "label":"Phone", "icon" :"phone.png"},
     {"type":"mobile", "label":"Mobile", "icon" :"mobile.png"},
     {"type":"mail", "label":"e-Mail", "icon" :"mail.png"},
-    {"type":"webSite", "label":"Web site", "icon" :"web.png"}
+    {"type":"webSite", "label":"Web site", "icon" :"web.png"},
+    {"type":"fax", "label":"Fax", "icon" :"fax.png"}
 ]
