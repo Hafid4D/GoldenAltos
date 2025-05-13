@@ -150,7 +150,44 @@
 	</table>
 	<table name="Equipment" uuid="FCE2D049B8944E4CA0AAB0152A549718" id="13">
 		<field name="UUID" uuid="576820214AE49648A0CC6ACA3DD19531" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="assignedID" uuid="28F9AB3445234D4987BA5B798C52930D" type="10" limiting_length="40" never_null="true" id="2"/>
+		<field name="locationID" uuid="98083B716AB37741AB6E5024E6D44BFD" type="3" never_null="true" id="3">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="model" uuid="B32B6631D46552418CA3ABAB9D7C7B45" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="serialNumber" uuid="5ADC0E8EA3A0B54D93B51D1542F8ECA6" type="10" limiting_length="255" never_null="true" id="5">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="nextCalDate" uuid="3C181EBEC0249D4693DAB491D07079B8" type="8" never_null="true" id="6"/>
+		<field name="lastCalDate" uuid="2639ED00AF85214E95F4F9DA2ABF4CDF" type="8" never_null="true" id="7"/>
+		<field name="nextPMDate" uuid="5363E39C2EAFC044B2BBDFD4EA440A64" type="8" never_null="true" id="8"/>
+		<field name="lastPMDate" uuid="577B586A7B4F40449D59FAD4ECD3B569" type="8" never_null="true" id="9"/>
+		<field name="notAtSite" uuid="28FD852F9ECAF14EB84BA9121F84B607" type="1" never_null="true" id="10">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="division" uuid="5660AB93B3B7BC4B9FA7BE938A9184A9" type="10" limiting_length="255" never_null="true" id="11">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="typeID" uuid="12709AFE414A0040B9EB5EF8A4D02329" type="3" never_null="true" id="12">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="status" uuid="EEDCF8C23859B5439799B45B0247BD8B" type="10" limiting_length="255" never_null="true" id="13">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="tech" uuid="E4B79FCDF4CD3A42A3F9C1792A67DA6D" type="10" limiting_length="255" never_null="true" id="14">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="description" uuid="8A1CFDC91BDD3545A040FE76E0EDA77A" type="10" limiting_length="255" never_null="true" id="15">
+			<field_extra multi_line="false"/>
+		</field>
 		<primary_key field_name="UUID" field_uuid="576820214AE49648A0CC6ACA3DD19531"/>
+	</table>
+	<table name="EquipmentType" uuid="621D3EE5BA919C468D780FC4B70A2B66" id="14">
+		<field name="UUID" uuid="DA6A725621642F468006BD1281612C84" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="typeID" uuid="E0DDD885298E9E43AEF1C57F75A4F120" type="3" never_null="true" id="2"/>
+		<field name="name" uuid="FD13DEB41F06E04A94D7EF62F8971EFF" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="color" uuid="0943C1A79DBC9C4EB56AA61701A6C9D7" type="10" limiting_length="255" never_null="true" id="4"/>
+		<primary_key field_name="UUID" field_uuid="DA6A725621642F468006BD1281612C84"/>
 	</table>
 	<table name="sfw_Country" uuid="4C0E0D9D33D246BAB1FACEEC19ABF144" id="15" prevent_journaling="true">
 		<field name="UUID" uuid="FDA14E8A26704F7091EC668E332108FB" type="10" unique="true" autogenerate="true" store_as_UUID="true" id="1"/>
@@ -186,6 +223,17 @@
 		<field name="ident" uuid="0FA173C6924748D4B87BF825693844FA" type="10" limiting_length="255" never_null="true" id="2"/>
 		<field name="currentValue" uuid="2FF105F7F7134B568F0024F73D7627A4" type="4" never_null="true" id="3"/>
 		<primary_key field_name="UUID" field_uuid="FE8325F6DB5E4D85A5D0C28F5B6584F1"/>
+	</table>
+	<table name="EquipmentLocation" uuid="3758196088EF454FAE6DE1AA847DFBAF" id="19">
+		<field name="UUID" uuid="52CADD4F2C4DE44B83A36B7204B3ED3B" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="locationID" uuid="D906482602B50B40B45E647CBE9C8D01" type="3" never_null="true" id="2"/>
+		<field name="name" uuid="64CA7EB6135A1F47AFC036E2FF5DCA50" type="10" limiting_length="255" never_null="true" id="3">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="color" uuid="E96386FA677555469EDE90EFEC728FC5" type="10" limiting_length="255" never_null="true" id="4">
+			<field_extra multi_line="false"/>
+		</field>
+		<primary_key field_name="UUID" field_uuid="52CADD4F2C4DE44B83A36B7204B3ED3B"/>
 	</table>
 	<table name="sfw_Setting" uuid="05967663C56F44398D96379354ABCC89" id="30">
 		<field name="UUID" uuid="5D20BF5E221E4AB5AA75260DDD551A9D" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -1133,6 +1181,11 @@
 			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="25D93B0B144C2147B7B4C498A7104C30" type="7">
+		<field_ref uuid="E0DDD885298E9E43AEF1C57F75A4F120" name="typeID">
+			<table_ref uuid="621D3EE5BA919C468D780FC4B70A2B66" name="EquipmentType"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="26B5486B90AD42B8B4DE300E4F87D8DE" type="3">
 		<field_ref uuid="CACC091D0D6247B385C4B1F8772EE52B" name="UUID_DocumentFolder">
 			<table_ref uuid="5E1C3E25225441628E3DBCF58BFAABF4" name="sfw_Document"/>
@@ -1373,6 +1426,11 @@
 			<table_ref uuid="7A8F1179566C46A6AB8E4B04DD19B496" name="StepTemplateCertification"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="AE3C51D88ED2C44F90C5B6FDA6E32C30" type="7">
+		<field_ref uuid="52CADD4F2C4DE44B83A36B7204B3ED3B" name="UUID">
+			<table_ref uuid="3758196088EF454FAE6DE1AA847DFBAF" name="EquipmentLocation"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="B761A9A87A1A4180B6093B39B6B17544" type="7">
 		<field_ref uuid="37676CD94E8B423595ED98B5C0E9CF89" name="UUID">
 			<table_ref uuid="96D1CE81460A4F75B3F4275138C8F778" name="Customer"/>
@@ -1451,6 +1509,11 @@
 	<index kind="regular" unique_keys="true" uuid="DD8B8F9C843946ACB59CD44A8F78E0EC" type="1">
 		<field_ref uuid="C368AB256E3246BAAA4F0BA10076F44E" name="UUID">
 			<table_ref uuid="0A7AAD6A6AAB448E9F91A0CF0CC592C6" name="sfw_SchedulerLog"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="DF101E504D31A440A5BFA5252EFB403E" type="7">
+		<field_ref uuid="DA6A725621642F468006BD1281612C84" name="UUID">
+			<table_ref uuid="621D3EE5BA919C468D780FC4B70A2B66" name="EquipmentType"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="E1A0D064FFAC4E89A436CFA96601DB89" type="1">
