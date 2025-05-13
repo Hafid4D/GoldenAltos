@@ -148,6 +148,10 @@
 		</field>
 		<primary_key field_name="UUID" field_uuid="E4C77F026FEDD243992C221D3EF12291"/>
 	</table>
+	<table name="Equipment" uuid="FCE2D049B8944E4CA0AAB0152A549718" id="13">
+		<field name="UUID" uuid="576820214AE49648A0CC6ACA3DD19531" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<primary_key field_name="UUID" field_uuid="576820214AE49648A0CC6ACA3DD19531"/>
+	</table>
 	<table name="sfw_Country" uuid="4C0E0D9D33D246BAB1FACEEC19ABF144" id="15" prevent_journaling="true">
 		<field name="UUID" uuid="FDA14E8A26704F7091EC668E332108FB" type="10" unique="true" autogenerate="true" store_as_UUID="true" id="1"/>
 		<field name="name" uuid="FEDEAAD3F9A64D8AA7049B2EA9699D2C" type="10" limiting_length="255" id="2"/>
@@ -1167,6 +1171,11 @@
 	<index kind="regular" unique_keys="true" uuid="47FC9B4F83C04BA89A6BB25173CF1D38" type="7">
 		<field_ref uuid="9C187AB4BBD84246AF62E935FF20415E" name="UUID">
 			<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="48A6882E9F11AD4C9E7D308EA4083B1B" type="7">
+		<field_ref uuid="576820214AE49648A0CC6ACA3DD19531" name="UUID">
+			<table_ref uuid="FCE2D049B8944E4CA0AAB0152A549718" name="Equipment"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="494707026F4445E39B210152D5EFBFAA" type="3">
