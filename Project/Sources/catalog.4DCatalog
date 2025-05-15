@@ -866,7 +866,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="9DD65FFAABDA4C1B911028DA92A13CAD" name_Nto1="Link_22" name_1toN="Link_22_return" state="1">
+	<relation uuid="9DD65FFAABDA4C1B911028DA92A13CAD" name_Nto1="inventory" name_1toN="pulls" state="1">
 		<related_field kind="source">
 			<field_ref uuid="1817281659A145608A712CCE5410B8A8" name="UUID_Inventory">
 				<table_ref uuid="B0A466FC99334B96B5FE810BAE186DC4" name="InventoryPull"/>

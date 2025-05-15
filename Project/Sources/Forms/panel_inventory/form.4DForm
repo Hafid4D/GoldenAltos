@@ -118,18 +118,18 @@
 				"header_bkgd2": {
 					"type": "rectangle",
 					"top": 118,
-					"left": 57,
+					"left": 5,
 					"width": 848,
 					"height": 30,
 					"sizingX": "grow",
 					"fill": "#A2C6D8",
 					"stroke": "transparent",
-					"right": 905
+					"right": 853
 				},
 				"lbl_dates": {
 					"type": "text",
 					"top": 125,
-					"left": 64,
+					"left": 12,
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
@@ -140,18 +140,18 @@
 				"header_bkgd4": {
 					"type": "rectangle",
 					"top": 151,
-					"left": 57,
+					"left": 5,
 					"width": 848,
 					"height": 419,
 					"sizingX": "grow",
 					"fill": "#E4E4E4",
 					"stroke": "transparent",
-					"right": 905
+					"right": 853
 				},
 				"label_0_15": {
 					"type": "text",
 					"top": 159,
-					"left": 65,
+					"left": 13,
 					"width": 100,
 					"height": 17,
 					"stroke": "#808080",
@@ -160,7 +160,7 @@
 				"entryField_partNum": {
 					"type": "input",
 					"top": 159,
-					"left": 185,
+					"left": 133,
 					"width": 320,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.partNum",
@@ -180,7 +180,7 @@
 				"label_0_2": {
 					"type": "text",
 					"top": 183,
-					"left": 65,
+					"left": 13,
 					"width": 100,
 					"height": 17,
 					"stroke": "#808080",
@@ -189,7 +189,7 @@
 				"entryField_description": {
 					"type": "input",
 					"top": 183,
-					"left": 185,
+					"left": 133,
 					"width": 320,
 					"height": 64,
 					"dataSource": "Form:C1466.current_item.description",
@@ -209,7 +209,7 @@
 				"label_0_4": {
 					"type": "text",
 					"top": 254,
-					"left": 65,
+					"left": 13,
 					"width": 100,
 					"height": 17,
 					"stroke": "#808080",
@@ -218,7 +218,7 @@
 				"entryField_lotNumber": {
 					"type": "input",
 					"top": 254,
-					"left": 185,
+					"left": 133,
 					"width": 320,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.lotNumber",
@@ -238,7 +238,7 @@
 				"label_0_6": {
 					"type": "text",
 					"top": 278,
-					"left": 65,
+					"left": 13,
 					"width": 100,
 					"height": 17,
 					"stroke": "#808080",
@@ -247,7 +247,7 @@
 				"entryField_dateIn": {
 					"type": "input",
 					"top": 278,
-					"left": 185,
+					"left": 133,
 					"width": 80,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.dateIn",
@@ -268,7 +268,7 @@
 				"label_0_7": {
 					"type": "text",
 					"top": 302,
-					"left": 65,
+					"left": 13,
 					"width": 100,
 					"height": 17,
 					"stroke": "#808080",
@@ -277,7 +277,7 @@
 				"entryField_expirationDate": {
 					"type": "input",
 					"top": 302,
-					"left": 185,
+					"left": 133,
 					"width": 80,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.expirationDate",
@@ -298,7 +298,7 @@
 				"label_0_8": {
 					"type": "text",
 					"top": 326,
-					"left": 65,
+					"left": 13,
 					"width": 100,
 					"height": 17,
 					"stroke": "#808080",
@@ -307,7 +307,7 @@
 				"entryField_qtyInStock": {
 					"type": "input",
 					"top": 326,
-					"left": 185,
+					"left": 133,
 					"width": 80,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.qtyInStock",
@@ -327,7 +327,7 @@
 				"label_0_9": {
 					"type": "text",
 					"top": 350,
-					"left": 65,
+					"left": 13,
 					"width": 100,
 					"height": 17,
 					"stroke": "#808080",
@@ -336,7 +336,7 @@
 				"entryField_unitCost": {
 					"type": "input",
 					"top": 350,
-					"left": 185,
+					"left": 133,
 					"width": 80,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.unitCost",
@@ -356,7 +356,7 @@
 				"label_0_10": {
 					"type": "text",
 					"top": 374,
-					"left": 65,
+					"left": 13,
 					"width": 100,
 					"height": 17,
 					"stroke": "#808080",
@@ -365,7 +365,7 @@
 				"entryField_binLocation": {
 					"type": "input",
 					"top": 374,
-					"left": 185,
+					"left": 133,
 					"width": 320,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.binLocation",
@@ -385,7 +385,7 @@
 				"label_0_11": {
 					"type": "text",
 					"top": 398,
-					"left": 65,
+					"left": 13,
 					"width": 100,
 					"height": 17,
 					"stroke": "#808080",
@@ -394,7 +394,7 @@
 				"entryField_recdBy": {
 					"type": "input",
 					"top": 398,
-					"left": 185,
+					"left": 133,
 					"width": 320,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.recdBy",
@@ -414,7 +414,7 @@
 				"label_0_12": {
 					"type": "text",
 					"top": 422,
-					"left": 65,
+					"left": 13,
 					"width": 100,
 					"height": 17,
 					"stroke": "#808080",
@@ -423,7 +423,7 @@
 				"entryField_division": {
 					"type": "input",
 					"top": 422,
-					"left": 185,
+					"left": 133,
 					"width": 320,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.division",
@@ -443,7 +443,7 @@
 				"label_0_13": {
 					"type": "text",
 					"top": 446,
-					"left": 65,
+					"left": 13,
 					"width": 100,
 					"height": 17,
 					"stroke": "#808080",
@@ -452,7 +452,7 @@
 				"entryField_totalCost": {
 					"type": "input",
 					"top": 446,
-					"left": 185,
+					"left": 133,
 					"width": 320,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.totalCost",
@@ -472,7 +472,7 @@
 				"label_0_14": {
 					"type": "text",
 					"top": 470,
-					"left": 65,
+					"left": 13,
 					"width": 100,
 					"height": 17,
 					"stroke": "#808080",
@@ -481,7 +481,7 @@
 				"entryField_property": {
 					"type": "input",
 					"top": 470,
-					"left": 185,
+					"left": 133,
 					"width": 320,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.property",
@@ -502,7 +502,7 @@
 				"label_0_18": {
 					"type": "text",
 					"top": 326,
-					"left": 305,
+					"left": 253,
 					"width": 100,
 					"height": 17,
 					"stroke": "#808080",
@@ -511,7 +511,7 @@
 				"entryField_inventoryUnits": {
 					"type": "input",
 					"top": 326,
-					"left": 425,
+					"left": 373,
 					"width": 80,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.inventoryUnits",
@@ -531,7 +531,7 @@
 				"label_0_19": {
 					"type": "text",
 					"top": 350,
-					"left": 305,
+					"left": 253,
 					"width": 100,
 					"height": 17,
 					"stroke": "#808080",
@@ -540,7 +540,7 @@
 				"entryField_currency": {
 					"type": "input",
 					"top": 350,
-					"left": 425,
+					"left": 373,
 					"width": 80,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.currency",
@@ -562,12 +562,12 @@
 		},
 		{
 			"objects": {
-				"lb_poLinesItems": {
+				"lb_pulls": {
 					"type": "listbox",
-					"left": 57,
-					"top": 143,
-					"width": 842,
-					"height": 401,
+					"left": 107,
+					"top": 119,
+					"width": 782,
+					"height": 440,
 					"events": [
 						"onClick",
 						"onHeaderClick",
@@ -579,6 +579,8 @@
 					"visibility": "visible",
 					"dataSource": "Form:C1466.lb_pulls",
 					"alternateFill": "#F7F9FC",
+					"right": 889,
+					"bottom": 559,
 					"columns": [
 						{
 							"header": {
@@ -591,7 +593,9 @@
 							"dataSource": "This:C1470.division",
 							"footer": {
 								"name": "Footer8"
-							}
+							},
+							"resizable": false,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -603,8 +607,10 @@
 							"footer": {
 								"name": "Footer1"
 							},
-							"width": 180,
-							"dataSource": "This:C1470.partNum"
+							"width": 150,
+							"dataSource": "This:C1470.partNum",
+							"resizable": false,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -617,7 +623,9 @@
 								"name": "Footer2"
 							},
 							"width": 175,
-							"dataSource": "This:C1470.inventory.stockNum"
+							"dataSource": "This:C1470.inventory.stockNum",
+							"resizable": true,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -630,7 +638,9 @@
 								"name": "Footer3"
 							},
 							"width": 80,
-							"dataSource": "This:C1470.jobNumber"
+							"dataSource": "This:C1470.jobNumber",
+							"resizable": false,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -642,11 +652,13 @@
 							"footer": {
 								"name": "Footer4"
 							},
-							"width": 100,
+							"width": 90,
 							"dataSource": "This:C1470.lotNumber",
 							"dataSourceTypeHint": "date",
 							"textAlign": "center",
-							"dateFormat": "short"
+							"dateFormat": "short",
+							"resizable": false,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -662,7 +674,9 @@
 							"dataSource": "This:C1470.currency",
 							"dataSourceTypeHint": "date",
 							"textAlign": "center",
-							"dateFormat": "short"
+							"dateFormat": "short",
+							"resizable": false,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -675,7 +689,9 @@
 								"name": "Footer6"
 							},
 							"width": 80,
-							"dataSource": "This:C1470.datePulled"
+							"dataSource": "This:C1470.datePulled",
+							"resizable": false,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -687,25 +703,28 @@
 							"footer": {
 								"name": "Footer7"
 							},
-							"width": 80,
-							"dataSource": "This:C1470.qty"
+							"width": 60,
+							"dataSource": "This:C1470.qty",
+							"resizable": false,
+							"enterable": false
 						}
 					]
 				},
-				"Text1": {
-					"type": "text",
-					"text": "Inventory Pulls",
-					"top": 119,
-					"left": 57,
-					"width": 224,
-					"height": 17,
-					"fontWeight": "bold"
+				"rec_bkgd_2": {
+					"type": "rectangle",
+					"top": 118,
+					"left": 5,
+					"width": 100,
+					"height": 442,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
 				},
-				"bActionLineItems": {
+				"bActionPulls": {
 					"type": "button",
 					"text": "Actions",
-					"top": 549,
-					"left": 56,
+					"top": 535,
+					"left": 16,
 					"width": 80,
 					"height": 21,
 					"events": [
@@ -715,13 +734,23 @@
 					"popupPlacement": "linked",
 					"icon": "/RESOURCES/sfw/image/picto/gear.png",
 					"textPlacement": "right",
-					"method": "ObjectMethods/bActionLineItems.4dm",
+					"method": "ObjectMethods/bActionPulls.4dm",
 					"visibility": "visible"
+				},
+				"Text": {
+					"type": "text",
+					"text": "Inv. Pulls",
+					"top": 124,
+					"left": 9,
+					"width": 88,
+					"height": 15,
+					"fontWeight": "bold",
+					"fontSize": 11
 				}
 			}
 		}
 	],
-	"geometryStamp": 308,
+	"geometryStamp": 339,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

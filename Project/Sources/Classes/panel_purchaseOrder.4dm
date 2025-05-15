@@ -1,6 +1,9 @@
 singleton Class constructor
 	//It's a singleton class
 	
+Function _activate_save_cancel_button()
+	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+	
 Function formMethod()
 	//This function manages the main logic for updating and refreshing the form
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
@@ -70,6 +73,74 @@ Function pup_jobsStatus()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
+	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	
+	Case of 
+		: (FORM Get current page:C276(*)=1)  // main
+			$minHeight:=566
+			
+			OBJECT GET COORDINATES:C663(*; "filler_hos"; $left; $top; $right; $bottom)
+			
+			$offset:=4
+			
+			OBJECT SET COORDINATES:C1248(*; "filler_hos"; $left; $top; $widthSubform-$offset; $heightSubform-$offset)
+			
+			OBJECT SET VISIBLE:C603(*; "filler_ver"; ($heightSubform>$minHeight))
+			
+			If ($heightSubform>$minHeight)
+				OBJECT GET COORDINATES:C663(*; "filler_ver"; $left; $top; $right; $bottom)
+				
+				OBJECT SET COORDINATES:C1248(*; "filler_ver"; $left; $top; $right; $heightSubform-$offset)
+			End if 
+			
+		: (FORM Get current page:C276(*)=2)  // po lines
+			OBJECT GET COORDINATES:C663(*; "rec_bkgd_2"; $left; $top; $right; $bottom)
+			OBJECT GET COORDINATES:C663(*; "lb_poLinesItems"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			OBJECT GET COORDINATES:C663(*; "bActionLineItems"; $left_bAc; $top_bAc; $right_bAc; $bottom_bAc)
+			
+			$offset:=4
+			$offset_bAc:=10
+			
+			$height_bAc:=$bottom_bAc-$top_bAc
+			
+			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_2"; $left; $top; $right; $heightSubform-$offset)
+			OBJECT SET COORDINATES:C1248(*; "lb_poLinesItems"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			OBJECT SET COORDINATES:C1248(*; "bActionLineItems"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
+			
+		: (FORM Get current page:C276(*)=3)  // jobs
+			OBJECT GET COORDINATES:C663(*; "rec_bkgd_3"; $left; $top; $right; $bottom)
+			OBJECT GET COORDINATES:C663(*; "lb_jobs"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			
+			$offset:=4
+			$offset_bAc:=10
+			
+			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_3"; $left; $top; $right; $heightSubform-$offset)
+			OBJECT SET COORDINATES:C1248(*; "lb_jobs"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			
+		: (FORM Get current page:C276(*)=4)  // lots
+			OBJECT GET COORDINATES:C663(*; "rec_bkgd_4"; $left; $top; $right; $bottom)
+			OBJECT GET COORDINATES:C663(*; "lb_lots"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			
+			$offset:=4
+			$offset_bAc:=10
+			
+			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_4"; $left; $top; $right; $heightSubform-$offset)
+			OBJECT SET COORDINATES:C1248(*; "lb_lots"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			
+		: (FORM Get current page:C276(*)=5)  // invoices
+			OBJECT GET COORDINATES:C663(*; "rec_bkgd_5"; $left; $top; $right; $bottom)
+			OBJECT GET COORDINATES:C663(*; "lb_invoices"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			OBJECT GET COORDINATES:C663(*; "bActionInvoices"; $left_bAc; $top_bAc; $right_bAc; $bottom_bAc)
+			
+			$offset:=4
+			$offset_bAc:=10
+			
+			$height_bAc:=$bottom_bAc-$top_bAc
+			
+			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_5"; $left; $top; $right; $heightSubform-$offset)
+			OBJECT SET COORDINATES:C1248(*; "lb_invoices"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			OBJECT SET COORDINATES:C1248(*; "bActionInvoices"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
+	End case 
 	
 Function loadDpAddress()
 	Form:C1466.dpAddress:=New object:C1471(\
@@ -79,7 +150,7 @@ Function loadDpAddress()
 		)
 	
 Function loadPoLineItems()
-	Form:C1466.lb_lineItems:=Form:C1466.current_item.lineItems
+	Form:C1466.lb_lineItems:=ds:C1482.PurchaseOrderLine.query("UUID_PurchaseOrder = :1"; Form:C1466.current_item.UUID)
 	
 Function loadPoJobs()
 	Form:C1466.lb_jobs:=Form:C1466.current_item.lineItems.job
@@ -88,7 +159,7 @@ Function loadLots()
 	Form:C1466.lb_lots:=Form:C1466.current_item.lineItems.job.lots
 	
 Function loadInvoices()
-	Form:C1466.lb_invoices:=Form:C1466.current_item.invoices
+	Form:C1466.lb_invoices:=ds:C1482.Invoice.query("UUID_PurchaseOrder = :1"; Form:C1466.current_item.UUID)
 	
 Function bActionLineItems()
 	//Manages actions: add, or remove, using dynamic menus and modification checks
@@ -117,7 +188,7 @@ Function bActionLineItems()
 				
 				$form:=New object:C1471("poLine"; $lineItem)
 				
-				$winRef:=Open form window:C675("createPoLine"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+				$winRef:=Open form window:C675("createPoLine"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
 				DIALOG:C40("createPoLine"; $form)
 				CLOSE WINDOW:C154($winRef)
 				
@@ -127,15 +198,15 @@ Function bActionLineItems()
 					$res:=$lineItem.save()
 					
 					If ($res.success)
-						Form:C1466.lb_lineItems:=ds:C1482.PurchaseOrderLine.query("UUID_PurchaseOrder = :1"; Form:C1466.current_item.UUID)
-						Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+						This:C1470.loadPoLineItems()
+						This:C1470._activate_save_cancel_button()
 					End if 
 				End if 
 				
 			: ($choose="--edit")
 				$form:=New object:C1471("poLine"; Form:C1466.selectedPoLine)
 				
-				$winRef:=Open form window:C675("createPoLine"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+				$winRef:=Open form window:C675("createPoLine"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
 				DIALOG:C40("createPoLine"; $form)
 				CLOSE WINDOW:C154($winRef)
 				
@@ -145,8 +216,8 @@ Function bActionLineItems()
 					$res:=$lineItem.save()
 					
 					If ($res.success)
-						Form:C1466.lb_lineItems:=ds:C1482.PurchaseOrderLine.query("UUID_PurchaseOrder = :1"; Form:C1466.current_item.UUID)
-						Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+						This:C1470.loadPoLineItems()
+						This:C1470._activate_save_cancel_button()
 					End if 
 				End if 
 				
@@ -156,10 +227,9 @@ Function bActionLineItems()
 					If (OK=1)
 						$res:=Form:C1466.selectedPoLine.drop()
 						
-						If (Not:C34($res.success))
-							ALERT:C41("Something wen wrong !!")
-						Else 
-							Form:C1466.lb_lineItems:=ds:C1482.PurchaseOrderLine.query("UUID_PurchaseOrder = :1"; Form:C1466.current_item.UUID)
+						If ($res.success)
+							This:C1470.loadPoLineItems()
+							This:C1470._activate_save_cancel_button()
 						End if 
 					End if 
 				Else 
@@ -200,8 +270,13 @@ Function bActionInvoices()
 		$refMenu:=Create menu:C408
 		APPEND MENU ITEM:C411($refMenu; "Create new Invoice")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--create")
+		
+		APPEND MENU ITEM:C411($refMenu; "Edit Invoice")
+		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--edit")
+		
 		APPEND MENU ITEM:C411($refMenu; "-")
-		APPEND MENU ITEM:C411($refMenu; "(Delete")
+		
+		APPEND MENU ITEM:C411($refMenu; "Delete")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")
 		
 		$choose:=Dynamic pop up menu:C1006($refMenu)
@@ -214,7 +289,7 @@ Function bActionInvoices()
 				
 				$form:=New object:C1471("invoice"; $invoice)
 				
-				$winRef:=Open form window:C675("createInvoice_po"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+				$winRef:=Open form window:C675("createInvoice_po"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
 				DIALOG:C40("createInvoice_po"; $form)
 				CLOSE WINDOW:C154($winRef)
 				
@@ -224,17 +299,55 @@ Function bActionInvoices()
 					$res:=$invoice.save()
 					
 					If ($res.success)
-						Form:C1466.lb_invoices:=ds:C1482.Invoice.query("UUID_PurchaseOrder = :1"; Form:C1466.current_item.UUID)
+						This:C1470.loadInvoices()
+						This:C1470._activate_save_cancel_button()
 					End if 
 				End if 
 				
-			: ($choose="--delete")
+			: ($choose="--edit")
+				If (Form:C1466.selectedInv#Null:C1517)
+					$form:=New object:C1471("invoice"; Form:C1466.selectedInv)
+					
+					$winRef:=Open form window:C675("createInvoice_po"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
+					DIALOG:C40("createInvoice_po"; $form)
+					CLOSE WINDOW:C154($winRef)
+					
+					If (OK=1)
+						$invoice:=$form.invoice
+						
+						$res:=$invoice.save()
+						
+						If ($res.success)
+							This:C1470.loadInvoices()
+							This:C1470._activate_save_cancel_button()
+						End if 
+					End if 
+				Else 
+					cs:C1710.sfw_dialog.me.alert("No Inventory selected !")
+				End if 
 				
+			: ($choose="--delete")
+				If (Form:C1466.selectedInv#Null:C1517)
+					cs:C1710.sfw_dialog.me.confirm("No Inventory selected !")
+					
+					If (ok=1)
+						$res:=Form:C1466.selectedInv.drop()
+						
+						If ($res.success)
+							This:C1470.loadInvoices()
+							This:C1470._activate_save_cancel_button()
+						End if 
+					End if 
+				Else 
+					cs:C1710.sfw_dialog.me.alert("No Inventory selected !")
+				End if 
 		End case 
 	Else 
 		$refMenu:=Create menu:C408
 		APPEND MENU ITEM:C411($refMenu; "(Create new Invoice")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--create")
+		APPEND MENU ITEM:C411($refMenu; "(Edit Invoice")
+		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--edit")
 		APPEND MENU ITEM:C411($refMenu; "-")
 		APPEND MENU ITEM:C411($refMenu; "(Delete")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")
@@ -256,4 +369,25 @@ Function bActionInvoices()
 		End case 
 	End if 
 	
-	
+Function selectCustomer()
+	If (Form:C1466.sfw.checkIsInModification())
+		Case of 
+			: (FORM Event:C1606.code=On Getting Focus:K2:7) | (FORM Event:C1606.code=On Clicked:K2:4)
+				OBJECT GET COORDINATES:C663(*; "Field_customerName"; $l; $t; $r; $b)
+				CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Screen:K27:7)
+				
+				$form:=New object:C1471(\
+					"colName"; "name"; \
+					"lb_items"; ds:C1482.Customer.all()\
+					)
+				
+				$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b-20)
+				DIALOG:C40("selectNto1"; $form)
+				CLOSE WINDOW:C154($winRef)
+				
+				If (ok=1)
+					Form:C1466.current_item.UUID_Customer:=$form.item.UUID
+					cs:C1710.panel_purchaseOrder.me._activate_save_cancel_button()
+				End if 
+		End case 
+	End if 

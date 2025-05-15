@@ -36,6 +36,44 @@ Function pup_XXX()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
+	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	
+	Case of 
+		: (FORM Get current page:C276(*)=2)  // Lot Steps
+			OBJECT GET COORDINATES:C663(*; "rec_bkgd_"+String:C10(FORM Get current page:C276(*)); $left; $top; $right; $bottom)
+			OBJECT GET COORDINATES:C663(*; "lb_steps"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			OBJECT GET COORDINATES:C663(*; "bActionLotSteps"; $left_bAc; $top_bAc; $right_bAc; $bottom_bAc)
+			
+			
+			OBJECT GET COORDINATES:C663(*; "btnMoveTop"; $left_mt; $top_mt; $right_mt; $bottom_mt)
+			OBJECT GET COORDINATES:C663(*; "btnMoveUp"; $left_mu; $top_mu; $right_mu; $bottom_mu)
+			OBJECT GET COORDINATES:C663(*; "btnMoveDown"; $left_md; $top_md; $right_md; $bottom_md)
+			OBJECT GET COORDINATES:C663(*; "btnMoveBottom"; $left_mb; $top_mb; $right_mb; $bottom_mb)
+			
+			$offset:=4
+			$offset_r:=60
+			$offset_btns_r:=15
+			$offset_bAc:=10
+			
+			$width:=$right-$left
+			$height:=$bottom-$top
+			
+			$height_bAc:=$bottom_bAc-$top_bAc
+			
+			$width_mt:=$right_mt-$left_mt
+			$width_mu:=$right_mu-$left_mu
+			$width_md:=$right_md-$left_md
+			$width_mb:=$right_mb-$left_mb
+			
+			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_"+String:C10(FORM Get current page:C276(*)); $left; $top; $right; $heightSubform-$offset)
+			OBJECT SET COORDINATES:C1248(*; "lb_steps"; $left_lb; $top_lb; $widthSubform-$offset_r; $heightSubform-$offset-1)
+			OBJECT SET COORDINATES:C1248(*; "bActionLotSteps"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
+			
+			OBJECT SET COORDINATES:C1248(*; "btnMoveTop"; $widthSubform-$offset_btns_r-$width_mt; $top_mt; $widthSubform-$offset_btns_r; $bottom_mt)
+			OBJECT SET COORDINATES:C1248(*; "btnMoveUp"; $widthSubform-$offset_btns_r-$width_mu; $top_mu; $widthSubform-$offset_btns_r; $bottom_mu)
+			OBJECT SET COORDINATES:C1248(*; "btnMoveDown"; $widthSubform-$offset_btns_r-$width_md; $top_md; $widthSubform-$offset_btns_r; $bottom_md)
+			OBJECT SET COORDINATES:C1248(*; "btnMoveBottom"; $widthSubform-$offset_btns_r-$width_mb; $top_mb; $widthSubform-$offset_btns_r; $bottom_mb)
+	End case 
 	
 Function loadLotSteps()
 	//Form.lb_steps:=Form.current_item.steps.orderBy("order asc")
@@ -78,7 +116,7 @@ Function bActionSteps()
 				$form.lotStep.UUID_Lot:=Form:C1466.current_item.UUID
 				$form.lotStep.order:=Form:C1466.lb_steps.length+1
 				
-				$winRef:=Open form window:C675("createStep_StepTemplate"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+				$winRef:=Open form window:C675("createStep_StepTemplate"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
 				DIALOG:C40("createStep_StepTemplate"; $form)
 				CLOSE WINDOW:C154($winRef)
 				
@@ -96,7 +134,7 @@ Function bActionSteps()
 			: ($choose="--create_from_step_file")
 				$form:=New object:C1471("lotInfo"; New object:C1471("customer"; Form:C1466.current_item.customer))
 				
-				$winRef:=Open form window:C675("createStepFromStepFile"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+				$winRef:=Open form window:C675("createStepFromStepFile"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
 				DIALOG:C40("createStepFromStepFile"; $form)
 				CLOSE WINDOW:C154($winRef)
 				

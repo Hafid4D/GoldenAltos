@@ -43,7 +43,7 @@
 					"text": "Spec Revision",
 					"fontWeight": "normal"
 				},
-				"entryField_specRevision": {
+				"Field_specRevision": {
 					"type": "input",
 					"top": 65,
 					"left": 112,
@@ -73,26 +73,6 @@
 					"text": "Lot on Hold",
 					"fontWeight": "normal"
 				},
-				"entryField_onHold": {
-					"type": "input",
-					"top": 90,
-					"left": 112,
-					"width": 140,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.onHold",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"textFormat": "$##,###,###,##0.00",
-					"textAlign": "left",
-					"fontWeight": "bold"
-				},
 				"label_0_1": {
 					"type": "text",
 					"top": 15,
@@ -109,7 +89,7 @@
 					"left": 112,
 					"width": 140,
 					"height": 17,
-					"dataSource": "Form:C1466.current_itemlot.job.jobNumber",
+					"dataSource": "Form:C1466.currentStep.lot.job.jobNumber",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -132,7 +112,7 @@
 					"text": "Lot Specs",
 					"fontWeight": "normal"
 				},
-				"entryField_lotSpecs": {
+				"Field_lotSpecs": {
 					"type": "input",
 					"top": 40,
 					"left": 112,
@@ -168,7 +148,7 @@
 					"left": 784,
 					"width": 120,
 					"height": 17,
-					"dataSource": "Form:C1466.currentStep.order",
+					"dataSource": "Form:C1466.currentStepOrder",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -180,7 +160,8 @@
 					"borderStyle": "none",
 					"textAlign": "left",
 					"fontWeight": "bold",
-					"sizingX": "grow"
+					"sizingX": "grow",
+					"dataSourceTypeHint": "number"
 				},
 				"label_0_5": {
 					"type": "text",
@@ -221,7 +202,7 @@
 					"text": "Step Description",
 					"fontWeight": "normal"
 				},
-				"entryField_description": {
+				"Field_description": {
 					"type": "input",
 					"top": 15,
 					"left": 384,
@@ -250,7 +231,7 @@
 					"text": "Step Alert",
 					"fontWeight": "normal"
 				},
-				"entryField_alert": {
+				"Field_alert": {
 					"type": "input",
 					"top": 65,
 					"left": 383,
@@ -312,7 +293,7 @@
 				"label_0_30": {
 					"type": "text",
 					"top": 65,
-					"left": 374,
+					"left": 373,
 					"width": 7,
 					"height": 17,
 					"stroke": "#808080",
@@ -353,6 +334,31 @@
 					"type": "text",
 					"top": 40,
 					"left": 776,
+					"width": 7,
+					"height": 17,
+					"stroke": "#808080",
+					"text": ":",
+					"fontWeight": "normal"
+				},
+				"Field_onHold": {
+					"type": "checkbox",
+					"text": "Lot On Hold",
+					"top": 86,
+					"left": 112,
+					"width": 161,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"fontWeight": "bold",
+					"dataSourceTypeHint": "boolean",
+					"dataSource": "Form:C1466.current_item.onHold",
+					"enterable": false
+				},
+				"label_0_8": {
+					"type": "text",
+					"top": 90,
+					"left": 102,
 					"width": 7,
 					"height": 17,
 					"stroke": "#808080",
@@ -472,11 +478,11 @@
 					"top": 188,
 					"left": 460,
 					"width": 450,
-					"height": 85,
+					"height": 225,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
 					"stroke": "transparent",
-					"bottom": 273
+					"bottom": 413
 				},
 				"List Box3": {
 					"type": "listbox",
@@ -495,8 +501,8 @@
 					"showHeaders": false,
 					"listboxType": "collection",
 					"alternateFill": "#F7F9FC",
-					"dataSource": "Form:C1466.lb_skills",
-					"currentItemSource": "Form:C1466.currentSkill",
+					"dataSource": "Form:C1466.lb_bins",
+					"currentItemSource": "Form:C1466.currentBin",
 					"selectionMode": "single",
 					"columns": [
 						{
@@ -509,7 +515,8 @@
 								"name": "Footer3"
 							},
 							"width": 50,
-							"dataSource": "This:C1470.certification.name"
+							"dataSource": "This:C1470.num",
+							"enterable": false
 						},
 						{
 							"header": {
@@ -520,7 +527,9 @@
 							"width": 150,
 							"footer": {
 								"name": "Footer1"
-							}
+							},
+							"dataSource": "This:C1470.definition",
+							"enterable": false
 						},
 						{
 							"header": {
@@ -531,7 +540,9 @@
 							"width": 300,
 							"footer": {
 								"name": "Footer2"
-							}
+							},
+							"dataSource": "This:C1470.value",
+							"enterable": false
 						}
 					]
 				},
@@ -629,12 +640,36 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none"
+				},
+				"banner_lotOnHold_page1": {
+					"type": "input",
+					"top": 376,
+					"left": 629,
+					"width": 285,
+					"height": 184,
+					"sizingX": "move",
+					"sizingY": "move",
+					"dataSourceTypeHint": "picture",
+					"fontFamily": "System Font Regular",
+					"fontSize": 13,
+					"focusable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"enterable": false,
+					"contextMenu": "none",
+					"dragging": "none",
+					"method": "ObjectMethods/banner_lotOnHold_page1.4dm",
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.bannerOnHold",
+					"pictureFormat": "truncatedTopLeft"
 				}
 			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_4lines",
-	"geometryStamp": 114,
+	"geometryStamp": 124,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

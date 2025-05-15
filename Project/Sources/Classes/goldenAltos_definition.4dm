@@ -7,8 +7,8 @@ Class constructor
 	This:C1470._visions_definition()
 	This:C1470._entries_definition()
 	//This._event_definition()
-	//This._scheduler_definition()
-	//This._notification_definition()
+	This:C1470._scheduler_definition()
+	This:C1470._notification_definition()
 	//This._profiles_definition()
 	
 Function _global_parameters()
@@ -25,7 +25,7 @@ Function _global_parameters()
 	This:C1470.globalParameters.address:=New object:C1471("defaultCountry"; "fr")
 	This:C1470.globalParameters.preferedCountriesInPup:=New collection:C1472("ma"; "fr"; "us")
 	
-	
+	This:C1470.globalParameters.notifications:=New object:C1471("activate"; True:C214)
 	
 Function _event_definition()
 	
@@ -94,26 +94,33 @@ Function _event_definition()
 Function _scheduler_definition()
 	var $periodicity : cs:C1710.sfw_definitionScheduler
 	
-	$periodicity:=cs:C1710.sfw_definitionScheduler.new("hourly")
-	$periodicity.setMinuteToStart(5)
-	$periodicity.setHourMinMax(9; 18)
-	cs:C1710.sfw_schedulerManager.me.createIfNotExist("test"; "test scheduler"; $periodicity; "testForScheduler"; "HelloIsTime"; False:C215)
-	
 	$periodicity:=cs:C1710.sfw_definitionScheduler.new("daily")
-	$periodicity.setHourToStart(11)
-	$periodicity.setMinuteToStart(0)
+	$periodicity.setHourToStart(3)
+	$periodicity.setMinuteToStart(33)
 	$periodicity.setDayNumbers(Monday:K10:13; Tuesday:K10:14; Wednesday:K10:15; Thursday:K10:16; Friday:K10:17)
-	cs:C1710.sfw_schedulerManager.me.createIfNotExist("test2"; "test scheduler2"; $periodicity; "testForScheduler"; "HelloIsTimeandDay"; False:C215)
+	cs:C1710.sfw_schedulerManager.me.createIfNotExist("CertificationRetraining"; "Retraining due within 30 days"; $periodicity; "TestSchedule"; "CheckCertificationRetraining"; False:C215)
 	
-	$periodicity:=cs:C1710.sfw_definitionScheduler.new("weekly")
-	$periodicity.setHourToStart(11)
-	$periodicity.setMinuteToStart(10)
-	$periodicity.setDayNumber(Tuesday:K10:14)
-	cs:C1710.sfw_schedulerManager.me.createIfNotExist("test3"; "test scheduler3"; $periodicity; "testForScheduler"; "HelloisWeek"; False:C215)
 	
-	$periodicity:=cs:C1710.sfw_definitionScheduler.new("hourly")
-	$periodicity.setMinutesToStart([0; 15; 30; 45])
-	cs:C1710.sfw_schedulerManager.me.createIfNotExist("microsoftAPIGraph_refreshToken"; "Refresh Token of Microsoft API Graph"; $periodicity; "microsoftGraphAPI"; "getToken"; True:C214)
+	//$periodicity:=cs.sfw_definitionScheduler.new("hourly")
+	//$periodicity.setMinuteToStart(5)
+	//$periodicity.setHourMinMax(9; 18)
+	//cs.sfw_schedulerManager.me.createIfNotExist("test"; "test scheduler"; $periodicity; "testForScheduler"; "HelloIsTime"; False)
+	
+	//$periodicity:=cs.sfw_definitionScheduler.new("daily")
+	//$periodicity.setHourToStart(11)
+	//$periodicity.setMinuteToStart(0)
+	//$periodicity.setDayNumbers(Monday; Tuesday; Wednesday; Thursday; Friday)
+	//cs.sfw_schedulerManager.me.createIfNotExist("test2"; "test scheduler2"; $periodicity; "testForScheduler"; "HelloIsTimeandDay"; False)
+	
+	//$periodicity:=cs.sfw_definitionScheduler.new("weekly")
+	//$periodicity.setHourToStart(11)
+	//$periodicity.setMinuteToStart(10)
+	//$periodicity.setDayNumber(Tuesday)
+	//cs.sfw_schedulerManager.me.createIfNotExist("test3"; "test scheduler3"; $periodicity; "testForScheduler"; "HelloisWeek"; False)
+	
+	//$periodicity:=cs.sfw_definitionScheduler.new("hourly")
+	//$periodicity.setMinutesToStart([0; 15; 30; 45])
+	//cs.sfw_schedulerManager.me.createIfNotExist("microsoftAPIGraph_refreshToken"; "Refresh Token of Microsoft API Graph"; $periodicity; "microsoftGraphAPI"; "getToken"; True)
 	
 	
 Function _notification_definition()
@@ -122,22 +129,27 @@ Function _notification_definition()
 	$definition:=cs:C1710.sfw_definitionNotificationType.new()
 	$definition.setDescription("A new task time is added for the project ##projectName## by ##staffName##.")
 	$definition.setActive()
-	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("NewTaskTime"; "New tasktime"; $definition)
+	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("CertificationRetraining"; "Retraining due within 30 days"; $definition)
 	
-	$definition:=cs:C1710.sfw_definitionNotificationType.new()
-	$definition.setDescription("A new meeting time is added by ##staffName##.")
-	$definition.setActive()
-	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("NewMeetingTime"; "New meeting time"; $definition)
+	//$definition:=cs.sfw_definitionNotificationType.new()
+	//$definition.setDescription("A new task time is added for the project ##projectName## by ##staffName##.")
+	//$definition.setActive()
+	//cs.sfw_notificationManager.me.createTypeIfNotExist("NewTaskTime"; "New tasktime"; $definition)
 	
-	$definition:=cs:C1710.sfw_definitionNotificationType.new()
-	$definition.setDescription("A new customer time is added for customer ##customerName## by ##staffName##.")
-	$definition.setActive()
-	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("NewCustomerTime"; "New customer time"; $definition)
+	//$definition:=cs.sfw_definitionNotificationType.new()
+	//$definition.setDescription("A new meeting time is added by ##staffName##.")
+	//$definition.setActive()
+	//cs.sfw_notificationManager.me.createTypeIfNotExist("NewMeetingTime"; "New meeting time"; $definition)
 	
-	$definition:=cs:C1710.sfw_definitionNotificationType.new()
-	$definition.setDescription("A new administrative time is added by ##staffName##.")
-	$definition.setActive()
-	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("NewMeetingTime"; "New meeting time"; $definition)
+	//$definition:=cs.sfw_definitionNotificationType.new()
+	//$definition.setDescription("A new customer time is added for customer ##customerName## by ##staffName##.")
+	//$definition.setActive()
+	//cs.sfw_notificationManager.me.createTypeIfNotExist("NewCustomerTime"; "New customer time"; $definition)
+	
+	//$definition:=cs.sfw_definitionNotificationType.new()
+	//$definition.setDescription("A new administrative time is added by ##staffName##.")
+	//$definition.setActive()
+	//cs.sfw_notificationManager.me.createTypeIfNotExist("NewMeetingTime"; "New meeting time"; $definition)
 	
 	
 	//Mark:-Visions defintion

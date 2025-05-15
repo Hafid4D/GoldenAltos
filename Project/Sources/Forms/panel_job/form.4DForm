@@ -98,24 +98,6 @@
 					"stroke": "#808080",
 					"text": "Archived"
 				},
-				"entryField_poNumber": {
-					"type": "input",
-					"top": 62,
-					"left": 92,
-					"width": 140,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.archived",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"textAlign": "left"
-				},
 				"label_0_4": {
 					"type": "text",
 					"top": 12,
@@ -198,6 +180,19 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"textAlign": "left"
+				},
+				"entryField_archived": {
+					"type": "checkbox",
+					"text": "Archived",
+					"top": 58,
+					"left": 92,
+					"width": 168,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.current_item.archived",
+					"dataSourceTypeHint": "boolean"
 				}
 			}
 		},
@@ -206,7 +201,7 @@
 				"header_bkgd1": {
 					"type": "rectangle",
 					"top": 119,
-					"left": 57,
+					"left": 6,
 					"width": 480,
 					"height": 30,
 					"sizingX": "fixed",
@@ -216,7 +211,7 @@
 				"lbl_address": {
 					"type": "text",
 					"top": 126,
-					"left": 63,
+					"left": 12,
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
@@ -227,7 +222,7 @@
 				"header_bkgd3": {
 					"type": "rectangle",
 					"top": 152,
-					"left": 57,
+					"left": 6,
 					"width": 480,
 					"height": 190,
 					"sizingX": "fixed",
@@ -236,7 +231,7 @@
 				},
 				"Popup Dropdown List": {
 					"type": "dropdown",
-					"left": 64,
+					"left": 13,
 					"top": 158,
 					"width": 125,
 					"height": 18,
@@ -248,7 +243,7 @@
 				},
 				"entryField_po_address_street": {
 					"type": "input",
-					"left": 196,
+					"left": 145,
 					"top": 178,
 					"width": 332,
 					"height": 18,
@@ -257,7 +252,7 @@
 				},
 				"entryField_po_address_city": {
 					"type": "input",
-					"left": 196,
+					"left": 145,
 					"top": 266,
 					"width": 100,
 					"height": 18,
@@ -266,7 +261,7 @@
 				},
 				"entryField_po_address_state": {
 					"type": "input",
-					"left": 312,
+					"left": 261,
 					"top": 266,
 					"width": 100,
 					"height": 18,
@@ -275,7 +270,7 @@
 				},
 				"entryField_po_address_zipCode": {
 					"type": "input",
-					"left": 428,
+					"left": 377,
 					"top": 266,
 					"width": 100,
 					"height": 18,
@@ -285,7 +280,7 @@
 				"label_0_10": {
 					"type": "text",
 					"top": 161,
-					"left": 196,
+					"left": 145,
 					"width": 150,
 					"height": 15,
 					"stroke": "#808080",
@@ -293,7 +288,7 @@
 				},
 				"entryField_po_address_addtio": {
 					"type": "input",
-					"left": 196,
+					"left": 145,
 					"top": 222,
 					"width": 332,
 					"height": 18,
@@ -303,7 +298,7 @@
 				"label_0_11": {
 					"type": "text",
 					"top": 204,
-					"left": 196,
+					"left": 145,
 					"width": 150,
 					"height": 15,
 					"stroke": "#808080",
@@ -312,7 +307,7 @@
 				"label_0_12": {
 					"type": "text",
 					"top": 248,
-					"left": 196,
+					"left": 145,
 					"width": 90,
 					"height": 15,
 					"stroke": "#808080",
@@ -321,7 +316,7 @@
 				"label_0_13": {
 					"type": "text",
 					"top": 248,
-					"left": 313,
+					"left": 262,
 					"width": 90,
 					"height": 15,
 					"stroke": "#808080",
@@ -330,7 +325,7 @@
 				"label_0_14": {
 					"type": "text",
 					"top": 248,
-					"left": 428,
+					"left": 377,
 					"width": 90,
 					"height": 15,
 					"stroke": "#808080",
@@ -338,7 +333,7 @@
 				},
 				"entryField_po_address_country": {
 					"type": "input",
-					"left": 196,
+					"left": 145,
 					"top": 311,
 					"width": 332,
 					"height": 18,
@@ -348,7 +343,7 @@
 				"label_0_22": {
 					"type": "text",
 					"top": 293,
-					"left": 196,
+					"left": 145,
 					"width": 150,
 					"height": 15,
 					"stroke": "#808080",
@@ -357,7 +352,7 @@
 				"header_bkgd2": {
 					"type": "rectangle",
 					"top": 119,
-					"left": 545,
+					"left": 494,
 					"width": 360,
 					"height": 30,
 					"sizingX": "fixed",
@@ -367,7 +362,7 @@
 				"lbl_address1": {
 					"type": "text",
 					"top": 126,
-					"left": 551,
+					"left": 500,
 					"width": 130,
 					"height": 17,
 					"stroke": "#000000",
@@ -378,7 +373,7 @@
 				"header_bkgd4": {
 					"type": "rectangle",
 					"top": 152,
-					"left": 545,
+					"left": 494,
 					"width": 360,
 					"height": 31,
 					"sizingX": "fixed",
@@ -388,7 +383,7 @@
 				"label_qty": {
 					"type": "text",
 					"top": 158,
-					"left": 553,
+					"left": 502,
 					"width": 60,
 					"height": 17,
 					"stroke": "#808080",
@@ -397,7 +392,7 @@
 				"entryField_qty": {
 					"type": "input",
 					"top": 158,
-					"left": 613,
+					"left": 562,
 					"width": 80,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.qty",
@@ -415,7 +410,7 @@
 				"label_qtyOnHand": {
 					"type": "text",
 					"top": 158,
-					"left": 721,
+					"left": 670,
 					"width": 80,
 					"height": 17,
 					"stroke": "#808080",
@@ -424,7 +419,7 @@
 				"entryField_qtyOnHand": {
 					"type": "input",
 					"top": 158,
-					"left": 809,
+					"left": 758,
 					"width": 80,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.qtyOnHand",
@@ -442,18 +437,18 @@
 				"header_bkgd5": {
 					"type": "rectangle",
 					"top": 189,
-					"left": 546,
+					"left": 495,
 					"width": 360,
 					"height": 30,
 					"sizingX": "grow",
 					"fill": "#A2C6D8",
 					"stroke": "transparent",
-					"right": 906
+					"right": 855
 				},
 				"lbl_address2": {
 					"type": "text",
 					"top": 196,
-					"left": 553,
+					"left": 502,
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
@@ -464,18 +459,18 @@
 				"header_bkgd6": {
 					"type": "rectangle",
 					"top": 222,
-					"left": 546,
+					"left": 495,
 					"width": 360,
 					"height": 120,
 					"sizingX": "grow",
 					"fill": "#E4E4E4",
 					"stroke": "transparent",
-					"right": 906
+					"right": 855
 				},
 				"label_0_15": {
 					"type": "text",
 					"top": 230,
-					"left": 554,
+					"left": 503,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
@@ -485,7 +480,7 @@
 					"type": "checkbox",
 					"text": "Alternate Shipping Address",
 					"top": 228,
-					"left": 679,
+					"left": 628,
 					"width": 222,
 					"height": 18,
 					"events": [
@@ -498,7 +493,7 @@
 				"label_0_7": {
 					"type": "text",
 					"top": 257,
-					"left": 554,
+					"left": 503,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
@@ -508,7 +503,7 @@
 					"type": "checkbox",
 					"text": "All lots shipped",
 					"top": 255,
-					"left": 679,
+					"left": 628,
 					"width": 222,
 					"height": 18,
 					"events": [
@@ -521,7 +516,7 @@
 				"label_0_9": {
 					"type": "text",
 					"top": 284,
-					"left": 554,
+					"left": 503,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
@@ -531,7 +526,7 @@
 					"type": "checkbox",
 					"text": "Line-Item Job",
 					"top": 282,
-					"left": 679,
+					"left": 628,
 					"width": 222,
 					"height": 18,
 					"events": [
@@ -544,7 +539,7 @@
 				"header_bkgd9": {
 					"type": "rectangle",
 					"top": 350,
-					"left": 57,
+					"left": 6,
 					"width": 480,
 					"height": 30,
 					"sizingX": "grow",
@@ -554,7 +549,7 @@
 				"lbl_address4": {
 					"type": "text",
 					"top": 357,
-					"left": 64,
+					"left": 13,
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
@@ -565,7 +560,7 @@
 				"header_bkgd10": {
 					"type": "rectangle",
 					"top": 383,
-					"left": 57,
+					"left": 6,
 					"width": 480,
 					"height": 171,
 					"sizingX": "grow",
@@ -576,7 +571,7 @@
 				"entryField_jobComment": {
 					"type": "input",
 					"top": 392,
-					"left": 65,
+					"left": 14,
 					"width": 454,
 					"height": 155,
 					"dataSource": "Form:C1466.current_item.jobComment",
@@ -596,7 +591,7 @@
 				"label_0_16": {
 					"type": "text",
 					"top": 311,
-					"left": 554,
+					"left": 503,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
@@ -606,7 +601,7 @@
 					"type": "checkbox",
 					"text": "No-Lots",
 					"top": 309,
-					"left": 679,
+					"left": 628,
 					"width": 222,
 					"height": 18,
 					"events": [
@@ -619,18 +614,18 @@
 				"header_bkgd7": {
 					"type": "rectangle",
 					"top": 349,
-					"left": 546,
+					"left": 495,
 					"width": 360,
 					"height": 30,
 					"sizingX": "grow",
 					"fill": "#A2C6D8",
 					"stroke": "transparent",
-					"right": 906
+					"right": 855
 				},
 				"lbl_address3": {
 					"type": "text",
 					"top": 356,
-					"left": 553,
+					"left": 502,
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
@@ -641,18 +636,18 @@
 				"header_bkgd8": {
 					"type": "rectangle",
 					"top": 382,
-					"left": 546,
+					"left": 495,
 					"width": 360,
 					"height": 140,
 					"sizingX": "grow",
 					"fill": "#E4E4E4",
 					"stroke": "transparent",
-					"right": 906
+					"right": 855
 				},
 				"label_0_8": {
 					"type": "text",
 					"top": 390,
-					"left": 554,
+					"left": 503,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
@@ -661,7 +656,7 @@
 				"label_0_17": {
 					"type": "text",
 					"top": 417,
-					"left": 554,
+					"left": 503,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
@@ -670,7 +665,7 @@
 				"label_0_18": {
 					"type": "text",
 					"top": 444,
-					"left": 554,
+					"left": 503,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
@@ -679,7 +674,7 @@
 				"label_0_19": {
 					"type": "text",
 					"top": 471,
-					"left": 554,
+					"left": 503,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
@@ -688,7 +683,7 @@
 				"label_0_21": {
 					"type": "text",
 					"top": 498,
-					"left": 554,
+					"left": 503,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
@@ -697,7 +692,7 @@
 				"entryField_qty1": {
 					"type": "input",
 					"top": 390,
-					"left": 678,
+					"left": 627,
 					"width": 220,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.dateCreated",
@@ -717,7 +712,7 @@
 				"entryField_qty2": {
 					"type": "input",
 					"top": 417,
-					"left": 678,
+					"left": 627,
 					"width": 220,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.expectedDate",
@@ -737,7 +732,7 @@
 				"entryField_qty3": {
 					"type": "input",
 					"top": 444,
-					"left": 678,
+					"left": 627,
 					"width": 220,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.invoiceDate",
@@ -757,7 +752,7 @@
 				"entryField_qty4": {
 					"type": "input",
 					"top": 471,
-					"left": 678,
+					"left": 627,
 					"width": 220,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.lastShipDate",
@@ -777,7 +772,7 @@
 				"entryField_qty5": {
 					"type": "input",
 					"top": 498,
-					"left": 678,
+					"left": 627,
 					"width": 220,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.archivedDate",
@@ -800,10 +795,10 @@
 			"objects": {
 				"lb_poLinesItems": {
 					"type": "listbox",
-					"left": 57,
-					"top": 125,
-					"width": 842,
-					"height": 403,
+					"left": 107,
+					"top": 119,
+					"width": 782,
+					"height": 440,
 					"events": [
 						"onClick",
 						"onHeaderClick",
@@ -815,10 +810,12 @@
 					"visibility": "visible",
 					"dataSource": "Form:C1466.lb_lineItems",
 					"alternateFill": "#F7F9FC",
+					"right": 889,
+					"bottom": 559,
 					"columns": [
 						{
 							"header": {
-								"text": "Item #",
+								"text": "#",
 								"name": "Header1",
 								"fontWeight": "bold"
 							},
@@ -826,8 +823,11 @@
 							"footer": {
 								"name": "Footer1"
 							},
-							"width": 40,
-							"dataSource": "This:C1470.itemNum"
+							"width": 30,
+							"dataSource": "This:C1470.itemNum",
+							"textAlign": "center",
+							"resizable": false,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -839,21 +839,10 @@
 							"footer": {
 								"name": "Footer2"
 							},
-							"width": 200,
-							"dataSource": "This:C1470.description"
-						},
-						{
-							"header": {
-								"name": "Header3",
-								"text": "Part Number",
-								"fontWeight": "bold"
-							},
-							"name": "Column3",
-							"footer": {
-								"name": "Footer3"
-							},
-							"width": 80,
-							"dataSource": "This:C1470.partNum"
+							"width": 230,
+							"dataSource": "This:C1470.description",
+							"resizable": true,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -869,7 +858,9 @@
 							"dataSource": "This:C1470.dateOrdered",
 							"dataSourceTypeHint": "date",
 							"textAlign": "center",
-							"dateFormat": "short"
+							"dateFormat": "short",
+							"resizable": false,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -885,7 +876,9 @@
 							"dataSource": "This:C1470.customerRequestedDate",
 							"dataSourceTypeHint": "date",
 							"textAlign": "center",
-							"dateFormat": "short"
+							"dateFormat": "short",
+							"resizable": false,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -898,7 +891,9 @@
 								"name": "Footer6"
 							},
 							"width": 70,
-							"dataSource": "This:C1470.qtyOrdered"
+							"dataSource": "This:C1470.qtyOrdered",
+							"resizable": false,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -911,7 +906,9 @@
 								"name": "Footer7"
 							},
 							"width": 55,
-							"dataSource": "This:C1470.currency"
+							"dataSource": "This:C1470.currency",
+							"resizable": false,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -924,7 +921,9 @@
 								"name": "Footer8"
 							},
 							"width": 60,
-							"dataSource": "This:C1470.unitPrice"
+							"dataSource": "This:C1470.unitPrice",
+							"resizable": false,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -937,7 +936,9 @@
 								"name": "Footer9"
 							},
 							"width": 80,
-							"dataSource": "This:C1470.shipJobNumber"
+							"dataSource": "This:C1470.shipJobNumber",
+							"resizable": false,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -950,15 +951,29 @@
 								"name": "Footer12"
 							},
 							"width": 80,
-							"dataSource": "This:C1470.buildJobNumber"
+							"dataSource": "This:C1470.buildJobNumber",
+							"resizable": false,
+							"enterable": false
 						}
 					]
+				},
+				"rec_bkgd_2": {
+					"type": "rectangle",
+					"top": 118,
+					"left": 5,
+					"width": 100,
+					"height": 442,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 105,
+					"bottom": 560
 				},
 				"bActionLineItems": {
 					"type": "button",
 					"text": "Actions",
-					"top": 534,
-					"left": 56,
+					"top": 535,
+					"left": 16,
 					"width": 80,
 					"height": 21,
 					"events": [
@@ -970,17 +985,27 @@
 					"textPlacement": "right",
 					"method": "ObjectMethods/bActionLineItems.4dm",
 					"visibility": "visible"
+				},
+				"Text1": {
+					"type": "text",
+					"text": "PO Lines",
+					"top": 124,
+					"left": 9,
+					"width": 88,
+					"height": 15,
+					"fontWeight": "bold",
+					"fontSize": 11
 				}
 			}
 		},
 		{
 			"objects": {
-				"lb_poLinesItems1": {
+				"lb_lots": {
 					"type": "listbox",
-					"left": 57,
-					"top": 125,
-					"width": 842,
-					"height": 403,
+					"left": 107,
+					"top": 119,
+					"width": 782,
+					"height": 440,
 					"events": [
 						"onClick",
 						"onHeaderClick",
@@ -991,8 +1016,9 @@
 					"listboxType": "collection",
 					"visibility": "visible",
 					"dataSource": "Form:C1466.lb_lots",
-					"bottom": 528,
+					"bottom": 559,
 					"alternateFill": "#F7F9FC",
+					"right": 889,
 					"columns": [
 						{
 							"header": {
@@ -1005,7 +1031,9 @@
 								"name": "Footer10"
 							},
 							"width": 80,
-							"dataSource": "This:C1470.lotNumber"
+							"dataSource": "This:C1470.lotNumber",
+							"resizable": false,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -1018,7 +1046,9 @@
 								"name": "Footer11"
 							},
 							"dataSource": "This:C1470.process",
-							"width": 165
+							"width": 150,
+							"resizable": true,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -1031,7 +1061,9 @@
 								"name": "Footer13"
 							},
 							"dataSource": "This:C1470.device",
-							"width": 200
+							"width": 155,
+							"resizable": false,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -1044,7 +1076,9 @@
 								"name": "Footer14"
 							},
 							"dataSource": "This:C1470.currentOrNextArea",
-							"width": 140
+							"width": 140,
+							"resizable": false,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -1057,7 +1091,9 @@
 								"name": "Footer15"
 							},
 							"dataSource": "This:C1470.ourCount",
-							"width": 80
+							"width": 80,
+							"resizable": false,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -1072,7 +1108,9 @@
 							"dataSource": "This:C1470.dateIn",
 							"width": 80,
 							"dateFormat": "short",
-							"textAlign": "center"
+							"textAlign": "center",
+							"resizable": false,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -1087,15 +1125,29 @@
 							"dataSource": "This:C1470.dateOut",
 							"width": 80,
 							"dateFormat": "short",
-							"textAlign": "center"
+							"textAlign": "center",
+							"resizable": false,
+							"enterable": false
 						}
 					]
 				},
-				"bActionLineItems1": {
+				"rec_bkgd_3": {
+					"type": "rectangle",
+					"top": 118,
+					"left": 5,
+					"width": 100,
+					"height": 442,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 105,
+					"bottom": 560
+				},
+				"bActionLots": {
 					"type": "button",
 					"text": "Actions",
-					"top": 534,
-					"left": 56,
+					"top": 535,
+					"left": 16,
 					"width": 80,
 					"height": 21,
 					"events": [
@@ -1105,13 +1157,23 @@
 					"popupPlacement": "linked",
 					"icon": "/RESOURCES/sfw/image/picto/gear.png",
 					"textPlacement": "right",
-					"method": "ObjectMethods/bActionLineItems1.4dm",
+					"method": "ObjectMethods/bActionLots.4dm",
 					"visibility": "visible"
+				},
+				"Text": {
+					"type": "text",
+					"text": "Lots",
+					"top": 124,
+					"left": 9,
+					"width": 88,
+					"height": 15,
+					"fontWeight": "bold",
+					"fontSize": 11
 				}
 			}
 		}
 	],
-	"geometryStamp": 897,
+	"geometryStamp": 980,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

@@ -127,7 +127,7 @@
 				},
 				"checkbox_storeAccess": {
 					"type": "checkbox",
-					"text": ":xliff:user.login.checkbox.rememberMe",
+					"text": "Remember Me",
 					"top": 233,
 					"left": 30,
 					"width": 340,
@@ -164,7 +164,7 @@
 					"height": 32,
 					"sizingY": "move",
 					"focusable": false,
-					"text": ":xliff:user.login.button.quit",
+					"text": "Quit",
 					"icon": "/RESOURCES/sfw/image/skin/rainbow/btn4states/return-24x24.png",
 					"iconFrames": 4,
 					"textPlacement": "right",

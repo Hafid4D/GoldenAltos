@@ -41,6 +41,37 @@ Function pup_XXX()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
+	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	
+	Case of 
+		: (FORM Get current page:C276(*)=2)  // po lines
+			OBJECT GET COORDINATES:C663(*; "rec_bkgd_2"; $left; $top; $right; $bottom)
+			OBJECT GET COORDINATES:C663(*; "lb_poLinesItems"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			OBJECT GET COORDINATES:C663(*; "bActionLineItems"; $left_bAc; $top_bAc; $right_bAc; $bottom_bAc)
+			
+			$offset:=4
+			$offset_bAc:=10
+			
+			$height_bAc:=$bottom_bAc-$top_bAc
+			
+			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_2"; $left; $top; $right; $heightSubform-$offset)
+			OBJECT SET COORDINATES:C1248(*; "lb_poLinesItems"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			OBJECT SET COORDINATES:C1248(*; "bActionLineItems"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
+			
+		: (FORM Get current page:C276(*)=3)  // lots
+			OBJECT GET COORDINATES:C663(*; "rec_bkgd_3"; $left; $top; $right; $bottom)
+			OBJECT GET COORDINATES:C663(*; "lb_poLinesItems"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			OBJECT GET COORDINATES:C663(*; "bActionLineItems"; $left_bAc; $top_bAc; $right_bAc; $bottom_bAc)
+			
+			$offset:=4
+			$offset_bAc:=10
+			
+			$height_bAc:=$bottom_bAc-$top_bAc
+			
+			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_3"; $left; $top; $right; $heightSubform-$offset)
+			OBJECT SET COORDINATES:C1248(*; "lb_lots"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			OBJECT SET COORDINATES:C1248(*; "bActionLots"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
+	End case 
 	
 Function loadPoLineItems()
 	Form:C1466.lb_lineItems:=ds:C1482.PurchaseOrderLine.query("UUID_Job = :1"; Form:C1466.current_item.UUID)
@@ -64,7 +95,7 @@ Function bActionAttachPoLine()
 			: ($choose="--create")
 				$form:=New object:C1471("UUID_Job"; Form:C1466.current_item.UUID)
 				
-				$winRef:=Open form window:C675("createPoLine_job"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+				$winRef:=Open form window:C675("createPoLine_job"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
 				DIALOG:C40("createPoLine_job"; $form)
 				CLOSE WINDOW:C154($winRef)
 				
@@ -102,7 +133,7 @@ Function bActionAttachLot()
 			: ($choose="--create")
 				$form:=New object:C1471("UUID_Job"; Form:C1466.current_item.UUID)
 				
-				$winRef:=Open form window:C675("createLot_job"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+				$winRef:=Open form window:C675("createLot_job"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
 				DIALOG:C40("createLot_job"; $form)
 				CLOSE WINDOW:C154($winRef)
 				

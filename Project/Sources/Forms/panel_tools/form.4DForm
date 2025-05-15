@@ -115,40 +115,25 @@
 		},
 		{
 			"objects": {
-				"bActionLineItems": {
-					"type": "button",
-					"text": "Actions",
-					"top": 388,
-					"left": 56,
-					"width": 80,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"style": "custom",
-					"popupPlacement": "linked",
-					"icon": "/RESOURCES/sfw/image/picto/gear.png",
-					"textPlacement": "right",
-					"method": "ObjectMethods/bActionLineItems.4dm",
-					"visibility": "visible"
-				},
-				"header_bkgd13": {
+				"rec_bkgd_1": {
 					"type": "rectangle",
 					"top": 118,
-					"left": 57,
-					"width": 856,
-					"height": 30,
+					"left": 5,
+					"width": 100,
+					"height": 442,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
-					"stroke": "transparent"
+					"stroke": "transparent",
+					"right": 105,
+					"bottom": 560
 				},
 				"Input": {
 					"type": "input",
-					"left": 63,
+					"left": 9,
 					"top": 125,
-					"width": 187,
+					"width": 92,
 					"height": 15,
-					"right": 250,
+					"right": 101,
 					"bottom": 140,
 					"enterable": false,
 					"contextMenu": "none",
@@ -156,14 +141,15 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"dataSource": "\"Tools (\"+String:C10(Form:C1466.lb_tools.length)+\")\"",
-					"fontWeight": "bold"
+					"fontWeight": "bold",
+					"fontSize": 11
 				},
-				"lb_jobs": {
+				"lb_tools": {
 					"type": "listbox",
-					"left": 57,
-					"top": 159,
-					"width": 410,
-					"height": 221,
+					"left": 107,
+					"top": 118,
+					"width": 408,
+					"height": 441,
 					"events": [
 						"onClick",
 						"onHeaderClick",
@@ -179,11 +165,11 @@
 					"alternateFill": "#F7F9FC",
 					"currentItemSource": "Form:C1466.currentTool",
 					"currentItemPositionSource": "Form:C1466.currentToolPos",
-					"method": "ObjectMethods/lb_jobs.4dm",
+					"method": "ObjectMethods/lb_tools.4dm",
 					"columns": [
 						{
 							"header": {
-								"text": "Tool Name",
+								"text": "Name",
 								"name": "Header10",
 								"fontWeight": "bold"
 							},
@@ -191,16 +177,35 @@
 							"footer": {
 								"name": "Footer10"
 							},
-							"width": 390,
+							"width": 300,
 							"dataSource": "This:C1470.name",
-							"enterable": false
+							"enterable": false,
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header1",
+								"text": "Date",
+								"fontWeight": "bold"
+							},
+							"name": "Column1",
+							"width": 90,
+							"footer": {
+								"name": "Footer1"
+							},
+							"dataSource": "This:C1470.date",
+							"resizable": false,
+							"enterable": false,
+							"dateFormat": "short",
+							"textAlign": "center",
+							"dataSourceTypeHint": "date"
 						}
 					]
 				},
 				"label_ToolLine_name": {
 					"type": "text",
-					"top": 192,
-					"left": 499,
+					"top": 172,
+					"left": 529,
 					"width": 68,
 					"height": 17,
 					"stroke": "#808080",
@@ -209,9 +214,9 @@
 				},
 				"entryField_toolLineName": {
 					"type": "input",
-					"top": 192,
-					"left": 597,
-					"width": 313,
+					"top": 172,
+					"left": 627,
+					"width": 273,
 					"height": 17,
 					"dataSource": "Form:C1466.currentTool.name",
 					"focusable": false,
@@ -227,11 +232,59 @@
 					"dataSourceTypeHint": "number",
 					"textAlign": "left",
 					"visibility": "hidden"
+				},
+				"label_ToolLine_date": {
+					"type": "text",
+					"top": 195,
+					"left": 529,
+					"width": 68,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Tool Date",
+					"visibility": "hidden"
+				},
+				"entryField_toolLineDate": {
+					"type": "input",
+					"top": 195,
+					"left": 627,
+					"width": 273,
+					"height": 17,
+					"dataSource": "Form:C1466.currentTool.date",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"method": "ObjectMethods/entryField_toolLineDate.4dm",
+					"dataSourceTypeHint": "number",
+					"textAlign": "left",
+					"visibility": "hidden"
+				},
+				"bActionTools": {
+					"type": "button",
+					"text": "Actions",
+					"top": 535,
+					"left": 16,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionTools.4dm",
+					"visibility": "visible"
 				}
 			}
 		}
 	],
-	"geometryStamp": 141,
+	"geometryStamp": 185,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"method": "method.4dm",
 	"editor": {

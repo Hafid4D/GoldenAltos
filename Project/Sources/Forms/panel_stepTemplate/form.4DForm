@@ -19,8 +19,6 @@
 		"onTimer",
 		"onResize",
 		"onSelectionChange",
-		"onMouseEnter",
-		"onMouseLeave",
 		"onBoundVariableChange",
 		"onPageChange"
 	],
@@ -783,12 +781,23 @@
 		},
 		{
 			"objects": {
-				"lb_invoices": {
+				"bkgd_lb_steps": {
+					"type": "rectangle",
+					"top": 95,
+					"left": 106,
+					"width": 843,
+					"height": 442,
+					"stroke": "#c0c0c0",
+					"fill": "#F7F9FC",
+					"right": 949,
+					"bottom": 537
+				},
+				"lb_steps": {
 					"type": "listbox",
-					"left": 6,
-					"top": 137,
-					"width": 507,
-					"height": 370,
+					"left": 106,
+					"top": 96,
+					"width": 467,
+					"height": 440,
 					"events": [
 						"onClick",
 						"onHeaderClick",
@@ -802,7 +811,8 @@
 					"alternateFill": "#F7F9FC",
 					"selectionMode": "single",
 					"currentItemSource": "Form:C1466.selectedStep",
-					"method": "ObjectMethods/lb_invoices.4dm",
+					"method": "ObjectMethods/lb_steps.4dm",
+					"scrollbarHorizontal": "hidden",
 					"columns": [
 						{
 							"header": {
@@ -815,7 +825,7 @@
 								"name": "Footer29"
 							},
 							"dataSource": "This:C1470.description",
-							"width": 200,
+							"width": 180,
 							"enterable": false
 						},
 						{
@@ -829,7 +839,7 @@
 								"name": "Footer30"
 							},
 							"dataSource": "This:C1470.alert",
-							"width": 200,
+							"width": 180,
 							"enterable": false
 						},
 						{
@@ -851,92 +861,67 @@
 						}
 					]
 				},
-				"bActionLineItems1": {
-					"type": "button",
-					"text": "Actions",
-					"top": 513,
-					"left": 5,
-					"width": 80,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"style": "custom",
-					"popupPlacement": "linked",
-					"icon": "/RESOURCES/sfw/image/picto/gear.png",
-					"textPlacement": "right",
-					"method": "ObjectMethods/bActionLineItems1.4dm",
-					"visibility": "visible"
-				},
-				"header_bkgd16": {
+				"rec_bkgd_2": {
 					"type": "rectangle",
-					"top": 96,
-					"left": 6,
-					"width": 903,
-					"height": 30,
+					"top": 95,
+					"left": 5,
+					"width": 100,
+					"height": 442,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
-					"stroke": "transparent"
+					"stroke": "transparent",
+					"right": 105,
+					"bottom": 537
 				},
 				"Input3": {
 					"type": "input",
-					"left": 12,
-					"top": 103,
-					"width": 187,
+					"left": 9,
+					"top": 102,
+					"width": 92,
 					"height": 15,
-					"right": 199,
-					"bottom": 118,
+					"right": 101,
+					"bottom": 117,
 					"enterable": false,
 					"contextMenu": "none",
 					"multiline": "no",
 					"fill": "transparent",
 					"borderStyle": "none",
 					"dataSource": "\"Steps (\"+String:C10(Form:C1466.lb_steps.length)+\")\"",
-					"fontWeight": "bold"
-				},
-				"bkgd_lb_consumptions_detail": {
-					"type": "rectangle",
-					"top": 136,
-					"left": 513,
-					"width": 396,
-					"height": 371,
-					"stroke": "#c0c0c0",
-					"fill": "#F7F9FC",
-					"right": 909,
-					"bottom": 507
+					"fontWeight": "bold",
+					"fontSize": 11
 				},
 				"label_stepLine_areas": {
 					"type": "text",
 					"text": "Areas",
-					"top": 385,
-					"left": 523,
-					"width": 102,
+					"top": 344,
+					"left": 583,
+					"width": 92,
 					"height": 15,
 					"fontWeight": "bold"
 				},
 				"label_stepLine_operationCode": {
 					"type": "text",
 					"text": "Operation Code",
-					"top": 417,
-					"left": 523,
-					"width": 102,
+					"top": 376,
+					"left": 583,
+					"width": 92,
 					"height": 15,
 					"fontWeight": "bold"
 				},
 				"label_stepLine_description": {
 					"type": "text",
 					"text": "Description",
-					"top": 177,
-					"left": 523,
-					"width": 102,
+					"top": 136,
+					"left": 583,
+					"width": 92,
 					"height": 15,
 					"fontWeight": "bold"
 				},
 				"entryField_stepLine_operationCode": {
 					"type": "input",
-					"left": 627,
-					"top": 416,
-					"width": 273,
+					"left": 677,
+					"top": 375,
+					"width": 263,
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
@@ -948,14 +933,14 @@
 					"events": [
 						"onDataChange"
 					],
-					"right": 900,
+					"right": 940,
 					"method": "ObjectMethods/entryField_stepLine_operationCode.4dm"
 				},
 				"entryField_stepLine_description": {
 					"type": "input",
-					"left": 627,
-					"top": 176,
-					"width": 273,
+					"left": 677,
+					"top": 135,
+					"width": 263,
 					"height": 74,
 					"borderStyle": "none",
 					"fill": "transparent",
@@ -968,26 +953,26 @@
 				"label_stepLine_specification": {
 					"type": "text",
 					"text": "Specification",
-					"top": 353,
-					"left": 523,
-					"width": 102,
+					"top": 312,
+					"left": 583,
+					"width": 92,
 					"height": 15,
 					"fontWeight": "bold"
 				},
 				"label_stepLine_alert": {
 					"type": "text",
 					"text": "Alert",
-					"top": 265,
-					"left": 523,
-					"width": 102,
+					"top": 224,
+					"left": 583,
+					"width": 92,
 					"height": 15,
 					"fontWeight": "bold"
 				},
 				"entryField_stepLine_alert": {
 					"type": "input",
-					"left": 627,
-					"top": 264,
-					"width": 273,
+					"left": 677,
+					"top": 223,
+					"width": 263,
 					"height": 74,
 					"borderStyle": "none",
 					"fill": "transparent",
@@ -999,9 +984,9 @@
 				},
 				"entryField_stepLine_areas": {
 					"type": "input",
-					"left": 627,
-					"top": 384,
-					"width": 273,
+					"left": 677,
+					"top": 343,
+					"width": 263,
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
@@ -1014,13 +999,13 @@
 					"choiceList": {
 						"$ref": "/SOURCES/lists.json#/Areas"
 					},
-					"right": 900
+					"right": 940
 				},
 				"entryField_stepLine_specification": {
 					"type": "input",
-					"left": 627,
-					"top": 352,
-					"width": 273,
+					"left": 677,
+					"top": 311,
+					"width": 263,
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
@@ -1030,12 +1015,29 @@
 						"onDataChange"
 					],
 					"method": "ObjectMethods/entryField_stepLine_specification.4dm",
-					"right": 900
+					"right": 940
+				},
+				"bActionSteps": {
+					"type": "button",
+					"text": "Actions",
+					"top": 512,
+					"left": 16,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionSteps.4dm",
+					"visibility": "visible"
 				}
 			}
 		}
 	],
-	"geometryStamp": 1871,
+	"geometryStamp": 1956,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

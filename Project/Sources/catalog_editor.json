@@ -1,5 +1,37 @@
 {
 	"tables": {
+		"Staff": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 1040,
+				"top": 40,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
+		"CertificationAssignment": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 840,
+				"top": 40,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
 		"QuoteStatus": {
 			"color": {
 				"red": 255,
@@ -546,8 +578,8 @@
 			"coordinates": {
 				"left": 297,
 				"top": 671,
-				"width": 180,
-				"height": 230.33203125
+				"width": 182,
+				"height": 232.33203125
 			},
 			"displayable_fields_count": 9,
 			"fields_ordering": 1,
@@ -953,46 +985,6 @@
 				"alpha": 0
 			}
 		},
-		"1A0886A82A88F541A7DE80A0FAAF88CE": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"D4257CC29A3F0A4D8CD61A1B1BA72D5B": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"8B69B2A25682C34BBF8DDE3FD2A1096D": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"C999B2B79A28894BBBBA3CDD64C6B585": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"83314A01941F4F48A77B60A20607A36D": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
 		"2AD91F4788D14BC589D0DC658413CE3C": {
 			"color": {
 				"red": 255,
@@ -1006,6 +998,14 @@
 				"red": 240,
 				"green": 240,
 				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"9DD65FFAABDA4C1B911028DA92A13CAD": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
 				"alpha": 0
 			}
 		},

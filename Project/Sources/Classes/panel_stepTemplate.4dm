@@ -48,6 +48,25 @@ Function pup_XXX()
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	This:C1470.displayStepLine()
+	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	
+	Case of 
+		: (FORM Get current page:C276(*)=2)  // steps
+			OBJECT GET COORDINATES:C663(*; "rec_bkgd_2"; $left; $top; $right; $bottom)
+			OBJECT GET COORDINATES:C663(*; "bkgd_lb_steps"; $left_bk_lb; $top_bk_lb; $right_bk_lb; $bottom_bk_lb)
+			OBJECT GET COORDINATES:C663(*; "lb_steps"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			OBJECT GET COORDINATES:C663(*; "bActionSteps"; $left_bAc; $top_bAc; $right_bAc; $bottom_bAc)
+			
+			$offset:=4
+			$offset_bAc:=10
+			
+			$height_bAc:=$bottom_bAc-$top_bAc
+			
+			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_2"; $left; $top; $right; $heightSubform-$offset)
+			OBJECT SET COORDINATES:C1248(*; "bkgd_lb_steps"; $left_bk_lb; $top_bk_lb; $widthSubform-$offset; $heightSubform-$offset)
+			OBJECT SET COORDINATES:C1248(*; "lb_steps"; $left_lb; $top_lb; $right_lb; $heightSubform-$offset-1)
+			OBJECT SET COORDINATES:C1248(*; "bActionSteps"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
+	End case 
 	
 	
 Function bActionSkills()
@@ -198,7 +217,7 @@ Function bActionDataTables()
 					Form:C1466.current_item.dataTables:=New object:C1471("items"; New collection:C1472())
 				End if 
 				
-				Form:C1466.current_item.dataTables.items.push(New object:C1471("key"; $dataTable))
+				Form:C1466.current_item.dataTables.items.push(New object:C1471("UUID"; Generate UUID:C1066; "key"; $dataTable; "value"; ""))
 				
 				This:C1470.loadDataTables()
 				This:C1470._activate_save_cancel_button()
@@ -236,7 +255,7 @@ Function bActionBins()
 	Case of 
 		: ($choose="--add")
 			$form:=New object:C1471(\
-				"binDefinition"; New object:C1471("num"; 0; "definition"; ""); \
+				"binDefinition"; New object:C1471("num"; 0; "definition"; ""; "value"; ""); \
 				"existingBins"; Form:C1466.lb_bins\
 				)
 			
@@ -295,7 +314,8 @@ Function bActionPMs()
 				
 				Form:C1466.current_item.parametricMeasurements.items.push(New object:C1471(\
 					"UUID"; Generate UUID:C1066; \
-					"key"; $pm\
+					"key"; $pm; \
+					"value"; ""\
 					))
 				
 				This:C1470.loadPMs()
@@ -380,7 +400,7 @@ Function bActionSteps()
 			
 			$form.step.UUID_StepTemplate:=Form:C1466.current_item.UUID
 			
-			$winRef:=Open form window:C675("createStepFromTemplate"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+			$winRef:=Open form window:C675("createStepFromTemplate"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("createStepFromTemplate"; $form)
 			CLOSE WINDOW:C154($winRef)
 			

@@ -2,7 +2,7 @@
 /**
 import po & po lines (po <-- po_lines)
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([PurchaseOrder:115])
 	TRUNCATE TABLE:C1051([PurchaseOrderLine:116])
 	TRUNCATE TABLE:C1051([Invoice:4])
@@ -115,7 +115,7 @@ End if
 /**
 import jobs & lot (job <-- lots) & Archives
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([Job:117])
 	TRUNCATE TABLE:C1051([Lot:118])
 	TRUNCATE TABLE:C1051([LotStep:5])
@@ -238,6 +238,14 @@ If (False:C215)
 					$lotStep_e.dateIn:=$step.dateIn
 					$lotStep_e.dateOut:=$step.dateOut
 					
+					$lotStep_e.tools:=New object:C1471("items"; New collection:C1472())
+					$lotStep_e.parametricMeasurements:=New object:C1471("items"; New collection:C1472())
+					$lotStep_e.stepInterruptions:=New object:C1471("items"; New collection:C1472())
+					$lotStep_e.dataTables:=New object:C1471("items"; New collection:C1472())
+					$lotStep_e.bins:=New object:C1471("items"; New collection:C1472())
+					$lotStep_e.skills:=New object:C1471("items"; New collection:C1472())
+					$lotStep_e.requitedCertifications:=New object:C1471("items"; New collection:C1472())
+					
 					$lotStep_e.UUID_Lot:=$lot_e.UUID
 					
 					$res:=$lotStep_e.save()
@@ -255,8 +263,9 @@ End if
 /**
 import inventories
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([Inventory:126])
+	TRUNCATE TABLE:C1051([InventoryPull:127])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/inventory_export.json")
 	
@@ -326,7 +335,7 @@ End if
 /**
 import step template
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([StepTemplate:121])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/step_template_export.json")
@@ -357,7 +366,7 @@ End if
 /**
 import tools
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([ToolType:122])
 	TRUNCATE TABLE:C1051([Tool:6])
 	
@@ -398,7 +407,7 @@ End if
 /**
 import cetifications
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([Certification:124])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/certifications_export.json")
@@ -422,7 +431,7 @@ End if
 /**
 import specifications
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([Specification:10])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/specification_export.json")
@@ -450,8 +459,9 @@ End if
 Create user: sfw_User & Staff tables
 **/
 If (True:C214)
+	TRUNCATE TABLE:C1051([Staff:135])
 	TRUNCATE TABLE:C1051([sfw_User:16])
-	TRUNCATE TABLE:C1051([Staff:12])
+	TRUNCATE TABLE:C1051([ContactEvent:12])
 	
 	$user:=ds:C1482.sfw_User.new()
 	$user.firstName:="Hassan"

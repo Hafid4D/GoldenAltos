@@ -1,1 +1,1 @@
-cs:C1710.panel_stepTemplate.me.bActionSkills()
+cs:C1710.panel_punchIn.me.bActionPMs()

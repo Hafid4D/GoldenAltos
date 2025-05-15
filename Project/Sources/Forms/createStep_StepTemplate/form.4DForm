@@ -306,6 +306,23 @@
 					"fill": "#FFFFFF",
 					"stroke": "transparent"
 				},
+				"Input8": {
+					"type": "input",
+					"left": 151,
+					"top": 52,
+					"width": 293,
+					"height": 18,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.searchTemplate",
+					"enterable": false,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"method": "ObjectMethods/Input8.4dm"
+				},
 				"header_bkgd28": {
 					"type": "rectangle",
 					"top": 47,
@@ -394,28 +411,6 @@
 					"fill": "transparent",
 					"dataSource": "Form:C1466.lotStep.alert"
 				},
-				"sf_templateSearch": {
-					"type": "subform",
-					"left": 522,
-					"top": 45,
-					"width": 340,
-					"height": 350,
-					"detailForm": "",
-					"visibility": "visible",
-					"method": "ObjectMethods/sf_templateSearch.4dm",
-					"dataSource": "Form:C1466.sf_templateSearch"
-				},
-				"sf_stepTemplateSearch": {
-					"type": "subform",
-					"left": 602,
-					"top": 45,
-					"width": 340,
-					"height": 350,
-					"detailForm": "",
-					"visibility": "visible",
-					"method": "ObjectMethods/sf_stepTemplateSearch.4dm",
-					"dataSource": "Form:C1466.sf_stepTemplateSearch"
-				},
 				"Input": {
 					"type": "input",
 					"left": 151,
@@ -433,27 +428,32 @@
 						"onMouseLeave"
 					]
 				},
-				"Input8": {
-					"type": "input",
-					"left": 151,
-					"top": 52,
-					"width": 293,
-					"height": 18,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.searchTemplate",
-					"enterable": false,
-					"events": [
-						"onClick",
-						"onMouseEnter",
-						"onMouseLeave"
-					],
-					"method": "ObjectMethods/Input8.4dm"
+				"sf_templateSearch": {
+					"type": "subform",
+					"left": 142,
+					"top": 45,
+					"width": 340,
+					"height": 350,
+					"detailForm": "",
+					"visibility": "visible",
+					"method": "ObjectMethods/sf_templateSearch.4dm",
+					"dataSource": "Form:C1466.sf_templateSearch"
+				},
+				"sf_stepTemplateSearch": {
+					"type": "subform",
+					"left": 162,
+					"top": 45,
+					"width": 340,
+					"height": 350,
+					"detailForm": "",
+					"visibility": "visible",
+					"method": "ObjectMethods/sf_stepTemplateSearch.4dm",
+					"dataSource": "Form:C1466.sf_stepTemplateSearch"
 				}
 			}
 		}
 	],
-	"geometryStamp": 3939,
+	"geometryStamp": 4039,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

@@ -7,16 +7,35 @@ Case of
 			Form:C1466.searchTemplate:=Form:C1466.sf_templateSearch.selectedItem.name
 			
 			Form:C1466.lotStep.tools:=New object:C1471("items"; New collection:C1472())
+			Form:C1466.lotStep.skills:=New object:C1471("items"; New collection:C1472())
+			Form:C1466.lotStep.requitedCertifications:=New object:C1471("items"; New collection:C1472())
 			
 			$stepTemplateTools:=ds:C1482.StepTemplateTool.query("UUID_StepTemplate = :1"; Form:C1466.sf_templateSearch.selectedItem.UUID)
 			
 			For each ($tool; $stepTemplateTools)
 				Form:C1466.lotStep.tools.items.push(New object:C1471(\
 					"UUID"; $tool.toolType.UUID; \
-					"order"; Form:C1466.lotStep.tools.items.length+1; \
+					"order"; $tool.order; \
 					"name"; $tool.toolType.name; \
 					"date"; $tool.toolType.date; \
-					"tool"; New object:C1471("UUID"; ""; "name"; "")\
+					"tool"; New object:C1471("UUID"; ""; "name"; ""; "date"; "")\
+					))
+			End for each 
+			
+			$stepTemplateSkills:=ds:C1482.StepTemplateCertification.query("UUID_StepTemplate = :1"; Form:C1466.sf_templateSearch.selectedItem.UUID)
+			
+			For each ($skill; $stepTemplateSkills)
+				Form:C1466.lotStep.skills.items.push(New object:C1471(\
+					"UUID"; $skill.certification.UUID; \
+					"name"; $skill.certification.name; \
+					"ref"; $skill.certification.ref\
+					))
+			End for each 
+			
+			For each ($st_certification; Form:C1466.sf_templateSearch.selectedItem.stepTemplateCertifications)
+				Form:C1466.lotStep.requitedCertifications.items.push(New object:C1471(\
+					"UUID_Certification"; $st_certification.certification.UUID; \
+					"name"; $st_certification.certification.name\
 					))
 			End for each 
 			

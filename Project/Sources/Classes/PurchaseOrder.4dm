@@ -17,7 +17,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(5; "invoices-32x32.png"; "Invoices")
 	
 	$entry.setLBItemsColumn("poNumber"; "PO Number"; "width:100")
-	$entry.setLBItemsColumn("customer_name"; "Customer Name"; "width:250")
+	$entry.setLBItemsColumn("customer.name"; "Customer Name"; "width:250")
 	$entry.setLBItemsColumn("amountBilled"; "Amount Billed"; "width:100"; "format:$##,###,###,##0.00")
 	
 	$entry.setLBItemsOrderBy("poNumber")
