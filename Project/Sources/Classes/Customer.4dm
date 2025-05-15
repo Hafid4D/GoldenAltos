@@ -11,7 +11,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setSearchboxField("name")
 	
 	$entry.setPanel("panel_customer")
-	$entry.setPanelPage(1; "staff-32x32.png"; "Main"+String:C10(Count))
+	$entry.setPanelPage(1; "staff-32x32.png"; "Main")
 	$entry.setPanelPage(2; "staff-32x32.png"; "POs")
 	$entry.setPanelPage(3; "staff-32x32.png"; "Jobs")
 	$entry.setPanelPage(4; "staff-32x32.png"; "Planning")

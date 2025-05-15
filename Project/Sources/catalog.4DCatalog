@@ -180,6 +180,8 @@
 		<field name="description" uuid="8A1CFDC91BDD3545A040FE76E0EDA77A" type="10" limiting_length="255" never_null="true" id="15">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="engg" uuid="F9B770AFD7C31C40B691296E8101B33D" type="1" never_null="true" id="16"/>
+		<field name="calibrationNotRequired" uuid="7B419FDA5229704FA3904368B6D9640E" type="1" never_null="true" id="17"/>
 		<primary_key field_name="UUID" field_uuid="576820214AE49648A0CC6ACA3DD19531"/>
 	</table>
 	<table name="EquipmentType" uuid="621D3EE5BA919C468D780FC4B70A2B66" id="14">
