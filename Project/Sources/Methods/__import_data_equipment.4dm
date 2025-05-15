@@ -32,7 +32,7 @@ If ($equipment_Log.exists)
 		$eEquipmentType:=ds:C1482.EquipmentType.new()
 		$eEquipmentType.typeID:=$i+1
 		$eEquipmentType.name:=$types[$i]
-		$eEquipmentType.color:="#FFFFFF"
+		//$eEquipmentType.color:="#FFFFFF"
 		$eEquipmentType.save()
 		
 	End for 
@@ -43,7 +43,7 @@ If ($equipment_Log.exists)
 		$eEquipmentLocation:=ds:C1482.EquipmentLocation.new()
 		$eEquipmentLocation.locationID:=$i+1
 		$eEquipmentLocation.name:=$locations[$i]
-		$eEquipmentLocation.color:="#FFFFFF"
+		//$eEquipmentLocation.color:="#FFFFFF"
 		$eEquipmentLocation.save()
 	End for 
 	
@@ -71,6 +71,8 @@ If ($equipment_Log.exists)
 		$eEquipment.nextPMDate:=$equipment.NextPMDate
 		$eEquipment.notAtSite:=$equipment.Not_at_site
 		$eEquipment.division:=$equipment.Division
+		$eEquipment.engg:=$equipment.Engg
+		$eEquipment.calibrationNotRequired:=$equipment.CalibrationNotRequired
 		
 		//Checkand assign a Location if needed
 		$type:=ds:C1482.EquipmentType.query("name =:1"; Split string:C1554($equipment.EquipmentType; "\r"; sk trim spaces:K86:2).join("\r"))  //$eEquipment.type:=$equipment.EquipmentType

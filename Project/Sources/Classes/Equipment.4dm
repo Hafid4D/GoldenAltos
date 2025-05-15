@@ -14,6 +14,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setPanel("panel_equipment")
 	$entry.setPanelPage(1; ""; "Main")
+	
 	$entry.setLBItemsColumn("assignedID"; "assigned ID"; "width:200")
 	$entry.setLBItemsColumn("serialNumber"; "Serial number"; "width:100")
 	$entry.setLBItemsOrderBy("assignedID")
@@ -36,10 +37,62 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	// MARK: - Views Definition
 	
+	// MARK: Equipment out of calibration List
 	$view:=cs:C1710.sfw_definitionView.new("equipmentOutOfCalibration"; "Equipment out of calibration")
-	$view.setDisplayType("hierarchicalEntries")
-	$view.setPictoLabel("/RESOURCES/sfw/image/picto/hierarchical.png")
-	//$view.addEntryMainLevel("nameInWizard"; "assignedID"; "displayOnlyIfChildren"; "displayCount"; "style:bold"; "color:navy"; "collapsed"; "orderBy:assignedID")
-	//$view.addEntryLevel("nameInWizard"; "project"; "linkToFollow:projects"; "orderBy:name")
+	$view.setLBItemsColumn("assignedID"; "assigned ID")
+	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:200")
+	$view.setLBItemsOrderBy("assignedID")
+	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
+	$view.setSubset("equipmentOutOfCalibration")
 	$entry.setView($view)
+	
+	// MARK: Prevent Maintenance List
+	$view:=cs:C1710.sfw_definitionView.new("pmEquipmentList"; "Prevent Maintenance List")
+	$view.setLBItemsColumn("assignedID"; "assigned ID")
+	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:200")
+	$view.setLBItemsOrderBy("assignedID")
+	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
+	$view.setSubset("pmEquipmentList")
+	$entry.setView($view)
+	
+	// MARK: Due calibration List
+	$view:=cs:C1710.sfw_definitionView.new("dueCalibratioList"; "Due calibration List")
+	$view.setLBItemsColumn("assignedID"; "assigned ID")
+	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:200")
+	$view.setLBItemsOrderBy("assignedID")
+	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
+	$view.setSubset("dueCalibratioList")
+	$entry.setView($view)
+	
+	// MARK: Due Prevent Maintenance List
+	$view:=cs:C1710.sfw_definitionView.new("duePMEquipmentList"; "Due Prevent Maintenance List")
+	$view.setLBItemsColumn("assignedID"; "assigned ID")
+	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:200")
+	$view.setLBItemsOrderBy("assignedID")
+	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
+	$view.setSubset("duePMEquipmentList")
+	$entry.setView($view)
+	
+	
+Function equipmentOutOfCalibration()->$equipments : cs:C1710.EquipmentSelection
+	
+	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & calibrationNotRequired=:2 & notAtSite=:3"; Current date:C33(*); False:C215; False:C215)
+	
+	
+Function pmEquipmentList()->$equipments : cs:C1710.EquipmentSelection
+	
+	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3"; Current date:C33(*); !00-00-00!; False:C215)
+	
+	
+Function dueCalibratioList()->$equipments : cs:C1710.EquipmentSelection
+	
+	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & notAtSite=:2 & engg=:3"; Current date:C33(*); False:C215; False:C215)
+	
+	
+Function duePMEquipmentList()->$equipments : cs:C1710.EquipmentSelection
+	
+	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3 & engg=:4"; Current date:C33(*); !00-00-00!; False:C215; False:C215)
+	
+	
+	
 	
