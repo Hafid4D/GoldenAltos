@@ -109,7 +109,7 @@ If ($equipment_Log.exists)
 			$eEquipment.typeID:=0
 		End if 
 		
-		$eEquipment.status:=$equipment.ATE_STATU
+		$eEquipment.status:=$equipment.ATE_STATUS
 		$eEquipment.tech:=$equipment.TECH
 		$eEquipment.description:=$equipment.Description
 		
