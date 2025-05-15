@@ -189,6 +189,100 @@ If (True:C214)
 					$eCustomer:=ds:C1482.Customer.new()
 					$eCustomer.name:=$contact.Company_Name
 					$eCustomer.IDT_status:=1
+					
+					
+					//AP Contact
+					$cContact:=ds:C1482.Contact.new()
+					$cContact.title:="AP"
+					$cContact.UUID_Customer:=$eCustomer.UUID
+					$cContact.firstName:=""
+					$cContact.lastName:=""
+					$cContact.contactDetails:=New object:C1471()
+					$cContact.contactDetails.addresses:=New collection:C1472()
+					
+					$cContact.contactDetails.communications:=New collection:C1472()
+					
+					$comm:=New object:C1471()
+					$comm.type:="mail"
+					$comm.comment:=""
+					$comm.contact:=$customer.AP_email
+					$cContact.contactDetails.communications.push($comm)
+					
+					$comm:=New object:C1471()
+					$comm.type:="phone"
+					$comm.comment:=""
+					$comm.contact:=$customer.AP_tel
+					$cContact.contactDetails.communications.push($comm)
+					
+					$comm:=New object:C1471()
+					$comm.type:="fax"
+					$comm.comment:=""
+					$comm.contact:=$customer.AP_fax
+					$cContact.contactDetails.communications.push($comm)
+					
+					$comm:=New object:C1471()
+					$comm.type:="mobile"
+					$comm.contact:=""
+					$comm.comment:=""
+					$cContact.contactDetails.communications.push($comm)
+					
+					$comm:=New object:C1471()
+					$comm.type:="mail"
+					$comm.contact:=""
+					$comm.comment:="CC Email"
+					$cContact.contactDetails.communications.push($comm)
+					
+					$result:=$cContact.save()
+					If ($result.success=False:C215)
+						TRACE:C157
+					End if 
+					
+					//Status Contact
+					$cContact:=ds:C1482.Contact.new()
+					$cContact.title:="Status"
+					$cContact.UUID_Customer:=$eCustomer.UUID
+					$cContact.firstName:=""
+					$cContact.lastName:=""
+					$cContact.contactDetails:=New object:C1471()
+					$cContact.contactDetails.addresses:=New collection:C1472()
+					
+					$cContact.contactDetails.communications:=New collection:C1472()
+					
+					$comm:=New object:C1471()
+					$comm.type:="phone"
+					$comm.contact:=$customer.Status_Tel
+					$comm.comment:=""
+					$cContact.contactDetails.communications.push($comm)
+					
+					$comm:=New object:C1471()
+					$comm.type:="fax"
+					$comm.contact:=$customer.Status_fax
+					$comm.comment:=""
+					$cContact.contactDetails.communications.push($comm)
+					
+					$comm:=New object:C1471()
+					$comm.type:="mobile"
+					$comm.contact:=""
+					$comm.comment:=""
+					$cContact.contactDetails.communications.push($comm)
+					
+					$comm:=New object:C1471()
+					$comm.type:="mail"
+					$comm.comment:=""
+					$comm.contact:=$customer.StatusEmailAddresses
+					$cContact.contactDetails.communications.push($comm)
+					
+					$comm:=New object:C1471()
+					$comm.type:="mail"
+					$comm.comment:="CC Email"
+					$comm.contact:=$customer.status_email_CC
+					$cContact.contactDetails.communications.push($comm)
+					
+					$result:=$cContact.save()
+					If ($result.success=False:C215)
+						TRACE:C157
+					End if 
+					
 					$eCustomer.save()
 				End if 
 				$eContact.UUID_Customer:=$eCustomer.UUID
