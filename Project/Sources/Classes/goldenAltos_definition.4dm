@@ -15,6 +15,7 @@ Function _global_parameters()
 	
 	This:C1470.globalParameters:=New object:C1471
 	This:C1470.globalParameters.toolbar:=New object:C1471("visionsLogo"; "/RESOURCES/image/logo/golden_atos_100x25.png"; "visionsLogoLocal"; "/RESOURCES/image/logo/golden_atos_100x25.png")
+	This:C1470.globalParameters.toolbar.entryIconsResize:=True:C214
 	This:C1470.globalParameters.panel:=New object:C1471("defaultLogo"; "/RESOURCES/image/logo/logoGATransparent.png"; "defaultLogoLocal"; "/RESOURCES/image/logo/logoGATransparent.png")
 	This:C1470.globalParameters.users:=New object:C1471("passwordLength"; 12)
 	This:C1470.globalParameters.users.linkedDataclass:="Staff"

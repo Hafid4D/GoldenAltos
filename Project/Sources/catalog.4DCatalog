@@ -83,7 +83,7 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="name" uuid="7350D8E27C53FF449E9F614B54838D45" type="10" limiting_length="255" never_null="true" id="3"/>
-		<field name="color" uuid="5023C7854EFE3C439CCC1FC54AC8A82B" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="color" uuid="27A23F0653EA584EA54E0669416312A0" type="10" limiting_length="255" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="319814755AB5A945864EA37F29F3FDE1"/>
 	</table>
 	<table name="sfw_Document" uuid="5E1C3E25225441628E3DBCF58BFAABF4" id="8">
@@ -186,7 +186,6 @@
 		<field name="UUID" uuid="DA6A725621642F468006BD1281612C84" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="typeID" uuid="E0DDD885298E9E43AEF1C57F75A4F120" type="3" never_null="true" id="2"/>
 		<field name="name" uuid="FD13DEB41F06E04A94D7EF62F8971EFF" type="10" limiting_length="255" never_null="true" id="3"/>
-		<field name="color" uuid="0943C1A79DBC9C4EB56AA61701A6C9D7" type="10" limiting_length="255" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="DA6A725621642F468006BD1281612C84"/>
 	</table>
 	<table name="sfw_Country" uuid="4C0E0D9D33D246BAB1FACEEC19ABF144" id="15" prevent_journaling="true">
@@ -228,9 +227,6 @@
 		<field name="UUID" uuid="52CADD4F2C4DE44B83A36B7204B3ED3B" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="locationID" uuid="D906482602B50B40B45E647CBE9C8D01" type="3" never_null="true" id="2"/>
 		<field name="name" uuid="64CA7EB6135A1F47AFC036E2FF5DCA50" type="10" limiting_length="255" never_null="true" id="3">
-			<field_extra multi_line="false"/>
-		</field>
-		<field name="color" uuid="E96386FA677555469EDE90EFEC728FC5" type="10" limiting_length="255" never_null="true" id="4">
 			<field_extra multi_line="false"/>
 		</field>
 		<primary_key field_name="UUID" field_uuid="52CADD4F2C4DE44B83A36B7204B3ED3B"/>

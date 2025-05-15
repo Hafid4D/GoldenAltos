@@ -1,5 +1,37 @@
 {
 	"tables": {
+		"Staff": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 440,
+				"top": 1522,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
+		"CertificationAssignment": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 240,
+				"top": 1522,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
 		"QuoteStatus": {
 			"color": {
 				"red": 255,
@@ -399,8 +431,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 608,
-				"top": 63,
+				"left": 593,
+				"top": 243,
 				"width": 180,
 				"height": 167.33203125
 			},
@@ -619,8 +651,24 @@
 			},
 			"coordinates": {
 				"left": 0,
-				"top": 533,
+				"top": 516,
 				"width": 186.029296875,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
+		"EquipmentLocation": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 40,
+				"top": 534,
+				"width": 120,
 				"height": 167.33203125
 			},
 			"displayable_fields_count": 6,
@@ -688,6 +736,38 @@
 				"height": 188.33203125
 			},
 			"displayable_fields_count": 7,
+			"fields_ordering": 1
+		},
+		"EquipmentType": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 40,
+				"top": 287,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
+		"Equipment": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 640,
+				"top": 40,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
 		"ContactEvent": {
@@ -946,46 +1026,6 @@
 	},
 	"relations": {
 		"DB8D79B14BDE42479CDD27271248450D": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"1A0886A82A88F541A7DE80A0FAAF88CE": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"D4257CC29A3F0A4D8CD61A1B1BA72D5B": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"8B69B2A25682C34BBF8DDE3FD2A1096D": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"C999B2B79A28894BBBBA3CDD64C6B585": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"83314A01941F4F48A77B60A20607A36D": {
 			"color": {
 				"red": 240,
 				"green": 240,
