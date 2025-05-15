@@ -202,6 +202,10 @@ Function _entries_definition()
 	$entry.setLBItemsOrderBy("lotNumber")
 	$entry.enableTransaction()
 	
+	$view:=cs:C1710.sfw_definitionView.new("onlyPunchIn"; "Only Punch IN"; "derivedFrom:main"; $entry)
+	$view.setSubset("onlyPunchIn")
+	$entry.setView($view)
+	
 	This:C1470._push_entry($entry)
 	
 	$entry:=cs:C1710.sfw_definitionEntry.new("punchOut"; ["production"]; "Punch OUT")
@@ -223,7 +227,6 @@ Function _entries_definition()
 	$entry.enableTransaction()
 	
 	This:C1470._push_entry($entry)
-	
 	
 Function _profiles_definition()
 	
