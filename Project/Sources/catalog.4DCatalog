@@ -165,7 +165,7 @@
 		<field name="notAtSite" uuid="28FD852F9ECAF14EB84BA9121F84B607" type="1" never_null="true" id="10">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="division" uuid="5660AB93B3B7BC4B9FA7BE938A9184A9" type="10" limiting_length="255" never_null="true" id="11">
+		<field name="divisionID" uuid="5660AB93B3B7BC4B9FA7BE938A9184A9" type="3" never_null="true" id="11">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="typeID" uuid="12709AFE414A0040B9EB5EF8A4D02329" type="3" never_null="true" id="12">
@@ -232,6 +232,14 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<primary_key field_name="UUID" field_uuid="52CADD4F2C4DE44B83A36B7204B3ED3B"/>
+	</table>
+	<table name="Division" uuid="F25CD20FCCFE2044A3D568BAFE905227" id="20">
+		<field name="UUID" uuid="3B46C986029743428A30E84AA5F8ADC4" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="divisionID" uuid="3FBA524B83F176409912B5ADAA71DC02" type="3" never_null="true" id="2"/>
+		<field name="name" uuid="AF940D1091A17442B9E5B7EBF2E4868A" type="10" limiting_length="255" never_null="true" id="3">
+			<field_extra multi_line="false"/>
+		</field>
+		<primary_key field_name="UUID" field_uuid="3B46C986029743428A30E84AA5F8ADC4"/>
 	</table>
 	<table name="sfw_Setting" uuid="05967663C56F44398D96379354ABCC89" id="30">
 		<field name="UUID" uuid="5D20BF5E221E4AB5AA75260DDD551A9D" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -1322,6 +1330,11 @@
 	<index kind="regular" uuid="78A3E0E59CD449B095A5C975019E16B2" type="3">
 		<field_ref uuid="08FD758BD6AB464B9EB0561E7BA918A3" name="UUID_User">
 			<table_ref uuid="BBA10D61B3A54D38A2C335D8A5A1BF6E" name="sfw_Favorite"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="7E197F46BD838349B434193A2013A37B" type="7">
+		<field_ref uuid="3B46C986029743428A30E84AA5F8ADC4" name="UUID">
+			<table_ref uuid="F25CD20FCCFE2044A3D568BAFE905227" name="Division"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="81B92667ECA840CC88E29D368B48B43D" type="7">

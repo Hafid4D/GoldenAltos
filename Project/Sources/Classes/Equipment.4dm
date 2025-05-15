@@ -34,6 +34,12 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$filter.setDynamicTitle("name"; "## equipment type")
 	$entry.addFilter($filter)
 	
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterEquipmentDivision")
+	$filter.setDefaultTitle("All divisions")
+	$filter.setFilterByIDInTable("Division"; "divisionID"; "divisionID")
+	$filter.setDynamicTitle("name"; "## equipment division")
+	$entry.addFilter($filter)
+	
 	
 	// MARK: - Views Definition
 	

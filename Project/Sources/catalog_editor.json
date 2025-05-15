@@ -658,6 +658,21 @@
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
+		"Division": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 3033,
+				"top": 253,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6
+		},
 		"EquipmentLocation": {
 			"color": {
 				"red": 255,
