@@ -3,6 +3,7 @@ var $eEquipment : cs:C1710.EquipmentEntity
 var $eEquipmentLocation : cs:C1710.EquipmentLocationEntity
 var $eEquipmentType : cs:C1710.EquipmentTypeEntity
 var $eDivision : cs:C1710.DivisionEntity
+var $eRepair : cs:C1710.Repair_LogEntity
 
 var $locations; $types; $divisions : Collection
 
@@ -24,6 +25,7 @@ $types:=New collection:C1472("Accelerometer"; "ADS Digimatic Indicator"; "Ball S
 $divisions:=New collection:C1472("GAC")
 
 $equipment_Log:=Folder:C1567(fk data folder:K87:12).file("DataJson/equipments_export.json")
+
 If ($equipment_Log.exists)
 	$equipments:=JSON Parse:C1218($equipment_Log.getText())
 	TRUNCATE TABLE:C1051([Equipment:13])
@@ -86,7 +88,7 @@ If ($equipment_Log.exists)
 		$eEquipment.lastPMDate:=$equipment.LastPMDate
 		$eEquipment.nextPMDate:=$equipment.NextPMDate
 		$eEquipment.notAtSite:=$equipment.Not_at_site
-		//$eEquipment.division:=$equipment.Division
+		
 		//Checkand assign a division if needed
 		$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($equipment.Division; "\r"; sk trim spaces:K86:2).join("\r"))  //$eEquipment.type:=$equipment.EquipmentType
 		
@@ -100,7 +102,7 @@ If ($equipment_Log.exists)
 		$eEquipment.calibrationNotRequired:=$equipment.CalibrationNotRequired
 		
 		
-		//Checkand assign a Location if needed
+		//Check and assign a Location if needed
 		$type:=ds:C1482.EquipmentType.query("name =:1"; Split string:C1554($equipment.EquipmentType; "\r"; sk trim spaces:K86:2).join("\r"))  //$eEquipment.type:=$equipment.EquipmentType
 		
 		If ($type.length>0)
@@ -110,8 +112,20 @@ If ($equipment_Log.exists)
 		End if 
 		
 		$eEquipment.status:=$equipment.ATE_STATUS
-		$eEquipment.tech:=$equipment.TECH
+		$eEquipment.calTech:=$equipment.TECH
+		$eEquipment.pmTech:=$equipment.PMTech
 		$eEquipment.description:=$equipment.Description
+		$eEquipment.manufacturer:=$equipment.Manufacturer
+		//$eEquipment.equipmentConfig:=$equipment.EquipmentConfig
+		$eEquipment.statusHistory:=$equipment.Status_History
+		$eEquipment.down:=$equipment.Down
+		$eEquipment.calInProgress:=$equipment.Cal_inprocess
+		$eEquipment.calInterval:=$equipment.CalInterval
+		$eEquipment.pmInterval:=$equipment.PMInterval
+		$eEquipment.calDocument:=$equipment.CalDocument
+		$eEquipment.pmDocument:=$equipment.PMDocument
+		
+		
 		
 		$res:=$eEquipment.save()
 		If (Not:C34($res.success))
@@ -123,5 +137,41 @@ If ($equipment_Log.exists)
 	
 	
 End if 
+
+
+$repair_Log_file:=Folder:C1567(fk data folder:K87:12).file("DataJson/repair_log_export.json")
+
+If ($repair_Log_file.exists)
+	$repair_log:=JSON Parse:C1218($repair_Log_file.getText())
+	TRUNCATE TABLE:C1051([Repair_Log:21])
+	
+	
+	
+	For each ($repair; $repair_log)
+		
+		$eRepair:=ds:C1482.Repair_Log.new()
+		
+		$eRepair.systemID:=$repair.Sys_ID
+		$eRepair.fixedBy:=$repair.Fixed_by
+		$eRepair.dateFixed:=$repair.Date_fixed
+		$eRepair.reportDate:=$repair.Rep_date
+		$eRepair.status:=$repair.E_status
+		$eRepair.problem:=$repair.Problem
+		$eRepair.reportID:=$repair.Rep_num
+		$eRepair.fix:=$repair.Fix
+		
+		$res:=$eRepair.save()
+		If (Not:C34($res.success))
+			TRACE:C157
+		End if 
+		
+		
+	End for each 
+	
+End if 
+
+
+
+
 
 

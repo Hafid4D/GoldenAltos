@@ -62,7 +62,7 @@
 				},
 				"label_status": {
 					"type": "text",
-					"top": 10,
+					"top": 12,
 					"left": 613,
 					"width": 90,
 					"height": 17,
@@ -71,7 +71,7 @@
 				},
 				"entryField_status": {
 					"type": "input",
-					"top": 10,
+					"top": 12,
 					"left": 708,
 					"width": 190,
 					"height": 17,
@@ -97,37 +97,9 @@
 					"stroke": "#808080",
 					"text": "Owner/Site : "
 				},
-				"label_tech": {
-					"type": "text",
-					"top": 38,
-					"left": 613,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Tech :"
-				},
-				"entryField_tech": {
-					"type": "input",
-					"top": 38,
-					"left": 708,
-					"width": 190,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.tech",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"textAlign": "left"
-				},
 				"label_0_5": {
 					"type": "text",
-					"top": 61,
+					"top": 66,
 					"left": 12,
 					"width": 90,
 					"height": 17,
@@ -136,7 +108,7 @@
 				},
 				"entryField_serialNumber": {
 					"type": "input",
-					"top": 61,
+					"top": 66,
 					"left": 110,
 					"width": 190,
 					"height": 17,
@@ -152,47 +124,19 @@
 					"borderStyle": "none",
 					"fontWeight": "bold"
 				},
-				"label_lastCalDate": {
-					"type": "text",
-					"top": 61,
-					"left": 613,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Last Cal Date : "
-				},
-				"entryField_lastCalDate": {
-					"type": "input",
-					"top": 61,
-					"left": 708,
-					"width": 190,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.lastCalDate",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"textAlign": "left",
-					"dataSourceTypeHint": "date"
-				},
 				"label_model": {
 					"type": "text",
-					"top": 38,
+					"top": 39,
 					"left": 12,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Model :"
+					"text": "Model :",
+					"bottom": 56
 				},
 				"entryField_model": {
 					"type": "input",
-					"top": 36,
+					"top": 39,
 					"left": 110,
 					"width": 190,
 					"height": 17,
@@ -207,11 +151,12 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"fontWeight": "bold",
-					"textAlign": "left"
+					"textAlign": "left",
+					"bottom": 56
 				},
 				"label_location": {
 					"type": "text",
-					"top": 38,
+					"top": 39,
 					"left": 315,
 					"width": 90,
 					"height": 17,
@@ -220,76 +165,18 @@
 				},
 				"label_type": {
 					"type": "text",
-					"top": 61,
+					"top": 66,
 					"left": 315,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Type :"
 				},
-				"label_pmDueDate": {
-					"type": "text",
-					"top": 38,
-					"left": 908,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Next PM Date : "
-				},
-				"entryField_nextCalDate": {
-					"type": "input",
-					"top": 10,
-					"left": 1006,
-					"width": 190,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.nextCalDate",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"textAlign": "left",
-					"dataSourceTypeHint": "date"
-				},
-				"label_calDue": {
-					"type": "text",
-					"top": 10,
-					"left": 908,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Next Cal Date : "
-				},
-				"entryField_nextPMDate": {
-					"type": "input",
-					"top": 38,
-					"left": 1006,
-					"width": 190,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.nextPMDate",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"textAlign": "left",
-					"dataSourceTypeHint": "date"
-				},
 				"entryField_engg": {
 					"type": "checkbox",
 					"text": "NPU",
-					"top": 12,
-					"left": 1206,
+					"top": 39,
+					"left": 708,
 					"width": 50,
 					"height": 17,
 					"events": [
@@ -300,7 +187,7 @@
 				},
 				"pup_equipmentType": {
 					"type": "button",
-					"top": 58,
+					"top": 63,
 					"left": 413,
 					"width": 190,
 					"height": 23,
@@ -321,7 +208,7 @@
 				},
 				"pup_equipmentLocation": {
 					"type": "button",
-					"top": 33,
+					"top": 36,
 					"left": 413,
 					"width": 190,
 					"height": 23,
@@ -362,19 +249,168 @@
 					"right": 603,
 					"fontWeight": "bold"
 				},
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 0,
+					"width": 5000,
+					"height": 704,
+					"fill": "#B1CFDE",
+					"strokeWidth": 0,
+					"stroke": "#FFFFFF"
+				}
+			}
+		},
+		{
+			"objects": {
+				"main_bkgd": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 0,
+					"width": 2192,
+					"height": 677,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent"
+				},
+				"shipping_bkgd": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 0,
+					"width": 480,
+					"height": 30,
+					"sizingX": "grow",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"Text1": {
+					"type": "text",
+					"text": "Cal data",
+					"top": 121,
+					"left": 8,
+					"width": 119,
+					"height": 16,
+					"fontWeight": "bold"
+				},
+				"shipping_bkgd1": {
+					"type": "rectangle",
+					"top": 428,
+					"left": 0,
+					"width": 480,
+					"height": 30,
+					"sizingX": "grow",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"Text2": {
+					"type": "text",
+					"text": "PM data",
+					"top": 435,
+					"left": 8,
+					"width": 119,
+					"height": 16,
+					"fontWeight": "bold"
+				},
+				"label_lastCalDate": {
+					"type": "text",
+					"top": 193,
+					"left": 8,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Last Cal Date : "
+				},
+				"entryField_lastCalDate": {
+					"type": "input",
+					"top": 193,
+					"left": 145,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.lastCalDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"dataSourceTypeHint": "date"
+				},
+				"label_pmDueDate": {
+					"type": "text",
+					"top": 473,
+					"left": 8,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Next PM Date : "
+				},
+				"entryField_nextCalDate": {
+					"type": "input",
+					"top": 161,
+					"left": 145,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.nextCalDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"dataSourceTypeHint": "date"
+				},
+				"label_calDue": {
+					"type": "text",
+					"top": 161,
+					"left": 8,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Next Cal Date : "
+				},
+				"entryField_nextPMDate": {
+					"type": "input",
+					"top": 478,
+					"left": 145,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.nextPMDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"dataSourceTypeHint": "date"
+				},
 				"label_lastPMDate": {
 					"type": "text",
-					"top": 61,
-					"left": 908,
-					"width": 90,
+					"top": 505,
+					"left": 8,
+					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Last PM Date : "
 				},
 				"entryField_lastPMDate": {
 					"type": "input",
-					"top": 61,
-					"left": 1006,
+					"top": 510,
+					"left": 145,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.lastPMDate",
@@ -390,15 +426,219 @@
 					"fontWeight": "bold",
 					"textAlign": "left",
 					"dataSourceTypeHint": "date"
+				},
+				"label_calInDays": {
+					"type": "text",
+					"top": 257,
+					"left": 8,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Cal interval in days : "
+				},
+				"entryField_calInterval": {
+					"type": "input",
+					"top": 257,
+					"left": 145,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.calInterval",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"dataSourceTypeHint": "date"
+				},
+				"entryField_calTech": {
+					"type": "input",
+					"top": 225,
+					"left": 145,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.calTech",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"dataSourceTypeHint": "date"
+				},
+				"label_calBy": {
+					"type": "text",
+					"top": 225,
+					"left": 8,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Calibrated by : "
+				},
+				"label_calInDays1": {
+					"type": "text",
+					"top": 574,
+					"left": 8,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "PM interval in days : "
+				},
+				"entryField_pmInterval": {
+					"type": "input",
+					"top": 574,
+					"left": 145,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.pmInterval",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"dataSourceTypeHint": "date"
+				},
+				"entryField_pmTech": {
+					"type": "input",
+					"top": 542,
+					"left": 145,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.pmTech",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"dataSourceTypeHint": "date"
+				},
+				"label_calBy1": {
+					"type": "text",
+					"top": 542,
+					"left": 8,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "PM by : "
 				}
 			}
 		},
 		{
-			"objects": {}
+			"objects": {
+				"lb_repairLog": {
+					"type": "listbox",
+					"left": 132,
+					"top": 114,
+					"width": 1443,
+					"height": 700,
+					"events": [
+						"onClick",
+						"onDataChange",
+						"onSelectionChange",
+						"onHeaderClick",
+						"onBeginDragOver"
+					],
+					"listboxType": "collection",
+					"currentItemPositionSource": "Form:C1466.selectedRepaiLogPos",
+					"currentItemSource": "Form:C1466.selectedRepaiLog",
+					"dataSource": "Form:C1466.lb_repairLog",
+					"method": "ObjectMethods/lb_repairLog.4dm",
+					"selectionMode": "single",
+					"resizingMode": "rightToLeft",
+					"alternateFill": "#E6E6E6",
+					"horizontalLineStroke": "transparent",
+					"borderStyle": "none",
+					"verticalLineStroke": "transparent",
+					"headerHeight": "2em",
+					"right": 1575,
+					"scrollbarHorizontal": "hidden",
+					"hideFocusRing": false,
+					"columns": [
+						{
+							"header": {
+								"text": "Report ID",
+								"name": "Header5",
+								"fontWeight": "bold"
+							},
+							"name": "Column5",
+							"footer": {
+								"name": "Footer5"
+							},
+							"dataSource": "This:C1470.reportID"
+						},
+						{
+							"header": {
+								"name": "Header6",
+								"text": "Problem",
+								"fontWeight": "bold"
+							},
+							"name": "Column6",
+							"footer": {
+								"name": "Footer6"
+							},
+							"dataSource": "This:C1470.problem",
+							"dataSourceTypeHint": "text",
+							"width": 379,
+							"truncateMode": "withEllipsis",
+							"wordwrap": "none"
+						},
+						{
+							"header": {
+								"name": "Header7",
+								"text": "Fix",
+								"fontWeight": "bold"
+							},
+							"name": "Column7",
+							"footer": {
+								"name": "Footer7"
+							},
+							"dataSource": "This:C1470.fix",
+							"width": 453,
+							"truncateMode": "withEllipsis",
+							"wordwrap": "none"
+						},
+						{
+							"header": {
+								"name": "Header11",
+								"text": "report Date",
+								"fontWeight": "bold"
+							},
+							"name": "Column11",
+							"footer": {
+								"name": "Footer11"
+							},
+							"dataSource": "This:C1470.reportDate",
+							"dataSourceTypeHint": "date"
+						}
+					]
+				}
+			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 156,
+	"geometryStamp": 289,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

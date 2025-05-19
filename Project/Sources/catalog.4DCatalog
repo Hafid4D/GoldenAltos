@@ -174,14 +174,23 @@
 		<field name="status" uuid="EEDCF8C23859B5439799B45B0247BD8B" type="10" limiting_length="255" never_null="true" id="13">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="tech" uuid="E4B79FCDF4CD3A42A3F9C1792A67DA6D" type="10" limiting_length="255" never_null="true" id="14">
+		<field name="calTech" uuid="E4B79FCDF4CD3A42A3F9C1792A67DA6D" type="10" limiting_length="255" never_null="true" id="14">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="description" uuid="8A1CFDC91BDD3545A040FE76E0EDA77A" type="10" limiting_length="255" never_null="true" id="15">
+		<field name="description" uuid="8A1CFDC91BDD3545A040FE76E0EDA77A" type="10" never_null="true" id="15">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="engg" uuid="F9B770AFD7C31C40B691296E8101B33D" type="1" never_null="true" id="16"/>
 		<field name="calibrationNotRequired" uuid="7B419FDA5229704FA3904368B6D9640E" type="1" never_null="true" id="17"/>
+		<field name="manufacturer" uuid="DD73ECE11EA20B44AF15B974374A735D" type="10" limiting_length="255" never_null="true" id="18"/>
+		<field name="statusHistory" uuid="073B4EE37ABAAC4EB9B4F5B41E326897" type="10" never_null="true" id="20"/>
+		<field name="down" uuid="DE69D3ADA393224387BE370026D29F46" type="1" never_null="true" id="21"/>
+		<field name="calInProgress" uuid="8BFF67F4342DDB4CB7F47D0000B448A4" type="1" never_null="true" id="22"/>
+		<field name="calInterval" uuid="1916CD9235A5094A9CD92631C5B89E0A" type="4" never_null="true" id="23"/>
+		<field name="calDocument" uuid="7413D7219E626B4A807B0C3838DF2255" type="10" limiting_length="255" never_null="true" id="24"/>
+		<field name="pmDocument" uuid="67EA2FADDB58F344B1BD248093E3258F" type="10" limiting_length="255" never_null="true" id="25"/>
+		<field name="pmTech" uuid="1C8D814D1D1FF742B6E3007A393A2B1D" type="10" limiting_length="255" never_null="true" id="26"/>
+		<field name="pmInterval" uuid="1204F3728A14C3429E0F22286732CC34" type="4" never_null="true" id="27"/>
 		<primary_key field_name="UUID" field_uuid="576820214AE49648A0CC6ACA3DD19531"/>
 	</table>
 	<table name="EquipmentType" uuid="621D3EE5BA919C468D780FC4B70A2B66" id="14">
@@ -240,6 +249,18 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<primary_key field_name="UUID" field_uuid="3B46C986029743428A30E84AA5F8ADC4"/>
+	</table>
+	<table name="Repair_Log" uuid="E209D11E14110249AE69799CB8F51C7C" id="21">
+		<field name="UUID" uuid="8FD486DDACE0854DA8FB686A58B08089" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="systemID" uuid="C56ACBF61233134FA887559C036F2D7A" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="fixedBy" uuid="178FB5C0BB8AF745A901549D3F9B117A" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="dateFixed" uuid="BFCFF4A84085C14BA123E73537FC98F4" type="8" never_null="true" id="4"/>
+		<field name="reportDate" uuid="741357BFDBEA23499DB051B8EDCB9EE8" type="8" never_null="true" id="5"/>
+		<field name="status" uuid="DA2945D648F7F24DB6ED519C615564F1" type="10" limiting_length="255" never_null="true" id="6"/>
+		<field name="problem" uuid="F35B240CA3E0504AB0D8E25B17534FBF" type="10" never_null="true" id="7"/>
+		<field name="reportID" uuid="EECBB96290F06F42B157E3F5D74CB367" type="4" never_null="true" id="8"/>
+		<field name="fix" uuid="BD82D562133F984B90190C8F06453963" type="10" never_null="true" id="9"/>
+		<primary_key field_name="UUID" field_uuid="8FD486DDACE0854DA8FB686A58B08089"/>
 	</table>
 	<table name="sfw_Setting" uuid="05967663C56F44398D96379354ABCC89" id="30">
 		<field name="UUID" uuid="5D20BF5E221E4AB5AA75260DDD551A9D" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -1092,6 +1113,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="F35293017B54C044AE269414528459D7" name_Nto1="Link_35" name_1toN="Link_35_return" state="1">
+		<related_field kind="source">
+			<field_ref uuid="C56ACBF61233134FA887559C036F2D7A" name="systemID">
+				<table_ref uuid="E209D11E14110249AE69799CB8F51C7C" name="Repair_Log"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="28F9AB3445234D4987BA5B798C52930D" name="assignedID">
+				<table_ref uuid="FCE2D049B8944E4CA0AAB0152A549718" name="Equipment"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="01619F9BF52940F3AFF8C52A4A82535D" type="3">
 		<field_ref uuid="951D3770910B43BBBFCAB95E4B3A1C65" name="UUID_Tool">
 			<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
@@ -1297,6 +1330,11 @@
 			<table_ref uuid="4EB6C9D117A3DC4B91D031D6BC0C7DA9" name="CustomerCarrier"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="6B9F071AF0A3F643915ABDB0950D7BF5" type="7">
+		<field_ref uuid="28F9AB3445234D4987BA5B798C52930D" name="assignedID">
+			<table_ref uuid="FCE2D049B8944E4CA0AAB0152A549718" name="Equipment"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="6BA10E032C4043CBA47A614905563474" type="1">
 		<field_ref uuid="244EB5978D564578AE1CE6A3256FEFA6" name="UUID">
 			<table_ref uuid="AD45950846A646AFB0A51B4683C122B7" name="sfw_Scheduler"/>
@@ -1410,6 +1448,11 @@
 	<index kind="regular" unique_keys="true" uuid="9CEE78492358F54D8FAE398F35A45555" type="7">
 		<field_ref uuid="EE9C517A8C59724B8559A5DCB59FE560" name="UUID">
 			<table_ref uuid="21C997F4FF841640B547868BE38C05ED" name="LotStep"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="A019C1C9D555E746849F9BDE233B42FC" type="7">
+		<field_ref uuid="8FD486DDACE0854DA8FB686A58B08089" name="UUID">
+			<table_ref uuid="E209D11E14110249AE69799CB8F51C7C" name="Repair_Log"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="A0852CCA129D2C44A8BCDEDF3B506C8A" type="3">

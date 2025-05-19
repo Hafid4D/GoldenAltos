@@ -8,10 +8,17 @@ Function formMethod()
 	//This function manages the main logic for updating and refreshing the form
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
+		
+		This:C1470.LoadAllTabs()
+		
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
+				
+				
+			: (FORM Get current page:C276(*)=2)
+				This:C1470.loadRepairLog()
 				
 				
 		End case 
@@ -36,6 +43,14 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_EquipmentType()
 	This:C1470.drawPup_EquipmentLocation()
 	This:C1470.drawPup_Division()
+	
+	Use (Form:C1466.sfw.entry.panel.pages)
+		Form:C1466.sfw.entry.panel.pages[1].label:="Repair Log ("+String:C10(Form:C1466.lb_repairLog.length)+")"
+		
+	End use 
+	Form:C1466.sfw.drawHTab()
+	
+	
 	
 Function drawPup_EquipmentType()
 	If (Form:C1466.current_item#Null:C1517)
@@ -125,7 +140,6 @@ Function pup_location()
 	This:C1470.drawPup_EquipmentLocation()
 	
 	
-	
 Function drawPup_Division()
 	If (Form:C1466.current_item#Null:C1517)
 		$equipmentDivision:=ds:C1482.Division.query("divisionID= :1"; Form:C1466.current_item.divisionID).first() || New object:C1471()
@@ -168,4 +182,27 @@ Function pup_division()
 		
 	End if 
 	This:C1470.drawPup_Division()
+	
+	
+Function loadRepairLog()
+	
+	If (Form:C1466.current_item#Null:C1517)
+		
+		//Form.lb_repairLog:=New collection()
+		
+		Form:C1466.lb_repairLog:=ds:C1482.Repair_Log.query("systemID =:1"; Form:C1466.current_item.assignedID).orderBy("systemID desc")
+		
+		
+	End if 
+	
+	
+Function LoadAllTabs()
+	
+	This:C1470.loadRepairLog()
+	
+	
+	
+	
+	
+	
 	
