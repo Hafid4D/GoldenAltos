@@ -18,7 +18,6 @@ var $equipments : cs:C1710.EquipmentSelection
 SUSPEND TRANSACTION:C1385
 $eSetting:=This:C1470._getSettingVersionReferenceRecords($identEntry)
 
-
 If ($identView="main")
 	$identView:="AllEquipments"
 End if 
