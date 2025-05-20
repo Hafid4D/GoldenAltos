@@ -1113,7 +1113,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="F35293017B54C044AE269414528459D7" name_Nto1="Link_35" name_1toN="Link_35_return" state="1">
+	<relation uuid="F35293017B54C044AE269414528459D7" name_Nto1="equipment" name_1toN="repairLogs" state="1">
 		<related_field kind="source">
 			<field_ref uuid="C56ACBF61233134FA887559C036F2D7A" name="systemID">
 				<table_ref uuid="E209D11E14110249AE69799CB8F51C7C" name="Repair_Log"/>

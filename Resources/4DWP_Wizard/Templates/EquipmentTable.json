@@ -7,7 +7,7 @@
         }, {
             "check": true,
             "header": "Location",
-            "source": "This.item.locationID"
+            "source": "ds.EquipmentLocation.query(\"locationID= :1\"; This.item.locationID).first().name"
         }, {
             "check": true,
             "header": "Model",
