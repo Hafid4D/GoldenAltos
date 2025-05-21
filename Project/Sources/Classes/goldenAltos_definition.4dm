@@ -237,7 +237,7 @@ Function _entries_definition()
 	This:C1470._push_entry($entry)
 	
 Function _profiles_definition()
-	$ePM:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("qa"; "Quality Assitance"; "autoCreation")
+	$eQA:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("qa"; "Quality Assitance"; "autoCreation")
 	
 	//$ePM:=ds.sfw_UserProfile.getAndCreateIfNotExist("pm"; "project manager"; "autoCreation")
 	//$eAM:=ds.sfw_UserProfile.getAndCreateIfNotExist("am"; "account manager"; "autoCreation")
