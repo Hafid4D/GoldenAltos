@@ -80,30 +80,30 @@ If (True:C214)
 			
 			$eCustomer.contactDetails.communications:=New collection:C1472()
 			
-			//AP Contacts -> TODO : TO BE REMOVED LATER
-			$comm:=New object:C1471()
-			$comm.type:="AP Contact"
-			$comm.detail:=New object:C1471()
-			$comm.detail.email:=$customer.AP_email
-			$comm.detail.phone:=$customer.AP_tel
-			$comm.detail.fax:=$customer.AP_fax
-			$comm.detail.mobile:=""
-			$comm.detail.email_cc:=""
+			////AP Contacts -> TODO : TO BE REMOVED LATER
+			//$comm:=New object()
+			//$comm.type:="AP Contact"
+			//$comm.detail:=New object()
+			//$comm.detail.email:=$customer.AP_email
+			//$comm.detail.phone:=$customer.AP_tel
+			//$comm.detail.fax:=$customer.AP_fax
+			//$comm.detail.mobile:=""
+			//$comm.detail.email_cc:=""
 			
-			$eCustomer.contactDetails.communications.push($comm)
+			//$eCustomer.contactDetails.communications.push($comm)
 			
 			
-			//Status Contacts -> TODO : TO BE REMOVED LATER
-			$comm:=New object:C1471()
-			$comm.type:="Status Contact"
-			$comm.detail:=New object:C1471()
-			$comm.detail.fax:=$customer.AP_fax
-			$comm.detail.mobile:=""
-			$comm.detail.email_cc:=""
-			$comm.detail.phone:=$customer.Status_Tel
-			$comm.detail.email:=$customer.StatusEmailAddresses
+			////Status Contacts -> TODO : TO BE REMOVED LATER
+			//$comm:=New object()
+			//$comm.type:="Status Contact"
+			//$comm.detail:=New object()
+			//$comm.detail.fax:=$customer.AP_fax
+			//$comm.detail.mobile:=""
+			//$comm.detail.email_cc:=""
+			//$comm.detail.phone:=$customer.Status_Tel
+			//$comm.detail.email:=$customer.StatusEmailAddresses
 			
-			$eCustomer.contactDetails.communications.push($comm)
+			//$eCustomer.contactDetails.communications.push($comm)
 			
 			//Checkand assign a Carrier if needed
 			$carrier:=ds:C1482.CustomerCarrier.query("name =:1"; Split string:C1554($customer.Carrier; "\r"; sk trim spaces:K86:2).join("\r"))

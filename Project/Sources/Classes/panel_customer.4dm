@@ -8,7 +8,8 @@ Function formMethod()
 		Form:C1466.addressBilling:=1
 		Form:C1466.addressShipping:=0
 		This:C1470.loadAllTabs()
-		
+		This:C1470.LoadApContact()
+		This:C1470.LoadStatusContact()
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
@@ -181,8 +182,7 @@ Function LoadApContact()
 		Form:C1466.lb_apContact:=New collection:C1472()
 		If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()#Null:C1517)
 			
-			Form:C1466.lb_apContact:=Form:C1466.current_item.rebuidComunications("AP Contact")
-			This:C1470.displayApContact()
+			Form:C1466.lb_apContact:=Form:C1466.current_item.rebuidComunications("AP")
 		End if 
 	End if 
 	
@@ -192,8 +192,8 @@ Function LoadStatusContact()
 		Form:C1466.lb_statusContact:=New collection:C1472()
 		If (Form:C1466.current_item.contacts.query("title=:1"; "Status").first()#Null:C1517)
 			
-			Form:C1466.lb_statusContact:=Form:C1466.current_item.rebuidComunications("Status Contact")
-			This:C1470.displayStatusContact()
+			Form:C1466.lb_statusContact:=Form:C1466.current_item.rebuidComunications("Status")
+			
 		End if 
 	End if 
 	
@@ -314,136 +314,37 @@ Function bActionXXX()
 	//Manages actions: add, or remove, using dynamic menus and modification checks
 	
 Function bActionApContact()
-/*
-$mainMenu:=Create menu
+	$refMenu:=Create menu:C408
+	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openInWindow")
+	If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()=Null:C1517)
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
 	
-APPEND MENU ITEM($mainMenu; "Add AP contact"; *)
-SET MENU ITEM PARAMETER($mainMenu; -1; "--addApContact")
-SET MENU ITEM SHORTCUT($mainMenu; -1; "L"; Command key mask)
-APPEND MENU ITEM($mainMenu; "-")
-	
-APPEND MENU ITEM($mainMenu; "Delete AP contact"; *)
-SET MENU ITEM PARAMETER($mainMenu; -1; "--deleteApContact")
-APPEND MENU ITEM($mainMenu; "-")
-	
-APPEND MENU ITEM($mainMenu; "Modify AP contact"; *)
-SET MENU ITEM PARAMETER($mainMenu; -1; "--modifyApContact")
-	
-If (Form.current_apContact=Null)
-DISABLE MENU ITEM($mainMenu; 3)
-DISABLE MENU ITEM($mainMenu; 5)
-End if 
-	
-	
-$choose:=Dynamic pop up menu($mainMenu)
-RELEASE MENU($mainMenu)
-	
-Case of 
-: ($choose="--addApContact")
-	
-$contact:=New object()
-	
-OB SET($contact; "name"; "contact type")
-OB SET($contact; "value"; "contact value")
-	
-Form.lb_apContact.push($contact)
-LISTBOX INSERT ROWS(*; "lb_apContact"; Form.lb_apContact.length; 1)
-This._activate_save_cancel_button()
-LISTBOX SELECT ROW(*; "lb_apContact"; Form.lb_apContact.length; lk replace selection)
-Form.current_apContact:=$contact
-This.displayApContact()
-	
-GOTO OBJECT(*; "entryField_apContactType")
-OBJECT SET ENTERABLE(*; "label_apContact@"; True)
-OBJECT SET ENTERABLE(*; "entryField_apContact@"; True)
-	
-: ($choose="--deleteApContact")
-OBJECT SET ENTERABLE(*; "label_apContact@"; False)
-OBJECT SET ENTERABLE(*; "entryField_apContact@"; False)
-	
-$ok:=cs.sfw_dialog.me.confirm("Do you really want to delete this contact? "; "Delete"; "CANCEL")
-If ($ok)
-If (Form.current_item.contacts.query("title=:1"; "AP").first()#Null)
-For ($i; 0; Form.current_item.contacts.query("title=:1"; "AP").first().contactDetails.communications.length-1)
-OB REMOVE(Form.current_item.contacts.query("title=:1"; "AP").first().contactDetails.communications; Form.current_apContact.name)
-This.LoadApContact()
-End for 
-End if 
-End if 
-	
-	
-: ($choose="--modifyApContact")
-OBJECT SET ENTERABLE(*; "label_apContact@"; True)
-OBJECT SET ENTERABLE(*; "entryField_apContact@"; True)
-	
-End case 
-*/
+	$choice:=Dynamic pop up menu:C1006($refMenu)
+	RELEASE MENU:C978($refMenu)
+	Case of 
+		: ($choice="openInWindow")
+			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.contacts.query("title=:1"; "AP").first(); "customerService"; "contact")
+	End case 
+	This:C1470.LoadApContact()
 	
 Function bActionStatusContact()
-/*
-$mainMenu:=Create menu
+	$refMenu:=Create menu:C408
+	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openInWindow")
+	If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()=Null:C1517)
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
 	
-APPEND MENU ITEM($mainMenu; "Add status contact"; *)
-SET MENU ITEM PARAMETER($mainMenu; -1; "--addStatusContact")
-SET MENU ITEM SHORTCUT($mainMenu; -1; "L"; Command key mask)
-APPEND MENU ITEM($mainMenu; "-")
+	$choice:=Dynamic pop up menu:C1006($refMenu)
+	RELEASE MENU:C978($refMenu)
+	Case of 
+		: ($choice="openInWindow")
+			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.contacts.query("title=:1"; "Status").first(); "customerService"; "contact")
+	End case 
+	This:C1470.LoadStatusContact()
 	
-APPEND MENU ITEM($mainMenu; "Delete status contact"; *)
-SET MENU ITEM PARAMETER($mainMenu; -1; "--deleteStatusContact")
-APPEND MENU ITEM($mainMenu; "-")
-	
-APPEND MENU ITEM($mainMenu; "Modify status contact"; *)
-SET MENU ITEM PARAMETER($mainMenu; -1; "--modifyStatusContact")
-	
-	
-If (Form.current_statusContact=Null)
-DISABLE MENU ITEM($mainMenu; 3)
-DISABLE MENU ITEM($mainMenu; 5)
-End if 
-	
-$choose:=Dynamic pop up menu($mainMenu)
-RELEASE MENU($mainMenu)
-	
-	
-Case of 
-: ($choose="--addStatusContact")
-	
-$contact:=New object()
-	
-OB SET($contact; "name"; "contact type")
-OB SET($contact; "value"; "contact value")
-	
-Form.lb_statusContact.push($contact)
-LISTBOX INSERT ROWS(*; "lb_statusContact"; Form.lb_statusContact.length; 1)
-This._activate_save_cancel_button()
-LISTBOX SELECT ROW(*; "lb_statusContact"; Form.lb_statusContact.length; lk replace selection)
-Form.current_statusContact:=$contact
-This.displayStatusContact()
-	
-GOTO OBJECT(*; "entryField_statusContactType")
-OBJECT SET ENTERABLE(*; "label_statusContact@"; True)
-OBJECT SET ENTERABLE(*; "entryField_statusContact@"; True)
-	
-: ($choose="--deleteStatusContact")
-OBJECT SET ENTERABLE(*; "label_statusContact@"; False)
-OBJECT SET ENTERABLE(*; "entryField_statusContact@"; False)
-	
-$ok:=cs.sfw_dialog.me.confirm("Do you really want to delete this contact? "; "Delete"; "CANCEL")
-If ($ok)
-If (Form.current_item.contacts.query("title=:1"; "Status").first()#Null)
-//For ($i; 0; Form.current_item.contacts.query("title=:1"; "Status").first().contactDetails.communications.length-1)
-OB REMOVE(Form.current_item.contacts.query("title=:1"; "Status").first().contactDetails.communications[0]; Form.current_statusContact.name)
-This.LoadStatusContact()
-//End for 
-End if 
-End if 
-	
-: ($choose="--modifyStatusContact")
-OBJECT SET ENTERABLE(*; "label_statusContact@"; True)
-OBJECT SET ENTERABLE(*; "entryField_statusContact@"; True)
-	
-End case 
-*/
 	
 Function loadDpAddress()
 	Form:C1466.dpAddress:=New object:C1471(\
@@ -453,189 +354,7 @@ Function loadDpAddress()
 		)
 	
 	
-Function displayApContact()
-	
-/*
-OBJECT SET ENTERABLE(*; "label_apContact@"; False)
-OBJECT SET ENTERABLE(*; "entryField_apContact@"; False)
-	
-If (Form.current_apContact=Null)
-OBJECT SET VISIBLE(*; "label_apContact@"; False)
-OBJECT SET VISIBLE(*; "entryField_apContact@"; False)
-Else 
-OBJECT SET VISIBLE(*; "label_apContact@"; True)
-OBJECT SET VISIBLE(*; "entryField_apContact@"; True)
-	
-End if 
-*/
-	
-Function displayStatusContact()
-/*
-OBJECT SET ENTERABLE(*; "label_statusContact@"; False)
-OBJECT SET ENTERABLE(*; "entryField_statusContact@"; False)
-	
-If (Form.current_statusContact=Null)
-OBJECT SET VISIBLE(*; "label_statusContact@"; False)
-OBJECT SET VISIBLE(*; "entryField_statusContact@"; False)
-Else 
-OBJECT SET VISIBLE(*; "label_statusContact@"; True)
-OBJECT SET VISIBLE(*; "entryField_statusContact@"; True)
-	
-End if 
-*/
-	
 Function _activate_save_cancel_button()
 	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
-	
-	
-Function saveAPContact()
-	
-/*
-var $detail : Object
-var $communications : Collection
-	
-If (Form.current_item.contactDetails=Null)
-Form.current_item.contactDetails:=New object()
-End if 
-	
-If (OB Is defined(Form.current_item.contactDetails; "communications"))
-$communications:=Form.current_item.contactDetails.communications
-If ($communications.length>0)
-$contacts:=New collection()
-For ($i; 0; $communications.length-1)
-If (OB Is defined($communications[$i]; "type"))
-If ($communications[$i].type="AP Contact")
-	
-If (OB Is defined($communications[$i]; "detail"))
-	
-If (Form.current_apContact.name#"contact type") & (Form.current_apContact.value#"contact value")
-OB SET(Form.current_item.contactDetails.communications[$i].detail; Form.current_apContact.name; Form.current_apContact.value)
-End if 
-	
-Else 
-If (Form.current_apContact.name#"contact type") & (Form.current_apContact.value#"contact value")
-$detail:=New object()
-OB SET($detail; Form.current_apContact.name; Form.current_apContact.value)
-OB SET(Form.current_item.contactDetails.communications[$i]; "detail"; $detail)
-End if 
-	
-End if 
-	
-End if 
-	
-Else 
-If (Form.current_apContact.name#"contact type") & (Form.current_apContact.value#"contact value")
-OB SET(Form.current_item.contactDetails.communications[$i]; "type"; "AP Contact")
-	
-$detail:=New object()
-	
-OB SET($detail; Form.current_apContact.name; Form.current_apContact.value)
-OB SET(Form.current_item.contactDetails.communications[$i]; "detail"; $detail)
-End if 
-End if 
-	
-End for 
-	
-Else 
-If (Form.current_apContact.name#"contact type") & (Form.current_apContact.value#"contact value")
-$comm:=New object()
-$comm.type:="AP Contact"
-$detail:=New object()
-	
-OB SET($detail; Form.current_apContact.name; Form.current_apContact.value)
-$comm.detail:=$detail
-Form.current_item.contactDetails.communications.push($comm)
-End if 
-	
-End if 
-	
-Else 
-If (Form.current_apContact.name#"contact type") & (Form.current_apContact.value#"contact value")
-$comm:=New object()
-$comm.type:="AP Contact"
-$detail:=New object()
-	
-OB SET($detail; Form.current_apContact.name; Form.current_apContact.value)
-$comm.detail:=$detail
-$communications:=New collection()
-$communications.push($comm)
-Form.current_item.contactDetails.communications:=$communications
-End if 
-	
-End if 
-*/
-	
-Function saveStatusContact()
-	
-/*
-	
-var $detail : Object
-var $communications : Collection
-	
-If (Form.current_item.contactDetails=Null)
-Form.current_item.contactDetails:=New object()
-End if 
-	
-If (OB Is defined(Form.current_item.contactDetails; "communications"))
-$communications:=Form.current_item.contactDetails.communications
-If ($communications.length>0)
-$contacts:=New collection()
-For ($i; 0; $communications.length-1)
-If (OB Is defined($communications[$i]; "type"))
-If ($communications[$i].type="Status Contact")
-	
-If (OB Is defined($communications[$i]; "detail"))
-If (Form.current_statusContact.name#"contact type") & (Form.current_statusContact.name#"contact value")
-OB SET(Form.current_item.contactDetails.communications[$i].detail; Form.current_statusContact.name; Form.current_statusContact.value)
-End if 
-Else 
-If (Form.current_statusContact.name#"contact type") & (Form.current_statusContact.name#"contact value")
-$detail:=New object()
-OB SET($detail; Form.current_statusContact.name; Form.current_statusContact.value)
-OB SET(Form.current_item.contactDetails.communications[$i]; "detail"; $detail)
-End if 
-End if 
-	
-End if 
-	
-Else 
-	
-	
-If (Form.current_statusContact.name#"contact type") & (Form.current_statusContact.name#"contact value")
-OB SET(Form.current_item.contactDetails.communications[$i]; "type"; "Status Contact")
-	
-$detail:=New object()
-OB SET($detail; Form.current_statusContact.name; Form.current_statusContact.value)
-OB SET(Form.current_item.contactDetails.communications[$i]; "detail"; $detail)
-End if 
-End if 
-	
-End for 
-	
-Else 
-If (Form.current_statusContact.name#"contact type") & (Form.current_statusContact.name#"contact value")
-$comm:=New object()
-$comm.type:="Status Contact"
-$detail:=New object()
-OB SET($detail; Form.current_statusContact.name; Form.current_statusContact.value)
-$comm.detail:=$detail
-Form.current_item.contactDetails.communications.push($comm)
-End if 
-End if 
-	
-Else 
-If (Form.current_statusContact.name#"contact type") & (Form.current_statusContact.name#"contact value")
-$comm:=New object()
-$comm.type:="Status Contact"
-$detail:=New object()
-OB SET($detail; Form.current_statusContact.name; Form.current_statusContact.value)
-$comm.detail:=$detail
-$communications:=New collection()
-$communications.push($comm)
-Form.current_item.contactDetails.communications:=$communications
-End if 
-End if 
-*/
-	
 	
 	

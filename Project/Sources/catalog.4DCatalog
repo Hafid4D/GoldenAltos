@@ -993,7 +993,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="CF3063584FFE4334AC18A5B8B1445D95" name_Nto1="customer" name_1toN="contacts" state="1">
+	<relation uuid="CF3063584FFE4334AC18A5B8B1445D95" name_Nto1="customer" name_1toN="contacts" state="1" integrity="delete">
 		<related_field kind="source">
 			<field_ref uuid="02F77BF6D13440FDA7D868C17307EDBE" name="UUID_Customer">
 				<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>

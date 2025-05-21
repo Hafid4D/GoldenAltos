@@ -18,47 +18,22 @@ local Function rebuildAddress()->$address : Object
 	
 local Function rebuidComunications($contactType)->$contacts : Collection
 	
-	
-	If (True:C214)
-		
-		
-		$communications:=Form:C1466.current_item.contactDetails.communications.query("type = :1"; $contactType).first()
-		If ($communications#Null:C1517)
-			$contacts:=New collection:C1472()
-			//For ($i; 0; $communications.length-1)
+	$communications:=Form:C1466.current_item.contacts.query("title=:1"; $contactType).first().contactDetails.communications
+	If ($communications#Null:C1517)
+		$contacts:=New collection:C1472()
+		For ($i; 0; $communications.length-1)
 			
-			OB GET PROPERTY NAMES:C1232($communications.detail; arrNames; arrTypes)
-			For ($j; 1; Size of array:C274(arrNames))
-				$object:=New object:C1471
-				$Object.name:=arrNames{$j}
-				$Object.value:=OB Get:C1224($communications.detail; $Object.name)
-				$contacts.push($Object)
-			End for 
+			$object:=New object:C1471
+			$Object.name:=$communications[$i].type
+			$Object.value:=$communications[$i].contact
+			$Object.comment:=$communications[$i].comment
+			$contacts.push($Object)
 			
-			//End for 
 			
-		End if 
+		End for 
 		
-		
-	Else 
-		
-		$communications:=Form:C1466.current_item.contacts.query("title=:1"; $contactType).first().contactDetails.communications
-		If ($communications#Null:C1517)
-			$contacts:=New collection:C1472()
-			For ($i; 0; $communications.length-1)
-				
-				OB GET PROPERTY NAMES:C1232($communications[$i]; arrNames; arrTypes)
-				For ($j; 1; Size of array:C274(arrNames))
-					$object:=New object:C1471
-					$Object.name:=arrNames{$j}
-					$Object.value:=OB Get:C1224($communications[$i]; $Object.name)
-					$contacts.push($Object)
-				End for 
-				
-			End for 
-			
-		End if 
 	End if 
+	
 	
 	
 	//mark:-Callbacks
@@ -85,9 +60,62 @@ local Function isDeletable()->$isDeletable : Boolean
 	
 	//mark:-Sub functions
 local Function _initCommunication()
-	If (This:C1470.contactDetails.communications=Null:C1517)
-		This:C1470.contactDetails.communications:=New collection:C1472
+	//If (This.contactDetails.communications=Null)
+	//This.contactDetails.communications:=New collection
+	//End if 
+	
+	If (ds:C1482.Contact.query("UUID_Customer=:1"; This:C1470.UUID).extract("title").indexOf("AP")=-1)
+		var $apContact : cs:C1710.ContactEntity
+		$apContact:=ds:C1482.Contact.new()
+		$apContact.title:="AP"
+		$apContact.UUID_Customer:=This:C1470.UUID
+		
+		$apContact.contactDetails:=New object:C1471
+		
+		$apContact.contactDetails.addresses:=New collection:C1472
+		
+		$mainAddress:=$apContact.contactDetails.addresses.query("type = :1"; "main").first()
+		If ($mainAddress=Null:C1517)
+			$mainAddress:=New object:C1471
+			$mainAddress.type:="main"
+			$mainAddress.detail:=New object:C1471
+			$mainAddress.detail.country:="FR"
+			$apContact.contactDetails.addresses.push($mainAddress)
+		End if 
+		
+		$apContact.contactDetails.communications:=New collection:C1472
+		
+		$apContact.save()
 	End if 
+	
+	If (ds:C1482.Contact.query("UUID_Customer=:1"; This:C1470.UUID).extract("title").indexOf("Status")=-1)
+		var $statusContact : cs:C1710.ContactEntity
+		$statusContact:=ds:C1482.Contact.new()
+		$statusContact.title:="Status"
+		$statusContact.UUID_Customer:=This:C1470.UUID
+		
+		$statusContact.contactDetails:=New object:C1471
+		
+		$statusContact.contactDetails.addresses:=New collection:C1472
+		
+		$mainAddress:=$statusContact.contactDetails.addresses.query("type = :1"; "main").first()
+		If ($mainAddress=Null:C1517)
+			$mainAddress:=New object:C1471
+			$mainAddress.type:="main"
+			$mainAddress.detail:=New object:C1471
+			$mainAddress.detail.country:="FR"
+			$statusContact.contactDetails.addresses.push($mainAddress)
+		End if 
+		
+		$statusContact.contactDetails.communications:=New collection:C1472
+		
+		$statusContact.save()
+	End if 
+	
+	
+	
+	//End if 
+	
 	
 	
 local Function _initAddress()
