@@ -541,6 +541,8 @@
 		<field name="UUID" uuid="46A023E9F16E49DBA21C7DCCBAA82770" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="name" uuid="72B7BB6EB54C4A27A9689D43F5EE2C3C" type="10" limiting_length="255" never_null="true" id="2"/>
 		<field name="ref" uuid="66AE759FD5E4834687653ACC2ECBF0BE" type="4" never_null="true" id="3"/>
+		<field name="duration" uuid="2C416E8F43E7FF47873E9F787A42DB2F" type="4" never_null="true" id="4"/>
+		<field name="oneTime" uuid="12EA1AFB18F4154F883825FDFD517862" type="1" never_null="true" id="5"/>
 		<primary_key field_name="UUID" field_uuid="46A023E9F16E49DBA21C7DCCBAA82770"/>
 	</table>
 	<table name="StepTemplateCertification" uuid="7A8F1179566C46A6AB8E4B04DD19B496" id="125">
@@ -662,18 +664,28 @@
 		<field name="UUID" uuid="5692BDD57E88304092FB8E31BA284F2D" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_Staff" uuid="EE187104965B1348AA53D2C2A3B28529" type="10" store_as_UUID="true" never_null="true" id="2"/>
 		<field name="UUID_Certification" uuid="76DD5A5DDBC91146A24857EF820BB589" type="10" store_as_UUID="true" never_null="true" id="3"/>
+		<field name="certificationDate" uuid="FEAF37B2E5CD0144B364A0AD7D00A310" type="4" never_null="true" id="4"/>
+		<field name="expiredIn" uuid="9D053CBCB6006843B6342AD00FAECD72" type="4" never_null="true" id="5"/>
 		<primary_key field_name="UUID" field_uuid="5692BDD57E88304092FB8E31BA284F2D"/>
 	</table>
 	<table name="Staff" uuid="FD10D10C9E0015458AFF59F988A373BB" id="135">
 		<field name="UUID" uuid="6941AB4C41898A4A9FBF25D5AC27CA2B" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_User" uuid="4348C8943690B243AFF8327DE0DA1368" type="10" store_as_UUID="true" never_null="true" id="2"/>
-		<field name="civility" uuid="178C1284FE2FFD479D3A8AAD31AF15EF" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="retrainDate" uuid="E05AFD8B07FC254FBBBAE2880867F189" type="8" never_null="true" id="3"/>
 		<field name="firstName" uuid="A922C209EFD24B41BE6B687860BE3C78" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="lastName" uuid="30C1F33ACB30EE4CBA2D2DD6218EF823" type="10" limiting_length="255" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="inactive" uuid="20CEA4B6D6E1A645AEC79369DCC34F13" type="1" never_null="true" id="6"/>
-		<field name="title" uuid="D3AD88037F66C948AA12662C8D4338C4" type="10" limiting_length="255" never_null="true" id="7"/>
+		<field name="terminationDate" uuid="9711BE3164B4C44BA4E865C89B7B0507" type="8" never_null="true" id="8"/>
+		<field name="creationDate" uuid="2EA2F0715821A44A8A08F4EFB2CF2EDE" type="8" never_null="true" id="9"/>
+		<field name="code" uuid="10F414604ECF714E8F9B93A248D3CB6D" type="10" limiting_length="255" unique="true" never_null="true" id="10"/>
+		<field name="department" uuid="73E51172CDE5C64395048F0930C85A05" type="10" limiting_length="255" never_null="true" id="11"/>
+		<field name="terminated" uuid="6D60DE6AF3ED654EB394FFE7695CB9DF" type="1" never_null="true" id="12"/>
+		<field name="hireDate" uuid="7EBB8EEF817496498EE3FA0CC391675E" type="8" never_null="true" id="13"/>
+		<field name="division" uuid="C307EB019AE88F48B0C093CC7A4B60B1" type="10" limiting_length="255" never_null="true" id="14"/>
+		<field name="citizenShipStatus" uuid="94BC1376AD162B4A9CB7ACBB60EA56E3" type="10" limiting_length="255" never_null="true" id="15"/>
+		<field name="contactDetails" uuid="DFFE835335868749B15EECAADA389EB4" type="21" blob_switch_size="2147483647" never_null="true" id="16"/>
 		<primary_key field_name="UUID" field_uuid="6941AB4C41898A4A9FBF25D5AC27CA2B"/>
 	</table>
 	<relation uuid="28F035FB298D4CB6988212AA82A48186" name_Nto1="user" name_1toN="comments" state="1">
@@ -1060,7 +1072,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="63E19F83A424FA4B9797919BB37294EE" name_Nto1="staff" name_1toN="certifications" state="1">
+	<relation uuid="63E19F83A424FA4B9797919BB37294EE" name_Nto1="staff" name_1toN="assignments" state="1">
 		<related_field kind="source">
 			<field_ref uuid="EE187104965B1348AA53D2C2A3B28529" name="UUID_Staff">
 				<table_ref uuid="061A7E4F30DD8C46A92C801EB9B9ACC5" name="CertificationAssignment"/>
@@ -1227,6 +1239,11 @@
 	<index kind="regular" unique_keys="true" uuid="48A6882E9F11AD4C9E7D308EA4083B1B" type="7">
 		<field_ref uuid="576820214AE49648A0CC6ACA3DD19531" name="UUID">
 			<table_ref uuid="FCE2D049B8944E4CA0AAB0152A549718" name="Equipment"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="490E6CB43D43F846A537EB3B601CBE03" type="1">
+		<field_ref uuid="10F414604ECF714E8F9B93A248D3CB6D" name="code">
+			<table_ref uuid="FD10D10C9E0015458AFF59F988A373BB" name="Staff"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="494707026F4445E39B210152D5EFBFAA" type="3">

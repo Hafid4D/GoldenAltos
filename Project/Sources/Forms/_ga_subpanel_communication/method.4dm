@@ -23,6 +23,20 @@ Case of
 		$setActivation:=True:C214
 		$rebuildDisplayedLB:=True:C214
 		
+		OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+		
+		OBJECT GET COORDINATES:C663(*; "lb_communications"; $lb_left; $lb_top; $lb_right; $lb_bottom)
+		OBJECT GET COORDINATES:C663(*; "bActions"; $ba_left; $ba_top; $ba_right; $ba_bottom)
+		OBJECT GET COORDINATES:C663(*; "header_bkgd"; $hb_left; $hb_top; $hb_right; $hb_bottom)
+		OBJECT GET COORDINATES:C663(*; "communication_bkgd"; $cb_left; $cb_top; $cb_right; $cb_bottom)
+		
+		$widthBa:=$ba_right-$ba_left
+		
+		OBJECT SET COORDINATES:C1248(*; "lb_communications"; $lb_left; $lb_top; $widthSubform; $lb_bottom)
+		OBJECT SET COORDINATES:C1248(*; "bActions"; $widthSubform-$widthBa-9; $ba_top; $widthSubform-9; $ba_bottom)
+		OBJECT SET COORDINATES:C1248(*; "header_bkgd"; $hb_left; $hb_top; $widthSubform; $hb_bottom)
+		OBJECT SET COORDINATES:C1248(*; "communication_bkgd"; $cb_left; $cb_top; $widthSubform; $cb_bottom)
+		
 		
 	: (FORM Event:C1606.code=On Bound Variable Change:K2:52)
 		$setActivation:=True:C214
@@ -87,7 +101,7 @@ Case of
 				
 				$form:=New object:C1471()
 				
-				$winRef:=Open form window:C675("_ga_subpanelCommunicationSingle"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+				$winRef:=Open form window:C675("_ga_subpanelCommunicationSingle"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
 				DIALOG:C40("_ga_subpanelCommunicationSingle"; $form)
 				CLOSE WINDOW:C154($winRef)
 				
@@ -162,6 +176,7 @@ CALL FORM(Current form window; "sfw_main_draw_button")
 		
 End if 
 */
+		
 End case 
 
 

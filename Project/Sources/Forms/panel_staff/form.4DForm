@@ -35,22 +35,22 @@
 	"pages": [
 		{
 			"objects": {
-				"label_civility": {
+				"label_code": {
 					"type": "text",
 					"top": 12,
 					"left": 12,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Civility"
+					"text": "Code"
 				},
-				"entryField_civility": {
+				"entryField_code": {
 					"type": "input",
 					"top": 12,
-					"left": 132,
-					"width": 140,
+					"left": 112,
+					"width": 138,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.civility",
+					"dataSource": "Form:C1466.current_item.code",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -60,7 +60,8 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold"
+					"fontWeight": "bold",
+					"right": 250
 				},
 				"label_firstName": {
 					"type": "text",
@@ -74,8 +75,8 @@
 				"entryField_firstName": {
 					"type": "input",
 					"top": 37,
-					"left": 132,
-					"width": 140,
+					"left": 112,
+					"width": 138,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.firstName",
 					"focusable": false,
@@ -87,7 +88,8 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold"
+					"fontWeight": "bold",
+					"right": 250
 				},
 				"label_lastName": {
 					"type": "text",
@@ -101,8 +103,8 @@
 				"entryField_lastName": {
 					"type": "input",
 					"top": 62,
-					"left": 132,
-					"width": 140,
+					"left": 112,
+					"width": 138,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.lastName",
 					"focusable": false,
@@ -114,24 +116,25 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold"
+					"fontWeight": "bold",
+					"right": 250
 				},
-				"label_title": {
+				"label_department": {
 					"type": "text",
 					"top": 12,
-					"left": 372,
+					"left": 312,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Title"
+					"text": "Department"
 				},
-				"entryField_title": {
+				"entryField_department": {
 					"type": "input",
 					"top": 12,
-					"left": 492,
-					"width": 140,
+					"left": 432,
+					"width": 138,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.title",
+					"dataSource": "Form:C1466.current_item.department",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -143,28 +146,429 @@
 					"borderStyle": "none",
 					"fontWeight": "bold"
 				},
-				"label_0_5": {
+				"label_division": {
+					"type": "text",
+					"top": 12,
+					"left": 632,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Division"
+				},
+				"Field_division": {
+					"type": "input",
+					"top": 12,
+					"left": 732,
+					"width": 138,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.division",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"dataSourceTypeHint": "date",
+					"dateFormat": "long"
+				},
+				"label_citizenShipStatus1": {
 					"type": "text",
 					"top": 37,
-					"left": 372,
-					"width": 90,
+					"left": 312,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Citizenship Status"
+				},
+				"Field_citizenShipStatus1": {
+					"type": "input",
+					"top": 37,
+					"left": 432,
+					"width": 138,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.citizenShipStatus",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"dataSourceTypeHint": "date",
+					"dateFormat": "long"
+				},
+				"wr30_background": {
+					"type": "rectangle",
+					"top": 88,
+					"left": 580,
+					"width": 304,
+					"height": 25,
+					"stroke": "transparent",
+					"fill": "#DFF9FB",
+					"visibility": "visible"
+				},
+				"wr30_text": {
+					"type": "input",
+					"left": 612,
+					"top": 93,
+					"width": 264,
+					"height": 17,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSource": "\"Retraining for \"+String:C10(Form:C1466.current_item.getCertiExpiredIn(30).length)+\" certifications due within 30 days.\"",
+					"enterable": false,
+					"focusable": false,
+					"visibility": "visible"
+				},
+				"wr30_icon": {
+					"type": "picture",
+					"top": 91,
+					"left": 585,
+					"width": 18,
+					"height": 18,
+					"picture": "/RESOURCES/sfw/image/icon/alert-50x50.png",
+					"pictureFormat": "scaled",
+					"visibility": "visible"
+				}
+			}
+		},
+		{
+			"objects": {
+				"subform_communication": {
+					"type": "subform",
+					"left": 5,
+					"top": 212,
+					"width": 905,
+					"height": 197,
+					"detailForm": "_ga_subpanel_communication",
+					"dataSource": "Form:C1466.subFormCommunication",
+					"method": "ObjectMethods/subform_communication.4dm"
+				},
+				"header_bkgd2": {
+					"type": "rectangle",
+					"top": 118,
+					"left": 5,
+					"width": 450,
+					"height": 30,
+					"sizingX": "grow",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 455
+				},
+				"lbl_address1": {
+					"type": "text",
+					"top": 125,
+					"left": 12,
+					"width": 250,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Staff Information",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"header_bkgd4": {
+					"type": "rectangle",
+					"top": 151,
+					"left": 5,
+					"width": 450,
+					"height": 57,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"right": 455
+				},
+				"label_inactive": {
+					"type": "text",
+					"top": 159,
+					"left": 249,
+					"width": 70,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Inactive"
 				},
-				"Check Box": {
+				"label_0_16": {
+					"type": "text",
+					"top": 159,
+					"left": 13,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Creation"
+				},
+				"entryField_creationDate": {
+					"type": "input",
+					"top": 159,
+					"left": 98,
+					"width": 110,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.creationDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onClick",
+						"onGettingFocus"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "date",
+					"dateFormat": "short",
+					"method": "ObjectMethods/entryField_creationDate.4dm"
+				},
+				"entryField_inactive": {
 					"type": "checkbox",
-					"text": "Inactive",
-					"top": 35,
-					"left": 492,
-					"width": 294,
-					"height": 19,
+					"text": "Inactive Staff",
+					"top": 157,
+					"left": 334,
+					"width": 110,
+					"height": 18,
 					"events": [
 						"onClick"
 					],
-					"dataSource": "Form:C1466.current_item.inactive",
 					"dataSourceTypeHint": "boolean",
+					"sizingX": "grow",
+					"dataSource": "Form:C1466.current_item.inactive"
+				},
+				"header_bkgd1": {
+					"type": "rectangle",
+					"top": 118,
+					"left": 460,
+					"width": 450,
+					"height": 30,
+					"sizingX": "grow",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 910
+				},
+				"header_bkgd3": {
+					"type": "rectangle",
+					"top": 151,
+					"left": 460,
+					"width": 450,
+					"height": 57,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"right": 910
+				},
+				"lbl_address2": {
+					"type": "text",
+					"top": 125,
+					"left": 468,
+					"width": 250,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Termination",
+					"fontSize": 12,
 					"fontWeight": "bold"
+				},
+				"label_0_1": {
+					"type": "text",
+					"top": 159,
+					"left": 469,
+					"width": 130,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Terminated"
+				},
+				"label_0_2": {
+					"type": "text",
+					"top": 183,
+					"left": 469,
+					"width": 130,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Termination Date"
+				},
+				"entryField_terminationDate": {
+					"type": "input",
+					"top": 183,
+					"left": 615,
+					"width": 110,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.terminationDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onClick",
+						"onGettingFocus"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "date",
+					"method": "ObjectMethods/entryField_terminationDate.4dm"
+				},
+				"label_hireDate": {
+					"type": "text",
+					"top": 184,
+					"left": 13,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Hire Date"
+				},
+				"entryField_hireDate": {
+					"type": "input",
+					"top": 184,
+					"left": 98,
+					"width": 110,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.hireDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onClick",
+						"onGettingFocus"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "date",
+					"dateFormat": "short",
+					"method": "ObjectMethods/entryField_hireDate.4dm"
+				},
+				"label_retrainDate": {
+					"type": "text",
+					"top": 184,
+					"left": 249,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Retraining Due"
+				},
+				"entryField_retrainDate": {
+					"type": "input",
+					"top": 184,
+					"left": 334,
+					"width": 110,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.retrainDate",
+					"focusable": true,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onClick",
+						"onGettingFocus"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"method": "ObjectMethods/entryField_retrainDate.4dm",
+					"dataSourceTypeHint": "date",
+					"dateFormat": "short"
+				},
+				"dp_creationDate": {
+					"type": "subform",
+					"top": 145,
+					"left": 1635,
+					"width": 168,
+					"height": 190,
+					"dataSource": "Form:C1466.current_item.creationDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DatePicker",
+					"hideFocusRing": true,
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dp_creationDate.4dm",
+					"events": [
+						"onDataChange"
+					],
+					"visibility": "hidden"
+				},
+				"entryField_terminated": {
+					"type": "checkbox",
+					"text": "Terminated",
+					"top": 157,
+					"left": 615,
+					"width": 110,
+					"height": 18,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"sizingX": "grow",
+					"dataSource": "Form:C1466.current_item.terminated"
+				},
+				"dp_hireDate": {
+					"type": "subform",
+					"top": 145,
+					"left": 1635,
+					"width": 168,
+					"height": 190,
+					"dataSource": "Form:C1466.current_item.hireDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DatePicker",
+					"hideFocusRing": true,
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dp_hireDate.4dm",
+					"events": [
+						"onDataChange"
+					],
+					"visibility": "hidden"
+				},
+				"dp_retrainDate": {
+					"type": "subform",
+					"top": 145,
+					"left": 1635,
+					"width": 168,
+					"height": 190,
+					"dataSource": "Form:C1466.current_item.retrainDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DatePicker",
+					"hideFocusRing": true,
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dp_retrainDate.4dm",
+					"events": [
+						"onDataChange"
+					],
+					"visibility": "hidden"
+				},
+				"dp_terminationDate": {
+					"type": "subform",
+					"top": 145,
+					"left": 1635,
+					"width": 168,
+					"height": 190,
+					"dataSource": "Form:C1466.current_item.terminationDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DatePicker",
+					"hideFocusRing": true,
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dp_terminationDate.4dm",
+					"events": [
+						"onDataChange"
+					],
+					"visibility": "hidden"
 				}
 			}
 		},
@@ -186,7 +590,7 @@
 					"type": "listbox",
 					"top": 119,
 					"left": 107,
-					"width": 370,
+					"width": 402,
 					"height": 440,
 					"resizingMode": "legacy",
 					"listboxType": "collection",
@@ -208,13 +612,14 @@
 					"method": "ObjectMethods/lb_assignments.4dm",
 					"selectionMode": "single",
 					"singleClickEdit": false,
+					"rowFillSource": "highlightExpiredCertification",
 					"columns": [
 						{
 							"name": "header_certifName",
 							"dataSource": "This:C1470.name",
-							"width": 313,
-							"minWidth": 10,
-							"maxWidth": 32000,
+							"width": 330,
+							"minWidth": 200,
+							"maxWidth": 340,
 							"events": [
 								"onClick",
 								"onDataChange"
@@ -242,7 +647,7 @@
 								"text": ""
 							},
 							"name": "entryField_hasCertif",
-							"width": 40,
+							"width": 30,
 							"dataSourceTypeHint": "boolean",
 							"enterable": false,
 							"footer": {
@@ -255,7 +660,9 @@
 								"onClick"
 							],
 							"resizable": false,
-							"controlType": "checkbox"
+							"controlType": "checkbox",
+							"minWidth": 30,
+							"maxWidth": 30
 						}
 					]
 				},
@@ -275,13 +682,79 @@
 					"dataSource": "\"Certifications (\"+String:C10(Form:C1466.lb_assignments.length)+\")\"",
 					"fontWeight": "bold",
 					"fontSize": 11
+				},
+				"Oval": {
+					"type": "oval",
+					"top": 492,
+					"left": 535,
+					"width": 18,
+					"height": 18,
+					"fill": "#7BEFB2",
+					"stroke": "#696969"
+				},
+				"Text": {
+					"type": "text",
+					"text": "One Time Certification or more than 30 days for expiration.",
+					"top": 492,
+					"left": 567,
+					"width": 350,
+					"height": 18
+				},
+				"Oval1": {
+					"type": "oval",
+					"top": 515,
+					"left": 535,
+					"width": 18,
+					"height": 18,
+					"fill": "#F6E58D",
+					"stroke": "#696969"
+				},
+				"Text1": {
+					"type": "text",
+					"text": "Expiring in 30 days.",
+					"top": 515,
+					"left": 567,
+					"width": 350,
+					"height": 18
+				},
+				"Oval3": {
+					"type": "oval",
+					"top": 538,
+					"left": 535,
+					"width": 18,
+					"height": 18,
+					"fill": "#FF7979",
+					"stroke": "#696969"
+				},
+				"Text3": {
+					"type": "text",
+					"text": "Expiring in 15 days.",
+					"top": 538,
+					"left": 567,
+					"width": 350,
+					"height": 18
 				}
 			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 146,
+	"geometryStamp": 950,
 	"editor": {
+		"groups": {
+			"Group": [
+				"Oval",
+				"Text",
+				"Oval1",
+				"Text1",
+				"Oval3",
+				"Text3"
+			],
+			"grp_wr30": [
+				"wr30_background",
+				"wr30_text",
+				"wr30_icon"
+			]
+		},
 		"activeView": "View 1",
 		"defaultView": "View 1",
 		"views": {

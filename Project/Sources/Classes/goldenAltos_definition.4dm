@@ -9,7 +9,7 @@ Class constructor
 	//This._event_definition()
 	This:C1470._scheduler_definition()
 	This:C1470._notification_definition()
-	//This._profiles_definition()
+	This:C1470._profiles_definition()
 	
 Function _global_parameters()
 	
@@ -128,7 +128,7 @@ Function _notification_definition()
 	var $definition : cs:C1710.sfw_definitionNotificationType
 	
 	$definition:=cs:C1710.sfw_definitionNotificationType.new()
-	$definition.setDescription("A new task time is added for the project ##projectName## by ##staffName##.")
+	$definition.setDescription("Retraining due within 30 days.")
 	$definition.setActive()
 	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("CertificationRetraining"; "Retraining due within 30 days"; $definition)
 	
@@ -179,6 +179,14 @@ Function _visions_definition()
 	$vision.setToolbarBackgroundColor("DarkCyan")
 	$vision.setFocusRingColor("darkred")
 	$vision.setIcon("image/vision/quality-assistance-24x24.png")
+	//$vision.setAllowedProfiles("qa")
+	This:C1470._push_vision($vision)
+	
+	$vision:=cs:C1710.sfw_definitionVision.new("salesAndQuotes"; "Sales & Quotes")
+	$vision.setToolbarBackgroundColor("DarkCyan")
+	$vision.setFocusRingColor("darkred")
+	$vision.setIcon("image/vision/sales-and-quotes-24x24.png")
+	//$vision.setAllowedProfiles("qa")
 	This:C1470._push_vision($vision)
 	
 	
@@ -229,9 +237,10 @@ Function _entries_definition()
 	This:C1470._push_entry($entry)
 	
 Function _profiles_definition()
+	$ePM:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("qa"; "Quality Assitance"; "autoCreation")
 	
-	$ePM:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("pm"; "project manager"; "autoCreation")
-	$eAM:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("am"; "account manager"; "autoCreation")
-	$eTAM:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("tam"; "technical account manager"; "autoCreation")
-	$eTest:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("tst"; "tester"; "autoCreation")
+	//$ePM:=ds.sfw_UserProfile.getAndCreateIfNotExist("pm"; "project manager"; "autoCreation")
+	//$eAM:=ds.sfw_UserProfile.getAndCreateIfNotExist("am"; "account manager"; "autoCreation")
+	//$eTAM:=ds.sfw_UserProfile.getAndCreateIfNotExist("tam"; "technical account manager"; "autoCreation")
+	//$eTest:=ds.sfw_UserProfile.getAndCreateIfNotExist("tst"; "tester"; "autoCreation")
 	

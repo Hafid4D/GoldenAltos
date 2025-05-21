@@ -461,7 +461,6 @@ Create user: sfw_User & Staff tables
 If (True:C214)
 	TRUNCATE TABLE:C1051([Staff:135])
 	TRUNCATE TABLE:C1051([sfw_User:16])
-	TRUNCATE TABLE:C1051([ContactEvent:12])
 	
 	$user:=ds:C1482.sfw_User.new()
 	$user.firstName:="Hassan"
@@ -480,12 +479,79 @@ If (True:C214)
 	$staff.UUID_User:=$user.UUID
 	$staff.firstName:="Hassan"
 	$staff.lastName:="Sribet"
-	$staff.civility:="Mr"
-	$staff.title:="Engineer"
+	$staff.code:="001144"
+	
+	$staff.contactDetails:=New object:C1471(\
+		"addresses"; New collection:C1472(); \
+		"communications"; New collection:C1472()\
+		)
 	
 	$res:=$staff.save()
 	
 	If (Not:C34($res.success))
 		TRACE:C157
 	End if 
+	
+	$user:=ds:C1482.sfw_User.new()
+	$user.firstName:="Omar"
+	$user.lastName:="Debbagh"
+	$user.login:="omardebbagh"
+	$user.accesses:=JSON Parse:C1218("{\"asDesigner\":true,\"password\":{\"temporary\":false,\"sendTemporaryByMail\":false,\"lastReset\":706358866,\"hash\":\"$2b$10$jWCPtle9cInwDJfVJbCrsecHbiVfbbBISVGEOOGXMILflvJnv9aJG\",\"lastChange\":706358916}}")
+	
+	$res:=$user.save()
+	
+	If (Not:C34($res.success))
+		TRACE:C157
+	End if 
+	
+	$staff:=ds:C1482.Staff.new()
+	$staff.UUID_User:=$user.UUID
+	$staff.firstName:="Omar"
+	$staff.lastName:="Debbagh"
+	$staff.code:="001155"
+	
+	$staff.contactDetails:=New object:C1471(\
+		"addresses"; New collection:C1472(); \
+		"communications"; New collection:C1472()\
+		)
+	
+	$res:=$staff.save()
+	
+	If (Not:C34($res.success))
+		TRACE:C157
+	End if 
+End if 
+
+/**
+import staffs
+**/
+If (True:C214)
+	//TRUNCATE TABLE([Staff])
+	
+	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/staff_export.json")
+	
+	$records:=JSON Parse:C1218($file.getText())
+	
+	For each ($record; $records)
+		$staff_e:=ds:C1482.Staff.new()
+		
+		$staff_e.firstName:=$record.firstName
+		$staff_e.lastName:=$record.lastName
+		$staff_e.retrainDate:=$record.retrainDate
+		$staff_e.terminationDate:=$record.terminationDate
+		$staff_e.creationDate:=cs:C1710.sfw_stmp.me.getDate($record.creationDate)
+		$staff_e.code:=$record.code
+		$staff_e.department:=$record.department
+		$staff_e.terminated:=$record.terminated
+		$staff_e.hireDate:=$record.hireDate
+		$staff_e.division:=$record.division
+		$staff_e.citizenShipStatus:=$record.citizenShipStatus
+		$staff_e.contactDetails:=$record.contactDetails
+		
+		$res:=$staff_e.save()
+		
+		If (Not:C34($res.success))
+			TRACE:C157
+		End if 
+	End for each 
 End if 

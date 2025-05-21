@@ -15,6 +15,7 @@
 		"onLoad",
 		"onClick",
 		"onDataChange",
+		"onResize",
 		"onBoundVariableChange"
 	],
 	"windowTitle": "window title",
@@ -112,7 +113,9 @@
 							"dataSource": "This:C1470.contact",
 							"width": 200,
 							"minWidth": 150,
-							"maxWidth": 500
+							"maxWidth": 500,
+							"resizable": false,
+							"enterable": false
 						},
 						{
 							"header": {
@@ -126,15 +129,16 @@
 							},
 							"dataSource": "This:C1470.comment",
 							"width": 150,
-							"minWidth": 150
+							"minWidth": 150,
+							"enterable": false
 						}
 					]
 				},
-				"header_bkgd1": {
+				"header_bkgd": {
 					"type": "rectangle",
 					"top": 0,
 					"left": 0,
-					"width": 641,
+					"width": 642,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
@@ -171,7 +175,7 @@
 			}
 		}
 	],
-	"geometryStamp": 57,
+	"geometryStamp": 60,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

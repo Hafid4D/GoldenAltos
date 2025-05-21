@@ -5,8 +5,8 @@ var $isInModification : Boolean
 $contactTypes:=New collection:C1472()
 $contactTypes.push({type: "Phone"})
 $contactTypes.push({type: "Mobile"})
-$contactTypes.push({type: "e-Mail"})
-$contactTypes.push({type: "Web site"})
+$contactTypes.push({type: "Mail"})
+$contactTypes.push({type: "webSite"})
 $contactTypes.push({type: "Fax"})
 
 //$isInModification:=sfw_checkIsInModification

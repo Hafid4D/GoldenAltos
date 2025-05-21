@@ -9,7 +9,7 @@
 	"windowMinHeight": 0,
 	"windowMaxWidth": 32767,
 	"windowMaxHeight": 32767,
-	"rightMargin": 20,
+	"rightMargin": 0,
 	"bottomMargin": 20,
 	"events": [
 		"onLoad",
@@ -291,7 +291,7 @@
 			"objects": {}
 		}
 	],
-	"geometryStamp": 148,
+	"geometryStamp": 151,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

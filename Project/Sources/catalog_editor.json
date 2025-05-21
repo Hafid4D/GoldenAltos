@@ -8,13 +8,60 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1040,
-				"top": 40,
-				"width": 120,
-				"height": 167.33203125
+				"left": 2385,
+				"top": 103,
+				"width": 149.05078125,
+				"height": 377.33203125
 			},
-			"displayable_fields_count": 6,
-			"fields_ordering": 1
+			"displayable_fields_count": 16,
+			"fields_ordering": 2,
+			"fields": {
+				"contactDetails": {
+					"position": 15
+				},
+				"citizenShipStatus": {
+					"position": 14
+				},
+				"division": {
+					"position": 13
+				},
+				"hireDate": {
+					"position": 9
+				},
+				"terminated": {
+					"position": 6
+				},
+				"department": {
+					"position": 12
+				},
+				"code": {
+					"position": 11
+				},
+				"creationDate": {
+					"position": 8
+				},
+				"terminationDate": {
+					"position": 5
+				},
+				"inactive": {
+					"position": 7
+				},
+				"lastName": {
+					"position": 4
+				},
+				"firstName": {
+					"position": 3
+				},
+				"retrainDate": {
+					"position": 10
+				},
+				"UUID_User": {
+					"position": 2
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
 		},
 		"CertificationAssignment": {
 			"color": {
@@ -24,13 +71,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 840,
-				"top": 40,
-				"width": 120,
-				"height": 167.33203125
+				"left": 2118,
+				"top": 602,
+				"width": 165,
+				"height": 173.33203125
 			},
-			"displayable_fields_count": 6,
-			"fields_ordering": 1
+			"displayable_fields_count": 6
 		},
 		"QuoteStatus": {
 			"color": {
@@ -213,11 +259,10 @@
 			"coordinates": {
 				"left": 2667.6667480469,
 				"top": 602,
-				"width": 175.92706298828,
-				"height": 104.33203125
+				"width": 180.92706298828,
+				"height": 126.33203125
 			},
-			"displayable_fields_count": 3,
-			"fields_ordering": 1
+			"displayable_fields_count": 4
 		},
 		"Certification": {
 			"color": {
@@ -229,11 +274,10 @@
 			"coordinates": {
 				"left": 2436.6667480469,
 				"top": 593,
-				"width": 94.397132873535,
-				"height": 104.33203125
+				"width": 103.2421875,
+				"height": 146.33203125
 			},
-			"displayable_fields_count": 3,
-			"fields_ordering": 1
+			"displayable_fields_count": 5
 		},
 		"StepTemplateTool": {
 			"color": {
@@ -1024,6 +1068,22 @@
 		}
 	},
 	"relations": {
+		"63E19F83A424FA4B9797919BB37294EE": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"AA4DBD52712BF943949C2851FF620722": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
 		"DB8D79B14BDE42479CDD27271248450D": {
 			"color": {
 				"red": 240,
@@ -1033,6 +1093,14 @@
 			}
 		},
 		"2AD91F4788D14BC589D0DC658413CE3C": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"A2FC9314D488E043A1D505B9967275F1": {
 			"color": {
 				"red": 255,
 				"green": 255,

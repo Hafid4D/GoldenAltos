@@ -3,7 +3,7 @@ Class extends DataClass
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	//Mark: entry : Quote
-	$entry:=cs:C1710.sfw_definitionEntry.new("quote"; ["customerService"]; "Quotes")
+	$entry:=cs:C1710.sfw_definitionEntry.new("quote"; ["salesAndQuotes"]; "Quotes")
 	$entry.setDataclass("Quote")
 	$entry.setDisplayOrder(-500)
 	$entry.setIcon("image/entry/contract-white-50x50.png")
