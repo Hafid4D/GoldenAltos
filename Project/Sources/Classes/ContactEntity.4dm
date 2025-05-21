@@ -64,7 +64,7 @@ local Function rebuidComunications->$contacts : Collection
 				$item.displayedIcon:=Form:C1466.communicationTypes[$indices[0]].displayedIcon
 				
 			Else 
-				$item.displayedType:=_Capitalize_text($mean.type)
+				$item.displayedType:=_capitalize_text($mean.type)
 			End if 
 			$contacts.push($item)
 		End for each 
@@ -94,6 +94,8 @@ local Function rebuidComunications->$contacts : Collection
 	
 	//mark:-Callbacks
 	
+	
+	
 local Function afterCreation()
 	This:C1470._initAddress()
 	This:C1470._initCommunication()
@@ -119,15 +121,15 @@ local Function _initCommunication()
 	If (This:C1470.contactDetails.communications=Null:C1517)
 		This:C1470.contactDetails.communications:=New collection:C1472
 	End if 
-	If (This:C1470.contactDetails.communications.length=0)
-		$comm:=New object:C1471()
-		$comm.phone:=""
-		$comm.fax:=""
-		$comm.mobile:=""
-		$comm.email:=""
-		$comm.email_cc:=""
-		This:C1470.contactDetails.communications.push($comm)
-	End if 
+	//If (This.contactDetails.communications.length=0)
+	//$comm:=New object()
+	//$comm.phone:=""
+	//$comm.fax:=""
+	//$comm.mobile:=""
+	//$comm.email:=""
+	//$comm.email_cc:=""
+	//This.contactDetails.communications.push($comm)
+	//End if 
 	
 local Function _initAddress()
 	// This callback is called when the item is selected in the itemList

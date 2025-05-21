@@ -130,11 +130,12 @@
 					"type": "rectangle",
 					"top": 478,
 					"left": 482,
-					"width": 1087,
+					"width": 1518,
 					"height": 384,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
-					"stroke": "transparent"
+					"stroke": "transparent",
+					"right": 2000
 				},
 				"main_bkgd1": {
 					"type": "rectangle",
@@ -160,11 +161,12 @@
 					"type": "rectangle",
 					"top": 142,
 					"left": 0,
-					"width": 1569,
+					"width": 2000,
 					"height": 337,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
-					"stroke": "transparent"
+					"stroke": "transparent",
+					"right": 2000
 				},
 				"shipping_bkgd": {
 					"type": "rectangle",
@@ -268,11 +270,12 @@
 					"type": "rectangle",
 					"top": 479,
 					"left": 482,
-					"width": 1087,
+					"width": 1518,
 					"height": 30,
 					"sizingX": "grow",
 					"fill": "#A2C6D8",
-					"stroke": "transparent"
+					"stroke": "transparent",
+					"right": 2000
 				},
 				"shipping_bkgd2": {
 					"type": "rectangle",
@@ -386,8 +389,8 @@
 					"type": "listbox",
 					"left": 599,
 					"top": 524,
-					"width": 337,
-					"height": 124,
+					"width": 693,
+					"height": 125,
 					"events": [
 						"onClick",
 						"onDataChange",
@@ -396,7 +399,7 @@
 					],
 					"listboxType": "collection",
 					"dataSource": "Form:C1466.lb_apContact",
-					"selectionMode": "single",
+					"selectionMode": "none",
 					"resizingMode": "legacy",
 					"scrollbarHorizontal": "automatic",
 					"scrollbarVertical": "automatic",
@@ -451,7 +454,21 @@
 								"onClick",
 								"onDataChange"
 							],
-							"enterable": false
+							"enterable": false,
+							"width": 250
+						},
+						{
+							"header": {
+								"name": "hdr_comment",
+								"text": "Comment",
+								"fontWeight": "bold"
+							},
+							"name": "Column28",
+							"footer": {
+								"name": "Footer28"
+							},
+							"dataSource": "This:C1470.comment",
+							"width": 100
 						}
 					]
 				},
@@ -459,8 +476,8 @@
 					"type": "listbox",
 					"left": 599,
 					"top": 662,
-					"width": 337,
-					"height": 123,
+					"width": 693,
+					"height": 125,
 					"events": [
 						"onClick",
 						"onDataChange",
@@ -469,7 +486,7 @@
 					],
 					"listboxType": "collection",
 					"dataSource": "Form:C1466.lb_statusContact",
-					"selectionMode": "single",
+					"selectionMode": "none",
 					"resizingMode": "legacy",
 					"scrollbarHorizontal": "automatic",
 					"scrollbarVertical": "automatic",
@@ -519,14 +536,28 @@
 							"events": [
 								"onClick",
 								"onDataChange"
-							]
+							],
+							"width": 250
+						},
+						{
+							"header": {
+								"name": "Header36",
+								"text": "Comment",
+								"fontWeight": "bold"
+							},
+							"name": "Column36",
+							"footer": {
+								"name": "Footer36"
+							},
+							"dataSource": "This:C1470.comment",
+							"width": 100
 						}
 					]
 				},
 				"bActionApContact": {
 					"type": "button",
 					"text": "Actions",
-					"top": 627,
+					"top": 628,
 					"left": 494,
 					"width": 80,
 					"height": 21,
@@ -538,12 +569,12 @@
 					"icon": "/RESOURCES/sfw/image/picto/gear.png",
 					"textPlacement": "right",
 					"method": "ObjectMethods/bActionApContact.4dm",
-					"visibility": "hidden"
+					"visibility": "visible"
 				},
 				"bActionStatusContact": {
 					"type": "button",
 					"text": "Actions",
-					"top": 764,
+					"top": 766,
 					"left": 494,
 					"width": 80,
 					"height": 21,
@@ -555,135 +586,7 @@
 					"icon": "/RESOURCES/sfw/image/picto/gear.png",
 					"textPlacement": "right",
 					"method": "ObjectMethods/bActionStatusContact.4dm",
-					"visibility": "hidden"
-				},
-				"label_apContactType": {
-					"type": "text",
-					"top": 529,
-					"left": 966,
-					"width": 40,
-					"height": 16,
-					"stroke": "#808080",
-					"text": "type",
-					"visibility": "hidden"
-				},
-				"label_statusContactType": {
-					"type": "text",
-					"top": 662,
-					"left": 966,
-					"width": 40,
-					"height": 16,
-					"stroke": "#808080",
-					"text": "type",
-					"visibility": "hidden"
-				},
-				"entryField_apContactValue": {
-					"type": "input",
-					"top": 566,
-					"left": 1010,
-					"width": 380,
-					"height": 17,
-					"dataSource": "Form:C1466.current_apContact.value",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onClick",
-						"onDataChange",
-						"onSelectionChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"right": 1390,
-					"method": "ObjectMethods/entryField_apContactValue.4dm",
-					"visibility": "hidden"
-				},
-				"entryField_statusContactValue": {
-					"type": "input",
-					"top": 700,
-					"left": 1010,
-					"width": 380,
-					"height": 17,
-					"dataSource": "Form:C1466.current_statusContact.value",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onClick",
-						"onDataChange",
-						"onSelectionChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"right": 1390,
-					"method": "ObjectMethods/entryField_statusContactValue.4dm",
-					"visibility": "hidden"
-				},
-				"entryField_apContactType": {
-					"type": "input",
-					"top": 529,
-					"left": 1010,
-					"width": 380,
-					"height": 17,
-					"dataSource": "Form:C1466.current_apContact.name",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onClick",
-						"onDataChange",
-						"onSelectionChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"right": 1390,
-					"method": "ObjectMethods/entryField_apContactType.4dm",
-					"visibility": "hidden"
-				},
-				"label_apContactValue": {
-					"type": "text",
-					"top": 567,
-					"left": 966,
-					"width": 40,
-					"height": 16,
-					"stroke": "#808080",
-					"text": "value",
-					"visibility": "hidden"
-				},
-				"label_statusContactValue": {
-					"type": "text",
-					"top": 698,
-					"left": 966,
-					"width": 40,
-					"height": 16,
-					"stroke": "#808080",
-					"text": "value",
-					"visibility": "hidden"
-				},
-				"entryField_statusContactType": {
-					"type": "input",
-					"top": 662,
-					"left": 1010,
-					"width": 380,
-					"height": 17,
-					"dataSource": "Form:C1466.current_statusContact.name",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onClick",
-						"onDataChange",
-						"onSelectionChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"right": 1390,
-					"method": "ObjectMethods/entryField_statusContactType.4dm",
-					"visibility": "hidden"
+					"visibility": "visible"
 				},
 				"pup_customerCarrier": {
 					"type": "button",
@@ -709,11 +612,12 @@
 					"type": "rectangle",
 					"top": 113,
 					"left": 0,
-					"width": 1569,
+					"width": 2000,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
-					"stroke": "transparent"
+					"stroke": "transparent",
+					"right": 2000
 				},
 				"lbl_address": {
 					"type": "text",
@@ -784,11 +688,7 @@
 				"entryField_code1",
 				"entryField_code2",
 				"lb_apContact",
-				"entryField_apContactType",
-				"entryField_apContactValue",
 				"lb_statusContact",
-				"entryField_statusContactType",
-				"entryField_statusContactValue",
 				"bActionApContact",
 				"bActionStatusContact",
 				"pup_customerCarrier",
@@ -1391,7 +1291,7 @@
 		},
 		null
 	],
-	"geometryStamp": 773,
+	"geometryStamp": 791,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
