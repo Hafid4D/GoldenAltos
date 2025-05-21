@@ -59,8 +59,9 @@ Function checkRetraining($days : Integer)->$retraining : Collection
 			CREATE RECORD:C68([sfw_Notification:69])
 			[sfw_Notification:69]UUID_NotificationType:4:=ds:C1482.sfw_NotificationType.all().first().UUID
 			[sfw_Notification:69]UUID_User:3:=cs:C1710.sfw_userManager.me.info.UUID
+			[sfw_Notification:69]UUID_target:2:=$staff_e.UUID
 			[sfw_Notification:69]comment:5:=$staff_e.firstName+" "+$staff_e.lastName+" :"+"Retraining for "+String:C10($staff_e.getCertiExpiredIn(30).length)+" certifications due within 30 days."
-			[sfw_Notification:69]moreData:8:=New object:C1471("targetDataClass"; "Certification"; "UUID_Staff"; $staff_e.UUID; "date"; Current date:C33())
+			[sfw_Notification:69]moreData:8:=New object:C1471("targetDataclass"; "Staff"; "UUID_Staff"; $staff_e.UUID; "date"; Current date:C33())
 			[sfw_Notification:69]stmp:7:=cs:C1710.sfw_stmp.me.now()
 			SAVE RECORD:C53([sfw_Notification:69])
 			
