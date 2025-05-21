@@ -1,7 +1,7 @@
 //%attributes = {}
-//_Capitalize_text project method
-//_Capitalize_text ( Text ) -> Text
-//_Capitalize_text ( Source text ) -> Capitalized text
+//_capitalize_text project method
+//_capitalize_text ( Text ) -> Text
+//_capitalize_text ( Source text ) -> Capitalized text
 
 $0:=$1
 $vlLen:=Length:C16($0)

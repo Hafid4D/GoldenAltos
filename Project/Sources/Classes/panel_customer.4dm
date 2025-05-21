@@ -7,7 +7,7 @@ Function formMethod()
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		Form:C1466.addressBilling:=1
 		Form:C1466.addressShipping:=0
-		This:C1470.LoadAllTabs()
+		This:C1470.loadAllTabs()
 		
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
@@ -166,7 +166,7 @@ Function loadXXX()
 	//Loads and initializes a list
 	
 	
-Function LoadAllTabs()
+Function loadAllTabs()
 	
 	This:C1470.loadPOs()
 	This:C1470.loadJobs()

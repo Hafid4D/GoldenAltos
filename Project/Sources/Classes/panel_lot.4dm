@@ -8,6 +8,7 @@ Function formMethod()
 	//This function manages the main logic for updating and refreshing the form
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
+		This:C1470.loadAllTabs()
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
@@ -37,6 +38,11 @@ Function pup_XXX()
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	Use (Form:C1466.sfw.entry.panel.pages)
+		Form:C1466.sfw.entry.panel.pages[1].label:="Lot Steps ("+String:C10(Form:C1466.lb_steps.length)+")"
+		
+	End use 
+	Form:C1466.sfw.drawHTab()
 	
 	Case of 
 		: (FORM Get current page:C276(*)=2)  // Lot Steps
@@ -74,6 +80,10 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "btnMoveDown"; $widthSubform-$offset_btns_r-$width_md; $top_md; $widthSubform-$offset_btns_r; $bottom_md)
 			OBJECT SET COORDINATES:C1248(*; "btnMoveBottom"; $widthSubform-$offset_btns_r-$width_mb; $top_mb; $widthSubform-$offset_btns_r; $bottom_mb)
 	End case 
+	
+Function loadAllTabs()
+	This:C1470.loadLotSteps()
+	
 	
 Function loadLotSteps()
 	//Form.lb_steps:=Form.current_item.steps.orderBy("order asc")

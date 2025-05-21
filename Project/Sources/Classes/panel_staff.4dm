@@ -9,6 +9,7 @@ Function formMethod()
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		//OBJECT SET VISIBLE(*; "wr30_@"; (Form.current_item.getCertiExpiredIn(30).length>0))
+		This:C1470.loadAllTabs()
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		ds:C1482.Staff.checkRetraining(30)
@@ -28,6 +29,10 @@ Function formMethod()
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	Use (Form:C1466.sfw.entry.panel.pages)
+		Form:C1466.sfw.entry.panel.pages[1].label:="Certifications Assignment ("+String:C10(Form:C1466.lb_assignments.length)+")"
+	End use 
+	Form:C1466.sfw.drawHTab()
 	
 	Case of 
 		: (FORM Get current page:C276(*)=2)  // assignments
@@ -39,6 +44,9 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_1"; $left; $top; $right; $heightSubform-$offset)
 			OBJECT SET COORDINATES:C1248(*; "lb_assignments"; $left_lb; $top_lb; $right_lb; $heightSubform-$offset-1)
 	End case 
+	
+Function loadAllTabs()
+	This:C1470.loadCertifications()
 	
 Function loadCommunications()
 	Form:C1466.subFormCommunication:=New object:C1471(\

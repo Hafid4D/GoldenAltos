@@ -5,7 +5,7 @@ Function formMethod()
 	//This function manages the main logic for updating and refreshing the form
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh
-		
+		This:C1470.loadAllTabs()
 	End if 
 	
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
@@ -43,6 +43,17 @@ Function redrawAndSetVisible()
 	OBJECT SET VISIBLE:C603(*; "bActionTerms"; Form:C1466.sfw.checkIsInModification())
 	
 	This:C1470.drawPup_quoteStatus()
+	
+	Use (Form:C1466.sfw.entry.panel.pages)
+		Form:C1466.sfw.entry.panel.pages[0].label:="Lines ("+String:C10(Form:C1466.lb_quoteLines.length)+")"
+		Form:C1466.sfw.entry.panel.pages[1].label:="Assumptions and Terms ("+String:C10(Form:C1466.lb_assumptions.length)+")"
+	End use 
+	Form:C1466.sfw.drawHTab()
+	
+	
+Function loadAllTabs()
+	This:C1470.loadQuoteLines()
+	This:C1470.loadAssumptions()
 	
 Function loadQuoteLines()
 	If (Form:C1466.current_item#Null:C1517)

@@ -8,6 +8,7 @@ Function formMethod()
 	//This function manages the main logic for updating and refreshing the form
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
+		This:C1470.loadAllTabs()
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
@@ -74,7 +75,13 @@ Function pup_jobsStatus()
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
-	
+	Use (Form:C1466.sfw.entry.panel.pages)
+		Form:C1466.sfw.entry.panel.pages[1].label:="Line Items ("+String:C10(Form:C1466.lb_lineItems.length)+")"
+		Form:C1466.sfw.entry.panel.pages[2].label:="Jobs ("+String:C10(Form:C1466.lb_jobs.length)+")"
+		Form:C1466.sfw.entry.panel.pages[3].label:="Lots ("+String:C10(Form:C1466.lb_lots.length)+")"
+		Form:C1466.sfw.entry.panel.pages[4].label:="Invoices ("+String:C10(Form:C1466.lb_invoices.length)+")"
+	End use 
+	Form:C1466.sfw.drawHTab()
 	Case of 
 		: (FORM Get current page:C276(*)=1)  // main
 			$minHeight:=566
@@ -148,6 +155,13 @@ Function loadDpAddress()
 		"index"; 0; \
 		"currentValue"; "Billing Address"\
 		)
+	
+Function loadAllTabs()
+	This:C1470.loadPoLineItems()
+	This:C1470.loadPoJobs()
+	This:C1470.loadLots()
+	This:C1470.loadInvoices()
+	
 	
 Function loadPoLineItems()
 	Form:C1466.lb_lineItems:=ds:C1482.PurchaseOrderLine.query("UUID_PurchaseOrder = :1"; Form:C1466.current_item.UUID)

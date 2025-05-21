@@ -4,7 +4,8 @@ singleton Class constructor
 Function formMethod()
 	//This function manages the main logic for updating and refreshing the form
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
-	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
+	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh
+		This:C1470.loadAllTabs()
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
@@ -42,6 +43,12 @@ Function pup_XXX()
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	Use (Form:C1466.sfw.entry.panel.pages)
+		Form:C1466.sfw.entry.panel.pages[1].label:="PO Lines ("+String:C10(Form:C1466.lb_lineItems.length)+")"
+		Form:C1466.sfw.entry.panel.pages[2].label:="Lots ("+String:C10(Form:C1466.lb_lots.length)+")"
+	End use 
+	Form:C1466.sfw.drawHTab()
+	
 	
 	Case of 
 		: (FORM Get current page:C276(*)=2)  // po lines
@@ -72,6 +79,12 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "lb_lots"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
 			OBJECT SET COORDINATES:C1248(*; "bActionLots"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
 	End case 
+	
+	
+Function loadAllTabs()
+	This:C1470.loadPoLineItems()
+	This:C1470.loadLots()
+	
 	
 Function loadPoLineItems()
 	Form:C1466.lb_lineItems:=ds:C1482.PurchaseOrderLine.query("UUID_Job = :1"; Form:C1466.current_item.UUID)
