@@ -282,6 +282,69 @@
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"textAlign": "left"
+				},
+				"btnForward": {
+					"type": "button",
+					"text": " ",
+					"top": 12,
+					"left": 540,
+					"width": 18,
+					"height": 18,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/forward-16x16.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnForward.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
+				},
+				"btnForward1": {
+					"type": "button",
+					"text": " ",
+					"top": 36,
+					"left": 276,
+					"width": 18,
+					"height": 18,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/forward-16x16.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnForward1.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
+				},
+				"btnForward2": {
+					"type": "button",
+					"text": " ",
+					"top": 61,
+					"left": 276,
+					"width": 18,
+					"height": 18,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/forward-16x16.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnForward2.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
 				}
 			}
 		},
@@ -1313,7 +1376,7 @@
 			"objects": {}
 		}
 	],
-	"geometryStamp": 1345,
+	"geometryStamp": 1412,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

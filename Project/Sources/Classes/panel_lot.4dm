@@ -247,3 +247,23 @@ Function manageReOrderBtns()
 				OBJECT SET ENABLED:C1123(*; "btnMoveDown"; False:C215)
 		End case 
 	End if 
+	
+Function btnOpenCustomer()
+	$es:=ds:C1482.Customer.query("name = :1"; Form:C1466.current_item.customer)
+	
+	If ($es.length>0)
+		Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "customer")
+	End if 
+	
+Function btnOpenPurchaseOrder()
+	$es:=ds:C1482.PurchaseOrder.query("poNumber = :1"; Form:C1466.current_item.poNumber)
+	
+	If ($es.length>0)
+		Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "purchaseOrders")
+	End if 
+	
+	
+Function btnOpenJob()
+	$entity:=Form:C1466.current_item.job
+	Form:C1466.sfw.openInANewWindow($entity; "customerService"; "jobs")
+	
