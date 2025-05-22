@@ -405,3 +405,8 @@ Function selectCustomer()
 				End if 
 		End case 
 	End if 
+	
+Function btnOpenCustomer()
+	$entity:=Form:C1466.current_item.customer
+	Form:C1466.sfw.openInANewWindow($entity; "customerService"; "customer")
+	
