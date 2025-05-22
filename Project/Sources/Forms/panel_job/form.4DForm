@@ -986,15 +986,15 @@
 					"method": "ObjectMethods/bActionLineItems.4dm",
 					"visibility": "visible"
 				},
-				"Text1": {
+				"Text2": {
 					"type": "text",
 					"text": "PO Lines",
-					"top": 124,
+					"top": 125,
 					"left": 9,
-					"width": 88,
-					"height": 15,
+					"width": 92,
+					"height": 16,
 					"fontWeight": "bold",
-					"fontSize": 11
+					"right": 101
 				}
 			}
 		},
@@ -1160,20 +1160,20 @@
 					"method": "ObjectMethods/bActionLots.4dm",
 					"visibility": "visible"
 				},
-				"Text": {
+				"Text1": {
 					"type": "text",
 					"text": "Lots",
-					"top": 124,
+					"top": 125,
 					"left": 9,
-					"width": 88,
-					"height": 15,
+					"width": 92,
+					"height": 16,
 					"fontWeight": "bold",
-					"fontSize": 11
+					"right": 101
 				}
 			}
 		}
 	],
-	"geometryStamp": 980,
+	"geometryStamp": 989,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

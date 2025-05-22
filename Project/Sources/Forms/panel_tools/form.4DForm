@@ -127,23 +127,6 @@
 					"right": 105,
 					"bottom": 560
 				},
-				"Input": {
-					"type": "input",
-					"left": 9,
-					"top": 125,
-					"width": 92,
-					"height": 15,
-					"right": 101,
-					"bottom": 140,
-					"enterable": false,
-					"contextMenu": "none",
-					"multiline": "no",
-					"fill": "transparent",
-					"borderStyle": "none",
-					"dataSource": "\"Tools (\"+String:C10(Form:C1466.lb_tools.length)+\")\"",
-					"fontWeight": "bold",
-					"fontSize": 11
-				},
 				"lb_tools": {
 					"type": "listbox",
 					"left": 107,
@@ -280,11 +263,21 @@
 					"textPlacement": "right",
 					"method": "ObjectMethods/bActionTools.4dm",
 					"visibility": "visible"
+				},
+				"Text": {
+					"type": "text",
+					"text": "Tools",
+					"top": 125,
+					"left": 9,
+					"width": 92,
+					"height": 16,
+					"fontWeight": "bold",
+					"right": 101
 				}
 			}
 		}
 	],
-	"geometryStamp": 185,
+	"geometryStamp": 189,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"method": "method.4dm",
 	"editor": {

@@ -737,20 +737,20 @@
 					"method": "ObjectMethods/bActionPulls.4dm",
 					"visibility": "visible"
 				},
-				"Text": {
+				"Text1": {
 					"type": "text",
-					"text": "Inv. Pulls",
-					"top": 124,
+					"text": "Inventory Pulls",
+					"top": 125,
 					"left": 9,
-					"width": 88,
-					"height": 15,
+					"width": 92,
+					"height": 16,
 					"fontWeight": "bold",
-					"fontSize": 11
+					"right": 101
 				}
 			}
 		}
 	],
-	"geometryStamp": 339,
+	"geometryStamp": 345,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

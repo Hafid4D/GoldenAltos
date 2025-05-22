@@ -873,23 +873,6 @@
 					"right": 105,
 					"bottom": 537
 				},
-				"Input3": {
-					"type": "input",
-					"left": 9,
-					"top": 102,
-					"width": 92,
-					"height": 15,
-					"right": 101,
-					"bottom": 117,
-					"enterable": false,
-					"contextMenu": "none",
-					"multiline": "no",
-					"fill": "transparent",
-					"borderStyle": "none",
-					"dataSource": "\"Steps (\"+String:C10(Form:C1466.lb_steps.length)+\")\"",
-					"fontWeight": "bold",
-					"fontSize": 11
-				},
 				"label_stepLine_areas": {
 					"type": "text",
 					"text": "Areas",
@@ -1033,11 +1016,21 @@
 					"textPlacement": "right",
 					"method": "ObjectMethods/bActionSteps.4dm",
 					"visibility": "visible"
+				},
+				"Text": {
+					"type": "text",
+					"text": "Steps",
+					"top": 105,
+					"left": 9,
+					"width": 92,
+					"height": 16,
+					"fontWeight": "bold",
+					"right": 101
 				}
 			}
 		}
 	],
-	"geometryStamp": 1956,
+	"geometryStamp": 1959,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

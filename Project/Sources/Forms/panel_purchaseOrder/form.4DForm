@@ -1122,23 +1122,6 @@
 					"fill": "#A2C6D8",
 					"stroke": "transparent"
 				},
-				"Input": {
-					"type": "input",
-					"left": 9,
-					"top": 125,
-					"width": 92,
-					"height": 15,
-					"right": 101,
-					"bottom": 140,
-					"enterable": false,
-					"contextMenu": "none",
-					"multiline": "no",
-					"fill": "transparent",
-					"borderStyle": "none",
-					"dataSource": "\"PO Lines (\"+String:C10(Form:C1466.lb_lineItems.length)+\")\"",
-					"fontWeight": "bold",
-					"fontSize": 11
-				},
 				"pupFilter_status": {
 					"type": "button",
 					"text": "All Status",
@@ -1176,6 +1159,16 @@
 					"visibility": "visible",
 					"sizingX": "fixed",
 					"sizingY": "fixed"
+				},
+				"Text": {
+					"type": "text",
+					"text": "PO Lines",
+					"top": 125,
+					"left": 9,
+					"width": 92,
+					"height": 16,
+					"fontWeight": "bold",
+					"right": 101
 				}
 			}
 		},
@@ -1361,22 +1354,15 @@
 					"right": 105,
 					"bottom": 560
 				},
-				"Input1": {
-					"type": "input",
-					"left": 9,
+				"Text1": {
+					"type": "text",
+					"text": "Jobs",
 					"top": 125,
+					"left": 9,
 					"width": 92,
-					"height": 15,
-					"right": 101,
-					"bottom": 140,
-					"enterable": false,
-					"contextMenu": "none",
-					"multiline": "no",
-					"fill": "transparent",
-					"borderStyle": "none",
-					"dataSource": "\"Jobs (\"+String:C10(Form:C1466.lb_jobs.length)+\")\"",
+					"height": 16,
 					"fontWeight": "bold",
-					"fontSize": 11
+					"right": 101
 				}
 			}
 		},
@@ -1526,22 +1512,15 @@
 					"right": 105,
 					"bottom": 560
 				},
-				"Input2": {
-					"type": "input",
-					"left": 9,
+				"Text2": {
+					"type": "text",
+					"text": "Lots",
 					"top": 125,
+					"left": 9,
 					"width": 92,
-					"height": 15,
-					"right": 101,
-					"bottom": 140,
-					"enterable": false,
-					"contextMenu": "none",
-					"multiline": "no",
-					"fill": "transparent",
-					"borderStyle": "none",
-					"dataSource": "\"Lots (\"+String:C10(Form:C1466.lb_lots.length)+\")\"",
+					"height": 16,
 					"fontWeight": "bold",
-					"fontSize": 11
+					"right": 101
 				}
 			}
 		},
@@ -1731,27 +1710,20 @@
 					"method": "ObjectMethods/bActionInvoices.4dm",
 					"visibility": "visible"
 				},
-				"Input3": {
-					"type": "input",
-					"left": 9,
+				"Text3": {
+					"type": "text",
+					"text": "Invoices",
 					"top": 125,
+					"left": 9,
 					"width": 92,
-					"height": 15,
-					"right": 101,
-					"bottom": 140,
-					"enterable": false,
-					"contextMenu": "none",
-					"multiline": "no",
-					"fill": "transparent",
-					"borderStyle": "none",
-					"dataSource": "\"Invoices (\"+String:C10(Form:C1466.lb_invoices.length)+\")\"",
+					"height": 16,
 					"fontWeight": "bold",
-					"fontSize": 11
+					"right": 101
 				}
 			}
 		}
 	],
-	"geometryStamp": 3041,
+	"geometryStamp": 3070,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

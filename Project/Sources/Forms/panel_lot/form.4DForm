@@ -1213,23 +1213,6 @@
 					"method": "ObjectMethods/bActionLotSteps.4dm",
 					"visibility": "visible"
 				},
-				"Input3": {
-					"type": "input",
-					"left": 9,
-					"top": 125,
-					"width": 92,
-					"height": 15,
-					"right": 101,
-					"bottom": 140,
-					"enterable": false,
-					"contextMenu": "none",
-					"multiline": "no",
-					"fill": "transparent",
-					"borderStyle": "none",
-					"dataSource": "\"Lot Steps (\"+String:C10(Form:C1466.lb_steps.length)+\")\"",
-					"fontWeight": "bold",
-					"fontSize": 11
-				},
 				"btnMoveTop": {
 					"type": "button",
 					"text": " ",
@@ -1313,6 +1296,16 @@
 					"visibility": "visible",
 					"iconFrames": 4,
 					"focusable": false
+				},
+				"Text": {
+					"type": "text",
+					"text": "Lot Steps",
+					"top": 125,
+					"left": 9,
+					"width": 92,
+					"height": 16,
+					"fontWeight": "bold",
+					"right": 101
 				}
 			}
 		},
@@ -1320,7 +1313,7 @@
 			"objects": {}
 		}
 	],
-	"geometryStamp": 1340,
+	"geometryStamp": 1345,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

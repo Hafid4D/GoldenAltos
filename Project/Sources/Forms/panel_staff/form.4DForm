@@ -666,23 +666,6 @@
 						}
 					]
 				},
-				"Input": {
-					"type": "input",
-					"left": 8,
-					"top": 125,
-					"width": 92,
-					"height": 15,
-					"right": 100,
-					"bottom": 140,
-					"enterable": false,
-					"contextMenu": "none",
-					"multiline": "no",
-					"fill": "transparent",
-					"borderStyle": "none",
-					"dataSource": "\"Certifications (\"+String:C10(Form:C1466.lb_assignments.length)+\")\"",
-					"fontWeight": "bold",
-					"fontSize": 11
-				},
 				"Oval": {
 					"type": "oval",
 					"top": 492,
@@ -733,12 +716,22 @@
 					"left": 567,
 					"width": 350,
 					"height": 18
+				},
+				"Text2": {
+					"type": "text",
+					"text": "Certifications",
+					"top": 125,
+					"left": 9,
+					"width": 92,
+					"height": 16,
+					"fontWeight": "bold",
+					"right": 101
 				}
 			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 950,
+	"geometryStamp": 954,
 	"editor": {
 		"groups": {
 			"Group": [
