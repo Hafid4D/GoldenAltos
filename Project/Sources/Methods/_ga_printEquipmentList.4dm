@@ -18,9 +18,9 @@ $template:=WP Import document:C1318($file.platformPath)
 
 $context.length:=Form:C1466.sfw.lb_items.length
 
-$context.location:=_getListFiltersValues("EquipmentLocation"; "locationID")
-$context.equipmentType:=_getListFiltersValues("EquipmentType"; "typeID")
-$context.division:=_getListFiltersValues("Division"; "divisionID")
+$context.location:=_ga_getListFiltersValues("EquipmentLocation"; "locationID")
+$context.equipmentType:=_ga_getListFiltersValues("EquipmentType"; "typeID")
+$context.division:=_ga_getListFiltersValues("Division"; "divisionID")
 
 Case of 
 	: ($identEntry="main")

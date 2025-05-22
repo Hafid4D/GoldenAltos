@@ -23,6 +23,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListAction("Export equipments list"; "_ga_exportEquipmentList")
 	$entry.setItemListAction("-"; "-")
 	$entry.setItemListAction("Print equipments list"; "_ga_printEquipmentList")
+	$entry.setItemListAction("-"; "-")
+	$entry.setItemListAction("Print Cal Sticker"; "_ga_printCalStickers")
+	$entry.setItemListAction("-"; "-")
+	$entry.setItemListAction("Print PM Sticker"; "_ga_printPMStickers")
 	
 	$entry.enableTransaction()
 	

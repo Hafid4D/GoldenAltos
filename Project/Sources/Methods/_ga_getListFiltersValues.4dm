@@ -1,6 +1,6 @@
 //%attributes = {}
 /*
-Method Name : _getListFiltersValues
+Method Name : _ga_getListFiltersValues
 Author : Medard /4D PS
 Date : 20-May-2025
 Purpose : This method get the values set for folters on View List
