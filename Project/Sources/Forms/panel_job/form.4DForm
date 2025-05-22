@@ -46,7 +46,7 @@
 					"type": "input",
 					"top": 12,
 					"left": 92,
-					"width": 140,
+					"width": 100,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.jobNumber",
 					"focusable": false,
@@ -74,7 +74,7 @@
 					"type": "input",
 					"top": 37,
 					"left": 92,
-					"width": 140,
+					"width": 100,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.poNumber",
 					"focusable": false,
@@ -107,7 +107,7 @@
 					"stroke": "#808080",
 					"text": "Customer"
 				},
-				"entryField_deviceNumber": {
+				"entryField_customer": {
 					"type": "input",
 					"top": 12,
 					"left": 432,
@@ -193,6 +193,48 @@
 					],
 					"dataSource": "Form:C1466.current_item.archived",
 					"dataSourceTypeHint": "boolean"
+				},
+				"btnForward": {
+					"type": "button",
+					"text": " ",
+					"top": 12,
+					"left": 576,
+					"width": 18,
+					"height": 18,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/forward-16x16.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnForward.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
+				},
+				"btnForward1": {
+					"type": "button",
+					"text": " ",
+					"top": 37,
+					"left": 196,
+					"width": 18,
+					"height": 18,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/forward-16x16.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnForward1.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
 				}
 			}
 		},
@@ -1173,7 +1215,7 @@
 			}
 		}
 	],
-	"geometryStamp": 989,
+	"geometryStamp": 1055,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
