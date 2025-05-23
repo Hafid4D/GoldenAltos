@@ -302,7 +302,7 @@
 					"stroke": "#808080",
 					"text": "Creation"
 				},
-				"entryField_creationDate": {
+				"EntryField_creationDate": {
 					"type": "input",
 					"top": 159,
 					"left": 98,
@@ -314,15 +314,14 @@
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
-						"onClick",
-						"onGettingFocus"
+						"onClick"
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
 					"sizingX": "grow",
 					"dataSourceTypeHint": "date",
-					"dateFormat": "short",
-					"method": "ObjectMethods/entryField_creationDate.4dm"
+					"dateFormat": "short blankIfNull",
+					"method": "ObjectMethods/EntryField_creationDate.4dm"
 				},
 				"entryField_inactive": {
 					"type": "checkbox",
@@ -402,13 +401,14 @@
 					"dropping": "custom",
 					"events": [
 						"onClick",
-						"onGettingFocus"
+						"onDataChange"
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
 					"sizingX": "grow",
 					"dataSourceTypeHint": "date",
-					"method": "ObjectMethods/entryField_terminationDate.4dm"
+					"method": "ObjectMethods/entryField_terminationDate.4dm",
+					"dateFormat": "systemShort blankIfNull"
 				},
 				"label_hireDate": {
 					"type": "text",
@@ -431,14 +431,13 @@
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
-						"onClick",
-						"onGettingFocus"
+						"onClick"
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
 					"sizingX": "grow",
 					"dataSourceTypeHint": "date",
-					"dateFormat": "short",
+					"dateFormat": "short blankIfNull",
 					"method": "ObjectMethods/entryField_hireDate.4dm"
 				},
 				"label_retrainDate": {
@@ -457,13 +456,12 @@
 					"width": 110,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.retrainDate",
-					"focusable": true,
+					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
-						"onClick",
-						"onGettingFocus"
+						"onClick"
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
@@ -471,27 +469,6 @@
 					"method": "ObjectMethods/entryField_retrainDate.4dm",
 					"dataSourceTypeHint": "date",
 					"dateFormat": "short"
-				},
-				"dp_creationDate": {
-					"type": "subform",
-					"top": 145,
-					"left": 1635,
-					"width": 168,
-					"height": 190,
-					"dataSource": "Form:C1466.current_item.creationDate",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DatePicker",
-					"hideFocusRing": true,
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/dp_creationDate.4dm",
-					"events": [
-						"onDataChange"
-					],
-					"visibility": "hidden"
 				},
 				"entryField_terminated": {
 					"type": "checkbox",
@@ -507,16 +484,35 @@
 					"sizingX": "grow",
 					"dataSource": "Form:C1466.current_item.terminated"
 				},
+				"dp_creationDate": {
+					"type": "subform",
+					"top": 159,
+					"left": 189,
+					"width": 19,
+					"height": 16,
+					"dataSource": "Form:C1466.current_item.creationDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dp_creationDate.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true
+				},
 				"dp_hireDate": {
 					"type": "subform",
-					"top": 145,
-					"left": 1635,
-					"width": 168,
-					"height": 190,
+					"top": 184,
+					"left": 189,
+					"width": 19,
+					"height": 16,
 					"dataSource": "Form:C1466.current_item.hireDate",
 					"dataSourceTypeHint": "date",
-					"detailForm": "DatePicker",
-					"hideFocusRing": true,
+					"detailForm": "DateButton",
 					"deletableInList": false,
 					"doubleClickInRowAction": "editSubrecord",
 					"doubleClickInEmptyAreaAction": "addSubrecord",
@@ -524,20 +520,19 @@
 					"printFrame": "variable",
 					"method": "ObjectMethods/dp_hireDate.4dm",
 					"events": [
-						"onDataChange"
+						"onLoad"
 					],
-					"visibility": "hidden"
+					"focusable": true
 				},
 				"dp_retrainDate": {
 					"type": "subform",
-					"top": 145,
-					"left": 1635,
-					"width": 168,
-					"height": 190,
+					"top": 184,
+					"left": 425,
+					"width": 19,
+					"height": 16,
 					"dataSource": "Form:C1466.current_item.retrainDate",
 					"dataSourceTypeHint": "date",
-					"detailForm": "DatePicker",
-					"hideFocusRing": true,
+					"detailForm": "DateButton",
 					"deletableInList": false,
 					"doubleClickInRowAction": "editSubrecord",
 					"doubleClickInEmptyAreaAction": "addSubrecord",
@@ -545,20 +540,19 @@
 					"printFrame": "variable",
 					"method": "ObjectMethods/dp_retrainDate.4dm",
 					"events": [
-						"onDataChange"
+						"onLoad"
 					],
-					"visibility": "hidden"
+					"focusable": true
 				},
 				"dp_terminationDate": {
 					"type": "subform",
-					"top": 145,
-					"left": 1635,
-					"width": 168,
-					"height": 190,
+					"top": 183,
+					"left": 706,
+					"width": 19,
+					"height": 16,
 					"dataSource": "Form:C1466.current_item.terminationDate",
 					"dataSourceTypeHint": "date",
-					"detailForm": "DatePicker",
-					"hideFocusRing": true,
+					"detailForm": "DateButton",
 					"deletableInList": false,
 					"doubleClickInRowAction": "editSubrecord",
 					"doubleClickInEmptyAreaAction": "addSubrecord",
@@ -566,9 +560,9 @@
 					"printFrame": "variable",
 					"method": "ObjectMethods/dp_terminationDate.4dm",
 					"events": [
-						"onDataChange"
+						"onLoad"
 					],
-					"visibility": "hidden"
+					"focusable": true
 				}
 			}
 		},
@@ -731,7 +725,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 954,
+	"geometryStamp": 1045,
 	"editor": {
 		"groups": {
 			"Group": [

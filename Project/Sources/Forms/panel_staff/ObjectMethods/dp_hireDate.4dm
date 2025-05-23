@@ -1,16 +1,14 @@
-//DatePicker sample code
+//PopupDate sample code
 
 Case of 
-	: (FORM Event:C1606.code=On Data Change:K2:15)
-		cs:C1710.panel_staff.me.hideDatePickers()
 		
 	: (Form event code:C388=On Load:K2:1)
 		
 		// Init the var itself
 		// this can be done anywhere else in your code
-		C_DATE:C307(vDate)
 		
-		// let's customise the datepicker if needed;
+		
+		// the let's customise the datepicker if needed;
 		//  All exemples below are inactivated (if false)
 		C_BOOLEAN:C305($Customise)
 		$Customise:=False:C215
@@ -21,6 +19,7 @@ Case of
 		// the line below is useless until you use "DatePicker SET DEFAULT…" commands
 		
 		// DatePicker RESET DEFAULT VALUES 
+		
 		
 		// the exemple below shows how to set days off of a week
 		// just define a 7 rows boolean array and set days that are off to "true"
@@ -73,6 +72,7 @@ Case of
 			
 			DatePicker SET DAYS OFF($FormName; 2; ->$_DaysOff)  // 2 stands for "only in 2009"
 		End if 
+		
 		
 		// The exemple below show how to define the first day of the week (default is monday)
 		If ($Customise)
