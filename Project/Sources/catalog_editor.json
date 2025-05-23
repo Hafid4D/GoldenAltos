@@ -89,9 +89,9 @@
 				"left": 3327.3332519531,
 				"top": 417.33331298828,
 				"width": 207.68237304688,
-				"height": 146.33203125
+				"height": 178.33203125
 			},
-			"displayable_fields_count": 5,
+			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
 		"Department": {
@@ -317,12 +317,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3742.6667480469,
-				"top": 759,
-				"width": 87.017578125,
-				"height": 125.33203125
+				"left": 3671.6667480469,
+				"top": 742,
+				"width": 99.017578125,
+				"height": 151.33203125
 			},
-			"displayable_fields_count": 4,
+			"displayable_fields_count": 5,
 			"fields_ordering": 1
 		},
 		"StepTemplate": {
@@ -812,22 +812,6 @@
 			"displayable_fields_count": 7,
 			"fields_ordering": 1
 		},
-		"EquipmentType": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			},
-			"coordinates": {
-				"left": 787,
-				"top": 221,
-				"width": 120,
-				"height": 167.33203125
-			},
-			"displayable_fields_count": 6,
-			"fields_ordering": 1
-		},
 		"Equipment": {
 			"color": {
 				"red": 255,
@@ -946,9 +930,9 @@
 				"left": 3321.6667480469,
 				"top": 628,
 				"width": 148.556640625,
-				"height": 127.33203125
+				"height": 171.33203125
 			},
-			"displayable_fields_count": 4
+			"displayable_fields_count": 6
 		},
 		"LotStep": {
 			"color": {
@@ -1098,6 +1082,14 @@
 		}
 	},
 	"relations": {
+		"0302D12C89828444A3C8D136FC09412A": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"DB8D79B14BDE42479CDD27271248450D": {
 			"color": {
 				"red": 240,

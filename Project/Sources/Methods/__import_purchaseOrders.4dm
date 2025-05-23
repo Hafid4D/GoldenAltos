@@ -2,7 +2,7 @@
 /**
 import po & po lines (po <-- po_lines)
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([PurchaseOrder:115])
 	TRUNCATE TABLE:C1051([PurchaseOrderLine:116])
 	TRUNCATE TABLE:C1051([Invoice:4])
@@ -154,9 +154,7 @@ If (True:C214)
 		$job.jobComment:=$record.jobComment
 		$job.archived:=$record.archived
 		$job.pr_qualifier:=$record.pr_qualifier
-		If ($record.pr_qualifier#"")
-			
-		End if 
+		
 		$res:=$job.save()
 		
 		If (Not:C34($res.success))
@@ -238,7 +236,14 @@ If (True:C214)
 					$lotStep_e.dateIn:=$step.dateIn
 					$lotStep_e.dateOut:=$step.dateOut
 					
-					$lotStep_e.tools:=New object:C1471("items"; New collection:C1472())
+					$lotStep_e.tools:=$step.tools  //New object("items"; New collection())
+					
+					While ($lotStep_e.tools.items.indexOf("")#-1)
+						
+						$lotStep_e.tools.items:=$lotStep_e.tools.items.remove($lotStep_e.tools.items.indexOf(""))
+						
+					End while 
+					
 					$lotStep_e.parametricMeasurements:=New object:C1471("items"; New collection:C1472())
 					$lotStep_e.stepInterruptions:=New object:C1471("items"; New collection:C1472())
 					$lotStep_e.dataTables:=New object:C1471("items"; New collection:C1472())

@@ -1,7 +1,6 @@
 //%attributes = {}
 var $eEquipment : cs:C1710.EquipmentEntity
 var $eEquipmentLocation : cs:C1710.EquipmentLocationEntity
-var $eEquipmentType : cs:C1710.EquipmentTypeEntity
 var $eDivision : cs:C1710.DivisionEntity
 var $eRepair : cs:C1710.Repair_LogEntity
 
@@ -30,7 +29,7 @@ If ($equipment_Log.exists)
 	$equipments:=JSON Parse:C1218($equipment_Log.getText())
 	TRUNCATE TABLE:C1051([Equipment:13])
 	TRUNCATE TABLE:C1051([EquipmentLocation:19])
-	TRUNCATE TABLE:C1051([EquipmentType:14])
+	TRUNCATE TABLE:C1051([EquipmentType])
 	TRUNCATE TABLE:C1051([Division:20])
 	
 	//----> [Division]
@@ -39,19 +38,7 @@ If ($equipment_Log.exists)
 		$eDivision:=ds:C1482.Division.new()
 		$eDivision.divisionID:=$i+1
 		$eDivision.name:=$divisions[$i]
-		//$eEquipmentType.color:="#FFFFFF"
 		$eDivision.save()
-		
-	End for 
-	
-	//----> [EquipementType]
-	For ($i; 0; $types.length-1)
-		
-		$eEquipmentType:=ds:C1482.EquipmentType.new()
-		$eEquipmentType.typeID:=$i+1
-		$eEquipmentType.name:=$types[$i]
-		//$eEquipmentType.color:="#FFFFFF"
-		$eEquipmentType.save()
 		
 	End for 
 	
@@ -64,7 +51,6 @@ If ($equipment_Log.exists)
 		//$eEquipmentLocation.color:="#FFFFFF"
 		$eEquipmentLocation.save()
 	End for 
-	
 	
 	For each ($equipment; $equipments)
 		
@@ -101,14 +87,13 @@ If ($equipment_Log.exists)
 		$eEquipment.engg:=$equipment.Engg
 		$eEquipment.calibrationNotRequired:=$equipment.CalibrationNotRequired
 		
-		
 		//Check and assign a Location if needed
-		$type:=ds:C1482.EquipmentType.query("name =:1"; Split string:C1554($equipment.EquipmentType; "\r"; sk trim spaces:K86:2).join("\r"))  //$eEquipment.type:=$equipment.EquipmentType
+		$type:=ds:C1482.ToolType.query("name =:1"; Split string:C1554($equipment.EquipmentType; "\r"; sk trim spaces:K86:2).join("\r"))  //$eEquipment.type:=$equipment.EquipmentType
 		
 		If ($type.length>0)
-			$eEquipment.typeID:=$type[0].typeID
+			$eEquipment.UUID_ToolType:=$type[0].UUID
 		Else 
-			$eEquipment.typeID:=0
+			//$eEquipment.UUID_ToolType:=0
 		End if 
 		
 		$eEquipment.status:=$equipment.ATE_STATUS
@@ -124,6 +109,7 @@ If ($equipment_Log.exists)
 		$eEquipment.pmInterval:=$equipment.PMInterval
 		$eEquipment.calDocument:=$equipment.CalDocument
 		$eEquipment.pmDocument:=$equipment.PMDocument
+		
 		
 		
 		

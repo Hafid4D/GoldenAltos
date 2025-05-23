@@ -19,7 +19,7 @@ $template:=WP Import document:C1318($file.platformPath)
 $context.length:=Form:C1466.sfw.lb_items.length
 
 $context.location:=_ga_getListFiltersValues("EquipmentLocation"; "locationID")
-$context.equipmentType:=_ga_getListFiltersValues("EquipmentType"; "typeID")
+$context.equipmentType:=_ga_getListFiltersValues("ToolType"; "UUID")  //("EquipmentType"; "typeID")
 $context.division:=_ga_getListFiltersValues("Division"; "divisionID")
 
 Case of 

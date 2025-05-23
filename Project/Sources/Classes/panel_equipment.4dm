@@ -54,7 +54,7 @@ Function redrawAndSetVisible()
 	
 Function drawPup_EquipmentType()
 	If (Form:C1466.current_item#Null:C1517)
-		$equipmentType:=ds:C1482.EquipmentType.query("typeID= :1"; Form:C1466.current_item.typeID).first() || New object:C1471()
+		$equipmentType:=ds:C1482.ToolType.query("UUID= :1"; Form:C1466.current_item.UUID_ToolType).first() || New object:C1471()
 		$typeName:=$equipmentType.name
 		If ($typeName=Null:C1517)
 			$typeName:=""
@@ -69,14 +69,10 @@ Function pup_type()
 	//Create pop up menu
 	If (Form:C1466.sfw.checkIsInModification())
 		$menu:=Create menu:C408
-		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.equipmentTypes=Null:C1517)
-			ds:C1482.EquipmentType.cacheLoad()
-		End if 
-		
-		For each ($equipmentType; Storage:C1525.cache.equipmentTypes)
+		For each ($equipmentType; ds:C1482.ToolType.all())  // Storage.cache.equipmentTypes)
 			APPEND MENU ITEM:C411($menu; $equipmentType.name; *)
 			SET MENU ITEM PARAMETER:C1004($menu; -1; $equipmentType.UUID)
-			If ($equipmentType.typeID=Form:C1466.current_item.typeID)
+			If ($equipmentType.UUID=Form:C1466.current_item.UUID_ToolType)
 				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
 				If (Is Windows:C1573)
 					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
@@ -88,8 +84,8 @@ Function pup_type()
 		
 		Case of 
 			: ($choose#"")
-				$equipmentType:=ds:C1482.EquipmentType.get($choose)
-				Form:C1466.current_item.typeID:=$equipmentType.typeID
+				$equipmentType:=ds:C1482.ToolType.get($choose)
+				Form:C1466.current_item.UUID_ToolType:=$equipmentType.UUID
 		End case 
 		
 	End if 

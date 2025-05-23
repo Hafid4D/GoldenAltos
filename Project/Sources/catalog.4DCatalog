@@ -183,6 +183,7 @@
 		<field name="engg" uuid="F9B770AFD7C31C40B691296E8101B33D" type="1" never_null="true" id="16"/>
 		<field name="calibrationNotRequired" uuid="7B419FDA5229704FA3904368B6D9640E" type="1" never_null="true" id="17"/>
 		<field name="manufacturer" uuid="DD73ECE11EA20B44AF15B974374A735D" type="10" limiting_length="255" never_null="true" id="18"/>
+		<field name="UUID_ToolType" uuid="8A0332764D4ABD43AFC3CF3599E618DC" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="19"/>
 		<field name="statusHistory" uuid="073B4EE37ABAAC4EB9B4F5B41E326897" type="10" never_null="true" id="20"/>
 		<field name="down" uuid="DE69D3ADA393224387BE370026D29F46" type="1" never_null="true" id="21"/>
 		<field name="calInProgress" uuid="8BFF67F4342DDB4CB7F47D0000B448A4" type="1" never_null="true" id="22"/>
@@ -192,12 +193,6 @@
 		<field name="pmTech" uuid="1C8D814D1D1FF742B6E3007A393A2B1D" type="10" limiting_length="255" never_null="true" id="26"/>
 		<field name="pmInterval" uuid="1204F3728A14C3429E0F22286732CC34" type="4" never_null="true" id="27"/>
 		<primary_key field_name="UUID" field_uuid="576820214AE49648A0CC6ACA3DD19531"/>
-	</table>
-	<table name="EquipmentType" uuid="621D3EE5BA919C468D780FC4B70A2B66" id="14">
-		<field name="UUID" uuid="DA6A725621642F468006BD1281612C84" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="typeID" uuid="E0DDD885298E9E43AEF1C57F75A4F120" type="3" never_null="true" id="2"/>
-		<field name="name" uuid="FD13DEB41F06E04A94D7EF62F8971EFF" type="10" limiting_length="255" never_null="true" id="3"/>
-		<primary_key field_name="UUID" field_uuid="DA6A725621642F468006BD1281612C84"/>
 	</table>
 	<table name="sfw_Country" uuid="4C0E0D9D33D246BAB1FACEEC19ABF144" id="15" prevent_journaling="true">
 		<field name="UUID" uuid="FDA14E8A26704F7091EC668E332108FB" type="10" unique="true" autogenerate="true" store_as_UUID="true" id="1"/>
@@ -1137,6 +1132,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="0302D12C89828444A3C8D136FC09412A" name_Nto1="type" name_1toN="equipments" state="1">
+		<related_field kind="source">
+			<field_ref uuid="8A0332764D4ABD43AFC3CF3599E618DC" name="UUID_ToolType">
+				<table_ref uuid="FCE2D049B8944E4CA0AAB0152A549718" name="Equipment"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="99E586D88F7844DC88C7D6EB4AABFEFE" name="UUID">
+				<table_ref uuid="C0C5EF5A4CD04FF7BB3897793A9DE6ED" name="ToolType"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="01619F9BF52940F3AFF8C52A4A82535D" type="3">
 		<field_ref uuid="951D3770910B43BBBFCAB95E4B3A1C65" name="UUID_Tool">
 			<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
@@ -1230,11 +1237,6 @@
 	<index kind="regular" uuid="24CCA01D7871416B98F1F1728F40CE6D" type="3">
 		<field_ref uuid="0D7F5C74CB3B4D0A88D4C320686F13E3" name="UUID_Contact">
 			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
-		</field_ref>
-	</index>
-	<index kind="regular" uuid="25D93B0B144C2147B7B4C498A7104C30" type="7">
-		<field_ref uuid="E0DDD885298E9E43AEF1C57F75A4F120" name="typeID">
-			<table_ref uuid="621D3EE5BA919C468D780FC4B70A2B66" name="EquipmentType"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="26B5486B90AD42B8B4DE300E4F87D8DE" type="3">
@@ -1572,6 +1574,11 @@
 			<table_ref uuid="71FD451F60934C9995C7A6D899CA2B51" name="Certification"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="DC26D85A1CEAF34F80864317132F0395" type="3">
+		<field_ref uuid="8A0332764D4ABD43AFC3CF3599E618DC" name="UUID_ToolType">
+			<table_ref uuid="FCE2D049B8944E4CA0AAB0152A549718" name="Equipment"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="DD147E408EF248D69FB08922B01E48D8" type="7">
 		<field_ref uuid="BA314E8B13754390B2700B893AD65AB1" name="UUID">
 			<table_ref uuid="A718BF77C87A4DB4AB861A00287FBC68" name="sfw_DocumentFolder"/>
@@ -1580,11 +1587,6 @@
 	<index kind="regular" unique_keys="true" uuid="DD8B8F9C843946ACB59CD44A8F78E0EC" type="1">
 		<field_ref uuid="C368AB256E3246BAAA4F0BA10076F44E" name="UUID">
 			<table_ref uuid="0A7AAD6A6AAB448E9F91A0CF0CC592C6" name="sfw_SchedulerLog"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="DF101E504D31A440A5BFA5252EFB403E" type="7">
-		<field_ref uuid="DA6A725621642F468006BD1281612C84" name="UUID">
-			<table_ref uuid="621D3EE5BA919C468D780FC4B70A2B66" name="EquipmentType"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="E1A0D064FFAC4E89A436CFA96601DB89" type="1">

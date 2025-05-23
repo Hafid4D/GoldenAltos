@@ -40,7 +40,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$filter:=cs:C1710.sfw_definitionFilter.new("filterEquipmentType")
 	$filter.setDefaultTitle("All types")
-	$filter.setFilterByIDInTable("EquipmentType"; "typeID"; "typeID")
+	$filter.setFilterByLinkedEntity("ToolType"; "UUID_ToolType"; ""; "type")
 	$filter.setDynamicTitle("name"; "## equipment type")
 	$entry.addFilter($filter)
 	

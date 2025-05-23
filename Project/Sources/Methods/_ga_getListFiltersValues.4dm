@@ -22,9 +22,9 @@ For ($i; 0; Form:C1466.filters.length-1)
 				$value:=Form:C1466.filters[$i].defaultTitle
 			Else 
 				
-				For ($i; 0; $allValues.length-1)
-					$valueName:=ds:C1482[$dataClass].query($field+"= :1"; $allValues[$i]).first().name
-					If ($i=0)
+				For ($j; 0; $allValues.length-1)
+					$valueName:=ds:C1482[$dataClass].query($field+"= :1"; $allValues[$j]).first().name
+					If ($j=0)
 						$value:=$valueName
 						
 					Else 
@@ -37,7 +37,31 @@ For ($i; 0; Form:C1466.filters.length-1)
 			
 		Else 
 			
-			$value:=Form:C1466.filters[$i].defaultTitle
+			If (OB Is defined:C1231(Form:C1466.filters[$i]; "UUIDS"))
+				
+				$allValues:=Form:C1466.filters[$i].UUIDS
+				If ($allValues.length=ds:C1482[$dataClass].all().length)
+					$value:=Form:C1466.filters[$i].defaultTitle
+				Else 
+					
+					For ($j; 0; $allValues.length-1)
+						$valueName:=ds:C1482[$dataClass].query($field+"= :1"; $allValues[$j]).first().name
+						If ($j=0)
+							$value:=$valueName
+							
+						Else 
+							$value:=$value+", "+$valueName
+						End if 
+						
+					End for 
+					
+				End if 
+			Else 
+				
+				$value:=Form:C1466.filters[$i].defaultTitle
+				
+			End if 
+			
 		End if 
 		
 		$i:=Form:C1466.filters.length
