@@ -21,6 +21,7 @@ $context.length:=Form:C1466.sfw.lb_items.length
 $context.location:=_ga_getListFiltersValues("EquipmentLocation"; "locationID")
 $context.equipmentType:=_ga_getListFiltersValues("ToolType"; "UUID")  //("EquipmentType"; "typeID")
 $context.division:=_ga_getListFiltersValues("Division"; "divisionID")
+$context.user:=Current machine:C483
 
 Case of 
 	: ($identEntry="main")

@@ -183,7 +183,7 @@
 		<field name="engg" uuid="F9B770AFD7C31C40B691296E8101B33D" type="1" never_null="true" id="16"/>
 		<field name="calibrationNotRequired" uuid="7B419FDA5229704FA3904368B6D9640E" type="1" never_null="true" id="17"/>
 		<field name="manufacturer" uuid="DD73ECE11EA20B44AF15B974374A735D" type="10" limiting_length="255" never_null="true" id="18"/>
-		<field name="UUID_ToolType" uuid="8A0332764D4ABD43AFC3CF3599E618DC" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="19"/>
+		<field name="UUID_ToolType" uuid="8A0332764D4ABD43AFC3CF3599E618DC" type="10" store_as_UUID="true" never_null="true" id="19"/>
 		<field name="statusHistory" uuid="073B4EE37ABAAC4EB9B4F5B41E326897" type="10" never_null="true" id="20"/>
 		<field name="down" uuid="DE69D3ADA393224387BE370026D29F46" type="1" never_null="true" id="21"/>
 		<field name="calInProgress" uuid="8BFF67F4342DDB4CB7F47D0000B448A4" type="1" never_null="true" id="22"/>
