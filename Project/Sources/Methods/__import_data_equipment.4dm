@@ -9,18 +9,6 @@ var $locations; $types; $divisions : Collection
 $locations:=New collection:C1472("4TH OPTICAL"; "Burn-in"; "Eng'r"; "Engineering"; "Environmental"; "EOL"; "FACILITY"; "FOL"; "FOL for Profiler"; \
 "FOL/RTC"; "Front of Line"; "Lab/ Vibration"; "Lab/Mechanical Shock"; "Lab/Milpitas"; "Marking"; "Pad"; "Solder"; "Solder Dip"; "Trim")
 
-$types:=New collection:C1472("Accelerometer"; "ADS Digimatic Indicator"; "Ball Shear"; "Bubble Leak Test Detector"; "Burn-In Oven"; "Caliper"; \
-"Centrifuge"; "Cleaner"; "Data Recorder"; "Die Attach"; "Die Grind"; "Die Shear"; "Digi Timer"; "Digital  Thermometer"; "Digital Force Gauge"; \
-"Digital Multimeter"; "Digital Vacuum Gauge"; "Dip Trimmer"; "Dispenser"; "Electrostatic Field Meter"; "ESD Box"; "Facilities"; "Fatigue Tester"; \
-"FILTRATION SYSTEM"; "Fine Leak bomb"; "Fine Leak Detector"; "Freezer"; "Furnace"; "Gauge block"; "Gross Leak Bomb"; "Ionizer"; "IR Reflow Oven"; \
-"Lazer Engraver"; "MARKER"; "Mechanical shock"; "Micrometer"; "Microscope"; "Microscope, Tool Maker"; "Moisture Chamber"; "Moisture Sensor"; \
-"Oscilloscope"; "Oven"; "Particle Counter"; "PIND"; "Plate Maker"; "Power Supply"; "Pressure Gauge"; "Resistance System"; "RTC"; "Salt Atmospheric Chamber"; \
-"Saw"; "SCALE"; "Sealing Furnance"; "Seam Sealer"; "Solder Dip Tester"; "Steam Age Chamber"; "Stud Pull Test"; "Tachometer, Laser, Photo"; \
-"Temp Cycle"; "Temp/ Humidity Recorder"; "Temperature Probe"; "Thermal Shock"; "Thermocouple"; "Thermocouple TX"; "Torque Tester"; "Trim Form"; \
-"Vacuum Gauge"; "VACUUM SEALER"; "Vacuum, Pressure Gauge"; "VIBRATION"; "Wafer Clean"; "Wafer Expander"; "Wafer Mount"; "Weight Set (Class M2)"; \
-"Welder"; "Wire Pull Tester"; "Wirebond"; "Wriststrap/Footstrap Tester")
-
-
 $divisions:=New collection:C1472("GAC")
 
 $equipment_Log:=Folder:C1567(fk data folder:K87:12).file("DataJson/equipments_export.json")
@@ -29,7 +17,6 @@ If ($equipment_Log.exists)
 	$equipments:=JSON Parse:C1218($equipment_Log.getText())
 	TRUNCATE TABLE:C1051([Equipment:13])
 	TRUNCATE TABLE:C1051([EquipmentLocation:19])
-	TRUNCATE TABLE:C1051([EquipmentType])
 	TRUNCATE TABLE:C1051([Division:20])
 	
 	//----> [Division]
@@ -142,9 +129,11 @@ If ($repair_Log_file.exists)
 		$eRepair.dateFixed:=$repair.Date_fixed
 		$eRepair.reportDate:=$repair.Rep_date
 		$eRepair.status:=$repair.E_status
-		$eRepair.problem:=$repair.Problem
+		$eRepair.problem:=Split string:C1554($repair.Problem; "\r"; sk trim spaces:K86:2).join("\r")
 		$eRepair.reportID:=$repair.Rep_num
 		$eRepair.fix:=$repair.Fix
+		$eRepair.downHrs:=$repair.Down_hrs
+		$eRepair.downAt:=$repair.Down_at
 		
 		$res:=$eRepair.save()
 		If (Not:C34($res.success))

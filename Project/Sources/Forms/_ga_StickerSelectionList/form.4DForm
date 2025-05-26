@@ -53,7 +53,7 @@
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
-					"text": "Select items for Calibration-Stickers",
+					"text": "Select items to print stickers",
 					"fontSize": 12,
 					"fontWeight": "bold"
 				},

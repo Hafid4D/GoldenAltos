@@ -255,6 +255,8 @@
 		<field name="problem" uuid="F35B240CA3E0504AB0D8E25B17534FBF" type="10" never_null="true" id="7"/>
 		<field name="reportID" uuid="EECBB96290F06F42B157E3F5D74CB367" type="4" never_null="true" id="8"/>
 		<field name="fix" uuid="BD82D562133F984B90190C8F06453963" type="10" never_null="true" id="9"/>
+		<field name="downHrs" uuid="AE2C3C7917087B4FBD5E3814DBE6703B" type="6" never_null="true" id="10"/>
+		<field name="downAt" uuid="4033EAEBDBD0E941A0CD4C53AFD01C46" type="9" never_null="true" id="11"/>
 		<primary_key field_name="UUID" field_uuid="8FD486DDACE0854DA8FB686A58B08089"/>
 	</table>
 	<table name="sfw_Setting" uuid="05967663C56F44398D96379354ABCC89" id="30">

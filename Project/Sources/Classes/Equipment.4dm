@@ -28,6 +28,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListAction("-"; "-")
 	$entry.setItemListAction("Print PM Sticker"; "_ga_printPMStickers")
 	
+	$entry.setItemAction("Print Repair_Log Report"; "_ga_printRepairLogReport")
+	
 	$entry.enableTransaction()
 	
 	// MARK: -Filters

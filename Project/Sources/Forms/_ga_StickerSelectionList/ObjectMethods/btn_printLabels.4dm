@@ -19,8 +19,6 @@ Case of
 			
 			$wpDoc:=WP New:C1317()
 			
-			$file:=Folder:C1567(fk resources folder:K87:11).file("4DWriteProPrintTemplates/equipmentSticker.4wp")
-			
 			$equipmentSelection:=Form:C1466.lb_selectedEquipments
 			
 			$start:=0
