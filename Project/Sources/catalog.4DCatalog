@@ -168,9 +168,6 @@
 		<field name="divisionID" uuid="5660AB93B3B7BC4B9FA7BE938A9184A9" type="3" never_null="true" id="11">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="typeID" uuid="12709AFE414A0040B9EB5EF8A4D02329" type="3" never_null="true" id="12">
-			<field_extra multi_line="false"/>
-		</field>
 		<field name="status" uuid="EEDCF8C23859B5439799B45B0247BD8B" type="10" limiting_length="255" never_null="true" id="13">
 			<field_extra multi_line="false"/>
 		</field>
