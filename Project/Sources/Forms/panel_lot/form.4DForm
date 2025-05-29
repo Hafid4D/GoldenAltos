@@ -403,11 +403,11 @@
 					"text": "Commit 1",
 					"right": 78
 				},
-				"entryField_commit": {
+				"Field_commit": {
 					"type": "input",
 					"top": 183,
-					"left": 78,
-					"width": 80,
+					"left": 72,
+					"width": 90,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.commit",
 					"focusable": false,
@@ -423,11 +423,11 @@
 					"dataSourceTypeHint": "date",
 					"dateFormat": "short"
 				},
-				"entryField_dateIn": {
+				"Field_dateIn": {
 					"type": "input",
 					"top": 159,
-					"left": 78,
-					"width": 80,
+					"left": 72,
+					"width": 90,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.dateIn",
 					"focusable": false,
@@ -446,7 +446,7 @@
 				"label_dateOut": {
 					"type": "text",
 					"top": 159,
-					"left": 181,
+					"left": 171,
 					"width": 60,
 					"height": 17,
 					"stroke": "#808080",
@@ -455,17 +455,17 @@
 				"label_reCommit": {
 					"type": "text",
 					"top": 183,
-					"left": 181,
+					"left": 171,
 					"width": 60,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Re Commit"
 				},
-				"entryField_reCommit": {
+				"Field_reCommit": {
 					"type": "input",
 					"top": 183,
-					"left": 249,
-					"width": 80,
+					"left": 239,
+					"width": 90,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.reCommit",
 					"focusable": false,
@@ -481,11 +481,11 @@
 					"dataSourceTypeHint": "date",
 					"dateFormat": "short"
 				},
-				"entryField_dateOut": {
+				"Field_dateOut": {
 					"type": "input",
 					"top": 159,
-					"left": 249,
-					"width": 80,
+					"left": 239,
+					"width": 90,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.dateOut",
 					"focusable": false,
@@ -763,11 +763,11 @@
 					"text": "Hold Date",
 					"right": 78
 				},
-				"entryField_holdDate": {
+				"Field_holdDate": {
 					"type": "input",
 					"top": 280,
-					"left": 78,
-					"width": 80,
+					"left": 72,
+					"width": 90,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.holdDate",
 					"focusable": false,
@@ -816,8 +816,8 @@
 					"type": "checkbox",
 					"text": "Lot on Hold",
 					"top": 251,
-					"left": 79,
-					"width": 249,
+					"left": 73,
+					"width": 258,
 					"height": 24,
 					"events": [
 						"onClick"
@@ -878,11 +878,11 @@
 					"text": "OQA Date",
 					"right": 78
 				},
-				"entryField_holdDate1": {
+				"Field_OQADate": {
 					"type": "input",
 					"top": 377,
-					"left": 78,
-					"width": 250,
+					"left": 72,
+					"width": 90,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.OQADate",
 					"focusable": false,
@@ -897,14 +897,14 @@
 					"sizingX": "grow",
 					"dataSourceTypeHint": "date",
 					"dateFormat": "short",
-					"right": 328
+					"right": 162
 				},
 				"Check Box1": {
 					"type": "checkbox",
 					"text": "OQA Done",
 					"top": 348,
-					"left": 79,
-					"width": 249,
+					"left": 73,
+					"width": 258,
 					"height": 24,
 					"events": [
 						"onClick"
@@ -924,8 +924,8 @@
 				"entryField_holdDate2": {
 					"type": "input",
 					"top": 401,
-					"left": 78,
-					"width": 250,
+					"left": 72,
+					"width": 259,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.OQASimpleSize",
 					"focusable": false,
@@ -939,7 +939,7 @@
 					"borderStyle": "none",
 					"sizingX": "grow",
 					"dataSourceTypeHint": "integer",
-					"right": 328
+					"right": 331
 				},
 				"header_bkgd9": {
 					"type": "rectangle",
@@ -1091,6 +1091,126 @@
 					"sizingX": "fixed",
 					"scrollbarHorizontal": "hidden",
 					"scrollbarVertical": "automatic"
+				},
+				"dp_dateIn": {
+					"type": "subform",
+					"top": 159,
+					"left": 143,
+					"width": 19,
+					"height": 16,
+					"dataSource": "Form:C1466.current_item.dateIn",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dp_dateIn.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true
+				},
+				"dp_expectedDate1": {
+					"type": "subform",
+					"top": 183,
+					"left": 143,
+					"width": 19,
+					"height": 16,
+					"dataSource": "Form:C1466.current_item.commit",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dp_expectedDate1.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true
+				},
+				"dp_reCommit": {
+					"type": "subform",
+					"top": 183,
+					"left": 310,
+					"width": 19,
+					"height": 16,
+					"dataSource": "Form:C1466.current_item.reCommit",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dp_reCommit.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true
+				},
+				"dp_dateOut": {
+					"type": "subform",
+					"top": 159,
+					"left": 309,
+					"width": 19,
+					"height": 16,
+					"dataSource": "Form:C1466.current_item.dateOut",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dp_dateOut.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true
+				},
+				"dp_holdDate": {
+					"type": "subform",
+					"top": 280,
+					"left": 143,
+					"width": 19,
+					"height": 16,
+					"dataSource": "Form:C1466.current_item.holdDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dp_holdDate.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true
+				},
+				"dp_OQADate": {
+					"type": "subform",
+					"top": 377,
+					"left": 143,
+					"width": 19,
+					"height": 16,
+					"dataSource": "Form:C1466.current_item.OQADate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dp_OQADate.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true
 				}
 			}
 		},
@@ -1376,7 +1496,7 @@
 			"objects": {}
 		}
 	],
-	"geometryStamp": 1412,
+	"geometryStamp": 1530,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

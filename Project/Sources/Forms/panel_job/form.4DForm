@@ -751,7 +751,7 @@
 					"dataSourceTypeHint": "date",
 					"dateFormat": "short"
 				},
-				"entryField_expectedDate": {
+				"Field_expectedDate": {
 					"type": "input",
 					"top": 187,
 					"left": 627,
@@ -768,9 +768,9 @@
 					"sizingX": "grow",
 					"dataSourceTypeHint": "date",
 					"dateFormat": "short",
-					"method": "ObjectMethods/entryField_expectedDate.4dm"
+					"method": "ObjectMethods/Field_expectedDate.4dm"
 				},
-				"entryField_invoiceDate": {
+				"Field_invoiceDate": {
 					"type": "input",
 					"top": 214,
 					"left": 627,
@@ -787,9 +787,9 @@
 					"sizingX": "grow",
 					"dataSourceTypeHint": "date",
 					"dateFormat": "short",
-					"method": "ObjectMethods/entryField_invoiceDate.4dm"
+					"method": "ObjectMethods/Field_invoiceDate.4dm"
 				},
-				"entryField_lastShipDate": {
+				"Field_lastShipDate": {
 					"type": "input",
 					"top": 241,
 					"left": 627,
@@ -806,9 +806,9 @@
 					"sizingX": "grow",
 					"dataSourceTypeHint": "date",
 					"dateFormat": "short",
-					"method": "ObjectMethods/entryField_lastShipDate.4dm"
+					"method": "ObjectMethods/Field_lastShipDate.4dm"
 				},
-				"entryField_archivedDate": {
+				"Field_archivedDate": {
 					"type": "input",
 					"top": 268,
 					"left": 627,
@@ -825,7 +825,7 @@
 					"sizingX": "grow",
 					"dataSourceTypeHint": "date",
 					"dateFormat": "short",
-					"method": "ObjectMethods/entryField_archivedDate.4dm"
+					"method": "ObjectMethods/Field_archivedDate.4dm"
 				},
 				"dp_expectedDate": {
 					"type": "subform",
@@ -1291,7 +1291,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1169,
+	"geometryStamp": 1173,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
