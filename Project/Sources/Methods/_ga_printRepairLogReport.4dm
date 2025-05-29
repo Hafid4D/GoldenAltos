@@ -16,11 +16,9 @@ $wpDoc:=WP New:C1317()
 
 $context:=New object:C1471()
 
-$file:=Folder:C1567(fk resources folder:K87:11).file("4DWriteProPrintTemplates/repairLog.4wp")
+$file:=Folder:C1567(fk resources folder:K87:11).file("4DWriteProPrintTemplates/equipmentRepairLog.4wp")
 $wpDoc:=WP Import document:C1318($file.platformPath)
 
-//$context.length:=Form.sfw.lb_items.length
-//$reportLogs_1:=Form.current_item.repairLogs.toCollection()
 $reportLogs:=Form:C1466.current_item.repairLogs.toCollection().orderBy("reportDate asc, downAt asc")
 If ($reportLogs.length>0)
 	$down_time:=Round:C94($reportLogs.sum("downHrs"); 2)
