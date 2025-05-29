@@ -1,0 +1,254 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "fixed",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 0,
+	"bottomMargin": 5,
+	"events": [
+		"onLoad",
+		"onPageChange",
+		"onValidate",
+		"onClick",
+		"onDoubleClick",
+		"onOutsideCall",
+		"onBeginDragOver",
+		"onDragOver",
+		"onDrop",
+		"onAfterKeystroke",
+		"onMenuSelect",
+		"onPluginArea",
+		"onAfterEdit",
+		"onTimer",
+		"onBoundVariableChange"
+	],
+	"windowTitle": "window title",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {
+				"header_bkgd1": {
+					"type": "rectangle",
+					"top": 0,
+					"left": 0,
+					"width": 270,
+					"height": 35,
+					"sizingX": "fixed",
+					"fill": "#69A4C0",
+					"stroke": "transparent"
+				},
+				"lb_setIntervalForm": {
+					"type": "text",
+					"top": 9,
+					"left": 7,
+					"width": 250,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "set date interval",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				}
+			}
+		},
+		{
+			"objects": {
+				"bOk": {
+					"type": "button",
+					"top": 129,
+					"left": 233,
+					"width": 30,
+					"height": 32,
+					"sizingY": "move",
+					"focusable": false,
+					"text": "",
+					"icon": "/RESOURCES/sfw/image/skin/rainbow/btn4states/check-24x24.png",
+					"iconFrames": 4,
+					"textPlacement": "center",
+					"style": "custom",
+					"events": [
+						"onClick"
+					],
+					"action": "accept",
+					"shortcutAccel": false,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": false,
+					"shortcutKey": "[Return]"
+				},
+				"bCancel": {
+					"type": "button",
+					"top": 129,
+					"left": 187,
+					"width": 32,
+					"height": 32,
+					"sizingY": "move",
+					"focusable": false,
+					"text": "",
+					"icon": "/RESOURCES/sfw/image/skin/rainbow/btn4states/return-24x24.png",
+					"iconFrames": 4,
+					"textPlacement": "center",
+					"style": "custom",
+					"events": [
+						"onClick"
+					],
+					"action": "cancel",
+					"method": "ObjectMethods/bCancel.4dm"
+				},
+				"pup_startDate": {
+					"type": "button",
+					"top": 46,
+					"left": 136,
+					"width": 127,
+					"height": 23,
+					"fontFamily": "System Font Regular",
+					"fontSize": 12,
+					"focusable": false,
+					"text": "--start--",
+					"style": "regular",
+					"events": [
+						"onClick"
+					],
+					"textPlacement": "left",
+					"textAlign": "center",
+					"method": "ObjectMethods/pup_startDate.4dm"
+				},
+				"Oval": {
+					"type": "oval",
+					"top": 48,
+					"left": 102,
+					"width": 19,
+					"height": 19,
+					"strokeWidth": 3,
+					"stroke": "#6495ed",
+					"fill": "transparent"
+				},
+				"Oval1": {
+					"type": "oval",
+					"top": 100,
+					"left": 102,
+					"width": 19,
+					"height": 19,
+					"strokeWidth": 3,
+					"stroke": "#6495ed",
+					"fill": "transparent"
+				},
+				"Line": {
+					"type": "line",
+					"top": 64,
+					"left": 110,
+					"width": 0,
+					"height": 39,
+					"strokeWidth": 3,
+					"stroke": "#6495ed"
+				},
+				"pup_endDate": {
+					"type": "button",
+					"top": 98,
+					"left": 136,
+					"width": 127,
+					"height": 23,
+					"fontFamily": "System Font Regular",
+					"fontSize": 12,
+					"focusable": false,
+					"text": "--end--",
+					"popupPlacement": "linked",
+					"style": "regular",
+					"events": [
+						"onClick"
+					],
+					"textPlacement": "left",
+					"textAlign": "center",
+					"method": "ObjectMethods/pup_endDate.4dm"
+				},
+				"label_0_10": {
+					"type": "text",
+					"top": 49,
+					"left": 7,
+					"width": 90,
+					"height": 16,
+					"stroke": "#808080",
+					"text": "Start Date"
+				},
+				"label_0_11": {
+					"type": "text",
+					"top": 75,
+					"left": 7,
+					"width": 90,
+					"height": 16,
+					"stroke": "#808080",
+					"text": "Interval"
+				},
+				"label_0_12": {
+					"type": "text",
+					"top": 101,
+					"left": 7,
+					"width": 90,
+					"height": 16,
+					"stroke": "#808080",
+					"text": "End Date"
+				},
+				"pup_interval": {
+					"type": "input",
+					"left": 159,
+					"top": 74,
+					"width": 81,
+					"height": 18,
+					"dataSourceTypeHint": "integer",
+					"dataSource": "Form:C1466.interval",
+					"right": 240,
+					"events": [
+						"onDataChange",
+						"onAfterKeystroke"
+					],
+					"multiline": "no",
+					"entryFilter": "&9",
+					"textAlign": "center",
+					"method": "ObjectMethods/pup_interval.4dm"
+				},
+				"intervalPlus": {
+					"type": "button",
+					"text": "+",
+					"top": 71,
+					"left": 240,
+					"width": 23,
+					"height": 23,
+					"events": [
+						"onClick"
+					],
+					"fontWeight": "bold",
+					"fontSize": 12,
+					"method": "ObjectMethods/intervalPlus.4dm"
+				},
+				"intervalMinus": {
+					"type": "button",
+					"text": "-",
+					"top": 71,
+					"left": 136,
+					"width": 23,
+					"height": 23,
+					"events": [
+						"onClick"
+					],
+					"fontWeight": "bold",
+					"fontSize": 12,
+					"method": "ObjectMethods/intervalMinus.4dm"
+				}
+			}
+		}
+	],
+	"geometryStamp": 27,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	},
+	"method": "method.4dm"
+}

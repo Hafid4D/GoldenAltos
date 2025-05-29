@@ -29,7 +29,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListAction("Print PM Sticker"; "_ga_printPMStickers")
 	
 	$entry.setItemAction("Print Repair_Log Report"; "_ga_printRepairLogReport")
-	$entry.setItemAction("Usage_Log"; "_ga_usageLogReport")
+	$entry.setItemAction("Print Usage_Log"; "_ga_usageLogReport")
 	
 	
 	$entry.enableTransaction()
@@ -53,6 +53,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$filter.setFilterByIDInTable("Division"; "divisionID"; "divisionID")
 	$filter.setDynamicTitle("name"; "## equipment division")
 	$entry.addFilter($filter)
+	
+	
 	
 	
 	// MARK: - Views Definition
@@ -94,7 +96,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setView($view)
 	
 	// MARK:  List of equipment down
-	$view:=cs:C1710.sfw_definitionView.new("equipmentsDownOrOnHold"; "Equipments down or on hold")
+	$view:=cs:C1710.sfw_definitionView.new("equipmentsDownOrOnHold"; "Equipments down")
 	$view.setLBItemsColumn("assignedID"; "assigned ID")
 	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:200")
 	$view.setLBItemsOrderBy("assignedID")
@@ -103,24 +105,66 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setView($view)
 	
 	
-Function equipmentsOutOfCalibration()->$equipments : cs:C1710.EquipmentSelection
+local Function cacheLoad()
 	
-	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & calibrationNotRequired=:2 & notAtSite=:3"; Current date:C33(*); False:C215; False:C215)
+	If (Storage:C1525.cache=Null:C1517)
+		Use (Storage:C1525)
+			Storage:C1525.cache:=New shared object:C1526
+		End use 
+	End if 
+	If (Storage:C1525.cache.startDate=Null:C1517)
+		Use (Storage:C1525.cache)
+			Storage:C1525.cache.startDate:=Current date:C33()
+		End use 
+	End if 
+	If (Storage:C1525.cache.endDate=Null:C1517)
+		Use (Storage:C1525.cache)
+			Storage:C1525.cache.endDate:=Current date:C33()
+		End use 
+	End if 
+	If (Undefined:C82(Storage:C1525.cache.interval))
+		Use (Storage:C1525.cache)
+			Storage:C1525.cache.interval:="0"
+		End use 
+	End if 
+	
+	
+Function setDateInterval()
+	This:C1470.cacheLoad()
+	
+	$form:=New object:C1471
+	$form.startDate:=Storage:C1525.cache.startDate
+	$form.endDate:=Storage:C1525.cache.endDate
+	$form.interval:=Storage:C1525.cache.interval
+	MOUSE POSITION:C468($mouseX; $mouseY; $mouseButtons)
+	CONVERT COORDINATES:C1365($mouseX; $mouseY; XY Current form:K27:5; XY Main window:K27:8)
+	Open window:C153($mouseX; $mouseY; $mouseX+270; $mouseY+165; Pop up form window:K39:11; "calendar")
+	DIALOG:C40("_ga_setDateInterval"; $form)
+	Use (Storage:C1525.cache)
+		Storage:C1525.cache.startDate:=$form.startDate
+		Storage:C1525.cache.endDate:=$form.endDate
+		Storage:C1525.cache.interval:=$form.interval
+	End use 
+	
+	
+Function equipmentsOutOfCalibration()->$equipments : cs:C1710.EquipmentSelection
+	This:C1470.setDateInterval()
+	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & calibrationNotRequired=:2 & notAtSite=:3"; Storage:C1525.cache.endDate; False:C215; False:C215)
 	
 	
 Function pmEquipments()->$equipments : cs:C1710.EquipmentSelection
-	
-	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3"; Current date:C33(*); !00-00-00!; False:C215)
+	This:C1470.setDateInterval()
+	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3"; Storage:C1525.cache.endDate; !00-00-00!; False:C215)
 	
 	
 Function dueCalibrationEquipments()->$equipments : cs:C1710.EquipmentSelection
-	
-	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & notAtSite=:2 & engg=:3"; Current date:C33(*); False:C215; False:C215)
+	This:C1470.setDateInterval()
+	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & notAtSite=:2 & engg=:3"; Storage:C1525.cache.endDate; False:C215; False:C215)
 	
 	
 Function duePMEquipments()->$equipments : cs:C1710.EquipmentSelection
-	
-	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3 & engg=:4"; Current date:C33(*); !00-00-00!; False:C215; False:C215)
+	This:C1470.setDateInterval()
+	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3 & engg=:4"; Storage:C1525.cache.endDate; !00-00-00!; False:C215; False:C215)
 	
 	
 Function equipmentsDownOrOnHold()->$equipments : cs:C1710.EquipmentSelection
