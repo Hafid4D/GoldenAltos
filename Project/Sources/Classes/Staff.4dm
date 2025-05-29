@@ -37,6 +37,17 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.enableTransaction()
 	
 	$entry.setItemListAction("Staff Certifications of the year"; "Staff_certification_of_the_year")
+	$entry.setItemListAction("Export All Employees - CSV"; "Staff_export_all_employees_csv")
+	$entry.setItemListAction("Export All Employees - PDF"; "Staff_export_all_employees_pdf")
+	
+	// MARK: -Filters
+	
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterCertification")
+	$filter.setDefaultTitle("All Certifications")
+	$filter.setFilterByManyToManyEntity("Certification"; "name"; "assignments.certification")
+	$filter.setDynamicTitle("name"; "## Certification")
+	$filter.setOrderForItems("ref")
+	$entry.addFilter($filter)
 	
 Function terminatedStaff()->$staffs : cs:C1710.StaffSelection
 	$staffs:=ds:C1482.Staff.query("terminated = :1"; True:C214)
