@@ -19,6 +19,8 @@ Function formMethod()
 				This:C1470.loadCommunications()
 			: (FORM Get current page:C276(*)=2)
 				This:C1470.loadCertifications()
+			: (FORM Get current page:C276(*)=3)
+				This:C1470.userSetting()
 		End case 
 	End if 
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())  //It's time to resize the object or set visible
@@ -167,5 +169,77 @@ Function manageCertification()
 	//End if 
 	
 Function hideDatePickers()
-	OBJECT SET VISIBLE:C603(*; "dp_@"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "dp_@"; False:C215)
+	
+	//mark:- setting page
+	
+Function userSetting()
+	
+	If (Form:C1466.current_item#Null:C1517) && (Form:C1466.current_item.user#Null:C1517)
+		OBJECT SET TITLE:C194(*; "pup_user"; Form:C1466.current_item.user.login)
+	Else 
+		OBJECT SET TITLE:C194(*; "pup_user"; "Select a Golden Altos account")
+	End if 
+	
+Function pup_user()
+	var $isInModification : Boolean
+	var $esUsers : cs:C1710.sfw_UserSelection
+	var $eUser : cs:C1710.sfw_UserEntity
+	
+	$isInModification:=sfw_checkIsInModification
+	
+	If ($isInModification)
+		$refMenu:=Create menu:C408
+		
+		// non affected users
+		$affectedUsers:=ds:C1482.Staff.all().extract("UUID_User")
+		$esUsers:=ds:C1482.sfw_User.query(" (NOT(UUID IN :1) AND (isInactive = :2) )  OR UUID = :3 ORDER BY login"; $affectedUsers; False:C215; Form:C1466.current_item.UUID_User)
+		
+		For each ($eUser; $esUsers)
+			APPEND MENU ITEM:C411($refMenu; $eUser.login; *)
+			SET MENU ITEM PARAMETER:C1004($refMenu; -1; $eUser.UUID)
+			If ($eUser.UUID=Form:C1466.current_item.UUID_User)
+				SET MENU ITEM MARK:C208($refMenu; -1; "-")
+			End if 
+		End for each 
+		If ($esUsers.length>0)
+			APPEND MENU ITEM:C411($refMenu; "-")
+		End if 
+		APPEND MENU ITEM:C411($refMenu; "Create a user based on staff information")
+		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "createUser")
+		
+		$choose:=Dynamic pop up menu:C1006($refMenu)
+		RELEASE MENU:C978($refMenu)
+		
+		Case of 
+			: ($choose="")
+				
+			: ($choose="createUser")
+				$eUser:=ds:C1482.sfw_User.new()
+				$eUser.firstName:=Form:C1466.current_item.firstName
+				$eUser.lastName:=Form:C1466.current_item.lastName
+				$info:=$eUser.save()
+				$eUser.setLogin()
+				$info:=$eUser.save()
+				//If ($info.success)
+				//$context:=New object
+				//$context.target:=Form.current_item.UUID
+				//$context.targetDataclass:="Staff"
+				//$context.userName:=$eUser.fullName
+				//$staff:=ds.Staff.query("UUID_User = :1"; cs.sfw_userManager.me.info.UUID).first()
+				//$context.staffName:=$staff.fullName
+				//$users:=New collection($staff.user.UUID)
+				
+				//$users:=$users.distinct()
+				//cs.sfw_notificationManager.me._notify("UserAccountCreated"; $users; $context)
+				//End if 
+				
+				
+				Form:C1466.current_item.UUID_User:=$eUser.UUID
+				OBJECT SET TITLE:C194(*; "pup_user"; $eUser.login)
+			Else 
+				Form:C1466.current_item.UUID_User:=$choose
+				OBJECT SET TITLE:C194(*; "pup_user"; Form:C1466.current_item.user.login)
+		End case 
+	End if 
 	

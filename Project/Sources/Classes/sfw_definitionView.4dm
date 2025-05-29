@@ -1,3 +1,13 @@
+property propertyPath : Text
+property lb_items : Object
+property picto : Text
+property displayType : Text
+property ident : Text
+property label : Text
+property subset : Object
+property HLItems : Object
+property HLEntries : Object
+
 Class constructor($ident : Text; $label : Text;  ...  : Variant)
 	var $view : cs:C1710.sfw_definitionView
 	

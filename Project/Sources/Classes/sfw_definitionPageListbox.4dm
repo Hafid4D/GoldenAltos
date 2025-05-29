@@ -318,6 +318,22 @@ Function _bAction()
 					SET MENU ITEM ICON:C984($menu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/outside-24x24.png")
 					SET MENU ITEM PARAMETER:C1004($menu; -1; "--export")
 					
+				: ($action.predefinedType="selectAll")
+					APPEND MENU ITEM:C411($menu; "Select all items..."; *)  //XLIFF 
+					SET MENU ITEM ICON:C984($menu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/action-24x24.png")
+					SET MENU ITEM PARAMETER:C1004($menu; -1; "--selectAll")
+					If (Form:C1466["selected_"+$ident+"_items"].length=Form:C1466[$ident].length)
+						DISABLE MENU ITEM:C150($menu; -1)
+					End if 
+					
+				: ($action.predefinedType="unselectAll")
+					APPEND MENU ITEM:C411($menu; "Unselect all items..."; *)  //XLIFF 
+					SET MENU ITEM ICON:C984($menu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/action-24x24.png")
+					SET MENU ITEM PARAMETER:C1004($menu; -1; "--unselectAll")
+					If (Form:C1466["selected_"+$ident+"_items"].length=0)
+						DISABLE MENU ITEM:C150($menu; -1)
+					End if 
+					
 				: ($action.specificAction)
 					APPEND MENU ITEM:C411($menu; $action.label; *)
 					SET MENU ITEM ICON:C984($menu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/action-24x24.png")
@@ -338,6 +354,14 @@ Function _bAction()
 		RELEASE MENU:C978($menu)
 		
 		Case of 
+			: ($choose="--selectAll")
+				Form:C1466["selected_"+$ident+"_items"]:=Form:C1466[$ident]
+				LISTBOX SELECT ROW:C912(*; $ident; 0; lk replace selection:K53:1)
+				
+			: ($choose="--unselectAll")
+				Form:C1466["selected_"+$ident+"_items"]:=Null:C1517
+				LISTBOX SELECT ROW:C912(*; $ident; 0; lk remove from selection:K53:3)
+				
 			: ($choose="--openInWindow")
 				$action:=$actions.query("predefinedType = :1"; "openInWindow").first()
 				$item:=Form:C1466["current_"+$ident+"_item"]

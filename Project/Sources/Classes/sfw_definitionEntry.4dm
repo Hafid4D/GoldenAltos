@@ -7,6 +7,8 @@ property dataclass : Text
 property searchbox : Object
 property icon : Text
 property launchingExpression : Text
+property event : Object
+property addable : Object
 
 Class constructor($ident : Text; $vision_ident : Variant; $labelPlurial : Text; $labelSingle : Text)
 	
@@ -261,13 +263,20 @@ Function setSubset($functionName : Text;  ...  : Variant)
 	End for 
 	$view.setSubset.apply($view; $params)
 	
-Function setAddable($addable : Boolean)
-	If (Count parameters:C259>0)
-		This:C1470.addable:=$addable
-	Else 
-		This:C1470.addable:=True:C214
-	End if 
-	
+Function setAddable($addable : Variant)
+	This:C1470.addable:=This:C1470.addable || New object:C1471
+	Case of 
+		: (Count parameters:C259=0)
+			This:C1470.addable.activate:=True:C214
+		: (Value type:C1509($addable)=Is boolean:K8:9)
+			This:C1470.addable.activate:=$addable
+		: (Value type:C1509($addable)=Is text:K8:3)
+			Case of 
+				: ($addable="hiddenLineInModeMenu")
+					This:C1470.addable.activate:=True:C214
+					This:C1470.addable.hiddenLineInModeMenu:=True:C214
+			End case 
+	End case 
 	
 Function setItemAction($label : Text; $method : Text;  ...  : Text)
 	var $action : Object:=New object:C1471
@@ -576,31 +585,58 @@ Function allowMultiSelectionInLB($allow : Boolean)
 	End if 
 	
 	
-Function setAllowedProfiles( ...  : Text)
+Function setAllowedProfiles( ...  : Variant)
 	var $p : Integer
 	For ($p; 1; Count parameters:C259)
-		This:C1470.allowedProfiles.push(${$p})
+		Case of 
+			: (Value type:C1509(${$p})=Is text:K8:3)
+				This:C1470.allowedProfiles.push(${$p})
+			: (Value type:C1509(${$p})=Is collection:K8:32)
+				This:C1470.allowedProfiles:=This:C1470.allowedProfiles.concat(${$p})
+			Else 
+				// not possible at this time
+		End case 
+	End for 
+	
+Function setAllowedProfilesForCreation( ...  : Variant)
+	var $p : Integer
+	For ($p; 1; Count parameters:C259)
+		Case of 
+			: (Value type:C1509(${$p})=Is text:K8:3)
+				This:C1470.allowedProfilesForCreation.push(${$p})
+			: (Value type:C1509(${$p})=Is collection:K8:32)
+				This:C1470.allowedProfilesForCreation:=This:C1470.allowedProfilesForCreation.concat(${$p})
+			Else 
+				// not possible at this time
+		End case 
 	End for 
 	
 	
-Function setAllowedProfilesForCreation( ...  : Text)
+Function setAllowedProfilesForDeletion( ...  : Variant)
 	var $p : Integer
 	For ($p; 1; Count parameters:C259)
-		This:C1470.allowedProfilesForCreation.push(${$p})
+		Case of 
+			: (Value type:C1509(${$p})=Is text:K8:3)
+				This:C1470.allowedProfilesForDeletion.push(${$p})
+			: (Value type:C1509(${$p})=Is collection:K8:32)
+				This:C1470.allowedProfilesForDeletion:=This:C1470.allowedProfilesForDeletion.concat(${$p})
+			Else 
+				// not possible at this time
+		End case 
 	End for 
 	
 	
-Function setAllowedProfilesForDeletion( ...  : Text)
+Function setAllowedProfilesForModification( ...  : Variant)
 	var $p : Integer
 	For ($p; 1; Count parameters:C259)
-		This:C1470.allowedProfilesForDeletion.push(${$p})
-	End for 
-	
-	
-Function setAllowedProfilesForModification( ...  : Text)
-	var $p : Integer
-	For ($p; 1; Count parameters:C259)
-		This:C1470.allowedProfilesForModification.push(${$p})
+		Case of 
+			: (Value type:C1509(${$p})=Is text:K8:3)
+				This:C1470.allowedProfilesForModification.push(${$p})
+			: (Value type:C1509(${$p})=Is collection:K8:32)
+				This:C1470.allowedProfilesForModification:=This:C1470.allowedProfilesForModification.concat(${$p})
+			Else 
+				// not possible at this time
+		End case 
 	End for 
 	
 	

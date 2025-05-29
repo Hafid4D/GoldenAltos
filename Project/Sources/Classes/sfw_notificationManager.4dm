@@ -20,7 +20,7 @@ Function formMethod()
 	
 	Case of 
 		: (FORM Event:C1606.code=On Load:K2:1)
-			Form:C1466.sfw:=cs:C1710.sfw.new()
+			Form:C1466.sfw:=cs:C1710.sfw_foundations.new()
 			This:C1470.loadNotifications()
 			Form:C1466.current_notification:=Null:C1517
 	End case 

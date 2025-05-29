@@ -1,8 +1,11 @@
+property window : Integer
+property callingWindow : Integer
+property levels : Object
+
 shared singleton Class constructor
 	
 	This:C1470.window:=0
 	This:C1470.callingWindow:=0
-	This:C1470.longtext:="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce volutpat auctor faucibus. Donec nec consectetur nunc. Sed pharetra a enim ac dignissim. Maecenas lacinia ligula vitae diam feugiat, a elementum nisl commodo. Suspendisse non eros at nunc f"+"eugiat facilisis at eget risus. Cras scelerisque nisl tellus, sit amet tempor mi semper non. Integer diam metus, finibus ac est vel, ultricies tempus nibh. Sed eget sagittis tortor. Integer ante odio, porta semper ex et, molestie aliquet quam. Phasell"+"us tincidunt, odio a congue placerat, nisl sem volutpat enim, eu pharetra leo nunc non nisl. Donec eu sagittis ipsum. Integer lacinia accumsan tempor. Vivamus mattis nisl ut dui pellentesque tincidunt. Orci varius natoque penatibus et magnis dis partu"+"rient montes, nascetur ridiculus mus. Quisque sollicitudin hendrerit diam ac posuere.\n\nDuis mattis, massa non consequat malesuada, lorem velit tincidunt nunc, nec ultricies nunc sapien vel nunc. Cras sed rhoncus metus, vitae lobortis libero. Fusce vol"+"utpat quis nunc in tincidunt. Aenean consectetur nibh et metus placerat tempus et vitae augue. Vestibulum eu elit ut sem euismod maximus eget rhoncus lacus. Nulla venenatis, dui id pretium consequat, libero ex dapibus neque, in hendrerit arcu odio id "+"est. Mauris eu magna ut est imperdiet hendrerit ac vitae ante. Nulla facilisi. Praesent euismod cursus facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nulla ullamcorper vitae turpis sit amet elementum"+"."
 	This:C1470.levels:=New shared object:C1526
 	This:C1470.levels["0"]:=New shared object:C1526("header"; "HoneyDew"; "body"; "MintCream"; "label"; ds:C1482.sfw_readXliff("comment.level.low"; "Low"))  //XLIFF OK
 	This:C1470.levels["1"]:=New shared object:C1526("header"; "LemonChiffon"; "body"; "LightYellow"; "label"; ds:C1482.sfw_readXliff("comment.level.normal"; "Normal"))  //XLIFF OK
@@ -12,16 +15,12 @@ shared singleton Class constructor
 	
 Function launch()
 	
-	CALL WORKER:C1389("commentManager"; Formula:C1597(cs:C1710.sfw_commentManager.me._launchWorker()))
+	CALL WORKER:C1389("commentManager"; "sfw_commentPalette_launch")
+	
+shared Function setWindow($ref : Integer)
+	This:C1470.window:=$ref
 	
 	
-shared Function _launchWorker()
-	
-	If (This:C1470.window=0)
-		$ref:=Open form window:C675("sfw_commentPalette"; Palette form window:K39:9; On the right:K39:3; At the top:K39:5)
-		This:C1470.window:=$ref
-		DIALOG:C40("sfw_commentPalette"; *)
-	End if 
 	
 	
 shared Function _formMethod()
@@ -248,11 +247,14 @@ Function _displayHeaderTabComment()
 		$nb:=ds:C1482.sfw_getNbComments(Form:C1466.current_item.UUID)
 		Case of 
 			: ($nb=0)
-				$title:=Form:C1466.sfw.entry.comment.unit0
+				$title:=ds:C1482.sfw_readXliff("commentPalette.no"; Form:C1466.sfw.entry.comment.unit0)
+				
 			: ($nb=1)
-				$title:=Form:C1466.sfw.entry.comment.unit1
+				$title:=ds:C1482.sfw_readXliff("commentPalette.one"; Form:C1466.sfw.entry.comment.unit1)
+				
 			Else 
-				$title:=String:C10($nb)+" "+Form:C1466.sfw.entry.comment.unitN
+				$title:=String:C10($nb)+" "+ds:C1482.sfw_readXliff("commentPalette.comments"; Form:C1466.sfw.entry.comment.unitN)
+				
 		End case 
 		OBJECT SET VALUE:C1742("headerTabComment_title"; $title)
 	End if 

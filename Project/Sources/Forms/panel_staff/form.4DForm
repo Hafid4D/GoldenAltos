@@ -22,6 +22,7 @@
 		"onDrop",
 		"onMenuSelect",
 		"onPluginArea",
+		"onDataChange",
 		"onDragOver",
 		"onTimer",
 		"onAfterKeystroke",
@@ -722,10 +723,43 @@
 					"right": 101
 				}
 			}
+		},
+		{
+			"objects": {
+				"label_0_3": {
+					"type": "text",
+					"top": 127,
+					"left": 58,
+					"width": 150,
+					"height": 19,
+					"stroke": "#808080",
+					"text": "Golden Altos user account"
+				},
+				"pup_user": {
+					"type": "button",
+					"top": 125,
+					"left": 218,
+					"width": 247,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "--user--",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_user.4dm",
+					"events": [
+						"onClick"
+					]
+				}
+			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"geometryStamp": 1045,
+	"geometryStamp": 958,
 	"editor": {
 		"groups": {
 			"Group": [

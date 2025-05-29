@@ -467,14 +467,14 @@ If (True:C214)
 	TRUNCATE TABLE:C1051([Staff:135])
 	TRUNCATE TABLE:C1051([sfw_User:16])
 	
-	$user:=ds:C1482.sfw_User.new()
-	$user.firstName:="Hassan"
-	$user.lastName:="Sribet"
-	$user.login:="hassansribet"
-	$user.accesses:=JSON Parse:C1218("{\"asDesigner\":true,\"password\":{\"temporary\":false,\"sendTemporaryByMail\":false,\"lastReset\":705253775,\"hash\":\"$2b$10$cLpZxBy5QcJCQ0K5DbscjuC3KC2bUblf0l5IJLtByF342d6OFlmFS\",\"lastChange\":705253879}}")
-	$user.asDesigner:=True:C214
+	//$user:=ds.sfw_User.new()
+	//$user.firstName:="Hassan"
+	//$user.lastName:="Sribet"
+	//$user.login:="hassansribet"
+	//$user.accesses:=JSON Parse("{\"asDesigner\":true,\"password\":{\"temporary\":false,\"sendTemporaryByMail\":false,\"lastReset\":705253775,\"hash\":\"$2b$10$cLpZxBy5QcJCQ0K5DbscjuC3KC2bUblf0l5IJLtByF342d6OFlmFS\",\"lastChange\":705253879}}")
+	//$user.asDesigner:=True
 	
-	$res:=$user.save()
+	//$res:=$user.save()
 	
 	If (Not:C34($res.success))
 		TRACE:C157
@@ -497,13 +497,13 @@ If (True:C214)
 		TRACE:C157
 	End if 
 	
-	$user:=ds:C1482.sfw_User.new()
-	$user.firstName:="Omar"
-	$user.lastName:="Debbagh"
-	$user.login:="omardebbagh"
-	$user.accesses:=JSON Parse:C1218("{\"asDesigner\":true,\"password\":{\"temporary\":false,\"sendTemporaryByMail\":false,\"lastReset\":706358866,\"hash\":\"$2b$10$jWCPtle9cInwDJfVJbCrsecHbiVfbbBISVGEOOGXMILflvJnv9aJG\",\"lastChange\":706358916}}")
+	//$user:=ds.sfw_User.new()
+	//$user.firstName:="Omar"
+	//$user.lastName:="Debbagh"
+	//$user.login:="omardebbagh"
+	//$user.accesses:=JSON Parse("{\"asDesigner\":true,\"password\":{\"temporary\":false,\"sendTemporaryByMail\":false,\"lastReset\":706358866,\"hash\":\"$2b$10$jWCPtle9cInwDJfVJbCrsecHbiVfbbBISVGEOOGXMILflvJnv9aJG\",\"lastChange\":706358916}}")
 	
-	$res:=$user.save()
+	//$res:=$user.save()
 	
 	If (Not:C34($res.success))
 		TRACE:C157

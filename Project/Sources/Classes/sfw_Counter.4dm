@@ -3,13 +3,14 @@ Class extends DataClass
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry:=cs:C1710.sfw_definitionEntry.new("counter"; "administration"; "Counter")
+	$entry.setXliffLabel("counter.counter")
 	$entry.setDataclass("sfw_Counter")
 	$entry.setIcon("sfw/entry/counter-50x50.png")
 	$entry.setSearchboxField("ident")
 	$entry.setSearchboxField("currentValue")
 	$entry.setPanel("sfw_panel_counter")
 	$entry.setLBItemsColumn("ident"; " ")
-	$entry.setLBItemsColumn("currentValue"; "Current value")
+	$entry.setLBItemsColumn("currentValue"; "Current value"; "xliff:counter.field.currentvalue")
 	$entry.setLBItemsOrderBy("ident")
 	$entry.setDisplayOrder(-100)
 	

@@ -3,6 +3,7 @@ Class extends DataClass
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry:=cs:C1710.sfw_definitionEntry.new("emailTemplate"; "administration"; "Email templates")
+	$entry.setXliffLabel("emailtemplate.title")
 	$entry.setDataclass("sfw_EmailTemplate")
 	$entry.setDisplayOrder(-1500)
 	$entry.setIcon("image/entry/emailTemplate-50x50.png")
@@ -13,9 +14,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanel("panel_emailTemplate")
 	$entry.setPanelPage(1; "description-32x32.png"; "Exemples")
 	
-	$entry.setLBItemsColumn("ident"; "Identifier"; "width:80")
-	$entry.setLBItemsColumn("name"; "Name"; "width:200")
-	$entry.setLBItemsColumn("subject"; "Subject"; "width:200")
+	$entry.setLBItemsColumn("ident"; "Identifier"; "xliff:emailtemplate.field.ident"; "width:80")
+	$entry.setLBItemsColumn("name"; "Name"; "xliff:emailtemplate.field.name"; "width:200")
+	$entry.setLBItemsColumn("subject"; "Subject"; "xliff:emailtemplate.field.subject"; "width:200")
 	
 	$entry.setLBItemsOrderBy("ident")
 	

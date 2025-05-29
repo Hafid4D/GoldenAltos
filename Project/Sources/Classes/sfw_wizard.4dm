@@ -1,4 +1,4 @@
-Class extends sfw
+Class extends sfw_foundations
 
 Class constructor()
 	Super:C1705()

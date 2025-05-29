@@ -19,3 +19,7 @@ If (Form:C1466.current_item#Null:C1517)
 		OBJECT SET FORMAT:C236(*; $objectName; $typeName)
 	End if 
 End if 
+
+
+OBJECT SET TITLE:C194(*; "ident"; ds:C1482.sfw_readXliff("setting.field.ident"))
+OBJECT SET TITLE:C194(*; "name"; ds:C1482.sfw_readXliff("setting.field.name"))

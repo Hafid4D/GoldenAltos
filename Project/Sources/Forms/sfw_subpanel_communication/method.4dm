@@ -43,13 +43,13 @@ Case of
 		$mainMenu:=Create menu:C408
 		$refMenus.push($mainMenu)
 		
-		APPEND MENU ITEM:C411($mainMenu; "Add a communication means"; *)
+		APPEND MENU ITEM:C411($mainMenu; ds:C1482.sfw_readXliff("communication.add"; "Add a communication means"); *)  // xliff
 		SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--add")
 		If (sfw_checkIsInModification)=False:C215
 			DISABLE MENU ITEM:C150($mainMenu; -1)
 		End if 
 		
-		APPEND MENU ITEM:C411($mainMenu; "Delete a communication means"; *)
+		APPEND MENU ITEM:C411($mainMenu; ds:C1482.sfw_readXliff("communication.delete"; "Delete a communication means"); *)  // xliff
 		SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--delete")
 		If (sfw_checkIsInModification)=False:C215
 			DISABLE MENU ITEM:C150($mainMenu; -1)
@@ -88,7 +88,7 @@ Case of
 			$refMenus.push($mainMenu)
 			
 			For each ($type; Form:C1466.communicationTypes)
-				APPEND MENU ITEM:C411($mainMenu; $type.label; *)
+				APPEND MENU ITEM:C411($mainMenu; ds:C1482.sfw_readXliff("communication."+Replace string:C233(Lowercase:C14($type.label); " "; ""); $type.label); *)
 				SET MENU ITEM PARAMETER:C1004($mainMenu; -1; $type.type)
 				SET MENU ITEM ICON:C984($mainMenu; -1; "path:/RESOURCES/sfw/communication/"+$type.icon)
 			End for each 

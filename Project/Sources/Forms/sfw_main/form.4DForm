@@ -37,8 +37,8 @@
 					"width": 1380,
 					"height": 60,
 					"sizingX": "grow",
-					"stroke": "transparent",
-					"fill": "#6AB0E8"
+					"fill": "#A6C1D5",
+					"stroke": "transparent"
 				},
 				"bkgd_bottomBar": {
 					"type": "rectangle",
@@ -83,6 +83,9 @@
 					"scrollbarHorizontal": "hidden",
 					"scrollbarVertical": "automatic",
 					"horizontalLineStroke": "transparent",
+					"verticalLineStroke": "transparent",
+					"fill": "#F5F5F5",
+					"alternateFill": "#FAFAFA",
 					"borderStyle": "none",
 					"method": "ObjectMethods/lb_items.4dm",
 					"events": [
@@ -95,9 +98,6 @@
 					"headerHeight": "20px",
 					"metaSource": "This:C1470.meta",
 					"selectedItemsSource": "Form:C1466.current_lb_item_selected",
-					"alternateFill": "#FAFAFA",
-					"fill": "#F5F5F5",
-					"verticalLineStroke": "transparent",
 					"columns": []
 				},
 				"detail_panel": {
@@ -884,5 +884,5 @@
 			"View 1": {}
 		}
 	},
-	"geometryStamp": 590
+	"geometryStamp": 581
 }

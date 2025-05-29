@@ -1,15 +1,17 @@
+property globalParameters : Object
+
 Class extends sfw_definitionBuilder
 
 Class constructor
 	
 	Super:C1705()
-	This:C1470._global_parameters()
 	This:C1470._visions_definition()
 	This:C1470._entries_definition()
 	//This._event_definition()
 	This:C1470._scheduler_definition()
 	This:C1470._notification_definition()
 	This:C1470._profiles_definition()
+	This:C1470._documentFolders_definition()
 	
 Function _global_parameters()
 	
@@ -26,7 +28,24 @@ Function _global_parameters()
 	This:C1470.globalParameters.address:=New object:C1471("defaultCountry"; "fr")
 	This:C1470.globalParameters.preferedCountriesInPup:=New collection:C1472("ma"; "fr"; "us")
 	
+	This:C1470.globalParameters.microsoftGraphAPI:=New object:C1471()
+	This:C1470.globalParameters.microsoftGraphAPI.clientId:="08c8a78e-8ad9-4bd7-b24f-73d590be281b"
+	This:C1470.globalParameters.microsoftGraphAPI.tenant:="06dc191b-7348-4b66-b0d9-806cb7d9455b"
+	This:C1470.globalParameters.microsoftGraphAPI.scope:="offline_access https://graph.microsoft.com/.default"
+	This:C1470.globalParameters.microsoftGraphAPI.userId:="noreply.goldenAltos@4d.com"
+	This:C1470.globalParameters.mail:=New object:C1471("sender"; "noreply.goldenAltos@4d.com")
+	
+	
 	This:C1470.globalParameters.notifications:=New object:C1471("activate"; True:C214)
+	
+	This:C1470.globalParameters.documentsStorageOnServer:=New object:C1471
+	This:C1470.globalParameters.documentsStorageOnServer.folder:=Folder:C1567(Folder:C1567(fk data folder:K87:12).platformPath; fk platform path:K87:2).parent.folder("DocumentData")
+	
+	This:C1470.globalParameters.dfd:=New object:C1471
+	This:C1470.globalParameters.dfd.visionAllowedProfiles:=["admin"; "pm"]
+	This:C1470.globalParameters.dfd.entryDocument:=New object:C1471
+	This:C1470.globalParameters.dfd.entryDocument.allowedProfiles:=["admin"; "pm"]
+	This:C1470.globalParameters.dfd.entryDocument.allowedProfilesForCreation:=["admin"; "pm"]
 	
 Function _event_definition()
 	
@@ -243,4 +262,13 @@ Function _profiles_definition()
 	//$eAM:=ds.sfw_UserProfile.getAndCreateIfNotExist("am"; "account manager"; "autoCreation")
 	//$eTAM:=ds.sfw_UserProfile.getAndCreateIfNotExist("tam"; "technical account manager"; "autoCreation")
 	//$eTest:=ds.sfw_UserProfile.getAndCreateIfNotExist("tst"; "tester"; "autoCreation")
+	
+Function _documentFolders_definition()
+	
+	$eContract:=ds:C1482.sfw_DocumentFolder.getAndCreateIfNotExist("contract"; "Contract")
+	$eContract:=ds:C1482.sfw_DocumentFolder.getAndCreateIfNotExist("sales"; "Sales")
+	$eContract:=ds:C1482.sfw_DocumentFolder.getAndCreateIfNotExist("quote"; "Quote"; "subFolderOf:sales")
+	$eContract:=ds:C1482.sfw_DocumentFolder.getAndCreateIfNotExist("invoice"; "Invoice"; "subFolderOf:sales")
+	$eLegal:=ds:C1482.sfw_DocumentFolder.getAndCreateIfNotExist("legal"; "Legal")
+	$eNda:=ds:C1482.sfw_DocumentFolder.getAndCreateIfNotExist("nda"; "NDA"; "subFolderOf:legal")
 	

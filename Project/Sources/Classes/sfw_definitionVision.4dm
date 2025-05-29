@@ -2,7 +2,9 @@ property ident : Text
 property label : Text
 property xliff : Text
 property toolbar : Object
-
+property allowedProfiles : Collection
+property displayOrder : Integer
+property icon : Text
 
 Class constructor($ident : Text; $label : Text)
 	This:C1470.ident:=$ident
@@ -29,10 +31,17 @@ Function setDisplayOrder($order : Integer)
 	This:C1470.displayOrder:=$order
 	
 	
-Function setAllowedProfiles( ...  : Text)
+Function setAllowedProfiles( ...  : Variant)
 	var $p : Integer
 	For ($p; 1; Count parameters:C259)
-		This:C1470.allowedProfiles.push(${$p})
+		Case of 
+			: (Value type:C1509(${$p})=Is text:K8:3)
+				This:C1470.allowedProfiles.push(${$p})
+			: (Value type:C1509(${$p})=Is collection:K8:32)
+				This:C1470.allowedProfiles:=This:C1470.allowedProfiles.concat(${$p})
+			Else 
+				// not possible at this time
+		End case 
 	End for 
 	
 	

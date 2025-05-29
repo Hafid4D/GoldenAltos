@@ -1,4 +1,4 @@
-Class extends sfw
+Class extends sfw_foundations
 
 
 property vision : Object
@@ -485,12 +485,13 @@ Function pushCurrentUserButton()
 		//mark: Project definition classes
 		$refSFWDefinitionclassesMenu:=Create menu:C408
 		This:C1470.refMenus.push($refSFWDefinitionclassesMenu)
-		$className:=Storage:C1525.definitionClass.name
-		$refMenuFunction:=This:C1470._menuFunction($className; "file:sfw/image/menu/puzzle.png")
-		APPEND MENU ITEM:C411($refSFWDefinitionclassesMenu; $className; $refMenuFunction; *)
-		SET MENU ITEM PARAMETER:C1004($refSFWDefinitionclassesMenu; -1; "--class:"+$className)
-		SET MENU ITEM ICON:C984($refSFWDefinitionclassesMenu; -1; "file:sfw/image/menu/puzzle.png")
-		$classNamesDisplayed.push($className)
+		For each ($className; [Storage:C1525.definitionClass.name; Storage:C1525.definitionClass.globalParametersName])
+			$refMenuFunction:=This:C1470._menuFunction($className; "file:sfw/image/menu/puzzle.png")
+			APPEND MENU ITEM:C411($refSFWDefinitionclassesMenu; $className; $refMenuFunction; *)
+			SET MENU ITEM PARAMETER:C1004($refSFWDefinitionclassesMenu; -1; "--class:"+$className)
+			SET MENU ITEM ICON:C984($refSFWDefinitionclassesMenu; -1; "file:sfw/image/menu/puzzle.png")
+			$classNamesDisplayed.push($className)
+		End for each 
 		APPEND MENU ITEM:C411($refClassesMenu; ds:C1482.sfw_readXliff("toolbar.projectDefinitionClass"; "Project definition class"); $refSFWDefinitionclassesMenu; *)  //XLIFF OK
 		SET MENU ITEM ICON:C984($refClassesMenu; -1; "file:sfw/image/menu/puzzle.png")
 		

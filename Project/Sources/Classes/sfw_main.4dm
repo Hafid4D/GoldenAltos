@@ -2,7 +2,7 @@ property lb_items : Collection
 property searchbox : Text
 property entry : cs:C1710.sfw_definitionEntry
 
-Class extends sfw
+Class extends sfw_foundations
 
 Class constructor()
 	Super:C1705()
@@ -149,6 +149,7 @@ Function lb_items_define()
 		If ($column.group#Null:C1517)
 			$group:=$column.group
 			If (Form:C1466.itemListColumnGroups.indices("group = :1"; $group).length#0)
+				$i-=1
 				continue
 			Else 
 				Form:C1466.itemListColumnGroups.push({group: $group; columnNum: $i; case: 1})

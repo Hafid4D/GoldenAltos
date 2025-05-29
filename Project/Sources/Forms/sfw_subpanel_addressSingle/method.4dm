@@ -67,7 +67,7 @@ If (Form:C1466#Null:C1517)
 					$objectName:="address_item_"+$item
 					OBJECT SET COORDINATES:C1248(*; $objectName; $left; $top; $left+$width_item; $top+$height_Item)
 					OBJECT SET VISIBLE:C603(*; $objectName; True:C214)
-					OBJECT SET PLACEHOLDER:C1295(*; $objectName; $item)
+					OBJECT SET PLACEHOLDER:C1295(*; $objectName; ds:C1482.sfw_readXliff("address."+$item; $item))
 					OBJECT SET ENTERABLE:C238(*; $objectName; $isInModification)
 					If ($isInModification)
 						$runValidationRules:=True:C214

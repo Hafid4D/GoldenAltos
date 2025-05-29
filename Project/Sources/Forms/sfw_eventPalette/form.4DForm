@@ -3,7 +3,7 @@
 		"version": "1",
 		"kind": "form"
 	},
-	"windowSizingX": "variable",
+	"windowSizingX": "fixed",
 	"windowSizingY": "variable",
 	"windowMinWidth": 350,
 	"windowMinHeight": 280,
@@ -43,7 +43,8 @@
 					"scrollbarVertical": "visible",
 					"dataSource": "Form:C1466.subFormEventList",
 					"method": "ObjectMethods/subFormEventList.4dm",
-					"sizingY": "grow"
+					"sizingY": "grow",
+					"sizingX": "grow"
 				},
 				"noEvent_picto": {
 					"type": "picture",
@@ -72,11 +73,28 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"dataSource": "Form:C1466.text_calculator"
+				},
+				"bAction": {
+					"type": "button",
+					"text": "Actions",
+					"top": 255,
+					"left": 4,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bAction.4dm",
+					"sizingY": "move"
 				}
 			}
 		}
 	],
-	"geometryStamp": 40,
+	"geometryStamp": 43,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

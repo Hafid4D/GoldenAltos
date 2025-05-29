@@ -14,7 +14,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setPanel("panel_staff")
 	$entry.setPanelPage(1; ""; "Main")
-	$entry.setPanelPage(2; ""; "Certifications Assignment")
+	$entry.setPanelPage(2; ""; "Certifications Assignment"; "")
+	$entry.setPanelPage(3; ""; "settings"; "allowedProfiles:admin")
 	
 	
 	$entry.setLBItemsColumn("code"; "Code"; "width:70"; "center")
@@ -35,6 +36,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	//$entry.setAllowedProfiles("qa")
 	
 	$entry.enableTransaction()
+	//$entry.setAllowedProfilesForDeletion("pm")
 	
 	$entry.setItemListAction("Staff Certifications of the year"; "Staff_certification_of_the_year")
 	$entry.setItemListAction("Export All Employees - CSV"; "Staff_export_all_employees_csv")

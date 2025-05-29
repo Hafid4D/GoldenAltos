@@ -4,6 +4,7 @@ Class extends DataClass
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry:=cs:C1710.sfw_definitionEntry.new("setting"; "administration"; "Settings")
+	$entry.setXliffLabel("setting.title")
 	$entry.setDataclass("sfw_Setting")
 	$entry.setDisplayOrder(-10000)
 	$entry.setIcon("image/entry/settings-50x50.png")
@@ -16,8 +17,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setValidationRule("name"; "entryField_name"; "mandatory"; "trimSpace"; "capitalize")
 	
 	$view:=cs:C1710.sfw_definitionView.new("allVisibleSettings"; "All visible settings")
-	$view.setLBItemsColumn("ident"; "Identifier"; "width:100")
-	$view.setLBItemsColumn("name"; "Name"; "width:200")
+	$view.setLBItemsColumn("ident"; "Identifier"; "width:100"; "xliff:setting.field.ident")
+	$view.setLBItemsColumn("name"; "Name"; "width:200"; "xliff:setting.field.name")
 	$view.setLBItemsOrderBy("ident")
 	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:setting"; "unitN:settings")
 	$view.setSubset("allVisibleSettings")

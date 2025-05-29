@@ -34,7 +34,7 @@
 	"pages": [
 		{
 			"objects": {
-				"label_0_1": {
+				"ident": {
 					"type": "text",
 					"top": 12,
 					"left": 12,
@@ -60,7 +60,7 @@
 					"fill": "transparent",
 					"borderStyle": "none"
 				},
-				"label_0_2": {
+				"label": {
 					"type": "text",
 					"top": 37,
 					"left": 12,
@@ -92,7 +92,7 @@
 			"objects": {}
 		}
 	],
-	"geometryStamp": 6,
+	"geometryStamp": 8,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

@@ -54,13 +54,13 @@
 					"fill": "#C0C0C0",
 					"stroke": "transparent"
 				},
-				"Texte": {
+				"scheduler": {
 					"type": "text",
 					"top": 24,
 					"left": 72,
 					"width": 237,
 					"height": 17,
-					"text": "Scheduler"
+					"text": ""
 				},
 				"Image1": {
 					"type": "picture",
@@ -142,12 +142,13 @@
 							"footer": {
 								"name": "Footer1"
 							},
-							"dataSource": "This:C1470.type"
+							"dataSource": "ds:C1482.sfw_readXliff(\"scheduler.\"+Lowercase:C14(This:C1470.type); This:C1470.type)"
 						},
 						{
 							"header": {
-								"name": "Header2",
-								"text": "Name"
+								"name": "name",
+								"text": "Name",
+								"dataSource": ""
 							},
 							"name": "Column2",
 							"footer": {
@@ -158,11 +159,11 @@
 						},
 						{
 							"header": {
-								"name": "Header4",
+								"name": "lastEx",
 								"text": "Last execution"
 							},
 							"name": "Column4",
-							"dataSource": "This:C1470.lastExecution",
+							"dataSource": "ds:C1482.sfw_readXliff(\"scheduler.\"+Lowercase:C14(This:C1470.lastExecution); This:C1470.lastExecution)",
 							"footer": {
 								"name": "Footer4"
 							}
@@ -239,8 +240,8 @@
 						},
 						{
 							"header": {
-								"name": "Header7",
-								"text": "Time"
+								"name": "time",
+								"text": ""
 							},
 							"name": "Column7",
 							"footer": {
@@ -283,7 +284,7 @@
 			}
 		}
 	],
-	"geometryStamp": 104,
+	"geometryStamp": 108,
 	"formSizeAnchor": "bkgd_bottomBar",
 	"method": "method.4dm",
 	"editor": {

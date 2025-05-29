@@ -179,7 +179,6 @@ shared Function storeAccess()
 	
 shared Function getAuthorizedProfiles()
 	
-	
 	This:C1470.authorizedProfiles:=ds:C1482.sfw_UserInscription.query("UUID_User = :1"; This:C1470.info.UUID).extract("userProfile.ident").copy(ck shared:K85:29)
 	If (This:C1470.authorizedProfiles.indexOf("admin")<0) && (This:C1470.info.asDesigner)
 		This:C1470.authorizedProfiles.push("admin")
