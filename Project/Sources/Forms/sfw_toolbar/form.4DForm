@@ -558,7 +558,7 @@
 					"left": 145,
 					"top": 17,
 					"width": 106,
-					"height": 49,
+					"height": 36,
 					"dataSource": "Form:C1466.vision.label",
 					"multiline": "yes",
 					"enterable": false,
@@ -578,7 +578,7 @@
 		"version": "1",
 		"kind": "form"
 	},
-	"geometryStamp": 371,
+	"geometryStamp": 533,
 	"editor": {
 		"groups": {
 			"Group": [

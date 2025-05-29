@@ -35,7 +35,7 @@
 	"pages": [
 		{
 			"objects": {
-				"label_0_1": {
+				"firstname": {
 					"type": "text",
 					"top": 12,
 					"left": 12,
@@ -61,7 +61,7 @@
 					"fill": "transparent",
 					"borderStyle": "none"
 				},
-				"label_0_2": {
+				"lastname": {
 					"type": "text",
 					"top": 37,
 					"left": 12,
@@ -87,7 +87,7 @@
 					"fill": "transparent",
 					"borderStyle": "none"
 				},
-				"label_0_3": {
+				"login": {
 					"type": "text",
 					"top": 62,
 					"left": 12,
@@ -118,7 +118,7 @@
 					"text": "Acts as designer",
 					"top": 11,
 					"left": 399,
-					"width": 144,
+					"width": 205,
 					"height": 18,
 					"events": [
 						"onClick"
@@ -211,8 +211,8 @@
 								"onDataChange"
 							],
 							"header": {
-								"name": "Entête3",
-								"text": "Profil",
+								"name": "profil",
+								"text": "Profile",
 								"fontTheme": "normal",
 								"textAlign": "left"
 							},
@@ -246,7 +246,7 @@
 		}
 	],
 	"method": "method.4dm",
-	"geometryStamp": 96,
+	"geometryStamp": 102,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

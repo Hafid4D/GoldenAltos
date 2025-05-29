@@ -17,7 +17,6 @@ Class constructor
 	
 	This:C1470.getPathReferenceFolder()
 	
-	This:C1470.sfw_files:={Classes: []; Methods: []; Forms: []; Resources: []; Documentation: []; Triggers: []}
 	
 	
 Function getPathReferenceFolder()
@@ -97,19 +96,19 @@ Function _pushResources($folderReference : 4D:C1709.Folder; $date : Date; $time 
 				Case of 
 					: ($file.name="sfw")
 					: ($file.name="sfw_@")
+					: ($file.name="dfd")
+					: ($file.name="dfd_@")
 					Else 
 						$copy:=False:C215
 				End case 
 				If ($copy)
 					$fileCopied:=$file.copyTo($lprojFolder; fk overwrite:K87:5)
-					This:C1470.sfw_files.Resources.push({file: $file.fullName})
 				End if 
 			End for each 
 		End if 
 		
-		If ($folder.name="sfw")
+		If ($folder.name="sfw") || ($folder.name="dfd")
 			$sfwFolder:=$folder.copyTo($targetFolder; fk overwrite:K87:5)
-			This:C1470.sfw_files.Resources.push({folder: $folder.fullName})
 		End if 
 		
 	End for each 
@@ -166,12 +165,12 @@ Function _pushDocumentation($folderReference : 4D:C1709.Folder; $date : Date; $t
 			$copy:=True:C214
 			Case of 
 				: ($file.name="sfw_@")
+				: ($file.name="dfd_@")
 				Else 
 					$copy:=False:C215
 			End case 
 			If ($copy)
 				$fileCopied:=$file.copyTo($folderToUpdate; fk overwrite:K87:5)
-				This:C1470.sfw_files.Documentation.push({file: $fileCopied.fullName})
 			End if 
 		End for each 
 	End while 
@@ -222,12 +221,14 @@ Function _pushProject($folderReference : 4D:C1709.Folder; $date : Date; $time : 
 			$copy:=True:C214
 			Case of 
 				: ($folder.name="sfw_@")
+				: ($folder.name="dfd_@")
 				: ($folder.name=String:C10(Num:C11($folder.name)))
 					$tableNum:=Num:C11($folder.name)
 					If (Is table number valid:C999($tableNum))
 						$tableName:=Table name:C256($tableNum)
 						Case of 
 							: ($tableName="sfw_@")
+							: ($tableName="dfd_@")
 							Else 
 								$copy:=False:C215
 						End case 
@@ -249,8 +250,6 @@ Function _pushProject($folderReference : 4D:C1709.Folder; $date : Date; $time : 
 			$copy:=True:C214
 			Case of 
 				: ($file.fullName="form.4DForm")
-					This:C1470.sfw_files.Forms.push({folder: $file.parent.fullName})
-					
 				: ($file.fullName="method.4dm") & (String:C10($file.parent.parent.name)="Forms")
 					
 				: ($file.name="DataStore")
@@ -266,7 +265,7 @@ Function _pushProject($folderReference : 4D:C1709.Folder; $date : Date; $time : 
 					$functionNames:=OB Keys:C1719($classPrototype)
 					
 					$copy:=False:C215
-					$file:=$folderToUpdate.file("DataStore.4dm")
+					$file:=$folderToUpdate.file("DataStore")
 					If (Not:C34($file.exists))
 						$file.create()
 					End if 
@@ -282,7 +281,7 @@ Function _pushProject($folderReference : 4D:C1709.Folder; $date : Date; $time : 
 								$functionName:=Substring:C12($codeLines[$i]; Position:C15("Function "; $codeLines[$i])+9)
 								$functionName:=Substring:C12($functionName; 1; Position:C15("("; $functionName)-1)
 								
-								If ($functionName="sfw_@") || ($functionName="_sfw_@")
+								If ($functionName="sfw_@") || ($functionName="_sfw_@") || ($functionName="dfd_@") || ($functionName="_dfd_@")
 									$classCode+=$codeLines[$i]+"\r"
 								Else 
 									$functionName:="--notInteresting"
@@ -306,18 +305,11 @@ Function _pushProject($folderReference : 4D:C1709.Folder; $date : Date; $time : 
 					
 					$file.setText($classCode)
 					
-					This:C1470.sfw_files.Classes.push({file: $file.name})
-					
 					
 				: ($file.name="sfw")
-					
-					This:C1470.sfw_files[$file.parent.fullName].push({file: $file.name})
-					
 				: ($file.name="sfw_@")
-					
-					This:C1470.sfw_files[$file.parent.fullName].push({file: $file.name})
-					
-					
+				: ($file.name="dfd")
+				: ($file.name="dfd_@")
 				: ($file.parent.name="ObjectMethods")
 				: ($file.parent.name="Images")
 				: ($file.name="table_@") & ($file.parent.name="Triggers")
@@ -326,13 +318,13 @@ Function _pushProject($folderReference : 4D:C1709.Folder; $date : Date; $time : 
 						$tableName:=Table name:C256($tableNum)
 						Case of 
 							: ($tableName="sfw_@")
+							: ($tableName="dfd_@")
 							Else 
 								$copy:=False:C215
 						End case 
 					Else 
 						$copy:=False:C215
 					End if 
-					
 				Else 
 					$copy:=False:C215
 			End case 
@@ -380,7 +372,6 @@ Function _pushModifyTableNum($folderReference : 4D:C1709.Folder; $date : Date; $
 		$file.create()
 	End if 
 	$file.setText(JSON Stringify:C1217($codes; *); "UTF-8")
-	This:C1470.sfw_files.Triggers.push({file: $file.fullName; table: Table name:C256($tableNum)})
 	
 	
 Function _storeAttributes($folderReference : 4D:C1709.Folder; $date : Date; $time : Time)
@@ -399,7 +390,7 @@ Function _storeAttributes($folderReference : 4D:C1709.Folder; $date : Date; $tim
 		$attributesMustBeStored:=True:C214
 		Case of 
 			: ($_method{$i}="sfw_@")
-				
+			: ($_method{$i}="dfd_@")
 			Else 
 				$attributesMustBeStored:=False:C215
 		End case 
@@ -430,6 +421,7 @@ Function _storeStructureDescription($folderReference : 4D:C1709.Folder)
 		$dataclassMustBeStored:=True:C214
 		Case of 
 			: ($dataclassName="sfw_@")
+			: ($dataclassName="dfd_@")
 			Else 
 				$dataclassMustBeStored:=False:C215
 		End case 
@@ -498,6 +490,7 @@ Function _pullResources($folderReference : 4D:C1709.Folder; $date : Date; $time 
 				$copy:=True:C214
 				Case of 
 					: ($file.name="sfw_@")
+					: ($file.name="dfd_@")
 					Else 
 						$copy:=False:C215
 				End case 
@@ -507,7 +500,7 @@ Function _pullResources($folderReference : 4D:C1709.Folder; $date : Date; $time 
 			End for each 
 		End if 
 		
-		If ($folder.name="sfw")
+		If ($folder.name="sfw") || ($folder.name="dfd")
 			$sfwFolder:=$targetFolder.folder($folder.fullName)
 			If ($sfwFolder.exists=False:C215)
 				$sfwFolder.create()
@@ -646,6 +639,7 @@ Function _pullProject($folderReference : 4D:C1709.Folder; $date : Date; $time : 
 			$copy:=True:C214
 			Case of 
 				: ($folder.name="sfw_@")
+				: ($folder.name="dfd_@")
 				: ($folder.name=String:C10(Num:C11($folder.name)))
 					$tableNum:=Num:C11($folder.name)
 					If ($codes[String:C10($tableNum)]#Null:C1517)
@@ -654,6 +648,7 @@ Function _pullProject($folderReference : 4D:C1709.Folder; $date : Date; $time : 
 							$tableName:=Table name:C256($newTableNum)
 							Case of 
 								: ($tableName="sfw_@")
+								: ($tableName="dfd_@")
 								Else 
 									$copy:=False:C215
 							End case 
@@ -682,6 +677,8 @@ Function _pullProject($folderReference : 4D:C1709.Folder; $date : Date; $time : 
 				: ($file.name="DataStore")
 				: ($file.name="sfw")
 				: ($file.name="sfw_@")
+				: ($file.name="dfd")
+				: ($file.name="dfd_@")
 				: ($file.parent.name="ObjectMethods")
 				: ($file.parent.name="Images")
 				: ($file.name="table_@") & ($file.parent.name="Triggers")
@@ -692,6 +689,7 @@ Function _pullProject($folderReference : 4D:C1709.Folder; $date : Date; $time : 
 							$tableName:=Table name:C256($newTableNum)
 							Case of 
 								: ($tableName="sfw_@")
+								: ($tableName="dfd_@")
 								Else 
 									$copy:=False:C215
 							End case 

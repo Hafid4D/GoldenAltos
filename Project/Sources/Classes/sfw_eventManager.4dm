@@ -1,5 +1,12 @@
+property window : Integer
+property events : Object
+property collapsedMonths : Collection
+property collapsedYears : Collection
+property expandedEvents : Collection
+property usersToDisplay : Collection
+property eventTypeToDisplay : Collection
+
 shared singleton Class constructor
-	This:C1470.longtext:="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce volutpat auctor faucibus. Donec nec consectetur nunc. Sed pharetra a enim ac dignissim. Maecenas lacinia ligula vitae diam feugiat, a elementum nisl commodo. Suspendisse non eros at nunc f"+"eugiat facilisis at eget risus. Cras scelerisque nisl tellus, sit amet tempor mi semper non. Integer diam metus, finibus ac est vel, ultricies tempus nibh. Sed eget sagittis tortor. Integer ante odio, porta semper ex et, molestie aliquet quam. Phasell"+"us tincidunt, odio a congue placerat, nisl sem volutpat enim, eu pharetra leo nunc non nisl. Donec eu sagittis ipsum. Integer lacinia accumsan tempor. Vivamus mattis nisl ut dui pellentesque tincidunt. Orci varius natoque penatibus et magnis dis partu"+"rient montes, nascetur ridiculus mus. Quisque sollicitudin hendrerit diam ac posuere.\n\nDuis mattis, massa non consequat malesuada, lorem velit tincidunt nunc, nec ultricies nunc sapien vel nunc. Cras sed rhoncus metus, vitae lobortis libero. Fusce vol"+"utpat quis nunc in tincidunt. Aenean consectetur nibh et metus placerat tempus et vitae augue. Vestibulum eu elit ut sem euismod maximus eget rhoncus lacus. Nulla venenatis, dui id pretium consequat, libero ex dapibus neque, in hendrerit arcu odio id "+"est. Mauris eu magna ut est imperdiet hendrerit ac vitae ante. Nulla facilisi. Praesent euismod cursus facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nulla ullamcorper vitae turpis sit amet elementum"+"."
 	
 	This:C1470.window:=0
 	This:C1470.events:=New shared object:C1526
@@ -7,6 +14,8 @@ shared singleton Class constructor
 	This:C1470.collapsedYears:=New shared collection:C1527
 	This:C1470.collapsedMonths:=New shared collection:C1527
 	This:C1470.expandedEvents:=New shared collection:C1527
+	This:C1470.usersToDisplay:=New shared collection:C1527
+	This:C1470.eventTypeToDisplay:=New shared collection:C1527
 	
 shared Function createIfNotExist($ident : Text; $label : Text)
 	var $eEventType : cs:C1710.sfw_EventTypeEntity
@@ -99,18 +108,167 @@ shared Function addEvent($entry : cs:C1710.sfw_definitionEntry; $ident : Text; $
 	
 Function launch()
 	
-	CALL WORKER:C1389("eventManager"; Formula:C1597(cs:C1710.sfw_eventManager.me._launchWorker()))
+	CALL WORKER:C1389("eventManager"; "sfw_eventPalette_launch")
 	
 	
-shared Function _launchWorker()
-	WINDOW LIST:C442($_refWindows; *)
-	If (This:C1470.window=0) || (Find in array:C230($_refWindows; This:C1470.window)<0)
-		$ref:=Open form window:C675("sfw_eventPalette"; Palette form window:K39:9; On the right:K39:3; At the bottom:K39:6)
-		This:C1470.window:=$ref
-		DIALOG:C40("sfw_eventPalette"; *)
+shared Function setWindow($ref : Integer)
+	This:C1470.window:=$ref
+	
+	
+shared Function bAction()
+	$refMenus:=New collection:C1472
+	$refMenu:=Create menu:C408
+	$refMenus.push($refMenu)
+	
+	$refMenuExpand:=Create menu:C408
+	$refMenus.push($refMenuExpand)
+	APPEND MENU ITEM:C411($refMenuExpand; "Expand all"; *)  //XLIFF
+	SET MENU ITEM PARAMETER:C1004($refMenuExpand; -1; "--expandAll")
+	APPEND MENU ITEM:C411($refMenuExpand; "-")
+	APPEND MENU ITEM:C411($refMenuExpand; "Expand years"; *)  //XLIFF
+	SET MENU ITEM PARAMETER:C1004($refMenuExpand; -1; "--expandYears")
+	APPEND MENU ITEM:C411($refMenuExpand; "Expand months"; *)  //XLIFF
+	SET MENU ITEM PARAMETER:C1004($refMenuExpand; -1; "--expandMonths")
+	APPEND MENU ITEM:C411($refMenuExpand; "Expand events"; *)  //XLIFF
+	SET MENU ITEM PARAMETER:C1004($refMenuExpand; -1; "--expandEvents")
+	APPEND MENU ITEM:C411($refMenu; "Expand"; $refMenuExpand; *)  //XLIFF
+	
+	$refMenuCollapse:=Create menu:C408
+	$refMenus.push($refMenuCollapse)
+	APPEND MENU ITEM:C411($refMenuCollapse; "Collapse all"; *)  //XLIFF
+	SET MENU ITEM PARAMETER:C1004($refMenuCollapse; -1; "--collapseAll")
+	APPEND MENU ITEM:C411($refMenuCollapse; "-")
+	APPEND MENU ITEM:C411($refMenuCollapse; "Collapse years"; *)  //XLIFF
+	SET MENU ITEM PARAMETER:C1004($refMenuCollapse; -1; "--collapseYears")
+	APPEND MENU ITEM:C411($refMenuCollapse; "Collapse months"; *)  //XLIFF
+	SET MENU ITEM PARAMETER:C1004($refMenuCollapse; -1; "--collapseMonths")
+	APPEND MENU ITEM:C411($refMenuCollapse; "Collapse events"; *)  //XLIFF
+	SET MENU ITEM PARAMETER:C1004($refMenuCollapse; -1; "--collapseEvents")
+	APPEND MENU ITEM:C411($refMenu; "Collapse"; $refMenuCollapse; *)  //XLIFF
+	
+	APPEND MENU ITEM:C411($refMenu; "-")
+	
+	$refMenuUser:=Create menu:C408
+	$refMenus.push($refMenuUser)
+	APPEND MENU ITEM:C411($refMenuUser; "All users"; *)  //XLIFF
+	SET MENU ITEM PARAMETER:C1004($refMenuUser; -1; "--allUsers")
+	If (This:C1470.usersToDisplay=Null:C1517) || (This:C1470.usersToDisplay.length=0)
+		SET MENU ITEM MARK:C208($refMenuUser; -1; Char:C90(18))
 	End if 
+	APPEND MENU ITEM:C411($refMenuUser; "-")
+	For each ($eUser; Form:C1466.esEvents.user.orderBy("fullName"))
+		APPEND MENU ITEM:C411($refMenuUser; $eUser.nameToDisplayForEventOrComment; *)
+		SET MENU ITEM PARAMETER:C1004($refMenuUser; -1; "user:"+$eUser.UUID)
+		If (This:C1470.usersToDisplay#Null:C1517) && (This:C1470.usersToDisplay.indexOf($eUser.UUID)>=0)
+			SET MENU ITEM MARK:C208($refMenuUser; -1; Char:C90(18))
+		End if 
+	End for each 
+	APPEND MENU ITEM:C411($refMenu; "Users"; $refMenuUser; *)  //XLIFF
 	
+	$refMenuEventType:=Create menu:C408
+	$refMenus.push($refMenuUser)
+	APPEND MENU ITEM:C411($refMenuEventType; "All event types"; *)  //XLIFF
+	SET MENU ITEM PARAMETER:C1004($refMenuEventType; -1; "--allEventTypes")
+	If (This:C1470.eventTypeToDisplay=Null:C1517) || (This:C1470.eventTypeToDisplay.length=0)
+		SET MENU ITEM MARK:C208($refMenuEventType; -1; Char:C90(18))
+	End if 
+	APPEND MENU ITEM:C411($refMenuEventType; "-")
+	For each ($eEventType; Form:C1466.esEvents.eventType.orderBy("label"))
+		APPEND MENU ITEM:C411($refMenuEventType; $eEventType.label; *)
+		SET MENU ITEM PARAMETER:C1004($refMenuEventType; -1; "eventType:"+$eEventType.UUID)
+		If (This:C1470.eventTypeToDisplay#Null:C1517) && (This:C1470.eventTypeToDisplay.indexOf($eEventType.UUID)>=0)
+			SET MENU ITEM MARK:C208($refMenuEventType; -1; Char:C90(18))
+		End if 
+	End for each 
+	APPEND MENU ITEM:C411($refMenu; "Event types"; $refMenuEventType; *)  //XLIFF
 	
+	$choice:=Dynamic pop up menu:C1006($refMenu)
+	For each ($refMenu; $refMenus)
+		RELEASE MENU:C978($refMenu)
+	End for each 
+	
+	Case of 
+		: ($choice="--expandAll")
+			This:C1470.collapsedYears:=New shared collection:C1527
+			This:C1470.collapsedMonths:=New shared collection:C1527
+			This:C1470.expandedEvents:=Form:C1466.events.extract("UUID").copy(ck shared:K85:29)
+			This:C1470._drawEventContainer()
+			
+		: ($choice="--expandYears")
+			This:C1470.collapsedYears:=New shared collection:C1527
+			This:C1470._drawEventContainer()
+			
+		: ($choice="--expandMonths")
+			This:C1470.collapsedMonths:=New shared collection:C1527
+			This:C1470._drawEventContainer()
+			
+		: ($choice="--expandEvents")
+			This:C1470.expandedEvents:=Form:C1466.events.extract("UUID").copy(ck shared:K85:29)
+			This:C1470._drawEventContainer()
+			
+		: ($choice="--collapseAll")
+			This:C1470.collapsedYears:=New shared collection:C1527
+			This:C1470.collapsedMonths:=New shared collection:C1527
+			For ($year; 2000; 2050)
+				This:C1470.collapsedYears.push($year)
+				For ($month; 1; 12)
+					This:C1470.collapsedMonths.push(String:C10($year)+"/"+String:C10($month))
+				End for 
+			End for 
+			This:C1470.expandedEvents:=New shared collection:C1527
+			This:C1470._drawEventContainer()
+			
+		: ($choice="--collapseYears")
+			This:C1470.collapsedYears:=New shared collection:C1527
+			For ($year; 2000; 2050)
+				This:C1470.collapsedYears.push($year)
+			End for 
+			This:C1470._drawEventContainer()
+			
+		: ($choice="--collapseMonths")
+			This:C1470.collapsedMonths:=New shared collection:C1527
+			For ($year; 2000; 2050)
+				For ($month; 1; 12)
+					This:C1470.collapsedMonths.push(String:C10($year)+"/"+String:C10($month))
+				End for 
+			End for 
+			This:C1470._drawEventContainer()
+			
+		: ($choice="--collapseEvents")
+			This:C1470.expandedEvents:=New shared collection:C1527
+			This:C1470._drawEventContainer()
+			
+			
+		: ($choice="--allUsers")
+			This:C1470.usersToDisplay:=New shared collection:C1527
+			This:C1470._drawEventContainer()
+			
+		: ($choice="user:@")
+			$uuid:=Split string:C1554($choice; ":").pop()
+			This:C1470.usersToDisplay:=This:C1470.usersToDisplay || New shared collection:C1527
+			$index:=This:C1470.usersToDisplay.indexOf($uuid)
+			If ($index>=0)
+				This:C1470.usersToDisplay.remove($index)
+			Else 
+				This:C1470.usersToDisplay.push($uuid)
+			End if 
+			This:C1470._drawEventContainer()
+			
+		: ($choice="--allEventTypes")
+			This:C1470.eventTypeToDisplay:=New shared collection:C1527
+			This:C1470._drawEventContainer()
+			
+		: ($choice="eventType:@")
+			$uuid:=Split string:C1554($choice; ":").pop()
+			This:C1470.eventTypeToDisplay:=This:C1470.eventTypeToDisplay || New shared collection:C1527
+			$index:=This:C1470.eventTypeToDisplay.indexOf($uuid)
+			If ($index>=0)
+				This:C1470.eventTypeToDisplay.remove($index)
+			Else 
+				This:C1470.eventTypeToDisplay.push($uuid)
+			End if 
+			This:C1470._drawEventContainer()
+	End case 
 	
 	
 shared Function _formMethod()
@@ -181,15 +339,15 @@ Function hide()
 	End if 
 	
 	
-Function _displayEvents($uuid_target : Text; $entry : cs:C1710.sfw_definition)
-	var $esEvents : 4D:C1709.EntitySelection
+Function _displayEvents($uuid_target : Text; $entry : cs:C1710.sfw_definitionEntry)
 	var $eEvent : 4D:C1709.Entity
 	
 	Form:C1466.UUID_target:=$uuid_target
+	Form:C1466.entry:=$entry
 	Form:C1466.events:=New collection:C1472
 	If (ds:C1482[$entry.event.dataclass]#Null:C1517)
-		$esEvents:=ds:C1482[$entry.event.dataclass].query($entry.event.linkedAttribute+" = :1 order by stmp desc"; $uuid_target)
-		For each ($eEvent; $esEvents)
+		Form:C1466.esEvents:=ds:C1482[$entry.event.dataclass].query($entry.event.linkedAttribute+" = :1 order by stmp desc"; $uuid_target)
+		For each ($eEvent; Form:C1466.esEvents)
 			$event:=New object:C1471
 			$event.UUID:=$eEvent.UUID
 			$event.stmp:=$eEvent.stmp
@@ -198,23 +356,11 @@ Function _displayEvents($uuid_target : Text; $entry : cs:C1710.sfw_definition)
 			$event.year:=Year of:C25($event.date)
 			$event.month:=Month of:C24($event.date)
 			If ($eEvent.user#Null:C1517)
-				If (cs:C1710.sfw_definition.me.globalParameters.linkedPathToNameFormUserEntity=Null:C1517)
-					$event.user:=$eEvent.user.fullName
-				Else 
-					$source:=$eEvent.user
-					$pathParts:=Split string:C1554(cs:C1710.sfw_definition.me.globalParameters.linkedPathToNameFormUserEntity; ".")
-					$lastAttribute:=$pathParts.pop()
-					For each ($pathPart; $pathParts)
-						If ($pathPart="@()")
-							$source:=$source[Substring:C12($pathPart; 1; Length:C16($pathPart)-2)]()
-						Else 
-							$source:=$source[$pathPart]
-						End if 
-					End for each 
-					$event.user:=$source[$lastAttribute]
-				End if 
+				$event.user:=$eEvent.user.nameToDisplayForEventOrComment
+				$event.UUID_User:=$eEvent.UUID_User
 			Else 
 				$event.user:=""  //cs.sfw_userManager.me.info.login
+				$event.UUID_User:="0"*32
 			End if 
 			$commentParts:=New collection:C1472
 			If ($eEvent.moreData#Null:C1517)
@@ -230,6 +376,7 @@ Function _displayEvents($uuid_target : Text; $entry : cs:C1710.sfw_definition)
 			$event.comment:=$commentParts.join("\r"; ck ignore null or empty:K85:5)
 			
 			$event.eventTypeTitle:=This:C1470.getEventTypeByUUID($eEvent.UUID_EventType).label
+			$event.UUID_EventType:=$eEvent.UUID_EventType
 			Form:C1466.events.push($event)
 		End for each 
 	End if 
@@ -254,6 +401,8 @@ Function _drawEventContainer()
 		$formEventListMonthJson:=$file.getText()
 		$file:=Folder:C1567(fk resources folder:K87:11).file("sfw/dynform/eventListItem.json")
 		$formEventListItemJson:=$file.getText()
+		$file:=Folder:C1567(fk resources folder:K87:11).file("sfw/dynform/eventListItemHidden.json")
+		$formEventListItemHiddenJson:=$file.getText()
 		
 		$pageObjects:=$formDefinition.pages[1].objects
 		$lineNum:=-1
@@ -318,51 +467,68 @@ Function _drawEventContainer()
 						$events:=Form:C1466.events.query("year = :1 and month = :2"; $year.year; $month.month)
 						For each ($event; $events)
 							$lineNum+=1
-							$newLineDefinition:=Replace string:C233($formEventListItemJson; "##1##"; String:C10($lineNum))
-							$event.expand:=(This:C1470.expandedEvents.indexOf($event.UUID)=-1) ? 0 : 1
 							
-							
-							$widgets:=JSON Parse:C1218($newLineDefinition).objects
-							$widget:=$widgets["bCollapse_event_"+String:C10($lineNum)]
-							$widget.dataSource:="Form.events["+String:C10($lineNum)+"].expand"
-							
-							
-							Case of 
-								: ($event.expand=0)
-									$widget:=$widgets["header_bkgd_"+String:C10($lineNum)]
-									$maxBottom:=$widget.top+$widget.height
-								: ($event.comment="")
-									$widget:=$widgets["time_"+String:C10($lineNum)]
-									$maxBottom:=$widget.top+$widget.height+3
-									$height:=$widget.height
-									$widget:=$widgets["body_bkgd_"+String:C10($lineNum)]
-									$widget.height:=$height+3+3
-								Else 
-									Form:C1466.text_calculator:=$event.comment
-									OBJECT GET BEST SIZE:C717(*; "text_calculator"; $bestWidth; $bestHeight; 321)
-									$widget:=$widgets["comment_"+String:C10($lineNum)]
-									$widget.height:=$bestHeight
-									$widget:=$widgets["body_bkgd_"+String:C10($lineNum)]
-									$widget.height:=$bestHeight+17+3+3+3
-									$maxBottom:=$widget.top+$widget.height
-							End case 
-							
-							
-							For each ($widgetName; $widgets)
-								$widget:=$widgets[$widgetName]
-								If ((Bool:C1537($widget._expand)=True:C214) && ($event.expand=1)) || (Bool:C1537($widget._expand)=False:C215)
-									$widget.top+=$vOffset
-									If ($widgetName#("comment_"+String:C10($lineNum)))
-										$pageObjects[$widgetName]:=$widget
+							$displayed:=(This:C1470.usersToDisplay=Null:C1517) || (This:C1470.usersToDisplay.length=0) || (This:C1470.usersToDisplay.indexOf($event.UUID_User)>=0)
+							$displayed:=$displayed & ((This:C1470.eventTypeToDisplay=Null:C1517) || (This:C1470.eventTypeToDisplay.length=0) || (This:C1470.eventTypeToDisplay.indexOf($event.UUID_EventType)>=0))
+							If ($displayed)
+								$newLineDefinition:=Replace string:C233($formEventListItemJson; "##1##"; String:C10($lineNum))
+								$event.expand:=(This:C1470.expandedEvents.indexOf($event.UUID)=-1) ? 0 : 1
+								
+								$widgets:=JSON Parse:C1218($newLineDefinition).objects
+								$widget:=$widgets["bCollapse_event_"+String:C10($lineNum)]
+								$widget.dataSource:="Form.events["+String:C10($lineNum)+"].expand"
+								
+								Case of 
+									: ($event.expand=0)
+										$widget:=$widgets["header_bkgd_"+String:C10($lineNum)]
+										$maxBottom:=$widget.top+$widget.height
+									: ($event.comment="")
+										$widget:=$widgets["time_"+String:C10($lineNum)]
+										$maxBottom:=$widget.top+$widget.height+3
+										$height:=$widget.height
+										$widget:=$widgets["body_bkgd_"+String:C10($lineNum)]
+										$widget.height:=$height+3+3
 									Else 
-										If ($event.comment#"")
+										Form:C1466.text_calculator:=$event.comment
+										OBJECT GET BEST SIZE:C717(*; "text_calculator"; $bestWidth; $bestHeight; 321)
+										$widget:=$widgets["comment_"+String:C10($lineNum)]
+										$widget.height:=$bestHeight
+										$widget:=$widgets["body_bkgd_"+String:C10($lineNum)]
+										$widget.height:=$bestHeight+17+3+3+3
+										$maxBottom:=$widget.top+$widget.height
+								End case 
+								
+								For each ($widgetName; $widgets)
+									$widget:=$widgets[$widgetName]
+									If ((Bool:C1537($widget._expand)=True:C214) && ($event.expand=1)) || (Bool:C1537($widget._expand)=False:C215)
+										$widget.top+=$vOffset
+										If ($widgetName#("comment_"+String:C10($lineNum)))
 											$pageObjects[$widgetName]:=$widget
+										Else 
+											If ($event.comment#"")
+												$pageObjects[$widgetName]:=$widget
+											End if 
 										End if 
 									End if 
-								End if 
-							End for each 
-							$vOffset+=$maxBottom
-							
+								End for each 
+								$vOffset+=$maxBottom
+								
+							Else 
+								
+								$newLineDefinition:=Replace string:C233($formEventListItemHiddenJson; "##1##"; String:C10($lineNum))
+								$widgets:=JSON Parse:C1218($newLineDefinition).objects
+								$maxBottom:=0
+								For each ($widgetName; $widgets)
+									$widget:=$widgets[$widgetName]
+									If ($widget.height+$widget.top>$maxBottom)
+										$maxBottom:=$widget.height+$widget.top
+									End if 
+									$widget.top+=$vOffset
+									$pageObjects[$widgetName]:=$widget
+								End for each 
+								$vOffset+=$maxBottom
+								
+							End if 
 						End for each 
 						
 					End if 

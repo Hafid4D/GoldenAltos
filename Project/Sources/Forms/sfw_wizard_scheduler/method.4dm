@@ -4,3 +4,8 @@ Case of
 		cs:C1710.sfw_window.me.setWindowTitle()
 		
 End case 
+
+OBJECT SET TITLE:C194(*; "scheduler"; ds:C1482.sfw_readXliff("scheduler.title"; "Scheduler"))
+OBJECT SET TITLE:C194(*; "name"; ds:C1482.sfw_readXliff("scheduler.name"; "Name"))
+OBJECT SET TITLE:C194(*; "lastEx"; ds:C1482.sfw_readXliff("scheduler.lastEx"; "Last execution"))
+OBJECT SET TITLE:C194(*; "time"; ds:C1482.sfw_readXliff("scheduler.time"; "Time"))

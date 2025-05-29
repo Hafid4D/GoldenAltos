@@ -5,16 +5,17 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry:=cs:C1710.sfw_definitionEntry.new("user"; "userManagement"; "Users")
 	//$entry.setXliffLabel("entry.users")
 	$entry.setDataclass("sfw_User")
-	$entry.setIcon("sfw/entry/users-50x50.png")
+	$entry.setIcon("sfw/entry/user-50x50-white.png")
+	$entry.setXliffLabel("user.users")
 	//$entry.setDisplayOrder(-1000)
 	$entry.setSearchboxField("firstName")
 	$entry.setSearchboxField("lastName")
 	$entry.setSearchboxField("login")
 	$entry.setPanel("sfw_panel_user")
 	$entry.setPanelPage(1; "address-32x32.png"; "Profiles")
-	$entry.setLBItemsColumn("firstName"; "First name")
-	$entry.setLBItemsColumn("lastName"; "Last name")
-	$entry.setLBItemsColumn("login"; "Login")
+	$entry.setLBItemsColumn("firstName"; "First name"; "xliff:user.field.firstname")
+	$entry.setLBItemsColumn("lastName"; "Last name"; "xliff:user.field.lastname")
+	$entry.setLBItemsColumn("login"; "Login"; "xliff:user.field.login")
 	$entry.setLBItemsOrderBy("firstName")
 	$entry.setLBItemsOrderBy("lastName")
 	$entry.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:user"; "unitN:users")
@@ -28,9 +29,12 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListPreconfigAction("importReferenceRecords")
 	$entry.setItemListPreconfigAction("copyItemsListToPasteboard")
 	$entry.setItemListAction("-"; "-")
-	$entry.setItemListAction("Capitalize the names"; "sfw_User_capitalize_all")
+	$entry.setItemListAction("Capitalize the names"; "capitalize_all")  //XLIFF
+	$entry.setItemListAction("Clean up profile inscriptions"; "cleanUpProfileInscriptions")  //XLIFF
 	
 	$entry.enableTransaction()
+	
+	$entry.setAllowedProfilesForCreation("pm")
 	
 	
 	
@@ -38,7 +42,6 @@ Function getActiveUsers()->$esUsers : cs:C1710.sfw_UserSelection
 	var $eRelated : 4D:C1709.Entity
 	
 	$esUsers:=ds:C1482.sfw_User.newSelection()
-	
 	For each ($eUser; ds:C1482.sfw_User.query("isInactive != True"))
 		Try
 			$eRelated:=ds:C1482[cs:C1710.sfw_definition.me.globalParameters.users.linkedDataclass].query("UUID_User = :1"; $eUser.UUID).first()
@@ -48,7 +51,20 @@ Function getActiveUsers()->$esUsers : cs:C1710.sfw_UserSelection
 		Catch
 			
 		End try
-		
-		
 	End for each 
 	
+	
+Function capitalize_all()
+	var $eUser : cs:C1710.sfw_UserEntity
+	
+	For each ($eUser; This:C1470.all())
+		$eUser.firstName:=cs:C1710.sfw_string.me.stringCapitalize($eUser.firstName)
+		$eUser.lastName:=cs:C1710.sfw_string.me.stringCapitalize($eUser.lastName)
+		$info:=$eUser.save()
+	End for each 
+	
+Function cleanUpProfileInscriptions()
+	
+	$uuidsProfiles:=ds:C1482.sfw_UserProfile.all().extract("UUID")
+	$esInscriptionsWithoutProfile:=ds:C1482.sfw_UserInscription.query("not(UUID_UserProfile in :1)"; $uuidsProfiles)
+	$info:=$esInscriptionsWithoutProfile.drop()

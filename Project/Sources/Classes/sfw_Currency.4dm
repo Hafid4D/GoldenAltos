@@ -3,6 +3,7 @@ Class extends DataClass
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry:=cs:C1710.sfw_definitionEntry.new("currency"; "administration"; "Currencies")
+	$entry.setXliffLabel("currency.title")
 	$entry.setDataclass("sfw_Currency")
 	$entry.setDisplayOrder(100)
 	$entry.setIcon("image/entry/currency-50x50-1.png"; "image/entry/currency-50x50.png")
@@ -12,8 +13,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setSearchboxField("name")
 	
 	$entry.setPanel("panel_currency"; 1)
-	$entry.setLBItemsColumn("symbol"; "Symbol"; "width:100")
-	$entry.setLBItemsColumn("name"; "Name"; "width:200")
+	$entry.setLBItemsColumn("symbol"; "Symbol"; "width:100"; "xliff:currency.field.symbol")
+	$entry.setLBItemsColumn("name"; "Name"; "width:200"; "xliff:currency.field.name")
 	$entry.setLBItemsOrderBy("symbol")
 	
 	$entry.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:currency"; "unitN:currencies")

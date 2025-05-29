@@ -5,7 +5,21 @@ Function get date()->$date : Date
 	$date:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmp)
 	
 	
-Function saveFromFile($file : Object; $blob : 4D:C1709.Blob)->$return : Object
+local Function saveFromFile()->$return : Object
+	var $file : 4D:C1709.File
+	var $blob : 4D:C1709.Blob
+	
+	If (This:C1470.moreData.originalPathOnClient#Null:C1517)
+		READ PICTURE FILE:C678(This:C1470.moreData.originalPathOnClient; $pict)
+		$file:=File:C1566(This:C1470.moreData.originalPathOnClient; fk platform path:K87:2)
+		PICTURE TO BLOB:C692($pict; $blob; $file.extension)
+		$return:=This:C1470.processSaveFromFile($file; $blob)
+		If ($return.success)
+			This:C1470.moreData.originalPathOnClient:=Null:C1517
+		End if 
+	End if 
+	
+Function processSaveFromFile($file : Object; $blob : 4D:C1709.Blob)->$return : Object
 	
 	$return:={success: False:C215}
 	

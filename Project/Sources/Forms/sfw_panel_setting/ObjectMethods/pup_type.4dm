@@ -7,7 +7,7 @@ If ($isInModification)
 	$menuItems:=["Alpha"; "Text"; "Date"; "Boolean"; "Integer"; "Real"; "Imap"; "Smtp"]
 	
 	For each ($item; $menuItems)
-		APPEND MENU ITEM:C411($menu; $item; *)
+		APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("setting.type."+Lowercase:C14($item); $item); *)
 		
 		SET MENU ITEM ICON:C984($menu; -1; "path:/RESOURCES/StructureEditor/"+$item+".png")
 		SET MENU ITEM PARAMETER:C1004($menu; -1; $item)

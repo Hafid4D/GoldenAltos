@@ -4,6 +4,7 @@ Class extends DataClass
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry:=cs:C1710.sfw_definitionEntry.new("eventType"; "administration"; "Event types")
+	$entry.setXliffLabel("eventtype.title")
 	$entry.setDataclass("sfw_EventType")
 	$entry.setDisplayOrder(-6500)
 	$entry.setIcon("image/entry/eventType-50x50.png")
@@ -11,8 +12,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setSearchboxField("label")
 	
 	$entry.setPanel("sfw_panel_eventType"; 2)
-	$entry.setLBItemsColumn("ident"; "Identifier"; "width:100")
-	$entry.setLBItemsColumn("label"; "Label")
+	$entry.setLBItemsColumn("ident"; "Identifier"; "width:100"; "xliff:eventtype.field.ident")
+	$entry.setLBItemsColumn("label"; "Label"; "xliff:eventtype.field.label")
 	$entry.setLBItemsOrderBy("ident")
 	
 	

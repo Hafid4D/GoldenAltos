@@ -25,7 +25,8 @@ shared Function get entries->$entries : Collection
 shared Function get globalParameters->$globalParameters : Object
 	
 	If (This:C1470.storedGlobalParameters=Null:C1517) || ((Not:C34(Is compiled mode:C492)) && ((FORM Event:C1606.objectName="bToolbar@") || (FORM Event:C1606.objectName="pupVision")))
-		$globalParameters:=cs:C1710[This:C1470.definitionClassName].new().globalParameters
+		cs:C1710.sfw_globalParameters.me.getParameters()
+		$globalParameters:=cs:C1710.sfw_globalParameters.me
 		This:C1470.storedGlobalParameters:=OB Copy:C1225($globalParameters; ck shared:K85:29; This:C1470)
 	Else 
 		$globalParameters:=This:C1470.storedGlobalParameters

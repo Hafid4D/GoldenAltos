@@ -28,3 +28,55 @@ Function getAndCreateIfNotExist($ident : Text; $name : Text;  ...  : Text)->$eFo
 			
 		End if 
 	End if 
+	
+	//Mark:- Function to manage the cache
+local Function cacheClear()
+	If (Storage:C1525.cache#Null:C1517)
+		Use (Storage:C1525.cache)
+			Storage:C1525.cache.documentFolder:=Null:C1517
+		End use 
+	End if 
+	
+	
+local Function cacheLoad()
+	
+	If (Storage:C1525.cache=Null:C1517)
+		Use (Storage:C1525)
+			Storage:C1525.cache:=New shared object:C1526
+		End use 
+	End if 
+	If (Storage:C1525.cache.documentFolder=Null:C1517)
+		$documentFolder:=This:C1470._loadAsCollection()
+		Use (Storage:C1525.cache)
+			Storage:C1525.cache.documentFolder:=$documentFolder.copy(ck shared:K85:29; Storage:C1525.cache)
+		End use 
+	End if 
+	
+	
+local Function cacheGet($uuid : Text)->$documentFolder : Object
+	If (Storage:C1525.cache=Null:C1517)
+		This:C1470.cacheLoad()
+	Else 
+		If (Storage:C1525.cache.sfw_country=Null:C1517)
+			This:C1470.cacheLoad()
+		End if 
+	End if 
+	
+	$indices:=Storage:C1525.cache.documentFolder.indices("UUID = :1"; $uuid)
+	If ($indices.length>0)
+		$documentFolder:=Storage:C1525.cache.documentFolder[$indices[0]]
+	Else 
+		$documentFolder:=New object:C1471
+	End if 
+	
+	
+Function trigger()
+	If (Application type:C494=4D Local mode:K5:1)
+		This:C1470.cacheClear()
+	Else 
+		EXECUTE ON CLIENT:C651("@"; "sfw_cacheManager"; "clear"; "sfw_DocumentFolder")
+	End if 
+	
+Function _loadAsCollection()->$documentFolder : Collection
+	
+	$documentFolder:=This:C1470.all().toCollection().orderBy("name")

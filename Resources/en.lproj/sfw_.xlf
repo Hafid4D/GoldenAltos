@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<xliff version="1.0" xmlns:d4="http://www.4d.com/d4-ns">
+  <file datatype="x-STR#" original="Undefined" source-language="fr" target-language="en">
+    <header>
+      <prop-group name="4DPop XLIFF Pro">
+        <prop prop-type="version">3.1</prop>
+      </prop-group>
+    </header>
+    <body>
+      <group resname="communication">
+        <trans-unit id="GRQHO7JA8+TZ8sP66WlTqA" resname="communication.add">
+          <source>Ajouter un moyen de communication</source>
+          <target>Add a communication means</target>
+        </trans-unit>
+        <trans-unit id="HG8N6CPTBLJecAYRsY2Ksg" resname="communication.delete">
+          <source>Supprimer un moyen de communication</source>
+          <target>Delete a communication means</target>
+        </trans-unit>
+        <trans-unit id="GP3xaZlq2jJZ3reRSibd1Q" resname="communication.phone">
+          <source>Téléphone</source>
+          <target>Phone</target>
+        </trans-unit>
+        <trans-unit id="bViLod9PdbeF4gZzh69h+w" resname="communication.mobile">
+          <source>Portable</source>
+          <target>Mobile</target>
+        </trans-unit>
+        <trans-unit id="zXf0X14eZ58u+XNaCYC7Bg" resname="communication.e-mail">
+          <source>Courriel</source>
+          <target>e-Mail</target>
+        </trans-unit>
+        <trans-unit id="TtNW4hWqqeCHtWRUSzs28Q" resname="communication.website">
+          <source>Site web</source>
+          <target>Web site </target>
+        </trans-unit>
+      </group>
+      <group resname="scheduler">
+        <trans-unit id="Cnt3YYnEID24zNmuViS5KQ" resname="scheduler.hourly">
+          <source>Horaire</source>
+          <target>Hourly</target>
+        </trans-unit>
+        <trans-unit id="R206AjgR0f5K6w00pByuZQ" resname="scheduler.daily">
+          <source>Quotidien</source>
+          <target>Daily</target>
+        </trans-unit>
+        <trans-unit id="dE+ysULBsZuvpgnIQili5g" resname="scheduler.weekly">
+          <source>Hebdomadaire</source>
+          <target>weekly</target>
+        </trans-unit>
+        <trans-unit id="BIrlS17fNpXatcV8tK2U+w" resname="scheduler.title">
+          <source>Planificateur</source>
+          <target>Scheduler</target>
+        </trans-unit>
+        <trans-unit id="6G2_kTf4zdnlPey021PlJg" resname="scheduler.name">
+          <source>Nom</source>
+          <target>Name</target>
+        </trans-unit>
+        <trans-unit id="PPMN7v3RlBrafz5swc9FpQ" resname="scheduler.lastEx">
+          <source>Dernière exécution</source>
+          <target>Last execution</target>
+        </trans-unit>
+        <trans-unit id="nUMQLrDT+mKTb89BNOc+1Q" resname="scheduler.time">
+          <source>Heure</source>
+          <target>Time</target>
+        </trans-unit>
+        <trans-unit id="ccyyuD3LDq1gLIsL2kjALQ" resname="scheduler.never">
+          <source>jamais</source>
+          <target>never</target>
+        </trans-unit>
+      </group>
+      <group resname="commentPalette">
+        <trans-unit id="6eVuqoJk7yIhQncd5dmjmg" resname="commentPalette.add">
+          <source>Ajouter un nouveau commentaire</source>
+          <target>Add a new comment</target>
+        </trans-unit>
+        <trans-unit id="EYTcABCTXUwW5yf4bcZpwQ" resname="commentPalette.comment">
+          <source>Il n'y a aucun commentaire pour l'instant pour l'élément actuel</source>
+          <target>There is no comment at this moment for the current item</target>
+        </trans-unit>
+        <trans-unit id="7V2ev3jzJjDBzMZ605Quxw" resname="commentPalette.erase">
+          <source>Effacer</source>
+          <target>Erase</target>
+        </trans-unit>
+        <trans-unit id="dzEjmLATmtdG2OjC6c2x_A" resname="commentPalette.save">
+          <source>Enregistrer le commentaire</source>
+          <target>Save comment</target>
+        </trans-unit>
+        <trans-unit id="cVySHfcxwZMYvW5h73gRnQ" resname="commentPalette.no">
+          <source>aucun commentaire</source>
+          <target>no comment</target>
+        </trans-unit>
+        <trans-unit id="sA5QEVN0Fax86DDWPDCbzQ" resname="commentPalette.one">
+          <source>un commentaire</source>
+          <target>one comment</target>
+        </trans-unit>
+        <trans-unit id="Gpopi3TJU3AO3cREXn_Hwg" resname="commentPalette.comments">
+          <source>commentaires</source>
+          <target>comments</target>
+        </trans-unit>
+      </group>
+      <group resname="address">
+        <trans-unit id="lUOI24+eA04zm2zV6myAfA" resname="address.street_1">
+          <source>rue_1</source>
+          <target>street_1</target>
+        </trans-unit>
+        <trans-unit id="sINCGOQxrUMukOeYJ4q5lA" resname="address.street_2">
+          <source>rue_2</source>
+          <target>street_2</target>
+        </trans-unit>
+        <trans-unit id="z3E4khD230o01zC7MNoixA" resname="address.postcode">
+          <source>codepostal</source>
+          <target>postcode</target>
+        </trans-unit>
+        <trans-unit id="4Nt8dlWApb1w0TXljRdIZg" resname="address.ville">
+          <source>ville</source>
+          <target>city</target>
+        </trans-unit>
+        <trans-unit id="7LTEPYgXuCCnLBc9flMMSg" resname="address.state">
+          <source>état</source>
+          <target>state</target>
+        </trans-unit>
+        <trans-unit id="kRGpdSeo7Q63npxpr7Dwag" resname="address.region">
+          <source>région</source>
+          <target>region</target>
+        </trans-unit>
+        <trans-unit id="FiOC2HmgvzmcN6YkWTbN5A" resname="address.municipality">
+          <source>municipalité</source>
+          <target>municipality</target>
+        </trans-unit>
+        <trans-unit id="CI9Br5dx6nX91kxCuZKjIA" resname="address.island">
+          <source>île</source>
+          <target>island</target>
+        </trans-unit>
+        <trans-unit id="nHgIEiMF6LCNCfvyeE94kQ" resname="address.prefecture">
+          <source>Préfecture
+</source>
+          <target>prefecture</target>
+        </trans-unit>
+        <trans-unit id="Gh3gSXf7VQ9DZIBW0byRlg" resname="address.paroisse">
+          <source>paroisse</source>
+          <target>parish</target>
+        </trans-unit>
+        <trans-unit id="64fAR7CRTBVX89gWPU2UBw" resname="address.suburb">
+          <source>banlieue</source>
+          <target>suburb</target>
+        </trans-unit>
+        <trans-unit id="2f2KzStZg5nnWuvlJjN1lw" resname="address.department">
+          <source>département</source>
+          <target>department</target>
+        </trans-unit>
+        <trans-unit id="ursK1mUQlK_K_LPKiCwgYg" resname="address.voisinage">
+          <source>voisinage</source>
+          <target>neighborhood</target>
+        </trans-unit>
+        <trans-unit id="Ndy_XVqGOTO3smXb8yWBDQ" resname="address.town">
+          <source>ville</source>
+          <target>town</target>
+        </trans-unit>
+        <trans-unit id="qxzlxEf3HswwdetViVggNQ" resname="address.street">
+          <source>rue</source>
+          <target>street</target>
+        </trans-unit>
+        <trans-unit id="VJelcB63Q_1sNgkS9cm9oQ" resname="address.buildingnamenumber">
+          <source>nom/numéro du bâtiment</source>
+          <target>buildingnamenumber</target>
+        </trans-unit>
+        <trans-unit id="eV0n0wNWA5EulHxF2DzQhQ" resname="address.regionstate">
+          <source>région/état</source>
+          <target>regionstate</target>
+        </trans-unit>
+      </group>
+      <group resname="eventtype">
+        
+        <trans-unit id="amFLUix3DoRjf0AOzK+HVQ" resname="eventtype.field.label">
+          <source>Libellé</source>
+          <target>Label</target>
+        </trans-unit>
+        <trans-unit id="s1m0+gHZSBoGf4JbgXaQDQ" resname="currency">
+          <source>Types d’événement</source>
+          <target>Event types</target>
+        </trans-unit>
+      </group>
+      <group resname="counter"/>
+      <group resname="user">
+        <trans-unit id="EMu2BNodDIVWZMaAL8KAOQ" resname="user.users">
+          <source>Utilisateurs</source>
+          <target>Users</target>
+        </trans-unit>
+        <trans-unit id="0I6tzH8JHPI_Gw+d8wth3A" resname="user.field.firstname">
+          <source>Prénom</source>
+          <target>First name</target>
+        </trans-unit>
+        <trans-unit id="4kSJieW4h+joRpCOyG0OJQ" resname="user.field.lastname">
+          <source>Nom</source>
+          <target>Last name</target>
+        </trans-unit>
+        <trans-unit id="i5+Q3WyI_QYT5Vy+mDcdIQ" resname="user.field.login">
+          <source>Identifiant</source>
+          <target>Login</target>
+        </trans-unit>
+        <trans-unit id="zP1E0EdiB8OYn1EOCeepzg" resname="user.field.designeract">
+          <source>Agit en tant que designer</source>
+          <target>Acts as designer</target>
+        </trans-unit>
+        <trans-unit id="kiDwj2+QyJeRtnpTUHonXg" resname="user.field.inactiveuser">
+          <source>Utilisateur inactif</source>
+          <target state="new">Utilisateur inactif</target>
+        </trans-unit>
+        <trans-unit id="mwVSUh11baCBrJJutSA6nA" resname="user.listbox.profile">
+          <source>Profil</source>
+          <target>Profile</target>
+        </trans-unit>
+        <trans-unit id="7zkoCbswoVorsHKCjq0gFg" resname="user.pwdconfirm">
+          <source>Souhaitez-vous copier le mot de passe temporaire dans le presse-papiers ?</source>
+          <target state="new">Souhaitez-vous copier le mot de passe temporaire dans le presse-papiers ?</target>
+        </trans-unit>
+      </group>
+      <group resname="profile">
+        <trans-unit id="4xOpkyHuVMxmg_8RmO4gJQ" resname="profile.profiles">
+          <source>profils</source>
+          <target>profiles</target>
+        </trans-unit>
+        <trans-unit id="zciTOngSzaIEZWmGt8QmOg" resname="profile.field.ident">
+          <source>Identifiant</source>
+          <target>Identifier</target>
+        </trans-unit>
+        <trans-unit id="_UQrMCMcWW5OSHqXKu4qOA" resname="profile.field.name">
+          <source>Nom</source>
+          <target>Name</target>
+        </trans-unit>
+        <trans-unit id="MXSm1V53JDa_o2WdH9HoqQ" resname="profile.adduser">
+          <source>Ajouter un utilisateur</source>
+          <target>Add a user</target>
+        </trans-unit>
+        <trans-unit id="CFa_LDGgf3ncYC8bGCErzA" resname="profile.deleteuser">
+          <source>Supprimer l'utilisateur</source>
+          <target>Delete the user</target>
+        </trans-unit>
+        <trans-unit id="uNiklLMxAzwngcXl1qf4Ow" resname="profile.listbox.user">
+          <source>Utilisateur</source>
+          <target>User</target>
+        </trans-unit>
+      </group>
+      <group resname="counter">
+        <trans-unit id="iwga_Dc1c3gUbAoNP22i2w" resname="counter.counter">
+          <source>Compteur</source>
+          <target>Counter</target>
+        </trans-unit>
+        <trans-unit id="NgOBtVQPRk8lmFyFzjeJWg" resname="counter.field.currentvalue">
+          <source>Valeur actuelle</source>
+          <target>Current value</target>
+        </trans-unit>
+        <trans-unit id="L88ivbdUyI2l165G9TdSJQ" resname="counter.field.ident">
+          <source>Identifiant</source>
+          <target>Identifier</target>
+        </trans-unit>
+        <trans-unit id="veYyScX6ZaQ8S3INzPspqQ" resname="counter.field.value">
+          <source>Valeur</source>
+          <target>Value</target>
+        </trans-unit>
+      </group>
+      <group resname="notificationType">
+        <trans-unit id="UWB8jrzV6ONO80IGI40fvA" resname="notificationtype.title">
+          <source>Types de notification</source>
+          <target state="needs-review-translation">Notification types</target>
+        </trans-unit>
+        <trans-unit id="b3sqcpC_3Jq690K0axHp5g" resname="notificationtype.field.ident">
+          <source>Identifiant</source>
+          <target>Identifier</target>
+        </trans-unit>
+        <trans-unit id="dkduG2dfbpakiuv8T0zY3A" resname="notificationtype.field.label">
+          <source>Libellé</source>
+          <target>Label</target>
+        </trans-unit>
+      </group>
+      <group resname="emailtemplate">
+        <trans-unit id="13bsruM_GAufRPKiWkUR7Q" resname="emailtemplate.title">
+          <source>Modèles d'email</source>
+          <target>Email templates</target>
+        </trans-unit>
+        <trans-unit id="wyGqVc0VngkjAJob+LjLRw" resname="emailtemplate.field.ident">
+          <source>Identifiant</source>
+          <target>Identifier</target>
+        </trans-unit>
+        <trans-unit id="U12xmBbldxJk3t+rj8GYVQ" resname="emailtemplate.field.name">
+          <source>Nom</source>
+          <target>Name</target>
+        </trans-unit>
+        <trans-unit id="+bHJ8raCTRf2f6z+50lDDg" resname="emailtemplate.field.subject">
+          <source>Objet</source>
+          <target state="needs-review-translation">Subject</target>
+        </trans-unit>
+      </group>
+      
+      <group resname="setting">
+        <trans-unit id="q6pshGTj3e2i2LgXQVpJxw" resname="setting.title">
+          <source>Paramètres</source>
+          <target>Settings</target>
+        </trans-unit>
+        <trans-unit id="1mAsTQfPxSNyb7qc+neNCA" resname="setting.field.ident">
+          <source>Identifiant</source>
+          <target>Identifier</target>
+        </trans-unit>
+        <trans-unit id="X+Y54alUdUo0KDR7tHYfBA" resname="setting.field.name">
+          <source>Nom</source>
+          <target>Name</target>
+        </trans-unit>
+        <trans-unit id="B7b3hEUcbD5+Er1pTlIVyg" resname="setting.type.text">
+          <source>Texte</source>
+          <target>Text</target>
+        </trans-unit>
+        <trans-unit id="+YmEV3Qy7XdYzUaTLlekLQ" resname="setting.type.boolean">
+          <source>Booléen</source>
+          <target>Boolean</target>
+        </trans-unit>
+        <trans-unit id="cIqyoyY+V80F0yjyPNLhvA" resname="setting.type.integer">
+          <source>Entier</source>
+          <target>Integer</target>
+        </trans-unit>
+        <trans-unit id="KktUAPDEoW1c7uNc9AImmw" resname="setting.type.real">
+          <source>Réel</source>
+          <target>Real</target>
+        </trans-unit>
+      </group>
+      <group resname="currency">
+        <trans-unit id="CGSkllZarnrMdsz4MXEZTw" resname="currency.title">
+          <source>Devies</source>
+          <target>Currencies</target>
+        </trans-unit>
+        <trans-unit id="ZcuErnm_YcuLz0ESutJZpA" resname="currency.field.symbol">
+          <source>Symbole</source>
+          <target>Symbol</target>
+        </trans-unit>
+        <trans-unit id="C0hsz6l0ALoipsswTFDYHg" resname="currency.field.name">
+          <source>Nom</source>
+          <target>Name</target>
+        </trans-unit>
+      </group>
+      <group resname="pagelistbox">
+        <trans-unit id="Ciu5GnUjZBNZyVZmBsRVeg" resname="pagelistbox.filter.all">
+          <source>À tout moment</source>
+          <target>All times</target>
+        </trans-unit>
+        <trans-unit id="ffL1wOi2wXvEMStU98c22g" resname="pagelistbox.filter.currentmonth">
+          <source>Mois en cours</source>
+          <target>Current month</target>
+        </trans-unit>
+        <trans-unit id="8J+IxblcWOW7mgXU7g55mg" resname="pagelistbox.filter.previousmonth">
+          <source>Mois précédent</source>
+          <target>Previous month</target>
+        </trans-unit>
+        <trans-unit id="k5wgh_7iknuZnuvs_PWI9g" resname="pagelistbox.filter.currentyear">
+          <source>Année en cours</source>
+          <target>Current year</target>
+        </trans-unit>
+        <trans-unit id="S0T8PAy4vuKyjIWXdMw+PQ" resname="pagelistbox.filter.previousyear">
+          <source>Année précédente</source>
+          <target>Previous year</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</xliff>

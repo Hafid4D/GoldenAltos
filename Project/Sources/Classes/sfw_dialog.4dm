@@ -121,11 +121,14 @@ Function request($message : Text; $default : Text; $buttonOkLabel : Text; $butto
 	$formData.buttonOkLabel:=$buttonOkLabel || "Ok"
 	$formData.buttonCancelLabel:=buttonCancelLabel || "Cancel"
 	$formData.trimSpace:=False:C215
+	$formData.notEmpty:=False:C215
 	For ($p; 5; Count parameters:C259)
 		$param:=${$p}
 		Case of 
 			: ($param="trimSpace")
 				$formData.trimSpace:=True:C214
+			: ($param="notEmpty")
+				$formData.notEmpty:=True:C214
 		End case 
 	End for 
 	If (Is Windows:C1573)
@@ -147,7 +150,8 @@ Function _sfw_dial_requestFM()
 			OBJECT SET TITLE:C194(*; "bCancel"; Form:C1466.buttonCancelLabel)
 			
 	End case 
-	
+	$okEnabled:=(Form:C1466.notEmpty=False:C215) || (Form:C1466.answer#"")
+	OBJECT SET ENABLED:C1123(*; "bOk"; $okEnabled)
 	
 shared Function _getLastExportFolder()->$folder : 4D:C1709.Folder
 	

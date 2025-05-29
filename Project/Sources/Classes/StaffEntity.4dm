@@ -56,3 +56,27 @@ Function getCertiExpiredIn($days : Integer)->$assignment_es : cs:C1710.Certifica
 	
 	$assignment_es:=This:C1470.assignments.query("expiredIn >= :1 AND expiredIn <= :2"; $start; $end)
 	
+local Function get email()->$email : Text
+	If (This:C1470.contactDetails#Null:C1517) && (This:C1470.contactDetails.communications#Null:C1517)
+		$communication:=This:C1470.contactDetails.communications.query("type = :1"; "mail").first()
+		If ($communication#Null:C1517)
+			$email:=$communication.contact
+		End if 
+	End if 
+	
+	
+local Function _initCommunication()
+	If (This:C1470.contactDetails.communications=Null:C1517)
+		This:C1470.contactDetails.communications:=New collection:C1472
+	End if 
+	
+Function get fullName()->$fullName : Text
+	
+	$fullName:=[This:C1470.firstName; This:C1470.lastName].join(" ")
+	
+	
+	
+local Function itemLoad()
+	// This callback is called when the item is selected in the itemList
+	
+	This:C1470._initCommunication()

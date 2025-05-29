@@ -37,6 +37,24 @@ Function set asDesigner($asDesigner : Boolean)
 		End if 
 	End if 
 	
+	
+Function get nameToDisplayForEventOrComment()->$name : Text
+	If (cs:C1710.sfw_definition.me.globalParameters.linkedPathToNameFormUserEntity=Null:C1517)
+		$name:=This:C1470.fullName
+	Else 
+		$pathParts:=Split string:C1554(cs:C1710.sfw_definition.me.globalParameters.linkedPathToNameFormUserEntity; ".")
+		$source:=This:C1470
+		$lastAttribute:=$pathParts.pop()
+		For each ($pathPart; $pathParts)
+			If ($pathPart="@()")
+				$source:=$source[Substring:C12($pathPart; 1; Length:C16($pathPart)-2)]()
+			Else 
+				$source:=$source[$pathPart]
+			End if 
+		End for each 
+		$name:=$source[$lastAttribute]
+	End if 
+	
 local Function get nameInWindowTitle()->$nameInWindowTitle : Text
 	// With this callback you return the name to displayed in the title of the window for the current item
 	$nameInWindowTitle:=This:C1470.login
