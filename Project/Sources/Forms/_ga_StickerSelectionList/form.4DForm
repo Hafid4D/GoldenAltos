@@ -53,7 +53,7 @@
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
-					"text": "Select items for Calibration-Stickers",
+					"text": "Select items to print stickers",
 					"fontSize": 12,
 					"fontWeight": "bold"
 				},
@@ -141,10 +141,10 @@
 				},
 				"btn_printLabels": {
 					"type": "button",
-					"text": "Print Labels For selected equipments",
+					"text": "Print Labels",
 					"top": 735,
-					"left": 686,
-					"width": 207,
+					"left": 803,
+					"width": 90,
 					"height": 25,
 					"events": [
 						"onClick"
@@ -155,7 +155,7 @@
 			}
 		}
 	],
-	"geometryStamp": 40,
+	"geometryStamp": 41,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

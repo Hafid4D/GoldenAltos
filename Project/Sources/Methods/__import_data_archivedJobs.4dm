@@ -117,6 +117,22 @@ If (True:C214)
 					$lotStep_e.qtyOut:=$step.qtyOut
 					$lotStep_e.dateIn:=$step.dateIn
 					$lotStep_e.dateOut:=$step.dateOut
+					$lotStep_e.tools:=New object:C1471()
+					$lotStep_e.tools:=$step.tools
+					
+					While ($lotStep_e.tools.items.indexOf("")#-1)
+						
+						$lotStep_e.tools.items:=$lotStep_e.tools.items.remove($lotStep_e.tools.items.indexOf(""))
+						
+					End while 
+					
+					$lotStep_e.parametricMeasurements:=New object:C1471("items"; New collection:C1472())
+					$lotStep_e.stepInterruptions:=New object:C1471("items"; New collection:C1472())
+					$lotStep_e.dataTables:=New object:C1471("items"; New collection:C1472())
+					$lotStep_e.bins:=New object:C1471("items"; New collection:C1472())
+					$lotStep_e.skills:=New object:C1471("items"; New collection:C1472())
+					$lotStep_e.requitedCertifications:=New object:C1471("items"; New collection:C1472())
+					
 					
 					$lotStep_e.UUID_Lot:=$lot_e.UUID
 					

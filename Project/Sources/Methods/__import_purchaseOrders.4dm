@@ -235,8 +235,8 @@ If (True:C214)
 					$lotStep_e.qtyOut:=$step.qtyOut
 					$lotStep_e.dateIn:=$step.dateIn
 					$lotStep_e.dateOut:=$step.dateOut
-					
-					$lotStep_e.tools:=$step.tools  //New object("items"; New collection())
+					$lotStep_e.tools:=New object:C1471()
+					$lotStep_e.tools:=$step.tools
 					
 					While ($lotStep_e.tools.items.indexOf("")#-1)
 						
