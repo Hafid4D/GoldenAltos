@@ -54,6 +54,13 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$filter.setOrderForItems("ref")
 	$entry.addFilter($filter)
 	
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterTeamMember")
+	$filter.setDefaultTitle("All Teams")
+	$filter.setFilterByManyToManyEntity("Team"; "name"; "memberships.team")
+	$filter.setDynamicTitle("name"; "## Team")
+	$filter.setOrderForItems("id")
+	$entry.addFilter($filter)
+	
 Function terminatedStaff()->$staffs : cs:C1710.StaffSelection
 	$staffs:=ds:C1482.Staff.query("terminated = :1"; True:C214)
 	

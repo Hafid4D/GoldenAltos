@@ -10,11 +10,10 @@
 			"coordinates": {
 				"left": 2385,
 				"top": 103,
-				"width": 203.05078125,
-				"height": 380.33203125
+				"width": 204.05078125,
+				"height": 390.33203125
 			},
 			"displayable_fields_count": 16,
-			"fields_ordering": 2,
 			"fields": {
 				"contactDetails": {
 					"position": 15
@@ -702,6 +701,36 @@
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
+		"Membership": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 2689.6843261719,
+				"top": 369,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6
+		},
+		"Team": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 2968.6843261719,
+				"top": 433,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6
+		},
 		"dfd_Line": {
 			"color": {
 				"red": 158,
@@ -1190,6 +1219,22 @@
 		}
 	},
 	"relations": {
+		"D002CD0C5DB41D4596506CF5BDCE45E7": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"60B3B4640AA9F3428C6C8AF0B96C1D02": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"955286728075C248B78E5075BB881DB4": {
 			"color": {
 				"red": 240,
