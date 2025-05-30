@@ -557,7 +557,7 @@
 		<field name="readyToShipDate" uuid="9B3A63399CCF23428B2DC8DEB6795CA2" type="8" never_null="true" id="30"/>
 		<field name="shippingMemo" uuid="DCA47DF91424DD4894BC10AF89D2D09E" type="10" never_null="true" id="31"/>
 		<field name="location" uuid="E71C67E4282EA742B952D10FA12855F2" type="10" limiting_length="255" never_null="true" id="32"/>
-		<field name="status" uuid="A4CF20D716CEAA43B1BE11D28352EB13" type="10" limiting_length="255" never_null="true" id="33"/>
+		<field name="status" uuid="A4CF20D716CEAA43B1BE11D28352EB13" type="4" never_null="true" id="33"/>
 		<field name="comment" uuid="CC820B6502BD5C4AB32C77A17C8B6F16" type="10" limiting_length="255" never_null="true" id="34"/>
 		<primary_key field_name="UUID" field_uuid="AEF78036FB7D429A96DF35BE53A0E0AF"/>
 	</table>

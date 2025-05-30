@@ -178,26 +178,7 @@
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Status"
-				},
-				"entryField_deviceTableLink": {
-					"type": "input",
-					"top": 62,
-					"left": 696,
-					"width": 140,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.status",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"textAlign": "left"
+					"text": "Approval Status"
 				},
 				"label_jobNumber3": {
 					"type": "text",
@@ -345,6 +326,26 @@
 					"visibility": "visible",
 					"iconFrames": 4,
 					"focusable": false
+				},
+				"pup_lotStatus": {
+					"type": "button",
+					"top": 58,
+					"left": 696,
+					"width": 200,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Status",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_lotStatus.4dm",
+					"events": [
+						"onClick",
+						"onDisplayDetail"
+					]
 				}
 			}
 		},
@@ -1496,7 +1497,7 @@
 			"objects": {}
 		}
 	],
-	"geometryStamp": 1530,
+	"geometryStamp": 1604,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
