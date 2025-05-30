@@ -163,24 +163,6 @@
 					"stroke": "#808080",
 					"text": "Shipped"
 				},
-				"entryField_division": {
-					"type": "input",
-					"top": 62,
-					"left": 432,
-					"width": 140,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.shipped",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"textAlign": "left"
-				},
 				"entryField_archived": {
 					"type": "checkbox",
 					"text": "Archived",
@@ -235,6 +217,19 @@
 					"visibility": "visible",
 					"iconFrames": 4,
 					"focusable": false
+				},
+				"entryField_shipped1": {
+					"type": "checkbox",
+					"text": "Shipped",
+					"top": 58,
+					"left": 432,
+					"width": 168,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.current_item.shipped",
+					"dataSourceTypeHint": "boolean"
 				}
 			}
 		},
@@ -1291,7 +1286,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1173,
+	"geometryStamp": 1223,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
