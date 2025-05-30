@@ -41,6 +41,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListAction("Staff Certifications of the year"; "Staff_certification_of_the_year")
 	$entry.setItemListAction("Export All Employees - CSV"; "Staff_export_all_employees_csv")
 	$entry.setItemListAction("Export All Employees - PDF"; "Staff_export_all_employees_pdf")
+	$entry.setItemListAction("Print Badges"; "Staff_print_badges")
+	
+	$entry.setItemAction("Print Certification Training"; "staff_print_cert_training")
 	
 	// MARK: -Filters
 	
