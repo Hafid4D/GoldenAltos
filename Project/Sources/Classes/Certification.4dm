@@ -19,3 +19,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setLBItemsOrderBy("ref")
 	
+	$entry.enableTransaction()
+	
+	$entry.setItemListAction("Import Certifications"; "certification_import")
+	$entry.setItemListAction("Export Certifications"; "certification_export")
+	

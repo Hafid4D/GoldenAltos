@@ -598,7 +598,7 @@
 	<table name="Certification" uuid="71FD451F60934C9995C7A6D899CA2B51" id="124">
 		<field name="UUID" uuid="46A023E9F16E49DBA21C7DCCBAA82770" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="name" uuid="72B7BB6EB54C4A27A9689D43F5EE2C3C" type="10" limiting_length="255" never_null="true" id="2"/>
-		<field name="ref" uuid="66AE759FD5E4834687653ACC2ECBF0BE" type="4" never_null="true" id="3"/>
+		<field name="ref" uuid="66AE759FD5E4834687653ACC2ECBF0BE" type="4" unique="true" never_null="true" id="3"/>
 		<field name="duration" uuid="2C416E8F43E7FF47873E9F787A42DB2F" type="4" never_null="true" id="4"/>
 		<field name="oneTime" uuid="12EA1AFB18F4154F883825FDFD517862" type="1" never_null="true" id="5"/>
 		<primary_key field_name="UUID" field_uuid="46A023E9F16E49DBA21C7DCCBAA82770"/>
@@ -745,6 +745,7 @@
 		<field name="citizenShipStatus" uuid="94BC1376AD162B4A9CB7ACBB60EA56E3" type="10" limiting_length="255" never_null="true" id="15"/>
 		<field name="contactDetails" uuid="DFFE835335868749B15EECAADA389EB4" type="21" blob_switch_size="2147483647" never_null="true" id="16"/>
 		<primary_key field_name="UUID" field_uuid="6941AB4C41898A4A9FBF25D5AC27CA2B"/>
+		<table_extra output_form="print_list"/>
 	</table>
 	<relation uuid="28F035FB298D4CB6988212AA82A48186" name_Nto1="user" name_1toN="comments" state="1">
 		<related_field kind="source">
@@ -1374,6 +1375,11 @@
 	<index kind="regular" uuid="41D626DCF0E04F4F827CB1D110C13972" type="3">
 		<field_ref uuid="67283794017E8F49A82B9A08EE6BB3F2" name="UUID_ToolType">
 			<table_ref uuid="0FF66E5E37EDD74B8E6E39F15644C85F" name="Tool"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="4466D060A399E74F8AA1C4B7D2CC91EE" type="1">
+		<field_ref uuid="66AE759FD5E4834687653ACC2ECBF0BE" name="ref">
+			<table_ref uuid="71FD451F60934C9995C7A6D899CA2B51" name="Certification"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="45A4536B5BED4C09AB713F22542E2CE1" type="1">
