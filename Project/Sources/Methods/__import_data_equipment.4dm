@@ -2,7 +2,7 @@
 var $eEquipment : cs:C1710.EquipmentEntity
 var $eEquipmentLocation : cs:C1710.EquipmentLocationEntity
 var $eDivision : cs:C1710.DivisionEntity
-var $eRepair : cs:C1710.Repair_LogEntity
+var $eRepair : cs:C1710.RepairLogEntity
 
 var $locations; $types; $divisions : Collection
 
@@ -116,13 +116,13 @@ $repair_Log_file:=Folder:C1567(fk data folder:K87:12).file("DataJson/repair_log_
 
 If ($repair_Log_file.exists)
 	$repair_log:=JSON Parse:C1218($repair_Log_file.getText())
-	TRUNCATE TABLE:C1051([Repair_Log:21])
+	TRUNCATE TABLE:C1051([RepairLog:21])
 	
 	
 	
 	For each ($repair; $repair_log)
 		
-		$eRepair:=ds:C1482.Repair_Log.new()
+		$eRepair:=ds:C1482.RepairLog.new()
 		
 		$eRepair.systemID:=$repair.Sys_ID
 		$eRepair.fixedBy:=$repair.Fixed_by
@@ -134,6 +134,9 @@ If ($repair_Log_file.exists)
 		$eRepair.fix:=$repair.Fix
 		$eRepair.downHrs:=$repair.Down_hrs
 		$eRepair.downAt:=$repair.Down_at
+		$eRepair.upAt:=$repair.Up_at
+		$eRepair.dateUp:=$repair.Date_fixed
+		
 		
 		$res:=$eRepair.save()
 		If (Not:C34($res.success))

@@ -17,11 +17,12 @@ $file:=Folder:C1567(fk resources folder:K87:11).file("4DWriteProPrintTemplates/e
 $template:=WP Import document:C1318($file.platformPath)
 
 $context.length:=Form:C1466.sfw.lb_items.length
-
 $context.location:=_ga_getListFiltersValues("EquipmentLocation"; "locationID")
 $context.equipmentType:=_ga_getListFiltersValues("ToolType"; "UUID")  //("EquipmentType"; "typeID")
 $context.division:=_ga_getListFiltersValues("Division"; "divisionID")
 $context.user:=Current machine:C483
+
+SET PRINT OPTION:C733(Orientation option:K47:2; 1)
 
 Case of 
 	: ($identEntry="main")
@@ -30,23 +31,23 @@ Case of
 		
 	: ($identEntry="equipmentsOutOfCalibration")
 		
-		$template.subject:="Equipments Out of Calibration"
+		$context.subject:="Equipments Out of Calibration"
 		
 	: ($identEntry="pmEquipments")
 		
-		$template.subject:="PM Equipments"
+		$context.subject:="PM Equipments"
 		
 	: ($identEntry="dueCalibrationEquipments")
 		
-		$template.subject:="Equipments overdue for calibration"
+		$context.subject:="Equipments overdue for calibration"
 		
 	: ($identEntry="duePMEquipments")
 		
-		$template.subject:="Due PM Equipments"
+		$context.subject:="Due PM Equipments"
 		
 	: ($identEntry="equipmentsDownOrOnHold")
 		
-		$template.subject:="Equipments down or on hold"
+		$context.subject:="Equipments down"
 		
 End case 
 

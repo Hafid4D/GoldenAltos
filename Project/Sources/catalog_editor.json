@@ -774,7 +774,7 @@
 				}
 			}
 		},
-		"Repair_Log": {
+		"RepairLog": {
 			"color": {
 				"red": 255,
 				"green": 255,

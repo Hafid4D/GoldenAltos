@@ -17,6 +17,8 @@ Case of
 			
 			$wpDoc:=WP New:C1317()
 			
+			SET PRINT OPTION:C733(Orientation option:K47:2; 1)
+			
 			$equipmentSelection:=Form:C1466.lb_selectedEquipments
 			
 			$start:=0

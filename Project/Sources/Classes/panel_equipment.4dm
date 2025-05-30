@@ -182,7 +182,7 @@ Function loadRepairLog()
 		
 		//Form.lb_repairLog:=New collection()
 		
-		Form:C1466.lb_repairLog:=ds:C1482.Repair_Log.query("systemID =:1"; Form:C1466.current_item.assignedID).orderBy("systemID desc")
+		Form:C1466.lb_repairLog:=ds:C1482.RepairLog.query("systemID =:1"; Form:C1466.current_item.assignedID).orderBy("systemID desc")
 		
 		
 	End if 
