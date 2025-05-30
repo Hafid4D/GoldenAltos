@@ -117,6 +117,14 @@ If (True:C214)
 					$lotStep_e.qtyOut:=$step.qtyOut
 					$lotStep_e.dateIn:=$step.dateIn
 					$lotStep_e.dateOut:=$step.dateOut
+					$lotStep_e.timeIn:=$step.timeIn
+					$lotStep_e.timeOut:=$step.timeOut
+					$lotStep_e.discard:=$step.discard
+					$lotStep_e.type:=$step.type
+					$lotStep_e.outOperator:=$step.outOperator
+					$lotStep_e.inOperator:=$step.inOperator
+					$lotStep_e.actualHours:=$step.actualHours
+					$lotStep_e.plannedHours:=$step.plannedHours
 					$lotStep_e.tools:=New object:C1471()
 					$lotStep_e.tools:=$step.tools
 					

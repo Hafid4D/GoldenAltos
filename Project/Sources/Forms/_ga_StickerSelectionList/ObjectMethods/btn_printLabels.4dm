@@ -9,8 +9,6 @@ Case of
 		
 	: (Form event code:C388=On Clicked:K2:4)
 		
-		//SET PRINT PREVIEW(True)
-		
 		var $wpDoc : Object
 		
 		If (True:C214)
@@ -69,10 +67,8 @@ Case of
 				$table:=WP New:C1317()
 				$table:=WP Insert table:C1473($range; wk append:K81:179)
 				
-				// insert header
-				$row:=WP Table append row:C1474($table; "ERP ID"; $equipmentSelection[$i].assignedID)
-				
 				//insert rows
+				$row:=WP Table append row:C1474($table; "ERP ID"; $equipmentSelection[$i].assignedID)
 				$row:=WP Table append row:C1474($table; "Model"; $equipmentSelection[$i].model)
 				$row:=WP Table append row:C1474($table; "Serial #"; $equipmentSelection[$i].serialNumber)
 				$row:=WP Table append row:C1474($table; "Last cal date"; String:C10($equipmentSelection[$i].lastCalDate)+" by "+String:C10($equipmentSelection[$i].calTech))

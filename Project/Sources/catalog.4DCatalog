@@ -68,6 +68,12 @@
 		<field name="commentFormat2" uuid="1D65043B17B8384AA83A7EFF588088BF" type="10" limiting_length="255" never_null="true" id="24"/>
 		<field name="skills" uuid="AA759D287FD0E745A192C7E5FB3C7A8C" type="21" blob_switch_size="2147483647" never_null="true" id="25"/>
 		<field name="requitedCertifications" uuid="5DDE65600ADF10499A45AEF5F921E9F7" type="21" blob_switch_size="2147483647" never_null="true" id="26"/>
+		<field name="discard" uuid="88678CDCE538EA41892A993C8E049827" type="1" never_null="true" id="27"/>
+		<field name="type" uuid="9C1CCA729EF115438E46170426829C45" type="3" never_null="true" id="28"/>
+		<field name="outOperator" uuid="5382DEEB40748041866F8116A4976296" type="10" limiting_length="255" never_null="true" id="29"/>
+		<field name="inOperator" uuid="CE059EA6EFE7EB49A1FC2DAF5CB22E65" type="10" limiting_length="255" never_null="true" id="30"/>
+		<field name="actualHours" uuid="0AAC51C4B19BA74CBACF719D1C91656B" type="6" never_null="true" id="31"/>
+		<field name="plannedHours" uuid="1A3980D589D3284F863777C1F0CA1A1F" type="6" never_null="true" id="32"/>
 		<primary_key field_name="UUID" field_uuid="EE9C517A8C59724B8559A5DCB59FE560"/>
 	</table>
 	<table name="Tool" uuid="0FF66E5E37EDD74B8E6E39F15644C85F" id="6">
@@ -1361,11 +1367,6 @@
 			<table_ref uuid="348628FCA4DC451085D7519B226BD509" name="QuoteLine"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="32540A729083A744A4F649A96CDCFFA1" type="1">
-		<field_ref uuid="EA4BF9CC573745C5BF902F88DA00BD6E" name="UUID">
-			<table_ref uuid="F74C797683A840F69C35777C0FF641E7" name="Assumption"/>
-		</field_ref>
-	</index>
 	<index kind="regular" uuid="40A9EAD691134D62B6DCAA9836F141F0" type="3">
 		<field_ref uuid="BE17FB9FF7BF49AABC4ABF0B78936BD8" name="UUID_User">
 			<table_ref uuid="521E751963104DC299061CF1588CADEF" name="sfw_EMailLog"/>
@@ -1549,6 +1550,11 @@
 	<index kind="regular" uuid="8D55D949B63840D6956A5F33050FDFB6" type="1">
 		<field_ref uuid="A276955D955E41BCA8E3E93B8F5D0B9D" name="UUID_target">
 			<table_ref uuid="BBA10D61B3A54D38A2C335D8A5A1BF6E" name="sfw_Favorite"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="8DE884007CA4E54DB22B4ABE8C29C057" type="1">
+		<field_ref uuid="EA4BF9CC573745C5BF902F88DA00BD6E" name="UUID">
+			<table_ref uuid="F74C797683A840F69C35777C0FF641E7" name="Assumption"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="8E428F94E18645F5A5B714643B5A007F" type="7">

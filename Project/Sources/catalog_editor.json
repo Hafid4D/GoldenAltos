@@ -1050,12 +1050,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2734,
-				"top": 1127.3332519531,
+				"left": 2686,
+				"top": 989.33325195312,
 				"width": 200.048828125,
-				"height": 595.33203125
+				"height": 758.33203125
 			},
-			"displayable_fields_count": 26,
+			"displayable_fields_count": 34,
 			"fields": {
 				"comment2": {
 					"position": 17

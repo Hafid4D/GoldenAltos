@@ -28,8 +28,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListAction("-"; "-")
 	$entry.setItemListAction("Print PM Sticker"; "_ga_printPMStickers")
 	
-	$entry.setItemAction("Print Repair_Log Report"; "_ga_printRepairLogReport")
-	$entry.setItemAction("Print Usage_Log"; "_ga_usageLogReport")
+	$entry.setItemAction("Print Repair Log Report"; "_ga_printRepairLogReport")
+	$entry.setItemAction("Print Usage Log Report"; "_ga_usageLogReport")
 	
 	
 	$entry.enableTransaction()
@@ -129,7 +129,7 @@ local Function cacheLoad()
 	End if 
 	
 	
-Function setDateInterval()
+local Function setDateInterval($pushUp; $title)
 	This:C1470.cacheLoad()
 	
 	$form:=New object:C1471
@@ -138,8 +138,14 @@ Function setDateInterval()
 	$form.interval:=Storage:C1525.cache.interval
 	MOUSE POSITION:C468($mouseX; $mouseY; $mouseButtons)
 	CONVERT COORDINATES:C1365($mouseX; $mouseY; XY Current form:K27:5; XY Main window:K27:8)
-	Open window:C153($mouseX; $mouseY; $mouseX+270; $mouseY+165; Pop up form window:K39:11; "calendar")
+	If ($pushUp)
+		$mouseY:=$mouseY-190
+		$mouseX:=$mouseX-100
+	End if 
+	$form.pushUp:=$pushUp
+	$windRef:=Open window:C153($mouseX; $mouseY; $mouseX+270; $mouseY+165; Movable dialog box:K34:7; $title)
 	DIALOG:C40("_ga_setDateInterval"; $form)
+	CLOSE WINDOW:C154($windRef)
 	Use (Storage:C1525.cache)
 		Storage:C1525.cache.startDate:=$form.startDate
 		Storage:C1525.cache.endDate:=$form.endDate
@@ -148,22 +154,26 @@ Function setDateInterval()
 	
 	
 Function equipmentsOutOfCalibration()->$equipments : cs:C1710.EquipmentSelection
-	This:C1470.setDateInterval()
+	$title:="Set date interval"
+	This:C1470.setDateInterval(False:C215; $title)
 	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & calibrationNotRequired=:2 & notAtSite=:3"; Storage:C1525.cache.endDate; False:C215; False:C215)
 	
 	
 Function pmEquipments()->$equipments : cs:C1710.EquipmentSelection
-	This:C1470.setDateInterval()
+	$title:="Set date interval"
+	This:C1470.setDateInterval(False:C215; $title)
 	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3"; Storage:C1525.cache.endDate; !00-00-00!; False:C215)
 	
 	
 Function dueCalibrationEquipments()->$equipments : cs:C1710.EquipmentSelection
-	This:C1470.setDateInterval()
+	$title:="Set date interval"
+	This:C1470.setDateInterval(False:C215; $title)
 	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & notAtSite=:2 & engg=:3"; Storage:C1525.cache.endDate; False:C215; False:C215)
 	
 	
 Function duePMEquipments()->$equipments : cs:C1710.EquipmentSelection
-	This:C1470.setDateInterval()
+	$title:="Set date interval"
+	This:C1470.setDateInterval(False:C215; $title)
 	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3 & engg=:4"; Storage:C1525.cache.endDate; !00-00-00!; False:C215; False:C215)
 	
 	

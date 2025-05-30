@@ -9,7 +9,7 @@
 	"windowMinHeight": 0,
 	"windowMaxWidth": 32767,
 	"windowMaxHeight": 32767,
-	"rightMargin": 0,
+	"rightMargin": 5,
 	"bottomMargin": 5,
 	"events": [
 		"onLoad",
@@ -32,36 +32,14 @@
 	"destination": "detailScreen",
 	"pages": [
 		{
-			"objects": {
-				"header_bkgd1": {
-					"type": "rectangle",
-					"top": 0,
-					"left": 0,
-					"width": 270,
-					"height": 35,
-					"sizingX": "fixed",
-					"fill": "#69A4C0",
-					"stroke": "transparent"
-				},
-				"lb_setIntervalForm": {
-					"type": "text",
-					"top": 9,
-					"left": 7,
-					"width": 250,
-					"height": 17,
-					"stroke": "#000000",
-					"text": "set date interval",
-					"fontSize": 12,
-					"fontWeight": "bold"
-				}
-			}
+			"objects": {}
 		},
 		{
 			"objects": {
 				"bOk": {
 					"type": "button",
-					"top": 129,
-					"left": 233,
+					"top": 93,
+					"left": 231,
 					"width": 30,
 					"height": 32,
 					"sizingY": "move",
@@ -83,8 +61,8 @@
 				},
 				"bCancel": {
 					"type": "button",
-					"top": 129,
-					"left": 187,
+					"top": 93,
+					"left": 185,
 					"width": 32,
 					"height": 32,
 					"sizingY": "move",
@@ -102,8 +80,8 @@
 				},
 				"pup_startDate": {
 					"type": "button",
-					"top": 46,
-					"left": 136,
+					"top": 10,
+					"left": 134,
 					"width": 127,
 					"height": 23,
 					"fontFamily": "System Font Regular",
@@ -120,8 +98,8 @@
 				},
 				"Oval": {
 					"type": "oval",
-					"top": 48,
-					"left": 102,
+					"top": 12,
+					"left": 100,
 					"width": 19,
 					"height": 19,
 					"strokeWidth": 3,
@@ -130,8 +108,8 @@
 				},
 				"Oval1": {
 					"type": "oval",
-					"top": 100,
-					"left": 102,
+					"top": 64,
+					"left": 100,
 					"width": 19,
 					"height": 19,
 					"strokeWidth": 3,
@@ -140,8 +118,8 @@
 				},
 				"Line": {
 					"type": "line",
-					"top": 64,
-					"left": 110,
+					"top": 28,
+					"left": 108,
 					"width": 0,
 					"height": 39,
 					"strokeWidth": 3,
@@ -149,8 +127,8 @@
 				},
 				"pup_endDate": {
 					"type": "button",
-					"top": 98,
-					"left": 136,
+					"top": 62,
+					"left": 134,
 					"width": 127,
 					"height": 23,
 					"fontFamily": "System Font Regular",
@@ -168,8 +146,8 @@
 				},
 				"label_0_10": {
 					"type": "text",
-					"top": 49,
-					"left": 7,
+					"top": 13,
+					"left": 5,
 					"width": 90,
 					"height": 16,
 					"stroke": "#808080",
@@ -177,8 +155,8 @@
 				},
 				"label_0_11": {
 					"type": "text",
-					"top": 75,
-					"left": 7,
+					"top": 39,
+					"left": 5,
 					"width": 90,
 					"height": 16,
 					"stroke": "#808080",
@@ -186,8 +164,8 @@
 				},
 				"label_0_12": {
 					"type": "text",
-					"top": 101,
-					"left": 7,
+					"top": 65,
+					"left": 5,
 					"width": 90,
 					"height": 16,
 					"stroke": "#808080",
@@ -195,13 +173,13 @@
 				},
 				"pup_interval": {
 					"type": "input",
-					"left": 159,
-					"top": 74,
+					"left": 157,
+					"top": 38,
 					"width": 81,
 					"height": 18,
 					"dataSourceTypeHint": "integer",
 					"dataSource": "Form:C1466.interval",
-					"right": 240,
+					"right": 238,
 					"events": [
 						"onDataChange",
 						"onAfterKeystroke"
@@ -214,8 +192,8 @@
 				"intervalPlus": {
 					"type": "button",
 					"text": "+",
-					"top": 71,
-					"left": 240,
+					"top": 35,
+					"left": 238,
 					"width": 23,
 					"height": 23,
 					"events": [
@@ -228,8 +206,8 @@
 				"intervalMinus": {
 					"type": "button",
 					"text": "-",
-					"top": 71,
-					"left": 136,
+					"top": 35,
+					"left": 134,
 					"width": 23,
 					"height": 23,
 					"events": [
@@ -242,7 +220,7 @@
 			}
 		}
 	],
-	"geometryStamp": 27,
+	"geometryStamp": 31,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
