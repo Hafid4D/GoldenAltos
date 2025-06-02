@@ -25,6 +25,8 @@ Function formMethod()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
+	This:C1470.drawPup_fixOperator()
+	This:C1470.drawPup_reportOperator()
 	
 	
 Function drawPup_XXX()
@@ -34,3 +36,89 @@ Function drawPup_XXX()
 	
 Function pup_XXX()
 	//Create pop up menu
+	
+Function drawPup_fixOperator()
+	If (Form:C1466.current_item#Null:C1517)
+		$fixOperator:=ds:C1482.Employee.query("UUID= :1"; Form:C1466.current_item.fixedBy).first() || New object:C1471()
+		$operatorCode:=$fixOperator.code
+		If ($operatorCode=Null:C1517)
+			$operatorCode:=""
+		End if 
+		$color:=""
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_fixOperator"; $operatorCode; $pathIcon; ($fixOperator=Null:C1517))
+	End if 
+	
+	
+Function pup_fixOperator()
+	//Create pop up menu
+	If (Form:C1466.sfw.checkIsInModification())
+		$menu:=Create menu:C408
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.employees=Null:C1517)
+			ds:C1482.Employee.cacheLoad()
+		End if 
+		
+		For each ($fixOperator; Storage:C1525.cache.employees)
+			APPEND MENU ITEM:C411($menu; $fixOperator.code; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $fixOperator.UUID)
+			If ($fixOperator.UUID=Form:C1466.current_item.fixedBy)
+				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+				If (Is Windows:C1573)
+					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+				End if 
+			End if 
+		End for each 
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		Case of 
+			: ($choose#"")
+				$fixOperator:=ds:C1482.Employee.get($choose)
+				Form:C1466.current_item.fixedBy:=$fixOperator.UUID
+		End case 
+		
+	End if 
+	This:C1470.drawPup_fixOperator()
+	
+Function drawPup_reportOperator()
+	If (Form:C1466.current_item#Null:C1517)
+		$reportOperator:=ds:C1482.Employee.query("UUID= :1"; Form:C1466.current_item.reportedBy).first() || New object:C1471()
+		$operatorCode:=$reportOperator.code
+		If ($operatorCode=Null:C1517)
+			$operatorCode:=""
+		End if 
+		$color:=""
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_reportOperator"; $operatorCode; $pathIcon; ($reportOperator=Null:C1517))
+	End if 
+	
+	
+Function pup_reportOperator()
+	//Create pop up menu
+	If (Form:C1466.sfw.checkIsInModification())
+		$menu:=Create menu:C408
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.employees=Null:C1517)
+			ds:C1482.Employee.cacheLoad()
+		End if 
+		
+		For each ($reportOperator; Storage:C1525.cache.employees)
+			APPEND MENU ITEM:C411($menu; $reportOperator.code; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $reportOperator.UUID)
+			If ($reportOperator.UUID=Form:C1466.current_item.fixedBy)
+				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+				If (Is Windows:C1573)
+					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+				End if 
+			End if 
+		End for each 
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		Case of 
+			: ($choose#"")
+				$reportOperator:=ds:C1482.Employee.get($choose)
+				Form:C1466.current_item.fixedBy:=$reportOperator.UUID
+		End case 
+		
+	End if 
+	This:C1470.drawPup_reportOperator()

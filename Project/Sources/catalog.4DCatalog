@@ -260,7 +260,7 @@
 	<table name="RepairLog" uuid="E209D11E14110249AE69799CB8F51C7C" id="21">
 		<field name="UUID" uuid="8FD486DDACE0854DA8FB686A58B08089" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="systemID" uuid="C56ACBF61233134FA887559C036F2D7A" type="10" limiting_length="255" never_null="true" id="2"/>
-		<field name="fixedBy" uuid="178FB5C0BB8AF745A901549D3F9B117A" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="fixedBy" uuid="178FB5C0BB8AF745A901549D3F9B117A" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="3"/>
 		<field name="dateFixed" uuid="BFCFF4A84085C14BA123E73537FC98F4" type="8" never_null="true" id="4"/>
 		<field name="reportDate" uuid="741357BFDBEA23499DB051B8EDCB9EE8" type="8" never_null="true" id="5"/>
 		<field name="status" uuid="DA2945D648F7F24DB6ED519C615564F1" type="10" limiting_length="255" never_null="true" id="6"/>
@@ -271,6 +271,7 @@
 		<field name="downAt" uuid="4033EAEBDBD0E941A0CD4C53AFD01C46" type="9" never_null="true" id="11"/>
 		<field name="upAt" uuid="7E6764EC95C7F74B89A8509FFD911EFE" type="9" never_null="true" id="12"/>
 		<field name="dateUp" uuid="8BE38F5B5B6E214D8C55B2E7F73DCE36" type="8" never_null="true" id="13"/>
+		<field name="reportedBy" uuid="0D41C3EAAF305248A7DDF508713A818A" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="15"/>
 		<primary_key field_name="UUID" field_uuid="8FD486DDACE0854DA8FB686A58B08089"/>
 	</table>
 	<table name="dfd_Document" uuid="A1BFE9AD9486804BA249798C81722C4A" id="22">

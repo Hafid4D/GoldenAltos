@@ -31,6 +31,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemAction("Print Repair Log Report"; "_ga_printRepairLogReport")
 	$entry.setItemAction("Print Usage Log Report"; "_ga_usageLogReport")
 	
+	//$entry.setItemListProjection("Projection to repairLog"; "projectionToRepairLog"; "RepairLog"; "qualityAssistance")
+	
 	
 	$entry.enableTransaction()
 	

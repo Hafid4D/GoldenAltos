@@ -102,8 +102,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1866,
-				"top": 262,
+				"left": 1894,
+				"top": 214,
 				"width": 93.66145324707,
 				"height": 83.33203125
 			},
@@ -118,12 +118,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1648,
-				"top": 269,
+				"left": 1640,
+				"top": 204,
 				"width": 159.685546875,
-				"height": 198.33203125
+				"height": 219.33203125
 			},
-			"displayable_fields_count": 7,
+			"displayable_fields_count": 8,
 			"fields_ordering": 1
 		},
 		"CustomerStatus": {
@@ -784,10 +784,10 @@
 			"coordinates": {
 				"left": 902,
 				"top": 520,
-				"width": 120,
-				"height": 345.33203125
+				"width": 176,
+				"height": 387.33203125
 			},
-			"displayable_fields_count": 14
+			"displayable_fields_count": 16
 		},
 		"Division": {
 			"color": {
