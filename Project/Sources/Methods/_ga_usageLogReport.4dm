@@ -66,6 +66,18 @@ If ($OK)
 			$Count:=$Count+1
 			$row:=WP Table append row:C1474($table; String:C10(Time:C179($entity.timeIn); HH MM:K7:2); String:C10($entity.dateOut; System date short:K1:1); String:C10(Time:C179($entity.timeOut); HH MM:K7:2); String:C10($entity.lot.lotNumber); $entity.description; String:C10($entity.qtyIn); String:C10($entity.qtyOut); $entity.tools.items[$entity.tools.items.indexOf(String:C10(Form:C1466.current_item.assignedID+"@"))]; $entity.inOperator; $entity.outOperator)
 			
+			$position1:=1
+			$position2:=Position:C15("\t"; WP Get text:C1575($row); 1; *)
+			
+			
+			$position3:=Position:C15("\t"; WP Get text:C1575($row); $position2+2; *)
+			$position4:=Position:C15("\t"; WP Get text:C1575($row); $position3+1; *)
+			$position5:=Position:C15("\t"; WP Get text:C1575($row); $position4+1; *)
+			
+			$linkRange:=WP Text range:C1341($row; $position4; $position5)
+			$link:=New object:C1471("method"; "_ga_WPLink_To_Lot"; "parameter"; String:C10($entity.lot.lotNumber))  //Don't forget to authorize with SET ALLOWED METHODS  
+			WP SET LINK:C1642($linkRange; $link)
+			
 		End for each 
 		If ($Count<$Maxcount) & ($PageBreak=1)  // ADD BLANK LINES
 			Repeat 

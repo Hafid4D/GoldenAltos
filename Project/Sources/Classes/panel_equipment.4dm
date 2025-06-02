@@ -193,8 +193,37 @@ Function LoadAllTabs()
 	This:C1470.loadRepairLog()
 	
 	
+Function linkOpenLot($entity : 4D:C1709.Entity; $visionIdent : Text; $entryIdent : Text)
+	If ($entity#Null:C1517)
+		
+		$formData:=New object:C1471()
+		$formData.sfw:=cs:C1710.sfw_item.new()
+		$formData.window:=New object:C1471
+		GET WINDOW RECT:C443($left; $top; $right; $bottom)
+		$formData.window.left:=$left+50
+		$formData.window.top:=$top+50
+		$formData.sfw.vision:=cs:C1710.sfw_definition.me.visions.query("ident = :1"; $visionIdent).first()
+		$formData.sfw.entry:=cs:C1710.sfw_definition.me.entries.query("ident = :1"; $entryIdent).first()
+		$formData.current_item:=$entity
+		$formData.sfw.openForm($formData)
+		
+	End if 
 	
+Function bActionRepairLog()
 	
+	$refMenu:=Create menu:C408
+	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openInWindow")
+	If (Form:C1466.selectedRepaiLog=Null:C1517) | (Undefined:C82(Form:C1466.selectedRepaiLog))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	$choice:=Dynamic pop up menu:C1006($refMenu)
+	RELEASE MENU:C978($refMenu)
+	Case of 
+		: ($choice="openInWindow")
+			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.repairLogs.query("UUID=:1"; Form:C1466.selectedRepaiLog.UUID).first(); "qualityAssistance"; "repairLog")
+	End case 
 	
 	
 	

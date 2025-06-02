@@ -648,12 +648,29 @@
 							"dataSourceTypeHint": "date"
 						}
 					]
+				},
+				"bActionRepairLog": {
+					"type": "button",
+					"text": "Actions",
+					"top": 137,
+					"left": 12,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionRepairLog.4dm",
+					"visibility": "visible"
 				}
 			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 419,
+	"geometryStamp": 425,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
