@@ -19,8 +19,13 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("reportID"; "report ID"; "width:100")
 	$entry.setLBItemsOrderBy("systemID")
 	
-	
 	$entry.enableTransaction()
+	
+	$entry.setItemListAction("Export the list"; "_ga_exportRepairLogList")
+	$entry.setItemListAction("-"; "-")
+	$entry.setItemListAction("Print the list"; "_ga_printRepairLogList")
+	$entry.setItemListAction("-"; "-")
+	
 	
 	// MARK: -Filters
 	

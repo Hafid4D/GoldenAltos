@@ -8,51 +8,58 @@ Date : 20-May-2025
 Purpose : Print Equipments View List
 */
 
-var $identEntry : Text:=Form:C1466.sfw.view.ident
-var $context : Object
-
-$context:=New object:C1471()
-
-$file:=Folder:C1567(fk resources folder:K87:11).file("4DWriteProPrintTemplates/equipmentsListPrint.4wp")
-$template:=WP Import document:C1318($file.platformPath)
-
-$context.length:=Form:C1466.sfw.lb_items.length
-$context.location:=_ga_getListFiltersValues("EquipmentLocation"; "locationID")
-$context.equipmentType:=_ga_getListFiltersValues("ToolType"; "UUID")  //("EquipmentType"; "typeID")
-$context.division:=_ga_getListFiltersValues("Division"; "divisionID")
-$context.user:=Current machine:C483
-
-SET PRINT OPTION:C733(Orientation option:K47:2; 1)
-
-Case of 
-	: ($identEntry="main")
-		
-		$context.subject:="Equipments"
-		
-	: ($identEntry="equipmentsOutOfCalibration")
-		
-		$context.subject:="Equipments Out of Calibration"
-		
-	: ($identEntry="pmEquipments")
-		
-		$context.subject:="PM Equipments"
-		
-	: ($identEntry="dueCalibrationEquipments")
-		
-		$context.subject:="Equipments overdue for calibration"
-		
-	: ($identEntry="duePMEquipments")
-		
-		$context.subject:="Due PM Equipments"
-		
-	: ($identEntry="equipmentsDownOrOnHold")
-		
-		$context.subject:="Equipments down"
-		
-End case 
-
-
-WP SET DATA CONTEXT:C1786($template; $context)
-
-PRINT SETTINGS:C106(2)
-WP PRINT:C1343($template)
+If (Form:C1466.sfw.lb_items.length>0)
+	
+	var $identEntry : Text:=Form:C1466.sfw.view.ident
+	var $context : Object
+	
+	$context:=New object:C1471()
+	
+	$file:=Folder:C1567(fk resources folder:K87:11).file("4DWriteProPrintTemplates/equipmentsListPrint.4wp")
+	$template:=WP Import document:C1318($file.platformPath)
+	
+	$context.length:=Form:C1466.sfw.lb_items.length
+	$context.location:=_ga_getListFiltersValues("EquipmentLocation"; "locationID")
+	$context.equipmentType:=_ga_getListFiltersValues("ToolType"; "UUID")  //("EquipmentType"; "typeID")
+	$context.division:=_ga_getListFiltersValues("Division"; "divisionID")
+	$context.user:=Current machine:C483
+	
+	SET PRINT OPTION:C733(Orientation option:K47:2; 1)
+	
+	Case of 
+		: ($identEntry="main")
+			
+			$context.subject:="Equipments"
+			
+		: ($identEntry="equipmentsOutOfCalibration")
+			
+			$context.subject:="Equipments Out of Calibration"
+			
+		: ($identEntry="pmEquipments")
+			
+			$context.subject:="PM Equipments"
+			
+		: ($identEntry="dueCalibrationEquipments")
+			
+			$context.subject:="Equipments overdue for calibration"
+			
+		: ($identEntry="duePMEquipments")
+			
+			$context.subject:="Due PM Equipments"
+			
+		: ($identEntry="equipmentsDownOrOnHold")
+			
+			$context.subject:="Equipments down"
+			
+	End case 
+	
+	
+	WP SET DATA CONTEXT:C1786($template; $context)
+	
+	PRINT SETTINGS:C106(2)
+	WP PRINT:C1343($template)
+	
+Else 
+	cs:C1710.sfw_dialog.me.info(ds:C1482.sfw_readXliff("Info"; "No items in the list to print"))
+	
+End if 

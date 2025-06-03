@@ -75,7 +75,7 @@
 					"left": 434,
 					"width": 190,
 					"height": 17,
-					"dataSource": "String:C10(Time:C179(Form:C1466.current_item.downAt); HH MM AM PM:K7:5)",
+					"dataSource": "Form:C1466.current_item.downAt",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -86,7 +86,9 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"fontWeight": "bold",
-					"textAlign": "left"
+					"textAlign": "left",
+					"dataSourceTypeHint": "time",
+					"timeFormat": "hh_mm_am"
 				},
 				"label_reportedID": {
 					"type": "text",
@@ -161,7 +163,7 @@
 					"left": 754,
 					"width": 190,
 					"height": 17,
-					"dataSource": "String:C10(Time:C179(Form:C1466.current_item.upAt); HH MM AM PM:K7:5)",
+					"dataSource": "Form:C1466.current_item.upAt",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -172,7 +174,9 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"fontWeight": "bold",
-					"textAlign": "left"
+					"textAlign": "left",
+					"dataSourceTypeHint": "time",
+					"timeFormat": "hh_mm_am"
 				},
 				"label_dateUp": {
 					"type": "text",
@@ -224,9 +228,9 @@
 				},
 				"pup_fixOperator": {
 					"type": "button",
-					"top": 62,
+					"top": 65,
 					"left": 434,
-					"width": 190,
+					"width": 75,
 					"height": 23,
 					"fontFamily": "System Font",
 					"fontSize": 13,
@@ -247,7 +251,7 @@
 					"type": "button",
 					"top": 65,
 					"left": 110,
-					"width": 190,
+					"width": 75,
 					"height": 23,
 					"fontFamily": "System Font",
 					"fontSize": 13,
@@ -263,6 +267,48 @@
 						"onDisplayDetail"
 					],
 					"fontWeight": "bold"
+				},
+				"btnForward": {
+					"type": "button",
+					"text": " ",
+					"top": 65,
+					"left": 190,
+					"width": 23,
+					"height": 23,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/forward-16x16.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnForward.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
+				},
+				"btnForward1": {
+					"type": "button",
+					"text": " ",
+					"top": 65,
+					"left": 514,
+					"width": 23,
+					"height": 23,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/forward-16x16.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnForward1.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
 				}
 			}
 		},
@@ -356,7 +402,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 81,
+	"geometryStamp": 104,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

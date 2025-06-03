@@ -4,11 +4,10 @@
 
 var $wpDoc : Object
 var $context : Object
-var $reportLogs; $reportLogs_1 : Collection
+var $reportLogs : Collection
 var $meanTbf; $minTbf; $maxTbf : Real
 
 $reportLogs:=New collection:C1472()
-$reportLogs_1:=New collection:C1472()
 $meanTbf:=0
 $minTbf:=0
 $maxTbf:=0
@@ -39,16 +38,24 @@ If ($reportLogs.length>0)
 			$minTbf:=Round:C94($atbf{1}; 2)
 			$maxTbf:=Round:C94($atbf{Size of array:C274($atbf)}; 2)
 	End case 
+	
+	
+	$context.assignedID:=Form:C1466.current_item.assignedID
+	$context.meanTbf:=$meanTbf
+	$context.minTbf:=$minTbf
+	$context.maxTbf:=$maxTbf
+	$context.upTime:=$uptime
+	$context.downTime:=$down_time
+	
+	WP SET DATA CONTEXT:C1786($wpDoc; $context)
+	
+	PRINT SETTINGS:C106(2)
+	WP PRINT:C1343($wpDoc)
+	
+Else 
+	
+	
 End if 
 
-$context.assignedID:=Form:C1466.current_item.assignedID
-$context.meanTbf:=$meanTbf
-$context.minTbf:=$minTbf
-$context.maxTbf:=$maxTbf
-$context.upTime:=$uptime
-$context.downTime:=$down_time
 
-WP SET DATA CONTEXT:C1786($wpDoc; $context)
 
-PRINT SETTINGS:C106(2)
-WP PRINT:C1343($wpDoc)

@@ -14,5 +14,5 @@ If ($form.calendar.display.date>=Form:C1466.startDate)
 	
 	Form:C1466.interval:=String:C10(Form:C1466.endDate-Form:C1466.startDate)
 Else 
-	cs:C1710.sfw_dialog.me.info(ds:C1482.sfw_readXliff(""; "End date must be greater or eaual to Start date"))
+	cs:C1710.sfw_dialog.me.info(ds:C1482.sfw_readXliff("Info"; "End date must be greater or eaual to Start date"))
 End if 

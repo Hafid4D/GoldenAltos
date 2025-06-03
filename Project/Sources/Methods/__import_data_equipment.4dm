@@ -126,37 +126,8 @@ If ($repair_Log_file.exists)
 		
 		$eRepair.systemID:=$repair.Sys_ID
 		$eRepair.reportedBy:=$repair.Rep_by
-		//$eRepair.fixedBy:=$repair.Fixed_by
-		
-		//Check and assign a Operator if needed
-		$fixedBy:=ds:C1482.Employee.query("code=:1"; Split string:C1554($repair.Fixed_by; "\r"; sk trim spaces:K86:2).join("\r"))  //$eEquipment.type:=$equipment.EquipmentType
-		
-		If ($fixedBy.length>0)
-			$eRepair.fixedBy:=$fixedBy[0].UUID
-		Else 
-			
-			If ($repair.Fixed_by#"")
-				
-			Else 
-				
-			End if 
-		End if 
-		
-		//Check and assign a Operator if needed
-		$fixedBy:=ds:C1482.Employee.query("code=:1"; Split string:C1554($repair.Rep_by; "\r"; sk trim spaces:K86:2).join("\r"))  //$eEquipment.type:=$equipment.EquipmentType
-		
-		If ($fixedBy.length>0)
-			$eRepair.reportedBy:=$fixedBy[0].UUID
-		Else 
-			
-			If ($repair.Rep_by#"")
-				
-			Else 
-				
-			End if 
-		End if 
-		
-		
+		$eRepair.fixedBy:=$repair.Fixed_by
+		$eRepair.reportedBy:=$repair.Rep_by
 		$eRepair.dateFixed:=$repair.Date_fixed
 		$eRepair.reportDate:=$repair.Rep_date
 		$eRepair.status:=$repair.E_status

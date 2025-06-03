@@ -39,7 +39,7 @@ Function pup_XXX()
 	
 Function drawPup_fixOperator()
 	If (Form:C1466.current_item#Null:C1517)
-		$fixOperator:=ds:C1482.Employee.query("UUID= :1"; Form:C1466.current_item.fixedBy).first() || New object:C1471()
+		$fixOperator:=ds:C1482.Staff.query("code= :1"; Form:C1466.current_item.fixedBy).first() || New object:C1471()
 		$operatorCode:=$fixOperator.code
 		If ($operatorCode=Null:C1517)
 			$operatorCode:=""
@@ -54,14 +54,14 @@ Function pup_fixOperator()
 	//Create pop up menu
 	If (Form:C1466.sfw.checkIsInModification())
 		$menu:=Create menu:C408
-		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.employees=Null:C1517)
-			ds:C1482.Employee.cacheLoad()
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.staffs=Null:C1517)
+			ds:C1482.Staff.cacheLoad()
 		End if 
 		
-		For each ($fixOperator; Storage:C1525.cache.employees)
+		For each ($fixOperator; Storage:C1525.cache.staffs)
 			APPEND MENU ITEM:C411($menu; $fixOperator.code; *)
-			SET MENU ITEM PARAMETER:C1004($menu; -1; $fixOperator.UUID)
-			If ($fixOperator.UUID=Form:C1466.current_item.fixedBy)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $fixOperator.code)
+			If ($fixOperator.code=Form:C1466.current_item.fixedBy)
 				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
 				If (Is Windows:C1573)
 					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
@@ -74,7 +74,7 @@ Function pup_fixOperator()
 		Case of 
 			: ($choose#"")
 				$fixOperator:=ds:C1482.Employee.get($choose)
-				Form:C1466.current_item.fixedBy:=$fixOperator.UUID
+				Form:C1466.current_item.fixedBy:=$fixOperator.code
 		End case 
 		
 	End if 
@@ -82,7 +82,7 @@ Function pup_fixOperator()
 	
 Function drawPup_reportOperator()
 	If (Form:C1466.current_item#Null:C1517)
-		$reportOperator:=ds:C1482.Employee.query("UUID= :1"; Form:C1466.current_item.reportedBy).first() || New object:C1471()
+		$reportOperator:=ds:C1482.Staff.query("code= :1"; Form:C1466.current_item.reportedBy).first() || New object:C1471()
 		$operatorCode:=$reportOperator.code
 		If ($operatorCode=Null:C1517)
 			$operatorCode:=""
@@ -97,14 +97,14 @@ Function pup_reportOperator()
 	//Create pop up menu
 	If (Form:C1466.sfw.checkIsInModification())
 		$menu:=Create menu:C408
-		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.employees=Null:C1517)
-			ds:C1482.Employee.cacheLoad()
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.staffs=Null:C1517)
+			ds:C1482.Staff.cacheLoad()
 		End if 
 		
-		For each ($reportOperator; Storage:C1525.cache.employees)
+		For each ($reportOperator; Storage:C1525.cache.staffs)
 			APPEND MENU ITEM:C411($menu; $reportOperator.code; *)
-			SET MENU ITEM PARAMETER:C1004($menu; -1; $reportOperator.UUID)
-			If ($reportOperator.UUID=Form:C1466.current_item.fixedBy)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $reportOperator.code)
+			If ($reportOperator.code=Form:C1466.current_item.fixedBy)
 				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
 				If (Is Windows:C1573)
 					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
@@ -117,8 +117,26 @@ Function pup_reportOperator()
 		Case of 
 			: ($choose#"")
 				$reportOperator:=ds:C1482.Employee.get($choose)
-				Form:C1466.current_item.fixedBy:=$reportOperator.UUID
+				Form:C1466.current_item.fixedBy:=$reportOperator.code
 		End case 
 		
 	End if 
 	This:C1470.drawPup_reportOperator()
+	
+	
+Function btnOpenOperator($operatorType)
+	
+	Case of 
+			
+		: ($operatorType="fixedBy")
+			$es:=ds:C1482.Staff.query("code = :1"; Form:C1466.current_item.fixedBy)
+			
+		: ($operatorType="reportedBy")
+			$es:=ds:C1482.Staff.query("code = :1"; Form:C1466.current_item.reportedBy)
+			
+	End case 
+	
+	If ($es.length>0)
+		Form:C1466.sfw.openInANewWindow($es[0]; "qualityAssistance"; "staff")
+	End if 
+	
