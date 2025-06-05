@@ -1,8 +1,10 @@
 //%attributes = {}
+
 /*
-_ga_exportEquipmentList()
-
-
+Method Name : _ga_exportRepairLogList
+Author : Medard /4D PS
+Date : 03-June-2025
+Purpose : This method export the items on repair Log  View List to an .csv document
 */
 
 var $eSetting : cs:C1710.sfw_SettingEntity

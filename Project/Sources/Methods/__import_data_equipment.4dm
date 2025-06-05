@@ -90,14 +90,16 @@ If ($equipment_Log.exists)
 		$eEquipment.manufacturer:=$equipment.Manufacturer
 		//$eEquipment.equipmentConfig:=$equipment.EquipmentConfig
 		$eEquipment.statusHistory:=$equipment.Status_History
+		If ($equipment.Status_History#"")
+			
+		End if 
 		$eEquipment.down:=$equipment.Down
 		$eEquipment.calInProgress:=$equipment.Cal_inprocess
 		$eEquipment.calInterval:=$equipment.CalInterval
 		$eEquipment.pmInterval:=$equipment.PMInterval
 		$eEquipment.calDocument:=$equipment.CalDocument
 		$eEquipment.pmDocument:=$equipment.PMDocument
-		
-		
+		$eEquipment.pmNotRequired:=$equipment.PMnotRequired
 		
 		
 		$res:=$eEquipment.save()

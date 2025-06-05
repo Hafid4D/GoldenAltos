@@ -174,6 +174,7 @@
 		<field name="divisionID" uuid="5660AB93B3B7BC4B9FA7BE938A9184A9" type="3" never_null="true" id="11">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="testerType" uuid="39572470724A184E9AC2EC5B82B5BE0E" type="10" limiting_length="255" never_null="true" id="12"/>
 		<field name="status" uuid="EEDCF8C23859B5439799B45B0247BD8B" type="10" limiting_length="255" never_null="true" id="13">
 			<field_extra multi_line="false"/>
 		</field>
@@ -195,6 +196,7 @@
 		<field name="pmDocument" uuid="67EA2FADDB58F344B1BD248093E3258F" type="10" limiting_length="255" never_null="true" id="25"/>
 		<field name="pmTech" uuid="1C8D814D1D1FF742B6E3007A393A2B1D" type="10" limiting_length="255" never_null="true" id="26"/>
 		<field name="pmInterval" uuid="1204F3728A14C3429E0F22286732CC34" type="4" never_null="true" id="27"/>
+		<field name="pmNotRequired" uuid="859817B7FAF8CC49A475632CB6DABF07" type="1" never_null="true" id="28"/>
 		<primary_key field_name="UUID" field_uuid="576820214AE49648A0CC6ACA3DD19531"/>
 	</table>
 	<table name="dfd_Template" uuid="63274D1841D8B94E868AEE5C2909EBE8" id="14">

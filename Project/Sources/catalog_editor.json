@@ -928,12 +928,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1106,
-				"top": 221,
+				"left": 1098,
+				"top": 182,
 				"width": 182,
-				"height": 630.33203125
+				"height": 706.33203125
 			},
-			"displayable_fields_count": 28
+			"displayable_fields_count": 31
 		},
 		"ContactEvent": {
 			"color": {
