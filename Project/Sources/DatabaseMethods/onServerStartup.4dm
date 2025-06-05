@@ -1,5 +1,5 @@
 
-sfw_on_server_startup_database("ProjectName_definition")
+sfw_on_server_startup_database("goldenAltos_definition")
 
 //CT_R_ST_COM_load
 
