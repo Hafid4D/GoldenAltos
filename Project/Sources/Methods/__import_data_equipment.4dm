@@ -18,6 +18,7 @@ If ($equipment_Log.exists)
 	TRUNCATE TABLE:C1051([Equipment:13])
 	TRUNCATE TABLE:C1051([EquipmentLocation:19])
 	TRUNCATE TABLE:C1051([Division:20])
+	TRUNCATE TABLE:C1051([Document:25])
 	
 	//----> [Division]
 	For ($i; 0; $divisions.length-1)
@@ -38,6 +39,18 @@ If ($equipment_Log.exists)
 		//$eEquipmentLocation.color:="#FFFFFF"
 		$eEquipmentLocation.save()
 	End for 
+	
+	
+	$docs:=Folder:C1567(fk data folder:K87:12).file("DataJson/docServerIndex_export.json")
+	$count:=0
+	If ($docs.exists)
+		
+		
+		$documents:=JSON Parse:C1218($docs.getText())
+		
+		
+	End if 
+	
 	
 	For each ($equipment; $equipments)
 		
@@ -105,6 +118,11 @@ If ($equipment_Log.exists)
 		$res:=$eEquipment.save()
 		If (Not:C34($res.success))
 			TRACE:C157
+		End if 
+		
+		$_documents:=$documents.query("PrimaryKeyValue=:1 & TableNumber=:2"; String:C10($equipment.UniqueID); 10)
+		If ($_documents.length>0)
+			__import_data_docServerIndex($eEquipment.UUID; $_documents; Table:C252(->[Equipment:13]))
 		End if 
 		
 		

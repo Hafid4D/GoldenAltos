@@ -1,0 +1,43 @@
+//%attributes = {}
+
+
+var $eDocument : cs:C1710.DocumentEntity
+var $foreignKey; $1 : Text
+var $documents; $2 : Collection
+
+$foreignKey:=$1
+$documents:=$2
+
+For each ($document; $documents)
+	
+	$eDocument:=ds:C1482.Document.new()
+	
+	//Case of 
+	
+	//: ($document.TableNumber=10)
+	$eDocument.tableNumber:=$3
+	$eDocument.foreignKey:=$foreignKey
+	
+	//Else 
+	//$eDocument.tableNumber:=$document.TableNumber
+	
+	//End case 
+	
+	$eDocument.code:=$document.DocCode
+	$eDocument.dateTimeStamp:=$document.DateTimeStamp
+	$eDocument.creationDateTimeStamp:=$document.CreationDateTimeStamp
+	$eDocument.documentPath:=$document.DocumentPath
+	$eDocument.sourcePath:=$document.SourcePath
+	$eDocument.tempCounter:=$document.TempCounter
+	$eDocument.rawText:=$document.RawText
+	$eDocument.description:=$document.DocDescription
+	
+	$res:=$eDocument.save()
+	If (Not:C34($res.success))
+		TRACE:C157
+	End if 
+	
+End for each 
+
+
+

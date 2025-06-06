@@ -15,6 +15,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanel("panel_equipment")
 	$entry.setPanelPage(1; ""; "Main")
 	$entry.setPanelPage(2; ""; "Repair Log")
+	$entry.setPanelPage(3; ""; "Attached Documents")
 	
 	$entry.setLBItemsColumn("assignedID"; "assigned ID"; "width:200")
 	$entry.setLBItemsColumn("serialNumber"; "Serial number"; "width:100")
@@ -55,7 +56,6 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$filter.setFilterByIDInTable("Division"; "divisionID"; "divisionID")
 	$filter.setDynamicTitle("name"; "## equipment division")
 	$entry.addFilter($filter)
-	
 	
 	
 	
@@ -104,6 +104,15 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setLBItemsOrderBy("assignedID")
 	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
 	$view.setSubset("equipmentsDownOrOnHold")
+	$entry.setView($view)
+	
+	// MARK:  List of equipment down
+	$view:=cs:C1710.sfw_definitionView.new("calibrationExemptList"; "Calibration-exempt list")
+	$view.setLBItemsColumn("assignedID"; "assigned ID")
+	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:200")
+	$view.setLBItemsOrderBy("assignedID")
+	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
+	$view.setSubset("calibrationExemptList")
 	$entry.setView($view)
 	
 	
@@ -183,6 +192,10 @@ Function equipmentsDownOrOnHold()->$equipments : cs:C1710.EquipmentSelection
 	
 	$equipments:=ds:C1482.Equipment.query("down=:1"; True:C214)
 	
+	
+Function calibrationExemptList()->$equipments : cs:C1710.EquipmentSelection
+	
+	$equipments:=ds:C1482.Equipment.query("calibrationNotRequired=:1"; True:C214)
 	
 	
 	

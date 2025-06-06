@@ -9,7 +9,9 @@ Function formMethod()
 	//This function manages the main logic for updating and refreshing the form
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
-		OBJECT SET TITLE:C194(*; "statusHistory"; String:C10(Form:C1466.current_item.statusHistory))
+		If (Form:C1466.current_item#Null:C1517)
+			OBJECT SET TITLE:C194(*; "statusHistory"; String:C10(Form:C1466.current_item.statusHistory))
+		End if 
 		This:C1470.LoadAllTabs()
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
@@ -19,6 +21,9 @@ Function formMethod()
 				
 			: (FORM Get current page:C276(*)=2)
 				This:C1470.loadRepairLog()
+				
+			: (FORM Get current page:C276(*)=3)
+				This:C1470.loadDocuments()
 				
 		End case 
 	End if 
@@ -40,10 +45,13 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_EquipmentType()
 	This:C1470.drawPup_EquipmentLocation()
 	This:C1470.drawPup_Division()
-	OBJECT SET TITLE:C194(*; "statusHistory"; String:C10(Form:C1466.current_item.statusHistory))
+	If (Form:C1466.current_item#Null:C1517)
+		OBJECT SET TITLE:C194(*; "statusHistory"; String:C10(Form:C1466.current_item.statusHistory))
+	End if 
 	
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="Repair Log ("+String:C10(Form:C1466.lb_repairLog.length)+")"
+		Form:C1466.sfw.entry.panel.pages[2].label:="Attached Documents ("+String:C10(Form:C1466.lb_documents.length)+")"
 		
 	End use 
 	Form:C1466.sfw.drawHTab()
@@ -189,9 +197,24 @@ Function loadRepairLog()
 	End if 
 	
 	
+Function loadDocuments()
+	
+	If (Form:C1466.current_item#Null:C1517)
+		
+		Form:C1466.lb_documents:=New collection:C1472()
+		
+		Form:C1466.lb_documents:=ds:C1482.Document.query("foreignKey=:1 & tableNumber=:2"; Form:C1466.current_item.UUID; Table:C252(->[Equipment:13])).orderBy("code desc").toCollection()
+		
+		Form:C1466.lb_documents:=Form:C1466.lb_documents.map(Formula:C1597(_ga_getDateTime))
+		
+	End if 
+	
+	
+	
 Function LoadAllTabs()
 	
 	This:C1470.loadRepairLog()
+	This:C1470.loadDocuments()
 	
 	
 Function linkOpenLot($entity : 4D:C1709.Entity; $visionIdent : Text; $entryIdent : Text)
@@ -225,6 +248,14 @@ Function bActionRepairLog()
 		: ($choice="openInWindow")
 			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.repairLogs.query("UUID=:1"; Form:C1466.selectedRepaiLog.UUID).first(); "qualityAssistance"; "repairLog")
 	End case 
+	
+	
+	
+Function bActionDocument()
+	
+	
+	
+	
 	
 	
 	

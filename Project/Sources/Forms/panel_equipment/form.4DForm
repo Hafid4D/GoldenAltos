@@ -381,7 +381,7 @@
 					"top": 114,
 					"left": 0,
 					"width": 2192,
-					"height": 677,
+					"height": 700,
 					"sizingX": "grow",
 					"fill": "#E4E4E4",
 					"stroke": "transparent"
@@ -451,7 +451,8 @@
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"textAlign": "left",
-					"dataSourceTypeHint": "date"
+					"dataSourceTypeHint": "date",
+					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
 				},
 				"label_pmDueDate": {
 					"type": "text",
@@ -480,7 +481,8 @@
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"textAlign": "left",
-					"dataSourceTypeHint": "date"
+					"dataSourceTypeHint": "date",
+					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
 				},
 				"label_calDue": {
 					"type": "text",
@@ -509,7 +511,8 @@
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"textAlign": "left",
-					"dataSourceTypeHint": "date"
+					"dataSourceTypeHint": "date",
+					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
 				},
 				"label_lastPMDate": {
 					"type": "text",
@@ -538,7 +541,8 @@
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"textAlign": "left",
-					"dataSourceTypeHint": "date"
+					"dataSourceTypeHint": "date",
+					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
 				},
 				"label_calInDays": {
 					"type": "text",
@@ -879,10 +883,119 @@
 					"visibility": "visible"
 				}
 			}
+		},
+		{
+			"objects": {
+				"lb_documents": {
+					"type": "listbox",
+					"left": 128,
+					"top": 114,
+					"width": 1443,
+					"height": 700,
+					"events": [
+						"onClick",
+						"onDataChange",
+						"onSelectionChange",
+						"onHeaderClick",
+						"onBeginDragOver"
+					],
+					"listboxType": "collection",
+					"currentItemPositionSource": "Form:C1466.selectedDocumentPos",
+					"currentItemSource": "Form:C1466.selectedDocument",
+					"dataSource": "Form:C1466.lb_documents",
+					"method": "ObjectMethods/lb_documents.4dm",
+					"selectionMode": "single",
+					"resizingMode": "rightToLeft",
+					"alternateFill": "#E6E6E6",
+					"horizontalLineStroke": "transparent",
+					"borderStyle": "none",
+					"verticalLineStroke": "transparent",
+					"headerHeight": "2em",
+					"right": 1571,
+					"scrollbarHorizontal": "hidden",
+					"hideFocusRing": false,
+					"columns": [
+						{
+							"header": {
+								"text": "Code",
+								"name": "Header1",
+								"fontWeight": "bold"
+							},
+							"name": "Column1",
+							"footer": {
+								"name": "Footer1"
+							},
+							"dataSource": "This:C1470.code"
+						},
+						{
+							"header": {
+								"name": "Header2",
+								"text": "Source Path",
+								"fontWeight": "bold"
+							},
+							"name": "Column2",
+							"footer": {
+								"name": "Footer2"
+							},
+							"dataSource": "This:C1470.sourcePath",
+							"dataSourceTypeHint": "text",
+							"width": 193,
+							"truncateMode": "withEllipsis",
+							"wordwrap": "none"
+						},
+						{
+							"header": {
+								"name": "Header3",
+								"text": "Date and Time of filling",
+								"fontWeight": "bold"
+							},
+							"name": "Column3",
+							"footer": {
+								"name": "Footer3"
+							},
+							"dataSource": "This:C1470.creationDateTime",
+							"width": 304,
+							"truncateMode": "withEllipsis",
+							"wordwrap": "none"
+						},
+						{
+							"header": {
+								"name": "Header4",
+								"text": "Doc Description",
+								"fontWeight": "bold"
+							},
+							"name": "Column4",
+							"footer": {
+								"name": "Footer4"
+							},
+							"dataSource": "This:C1470.description",
+							"dataSourceTypeHint": "text",
+							"width": 219
+						}
+					]
+				},
+				"bActionDocument": {
+					"type": "button",
+					"text": "Actions",
+					"top": 137,
+					"left": 12,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionDocument.4dm",
+					"visibility": "visible"
+				}
+			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 480,
+	"geometryStamp": 499,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

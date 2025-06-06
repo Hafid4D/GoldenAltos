@@ -29,19 +29,19 @@ If (Form:C1466.sfw.lb_items.length>0)
 	Case of 
 		: ($identEntry="main")
 			
-			$context.subject:="Equipments"
+			$context.subject:="equipments"
 			
 		: ($identEntry="equipmentsOutOfCalibration")
 			
-			$context.subject:="Equipments Out of Calibration"
+			$context.subject:="equipments out of calibration"
 			
 		: ($identEntry="pmEquipments")
 			
-			$context.subject:="PM Equipments"
+			$context.subject:="PM equipments"
 			
 		: ($identEntry="dueCalibrationEquipments")
 			
-			$context.subject:="Equipments overdue for calibration"
+			$context.subject:="equipments overdue for calibration"
 			
 		: ($identEntry="duePMEquipments")
 			
@@ -49,7 +49,12 @@ If (Form:C1466.sfw.lb_items.length>0)
 			
 		: ($identEntry="equipmentsDownOrOnHold")
 			
-			$context.subject:="Equipments down"
+			$context.subject:="equipments down"
+			
+		: ($identEntry="calibrationExemptList")
+			
+			$context.subject:="equipments that do not required calibration"
+			
 			
 	End case 
 	

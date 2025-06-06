@@ -702,6 +702,21 @@
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
+		"Document": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 891,
+				"top": 74,
+				"width": 186,
+				"height": 346.33203125
+			},
+			"displayable_fields_count": 14
+		},
 		"dfd_Line": {
 			"color": {
 				"red": 158,
@@ -812,8 +827,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 927,
-				"top": 221,
+				"left": 752,
+				"top": 0,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -1007,9 +1022,9 @@
 				"left": 250.66662597656,
 				"top": 914.66674804688,
 				"width": 194.66665649414,
-				"height": 225.99870300293
+				"height": 239.99870300293
 			},
-			"displayable_fields_count": 8,
+			"displayable_fields_count": 9,
 			"fields_ordering": 1
 		},
 		"CustomerCarrier": {
