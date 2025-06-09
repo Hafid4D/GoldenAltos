@@ -943,12 +943,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1098,
-				"top": 182,
+				"left": 1091,
+				"top": 27,
 				"width": 182,
-				"height": 706.33203125
+				"height": 670.33203125
 			},
-			"displayable_fields_count": 31
+			"displayable_fields_count": 29
 		},
 		"ContactEvent": {
 			"color": {

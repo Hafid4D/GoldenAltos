@@ -114,17 +114,50 @@ If ($equipment_Log.exists)
 		$eEquipment.pmDocument:=$equipment.PMDocument
 		$eEquipment.pmNotRequired:=$equipment.PMnotRequired
 		
+		$_documents:=$documents.query("PrimaryKeyValue=:1 & TableNumber=:2"; String:C10($equipment.UniqueID); 10)
+		
+		///*
+		$eEquipment.reports:=New object:C1471()
+		$eEquipment.reports.documents:=New collection:C1472()
+		
+		For each ($document; $_documents)
+			$doc:=New object:C1471
+			
+			//$doc.tableNumber:=Table(->[Equipment])
+			//$doc.foreignKey:=$eEquipment.UUID
+			$doc.code:=$document.DocCode
+			$doc.dateTimeStamp:=$document.DateTimeStamp
+			$doc.creationDateTimeStamp:=$document.CreationDateTimeStamp
+			$doc.documentPath:=$document.DocumentPath
+			$doc.sourcePath:=$document.SourcePath
+			$doc.tempCounter:=$document.TempCounter
+			$doc.rawText:=$document.RawText
+			$doc.description:=$document.DocDescription
+			
+			$report:=Folder:C1567(fk data folder:K87:12).file("DataJson/EquipmentReports/"+String:C10($document.UniqueID+$document.PrimaryKeyValue))
+			If ($report.exists)
+				
+				C_BLOB:C604($blob)
+				DOCUMENT TO BLOB:C525($report.platformPath; $blob)
+				
+				$doc.blob:=$blob
+				
+			End if 
+			
+			$eEquipment.reports.documents.push($doc)
+		End for each 
+		
+		//*/
 		
 		$res:=$eEquipment.save()
 		If (Not:C34($res.success))
 			TRACE:C157
 		End if 
 		
-		$_documents:=$documents.query("PrimaryKeyValue=:1 & TableNumber=:2"; String:C10($equipment.UniqueID); 10)
-		If ($_documents.length>0)
-			__import_data_docServerIndex($eEquipment.UUID; $_documents; Table:C252(->[Equipment:13]))
-		End if 
 		
+		//If ($_documents.length>0)
+		//__import_data_docServerIndex($eEquipment.UUID; $_documents; Table(->[Equipment]))
+		//End if 
 		
 	End for each 
 	

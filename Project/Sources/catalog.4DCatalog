@@ -197,6 +197,7 @@
 		<field name="pmTech" uuid="1C8D814D1D1FF742B6E3007A393A2B1D" type="10" limiting_length="255" never_null="true" id="26"/>
 		<field name="pmInterval" uuid="1204F3728A14C3429E0F22286732CC34" type="4" never_null="true" id="27"/>
 		<field name="pmNotRequired" uuid="859817B7FAF8CC49A475632CB6DABF07" type="1" never_null="true" id="28"/>
+		<field name="reports" uuid="6E1DF8765704A1488DCA7F7119AE167C" type="21" blob_switch_size="2147483647" never_null="true" id="29"/>
 		<primary_key field_name="UUID" field_uuid="576820214AE49648A0CC6ACA3DD19531"/>
 	</table>
 	<table name="dfd_Template" uuid="63274D1841D8B94E868AEE5C2909EBE8" id="14">
@@ -305,7 +306,7 @@
 	<table name="Document" uuid="FBA11C0BC2A7E94692FD2162F7AD9333" id="25">
 		<field name="UUID" uuid="3E04CFF5D515BF48A62EAC677ABD1B96" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="tableNumber" uuid="1D8B24F554804A49A91CC94208BD2EEB" type="4" never_null="true" id="2"/>
-		<field name="foreignKey" uuid="D6A3AA495E693F4C8D7725E7013692AF" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="3"/>
+		<field name="foreignKey" uuid="D6A3AA495E693F4C8D7725E7013692AF" type="10" store_as_UUID="true" never_null="true" id="3"/>
 		<field name="dateTimeStamp" uuid="2B0B6BF653930C429E1D8B5E669A42D4" type="4" never_null="true" id="4">
 			<field_extra multi_line="false"/>
 		</field>
@@ -328,7 +329,7 @@
 		<field name="docThumbnail" uuid="6A6D0A493628814F937ECD3D67EE3C15" type="12" never_null="true" id="11">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="docBlob" uuid="7A1193BCC3F47246B4E1E3A03CCC534E" type="18" never_null="true" id="12">
+		<field name="blob" uuid="7A1193BCC3F47246B4E1E3A03CCC534E" type="18" never_null="true" id="12">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="rawText" uuid="52D830E48D4D4845AE1F860CF62ACC01" type="10" limiting_length="255" never_null="true" id="13">

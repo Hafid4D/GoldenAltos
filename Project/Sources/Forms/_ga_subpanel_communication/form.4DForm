@@ -170,7 +170,7 @@
 					"focusable": false,
 					"icon": "/RESOURCES/sfw/image/picto/gear.png",
 					"textPlacement": "right",
-					"method": "ObjectMethods/bActions.4dm"
+					"method": ""
 				}
 			}
 		}

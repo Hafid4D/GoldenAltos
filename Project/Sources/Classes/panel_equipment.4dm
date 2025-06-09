@@ -51,7 +51,7 @@ Function redrawAndSetVisible()
 	
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="Repair Log ("+String:C10(Form:C1466.lb_repairLog.length)+")"
-		Form:C1466.sfw.entry.panel.pages[2].label:="Attached Documents ("+String:C10(Form:C1466.lb_documents.length)+")"
+		Form:C1466.sfw.entry.panel.pages[2].label:="Attached Reports ("+String:C10(Form:C1466.lb_documents.length)+")"
 		
 	End use 
 	Form:C1466.sfw.drawHTab()
@@ -201,12 +201,9 @@ Function loadDocuments()
 	
 	If (Form:C1466.current_item#Null:C1517)
 		
-		Form:C1466.lb_documents:=New collection:C1472()
+		Form:C1466.lb_documents:=Form:C1466.current_item.reports.documents.map(Formula:C1597(_ga_getDateTime))
 		
-		Form:C1466.lb_documents:=ds:C1482.Document.query("foreignKey=:1 & tableNumber=:2"; Form:C1466.current_item.UUID; Table:C252(->[Equipment:13])).orderBy("code desc").toCollection()
-		
-		Form:C1466.lb_documents:=Form:C1466.lb_documents.map(Formula:C1597(_ga_getDateTime))
-		
+		//Form.lb_documents:=ds.Document.query("foreignKey=:1 & tableNumber=:2"; Form.current_item.UUID; Table(->[Equipment])).orderBy("code desc").toCollection().map(Formula(_ga_getDateTime)
 	End if 
 	
 	
@@ -252,6 +249,45 @@ Function bActionRepairLog()
 	
 	
 Function bActionDocument()
+	
+	$refMenu:=Create menu:C408
+	APPEND MENU ITEM:C411($refMenu; "View report"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--view")
+	If (Form:C1466.selectedDocument=Null:C1517) | (Undefined:C82(Form:C1466.selectedDocument))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	APPEND MENU ITEM:C411($refMenu; "add report"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--add")
+	If (sfw_checkIsInModification=False:C215)
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	APPEND MENU ITEM:C411($refMenu; "delete report"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")
+	If ((sfw_checkIsInModification=False:C215) & ((Form:C1466.selectedDocument=Null:C1517) | (Undefined:C82(Form:C1466.selectedDocument))))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	$choice:=Dynamic pop up menu:C1006($refMenu)
+	RELEASE MENU:C978($refMenu)
+	Case of 
+		: ($choice="--view")
+			
+			$LocalFile:=Temporary folder:C486+Folder separator:K24:12+Form:C1466.selectedDocument.sourcePath
+			BLOB TO DOCUMENT:C526($LocalFile; Form:C1466.selectedDocument.blob)
+			OPEN URL:C673($LocalFile; *)
+			
+		: ($choice="--add")
+			
+			
+			
+		: ($choice="--delete")
+			
+			
+			
+			
+	End case 
 	
 	
 	

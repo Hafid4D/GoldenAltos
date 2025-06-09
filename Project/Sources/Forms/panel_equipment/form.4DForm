@@ -888,7 +888,7 @@
 			"objects": {
 				"lb_documents": {
 					"type": "listbox",
-					"left": 128,
+					"left": 132,
 					"top": 114,
 					"width": 1443,
 					"height": 700,
@@ -903,7 +903,7 @@
 					"currentItemPositionSource": "Form:C1466.selectedDocumentPos",
 					"currentItemSource": "Form:C1466.selectedDocument",
 					"dataSource": "Form:C1466.lb_documents",
-					"method": "ObjectMethods/lb_documents.4dm",
+					"method": "",
 					"selectionMode": "single",
 					"resizingMode": "rightToLeft",
 					"alternateFill": "#E6E6E6",
@@ -911,27 +911,30 @@
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
 					"headerHeight": "2em",
-					"right": 1571,
-					"scrollbarHorizontal": "hidden",
+					"right": 1575,
+					"scrollbarHorizontal": "automatic",
 					"hideFocusRing": false,
 					"columns": [
 						{
 							"header": {
 								"text": "Code",
 								"name": "Header1",
-								"fontWeight": "bold"
+								"fontWeight": "bold",
+								"textAlign": "left"
 							},
 							"name": "Column1",
 							"footer": {
 								"name": "Footer1"
 							},
-							"dataSource": "This:C1470.code"
+							"dataSource": "This:C1470.code",
+							"width": 59
 						},
 						{
 							"header": {
 								"name": "Header2",
 								"text": "Source Path",
-								"fontWeight": "bold"
+								"fontWeight": "bold",
+								"textAlign": "left"
 							},
 							"name": "Column2",
 							"footer": {
@@ -939,7 +942,7 @@
 							},
 							"dataSource": "This:C1470.sourcePath",
 							"dataSourceTypeHint": "text",
-							"width": 193,
+							"width": 198,
 							"truncateMode": "withEllipsis",
 							"wordwrap": "none"
 						},
@@ -947,22 +950,25 @@
 							"header": {
 								"name": "Header3",
 								"text": "Date and Time of filling",
-								"fontWeight": "bold"
+								"fontWeight": "bold",
+								"textAlign": "right"
 							},
 							"name": "Column3",
 							"footer": {
 								"name": "Footer3"
 							},
 							"dataSource": "This:C1470.creationDateTime",
-							"width": 304,
+							"width": 153,
 							"truncateMode": "withEllipsis",
-							"wordwrap": "none"
+							"wordwrap": "none",
+							"textAlign": "right"
 						},
 						{
 							"header": {
 								"name": "Header4",
 								"text": "Doc Description",
-								"fontWeight": "bold"
+								"fontWeight": "bold",
+								"textAlign": "left"
 							},
 							"name": "Column4",
 							"footer": {
@@ -970,7 +976,7 @@
 							},
 							"dataSource": "This:C1470.description",
 							"dataSourceTypeHint": "text",
-							"width": 219
+							"width": 224
 						}
 					]
 				},
@@ -995,7 +1001,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 499,
+	"geometryStamp": 501,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
