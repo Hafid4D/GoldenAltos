@@ -30,6 +30,7 @@ Function formMethod()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
+	This:C1470.hideDatePickers()
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="Certifications Assignment ("+String:C10(Form:C1466.lb_assignments.length)+")"
@@ -124,24 +125,48 @@ Function manageCertification()
 			This:C1470._activate_save_cancel_button()
 	End case 
 	
-Function manageDataPicker($objectName : Text)
-	If (Form:C1466.sfw.checkIsInModification())
-		Case of 
-			: (FORM Event:C1606.code=On Clicked:K2:4) | (FORM Event:C1606.code=On Getting Focus:K2:7)
-				cs:C1710.panel_staff.me.hideDatePickers()
-				
-				OBJECT GET COORDINATES:C663(*; "entryField_"+$objectName; $ob_left; $ob_top; $ob_right; $ob_bottom)
-				
-				OBJECT GET COORDINATES:C663(*; "dp_"+$objectName; $dp_left; $dp_top; $dp_right; $dp_bottom)
-				
-				$dp_width:=$dp_right-$dp_left
-				$dp_height:=$dp_bottom-$dp_top
-				
-				OBJECT SET COORDINATES:C1248(*; "dp_"+$objectName; $ob_right-$dp_width; $ob_bottom; $ob_right; $ob_bottom+$dp_height)
-				
-				OBJECT SET VISIBLE:C603(*; "dp_"+$objectName; True:C214)
-		End case 
-	End if 
+	//Function manageDataPicker($objectName : Text)
+	//If (Form.sfw.checkIsInModification() && ((FORM Event.code=On Clicked) || (FORM Event.code=On Getting Focus)))
+	//Case of 
+	//: (OBJECT Get visible(*; "dp_terminationDate"))
+	//OBJECT SET VISIBLE(*; "dp_terminationDate"; False)
+	//: (OBJECT Get visible(*; "dp_retrainDate"))
+	//OBJECT SET VISIBLE(*; "dp_retrainDate"; False)
+	//: (OBJECT Get visible(*; "dp_hireDate"))
+	//OBJECT SET VISIBLE(*; "dp_hireDate"; False)
+	//: (OBJECT Get visible(*; "dp_creationDate"))
+	//OBJECT SET VISIBLE(*; "dp_creationDate"; False)
+	//: (FORM Event.code=On Clicked) | (FORM Event.code=On Getting Focus)
+	//OBJECT Get pointer(Object named; *; "SelectedDate"; "dp_creationDate")->:=Form.current_item[$objectName]
+	
+	//OBJECT SET VALUE("dp_creationDate"; Form.current_item[$objectName])
+	//cs.panel_staff.me.hideDatePickers()
+	
+	//OBJECT GET COORDINATES(*; "entryField_"+$objectName; $ob_left; $ob_top; $ob_right; $ob_bottom)
+	
+	//OBJECT GET COORDINATES(*; "dp_"+$objectName; $dp_left; $dp_top; $dp_right; $dp_bottom)
+	
+	//$dp_width:=$dp_right-$dp_left
+	//$dp_height:=$dp_bottom-$dp_top
+	
+	//OBJECT SET COORDINATES(*; "dp_"+$objectName; $ob_right-$dp_width; $ob_bottom; $ob_right; $ob_bottom+$dp_height)
+	
+	//OBJECT SET VISIBLE(*; "dp_"+$objectName; True)
+	//End case 
+	
+	//If (FORM Event.code=On Clicked)
+	//Case of 
+	//: (OBJECT Get visible(*; "dp_terminationDate"))
+	//OBJECT SET VISIBLE(*; "dp_terminationDate"; False)
+	//: (OBJECT Get visible(*; "dp_retrainDate"))
+	//OBJECT SET VISIBLE(*; "dp_retrainDate"; False)
+	//: (OBJECT Get visible(*; "dp_hireDate"))
+	//OBJECT SET VISIBLE(*; "dp_hireDate"; False)
+	//: (OBJECT Get visible(*; "dp_creationDate"))
+	//OBJECT SET VISIBLE(*; "dp_creationDate"; False)
+	//End case 
+	//End if 
+	//End if 
 	
 Function hideDatePickers()
 	OBJECT SET VISIBLE:C603(*; "dp_@"; False:C215)

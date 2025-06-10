@@ -2,7 +2,7 @@ Class extends DataClass
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
-	$entry:=cs:C1710.sfw_definitionEntry.new("dfdDocument"; "dfd"; "Documents"; "Document")  //XLIFF
+	$entry:=cs:C1710.sfw_definitionEntry.new("dfdDocument"; "documentManagement"; "Documents"; "Document")
 	$entry.setDataclass("dfd_Document")
 	$entry.setDisplayOrder(300)
 	$entry.setIcon("dfd/image/entry/dfd_Document-50x50.png")
@@ -14,12 +14,12 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(1; ""; "Definition")
 	
 	
-	$entry.setLBItemsColumn("name"; "Name")
+	$entry.setLBItemsColumn("name"; "Name"; "xliff:documentFolder.form.name")
 	
 	$entry.setLBItemsOrderBy("name")
 	
-	$entry.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:document"; "unitN:documents")  //XLIFF
-	$entry.setMainViewLabel("All documents")  //XLIFF
+	$entry.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:document"; "unitN:documents")
+	$entry.setMainViewLabel(ds:C1482.sfw_readXliff("dfdDocument.entry.alldocuments"))  //"All documents")
 	
 	$entry.enableTransaction()
 	
@@ -33,7 +33,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	//$entry.setAllowedProfilesForDeletion(cs.sfw_globalParameters.me.dfd.entryDocument.allowedProfilesForDeletion || "admin")
 	//$entry.setAllowedProfilesForModification(cs.sfw_globalParameters.me.dfd.entryDocument.allowedProfilesForModification || "admin")
 	
-	$entry.setItemListProjection("Projection to templates"; "projectionToTemplates"; "dfdTemplate"; "dfd")
+	$entry.setItemListProjection("Projection to templates"; "projectionToTemplates"; "dfdTemplate"; "documentManagement")
 	
 	
 local Function buildFromTemplate($name : Text; $templateParam : Variant; $data : Object; $optionText : Text; $options : Object)->$document : cs:C1710.dfd_DocumentEntity
@@ -63,7 +63,8 @@ local Function buildFromTemplate($name : Text; $templateParam : Variant; $data :
 	
 	$context.document:=ds:C1482.dfd_Document.new()
 	$context.document.name:=$name
-	
+	$context.document.stmp:=cs:C1710.sfw_stmp.me.now()
+	$context.document.UUID_User:=cs:C1710.sfw_userManager.me.info.UUID
 	Case of 
 		: (Value type:C1509($templateParam)=Is text:K8:3)
 			$template:=ds:C1482.dfd_Template.query("name = :1"; $templateParam).first()

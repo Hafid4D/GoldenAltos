@@ -10,11 +10,10 @@
 			"coordinates": {
 				"left": 2385,
 				"top": 103,
-				"width": 203.05078125,
-				"height": 380.33203125
+				"width": 204.05078125,
+				"height": 390.33203125
 			},
 			"displayable_fields_count": 16,
-			"fields_ordering": 2,
 			"fields": {
 				"contactDetails": {
 					"position": 15
@@ -775,7 +774,7 @@
 				"name": {
 					"position": 5
 				},
-				"generationDate": {
+				"stmp": {
 					"position": 4
 				},
 				"UUID_User": {
@@ -1025,7 +1024,36 @@
 				"height": 239.99870300293
 			},
 			"displayable_fields_count": 9,
-			"fields_ordering": 1
+			"fields_ordering": 5,
+			"fields": {
+				"UUID_DocumentModel": {
+					"position": 2
+				},
+				"moreData": {
+					"position": 1
+				},
+				"stmp": {
+					"position": 7
+				},
+				"extension": {
+					"position": 4
+				},
+				"name": {
+					"position": 6
+				},
+				"UUID_User": {
+					"position": 3
+				},
+				"UUID_target": {
+					"position": 9
+				},
+				"UUID_DocumentFolder": {
+					"position": 5
+				},
+				"UUID": {
+					"position": 8
+				}
+			}
 		},
 		"CustomerCarrier": {
 			"color": {

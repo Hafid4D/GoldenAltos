@@ -41,6 +41,8 @@ Function pup_XXX()
 	
 	
 Function redrawAndSetVisible()
+	This:C1470.hideDatePickers()
+	
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	Use (Form:C1466.sfw.entry.panel.pages)
@@ -182,4 +184,8 @@ Function btnOpenPurchaseOrder()
 	If ($es.length>0)
 		Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "purchaseOrders")
 	End if 
+	
+Function hideDatePickers()
+	OBJECT SET VISIBLE:C603(*; "dp_@"; Form:C1466.sfw.checkIsInModification())
+	
 	

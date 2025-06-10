@@ -65,7 +65,7 @@ Function checkForCertifications()->$valid : Boolean
 			$certifications:=Form:C1466.currentStep.requitedCertifications.items
 			
 			For each ($certification; $certifications)
-				$assignments:=$staff_e.certifications.query("UUID_Certification = :1"; $certification.UUID_Certification)
+				$assignments:=$staff_e.assignments.query("UUID_Certification = :1"; $certification.UUID_Certification)
 				
 				If ($assignments.length=0)
 					$missingCertifications.push($certification)

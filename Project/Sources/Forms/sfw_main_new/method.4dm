@@ -41,6 +41,8 @@ Case of
 		$framework._displayPupViews()
 		$framework.lb_items_counter_format()
 		
+		
+		
 	: (FORM Event:C1606.code=On Resize:K2:27)
 		Form:C1466.subForm:=Form:C1466.subForm
 		OBJECT GET SUBFORM CONTAINER SIZE:C1148($form_width; $form_height)
@@ -48,6 +50,13 @@ Case of
 		OBJECT GET COORDINATES:C663(*; "bkgd_topBar"; $gtopbar; $htopbar; $dtopbar; $btopbar)
 		OBJECT GET COORDINATES:C663(*; "bkgd_bottomBar"; $gbottombar; $hbottombar; $dbottombar; $bbottombar)
 		OBJECT SET COORDINATES:C1248(*; "detail_panel"; $dvspliter; $btopbar; $form_width; $hbottombar)
+		GET WINDOW RECT:C443($g; $h; $d; $b; Current form window:C827)
+		$heightWindow:=$b-$h
+		If ($heightWindow=Screen height:C188)
+			HIDE TOOL BAR:C434
+		Else 
+			SHOW TOOL BAR:C433
+		End if 
 		
 	: (FORM Event:C1606.code=On Close Box:K2:21)
 		
@@ -56,6 +65,7 @@ Case of
 			cs:C1710.sfw_commentManager.me.hide()
 			cs:C1710.sfw_eventManager.me.hide()
 			ACCEPT:C269
+			SHOW TOOL BAR:C433
 		End if 
 		
 	: (FORM Event:C1606.code=On Unload:K2:2)
@@ -89,6 +99,10 @@ Case of
 		Else 
 			cs:C1710.sfw_eventManager.me.hide()
 		End if 
+		
+		
+	: (FORM Event:C1606.code=On Timer:K2:25)
+		SET TIMER:C645(0)
 		
 End case 
 

@@ -15,7 +15,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanel("panel_staff")
 	$entry.setPanelPage(1; ""; "Main")
 	$entry.setPanelPage(2; ""; "Certifications Assignment"; "")
-	$entry.setPanelPage(3; ""; "settings"; "allowedProfiles:admin")
+	$entry.setPanelPage(3; ""; "Settings"; "allowedProfiles:admin")
 	
 	
 	$entry.setLBItemsColumn("code"; "Code"; "width:70"; "center")
@@ -33,15 +33,56 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setPictoLabel("/RESOURCES/ga/image/picto/terminated-user-16x16.png")
 	$entry.setView($view)
 	
+	$view:=cs:C1710.sfw_definitionView.new("retrainingStaff"; "Staff retraining in 30 days"; "derivedFrom:main"; $entry)
+	$view.setSubset("retrainingStaff")
+	$view.setPictoLabel("/RESOURCES/ga/image/picto/terminated-user-16x16.png")
+	$entry.setView($view)
+	
 	//$entry.setAllowedProfiles("qa")
 	
 	$entry.enableTransaction()
 	//$entry.setAllowedProfilesForDeletion("pm")
 	
 	$entry.setItemListAction("Staff Certifications of the year"; "Staff_certification_of_the_year")
+	$entry.setItemListAction("Export All Employees - CSV"; "Staff_export_all_employees_csv")
+	$entry.setItemListAction("Export All Employees - PDF"; "Staff_export_all_employees_pdf")
+	$entry.setItemListAction("Print Badges"; "Staff_print_badges")
+	
+	$entry.setItemAction("Print Badge"; "staff_print_badge")
+	$entry.setItemAction("Print Certification Training"; "staff_print_cert_training")
+	
+	// MARK: -Filters
+	
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterCertification")
+	$filter.setDefaultTitle("All Certifications")
+	$filter.setFilterByManyToManyEntity("Certification"; "name"; "assignments.certification")
+	$filter.setDynamicTitle("name"; "## Certification")
+	$filter.setOrderForItems("ref")
+	$entry.addFilter($filter)
+	
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterTeamMember")
+	$filter.setDefaultTitle("All Teams")
+	$filter.setFilterByManyToManyEntity("Team"; "name"; "memberships.team")
+	$filter.setDynamicTitle("name"; "## Team")
+	$filter.setOrderForItems("id")
+	$entry.addFilter($filter)
+	
 	
 Function terminatedStaff()->$staffs : cs:C1710.StaffSelection
 	$staffs:=ds:C1482.Staff.query("terminated = :1"; True:C214)
+	
+	
+Function retrainingStaff()->$staffs : cs:C1710.StaffSelection
+	$staffs:=ds:C1482.Staff.newSelection()
+	
+	For each ($staff; ds:C1482.Staff.all())
+		$certs:=$staff.getCertiExpiredIn(30)
+		
+		If ($certs.length>0)
+			$staffs.add($staff)
+		End if 
+	End for each 
+	
 	
 Function checkRetraining($days : Integer)->$retraining : Collection
 	var $staff_es : cs:C1710.StaffSelection

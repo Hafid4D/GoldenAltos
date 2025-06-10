@@ -2,7 +2,7 @@
 /**
 import po & po lines (po <-- po_lines)
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([PurchaseOrder:115])
 	TRUNCATE TABLE:C1051([PurchaseOrderLine:116])
 	TRUNCATE TABLE:C1051([Invoice:4])
@@ -539,11 +539,12 @@ End if
 import staffs
 **/
 If (True:C214)
-	//TRUNCATE TABLE([Staff])
+	TRUNCATE TABLE:C1051([Staff:135])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/staff_export.json")
 	
 	$records:=JSON Parse:C1218($file.getText())
+	
 	
 	For each ($record; $records)
 		$staff_e:=ds:C1482.Staff.new()
@@ -560,6 +561,30 @@ If (True:C214)
 		$staff_e.division:=$record.division
 		$staff_e.citizenShipStatus:=$record.citizenShipStatus
 		$staff_e.contactDetails:=$record.contactDetails
+		
+		//If ($staff_e.firstName="Analyn") & ($staff_e.lastName="Tolentino")
+		//TRACE
+		//End if 
+		
+		For ($i; 1; 31)
+			$value:=$record.teamMemberShip[String:C10($i)]
+			
+			If ($value)
+				$team_es:=ds:C1482.Team.query("id = :1"; $i)
+				
+				If ($team_es.length>0)
+					$membership_e:=ds:C1482.Membership.new()
+					$membership_e.UUID_Staff:=$staff_e.UUID
+					$membership_e.UUID_Team:=$team_es[0].UUID
+					
+					$res:=$membership_e.save()
+					
+					If (Not:C34($res.success))
+						TRACE:C157
+					End if 
+				End if 
+			End if 
+		End for 
 		
 		$res:=$staff_e.save()
 		

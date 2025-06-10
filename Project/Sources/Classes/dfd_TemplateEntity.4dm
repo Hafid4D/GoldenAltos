@@ -10,6 +10,7 @@ local Function get nameInWindowTitle()->$nameInWindowTitle : Text
 	$nameInWindowTitle:=This:C1470.name
 	
 	
+	
 local Function isDeletable()->$isDeletable : Boolean
 	// This callback must return false to inactivate the deletion mode for the current item.
 	If (This:C1470.documents.length=0)

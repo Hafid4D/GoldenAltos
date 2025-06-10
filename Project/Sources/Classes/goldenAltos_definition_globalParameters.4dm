@@ -5,10 +5,13 @@ property login : Object
 property folders : Object
 property address : Object
 property preferedCountriesInPup : Collection
+property microsoftGraphAPI : Object
+property mail : Object
 property notifications : Object
 property documentsStorageOnServer : Object
 property dfd : Object
 property userVision : Object
+
 
 Class extends sfw_definition_globalParameters
 

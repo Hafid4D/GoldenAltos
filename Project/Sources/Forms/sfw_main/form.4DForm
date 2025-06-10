@@ -19,6 +19,7 @@
 		"onLosingFocus",
 		"onDataChange",
 		"onCloseBox",
+		"onTimer",
 		"onResize"
 	],
 	"method": "method.4dm",

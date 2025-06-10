@@ -7,10 +7,10 @@ shared singleton Class constructor
 	This:C1470.window:=0
 	This:C1470.callingWindow:=0
 	This:C1470.levels:=New shared object:C1526
-	This:C1470.levels["0"]:=New shared object:C1526("header"; "HoneyDew"; "body"; "MintCream"; "label"; ds:C1482.sfw_readXliff("comment.level.low"; "Low"))  //XLIFF OK
-	This:C1470.levels["1"]:=New shared object:C1526("header"; "LemonChiffon"; "body"; "LightYellow"; "label"; ds:C1482.sfw_readXliff("comment.level.normal"; "Normal"))  //XLIFF OK
-	This:C1470.levels["2"]:=New shared object:C1526("header"; "LightPink"; "body"; "MistyRose"; "label"; ds:C1482.sfw_readXliff("comment.level.important"; "Important"))  //XLIFF OK
-	This:C1470.levels["3"]:=New shared object:C1526("header"; "Wheat"; "body"; "Bisque"; "label"; ds:C1482.sfw_readXliff("comment.level.critical"; "Critical"))  //XLIFF OK
+	This:C1470.levels["0"]:=New shared object:C1526("header"; "HoneyDew"; "body"; "MintCream"; "label"; ds:C1482.sfw_readXliff("comment.level.low"; "Low"))
+	This:C1470.levels["1"]:=New shared object:C1526("header"; "LemonChiffon"; "body"; "LightYellow"; "label"; ds:C1482.sfw_readXliff("comment.level.normal"; "Normal"))
+	This:C1470.levels["2"]:=New shared object:C1526("header"; "LightPink"; "body"; "MistyRose"; "label"; ds:C1482.sfw_readXliff("comment.level.important"; "Important"))
+	This:C1470.levels["3"]:=New shared object:C1526("header"; "Wheat"; "body"; "Bisque"; "label"; ds:C1482.sfw_readXliff("comment.level.critical"; "Critical"))
 	
 	
 Function launch()
@@ -111,7 +111,7 @@ Function _drawCommentContainer()
 				End if 
 				If ($comment.add)
 					$widget:=$widgets["pup_priority_"+String:C10($lineNum)]
-					$widget.text:=ds:C1482.sfw_readXliff("comment.priority"; "Priority")+" : "+This:C1470.levels["1"].label  //XLIFF"
+					$widget.text:=ds:C1482.sfw_readXliff("comment.priority"; "Priority")+" : "+This:C1470.levels["1"].label
 				End if 
 				$widget:=$widgets["header_bkgd_"+String:C10($lineNum)]
 				$widget.fill:=This:C1470.levels[String:C10($comment.level)].header
@@ -166,9 +166,9 @@ Function bAction()
 	$refMenu:=Create menu:C408
 	$refMenus.push($refMenu)
 	
-	APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("comment.expandAll"; "Expand all"); *)  //XLIFF OK
+	APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("comment.expandAll"; "Expand all"); *)
 	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--expandAll")
-	APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("comment.collapseAll"; "Collapse all"); *)  //XLIFF OK
+	APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("comment.collapseAll"; "Collapse all"); *)
 	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--collapseAll")
 	
 	$refSubMenu:=Create menu:C408
@@ -176,10 +176,10 @@ Function bAction()
 	$i:=-1
 	For each ($level; This:C1470.levels)
 		$i+=1
-		APPEND MENU ITEM:C411($refSubMenu; ds:C1482.sfw_readXliff("comment.level."+Lowercase:C14(This:C1470.levels[$level].label); This:C1470.levels[$level].label); *)  //XLIFF OK
+		APPEND MENU ITEM:C411($refSubMenu; ds:C1482.sfw_readXliff("comment.level."+Lowercase:C14(This:C1470.levels[$level].label); This:C1470.levels[$level].label); *)
 		SET MENU ITEM PARAMETER:C1004($refSubMenu; -1; "level:"+String:C10($i))
 	End for each 
-	APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("comment.limitToLevel"; "Limit to level"); $refSubMenu; *)  //XLIFF OK
+	APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("comment.limitToLevel"; "Limit to level"); $refSubMenu; *)
 	
 	$choice:=Dynamic pop up menu:C1006($refMenu)
 	For each ($refMenu; $refMenus)
@@ -220,7 +220,7 @@ Function subFormMethod()
 					Form:C1466.messages[0].level:=Num:C11($choice)
 					OBJECT SET RGB COLORS:C628(*; "header_bkgd_0"; This:C1470.levels[$choice].header; This:C1470.levels[$choice].header)
 					OBJECT SET RGB COLORS:C628(*; "message_bkgd_0"; This:C1470.levels[$choice].body; This:C1470.levels[$choice].body)
-					OBJECT SET TITLE:C194(*; "pup_priority_0"; ds:C1482.sfw_readXliff("comment.priority"; "Priority")+": "+ds:C1482.sfw_readXliff("comment.level."+Lowercase:C14(This:C1470.levels[$choice].label); This:C1470.levels[$choice].label))  //XLIFF  OK
+					OBJECT SET TITLE:C194(*; "pup_priority_0"; ds:C1482.sfw_readXliff("comment.priority"; "Priority")+": "+ds:C1482.sfw_readXliff("comment.level."+Lowercase:C14(This:C1470.levels[$choice].label); This:C1470.levels[$choice].label))
 			End case 
 			
 			

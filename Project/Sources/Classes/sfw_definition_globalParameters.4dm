@@ -1,9 +1,3 @@
-property toolbar : Object
-property panel : Object
-property mainInterface : Object
-property users : Object
-property address : Object
-
 
 Class constructor
 	

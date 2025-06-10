@@ -1083,7 +1083,7 @@ Function lb_rules()
 			
 			Case of 
 				: ($choose="--addRule")
-					$answer:=cs:C1710.sfw_dialog.me.request(Localized string:C991("template_line.lb_rules.add.prompt"); ""; "Add rule"; "Cancel"; "trimSpace")  //XLIFF
+					$answer:=cs:C1710.sfw_dialog.me.request(Localized string:C991("template_line.lb_rules.add.prompt"); ""; ds:C1482.sfw_readXliff("dfdLine.panel.addrule"); ds:C1482.sfw_readXliff("dfdLine.panel.cancel"); "trimSpace")
 					If ($answer.ok) & ($answer.answer#"")
 						$rule:=New object:C1471
 						$rule.rule:=$answer.answer
@@ -1094,7 +1094,7 @@ Function lb_rules()
 					This:C1470.redraw_preview()
 					
 				: ($choose="--editRule")
-					$answer:=cs:C1710.sfw_dialog.me.request(Localized string:C991("template_line.lb_rules.edit.prompt"); Form:C1466.rule.rule; "Modify rule"; "Cancel"; "trimSpace")  //XLIFF
+					$answer:=cs:C1710.sfw_dialog.me.request(Localized string:C991("template_line.lb_rules.edit.prompt"); Form:C1466.rule.rule; ds:C1482.sfw_readXliff("dfdLine.panel.modifyrule"); ds:C1482.sfw_readXliff("dfdLine.panel.cancel"); "trimSpace")
 					If ($answer.ok) & ($answer.answer#"")
 						Form:C1466.rule.rule:=$answer.answer
 						Form:C1466.current_item.calculs.rules:=Form:C1466.lb_rules
@@ -1106,7 +1106,7 @@ Function lb_rules()
 					$rule:=OB Copy:C1225(Form:C1466.rule)
 					Form:C1466.lb_rules.push($rule)
 					Form:C1466.current_item.calculs.rules:=Form:C1466.lb_rules
-					$answer:=cs:C1710.sfw_dialog.me.request("Modify the duplicate rule:"; $rule.rule; "Modify rule"; "Cancel"; "trimSpace")  //XLIFF
+					$answer:=cs:C1710.sfw_dialog.me.request(ds:C1482.sfw_readXliff("dfdLine.panel.modifyduplicate"); $rule.rule; ds:C1482.sfw_readXliff("dfdLine.panel.modifyrule"); ds:C1482.sfw_readXliff("dfdLine.panel.cancel"); "trimSpace")
 					If ($answer.ok) & ($answer.answer#"")
 						$rule.rule:=$answer.answer
 					End if 
@@ -1375,10 +1375,10 @@ Function contextualClic_object()
 		: ($choose="--rename")
 			$objectName:=Form:C1466.object.name
 			$othersObjects:=Form:C1466.lb_objects.query("name # :1"; $objectName)
-			$answer:=cs:C1710.sfw_dialog.me.request("Enter the new name:"; $objectName; "Rename"; "Cancel"; "trimSpace")  //XLIFF
+			$answer:=cs:C1710.sfw_dialog.me.request(ds:C1482.sfw_readXliff("dfdLine.panel.renameobject"); $objectName; ds:C1482.sfw_readXliff("dfdLine.panel.rename"); ds:C1482.sfw_readXliff("dfdLine.panel.cancel"); "trimSpace")
 			If ($answer.ok) & ($answer.answer#"")
 				If ($othersObjects.query("name = :1"; $answer.answer).length>0)
-					cs:C1710.sfw_dialog.me.alert("The name already exists. Renaming is not possible")  //XLIFF
+					cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("dfdLine.panel.norenameobject"))
 				Else 
 					
 					Form:C1466.object.name:=$answer.answer
@@ -1783,13 +1783,13 @@ Function column_object_name()
 					$0:=-1
 					//$position:=Form.position_object
 					//Form.lb_objects.remove($position-1)
-					cs:C1710.sfw_dialog.me.alert("The name already exists. Renaming is not possible")  //XLIFF
+					cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("dfdLine.panel.norenameobject"))
 					Form:C1466.object.name:=Form:C1466.lastNameFormObject
 				Else 
 					This:C1470.activate_SaveCancel()
 					This:C1470.rename_objectInRules($objectName; $answer)
 					// to begin a new cycle and refresh the list
-					This:C1470.postpone(Formula:C1597(cs:C1710.dfd_panel_line.me.redraw_LB_properties()))
+					This:C1470.postpone(Formula:C1597(cs:C1710.dfd_panel_line.me.redraw_lb_properties()))
 					This:C1470.postpone(Formula:C1597(cs:C1710.dfd_panel_line.me.redraw_preview()))
 					$0:=0
 				End if 
@@ -1843,24 +1843,24 @@ Function lb_properties()
 				
 			End if 
 			
-			APPEND MENU ITEM:C411($refMenu; "Add a property..."; $refSubMenu)  //XLIFF
+			APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("dfdLine.panel.addproperty"); $refSubMenu)
 			APPEND MENU ITEM:C411($refMenu; "-")
 			If (Form:C1466.property#Null:C1517)
 				$index:=$schema._requiered.indexOf(String:C10(Form:C1466.property.name))
 				If ($index=-1)
-					APPEND MENU ITEM:C411($refMenu; "Delete"; *)  //xliff
+					APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("dfdLine.panel.delete"); *)
 					ENABLE MENU ITEM:C149($refMenu; -1)
 					SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")
 				Else 
-					APPEND MENU ITEM:C411($refMenu; "Delete (mandatory property)"; *)  //XLIFF
+					APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("dfdLine.panel.deletemandatory"); *)
 					DISABLE MENU ITEM:C150($refMenu; -1)
 				End if 
 			Else 
-				APPEND MENU ITEM:C411($refMenu; "Delete"; *)  //XLIFF
+				APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("dfdLine.panel.delete"); *)
 				DISABLE MENU ITEM:C150($refMenu; -1)
 			End if 
 			APPEND MENU ITEM:C411($refMenu; "-")
-			APPEND MENU ITEM:C411($refMenu; "Color editor..."; *)  //XLIFF
+			APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("dfdLine.panel.colorEditor"); *)
 			If (Form:C1466.property#Null:C1517)
 				ENABLE MENU ITEM:C149($refMenu; -1)
 			Else 

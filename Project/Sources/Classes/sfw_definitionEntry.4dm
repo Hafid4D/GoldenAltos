@@ -6,9 +6,38 @@ property searchfields : Collection
 property dataclass : Text
 property searchbox : Object
 property icon : Text
+property iconAlternative : Text
 property launchingExpression : Text
 property event : Object
 property addable : Object
+property toolbarLabel : Text
+property visions : Collection
+property displayOrder : Integer
+property panel : Object
+property itemActions : Collection
+property itemListActions : Collection
+property itemListProjections : Collection
+property itemListOutsides : Collection
+property views : Collection
+property allowFavorite : Boolean
+property allowDocument : Object
+property multiselection : Boolean
+property allowedProfiles : Collection
+property allowedProfilesForCreation : Collection
+property allowedProfilesForDeletion : Collection
+property allowedProfilesForModification : Collection
+property toolBarGroup : Object
+property linkedReferenceRecordsDataclasses : Collection
+property panelAfterProjectionIfNoItemSelected : Text
+property panelIfNoItemSelected : Text
+property validationRules : Collection
+property wizard : Object
+property virtual : Text
+property items : Collection
+property comment : Object
+property filters : Collection
+property specificAddModes : Collection
+property splitter : Object
 
 Class constructor($ident : Text; $vision_ident : Variant; $labelPlurial : Text; $labelSingle : Text)
 	
@@ -35,7 +64,7 @@ Class constructor($ident : Text; $vision_ident : Variant; $labelPlurial : Text; 
 	This:C1470.itemListOutsides:=New collection:C1472
 	This:C1470.views:=New collection:C1472
 	This:C1470.allowFavorite:=True:C214
-	This:C1470.allowDocument:=False:C215
+	This:C1470.allowDocument:=Null:C1517
 	This:C1470.multiselection:=False:C215
 	This:C1470.allowedProfiles:=New collection:C1472
 	This:C1470.allowedProfilesForCreation:=New collection:C1472
@@ -248,6 +277,14 @@ Function setLBItemsMetaExpression($metaExpression : Text)
 	End if 
 	$view.setLBItemsMetaExpression($metaExpression)
 	
+Function setRLDefinition($nameAttribute : Text; $recursiveAttribute : Text)
+	var $view : cs:C1710.sfw_definitionView
+	$view:=This:C1470.views.query("ident = :1"; "main").first()
+	If ($view=Null:C1517)
+		$view:=cs:C1710.sfw_definitionView.new("main"; "Main view")
+		This:C1470.setView($view)
+	End if 
+	$view.setRLDefinition($nameAttribute; $recursiveAttribute)
 	
 Function setSubset($functionName : Text;  ...  : Variant)
 	var $view : cs:C1710.sfw_definitionView
@@ -340,15 +377,15 @@ Function setItemListPreconfigAction($actionIdent : Text;  ...  : Text)
 	
 	Case of 
 		: ($actionIdent="exportReferenceRecords") && (cs:C1710.sfw_userManager.me.canImportExportReferenceRecords())
-			$action.label:="Export the reference records"
+			$action.label:=ds:C1482.sfw_readXliff("definitionEntry.preconfig.export")
 			This:C1470.itemListActions.push($action)
 			
 		: ($actionIdent="importReferenceRecords") && (cs:C1710.sfw_userManager.me.canImportExportReferenceRecords())
-			$action.label:="Import the reference records"
+			$action.label:=ds:C1482.sfw_readXliff("definitionEntry.preconfig.import")
 			This:C1470.itemListActions.push($action)
 			
 		: ($actionIdent="copyItemsListToPasteboard") && (cs:C1710.sfw_userManager.me.canImportExportReferenceRecords())
-			$action.label:="Copy this list to the pasteboard"
+			$action.label:=ds:C1482.sfw_readXliff("definitionEntry.preconfig.copy")
 			This:C1470.itemListActions.push($action)
 			
 	End case 
@@ -418,7 +455,8 @@ Function setValidationRule($field : Text; $widget : Text;  ...  : Text)
 				$rule.unique:=True:C214
 			: ($selector="UUIDNotNull")
 				$rule.UUIDNotNull:=True:C214
-				
+			: ($selector="notZero")
+				$rule.notZero:=True:C214
 			: ($selector="message")
 				$rule.message:=$params.join(":")
 		End case 
@@ -570,10 +608,20 @@ Function activateFavorite($activate : Boolean)
 	End if 
 	
 	
-Function activateDocument()
-	This:C1470.allowDocument:=True:C214
-	$pageDocuments:=cs:C1710.sfw_definitionPageDocuments.new("pageDocument")
-	This:C1470.setPanelDynamicPage(This:C1470.panel.pages.length+1; ""; "Documents"; $pageDocuments)  //XLIFF
+Function activateDocument( ...  : Text)
+	This:C1470.allowDocument:=New object:C1471
+	
+	For ($p; 1; Count parameters:C259)
+		$params:=Split string:C1554(${$p}; ":")
+		$selector:=$params.shift()
+		Case of 
+			: ($selector="showCountInTab")
+				This:C1470.allowDocument.showCountInTab:=True:C214
+		End case 
+	End for 
+	
+	$pageDocuments:=cs:C1710.sfw_definitionPageDocuments.new("pageDocument"; This:C1470.allowDocument)
+	This:C1470.setPanelDynamicPage(This:C1470.panel.pages.length+1; ""; "Documents"; $pageDocuments)
 	
 	
 Function allowMultiSelectionInLB($allow : Boolean)
@@ -679,4 +727,8 @@ Function setSearchField( ...  : Text)
 Function setLaunchingExpression($expression : Text)
 	
 	This:C1470.launchingExpression:=$expression
+	
+	
+Function setAsSplitter()
+	This:C1470.splitter:=New object:C1471
 	

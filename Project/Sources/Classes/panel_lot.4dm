@@ -37,6 +37,9 @@ Function pup_XXX()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
+	This:C1470.hideDatePickers()
+	This:C1470.drawPup_LotStatus()
+	
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="Lot Steps ("+String:C10(Form:C1466.lb_steps.length)+")"
@@ -262,8 +265,81 @@ Function btnOpenPurchaseOrder()
 		Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "purchaseOrders")
 	End if 
 	
-	
 Function btnOpenJob()
 	$entity:=Form:C1466.current_item.job
 	Form:C1466.sfw.openInANewWindow($entity; "customerService"; "jobs")
 	
+Function hideDatePickers()
+	OBJECT SET VISIBLE:C603(*; "dp_@"; Form:C1466.sfw.checkIsInModification())
+	
+Function drawPup_LotStatus()
+	If (Form:C1466.current_item#Null:C1517)
+		Case of 
+			: (Form:C1466.current_item.status=1)
+				$color:="SeaGreen"
+				$statusName:="Accepted"
+				
+			: (Form:C1466.current_item.status=2)
+				$color:="Crimson"
+				$statusName:="Rejected"
+				
+			Else 
+				$color:=""
+				$statusName:=" "
+		End case 
+		
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_lotStatus"; $statusName; $pathIcon; False:C215)
+	End if 
+	
+Function pup_status()
+	//Create pop up menu
+	If (Form:C1466.sfw.checkIsInModification())
+		$menu:=Create menu:C408
+		
+		APPEND MENU ITEM:C411($menu; " "; *)
+		SET MENU ITEM PARAMETER:C1004($menu; -1; "--nothing")
+		
+		If (Form:C1466.current_item.status=0)
+			SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+			If (Is Windows:C1573)
+				SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+			End if 
+		End if 
+		
+		APPEND MENU ITEM:C411($menu; "Accepted"; *)
+		SET MENU ITEM PARAMETER:C1004($menu; -1; "--accepted")
+		
+		If (Form:C1466.current_item.status=1)
+			SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+			If (Is Windows:C1573)
+				SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+			End if 
+		End if 
+		
+		APPEND MENU ITEM:C411($menu; "Rejected"; *)
+		SET MENU ITEM PARAMETER:C1004($menu; -1; "--rejected")
+		
+		If (Form:C1466.current_item.status=2)
+			SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+			If (Is Windows:C1573)
+				SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+			End if 
+		End if 
+		
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		Case of 
+			: ($choose="--accepted")
+				Form:C1466.current_item.status:=1
+				
+			: ($choose="--rejected")
+				Form:C1466.current_item.status:=2
+				
+			Else 
+				Form:C1466.current_item.status:=0
+		End case 
+		
+	End if 
+	This:C1470.drawPup_LotStatus()

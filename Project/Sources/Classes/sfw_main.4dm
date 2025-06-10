@@ -1,6 +1,9 @@
 property lb_items : Collection
 property searchbox : Text
 property entry : cs:C1710.sfw_definitionEntry
+property view : Object
+property vision : Object  //the current vision
+property lastRefItemInList : Integer
 
 Class extends sfw_foundations
 
@@ -281,6 +284,9 @@ Function lb_items_search()
 		: (This:C1470.view.displayType="hierarchicalEntries")
 			This:C1470._drawHierarchicalEntries()
 			
+		: (This:C1470.view.displayType="recursiveList")
+			This:C1470._drawRecursiveList()
+			
 	End case 
 	
 Function lb_items_counter_format()
@@ -367,12 +373,12 @@ Function lb_items_doEvent()
 			$refMenus:=New collection:C1472
 			$refMenu:=Create menu:C408
 			$refMenus.push($refMenu)
-			APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("main.unselectedAll"; "Unselect all"); *)  //XLIFF OK
+			APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("main.unselectedAll"; "Unselect all"); *)
 			SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--unselectAll")
 			SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/unselectAll-24x24.png")
 			
 			APPEND MENU ITEM:C411($refMenu; "-")
-			APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("main.openNewWindow"; "Open in a new window..."); *)  //XLIFF OK
+			APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("main.openNewWindow"; "Open in a new window..."); *)
 			SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/openWindow-24x24.png")
 			SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--open")
 			If (Form:C1466.current_lb_item_pos=0)
@@ -382,14 +388,14 @@ Function lb_items_doEvent()
 			$refMenuAction:=This:C1470._buildMenuAction($refMenus)
 			If (Count menu items:C405($refMenuAction)>0)
 				APPEND MENU ITEM:C411($refMenu; "-")
-				APPEND MENU ITEM:C411($refMenu; "Actions"; $refMenuAction; *)  //XLIFF OK
+				APPEND MENU ITEM:C411($refMenu; "Actions"; $refMenuAction; *)
 				SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/action-24x24.png")
 			End if 
 			
 			$refMenuProjection:=This:C1470._buildMenuProjection($refMenus)
 			If (Count menu items:C405($refMenuProjection)>0)
 				APPEND MENU ITEM:C411($refMenu; "-")
-				APPEND MENU ITEM:C411($refMenu; "Projection"; $refMenuProjection; *)  //XLIFF OK
+				APPEND MENU ITEM:C411($refMenu; "Projection"; $refMenuProjection; *)
 				SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/projection-24x24.png")
 			End if 
 			
@@ -830,6 +836,8 @@ Function _displayPupViews()
 			$target:="hl_items"
 		: (This:C1470.view.displayType="hierarchicalEntries")
 			$target:="hl_items"
+		: (This:C1470.view.displayType="recursiveList")
+			$target:="hl_items"
 		Else 
 			$target:="lb_items"
 	End case 
@@ -875,7 +883,7 @@ Function clicEntryLabel()
 	If (Form:C1466.sfw.entry.allowFavorite) || (Form:C1466.projection#Null:C1517)
 		
 		$refMenu:=Create menu:C408
-		APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("entry.noResctriction"; "No restriction"); *)  //xliff OK
+		APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("entry.noResctriction"; "No restriction"); *)
 		If (Form:C1466.filterByFavorite=False:C215) && (Form:C1466.filterByProjection=False:C215)
 			SET MENU ITEM MARK:C208($refMenu; -1; Char:C90(18))
 		End if 
@@ -883,7 +891,7 @@ Function clicEntryLabel()
 		SET MENU ITEM ICON:C984($refMenu; -1; "path:/RESOURCES/sfw/image/picto/book-brown.png")
 		
 		If (Form:C1466.sfw.entry.allowFavorite)
-			APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("entry.onlyFavorites"; "Only my favorites"); *)  //xliff OK
+			APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("entry.onlyFavorites"; "Only my favorites"); *)
 			If (Form:C1466.filterByFavorite)
 				SET MENU ITEM MARK:C208($refMenu; -1; Char:C90(18))
 			End if 
@@ -1050,6 +1058,64 @@ Function _drawHierarchicalEntriesLevel($parentItem : 4D:C1709.Entity)->$list : I
 	This:C1470.HLEntries.lastCount:=$items.length
 	This:C1470.HLEntries.currentLevelInDrawing-=1
 	
+	//mark:-RecursiveList
+	
+Function _drawRecursiveList()
+	
+	//This.view.RLDefinition
+	This:C1470.rl_itemUUIDs:=This:C1470.lb_items.extract("UUID")
+	If (This:C1470.searchbox#"")
+		$uuids:=This:C1470.rl_itemUUIDs.copy()
+		For each ($uuid; This:C1470.rl_itemUUIDs)
+			$e:=ds:C1482[This:C1470.entry.dataclass].get($uuid)
+			While ($e[This:C1470.view.RLDefinition.recursiveAttribute]#Null:C1517)
+				$e:=$e[This:C1470.view.RLDefinition.recursiveAttribute]
+				$uuids.push($e.getKey())
+			End while 
+		End for each 
+		This:C1470.lb_items:=ds:C1482[This:C1470.entry.dataclass].query("UUID in :1"; $uuids)
+	End if 
+	This:C1470.clearHierarchicalEntries()
+	This:C1470.lastRefItemInList:=0
+	This:C1470.currentItemRef:=0
+	Form:C1466.sfw.hl_items:=This:C1470._drawRecursiveListItem()
+	If (Form:C1466.current_item#Null:C1517) && (This:C1470.currentItemRef#0)
+		SELECT LIST ITEMS BY REFERENCE:C630(Form:C1466.sfw.hl_items; This:C1470.currentItemRef)
+	End if 
+	
+Function _drawRecursiveListItem($parent_UUID : Text)->$refList : Integer
+	
+	If (Count parameters:C259=0)
+		$queryString:=This:C1470.view.RLDefinition.recursiveAttribute+"= null order by "+This:C1470.view.RLDefinition.nameAttribute
+		$es:=This:C1470.lb_items.query($queryString)
+	Else 
+		$queryString:=This:C1470.view.RLDefinition.recursiveAttribute+".UUID = :1 order by "+This:C1470.view.RLDefinition.nameAttribute
+		$es:=This:C1470.lb_items.query($queryString; $parent_UUID)
+	End if 
+	
+	If ($es.length=0)
+		$refList:=0
+	Else 
+		$refList:=New list:C375
+		For each ($e; $es)
+			$key:=$e.getKey()
+			$subList:=This:C1470._drawRecursiveListItem($key)
+			$label:=$e[This:C1470.view.RLDefinition.nameAttribute]
+			This:C1470.lastRefItemInList+=1
+			If ($subList=0)
+				APPEND TO LIST:C376($refList; $label; This:C1470.lastRefItemInList)
+			Else 
+				APPEND TO LIST:C376($refList; $label; This:C1470.lastRefItemInList; $subList; True:C214)
+			End if 
+			SET LIST ITEM PARAMETER:C986($refList; This:C1470.lastRefItemInList; "UUID"; $key)
+			If (This:C1470.rl_itemUUIDs.indexOf($key)=-1)
+				SET LIST ITEM PROPERTIES:C386($refList; This:C1470.lastRefItemInList; False:C215; Plain:K14:1; 0; 0x0CACAACA)
+			End if 
+			If (Form:C1466.current_item#Null:C1517) && (Form:C1466.current_item.UUID=$key)
+				This:C1470.currentItemRef:=This:C1470.lastRefItemInList
+			End if 
+		End for each 
+	End if 
 	
 	
 	//mark:-Filters
