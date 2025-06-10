@@ -51,7 +51,7 @@ Function redrawAndSetVisible()
 	
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="Repair Log ("+String:C10(Form:C1466.lb_repairLog.length)+")"
-		Form:C1466.sfw.entry.panel.pages[2].label:="Attached Reports ("+String:C10(Form:C1466.lb_documents.length)+")"
+		Form:C1466.sfw.entry.panel.pages[2].label:="Documents ("+String:C10(Form:C1466.lb_documents.length)+")"
 		
 	End use 
 	Form:C1466.sfw.drawHTab()
@@ -205,7 +205,6 @@ Function loadDocuments()
 		
 		//Form.lb_documents:=ds.Document.query("foreignKey=:1 & tableNumber=:2"; Form.current_item.UUID; Table(->[Equipment])).orderBy("code desc").toCollection().map(Formula(_ga_getDateTime)
 	End if 
-	
 	
 	
 Function LoadAllTabs()
