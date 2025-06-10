@@ -5,7 +5,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry:=cs:C1710.sfw_definitionEntry.new("user"; "userManagement"; "Users")
 	//$entry.setXliffLabel("entry.users")
 	$entry.setDataclass("sfw_User")
-	$entry.setIcon("sfw/entry/user-50x50-white.png")
+	$entry.setIcon("sfw/entry/users-50x50.png")
 	$entry.setXliffLabel("user.users")
 	//$entry.setDisplayOrder(-1000)
 	$entry.setSearchboxField("firstName")
@@ -29,12 +29,12 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListPreconfigAction("importReferenceRecords")
 	$entry.setItemListPreconfigAction("copyItemsListToPasteboard")
 	$entry.setItemListAction("-"; "-")
-	$entry.setItemListAction("Capitalize the names"; "capitalize_all")  //XLIFF
-	$entry.setItemListAction("Clean up profile inscriptions"; "cleanUpProfileInscriptions")  //XLIFF
+	$entry.setItemListAction(ds:C1482.sfw_readXliff("user.capitalename"); "capitalize_all")
+	$entry.setItemListAction(ds:C1482.sfw_readXliff("user.cleanprofile"); "cleanUpProfileInscriptions")
 	
 	$entry.enableTransaction()
 	
-	$entry.setAllowedProfilesForCreation("pm")
+	$entry.setAllowedProfiles(cs:C1710.sfw_globalParameters.me.userVision.entryUser.allowedProfiles || "admin")
 	
 	
 	

@@ -122,35 +122,35 @@ shared Function bAction()
 	
 	$refMenuExpand:=Create menu:C408
 	$refMenus.push($refMenuExpand)
-	APPEND MENU ITEM:C411($refMenuExpand; "Expand all"; *)  //XLIFF
+	APPEND MENU ITEM:C411($refMenuExpand; ds:C1482.sfw_readXliff("eventManager.expall"); *)
 	SET MENU ITEM PARAMETER:C1004($refMenuExpand; -1; "--expandAll")
 	APPEND MENU ITEM:C411($refMenuExpand; "-")
-	APPEND MENU ITEM:C411($refMenuExpand; "Expand years"; *)  //XLIFF
+	APPEND MENU ITEM:C411($refMenuExpand; ds:C1482.sfw_readXliff("eventManager.expyears"); *)
 	SET MENU ITEM PARAMETER:C1004($refMenuExpand; -1; "--expandYears")
-	APPEND MENU ITEM:C411($refMenuExpand; "Expand months"; *)  //XLIFF
+	APPEND MENU ITEM:C411($refMenuExpand; ds:C1482.sfw_readXliff("eventManager.expmonths"); *)
 	SET MENU ITEM PARAMETER:C1004($refMenuExpand; -1; "--expandMonths")
-	APPEND MENU ITEM:C411($refMenuExpand; "Expand events"; *)  //XLIFF
+	APPEND MENU ITEM:C411($refMenuExpand; ds:C1482.sfw_readXliff("eventManager.expevent"); *)
 	SET MENU ITEM PARAMETER:C1004($refMenuExpand; -1; "--expandEvents")
-	APPEND MENU ITEM:C411($refMenu; "Expand"; $refMenuExpand; *)  //XLIFF
+	APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("eventManager.exp"); $refMenuExpand; *)
 	
 	$refMenuCollapse:=Create menu:C408
 	$refMenus.push($refMenuCollapse)
-	APPEND MENU ITEM:C411($refMenuCollapse; "Collapse all"; *)  //XLIFF
+	APPEND MENU ITEM:C411($refMenuCollapse; ds:C1482.sfw_readXliff("eventManager.collall"); *)
 	SET MENU ITEM PARAMETER:C1004($refMenuCollapse; -1; "--collapseAll")
 	APPEND MENU ITEM:C411($refMenuCollapse; "-")
-	APPEND MENU ITEM:C411($refMenuCollapse; "Collapse years"; *)  //XLIFF
+	APPEND MENU ITEM:C411($refMenuCollapse; ds:C1482.sfw_readXliff("eventManager.collyears"); *)
 	SET MENU ITEM PARAMETER:C1004($refMenuCollapse; -1; "--collapseYears")
-	APPEND MENU ITEM:C411($refMenuCollapse; "Collapse months"; *)  //XLIFF
+	APPEND MENU ITEM:C411($refMenuCollapse; ds:C1482.sfw_readXliff("eventManager.collmonths"); *)
 	SET MENU ITEM PARAMETER:C1004($refMenuCollapse; -1; "--collapseMonths")
-	APPEND MENU ITEM:C411($refMenuCollapse; "Collapse events"; *)  //XLIFF
+	APPEND MENU ITEM:C411($refMenuCollapse; ds:C1482.sfw_readXliff("eventManager.collevent"); *)
 	SET MENU ITEM PARAMETER:C1004($refMenuCollapse; -1; "--collapseEvents")
-	APPEND MENU ITEM:C411($refMenu; "Collapse"; $refMenuCollapse; *)  //XLIFF
+	APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("eventManager.coll"); $refMenuCollapse; *)
 	
 	APPEND MENU ITEM:C411($refMenu; "-")
 	
 	$refMenuUser:=Create menu:C408
 	$refMenus.push($refMenuUser)
-	APPEND MENU ITEM:C411($refMenuUser; "All users"; *)  //XLIFF
+	APPEND MENU ITEM:C411($refMenuUser; ds:C1482.sfw_readXliff("eventManager.userall"); *)
 	SET MENU ITEM PARAMETER:C1004($refMenuUser; -1; "--allUsers")
 	If (This:C1470.usersToDisplay=Null:C1517) || (This:C1470.usersToDisplay.length=0)
 		SET MENU ITEM MARK:C208($refMenuUser; -1; Char:C90(18))
@@ -163,11 +163,11 @@ shared Function bAction()
 			SET MENU ITEM MARK:C208($refMenuUser; -1; Char:C90(18))
 		End if 
 	End for each 
-	APPEND MENU ITEM:C411($refMenu; "Users"; $refMenuUser; *)  //XLIFF
+	APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("eventManager.user"); $refMenuUser; *)
 	
 	$refMenuEventType:=Create menu:C408
 	$refMenus.push($refMenuUser)
-	APPEND MENU ITEM:C411($refMenuEventType; "All event types"; *)  //XLIFF
+	APPEND MENU ITEM:C411($refMenuEventType; ds:C1482.sfw_readXliff("eventManager.alleventtype"); *)
 	SET MENU ITEM PARAMETER:C1004($refMenuEventType; -1; "--allEventTypes")
 	If (This:C1470.eventTypeToDisplay=Null:C1517) || (This:C1470.eventTypeToDisplay.length=0)
 		SET MENU ITEM MARK:C208($refMenuEventType; -1; Char:C90(18))
@@ -180,7 +180,7 @@ shared Function bAction()
 			SET MENU ITEM MARK:C208($refMenuEventType; -1; Char:C90(18))
 		End if 
 	End for each 
-	APPEND MENU ITEM:C411($refMenu; "Event types"; $refMenuEventType; *)  //XLIFF
+	APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("eventManager.eventtype"); $refMenuEventType; *)
 	
 	$choice:=Dynamic pop up menu:C1006($refMenu)
 	For each ($refMenu; $refMenus)

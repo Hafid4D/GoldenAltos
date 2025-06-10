@@ -749,7 +749,7 @@ Function _restoreAttributes($folderReference : 4D:C1709.Folder; $date : Date; $t
 Function export()
 	var $sourceControler : cs:C1710.sfw_sourceControler
 	
-	$ok:=cs:C1710.sfw_dialog.me.confirm(ds:C1482.sfw_readXliff("export.sfw"; "Do you want to export all the source for the framework ?"))  //XLIFF OK
+	$ok:=cs:C1710.sfw_dialog.me.confirm(ds:C1482.sfw_readXliff("export.sfw"; "Do you want to export all the source for the framework ?"))
 	If ($ok)
 		$sourceControler:=cs:C1710.sfw_sourceControler.new()
 		$sourceControler.fullPush()
@@ -759,11 +759,11 @@ Function export()
 Function import()
 	var $sourceControler : cs:C1710.sfw_sourceControler
 	
-	$ok:=cs:C1710.sfw_dialog.me.confirm(ds:C1482.sfw_readXliff("import.sfw"; "Do you want to import all the source for the framework ?"))  //XLIFF OK
+	$ok:=cs:C1710.sfw_dialog.me.confirm(ds:C1482.sfw_readXliff("import.sfw"; "Do you want to import all the source for the framework ?"))
 	If ($ok)
 		$sourceControler:=cs:C1710.sfw_sourceControler.new()
 		
 		$sourceControler.fullPull()
 		
-		cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("import.sfwDone"; "Full Import is done ! I wish you a good work with this new version of the framework."))  //XLIFF OK
+		cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("import.sfwDone"; "Full Import is done ! I wish you a good work with this new version of the framework."))
 	End if 

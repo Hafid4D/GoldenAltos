@@ -42,7 +42,7 @@
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Name"
+					"text": ":xliff:documentFolder.form.name"
 				},
 				"entryField_name": {
 					"type": "input",
@@ -752,8 +752,8 @@
 			"objects": {
 				"pup_documentFolder": {
 					"type": "button",
-					"top": 71,
-					"left": 115,
+					"top": 73,
+					"left": 136,
 					"width": 189,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -772,17 +772,106 @@
 				"label_0_4": {
 					"type": "text",
 					"top": 76,
-					"left": 12,
-					"width": 113,
+					"left": 3,
+					"width": 133,
 					"height": 15,
 					"stroke": "#808080",
-					"text": "Document Folder"
+					"text": ":xliff:dfdTemplate.form.documentfolder"
+				},
+				"permissions_bkgd": {
+					"type": "rectangle",
+					"top": 103,
+					"left": -1,
+					"width": 340,
+					"height": 499,
+					"stroke": "#c0c0c0",
+					"fill": "#F7F9FC"
+				},
+				"hl_bkgd": {
+					"type": "picture",
+					"top": 103,
+					"left": 0,
+					"width": 251,
+					"height": 400,
+					"picture": "Images/Static Picture3.png",
+					"pictureFormat": "tiled"
+				},
+				"hl_permissions": {
+					"type": "list",
+					"left": 0,
+					"top": 103,
+					"width": 265,
+					"height": 400,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.hl_permissions",
+					"scrollbarVertical": "visible",
+					"scrollbarHorizontal": "hidden",
+					"fill": "transparent",
+					"focusable": false,
+					"enterable": false,
+					"method": "ObjectMethods/hl_permissions.4dm"
+				},
+				"bAction_permissions": {
+					"type": "button",
+					"text": "Actions",
+					"top": 512,
+					"left": 7,
+					"width": 82,
+					"height": 24,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bAction_permissions.4dm"
+				}
+			}
+		},
+		{
+			"objects": {
+				"label_0_1": {
+					"type": "text",
+					"top": 76,
+					"left": 3,
+					"width": 173,
+					"height": 15,
+					"stroke": "#808080",
+					"text": ":xliff:dfdTemplate.form.documentformula"
+				},
+				"entryField_documentNameFormula": {
+					"type": "input",
+					"left": 185,
+					"top": 76,
+					"width": 729,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.moreData.documentNameFormula"
+				},
+				"label_0_2": {
+					"type": "text",
+					"top": 102,
+					"left": 3,
+					"width": 173,
+					"height": 35,
+					"stroke": "#808080",
+					"text": ":xliff:dfdTemplate.form.precalculmethod"
+				},
+				"entryField_documentPrecalculationMethod": {
+					"type": "input",
+					"left": 185,
+					"top": 102,
+					"width": 729,
+					"height": 369,
+					"dataSource": "Form:C1466.current_item.moreData.documentPrecalculationMethod"
 				}
 			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_1lines",
-	"geometryStamp": 233,
+	"geometryStamp": 271,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

@@ -7,6 +7,21 @@
       </prop-group>
     </header>
     <body>
+      <group resname="definitionEntry">
+        <trans-unit id="10" resname="definitionEntry.preconfig.export">
+          <source>Exporter les enregistrements de référence</source>
+          <target>Exporter les enregistrements de référence</target>
+        </trans-unit>
+        <trans-unit id="11" resname="definitionEntry.preconfig.import">
+          <source>Importer les enregistrements de référence</source>
+          <target>Importer les enregistrements de référence</target>
+        </trans-unit>
+        <trans-unit id="12" resname="definitionEntry.preconfig.copy">
+          <source>Copier cette liste dans le presse-papiers</source>
+          <target>Copier cette liste dans le presse-papiers</target>
+        </trans-unit>
+      </group>
+
       <group resname="communication">
         <trans-unit id="GRQHO7JA8+TZ8sP66WlTqA" resname="communication.add">
           <source>Ajouter un moyen de communication</source>
@@ -187,6 +202,21 @@
         </trans-unit>
       </group>
       <group resname="user">
+        <trans-unit id="1" resname="user.vision">
+          <source>Gestion des utilisateurs</source>
+          <target>Gestion des utilisateurs</target>
+        </trans-unit>
+        <trans-unit id="2" resname="user.capitalename">
+          <source>Mettre une majuscule initiale aux noms</source>
+          <target>Mettre une majuscule initiale aux noms</target>
+        </trans-unit>
+        <trans-unit id="3" resname="user.cleanprofile">
+          <source>Nettoyer les inscriptions du profil</source>
+          <target>Nettoyer les inscriptions du profil</target>
+        </trans-unit>
+
+
+
         <trans-unit id="EMu2BNodDIVWZMaAL8KAOQ" resname="user.users">
           <source>Utilisateurs</source>
           <target>Utilisateurs</target>
@@ -358,7 +388,155 @@
           <source>Année précédente</source>
           <target>Année précédente</target>
         </trans-unit>
+
+        <trans-unit id="24" resname="pagelistbox.select.selectall">
+          <source>Sélectionner tous les éléments...</source>
+          <target>Sélectionner tous les éléments...</target>
+        </trans-unit>
+        <trans-unit id="25" resname="pagelistbox.select.unselectall">
+          <source>Désélectionner tous les éléments...</source>
+          <target>Désélectionner tous les éléments...</target>
+        </trans-unit>
+
+
       </group>
+
+      <group resname="documentFolder">
+        <trans-unit id="26" resname="documentFolder.entry.plural">
+          <source>Dossiers</source>
+          <target>Dossiers</target>
+        </trans-unit>
+        <trans-unit id="27" resname="documentFolder.entry.single">
+          <source>Dossier</source>
+          <target>Dossier</target>
+        </trans-unit>
+        <trans-unit id="28" resname="documentFolder.entry.allfolders">
+          <source>Tous les dossiers</source>
+          <target>Tous les dossiers</target>
+        </trans-unit>
+
+        <trans-unit id="28" resname="documentFolder.form.ident">
+          <source>Identifiant</source>
+          <target>Identifiant</target>
+        </trans-unit>
+        <trans-unit id="28" resname="documentFolder.form.name">
+          <source>Nom</source>
+          <target>Nom</target>
+        </trans-unit>
+        <trans-unit id="28" resname="documentFolder.form.parentfolder">
+          <source>Dossier parent</source>
+          <target>Dossier parent</target>
+        </trans-unit>
+        <trans-unit id="28" resname="documentFolder.form.dontupload">
+          <source>N'importez aucun fichier</source>
+          <target>N'importez aucun fichier</target>
+        </trans-unit>
+
+
+
+
+      </group>
+      <group resname="documentModel">
+        <trans-unit id="29" resname="documentModel.entry.plural">
+          <source>Modèles</source>
+          <target>Modèles</target>
+        </trans-unit>
+        <trans-unit id="30" resname="documentModel.entry.single">
+          <source>Modèle</source>
+          <target>Modèle</target>
+        </trans-unit>
+        <trans-unit id="31" resname="documentModel.entry.alltemplate">
+          <source>Tous les modèles</source>
+          <target>Tous les modèles</target>
+        </trans-unit>
+        <trans-unit id="32" resname="documentModel.entry.field.name">
+          <source>Nom</source>
+          <target>Nom</target>
+        </trans-unit>
+        <trans-unit id="33" resname="documentModel.entry.counter.one">
+          <source>modèle</source>
+          <target>modèle</target>
+        </trans-unit>
+        <trans-unit id="34" resname="documentModel.entry.counter.unitn">
+          <source>modèles</source>
+          <target>modèles</target>
+        </trans-unit>
+
+        <trans-unit id="54" resname="documentModel.panel.balisedtext">
+          <source>Texte balisé</source>
+          <target>Texte balisé</target>
+        </trans-unit>
+      </group>
+
+       <group resname="eventManager">
+        <trans-unit id="35" resname="eventManager.expall">
+          <source>Développer tout</source>
+          <target>Développer tout</target>
+        </trans-unit>
+        <trans-unit id="36" resname="eventManager.expyears">
+          <source>Développer les années</source>
+          <target>Développer les années</target>
+        </trans-unit>
+        <trans-unit id="37" resname="eventManager.expmonths">
+          <source>Développer les mois</source>
+          <target>Développer les mois</target>
+        </trans-unit>
+        <trans-unit id="38" resname="eventManager.expevent">
+          <source>Développer les événements</source>
+          <target>Développer les événements</target>
+        </trans-unit>
+        <trans-unit id="39" resname="eventManager.exp">
+          <source>Développer</source>
+          <target>Développer</target>
+        </trans-unit>
+        
+        <trans-unit id="40" resname="eventManager.collall">
+          <source>Réduire tout</source>
+          <target>Réduire tout</target>
+        </trans-unit>
+        <trans-unit id="41" resname="eventManager.collyears">
+          <source>Réduire les années</source>
+          <target>Réduire les années</target>
+        </trans-unit>
+        <trans-unit id="42" resname="eventManager.collmonths">
+          <source>Réduire les mois</source>
+          <target>Réduire les mois</target>
+        </trans-unit>
+        <trans-unit id="43" resname="eventManager.collevent">
+          <source>Réduire les événements</source>
+          <target>Réduire les événements</target>
+        </trans-unit>
+        <trans-unit id="44" resname="eventManager.coll">
+          <source>Réduire</source>
+          <target>Réduire</target>
+        </trans-unit>
+
+        <trans-unit id="45" resname="eventManager.userall">
+          <source>Tous les utilisateurs</source>
+          <target>Tous les utilisateurs</target>
+        </trans-unit>
+        <trans-unit id="46" resname="eventManager.user">
+          <source>Utilisateurs</source>
+          <target>Utilisateurs</target>
+        </trans-unit>
+
+
+        <trans-unit id="47" resname="eventManager.alleventtype">
+          <source>Tous les types d’événements</source>
+          <target>Tous les types d’événements</target>
+        </trans-unit>
+        <trans-unit id="48" resname="eventManager.eventtype">
+          <source>Types d’événements</source>
+          <target>Types d’événements</target>
+        </trans-unit>
+
+
+
+      </group>
+
+
+
+
     </body>
   </file>
 

@@ -293,7 +293,7 @@ Function _bAction()
 					APPEND MENU ITEM:C411($menu; "-")
 					
 				: ($action.predefinedType="openInWindow")
-					APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("definitionPageLB.openSelectedItem"; "Open selected item in a new window..."); *)  //XLIFF OK
+					APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("definitionPageLB.openSelectedItem"; "Open selected item in a new window..."); *)
 					SET MENU ITEM PARAMETER:C1004($menu; -1; "--openInWindow")
 					SET MENU ITEM ICON:C984($menu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/openWindow-24x24.png")
 					If (Form:C1466["current_"+$ident+"_item"]=Null:C1517) || (Form:C1466["selected_"+$ident+"_items"].length>1)
@@ -302,24 +302,24 @@ Function _bAction()
 					
 				: ($action.predefinedType="openAProjection")
 					If (Form:C1466["selected_"+$ident+"_items"].length>0)
-						APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("definitionPageLB.openProjectionSelectedItem"; "Open a projection with selected items..."); *)  //XLIFF OK
+						APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("definitionPageLB.openProjectionSelectedItem"; "Open a projection with selected items..."); *)
 					Else 
-						APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("definitionPageLB.openProjectionAllItem"; "Open a projection with all items..."); *)  //XLIFF OK
+						APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("definitionPageLB.openProjectionAllItem"; "Open a projection with all items..."); *)
 					End if 
 					SET MENU ITEM ICON:C984($menu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/projection-24x24.png")
 					SET MENU ITEM PARAMETER:C1004($menu; -1; "--openAProjection")
 					
 				: ($action.predefinedType="export")
 					If (Form:C1466["selected_"+$ident+"_items"].length>0)
-						APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("definitionPageLB.exportSelectedItem"; "Export the selected items..."); *)  //XLIFF OK
+						APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("definitionPageLB.exportSelectedItem"; "Export the selected items..."); *)
 					Else 
-						APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("definitionPageLB.exportAll"; "Export all items..."); *)  //XLIFF OK
+						APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("definitionPageLB.exportAll"; "Export all items..."); *)
 					End if 
 					SET MENU ITEM ICON:C984($menu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/outside-24x24.png")
 					SET MENU ITEM PARAMETER:C1004($menu; -1; "--export")
 					
 				: ($action.predefinedType="selectAll")
-					APPEND MENU ITEM:C411($menu; "Select all items..."; *)  //XLIFF 
+					APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("pagelistbox.select.selectall"); *)
 					SET MENU ITEM ICON:C984($menu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/action-24x24.png")
 					SET MENU ITEM PARAMETER:C1004($menu; -1; "--selectAll")
 					If (Form:C1466["selected_"+$ident+"_items"].length=Form:C1466[$ident].length)
@@ -327,7 +327,7 @@ Function _bAction()
 					End if 
 					
 				: ($action.predefinedType="unselectAll")
-					APPEND MENU ITEM:C411($menu; "Unselect all items..."; *)  //XLIFF 
+					APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("pagelistbox.select.unselectall"); *)
 					SET MENU ITEM ICON:C984($menu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/action-24x24.png")
 					SET MENU ITEM PARAMETER:C1004($menu; -1; "--unselectAll")
 					If (Form:C1466["selected_"+$ident+"_items"].length=0)
@@ -375,7 +375,7 @@ Function _bAction()
 				$formData.sfw.vision:=cs:C1710.sfw_definition.me.getVisionByIdent($action.visionIdent)
 				$formData.sfw.entry:=cs:C1710.sfw_definition.me.getEntryByIdent($action.entryIdent)
 				$formData.projection:=New object:C1471
-				$formData.projection.label:="<- "+Form:C1466.sfw.entry.label  //XLIFF
+				$formData.projection.label:="<- "+Form:C1466.sfw.entry.label  // XLIFF
 				If (Form:C1466["selected_"+$ident+"_items"].length>0)
 					$formData.projection.entitiesSelection:=Form:C1466["selected_"+$ident+"_items"]
 				Else 

@@ -1,11 +1,20 @@
+property hpup_menus : Collection
+
 singleton Class constructor
 	//It's a singleton class
 	
 Function formMethod()
 	Case of 
 		: (FORM Event:C1606.code=On Resize:K2:27)
-			Form:C1466.resizingAsked:=1
-			SET TIMER:C645(20)
+			Case of 
+				: (FORM Get current page:C276(*)=1)
+					Form:C1466.resizingAsked:=1
+					SET TIMER:C645(20)
+				: (FORM Get current page:C276(*)=2)
+					This:C1470.resizeObjectsPagePermissions()
+				: (FORM Get current page:C276(*)=3)
+					This:C1470.resizeObjectsPage3()
+			End case 
 			
 		: (FORM Event:C1606.code=On Timer:K2:25) && (Num:C11(Form:C1466.resizingAsked)>0)
 			This:C1470.resizeObjects()
@@ -17,6 +26,7 @@ Function formMethod()
 			Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 			If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 				This:C1470.drawPup_documentFolder()
+				
 			End if 
 			If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 				Case of 
@@ -43,8 +53,11 @@ Function formMethod()
 						End if 
 						This:C1470.redraw_all()
 					: (FORM Get current page:C276(*)=2)
-						//This.loadProfils()
-						//This.loadEntries()
+						This:C1470.buildHLPermissions()
+						
+					: (FORM Get current page:C276(*)=3)
+						This:C1470.resizeObjectsPage3()
+						
 				End case 
 			End if 
 			If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())  //It's time to resize the object or set visible
@@ -56,8 +69,13 @@ Function formMethod()
 	End case 
 	
 Function redrawAndSetVisible()
-	//Adjusts the layout and visibility of form elements based on the current page and modification state
+	This:C1470.resizeObjectsPagePermissions()
+	This:C1470.resizeObjectsPage3()
+	
 	This:C1470.drawPup_documentFolder()
+	
+	
+	
 	
 Function resizeObjects()
 	SET TIMER:C645(0)
@@ -108,6 +126,15 @@ Function resizeObjects()
 	End case 
 	Form:C1466.resizingAsked+=1
 	
+	
+	
+Function resizeObjectsPage3()
+	$margin:=10
+	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubForm; $heightSubForm)
+	OBJECT GET COORDINATES:C663(*; "entryField_documentNameFormula"; $g; $h; $d; $b)
+	OBJECT SET COORDINATES:C1248(*; "entryField_documentNameFormula"; $g; $h; $widthSubForm-$margin; $b)
+	OBJECT GET COORDINATES:C663(*; "entryField_documentPrecalculationMethod"; $g; $h; $d; $b)
+	OBJECT SET COORDINATES:C1248(*; "entryField_documentPrecalculationMethod"; $g; $h; $widthSubForm-$margin; $heightSubForm-$margin)
 	
 	
 Function redraw_all()
@@ -234,7 +261,7 @@ Function redraw_lb_lines($linePosition : Integer)
 						break
 					End if 
 				: ($line.kind="pageBreak")
-					$item.name:="Page break"  //XLIFF
+					$item.name:=ds:C1482.sfw_readXliff("dfdTemplate.panel.pagebreak")
 					$item.pict:=Form:C1466.picts.pageBreak
 					$line.typology:=""
 					
@@ -1077,7 +1104,9 @@ Function typology_get_iconPath_byCode($typology : Text)->$path : Text
 	
 Function typology_get_name_byCode($code : Text)->$name : Text
 	var $indices : Collection
-	
+	If (Form:C1466.typologies=Null:C1517)
+		This:C1470.load_typologies()
+	End if 
 	$indices:=Form:C1466.typologies.indices("code = :1"; $code)
 	If ($indices.length>0)
 		$name:=Form:C1466.typologies[$indices[0]].label
@@ -1445,7 +1474,7 @@ Function lb_lines()
 			End for each 
 			
 			Case of 
-				: ($choose="--delete") & (Form:C1466.line.line.UUID_entity#Null:C1517)
+				: ($choose="--delete") && (Form:C1466.line.line.UUID_entity#Null:C1517)
 					$uuid:=Form:C1466.line.line.UUID_entity
 					$indices:=Form:C1466.current_item.hierarchy.lines.indices("UUID_entity = :1"; $uuid)
 					If ($indices.length>0)
@@ -1840,7 +1869,7 @@ Function bAddLine()
 	End if 
 	
 	
-	
+	//Mark:-Pup_DocumentFolder
 Function drawPup_documentFolder()
 	
 	If (Form:C1466.current_item#Null:C1517)
@@ -1848,48 +1877,24 @@ Function drawPup_documentFolder()
 		Form:C1466.sfw.drawButtonPup("pup_documentFolder"; $documentFolderName; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.documentFolder=Null:C1517))
 	End if 
 	
+	
+	
 Function pup_documentFolder()
 	If (Form:C1466.sfw.checkIsInModification())
-		$menu:=Create menu:C408
 		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.documentFolder=Null:C1517)
 			ds:C1482.sfw_DocumentFolder.cacheLoad()
 		End if 
 		
-		$folderParents:=Storage:C1525.cache.documentFolder.query("UUID_ParentFolder = :1"; (16*"00"))
+		This:C1470.hpup_menus:=New collection:C1472
+		$menu:=This:C1470._hpup_documentFolder()
 		
-		For each ($documentFolder; $folderParents)
-			$refSubMenu:=Create menu:C408
-			//$refMenus.push($refSubMenu)
-			
-			$folders:=Storage:C1525.cache.documentFolder.query("UUID_ParentFolder = :1"; $documentFolder.UUID)
-			If ($folders.length>0)
-				For each ($folder; $folders)
-					APPEND MENU ITEM:C411($refSubMenu; $folder.ident+" - "+$folder.name; *)
-					SET MENU ITEM PARAMETER:C1004($refSubMenu; -1; $folder.UUID)
-					If ($folder.UUID=Form:C1466.current_item.UUID_DocumentFolder)
-						SET MENU ITEM MARK:C208($refSubMenu; -1; Char:C90(18))
-					End if 
-				End for each 
-				APPEND MENU ITEM:C411($menu; $documentFolder.name; $refSubMenu; *)
-				SET MENU ITEM PARAMETER:C1004($menu; -1; $documentFolder.UUID)
-				If ($documentFolder.UUID=Form:C1466.current_item.UUID_DocumentFolder)
-					SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
-				End if 
-			Else 
-				APPEND MENU ITEM:C411($menu; $documentFolder.ident+" - "+$documentFolder.name; *)
-				SET MENU ITEM PARAMETER:C1004($menu; -1; $documentFolder.UUID)
-				If ($documentFolder.UUID=Form:C1466.current_item.UUID_DocumentFolder)
-					SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
-				End if 
-			End if 
-		End for each 
 		$choose:=Dynamic pop up menu:C1006($menu)
-		RELEASE MENU:C978($menu)
-		
+		For each ($menu; This:C1470.hpup_menus)
+			RELEASE MENU:C978($menu)
+		End for each 
 		
 		Case of 
 			: ($choose="")
-				
 			Else 
 				$eDocumentFolder:=ds:C1482.sfw_DocumentFolder.get($choose)
 				Form:C1466.current_item.UUID_DocumentFolder:=$eDocumentFolder.UUID
@@ -1897,5 +1902,221 @@ Function pup_documentFolder()
 	End if 
 	
 	This:C1470.drawPup_documentFolder()
+	
+Function _hpup_documentFolder($uuid_parent : Text)->$menu : Text
+	var $parentFolder : Object
+	var $parentFolders : Collection
+	
+	If (Count parameters:C259=0)
+		$parentFolders:=Storage:C1525.cache.documentFolder.query("UUID_ParentFolder = :1"; (16*"00"))
+	Else 
+		$parentFolders:=Storage:C1525.cache.documentFolder.query("UUID_ParentFolder = :1 order by name"; $uuid_parent)
+	End if 
+	If ($parentFolders.length=0)
+		$menu:=""
+	Else 
+		$menu:=Create menu:C408
+		This:C1470.hpup_menus.push($menu)
+		For each ($parentFolder; $parentFolders)
+			$subMenu:=This:C1470._hpup_documentFolder($parentFolder.UUID)
+			If ($subMenu="")
+				APPEND MENU ITEM:C411($menu; $parentFolder.name; *)
+			Else 
+				APPEND MENU ITEM:C411($menu; $parentFolder.name; $subMenu; *)
+			End if 
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $parentFolder.UUID)
+			If ($parentFolder.UUID=Form:C1466.current_item.UUID_DocumentFolder)
+				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+			End if 
+		End for each 
+	End if 
+	
+	
+	
+	// Object methode
+	
+	
+	//mark:-permissions
+	
+	
+Function resizeObjectsPagePermissions()
+	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubForm; $heightSubForm)
+	$margin:=3
+	OBJECT GET COORDINATES:C663(*; "bAction_permissions"; $btg; $bth; $btd; $btb)
+	$btHeight:=$btb-$bth
+	$btWidth:=$btd-$btg
+	OBJECT GET COORDINATES:C663(*; "permissions_bkgd"; $g; $h; $d; $b)
+	
+	OBJECT SET COORDINATES:C1248(*; "permissions_bkgd"; -1; $h; $d; $heightSubForm+1)
+	OBJECT SET COORDINATES:C1248(*; "bAction_permissions"; $margin; $heightSubForm-$btHeight-($margin*1); $margin+$btWidth; $heightSubForm-($margin*1))
+	OBJECT SET COORDINATES:C1248(*; "hl_permissions"; 0; $h; $d-1; $heightSubForm-$btHeight-($margin*2))
+	OBJECT SET COORDINATES:C1248(*; "hl_bkgd"; 0; $h; $d-1; $heightSubForm-$btHeight-($margin*2))
+	
+	
+Function buildHLPermissions()
+	var $eProfile : cs:C1710.sfw_UserProfileEntity
+	var $esProfiles : cs:C1710.sfw_UserProfileSelection
+	
+	If (Form:C1466.hl_permissions#Null:C1517) && (Is a list:C621(Form:C1466.hl_permissions))
+		CLEAR LIST:C377(Form:C1466.hl_permissions; *)
+	End if 
+	Form:C1466.hl_permissions:=New list:C375
+	$refInList:=0
+	$identProfiles:=Form:C1466.current_item.moreData.allowedProfiles || New collection:C1472
+	$esProfiles:=ds:C1482.sfw_UserProfile.query("ident in :1 order by name"; $identProfiles)
+	If ($esProfiles.length>0)
+		$subList:=New list:C375
+		For each ($eProfile; $esProfiles)
+			$refInList+=1
+			APPEND TO LIST:C376($subList; $eProfile.name; $refInList)
+			SET LIST ITEM PARAMETER:C986($subList; $refInList; "profilIdent"; $eProfile.ident)
+		End for each 
+		$refInList+=1
+		APPEND TO LIST:C376(Form:C1466.hl_permissions; ds:C1482.sfw_readXliff("dfdTemplate.panel.profiles"); $refInList; $subList; True:C214)
+		SET LIST ITEM PROPERTIES:C386(Form:C1466.hl_permissions; $refInList; False:C215; Bold:K14:2)
+		SET LIST ITEM PARAMETER:C986(Form:C1466.hl_permissions; $refInList; Additional text:K28:7; String:C10($esProfiles.length))
+		
+	End if 
+	
+	$entries:=New collection:C1472()
+	If (Form:C1466.current_item.moreData.allowedEntries#Null:C1517)
+		$entries:=cs:C1710.sfw_definition.me.entries.query("ident in :1"; Form:C1466.current_item.moreData.allowedEntries || New collection:C1472).extract("ident"; "ident"; "label"; "label").orderBy("label")
+	End if 
+	If ($entries.length>0)
+		$subList:=New list:C375
+		For each ($entry; $entries)
+			$refInList+=1
+			APPEND TO LIST:C376($subList; $entry.label; $refInList)
+			SET LIST ITEM PARAMETER:C986($subList; $refInList; "entryIdent"; $entry.ident)
+		End for each 
+		$refInList+=1
+		APPEND TO LIST:C376(Form:C1466.hl_permissions; ds:C1482.sfw_readXliff("dfdTemplate.panel.entries"); $refInList; $subList; True:C214)
+		SET LIST ITEM PROPERTIES:C386(Form:C1466.hl_permissions; $refInList; False:C215; Bold:K14:2)
+		SET LIST ITEM PARAMETER:C986(Form:C1466.hl_permissions; $refInList; Additional text:K28:7; String:C10($entries.length))
+	End if 
+	
+	
+Function bAction_permissions()
+	
+	GET LIST ITEM:C378(Form:C1466.hl_permissions; *; $itemRef; $itemText)
+	$profilIdent:=""
+	$entryIdent:=""
+	If ($itemRef#0)
+		GET LIST ITEM PARAMETER:C985(Form:C1466.hl_permissions; $itemRef; "profilIdent"; $profilIdent)
+		GET LIST ITEM PARAMETER:C985(Form:C1466.hl_permissions; $itemRef; "entryIdent"; $entryIdent)
+	End if 
+	$menus:=New collection:C1472()
+	$menu:=Create menu:C408
+	$menus.push($menu)
+	
+	If (Form:C1466.sfw.checkIsInModification())
+		$subMenuProfiles:=Create menu:C408
+		$menus.push($subMenuProfiles)
+		$profiles:=ds:C1482.sfw_UserProfile.query("not(ident in :1) order by name"; Form:C1466.current_item.moreData.allowedProfiles || New collection:C1472)
+		For each ($profil; $profiles)
+			APPEND MENU ITEM:C411($subMenuProfiles; $profil.name; *)
+			SET MENU ITEM PARAMETER:C1004($subMenuProfiles; -1; "Profil:"+$profil.ident)
+		End for each 
+		If ($profiles.length#0)
+			APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("dfdTemplate.panel.addpr"); $subMenuProfiles; *)
+		Else 
+			APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("dfdTemplate.panel.addpr"); *)
+			DISABLE MENU ITEM:C150($menu; -1)
+		End if 
+	Else 
+		APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("dfdTemplate.panel.addpr"); *)
+		DISABLE MENU ITEM:C150($menu; -1)
+	End if 
+	
+	If (Form:C1466.sfw.checkIsInModification())
+		$subMenuEntries:=Create menu:C408
+		$menus.push($subMenuEntries)
+		$entries:=cs:C1710.sfw_definition.me.entries
+		$colEntries:=New collection:C1472()
+		For each ($entry; $entries)
+			$e:=$colEntries.query("ident = :1"; $entry.ident)
+			If ($e.length=0)
+				$colEntries.push({ident: $entry.ident; label: $entry.label})
+			End if 
+		End for each 
+		$colEntries:=$colEntries.orderBy("label")
+		
+		For each ($entry; $colEntries)
+			APPEND MENU ITEM:C411($subMenuEntries; $entry.label; *)
+			SET MENU ITEM PARAMETER:C1004($subMenuEntries; -1; "Entry:"+$entry.ident)
+		End for each 
+		If ($colEntries.length#0)
+			APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("dfdTemplate.panel.adde"); $subMenuEntries; *)
+		Else 
+			APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("dfdTemplate.panel.adde"); *)
+			DISABLE MENU ITEM:C150($menu; -1)
+		End if 
+	Else 
+		APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("dfdTemplate.panel.adde"); *)
+		DISABLE MENU ITEM:C150($menu; -1)
+	End if 
+	
+	APPEND MENU ITEM:C411($menu; "-")
+	APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("dfdTemplate.panel.delete"); *)
+	SET MENU ITEM PARAMETER:C1004($menu; -1; "Delete")
+	If (Form:C1466.sfw.checkIsInModification()) && (($profilIdent#"") || ($entryIdent#""))
+	Else 
+		DISABLE MENU ITEM:C150($menu; -1)
+	End if 
+	
+	$choose:=Dynamic pop up menu:C1006($menu)
+	For each ($menu; $menus)
+		RELEASE MENU:C978($menu)
+	End for each 
+	
+	Case of 
+		: ($choose)="Profil:@"
+			$profilIdent:=Split string:C1554($choose; ":").pop()
+			If (Form:C1466.current_item.moreData.allowedProfiles=Null:C1517)
+				Form:C1466.current_item.moreData.allowedProfiles:=New collection:C1472()
+			End if 
+			Form:C1466.current_item.moreData.allowedProfiles.push($profilIdent)
+			Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+			This:C1470.buildHLPermissions()
+			
+		: ($choose)="Entry:@"
+			$entryIdent:=Split string:C1554($choose; ":").pop()
+			
+			If (Form:C1466.current_item.moreData.allowedEntries=Null:C1517)
+				Form:C1466.current_item.moreData.allowedEntries:=New collection:C1472()
+			End if 
+			
+			Form:C1466.current_item.moreData.allowedEntries.push($entryIdent)
+			Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+			This:C1470.buildHLPermissions()
+			
+			
+		: ($choose="Delete") && ($profilIdent#"")
+			
+			$index:=Form:C1466.current_item.moreData.allowedProfiles.indexOf($profilIdent)
+			If ($index>=0)
+				Form:C1466.current_item.moreData.allowedProfiles.remove($index)
+			End if 
+			Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+			This:C1470.buildHLPermissions()
+			
+		: ($choose="Delete") && ($entryIdent#"")
+			
+			$index:=Form:C1466.current_item.moreData.allowedEntries.indexOf($entryIdent)
+			If ($index>=0)
+				Form:C1466.current_item.moreData.allowedEntries.remove($index)
+			End if 
+			Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+			This:C1470.buildHLPermissions()
+			
+	End case 
+	
+Function hl_permissions
+	
+	Case of 
+		: (FORM Event:C1606.code=On Clicked:K2:4) && ((Right click:C712) || (Contextual click:C713))
+			This:C1470.bAction_permissions()
+			
+	End case 
 	
 	

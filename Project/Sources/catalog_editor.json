@@ -701,6 +701,21 @@
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
+		"Document": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 891,
+				"top": 74,
+				"width": 186,
+				"height": 346.33203125
+			},
+			"displayable_fields_count": 14
+		},
 		"dfd_Line": {
 			"color": {
 				"red": 158,
@@ -759,7 +774,7 @@
 				"name": {
 					"position": 5
 				},
-				"generationDate": {
+				"stmp": {
 					"position": 4
 				},
 				"UUID_User": {
@@ -1009,7 +1024,36 @@
 				"height": 239.99870300293
 			},
 			"displayable_fields_count": 9,
-			"fields_ordering": 1
+			"fields_ordering": 5,
+			"fields": {
+				"UUID_DocumentModel": {
+					"position": 2
+				},
+				"moreData": {
+					"position": 1
+				},
+				"stmp": {
+					"position": 7
+				},
+				"extension": {
+					"position": 4
+				},
+				"name": {
+					"position": 6
+				},
+				"UUID_User": {
+					"position": 3
+				},
+				"UUID_target": {
+					"position": 9
+				},
+				"UUID_DocumentFolder": {
+					"position": 5
+				},
+				"UUID": {
+					"position": 8
+				}
+			}
 		},
 		"CustomerCarrier": {
 			"color": {
@@ -1189,22 +1233,6 @@
 		}
 	},
 	"relations": {
-		"D002CD0C5DB41D4596506CF5BDCE45E7": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"60B3B4640AA9F3428C6C8AF0B96C1D02": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
 		"955286728075C248B78E5075BB881DB4": {
 			"color": {
 				"red": 240,

@@ -1,5 +1,7 @@
 property storedParameters : Object
 property globalParametersClassName : Text
+property dfd : Object
+property userVision : Object
 
 shared singleton Class constructor
 	This:C1470.globalParametersClassName:=Storage:C1525.definitionClass.globalParametersName

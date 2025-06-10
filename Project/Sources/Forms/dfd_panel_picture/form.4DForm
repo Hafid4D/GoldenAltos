@@ -40,7 +40,7 @@
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Name"
+					"text": ":xliff:documentFolder.form.name"
 				},
 				"entryField_name": {
 					"type": "input",

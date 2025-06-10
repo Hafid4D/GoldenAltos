@@ -1,5 +1,3 @@
-var $staff : cs:C1710.StaffEntity
-
 Case of 
 	: (FORM Event:C1606.code=On Clicked:K2:4)
 		
@@ -10,10 +8,9 @@ Case of
 			$ok:=cs:C1710.sfw_dialog.me.confirm($message)
 			If ($ok)
 				SET TEXT TO PASTEBOARD:C523($password)
-				
 			End if 
-			
 			Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
 		End if 
 		
 End case 
+

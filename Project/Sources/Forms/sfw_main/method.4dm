@@ -49,6 +49,7 @@ Case of
 		OBJECT GET COORDINATES:C663(*; "bkgd_bottomBar"; $gbottombar; $hbottombar; $dbottombar; $bbottombar)
 		OBJECT SET COORDINATES:C1248(*; "detail_panel"; $dvspliter; $btopbar; $form_width; $hbottombar)
 		
+		
 	: (FORM Event:C1606.code=On Close Box:K2:21)
 		
 		If ($framework.nothingToSave())
@@ -89,6 +90,9 @@ Case of
 		Else 
 			cs:C1710.sfw_eventManager.me.hide()
 		End if 
+		
+		
+		
 		
 End case 
 

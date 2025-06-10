@@ -42,7 +42,7 @@
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Name"
+					"text": ":xliff:documentFolder.form.name"
 				},
 				"entryField_name": {
 					"type": "input",
@@ -127,7 +127,7 @@
 						"onClick"
 					],
 					"style": "bevel",
-					"icon": "/RESOURCES/image/icon/document-vertical.png",
+					"icon": "/RESOURCES/dfd/image/icon/document-vertical.png",
 					"iconFrames": 1,
 					"focusable": false,
 					"radioGroup": "bOrientation",
@@ -146,7 +146,7 @@
 						"onClick"
 					],
 					"style": "bevel",
-					"icon": "/RESOURCES/image/icon/document-horizontal.png",
+					"icon": "/RESOURCES/dfd/image/icon/document-horizontal.png",
 					"iconFrames": 1,
 					"focusable": false,
 					"radioGroup": "bOrientation",
@@ -307,7 +307,7 @@
 						"onClick"
 					],
 					"style": "bevel",
-					"icon": "/RESOURCES/image/icon/ruler.png",
+					"icon": "/RESOURCES/dfd/image/icon/ruler.png",
 					"focusable": false,
 					"dataSource": "Form:C1466.rulers",
 					"method": "ObjectMethods/bRuler.4dm",
@@ -502,7 +502,7 @@
 						"onClick"
 					],
 					"style": "bevel",
-					"icon": "/RESOURCES/image/icon/document-pdf.png",
+					"icon": "/RESOURCES/dfd/image/icon/document-pdf.png",
 					"sizingY": "fixed",
 					"focusable": false,
 					"sizingX": "move",
