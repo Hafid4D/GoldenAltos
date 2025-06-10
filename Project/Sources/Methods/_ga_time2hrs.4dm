@@ -27,7 +27,7 @@ Case of
 		
 		$0:=$hrs+$mins
 	Else 
-		$StartDT:=_setDateTimeStamp($1; $2)
-		$StopDT:=_setDateTimeStamp($3; $4)
+		$StartDT:=_ga_setDateTimeStamp($1; $2)
+		$StopDT:=_ga_setDateTimeStamp($3; $4)
 		$0:=Round:C94(($StopDT-$StartDT)/3600; 4)
 End case 

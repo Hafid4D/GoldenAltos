@@ -175,8 +175,8 @@
 				"entryField_engg": {
 					"type": "checkbox",
 					"text": "Engineering Use Only (NPU)",
-					"top": 39,
-					"left": 708,
+					"top": 12,
+					"left": 918,
 					"width": 190,
 					"height": 17,
 					"events": [
@@ -263,8 +263,8 @@
 				"entryField_down": {
 					"type": "checkbox",
 					"text": "Down",
-					"top": 66,
-					"left": 708,
+					"top": 39,
+					"left": 918,
 					"width": 190,
 					"height": 17,
 					"events": [
@@ -274,144 +274,103 @@
 					"fontWeight": "bold",
 					"dataSourceTypeHint": "boolean"
 				},
-				"pup_startDate": {
-					"type": "button",
-					"top": 11,
-					"left": 1113,
-					"width": 127,
-					"height": 23,
-					"fontFamily": "System Font Regular",
-					"fontSize": 12,
-					"focusable": false,
-					"text": "--start--",
-					"style": "regular",
-					"events": [
-						"onClick"
-					],
-					"textPlacement": "left",
-					"textAlign": "center",
-					"method": "ObjectMethods/pup_startDate.4dm"
-				},
-				"Oval": {
-					"type": "oval",
-					"top": 13,
-					"left": 1079,
-					"width": 19,
-					"height": 19,
-					"strokeWidth": 3,
-					"stroke": "#6495ed",
-					"fill": "transparent"
-				},
-				"Oval1": {
-					"type": "oval",
-					"top": 65,
-					"left": 1079,
-					"width": 19,
-					"height": 19,
-					"strokeWidth": 3,
-					"stroke": "#6495ed",
-					"fill": "transparent"
-				},
-				"Line": {
-					"type": "line",
-					"top": 29,
-					"left": 1087,
-					"width": 0,
-					"height": 39,
-					"strokeWidth": 3,
-					"stroke": "#6495ed"
-				},
-				"pup_endDate": {
-					"type": "button",
-					"top": 63,
-					"left": 1113,
-					"width": 127,
-					"height": 23,
-					"fontFamily": "System Font Regular",
-					"fontSize": 12,
-					"focusable": false,
-					"text": "--end--",
-					"popupPlacement": "linked",
-					"style": "regular",
-					"events": [
-						"onClick"
-					],
-					"textPlacement": "left",
-					"textAlign": "center",
-					"method": "ObjectMethods/pup_endDate.4dm"
-				},
-				"label_0_10": {
+				"label_manufacturer": {
 					"type": "text",
-					"top": 14,
-					"left": 984,
+					"top": 39,
+					"left": 613,
 					"width": 90,
-					"height": 16,
+					"height": 17,
 					"stroke": "#808080",
-					"text": "Start Date"
+					"text": "Manufacturer :"
 				},
-				"label_0_11": {
-					"type": "text",
-					"top": 40,
-					"left": 984,
-					"width": 90,
-					"height": 16,
-					"stroke": "#808080",
-					"text": "Interval"
+				"entryField_manufacturer": {
+					"type": "input",
+					"top": 39,
+					"left": 708,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.manufacturer",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left"
 				},
-				"label_0_12": {
+				"label_testerType": {
 					"type": "text",
 					"top": 66,
-					"left": 984,
+					"left": 613,
 					"width": 90,
-					"height": 16,
+					"height": 17,
 					"stroke": "#808080",
-					"text": "End Date"
+					"text": "Tester type :"
 				},
-				"pup_interval": {
+				"entryField_testerType": {
 					"type": "input",
-					"left": 1136,
+					"top": 66,
+					"left": 708,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.testerType",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left"
+				},
+				"entryField_calibrationNotRequired": {
+					"type": "checkbox",
+					"text": "Calibration Not Required",
+					"top": 66,
+					"left": 918,
+					"width": 190,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.current_item.calibrationNotRequired",
+					"fontWeight": "bold",
+					"dataSourceTypeHint": "boolean"
+				},
+				"entryField_notAtSite": {
+					"type": "checkbox",
+					"text": "Not at site",
+					"top": 12,
+					"left": 1128,
+					"width": 190,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.current_item.notAtSite",
+					"fontWeight": "bold",
+					"dataSourceTypeHint": "boolean"
+				},
+				"entryField_pmNotRequired": {
+					"type": "checkbox",
+					"text": "PM Not Required",
 					"top": 39,
-					"width": 81,
-					"height": 18,
-					"dataSourceTypeHint": "integer",
-					"dataSource": "Form:C1466.interval",
-					"right": 1217,
-					"events": [
-						"onDataChange",
-						"onAfterKeystroke"
-					],
-					"multiline": "no",
-					"entryFilter": "&9",
-					"textAlign": "center",
-					"method": "ObjectMethods/pup_interval.4dm"
-				},
-				"intervalPlus": {
-					"type": "button",
-					"text": "+",
-					"top": 36,
-					"left": 1217,
-					"width": 23,
-					"height": 23,
+					"left": 1128,
+					"width": 190,
+					"height": 17,
 					"events": [
 						"onClick"
 					],
+					"dataSource": "Form:C1466.current_item.pmNotRequired",
 					"fontWeight": "bold",
-					"fontSize": 12,
-					"method": "ObjectMethods/intervalPlus.4dm"
-				},
-				"intervalMinus": {
-					"type": "button",
-					"text": "-",
-					"top": 36,
-					"left": 1113,
-					"width": 23,
-					"height": 23,
-					"events": [
-						"onClick"
-					],
-					"fontWeight": "bold",
-					"fontSize": 12,
-					"method": "ObjectMethods/intervalMinus.4dm"
+					"dataSourceTypeHint": "boolean"
 				}
 			}
 		},
@@ -422,7 +381,7 @@
 					"top": 114,
 					"left": 0,
 					"width": 2192,
-					"height": 677,
+					"height": 700,
 					"sizingX": "grow",
 					"fill": "#E4E4E4",
 					"stroke": "transparent"
@@ -448,7 +407,7 @@
 				},
 				"shipping_bkgd1": {
 					"type": "rectangle",
-					"top": 428,
+					"top": 332,
 					"left": 0,
 					"width": 480,
 					"height": 30,
@@ -459,7 +418,7 @@
 				"Text2": {
 					"type": "text",
 					"text": "PM data",
-					"top": 435,
+					"top": 339,
 					"left": 8,
 					"width": 119,
 					"height": 16,
@@ -492,11 +451,12 @@
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"textAlign": "left",
-					"dataSourceTypeHint": "date"
+					"dataSourceTypeHint": "date",
+					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
 				},
 				"label_pmDueDate": {
 					"type": "text",
-					"top": 473,
+					"top": 377,
 					"left": 8,
 					"width": 110,
 					"height": 17,
@@ -521,7 +481,8 @@
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"textAlign": "left",
-					"dataSourceTypeHint": "date"
+					"dataSourceTypeHint": "date",
+					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
 				},
 				"label_calDue": {
 					"type": "text",
@@ -534,7 +495,7 @@
 				},
 				"entryField_nextPMDate": {
 					"type": "input",
-					"top": 478,
+					"top": 382,
 					"left": 145,
 					"width": 190,
 					"height": 17,
@@ -550,11 +511,12 @@
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"textAlign": "left",
-					"dataSourceTypeHint": "date"
+					"dataSourceTypeHint": "date",
+					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
 				},
 				"label_lastPMDate": {
 					"type": "text",
-					"top": 505,
+					"top": 409,
 					"left": 8,
 					"width": 110,
 					"height": 17,
@@ -563,7 +525,7 @@
 				},
 				"entryField_lastPMDate": {
 					"type": "input",
-					"top": 510,
+					"top": 414,
 					"left": 145,
 					"width": 190,
 					"height": 17,
@@ -579,7 +541,8 @@
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"textAlign": "left",
-					"dataSourceTypeHint": "date"
+					"dataSourceTypeHint": "date",
+					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
 				},
 				"label_calInDays": {
 					"type": "text",
@@ -641,7 +604,7 @@
 				},
 				"label_calInDays1": {
 					"type": "text",
-					"top": 574,
+					"top": 478,
 					"left": 8,
 					"width": 110,
 					"height": 17,
@@ -650,7 +613,7 @@
 				},
 				"entryField_pmInterval": {
 					"type": "input",
-					"top": 574,
+					"top": 478,
 					"left": 145,
 					"width": 190,
 					"height": 17,
@@ -670,7 +633,7 @@
 				},
 				"entryField_pmTech": {
 					"type": "input",
-					"top": 542,
+					"top": 446,
 					"left": 145,
 					"width": 190,
 					"height": 17,
@@ -690,12 +653,126 @@
 				},
 				"label_calBy1": {
 					"type": "text",
-					"top": 542,
+					"top": 446,
 					"left": 8,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "PM by : "
+				},
+				"label_calDocument": {
+					"type": "text",
+					"top": 289,
+					"left": 8,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Cal Document : "
+				},
+				"entryField_calDocument": {
+					"type": "input",
+					"top": 289,
+					"left": 145,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.calDocument",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"dataSourceTypeHint": "date"
+				},
+				"label_calDocument1": {
+					"type": "text",
+					"top": 510,
+					"left": 8,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "PM Document : "
+				},
+				"entryField_pmDocument1": {
+					"type": "input",
+					"top": 510,
+					"left": 145,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.pmDocument",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"dataSourceTypeHint": "date"
+				},
+				"label_calDocument2": {
+					"type": "text",
+					"top": 289,
+					"left": 8,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Cal Document : "
+				},
+				"entryField_calDocument1": {
+					"type": "input",
+					"top": 289,
+					"left": 145,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.calDocument",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"dataSourceTypeHint": "date"
+				},
+				"shipping_bkgd2": {
+					"type": "rectangle",
+					"top": 552,
+					"left": 0,
+					"width": 480,
+					"height": 30,
+					"sizingX": "grow",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"Text3": {
+					"type": "text",
+					"text": "Status history",
+					"top": 559,
+					"left": 8,
+					"width": 119,
+					"height": 16,
+					"fontWeight": "bold"
+				},
+				"statusHistory": {
+					"type": "text",
+					"text": "",
+					"top": 611,
+					"left": 19,
+					"width": 451,
+					"height": 120
 				}
 			}
 		},
@@ -787,12 +864,144 @@
 							"dataSourceTypeHint": "date"
 						}
 					]
+				},
+				"bActionRepairLog": {
+					"type": "button",
+					"text": "Actions",
+					"top": 137,
+					"left": 12,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionRepairLog.4dm",
+					"visibility": "visible"
+				}
+			}
+		},
+		{
+			"objects": {
+				"lb_documents": {
+					"type": "listbox",
+					"left": 132,
+					"top": 114,
+					"width": 1443,
+					"height": 700,
+					"events": [
+						"onClick",
+						"onDataChange",
+						"onSelectionChange",
+						"onHeaderClick",
+						"onBeginDragOver"
+					],
+					"listboxType": "collection",
+					"currentItemPositionSource": "Form:C1466.selectedDocumentPos",
+					"currentItemSource": "Form:C1466.selectedDocument",
+					"dataSource": "Form:C1466.lb_documents",
+					"method": "",
+					"selectionMode": "single",
+					"resizingMode": "rightToLeft",
+					"alternateFill": "#E6E6E6",
+					"horizontalLineStroke": "transparent",
+					"borderStyle": "none",
+					"verticalLineStroke": "transparent",
+					"headerHeight": "2em",
+					"right": 1575,
+					"scrollbarHorizontal": "automatic",
+					"hideFocusRing": false,
+					"columns": [
+						{
+							"header": {
+								"text": "Code",
+								"name": "Header1",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column1",
+							"footer": {
+								"name": "Footer1"
+							},
+							"dataSource": "This:C1470.code",
+							"width": 59
+						},
+						{
+							"header": {
+								"name": "Header2",
+								"text": "Source Path",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column2",
+							"footer": {
+								"name": "Footer2"
+							},
+							"dataSource": "This:C1470.sourcePath",
+							"dataSourceTypeHint": "text",
+							"width": 198,
+							"truncateMode": "withEllipsis",
+							"wordwrap": "none"
+						},
+						{
+							"header": {
+								"name": "Header3",
+								"text": "Date and Time of filling",
+								"fontWeight": "bold",
+								"textAlign": "right"
+							},
+							"name": "Column3",
+							"footer": {
+								"name": "Footer3"
+							},
+							"dataSource": "This:C1470.creationDateTime",
+							"width": 153,
+							"truncateMode": "withEllipsis",
+							"wordwrap": "none",
+							"textAlign": "right"
+						},
+						{
+							"header": {
+								"name": "Header4",
+								"text": "Doc Description",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column4",
+							"footer": {
+								"name": "Footer4"
+							},
+							"dataSource": "This:C1470.description",
+							"dataSourceTypeHint": "text",
+							"width": 224
+						}
+					]
+				},
+				"bActionDocument": {
+					"type": "button",
+					"text": "Actions",
+					"top": 137,
+					"left": 12,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionDocument.4dm",
+					"visibility": "visible"
 				}
 			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 417,
+	"geometryStamp": 501,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

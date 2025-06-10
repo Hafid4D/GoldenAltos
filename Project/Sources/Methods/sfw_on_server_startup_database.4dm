@@ -6,7 +6,9 @@ Use (Storage:C1525)
 	If (Count parameters:C259>1)
 		Storage:C1525.definitionClass.globalParametersName:=$globalParametersClassName
 	Else 
-		Storage:C1525.definitionClass.globalParametersName:=$definitionClassName+"_globalParameters"
+		Use (Storage:C1525.definitionClass)
+			Storage:C1525.definitionClass.globalParametersName:=$definitionClassName+"_globalParameters"
+		End use 
 	End if 
 	
 End use 

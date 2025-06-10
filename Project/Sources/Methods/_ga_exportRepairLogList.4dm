@@ -1,12 +1,11 @@
 //%attributes = {}
 
 /*
-Method Name : _ga_exportEquipmentList
+Method Name : _ga_exportRepairLogList
 Author : Medard /4D PS
 Date : 03-June-2025
-Purpose : This method export the items on Equipment View List to an .xls document
+Purpose : This method export the items on repair Log  View List to an .xls document
 */
-
 
 var $eSetting : cs:C1710.sfw_SettingEntity
 var $identEntry : Text:=Form:C1466.sfw.entry.ident
@@ -15,7 +14,7 @@ var $entity : 4D:C1709.Entity
 var $info : Object
 var $wpBlob : 4D:C1709.Blob
 var $wpEncodedBlob : Text
-var $equipments : cs:C1710.EquipmentSelection
+var $logs : cs:C1710.RepairLogSelection
 var $OK; $allFields; $continue : Boolean
 var $headers; $relevantFields : Collection
 var $header; $separator_col; $separator_line : Text
@@ -39,16 +38,17 @@ Case of
 		
 End case 
 
+
 If ($continue)
 	$headers:=New collection:C1472()
-	$relevantFields:=New collection:C1472("division"; "assignedID"; "model"; "description"; "type"; "nextCalDate"; "nextPMDate"; "calTech"; "pmTech"; "location")
+	$relevantFields:=New collection:C1472("systemID"; "reportID"; "problem"; "fix"; "downHrs")
 	$separator_col:=Char:C90(Tab:K15:37)
 	$separator_line:=Char:C90(Carriage return:K15:38)
 	
 	SUSPEND TRANSACTION:C1385
 	
 	If ($identView="main")
-		$identView:="allEquipments"
+		$identView:="allProblems"
 	End if 
 	
 	$file:=Create document:C266(""; "xls")
@@ -57,12 +57,12 @@ If ($continue)
 	$export.records:=New collection:C1472
 	
 	$dataclass:=Form:C1466.sfw.entry.dataclass
-	If ($identView="allEquipments")
-		$equipments:=ds:C1482[$dataclass].all()
+	If ($identView="allProblems")
+		$logs:=ds:C1482[$dataclass].all()
 	Else 
-		$equipments:=ds:C1482[$dataclass][$identView]()
+		$logs:=ds:C1482[$dataclass][$identView]()
 	End if 
-	For each ($entity; $equipments)
+	For each ($entity; $logs)
 		$oEntity:=New object:C1471
 		For each ($attribute; ds:C1482[$dataclass])
 			If (ds:C1482[$dataclass][$attribute].fieldType=Is object:K8:27) && ($entity[$attribute]#Null:C1517) && (String:C10($entity[$attribute].title)="4D Write Pro New Document")
@@ -78,16 +78,13 @@ If ($continue)
 		
 	End for each 
 	
-	$equipment_es:=$export.records
+	$log_es:=$export.records
 	
-	If ($equipment_es.length>0)
-		OB GET PROPERTY NAMES:C1232($equipment_es[0]; $headerNames; $arrTypes)
+	If ($log_es.length>0)
+		OB GET PROPERTY NAMES:C1232($log_es[0]; $headerNames; $arrTypes)
 		ARRAY TO COLLECTION:C1563($headers; $headerNames)
 		
-		$headers:=$headers.remove($headers.indexOf("repairLogs"))
-		$headers[$headers.indexOf("locationID")]:="location"
-		$headers[$headers.indexOf("UUID_ToolType")]:="type"
-		$headers[$headers.indexOf("divisionID")]:="division"
+		$headers:=$headers.remove($headers.indexOf("equipment"))
 		If (Not:C34($allFields))
 			$headers:=$relevantFields.filter(Formula:C1597($relevantFields.indexOf($1.value)#-1))
 		End if 
@@ -105,27 +102,11 @@ If ($continue)
 	
 	If ($OK)
 		
-		For each ($equipment_e; $equipment_es)
-			
+		For each ($log_e; $log_es)
+			$line:=""
 			For each ($headerName; $headers)
 				
-				Case of 
-						
-					: ($headerName="location")
-						$location:=ds:C1482.EquipmentLocation.query("locationID=:1"; $equipment_e["locationID"]).first()
-						SEND PACKET:C103($file; Replace string:C233(String:C10($location.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
-					: ($headerName="type")
-						$type:=ds:C1482.ToolType.query("UUID=:1"; $equipment_e["UUID_ToolType"]).first()
-						SEND PACKET:C103($file; Replace string:C233(String:C10($type.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
-						
-					: ($headerName="division")
-						$division:=ds:C1482.Division.query("divisionID=:1"; $equipment_e["divisionID"]).first()
-						SEND PACKET:C103($file; Replace string:C233(String:C10($division.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
-						
-					Else 
-						SEND PACKET:C103($file; Replace string:C233(String:C10($equipment_e[$headerName]); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
-						
-				End case 
+				SEND PACKET:C103($file; Replace string:C233(String:C10($log_e[$headerName]); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
 				
 			End for each 
 			
@@ -151,4 +132,3 @@ If ($continue)
 	End if 
 	
 End if 
-

@@ -2,7 +2,7 @@
 var $eEquipment : cs:C1710.EquipmentEntity
 var $eEquipmentLocation : cs:C1710.EquipmentLocationEntity
 var $eDivision : cs:C1710.DivisionEntity
-var $eRepair : cs:C1710.Repair_LogEntity
+var $eRepair : cs:C1710.RepairLogEntity
 
 var $locations; $types; $divisions : Collection
 
@@ -18,6 +18,7 @@ If ($equipment_Log.exists)
 	TRUNCATE TABLE:C1051([Equipment:13])
 	TRUNCATE TABLE:C1051([EquipmentLocation:19])
 	TRUNCATE TABLE:C1051([Division:20])
+	TRUNCATE TABLE:C1051([Document:25])
 	
 	//----> [Division]
 	For ($i; 0; $divisions.length-1)
@@ -38,6 +39,18 @@ If ($equipment_Log.exists)
 		//$eEquipmentLocation.color:="#FFFFFF"
 		$eEquipmentLocation.save()
 	End for 
+	
+	
+	$docs:=Folder:C1567(fk data folder:K87:12).file("DataJson/docServerIndex_export.json")
+	$count:=0
+	If ($docs.exists)
+		
+		
+		$documents:=JSON Parse:C1218($docs.getText())
+		
+		
+	End if 
+	
 	
 	For each ($equipment; $equipments)
 		
@@ -90,21 +103,61 @@ If ($equipment_Log.exists)
 		$eEquipment.manufacturer:=$equipment.Manufacturer
 		//$eEquipment.equipmentConfig:=$equipment.EquipmentConfig
 		$eEquipment.statusHistory:=$equipment.Status_History
+		If ($equipment.Status_History#"")
+			
+		End if 
 		$eEquipment.down:=$equipment.Down
 		$eEquipment.calInProgress:=$equipment.Cal_inprocess
 		$eEquipment.calInterval:=$equipment.CalInterval
 		$eEquipment.pmInterval:=$equipment.PMInterval
 		$eEquipment.calDocument:=$equipment.CalDocument
 		$eEquipment.pmDocument:=$equipment.PMDocument
+		$eEquipment.pmNotRequired:=$equipment.PMnotRequired
 		
+		$_documents:=$documents.query("PrimaryKeyValue=:1 & TableNumber=:2"; String:C10($equipment.UniqueID); 10)
 		
+		///*
+		$eEquipment.reports:=New object:C1471()
+		$eEquipment.reports.documents:=New collection:C1472()
 		
+		For each ($document; $_documents)
+			$doc:=New object:C1471
+			
+			//$doc.tableNumber:=Table(->[Equipment])
+			//$doc.foreignKey:=$eEquipment.UUID
+			$doc.code:=$document.DocCode
+			$doc.dateTimeStamp:=$document.DateTimeStamp
+			$doc.creationDateTimeStamp:=$document.CreationDateTimeStamp
+			$doc.documentPath:=$document.DocumentPath
+			$doc.sourcePath:=$document.SourcePath
+			$doc.tempCounter:=$document.TempCounter
+			$doc.rawText:=$document.RawText
+			$doc.description:=$document.DocDescription
+			
+			$report:=Folder:C1567(fk data folder:K87:12).file("DataJson/EquipmentReports/"+String:C10($document.UniqueID+$document.PrimaryKeyValue))
+			If ($report.exists)
+				
+				C_BLOB:C604($blob)
+				DOCUMENT TO BLOB:C525($report.platformPath; $blob)
+				
+				$doc.blob:=$blob
+				
+			End if 
+			
+			$eEquipment.reports.documents.push($doc)
+		End for each 
+		
+		//*/
 		
 		$res:=$eEquipment.save()
 		If (Not:C34($res.success))
 			TRACE:C157
 		End if 
 		
+		
+		//If ($_documents.length>0)
+		//__import_data_docServerIndex($eEquipment.UUID; $_documents; Table(->[Equipment]))
+		//End if 
 		
 	End for each 
 	
@@ -116,16 +169,18 @@ $repair_Log_file:=Folder:C1567(fk data folder:K87:12).file("DataJson/repair_log_
 
 If ($repair_Log_file.exists)
 	$repair_log:=JSON Parse:C1218($repair_Log_file.getText())
-	TRUNCATE TABLE:C1051([Repair_Log:21])
+	TRUNCATE TABLE:C1051([RepairLog:21])
 	
 	
 	
 	For each ($repair; $repair_log)
 		
-		$eRepair:=ds:C1482.Repair_Log.new()
+		$eRepair:=ds:C1482.RepairLog.new()
 		
 		$eRepair.systemID:=$repair.Sys_ID
+		$eRepair.reportedBy:=$repair.Rep_by
 		$eRepair.fixedBy:=$repair.Fixed_by
+		$eRepair.reportedBy:=$repair.Rep_by
 		$eRepair.dateFixed:=$repair.Date_fixed
 		$eRepair.reportDate:=$repair.Rep_date
 		$eRepair.status:=$repair.E_status
@@ -134,6 +189,9 @@ If ($repair_Log_file.exists)
 		$eRepair.fix:=$repair.Fix
 		$eRepair.downHrs:=$repair.Down_hrs
 		$eRepair.downAt:=$repair.Down_at
+		$eRepair.upAt:=$repair.Up_at
+		$eRepair.dateUp:=$repair.Date_fixed
+		
 		
 		$res:=$eRepair.save()
 		If (Not:C34($res.success))

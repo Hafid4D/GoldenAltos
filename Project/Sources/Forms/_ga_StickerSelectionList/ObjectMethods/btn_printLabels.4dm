@@ -9,15 +9,15 @@ Case of
 		
 	: (Form event code:C388=On Clicked:K2:4)
 		
-		//SET PRINT PREVIEW(True)
-		
 		var $wpDoc : Object
 		
-		If (True:C214)
+		If (Form:C1466.lb_currentEquipment#Null:C1517)
 			//No template used Generate the sticker by code
 			var $equipmentSelection : cs:C1710.EquipmentSelection
 			
 			$wpDoc:=WP New:C1317()
+			
+			SET PRINT OPTION:C733(Orientation option:K47:2; 1)
 			
 			$equipmentSelection:=Form:C1466.lb_selectedEquipments
 			
@@ -69,10 +69,8 @@ Case of
 				$table:=WP New:C1317()
 				$table:=WP Insert table:C1473($range; wk append:K81:179)
 				
-				// insert header
-				$row:=WP Table append row:C1474($table; "ERP ID"; $equipmentSelection[$i].assignedID)
-				
 				//insert rows
+				$row:=WP Table append row:C1474($table; "ERP ID"; $equipmentSelection[$i].assignedID)
 				$row:=WP Table append row:C1474($table; "Model"; $equipmentSelection[$i].model)
 				$row:=WP Table append row:C1474($table; "Serial #"; $equipmentSelection[$i].serialNumber)
 				$row:=WP Table append row:C1474($table; "Last cal date"; String:C10($equipmentSelection[$i].lastCalDate)+" by "+String:C10($equipmentSelection[$i].calTech))
@@ -97,74 +95,79 @@ Case of
 		Else 
 			
 			//Old WAY USING THE TEMPLATE
-			var $context; $options : Object
-			var $targetObj; $_wpDoc : Object
-			$wpDoc:=WP New:C1317()
-			$_wpDoc:=WP New:C1317()
-			$context:=New object:C1471()
-			$options:=New object:C1471()
-			var $nbrBegin; $nbrToEvaluate; $nbrOfPages : Integer
+/*
+var $context; $options : Object
+var $targetObj; $_wpDoc : Object
+$wpDoc:=WP New()
+$_wpDoc:=WP New()
+$context:=New object()
+$options:=New object()
+var $nbrBegin; $nbrToEvaluate; $nbrOfPages : Integer
 			
-			$file:=Folder:C1567(fk resources folder:K87:11).file("4DWriteProPrintTemplates/equipmentSticker.4wp")
+$file:=Folder(fk resources folder).file("4DWriteProPrintTemplates/equipmentSticker.4wp")
 			
-			//$options.anchoredTextAreas:="inline"
+//$options.anchoredTextAreas:="inline"
 			
-			$template:=WP Import document:C1318($file.platformPath)  //; $options)
+$template:=WP Import document($file.platformPath)  //; $options)
 			
-			$context:=Form:C1466.lb_selectedEquipments
+$context:=Form.lb_selectedEquipments
 			
-			$nbrEquipments:=$context.length
+$nbrEquipments:=$context.length
 			
-			$nbrOfPages:=$nbrEquipments\21
-			If ($nbrEquipments%21>0)
-				$nbrOfPages:=$nbrOfPages+1
-			End if 
+$nbrOfPages:=$nbrEquipments/21
+If ($nbrEquipments%21>0)
+$nbrOfPages:=$nbrOfPages+1
+End if 
 			
-			OPEN PRINTING JOB:C995
+OPEN PRINTING JOB
 			
-			For ($k; 1; $nbrOfPages)
-				
-				$template:=WP Import document:C1318($file.platformPath)  //; $options)
-				
-				If ($k=$nbrOfPages)
-					If ($nbrEquipments%21>0)
-						$nbrToEvaluate:=($nbrEquipments%21)
-					End if 
-				Else 
-					$nbrToEvaluate:=21
-				End if 
-				If ($k=1)
-					$nbrBegin:=0
-					$end:=21
-				Else 
-					$nbrBegin:=$end
-					$end:=$end+21
-				End if 
-				
-				$_context:=$context.slice($nbrBegin; $end)
-				WP SET DATA CONTEXT:C1786($template; $_context)
-				
-				
-				For ($i; $nbrToEvaluate; 20)
-					
-					$textbox:=WP Get elements:C1550($template; wk type text box:K81:372)[$i]
-					WP SET TEXT:C1574($textbox; ""; wk replace:K81:177)
-					
-				End for 
-				
-				WP PRINT:C1343($template)
-				
-			End for 
+For ($k; 1; $nbrOfPages)
 			
-			CLOSE PRINTING JOB:C996
+$template:=WP Import document($file.platformPath)  //; $options)
 			
-			//WP COMPUTE FORMULAS($template)
-			//WP FREEZE FORMULAS($template; wk do not recompute expressions)
+If ($k=$nbrOfPages)
+If ($nbrEquipments%21>0)
+$nbrToEvaluate:=($nbrEquipments%21)
+End if 
+Else 
+$nbrToEvaluate:=21
+End if 
+If ($k=1)
+$nbrBegin:=0
+$end:=21
+Else 
+$nbrBegin:=$end
+$end:=$end+21
+End if 
 			
-			//WP INSERT DOCUMENT($wpDoc; $template; wk append)
+$_context:=$context.slice($nbrBegin; $end)
+WP SET DATA CONTEXT($template; $_context)
 			
-			//PRINT SETTINGS(2)
-			//WP PRINT($wpDoc)
+			
+For ($i; $nbrToEvaluate; 20)
+			
+$textbox:=WP Get elements($template; wk type text box)[$i]
+WP SET TEXT($textbox; ""; wk replace)
+			
+End for 
+			
+WP PRINT($template)
+			
+End for 
+			
+CLOSE PRINTING JOB
+			
+//WP COMPUTE FORMULAS($template)
+//WP FREEZE FORMULAS($template; wk do not recompute expressions)
+			
+//WP INSERT DOCUMENT($wpDoc; $template; wk append)
+			
+//PRINT SETTINGS(2)
+//WP PRINT($wpDoc)
+			
+*/
+			cs:C1710.sfw_dialog.me.info(ds:C1482.sfw_readXliff("Info"; "Select equipments for stickers printing"))
+			
 		End if 
 		
 End case 

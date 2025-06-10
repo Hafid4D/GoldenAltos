@@ -1,5 +1,5 @@
 {
-    "tableDataSource": "ds.Repair_Log.query(\"systemID =:1\"; Form.current_item.assignedID).orderBy(\"systemID asc\")",
+    "tableDataSource": "ds.RepairLog.query(\"systemID =:1\"; Form.current_item.assignedID).orderBy(\"systemID asc\")",
     "columns": [{
             "check": true,
             "header": "Problem",

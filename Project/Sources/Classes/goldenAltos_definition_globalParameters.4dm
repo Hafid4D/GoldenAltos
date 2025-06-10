@@ -41,10 +41,10 @@ Function _global_parameters()
 	
 	This:C1470.notifications:=New object:C1471("activate"; True:C214)
 	
-	
-	This:C1470.documentsStorageOnServer:=New object:C1471
-	This:C1470.documentsStorageOnServer.folder:=Folder:C1567(Folder:C1567(fk data folder:K87:12).platformPath; fk platform path:K87:2).parent.folder("DocumentData")
-	
+	If (Application type:C494#4D Remote mode:K5:5)
+		This:C1470.documentsStorageOnServer:=New object:C1471
+		This:C1470.documentsStorageOnServer.folder:=Folder:C1567(Folder:C1567(fk data folder:K87:12).platformPath; fk platform path:K87:2).parent.folder("DocumentData")
+	End if 
 	//mark:- Dynamic document 
 	
 	//mark: vision

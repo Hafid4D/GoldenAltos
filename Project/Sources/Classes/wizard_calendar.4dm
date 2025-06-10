@@ -8,8 +8,10 @@ Function formMethod()
 	Case of 
 		: (FORM Event:C1606.code=On Load:K2:1)
 			
-			This:C1470.calendar_init()
+			Form:C1466.calendar:=New object:C1471
+			Form:C1466.calendar.display:=New object:C1471
 			Form:C1466.calendar.display.date:=Form:C1466.date
+			This:C1470.calendar_init()
 			
 		: (FORM Event:C1606.code=On Clicked:K2:4)
 			$objectName:=FORM Event:C1606.objectName

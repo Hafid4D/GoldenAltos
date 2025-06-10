@@ -19,6 +19,11 @@
             <method>sfw_macro_panelClass("<method_path/>")</method>
         </text>
     </macro>
+    <macro name="Add entry definition" in_menu="true" type_ahead="false" version="2">
+        <text>
+            <method>sfw_macro_entryDefinition("<method_path/>")</method>
+        </text>
+    </macro>
     <macro name="Entry definition " in_menu="true" type_ahead="true" version="2">
         <text>
         local Function entryDefinition()->$entry : cs.sfw_definitionEntry
@@ -95,5 +100,15 @@ $entry.enableEvent()
 	End case 
         </text>
     </macro>
-
+    <macro name="Variadic parameters" in_menu="true" type_ahead="true" version="2">
+        <text>
+	For ($p; 3; Count parameters)
+		$params:=Split string(${$p}; ":")
+		$selector:=$params.shift()
+		Case of 
+			: ($selector="")
+		End case 
+	End for 
+         </text>
+    </macro>
 </macros>

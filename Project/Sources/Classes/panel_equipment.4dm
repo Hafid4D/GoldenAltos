@@ -4,23 +4,15 @@ singleton Class constructor
 Function _activate_save_cancel_button()
 	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
 	
+	
 Function formMethod()
 	//This function manages the main logic for updating and refreshing the form
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
-		
-		If (Form:C1466.startDate=Null:C1517)
-			Form:C1466.startDate:=Current date:C33()
+		If (Form:C1466.current_item#Null:C1517)
+			OBJECT SET TITLE:C194(*; "statusHistory"; String:C10(Form:C1466.current_item.statusHistory))
 		End if 
-		If (Form:C1466.endDate=Null:C1517)
-			Form:C1466.endDate:=Current date:C33()
-		End if 
-		If (Undefined:C82(Form:C1466.interval))
-			Form:C1466.interval:="0"
-		End if 
-		
 		This:C1470.LoadAllTabs()
-		This:C1470.calendar_init()
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
@@ -30,14 +22,14 @@ Function formMethod()
 			: (FORM Get current page:C276(*)=2)
 				This:C1470.loadRepairLog()
 				
+			: (FORM Get current page:C276(*)=3)
+				This:C1470.loadDocuments()
 				
 		End case 
 	End if 
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())  //It's time to resize the object or set visible
 		This:C1470.redrawAndSetVisible()
 	End if 
-	
-	
 	
 	
 Function drawPup_XXX()
@@ -48,20 +40,21 @@ Function drawPup_XXX()
 Function pup_XXX()
 	//Create pop up menu
 	
-	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	This:C1470.drawPup_EquipmentType()
 	This:C1470.drawPup_EquipmentLocation()
 	This:C1470.drawPup_Division()
+	If (Form:C1466.current_item#Null:C1517)
+		OBJECT SET TITLE:C194(*; "statusHistory"; String:C10(Form:C1466.current_item.statusHistory))
+	End if 
 	
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="Repair Log ("+String:C10(Form:C1466.lb_repairLog.length)+")"
+		Form:C1466.sfw.entry.panel.pages[2].label:="Attached Reports ("+String:C10(Form:C1466.lb_documents.length)+")"
 		
 	End use 
 	Form:C1466.sfw.drawHTab()
-	OBJECT SET TITLE:C194(*; "pup_endDate"; String:C10(Form:C1466.endDate))
-	OBJECT SET TITLE:C194(*; "pup_startDate"; String:C10(Form:C1466.startDate))
 	
 	
 Function drawPup_EquipmentType()
@@ -198,153 +191,103 @@ Function loadRepairLog()
 		
 		//Form.lb_repairLog:=New collection()
 		
-		Form:C1466.lb_repairLog:=ds:C1482.Repair_Log.query("systemID =:1"; Form:C1466.current_item.assignedID).orderBy("systemID desc")
+		Form:C1466.lb_repairLog:=ds:C1482.RepairLog.query("systemID =:1"; Form:C1466.current_item.assignedID).orderBy("systemID desc")
 		
 		
 	End if 
+	
+	
+Function loadDocuments()
+	
+	If (Form:C1466.current_item#Null:C1517)
+		
+		Form:C1466.lb_documents:=Form:C1466.current_item.reports.documents.map(Formula:C1597(_ga_getDateTime))
+		
+		//Form.lb_documents:=ds.Document.query("foreignKey=:1 & tableNumber=:2"; Form.current_item.UUID; Table(->[Equipment])).orderBy("code desc").toCollection().map(Formula(_ga_getDateTime)
+	End if 
+	
 	
 	
 Function LoadAllTabs()
 	
 	This:C1470.loadRepairLog()
+	This:C1470.loadDocuments()
 	
 	
-	
-	//Mark:-Calendar
-	
-	
-Function displayDate()
-	Form:C1466.calendar.display.year:=Year of:C25(Form:C1466.calendar.display.date)
-	Form:C1466.calendar.display.month:=Month of:C24(Form:C1466.calendar.display.date)
-	Form:C1466.calendar.display.day:=Day of:C23(Form:C1466.calendar.display.date)
-	Form:C1466.planificationRanges:=Null:C1517
-	//This.calendar_drawing()
-	//This.pup_start_init()
-	//This.pup_duration_init()
-	//This.pup_end_init()
-	//This.alerteTiming()
-	
-	//If (FORM Get current page=3)
-	//This.pup_meetings_init_p3()
-	//End if 
-	
-	
-Function calendar_init()
-	
-	If (Form:C1466.months=Null:C1517)
-		Form:C1466.months:=Split string:C1554(ds:C1482.sfw_readXliff("dateAndTime.months"; "January;Febuary;March;April;May;June;July;August;September;October;November;December"); ";")
-		Form:C1466.days:=Split string:C1554(ds:C1482.sfw_readXliff("dateAndTime.days"; "Sunday;Monday;Tuesday;Wednesday;Thursday;Friday;Saturday"); ";")
+Function linkOpenLot($entity : 4D:C1709.Entity; $visionIdent : Text; $entryIdent : Text)
+	If ($entity#Null:C1517)
+		
+		$formData:=New object:C1471()
+		$formData.sfw:=cs:C1710.sfw_item.new()
+		$formData.window:=New object:C1471
+		GET WINDOW RECT:C443($left; $top; $right; $bottom)
+		$formData.window.left:=$left+50
+		$formData.window.top:=$top+50
+		$formData.sfw.vision:=cs:C1710.sfw_definition.me.visions.query("ident = :1"; $visionIdent).first()
+		$formData.sfw.entry:=cs:C1710.sfw_definition.me.entries.query("ident = :1"; $entryIdent).first()
+		$formData.current_item:=$entity
+		$formData.sfw.openForm($formData)
+		
 	End if 
 	
+Function bActionRepairLog()
 	
-Function bPreviousMonth()
-	Form:C1466.calendar.display.date:=Add to date:C393(Form:C1466.calendar.display.date; 0; -1; 0)
-	This:C1470.displayDate()
+	$refMenu:=Create menu:C408
+	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openInWindow")
+	If (Form:C1466.selectedRepaiLog=Null:C1517) | (Undefined:C82(Form:C1466.selectedRepaiLog))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
 	
-Function bNextMonth()
-	Form:C1466.calendar.display.date:=Add to date:C393(Form:C1466.calendar.display.date; 0; 1; 0)
-	This:C1470.displayDate()
-	
-Function bToday()
-	Form:C1466.calendar.display.date:=Current date:C33
-	This:C1470.displayDate()
-	
-Function pup_displayYear()
-	$refmenus:=New collection:C1472()
-	$menu:=Create menu:C408
-	$refmenus.push($menu)
-	$yearToday:=Year of:C25(Current date:C33)
-	For ($year; $yearToday-10; $yearToday)
-		APPEND MENU ITEM:C411($menu; String:C10($year))
-		$ref:=String:C10($year)
-		SET MENU ITEM PARAMETER:C1004($menu; -1; $ref)
-	End for 
-	
-	
-	$ref:=Dynamic pop up menu:C1006($menu)
-	
-	For each ($menu; $refmenus)
-		RELEASE MENU:C978($menu)
-	End for each 
-	
+	$choice:=Dynamic pop up menu:C1006($refMenu)
+	RELEASE MENU:C978($refMenu)
 	Case of 
-		: ($ref="")
-		: ($ref#"")
-			//Form.calendar.display.year:=Num($ref)
-			Form:C1466.calendar.display.date:=Add to date:C393(!00-00-00!; Form:C1466.calendar.display.year; Form:C1466.calendar.display.month; Form:C1466.calendar.display.day)
-			//This.displayDate()
+		: ($choice="openInWindow")
+			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.repairLogs.query("UUID=:1"; Form:C1466.selectedRepaiLog.UUID).first(); "qualityAssistance"; "repairLog")
 	End case 
 	
 	
-Function pup_displayMonth()
-	$refmenus:=New collection:C1472()
-	$menu:=Create menu:C408
-	$refmenus.push($menu)
-	$m:=0
-	For each ($month; Form:C1466.months)
-		$m:=$m+1
-		APPEND MENU ITEM:C411($menu; $month; *)
-		$ref:=String:C10($m; "00")
-		SET MENU ITEM PARAMETER:C1004($menu; -1; $ref)
-		If ($m%3=0)
-			APPEND MENU ITEM:C411($menu; "-")
-		End if 
-	End for each 
 	
+Function bActionDocument()
 	
-	$ref:=Dynamic pop up menu:C1006($menu)
+	$refMenu:=Create menu:C408
+	APPEND MENU ITEM:C411($refMenu; "View report"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--view")
+	If (Form:C1466.selectedDocument=Null:C1517) | (Undefined:C82(Form:C1466.selectedDocument))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
 	
-	For each ($menu; $refmenus)
-		RELEASE MENU:C978($menu)
-	End for each 
+	APPEND MENU ITEM:C411($refMenu; "add report"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--add")
+	If (sfw_checkIsInModification=False:C215)
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
 	
+	APPEND MENU ITEM:C411($refMenu; "delete report"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")
+	If ((sfw_checkIsInModification=False:C215) & ((Form:C1466.selectedDocument=Null:C1517) | (Undefined:C82(Form:C1466.selectedDocument))))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	$choice:=Dynamic pop up menu:C1006($refMenu)
+	RELEASE MENU:C978($refMenu)
 	Case of 
-		: ($ref="")
-		: ($ref#"")
-			//Form.calendar.display.month:=Num($ref)
-			//Form.calendar.display.date:=Add to date(!00-00-00!; Form.calendar.display.year; Form.calendar.display.month; Form.calendar.display.day)
-			//This.displayDate()
+		: ($choice="--view")
+			
+			$LocalFile:=Temporary folder:C486+Folder separator:K24:12+Form:C1466.selectedDocument.sourcePath
+			BLOB TO DOCUMENT:C526($LocalFile; Form:C1466.selectedDocument.blob)
+			OPEN URL:C673($LocalFile; *)
+			
+		: ($choice="--add")
+			
+			
+			
+		: ($choice="--delete")
+			
+			
+			
+			
 	End case 
-	
-	
-Function drawPup_days()
-	If (Form:C1466.current_item#Null:C1517)
-		$days:=New collection:C1472("1"; "2"; "3"; "4"; "5"; "6"; "7"; "8"; "9"; "10"; "11"; "12"; "13"; "14"; "15"; "16"; "17"; "18"; "19"; "20"; "21"; "22"; "23"; "24"; "25"; "26"; "27"; "28"; "29"; "30"; "31")
-		$typeName:=$days
-		If ($typeName=Null:C1517)
-			$typeName:=""
-		End if 
-		$color:=""
-		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
-		Form:C1466.sfw.drawButtonPup("Pup_displayDay"; $typeName; $pathIcon; ($days=Null:C1517))
-	End if 
-	
-	
-Function pup_days()
-	//Create pop up menu
-	If (Form:C1466.sfw.checkIsInModification())
-		$menu:=Create menu:C408
-		For each ($days; ds:C1482.ToolType.all())  // Storage.cache.equipmentTypes)
-			APPEND MENU ITEM:C411($menu; $equipmentType.name; *)
-			SET MENU ITEM PARAMETER:C1004($menu; -1; $equipmentType.UUID)
-			If ($equipmentType.UUID=Form:C1466.current_item.UUID_ToolType)
-				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
-				If (Is Windows:C1573)
-					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
-				End if 
-			End if 
-		End for each 
-		$choose:=Dynamic pop up menu:C1006($menu)
-		RELEASE MENU:C978($menu)
-		
-		Case of 
-			: ($choose#"")
-				$equipmentType:=ds:C1482.ToolType.get($choose)
-				Form:C1466.current_item.UUID_ToolType:=$equipmentType.UUID
-		End case 
-		
-	End if 
-	This:C1470.drawPup_days()
 	
 	
 	
