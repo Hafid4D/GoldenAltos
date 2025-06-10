@@ -189,10 +189,7 @@ Function loadRepairLog()
 	
 	If (Form:C1466.current_item#Null:C1517)
 		
-		//Form.lb_repairLog:=New collection()
-		
 		Form:C1466.lb_repairLog:=ds:C1482.RepairLog.query("systemID =:1"; Form:C1466.current_item.assignedID).orderBy("systemID desc")
-		
 		
 	End if 
 	
@@ -251,21 +248,27 @@ Function bActionDocument()
 	
 	$refMenu:=Create menu:C408
 	APPEND MENU ITEM:C411($refMenu; "View report"; *)
-	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--view")
+	SET MENU ITEM PARAMETER:C1004($refMenu; 1; "--view")
 	If (Form:C1466.selectedDocument=Null:C1517) | (Undefined:C82(Form:C1466.selectedDocument))
-		DISABLE MENU ITEM:C150($refMenu; -1)
+		DISABLE MENU ITEM:C150($refMenu; 1)
 	End if 
 	
 	APPEND MENU ITEM:C411($refMenu; "add report"; *)
-	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--add")
+	SET MENU ITEM PARAMETER:C1004($refMenu; 2; "--add")
 	If (sfw_checkIsInModification=False:C215)
-		DISABLE MENU ITEM:C150($refMenu; -1)
+		DISABLE MENU ITEM:C150($refMenu; 2)
+	End if 
+	
+	APPEND MENU ITEM:C411($refMenu; "modify report"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; 3; "--modify")
+	If (sfw_checkIsInModification=False:C215) | (Form:C1466.selectedDocument=Null:C1517) | Undefined:C82(Form:C1466.selectedDocument)
+		DISABLE MENU ITEM:C150($refMenu; 3)
 	End if 
 	
 	APPEND MENU ITEM:C411($refMenu; "delete report"; *)
-	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")
-	If ((sfw_checkIsInModification=False:C215) & ((Form:C1466.selectedDocument=Null:C1517) | (Undefined:C82(Form:C1466.selectedDocument))))
-		DISABLE MENU ITEM:C150($refMenu; -1)
+	SET MENU ITEM PARAMETER:C1004($refMenu; 4; "--delete")
+	If (sfw_checkIsInModification=False:C215) | (Form:C1466.selectedDocument=Null:C1517) | Undefined:C82(Form:C1466.selectedDocument)
+		DISABLE MENU ITEM:C150($refMenu; 4)
 	End if 
 	
 	$choice:=Dynamic pop up menu:C1006($refMenu)
@@ -279,7 +282,22 @@ Function bActionDocument()
 			
 		: ($choice="--add")
 			
+		: ($choice="--modify")
 			
+			$form:=New object:C1471
+			
+			$form:=Form:C1466.selectedDocument
+			
+			$winRef:=Open form window:C675("_ga_Document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("_ga_Document"; $form)
+			
+			Form:C1466.selectedDocument.code:=$form.values.code
+			Form:C1466.selectedDocument.documentPath:=$form.values.documentPath
+			Form:C1466.selectedDocument.sourcePath:=$form.values.sourcePath
+			Form:C1466.selectedDocument.description:=$form.values.description
+			Form:C1466.selectedDocument.approvalDate:=$form.values.approvalDate
+			Form:C1466.selectedDocument.approvedBy:=$form.values.approvedBy
+			Form:C1466.selectedDocument.isApproved:=$form.values.isApproved
 			
 		: ($choice="--delete")
 			
