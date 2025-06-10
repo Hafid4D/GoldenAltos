@@ -337,18 +337,6 @@
 		</field>
 		<primary_key field_name="UUID" field_uuid="3E04CFF5D515BF48A62EAC677ABD1B96"/>
 	</table>
-	<table name="Team" uuid="7B297BB3C8DBDA42B6756D36DC233D8B" id="136">
-		<field name="UUID" uuid="2407878C5D46474F9669463CE4A10D45" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="id" uuid="38C4DA5CA6FC7341BBEEABE68E6A01FA" type="4" never_null="true" id="2"/>
-		<field name="name" uuid="9911EF98C0E7C941827A98923504109D" type="10" limiting_length="255" never_null="true" id="3"/>
-		<primary_key field_name="UUID" field_uuid="2407878C5D46474F9669463CE4A10D45"/>
-	</table>
-	<table name="Membership" uuid="89B8693B8BA31D46A5E7CC5F40548E73" id="137">
-		<field name="UUID" uuid="57B2843F4E0D9844849760E738191BA9" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="UUID_Staff" uuid="0CA34F14FEE5FF429B1A694BD2DD1C6B" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="2"/>
-		<field name="UUID_Team" uuid="378FB0F2EB71F243BA08605B15A340E4" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="3"/>
-		<primary_key field_name="UUID" field_uuid="57B2843F4E0D9844849760E738191BA9"/>
-	</table>
 	<table name="sfw_Setting" uuid="05967663C56F44398D96379354ABCC89" id="30">
 		<field name="UUID" uuid="5D20BF5E221E4AB5AA75260DDD551A9D" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="ident" uuid="ABB06A103E7F45F4B9EA7F1C434C5A17" type="10" limiting_length="255" never_null="true" id="2"/>
@@ -805,6 +793,18 @@
 		<field name="contactDetails" uuid="DFFE835335868749B15EECAADA389EB4" type="21" blob_switch_size="2147483647" never_null="true" id="16"/>
 		<primary_key field_name="UUID" field_uuid="6941AB4C41898A4A9FBF25D5AC27CA2B"/>
 		<table_extra output_form="print_list"/>
+	</table>
+	<table name="Team" uuid="7B297BB3C8DBDA42B6756D36DC233D8B" id="136">
+		<field name="UUID" uuid="2407878C5D46474F9669463CE4A10D45" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="id" uuid="38C4DA5CA6FC7341BBEEABE68E6A01FA" type="4" never_null="true" id="2"/>
+		<field name="name" uuid="9911EF98C0E7C941827A98923504109D" type="10" limiting_length="255" never_null="true" id="3"/>
+		<primary_key field_name="UUID" field_uuid="2407878C5D46474F9669463CE4A10D45"/>
+	</table>
+	<table name="Membership" uuid="89B8693B8BA31D46A5E7CC5F40548E73" id="137">
+		<field name="UUID" uuid="57B2843F4E0D9844849760E738191BA9" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="UUID_Staff" uuid="0CA34F14FEE5FF429B1A694BD2DD1C6B" type="10" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="UUID_Team" uuid="378FB0F2EB71F243BA08605B15A340E4" type="10" store_as_UUID="true" never_null="true" id="3"/>
+		<primary_key field_name="UUID" field_uuid="57B2843F4E0D9844849760E738191BA9"/>
 	</table>
 	<relation uuid="28F035FB298D4CB6988212AA82A48186" name_Nto1="user" name_1toN="comments" state="1">
 		<related_field kind="source">
@@ -1448,11 +1448,6 @@
 	<index kind="regular" uuid="2F43555942CD426DA98581247C28392E" type="3">
 		<field_ref uuid="252F726A4DA54A89B97834C4A86C2301" name="UUID_Quote">
 			<table_ref uuid="348628FCA4DC451085D7519B226BD509" name="QuoteLine"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="32540A729083A744A4F649A96CDCFFA1" type="1">
-		<field_ref uuid="EA4BF9CC573745C5BF902F88DA00BD6E" name="UUID">
-			<table_ref uuid="F74C797683A840F69C35777C0FF641E7" name="Assumption"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="40A9EAD691134D62B6DCAA9836F141F0" type="3">
