@@ -1,4 +1,6 @@
 property info : Object
+property authorizations : Object
+property authorizedProfiles : Collection
 
 shared singleton Class constructor
 	

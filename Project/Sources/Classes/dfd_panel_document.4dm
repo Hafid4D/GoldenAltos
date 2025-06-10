@@ -355,20 +355,22 @@ Function redraw_preview($context : Object; $destination : Text; $page : Integer)
 	If (Count parameters:C259=0)
 		$context:=Form:C1466
 	End if 
-	If (Count parameters:C259<1)
+	If (Count parameters:C259<2)
 		$destination:="--subform"
 	End if 
-	If (Count parameters:C259<2)
+	If (Count parameters:C259<3)
 		$page:=($context.ddPage.index#Null:C1517) ? $context.ddPage.index+1 : 1
 	End if 
 	
-	If (Form:C1466.current_item#Null:C1517)
+	If (Form:C1466.current_item#Null:C1517) && ($context.document=Null:C1517)
 		$context.document:=Form:C1466.current_item
 	End if 
 	
 	$continue:=True:C214
 	
 	//MARK:-print settings
+	$context.document.moreData:=$context.document.moreData || New object:C1471
+	$context.document.moreData.settings:=$context.document.moreData.settings || New object:C1471
 	
 	$pdfDocumentName:=String:C10($context.document.moreData.settings.pdfDocumentName)
 	If ($pdfDocumentName#"")
@@ -492,14 +494,13 @@ Function redraw_preview($context : Object; $destination : Text; $page : Integer)
 				
 				$variableItems:=OB Copy:C1225($context.document.variableItems)
 				If ($context.document.template#Null:C1517) && ($context.document.template.moreData#Null:C1517) && ($context.document.template.moreData.methodPrep#Null:C1517)
-					
 					$method:="<!--#4DCODE \r"
 					$method+="$data:=$1 \r"
 					$method+=$context.document.template.moreData.methodPrep
 					$method+="\r-->"
-					
+					ds:C1482.startTransaction()
 					PROCESS 4D TAGS:C816($method; $result; $variableItems)
-					
+					ds:C1482.cancelTransaction()
 				End if 
 				
 				
@@ -2014,7 +2015,7 @@ Function redraw_preview($context : Object; $destination : Text; $page : Integer)
 							
 							Form:C1466.preview:=New object:C1471
 							OBJECT SET SUBFORM:C1138(*; "preview"; $formDefinition)
-							
+							$context.formDefinition:=$formDefinition
 					End case 
 				End for 
 				

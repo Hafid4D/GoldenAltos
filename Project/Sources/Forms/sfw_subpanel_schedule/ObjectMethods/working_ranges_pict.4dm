@@ -26,13 +26,13 @@ If ($isInModification)
 				$qStart:=$workingRanges[$indexOfPrevious]\900
 			End if 
 			For ($q; $qStart; $end-1)
-				APPEND MENU ITEM:C411($submenu; ds:C1482.sfw_readXliff("dateAndTime.startAt"; "start at")+" "+String:C10(Time:C179($q*900); HH MM:K7:2))  //XLIFF
+				APPEND MENU ITEM:C411($submenu; ds:C1482.sfw_readXliff("dateAndTime.startAt")+" "+String:C10(Time:C179($q*900); HH MM:K7:2))
 				SET MENU ITEM PARAMETER:C1004($submenu; -1; $range+":"+String:C10($q*900)+"-"+String:C10($end*900))
 				If ($q=$start)
 					SET MENU ITEM MARK:C208($submenu; -1; Char:C90(18))
 				End if 
 			End for 
-			APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("dateAndTime.startAt"; "start at")+" "+String:C10(Time:C179($start*900); HH MM:K7:2); $submenu)  //XLIFF
+			APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("dateAndTime.startAt")+" "+String:C10(Time:C179($start*900); HH MM:K7:2); $submenu)
 			
 			$submenu:=Create menu:C408
 			$refmenus.push($submenu)
@@ -43,13 +43,13 @@ If ($isInModification)
 				$qEnd:=$workingRanges[$indexOfNext]\900
 			End if 
 			For ($q; $start+1; $qEnd)
-				APPEND MENU ITEM:C411($submenu; ds:C1482.sfw_readXliff("dateAndTime.stopAt"; "stop at")+" "+String:C10(Time:C179($q*900); HH MM:K7:2))  //XLIFF
+				APPEND MENU ITEM:C411($submenu; ds:C1482.sfw_readXliff("dateAndTime.stopAt")+" "+String:C10(Time:C179($q*900); HH MM:K7:2))
 				SET MENU ITEM PARAMETER:C1004($submenu; -1; $range+":"+String:C10($start*900)+"-"+String:C10($q*900))
 				If ($q=$end)
 					SET MENU ITEM MARK:C208($submenu; -1; Char:C90(18))
 				End if 
 			End for 
-			APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("dateAndTime.stopAt"; "stop at")+" "+String:C10(Time:C179($end*900); HH MM:K7:2); $submenu)  //XLIFF
+			APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("dateAndTime.stopAt")+" "+String:C10(Time:C179($end*900); HH MM:K7:2); $submenu)
 			
 			APPEND MENU ITEM:C411($menu; "-")
 			APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("dateAndTime.remove"; "remove"))
@@ -80,7 +80,7 @@ If ($isInModification)
 			End if 
 			
 			For ($q; $qMin; $qMax)
-				APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("dateAndTime.startAt"; "start at")+" "+String:C10(Time:C179($q*900); HH MM:K7:2))  //XLIFF
+				APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("dateAndTime.startAt")+" "+String:C10(Time:C179($q*900); HH MM:K7:2))
 				SET MENU ITEM PARAMETER:C1004($menu; -1; String:C10($q*900)+"-"+String:C10(($q+1)*900))
 			End for 
 			

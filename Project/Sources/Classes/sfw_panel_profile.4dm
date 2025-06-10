@@ -55,24 +55,24 @@ Function bActionInscriptions()
 			SET MENU ITEM PARAMETER:C1004($subMenuUsers; -1; "User:"+$eUse.UUID)
 		End for each 
 		If ($esUsers.length#0)
-			APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("profile.adduser"; "Add a user"); $subMenuUsers; *)  //XLIFF ok
+			APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("profile.adduser"; "Add a user"); $subMenuUsers; *)
 		Else 
-			APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("profile.adduser"; "Add a user"); *)  //XLIFF ok
+			APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("profile.adduser"; "Add a user"); *)
 			DISABLE MENU ITEM:C150($menu; -1)
 		End if 
 	Else 
-		APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("profile.adduser"; "Add a user"); *)  //XLIFF ok
+		APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("profile.adduser"; "Add a user"); *)
 		DISABLE MENU ITEM:C150($menu; -1)
 	End if 
 	If (Form:C1466.inscription#Null:C1517)
-		APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("profile.deleteuser"; "Delete the user")+" \""+Form:C1466.inscription.user.login+"\""; *)  // xliff
+		APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("profile.deleteuser"; "Delete the user")+" \""+Form:C1466.inscription.user.login+"\""; *)
 		If (Form:C1466.sfw.checkIsInModification()) && (Form:C1466.inscription.moreData.autoCreation=Null:C1517)
 			SET MENU ITEM PARAMETER:C1004($menu; -1; "Delete:"+Form:C1466.inscription.UUID)
 		Else 
 			DISABLE MENU ITEM:C150($menu; -1)
 		End if 
 	Else 
-		APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("profile.deleteuser"; "Delete the user"); *)  // add xliff
+		APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("profile.deleteuser"; "Delete the user"); *)
 		DISABLE MENU ITEM:C150($menu; -1)
 	End if 
 	$choose:=Dynamic pop up menu:C1006($menu)

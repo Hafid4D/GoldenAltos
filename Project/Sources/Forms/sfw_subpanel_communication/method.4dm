@@ -43,13 +43,13 @@ Case of
 		$mainMenu:=Create menu:C408
 		$refMenus.push($mainMenu)
 		
-		APPEND MENU ITEM:C411($mainMenu; ds:C1482.sfw_readXliff("communication.add"; "Add a communication means"); *)  // xliff
+		APPEND MENU ITEM:C411($mainMenu; ds:C1482.sfw_readXliff("communication.add"; "Add a communication means"); *)
 		SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--add")
 		If (sfw_checkIsInModification)=False:C215
 			DISABLE MENU ITEM:C150($mainMenu; -1)
 		End if 
 		
-		APPEND MENU ITEM:C411($mainMenu; ds:C1482.sfw_readXliff("communication.delete"; "Delete a communication means"); *)  // xliff
+		APPEND MENU ITEM:C411($mainMenu; ds:C1482.sfw_readXliff("communication.delete"; "Delete a communication means"); *)
 		SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--delete")
 		If (sfw_checkIsInModification)=False:C215
 			DISABLE MENU ITEM:C150($mainMenu; -1)

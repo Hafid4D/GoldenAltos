@@ -1,6 +1,36 @@
 Class extends DataClass
 
-
+local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
+	
+	$entry:=cs:C1710.sfw_definitionEntry.new("documentFolder"; "documentManagement"; ds:C1482.sfw_readXliff("documentFolder.entry.plural"); ds:C1482.sfw_readXliff("documentFolder.entry.single"))
+	$entry.setDataclass("sfw_DocumentFolder")
+	//$entry.setXliffLabel("documentFolder.entry.plural")
+	$entry.setDisplayOrder(11010)
+	$entry.setIcon("sfw/entry/DocumentFolder-50x50.png")
+	
+	$entry.setSearchboxField("name")
+	
+	
+	$entry.setPanel("sfw_panel_documentFolder"; 1)
+	$entry.setPanelPage(1; ""; "Definition")
+	$entry.setPanelPage(2; ""; "Permissions")
+	
+	
+	$entry.setRLDefinition("name"; "parentFolder")
+	$entry.setMainViewLabel(ds:C1482.sfw_readXliff("documentFolder.entry.allfolders"))
+	
+	$entry.enableTransaction()
+	$entry.setItemListPreconfigAction("exportReferenceRecords")
+	$entry.setItemListPreconfigAction("importReferenceRecords")
+	
+	$entry.setValidationRule("name"; "entryField_name"; "mandatory"; "trimSpace"; "message:the name is mandatory")
+	$entry.setValidationRule("ident"; "entryField_ident"; "mandatory"; "trimSpace"; "message:the ident is mandatory")
+	$entry.setValidationRule("ident"; "entryField_ident"; "unique"; "message:the ident is must be unique")
+	
+	$entry.setAllowedProfiles("admin")
+	
+	
+	
 Function getAndCreateIfNotExist($ident : Text; $name : Text;  ...  : Text)->$eFolder : cs:C1710.sfw_DocumentFolderEntity
 	var $eParentFolder : cs:C1710.sfw_DocumentFolderEntity
 	

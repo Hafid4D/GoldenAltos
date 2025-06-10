@@ -7,6 +7,7 @@ property label : Text
 property subset : Object
 property HLItems : Object
 property HLEntries : Object
+property RLDefinition : Object
 
 Class constructor($ident : Text; $label : Text;  ...  : Variant)
 	var $view : cs:C1710.sfw_definitionView
@@ -253,3 +254,11 @@ Function addEntryLevel($attributeTodisplay : Text; $entryIdent : Text;  ...  : T
 	End for 
 	
 	This:C1470.HLEntries.levels.push($hierarchicalLevel)
+	
+	
+Function setRLDefinition($nameAttribute : Text; $recursiveAttribute : Text)
+	This:C1470.displayType:="recursiveList"
+	This:C1470.RLDefinition:=New object:C1471
+	This:C1470.RLDefinition.nameAttribute:=$nameAttribute
+	This:C1470.RLDefinition.recursiveAttribute:=$recursiveAttribute
+	

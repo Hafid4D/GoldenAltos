@@ -82,13 +82,13 @@ Function bActionInscriptions()
 			SET MENU ITEM PARAMETER:C1004($subMenuProfiles; -1; "Profile:"+$eProfile.UUID)
 		End for each 
 		If ($esProfiles.length#0)
-			APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("profil.addProfile"; "Add a profile"); $subMenuProfiles; *)  //XLIFF OK
+			APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("profil.addProfile"; "Add a profile"); $subMenuProfiles; *)
 		Else 
-			APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("profil.addProfile"; "Add a profile"); *)  //XLIFF OK
+			APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("profil.addProfile"; "Add a profile"); *)
 			DISABLE MENU ITEM:C150($menu; -1)
 		End if 
 	Else 
-		APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("profil.addProfile"; "Add a profile"); *)  //XLIFF OK
+		APPEND MENU ITEM:C411($menu; ds:C1482.sfw_readXliff("profil.addProfile"; "Add a profile"); *)
 		DISABLE MENU ITEM:C150($menu; -1)
 	End if 
 	If (Form:C1466.inscription#Null:C1517)

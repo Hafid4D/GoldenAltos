@@ -101,6 +101,7 @@
 		<field name="extension" uuid="ACDED19B16D5474D9EDD0487F37697F1" type="10" limiting_length="255" never_null="true" id="6"/>
 		<field name="stmp" uuid="DAB7EE0187F140E29CAE47D001BAEDAA" type="4" never_null="true" id="7"/>
 		<field name="moreData" uuid="EBF096AA221543D59956F8268859F11F" type="21" blob_switch_size="2147483647" never_null="true" id="8"/>
+		<field name="UUID_DocumentModel" uuid="BACD5C581C2B8644BF8526784365D436" type="10" store_as_UUID="true" never_null="true" id="9"/>
 		<primary_key field_name="UUID" field_uuid="1220A37BE5DC40168EEC02C61B1D51FC"/>
 	</table>
 	<table name="sfw_DocumentFolder" uuid="A718BF77C87A4DB4AB861A00287FBC68" id="9">
@@ -281,7 +282,7 @@
 		<field name="UUID" uuid="310A8CB45BA28349A1E6BD9A2F40F364" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_dfd_Template" uuid="E69CC48F6A0A1F4480CF6295260128E1" type="10" store_as_UUID="true" id="2"/>
 		<field name="UUID_User" uuid="9D3F765B0FC1874DB2D0966C3BDC0CA7" type="10" store_as_UUID="true" never_null="true" id="3"/>
-		<field name="generationDate" uuid="267C22B7B189C049A3AB0638D4698D6C" type="8" id="4"/>
+		<field name="stmp" uuid="267C22B7B189C049A3AB0638D4698D6C" type="4" id="4"/>
 		<field name="name" uuid="06162DE7F87BC0499884C98E0B03AEF6" type="10" limiting_length="255" id="5"/>
 		<field name="variableItems" uuid="39183766E3386547A87C9408E1E6B3DE" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<field name="moreData" uuid="BC49A97039CF3840A96501AEBC953C67" type="21" blob_switch_size="2147483647" id="7"/>
@@ -336,6 +337,15 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<primary_key field_name="UUID" field_uuid="3E04CFF5D515BF48A62EAC677ABD1B96"/>
+	</table>
+	<table name="sfw_DocumentModel" uuid="37B76DEC3444474BA87B456E6A1D1708" id="26">
+		<field name="UUID" uuid="AC37D94799FAA74089EE6777FABCEAAF" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="UUID_DocumentFolder" uuid="F119140F7535E44DB944F683426DC8A2" type="10" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="name" uuid="3A6A30ADDED4E24EB25F2E3E090A2DC4" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="areaWP" uuid="79AB859EC74F054FA5554C447FE433F9" type="21" blob_switch_size="2147483647" never_null="true" id="4"/>
+		<field name="moreData" uuid="9415E3B777A4F34D8D8D11D31024022E" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
+		<field name="type" uuid="B9A67EFD1DD67F4389B54DCFEFF24231" type="3" never_null="true" id="6"/>
+		<primary_key field_name="UUID" field_uuid="AC37D94799FAA74089EE6777FABCEAAF"/>
 	</table>
 	<table name="sfw_Setting" uuid="05967663C56F44398D96379354ABCC89" id="30">
 		<field name="UUID" uuid="5D20BF5E221E4AB5AA75260DDD551A9D" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -1272,6 +1282,30 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="0146C347C940AF4CAD11DE15A7285587" name_Nto1="documentModel" name_1toN="documents" state="1">
+		<related_field kind="source">
+			<field_ref uuid="BACD5C581C2B8644BF8526784365D436" name="UUID_DocumentModel">
+				<table_ref uuid="5E1C3E25225441628E3DBCF58BFAABF4" name="sfw_Document"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="AC37D94799FAA74089EE6777FABCEAAF" name="UUID">
+				<table_ref uuid="37B76DEC3444474BA87B456E6A1D1708" name="sfw_DocumentModel"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="F42758F6BFA16D4889674FD8DF03D3A7" name_Nto1="documentFolder" name_1toN="documentModels" state="1">
+		<related_field kind="source">
+			<field_ref uuid="F119140F7535E44DB944F683426DC8A2" name="UUID_DocumentFolder">
+				<table_ref uuid="37B76DEC3444474BA87B456E6A1D1708" name="sfw_DocumentModel"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="BA314E8B13754390B2700B893AD65AB1" name="UUID">
+				<table_ref uuid="A718BF77C87A4DB4AB861A00287FBC68" name="sfw_DocumentFolder"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="01619F9BF52940F3AFF8C52A4A82535D" type="3">
 		<field_ref uuid="951D3770910B43BBBFCAB95E4B3A1C65" name="UUID_Tool">
 			<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
@@ -1355,6 +1389,11 @@
 	<index kind="regular" unique_keys="true" uuid="1FEAD11AEFB24168AD1B785362ACF144" type="1">
 		<field_ref uuid="8FC82746020F4EB6BA85B431DFE019A8" name="UUID">
 			<table_ref uuid="521E751963104DC299061CF1588CADEF" name="sfw_EMailLog"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="21DCC4A57F29B943B8652C76784095CE" type="3">
+		<field_ref uuid="F119140F7535E44DB944F683426DC8A2" name="UUID_DocumentFolder">
+			<table_ref uuid="37B76DEC3444474BA87B456E6A1D1708" name="sfw_DocumentModel"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="22F0141A50F64622A885D4E9121514EB" type="1">
@@ -1492,11 +1531,6 @@
 			<table_ref uuid="5E1C3E25225441628E3DBCF58BFAABF4" name="sfw_Document"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="6718C9EE46DA4250ADE66AB7BAA72EEB" type="7">
-		<field_ref uuid="8EFDF2BE837542E3849ECB064F30C5BD" name="UUID">
-			<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
-		</field_ref>
-	</index>
 	<index kind="regular" unique_keys="true" uuid="6B32C8DEC9CEEB449F96F5750E84D233" type="3">
 		<field_ref uuid="B16B9E9117F74E4D836B97A7A8CDE8F6" name="carrierID">
 			<table_ref uuid="4EB6C9D117A3DC4B91D031D6BC0C7DA9" name="CustomerCarrier"/>
@@ -1545,6 +1579,11 @@
 	<index kind="regular" uuid="7B5F890268AC8D4694DE94997DF66E36" type="3">
 		<field_ref uuid="8E8814A889814010890030637A9BFFF5" name="UUID_target">
 			<table_ref uuid="5E1C3E25225441628E3DBCF58BFAABF4" name="sfw_Document"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="7CCC1D4F6127A6469344D8B1A96A16DB" type="1">
+		<field_ref uuid="E41F2741AB1E490D97E4B22E3583C7E6" name="UUID">
+			<table_ref uuid="BBA10D61B3A54D38A2C335D8A5A1BF6E" name="sfw_Favorite"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="7E197F46BD838349B434193A2013A37B" type="7">
@@ -1667,6 +1706,11 @@
 			<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="A90F65BE848BB84D827F3D9B3B5A26BA" type="3">
+		<field_ref uuid="BACD5C581C2B8644BF8526784365D436" name="UUID_DocumentModel">
+			<table_ref uuid="5E1C3E25225441628E3DBCF58BFAABF4" name="sfw_Document"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="AA064FCFF3604B159A1E8BE07FD321D7" type="3">
 		<field_ref uuid="DB99D889130B4E138C02DC979C707EAE" name="UUID_StepTemplate">
 			<table_ref uuid="7A8F1179566C46A6AB8E4B04DD19B496" name="StepTemplateCertification"/>
@@ -1685,11 +1729,6 @@
 	<index kind="regular" unique_keys="true" uuid="B761A9A87A1A4180B6093B39B6B17544" type="7">
 		<field_ref uuid="37676CD94E8B423595ED98B5C0E9CF89" name="UUID">
 			<table_ref uuid="96D1CE81460A4F75B3F4275138C8F778" name="Customer"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="B7ACAC708736442495EDF63234A8205A" type="1">
-		<field_ref uuid="E41F2741AB1E490D97E4B22E3583C7E6" name="UUID">
-			<table_ref uuid="BBA10D61B3A54D38A2C335D8A5A1BF6E" name="sfw_Favorite"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="BA9A24A631304F64B16D7EA3EA4C0EF2" type="7">
@@ -1782,6 +1821,11 @@
 			<table_ref uuid="E82BBE2952C449BE995135760C788E8F" name="sfw_Comment"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="E3FE6D69E136D048AE44F2672D4110DE" type="1">
+		<field_ref uuid="AC37D94799FAA74089EE6777FABCEAAF" name="UUID">
+			<table_ref uuid="37B76DEC3444474BA87B456E6A1D1708" name="sfw_DocumentModel"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="E56A9FD6A4FC504481E5686E911F72DA" type="3">
 		<field_ref uuid="9D3F765B0FC1874DB2D0966C3BDC0CA7" name="UUID_User">
 			<table_ref uuid="A1BFE9AD9486804BA249798C81722C4A" name="dfd_Document"/>
@@ -1805,6 +1849,11 @@
 	<index kind="regular" uuid="F62C2A61AAAD5D4DBADE832EA3A90FB2" type="3">
 		<field_ref uuid="E69CC48F6A0A1F4480CF6295260128E1" name="UUID_dfd_Template">
 			<table_ref uuid="A1BFE9AD9486804BA249798C81722C4A" name="dfd_Document"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="F79B3490BB86294E8ABCF568593399BF" type="7">
+		<field_ref uuid="8EFDF2BE837542E3849ECB064F30C5BD" name="UUID">
+			<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="FB7A08243A97934089A9BE54DDC795AB" type="3">

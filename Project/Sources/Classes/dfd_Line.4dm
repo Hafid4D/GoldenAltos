@@ -3,7 +3,7 @@ Class extends DataClass
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
-	$entry:=cs:C1710.sfw_definitionEntry.new("dfdLine"; "dfd"; "Lines"; "Line")
+	$entry:=cs:C1710.sfw_definitionEntry.new("dfdLine"; "documentManagement"; "Lines"; "Line")
 	$entry.setDataclass("dfd_Line")
 	$entry.setDisplayOrder(100)
 	$entry.setIcon("dfd/image/entry/dfd_Line-50x50.png")
@@ -15,7 +15,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(1; ""; "Definition")
 	
 	
-	$entry.setLBItemsColumn("name"; "Name")
+	$entry.setLBItemsColumn("name"; "Name"; "xliff:documentFolder.form.name")
 	
 	$entry.setLBItemsOrderBy("name")
 	

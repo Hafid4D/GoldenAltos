@@ -3,7 +3,7 @@ Class extends DataClass
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
-	$entry:=cs:C1710.sfw_definitionEntry.new("dfdTemplate"; "dfd"; "Templates"; "Template")
+	$entry:=cs:C1710.sfw_definitionEntry.new("dfdTemplate"; "documentManagement"; "Templates"; "Template")
 	$entry.setDataclass("dfd_Template")
 	$entry.setDisplayOrder(200)
 	$entry.setIcon("dfd/image/entry/dfd_Template-50x50.png")
@@ -12,11 +12,12 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	
 	$entry.setPanel("dfd_panel_template"; 1)
-	$entry.setPanelPage(1; ""; "Definition")
-	$entry.setPanelPage(2; ""; "Autorisations")
+	$entry.setPanelPage(1; ""; ds:C1482.sfw_readXliff("dfdTemplate.page.definition"))
+	$entry.setPanelPage(2; ""; ds:C1482.sfw_readXliff("dfdTemplate.page.permissions"))
+	$entry.setPanelPage(3; ""; ds:C1482.sfw_readXliff("dfdTemplate.page.docgeneration"))
 	
 	
-	$entry.setLBItemsColumn("name"; "Name")
+	$entry.setLBItemsColumn("name"; "Name"; "xliff:documentFolder.form.name")
 	
 	$entry.setLBItemsOrderBy("name")
 	
@@ -38,8 +39,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	//$entry.setAllowedProfilesForDeletion(cs.sfw_globalParameters.me.dfd.entryTemplate.allowedProfilesForDeletion || "admin")
 	//$entry.setAllowedProfilesForModification(cs.sfw_globalParameters.me.dfd.entryTemplate.allowedProfilesForModification || "admin")
 	
-	$entry.setItemListProjection("Projection to documents"; "projectionToDocuments"; "dfdDocument"; "dfd")
-	$entry.setItemListProjection("Projection to lines"; "projectionToLines"; "dfdLine"; "dfd")
+	$entry.setItemListProjection("Projection to documents"; "projectionToDocuments"; "dfdDocument"; "documentManagement")
+	$entry.setItemListProjection("Projection to lines"; "projectionToLines"; "dfdLine"; "documentManagement")
 	
 	
 Function importTemplate()

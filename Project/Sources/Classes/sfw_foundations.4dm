@@ -1,4 +1,5 @@
 property entry : cs:C1710.sfw_definitionEntry
+property view : cs:C1710.sfw_definitionView
 
 Class constructor
 	
@@ -527,21 +528,21 @@ Function drawButtons()
 	$enabletemListButtons:=New collection:C1472
 	Case of 
 		: (Form:C1466.situation.mode="none")
-			$bModeFormat:=ds:C1482.sfw_readXliff("crud.mode.chooseAMode"; "Choose a mode")+";#sfw/image/skin/rainbow/btn4states/mode-32x32.png;;3;1;1;0;;;;1;;4"  //XLIFF OK
+			$bModeFormat:=ds:C1482.sfw_readXliff("crud.mode.chooseAMode"; "Choose a mode")+";#sfw/image/skin/rainbow/btn4states/mode-32x32.png;;3;1;1;0;;;;1;;4"
 			If (Form:C1466.current_item#Null:C1517)
 				$visibleItemButtons.push("bItemReload")
 				$enabletemButtons.push("bItemReload")
 			End if 
 			
 		: (Form:C1466.situation.mode="view")
-			$bModeFormat:=ds:C1482.sfw_readXliff("crud.mode.visualization"; "Visualization")+";#sfw/image/skin/rainbow/btn4states/eye-32x32.png;;3;1;1;0;;;;1;;4"  //XLIFF OK
+			$bModeFormat:=ds:C1482.sfw_readXliff("crud.mode.visualization"; "Visualization")+";#sfw/image/skin/rainbow/btn4states/eye-32x32.png;;3;1;1;0;;;;1;;4"
 			If (Form:C1466.current_item#Null:C1517)
 				$visibleItemButtons.push("bItemReload")
 				$enabletemButtons.push("bItemReload")
 			End if 
 			
 		: (Form:C1466.situation.mode="add")
-			$bModeFormat:=ds:C1482.sfw_readXliff("crud.mode.creation"; "Creation")+";#sfw/image/skin/rainbow/btn4states/add-32x32.png;;3;1;1;0;;;;1;;4"  //XLIFF OK
+			$bModeFormat:=ds:C1482.sfw_readXliff("crud.mode.creation"; "Creation")+";#sfw/image/skin/rainbow/btn4states/add-32x32.png;;3;1;1;0;;;;1;;4"
 			$visibleItemButtons.push("bItemRenounce")
 			$visibleItemButtons.push("bItemCreate")
 			$enabletemButtons.push("bItemRenounce")
@@ -551,7 +552,7 @@ Function drawButtons()
 			End if 
 			
 		: (Form:C1466.situation.mode="duplicate")
-			$bModeFormat:=ds:C1482.sfw_readXliff("crud.mode.creation"; "Creation")+";#sfw/image/skin/rainbow/btn4states/add-32x32.png;;3;1;1;0;;;;1;;4"  //XLIFF OK
+			$bModeFormat:=ds:C1482.sfw_readXliff("crud.mode.creation"; "Creation")+";#sfw/image/skin/rainbow/btn4states/add-32x32.png;;3;1;1;0;;;;1;;4"
 			$visibleItemButtons.push("bItemRenounce")
 			$visibleItemButtons.push("bItemCreate")
 			$enabletemButtons.push("bItemRenounce")
@@ -561,13 +562,13 @@ Function drawButtons()
 			End if 
 			
 		: (Form:C1466.situation.mode="delete")
-			$bModeFormat:=ds:C1482.sfw_readXliff("crud.mode.deletion"; "Deletion")+";#sfw/image/skin/rainbow/btn4states/trash-32x32.png;;3;1;1;0;;;;1;;4"  //XLIFF OK
+			$bModeFormat:=ds:C1482.sfw_readXliff("crud.mode.deletion"; "Deletion")+";#sfw/image/skin/rainbow/btn4states/trash-32x32.png;;3;1;1;0;;;;1;;4"
 			$visibleItemButtons.push("bItemDelete")
 			$enabletemButtons.push("bItemDelete")
 			
 		Else 
 			Form:C1466.situation.mode:="modify"
-			$bModeFormat:=ds:C1482.sfw_readXliff("crud.mode.modification"; "Modification")+";#sfw/image/skin/rainbow/btn4states/edit-32x32.png;;3;1;1;0;;;;1;;4"  //XLIFF OK
+			$bModeFormat:=ds:C1482.sfw_readXliff("crud.mode.modification"; "Modification")+";#sfw/image/skin/rainbow/btn4states/edit-32x32.png;;3;1;1;0;;;;1;;4"
 			$visibleItemButtons.push("bItemCancel")
 			$visibleItemButtons.push("bItemSave")
 			$diffs:=New collection:C1472
@@ -693,7 +694,7 @@ Function drawButtons_virtual()
 	OBJECT SET VISIBLE:C603(*; "bItem@"; False:C215)
 	OBJECT SET VISIBLE:C603(*; "bItemList@"; False:C215)
 	
-	$bModeFormat:=ds:C1482.sfw_readXliff("crud.mode.actions"; "Actions")+";#sfw/image/skin/rainbow/btn4states/action-32x32.png;;3;1;1;0;;;;1;;4"  //XLIFF OK
+	$bModeFormat:=ds:C1482.sfw_readXliff("crud.mode.actions"; "Actions")+";#sfw/image/skin/rainbow/btn4states/action-32x32.png;;3;1;1;0;;;;1;;4"
 	OBJECT SET FORMAT:C236(*; "bMode"; $bModeFormat)
 	$bModeVisible:=False:C215
 	Case of 
@@ -853,11 +854,16 @@ Function bItemCreate()
 			Form:C1466.sfw.lb_items_search()
 		End try
 		$indexInEntitySelection:=$newEntity.indexOf(Form:C1466.sfw.lb_items)
-		Form:C1466.sfw.lb_items:=Form:C1466.sfw.lb_items
-		LISTBOX SELECT ROW:C912(*; "lb_items"; $indexInEntitySelection+1; lk replace selection:K53:1)
-		Form:C1466.current_item:=Form:C1466.sfw.lb_items[$indexInEntitySelection]
-		Form:C1466.situation.mode:="Modify"  //when we save a new item, we continue with the modify mode
-		Form:C1466.sfw.lb_items_selectionChange()
+		Case of 
+			: (This:C1470.view.displayType="recursiveList")
+				This:C1470._drawRecursiveList()
+			Else 
+				Form:C1466.sfw.lb_items:=Form:C1466.sfw.lb_items
+				LISTBOX SELECT ROW:C912(*; "lb_items"; $indexInEntitySelection+1; lk replace selection:K53:1)
+				Form:C1466.current_item:=Form:C1466.sfw.lb_items[$indexInEntitySelection]
+				Form:C1466.situation.mode:="Modify"  //when we save a new item, we continue with the modify mode
+				Form:C1466.sfw.lb_items_selectionChange()
+		End case 
 	End if 
 	Form:C1466.situation.mode:="Modify"  //when we save a new item, we continue with the modify mode
 	Form:C1466.sfw.drawButtons()
@@ -874,11 +880,13 @@ Function bItemDelete()
 		
 		Case of 
 			: (OB Class:C1730(Form:C1466.sfw).name="sfw_item")
+				This:C1470.callbackOnCurrentItem("beforeDelete")
 				$info:=Form:C1466.current_item.drop()
 				Form:C1466.current_clone:=Null:C1517
 				This:C1470.validateTransaction()
 				ACCEPT:C269
 			Else 
+				
 				This:C1470.callbackOnCurrentItem("beforeDelete")
 				Form:C1466.sfw.lb_items:=Form:C1466.sfw.lb_items.minus(Form:C1466.current_item)
 				$info:=Form:C1466.current_item.drop()
@@ -888,7 +896,12 @@ Function bItemDelete()
 				Form:C1466.current_clone:=Null:C1517
 				Form:C1466.subForm.calculation:=New object:C1471
 				Form:C1466.subForm:=Form:C1466.subForm
-				Form:C1466.sfw.lb_items_sort()
+				Case of 
+					: (This:C1470.view.displayType="recursiveList")
+						Form:C1466.sfw._drawRecursiveList()
+					Else 
+						Form:C1466.sfw.lb_items_sort()
+				End case 
 				Form:C1466.sfw.lb_items_selectionChange()
 				Form:C1466.sfw.drawButtons()
 		End case 
@@ -1144,17 +1157,17 @@ Function _buildMenuProjection($refMenus : Collection)->$refMenu : Text
 		$refSubMenu:=Create menu:C408
 		$refMenus.push($refSubMenu)
 		
-		APPEND MENU ITEM:C411($refSubMenu; ds:C1482.sfw_readXliff("projection.fromTheList"; "From the list..."); *)  //XLIFF OK
+		APPEND MENU ITEM:C411($refSubMenu; ds:C1482.sfw_readXliff("projection.fromTheList"; "From the list..."); *)
 		SET MENU ITEM PARAMETER:C1004($refSubMenu; -1; "projection:"+String:C10($a)+":all")
 		
 		If (LISTBOX Get property:C917(*; "lb_items"; lk selection mode:K53:35)=lk multiple:K53:59)
 			If (Form:C1466.current_lb_item_selected.length=1)
-				APPEND MENU ITEM:C411($refSubMenu; ds:C1482.sfw_readXliff("projection.fromSelectedList"; "From the selected item..."); *)  //XLIFF OK
+				APPEND MENU ITEM:C411($refSubMenu; ds:C1482.sfw_readXliff("projection.fromSelectedList"; "From the selected item..."); *)
 			Else 
-				APPEND MENU ITEM:C411($refSubMenu; ds:C1482.sfw_readXliff("projection.fromSelectedList"; "From the selected item..."); *)  //XLIFF OK
+				APPEND MENU ITEM:C411($refSubMenu; ds:C1482.sfw_readXliff("projection.fromSelectedList"; "From the selected item..."); *)
 			End if 
 		Else 
-			APPEND MENU ITEM:C411($refSubMenu; ds:C1482.sfw_readXliff("projection.fromSelectedList"; "From the selected item..."); *)  //XLIFF OK
+			APPEND MENU ITEM:C411($refSubMenu; ds:C1482.sfw_readXliff("projection.fromSelectedList"; "From the selected item..."); *)
 		End if 
 		SET MENU ITEM PARAMETER:C1004($refSubMenu; -1; "projection:"+String:C10($a)+":selected")
 		If (Form:C1466.current_lb_item_selected.length=0)
@@ -1162,7 +1175,7 @@ Function _buildMenuProjection($refMenus : Collection)->$refMenu : Text
 		End if 
 		APPEND MENU ITEM:C411($refSubMenu; "-")
 		If (Form:C1466.sfw.entry.allowFavorite)
-			APPEND MENU ITEM:C411($refSubMenu; ds:C1482.sfw_readXliff("projection.fromMyFavorites"; "From my favorites..."); *)  //XLIFF OK
+			APPEND MENU ITEM:C411($refSubMenu; ds:C1482.sfw_readXliff("projection.fromMyFavorites"; "From my favorites..."); *)
 			SET MENU ITEM PARAMETER:C1004($refSubMenu; -1; "projection:"+String:C10($a)+":favorites")
 			If ($esFavorites.length=0)
 				DISABLE MENU ITEM:C150($refSubMenu; -1)
@@ -1199,7 +1212,7 @@ Function _executeMenuProjection($choose : Text)
 			$formData.sfw.vision:=cs:C1710.sfw_definition.me.getVisionByIdent($projection.visionIdent)
 			$formData.sfw.entry:=cs:C1710.sfw_definition.me.getEntryByIdent($projection.entryIdent)
 			$formData.projection:=New object:C1471
-			$formData.projection.label:="<- "+Form:C1466.sfw.entry.label  //XLIFF
+			$formData.projection.label:="<- "+Form:C1466.sfw.entry.label  // XLIFF
 			$formData.projection.entitiesSelection:=$projectedItems
 			$formData.window:=New object:C1471
 			GET WINDOW RECT:C443($left; $top; $right; $bottom)
@@ -1389,10 +1402,10 @@ Function bIcon_entry()
 			
 			$identFavoriteEntries:=ds:C1482.sfw_Favorite.getIdentFavoriteEntries()
 			If ($identFavoriteEntries.indexOf(Form:C1466.sfw.entry.ident)=-1)
-				APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("favorite.setAsFavoriteEntry"; "Set as favorite entry"); *)  //XLIFF OK
+				APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("favorite.setAsFavoriteEntry"; "Set as favorite entry"); *)
 				SET MENU ITEM PARAMETER:C1004($refMenu; -1; "++entry:"+Form:C1466.sfw.entry.ident)
 			Else 
-				APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("favorite.unsetAsFavoriteEntry"; "Unset as favorite entry"); *)  //XLIFF OK
+				APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("favorite.unsetAsFavoriteEntry"; "Unset as favorite entry"); *)
 				SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--entry:"+Form:C1466.sfw.entry.ident)
 			End if 
 			
@@ -1613,7 +1626,7 @@ Function bMode()
 					End if 
 					
 					If (Form:C1466.current_item#Null:C1517) && (Form:C1466.current_item.duplicateRecord#Null:C1517)
-						APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("crud.mode.duplicate"; "Duplication"); *)  //XLIFF OK
+						APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("crud.mode.duplicate"; "Duplication"); *)
 						SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/duplicate-24x24.png")
 						SET MENU ITEM PARAMETER:C1004($refMenu; -1; "duplicate")
 						If (Form:C1466.situation.mode="duplicate")
@@ -1648,8 +1661,8 @@ Function bMode()
 			End if 
 			
 			If (Form:C1466.dialogName="sfw_main") || (Form:C1466.dialogName="sfw_main_new")
-				APPEND MENU ITEM:C411($refMenu; "-")  //XLIFF OK
-				APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("crud.mode.openNewWindow"; "Open in a new window"); *)  //XLIFF OK
+				APPEND MENU ITEM:C411($refMenu; "-")
+				APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("crud.mode.openNewWindow"; "Open in a new window"); *)
 				SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/openWindow-24x24.png")
 				SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openWindow")
 				If (Form:C1466.current_item=Null:C1517)
@@ -1658,8 +1671,8 @@ Function bMode()
 			End if 
 			
 			If (Macintosh option down:C545 || Windows Alt down:C563)
-				APPEND MENU ITEM:C411($refMenu; "-")  //XLIFF OK
-				APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("crud.mode.openSpider"; "Show related records"); *)  //XLIFF OK
+				APPEND MENU ITEM:C411($refMenu; "-")
+				APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("crud.mode.openSpider"; "Show related records"); *)
 				SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/spider-24x24.png")
 				SET MENU ITEM PARAMETER:C1004($refMenu; -1; "spider")
 				If (Form:C1466.current_item=Null:C1517)
@@ -2099,7 +2112,7 @@ Function _exportReferenceRecords()
 	$json:=JSON Stringify:C1217($export; *)
 	$file.setText($json)
 	RESUME TRANSACTION:C1386
-	cs:C1710.sfw_dialog.me.info(ds:C1482.sfw_readXliff("export.done"; "The export is done"))  //XLIFF OK
+	cs:C1710.sfw_dialog.me.info(ds:C1482.sfw_readXliff("export.done"; "The export is done"))
 	SHOW ON DISK:C922($file.platformPath)
 	
 	
@@ -2125,9 +2138,9 @@ Function _importReferenceRecords()
 		$importToDo:=True:C214
 		Case of 
 			: ($importVersion<$currentVersion)
-				$importToDo:=cs:C1710.sfw_dialog.me.confirm(ds:C1482.sfw_readXliff("import.bellowCurrentVersion"; "The version in the referenceRecords file is bellow the current version in this datafile"); ds:C1482.sfw_readXliff("import.buttonImport"; "Import"); ds:C1482.sfw_readXliff("import.buttonCancel"; "Cancel"))  //XLIFF OK
+				$importToDo:=cs:C1710.sfw_dialog.me.confirm(ds:C1482.sfw_readXliff("import.bellowCurrentVersion"; "The version in the referenceRecords file is bellow the current version in this datafile"); ds:C1482.sfw_readXliff("import.buttonImport"; "Import"); ds:C1482.sfw_readXliff("import.buttonCancel"; "Cancel"))
 			: ($importVersion=$currentVersion)
-				$importToDo:=cs:C1710.sfw_dialog.me.confirm(ds:C1482.sfw_readXliff("import.sameCurrentVersion"; "The version in the referenceRecords file seems the same than the current version in this datafile"); ds:C1482.sfw_readXliff("import.buttonImport"; "Import"); ds:C1482.sfw_readXliff("import.buttonCancel"; "Cancel"))  //XLIFF OK
+				$importToDo:=cs:C1710.sfw_dialog.me.confirm(ds:C1482.sfw_readXliff("import.sameCurrentVersion"; "The version in the referenceRecords file seems the same than the current version in this datafile"); ds:C1482.sfw_readXliff("import.buttonImport"; "Import"); ds:C1482.sfw_readXliff("import.buttonCancel"; "Cancel"))
 		End case 
 		
 		If ($importToDo)
@@ -2214,7 +2227,7 @@ Function _importReferenceRecords()
 					
 				: ($confirmAnswered=False:C215) && ($esToDrop.length>0)
 					$confirmAnswered:=True:C214
-					cs:C1710.sfw_dialog.me.confirm(ds:C1482.sfw_readXliff("import.notPresent"; "Some records present in the datafile aren't present in the reference import file. What do you want to do?"); ds:C1482.sfw_readXliff("import.buttonKeep"; "Keep"); ds:C1482.sfw_readXliff("import.buttonDrop"; "Drop"))  //XLIFF OK
+					cs:C1710.sfw_dialog.me.confirm(ds:C1482.sfw_readXliff("import.notPresent"; "Some records present in the datafile aren't present in the reference import file. What do you want to do?"); ds:C1482.sfw_readXliff("import.buttonKeep"; "Keep"); ds:C1482.sfw_readXliff("import.buttonDrop"; "Drop"))
 					$drop:=(ok=0)
 					
 				Else 
@@ -2228,13 +2241,13 @@ Function _importReferenceRecords()
 				End for each 
 			End if 
 			
-			cs:C1710.sfw_dialog.me.info(ds:C1482.sfw_readXliff("import.done"; "The import is done"))  //XLIFF OK
+			cs:C1710.sfw_dialog.me.info(ds:C1482.sfw_readXliff("import.done"; "The import is done"))
 			Form:C1466.sfw.lb_items_search()
 			
 		End if 
 		
 	Else 
-		cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("import.fileNotExist"; "The referenceRecords file doesn't exist in the folder")+" "+Folder:C1567(fk resources folder:K87:11).folder(cs:C1710.sfw_definition.me.globalParameters.folders.projectResources+"/referenceRecords/").path)  //XLIFF OK
+		cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("import.fileNotExist"; "The referenceRecords file doesn't exist in the folder")+" "+Folder:C1567(fk resources folder:K87:11).folder(cs:C1710.sfw_definition.me.globalParameters.folders.projectResources+"/referenceRecords/").path)
 	End if 
 	RESUME TRANSACTION:C1386
 	
@@ -2373,17 +2386,18 @@ Function panelFormMethod()
 			
 			
 		: (FORM Event:C1606.code=On Resize:K2:27)
+			cs:C1710.sfw_tracker.me.internal("Resize")
 			$pageDefinition:=This:C1470.entry.panel.pages.query("page = :1"; FORM Get current page:C276(*)).first()
 			If ($pageDefinition.dynamicSource#Null:C1517) && ($pageDefinition.dynamicSource.resizePanel#Null:C1517)
 				$pageDefinition.dynamicSource.resizePanel()
 			End if 
-			
 			
 		: (FORM Event:C1606.code=On Timer:K2:25)
 			$pageDefinition:=This:C1470.entry.panel.pages.query("page = :1"; FORM Get current page:C276(*)).first()
 			If ($pageDefinition.dynamicSource#Null:C1517) && ($pageDefinition.dynamicSource.timerPanel#Null:C1517)
 				$pageDefinition.dynamicSource.timerPanel()
 			End if 
+			
 	End case 
 	
 	
@@ -2424,7 +2438,10 @@ Function panelFormMethod()
 									$success:=False:C215
 							End case 
 						End if 
-						
+					: ($rule.widget="")
+						If ($rule.notZero)
+							$success:=(Num:C11(Form:C1466.current_item[$rule.field])#0)
+						End if 
 					Else 
 						$type:=OB Get type:C1230(Form:C1466.current_item; $rule.field)
 						If (Bool:C1537($rule.uppercase)) & ($type=Is text:K8:3) & (FORM Event:C1606.code=On Data Change:K2:15)
@@ -2460,6 +2477,16 @@ Function panelFormMethod()
 										$widget:=String:C10($rule.widget)
 										OBJECT SET RGB COLORS:C628(*; $widget; "black"; 0x00FAA9AB)
 										$success:=False:C215
+									End if 
+							End case 
+						End if 
+						If ($rule.notZero)
+							Case of 
+								: ($type=Is real:K8:4) || ($type=Is integer:K8:5)
+									$success:=(Num:C11(Form:C1466.current_item[$rule.field])#0)
+									$widget:=String:C10($rule.widget)
+									If (Not:C34($success))
+										OBJECT SET RGB COLORS:C628(*; $widget; "black"; 0x00FAA9AB)
 									End if 
 							End case 
 						End if 
@@ -2541,6 +2568,17 @@ Function updateOfPanelNeeded()->$updateNeeded : Boolean
 	End if 
 	If ($updateNeeded)
 		cs:C1710.sfw_tracker.me.internal("updateOfPanelNeeded")
+		For each ($panelPage; This:C1470.entry.panel.pages)
+			If ($panelPage.dynamicSource#Null:C1517)
+				$dynamicClass:=OB Class:C1730($panelPage.dynamicSource).name
+				Case of 
+					: ($dynamicClass="sfw_definitionPageListbox")
+						
+					: ($dynamicClass="sfw_definitionPageDocuments")
+						$panelPage.dynamicSource.refreshHTab()
+				End case 
+			End if 
+		End for each 
 	End if 
 	
 Function redrawAndSetVisibleInPanelNeeded()->$redrawNeeded : Boolean
@@ -2549,6 +2587,7 @@ Function redrawAndSetVisibleInPanelNeeded()->$redrawNeeded : Boolean
 		: (FORM Event:C1606.code=On Mouse Enter:K2:33)
 		: (FORM Event:C1606.code=On Mouse Move:K2:35)
 		: (FORM Event:C1606.code=On Mouse Leave:K2:34)
+		: (Form:C1466.current_item=Null:C1517)
 		Else 
 			$redrawNeeded:=True:C214
 	End case 
@@ -2611,84 +2650,70 @@ Function displayItemPanel()
 			$formDefinition:=JSON Parse:C1218($json)
 		End if 
 		//refresh for object method paths
-		If (123#123)
-			//For each ($page; $formDefinition.pages)
-			//$page:=$page || New object
-			//$page.objects:=$page.objects || New object
-			//For each ($objectName; $page.objects)
-			//If ($page.objects[$objectName].method#Null) && ($page.objects[$objectName].method="ObjectMethods@")
-			//$page.objects[$objectName].method:=$folderForm.path+$page.objects[$objectName].method
-			//End if 
-			//End for each 
-			//End for each 
-		End if 
-		If (123=123)
-			$offsetHorizontal:=0
-			$offsetVertical:=0
-			$definitions:=New collection:C1472($formDefinition)
-			If ($formDefinition.inheritedForm#Null:C1517)
-				$folderForm:=Folder:C1567(fk database folder:K87:14).folder("Project/Sources/Forms/"+$formDefinition.inheritedForm)
+		
+		$offsetHorizontal:=0
+		$offsetVertical:=0
+		$definitions:=New collection:C1472($formDefinition)
+		If ($formDefinition.inheritedForm#Null:C1517)
+			$folderForm:=Folder:C1567(fk database folder:K87:14).folder("Project/Sources/Forms/"+$formDefinition.inheritedForm)
+			$file:=$folderForm.file("form.4DForm")
+			$cacheFile:=Folder:C1567(fk resources folder:K87:11).file("DynamicForm/"+$formDefinition.inheritedForm+"form.4XForm")
+			If ($file.exists)
 				$file:=$folderForm.file("form.4DForm")
-				$cacheFile:=Folder:C1567(fk resources folder:K87:11).file("DynamicForm/"+$formDefinition.inheritedForm+"form.4XForm")
-				If ($file.exists)
-					$file:=$folderForm.file("form.4DForm")
-					$definition:=JSON Parse:C1218($file.getText())
-					$definitions.push($definition)
-					TEXT TO BLOB:C554(JSON Stringify:C1217($definition); $blob; UTF8 text without length:K22:17)
-					COMPRESS BLOB:C534($blob; Fast compression mode:K22:13)
-					$cacheFile.setContent($blob)
-				Else 
-					$blob:=$cacheFile.getContent()
-					EXPAND BLOB:C535($blob)
-					$json:=BLOB to text:C555($blob; UTF8 text without length:K22:17)
-					$definition:=JSON Parse:C1218($json)
-					$definitions.push($definition)
-				End if 
+				$definition:=JSON Parse:C1218($file.getText())
+				$definitions.push($definition)
+				TEXT TO BLOB:C554(JSON Stringify:C1217($definition); $blob; UTF8 text without length:K22:17)
+				COMPRESS BLOB:C534($blob; Fast compression mode:K22:13)
+				$cacheFile.setContent($blob)
+			Else 
+				$blob:=$cacheFile.getContent()
+				EXPAND BLOB:C535($blob)
+				$json:=BLOB to text:C555($blob; UTF8 text without length:K22:17)
+				$definition:=JSON Parse:C1218($json)
+				$definitions.push($definition)
 			End if 
-			For each ($definition; $definitions)
-				For each ($page; $definition.pages)
-					$page:=$page || New object:C1471
-					$page.objects:=$page.objects || New object:C1471
-					For each ($objectName; $page.objects)
-						$object:=$page.objects[$objectName]
-						Case of 
-							: ($objectName="header_bkgd")
-								$offsetVertical:=$object.top+$object.height
-							: ($objectName="vTabBar_subform")
-								$offsetHorizontal:=$object.left+$object.width
-						End case 
-						Case of 
-							: ($object.type="listbox")
-								If ($object.method="ObjectMethods@")
-									$object.method:="sfw_dynamicForm_script"
-								End if 
-								For each ($column; $page.objects[$objectName].columns)
-									If ($column.method="ObjectMethods@")
-										$column.method:="sfw_dynamicForm_script"
-									End if 
-								End for each 
-							: ($object.method#Null:C1517)
+		End if 
+		For each ($definition; $definitions)
+			For each ($page; $definition.pages)
+				$page:=$page || New object:C1471
+				$page.objects:=$page.objects || New object:C1471
+				For each ($objectName; $page.objects)
+					$object:=$page.objects[$objectName]
+					Case of 
+						: ($objectName="header_bkgd")
+							$offsetVertical:=$object.top+$object.height
+						: ($objectName="vTabBar_subform")
+							$offsetHorizontal:=$object.left+$object.width
+					End case 
+					Case of 
+						: ($object.type="listbox")
+							If ($object.method="ObjectMethods@")
 								$object.method:="sfw_dynamicForm_script"
-						End case 
-						
-					End for each 
+							End if 
+							For each ($column; $page.objects[$objectName].columns)
+								If ($column.method="ObjectMethods@")
+									$column.method:="sfw_dynamicForm_script"
+								End if 
+							End for each 
+						: ($object.method#Null:C1517)
+							$object.method:="sfw_dynamicForm_script"
+					End case 
+					
 				End for each 
 			End for each 
-		End if 
+		End for each 
 		
 		For each ($panelPage; This:C1470.entry.panel.pages)
 			If ($panelPage.dynamicSource#Null:C1517)
-				If (123=123)
-					If ($panelPage.page<$formDefinition.pages.length)
-						$pageDefinition:=$formDefinition.pages[$panelPage.page]
-						If ($pageDefinition=Null:C1517)
-							$pageDefinition:=New object:C1471("objects"; New object:C1471)
-							$formDefinition.pages[$panelPage.page]:=$pageDefinition
-						End if 
-					Else 
+				If ($panelPage.page<$formDefinition.pages.length)
+					$pageDefinition:=$formDefinition.pages[$panelPage.page]
+					If ($pageDefinition=Null:C1517)
 						$pageDefinition:=New object:C1471("objects"; New object:C1471)
 						$formDefinition.pages[$panelPage.page]:=$pageDefinition
 					End if 
+				Else 
+					$pageDefinition:=New object:C1471("objects"; New object:C1471)
+					$formDefinition.pages[$panelPage.page]:=$pageDefinition
 				End if 
 				
 				$dynamicClass:=OB Class:C1730($panelPage.dynamicSource).name
@@ -2817,10 +2842,19 @@ Function drawHTab()
 				$strokeText:="222222"
 				$hText:=7
 			End if 
-			$withTab:=$tab.width+20
+			If (String:C10($tab.extraLabel)="")
+				$label:=$tab.label
+				$withTab:=$tab.width+20
+			Else 
+				$label:=$tab.label+String:C10($tab.extraLabel)
+				OBJECT SET TITLE:C194(*; "TextWidthCalculator"; $tab.extraLabel)
+				OBJECT GET BEST SIZE:C717(*; "TextWidthCalculator"; $bestWidth; $bestHeight)
+				$withTab:=$tab.width+20+$bestWidth
+			End if 
 			$rect:=SVG_New_rect($svg; $hOffset; $top; $withTab; 27; 5; 5; $stroke; $fill; 1)
 			SVG_SET_ID($rect; "page:"+String:C10($tab.page))
-			$text:=SVG_New_text($svg; $tab.label; $hOffset+($withTab/2); $hText; $fonFamily; 12; $style; Align center:K42:3; $strokeText)
+			
+			$text:=SVG_New_text($svg; $label; $hOffset+($withTab/2); $hText; $fonFamily; 12; $style; Align center:K42:3; $strokeText)
 			$hOffset+=$hGutter+$withTab
 		End if 
 	End for each 
