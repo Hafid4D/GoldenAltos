@@ -12,7 +12,6 @@
 	"rightMargin": 20,
 	"bottomMargin": 20,
 	"events": [
-		"onLoad",
 		"onHeader",
 		"onPrintingDetail"
 	],
@@ -314,7 +313,7 @@
 					"height": 16,
 					"fill": "transparent",
 					"borderStyle": "none",
-					"dataSource": "Form:C1466.certification.name"
+					"dataSource": "Form:C1466.certificationName"
 				},
 				"Input1": {
 					"type": "input",
@@ -324,10 +323,9 @@
 					"height": 16,
 					"fill": "transparent",
 					"borderStyle": "none",
-					"dataSource": "Form:C1466.certification.date",
+					"dataSource": "Form:C1466.certificationDate",
 					"dataSourceTypeHint": "date",
-					"dateFormat": "short",
-					"textAlign": "right"
+					"dateFormat": "short"
 				}
 			}
 		}

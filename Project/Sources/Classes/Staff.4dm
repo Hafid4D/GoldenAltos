@@ -43,7 +43,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.enableTransaction()
 	//$entry.setAllowedProfilesForDeletion("pm")
 	
-	$entry.setItemListAction("Staff Certifications of the year"; "Staff_certification_of_the_year")
+	$entry.setItemListAction("Staff Certifications of the year - CSV"; "Staff_certif_of_the_year_csv")
+	$entry.setItemListAction("Staff Certifications of the year - PDF"; "Staff_certif_of_the_year_pdf")
 	$entry.setItemListAction("Export All Employees - CSV"; "Staff_export_all_employees_csv")
 	$entry.setItemListAction("Export All Employees - PDF"; "Staff_export_all_employees_pdf")
 	$entry.setItemListAction("Print Badges"; "Staff_print_badges")
