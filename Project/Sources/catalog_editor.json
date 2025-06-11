@@ -735,18 +735,18 @@
 		},
 		"sfw_DocumentModel": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 181,
+				"green": 145,
+				"blue": 209,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 240,
-				"top": 40,
-				"width": 120,
-				"height": 167.33203125
+				"left": 494,
+				"top": 1193,
+				"width": 192,
+				"height": 191.33203125
 			},
-			"displayable_fields_count": 6,
+			"displayable_fields_count": 7,
 			"fields_ordering": 1
 		},
 		"Document": {
@@ -1281,6 +1281,22 @@
 		}
 	},
 	"relations": {
+		"21F24064B21BD049B14117B76DB3F13A": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"F4287A8F63DFD843A448C38B9636BE8D": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"955286728075C248B78E5075BB881DB4": {
 			"color": {
 				"red": 240,

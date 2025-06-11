@@ -1296,6 +1296,30 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="F4287A8F63DFD843A448C38B9636BE8D" name_Nto1="documentFolder" name_1toN="documentModels" state="1">
+		<related_field kind="source">
+			<field_ref uuid="F119140F7535E44DB944F683426DC8A2" name="UUID_DocumentFolder">
+				<table_ref uuid="37B76DEC3444474BA87B456E6A1D1708" name="sfw_DocumentModel"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="BA314E8B13754390B2700B893AD65AB1" name="UUID">
+				<table_ref uuid="A718BF77C87A4DB4AB861A00287FBC68" name="sfw_DocumentFolder"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="21F24064B21BD049B14117B76DB3F13A" name_Nto1="documentModel" name_1toN="documents" state="1">
+		<related_field kind="source">
+			<field_ref uuid="BACD5C581C2B8644BF8526784365D436" name="UUID_DocumentModel">
+				<table_ref uuid="5E1C3E25225441628E3DBCF58BFAABF4" name="sfw_Document"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="F119140F7535E44DB944F683426DC8A2" name="UUID_DocumentFolder">
+				<table_ref uuid="37B76DEC3444474BA87B456E6A1D1708" name="sfw_DocumentModel"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="01619F9BF52940F3AFF8C52A4A82535D" type="3">
 		<field_ref uuid="951D3770910B43BBBFCAB95E4B3A1C65" name="UUID_Tool">
 			<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
