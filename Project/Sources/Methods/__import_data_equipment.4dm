@@ -123,8 +123,6 @@ If ($equipment_Log.exists)
 		For each ($document; $_documents)
 			$doc:=New object:C1471
 			
-			//$doc.tableNumber:=Table(->[Equipment])
-			//$doc.foreignKey:=$eEquipment.UUID
 			$doc.code:=$document.DocCode
 			$doc.dateTimeStamp:=$document.DateTimeStamp
 			$doc.creationDateTimeStamp:=$document.CreationDateTimeStamp
@@ -133,6 +131,9 @@ If ($equipment_Log.exists)
 			$doc.tempCounter:=$document.TempCounter
 			$doc.rawText:=$document.RawText
 			$doc.description:=$document.DocDescription
+			$doc.approvalDate:=!00-00-00!
+			$doc.approvedBy:=""
+			$doc.isApproved:=False:C215
 			
 			$report:=Folder:C1567(fk data folder:K87:12).file("DataJson/EquipmentReports/"+String:C10($document.UniqueID+$document.PrimaryKeyValue))
 			If ($report.exists)

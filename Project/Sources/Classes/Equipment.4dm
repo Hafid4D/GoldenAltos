@@ -15,7 +15,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanel("panel_equipment")
 	$entry.setPanelPage(1; ""; "Main")
 	$entry.setPanelPage(2; ""; "Repair Log")
-	$entry.setPanelPage(3; ""; "Attached Reports")
+	$entry.setPanelPage(3; ""; "Documents")
 	
 	$entry.setLBItemsColumn("assignedID"; "assigned ID"; "width:200")
 	$entry.setLBItemsColumn("serialNumber"; "Serial number"; "width:100")
