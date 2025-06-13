@@ -749,21 +749,6 @@
 			"displayable_fields_count": 7,
 			"fields_ordering": 1
 		},
-		"Document": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			},
-			"coordinates": {
-				"left": 891,
-				"top": 74,
-				"width": 186,
-				"height": 346.33203125
-			},
-			"displayable_fields_count": 14
-		},
 		"dfd_Line": {
 			"color": {
 				"red": 158,
@@ -847,9 +832,9 @@
 				"left": 902,
 				"top": 520,
 				"width": 176,
-				"height": 387.33203125
+				"height": 422.33203125
 			},
-			"displayable_fields_count": 16
+			"displayable_fields_count": 18
 		},
 		"Division": {
 			"color": {

@@ -45,7 +45,6 @@ If ($continue)
 	$separator_col:=Char:C90(Tab:K15:37)
 	$separator_line:=Char:C90(Carriage return:K15:38)
 	
-	SUSPEND TRANSACTION:C1385
 	
 	If ($identView="main")
 		$identView:="allEquipments"
@@ -122,6 +121,9 @@ If ($continue)
 						$division:=ds:C1482.Division.query("divisionID=:1"; $equipment_e["divisionID"]).first()
 						SEND PACKET:C103($file; Replace string:C233(String:C10($division.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
 						
+					: ($headerName="reports")
+						
+						
 					Else 
 						SEND PACKET:C103($file; Replace string:C233(String:C10($equipment_e[$headerName]); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
 						
@@ -134,8 +136,6 @@ If ($continue)
 		End for each 
 		
 		CLOSE DOCUMENT:C267($file)
-		
-		RESUME TRANSACTION:C1386
 		
 		cs:C1710.sfw_dialog.me.info(ds:C1482.sfw_readXliff("export.done"; "The export is done"))
 		

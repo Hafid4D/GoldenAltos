@@ -86,7 +86,8 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"fontWeight": "bold",
-					"textAlign": "left"
+					"textAlign": "left",
+					"method": "ObjectMethods/entryField_status.4dm"
 				},
 				"label_0_4": {
 					"type": "text",
@@ -773,6 +774,90 @@
 					"left": 19,
 					"width": 451,
 					"height": 120
+				},
+				"PopupDate1": {
+					"type": "subform",
+					"top": 161,
+					"left": 316,
+					"width": 19,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.nextCalDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/PopupDate1.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true,
+					"borderStyle": "none"
+				},
+				"PopupDate2": {
+					"type": "subform",
+					"top": 193,
+					"left": 316,
+					"width": 19,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.lastCalDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/PopupDate2.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true,
+					"borderStyle": "none"
+				},
+				"PopupDate3": {
+					"type": "subform",
+					"top": 382,
+					"left": 316,
+					"width": 19,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.nextPMDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/PopupDate3.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true,
+					"borderStyle": "none"
+				},
+				"PopupDate4": {
+					"type": "subform",
+					"top": 414,
+					"left": 316,
+					"width": 19,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.lastPMDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/PopupDate4.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true,
+					"borderStyle": "none"
 				}
 			}
 		},
@@ -977,6 +1062,19 @@
 							"dataSource": "This:C1470.description",
 							"dataSourceTypeHint": "text",
 							"width": 224
+						},
+						{
+							"header": {
+								"name": "Header8",
+								"text": "QA Approval",
+								"fontWeight": "bold"
+							},
+							"name": "Column8",
+							"dataSourceTypeHint": "boolean",
+							"dataSource": "This:C1470.isApproved",
+							"footer": {
+								"name": "Footer8"
+							}
 						}
 					]
 				},
@@ -1001,7 +1099,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 501,
+	"geometryStamp": 512,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

@@ -265,7 +265,7 @@
 		<field name="UUID" uuid="8FD486DDACE0854DA8FB686A58B08089" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="systemID" uuid="C56ACBF61233134FA887559C036F2D7A" type="10" limiting_length="255" never_null="true" id="2"/>
 		<field name="fixedBy" uuid="178FB5C0BB8AF745A901549D3F9B117A" type="10" never_null="true" id="3"/>
-		<field name="dateFixed" uuid="BFCFF4A84085C14BA123E73537FC98F4" type="8" never_null="true" id="4"/>
+		<field name="fixedDate" uuid="BFCFF4A84085C14BA123E73537FC98F4" type="8" never_null="true" id="4"/>
 		<field name="reportDate" uuid="741357BFDBEA23499DB051B8EDCB9EE8" type="8" never_null="true" id="5"/>
 		<field name="status" uuid="DA2945D648F7F24DB6ED519C615564F1" type="10" limiting_length="255" never_null="true" id="6"/>
 		<field name="problem" uuid="F35B240CA3E0504AB0D8E25B17534FBF" type="10" never_null="true" id="7"/>
@@ -275,7 +275,10 @@
 		<field name="downAt" uuid="4033EAEBDBD0E941A0CD4C53AFD01C46" type="9" never_null="true" id="11"/>
 		<field name="upAt" uuid="7E6764EC95C7F74B89A8509FFD911EFE" type="9" never_null="true" id="12"/>
 		<field name="dateUp" uuid="8BE38F5B5B6E214D8C55B2E7F73DCE36" type="8" never_null="true" id="13"/>
+		<field name="isApproved" uuid="D1206F3FDDA66F49812596441E32BE6A" type="1" never_null="true" id="14"/>
 		<field name="reportedBy" uuid="0D41C3EAAF305248A7DDF508713A818A" type="10" never_null="true" id="15"/>
+		<field name="approvedBy" uuid="C69BC87ECC3E8A40AFE2E649C3367539" type="10" limiting_length="255" never_null="true" id="16"/>
+		<field name="approvalDate" uuid="C58CFAD652E982459AD859AAC73FE8D3" type="8" never_null="true" id="17"/>
 		<primary_key field_name="UUID" field_uuid="8FD486DDACE0854DA8FB686A58B08089"/>
 	</table>
 	<table name="dfd_Document" uuid="A1BFE9AD9486804BA249798C81722C4A" id="22">
@@ -303,40 +306,6 @@
 		<field name="variableItems" uuid="0E045F5AB20DD449B056619FE140AD60" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
 		<field name="moreData" uuid="4BCA5B74C4D29142B7B17483C096F2A9" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="0526ECAF73946E4E90574CB0C2FC9FA1"/>
-	</table>
-	<table name="Document" uuid="FBA11C0BC2A7E94692FD2162F7AD9333" id="25">
-		<field name="UUID" uuid="3E04CFF5D515BF48A62EAC677ABD1B96" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="tableNumber" uuid="1D8B24F554804A49A91CC94208BD2EEB" type="4" never_null="true" id="2"/>
-		<field name="foreignKey" uuid="D6A3AA495E693F4C8D7725E7013692AF" type="10" store_as_UUID="true" never_null="true" id="3"/>
-		<field name="dateTimeStamp" uuid="2B0B6BF653930C429E1D8B5E669A42D4" type="4" never_null="true" id="4">
-			<field_extra multi_line="false"/>
-		</field>
-		<field name="creationDateTimeStamp" uuid="85A12442048A214F9359038DB84D30A5" type="4" never_null="true" id="5">
-			<field_extra multi_line="false"/>
-		</field>
-		<field name="description" uuid="A2FF0A85AEBBB745BA14B6F8F42A84D5" type="10" limiting_length="255" never_null="true" id="6"/>
-		<field name="documentPath" uuid="4FAAB98F50F2074B8C4219C53A978624" type="10" limiting_length="255" never_null="true" id="7">
-			<field_extra multi_line="false"/>
-		</field>
-		<field name="sourcePath" uuid="1F70238B486BCA4E9F45CAE04774287F" type="10" limiting_length="255" never_null="true" id="8">
-			<field_extra multi_line="false"/>
-		</field>
-		<field name="code" uuid="0438951A79E1D04CAC0A1B4533EAB449" type="10" limiting_length="255" never_null="true" id="9">
-			<field_extra multi_line="false"/>
-		</field>
-		<field name="tempCounter" uuid="067D3676EFBF164794687A601ABCA447" type="4" never_null="true" id="10">
-			<field_extra multi_line="false"/>
-		</field>
-		<field name="docThumbnail" uuid="6A6D0A493628814F937ECD3D67EE3C15" type="12" never_null="true" id="11">
-			<field_extra multi_line="false"/>
-		</field>
-		<field name="blob" uuid="7A1193BCC3F47246B4E1E3A03CCC534E" type="18" never_null="true" id="12">
-			<field_extra multi_line="false"/>
-		</field>
-		<field name="rawText" uuid="52D830E48D4D4845AE1F860CF62ACC01" type="10" limiting_length="255" never_null="true" id="13">
-			<field_extra multi_line="false"/>
-		</field>
-		<primary_key field_name="UUID" field_uuid="3E04CFF5D515BF48A62EAC677ABD1B96"/>
 	</table>
 	<table name="sfw_DocumentModel" uuid="37B76DEC3444474BA87B456E6A1D1708" id="26">
 		<field name="UUID" uuid="AC37D94799FAA74089EE6777FABCEAAF" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -1654,11 +1623,6 @@
 			<table_ref uuid="2CC1E163267E4DFE808464C271CC4C9F" name="PurchaseOrderLine"/>
 		</field_ref>
 	</index>
-	<index kind="regular" uuid="841E2E03ADF5D64E977435719D9151C8" type="1">
-		<field_ref uuid="D6A3AA495E693F4C8D7725E7013692AF" name="foreignKey">
-			<table_ref uuid="FBA11C0BC2A7E94692FD2162F7AD9333" name="Document"/>
-		</field_ref>
-	</index>
 	<index kind="regular" uuid="866AC73A0570C443A12494C3DF0771C5" type="3">
 		<field_ref uuid="95C3CA62BD079647A666AAE41D7B984A" name="UUID_StepTemplate">
 			<table_ref uuid="73EFE2D78C61400397353509CBA87D18" name="Step"/>
@@ -1774,11 +1738,6 @@
 			<table_ref uuid="7A8F1179566C46A6AB8E4B04DD19B496" name="StepTemplateCertification"/>
 		</field_ref>
 	</index>
-	<index kind="regular" uuid="AA105DAA0337A74E8603E1F3EDB77DBE" type="3">
-		<field_ref uuid="1D8B24F554804A49A91CC94208BD2EEB" name="tableNumber">
-			<table_ref uuid="FBA11C0BC2A7E94692FD2162F7AD9333" name="Document"/>
-		</field_ref>
-	</index>
 	<index kind="regular" unique_keys="true" uuid="AE3C51D88ED2C44F90C5B6FDA6E32C30" type="7">
 		<field_ref uuid="52CADD4F2C4DE44B83A36B7204B3ED3B" name="UUID">
 			<table_ref uuid="3758196088EF454FAE6DE1AA847DFBAF" name="EquipmentLocation"/>
@@ -1807,11 +1766,6 @@
 	<index kind="regular" unique_keys="true" uuid="BDA8800349B14D4D92A8B670F01E0E74" type="7">
 		<field_ref uuid="06082B4C48E941B1831630EDE47BA25D" name="UUID">
 			<table_ref uuid="7A8F1179566C46A6AB8E4B04DD19B496" name="StepTemplateCertification"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="BED554E1CE4BC247B499BAECCA6AC55E" type="7">
-		<field_ref uuid="3E04CFF5D515BF48A62EAC677ABD1B96" name="UUID">
-			<table_ref uuid="FBA11C0BC2A7E94692FD2162F7AD9333" name="Document"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="C4B21DC93AECE742AAF07D041BE7F747" type="7">

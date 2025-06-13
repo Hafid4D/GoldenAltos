@@ -13,22 +13,23 @@
 	"bottomMargin": 0,
 	"events": [
 		"onLoad",
-		"onPageChange",
 		"onValidate",
 		"onClick",
-		"onDoubleClick",
 		"onOutsideCall",
-		"onBeginDragOver",
-		"onDragOver",
+		"onDoubleClick",
 		"onDrop",
-		"onAfterKeystroke",
 		"onMenuSelect",
 		"onPluginArea",
-		"onAfterEdit",
+		"onDataChange",
+		"onDragOver",
 		"onTimer",
-		"onBoundVariableChange"
+		"onAfterKeystroke",
+		"onAfterEdit",
+		"onBeginDragOver",
+		"onBoundVariableChange",
+		"onPageChange"
 	],
-	"windowTitle": "window title",
+	"windowTitle": "Document details",
 	"destination": "detailScreen",
 	"pages": [
 		{
@@ -37,7 +38,7 @@
 					"type": "rectangle",
 					"top": 0,
 					"left": 0,
-					"width": 466,
+					"width": 490,
 					"height": 280,
 					"fill": "#E6E6E6",
 					"stroke": "transparent",
@@ -119,7 +120,7 @@
 				},
 				"Text20": {
 					"type": "text",
-					"text": "Document Patth",
+					"text": "Document Path",
 					"top": 6,
 					"left": 7,
 					"width": 102,
@@ -173,7 +174,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.sourcePath"
+					"dataSource": "Form:C1466.details.sourcePath"
 				},
 				"Input7": {
 					"type": "input",
@@ -183,9 +184,8 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.documentPath",
-					"dataSourceTypeHint": "number",
-					"numberFormat": "$##,###,###,##0.00"
+					"dataSource": "Form:C1466.details.documentPath",
+					"dataSourceTypeHint": "text"
 				},
 				"header_bkgd8": {
 					"type": "rectangle",
@@ -224,7 +224,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.description"
+					"dataSource": "Form:C1466.details.description"
 				},
 				"header_bkgd16": {
 					"type": "rectangle",
@@ -269,7 +269,7 @@
 					"dataSourceTypeHint": "boolean",
 					"fontWeight": "normal",
 					"right": 452,
-					"dataSource": "Form:C1466.isApproved"
+					"dataSource": "Form:C1466.details.isApproved"
 				},
 				"Text3": {
 					"type": "text",
@@ -309,7 +309,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.approvedBy"
+					"dataSource": "Form:C1466.details.approvedBy"
 				},
 				"Text16": {
 					"type": "text",
@@ -321,7 +321,7 @@
 					"textAlign": "right",
 					"fontWeight": "bold"
 				},
-				"Input9": {
+				"Field_approvalDate": {
 					"type": "input",
 					"left": 151,
 					"top": 197,
@@ -329,8 +329,11 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.approvalDate",
-					"dataSourceTypeHint": "date"
+					"dataSource": "Form:C1466.details.approvalDate",
+					"dataSourceTypeHint": "date",
+					"enterable": false,
+					"focusable": false,
+					"sizingX": "grow"
 				},
 				"Text1": {
 					"type": "text",
@@ -342,13 +345,13 @@
 					"fontWeight": "bold",
 					"class": ""
 				},
-				"PopupDate1": {
+				"PopupDate": {
 					"type": "subform",
 					"top": 198,
-					"left": 433,
+					"left": 425,
 					"width": 19,
 					"height": 17,
-					"dataSource": "Form:C1466.invoice.date",
+					"dataSource": "Form:C1466.details.approvalDate",
 					"dataSourceTypeHint": "date",
 					"detailForm": "DateButton",
 					"deletableInList": false,
@@ -356,7 +359,7 @@
 					"doubleClickInEmptyAreaAction": "addSubrecord",
 					"selectionMode": "multiple",
 					"printFrame": "variable",
-					"method": "ObjectMethods/PopupDate1.4dm",
+					"method": "ObjectMethods/PopupDate.4dm",
 					"events": [
 						"onLoad"
 					],
@@ -366,7 +369,7 @@
 				"bOk": {
 					"type": "button",
 					"top": 235,
-					"left": 422,
+					"left": 458,
 					"width": 30,
 					"height": 32,
 					"sizingY": "move",
@@ -385,12 +388,12 @@
 					"shortcutShift": false,
 					"shortcutAlt": false,
 					"shortcutKey": "[Return]",
-					"method": "ObjectMethods/bOk.4dm"
+					"method": ""
 				},
 				"bCancel": {
 					"type": "button",
 					"top": 235,
-					"left": 376,
+					"left": 412,
 					"width": 32,
 					"height": 32,
 					"sizingY": "move",
@@ -404,7 +407,7 @@
 						"onClick"
 					],
 					"action": "cancel",
-					"method": "ObjectMethods/bCancel.4dm"
+					"method": ""
 				},
 				"pup_docTypes": {
 					"type": "button",
@@ -423,11 +426,51 @@
 					"style": "bevel",
 					"popupPlacement": "linked",
 					"textPlacement": "left"
+				},
+				"bView": {
+					"type": "button",
+					"text": "",
+					"top": 30,
+					"left": 458,
+					"width": 30,
+					"height": 32,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"icon": "/RESOURCES/sfw/image/skin/rainbow/btn4states/eye-24x24.png",
+					"iconFrames": 4,
+					"method": "ObjectMethods/bView.4dm"
+				},
+				"bUpload": {
+					"type": "button",
+					"top": 237,
+					"left": 7,
+					"width": 133,
+					"height": 30,
+					"sizingY": "move",
+					"focusable": false,
+					"text": " Upload document",
+					"icon": "/RESOURCES/sfw/image/menu/upload.png",
+					"iconFrames": 1,
+					"textPlacement": "right",
+					"style": "roundedBevel",
+					"events": [
+						"onClick"
+					],
+					"action": "",
+					"shortcutAccel": false,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": false,
+					"shortcutKey": "",
+					"method": "",
+					"fontWeight": "bold"
 				}
 			}
 		}
 	],
-	"geometryStamp": 160,
+	"geometryStamp": 199,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
