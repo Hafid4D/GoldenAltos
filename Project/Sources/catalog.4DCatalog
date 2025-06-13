@@ -1320,6 +1320,30 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="FDC5A1E6258BD846948597EDE0DBB2A7" name_Nto1="staff" name_1toN="memberships" state="1">
+		<related_field kind="source">
+			<field_ref uuid="0CA34F14FEE5FF429B1A694BD2DD1C6B" name="UUID_Staff">
+				<table_ref uuid="89B8693B8BA31D46A5E7CC5F40548E73" name="Membership"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="6941AB4C41898A4A9FBF25D5AC27CA2B" name="UUID">
+				<table_ref uuid="FD10D10C9E0015458AFF59F988A373BB" name="Staff"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="F6F0A513B569CF478CD5428CF28D8E51" name_Nto1="team" name_1toN="memberships" state="1">
+		<related_field kind="source">
+			<field_ref uuid="378FB0F2EB71F243BA08605B15A340E4" name="UUID_Team">
+				<table_ref uuid="89B8693B8BA31D46A5E7CC5F40548E73" name="Membership"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="2407878C5D46474F9669463CE4A10D45" name="UUID">
+				<table_ref uuid="7B297BB3C8DBDA42B6756D36DC233D8B" name="Team"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="01619F9BF52940F3AFF8C52A4A82535D" type="3">
 		<field_ref uuid="951D3770910B43BBBFCAB95E4B3A1C65" name="UUID_Tool">
 			<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
@@ -1463,6 +1487,11 @@
 	<index kind="regular" uuid="2F43555942CD426DA98581247C28392E" type="3">
 		<field_ref uuid="252F726A4DA54A89B97834C4A86C2301" name="UUID_Quote">
 			<table_ref uuid="348628FCA4DC451085D7519B226BD509" name="QuoteLine"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="34F76064C30E2F4C9C144E533921C827" type="3">
+		<field_ref uuid="0CA34F14FEE5FF429B1A694BD2DD1C6B" name="UUID_Staff">
+			<table_ref uuid="89B8693B8BA31D46A5E7CC5F40548E73" name="Membership"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="40A9EAD691134D62B6DCAA9836F141F0" type="3">
