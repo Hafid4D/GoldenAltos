@@ -442,7 +442,7 @@
 					"iconFrames": 4,
 					"method": "ObjectMethods/bView.4dm"
 				},
-				"bUpload": {
+				"bUploadDocument": {
 					"type": "button",
 					"top": 237,
 					"left": 7,
@@ -464,13 +464,21 @@
 					"shortcutShift": false,
 					"shortcutAlt": false,
 					"shortcutKey": "",
-					"method": "",
+					"method": "ObjectMethods/bUploadDocument.4dm",
 					"fontWeight": "bold"
+				},
+				"fileName": {
+					"type": "text",
+					"text": "",
+					"top": 237,
+					"left": 145,
+					"width": 247,
+					"height": 30
 				}
 			}
 		}
 	],
-	"geometryStamp": 199,
+	"geometryStamp": 204,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

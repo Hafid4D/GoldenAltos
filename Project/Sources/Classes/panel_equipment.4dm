@@ -201,7 +201,6 @@ Function loadDocuments()
 		
 		Form:C1466.lb_documents:=Form:C1466.current_item.reports.documents.map(Formula:C1597(_ga_getDateTime))
 		
-		//Form.lb_documents:=ds.Document.query("foreignKey=:1 & tableNumber=:2"; Form.current_item.UUID; Table(->[Equipment])).orderBy("code desc").toCollection().map(Formula(_ga_getDateTime)
 	End if 
 	
 	
