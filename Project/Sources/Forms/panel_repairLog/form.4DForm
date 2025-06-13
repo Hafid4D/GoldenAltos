@@ -88,7 +88,8 @@
 					"fontWeight": "bold",
 					"textAlign": "left",
 					"dataSourceTypeHint": "time",
-					"timeFormat": "hh_mm_am"
+					"timeFormat": "hh_mm_am",
+					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
 				},
 				"label_reportedID": {
 					"type": "text",
@@ -146,7 +147,9 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"fontWeight": "bold",
-					"textAlign": "left"
+					"textAlign": "left",
+					"dataSourceTypeHint": "date",
+					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
 				},
 				"label_timeUp": {
 					"type": "text",
@@ -204,7 +207,9 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"fontWeight": "bold",
-					"textAlign": "left"
+					"textAlign": "left",
+					"dataSourceTypeHint": "date",
+					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
 				},
 				"label_reportedID1": {
 					"type": "text",
@@ -309,6 +314,194 @@
 					"visibility": "visible",
 					"iconFrames": 4,
 					"focusable": false
+				},
+				"label_approvedBy": {
+					"type": "text",
+					"top": 67,
+					"left": 978,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Approved by :"
+				},
+				"entryField_approvedBy": {
+					"type": "input",
+					"top": 67,
+					"left": 1073,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.approvedBy",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"dataSourceTypeHint": "time",
+					"timeFormat": "hh_mm_am"
+				},
+				"label_approvedDate": {
+					"type": "text",
+					"top": 38,
+					"left": 978,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Approved Date :"
+				},
+				"entryField_approvalDate": {
+					"type": "input",
+					"top": 38,
+					"left": 1073,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.approvalDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"dataSourceTypeHint": "date",
+					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
+				},
+				"entryField_isApproved": {
+					"type": "checkbox",
+					"text": "Approved",
+					"top": 11,
+					"left": 1073,
+					"width": 190,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.current_item.isApproved",
+					"fontWeight": "bold",
+					"dataSourceTypeHint": "boolean"
+				},
+				"PopupDate": {
+					"type": "subform",
+					"top": 39,
+					"left": 1244,
+					"width": 19,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.approvalDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/PopupDate.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true,
+					"borderStyle": "none"
+				},
+				"PopupDate1": {
+					"type": "subform",
+					"top": 12,
+					"left": 605,
+					"width": 19,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.reportDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/PopupDate1.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true,
+					"borderStyle": "none"
+				},
+				"PopupDate2": {
+					"type": "subform",
+					"top": 12,
+					"left": 925,
+					"width": 19,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.dateUp",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/PopupDate2.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true,
+					"borderStyle": "none"
+				},
+				"label_fixDate": {
+					"type": "text",
+					"top": 68,
+					"left": 659,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Fix date :"
+				},
+				"entryField_dateUp1": {
+					"type": "input",
+					"top": 68,
+					"left": 754,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.fixedDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"dataSourceTypeHint": "date",
+					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
+				},
+				"PopupDate3": {
+					"type": "subform",
+					"top": 68,
+					"left": 925,
+					"width": 19,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.fixedDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/PopupDate3.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true,
+					"borderStyle": "none"
 				}
 			}
 		},
@@ -402,7 +595,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 104,
+	"geometryStamp": 148,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

@@ -1,7 +1,7 @@
 //%attributes = {}
 
 
-var $eDocument : cs:C1710.DocumentEntity
+//var $eDocument : cs.DocumentEntity  //Create Document Table first and uncomment this line
 var $foreignKey; $1 : Text
 var $documents; $2 : Collection
 var $blob : Blob

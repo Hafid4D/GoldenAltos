@@ -27,6 +27,7 @@ Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	This:C1470.drawPup_fixOperator()
 	This:C1470.drawPup_reportOperator()
+	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
 	
 	
 Function drawPup_XXX()

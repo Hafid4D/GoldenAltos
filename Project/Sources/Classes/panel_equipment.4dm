@@ -54,6 +54,7 @@ Function redrawAndSetVisible()
 		Form:C1466.sfw.entry.panel.pages[2].label:="Documents ("+String:C10(Form:C1466.lb_documents.length)+")"
 		
 	End use 
+	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
 	Form:C1466.sfw.drawHTab()
 	
 	
@@ -280,30 +281,53 @@ Function bActionDocument()
 			BLOB TO DOCUMENT:C526($LocalFile; Form:C1466.selectedDocument.blob)
 			OPEN URL:C673($LocalFile; *)
 			
+			
 		: ($choice="--add")
+			
+			$details:=New object:C1471
+			OB SET:C1220($details; "code"; ""; \
+				"dateTimeStamp"; _ga_setDateTimeStamp(Current date:C33(*); Current time:C178(*)); \
+				"creationDateTimeStamp"; _ga_setDateTimeStamp(Current date:C33(*); Current time:C178(*)); \
+				"documentPath"; ""; \
+				"sourcePath"; ""; \
+				"description"; ""; \
+				"approvalDate"; Date:C102(!00-00-00!); \
+				"approvedBy"; ""; \
+				"isApproved"; False:C215)
+			
+			
+			$form:=New object:C1471("details"; $details)  // Form.selectedDocument)
+			
+			$form.operation:="create"
+			
+			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("_ga_document"; $form)
+			If (OK=1)
+				Form:C1466.current_item.reports.documents.push($form.details)
+			End if 
+			
 			
 		: ($choice="--modify")
 			
-			$form:=New object:C1471
+			$form:=New object:C1471("details"; Form:C1466.current_item.reports.documents[Form:C1466.selectedDocumentPos-1])  // Form.selectedDocument)
 			
-			$form:=Form:C1466.selectedDocument
+			$form.operation:="modify"
 			
-			$winRef:=Open form window:C675("_ga_Document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
-			DIALOG:C40("_ga_Document"; $form)
+			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("_ga_document"; $form)
 			
-			Form:C1466.selectedDocument.code:=$form.values.code
-			Form:C1466.selectedDocument.documentPath:=$form.values.documentPath
-			Form:C1466.selectedDocument.sourcePath:=$form.values.sourcePath
-			Form:C1466.selectedDocument.description:=$form.values.description
-			Form:C1466.selectedDocument.approvalDate:=$form.values.approvalDate
-			Form:C1466.selectedDocument.approvedBy:=$form.values.approvedBy
-			Form:C1466.selectedDocument.isApproved:=$form.values.isApproved
 			
 		: ($choice="--delete")
 			
+			$ok:=cs:C1710.sfw_dialog.me.confirm("Do you really want to delete this document? "; "Delete"; "CANCEL")
+			If ($ok)
+				
+				Form:C1466.current_item.reports.documents.remove(Form:C1466.selectedDocumentPos-1)
+				
+				
+			End if 
 			
-			
-			
+			This:C1470.loadDocuments()
 	End case 
 	
 	

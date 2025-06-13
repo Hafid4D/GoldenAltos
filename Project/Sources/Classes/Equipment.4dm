@@ -17,8 +17,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(2; ""; "Repair Log")
 	$entry.setPanelPage(3; ""; "Documents")
 	
-	$entry.setLBItemsColumn("assignedID"; "assigned ID"; "width:200")
-	$entry.setLBItemsColumn("serialNumber"; "Serial number"; "width:100")
+	$entry.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
+	$entry.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
+	$entry.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
 	$entry.setLBItemsOrderBy("assignedID")
 	
 	$entry.setItemListAction("Export equipments list"; "_ga_exportEquipmentList")
@@ -30,9 +31,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListAction("Print PM Sticker"; "_ga_printPMStickers")
 	
 	$entry.setItemAction("Print Repair Log Report"; "_ga_printRepairLogReport")
-	$entry.setItemAction("Print Usage Log Report"; "_ga_usageLogReport")
-	
-	//$entry.setItemListProjection("Projection to repairLog"; "projectionToRepairLog"; "RepairLog"; "qualityAssistance")
+	$entry.setItemAction("Print Usage Log Equip/Traveler"; "_ga_usageLogReport")
 	
 	
 	$entry.enableTransaction()
@@ -63,8 +62,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	// MARK: Equipment out of calibration List
 	$view:=cs:C1710.sfw_definitionView.new("equipmentsOutOfCalibration"; "Equipments out of calibration")
-	$view.setLBItemsColumn("assignedID"; "assigned ID")
-	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:200")
+	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
+	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
+	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
 	$view.setLBItemsOrderBy("assignedID")
 	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
 	$view.setSubset("equipmentsOutOfCalibration")
@@ -72,8 +72,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	// MARK: Prevent Maintenance List
 	$view:=cs:C1710.sfw_definitionView.new("pmEquipments"; "Prevent Maintenance equipments")
-	$view.setLBItemsColumn("assignedID"; "assigned ID")
-	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:200")
+	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
+	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
+	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
 	$view.setLBItemsOrderBy("assignedID")
 	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
 	$view.setSubset("pmEquipments")
@@ -81,8 +82,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	// MARK: Due calibration List
 	$view:=cs:C1710.sfw_definitionView.new("dueCalibrationEquipments"; "Due calibration equipments")
-	$view.setLBItemsColumn("assignedID"; "assigned ID")
-	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:200")
+	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
+	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
+	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
 	$view.setLBItemsOrderBy("assignedID")
 	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
 	$view.setSubset("dueCalibrationEquipments")
@@ -90,8 +92,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	// MARK: Due Prevent Maintenance List
 	$view:=cs:C1710.sfw_definitionView.new("duePMEquipments"; "Due Prevent Maintenance equipments")
-	$view.setLBItemsColumn("assignedID"; "assigned ID")
-	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:200")
+	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
+	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
+	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
 	$view.setLBItemsOrderBy("assignedID")
 	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
 	$view.setSubset("duePMEquipments")
@@ -99,8 +102,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	// MARK:  List of equipment down
 	$view:=cs:C1710.sfw_definitionView.new("equipmentsDownOrOnHold"; "Equipments down")
-	$view.setLBItemsColumn("assignedID"; "assigned ID")
-	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:200")
+	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
+	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
+	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
 	$view.setLBItemsOrderBy("assignedID")
 	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
 	$view.setSubset("equipmentsDownOrOnHold")
@@ -108,8 +112,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	// MARK:  List of equipment down
 	$view:=cs:C1710.sfw_definitionView.new("calibrationExemptList"; "Calibration-exempt list")
-	$view.setLBItemsColumn("assignedID"; "assigned ID")
-	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:200")
+	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
+	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
+	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
 	$view.setLBItemsOrderBy("assignedID")
 	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
 	$view.setSubset("calibrationExemptList")

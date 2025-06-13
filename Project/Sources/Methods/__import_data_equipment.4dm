@@ -18,7 +18,6 @@ If ($equipment_Log.exists)
 	TRUNCATE TABLE:C1051([Equipment:13])
 	TRUNCATE TABLE:C1051([EquipmentLocation:19])
 	TRUNCATE TABLE:C1051([Division:20])
-	TRUNCATE TABLE:C1051([Document:25])
 	
 	//----> [Division]
 	For ($i; 0; $divisions.length-1)
@@ -93,7 +92,7 @@ If ($equipment_Log.exists)
 		If ($type.length>0)
 			$eEquipment.UUID_ToolType:=$type[0].UUID
 		Else 
-			//$eEquipment.UUID_ToolType:=0
+			
 		End if 
 		
 		$eEquipment.status:=$equipment.ATE_STATUS
@@ -116,7 +115,6 @@ If ($equipment_Log.exists)
 		
 		$_documents:=$documents.query("PrimaryKeyValue=:1 & TableNumber=:2"; String:C10($equipment.UniqueID); 10)
 		
-		///*
 		$eEquipment.reports:=New object:C1471()
 		$eEquipment.reports.documents:=New collection:C1472()
 		
@@ -128,8 +126,6 @@ If ($equipment_Log.exists)
 			$doc.creationDateTimeStamp:=$document.CreationDateTimeStamp
 			$doc.documentPath:=$document.DocumentPath
 			$doc.sourcePath:=$document.SourcePath
-			$doc.tempCounter:=$document.TempCounter
-			$doc.rawText:=$document.RawText
 			$doc.description:=$document.DocDescription
 			$doc.approvalDate:=!00-00-00!
 			$doc.approvedBy:=""
@@ -148,17 +144,10 @@ If ($equipment_Log.exists)
 			$eEquipment.reports.documents.push($doc)
 		End for each 
 		
-		//*/
-		
 		$res:=$eEquipment.save()
 		If (Not:C34($res.success))
 			TRACE:C157
 		End if 
-		
-		
-		//If ($_documents.length>0)
-		//__import_data_docServerIndex($eEquipment.UUID; $_documents; Table(->[Equipment]))
-		//End if 
 		
 	End for each 
 	
@@ -182,7 +171,7 @@ If ($repair_Log_file.exists)
 		$eRepair.reportedBy:=$repair.Rep_by
 		$eRepair.fixedBy:=$repair.Fixed_by
 		$eRepair.reportedBy:=$repair.Rep_by
-		$eRepair.dateFixed:=$repair.Date_fixed
+		$eRepair.fixedDate:=$repair.Date_fixed
 		$eRepair.reportDate:=$repair.Rep_date
 		$eRepair.status:=$repair.E_status
 		$eRepair.problem:=Split string:C1554($repair.Problem; "\r"; sk trim spaces:K86:2).join("\r")

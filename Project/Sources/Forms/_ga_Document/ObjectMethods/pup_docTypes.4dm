@@ -3,7 +3,7 @@
 Case of 
 		
 	: (Form event code:C388=On Load:K2:1)
-		OBJECT SET TITLE:C194(*; "pup_docTypes"; String:C10(Form:C1466.code))
+		OBJECT SET TITLE:C194(*; "pup_docTypes"; String:C10(Form:C1466.details.code))
 		
 	: (Form event code:C388=On Clicked:K2:4)
 		//var $hList; $hSousList : Integer
@@ -36,7 +36,7 @@ Case of
 		Case of 
 			: ($choose#"")
 				OBJECT SET TITLE:C194(*; "pup_docTypes"; $choose)
-				Form:C1466.code:=$choose
+				Form:C1466.details.code:=$choose
 		End case 
 		
 End case 
