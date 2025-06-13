@@ -11,10 +11,7 @@
 	"windowMaxHeight": 32767,
 	"rightMargin": 0,
 	"bottomMargin": 0,
-	"events": [
-		"onPrintingFooter",
-		"onPrintingDetail"
-	],
+	"events": [],
 	"destination": "listPrinter",
 	"pages": [
 		{

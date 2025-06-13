@@ -11,10 +11,7 @@
 	"windowMaxHeight": 32767,
 	"rightMargin": 0,
 	"bottomMargin": 0,
-	"events": [
-		"onPrintingFooter",
-		"onPrintingDetail"
-	],
+	"events": [],
 	"destination": "listPrinter",
 	"pages": [
 		{
@@ -266,7 +263,7 @@
 					"top": 97,
 					"width": 28,
 					"height": 16,
-					"dataSource": "Form:C1466.order",
+					"dataSource": "Form:C1466.employee.count",
 					"enterable": false,
 					"borderStyle": "none",
 					"textAlign": "center"
@@ -277,7 +274,7 @@
 					"top": 97,
 					"width": 47,
 					"height": 16,
-					"dataSource": "[Staff:135]code:10",
+					"dataSource": "Form:C1466.employee.code",
 					"enterable": false,
 					"borderStyle": "none",
 					"textAlign": "center"
@@ -288,7 +285,7 @@
 					"top": 97,
 					"width": 77,
 					"height": 16,
-					"dataSource": "[Staff:135]firstName:4",
+					"dataSource": "Form:C1466.employee.firstName",
 					"enterable": false,
 					"borderStyle": "none",
 					"textAlign": "center"
@@ -299,7 +296,7 @@
 					"top": 97,
 					"width": 77,
 					"height": 16,
-					"dataSource": "[Staff:135]lastName:5",
+					"dataSource": "Form:C1466.employee.lastName",
 					"enterable": false,
 					"borderStyle": "none",
 					"textAlign": "center"
@@ -310,7 +307,7 @@
 					"top": 97,
 					"width": 77,
 					"height": 16,
-					"dataSource": "[Staff:135]department:11",
+					"dataSource": "Form:C1466.employee.department",
 					"enterable": false,
 					"borderStyle": "none",
 					"textAlign": "center"
@@ -321,7 +318,7 @@
 					"top": 97,
 					"width": 77,
 					"height": 16,
-					"dataSource": "[Staff:135]hireDate:13",
+					"dataSource": "Form:C1466.employee.hireDate",
 					"enterable": false,
 					"borderStyle": "none",
 					"textAlign": "center"
@@ -332,7 +329,7 @@
 					"top": 97,
 					"width": 65,
 					"height": 16,
-					"dataSource": "[Staff:135]terminated:12",
+					"dataSource": "Form:C1466.employee.terminated",
 					"enterable": false,
 					"borderStyle": "none",
 					"textAlign": "center"
@@ -343,7 +340,7 @@
 					"top": 97,
 					"width": 87,
 					"height": 16,
-					"dataSource": "[Staff:135]terminationDate:8",
+					"dataSource": "Form:C1466.employee.terminationDate",
 					"enterable": false,
 					"borderStyle": "none",
 					"dataSourceTypeHint": "date",
@@ -361,7 +358,7 @@
 				"Text11": {
 					"type": "text",
 					"text": "Printed by :",
-					"top": 121,
+					"top": 124,
 					"left": 420,
 					"width": 75,
 					"height": 15,
@@ -371,7 +368,7 @@
 				"Text12": {
 					"type": "text",
 					"text": "Printed Date :",
-					"top": 133,
+					"top": 136,
 					"left": 420,
 					"width": 75,
 					"height": 27,
@@ -381,7 +378,7 @@
 				"Input10": {
 					"type": "input",
 					"left": 499,
-					"top": 121,
+					"top": 124,
 					"width": 77,
 					"height": 16,
 					"dataSource": "Form:C1466.printedBy",
@@ -393,7 +390,7 @@
 				"Input11": {
 					"type": "input",
 					"left": 499,
-					"top": 133,
+					"top": 136,
 					"width": 77,
 					"height": 28,
 					"dataSource": "Form:C1466.printedDate",
@@ -403,11 +400,18 @@
 					"fontSize": 10,
 					"dataSourceTypeHint": "date",
 					"dateFormat": "short"
+				},
+				"Line21": {
+					"type": "line",
+					"top": 121,
+					"left": 17,
+					"width": 560,
+					"height": 0
 				}
 			}
 		}
 	],
-	"geometryStamp": 892,
+	"geometryStamp": 900,
 	"markerFooter": 154,
 	"markerBreak": 120,
 	"markerBody": 119,

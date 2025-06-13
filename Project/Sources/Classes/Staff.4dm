@@ -45,8 +45,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setItemListAction("Staff Certifications of the year - CSV"; "Staff_certif_of_the_year_csv")
 	$entry.setItemListAction("Staff Certifications of the year - PDF"; "Staff_certif_of_the_year_pdf")
-	$entry.setItemListAction("Export All Employees - CSV"; "Staff_export_all_employees_csv")
-	$entry.setItemListAction("Export All Employees - PDF"; "Staff_export_all_employees_pdf")
+	$entry.setItemListAction("Export Employees - CSV"; "Staff_export_employees_csv")
+	$entry.setItemListAction("Export Employees - PDF"; "Staff_export_employees_pdf")
 	$entry.setItemListAction("Print Badges"; "Staff_print_badges")
 	
 	$entry.setItemAction("Print Badge"; "staff_print_badge")

@@ -16,7 +16,7 @@ If (OK=1)
 	
 	$data.push($header)
 	
-	$staff_es:=ds:C1482.Staff.all()
+	$staff_es:=Form:C1466.sfw.lb_items
 	
 	For each ($staff_e; $staff_es)
 		$line:=$staff_e.firstName+$separator_col+\
