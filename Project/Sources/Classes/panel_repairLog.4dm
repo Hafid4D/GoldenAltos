@@ -34,6 +34,9 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_reportOperator()
 	This:C1470.drawPup_EquipmentId()
 	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
+	If (Form:C1466.situation.mode#"add")
+		OBJECT SET ENTERABLE:C238(*; "entryField_systemID"; False:C215)
+	End if 
 	
 	
 Function drawPup_XXX()
@@ -53,7 +56,7 @@ Function drawPup_EquipmentId()
 			$typeName:=""
 		End if 
 		$color:=""  //cs.sfw_htmlColor.me.getName($equipmentId.color)
-		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		$pathIcon:=""  //($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
 		Form:C1466.sfw.drawButtonPup("pup_equipmentId"; $typeName; $pathIcon; ($equipmentId=Null:C1517))
 	End if 
 	
