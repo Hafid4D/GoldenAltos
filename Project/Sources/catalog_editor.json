@@ -40,8 +40,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2356,
-				"top": 162,
+				"left": 2429,
+				"top": 153,
 				"width": 207.05078125,
 				"height": 379.33203125
 			},
@@ -102,8 +102,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2118,
-				"top": 602,
+				"left": 2110,
+				"top": 642,
 				"width": 165,
 				"height": 173.33203125
 			},
@@ -136,9 +136,9 @@
 				"left": 1894,
 				"top": 214,
 				"width": 93.66145324707,
-				"height": 83.33203125
+				"height": 129.33203125
 			},
-			"displayable_fields_count": 2,
+			"displayable_fields_count": 4,
 			"fields_ordering": 1
 		},
 		"Employee": {
@@ -181,8 +181,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2029,
-				"top": 36,
+				"left": 1783,
+				"top": 0,
 				"width": 127.669921875,
 				"height": 167.33203125
 			},
@@ -701,6 +701,36 @@
 			"displayable_fields_count": 5,
 			"fields_ordering": 1
 		},
+		"YesNoQuestion": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 2622,
+				"top": 0,
+				"width": 153,
+				"height": 112.33203125
+			},
+			"displayable_fields_count": 3
+		},
+		"CICategory": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 2471,
+				"top": 0,
+				"width": 120,
+				"height": 127.33203125
+			},
+			"displayable_fields_count": 4
+		},
 		"sfw_Currency": {
 			"color": {
 				"red": 237,
@@ -716,6 +746,21 @@
 			},
 			"displayable_fields_count": 3,
 			"fields_ordering": 1
+		},
+		"CIOrigin": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 1929,
+				"top": 0,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6
 		},
 		"sfw_Setting": {
 			"color": {
@@ -733,6 +778,51 @@
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
+		"CIHumanFactors": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 2274,
+				"top": 354,
+				"width": 120,
+				"height": 117.33203125
+			},
+			"displayable_fields_count": 3
+		},
+		"CIDisposition": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 2275,
+				"top": 220,
+				"width": 120,
+				"height": 115.33203125
+			},
+			"displayable_fields_count": 3
+		},
+		"CIPriority": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 2290,
+				"top": 0,
+				"width": 120,
+				"height": 157.33203125
+			},
+			"displayable_fields_count": 5
+		},
 		"sfw_DocumentModel": {
 			"color": {
 				"red": 181,
@@ -748,6 +838,31 @@
 			},
 			"displayable_fields_count": 7,
 			"fields_ordering": 1
+		},
+		"ContinuousImprovement": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 2062,
+				"top": 0,
+				"width": 197,
+				"height": 428.33203125
+			},
+			"displayable_fields_count": 18,
+			"fields": {
+				"notes": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
 		},
 		"dfd_Line": {
 			"color": {
@@ -1240,8 +1355,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3325,
-				"top": 130.66667175293,
+				"left": 3321,
+				"top": 161.66667175293,
 				"width": 211.01448059082,
 				"height": 104.33203125
 			},
@@ -1259,9 +1374,9 @@
 				"left": 692,
 				"top": 423,
 				"width": 149.015625,
-				"height": 210.33203125
+				"height": 196.33203125
 			},
-			"displayable_fields_count": 8,
+			"displayable_fields_count": 7,
 			"fields_ordering": 1
 		}
 	},
