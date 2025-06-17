@@ -749,6 +749,35 @@
 			"displayable_fields_count": 7,
 			"fields_ordering": 1
 		},
+		"Qcar": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 1618,
+				"top": 1170,
+				"width": 188.015625,
+				"height": 503.33203125
+			},
+			"displayable_fields_count": 22,
+			"fields": {
+				"UUID_Customer": {
+					"position": 3
+				},
+				"UUID_Lot": {
+					"position": 2
+				},
+				"qcarNumber": {
+					"position": 4
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
+		},
 		"dfd_Line": {
 			"color": {
 				"red": 158,
@@ -1266,6 +1295,22 @@
 		}
 	},
 	"relations": {
+		"169DABBC5600C0469F8583F46BDCDFA4": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"ADD3451DE4C0DF41A843F29EF0A9F98F": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"F6F0A513B569CF478CD5428CF28D8E51": {
 			"color": {
 				"red": 240,
