@@ -131,7 +131,7 @@ local Function _initAddress()
 		$mainAddress:=New object:C1471
 		$mainAddress.type:="billing"
 		$mainAddress.detail:=New object:C1471
-		$mainAddress.detail.country:="FR"
+		$mainAddress.detail.country:=cs:C1710.sfw_definition.me.globalParameters.address.defaultCountry
 		This:C1470.contactDetails.addresses.push($mainAddress)
 	End if 
 	
@@ -140,7 +140,7 @@ local Function _initAddress()
 		$mainAddress:=New object:C1471
 		$mainAddress.type:="shipping"
 		$mainAddress.detail:=New object:C1471
-		$mainAddress.detail.country:="FR"
+		$mainAddress.detail.country:=cs:C1710.sfw_definition.me.globalParameters.address.defaultCountry
 		This:C1470.contactDetails.addresses.push($mainAddress)
 	End if 
 	

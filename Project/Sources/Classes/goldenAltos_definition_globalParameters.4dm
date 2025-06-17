@@ -30,8 +30,8 @@ Function _global_parameters()
 	This:C1470.users.linkedObject:="staff"
 	This:C1470.users.linkedPathToNameFromUserEntity:="staffs.first().fullName"
 	This:C1470.users.linkedPathToEmailFromUserEntity:="staffs.first().email"
-	This:C1470.folders:=New object:C1471("projectResources"; "kairos")
-	This:C1470.address:=New object:C1471("defaultCountry"; "fr")
+	This:C1470.folders:=New object:C1471("projectResources"; "ga")
+	This:C1470.address:=New object:C1471("defaultCountry"; "us")
 	This:C1470.preferedCountriesInPup:=New collection:C1472("ma"; "fr"; "us")
 	
 	This:C1470.microsoftGraphAPI:=New object:C1471()
