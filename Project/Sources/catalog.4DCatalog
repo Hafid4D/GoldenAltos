@@ -349,6 +349,7 @@
 		</field>
 		<field name="externalID" uuid="6CCF4B8B7E030544B21604F953DD5343" type="10" limiting_length="255" never_null="true" id="18"/>
 		<field name="currentDueDate" uuid="B232F043459B6B41B4B9D9A41D1722F1" type="8" never_null="true" id="19"/>
+		<field name="title" uuid="EB1C6D90466E244EAD12C83A24C318D6" type="10" limiting_length="255" never_null="true" id="20"/>
 		<primary_key field_name="UUID" field_uuid="E4F1F05A93EBEB4EB76E384419D62112"/>
 	</table>
 	<table name="sfw_DocumentModel" uuid="37B76DEC3444474BA87B456E6A1D1708" id="26">
@@ -384,7 +385,7 @@
 	</table>
 	<table name="CIHumanFactors" uuid="2B3270362A7A6342B4A9D49F4266C1F5" id="29">
 		<field name="UUID" uuid="01A4D0E8E7BA9B48A30792F1EDE4BAD6" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="factorID" uuid="BEBEC1FBBA247041AB993C2E0442DE8E" type="10" limiting_length="255" never_null="true" id="2">
+		<field name="factorID" uuid="BEBEC1FBBA247041AB993C2E0442DE8E" type="4" never_null="true" id="2">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="name" uuid="8C42CB157AFC2F4A89015D381524E2CF" type="10" limiting_length="255" never_null="true" id="4">
@@ -403,7 +404,7 @@
 	</table>
 	<table name="CIOrigin" uuid="709A717C5479F84494AA1C420093F500" id="31">
 		<field name="UUID" uuid="FAB7EB268BAD3741BE4520A0518A4764" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="originID" uuid="CB4B7F976C649D46993F3043BE045E9A" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="originID" uuid="CB4B7F976C649D46993F3043BE045E9A" type="4" never_null="true" id="2"/>
 		<field name="name" uuid="739CA3D15E5CF448BBEB3FEC0068C898" type="10" limiting_length="255" never_null="true" id="3"/>
 		<primary_key field_name="UUID" field_uuid="FAB7EB268BAD3741BE4520A0518A4764"/>
 	</table>
@@ -415,13 +416,13 @@
 	</table>
 	<table name="CICategory" uuid="12C5C25E6F81654DA0FB31C54E963E00" id="33">
 		<field name="UUID" uuid="ABB5485D67861C4884D7E9EF218BFD1A" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="categoryID" uuid="D36C063AA9B2BE46BFCF2168662F8FF0" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="categoryID" uuid="D36C063AA9B2BE46BFCF2168662F8FF0" type="4" never_null="true" id="2"/>
 		<field name="name" uuid="6BE27370D49C944A825D585038214E51" type="10" limiting_length="255" never_null="true" id="3"/>
 		<primary_key field_name="UUID" field_uuid="ABB5485D67861C4884D7E9EF218BFD1A"/>
 	</table>
 	<table name="YesNoQuestion" uuid="EF08E8961B35724A90161EC3FDC9D950" id="34">
 		<field name="UUID" uuid="F4F183C203267641A55226527FCEE721" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="responseID" uuid="0F2C3571EDC382469AB7FD9CC656A6A6" type="10" limiting_length="255" never_null="true" id="2">
+		<field name="responseID" uuid="0F2C3571EDC382469AB7FD9CC656A6A6" type="4" never_null="true" id="2">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="name" uuid="1EEE988BAA79264E9827B1CCEBE4408C" type="10" limiting_length="255" never_null="true" id="3">

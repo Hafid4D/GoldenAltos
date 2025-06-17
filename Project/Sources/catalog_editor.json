@@ -1,5 +1,34 @@
 {
 	"tables": {
+		"Qcar": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 1618,
+				"top": 1170,
+				"width": 188.015625,
+				"height": 503.33203125
+			},
+			"displayable_fields_count": 22,
+			"fields": {
+				"UUID_Customer": {
+					"position": 3
+				},
+				"UUID_Lot": {
+					"position": 2
+				},
+				"qcarNumber": {
+					"position": 4
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
+		},
 		"Membership": {
 			"color": {
 				"red": 255,
@@ -861,35 +890,6 @@
 						"blue": 255,
 						"alpha": 0
 					}
-				}
-			}
-		},
-		"Qcar": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			},
-			"coordinates": {
-				"left": 1618,
-				"top": 1170,
-				"width": 188.015625,
-				"height": 503.33203125
-			},
-			"displayable_fields_count": 22,
-			"fields": {
-				"UUID_Customer": {
-					"position": 3
-				},
-				"UUID_Lot": {
-					"position": 2
-				},
-				"qcarNumber": {
-					"position": 4
-				},
-				"UUID": {
-					"position": 1
 				}
 			}
 		},
