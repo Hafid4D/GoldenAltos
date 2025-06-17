@@ -9,6 +9,11 @@ Function formMethod()
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		
+		If (Form:C1466.situation.mode="add")
+			OBJECT SET VISIBLE:C603(*; "pup_equipmentId"; True:C214)
+		Else 
+			OBJECT SET VISIBLE:C603(*; "pup_equipmentId"; False:C215)
+		End if 
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
@@ -27,7 +32,11 @@ Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	This:C1470.drawPup_fixOperator()
 	This:C1470.drawPup_reportOperator()
+	This:C1470.drawPup_EquipmentId()
 	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
+	If (Form:C1466.situation.mode#"add")
+		OBJECT SET ENTERABLE:C238(*; "entryField_systemID"; False:C215)
+	End if 
 	
 	
 Function drawPup_XXX()
@@ -37,6 +46,48 @@ Function drawPup_XXX()
 	
 Function pup_XXX()
 	//Create pop up menu
+	
+	
+Function drawPup_EquipmentId()
+	If (Form:C1466.current_item#Null:C1517)
+		$equipmentId:=Form:C1466.current_item.equipment  //ds.Equipment.query("assignedID= :1"; Form.current_item.systemID).first() || New object()
+		$typeName:=$equipmentId.assignedID
+		If ($typeName=Null:C1517)
+			$typeName:=""
+		End if 
+		$color:=""  //cs.sfw_htmlColor.me.getName($equipmentId.color)
+		$pathIcon:=""  //($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_equipmentId"; $typeName; $pathIcon; ($equipmentId=Null:C1517))
+	End if 
+	
+	
+Function pup_equipId()
+	//Create pop up menu
+	If (Form:C1466.sfw.checkIsInModification())
+		$menu:=Create menu:C408
+		For each ($equipmentId; ds:C1482.Equipment.all())  // Storage.cache.equipmentTypes)
+			APPEND MENU ITEM:C411($menu; $equipmentId.assignedID; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $equipmentId.UUID)
+			If ($equipmentId.assignedID=Form:C1466.current_item.systemID)
+				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+				If (Is Windows:C1573)
+					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+				End if 
+			End if 
+		End for each 
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		Case of 
+			: ($choose#"")
+				$equipmentId:=ds:C1482.Equipment.get($choose)
+				Form:C1466.current_item.systemID:=$equipmentId.assignedID
+		End case 
+		
+	End if 
+	This:C1470.drawPup_EquipmentId()
+	
+	
 	
 Function drawPup_fixOperator()
 	If (Form:C1466.current_item#Null:C1517)

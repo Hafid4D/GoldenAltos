@@ -502,6 +502,29 @@
 					],
 					"focusable": true,
 					"borderStyle": "none"
+				},
+				"pup_equipmentId": {
+					"type": "button",
+					"top": 10,
+					"left": 108,
+					"width": 194,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_equipmentId.4dm",
+					"events": [
+						"onLoad",
+						"onClick",
+						"onDisplayDetail"
+					],
+					"fontWeight": "bold",
+					"right": 302
 				}
 			}
 		},
@@ -595,7 +618,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 148,
+	"geometryStamp": 165,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

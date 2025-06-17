@@ -1,5 +1,3 @@
-
-
 Case of 
 		
 	: (Form event code:C388=On Clicked:K2:4)
@@ -12,6 +10,8 @@ Case of
 		If (OK=1)
 			DOCUMENT TO BLOB:C525(Document; $blob)
 			Form:C1466.details.blob:=$blob
+			
+			OBJECT SET TITLE:C194(*; "fileName"; $vhDoc)
 		End if 
 		
 		

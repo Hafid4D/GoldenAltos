@@ -9,8 +9,30 @@ Case of
 		//var $hList; $hSousList : Integer
 		var $hListItems : Collection
 		var $hSousListItems : Collection
-		$hListItems:=New collection:C1472("DocTypeChecks"; "DocTypeDeposits"; "DocTypeEquipment"; "DocTypeJob")
-		$hSousListItems:=New collection:C1472(New collection:C1472("CKD Check Disbursed"); New collection:C1472("CKR Check Received"); New collection:C1472("CAL Calibration Data"); New collection:C1472("IN Customer Job-Instructions"; "RPT Reports"))
+		$hListItems:=New collection:C1472("DocTypeChecks"; \
+			"DocTypeDeposits"; \
+			"DocTypeEquipment"; \
+			"DocTypeJob"; \
+			"DocTypeOther"; \
+			"DocTypeQuote"; \
+			"DocTypeResourceCal"; \
+			"DocTypeSalesOrder"; \
+			"DocTypeSupplier"; \
+			"DocTypeTraveler"; \
+			"DocTypeVendorPO")
+		
+		$hSousListItems:=New collection:C1472(New collection:C1472("CKD Check Disbursed"); \
+			New collection:C1472("CKR Check Received"); \
+			New collection:C1472("CAL Calibration Data"); \
+			New collection:C1472("IN Customer Job-Instructions"; "RPT Reports"); \
+			New collection:C1472("---"; "OT   Other"); \
+			New collection:C1472("QT Quote"; "RFQ Request for Quote"); \
+			New collection:C1472("TS Resource Time-Slip acknowledgement"); \
+			New collection:C1472("CPO Customer's PO"); \
+			New collection:C1472("CRT Certificate"); \
+			New collection:C1472("DL data-log"; "SM Tester Summary"); \
+			New collection:C1472("VPO PO issued to Vendor"))
+		
 		$hList:=Create menu:C408
 		
 		
@@ -35,6 +57,7 @@ Case of
 		RELEASE MENU:C978($hList)
 		Case of 
 			: ($choose#"")
+				$choose:=Split string:C1554($choose; " ")[0]
 				OBJECT SET TITLE:C194(*; "pup_docTypes"; $choose)
 				Form:C1466.details.code:=$choose
 		End case 
