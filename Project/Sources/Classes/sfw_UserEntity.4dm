@@ -99,21 +99,21 @@ local Function sendTemporaryPassword()
 	$formula:=Formula from string:C1601("ds.sfw_User.get($1)."+cs:C1710.sfw_definition.me.globalParameters.users.linkedPathToEmailFromUserEntity)
 	$userEmail:=$formula.call(Null:C1517; This:C1470.UUID)
 	
-	If ($userEmail#"")
-		$email:=New object:C1471
-		$dataContext:={userName: This:C1470.login; temporaryPassword: This:C1470.accesses.password.temporaryPassword}
-		$email:=ds:C1482.sfw_EmailTemplate.prepareEmail("UserPasswordTempo"; $dataContext)
-		
-		If ($email#Null:C1517)
-			// To
-			$addressTo:=New object:C1471
-			$addressTo.emailAddress:=New object:C1471
-			$addressto.emailAddress.address:=$userEmail
-			$email.toRecipients:=New collection:C1472($addressTo)
-			
-			cs:C1710.sfw_eMailManager.me.sendAnEMail($email)
-		End if 
-	End if 
+	//If ($userEmail#"")
+	//$email:=New object
+	//$dataContext:={userName: This.login; temporaryPassword: This.accesses.password.temporaryPassword}
+	//$email:=ds.sfw_EmailTemplate.prepareEmail("UserPasswordTempo"; $dataContext)
+	
+	//If ($email#Null)
+	//// To
+	//$addressTo:=New object
+	//$addressTo.emailAddress:=New object
+	//$addressto.emailAddress.address:=$userEmail
+	//$email.toRecipients:=New collection($addressTo)
+	
+	//cs.sfw_eMailManager.me.sendAnEMail($email)
+	//End if 
+	//End if 
 	
 local Function setLogin()->$login : Text
 	$i:=0
