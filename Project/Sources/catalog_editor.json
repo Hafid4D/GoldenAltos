@@ -714,6 +714,36 @@
 			"displayable_fields_count": 3,
 			"fields_ordering": 1
 		},
+		"LeadStage": {
+			"color": {
+				"red": 207,
+				"green": 209,
+				"blue": 165,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 970,
+				"top": 1770,
+				"width": 155,
+				"height": 159.33203125
+			},
+			"displayable_fields_count": 5
+		},
+		"LeadPriority": {
+			"color": {
+				"red": 207,
+				"green": 209,
+				"blue": 165,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 1245,
+				"top": 1759,
+				"width": 162,
+				"height": 163.33203125
+			},
+			"displayable_fields_count": 5
+		},
 		"sfw_Favorite": {
 			"color": {
 				"red": 168,
@@ -729,6 +759,36 @@
 			},
 			"displayable_fields_count": 5,
 			"fields_ordering": 1
+		},
+		"ServiceType": {
+			"color": {
+				"red": 207,
+				"green": 209,
+				"blue": 165,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 1475,
+				"top": 1774,
+				"width": 149,
+				"height": 146.33203125
+			},
+			"displayable_fields_count": 5
+		},
+		"Lead": {
+			"color": {
+				"red": 207,
+				"green": 209,
+				"blue": 165,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 1156,
+				"top": 1298,
+				"width": 355,
+				"height": 350.33203125
+			},
+			"displayable_fields_count": 14
 		},
 		"YesNoQuestion": {
 			"color": {
@@ -1410,6 +1470,30 @@
 		}
 	},
 	"relations": {
+		"501938D48107BD4E89B47217F659169B": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"586EE5400CA2464DBBE3B9162480749C": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"53BB40AE7C83FC4384BE73C431F1DB89": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"169DABBC5600C0469F8583F46BDCDFA4": {
 			"color": {
 				"red": 240,
