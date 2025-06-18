@@ -35,6 +35,9 @@ local Function rebuidComunications($contactType)->$contacts : Collection
 	End if 
 	
 	
+local Function get nameInWindowTitle()->$nameInWindowTitle : Text
+	$nameInWindowTitle:=This:C1470.name
+	
 	
 	//mark:-Callbacks
 	
