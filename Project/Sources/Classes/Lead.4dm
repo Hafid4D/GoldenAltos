@@ -39,21 +39,21 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	//Mark:- Filters
 	
-	////customers
-	//$filter:=cs.sfw_definitionFilter.new("filterCustomer")
-	//$filter.setDefaultTitle("All customers")
-	//$filter.setFilterByLinkedEntity("Customer"; "UUID_Customer"; "uuidCustomer"; "customer")
-	//$filter.setDynamicTitle("name"; "## customers")
-	//$filter.setOrderForItems("name")
-	//$entry.addFilter($filter)
+	//customers
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterCustomer")
+	$filter.setDefaultTitle("All customers")
+	$filter.setFilterByLinkedEntity("Customer"; "UUID_Customer"; "uuidCustomer"; "customer")
+	$filter.setDynamicTitle("name"; "## customers")
+	$filter.setOrderForItems("name")
+	$entry.addFilter($filter)
 	
-	////service types
-	//$filter:=cs.sfw_definitionFilter.new("filterServiceType")
-	//$filter.setDefaultTitle("All services")
-	//$filter.setFilterByLinkedEntity("ServiceType"; "UUID_ServiceType"; "uuidService"; "serviceType")
-	//$filter.setDynamicTitle("name"; "## services")
-	//$filter.setOrderForItems("name")
-	//$entry.addFilter($filter)
+	//service types
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterServiceType")
+	$filter.setDefaultTitle("All services")
+	$filter.setFilterByLinkedEntity("ServiceType"; "UUID_ServiceType"; "uuidService"; "serviceType")
+	$filter.setDynamicTitle("name"; "## services")
+	$filter.setOrderForItems("name")
+	$entry.addFilter($filter)
 	
 	
 	//stages
@@ -63,10 +63,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$filter.setDynamicTitle("name"; "## statuses")
 	$entry.addFilter($filter)
 	
-	////priorities
-	//$filter:=cs.sfw_definitionFilter.new("filterCurrentPriority")
-	//$filter.setDefaultTitle("All priorities")
-	//$filter.setFilterByIDInTable("LeadPriority"; "levelID"; "priorityLevelID")
-	//$filter.setDynamicTitle("name"; "## priorities")
-	//$entry.addFilter($filter)
+	//priorities
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterCurrentPriority")
+	$filter.setDefaultTitle("All priorities")
+	$filter.setFilterByIDInTable("LeadPriority"; "levelID"; "priorityLevelID")
+	$filter.setDynamicTitle("name"; "## priorities")
+	$entry.addFilter($filter)
 	
