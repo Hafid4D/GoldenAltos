@@ -714,6 +714,21 @@
 			"displayable_fields_count": 3,
 			"fields_ordering": 1
 		},
+		"LeadNextStep": {
+			"color": {
+				"red": 207,
+				"green": 209,
+				"blue": 165,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 740.68432617188,
+				"top": 1697,
+				"width": 183,
+				"height": 172.33203125
+			},
+			"displayable_fields_count": 6
+		},
 		"LeadStage": {
 			"color": {
 				"red": 207,
@@ -785,10 +800,10 @@
 			"coordinates": {
 				"left": 1156,
 				"top": 1298,
-				"width": 355,
-				"height": 350.33203125
+				"width": 365,
+				"height": 425.33203125
 			},
-			"displayable_fields_count": 14
+			"displayable_fields_count": 18
 		},
 		"YesNoQuestion": {
 			"color": {
@@ -1470,6 +1485,30 @@
 		}
 	},
 	"relations": {
+		"DBBCF9672F086D48A93D8C8AC22B8557": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"7535E31683B9724F9BD5369549E72CA1": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"64B0D1E2168AB04DAF6DA8C01B5BE75C": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"501938D48107BD4E89B47217F659169B": {
 			"color": {
 				"red": 240,

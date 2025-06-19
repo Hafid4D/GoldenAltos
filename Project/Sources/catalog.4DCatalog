@@ -445,6 +445,10 @@
 		<field name="moreData" uuid="FAECBD02E8155644A80870BD216F4E4A" type="21" blob_switch_size="2147483647" never_null="true" id="12"/>
 		<field name="reasonWL" uuid="2ED11087E0366E449C71CD30D51205AB" type="10" never_null="true" id="13"/>
 		<field name="deal" uuid="35EF36B63564FF46BBA65655170D2D5A" type="1" never_null="true" id="14"/>
+		<field name="UUID_Quote" uuid="8E4BF5B27969464981C64AD7543BE951" type="10" store_as_UUID="true" never_null="true" id="15"/>
+		<field name="UUID_PurchaseOrder" uuid="66DD748CF2641D4DBD235BD1487914EF" type="10" store_as_UUID="true" never_null="true" id="16"/>
+		<field name="UUID_Job" uuid="CB7307EF402DB74B825760216604C54F" type="10" store_as_UUID="true" never_null="true" id="17"/>
+		<field name="currentNextStep" uuid="77AF3DA079C03A43BAD250289F15EF39" type="3" never_null="true" id="18"/>
 		<primary_key field_name="UUID" field_uuid="B8409317F330EA438FDD41BD2DFC32A3"/>
 	</table>
 	<table name="ServiceType" uuid="2125F2FDC0CF8B44888965E43127D9B3" id="36">
@@ -477,6 +481,14 @@
 		<field name="name" uuid="F3283935A5138D468A43D291716EF06C" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="color" uuid="1F06FC21290EA44DBD230347A18CA356" type="10" limiting_length="255" never_null="true" id="5"/>
 		<primary_key field_name="UUID" field_uuid="F82EDBE20F7F0A4C9658EA6A94789558"/>
+	</table>
+	<table name="LeadNextStep" uuid="D96F66F181815C4C8B54C0F2DB6B1B1A" id="40">
+		<field name="UUID" uuid="99E1A49B9010EC458423F8D8D2A94E3A" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="nextStepID" uuid="D016A17417F7474AA86C7883902446D4" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="code" uuid="2A096374FF0BCE4C816BC28093E98182" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="name" uuid="2191096C7F76D74F823C6955E32B3575" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="color" uuid="2D95A760379E1F48B6DABA4CBAF685EE" type="10" limiting_length="255" never_null="true" id="5"/>
+		<primary_key field_name="UUID" field_uuid="99E1A49B9010EC458423F8D8D2A94E3A"/>
 	</table>
 	<table name="sfw_EventType" uuid="C482A0FBAE724304A8E05A0570FD55D6" id="52">
 		<field name="UUID" uuid="AEE9BE0296924CA7899B7E5DB37ACE13" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -1539,6 +1551,42 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="64B0D1E2168AB04DAF6DA8C01B5BE75C" name_Nto1="job" name_1toN="leads" state="1">
+		<related_field kind="source">
+			<field_ref uuid="CB7307EF402DB74B825760216604C54F" name="UUID_Job">
+				<table_ref uuid="1E733AC1BDB87C40B151040C49BD164B" name="Lead"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="D70DED62813D485DA8CFB0CFD1FF994C" name="UUID">
+				<table_ref uuid="D3AC71CFD00F4948816121AA74EF8DFE" name="Job"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="7535E31683B9724F9BD5369549E72CA1" name_Nto1="purchaseOrder" name_1toN="leads" state="1">
+		<related_field kind="source">
+			<field_ref uuid="66DD748CF2641D4DBD235BD1487914EF" name="UUID_PurchaseOrder">
+				<table_ref uuid="1E733AC1BDB87C40B151040C49BD164B" name="Lead"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="9C187AB4BBD84246AF62E935FF20415E" name="UUID">
+				<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="DBBCF9672F086D48A93D8C8AC22B8557" name_Nto1="quote" name_1toN="leads" state="1">
+		<related_field kind="source">
+			<field_ref uuid="8E4BF5B27969464981C64AD7543BE951" name="UUID_Quote">
+				<table_ref uuid="1E733AC1BDB87C40B151040C49BD164B" name="Lead"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="DDEAA2AF9B9A44BD99857817933C03AA" name="UUID">
+				<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="01619F9BF52940F3AFF8C52A4A82535D" type="3">
 		<field_ref uuid="951D3770910B43BBBFCAB95E4B3A1C65" name="UUID_Tool">
 			<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
@@ -1552,6 +1600,11 @@
 	<index kind="regular" unique_keys="true" uuid="0251966533F64ABA91350A53A8C4F2A0" type="1">
 		<field_ref uuid="781351B073D04C208690E0F1E35AE1FC" name="UUID">
 			<table_ref uuid="46D5D228874048E390B37970A681AAD0" name="sfw_EmailTemplate"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="031249732BE5714E8D57906FBC93768C" type="3">
+		<field_ref uuid="8E4BF5B27969464981C64AD7543BE951" name="UUID_Quote">
+			<table_ref uuid="1E733AC1BDB87C40B151040C49BD164B" name="Lead"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="033AEB213D35D04DA2778E4E3928A376" type="1">
@@ -1854,6 +1907,16 @@
 			<table_ref uuid="A6301A2C994D4680A851FC2AE85118BE" name="StepFile"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="6F750377C0AD2B47A855BA8C28D42C58" type="3">
+		<field_ref uuid="CB7307EF402DB74B825760216604C54F" name="UUID_Job">
+			<table_ref uuid="1E733AC1BDB87C40B151040C49BD164B" name="Lead"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="718EB6C9BE61234BBFF4A4695D2DE4E6" type="7">
+		<field_ref uuid="99E1A49B9010EC458423F8D8D2A94E3A" name="UUID">
+			<table_ref uuid="D96F66F181815C4C8B54C0F2DB6B1B1A" name="LeadNextStep"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="7285E9EA6CF141228EA7B4A754610DF4" type="1">
 		<field_ref uuid="AEE9BE0296924CA7899B7E5DB37ACE13" name="UUID">
 			<table_ref uuid="C482A0FBAE724304A8E05A0570FD55D6" name="sfw_EventType"/>
@@ -2127,6 +2190,11 @@
 	<index kind="regular" unique_keys="true" uuid="DD8B8F9C843946ACB59CD44A8F78E0EC" type="1">
 		<field_ref uuid="C368AB256E3246BAAA4F0BA10076F44E" name="UUID">
 			<table_ref uuid="0A7AAD6A6AAB448E9F91A0CF0CC592C6" name="sfw_SchedulerLog"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="DEF7B611B76F7B4483FA67DB336E0BCC" type="3">
+		<field_ref uuid="66DD748CF2641D4DBD235BD1487914EF" name="UUID_PurchaseOrder">
+			<table_ref uuid="1E733AC1BDB87C40B151040C49BD164B" name="Lead"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="DF30050CCDC3414E8A2AA7F3D6AC41F5" type="7">
