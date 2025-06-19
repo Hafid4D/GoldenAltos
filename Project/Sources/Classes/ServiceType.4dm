@@ -3,8 +3,8 @@ Class extends DataClass
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry:=cs:C1710.sfw_definitionEntry.new("serviceType"; "administration"; "Service types")
 	$entry.setDataclass("ServiceType")
-	$entry.setIcon("image/entry/serviceType-50x50.png")
-	
+	$entry.setIcon("image/entry/serviceType-50x50-W.png"; "image/entry/serviceType-50x50-B.png")
+	$entry.setDisplayOrder(-33000)
 	
 	$entry.setSearchboxField("code")
 	$entry.setSearchboxField("name")
@@ -27,6 +27,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setItemListPreconfigAction("exportReferenceRecords")
 	$entry.setItemListPreconfigAction("importReferenceRecords")
+	
+	$entry.setToolBarGroup("leadParameters")
 	
 	//Mark:- Function to manage the cache
 local Function cacheClear()

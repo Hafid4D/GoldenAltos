@@ -1,10 +1,10 @@
 Class extends DataClass
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
-	$entry:=cs:C1710.sfw_definitionEntry.new("termCondition"; "salesAndQuotes"; "Terms")
+	$entry:=cs:C1710.sfw_definitionEntry.new("termCondition"; "administration"; "Terms")
 	$entry.setDataclass("TermCondition")
-	$entry.setIcon("image/entry/termCondition-50x50.png")
-	$entry.setDisplayOrder(-2000)
+	$entry.setIcon("image/entry/terms-50x50-W.png"; "image/entry/terms-50x50-B.png")
+	$entry.setDisplayOrder(-22000)
 	
 	$entry.setSearchboxField("code")
 	
@@ -21,3 +21,5 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListPreconfigAction("exportReferenceRecords")
 	$entry.setItemListPreconfigAction("importReferenceRecords")
 	$entry.setItemListPreconfigAction("copyItemsListToPasteboard")
+	
+	$entry.setToolBarGroup("QuoteParameters")

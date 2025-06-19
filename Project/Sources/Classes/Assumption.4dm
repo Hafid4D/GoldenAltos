@@ -3,10 +3,10 @@ Class extends DataClass
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
-	$entry:=cs:C1710.sfw_definitionEntry.new("assumption"; "salesAndQuotes"; "Assumptions")
+	$entry:=cs:C1710.sfw_definitionEntry.new("assumption"; "administration"; "Assumptions")
 	$entry.setDataclass("Assumption")
-	$entry.setIcon("image/entry/assumption-50x50.png")
-	$entry.setDisplayOrder(-1000)
+	$entry.setIcon("image/entry/assumption-50x50-W.png"; "image/entry/assumption-50x50-B.png")
+	$entry.setDisplayOrder(-21000)
 	
 	$entry.setSearchboxField("code")
 	
@@ -24,3 +24,4 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListPreconfigAction("importReferenceRecords")
 	$entry.setItemListPreconfigAction("copyItemsListToPasteboard")
 	
+	$entry.setToolBarGroup("QuoteParameters")

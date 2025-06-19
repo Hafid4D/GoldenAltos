@@ -8,8 +8,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setDataclass("LeadNextStep")
 	
-	$entry.setIcon("image/entry/leadNextStep-50x50.png")
-	
+	$entry.setIcon("image/entry/step-50x50-W.png"; "image/entry/step-50x50-B.png")
+	$entry.setDisplayOrder(-31000)
 	$entry.setSearchboxField("nextStepID")
 	$entry.setSearchboxField("code")
 	$entry.setSearchboxField("name")
@@ -33,6 +33,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListPreconfigAction("exportReferenceRecords")
 	$entry.setItemListPreconfigAction("importReferenceRecords")
 	
+	$entry.setToolBarGroup("leadParameters")
 	//Mark:- Function to manage the cache
 local Function cacheClear()
 	If (Storage:C1525.cache#Null:C1517)

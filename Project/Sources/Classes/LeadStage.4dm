@@ -9,8 +9,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setDataclass("LeadStage")
 	
-	$entry.setIcon("image/entry/stage-50x50.png")
-	
+	$entry.setIcon("image/entry/stage-50x50-W.png"; "image/entry/stage-50x50-B.png")
+	$entry.setDisplayOrder(-32000)
 	$entry.setSearchboxField("stageID")
 	$entry.setSearchboxField("code")
 	$entry.setSearchboxField("name")
@@ -33,6 +33,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setItemListPreconfigAction("exportReferenceRecords")
 	$entry.setItemListPreconfigAction("importReferenceRecords")
+	
+	$entry.setToolBarGroup("leadParameters")
 	
 	//Mark:- Function to manage the cache
 local Function cacheClear()

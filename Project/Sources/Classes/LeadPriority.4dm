@@ -4,7 +4,9 @@ Class extends DataClass
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry:=cs:C1710.sfw_definitionEntry.new("leadPriority"; "administration"; "Lead priorities")
 	$entry.setDataclass("LeadPriority")
-	$entry.setIcon("image/entry/priority-50x50.png")
+	$entry.setIcon("image/entry/priority-50x50-W.png"; "image/entry/priority-50x50-B.png")
+	$entry.setDisplayOrder(-30000)
+	
 	
 	$entry.setSearchboxField("levelID")
 	$entry.setSearchboxField("code")
@@ -32,9 +34,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListPreconfigAction("exportReferenceRecords")
 	$entry.setItemListPreconfigAction("importReferenceRecords")
 	
-	//It is used to set a preconfigured action that will be executed on the item list of the entry 
-	//"exportReferenceRecords","importReferenceRecords","copyItemsListToPasteboard"...
-	
+	$entry.setToolBarGroup("leadParameters"; "Lead P."; "sfw/entry/leadParam-50x50.png")
 	
 	
 	//Mark:- Function to manage the cache
