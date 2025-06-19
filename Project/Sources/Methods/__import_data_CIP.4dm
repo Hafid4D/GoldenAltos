@@ -7,7 +7,7 @@ If (True:C214)
 	var $eQuestion : cs:C1710.YesNoQuestionEntity
 	var $ePriority : cs:C1710.CIPriorityEntity
 	var $eOrigin : cs:C1710.CIOriginEntity
-	var $eHumanFactors : cs:C1710.CIHumanFactorsEntity
+	var $eHumanFactor : cs:C1710.CIHumanFactorEntity
 	var $eDisposition : cs:C1710.CIDispositionEntity
 	
 	var $colors : Collection:=New collection:C1472("#3CB371"; "#FFFF00"; "#FF7F50"; "#1E90FF"; "#FF0000")
@@ -74,14 +74,14 @@ If (True:C214)
 		
 	End for 
 	
-	//----> [CIHumanFactors]
-	TRUNCATE TABLE:C1051([CIHumanFactors:29])
+	//----> [CIHumanFactor]
+	TRUNCATE TABLE:C1051([CIHumanFactor:29])
 	For ($i; 0; $humanFactors.length-1)
 		
-		$eHumanFactors:=ds:C1482.CIHumanFactors.new()
-		$eHumanFactors.factorID:=$i+1
-		$eHumanFactors.name:=$humanFactors[$i]
-		$eHumanFactors.save()
+		$eHumanFactor:=ds:C1482.CIHumanFactor.new()
+		$eHumanFactor.factorID:=$i+1
+		$eHumanFactor.name:=$humanFactors[$i]
+		$eHumanFactor.save()
 		
 	End for 
 	
@@ -137,7 +137,7 @@ If ($cip_log.exists)
 			$eCip.disposition:=$disposition[0].dispositionID
 		End if 
 		
-		$humanFactor:=ds:C1482.CIHumanFactors.query("name =:1"; Split string:C1554($cip.humanFactor; "\r"; sk trim spaces:K86:2).join("\r"))
+		$humanFactor:=ds:C1482.CIHumanFactor.query("name =:1"; Split string:C1554($cip.humanFactor; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($humanFactor.length>0)
 			$eCip.humanFactor:=$humanFactor[0].factorID
 		End if 

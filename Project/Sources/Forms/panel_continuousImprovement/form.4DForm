@@ -205,7 +205,7 @@
 				},
 				"label_0_8": {
 					"type": "text",
-					"top": 655,
+					"top": 638,
 					"left": 175,
 					"width": 250,
 					"height": 17,
@@ -390,7 +390,7 @@
 					"text": "Requirement/Procedure#",
 					"textAlign": "right"
 				},
-				"entryField_title1": {
+				"entryField_requirement": {
 					"type": "input",
 					"top": 453,
 					"left": 175,
@@ -466,7 +466,7 @@
 					"fontWeight": "bold",
 					"textAlign": "left"
 				},
-				"label_origin1": {
+				"label_disposition": {
 					"type": "text",
 					"top": 490,
 					"left": 399,
@@ -475,12 +475,284 @@
 					"stroke": "#808080",
 					"text": "Disposition",
 					"textAlign": "right"
+				},
+				"label_0_11": {
+					"type": "text",
+					"top": 527,
+					"left": 5,
+					"width": 145,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Human Factoe if CA",
+					"textAlign": "right"
+				},
+				"pup_humanFactor": {
+					"type": "button",
+					"top": 524,
+					"left": 175,
+					"width": 539,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_humanFactor.4dm",
+					"events": [
+						"onClick",
+						"onDisplayDetail"
+					],
+					"right": 714,
+					"fontWeight": "bold",
+					"textAlign": "left"
+				},
+				"label_0_12": {
+					"type": "text",
+					"top": 570,
+					"left": 5,
+					"width": 145,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Responsible Person(s)",
+					"textAlign": "right"
+				},
+				"entryField_responsible": {
+					"type": "input",
+					"top": 564,
+					"left": 175,
+					"width": 539,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.responsible",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"bottom": 581
+				},
+				"label_0_13": {
+					"type": "text",
+					"top": 601,
+					"left": 5,
+					"width": 145,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Current Due Date",
+					"textAlign": "right"
+				},
+				"entryField_currentDueDate": {
+					"type": "input",
+					"top": 601,
+					"left": 175,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.currentDueDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"bottom": 618,
+					"dataSourceTypeHint": "date"
+				},
+				"PopupDate2": {
+					"type": "subform",
+					"top": 601,
+					"left": 346,
+					"width": 19,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.currentDueDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/PopupDate2.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true,
+					"borderStyle": "none"
+				},
+				"label_0_14": {
+					"type": "text",
+					"top": 601,
+					"left": 369,
+					"width": 130,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Original Due Date",
+					"textAlign": "right"
+				},
+				"entryField_originalDueDate": {
+					"type": "input",
+					"top": 601,
+					"left": 524,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.originalDueDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"bottom": 618,
+					"dataSourceTypeHint": "date"
+				},
+				"PopupDate3": {
+					"type": "subform",
+					"top": 601,
+					"left": 695,
+					"width": 19,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.originalDueDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/PopupDate3.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true,
+					"borderStyle": "none"
+				},
+				"pup_yesNoQuestion": {
+					"type": "button",
+					"top": 660,
+					"left": 175,
+					"width": 190,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_yesNoQuestion.4dm",
+					"events": [
+						"onClick",
+						"onDisplayDetail"
+					],
+					"right": 365,
+					"fontWeight": "bold",
+					"textAlign": "left"
+				},
+				"label_0_15": {
+					"type": "text",
+					"top": 663,
+					"left": 409,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Closed Date",
+					"textAlign": "right"
+				},
+				"entryField_dateClosed": {
+					"type": "input",
+					"top": 663,
+					"left": 524,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.dateClosed",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"bottom": 680,
+					"dataSourceTypeHint": "date"
+				},
+				"PopupDate4": {
+					"type": "subform",
+					"top": 663,
+					"left": 695,
+					"width": 19,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.dateClosed",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/PopupDate4.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true,
+					"borderStyle": "none"
+				},
+				"entryField_notes": {
+					"type": "input",
+					"top": 703,
+					"left": 175,
+					"width": 539,
+					"height": 60,
+					"dataSource": "Form:C1466.current_item.notes",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"bottom": 763
+				},
+				"label_0_16": {
+					"type": "text",
+					"top": 703,
+					"left": 5,
+					"width": 145,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Notes",
+					"textAlign": "right"
 				}
 			}
 		},
 		null
 	],
-	"geometryStamp": 180,
+	"geometryStamp": 232,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"editor": {
 		"activeView": "View 1",

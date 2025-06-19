@@ -392,7 +392,8 @@ Function selectCustomer()
 				
 				$form:=New object:C1471(\
 					"colName"; "name"; \
-					"lb_items"; ds:C1482.Customer.all()\
+					"lb_items"; ds:C1482.Customer.all(); \
+					"dataclass"; "Customer"\
 					)
 				
 				$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b-20)

@@ -173,7 +173,8 @@
 					"events": [
 						"onLoad",
 						"onClick"
-					]
+					],
+					"textAlign": "left"
 				},
 				"communication_subform": {
 					"type": "subform",

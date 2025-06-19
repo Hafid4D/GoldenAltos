@@ -882,7 +882,7 @@
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
-		"CIHumanFactors": {
+		"CIHumanFactor": {
 			"color": {
 				"red": 255,
 				"green": 255,
@@ -908,9 +908,9 @@
 				"left": 2275,
 				"top": 220,
 				"width": 120,
-				"height": 115.33203125
+				"height": 134.33203125
 			},
-			"displayable_fields_count": 3
+			"displayable_fields_count": 4
 		},
 		"CIPriority": {
 			"color": {
