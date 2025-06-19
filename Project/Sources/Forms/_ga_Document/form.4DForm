@@ -473,12 +473,13 @@
 					"top": 237,
 					"left": 145,
 					"width": 247,
-					"height": 30
+					"height": 30,
+					"textAlign": "left"
 				}
 			}
 		}
 	],
-	"geometryStamp": 204,
+	"geometryStamp": 205,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

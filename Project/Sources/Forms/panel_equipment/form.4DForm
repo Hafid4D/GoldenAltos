@@ -81,6 +81,7 @@
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
+						"onLosingFocus",
 						"onDataChange"
 					],
 					"fill": "transparent",

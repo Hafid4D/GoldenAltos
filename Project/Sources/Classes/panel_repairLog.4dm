@@ -104,33 +104,56 @@ Function drawPup_fixOperator()
 	
 Function pup_fixOperator()
 	//Create pop up menu
+	
 	If (Form:C1466.sfw.checkIsInModification())
-		$menu:=Create menu:C408
-		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.staffs=Null:C1517)
-			ds:C1482.Staff.cacheLoad()
+/*
+$menu:=Create menu
+If (Storage.cache=Null) || (Storage.cache.staffs=Null)
+ds.Staff.cacheLoad()
+End if 
+		
+For each ($fixOperator; Storage.cache.staffs)
+APPEND MENU ITEM($menu; $fixOperator.code; *)
+SET MENU ITEM PARAMETER($menu; -1; $fixOperator.code)
+If ($fixOperator.code=Form.current_item.fixedBy)
+SET MENU ITEM MARK($menu; -1; Char(18))
+If (Is Windows)
+SET MENU ITEM STYLE($menu; -1; Bold)
+End if 
+End if 
+End for each 
+$choose:=Dynamic pop up menu($menu)
+RELEASE MENU($menu)
+		
+Case of 
+: ($choose#"")
+$fixOperator:=ds.Employee.get($choose)
+Form.current_item.fixedBy:=$fixOperator.code
+End case 
+		
+*/
+		
+		OBJECT GET COORDINATES:C663(*; "pup_fixOperator"; $l; $t; $r; $b)
+		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
+		
+		$form:=New object:C1471(\
+			"colName"; "code"; \
+			"lb_items"; ds:C1482.Staff.all(); \
+			"dataclass"; "Staff"\
+			)
+		
+		$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b)
+		DIALOG:C40("selectNto1"; $form)
+		CLOSE WINDOW:C154($winRef)
+		
+		If (ok=1)
+			Form:C1466.current_item.fixedBy:=$form.item.code
+			cs:C1710.panel_repairLog.me._activate_save_cancel_button()
 		End if 
-		
-		For each ($fixOperator; Storage:C1525.cache.staffs)
-			APPEND MENU ITEM:C411($menu; $fixOperator.code; *)
-			SET MENU ITEM PARAMETER:C1004($menu; -1; $fixOperator.code)
-			If ($fixOperator.code=Form:C1466.current_item.fixedBy)
-				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
-				If (Is Windows:C1573)
-					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
-				End if 
-			End if 
-		End for each 
-		$choose:=Dynamic pop up menu:C1006($menu)
-		RELEASE MENU:C978($menu)
-		
-		Case of 
-			: ($choose#"")
-				$fixOperator:=ds:C1482.Employee.get($choose)
-				Form:C1466.current_item.fixedBy:=$fixOperator.code
-		End case 
-		
 	End if 
+	
 	This:C1470.drawPup_fixOperator()
+	
 	
 Function drawPup_reportOperator()
 	If (Form:C1466.current_item#Null:C1517)
@@ -148,31 +171,50 @@ Function drawPup_reportOperator()
 Function pup_reportOperator()
 	//Create pop up menu
 	If (Form:C1466.sfw.checkIsInModification())
-		$menu:=Create menu:C408
-		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.staffs=Null:C1517)
-			ds:C1482.Staff.cacheLoad()
+/*
+$menu:=Create menu
+If (Storage.cache=Null) || (Storage.cache.staffs=Null)
+ds.Staff.cacheLoad()
+End if 
+		
+For each ($reportOperator; Storage.cache.staffs)
+APPEND MENU ITEM($menu; $reportOperator.code; *)
+SET MENU ITEM PARAMETER($menu; -1; $reportOperator.code)
+If ($reportOperator.code=Form.current_item.fixedBy)
+SET MENU ITEM MARK($menu; -1; Char(18))
+If (Is Windows)
+SET MENU ITEM STYLE($menu; -1; Bold)
+End if 
+End if 
+End for each 
+$choose:=Dynamic pop up menu($menu)
+RELEASE MENU($menu)
+		
+Case of 
+: ($choose#"")
+$reportOperator:=ds.Employee.get($choose)
+Form.current_item.reportedBy:=$reportOperator.code
+End case 
+*/
+		OBJECT GET COORDINATES:C663(*; "pup_reportOperator"; $l; $t; $r; $b)
+		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
+		
+		$form:=New object:C1471(\
+			"colName"; "code"; \
+			"lb_items"; ds:C1482.Staff.all(); \
+			"dataclass"; "Staff"\
+			)
+		
+		$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b)
+		DIALOG:C40("selectNto1"; $form)
+		CLOSE WINDOW:C154($winRef)
+		
+		If (ok=1)
+			Form:C1466.current_item.reportedBy:=$form.item.code
+			cs:C1710.panel_repairLog.me._activate_save_cancel_button()
 		End if 
-		
-		For each ($reportOperator; Storage:C1525.cache.staffs)
-			APPEND MENU ITEM:C411($menu; $reportOperator.code; *)
-			SET MENU ITEM PARAMETER:C1004($menu; -1; $reportOperator.code)
-			If ($reportOperator.code=Form:C1466.current_item.fixedBy)
-				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
-				If (Is Windows:C1573)
-					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
-				End if 
-			End if 
-		End for each 
-		$choose:=Dynamic pop up menu:C1006($menu)
-		RELEASE MENU:C978($menu)
-		
-		Case of 
-			: ($choose#"")
-				$reportOperator:=ds:C1482.Employee.get($choose)
-				Form:C1466.current_item.fixedBy:=$reportOperator.code
-		End case 
-		
 	End if 
+	
 	This:C1470.drawPup_reportOperator()
 	
 	
