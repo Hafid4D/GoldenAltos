@@ -489,7 +489,7 @@
 	</table>
 	<table name="LeadNextStep" uuid="D96F66F181815C4C8B54C0F2DB6B1B1A" id="40">
 		<field name="UUID" uuid="99E1A49B9010EC458423F8D8D2A94E3A" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="nextStepID" uuid="D016A17417F7474AA86C7883902446D4" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="nextStepID" uuid="D016A17417F7474AA86C7883902446D4" type="3" never_null="true" id="2"/>
 		<field name="code" uuid="2A096374FF0BCE4C816BC28093E98182" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="name" uuid="2191096C7F76D74F823C6955E32B3575" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="color" uuid="2D95A760379E1F48B6DABA4CBAF685EE" type="10" limiting_length="255" never_null="true" id="5"/>
