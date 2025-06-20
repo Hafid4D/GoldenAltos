@@ -13,20 +13,21 @@
 	"bottomMargin": 0,
 	"events": [
 		"onLoad",
-		"onPageChange",
 		"onValidate",
 		"onClick",
-		"onDoubleClick",
 		"onOutsideCall",
-		"onBeginDragOver",
-		"onDragOver",
+		"onDoubleClick",
 		"onDrop",
-		"onAfterKeystroke",
 		"onMenuSelect",
 		"onPluginArea",
+		"onDragOver",
+		"onCloseBox",
+		"onUnload",
+		"onAfterKeystroke",
 		"onAfterEdit",
-		"onTimer",
-		"onBoundVariableChange"
+		"onBeginDragOver",
+		"onBoundVariableChange",
+		"onPageChange"
 	],
 	"windowTitle": "window title",
 	"destination": "detailScreen",
@@ -36,7 +37,7 @@
 		},
 		{
 			"objects": {
-				"List Box": {
+				"teams": {
 					"type": "listbox",
 					"left": 2,
 					"top": 0,
@@ -54,9 +55,9 @@
 					"listboxType": "collection",
 					"verticalLineStroke": "transparent",
 					"selectionMode": "single",
-					"currentItemSource": "currentTeam",
-					"currentItemPositionSource": "currentTeamPos",
-					"selectedItemsSource": "currentSelectedTeams",
+					"currentItemSource": "Form:C1466.currentTeam",
+					"currentItemPositionSource": "Form:C1466.currentTeamPos",
+					"selectedItemsSource": "Form:C1466.currentSelectedTeams",
 					"scrollbarHorizontal": "automatic",
 					"scrollbarVertical": "automatic",
 					"fill": "transparent",
@@ -64,14 +65,14 @@
 					"stroke": "#000000",
 					"sizingX": "fixed",
 					"sizingY": "grow",
-					"method": "ObjectMethods/List Box.4dm",
+					"method": "ObjectMethods/teams.4dm",
 					"columns": [
 						{
 							"header": {
 								"text": "",
 								"name": "Header1"
 							},
-							"name": "Column1",
+							"name": "TeamsCheckBox",
 							"footer": {
 								"name": "Footer1"
 							},
@@ -79,7 +80,14 @@
 							"dataSource": "This:C1470.selected",
 							"dataSourceTypeHint": "boolean",
 							"textAlign": "right",
-							"stroke": "#000000"
+							"stroke": "#000000",
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"enterable": true,
+							"method": "ObjectMethods/TeamsCheckBox.4dm",
+							"truncateMode": "none"
 						},
 						{
 							"header": {
@@ -93,11 +101,16 @@
 							},
 							"dataSource": "This:C1470.teamName",
 							"textAlign": "left",
-							"stroke": "#000000"
+							"stroke": "#000000",
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"enterable": false
 						}
 					]
 				},
-				"List Box1": {
+				"teamMembers": {
 					"type": "listbox",
 					"left": 296,
 					"top": 0,
@@ -110,12 +123,11 @@
 						"onSelectionChange"
 					],
 					"horizontalLineStroke": "transparent",
-					"dataSource": "currentTeam.members",
 					"resizingMode": "legacy",
 					"listboxType": "collection",
 					"verticalLineStroke": "transparent",
 					"selectionMode": "single",
-					"currentItemSource": "currentStaff",
+					"currentItemSource": "Form:C1466.currentStaff",
 					"scrollbarHorizontal": "automatic",
 					"scrollbarVertical": "automatic",
 					"fill": "transparent",
@@ -123,13 +135,15 @@
 					"stroke": "#000000",
 					"sizingX": "fixed",
 					"sizingY": "grow",
+					"dataSource": "Form:C1466.currentTeam.members",
+					"selectedItemsSource": "Form:C1466.staffSelection",
 					"columns": [
 						{
 							"header": {
 								"text": "",
 								"name": "Header3"
 							},
-							"name": "Column3",
+							"name": "membersChecBox",
 							"footer": {
 								"name": "Footer3"
 							},
@@ -137,7 +151,12 @@
 							"dataSource": "This:C1470.selected",
 							"dataSourceTypeHint": "boolean",
 							"textAlign": "right",
-							"stroke": "#000000"
+							"stroke": "#000000",
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"method": "ObjectMethods/membersChecBox.4dm"
 						},
 						{
 							"header": {
@@ -151,7 +170,12 @@
 							},
 							"dataSource": "This:C1470.staffName",
 							"textAlign": "left",
-							"stroke": "#000000"
+							"stroke": "#000000",
+							"enterable": false,
+							"events": [
+								"onClick",
+								"onDataChange"
+							]
 						}
 					]
 				},
@@ -212,7 +236,7 @@
 			}
 		}
 	],
-	"geometryStamp": 65,
+	"geometryStamp": 77,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
