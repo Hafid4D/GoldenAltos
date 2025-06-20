@@ -127,20 +127,61 @@
 					"fontWeight": "bold",
 					"textAlign": "left",
 					"bottom": 82
+				},
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 1,
+					"width": 5000,
+					"height": 704,
+					"fill": "#B1CFDE",
+					"strokeWidth": 0,
+					"stroke": "#FFFFFF"
 				}
 			}
 		},
 		{
 			"objects": {
+				"label_0_6": {
+					"type": "text",
+					"top": 249,
+					"left": 175,
+					"width": 300,
+					"height": 17,
+					"stroke": "#696969",
+					"text": "Action items to Address Risks & Opportinuties  ",
+					"fontWeight": "normal"
+				},
+				"entryField_action": {
+					"type": "input",
+					"top": 271,
+					"left": 175,
+					"width": 539,
+					"height": 60,
+					"dataSource": "Form:C1466.current_item.action",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"bottom": 331
+				},
 				"label_0_4": {
 					"type": "text",
 					"top": 138,
 					"left": 60,
 					"width": 90,
 					"height": 17,
-					"stroke": "#808080",
+					"stroke": "#696969",
 					"text": "Priority",
-					"textAlign": "right"
+					"textAlign": "right",
+					"fontWeight": "normal"
 				},
 				"pup_priority": {
 					"type": "button",
@@ -171,9 +212,10 @@
 					"left": 409,
 					"width": 90,
 					"height": 17,
-					"stroke": "#808080",
+					"stroke": "#696969",
 					"text": "Title ",
-					"textAlign": "right"
+					"textAlign": "right",
+					"fontWeight": "normal"
 				},
 				"label_0_3": {
 					"type": "text",
@@ -181,27 +223,20 @@
 					"left": 60,
 					"width": 90,
 					"height": 17,
-					"stroke": "#808080",
+					"stroke": "#696969",
 					"text": "Date Initianed ",
-					"textAlign": "right"
-				},
-				"label_0_6": {
-					"type": "text",
-					"top": 351,
-					"left": 175,
-					"width": 300,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Action items to Address Risks & Opportinuties  "
+					"textAlign": "right",
+					"fontWeight": "normal"
 				},
 				"label_0_7": {
 					"type": "text",
-					"top": 249,
+					"top": 351,
 					"left": 175,
 					"width": 350,
 					"height": 17,
-					"stroke": "#808080",
-					"text": "Non conformance/Complaint/Feedback/Itevm being addressed "
+					"stroke": "#696969",
+					"text": "Non conformance/Complaint/Feedback/Itevm being addressed ",
+					"fontWeight": "normal"
 				},
 				"label_0_8": {
 					"type": "text",
@@ -209,8 +244,9 @@
 					"left": 175,
 					"width": 250,
 					"height": 17,
-					"stroke": "#808080",
-					"text": "Effective & Residual Risk Acceptable ?"
+					"stroke": "#696969",
+					"text": "Effective & Residual Risk Acceptable ?",
+					"fontWeight": "normal"
 				},
 				"label_0_9": {
 					"type": "text",
@@ -218,9 +254,10 @@
 					"left": 50,
 					"width": 100,
 					"height": 17,
-					"stroke": "#808080",
-					"text": "Procedure Type",
-					"textAlign": "right"
+					"stroke": "#696969",
+					"text": "QCAR #",
+					"textAlign": "right",
+					"fontWeight": "normal"
 				},
 				"label_origin": {
 					"type": "text",
@@ -228,9 +265,10 @@
 					"left": 399,
 					"width": 100,
 					"height": 17,
-					"stroke": "#808080",
+					"stroke": "#696969",
 					"text": "Origin",
-					"textAlign": "right"
+					"textAlign": "right",
+					"fontWeight": "normal"
 				},
 				"pup_origin": {
 					"type": "button",
@@ -321,7 +359,7 @@
 				},
 				"entryField_procedureType": {
 					"type": "input",
-					"top": 271,
+					"top": 373,
 					"left": 175,
 					"width": 539,
 					"height": 60,
@@ -337,7 +375,7 @@
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"textAlign": "left",
-					"bottom": 331
+					"bottom": 433
 				},
 				"PopupDate1": {
 					"type": "subform",
@@ -360,35 +398,16 @@
 					"focusable": true,
 					"borderStyle": "none"
 				},
-				"entryField_action": {
-					"type": "input",
-					"top": 373,
-					"left": 175,
-					"width": 539,
-					"height": 60,
-					"dataSource": "Form:C1466.current_item.action",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"textAlign": "left",
-					"bottom": 433
-				},
 				"label_0_10": {
 					"type": "text",
 					"top": 453,
 					"left": 5,
 					"width": 145,
 					"height": 17,
-					"stroke": "#808080",
+					"stroke": "#696969",
 					"text": "Requirement/Procedure#",
-					"textAlign": "right"
+					"textAlign": "right",
+					"fontWeight": "normal"
 				},
 				"entryField_requirement": {
 					"type": "input",
@@ -416,9 +435,10 @@
 					"left": 5,
 					"width": 145,
 					"height": 17,
-					"stroke": "#808080",
+					"stroke": "#696969",
 					"text": "Category of Action",
-					"textAlign": "right"
+					"textAlign": "right",
+					"fontWeight": "normal"
 				},
 				"pup_category": {
 					"type": "button",
@@ -472,9 +492,10 @@
 					"left": 399,
 					"width": 100,
 					"height": 17,
-					"stroke": "#808080",
+					"stroke": "#696969",
 					"text": "Disposition",
-					"textAlign": "right"
+					"textAlign": "right",
+					"fontWeight": "normal"
 				},
 				"label_0_11": {
 					"type": "text",
@@ -482,9 +503,10 @@
 					"left": 5,
 					"width": 145,
 					"height": 17,
-					"stroke": "#808080",
+					"stroke": "#696969",
 					"text": "Human Factoe if CA",
-					"textAlign": "right"
+					"textAlign": "right",
+					"fontWeight": "normal"
 				},
 				"pup_humanFactor": {
 					"type": "button",
@@ -515,9 +537,10 @@
 					"left": 5,
 					"width": 145,
 					"height": 17,
-					"stroke": "#808080",
+					"stroke": "#696969",
 					"text": "Responsible Person(s)",
-					"textAlign": "right"
+					"textAlign": "right",
+					"fontWeight": "normal"
 				},
 				"entryField_responsible": {
 					"type": "input",
@@ -545,9 +568,10 @@
 					"left": 5,
 					"width": 145,
 					"height": 17,
-					"stroke": "#808080",
+					"stroke": "#696969",
 					"text": "Current Due Date",
-					"textAlign": "right"
+					"textAlign": "right",
+					"fontWeight": "normal"
 				},
 				"entryField_currentDueDate": {
 					"type": "input",
@@ -597,9 +621,10 @@
 					"left": 369,
 					"width": 130,
 					"height": 17,
-					"stroke": "#808080",
+					"stroke": "#696969",
 					"text": "Original Due Date",
-					"textAlign": "right"
+					"textAlign": "right",
+					"fontWeight": "normal"
 				},
 				"entryField_originalDueDate": {
 					"type": "input",
@@ -672,9 +697,10 @@
 					"left": 409,
 					"width": 90,
 					"height": 17,
-					"stroke": "#808080",
+					"stroke": "#696969",
 					"text": "Closed Date",
-					"textAlign": "right"
+					"textAlign": "right",
+					"fontWeight": "normal"
 				},
 				"entryField_dateClosed": {
 					"type": "input",
@@ -744,15 +770,46 @@
 					"left": 5,
 					"width": 145,
 					"height": 17,
-					"stroke": "#808080",
+					"stroke": "#696969",
 					"text": "Notes",
-					"textAlign": "right"
+					"textAlign": "right",
+					"fontWeight": "normal"
+				},
+				"bActionRefresh": {
+					"type": "button",
+					"text": "",
+					"top": 204,
+					"left": 718,
+					"width": 30,
+					"height": 32,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"icon": "/RESOURCES/sfw/image/skin/rainbow/btn4states/refresh-24x24.png",
+					"iconFrames": 4,
+					"method": "ObjectMethods/bActionRefresh.4dm"
+				},
+				"bResponsibleEdit": {
+					"type": "button",
+					"text": "",
+					"top": 556,
+					"left": 718,
+					"width": 30,
+					"height": 32,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"icon": "/RESOURCES/sfw/image/skin/rainbow/btn4states/edit-24x24.png",
+					"iconFrames": 4,
+					"method": "ObjectMethods/bResponsibleEdit.4dm"
 				}
 			}
 		},
 		null
 	],
-	"geometryStamp": 232,
+	"geometryStamp": 242,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"editor": {
 		"activeView": "View 1",

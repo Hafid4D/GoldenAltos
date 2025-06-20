@@ -74,6 +74,7 @@ End case
 		$form:=New object:C1471(\
 			"colName"; "name"; \
 			"lb_items"; ds:C1482.Customer.all(); \
+			"allData"; ds:C1482.Customer.all(); \
 			"dataclass"; "Customer"\
 			)
 		

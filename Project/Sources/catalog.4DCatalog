@@ -323,7 +323,7 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="procedureType" uuid="4A0987CB5AAFE54FB73D5E6576129BF3" type="10" limiting_length="255" never_null="true" id="7"/>
-		<field name="action" uuid="9D6DEBF88A75CF4D9813AA2BFB6A2F03" type="10" limiting_length="255" never_null="true" id="8"/>
+		<field name="action" uuid="9D6DEBF88A75CF4D9813AA2BFB6A2F03" type="10" never_null="true" id="8"/>
 		<field name="requirement" uuid="1607E1FEBAF47C46825037138C40B3B8" type="10" limiting_length="255" never_null="true" id="9"/>
 		<field name="category" uuid="084AE7EE9235CB4E931BEB49A23232A4" type="4" never_null="true" id="10">
 			<field_extra multi_line="false"/>
@@ -334,7 +334,7 @@
 		<field name="humanFactor" uuid="3824444FE1B88B4F8F518C3EEC330E92" type="4" never_null="true" id="12">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="responsible" uuid="96611CD28BB0994F8C770FA4B1987ED1" type="10" limiting_length="255" never_null="true" id="13">
+		<field name="responsible" uuid="96611CD28BB0994F8C770FA4B1987ED1" type="10" never_null="true" id="13">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="originalDueDate" uuid="CC391D2EE2B9EB4E98168FC33C329764" type="8" never_null="true" id="14"/>
@@ -489,7 +489,7 @@
 	</table>
 	<table name="LeadNextStep" uuid="D96F66F181815C4C8B54C0F2DB6B1B1A" id="40">
 		<field name="UUID" uuid="99E1A49B9010EC458423F8D8D2A94E3A" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="nextStepID" uuid="D016A17417F7474AA86C7883902446D4" type="3" never_null="true" id="2"/>
+		<field name="nextStepID" uuid="D016A17417F7474AA86C7883902446D4" type="10" limiting_length="255" never_null="true" id="2"/>
 		<field name="code" uuid="2A096374FF0BCE4C816BC28093E98182" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="name" uuid="2191096C7F76D74F823C6955E32B3575" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="color" uuid="2D95A760379E1F48B6DABA4CBAF685EE" type="10" limiting_length="255" never_null="true" id="5"/>

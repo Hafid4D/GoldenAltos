@@ -16,7 +16,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setLBItemsColumn("item"; "Item#"; "width:125")
 	$entry.setLBItemsColumn("interestedParty"; "Interested Party"; "width:125")
-	$entry.setLBItemsColumn("procedureType"; "procedure Type"; "width:200")
+	$entry.setLBItemsColumn("procedureType"; "Procedure "; "width:200")
 	$entry.setLBItemsOrderBy("item")
 	
 	
