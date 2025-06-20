@@ -9,6 +9,8 @@
 	"windowMinHeight": 0,
 	"windowMaxWidth": 32767,
 	"windowMaxHeight": 32767,
+	"rightMargin": 5,
+	"bottomMargin": 0,
 	"events": [
 		"onLoad",
 		"onPageChange",
@@ -36,9 +38,9 @@
 			"objects": {
 				"lb_items": {
 					"type": "listbox",
-					"left": 2,
-					"top": 39,
-					"width": 235,
+					"left": 0,
+					"top": 44,
+					"width": 205,
 					"height": 216,
 					"events": [
 						"onDoubleClick",
@@ -71,86 +73,57 @@
 								"name": "Footer1"
 							},
 							"width": 240,
-							"dataSource": "This:C1470.lastName"
+							"dataSource": "This:C1470.code"
+						},
+						{
+							"header": {
+								"name": "Header2",
+								"text": "Header2"
+							},
+							"name": "Column2",
+							"footer": {
+								"name": "Footer2"
+							}
 						}
 					]
 				},
-				"searchbox_roundRectangle": {
-					"type": "rectangle",
-					"top": 2,
-					"left": 1,
-					"width": 236,
-					"height": 36,
-					"sizingX": "move",
-					"stroke": "transparent",
-					"strokeWidth": 3,
-					"borderRadius": 0
-				},
-				"searchbox_icon": {
-					"type": "picture",
-					"top": 9,
-					"left": 5,
-					"width": 24,
-					"height": 24,
-					"sizingX": "move",
-					"pictureFormat": "scaled",
-					"picture": "/RESOURCES/image/logo/loupe.png"
-				},
-				"word": {
-					"type": "input",
-					"left": 36,
-					"top": 11,
-					"width": 178,
-					"height": 17,
-					"dataSource": "Form:C1466.words",
-					"hideFocusRing": true,
-					"method": "ObjectMethods/word.4dm",
-					"events": [
-						"onDataChange",
-						"onAfterKeystroke",
-						"onAfterEdit"
-					],
-					"placeholder": "search ...",
-					"borderStyle": "solid",
-					"borderRadius": 5
-				},
 				"searchbox_roundRectangle1": {
 					"type": "rectangle",
-					"top": 20,
-					"left": 1290,
-					"width": 218,
-					"height": 36,
+					"top": 8,
+					"left": 5,
+					"width": 200,
+					"height": 27,
 					"sizingX": "move",
-					"stroke": "#60A9EF",
+					"stroke": "#008B8B",
 					"borderRadius": 16,
 					"fill": "#EDEDED",
 					"strokeWidth": 3
 				},
 				"Image7": {
 					"type": "picture",
-					"top": 27,
-					"left": 1300,
-					"width": 26,
-					"height": 24,
+					"top": 13,
+					"left": 19,
+					"width": 16,
+					"height": 16,
 					"sizingX": "move",
 					"pictureFormat": "scaled",
 					"picture": "/RESOURCES/image/logo/loupe.png"
 				},
-				"searchbox_variable": {
+				"word1": {
 					"type": "input",
-					"top": 31,
-					"left": 1331,
-					"width": 144,
-					"height": 17,
+					"top": 13,
+					"left": 41,
+					"width": 137,
+					"height": 16,
 					"sizingX": "move",
-					"dataSource": "Form:C1466.sfw.searchbox",
+					"dataSource": "Form:C1466.words",
 					"fill": "transparent",
 					"borderStyle": "none",
 					"hideFocusRing": true,
-					"placeholder": ":xliff:search.globalSearch",
+					"placeholder": "search...",
 					"dragging": "none",
 					"dropping": "custom",
-					"method": "ObjectMethods/searchbox_variable.4dm",
+					"method": "ObjectMethods/word1.4dm",
 					"events": [
 						"onLosingFocus",
 						"onGettingFocus",
@@ -160,13 +133,13 @@
 				},
 				"searchbox_cross": {
 					"type": "button",
-					"top": 30,
-					"left": 1477,
-					"width": 19,
+					"top": 13,
+					"left": 178,
+					"width": 14,
 					"height": 18,
 					"sizingX": "move",
 					"fontWeight": "bold",
-					"stroke": "#FFFFFF",
+					"stroke": "#008B8B",
 					"focusable": false,
 					"text": "X",
 					"iconFrames": 4,
@@ -179,7 +152,7 @@
 			}
 		}
 	],
-	"geometryStamp": 100,
+	"geometryStamp": 53,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
@@ -187,6 +160,5 @@
 			"View 1": {}
 		}
 	},
-	"formSizeAnchor": "lb_items",
-	"method": "method.4dm"
+	"method": ""
 }

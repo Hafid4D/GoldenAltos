@@ -8,8 +8,11 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setSearchboxField("leadCode")
 	$entry.setSearchboxField("customerName")
-	$entry.setPanel("panel_lead")
+	$entry.setPanel("panel_lead"; 1)
 	
+	$entry.setPanelPage(1; ""; "Main")
+	$entry.setPanelPage(2; ""; "Interactions")
+	$entry.setPanelPage(3; ""; "Jobs & Deliveries")
 	
 	
 	$entry.setLBItemsColumn("leadCode"; "Lead ID"; "width:50")

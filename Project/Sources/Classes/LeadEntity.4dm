@@ -24,6 +24,12 @@ Function set dateClose($closeDate : Date)
 Function get customerName()->$name : Text
 	$name:=This:C1470.customer.name
 	
+Function get dealType()->$name : Text
+	If (This:C1470.deal)
+		$name:="Existing customer"
+	Else 
+		$name:="New customer"
+	End if 
 	
 Function get stage()->$stage : Text
 	var $eLeadStage : cs:C1710.LeadStageEntity
@@ -45,4 +51,9 @@ Function calculateCode()->$leadCode : Text
 	
 local Function afterCreation()
 	// This callback is called after saving the new item
+	This:C1470._initContacts()
 	
+local Function _initContacts()
+	If (This:C1470.moreData.secondaryContacts=Null:C1517)
+		This:C1470.moreData.secondaryContacts:=New collection:C1472
+	End if 

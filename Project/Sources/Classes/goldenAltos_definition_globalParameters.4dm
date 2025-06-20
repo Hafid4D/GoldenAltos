@@ -11,6 +11,7 @@ property notifications : Object
 property documentsStorageOnServer : Object
 property dfd : Object
 property userVision : Object
+property mainInterface : Object
 
 
 Class extends sfw_definition_globalParameters
@@ -24,6 +25,10 @@ Function _global_parameters()
 	
 	This:C1470.toolbar:=New object:C1471("visionsLogo"; "/RESOURCES/image/logo/golden_atos_100x25.png"; "visionsLogoLocal"; "/RESOURCES/image/logo/golden_atos_100x25.png")
 	This:C1470.toolbar.entryIconsResize:=True:C214
+	
+	This:C1470.mainInterface:=New object:C1471("window"; New object:C1471)
+	This:C1470.mainInterface.window:=New object:C1471("width"; 1800; "height"; 850)
+	
 	This:C1470.panel:=New object:C1471("defaultLogo"; "/RESOURCES/image/logo/logoGATransparent.png"; "defaultLogoLocal"; "/RESOURCES/image/logo/logoGATransparent.png")
 	This:C1470.users:=New object:C1471("passwordLength"; 12)
 	This:C1470.users.linkedDataclass:="Staff"
