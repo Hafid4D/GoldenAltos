@@ -714,6 +714,37 @@
 			"displayable_fields_count": 3,
 			"fields_ordering": 1
 		},
+		"(InteractionType)": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 1209.015625,
+				"top": 2104.013671875,
+				"width": 193,
+				"height": 131.33203125
+			},
+			"displayable_fields_count": 4,
+			"fields_ordering": 1
+		},
+		"LeadInteraction": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 860.015625,
+				"top": 2010.013671875,
+				"width": 230,
+				"height": 227.33203125
+			},
+			"displayable_fields_count": 8
+		},
 		"LeadNextStep": {
 			"color": {
 				"red": 207,
@@ -1485,6 +1516,22 @@
 		}
 	},
 	"relations": {
+		"24BB5D155DE423499AE0F96C27851857": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"BB2D5D424F97EB448E57F69E217877FF": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"DBBCF9672F086D48A93D8C8AC22B8557": {
 			"color": {
 				"red": 240,

@@ -323,7 +323,7 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="procedureType" uuid="4A0987CB5AAFE54FB73D5E6576129BF3" type="10" limiting_length="255" never_null="true" id="7"/>
-		<field name="action" uuid="9D6DEBF88A75CF4D9813AA2BFB6A2F03" type="10" never_null="true" id="8"/>
+		<field name="action" uuid="9D6DEBF88A75CF4D9813AA2BFB6A2F03" type="10" limiting_length="255" never_null="true" id="8"/>
 		<field name="requirement" uuid="1607E1FEBAF47C46825037138C40B3B8" type="10" limiting_length="255" never_null="true" id="9"/>
 		<field name="category" uuid="084AE7EE9235CB4E931BEB49A23232A4" type="4" never_null="true" id="10">
 			<field_extra multi_line="false"/>
@@ -334,7 +334,7 @@
 		<field name="humanFactor" uuid="3824444FE1B88B4F8F518C3EEC330E92" type="4" never_null="true" id="12">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="responsible" uuid="96611CD28BB0994F8C770FA4B1987ED1" type="10" never_null="true" id="13">
+		<field name="responsible" uuid="96611CD28BB0994F8C770FA4B1987ED1" type="10" limiting_length="255" never_null="true" id="13">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="originalDueDate" uuid="CC391D2EE2B9EB4E98168FC33C329764" type="8" never_null="true" id="14"/>
@@ -489,11 +489,26 @@
 	</table>
 	<table name="LeadNextStep" uuid="D96F66F181815C4C8B54C0F2DB6B1B1A" id="40">
 		<field name="UUID" uuid="99E1A49B9010EC458423F8D8D2A94E3A" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="nextStepID" uuid="D016A17417F7474AA86C7883902446D4" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="nextStepID" uuid="D016A17417F7474AA86C7883902446D4" type="3" never_null="true" id="2"/>
 		<field name="code" uuid="2A096374FF0BCE4C816BC28093E98182" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="name" uuid="2191096C7F76D74F823C6955E32B3575" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="color" uuid="2D95A760379E1F48B6DABA4CBAF685EE" type="10" limiting_length="255" never_null="true" id="5"/>
 		<primary_key field_name="UUID" field_uuid="99E1A49B9010EC458423F8D8D2A94E3A"/>
+	</table>
+	<table name="LeadInteraction" uuid="09EC8D59A0A74F4CB641496466463D7D" id="41">
+		<field name="UUID" uuid="8E07F4AEF2A6404F887B39EEB3C49D60" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="interactionID" uuid="42C6E67BD7239247A8775C55060B061A" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="stmpCreation" uuid="6A89ED4765D27B4E8982AA8E4F217AC6" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="note" uuid="82F88CE86EE1624BA8F231118CB60FEB" type="10" never_null="true" id="4"/>
+		<field name="stmpFollowUp" uuid="66C03A998A8B69419BBAA12DBE89A508" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="UUID_Staff" uuid="291F6A053404EC42BFFD0E4229C015A1" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="6"/>
+		<field name="UUID_Lead" uuid="1E2AFBAD183BE04FB8597156ADFBCB24" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="7"/>
+		<primary_key field_name="UUID" field_uuid="8E07F4AEF2A6404F887B39EEB3C49D60"/>
+	</table>
+	<table name="(InteractionType)" uuid="9737DFBDAB081A4AA1A3F6A20651C78B" id="42" hide_in_REST="true">
+		<field name="UUID" uuid="94BD7347D1A6CF45825386ADC69E033C" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<primary_key field_name="UUID" field_uuid="94BD7347D1A6CF45825386ADC69E033C"/>
+		<table_extra trashed="true"/>
 	</table>
 	<table name="sfw_EventType" uuid="C482A0FBAE724304A8E05A0570FD55D6" id="52">
 		<field name="UUID" uuid="AEE9BE0296924CA7899B7E5DB37ACE13" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -1592,6 +1607,30 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="BB2D5D424F97EB448E57F69E217877FF" name_Nto1="lead" name_1toN="leadInteractions" state="1">
+		<related_field kind="source">
+			<field_ref uuid="1E2AFBAD183BE04FB8597156ADFBCB24" name="UUID_Lead">
+				<table_ref uuid="09EC8D59A0A74F4CB641496466463D7D" name="LeadInteraction"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="B8409317F330EA438FDD41BD2DFC32A3" name="UUID">
+				<table_ref uuid="1E733AC1BDB87C40B151040C49BD164B" name="Lead"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="24BB5D155DE423499AE0F96C27851857" name_Nto1="staff" name_1toN="leadInteractions" state="1">
+		<related_field kind="source">
+			<field_ref uuid="291F6A053404EC42BFFD0E4229C015A1" name="UUID_Staff">
+				<table_ref uuid="09EC8D59A0A74F4CB641496466463D7D" name="LeadInteraction"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="6941AB4C41898A4A9FBF25D5AC27CA2B" name="UUID">
+				<table_ref uuid="FD10D10C9E0015458AFF59F988A373BB" name="Staff"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="01619F9BF52940F3AFF8C52A4A82535D" type="3">
 		<field_ref uuid="951D3770910B43BBBFCAB95E4B3A1C65" name="UUID_Tool">
 			<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
@@ -1615,6 +1654,11 @@
 	<index kind="regular" unique_keys="true" uuid="033AEB213D35D04DA2778E4E3928A376" type="1">
 		<field_ref uuid="6A2CE8BD47C44B8EAC7B0C5C14CD21DB" name="UUID">
 			<table_ref uuid="6059D6A0DACF42889F97EAD171DE9723" name="QuoteStatus"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="041225D53D04464FAA15C07636236531" type="3">
+		<field_ref uuid="291F6A053404EC42BFFD0E4229C015A1" name="UUID_Staff">
+			<table_ref uuid="09EC8D59A0A74F4CB641496466463D7D" name="LeadInteraction"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="05A5CB771A47C343B55CD143ED08FD46" type="3">
@@ -1700,6 +1744,11 @@
 	<index kind="regular" unique_keys="true" uuid="1E065A3FABAA4F9C834D3066ABDCF8E4" type="1">
 		<field_ref uuid="C3D4E0743AF343B1820D56205B8EA6D7" name="login">
 			<table_ref uuid="2C75E07E18FC4733A8C98A0B31D40656" name="sfw_User"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="1FDDD117DA0DF44DB5F36BDD1AD2AB2C" type="3">
+		<field_ref uuid="1E2AFBAD183BE04FB8597156ADFBCB24" name="UUID_Lead">
+			<table_ref uuid="09EC8D59A0A74F4CB641496466463D7D" name="LeadInteraction"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="1FEAD11AEFB24168AD1B785362ACF144" type="1">
@@ -2102,6 +2151,11 @@
 			<table_ref uuid="1E733AC1BDB87C40B151040C49BD164B" name="Lead"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="B534B2262DF93045BC7E6F5A93405A91" type="7">
+		<field_ref uuid="8E07F4AEF2A6404F887B39EEB3C49D60" name="UUID">
+			<table_ref uuid="09EC8D59A0A74F4CB641496466463D7D" name="LeadInteraction"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="B761A9A87A1A4180B6093B39B6B17544" type="7">
 		<field_ref uuid="37676CD94E8B423595ED98B5C0E9CF89" name="UUID">
 			<table_ref uuid="96D1CE81460A4F75B3F4275138C8F778" name="Customer"/>
@@ -2205,6 +2259,11 @@
 	<index kind="regular" unique_keys="true" uuid="DF30050CCDC3414E8A2AA7F3D6AC41F5" type="7">
 		<field_ref uuid="D81F07A96F817641A43C05681384BC82" name="UUID">
 			<table_ref uuid="3B9C8B2E8B9769409AD8BB9F66CA3E6E" name="CIDisposition"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="DFE7599F5716B24E9ABF45DE15DC66A0" type="7">
+		<field_ref uuid="94BD7347D1A6CF45825386ADC69E033C" name="UUID">
+			<table_ref uuid="9737DFBDAB081A4AA1A3F6A20651C78B" name="(InteractionType)"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="E1A0D064FFAC4E89A436CFA96601DB89" type="1">
