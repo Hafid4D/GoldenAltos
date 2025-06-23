@@ -1,4 +1,4 @@
-//%attributes = {}
+//%attributes = {"executedOnServer":true}
 /**
 import po & po lines (po <-- po_lines)
 **/
@@ -108,7 +108,7 @@ If (True:C214)
 	
 	
 	If ($erreur.length>0)
-		TRACE:C157
+		//TRACE
 	End if 
 End if 
 

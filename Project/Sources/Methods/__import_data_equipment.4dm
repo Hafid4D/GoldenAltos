@@ -1,4 +1,4 @@
-//%attributes = {}
+//%attributes = {"executedOnServer":true}
 var $eEquipment : cs:C1710.EquipmentEntity
 var $eEquipmentLocation : cs:C1710.EquipmentLocationEntity
 var $eDivision : cs:C1710.DivisionEntity

@@ -847,9 +847,9 @@
 				"left": 2426,
 				"top": 0,
 				"width": 153,
-				"height": 112.33203125
+				"height": 133.33203125
 			},
-			"displayable_fields_count": 3
+			"displayable_fields_count": 4
 		},
 		"CICategory": {
 			"color": {
@@ -985,9 +985,9 @@
 				"left": 2062,
 				"top": 0,
 				"width": 197,
-				"height": 460.33203125
+				"height": 484.33203125
 			},
-			"displayable_fields_count": 19,
+			"displayable_fields_count": 21,
 			"fields": {
 				"notes": {
 					"color": {

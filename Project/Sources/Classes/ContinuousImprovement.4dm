@@ -19,5 +19,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("procedureType"; "Procedure "; "width:200")
 	$entry.setLBItemsOrderBy("item")
 	
+	$entry.setItemListAction("Export to excel"; "_ga_exportCIPList")
+	
 	
 	

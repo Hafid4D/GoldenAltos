@@ -378,7 +378,6 @@
 		<field name="dispositionID" uuid="4AB2845E0CC27F43A1271A5039F992B5" type="4" never_null="true" id="2">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="color" uuid="636D71117FBA1C45A41BB578DF8015D2" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="name" uuid="24A848999F23B84C84EF4065BD6C4583" type="10" limiting_length="255" never_null="true" id="4">
 			<field_extra multi_line="false"/>
 		</field>
@@ -389,7 +388,6 @@
 		<field name="factorID" uuid="BEBEC1FBBA247041AB993C2E0442DE8E" type="4" never_null="true" id="2">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="color" uuid="FAFA2BDF7D1F624394CBE5D517AB35C0" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="name" uuid="8C42CB157AFC2F4A89015D381524E2CF" type="10" limiting_length="255" never_null="true" id="4">
 			<field_extra multi_line="false"/>
 		</field>
@@ -408,7 +406,6 @@
 		<field name="UUID" uuid="FAB7EB268BAD3741BE4520A0518A4764" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="originID" uuid="CB4B7F976C649D46993F3043BE045E9A" type="4" never_null="true" id="2"/>
 		<field name="name" uuid="739CA3D15E5CF448BBEB3FEC0068C898" type="10" limiting_length="255" never_null="true" id="3"/>
-		<field name="color" uuid="987C2045CD159C4DAE4D79686F001C3E" type="10" limiting_length="255" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="FAB7EB268BAD3741BE4520A0518A4764"/>
 	</table>
 	<table name="sfw_Currency" uuid="01CB0A8A61387F468A67DFD7FE5F4D16" id="32">
@@ -421,7 +418,6 @@
 		<field name="UUID" uuid="ABB5485D67861C4884D7E9EF218BFD1A" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="categoryID" uuid="D36C063AA9B2BE46BFCF2168662F8FF0" type="4" never_null="true" id="2"/>
 		<field name="name" uuid="6BE27370D49C944A825D585038214E51" type="10" limiting_length="255" never_null="true" id="3"/>
-		<field name="color" uuid="03E8B41E6C0D284AB29004955C939D67" type="10" limiting_length="255" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="ABB5485D67861C4884D7E9EF218BFD1A"/>
 	</table>
 	<table name="YesNoQuestion" uuid="EF08E8961B35724A90161EC3FDC9D950" id="34">
@@ -432,7 +428,6 @@
 		<field name="name" uuid="1EEE988BAA79264E9827B1CCEBE4408C" type="10" limiting_length="255" never_null="true" id="3">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="color" uuid="2AF37C80988E794DBF3653847443E079" type="10" limiting_length="255" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="F4F183C203267641A55226527FCEE721"/>
 	</table>
 	<table name="Lead" uuid="1E733AC1BDB87C40B151040C49BD164B" id="35">
@@ -501,8 +496,8 @@
 		<field name="stmpCreation" uuid="6A89ED4765D27B4E8982AA8E4F217AC6" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="note" uuid="82F88CE86EE1624BA8F231118CB60FEB" type="10" never_null="true" id="4"/>
 		<field name="stmpFollowUp" uuid="66C03A998A8B69419BBAA12DBE89A508" type="10" limiting_length="255" never_null="true" id="5"/>
-		<field name="UUID_Staff" uuid="291F6A053404EC42BFFD0E4229C015A1" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="6"/>
-		<field name="UUID_Lead" uuid="1E2AFBAD183BE04FB8597156ADFBCB24" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="7"/>
+		<field name="UUID_Staff" uuid="291F6A053404EC42BFFD0E4229C015A1" type="10" store_as_UUID="true" never_null="true" id="6"/>
+		<field name="UUID_Lead" uuid="1E2AFBAD183BE04FB8597156ADFBCB24" type="10" store_as_UUID="true" never_null="true" id="7"/>
 		<primary_key field_name="UUID" field_uuid="8E07F4AEF2A6404F887B39EEB3C49D60"/>
 	</table>
 	<table name="(InteractionType)" uuid="9737DFBDAB081A4AA1A3F6A20651C78B" id="42" hide_in_REST="true">

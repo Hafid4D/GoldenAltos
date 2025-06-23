@@ -1,4 +1,4 @@
-//%attributes = {}
+//%attributes = {"executedOnServer":true}
 
 var $eCip : cs:C1710.ContinuousImprovementEntity
 
@@ -12,21 +12,21 @@ If (True:C214)
 	
 	var $colors : Collection:=New collection:C1472("#3CB371"; "#FFFF00"; "#FF7F50"; "#1E90FF"; "#FF0000")
 	var $categories : Collection:=New collection:C1472("Internal Risk Mitigation"; \
-		"External Risk Mitigation"; "Internal Opportunity"; "External Opportunity"; \
-		"Resource Need"; "Change to QMS"; "Corrective Action"; "Training Need"; "NCR Only"; \
-		"SCAR"; "RMA-KPI"; "RMA-NonKPI"; "NCMR Only"; "Other")
+		"External Risk Mitigation"; "Internal Opportunity"; "External Opportunity"; "NMCR Only"; \
+		"Resource Need"; "Change to QMS"; "Corrective Action"; "Training Need"; "NCR Only"; "Improve Process"; \
+		"SCAR"; "RMA-KPI"; "RMA-NonKPI"; "NCMR Only"; "Corrective Action and Training"; "Repair"; "Other")
 	var $questions : Collection:=New collection:C1472("Yes"; "No"; "N/A")
 	var $priorities : Collection:=New collection:C1472("Active"; "Monitor"; "Deferred"; "Complete"; "Canceled")
 	var $origins : Collection:=New collection:C1472("NCR"; "NCMR"; "SWOT"; "Process Risk"; "Human Factors"; \
 		"Management Review"; "Internal Audit"; "Internal Issue"; "Customer Audit"; "CB Audit"; "Customer CAR"; \
-		"Complaint"; "Feedback"; "Supplier"; "RMA"; "KPI/Objective Performance"; "Regulatory"; "Other")
+		"Complaint"; "Feedback"; "Supplier"; "RMA"; "KPI/Objective Performance"; "Regulatory"; "Process Improvement"; "Other")
 	var $humanFactors : Collection:=New collection:C1472("Not CAR"; "Not Applicable"; "Fatigue"; \
 		"Lack of Concentration"; "Complacency"; "Lack of Knowledge"; "Distraction"; "Lack of Teamwork"; \
 		"Lack of Resources"; "Pressure"; "Lack of Assertiveness"; "Stress"; "Lack of Awareness"; \
 		"Negative Norms "; "Ergonomics"; "Equipment"; "Culture"; "Competence"; "Environmental"; \
-		"Feelings"; "Other")
-	var $dispositions : Collection:=New collection:C1472("N/A (Not NCP)"; "Awaiting Disp."; "Scrap"; "Rework"; \
-		"Repair"; "Use As Is"; "Return To Vendor")
+		"Feelings"; "Lack of personnel"; "Other")
+	var $dispositions : Collection:=New collection:C1472("N/A (Not NCP)"; "Awaiting Disp."; "Scrap"; "Rework"; "Notified the customer"; \
+		"Repair"; "Use As Is"; "Return To Vendor"; "Improve methods"; "Increase Inventory"; "Revise Spec, Training"; "Revise Procedure")
 	
 	
 	//----> [CICategory]
@@ -121,6 +121,9 @@ If ($cip_log.exists)
 		$origin:=ds:C1482.CIOrigin.query("name =:1"; Split string:C1554($cip.origin; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($origin.length>0)
 			$eCip.origin:=$origin[0].originID
+		Else 
+			$eCip.origin:=$origins.length
+			
 		End if 
 		
 		$eCip.procedureType:=$cip.procedureType
@@ -130,16 +133,37 @@ If ($cip_log.exists)
 		$category:=ds:C1482.CICategory.query("name =:1"; Split string:C1554($cip.category; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($category.length>0)
 			$eCip.category:=$category[0].categoryID
+		Else 
+			
+			If (Split string:C1554($cip.category; "\r"; sk trim spaces:K86:2).join("\r")="RMA-NonKPI'")
+				$eCip.category:=12
+			Else 
+				$eCip.category:=$categories.length
+			End if 
 		End if 
 		
 		$disposition:=ds:C1482.CIDisposition.query("name =:1"; Split string:C1554($cip.disposition; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($disposition.length>0)
 			$eCip.disposition:=$disposition[0].dispositionID
+			
+		Else 
+			Case of 
+					
+				: (Split string:C1554($cip.disposition; "\r"; sk trim spaces:K86:2).join("\r")="Not applicable (Not NCP)") | (Split string:C1554($cip.disposition; "\r"; sk trim spaces:K86:2).join("\r")="NA (Not NCP)")
+					$eCip.disposition:=1
+				: (Split string:C1554($cip.disposition; "\r"; sk trim spaces:K86:2).join("\r")="Us as is")
+					$eCip.disposition:=6
+				Else 
+					
+			End case 
+			
 		End if 
 		
 		$humanFactor:=ds:C1482.CIHumanFactor.query("name =:1"; Split string:C1554($cip.humanFactor; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($humanFactor.length>0)
 			$eCip.humanFactor:=$humanFactor[0].factorID
+		Else 
+			$eCip.humanFactor:=$humanFactors.length
 		End if 
 		
 		$eCip.responsible:=$cip.responsible
@@ -157,7 +181,7 @@ If ($cip_log.exists)
 		$eCip.externalID:=$cip.externalID
 		$eCip.currentDueDate:=$cip.currentDueDate
 		$eCip.notes:=$cip.notes
-		
+		$eCip.title:=""
 		
 		
 		$res:=$eCip.save()

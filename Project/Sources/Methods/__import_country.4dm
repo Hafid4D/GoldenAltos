@@ -1,4 +1,4 @@
-//%attributes = {}
+//%attributes = {"executedOnServer":true}
 TRUNCATE TABLE:C1051([sfw_Country:15])
 If (True:C214)
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/sfw_country.json")

@@ -4,7 +4,6 @@
 Case of 
 		
 	: (Form event code:C388=On Data Change:K2:15)
-		
 		If (Form:C1466.currentTeam.members.extract("selected").distinct().length=1) & (Form:C1466.currentTeam.members.extract("selected").distinct()[0]=True:C214)
 			
 			Form:C1466.currentTeam.selected:=True:C214

@@ -3,6 +3,7 @@
 
 Case of 
 		
+		
 	: (Form event code:C388=On Data Change:K2:15)
 		
 		If (Form:C1466.currentTeam.selected=True:C214)
@@ -23,6 +24,7 @@ Case of
 		End if 
 		
 		Form:C1466.currentTeam.members:=Form:C1466.currentTeam.members
+		
 		
 	Else 
 		
