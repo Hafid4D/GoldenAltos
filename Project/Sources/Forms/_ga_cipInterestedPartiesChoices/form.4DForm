@@ -13,21 +13,20 @@
 	"bottomMargin": 0,
 	"events": [
 		"onLoad",
+		"onPageChange",
 		"onValidate",
 		"onClick",
-		"onOutsideCall",
 		"onDoubleClick",
+		"onOutsideCall",
+		"onBeginDragOver",
+		"onDragOver",
 		"onDrop",
+		"onAfterKeystroke",
 		"onMenuSelect",
 		"onPluginArea",
-		"onDragOver",
-		"onCloseBox",
-		"onUnload",
-		"onAfterKeystroke",
 		"onAfterEdit",
-		"onBeginDragOver",
-		"onBoundVariableChange",
-		"onPageChange"
+		"onTimer",
+		"onBoundVariableChange"
 	],
 	"windowTitle": "window title",
 	"destination": "detailScreen",
@@ -37,83 +36,10 @@
 		},
 		{
 			"objects": {
-				"teams": {
+				"interestedParties": {
 					"type": "listbox",
-					"left": 2,
-					"top": 0,
-					"width": 292,
-					"height": 492,
-					"events": [
-						"onClick",
-						"onHeaderClick",
-						"onDataChange",
-						"onSelectionChange"
-					],
-					"horizontalLineStroke": "transparent",
-					"dataSource": "Form:C1466.teams",
-					"resizingMode": "legacy",
-					"listboxType": "collection",
-					"verticalLineStroke": "transparent",
-					"selectionMode": "single",
-					"currentItemSource": "Form:C1466.currentTeam",
-					"currentItemPositionSource": "Form:C1466.currentTeamPos",
-					"selectedItemsSource": "Form:C1466.currentSelectedTeams",
-					"scrollbarHorizontal": "automatic",
-					"scrollbarVertical": "automatic",
-					"fill": "transparent",
-					"borderStyle": "none",
-					"stroke": "#000000",
-					"sizingX": "fixed",
-					"sizingY": "grow",
-					"method": "ObjectMethods/teams.4dm",
-					"columns": [
-						{
-							"header": {
-								"text": "",
-								"name": "Header1"
-							},
-							"name": "TeamsCheckBox",
-							"footer": {
-								"name": "Footer1"
-							},
-							"width": 30,
-							"dataSource": "This:C1470.selected",
-							"dataSourceTypeHint": "boolean",
-							"textAlign": "right",
-							"stroke": "#000000",
-							"events": [
-								"onClick",
-								"onDataChange"
-							],
-							"enterable": true,
-							"method": "ObjectMethods/TeamsCheckBox.4dm",
-							"truncateMode": "none"
-						},
-						{
-							"header": {
-								"name": "Header2",
-								"text": "Teams",
-								"fontWeight": "bold"
-							},
-							"name": "Column2",
-							"footer": {
-								"name": "Footer2"
-							},
-							"dataSource": "This:C1470.teamName",
-							"textAlign": "left",
-							"stroke": "#000000",
-							"events": [
-								"onClick",
-								"onDataChange"
-							],
-							"enterable": false
-						}
-					]
-				},
-				"teamMembers": {
-					"type": "listbox",
-					"left": 296,
-					"top": 0,
+					"left": 6,
+					"top": 6,
 					"width": 292,
 					"height": 492,
 					"events": [
@@ -127,7 +53,7 @@
 					"listboxType": "collection",
 					"verticalLineStroke": "transparent",
 					"selectionMode": "single",
-					"currentItemSource": "Form:C1466.currentStaff",
+					"currentItemSource": "Form:C1466.currentParty",
 					"scrollbarHorizontal": "automatic",
 					"scrollbarVertical": "automatic",
 					"fill": "transparent",
@@ -135,8 +61,9 @@
 					"stroke": "#000000",
 					"sizingX": "fixed",
 					"sizingY": "grow",
-					"dataSource": "Form:C1466.currentTeam.members",
-					"selectedItemsSource": "Form:C1466.staffSelection",
+					"dataSource": "Form:C1466.interestedParties",
+					"selectedItemsSource": "Form:C1466.partySelection",
+					"currentItemPositionSource": "Form:C1466.currentPartyPos",
 					"columns": [
 						{
 							"header": {
@@ -156,19 +83,19 @@
 								"onClick",
 								"onDataChange"
 							],
-							"method": "ObjectMethods/membersChecBox.4dm"
+							"method": ""
 						},
 						{
 							"header": {
 								"name": "Header4",
-								"text": "Team Members",
+								"text": "Interested Parties",
 								"fontWeight": "bold"
 							},
 							"name": "Column4",
 							"footer": {
 								"name": "Footer4"
 							},
-							"dataSource": "This:C1470.staffName",
+							"dataSource": "This:C1470.name",
 							"textAlign": "left",
 							"stroke": "#000000",
 							"enterable": false,
@@ -181,8 +108,8 @@
 				},
 				"bOk": {
 					"type": "button",
-					"top": 501,
-					"left": 550,
+					"top": 507,
+					"left": 260,
 					"width": 30,
 					"height": 32,
 					"sizingY": "move",
@@ -205,8 +132,8 @@
 				},
 				"bCancel": {
 					"type": "button",
-					"top": 501,
-					"left": 504,
+					"top": 507,
+					"left": 214,
 					"width": 32,
 					"height": 32,
 					"sizingY": "move",
@@ -220,24 +147,13 @@
 						"onClick"
 					],
 					"action": "cancel",
-					"method": "ObjectMethods/bCancel.4dm",
+					"method": "",
 					"sizingX": "move"
-				},
-				"Line": {
-					"type": "line",
-					"top": 0,
-					"left": 294,
-					"width": 0,
-					"height": 501,
-					"startPoint": "bottomLeft",
-					"sizingY": "grow",
-					"sizingX": "fixed"
 				}
 			}
 		}
 	],
-	"geometryStamp": 79,
-	"method": "method.4dm",
+	"geometryStamp": 5,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
@@ -245,5 +161,5 @@
 			"View 1": {}
 		}
 	},
-	"shared": false
+	"method": ""
 }

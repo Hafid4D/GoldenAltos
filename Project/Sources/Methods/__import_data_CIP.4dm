@@ -112,7 +112,7 @@ If ($cip_log.exists)
 		$eCip:=ds:C1482.ContinuousImprovement.new()
 		
 		$eCip.item:=$cip.item
-		$eCip.interestedParty:=$cip.interestedParty
+		$eCip.interestedParty:=Split string:C1554($cip.interestedParty; "\n"; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join(",")
 		
 		$eCip.priority:=$cip.priority
 		

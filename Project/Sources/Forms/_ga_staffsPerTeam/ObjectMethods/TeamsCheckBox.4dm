@@ -12,7 +12,7 @@ Case of
 				
 				Form:C1466.currentTeam.members[$j].selected:=True:C214
 			End for 
-			OBJECT SET ENTERABLE:C238(*; "membersChecBox"; False:C215)
+			//OBJECT SET ENTERABLE(*; "membersChecBox"; False)
 		Else 
 			
 			For ($j; 0; Form:C1466.currentTeam.members.length-1)

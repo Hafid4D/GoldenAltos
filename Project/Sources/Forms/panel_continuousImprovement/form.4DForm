@@ -39,10 +39,11 @@
 					"left": 12,
 					"width": 143,
 					"height": 17,
-					"stroke": "#808080",
+					"stroke": "#000000",
 					"text": "Item # ",
 					"right": 155,
-					"textAlign": "right"
+					"textAlign": "right",
+					"fontWeight": "bold"
 				},
 				"entryField_item": {
 					"type": "input",
@@ -60,7 +61,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"dataSourceTypeHint": "number",
 					"textAlign": "left"
 				},
@@ -70,11 +71,12 @@
 					"left": 12,
 					"width": 143,
 					"height": 17,
-					"stroke": "#808080",
+					"stroke": "#000000",
 					"text": "Interested Party Name ",
 					"bottom": 55,
 					"right": 155,
-					"textAlign": "right"
+					"textAlign": "right",
+					"fontWeight": "bold"
 				},
 				"entryField_interestedParty": {
 					"type": "input",
@@ -92,7 +94,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"bottom": 55
 				},
@@ -102,11 +104,12 @@
 					"left": 12,
 					"width": 143,
 					"height": 17,
-					"stroke": "#808080",
+					"stroke": "#000000",
 					"text": "External ID ",
 					"bottom": 82,
 					"right": 155,
-					"textAlign": "right"
+					"textAlign": "right",
+					"fontWeight": "bold"
 				},
 				"entryField_externalID": {
 					"type": "input",
@@ -124,11 +127,11 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"bottom": 82
 				},
-				"Rectangle": {
+				"backgroundRectangle": {
 					"type": "rectangle",
 					"top": 114,
 					"left": 1,
@@ -137,20 +140,186 @@
 					"fill": "#B1CFDE",
 					"strokeWidth": 0,
 					"stroke": "#FFFFFF"
+				},
+				"bInterestedPartyEdit": {
+					"type": "button",
+					"text": "",
+					"top": 30,
+					"left": 370,
+					"width": 30,
+					"height": 32,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"icon": "/RESOURCES/sfw/image/skin/rainbow/btn4states/edit-24x24.png",
+					"iconFrames": 4,
+					"method": "ObjectMethods/bInterestedPartyEdit.4dm"
 				}
 			}
 		},
 		{
 			"objects": {
+				"Rectangle17": {
+					"type": "rectangle",
+					"top": 450,
+					"left": 173,
+					"width": 543,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle12": {
+					"type": "rectangle",
+					"top": 703,
+					"left": 173,
+					"width": 543,
+					"height": 60,
+					"stroke": "transparent"
+				},
+				"Rectangle13": {
+					"type": "rectangle",
+					"top": 271,
+					"left": 173,
+					"width": 543,
+					"height": 60,
+					"stroke": "transparent"
+				},
+				"Rectangle14": {
+					"type": "rectangle",
+					"top": 373,
+					"left": 173,
+					"width": 543,
+					"height": 60,
+					"stroke": "transparent"
+				},
+				"Rectangle15": {
+					"type": "rectangle",
+					"top": 524,
+					"left": 173,
+					"width": 543,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle1": {
+					"type": "rectangle",
+					"top": 487,
+					"left": 522,
+					"width": 194,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle5": {
+					"type": "rectangle",
+					"top": 598,
+					"left": 522,
+					"width": 194,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle6": {
+					"type": "rectangle",
+					"top": 660,
+					"left": 522,
+					"width": 194,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle9": {
+					"type": "rectangle",
+					"top": 135,
+					"left": 522,
+					"width": 194,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle10": {
+					"type": "rectangle",
+					"top": 172,
+					"left": 522,
+					"width": 194,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle3": {
+					"type": "rectangle",
+					"top": 561,
+					"left": 173,
+					"width": 543,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle4": {
+					"type": "rectangle",
+					"top": 598,
+					"left": 173,
+					"width": 195,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle7": {
+					"type": "rectangle",
+					"top": 660,
+					"left": 173,
+					"width": 195,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle8": {
+					"type": "rectangle",
+					"top": 135,
+					"left": 173,
+					"width": 195,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle11": {
+					"type": "rectangle",
+					"top": 172,
+					"left": 173,
+					"width": 195,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle2": {
+					"type": "rectangle",
+					"top": 487,
+					"left": 173,
+					"width": 195,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"pup_disposition": {
+					"type": "button",
+					"top": 487,
+					"left": 524,
+					"width": 190,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_disposition.4dm",
+					"events": [
+						"onClick",
+						"onDisplayDetail"
+					],
+					"right": 714,
+					"fontWeight": "normal",
+					"textAlign": "left"
+				},
 				"label_0_6": {
 					"type": "text",
 					"top": 249,
 					"left": 175,
 					"width": 300,
 					"height": 17,
-					"stroke": "#696969",
+					"stroke": "#000000",
 					"text": "Action items to Address Risks & Opportinuties  ",
-					"fontWeight": "normal"
+					"fontWeight": "bold"
 				},
 				"entryField_action": {
 					"type": "input",
@@ -168,7 +337,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"bottom": 331
 				},
@@ -178,10 +347,10 @@
 					"left": 60,
 					"width": 90,
 					"height": 17,
-					"stroke": "#696969",
+					"stroke": "#000000",
 					"text": "Priority",
 					"textAlign": "right",
-					"fontWeight": "normal"
+					"fontWeight": "bold"
 				},
 				"pup_priority": {
 					"type": "button",
@@ -203,7 +372,7 @@
 						"onDisplayDetail"
 					],
 					"right": 365,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"label_0_2": {
@@ -212,10 +381,10 @@
 					"left": 409,
 					"width": 90,
 					"height": 17,
-					"stroke": "#696969",
+					"stroke": "#000000",
 					"text": "Title ",
 					"textAlign": "right",
-					"fontWeight": "normal"
+					"fontWeight": "bold"
 				},
 				"label_0_3": {
 					"type": "text",
@@ -223,10 +392,10 @@
 					"left": 60,
 					"width": 90,
 					"height": 17,
-					"stroke": "#696969",
+					"stroke": "#000000",
 					"text": "Date Initianed ",
 					"textAlign": "right",
-					"fontWeight": "normal"
+					"fontWeight": "bold"
 				},
 				"label_0_7": {
 					"type": "text",
@@ -234,9 +403,9 @@
 					"left": 175,
 					"width": 350,
 					"height": 17,
-					"stroke": "#696969",
+					"stroke": "#000000",
 					"text": "Non conformance/Complaint/Feedback/Itevm being addressed ",
-					"fontWeight": "normal"
+					"fontWeight": "bold"
 				},
 				"label_0_8": {
 					"type": "text",
@@ -244,9 +413,9 @@
 					"left": 175,
 					"width": 250,
 					"height": 17,
-					"stroke": "#696969",
+					"stroke": "#000000",
 					"text": "Effective & Residual Risk Acceptable ?",
-					"fontWeight": "normal"
+					"fontWeight": "bold"
 				},
 				"label_0_9": {
 					"type": "text",
@@ -254,10 +423,10 @@
 					"left": 50,
 					"width": 100,
 					"height": 17,
-					"stroke": "#696969",
+					"stroke": "#000000",
 					"text": "QCAR #",
 					"textAlign": "right",
-					"fontWeight": "normal"
+					"fontWeight": "bold"
 				},
 				"label_origin": {
 					"type": "text",
@@ -265,10 +434,10 @@
 					"left": 399,
 					"width": 100,
 					"height": 17,
-					"stroke": "#696969",
+					"stroke": "#000000",
 					"text": "Origin",
 					"textAlign": "right",
-					"fontWeight": "normal"
+					"fontWeight": "bold"
 				},
 				"pup_origin": {
 					"type": "button",
@@ -290,7 +459,7 @@
 						"onDisplayDetail"
 					],
 					"right": 714,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"entryField_dateInitiated": {
@@ -309,7 +478,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"bottom": 192,
 					"dataSourceTypeHint": "date"
@@ -330,7 +499,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"bottom": 155
 				},
@@ -354,7 +523,7 @@
 						"onDisplayDetail"
 					],
 					"right": 714,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"entryField_procedureType": {
@@ -373,7 +542,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"bottom": 433
 				},
@@ -404,10 +573,10 @@
 					"left": 5,
 					"width": 145,
 					"height": 17,
-					"stroke": "#696969",
+					"stroke": "#000000",
 					"text": "Requirement/Procedure#",
 					"textAlign": "right",
-					"fontWeight": "normal"
+					"fontWeight": "bold"
 				},
 				"entryField_requirement": {
 					"type": "input",
@@ -425,7 +594,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"bottom": 470
 				},
@@ -435,10 +604,10 @@
 					"left": 5,
 					"width": 145,
 					"height": 17,
-					"stroke": "#696969",
+					"stroke": "#000000",
 					"text": "Category of Action",
 					"textAlign": "right",
-					"fontWeight": "normal"
+					"fontWeight": "bold"
 				},
 				"pup_category": {
 					"type": "button",
@@ -460,30 +629,7 @@
 						"onDisplayDetail"
 					],
 					"right": 365,
-					"fontWeight": "bold",
-					"textAlign": "left"
-				},
-				"pup_disposition": {
-					"type": "button",
-					"top": 487,
-					"left": 524,
-					"width": 190,
-					"height": 23,
-					"fontFamily": "System Font",
-					"fontSize": 13,
-					"focusable": false,
-					"text": "",
-					"icon": "",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/pup_disposition.4dm",
-					"events": [
-						"onClick",
-						"onDisplayDetail"
-					],
-					"right": 714,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"label_disposition": {
@@ -492,10 +638,10 @@
 					"left": 399,
 					"width": 100,
 					"height": 17,
-					"stroke": "#696969",
+					"stroke": "#000000",
 					"text": "Disposition",
 					"textAlign": "right",
-					"fontWeight": "normal"
+					"fontWeight": "bold"
 				},
 				"label_0_11": {
 					"type": "text",
@@ -503,10 +649,10 @@
 					"left": 5,
 					"width": 145,
 					"height": 17,
-					"stroke": "#696969",
+					"stroke": "#000000",
 					"text": "Human Factoe if CA",
 					"textAlign": "right",
-					"fontWeight": "normal"
+					"fontWeight": "bold"
 				},
 				"pup_humanFactor": {
 					"type": "button",
@@ -528,7 +674,7 @@
 						"onDisplayDetail"
 					],
 					"right": 714,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"label_0_12": {
@@ -537,10 +683,10 @@
 					"left": 5,
 					"width": 145,
 					"height": 17,
-					"stroke": "#696969",
+					"stroke": "#000000",
 					"text": "Responsible Person(s)",
 					"textAlign": "right",
-					"fontWeight": "normal"
+					"fontWeight": "bold"
 				},
 				"entryField_responsible": {
 					"type": "input",
@@ -558,7 +704,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"bottom": 581
 				},
@@ -568,10 +714,10 @@
 					"left": 5,
 					"width": 145,
 					"height": 17,
-					"stroke": "#696969",
+					"stroke": "#000000",
 					"text": "Current Due Date",
 					"textAlign": "right",
-					"fontWeight": "normal"
+					"fontWeight": "bold"
 				},
 				"entryField_currentDueDate": {
 					"type": "input",
@@ -589,7 +735,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"bottom": 618,
 					"dataSourceTypeHint": "date"
@@ -621,10 +767,10 @@
 					"left": 369,
 					"width": 130,
 					"height": 17,
-					"stroke": "#696969",
+					"stroke": "#000000",
 					"text": "Original Due Date",
 					"textAlign": "right",
-					"fontWeight": "normal"
+					"fontWeight": "bold"
 				},
 				"entryField_originalDueDate": {
 					"type": "input",
@@ -642,7 +788,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"bottom": 618,
 					"dataSourceTypeHint": "date"
@@ -688,7 +834,7 @@
 						"onDisplayDetail"
 					],
 					"right": 365,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"label_0_15": {
@@ -697,10 +843,10 @@
 					"left": 409,
 					"width": 90,
 					"height": 17,
-					"stroke": "#696969",
+					"stroke": "#000000",
 					"text": "Closed Date",
 					"textAlign": "right",
-					"fontWeight": "normal"
+					"fontWeight": "bold"
 				},
 				"entryField_dateClosed": {
 					"type": "input",
@@ -718,7 +864,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"bottom": 680,
 					"dataSourceTypeHint": "date"
@@ -760,7 +906,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"bottom": 763
 				},
@@ -770,10 +916,10 @@
 					"left": 5,
 					"width": 145,
 					"height": 17,
-					"stroke": "#696969",
+					"stroke": "#000000",
 					"text": "Notes",
 					"textAlign": "right",
-					"fontWeight": "normal"
+					"fontWeight": "bold"
 				},
 				"bActionRefresh": {
 					"type": "button",
@@ -804,12 +950,20 @@
 					"icon": "/RESOURCES/sfw/image/skin/rainbow/btn4states/edit-24x24.png",
 					"iconFrames": 4,
 					"method": "ObjectMethods/bResponsibleEdit.4dm"
+				},
+				"Rectangle16": {
+					"type": "rectangle",
+					"top": 209,
+					"left": 173,
+					"width": 543,
+					"height": 23,
+					"stroke": "transparent"
 				}
 			}
 		},
 		null
 	],
-	"geometryStamp": 242,
+	"geometryStamp": 353,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"editor": {
 		"activeView": "View 1",
