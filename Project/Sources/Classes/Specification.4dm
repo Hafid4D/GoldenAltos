@@ -4,7 +4,7 @@ Class extends DataClass
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	//Mark: entry : Specification
-	$entry:=cs:C1710.sfw_definitionEntry.new("specification"; ["qualityAssistance"]; "Specifications")
+	$entry:=cs:C1710.sfw_definitionEntry.new("specification"; ["qualityAssistance"]; "Specs Control")
 	$entry.setDataclass("Specification")
 	$entry.setSearchboxField("spec")
 	$entry.setDisplayOrder(-500)
