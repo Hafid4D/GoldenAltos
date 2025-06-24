@@ -74,25 +74,45 @@ Function drawPup_EquipmentType()
 Function pup_type()
 	//Create pop up menu
 	If (Form:C1466.sfw.checkIsInModification())
-		$menu:=Create menu:C408
-		For each ($equipmentType; ds:C1482.ToolType.all())  // Storage.cache.equipmentTypes)
-			APPEND MENU ITEM:C411($menu; $equipmentType.name; *)
-			SET MENU ITEM PARAMETER:C1004($menu; -1; $equipmentType.UUID)
-			If ($equipmentType.UUID=Form:C1466.current_item.UUID_ToolType)
-				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
-				If (Is Windows:C1573)
-					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
-				End if 
-			End if 
-		End for each 
-		$choose:=Dynamic pop up menu:C1006($menu)
-		RELEASE MENU:C978($menu)
+/*
+$menu:=Create menu
+For each ($equipmentType; ds.ToolType.all())  // Storage.cache.equipmentTypes)
+APPEND MENU ITEM($menu; $equipmentType.name; *)
+SET MENU ITEM PARAMETER($menu; -1; $equipmentType.UUID)
+If ($equipmentType.UUID=Form.current_item.UUID_ToolType)
+SET MENU ITEM MARK($menu; -1; Char(18))
+If (Is Windows)
+SET MENU ITEM STYLE($menu; -1; Bold)
+End if 
+End if 
+End for each 
+$choose:=Dynamic pop up menu($menu)
+RELEASE MENU($menu)
 		
-		Case of 
-			: ($choose#"")
-				$equipmentType:=ds:C1482.ToolType.get($choose)
-				Form:C1466.current_item.UUID_ToolType:=$equipmentType.UUID
-		End case 
+Case of 
+: ($choose#"")
+$equipmentType:=ds.ToolType.get($choose)
+Form.current_item.UUID_ToolType:=$equipmentType.UUID
+End case 
+*/
+		OBJECT GET COORDINATES:C663(*; "pup_equipmentType"; $l; $t; $r; $b)
+		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
+		
+		$form:=New object:C1471(\
+			"colName"; "name"; \
+			"lb_items"; ds:C1482.ToolType.all(); \
+			"allData"; ds:C1482.ToolType.all(); \
+			"dataclass"; "ToolType"\
+			)
+		
+		$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b)
+		DIALOG:C40("selectNto1"; $form)
+		CLOSE WINDOW:C154($winRef)
+		
+		If (ok=1)
+			Form:C1466.current_item.UUID_ToolType:=$form.item.name
+			cs:C1710.panel_equipment.me._activate_save_cancel_button()
+		End if 
 		
 	End if 
 	This:C1470.drawPup_EquipmentType()

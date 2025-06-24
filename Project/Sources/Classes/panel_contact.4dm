@@ -32,7 +32,7 @@ Function drawPup_Customer()
 		$customer:=ds:C1482.Customer.query("UUID= :1"; Form:C1466.current_item.UUID_Customer).first() || New object:C1471()
 		$customerName:=$customer.name
 		If ($customerName=Null:C1517)
-			$customerName:="Customer"
+			$customerName:=""
 		End if 
 		$color:="#FFFFFF"  //cs.sfw_htmlColor.me.getName($customer.color)
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
@@ -43,31 +43,51 @@ Function drawPup_Customer()
 Function pup_Customer()
 	//Create pop up menu
 	If (Form:C1466.sfw.checkIsInModification())
-		$menu:=Create menu:C408
-		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.customers=Null:C1517)
-			ds:C1482.Customer.cacheLoad()
+/*
+$menu:=Create menu
+If (Storage.cache=Null) || (Storage.cache.customers=Null)
+ds.Customer.cacheLoad()
+End if 
+		
+For each ($eCustomer; Storage.cache.customers)
+APPEND MENU ITEM($menu; $eCustomer.name; *)
+SET MENU ITEM PARAMETER($menu; -1; $eCustomer.UUID)
+If ($eCustomer.UUID=Form.current_item.UUID_Customer)
+SET MENU ITEM MARK($menu; -1; Char(18))
+If (Is Windows)
+SET MENU ITEM STYLE($menu; -1; Bold)
+End if 
+End if 
+End for each 
+$choose:=Dynamic pop up menu($menu)
+RELEASE MENU($menu)
+		
+Case of 
+: ($choose#"")
+$eCustomer:=ds.Customer.get($choose)
+Form.current_item.UUID_Customer:=$eCustomer.UUID
+End case 
+*/
+		OBJECT GET COORDINATES:C663(*; "pup_Customer"; $l; $t; $r; $b)
+		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
+		
+		$form:=New object:C1471(\
+			"colName"; "name"; \
+			"lb_items"; ds:C1482.Customer.all(); \
+			"allData"; ds:C1482.Customer.all(); \
+			"dataclass"; "Customer"\
+			)
+		
+		$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b)
+		DIALOG:C40("selectNto1"; $form)
+		CLOSE WINDOW:C154($winRef)
+		
+		If (ok=1)
+			Form:C1466.current_item.UUID_Customer:=$form.item.UUID
+			cs:C1710.panel_contact.me._activate_save_cancel_button()
 		End if 
-		
-		For each ($eCustomer; Storage:C1525.cache.customers)
-			APPEND MENU ITEM:C411($menu; $eCustomer.name; *)
-			SET MENU ITEM PARAMETER:C1004($menu; -1; $eCustomer.UUID)
-			If ($eCustomer.UUID=Form:C1466.current_item.UUID_Customer)
-				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
-				If (Is Windows:C1573)
-					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
-				End if 
-			End if 
-		End for each 
-		$choose:=Dynamic pop up menu:C1006($menu)
-		RELEASE MENU:C978($menu)
-		
-		Case of 
-			: ($choose#"")
-				$eCustomer:=ds:C1482.Customer.get($choose)
-				Form:C1466.current_item.UUID_Customer:=$eCustomer.UUID
-		End case 
-		
 	End if 
+	
 	This:C1470.drawPup_Customer()
 	
 	

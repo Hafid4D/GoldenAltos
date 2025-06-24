@@ -1,5 +1,5 @@
 //%attributes = {}
-TRUNCATE TABLE:C1051([Team:25])
+TRUNCATE TABLE:C1051([Team:136])
 
 //1
 $team_e:=ds:C1482.Team.new()
