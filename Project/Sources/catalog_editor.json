@@ -982,7 +982,7 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2062,
+				"left": 2066,
 				"top": 0,
 				"width": 197,
 				"height": 484.33203125
@@ -1094,8 +1094,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3068,
-				"top": 228,
+				"left": 3020,
+				"top": 294,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -1270,12 +1270,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3091.015625,
+				"left": 3078.015625,
 				"top": 0,
-				"width": 123.697265625,
-				"height": 193.33203125
+				"width": 200.697265625,
+				"height": 268.33203125
 			},
-			"displayable_fields_count": 7
+			"displayable_fields_count": 10
 		},
 		"sfw_DocumentFolder": {
 			"color": {
@@ -1346,8 +1346,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3134,
-				"top": 420,
+				"left": 3144,
+				"top": 448,
 				"width": 169,
 				"height": 142.33203125
 			},

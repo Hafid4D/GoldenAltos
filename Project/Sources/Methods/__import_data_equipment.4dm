@@ -44,9 +44,7 @@ If ($equipment_Log.exists)
 	$count:=0
 	If ($docs.exists)
 		
-		
 		$documents:=JSON Parse:C1218($docs.getText())
-		
 		
 	End if 
 	
