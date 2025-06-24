@@ -894,7 +894,7 @@
 		<field name="revisionDate" uuid="7891632079BA28459B431B9F8CEEF120" type="8" never_null="true" id="8"/>
 		<field name="initialResponse" uuid="BDB0BDD27F533246B95F4932EA9FAE2F" type="10" limiting_length="255" never_null="true" id="9"/>
 		<field name="initiator8D" uuid="15257E6F093C3347AE0A93CFCAAD80D2" type="10" limiting_length="255" never_null="true" id="10"/>
-		<field name="closeDate" uuid="AB17B7F5A540A243A1EA6F8BEE38AD9A" type="10" limiting_length="255" never_null="true" id="11"/>
+		<field name="actualCloseDate" uuid="AB17B7F5A540A243A1EA6F8BEE38AD9A" type="8" never_null="true" id="11"/>
 		<field name="verifiedBy" uuid="E97BB2497556B4448868D3412B7DE3AF" type="10" limiting_length="255" never_null="true" id="12">
 			<field_extra multi_line="false"/>
 		</field>
@@ -904,10 +904,13 @@
 		<field name="category" uuid="1EFFD250540A5C42ABDA48B40C2B1DC5" type="10" limiting_length="255" never_null="true" id="16"/>
 		<field name="issuedBy" uuid="DA02EB22A8AF3649BBADB5854B94A74A" type="10" limiting_length="255" never_null="true" id="17"/>
 		<field name="issuedTo" uuid="5CFBA75EF365C04A9879CA74CFD4169D" type="10" limiting_length="255" never_null="true" id="18"/>
-		<field name="issuedDate" uuid="9AF8CA702C2C7448806FCD7CB0F76A9B" type="10" limiting_length="255" never_null="true" id="19"/>
-		<field name="closedDate" uuid="50ABF45F77F29F48BC18CB7EF152D645" type="8" never_null="true" id="20"/>
+		<field name="issuedDate" uuid="9AF8CA702C2C7448806FCD7CB0F76A9B" type="8" never_null="true" id="19"/>
+		<field name="verifiedDate" uuid="0B85C7C16DCE9747A40CD5980B0F4C9E" type="8" never_null="true" id="20"/>
 		<field name="inLine" uuid="5B4D465362DD5F49B47F51360FE6FC0C" type="1" never_null="true" id="21"/>
 		<field name="internal" uuid="F49902FC522A7C4FB90630EBE787A9D4" type="1" never_null="true" id="22"/>
+		<field name="correctiveActionReport" uuid="1701324EEA8F954597D6F9CC393FB6AA" type="21" blob_switch_size="2147483647" never_null="true" id="23"/>
+		<field name="closedDate" uuid="2395A06581078341A84621D83B30DE97" type="8" never_null="true" id="24"/>
+		<field name="verified" uuid="B5317F2936DAA84688754D5AD27F203A" type="1" never_null="true" id="25"/>
 		<primary_key field_name="UUID" field_uuid="129BD267EFE06D4EBCF1E64FCE762186"/>
 	</table>
 	<relation uuid="28F035FB298D4CB6988212AA82A48186" name_Nto1="user" name_1toN="comments" state="1">
@@ -1542,16 +1545,6 @@
 			<table_ref uuid="A1BFE9AD9486804BA249798C81722C4A" name="dfd_Document"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="17DAA6DCBF4CDA408102605937E46945" type="1">
-		<field_ref uuid="576820214AE49648A0CC6ACA3DD19531" name="UUID">
-			<table_ref uuid="FCE2D049B8944E4CA0AAB0152A549718" name="Equipment"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="1A60E392B5D57C40A28F368CB3D8AEAE" type="1">
-		<field_ref uuid="8FD486DDACE0854DA8FB686A58B08089" name="UUID">
-			<table_ref uuid="E209D11E14110249AE69799CB8F51C7C" name="RepairLog"/>
-		</field_ref>
-	</index>
 	<index kind="regular" unique_keys="true" uuid="1AAB39487A27AF41AFC1D4CBCFA0772A" type="7">
 		<field_ref uuid="ABB5485D67861C4884D7E9EF218BFD1A" name="UUID">
 			<table_ref uuid="12C5C25E6F81654DA0FB31C54E963E00" name="CICategory"/>
@@ -1735,6 +1728,11 @@
 	<index kind="regular" uuid="62653CBC37B2C04D8FDC32AE64890757" type="3">
 		<field_ref uuid="4463613D81E24EFBA7FEC15654FA732C" name="UUID_User">
 			<table_ref uuid="5E1C3E25225441628E3DBCF58BFAABF4" name="sfw_Document"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="6B00CE673CCF6D44B73838EAEE15DA50" type="1">
+		<field_ref uuid="8FD486DDACE0854DA8FB686A58B08089" name="UUID">
+			<table_ref uuid="E209D11E14110249AE69799CB8F51C7C" name="RepairLog"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="6B32C8DEC9CEEB449F96F5750E84D233" type="3">
@@ -1950,6 +1948,11 @@
 	<index kind="regular" uuid="BC75664DDD5DE14595C93F4D48ACAE08" type="3">
 		<field_ref uuid="7DC537B061D51F40A13C9A363D978D58" name="UUID_DocumentFolder">
 			<table_ref uuid="63274D1841D8B94E868AEE5C2909EBE8" name="dfd_Template"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="BD47FA9405A1744D91F89C7277E5056E" type="1">
+		<field_ref uuid="576820214AE49648A0CC6ACA3DD19531" name="UUID">
+			<table_ref uuid="FCE2D049B8944E4CA0AAB0152A549718" name="Equipment"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="BDA8800349B14D4D92A8B670F01E0E74" type="7">

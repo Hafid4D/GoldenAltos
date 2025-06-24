@@ -1,5 +1,94 @@
 {
 	"tables": {
+		"Qcar": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 1623,
+				"top": 1105,
+				"width": 289.3828125,
+				"height": 577.33203125
+			},
+			"displayable_fields_count": 25,
+			"fields": {
+				"closedDate": {
+					"position": 24
+				},
+				"correctiveActionReport": {
+					"position": 23
+				},
+				"internal": {
+					"position": 22
+				},
+				"inLine": {
+					"position": 21
+				},
+				"verifiedDate": {
+					"position": 13
+				},
+				"issuedDate": {
+					"position": 20
+				},
+				"issuedTo": {
+					"position": 19
+				},
+				"issuedBy": {
+					"position": 18
+				},
+				"category": {
+					"position": 17
+				},
+				"submitDate": {
+					"position": 16
+				},
+				"submit": {
+					"position": 15
+				},
+				"void": {
+					"position": 14
+				},
+				"verifiedBy": {
+					"position": 12
+				},
+				"actualCloseDate": {
+					"position": 11
+				},
+				"initiator8D": {
+					"position": 10
+				},
+				"initialResponse": {
+					"position": 9
+				},
+				"revisionDate": {
+					"position": 8
+				},
+				"targetCloseDate": {
+					"position": 7
+				},
+				"openDate": {
+					"position": 6
+				},
+				"device": {
+					"position": 5
+				},
+				"UUID_Customer": {
+					"position": 4
+				},
+				"UUID_Lot": {
+					"position": 3
+				},
+				"qcarNumber": {
+					"position": 2
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
+		},
 		"Membership": {
 			"color": {
 				"red": 255,
@@ -104,10 +193,10 @@
 			"coordinates": {
 				"left": 2110,
 				"top": 642,
-				"width": 165,
-				"height": 173.33203125
+				"width": 169,
+				"height": 165.33203125
 			},
-			"displayable_fields_count": 6
+			"displayable_fields_count": 5
 		},
 		"QuoteStatus": {
 			"color": {
@@ -861,35 +950,6 @@
 						"blue": 255,
 						"alpha": 0
 					}
-				}
-			}
-		},
-		"Qcar": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			},
-			"coordinates": {
-				"left": 1618,
-				"top": 1170,
-				"width": 188.015625,
-				"height": 503.33203125
-			},
-			"displayable_fields_count": 22,
-			"fields": {
-				"UUID_Customer": {
-					"position": 3
-				},
-				"UUID_Lot": {
-					"position": 2
-				},
-				"qcarNumber": {
-					"position": 4
-				},
-				"UUID": {
-					"position": 1
 				}
 			}
 		},
