@@ -441,7 +441,7 @@
 				},
 				"sf_stepTemplateSearch": {
 					"type": "subform",
-					"left": 162,
+					"left": 142,
 					"top": 45,
 					"width": 340,
 					"height": 350,
@@ -453,7 +453,7 @@
 			}
 		}
 	],
-	"geometryStamp": 4041,
+	"geometryStamp": 4042,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

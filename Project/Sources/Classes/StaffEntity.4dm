@@ -1,7 +1,12 @@
 Class extends Entity
 
 Function hasCertification($uuid_certification : Text; $duration : Integer)->$certified : Boolean
-	$certified:=(ds:C1482.CertificationAssignment.query("UUID_Staff = :1 AND UUID_Certification = :2"; This:C1470.UUID; $uuid_certification).length>0)
+	//$certified:=(ds.CertificationAssignment.query("UUID_Staff = :1 AND UUID_Certification = :2"; This.UUID; $uuid_certification).length>0)
+	$certified:=(ds:C1482.CertificationAssignment.query("UUID_Staff = :1 AND UUID_Certification = :2 AND expiredIn >= :3"; \
+		This:C1470.UUID; \
+		$uuid_certification; \
+		cs:C1710.sfw_stmp.me.build(Current date:C33())\
+		).length>0)
 	
 Function createCertification($uuid_certification : Text; $duration : Integer)->$certified : Boolean
 	$certificationAssignment:=ds:C1482.CertificationAssignment.new()

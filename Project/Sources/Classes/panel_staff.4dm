@@ -41,11 +41,15 @@ Function redrawAndSetVisible()
 		: (FORM Get current page:C276(*)=2)  // assignments
 			OBJECT GET COORDINATES:C663(*; "rec_bkgd_1"; $left; $top; $right; $bottom)
 			OBJECT GET COORDINATES:C663(*; "lb_assignments"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			OBJECT GET COORDINATES:C663(*; "bActionCertifications"; $left_bAc; $top_bAc; $right_bAc; $bottom_bAc)
 			
 			$offset:=4
+			$offset_bAc:=10
+			$height_bAc:=$bottom_bAc-$top_bAc
 			
 			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_1"; $left; $top; $right; $heightSubform-$offset)
 			OBJECT SET COORDINATES:C1248(*; "lb_assignments"; $left_lb; $top_lb; $right_lb; $heightSubform-$offset-1)
+			OBJECT SET COORDINATES:C1248(*; "bActionCertifications"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
 	End case 
 	
 Function loadAllTabs()
@@ -123,6 +127,13 @@ Function manageCertification()
 			End if 
 			
 			This:C1470._activate_save_cancel_button()
+			
+		: (FORM Event:C1606.code=On Clicked:K2:4)
+			$find:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($1.value=$2)); "qa")
+			
+			If ($find#"")
+				
+			End if 
 	End case 
 	
 	//Function manageDataPicker($objectName : Text)
@@ -243,3 +254,39 @@ Function pup_user()
 		End case 
 	End if 
 	
+	
+Function bActionCertifications()
+	//If (Form.sfw.checkIsInModification())
+	If (Form:C1466.selectedCertification#Null:C1517)
+		$refMenu:=Create menu:C408
+		APPEND MENU ITEM:C411($refMenu; "Print Certificate of Completion")
+		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--print")
+		If (Not:C34(Form:C1466.current_item.hasCertification(Form:C1466.selectedCertification.UUID)))
+			DISABLE MENU ITEM:C150($refMenu; -1)
+		End if 
+		
+		$choose:=Dynamic pop up menu:C1006($refMenu)
+		
+		Case of 
+			: ($choose="--print")
+				PRINT SETTINGS:C106()
+				
+				OPEN PRINTING JOB:C995
+				
+				SET PRINT OPTION:C733(Orientation option:K47:2; 2)
+				
+				$form:=New object:C1471(\
+					"staffName"; Form:C1466.current_item.fullName; \
+					"certificationName"; Form:C1466.selectedCertification.name; \
+					"issuedBy"; "GOLDEN ALTOS CORPORATION"; \
+					"date"; String:C10(Form:C1466.selectedCertification.expiredIn; System date long:K1:3)\
+					)
+				
+				Print form:C5([Certification:124]; "certification_of_completion"; $form; Form detail:K43:1)
+				
+				CLOSE PRINTING JOB:C996
+		End case 
+	Else 
+		cs:C1710.sfw_dialog.me.alert("No Certification Selected !")
+	End if 
+	//End if 
