@@ -122,6 +122,11 @@
 		<field name="form" uuid="A381E5FB374E414D88A95210588F22FA" type="1" never_null="true" id="7"/>
 		<field name="documents" uuid="FA7C66EB8C3BF549BCE63FCB38B9A38E" type="21" blob_switch_size="2147483647" never_null="true" id="8"/>
 		<field name="publishedDocumentBlob" uuid="9410E3782B60CE4592ADEB2362C6D228" type="18" never_null="true" id="9"/>
+		<field name="category" uuid="67905BE86C5BDA44814B3A2BCCFDCDB6" type="10" limiting_length="255" never_null="true" id="10"/>
+		<field name="remark" uuid="F4CD3DD5A915BB498EF945E380518B91" type="10" limiting_length="255" never_null="true" id="11"/>
+		<field name="extension" uuid="1743D4283CC7B74CAF65FB4A396AEE7C" type="10" limiting_length="255" never_null="true" id="12"/>
+		<field name="addendum" uuid="6DF08F80478E4F47A8CF52321A3E7801" type="1" never_null="true" id="13"/>
+		<field name="suppress" uuid="667B2B05F2E694439706686CE9DC412D" type="1" never_null="true" id="14"/>
 		<primary_key field_name="UUID" field_uuid="2A671DFB01797B4DBB6EC2EB4216DB75"/>
 	</table>
 	<table name="CustomerEvent" uuid="0846217DF6043D4ABB7910378EBDF68A" id="11">

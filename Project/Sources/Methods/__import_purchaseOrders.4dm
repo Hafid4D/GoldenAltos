@@ -467,9 +467,13 @@ If (True:C214)
 		$specification_e.title:=$record.Spec_Title
 		$specification_e.revisionDate:=Date:C102($record.Revsion_Date)
 		$specification_e.rev:=$record.Rev
-		$specification_e.division:=$record.Division
+		$specification_e.division:=$record.Division  //TO CHANGE
 		$specification_e.form:=$record.Form
-		
+		$specification_e.category:=$record.PublishedDocCategory  //TO CHANGE
+		$specification_e.remark:=$record.Remarks
+		$specification_e.extension:=$record.Dosext
+		$specification_e.addendum:=$record.Addendum
+		$specification_e.suppress:=$record.Suppress
 		
 		$PublishedDocumentBlob:=Folder:C1567(fk data folder:K87:12).file("DataJson/SpecificationsPublishedDocumentBlobFields/"+String:C10($record.Spec))
 		If ($PublishedDocumentBlob.exists)
@@ -496,9 +500,9 @@ If (True:C214)
 			$docObj.documentPath:=$document.DocumentPath
 			$docObj.sourcePath:=$document.SourcePath
 			$docObj.description:=$document.DocDescription
-			//$docObj.approvalDate:=!00-00-00!
-			//$docObj.approvedBy:=""
-			//$docObj.isApproved:=False
+			$docObj.approvalDate:=!00-00-00!
+			$docObj.approvedBy:=""
+			$docObj.isApproved:=False:C215
 			
 			$doc:=Folder:C1567(fk data folder:K87:12).file("DataJson/SpecificationsDocuments/"+String:C10($document.UniqueID+$document.PrimaryKeyValue))
 			If ($doc.exists)
