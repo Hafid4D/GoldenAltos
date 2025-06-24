@@ -51,8 +51,10 @@ $wpDoc:=WP Import document:C1318($file.platformPath)
 WP SET DATA CONTEXT:C1786($wpDoc; $context)
 
 SET PRINT PREVIEW:C364(True:C214)
-//PRINT SETTINGS(2)
-//WP PRINT($wpDoc; wk html wysiwyg)
-WP EXPORT DOCUMENT:C1337($wpDoc; "test.pdf"; wk pdf:K81:315)
+
+$path:=System folder:C487(Desktop:K41:16)+String:C10(Form:C1466.current_item.qcarNumber)+".pdf"
+WP EXPORT DOCUMENT:C1337($wpDoc; $path; wk pdf:K81:315)
+
+OPEN URL:C673($path)
 
 //OPEN URL("test.pdf")

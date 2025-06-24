@@ -549,7 +549,7 @@
 				},
 				"entryField_verified": {
 					"type": "checkbox",
-					"text": "Inactive Staff",
+					"text": "Verified",
 					"top": 194,
 					"left": 374,
 					"width": 110,

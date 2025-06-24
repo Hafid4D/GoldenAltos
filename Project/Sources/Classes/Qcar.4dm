@@ -15,7 +15,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setPanel("panel_qcar")
 	$entry.setPanelPage(1; ""; "Main")
-	$entry.setPanelPage(2; ""; "8D CA Reprot")
+	$entry.setPanelPage(2; ""; "8D CA Report")
 	
 	$entry.setLBItemsColumn("qcarNumber"; "#"; "width:40"; "center")
 	$entry.setLBItemsColumn("customer.name"; "Customer"; "width:200")
