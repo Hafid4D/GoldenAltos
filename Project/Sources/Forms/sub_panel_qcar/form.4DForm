@@ -307,7 +307,7 @@
 					"dataSourceTypeHint": "date",
 					"dateFormat": "short"
 				},
-				"entryField_dropShipCustomer5": {
+				"entryField_d3ActualDate": {
 					"type": "input",
 					"top": 190,
 					"left": 810,
@@ -511,7 +511,7 @@
 					"height": 109,
 					"stroke": "#c0c0c0"
 				},
-				"entryField_dropShipCustomer9": {
+				"entryField_d6TargetDate": {
 					"type": "input",
 					"top": 728,
 					"left": 726,
@@ -531,7 +531,7 @@
 					"dataSourceTypeHint": "date",
 					"dateFormat": "short"
 				},
-				"entryField_dropShipCustomer10": {
+				"entryField_d6ActualDate": {
 					"type": "input",
 					"top": 728,
 					"left": 810,
@@ -643,7 +643,7 @@
 					"height": 109,
 					"stroke": "#c0c0c0"
 				},
-				"entryField_dropShipCustomer12": {
+				"entryField_d7TargetDate": {
 					"type": "input",
 					"top": 874,
 					"left": 726,
@@ -663,7 +663,7 @@
 					"dataSourceTypeHint": "date",
 					"dateFormat": "short"
 				},
-				"entryField_dropShipCustomer13": {
+				"entryField_d7ActualDate": {
 					"type": "input",
 					"top": 874,
 					"left": 810,
@@ -877,7 +877,7 @@
 					"fontWeight": "normal",
 					"textAlign": "left"
 				},
-				"dp_creationDate5": {
+				"dp_d3TargetDate": {
 					"type": "subform",
 					"top": 190,
 					"left": 786,
@@ -891,7 +891,107 @@
 					"doubleClickInEmptyAreaAction": "addSubrecord",
 					"selectionMode": "multiple",
 					"printFrame": "variable",
-					"method": "ObjectMethods/dp_creationDate5.4dm",
+					"method": "ObjectMethods/dp_d3TargetDate.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true
+				},
+				"dp_d3ActualDate": {
+					"type": "subform",
+					"top": 190,
+					"left": 870,
+					"width": 19,
+					"height": 16,
+					"dataSource": "Form:C1466.correctiveActionReport.d3ActualDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dp_d3ActualDate.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true
+				},
+				"dp_d6TargetDate": {
+					"type": "subform",
+					"top": 728,
+					"left": 786,
+					"width": 19,
+					"height": 16,
+					"dataSource": "Form:C1466.correctiveActionReport.d6TargetDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dp_d6TargetDate.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true
+				},
+				"dp_d6ActualDate": {
+					"type": "subform",
+					"top": 728,
+					"left": 870,
+					"width": 19,
+					"height": 16,
+					"dataSource": "Form:C1466.correctiveActionReport.d6ActualDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dp_d6ActualDate.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true
+				},
+				"dp_d7TargetDate": {
+					"type": "subform",
+					"top": 874,
+					"left": 786,
+					"width": 19,
+					"height": 16,
+					"dataSource": "Form:C1466.correctiveActionReport.d7TargetDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dp_d7TargetDate.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true
+				},
+				"dp_d7ActualDate": {
+					"type": "subform",
+					"top": 874,
+					"left": 870,
+					"width": 19,
+					"height": 16,
+					"dataSource": "Form:C1466.correctiveActionReport.d7ActualDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dp_d7ActualDate.4dm",
 					"events": [
 						"onLoad"
 					],
@@ -900,7 +1000,7 @@
 			}
 		}
 	],
-	"geometryStamp": 248,
+	"geometryStamp": 334,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
