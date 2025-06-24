@@ -721,6 +721,103 @@
 					"height": 16,
 					"fontWeight": "bold",
 					"right": 101
+				},
+				"List Box": {
+					"type": "listbox",
+					"left": 535,
+					"top": 200,
+					"width": 207,
+					"height": 256,
+					"events": [
+						"onClick",
+						"onHeaderClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.certifications",
+					"columns": [
+						{
+							"header": {
+								"text": "#",
+								"name": "Header2",
+								"fontWeight": "bold"
+							},
+							"name": "Column1",
+							"footer": {
+								"name": "Footer2"
+							},
+							"width": 30,
+							"textAlign": "center",
+							"dataSource": "Form:C1466.certifications.indexOf(This:C1470)"
+						},
+						{
+							"header": {
+								"name": "Header3",
+								"text": "Certified at",
+								"fontWeight": "bold"
+							},
+							"name": "Column2",
+							"footer": {
+								"name": "Footer3"
+							},
+							"width": 80,
+							"textAlign": "center",
+							"dataSource": "This:C1470.certifiedAt"
+						},
+						{
+							"header": {
+								"name": "Header4",
+								"text": "Expired in",
+								"fontWeight": "bold"
+							},
+							"name": "Column3",
+							"footer": {
+								"name": "Footer4"
+							},
+							"width": 80,
+							"textAlign": "center",
+							"dataSource": "This:C1470.expiredIn"
+						}
+					]
+				},
+				"Line": {
+					"type": "line",
+					"top": 476,
+					"left": 510,
+					"width": 374,
+					"height": 0,
+					"stroke": "#808080"
+				},
+				"Button": {
+					"type": "button",
+					"text": "Re-New",
+					"top": 171,
+					"left": 684,
+					"width": 60,
+					"height": 22,
+					"events": [
+						"onClick"
+					]
+				},
+				"bActionCertifications": {
+					"type": "button",
+					"text": "Actions",
+					"top": 535,
+					"left": 16,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionCertifications.4dm",
+					"visibility": "visible",
+					"sizingX": "fixed",
+					"sizingY": "fixed"
 				}
 			}
 		},
@@ -758,8 +855,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 1045,
-	"geometryStamp": 958,
+	"geometryStamp": 1084,
 	"editor": {
 		"groups": {
 			"Group": [
