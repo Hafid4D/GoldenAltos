@@ -119,6 +119,14 @@
 		<field name="revisionDate" uuid="73D94A9309F8BF44B438A516ECF1EBF3" type="8" never_null="true" id="4"/>
 		<field name="rev" uuid="2A87C313C2550F45961A1D4291FAF99A" type="10" limiting_length="255" never_null="true" id="5"/>
 		<field name="division" uuid="C4DB48A00B34314089C60749A12362E7" type="10" limiting_length="255" never_null="true" id="6"/>
+		<field name="form" uuid="A381E5FB374E414D88A95210588F22FA" type="1" never_null="true" id="7"/>
+		<field name="documents" uuid="FA7C66EB8C3BF549BCE63FCB38B9A38E" type="21" blob_switch_size="2147483647" never_null="true" id="8"/>
+		<field name="publishedDocumentBlob" uuid="9410E3782B60CE4592ADEB2362C6D228" type="18" never_null="true" id="9"/>
+		<field name="category" uuid="67905BE86C5BDA44814B3A2BCCFDCDB6" type="10" limiting_length="255" never_null="true" id="10"/>
+		<field name="remark" uuid="F4CD3DD5A915BB498EF945E380518B91" type="10" limiting_length="255" never_null="true" id="11"/>
+		<field name="extension" uuid="1743D4283CC7B74CAF65FB4A396AEE7C" type="10" limiting_length="255" never_null="true" id="12"/>
+		<field name="addendum" uuid="6DF08F80478E4F47A8CF52321A3E7801" type="1" never_null="true" id="13"/>
+		<field name="suppress" uuid="667B2B05F2E694439706686CE9DC412D" type="1" never_null="true" id="14"/>
 		<primary_key field_name="UUID" field_uuid="2A671DFB01797B4DBB6EC2EB4216DB75"/>
 	</table>
 	<table name="CustomerEvent" uuid="0846217DF6043D4ABB7910378EBDF68A" id="11">
@@ -378,7 +386,6 @@
 		<field name="dispositionID" uuid="4AB2845E0CC27F43A1271A5039F992B5" type="4" never_null="true" id="2">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="color" uuid="636D71117FBA1C45A41BB578DF8015D2" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="name" uuid="24A848999F23B84C84EF4065BD6C4583" type="10" limiting_length="255" never_null="true" id="4">
 			<field_extra multi_line="false"/>
 		</field>
@@ -389,7 +396,6 @@
 		<field name="factorID" uuid="BEBEC1FBBA247041AB993C2E0442DE8E" type="4" never_null="true" id="2">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="color" uuid="FAFA2BDF7D1F624394CBE5D517AB35C0" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="name" uuid="8C42CB157AFC2F4A89015D381524E2CF" type="10" limiting_length="255" never_null="true" id="4">
 			<field_extra multi_line="false"/>
 		</field>
@@ -408,7 +414,6 @@
 		<field name="UUID" uuid="FAB7EB268BAD3741BE4520A0518A4764" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="originID" uuid="CB4B7F976C649D46993F3043BE045E9A" type="4" never_null="true" id="2"/>
 		<field name="name" uuid="739CA3D15E5CF448BBEB3FEC0068C898" type="10" limiting_length="255" never_null="true" id="3"/>
-		<field name="color" uuid="987C2045CD159C4DAE4D79686F001C3E" type="10" limiting_length="255" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="FAB7EB268BAD3741BE4520A0518A4764"/>
 	</table>
 	<table name="sfw_Currency" uuid="01CB0A8A61387F468A67DFD7FE5F4D16" id="32">
@@ -421,7 +426,6 @@
 		<field name="UUID" uuid="ABB5485D67861C4884D7E9EF218BFD1A" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="categoryID" uuid="D36C063AA9B2BE46BFCF2168662F8FF0" type="4" never_null="true" id="2"/>
 		<field name="name" uuid="6BE27370D49C944A825D585038214E51" type="10" limiting_length="255" never_null="true" id="3"/>
-		<field name="color" uuid="03E8B41E6C0D284AB29004955C939D67" type="10" limiting_length="255" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="ABB5485D67861C4884D7E9EF218BFD1A"/>
 	</table>
 	<table name="YesNoQuestion" uuid="EF08E8961B35724A90161EC3FDC9D950" id="34">
@@ -432,7 +436,6 @@
 		<field name="name" uuid="1EEE988BAA79264E9827B1CCEBE4408C" type="10" limiting_length="255" never_null="true" id="3">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="color" uuid="2AF37C80988E794DBF3653847443E079" type="10" limiting_length="255" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="F4F183C203267641A55226527FCEE721"/>
 	</table>
 	<table name="Lead" uuid="1E733AC1BDB87C40B151040C49BD164B" id="35">

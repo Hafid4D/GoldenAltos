@@ -1,4 +1,4 @@
-//%attributes = {}
+//%attributes = {"executedOnServer":true}
 
 If (True:C214)
 	
