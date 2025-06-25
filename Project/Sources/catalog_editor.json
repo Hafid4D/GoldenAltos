@@ -701,6 +701,21 @@
 			"displayable_fields_count": 3,
 			"fields_ordering": 1
 		},
+		"StepSpec": {
+			"color": {
+				"red": 181,
+				"green": 145,
+				"blue": 209,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 2972.712890625,
+				"top": 1092,
+				"width": 167.689453125,
+				"height": 104.33203125
+			},
+			"displayable_fields_count": 3
+		},
 		"(InteractionType)": {
 			"color": {
 				"red": 255,
@@ -1251,18 +1266,18 @@
 		},
 		"Specification": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 181,
+				"green": 145,
+				"blue": 209,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3091.015625,
-				"top": 0,
+				"left": 3206.015625,
+				"top": 1115,
 				"width": 123.697265625,
-				"height": 167.33203125
+				"height": 188.33203125
 			},
-			"displayable_fields_count": 6
+			"displayable_fields_count": 7
 		},
 		"sfw_DocumentFolder": {
 			"color": {
@@ -1503,6 +1518,22 @@
 		}
 	},
 	"relations": {
+		"F7A12367E0E7E44682B1512B34B69AAC": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"45A43F51ED95C047B8A7E61F371E3C59": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"24BB5D155DE423499AE0F96C27851857": {
 			"color": {
 				"red": 240,
