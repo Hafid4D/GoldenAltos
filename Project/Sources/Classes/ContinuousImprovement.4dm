@@ -15,9 +15,11 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(1; ""; "Main")
 	
 	$entry.setLBItemsColumn("item"; "Item#"; "width:125")
-	$entry.setLBItemsColumn("interestedParty"; "Interested Party"; "width:125")
+	//$entry.setLBItemsColumn("interestedParty"; "Interested Party"; "width:125")
 	$entry.setLBItemsColumn("procedureType"; "Procedure "; "width:200")
 	$entry.setLBItemsOrderBy("item")
+	
+	$entry.setItemListAction("Export to excel"; "_ga_exportCIPList")
 	
 	
 	

@@ -49,11 +49,12 @@ Function redrawAndSetVisible()
 		OBJECT SET ENTERABLE:C238(*; "entryField_action"; True:C214)
 	End if 
 	
+	OBJECT SET ENTERABLE:C238(*; "entryField_interestedParty"; False:C215)
 	OBJECT SET ENTERABLE:C238(*; "entryField_responsible"; False:C215)
-	
-	OBJECT SET VISIBLE:C603(*; "bResponsibleEdit"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "@Edit"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET VISIBLE:C603(*; "bActionRefresh"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "Rectangl@"; Not:C34(Form:C1466.sfw.checkIsInModification()))
 	Form:C1466.sfw.drawHTab()
 	
 	
@@ -195,16 +196,16 @@ Function responsibleEdit()
 		var $teams : cs:C1710.TeamSelection
 		var $staffs : cs:C1710.StaffEntity
 		var $hListItems : Collection
-		var hSousListItems; $memberShips; $teamMembers : Collection
+		var $hSousListItems; $memberShips; $teamMembers : Collection
 		
 		$memberShips:=New collection:C1472()
 		$hListItems:=New collection:C1472()
-		hSousListItems:=New collection:C1472()
+		$hSousListItems:=New collection:C1472()
 		$teamMembers:=New collection:C1472()
 		
 		$teams:=ds:C1482.Team.all()
-		$hListItems:=ds:C1482.Team.all().toCollection().extract("name")
-		hListItems:=New collection:C1472()
+		//$hListItems:=ds.Team.all().toCollection().extract("name")
+		//hListItems:=New collection()
 		
 		For each ($team; $teams)
 			$memberShips:=$team.memberships.extract("UUID_Staff")
@@ -215,12 +216,12 @@ Function responsibleEdit()
 				$teamMembers.push($obj)
 				
 			End for each 
-			hSousListItems.push($teamMembers)
+			$hSousListItems.push($teamMembers)
 		End for each 
 		
-		For ($i; 0; $hListItems.length-1)
-			$obj:=New object:C1471("selected"; False:C215; "teamName"; $hListItems[$i]; "members"; hSousListItems[$i])
-			hListItems.push($obj)
+		For ($i; 0; ds:C1482.Team.all().toCollection().extract("name").length-1)
+			$obj:=New object:C1471("selected"; False:C215; "teamName"; ds:C1482.Team.all().toCollection().extract("name")[$i]; "members"; $hSousListItems[$i])
+			$hListItems.push($obj)
 		End for 
 		
 		
@@ -228,19 +229,19 @@ Function responsibleEdit()
 		
 		For ($k; 0; $responsibles.length-1)
 			
-			For ($i; 0; hListItems.length-1)
+			For ($i; 0; $hListItems.length-1)
 				
-				If (hListItems[$i].teamName=$responsibles[$k])
+				If ($hListItems[$i].teamName=$responsibles[$k])
 					
-					hListItems[$i].selected:=True:C214
+					$hListItems[$i].selected:=True:C214
 					
 				Else 
 					
-					For ($j; 0; hSousListItems[$i].length-1)
+					For ($j; 0; $hSousListItems[$i].length-1)
 						
-						If (hSousListItems[$i][$j].staffName=$responsibles[$k])
+						If ($hSousListItems[$i][$j].staffName=$responsibles[$k])
 							
-							hSousListItems[$i][$j].selected:=True:C214
+							$hSousListItems[$i][$j].selected:=True:C214
 							
 						End if 
 						
@@ -253,7 +254,7 @@ Function responsibleEdit()
 		End for 
 		
 		
-		$form.teams:=hListItems
+		$form.teams:=$hListItems
 		$winRef:=Open form window:C675("_ga_staffsPerTeam"; Movable dialog box:K34:7; Horizontally centered:K39:1; Vertically centered:K39:4)
 		DIALOG:C40("_ga_staffsPerTeam"; $form)
 		
@@ -287,5 +288,49 @@ Function responsibleEdit()
 		End if 
 		
 	End if 
+	
+	
+Function interestedPartyEdit()
+	
+	$interestedParties:=New collection:C1472()
+	$allInterestedParties:=New collection:C1472("Company"; "Customer"; "Customers"; "DLA"; "Employees"; "Management"; "Operator"; "Organization"; "Supplier"; "Suppliers"; "Top Management")
+	
+	$currentInterestedParties:=Split string:C1554(Form:C1466.current_item.interestedParty; ",")
+	
+	For ($i; 0; $allInterestedParties.length-1)
+		
+		$obj:=New object:C1471("name"; $allInterestedParties[$i]; "selected"; Not:C34($currentInterestedParties.indexOf($allInterestedParties[$i])<0))
+		
+		$interestedParties.push($obj)
+	End for 
+	
+	$form:=New object:C1471()
+	$form.interestedParties:=$interestedParties
+	$winRef:=Open form window:C675("_ga_cipInterestedPartiesChoices"; Movable dialog box:K34:7; Horizontally centered:K39:1; Vertically centered:K39:4)
+	DIALOG:C40("_ga_cipInterestedPartiesChoices"; $form)
+	
+	
+	If (OK=1)
+		$interestedParties:=New collection:C1472()
+		$choices:=$form.interestedParties
+		
+		
+		For ($i; 0; $choices.length-1)
+			
+			If ($choices[$i].selected=True:C214) & ($interestedParties.indexOf($choices[$i].name)=-1)
+				$interestedParties.push($choices[$i].name)
+				
+			End if 
+			
+		End for 
+		
+		
+		Form:C1466.current_item.interestedParty:=$interestedParties.join(",")
+		cs:C1710.panel_continuousImprovement.me._activate_save_cancel_button()
+		
+		
+	End if 
+	
+	
 	
 	

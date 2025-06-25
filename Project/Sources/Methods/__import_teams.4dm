@@ -1,4 +1,4 @@
-//%attributes = {}
+//%attributes = {"executedOnServer":true}
 TRUNCATE TABLE:C1051([Team:136])
 
 //1

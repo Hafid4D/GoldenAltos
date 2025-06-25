@@ -1,4 +1,4 @@
-//%attributes = {}
+//%attributes = {"executedOnServer":true}
 var $eAssumption : cs:C1710.AssumptionEntity
 var $eQuote : cs:C1710.QuoteEntity
 var $eQuoteLine : cs:C1710.QuoteLineEntity
@@ -13,7 +13,7 @@ If ($assumptions_file.exists)
 	TRUNCATE TABLE:C1051([QuoteLine:129])
 	TRUNCATE TABLE:C1051([Quote:128])
 	TRUNCATE TABLE:C1051([Assumption:2])
-	TRUNCATE TABLE:C1051([QuoteStatus:5])
+	TRUNCATE TABLE:C1051([LotStep:5])
 	
 	If (True:C214)  //fill QuoteStatus table
 		$eQuoteStatus:=ds:C1482.QuoteStatus.new()

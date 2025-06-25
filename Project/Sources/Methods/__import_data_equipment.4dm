@@ -1,4 +1,4 @@
-//%attributes = {}
+//%attributes = {"executedOnServer":true}
 var $eEquipment : cs:C1710.EquipmentEntity
 var $eEquipmentLocation : cs:C1710.EquipmentLocationEntity
 var $eDivision : cs:C1710.DivisionEntity
@@ -44,9 +44,7 @@ If ($equipment_Log.exists)
 	$count:=0
 	If ($docs.exists)
 		
-		
 		$documents:=JSON Parse:C1218($docs.getText())
-		
 		
 	End if 
 	

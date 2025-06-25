@@ -1,8 +1,8 @@
-//%attributes = {}
+//%attributes = {"executedOnServer":true}
 /**
 import po & po lines (po <-- po_lines)
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([PurchaseOrder:115])
 	TRUNCATE TABLE:C1051([PurchaseOrderLine:116])
 	TRUNCATE TABLE:C1051([Invoice:4])
@@ -108,14 +108,14 @@ If (True:C214)
 	
 	
 	If ($erreur.length>0)
-		TRACE:C157
+		//TRACE
 	End if 
 End if 
 
 /**
 import jobs & lot (job <-- lots) & Archives
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([Job:117])
 	TRUNCATE TABLE:C1051([Lot:118])
 	TRUNCATE TABLE:C1051([LotStep:5])
@@ -276,7 +276,7 @@ End if
 /**
 import inventories
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([Inventory:126])
 	TRUNCATE TABLE:C1051([InventoryPull:127])
 	
@@ -348,7 +348,7 @@ End if
 /**
 import step template
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([StepTemplate:121])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/step_template_export.json")
@@ -379,7 +379,7 @@ End if
 /**
 import tools
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([ToolType:122])
 	TRUNCATE TABLE:C1051([Tool:6])
 	
@@ -420,7 +420,7 @@ End if
 /**
 import cetifications
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([Certification:124])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/certifications_export.json")
@@ -445,24 +445,80 @@ End if
 import specifications
 **/
 If (True:C214)
+	
+	var $blob : Blob
+	
 	TRUNCATE TABLE:C1051([Specification:10])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/specification_export.json")
 	
 	$records:=JSON Parse:C1218($file.getText())
 	
+	$docs:=Folder:C1567(fk data folder:K87:12).file("DataJson/docServerIndex_export.json")
+	If ($docs.exists)
+		$documents:=JSON Parse:C1218($docs.getText())
+	End if 
+	
+	
 	For each ($record; $records)
 		$specification_e:=ds:C1482.Specification.new()
 		
-		$specification_e.spec:=$record.spec
-		$specification_e.title:=$record.title
-		$specification_e.revisionDate:=$record.revisionDate
-		$specification_e.rev:=$record.rev
-		$specification_e.ext:=$record.ext
-		$specification_e.division:=$record.division
+		$specification_e.spec:=$record.Spec
+		$specification_e.title:=$record.Spec_Title
+		$specification_e.revisionDate:=Date:C102($record.Revsion_Date)
+		$specification_e.rev:=$record.Rev
+		$specification_e.division:=$record.Division  //TO CHANGE
+		$specification_e.form:=$record.Form
+		$specification_e.category:=$record.PublishedDocCategory  //TO CHANGE
+		$specification_e.remark:=$record.Remarks
+		$specification_e.extension:=$record.Dosext
+		$specification_e.addendum:=$record.Addendum
+		$specification_e.suppress:=$record.Suppress
+		
+		$PublishedDocumentBlob:=Folder:C1567(fk data folder:K87:12).file("DataJson/SpecificationsPublishedDocumentBlobFields/"+String:C10($record.Spec))
+		If ($PublishedDocumentBlob.exists)
+			
+			DOCUMENT TO BLOB:C525($PublishedDocumentBlob.platformPath; $blob)
+			$specification_e.publishedDocumentBlob:=$blob
+			
+		Else 
+			
+		End if 
+		
+		
+		$_documents:=$documents.query("PrimaryKeyValue=:1 & TableNumber=:2"; String:C10($record.UniqueID); 21)
+		
+		$specification_e.documents:=New object:C1471()
+		$specification_e.documents.documentsCollection:=New collection:C1472()
+		
+		For each ($document; $_documents)
+			$docObj:=New object:C1471
+			
+			$docObj.code:=$document.DocCode
+			$docObj.dateTimeStamp:=$document.DateTimeStamp
+			$docObj.creationDateTimeStamp:=$document.CreationDateTimeStamp
+			$docObj.documentPath:=$document.DocumentPath
+			$docObj.sourcePath:=$document.SourcePath
+			$docObj.description:=$document.DocDescription
+			$docObj.approvalDate:=!00-00-00!
+			$docObj.approvedBy:=""
+			$docObj.isApproved:=False:C215
+			
+			$doc:=Folder:C1567(fk data folder:K87:12).file("DataJson/SpecificationsDocuments/"+String:C10($document.UniqueID+$document.PrimaryKeyValue))
+			If ($doc.exists)
+				
+				
+				DOCUMENT TO BLOB:C525($doc.platformPath; $blob)
+				
+				$docObj.blob:=$blob
+				
+			End if 
+			
+			$specification_e.documents.documentsCollection.push($docObj)
+		End for each 
+		
 		
 		$res:=$specification_e.save()
-		
 		If (Not:C34($res.success))
 			TRACE:C157
 		End if 
@@ -472,7 +528,7 @@ End if
 /**
 Create user: sfw_User & Staff tables
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([Staff:135])
 	TRUNCATE TABLE:C1051([sfw_User:16])
 	
@@ -539,7 +595,7 @@ End if
 /**
 import staffs
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([Staff:135])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/staff_export.json")
