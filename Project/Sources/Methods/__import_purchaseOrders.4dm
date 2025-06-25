@@ -458,6 +458,7 @@ If (True:C214)
 		$specification_e.title:=$record.title
 		$specification_e.revisionDate:=$record.revisionDate
 		$specification_e.rev:=$record.rev
+		$specification_e.ext:=$record.ext
 		$specification_e.division:=$record.division
 		
 		$res:=$specification_e.save()
@@ -587,6 +588,61 @@ If (True:C214)
 		End for 
 		
 		$res:=$staff_e.save()
+		
+		If (Not:C34($res.success))
+			TRACE:C157
+		End if 
+	End for each 
+End if 
+
+/**
+import qcars
+**/
+If (True:C214)
+	TRUNCATE TABLE:C1051([Qcar:138])
+	
+	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/qcar_export.json")
+	
+	$records:=JSON Parse:C1218($file.getText())
+	
+	For each ($record; $records)
+		$qcar_e:=ds:C1482.Qcar.new()
+		
+		$qcar_e.qcarNumber:=$record.qcarNumber
+		$qcar_e.device:=$record.device
+		$qcar_e.closedDate:=$record.closedDate
+		$qcar_e.targetCloseDate:=$record.targetCloseDate
+		$qcar_e.actualCloseDate:=$record.actualCloseDate
+		$qcar_e.verifiedBy:=$record.verifiedBy
+		$qcar_e.verifiedDate:=$record.verifiedDate
+		$qcar_e.void:=$record.void
+		$qcar_e.submit:=$record.submit
+		$qcar_e.submitDate:=$record.submitDate
+		$qcar_e.category:=$record.category
+		$qcar_e.issuedBy:=$record.issuedBy
+		$qcar_e.issuedTo:=$record.issuedTo
+		$qcar_e.issuedDate:=$record.issuedDate
+		
+		$qcar_e._initCorrectiveActionReport()
+		
+		
+		$customer_es:=ds:C1482.Customer.query("name = :1"; $record.customer)
+		
+		If ($customer_es.length>0)
+			$qcar_e.UUID_Customer:=$customer_es[0].UUID
+		Else 
+			//TRACE
+		End if 
+		
+		$lot_es:=ds:C1482.Lot.query("lotNumber = :1"; $record.lotNumber)
+		
+		If ($lot_es.length>0)
+			$qcar_e.UUID_Lot:=$lot_es[0].UUID
+		Else 
+			//TRACE
+		End if 
+		
+		$res:=$qcar_e.save()
 		
 		If (Not:C34($res.success))
 			TRACE:C157
