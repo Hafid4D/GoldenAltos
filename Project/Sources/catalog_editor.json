@@ -24,8 +24,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2667,
-				"top": 312.66796875,
+				"left": 2685,
+				"top": 399.66796875,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -701,6 +701,36 @@
 			"displayable_fields_count": 3,
 			"fields_ordering": 1
 		},
+		"SpecControllingDept": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 2933,
+				"top": 137.66796875,
+				"width": 121,
+				"height": 127.33203125
+			},
+			"displayable_fields_count": 4
+		},
+		"SpecCategory": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 2931,
+				"top": 0,
+				"width": 120,
+				"height": 124.33203125
+			},
+			"displayable_fields_count": 3
+		},
 		"StepSpec": {
 			"color": {
 				"red": 181,
@@ -1096,8 +1126,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3020,
-				"top": 294,
+				"left": 3004,
+				"top": 408,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -1242,12 +1272,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2836,
-				"top": 228,
+				"left": 2676,
+				"top": 188,
 				"width": 169,
-				"height": 193.33203125
+				"height": 170.33203125
 			},
-			"displayable_fields_count": 7
+			"displayable_fields_count": 6
 		},
 		"CustomerEvent": {
 			"color": {
@@ -1257,12 +1287,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2836,
-				"top": 17,
+				"left": 2653,
+				"top": 0,
 				"width": 167,
-				"height": 190.33203125
+				"height": 174.33203125
 			},
-			"displayable_fields_count": 7
+			"displayable_fields_count": 6
 		},
 		"Specification": {
 			"color": {
@@ -1272,12 +1302,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3091.015625,
+				"left": 3088.015625,
 				"top": 0,
-				"width": 123.697265625,
-				"height": 167.33203125
+				"width": 174.697265625,
+				"height": 380.33203125
 			},
-			"displayable_fields_count": 6
+			"displayable_fields_count": 16
 		},
 		"sfw_DocumentFolder": {
 			"color": {

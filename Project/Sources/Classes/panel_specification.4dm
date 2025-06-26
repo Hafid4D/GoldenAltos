@@ -28,13 +28,15 @@ Function formMethod()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
+	This:C1470.drawPup_category()
+	This:C1470.drawPup_departement()
 	
 	Use (Form:C1466.sfw.entry.panel.pages)
 		
 		Form:C1466.sfw.entry.panel.pages[1].label:="Documents ("+String:C10(Form:C1466.lb_documents.length)+")"
 		
 	End use 
-	
+	Form:C1466.sfw.drawHTab()
 	
 Function drawPup_XXX()
 	//This function updates the dropdown by displaying the name
@@ -143,9 +145,31 @@ Function bActionDocument()
 			End if 
 			
 			This:C1470.loadDocuments()
+			
 	End case 
 	
 	
+Function drawPup_category()
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.current_item.drowPup("SpecCategory"; "categoryID"; "categoryID"; "pup_category")
+	End if 
 	
+	
+Function pup_category()
+	//Create pop up menu
+	Form:C1466.current_item.pup("specCategories"; "SpecCategory"; "categoryID"; "categoryID")
+	This:C1470.drawPup_category()
+	
+	
+Function drawPup_departement()
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.current_item.drowPup("SpecControllingDept"; "departmentID"; "controllingDeptID"; "pup_departement")
+	End if 
+	
+	
+Function pup_departement()
+	//Create pop up menu
+	Form:C1466.current_item.pup("specDepartements"; "SpecControllingDept"; "departmentID"; "controllingDeptID")
+	This:C1470.drawPup_departement()
 	
 	

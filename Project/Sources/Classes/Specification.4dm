@@ -12,8 +12,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setSearchboxField("spec"; "placeholder:Spec#")
 	
-	$entry.setLBItemsColumn("spec"; "Spec#"; "width:50")
-	$entry.setLBItemsColumn("rev"; "Revision"; "width:50")
+	$entry.setLBItemsColumn("spec"; "Spec#"; "width:100")
+	$entry.setLBItemsColumn("revision"; "Revision"; "width:50")
 	$entry.setLBItemsColumn("title"; "Title")
 	
 	$entry.setLBItemsOrderBy("spec")

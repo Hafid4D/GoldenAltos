@@ -2,7 +2,7 @@
 /**
 import po & po lines (po <-- po_lines)
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([PurchaseOrder:115])
 	TRUNCATE TABLE:C1051([PurchaseOrderLine:116])
 	TRUNCATE TABLE:C1051([Invoice:4])
@@ -115,7 +115,7 @@ End if
 /**
 import jobs & lot (job <-- lots) & Archives
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([Job:117])
 	TRUNCATE TABLE:C1051([Lot:118])
 	TRUNCATE TABLE:C1051([LotStep:5])
@@ -276,7 +276,7 @@ End if
 /**
 import inventories
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([Inventory:126])
 	TRUNCATE TABLE:C1051([InventoryPull:127])
 	
@@ -348,7 +348,7 @@ End if
 /**
 import step template
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([StepTemplate:121])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/step_template_export.json")
@@ -379,7 +379,7 @@ End if
 /**
 import tools
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([ToolType:122])
 	TRUNCATE TABLE:C1051([Tool:6])
 	
@@ -420,7 +420,7 @@ End if
 /**
 import cetifications
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([Certification:124])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/certifications_export.json")
@@ -466,14 +466,39 @@ If (True:C214)
 		$specification_e.spec:=$record.Spec
 		$specification_e.title:=$record.Spec_Title
 		$specification_e.revisionDate:=Date:C102($record.Revsion_Date)
-		$specification_e.rev:=$record.Rev
-		$specification_e.division:=$record.Division  //TO CHANGE
-		$specification_e.form:=$record.Form
-		$specification_e.category:=$record.PublishedDocCategory  //TO CHANGE
+		$specification_e.revision:=$record.Rev
+		
+		//$specification_e.division:=$record.Division  //TO CHANGE
+		$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($record.Division; "\r"; sk trim spaces:K86:2).join("\r"))
+		If ($division.length>0)
+			$specification_e.divisionID:=$division[0].divisionID
+		Else 
+			$specification_e.divisionID:=0
+		End if 
+		
+		$specification_e.isForm:=$record.Form
+		
+		//$specification_e.category:=$record.PublishedDocCategory  //TO CHANGE
+		$category:=ds:C1482.SpecCategory.query("name =:1"; Split string:C1554($record.PublishedDocCategory; "\r"; sk trim spaces:K86:2).join("\r"))
+		If ($category.length>0)
+			$specification_e.categoryID:=$category[0].categoryID
+		Else 
+			$specification_e.categoryID:=0
+		End if 
+		
 		$specification_e.remark:=$record.Remarks
 		$specification_e.extension:=$record.Dosext
 		$specification_e.addendum:=$record.Addendum
 		$specification_e.suppress:=$record.Suppress
+		
+		//$specification_e.controllingDeptID:=$record.ControllingDept
+		$stecControllingDetpt:=ds:C1482.SpecControllingDept.query("name =:1"; Split string:C1554($record.ControllingDept; "\r"; sk trim spaces:K86:2).join("\r"))
+		If ($category.length>0)
+			$specification_e.controllingDeptID:=$stecControllingDetpt[0].departmentID
+		Else 
+			$specification_e.controllingDeptID:=0
+		End if 
+		
 		
 		$PublishedDocumentBlob:=Folder:C1567(fk data folder:K87:12).file("DataJson/SpecificationsPublishedDocumentBlobFields/"+String:C10($record.Spec))
 		If ($PublishedDocumentBlob.exists)
@@ -528,7 +553,7 @@ End if
 /**
 Create user: sfw_User & Staff tables
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([Staff:135])
 	TRUNCATE TABLE:C1051([sfw_User:16])
 	
@@ -595,7 +620,7 @@ End if
 /**
 import staffs
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([Staff:135])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/staff_export.json")

@@ -117,17 +117,17 @@
 		<field name="spec" uuid="503731601352984F9BF5FB041C0CAC3E" type="10" limiting_length="255" never_null="true" id="2"/>
 		<field name="title" uuid="C957B882F419D841AC29C05D4B2E8D85" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="revisionDate" uuid="73D94A9309F8BF44B438A516ECF1EBF3" type="8" never_null="true" id="4"/>
-		<field name="rev" uuid="2A87C313C2550F45961A1D4291FAF99A" type="10" limiting_length="255" never_null="true" id="5"/>
-		<field name="division" uuid="C4DB48A00B34314089C60749A12362E7" type="10" limiting_length="255" never_null="true" id="6"/>
-		<field name="form" uuid="A381E5FB374E414D88A95210588F22FA" type="1" never_null="true" id="7"/>
+		<field name="revision" uuid="2A87C313C2550F45961A1D4291FAF99A" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="divisionID" uuid="C4DB48A00B34314089C60749A12362E7" type="3" never_null="true" id="6"/>
+		<field name="isForm" uuid="A381E5FB374E414D88A95210588F22FA" type="1" never_null="true" id="7"/>
 		<field name="documents" uuid="FA7C66EB8C3BF549BCE63FCB38B9A38E" type="21" blob_switch_size="2147483647" never_null="true" id="8"/>
 		<field name="publishedDocumentBlob" uuid="9410E3782B60CE4592ADEB2362C6D228" type="18" never_null="true" id="9"/>
-		<field name="category" uuid="67905BE86C5BDA44814B3A2BCCFDCDB6" type="10" limiting_length="255" never_null="true" id="10"/>
+		<field name="categoryID" uuid="67905BE86C5BDA44814B3A2BCCFDCDB6" type="4" never_null="true" id="10"/>
 		<field name="remark" uuid="F4CD3DD5A915BB498EF945E380518B91" type="10" limiting_length="255" never_null="true" id="11"/>
 		<field name="extension" uuid="1743D4283CC7B74CAF65FB4A396AEE7C" type="10" limiting_length="255" never_null="true" id="12"/>
 		<field name="addendum" uuid="6DF08F80478E4F47A8CF52321A3E7801" type="1" never_null="true" id="13"/>
 		<field name="suppress" uuid="667B2B05F2E694439706686CE9DC412D" type="1" never_null="true" id="14"/>
-		<field name="ext" uuid="8748761B129A7E41BE65C6C40E654D61" type="10" limiting_length="255" never_null="true" id="7"/>
+		<field name="controllingDeptID" uuid="00BBA10D3C697F408E164BC3494272E4" type="4" never_null="true" id="15"/>
 		<primary_key field_name="UUID" field_uuid="2A671DFB01797B4DBB6EC2EB4216DB75"/>
 	</table>
 	<table name="CustomerEvent" uuid="0846217DF6043D4ABB7910378EBDF68A" id="11">
@@ -516,9 +516,29 @@
 	</table>
 	<table name="StepSpec" uuid="74CB192F1AF3134C9082ABA4683C0838" id="43">
 		<field name="UUID" uuid="AF2E663EC28F5E4399FC4407F055FCC2" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="UUID_Step" uuid="51E9BC9408544D40A527B62C43DBA725" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="2"/>
-		<field name="UUID_Specification" uuid="8A9C0B885868D54583D57B3105E9B3A8" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="3"/>
+		<field name="UUID_Step" uuid="51E9BC9408544D40A527B62C43DBA725" type="10" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="UUID_Specification" uuid="8A9C0B885868D54583D57B3105E9B3A8" type="10" store_as_UUID="true" never_null="true" id="3"/>
 		<primary_key field_name="UUID" field_uuid="AF2E663EC28F5E4399FC4407F055FCC2"/>
+	</table>
+	<table name="SpecCategory" uuid="1DD549D299382B418ADAD9578CE6175C" id="44">
+		<field name="UUID" uuid="9B19C7B5DCA2C344BA2641A78BFD5432" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="categoryID" uuid="0D78ACF5926EB64AA64CDE9CFDF64207" type="4" never_null="true" id="2">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="name" uuid="591819AEBEDDB8488A4A14F096E99AE9" type="10" limiting_length="255" never_null="true" id="3">
+			<field_extra multi_line="false"/>
+		</field>
+		<primary_key field_name="UUID" field_uuid="9B19C7B5DCA2C344BA2641A78BFD5432"/>
+	</table>
+	<table name="SpecControllingDept" uuid="C1BEBD5DDE0D1A45AEE41760FAE1229A" id="45">
+		<field name="UUID" uuid="1CB76A26D5B699429A95B9E10253FD00" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="departmentID" uuid="48A065C367048045873CF6758D645135" type="4" never_null="true" id="2">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="name" uuid="B2E5A4F1544B0F4EB1740B76055666CA" type="10" limiting_length="255" never_null="true" id="3">
+			<field_extra multi_line="false"/>
+		</field>
+		<primary_key field_name="UUID" field_uuid="1CB76A26D5B699429A95B9E10253FD00"/>
 	</table>
 	<table name="sfw_EventType" uuid="C482A0FBAE724304A8E05A0570FD55D6" id="52">
 		<field name="UUID" uuid="AEE9BE0296924CA7899B7E5DB37ACE13" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -1918,6 +1938,11 @@
 			<table_ref uuid="446AB1ED27F3664C9C9747DD14114EF2" name="Qcar"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="4EF303D62F454942AA8026FF7896539A" type="7">
+		<field_ref uuid="1CB76A26D5B699429A95B9E10253FD00" name="UUID">
+			<table_ref uuid="C1BEBD5DDE0D1A45AEE41760FAE1229A" name="SpecControllingDept"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="4FA46263FA2E426BAF05C717690A91D3" type="3">
 		<field_ref uuid="491D22673649415D96EF83B831F5FB28" name="UUID_PurchaseOrder">
 			<table_ref uuid="2CC1E163267E4DFE808464C271CC4C9F" name="PurchaseOrderLine"/>
@@ -2011,6 +2036,11 @@
 	<index kind="regular" uuid="6F750377C0AD2B47A855BA8C28D42C58" type="3">
 		<field_ref uuid="CB7307EF402DB74B825760216604C54F" name="UUID_Job">
 			<table_ref uuid="1E733AC1BDB87C40B151040C49BD164B" name="Lead"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="6FDC27B0D0BCC14ABBB4604046ED27CE" type="7">
+		<field_ref uuid="9B19C7B5DCA2C344BA2641A78BFD5432" name="UUID">
+			<table_ref uuid="1DD549D299382B418ADAD9578CE6175C" name="SpecCategory"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="718EB6C9BE61234BBFF4A4695D2DE4E6" type="7">

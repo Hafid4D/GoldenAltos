@@ -347,6 +347,7 @@ Function bActionDocument()
 			End if 
 			
 			This:C1470.loadDocuments()
+			
 	End case 
 	
 	
