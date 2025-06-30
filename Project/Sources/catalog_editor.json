@@ -1126,8 +1126,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3004,
-				"top": 408,
+				"left": 3002,
+				"top": 446,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -1305,9 +1305,9 @@
 				"left": 3088.015625,
 				"top": 0,
 				"width": 174.697265625,
-				"height": 380.33203125
+				"height": 401.33203125
 			},
-			"displayable_fields_count": 16
+			"displayable_fields_count": 17
 		},
 		"sfw_DocumentFolder": {
 			"color": {

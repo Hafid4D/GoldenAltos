@@ -489,11 +489,12 @@ If (True:C214)
 		$specification_e.remark:=$record.Remarks
 		$specification_e.extension:=$record.Dosext
 		$specification_e.addendum:=$record.Addendum
+		$specification_e.addendumToSpec:=$record.AddendumToSpec
 		$specification_e.suppress:=$record.Suppress
 		
 		//$specification_e.controllingDeptID:=$record.ControllingDept
 		$stecControllingDetpt:=ds:C1482.SpecControllingDept.query("name =:1"; Split string:C1554($record.ControllingDept; "\r"; sk trim spaces:K86:2).join("\r"))
-		If ($category.length>0)
+		If ($stecControllingDetpt.length>0)
 			$specification_e.controllingDeptID:=$stecControllingDetpt[0].departmentID
 		Else 
 			$specification_e.controllingDeptID:=0

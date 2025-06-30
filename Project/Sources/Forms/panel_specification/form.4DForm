@@ -59,7 +59,7 @@
 					"type": "input",
 					"top": 12,
 					"left": 175,
-					"width": 250,
+					"width": 150,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.spec",
 					"focusable": false,
@@ -105,6 +105,21 @@
 					"fontWeight": "normal",
 					"textAlign": "left",
 					"bottom": 71
+				},
+				"bView": {
+					"type": "button",
+					"text": "",
+					"top": 4,
+					"left": 330,
+					"width": 30,
+					"height": 32,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"icon": "/RESOURCES/sfw/image/skin/rainbow/btn4states/eye-24x24.png",
+					"iconFrames": 4,
+					"method": "ObjectMethods/bView.4dm"
 				}
 			}
 		},
@@ -112,31 +127,13 @@
 			"objects": {
 				"Rectangle11": {
 					"type": "rectangle",
-					"top": 486,
+					"top": 481,
 					"left": 15,
-					"width": 410,
-					"height": 64,
+					"width": 415,
+					"height": 85,
 					"stroke": "#FFFFFF",
 					"fill": "transparent",
 					"strokeWidth": 1
-				},
-				"Group Box": {
-					"type": "groupBox",
-					"text": "Spec or Form\r",
-					"top": 493,
-					"left": 233,
-					"width": 181,
-					"height": 50,
-					"fontWeight": "bold",
-					"stroke": "automatic"
-				},
-				"Rectangle10": {
-					"type": "rectangle",
-					"top": 513,
-					"left": 238,
-					"width": 170,
-					"height": 23,
-					"stroke": "transparent"
 				},
 				"Rectangle7": {
 					"type": "rectangle",
@@ -144,14 +141,6 @@
 					"left": 175,
 					"width": 250,
 					"height": 25,
-					"stroke": "transparent"
-				},
-				"Rectangle9": {
-					"type": "rectangle",
-					"top": 513,
-					"left": 33,
-					"width": 170,
-					"height": 23,
 					"stroke": "transparent"
 				},
 				"Rectangle1": {
@@ -425,35 +414,6 @@
 					"bottom": 337,
 					"dataSourceTypeHint": "date"
 				},
-				"radio_form_True": {
-					"type": "radio",
-					"text": "Spec",
-					"top": 518,
-					"left": 247,
-					"width": 50,
-					"height": 15,
-					"events": [
-						"onClick"
-					],
-					"dataSourceTypeHint": "boolean",
-					"radioGroup": "formOrSpec",
-					"style": "regular",
-					"dataSource": "Not:C34(Form:C1466.current_item.form)"
-				},
-				"radio_form_Fasle": {
-					"type": "radio",
-					"text": "Form",
-					"top": 517,
-					"left": 344,
-					"width": 50,
-					"height": 15,
-					"events": [
-						"onClick"
-					],
-					"dataSourceTypeHint": "boolean",
-					"radioGroup": "formOrSpec",
-					"dataSource": "Form:C1466.current_item.form"
-				},
 				"entryField_isForm": {
 					"type": "checkbox",
 					"text": "Is this a form?",
@@ -482,19 +442,69 @@
 					"fontWeight": "normal",
 					"dataSourceTypeHint": "boolean"
 				},
-				"entryField_addendum": {
+				"Rectangle12": {
+					"type": "rectangle",
+					"top": 489,
+					"left": 175,
+					"width": 250,
+					"height": 25,
+					"stroke": "transparent"
+				},
+				"entryField_addendum1": {
 					"type": "checkbox",
 					"text": "This Spec is Addendum",
-					"top": 516,
-					"left": 34,
-					"width": 168,
-					"height": 17,
+					"top": 492,
+					"left": 177,
+					"width": 246,
+					"height": 19,
 					"events": [
 						"onClick"
 					],
 					"dataSource": "Form:C1466.current_item.addendum",
 					"fontWeight": "normal",
 					"dataSourceTypeHint": "boolean"
+				},
+				"Rectangle9": {
+					"type": "rectangle",
+					"top": 534,
+					"left": 173,
+					"width": 250,
+					"height": 25,
+					"stroke": "transparent"
+				},
+				"label_0_8": {
+					"type": "text",
+					"top": 537,
+					"left": 13,
+					"width": 150,
+					"height": 19,
+					"stroke": "#000000",
+					"text": "Spec or Form",
+					"textAlign": "right",
+					"fontWeight": "bold"
+				},
+				"pup_departement1": {
+					"type": "button",
+					"top": 534,
+					"left": 175,
+					"width": 246,
+					"height": 25,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_departement1.4dm",
+					"events": [
+						"onClick",
+						"onDisplayDetail"
+					],
+					"right": 421,
+					"fontWeight": "normal",
+					"textAlign": "left"
 				}
 			}
 		},
@@ -628,18 +638,13 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 311,
+	"geometryStamp": 338,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {
-			"Group10": [
-				"Rectangle11",
-				"Group Box",
-				"Rectangle10",
-				"Rectangle9",
-				"radio_form_True",
-				"radio_form_Fasle",
-				"entryField_addendum"
+			"Group": [
+				"Rectangle12",
+				"entryField_addendum1"
 			],
 			"Group2": [
 				"Rectangle7",

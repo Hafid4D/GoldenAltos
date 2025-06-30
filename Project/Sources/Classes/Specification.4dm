@@ -24,5 +24,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(2; ""; "Documents")
 	
 	
+	$entry.setItemListAction("Print Spec"; "_ga_printSpec")
+	
+	
 	
 	
