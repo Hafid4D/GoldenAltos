@@ -491,6 +491,8 @@ If (True:C214)
 		$specification_e.addendum:=$record.Addendum
 		$specification_e.addendumToSpec:=$record.AddendumToSpec
 		$specification_e.suppress:=$record.Suppress
+		$specification_e.reviewIntervalInDays:=$record.ReviewIntervalInDays
+		$specification_e.reviewDate:=$record.Review_Date
 		
 		//$specification_e.controllingDeptID:=$record.ControllingDept
 		$stecControllingDetpt:=ds:C1482.SpecControllingDept.query("name =:1"; Split string:C1554($record.ControllingDept; "\r"; sk trim spaces:K86:2).join("\r"))

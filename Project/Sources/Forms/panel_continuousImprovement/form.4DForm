@@ -315,7 +315,7 @@
 					"type": "text",
 					"top": 249,
 					"left": 175,
-					"width": 300,
+					"width": 539,
 					"height": 17,
 					"stroke": "#000000",
 					"text": "Action items to Address Risks & Opportinuties  ",
@@ -401,10 +401,10 @@
 					"type": "text",
 					"top": 351,
 					"left": 175,
-					"width": 350,
+					"width": 539,
 					"height": 17,
 					"stroke": "#000000",
-					"text": "Non conformance/Complaint/Feedback/Itevm being addressed ",
+					"text": "Non conformance/Complaint/Feedback/Item being addressed ",
 					"fontWeight": "bold"
 				},
 				"label_0_8": {
@@ -963,7 +963,7 @@
 		},
 		null
 	],
-	"geometryStamp": 353,
+	"geometryStamp": 355,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"editor": {
 		"activeView": "View 1",
