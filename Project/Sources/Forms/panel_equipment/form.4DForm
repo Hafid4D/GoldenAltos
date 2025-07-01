@@ -1000,6 +1000,9 @@
 					"right": 1575,
 					"scrollbarHorizontal": "automatic",
 					"hideFocusRing": false,
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"scrollbarVertical": "automatic",
 					"columns": [
 						{
 							"header": {
@@ -1100,7 +1103,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 512,
+	"geometryStamp": 514,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
