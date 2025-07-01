@@ -127,7 +127,7 @@
 		<field name="extension" uuid="1743D4283CC7B74CAF65FB4A396AEE7C" type="10" limiting_length="255" never_null="true" id="12"/>
 		<field name="addendum" uuid="6DF08F80478E4F47A8CF52321A3E7801" type="1" never_null="true" id="13"/>
 		<field name="suppress" uuid="667B2B05F2E694439706686CE9DC412D" type="1" never_null="true" id="14"/>
-		<field name="ext" uuid="8748761B129A7E41BE65C6C40E654D61" type="10" limiting_length="255" never_null="true" id="7"/>
+		<field name="ext" uuid="8748761B129A7E41BE65C6C40E654D61" type="10" limiting_length="255" never_null="true" id="15"/>
 		<primary_key field_name="UUID" field_uuid="2A671DFB01797B4DBB6EC2EB4216DB75"/>
 	</table>
 	<table name="CustomerEvent" uuid="0846217DF6043D4ABB7910378EBDF68A" id="11">
@@ -516,8 +516,8 @@
 	</table>
 	<table name="StepSpec" uuid="74CB192F1AF3134C9082ABA4683C0838" id="43">
 		<field name="UUID" uuid="AF2E663EC28F5E4399FC4407F055FCC2" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="UUID_Step" uuid="51E9BC9408544D40A527B62C43DBA725" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="2"/>
-		<field name="UUID_Specification" uuid="8A9C0B885868D54583D57B3105E9B3A8" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="3"/>
+		<field name="UUID_Step" uuid="51E9BC9408544D40A527B62C43DBA725" type="10" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="UUID_Specification" uuid="8A9C0B885868D54583D57B3105E9B3A8" type="10" store_as_UUID="true" never_null="true" id="3"/>
 		<primary_key field_name="UUID" field_uuid="AF2E663EC28F5E4399FC4407F055FCC2"/>
 	</table>
 	<table name="sfw_EventType" uuid="C482A0FBAE724304A8E05A0570FD55D6" id="52">

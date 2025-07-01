@@ -9,289 +9,161 @@
 	"windowMinHeight": 0,
 	"windowMaxWidth": 32767,
 	"windowMaxHeight": 32767,
-	"rightMargin": 20,
-	"bottomMargin": 20,
+	"rightMargin": 0,
+	"bottomMargin": 0,
 	"events": [
 		"onLoad",
-		"onPageChange",
-		"onValidate",
-		"onClick",
-		"onDoubleClick",
-		"onOutsideCall",
-		"onBeginDragOver",
-		"onDragOver",
-		"onDrop",
-		"onAfterKeystroke",
-		"onMenuSelect",
-		"onPluginArea",
-		"onAfterEdit",
-		"onTimer",
+		"onDataChange",
 		"onBoundVariableChange"
 	],
 	"windowTitle": "window title",
 	"destination": "detailScreen",
 	"pages": [
 		{
-			"objects": {
-				"label_0_1": {
-					"type": "text",
-					"top": 11,
-					"left": 12,
-					"width": 143,
-					"height": 17,
-					"stroke": "#000000",
-					"text": "Item # ",
-					"right": 155,
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"entryField_item": {
-					"type": "input",
-					"top": 11,
-					"left": 175,
-					"width": 190,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.item",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "normal",
-					"dataSourceTypeHint": "number",
-					"textAlign": "left"
-				},
-				"label_partyName": {
-					"type": "text",
-					"top": 38,
-					"left": 12,
-					"width": 143,
-					"height": 17,
-					"stroke": "#000000",
-					"text": "Interested Party Name ",
-					"bottom": 55,
-					"right": 155,
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"entryField_interestedParty": {
-					"type": "input",
-					"top": 38,
-					"left": 175,
-					"width": 190,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.interestedParty",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "normal",
-					"textAlign": "left",
-					"bottom": 55
-				},
-				"label_externalID": {
-					"type": "text",
-					"top": 65,
-					"left": 12,
-					"width": 143,
-					"height": 17,
-					"stroke": "#000000",
-					"text": "External ID ",
-					"bottom": 82,
-					"right": 155,
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"entryField_externalID": {
-					"type": "input",
-					"top": 65,
-					"left": 175,
-					"width": 190,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.externalID",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "normal",
-					"textAlign": "left",
-					"bottom": 82
-				},
-				"backgroundRectangle": {
-					"type": "rectangle",
-					"top": 114,
-					"left": 1,
-					"width": 5000,
-					"height": 704,
-					"fill": "#B1CFDE",
-					"strokeWidth": 0,
-					"stroke": "#FFFFFF"
-				},
-				"bInterestedPartyEdit": {
-					"type": "button",
-					"text": "",
-					"top": 30,
-					"left": 370,
-					"width": 30,
-					"height": 32,
-					"events": [
-						"onClick"
-					],
-					"style": "custom",
-					"icon": "/RESOURCES/sfw/image/skin/rainbow/btn4states/edit-24x24.png",
-					"iconFrames": 4,
-					"method": "ObjectMethods/bInterestedPartyEdit.4dm"
-				}
-			}
+			"objects": {}
 		},
 		{
 			"objects": {
+				"Rectangle16": {
+					"type": "rectangle",
+					"top": 90,
+					"left": 168,
+					"width": 543,
+					"height": 23,
+					"stroke": "transparent"
+				},
 				"Rectangle17": {
 					"type": "rectangle",
-					"top": 450,
-					"left": 173,
+					"top": 331,
+					"left": 168,
 					"width": 543,
 					"height": 23,
 					"stroke": "transparent"
 				},
 				"Rectangle12": {
 					"type": "rectangle",
-					"top": 703,
-					"left": 173,
+					"top": 584,
+					"left": 168,
 					"width": 543,
 					"height": 60,
 					"stroke": "transparent"
 				},
 				"Rectangle13": {
 					"type": "rectangle",
-					"top": 271,
-					"left": 173,
+					"top": 152,
+					"left": 168,
 					"width": 543,
 					"height": 60,
 					"stroke": "transparent"
 				},
 				"Rectangle14": {
 					"type": "rectangle",
-					"top": 373,
-					"left": 173,
+					"top": 254,
+					"left": 168,
 					"width": 543,
 					"height": 60,
 					"stroke": "transparent"
 				},
 				"Rectangle15": {
 					"type": "rectangle",
-					"top": 524,
-					"left": 173,
+					"top": 405,
+					"left": 168,
 					"width": 543,
 					"height": 23,
 					"stroke": "transparent"
 				},
 				"Rectangle1": {
 					"type": "rectangle",
-					"top": 487,
-					"left": 522,
+					"top": 368,
+					"left": 517,
 					"width": 194,
 					"height": 23,
 					"stroke": "transparent"
 				},
 				"Rectangle5": {
 					"type": "rectangle",
-					"top": 598,
-					"left": 522,
+					"top": 479,
+					"left": 517,
 					"width": 194,
 					"height": 23,
 					"stroke": "transparent"
 				},
 				"Rectangle6": {
 					"type": "rectangle",
-					"top": 660,
-					"left": 522,
+					"top": 541,
+					"left": 517,
 					"width": 194,
 					"height": 23,
 					"stroke": "transparent"
 				},
 				"Rectangle9": {
 					"type": "rectangle",
-					"top": 135,
-					"left": 522,
+					"top": 16,
+					"left": 517,
 					"width": 194,
 					"height": 23,
 					"stroke": "transparent"
 				},
 				"Rectangle10": {
 					"type": "rectangle",
-					"top": 172,
-					"left": 522,
+					"top": 53,
+					"left": 517,
 					"width": 194,
 					"height": 23,
 					"stroke": "transparent"
 				},
 				"Rectangle3": {
 					"type": "rectangle",
-					"top": 561,
-					"left": 173,
+					"top": 442,
+					"left": 168,
 					"width": 543,
 					"height": 23,
 					"stroke": "transparent"
 				},
 				"Rectangle4": {
 					"type": "rectangle",
-					"top": 598,
-					"left": 173,
+					"top": 479,
+					"left": 168,
 					"width": 195,
 					"height": 23,
 					"stroke": "transparent"
 				},
 				"Rectangle7": {
 					"type": "rectangle",
-					"top": 660,
-					"left": 173,
+					"top": 541,
+					"left": 168,
 					"width": 195,
 					"height": 23,
 					"stroke": "transparent"
 				},
 				"Rectangle8": {
 					"type": "rectangle",
-					"top": 135,
-					"left": 173,
+					"top": 16,
+					"left": 168,
 					"width": 195,
 					"height": 23,
 					"stroke": "transparent"
 				},
 				"Rectangle11": {
 					"type": "rectangle",
-					"top": 172,
-					"left": 173,
+					"top": 53,
+					"left": 168,
 					"width": 195,
 					"height": 23,
 					"stroke": "transparent"
 				},
 				"Rectangle2": {
 					"type": "rectangle",
-					"top": 487,
-					"left": 173,
+					"top": 368,
+					"left": 168,
 					"width": 195,
 					"height": 23,
 					"stroke": "transparent"
 				},
 				"pup_disposition": {
 					"type": "button",
-					"top": 487,
-					"left": 524,
+					"top": 368,
+					"left": 519,
 					"width": 190,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -307,14 +179,14 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"right": 714,
+					"right": 709,
 					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"label_0_6": {
 					"type": "text",
-					"top": 249,
-					"left": 175,
+					"top": 130,
+					"left": 170,
 					"width": 539,
 					"height": 17,
 					"stroke": "#000000",
@@ -323,8 +195,8 @@
 				},
 				"entryField_action": {
 					"type": "input",
-					"top": 271,
-					"left": 175,
+					"top": 152,
+					"left": 170,
 					"width": 539,
 					"height": 60,
 					"dataSource": "Form:C1466.current_item.action",
@@ -339,12 +211,12 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 331
+					"bottom": 212
 				},
 				"label_0_4": {
 					"type": "text",
-					"top": 138,
-					"left": 60,
+					"top": 19,
+					"left": 55,
 					"width": 90,
 					"height": 17,
 					"stroke": "#000000",
@@ -354,8 +226,8 @@
 				},
 				"pup_priority": {
 					"type": "button",
-					"top": 135,
-					"left": 175,
+					"top": 16,
+					"left": 170,
 					"width": 190,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -371,14 +243,14 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"right": 365,
+					"right": 360,
 					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"label_0_2": {
 					"type": "text",
-					"top": 138,
-					"left": 409,
+					"top": 19,
+					"left": 404,
 					"width": 90,
 					"height": 17,
 					"stroke": "#000000",
@@ -388,8 +260,8 @@
 				},
 				"label_0_3": {
 					"type": "text",
-					"top": 175,
-					"left": 60,
+					"top": 56,
+					"left": 55,
 					"width": 90,
 					"height": 17,
 					"stroke": "#000000",
@@ -399,8 +271,8 @@
 				},
 				"label_0_7": {
 					"type": "text",
-					"top": 351,
-					"left": 175,
+					"top": 232,
+					"left": 170,
 					"width": 539,
 					"height": 17,
 					"stroke": "#000000",
@@ -409,8 +281,8 @@
 				},
 				"label_0_8": {
 					"type": "text",
-					"top": 638,
-					"left": 175,
+					"top": 519,
+					"left": 170,
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
@@ -419,8 +291,8 @@
 				},
 				"label_0_9": {
 					"type": "text",
-					"top": 212,
-					"left": 50,
+					"top": 93,
+					"left": 45,
 					"width": 100,
 					"height": 17,
 					"stroke": "#000000",
@@ -430,8 +302,8 @@
 				},
 				"label_origin": {
 					"type": "text",
-					"top": 175,
-					"left": 399,
+					"top": 56,
+					"left": 394,
 					"width": 100,
 					"height": 17,
 					"stroke": "#000000",
@@ -441,8 +313,8 @@
 				},
 				"pup_origin": {
 					"type": "button",
-					"top": 172,
-					"left": 524,
+					"top": 53,
+					"left": 519,
 					"width": 190,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -458,14 +330,14 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"right": 714,
+					"right": 709,
 					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"entryField_dateInitiated": {
 					"type": "input",
-					"top": 175,
-					"left": 175,
+					"top": 56,
+					"left": 170,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.dateInitiated",
@@ -480,13 +352,13 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 192,
+					"bottom": 73,
 					"dataSourceTypeHint": "date"
 				},
 				"entryField_title": {
 					"type": "input",
-					"top": 138,
-					"left": 524,
+					"top": 19,
+					"left": 519,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.title",
@@ -501,12 +373,12 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 155
+					"bottom": 36
 				},
 				"pup_procedure": {
 					"type": "button",
-					"top": 209,
-					"left": 175,
+					"top": 90,
+					"left": 170,
 					"width": 539,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -522,14 +394,14 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"right": 714,
+					"right": 709,
 					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"entryField_procedureType": {
 					"type": "input",
-					"top": 373,
-					"left": 175,
+					"top": 254,
+					"left": 170,
 					"width": 539,
 					"height": 60,
 					"dataSource": "Form:C1466.current_item.procedureType",
@@ -544,12 +416,12 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 433
+					"bottom": 314
 				},
 				"PopupDate1": {
 					"type": "subform",
-					"top": 175,
-					"left": 346,
+					"top": 56,
+					"left": 341,
 					"width": 19,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.dateInitiated",
@@ -569,8 +441,8 @@
 				},
 				"label_0_10": {
 					"type": "text",
-					"top": 453,
-					"left": 5,
+					"top": 334,
+					"left": 0,
 					"width": 145,
 					"height": 17,
 					"stroke": "#000000",
@@ -580,8 +452,8 @@
 				},
 				"entryField_requirement": {
 					"type": "input",
-					"top": 453,
-					"left": 175,
+					"top": 334,
+					"left": 170,
 					"width": 539,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.requirement",
@@ -596,12 +468,12 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 470
+					"bottom": 351
 				},
 				"label_0_5": {
 					"type": "text",
-					"top": 490,
-					"left": 5,
+					"top": 371,
+					"left": 0,
 					"width": 145,
 					"height": 17,
 					"stroke": "#000000",
@@ -611,8 +483,8 @@
 				},
 				"pup_category": {
 					"type": "button",
-					"top": 487,
-					"left": 175,
+					"top": 368,
+					"left": 170,
 					"width": 190,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -628,14 +500,14 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"right": 365,
+					"right": 360,
 					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"label_disposition": {
 					"type": "text",
-					"top": 490,
-					"left": 399,
+					"top": 371,
+					"left": 394,
 					"width": 100,
 					"height": 17,
 					"stroke": "#000000",
@@ -645,8 +517,8 @@
 				},
 				"label_0_11": {
 					"type": "text",
-					"top": 527,
-					"left": 5,
+					"top": 408,
+					"left": 0,
 					"width": 145,
 					"height": 17,
 					"stroke": "#000000",
@@ -656,8 +528,8 @@
 				},
 				"pup_humanFactor": {
 					"type": "button",
-					"top": 524,
-					"left": 175,
+					"top": 405,
+					"left": 170,
 					"width": 539,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -673,14 +545,14 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"right": 714,
+					"right": 709,
 					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"label_0_12": {
 					"type": "text",
-					"top": 570,
-					"left": 5,
+					"top": 451,
+					"left": 0,
 					"width": 145,
 					"height": 17,
 					"stroke": "#000000",
@@ -690,8 +562,8 @@
 				},
 				"entryField_responsible": {
 					"type": "input",
-					"top": 564,
-					"left": 175,
+					"top": 445,
+					"left": 170,
 					"width": 539,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.responsible",
@@ -706,12 +578,12 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 581
+					"bottom": 462
 				},
 				"label_0_13": {
 					"type": "text",
-					"top": 601,
-					"left": 5,
+					"top": 482,
+					"left": 0,
 					"width": 145,
 					"height": 17,
 					"stroke": "#000000",
@@ -721,8 +593,8 @@
 				},
 				"entryField_currentDueDate": {
 					"type": "input",
-					"top": 601,
-					"left": 175,
+					"top": 482,
+					"left": 170,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.currentDueDate",
@@ -737,13 +609,13 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 618,
+					"bottom": 499,
 					"dataSourceTypeHint": "date"
 				},
 				"PopupDate2": {
 					"type": "subform",
-					"top": 601,
-					"left": 346,
+					"top": 482,
+					"left": 341,
 					"width": 19,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.currentDueDate",
@@ -763,8 +635,8 @@
 				},
 				"label_0_14": {
 					"type": "text",
-					"top": 601,
-					"left": 369,
+					"top": 482,
+					"left": 364,
 					"width": 130,
 					"height": 17,
 					"stroke": "#000000",
@@ -774,8 +646,8 @@
 				},
 				"entryField_originalDueDate": {
 					"type": "input",
-					"top": 601,
-					"left": 524,
+					"top": 482,
+					"left": 519,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.originalDueDate",
@@ -790,13 +662,13 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 618,
+					"bottom": 499,
 					"dataSourceTypeHint": "date"
 				},
 				"PopupDate3": {
 					"type": "subform",
-					"top": 601,
-					"left": 695,
+					"top": 482,
+					"left": 690,
 					"width": 19,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.originalDueDate",
@@ -816,8 +688,8 @@
 				},
 				"pup_yesNoQuestion": {
 					"type": "button",
-					"top": 660,
-					"left": 175,
+					"top": 541,
+					"left": 170,
 					"width": 190,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -833,14 +705,14 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"right": 365,
+					"right": 360,
 					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"label_0_15": {
 					"type": "text",
-					"top": 663,
-					"left": 409,
+					"top": 544,
+					"left": 404,
 					"width": 90,
 					"height": 17,
 					"stroke": "#000000",
@@ -850,8 +722,8 @@
 				},
 				"entryField_dateClosed": {
 					"type": "input",
-					"top": 663,
-					"left": 524,
+					"top": 544,
+					"left": 519,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.dateClosed",
@@ -866,13 +738,13 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 680,
+					"bottom": 561,
 					"dataSourceTypeHint": "date"
 				},
 				"PopupDate4": {
 					"type": "subform",
-					"top": 663,
-					"left": 695,
+					"top": 544,
+					"left": 690,
 					"width": 19,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.dateClosed",
@@ -892,8 +764,8 @@
 				},
 				"entryField_notes": {
 					"type": "input",
-					"top": 703,
-					"left": 175,
+					"top": 584,
+					"left": 170,
 					"width": 539,
 					"height": 60,
 					"dataSource": "Form:C1466.current_item.notes",
@@ -908,12 +780,12 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 763
+					"bottom": 644
 				},
 				"label_0_16": {
 					"type": "text",
-					"top": 703,
-					"left": 5,
+					"top": 584,
+					"left": 0,
 					"width": 145,
 					"height": 17,
 					"stroke": "#000000",
@@ -924,8 +796,8 @@
 				"bActionRefresh": {
 					"type": "button",
 					"text": "",
-					"top": 204,
-					"left": 718,
+					"top": 85,
+					"left": 713,
 					"width": 30,
 					"height": 32,
 					"events": [
@@ -939,8 +811,8 @@
 				"bResponsibleEdit": {
 					"type": "button",
 					"text": "",
-					"top": 556,
-					"left": 718,
+					"top": 437,
+					"left": 713,
 					"width": 30,
 					"height": 32,
 					"events": [
@@ -950,21 +822,12 @@
 					"icon": "/RESOURCES/sfw/image/skin/rainbow/btn4states/edit-24x24.png",
 					"iconFrames": 4,
 					"method": "ObjectMethods/bResponsibleEdit.4dm"
-				},
-				"Rectangle16": {
-					"type": "rectangle",
-					"top": 209,
-					"left": 173,
-					"width": 543,
-					"height": 23,
-					"stroke": "transparent"
 				}
 			}
-		},
-		null
+		}
 	],
-	"geometryStamp": 355,
-	"inheritedForm": "sfw_bkgd_header_3lines",
+	"geometryStamp": 6,
+	"shared": false,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
