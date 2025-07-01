@@ -118,8 +118,7 @@
 					"style": "bevel",
 					"method": "ObjectMethods/pup_CustomerStatus.4dm",
 					"events": [
-						"onClick",
-						"onDisplayDetail"
+						"onClick"
 					]
 				}
 			}
@@ -604,7 +603,6 @@
 					"style": "bevel",
 					"method": "ObjectMethods/pup_customerCarrier.4dm",
 					"events": [
-						"onLoad",
 						"onClick"
 					]
 				},
