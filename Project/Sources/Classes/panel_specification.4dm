@@ -18,7 +18,7 @@ Function formMethod()
 				
 			: (FORM Get current page:C276(*)=2)
 				This:C1470.loadDocuments()
-				
+				OBJECT SET ENTERABLE:C238(*; "lb_documents"; False:C215)
 		End case 
 	End if 
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())  //It's time to resize the object or set visible
@@ -28,13 +28,19 @@ Function formMethod()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
+	This:C1470.drawPup_category()
+	This:C1470.drawPup_departement()
+	
+	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "bSpecView"; Not:C34(Form:C1466.sfw.checkIsInModification()))
+	OBJECT SET VISIBLE:C603(*; "bSpecEdit"; Form:C1466.sfw.checkIsInModification())
 	
 	Use (Form:C1466.sfw.entry.panel.pages)
 		
 		Form:C1466.sfw.entry.panel.pages[1].label:="Documents ("+String:C10(Form:C1466.lb_documents.length)+")"
 		
 	End use 
-	
+	Form:C1466.sfw.drawHTab()
 	
 Function drawPup_XXX()
 	//This function updates the dropdown by displaying the name
@@ -119,18 +125,18 @@ Function bActionDocument()
 			DIALOG:C40("_ga_document"; $form)
 			If (OK=1)
 				Form:C1466.current_item.documents.documentsCollection.push($form.details)
+				cs:C1710.panel_specification.me._activate_save_cancel_button()
 			End if 
 			
 			
 		: ($choice="--modify")
 			
-			$form:=New object:C1471("details"; Form:C1466.current_item.documents.documentsCollection[Form:C1466.selectedDocumentPos-1])  // Form.selectedDocument)
+			$form:=New object:C1471("details"; Form:C1466.current_item.documents.documentsCollection[Form:C1466.selectedDocumentPos-1])
 			
 			$form.operation:="modify"
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_document"; $form)
-			
 			
 		: ($choice="--delete")
 			
@@ -143,9 +149,48 @@ Function bActionDocument()
 			End if 
 			
 			This:C1470.loadDocuments()
+			
 	End case 
 	
 	
+Function drawPup_category()
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.current_item.drowPup("SpecCategory"; "categoryID"; "categoryID"; "pup_category")
+	End if 
+	
+	
+Function pup_category()
+	//Create pop up menu
+	Form:C1466.current_item.pup("specCategories"; "SpecCategory"; "categoryID"; "categoryID")
+	This:C1470.drawPup_category()
+	
+	
+Function drawPup_departement()
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.current_item.drowPup("SpecControllingDept"; "departmentID"; "controllingDeptID"; "pup_departement")
+	End if 
+	
+	
+Function pup_departement()
+	Form:C1466.current_item.publishedDocumentBlob  //Create pop up menu
+	Form:C1466.current_item.pup("specDepartements"; "SpecControllingDept"; "departmentID"; "controllingDeptID")
+	This:C1470.drawPup_departement()
+	
+	
+Function bSpecEdit()
+	
+	$details:=New object:C1471("blob"; Form:C1466.current_item.publishedDocumentBlob; "docPath"; ""; "docName"; Form:C1466.current_item.spec)
+	
+	$form:=New object:C1471("details"; $details)
+	$form.operation:="modify"
+	
+	$winRef:=Open form window:C675("_ga_uploadDocument"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+	DIALOG:C40("_ga_uploadDocument"; $form)
+	
+	If (OK=1)
+		Form:C1466.current_item.publishedDocumentBlob:=$form.details.blob
+		cs:C1710.panel_specification.me._activate_save_cancel_button()
+	End if 
 	
 	
 	
