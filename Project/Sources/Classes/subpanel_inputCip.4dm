@@ -183,8 +183,8 @@ Function pup_procedureType()
 		
 		$form:=New object:C1471(\
 			"colName"; "qcarNumberRef"; \
-			"lb_items"; ds:C1482.Qcar.all().toCollection().map(Formula:C1597(_ga_getQRef)); \
-			"allData"; ds:C1482.Qcar.all().toCollection().map(Formula:C1597(_ga_getQRef)); \
+			"lb_items"; ds:C1482.Qcar.all().toCollection().map(Formula:C1597(_ga_getQcarRef)); \
+			"allData"; ds:C1482.Qcar.all().toCollection().map(Formula:C1597(_ga_getQcarRef)); \
 			"dataclass"; "Qcar"\
 			)
 		

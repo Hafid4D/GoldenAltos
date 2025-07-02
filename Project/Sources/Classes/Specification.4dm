@@ -24,8 +24,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(2; ""; "Documents")
 	
 	
-	$entry.setItemListAction("Print Spec"; "_ga_printSpec")
-	
+	$entry.setItemListAction("Export List To Excel"; "_ga_exportSpecToExcel")
+	$entry.setItemListAction("Print The List"; "_ga_printSpecList")
 	
 	
 	
@@ -69,7 +69,6 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setSubset("docsLateInReviewing")
 	$entry.setView($view)
 	
-	
 	// MARK: Docs late in reviewing
 	$view:=cs:C1710.sfw_definitionView.new("docsRequiringReviewSoon"; "Control Docs requiring review in 7 days")
 	$view.setLBItemsColumn("spec"; "Spec#"; "width:100")
@@ -80,10 +79,31 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setSubset("docsRequiringReviewSoon")
 	$entry.setView($view)
 	
+	// MARK: Specs
+	$view:=cs:C1710.sfw_definitionView.new("OnlySpecs"; "Specs")
+	$view.setLBItemsColumn("spec"; "Spec#"; "width:100")
+	$view.setLBItemsColumn("revision"; "Revision"; "width:50")
+	$view.setLBItemsColumn("title"; "Title")
+	$view.setLBItemsOrderBy("spec")
+	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:specification"; "unitN:specifications")
+	$view.setSubset("OnlySpecs")
+	$entry.setView($view)
+	
+	// MARK: Forms
+	$view:=cs:C1710.sfw_definitionView.new("OnlyForms"; "Specs")
+	$view.setLBItemsColumn("spec"; "Spec#"; "width:100")
+	$view.setLBItemsColumn("revision"; "Revision"; "width:50")
+	$view.setLBItemsColumn("title"; "Title")
+	$view.setLBItemsOrderBy("spec")
+	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:specification"; "unitN:specifications")
+	$view.setSubset("OnlyForms")
+	$entry.setView($view)
+	
+	
+	
 	
 	
 	// MARK: - Query Functions
-	
 	
 	
 local Function cacheLoad()
@@ -145,6 +165,13 @@ Function docsLateInReviewing()->$specifications : cs:C1710.SpecificationSelectio
 Function docsRequiringReviewSoon()->$specifications : cs:C1710.SpecificationSelection
 	$specifications:=ds:C1482.Specification.query("suppress =:1 & reviewIntervalInDays >0 & eval((This.reviewDate+This.reviewIntervalInDays)<(Current date(*)+7))"; False:C215)
 	
+	
+Function OnlySpecs()->$specifications : cs:C1710.SpecificationSelection
+	$specifications:=ds:C1482.Specification.query("suppress =:1 & isForm=:2"; False:C215; False:C215)
+	
+	
+Function OnlyForms()->$specifications : cs:C1710.SpecificationSelection
+	$specifications:=ds:C1482.Specification.query("suppress =:1 & isForm=:2"; False:C215; True:C214)
 	
 	
 	
