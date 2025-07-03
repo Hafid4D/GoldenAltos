@@ -102,6 +102,7 @@ Function selectLot()
 				
 				If (ok=1)
 					Form:C1466.current_item.UUID_Lot:=$form.item.UUID
+					
 					cs:C1710.panel_purchaseOrder.me._activate_save_cancel_button()
 				End if 
 		End case 
