@@ -13,7 +13,12 @@ If (True:C214)
 	
 	$erreur:=New collection:C1472()
 	
+	$poNumber:=0
+	
 	For each ($record; $records)
+		
+		$poNumber:=$poNumber+1
+		
 		$po:=ds:C1482.PurchaseOrder.new()
 		
 		$customer_es:=ds:C1482.Customer.query("name = :1"; $record.customer_name)
@@ -25,10 +30,20 @@ If (True:C214)
 		End if 
 		
 		//$po.customer_name:=$record.customer_name
-		$po.poNumber:=$record.poNumber
+		
+		$po.poNumber:=$poNumber
+		$po.oldPoNumber:=$record.poNumber
 		$po.poAmount:=$record.poAmount
 		$po.amountBilled:=$record.amountBilled
-		$po.ourQuote:=$record.ourQuote
+		
+		//$po.ourQuote:=$record.ourQuote
+		$quote:=ds:C1482.Quote.query("code =:1"; Split string:C1554($record.ourQuote; "\r"; sk trim spaces:K86:2).join("\r"))
+		If ($quote.length>0)
+			$po.UUID_Quote:=$quote[0].UUID
+		Else 
+			
+		End if 
+		
 		$po.resaleNumber:=$record.resaleNumber
 		$po.identifier:=$record.identifier
 		$po.initials:=$record.initials
@@ -128,7 +143,15 @@ If (True:C214)
 		$job:=ds:C1482.Job.new()
 		
 		$job.jobNumber:=$record.jobNumber
-		$job.poNumber:=$record.poNumber
+		
+		//$job.poNumber:=$record.poNumber
+		$po_s:=ds:C1482.PurchaseOrder.query("oldPoNumber =:1"; Split string:C1554($record.poNumber; "\r"; sk trim spaces:K86:2).join("\r"))
+		If ($po_s.length>0)
+			$job.poNumber:=$po_s[0].poNumber
+		Else 
+			$job.poNumber:=0
+		End if 
+		
 		$job.division:=$record.division
 		$job.dateCreated:=$record.dateCreated
 		$job.expectedDate:=$record.expectedDate
@@ -167,7 +190,7 @@ If (True:C214)
 			If ($poLine_es.length>0)
 				$poLine_e:=$poLine_es[0]
 				
-				If ($poLine_e.purchaseOrder.poNumber=$record.poNumber) & ($poline.description=$poLine_e.description)
+				If ($poLine_e.purchaseOrder.oldPoNumber=$record.poNumber) & ($poline.description=$poLine_e.description)
 					$poLine_e.UUID_Job:=$job.UUID
 					
 					$res:=$poLine_e.save()
@@ -194,7 +217,15 @@ If (True:C214)
 			$lot_e.onHold:=$lot.onHold
 			$lot_e.holdDate:=$lot.holdDate
 			$lot_e.holdTime:=$lot.holdTime
-			$lot_e.poNumber:=$lot.poNumber
+			
+			//$lot_e.poNumber:=$lot.poNumber
+			$po_s:=ds:C1482.PurchaseOrder.query("oldPoNumber =:1"; Split string:C1554($record.poNumber; "\r"; sk trim spaces:K86:2).join("\r"))
+			If ($po_s.length>0)
+				$lot_e.poNumber:=$po_s[0].poNumber
+			Else 
+				$lot_e.poNumber:=0
+			End if 
+			
 			$lot_e.customer:=$lot.customer
 			$lot_e.commit:=$lot.commit
 			$lot_e.reCommit:=$lot.reCommit

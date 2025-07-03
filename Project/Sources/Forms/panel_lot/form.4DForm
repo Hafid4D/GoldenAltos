@@ -169,7 +169,8 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold"
+					"fontWeight": "bold",
+					"dataSourceTypeHint": "integer"
 				},
 				"label_jobNumber2": {
 					"type": "text",
