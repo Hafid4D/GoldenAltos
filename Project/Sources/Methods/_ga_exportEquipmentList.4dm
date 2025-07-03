@@ -52,101 +52,104 @@ If ($continue)
 	
 	$file:=Create document:C266(""; "xls")
 	
-	$export:=New object:C1471
-	$export.records:=New collection:C1472
-	
-	$dataclass:=Form:C1466.sfw.entry.dataclass
-	If ($identView="allEquipments")
-		$equipments:=ds:C1482[$dataclass].all()
-	Else 
-		$equipments:=ds:C1482[$dataclass][$identView]()
-	End if 
-	For each ($entity; $equipments)
-		$oEntity:=New object:C1471
-		For each ($attribute; ds:C1482[$dataclass])
-			If (ds:C1482[$dataclass][$attribute].fieldType=Is object:K8:27) && ($entity[$attribute]#Null:C1517) && (String:C10($entity[$attribute].title)="4D Write Pro New Document")
-				WP EXPORT VARIABLE:C1319($entity[$attribute]; $wpBlob; wk 4wp:K81:4)
-				BASE64 ENCODE:C895($wpBlob; $wpEncodedBlob)
-				$oEntity[$attribute]:=$wpEncodedBlob
-			Else 
-				$oEntity[$attribute]:=$entity[$attribute]
-			End if 
+	If (OK=1)
+		$export:=New object:C1471
+		$export.records:=New collection:C1472
+		
+		$dataclass:=Form:C1466.sfw.entry.dataclass
+		If ($identView="allEquipments")
+			$equipments:=ds:C1482[$dataclass].all()
+		Else 
+			$equipments:=ds:C1482[$dataclass][$identView]()
+		End if 
+		For each ($entity; $equipments)
+			$oEntity:=New object:C1471
+			For each ($attribute; ds:C1482[$dataclass])
+				If (ds:C1482[$dataclass][$attribute].fieldType=Is object:K8:27) && ($entity[$attribute]#Null:C1517) && (String:C10($entity[$attribute].title)="4D Write Pro New Document")
+					WP EXPORT VARIABLE:C1319($entity[$attribute]; $wpBlob; wk 4wp:K81:4)
+					BASE64 ENCODE:C895($wpBlob; $wpEncodedBlob)
+					$oEntity[$attribute]:=$wpEncodedBlob
+				Else 
+					$oEntity[$attribute]:=$entity[$attribute]
+				End if 
+				
+			End for each 
+			$export.records.push($oEntity)
 			
 		End for each 
-		$export.records.push($oEntity)
 		
-	End for each 
-	
-	$equipment_es:=$export.records
-	
-	If ($equipment_es.length>0)
-		OB GET PROPERTY NAMES:C1232($equipment_es[0]; $headerNames; $arrTypes)
-		ARRAY TO COLLECTION:C1563($headers; $headerNames)
+		$equipment_es:=$export.records
 		
-		$headers:=$headers.remove($headers.indexOf("repairLogs"))
-		$headers[$headers.indexOf("locationID")]:="location"
-		$headers[$headers.indexOf("UUID_ToolType")]:="type"
-		$headers[$headers.indexOf("divisionID")]:="division"
-		If (Not:C34($allFields))
-			$headers:=$relevantFields.filter(Formula:C1597($relevantFields.indexOf($1.value)#-1))
-		End if 
-		$OK:=True:C214
-	Else 
-		$OK:=False:C215
-	End if 
-	For ($i; 0; $headers.length-1)
-		
-		SEND PACKET:C103($file; $headers[$i]+$separator_col)
-		
-	End for 
-	
-	SEND PACKET:C103($file; $separator_line)
-	
-	If ($OK)
-		
-		For each ($equipment_e; $equipment_es)
+		If ($equipment_es.length>0)
+			OB GET PROPERTY NAMES:C1232($equipment_es[0]; $headerNames; $arrTypes)
+			ARRAY TO COLLECTION:C1563($headers; $headerNames)
 			
-			For each ($headerName; $headers)
+			$headers:=$headers.remove($headers.indexOf("repairLogs"))
+			$headers[$headers.indexOf("locationID")]:="location"
+			$headers[$headers.indexOf("UUID_ToolType")]:="type"
+			$headers[$headers.indexOf("divisionID")]:="division"
+			If (Not:C34($allFields))
+				$headers:=$relevantFields.filter(Formula:C1597($relevantFields.indexOf($1.value)#-1))
+			End if 
+			$OK:=True:C214
+		Else 
+			$OK:=False:C215
+		End if 
+		For ($i; 0; $headers.length-1)
+			
+			SEND PACKET:C103($file; $headers[$i]+$separator_col)
+			
+		End for 
+		
+		SEND PACKET:C103($file; $separator_line)
+		
+		If ($OK)
+			
+			For each ($equipment_e; $equipment_es)
 				
-				Case of 
-						
-					: ($headerName="location")
-						$location:=ds:C1482.EquipmentLocation.query("locationID=:1"; $equipment_e["locationID"]).first()
-						SEND PACKET:C103($file; Replace string:C233(String:C10($location.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
-					: ($headerName="type")
-						$type:=ds:C1482.ToolType.query("UUID=:1"; $equipment_e["UUID_ToolType"]).first()
-						SEND PACKET:C103($file; Replace string:C233(String:C10($type.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
-						
-					: ($headerName="division")
-						$division:=ds:C1482.Division.query("divisionID=:1"; $equipment_e["divisionID"]).first()
-						SEND PACKET:C103($file; Replace string:C233(String:C10($division.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
-						
-					: ($headerName="reports")
-						
-						
-					Else 
-						SEND PACKET:C103($file; Replace string:C233(String:C10($equipment_e[$headerName]); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
-						
-				End case 
+				For each ($headerName; $headers)
+					
+					Case of 
+							
+						: ($headerName="location")
+							$location:=ds:C1482.EquipmentLocation.query("locationID=:1"; $equipment_e["locationID"]).first()
+							SEND PACKET:C103($file; Replace string:C233(String:C10($location.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
+						: ($headerName="type")
+							$type:=ds:C1482.ToolType.query("UUID=:1"; $equipment_e["UUID_ToolType"]).first()
+							SEND PACKET:C103($file; Replace string:C233(String:C10($type.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
+							
+						: ($headerName="division")
+							$division:=ds:C1482.Division.query("divisionID=:1"; $equipment_e["divisionID"]).first()
+							SEND PACKET:C103($file; Replace string:C233(String:C10($division.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
+							
+						: ($headerName="reports")
+							
+							
+						Else 
+							SEND PACKET:C103($file; Replace string:C233(String:C10($equipment_e[$headerName]); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
+							
+					End case 
+					
+				End for each 
+				
+				SEND PACKET:C103($file; $separator_line)
 				
 			End for each 
 			
-			SEND PACKET:C103($file; $separator_line)
+			CLOSE DOCUMENT:C267($file)
 			
-		End for each 
-		
-		CLOSE DOCUMENT:C267($file)
-		
-		cs:C1710.sfw_dialog.me.info(ds:C1482.sfw_readXliff("export.done"; "The export is done"))
-		
-		SET ENVIRONMENT VARIABLE:C812("_4D_OPTION_BLOCKING_EXTERNAL_PROCESS"; "false")
-		SET ENVIRONMENT VARIABLE:C812("_4D_OPTION_HIDE_CONSOLE"; "true")
-		
-		LAUNCH EXTERNAL PROCESS:C811("cmd.exe /C  start \"\" \""+document+"\"")
-		
-	Else 
-		
-		cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("No items in the list to print"))
+			cs:C1710.sfw_dialog.me.info(ds:C1482.sfw_readXliff("export.done"; "The export is done"))
+			
+			SET ENVIRONMENT VARIABLE:C812("_4D_OPTION_BLOCKING_EXTERNAL_PROCESS"; "false")
+			SET ENVIRONMENT VARIABLE:C812("_4D_OPTION_HIDE_CONSOLE"; "true")
+			
+			LAUNCH EXTERNAL PROCESS:C811("cmd.exe /C  start \"\" \""+document+"\"")
+			
+		Else 
+			
+			cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("No items in the list to print"))
+			
+		End if 
 		
 	End if 
 	

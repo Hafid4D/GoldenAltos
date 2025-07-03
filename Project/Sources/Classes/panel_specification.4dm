@@ -167,13 +167,13 @@ Function pup_category()
 	
 Function drawPup_departement()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.current_item.drowPup("SpecControllingDept"; "departmentID"; "controllingDeptID"; "pup_departement")
+		Form:C1466.current_item.drowPup("SpecControllingDept"; "departmentID"; "departmentID"; "pup_departement")
 	End if 
 	
 	
 Function pup_departement()
 	Form:C1466.current_item.publishedDocumentBlob  //Create pop up menu
-	Form:C1466.current_item.pup("specDepartements"; "SpecControllingDept"; "departmentID"; "controllingDeptID")
+	Form:C1466.current_item.pup("specDepartements"; "SpecControllingDept"; "departmentID"; "departmentID")
 	This:C1470.drawPup_departement()
 	
 	

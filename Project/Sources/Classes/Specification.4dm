@@ -24,7 +24,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(2; ""; "Documents")
 	
 	
-	$entry.setItemListAction("Export List To Excel"; "_ga_exportSpecToExcel")
+	$entry.setItemListAction("Export The List To Excel"; "_ga_exportSpecToExcel")
 	$entry.setItemListAction("Print The List"; "_ga_printSpecList")
 	
 	
@@ -33,14 +33,14 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	
 	$filter:=cs:C1710.sfw_definitionFilter.new("filterSpecDocumentType")
-	$filter.setDefaultTitle("All Type")
+	$filter.setDefaultTitle("All Types")
 	$filter.setFilterByIDInTable("SpecCategory"; "categoryID"; "categoryID")
 	$filter.setDynamicTitle("name"; "## document  type")
 	$entry.addFilter($filter)
 	
 	$filter:=cs:C1710.sfw_definitionFilter.new("filterSpecDocumentType")
 	$filter.setDefaultTitle("All departments")
-	$filter.setFilterByIDInTable("SpecControllingDept"; "departmentID"; "controllingDeptID")
+	$filter.setFilterByIDInTable("SpecControllingDept"; "departmentID"; "departmentID")
 	$filter.setDynamicTitle("name"; "## controlling department")
 	$entry.addFilter($filter)
 	
@@ -90,7 +90,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setView($view)
 	
 	// MARK: Forms
-	$view:=cs:C1710.sfw_definitionView.new("OnlyForms"; "Specs")
+	$view:=cs:C1710.sfw_definitionView.new("OnlyForms"; "Forms")
 	$view.setLBItemsColumn("spec"; "Spec#"; "width:100")
 	$view.setLBItemsColumn("revision"; "Revision"; "width:50")
 	$view.setLBItemsColumn("title"; "Title")
