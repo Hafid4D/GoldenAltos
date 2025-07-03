@@ -3,7 +3,10 @@ Class extends Entity
 //local Function beforeSaveCreation()
 //This._initCorrectiveActionReport()
 
-
+local Function loadAfterCreation()
+	// This callback is called after creating the new item but before displaying the panel.
+	This:C1470.qcarNumber:=ds:C1482.Qcar.all().max("qcarNumber")+1
+	
 local Function _initCorrectiveActionReport()
 	This:C1470.correctiveActionReport:=New object:C1471(\
 		"teamLearders"; ""; \

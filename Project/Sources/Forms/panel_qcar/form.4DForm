@@ -365,7 +365,7 @@
 					"stroke": "#808080",
 					"text": "Car #"
 				},
-				"entryField_qcarNumber": {
+				"Field_qcarNumber": {
 					"type": "input",
 					"top": 12,
 					"left": 520,
@@ -380,7 +380,8 @@
 						"onDataChange"
 					],
 					"fill": "transparent",
-					"borderStyle": "none"
+					"borderStyle": "none",
+					"dataSourceTypeHint": "number"
 				},
 				"entryField_rb_internal": {
 					"type": "radio",
@@ -838,7 +839,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_4lines",
-	"geometryStamp": 2615,
+	"geometryStamp": 2616,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
