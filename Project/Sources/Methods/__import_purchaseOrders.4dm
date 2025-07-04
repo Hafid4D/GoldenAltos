@@ -494,12 +494,12 @@ If (True:C214)
 		$specification_e.reviewIntervalInDays:=$record.ReviewIntervalInDays
 		$specification_e.reviewDate:=$record.Review_Date
 		
-		//$specification_e.controllingDeptID:=$record.ControllingDept
+		//$specification_e.departmentID:=$record.ControllingDept
 		$stecControllingDetpt:=ds:C1482.SpecControllingDept.query("name =:1"; Split string:C1554($record.ControllingDept; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($stecControllingDetpt.length>0)
-			$specification_e.controllingDeptID:=$stecControllingDetpt[0].departmentID
+			$specification_e.departmentID:=$stecControllingDetpt[0].departmentID
 		Else 
-			$specification_e.controllingDeptID:=0
+			$specification_e.departmentID:=0
 		End if 
 		
 		
