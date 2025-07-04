@@ -149,6 +149,11 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "bActionInvoices"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
 	End case 
 	
+	OBJECT SET ENTERABLE:C238(*; "entryField_poNumber"; False:C215)
+	This:C1470.drawPup_quoteNumber()
+	
+	
+	
 Function loadDpAddress()
 	Form:C1466.dpAddress:=New object:C1471(\
 		"values"; New collection:C1472("billing"; "shipping"); \
@@ -411,4 +416,49 @@ Function selectCustomer()
 Function btnOpenCustomer()
 	$entity:=Form:C1466.current_item.customer
 	Form:C1466.sfw.openInANewWindow($entity; "customerService"; "customer")
+	
+	
+	
+Function drawPup_quoteNumber()
+	If (Form:C1466.current_item#Null:C1517)
+		$poQuote:=ds:C1482.Quote.query("UUID= :1"; Form:C1466.current_item.UUID_Quote).first() || New object:C1471()
+		$quoteNumber:=$poQuote.code
+		If ($quoteNumber=Null:C1517)
+			$quoteNumber:=""
+		End if 
+		$color:=""
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_quote"; $quoteNumber; $pathIcon; ($poQuote=Null:C1517))
+		
+		OBJECT SET TITLE:C194(*; "pup_quote"; $quoteNumber)
+		
+	End if 
+	
+	
+Function pup_quote()
+	//Create pop up menu
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		OBJECT GET COORDINATES:C663(*; "pup_quote"; $l; $t; $r; $b)
+		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
+		
+		$form:=New object:C1471(\
+			"colName"; "code"; \
+			"lb_items"; ds:C1482.Quote.all(); \
+			"allData"; ds:C1482.Quote.all(); \
+			"dataclass"; "Quote"\
+			)
+		
+		$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b)
+		DIALOG:C40("selectNto1"; $form)
+		CLOSE WINDOW:C154($winRef)
+		
+		If (ok=1)
+			Form:C1466.current_item.UUID_Quote:=$form.item.UUID
+			cs:C1710.panel_purchaseOrder.me._activate_save_cancel_button()
+		End if 
+		
+	End if 
+	This:C1470.drawPup_quoteNumber()
+	
 	

@@ -1550,6 +1550,14 @@
 		}
 	},
 	"relations": {
+		"C4A8CC154AD81D4D986804038C278648": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"F7A12367E0E7E44682B1512B34B69AAC": {
 			"color": {
 				"red": 240,
