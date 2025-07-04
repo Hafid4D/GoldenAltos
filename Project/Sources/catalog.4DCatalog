@@ -127,7 +127,7 @@
 		<field name="extension" uuid="1743D4283CC7B74CAF65FB4A396AEE7C" type="10" limiting_length="255" never_null="true" id="12"/>
 		<field name="addendum" uuid="6DF08F80478E4F47A8CF52321A3E7801" type="1" never_null="true" id="13"/>
 		<field name="suppress" uuid="667B2B05F2E694439706686CE9DC412D" type="1" never_null="true" id="14"/>
-		<field name="departmentID" uuid="00BBA10D3C697F408E164BC3494272E4" type="4" never_null="true" id="15"/>
+		<field name="controllingDeptID" uuid="00BBA10D3C697F408E164BC3494272E4" type="4" never_null="true" id="15"/>
 		<field name="addendumToSpec" uuid="4DB9F8A21A12A14398F05AF7C5F1BA5D" type="10" limiting_length="255" never_null="true" id="16"/>
 		<field name="reviewIntervalInDays" uuid="7413D34B72ACD04A8DAD654BFE162AAF" type="4" never_null="true" id="17"/>
 		<field name="reviewDate" uuid="87FFB43152B5CB40B41CA4ABE12A9474" type="8" never_null="true" id="18"/>
@@ -542,6 +542,85 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<primary_key field_name="UUID" field_uuid="1CB76A26D5B699429A95B9E10253FD00"/>
+	</table>
+	<table name="AVML" uuid="BBADA9B28C42FC4AA02504E477DEF5BB" id="46">
+		<field name="UUID" uuid="87371A3102B02347880B2FF579DAE670" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="vendorPartnum" uuid="F26AC0287F1C224A9AF873C7F753C1FD" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="UUID_Supplier" uuid="D6B22629CE507C4BA154CFBF1D819A03" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="3">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="critical" uuid="DFD8A9EAABB0C5409D7A7BCDB62D635D" type="1" never_null="true" id="4">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="service" uuid="2E6FD8C72D5E8547B198F939FCEECBDE" type="1" never_null="true" id="5">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="serviceType" uuid="74A19B8EDF4DCB47851ACE8FC6F402ED" type="10" limiting_length="255" never_null="true" id="6">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="divisionID" uuid="121A17456A36054D965ACFF2075F8217" type="3" never_null="true" id="7">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="enteredBy" uuid="670C88DBC0B14E49A574F7519BC450B1" type="10" limiting_length="255" never_null="true" id="8">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="capacity" uuid="6A03FF2C18A60344BD966CAF11FD25C9" type="6" never_null="true" id="9">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="makeInactive" uuid="D445F01B5559314888F81E2C17F03C44" type="1" never_null="true" id="10">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="comment" uuid="D40A49ADE8CEDF4EA8C93B3B2682F8EF" type="10" limiting_length="255" never_null="true" id="11">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="partID" uuid="9EDDF97B637DA94694E3BB63141A7E12" type="4" never_null="true" id="12"/>
+		<field name="inventoryUnits" uuid="E9090844235EE941A89A7DF2718ABD97" type="10" limiting_length="255" never_null="true" id="13"/>
+		<field name="procurementUnits" uuid="A25B4F7B11141E4CB08B472202BE9EC3" type="10" limiting_length="255" never_null="true" id="14"/>
+		<field name="transFactorNumerator" uuid="65090C4BDC49AB44B8F3D8BFC5314F61" type="4" never_null="true" id="15"/>
+		<field name="transFactorDenominator" uuid="7A26A0AA1F41CF4792B36923D010C0AD" type="4" never_null="true" id="16"/>
+		<field name="minInventoryLevel" uuid="9B66A1318EE7BC489E2F0DC379313B3D" type="4" never_null="true" id="17"/>
+		<primary_key field_name="UUID" field_uuid="87371A3102B02347880B2FF579DAE670"/>
+	</table>
+	<table name="Supplier" uuid="A0C8CDC075BBB546914E03F7689B897E" id="47">
+		<field name="UUID" uuid="CFBA7599E861DC4A91A0C1B26781C297" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="name" uuid="1D7BBD937086184FA34B8CBC13CDDEF8" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="code" uuid="145C3BD9010E0F44BF6F221E19880D39" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="divisionID" uuid="C611DBD77DE39740B2867FB557D91AC2" type="3" never_null="true" id="4"/>
+		<field name="disqualified" uuid="C589EEF44C5A344789E4CDA7015CD128" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="enteredBy" uuid="C318999D07234A4C9EE9D5666BB534FE" type="10" limiting_length="255" never_null="true" id="6">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="qaComment" uuid="9E2E75C9B07A604DB6914085FC18197B" type="10" limiting_length="255" never_null="true" id="7"/>
+		<field name="approvedByQA" uuid="DFB28DBA4475DC43B531333D862449C6" type="1" never_null="true" id="8"/>
+		<field name="approvedByCustomer" uuid="7B255B63F6131E41B05F2F83A77AB1B6" type="1" never_null="true" id="9">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="allowedLotProcessing" uuid="AE0E81A08F75A944AB6ED653F37D7B0E" type="1" never_null="true" id="10">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="webServer" uuid="2BAD0FECD7806C47AD1908CD0F8E6D91" type="10" limiting_length="255" never_null="true" id="11"/>
+		<field name="auditRequired" uuid="AC99D3472F6478429E6847312CC08884" type="1" never_null="true" id="12">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="contactDetails" uuid="FCA1BA48E1FC074C9BD23054EB6136A6" type="21" blob_switch_size="2147483647" never_null="true" id="13"/>
+		<field name="deactivated" uuid="4575DDDCCE24EC489147EEDEBA512348" type="1" never_null="true" id="14"/>
+		<field name="lastAuditDate" uuid="CF08CC6FC69B374CB96A8293FB969539" type="8" never_null="true" id="15">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="nextAuditDate" uuid="4C047305581E2E43A36A0378D0CF2E0A" type="8" never_null="true" id="16">
+			<field_extra multi_line="false"/>
+		</field>
+		<primary_key field_name="UUID" field_uuid="CFBA7599E861DC4A91A0C1B26781C297"/>
+	</table>
+	<table name="PartData" uuid="68D645D2E1989F4CA36E905F914AD868" id="48">
+		<field name="UUID" uuid="C1A74BC4B22D5045AF2DB98046B4965F" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="partID" uuid="08EB6A4E39EF9F4B87205E60D7662010" type="4" never_null="true" id="2">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="partNum" uuid="7A85388CD512C046A81BE5DA02676256" type="10" limiting_length="255" never_null="true" id="3">
+			<field_extra multi_line="false"/>
+		</field>
+		<primary_key field_name="UUID" field_uuid="C1A74BC4B22D5045AF2DB98046B4965F"/>
 	</table>
 	<table name="sfw_EventType" uuid="C482A0FBAE724304A8E05A0570FD55D6" id="52">
 		<field name="UUID" uuid="AEE9BE0296924CA7899B7E5DB37ACE13" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -1707,6 +1786,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="4397240B422CC64C80533458CFAD745E" name_Nto1="Link_58" name_1toN="Link_58_return" state="1">
+		<related_field kind="source">
+			<field_ref uuid="D6B22629CE507C4BA154CFBF1D819A03" name="UUID_Supplier">
+				<table_ref uuid="BBADA9B28C42FC4AA02504E477DEF5BB" name="AVML"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="CFBA7599E861DC4A91A0C1B26781C297" name="UUID">
+				<table_ref uuid="A0C8CDC075BBB546914E03F7689B897E" name="Supplier"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="01619F9BF52940F3AFF8C52A4A82535D" type="3">
 		<field_ref uuid="951D3770910B43BBBFCAB95E4B3A1C65" name="UUID_Tool">
 			<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
@@ -1900,6 +1991,11 @@
 	<index kind="regular" uuid="34F76064C30E2F4C9C144E533921C827" type="3">
 		<field_ref uuid="0CA34F14FEE5FF429B1A694BD2DD1C6B" name="UUID_Staff">
 			<table_ref uuid="89B8693B8BA31D46A5E7CC5F40548E73" name="Membership"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="403C626410002A419CA90F8E207E146B" type="3">
+		<field_ref uuid="D6B22629CE507C4BA154CFBF1D819A03" name="UUID_Supplier">
+			<table_ref uuid="BBADA9B28C42FC4AA02504E477DEF5BB" name="AVML"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="40A9EAD691134D62B6DCAA9836F141F0" type="3">
@@ -2207,6 +2303,11 @@
 			<table_ref uuid="21C997F4FF841640B547868BE38C05ED" name="LotStep"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="A098D3CD74236B4AAB26C06A1CFE9D1D" type="7">
+		<field_ref uuid="C1A74BC4B22D5045AF2DB98046B4965F" name="UUID">
+			<table_ref uuid="68D645D2E1989F4CA36E905F914AD868" name="PartData"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="A3289A6EBF0C432BACE45C8F4D39ECE8" type="1">
 		<field_ref uuid="3AD90DA349424F09BFB121387ED4AC96" name="UUID">
 			<table_ref uuid="2D402F4FA4404104988E27262D340885" name="sfw_EMailQueue"/>
@@ -2240,6 +2341,11 @@
 	<index kind="regular" unique_keys="true" uuid="B1A2B84D24E6284B89649B659845D4AF" type="7">
 		<field_ref uuid="A0B2300D77BC874D9789248A024181BD" name="UUID">
 			<table_ref uuid="2125F2FDC0CF8B44888965E43127D9B3" name="ServiceType"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="B3491E1299D751499D9974A739BA35FB" type="7">
+		<field_ref uuid="CFBA7599E861DC4A91A0C1B26781C297" name="UUID">
+			<table_ref uuid="A0C8CDC075BBB546914E03F7689B897E" name="Supplier"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="B530007B6761954194108DE5FD455EFD" type="3">
@@ -2395,6 +2501,11 @@
 	<index kind="regular" uuid="E7D28A0091E86643B16A9B49C6C707BF" type="3">
 		<field_ref uuid="71EF18521588C54EB8EEFCBF933AC232" name="UUID_Lot">
 			<table_ref uuid="446AB1ED27F3664C9C9747DD14114EF2" name="Qcar"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="E90423F02E32F246A199CD89F4566EB3" type="7">
+		<field_ref uuid="87371A3102B02347880B2FF579DAE670" name="UUID">
+			<table_ref uuid="BBADA9B28C42FC4AA02504E477DEF5BB" name="AVML"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="EA961ED6B22F3B46AD00D030EBAF34A9" type="3">

@@ -10,10 +10,10 @@
 			"coordinates": {
 				"left": 640,
 				"top": 781,
-				"width": 120,
-				"height": 167.33203125
+				"width": 228,
+				"height": 582.33203125
 			},
-			"displayable_fields_count": 6,
+			"displayable_fields_count": 25,
 			"fields_ordering": 1
 		},
 		"Membership": {
@@ -289,7 +289,7 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 717.33325195312,
+				"left": 728.33325195312,
 				"top": 1156.9998779297,
 				"width": 159.052734375,
 				"height": 507.33203125
@@ -701,6 +701,51 @@
 			"displayable_fields_count": 3,
 			"fields_ordering": 1
 		},
+		"PartData": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 3345,
+				"top": 1091,
+				"width": 163,
+				"height": 194.33203125
+			},
+			"displayable_fields_count": 7
+		},
+		"Supplier": {
+			"color": {
+				"red": 128,
+				"green": 255,
+				"blue": 128,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 3844,
+				"top": 783,
+				"width": 196,
+				"height": 627.33203125
+			},
+			"displayable_fields_count": 27
+		},
+		"AVML": {
+			"color": {
+				"red": 128,
+				"green": 255,
+				"blue": 128,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 3604,
+				"top": 984,
+				"width": 193,
+				"height": 421.33203125
+			},
+			"displayable_fields_count": 18
+		},
 		"SpecControllingDept": {
 			"color": {
 				"red": 255,
@@ -709,8 +754,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3561,
-				"top": 33,
+				"left": 3319,
+				"top": 161,
 				"width": 144,
 				"height": 119.33203125
 			},
@@ -725,8 +770,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3349,
-				"top": 26,
+				"left": 3316,
+				"top": 4,
 				"width": 154,
 				"height": 131.33203125
 			},
@@ -872,10 +917,10 @@
 		},
 		"YesNoQuestion": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 114,
+				"green": 209,
+				"blue": 221,
+				"alpha": 255
 			},
 			"coordinates": {
 				"left": 2426,
@@ -887,10 +932,10 @@
 		},
 		"CICategory": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 114,
+				"green": 209,
+				"blue": 221,
+				"alpha": 255
 			},
 			"coordinates": {
 				"left": 1937,
@@ -918,10 +963,10 @@
 		},
 		"CIOrigin": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 114,
+				"green": 209,
+				"blue": 221,
+				"alpha": 255
 			},
 			"coordinates": {
 				"left": 1929,
@@ -949,10 +994,10 @@
 		},
 		"CIHumanFactor": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 114,
+				"green": 209,
+				"blue": 221,
+				"alpha": 255
 			},
 			"coordinates": {
 				"left": 2281,
@@ -964,10 +1009,10 @@
 		},
 		"CIDisposition": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 114,
+				"green": 209,
+				"blue": 221,
+				"alpha": 255
 			},
 			"coordinates": {
 				"left": 2283,
@@ -979,10 +1024,10 @@
 		},
 		"CIPriority": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 114,
+				"green": 209,
+				"blue": 221,
+				"alpha": 255
 			},
 			"coordinates": {
 				"left": 2290,
@@ -1010,10 +1055,10 @@
 		},
 		"ContinuousImprovement": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 114,
+				"green": 209,
+				"blue": 221,
+				"alpha": 255
 			},
 			"coordinates": {
 				"left": 2066,
@@ -1550,6 +1595,14 @@
 		}
 	},
 	"relations": {
+		"4397240B422CC64C80533458CFAD745E": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"C4A8CC154AD81D4D986804038C278648": {
 			"color": {
 				"red": 240,
