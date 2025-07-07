@@ -710,7 +710,7 @@
 			},
 			"coordinates": {
 				"left": 3398,
-				"top": 1118,
+				"top": 1120,
 				"width": 163,
 				"height": 194.33203125
 			},
@@ -742,9 +742,9 @@
 				"left": 3604,
 				"top": 984,
 				"width": 193,
-				"height": 421.33203125
+				"height": 482.33203125
 			},
-			"displayable_fields_count": 18
+			"displayable_fields_count": 21
 		},
 		"SpecControllingDept": {
 			"color": {
@@ -1595,6 +1595,14 @@
 		}
 	},
 	"relations": {
+		"42BCCE20373BB84ABBBDF798B52E0EA3": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"4397240B422CC64C80533458CFAD745E": {
 			"color": {
 				"red": 240,

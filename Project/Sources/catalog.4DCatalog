@@ -573,12 +573,13 @@
 		<field name="comment" uuid="D40A49ADE8CEDF4EA8C93B3B2682F8EF" type="10" limiting_length="255" never_null="true" id="11">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="partID" uuid="9EDDF97B637DA94694E3BB63141A7E12" type="4" never_null="true" id="12"/>
+		<field name="ourPartNum" uuid="9EDDF97B637DA94694E3BB63141A7E12" type="10" limiting_length="255" never_null="true" id="12"/>
 		<field name="inventoryUnits" uuid="E9090844235EE941A89A7DF2718ABD97" type="10" limiting_length="255" never_null="true" id="13"/>
 		<field name="procurementUnits" uuid="A25B4F7B11141E4CB08B472202BE9EC3" type="10" limiting_length="255" never_null="true" id="14"/>
 		<field name="transFactorNumerator" uuid="65090C4BDC49AB44B8F3D8BFC5314F61" type="4" never_null="true" id="15"/>
 		<field name="transFactorDenominator" uuid="7A26A0AA1F41CF4792B36923D010C0AD" type="4" never_null="true" id="16"/>
 		<field name="minInventoryLevel" uuid="9B66A1318EE7BC489E2F0DC379313B3D" type="4" never_null="true" id="17"/>
+		<field name="UUID_PartData" uuid="E7C8FFEBD904E74EB339A34146F11671" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="18"/>
 		<primary_key field_name="UUID" field_uuid="87371A3102B02347880B2FF579DAE670"/>
 	</table>
 	<table name="Supplier" uuid="A0C8CDC075BBB546914E03F7689B897E" id="47">
@@ -598,7 +599,7 @@
 		<field name="allowedLotProcessing" uuid="AE0E81A08F75A944AB6ED653F37D7B0E" type="1" never_null="true" id="10">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="webServer" uuid="2BAD0FECD7806C47AD1908CD0F8E6D91" type="10" limiting_length="255" never_null="true" id="11"/>
+		<field name="webService" uuid="2BAD0FECD7806C47AD1908CD0F8E6D91" type="10" limiting_length="255" never_null="true" id="11"/>
 		<field name="auditRequired" uuid="AC99D3472F6478429E6847312CC08884" type="1" never_null="true" id="12">
 			<field_extra multi_line="false"/>
 		</field>
@@ -614,10 +615,7 @@
 	</table>
 	<table name="PartData" uuid="68D645D2E1989F4CA36E905F914AD868" id="48">
 		<field name="UUID" uuid="C1A74BC4B22D5045AF2DB98046B4965F" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="partID" uuid="08EB6A4E39EF9F4B87205E60D7662010" type="4" never_null="true" id="2">
-			<field_extra multi_line="false"/>
-		</field>
-		<field name="partNum" uuid="7A85388CD512C046A81BE5DA02676256" type="10" limiting_length="255" never_null="true" id="3">
+		<field name="internalPartNum" uuid="7A85388CD512C046A81BE5DA02676256" type="10" limiting_length="255" never_null="true" id="3">
 			<field_extra multi_line="false"/>
 		</field>
 		<primary_key field_name="UUID" field_uuid="C1A74BC4B22D5045AF2DB98046B4965F"/>
@@ -1798,6 +1796,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="42BCCE20373BB84ABBBDF798B52E0EA3" name_Nto1="Link_59" name_1toN="Link_59_return" state="1">
+		<related_field kind="source">
+			<field_ref uuid="E7C8FFEBD904E74EB339A34146F11671" name="UUID_PartData">
+				<table_ref uuid="BBADA9B28C42FC4AA02504E477DEF5BB" name="AVML"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="C1A74BC4B22D5045AF2DB98046B4965F" name="UUID">
+				<table_ref uuid="68D645D2E1989F4CA36E905F914AD868" name="PartData"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="01619F9BF52940F3AFF8C52A4A82535D" type="3">
 		<field_ref uuid="951D3770910B43BBBFCAB95E4B3A1C65" name="UUID_Tool">
 			<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
@@ -1961,6 +1971,11 @@
 	<index kind="regular" unique_keys="true" uuid="279FCE3367AEBA4AAF55EF606FA5535B" type="1">
 		<field_ref uuid="0526ECAF73946E4E90574CB0C2FC9FA1" name="UUID">
 			<table_ref uuid="AD9AFF574E6E2745A70D65CE48ABAB7E" name="dfd_Line"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="286AC345FC990F488A9B1DA4B8A1E789" type="3">
+		<field_ref uuid="E7C8FFEBD904E74EB339A34146F11671" name="UUID_PartData">
+			<table_ref uuid="BBADA9B28C42FC4AA02504E477DEF5BB" name="AVML"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="2A8FF9A5455141689A96101C4A7D5338" type="3">
