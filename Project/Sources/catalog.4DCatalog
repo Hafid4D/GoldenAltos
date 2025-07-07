@@ -546,7 +546,7 @@
 	<table name="AVML" uuid="BBADA9B28C42FC4AA02504E477DEF5BB" id="46">
 		<field name="UUID" uuid="87371A3102B02347880B2FF579DAE670" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="vendorPartnum" uuid="F26AC0287F1C224A9AF873C7F753C1FD" type="10" limiting_length="255" never_null="true" id="2"/>
-		<field name="UUID_Supplier" uuid="D6B22629CE507C4BA154CFBF1D819A03" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="3">
+		<field name="UUID_Supplier" uuid="D6B22629CE507C4BA154CFBF1D819A03" type="10" store_as_UUID="true" never_null="true" id="3">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="critical" uuid="DFD8A9EAABB0C5409D7A7BCDB62D635D" type="1" never_null="true" id="4">

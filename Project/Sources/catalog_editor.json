@@ -703,14 +703,14 @@
 		},
 		"PartData": {
 			"color": {
-				"red": 255,
+				"red": 128,
 				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"blue": 128,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3345,
-				"top": 1091,
+				"left": 3398,
+				"top": 1118,
 				"width": 163,
 				"height": 194.33203125
 			},
