@@ -26,7 +26,7 @@ If ($partData_log.exists)
 End if 
 
 
-//AVMAml table
+//supplier table
 var $eSupplier : cs:C1710.SupplierEntity
 
 
@@ -84,8 +84,8 @@ End if
 
 
 
-//AVMAml table
-var $eAvml : cs:C1710.AVMLEntity
+//AML table
+var $eAvml : cs:C1710.AMLEntity
 
 
 $avml_log:=Folder:C1567(fk data folder:K87:12).file("DataJson/avlAml_export.json")
@@ -93,11 +93,11 @@ $avml_log:=Folder:C1567(fk data folder:K87:12).file("DataJson/avlAml_export.json
 If ($avml_log.exists)
 	$avmls:=JSON Parse:C1218($avml_log.getText())
 	
-	TRUNCATE TABLE:C1051([AVML:46])
+	TRUNCATE TABLE:C1051([PartInfo])
 	
 	For each ($avml; $avmls)
 		
-		$eAvml:=ds:C1482.AVML.new()
+		$eAvml:=ds:C1482.AML.new()
 		
 		$eAvml.vendorPartnum:=$avml.Vendor_partnum
 		$eAvml.UUID_Supplier:=$avml.Vendor_partnum
@@ -120,14 +120,14 @@ If ($avml_log.exists)
 		$eAvml.capacity:=$avml.Capacity
 		$eAvml.makeInactive:=$avml.MakeInactive
 		$eAvml.comment:=$avml.Comments
-		$eAvml.ourPartNum:=$avml.OUR_partnum
+		
 		$eAvml.inventoryUnits:=$avml.InventoryUnits
 		$eAvml.procurementUnits:=$avml.TransFactorNumerator
 		$eAvml.transFactorNumerator:=$avml.TransFactorNumerator
 		$eAvml.transFactorDenominator:=$avml.TransFactorDenominator
 		$eAvml.minInventoryLevel:=$avml.MinInventoryLevel
 		
-		
+		//$eAvml.ourPartNum:=$avml.OUR_partnum
 		$partNum:=ds:C1482.PartData.query("internalPartNum =:1"; Split string:C1554($avml.OUR_partnum; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($partNum.length>0)
 			$eAvml.UUID_PartData:=$partNum[0].UUID
