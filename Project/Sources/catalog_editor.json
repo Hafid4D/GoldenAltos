@@ -701,6 +701,21 @@
 			"displayable_fields_count": 3,
 			"fields_ordering": 1
 		},
+		"Units": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 3230,
+				"top": 1211,
+				"width": 120,
+				"height": 119.33203125
+			},
+			"displayable_fields_count": 3
+		},
 		"PartData": {
 			"color": {
 				"red": 128,

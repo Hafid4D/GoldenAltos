@@ -1,4 +1,4 @@
-//%attributes = {}
+//%attributes = {"executedOnServer":true}
 
 
 //PartData
@@ -93,7 +93,7 @@ $avml_log:=Folder:C1567(fk data folder:K87:12).file("DataJson/avlAml_export.json
 If ($avml_log.exists)
 	$avmls:=JSON Parse:C1218($avml_log.getText())
 	
-	TRUNCATE TABLE:C1051([PartInfo])
+	TRUNCATE TABLE:C1051([AML:46])
 	
 	For each ($avml; $avmls)
 		
@@ -121,8 +121,28 @@ If ($avml_log.exists)
 		$eAvml.makeInactive:=$avml.MakeInactive
 		$eAvml.comment:=$avml.Comments
 		
-		$eAvml.inventoryUnits:=$avml.InventoryUnits
-		$eAvml.procurementUnits:=$avml.TransFactorNumerator
+		//$eAvml.inventoryUnits:=$avml.InventoryUnits
+		$unit:=ds:C1482.Units.query("name =:1"; Split string:C1554($avml.InventoryUnits; "\r"; sk trim spaces:K86:2).join("\r"))
+		
+		If ($unit.length>0)
+			
+			$eAvml.inventoryUnits:=$unit[0].unitID
+		Else 
+			
+			$eAvml.inventoryUnits:=0
+		End if 
+		
+		//$eAvml.procurementUnits:=$avml.ProcurementUnits
+		$unit:=ds:C1482.Units.query("name =:1"; Split string:C1554($avml.ProcurementUnits; "\r"; sk trim spaces:K86:2).join("\r"))
+		
+		If ($unit.length>0)
+			
+			$eAvml.procurementUnits:=$unit[0].unitID
+		Else 
+			
+			$eAvml.procurementUnits:=0
+		End if 
+		
 		$eAvml.transFactorNumerator:=$avml.TransFactorNumerator
 		$eAvml.transFactorDenominator:=$avml.TransFactorDenominator
 		$eAvml.minInventoryLevel:=$avml.MinInventoryLevel
