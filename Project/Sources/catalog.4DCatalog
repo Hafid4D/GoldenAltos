@@ -127,7 +127,7 @@
 		<field name="extension" uuid="1743D4283CC7B74CAF65FB4A396AEE7C" type="10" limiting_length="255" never_null="true" id="12"/>
 		<field name="addendum" uuid="6DF08F80478E4F47A8CF52321A3E7801" type="1" never_null="true" id="13"/>
 		<field name="suppress" uuid="667B2B05F2E694439706686CE9DC412D" type="1" never_null="true" id="14"/>
-		<field name="controllingDeptID" uuid="00BBA10D3C697F408E164BC3494272E4" type="4" never_null="true" id="15"/>
+		<field name="departmentID" uuid="00BBA10D3C697F408E164BC3494272E4" type="4" never_null="true" id="15"/>
 		<field name="addendumToSpec" uuid="4DB9F8A21A12A14398F05AF7C5F1BA5D" type="10" limiting_length="255" never_null="true" id="16"/>
 		<field name="reviewIntervalInDays" uuid="7413D34B72ACD04A8DAD654BFE162AAF" type="4" never_null="true" id="17"/>
 		<field name="reviewDate" uuid="87FFB43152B5CB40B41CA4ABE12A9474" type="8" never_null="true" id="18"/>

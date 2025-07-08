@@ -59,7 +59,7 @@
 					"type": "input",
 					"top": 12,
 					"left": 204,
-					"width": 150,
+					"width": 300,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.supplier.name",
 					"focusable": false,
@@ -90,7 +90,7 @@
 					"type": "input",
 					"top": 39,
 					"left": 204,
-					"width": 250,
+					"width": 300,
 					"height": 41,
 					"dataSource": "Form:C1466.current_item.partData.internalPartNum",
 					"focusable": false,
@@ -110,12 +110,36 @@
 		},
 		{
 			"objects": {
+				"Rectangle4": {
+					"type": "rectangle",
+					"top": 197,
+					"left": 203,
+					"width": 302,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle3": {
+					"type": "rectangle",
+					"top": 234,
+					"left": 203,
+					"width": 302,
+					"height": 23,
+					"stroke": "transparent"
+				},
 				"Rectangle1": {
 					"type": "rectangle",
-					"top": 127,
-					"left": 666,
-					"width": 250,
-					"height": 41,
+					"top": 273,
+					"left": 203,
+					"width": 302,
+					"height": 43,
+					"stroke": "transparent"
+				},
+				"Rectangle2": {
+					"type": "rectangle",
+					"top": 138,
+					"left": 203,
+					"width": 302,
+					"height": 43,
 					"stroke": "transparent"
 				},
 				"label_vendorPartNum": {
@@ -135,7 +159,7 @@
 					"type": "input",
 					"top": 139,
 					"left": 204,
-					"width": 250,
+					"width": 300,
 					"height": 41,
 					"dataSource": "Form:C1466.current_item.vendorPartnum",
 					"focusable": false,
@@ -151,30 +175,22 @@
 					"textAlign": "left",
 					"bottom": 180
 				},
-				"Rectangle2": {
-					"type": "rectangle",
-					"top": 264,
-					"left": 614,
-					"width": 250,
-					"height": 23,
-					"stroke": "transparent"
-				},
 				"label_0_2": {
 					"type": "text",
-					"top": 195,
+					"top": 200,
 					"left": 15,
 					"width": 175,
 					"height": 17,
 					"stroke": "#000000",
-					"text": "Service Tyoe",
+					"text": "Service Type",
 					"textAlign": "right",
 					"fontWeight": "bold"
 				},
 				"entryField_revision": {
 					"type": "input",
-					"top": 195,
+					"top": 200,
 					"left": 204,
-					"width": 246,
+					"width": 300,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.serviceType",
 					"focusable": false,
@@ -188,19 +204,11 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 212
-				},
-				"Rectangle3": {
-					"type": "rectangle",
-					"top": 307,
-					"left": 614,
-					"width": 250,
-					"height": 23,
-					"stroke": "transparent"
+					"bottom": 217
 				},
 				"label_0_3": {
 					"type": "text",
-					"top": 244,
+					"top": 237,
 					"left": 15,
 					"width": 175,
 					"height": 17,
@@ -211,10 +219,10 @@
 				},
 				"entryField_revision1": {
 					"type": "input",
-					"top": 416,
-					"left": 306,
-					"width": 246,
-					"height": 17,
+					"top": 274,
+					"left": 204,
+					"width": 300,
+					"height": 41,
 					"dataSource": "Form:C1466.current_item.revision",
 					"focusable": false,
 					"enterable": false,
@@ -227,19 +235,11 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 433
-				},
-				"Rectangle4": {
-					"type": "rectangle",
-					"top": 364,
-					"left": 620,
-					"width": 250,
-					"height": 23,
-					"stroke": "transparent"
+					"bottom": 315
 				},
 				"label_0_4": {
 					"type": "text",
-					"top": 302,
+					"top": 274,
 					"left": 15,
 					"width": 175,
 					"height": 17,
@@ -250,9 +250,9 @@
 				},
 				"entryField_revision2": {
 					"type": "input",
-					"top": 335,
-					"left": 360,
-					"width": 246,
+					"top": 237,
+					"left": 204,
+					"width": 300,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.revision",
 					"focusable": false,
@@ -266,22 +266,47 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 352
+					"bottom": 254
 				},
-				"Rectangle5": {
+				"Rectangle11": {
 					"type": "rectangle",
-					"top": 191,
-					"left": 666,
-					"width": 250,
-					"height": 41,
-					"stroke": "transparent"
+					"top": 342,
+					"left": 17,
+					"width": 490,
+					"height": 85,
+					"stroke": "#FFFFFF",
+					"fill": "transparent",
+					"strokeWidth": 1,
+					"visibility": "hidden"
 				}
 			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 70,
+	"geometryStamp": 138,
 	"editor": {
+		"groups": {
+			"Group1": [
+				"Rectangle2",
+				"label_vendorPartNum",
+				"entryField_vendorPartnum"
+			],
+			"Group2": [
+				"Rectangle4",
+				"label_0_2",
+				"entryField_revision"
+			],
+			"Group3": [
+				"Rectangle3",
+				"label_0_3",
+				"entryField_revision2"
+			],
+			"Group4": [
+				"Rectangle1",
+				"entryField_revision1",
+				"label_0_4"
+			]
+		},
 		"activeView": "View 1",
 		"defaultView": "View 1",
 		"views": {
