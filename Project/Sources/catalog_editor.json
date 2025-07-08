@@ -727,11 +727,11 @@
 				"left": 3844,
 				"top": 783,
 				"width": 196,
-				"height": 627.33203125
+				"height": 681.33203125
 			},
-			"displayable_fields_count": 27
+			"displayable_fields_count": 30
 		},
-		"AVML": {
+		"AML": {
 			"color": {
 				"red": 128,
 				"green": 255,
@@ -1064,9 +1064,9 @@
 				"left": 2066,
 				"top": 0,
 				"width": 197,
-				"height": 484.33203125
+				"height": 513.33203125
 			},
-			"displayable_fields_count": 21,
+			"displayable_fields_count": 22,
 			"fields": {
 				"notes": {
 					"color": {

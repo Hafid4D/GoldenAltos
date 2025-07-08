@@ -160,6 +160,14 @@
 		},
 		{
 			"objects": {
+				"Rectangle16": {
+					"type": "rectangle",
+					"top": 209,
+					"left": 173,
+					"width": 543,
+					"height": 23,
+					"stroke": "transparent"
+				},
 				"Rectangle17": {
 					"type": "rectangle",
 					"top": 450,
@@ -950,20 +958,12 @@
 					"icon": "/RESOURCES/sfw/image/skin/rainbow/btn4states/edit-24x24.png",
 					"iconFrames": 4,
 					"method": "ObjectMethods/bResponsibleEdit.4dm"
-				},
-				"Rectangle16": {
-					"type": "rectangle",
-					"top": 209,
-					"left": 173,
-					"width": 543,
-					"height": 23,
-					"stroke": "transparent"
 				}
 			}
 		},
 		null
 	],
-	"geometryStamp": 355,
+	"geometryStamp": 359,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"editor": {
 		"activeView": "View 1",

@@ -1,0 +1,317 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 20,
+	"bottomMargin": 20,
+	"events": [
+		"onLoad",
+		"onPageChange",
+		"onValidate",
+		"onClick",
+		"onDoubleClick",
+		"onOutsideCall",
+		"onBeginDragOver",
+		"onDragOver",
+		"onDrop",
+		"onAfterKeystroke",
+		"onMenuSelect",
+		"onPluginArea",
+		"onAfterEdit",
+		"onTimer",
+		"onBoundVariableChange"
+	],
+	"windowTitle": "window title",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 1,
+					"width": 5000,
+					"height": 704,
+					"fill": "#B1CFDE",
+					"strokeWidth": 0,
+					"stroke": "#FFFFFF"
+				},
+				"label_0_1": {
+					"type": "text",
+					"top": 12,
+					"left": 15,
+					"width": 175,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Supplier",
+					"right": 190,
+					"fontWeight": "bold",
+					"textAlign": "right"
+				},
+				"entryField_supplier": {
+					"type": "input",
+					"top": 12,
+					"left": 204,
+					"width": 300,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.supplier.name",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "normal"
+				},
+				"label_internalPartNum": {
+					"type": "text",
+					"top": 39,
+					"left": 15,
+					"width": 175,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Internal PartNum",
+					"bottom": 56,
+					"right": 190,
+					"fontWeight": "bold",
+					"textAlign": "right"
+				},
+				"entryField_internalPart#": {
+					"type": "input",
+					"top": 39,
+					"left": 204,
+					"width": 300,
+					"height": 41,
+					"dataSource": "Form:C1466.current_item.partData.internalPartNum",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "normal",
+					"textAlign": "left",
+					"bottom": 80
+				}
+			}
+		},
+		{
+			"objects": {
+				"Rectangle4": {
+					"type": "rectangle",
+					"top": 197,
+					"left": 203,
+					"width": 302,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle3": {
+					"type": "rectangle",
+					"top": 234,
+					"left": 203,
+					"width": 302,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle1": {
+					"type": "rectangle",
+					"top": 273,
+					"left": 203,
+					"width": 302,
+					"height": 43,
+					"stroke": "transparent"
+				},
+				"Rectangle2": {
+					"type": "rectangle",
+					"top": 138,
+					"left": 203,
+					"width": 302,
+					"height": 43,
+					"stroke": "transparent"
+				},
+				"label_vendorPartNum": {
+					"type": "text",
+					"top": 139,
+					"left": 15,
+					"width": 175,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Internal PartNum",
+					"bottom": 156,
+					"right": 190,
+					"fontWeight": "bold",
+					"textAlign": "right"
+				},
+				"entryField_vendorPartnum": {
+					"type": "input",
+					"top": 139,
+					"left": 204,
+					"width": 300,
+					"height": 41,
+					"dataSource": "Form:C1466.current_item.vendorPartnum",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "normal",
+					"textAlign": "left",
+					"bottom": 180
+				},
+				"label_0_2": {
+					"type": "text",
+					"top": 200,
+					"left": 15,
+					"width": 175,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Service Type",
+					"textAlign": "right",
+					"fontWeight": "bold"
+				},
+				"entryField_revision": {
+					"type": "input",
+					"top": 200,
+					"left": 204,
+					"width": 300,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.serviceType",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "normal",
+					"textAlign": "left",
+					"bottom": 217
+				},
+				"label_0_3": {
+					"type": "text",
+					"top": 237,
+					"left": 15,
+					"width": 175,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Service/Product Description",
+					"textAlign": "right",
+					"fontWeight": "bold"
+				},
+				"entryField_revision1": {
+					"type": "input",
+					"top": 274,
+					"left": 204,
+					"width": 300,
+					"height": 41,
+					"dataSource": "Form:C1466.current_item.revision",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "normal",
+					"textAlign": "left",
+					"bottom": 315
+				},
+				"label_0_4": {
+					"type": "text",
+					"top": 274,
+					"left": 15,
+					"width": 175,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Comments",
+					"textAlign": "right",
+					"fontWeight": "bold"
+				},
+				"entryField_revision2": {
+					"type": "input",
+					"top": 237,
+					"left": 204,
+					"width": 300,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.revision",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "normal",
+					"textAlign": "left",
+					"bottom": 254
+				},
+				"Rectangle11": {
+					"type": "rectangle",
+					"top": 342,
+					"left": 17,
+					"width": 490,
+					"height": 85,
+					"stroke": "#FFFFFF",
+					"fill": "transparent",
+					"strokeWidth": 1,
+					"visibility": "hidden"
+				}
+			}
+		}
+	],
+	"inheritedForm": "sfw_bkgd_header_3lines",
+	"geometryStamp": 138,
+	"editor": {
+		"groups": {
+			"Group1": [
+				"Rectangle2",
+				"label_vendorPartNum",
+				"entryField_vendorPartnum"
+			],
+			"Group2": [
+				"Rectangle4",
+				"label_0_2",
+				"entryField_revision"
+			],
+			"Group3": [
+				"Rectangle3",
+				"label_0_3",
+				"entryField_revision2"
+			],
+			"Group4": [
+				"Rectangle1",
+				"entryField_revision1",
+				"label_0_4"
+			]
+		},
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	},
+	"method": "method.4dm"
+}
