@@ -288,7 +288,7 @@
 		<field name="upAt" uuid="7E6764EC95C7F74B89A8509FFD911EFE" type="9" never_null="true" id="12"/>
 		<field name="dateUp" uuid="8BE38F5B5B6E214D8C55B2E7F73DCE36" type="8" never_null="true" id="13"/>
 		<field name="isApproved" uuid="D1206F3FDDA66F49812596441E32BE6A" type="1" never_null="true" id="14"/>
-		<field name="reportedBy" uuid="0D41C3EAAF305248A7DDF508713A818A" type="10" never_null="true" id="15"/>
+		<field name="reportedBy" uuid="0D41C3EAAF305248A7DDF508713A818A" type="10" limiting_length="255" never_null="true" id="15"/>
 		<field name="approvedBy" uuid="C69BC87ECC3E8A40AFE2E649C3367539" type="10" limiting_length="255" never_null="true" id="16"/>
 		<field name="approvalDate" uuid="C58CFAD652E982459AD859AAC73FE8D3" type="8" never_null="true" id="17"/>
 		<primary_key field_name="UUID" field_uuid="8FD486DDACE0854DA8FB686A58B08089"/>
@@ -574,8 +574,10 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="ourPartNum" uuid="9EDDF97B637DA94694E3BB63141A7E12" type="10" limiting_length="255" never_null="true" id="12"/>
-		<field name="inventoryUnits" uuid="E9090844235EE941A89A7DF2718ABD97" type="10" limiting_length="255" never_null="true" id="13"/>
-		<field name="procurementUnits" uuid="A25B4F7B11141E4CB08B472202BE9EC3" type="10" limiting_length="255" never_null="true" id="14"/>
+		<field name="inventoryUnits" uuid="E9090844235EE941A89A7DF2718ABD97" type="3" never_null="true" id="13">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="procurementUnits" uuid="A25B4F7B11141E4CB08B472202BE9EC3" type="3" never_null="true" id="14"/>
 		<field name="transFactorNumerator" uuid="65090C4BDC49AB44B8F3D8BFC5314F61" type="4" never_null="true" id="15"/>
 		<field name="transFactorDenominator" uuid="7A26A0AA1F41CF4792B36923D010C0AD" type="4" never_null="true" id="16"/>
 		<field name="minInventoryLevel" uuid="9B66A1318EE7BC489E2F0DC379313B3D" type="4" never_null="true" id="17"/>
@@ -619,6 +621,14 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<primary_key field_name="UUID" field_uuid="C1A74BC4B22D5045AF2DB98046B4965F"/>
+	</table>
+	<table name="Units" uuid="BBEF22543374E24BBC6534C68EA6E3D2" id="49">
+		<field name="UUID" uuid="2C3EE5FC26975842998856F7D02B3BA2" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="unitID" uuid="B8D8E68ABB8B0B478109C20BD0BBBCE8" type="3" never_null="true" id="2"/>
+		<field name="name" uuid="2985F44C992E634496636D1D3287EA03" type="10" limiting_length="255" never_null="true" id="3">
+			<field_extra multi_line="false"/>
+		</field>
+		<primary_key field_name="UUID" field_uuid="2C3EE5FC26975842998856F7D02B3BA2"/>
 	</table>
 	<table name="sfw_EventType" uuid="C482A0FBAE724304A8E05A0570FD55D6" id="52">
 		<field name="UUID" uuid="AEE9BE0296924CA7899B7E5DB37ACE13" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -2406,6 +2416,11 @@
 	<index kind="regular" uuid="C2FF4C838C8DF24E9EAF2D4973188DE2" type="3">
 		<field_ref uuid="51E9BC9408544D40A527B62C43DBA725" name="UUID_Step">
 			<table_ref uuid="74CB192F1AF3134C9082ABA4683C0838" name="StepSpec"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="C3EC366D8E9CAB49B51548ECC14F4D9B" type="7">
+		<field_ref uuid="2C3EE5FC26975842998856F7D02B3BA2" name="UUID">
+			<table_ref uuid="BBEF22543374E24BBC6534C68EA6E3D2" name="Units"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="C4B21DC93AECE742AAF07D041BE7F747" type="7">
