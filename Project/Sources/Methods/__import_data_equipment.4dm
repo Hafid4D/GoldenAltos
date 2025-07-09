@@ -1,43 +1,12 @@
 //%attributes = {"executedOnServer":true}
 var $eEquipment : cs:C1710.EquipmentEntity
-var $eEquipmentLocation : cs:C1710.EquipmentLocationEntity
-var $eDivision : cs:C1710.DivisionEntity
 var $eRepair : cs:C1710.RepairLogEntity
-
-var $locations; $types; $divisions : Collection
-
-$locations:=New collection:C1472("4TH OPTICAL"; "Burn-in"; "Eng'r"; "Engineering"; "Environmental"; "EOL"; "FACILITY"; "FOL"; "FOL for Profiler"; \
-"FOL/RTC"; "Front of Line"; "Lab/ Vibration"; "Lab/Mechanical Shock"; "Lab/Milpitas"; "Marking"; "Pad"; "Solder"; "Solder Dip"; "Trim")
-
-$divisions:=New collection:C1472("GAC")
 
 $equipment_Log:=Folder:C1567(fk data folder:K87:12).file("DataJson/equipments_export.json")
 
 If ($equipment_Log.exists)
 	$equipments:=JSON Parse:C1218($equipment_Log.getText())
 	TRUNCATE TABLE:C1051([Equipment:13])
-	TRUNCATE TABLE:C1051([EquipmentLocation:19])
-	TRUNCATE TABLE:C1051([Division:20])
-	
-	//----> [Division]
-	For ($i; 0; $divisions.length-1)
-		
-		$eDivision:=ds:C1482.Division.new()
-		$eDivision.divisionID:=$i+1
-		$eDivision.name:=$divisions[$i]
-		$eDivision.save()
-		
-	End for 
-	
-	//----> [EquipementLocation]
-	For ($i; 0; $locations.length-1)
-		
-		$eEquipmentLocation:=ds:C1482.EquipmentLocation.new()
-		$eEquipmentLocation.locationID:=$i+1
-		$eEquipmentLocation.name:=$locations[$i]
-		//$eEquipmentLocation.color:="#FFFFFF"
-		$eEquipmentLocation.save()
-	End for 
 	
 	
 	$docs:=Folder:C1567(fk data folder:K87:12).file("DataJson/docServerIndex_export.json")
@@ -158,8 +127,6 @@ $repair_Log_file:=Folder:C1567(fk data folder:K87:12).file("DataJson/repair_log_
 If ($repair_Log_file.exists)
 	$repair_log:=JSON Parse:C1218($repair_Log_file.getText())
 	TRUNCATE TABLE:C1051([RepairLog:21])
-	
-	
 	
 	For each ($repair; $repair_log)
 		
