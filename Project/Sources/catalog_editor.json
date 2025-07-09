@@ -58,10 +58,10 @@
 			"coordinates": {
 				"left": 2429,
 				"top": 153,
-				"width": 207.05078125,
-				"height": 379.33203125
+				"width": 239.18981933594,
+				"height": 420.02722167969
 			},
-			"displayable_fields_count": 16,
+			"displayable_fields_count": 18,
 			"fields": {
 				"contactDetails": {
 					"position": 15
@@ -700,6 +700,47 @@
 			},
 			"displayable_fields_count": 3,
 			"fields_ordering": 1
+		},
+		"LeadEvent": {
+			"color": {
+				"red": 127,
+				"green": 135,
+				"blue": 236,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 4205.1741027832,
+				"top": 1294.6236572266,
+				"width": 170.109375,
+				"height": 168.87109375
+			},
+			"displayable_fields_count": 6,
+			"fields": {
+				"UUID_EventType": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				},
+				"UUID_Lead": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				},
+				"UUID": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
 		},
 		"StepSpec": {
 			"color": {
@@ -1518,6 +1559,30 @@
 		}
 	},
 	"relations": {
+		"19AC57227D1946EEA9F94B4D8B9AF6A7": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"178204FE24244CF0B1F093EC96E62BE3": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"1A660DE84F90438D8AD948895FB5BFC3": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
 		"F7A12367E0E7E44682B1512B34B69AAC": {
 			"color": {
 				"red": 240,

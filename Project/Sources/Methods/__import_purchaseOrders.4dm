@@ -2,7 +2,7 @@
 /**
 import po & po lines (po <-- po_lines)
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([PurchaseOrder:115])
 	TRUNCATE TABLE:C1051([PurchaseOrderLine:116])
 	TRUNCATE TABLE:C1051([Invoice:4])
@@ -115,7 +115,7 @@ End if
 /**
 import jobs & lot (job <-- lots) & Archives
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([Job:117])
 	TRUNCATE TABLE:C1051([Lot:118])
 	TRUNCATE TABLE:C1051([LotStep:5])
@@ -276,7 +276,7 @@ End if
 /**
 import inventories
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([Inventory:126])
 	TRUNCATE TABLE:C1051([InventoryPull:127])
 	
@@ -348,7 +348,7 @@ End if
 /**
 import step template
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([StepTemplate:121])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/step_template_export.json")
@@ -379,7 +379,7 @@ End if
 /**
 import tools
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([ToolType:122])
 	TRUNCATE TABLE:C1051([Tool:6])
 	
@@ -420,7 +420,7 @@ End if
 /**
 import cetifications
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([Certification:124])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/certifications_export.json")
@@ -528,7 +528,7 @@ End if
 /**
 Create user: sfw_User & Staff tables
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([Staff:135])
 	TRUNCATE TABLE:C1051([sfw_User:16])
 	
@@ -595,7 +595,7 @@ End if
 /**
 import staffs
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([Staff:135])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/staff_export.json")
