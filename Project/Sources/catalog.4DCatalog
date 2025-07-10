@@ -570,7 +570,7 @@
 		<field name="makeInactive" uuid="D445F01B5559314888F81E2C17F03C44" type="1" never_null="true" id="10">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="comment" uuid="D40A49ADE8CEDF4EA8C93B3B2682F8EF" type="10" limiting_length="255" never_null="true" id="11">
+		<field name="comment" uuid="D40A49ADE8CEDF4EA8C93B3B2682F8EF" type="10" never_null="true" id="11">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="ourPartNum" uuid="9EDDF97B637DA94694E3BB63141A7E12" type="10" limiting_length="255" never_null="true" id="12"/>
@@ -582,6 +582,12 @@
 		<field name="transFactorDenominator" uuid="7A26A0AA1F41CF4792B36923D010C0AD" type="4" never_null="true" id="16"/>
 		<field name="minInventoryLevel" uuid="9B66A1318EE7BC489E2F0DC379313B3D" type="4" never_null="true" id="17"/>
 		<field name="UUID_PartData" uuid="E7C8FFEBD904E74EB339A34146F11671" type="10" store_as_UUID="true" never_null="true" id="18"/>
+		<field name="description" uuid="392A39234CFA9D44BE5D455EA435B8BC" type="10" never_null="true" id="19">
+			<field_extra multi_line="true"/>
+		</field>
+		<field name="approvedBy" uuid="66206A9C456E4B42A1A256C572E05B0E" type="10" limiting_length="255" never_null="true" id="20"/>
+		<field name="isApproved" uuid="CF4A58BB76CA9643BC2AE13AE3E91EA4" type="1" never_null="true" id="21"/>
+		<field name="approvalDate" uuid="5EC205F49069354E9F9AD6417AFA9C1C" type="8" never_null="true" id="22"/>
 		<primary_key field_name="UUID" field_uuid="87371A3102B02347880B2FF579DAE670"/>
 	</table>
 	<table name="Supplier" uuid="A0C8CDC075BBB546914E03F7689B897E" id="47">

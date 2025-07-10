@@ -325,7 +325,35 @@ Function bActionApContact()
 	RELEASE MENU:C978($refMenu)
 	Case of 
 		: ($choice="openInWindow")
-			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.contacts.query("title=:1"; "AP").first(); "customerService"; "contact")
+			var $newcontact : cs:C1710.ContactEntity
+			$newcontact:=ds:C1482.Contact.new()
+			
+			
+			If ($newcontact.contactDetails.communications=Null:C1517)
+				$newcontact.contactDetails.communications:=New collection:C1472
+			End if 
+			
+			If ($newcontact.contactDetails=Null:C1517)
+				$newcontact.contactDetails:=New object:C1471
+			End if 
+			If ($newcontact.contactDetails.addresses=Null:C1517)
+				$newcontact.contactDetails.addresses:=New collection:C1472
+			End if 
+			$mainAddress:=$newcontact.contactDetails.addresses.query("type = :1"; "main").first()
+			If ($mainAddress=Null:C1517)
+				$mainAddress:=New object:C1471
+				$mainAddress.type:="main"
+				$mainAddress.detail:=New object:C1471
+				$mainAddress.detail.country:="FR"
+				$newcontact.contactDetails.addresses.push($mainAddress)
+			End if 
+			$res:=$newcontact.save()
+			If (Not:C34($res.success))
+				TRACE:C157
+			End if 
+			
+			Form:C1466.sfw.openInANewWindow($newcontact; "customerService"; "contact")
+			//Form.sfw.openInANewWindow(Form.current_item.contacts.query("title=:1"; "AP").first(); "customerService"; "contact")
 	End case 
 	This:C1470.LoadApContact()
 	
