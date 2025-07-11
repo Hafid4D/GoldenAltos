@@ -13,7 +13,12 @@ If (True:C214)
 	
 	$erreur:=New collection:C1472()
 	
+	$poNumber:=0
+	
 	For each ($record; $records)
+		
+		$poNumber:=$poNumber+1
+		
 		$po:=ds:C1482.PurchaseOrder.new()
 		
 		$customer_es:=ds:C1482.Customer.query("name = :1"; $record.customer_name)
@@ -25,10 +30,20 @@ If (True:C214)
 		End if 
 		
 		//$po.customer_name:=$record.customer_name
-		$po.poNumber:=$record.poNumber
+		
+		$po.poNumber:=$poNumber
+		$po.oldPoNumber:=$record.poNumber
 		$po.poAmount:=$record.poAmount
 		$po.amountBilled:=$record.amountBilled
-		$po.ourQuote:=$record.ourQuote
+		
+		//$po.ourQuote:=$record.ourQuote
+		$quote:=ds:C1482.Quote.query("code =:1"; Split string:C1554($record.ourQuote; "\r"; sk trim spaces:K86:2).join("\r"))
+		If ($quote.length>0)
+			$po.UUID_Quote:=$quote[0].UUID
+		Else 
+			
+		End if 
+		
 		$po.resaleNumber:=$record.resaleNumber
 		$po.identifier:=$record.identifier
 		$po.initials:=$record.initials
@@ -128,7 +143,15 @@ If (True:C214)
 		$job:=ds:C1482.Job.new()
 		
 		$job.jobNumber:=$record.jobNumber
-		$job.poNumber:=$record.poNumber
+		
+		//$job.poNumber:=$record.poNumber
+		$po_s:=ds:C1482.PurchaseOrder.query("oldPoNumber =:1"; Split string:C1554($record.poNumber; "\r"; sk trim spaces:K86:2).join("\r"))
+		If ($po_s.length>0)
+			$job.poNumber:=$po_s[0].poNumber
+		Else 
+			$job.poNumber:=0
+		End if 
+		
 		$job.division:=$record.division
 		$job.dateCreated:=$record.dateCreated
 		$job.expectedDate:=$record.expectedDate
@@ -167,7 +190,7 @@ If (True:C214)
 			If ($poLine_es.length>0)
 				$poLine_e:=$poLine_es[0]
 				
-				If ($poLine_e.purchaseOrder.poNumber=$record.poNumber) & ($poline.description=$poLine_e.description)
+				If ($poLine_e.purchaseOrder.oldPoNumber=$record.poNumber) & ($poline.description=$poLine_e.description)
 					$poLine_e.UUID_Job:=$job.UUID
 					
 					$res:=$poLine_e.save()
@@ -194,7 +217,15 @@ If (True:C214)
 			$lot_e.onHold:=$lot.onHold
 			$lot_e.holdDate:=$lot.holdDate
 			$lot_e.holdTime:=$lot.holdTime
-			$lot_e.poNumber:=$lot.poNumber
+			
+			//$lot_e.poNumber:=$lot.poNumber
+			$po_s:=ds:C1482.PurchaseOrder.query("oldPoNumber =:1"; Split string:C1554($record.poNumber; "\r"; sk trim spaces:K86:2).join("\r"))
+			If ($po_s.length>0)
+				$lot_e.poNumber:=$po_s[0].poNumber
+			Else 
+				$lot_e.poNumber:=0
+			End if 
+			
 			$lot_e.customer:=$lot.customer
 			$lot_e.commit:=$lot.commit
 			$lot_e.reCommit:=$lot.reCommit
@@ -466,14 +497,42 @@ If (True:C214)
 		$specification_e.spec:=$record.Spec
 		$specification_e.title:=$record.Spec_Title
 		$specification_e.revisionDate:=Date:C102($record.Revsion_Date)
-		$specification_e.rev:=$record.Rev
-		$specification_e.division:=$record.Division  //TO CHANGE
-		$specification_e.form:=$record.Form
-		$specification_e.category:=$record.PublishedDocCategory  //TO CHANGE
+		$specification_e.revision:=$record.Rev
+		
+		//$specification_e.division:=$record.Division  //TO CHANGE
+		$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($record.Division; "\r"; sk trim spaces:K86:2).join("\r"))
+		If ($division.length>0)
+			$specification_e.divisionID:=$division[0].divisionID
+		Else 
+			$specification_e.divisionID:=0
+		End if 
+		
+		$specification_e.isForm:=$record.Form
+		
+		//$specification_e.category:=$record.PublishedDocCategory  //TO CHANGE
+		$category:=ds:C1482.SpecCategory.query("name =:1"; Split string:C1554($record.PublishedDocCategory; "\r"; sk trim spaces:K86:2).join("\r"))
+		If ($category.length>0)
+			$specification_e.categoryID:=$category[0].categoryID
+		Else 
+			$specification_e.categoryID:=0
+		End if 
+		
 		$specification_e.remark:=$record.Remarks
 		$specification_e.extension:=$record.Dosext
 		$specification_e.addendum:=$record.Addendum
+		$specification_e.addendumToSpec:=$record.AddendumToSpec
 		$specification_e.suppress:=$record.Suppress
+		$specification_e.reviewIntervalInDays:=$record.ReviewIntervalInDays
+		$specification_e.reviewDate:=$record.Review_Date
+		
+		//$specification_e.departmentID:=$record.ControllingDept
+		$stecControllingDetpt:=ds:C1482.SpecControllingDept.query("name =:1"; Split string:C1554($record.ControllingDept; "\r"; sk trim spaces:K86:2).join("\r"))
+		If ($stecControllingDetpt.length>0)
+			$specification_e.departmentID:=$stecControllingDetpt[0].departmentID
+		Else 
+			$specification_e.departmentID:=0
+		End if 
+		
 		
 		$PublishedDocumentBlob:=Folder:C1567(fk data folder:K87:12).file("DataJson/SpecificationsPublishedDocumentBlobFields/"+String:C10($record.Spec))
 		If ($PublishedDocumentBlob.exists)

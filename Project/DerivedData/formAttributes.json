@@ -57,7 +57,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_customer": {
-			"timeStamp": "2025-07-08T10:37:02Z",
+			"timeStamp": "2025-07-11T14:50:23Z",
 			"destination": "detailScreen"
 		},
 		"panel_qcar": {
@@ -241,7 +241,7 @@
 			"destination": "detailScreen"
 		},
 		"_ga_Document": {
-			"timeStamp": "2025-07-08T10:37:02Z",
+			"timeStamp": "2025-07-11T14:50:23Z",
 			"destination": "detailScreen"
 		},
 		"panel_notificationType": {
@@ -249,7 +249,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_lot": {
-			"timeStamp": "2025-07-08T10:37:02Z",
+			"timeStamp": "2025-07-11T14:50:23Z",
 			"destination": "detailScreen"
 		},
 		"sfw_panel_counter": {
@@ -301,7 +301,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_equipment": {
-			"timeStamp": "2025-07-08T10:37:02Z",
+			"timeStamp": "2025-07-11T14:50:23Z",
 			"destination": "detailScreen"
 		},
 		"panel_job": {
@@ -313,7 +313,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_purchaseOrder": {
-			"timeStamp": "2025-07-08T10:37:02Z",
+			"timeStamp": "2025-07-11T14:50:23Z",
 			"destination": "detailScreen"
 		},
 		"sfw_main": {
@@ -368,8 +368,16 @@
 			"timeStamp": "2025-07-08T10:37:02Z",
 			"destination": "detailScreen"
 		},
+		"panel_AML": {
+			"timeStamp": "2025-07-11T14:50:23Z",
+			"destination": "detailScreen"
+		},
 		"sfw_bkgd_header_4lines": {
 			"timeStamp": "2025-07-08T10:37:02Z",
+			"destination": "detailScreen"
+		},
+		"_ga_uploadDocument": {
+			"timeStamp": "2025-07-11T14:50:23Z",
 			"destination": "detailScreen"
 		},
 		"panel_leadStage": {
@@ -386,6 +394,10 @@
 		},
 		"dfd_collection_editor": {
 			"timeStamp": "2025-07-08T10:37:02Z",
+			"destination": "detailScreen"
+		},
+		"_ga_subpanelInputCip": {
+			"timeStamp": "2025-07-11T14:50:23Z",
 			"destination": "detailScreen"
 		},
 		"selectStaff": {
@@ -445,7 +457,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_specification": {
-			"timeStamp": "2025-07-08T10:37:02Z",
+			"timeStamp": "2025-07-11T14:50:23Z",
 			"destination": "detailScreen"
 		},
 		"_ga_usageLogPreview": {
@@ -461,7 +473,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_continuousImprovement": {
-			"timeStamp": "2025-07-08T10:37:02Z",
+			"timeStamp": "2025-07-11T14:50:23Z",
 			"destination": "detailScreen"
 		},
 		"sfw_bkgd_header_2lines": {

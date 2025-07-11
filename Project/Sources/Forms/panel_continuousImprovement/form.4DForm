@@ -160,6 +160,14 @@
 		},
 		{
 			"objects": {
+				"Rectangle16": {
+					"type": "rectangle",
+					"top": 209,
+					"left": 173,
+					"width": 543,
+					"height": 23,
+					"stroke": "transparent"
+				},
 				"Rectangle17": {
 					"type": "rectangle",
 					"top": 450,
@@ -315,7 +323,7 @@
 					"type": "text",
 					"top": 249,
 					"left": 175,
-					"width": 300,
+					"width": 539,
 					"height": 17,
 					"stroke": "#000000",
 					"text": "Action items to Address Risks & Opportinuties  ",
@@ -401,10 +409,10 @@
 					"type": "text",
 					"top": 351,
 					"left": 175,
-					"width": 350,
+					"width": 539,
 					"height": 17,
 					"stroke": "#000000",
-					"text": "Non conformance/Complaint/Feedback/Itevm being addressed ",
+					"text": "Non conformance/Complaint/Feedback/Item being addressed ",
 					"fontWeight": "bold"
 				},
 				"label_0_8": {
@@ -950,20 +958,12 @@
 					"icon": "/RESOURCES/sfw/image/skin/rainbow/btn4states/edit-24x24.png",
 					"iconFrames": 4,
 					"method": "ObjectMethods/bResponsibleEdit.4dm"
-				},
-				"Rectangle16": {
-					"type": "rectangle",
-					"top": 209,
-					"left": 173,
-					"width": 543,
-					"height": 23,
-					"stroke": "transparent"
 				}
 			}
 		},
 		null
 	],
-	"geometryStamp": 353,
+	"geometryStamp": 359,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"editor": {
 		"activeView": "View 1",
