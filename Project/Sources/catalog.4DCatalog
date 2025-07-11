@@ -10,6 +10,7 @@
 		<field name="contactDetails" uuid="7B2BE752FE4343B1A18596793976CEBB" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
 		<field name="code" uuid="A0AA3A2CDD0F4B4C98340D8C3643BC81" type="10" limiting_length="255" never_null="true" id="6"/>
 		<field name="title" uuid="6A7FDC50467B441E8639D0536CFB133A" type="10" limiting_length="255" never_null="true" id="7"/>
+		<field name="UUID_Supplier" uuid="F9C51792B9078240AFF056E5A531503C" type="10" store_as_UUID="true" never_null="true" id="8"/>
 		<primary_key field_name="UUID" field_uuid="8EFDF2BE837542E3849ECB064F30C5BD"/>
 	</table>
 	<table name="Assumption" uuid="F74C797683A840F69C35777C0FF641E7" id="2">
@@ -1824,6 +1825,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="A9E8856FF5C9A641BF2CAE73D425114C" name_Nto1="Link_60" name_1toN="Link_60_return" state="1">
+		<related_field kind="source">
+			<field_ref uuid="F9C51792B9078240AFF056E5A531503C" name="UUID_Supplier">
+				<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="CFBA7599E861DC4A91A0C1B26781C297" name="UUID">
+				<table_ref uuid="A0C8CDC075BBB546914E03F7689B897E" name="Supplier"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="01619F9BF52940F3AFF8C52A4A82535D" type="3">
 		<field_ref uuid="951D3770910B43BBBFCAB95E4B3A1C65" name="UUID_Tool">
 			<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
@@ -2522,6 +2535,11 @@
 	<index kind="regular" uuid="E1AF2C1E50FF9B48B7E1243D38EB15A1" type="3">
 		<field_ref uuid="1FBF2EAB42691642930AB78E5C113913" name="UUID_Quote">
 			<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="E39CB52E9FDEBC43ADDF13F4477F622C" type="3">
+		<field_ref uuid="F9C51792B9078240AFF056E5A531503C" name="UUID_Supplier">
+			<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="E3FE6D69E136D048AE44F2672D4110DE" type="1">

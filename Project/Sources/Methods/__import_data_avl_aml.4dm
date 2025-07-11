@@ -1,6 +1,8 @@
 //%attributes = {"executedOnServer":true}
 
 
+var $eContact : cs:C1710.ContactEntity
+
 //PartData
 var $ePartData : cs:C1710.PartDataEntity
 
@@ -63,16 +65,119 @@ If ($supplier_log.exists)
 		$eSupplier.allowedLotProcessing:=$supplier.lot_processing_allowed
 		$eSupplier.webService:=$supplier.WebService
 		$eSupplier.auditRequired:=$supplier.Audit_Required
-		
-		//$eSupplier.contactDetails:=$supplier.TransFactorNumerator
-		
 		$eSupplier.deactivated:=$supplier.Deactivate
 		$eSupplier.lastAuditDate:=$supplier.Last_Audit_Date
 		$eSupplier.nextAuditDate:=$supplier.Next_Audit_Due
 		
+		$eSupplier.contactDetails:=New object:C1471()
+		$eSupplier.contactDetails.addresses:=New collection:C1472()
 		
+		$address:=New object:C1471()
+		$address.type:="main"
+		$address.detail:=New object:C1471()
+		$address.detail.country:="US"
+		$address.detail.street_1:=$supplier.Address1
+		If (String:C10($supplier.Address2)#"")
+			$address.detail.street_2:=$supplier.Address2
+		End if 
+		$address.detail.postcode:=$supplier.Zip
+		$address.detail.iso_code_2:="US"
+		$address.detail.city:=$supplier.Address3
+		$address.detail.state:=$supplier.State
+		$eSupplier.contactDetails.addresses.push($address)
+		
+		$address:=New object:C1471()
+		$address.type:="remit"
+		$address.detail:=New object:C1471()
+		$address.detail.country:="US"
+		$address.detail.street_1:=$supplier.remit_add1
+		If (String:C10($supplier.Address2)#"")
+			$address.detail.street_2:=$supplier.remit_add2
+		End if 
+		$address.detail.postcode:=$supplier.remit_zip
+		$address.detail.iso_code_2:="US"
+		$address.detail.city:=$supplier.remit_add3
+		$address.detail.state:=$supplier.remit_st
+		$eSupplier.contactDetails.addresses.push($address)
+		
+		
+		//Save the supplier
 		$res:=$eSupplier.save()
 		If (Not:C34($res.success))
+			TRACE:C157
+		End if 
+		
+		
+		//Primary contact
+		$eContact:=ds:C1482.Contact.new()
+		$eContact.UUID_Customer:=$eSupplier.UUID
+		$eContact.firstName:=$supplier.C1_first_name
+		$eContact.lastName:=$supplier.C1_last_name
+		$eContact.title:="Supplier"
+		
+		$eContact.contactDetails:=New object:C1471()
+		$eContact.contactDetails.addresses:=New collection:C1472()
+		
+		$eContact.contactDetails.communications:=New collection:C1472()
+		
+		$comm:=New object:C1471()
+		$comm.type:="phone"
+		$comm.comment:=""
+		$comm.contact:=$supplier.C1_tel
+		$eContact.contactDetails.communications.push($comm)
+		
+		$comm:=New object:C1471()
+		$comm.type:="fax"
+		$comm.comment:=""
+		$comm.contact:=$supplier.C1_fax
+		$eContact.contactDetails.communications.push($comm)
+		If ($supplier.C1_fax#"")
+			
+		End if 
+		$comm:=New object:C1471()
+		$comm.type:="mail"
+		$comm.comment:=""
+		$comm.contact:=$supplier.C1_Email
+		$eContact.contactDetails.communications.push($comm)
+		
+		$result:=$eContact.save()
+		If ($result.success=False:C215)
+			TRACE:C157
+		End if 
+		
+		
+		//Secondary contact
+		$eContact:=ds:C1482.Contact.new()
+		$eContact.UUID_Customer:=$eSupplier.UUID
+		$eContact.firstName:=$supplier.C2_first_name
+		$eContact.lastName:=$supplier.C2_last_name
+		$eContact.title:="Supplier"
+		
+		$eContact.contactDetails:=New object:C1471()
+		$eContact.contactDetails.addresses:=New collection:C1472()
+		
+		$eContact.contactDetails.communications:=New collection:C1472()
+		
+		$comm:=New object:C1471()
+		$comm.type:="phone"
+		$comm.comment:=""
+		$comm.contact:=$supplier.C2_tel
+		$eContact.contactDetails.communications.push($comm)
+		
+		$comm:=New object:C1471()
+		$comm.type:="fax"
+		$comm.comment:=""
+		$comm.contact:=$supplier.C2_fax
+		$eContact.contactDetails.communications.push($comm)
+		
+		$comm:=New object:C1471()
+		$comm.type:="mail"
+		$comm.comment:=""
+		$comm.contact:=$supplier.C2_Email
+		$eContact.contactDetails.communications.push($comm)
+		
+		$result:=$eContact.save()
+		If ($result.success=False:C215)
 			TRACE:C157
 		End if 
 		
