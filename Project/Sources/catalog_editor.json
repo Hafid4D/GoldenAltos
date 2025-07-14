@@ -508,10 +508,10 @@
 			"coordinates": {
 				"left": 1296,
 				"top": 686,
-				"width": 173.724609375,
-				"height": 292.33203125
+				"width": 188.29302978516,
+				"height": 331.21447753906
 			},
-			"displayable_fields_count": 11,
+			"displayable_fields_count": 13,
 			"fields_ordering": 1
 		},
 		"sfw_NotificationType": {
@@ -923,8 +923,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1156,
-				"top": 1298,
+				"left": 1167.6898193359,
+				"top": 1192.286895752,
 				"width": 365,
 				"height": 425.33203125
 			},
