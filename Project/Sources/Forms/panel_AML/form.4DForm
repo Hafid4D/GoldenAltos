@@ -35,7 +35,7 @@
 			"objects": {
 				"backgroundRectangle": {
 					"type": "rectangle",
-					"top": 118,
+					"top": 114,
 					"left": 0,
 					"width": 5000,
 					"height": 704,
@@ -762,7 +762,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 488,
+	"geometryStamp": 490,
 	"editor": {
 		"groups": {
 			"Group": [
