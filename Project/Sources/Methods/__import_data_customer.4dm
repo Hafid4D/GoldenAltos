@@ -163,28 +163,29 @@ If (True:C214)
 				$comm:=New object:C1471()
 				$comm.type:="phone"
 				$comm.comment:=""
-				$comm.phone:=$contact.Tel
+				$comm.contact:=$contact.Tel
 				$eContact.contactDetails.communications.push($comm)
 				
 				$comm:=New object:C1471()
 				$comm.type:="fax"
 				$comm.comment:=""
-				$comm.fax:=$contact.Fax
+				$comm.contact:=$contact.Fax
 				$eContact.contactDetails.communications.push($comm)
 				
 				$comm:=New object:C1471()
 				$comm.type:="mobile"
 				$comm.comment:=""
-				$comm.mobile:=$contact.MobileNum
+				$comm.contact:=$contact.MobileNum
 				$eContact.contactDetails.communications.push($comm)
 				
 				$comm:=New object:C1471()
 				$comm.type:="mail"
 				$comm.comment:=""
-				$comm.email:=$contact.Email_address
+				$comm.contact:=$contact.Email_address
 				$eContact.contactDetails.communications.push($comm)
 				
 				$eCustomer:=ds:C1482.Customer.query("name = :1"; $contact.Company_Name).first()
+				//Commented because causing duplication due to manual entry on the old system -  STILL NEED TO DECIDE ON WHAT TO DO
 /*
 If ($eCustomer=Null)
 $eCustomer:=ds.Customer.new()

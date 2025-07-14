@@ -799,9 +799,9 @@
 				"left": 3604,
 				"top": 984,
 				"width": 193,
-				"height": 482.33203125
+				"height": 617.33203125
 			},
-			"displayable_fields_count": 21
+			"displayable_fields_count": 27
 		},
 		"SpecControllingDept": {
 			"color": {
@@ -1596,8 +1596,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1297,
-				"top": 378,
+				"left": 1312,
+				"top": 348,
 				"width": 179.712890625,
 				"height": 301.33203125
 			},
@@ -1645,14 +1645,21 @@
 			"coordinates": {
 				"left": 692,
 				"top": 423,
-				"width": 149.015625,
-				"height": 196.33203125
+				"width": 166.015625,
+				"height": 225.33203125
 			},
-			"displayable_fields_count": 7,
-			"fields_ordering": 1
+			"displayable_fields_count": 8
 		}
 	},
 	"relations": {
+		"A9E8856FF5C9A641BF2CAE73D425114C": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"42BCCE20373BB84ABBBDF798B52E0EA3": {
 			"color": {
 				"red": 240,
