@@ -110,10 +110,10 @@ If ($supplier_log.exists)
 		
 		//Primary contact
 		$eContact:=ds:C1482.Contact.new()
-		$eContact.UUID_Customer:=$eSupplier.UUID
+		$eContact.UUID_Supplier:=$eSupplier.UUID
 		$eContact.firstName:=$supplier.C1_first_name
 		$eContact.lastName:=$supplier.C1_last_name
-		$eContact.title:="PSA"
+		$eContact.title:="PSC"
 		
 		$eContact.contactDetails:=New object:C1471()
 		$eContact.contactDetails.addresses:=New collection:C1472()
@@ -148,7 +148,7 @@ If ($supplier_log.exists)
 		
 		//Secondary contact
 		$eContact:=ds:C1482.Contact.new()
-		$eContact.UUID_Customer:=$eSupplier.UUID
+		$eContact.UUID_Supplier:=$eSupplier.UUID
 		$eContact.firstName:=$supplier.C2_first_name
 		$eContact.lastName:=$supplier.C2_last_name
 		$eContact.title:="SSC"
