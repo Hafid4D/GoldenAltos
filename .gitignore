@@ -4,7 +4,7 @@
 /userPreferences.*
 /*.4BK
 /backupHistory.json
-/Project/DerivedData
+/Project/DerivedData/*
 
 # System files
 .DS_Store
