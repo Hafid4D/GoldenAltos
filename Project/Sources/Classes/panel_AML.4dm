@@ -9,14 +9,12 @@ Function formMethod()
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		
-		This:C1470.LoadAllTabs()
 	End if 
 	
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
 				
-			: (FORM Get current page:C276(*)=2)
 				
 		End case 
 	End if 
@@ -28,8 +26,29 @@ Function formMethod()
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	
-	OBJECT SET VISIBLE:C603(*; "Rectangl@"; Not:C34(Form:C1466.sfw.checkIsInModification()))
+	This:C1470.supplierAddressDetails()
+	This:C1470.drawPup_approvedBy()
+	This:C1470.drawPup_empCode()
+	This:C1470.drawPup_inventoryUnit()
+	This:C1470.drawPup_procurementUnit()
+	This:C1470.drawPup_division()
+	This:C1470.drawPup_supplier()
+	
+	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
 	Form:C1466.sfw.drawHTab()
+	
+	
+	
+	
+Function supplierAddressDetails()
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.subFormAddress:=New object:C1471()
+		Form:C1466.subFormAddress.address:=Form:C1466.current_item.rebuildAddress()
+		Form:C1466.subFormAddress.situation:=OB Copy:C1225(Form:C1466.situation)
+		Form:C1466.subFormAddress.situation.mode:="view"
+		
+	End if 
+	
 	
 Function drawPup_XXX()
 	//This function updates the dropdown by displaying the name
@@ -40,5 +59,166 @@ Function pup_XXX()
 	//Create pop up menu
 	
 	
-Function LoadAllTabs()
+Function drawPup_supplier()
+	If (Form:C1466.current_item#Null:C1517)
+		$supplier:=ds:C1482.Supplier.query("UUID= :1"; Form:C1466.current_item.UUID_Supplier).first() || New object:C1471()
+		$supplierName:=$supplier.name
+		If ($supplierName=Null:C1517)
+			$supplierName:=""
+		End if 
+		$color:=""
+		$pathIcon:=""
+		Form:C1466.sfw.drawButtonPup("pup_supplier"; $supplierName; $pathIcon; ($supplier=Null:C1517))
+		
+	End if 
+	
+	
+Function pup_supplier()
+	//Create pop up menu
+	
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		OBJECT GET COORDINATES:C663(*; "pup_supplier"; $l; $t; $r; $b)
+		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
+		
+		$form:=New object:C1471(\
+			"colName"; "name"; \
+			"lb_items"; ds:C1482.Supplier.all(); \
+			"allData"; ds:C1482.Supplier.all(); \
+			"dataclass"; "Supplier"\
+			)
+		
+		$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b)
+		DIALOG:C40("selectNto1"; $form)
+		CLOSE WINDOW:C154($winRef)
+		
+		If (ok=1)
+			Form:C1466.current_item.UUID_Supplier:=$form.item.UUID
+			cs:C1710.panel_AML.me._activate_save_cancel_button()
+		End if 
+	End if 
+	
+	This:C1470.drawPup_supplier()
+	
+	
+	
+Function drawPup_approvedBy()
+	If (Form:C1466.current_item#Null:C1517)
+		$operator:=ds:C1482.Staff.query("code= :1"; Form:C1466.current_item.approvedBy).first() || New object:C1471()
+		$operatorCode:=$operator.code
+		If ($operatorCode=Null:C1517)
+			$operatorCode:=""
+		End if 
+		$color:=""
+		$pathIcon:=""
+		Form:C1466.sfw.drawButtonPup("pup_approvedBy"; $operatorCode; $pathIcon; ($operator=Null:C1517))
+		
+	End if 
+	
+	
+Function pup_approvedBy()
+	//Create pop up menu
+	
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		OBJECT GET COORDINATES:C663(*; "pup_approvedBy"; $l; $t; $r; $b)
+		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
+		
+		$form:=New object:C1471(\
+			"colName"; "code"; \
+			"lb_items"; ds:C1482.Staff.all(); \
+			"allData"; ds:C1482.Staff.all(); \
+			"dataclass"; "Staff"\
+			)
+		
+		$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b)
+		DIALOG:C40("selectNto1"; $form)
+		CLOSE WINDOW:C154($winRef)
+		
+		If (ok=1)
+			Form:C1466.current_item.approvedBy:=$form.item.code
+			cs:C1710.panel_AML.me._activate_save_cancel_button()
+		End if 
+	End if 
+	
+	This:C1470.drawPup_approvedBy()
+	
+	
+Function drawPup_empCode()
+	If (Form:C1466.current_item#Null:C1517)
+		$operator:=ds:C1482.Staff.query("code= :1"; Form:C1466.current_item.enteredBy).first() || New object:C1471()
+		$operatorCode:=$operator.code
+		If ($operatorCode=Null:C1517)
+			$operatorCode:=""
+		End if 
+		$color:=""
+		$pathIcon:=""
+		Form:C1466.sfw.drawButtonPup("pup_empCode"; $operatorCode; $pathIcon; ($operator=Null:C1517))
+		
+	End if 
+	
+	
+Function pup_empCode()
+	//Create pop up menu
+	
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		OBJECT GET COORDINATES:C663(*; "pup_approvedBy"; $l; $t; $r; $b)
+		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
+		
+		$form:=New object:C1471(\
+			"colName"; "code"; \
+			"lb_items"; ds:C1482.Staff.all(); \
+			"allData"; ds:C1482.Staff.all(); \
+			"dataclass"; "Staff"\
+			)
+		
+		$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b)
+		DIALOG:C40("selectNto1"; $form)
+		CLOSE WINDOW:C154($winRef)
+		
+		If (ok=1)
+			Form:C1466.current_item.enteredBy:=$form.item.code
+			cs:C1710.panel_AML.me._activate_save_cancel_button()
+		End if 
+	End if 
+	
+	This:C1470.drawPup_empCode()
+	
+	
+Function drawPup_inventoryUnit()
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.current_item.drowPup("Units"; "unitID"; "inventoryUnits"; "pup_inventoryUnit")
+	End if 
+	
+	
+Function pup_inventoryUnit()
+	//Create pop up menu
+	Form:C1466.current_item.pup("units"; "Units"; "unitID"; "inventoryUnits")
+	This:C1470.drawPup_inventoryUnit()
+	
+	
+Function drawPup_procurementUnit()
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.current_item.drowPup("Units"; "unitID"; "inventoryUnits"; "pup_procurementUnit")
+	End if 
+	
+	
+Function pup_procurementUnit()
+	//Create pop up menu
+	Form:C1466.current_item.pup("units"; "Units"; "unitID"; "procurementUnits")
+	This:C1470.drawPup_procurementUnit()
+	
+	
+Function drawPup_division()
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.current_item.drowPup("Division"; "divisionID"; "divisionID"; "pup_division")
+	End if 
+	
+	
+Function pup_division()
+	//Create pop up menu
+	Form:C1466.current_item.pup("divisions"; "Division"; "divisionID"; "divisionID")
+	This:C1470.drawPup_division()
+	
 	
