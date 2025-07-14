@@ -731,7 +731,7 @@
 							"footer": {
 								"name": "Footer3"
 							},
-							"dataSource": "This:C1470.contact.firstName"
+							"dataSource": "This:C1470.firstName"
 						},
 						{
 							"header": {
@@ -743,7 +743,7 @@
 							"footer": {
 								"name": "Footer1"
 							},
-							"dataSource": "This:C1470.contact.lastName",
+							"dataSource": "This:C1470.lastName",
 							"width": 147
 						},
 						{
