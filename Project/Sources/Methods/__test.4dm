@@ -19,6 +19,6 @@ $text:="   \r  "
 
 $text:=cs:C1710.Util.me.trim($text; [" "; "\r"])
 
-ALERT:C41("ok ok")
+ALERT:C41("ok ok-")
 
 
