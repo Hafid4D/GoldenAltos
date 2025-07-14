@@ -216,7 +216,7 @@ Function pup_priority()
 	//mark:Next Step
 Function drawPup_nextStep()
 	If (Form:C1466.current_item#Null:C1517)
-		$leadNextStep:=ds:C1482.LeadNextStep.query("nextStepID= :1"; Form:C1466.current_item.currentNextStep).first() || New object:C1471()
+		$leadNextStep:=Form:C1466.current_item.nextStep || New object:C1471()
 		$parts:=New collection:C1472($leadNextStep.code; $leadNextStep.name)
 		$leadNextStepName:=$parts.join(" - "; ck ignore null or empty:K85:5)
 		If ($leadNextStepName="")
@@ -254,8 +254,8 @@ Function pup_nextStep()
 		
 		Case of 
 			: ($choose#"")
-				$eLeadNextStep:=ds:C1482.LeadNextStep.get($choose)
-				Form:C1466.current_item.currentNextStep:=$eLeadNextStep.nextStepID
+				//$eLeadNextStep:=ds.LeadNextStep.get($choose)
+				Form:C1466.current_item.UUID_LeadNextStep:=$choose
 		End case 
 	End if 
 	This:C1470.drawPup_nextStep()

@@ -2,6 +2,7 @@
 
 //TRACE
 
+<<<<<<< HEAD
 $file:=Folder:C1567(fk data folder:K87:12).file("People_generated_1400.json")
 $names:=JSON Parse:C1218($file.getText())
 
@@ -15,3 +16,9 @@ For each ($e; $es)
 End for each 
 
 [Customer:114]
+=======
+$text:="   \r  "
+
+$text:=cs:C1710.Util.me.trim($text; [" "; "\r"])
+
+>>>>>>> Develop

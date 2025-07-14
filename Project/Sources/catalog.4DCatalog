@@ -10,6 +10,7 @@
 		<field name="contactDetails" uuid="7B2BE752FE4343B1A18596793976CEBB" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
 		<field name="code" uuid="A0AA3A2CDD0F4B4C98340D8C3643BC81" type="10" limiting_length="255" never_null="true" id="6"/>
 		<field name="title" uuid="6A7FDC50467B441E8639D0536CFB133A" type="10" limiting_length="255" never_null="true" id="7"/>
+		<field name="UUID_Supplier" uuid="F9C51792B9078240AFF056E5A531503C" type="10" store_as_UUID="true" never_null="true" id="8"/>
 		<primary_key field_name="UUID" field_uuid="8EFDF2BE837542E3849ECB064F30C5BD"/>
 	</table>
 	<table name="Assumption" uuid="F74C797683A840F69C35777C0FF641E7" id="2">
@@ -460,7 +461,7 @@
 		<field name="UUID_Quote" uuid="8E4BF5B27969464981C64AD7543BE951" type="10" store_as_UUID="true" never_null="true" id="15"/>
 		<field name="UUID_PurchaseOrder" uuid="66DD748CF2641D4DBD235BD1487914EF" type="10" store_as_UUID="true" never_null="true" id="16"/>
 		<field name="UUID_Job" uuid="CB7307EF402DB74B825760216604C54F" type="10" store_as_UUID="true" never_null="true" id="17"/>
-		<field name="currentNextStep" uuid="77AF3DA079C03A43BAD250289F15EF39" type="3" never_null="true" id="18"/>
+		<field name="UUID_LeadNextStep" uuid="77AF3DA079C03A43BAD250289F15EF39" type="10" store_as_UUID="true" never_null="true" id="18"/>
 		<primary_key field_name="UUID" field_uuid="B8409317F330EA438FDD41BD2DFC32A3"/>
 	</table>
 	<table name="ServiceType" uuid="2125F2FDC0CF8B44888965E43127D9B3" id="36">
@@ -570,7 +571,7 @@
 		<field name="makeInactive" uuid="D445F01B5559314888F81E2C17F03C44" type="1" never_null="true" id="10">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="comment" uuid="D40A49ADE8CEDF4EA8C93B3B2682F8EF" type="10" limiting_length="255" never_null="true" id="11">
+		<field name="comment" uuid="D40A49ADE8CEDF4EA8C93B3B2682F8EF" type="10" never_null="true" id="11">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="ourPartNum" uuid="9EDDF97B637DA94694E3BB63141A7E12" type="10" limiting_length="255" never_null="true" id="12"/>
@@ -582,6 +583,12 @@
 		<field name="transFactorDenominator" uuid="7A26A0AA1F41CF4792B36923D010C0AD" type="4" never_null="true" id="16"/>
 		<field name="minInventoryLevel" uuid="9B66A1318EE7BC489E2F0DC379313B3D" type="4" never_null="true" id="17"/>
 		<field name="UUID_PartData" uuid="E7C8FFEBD904E74EB339A34146F11671" type="10" store_as_UUID="true" never_null="true" id="18"/>
+		<field name="description" uuid="392A39234CFA9D44BE5D455EA435B8BC" type="10" never_null="true" id="19">
+			<field_extra multi_line="true"/>
+		</field>
+		<field name="approvedBy" uuid="66206A9C456E4B42A1A256C572E05B0E" type="10" limiting_length="255" never_null="true" id="20"/>
+		<field name="isApproved" uuid="CF4A58BB76CA9643BC2AE13AE3E91EA4" type="1" never_null="true" id="21"/>
+		<field name="approvalDate" uuid="5EC205F49069354E9F9AD6417AFA9C1C" type="8" never_null="true" id="22"/>
 		<primary_key field_name="UUID" field_uuid="87371A3102B02347880B2FF579DAE670"/>
 	</table>
 	<table name="Supplier" uuid="A0C8CDC075BBB546914E03F7689B897E" id="47">
@@ -589,7 +596,7 @@
 		<field name="name" uuid="1D7BBD937086184FA34B8CBC13CDDEF8" type="10" limiting_length="255" never_null="true" id="2"/>
 		<field name="code" uuid="145C3BD9010E0F44BF6F221E19880D39" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="divisionID" uuid="C611DBD77DE39740B2867FB557D91AC2" type="3" never_null="true" id="4"/>
-		<field name="disqualified" uuid="C589EEF44C5A344789E4CDA7015CD128" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="disqualified" uuid="C589EEF44C5A344789E4CDA7015CD128" type="1" never_null="true" id="5"/>
 		<field name="enteredBy" uuid="C318999D07234A4C9EE9D5666BB534FE" type="10" limiting_length="255" never_null="true" id="6">
 			<field_extra multi_line="false"/>
 		</field>
@@ -1782,6 +1789,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="754F3BE1B35C45268B23604F04D7BD37" name_Nto1="nextStep" name_1toN="leads" state="1">
+		<related_field kind="source">
+			<field_ref uuid="77AF3DA079C03A43BAD250289F15EF39" name="UUID_LeadNextStep">
+				<table_ref uuid="1E733AC1BDB87C40B151040C49BD164B" name="Lead"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="99E1A49B9010EC458423F8D8D2A94E3A" name="UUID">
+				<table_ref uuid="D96F66F181815C4C8B54C0F2DB6B1B1A" name="LeadNextStep"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<relation uuid="C4A8CC154AD81D4D986804038C278648" name_Nto1="Link_57" name_1toN="Link_57_return" state="1">
 		<related_field kind="source">
 			<field_ref uuid="1FBF2EAB42691642930AB78E5C113913" name="UUID_Quote">
@@ -1815,6 +1834,18 @@
 		<related_field kind="destination">
 			<field_ref uuid="C1A74BC4B22D5045AF2DB98046B4965F" name="UUID">
 				<table_ref uuid="68D645D2E1989F4CA36E905F914AD868" name="PartData"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="A9E8856FF5C9A641BF2CAE73D425114C" name_Nto1="Link_60" name_1toN="Link_60_return" state="1">
+		<related_field kind="source">
+			<field_ref uuid="F9C51792B9078240AFF056E5A531503C" name="UUID_Supplier">
+				<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="CFBA7599E861DC4A91A0C1B26781C297" name="UUID">
+				<table_ref uuid="A0C8CDC075BBB546914E03F7689B897E" name="Supplier"/>
 			</field_ref>
 		</related_field>
 	</relation>
@@ -2458,6 +2489,11 @@
 			<table_ref uuid="0846217DF6043D4ABB7910378EBDF68A" name="CustomerEvent"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="D0254C39FCF241A88735E64AFED1FC64" type="3">
+		<field_ref uuid="77AF3DA079C03A43BAD250289F15EF39" name="UUID_LeadNextStep">
+			<table_ref uuid="1E733AC1BDB87C40B151040C49BD164B" name="Lead"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="D4CC8B0748494261824D0B7ABD37C4BD" type="1">
 		<field_ref uuid="5D20BF5E221E4AB5AA75260DDD551A9D" name="UUID">
 			<table_ref uuid="05967663C56F44398D96379354ABCC89" name="sfw_Setting"/>
@@ -2516,6 +2552,11 @@
 	<index kind="regular" uuid="E1AF2C1E50FF9B48B7E1243D38EB15A1" type="3">
 		<field_ref uuid="1FBF2EAB42691642930AB78E5C113913" name="UUID_Quote">
 			<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="E39CB52E9FDEBC43ADDF13F4477F622C" type="3">
+		<field_ref uuid="F9C51792B9078240AFF056E5A531503C" name="UUID_Supplier">
+			<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="E3FE6D69E136D048AE44F2672D4110DE" type="1">
