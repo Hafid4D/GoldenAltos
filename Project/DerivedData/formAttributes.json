@@ -14,7 +14,6 @@
 		},
 		"panel_currency": {
 			"timeStamp": "2025-07-08T10:37:02Z",
-<<<<<<< HEAD
 			"destination": "detailScreen"
 		},
 		"sfw_vTabBar": {
@@ -82,7 +81,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_lead": {
-			"timeStamp": "2025-07-14T11:19:52Z",
+			"timeStamp": "2025-07-14T14:28:21Z",
 			"destination": "detailScreen"
 		},
 		"sfw_panel_default": {
@@ -130,121 +129,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_supplier": {
-			"timeStamp": "2025-07-14T11:24:30Z",
-=======
-			"destination": "detailScreen"
-		},
-		"sfw_vTabBar": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"createPoLine": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"_ga_StickerSelectionList": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"zzzEmail": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"sfw_entryTBPup": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"sfw_globalSearch": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"sfw_dial_alert": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"selectJob": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"sfw_bkgd_header_1lines": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"panel_quote": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"panel_customer": {
-			"timeStamp": "2025-07-11T14:50:23Z",
-			"destination": "detailScreen"
-		},
-		"panel_qcar": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"panel_stepTemplate": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"searchOnList_v2": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"sfw_subpanel_schedule": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"panel_punchIn": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"panel_lead": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"sfw_panel_default": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"dfd_panel_picture": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"sfw_main_new": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"_ga_calendar": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"_ga_staffsPerTeam": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"Form1": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"sfw_dial_CreateRenounceContinue": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"panel_contact": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"sfw_user_newPassword": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"__test": {
-			"timeStamp": "2025-07-08T10:37:02Z",
-			"destination": "detailScreen"
-		},
-		"sfw_eventPalette1": {
-			"timeStamp": "2025-07-08T10:37:02Z",
->>>>>>> Develop
+			"timeStamp": "2025-07-14T14:28:21Z",
 			"destination": "detailScreen"
 		},
 		"dfd_panel_template": {
@@ -488,7 +373,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_AML": {
-			"timeStamp": "2025-07-11T14:50:23Z",
+			"timeStamp": "2025-07-14T14:28:21Z",
 			"destination": "detailScreen"
 		},
 		"sfw_bkgd_header_4lines": {

@@ -25,10 +25,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLinkManyToOneToTrackInModificationEvent("LeadNextStep"; "UUID_LeadNextStep"; "nextStep.name")
 	
 	
-
+	
+	
 	$entry.activateComment()
 	
-
 	$entry.setValidationRule("UUID_Staff"; ""; "UUIDNotNull"; "message:The staff must be defined")
 	$entry.setValidationRule("UUID_Customer"; ""; "UUIDNotNull"; "message:The customer must be defined")
 	$entry.setValidationRule("dateCreation"; "entryField_dateCreation"; "mandatory")

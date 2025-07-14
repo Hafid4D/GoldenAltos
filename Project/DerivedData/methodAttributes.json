@@ -22,11 +22,7 @@
 			"timeStamp": "2025-07-08T10:37:02Z"
 		},
 		"__test": {
-<<<<<<< HEAD
-			"timeStamp": "2025-07-14T11:24:04Z"
-=======
-			"timeStamp": "2025-07-11T14:47:00Z"
->>>>>>> Develop
+			"timeStamp": "2025-07-14T14:28:21Z"
 		},
 		"dfd_Template_lineInRulers": {
 			"timeStamp": "2025-07-08T10:37:02Z"
@@ -143,11 +139,7 @@
 			"timeStamp": "2025-07-08T10:37:02Z"
 		},
 		"__import_data_customer": {
-<<<<<<< HEAD
-			"timeStamp": "2025-07-14T11:24:30Z",
-=======
-			"timeStamp": "2025-07-11T14:50:23Z",
->>>>>>> Develop
+			"timeStamp": "2025-07-14T14:28:21Z",
 			"attributes": {
 				"executedOnServer": true
 			}
@@ -219,7 +211,7 @@
 			"timeStamp": "2025-07-08T10:37:02Z"
 		},
 		"__import_data_avl_aml": {
-			"timeStamp": "2025-07-11T14:50:23Z",
+			"timeStamp": "2025-07-14T14:28:21Z",
 			"attributes": {
 				"executedOnServer": true
 			}
