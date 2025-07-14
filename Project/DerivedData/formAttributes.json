@@ -81,7 +81,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_lead": {
-			"timeStamp": "2025-07-14T11:19:52Z",
+			"timeStamp": "2025-07-14T14:28:21Z",
 			"destination": "detailScreen"
 		},
 		"sfw_panel_default": {
@@ -129,7 +129,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_supplier": {
-			"timeStamp": "2025-07-14T11:24:30Z",
+			"timeStamp": "2025-07-14T14:28:21Z",
 			"destination": "detailScreen"
 		},
 		"dfd_panel_template": {
@@ -373,7 +373,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_AML": {
-			"timeStamp": "2025-07-14T11:24:30Z",
+			"timeStamp": "2025-07-14T14:28:21Z",
 			"destination": "detailScreen"
 		},
 		"sfw_bkgd_header_4lines": {
