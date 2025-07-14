@@ -41,18 +41,26 @@ Function formMethod()
 	End if 
 	
 Function loadContacts()
-	Form:C1466.contact:=Null:C1517
-	Form:C1466.contact_position:=0
+	var $e_mainContact : cs:C1710.ContactEntity
+	var $secondaryContacts : cs:C1710.ContactSelection
+	
 	Form:C1466.lb_contacts:=New collection:C1472()
-	If (Form:C1466.current_item.moreData.secondaryContacts#Null:C1517)
-		$contacts:=ds:C1482.Contact.query("UUID in :1"; Form:C1466.current_item.moreData.secondaryContacts.extract("UUID")) || New collection:C1472()
-		For each ($e; $contacts)
-			Form:C1466.lb_contacts.unshift({contact: $e; type: "Secondary"})
-		End for each 
+	If (Form:C1466.current_item.moreData#Null:C1517) && (Form:C1466.current_item.moreData.mainContact#Null:C1517)
+		$e_mainContact:=ds:C1482.Contact.get(Form:C1466.current_item.moreData.mainContact.UUID)
+		If ($e_mainContact#Null:C1517)
+			$mainContact:=$e_mainContact.toObject()
+			$mainContact.type:="Main"
+			Form:C1466.lb_contacts.push($mainContact)
+		End if 
 	End if 
-	If (Form:C1466.current_item.moreData.mainContact#Null:C1517)
-		$contact:=ds:C1482.Contact.get(Form:C1466.current_item.moreData.mainContact)
-		Form:C1466.lb_contacts.unshift({contact: $contact; type: "Main"})
+	
+	If (Form:C1466.current_item.moreData#Null:C1517) && (Form:C1466.current_item.moreData.secondaryContacts#Null:C1517)
+		$secondaryContacts:=ds:C1482.Contact.query("UUID in :1"; Form:C1466.current_item.moreData.secondaryContacts)
+		For each ($e_contact; $secondaryContacts)
+			$contact:=$e_contact.toObject()
+			$contact.type:="Secondary"
+			Form:C1466.lb_contacts.push($contact)
+		End for each 
 	End if 
 	
 	
@@ -278,6 +286,8 @@ Function selectCustomer()
 					Form:C1466.current_item.UUID_Customer:=$form.item.UUID
 					Form:C1466.current_item.deal:=True:C214
 					Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+					Form:C1466.current_item.moreData:=New object:C1471()
+					This:C1470.loadContacts()
 				End if 
 		End case 
 	End if 
@@ -502,110 +512,119 @@ Function btnDatePickerClose()
 	
 Function btnActionContacts()
 	//mark: better code 
-	$refMenus:=New collection:C1472()
 	$refMenu:=Create menu:C408()
 	
-	$refMenus.push($refMenu)
-	If (Form:C1466.sfw.checkIsInModification())
-		
-		$refMenuExistingContracts:=Create menu:C408()
-		$refMenus.push($refMenuExistingContracts)
-		
-		$uuidContacts:=Form:C1466.current_item.moreData.secondaryContacts.extract("UUID") || New collection:C1472()
-		If (Form:C1466.current_item.moreData.mainContact#Null:C1517)
-			$uuidContacts.push(Form:C1466.current_item.moreData.mainContact)
-		End if 
-		$refMenuContract:=Form:C1466.current_item.customer.contacts.query("not(UUID in :1)"; $uuidContacts).toCollection()
-		
-		For each ($contract; $refMenuContract)
-			APPEND MENU ITEM:C411($refMenuExistingContracts; $contract.fullName; *)
-			SET MENU ITEM PARAMETER:C1004($refMenuExistingContracts; -1; "contact:"+$contract.UUID)
-		End for each 
-		
-		If ($refMenuContract.length#0)
-			APPEND MENU ITEM:C411($refMenu; "Add Contact"; $refMenuExistingContracts; *)
-		Else 
-			APPEND MENU ITEM:C411($refMenu; "Add Contact"; *)
-			DISABLE MENU ITEM:C150($refMenu; -1)
-		End if 
-		
-	Else 
-		APPEND MENU ITEM:C411($refMenu; "Add Contact"; *)
+	APPEND MENU ITEM:C411($refMenu; "Add main contact"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--addMainContact")
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
 		DISABLE MENU ITEM:C150($refMenu; -1)
 	End if 
 	
-	APPEND MENU ITEM:C411($refMenu; "Delete a contact"; *)
-	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--drop")
+	APPEND MENU ITEM:C411($refMenu; "Add secondary contact"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--addSeconaryContact")
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	APPEND MENU ITEM:C411($refMenu; "Delete contact"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--deleteContact")
 	If (Not:C34(Form:C1466.sfw.checkIsInModification())) || (Form:C1466.contact=Null:C1517)
 		DISABLE MENU ITEM:C150($refMenu; -1)
 	End if 
 	
-	
-	
-	
 	$choice:=Dynamic pop up menu:C1006($refMenu)
-	For each ($refMenu; $refMenus)
-		RELEASE MENU:C978($refMenu)
-	End for each 
+	RELEASE MENU:C978($refMenu)
 	
 	
 	
 	Case of 
 		: ($choice="")
 			
-		: ($choice="contact:@")
+		: ($choice="--addMainContact")
+			$uuids:=New collection:C1472()
+			If (Form:C1466.current_item.moreData#Null:C1517) && (Form:C1466.current_item.moreData.mainContact#Null:C1517)
+				$uuids.push(Form:C1466.current_item.moreData.mainContact.UUID)
+			End if 
+			If (Form:C1466.current_item.moreData#Null:C1517) && (Form:C1466.current_item.moreData.secondaryContacts#Null:C1517)
+				$uuids:=$uuids.concat(Form:C1466.current_item.moreData.secondaryContacts)
+			End if 
 			
-			$UUID_Contact:=Substring:C12($choice; 9)
-			$eContact:=ds:C1482.Contact.get($UUID_Contact)
+			$form:=New object:C1471()
+			$form.lb_contacts:=ds:C1482.Contact.query("customer.leads.UUID == :1 and not(UUID in :2)"; Form:C1466.current_item.UUID; $uuids)
+			$ref:=Open form window:C675("Lead_chooseMainContact"; Sheet form window:K39:12)
+			DIALOG:C40("Lead_chooseMainContact"; $form)
+			CLOSE WINDOW:C154($ref)
 			
-			If (Form:C1466.current_item.moreData.mainContact=Null:C1517)
-				Form:C1466.current_item.moreData.mainContact:=$UUID_Contact
-				$type:="Main"
-			Else 
+			If (ok=1)
+				If (Form:C1466.current_item.moreData=Null:C1517)
+					Form:C1466.current_item.moreData:=New object:C1471()
+				End if 
+				
+				If (Form:C1466.current_item.moreData.mainContact=Null:C1517)
+					Form:C1466.current_item.moreData.mainContact:=New object:C1471()
+				End if 
+				
+				Form:C1466.current_item.moreData.mainContact:={UUID: $form.current_contact.UUID}
+				This:C1470.loadContacts()
+				cs:C1710.panel_lead.me._activate_save_cancel_button()
+			End if 
+			
+		: ($choice="--addSeconaryContact")
+			$uuids:=New collection:C1472()
+			If (Form:C1466.current_item.moreData#Null:C1517) && (Form:C1466.current_item.moreData.mainContact#Null:C1517)
+				$uuids.push(Form:C1466.current_item.moreData.mainContact.UUID)
+			End if 
+			If (Form:C1466.current_item.moreData#Null:C1517) && (Form:C1466.current_item.moreData.secondaryContacts#Null:C1517)
+				$uuids:=$uuids.concat(Form:C1466.current_item.moreData.secondaryContacts)
+			End if 
+			
+			$form:=New object:C1471()
+			$form.lb_contacts:=ds:C1482.Contact.query("customer.leads.UUID == :1 and not(UUID in :2)"; Form:C1466.current_item.UUID; $uuids).toCollection()
+			For each ($contact; $form.lb_contacts)
+				$contact.selected:=False:C215
+			End for each 
+			
+			$ref:=Open form window:C675("Lead_chooseSecondaryContacts"; Sheet form window:K39:12)
+			DIALOG:C40("Lead_chooseSecondaryContacts"; $form)
+			CLOSE WINDOW:C154($ref)
+			
+			If (ok=1)
+				If (Form:C1466.current_item.moreData=Null:C1517)
+					Form:C1466.current_item.moreData:=New object:C1471()
+				End if 
+				
 				If (Form:C1466.current_item.moreData.secondaryContacts=Null:C1517)
 					Form:C1466.current_item.moreData.secondaryContacts:=New collection:C1472()
 				End if 
-				Form:C1466.current_item.moreData.secondaryContacts.push({UUID: $UUID_Contact})
-				$type:="Secondary"
-				$conts:=Form:C1466.current_item.moreData.secondaryContacts
-				$conts:=$conts.distinct("UUID")
-				$newcollection:=New collection:C1472()
-				For each ($e; $conts)
-					$newcollection.push({UUID: $e})
+				
+				For each ($contact; $form.lb_contacts)
+					If ($contact.selected)
+						Form:C1466.current_item.moreData.secondaryContacts.push($contact.UUID)
+					End if 
 				End for each 
-				Form:C1466.current_item.moreData.secondaryContacts:=New collection:C1472()
-				Form:C1466.current_item.moreData.secondaryContacts:=$newcollection
+				
+				This:C1470.loadContacts()
+				cs:C1710.panel_lead.me._activate_save_cancel_button()
 			End if 
 			
 			
-			Form:C1466.lb_contacts.push({contact: $eContact; type: $type})
-			Form:C1466.lb_contacts:=Form:C1466.lb_contacts
-			Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+		: ($choice="--deleteContact")
 			
-		: ($choice="--drop")
-			
-			If (Form:C1466.contact_position=1) && (Form:C1466.current_item.moreData.mainContact=Form:C1466.contact.contact.UUID)
+			If (Form:C1466.contact.type="Main")
 				Form:C1466.current_item.moreData.mainContact:=Null:C1517
 			Else 
-				
-				$conts:=Form:C1466.current_item.moreData.secondaryContacts
-				$index:=$conts.indexOf(Form:C1466.contact.contact.UUID)
-				$conts.remove($index-1)
-				$conts:=$conts.distinct("UUID")
-				$newcollection:=New collection:C1472()
-				For each ($e; $conts)
-					$newcollection.push({UUID: $e})
-				End for each 
-				Form:C1466.current_item.moreData.secondaryContacts:=New collection:C1472()
-				Form:C1466.current_item.moreData.secondaryContacts:=$newcollection
+				$index:=Form:C1466.current_item.moreData.secondaryContacts.indexOf(Form:C1466.contact.UUID)
+				If ($indexOf#-1)
+					Form:C1466.current_item.moreData.secondaryContacts.remove($index)
+				End if 
 			End if 
-			
-			Form:C1466.lb_contacts.remove(Form:C1466.contact_position-1)
-			Form:C1466.lb_contacts:=Form:C1466.lb_contacts
-			Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+			This:C1470.loadContacts()
+			cs:C1710.panel_lead.me._activate_save_cancel_button()
 	End case 
 	
 	
+Function _activate_save_cancel_button()
+	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
 	
 	
 	

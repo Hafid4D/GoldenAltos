@@ -81,7 +81,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_lead": {
-			"timeStamp": "2025-07-08T10:37:02Z",
+			"timeStamp": "2025-07-14T15:24:36Z",
 			"destination": "detailScreen"
 		},
 		"sfw_panel_default": {
@@ -126,6 +126,10 @@
 		},
 		"sfw_eventPalette1": {
 			"timeStamp": "2025-07-08T10:37:02Z",
+			"destination": "detailScreen"
+		},
+		"panel_supplier": {
+			"timeStamp": "2025-07-14T15:24:36Z",
 			"destination": "detailScreen"
 		},
 		"dfd_panel_template": {
@@ -288,6 +292,10 @@
 			"timeStamp": "2025-07-08T10:37:02Z",
 			"destination": "detailScreen"
 		},
+		"Lead_chooseMainContact": {
+			"timeStamp": "2025-07-14T15:24:36Z",
+			"destination": "detailScreen"
+		},
 		"createStepInterruption_punchIn": {
 			"timeStamp": "2025-07-08T10:37:02Z",
 			"destination": "detailScreen"
@@ -369,7 +377,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_AML": {
-			"timeStamp": "2025-07-11T14:50:23Z",
+			"timeStamp": "2025-07-14T15:24:36Z",
 			"destination": "detailScreen"
 		},
 		"sfw_bkgd_header_4lines": {
@@ -426,6 +434,10 @@
 		},
 		"createPoLine_job": {
 			"timeStamp": "2025-07-08T10:37:02Z",
+			"destination": "detailScreen"
+		},
+		"Lead_chooseSecondaryContacts": {
+			"timeStamp": "2025-07-14T15:24:36Z",
 			"destination": "detailScreen"
 		},
 		"sfw_wizard_scheduler": {
