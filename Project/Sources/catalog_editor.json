@@ -1602,10 +1602,10 @@
 			"coordinates": {
 				"left": 692,
 				"top": 423,
-				"width": 166.015625,
-				"height": 225.33203125
+				"width": 175.015625,
+				"height": 300.33203125
 			},
-			"displayable_fields_count": 8
+			"displayable_fields_count": 12
 		}
 	},
 	"relations": {

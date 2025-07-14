@@ -1,8 +1,6 @@
 Class extends DataClass
 
 
-
-
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	//Mark: entry : Equipment
 	$entry:=cs:C1710.sfw_definitionEntry.new("AVL"; ["qualityAssistance"]; "AVL")
