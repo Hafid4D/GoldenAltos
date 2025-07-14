@@ -596,7 +596,7 @@
 		<field name="name" uuid="1D7BBD937086184FA34B8CBC13CDDEF8" type="10" limiting_length="255" never_null="true" id="2"/>
 		<field name="code" uuid="145C3BD9010E0F44BF6F221E19880D39" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="divisionID" uuid="C611DBD77DE39740B2867FB557D91AC2" type="3" never_null="true" id="4"/>
-		<field name="disqualified" uuid="C589EEF44C5A344789E4CDA7015CD128" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="disqualified" uuid="C589EEF44C5A344789E4CDA7015CD128" type="1" never_null="true" id="5"/>
 		<field name="enteredBy" uuid="C318999D07234A4C9EE9D5666BB534FE" type="10" limiting_length="255" never_null="true" id="6">
 			<field_extra multi_line="false"/>
 		</field>
