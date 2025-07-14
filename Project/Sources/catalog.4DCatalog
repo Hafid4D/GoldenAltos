@@ -1849,6 +1849,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="A9E8856FF5C9A641BF2CAE73D425114C" name_Nto1="Link_60" name_1toN="Link_60_return" state="1">
+		<related_field kind="source">
+			<field_ref uuid="F9C51792B9078240AFF056E5A531503C" name="UUID_Supplier">
+				<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="CFBA7599E861DC4A91A0C1B26781C297" name="UUID">
+				<table_ref uuid="A0C8CDC075BBB546914E03F7689B897E" name="Supplier"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="01619F9BF52940F3AFF8C52A4A82535D" type="3">
 		<field_ref uuid="951D3770910B43BBBFCAB95E4B3A1C65" name="UUID_Tool">
 			<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
