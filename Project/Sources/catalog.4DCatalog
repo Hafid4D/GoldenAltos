@@ -1789,42 +1789,6 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="1A660DE84F90438D8AD948895FB5BFC3" name_Nto1="lead" name_1toN="leadEvents" state="1">
-		<related_field kind="source">
-			<field_ref uuid="BDBCA6C34CC841A5A1A7AB3FD751B91A" name="UUID_Lead">
-				<table_ref uuid="E73BE77C242C4D439E33FD6C38DA96FB" name="LeadEvent"/>
-			</field_ref>
-		</related_field>
-		<related_field kind="destination">
-			<field_ref uuid="B8409317F330EA438FDD41BD2DFC32A3" name="UUID">
-				<table_ref uuid="1E733AC1BDB87C40B151040C49BD164B" name="Lead"/>
-			</field_ref>
-		</related_field>
-	</relation>
-	<relation uuid="178204FE24244CF0B1F093EC96E62BE3" name_Nto1="eventType" name_1toN="leadEvents" state="1">
-		<related_field kind="source">
-			<field_ref uuid="6BD6FD61F2E14A8B9EE91F46803A00DD" name="UUID_EventType">
-				<table_ref uuid="E73BE77C242C4D439E33FD6C38DA96FB" name="LeadEvent"/>
-			</field_ref>
-		</related_field>
-		<related_field kind="destination">
-			<field_ref uuid="AEE9BE0296924CA7899B7E5DB37ACE13" name="UUID">
-				<table_ref uuid="C482A0FBAE724304A8E05A0570FD55D6" name="sfw_EventType"/>
-			</field_ref>
-		</related_field>
-	</relation>
-	<relation uuid="19AC57227D1946EEA9F94B4D8B9AF6A7" name_Nto1="user" name_1toN="leadEvents" state="1">
-		<related_field kind="source">
-			<field_ref uuid="5F5ECF0FC240406EB72F7BD5EECB04A5" name="UUID_User">
-				<table_ref uuid="E73BE77C242C4D439E33FD6C38DA96FB" name="LeadEvent"/>
-			</field_ref>
-		</related_field>
-		<related_field kind="destination">
-			<field_ref uuid="34E9F9D48BE14DCD95127852F83BF1FB" name="UUID">
-				<table_ref uuid="2C75E07E18FC4733A8C98A0B31D40656" name="sfw_User"/>
-			</field_ref>
-		</related_field>
-	</relation>
 	<relation uuid="754F3BE1B35C45268B23604F04D7BD37" name_Nto1="nextStep" name_1toN="leads" state="1">
 		<related_field kind="source">
 			<field_ref uuid="77AF3DA079C03A43BAD250289F15EF39" name="UUID_LeadNextStep">
