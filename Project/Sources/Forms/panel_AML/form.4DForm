@@ -35,11 +35,11 @@
 			"objects": {
 				"backgroundRectangle": {
 					"type": "rectangle",
-					"top": 114,
-					"left": 1,
+					"top": 118,
+					"left": 0,
 					"width": 5000,
 					"height": 704,
-					"fill": "#B1CFDE",
+					"fill": "#E3E3E3",
 					"strokeWidth": 0,
 					"stroke": "#FFFFFF"
 				},
@@ -54,24 +54,6 @@
 					"right": 190,
 					"fontWeight": "bold",
 					"textAlign": "right"
-				},
-				"entryField_supplier": {
-					"type": "input",
-					"top": 12,
-					"left": 204,
-					"width": 300,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.supplier.name",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "normal"
 				},
 				"label_internalPartNum": {
 					"type": "text",
@@ -133,126 +115,50 @@
 					"dataSource": "Form:C1466.current_item.service",
 					"fontWeight": "normal",
 					"dataSourceTypeHint": "boolean"
+				},
+				"pup_supplier": {
+					"type": "button",
+					"top": 7,
+					"left": 204,
+					"width": 300,
+					"height": 26,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_supplier.4dm",
+					"events": [
+						"onClick"
+					],
+					"right": 504,
+					"fontWeight": "normal",
+					"textAlign": "left"
 				}
 			}
 		},
 		{
 			"objects": {
-				"boundRectangle": {
-					"type": "rectangle",
-					"top": 495,
-					"left": 15,
-					"width": 655,
-					"height": 37,
-					"stroke": "#FFFFFF",
-					"fill": "transparent",
-					"strokeWidth": 1,
-					"visibility": "hidden",
-					"bottom": 532
-				},
-				"Rectangle14": {
-					"type": "rectangle",
-					"top": 452,
-					"left": 507,
-					"width": 156,
-					"height": 23,
-					"stroke": "transparent",
-					"right": 663
-				},
-				"Rectangle9": {
-					"type": "rectangle",
-					"top": 365,
-					"left": 507,
-					"width": 72,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle8": {
-					"type": "rectangle",
-					"top": 365,
-					"left": 427,
-					"width": 72,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle7": {
-					"type": "rectangle",
-					"top": 402,
-					"left": 427,
-					"width": 72,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle6": {
-					"type": "rectangle",
-					"top": 402,
-					"left": 203,
-					"width": 72,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle5": {
-					"type": "rectangle",
-					"top": 365,
-					"left": 203,
-					"width": 72,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle4": {
-					"type": "rectangle",
-					"top": 197,
-					"left": 203,
-					"width": 460,
-					"height": 23,
-					"stroke": "transparent",
-					"right": 663
-				},
-				"Rectangle3": {
-					"type": "rectangle",
-					"top": 234,
-					"left": 203,
-					"width": 460,
-					"height": 23,
-					"stroke": "transparent",
-					"right": 663
-				},
-				"Rectangle1": {
-					"type": "rectangle",
-					"top": 273,
-					"left": 203,
-					"width": 460,
-					"height": 48,
-					"stroke": "transparent",
-					"right": 663,
-					"bottom": 321
-				},
-				"Rectangle2": {
-					"type": "rectangle",
-					"top": 138,
-					"left": 203,
-					"width": 460,
-					"height": 43,
-					"stroke": "transparent",
-					"right": 663
-				},
 				"label_vendorPartNum": {
 					"type": "text",
-					"top": 139,
-					"left": 15,
+					"top": 153,
+					"left": 22,
 					"width": 175,
 					"height": 17,
 					"stroke": "#000000",
-					"text": "Internal PartNum",
-					"bottom": 156,
-					"right": 190,
+					"text": "Vendor PartNum",
+					"bottom": 170,
+					"right": 197,
 					"fontWeight": "bold",
 					"textAlign": "right"
 				},
 				"entryField_vendorPartnum": {
 					"type": "input",
-					"top": 139,
-					"left": 204,
+					"top": 153,
+					"left": 211,
 					"width": 458,
 					"height": 41,
 					"dataSource": "Form:C1466.current_item.vendorPartnum",
@@ -267,13 +173,13 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 180,
-					"right": 662
+					"bottom": 194,
+					"right": 669
 				},
 				"label_0_2": {
 					"type": "text",
-					"top": 200,
-					"left": 15,
+					"top": 214,
+					"left": 22,
 					"width": 175,
 					"height": 17,
 					"stroke": "#000000",
@@ -283,8 +189,8 @@
 				},
 				"entryField_revision": {
 					"type": "input",
-					"top": 200,
-					"left": 204,
+					"top": 214,
+					"left": 211,
 					"width": 458,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.serviceType",
@@ -299,13 +205,13 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 217,
-					"right": 662
+					"bottom": 231,
+					"right": 669
 				},
 				"label_0_3": {
 					"type": "text",
-					"top": 237,
-					"left": 15,
+					"top": 251,
+					"left": 22,
 					"width": 175,
 					"height": 17,
 					"stroke": "#000000",
@@ -315,8 +221,8 @@
 				},
 				"entryField_comment": {
 					"type": "input",
-					"top": 274,
-					"left": 204,
+					"top": 288,
+					"left": 211,
 					"width": 458,
 					"height": 46,
 					"dataSource": "Form:C1466.current_item.comment",
@@ -331,13 +237,13 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 320,
-					"right": 662
+					"bottom": 334,
+					"right": 669
 				},
 				"label_0_4": {
 					"type": "text",
-					"top": 274,
-					"left": 15,
+					"top": 288,
+					"left": 22,
 					"width": 175,
 					"height": 17,
 					"stroke": "#000000",
@@ -347,8 +253,8 @@
 				},
 				"entryField_description": {
 					"type": "input",
-					"top": 237,
-					"left": 204,
+					"top": 251,
+					"left": 211,
 					"width": 458,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.description",
@@ -363,25 +269,13 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 254,
-					"right": 662
-				},
-				"boundRectangle1": {
-					"type": "rectangle",
-					"top": 358,
-					"left": 15,
-					"width": 655,
-					"height": 74,
-					"stroke": "#FFFFFF",
-					"fill": "transparent",
-					"strokeWidth": 1,
-					"visibility": "hidden",
-					"bottom": 432
+					"bottom": 268,
+					"right": 669
 				},
 				"pup_procurementUnit": {
 					"type": "button",
-					"top": 365,
-					"left": 204,
+					"top": 440,
+					"left": 211,
 					"width": 70,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -397,40 +291,40 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"right": 274,
+					"right": 281,
 					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"label_1": {
 					"type": "text",
-					"top": 368,
-					"left": 15,
+					"top": 443,
+					"left": 22,
 					"width": 175,
 					"height": 17,
 					"stroke": "#000000",
 					"text": "Procurement Units",
-					"bottom": 385,
-					"right": 190,
+					"bottom": 460,
+					"right": 197,
 					"fontWeight": "bold",
 					"textAlign": "right"
 				},
 				"label_inventoryUnits": {
 					"type": "text",
-					"top": 405,
-					"left": 15,
+					"top": 480,
+					"left": 22,
 					"width": 175,
 					"height": 17,
 					"stroke": "#000000",
 					"text": "Inventory Units",
-					"bottom": 422,
-					"right": 190,
+					"bottom": 497,
+					"right": 197,
 					"fontWeight": "bold",
 					"textAlign": "right"
 				},
 				"pup_inventoryUnit": {
 					"type": "button",
-					"top": 402,
-					"left": 204,
+					"top": 477,
+					"left": 211,
 					"width": 70,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -446,40 +340,40 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"right": 274,
+					"right": 281,
 					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"label_transformationFactor": {
 					"type": "text",
-					"top": 368,
-					"left": 284,
+					"top": 443,
+					"left": 291,
 					"width": 130,
 					"height": 17,
 					"stroke": "#000000",
 					"text": "Transformation Factor",
-					"bottom": 385,
-					"right": 414,
+					"bottom": 460,
+					"right": 421,
 					"fontWeight": "bold",
 					"textAlign": "right"
 				},
 				"label_minInventoryLevel": {
 					"type": "text",
-					"top": 405,
-					"left": 284,
+					"top": 480,
+					"left": 291,
 					"width": 130,
 					"height": 17,
 					"stroke": "#000000",
 					"text": "Min Inventory Level",
-					"bottom": 422,
-					"right": 414,
+					"bottom": 497,
+					"right": 421,
 					"fontWeight": "bold",
 					"textAlign": "right"
 				},
 				"entryField_revision3": {
 					"type": "input",
-					"top": 368,
-					"left": 428,
+					"top": 443,
+					"left": 435,
 					"width": 70,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.serviceType",
@@ -494,12 +388,12 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 385
+					"bottom": 460
 				},
 				"entryField_revision4": {
 					"type": "input",
-					"top": 405,
-					"left": 428,
+					"top": 480,
+					"left": 435,
 					"width": 70,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.serviceType",
@@ -514,12 +408,12 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 422
+					"bottom": 497
 				},
 				"entryField_revision5": {
 					"type": "input",
-					"top": 368,
-					"left": 508,
+					"top": 443,
+					"left": 515,
 					"width": 70,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.serviceType",
@@ -534,34 +428,26 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 385
+					"bottom": 460
 				},
 				"label_capacity": {
 					"type": "text",
-					"top": 405,
-					"left": 508,
+					"top": 480,
+					"left": 515,
 					"width": 70,
 					"height": 17,
 					"stroke": "#000000",
 					"text": "Capacity",
-					"bottom": 422,
-					"right": 578,
+					"bottom": 497,
+					"right": 585,
 					"fontWeight": "bold",
 					"textAlign": "right",
 					"class": ""
 				},
-				"Rectangle10": {
-					"type": "rectangle",
-					"top": 402,
-					"left": 591,
-					"width": 72,
-					"height": 23,
-					"stroke": "transparent"
-				},
 				"entryField_revision6": {
 					"type": "input",
-					"top": 405,
-					"left": 592,
+					"top": 480,
+					"left": 599,
 					"width": 70,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.serviceType",
@@ -576,46 +462,25 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 422
-				},
-				"label_4": {
-					"type": "text",
-					"top": 336,
-					"left": 15,
-					"width": 175,
-					"height": 17,
-					"stroke": "#000000",
-					"text": "Procurement Units",
-					"bottom": 353,
-					"right": 190,
-					"fontWeight": "bold",
-					"textAlign": "right"
-				},
-				"Rectangle12": {
-					"type": "rectangle",
-					"top": 452,
-					"left": 203,
-					"width": 72,
-					"height": 23,
-					"stroke": "transparent"
+					"bottom": 497
 				},
 				"label_empCode": {
 					"type": "text",
-					"top": 455,
-					"left": 15,
+					"top": 357,
+					"left": 22,
 					"width": 175,
 					"height": 17,
 					"stroke": "#000000",
 					"text": "Employee Code",
-					"bottom": 472,
-					"right": 190,
+					"bottom": 374,
+					"right": 197,
 					"fontWeight": "bold",
 					"textAlign": "right"
 				},
 				"pup_empCode": {
 					"type": "button",
-					"top": 452,
-					"left": 204,
+					"top": 354,
+					"left": 211,
 					"width": 70,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -631,35 +496,27 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"right": 274,
+					"right": 281,
 					"fontWeight": "normal",
 					"textAlign": "left"
 				},
-				"Rectangle13": {
-					"type": "rectangle",
-					"top": 452,
-					"left": 427,
-					"width": 72,
-					"height": 23,
-					"stroke": "transparent"
-				},
 				"label_procurementUnits3": {
 					"type": "text",
-					"top": 455,
-					"left": 284,
+					"top": 357,
+					"left": 291,
 					"width": 130,
 					"height": 17,
 					"stroke": "#000000",
 					"text": "division",
-					"bottom": 472,
-					"right": 414,
+					"bottom": 374,
+					"right": 421,
 					"fontWeight": "bold",
 					"textAlign": "right"
 				},
 				"pup_division": {
 					"type": "button",
-					"top": 452,
-					"left": 428,
+					"top": 354,
+					"left": 435,
 					"width": 70,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -675,15 +532,15 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"right": 498,
+					"right": 505,
 					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"entryField_makeInactive": {
 					"type": "checkbox",
 					"text": "Make Inactive",
-					"top": 455,
-					"left": 509,
+					"top": 357,
+					"left": 516,
 					"width": 154,
 					"height": 17,
 					"events": [
@@ -692,29 +549,12 @@
 					"dataSource": "Form:C1466.current_item.makeInactive",
 					"fontWeight": "normal",
 					"dataSourceTypeHint": "boolean",
-					"right": 663
-				},
-				"Rectangle16": {
-					"type": "rectangle",
-					"top": 502,
-					"left": 507,
-					"width": 156,
-					"height": 23,
-					"stroke": "transparent",
-					"right": 663
-				},
-				"Rectangle19": {
-					"type": "rectangle",
-					"top": 502,
-					"left": 203,
-					"width": 72,
-					"height": 23,
-					"stroke": "transparent"
+					"right": 670
 				},
 				"pup_approvedBy": {
 					"type": "button",
-					"top": 502,
-					"left": 204,
+					"top": 570,
+					"left": 599,
 					"width": 70,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -730,43 +570,43 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"right": 274,
+					"right": 669,
 					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"label_approvedBy": {
 					"type": "text",
-					"top": 505,
-					"left": 15,
-					"width": 175,
+					"top": 573,
+					"left": 455,
+					"width": 130,
 					"height": 17,
 					"stroke": "#000000",
 					"text": "Approded By",
-					"bottom": 522,
-					"right": 190,
+					"bottom": 590,
+					"right": 585,
 					"fontWeight": "bold",
 					"textAlign": "right"
 				},
 				"label_approvedDate": {
 					"type": "text",
-					"top": 505,
-					"left": 369,
+					"top": 573,
+					"left": 128,
 					"width": 130,
 					"height": 17,
 					"stroke": "#000000",
 					"text": "Approval Date",
-					"bottom": 522,
-					"right": 499,
+					"bottom": 590,
+					"right": 258,
 					"fontWeight": "bold",
 					"textAlign": "right"
 				},
-				"entryField_revision7": {
+				"entryField_approvalDate": {
 					"type": "input",
-					"top": 505,
-					"left": 508,
+					"top": 573,
+					"left": 267,
 					"width": 154,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.serviceType",
+					"dataSource": "Form:C1466.current_item.approvalDate",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -778,23 +618,154 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 522,
-					"right": 662
+					"bottom": 590,
+					"right": 421
+				},
+				"subFormAddress": {
+					"type": "subform",
+					"left": 680,
+					"top": 143,
+					"width": 776,
+					"height": 249,
+					"detailForm": "sfw_subpanel_addressSingle",
+					"borderStyle": "none",
+					"dataSource": "Form:C1466.subFormAddress",
+					"right": 1456,
+					"method": "ObjectMethods/subFormAddress.4dm",
+					"focusable": false
+				},
+				"header_bkgd2": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 680,
+					"width": 776,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 1456
+				},
+				"lbl_address": {
+					"type": "text",
+					"top": 121,
+					"left": 691,
+					"width": 250,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Supplier address",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"header_bkgd1": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 1,
+					"width": 676,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 677
+				},
+				"lbl_address1": {
+					"type": "text",
+					"top": 121,
+					"left": 12,
+					"width": 250,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "General informations",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"header_bkgd3": {
+					"type": "rectangle",
+					"top": 389,
+					"left": 1,
+					"width": 676,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 677
+				},
+				"lbl_address2": {
+					"type": "text",
+					"top": 396,
+					"left": 12,
+					"width": 250,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Procurement & Inventory Units",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"header_bkgd4": {
+					"type": "rectangle",
+					"top": 520,
+					"left": 1,
+					"width": 676,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 677
+				},
+				"lbl_address3": {
+					"type": "text",
+					"top": 527,
+					"left": 12,
+					"width": 250,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "QA Informations",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"entryField_isApproved": {
+					"type": "checkbox",
+					"text": "Approved",
+					"top": 573,
+					"left": 12,
+					"width": 98,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.current_item.isApproved",
+					"fontWeight": "normal",
+					"dataSourceTypeHint": "boolean",
+					"right": 110
+				},
+				"PopupDate1": {
+					"type": "subform",
+					"top": 573,
+					"left": 402,
+					"width": 19,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.approvalDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/PopupDate1.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true,
+					"borderStyle": "none"
 				}
 			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 374,
+	"geometryStamp": 488,
 	"editor": {
 		"groups": {
 			"Group": [
-				"Rectangle9",
-				"Rectangle8",
-				"Rectangle7",
-				"Rectangle6",
-				"Rectangle5",
-				"boundRectangle1",
 				"pup_procurementUnit",
 				"label_1",
 				"label_inventoryUnits",
@@ -805,18 +776,36 @@
 				"entryField_revision4",
 				"entryField_revision5",
 				"label_capacity",
-				"Rectangle10",
 				"entryField_revision6"
 			],
 			"Group1": [
-				"Rectangle14",
-				"Rectangle12",
 				"label_empCode",
 				"pup_empCode",
-				"Rectangle13",
 				"label_procurementUnits3",
 				"pup_division",
 				"entryField_makeInactive"
+			],
+			"Group2": [
+				"pup_approvedBy",
+				"label_approvedBy",
+				"label_approvedDate",
+				"entryField_approvalDate",
+				"entryField_isApproved",
+				"PopupDate1"
+			],
+			"Group3": [
+				"label_0_4",
+				"entryField_comment"
+			],
+			"Group4": [
+				"label_0_3",
+				"entryField_description",
+				"label_0_2",
+				"entryField_revision"
+			],
+			"Group5": [
+				"label_vendorPartNum",
+				"entryField_vendorPartnum"
 			]
 		},
 		"activeView": "View 1",

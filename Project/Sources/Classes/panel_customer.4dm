@@ -333,7 +333,7 @@ Function bActionStatusContact()
 	$refMenu:=Create menu:C408
 	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
 	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openInWindow")
-	If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()=Null:C1517)
+	If (Form:C1466.current_item.contacts.query("title=:1"; "Status").first()=Null:C1517)
 		DISABLE MENU ITEM:C150($refMenu; -1)
 	End if 
 	

@@ -9,14 +9,12 @@ Function formMethod()
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		
-		This:C1470.LoadAllTabs()
 	End if 
 	
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
 				
-			: (FORM Get current page:C276(*)=2)
 				
 		End case 
 	End if 
@@ -28,15 +26,28 @@ Function formMethod()
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	
+	This:C1470.supplierAddressDetails()
 	This:C1470.drawPup_approvedBy()
 	This:C1470.drawPup_empCode()
 	This:C1470.drawPup_inventoryUnit()
 	This:C1470.drawPup_procurementUnit()
 	This:C1470.drawPup_division()
+	This:C1470.drawPup_supplier()
 	
-	OBJECT SET VISIBLE:C603(*; "Rectangle@"; Not:C34(Form:C1466.sfw.checkIsInModification()))
+	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
 	Form:C1466.sfw.drawHTab()
 	
+	
+	
+	
+Function supplierAddressDetails()
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.subFormAddress:=New object:C1471()
+		Form:C1466.subFormAddress.address:=Form:C1466.current_item.rebuildAddress()
+		Form:C1466.subFormAddress.situation:=OB Copy:C1225(Form:C1466.situation)
+		Form:C1466.subFormAddress.situation.mode:="view"
+		
+	End if 
 	
 	
 Function drawPup_XXX()
@@ -48,9 +59,46 @@ Function pup_XXX()
 	//Create pop up menu
 	
 	
+Function drawPup_supplier()
+	If (Form:C1466.current_item#Null:C1517)
+		$supplier:=ds:C1482.Supplier.query("UUID= :1"; Form:C1466.current_item.UUID_Supplier).first() || New object:C1471()
+		$supplierName:=$supplier.name
+		If ($supplierName=Null:C1517)
+			$supplierName:=""
+		End if 
+		$color:=""
+		$pathIcon:=""
+		Form:C1466.sfw.drawButtonPup("pup_supplier"; $supplierName; $pathIcon; ($supplier=Null:C1517))
+		
+	End if 
 	
-Function LoadAllTabs()
 	
+Function pup_supplier()
+	//Create pop up menu
+	
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		OBJECT GET COORDINATES:C663(*; "pup_supplier"; $l; $t; $r; $b)
+		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
+		
+		$form:=New object:C1471(\
+			"colName"; "name"; \
+			"lb_items"; ds:C1482.Supplier.all(); \
+			"allData"; ds:C1482.Supplier.all(); \
+			"dataclass"; "Supplier"\
+			)
+		
+		$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b)
+		DIALOG:C40("selectNto1"; $form)
+		CLOSE WINDOW:C154($winRef)
+		
+		If (ok=1)
+			Form:C1466.current_item.UUID_Supplier:=$form.item.UUID
+			cs:C1710.panel_AML.me._activate_save_cancel_button()
+		End if 
+	End if 
+	
+	This:C1470.drawPup_supplier()
 	
 	
 	
