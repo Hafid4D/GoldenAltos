@@ -701,6 +701,31 @@
 			"displayable_fields_count": 3,
 			"fields_ordering": 1
 		},
+		"LeadEvent": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 4713.7133026123,
+				"top": 1231.5030670166,
+				"width": 169,
+				"height": 193.33203125
+			},
+			"displayable_fields_count": 7,
+			"fields": {
+				"UUID": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
+		},
 		"Units": {
 			"color": {
 				"red": 255,
@@ -1610,6 +1635,30 @@
 		}
 	},
 	"relations": {
+		"0593618F32AA47E0B03B170604C8D3B2": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"6120D9486B32444088E89AFECD087224": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"AE19CBDB010A4D53BA5D456EB90C3671": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
 		"42BCCE20373BB84ABBBDF798B52E0EA3": {
 			"color": {
 				"red": 240,
