@@ -701,6 +701,21 @@
 			"displayable_fields_count": 3,
 			"fields_ordering": 1
 		},
+		"CompanyType": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 917,
+				"top": 143,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6
+		},
 		"LeadEvent": {
 			"color": {
 				"red": 255,
@@ -1228,7 +1243,7 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 752,
+				"left": 777,
 				"top": 0,
 				"width": 120,
 				"height": 167.33203125
@@ -1625,16 +1640,33 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 692,
-				"top": 423,
-				"width": 149.015625,
-				"height": 196.33203125
+				"left": 578,
+				"top": 294,
+				"width": 182.015625,
+				"height": 313.33203125
 			},
-			"displayable_fields_count": 7,
-			"fields_ordering": 1
+			"displayable_fields_count": 12,
+			"fields": {
+				"UUID_CompanyType": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
 		}
 	},
 	"relations": {
+		"EE7A991A23F88940A19CFA298610DD08": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"0593618F32AA47E0B03B170604C8D3B2": {
 			"color": {
 				"red": 255,
@@ -1652,6 +1684,14 @@
 			}
 		},
 		"AE19CBDB010A4D53BA5D456EB90C3671": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"A9E8856FF5C9A641BF2CAE73D425114C": {
 			"color": {
 				"red": 255,
 				"green": 255,
