@@ -38,8 +38,6 @@ Function redrawAndSetVisible()
 	Form:C1466.sfw.drawHTab()
 	
 	
-	
-	
 Function supplierAddressDetails()
 	If (Form:C1466.current_item#Null:C1517)
 		Form:C1466.subFormAddress:=New object:C1471()
@@ -48,15 +46,6 @@ Function supplierAddressDetails()
 		Form:C1466.subFormAddress.situation.mode:="view"
 		
 	End if 
-	
-	
-Function drawPup_XXX()
-	//This function updates the dropdown by displaying the name
-	Form:C1466.sfw.drawButtonPup("pup_xxx"; $xxxName; "xxxx.png"; (Form:C1466.current_item.xxxx=Null:C1517))
-	
-	
-Function pup_XXX()
-	//Create pop up menu
 	
 	
 Function drawPup_supplier()
