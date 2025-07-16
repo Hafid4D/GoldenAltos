@@ -693,8 +693,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1383.829711914,
-				"top": 2059.7229614258,
+				"left": 1422.4901123046,
+				"top": 2188.4861450196,
 				"width": 162,
 				"height": 163.33203125
 			},
@@ -724,12 +724,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 929.32791137695,
-				"top": 2004.8984222413,
-				"width": 253.60321044922,
-				"height": 263.55078125
+				"left": 1010.3008117676,
+				"top": 2031.1480712891,
+				"width": 254.82403564453,
+				"height": 311.97802734375
 			},
-			"displayable_fields_count": 10,
+			"displayable_fields_count": 12,
 			"fields": {
 				"UUID": {
 					"color": {
@@ -1685,6 +1685,14 @@
 		}
 	},
 	"relations": {
+		"C09BC2389C8D4BF6BFF5034684908093": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
 		"EDD3DE5B223549E9B009035A8C596B4F": {
 			"color": {
 				"red": 255,
