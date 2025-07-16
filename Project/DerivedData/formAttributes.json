@@ -188,6 +188,10 @@
 			"timeStamp": "2025-07-08T10:37:02Z",
 			"destination": "detailScreen"
 		},
+		"panel_interactionType": {
+			"timeStamp": "2025-07-08T10:37:02Z",
+			"destination": "detailScreen"
+		},
 		"_ga_subpanel_communication": {
 			"timeStamp": "2025-07-08T10:37:02Z",
 			"destination": "detailScreen"
@@ -294,6 +298,10 @@
 		},
 		"Lead_chooseMainContact": {
 			"timeStamp": "2025-07-14T15:24:36Z",
+			"destination": "detailScreen"
+		},
+		"panel_leadPriority1": {
+			"timeStamp": "2025-07-08T10:37:02Z",
 			"destination": "detailScreen"
 		},
 		"createStepInterruption_punchIn": {

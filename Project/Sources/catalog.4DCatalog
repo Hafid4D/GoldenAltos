@@ -507,7 +507,7 @@
 		<field name="UUID" uuid="A4C6B18253DB4C32978E0EDA5E5507FD" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="levelID" uuid="338E8561A654487DB2B07A0A0E1ABEC8" type="3" never_null="true" id="2"/>
+		<field name="levelID" uuid="F200F887B1A84B2E87DD80C31E6C92C5" type="3" never_null="true" id="2"/>
 		<field name="code" uuid="4CCF1F13CF234775AC259431514225F4" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="name" uuid="4216492E5C3D44A9BC9ED1B6891725BB" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="color" uuid="035BDC8F08F24283B5BD5F480C37867F" type="10" limiting_length="255" never_null="true" id="5"/>
@@ -694,7 +694,7 @@
 	</table>
 	<table name="InteractionTrigger" uuid="BE46414800704294A200CFC78A849926" id="53">
 		<field name="UUID" uuid="DDD1D8B9DED6419FA5277AF0AF879E0A" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="levelID" uuid="FE0B835409A04743BC46668389766106" type="3" never_null="true" id="2"/>
+		<field name="levelID" uuid="8E410EE170CD481AA437A273076370A3" type="3" never_null="true" id="2"/>
 		<field name="code" uuid="2EC4C77592DE46AC83995D0D6C9D54D1" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="name" uuid="8B736123DC8141ACBB69A8157EAFBA85" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="color" uuid="2B2DCAD0AFAE404492D1597F75D3B195" type="10" limiting_length="255" never_null="true" id="5"/>
