@@ -458,6 +458,10 @@ Function redrawAndSetVisible()
 			
 			OBJECT SET COORDINATES:C1248(*; "bar_history"; $g; $t; $widthSubform; $b)
 			OBJECT SET COORDINATES:C1248(*; "Rec_history"; $gh; $th; $widthSubform; $heightSubform)
+			
+		: (FORM Get current page:C276(*)=2)
+			OBJECT SET ENABLED:C1123(*; "bActionInteractions"; Form:C1466.sfw.checkIsInModification())
+			
 		: (FORM Get current page:C276(*)=3)
 			
 			OBJECT GET COORDINATES:C663(*; "Rect"; $g; $t; $r; $b)
@@ -636,8 +640,41 @@ Function _activate_save_cancel_button()
 	
 	
 Function bActionInteractions()
+	$mainMenu:=Create menu:C408
+	
+	APPEND MENU ITEM:C411($mainMenu; "Edit interaction..."; *)
+	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--edit")
+	If (Form:C1466.current_interaction=Null:C1517)
+		DISABLE MENU ITEM:C150($mainMenu; -1)
+	End if 
+	//APPEND MENU ITEM($mainMenu; "-")
 	
 	
+	APPEND MENU ITEM:C411($mainMenu; "Complete follow up"; *)
+	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--complete")
+	If (Form:C1466.current_interaction=Null:C1517)
+		DISABLE MENU ITEM:C150($mainMenu; -1)
+	End if 
+	
+	APPEND MENU ITEM:C411($mainMenu; "Schedule follow up"; *)
+	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--schedule")
+	If (Form:C1466.current_interaction=Null:C1517)
+		DISABLE MENU ITEM:C150($mainMenu; -1)
+	End if 
+	
+	APPEND MENU ITEM:C411($mainMenu; "Log interaction"; *)
+	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--log")
+	
+	
+	$choice:=Dynamic pop up menu:C1006($mainMenu)
+	RELEASE MENU:C978($mainMenu)
+	
+	
+	Case of 
+		: ($choice="")
+		: ($choice="--log")
+			
+	End case 
 	
 	
 	

@@ -819,7 +819,7 @@
 					"focusable": false,
 					"movableRows": false,
 					"dataSource": "Form:C1466.lb_interactions",
-					"currentItemSource": "Form:C1466.current_quoteLine",
+					"currentItemSource": "Form:C1466.current_interaction",
 					"currentItemPositionSource": "",
 					"metaSource": "This:C1470.meta",
 					"scrollbarHorizontal": "hidden",
