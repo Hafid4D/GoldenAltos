@@ -337,24 +337,6 @@
 		},
 		{
 			"objects": {
-				"Rec_note": {
-					"type": "rectangle",
-					"top": 306,
-					"left": 336,
-					"width": 397,
-					"height": 302,
-					"stroke": "transparent",
-					"fill": "#FFFFFF"
-				},
-				"Rec_history": {
-					"type": "rectangle",
-					"top": 142,
-					"left": 734,
-					"width": 300,
-					"height": 466,
-					"fill": "#FFFFFF",
-					"stroke": "transparent"
-				},
 				"Rectangle5": {
 					"type": "rectangle",
 					"top": 113,
@@ -406,42 +388,6 @@
 					"top": 122,
 					"left": 359,
 					"width": 80,
-					"height": 15,
-					"fontWeight": "bold"
-				},
-				"Rectangle8": {
-					"type": "rectangle",
-					"top": 306,
-					"left": 335,
-					"width": 398,
-					"height": 32,
-					"fill": "#00A4A4",
-					"stroke": "transparent"
-				},
-				"Text3": {
-					"type": "text",
-					"text": "Notes",
-					"top": 315,
-					"left": 359,
-					"width": 80,
-					"height": 15,
-					"fontWeight": "bold"
-				},
-				"bar_history": {
-					"type": "rectangle",
-					"top": 113,
-					"left": 734,
-					"width": 300,
-					"height": 32,
-					"fill": "#00A4A4",
-					"stroke": "transparent"
-				},
-				"Text4": {
-					"type": "text",
-					"text": "History",
-					"top": 122,
-					"left": 752,
-					"width": 60,
 					"height": 15,
 					"fontWeight": "bold"
 				},
@@ -682,22 +628,6 @@
 					"icon": "/RESOURCES/sfw/image/picto/gearW.png",
 					"textPlacement": "right",
 					"method": "ObjectMethods/bActionQuoteLines.4dm"
-				},
-				"bActionQuoteLines1": {
-					"type": "button",
-					"text": "",
-					"top": 309,
-					"left": 697,
-					"width": 27,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"style": "custom",
-					"popupPlacement": "linked",
-					"icon": "/RESOURCES/sfw/image/picto/gearW.png",
-					"textPlacement": "right",
-					"method": "ObjectMethods/bActionQuoteLines1.4dm"
 				},
 				"List Box": {
 					"type": "listbox",
@@ -1042,17 +972,13 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 384,
+	"geometryStamp": 388,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {
 			"Group2": [
 				"Rectangle7",
 				"Text2"
-			],
-			"Group3": [
-				"Rectangle8",
-				"Text3"
 			]
 		},
 		"activeView": "View 1",
