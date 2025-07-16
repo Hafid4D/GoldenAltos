@@ -32,6 +32,10 @@ Function formMethod()
 		Case of 
 			: (FORM Get current page:C276(*)=1)
 				This:C1470.loadContacts()
+				
+			: (FORM Get current page:C276(*)=2)
+				This:C1470.loadInteractions()
+				
 			: (FORM Get current page:C276(*)=3)
 				This:C1470.loadJobs()
 		End case 
@@ -39,6 +43,9 @@ Function formMethod()
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())
 		This:C1470.redrawAndSetVisible()
 	End if 
+	
+Function loadInteractions()
+	Form:C1466.lb_interactions:=Form:C1466.current_item.interactions
 	
 Function loadContacts()
 	var $e_mainContact : cs:C1710.ContactEntity
@@ -628,7 +635,9 @@ Function _activate_save_cancel_button()
 	
 	
 	
-Function btnActionNotes()
+Function bActionInteractions()
+	
+	
 	
 	
 	
