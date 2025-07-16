@@ -565,7 +565,7 @@
 					"fontFamily": "System Font",
 					"fontSize": 13,
 					"focusable": false,
-					"text": "Quote",
+					"text": "Select quote",
 					"icon": "",
 					"popupPlacement": "linked",
 					"textPlacement": "right",
@@ -584,7 +584,7 @@
 					"fontFamily": "System Font",
 					"fontSize": 13,
 					"focusable": false,
-					"text": "PO",
+					"text": "Select PO",
 					"icon": "",
 					"popupPlacement": "linked",
 					"textPlacement": "right",
@@ -603,7 +603,7 @@
 					"fontFamily": "System Font",
 					"fontSize": 13,
 					"focusable": false,
-					"text": "Job",
+					"text": "Select job",
 					"icon": "",
 					"popupPlacement": "linked",
 					"textPlacement": "right",
@@ -721,6 +721,185 @@
 					"height": 566,
 					"fill": "#00A4A4",
 					"stroke": "transparent"
+				},
+				"bActionInteractions": {
+					"type": "button",
+					"text": "Actions",
+					"top": 622,
+					"left": 36,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionInteractions.4dm"
+				},
+				"lb_interactions": {
+					"type": "listbox",
+					"top": 124,
+					"left": 136,
+					"width": 1148,
+					"height": 529,
+					"resizingMode": "legacy",
+					"listboxType": "collection",
+					"focusable": false,
+					"movableRows": false,
+					"dataSource": "Form:C1466.lb_interactions",
+					"currentItemSource": "Form:C1466.current_interaction",
+					"currentItemPositionSource": "",
+					"metaSource": "This:C1470.meta",
+					"scrollbarHorizontal": "hidden",
+					"horizontalLineStroke": "transparent",
+					"verticalLineStroke": "#C0C0C0",
+					"events": [
+						"onClick",
+						"onDataChange",
+						"onSelectionChange",
+						"onHeaderClick"
+					],
+					"fill": "#FFFFFF",
+					"alternateFill": "#F7F9FC",
+					"borderStyle": "system",
+					"method": "ObjectMethods/lb_interactions.4dm",
+					"columns": [
+						{
+							"name": "Colonne2",
+							"dataSource": "This:C1470.number",
+							"width": 40,
+							"minWidth": 10,
+							"maxWidth": 32000,
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"header": {
+								"name": "ID",
+								"text": "#",
+								"fontTheme": "normal",
+								"textAlign": "left"
+							},
+							"footer": {
+								"name": "Pied2",
+								"timeFormat": "hh_mm_ss",
+								"fontFamily": "System Font Regular",
+								"fontSize": 10
+							},
+							"fontTheme": "normal",
+							"enterable": false
+						},
+						{
+							"name": "Colonne9",
+							"dataSource": "This:C1470.creationDate",
+							"width": 102,
+							"minWidth": 10,
+							"maxWidth": 32000,
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"header": {
+								"name": "Entête11",
+								"text": "Creation date",
+								"fontTheme": "normal",
+								"textAlign": "center",
+								"verticalAlign": "automatic"
+							},
+							"footer": {
+								"name": "Pied11",
+								"timeFormat": "hh_mm_ss",
+								"fontFamily": "System Font Regular",
+								"fontSize": 10
+							},
+							"fontTheme": "normal",
+							"dataSourceTypeHint": "text"
+						},
+						{
+							"name": "Colonne4",
+							"dataSource": "This:C1470.contact.fullName",
+							"width": 165,
+							"minWidth": 10,
+							"maxWidth": 32000,
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"header": {
+								"name": "Entête4",
+								"text": "Contact",
+								"fontTheme": "normal",
+								"textAlign": "center",
+								"verticalAlign": "automatic"
+							},
+							"footer": {
+								"name": "Pied4",
+								"timeFormat": "hh_mm_ss",
+								"fontFamily": "System Font Regular",
+								"fontSize": 10
+							},
+							"fontTheme": "normal",
+							"dataSourceTypeHint": "text"
+						},
+						{
+							"header": {
+								"name": "Header20",
+								"text": "Type"
+							},
+							"name": "Column20",
+							"footer": {
+								"name": "Footer20"
+							},
+							"dataSource": "This:C1470.type.name"
+						},
+						{
+							"header": {
+								"name": "Header21",
+								"text": "Trigger"
+							},
+							"name": "Column21",
+							"footer": {
+								"name": "Footer21"
+							},
+							"dataSource": "This:C1470.trigger.name"
+						},
+						{
+							"header": {
+								"name": "Header22",
+								"text": "F/U Date"
+							},
+							"name": "Column22",
+							"footer": {
+								"name": "Footer22"
+							},
+							"dataSource": "This:C1470.followUPDate"
+						},
+						{
+							"header": {
+								"name": "Header23",
+								"text": "Sales Person"
+							},
+							"name": "Column23",
+							"footer": {
+								"name": "Footer23"
+							},
+							"dataSource": "This:C1470.employee.fullName",
+							"width": 179
+						},
+						{
+							"header": {
+								"name": "Header19",
+								"text": "Notes"
+							},
+							"name": "Column19",
+							"footer": {
+								"name": "Footer19"
+							},
+							"dataSource": "This:C1470.notes"
+						}
+					]
 				}
 			}
 		},

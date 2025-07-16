@@ -81,7 +81,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_lead": {
-			"timeStamp": "2025-07-16T10:20:39Z",
+			"timeStamp": "2025-07-16T15:18:02Z",
 			"destination": "detailScreen"
 		},
 		"sfw_panel_default": {
@@ -185,6 +185,10 @@
 			"destination": "detailScreen"
 		},
 		"panel_leadNextStep": {
+			"timeStamp": "2025-07-08T10:37:02Z",
+			"destination": "detailScreen"
+		},
+		"panel_interactionType": {
 			"timeStamp": "2025-07-08T10:37:02Z",
 			"destination": "detailScreen"
 		},
@@ -397,6 +401,10 @@
 			"destination": "detailScreen"
 		},
 		"sfw_eventPalette": {
+			"timeStamp": "2025-07-08T10:37:02Z",
+			"destination": "detailScreen"
+		},
+		"panel_interactionTrigger": {
 			"timeStamp": "2025-07-08T10:37:02Z",
 			"destination": "detailScreen"
 		},

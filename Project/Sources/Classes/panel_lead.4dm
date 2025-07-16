@@ -32,6 +32,10 @@ Function formMethod()
 		Case of 
 			: (FORM Get current page:C276(*)=1)
 				This:C1470.loadContacts()
+				
+			: (FORM Get current page:C276(*)=2)
+				This:C1470.loadInteractions()
+				
 			: (FORM Get current page:C276(*)=3)
 				This:C1470.loadJobs()
 		End case 
@@ -39,6 +43,9 @@ Function formMethod()
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())
 		This:C1470.redrawAndSetVisible()
 	End if 
+	
+Function loadInteractions()
+	Form:C1466.lb_interactions:=Form:C1466.current_item.interactions
 	
 Function loadContacts()
 	var $e_mainContact : cs:C1710.ContactEntity
@@ -286,13 +293,19 @@ Function selectCustomer()
 					Form:C1466.current_item.UUID_Customer:=$form.item.UUID
 					Form:C1466.current_item.deal:=True:C214
 					Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
-					Form:C1466.current_item.moreData:=New object:C1471()
+					
+					This:C1470._clearInfoAfterChangingCustomer()
 					This:C1470.loadContacts()
 				End if 
 		End case 
 	End if 
 	This:C1470.drawPup_customer()
 	
+Function _clearInfoAfterChangingCustomer()
+	Form:C1466.current_item.moreData:=New object:C1471()
+	Form:C1466.current_item.UUID_Quote:=Null:C1517
+	Form:C1466.current_item.UUID_PurchaseOrder:=Null:C1517
+	Form:C1466.current_item.UUID_Job:=Null:C1517
 	
 	//mark:Staff
 Function drawPup_staff()
@@ -328,7 +341,7 @@ Function selectStaff()
 	//mark:quote
 Function drawPup_quote()
 	If (Form:C1466.current_item#Null:C1517)
-		$quoteName:=Form:C1466.current_item.quote.code || "Quote"
+		$quoteName:=Form:C1466.current_item.quote.code || "Select quote"
 		Form:C1466.sfw.drawButtonPup("pup_quote"; $quoteName; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.quote=Null:C1517))
 	End if 
 	
@@ -360,8 +373,9 @@ Function selectQuote
 	
 	//mark:PO
 Function drawPup_po()
+	var $poName : Text
 	If (Form:C1466.current_item#Null:C1517)
-		$poName:=Form:C1466.current_item.purchaseOrder.poNumber || "PO"
+		$poName:=String:C10(Form:C1466.current_item.purchaseOrder.poNumber) || "Select PO"
 		Form:C1466.sfw.drawButtonPup("pup_po"; $poName; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.purchaseOrder=Null:C1517))
 	End if 
 	
@@ -397,8 +411,9 @@ Function selectPO()
 	
 	//mark:Job
 Function drawPup_job()
+	var $jobName : Text
 	If (Form:C1466.current_item#Null:C1517)
-		$jobName:=String:C10(Form:C1466.current_item.job.jobNumber) || "Job"
+		$jobName:=String:C10(Form:C1466.current_item.job.jobNumber) || "Select job"
 		Form:C1466.sfw.drawButtonPup("pup_job"; $jobName; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.job=Null:C1517))
 	End if 
 	
@@ -451,6 +466,10 @@ Function redrawAndSetVisible()
 			
 			OBJECT SET COORDINATES:C1248(*; "bar_history"; $g; $t; $widthSubform; $b)
 			OBJECT SET COORDINATES:C1248(*; "Rec_history"; $gh; $th; $widthSubform; $heightSubform)
+			
+		: (FORM Get current page:C276(*)=2)
+			OBJECT SET ENABLED:C1123(*; "bActionInteractions"; Form:C1466.sfw.checkIsInModification())
+			
 		: (FORM Get current page:C276(*)=3)
 			
 			OBJECT GET COORDINATES:C663(*; "Rect"; $g; $t; $r; $b)
@@ -628,7 +647,42 @@ Function _activate_save_cancel_button()
 	
 	
 	
-Function btnActionNotes()
+Function bActionInteractions()
+	$mainMenu:=Create menu:C408
+	
+	APPEND MENU ITEM:C411($mainMenu; "Edit interaction..."; *)
+	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--edit")
+	If (Form:C1466.current_interaction=Null:C1517)
+		DISABLE MENU ITEM:C150($mainMenu; -1)
+	End if 
+	//APPEND MENU ITEM($mainMenu; "-")
+	
+	
+	APPEND MENU ITEM:C411($mainMenu; "Complete follow up"; *)
+	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--complete")
+	If (Form:C1466.current_interaction=Null:C1517)
+		DISABLE MENU ITEM:C150($mainMenu; -1)
+	End if 
+	
+	APPEND MENU ITEM:C411($mainMenu; "Schedule follow up"; *)
+	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--schedule")
+	If (Form:C1466.current_interaction=Null:C1517)
+		DISABLE MENU ITEM:C150($mainMenu; -1)
+	End if 
+	
+	APPEND MENU ITEM:C411($mainMenu; "Log interaction"; *)
+	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--log")
+	
+	
+	$choice:=Dynamic pop up menu:C1006($mainMenu)
+	RELEASE MENU:C978($mainMenu)
+	
+	
+	Case of 
+		: ($choice="")
+		: ($choice="--log")
+			
+	End case 
 	
 	
 	
