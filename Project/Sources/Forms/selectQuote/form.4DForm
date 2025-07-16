@@ -40,8 +40,8 @@
 					"type": "listbox",
 					"left": 0,
 					"top": 44,
-					"width": 205,
-					"height": 216,
+					"width": 326,
+					"height": 163,
 					"events": [
 						"onDoubleClick",
 						"onDataChange",
@@ -72,7 +72,7 @@
 							"footer": {
 								"name": "Footer1"
 							},
-							"width": 240,
+							"width": 100,
 							"dataSource": "This:C1470.code"
 						},
 						{
@@ -83,7 +83,9 @@
 							"name": "Column2",
 							"footer": {
 								"name": "Footer2"
-							}
+							},
+							"width": 200,
+							"dataSource": "This:C1470.subject"
 						}
 					]
 				},
@@ -152,7 +154,7 @@
 			}
 		}
 	],
-	"geometryStamp": 53,
+	"geometryStamp": 59,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

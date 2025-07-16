@@ -40,7 +40,7 @@
 					"type": "listbox",
 					"left": 0,
 					"top": 44,
-					"width": 213,
+					"width": 279,
 					"height": 216,
 					"events": [
 						"onDoubleClick",
@@ -72,9 +72,21 @@
 							"footer": {
 								"name": "Footer1"
 							},
-							"width": 215,
+							"width": 140,
 							"dataSource": "This:C1470.jobNumber",
 							"textAlign": "left"
+						},
+						{
+							"header": {
+								"name": "Header2",
+								"text": "Header2"
+							},
+							"name": "Column2",
+							"footer": {
+								"name": "Footer2"
+							},
+							"dataSource": "This:C1470.code",
+							"width": 140
 						}
 					]
 				},
@@ -143,7 +155,7 @@
 			}
 		}
 	],
-	"geometryStamp": 55,
+	"geometryStamp": 57,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

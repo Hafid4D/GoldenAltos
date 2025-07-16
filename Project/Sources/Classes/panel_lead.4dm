@@ -286,13 +286,19 @@ Function selectCustomer()
 					Form:C1466.current_item.UUID_Customer:=$form.item.UUID
 					Form:C1466.current_item.deal:=True:C214
 					Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
-					Form:C1466.current_item.moreData:=New object:C1471()
+					
+					This:C1470._clearInfoAfterChangingCustomer()
 					This:C1470.loadContacts()
 				End if 
 		End case 
 	End if 
 	This:C1470.drawPup_customer()
 	
+Function _clearInfoAfterChangingCustomer()
+	Form:C1466.current_item.moreData:=New object:C1471()
+	Form:C1466.current_item.UUID_Quote:=Null:C1517
+	Form:C1466.current_item.UUID_PurchaseOrder:=Null:C1517
+	Form:C1466.current_item.UUID_Job:=Null:C1517
 	
 	//mark:Staff
 Function drawPup_staff()
@@ -328,7 +334,7 @@ Function selectStaff()
 	//mark:quote
 Function drawPup_quote()
 	If (Form:C1466.current_item#Null:C1517)
-		$quoteName:=Form:C1466.current_item.quote.code || "Quote"
+		$quoteName:=Form:C1466.current_item.quote.code || "Select quote"
 		Form:C1466.sfw.drawButtonPup("pup_quote"; $quoteName; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.quote=Null:C1517))
 	End if 
 	
@@ -360,8 +366,9 @@ Function selectQuote
 	
 	//mark:PO
 Function drawPup_po()
+	var $poName : Text
 	If (Form:C1466.current_item#Null:C1517)
-		$poName:=Form:C1466.current_item.purchaseOrder.poNumber || "PO"
+		$poName:=String:C10(Form:C1466.current_item.purchaseOrder.poNumber) || "Select PO"
 		Form:C1466.sfw.drawButtonPup("pup_po"; $poName; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.purchaseOrder=Null:C1517))
 	End if 
 	
@@ -397,8 +404,9 @@ Function selectPO()
 	
 	//mark:Job
 Function drawPup_job()
+	var $jobName : Text
 	If (Form:C1466.current_item#Null:C1517)
-		$jobName:=String:C10(Form:C1466.current_item.job.jobNumber) || "Job"
+		$jobName:=String:C10(Form:C1466.current_item.job.jobNumber) || "Select job"
 		Form:C1466.sfw.drawButtonPup("pup_job"; $jobName; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.job=Null:C1517))
 	End if 
 	
