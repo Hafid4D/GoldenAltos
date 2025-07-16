@@ -324,6 +324,10 @@
 			"timeStamp": "2025-07-08T10:37:02Z",
 			"destination": "detailScreen"
 		},
+		"panel_interactionOutcome": {
+			"timeStamp": "2025-07-08T10:37:02Z",
+			"destination": "detailScreen"
+		},
 		"panel_purchaseOrder": {
 			"timeStamp": "2025-07-11T14:50:23Z",
 			"destination": "detailScreen"
@@ -341,6 +345,10 @@
 			"destination": "detailScreen"
 		},
 		"sfw_lbXliff": {
+			"timeStamp": "2025-07-08T10:37:02Z",
+			"destination": "detailScreen"
+		},
+		"panel_interactionMethod": {
 			"timeStamp": "2025-07-08T10:37:02Z",
 			"destination": "detailScreen"
 		},
