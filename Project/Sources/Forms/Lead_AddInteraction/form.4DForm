@@ -38,7 +38,7 @@
 			"objects": {
 				"Button": {
 					"type": "button",
-					"top": 450,
+					"top": 470,
 					"left": 268,
 					"width": 70,
 					"height": 20,
@@ -54,7 +54,7 @@
 				},
 				"Button1": {
 					"type": "button",
-					"top": 450,
+					"top": 470,
 					"left": 348,
 					"width": 70,
 					"height": 20,
@@ -90,7 +90,7 @@
 				"Text1": {
 					"type": "text",
 					"text": "Date",
-					"top": 53,
+					"top": 75,
 					"left": 23,
 					"width": 91,
 					"height": 16
@@ -98,7 +98,7 @@
 				"creationDate": {
 					"type": "input",
 					"left": 129,
-					"top": 53,
+					"top": 75,
 					"width": 261,
 					"height": 17,
 					"dataSourceTypeHint": "text",
@@ -107,7 +107,7 @@
 				"btnDatePickerCreate": {
 					"type": "button",
 					"text": " ",
-					"top": 54,
+					"top": 76,
 					"left": 400,
 					"width": 18,
 					"height": 18,
@@ -127,7 +127,7 @@
 				},
 				"pup_method": {
 					"type": "button",
-					"top": 88,
+					"top": 110,
 					"left": 129,
 					"width": 289,
 					"height": 28,
@@ -147,14 +147,14 @@
 				"Text2": {
 					"type": "text",
 					"text": "Method",
-					"top": 88,
+					"top": 110,
 					"left": 23,
 					"width": 113,
 					"height": 16
 				},
 				"pup_outcome": {
 					"type": "button",
-					"top": 124,
+					"top": 146,
 					"left": 129,
 					"width": 289,
 					"height": 28,
@@ -174,14 +174,14 @@
 				"Text3": {
 					"type": "text",
 					"text": "Outcome",
-					"top": 124,
+					"top": 146,
 					"left": 23,
 					"width": 113,
 					"height": 16
 				},
 				"pup_sales": {
 					"type": "button",
-					"top": 160,
+					"top": 182,
 					"left": 129,
 					"width": 289,
 					"height": 27,
@@ -201,7 +201,7 @@
 				"Text4": {
 					"type": "text",
 					"text": "Sales person",
-					"top": 160,
+					"top": 182,
 					"left": 23,
 					"width": 113,
 					"height": 16
@@ -209,7 +209,7 @@
 				"Text5": {
 					"type": "text",
 					"text": "Notes",
-					"top": 270,
+					"top": 292,
 					"left": 24,
 					"width": 85,
 					"height": 16
@@ -217,16 +217,16 @@
 				"creationDate1": {
 					"type": "input",
 					"left": 129,
-					"top": 270,
+					"top": 292,
 					"width": 289,
 					"height": 145,
 					"dataSourceTypeHint": "text",
 					"dataSource": "Form:C1466.notes",
 					"multiline": "yes"
 				},
-				"pup_sales1": {
+				"pup_contact": {
 					"type": "button",
-					"top": 196,
+					"top": 218,
 					"left": 129,
 					"width": 289,
 					"height": 27,
@@ -238,7 +238,7 @@
 					"popupPlacement": "linked",
 					"textPlacement": "right",
 					"style": "bevel",
-					"method": "ObjectMethods/pup_sales1.4dm",
+					"method": "ObjectMethods/pup_contact.4dm",
 					"events": [
 						"onClick"
 					]
@@ -246,14 +246,14 @@
 				"Text6": {
 					"type": "text",
 					"text": "Contact",
-					"top": 196,
+					"top": 218,
 					"left": 23,
 					"width": 113,
 					"height": 16
 				},
-				"pup_sales2": {
+				"pup_trigger": {
 					"type": "button",
-					"top": 232,
+					"top": 254,
 					"left": 129,
 					"width": 289,
 					"height": 27,
@@ -265,7 +265,7 @@
 					"popupPlacement": "linked",
 					"textPlacement": "right",
 					"style": "bevel",
-					"method": "ObjectMethods/pup_sales2.4dm",
+					"method": "ObjectMethods/pup_trigger.4dm",
 					"events": [
 						"onClick"
 					]
@@ -273,15 +273,33 @@
 				"Text7": {
 					"type": "text",
 					"text": "Trigger",
-					"top": 232,
+					"top": 254,
 					"left": 23,
 					"width": 113,
 					"height": 16
+				},
+				"Text8": {
+					"type": "text",
+					"text": "Number",
+					"top": 46,
+					"left": 24,
+					"width": 91,
+					"height": 16
+				},
+				"creationDate2": {
+					"type": "input",
+					"left": 130,
+					"top": 46,
+					"width": 261,
+					"height": 17,
+					"dataSourceTypeHint": "integer",
+					"dataSource": "Form:C1466.number",
+					"enterable": false
 				}
 			}
 		}
 	],
-	"geometryStamp": 103,
+	"geometryStamp": 111,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

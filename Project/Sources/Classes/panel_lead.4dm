@@ -49,28 +49,6 @@ Function loadInteractions()
 	
 Function loadContacts()
 	Form:C1466.lb_contacts:=Form:C1466.current_item.contacts()
-	//var $e_mainContact : cs.ContactEntity
-	//var $secondaryContacts : cs.ContactSelection
-	
-	//Form.lb_contacts:=New collection()
-	//If (Form.current_item.moreData#Null) && (Form.current_item.moreData.mainContact#Null)
-	//$e_mainContact:=ds.Contact.get(Form.current_item.moreData.mainContact.UUID)
-	//If ($e_mainContact#Null)
-	//$mainContact:=$e_mainContact.toObject()
-	//$mainContact.type:="Main"
-	//Form.lb_contacts.push($mainContact)
-	//End if 
-	//End if 
-	
-	//If (Form.current_item.moreData#Null) && (Form.current_item.moreData.secondaryContacts#Null)
-	//$secondaryContacts:=ds.Contact.query("UUID in :1"; Form.current_item.moreData.secondaryContacts)
-	//For each ($e_contact; $secondaryContacts)
-	//$contact:=$e_contact.toObject()
-	//$contact.type:="Secondary"
-	//Form.lb_contacts.push($contact)
-	//End for each 
-	//End if 
-	
 	
 Function loadJobs()
 	Form:C1466.job:=Null:C1517
@@ -649,6 +627,9 @@ Function _activate_save_cancel_button()
 	
 	
 Function bActionInteractions()
+	var $interaction : cs:C1710.InteractionEntity
+	var $status : cs:C1710.InteractionTypeEntity
+	
 	$mainMenu:=Create menu:C408
 	
 	APPEND MENU ITEM:C411($mainMenu; "Edit interaction..."; *)
@@ -682,7 +663,7 @@ Function bActionInteractions()
 	Case of 
 		: ($choice="")
 		: ($choice="--log")
-			$form:=New object:C1471("creationDate"; Current date:C33(); "current_item"; Form:C1466.current_item)
+			$form:=New object:C1471("creationDate"; Current date:C33(); "current_item"; Form:C1466.current_item; "number"; Sequence number:C244([Interaction:51]))
 			
 			$ref:=Open form window:C675("Lead_AddInteraction"; Sheet form window:K39:12)
 			DIALOG:C40("Lead_AddInteraction"; $form)
@@ -691,10 +672,16 @@ Function bActionInteractions()
 			If (ok=1)
 				$form.stmpCreation:=cs:C1710.sfw_stmp.me.build($form.creationDate)
 				OB REMOVE:C1226($form; "creationDate")
+				OB REMOVE:C1226($form; "current_item")
+				
 				
 				$interaction:=ds:C1482.Interaction.new()
 				$interaction.fromObject($form)
 				$interaction.UUID_Lead:=Form:C1466.current_item.UUID
+				$status:=ds:C1482.InteractionType.query("code == :1"; "COMPLETED").first()
+				If ($status#Null:C1517)
+					$interaction.UUID_Type:=$status.UUID
+				End if 
 				$result:=$interaction.save()
 				
 				
@@ -716,6 +703,11 @@ Function pup_interaction($type; $currentUUID)->$uuid : Text
 			$dc:="InteractionOutcome"
 			$cacheAttribut:="interactionOutcome"
 			$widgetName:="pup_outcome"
+			
+		: ($type="trigger")
+			$dc:="InteractionTrigger"
+			$cacheAttribut:="interactionTrigger"
+			$widgetName:="pup_trigger"
 			
 	End case 
 	
