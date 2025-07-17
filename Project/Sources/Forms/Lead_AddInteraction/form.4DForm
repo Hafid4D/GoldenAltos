@@ -38,7 +38,7 @@
 			"objects": {
 				"Button": {
 					"type": "button",
-					"top": 387,
+					"top": 450,
 					"left": 268,
 					"width": 70,
 					"height": 20,
@@ -54,7 +54,7 @@
 				},
 				"Button1": {
 					"type": "button",
-					"top": 387,
+					"top": 450,
 					"left": 348,
 					"width": 70,
 					"height": 20,
@@ -209,7 +209,7 @@
 				"Text5": {
 					"type": "text",
 					"text": "Notes",
-					"top": 207,
+					"top": 270,
 					"left": 24,
 					"width": 85,
 					"height": 16
@@ -217,22 +217,77 @@
 				"creationDate1": {
 					"type": "input",
 					"left": 129,
-					"top": 207,
+					"top": 270,
 					"width": 289,
 					"height": 145,
 					"dataSourceTypeHint": "text",
 					"dataSource": "Form:C1466.notes",
 					"multiline": "yes"
+				},
+				"pup_sales1": {
+					"type": "button",
+					"top": 196,
+					"left": 129,
+					"width": 289,
+					"height": 27,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Contact",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_sales1.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Text6": {
+					"type": "text",
+					"text": "Contact",
+					"top": 196,
+					"left": 23,
+					"width": 113,
+					"height": 16
+				},
+				"pup_sales2": {
+					"type": "button",
+					"top": 232,
+					"left": 129,
+					"width": 289,
+					"height": 27,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Trigger",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_sales2.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Text7": {
+					"type": "text",
+					"text": "Trigger",
+					"top": 232,
+					"left": 23,
+					"width": 113,
+					"height": 16
 				}
 			}
 		}
 	],
-	"geometryStamp": 88,
+	"geometryStamp": 103,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
 		"views": {
 			"View 1": {}
 		}
-	}
+	},
+	"method": "method.4dm"
 }

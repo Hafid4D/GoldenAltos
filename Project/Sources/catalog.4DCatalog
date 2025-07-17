@@ -685,6 +685,7 @@
 		<field name="UUID_Contact" uuid="2BA12048AF9841FAAEDC129C7394FAFC" type="10" store_as_UUID="true" never_null="true" id="10"/>
 		<field name="UUID_Method" uuid="E0032020C5FC4E35A311A40ED4EF245B" type="10" store_as_UUID="true" never_null="true" id="11"/>
 		<field name="UUID_Outcome" uuid="7F025E2A765243A2BC9E00979FB9D560" type="10" store_as_UUID="true" never_null="true" id="12"/>
+		<field name="UUID_Interaction" uuid="3B1FDCAA377A43DB99C8AFA0198EFCF5" type="10" store_as_UUID="true" never_null="true" id="13"/>
 		<primary_key field_name="UUID" field_uuid="26E185DCFBC74FF3AF6AD248B2DFF24C"/>
 	</table>
 	<table name="sfw_EventType" uuid="C482A0FBAE724304A8E05A0570FD55D6" id="52">
@@ -1134,7 +1135,7 @@
 		<field name="terminationDate" uuid="9711BE3164B4C44BA4E865C89B7B0507" type="8" never_null="true" id="8"/>
 		<field name="creationDate" uuid="2EA2F0715821A44A8A08F4EFB2CF2EDE" type="8" never_null="true" id="9"/>
 		<field name="code" uuid="10F414604ECF714E8F9B93A248D3CB6D" type="10" limiting_length="255" unique="true" never_null="true" id="10"/>
-		<field name="UUID_Department" uuid="73E51172CDE5C64395048F0930C85A05" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="11">
+		<field name="UUID_Department" uuid="73E51172CDE5C64395048F0930C85A05" type="10" store_as_UUID="true" never_null="true" id="11">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="terminated" uuid="6D60DE6AF3ED654EB394FFE7695CB9DF" type="1" never_null="true" id="12"/>
@@ -1508,6 +1509,18 @@
 		<related_field kind="destination">
 			<field_ref uuid="99E586D88F7844DC88C7D6EB4AABFEFE" name="UUID">
 				<table_ref uuid="C0C5EF5A4CD04FF7BB3897793A9DE6ED" name="ToolType"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="4EEBB3B3CDCE4E4D8FB9E78C0A56728C" name_Nto1="parent" name_1toN="children" state="1">
+		<related_field kind="source">
+			<field_ref uuid="3B1FDCAA377A43DB99C8AFA0198EFCF5" name="UUID_Interaction">
+				<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="26E185DCFBC74FF3AF6AD248B2DFF24C" name="UUID">
+				<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
 			</field_ref>
 		</related_field>
 	</relation>
@@ -2848,6 +2861,11 @@
 	<index kind="regular" unique_keys="true" uuid="FE425B93960DD7438DE10199A2EFD08C" type="7">
 		<field_ref uuid="E33DA69061AB7744853A3E6B6DF6BB8D" name="UUID">
 			<table_ref uuid="0FF66E5E37EDD74B8E6E39F15644C85F" name="Tool"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="FE48190D4B0D4B27A606CA2013402079" type="1">
+		<field_ref uuid="3B1FDCAA377A43DB99C8AFA0198EFCF5" name="UUID_Interaction">
+			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="FE9818C25449453BADD9C91718F21616" type="7">

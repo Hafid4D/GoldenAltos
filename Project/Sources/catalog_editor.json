@@ -764,12 +764,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1060.3558807373,
-				"top": 1960.3384399415,
-				"width": 254.82403564453,
-				"height": 311.97802734375
+				"left": 1112.8527069092,
+				"top": 1953.4202575685,
+				"width": 285.34545898437,
+				"height": 338.83685302734
 			},
-			"displayable_fields_count": 12,
+			"displayable_fields_count": 14,
 			"fields": {
 				"UUID": {
 					"color": {
@@ -1998,6 +1998,14 @@
 			}
 		},
 		"2AD91F4788D14BC589D0DC658413CE3C": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"4EEBB3B3CDCE4E4D8FB9E78C0A56728C": {
 			"color": {
 				"red": 255,
 				"green": 255,

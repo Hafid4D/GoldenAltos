@@ -48,27 +48,28 @@ Function loadInteractions()
 	Form:C1466.lb_interactions:=Form:C1466.current_item.interactions
 	
 Function loadContacts()
-	var $e_mainContact : cs:C1710.ContactEntity
-	var $secondaryContacts : cs:C1710.ContactSelection
+	Form:C1466.lb_contacts:=Form:C1466.current_item.contacts()
+	//var $e_mainContact : cs.ContactEntity
+	//var $secondaryContacts : cs.ContactSelection
 	
-	Form:C1466.lb_contacts:=New collection:C1472()
-	If (Form:C1466.current_item.moreData#Null:C1517) && (Form:C1466.current_item.moreData.mainContact#Null:C1517)
-		$e_mainContact:=ds:C1482.Contact.get(Form:C1466.current_item.moreData.mainContact.UUID)
-		If ($e_mainContact#Null:C1517)
-			$mainContact:=$e_mainContact.toObject()
-			$mainContact.type:="Main"
-			Form:C1466.lb_contacts.push($mainContact)
-		End if 
-	End if 
+	//Form.lb_contacts:=New collection()
+	//If (Form.current_item.moreData#Null) && (Form.current_item.moreData.mainContact#Null)
+	//$e_mainContact:=ds.Contact.get(Form.current_item.moreData.mainContact.UUID)
+	//If ($e_mainContact#Null)
+	//$mainContact:=$e_mainContact.toObject()
+	//$mainContact.type:="Main"
+	//Form.lb_contacts.push($mainContact)
+	//End if 
+	//End if 
 	
-	If (Form:C1466.current_item.moreData#Null:C1517) && (Form:C1466.current_item.moreData.secondaryContacts#Null:C1517)
-		$secondaryContacts:=ds:C1482.Contact.query("UUID in :1"; Form:C1466.current_item.moreData.secondaryContacts)
-		For each ($e_contact; $secondaryContacts)
-			$contact:=$e_contact.toObject()
-			$contact.type:="Secondary"
-			Form:C1466.lb_contacts.push($contact)
-		End for each 
-	End if 
+	//If (Form.current_item.moreData#Null) && (Form.current_item.moreData.secondaryContacts#Null)
+	//$secondaryContacts:=ds.Contact.query("UUID in :1"; Form.current_item.moreData.secondaryContacts)
+	//For each ($e_contact; $secondaryContacts)
+	//$contact:=$e_contact.toObject()
+	//$contact.type:="Secondary"
+	//Form.lb_contacts.push($contact)
+	//End for each 
+	//End if 
 	
 	
 Function loadJobs()
@@ -681,7 +682,7 @@ Function bActionInteractions()
 	Case of 
 		: ($choice="")
 		: ($choice="--log")
-			$form:=New object:C1471("creationDate"; Current date:C33())
+			$form:=New object:C1471("creationDate"; Current date:C33(); "current_item"; Form:C1466.current_item)
 			
 			$ref:=Open form window:C675("Lead_AddInteraction"; Sheet form window:K39:12)
 			DIALOG:C40("Lead_AddInteraction"; $form)

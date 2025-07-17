@@ -57,3 +57,26 @@ local Function _initContacts()
 	If (This:C1470.moreData.secondaryContacts=Null:C1517)
 		This:C1470.moreData.secondaryContacts:=New collection:C1472
 	End if 
+	
+Function contacts()->$contacts : Collection
+	var $e_mainContact : cs:C1710.ContactEntity
+	var $secondaryContacts : cs:C1710.ContactSelection
+	
+	$contacts:=New collection:C1472()
+	If (This:C1470.moreData#Null:C1517) && (This:C1470.moreData.mainContact#Null:C1517)
+		$e_mainContact:=ds:C1482.Contact.get(This:C1470.moreData.mainContact.UUID)
+		If ($e_mainContact#Null:C1517)
+			$mainContact:=$e_mainContact.toObject()
+			$mainContact.type:="Main"
+			$contacts.push($mainContact)
+		End if 
+	End if 
+	
+	If (This:C1470.moreData#Null:C1517) && (This:C1470.moreData.secondaryContacts#Null:C1517)
+		$secondaryContacts:=ds:C1482.Contact.query("UUID in :1"; This:C1470.moreData.secondaryContacts)
+		For each ($e_contact; $secondaryContacts)
+			$contact:=$e_contact.toObject()
+			$contact.type:="Secondary"
+			$contacts.push($contact)
+		End for each 
+	End if 
