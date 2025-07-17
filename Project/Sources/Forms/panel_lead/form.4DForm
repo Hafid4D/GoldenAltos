@@ -885,7 +885,7 @@
 							"footer": {
 								"name": "Footer23"
 							},
-							"dataSource": "This:C1470.employee.fullName",
+							"dataSource": "This:C1470.staff.fullName",
 							"width": 179
 						},
 						{

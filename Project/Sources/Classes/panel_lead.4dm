@@ -45,31 +45,10 @@ Function formMethod()
 	End if 
 	
 Function loadInteractions()
-	Form:C1466.lb_interactions:=Form:C1466.current_item.interactions
+	Form:C1466.lb_interactions:=Form:C1466.current_item.interactions.orderBy("number desc")
 	
 Function loadContacts()
-	var $e_mainContact : cs:C1710.ContactEntity
-	var $secondaryContacts : cs:C1710.ContactSelection
-	
-	Form:C1466.lb_contacts:=New collection:C1472()
-	If (Form:C1466.current_item.moreData#Null:C1517) && (Form:C1466.current_item.moreData.mainContact#Null:C1517)
-		$e_mainContact:=ds:C1482.Contact.get(Form:C1466.current_item.moreData.mainContact.UUID)
-		If ($e_mainContact#Null:C1517)
-			$mainContact:=$e_mainContact.toObject()
-			$mainContact.type:="Main"
-			Form:C1466.lb_contacts.push($mainContact)
-		End if 
-	End if 
-	
-	If (Form:C1466.current_item.moreData#Null:C1517) && (Form:C1466.current_item.moreData.secondaryContacts#Null:C1517)
-		$secondaryContacts:=ds:C1482.Contact.query("UUID in :1"; Form:C1466.current_item.moreData.secondaryContacts)
-		For each ($e_contact; $secondaryContacts)
-			$contact:=$e_contact.toObject()
-			$contact.type:="Secondary"
-			Form:C1466.lb_contacts.push($contact)
-		End for each 
-	End if 
-	
+	Form:C1466.lb_contacts:=Form:C1466.current_item.contacts()
 	
 Function loadJobs()
 	Form:C1466.job:=Null:C1517
@@ -510,14 +489,15 @@ Function btnOpenStaff()
 Function btnCreateCustomer()
 	Form:C1466.sfw.openCreateWindow("customerService"; "customer")
 	
-Function btnDatePickerCreate()
-	If (Form:C1466.sfw.checkIsInModification())
-		OBJECT GET COORDINATES:C663(*; "btnDatePickerCreate"; $x1; $y1; $x2; $y2)
-		$test:=DatePicker Display Dialog($x1+500; $y1+100)
-		If ($test#!00-00-00!)
-			Form:C1466.current_item.dateCreation:=$test
-		End if 
+Function btnDatePickerCreate($object; $attribut)
+	$name:=OBJECT Get name:C1087
+	OBJECT GET COORDINATES:C663(*; $name; $x1; $y1; $x2; $y2)
+	CONVERT COORDINATES:C1365($x1; $y1; XY Current form:K27:5; XY Current window:K27:6)
+	$test:=DatePicker Display Dialog($x1; $y1)
+	If ($test#!00-00-00!)
+		$object[$attribut]:=$test
 	End if 
+	
 	
 Function btnDatePickerClose()
 	If (Form:C1466.sfw.checkIsInModification())
@@ -648,6 +628,9 @@ Function _activate_save_cancel_button()
 	
 	
 Function bActionInteractions()
+	var $interaction : cs:C1710.InteractionEntity
+	var $status : cs:C1710.InteractionTypeEntity
+	
 	$mainMenu:=Create menu:C408
 	
 	APPEND MENU ITEM:C411($mainMenu; "Edit interaction..."; *)
@@ -681,9 +664,100 @@ Function bActionInteractions()
 	Case of 
 		: ($choice="")
 		: ($choice="--log")
+			$form:=New object:C1471
+			$form.creationDate:=Current date:C33()
+			$form.current_item:=Form:C1466.current_item
+			$form.number:=ds:C1482.Interaction.sequence
+			$form.nextFollowUp:=False:C215
+			$form.followUPDate:=Add to date:C393(Current date:C33; 0; 0; 1)
+			
+			$ref:=Open form window:C675("Lead_AddInteraction"; Sheet form window:K39:12)
+			DIALOG:C40("Lead_AddInteraction"; $form)
+			CLOSE WINDOW:C154($ref)
+			
+			If (ok=1)
+				$form.stmpCreation:=cs:C1710.sfw_stmp.me.build($form.creationDate)
+				$form.stmpFollowUp:=cs:C1710.sfw_stmp.me.build($form.followUPDate)
+				OB REMOVE:C1226($form; "creationDate")
+				OB REMOVE:C1226($form; "followUPDate")
+				OB REMOVE:C1226($form; "current_item")
+				
+				$interaction:=ds:C1482.Interaction.new()
+				$interaction.fromObject($form)
+				$interaction.UUID_Lead:=Form:C1466.current_item.UUID
+				$status:=ds:C1482.InteractionType.query("code == :1"; "COMPLETED").first()
+				If ($status#Null:C1517)
+					$interaction.UUID_Type:=$status.UUID
+				End if 
+				$result:=$interaction.save()
+				Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($interaction).orderBy("number desc")
+				
+				
+				If ($form.nextFollowUp)
+					$scheduledInteraction:=ds:C1482.Interaction.new()
+					$scheduledInteraction.fromObject($form)
+					$scheduledInteraction.number:=ds:C1482.Interaction.sequence
+					$scheduledInteraction.UUID_Lead:=Form:C1466.current_item.UUID
+					$scheduledInteraction.notes:=""
+					$scheduledInteraction.UUID_Lead:=Form:C1466.current_item.UUID
+					$status:=ds:C1482.InteractionType.query("code == :1"; "SCHEDULED").first()
+					If ($status#Null:C1517)
+						$scheduledInteraction.UUID_Type:=$status.UUID
+					End if 
+					$scheduledInteraction.UUID_Interaction:=$interaction.UUID
+					
+					$result:=$scheduledInteraction.save()
+					Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($scheduledInteraction).orderBy("number desc")
+					
+				End if 
+				
+				cs:C1710.panel_lead.me._activate_save_cancel_button()
+			End if 
+			
+	End case 
+	
+Function pup_interaction($type; $currentUUID)->$uuid : Text
+	
+	Case of 
+		: ($type="method")
+			$dc:="InteractionMethod"
+			$cacheAttribut:="interactionMethod"
+			$widgetName:="pup_method"
+			
+		: ($type="outcome")
+			$dc:="InteractionOutcome"
+			$cacheAttribut:="interactionOutcome"
+			$widgetName:="pup_outcome"
+			
+		: ($type="trigger")
+			$dc:="InteractionTrigger"
+			$cacheAttribut:="interactionTrigger"
+			$widgetName:="pup_trigger"
 			
 	End case 
 	
 	
+	$menu:=Create menu:C408
+	If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache[$cacheAttribut]=Null:C1517)
+		ds:C1482[$dc].cacheLoad()
+	End if 
 	
+	For each ($eItem; Storage:C1525.cache[$cacheAttribut])
+		APPEND MENU ITEM:C411($menu; $eItem.name; *)
+		SET MENU ITEM PARAMETER:C1004($menu; -1; $eItem.UUID)
+		If ($eItem.UUID=$currentUUID)
+			SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+			If (Is Windows:C1573)
+				SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+			End if 
+		End if 
+	End for each 
+	$uuid:=Dynamic pop up menu:C1006($menu)
+	RELEASE MENU:C978($menu)
+	
+	Case of 
+		: ($uuid#"")
+			$item:=Storage:C1525.cache[$cacheAttribut].query("UUID == :1"; $uuid)[0]
+			OBJECT SET TITLE:C194(*; $widgetName; $item.name)
+	End case 
 	

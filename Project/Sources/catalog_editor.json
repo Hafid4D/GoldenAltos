@@ -56,12 +56,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2429,
-				"top": 153,
-				"width": 207.05078125,
-				"height": 379.33203125
+				"left": 1732.9794769287,
+				"top": 570.94158935547,
+				"width": 226.30639648438,
+				"height": 417.9924621582
 			},
-			"displayable_fields_count": 16,
+			"displayable_fields_count": 17,
 			"fields": {
 				"contactDetails": {
 					"position": 15
@@ -78,7 +78,13 @@
 				"terminated": {
 					"position": 6
 				},
-				"department": {
+				"UUID_Department": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					},
 					"position": 12
 				},
 				"code": {
@@ -157,22 +163,6 @@
 			"displayable_fields_count": 4,
 			"fields_ordering": 1
 		},
-		"Employee": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			},
-			"coordinates": {
-				"left": 1640,
-				"top": 204,
-				"width": 159.685546875,
-				"height": 219.33203125
-			},
-			"displayable_fields_count": 8,
-			"fields_ordering": 1
-		},
 		"CustomerStatus": {
 			"color": {
 				"red": 255,
@@ -213,12 +203,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1349.6715087891,
+				"left": 1297,
 				"top": 0,
-				"width": 220.25073242188,
-				"height": 390.47149658203
+				"width": 195.046875,
+				"height": 335.33203125
 			},
-			"displayable_fields_count": 16,
+			"displayable_fields_count": 14,
 			"fields_ordering": 2,
 			"fields": {
 				"voided": {
@@ -493,10 +483,10 @@
 			"coordinates": {
 				"left": 1578,
 				"top": 503,
-				"width": 203.46984863281,
-				"height": 597.47436523438
+				"width": 157.048828125,
+				"height": 575.33203125
 			},
-			"displayable_fields_count": 26
+			"displayable_fields_count": 25
 		},
 		"Customer": {
 			"color": {
@@ -685,6 +675,56 @@
 				}
 			}
 		},
+		"InteractionMethod": {
+			"color": {
+				"red": 207,
+				"green": 209,
+				"blue": 165,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 1610.762512207,
+				"top": 1979.6590576172,
+				"width": 162,
+				"height": 163.33203125
+			},
+			"displayable_fields_count": 5,
+			"fields": {
+				"UUID": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
+		},
+		"InteractionOutcome": {
+			"color": {
+				"red": 207,
+				"green": 209,
+				"blue": 165,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 1542.4927368164,
+				"top": 2227.5024414063,
+				"width": 162,
+				"height": 163.33203125
+			},
+			"displayable_fields_count": 5,
+			"fields": {
+				"UUID": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
+		},
 		"InteractionTrigger": {
 			"color": {
 				"red": 207,
@@ -693,8 +733,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1422.4901123046,
-				"top": 2188.4861450196,
+				"left": 760.18234252921,
+				"top": 2157.9232788086,
 				"width": 162,
 				"height": 163.33203125
 			},
@@ -724,12 +764,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1010.3008117676,
-				"top": 2031.1480712891,
-				"width": 254.82403564453,
-				"height": 311.97802734375
+				"left": 1112.8527069092,
+				"top": 1953.4202575685,
+				"width": 285.34545898437,
+				"height": 338.83685302734
 			},
-			"displayable_fields_count": 12,
+			"displayable_fields_count": 14,
 			"fields": {
 				"UUID": {
 					"color": {
@@ -897,8 +937,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1628.7045898438,
-				"top": 2096.8619995118,
+				"left": 1075.8306884766,
+				"top": 2319.2586669922,
 				"width": 162,
 				"height": 163.33203125
 			},
@@ -1677,14 +1717,38 @@
 			"coordinates": {
 				"left": 692,
 				"top": 423,
-				"width": 144,
-				"height": 209.33203125
+				"width": 149.015625,
+				"height": 196.33203125
 			},
-			"displayable_fields_count": 8,
+			"displayable_fields_count": 7,
 			"fields_ordering": 1
 		}
 	},
 	"relations": {
+		"F01472D43AF045ECB5F37A14F2FBD275": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"FC01FE8AFB1B4C998C2ECA9DDCE44478": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"068E44D3BD334FFF88492120C25B4C9A": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
 		"C09BC2389C8D4BF6BFF5034684908093": {
 			"color": {
 				"red": 255,
@@ -1693,7 +1757,7 @@
 				"alpha": 0
 			}
 		},
-		"EDD3DE5B223549E9B009035A8C596B4F": {
+		"DBA2364367CE440FBDE4F5879B7D3579": {
 			"color": {
 				"red": 255,
 				"green": 255,
@@ -1941,7 +2005,7 @@
 				"alpha": 0
 			}
 		},
-		"A2FC9314D488E043A1D505B9967275F1": {
+		"4EEBB3B3CDCE4E4D8FB9E78C0A56728C": {
 			"color": {
 				"red": 255,
 				"green": 255,

@@ -1,10 +1,8 @@
 //%attributes = {}
 
-
-[Job:117]
-$po:=ds:C1482.PurchaseOrder.all().distinct("code")
-
-
+TRUNCATE TABLE:C1051([Interaction:51])
+//$es:=ds.Interaction.all()
+//[Lead]
 
 
 //$file:=Folder(fk data folder).file("2300_Names.json")

@@ -45,7 +45,7 @@
 			"destination": "detailScreen"
 		},
 		"selectJob": {
-			"timeStamp": "2025-07-16T10:20:39Z",
+			"timeStamp": "2025-07-16T15:53:22Z",
 			"destination": "detailScreen"
 		},
 		"sfw_bkgd_header_1lines": {
@@ -81,7 +81,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_lead": {
-			"timeStamp": "2025-07-16T15:18:02Z",
+			"timeStamp": "2025-07-17T11:40:05Z",
 			"destination": "detailScreen"
 		},
 		"sfw_panel_default": {
@@ -161,7 +161,7 @@
 			"destination": "detailScreen"
 		},
 		"selectQuote": {
-			"timeStamp": "2025-07-16T10:20:39Z",
+			"timeStamp": "2025-07-16T15:53:22Z",
 			"destination": "detailScreen"
 		},
 		"selectCustomer": {
@@ -189,7 +189,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_interactionType": {
-			"timeStamp": "2025-07-08T10:37:02Z",
+			"timeStamp": "2025-07-16T15:53:22Z",
 			"destination": "detailScreen"
 		},
 		"_ga_subpanel_communication": {
@@ -205,7 +205,7 @@
 			"destination": "detailScreen"
 		},
 		"selectPo": {
-			"timeStamp": "2025-07-16T10:20:39Z",
+			"timeStamp": "2025-07-16T15:53:22Z",
 			"destination": "detailScreen"
 		},
 		"sfw_selector_callback": {
@@ -324,6 +324,14 @@
 			"timeStamp": "2025-07-08T10:37:02Z",
 			"destination": "detailScreen"
 		},
+		"Lead_AddInteraction": {
+			"timeStamp": "2025-07-17T15:27:11Z",
+			"destination": "detailScreen"
+		},
+		"panel_interactionOutcome": {
+			"timeStamp": "2025-07-08T10:37:02Z",
+			"destination": "detailScreen"
+		},
 		"panel_purchaseOrder": {
 			"timeStamp": "2025-07-11T14:50:23Z",
 			"destination": "detailScreen"
@@ -341,6 +349,10 @@
 			"destination": "detailScreen"
 		},
 		"sfw_lbXliff": {
+			"timeStamp": "2025-07-08T10:37:02Z",
+			"destination": "detailScreen"
+		},
+		"panel_interactionMethod": {
 			"timeStamp": "2025-07-08T10:37:02Z",
 			"destination": "detailScreen"
 		},
@@ -405,7 +417,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_interactionTrigger": {
-			"timeStamp": "2025-07-08T10:37:02Z",
+			"timeStamp": "2025-07-16T15:53:22Z",
 			"destination": "detailScreen"
 		},
 		"dfd_collection_editor": {
