@@ -1,9 +1,7 @@
 //%attributes = {}
 
 
-[Job:117]
-$po:=ds:C1482.PurchaseOrder.all().distinct("code")
-
+$es:=ds:C1482.Staff.query("department == :1"; "Sales")
 
 
 

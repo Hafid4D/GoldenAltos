@@ -670,7 +670,7 @@
 		</field>
 		<field name="note" uuid="DFC0CC9E56ED42E6B362DFFD6CFE9A18" type="10" never_null="true" id="4"/>
 		<field name="stmpFollowUp" uuid="9A46C34C20ED4A4487EE635EE4F5C83A" type="10" limiting_length="255" never_null="true" id="5"/>
-		<field name="UUID_Employee" uuid="0C8B8BC2547F424CBBC35386810732B1" type="10" store_as_UUID="true" never_null="true" id="6">
+		<field name="UUID_Staff" uuid="0C8B8BC2547F424CBBC35386810732B1" type="10" store_as_UUID="true" never_null="true" id="6">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="UUID_Lead" uuid="17F71D68FA714CE9A75ED79CA63E3BE2" type="10" store_as_UUID="true" never_null="true" id="7">
@@ -1987,15 +1987,15 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="EDD3DE5B223549E9B009035A8C596B4F" name_Nto1="employee" name_1toN="interactions" state="1">
+	<relation uuid="DBA2364367CE440FBDE4F5879B7D3579" name_Nto1="staff" name_1toN="interactions" state="1">
 		<related_field kind="source">
-			<field_ref uuid="0C8B8BC2547F424CBBC35386810732B1" name="UUID_Employee">
+			<field_ref uuid="0C8B8BC2547F424CBBC35386810732B1" name="UUID_Staff">
 				<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
 			</field_ref>
 		</related_field>
 		<related_field kind="destination">
-			<field_ref uuid="DD376712F0CC41AFA671F1D6AF7D83D7" name="UUID">
-				<table_ref uuid="80CC55684C2F4451AC0751964F071A71" name="Employee"/>
+			<field_ref uuid="6941AB4C41898A4A9FBF25D5AC27CA2B" name="UUID">
+				<table_ref uuid="FD10D10C9E0015458AFF59F988A373BB" name="Staff"/>
 			</field_ref>
 		</related_field>
 	</relation>
@@ -2151,7 +2151,7 @@
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="1D4407A77A2445DB9D572AEB674BDE43" type="3">
-		<field_ref uuid="0C8B8BC2547F424CBBC35386810732B1" name="UUID_Employee">
+		<field_ref uuid="0C8B8BC2547F424CBBC35386810732B1" name="UUID_Staff">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
 		</field_ref>
 	</index>

@@ -151,11 +151,65 @@
 					"left": 43,
 					"width": 113,
 					"height": 16
+				},
+				"pup_outcome": {
+					"type": "button",
+					"top": 144,
+					"left": 149,
+					"width": 226,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Outcome",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_outcome.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Text3": {
+					"type": "text",
+					"text": "Outcome",
+					"top": 144,
+					"left": 43,
+					"width": 113,
+					"height": 16
+				},
+				"pup_outcome1": {
+					"type": "button",
+					"top": 180,
+					"left": 149,
+					"width": 226,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Outcome",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_outcome1.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Text4": {
+					"type": "text",
+					"text": "Sales person",
+					"top": 180,
+					"left": 43,
+					"width": 113,
+					"height": 16
 				}
 			}
 		}
 	],
-	"geometryStamp": 58,
+	"geometryStamp": 62,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

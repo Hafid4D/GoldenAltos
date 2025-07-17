@@ -681,7 +681,7 @@ Function bActionInteractions()
 	Case of 
 		: ($choice="")
 		: ($choice="--log")
-			$form:={interaction: New object:C1471()}
+			$form:=New object:C1471("creationDate"; Current date:C33())
 			
 			$ref:=Open form window:C675("Lead_AddInteraction"; Sheet form window:K39:12)
 			DIALOG:C40("Lead_AddInteraction"; $form)
@@ -700,6 +700,11 @@ Function pup_interaction($type; $currentUUID)->$uuid : Text
 			$dc:="InteractionMethod"
 			$cacheAttribut:="interactionMethod"
 			$widgetName:="pup_method"
+			
+		: ($type="outcome")
+			$dc:="InteractionOutcome"
+			$cacheAttribut:="interactionOutcome"
+			$widgetName:="pup_outcome"
 	End case 
 	
 	
