@@ -163,22 +163,6 @@
 			"displayable_fields_count": 4,
 			"fields_ordering": 1
 		},
-		"Employee": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			},
-			"coordinates": {
-				"left": 1640,
-				"top": 204,
-				"width": 159.685546875,
-				"height": 219.33203125
-			},
-			"displayable_fields_count": 8,
-			"fields_ordering": 1
-		},
 		"CustomerStatus": {
 			"color": {
 				"red": 255,
@@ -2014,14 +1998,6 @@
 			}
 		},
 		"2AD91F4788D14BC589D0DC658413CE3C": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"A2FC9314D488E043A1D505B9967275F1": {
 			"color": {
 				"red": 255,
 				"green": 255,

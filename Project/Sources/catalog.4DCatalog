@@ -1096,16 +1096,6 @@
 		<field name="color" uuid="8DC2C4691C634726B48B6698EC206261" type="10" limiting_length="255" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="9C6030E6F9384C39A4FDB9E6453F235A"/>
 	</table>
-	<table name="Employee" uuid="80CC55684C2F4451AC0751964F071A71" id="131">
-		<field name="UUID" uuid="DD376712F0CC41AFA671F1D6AF7D83D7" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="firstName" uuid="2CC86DA71CBD443597A55DEAD02293E6" type="10" limiting_length="255" never_null="true" id="2"/>
-		<field name="lastName" uuid="C5E159F86F5F473EB861D2B6B346BFCB" type="10" limiting_length="255" never_null="true" id="3"/>
-		<field name="contactDetails" uuid="C80C8A2497674891A6EBA4908DD06B32" type="21" blob_switch_size="2147483647" never_null="true" id="4"/>
-		<field name="UUID_Department" uuid="0A9BA78388B14E569AB76C2955F3E5E3" type="10" store_as_UUID="true" never_null="true" id="5"/>
-		<field name="code" uuid="FF31D98C3A224153ADB23907CD5B9570" type="10" limiting_length="255" never_null="true" id="6"/>
-		<field name="active" uuid="9EB7F40C76914F4A92E90EDF5924EF36" type="1" never_null="true" id="7"/>
-		<primary_key field_name="UUID" field_uuid="DD376712F0CC41AFA671F1D6AF7D83D7"/>
-	</table>
 	<table name="Department" uuid="894004274A3B4909A39584EC0B879D18" id="132">
 		<field name="UUID" uuid="8D9FB8C795534689B56DE1CC69FD3D14" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="name" uuid="99BB28C34588457F89FCF838E93A19BD" type="10" limiting_length="255" never_null="true" id="2"/>
@@ -1518,30 +1508,6 @@
 		<related_field kind="destination">
 			<field_ref uuid="99E586D88F7844DC88C7D6EB4AABFEFE" name="UUID">
 				<table_ref uuid="C0C5EF5A4CD04FF7BB3897793A9DE6ED" name="ToolType"/>
-			</field_ref>
-		</related_field>
-	</relation>
-	<relation uuid="A2FC9314D488E043A1D505B9967275F1" name_Nto1="department" name_1toN="employees" state="1">
-		<related_field kind="source">
-			<field_ref uuid="0A9BA78388B14E569AB76C2955F3E5E3" name="UUID_Department">
-				<table_ref uuid="80CC55684C2F4451AC0751964F071A71" name="Employee"/>
-			</field_ref>
-		</related_field>
-		<related_field kind="destination">
-			<field_ref uuid="8D9FB8C795534689B56DE1CC69FD3D14" name="UUID">
-				<table_ref uuid="894004274A3B4909A39584EC0B879D18" name="Department"/>
-			</field_ref>
-		</related_field>
-	</relation>
-	<relation uuid="E53C2765B75493449D395F55702F48DB" name_Nto1="employee" name_1toN="quotes" state="1">
-		<related_field kind="source">
-			<field_ref uuid="0EACB0E17BBD4F639E0C142211979D18" name="UUID_Employee">
-				<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
-			</field_ref>
-		</related_field>
-		<related_field kind="destination">
-			<field_ref uuid="DD376712F0CC41AFA671F1D6AF7D83D7" name="UUID">
-				<table_ref uuid="80CC55684C2F4451AC0751964F071A71" name="Employee"/>
 			</field_ref>
 		</related_field>
 	</relation>
@@ -2534,11 +2500,6 @@
 			<table_ref uuid="C0C5EF5A4CD04FF7BB3897793A9DE6ED" name="ToolType"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="8BF171373E502D41AE4945DA954A8262" type="1">
-		<field_ref uuid="DD376712F0CC41AFA671F1D6AF7D83D7" name="UUID">
-			<table_ref uuid="80CC55684C2F4451AC0751964F071A71" name="Employee"/>
-		</field_ref>
-	</index>
 	<index kind="regular" uuid="8D55D949B63840D6956A5F33050FDFB6" type="1">
 		<field_ref uuid="A276955D955E41BCA8E3E93B8F5D0B9D" name="UUID_target">
 			<table_ref uuid="BBA10D61B3A54D38A2C335D8A5A1BF6E" name="sfw_Favorite"/>
@@ -2847,11 +2808,6 @@
 	<index kind="regular" uuid="EA961ED6B22F3B46AD00D030EBAF34A9" type="3">
 		<field_ref uuid="482371D0CF2A0C4A892CF69926A2E78C" name="UUID_Team">
 			<table_ref uuid="FD10D10C9E0015458AFF59F988A373BB" name="Staff"/>
-		</field_ref>
-	</index>
-	<index kind="regular" uuid="F07FD1503FBC604EB347008A7836AB88" type="3">
-		<field_ref uuid="0A9BA78388B14E569AB76C2955F3E5E3" name="UUID_Department">
-			<table_ref uuid="80CC55684C2F4451AC0751964F071A71" name="Employee"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="F20E165F0BE847BE813BD9F4E3EC7C7E" type="3">

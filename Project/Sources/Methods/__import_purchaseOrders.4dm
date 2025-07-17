@@ -1,4 +1,6 @@
 //%attributes = {"executedOnServer":true}
+var $eDepartment : cs:C1710.DepartmentEntity
+
 /**
 import po & po lines (po <-- po_lines)
 **/
@@ -655,6 +657,7 @@ End if
 import staffs
 **/
 If (True:C214)
+	
 	TRUNCATE TABLE:C1051([Staff:135])
 	TRUNCATE TABLE:C1051([Department:132])
 	
