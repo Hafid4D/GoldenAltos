@@ -668,8 +668,8 @@
 		<field name="stmpCreation" uuid="B6A59CA700174E06994E622F3BDF82ED" type="4" never_null="true" id="3">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="note" uuid="DFC0CC9E56ED42E6B362DFFD6CFE9A18" type="10" never_null="true" id="4"/>
-		<field name="stmpFollowUp" uuid="9A46C34C20ED4A4487EE635EE4F5C83A" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="notes" uuid="DFC0CC9E56ED42E6B362DFFD6CFE9A18" type="10" never_null="true" id="4"/>
+		<field name="stmpFollowUp" uuid="9A46C34C20ED4A4487EE635EE4F5C83A" type="4" never_null="true" id="5"/>
 		<field name="UUID_Staff" uuid="0C8B8BC2547F424CBBC35386810732B1" type="10" store_as_UUID="true" never_null="true" id="6">
 			<field_extra multi_line="false"/>
 		</field>

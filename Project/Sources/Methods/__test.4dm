@@ -1,7 +1,7 @@
 //%attributes = {}
 
 
-$es:=ds:C1482.Staff.query("department == :1"; "Sales")
+$es:=ds:C1482.Interaction.all()
 
 
 

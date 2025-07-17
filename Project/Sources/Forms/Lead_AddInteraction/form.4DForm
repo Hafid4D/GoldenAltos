@@ -38,8 +38,8 @@
 			"objects": {
 				"Button": {
 					"type": "button",
-					"top": 463,
-					"left": 591,
+					"top": 387,
+					"left": 268,
 					"width": 70,
 					"height": 20,
 					"sizingX": "move",
@@ -54,8 +54,8 @@
 				},
 				"Button1": {
 					"type": "button",
-					"top": 463,
-					"left": 671,
+					"top": 387,
+					"left": 348,
 					"width": 70,
 					"height": 20,
 					"sizingX": "move",
@@ -73,7 +73,7 @@
 					"type": "rectangle",
 					"top": 7,
 					"left": 0,
-					"width": 703,
+					"width": 438,
 					"height": 32,
 					"fill": "#00A4A4",
 					"stroke": "transparent"
@@ -90,25 +90,25 @@
 				"Text1": {
 					"type": "text",
 					"text": "Date",
-					"top": 73,
-					"left": 43,
+					"top": 53,
+					"left": 23,
 					"width": 91,
 					"height": 16
 				},
 				"creationDate": {
 					"type": "input",
-					"left": 149,
-					"top": 73,
-					"width": 226,
-					"height": 20,
+					"left": 129,
+					"top": 53,
+					"width": 261,
+					"height": 17,
 					"dataSourceTypeHint": "text",
 					"dataSource": "Form:C1466.creationDate"
 				},
 				"btnDatePickerCreate": {
 					"type": "button",
 					"text": " ",
-					"top": 73,
-					"left": 386,
+					"top": 54,
+					"left": 400,
 					"width": 18,
 					"height": 18,
 					"events": [
@@ -127,10 +127,10 @@
 				},
 				"pup_method": {
 					"type": "button",
-					"top": 108,
-					"left": 149,
-					"width": 226,
-					"height": 23,
+					"top": 88,
+					"left": 129,
+					"width": 289,
+					"height": 28,
 					"fontFamily": "System Font",
 					"fontSize": 13,
 					"focusable": false,
@@ -147,17 +147,17 @@
 				"Text2": {
 					"type": "text",
 					"text": "Method",
-					"top": 108,
-					"left": 43,
+					"top": 88,
+					"left": 23,
 					"width": 113,
 					"height": 16
 				},
 				"pup_outcome": {
 					"type": "button",
-					"top": 144,
-					"left": 149,
-					"width": 226,
-					"height": 23,
+					"top": 124,
+					"left": 129,
+					"width": 289,
+					"height": 28,
 					"fontFamily": "System Font",
 					"fontSize": 13,
 					"focusable": false,
@@ -174,26 +174,26 @@
 				"Text3": {
 					"type": "text",
 					"text": "Outcome",
-					"top": 144,
-					"left": 43,
+					"top": 124,
+					"left": 23,
 					"width": 113,
 					"height": 16
 				},
-				"pup_outcome1": {
+				"pup_sales": {
 					"type": "button",
-					"top": 180,
-					"left": 149,
-					"width": 226,
-					"height": 23,
+					"top": 160,
+					"left": 129,
+					"width": 289,
+					"height": 27,
 					"fontFamily": "System Font",
 					"fontSize": 13,
 					"focusable": false,
-					"text": "Outcome",
+					"text": "Sales person",
 					"icon": "",
 					"popupPlacement": "linked",
 					"textPlacement": "right",
 					"style": "bevel",
-					"method": "ObjectMethods/pup_outcome1.4dm",
+					"method": "ObjectMethods/pup_sales.4dm",
 					"events": [
 						"onClick"
 					]
@@ -201,15 +201,33 @@
 				"Text4": {
 					"type": "text",
 					"text": "Sales person",
-					"top": 180,
-					"left": 43,
+					"top": 160,
+					"left": 23,
 					"width": 113,
 					"height": 16
+				},
+				"Text5": {
+					"type": "text",
+					"text": "Notes",
+					"top": 207,
+					"left": 24,
+					"width": 85,
+					"height": 16
+				},
+				"creationDate1": {
+					"type": "input",
+					"left": 129,
+					"top": 207,
+					"width": 289,
+					"height": 145,
+					"dataSourceTypeHint": "text",
+					"dataSource": "Form:C1466.notes",
+					"multiline": "yes"
 				}
 			}
 		}
 	],
-	"geometryStamp": 62,
+	"geometryStamp": 88,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

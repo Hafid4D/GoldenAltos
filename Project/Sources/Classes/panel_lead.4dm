@@ -688,7 +688,17 @@ Function bActionInteractions()
 			CLOSE WINDOW:C154($ref)
 			
 			If (ok=1)
+				$form.stmpCreation:=cs:C1710.sfw_stmp.me.build($form.creationDate)
+				OB REMOVE:C1226($form; "creationDate")
 				
+				$interaction:=ds:C1482.Interaction.new()
+				$interaction.fromObject($form)
+				$interaction.UUID_Lead:=Form:C1466.current_item.UUID
+				$result:=$interaction.save()
+				
+				
+				Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($interaction)
+				cs:C1710.panel_lead.me._activate_save_cancel_button()
 			End if 
 			
 	End case 
@@ -705,6 +715,7 @@ Function pup_interaction($type; $currentUUID)->$uuid : Text
 			$dc:="InteractionOutcome"
 			$cacheAttribut:="interactionOutcome"
 			$widgetName:="pup_outcome"
+			
 	End case 
 	
 	
@@ -727,7 +738,7 @@ Function pup_interaction($type; $currentUUID)->$uuid : Text
 	RELEASE MENU:C978($menu)
 	
 	Case of 
-		: ($uuid#Null:C1517)
+		: ($uuid#"")
 			$item:=Storage:C1525.cache[$cacheAttribut].query("UUID == :1"; $uuid)[0]
 			OBJECT SET TITLE:C194(*; $widgetName; $item.name)
 	End case 
