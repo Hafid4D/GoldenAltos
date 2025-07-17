@@ -56,8 +56,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1660.1649017334,
-				"top": 1452.6535491943,
+				"left": 1732.9794769287,
+				"top": 570.94158935547,
 				"width": 226.30639648438,
 				"height": 417.9924621582
 			},
@@ -78,7 +78,13 @@
 				"terminated": {
 					"position": 6
 				},
-				"department": {
+				"UUID_Department": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					},
 					"position": 12
 				},
 				"code": {
@@ -1735,6 +1741,14 @@
 		}
 	},
 	"relations": {
+		"F01472D43AF045ECB5F37A14F2FBD275": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
 		"FC01FE8AFB1B4C998C2ECA9DDCE44478": {
 			"color": {
 				"red": 255,

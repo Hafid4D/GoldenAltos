@@ -1144,7 +1144,9 @@
 		<field name="terminationDate" uuid="9711BE3164B4C44BA4E865C89B7B0507" type="8" never_null="true" id="8"/>
 		<field name="creationDate" uuid="2EA2F0715821A44A8A08F4EFB2CF2EDE" type="8" never_null="true" id="9"/>
 		<field name="code" uuid="10F414604ECF714E8F9B93A248D3CB6D" type="10" limiting_length="255" unique="true" never_null="true" id="10"/>
-		<field name="department" uuid="73E51172CDE5C64395048F0930C85A05" type="10" limiting_length="255" never_null="true" id="11"/>
+		<field name="UUID_Department" uuid="73E51172CDE5C64395048F0930C85A05" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="11">
+			<field_extra multi_line="false"/>
+		</field>
 		<field name="terminated" uuid="6D60DE6AF3ED654EB394FFE7695CB9DF" type="1" never_null="true" id="12"/>
 		<field name="hireDate" uuid="7EBB8EEF817496498EE3FA0CC391675E" type="8" never_null="true" id="13"/>
 		<field name="division" uuid="C307EB019AE88F48B0C093CC7A4B60B1" type="10" limiting_length="255" never_null="true" id="14"/>
@@ -2035,6 +2037,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="F01472D43AF045ECB5F37A14F2FBD275" name_Nto1="department" name_1toN="staffs" state="1">
+		<related_field kind="source">
+			<field_ref uuid="73E51172CDE5C64395048F0930C85A05" name="UUID_Department">
+				<table_ref uuid="FD10D10C9E0015458AFF59F988A373BB" name="Staff"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="8D9FB8C795534689B56DE1CC69FD3D14" name="UUID">
+				<table_ref uuid="894004274A3B4909A39584EC0B879D18" name="Department"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="005E48A922A4464DB92973931B467ACF" type="3">
 		<field_ref uuid="17F71D68FA714CE9A75ED79CA63E3BE2" name="UUID_Lead">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
@@ -2483,6 +2497,11 @@
 	<index kind="regular" unique_keys="true" uuid="7E197F46BD838349B434193A2013A37B" type="7">
 		<field_ref uuid="3B46C986029743428A30E84AA5F8ADC4" name="UUID">
 			<table_ref uuid="F25CD20FCCFE2044A3D568BAFE905227" name="Division"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="7F13C595848746569F0E942118A7C3E9" type="3">
+		<field_ref uuid="73E51172CDE5C64395048F0930C85A05" name="UUID_Department">
+			<table_ref uuid="FD10D10C9E0015458AFF59F988A373BB" name="Staff"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="81B92667ECA840CC88E29D368B48B43D" type="7">

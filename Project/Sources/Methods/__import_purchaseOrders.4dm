@@ -656,6 +656,7 @@ import staffs
 **/
 If (True:C214)
 	TRUNCATE TABLE:C1051([Staff:135])
+	TRUNCATE TABLE:C1051([Department:132])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/staff_export.json")
 	
@@ -663,15 +664,21 @@ If (True:C214)
 	
 	
 	For each ($record; $records)
-		$staff_e:=ds:C1482.Staff.new()
+		$eDepartment:=ds:C1482.Department.query("name == :1"; $record.department).first()
+		If ($eDepartment=Null:C1517)
+			$eDepartment:=ds:C1482.Department.new()
+			$eDepartment.name:=$record.department
+			$eDepartment.save()
+		End if 
 		
+		$staff_e:=ds:C1482.Staff.new()
 		$staff_e.firstName:=$record.firstName
 		$staff_e.lastName:=$record.lastName
 		$staff_e.retrainDate:=$record.retrainDate
 		$staff_e.terminationDate:=$record.terminationDate
 		$staff_e.creationDate:=cs:C1710.sfw_stmp.me.getDate($record.creationDate)
 		$staff_e.code:=$record.code
-		$staff_e.department:=$record.department
+		$staff_e.UUID_Department:=$eDepartment.UUID
 		$staff_e.terminated:=$record.terminated
 		$staff_e.hireDate:=$record.hireDate
 		$staff_e.division:=$record.division
