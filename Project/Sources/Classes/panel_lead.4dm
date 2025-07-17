@@ -45,7 +45,7 @@ Function formMethod()
 	End if 
 	
 Function loadInteractions()
-	Form:C1466.lb_interactions:=Form:C1466.current_item.interactions
+	Form:C1466.lb_interactions:=Form:C1466.current_item.interactions.orderBy("number desc")
 	
 Function loadContacts()
 	Form:C1466.lb_contacts:=Form:C1466.current_item.contacts()
@@ -490,7 +490,8 @@ Function btnCreateCustomer()
 	Form:C1466.sfw.openCreateWindow("customerService"; "customer")
 	
 Function btnDatePickerCreate($object; $attribut)
-	OBJECT GET COORDINATES:C663(*; "btnDatePickerCreate"; $x1; $y1; $x2; $y2)
+	$name:=OBJECT Get name:C1087
+	OBJECT GET COORDINATES:C663(*; $name; $x1; $y1; $x2; $y2)
 	CONVERT COORDINATES:C1365($x1; $y1; XY Current form:K27:5; XY Current window:K27:6)
 	$test:=DatePicker Display Dialog($x1; $y1)
 	If ($test#!00-00-00!)
@@ -663,7 +664,12 @@ Function bActionInteractions()
 	Case of 
 		: ($choice="")
 		: ($choice="--log")
-			$form:=New object:C1471("creationDate"; Current date:C33(); "current_item"; Form:C1466.current_item; "number"; Sequence number:C244([Interaction:51]))
+			$form:=New object:C1471
+			$form.creationDate:=Current date:C33()
+			$form.current_item:=Form:C1466.current_item
+			$form.number:=ds:C1482.Interaction.sequence
+			$form.nextFollowUp:=False:C215
+			$form.followUPDate:=Add to date:C393(Current date:C33; 0; 0; 1)
 			
 			$ref:=Open form window:C675("Lead_AddInteraction"; Sheet form window:K39:12)
 			DIALOG:C40("Lead_AddInteraction"; $form)
@@ -671,9 +677,10 @@ Function bActionInteractions()
 			
 			If (ok=1)
 				$form.stmpCreation:=cs:C1710.sfw_stmp.me.build($form.creationDate)
+				$form.stmpFollowUp:=cs:C1710.sfw_stmp.me.build($form.followUPDate)
 				OB REMOVE:C1226($form; "creationDate")
+				OB REMOVE:C1226($form; "followUPDate")
 				OB REMOVE:C1226($form; "current_item")
-				
 				
 				$interaction:=ds:C1482.Interaction.new()
 				$interaction.fromObject($form)
@@ -683,9 +690,27 @@ Function bActionInteractions()
 					$interaction.UUID_Type:=$status.UUID
 				End if 
 				$result:=$interaction.save()
+				Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($interaction).orderBy("number desc")
 				
 				
-				Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($interaction)
+				If ($form.nextFollowUp)
+					$scheduledInteraction:=ds:C1482.Interaction.new()
+					$scheduledInteraction.fromObject($form)
+					$scheduledInteraction.number:=ds:C1482.Interaction.sequence
+					$scheduledInteraction.UUID_Lead:=Form:C1466.current_item.UUID
+					$scheduledInteraction.notes:=""
+					$scheduledInteraction.UUID_Lead:=Form:C1466.current_item.UUID
+					$status:=ds:C1482.InteractionType.query("code == :1"; "SCHEDULED").first()
+					If ($status#Null:C1517)
+						$scheduledInteraction.UUID_Type:=$status.UUID
+					End if 
+					$scheduledInteraction.UUID_Interaction:=$interaction.UUID
+					
+					$result:=$scheduledInteraction.save()
+					Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($scheduledInteraction).orderBy("number desc")
+					
+				End if 
+				
 				cs:C1710.panel_lead.me._activate_save_cancel_button()
 			End if 
 			
