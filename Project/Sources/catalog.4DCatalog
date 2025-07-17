@@ -682,9 +682,9 @@
 		<field name="UUID_Trigger" uuid="4B73C8B733144E9CB92FA5E67A397887" type="10" store_as_UUID="true" never_null="true" id="9">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="UUID_Contact" uuid="2BA12048AF9841FAAEDC129C7394FAFC" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="10"/>
-		<field name="UUID_Method" uuid="E0032020C5FC4E35A311A40ED4EF245B" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="11"/>
-		<field name="UUID_Outcome" uuid="7F025E2A765243A2BC9E00979FB9D560" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="12"/>
+		<field name="UUID_Contact" uuid="2BA12048AF9841FAAEDC129C7394FAFC" type="10" store_as_UUID="true" never_null="true" id="10"/>
+		<field name="UUID_Method" uuid="E0032020C5FC4E35A311A40ED4EF245B" type="10" store_as_UUID="true" never_null="true" id="11"/>
+		<field name="UUID_Outcome" uuid="7F025E2A765243A2BC9E00979FB9D560" type="10" store_as_UUID="true" never_null="true" id="12"/>
 		<primary_key field_name="UUID" field_uuid="26E185DCFBC74FF3AF6AD248B2DFF24C"/>
 	</table>
 	<table name="sfw_EventType" uuid="C482A0FBAE724304A8E05A0570FD55D6" id="52">

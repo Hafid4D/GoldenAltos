@@ -510,14 +510,14 @@ Function btnOpenStaff()
 Function btnCreateCustomer()
 	Form:C1466.sfw.openCreateWindow("customerService"; "customer")
 	
-Function btnDatePickerCreate()
-	If (Form:C1466.sfw.checkIsInModification())
-		OBJECT GET COORDINATES:C663(*; "btnDatePickerCreate"; $x1; $y1; $x2; $y2)
-		$test:=DatePicker Display Dialog($x1+500; $y1+100)
-		If ($test#!00-00-00!)
-			Form:C1466.current_item.dateCreation:=$test
-		End if 
+Function btnDatePickerCreate($object; $attribut)
+	OBJECT GET COORDINATES:C663(*; "btnDatePickerCreate"; $x1; $y1; $x2; $y2)
+	CONVERT COORDINATES:C1365($x1; $y1; XY Current form:K27:5; XY Current window:K27:6)
+	$test:=DatePicker Display Dialog($x1; $y1)
+	If ($test#!00-00-00!)
+		$object[$attribut]:=$test
 	End if 
+	
 	
 Function btnDatePickerClose()
 	If (Form:C1466.sfw.checkIsInModification())
@@ -681,9 +681,49 @@ Function bActionInteractions()
 	Case of 
 		: ($choice="")
 		: ($choice="--log")
+			$form:={interaction: New object:C1471()}
+			
+			$ref:=Open form window:C675("Lead_AddInteraction"; Sheet form window:K39:12)
+			DIALOG:C40("Lead_AddInteraction"; $form)
+			CLOSE WINDOW:C154($ref)
+			
+			If (ok=1)
+				
+			End if 
 			
 	End case 
 	
+Function pup_interaction($type; $currentUUID)->$uuid : Text
+	
+	Case of 
+		: ($type="method")
+			$dc:="InteractionMethod"
+			$cacheAttribut:="interactionMethod"
+			$widgetName:="pup_method"
+	End case 
 	
 	
+	$menu:=Create menu:C408
+	If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache[$cacheAttribut]=Null:C1517)
+		ds:C1482[$dc].cacheLoad()
+	End if 
+	
+	For each ($eItem; Storage:C1525.cache[$cacheAttribut])
+		APPEND MENU ITEM:C411($menu; $eItem.name; *)
+		SET MENU ITEM PARAMETER:C1004($menu; -1; $eItem.UUID)
+		If ($eItem.UUID=$currentUUID)
+			SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+			If (Is Windows:C1573)
+				SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+			End if 
+		End if 
+	End for each 
+	$uuid:=Dynamic pop up menu:C1006($menu)
+	RELEASE MENU:C978($menu)
+	
+	Case of 
+		: ($uuid#Null:C1517)
+			$item:=Storage:C1525.cache[$cacheAttribut].query("UUID == :1"; $uuid)[0]
+			OBJECT SET TITLE:C194(*; $widgetName; $item.name)
+	End case 
 	
