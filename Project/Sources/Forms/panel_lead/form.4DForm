@@ -742,7 +742,7 @@
 					"type": "listbox",
 					"top": 124,
 					"left": 136,
-					"width": 1148,
+					"width": 442,
 					"height": 529,
 					"resizingMode": "legacy",
 					"listboxType": "collection",
@@ -853,53 +853,255 @@
 								"name": "Footer20"
 							},
 							"dataSource": "This:C1470.type.name"
-						},
-						{
-							"header": {
-								"name": "Header21",
-								"text": "Trigger"
-							},
-							"name": "Column21",
-							"footer": {
-								"name": "Footer21"
-							},
-							"dataSource": "This:C1470.trigger.name"
-						},
-						{
-							"header": {
-								"name": "Header22",
-								"text": "F/U Date"
-							},
-							"name": "Column22",
-							"footer": {
-								"name": "Footer22"
-							},
-							"dataSource": "This:C1470.followUPDate"
-						},
-						{
-							"header": {
-								"name": "Header23",
-								"text": "Sales Person"
-							},
-							"name": "Column23",
-							"footer": {
-								"name": "Footer23"
-							},
-							"dataSource": "This:C1470.staff.fullName",
-							"width": 179
-						},
-						{
-							"header": {
-								"name": "Header19",
-								"text": "Notes"
-							},
-							"name": "Column19",
-							"footer": {
-								"name": "Footer19"
-							},
-							"dataSource": "This:C1470.notes"
 						}
 					]
+				},
+				"Interaction1": {
+					"type": "text",
+					"text": "Number",
+					"top": 124,
+					"left": 598,
+					"width": 91,
+					"height": 16
+				},
+				"number": {
+					"type": "input",
+					"left": 704,
+					"top": 124,
+					"width": 261,
+					"height": 17,
+					"dataSourceTypeHint": "integer",
+					"dataSource": "Form:C1466.current_interaction.number",
+					"enterable": false
+				},
+				"Interaction2": {
+					"type": "text",
+					"text": "Creation date",
+					"top": 160,
+					"left": 598,
+					"width": 91,
+					"height": 16
+				},
+				"Inter_input_creationDate": {
+					"type": "input",
+					"left": 704,
+					"top": 160,
+					"width": 261,
+					"height": 17,
+					"dataSourceTypeHint": "text",
+					"dataSource": "Form:C1466.current_interaction.creationDate"
+				},
+				"pup_method": {
+					"type": "button",
+					"top": 239,
+					"left": 705,
+					"width": 289,
+					"height": 28,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Method",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_method.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"interaction4": {
+					"type": "text",
+					"text": "Method",
+					"top": 239,
+					"left": 599,
+					"width": 113,
+					"height": 16
+				},
+				"btnDatePickerCreate1": {
+					"type": "button",
+					"text": " ",
+					"top": 158,
+					"left": 976,
+					"width": 18,
+					"height": 18,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/calendar.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnDatePickerCreate1.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false,
+					"dataSource": ""
+				},
+				"pup_outcome": {
+					"type": "button",
+					"top": 282,
+					"left": 705,
+					"width": 289,
+					"height": 28,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Outcome",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_outcome.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Interaction5": {
+					"type": "text",
+					"text": "Outcome",
+					"top": 287,
+					"left": 599,
+					"width": 113,
+					"height": 16
+				},
+				"pup_contact": {
+					"type": "button",
+					"top": 376,
+					"left": 704,
+					"width": 289,
+					"height": 27,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Contact",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_contact.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Interaction7": {
+					"type": "text",
+					"text": "Contact",
+					"top": 382,
+					"left": 598,
+					"width": 113,
+					"height": 16
+				},
+				"pup_trigger": {
+					"type": "button",
+					"top": 424,
+					"left": 705,
+					"width": 289,
+					"height": 27,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Trigger",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_trigger.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Interaction8": {
+					"type": "text",
+					"text": "Trigger",
+					"top": 429,
+					"left": 599,
+					"width": 113,
+					"height": 16
+				},
+				"Interaction9": {
+					"type": "text",
+					"text": "Notes",
+					"top": 474,
+					"left": 598,
+					"width": 85,
+					"height": 16
+				},
+				"Inter_input_notes": {
+					"type": "input",
+					"left": 703,
+					"top": 474,
+					"width": 460,
+					"height": 145,
+					"dataSourceTypeHint": "text",
+					"dataSource": "Form:C1466.current_interaction.notes",
+					"multiline": "yes"
+				},
+				"Interaction3": {
+					"type": "text",
+					"text": "Follow-up date",
+					"top": 198,
+					"left": 597,
+					"width": 91,
+					"height": 16
+				},
+				"Inter_input_followUPDate": {
+					"type": "input",
+					"left": 703,
+					"top": 198,
+					"width": 261,
+					"height": 17,
+					"dataSourceTypeHint": "text",
+					"dataSource": "Form:C1466.current_interaction.followUPDate"
+				},
+				"btnDatePickerCreate2": {
+					"type": "button",
+					"text": " ",
+					"top": 196,
+					"left": 975,
+					"width": 18,
+					"height": 18,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/calendar.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnDatePickerCreate2.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false,
+					"dataSource": ""
+				},
+				"pup_sales": {
+					"type": "button",
+					"top": 330,
+					"left": 704,
+					"width": 289,
+					"height": 27,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Sales person",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_sales.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Interaction6": {
+					"type": "text",
+					"text": "Sales person",
+					"top": 335,
+					"left": 598,
+					"width": 113,
+					"height": 16
 				}
 			}
 		},
@@ -1151,7 +1353,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 388,
+	"geometryStamp": 527,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {
