@@ -27,6 +27,7 @@ Function formMethod()
 		This:C1470.drawPup_quote()
 		This:C1470.drawPup_po()
 		This:C1470.drawPup_job()
+		
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
@@ -36,6 +37,7 @@ Function formMethod()
 			: (FORM Get current page:C276(*)=2)
 				This:C1470.loadInteractions()
 				
+				
 			: (FORM Get current page:C276(*)=3)
 				This:C1470.loadJobs()
 		End case 
@@ -43,6 +45,13 @@ Function formMethod()
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())
 		This:C1470.redrawAndSetVisible()
 	End if 
+	
+	Case of 
+		: (FORM Event:C1606.code=On Bound Variable Change:K2:52)
+			This:C1470.drawPup_Interaction(["method"; "outcome"; "trigger"; "sales"; "contact"])
+			This:C1470.display_interactionDetails()
+			
+	End case 
 	
 Function loadInteractions()
 	Form:C1466.lb_interactions:=Form:C1466.current_item.interactions.orderBy("number desc")
@@ -70,6 +79,57 @@ Function drawPup_serviceType()
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
 		Form:C1466.sfw.drawButtonPup("pup_serviceType"; $serviceName; $pathIcon; (Form:C1466.current_item.serviceType=Null:C1517))
 	End if 
+	
+Function display_interactionDetails()
+	OBJECT SET VISIBLE:C603(*; "interaction@"; Form:C1466.current_interaction#Null:C1517)
+	OBJECT SET VISIBLE:C603(*; "Inter_input@"; Form:C1466.current_interaction#Null:C1517)
+	OBJECT SET VISIBLE:C603(*; "btnDatePickerCreate@"; Form:C1466.current_interaction#Null:C1517)
+	
+Function drawPup_Interaction($widgets : Collection)
+	var $item : Object
+	For each ($widget; $widgets)
+		$widgetName:="pup_"+$widget
+		
+		If (Form:C1466.current_interaction#Null:C1517)
+			$widgetCapitalized:=cs:C1710.sfw_string.me.stringCapitalize($widget)
+			$defaultName:="Select "+$widget
+			$uuid:="UUID_"+$widgetCapitalized
+			$cacheAttr:="interaction"+$widgetCapitalized
+			
+			
+			OBJECT SET VISIBLE:C603(*; $widgetName; True:C214)
+			Case of 
+				: ($widget="sales")
+					$name:=Form:C1466.current_interaction.staff=Null:C1517 ? "Select "+$widget : Form:C1466.current_interaction.staff.fullName
+					
+					
+				: ($widget="contact")
+					$name:=Form:C1466.current_interaction.contact=Null:C1517 ? "Select "+$widget : Form:C1466.current_interaction.contact.fullName
+					
+				Else 
+					$dc:="Interaction"+$widgetCapitalized
+					If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache[$cacheAttr]=Null:C1517)
+						ds:C1482[$dc].cacheLoad()
+					End if 
+					$items:=Storage:C1525.cache[$cacheAttr].query("UUID == :1"; Form:C1466.current_interaction[$uuid])
+					
+					If ($items.length#0)
+						$name:=$items[0].name
+					Else 
+						$name:=$defaultName
+					End if 
+			End case 
+			
+			
+			Form:C1466.sfw.drawButtonPup($widgetName; $name; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; ($items.length=0))
+			
+		Else 
+			OBJECT SET VISIBLE:C603(*; $widgetName; False:C215)
+		End if 
+	End for each 
+	
+	
+	
 	
 	
 Function pup_serviceType()
@@ -324,6 +384,13 @@ Function drawPup_quote()
 		Form:C1466.sfw.drawButtonPup("pup_quote"; $quoteName; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.quote=Null:C1517))
 	End if 
 	
+Function drawPup_method()
+	If (Form:C1466.current_item#Null:C1517)
+		$quoteName:=Form:C1466.current_item.quote.code || "Select quote"
+		Form:C1466.sfw.drawButtonPup("pup_quote"; $quoteName; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.quote=Null:C1517))
+	End if 
+	
+	
 Function selectQuote
 	If (Form:C1466.sfw.checkIsInModification())
 		Case of 
@@ -448,6 +515,8 @@ Function redrawAndSetVisible()
 			
 		: (FORM Get current page:C276(*)=2)
 			OBJECT SET ENABLED:C1123(*; "bActionInteractions"; Form:C1466.sfw.checkIsInModification())
+			This:C1470.drawPup_Interaction(["method"; "outcome"; "trigger"; "contact"; "sales"])
+			This:C1470.display_interactionDetails()
 			
 		: (FORM Get current page:C276(*)=3)
 			
@@ -717,47 +786,47 @@ Function bActionInteractions()
 	End case 
 	
 Function pup_interaction($type; $currentUUID)->$uuid : Text
-	
-	Case of 
-		: ($type="method")
-			$dc:="InteractionMethod"
-			$cacheAttribut:="interactionMethod"
-			$widgetName:="pup_method"
-			
-		: ($type="outcome")
-			$dc:="InteractionOutcome"
-			$cacheAttribut:="interactionOutcome"
-			$widgetName:="pup_outcome"
-			
-		: ($type="trigger")
-			$dc:="InteractionTrigger"
-			$cacheAttribut:="interactionTrigger"
-			$widgetName:="pup_trigger"
-			
-	End case 
-	
-	
-	$menu:=Create menu:C408
-	If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache[$cacheAttribut]=Null:C1517)
-		ds:C1482[$dc].cacheLoad()
-	End if 
-	
-	For each ($eItem; Storage:C1525.cache[$cacheAttribut])
-		APPEND MENU ITEM:C411($menu; $eItem.name; *)
-		SET MENU ITEM PARAMETER:C1004($menu; -1; $eItem.UUID)
-		If ($eItem.UUID=$currentUUID)
-			SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
-			If (Is Windows:C1573)
-				SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
-			End if 
+	If (Form:C1466.sfw.checkIsInModification())
+		Case of 
+			: ($type="method")
+				$dc:="InteractionMethod"
+				$cacheAttribut:="interactionMethod"
+				$widgetName:="pup_method"
+				
+			: ($type="outcome")
+				$dc:="InteractionOutcome"
+				$cacheAttribut:="interactionOutcome"
+				$widgetName:="pup_outcome"
+				
+			: ($type="trigger")
+				$dc:="InteractionTrigger"
+				$cacheAttribut:="interactionTrigger"
+				$widgetName:="pup_trigger"
+				
+		End case 
+		
+		
+		$menu:=Create menu:C408
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache[$cacheAttribut]=Null:C1517)
+			ds:C1482[$dc].cacheLoad()
 		End if 
-	End for each 
-	$uuid:=Dynamic pop up menu:C1006($menu)
-	RELEASE MENU:C978($menu)
-	
-	Case of 
-		: ($uuid#"")
-			$item:=Storage:C1525.cache[$cacheAttribut].query("UUID == :1"; $uuid)[0]
-			OBJECT SET TITLE:C194(*; $widgetName; $item.name)
-	End case 
-	
+		
+		For each ($eItem; Storage:C1525.cache[$cacheAttribut])
+			APPEND MENU ITEM:C411($menu; $eItem.name; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $eItem.UUID)
+			If ($eItem.UUID=$currentUUID)
+				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+				If (Is Windows:C1573)
+					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+				End if 
+			End if 
+		End for each 
+		$uuid:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		Case of 
+			: ($uuid#"")
+				$item:=Storage:C1525.cache[$cacheAttribut].query("UUID == :1"; $uuid)[0]
+				OBJECT SET TITLE:C194(*; $widgetName; $item.name)
+		End case 
+	End if 

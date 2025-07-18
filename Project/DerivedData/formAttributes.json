@@ -81,7 +81,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_lead": {
-			"timeStamp": "2025-07-17T11:40:05Z",
+			"timeStamp": "2025-07-18T11:15:15Z",
 			"destination": "detailScreen"
 		},
 		"sfw_panel_default": {
@@ -325,11 +325,11 @@
 			"destination": "detailScreen"
 		},
 		"Lead_AddInteraction": {
-			"timeStamp": "2025-07-17T15:27:11Z",
+			"timeStamp": "2025-07-17T15:50:36Z",
 			"destination": "detailScreen"
 		},
 		"panel_interactionOutcome": {
-			"timeStamp": "2025-07-08T10:37:02Z",
+			"timeStamp": "2025-07-17T15:50:36Z",
 			"destination": "detailScreen"
 		},
 		"panel_purchaseOrder": {
@@ -353,7 +353,7 @@
 			"destination": "detailScreen"
 		},
 		"panel_interactionMethod": {
-			"timeStamp": "2025-07-08T10:37:02Z",
+			"timeStamp": "2025-07-17T15:50:36Z",
 			"destination": "detailScreen"
 		},
 		"sfw_panel_country": {

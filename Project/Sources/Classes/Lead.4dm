@@ -29,10 +29,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.activateComment()
 	
-	$entry.setValidationRule("UUID_Staff"; ""; "UUIDNotNull"; "message:The staff must be defined")
-	$entry.setValidationRule("UUID_Customer"; ""; "UUIDNotNull"; "message:The customer must be defined")
-	$entry.setValidationRule("dateCreation"; "entryField_dateCreation"; "mandatory")
-	$entry.setValidationRule("UUID_ServiceType"; ""; "UUIDNotNull"; "message:The service must be defined")
+	//$entry.setValidationRule("UUID_Staff"; ""; "UUIDNotNull"; "message:The staff must be defined")
+	//$entry.setValidationRule("UUID_Customer"; ""; "UUIDNotNull"; "message:The customer must be defined")
+	//$entry.setValidationRule("dateCreation"; "entryField_dateCreation"; "mandatory")
+	//$entry.setValidationRule("UUID_ServiceType"; ""; "UUIDNotNull"; "message:The service must be defined")
 	//$entry.setValidationRule("currentStageID"; "entryField_dateCreation"; "mandatory")
 	
 	$entry.setLBItemsOrderBy("leadCode")
