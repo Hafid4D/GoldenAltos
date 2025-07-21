@@ -48,8 +48,18 @@ Function formMethod()
 	
 	Case of 
 		: (FORM Event:C1606.code=On Bound Variable Change:K2:52)
-			This:C1470.drawPup_Interaction(["method"; "outcome"; "trigger"; "sales"; "contact"])
+			This:C1470.drawPup_Interaction(["method"; "outcome"; "trigger"; "sales"; "contact"; "type"])
 			This:C1470.display_interactionDetails()
+			If (Form:C1466.current_interaction#Null:C1517)
+				$index:=Form:C1466.current_interaction.indexOf()
+				If ($index=-1)
+					LISTBOX SELECT ROW:C912(*; "lb_interactions"; 0; lk remove from selection:K53:3)
+				Else 
+					LISTBOX SELECT ROW:C912(*; "lb_interactions"; $index+1; lk replace selection:K53:1)
+				End if 
+			Else 
+				LISTBOX SELECT ROW:C912(*; "lb_interactions"; 0; lk remove from selection:K53:3)
+			End if 
 			
 	End case 
 	
@@ -515,7 +525,7 @@ Function redrawAndSetVisible()
 			
 		: (FORM Get current page:C276(*)=2)
 			OBJECT SET ENABLED:C1123(*; "bActionInteractions"; Form:C1466.sfw.checkIsInModification())
-			This:C1470.drawPup_Interaction(["method"; "outcome"; "trigger"; "contact"; "sales"])
+			This:C1470.drawPup_Interaction(["method"; "outcome"; "trigger"; "contact"; "sales"; "type"])
 			This:C1470.display_interactionDetails()
 			
 		: (FORM Get current page:C276(*)=3)
@@ -558,13 +568,17 @@ Function btnOpenStaff()
 Function btnCreateCustomer()
 	Form:C1466.sfw.openCreateWindow("customerService"; "customer")
 	
-Function btnDatePickerCreate($object; $attribut)
+Function btnDatePickerCreate($object; $attribut; $stmp)
 	$name:=OBJECT Get name:C1087
 	OBJECT GET COORDINATES:C663(*; $name; $x1; $y1; $x2; $y2)
 	CONVERT COORDINATES:C1365($x1; $y1; XY Current form:K27:5; XY Current window:K27:6)
 	$test:=DatePicker Display Dialog($x1; $y1)
 	If ($test#!00-00-00!)
-		$object[$attribut]:=$test
+		If (Bool:C1537($stmp))
+			$object[$attribut]:=cs:C1710.sfw_stmp.me.build($test)
+		Else 
+			$object[$attribut]:=$test
+		End if 
 	End if 
 	
 	
@@ -786,7 +800,7 @@ Function bActionInteractions()
 	End case 
 	
 Function pup_interaction($type; $currentUUID)->$uuid : Text
-	If (Form:C1466.sfw.checkIsInModification())
+	If (Form:C1466.sfw.checkIsInModification=Null:C1517) || (Form:C1466.sfw.checkIsInModification#Null:C1517 && Form:C1466.sfw.checkIsInModification())
 		Case of 
 			: ($type="method")
 				$dc:="InteractionMethod"
@@ -802,6 +816,11 @@ Function pup_interaction($type; $currentUUID)->$uuid : Text
 				$dc:="InteractionTrigger"
 				$cacheAttribut:="interactionTrigger"
 				$widgetName:="pup_trigger"
+				
+			: ($type="type")
+				$dc:="InteractionType"
+				$cacheAttribut:="interactionType"
+				$widgetName:="pup_type"
 				
 		End case 
 		

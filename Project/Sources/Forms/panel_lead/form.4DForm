@@ -877,7 +877,7 @@
 				"Interaction2": {
 					"type": "text",
 					"text": "Creation date",
-					"top": 160,
+					"top": 152,
 					"left": 598,
 					"width": 91,
 					"height": 16
@@ -885,7 +885,7 @@
 				"Inter_input_creationDate": {
 					"type": "input",
 					"left": 704,
-					"top": 160,
+					"top": 152,
 					"width": 261,
 					"height": 17,
 					"dataSourceTypeHint": "text",
@@ -893,8 +893,8 @@
 				},
 				"pup_method": {
 					"type": "button",
-					"top": 239,
-					"left": 705,
+					"top": 245,
+					"left": 703,
 					"width": 289,
 					"height": 28,
 					"fontFamily": "System Font",
@@ -913,7 +913,7 @@
 				"interaction4": {
 					"type": "text",
 					"text": "Method",
-					"top": 239,
+					"top": 251,
 					"left": 599,
 					"width": 113,
 					"height": 16
@@ -921,7 +921,7 @@
 				"btnDatePickerCreate1": {
 					"type": "button",
 					"text": " ",
-					"top": 158,
+					"top": 150,
 					"left": 976,
 					"width": 18,
 					"height": 18,
@@ -941,8 +941,8 @@
 				},
 				"pup_outcome": {
 					"type": "button",
-					"top": 282,
-					"left": 705,
+					"top": 283,
+					"left": 703,
 					"width": 289,
 					"height": 28,
 					"fontFamily": "System Font",
@@ -961,15 +961,15 @@
 				"Interaction5": {
 					"type": "text",
 					"text": "Outcome",
-					"top": 287,
+					"top": 289,
 					"left": 599,
 					"width": 113,
 					"height": 16
 				},
 				"pup_contact": {
 					"type": "button",
-					"top": 376,
-					"left": 704,
+					"top": 359,
+					"left": 703,
 					"width": 289,
 					"height": 27,
 					"fontFamily": "System Font",
@@ -988,15 +988,15 @@
 				"Interaction7": {
 					"type": "text",
 					"text": "Contact",
-					"top": 382,
+					"top": 364,
 					"left": 598,
 					"width": 113,
 					"height": 16
 				},
 				"pup_trigger": {
 					"type": "button",
-					"top": 424,
-					"left": 705,
+					"top": 395,
+					"left": 703,
 					"width": 289,
 					"height": 27,
 					"fontFamily": "System Font",
@@ -1015,7 +1015,7 @@
 				"Interaction8": {
 					"type": "text",
 					"text": "Trigger",
-					"top": 429,
+					"top": 400,
 					"left": 599,
 					"width": 113,
 					"height": 16
@@ -1023,7 +1023,7 @@
 				"Interaction9": {
 					"type": "text",
 					"text": "Notes",
-					"top": 474,
+					"top": 445,
 					"left": 598,
 					"width": 85,
 					"height": 16
@@ -1031,7 +1031,7 @@
 				"Inter_input_notes": {
 					"type": "input",
 					"left": 703,
-					"top": 474,
+					"top": 445,
 					"width": 460,
 					"height": 145,
 					"dataSourceTypeHint": "text",
@@ -1041,7 +1041,7 @@
 				"Interaction3": {
 					"type": "text",
 					"text": "Follow-up date",
-					"top": 198,
+					"top": 182,
 					"left": 597,
 					"width": 91,
 					"height": 16
@@ -1049,7 +1049,7 @@
 				"Inter_input_followUPDate": {
 					"type": "input",
 					"left": 703,
-					"top": 198,
+					"top": 180,
 					"width": 261,
 					"height": 17,
 					"dataSourceTypeHint": "text",
@@ -1058,7 +1058,7 @@
 				"btnDatePickerCreate2": {
 					"type": "button",
 					"text": " ",
-					"top": 196,
+					"top": 180,
 					"left": 975,
 					"width": 18,
 					"height": 18,
@@ -1078,8 +1078,8 @@
 				},
 				"pup_sales": {
 					"type": "button",
-					"top": 330,
-					"left": 704,
+					"top": 321,
+					"left": 703,
 					"width": 289,
 					"height": 27,
 					"fontFamily": "System Font",
@@ -1098,8 +1098,35 @@
 				"Interaction6": {
 					"type": "text",
 					"text": "Sales person",
-					"top": 335,
+					"top": 326,
 					"left": 598,
+					"width": 113,
+					"height": 16
+				},
+				"pup_type": {
+					"type": "button",
+					"top": 209,
+					"left": 703,
+					"width": 289,
+					"height": 28,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Status",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_type.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"interaction10": {
+					"type": "text",
+					"text": "Status",
+					"top": 215,
+					"left": 599,
 					"width": 113,
 					"height": 16
 				}
@@ -1353,7 +1380,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 527,
+	"geometryStamp": 643,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {
