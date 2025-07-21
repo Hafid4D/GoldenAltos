@@ -714,15 +714,24 @@ Function bActionInteractions()
 	var $interaction : cs:C1710.InteractionEntity
 	var $status : cs:C1710.InteractionTypeEntity
 	
+	If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.interactionType=Null:C1517)
+		ds:C1482.InteractionType.cacheLoad()
+	End if 
+	
+	$items:=Storage:C1525.cache.interactionType.query("code == :1"; "SCHEDULED")
+	If ($items.length#0)
+		$scheduledUUID:=$items[0].UUID
+	Else 
+		$scheduledUUID:=""
+	End if 
+	
 	$mainMenu:=Create menu:C408
 	
-	APPEND MENU ITEM:C411($mainMenu; "Edit interaction..."; *)
-	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--edit")
-	If (Form:C1466.current_interaction=Null:C1517)
+	APPEND MENU ITEM:C411($mainMenu; "Cancel interaction"; *)
+	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--cancel")
+	If (Form:C1466.current_interaction=Null:C1517) || (Form:C1466.current_interaction#Null:C1517 && Form:C1466.current_interaction.UUID_Type#$scheduledUUID)
 		DISABLE MENU ITEM:C150($mainMenu; -1)
 	End if 
-	//APPEND MENU ITEM($mainMenu; "-")
-	
 	
 	APPEND MENU ITEM:C411($mainMenu; "Complete follow up"; *)
 	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--complete")
@@ -797,6 +806,16 @@ Function bActionInteractions()
 				cs:C1710.panel_lead.me._activate_save_cancel_button()
 			End if 
 			
+		: ($choice="--cancel")
+			$items:=Storage:C1525.cache.interactionType.query("code == :1"; "CANCELED")
+			If ($items.length#0)
+				$canceledUUID:=$items[0].UUID
+			Else 
+				$canceledUUID:=""
+			End if 
+			Form:C1466.current_interaction.UUID_Type:=$canceledUUID
+			Form:C1466.current_interaction.save()
+			cs:C1710.panel_lead.me._activate_save_cancel_button()
 	End case 
 	
 Function pup_interaction($type; $currentUUID)->$uuid : Text
