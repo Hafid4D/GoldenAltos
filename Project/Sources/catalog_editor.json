@@ -10,10 +10,10 @@
 			"coordinates": {
 				"left": 640,
 				"top": 781,
-				"width": 120,
-				"height": 167.33203125
+				"width": 204,
+				"height": 593.33203125
 			},
-			"displayable_fields_count": 6,
+			"displayable_fields_count": 26,
 			"fields_ordering": 1
 		},
 		"Membership": {
@@ -382,10 +382,58 @@
 			"coordinates": {
 				"left": 3031.6667480469,
 				"top": 630.66668701172,
-				"width": 197.048828125,
-				"height": 356.33203125
+				"width": 198.048828125,
+				"height": 365.33203125
 			},
-			"displayable_fields_count": 15
+			"displayable_fields_count": 15,
+			"fields_ordering": 2,
+			"fields": {
+				"settings": {
+					"position": 8
+				},
+				"templateNumber": {
+					"position": 3
+				},
+				"bins": {
+					"position": 15
+				},
+				"parametricMeasurements": {
+					"position": 14
+				},
+				"dataTables": {
+					"position": 13
+				},
+				"comment2": {
+					"position": 12
+				},
+				"comment1": {
+					"position": 11
+				},
+				"largeLayout": {
+					"position": 10
+				},
+				"smallLayout": {
+					"position": 9
+				},
+				"binning": {
+					"position": 7
+				},
+				"status": {
+					"position": 6
+				},
+				"division": {
+					"position": 5
+				},
+				"operation": {
+					"position": 4
+				},
+				"name": {
+					"position": 2
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
 		},
 		"Step": {
 			"color": {
@@ -446,11 +494,10 @@
 			"coordinates": {
 				"left": 2437.3334960938,
 				"top": 1052.6667480469,
-				"width": 157.69921875,
-				"height": 755.33203125
+				"width": 169.69921875,
+				"height": 859.33203125
 			},
-			"displayable_fields_count": 34,
-			"fields_ordering": 1
+			"displayable_fields_count": 38
 		},
 		"Job": {
 			"color": {
@@ -512,7 +559,25 @@
 				"height": 292.33203125
 			},
 			"displayable_fields_count": 11,
-			"fields_ordering": 1
+			"fields_ordering": 1,
+			"fields": {
+				"code": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				},
+				"name": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
 		},
 		"sfw_NotificationType": {
 			"color": {
@@ -700,6 +765,80 @@
 			},
 			"displayable_fields_count": 3,
 			"fields_ordering": 1
+		},
+		"RMA": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 1123,
+				"top": 973.33203125,
+				"width": 162.033203125,
+				"height": 430.33203125
+			},
+			"displayable_fields_count": 18,
+			"fields": {
+				"customerPo": {
+					"position": 5
+				},
+				"receivedDate": {
+					"position": 6
+				},
+				"customerSvc": {
+					"position": 17
+				},
+				"qaQc": {
+					"position": 16
+				},
+				"materialDisposition": {
+					"position": 15
+				},
+				"reasonForReturn": {
+					"position": 13
+				},
+				"dateClose": {
+					"position": 7
+				},
+				"status": {
+					"position": 12
+				},
+				"description": {
+					"position": 14
+				},
+				"phone": {
+					"position": 11
+				},
+				"authorizedBy": {
+					"position": 10
+				},
+				"invoiceNumber": {
+					"position": 9
+				},
+				"contact": {
+					"position": 8
+				},
+				"rmaNumber": {
+					"position": 3
+				},
+				"partNumber": {
+					"position": 4
+				},
+				"UUID_Qcar": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					},
+					"position": 2
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
 		},
 		"SpecControllingDept": {
 			"color": {
@@ -1259,8 +1398,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1091,
-				"top": 27,
+				"left": 1029,
+				"top": 22,
 				"width": 182,
 				"height": 670.33203125
 			},
@@ -1304,7 +1443,7 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3091.015625,
+				"left": 3093.015625,
 				"top": 0,
 				"width": 190.697265625,
 				"height": 446.33203125
@@ -1550,6 +1689,14 @@
 		}
 	},
 	"relations": {
+		"E2AF483B529D544AB1C2C73E91FCFA34": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"F7A12367E0E7E44682B1512B34B69AAC": {
 			"color": {
 				"red": 240,

@@ -7,7 +7,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry:=cs:C1710.sfw_definitionEntry.new("specification"; ["qualityAssistance"]; "Specs Control")
 	$entry.setDataclass("Specification")
 	$entry.setSearchboxField("spec")
-	$entry.setDisplayOrder(-500)
+	$entry.setDisplayOrder(-600)
 	$entry.setIcon("image/entry/spec-control-white-50x50.png")
 	
 	$entry.setSearchboxField("spec"; "placeholder:Spec#")

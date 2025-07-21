@@ -5,26 +5,25 @@ Function get fullName()->$fullName : Text
 	$fullName:=This:C1470.firstName+" "+This:C1470.lastName
 	
 	
-local Function rebuildAddress()->$address : Object
+local Function rebuildAddress()
+	Form:C1466.subFormAddress:=New object:C1471
+	Form:C1466.subFormAddress.situation:=Form:C1466.situation
 	
-	Case of 
-		: (Form:C1466.addressBilling=1)
-			$type:="billing"
-		: (Form:C1466.addressShipping=1)
-			$type:="shipping"
-	End case 
-	
-	If (Form:C1466.current_item#Null:C1517)
-		
-		If (Form:C1466.current_item.title#"Status") && (Form:C1466.current_item.title#"AP")
-			If (OB Is defined:C1231(Form:C1466.current_item.contactDetails; "addresses"))
-				$address:=Form:C1466.current_item.contactDetails.addresses.query("type = :1"; "main").first()
-			End if 
-		End if 
-		Form:C1466.subFormAddress.address:=$address
-		
-	End if 
+	$mainAddress:=Form:C1466.current_item.contactDetails.addresses.query("type = :1"; "main").first()
+	Form:C1466.subFormAddress.address:=$mainAddress
 	Form:C1466.subFormAddress:=Form:C1466.subFormAddress
+	
+	//If (Form.current_item#Null)
+	
+	//If (Form.current_item.title#"Status") && (Form.current_item.title#"AP")
+	//If (OB Is defined(Form.current_item.contactDetails; "addresses"))
+	//$address:=Form.current_item.contactDetails.addresses.query("type = :1"; "main").first()
+	//End if 
+	//End if 
+	//Form.subFormAddress.address:=$address
+	
+	//End if 
+	//Form.subFormAddress:=Form.subFormAddress
 	
 	
 local Function rebuidComunications->$contacts : Collection
@@ -64,7 +63,7 @@ local Function rebuidComunications->$contacts : Collection
 				$item.displayedIcon:=Form:C1466.communicationTypes[$indices[0]].displayedIcon
 				
 			Else 
-				$item.displayedType:=_capitalize_text($mean.type)
+				$item.displayedType:=_Capitalize_text($mean.type)
 			End if 
 			$contacts.push($item)
 		End for each 
@@ -144,7 +143,7 @@ local Function _initAddress()
 		$mainAddress:=New object:C1471
 		$mainAddress.type:="main"
 		$mainAddress.detail:=New object:C1471
-		$mainAddress.detail.country:="FR"
+		$mainAddress.detail.country:="us"
 		This:C1470.contactDetails.addresses.push($mainAddress)
 	End if 
 	

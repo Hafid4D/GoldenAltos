@@ -1026,11 +1026,121 @@
 					"height": 16,
 					"fontWeight": "bold",
 					"right": 101
+				},
+				"btn_openDocument": {
+					"type": "button",
+					"text": " ",
+					"top": 311,
+					"left": 922,
+					"width": 18,
+					"height": 18,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/forward-16x16.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btn_openDocument.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
+				}
+			}
+		},
+		{
+			"objects": {
+				"bkgd_lb_properties": {
+					"type": "rectangle",
+					"top": 95,
+					"left": 106,
+					"width": 843,
+					"height": 442,
+					"stroke": "#c0c0c0",
+					"fill": "#F7F9FC",
+					"right": 949,
+					"bottom": 537
+				},
+				"lb_properties": {
+					"type": "listbox",
+					"left": 106,
+					"top": 96,
+					"width": 467,
+					"height": 440,
+					"events": [
+						"onDataChange"
+					],
+					"headerHeight": "24px",
+					"listboxType": "collection",
+					"visibility": "visible",
+					"dataSource": "Form:C1466.lb_properties",
+					"alternateFill": "#F7F9FC",
+					"selectionMode": "single",
+					"currentItemSource": "Form:C1466.selectedProperty",
+					"method": "ObjectMethods/lb_properties.4dm",
+					"scrollbarHorizontal": "hidden",
+					"columns": [
+						{
+							"header": {
+								"name": "Header8",
+								"text": "Property",
+								"fontWeight": "bold"
+							},
+							"name": "Column8",
+							"footer": {
+								"name": "Footer8"
+							},
+							"dataSource": "This:C1470.name",
+							"width": 388,
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "Header9",
+								"text": "",
+								"fontWeight": "bold"
+							},
+							"name": "entryField_checked",
+							"footer": {
+								"name": "Footer9"
+							},
+							"dataSource": "This:C1470.checked",
+							"width": 62,
+							"enterable": false,
+							"dataSourceTypeHint": "boolean",
+							"resizable": false,
+							"controlType": "checkbox"
+						}
+					]
+				},
+				"rec_bkgd_3": {
+					"type": "rectangle",
+					"top": 95,
+					"left": 5,
+					"width": 100,
+					"height": 442,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 105,
+					"bottom": 537
+				},
+				"Text1": {
+					"type": "text",
+					"text": "Properties",
+					"top": 105,
+					"left": 9,
+					"width": 92,
+					"height": 16,
+					"fontWeight": "bold",
+					"right": 101
 				}
 			}
 		}
 	],
-	"geometryStamp": 1959,
+	"geometryStamp": 1985,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

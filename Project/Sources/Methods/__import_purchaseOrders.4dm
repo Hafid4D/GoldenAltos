@@ -153,7 +153,6 @@ If (True:C214)
 		$job.shipMemo:=$record.shipMemo
 		$job.jobComment:=$record.jobComment
 		$job.archived:=$record.archived
-		$job.pr_qualifier:=$record.pr_qualifier
 		
 		$res:=$job.save()
 		
@@ -214,6 +213,7 @@ If (True:C214)
 			$lot_e.location:=$lot.location
 			$lot_e.comment:=$lot.comment
 			$lot_e.status:=$lot.status
+			$job.pr_qualifier:=$record.pr_qualifier
 			
 			$lot_e.UUID_Job:=$job.UUID
 			
@@ -243,6 +243,7 @@ If (True:C214)
 					$lotStep_e.inOperator:=$step.inOperator
 					$lotStep_e.actualHours:=$step.actualHours
 					$lotStep_e.plannedHours:=$step.plannedHours
+					$lotStep_e.minYield:=$step.minYield
 					$lotStep_e.tools:=New object:C1471()
 					$lotStep_e.tools:=$step.tools
 					
@@ -367,6 +368,17 @@ If (True:C214)
 		$stepTemplate_e.largeLayout:=$record.largeLayout
 		$stepTemplate_e.comment1:=$record.comment1
 		$stepTemplate_e.comment2:=$record.comment2
+		$stepTemplate_e.templateNumber:=$record.templateNumber
+		
+		$stepTemplate_e._initSettings()
+		
+		If ($record.settings>0)
+			
+			For ($i; 1; 32)
+				$stepTemplate_e.settings.properties[$i-1].checked:=(($record.settings & (2^($i-1)))=(2^($i-1)))
+			End for 
+			
+		End if 
 		
 		$res:=$stepTemplate_e.save()
 		
@@ -696,7 +708,7 @@ If (True:C214)
 		$qcar_e.device:=$record.device
 		$qcar_e.closedDate:=$record.closedDate
 		$qcar_e.targetCloseDate:=$record.targetCloseDate
-		$qcar_e.actualCloseDate:=$record.actualCloseDate
+		//$qcar_e.actualCloseDate:=$record.actualCloseDate
 		$qcar_e.verifiedBy:=$record.verifiedBy
 		$qcar_e.verifiedDate:=$record.verifiedDate
 		$qcar_e.void:=$record.void
@@ -710,18 +722,26 @@ If (True:C214)
 		$qcar_e._initCorrectiveActionReport()
 		
 		
-		$customer_es:=ds:C1482.Customer.query("name = :1"; $record.customer)
+		//$customer_es:=ds.Customer.query("name = :1"; $record.customer)
 		
-		If ($customer_es.length>0)
-			$qcar_e.UUID_Customer:=$customer_es[0].UUID
-		Else 
-			//TRACE
-		End if 
+		//If ($customer_es.length>0)
+		//$qcar_e.UUID_Customer:=$customer_es[0].UUID
+		//Else 
+		////TRACE
+		//End if 
 		
 		$lot_es:=ds:C1482.Lot.query("lotNumber = :1"; $record.lotNumber)
 		
 		If ($lot_es.length>0)
 			$qcar_e.UUID_Lot:=$lot_es[0].UUID
+			
+			$customer_es:=ds:C1482.Customer.query("name = :1"; $lot_es[0].customer)
+			
+			If ($customer_es.length>0)
+				$qcar_e.UUID_Customer:=$customer_es[0].UUID
+			Else 
+				//TRACE
+			End if 
 		Else 
 			//TRACE
 		End if 

@@ -343,3 +343,29 @@ Function pup_status()
 		
 	End if 
 	This:C1470.drawPup_LotStatus()
+	
+Function selectJob()
+	If (Form:C1466.sfw.checkIsInModification())
+		Case of 
+			: (FORM Event:C1606.code=On Getting Focus:K2:7) | (FORM Event:C1606.code=On Clicked:K2:4)
+				OBJECT GET COORDINATES:C663(*; "Field_customerName"; $l; $t; $r; $b)
+				CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
+				
+				$form:=New object:C1471(\
+					"colName"; "jobNumber"; \
+					"lb_items"; ds:C1482.Job.all().orderBy("jobNumber"); \
+					"allData"; ds:C1482.Job.all().orderBy("jobNumber"); \
+					"dataclass"; "Job"\
+					)
+				
+				$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b-20)
+				DIALOG:C40("selectNto1"; $form)
+				CLOSE WINDOW:C154($winRef)
+				
+				If (ok=1)
+					Form:C1466.current_item.UUID_Job:=$form.item.UUID
+					
+					cs:C1710.panel_purchaseOrder.me._activate_save_cancel_button()
+				End if 
+		End case 
+	End if 

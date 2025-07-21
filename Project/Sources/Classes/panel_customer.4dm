@@ -8,15 +8,13 @@ Function formMethod()
 		Form:C1466.addressBilling:=1
 		Form:C1466.addressShipping:=0
 		This:C1470.loadAllTabs()
-		This:C1470.LoadApContact()
-		This:C1470.LoadStatusContact()
+		This:C1470.loadContacts()
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
 				// add load functions
-				This:C1470.LoadApContact()
-				This:C1470.LoadStatusContact()
+				This:C1470.loadContacts()
 				
 				
 			: (FORM Get current page:C276(*)=2)
@@ -176,25 +174,9 @@ Function loadAllTabs()
 	This:C1470.loadInvoices()
 	
 	
-Function LoadApContact()
-	
+Function loadContacts()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.lb_apContact:=New collection:C1472()
-		If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()#Null:C1517)
-			
-			Form:C1466.lb_apContact:=Form:C1466.current_item.rebuidComunications("AP")
-		End if 
-	End if 
-	
-	
-Function LoadStatusContact()
-	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.lb_statusContact:=New collection:C1472()
-		If (Form:C1466.current_item.contacts.query("title=:1"; "Status").first()#Null:C1517)
-			
-			Form:C1466.lb_statusContact:=Form:C1466.current_item.rebuidComunications("Status")
-			
-		End if 
+		Form:C1466.lb_contacts:=ds:C1482.Contact.query("UUID_Customer = :1"; Form:C1466.current_item.UUID)
 	End if 
 	
 	
@@ -310,40 +292,45 @@ Function loadInvoices()
 	End if 
 	
 	
-Function bActionXXX()
-	//Manages actions: add, or remove, using dynamic menus and modification checks
-	
-Function bActionApContact()
+Function bActionContact()
 	$refMenu:=Create menu:C408
+	
+	APPEND MENU ITEM:C411($refMenu; "Add a new Contact"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--addNewContact")
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
 	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
-	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openInWindow")
-	If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()=Null:C1517)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--openInWindow")
+	If (Form:C1466.selected_contact=Null:C1517)
 		DISABLE MENU ITEM:C150($refMenu; -1)
 	End if 
 	
 	$choice:=Dynamic pop up menu:C1006($refMenu)
 	RELEASE MENU:C978($refMenu)
 	Case of 
-		: ($choice="openInWindow")
-			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.contacts.query("title=:1"; "AP").first(); "customerService"; "contact")
+		: ($choice="--addNewContact")
+			$form:=New object:C1471()
+			
+			$winRef:=Open form window:C675("addNewContactToCustomer"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("addNewContactToCustomer"; $form)
+			CLOSE WINDOW:C154
+			
+			If (ok=1)
+				For each ($contact; $form.selectedContacts)
+					$contact.UUID_Customer:=Form:C1466.current_item.UUID
+					
+					$res:=$contact.save()
+				End for each 
+				
+				This:C1470._activate_save_cancel_button()
+				This:C1470.loadContacts()
+			End if 
+			
+		: ($choice="--openInWindow")
+			Form:C1466.sfw.openInANewWindow(Form:C1466.selected_contact; "customerService"; "contact")
 	End case 
-	This:C1470.LoadApContact()
-	
-Function bActionStatusContact()
-	$refMenu:=Create menu:C408
-	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
-	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openInWindow")
-	If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()=Null:C1517)
-		DISABLE MENU ITEM:C150($refMenu; -1)
-	End if 
-	
-	$choice:=Dynamic pop up menu:C1006($refMenu)
-	RELEASE MENU:C978($refMenu)
-	Case of 
-		: ($choice="openInWindow")
-			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.contacts.query("title=:1"; "Status").first(); "customerService"; "contact")
-	End case 
-	This:C1470.LoadStatusContact()
 	
 	
 Function loadDpAddress()
@@ -354,7 +341,7 @@ Function loadDpAddress()
 		)
 	
 	
+	
+	
 Function _activate_save_cancel_button()
 	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
-	
-	

@@ -24,6 +24,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setLBItemsOrderBy("name")
 	
+	$entry.setValidationRule("code"; "entryField_code"; "mandatory"; "unique"; "message:The customer code is mandatory and unique")
+	$entry.setValidationRule("name"; "entryField_name"; "mandatory"; "unique"; "message:The customer name is mandatory and unique")
+	
+	
 	$entry.activateEvent("CustomerEvent"; "UUID_Customer")
 	$entry.setAttributesToTrackInModificationEvent("IDT_status"; "name"; "IDT_carrier"; "accountNumber"; "code"; "resaleLicenseNumber")
 	$entry.setEventOptions("dontCreateModifyEventIfNoTrackingAttribute")

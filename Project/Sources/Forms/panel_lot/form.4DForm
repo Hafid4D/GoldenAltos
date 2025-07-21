@@ -97,7 +97,7 @@
 					"stroke": "#808080",
 					"text": "Job #"
 				},
-				"entryField_customer": {
+				"Field_customer": {
 					"type": "input",
 					"top": 37,
 					"left": 132,
@@ -109,12 +109,14 @@
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
-						"onDataChange"
+						"onClick",
+						"onMouseMove"
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
 					"fontWeight": "bold",
-					"textAlign": "left"
+					"textAlign": "left",
+					"method": "ObjectMethods/Field_customer.4dm"
 				},
 				"label_jobNumber1": {
 					"type": "text",
@@ -153,13 +155,13 @@
 					"stroke": "#808080",
 					"text": "PO #"
 				},
-				"entryField_poNumber": {
+				"Field_poNumber": {
 					"type": "input",
 					"top": 62,
 					"left": 132,
 					"width": 140,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.poNumber",
+					"dataSource": "Form:C1466.current_item.job.poNumber",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -189,7 +191,7 @@
 					"stroke": "#808080",
 					"text": "Customer"
 				},
-				"entryField_device1": {
+				"Field_device1": {
 					"type": "input",
 					"top": 12,
 					"left": 396,
@@ -1308,6 +1310,24 @@
 						},
 						{
 							"header": {
+								"name": "Header1",
+								"text": "Min Yield",
+								"fontWeight": "bold"
+							},
+							"name": "Column1",
+							"footer": {
+								"name": "Footer1"
+							},
+							"dataSource": "This:C1470.minYield",
+							"width": 65,
+							"dataSourceTypeHint": "number",
+							"dateFormat": "short",
+							"textAlign": "center",
+							"enterable": false,
+							"resizable": false
+						},
+						{
+							"header": {
 								"name": "Header31",
 								"text": "Qty IN",
 								"fontWeight": "bold"
@@ -1497,7 +1517,7 @@
 			"objects": {}
 		}
 	],
-	"geometryStamp": 1604,
+	"geometryStamp": 1607,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
