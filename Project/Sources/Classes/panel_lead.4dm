@@ -733,17 +733,14 @@ Function bActionInteractions()
 		DISABLE MENU ITEM:C150($mainMenu; -1)
 	End if 
 	
-	APPEND MENU ITEM:C411($mainMenu; "Complete follow up"; *)
-	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--complete")
-	If (Form:C1466.current_interaction=Null:C1517)
-		DISABLE MENU ITEM:C150($mainMenu; -1)
-	End if 
+	//APPEND MENU ITEM($mainMenu; "Complete follow up"; *)
+	//SET MENU ITEM PARAMETER($mainMenu; -1; "--complete")
+	//If (Form.current_interaction=Null)
+	//DISABLE MENU ITEM($mainMenu; -1)
+	//End if 
 	
 	APPEND MENU ITEM:C411($mainMenu; "Schedule follow up"; *)
 	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--schedule")
-	If (Form:C1466.current_interaction=Null:C1517)
-		DISABLE MENU ITEM:C150($mainMenu; -1)
-	End if 
 	
 	APPEND MENU ITEM:C411($mainMenu; "Log interaction"; *)
 	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--log")
@@ -755,6 +752,36 @@ Function bActionInteractions()
 	
 	Case of 
 		: ($choice="")
+		: ($choice="--schedule")
+			$form:=New object:C1471
+			$form.creationDate:=Current date:C33()
+			$form.current_item:=Form:C1466.current_item
+			$form.number:=ds:C1482.Interaction.sequence
+			$form.followUPDate:=Add to date:C393(Current date:C33; 0; 0; 1)
+			
+			$ref:=Open form window:C675("Lead_scheduleFollowUP"; Sheet form window:K39:12)
+			DIALOG:C40("Lead_scheduleFollowUP"; $form)
+			CLOSE WINDOW:C154($ref)
+			
+			If (ok=1)
+				$form.stmpFollowUp:=cs:C1710.sfw_stmp.me.build($form.followUPDate)
+				$form.stmpCreation:=cs:C1710.sfw_stmp.me.build($form.creationDate)
+				OB REMOVE:C1226($form; "followUPDate")
+				OB REMOVE:C1226($form; "creationDate")
+				OB REMOVE:C1226($form; "current_item")
+				
+				$interaction:=ds:C1482.Interaction.new()
+				$interaction.fromObject($form)
+				$interaction.UUID_Lead:=Form:C1466.current_item.UUID
+				$status:=ds:C1482.InteractionType.query("code == :1"; "SCHEDULED").first()
+				If ($status#Null:C1517)
+					$interaction.UUID_Type:=$status.UUID
+				End if 
+				$result:=$interaction.save()
+				Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($interaction).orderBy("number desc")
+				cs:C1710.panel_lead.me._activate_save_cancel_button()
+			End if 
+			
 		: ($choice="--log")
 			$form:=New object:C1471
 			$form.creationDate:=Current date:C33()
