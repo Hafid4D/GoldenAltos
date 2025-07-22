@@ -1,8 +1,7 @@
 //%attributes = {}
 
-TRUNCATE TABLE:C1051([Interaction:51])
-//$es:=ds.Interaction.all()
-//[Lead]
+TRUNCATE TABLE:C1051([sfw_Notification:69])
+$es:=ds:C1482.sfw_Notification.all()
 
 
 //$file:=Folder(fk data folder).file("2300_Names.json")

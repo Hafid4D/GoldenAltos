@@ -766,6 +766,7 @@ Function bActionInteractions()
 			If (ok=1)
 				$form.stmpFollowUp:=cs:C1710.sfw_stmp.me.build($form.followUPDate)
 				$form.stmpCreation:=cs:C1710.sfw_stmp.me.build($form.creationDate)
+				$followUPDate:=$form.followUPDate
 				OB REMOVE:C1226($form; "followUPDate")
 				OB REMOVE:C1226($form; "creationDate")
 				OB REMOVE:C1226($form; "current_item")
@@ -778,6 +779,18 @@ Function bActionInteractions()
 					$interaction.UUID_Type:=$status.UUID
 				End if 
 				$result:=$interaction.save()
+				
+				$context:=New object:C1471
+				$context.target:=Form:C1466.current_item.UUID
+				$context.targetDataclass:="Lead"
+				$context.Followupdate:=$followUPDate
+				$context.Contact:=$interaction.contact.fullName
+				$context.Trigger:=$interaction.trigger.name
+				
+				$staff:=ds:C1482.Staff.query("UUID_User = :1"; cs:C1710.sfw_userManager.me.info.UUID).first()
+				$users:=New collection:C1472($staff.user.UUID)
+				cs:C1710.sfw_notificationManager.me._notify("InteractionScheduled"; $users; $context)
+				
 				Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($interaction).orderBy("number desc")
 				cs:C1710.panel_lead.me._activate_save_cancel_button()
 			End if 
@@ -795,11 +808,13 @@ Function bActionInteractions()
 			CLOSE WINDOW:C154($ref)
 			
 			If (ok=1)
+				$followUPDate:=$form.followUPDate
 				$form.stmpCreation:=cs:C1710.sfw_stmp.me.build($form.creationDate)
 				$form.stmpFollowUp:=cs:C1710.sfw_stmp.me.build($form.followUPDate)
 				OB REMOVE:C1226($form; "creationDate")
 				OB REMOVE:C1226($form; "followUPDate")
 				OB REMOVE:C1226($form; "current_item")
+				
 				
 				$interaction:=ds:C1482.Interaction.new()
 				$interaction.fromObject($form)
@@ -826,6 +841,19 @@ Function bActionInteractions()
 					$scheduledInteraction.UUID_Interaction:=$interaction.UUID
 					
 					$result:=$scheduledInteraction.save()
+					
+					
+					$context:=New object:C1471
+					$context.target:=Form:C1466.current_item.UUID
+					$context.targetDataclass:="Lead"
+					$context.Followupdate:=$followUPDate
+					$context.Contact:=$scheduledInteraction.contact.fullName
+					$context.Trigger:=$scheduledInteraction.trigger.name
+					
+					$staff:=ds:C1482.Staff.query("UUID_User = :1"; cs:C1710.sfw_userManager.me.info.UUID).first()
+					$users:=New collection:C1472($staff.user.UUID)
+					cs:C1710.sfw_notificationManager.me._notify("InteractionScheduled"; $users; $context)
+					
 					Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($scheduledInteraction).orderBy("number desc")
 					
 				End if 
