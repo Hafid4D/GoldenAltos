@@ -568,11 +568,26 @@ Function btnOpenStaff()
 Function btnCreateCustomer()
 	Form:C1466.sfw.openCreateWindow("customerService"; "customer")
 	
-Function btnDatePickerCreate($object; $attribut; $stmp)
+Function btnDatePickerCreate($object; $attribut; $stmp; $minMax)
+	var $currentDate : Date
 	$name:=OBJECT Get name:C1087
 	OBJECT GET COORDINATES:C663(*; $name; $x1; $y1; $x2; $y2)
 	CONVERT COORDINATES:C1365($x1; $y1; XY Current form:K27:5; XY Current window:K27:6)
-	$test:=DatePicker Display Dialog($x1; $y1)
+	
+	$currentDate:=Current date:C33()
+	Case of 
+		: (Num:C11($minMax)=1)
+			DatePicker SET DEFAULT MAX DATE(!2040-01-01!)
+			DatePicker SET DEFAULT MIN DATE($currentDate)
+			
+		: (Num:C11($minMax)=2)
+			DatePicker SET DEFAULT MIN DATE(!2004-01-01!)
+			DatePicker SET DEFAULT MAX DATE($currentDate)
+			
+	End case 
+	
+	
+	$test:=DatePicker Display Dialog($x1; $y1; Current date:C33())
 	If ($test#!00-00-00!)
 		If (Bool:C1537($stmp))
 			$object[$attribut]:=cs:C1710.sfw_stmp.me.build($test)
