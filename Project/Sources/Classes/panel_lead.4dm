@@ -64,7 +64,7 @@ Function formMethod()
 	End case 
 	
 Function loadInteractions()
-	Form:C1466.lb_interactions:=Form:C1466.current_item.interactions.orderBy("number desc")
+	Form:C1466.lb_interactions:=Form:C1466.current_item.interactions.orderBy("stmpCreation desc")
 	
 Function loadContacts()
 	Form:C1466.lb_contacts:=Form:C1466.current_item.contacts()
@@ -806,7 +806,7 @@ Function bActionInteractions()
 				$users:=New collection:C1472($staff.user.UUID)
 				cs:C1710.sfw_notificationManager.me._notify("InteractionScheduled"; $users; $context)
 				
-				Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($interaction).orderBy("number desc")
+				Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($interaction).orderBy("stmpCreation desc")
 				cs:C1710.panel_lead.me._activate_save_cancel_button()
 			End if 
 			
@@ -839,7 +839,7 @@ Function bActionInteractions()
 					$interaction.UUID_Type:=$status.UUID
 				End if 
 				$result:=$interaction.save()
-				Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($interaction).orderBy("number desc")
+				Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($interaction).orderBy("stmpCreation desc")
 				
 				
 				If ($form.nextFollowUp)

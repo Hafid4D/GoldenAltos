@@ -1129,6 +1129,46 @@
 					"left": 599,
 					"width": 113,
 					"height": 16
+				},
+				"pup_nextStep1": {
+					"type": "button",
+					"top": 143,
+					"left": 10,
+					"width": 106,
+					"height": 20,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "All Statuses",
+					"icon": "/RESOURCES/image/element/filter.png",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "custom",
+					"method": "ObjectMethods/pup_nextStep1.4dm",
+					"events": [
+						"onClick"
+					],
+					"iconFrames": 1
+				},
+				"pup_nextStep4": {
+					"type": "button",
+					"top": 177,
+					"left": 10,
+					"width": 106,
+					"height": 20,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "All Statuses",
+					"icon": "/RESOURCES/image/element/filter.png",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "custom",
+					"method": "ObjectMethods/pup_nextStep4.4dm",
+					"events": [
+						"onClick"
+					],
+					"iconFrames": 1
 				}
 			}
 		},
@@ -1380,7 +1420,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 643,
+	"geometryStamp": 647,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {
