@@ -875,6 +875,7 @@ Function bActionInteractions()
 	
 Function pup_interaction($type; $currentUUID)->$uuid : Text
 	If (Form:C1466.sfw.checkIsInModification=Null:C1517) || (Form:C1466.sfw.checkIsInModification#Null:C1517 && Form:C1466.sfw.checkIsInModification())
+		$displayMenu:=True:C214
 		Case of 
 			: ($type="method")
 				$dc:="InteractionMethod"
@@ -896,30 +897,42 @@ Function pup_interaction($type; $currentUUID)->$uuid : Text
 				$cacheAttribut:="interactionType"
 				$widgetName:="pup_type"
 				
+				If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache[$cacheAttribut]=Null:C1517)
+					ds:C1482[$dc].cacheLoad()
+				End if 
+				$items:=Storage:C1525.cache[$cacheAttribut].query("UUID == :1"; $currentUUID)
+				If ($items.length#0)
+					$displayMenu:=$items[0].code#"COMPLETED"
+				End if 
+				
+				
+				
 		End case 
 		
-		
-		$menu:=Create menu:C408
-		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache[$cacheAttribut]=Null:C1517)
-			ds:C1482[$dc].cacheLoad()
+		If ($displayMenu)
+			$menu:=Create menu:C408
+			If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache[$cacheAttribut]=Null:C1517)
+				ds:C1482[$dc].cacheLoad()
+			End if 
+			
+			For each ($eItem; Storage:C1525.cache[$cacheAttribut])
+				APPEND MENU ITEM:C411($menu; $eItem.name; *)
+				SET MENU ITEM PARAMETER:C1004($menu; -1; $eItem.UUID)
+				If ($eItem.UUID=$currentUUID)
+					SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+					If (Is Windows:C1573)
+						SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+					End if 
+				End if 
+			End for each 
+			$uuid:=Dynamic pop up menu:C1006($menu)
+			RELEASE MENU:C978($menu)
+			
+			Case of 
+				: ($uuid#"")
+					$item:=Storage:C1525.cache[$cacheAttribut].query("UUID == :1"; $uuid)[0]
+					OBJECT SET TITLE:C194(*; $widgetName; $item.name)
+			End case 
 		End if 
 		
-		For each ($eItem; Storage:C1525.cache[$cacheAttribut])
-			APPEND MENU ITEM:C411($menu; $eItem.name; *)
-			SET MENU ITEM PARAMETER:C1004($menu; -1; $eItem.UUID)
-			If ($eItem.UUID=$currentUUID)
-				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
-				If (Is Windows:C1573)
-					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
-				End if 
-			End if 
-		End for each 
-		$uuid:=Dynamic pop up menu:C1006($menu)
-		RELEASE MENU:C978($menu)
-		
-		Case of 
-			: ($uuid#"")
-				$item:=Storage:C1525.cache[$cacheAttribut].query("UUID == :1"; $uuid)[0]
-				OBJECT SET TITLE:C194(*; $widgetName; $item.name)
-		End case 
 	End if 
