@@ -735,10 +735,10 @@
 			"coordinates": {
 				"left": 760.18234252921,
 				"top": 2157.9232788086,
-				"width": 162,
-				"height": 163.33203125
+				"width": 165.71719360352,
+				"height": 177.60284423828
 			},
-			"displayable_fields_count": 5
+			"displayable_fields_count": 6
 		},
 		"sfw_EventType": {
 			"color": {
@@ -764,8 +764,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1112.8527069092,
-				"top": 1953.4202575685,
+				"left": 1342.8549041748,
+				"top": 1962.539581299,
 				"width": 285.34545898437,
 				"height": 338.83685302734
 			},

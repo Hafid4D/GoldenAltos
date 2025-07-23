@@ -83,4 +83,4 @@ Function trigger()
 Function _loadAsCollection()->$interactionsTypeColl : Collection
 	var $file : 4D:C1709.File
 	var $img : Picture
-	$interactionsTypeColl:=This:C1470.all().toCollection("UUID, levelID, code, name, color").orderBy("levelID")
+	$interactionsTypeColl:=This:C1470.all().toCollection().orderBy("levelID")

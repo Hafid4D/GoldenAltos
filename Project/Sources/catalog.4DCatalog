@@ -701,6 +701,7 @@
 		<field name="code" uuid="2EC4C77592DE46AC83995D0D6C9D54D1" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="name" uuid="8B736123DC8141ACBB69A8157EAFBA85" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="color" uuid="2B2DCAD0AFAE404492D1597F75D3B195" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="moreData" uuid="8910090A9AA949969540E0A0B0E81718" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="DDD1D8B9DED6419FA5277AF0AF879E0A"/>
 	</table>
 	<table name="InteractionOutcome" uuid="A2E5AA68898A4B1595645CE229236B67" id="54">

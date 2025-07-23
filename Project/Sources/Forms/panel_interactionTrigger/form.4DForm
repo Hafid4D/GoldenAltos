@@ -144,10 +144,39 @@
 			}
 		},
 		{
-			"objects": {}
+			"objects": {
+				"label_0_4": {
+					"type": "text",
+					"top": 135,
+					"left": 12,
+					"width": 201,
+					"height": 16,
+					"stroke": "#808080",
+					"text": "Days after the creation of a lead"
+				},
+				"entryField_daysAfterLeadCreation": {
+					"type": "input",
+					"top": 135,
+					"left": 258,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.moreData.daysAfterLeadCreation",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "integer",
+					"method": "ObjectMethods/entryField_daysAfterLeadCreation.4dm"
+				}
+			}
 		}
 	],
-	"geometryStamp": 16,
+	"geometryStamp": 31,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"method": "method.4dm",
 	"editor": {

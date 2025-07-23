@@ -50,7 +50,58 @@ Function calculateCode()->$leadCode : Text
 	
 	
 local Function afterCreation()
-	// This callback is called after saving the new item
+	var $interaction : cs:C1710.InteractionEntity
+	If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.interactionTrigger=Null:C1517)
+		ds:C1482.InteractionTrigger.cacheLoad()
+	End if 
+	
+	$items:=Storage:C1525.cache.interactionTrigger.query("code == :1"; "LEAD_CREATION")
+	If ($items.length#0)
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.interactionType=Null:C1517)
+			ds:C1482.InteractionType.cacheLoad()
+		End if 
+		$types:=Storage:C1525.cache.interactionType.query("code == :1"; "SCHEDULED")
+		If ($types.length#0)
+			$uuidType:=$types[0].UUID
+		Else 
+			$uuidType:=""
+		End if 
+		
+		$mainContact:=This:C1470.mainContact()
+		If ($mainContact#Null:C1517)
+			$uuidMainContact:=$mainContact.UUID
+		Else 
+			$uuidMainContact:=""
+		End if 
+		
+		$uuidTrigger:=$items[0].UUID
+		$nbrDaysAfter:=Num:C11($items[0].moreData.daysAfterLeadCreation)
+		
+		$interaction:=ds:C1482.Interaction.new()
+		$interaction.number:=ds:C1482.Interaction.sequence
+		$interaction.stmpCreation:=cs:C1710.sfw_stmp.me.build()
+		$interaction.stmpFollowUp:=cs:C1710.sfw_stmp.me.build(Add to date:C393(Current date:C33; 0; 0; $nbrDaysAfter))
+		$interaction.UUID_Staff:=cs:C1710.sfw_userManager.me.info.UUID
+		$interaction.UUID_Lead:=This:C1470.UUID
+		$interaction.UUID_Type:=$uuidType
+		$interaction.UUID_Trigger:=$uuidTrigger
+		$interaction.UUID_Contact:=$uuidMainContact
+		$interaction.save()
+		
+		$context:=New object:C1471
+		$context.target:=Form:C1466.current_item.UUID
+		$context.targetDataclass:="Lead"
+		$context.Followupdate:=$interaction.followUPDate
+		$context.Contact:=$interaction.contact.fullName
+		$context.Trigger:=$interaction.trigger.name
+		
+		$staff:=ds:C1482.Staff.query("UUID_User = :1"; cs:C1710.sfw_userManager.me.info.UUID).first()
+		$users:=New collection:C1472($staff.user.UUID)
+		cs:C1710.sfw_notificationManager.me._notify("InteractionScheduled"; $users; $context)
+		
+	Else 
+		ALERT:C41("")
+	End if 
 	This:C1470._initContacts()
 	
 local Function _initContacts()
@@ -79,4 +130,11 @@ Function contacts()->$contacts : Collection
 			$contact.type:="Secondary"
 			$contacts.push($contact)
 		End for each 
+	End if 
+	
+local Function mainContact()->$mainContact : cs:C1710.ContactEntity
+	If (This:C1470.moreData#Null:C1517) && (This:C1470.moreData.mainContact#Null:C1517)
+		$mainContact:=ds:C1482.Contact.get(This:C1470.moreData.mainContact.UUID)
+	Else 
+		$mainContact:=Null:C1517
 	End if 
