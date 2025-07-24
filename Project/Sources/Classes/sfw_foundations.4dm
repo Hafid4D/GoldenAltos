@@ -100,7 +100,6 @@ Function _openFormInProcess($formData : Object)
 		$formData.window.left:=$left
 		$formData.window.top:=$top
 		$formData.sfw.openForm($formData)
-		
 	End if 
 	
 	

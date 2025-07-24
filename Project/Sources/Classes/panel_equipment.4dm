@@ -110,7 +110,7 @@ End case
 		CLOSE WINDOW:C154($winRef)
 		
 		If (ok=1)
-			Form:C1466.current_item.UUID_ToolType:=$form.item.name
+			Form:C1466.current_item.UUID_ToolType:=$form.item.UUID
 			cs:C1710.panel_equipment.me._activate_save_cancel_button()
 		End if 
 		
