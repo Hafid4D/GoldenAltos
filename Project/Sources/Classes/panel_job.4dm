@@ -109,8 +109,12 @@ Function bActionAttachPoLine()
 		APPEND MENU ITEM:C411($refMenu; "Attach a PO Line")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--create")
 		APPEND MENU ITEM:C411($refMenu; "-")
-		APPEND MENU ITEM:C411($refMenu; "(Delete")
+		
+		APPEND MENU ITEM:C411($refMenu; "Delete")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")
+		If (Form:C1466.selectedPoLine=Null:C1517)
+			DISABLE MENU ITEM:C150($refMenu; -1)
+		End if 
 		
 		$choose:=Dynamic pop up menu:C1006($refMenu)
 		
@@ -127,7 +131,20 @@ Function bActionAttachPoLine()
 				End if 
 				
 			: ($choose="--delete")
-				
+				If (Form:C1466.selectedPoLine#Null:C1517)
+					cs:C1710.sfw_dialog.me.confirm("Are you sure? !")
+					
+					If (ok=1)
+						Form:C1466.selectedPoLine.UUID_Job:=""
+						
+						$res:=Form:C1466.selectedPoLine.save()
+						
+						If ($res.success)
+							This:C1470.loadPoLineItems()
+							This:C1470._activate_save_cancel_button()
+						End if 
+					End if 
+				End if 
 		End case 
 	Else 
 		$refMenu:=Create menu:C408
@@ -147,8 +164,11 @@ Function bActionAttachLot()
 		APPEND MENU ITEM:C411($refMenu; "Attach a Lot")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--create")
 		APPEND MENU ITEM:C411($refMenu; "-")
-		APPEND MENU ITEM:C411($refMenu; "(Delete")
+		APPEND MENU ITEM:C411($refMenu; "Delete")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")
+		If (Form:C1466.selectedLot=Null:C1517)
+			DISABLE MENU ITEM:C150($refMenu; -1)
+		End if 
 		
 		$choose:=Dynamic pop up menu:C1006($refMenu)
 		
@@ -165,7 +185,20 @@ Function bActionAttachLot()
 				End if 
 				
 			: ($choose="--delete")
-				
+				If (Form:C1466.selectedLot#Null:C1517)
+					cs:C1710.sfw_dialog.me.confirm("Are you sure? !")
+					
+					If (ok=1)
+						Form:C1466.selectedLot.UUID_Job:=""
+						
+						$res:=Form:C1466.selectedLot.save()
+						
+						If ($res.success)
+							This:C1470.loadLots()
+							This:C1470._activate_save_cancel_button()
+						End if 
+					End if 
+				End if 
 		End case 
 	Else 
 		$refMenu:=Create menu:C408

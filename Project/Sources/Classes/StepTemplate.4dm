@@ -11,7 +11,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setPanel("panel_stepTemplate")
 	$entry.setPanelPage(1; ""; "Main")
-	$entry.setPanelPage(2; ""; "Steps")
+	//$entry.setPanelPage(2; ""; "Steps")
 	$entry.setPanelPage(3; ""; "Settings")
 	
 	$entry.setLBItemsColumn("templateNumber"; "#"; "width:50")

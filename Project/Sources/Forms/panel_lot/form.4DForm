@@ -1045,11 +1045,11 @@
 					"text": "Ready to Ship",
 					"right": 433
 				},
-				"entryField_commit2": {
+				"Field_readyToShip": {
 					"type": "input",
 					"top": 304,
 					"left": 441,
-					"width": 406,
+					"width": 90,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.readyToShipDate",
 					"focusable": false,
@@ -1210,6 +1210,26 @@
 					"selectionMode": "multiple",
 					"printFrame": "variable",
 					"method": "ObjectMethods/dp_OQADate.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true
+				},
+				"dp_readyToShipDate": {
+					"type": "subform",
+					"top": 305,
+					"left": 512,
+					"width": 19,
+					"height": 16,
+					"dataSource": "Form:C1466.current_item.readyToShipDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dp_readyToShipDate.4dm",
 					"events": [
 						"onLoad"
 					],
@@ -1517,7 +1537,7 @@
 			"objects": {}
 		}
 	],
-	"geometryStamp": 1607,
+	"geometryStamp": 1641,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

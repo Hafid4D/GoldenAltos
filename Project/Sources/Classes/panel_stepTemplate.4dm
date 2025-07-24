@@ -53,9 +53,7 @@ Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	This:C1470.displayStepLine()
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
-	Use (Form:C1466.sfw.entry.panel.pages)
-		Form:C1466.sfw.entry.panel.pages[1].label:="Steps ("+String:C10(Form:C1466.lb_steps.length)+")"
-	End use 
+	
 	Form:C1466.sfw.drawHTab()
 	
 	Case of 
@@ -467,3 +465,36 @@ Function manageProperties()
 			End if 
 	End case 
 	
+	
+Function selectDivision()
+	Case of 
+		: (FORM Event:C1606.code=On Clicked:K2:4)
+			If (Form:C1466.sfw.checkIsInModification())
+				OBJECT GET COORDINATES:C663(*; "Field_division"; $l; $t; $r; $b)
+				CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
+				
+				$form:=New object:C1471(\
+					"colName"; "name"; \
+					"lb_items"; ds:C1482.Division.all(); \
+					"allData"; ds:C1482.Division.all(); \
+					"dataclass"; "Division"\
+					)
+				
+				$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b)
+				DIALOG:C40("selectNto1"; $form)
+				CLOSE WINDOW:C154($winRef)
+				
+				If (ok=1)
+					If ($form.item#Null:C1517)
+						Form:C1466.current_item.division:=$form.item.name
+					Else 
+						Form:C1466.current_item.division:=""
+					End if 
+					
+					cs:C1710.panel_contact.me._activate_save_cancel_button()
+				End if 
+			End if 
+			
+		: (FORM Event:C1606.code=On Mouse Move:K2:35)
+			SET CURSOR:C469(9000)
+	End case 

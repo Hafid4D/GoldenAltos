@@ -75,6 +75,9 @@
 		<field name="actualHours" uuid="0AAC51C4B19BA74CBACF719D1C91656B" type="6" never_null="true" id="31"/>
 		<field name="plannedHours" uuid="1A3980D589D3284F863777C1F0CA1A1F" type="6" never_null="true" id="32"/>
 		<field name="minYield" uuid="901C0BE796303E42954B9B1EBB994B24" type="6" never_null="true" id="33"/>
+		<field name="specification" uuid="85056B8E0387464B8369D71A48FF82BD" type="10" limiting_length="255" never_null="true" id="34"/>
+		<field name="operationCode" uuid="B22D096855CD02489C2580BE15C843C4" type="10" limiting_length="255" never_null="true" id="35"/>
+		<field name="areas" uuid="861ECD70A6CEF14E8397539FE090ECA5" type="10" limiting_length="255" never_null="true" id="36"/>
 		<primary_key field_name="UUID" field_uuid="EE9C517A8C59724B8559A5DCB59FE560"/>
 	</table>
 	<table name="Tool" uuid="0FF66E5E37EDD74B8E6E39F15644C85F" id="6">

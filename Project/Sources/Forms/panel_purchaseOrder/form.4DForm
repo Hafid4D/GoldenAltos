@@ -191,7 +191,7 @@
 					"text": "Division",
 					"fontWeight": "normal"
 				},
-				"entryField_division": {
+				"Field_division": {
 					"type": "input",
 					"top": 62,
 					"left": 644,
@@ -203,12 +203,14 @@
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
-						"onDataChange"
+						"onClick",
+						"onMouseMove"
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
 					"textAlign": "left",
-					"fontWeight": "bold"
+					"fontWeight": "bold",
+					"method": "ObjectMethods/Field_division.4dm"
 				},
 				"label_0_7": {
 					"type": "text",
@@ -1130,6 +1132,7 @@
 					"right": 889,
 					"bottom": 559,
 					"scrollbarHorizontal": "hidden",
+					"currentItemSource": "Form:C1466.selectedJob",
 					"columns": [
 						{
 							"header": {
@@ -1299,6 +1302,25 @@
 					"height": 16,
 					"fontWeight": "bold",
 					"right": 101
+				},
+				"bActionJobs": {
+					"type": "button",
+					"text": "Actions",
+					"top": 535,
+					"left": 16,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionJobs.4dm",
+					"visibility": "visible",
+					"sizingX": "fixed",
+					"sizingY": "fixed"
 				}
 			}
 		},
@@ -1324,6 +1346,7 @@
 					"right": 889,
 					"bottom": 559,
 					"scrollbarHorizontal": "hidden",
+					"currentItemSource": "Form:C1466.selectedLot",
 					"columns": [
 						{
 							"header": {
@@ -1457,6 +1480,25 @@
 					"height": 16,
 					"fontWeight": "bold",
 					"right": 101
+				},
+				"bActionLots": {
+					"type": "button",
+					"text": "Actions",
+					"top": 535,
+					"left": 16,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionLots.4dm",
+					"visibility": "visible",
+					"sizingX": "fixed",
+					"sizingY": "fixed"
 				}
 			}
 		},
@@ -1659,7 +1701,7 @@
 			}
 		}
 	],
-	"geometryStamp": 3314,
+	"geometryStamp": 3319,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

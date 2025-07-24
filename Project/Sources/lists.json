@@ -1127,5 +1127,35 @@
 				"editable": true
 			}
 		]
+	},
+	"OperationTypes": {
+		"editable": false,
+		"items": [
+			{
+				"text": "AI",
+				"ref": 1,
+				"editable": true
+			},
+			{
+				"text": "BI",
+				"ref": 2,
+				"editable": true
+			},
+			{
+				"text": "EI",
+				"ref": 3,
+				"editable": true
+			},
+			{
+				"text": "FT",
+				"ref": 4,
+				"editable": true
+			},
+			{
+				"text": "WS",
+				"ref": 5,
+				"editable": true
+			}
+		]
 	}
 }

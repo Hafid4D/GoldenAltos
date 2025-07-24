@@ -94,7 +94,7 @@
 				"label_0_3": {
 					"type": "text",
 					"top": 62,
-					"left": 12,
+					"left": 292,
 					"width": 70,
 					"height": 17,
 					"stroke": "#808080",
@@ -164,7 +164,7 @@
 				"label_0_6": {
 					"type": "text",
 					"top": 62,
-					"left": 292,
+					"left": 12,
 					"width": 70,
 					"height": 17,
 					"stroke": "#808080",
@@ -174,7 +174,7 @@
 					"type": "checkbox",
 					"text": "Archived",
 					"top": 58,
-					"left": 92,
+					"left": 432,
 					"width": 168,
 					"height": 22,
 					"events": [
@@ -229,7 +229,7 @@
 					"type": "checkbox",
 					"text": "Shipped",
 					"top": 58,
-					"left": 432,
+					"left": 92,
 					"width": 168,
 					"height": 22,
 					"events": [
@@ -852,6 +852,7 @@
 					"alternateFill": "#F7F9FC",
 					"right": 889,
 					"bottom": 559,
+					"currentItemSource": "Form:C1466.selectedPoLine",
 					"columns": [
 						{
 							"header": {
@@ -1059,6 +1060,7 @@
 					"bottom": 559,
 					"alternateFill": "#F7F9FC",
 					"right": 889,
+					"currentItemSource": "Form:C1466.selectedLot",
 					"columns": [
 						{
 							"header": {
@@ -1213,7 +1215,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1439,
+	"geometryStamp": 1476,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
