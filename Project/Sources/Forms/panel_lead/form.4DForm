@@ -1130,45 +1130,43 @@
 					"width": 113,
 					"height": 16
 				},
-				"pup_nextStep1": {
+				"pupFilter_status": {
 					"type": "button",
-					"top": 143,
-					"left": 10,
-					"width": 106,
-					"height": 20,
-					"fontFamily": "System Font",
-					"fontSize": 13,
-					"focusable": false,
-					"text": "All Statuses",
-					"icon": "/RESOURCES/image/element/filter.png",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "custom",
-					"method": "ObjectMethods/pup_nextStep1.4dm",
+					"text": "All status",
+					"top": 124,
+					"left": 12,
+					"width": 104,
+					"height": 18,
 					"events": [
 						"onClick"
 					],
-					"iconFrames": 1
+					"style": "bevel",
+					"popupPlacement": "linked",
+					"fontSize": 9,
+					"icon": "/RESOURCES/sfw/image/picto/funnel-small.png",
+					"textPlacement": "right",
+					"visibility": "visible",
+					"focusable": false,
+					"method": "ObjectMethods/pupFilter_status.4dm"
 				},
-				"pup_nextStep4": {
+				"pupFilter_trigger": {
 					"type": "button",
-					"top": 177,
-					"left": 10,
-					"width": 106,
-					"height": 20,
-					"fontFamily": "System Font",
-					"fontSize": 13,
-					"focusable": false,
-					"text": "All Statuses",
-					"icon": "/RESOURCES/image/element/filter.png",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "custom",
-					"method": "ObjectMethods/pup_nextStep4.4dm",
+					"text": "All triggers",
+					"top": 150,
+					"left": 12,
+					"width": 104,
+					"height": 18,
 					"events": [
 						"onClick"
 					],
-					"iconFrames": 1
+					"style": "bevel",
+					"popupPlacement": "linked",
+					"fontSize": 9,
+					"icon": "/RESOURCES/sfw/image/picto/funnel-small.png",
+					"textPlacement": "right",
+					"visibility": "visible",
+					"focusable": false,
+					"method": "ObjectMethods/pupFilter_trigger.4dm"
 				}
 			}
 		},
@@ -1420,7 +1418,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 647,
+	"geometryStamp": 665,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {
