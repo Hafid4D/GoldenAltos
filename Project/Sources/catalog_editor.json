@@ -56,8 +56,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1732.9794769287,
-				"top": 570.94158935547,
+				"left": 1960.4692230225,
+				"top": 438.47967529297,
 				"width": 226.30639648438,
 				"height": 417.9924621582
 			},
@@ -155,8 +155,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1894,
-				"top": 214,
+				"left": 2007.2374267578,
+				"top": 217.95132446289,
 				"width": 93.66145324707,
 				"height": 129.33203125
 			},
@@ -187,7 +187,7 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1783,
+				"left": 1781.7233886719,
 				"top": 0,
 				"width": 127.669921875,
 				"height": 167.33203125
@@ -203,24 +203,20 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1297,
+				"left": 1380.0543823242,
 				"top": 0,
-				"width": 195.046875,
-				"height": 335.33203125
+				"width": 263.75323486328,
+				"height": 419.92266845703
 			},
-			"displayable_fields_count": 14,
-			"fields_ordering": 2,
+			"displayable_fields_count": 18,
 			"fields": {
 				"voided": {
 					"position": 14
 				},
-				"division": {
-					"position": 13
-				},
 				"revision": {
 					"position": 12
 				},
-				"UUID_Employee": {
+				"UUID_Staff": {
 					"position": 3
 				},
 				"stmpCreation": {
@@ -241,14 +237,11 @@
 				"subject": {
 					"position": 6
 				},
-				"currentStatusID": {
+				"UUID_Status": {
 					"position": 5
 				},
 				"code": {
 					"position": 4
-				},
-				"UUID_Contact": {
-					"position": 2
 				},
 				"UUID": {
 					"position": 1
@@ -675,6 +668,45 @@
 				}
 			}
 		},
+		"Status": {
+			"color": {
+				"red": 207,
+				"green": 209,
+				"blue": 165,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 1745.3931884766,
+				"top": 211.051071167,
+				"width": 163.33068847656,
+				"height": 157.45648193359
+			},
+			"displayable_fields_count": 5,
+			"fields_ordering": 2,
+			"fields": {
+				"levelID": {
+					"position": 2
+				},
+				"color": {
+					"position": 5
+				},
+				"name": {
+					"position": 4
+				},
+				"code": {
+					"position": 3
+				},
+				"UUID": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					},
+					"position": 1
+				}
+			}
+		},
 		"InteractionMethod": {
 			"color": {
 				"red": 207,
@@ -1023,12 +1055,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1475,
-				"top": 1774,
-				"width": 149,
-				"height": 146.33203125
+				"left": 1611.9033813477,
+				"top": 1212.9949188232,
+				"width": 176.93957519531,
+				"height": 190.07992553711
 			},
-			"displayable_fields_count": 5
+			"displayable_fields_count": 7
 		},
 		"Lead": {
 			"color": {
@@ -1040,10 +1072,20 @@
 			"coordinates": {
 				"left": 1167.6898193359,
 				"top": 1192.286895752,
-				"width": 365,
-				"height": 425.33203125
+				"width": 383.04388427734,
+				"height": 466.03674316406
 			},
-			"displayable_fields_count": 18
+			"displayable_fields_count": 20,
+			"fields": {
+				"UUID_LeadNextStep": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
 		},
 		"YesNoQuestion": {
 			"color": {
@@ -1725,6 +1767,22 @@
 		}
 	},
 	"relations": {
+		"13D1804A59BB4334B69B728013AC4033": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"AD6BBF2F268242C0B04A46CEBCCC5DEA": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
 		"F01472D43AF045ECB5F37A14F2FBD275": {
 			"color": {
 				"red": 255,
@@ -2014,6 +2072,14 @@
 			}
 		},
 		"CF3063584FFE4334AC18A5B8B1445D95": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"761F023AC9E24FF8B9A7192BD1698794": {
 			"color": {
 				"red": 255,
 				"green": 255,

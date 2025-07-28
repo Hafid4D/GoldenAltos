@@ -461,7 +461,9 @@
 		<field name="UUID_Quote" uuid="8E4BF5B27969464981C64AD7543BE951" type="10" store_as_UUID="true" never_null="true" id="15"/>
 		<field name="UUID_PurchaseOrder" uuid="66DD748CF2641D4DBD235BD1487914EF" type="10" store_as_UUID="true" never_null="true" id="16"/>
 		<field name="UUID_Job" uuid="CB7307EF402DB74B825760216604C54F" type="10" store_as_UUID="true" never_null="true" id="17"/>
-		<field name="UUID_LeadNextStep" uuid="77AF3DA079C03A43BAD250289F15EF39" type="10" store_as_UUID="true" never_null="true" id="18"/>
+		<field name="UUID_LeadNextStep" uuid="77AF3DA079C03A43BAD250289F15EF39" type="10" store_as_UUID="true" never_null="true" id="18">
+			<field_extra multi_line="false"/>
+		</field>
 		<primary_key field_name="UUID" field_uuid="B8409317F330EA438FDD41BD2DFC32A3"/>
 	</table>
 	<table name="ServiceType" uuid="2125F2FDC0CF8B44888965E43127D9B3" id="36">
@@ -469,6 +471,7 @@
 		<field name="code" uuid="BA3418EC8C89EE49BFA6528783AB15D8" type="10" limiting_length="255" never_null="true" id="2"/>
 		<field name="name" uuid="01E11E5B73D71E4796B158056501C161" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="color" uuid="E858E790BF5C694FA95061370A5AC02F" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="levelID" uuid="BD5039159E564DF2B7932E595166FD19" type="3" never_null="true" id="5"/>
 		<primary_key field_name="UUID" field_uuid="A0B2300D77BC874D9789248A024181BD"/>
 	</table>
 	<table name="sfw_Favorite" uuid="BBA10D61B3A54D38A2C335D8A5A1BF6E" id="37">
@@ -723,6 +726,16 @@
 		<field name="color" uuid="0D2C5911A364470D8717884D3C774D57" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="levelID" uuid="FB849C44CC3F48F58AFE34FC14572125" type="3" never_null="true" id="5"/>
 		<primary_key field_name="UUID" field_uuid="42B24EAE59DD4900B3A2BAF05FC016F1"/>
+	</table>
+	<table name="Status" uuid="360519D1527C423E8DA77FF905C3FFCA" id="56">
+		<field name="UUID" uuid="B57D2566EC8E40D4BC2F441805123DA3" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="code" uuid="18322BFA9744483F8D22921295D48831" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="name" uuid="669BBCE8C9F24B47860999A8A23372EC" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="color" uuid="C15F428063024BA284459F660F13DE41" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="levelID" uuid="356C75E61FA34A6182A915669CDF381C" type="3" never_null="true" id="5"/>
+		<primary_key field_name="UUID" field_uuid="B57D2566EC8E40D4BC2F441805123DA3"/>
 	</table>
 	<table name="sfw_Notification" uuid="5B73B25D951B4B17AB99971FB0079E64" id="69">
 		<field name="UUID" uuid="37203E4F21D84C8EBC40DFC936CBFFA1" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -1065,19 +1078,22 @@
 	</table>
 	<table name="Quote" uuid="98A20403539048D2B775AEAED975966B" id="128">
 		<field name="UUID" uuid="DDEAA2AF9B9A44BD99857817933C03AA" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="UUID_Contact" uuid="0D7F5C74CB3B4D0A88D4C320686F13E3" type="10" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="division" uuid="CBEFD2BAB08C49C385C25C49E3C984D1" type="10" limiting_length="255" never_null="true" id="2"/>
 		<field name="code" uuid="413566DF139D4D7993079083DDF8180F" type="10" limiting_length="255" never_null="true" id="3"/>
-		<field name="currentStatusID" uuid="FB1C1924172C43E68738DAC7FEC97333" type="3" never_null="true" id="4"/>
+		<field name="UUID_Status" uuid="FB1C1924172C43E68738DAC7FEC97333" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="4"/>
 		<field name="subject" uuid="F703E617E1FA419A91679E7701D982DA" type="10" limiting_length="255" never_null="true" id="5"/>
 		<field name="reference" uuid="3654B390DF5B4BC9869CCFFE02253DC9" type="10" limiting_length="255" never_null="true" id="6"/>
 		<field name="assumptions" uuid="1CF6DB165ED94D8EBA82D57E81B086DD" type="21" blob_switch_size="2147483647" never_null="true" id="7"/>
 		<field name="optionalPreliminaryTxt_wr" uuid="7ECA3501E5544BD88FD49E982E900EC0" type="21" blob_switch_size="2147483647" never_null="true" id="8"/>
 		<field name="termsConditions" uuid="841C2C0BB623401EA6087977440B07D8" type="21" blob_switch_size="2147483647" never_null="true" id="9"/>
 		<field name="stmpCreation" uuid="F97449D28C8C45E9A331B9D93BEBB59F" type="4" never_null="true" id="10"/>
-		<field name="UUID_Employee" uuid="0EACB0E17BBD4F639E0C142211979D18" type="10" store_as_UUID="true" never_null="true" id="11"/>
+		<field name="UUID_Staff" uuid="0EACB0E17BBD4F639E0C142211979D18" type="10" store_as_UUID="true" never_null="true" id="11"/>
 		<field name="revision" uuid="1AC1E65EF74F4F6C8D21783AB1121A51" type="10" limiting_length="255" never_null="true" id="12"/>
-		<field name="division" uuid="E8525F3CB57E40CDA05F257B24807529" type="10" limiting_length="255" never_null="true" id="13"/>
 		<field name="voided" uuid="93C37C641AE2804F9E79B02DA8D0D64D" type="1" never_null="true" id="14"/>
+		<field name="UUID_Service" uuid="5D9A39B0F2984CED9C5FECF964794B22" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="15"/>
+		<field name="moreData" uuid="35CECEFAAF16499BA3F6A14DA5B373D4" type="21" blob_switch_size="2147483647" never_null="true" id="16">
+			<field_extra multi_line="false"/>
+		</field>
 		<primary_key field_name="UUID" field_uuid="DDEAA2AF9B9A44BD99857817933C03AA"/>
 	</table>
 	<table name="QuoteLine" uuid="348628FCA4DC451085D7519B226BD509" id="129">
@@ -1453,15 +1469,15 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="5AF1197C37DC4B28BCC4BE28D9409233" name_Nto1="contact" name_1toN="quotes" state="1">
+	<relation uuid="761F023AC9E24FF8B9A7192BD1698794" name_Nto1="staff" name_1toN="quotes" state="1">
 		<related_field kind="source">
-			<field_ref uuid="0D7F5C74CB3B4D0A88D4C320686F13E3" name="UUID_Contact">
+			<field_ref uuid="0EACB0E17BBD4F639E0C142211979D18" name="UUID_Staff">
 				<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
 			</field_ref>
 		</related_field>
 		<related_field kind="destination">
-			<field_ref uuid="8EFDF2BE837542E3849ECB064F30C5BD" name="UUID">
-				<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
+			<field_ref uuid="6941AB4C41898A4A9FBF25D5AC27CA2B" name="UUID">
+				<table_ref uuid="FD10D10C9E0015458AFF59F988A373BB" name="Staff"/>
 			</field_ref>
 		</related_field>
 	</relation>
@@ -2029,6 +2045,30 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="AD6BBF2F268242C0B04A46CEBCCC5DEA" name_Nto1="service" name_1toN="quotes" state="1">
+		<related_field kind="source">
+			<field_ref uuid="5D9A39B0F2984CED9C5FECF964794B22" name="UUID_Service">
+				<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="A0B2300D77BC874D9789248A024181BD" name="UUID">
+				<table_ref uuid="2125F2FDC0CF8B44888965E43127D9B3" name="ServiceType"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="13D1804A59BB4334B69B728013AC4033" name_Nto1="status" name_1toN="quotes" state="1">
+		<related_field kind="source">
+			<field_ref uuid="FB1C1924172C43E68738DAC7FEC97333" name="UUID_Status">
+				<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="B57D2566EC8E40D4BC2F441805123DA3" name="UUID">
+				<table_ref uuid="360519D1527C423E8DA77FF905C3FFCA" name="Status"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="005E48A922A4464DB92973931B467ACF" type="3">
 		<field_ref uuid="17F71D68FA714CE9A75ED79CA63E3BE2" name="UUID_Lead">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
@@ -2187,11 +2227,6 @@
 	<index kind="regular" unique_keys="true" uuid="246F04C1DEBA3C45BF9A7C28F15E50DF" type="7">
 		<field_ref uuid="3D5820337641C0429DE0E451B4C553BC" name="UUID">
 			<table_ref uuid="250C49949B7EEE4DAAA8A5D319A94DF6" name="CIPriority"/>
-		</field_ref>
-	</index>
-	<index kind="regular" uuid="24CCA01D7871416B98F1F1728F40CE6D" type="3">
-		<field_ref uuid="0D7F5C74CB3B4D0A88D4C320686F13E3" name="UUID_Contact">
-			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="26B5486B90AD42B8B4DE300E4F87D8DE" type="3">
@@ -2500,7 +2535,7 @@
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="878B8D90A6C2644D89B8883B80E40549" type="3">
-		<field_ref uuid="0EACB0E17BBD4F639E0C142211979D18" name="UUID_Employee">
+		<field_ref uuid="0EACB0E17BBD4F639E0C142211979D18" name="UUID_Staff">
 			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
 		</field_ref>
 	</index>
@@ -2557,6 +2592,11 @@
 	<index kind="regular" uuid="91A9B2A8DCE64160836970E0584BA5DE" type="3">
 		<field_ref uuid="F6AFD7AAF6B044F09997D72626D64838" name="UUID_User">
 			<table_ref uuid="E82BBE2952C449BE995135760C788E8F" name="sfw_Comment"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="937D8396A2FC454C8FB085F2953DE28B" type="3">
+		<field_ref uuid="77AF3DA079C03A43BAD250289F15EF39" name="UUID_LeadNextStep">
+			<table_ref uuid="1E733AC1BDB87C40B151040C49BD164B" name="Lead"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="9491A1F1D969407683E038116AC5653C" type="3">
@@ -2627,6 +2667,11 @@
 	<index kind="regular" unique_keys="true" uuid="B1A2B84D24E6284B89649B659845D4AF" type="7">
 		<field_ref uuid="A0B2300D77BC874D9789248A024181BD" name="UUID">
 			<table_ref uuid="2125F2FDC0CF8B44888965E43127D9B3" name="ServiceType"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="B24465934C77438E8015A612FDE83A4A" type="3">
+		<field_ref uuid="FB1C1924172C43E68738DAC7FEC97333" name="UUID_Status">
+			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="B3491E1299D751499D9974A739BA35FB" type="7">
@@ -2819,6 +2864,11 @@
 			<table_ref uuid="BBADA9B28C42FC4AA02504E477DEF5BB" name="AML"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="E9107C9C14254D3AB8B9C9A725CCE5E6" type="3">
+		<field_ref uuid="5D9A39B0F2984CED9C5FECF964794B22" name="UUID_Service">
+			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="EA961ED6B22F3B46AD00D030EBAF34A9" type="3">
 		<field_ref uuid="482371D0CF2A0C4A892CF69926A2E78C" name="UUID_Team">
 			<table_ref uuid="FD10D10C9E0015458AFF59F988A373BB" name="Staff"/>
@@ -2847,6 +2897,11 @@
 	<index kind="regular" unique_keys="true" uuid="F79B3490BB86294E8ABCF568593399BF" type="7">
 		<field_ref uuid="8EFDF2BE837542E3849ECB064F30C5BD" name="UUID">
 			<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="FAD5E6617E37464B910B102C7D93830E" type="1">
+		<field_ref uuid="B57D2566EC8E40D4BC2F441805123DA3" name="UUID">
+			<table_ref uuid="360519D1527C423E8DA77FF905C3FFCA" name="Status"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="FB7A08243A97934089A9BE54DDC795AB" type="3">
