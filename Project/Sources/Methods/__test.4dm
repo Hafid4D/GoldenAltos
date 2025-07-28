@@ -1,7 +1,7 @@
 //%attributes = {}
 
 
-
+$es:=ds:C1482.Quote.all()
 
 //$file:=Folder(fk data folder).file("2300_Names.json")
 //$names:=JSON Parse($file.getText())

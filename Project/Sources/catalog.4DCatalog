@@ -727,16 +727,6 @@
 		<field name="levelID" uuid="FB849C44CC3F48F58AFE34FC14572125" type="3" never_null="true" id="5"/>
 		<primary_key field_name="UUID" field_uuid="42B24EAE59DD4900B3A2BAF05FC016F1"/>
 	</table>
-	<table name="Status" uuid="360519D1527C423E8DA77FF905C3FFCA" id="56">
-		<field name="UUID" uuid="B57D2566EC8E40D4BC2F441805123DA3" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1">
-			<field_extra multi_line="false"/>
-		</field>
-		<field name="code" uuid="18322BFA9744483F8D22921295D48831" type="10" limiting_length="255" never_null="true" id="2"/>
-		<field name="name" uuid="669BBCE8C9F24B47860999A8A23372EC" type="10" limiting_length="255" never_null="true" id="3"/>
-		<field name="color" uuid="C15F428063024BA284459F660F13DE41" type="10" limiting_length="255" never_null="true" id="4"/>
-		<field name="levelID" uuid="356C75E61FA34A6182A915669CDF381C" type="3" never_null="true" id="5"/>
-		<primary_key field_name="UUID" field_uuid="B57D2566EC8E40D4BC2F441805123DA3"/>
-	</table>
 	<table name="sfw_Notification" uuid="5B73B25D951B4B17AB99971FB0079E64" id="69">
 		<field name="UUID" uuid="37203E4F21D84C8EBC40DFC936CBFFA1" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_target" uuid="B24DECF1CAF741CABEBD6960E1AD5595" type="10" store_as_UUID="true" id="2"/>
@@ -1080,7 +1070,7 @@
 		<field name="UUID" uuid="DDEAA2AF9B9A44BD99857817933C03AA" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="division" uuid="CBEFD2BAB08C49C385C25C49E3C984D1" type="10" limiting_length="255" never_null="true" id="2"/>
 		<field name="code" uuid="413566DF139D4D7993079083DDF8180F" type="10" limiting_length="255" never_null="true" id="3"/>
-		<field name="UUID_Status" uuid="FB1C1924172C43E68738DAC7FEC97333" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="4"/>
+		<field name="UUID_Status" uuid="FB1C1924172C43E68738DAC7FEC97333" type="10" store_as_UUID="true" never_null="true" id="4"/>
 		<field name="subject" uuid="F703E617E1FA419A91679E7701D982DA" type="10" limiting_length="255" never_null="true" id="5"/>
 		<field name="reference" uuid="3654B390DF5B4BC9869CCFFE02253DC9" type="10" limiting_length="255" never_null="true" id="6"/>
 		<field name="assumptions" uuid="1CF6DB165ED94D8EBA82D57E81B086DD" type="21" blob_switch_size="2147483647" never_null="true" id="7"/>
@@ -1089,9 +1079,9 @@
 		<field name="stmpCreation" uuid="F97449D28C8C45E9A331B9D93BEBB59F" type="4" never_null="true" id="10"/>
 		<field name="UUID_Staff" uuid="0EACB0E17BBD4F639E0C142211979D18" type="10" store_as_UUID="true" never_null="true" id="11"/>
 		<field name="revision" uuid="1AC1E65EF74F4F6C8D21783AB1121A51" type="10" limiting_length="255" never_null="true" id="12"/>
-		<field name="UUID_Customer" uuid="F30954D8AEF34E28A8015DEADE8362D2" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="13"/>
+		<field name="UUID_Customer" uuid="F30954D8AEF34E28A8015DEADE8362D2" type="10" store_as_UUID="true" never_null="true" id="13"/>
 		<field name="voided" uuid="93C37C641AE2804F9E79B02DA8D0D64D" type="1" never_null="true" id="14"/>
-		<field name="UUID_Service" uuid="5D9A39B0F2984CED9C5FECF964794B22" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="15"/>
+		<field name="UUID_Service" uuid="5D9A39B0F2984CED9C5FECF964794B22" type="10" store_as_UUID="true" never_null="true" id="15"/>
 		<field name="moreData" uuid="35CECEFAAF16499BA3F6A14DA5B373D4" type="21" blob_switch_size="2147483647" never_null="true" id="16">
 			<field_extra multi_line="false"/>
 		</field>
@@ -2058,15 +2048,15 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="13D1804A59BB4334B69B728013AC4033" name_Nto1="status" name_1toN="quotes" state="1">
+	<relation uuid="ABCDD9EC48614C7C93F6B133B4942C86" name_Nto1="status" name_1toN="quotes" state="1">
 		<related_field kind="source">
 			<field_ref uuid="FB1C1924172C43E68738DAC7FEC97333" name="UUID_Status">
 				<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
 			</field_ref>
 		</related_field>
 		<related_field kind="destination">
-			<field_ref uuid="B57D2566EC8E40D4BC2F441805123DA3" name="UUID">
-				<table_ref uuid="360519D1527C423E8DA77FF905C3FFCA" name="Status"/>
+			<field_ref uuid="6A2CE8BD47C44B8EAC7B0C5C14CD21DB" name="UUID">
+				<table_ref uuid="6059D6A0DACF42889F97EAD171DE9723" name="QuoteStatus"/>
 			</field_ref>
 		</related_field>
 	</relation>
@@ -2915,11 +2905,6 @@
 	<index kind="regular" unique_keys="true" uuid="F79B3490BB86294E8ABCF568593399BF" type="7">
 		<field_ref uuid="8EFDF2BE837542E3849ECB064F30C5BD" name="UUID">
 			<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="FAD5E6617E37464B910B102C7D93830E" type="1">
-		<field_ref uuid="B57D2566EC8E40D4BC2F441805123DA3" name="UUID">
-			<table_ref uuid="360519D1527C423E8DA77FF905C3FFCA" name="Status"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="FB7A08243A97934089A9BE54DDC795AB" type="3">

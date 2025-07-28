@@ -139,8 +139,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3778.3332519531,
-				"top": 402.33331298828,
+				"left": 1749.0814056396,
+				"top": 150.92741394043,
 				"width": 207.68237304688,
 				"height": 178.33203125
 			},
@@ -665,45 +665,6 @@
 						"blue": 255,
 						"alpha": 0
 					}
-				}
-			}
-		},
-		"Status": {
-			"color": {
-				"red": 207,
-				"green": 209,
-				"blue": 165,
-				"alpha": 255
-			},
-			"coordinates": {
-				"left": 1745.3931884766,
-				"top": 211.051071167,
-				"width": 163.33068847656,
-				"height": 157.45648193359
-			},
-			"displayable_fields_count": 5,
-			"fields_ordering": 2,
-			"fields": {
-				"levelID": {
-					"position": 2
-				},
-				"color": {
-					"position": 5
-				},
-				"name": {
-					"position": 4
-				},
-				"code": {
-					"position": 3
-				},
-				"UUID": {
-					"color": {
-						"red": 255,
-						"green": 255,
-						"blue": 255,
-						"alpha": 0
-					},
-					"position": 1
 				}
 			}
 		},
@@ -1775,7 +1736,7 @@
 				"alpha": 0
 			}
 		},
-		"13D1804A59BB4334B69B728013AC4033": {
+		"ABCDD9EC48614C7C93F6B133B4942C86": {
 			"color": {
 				"red": 255,
 				"green": 255,
