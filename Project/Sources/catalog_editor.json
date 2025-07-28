@@ -187,12 +187,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1781.7233886719,
-				"top": 0,
-				"width": 127.669921875,
-				"height": 167.33203125
+				"left": 1826.9506835938,
+				"top": 44.902359008789,
+				"width": 147.00085449219,
+				"height": 192.73617553711
 			},
-			"displayable_fields_count": 6,
+			"displayable_fields_count": 7,
 			"fields_ordering": 1
 		},
 		"Quote": {

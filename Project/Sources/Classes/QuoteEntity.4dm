@@ -74,4 +74,8 @@ Function preview()->$preview : Object
 	
 	$preview.conditions:=ds:C1482.TermCondition.query("UUID in :1"; This:C1470.termsConditions.UUIDs)
 	
+Function get dateCreation()->$createDate : Date
+	$createDate:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpCreation; True:C214)
 	
+Function get amount()->$amount : Real
+	$amount:=This:C1470.lines.sum("amount")
