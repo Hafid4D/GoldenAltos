@@ -47,7 +47,6 @@ Function redrawAndSetVisible()
 	
 	This:C1470.drawPup_quoteStatus()
 	This:C1470.drawPup_quoteCustomer()
-	This:C1470.drawPup_quoteService()
 	
 	//Use (Form.sfw.entry.panel.pages)
 	//Form.sfw.entry.panel.pages[0].label:="Lines ("+String(Form.lb_quoteLines.length)+")"
@@ -441,6 +440,7 @@ Function pup_status()
 			: ($choose#"")
 				$eQuoteStatus:=ds:C1482.QuoteStatus.get($choose)
 				Form:C1466.current_item.UUID_Status:=$eQuoteStatus.UUID
+				cs:C1710.panel_quote.me._activate_save_cancel_button()
 		End case 
 		
 	End if 
@@ -465,16 +465,23 @@ Function drawPup_quoteCustomer()
 		Form:C1466.sfw.drawButtonPup("pup_customer"; $name; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.customer=Null:C1517))
 	End if 
 	
-Function drawPup_quoteService()
-	If (Form:C1466.current_item#Null:C1517)
-		$service:=Form:C1466.current_item.service || New object:C1471()
-		$parts:=New collection:C1472($service.code; $service.name)
-		$serviceName:=$parts.join(" - "; ck ignore null or empty:K85:5)
-		If ($serviceName="")
-			$serviceName:="Service"
-		End if 
-		$color:=cs:C1710.sfw_htmlColor.me.getName($service.color)
-		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
-		Form:C1466.sfw.drawButtonPup("pup_serviceType"; $serviceName; $pathIcon; ($service=Null:C1517))
+Function selectCustomer()
+	If (Form:C1466.sfw.checkIsInModification())
+		Case of 
+			: (FORM Event:C1606.code=On Getting Focus:K2:7) | (FORM Event:C1606.code=On Clicked:K2:4)
+				
+				OBJECT GET COORDINATES:C663(*; "entryField_customer"; $l; $t; $r; $b)
+				CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
+				$form:=New object:C1471()
+				$form.lb_items:=ds:C1482.Customer.all()
+				
+				
+				$winRef:=Open form window:C675("selectCustomer"; Pop up form window:K39:11; $l; $b+1)
+				DIALOG:C40("selectCustomer"; $form)
+				CLOSE WINDOW:C154($winRef)
+				If (ok=1)
+					Form:C1466.current_item.UUID_Customer:=$form.item.UUID
+					cs:C1710.panel_quote.me._activate_save_cancel_button()
+				End if 
+		End case 
 	End if 
-	

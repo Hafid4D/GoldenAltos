@@ -186,25 +186,6 @@
 					"stroke": "#808080",
 					"text": "Status"
 				},
-				"pup_customer": {
-					"type": "button",
-					"top": 6,
-					"left": 435,
-					"width": 215,
-					"height": 23,
-					"fontFamily": "System Font",
-					"fontSize": 13,
-					"focusable": false,
-					"text": "Customer",
-					"icon": "",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/pup_customer.4dm",
-					"events": [
-						"onClick"
-					]
-				},
 				"btnForward": {
 					"type": "button",
 					"text": " ",
@@ -261,6 +242,25 @@
 					"events": [
 						"onClick"
 					]
+				},
+				"entryField_customer": {
+					"type": "input",
+					"top": 12,
+					"left": 435,
+					"width": 210,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.customer.name",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onClick",
+						"onGettingFocus"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"method": "ObjectMethods/entryField_customer.4dm"
 				}
 			}
 		},
@@ -1011,7 +1011,7 @@
 			}
 		}
 	],
-	"geometryStamp": 606,
+	"geometryStamp": 613,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {
