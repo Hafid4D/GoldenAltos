@@ -64,6 +64,7 @@ If ($assumptions_file.exists)
 			
 			$eQuote.moreData:=New object:C1471()
 			$eQuote.moreData.mainContact:=$eContact.UUID
+			$eQuote.UUID_Customer:=$eCostumer.UUID
 			$eQuote.code:=$quote.QuoteNumber
 			
 			If ($quote.Status#"")

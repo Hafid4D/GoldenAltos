@@ -11,13 +11,16 @@ Function formMethod()
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
-				This:C1470.loadQuoteLines()
+				
 				
 			: (FORM Get current page:C276(*)=2)
+				This:C1470.loadQuoteLines()
+				
+			: (FORM Get current page:C276(*)=3)
 				This:C1470.loadAssumptions()
 				This:C1470.loadTermsConditions()
 				
-			: (FORM Get current page:C276(*)=4)
+			: (FORM Get current page:C276(*)=5)
 				This:C1470.buildQuotePreview()
 				
 		End case 
@@ -43,6 +46,8 @@ Function redrawAndSetVisible()
 	OBJECT SET VISIBLE:C603(*; "bActionTerms"; Form:C1466.sfw.checkIsInModification())
 	
 	This:C1470.drawPup_quoteStatus()
+	This:C1470.drawPup_quoteCustomer()
+	This:C1470.drawPup_quoteService()
 	
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[0].label:="Lines ("+String:C10(Form:C1466.lb_quoteLines.length)+")"
@@ -52,8 +57,8 @@ Function redrawAndSetVisible()
 	
 	
 Function loadAllTabs()
-	This:C1470.loadQuoteLines()
-	This:C1470.loadAssumptions()
+	//This.loadQuoteLines()
+	//This.loadAssumptions()
 	
 Function loadQuoteLines()
 	If (Form:C1466.current_item#Null:C1517)
@@ -435,7 +440,7 @@ Function pup_status()
 		Case of 
 			: ($choose#"")
 				$eQuoteStatus:=ds:C1482.QuoteStatus.get($choose)
-				Form:C1466.current_item.currentStatusID:=$eQuoteStatus.statusID
+				Form:C1466.current_item.UUID_Status:=$eQuoteStatus.UUID
 		End case 
 		
 	End if 
@@ -443,7 +448,7 @@ Function pup_status()
 	
 Function drawPup_quoteStatus()
 	If (Form:C1466.current_item#Null:C1517)
-		$quoteStatus:=ds:C1482.QuoteStatus.query("statusID= :1"; Form:C1466.current_item.currentStatusID).first() || New object:C1471()
+		$quoteStatus:=Form:C1466.current_item.status || New object:C1471()
 		$parts:=New collection:C1472($quoteStatus.code; $quoteStatus.name)
 		$statusName:=$parts.join(" - "; ck ignore null or empty:K85:5)
 		If ($statusName="")
@@ -453,3 +458,23 @@ Function drawPup_quoteStatus()
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
 		Form:C1466.sfw.drawButtonPup("pup_quoteStatus"; $statusName; $pathIcon; ($quoteStatus=Null:C1517))
 	End if 
+	
+Function drawPup_quoteCustomer()
+	If (Form:C1466.current_item#Null:C1517)
+		$name:=Form:C1466.current_item.customer.name || "Customer"
+		Form:C1466.sfw.drawButtonPup("pup_customer"; $name; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.customer=Null:C1517))
+	End if 
+	
+Function drawPup_quoteService()
+	If (Form:C1466.current_item#Null:C1517)
+		$service:=Form:C1466.current_item.service || New object:C1471()
+		$parts:=New collection:C1472($service.code; $service.name)
+		$serviceName:=$parts.join(" - "; ck ignore null or empty:K85:5)
+		If ($serviceName="")
+			$serviceName:="Service"
+		End if 
+		$color:=cs:C1710.sfw_htmlColor.me.getName($service.color)
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_serviceType"; $serviceName; $pathIcon; ($service=Null:C1517))
+	End if 
+	
