@@ -81,3 +81,4 @@ Function _loadAsCollection()->$projectStatusColl : Collection
 	var $file : 4D:C1709.File
 	var $img : Picture
 	$projectStatusColl:=This:C1470.all().toCollection("UUID, code, name, color").orderBy("code")
+	

@@ -77,16 +77,18 @@
 					"left": 132,
 					"width": 177,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.leads[0].code",
+					"dataSource": "Form:C1466.current_item.leads[0].leadCode",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
-						"onDataChange"
+						"onClick",
+						"onGettingFocus"
 					],
 					"fill": "transparent",
-					"borderStyle": "none"
+					"borderStyle": "none",
+					"method": "ObjectMethods/entryField_subject.4dm"
 				},
 				"label_0_3": {
 					"type": "text",

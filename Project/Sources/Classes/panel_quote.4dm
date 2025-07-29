@@ -511,8 +511,7 @@ Function pup_serviceType()
 		
 		Case of 
 			: ($choose#"")
-				$eServiceType:=ds:C1482.ServiceType.get($choose)
-				Form:C1466.current_item.UUID_ServiceType:=$eServiceType.UUID
+				Form:C1466.current_item.UUID_ServiceType:=$choose
 		End case 
 	End if 
 	This:C1470.drawPup_serviceType()
@@ -528,3 +527,20 @@ Function drawPup_serviceType()
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
 		Form:C1466.sfw.drawButtonPup("pup_serviceType"; $serviceName; $pathIcon; (Form:C1466.current_item.serviceType=Null:C1517))
 	End if 
+	
+Function selectItem($items)->$UUIDItemSelected : Text
+	$obectName:=OBJECT Get name:C1087(Object current:K67:2)
+	OBJECT GET COORDINATES:C663(*; $obectName; $l; $t; $r; $b)
+	CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
+	$form:=New object:C1471()
+	$form.lb_items:=$items
+	
+	$winRef:=Open form window:C675("selectItem"; Pop up form window:K39:11; $l; $b)
+	DIALOG:C40("selectItem"; $form)
+	CLOSE WINDOW:C154($winRef)
+	If (ok=1)
+		$UUIDItemSelected:=$form.item.UUID
+	Else 
+		$UUIDItemSelected:=""
+	End if 
+	
