@@ -35,6 +35,9 @@ Function formMethod()
 				This:C1470.loadContacts()
 				
 			: (FORM Get current page:C276(*)=2)
+				Form:C1466.interactons_filters:=New object:C1471
+				Form:C1466.interactons_filters.status:=New collection:C1472()
+				Form:C1466.interactons_filters.trigger:=New collection:C1472()
 				This:C1470.loadInteractions()
 				
 				
@@ -64,7 +67,27 @@ Function formMethod()
 	End case 
 	
 Function loadInteractions()
-	Form:C1466.lb_interactions:=Form:C1466.current_item.interactions.orderBy("number desc")
+	$queryString:=""
+	$settings:=New object:C1471("parameters"; New object:C1471)
+	If (Form:C1466.interactons_filters.status.length#0)
+		$queryString+="UUID_Type in :status"
+		$settings.parameters.status:=Form:C1466.interactons_filters.status
+	End if 
+	If (Form:C1466.interactons_filters.trigger.length#0)
+		If ($queryString#"")
+			$queryString+=" and UUID_Trigger in :trigger"
+		Else 
+			$queryString+=" UUID_Trigger in :trigger"
+		End if 
+		$settings.parameters.trigger:=Form:C1466.interactons_filters.trigger
+	End if 
+	
+	If ($queryString="")
+		Form:C1466.lb_interactions:=Form:C1466.current_item.interactions.orderBy("stmpCreation desc")
+	Else 
+		$queryString+=" order by stmpCreation desc"
+		Form:C1466.lb_interactions:=Form:C1466.current_item.interactions.query($queryString; $settings)
+	End if 
 	
 Function loadContacts()
 	Form:C1466.lb_contacts:=Form:C1466.current_item.contacts()
@@ -806,7 +829,7 @@ Function bActionInteractions()
 				$users:=New collection:C1472($staff.user.UUID)
 				cs:C1710.sfw_notificationManager.me._notify("InteractionScheduled"; $users; $context)
 				
-				Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($interaction).orderBy("number desc")
+				Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($interaction).orderBy("stmpCreation desc")
 				cs:C1710.panel_lead.me._activate_save_cancel_button()
 			End if 
 			
@@ -839,7 +862,7 @@ Function bActionInteractions()
 					$interaction.UUID_Type:=$status.UUID
 				End if 
 				$result:=$interaction.save()
-				Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($interaction).orderBy("number desc")
+				Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($interaction).orderBy("stmpCreation desc")
 				
 				
 				If ($form.nextFollowUp)
@@ -950,4 +973,75 @@ Function pup_interaction($type; $currentUUID)->$uuid : Text
 			End case 
 		End if 
 		
+	End if 
+	
+Function pup_filter($filterType : Text)
+	$attr:=$filterType#"status" ? $filterType : "type"
+	$capitalizeType:=cs:C1710.sfw_string.me.stringCapitalize($attr)
+	$cacheAttribut:="interaction"+$capitalizeType
+	$dc:="Interaction"+$capitalizeType
+	$label:=""
+	$allItems:=$filterType="status" ? "All status" : "All "+$filterType+"s"
+	If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache[$cacheAttribut]=Null:C1517)
+		ds:C1482[$dc].cacheLoad()
+	End if 
+	
+	$menu:=Create menu:C408
+	
+	APPEND MENU ITEM:C411($menu; $allItems; *)
+	SET MENU ITEM PARAMETER:C1004($menu; -1; "all")
+	If (Form:C1466.interactons_filters[$filterType].length=0)
+		SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+		If (Is Windows:C1573)
+			SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+		End if 
+	End if 
+	
+	APPEND MENU ITEM:C411($menu; "-")
+	
+	For each ($item; Storage:C1525.cache[$cacheAttribut])
+		APPEND MENU ITEM:C411($menu; $item.name; *)
+		SET MENU ITEM PARAMETER:C1004($menu; -1; $item.UUID+"_"+$item.name)
+		If (Form:C1466.interactons_filters[$filterType].indexOf($item.UUID)#-1)
+			SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+			If (Is Windows:C1573)
+				SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+			End if 
+		End if 
+	End for each 
+	
+	$choice:=Dynamic pop up menu:C1006($menu)
+	RELEASE MENU:C978($menu)
+	
+	
+	Case of 
+		: ($choice="")
+		: ($choice="all")
+			Form:C1466.interactons_filters[$filterType].clear()
+			$label:=$allItems
+		Else 
+			$items:=Split string:C1554($choice; "_")
+			$uuid:=$items[0]
+			
+			$index:=Form:C1466.interactons_filters[$filterType].indexOf($uuid)
+			If ($index#-1)
+				Form:C1466.interactons_filters[$filterType].remove($index)
+			Else 
+				Form:C1466.interactons_filters[$filterType].push($uuid)
+			End if 
+			
+			Case of 
+				: (Form:C1466.interactons_filters[$filterType].length=0)
+					$label:="All "+$filterType
+				: (Form:C1466.interactons_filters[$filterType].length=1)
+					$label:=$items[1]
+				Else 
+					
+					$label:=String:C10(Form:C1466.interactons_filters[$filterType].length)+" "+$filterType
+					$label:=$filterType="status" ? $label : $label+"s"
+			End case 
+	End case 
+	
+	If ($label#"")
+		OBJECT SET TITLE:C194(*; "pupFilter_"+$filterType; $label)
 	End if 

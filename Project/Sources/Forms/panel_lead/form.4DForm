@@ -1129,6 +1129,44 @@
 					"left": 599,
 					"width": 113,
 					"height": 16
+				},
+				"pupFilter_status": {
+					"type": "button",
+					"text": "All status",
+					"top": 124,
+					"left": 12,
+					"width": 104,
+					"height": 18,
+					"events": [
+						"onClick"
+					],
+					"style": "bevel",
+					"popupPlacement": "linked",
+					"fontSize": 9,
+					"icon": "/RESOURCES/sfw/image/picto/funnel-small.png",
+					"textPlacement": "right",
+					"visibility": "visible",
+					"focusable": false,
+					"method": "ObjectMethods/pupFilter_status.4dm"
+				},
+				"pupFilter_trigger": {
+					"type": "button",
+					"text": "All triggers",
+					"top": 150,
+					"left": 12,
+					"width": 104,
+					"height": 18,
+					"events": [
+						"onClick"
+					],
+					"style": "bevel",
+					"popupPlacement": "linked",
+					"fontSize": 9,
+					"icon": "/RESOURCES/sfw/image/picto/funnel-small.png",
+					"textPlacement": "right",
+					"visibility": "visible",
+					"focusable": false,
+					"method": "ObjectMethods/pupFilter_trigger.4dm"
 				}
 			}
 		},
@@ -1380,7 +1418,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 643,
+	"geometryStamp": 665,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {

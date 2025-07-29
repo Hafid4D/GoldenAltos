@@ -56,10 +56,10 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2429,
-				"top": 153,
-				"width": 207.05078125,
-				"height": 379.33203125
+				"left": 1732.9794769287,
+				"top": 570.94158935547,
+				"width": 226.30639648438,
+				"height": 417.9924621582
 			},
 			"displayable_fields_count": 16,
 			"fields": {
@@ -149,8 +149,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1894,
-				"top": 214,
+				"left": 2007.2374267578,
+				"top": 217.95132446289,
 				"width": 93.66145324707,
 				"height": 129.33203125
 			},
@@ -197,7 +197,7 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1783,
+				"left": 1781.7233886719,
 				"top": 0,
 				"width": 127.669921875,
 				"height": 167.33203125
@@ -213,24 +213,20 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1297,
+				"left": 1380.0543823242,
 				"top": 0,
-				"width": 195.046875,
-				"height": 335.33203125
+				"width": 263.75323486328,
+				"height": 419.92266845703
 			},
-			"displayable_fields_count": 14,
-			"fields_ordering": 2,
+			"displayable_fields_count": 18,
 			"fields": {
 				"voided": {
 					"position": 14
 				},
-				"division": {
-					"position": 13
-				},
 				"revision": {
 					"position": 12
 				},
-				"UUID_Employee": {
+				"UUID_Staff": {
 					"position": 3
 				},
 				"stmpCreation": {
@@ -251,14 +247,11 @@
 				"subject": {
 					"position": 6
 				},
-				"currentStatusID": {
+				"UUID_Status": {
 					"position": 5
 				},
 				"code": {
 					"position": 4
-				},
-				"UUID_Contact": {
-					"position": 2
 				},
 				"UUID": {
 					"position": 1
@@ -822,6 +815,71 @@
 				}
 			}
 		},
+		"InteractionMethod": {
+			"color": {
+				"red": 207,
+				"green": 209,
+				"blue": 165,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 1610.762512207,
+				"top": 1979.6590576172,
+				"width": 162,
+				"height": 163.33203125
+			},
+			"displayable_fields_count": 5,
+			"fields": {
+				"UUID": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
+		},
+		"InteractionOutcome": {
+			"color": {
+				"red": 207,
+				"green": 209,
+				"blue": 165,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 1542.4927368164,
+				"top": 2227.5024414063,
+				"width": 162,
+				"height": 163.33203125
+			},
+			"displayable_fields_count": 5,
+			"fields": {
+				"UUID": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
+		},
+		"InteractionTrigger": {
+			"color": {
+				"red": 207,
+				"green": 209,
+				"blue": 165,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 760.18234252921,
+				"top": 2157.9232788086,
+				"width": 165.71719360352,
+				"height": 177.60284423828
+			},
+			"displayable_fields_count": 6
+		},
 		"sfw_EventType": {
 			"color": {
 				"red": 237,
@@ -1089,12 +1147,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1475,
-				"top": 1774,
-				"width": 149,
-				"height": 146.33203125
+				"left": 1611.9033813477,
+				"top": 1212.9949188232,
+				"width": 176.93957519531,
+				"height": 190.07992553711
 			},
-			"displayable_fields_count": 5
+			"displayable_fields_count": 7
 		},
 		"Lead": {
 			"color": {
@@ -1104,12 +1162,22 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1156,
-				"top": 1298,
+				"left": 1167.6898193359,
+				"top": 1192.286895752,
 				"width": 365,
 				"height": 425.33203125
 			},
-			"displayable_fields_count": 18
+			"displayable_fields_count": 20,
+			"fields": {
+				"UUID_LeadNextStep": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
 		},
 		"YesNoQuestion": {
 			"color": {
@@ -1791,7 +1859,7 @@
 		}
 	},
 	"relations": {
-		"3CB586C9B8431B41B3BC1FDE8726D98F": {
+		"F01472D43AF045ECB5F37A14F2FBD275": {
 			"color": {
 				"red": 240,
 				"green": 240,
@@ -2000,6 +2068,14 @@
 			}
 		},
 		"CF3063584FFE4334AC18A5B8B1445D95": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"761F023AC9E24FF8B9A7192BD1698794": {
 			"color": {
 				"red": 255,
 				"green": 255,
