@@ -185,7 +185,7 @@
 					"stroke": "#808080",
 					"text": "Citizenship Status"
 				},
-				"Field_citizenShipStatus1": {
+				"EntryField_citizenShipStatus1": {
 					"type": "input",
 					"top": 37,
 					"left": 432,
@@ -855,7 +855,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 1084,
+	"geometryStamp": 1085,
 	"editor": {
 		"groups": {
 			"Group": [
