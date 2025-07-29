@@ -9,7 +9,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setDisplayOrder(100)
 	$entry.setIcon("image/entry/repairLog-50x50.png")
 	
-	$entry.setSearchboxField("systemID"; "placeholder:equipment ID")
+	$entry.setSearchboxField("systemID")
 	
 	$entry.setPanel("panel_repairLog")
 	$entry.setPanelPage(1; ""; "Main")
