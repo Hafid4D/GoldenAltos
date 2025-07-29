@@ -1081,7 +1081,7 @@
 		<field name="revision" uuid="1AC1E65EF74F4F6C8D21783AB1121A51" type="10" limiting_length="255" never_null="true" id="12"/>
 		<field name="UUID_Customer" uuid="F30954D8AEF34E28A8015DEADE8362D2" type="10" store_as_UUID="true" never_null="true" id="13"/>
 		<field name="voided" uuid="93C37C641AE2804F9E79B02DA8D0D64D" type="1" never_null="true" id="14"/>
-		<field name="UUID_Service" uuid="5D9A39B0F2984CED9C5FECF964794B22" type="10" store_as_UUID="true" never_null="true" id="15"/>
+		<field name="UUID_ServiceType" uuid="5D9A39B0F2984CED9C5FECF964794B22" type="10" store_as_UUID="true" never_null="true" id="15"/>
 		<field name="moreData" uuid="35CECEFAAF16499BA3F6A14DA5B373D4" type="21" blob_switch_size="2147483647" never_null="true" id="16">
 			<field_extra multi_line="false"/>
 		</field>
@@ -2036,9 +2036,9 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="AD6BBF2F268242C0B04A46CEBCCC5DEA" name_Nto1="service" name_1toN="quotes" state="1">
+	<relation uuid="AD6BBF2F268242C0B04A46CEBCCC5DEA" name_Nto1="serviceType" name_1toN="quotes" state="1">
 		<related_field kind="source">
-			<field_ref uuid="5D9A39B0F2984CED9C5FECF964794B22" name="UUID_Service">
+			<field_ref uuid="5D9A39B0F2984CED9C5FECF964794B22" name="UUID_ServiceType">
 				<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
 			</field_ref>
 		</related_field>
@@ -2873,7 +2873,7 @@
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="E9107C9C14254D3AB8B9C9A725CCE5E6" type="3">
-		<field_ref uuid="5D9A39B0F2984CED9C5FECF964794B22" name="UUID_Service">
+		<field_ref uuid="5D9A39B0F2984CED9C5FECF964794B22" name="UUID_ServiceType">
 			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
 		</field_ref>
 	</index>

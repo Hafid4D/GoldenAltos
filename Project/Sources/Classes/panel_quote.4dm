@@ -47,6 +47,7 @@ Function redrawAndSetVisible()
 	
 	This:C1470.drawPup_quoteStatus()
 	This:C1470.drawPup_quoteCustomer()
+	This:C1470.drawPup_serviceType()
 	
 	//Use (Form.sfw.entry.panel.pages)
 	//Form.sfw.entry.panel.pages[0].label:="Lines ("+String(Form.lb_quoteLines.length)+")"
@@ -484,4 +485,46 @@ Function selectCustomer()
 					cs:C1710.panel_quote.me._activate_save_cancel_button()
 				End if 
 		End case 
+	End if 
+	
+Function pup_serviceType()
+	var $eServiceType : cs:C1710.ServiceTypeEntity
+	If (Form:C1466.sfw.checkIsInModification())
+		$menu:=Create menu:C408
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.serviceType=Null:C1517)
+			ds:C1482.ServiceType.cacheLoad()
+		End if 
+		
+		For each ($serviceType; Storage:C1525.cache.serviceType)
+			APPEND MENU ITEM:C411($menu; $serviceType.code+" - "+$serviceType.name; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $serviceType.UUID)
+			If ($serviceType.UUID=Form:C1466.current_item.UUID_ServiceType)
+				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+				If (Is Windows:C1573)
+					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+				End if 
+			End if 
+		End for each 
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		
+		Case of 
+			: ($choose#"")
+				$eServiceType:=ds:C1482.ServiceType.get($choose)
+				Form:C1466.current_item.UUID_ServiceType:=$eServiceType.UUID
+		End case 
+	End if 
+	This:C1470.drawPup_serviceType()
+	
+Function drawPup_serviceType()
+	If (Form:C1466.current_item#Null:C1517)
+		$parts:=New collection:C1472(Form:C1466.current_item.serviceType.code; Form:C1466.current_item.serviceType.name)
+		$serviceName:=$parts.join(" - "; ck ignore null or empty:K85:5)
+		If ($serviceName="")
+			$serviceName:="Service"
+		End if 
+		$color:=cs:C1710.sfw_htmlColor.me.getName(Form:C1466.current_item.serviceType.color)
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_serviceType"; $serviceName; $pathIcon; (Form:C1466.current_item.serviceType=Null:C1517))
 	End if 
