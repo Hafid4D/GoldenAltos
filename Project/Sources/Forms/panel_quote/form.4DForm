@@ -272,7 +272,7 @@
 					"type": "rectangle",
 					"top": 113,
 					"left": 0,
-					"width": 726,
+					"width": 529,
 					"height": 32,
 					"fill": "#00A4A4",
 					"stroke": "transparent"
@@ -289,7 +289,7 @@
 				"Rectangle7": {
 					"type": "rectangle",
 					"top": 113,
-					"left": 727,
+					"left": 530,
 					"width": 398,
 					"height": 32,
 					"fill": "#00A4A4",
@@ -299,14 +299,14 @@
 					"type": "text",
 					"text": "Contacts",
 					"top": 122,
-					"left": 751,
+					"left": 554,
 					"width": 80,
 					"height": 15,
 					"fontWeight": "bold"
 				},
 				"List Box": {
 					"type": "listbox",
-					"left": 728,
+					"left": 531,
 					"top": 147,
 					"width": 396,
 					"height": 159,
@@ -316,7 +316,7 @@
 						"onDataChange",
 						"onSelectionChange"
 					],
-					"right": 1124,
+					"right": 927,
 					"scrollbarHorizontal": "hidden",
 					"listboxType": "collection",
 					"dataSource": "Form:C1466.lb_contacts",
@@ -395,8 +395,8 @@
 					"type": "subform",
 					"left": 0,
 					"top": 196,
-					"width": 545,
-					"height": 254,
+					"width": 529,
+					"height": 196,
 					"detailForm": "sfw_subpanel_addressSingle",
 					"borderStyle": "none",
 					"dataSource": "Form:C1466.subFormAddress"
@@ -404,12 +404,12 @@
 				"communication_subform": {
 					"type": "subform",
 					"left": 0,
-					"top": 450,
-					"width": 545,
-					"height": 233,
+					"top": 393,
+					"width": 529,
+					"height": 170,
 					"detailForm": "_ga_subpanel_communication",
 					"dataSource": "Form:C1466.subFormCommunication",
-					"method": "",
+					"method": "ObjectMethods/communication_subform.4dm",
 					"visibility": "visible"
 				}
 			}
@@ -1008,7 +1008,7 @@
 			}
 		}
 	],
-	"geometryStamp": 679,
+	"geometryStamp": 714,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {

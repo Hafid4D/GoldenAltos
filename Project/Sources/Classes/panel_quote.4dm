@@ -12,10 +12,13 @@ Function formMethod()
 		Case of 
 			: (FORM Get current page:C276(*)=1)
 				Form:C1466.contactDetails:=This:C1470.contactInfo()
-				If (Form:C1466.subFormAddress=Null:C1517)
-					Form:C1466.subFormAddress:=New object:C1471
-				End if 
+				
+				Form:C1466.subFormAddress:=New object:C1471
+				Form:C1466.subFormCommunication:=New object:C1471
+				
 				Form:C1466.subFormAddress.address:=Form:C1466.contactDetails.address
+				Form:C1466.subFormCommunication.communications:=Form:C1466.contactDetails.communications
+				Form:C1466.subFormCommunication:=Form:C1466.subFormCommunication
 				
 			: (FORM Get current page:C276(*)=2)
 				This:C1470.loadQuoteLines()
@@ -559,7 +562,7 @@ Function contactInfo()->$contactInfo : Object
 		If ($contact#Null:C1517)
 			$contactInfo.mainContact:=$contact
 			$contactInfo.address:=$contact.rebuildAddress()
-			
+			$contactInfo.communications:=$contact.rebuidComunications()
 		End if 
 	End if 
 	
