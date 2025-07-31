@@ -5,26 +5,14 @@ Function get fullName()->$fullName : Text
 	$fullName:=This:C1470.firstName+" "+This:C1470.lastName
 	
 	
-local Function rebuildAddress()->$address : Object
-	
-	Case of 
-		: (Form:C1466.addressBilling=1)
-			$type:="billing"
-		: (Form:C1466.addressShipping=1)
-			$type:="shipping"
-	End case 
-	
-	If (Form:C1466.current_item#Null:C1517)
-		
-		If (Form:C1466.current_item.title#"Status") && (Form:C1466.current_item.title#"AP")
-			If (OB Is defined:C1231(Form:C1466.current_item.contactDetails; "addresses"))
-				$address:=Form:C1466.current_item.contactDetails.addresses.query("type = :1"; "main").first()
-			End if 
+local Function rebuildAddress($type : Text)->$address : Object
+	$type:=String:C10($type)="" ? "main" : $type
+	If (This:C1470.contactDetails#Null:C1517) && (This:C1470.contactDetails.addresses#Null:C1517)
+		$addresses:=This:C1470.contactDetails.addresses.query("type = :1"; $type)
+		If ($addresses.length#0)
+			$address:=$addresses[0]
 		End if 
-		Form:C1466.subFormAddress.address:=$address
-		
 	End if 
-	Form:C1466.subFormAddress:=Form:C1466.subFormAddress
 	
 	
 local Function rebuidComunications->$contacts : Collection
@@ -64,7 +52,7 @@ local Function rebuidComunications->$contacts : Collection
 				$item.displayedIcon:=Form:C1466.communicationTypes[$indices[0]].displayedIcon
 				
 			Else 
-				$item.displayedType:=_capitalize_text($mean.type)
+				$item.displayedType:=_Capitalize_text($mean.type)
 			End if 
 			$contacts.push($item)
 		End for each 

@@ -271,8 +271,8 @@
 				"Rectangle5": {
 					"type": "rectangle",
 					"top": 113,
-					"left": -1,
-					"width": 335,
+					"left": 0,
+					"width": 726,
 					"height": 32,
 					"fill": "#00A4A4",
 					"stroke": "transparent"
@@ -289,7 +289,7 @@
 				"Rectangle7": {
 					"type": "rectangle",
 					"top": 113,
-					"left": 335,
+					"left": 727,
 					"width": 398,
 					"height": 32,
 					"fill": "#00A4A4",
@@ -299,14 +299,14 @@
 					"type": "text",
 					"text": "Contacts",
 					"top": 122,
-					"left": 359,
+					"left": 751,
 					"width": 80,
 					"height": 15,
 					"fontWeight": "bold"
 				},
 				"List Box": {
 					"type": "listbox",
-					"left": 336,
+					"left": 728,
 					"top": 147,
 					"width": 396,
 					"height": 159,
@@ -316,7 +316,7 @@
 						"onDataChange",
 						"onSelectionChange"
 					],
-					"right": 732,
+					"right": 1124,
 					"scrollbarHorizontal": "hidden",
 					"listboxType": "collection",
 					"dataSource": "Form:C1466.lb_contacts",
@@ -374,22 +374,13 @@
 					"stroke": "#808080",
 					"text": "Name"
 				},
-				"label_0_9": {
-					"type": "text",
-					"top": 196,
-					"left": 18,
-					"width": 64,
-					"height": 15,
-					"stroke": "#808080",
-					"text": "Company"
-				},
 				"field2": {
 					"type": "input",
 					"top": 164,
 					"left": 102,
 					"width": 162,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.dealType",
+					"dataSource": "Form:C1466.contactDetails.mainContact.fullName",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -400,22 +391,26 @@
 					"fill": "transparent",
 					"borderStyle": "none"
 				},
-				"entryField_dateClose": {
-					"type": "input",
-					"top": 195,
-					"left": 102,
-					"width": 162,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.dateClose",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none"
+				"subFormAddress": {
+					"type": "subform",
+					"left": 0,
+					"top": 196,
+					"width": 545,
+					"height": 254,
+					"detailForm": "sfw_subpanel_addressSingle",
+					"borderStyle": "none",
+					"dataSource": "Form:C1466.subFormAddress"
+				},
+				"communication_subform": {
+					"type": "subform",
+					"left": 0,
+					"top": 450,
+					"width": 545,
+					"height": 233,
+					"detailForm": "_ga_subpanel_communication",
+					"dataSource": "Form:C1466.subFormCommunication",
+					"method": "",
+					"visibility": "visible"
 				}
 			}
 		},
@@ -1013,7 +1008,7 @@
 			}
 		}
 	],
-	"geometryStamp": 613,
+	"geometryStamp": 679,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {

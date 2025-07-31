@@ -11,7 +11,11 @@ Function formMethod()
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
-				
+				Form:C1466.contactDetails:=This:C1470.contactInfo()
+				If (Form:C1466.subFormAddress=Null:C1517)
+					Form:C1466.subFormAddress:=New object:C1471
+				End if 
+				Form:C1466.subFormAddress.address:=Form:C1466.contactDetails.address
 				
 			: (FORM Get current page:C276(*)=2)
 				This:C1470.loadQuoteLines()
@@ -48,6 +52,9 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_quoteStatus()
 	This:C1470.drawPup_quoteCustomer()
 	This:C1470.drawPup_serviceType()
+	
+	Form:C1466.contactDetails:=This:C1470.contactInfo()
+	Form:C1466.subFormAddress.address:=Form:C1466.contactDetails.address
 	
 	//Use (Form.sfw.entry.panel.pages)
 	//Form.sfw.entry.panel.pages[0].label:="Lines ("+String(Form.lb_quoteLines.length)+")"
@@ -543,4 +550,17 @@ Function selectItem($items)->$UUIDItemSelected : Text
 	Else 
 		$UUIDItemSelected:=""
 	End if 
+	
+Function contactInfo()->$contactInfo : Object
+	var $contact : cs:C1710.ContactEntity
+	$contactInfo:={mainContact: Null:C1517; addressMainContact: Null:C1517}
+	If (Form:C1466.current_item.moreData#Null:C1517) && (Form:C1466.current_item.moreData.mainContact#Null:C1517)
+		$contact:=ds:C1482.Contact.get(Form:C1466.current_item.moreData.mainContact)
+		If ($contact#Null:C1517)
+			$contactInfo.mainContact:=$contact
+			$contactInfo.address:=$contact.rebuildAddress()
+			
+		End if 
+	End if 
+	
 	
