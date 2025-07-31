@@ -411,6 +411,22 @@
 					"dataSource": "Form:C1466.subFormCommunication",
 					"method": "ObjectMethods/communication_subform.4dm",
 					"visibility": "visible"
+				},
+				"bActionQuoteLines1": {
+					"type": "button",
+					"text": "",
+					"top": 119,
+					"left": 900,
+					"width": 27,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gearW.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionQuoteLines1.4dm"
 				}
 			}
 		},
@@ -1008,7 +1024,7 @@
 			}
 		}
 	],
-	"geometryStamp": 714,
+	"geometryStamp": 716,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {
