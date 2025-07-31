@@ -20,6 +20,8 @@ Function formMethod()
 				Form:C1466.subFormCommunication.communications:=Form:C1466.contactDetails.communications
 				Form:C1466.subFormCommunication:=Form:C1466.subFormCommunication
 				
+				This:C1470.loadContacts()
+				
 			: (FORM Get current page:C276(*)=2)
 				This:C1470.loadQuoteLines()
 				
@@ -44,7 +46,8 @@ Function formMethod()
 			
 	End case 
 	
-	
+Function loadContacts()
+	Form:C1466.lb_contacts:=Form:C1466.current_item.contacts()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
@@ -558,7 +561,7 @@ Function contactInfo()->$contactInfo : Object
 	var $contact : cs:C1710.ContactEntity
 	$contactInfo:={mainContact: Null:C1517; addressMainContact: Null:C1517}
 	If (Form:C1466.current_item.moreData#Null:C1517) && (Form:C1466.current_item.moreData.mainContact#Null:C1517)
-		$contact:=ds:C1482.Contact.get(Form:C1466.current_item.moreData.mainContact)
+		$contact:=ds:C1482.Contact.get(Form:C1466.current_item.moreData.mainContact.UUID)
 		If ($contact#Null:C1517)
 			$contactInfo.mainContact:=$contact
 			$contactInfo.address:=$contact.rebuildAddress()
