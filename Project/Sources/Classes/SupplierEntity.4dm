@@ -113,10 +113,10 @@ local Function _initCommunication()
 	//This.contactDetails.communications:=New collection
 	//End if 
 	
-	If (ds:C1482.Contact.query("UUID_Supplier=:1"; This:C1470.UUID).extract("title").indexOf("PSC")=-1)
+	If (ds:C1482.Contact.query("UUID_Supplier=:1"; This:C1470.UUID).extract("title").indexOf("Primary")=-1)
 		var $apContact : cs:C1710.ContactEntity
 		$apContact:=ds:C1482.Contact.new()
-		$apContact.title:="PSC"
+		$apContact.title:="Primary"
 		$apContact.UUID_Supplier:=This:C1470.UUID
 		
 		$apContact.contactDetails:=New object:C1471
@@ -137,10 +137,10 @@ local Function _initCommunication()
 		$apContact.save()
 	End if 
 	
-	If (ds:C1482.Contact.query("UUID_Supplier=:1"; This:C1470.UUID).extract("title").indexOf("SSC")=-1)
+	If (ds:C1482.Contact.query("UUID_Supplier=:1"; This:C1470.UUID).extract("title").indexOf("Secondary")=-1)
 		var $statusContact : cs:C1710.ContactEntity
 		$statusContact:=ds:C1482.Contact.new()
-		$statusContact.title:="SSC"
+		$statusContact.title:="Secondary"
 		$statusContact.UUID_Supplier:=This:C1470.UUID
 		
 		$statusContact.contactDetails:=New object:C1471

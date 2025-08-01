@@ -49,15 +49,15 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	// MARK: - Views Definition
 	
 	
-	// MARK: All Addendums
-	$view:=cs:C1710.sfw_definitionView.new("allAddendums"; "All addendums")
-	$view.setLBItemsColumn("spec"; "Spec#"; "width:100")
-	$view.setLBItemsColumn("revision"; "Revision"; "width:50")
-	$view.setLBItemsColumn("title"; "Title")
-	$view.setLBItemsOrderBy("spec")
-	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:specification"; "unitN:specifications")
-	$view.setSubset("allAddendums")
-	$entry.setView($view)
+	//// MARK: All Addendums
+	//$view:=cs.sfw_definitionView.new("allAddendums"; "All addendums")
+	//$view.setLBItemsColumn("spec"; "Spec#"; "width:100")
+	//$view.setLBItemsColumn("revision"; "Revision"; "width:50")
+	//$view.setLBItemsColumn("title"; "Title")
+	//$view.setLBItemsOrderBy("spec")
+	//$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:specification"; "unitN:specifications")
+	//$view.setSubset("allAddendums")
+	//$entry.setView($view)
 	
 	// MARK: Docs late in reviewing
 	$view:=cs:C1710.sfw_definitionView.new("docsLateInReviewing"; "Control Docs late in Reviewing")

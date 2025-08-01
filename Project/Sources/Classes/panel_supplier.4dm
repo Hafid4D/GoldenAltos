@@ -50,9 +50,9 @@ Function LoadPrimaryContact()
 	
 	If (Form:C1466.current_item#Null:C1517)
 		Form:C1466.lb_primaryContact:=New collection:C1472()
-		If (Form:C1466.current_item.contacts.query("title=:1"; "PSC").first()#Null:C1517)
+		If (Form:C1466.current_item.contacts.query("title=:1"; "Primary").first()#Null:C1517)
 			
-			Form:C1466.lb_primaryContact:=Form:C1466.current_item.rebuidComunications("PSC")
+			Form:C1466.lb_primaryContact:=Form:C1466.current_item.rebuidComunications("Primary")
 			
 		End if 
 	End if 
@@ -61,9 +61,9 @@ Function LoadPrimaryContact()
 Function LoadSecondaryContact()
 	If (Form:C1466.current_item#Null:C1517)
 		Form:C1466.lb_secondaryContact:=New collection:C1472()
-		If (Form:C1466.current_item.contacts.query("title=:1"; "SSC").first()#Null:C1517)
+		If (Form:C1466.current_item.contacts.query("title=:1"; "Secondary").first()#Null:C1517)
 			
-			Form:C1466.lb_secondaryContact:=Form:C1466.current_item.rebuidComunications("SSC")
+			Form:C1466.lb_secondaryContact:=Form:C1466.current_item.rebuidComunications("Secondary")
 			
 		End if 
 	End if 
@@ -73,7 +73,7 @@ Function bActionPrimaryContact()
 	$refMenu:=Create menu:C408
 	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
 	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openInWindow")
-	If (Form:C1466.current_item.contacts.query("title=:1"; "PSC").first()=Null:C1517)
+	If (Form:C1466.current_item.contacts.query("title=:1"; "Primary").first()=Null:C1517)
 		DISABLE MENU ITEM:C150($refMenu; -1)
 	End if 
 	
@@ -81,7 +81,7 @@ Function bActionPrimaryContact()
 	RELEASE MENU:C978($refMenu)
 	Case of 
 		: ($choice="openInWindow")
-			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.contacts.query("title=:1"; "PSC").first(); "customerService"; "contact")
+			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.contacts.query("title=:1"; "Primary").first(); "customerService"; "contact")
 	End case 
 	This:C1470.LoadPrimaryContact()
 	
@@ -90,7 +90,7 @@ Function bActionSecondaryContact()
 	$refMenu:=Create menu:C408
 	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
 	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openInWindow")
-	If (Form:C1466.current_item.contacts.query("title=:1"; "SSC").first()=Null:C1517)
+	If (Form:C1466.current_item.contacts.query("title=:1"; "Secondary").first()=Null:C1517)
 		DISABLE MENU ITEM:C150($refMenu; -1)
 	End if 
 	
@@ -98,7 +98,7 @@ Function bActionSecondaryContact()
 	RELEASE MENU:C978($refMenu)
 	Case of 
 		: ($choice="openInWindow")
-			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.contacts.query("title=:1"; "SSC").first(); "customerService"; "contact")
+			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.contacts.query("title=:1"; "Secondary").first(); "customerService"; "contact")
 	End case 
 	This:C1470.LoadSecondaryContact()
 	
@@ -155,4 +155,12 @@ Function pup_division()
 	Form:C1466.current_item.pup("divisions"; "Division"; "divisionID"; "divisionID")
 	This:C1470.drawPup_division()
 	
+	
+Function btnOpenSupplier()
+	
+	$es:=ds:C1482.Supplier.query("UUID = :1"; Form:C1466.current_item.UUID_Supplier)
+	
+	If ($es.length>0)
+		Form:C1466.sfw.openInANewWindow($es[0]; "qualityAssistance"; "AVL")
+	End if 
 	
