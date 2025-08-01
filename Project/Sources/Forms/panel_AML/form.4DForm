@@ -137,6 +137,27 @@
 					"right": 504,
 					"fontWeight": "normal",
 					"textAlign": "left"
+				},
+				"btnForward2": {
+					"type": "button",
+					"text": " ",
+					"top": 11,
+					"left": 514,
+					"width": 18,
+					"height": 18,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/forward-16x16.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnForward2.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
 				}
 			}
 		},
@@ -757,12 +778,33 @@
 					],
 					"focusable": true,
 					"borderStyle": "none"
+				},
+				"btnForward3": {
+					"type": "button",
+					"text": " ",
+					"top": 341,
+					"left": 691,
+					"width": 18,
+					"height": 18,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/forward-16x16.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnForward3.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
 				}
 			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 490,
+	"geometryStamp": 496,
 	"editor": {
 		"groups": {
 			"Group": [

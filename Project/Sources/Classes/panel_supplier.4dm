@@ -156,3 +156,11 @@ Function pup_division()
 	This:C1470.drawPup_division()
 	
 	
+Function btnOpenSupplier()
+	
+	$es:=ds:C1482.Supplier.query("UUID = :1"; Form:C1466.current_item.UUID_Supplier)
+	
+	If ($es.length>0)
+		Form:C1466.sfw.openInANewWindow($es[0]; "qualityAssistance"; "AVL")
+	End if 
+	
