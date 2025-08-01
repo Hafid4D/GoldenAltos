@@ -337,24 +337,6 @@
 		},
 		{
 			"objects": {
-				"Rec_note": {
-					"type": "rectangle",
-					"top": 306,
-					"left": 336,
-					"width": 397,
-					"height": 302,
-					"stroke": "transparent",
-					"fill": "#FFFFFF"
-				},
-				"Rec_history": {
-					"type": "rectangle",
-					"top": 142,
-					"left": 734,
-					"width": 300,
-					"height": 466,
-					"fill": "#FFFFFF",
-					"stroke": "transparent"
-				},
 				"Rectangle5": {
 					"type": "rectangle",
 					"top": 113,
@@ -406,42 +388,6 @@
 					"top": 122,
 					"left": 359,
 					"width": 80,
-					"height": 15,
-					"fontWeight": "bold"
-				},
-				"Rectangle8": {
-					"type": "rectangle",
-					"top": 306,
-					"left": 335,
-					"width": 398,
-					"height": 32,
-					"fill": "#00A4A4",
-					"stroke": "transparent"
-				},
-				"Text3": {
-					"type": "text",
-					"text": "Notes",
-					"top": 315,
-					"left": 359,
-					"width": 80,
-					"height": 15,
-					"fontWeight": "bold"
-				},
-				"bar_history": {
-					"type": "rectangle",
-					"top": 113,
-					"left": 734,
-					"width": 300,
-					"height": 32,
-					"fill": "#00A4A4",
-					"stroke": "transparent"
-				},
-				"Text4": {
-					"type": "text",
-					"text": "History",
-					"top": 122,
-					"left": 752,
-					"width": 60,
 					"height": 15,
 					"fontWeight": "bold"
 				},
@@ -619,7 +565,7 @@
 					"fontFamily": "System Font",
 					"fontSize": 13,
 					"focusable": false,
-					"text": "Quote",
+					"text": "Select quote",
 					"icon": "",
 					"popupPlacement": "linked",
 					"textPlacement": "right",
@@ -638,7 +584,7 @@
 					"fontFamily": "System Font",
 					"fontSize": 13,
 					"focusable": false,
-					"text": "PO",
+					"text": "Select PO",
 					"icon": "",
 					"popupPlacement": "linked",
 					"textPlacement": "right",
@@ -657,7 +603,7 @@
 					"fontFamily": "System Font",
 					"fontSize": 13,
 					"focusable": false,
-					"text": "Job",
+					"text": "Select job",
 					"icon": "",
 					"popupPlacement": "linked",
 					"textPlacement": "right",
@@ -682,22 +628,6 @@
 					"icon": "/RESOURCES/sfw/image/picto/gearW.png",
 					"textPlacement": "right",
 					"method": "ObjectMethods/bActionQuoteLines.4dm"
-				},
-				"bActionQuoteLines1": {
-					"type": "button",
-					"text": "",
-					"top": 309,
-					"left": 697,
-					"width": 27,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"style": "custom",
-					"popupPlacement": "linked",
-					"icon": "/RESOURCES/sfw/image/picto/gearW.png",
-					"textPlacement": "right",
-					"method": "ObjectMethods/bActionQuoteLines1.4dm"
 				},
 				"List Box": {
 					"type": "listbox",
@@ -791,6 +721,452 @@
 					"height": 566,
 					"fill": "#00A4A4",
 					"stroke": "transparent"
+				},
+				"bActionInteractions": {
+					"type": "button",
+					"text": "Actions",
+					"top": 622,
+					"left": 36,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionInteractions.4dm"
+				},
+				"lb_interactions": {
+					"type": "listbox",
+					"top": 124,
+					"left": 136,
+					"width": 442,
+					"height": 529,
+					"resizingMode": "legacy",
+					"listboxType": "collection",
+					"focusable": false,
+					"movableRows": false,
+					"dataSource": "Form:C1466.lb_interactions",
+					"currentItemSource": "Form:C1466.current_interaction",
+					"currentItemPositionSource": "",
+					"metaSource": "This:C1470.meta",
+					"scrollbarHorizontal": "hidden",
+					"horizontalLineStroke": "transparent",
+					"verticalLineStroke": "#C0C0C0",
+					"events": [
+						"onClick",
+						"onDataChange",
+						"onSelectionChange",
+						"onHeaderClick"
+					],
+					"fill": "#FFFFFF",
+					"alternateFill": "#F7F9FC",
+					"borderStyle": "system",
+					"method": "ObjectMethods/lb_interactions.4dm",
+					"columns": [
+						{
+							"name": "Colonne2",
+							"dataSource": "This:C1470.number",
+							"width": 40,
+							"minWidth": 10,
+							"maxWidth": 32000,
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"header": {
+								"name": "ID",
+								"text": "#",
+								"fontTheme": "normal",
+								"textAlign": "left"
+							},
+							"footer": {
+								"name": "Pied2",
+								"timeFormat": "hh_mm_ss",
+								"fontFamily": "System Font Regular",
+								"fontSize": 10
+							},
+							"fontTheme": "normal",
+							"enterable": false
+						},
+						{
+							"name": "Colonne9",
+							"dataSource": "This:C1470.creationDate",
+							"width": 102,
+							"minWidth": 10,
+							"maxWidth": 32000,
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"header": {
+								"name": "Entête11",
+								"text": "Creation date",
+								"fontTheme": "normal",
+								"textAlign": "center",
+								"verticalAlign": "automatic"
+							},
+							"footer": {
+								"name": "Pied11",
+								"timeFormat": "hh_mm_ss",
+								"fontFamily": "System Font Regular",
+								"fontSize": 10
+							},
+							"fontTheme": "normal",
+							"dataSourceTypeHint": "text"
+						},
+						{
+							"name": "Colonne4",
+							"dataSource": "This:C1470.contact.fullName",
+							"width": 165,
+							"minWidth": 10,
+							"maxWidth": 32000,
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"header": {
+								"name": "Entête4",
+								"text": "Contact",
+								"fontTheme": "normal",
+								"textAlign": "center",
+								"verticalAlign": "automatic"
+							},
+							"footer": {
+								"name": "Pied4",
+								"timeFormat": "hh_mm_ss",
+								"fontFamily": "System Font Regular",
+								"fontSize": 10
+							},
+							"fontTheme": "normal",
+							"dataSourceTypeHint": "text"
+						},
+						{
+							"header": {
+								"name": "Header20",
+								"text": "Type"
+							},
+							"name": "Column20",
+							"footer": {
+								"name": "Footer20"
+							},
+							"dataSource": "This:C1470.type.name"
+						}
+					]
+				},
+				"Interaction1": {
+					"type": "text",
+					"text": "Number",
+					"top": 124,
+					"left": 598,
+					"width": 91,
+					"height": 16
+				},
+				"number": {
+					"type": "input",
+					"left": 704,
+					"top": 124,
+					"width": 261,
+					"height": 17,
+					"dataSourceTypeHint": "integer",
+					"dataSource": "Form:C1466.current_interaction.number",
+					"enterable": false
+				},
+				"Interaction2": {
+					"type": "text",
+					"text": "Creation date",
+					"top": 152,
+					"left": 598,
+					"width": 91,
+					"height": 16
+				},
+				"Inter_input_creationDate": {
+					"type": "input",
+					"left": 704,
+					"top": 152,
+					"width": 261,
+					"height": 17,
+					"dataSourceTypeHint": "text",
+					"dataSource": "Form:C1466.current_interaction.creationDate"
+				},
+				"pup_method": {
+					"type": "button",
+					"top": 245,
+					"left": 703,
+					"width": 289,
+					"height": 28,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Method",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_method.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"interaction4": {
+					"type": "text",
+					"text": "Method",
+					"top": 251,
+					"left": 599,
+					"width": 113,
+					"height": 16
+				},
+				"btnDatePickerCreate1": {
+					"type": "button",
+					"text": " ",
+					"top": 150,
+					"left": 976,
+					"width": 18,
+					"height": 18,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/calendar.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnDatePickerCreate1.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false,
+					"dataSource": ""
+				},
+				"pup_outcome": {
+					"type": "button",
+					"top": 283,
+					"left": 703,
+					"width": 289,
+					"height": 28,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Outcome",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_outcome.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Interaction5": {
+					"type": "text",
+					"text": "Outcome",
+					"top": 289,
+					"left": 599,
+					"width": 113,
+					"height": 16
+				},
+				"pup_contact": {
+					"type": "button",
+					"top": 359,
+					"left": 703,
+					"width": 289,
+					"height": 27,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Contact",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_contact.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Interaction7": {
+					"type": "text",
+					"text": "Contact",
+					"top": 364,
+					"left": 598,
+					"width": 113,
+					"height": 16
+				},
+				"pup_trigger": {
+					"type": "button",
+					"top": 395,
+					"left": 703,
+					"width": 289,
+					"height": 27,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Trigger",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_trigger.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Interaction8": {
+					"type": "text",
+					"text": "Trigger",
+					"top": 400,
+					"left": 599,
+					"width": 113,
+					"height": 16
+				},
+				"Interaction9": {
+					"type": "text",
+					"text": "Notes",
+					"top": 445,
+					"left": 598,
+					"width": 85,
+					"height": 16
+				},
+				"Inter_input_notes": {
+					"type": "input",
+					"left": 703,
+					"top": 445,
+					"width": 460,
+					"height": 145,
+					"dataSourceTypeHint": "text",
+					"dataSource": "Form:C1466.current_interaction.notes",
+					"multiline": "yes"
+				},
+				"Interaction3": {
+					"type": "text",
+					"text": "Follow-up date",
+					"top": 182,
+					"left": 597,
+					"width": 91,
+					"height": 16
+				},
+				"Inter_input_followUPDate": {
+					"type": "input",
+					"left": 703,
+					"top": 180,
+					"width": 261,
+					"height": 17,
+					"dataSourceTypeHint": "text",
+					"dataSource": "Form:C1466.current_interaction.followUPDate"
+				},
+				"btnDatePickerCreate2": {
+					"type": "button",
+					"text": " ",
+					"top": 180,
+					"left": 975,
+					"width": 18,
+					"height": 18,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/calendar.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnDatePickerCreate2.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false,
+					"dataSource": ""
+				},
+				"pup_sales": {
+					"type": "button",
+					"top": 321,
+					"left": 703,
+					"width": 289,
+					"height": 27,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Sales person",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_sales.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Interaction6": {
+					"type": "text",
+					"text": "Sales person",
+					"top": 326,
+					"left": 598,
+					"width": 113,
+					"height": 16
+				},
+				"pup_type": {
+					"type": "button",
+					"top": 209,
+					"left": 703,
+					"width": 289,
+					"height": 28,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Status",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_type.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"interaction10": {
+					"type": "text",
+					"text": "Status",
+					"top": 215,
+					"left": 599,
+					"width": 113,
+					"height": 16
+				},
+				"pupFilter_status": {
+					"type": "button",
+					"text": "All status",
+					"top": 124,
+					"left": 12,
+					"width": 104,
+					"height": 18,
+					"events": [
+						"onClick"
+					],
+					"style": "bevel",
+					"popupPlacement": "linked",
+					"fontSize": 9,
+					"icon": "/RESOURCES/sfw/image/picto/funnel-small.png",
+					"textPlacement": "right",
+					"visibility": "visible",
+					"focusable": false,
+					"method": "ObjectMethods/pupFilter_status.4dm"
+				},
+				"pupFilter_trigger": {
+					"type": "button",
+					"text": "All triggers",
+					"top": 150,
+					"left": 12,
+					"width": 104,
+					"height": 18,
+					"events": [
+						"onClick"
+					],
+					"style": "bevel",
+					"popupPlacement": "linked",
+					"fontSize": 9,
+					"icon": "/RESOURCES/sfw/image/picto/funnel-small.png",
+					"textPlacement": "right",
+					"visibility": "visible",
+					"focusable": false,
+					"method": "ObjectMethods/pupFilter_trigger.4dm"
 				}
 			}
 		},
@@ -1042,17 +1418,13 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 384,
+	"geometryStamp": 665,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {
 			"Group2": [
 				"Rectangle7",
 				"Text2"
-			],
-			"Group3": [
-				"Rectangle8",
-				"Text3"
 			]
 		},
 		"activeView": "View 1",

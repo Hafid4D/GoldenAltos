@@ -40,7 +40,7 @@
 					"type": "listbox",
 					"left": 0,
 					"top": 44,
-					"width": 205,
+					"width": 250,
 					"height": 216,
 					"events": [
 						"onDoubleClick",
@@ -72,8 +72,10 @@
 							"footer": {
 								"name": "Footer1"
 							},
-							"width": 240,
-							"dataSource": "This:C1470.poNumber"
+							"width": 120,
+							"dataSource": "This:C1470.poNumber",
+							"dataSourceTypeHint": "text",
+							"textAlign": "left"
 						},
 						{
 							"header": {
@@ -83,7 +85,9 @@
 							"name": "Column2",
 							"footer": {
 								"name": "Footer2"
-							}
+							},
+							"dataSource": "This:C1470.code",
+							"width": 120
 						}
 					]
 				},
@@ -152,7 +156,7 @@
 			}
 		}
 	],
-	"geometryStamp": 53,
+	"geometryStamp": 55,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

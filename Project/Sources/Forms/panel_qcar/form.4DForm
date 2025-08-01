@@ -35,7 +35,7 @@
 			"objects": {
 				"label_0_1": {
 					"type": "text",
-					"top": 12,
+					"top": 62,
 					"left": 12,
 					"width": 65,
 					"height": 17,
@@ -44,11 +44,11 @@
 				},
 				"Field_customer": {
 					"type": "input",
-					"top": 12,
+					"top": 62,
 					"left": 82,
 					"width": 110,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.customer.name",
+					"dataSource": "Form:C1466.current_item.lot.customer",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -88,16 +88,16 @@
 				},
 				"label_lotNumber": {
 					"type": "text",
-					"top": 62,
+					"top": 12,
 					"left": 12,
 					"width": 65,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Lot #"
+					"text": "Traveller #"
 				},
 				"Field_lotNumber": {
 					"type": "input",
-					"top": 62,
+					"top": 12,
 					"left": 82,
 					"width": 110,
 					"height": 17,
@@ -107,7 +107,8 @@
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
-						"onClick"
+						"onClick",
+						"onMouseMove"
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
@@ -122,13 +123,13 @@
 					"stroke": "#808080",
 					"text": "Device"
 				},
-				"entryField_device": {
+				"Field_device": {
 					"type": "input",
 					"top": 87,
 					"left": 82,
 					"width": 240,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.device",
+					"dataSource": "Form:C1466.current_item.lot.device",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -365,7 +366,7 @@
 					"stroke": "#808080",
 					"text": "Car #"
 				},
-				"entryField_qcarNumber": {
+				"Field_qcarNumber": {
 					"type": "input",
 					"top": 12,
 					"left": 520,
@@ -380,7 +381,8 @@
 						"onDataChange"
 					],
 					"fill": "transparent",
-					"borderStyle": "none"
+					"borderStyle": "none",
+					"dataSourceTypeHint": "number"
 				},
 				"entryField_rb_internal": {
 					"type": "radio",
@@ -838,7 +840,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_4lines",
-	"geometryStamp": 2615,
+	"geometryStamp": 2634,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

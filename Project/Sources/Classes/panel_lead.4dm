@@ -27,11 +27,20 @@ Function formMethod()
 		This:C1470.drawPup_quote()
 		This:C1470.drawPup_po()
 		This:C1470.drawPup_job()
+		
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
 				This:C1470.loadContacts()
+				
+			: (FORM Get current page:C276(*)=2)
+				Form:C1466.interactons_filters:=New object:C1471
+				Form:C1466.interactons_filters.status:=New collection:C1472()
+				Form:C1466.interactons_filters.trigger:=New collection:C1472()
+				This:C1470.loadInteractions()
+				
+				
 			: (FORM Get current page:C276(*)=3)
 				This:C1470.loadJobs()
 		End case 
@@ -40,29 +49,48 @@ Function formMethod()
 		This:C1470.redrawAndSetVisible()
 	End if 
 	
-Function loadContacts()
-	var $e_mainContact : cs:C1710.ContactEntity
-	var $secondaryContacts : cs:C1710.ContactSelection
+	Case of 
+		: (FORM Event:C1606.code=On Bound Variable Change:K2:52)
+			This:C1470.drawPup_Interaction(["method"; "outcome"; "trigger"; "sales"; "contact"; "type"])
+			This:C1470.display_interactionDetails()
+			If (Form:C1466.current_interaction#Null:C1517)
+				$index:=Form:C1466.current_interaction.indexOf()
+				If ($index=-1)
+					LISTBOX SELECT ROW:C912(*; "lb_interactions"; 0; lk remove from selection:K53:3)
+				Else 
+					LISTBOX SELECT ROW:C912(*; "lb_interactions"; $index+1; lk replace selection:K53:1)
+				End if 
+			Else 
+				LISTBOX SELECT ROW:C912(*; "lb_interactions"; 0; lk remove from selection:K53:3)
+			End if 
+			
+	End case 
 	
-	Form:C1466.lb_contacts:=New collection:C1472()
-	If (Form:C1466.current_item.moreData#Null:C1517) && (Form:C1466.current_item.moreData.mainContact#Null:C1517)
-		$e_mainContact:=ds:C1482.Contact.get(Form:C1466.current_item.moreData.mainContact.UUID)
-		If ($e_mainContact#Null:C1517)
-			$mainContact:=$e_mainContact.toObject()
-			$mainContact.type:="Main"
-			Form:C1466.lb_contacts.push($mainContact)
+Function loadInteractions()
+	$queryString:=""
+	$settings:=New object:C1471("parameters"; New object:C1471)
+	If (Form:C1466.interactons_filters.status.length#0)
+		$queryString+="UUID_Type in :status"
+		$settings.parameters.status:=Form:C1466.interactons_filters.status
+	End if 
+	If (Form:C1466.interactons_filters.trigger.length#0)
+		If ($queryString#"")
+			$queryString+=" and UUID_Trigger in :trigger"
+		Else 
+			$queryString+=" UUID_Trigger in :trigger"
 		End if 
+		$settings.parameters.trigger:=Form:C1466.interactons_filters.trigger
 	End if 
 	
-	If (Form:C1466.current_item.moreData#Null:C1517) && (Form:C1466.current_item.moreData.secondaryContacts#Null:C1517)
-		$secondaryContacts:=ds:C1482.Contact.query("UUID in :1"; Form:C1466.current_item.moreData.secondaryContacts)
-		For each ($e_contact; $secondaryContacts)
-			$contact:=$e_contact.toObject()
-			$contact.type:="Secondary"
-			Form:C1466.lb_contacts.push($contact)
-		End for each 
+	If ($queryString="")
+		Form:C1466.lb_interactions:=Form:C1466.current_item.interactions.orderBy("stmpCreation desc")
+	Else 
+		$queryString+=" order by stmpCreation desc"
+		Form:C1466.lb_interactions:=Form:C1466.current_item.interactions.query($queryString; $settings)
 	End if 
 	
+Function loadContacts()
+	Form:C1466.lb_contacts:=Form:C1466.current_item.contacts()
 	
 Function loadJobs()
 	Form:C1466.job:=Null:C1517
@@ -84,6 +112,57 @@ Function drawPup_serviceType()
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
 		Form:C1466.sfw.drawButtonPup("pup_serviceType"; $serviceName; $pathIcon; (Form:C1466.current_item.serviceType=Null:C1517))
 	End if 
+	
+Function display_interactionDetails()
+	OBJECT SET VISIBLE:C603(*; "interaction@"; Form:C1466.current_interaction#Null:C1517)
+	OBJECT SET VISIBLE:C603(*; "Inter_input@"; Form:C1466.current_interaction#Null:C1517)
+	OBJECT SET VISIBLE:C603(*; "btnDatePickerCreate@"; Form:C1466.current_interaction#Null:C1517)
+	
+Function drawPup_Interaction($widgets : Collection)
+	var $item : Object
+	For each ($widget; $widgets)
+		$widgetName:="pup_"+$widget
+		
+		If (Form:C1466.current_interaction#Null:C1517)
+			$widgetCapitalized:=cs:C1710.sfw_string.me.stringCapitalize($widget)
+			$defaultName:="Select "+$widget
+			$uuid:="UUID_"+$widgetCapitalized
+			$cacheAttr:="interaction"+$widgetCapitalized
+			
+			
+			OBJECT SET VISIBLE:C603(*; $widgetName; True:C214)
+			Case of 
+				: ($widget="sales")
+					$name:=Form:C1466.current_interaction.staff=Null:C1517 ? "Select "+$widget : Form:C1466.current_interaction.staff.fullName
+					
+					
+				: ($widget="contact")
+					$name:=Form:C1466.current_interaction.contact=Null:C1517 ? "Select "+$widget : Form:C1466.current_interaction.contact.fullName
+					
+				Else 
+					$dc:="Interaction"+$widgetCapitalized
+					If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache[$cacheAttr]=Null:C1517)
+						ds:C1482[$dc].cacheLoad()
+					End if 
+					$items:=Storage:C1525.cache[$cacheAttr].query("UUID == :1"; Form:C1466.current_interaction[$uuid])
+					
+					If ($items.length#0)
+						$name:=$items[0].name
+					Else 
+						$name:=$defaultName
+					End if 
+			End case 
+			
+			
+			Form:C1466.sfw.drawButtonPup($widgetName; $name; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; ($items.length=0))
+			
+		Else 
+			OBJECT SET VISIBLE:C603(*; $widgetName; False:C215)
+		End if 
+	End for each 
+	
+	
+	
 	
 	
 Function pup_serviceType()
@@ -286,13 +365,19 @@ Function selectCustomer()
 					Form:C1466.current_item.UUID_Customer:=$form.item.UUID
 					Form:C1466.current_item.deal:=True:C214
 					Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
-					Form:C1466.current_item.moreData:=New object:C1471()
+					
+					This:C1470._clearInfoAfterChangingCustomer()
 					This:C1470.loadContacts()
 				End if 
 		End case 
 	End if 
 	This:C1470.drawPup_customer()
 	
+Function _clearInfoAfterChangingCustomer()
+	Form:C1466.current_item.moreData:=New object:C1471()
+	Form:C1466.current_item.UUID_Quote:=Null:C1517
+	Form:C1466.current_item.UUID_PurchaseOrder:=Null:C1517
+	Form:C1466.current_item.UUID_Job:=Null:C1517
 	
 	//mark:Staff
 Function drawPup_staff()
@@ -328,9 +413,16 @@ Function selectStaff()
 	//mark:quote
 Function drawPup_quote()
 	If (Form:C1466.current_item#Null:C1517)
-		$quoteName:=Form:C1466.current_item.quote.code || "Quote"
+		$quoteName:=Form:C1466.current_item.quote.code || "Select quote"
 		Form:C1466.sfw.drawButtonPup("pup_quote"; $quoteName; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.quote=Null:C1517))
 	End if 
+	
+Function drawPup_method()
+	If (Form:C1466.current_item#Null:C1517)
+		$quoteName:=Form:C1466.current_item.quote.code || "Select quote"
+		Form:C1466.sfw.drawButtonPup("pup_quote"; $quoteName; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.quote=Null:C1517))
+	End if 
+	
 	
 Function selectQuote
 	If (Form:C1466.sfw.checkIsInModification())
@@ -360,8 +452,9 @@ Function selectQuote
 	
 	//mark:PO
 Function drawPup_po()
+	var $poName : Text
 	If (Form:C1466.current_item#Null:C1517)
-		$poName:=Form:C1466.current_item.purchaseOrder.poNumber || "PO"
+		$poName:=String:C10(Form:C1466.current_item.purchaseOrder.poNumber) || "Select PO"
 		Form:C1466.sfw.drawButtonPup("pup_po"; $poName; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.purchaseOrder=Null:C1517))
 	End if 
 	
@@ -397,8 +490,9 @@ Function selectPO()
 	
 	//mark:Job
 Function drawPup_job()
+	var $jobName : Text
 	If (Form:C1466.current_item#Null:C1517)
-		$jobName:=String:C10(Form:C1466.current_item.job.jobNumber) || "Job"
+		$jobName:=String:C10(Form:C1466.current_item.job.jobNumber) || "Select job"
 		Form:C1466.sfw.drawButtonPup("pup_job"; $jobName; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.job=Null:C1517))
 	End if 
 	
@@ -451,6 +545,12 @@ Function redrawAndSetVisible()
 			
 			OBJECT SET COORDINATES:C1248(*; "bar_history"; $g; $t; $widthSubform; $b)
 			OBJECT SET COORDINATES:C1248(*; "Rec_history"; $gh; $th; $widthSubform; $heightSubform)
+			
+		: (FORM Get current page:C276(*)=2)
+			OBJECT SET ENABLED:C1123(*; "bActionInteractions"; Form:C1466.sfw.checkIsInModification())
+			This:C1470.drawPup_Interaction(["method"; "outcome"; "trigger"; "contact"; "sales"; "type"])
+			This:C1470.display_interactionDetails()
+			
 		: (FORM Get current page:C276(*)=3)
 			
 			OBJECT GET COORDINATES:C663(*; "Rect"; $g; $t; $r; $b)
@@ -491,14 +591,34 @@ Function btnOpenStaff()
 Function btnCreateCustomer()
 	Form:C1466.sfw.openCreateWindow("customerService"; "customer")
 	
-Function btnDatePickerCreate()
-	If (Form:C1466.sfw.checkIsInModification())
-		OBJECT GET COORDINATES:C663(*; "btnDatePickerCreate"; $x1; $y1; $x2; $y2)
-		$test:=DatePicker Display Dialog($x1+500; $y1+100)
-		If ($test#!00-00-00!)
-			Form:C1466.current_item.dateCreation:=$test
+Function btnDatePickerCreate($object; $attribut; $stmp; $minMax)
+	var $currentDate : Date
+	$name:=OBJECT Get name:C1087
+	OBJECT GET COORDINATES:C663(*; $name; $x1; $y1; $x2; $y2)
+	CONVERT COORDINATES:C1365($x1; $y1; XY Current form:K27:5; XY Current window:K27:6)
+	
+	$currentDate:=Current date:C33()
+	Case of 
+		: (Num:C11($minMax)=1)
+			DatePicker SET DEFAULT MAX DATE(!2040-01-01!)
+			DatePicker SET DEFAULT MIN DATE($currentDate)
+			
+		: (Num:C11($minMax)=2)
+			DatePicker SET DEFAULT MIN DATE(!2004-01-01!)
+			DatePicker SET DEFAULT MAX DATE($currentDate)
+			
+	End case 
+	
+	
+	$test:=DatePicker Display Dialog($x1; $y1; Current date:C33())
+	If ($test#!00-00-00!)
+		If (Bool:C1537($stmp))
+			$object[$attribut]:=cs:C1710.sfw_stmp.me.build($test)
+		Else 
+			$object[$attribut]:=$test
 		End if 
 	End if 
+	
 	
 Function btnDatePickerClose()
 	If (Form:C1466.sfw.checkIsInModification())
@@ -628,8 +748,300 @@ Function _activate_save_cancel_button()
 	
 	
 	
-Function btnActionNotes()
+Function bActionInteractions()
+	var $interaction : cs:C1710.InteractionEntity
+	var $status : cs:C1710.InteractionTypeEntity
+	
+	If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.interactionType=Null:C1517)
+		ds:C1482.InteractionType.cacheLoad()
+	End if 
+	
+	$items:=Storage:C1525.cache.interactionType.query("code == :1"; "SCHEDULED")
+	If ($items.length#0)
+		$scheduledUUID:=$items[0].UUID
+	Else 
+		$scheduledUUID:=""
+	End if 
+	
+	$mainMenu:=Create menu:C408
+	
+	APPEND MENU ITEM:C411($mainMenu; "Cancel interaction"; *)
+	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--cancel")
+	If (Form:C1466.current_interaction=Null:C1517) || (Form:C1466.current_interaction#Null:C1517 && Form:C1466.current_interaction.UUID_Type#$scheduledUUID)
+		DISABLE MENU ITEM:C150($mainMenu; -1)
+	End if 
+	
+	//APPEND MENU ITEM($mainMenu; "Complete follow up"; *)
+	//SET MENU ITEM PARAMETER($mainMenu; -1; "--complete")
+	//If (Form.current_interaction=Null)
+	//DISABLE MENU ITEM($mainMenu; -1)
+	//End if 
+	
+	APPEND MENU ITEM:C411($mainMenu; "Schedule follow up"; *)
+	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--schedule")
+	
+	APPEND MENU ITEM:C411($mainMenu; "Log interaction"; *)
+	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--log")
 	
 	
+	$choice:=Dynamic pop up menu:C1006($mainMenu)
+	RELEASE MENU:C978($mainMenu)
 	
 	
+	Case of 
+		: ($choice="")
+		: ($choice="--schedule")
+			$form:=New object:C1471
+			$form.creationDate:=Current date:C33()
+			$form.current_item:=Form:C1466.current_item
+			$form.number:=ds:C1482.Interaction.sequence
+			$form.followUPDate:=Add to date:C393(Current date:C33; 0; 0; 1)
+			
+			$ref:=Open form window:C675("Lead_scheduleFollowUP"; Sheet form window:K39:12)
+			DIALOG:C40("Lead_scheduleFollowUP"; $form)
+			CLOSE WINDOW:C154($ref)
+			
+			If (ok=1)
+				$form.stmpFollowUp:=cs:C1710.sfw_stmp.me.build($form.followUPDate)
+				$form.stmpCreation:=cs:C1710.sfw_stmp.me.build($form.creationDate)
+				$followUPDate:=$form.followUPDate
+				OB REMOVE:C1226($form; "followUPDate")
+				OB REMOVE:C1226($form; "creationDate")
+				OB REMOVE:C1226($form; "current_item")
+				
+				$interaction:=ds:C1482.Interaction.new()
+				$interaction.fromObject($form)
+				$interaction.UUID_Lead:=Form:C1466.current_item.UUID
+				$status:=ds:C1482.InteractionType.query("code == :1"; "SCHEDULED").first()
+				If ($status#Null:C1517)
+					$interaction.UUID_Type:=$status.UUID
+				End if 
+				$result:=$interaction.save()
+				
+				$context:=New object:C1471
+				$context.target:=Form:C1466.current_item.UUID
+				$context.targetDataclass:="Lead"
+				$context.Followupdate:=$followUPDate
+				$context.Contact:=$interaction.contact.fullName
+				$context.Trigger:=$interaction.trigger.name
+				
+				$staff:=ds:C1482.Staff.query("UUID_User = :1"; cs:C1710.sfw_userManager.me.info.UUID).first()
+				$users:=New collection:C1472($staff.user.UUID)
+				cs:C1710.sfw_notificationManager.me._notify("InteractionScheduled"; $users; $context)
+				
+				Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($interaction).orderBy("stmpCreation desc")
+				cs:C1710.panel_lead.me._activate_save_cancel_button()
+			End if 
+			
+		: ($choice="--log")
+			$form:=New object:C1471
+			$form.creationDate:=Current date:C33()
+			$form.current_item:=Form:C1466.current_item
+			$form.number:=ds:C1482.Interaction.sequence
+			$form.nextFollowUp:=False:C215
+			$form.followUPDate:=Add to date:C393(Current date:C33; 0; 0; 1)
+			
+			$ref:=Open form window:C675("Lead_AddInteraction"; Sheet form window:K39:12)
+			DIALOG:C40("Lead_AddInteraction"; $form)
+			CLOSE WINDOW:C154($ref)
+			
+			If (ok=1)
+				$followUPDate:=$form.followUPDate
+				$form.stmpCreation:=cs:C1710.sfw_stmp.me.build($form.creationDate)
+				$form.stmpFollowUp:=cs:C1710.sfw_stmp.me.build($form.followUPDate)
+				OB REMOVE:C1226($form; "creationDate")
+				OB REMOVE:C1226($form; "followUPDate")
+				OB REMOVE:C1226($form; "current_item")
+				
+				
+				$interaction:=ds:C1482.Interaction.new()
+				$interaction.fromObject($form)
+				$interaction.UUID_Lead:=Form:C1466.current_item.UUID
+				$status:=ds:C1482.InteractionType.query("code == :1"; "COMPLETED").first()
+				If ($status#Null:C1517)
+					$interaction.UUID_Type:=$status.UUID
+				End if 
+				$result:=$interaction.save()
+				Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($interaction).orderBy("stmpCreation desc")
+				
+				
+				If ($form.nextFollowUp)
+					$scheduledInteraction:=ds:C1482.Interaction.new()
+					$scheduledInteraction.fromObject($form)
+					$scheduledInteraction.number:=ds:C1482.Interaction.sequence
+					$scheduledInteraction.UUID_Lead:=Form:C1466.current_item.UUID
+					$scheduledInteraction.notes:=""
+					$scheduledInteraction.UUID_Lead:=Form:C1466.current_item.UUID
+					$status:=ds:C1482.InteractionType.query("code == :1"; "SCHEDULED").first()
+					If ($status#Null:C1517)
+						$scheduledInteraction.UUID_Type:=$status.UUID
+					End if 
+					$scheduledInteraction.UUID_Interaction:=$interaction.UUID
+					
+					$result:=$scheduledInteraction.save()
+					
+					
+					$context:=New object:C1471
+					$context.target:=Form:C1466.current_item.UUID
+					$context.targetDataclass:="Lead"
+					$context.Followupdate:=$followUPDate
+					$context.Contact:=$scheduledInteraction.contact.fullName
+					$context.Trigger:=$scheduledInteraction.trigger.name
+					
+					$staff:=ds:C1482.Staff.query("UUID_User = :1"; cs:C1710.sfw_userManager.me.info.UUID).first()
+					$users:=New collection:C1472($staff.user.UUID)
+					cs:C1710.sfw_notificationManager.me._notify("InteractionScheduled"; $users; $context)
+					
+					Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($scheduledInteraction).orderBy("number desc")
+					
+				End if 
+				
+				cs:C1710.panel_lead.me._activate_save_cancel_button()
+			End if 
+			
+		: ($choice="--cancel")
+			$items:=Storage:C1525.cache.interactionType.query("code == :1"; "CANCELED")
+			If ($items.length#0)
+				$canceledUUID:=$items[0].UUID
+			Else 
+				$canceledUUID:=""
+			End if 
+			Form:C1466.current_interaction.UUID_Type:=$canceledUUID
+			Form:C1466.current_interaction.save()
+			cs:C1710.panel_lead.me._activate_save_cancel_button()
+	End case 
+	
+Function pup_interaction($type; $currentUUID)->$uuid : Text
+	If (Form:C1466.sfw.checkIsInModification=Null:C1517) || (Form:C1466.sfw.checkIsInModification#Null:C1517 && Form:C1466.sfw.checkIsInModification())
+		$displayMenu:=True:C214
+		Case of 
+			: ($type="method")
+				$dc:="InteractionMethod"
+				$cacheAttribut:="interactionMethod"
+				$widgetName:="pup_method"
+				
+			: ($type="outcome")
+				$dc:="InteractionOutcome"
+				$cacheAttribut:="interactionOutcome"
+				$widgetName:="pup_outcome"
+				
+			: ($type="trigger")
+				$dc:="InteractionTrigger"
+				$cacheAttribut:="interactionTrigger"
+				$widgetName:="pup_trigger"
+				
+			: ($type="type")
+				$dc:="InteractionType"
+				$cacheAttribut:="interactionType"
+				$widgetName:="pup_type"
+				
+				If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache[$cacheAttribut]=Null:C1517)
+					ds:C1482[$dc].cacheLoad()
+				End if 
+				$items:=Storage:C1525.cache[$cacheAttribut].query("UUID == :1"; $currentUUID)
+				If ($items.length#0)
+					$displayMenu:=$items[0].code#"COMPLETED"
+				End if 
+				
+				
+				
+		End case 
+		
+		If ($displayMenu)
+			$menu:=Create menu:C408
+			If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache[$cacheAttribut]=Null:C1517)
+				ds:C1482[$dc].cacheLoad()
+			End if 
+			
+			For each ($eItem; Storage:C1525.cache[$cacheAttribut])
+				APPEND MENU ITEM:C411($menu; $eItem.name; *)
+				SET MENU ITEM PARAMETER:C1004($menu; -1; $eItem.UUID)
+				If ($eItem.UUID=$currentUUID)
+					SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+					If (Is Windows:C1573)
+						SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+					End if 
+				End if 
+			End for each 
+			$uuid:=Dynamic pop up menu:C1006($menu)
+			RELEASE MENU:C978($menu)
+			
+			Case of 
+				: ($uuid#"")
+					$item:=Storage:C1525.cache[$cacheAttribut].query("UUID == :1"; $uuid)[0]
+					OBJECT SET TITLE:C194(*; $widgetName; $item.name)
+			End case 
+		End if 
+		
+	End if 
+	
+Function pup_filter($filterType : Text)
+	$attr:=$filterType#"status" ? $filterType : "type"
+	$capitalizeType:=cs:C1710.sfw_string.me.stringCapitalize($attr)
+	$cacheAttribut:="interaction"+$capitalizeType
+	$dc:="Interaction"+$capitalizeType
+	$label:=""
+	$allItems:=$filterType="status" ? "All status" : "All "+$filterType+"s"
+	If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache[$cacheAttribut]=Null:C1517)
+		ds:C1482[$dc].cacheLoad()
+	End if 
+	
+	$menu:=Create menu:C408
+	
+	APPEND MENU ITEM:C411($menu; $allItems; *)
+	SET MENU ITEM PARAMETER:C1004($menu; -1; "all")
+	If (Form:C1466.interactons_filters[$filterType].length=0)
+		SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+		If (Is Windows:C1573)
+			SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+		End if 
+	End if 
+	
+	APPEND MENU ITEM:C411($menu; "-")
+	
+	For each ($item; Storage:C1525.cache[$cacheAttribut])
+		APPEND MENU ITEM:C411($menu; $item.name; *)
+		SET MENU ITEM PARAMETER:C1004($menu; -1; $item.UUID+"_"+$item.name)
+		If (Form:C1466.interactons_filters[$filterType].indexOf($item.UUID)#-1)
+			SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+			If (Is Windows:C1573)
+				SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+			End if 
+		End if 
+	End for each 
+	
+	$choice:=Dynamic pop up menu:C1006($menu)
+	RELEASE MENU:C978($menu)
+	
+	
+	Case of 
+		: ($choice="")
+		: ($choice="all")
+			Form:C1466.interactons_filters[$filterType].clear()
+			$label:=$allItems
+		Else 
+			$items:=Split string:C1554($choice; "_")
+			$uuid:=$items[0]
+			
+			$index:=Form:C1466.interactons_filters[$filterType].indexOf($uuid)
+			If ($index#-1)
+				Form:C1466.interactons_filters[$filterType].remove($index)
+			Else 
+				Form:C1466.interactons_filters[$filterType].push($uuid)
+			End if 
+			
+			Case of 
+				: (Form:C1466.interactons_filters[$filterType].length=0)
+					$label:="All "+$filterType
+				: (Form:C1466.interactons_filters[$filterType].length=1)
+					$label:=$items[1]
+				Else 
+					
+					$label:=String:C10(Form:C1466.interactons_filters[$filterType].length)+" "+$filterType
+					$label:=$filterType="status" ? $label : $label+"s"
+			End case 
+	End case 
+	
+	If ($label#"")
+		OBJECT SET TITLE:C194(*; "pupFilter_"+$filterType; $label)
+	End if 
