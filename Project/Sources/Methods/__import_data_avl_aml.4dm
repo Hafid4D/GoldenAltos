@@ -111,10 +111,11 @@ If ($supplier_log.exists)
 		//Primary contact
 		$eContact:=ds:C1482.Contact.new()
 		$eContact.UUID_Supplier:=$eSupplier.UUID
+		$eContact.companyName:=$supplier.Supplier
 		$eContact.firstName:=$supplier.C1_first_name
 		$eContact.lastName:=$supplier.C1_last_name
-		$eContact.title:="PSC"
-		
+		$eContact.title:="Primary"
+		$eContact.UUID_CompanyType:=ds:C1482.CompanyType.query("name =:1"; "Supplier")[0].UUID
 		$eContact.contactDetails:=New object:C1471()
 		$eContact.contactDetails.addresses:=New collection:C1472()
 		
@@ -149,9 +150,11 @@ If ($supplier_log.exists)
 		//Secondary contact
 		$eContact:=ds:C1482.Contact.new()
 		$eContact.UUID_Supplier:=$eSupplier.UUID
+		$eContact.companyName:=$supplier.Supplier
 		$eContact.firstName:=$supplier.C2_first_name
 		$eContact.lastName:=$supplier.C2_last_name
-		$eContact.title:="SSC"
+		$eContact.title:="Secondary"
+		$eContact.UUID_CompanyType:=ds:C1482.CompanyType.query("name =:1"; "Supplier")[0].UUID
 		
 		$eContact.contactDetails:=New object:C1471()
 		$eContact.contactDetails.addresses:=New collection:C1472()
@@ -260,8 +263,10 @@ If ($avml_log.exists)
 		End if 
 		
 		$supplier:=ds:C1482.Supplier.query("name =:1"; Split string:C1554($avml.Supplier; "\r"; sk trim spaces:K86:2).join("\r"))
-		If ($partNum.length>0)
+		If ($supplier.length>0)
 			$eAvml.UUID_Supplier:=$supplier[0].UUID
+		Else 
+			
 		End if 
 		
 		$res:=$eAvml.save()

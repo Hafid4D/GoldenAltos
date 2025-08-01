@@ -140,7 +140,7 @@ If (True:C214)
 				$eContact.lastName:=$contact.LastName
 				$eContact.code:=$contact.Contactcode
 				$eContact.title:=$contact.Title
-				
+				$eContact.UUID_CompanyType:=ds:C1482.CompanyType.query("name =:1"; "Customer")[0].UUID
 				$eContact.contactDetails:=New object:C1471()
 				$eContact.contactDetails.addresses:=New collection:C1472()
 				$address:=New object:C1471()
@@ -292,6 +292,7 @@ $eContact.UUID_Customer:=$eCustomer.UUID
 				
 				If ($eCustomer#Null:C1517)
 					$eContact.UUID_Customer:=$eCustomer.UUID
+					$eContact.companyName:=$eCustomer.name
 					$result:=$eContact.save()
 					If ($result.success=False:C215)
 						TRACE:C157
@@ -307,7 +308,9 @@ $eContact.UUID_Customer:=$eCustomer.UUID
 				//AP Contact
 				$cContact:=ds:C1482.Contact.new()
 				$cContact.title:="AP"
+				$cContact.UUID_CompanyType:=ds:C1482.CompanyType.query("name =:1"; "Customer")[0].UUID
 				$cContact.UUID_Customer:=$eCustomer.UUID
+				$cContact.companyName:=$customer.Customer
 				$cContact.firstName:=$customer.AP_contact_fn
 				$cContact.lastName:=$customer.AP_contact_ln
 				$cContact.contactDetails:=New object:C1471()
@@ -353,7 +356,9 @@ $eContact.UUID_Customer:=$eCustomer.UUID
 				//Status Contact
 				$cContact:=ds:C1482.Contact.new()
 				$cContact.title:="Status"
+				$cContact.UUID_CompanyType:=ds:C1482.CompanyType.query("name =:1"; "Customer")[0].UUID
 				$cContact.UUID_Customer:=$eCustomer.UUID
+				$cContact.companyName:=$customer.Customer
 				$cContact.firstName:=$customer.Status_Contact
 				$cContact.lastName:=""
 				$cContact.contactDetails:=New object:C1471()

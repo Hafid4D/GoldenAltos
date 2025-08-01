@@ -840,6 +840,7 @@
 				}
 			}
 		},
+
 		"InteractionOutcome": {
 			"color": {
 				"red": 207,
@@ -1452,7 +1453,7 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 752,
+				"left": 777,
 				"top": 0,
 				"width": 120,
 				"height": 167.33203125
@@ -1849,13 +1850,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 692,
-				"top": 423,
-				"width": 149.015625,
-				"height": 196.33203125
+				"left": 633,
+				"top": 299,
+				"width": 182.015625,
+				"height": 313.33203125
 			},
-			"displayable_fields_count": 7,
-			"fields_ordering": 1
+			"displayable_fields_count": 12
 		}
 	},
 	"relations": {
