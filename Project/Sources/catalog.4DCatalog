@@ -12,7 +12,7 @@
 		<field name="title" uuid="6A7FDC50467B441E8639D0536CFB133A" type="10" limiting_length="255" never_null="true" id="7"/>
 		<field name="UUID_Supplier" uuid="F9C51792B9078240AFF056E5A531503C" type="10" store_as_UUID="true" never_null="true" id="8"/>
 		<field name="companyName" uuid="F6C09A6B8D36A94CB66AA7C7172EE5BE" type="10" limiting_length="255" never_null="true" id="9"/>
-		<field name="UUID_CompanyType" uuid="467E7A7691D11C4E8F717A978DF321B0" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="10">
+		<field name="UUID_CompanyType" uuid="467E7A7691D11C4E8F717A978DF321B0" type="10" store_as_UUID="true" never_null="true" id="10">
 			<field_extra multi_line="false"/>
 		</field>
 		<primary_key field_name="UUID" field_uuid="8EFDF2BE837542E3849ECB064F30C5BD"/>
