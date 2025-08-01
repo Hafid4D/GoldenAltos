@@ -12,9 +12,7 @@
 		<field name="title" uuid="6A7FDC50467B441E8639D0536CFB133A" type="10" limiting_length="255" never_null="true" id="7"/>
 		<field name="UUID_Supplier" uuid="F9C51792B9078240AFF056E5A531503C" type="10" store_as_UUID="true" never_null="true" id="8"/>
 		<field name="companyName" uuid="F6C09A6B8D36A94CB66AA7C7172EE5BE" type="10" limiting_length="255" never_null="true" id="9"/>
-		<field name="UUID_CompanyType" uuid="467E7A7691D11C4E8F717A978DF321B0" type="10" store_as_UUID="true" never_null="true" id="10">
-			<field_extra multi_line="false"/>
-		</field>
+		<field name="UUID_CompanyType" uuid="39079DD09AA36947B833A077AABE0CE6" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="10"/>
 		<primary_key field_name="UUID" field_uuid="8EFDF2BE837542E3849ECB064F30C5BD"/>
 	</table>
 	<table name="Assumption" uuid="F74C797683A840F69C35777C0FF641E7" id="2">
@@ -662,13 +660,14 @@
 		</field>
 		<primary_key field_name="UUID" field_uuid="068764F21FF24E9F8AF8EBBA5BB5EEF1"/>
 	</table>
-	<table name="CompanyType" uuid="274BC7137B6CF6408C85D67A6A99C8AF" id="51">
+	<table name="(CompanyType)" uuid="274BC7137B6CF6408C85D67A6A99C8AF" id="51" hide_in_REST="true">
 		<field name="UUID" uuid="02E579F073336243A05659451C9556CB" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="typeID" uuid="C0FBA1D2F4F0264980CE2802A4B65EF2" type="3" never_null="true" id="2"/>
 		<field name="name" uuid="19CD501F3112344598AFC34C7D1358B2" type="10" limiting_length="255" never_null="true" id="3">
 			<field_extra multi_line="false"/>
 		</field>
 		<primary_key field_name="UUID" field_uuid="02E579F073336243A05659451C9556CB"/>
+		<table_extra trashed="true"/>
 	</table>
 	<table name="sfw_EventType" uuid="C482A0FBAE724304A8E05A0570FD55D6" id="52">
 		<field name="UUID" uuid="AEE9BE0296924CA7899B7E5DB37ACE13" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -676,6 +675,12 @@
 		<field name="label" uuid="C6D489B4A844430FAC1E94D910E12E4E" type="10" limiting_length="255" never_null="true" id="3"/>
 		<primary_key field_name="UUID" field_uuid="AEE9BE0296924CA7899B7E5DB37ACE13"/>
 		<table_extra output_form="output"/>
+	</table>
+	<table name="CompanyType" uuid="BAE1FA3381CC6C4BB86275B878275798" id="53">
+		<field name="UUID" uuid="DF8913916E8B3044989855C6CA72A0B6" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="typeID" uuid="C52A572839301B46BADA9F7D9C47E3F9" type="3" never_null="true" id="2"/>
+		<field name="name" uuid="EEE533393A04BA48BC4DBFA25061F925" type="10" limiting_length="255" never_null="true" id="3"/>
+		<primary_key field_name="UUID" field_uuid="DF8913916E8B3044989855C6CA72A0B6"/>
 	</table>
 	<table name="sfw_Notification" uuid="5B73B25D951B4B17AB99971FB0079E64" id="69">
 		<field name="UUID" uuid="37203E4F21D84C8EBC40DFC936CBFFA1" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -1918,18 +1923,6 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="EE7A991A23F88940A19CFA298610DD08" name_Nto1="companyType" name_1toN="contacts" state="1">
-		<related_field kind="source">
-			<field_ref uuid="467E7A7691D11C4E8F717A978DF321B0" name="UUID_CompanyType">
-				<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
-			</field_ref>
-		</related_field>
-		<related_field kind="destination">
-			<field_ref uuid="02E579F073336243A05659451C9556CB" name="UUID">
-				<table_ref uuid="274BC7137B6CF6408C85D67A6A99C8AF" name="CompanyType"/>
-			</field_ref>
-		</related_field>
-	</relation>
 	<index kind="regular" uuid="01619F9BF52940F3AFF8C52A4A82535D" type="3">
 		<field_ref uuid="951D3770910B43BBBFCAB95E4B3A1C65" name="UUID_Tool">
 			<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
@@ -2053,6 +2046,11 @@
 	<index kind="regular" unique_keys="true" uuid="1FEAD11AEFB24168AD1B785362ACF144" type="1">
 		<field_ref uuid="8FC82746020F4EB6BA85B431DFE019A8" name="UUID">
 			<table_ref uuid="521E751963104DC299061CF1588CADEF" name="sfw_EMailLog"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="20EA1F9590F39E4A95DC2CC7C42D98AC" type="7">
+		<field_ref uuid="DF8913916E8B3044989855C6CA72A0B6" name="UUID">
+			<table_ref uuid="BAE1FA3381CC6C4BB86275B878275798" name="CompanyType"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="21DCC4A57F29B943B8652C76784095CE" type="3">
@@ -2260,11 +2258,6 @@
 			<table_ref uuid="5E1C3E25225441628E3DBCF58BFAABF4" name="sfw_Document"/>
 		</field_ref>
 	</index>
-	<index kind="regular" uuid="652D13DC1FE29E45881B7D346DAFB903" type="3">
-		<field_ref uuid="467E7A7691D11C4E8F717A978DF321B0" name="UUID_CompanyType">
-			<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
-		</field_ref>
-	</index>
 	<index kind="regular" uuid="675DDEA34102494283E12FCAE91573AD" type="3">
 		<field_ref uuid="74D4489457374B57A51D090D4AC39E94" name="UUID_Lead">
 			<table_ref uuid="04F7E2A28A5349B4B0C70F6D644922BB" name="LeadEvent"/>
@@ -2450,6 +2443,11 @@
 			<table_ref uuid="446AB1ED27F3664C9C9747DD14114EF2" name="Qcar"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="9AE634FCDF451443B2699130B03E9887" type="3">
+		<field_ref uuid="39079DD09AA36947B833A077AABE0CE6" name="UUID_CompanyType">
+			<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="9CEE78492358F54D8FAE398F35A45555" type="7">
 		<field_ref uuid="EE9C517A8C59724B8559A5DCB59FE560" name="UUID">
 			<table_ref uuid="21C997F4FF841640B547868BE38C05ED" name="LotStep"/>
@@ -2567,7 +2565,7 @@
 	</index>
 	<index kind="regular" unique_keys="true" uuid="C6437336BE9B5248AC5135175C986120" type="7">
 		<field_ref uuid="02E579F073336243A05659451C9556CB" name="UUID">
-			<table_ref uuid="274BC7137B6CF6408C85D67A6A99C8AF" name="CompanyType"/>
+			<table_ref uuid="274BC7137B6CF6408C85D67A6A99C8AF" name="(CompanyType)"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="C67D3D6C3D35D4438C78BB6A985AC054" type="3">

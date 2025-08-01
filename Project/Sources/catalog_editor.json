@@ -685,6 +685,21 @@
 				}
 			}
 		},
+		"CompanyType": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 922,
+				"top": 163,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6
+		},
 		"sfw_EventType": {
 			"color": {
 				"red": 237,
@@ -701,7 +716,7 @@
 			"displayable_fields_count": 3,
 			"fields_ordering": 1
 		},
-		"CompanyType": {
+		"(CompanyType)": {
 			"color": {
 				"red": 255,
 				"green": 255,
@@ -1645,28 +1660,10 @@
 				"width": 182.015625,
 				"height": 313.33203125
 			},
-			"displayable_fields_count": 12,
-			"fields": {
-				"UUID_CompanyType": {
-					"color": {
-						"red": 255,
-						"green": 255,
-						"blue": 255,
-						"alpha": 0
-					}
-				}
-			}
+			"displayable_fields_count": 12
 		}
 	},
 	"relations": {
-		"EE7A991A23F88940A19CFA298610DD08": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
 		"0593618F32AA47E0B03B170604C8D3B2": {
 			"color": {
 				"red": 255,
