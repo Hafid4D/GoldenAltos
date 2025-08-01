@@ -213,7 +213,13 @@
 				"voided": {
 					"position": 14
 				},
-				"revision": {
+				"UUID_Revision": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					},
 					"position": 12
 				},
 				"UUID_Staff": {
@@ -659,6 +665,31 @@
 			"fields_ordering": 1,
 			"fields": {
 				"UUID_NotificationType": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
+		},
+		"Revision": {
+			"color": {
+				"red": 207,
+				"green": 209,
+				"blue": 165,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 1714.3526611328,
+				"top": 354.39376831055,
+				"width": 162,
+				"height": 163.33203125
+			},
+			"displayable_fields_count": 5,
+			"fields": {
+				"UUID": {
 					"color": {
 						"red": 255,
 						"green": 255,
@@ -1728,6 +1759,14 @@
 		}
 	},
 	"relations": {
+		"F525F81F4C1F4801B743AD30F535F348": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
 		"C25C35B1A209492C83653EC7F60E5561": {
 			"color": {
 				"red": 255,

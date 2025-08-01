@@ -727,6 +727,16 @@
 		<field name="levelID" uuid="FB849C44CC3F48F58AFE34FC14572125" type="3" never_null="true" id="5"/>
 		<primary_key field_name="UUID" field_uuid="42B24EAE59DD4900B3A2BAF05FC016F1"/>
 	</table>
+	<table name="Revision" uuid="29604671FA2A4476BBFC5BF467B80F05" id="56">
+		<field name="UUID" uuid="5F21577CC2BE493CA3F18E8E33520528" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="levelID" uuid="218C2B1450BE42AFBFB47CF5EC84CE94" type="3" never_null="true" id="2"/>
+		<field name="code" uuid="E923321DB669447C8EEADF3578BFD874" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="name" uuid="338CC40E187A4215A367882E574CCE0B" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="color" uuid="DA797FA43F604FEA90014A99C8F316F4" type="10" limiting_length="255" never_null="true" id="5"/>
+		<primary_key field_name="UUID" field_uuid="5F21577CC2BE493CA3F18E8E33520528"/>
+	</table>
 	<table name="sfw_Notification" uuid="5B73B25D951B4B17AB99971FB0079E64" id="69">
 		<field name="UUID" uuid="37203E4F21D84C8EBC40DFC936CBFFA1" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_target" uuid="B24DECF1CAF741CABEBD6960E1AD5595" type="10" store_as_UUID="true" id="2"/>
@@ -1078,7 +1088,9 @@
 		<field name="termsConditions" uuid="841C2C0BB623401EA6087977440B07D8" type="21" blob_switch_size="2147483647" never_null="true" id="9"/>
 		<field name="stmpCreation" uuid="F97449D28C8C45E9A331B9D93BEBB59F" type="4" never_null="true" id="10"/>
 		<field name="UUID_Staff" uuid="0EACB0E17BBD4F639E0C142211979D18" type="10" store_as_UUID="true" never_null="true" id="11"/>
-		<field name="revision" uuid="1AC1E65EF74F4F6C8D21783AB1121A51" type="10" limiting_length="255" never_null="true" id="12"/>
+		<field name="UUID_Revision" uuid="1AC1E65EF74F4F6C8D21783AB1121A51" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="12">
+			<field_extra multi_line="false"/>
+		</field>
 		<field name="UUID_Customer" uuid="F30954D8AEF34E28A8015DEADE8362D2" type="10" store_as_UUID="true" never_null="true" id="13"/>
 		<field name="voided" uuid="93C37C641AE2804F9E79B02DA8D0D64D" type="1" never_null="true" id="14"/>
 		<field name="UUID_ServiceType" uuid="5D9A39B0F2984CED9C5FECF964794B22" type="10" store_as_UUID="true" never_null="true" id="15"/>
@@ -2072,6 +2084,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="F525F81F4C1F4801B743AD30F535F348" name_Nto1="revision" name_1toN="quotes" state="1">
+		<related_field kind="source">
+			<field_ref uuid="1AC1E65EF74F4F6C8D21783AB1121A51" name="UUID_Revision">
+				<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="5F21577CC2BE493CA3F18E8E33520528" name="UUID">
+				<table_ref uuid="29604671FA2A4476BBFC5BF467B80F05" name="Revision"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="005E48A922A4464DB92973931B467ACF" type="3">
 		<field_ref uuid="17F71D68FA714CE9A75ED79CA63E3BE2" name="UUID_Lead">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
@@ -2205,6 +2229,11 @@
 	<index kind="regular" unique_keys="true" uuid="1FEAD11AEFB24168AD1B785362ACF144" type="1">
 		<field_ref uuid="8FC82746020F4EB6BA85B431DFE019A8" name="UUID">
 			<table_ref uuid="521E751963104DC299061CF1588CADEF" name="sfw_EMailLog"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="217F18850D164B47A3813A83525C7283" type="3">
+		<field_ref uuid="1AC1E65EF74F4F6C8D21783AB1121A51" name="UUID_Revision">
+			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="21DCC4A57F29B943B8652C76784095CE" type="3">
@@ -2485,6 +2514,11 @@
 	<index kind="regular" uuid="72D8F1D0BCF0486BBE43C46E84F16301" type="3">
 		<field_ref uuid="7B50ED3E956E4D61A6BECCCFC24BDB01" name="UUID_Scheduler">
 			<table_ref uuid="0A7AAD6A6AAB448E9F91A0CF0CC592C6" name="sfw_SchedulerLog"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="74B1CBE438144A4580385CB3823B89E4" type="1">
+		<field_ref uuid="5F21577CC2BE493CA3F18E8E33520528" name="UUID">
+			<table_ref uuid="29604671FA2A4476BBFC5BF467B80F05" name="Revision"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="770880AC7588704C9385F72F115863CD" type="1">

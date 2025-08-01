@@ -405,7 +405,7 @@
 					"type": "subform",
 					"left": 0,
 					"top": 393,
-					"width": 529,
+					"width": 524,
 					"height": 170,
 					"detailForm": "_ga_subpanel_communication",
 					"dataSource": "Form:C1466.subFormCommunication",
@@ -1024,7 +1024,7 @@
 			}
 		}
 	],
-	"geometryStamp": 716,
+	"geometryStamp": 719,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {
