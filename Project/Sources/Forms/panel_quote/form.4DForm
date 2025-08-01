@@ -263,6 +263,34 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"method": "ObjectMethods/entryField_customer.4dm"
+				},
+				"pup_QuoteRevision": {
+					"type": "button",
+					"top": 34,
+					"left": 815,
+					"width": 172,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Revision",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_QuoteRevision.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"label_0_9": {
+					"type": "text",
+					"top": 37,
+					"left": 741,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Revision"
 				}
 			}
 		},
@@ -1024,7 +1052,7 @@
 			}
 		}
 	],
-	"geometryStamp": 719,
+	"geometryStamp": 722,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {

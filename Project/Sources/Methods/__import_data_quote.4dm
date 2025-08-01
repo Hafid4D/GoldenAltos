@@ -132,17 +132,21 @@ If ($assumptions_file.exists)
 			End if 
 			$eQuote.stmpCreation:=cs:C1710.sfw_stmp.me.build(Date:C102($quote.Qdate))
 			
-			$eRevision:=ds:C1482.Revision.query("name == :1"; $quote.Revision).first()
-			$levelRevision:=1
-			If ($eRevision=Null:C1517)
-				$eRevision:=ds:C1482.Revision.new()
-				$eRevision.name:=Uppercase:C13($quote.Revision)
-				$eRevision.code:=Uppercase:C13($quote.Revision)
-				$eRevision.levelID:=$levelRevision
-				$eRevision.save()
-				$levelRevision+=1
+			If ($quote.Revision#"")
+				$eRevision:=ds:C1482.Revision.query("name == :1"; $quote.Revision).first()
+				$levelRevision:=1
+				If ($eRevision=Null:C1517)
+					$eRevision:=ds:C1482.Revision.new()
+					$eRevision.name:=Uppercase:C13($quote.Revision)
+					$eRevision.code:=Uppercase:C13($quote.Revision)
+					$eRevision.levelID:=$levelRevision
+					$eRevision.save()
+					$levelRevision+=1
+				End if 
+				$eQuote.UUID_Revision:=$eRevision.UUID
+			Else 
+				$eQuote.UUID_Revision:=""
 			End if 
-			$eQuote.UUID_Revision:=$eRevision.UUID
 			$eQuote.division:=$quote.Division
 			$eQuote.voided:=$quote.void
 			$eQuote.save()

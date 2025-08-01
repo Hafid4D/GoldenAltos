@@ -58,6 +58,7 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_quoteStatus()
 	This:C1470.drawPup_quoteCustomer()
 	This:C1470.drawPup_serviceType()
+	This:C1470.drawPup_quoteRevision()
 	
 	Form:C1466.contactDetails:=This:C1470.contactInfo()
 	Form:C1466.subFormAddress.address:=Form:C1466.contactDetails.address
@@ -426,6 +427,51 @@ Function onBoundVariableChange()
 		End if 
 	Else 
 		LISTBOX SELECT ROW:C912(*; "lb_quoteLines"; 0; lk remove from selection:K53:3)
+	End if 
+	
+Function pup_revision()
+	If (Form:C1466.sfw.checkIsInModification())
+		$menu:=Create menu:C408
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.quoteRevision=Null:C1517)
+			ds:C1482.Revision.cacheLoad()
+		End if 
+		
+		For each ($eRvision; Storage:C1525.cache.quoteRevision)
+			APPEND MENU ITEM:C411($menu; $eRvision.name; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $eRvision.UUID)
+			If ($eRvision.code=Form:C1466.current_item.revision.code)
+				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+				If (Is Windows:C1573)
+					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+				End if 
+			End if 
+		End for each 
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		Case of 
+			: ($choose#"")
+				Form:C1466.current_item.UUID_Revision:=$choose
+				cs:C1710.panel_quote.me._activate_save_cancel_button()
+		End case 
+		
+	End if 
+	This:C1470.drawPup_quoteRevision()
+	
+Function drawPup_quoteRevision()
+	var $quoteRevision : cs:C1710.RevisionEntity
+	If (Form:C1466.current_item#Null:C1517)
+		$quoteRevision:=Form:C1466.current_item.revision
+		If ($quoteRevision#Null:C1517)
+			$parts:=New collection:C1472($quoteRevision.code; $quoteRevision.name)
+			$revisionName:=$parts.join(" - "; ck ignore null or empty:K85:5)
+			$color:=cs:C1710.sfw_htmlColor.me.getName($quoteRevision.color)
+		Else 
+			$revisionName:="Revision"
+			$color:=""
+		End if 
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_QuoteRevision"; $revisionName; $pathIcon; ($quoteRevision=Null:C1517))
 	End if 
 	
 Function pup_status()

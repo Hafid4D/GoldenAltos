@@ -23,5 +23,6 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setLBItemsOrderBy("subject")
 	
-	
 	$entry.enableTransaction()
+	
+	$entry.activateComment()
