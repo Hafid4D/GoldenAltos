@@ -33,16 +33,6 @@
 	"pages": [
 		{
 			"objects": {
-				"Rectangle": {
-					"type": "rectangle",
-					"top": 114,
-					"left": 1,
-					"width": 5000,
-					"height": 704,
-					"fill": "#B1CFDE",
-					"strokeWidth": 0,
-					"stroke": "#FFFFFF"
-				},
 				"label_0_1": {
 					"type": "text",
 					"top": 12,
@@ -135,6 +125,16 @@
 					"icon": "/RESOURCES/sfw/image/skin/rainbow/btn4states/edit-24x24.png",
 					"iconFrames": 4,
 					"method": "ObjectMethods/bSpecEdit.4dm"
+				},
+				"backgroundRectangle": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 0,
+					"width": 5000,
+					"height": 704,
+					"fill": "#E3E3E3",
+					"strokeWidth": 0,
+					"stroke": "#FFFFFF"
 				}
 			}
 		},
@@ -148,7 +148,7 @@
 					"height": 85,
 					"stroke": "#FFFFFF",
 					"fill": "transparent",
-					"strokeWidth": 1,
+					"strokeWidth": 2,
 					"visibility": "hidden"
 				},
 				"Rectangle7": {
@@ -660,7 +660,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 349,
+	"geometryStamp": 360,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {
