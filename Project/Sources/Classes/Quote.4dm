@@ -25,4 +25,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.enableTransaction()
 	
+	$entry.activateEvent("QuoteEvent"; "UUID_Quote")
+	//$entry.setAttributesToTrackInModificationEvent("currentNextStep")
+	$entry.setEventOptions("dontCreateModifyEventIfNoTrackingAttribute")
+	$entry.setLinkManyToOneToTrackInModificationEvent("Revision"; "UUID_Revision"; "revision.name")
+	
 	$entry.activateComment()
