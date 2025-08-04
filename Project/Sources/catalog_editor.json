@@ -472,10 +472,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
+
 				"left": 440,
 				"top": 1769,
 				"width": 120,
 				"height": 167.33203125
+
 			},
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
@@ -512,7 +514,9 @@
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
+
 		"sfw_Scheduler": {
+
 			"color": {
 				"red": 255,
 				"green": 255,
@@ -544,6 +548,7 @@
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
+
 		"Revision": {
 			"color": {
 				"red": 255,
@@ -561,6 +566,7 @@
 			"fields_ordering": 1
 		},
 		"InteractionMethod": {
+
 			"color": {
 				"red": 255,
 				"green": 255,
@@ -640,6 +646,7 @@
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
+
 		"Unit": {
 			"color": {
 				"red": 255,
@@ -648,6 +655,7 @@
 				"alpha": 0
 			},
 			"coordinates": {
+
 				"left": 1440,
 				"top": 1275,
 				"width": 120,
@@ -1224,6 +1232,7 @@
 				"alpha": 0
 			},
 			"coordinates": {
+
 				"left": 640,
 				"top": 287,
 				"width": 120,
@@ -1231,6 +1240,7 @@
 			},
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
+
 		},
 		"CustomerEvent": {
 			"color": {
