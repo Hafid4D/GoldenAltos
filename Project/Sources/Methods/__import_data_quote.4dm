@@ -7,6 +7,7 @@ var $eCostumer : cs:C1710.CustomerEntity
 var $eTermConditon : cs:C1710.TermConditionEntity
 var $eQuoteStatus : cs:C1710.QuoteStatusEntity
 var $eEmployee : cs:C1710.StaffEntity
+var $eRevision : cs:C1710.RevisionEntity
 
 $assumptions_file:=Folder:C1567(fk data folder:K87:12).file("DataJson/quote_assumptions.json")
 If ($assumptions_file.exists)
@@ -63,7 +64,8 @@ If ($assumptions_file.exists)
 			
 			
 			$eQuote.moreData:=New object:C1471()
-			$eQuote.moreData.mainContact:=$eContact.UUID
+			$eQuote.moreData.mainContact:={UUID: $eContact.UUID}
+			$eQuote.UUID_Customer:=$eCostumer.UUID
 			$eQuote.code:=$quote.QuoteNumber
 			
 			If ($quote.Status#"")
@@ -129,7 +131,22 @@ If ($assumptions_file.exists)
 				$eQuote.optionalPreliminaryTxt_wr:=WP Import document:C1318($wpFile.platformPath)
 			End if 
 			$eQuote.stmpCreation:=cs:C1710.sfw_stmp.me.build(Date:C102($quote.Qdate))
-			$eQuote.revision:=$quote.Revision
+			
+			If ($quote.Revision#"")
+				$eRevision:=ds:C1482.Revision.query("name == :1"; $quote.Revision).first()
+				$levelRevision:=1
+				If ($eRevision=Null:C1517)
+					$eRevision:=ds:C1482.Revision.new()
+					$eRevision.name:=Uppercase:C13($quote.Revision)
+					$eRevision.code:=Uppercase:C13($quote.Revision)
+					$eRevision.levelID:=$levelRevision
+					$eRevision.save()
+					$levelRevision+=1
+				End if 
+				$eQuote.UUID_Revision:=$eRevision.UUID
+			Else 
+				$eQuote.UUID_Revision:=""
+			End if 
 			$eQuote.division:=$quote.Division
 			$eQuote.voided:=$quote.void
 			$eQuote.save()

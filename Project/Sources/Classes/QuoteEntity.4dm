@@ -74,4 +74,31 @@ Function preview()->$preview : Object
 	
 	$preview.conditions:=ds:C1482.TermCondition.query("UUID in :1"; This:C1470.termsConditions.UUIDs)
 	
+Function get dateCreation()->$createDate : Date
+	$createDate:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpCreation; True:C214)
 	
+Function get amount()->$amount : Real
+	$amount:=This:C1470.lines.sum("amount")
+	
+Function contacts()->$contacts : Collection
+	var $e_mainContact : cs:C1710.ContactEntity
+	var $secondaryContacts : cs:C1710.ContactSelection
+	
+	$contacts:=New collection:C1472()
+	If (This:C1470.moreData#Null:C1517) && (This:C1470.moreData.mainContact#Null:C1517)
+		$e_mainContact:=ds:C1482.Contact.get(This:C1470.moreData.mainContact.UUID)
+		If ($e_mainContact#Null:C1517)
+			$mainContact:=$e_mainContact.toObject()
+			$mainContact.type:="Main"
+			$contacts.push($mainContact)
+		End if 
+	End if 
+	
+	If (This:C1470.moreData#Null:C1517) && (This:C1470.moreData.secondaryContacts#Null:C1517)
+		$secondaryContacts:=ds:C1482.Contact.query("UUID in :1"; This:C1470.moreData.secondaryContacts)
+		For each ($e_contact; $secondaryContacts)
+			$contact:=$e_contact.toObject()
+			$contact.type:="Secondary"
+			$contacts.push($contact)
+		End for each 
+	End if 

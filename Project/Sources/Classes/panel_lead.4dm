@@ -191,8 +191,7 @@ Function pup_serviceType()
 		
 		Case of 
 			: ($choose#"")
-				$eServiceType:=ds:C1482.ServiceType.get($choose)
-				Form:C1466.current_item.UUID_ServiceType:=$eServiceType.UUID
+				Form:C1466.current_item.UUID_ServiceType:=$choose
 		End case 
 	End if 
 	This:C1470.drawPup_serviceType()
