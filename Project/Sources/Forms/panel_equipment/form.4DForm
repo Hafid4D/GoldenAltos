@@ -304,34 +304,6 @@
 					"fontWeight": "bold",
 					"textAlign": "left"
 				},
-				"label_testerType": {
-					"type": "text",
-					"top": 66,
-					"left": 613,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Tester type :"
-				},
-				"entryField_testerType": {
-					"type": "input",
-					"top": 66,
-					"left": 708,
-					"width": 190,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.testerType",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"textAlign": "left"
-				},
 				"entryField_calibrationNotRequired": {
 					"type": "checkbox",
 					"text": "Calibration Not Required",
@@ -363,8 +335,8 @@
 				"entryField_pmNotRequired": {
 					"type": "checkbox",
 					"text": "PM Not Required",
-					"top": 39,
-					"left": 1128,
+					"top": 66,
+					"left": 708,
 					"width": 190,
 					"height": 17,
 					"events": [
@@ -1103,7 +1075,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 514,
+	"geometryStamp": 518,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
