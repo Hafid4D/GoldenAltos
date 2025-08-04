@@ -11,7 +11,7 @@ $partData_log:=Folder:C1567(fk data folder:K87:12).file("DataJson/partData_expor
 If ($partData_log.exists)
 	$partDatas:=JSON Parse:C1218($partData_log.getText())
 	
-	TRUNCATE TABLE:C1051([PartData:48])
+	TRUNCATE TABLE:C1051([PartData:58])
 	
 	For each ($partData; $partDatas)
 		
@@ -37,7 +37,7 @@ $supplier_log:=Folder:C1567(fk data folder:K87:12).file("DataJson/suppliers_expo
 If ($supplier_log.exists)
 	$suppliers:=JSON Parse:C1218($supplier_log.getText())
 	
-	TRUNCATE TABLE:C1051([Supplier:47])
+	TRUNCATE TABLE:C1051([Supplier:57])
 	
 	For each ($supplier; $suppliers)
 		
@@ -201,7 +201,7 @@ $avml_log:=Folder:C1567(fk data folder:K87:12).file("DataJson/avlAml_export.json
 If ($avml_log.exists)
 	$avmls:=JSON Parse:C1218($avml_log.getText())
 	
-	TRUNCATE TABLE:C1051([AML:46])
+	TRUNCATE TABLE:C1051([RMA:46])
 	
 	For each ($avml; $avmls)
 		

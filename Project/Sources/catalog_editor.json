@@ -575,10 +575,10 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 505.33331298828,
-				"top": 426.66665649414,
-				"width": 166,
-				"height": 125.33203125
+				"left": 440,
+				"top": 1769,
+				"width": 120,
+				"height": 167.33203125
 			},
 			"displayable_fields_count": 4,
 			"fields_ordering": 1
@@ -699,6 +699,67 @@
 				}
 			}
 		},
+		"Units": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 3230,
+				"top": 1211,
+				"width": 120,
+				"height": 119.33203125
+			},
+			"displayable_fields_count": 3
+		},
+		"PartData": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 440,
+				"top": 1522,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
+		"Supplier": {
+			"color": {
+				"red": 128,
+				"green": 255,
+				"blue": 128,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 3844,
+				"top": 783,
+				"width": 196,
+				"height": 681.33203125
+			},
+			"displayable_fields_count": 30
+		},
+		"AML": {
+			"color": {
+				"red": 128,
+				"green": 255,
+				"blue": 128,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 3604,
+				"top": 984,
+				"width": 193,
+				"height": 482.33203125
+			},
+			"displayable_fields_count": 21
+		},
 		"InteractionMethod": {
 			"color": {
 				"red": 207,
@@ -766,18 +827,18 @@
 		},
 		"sfw_EventType": {
 			"color": {
-				"red": 237,
-				"green": 211,
-				"blue": 181,
-				"alpha": 255
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
 			},
 			"coordinates": {
-				"left": 0,
-				"top": 855,
-				"width": 183.41665649414,
-				"height": 104.33203125
+				"left": 240,
+				"top": 1522,
+				"width": 120,
+				"height": 167.33203125
 			},
-			"displayable_fields_count": 3,
+			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
 		"Interaction": {
@@ -830,66 +891,6 @@
 				}
 			}
 		},
-		"Units": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			},
-			"coordinates": {
-				"left": 3230,
-				"top": 1211,
-				"width": 120,
-				"height": 119.33203125
-			},
-			"displayable_fields_count": 3
-		},
-		"PartData": {
-			"color": {
-				"red": 128,
-				"green": 255,
-				"blue": 128,
-				"alpha": 255
-			},
-			"coordinates": {
-				"left": 3398,
-				"top": 1120,
-				"width": 163,
-				"height": 194.33203125
-			},
-			"displayable_fields_count": 7
-		},
-		"Supplier": {
-			"color": {
-				"red": 128,
-				"green": 255,
-				"blue": 128,
-				"alpha": 255
-			},
-			"coordinates": {
-				"left": 3844,
-				"top": 783,
-				"width": 196,
-				"height": 681.33203125
-			},
-			"displayable_fields_count": 30
-		},
-		"AML": {
-			"color": {
-				"red": 128,
-				"green": 255,
-				"blue": 128,
-				"alpha": 255
-			},
-			"coordinates": {
-				"left": 3604,
-				"top": 984,
-				"width": 193,
-				"height": 482.33203125
-			},
-			"displayable_fields_count": 21
-		},
 		"SpecControllingDept": {
 			"color": {
 				"red": 255,
@@ -937,7 +938,7 @@
 			},
 			"displayable_fields_count": 3
 		},
-		"(InteractionType)": {
+		"CompanyType": {
 			"color": {
 				"red": 255,
 				"green": 255,
@@ -945,12 +946,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1209.015625,
-				"top": 2104.013671875,
-				"width": 193,
-				"height": 131.33203125
+				"left": 240,
+				"top": 40,
+				"width": 120,
+				"height": 167.33203125
 			},
-			"displayable_fields_count": 4,
+			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
 		"InteractionType": {
@@ -1483,12 +1484,13 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2827,
-				"top": 222,
-				"width": 169,
-				"height": 193.33203125
+				"left": 640,
+				"top": 287,
+				"width": 120,
+				"height": 167.33203125
 			},
-			"displayable_fields_count": 7
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
 		},
 		"CustomerEvent": {
 			"color": {
