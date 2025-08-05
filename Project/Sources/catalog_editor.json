@@ -971,8 +971,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 240,
-				"top": 40,
+				"left": 211.04653930664,
+				"top": 0,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -1778,10 +1778,10 @@
 			"coordinates": {
 				"left": 692,
 				"top": 423,
-				"width": 149.015625,
-				"height": 196.33203125
+				"width": 159.95446777344,
+				"height": 239.15802001953
 			},
-			"displayable_fields_count": 7,
+			"displayable_fields_count": 9,
 			"fields_ordering": 1
 		}
 	},
