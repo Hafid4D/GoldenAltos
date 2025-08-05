@@ -18,6 +18,7 @@ If ($assumptions_file.exists)
 	$quote_file:=Folder:C1567(fk data folder:K87:12).file("DataJson/quotes.json")
 	If ($quote_file.exists)
 		$quotes:=JSON Parse:C1218($quote_file.getText())
+		TRACE:C157
 		For each ($quote; $quotes)
 			$eQuote:=ds:C1482.Quote.new()
 			

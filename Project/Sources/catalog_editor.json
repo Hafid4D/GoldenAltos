@@ -656,8 +656,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 283.66665649414,
-				"top": 48.333335876465,
+				"left": 336.20071411133,
+				"top": 124.52043914795,
 				"width": 182,
 				"height": 232.33203125
 			},
@@ -665,6 +665,31 @@
 			"fields_ordering": 1,
 			"fields": {
 				"UUID_NotificationType": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
+		},
+		"QuoteEvent": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 4713.4065856934,
+				"top": 976.88204956055,
+				"width": 169,
+				"height": 193.33203125
+			},
+			"displayable_fields_count": 7,
+			"fields": {
+				"UUID": {
 					"color": {
 						"red": 255,
 						"green": 255,
@@ -1801,15 +1826,40 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 650,
-				"top": 480,
-				"width": 171.015625,
-				"height": 282.33203125
+				"left": 692,
+				"top": 423,
+				"width": 159.95446777344,
+				"height": 239.15802001953
 			},
-			"displayable_fields_count": 11
+			"displayable_fields_count": 9,
+			"fields_ordering": 1
 		}
 	},
 	"relations": {
+		"85096A5E94564B19A0DB035D1B689839": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"309393617FBD4C159CCC9DA605D0AD2A": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"3D75BC15FEE941B8802DEACACC2C7566": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
 		"F525F81F4C1F4801B743AD30F535F348": {
 			"color": {
 				"red": 255,
