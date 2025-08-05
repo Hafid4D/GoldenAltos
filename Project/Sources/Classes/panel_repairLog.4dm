@@ -91,7 +91,7 @@ Function pup_equipId()
 	
 Function drawPup_fixOperator()
 	If (Form:C1466.current_item#Null:C1517)
-		$fixOperator:=ds:C1482.Staff.query("code= :1"; Form:C1466.current_item.fixedBy).first() || New object:C1471()
+		$fixOperator:=ds:C1482.Staff.query("staffID= :1"; Form:C1466.current_item.fixedBy).first() || New object:C1471()
 		$operatorCode:=$fixOperator.code
 		If ($operatorCode=Null:C1517)
 			$operatorCode:=""
@@ -148,7 +148,7 @@ End case
 		CLOSE WINDOW:C154($winRef)
 		
 		If (ok=1)
-			Form:C1466.current_item.fixedBy:=$form.item.code
+			Form:C1466.current_item.fixedBy:=$form.item.staffID
 			cs:C1710.panel_repairLog.me._activate_save_cancel_button()
 		End if 
 	End if 
@@ -158,7 +158,7 @@ End case
 	
 Function drawPup_reportOperator()
 	If (Form:C1466.current_item#Null:C1517)
-		$reportOperator:=ds:C1482.Staff.query("code= :1"; Form:C1466.current_item.reportedBy).first() || New object:C1471()
+		$reportOperator:=ds:C1482.Staff.query("staffID= :1"; Form:C1466.current_item.reportedBy).first() || New object:C1471()
 		$operatorCode:=$reportOperator.code
 		If ($operatorCode=Null:C1517)
 			$operatorCode:=""
@@ -212,7 +212,7 @@ End case
 		CLOSE WINDOW:C154($winRef)
 		
 		If (ok=1)
-			Form:C1466.current_item.reportedBy:=$form.item.code
+			Form:C1466.current_item.reportedBy:=$form.item.staffID
 			cs:C1710.panel_repairLog.me._activate_save_cancel_button()
 		End if 
 	End if 
@@ -225,10 +225,10 @@ Function btnOpenOperator($operatorType)
 	Case of 
 			
 		: ($operatorType="fixedBy")
-			$es:=ds:C1482.Staff.query("code = :1"; Form:C1466.current_item.fixedBy)
+			$es:=ds:C1482.Staff.query("staffID = :1"; Form:C1466.current_item.fixedBy)
 			
 		: ($operatorType="reportedBy")
-			$es:=ds:C1482.Staff.query("code = :1"; Form:C1466.current_item.reportedBy)
+			$es:=ds:C1482.Staff.query("staffID = :1"; Form:C1466.current_item.reportedBy)
 			
 	End case 
 	

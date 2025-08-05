@@ -17,5 +17,5 @@ local Function cacheLoad()
 	
 	
 Function _loadAsCollection()->$ImprovementResponses : Collection
-	$ImprovementResponses:=This:C1470.all().toCollection("UUID, responseID,name,color").orderBy("responseID")
+	$ImprovementResponses:=This:C1470.all().toCollection("UUID, responseID,name").orderBy("responseID")
 	
