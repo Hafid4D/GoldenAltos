@@ -16,37 +16,16 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanel("panel_contact")
 	$entry.setLBItemsColumn("companyName"; "Company name"; "width:200")
 	$entry.setLBItemsColumn("title"; "Title"; "width:100")
-	//$entry.setLBItemsColumn("companyType.name"; "Company Type"; "width:100")
 	$entry.setLBItemsOrderBy("companyName")
 	
 	$entry.enableTransaction()
 	
 	$entry.activateFavorite()
 	
-	//$filter:=cs.sfw_definitionFilter.new("filterCustomer")
-	//$filter.setDefaultTitle("All customers")
-	//$filter.setFilterByLinkedEntity("Customer"; "UUID_Customer"; ""; "customer")
-	//$filter.setDynamicTitle("name"; "## customers")
-	//$entry.addFilter($filter)
-	
-	//$filter:=cs.sfw_definitionFilter.new("filterSupplier")
-	//$filter.setDefaultTitle("All suppliers")
-	//$filter.setFilterByLinkedEntity("Supplier"; "UUID_Supplier"; ""; "supplier")
-	//$filter.setDynamicTitle("name"; "## suppliers")
-	//$entry.addFilter($filter)
-	
-	//$filter:=cs.sfw_definitionFilter.new("filterCompanyType")
-	//$filter.setDefaultTitle("All Company types")
-	//$filter.setFilterByLinkedEntity("CompanyType"; "UUID_CompanyType"; ""; "companyType")
-	//$filter.setDynamicTitle("name"; "## companyType")
-	//$entry.addFilter($filter)
 	
 	$entry.activateEvent("ContactEvent"; "UUID_Contact")
 	$entry.setAttributesToTrackInModificationEvent("firstName"; "lastName"; "code"; "title")
 	$entry.setEventOptions("CreateModifyEventIfNoTrackingAttribute")
-	
-	
-	
 	
 	
 	
@@ -57,7 +36,6 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view:=cs:C1710.sfw_definitionView.new("suppliersContacts"; "Suppliers Contacts")
 	$view.setLBItemsColumn("companyName"; "Company name"; "width:200")
 	$view.setLBItemsColumn("title"; "Title"; "width:100")
-	//$view.setLBItemsColumn("companyType.name"; "Company Type"; "width:100")
 	$view.setLBItemsOrderBy("companyName")
 	$view.setSubset("suppliersContacts")
 	$entry.setView($view)
@@ -66,20 +44,37 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view:=cs:C1710.sfw_definitionView.new("customersContacts"; "Customers Contacts")
 	$view.setLBItemsColumn("companyName"; "Company name"; "width:200")
 	$view.setLBItemsColumn("title"; "Title"; "width:100")
-	//$view.setLBItemsColumn("companyType.name"; "Company Type"; "width:100")
 	$view.setLBItemsOrderBy("companyName")
 	$view.setSubset("customersContacts")
 	$entry.setView($view)
 	
 	
 Function suppliersContacts()->$contacts : cs:C1710.Contact
-	$formula:=Formula:C1597(This:C1470.supplier#Null:C1517)
-	$contacts:=ds:C1482.Contact.query(":1"; $formula)
+	var $suppliersUUIDs : Collection:=New collection:C1472()
+	$suppliersUUIDs:=ds:C1482.Supplier.all().toCollection().extract("UUID")  //$formula:=Formula(This.supplier#Null)
+	$contacts:=ds:C1482.Contact.query("UUID_Company IN :1"; $suppliersUUIDs)
 	
 Function customersContacts()->$contacts : cs:C1710.Contact
-	$formula:=Formula:C1597(This:C1470.customer#Null:C1517)
-	$contacts:=ds:C1482.Contact.query(":1"; $formula)
+	var $customersUUIDs : Collection:=New collection:C1472()
+	$customersUUIDs:=ds:C1482.Customer.all().toCollection().extract("UUID")  //$formula:=Formula(This.customer#Null)
+	$contacts:=ds:C1482.Contact.query("UUID_Company IN :1"; $customersUUIDs)
 	
 	
+local Function cacheLoad()
 	
+	If (Storage:C1525.cache=Null:C1517)
+		Use (Storage:C1525)
+			Storage:C1525.cache:=New shared object:C1526
+		End use 
+	End if 
+	If (Storage:C1525.cache.companyTypes=Null:C1517)
+		$companyTypes:=This:C1470._loadAsCollection()
+		Use (Storage:C1525.cache)
+			Storage:C1525.cache.companyTypes:=$companyTypes.copy(ck shared:K85:29; Storage:C1525.cache)
+		End use 
+	End if 
+	
+	
+Function _loadAsCollection()->$companyTypes : Collection
+	$companyTypes:=New collection:C1472("Supplier"; "Customer")
 	

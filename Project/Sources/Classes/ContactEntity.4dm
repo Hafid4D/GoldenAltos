@@ -4,6 +4,18 @@ Class extends Entity
 Function get fullName()->$fullName : Text
 	$fullName:=This:C1470.firstName+" "+This:C1470.lastName
 	
+Function getCompanyType()->$company : Text
+	var $supplier : cs:C1710.SupplierEntity
+	$supplier:=ds:C1482.Supplier.query("UUID = :1"; This:C1470.UUID_Company).first()
+	If ($supplier#Null:C1517)
+		$company:="Supplier"
+	Else 
+		var $customer : cs:C1710.CustomerEntity
+		$customer:=ds:C1482.Customer.query("UUID = :1"; This:C1470.UUID_Company).first()
+		If ($customer#Null:C1517)
+			$company:="Customer"
+		End if 
+	End if 
 	
 local Function rebuildAddress($type : Text)->$address : Object
 	$type:=String:C10($type)="" ? "main" : $type
