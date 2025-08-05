@@ -9,8 +9,8 @@
 	"windowMinHeight": 0,
 	"windowMaxWidth": 32767,
 	"windowMaxHeight": 32767,
-	"rightMargin": 0,
-	"bottomMargin": 0,
+	"rightMargin": 5,
+	"bottomMargin": 10,
 	"events": [
 		"onLoad",
 		"onDataChange",
@@ -24,6 +24,142 @@
 		},
 		{
 			"objects": {
+				"Rectangle18": {
+					"type": "rectangle",
+					"top": 90,
+					"left": 166,
+					"width": 543,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle19": {
+					"type": "rectangle",
+					"top": 331,
+					"left": 166,
+					"width": 543,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle20": {
+					"type": "rectangle",
+					"top": 584,
+					"left": 166,
+					"width": 543,
+					"height": 60,
+					"stroke": "transparent"
+				},
+				"Rectangle21": {
+					"type": "rectangle",
+					"top": 152,
+					"left": 166,
+					"width": 543,
+					"height": 60,
+					"stroke": "transparent"
+				},
+				"Rectangle22": {
+					"type": "rectangle",
+					"top": 254,
+					"left": 166,
+					"width": 543,
+					"height": 60,
+					"stroke": "transparent"
+				},
+				"Rectangle23": {
+					"type": "rectangle",
+					"top": 405,
+					"left": 166,
+					"width": 543,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle24": {
+					"type": "rectangle",
+					"top": 368,
+					"left": 515,
+					"width": 194,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle25": {
+					"type": "rectangle",
+					"top": 479,
+					"left": 515,
+					"width": 194,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle26": {
+					"type": "rectangle",
+					"top": 541,
+					"left": 515,
+					"width": 194,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle27": {
+					"type": "rectangle",
+					"top": 16,
+					"left": 515,
+					"width": 194,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle28": {
+					"type": "rectangle",
+					"top": 53,
+					"left": 515,
+					"width": 194,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle29": {
+					"type": "rectangle",
+					"top": 442,
+					"left": 166,
+					"width": 543,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle30": {
+					"type": "rectangle",
+					"top": 479,
+					"left": 166,
+					"width": 195,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle31": {
+					"type": "rectangle",
+					"top": 541,
+					"left": 166,
+					"width": 195,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle32": {
+					"type": "rectangle",
+					"top": 16,
+					"left": 166,
+					"width": 195,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle33": {
+					"type": "rectangle",
+					"top": 53,
+					"left": 166,
+					"width": 195,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle34": {
+					"type": "rectangle",
+					"top": 368,
+					"left": 166,
+					"width": 195,
+					"height": 23,
+					"stroke": "transparent"
+				},
 				"Rectangle16": {
 					"type": "rectangle",
 					"top": 90,
@@ -826,8 +962,8 @@
 			}
 		}
 	],
-	"geometryStamp": 6,
-	"shared": false,
+	"geometryStamp": 35,
+	"shared": true,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
