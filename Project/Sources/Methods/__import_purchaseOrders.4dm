@@ -312,6 +312,8 @@ import inventories
 If (True:C214)
 	TRUNCATE TABLE:C1051([Inventory:126])
 	TRUNCATE TABLE:C1051([InventoryPull:127])
+	TRUNCATE TABLE:C1051([Location:47])
+	TRUNCATE TABLE:C1051([Unit:48])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/inventory_export.json")
 	
@@ -321,61 +323,104 @@ If (True:C214)
 		$inventory_e:=ds:C1482.Inventory.new()
 		
 		$inventory_e.customerSpecific:=$record.customerSpecific
-		$inventory_e.partNum:=$record.partNum
+		$inventory_e.partNumber:=$record.partNum
 		$inventory_e.vendor:=$record.vendor
 		$inventory_e.description:=$record.description
 		$inventory_e.classification:=$record.classification
-		$inventory_e.lotNumber:=$record.lotNumber
+		//$inventory_e.partLotNumber:=$record.lotNumber
 		$inventory_e.stockNum:=$record.stockNum
-		$inventory_e.dateIn:=$record.dateIn
+		$inventory_e.dateIn:=cs:C1710.sfw_stmp.me.build(Date:C102($record.dateIn))
 		$inventory_e.expirationDate:=$record.expirationDate
 		$inventory_e.qtyInStock:=$record.qtyInStock
 		$inventory_e.unitCost:=$record.unitCost
-		$inventory_e.inventoryUnits:=$record.inventoryUnits
+		$inventory_e.units:=$record.inventoryUnits
 		$inventory_e.currency:=$record.currency
-		$inventory_e.binLocation:=$record.binLocation
-		$inventory_e.recdBy:=$record.recdBy
-		$inventory_e.division:=$record.division
+		$inventory_e.location:=$record.binLocation
+		$inventory_e.receivedBy:=$record.recdBy
 		$inventory_e.totalCost:=$record.totalCost
-		$inventory_e.property:=$record.property
 		$inventory_e.availableQty:=$record.AvailableQty
-		$inventory_e.originalQty:=$record.originalQty
+		$inventory_e.initiallQty:=$record.originalQty
+		$inventory_e.inventoryID:=(ds:C1482.Inventory.all().length>0) ? ds:C1482.Inventory.all().max("inventoryID")+1 : 1
+		$inventory_e.code:="INV"+String:C10($inventory_e.inventoryID; "00000#")
+		
+		$staff_es:=ds:C1482.Staff.query("code = :1"; $inventory_e.receivedBy)
+		
+		If ($staff_es.length>0)
+			$inventory_e.UUID_Staff:=$staff_es[0].UUID
+		End if 
 		
 		$res:=$inventory_e.save()
 		
 		If (Not:C34($res.success))
 			TRACE:C157
 		Else 
-			For each ($pull; $record.pulls)
-				$pull_e:=ds:C1482.InventoryPull.new()
-				
-				$pull_e.partNum:=$pull.partNum
-				$pull_e.qty:=$pull.qty
-				$pull_e.cost:=$pull.partNum
-				$pull_e.datePulled:=$pull.datePulled
-				$pull_e.jobNumber:=$pull.jobNumber
-				$pull_e.uniqueID:=$pull.uniqueID
-				$pull_e.pulledBy:=$pull.pulledBy
-				$pull_e.division:=$pull.division
-				$pull_e.docsInDocServer:=$pull.docsInDocServer
-				$pull_e.currency:=$pull.currency
-				$pull_e.units:=$pull.units
-				$pull_e.currency:=$pull.currency
-				$pull_e.pullMode:=$pull.pullMode
-				$pull_e.lotNumber:=$pull.lotNumber
-				$pull_e.property:=$pull.property
-				$pull_e.jobInvoiceDate:=$pull.jobInvoiceDate
-				$pull_e.UUID_Inventory:=$inventory_e.UUID
-				
-				$res:=$pull_e.save()
-				
-				If (Not:C34($res.success))
-					TRACE:C157
-				End if 
-			End for each 
+			//For each ($pull; $record.pulls)
+			//$pull_e:=ds.InventoryPull.new()
+			
+			//$pull_e.partNum:=$pull.partNum
+			//$pull_e.qty:=$pull.qty
+			//$pull_e.cost:=$pull.partNum
+			//$pull_e.datePulled:=$pull.datePulled
+			//$pull_e.jobNumber:=$pull.jobNumber
+			//$pull_e.uniqueID:=$pull.uniqueID
+			//$pull_e.pulledBy:=$pull.pulledBy
+			//$pull_e.division:=$pull.division
+			//$pull_e.docsInDocServer:=$pull.docsInDocServer
+			//$pull_e.currency:=$pull.currency
+			//$pull_e.units:=$pull.units
+			//$pull_e.currency:=$pull.currency
+			//$pull_e.pullMode:=$pull.pullMode
+			//$pull_e.lotNumber:=$pull.lotNumber
+			//$pull_e.property:=$pull.property
+			//$pull_e.jobInvoiceDate:=$pull.jobInvoiceDate
+			//$pull_e.UUID_Inventory:=$inventory_e.UUID
+			
+			//$res:=$pull_e.save()
+			
+			//If (Not($res.success))
+			//TRACE
+			//End if 
+			//End for each 
 		End if 
 		
 	End for each 
+	
+	$locations:=ds:C1482.Inventory.all().distinct("location")
+	
+	For each ($location; $locations)
+		$location_e:=ds:C1482.Location.new()
+		$location_e.name:=$location
+		$res:=$location_e.save()
+		
+		If (Not:C34($res.success))
+			TRACE:C157
+		End if 
+	End for each 
+	
+	$units:=ds:C1482.Inventory.all().distinct("units")
+	
+	For each ($unit; $units)
+		$unit_e:=ds:C1482.Unit.new()
+		$unit_e.name:=$unit
+		$res:=$unit_e.save()
+		
+		If (Not:C34($res.success))
+			TRACE:C157
+		End if 
+	End for each 
+	
+	$classifications:=ds:C1482.Inventory.all().distinct("classification")
+	
+	For each ($classification; $classifications)
+		$classification_e:=ds:C1482.Classification.new()
+		$classification_e.name:=$classification
+		$res:=$classification_e.save()
+		
+		If (Not:C34($res.success))
+			TRACE:C157
+		End if 
+	End for each 
+	
 End if 
 
 /**
