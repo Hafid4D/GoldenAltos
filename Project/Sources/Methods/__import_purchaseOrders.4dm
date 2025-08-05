@@ -665,8 +665,10 @@ If (True:C214)
 	
 	$records:=JSON Parse:C1218($file.getText())
 	
-	
+	$counter:=0
 	For each ($record; $records)
+		$counter:=$counter+1
+		
 		$eDepartment:=ds:C1482.Department.query("name == :1"; $record.department).first()
 		If ($eDepartment=Null:C1517)
 			$eDepartment:=ds:C1482.Department.new()
@@ -680,14 +682,14 @@ If (True:C214)
 		$staff_e.retrainDate:=$record.retrainDate
 		$staff_e.terminationDate:=$record.terminationDate
 		$staff_e.creationDate:=cs:C1710.sfw_stmp.me.getDate($record.creationDate)
-		$staff_e.code:=$record.code
+		$staff_e.code:=Split string:C1554($record.code; "\r"; sk trim spaces:K86:2).join("\r")
 		$staff_e.UUID_Department:=$eDepartment.UUID
 		$staff_e.terminated:=$record.terminated
 		$staff_e.hireDate:=$record.hireDate
 		$staff_e.division:=$record.division
 		$staff_e.citizenShipStatus:=$record.citizenShipStatus
 		$staff_e.contactDetails:=$record.contactDetails
-		
+		$staff_e.staffID:=$counter
 		//If ($staff_e.firstName="Analyn") & ($staff_e.lastName="Tolentino")
 		//TRACE
 		//End if 

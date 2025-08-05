@@ -31,7 +31,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListAction("Print PM Sticker"; "_ga_printPMStickers")
 	
 	$entry.setItemAction("Print Repair Log Report"; "_ga_printRepairLogReport")
-	$entry.setItemAction("Print Usage Log Equip/Traveler"; "_ga_usageLogReport")
+	$entry.setItemAction("Print Usage Log EquipTraveler"; "_ga_usageLogReport")
 	
 	
 	$entry.enableTransaction()

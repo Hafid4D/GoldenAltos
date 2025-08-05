@@ -156,7 +156,7 @@ End for
 var $eUnit : cs:C1710.UnitsEntity
 var $units : Collection:=New collection:C1472("Bag"; "Can"; "EA"; "Hour"; "Lot"; "Pcs"; "Roll"; "Set"; "Box"; "Spool"; "Gallon"; "Ream"; "Case"; \
 "Pack"; "Yesr"; "Lbs"; "Pair")
-TRUNCATE TABLE:C1051([Units:59])
+TRUNCATE TABLE:C1051([Units:49])
 For ($i; 0; $units.length-1)
 	$eUnit:=ds:C1482.Units.new()
 	$eUnit.unitID:=$i+1

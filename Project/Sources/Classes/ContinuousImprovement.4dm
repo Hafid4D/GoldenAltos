@@ -13,6 +13,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setPanel("panel_continuousImprovement")
 	$entry.setPanelPage(1; ""; "Main")
+	$entry.setPanelPage(2; ""; "seconde Windows")
 	
 	$entry.setLBItemsColumn("item"; "Item#"; "width:125")
 	//$entry.setLBItemsColumn("interestedParty"; "Interested Party"; "width:125")

@@ -31,16 +31,18 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	// MARK: -Filters
 	
 	$filter:=cs:C1710.sfw_definitionFilter.new("filterFixOperator")
-	$filter.setDefaultTitle("All Report Operators")
-	$filter.setFilterByLinkedEntity("Employee"; "fixedBy"; ""; "UUID")
+	$filter.setDefaultTitle("All Fix Operators")
+	$filter.setFilterByIDInTable("Staff"; "staffID"; "fixedBy")
+	//$filter.setFilterByLinkedEntity("Staff"; "fixedBy"; ""; "code")
 	$filter.setDynamicTitle("code"; "## Fixed by")
 	$filter.setOrderForItems("code")
 	$filter.setAttributeLabelForItem("code")
 	$entry.addFilter($filter)
 	
 	$filter:=cs:C1710.sfw_definitionFilter.new("filterReportOperator")
-	$filter.setDefaultTitle("All Fix Operators")
-	$filter.setFilterByLinkedEntity("Employee"; "reportedBy"; ""; "UUID")
+	$filter.setDefaultTitle("All Report Operators")
+	$filter.setFilterByIDInTable("Staff"; "staffID"; "reportedBy")
+	//$filter.setFilterByLinkedEntity("Staff"; "reportedBy"; ""; "code")
 	$filter.setDynamicTitle("code"; "## Reported by")
 	$filter.setOrderForItems("code")
 	$filter.setAttributeLabelForItem("code")
@@ -80,7 +82,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setSubset("repairsByInterval")
 	$entry.setView($view)
 	
-	//// MARK: Cuurent problem - All fixes
+	//// MARK: Current problem - All fixes
 	//$view:=cs.sfw_definitionView.new("closedProblems"; "Fixed problems")
 	//$view.setLBItemsColumn("systemID"; "system ID")
 	//$view.setLBItemsColumn("reportID"; "report ID"; "width:200")
@@ -89,7 +91,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	//$view.setSubset("closedProblems")
 	//$entry.setView($view)
 	
-	//// MARK: Cuurent problem - Approved repairs
+	//// MARK: Current problem - Approved repairs
 	//$view:=cs.sfw_definitionView.new("approvedRepairs"; "Approved repairs")
 	//$view.setLBItemsColumn("systemID"; "system ID")
 	//$view.setLBItemsColumn("reportID"; "report ID"; "width:200")
@@ -98,7 +100,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	//$view.setSubset("approvedRepairs")
 	//$entry.setView($view)
 	
-	//// MARK: Cuurent problem - Not Yet Approved repairs
+	//// MARK: Current problem - Not Yet Approved repairs
 	//$view:=cs.sfw_definitionView.new("notYetApprovedRepairs"; "Not yet approved repairs")
 	//$view.setLBItemsColumn("systemID"; "system ID")
 	//$view.setLBItemsColumn("reportID"; "report ID"; "width:200")

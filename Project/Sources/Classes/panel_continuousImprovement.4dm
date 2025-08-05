@@ -2,6 +2,7 @@ singleton Class constructor
 	//It's a singleton class
 	
 Function _activate_save_cancel_button()
+	
 	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
 	
 Function formMethod()
@@ -55,8 +56,42 @@ Function redrawAndSetVisible()
 	OBJECT SET VISIBLE:C603(*; "bActionRefresh"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET VISIBLE:C603(*; "Rectangl@"; Not:C34(Form:C1466.sfw.checkIsInModification()))
+	
+	This:C1470.cipManage()
+	
+	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	
+	Case of 
+		: (FORM Get current page:C276(*)=2)
+			OBJECT GET COORDINATES:C663(*; "subform_cip"; $left; $top; $right; $bottom)
+			
+			$hOffset:=20
+			$vOffset:=4
+			
+			OBJECT SET COORDINATES:C1248(*; "subform_cip"; $left; $top; $widthSubform-$hOffset; $heightSubform-$vOffset)
+	End case 
+	
 	Form:C1466.sfw.drawHTab()
 	
+	
+	
+Function cipManage()
+	If (Form:C1466.current_item#Null:C1517)
+		If (Form:C1466.situation.mode="add")
+			//Form.current_item._initCorrectiveActionReport()
+		End if 
+		
+		Form:C1466.subform_cip:=New object:C1471()
+		Form:C1466.subform_cip.current_item:=Form:C1466.current_item
+		Form:C1466.subform_cip.situation:=Form:C1466.situation
+		Form:C1466.subform_cip.sfw:=Form:C1466.sfw
+	End if 
+	
+	
+	
+Function subFormEvent()
+	Form:C1466.current_item:=Form:C1466.subform_cip.current_item
+	This:C1470._activate_save_cancel_button()
 	
 	
 Function drawPup_priority()

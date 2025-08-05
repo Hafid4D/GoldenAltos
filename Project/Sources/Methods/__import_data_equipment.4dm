@@ -133,9 +133,24 @@ If ($repair_Log_file.exists)
 		$eRepair:=ds:C1482.RepairLog.new()
 		
 		$eRepair.systemID:=$repair.Sys_ID
-		$eRepair.reportedBy:=$repair.Rep_by
-		$eRepair.fixedBy:=$repair.Fixed_by
-		$eRepair.reportedBy:=$repair.Rep_by
+		//$eRepair.reportedBy:=Split string($repair.Rep_by; "\r"; sk trim spaces).join("\r")
+		$staff:=ds:C1482.Staff.query("code =:1"; Split string:C1554($repair.Rep_by; "\r"; sk trim spaces:K86:2).join("\r"))  //$eEquipment.type:=$equipment.EquipmentType
+		
+		If ($staff.length>0)
+			$eRepair.reportedBy:=$staff[0].staffID
+		Else 
+			$eRepair.reportedBy:=0
+		End if 
+		
+		//$eRepair.fixedBy:=Split string($repair.Fixed_by; "\r"; sk trim spaces).join("\r")
+		$staff:=ds:C1482.Staff.query("code =:1"; Split string:C1554($repair.Fixed_by; "\r"; sk trim spaces:K86:2).join("\r"))  //$eEquipment.type:=$equipment.EquipmentType
+		
+		If ($staff.length>0)
+			$eRepair.fixedBy:=$staff[0].staffID
+		Else 
+			$eRepair.fixedBy:=0
+		End if 
+		
 		$eRepair.fixedDate:=$repair.Date_fixed
 		$eRepair.reportDate:=$repair.Rep_date
 		$eRepair.status:=$repair.E_status
