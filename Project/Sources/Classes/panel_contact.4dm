@@ -6,13 +6,10 @@ Function formMethod()
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		
-		$companyType:=ds:C1482.CompanyType.query("UUID =:1"; Form:C1466.current_item.UUID_CompanyType).first() || New object:C1471()
-		Form:C1466.companyType:=$companyType.name
-		If (Form:C1466.companyType=Null:C1517)
-			Form:C1466.companyType:=""
-		End if 
+		Form:C1466.companyType:=Form:C1466.current_item.getCompanyType()
 		
 	End if 
+	
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
@@ -34,7 +31,7 @@ Function drawPup_XXX()
 	
 Function drawPup_Customer()
 	If (Form:C1466.current_item#Null:C1517)
-		$customer:=ds:C1482.Customer.query("UUID =:1"; Form:C1466.current_item.UUID_Customer).first() || New object:C1471()
+		$customer:=ds:C1482.Customer.query("UUID =:1"; Form:C1466.current_item.UUID_Company).first() || New object:C1471()
 		$customerName:=$customer.name
 		If ($customerName=Null:C1517)
 			$customerName:=""
@@ -64,7 +61,7 @@ Function pup_Customer()
 		CLOSE WINDOW:C154($winRef)
 		
 		If (ok=1)
-			Form:C1466.current_item.UUID_Customer:=$form.item.UUID
+			Form:C1466.current_item.UUID_Company:=$form.item.UUID
 			cs:C1710.panel_contact.me._activate_save_cancel_button()
 		End if 
 	End if 
@@ -74,7 +71,7 @@ Function pup_Customer()
 	
 Function drawPup_supplier()
 	If (Form:C1466.current_item#Null:C1517)
-		$supplier:=ds:C1482.Supplier.query("UUID =:1"; Form:C1466.current_item.UUID_Supplier).first() || New object:C1471()
+		$supplier:=ds:C1482.Supplier.query("UUID =:1"; Form:C1466.current_item.UUID_Company).first() || New object:C1471()
 		$supplierName:=$supplier.name
 		If ($supplierName=Null:C1517)
 			$supplierName:=""
@@ -104,7 +101,7 @@ Function pup_supplier()
 		CLOSE WINDOW:C154($winRef)
 		
 		If (ok=1)
-			Form:C1466.current_item.UUID_Supplier:=$form.item.UUID
+			Form:C1466.current_item.UUID_Company:=$form.item.UUID
 			cs:C1710.panel_contact.me._activate_save_cancel_button()
 		End if 
 	End if 
@@ -115,13 +112,10 @@ Function pup_supplier()
 	
 Function drawPup_companyType()
 	If (Form:C1466.current_item#Null:C1517)
-		$companyType:=ds:C1482.CompanyType.query("UUID =:1"; Form:C1466.current_item.UUID_CompanyType).first() || New object:C1471()
-		$companyTypeName:=$companyType.name
-		If ($companyTypeName=Null:C1517)
-			$companyTypeName:=""
-		End if 
-		$color:=""  //cs.sfw_htmlColor.me.getName($companyType.color)
-		$pathIcon:=""  //($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		$companyType:=New object:C1471
+		$companyTypeName:=Form:C1466.companyType
+		$color:=""
+		$pathIcon:=""
 		Form:C1466.sfw.drawButtonPup("pup_companyType"; $companyTypeName; $pathIcon; ($companyType=Null:C1517))
 	End if 
 	
@@ -131,27 +125,21 @@ Function pup_companyType()
 	If (Form:C1466.sfw.checkIsInModification())
 		$menu:=Create menu:C408
 		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.companyTypes=Null:C1517)
-			ds:C1482.CompanyType.cacheLoad()
+			ds:C1482.Contact.cacheLoad()
 		End if 
-		
+		$count:=0
 		For each ($eCompanyType; Storage:C1525.cache.companyTypes)
-			APPEND MENU ITEM:C411($menu; $eCompanyType.name; *)
-			SET MENU ITEM PARAMETER:C1004($menu; -1; $eCompanyType.UUID)
-			If ($eCompanyType.UUID=Form:C1466.current_item.UUID_CompanyType)
-				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
-				If (Is Windows:C1573)
-					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
-				End if 
-			End if 
+			$count:=$count+1
+			APPEND MENU ITEM:C411($menu; $eCompanyType; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $eCompanyType)
+			
 		End for each 
 		$choose:=Dynamic pop up menu:C1006($menu)
 		RELEASE MENU:C978($menu)
 		
 		Case of 
 			: ($choose#"")
-				$eCompanyType:=ds:C1482.CompanyType.get($choose)
-				Form:C1466.companyType:=$eCompanyType.name
-				Form:C1466.current_item.UUID_CompanyType:=$eCompanyType.UUID
+				Form:C1466.companyType:=$choose
 		End case 
 		
 	End if 
@@ -357,7 +345,7 @@ Function btnOpenCompany()
 			
 		: (Form:C1466.companyType="Supplier")
 			
-			$es:=ds:C1482.Supplier.query("UUID =:1"; Form:C1466.current_item.UUID_Supplier)
+			$es:=ds:C1482.Supplier.query("UUID =:1"; Form:C1466.current_item.UUID_Company)
 			
 			If ($es.length>0)
 				Form:C1466.sfw.openInANewWindow($es[0]; "qualityAssistance"; "AVL")
@@ -366,7 +354,7 @@ Function btnOpenCompany()
 			
 		: (Form:C1466.companyType="Customer")
 			
-			$es:=ds:C1482.Customer.query("UUID =:1"; Form:C1466.current_item.UUID_Customer)
+			$es:=ds:C1482.Customer.query("UUID =:1"; Form:C1466.current_item.UUID_Company)
 			
 			If ($es.length>0)
 				Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "customer")

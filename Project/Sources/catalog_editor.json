@@ -1013,22 +1013,6 @@
 			},
 			"displayable_fields_count": 3
 		},
-		"CompanyType": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			},
-			"coordinates": {
-				"left": 846,
-				"top": 188,
-				"width": 120,
-				"height": 167.33203125
-			},
-			"displayable_fields_count": 6,
-			"fields_ordering": 1
-		},
 		"InteractionType": {
 			"color": {
 				"red": 207,
@@ -1428,7 +1412,7 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 752,
+				"left": 789,
 				"top": 0,
 				"width": 120,
 				"height": 167.33203125
@@ -1559,8 +1543,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 640,
-				"top": 287,
+				"left": 470,
+				"top": 372,
 				"width": 164,
 				"height": 186.33203125
 			},
@@ -1826,13 +1810,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 692,
-				"top": 423,
-				"width": 159.95446777344,
-				"height": 239.15802001953
+				"left": 680,
+				"top": 363,
+				"width": 183.95446777344,
+				"height": 256.15802001953
 			},
-			"displayable_fields_count": 9,
-			"fields_ordering": 1
+			"displayable_fields_count": 10
 		}
 	},
 	"relations": {
@@ -1961,14 +1944,6 @@
 				"red": 255,
 				"green": 255,
 				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"6A097E42A2150B4787B2F8BE0AC7B1D0": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
 				"alpha": 0
 			}
 		},
@@ -2181,14 +2156,6 @@
 			}
 		},
 		"4EEBB3B3CDCE4E4D8FB9E78C0A56728C": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"CF3063584FFE4334AC18A5B8B1445D95": {
 			"color": {
 				"red": 255,
 				"green": 255,
