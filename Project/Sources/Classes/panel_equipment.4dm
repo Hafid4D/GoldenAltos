@@ -45,6 +45,8 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_EquipmentType()
 	This:C1470.drawPup_EquipmentLocation()
 	This:C1470.drawPup_Division()
+	This:C1470.equipmentManage()
+	
 	If (Form:C1466.current_item#Null:C1517)
 		OBJECT SET TITLE:C194(*; "statusHistory"; String:C10(Form:C1466.current_item.statusHistory))
 	End if 
@@ -55,7 +57,39 @@ Function redrawAndSetVisible()
 		
 	End use 
 	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
+	
+	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	
+	Case of 
+		: (FORM Get current page:C276(*)=1)
+			OBJECT GET COORDINATES:C663(*; "subformEquipement"; $left; $top; $right; $bottom)
+			
+			$hOffset:=20
+			$vOffset:=4
+			
+			OBJECT SET COORDINATES:C1248(*; "subformEquipement"; $left; $top; $widthSubform-$hOffset; $heightSubform-$vOffset)
+	End case 
+	
 	Form:C1466.sfw.drawHTab()
+	
+	
+	
+Function equipmentManage()
+	If (Form:C1466.current_item#Null:C1517)
+		If (Form:C1466.situation.mode="add")
+			//Form.current_item._initCorrectiveActionReport()
+		End if 
+		
+		Form:C1466.subformEquipement:=New object:C1471()
+		Form:C1466.subformEquipement.current_item:=Form:C1466.current_item
+		Form:C1466.subformEquipement.situation:=Form:C1466.situation
+		Form:C1466.subformEquipement.sfw:=Form:C1466.sfw
+	End if 
+	
+	
+Function subFormEvent()
+	Form:C1466.current_item:=Form:C1466.subformEquipement.current_item
+	This:C1470._activate_save_cancel_button()
 	
 	
 Function drawPup_EquipmentType()
@@ -74,27 +108,7 @@ Function drawPup_EquipmentType()
 Function pup_type()
 	//Create pop up menu
 	If (Form:C1466.sfw.checkIsInModification())
-/*
-$menu:=Create menu
-For each ($equipmentType; ds.ToolType.all())  // Storage.cache.equipmentTypes)
-APPEND MENU ITEM($menu; $equipmentType.name; *)
-SET MENU ITEM PARAMETER($menu; -1; $equipmentType.UUID)
-If ($equipmentType.UUID=Form.current_item.UUID_ToolType)
-SET MENU ITEM MARK($menu; -1; Char(18))
-If (Is Windows)
-SET MENU ITEM STYLE($menu; -1; Bold)
-End if 
-End if 
-End for each 
-$choose:=Dynamic pop up menu($menu)
-RELEASE MENU($menu)
 		
-Case of 
-: ($choose#"")
-$equipmentType:=ds.ToolType.get($choose)
-Form.current_item.UUID_ToolType:=$equipmentType.UUID
-End case 
-*/
 		OBJECT GET COORDINATES:C663(*; "pup_equipmentType"; $l; $t; $r; $b)
 		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
 		
