@@ -9,7 +9,6 @@ Purpose : This method export the items on repair Log  View List to an .xls docum
 
 var $eSetting : cs:C1710.sfw_SettingEntity
 var $identEntry : Text:=Form:C1466.sfw.entry.ident
-var $identView : Text:=Form:C1466.sfw.view.ident
 var $entity : 4D:C1709.Entity
 var $info : Object
 var $wpBlob : 4D:C1709.Blob
@@ -47,9 +46,6 @@ If ($continue)
 	
 	SUSPEND TRANSACTION:C1385
 	
-	If ($identView="main")
-		$identView:="allProblems"
-	End if 
 	
 	$file:=Create document:C266(""; "xls")
 	
@@ -58,11 +54,9 @@ If ($continue)
 		$export.records:=New collection:C1472
 		
 		$dataclass:=Form:C1466.sfw.entry.dataclass
-		If ($identView="allProblems")
-			$logs:=ds:C1482[$dataclass].all()
-		Else 
-			$logs:=ds:C1482[$dataclass][$identView]()
-		End if 
+		
+		$logs:=Form:C1466.sfw.lb_items
+		
 		For each ($entity; $logs)
 			$oEntity:=New object:C1471
 			For each ($attribute; ds:C1482[$dataclass])

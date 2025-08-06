@@ -10,7 +10,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setDisplayOrder(-500)
 	$entry.setIcon("image/entry/spec-control-white-50x50.png")
 	
-	$entry.setSearchboxField("spec"; "placeholder:Spec#")
+	$entry.setSearchboxField("spec")
 	
 	$entry.setLBItemsColumn("spec"; "Spec#"; "width:100")
 	$entry.setLBItemsColumn("revision"; "Revision"; "width:50")
