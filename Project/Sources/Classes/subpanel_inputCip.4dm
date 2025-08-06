@@ -72,15 +72,6 @@ Function formMethod()
 	
 	
 	
-Function drawPup_XXX()
-	//This function updates the dropdown by displaying the name
-	Form:C1466.sfw.drawButtonPup("pup_xxx"; $xxxName; "xxxx.png"; (Form:C1466.inputSubform.xxxx=Null:C1517))
-	
-	
-Function pup_XXX()
-	//Create pop up menu
-	
-	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and
 	
@@ -199,7 +190,7 @@ Function pup_procedureType()
 		
 		If (ok=1)
 			Form:C1466.current_item.action:=$form.item.qcarNumberRef
-			cs:C1710.panel_continuousImprovement.me._activate_save_cancel_button()
+			CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 		End if 
 		
 	End if 
@@ -211,8 +202,7 @@ Function refreshAction()
 	If (Form:C1466.sfw.checkIsInModification())
 		OBJECT SET TITLE:C194(*; "pup_procedure"; "")
 		Form:C1466.current_item.action:=""
-		cs:C1710.panel_continuousImprovement.me._activate_save_cancel_button()
-		
+		CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 	End if 
 	
 	
@@ -312,7 +302,7 @@ Function responsibleEdit()
 			
 			
 			Form:C1466.current_item.responsible:=$responsables.join(",")
-			cs:C1710.panel_continuousImprovement.me._activate_save_cancel_button()
+			CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 		End if 
 		
 	End if 
