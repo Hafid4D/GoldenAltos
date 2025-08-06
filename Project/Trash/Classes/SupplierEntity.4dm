@@ -67,7 +67,7 @@ local Function rebuildAddress()->$address : Object
 	
 local Function rebuidComunications($contactType)->$contacts : Collection
 	
-	$communications:=ds:C1482.Contact.query("UUID_Company = :1"; Form:C1466.current_item.UUID).query("title=:1"; $contactType).first().contactDetails.communications
+	$communications:=Form:C1466.current_item.contacts.query("title=:1"; $contactType).first().contactDetails.communications
 	If ($communications#Null:C1517)
 		$contacts:=New collection:C1472()
 		For ($i; 0; $communications.length-1)
@@ -113,11 +113,11 @@ local Function _initCommunication()
 	//This.contactDetails.communications:=New collection
 	//End if 
 	
-	If (ds:C1482.Contact.query("UUID_Company=:1"; This:C1470.UUID).extract("title").indexOf("Primary")=-1)
+	If (ds:C1482.Contact.query("UUID_Supplier=:1"; This:C1470.UUID).extract("title").indexOf("Primary")=-1)
 		var $apContact : cs:C1710.ContactEntity
 		$apContact:=ds:C1482.Contact.new()
 		$apContact.title:="Primary"
-		$apContact.UUID_Company:=This:C1470.UUID
+		$apContact.UUID_Supplier:=This:C1470.UUID
 		
 		$apContact.contactDetails:=New object:C1471
 		
@@ -137,11 +137,11 @@ local Function _initCommunication()
 		$apContact.save()
 	End if 
 	
-	If (ds:C1482.Contact.query("UUID_Company=:1"; This:C1470.UUID).extract("title").indexOf("Secondary")=-1)
+	If (ds:C1482.Contact.query("UUID_Supplier=:1"; This:C1470.UUID).extract("title").indexOf("Secondary")=-1)
 		var $statusContact : cs:C1710.ContactEntity
 		$statusContact:=ds:C1482.Contact.new()
 		$statusContact.title:="Secondary"
-		$statusContact.UUID_Company:=This:C1470.UUID
+		$statusContact.UUID_Supplier:=This:C1470.UUID
 		
 		$statusContact.contactDetails:=New object:C1471
 		

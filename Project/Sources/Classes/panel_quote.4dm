@@ -13,12 +13,18 @@ Function formMethod()
 			: (FORM Get current page:C276(*)=1)
 				Form:C1466.contactDetails:=This:C1470.contactInfo()
 				
-				Form:C1466.subFormAddress:=New object:C1471
-				Form:C1466.subFormCommunication:=New object:C1471
+				If (Form:C1466.contactDetails.address#Null:C1517)
+					Form:C1466.subFormAddress:=New object:C1471
+					Form:C1466.subFormAddress.address:=Form:C1466.contactDetails.address
+				End if 
+				If (Form:C1466.contactDetails.communications#Null:C1517)
+					Form:C1466.subFormCommunication:=New object:C1471
+					Form:C1466.subFormCommunication.communications:=Form:C1466.contactDetails.communications
+				End if 
 				
-				Form:C1466.subFormAddress.address:=Form:C1466.contactDetails.address
-				Form:C1466.subFormCommunication.communications:=Form:C1466.contactDetails.communications
-				Form:C1466.subFormCommunication:=Form:C1466.subFormCommunication
+				If (Form:C1466.contactDetails.address#Null:C1517) || (Form:C1466.contactDetails.communications#Null:C1517)
+					Form:C1466.subFormCommunication:=Form:C1466.subFormCommunication
+				End if 
 				
 				This:C1470.loadContacts()
 				
@@ -61,7 +67,19 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_quoteRevision()
 	
 	Form:C1466.contactDetails:=This:C1470.contactInfo()
-	Form:C1466.subFormAddress.address:=Form:C1466.contactDetails.address
+	
+	If (Form:C1466.contactDetails.address#Null:C1517)
+		Form:C1466.subFormAddress:=New object:C1471
+		Form:C1466.subFormAddress.address:=Form:C1466.contactDetails.address
+	End if 
+	If (Form:C1466.contactDetails.communications#Null:C1517)
+		Form:C1466.subFormCommunication:=New object:C1471
+		Form:C1466.subFormCommunication.communications:=Form:C1466.contactDetails.communications
+	End if 
+	
+	If (Form:C1466.contactDetails.address#Null:C1517) || (Form:C1466.contactDetails.communications#Null:C1517)
+		Form:C1466.subFormCommunication:=Form:C1466.subFormCommunication
+	End if 
 	
 	//Use (Form.sfw.entry.panel.pages)
 	//Form.sfw.entry.panel.pages[0].label:="Lines ("+String(Form.lb_quoteLines.length)+")"
@@ -542,9 +560,13 @@ Function selectCustomer()
 				If (ok=1)
 					Form:C1466.current_item.UUID_Customer:=$form.item.UUID
 					cs:C1710.panel_quote.me._activate_save_cancel_button()
+					This:C1470._clearInfoAfterChangingCustomer()
 				End if 
 		End case 
 	End if 
+	
+Function _clearInfoAfterChangingCustomer()
+	Form:C1466.current_item.moreData:=New object:C1471()
 	
 Function pup_serviceType()
 	var $eServiceType : cs:C1710.ServiceTypeEntity

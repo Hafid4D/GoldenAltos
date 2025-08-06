@@ -2,6 +2,10 @@ singleton Class constructor
 	
 	//It's a singleton class
 	
+Function _activate_save_cancel_button()
+	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+	
+	
 Function formMethod()
 	
 	
@@ -60,20 +64,12 @@ Function formMethod()
 			OBJECT SET VISIBLE:C603(*; "bResponsibleEdit"; $isInModification)
 			OBJECT SET VISIBLE:C603(*; "bActionRefresh"; $isInModification)
 			OBJECT SET VISIBLE:C603(*; "PopupDa@"; $isInModification)
+			OBJECT SET VISIBLE:C603(*; "Rectangl@"; $isInModification)
 			
 		End if 
 		
 	End if 
 	
-	
-	
-Function drawPup_XXX()
-	//This function updates the dropdown by displaying the name
-	Form:C1466.sfw.drawButtonPup("pup_xxx"; $xxxName; "xxxx.png"; (Form:C1466.inputSubform.xxxx=Null:C1517))
-	
-	
-Function pup_XXX()
-	//Create pop up menu
 	
 	
 Function redrawAndSetVisible()
@@ -83,82 +79,82 @@ Function redrawAndSetVisible()
 	
 	
 Function drawPup_priority()
-	If (Form:C1466.inputSubform#Null:C1517)
-		This:C1470.drowPup("CIPriority"; "priorityID"; "priority"; "pup_priority")
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.current_item.drowPup("CIPriority"; "priorityID"; "priority"; "pup_priority")
 	End if 
 	
 	
 Function pup_priority()
 	//Create pop up menu
-	This:C1470.pup("ImprovementPriorities"; "CIPriority"; "priorityID"; "priority")
+	Form:C1466.current_item.pup("ImprovementPriorities"; "CIPriority"; "priorityID"; "priority")
 	This:C1470.drawPup_priority()
 	
 	
 Function drawPup_origin()
-	If (Form:C1466.inputSubform#Null:C1517)
-		This:C1470.drowPup("CIOrigin"; "originID"; "origin"; "pup_origin")
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.current_item.drowPup("CIOrigin"; "originID"; "origin"; "pup_origin")
 	End if 
 	
 	
 Function pup_origin()
 	//Create pop up menu
-	This:C1470.pup("ImprovementOrigins"; "CIOrigin"; "originID"; "origin")
+	Form:C1466.current_item.pup("ImprovementOrigins"; "CIOrigin"; "originID"; "origin")
 	This:C1470.drawPup_origin()
 	
 	
 Function drawPup_category()
-	If (Form:C1466.inputSubform#Null:C1517)
-		This:C1470.drowPup("CICategory"; "categoryID"; "category"; "pup_category")
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.current_item.drowPup("CICategory"; "categoryID"; "category"; "pup_category")
 	End if 
 	
 	
 Function pup_category()
 	//Create pop up menu
-	This:C1470.pup("ImprovementCategories"; "CICategory"; "categoryID"; "category")
+	Form:C1466.current_item.pup("ImprovementCategories"; "CICategory"; "categoryID"; "category")
 	This:C1470.drawPup_category()
 	
 	
 Function drawPup_disposition()
-	If (Form:C1466.inputSubform#Null:C1517)
-		This:C1470.drowPup("CIDisposition"; "dispositionID"; "disposition"; "pup_disposition")
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.current_item.drowPup("CIDisposition"; "dispositionID"; "disposition"; "pup_disposition")
 	End if 
 	
 	
 Function pup_disposition()
 	//Create pop up menu
-	This:C1470.pup("ImprovementDispositions"; "CIDisposition"; "dispositionID"; "disposition")
+	Form:C1466.current_item.pup("ImprovementDispositions"; "CIDisposition"; "dispositionID"; "disposition")
 	This:C1470.drawPup_disposition()
 	
 	
 	
 Function drawPup_humanFactor()
-	If (Form:C1466.inputSubform#Null:C1517)
-		This:C1470.drowPup("CIHumanFactor"; "factorID"; "humanFactor"; "pup_humanFactor")
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.current_item.drowPup("CIHumanFactor"; "factorID"; "humanFactor"; "pup_humanFactor")
 	End if 
 	
 	
 Function pup_humanFactor()
 	//Create pop up menu
-	This:C1470.pup("ImprovementFactors"; "CIHumanFactor"; "factorID"; "humanFactor")
+	Form:C1466.current_item.pup("ImprovementFactors"; "CIHumanFactor"; "factorID"; "humanFactor")
 	This:C1470.drawPup_humanFactor()
 	
 	
 Function drawPup_yesNoQuestion()
-	If (Form:C1466.inputSubform#Null:C1517)
-		This:C1470.drowPup("YesNoQuestion"; "responseID"; "IsAcceptable"; "pup_yesNoQuestion")
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.current_item.drowPup("YesNoQuestion"; "responseID"; "IsAcceptable"; "pup_yesNoQuestion")
 	End if 
 	
 	
 Function pup_yesNoQuestion()
 	//Create pop up menu
-	This:C1470.pup("ImprovementResponses"; "YesNoQuestion"; "responseID"; "IsAcceptable")
+	Form:C1466.current_item.pup("ImprovementResponses"; "YesNoQuestion"; "responseID"; "IsAcceptable")
 	This:C1470.drawPup_yesNoQuestion()
 	
 	
 Function drawPup_procedureType()
-	If (Form:C1466.inputSubform#Null:C1517)
-		If (Form:C1466.inputSubform.action="QCAR#@")
-			OBJECT SET TITLE:C194(*; "pup_procedure"; Form:C1466.inputSubform.action)
+	If (Form:C1466.current_item#Null:C1517)
+		If (Form:C1466.current_item.action="QCAR#@")
+			OBJECT SET TITLE:C194(*; "pup_procedure"; Form:C1466.current_item.action)
 			
 		Else 
 			OBJECT SET TITLE:C194(*; "pup_procedure"; "")
@@ -193,8 +189,8 @@ Function pup_procedureType()
 		CLOSE WINDOW:C154($winRef)
 		
 		If (ok=1)
-			Form:C1466.inputSubform.action:=$form.item.qcarNumberRef
-			//cs.panel_continuousImprovement.me._activate_save_cancel_button()
+			Form:C1466.current_item.action:=$form.item.qcarNumberRef
+			CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 		End if 
 		
 	End if 
@@ -205,14 +201,12 @@ Function pup_procedureType()
 Function refreshAction()
 	If (Form:C1466.sfw.checkIsInModification())
 		OBJECT SET TITLE:C194(*; "pup_procedure"; "")
-		Form:C1466.inputSubform.action:=""
-		//cs.panel_continuousImprovement.me._activate_save_cancel_button()
-		
+		Form:C1466.current_item.action:=""
+		CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 	End if 
 	
 	
 Function responsibleEdit()
-	
 	If (Form:C1466.sfw.checkIsInModification())
 		
 		$form:=New object:C1471
@@ -249,7 +243,7 @@ Function responsibleEdit()
 		End for 
 		
 		
-		$responsibles:=Split string:C1554(Form:C1466.inputSubform.responsible; ",")
+		$responsibles:=Split string:C1554(Form:C1466.current_item.responsible; ",")
 		
 		For ($k; 0; $responsibles.length-1)
 			
@@ -307,55 +301,10 @@ Function responsibleEdit()
 			End for 
 			
 			
-			Form:C1466.inputSubform.responsible:=$responsables.join(",")
-			//cs.panel_continuousImprovement.me._activate_save_cancel_button()
+			Form:C1466.current_item.responsible:=$responsables.join(",")
+			CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 		End if 
 		
 	End if 
 	
-	
-Function drowPup($dataClass; $queryField; $queryValue; $pupName)
-	
-	$entity:=ds:C1482[$dataClass].query($queryField+"= :1"; Form:C1466.inputSubform[$queryValue]).first() || New object:C1471()
-	$name:=$entity.name
-	If ($name=Null:C1517)
-		$name:=""
-	End if 
-	If (Not:C34(Undefined:C82($entity.color)))
-		$color:=cs:C1710.sfw_htmlColor.me.getName($entity.color)
-		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
-	Else 
-		$pathIcon:=""
-	End if 
-	Form:C1466.sfw.drawButtonPup($pupName; $name; $pathIcon; ($entity=Null:C1517))
-	
-	
-Function pup($cacheCollection; $dataClass; $queryField; $queryValue)
-	
-	If (Form:C1466.sfw.checkIsInModification())
-		$menu:=Create menu:C408
-		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache[$cacheCollection]=Null:C1517)
-			ds:C1482[$dataClass].cacheLoad()
-		End if 
-		
-		For each ($eImprovementPriority; Storage:C1525.cache[$cacheCollection])
-			APPEND MENU ITEM:C411($menu; $eImprovementPriority.name; *)
-			SET MENU ITEM PARAMETER:C1004($menu; -1; $eImprovementPriority.UUID)
-			If (Num:C11($eImprovementPriority[$queryField])=Form:C1466.inputSubform[$queryValue])
-				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
-				If (Is Windows:C1573)
-					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
-				End if 
-			End if 
-		End for each 
-		$choose:=Dynamic pop up menu:C1006($menu)
-		RELEASE MENU:C978($menu)
-		
-		Case of 
-			: ($choose#"")
-				$eImprovementPriority:=ds:C1482[$dataClass].get($choose)
-				Form:C1466.inputSubform[$queryValue]:=$eImprovementPriority[$queryField]
-		End case 
-		
-	End if 
 	

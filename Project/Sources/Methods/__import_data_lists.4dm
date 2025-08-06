@@ -4,18 +4,6 @@
 var $colors : Collection:=New collection:C1472("#3CB371"; "#FFFF00"; "#FF7F50"; "#1E90FF"; "#FF0000")
 
 
-//----> [CompanyType]
-var $eCompanyType : cs:C1710.CompanyTypeEntity
-var $CompanyTypes : Collection:=New collection:C1472("Customer"; "Supplier")
-TRUNCATE TABLE:C1051([CompanyType:42])
-For ($i; 0; $CompanyTypes.length-1)
-	$eCompanyType:=ds:C1482.CompanyType.new()
-	$eCompanyType.typeID:=$i+1
-	$eCompanyType.name:=$CompanyTypes[$i]
-	$eCompanyType.save()
-End for 
-
-
 //---->[SpecControllingDept]
 var $eControllingDept : cs:C1710.SpecControllingDeptEntity
 var $SpecControllingDepts : Collection:=New collection:C1472("All"; "Accounting"; "Assembly"; "Beanch"; \
@@ -156,7 +144,7 @@ End for
 var $eUnit : cs:C1710.UnitsEntity
 var $units : Collection:=New collection:C1472("Bag"; "Can"; "EA"; "Hour"; "Lot"; "Pcs"; "Roll"; "Set"; "Box"; "Spool"; "Gallon"; "Ream"; "Case"; \
 "Pack"; "Yesr"; "Lbs"; "Pair")
-TRUNCATE TABLE:C1051([Units:59])
+TRUNCATE TABLE:C1051([Units:49])
 For ($i; 0; $units.length-1)
 	$eUnit:=ds:C1482.Units.new()
 	$eUnit.unitID:=$i+1

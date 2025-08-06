@@ -172,7 +172,7 @@ Function drawPup_departement()
 	
 	
 Function pup_departement()
-	Form:C1466.current_item.publishedDocumentBlob  //Create pop up menu
+	//Create pop up menu
 	Form:C1466.current_item.pup("specDepartements"; "SpecControllingDept"; "departmentID"; "departmentID")
 	This:C1470.drawPup_departement()
 	

@@ -110,12 +110,11 @@ If ($supplier_log.exists)
 		
 		//Primary contact
 		$eContact:=ds:C1482.Contact.new()
-		$eContact.UUID_Supplier:=$eSupplier.UUID
+		$eContact.UUID_Company:=$eSupplier.UUID
 		$eContact.companyName:=$supplier.Supplier
 		$eContact.firstName:=$supplier.C1_first_name
 		$eContact.lastName:=$supplier.C1_last_name
 		$eContact.title:="Primary"
-		$eContact.UUID_CompanyType:=ds:C1482.CompanyType.query("name =:1"; "Supplier")[0].UUID
 		$eContact.contactDetails:=New object:C1471()
 		$eContact.contactDetails.addresses:=New collection:C1472()
 		
@@ -149,13 +148,11 @@ If ($supplier_log.exists)
 		
 		//Secondary contact
 		$eContact:=ds:C1482.Contact.new()
-		$eContact.UUID_Supplier:=$eSupplier.UUID
+		$eContact.UUID_Company:=$eSupplier.UUID
 		$eContact.companyName:=$supplier.Supplier
 		$eContact.firstName:=$supplier.C2_first_name
 		$eContact.lastName:=$supplier.C2_last_name
 		$eContact.title:="Secondary"
-		$eContact.UUID_CompanyType:=ds:C1482.CompanyType.query("name =:1"; "Supplier")[0].UUID
-		
 		$eContact.contactDetails:=New object:C1471()
 		$eContact.contactDetails.addresses:=New collection:C1472()
 		
@@ -201,14 +198,13 @@ $avml_log:=Folder:C1567(fk data folder:K87:12).file("DataJson/avlAml_export.json
 If ($avml_log.exists)
 	$avmls:=JSON Parse:C1218($avml_log.getText())
 	
-	TRUNCATE TABLE:C1051([RMA:46])
+	TRUNCATE TABLE:C1051([AML:56])
 	
 	For each ($avml; $avmls)
 		
 		$eAvml:=ds:C1482.AML.new()
 		
 		$eAvml.vendorPartnum:=$avml.Vendor_partnum
-		$eAvml.UUID_Supplier:=$avml.Vendor_partnum
 		$eAvml.critical:=$avml.Critical
 		$eAvml.service:=$avml.Service
 		$eAvml.serviceType:=$avml.Service_type
