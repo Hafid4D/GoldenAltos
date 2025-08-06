@@ -11,7 +11,6 @@ Purpose : This method export the items on Spec Control View List to an .xls docu
 
 var $eSetting : cs:C1710.sfw_SettingEntity
 var $identEntry : Text:=Form:C1466.sfw.entry.ident
-var $identView : Text:=Form:C1466.sfw.view.ident
 var $entity : 4D:C1709.Entity
 var $info : Object
 var $wpBlob : 4D:C1709.Blob
@@ -29,9 +28,6 @@ $headers:=New collection:C1472()
 $separator_col:=Char:C90(Tab:K15:37)
 $separator_line:=Char:C90(Carriage return:K15:38)
 
-If ($identView="main")
-	$identView:="Continuous Improvement Programs"
-End if 
 
 $file:=Create document:C266(""; "xls")
 
@@ -40,11 +36,10 @@ If (OK=1)
 	$export.records:=New collection:C1472
 	
 	$dataclass:=Form:C1466.sfw.entry.dataclass
-	If ($identView="Continuous Improvement Programs")
-		$specifications:=ds:C1482[$dataclass].all()
-	Else 
-		$specifications:=ds:C1482[$dataclass][$identView]()
-	End if 
+	
+	$specifications:=Form:C1466.sfw.lb_items
+	
+	
 	For each ($entity; $specifications)
 		$oEntity:=New object:C1471
 		For each ($attribute; ds:C1482[$dataclass])
