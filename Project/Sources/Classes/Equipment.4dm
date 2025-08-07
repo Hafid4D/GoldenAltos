@@ -4,7 +4,7 @@ Class extends DataClass
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	//Mark: entry : Equipment
-	$entry:=cs:C1710.sfw_definitionEntry.new("equipment"; ["qualityAssistance"]; "Equipments")
+	$entry:=cs:C1710.sfw_definitionEntry.new("equipment"; ["qualityAssurance"]; "Equipments")
 	$entry.setDataclass("Equipment")
 	$entry.setSearchboxField("assignedID")
 	$entry.setDisplayOrder(100)
@@ -31,9 +31,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListAction("Print PM Sticker"; "_ga_printPMStickers")
 	
 	$entry.setItemAction("Print Repair Log Report"; "_ga_printRepairLogReport")
-
+	
 	$entry.setItemAction("Print Usage Log EquipTraveler"; "_ga_usageLogReport")
-
+	
 	
 	
 	$entry.enableTransaction()

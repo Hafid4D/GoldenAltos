@@ -585,7 +585,7 @@ Function btnOpenCustomer()
 	
 Function btnOpenStaff()
 	$entity:=Form:C1466.current_item.staff
-	Form:C1466.sfw.openInANewWindow($entity; "qualityAssistance"; "staff")
+	Form:C1466.sfw.openInANewWindow($entity; "qualityAssurance"; "staff")
 	
 Function btnCreateCustomer()
 	Form:C1466.sfw.openCreateWindow("customerService"; "customer")

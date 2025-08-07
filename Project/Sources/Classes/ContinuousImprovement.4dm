@@ -3,7 +3,7 @@ Class extends DataClass
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	//Mark: entry : Contact
-	$entry:=cs:C1710.sfw_definitionEntry.new("continuousImprovement"; ["qualityAssistance"]; "CIP")
+	$entry:=cs:C1710.sfw_definitionEntry.new("continuousImprovement"; ["qualityAssurance"]; "CIP")
 	$entry.setDataclass("ContinuousImprovement")
 	$entry.setSearchboxField("item")
 	$entry.setDisplayOrder(-400)

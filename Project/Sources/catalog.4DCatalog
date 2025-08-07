@@ -10,7 +10,7 @@
 		<field name="code" uuid="A0AA3A2CDD0F4B4C98340D8C3643BC81" type="10" limiting_length="255" never_null="true" id="6"/>
 		<field name="title" uuid="6A7FDC50467B441E8639D0536CFB133A" type="10" limiting_length="255" never_null="true" id="7"/>
 		<field name="companyName" uuid="BC4FED4B0941C340ACD303B81A17135A" type="10" limiting_length="255" never_null="true" id="9"/>
-		<field name="UUID_Company" uuid="1CA2A874935E4649B7EC63D11EF51140" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="11"/>
+		<field name="UUID_Company" uuid="1CA2A874935E4649B7EC63D11EF51140" type="10" store_as_UUID="true" never_null="true" id="11"/>
 		<primary_key field_name="UUID" field_uuid="8EFDF2BE837542E3849ECB064F30C5BD"/>
 	</table>
 	<table name="Assumption" uuid="F74C797683A840F69C35777C0FF641E7" id="2">

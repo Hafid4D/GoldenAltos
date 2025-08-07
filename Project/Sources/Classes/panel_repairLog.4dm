@@ -233,6 +233,6 @@ Function btnOpenOperator($operatorType)
 	End case 
 	
 	If ($es.length>0)
-		Form:C1466.sfw.openInANewWindow($es[0]; "qualityAssistance"; "staff")
+		Form:C1466.sfw.openInANewWindow($es[0]; "qualityAssurance"; "staff")
 	End if 
 	
