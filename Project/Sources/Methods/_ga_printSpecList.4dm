@@ -58,14 +58,6 @@ If (Form:C1466.sfw.lb_items.length>0)
 							$context.subject:="Forms"
 						End if 
 						
-					: ($identEntry="allAddendums")
-						
-						If ($onlyForms=False:C215)
-							$context.subject:="all Addendums Specifications"
-						Else 
-							$context.subject:="all Addendums Forms"
-						End if 
-						
 					: ($identEntry="docsRequiringReviewSoon")
 						
 						If ($onlyForms=False:C215)

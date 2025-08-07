@@ -521,8 +521,6 @@ If (True:C214)
 		
 		$specification_e.remark:=$record.Remarks
 		$specification_e.extension:=$record.Dosext
-		$specification_e.addendum:=$record.Addendum
-		$specification_e.addendumToSpec:=$record.AddendumToSpec
 		$specification_e.suppress:=$record.Suppress
 		$specification_e.reviewIntervalInDays:=$record.ReviewIntervalInDays
 		$specification_e.reviewDate:=$record.Review_Date

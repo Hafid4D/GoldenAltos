@@ -3,7 +3,7 @@ Class extends DataClass
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	//Mark: entry : Contact
-	$entry:=cs:C1710.sfw_definitionEntry.new("repairLog"; ["qualityAssistance"]; "Repair Logs")
+	$entry:=cs:C1710.sfw_definitionEntry.new("repairLog"; ["qualityAssurance"]; "Repair Logs")
 	$entry.setDataclass("RepairLog")
 	$entry.setSearchboxField("systemID")
 	$entry.setDisplayOrder(100)

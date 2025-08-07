@@ -4,7 +4,7 @@ Class extends DataClass
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	//Mark: entry : Specification
-	$entry:=cs:C1710.sfw_definitionEntry.new("specification"; ["qualityAssistance"]; "Specs Control")
+	$entry:=cs:C1710.sfw_definitionEntry.new("specification"; ["qualityAssurance"]; "Specs Control")
 	$entry.setDataclass("Specification")
 	$entry.setSearchboxField("spec")
 	$entry.setDisplayOrder(-500)
@@ -49,16 +49,6 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	// MARK: - Views Definition
 	
 	
-	//// MARK: All Addendums
-	//$view:=cs.sfw_definitionView.new("allAddendums"; "All addendums")
-	//$view.setLBItemsColumn("spec"; "Spec#"; "width:100")
-	//$view.setLBItemsColumn("revision"; "Revision"; "width:50")
-	//$view.setLBItemsColumn("title"; "Title")
-	//$view.setLBItemsOrderBy("spec")
-	//$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:specification"; "unitN:specifications")
-	//$view.setSubset("allAddendums")
-	//$entry.setView($view)
-	
 	// MARK: Docs late in reviewing
 	$view:=cs:C1710.sfw_definitionView.new("docsLateInReviewing"; "Control Docs late in Reviewing")
 	$view.setLBItemsColumn("spec"; "Spec#"; "width:100")
@@ -69,7 +59,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setSubset("docsLateInReviewing")
 	$entry.setView($view)
 	
-	// MARK: Docs late in reviewing
+	// MARK: ocs requiring review in 7 days
 	$view:=cs:C1710.sfw_definitionView.new("docsRequiringReviewSoon"; "Control Docs requiring review in 7 days")
 	$view.setLBItemsColumn("spec"; "Spec#"; "width:100")
 	$view.setLBItemsColumn("revision"; "Revision"; "width:50")
@@ -152,10 +142,6 @@ local Function setDateInterval($pushUp; $title)
 		Storage:C1525.cache.endDate:=$form.endDate
 		Storage:C1525.cache.interval:=$form.interval
 	End use 
-	
-	
-Function allAddendums()->$specifications : cs:C1710.SpecificationSelection
-	$specifications:=ds:C1482.Specification.query("addendum =:1"; True:C214)
 	
 	
 Function docsLateInReviewing()->$specifications : cs:C1710.SpecificationSelection

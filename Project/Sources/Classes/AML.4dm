@@ -3,7 +3,7 @@ Class extends DataClass
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	//Mark: entry : Equipment
-	$entry:=cs:C1710.sfw_definitionEntry.new("AML"; ["qualityAssistance"]; "AML")
+	$entry:=cs:C1710.sfw_definitionEntry.new("AML"; ["qualityAssurance"]; "AML")
 	$entry.setDataclass("AML")
 	$entry.setDisplayOrder(-600)
 	$entry.setIcon("image/entry/aml-white-50x50.png")

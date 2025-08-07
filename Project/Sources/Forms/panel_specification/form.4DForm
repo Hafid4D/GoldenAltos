@@ -140,16 +140,68 @@
 		},
 		{
 			"objects": {
-				"Rectangle11": {
+				"Rectangle9": {
 					"type": "rectangle",
-					"top": 481,
-					"left": 15,
-					"width": 415,
-					"height": 85,
-					"stroke": "#FFFFFF",
+					"top": 358,
+					"left": 173,
+					"width": 250,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"label_0_8": {
+					"type": "text",
+					"top": 360,
+					"left": 13,
+					"width": 150,
+					"height": 19,
+					"stroke": "#000000",
+					"text": "Review Date",
+					"textAlign": "right",
+					"fontWeight": "bold"
+				},
+				"entryField_reviewDate": {
+					"type": "input",
+					"top": 360,
+					"left": 175,
+					"width": 246,
+					"height": 19,
+					"dataSource": "Form:C1466.current_item.reviewDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
 					"fill": "transparent",
-					"strokeWidth": 2,
-					"visibility": "hidden"
+					"borderStyle": "none",
+					"fontWeight": "normal",
+					"textAlign": "left",
+					"bottom": 379,
+					"dataSourceTypeHint": "date",
+					"method": "ObjectMethods/entryField_reviewDate.4dm"
+				},
+				"PopupDate1": {
+					"type": "subform",
+					"top": 361,
+					"left": 402,
+					"width": 19,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.reviewDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/PopupDate1.4dm",
+					"events": [
+						"onLoad",
+						"onDataChange"
+					],
+					"focusable": true,
+					"borderStyle": "none"
 				},
 				"Rectangle7": {
 					"type": "rectangle",
@@ -177,7 +229,7 @@
 				},
 				"Rectangle3": {
 					"type": "rectangle",
-					"top": 358,
+					"top": 489,
 					"left": 175,
 					"width": 250,
 					"height": 23,
@@ -335,7 +387,7 @@
 				},
 				"label_0_5": {
 					"type": "text",
-					"top": 363,
+					"top": 494,
 					"left": 15,
 					"width": 150,
 					"height": 17,
@@ -346,7 +398,7 @@
 				},
 				"entryField_remark": {
 					"type": "input",
-					"top": 361,
+					"top": 492,
 					"left": 177,
 					"width": 246,
 					"height": 17,
@@ -362,7 +414,7 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 378
+					"bottom": 509
 				},
 				"label_0_7": {
 					"type": "text",
@@ -415,7 +467,7 @@
 					"left": 177,
 					"width": 246,
 					"height": 21,
-					"dataSource": "Form:C1466.current_item.revisionDate",
+					"dataSource": "Form:C1466.current_item.reviewIntervalInDays",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -457,75 +509,6 @@
 					"dataSource": "Form:C1466.current_item.suppress",
 					"fontWeight": "normal",
 					"dataSourceTypeHint": "boolean"
-				},
-				"Rectangle12": {
-					"type": "rectangle",
-					"top": 489,
-					"left": 175,
-					"width": 250,
-					"height": 25,
-					"stroke": "transparent",
-					"visibility": "hidden"
-				},
-				"entryField_addendum1": {
-					"type": "checkbox",
-					"text": "This Spec is Addendum",
-					"top": 492,
-					"left": 177,
-					"width": 246,
-					"height": 19,
-					"events": [
-						"onClick"
-					],
-					"dataSource": "Form:C1466.current_item.addendum",
-					"fontWeight": "normal",
-					"dataSourceTypeHint": "boolean",
-					"visibility": "hidden"
-				},
-				"Rectangle9": {
-					"type": "rectangle",
-					"top": 534,
-					"left": 173,
-					"width": 250,
-					"height": 25,
-					"stroke": "transparent",
-					"visibility": "hidden"
-				},
-				"label_0_8": {
-					"type": "text",
-					"top": 537,
-					"left": 13,
-					"width": 150,
-					"height": 19,
-					"stroke": "#000000",
-					"text": "Spec or Form",
-					"textAlign": "right",
-					"fontWeight": "bold",
-					"visibility": "hidden"
-				},
-				"pup_departement1": {
-					"type": "button",
-					"top": 534,
-					"left": 175,
-					"width": 246,
-					"height": 25,
-					"fontFamily": "System Font",
-					"fontSize": 13,
-					"focusable": false,
-					"text": "",
-					"icon": "",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/pup_departement1.4dm",
-					"events": [
-						"onClick",
-						"onDisplayDetail"
-					],
-					"right": 421,
-					"fontWeight": "normal",
-					"textAlign": "left",
-					"visibility": "hidden"
 				}
 			}
 		},
@@ -660,17 +643,20 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 360,
+	"geometryStamp": 379,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {
 			"Group": [
-				"Rectangle11",
-				"Rectangle12",
-				"entryField_addendum1",
+				"Rectangle3",
+				"label_0_5",
+				"entryField_remark"
+			],
+			"Group1": [
 				"Rectangle9",
+				"entryField_reviewDate",
 				"label_0_8",
-				"pup_departement1"
+				"PopupDate1"
 			],
 			"Group8": [
 				"Rectangle1",
