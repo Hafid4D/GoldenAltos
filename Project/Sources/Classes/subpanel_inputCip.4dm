@@ -82,7 +82,7 @@ Function drawPup_priority()
 	If (Form:C1466.current_item#Null:C1517)
 		Form:C1466.current_item.drowPup("CIPriority"; "priorityID"; "priority"; "pup_priority")
 	End if 
-	
+	CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 	
 Function pup_priority()
 	//Create pop up menu
@@ -94,7 +94,7 @@ Function drawPup_origin()
 	If (Form:C1466.current_item#Null:C1517)
 		Form:C1466.current_item.drowPup("CIOrigin"; "originID"; "origin"; "pup_origin")
 	End if 
-	
+	CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 	
 Function pup_origin()
 	//Create pop up menu
@@ -106,7 +106,7 @@ Function drawPup_category()
 	If (Form:C1466.current_item#Null:C1517)
 		Form:C1466.current_item.drowPup("CICategory"; "categoryID"; "category"; "pup_category")
 	End if 
-	
+	CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 	
 Function pup_category()
 	//Create pop up menu
@@ -118,7 +118,7 @@ Function drawPup_disposition()
 	If (Form:C1466.current_item#Null:C1517)
 		Form:C1466.current_item.drowPup("CIDisposition"; "dispositionID"; "disposition"; "pup_disposition")
 	End if 
-	
+	CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 	
 Function pup_disposition()
 	//Create pop up menu
@@ -131,7 +131,7 @@ Function drawPup_humanFactor()
 	If (Form:C1466.current_item#Null:C1517)
 		Form:C1466.current_item.drowPup("CIHumanFactor"; "factorID"; "humanFactor"; "pup_humanFactor")
 	End if 
-	
+	CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 	
 Function pup_humanFactor()
 	//Create pop up menu
@@ -143,7 +143,7 @@ Function drawPup_yesNoQuestion()
 	If (Form:C1466.current_item#Null:C1517)
 		Form:C1466.current_item.drowPup("YesNoQuestion"; "responseID"; "IsAcceptable"; "pup_yesNoQuestion")
 	End if 
-	
+	CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 	
 Function pup_yesNoQuestion()
 	//Create pop up menu
@@ -169,7 +169,7 @@ Function drawPup_procedureType()
 		End if 
 		
 	End if 
-	
+	CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 	
 Function pup_procedureType()
 	//Create pop up menu
