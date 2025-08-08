@@ -540,12 +540,14 @@
 		</field>
 		<primary_key field_name="UUID" field_uuid="1CB76A26D5B699429A95B9E10253FD00"/>
 	</table>
-	<table name="Units" uuid="BBEF22543374E24BBC6534C68EA6E3D2" id="49">
+	<table name="Unit" uuid="BBEF22543374E24BBC6534C68EA6E3D2" id="49">
 		<field name="UUID" uuid="2C3EE5FC26975842998856F7D02B3BA2" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="unitID" uuid="B8D8E68ABB8B0B478109C20BD0BBBCE8" type="3" never_null="true" id="2"/>
-		<field name="name" uuid="2985F44C992E634496636D1D3287EA03" type="10" limiting_length="255" never_null="true" id="3">
+		<field name="levelID" uuid="B8D8E68ABB8B0B478109C20BD0BBBCE8" type="3" never_null="true" id="2"/>
+		<field name="code" uuid="2985F44C992E634496636D1D3287EA03" type="10" limiting_length="255" never_null="true" id="3">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="name" uuid="66342D72F1BD1045A4476EDC0CFB80DA" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="color" uuid="C3C602807A2B7A4E9331F48E8166FCA9" type="10" limiting_length="255" never_null="true" id="5"/>
 		<primary_key field_name="UUID" field_uuid="2C3EE5FC26975842998856F7D02B3BA2"/>
 	</table>
 	<table name="LeadEvent" uuid="04F7E2A28A5349B4B0C70F6D644922BB" id="50">
@@ -2742,7 +2744,7 @@
 	</index>
 	<index kind="regular" unique_keys="true" uuid="AE83CD1FD23F074388E41D1EB7FB0173" type="1">
 		<field_ref uuid="2C3EE5FC26975842998856F7D02B3BA2" name="UUID">
-			<table_ref uuid="BBEF22543374E24BBC6534C68EA6E3D2" name="Units"/>
+			<table_ref uuid="BBEF22543374E24BBC6534C68EA6E3D2" name="Unit"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="B1A2B84D24E6284B89649B659845D4AF" type="7">
