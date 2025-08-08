@@ -19,9 +19,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("approvedByQA?\"Approved\":\"Not Approved\""; "QA Approval"; "width:150"; "orderByFormula:this.approvedByQA")
 	$entry.setLBItemsOrderBy("name")
 	
-	$entry.setItemListAction("Export avl list"; "_ga_exportEquipmentList")
-	$entry.setItemListAction("-"; "-")
-	$entry.setItemListAction("Print equipments list"; "_ga_printEquipmentList")
+	$entry.setItemListAction("Export selection to excel"; "_ga_exportSupplierList")
 	
 	
 	
