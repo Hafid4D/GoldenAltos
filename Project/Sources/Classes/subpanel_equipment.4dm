@@ -2,9 +2,6 @@ singleton Class constructor
 	
 	//It's a singleton class
 	
-Function _activate_save_cancel_button()
-	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
-	
 	
 Function formMethod()
 	
@@ -25,7 +22,7 @@ Function formMethod()
 				
 				
 			: (FORM Event:C1606.code=On Data Change:K2:15)
-				CALL SUBFORM CONTAINER:C1086(-2000)
+				
 				
 			Else 
 				

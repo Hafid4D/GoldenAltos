@@ -296,7 +296,8 @@
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"textAlign": "left",
-					"dataSourceTypeHint": "text"
+					"dataSourceTypeHint": "text",
+					"method": "ObjectMethods/entryField_calInterval.4dm"
 				},
 				"entryField_calTech": {
 					"type": "input",
@@ -316,7 +317,8 @@
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"textAlign": "left",
-					"dataSourceTypeHint": "text"
+					"dataSourceTypeHint": "text",
+					"method": "ObjectMethods/entryField_calTech.4dm"
 				},
 				"label_calBy": {
 					"type": "text",
@@ -354,7 +356,8 @@
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"textAlign": "left",
-					"dataSourceTypeHint": "date"
+					"dataSourceTypeHint": "date",
+					"method": "ObjectMethods/entryField_pmInterval.4dm"
 				},
 				"entryField_pmTech": {
 					"type": "input",
@@ -374,7 +377,8 @@
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"textAlign": "left",
-					"dataSourceTypeHint": "text"
+					"dataSourceTypeHint": "text",
+					"method": "ObjectMethods/entryField_pmTech.4dm"
 				},
 				"label_calBy1": {
 					"type": "text",
@@ -441,7 +445,8 @@
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"textAlign": "left",
-					"dataSourceTypeHint": "text"
+					"dataSourceTypeHint": "text",
+					"method": "ObjectMethods/entryField_pmDocument1.4dm"
 				},
 				"label_calDocument2": {
 					"type": "text",
@@ -470,7 +475,8 @@
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"textAlign": "left",
-					"dataSourceTypeHint": "text"
+					"dataSourceTypeHint": "text",
+					"method": "ObjectMethods/entryField_calDocument1.4dm"
 				},
 				"shipping_bkgd2": {
 					"type": "rectangle",
@@ -537,7 +543,8 @@
 					"printFrame": "variable",
 					"method": "ObjectMethods/PopupDate2.4dm",
 					"events": [
-						"onLoad"
+						"onLoad",
+						"onDataChange"
 					],
 					"focusable": true,
 					"borderStyle": "none"
@@ -558,7 +565,8 @@
 					"printFrame": "variable",
 					"method": "ObjectMethods/PopupDate3.4dm",
 					"events": [
-						"onLoad"
+						"onLoad",
+						"onDataChange"
 					],
 					"focusable": true,
 					"borderStyle": "none"
@@ -579,7 +587,8 @@
 					"printFrame": "variable",
 					"method": "ObjectMethods/PopupDate4.4dm",
 					"events": [
-						"onLoad"
+						"onLoad",
+						"onDataChange"
 					],
 					"focusable": true,
 					"borderStyle": "none"
