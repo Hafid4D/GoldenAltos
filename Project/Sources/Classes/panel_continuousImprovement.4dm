@@ -31,7 +31,7 @@ Function redrawAndSetVisible()
 	This:C1470.cipManage()
 	
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
-	
+	OBJECT SET VISIBLE:C603(*; "bInterestedPartyEdit"; Form:C1466.sfw.checkIsInModification())
 	Case of 
 		: (FORM Get current page:C276(*)=1)
 			OBJECT GET COORDINATES:C663(*; "subform_cip"; $left; $top; $right; $bottom)

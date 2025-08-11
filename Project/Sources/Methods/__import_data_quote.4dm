@@ -18,7 +18,7 @@ If ($assumptions_file.exists)
 	$quote_file:=Folder:C1567(fk data folder:K87:12).file("DataJson/quotes.json")
 	If ($quote_file.exists)
 		$quotes:=JSON Parse:C1218($quote_file.getText())
-		TRACE:C157
+		
 		For each ($quote; $quotes)
 			$eQuote:=ds:C1482.Quote.new()
 			
@@ -32,7 +32,7 @@ If ($assumptions_file.exists)
 			$eContact:=ds:C1482.Contact.query("code == :1"; $quote.ContactCode).first()
 			If ($eContact=Null:C1517)
 				$eContact:=ds:C1482.Contact.new()
-				$eContact.UUID_Customer:=$eCostumer.UUID
+				$eContact.UUID_Company:=$eCostumer.UUID
 				$eContact.firstName:=$quote.Fname
 				$eContact.lastName:=$quote.Lname
 				$eContact.code:=$quote.ContactCode
@@ -54,11 +54,30 @@ If ($assumptions_file.exists)
 				$eContact.contactDetails.addresses.push($address)
 				
 				$eContact.contactDetails.communications:=New collection:C1472()
-				$comm:=New object:C1471()
-				$comm.mobile:=$quote.tel_num
-				$comm.fax:=$quote.fax_num
-				$comm.email:=$quote.email_addr
-				$eContact.contactDetails.communications.push($comm)
+				
+				If ($quote.tel_num#"")
+					$comm:=New object:C1471()
+					$comm.type:="mobile"
+					$comm.comment:=""
+					$comm.contact:=$quote.tel_num
+					$eContact.contactDetails.communications.push($comm)
+				End if 
+				
+				If ($quote.fax_num#"")
+					$comm:=New object:C1471()
+					$comm.type:="fax"
+					$comm.comment:=""
+					$comm.contact:=$quote.fax_num
+					$eContact.contactDetails.communications.push($comm)
+				End if 
+				
+				If ($quote.email_addr#"")
+					$comm:=New object:C1471()
+					$comm.type:="email"
+					$comm.comment:=""
+					$comm.contact:=$quote.email_addr
+					$eContact.contactDetails.communications.push($comm)
+				End if 
 				
 				$eContact.save()
 			End if 
@@ -114,11 +133,29 @@ If ($assumptions_file.exists)
 					$ext:=$motifs[1]
 				End if 
 				
-				$comm:=New object:C1471()
-				$comm.email:=$email
-				$comm.mobile:=$tel
-				$comm.ext:=$ext
-				$eEmployee.contactDetails.communications.push($comm)
+				If ($tel#"")
+					$comm:=New object:C1471()
+					$comm.type:="mobile"
+					$comm.comment:=""
+					$comm.contact:=$tel
+					$eContact.contactDetails.communications.push($comm)
+				End if 
+				
+				If ($ext#"")
+					$comm:=New object:C1471()
+					$comm.type:="ext"
+					$comm.comment:=""
+					$comm.contact:=$ext
+					$eContact.contactDetails.communications.push($comm)
+				End if 
+				
+				If ($email#"")
+					$comm:=New object:C1471()
+					$comm.type:="email"
+					$comm.comment:=""
+					$comm.contact:=$email
+					$eContact.contactDetails.communications.push($comm)
+				End if 
 				
 				$rss:=$eEmployee.save()
 				If ($rss.success=False:C215)
