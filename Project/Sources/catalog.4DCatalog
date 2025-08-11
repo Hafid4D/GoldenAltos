@@ -2782,6 +2782,11 @@
 			<table_ref uuid="2D402F4FA4404104988E27262D340885" name="sfw_EMailQueue"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="A36D178827E848A69625D00B2A99C18B" type="1">
+		<field_ref uuid="87371A3102B02347880B2FF579DAE670" name="UUID">
+			<table_ref uuid="BBADA9B28C42FC4AA02504E477DEF5BB" name="AML"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="A5AE436EE8050948AB9B961F0A7E1491" type="7">
 		<field_ref uuid="5692BDD57E88304092FB8E31BA284F2D" name="UUID">
 			<table_ref uuid="061A7E4F30DD8C46A92C801EB9B9ACC5" name="CertificationAssignment"/>
