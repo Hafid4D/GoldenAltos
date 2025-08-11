@@ -126,8 +126,10 @@
 		<field name="categoryID" uuid="67905BE86C5BDA44814B3A2BCCFDCDB6" type="4" never_null="true" id="10"/>
 		<field name="remark" uuid="F4CD3DD5A915BB498EF945E380518B91" type="10" limiting_length="255" never_null="true" id="11"/>
 		<field name="extension" uuid="1743D4283CC7B74CAF65FB4A396AEE7C" type="10" limiting_length="255" never_null="true" id="12"/>
+		<field name="addendum" uuid="6DF08F80478E4F47A8CF52321A3E7801" type="1" never_null="true" id="13"/>
 		<field name="suppress" uuid="667B2B05F2E694439706686CE9DC412D" type="1" never_null="true" id="14"/>
 		<field name="departmentID" uuid="00BBA10D3C697F408E164BC3494272E4" type="4" never_null="true" id="15"/>
+		<field name="addendumToSpec" uuid="4DB9F8A21A12A14398F05AF7C5F1BA5D" type="10" limiting_length="255" never_null="true" id="16"/>
 		<field name="reviewIntervalInDays" uuid="7413D34B72ACD04A8DAD654BFE162AAF" type="4" never_null="true" id="17"/>
 		<field name="reviewDate" uuid="87FFB43152B5CB40B41CA4ABE12A9474" type="8" never_null="true" id="18"/>
 		<primary_key field_name="UUID" field_uuid="2A671DFB01797B4DBB6EC2EB4216DB75"/>
@@ -541,11 +543,14 @@
 		<primary_key field_name="UUID" field_uuid="1CB76A26D5B699429A95B9E10253FD00"/>
 	</table>
 	<table name="Units" uuid="BBEF22543374E24BBC6534C68EA6E3D2" id="49">
+
 		<field name="UUID" uuid="2C3EE5FC26975842998856F7D02B3BA2" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="unitID" uuid="B8D8E68ABB8B0B478109C20BD0BBBCE8" type="3" never_null="true" id="2"/>
-		<field name="name" uuid="2985F44C992E634496636D1D3287EA03" type="10" limiting_length="255" never_null="true" id="3">
+		<field name="levelID" uuid="B8D8E68ABB8B0B478109C20BD0BBBCE8" type="3" never_null="true" id="2"/>
+		<field name="code" uuid="2985F44C992E634496636D1D3287EA03" type="10" limiting_length="255" never_null="true" id="3">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="name" uuid="66342D72F1BD1045A4476EDC0CFB80DA" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="color" uuid="C3C602807A2B7A4E9331F48E8166FCA9" type="10" limiting_length="255" never_null="true" id="5"/>
 		<primary_key field_name="UUID" field_uuid="2C3EE5FC26975842998856F7D02B3BA2"/>
 	</table>
 	<table name="LeadEvent" uuid="04F7E2A28A5349B4B0C70F6D644922BB" id="50">
@@ -2290,6 +2295,11 @@
 			<table_ref uuid="AD9AFF574E6E2745A70D65CE48ABAB7E" name="dfd_Line"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="2A6424D2B4134CA2AF953DBE58FB2DBA" type="1">
+		<field_ref uuid="87371A3102B02347880B2FF579DAE670" name="UUID">
+			<table_ref uuid="BBADA9B28C42FC4AA02504E477DEF5BB" name="(AML)"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="2A8FF9A5455141689A96101C4A7D5338" type="3">
 		<field_ref uuid="2E2FF42359124C978D041A838CB8866E" name="UUID_User">
 			<table_ref uuid="0A7AAD6A6AAB448E9F91A0CF0CC592C6" name="sfw_SchedulerLog"/>
@@ -2425,11 +2435,6 @@
 			<table_ref uuid="4EB6C9D117A3DC4B91D031D6BC0C7DA9" name="CustomerCarrier"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="56B886B5049AE6478CEA8C8CAD699222" type="1">
-		<field_ref uuid="CFBA7599E861DC4A91A0C1B26781C297" name="UUID">
-			<table_ref uuid="A0C8CDC075BBB546914E03F7689B897E" name="Supplier"/>
-		</field_ref>
-	</index>
 	<index kind="regular" uuid="5743909E87308F4791C546B6E49A8379" type="3">
 		<field_ref uuid="E7C8FFEBD904E74EB339A34146F11671" name="UUID_PartData">
 			<table_ref uuid="BBADA9B28C42FC4AA02504E477DEF5BB" name="AML"/>
@@ -2455,11 +2460,6 @@
 			<table_ref uuid="FD10D10C9E0015458AFF59F988A373BB" name="Staff"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="5C99B0B64272314EBB790B3C2D628A0E" type="1">
-		<field_ref uuid="87371A3102B02347880B2FF579DAE670" name="UUID">
-			<table_ref uuid="BBADA9B28C42FC4AA02504E477DEF5BB" name="AML"/>
-		</field_ref>
-	</index>
 	<index kind="regular" uuid="5F5C17476B8F481D93BCC7DBFA70DAF2" type="3">
 		<field_ref uuid="8A589FC02D27422896AAEB8585D15059" name="UUID_target">
 			<table_ref uuid="E82BBE2952C449BE995135760C788E8F" name="sfw_Comment"/>
@@ -2478,6 +2478,11 @@
 	<index kind="regular" uuid="62653CBC37B2C04D8FDC32AE64890757" type="3">
 		<field_ref uuid="4463613D81E24EFBA7FEC15654FA732C" name="UUID_User">
 			<table_ref uuid="5E1C3E25225441628E3DBCF58BFAABF4" name="sfw_Document"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="63EB42724ED147C3B12BE631ADB8F57C" type="1">
+		<field_ref uuid="CFBA7599E861DC4A91A0C1B26781C297" name="UUID">
+			<table_ref uuid="A0C8CDC075BBB546914E03F7689B897E" name="(Supplier)"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="675DDEA34102494283E12FCAE91573AD" type="3">
@@ -2605,11 +2610,6 @@
 			<table_ref uuid="73EFE2D78C61400397353509CBA87D18" name="Step"/>
 		</field_ref>
 	</index>
-	<index kind="regular" uuid="8700263A15B7924780675278F08160E5" type="1">
-		<field_ref uuid="7A85388CD512C046A81BE5DA02676256" name="internalPartNum">
-			<table_ref uuid="68D645D2E1989F4CA36E905F914AD868" name="PartData"/>
-		</field_ref>
-	</index>
 	<index kind="regular" uuid="878B8D90A6C2644D89B8883B80E40549" type="3">
 		<field_ref uuid="0EACB0E17BBD4F639E0C142211979D18" name="UUID_Staff">
 			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
@@ -2705,6 +2705,11 @@
 			<table_ref uuid="2D402F4FA4404104988E27262D340885" name="sfw_EMailQueue"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="A36D178827E848A69625D00B2A99C18B" type="1">
+		<field_ref uuid="87371A3102B02347880B2FF579DAE670" name="UUID">
+			<table_ref uuid="BBADA9B28C42FC4AA02504E477DEF5BB" name="AML"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="A5AE436EE8050948AB9B961F0A7E1491" type="7">
 		<field_ref uuid="5692BDD57E88304092FB8E31BA284F2D" name="UUID">
 			<table_ref uuid="061A7E4F30DD8C46A92C801EB9B9ACC5" name="CertificationAssignment"/>
@@ -2742,7 +2747,7 @@
 	</index>
 	<index kind="regular" unique_keys="true" uuid="AE83CD1FD23F074388E41D1EB7FB0173" type="1">
 		<field_ref uuid="2C3EE5FC26975842998856F7D02B3BA2" name="UUID">
-			<table_ref uuid="BBEF22543374E24BBC6534C68EA6E3D2" name="Units"/>
+			<table_ref uuid="BBEF22543374E24BBC6534C68EA6E3D2" name="Unit"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="B1A2B84D24E6284B89649B659845D4AF" type="7">
@@ -2878,6 +2883,11 @@
 	<index kind="regular" unique_keys="true" uuid="DA644052E5E745D2A0EBE32E584543F8" type="7">
 		<field_ref uuid="46A023E9F16E49DBA21C7DCCBAA82770" name="UUID">
 			<table_ref uuid="71FD451F60934C9995C7A6D899CA2B51" name="Certification"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="DAA75F35A4DE45118329BE350E00A88F" type="1">
+		<field_ref uuid="CFBA7599E861DC4A91A0C1B26781C297" name="UUID">
+			<table_ref uuid="A0C8CDC075BBB546914E03F7689B897E" name="Supplier"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="DC26D85A1CEAF34F80864317132F0395" type="3">

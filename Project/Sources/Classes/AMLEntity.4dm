@@ -30,7 +30,7 @@ local Function drowPup($dataClass; $queryField; $queryValue; $pupName)
 		$color:=cs:C1710.sfw_htmlColor.me.getName($entity.color)
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
 	Else 
-		$pathIcon:=""
+		$pathIcon:="sfw/colors/GhostWhite-circle.png"
 	End if 
 	Form:C1466.sfw.drawButtonPup($pupName; $name; $pathIcon; ($entity=Null:C1517))
 	

@@ -68,11 +68,11 @@ If (Form:C1466.sfw.lb_items.length>0)
 						
 					: ($identEntry="OnlySpecs")
 						
-						$context.subject:="Only Specs"
+						$context.subject:="Specs"
 						
 					: ($identEntry="OnlyForms")
 						
-						$context.subject:="Only Forms"
+						$context.subject:="Forms"
 					Else 
 						
 						$context.subject:="Specifications"

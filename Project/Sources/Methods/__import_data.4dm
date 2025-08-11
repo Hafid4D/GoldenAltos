@@ -10,6 +10,6 @@ __import_data_equipment
 __import_country
 __import_data_CIP
 __import_data_avl_aml
-__import_data_quote()
+__import_data_quote
 
 ALERT:C41("Import done")

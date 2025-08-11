@@ -226,22 +226,22 @@ If ($avml_log.exists)
 		$eAvml.comment:=$avml.Comments
 		
 		//$eAvml.inventoryUnits:=$avml.InventoryUnits
-		$unit:=ds:C1482.Units.query("name =:1"; Split string:C1554($avml.InventoryUnits; "\r"; sk trim spaces:K86:2).join("\r"))
+		$unit:=ds:C1482.Unit.query("name =:1"; Split string:C1554($avml.InventoryUnits; "\r"; sk trim spaces:K86:2).join("\r"))
 		
 		If ($unit.length>0)
 			
-			$eAvml.inventoryUnits:=$unit[0].unitID
+			$eAvml.inventoryUnits:=$unit[0].levelID
 		Else 
 			
 			$eAvml.inventoryUnits:=0
 		End if 
 		
 		//$eAvml.procurementUnits:=$avml.ProcurementUnits
-		$unit:=ds:C1482.Units.query("name =:1"; Split string:C1554($avml.ProcurementUnits; "\r"; sk trim spaces:K86:2).join("\r"))
+		$unit:=ds:C1482.Unit.query("name =:1"; Split string:C1554($avml.ProcurementUnits; "\r"; sk trim spaces:K86:2).join("\r"))
 		
 		If ($unit.length>0)
 			
-			$eAvml.procurementUnits:=$unit[0].unitID
+			$eAvml.procurementUnits:=$unit[0].levelID
 		Else 
 			
 			$eAvml.procurementUnits:=0
