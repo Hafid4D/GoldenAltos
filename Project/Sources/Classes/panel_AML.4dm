@@ -152,7 +152,7 @@ Function pup_empCode()
 	
 	If (Form:C1466.sfw.checkIsInModification())
 		
-		OBJECT GET COORDINATES:C663(*; "pup_approvedBy"; $l; $t; $r; $b)
+		OBJECT GET COORDINATES:C663(*; "pup_empCode"; $l; $t; $r; $b)
 		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
 		
 		$form:=New object:C1471(\
