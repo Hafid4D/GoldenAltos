@@ -177,25 +177,25 @@ Function pup_empCode()
 	
 Function drawPup_inventoryUnit()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.current_item.drowPup("Unit"; "levelID"; "inventoryUnits"; "pup_inventoryUnit")
+		Form:C1466.current_item.drowPup("Units"; "levelID"; "inventoryUnits"; "pup_inventoryUnit")
 	End if 
 	
 	
 Function pup_inventoryUnit()
 	//Create pop up menu
-	Form:C1466.current_item.pup("units"; "Unit"; "levelID"; "inventoryUnits")
+	Form:C1466.current_item.pup("units"; "Units"; "levelID"; "inventoryUnits")
 	This:C1470.drawPup_inventoryUnit()
 	
 	
 Function drawPup_procurementUnit()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.current_item.drowPup("Unit"; "levelID"; "inventoryUnits"; "pup_procurementUnit")
+		Form:C1466.current_item.drowPup("Units"; "levelID"; "procurementUnits"; "pup_procurementUnit")
 	End if 
 	
 	
 Function pup_procurementUnit()
 	//Create pop up menu
-	Form:C1466.current_item.pup("units"; "Unit"; "levelID"; "procurementUnits")
+	Form:C1466.current_item.pup("units"; "Units"; "levelID"; "procurementUnits")
 	This:C1470.drawPup_procurementUnit()
 	
 	

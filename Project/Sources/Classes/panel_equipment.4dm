@@ -336,7 +336,9 @@ Function bActionDocument()
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_document"; $form)
 			If (OK=1)
-				Form:C1466.current_item.reports.documents.push($form.details)
+				Form:C1466.selectedDocument:=$form.details
+				//Form.current_item.reports.documents.push($form.details)
+				cs:C1710.panel_equipment.me._activate_save_cancel_button()
 			End if 
 			
 			
@@ -348,19 +350,23 @@ Function bActionDocument()
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_document"; $form)
-			
+			If (OK=1)
+				Form:C1466.selectedDocument:=$form.details
+				//Form.current_item.reports.documents.push($form.details)
+				cs:C1710.panel_equipment.me._activate_save_cancel_button()
+			End if 
 			
 		: ($choice="--delete")
 			
 			$ok:=cs:C1710.sfw_dialog.me.confirm("Do you really want to delete this document? "; "Delete"; "CANCEL")
 			If ($ok)
-				
-				Form:C1466.current_item.reports.documents.remove(Form:C1466.selectedDocumentPos-1)
-				
+				Form:C1466.lb_documents.remove(Form:C1466.selectedDocumentPos-1)
+				//Form.current_item.reports.documents.remove(Form.selectedDocumentPos-1)
+				cs:C1710.panel_equipment.me._activate_save_cancel_button()
 				
 			End if 
 			
-			This:C1470.loadDocuments()
+			//This.loadDocuments()
 			
 	End case 
 	

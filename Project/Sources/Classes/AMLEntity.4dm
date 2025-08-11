@@ -10,7 +10,7 @@ local Function rebuildAddress()->$address : Object
 		If (Form:C1466.current_item.supplier#Null:C1517)
 			
 			If (OB Is defined:C1231(Form:C1466.current_item.supplier.contactDetails; "addresses"))
-				$address:=Form:C1466.current_item.supplier.contactDetails.addresses.query("type = :1"; "main").first()
+				$address:=Form:C1466.current_item.supplier.contactDetails.addresses.query("type =:1"; "main").first()
 			End if 
 		End if 
 		Form:C1466.subFormAddress.address:=$address
@@ -21,7 +21,7 @@ local Function rebuildAddress()->$address : Object
 	
 local Function drowPup($dataClass; $queryField; $queryValue; $pupName)
 	
-	$entity:=ds:C1482[$dataClass].query($queryField+"= :1"; Form:C1466.current_item[$queryValue]).first() || New object:C1471()
+	$entity:=ds:C1482[$dataClass].query($queryField+" =:1"; Form:C1466.current_item[$queryValue]).first() || New object:C1471()
 	$name:=$entity.name
 	If ($name=Null:C1517)
 		$name:=""
