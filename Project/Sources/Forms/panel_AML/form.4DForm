@@ -572,82 +572,12 @@
 					"dataSourceTypeHint": "boolean",
 					"right": 670
 				},
-				"pup_approvedBy": {
-					"type": "button",
-					"top": 570,
-					"left": 599,
-					"width": 70,
-					"height": 23,
-					"fontFamily": "System Font",
-					"fontSize": 13,
-					"focusable": false,
-					"text": "",
-					"icon": "",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/pup_approvedBy.4dm",
-					"events": [
-						"onClick",
-						"onDisplayDetail"
-					],
-					"right": 669,
-					"fontWeight": "normal",
-					"textAlign": "left"
-				},
-				"label_approvedBy": {
-					"type": "text",
-					"top": 573,
-					"left": 455,
-					"width": 130,
-					"height": 17,
-					"stroke": "#000000",
-					"text": "Approded By",
-					"bottom": 590,
-					"right": 585,
-					"fontWeight": "bold",
-					"textAlign": "right"
-				},
-				"label_approvedDate": {
-					"type": "text",
-					"top": 573,
-					"left": 128,
-					"width": 130,
-					"height": 17,
-					"stroke": "#000000",
-					"text": "Approval Date",
-					"bottom": 590,
-					"right": 258,
-					"fontWeight": "bold",
-					"textAlign": "right"
-				},
-				"entryField_approvalDate": {
-					"type": "input",
-					"top": 573,
-					"left": 267,
-					"width": 154,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.approvalDate",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "normal",
-					"textAlign": "left",
-					"bottom": 590,
-					"right": 421
-				},
 				"subFormAddress": {
 					"type": "subform",
 					"left": 680,
 					"top": 143,
 					"width": 776,
-					"height": 249,
+					"height": 243,
 					"detailForm": "sfw_subpanel_addressSingle",
 					"borderStyle": "none",
 					"dataSource": "Form:C1466.subFormAddress",
@@ -721,64 +651,6 @@
 					"fontSize": 12,
 					"fontWeight": "bold"
 				},
-				"header_bkgd4": {
-					"type": "rectangle",
-					"top": 520,
-					"left": 1,
-					"width": 676,
-					"height": 30,
-					"sizingX": "fixed",
-					"fill": "#A2C6D8",
-					"stroke": "transparent",
-					"right": 677
-				},
-				"lbl_address3": {
-					"type": "text",
-					"top": 527,
-					"left": 12,
-					"width": 250,
-					"height": 17,
-					"stroke": "#000000",
-					"text": "QA Informations",
-					"fontSize": 12,
-					"fontWeight": "bold"
-				},
-				"entryField_isApproved": {
-					"type": "checkbox",
-					"text": "Approved",
-					"top": 573,
-					"left": 12,
-					"width": 98,
-					"height": 17,
-					"events": [
-						"onClick"
-					],
-					"dataSource": "Form:C1466.current_item.isApproved",
-					"fontWeight": "normal",
-					"dataSourceTypeHint": "boolean",
-					"right": 110
-				},
-				"PopupDate1": {
-					"type": "subform",
-					"top": 573,
-					"left": 402,
-					"width": 19,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.approvalDate",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/PopupDate1.4dm",
-					"events": [
-						"onLoad"
-					],
-					"focusable": true,
-					"borderStyle": "none"
-				},
 				"btnForward3": {
 					"type": "button",
 					"text": " ",
@@ -799,12 +671,140 @@
 					"visibility": "visible",
 					"iconFrames": 4,
 					"focusable": false
+				},
+				"pup_approvedBy": {
+					"type": "button",
+					"top": 440,
+					"left": 1278,
+					"width": 70,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_approvedBy.4dm",
+					"events": [
+						"onClick",
+						"onDisplayDetail"
+					],
+					"right": 1348,
+					"fontWeight": "normal",
+					"textAlign": "left"
+				},
+				"label_approvedBy": {
+					"type": "text",
+					"top": 443,
+					"left": 1134,
+					"width": 130,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Approded By",
+					"bottom": 460,
+					"right": 1264,
+					"fontWeight": "bold",
+					"textAlign": "right"
+				},
+				"label_approvedDate": {
+					"type": "text",
+					"top": 443,
+					"left": 807,
+					"width": 130,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Approval Date",
+					"bottom": 460,
+					"right": 937,
+					"fontWeight": "bold",
+					"textAlign": "right"
+				},
+				"entryField_approvalDate": {
+					"type": "input",
+					"top": 443,
+					"left": 946,
+					"width": 154,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.approvalDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "normal",
+					"textAlign": "left",
+					"bottom": 460,
+					"right": 1100
+				},
+				"header_bkgd4": {
+					"type": "rectangle",
+					"top": 390,
+					"left": 680,
+					"width": 776,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 1456
+				},
+				"lbl_address3": {
+					"type": "text",
+					"top": 397,
+					"left": 691,
+					"width": 250,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "QA Informations",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"entryField_isApproved": {
+					"type": "checkbox",
+					"text": "Approved",
+					"top": 443,
+					"left": 691,
+					"width": 98,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.current_item.isApproved",
+					"fontWeight": "normal",
+					"dataSourceTypeHint": "boolean",
+					"right": 789
+				},
+				"PopupDate1": {
+					"type": "subform",
+					"top": 443,
+					"left": 1081,
+					"width": 19,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.approvalDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/PopupDate1.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true,
+					"borderStyle": "none"
 				}
 			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 496,
+	"geometryStamp": 501,
 	"editor": {
 		"groups": {
 			"Group": [

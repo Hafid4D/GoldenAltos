@@ -256,6 +256,18 @@ If ($avml_log.exists)
 		$partNum:=ds:C1482.PartData.query("internalPartNum =:1"; Split string:C1554($avml.OUR_partnum; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($partNum.length>0)
 			$eAvml.UUID_PartData:=$partNum[0].UUID
+		Else 
+			
+			$ePartData:=ds:C1482.PartData.new()
+			$ePartData.internalPartNum:=$avml.OUR_partnum
+			
+			$res:=$ePartData.save()
+			If (Not:C34($res.success))
+				TRACE:C157
+			End if 
+			
+			$eAvml.UUID_PartData:=$ePartData.UUID
+			
 		End if 
 		
 		$supplier:=ds:C1482.Supplier.query("name =:1"; Split string:C1554($avml.Supplier; "\r"; sk trim spaces:K86:2).join("\r"))

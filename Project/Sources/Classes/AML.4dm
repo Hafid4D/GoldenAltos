@@ -14,10 +14,13 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(1; ""; "Main")
 	
 	$entry.setLBItemsColumn("partData.internalPartNum"; "Internal Part#"; "width:150")
-	$entry.setLBItemsColumn("vendorPartnum"; "Vendor Part#"; "width:250")
+	$entry.setLBItemsColumn("vendorPartnum"; "Vendor Part#"; "width:100")
 	$entry.setLBItemsColumn("supplier.name"; "Vendor name"; "width:250")
 	$entry.setLBItemsOrderBy("partData.internalPartNum")
 	
+	$entry.setItemListAction("Export selection to excel"; "_ga_exportAmlList")
+	$entry.setItemListAction("-"; "-")
+	$entry.setItemListAction("Print selection"; "_ga_printAmlList")
 	
 	
 	// MARK: -Filters
