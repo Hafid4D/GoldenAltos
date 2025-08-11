@@ -732,7 +732,6 @@
 				"alpha": 255
 			},
 			"coordinates": {
-
 				"left": 3855,
 				"top": 426,
 				"width": 186,
@@ -752,9 +751,9 @@
 				"left": 4336,
 				"top": 425,
 				"width": 211,
-				"height": 404.33203125
+				"height": 422.33203125
 			},
-			"displayable_fields_count": 17,
+			"displayable_fields_count": 18,
 			"fields": {
 				"UUID": {
 					"color": {
@@ -922,7 +921,7 @@
 				}
 			}
 		},
-		"Unit": {
+		"Units": {
 			"color": {
 				"red": 255,
 				"green": 255,
@@ -930,12 +929,13 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3884,
+				"left": 3882,
 				"top": 595,
 				"width": 120,
 				"height": 167.33203125
 			},
-			"displayable_fields_count": 6
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
 		},
 		"SpecControllingDept": {
 			"color": {

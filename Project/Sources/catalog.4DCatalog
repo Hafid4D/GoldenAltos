@@ -720,6 +720,7 @@
 		<field name="nextAuditDate" uuid="4C047305581E2E43A36A0378D0CF2E0A" type="8" never_null="true" id="16">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="attachedDocuments" uuid="926C9621239B634A8ACB2A923364231D" type="21" blob_switch_size="2147483647" never_null="true" id="17"/>
 		<primary_key field_name="UUID" field_uuid="CFBA7599E861DC4A91A0C1B26781C297"/>
 	</table>
 	<table name="PartData" uuid="68D645D2E1989F4CA36E905F914AD868" id="58">
@@ -2295,11 +2296,6 @@
 			<table_ref uuid="AD9AFF574E6E2745A70D65CE48ABAB7E" name="dfd_Line"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="2A6424D2B4134CA2AF953DBE58FB2DBA" type="1">
-		<field_ref uuid="87371A3102B02347880B2FF579DAE670" name="UUID">
-			<table_ref uuid="BBADA9B28C42FC4AA02504E477DEF5BB" name="(AML)"/>
-		</field_ref>
-	</index>
 	<index kind="regular" uuid="2A8FF9A5455141689A96101C4A7D5338" type="3">
 		<field_ref uuid="2E2FF42359124C978D041A838CB8866E" name="UUID_User">
 			<table_ref uuid="0A7AAD6A6AAB448E9F91A0CF0CC592C6" name="sfw_SchedulerLog"/>
@@ -2478,11 +2474,6 @@
 	<index kind="regular" uuid="62653CBC37B2C04D8FDC32AE64890757" type="3">
 		<field_ref uuid="4463613D81E24EFBA7FEC15654FA732C" name="UUID_User">
 			<table_ref uuid="5E1C3E25225441628E3DBCF58BFAABF4" name="sfw_Document"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="63EB42724ED147C3B12BE631ADB8F57C" type="1">
-		<field_ref uuid="CFBA7599E861DC4A91A0C1B26781C297" name="UUID">
-			<table_ref uuid="A0C8CDC075BBB546914E03F7689B897E" name="(Supplier)"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="675DDEA34102494283E12FCAE91573AD" type="3">
@@ -2747,7 +2738,7 @@
 	</index>
 	<index kind="regular" unique_keys="true" uuid="AE83CD1FD23F074388E41D1EB7FB0173" type="1">
 		<field_ref uuid="2C3EE5FC26975842998856F7D02B3BA2" name="UUID">
-			<table_ref uuid="BBEF22543374E24BBC6534C68EA6E3D2" name="Unit"/>
+			<table_ref uuid="BBEF22543374E24BBC6534C68EA6E3D2" name="Units"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="B1A2B84D24E6284B89649B659845D4AF" type="7">

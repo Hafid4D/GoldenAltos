@@ -782,10 +782,139 @@
 					"dataSourceTypeHint": "text"
 				}
 			}
+		},
+		{
+			"objects": {
+				"lb_documents": {
+					"type": "listbox",
+					"left": 132,
+					"top": 114,
+					"width": 1443,
+					"height": 700,
+					"events": [
+						"onClick",
+						"onDataChange",
+						"onSelectionChange",
+						"onHeaderClick",
+						"onBeginDragOver"
+					],
+					"listboxType": "collection",
+					"currentItemPositionSource": "Form:C1466.selectedDocumentPos",
+					"currentItemSource": "Form:C1466.selectedDocument",
+					"dataSource": "Form:C1466.lb_documents",
+					"method": "",
+					"selectionMode": "single",
+					"resizingMode": "rightToLeft",
+					"alternateFill": "#E6E6E6",
+					"horizontalLineStroke": "transparent",
+					"borderStyle": "none",
+					"verticalLineStroke": "transparent",
+					"headerHeight": "2em",
+					"right": 1575,
+					"scrollbarHorizontal": "automatic",
+					"hideFocusRing": false,
+					"focusable": true,
+					"columns": [
+						{
+							"header": {
+								"text": "Code",
+								"name": "Header5",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column5",
+							"footer": {
+								"name": "Footer5"
+							},
+							"dataSource": "This:C1470.code",
+							"width": 59
+						},
+						{
+							"header": {
+								"name": "Header6",
+								"text": "Source Path",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column6",
+							"footer": {
+								"name": "Footer6"
+							},
+							"dataSource": "This:C1470.sourcePath",
+							"dataSourceTypeHint": "text",
+							"width": 198,
+							"truncateMode": "withEllipsis",
+							"wordwrap": "none"
+						},
+						{
+							"header": {
+								"name": "Header7",
+								"text": "Date and Time of filling",
+								"fontWeight": "bold",
+								"textAlign": "right"
+							},
+							"name": "Column7",
+							"footer": {
+								"name": "Footer7"
+							},
+							"dataSource": "This:C1470.creationDateTime",
+							"width": 153,
+							"truncateMode": "withEllipsis",
+							"wordwrap": "none",
+							"textAlign": "right"
+						},
+						{
+							"header": {
+								"name": "Header8",
+								"text": "Doc Description",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column8",
+							"footer": {
+								"name": "Footer8"
+							},
+							"dataSource": "This:C1470.description",
+							"dataSourceTypeHint": "text",
+							"width": 224
+						},
+						{
+							"header": {
+								"name": "Header9",
+								"text": "QA Approval",
+								"fontWeight": "bold"
+							},
+							"name": "Column9",
+							"dataSourceTypeHint": "boolean",
+							"dataSource": "This:C1470.isApproved",
+							"footer": {
+								"name": "Footer9"
+							}
+						}
+					]
+				},
+				"bActionDocument": {
+					"type": "button",
+					"text": "Actions",
+					"top": 137,
+					"left": 12,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionDocument.4dm",
+					"visibility": "visible"
+				}
+			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 143,
+	"geometryStamp": 145,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

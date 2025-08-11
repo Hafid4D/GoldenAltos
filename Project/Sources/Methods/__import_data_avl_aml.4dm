@@ -39,6 +39,16 @@ If ($supplier_log.exists)
 	
 	TRUNCATE TABLE:C1051([Supplier:57])
 	
+	
+	$docs:=Folder:C1567(fk data folder:K87:12).file("DataJson/docServerIndex_export.json")
+	$count:=0
+	If ($docs.exists)
+		
+		$documents:=JSON Parse:C1218($docs.getText())
+		
+	End if 
+	
+	
 	For each ($supplier; $suppliers)
 		
 		$eSupplier:=ds:C1482.Supplier.new()
@@ -99,6 +109,39 @@ If ($supplier_log.exists)
 		$address.detail.city:=$supplier.remit_add3
 		$address.detail.state:=$supplier.remit_st
 		$eSupplier.contactDetails.addresses.push($address)
+		
+		$_documents:=$documents.query("PrimaryKeyValue=:1 & TableNumber=:2"; String:C10($supplier.UniqueID); 18)
+		
+		$eSupplier.attachedDocuments:=New object:C1471()
+		$eSupplier.attachedDocuments.documents:=New collection:C1472()
+		
+		For each ($document; $_documents)
+			$doc:=New object:C1471
+			
+			$doc.code:=$document.DocCode
+			$doc.dateTimeStamp:=$document.DateTimeStamp
+			$doc.creationDateTimeStamp:=$document.CreationDateTimeStamp
+			$doc.documentPath:=$document.DocumentPath
+			$doc.sourcePath:=$document.SourcePath
+			$doc.description:=$document.DocDescription
+			$doc.approvalDate:=!00-00-00!
+			$doc.approvedBy:=""
+			$doc.isApproved:=False:C215
+			
+			
+			$report:=Folder:C1567(fk data folder:K87:12).file("DataJson/SuppliersDocs/"+String:C10($document.UniqueID+$document.PrimaryKeyValue))
+			If ($report.exists)
+				
+				C_BLOB:C604($blob)
+				DOCUMENT TO BLOB:C525($report.platformPath; $blob)
+				
+				$doc.blob:=$blob
+				
+			End if 
+			
+			$eSupplier.attachedDocuments.documents.push($doc)
+			
+		End for each 
 		
 		
 		//Save the supplier
@@ -226,7 +269,7 @@ If ($avml_log.exists)
 		$eAvml.comment:=$avml.Comments
 		
 		//$eAvml.inventoryUnits:=$avml.InventoryUnits
-		$unit:=ds:C1482.Unit.query("name =:1"; Split string:C1554($avml.InventoryUnits; "\r"; sk trim spaces:K86:2).join("\r"))
+		$unit:=ds:C1482.Units.query("name =:1"; Split string:C1554($avml.InventoryUnits; "\r"; sk trim spaces:K86:2).join("\r"))
 		
 		If ($unit.length>0)
 			
@@ -237,7 +280,7 @@ If ($avml_log.exists)
 		End if 
 		
 		//$eAvml.procurementUnits:=$avml.ProcurementUnits
-		$unit:=ds:C1482.Unit.query("name =:1"; Split string:C1554($avml.ProcurementUnits; "\r"; sk trim spaces:K86:2).join("\r"))
+		$unit:=ds:C1482.Units.query("name =:1"; Split string:C1554($avml.ProcurementUnits; "\r"; sk trim spaces:K86:2).join("\r"))
 		
 		If ($unit.length>0)
 			
