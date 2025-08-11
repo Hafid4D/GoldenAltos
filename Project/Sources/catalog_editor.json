@@ -8,8 +8,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 640,
-				"top": 781,
+				"left": 581,
+				"top": 629,
 				"width": 228,
 				"height": 582.33203125
 			},
@@ -126,10 +126,10 @@
 			"coordinates": {
 				"left": 1991,
 				"top": 880,
-				"width": 169,
-				"height": 165.33203125
+				"width": 194,
+				"height": 171.33203125
 			},
-			"displayable_fields_count": 5
+			"displayable_fields_count": 6
 		},
 		"QuoteStatus": {
 			"color": {
@@ -464,8 +464,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1794,
-				"top": 600,
+				"left": 1769,
+				"top": 580,
 				"width": 189.73828125,
 				"height": 398.33203125
 			},
@@ -732,12 +732,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3481,
-				"top": 1033,
-				"width": 129,
-				"height": 100.33203125
+				"left": 3565,
+				"top": 1121,
+				"width": 186,
+				"height": 127.33203125
 			},
-			"displayable_fields_count": 2,
+			"displayable_fields_count": 4,
 			"fields_ordering": 1
 		},
 		"Supplier": {
@@ -748,8 +748,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4034,
-				"top": 599,
+				"left": 4074,
+				"top": 463,
 				"width": 211,
 				"height": 404.33203125
 			},
@@ -773,8 +773,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3669,
-				"top": 929,
+				"left": 3829,
+				"top": 873,
 				"width": 205,
 				"height": 533.33203125
 			},
@@ -929,42 +929,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 4081,
-				"top": 1072,
+				"left": 4077,
+				"top": 1100,
 				"width": 120,
 				"height": 119.33203125
 			},
 			"displayable_fields_count": 3
-		},
-		"(Supplier)": {
-			"color": {
-				"red": 128,
-				"green": 255,
-				"blue": 128,
-				"alpha": 255
-			},
-			"coordinates": {
-				"left": 3844,
-				"top": 783,
-				"width": 196,
-				"height": 681.33203125
-			},
-			"displayable_fields_count": 30
-		},
-		"(AML)": {
-			"color": {
-				"red": 128,
-				"green": 255,
-				"blue": 128,
-				"alpha": 255
-			},
-			"coordinates": {
-				"left": 3736,
-				"top": 897,
-				"width": 193,
-				"height": 482.33203125
-			},
-			"displayable_fields_count": 21
 		},
 		"SpecControllingDept": {
 			"color": {
@@ -1285,7 +1255,7 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2066,
+				"left": 2095,
 				"top": 0,
 				"width": 197,
 				"height": 513.33203125

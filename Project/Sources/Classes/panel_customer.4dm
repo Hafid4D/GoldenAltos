@@ -180,7 +180,7 @@ Function LoadApContact()
 	
 	If (Form:C1466.current_item#Null:C1517)
 		Form:C1466.lb_apContact:=New collection:C1472()
-		If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()#Null:C1517)
+		If (ds:C1482.Contact.query("UUID_Company=:1 & title=:2"; Form:C1466.current_item.UUID; "AP").first()#Null:C1517)
 			
 			Form:C1466.lb_apContact:=Form:C1466.current_item.rebuidComunications("AP")
 		End if 
@@ -190,7 +190,7 @@ Function LoadApContact()
 Function LoadStatusContact()
 	If (Form:C1466.current_item#Null:C1517)
 		Form:C1466.lb_statusContact:=New collection:C1472()
-		If (Form:C1466.current_item.contacts.query("title=:1"; "Status").first()#Null:C1517)
+		If (ds:C1482.Contact.query("UUID_Company=:1 & title=:2"; Form:C1466.current_item.UUID; "Status").first()#Null:C1517)
 			
 			Form:C1466.lb_statusContact:=Form:C1466.current_item.rebuidComunications("Status")
 			
@@ -202,7 +202,7 @@ Function bActionApContact()
 	$refMenu:=Create menu:C408
 	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
 	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openInWindow")
-	If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()=Null:C1517)
+	If (ds:C1482.Contact.query("UUID_Company=:1 & title=:2"; Form:C1466.current_item.UUID; "AP").first()=Null:C1517)
 		DISABLE MENU ITEM:C150($refMenu; -1)
 	End if 
 	
@@ -210,7 +210,7 @@ Function bActionApContact()
 	RELEASE MENU:C978($refMenu)
 	Case of 
 		: ($choice="openInWindow")
-			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.contacts.query("title=:1"; "AP").first(); "customerService"; "contact")
+			Form:C1466.sfw.openInANewWindow(ds:C1482.Contact.query("UUID_Company=:1 & title=:2"; Form:C1466.current_item.UUID; "AP").first(); "customerService"; "contact")
 	End case 
 	This:C1470.LoadApContact()
 	
@@ -219,7 +219,7 @@ Function bActionStatusContact()
 	$refMenu:=Create menu:C408
 	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
 	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openInWindow")
-	If (Form:C1466.current_item.contacts.query("title=:1"; "Status").first()=Null:C1517)
+	If (ds:C1482.Contact.query("UUID_Company=:1 & title=:2"; Form:C1466.current_item.UUID; "Status").first()=Null:C1517)
 		DISABLE MENU ITEM:C150($refMenu; -1)
 	End if 
 	
@@ -227,7 +227,7 @@ Function bActionStatusContact()
 	RELEASE MENU:C978($refMenu)
 	Case of 
 		: ($choice="openInWindow")
-			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.contacts.query("title=:1"; "Status").first(); "customerService"; "contact")
+			Form:C1466.sfw.openInANewWindow(ds:C1482.Contact.query("UUID_Company=:1 & title=:2"; Form:C1466.current_item.UUID; "Status").first(); "customerService"; "contact")
 	End case 
 	This:C1470.LoadStatusContact()
 	

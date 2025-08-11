@@ -273,7 +273,7 @@ Function bActionRepairLog()
 	RELEASE MENU:C978($refMenu)
 	Case of 
 		: ($choice="openInWindow")
-			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.repairLogs.query("UUID=:1"; Form:C1466.selectedRepaiLog.UUID).first(); "qualityAssistance"; "repairLog")
+			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.repairLogs.query("UUID=:1"; Form:C1466.selectedRepaiLog.UUID).first(); "qualityAssurance"; "repairLog")
 	End case 
 	
 	

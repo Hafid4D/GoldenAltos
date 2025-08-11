@@ -347,7 +347,8 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 212
+					"bottom": 212,
+					"method": "ObjectMethods/entryField_action.4dm"
 				},
 				"label_0_4": {
 					"type": "text",
@@ -489,7 +490,8 @@
 					"fontWeight": "normal",
 					"textAlign": "left",
 					"bottom": 73,
-					"dataSourceTypeHint": "date"
+					"dataSourceTypeHint": "date",
+					"method": "ObjectMethods/entryField_dateInitiated.4dm"
 				},
 				"entryField_title": {
 					"type": "input",
@@ -509,7 +511,8 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 36
+					"bottom": 36,
+					"method": "ObjectMethods/entryField_title.4dm"
 				},
 				"pup_procedure": {
 					"type": "button",
@@ -552,7 +555,8 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 314
+					"bottom": 314,
+					"method": "ObjectMethods/entryField_procedureType.4dm"
 				},
 				"PopupDate1": {
 					"type": "subform",
@@ -570,7 +574,8 @@
 					"printFrame": "variable",
 					"method": "ObjectMethods/PopupDate1.4dm",
 					"events": [
-						"onLoad"
+						"onLoad",
+						"onDataChange"
 					],
 					"focusable": true,
 					"borderStyle": "none"
@@ -604,7 +609,8 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 351
+					"bottom": 351,
+					"method": "ObjectMethods/entryField_requirement.4dm"
 				},
 				"label_0_5": {
 					"type": "text",
@@ -714,7 +720,8 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 462
+					"bottom": 462,
+					"method": "ObjectMethods/entryField_responsible.4dm"
 				},
 				"label_0_13": {
 					"type": "text",
@@ -764,7 +771,8 @@
 					"printFrame": "variable",
 					"method": "ObjectMethods/PopupDate2.4dm",
 					"events": [
-						"onLoad"
+						"onLoad",
+						"onDataChange"
 					],
 					"focusable": true,
 					"borderStyle": "none"
@@ -817,7 +825,8 @@
 					"printFrame": "variable",
 					"method": "ObjectMethods/PopupDate3.4dm",
 					"events": [
-						"onLoad"
+						"onLoad",
+						"onDataChange"
 					],
 					"focusable": true,
 					"borderStyle": "none"
@@ -893,7 +902,8 @@
 					"printFrame": "variable",
 					"method": "ObjectMethods/PopupDate4.4dm",
 					"events": [
-						"onLoad"
+						"onLoad",
+						"onDataChange"
 					],
 					"focusable": true,
 					"borderStyle": "none"
@@ -916,7 +926,8 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 644
+					"bottom": 644,
+					"method": "ObjectMethods/entryField_notes.4dm"
 				},
 				"label_0_16": {
 					"type": "text",
