@@ -140,13 +140,13 @@ For ($i; 0; $cipDispositions.length-1)
 End for 
 
 
-//----> [Unit]
-var $eUnit : cs:C1710.UnitEntity
+//----> [Unist]
+var $eUnit : cs:C1710.UnitsEntity
 var $units : Collection:=New collection:C1472("Bag"; "Can"; "EA"; "Hour"; "Lot"; "Pcs"; "Roll"; "Set"; "Box"; "Spool"; "Gallon"; "Ream"; "Case"; \
 "Pack"; "Yesr"; "Lbs"; "Pair")
-TRUNCATE TABLE:C1051([Unit:49])
+TRUNCATE TABLE:C1051([Units:49])
 For ($i; 0; $units.length-1)
-	$eUnit:=ds:C1482.Unit.new()
+	$eUnit:=ds:C1482.Units.new()
 	$eUnit.levelID:=$i+1
 	$eUnit.name:=$units[$i]
 	$eUnit.color:="#FFFFFF"
