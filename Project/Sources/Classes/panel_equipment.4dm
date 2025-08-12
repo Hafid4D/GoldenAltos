@@ -224,7 +224,7 @@ Function loadRepairLog()
 	
 	If (Form:C1466.current_item#Null:C1517)
 		
-		Form:C1466.lb_repairLog:=ds:C1482.RepairLog.query("systemID =:1"; Form:C1466.current_item.assignedID).orderBy("systemID desc")
+		Form:C1466.lb_repairLog:=Form:C1466.current_item.repairLogs
 		
 	End if 
 	

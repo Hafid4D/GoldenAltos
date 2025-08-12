@@ -123,7 +123,7 @@ End if
 
 
 $repair_Log_file:=Folder:C1567(fk data folder:K87:12).file("DataJson/repair_log_export.json")
-
+var $text : Text:=""
 If ($repair_Log_file.exists)
 	$repair_log:=JSON Parse:C1218($repair_Log_file.getText())
 	TRUNCATE TABLE:C1051([RepairLog:21])
@@ -132,23 +132,30 @@ If ($repair_Log_file.exists)
 		
 		$eRepair:=ds:C1482.RepairLog.new()
 		
-		$eRepair.systemID:=$repair.Sys_ID
-		//$eRepair.reportedBy:=Split string($repair.Rep_by; "\r"; sk trim spaces).join("\r")
-		$staff:=ds:C1482.Staff.query("code =:1"; Split string:C1554($repair.Rep_by; "\r"; sk trim spaces:K86:2).join("\r"))  //$eEquipment.type:=$equipment.EquipmentType
-		
-		If ($staff.length>0)
-			$eRepair.reportedBy:=$staff[0].staffID
+		$equipment:=ds:C1482.Equipment.query("assignedID =:1"; Split string:C1554($repair.Sys_ID; "\r"; sk trim spaces:K86:2).join("\r"))
+		If ($equipment.length>0)
+			$eRepair.UUID_Equipment:=$equipment[0].UUID
 		Else 
-			$eRepair.reportedBy:=0
+			$eRepair.UUID_Equipment:=""
+			$text:=$text+"\n"+$repair.Sys_ID
 		End if 
 		
-		//$eRepair.fixedBy:=Split string($repair.Fixed_by; "\r"; sk trim spaces).join("\r")
-		$staff:=ds:C1482.Staff.query("code =:1"; Split string:C1554($repair.Fixed_by; "\r"; sk trim spaces:K86:2).join("\r"))  //$eEquipment.type:=$equipment.EquipmentType
+		$eRepair.operators:=New object:C1471()
+		
+		$staff:=ds:C1482.Staff.query("code =:1"; Split string:C1554($repair.Rep_by; "\r"; sk trim spaces:K86:2).join("\r"))
 		
 		If ($staff.length>0)
-			$eRepair.fixedBy:=$staff[0].staffID
+			$eRepair.operators.reportedBy:=$staff[0].UUID
 		Else 
-			$eRepair.fixedBy:=0
+			$eRepair.operators.reportedBy:=""
+		End if 
+		
+		$staff:=ds:C1482.Staff.query("code =:1"; Split string:C1554($repair.Fixed_by; "\r"; sk trim spaces:K86:2).join("\r"))
+		
+		If ($staff.length>0)
+			$eRepair.operators.fixedBy:=$staff[0].UUID
+		Else 
+			$eRepair.operators.fixedBy:=""
 		End if 
 		
 		$eRepair.fixedDate:=$repair.Date_fixed
@@ -172,6 +179,7 @@ If ($repair_Log_file.exists)
 	End for each 
 	
 End if 
+SET TEXT TO PASTEBOARD:C523($text)
 
 
 

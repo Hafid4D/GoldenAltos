@@ -276,7 +276,7 @@
 	</table>
 	<table name="RepairLog" uuid="E209D11E14110249AE69799CB8F51C7C" id="21">
 		<field name="UUID" uuid="8FD486DDACE0854DA8FB686A58B08089" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="systemID" uuid="C56ACBF61233134FA887559C036F2D7A" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="UUID_Equipment" uuid="C56ACBF61233134FA887559C036F2D7A" type="10" store_as_UUID="true" never_null="true" id="2"/>
 		<field name="fixedBy" uuid="AC0D9388F1EFC04CA05EA8CBB47E3BF7" type="3" never_null="true" id="3"/>
 		<field name="fixedDate" uuid="BFCFF4A84085C14BA123E73537FC98F4" type="8" never_null="true" id="4"/>
 		<field name="reportDate" uuid="741357BFDBEA23499DB051B8EDCB9EE8" type="8" never_null="true" id="5"/>
@@ -292,6 +292,7 @@
 		<field name="reportedBy" uuid="0D41C3EAAF305248A7DDF508713A818A" type="3" never_null="true" id="15"/>
 		<field name="approvedBy" uuid="C69BC87ECC3E8A40AFE2E649C3367539" type="10" limiting_length="255" never_null="true" id="16"/>
 		<field name="approvalDate" uuid="C58CFAD652E982459AD859AAC73FE8D3" type="8" never_null="true" id="17"/>
+		<field name="operators" uuid="0A3CC89837F0474693760937B65C8C46" type="21" blob_switch_size="2147483647" never_null="true" id="18"/>
 		<primary_key field_name="UUID" field_uuid="8FD486DDACE0854DA8FB686A58B08089"/>
 	</table>
 	<table name="dfd_Document" uuid="A1BFE9AD9486804BA249798C81722C4A" id="22">
@@ -543,7 +544,6 @@
 		<primary_key field_name="UUID" field_uuid="1CB76A26D5B699429A95B9E10253FD00"/>
 	</table>
 	<table name="Units" uuid="BBEF22543374E24BBC6534C68EA6E3D2" id="49">
-
 		<field name="UUID" uuid="2C3EE5FC26975842998856F7D02B3BA2" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="levelID" uuid="B8D8E68ABB8B0B478109C20BD0BBBCE8" type="3" never_null="true" id="2"/>
 		<field name="code" uuid="2985F44C992E634496636D1D3287EA03" type="10" limiting_length="255" never_null="true" id="3">
@@ -1187,7 +1187,6 @@
 		<field name="division" uuid="C307EB019AE88F48B0C093CC7A4B60B1" type="10" limiting_length="255" never_null="true" id="14"/>
 		<field name="citizenShipStatus" uuid="94BC1376AD162B4A9CB7ACBB60EA56E3" type="10" limiting_length="255" never_null="true" id="15"/>
 		<field name="contactDetails" uuid="DFFE835335868749B15EECAADA389EB4" type="21" blob_switch_size="2147483647" never_null="true" id="16"/>
-		<field name="staffID" uuid="293ADE7DF513C544A37CD0191229F1C0" type="3" never_null="true" id="17"/>
 		<primary_key field_name="UUID" field_uuid="6941AB4C41898A4A9FBF25D5AC27CA2B"/>
 		<table_extra output_form="print_list"/>
 	</table>
@@ -1617,14 +1616,14 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="F35293017B54C044AE269414528459D7" name_Nto1="equipment" name_1toN="repairLogs" state="1">
+	<relation uuid="BCF4A60895A2A543A55AEF7B2BCAF5D3" name_Nto1="equipment" name_1toN="repairLogs" auto_load_Nto1="true" auto_load_1toN="true" state="1">
 		<related_field kind="source">
-			<field_ref uuid="C56ACBF61233134FA887559C036F2D7A" name="systemID">
+			<field_ref uuid="C56ACBF61233134FA887559C036F2D7A" name="UUID_Equipment">
 				<table_ref uuid="E209D11E14110249AE69799CB8F51C7C" name="RepairLog"/>
 			</field_ref>
 		</related_field>
 		<related_field kind="destination">
-			<field_ref uuid="28F9AB3445234D4987BA5B798C52930D" name="assignedID">
+			<field_ref uuid="576820214AE49648A0CC6ACA3DD19531" name="UUID">
 				<table_ref uuid="FCE2D049B8944E4CA0AAB0152A549718" name="Equipment"/>
 			</field_ref>
 		</related_field>
@@ -2699,6 +2698,11 @@
 	<index kind="regular" unique_keys="true" uuid="A36D178827E848A69625D00B2A99C18B" type="1">
 		<field_ref uuid="87371A3102B02347880B2FF579DAE670" name="UUID">
 			<table_ref uuid="BBADA9B28C42FC4AA02504E477DEF5BB" name="AML"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="A3B576932D35914CA79E9D0E093469C3" type="3">
+		<field_ref uuid="C56ACBF61233134FA887559C036F2D7A" name="UUID_Equipment">
+			<table_ref uuid="E209D11E14110249AE69799CB8F51C7C" name="RepairLog"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="A5AE436EE8050948AB9B961F0A7E1491" type="7">

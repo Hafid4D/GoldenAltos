@@ -687,7 +687,6 @@ If (True:C214)
 		$staff_e.division:=$record.division
 		$staff_e.citizenShipStatus:=$record.citizenShipStatus
 		$staff_e.contactDetails:=$record.contactDetails
-		$staff_e.staffID:=$counter
 		//If ($staff_e.firstName="Analyn") & ($staff_e.lastName="Tolentino")
 		//TRACE
 		//End if 
