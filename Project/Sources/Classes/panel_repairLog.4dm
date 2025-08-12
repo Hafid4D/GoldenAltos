@@ -50,7 +50,7 @@ Function pup_XXX()
 	
 Function drawPup_EquipmentId()
 	If (Form:C1466.current_item#Null:C1517)
-		$equipmentId:=Form:C1466.current_item.equipment  //ds.Equipment.query("assignedID= :1"; Form.current_item.systemID).first() || New object()
+		$equipmentId:=ds:C1482.Equipment.query("UUID =:1"; Form:C1466.current_item.UUID_Equipment).first() || New object:C1471()  //ds.Equipment.query("assignedID= :1"; Form.current_item.systemID).first() || New object()
 		$typeName:=$equipmentId.assignedID
 		If ($typeName=Null:C1517)
 			$typeName:=""
@@ -68,7 +68,7 @@ Function pup_equipId()
 		For each ($equipmentId; ds:C1482.Equipment.all())  // Storage.cache.equipmentTypes)
 			APPEND MENU ITEM:C411($menu; $equipmentId.assignedID; *)
 			SET MENU ITEM PARAMETER:C1004($menu; -1; $equipmentId.UUID)
-			If ($equipmentId.assignedID=Form:C1466.current_item.systemID)
+			If ($equipmentId.assignedID=Form:C1466.current_item.equipment.assignedID)
 				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
 				If (Is Windows:C1573)
 					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
@@ -81,7 +81,7 @@ Function pup_equipId()
 		Case of 
 			: ($choose#"")
 				$equipmentId:=ds:C1482.Equipment.get($choose)
-				Form:C1466.current_item.systemID:=$equipmentId.assignedID
+				Form:C1466.current_item.equipment.assignedID:=$equipmentId.assignedID
 		End case 
 		
 	End if 
@@ -91,7 +91,7 @@ Function pup_equipId()
 	
 Function drawPup_fixOperator()
 	If (Form:C1466.current_item#Null:C1517)
-		$fixOperator:=ds:C1482.Staff.query("staffID= :1"; Form:C1466.current_item.fixedBy).first() || New object:C1471()
+		$fixOperator:=ds:C1482.Staff.query("UUID= :1"; Form:C1466.current_item.operators.fixedBy).first() || New object:C1471()
 		$operatorCode:=$fixOperator.code
 		If ($operatorCode=Null:C1517)
 			$operatorCode:=""
@@ -148,7 +148,7 @@ End case
 		CLOSE WINDOW:C154($winRef)
 		
 		If (ok=1)
-			Form:C1466.current_item.fixedBy:=$form.item.staffID
+			Form:C1466.current_item.operators.fixedBy:=$form.item.UUID
 			cs:C1710.panel_repairLog.me._activate_save_cancel_button()
 		End if 
 	End if 
@@ -158,7 +158,7 @@ End case
 	
 Function drawPup_reportOperator()
 	If (Form:C1466.current_item#Null:C1517)
-		$reportOperator:=ds:C1482.Staff.query("staffID= :1"; Form:C1466.current_item.reportedBy).first() || New object:C1471()
+		$reportOperator:=ds:C1482.Staff.query("UUID= :1"; Form:C1466.current_item.operators.reportedBy).first() || New object:C1471()
 		$operatorCode:=$reportOperator.code
 		If ($operatorCode=Null:C1517)
 			$operatorCode:=""
@@ -212,7 +212,7 @@ End case
 		CLOSE WINDOW:C154($winRef)
 		
 		If (ok=1)
-			Form:C1466.current_item.reportedBy:=$form.item.staffID
+			Form:C1466.current_item.operators.reportedBy:=$form.item.UUID
 			cs:C1710.panel_repairLog.me._activate_save_cancel_button()
 		End if 
 	End if 
@@ -225,10 +225,10 @@ Function btnOpenOperator($operatorType)
 	Case of 
 			
 		: ($operatorType="fixedBy")
-			$es:=ds:C1482.Staff.query("staffID = :1"; Form:C1466.current_item.fixedBy)
+			$es:=ds:C1482.Staff.query("UUID = :1"; Form:C1466.current_item.operators.fixedBy)
 			
 		: ($operatorType="reportedBy")
-			$es:=ds:C1482.Staff.query("staffID = :1"; Form:C1466.current_item.reportedBy)
+			$es:=ds:C1482.Staff.query("UUID = :1"; Form:C1466.current_item.operators.reportedBy)
 			
 	End case 
 	
@@ -236,3 +236,11 @@ Function btnOpenOperator($operatorType)
 		Form:C1466.sfw.openInANewWindow($es[0]; "qualityAssurance"; "staff")
 	End if 
 	
+	
+Function btnOpenEquipment()
+	
+	$es:=ds:C1482.Equipment.query("UUID = :1"; Form:C1466.current_item.UUID_Equipment)
+	
+	If ($es.length>0)
+		Form:C1466.sfw.openInANewWindow($es[0]; "qualityAssurance"; "equipment")
+	End if 

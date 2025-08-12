@@ -101,7 +101,16 @@ If ($continue)
 				$line:=""
 				For each ($headerName; $headers)
 					
-					SEND PACKET:C103($file; Replace string:C233(String:C10($log_e[$headerName]); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
+					Case of 
+							
+						: ($headerName="systemID")
+							$systemID:=$log_e.equipment#Null:C1517 ? $log_e.equipment.assignedID : ""
+							SEND PACKET:C103($file; Replace string:C233(String:C10($systemID); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
+							
+						Else 
+							
+							SEND PACKET:C103($file; Replace string:C233(String:C10($log_e[$headerName]); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
+					End case 
 					
 				End for each 
 				

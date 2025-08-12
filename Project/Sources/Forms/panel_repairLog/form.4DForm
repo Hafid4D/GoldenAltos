@@ -48,7 +48,7 @@
 					"left": 110,
 					"width": 190,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.systemID",
+					"dataSource": "Form:C1466.current_item.equipment.assignedID",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -505,8 +505,8 @@
 				},
 				"pup_equipmentId": {
 					"type": "button",
-					"top": 10,
-					"left": 108,
+					"top": 9,
+					"left": 110,
 					"width": 194,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -524,7 +524,28 @@
 						"onDisplayDetail"
 					],
 					"fontWeight": "bold",
-					"right": 302
+					"right": 304
+				},
+				"btnForward2": {
+					"type": "button",
+					"text": " ",
+					"top": 12,
+					"left": 303,
+					"width": 23,
+					"height": 23,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/forward-16x16.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnForward2.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
 				}
 			}
 		},
@@ -618,7 +639,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 165,
+	"geometryStamp": 170,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
