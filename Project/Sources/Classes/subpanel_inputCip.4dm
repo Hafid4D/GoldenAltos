@@ -2,16 +2,10 @@ singleton Class constructor
 	
 	//It's a singleton class
 	
-Function _activate_save_cancel_button()
-	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
-	
-	
 Function formMethod()
 	
 	
 	If (Form:C1466#Null:C1517)
-		
-		//cs.sub_panel_cipInput.me.formMethod()
 		
 		var $rebuildForm : Boolean
 		
@@ -25,7 +19,7 @@ Function formMethod()
 				
 				
 			: (FORM Event:C1606.code=On Data Change:K2:15)
-				CALL SUBFORM CONTAINER:C1086(-2000)
+				//CALL SUBFORM CONTAINER(-2000)
 				
 			Else 
 				
@@ -75,18 +69,17 @@ Function formMethod()
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and
 	
-	CALL SUBFORM CONTAINER:C1086(-2000)
 	
 	
 Function drawPup_priority()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.current_item.drowPup("CIPriority"; "priorityID"; "priority"; "pup_priority")
+		Form:C1466.current_item.drowPup("CIPriority"; "levelID"; "UUID_CIPriority"; "pup_priority")
 	End if 
 	CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 	
 Function pup_priority()
 	//Create pop up menu
-	Form:C1466.current_item.pup("ImprovementPriorities"; "CIPriority"; "priorityID"; "priority")
+	Form:C1466.current_item.pup("ImprovementPriorities"; "CIPriority"; "levelID"; "UUID_CIPriority")
 	This:C1470.drawPup_priority()
 	
 	

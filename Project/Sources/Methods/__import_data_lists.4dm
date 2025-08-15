@@ -69,8 +69,9 @@ var $cipCategories : Collection:=New collection:C1472("Internal Risk Mitigation"
 "SCAR"; "RMA-KPI"; "RMA-NonKPI"; "NCMR Only"; "Corrective Action and Training"; "Repair"; "Other")
 For ($i; 0; $cipCategories.length-1)
 	$eCipCategory:=ds:C1482.CICategory.new()
-	$eCipCategory.categoryID:=$i+1
+	$eCipCategory.levelID:=$i+1
 	$eCipCategory.name:=$cipCategories[$i]
+	$eCipCategory.color:="#FFFFFF"
 	$eCipCategory.save()
 End for 
 
@@ -80,8 +81,9 @@ var $questions : Collection:=New collection:C1472("Yes"; "No"; "N/A")
 TRUNCATE TABLE:C1051([YesNoQuestion:34])
 For ($i; 0; $questions.length-1)
 	$eQuestion:=ds:C1482.YesNoQuestion.new()
-	$eQuestion.responseID:=$i+1
+	$eQuestion.levelID:=$i+1
 	$eQuestion.name:=$questions[$i]
+	$eQuestion.color:="#FFFFFF"
 	$eQuestion.save()
 End for 
 
@@ -91,7 +93,7 @@ var $cipPriorities : Collection:=New collection:C1472("Active"; "Monitor"; "Defe
 TRUNCATE TABLE:C1051([CIPriority:27])
 For ($i; 0; $cipPriorities.length-1)
 	$ePriority:=ds:C1482.CIPriority.new()
-	$ePriority.priorityID:=$i+1
+	$ePriority.levelID:=$i+1
 	$ePriority.name:=$cipPriorities[$i]
 	$ePriority.color:=$colors[$i]
 	$ePriority.save()
@@ -105,8 +107,9 @@ var $cipOrigins : Collection:=New collection:C1472("NCR"; "NCMR"; "SWOT"; "Proce
 TRUNCATE TABLE:C1051([CIOrigin:31])
 For ($i; 0; $cipOrigins.length-1)
 	$eOrigin:=ds:C1482.CIOrigin.new()
-	$eOrigin.originID:=$i+1
+	$eOrigin.levelID:=$i+1
 	$eOrigin.name:=$cipOrigins[$i]
+	$eOrigin.color:="#FFFFFF"
 	$eOrigin.save()
 End for 
 
@@ -121,8 +124,9 @@ var $cipHumanFactors : Collection:=New collection:C1472("Not CAR"; "Not Applicab
 TRUNCATE TABLE:C1051([CIHumanFactor:29])
 For ($i; 0; $cipHumanFactors.length-1)
 	$eHumanFactor:=ds:C1482.CIHumanFactor.new()
-	$eHumanFactor.factorID:=$i+1
+	$eHumanFactor.levelID:=$i+1
 	$eHumanFactor.name:=$cipHumanFactors[$i]
+	$eHumanFactor.color:="#FFFFFF"
 	$eHumanFactor.save()
 End for 
 
@@ -130,17 +134,18 @@ End for
 //----> [CIDisposition]
 var $eDisposition : cs:C1710.CIDispositionEntity
 var $cipDispositions : Collection:=New collection:C1472("N/A (Not NCP)"; "Awaiting Disp."; "Scrap"; "Rework"; "Notified the customer"; \
-"Repair"; "Use As Is"; "Return To Vendor"; "Improve methods"; "Increase Inventory"; "Revise Spec, Training"; "Revise Procedure")
+"Repair"; "Use As Is"; "Return To Vendor"; "Improve methods"; "Increase Inventory"; "Revise Spec, Training"; "Revise Procedure"; "Other")
 TRUNCATE TABLE:C1051([CIDisposition:28])
 For ($i; 0; $cipDispositions.length-1)
 	$eDisposition:=ds:C1482.CIDisposition.new()
-	$eDisposition.dispositionID:=$i+1
+	$eDisposition.levelID:=$i+1
 	$eDisposition.name:=$cipDispositions[$i]
+	$eDisposition.color:="#FFFFFF"
 	$eDisposition.save()
 End for 
 
 
-//----> [Unist]
+//----> [Units]
 var $eUnit : cs:C1710.UnitsEntity
 var $units : Collection:=New collection:C1472("Bag"; "Can"; "EA"; "Hour"; "Lot"; "Pcs"; "Roll"; "Set"; "Box"; "Spool"; "Gallon"; "Ream"; "Case"; \
 "Pack"; "Yesr"; "Lbs"; "Pair")

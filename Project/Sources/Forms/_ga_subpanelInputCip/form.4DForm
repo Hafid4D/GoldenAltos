@@ -325,9 +325,9 @@
 					"left": 170,
 					"width": 539,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Action items to Address Risks & Opportinuties  ",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"entryField_action": {
 					"type": "input",
@@ -356,10 +356,10 @@
 					"left": 55,
 					"width": 90,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Priority",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"pup_priority": {
 					"type": "button",
@@ -390,10 +390,10 @@
 					"left": 404,
 					"width": 90,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Title ",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"label_0_3": {
 					"type": "text",
@@ -401,10 +401,10 @@
 					"left": 55,
 					"width": 90,
 					"height": 17,
-					"stroke": "#000000",
-					"text": "Date Initianed ",
+					"stroke": "#808080",
+					"text": "Date Initiated ",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"label_0_7": {
 					"type": "text",
@@ -412,9 +412,9 @@
 					"left": 170,
 					"width": 539,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Non conformance/Complaint/Feedback/Item being addressed ",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"label_0_8": {
 					"type": "text",
@@ -422,9 +422,9 @@
 					"left": 170,
 					"width": 250,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Effective & Residual Risk Acceptable ?",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"label_0_9": {
 					"type": "text",
@@ -432,10 +432,10 @@
 					"left": 45,
 					"width": 100,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "QCAR #",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"label_origin": {
 					"type": "text",
@@ -443,10 +443,10 @@
 					"left": 394,
 					"width": 100,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Origin",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"pup_origin": {
 					"type": "button",
@@ -586,10 +586,10 @@
 					"left": 0,
 					"width": 145,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Requirement/Procedure#",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"entryField_requirement": {
 					"type": "input",
@@ -618,10 +618,10 @@
 					"left": 0,
 					"width": 145,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Category of Action",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"pup_category": {
 					"type": "button",
@@ -652,10 +652,10 @@
 					"left": 394,
 					"width": 100,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Disposition",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"label_0_11": {
 					"type": "text",
@@ -663,10 +663,10 @@
 					"left": 0,
 					"width": 145,
 					"height": 17,
-					"stroke": "#000000",
-					"text": "Human Factoe if CA",
+					"stroke": "#808080",
+					"text": "Human Factor if CA",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"pup_humanFactor": {
 					"type": "button",
@@ -697,10 +697,10 @@
 					"left": 0,
 					"width": 145,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Responsible Person(s)",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"entryField_responsible": {
 					"type": "input",
@@ -729,10 +729,10 @@
 					"left": 0,
 					"width": 145,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Current Due Date",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"entryField_currentDueDate": {
 					"type": "input",
@@ -783,10 +783,10 @@
 					"left": 364,
 					"width": 130,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Original Due Date",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"entryField_originalDueDate": {
 					"type": "input",
@@ -860,10 +860,10 @@
 					"left": 404,
 					"width": 90,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Closed Date",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"entryField_dateClosed": {
 					"type": "input",
@@ -935,10 +935,10 @@
 					"left": 0,
 					"width": 145,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Notes",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"bActionRefresh": {
 					"type": "button",
