@@ -33,26 +33,16 @@
 	"pages": [
 		{
 			"objects": {
-				"backgroundRectangle": {
-					"type": "rectangle",
-					"top": 114,
-					"left": 0,
-					"width": 5000,
-					"height": 704,
-					"fill": "#E3E3E3",
-					"strokeWidth": 0,
-					"stroke": "#FFFFFF"
-				},
 				"label_0_1": {
 					"type": "text",
 					"top": 12,
 					"left": 15,
 					"width": 175,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Supplier",
 					"right": 190,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "right"
 				},
 				"label_internalPartNum": {
@@ -61,11 +51,11 @@
 					"left": 15,
 					"width": 175,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Internal PartNum",
 					"bottom": 56,
 					"right": 190,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "right"
 				},
 				"entryField_internalPart#": {
@@ -158,22 +148,76 @@
 					"visibility": "visible",
 					"iconFrames": 4,
 					"focusable": false
+				},
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 113,
+					"left": 0,
+					"width": 5000,
+					"height": 704,
+					"fill": "#B1CFDE",
+					"strokeWidth": 2,
+					"stroke": "#FFFFFF"
 				}
 			}
 		},
 		{
 			"objects": {
+				"header_bkgd8": {
+					"type": "rectangle",
+					"top": 143,
+					"left": 680,
+					"width": 776,
+					"height": 243,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"right": 1456
+				},
+				"header_bkgd7": {
+					"type": "rectangle",
+					"top": 420,
+					"left": 680,
+					"width": 776,
+					"height": 272,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"right": 1456
+				},
+				"header_bkgd6": {
+					"type": "rectangle",
+					"top": 420,
+					"left": 1,
+					"width": 676,
+					"height": 272,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"right": 677
+				},
+				"header_bkgd5": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 1,
+					"width": 676,
+					"height": 272,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"right": 677
+				},
 				"label_vendorPartNum": {
 					"type": "text",
 					"top": 153,
 					"left": 22,
 					"width": 175,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Vendor PartNum",
 					"bottom": 170,
 					"right": 197,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "right"
 				},
 				"entryField_vendorPartnum": {
@@ -203,10 +247,10 @@
 					"left": 22,
 					"width": 175,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Service Type",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"entryField_revision": {
 					"type": "input",
@@ -235,10 +279,10 @@
 					"left": 22,
 					"width": 175,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Service/Product Description",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"entryField_comment": {
 					"type": "input",
@@ -267,10 +311,10 @@
 					"left": 22,
 					"width": 175,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Comments",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"entryField_description": {
 					"type": "input",
@@ -322,11 +366,11 @@
 					"left": 22,
 					"width": 175,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Procurement Units",
 					"bottom": 460,
 					"right": 197,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "right"
 				},
 				"label_inventoryUnits": {
@@ -335,11 +379,11 @@
 					"left": 22,
 					"width": 175,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Inventory Units",
 					"bottom": 497,
 					"right": 197,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "right"
 				},
 				"pup_inventoryUnit": {
@@ -371,11 +415,11 @@
 					"left": 291,
 					"width": 130,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Transformation Factor",
 					"bottom": 460,
 					"right": 421,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "right"
 				},
 				"label_minInventoryLevel": {
@@ -384,11 +428,11 @@
 					"left": 291,
 					"width": 130,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Min Inventory Level",
 					"bottom": 497,
 					"right": 421,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "right"
 				},
 				"entryField_revision3": {
@@ -457,11 +501,11 @@
 					"left": 515,
 					"width": 70,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Capacity",
 					"bottom": 497,
 					"right": 585,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "right",
 					"class": ""
 				},
@@ -491,11 +535,11 @@
 					"left": 22,
 					"width": 175,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Employee Code",
 					"bottom": 374,
 					"right": 197,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "right"
 				},
 				"pup_empCode": {
@@ -527,11 +571,11 @@
 					"left": 291,
 					"width": 130,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "division",
 					"bottom": 374,
 					"right": 421,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "right"
 				},
 				"pup_division": {
@@ -701,11 +745,11 @@
 					"left": 1134,
 					"width": 130,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Approded By",
 					"bottom": 460,
 					"right": 1264,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "right"
 				},
 				"label_approvedDate": {
@@ -714,11 +758,11 @@
 					"left": 807,
 					"width": 130,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Approval Date",
 					"bottom": 460,
 					"right": 937,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "right"
 				},
 				"entryField_approvalDate": {
@@ -804,7 +848,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 501,
+	"geometryStamp": 516,
 	"editor": {
 		"groups": {
 			"Group": [

@@ -17,15 +17,21 @@ If ($cip_log.exists)
 		$eCip.item:=$cip.item
 		$eCip.interestedParty:=Split string:C1554($cip.interestedParty; "\n"; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join(",")
 		
-		$eCip.priority:=$cip.priority
+		$priority:=ds:C1482.CIPriority.query("levelID =:1"; $cip.priority)
+		If ($priority.length>0)
+			$eCip.UUID_CIPriority:=$priority[0].UUID
+		Else 
+			$eCip.UUID_CIOrigin:=""
+			
+		End if 
 		
 		$eCip.dateInitiated:=$cip.dateInitiated
 		
 		$origin:=ds:C1482.CIOrigin.query("name =:1"; Split string:C1554($cip.origin; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($origin.length>0)
-			$eCip.origin:=$origin[0].originID
+			$eCip.UUID_CIOrigin:=$origin[0].UUID
 		Else 
-			$eCip.origin:=$origins.length
+			$eCip.UUID_CIOrigin:=""
 			
 		End if 
 		
@@ -35,38 +41,45 @@ If ($cip_log.exists)
 		
 		$category:=ds:C1482.CICategory.query("name =:1"; Split string:C1554($cip.category; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($category.length>0)
-			$eCip.category:=$category[0].categoryID
+			$eCip.UUID_CICategory:=$category[0].UUID
 		Else 
 			
 			If (Split string:C1554($cip.category; "\r"; sk trim spaces:K86:2).join("\r")="RMA-NonKPI'")
-				$eCip.category:=12
+				$eCip.UUID_CICategory:=ds:C1482.CICategory.query("levelID =:1"; 12).first().UUID
+				
 			Else 
-				$eCip.category:=$categories.length
+				$eCip.UUID_CICategory:=""
 			End if 
 		End if 
 		
 		$disposition:=ds:C1482.CIDisposition.query("name =:1"; Split string:C1554($cip.disposition; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($disposition.length>0)
-			$eCip.disposition:=$disposition[0].dispositionID
+			$eCip.UUID_CIDisposition:=$disposition[0].UUID
 			
 		Else 
 			Case of 
 					
 				: (Split string:C1554($cip.disposition; "\r"; sk trim spaces:K86:2).join("\r")="Not applicable (Not NCP)") | (Split string:C1554($cip.disposition; "\r"; sk trim spaces:K86:2).join("\r")="NA (Not NCP)")
-					$eCip.disposition:=1
+					$eCip.UUID_CIDisposition:=ds:C1482.CIDisposition.query("levelID =:1"; 1).first().UUID
+					
 				: (Split string:C1554($cip.disposition; "\r"; sk trim spaces:K86:2).join("\r")="Us as is")
-					$eCip.disposition:=6
+					$eCip.UUID_CIDisposition:=ds:C1482.CIDisposition.query("levelID =:1"; 6).first().UUID
+					
 				Else 
 					
+					$eCip.UUID_CIDisposition:=""
 			End case 
 			
 		End if 
 		
+		$eCip.moreData:=New object:C1471()
+		$eCip.moreData.disposition:=""
+		
 		$humanFactor:=ds:C1482.CIHumanFactor.query("name =:1"; Split string:C1554($cip.humanFactor; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($humanFactor.length>0)
-			$eCip.humanFactor:=$humanFactor[0].factorID
+			$eCip.UUID_CIHumanFactor:=$humanFactor[0].UUID
 		Else 
-			$eCip.humanFactor:=$humanFactors.length
+			$eCip.UUID_CIHumanFactor:=""
 		End if 
 		
 		$eCip.responsible:=$cip.responsible
@@ -75,9 +88,9 @@ If ($cip_log.exists)
 		
 		$IsAcceptable:=ds:C1482.YesNoQuestion.query("name =:1"; Split string:C1554($cip.IsAcceptable; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($IsAcceptable.length>0)
-			$eCip.IsAcceptable:=$IsAcceptable[0].responseID
+			$eCip.UUID_YesNoQuestion:=$IsAcceptable[0].UUID
 		Else 
-			$eCip.IsAcceptable:=3
+			$eCip.UUID_CIDisposition:=ds:C1482.YesNoQuestion.query("levelID =:1"; 3).first().UUID
 		End if 
 		
 		$eCip.externalID:=$cip.externalID

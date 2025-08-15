@@ -39,17 +39,17 @@
 					"left": 12,
 					"width": 143,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Item # ",
 					"right": 155,
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"entryField_item": {
 					"type": "input",
 					"top": 11,
-					"left": 175,
-					"width": 190,
+					"left": 170,
+					"width": 200,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.item",
 					"focusable": false,
@@ -71,18 +71,18 @@
 					"left": 12,
 					"width": 143,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Interested Party Name ",
 					"bottom": 55,
 					"right": 155,
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"entryField_interestedParty": {
 					"type": "input",
 					"top": 38,
-					"left": 175,
-					"width": 190,
+					"left": 170,
+					"width": 200,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.interestedParty",
 					"focusable": false,
@@ -104,18 +104,18 @@
 					"left": 12,
 					"width": 143,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "External ID ",
 					"bottom": 82,
 					"right": 155,
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"entryField_externalID": {
 					"type": "input",
 					"top": 65,
-					"left": 175,
-					"width": 190,
+					"left": 170,
+					"width": 200,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.externalID",
 					"focusable": false,
@@ -135,7 +135,7 @@
 					"type": "button",
 					"text": "",
 					"top": 30,
-					"left": 370,
+					"left": 374,
 					"width": 30,
 					"height": 32,
 					"events": [
@@ -155,367 +155,23 @@
 					"fill": "#E3E3E3",
 					"strokeWidth": 0,
 					"stroke": "#FFFFFF"
-				}
-			}
-		},
-		{
-			"objects": {
-				"subform_cip": {
-					"type": "subform",
-					"left": 3,
-					"top": 116,
-					"width": 767,
-					"height": 659,
-					"dataSource": "Form:C1466.subform_cip",
-					"detailForm": "_ga_subpanelInputCip",
-					"sizingY": "fixed",
-					"scrollbarVertical": "visible",
-					"sizingX": "fixed",
-					"method": "ObjectMethods/subform_cip.4dm",
-					"events": [
-						"onDataChange"
-					]
-				}
-			}
-		},
-		{
-			"objects": {
-				"Rectangle16": {
-					"type": "rectangle",
-					"top": 226,
-					"left": 173,
-					"width": 543,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle17": {
-					"type": "rectangle",
-					"top": 467,
-					"left": 173,
-					"width": 543,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle12": {
-					"type": "rectangle",
-					"top": 720,
-					"left": 173,
-					"width": 543,
-					"height": 60,
-					"stroke": "transparent"
-				},
-				"Rectangle13": {
-					"type": "rectangle",
-					"top": 288,
-					"left": 173,
-					"width": 543,
-					"height": 60,
-					"stroke": "transparent"
-				},
-				"Rectangle14": {
-					"type": "rectangle",
-					"top": 390,
-					"left": 173,
-					"width": 543,
-					"height": 60,
-					"stroke": "transparent"
-				},
-				"Rectangle15": {
-					"type": "rectangle",
-					"top": 541,
-					"left": 173,
-					"width": 543,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle1": {
-					"type": "rectangle",
-					"top": 504,
-					"left": 522,
-					"width": 194,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle5": {
-					"type": "rectangle",
-					"top": 615,
-					"left": 522,
-					"width": 194,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle6": {
-					"type": "rectangle",
-					"top": 677,
-					"left": 522,
-					"width": 194,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle9": {
-					"type": "rectangle",
-					"top": 152,
-					"left": 522,
-					"width": 194,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle10": {
-					"type": "rectangle",
-					"top": 189,
-					"left": 522,
-					"width": 194,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle3": {
-					"type": "rectangle",
-					"top": 578,
-					"left": 173,
-					"width": 543,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle4": {
-					"type": "rectangle",
-					"top": 615,
-					"left": 173,
-					"width": 195,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle7": {
-					"type": "rectangle",
-					"top": 677,
-					"left": 173,
-					"width": 195,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle8": {
-					"type": "rectangle",
-					"top": 152,
-					"left": 173,
-					"width": 195,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle11": {
-					"type": "rectangle",
-					"top": 189,
-					"left": 173,
-					"width": 195,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle2": {
-					"type": "rectangle",
-					"top": 504,
-					"left": 173,
-					"width": 195,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"pup_disposition": {
-					"type": "button",
-					"top": 504,
-					"left": 524,
-					"width": 190,
-					"height": 23,
-					"fontFamily": "System Font",
-					"fontSize": 13,
-					"focusable": false,
-					"text": "",
-					"icon": "",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/pup_disposition.4dm",
-					"events": [
-						"onClick",
-						"onDisplayDetail"
-					],
-					"right": 714,
-					"fontWeight": "normal",
-					"textAlign": "left"
-				},
-				"label_0_6": {
-					"type": "text",
-					"top": 266,
-					"left": 175,
-					"width": 539,
-					"height": 17,
-					"stroke": "#000000",
-					"text": "Action items to Address Risks & Opportinuties  ",
-					"fontWeight": "bold"
-				},
-				"entryField_action": {
-					"type": "input",
-					"top": 288,
-					"left": 175,
-					"width": 539,
-					"height": 60,
-					"dataSource": "Form:C1466.current_item.action",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "normal",
-					"textAlign": "left",
-					"bottom": 348
-				},
-				"label_0_4": {
-					"type": "text",
-					"top": 155,
-					"left": 60,
-					"width": 90,
-					"height": 17,
-					"stroke": "#000000",
-					"text": "Priority",
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"pup_priority": {
-					"type": "button",
-					"top": 152,
-					"left": 175,
-					"width": 190,
-					"height": 23,
-					"fontFamily": "System Font",
-					"fontSize": 13,
-					"focusable": false,
-					"text": "",
-					"icon": "",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/pup_priority.4dm",
-					"events": [
-						"onClick",
-						"onDisplayDetail"
-					],
-					"right": 365,
-					"fontWeight": "normal",
-					"textAlign": "left"
 				},
 				"label_0_2": {
 					"type": "text",
-					"top": 155,
-					"left": 409,
+					"top": 11,
+					"left": 454,
 					"width": 90,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Title ",
 					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"label_0_3": {
-					"type": "text",
-					"top": 192,
-					"left": 60,
-					"width": 90,
-					"height": 17,
-					"stroke": "#000000",
-					"text": "Date Initianed ",
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"label_0_7": {
-					"type": "text",
-					"top": 368,
-					"left": 175,
-					"width": 539,
-					"height": 17,
-					"stroke": "#000000",
-					"text": "Non conformance/Complaint/Feedback/Item being addressed ",
-					"fontWeight": "bold"
-				},
-				"label_0_8": {
-					"type": "text",
-					"top": 655,
-					"left": 175,
-					"width": 250,
-					"height": 17,
-					"stroke": "#000000",
-					"text": "Effective & Residual Risk Acceptable ?",
-					"fontWeight": "bold"
-				},
-				"label_0_9": {
-					"type": "text",
-					"top": 229,
-					"left": 50,
-					"width": 100,
-					"height": 17,
-					"stroke": "#000000",
-					"text": "QCAR #",
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"label_origin": {
-					"type": "text",
-					"top": 192,
-					"left": 399,
-					"width": 100,
-					"height": 17,
-					"stroke": "#000000",
-					"text": "Origin",
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"pup_origin": {
-					"type": "button",
-					"top": 189,
-					"left": 524,
-					"width": 190,
-					"height": 23,
-					"fontFamily": "System Font",
-					"fontSize": 13,
-					"focusable": false,
-					"text": "",
-					"icon": "",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/pup_origin.4dm",
-					"events": [
-						"onClick",
-						"onDisplayDetail"
-					],
-					"right": 714,
-					"fontWeight": "normal",
-					"textAlign": "left"
-				},
-				"entryField_dateInitiated": {
-					"type": "input",
-					"top": 192,
-					"left": 175,
-					"width": 190,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.dateInitiated",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "normal",
-					"textAlign": "left",
-					"bottom": 209,
-					"dataSourceTypeHint": "date"
+					"fontWeight": "normal"
 				},
 				"entryField_title": {
 					"type": "input",
-					"top": 155,
-					"left": 524,
-					"width": 190,
+					"top": 11,
+					"left": 559,
+					"width": 200,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.title",
 					"focusable": false,
@@ -529,38 +185,26 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 172
+					"bottom": 28
 				},
-				"pup_procedure": {
-					"type": "button",
-					"top": 226,
-					"left": 175,
-					"width": 539,
-					"height": 23,
-					"fontFamily": "System Font",
-					"fontSize": 13,
-					"focusable": false,
-					"text": "",
-					"icon": "",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/pup_procedure.4dm",
-					"events": [
-						"onClick",
-						"onDisplayDetail"
-					],
-					"right": 714,
-					"fontWeight": "normal",
-					"textAlign": "left"
+				"label_0_3": {
+					"type": "text",
+					"top": 38,
+					"left": 454,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Date Initianed ",
+					"textAlign": "right",
+					"fontWeight": "normal"
 				},
-				"entryField_procedureType": {
+				"entryField_dateInitiated": {
 					"type": "input",
-					"top": 390,
-					"left": 175,
-					"width": 539,
-					"height": 60,
-					"dataSource": "Form:C1466.current_item.procedureType",
+					"top": 38,
+					"left": 559,
+					"width": 200,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.dateInitiated",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -572,12 +216,13 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 450
+					"bottom": 55,
+					"dataSourceTypeHint": "date"
 				},
 				"PopupDate1": {
 					"type": "subform",
-					"top": 192,
-					"left": 346,
+					"top": 38,
+					"left": 740,
 					"width": 19,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.dateInitiated",
@@ -597,20 +242,20 @@
 				},
 				"label_0_10": {
 					"type": "text",
-					"top": 470,
-					"left": 5,
-					"width": 145,
+					"top": 65,
+					"left": 410,
+					"width": 134,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Requirement/Procedure#",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"entryField_requirement": {
 					"type": "input",
-					"top": 470,
-					"left": 175,
-					"width": 539,
+					"top": 65,
+					"left": 559,
+					"width": 200,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.requirement",
 					"focusable": false,
@@ -624,24 +269,232 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 487
+					"bottom": 82,
+					"right": 759
+				}
+			}
+		},
+		{
+			"objects": {
+				"pup_disposition": {
+					"type": "button",
+					"top": 291,
+					"left": 169,
+					"width": 202,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_disposition.4dm",
+					"events": [
+						"onClick",
+						"onDisplayDetail"
+					],
+					"right": 371,
+					"fontWeight": "normal",
+					"textAlign": "left"
+				},
+				"label_0_6": {
+					"type": "text",
+					"top": 206,
+					"left": 409,
+					"width": 349,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Action items to Address Risks & Opportinuties  ",
+					"fontWeight": "normal",
+					"right": 758
+				},
+				"entryField_action": {
+					"type": "input",
+					"top": 226,
+					"left": 409,
+					"width": 332,
+					"height": 61,
+					"dataSource": "Form:C1466.current_item.action",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "normal",
+					"textAlign": "left",
+					"bottom": 287,
+					"right": 741,
+					"sizingX": "grow",
+					"scrollbarVertical": "automatic"
+				},
+				"label_0_4": {
+					"type": "text",
+					"top": 133,
+					"left": 65,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Priority",
+					"textAlign": "right",
+					"fontWeight": "normal"
+				},
+				"pup_priority": {
+					"type": "button",
+					"top": 130,
+					"left": 169,
+					"width": 202,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_priority.4dm",
+					"events": [
+						"onClick",
+						"onDisplayDetail"
+					],
+					"right": 371,
+					"fontWeight": "normal",
+					"textAlign": "left"
+				},
+				"label_0_7": {
+					"type": "text",
+					"top": 121,
+					"left": 409,
+					"width": 349,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Non conformance/Complaint/Feedback/Item being addressed ",
+					"fontWeight": "normal",
+					"right": 758
+				},
+				"label_0_8": {
+					"type": "text",
+					"top": 241,
+					"left": 171,
+					"width": 200,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Effective & Residual Risk Acceptable ?",
+					"fontWeight": "normal"
+				},
+				"label_0_9": {
+					"type": "text",
+					"top": 214,
+					"left": 55,
+					"width": 100,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "QCAR #",
+					"textAlign": "right",
+					"fontWeight": "normal"
+				},
+				"label_origin": {
+					"type": "text",
+					"top": 160,
+					"left": 55,
+					"width": 100,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Origin",
+					"textAlign": "right",
+					"fontWeight": "normal"
+				},
+				"pup_origin": {
+					"type": "button",
+					"top": 157,
+					"left": 169,
+					"width": 202,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_origin.4dm",
+					"events": [
+						"onClick",
+						"onDisplayDetail"
+					],
+					"right": 371,
+					"fontWeight": "normal",
+					"textAlign": "left"
+				},
+				"pup_procedure": {
+					"type": "button",
+					"top": 211,
+					"left": 169,
+					"width": 202,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_procedure.4dm",
+					"events": [
+						"onClick",
+						"onDisplayDetail"
+					],
+					"right": 371,
+					"fontWeight": "normal",
+					"textAlign": "left"
+				},
+				"entryField_procedureType": {
+					"type": "input",
+					"top": 140,
+					"left": 409,
+					"width": 332,
+					"height": 48,
+					"dataSource": "Form:C1466.current_item.procedureType",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "normal",
+					"textAlign": "left",
+					"bottom": 188,
+					"right": 741,
+					"sizingX": "grow",
+					"scrollbarVertical": "automatic"
 				},
 				"label_0_5": {
 					"type": "text",
-					"top": 507,
-					"left": 5,
+					"top": 187,
+					"left": 10,
 					"width": 145,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Category of Action",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"pup_category": {
 					"type": "button",
-					"top": 504,
-					"left": 175,
-					"width": 190,
+					"top": 184,
+					"left": 169,
+					"width": 202,
 					"height": 23,
 					"fontFamily": "System Font",
 					"fontSize": 13,
@@ -656,37 +509,37 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"right": 365,
+					"right": 371,
 					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"label_disposition": {
 					"type": "text",
-					"top": 507,
-					"left": 399,
+					"top": 294,
+					"left": 55,
 					"width": 100,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Disposition",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"label_0_11": {
 					"type": "text",
-					"top": 544,
-					"left": 5,
+					"top": 321,
+					"left": 10,
 					"width": 145,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Human Factoe if CA",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"pup_humanFactor": {
 					"type": "button",
-					"top": 541,
-					"left": 175,
-					"width": 539,
+					"top": 318,
+					"left": 169,
+					"width": 202,
 					"height": 23,
 					"fontFamily": "System Font",
 					"fontSize": 13,
@@ -701,26 +554,26 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"right": 714,
+					"right": 371,
 					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"label_0_12": {
 					"type": "text",
-					"top": 587,
-					"left": 5,
+					"top": 429,
+					"left": 10,
 					"width": 145,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Responsible Person(s)",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"entryField_responsible": {
 					"type": "input",
-					"top": 581,
-					"left": 175,
-					"width": 539,
+					"top": 429,
+					"left": 170,
+					"width": 589,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.responsible",
 					"focusable": false,
@@ -734,24 +587,25 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 598
+					"bottom": 446,
+					"right": 759
 				},
 				"label_0_13": {
 					"type": "text",
-					"top": 618,
-					"left": 5,
+					"top": 348,
+					"left": 10,
 					"width": 145,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Current Due Date",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"entryField_currentDueDate": {
 					"type": "input",
-					"top": 618,
-					"left": 175,
-					"width": 190,
+					"top": 348,
+					"left": 170,
+					"width": 200,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.currentDueDate",
 					"focusable": false,
@@ -765,13 +619,14 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 635,
-					"dataSourceTypeHint": "date"
+					"bottom": 365,
+					"dataSourceTypeHint": "date",
+					"stroke": "#000000"
 				},
 				"PopupDate2": {
 					"type": "subform",
-					"top": 618,
-					"left": 346,
+					"top": 348,
+					"left": 352,
 					"width": 19,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.currentDueDate",
@@ -791,20 +646,20 @@
 				},
 				"label_0_14": {
 					"type": "text",
-					"top": 618,
-					"left": 369,
+					"top": 375,
+					"left": 25,
 					"width": 130,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Original Due Date",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"entryField_originalDueDate": {
 					"type": "input",
-					"top": 618,
-					"left": 524,
-					"width": 190,
+					"top": 375,
+					"left": 170,
+					"width": 200,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.originalDueDate",
 					"focusable": false,
@@ -818,13 +673,14 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 635,
-					"dataSourceTypeHint": "date"
+					"bottom": 392,
+					"dataSourceTypeHint": "date",
+					"stroke": "#000000"
 				},
 				"PopupDate3": {
 					"type": "subform",
-					"top": 618,
-					"left": 695,
+					"top": 375,
+					"left": 352,
 					"width": 19,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.originalDueDate",
@@ -844,9 +700,9 @@
 				},
 				"pup_yesNoQuestion": {
 					"type": "button",
-					"top": 677,
-					"left": 175,
-					"width": 190,
+					"top": 264,
+					"left": 169,
+					"width": 202,
 					"height": 23,
 					"fontFamily": "System Font",
 					"fontSize": 13,
@@ -861,26 +717,26 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"right": 365,
+					"right": 371,
 					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"label_0_15": {
 					"type": "text",
-					"top": 680,
-					"left": 409,
+					"top": 402,
+					"left": 65,
 					"width": 90,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Closed Date",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"entryField_dateClosed": {
 					"type": "input",
-					"top": 680,
-					"left": 524,
-					"width": 190,
+					"top": 402,
+					"left": 170,
+					"width": 200,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.dateClosed",
 					"focusable": false,
@@ -894,13 +750,14 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 697,
-					"dataSourceTypeHint": "date"
+					"bottom": 419,
+					"dataSourceTypeHint": "date",
+					"stroke": "#000000"
 				},
 				"PopupDate4": {
 					"type": "subform",
-					"top": 680,
-					"left": 695,
+					"top": 402,
+					"left": 351,
 					"width": 19,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.dateClosed",
@@ -920,10 +777,10 @@
 				},
 				"entryField_notes": {
 					"type": "input",
-					"top": 720,
-					"left": 175,
-					"width": 539,
-					"height": 60,
+					"top": 342,
+					"left": 409,
+					"width": 332,
+					"height": 77,
 					"dataSource": "Form:C1466.current_item.notes",
 					"focusable": false,
 					"enterable": false,
@@ -936,24 +793,28 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 780
+					"bottom": 419,
+					"sizingX": "grow",
+					"scrollbarVertical": "automatic",
+					"right": 741
 				},
 				"label_0_16": {
 					"type": "text",
-					"top": 720,
-					"left": 5,
-					"width": 145,
+					"top": 321,
+					"left": 409,
+					"width": 349,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Notes",
-					"textAlign": "right",
-					"fontWeight": "bold"
+					"textAlign": "left",
+					"fontWeight": "normal",
+					"right": 758
 				},
 				"bActionRefresh": {
 					"type": "button",
 					"text": "",
-					"top": 221,
-					"left": 718,
+					"top": 206,
+					"left": 374,
 					"width": 30,
 					"height": 32,
 					"events": [
@@ -967,8 +828,8 @@
 				"bResponsibleEdit": {
 					"type": "button",
 					"text": "",
-					"top": 573,
-					"left": 718,
+					"top": 421,
+					"left": 761,
 					"width": 30,
 					"height": 32,
 					"events": [
@@ -978,11 +839,160 @@
 					"icon": "/RESOURCES/sfw/image/skin/rainbow/btn4states/edit-24x24.png",
 					"iconFrames": 4,
 					"method": "ObjectMethods/bResponsibleEdit.4dm"
+				},
+				"otherDisposition": {
+					"type": "text",
+					"text": "",
+					"top": 294,
+					"left": 409,
+					"width": 332,
+					"height": 17,
+					"right": 741
+				}
+			}
+		},
+		{
+			"objects": {
+				"Rectangle16": {
+					"type": "rectangle",
+					"top": 204,
+					"left": 168,
+					"width": 543,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle17": {
+					"type": "rectangle",
+					"top": 445,
+					"left": 168,
+					"width": 543,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle12": {
+					"type": "rectangle",
+					"top": 698,
+					"left": 168,
+					"width": 543,
+					"height": 60,
+					"stroke": "transparent"
+				},
+				"Rectangle13": {
+					"type": "rectangle",
+					"top": 266,
+					"left": 168,
+					"width": 543,
+					"height": 60,
+					"stroke": "transparent"
+				},
+				"Rectangle14": {
+					"type": "rectangle",
+					"top": 368,
+					"left": 168,
+					"width": 543,
+					"height": 60,
+					"stroke": "transparent"
+				},
+				"Rectangle15": {
+					"type": "rectangle",
+					"top": 519,
+					"left": 168,
+					"width": 543,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle1": {
+					"type": "rectangle",
+					"top": 482,
+					"left": 517,
+					"width": 194,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle5": {
+					"type": "rectangle",
+					"top": 593,
+					"left": 517,
+					"width": 194,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle6": {
+					"type": "rectangle",
+					"top": 655,
+					"left": 517,
+					"width": 194,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle9": {
+					"type": "rectangle",
+					"top": 130,
+					"left": 517,
+					"width": 194,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle10": {
+					"type": "rectangle",
+					"top": 167,
+					"left": 517,
+					"width": 194,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle3": {
+					"type": "rectangle",
+					"top": 556,
+					"left": 168,
+					"width": 543,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle4": {
+					"type": "rectangle",
+					"top": 593,
+					"left": 168,
+					"width": 195,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle7": {
+					"type": "rectangle",
+					"top": 655,
+					"left": 168,
+					"width": 195,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle8": {
+					"type": "rectangle",
+					"top": 130,
+					"left": 168,
+					"width": 195,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle11": {
+					"type": "rectangle",
+					"top": 167,
+					"left": 168,
+					"width": 195,
+					"height": 23,
+					"stroke": "transparent"
+				},
+				"Rectangle2": {
+					"type": "rectangle",
+					"top": 482,
+					"left": 168,
+					"width": 195,
+					"height": 23,
+					"stroke": "transparent"
 				}
 			}
 		}
 	],
-	"geometryStamp": 417,
+	"geometryStamp": 804,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"editor": {
 		"activeView": "View 1",

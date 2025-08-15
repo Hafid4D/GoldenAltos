@@ -16,5 +16,5 @@ local Function cacheLoad()
 	
 	
 Function _loadAsCollection()->$ImprovementPriorities : Collection
-	$ImprovementPriorities:=This:C1470.all().toCollection("UUID, priorityID,name,color").orderBy("priorityID")
+	$ImprovementPriorities:=This:C1470.all().toCollection("UUID, levelID,name,color").orderBy("levelID")
 	

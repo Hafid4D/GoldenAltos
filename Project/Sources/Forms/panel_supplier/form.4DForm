@@ -33,16 +33,6 @@
 	"pages": [
 		{
 			"objects": {
-				"backgroundRectangle": {
-					"type": "rectangle",
-					"top": 114,
-					"left": 0,
-					"width": 5000,
-					"height": 704,
-					"fill": "#E3E3E3",
-					"strokeWidth": 0,
-					"stroke": "#FFFFFF"
-				},
 				"label_code": {
 					"type": "text",
 					"top": 39,
@@ -68,7 +58,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"right": 362
 				},
 				"label_supplier": {
@@ -96,7 +86,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"label_division": {
 					"type": "text",
@@ -129,11 +119,73 @@
 					"right": 362,
 					"fontWeight": "normal",
 					"textAlign": "left"
+				},
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 113,
+					"left": 0,
+					"width": 5000,
+					"height": 704,
+					"fill": "#B1CFDE",
+					"strokeWidth": 2,
+					"stroke": "#FFFFFF"
 				}
 			}
 		},
 		{
 			"objects": {
+				"header_bkgd3": {
+					"type": "rectangle",
+					"top": 149,
+					"left": 793,
+					"width": 864,
+					"height": 289,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"right": 1657
+				},
+				"header_bkgd6": {
+					"type": "rectangle",
+					"top": 148,
+					"left": 0,
+					"width": 790,
+					"height": 289,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"right": 790
+				},
+				"main_bkgd1": {
+					"type": "rectangle",
+					"top": 473,
+					"left": 793,
+					"width": 863,
+					"height": 289,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent"
+				},
+				"main_bkgd2": {
+					"type": "rectangle",
+					"top": 148,
+					"left": 793,
+					"width": 863,
+					"height": 289,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent"
+				},
+				"main_bkgd": {
+					"type": "rectangle",
+					"top": 473,
+					"left": 1,
+					"width": 789,
+					"height": 289,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent"
+				},
 				"header_bkgd1": {
 					"type": "rectangle",
 					"top": 114,
@@ -233,7 +285,8 @@
 					"width": 110,
 					"height": 16,
 					"stroke": "#808080",
-					"text": "Secondary Contact"
+					"text": "Secondary Contact",
+					"fontWeight": "normal"
 				},
 				"label_0_12": {
 					"type": "text",
@@ -242,7 +295,8 @@
 					"width": 110,
 					"height": 16,
 					"stroke": "#808080",
-					"text": "Primary Contact"
+					"text": "Primary Contact",
+					"fontWeight": "normal"
 				},
 				"lb_primaryContact": {
 					"type": "listbox",
@@ -520,11 +574,11 @@
 					"left": 386,
 					"width": 130,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Entrered By",
 					"bottom": 546,
 					"right": 516,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "right"
 				},
 				"label_lastAuditDate": {
@@ -533,11 +587,11 @@
 					"left": 12,
 					"width": 130,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Last Audit Date",
 					"bottom": 509,
 					"right": 142,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "right"
 				},
 				"entryField_lastAuditDate": {
@@ -664,11 +718,11 @@
 					"left": 12,
 					"width": 130,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Next Audit Date",
 					"bottom": 546,
 					"right": 142,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "right"
 				},
 				"entryField_nextAuditDate": {
@@ -741,10 +795,10 @@
 					"left": 12,
 					"width": 130,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "QA Comments",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"label_webService": {
 					"type": "text",
@@ -752,11 +806,11 @@
 					"left": 386,
 					"width": 130,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Web Service",
 					"bottom": 509,
 					"right": 516,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "right"
 				},
 				"entryField_webService": {
@@ -914,7 +968,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 145,
+	"geometryStamp": 177,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
