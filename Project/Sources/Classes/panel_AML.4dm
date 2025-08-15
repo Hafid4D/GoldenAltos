@@ -25,6 +25,13 @@ Function formMethod()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
+	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	OBJECT GET COORDINATES:C663(*; "subFormAddress"; $g; $h; $d; $b)
+	OBJECT SET COORDINATES:C1248(*; "subFormAddress"; $g; $h; $widthSubform-20; $b)
+	
+	OBJECT GET COORDINATES:C663(*; "entryField_comment"; $g; $h; $d; $b)
+	OBJECT SET COORDINATES:C1248(*; "entryField_comment"; $g; $h; $widthSubform-50; $b)
+	
 	
 	This:C1470.supplierAddressDetails()
 	This:C1470.drawPup_approvedBy()
