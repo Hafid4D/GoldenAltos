@@ -12,6 +12,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setPanel("panel_AML")
 	$entry.setPanelPage(1; ""; "Main")
+	$entry.setPanelPage(2; ""; "Address")
 	
 	$entry.setLBItemsColumn("partData.internalPartNum"; "Internal Part#"; "width:150")
 	$entry.setLBItemsColumn("vendorPartnum"; "Vendor Part#"; "width:150")
