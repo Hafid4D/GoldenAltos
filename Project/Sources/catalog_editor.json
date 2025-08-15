@@ -923,10 +923,10 @@
 		},
 		"Units": {
 			"color": {
-				"red": 255,
+				"red": 128,
 				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"blue": 128,
+				"alpha": 255
 			},
 			"coordinates": {
 				"left": 3882,

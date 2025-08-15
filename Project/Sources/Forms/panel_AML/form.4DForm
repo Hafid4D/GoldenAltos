@@ -248,7 +248,7 @@
 					"width": 175,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Service Type",
+					"text": "Service/Product",
 					"textAlign": "right",
 					"fontWeight": "normal"
 				},
