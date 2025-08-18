@@ -24,6 +24,7 @@ Function formMethod()
 				
 			: (FORM Get current page:C276(*)=3)
 				This:C1470.loadDocuments()
+				OBJECT SET ENTERABLE:C238(*; "lb_documents"; False:C215)
 				
 		End case 
 	End if 
@@ -42,54 +43,28 @@ Function pup_XXX()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
-	This:C1470.drawPup_EquipmentType()
-	This:C1470.drawPup_EquipmentLocation()
-	This:C1470.drawPup_Division()
-	This:C1470.equipmentManage()
-	
-	If (Form:C1466.current_item#Null:C1517)
-		OBJECT SET TITLE:C194(*; "statusHistory"; String:C10(Form:C1466.current_item.statusHistory))
-	End if 
 	
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="Repair Log ("+String:C10(Form:C1466.lb_repairLog.length)+")"
 		Form:C1466.sfw.entry.panel.pages[2].label:="Documents ("+String:C10(Form:C1466.lb_documents.length)+")"
 		
 	End use 
-	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
-	
-	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
-	
-	Case of 
-		: (FORM Get current page:C276(*)=1)
-			OBJECT GET COORDINATES:C663(*; "subformEquipement"; $left; $top; $right; $bottom)
-			
-			$hOffset:=20
-			$vOffset:=4
-			
-			OBJECT SET COORDINATES:C1248(*; "subformEquipement"; $left; $top; $widthSubform-$hOffset; $heightSubform-$vOffset)
-	End case 
-	
 	Form:C1466.sfw.drawHTab()
 	
+	This:C1470.drawPup_EquipmentType()
+	This:C1470.drawPup_EquipmentLocation()
+	This:C1470.drawPup_Division()
 	
+	OBJECT SET ENTERABLE:C238(*; "entryField@"; Form:C1466.sfw.checkIsInModification())
 	
-Function equipmentManage()
+	OBJECT SET ENTERABLE:C238(*; "entryField@"; Not:C34(Form:C1466.sfw.checkIsInModification()))
+	
 	If (Form:C1466.current_item#Null:C1517)
-		If (Form:C1466.situation.mode="add")
-			//Form.current_item._initCorrectiveActionReport()
-		End if 
-		
-		Form:C1466.subformEquipement:=New object:C1471()
-		Form:C1466.subformEquipement.current_item:=Form:C1466.current_item
-		Form:C1466.subformEquipement.situation:=Form:C1466.situation
-		Form:C1466.subformEquipement.sfw:=Form:C1466.sfw
+		OBJECT SET TITLE:C194(*; "statusHistory"; String:C10(Form:C1466.current_item.statusHistory))
 	End if 
+	OBJECT SET VISIBLE:C603(*; "Rectangl@"; Form:C1466.sfw.checkIsInModification())
 	
-	
-Function subFormEvent()
-	Form:C1466.current_item:=Form:C1466.subformEquipement.current_item
-	This:C1470._activate_save_cancel_button()
+	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
 	
 	
 Function drawPup_EquipmentType()
@@ -178,7 +153,7 @@ Function pup_location()
 	
 Function drawPup_Division()
 	If (Form:C1466.current_item#Null:C1517)
-		$equipmentDivision:=ds:C1482.Division.query("divisionID= :1"; Form:C1466.current_item.divisionID).first() || New object:C1471()
+		$equipmentDivision:=ds:C1482.Division.query("UUID= :1"; Form:C1466.current_item.UUID_Division).first() || New object:C1471()
 		$divisionName:=$equipmentDivision.name
 		If ($divisionName=Null:C1517)
 			$divisionName:=""
@@ -200,7 +175,7 @@ Function pup_division()
 		For each ($equipmentDivision; Storage:C1525.cache.divisions)
 			APPEND MENU ITEM:C411($menu; $equipmentDivision.name; *)
 			SET MENU ITEM PARAMETER:C1004($menu; -1; $equipmentDivision.UUID)
-			If ($equipmentDivision.divisionID=Form:C1466.current_item.divisionID)
+			If ($equipmentDivision.UUID=Form:C1466.current_item.UUID_Division)
 				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
 				If (Is Windows:C1573)
 					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
@@ -213,7 +188,7 @@ Function pup_division()
 		Case of 
 			: ($choose#"")
 				$equipmentDivision:=ds:C1482.Division.get($choose)
-				Form:C1466.current_item.divisionID:=$equipmentDivision.divisionID
+				Form:C1466.current_item.UUID_Division:=$equipmentDivision.UUID
 		End case 
 		
 	End if 
@@ -336,7 +311,7 @@ Function bActionDocument()
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_document"; $form)
 			If (OK=1)
-				Form:C1466.selectedDocument:=$form.details
+				Form:C1466.lb_documents.push($form.details)
 				//Form.current_item.reports.documents.push($form.details)
 				cs:C1710.panel_equipment.me._activate_save_cancel_button()
 			End if 

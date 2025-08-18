@@ -6,25 +6,23 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	//Mark: entry : Specification
 	$entry:=cs:C1710.sfw_definitionEntry.new("specification"; ["qualityAssurance"]; "Specs Control")
 	$entry.setDataclass("Specification")
-	$entry.setSearchboxField("spec")
 	$entry.setDisplayOrder(-500)
 	$entry.setIcon("image/entry/spec-control-white-50x50.png")
 	
 	$entry.setSearchboxField("spec")
 	
+	$entry.setPanel("panel_specification")
+	$entry.setPanelPage(1; ""; "Main")
+	$entry.setPanelPage(2; ""; "Documents")
+	
 	$entry.setLBItemsColumn("spec"; "Spec#"; "width:100")
 	$entry.setLBItemsColumn("revision"; "Revision"; "width:50")
 	$entry.setLBItemsColumn("title"; "Title")
 	$entry.setLBItemsOrderBy("spec")
-	$entry.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:specification"; "unitN:specifications")
-	
-	$entry.setPanel("panel_specification")
-	
-	$entry.setPanelPage(1; ""; "Main")
-	$entry.setPanelPage(2; ""; "Documents")
-	
+	//$entry.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:specification"; "unitN:specifications")
 	
 	$entry.setItemListAction("Export The List To Excel"; "_ga_exportSpecToExcel")
+	$entry.setItemListAction("-"; "-")
 	$entry.setItemListAction("Print The List"; "_ga_printSpecList")
 	
 	

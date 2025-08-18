@@ -36,19 +36,19 @@
 				"label_0_1": {
 					"type": "text",
 					"top": 12,
-					"left": 15,
+					"left": 0,
 					"width": 150,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Specification#",
-					"right": 165,
-					"fontWeight": "bold",
+					"right": 150,
+					"fontWeight": "normal",
 					"textAlign": "right"
 				},
 				"entryField_spec": {
 					"type": "input",
 					"top": 12,
-					"left": 175,
+					"left": 160,
 					"width": 150,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.spec",
@@ -66,20 +66,20 @@
 				"label_title": {
 					"type": "text",
 					"top": 39,
-					"left": 15,
+					"left": 0,
 					"width": 150,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Spec Title",
 					"bottom": 56,
-					"right": 165,
-					"fontWeight": "bold",
+					"right": 150,
+					"fontWeight": "normal",
 					"textAlign": "right"
 				},
 				"entryField_title": {
 					"type": "input",
 					"top": 39,
-					"left": 175,
+					"left": 160,
 					"width": 250,
 					"height": 41,
 					"dataSource": "Form:C1466.current_item.title",
@@ -100,7 +100,7 @@
 					"type": "button",
 					"text": "",
 					"top": 4,
-					"left": 330,
+					"left": 320,
 					"width": 30,
 					"height": 32,
 					"events": [
@@ -115,7 +115,7 @@
 					"type": "button",
 					"text": "",
 					"top": 4,
-					"left": 330,
+					"left": 320,
 					"width": 30,
 					"height": 32,
 					"events": [
@@ -140,29 +140,21 @@
 		},
 		{
 			"objects": {
-				"Rectangle9": {
-					"type": "rectangle",
-					"top": 358,
-					"left": 173,
-					"width": 250,
-					"height": 23,
-					"stroke": "transparent"
-				},
 				"label_0_8": {
 					"type": "text",
-					"top": 360,
-					"left": 13,
+					"top": 274,
+					"left": 0,
 					"width": 150,
 					"height": 19,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Review Date",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"entryField_reviewDate": {
 					"type": "input",
-					"top": 360,
-					"left": 175,
+					"top": 274,
+					"left": 160,
 					"width": 246,
 					"height": 19,
 					"dataSource": "Form:C1466.current_item.reviewDate",
@@ -177,14 +169,14 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 379,
+					"bottom": 293,
 					"dataSourceTypeHint": "date",
 					"method": "ObjectMethods/entryField_reviewDate.4dm"
 				},
 				"PopupDate1": {
 					"type": "subform",
-					"top": 361,
-					"left": 402,
+					"top": 275,
+					"left": 387,
 					"width": 19,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.reviewDate",
@@ -203,86 +195,22 @@
 					"focusable": true,
 					"borderStyle": "none"
 				},
-				"Rectangle7": {
-					"type": "rectangle",
-					"top": 401,
-					"left": 175,
-					"width": 250,
-					"height": 25,
-					"stroke": "transparent"
-				},
-				"Rectangle1": {
-					"type": "rectangle",
-					"top": 229,
-					"left": 175,
-					"width": 250,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle2": {
-					"type": "rectangle",
-					"top": 140,
-					"left": 175,
-					"width": 250,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle3": {
-					"type": "rectangle",
-					"top": 489,
-					"left": 175,
-					"width": 250,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle4": {
-					"type": "rectangle",
-					"top": 315,
-					"left": 175,
-					"width": 250,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle5": {
-					"type": "rectangle",
-					"top": 272,
-					"left": 175,
-					"width": 250,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle6": {
-					"type": "rectangle",
-					"top": 446,
-					"left": 175,
-					"width": 250,
-					"height": 23,
-					"stroke": "transparent"
-				},
-				"Rectangle8": {
-					"type": "rectangle",
-					"top": 186,
-					"left": 175,
-					"width": 250,
-					"height": 23,
-					"stroke": "transparent"
-				},
 				"label_0_4": {
 					"type": "text",
-					"top": 186,
-					"left": 15,
+					"top": 160,
+					"left": 0,
 					"width": 150,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Document Category",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"pup_category": {
 					"type": "button",
-					"top": 186,
-					"left": 177,
-					"width": 246,
+					"top": 157,
+					"left": 158,
+					"width": 250,
 					"height": 23,
 					"fontFamily": "System Font",
 					"fontSize": 13,
@@ -297,36 +225,36 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"right": 423,
+					"right": 408,
 					"fontWeight": "normal",
 					"textAlign": "left"
 				},
-				"label_0_2": {
+				"label_Revision": {
 					"type": "text",
-					"top": 143,
-					"left": 15,
+					"top": 133,
+					"left": 0,
 					"width": 150,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Revision",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"label_0_3": {
 					"type": "text",
-					"top": 231,
-					"left": 15,
+					"top": 187,
+					"left": 0,
 					"width": 150,
 					"height": 19,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Revision Date",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"entryField_revisionDate": {
 					"type": "input",
-					"top": 231,
-					"left": 177,
+					"top": 187,
+					"left": 160,
 					"width": 246,
 					"height": 19,
 					"dataSource": "Form:C1466.current_item.revisionDate",
@@ -341,13 +269,13 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 250,
+					"bottom": 206,
 					"dataSourceTypeHint": "date"
 				},
 				"entryField_revision": {
 					"type": "input",
-					"top": 143,
-					"left": 177,
+					"top": 133,
+					"left": 160,
 					"width": 246,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.revision",
@@ -362,12 +290,12 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 160
+					"bottom": 150
 				},
 				"PopupDate": {
 					"type": "subform",
-					"top": 232,
-					"left": 404,
+					"top": 188,
+					"left": 387,
 					"width": 19,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.revisionDate",
@@ -387,19 +315,19 @@
 				},
 				"label_0_5": {
 					"type": "text",
-					"top": 494,
-					"left": 15,
+					"top": 361,
+					"left": 0,
 					"width": 150,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Remark",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"entryField_remark": {
 					"type": "input",
-					"top": 492,
-					"left": 177,
+					"top": 361,
+					"left": 160,
 					"width": 246,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.remark",
@@ -414,24 +342,24 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 509
+					"bottom": 378
 				},
 				"label_0_7": {
 					"type": "text",
-					"top": 275,
-					"left": 15,
+					"top": 216,
+					"left": 0,
 					"width": 150,
 					"height": 17,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Departement",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"pup_departement": {
 					"type": "button",
-					"top": 272,
-					"left": 177,
-					"width": 246,
+					"top": 213,
+					"left": 158,
+					"width": 250,
 					"height": 23,
 					"fontFamily": "System Font",
 					"fontSize": 13,
@@ -446,25 +374,25 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"right": 423,
+					"right": 408,
 					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"label_0_6": {
 					"type": "text",
-					"top": 316,
-					"left": 15,
+					"top": 243,
+					"left": 0,
 					"width": 150,
 					"height": 21,
-					"stroke": "#000000",
+					"stroke": "#808080",
 					"text": "Review interval in Days",
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"entryField_revisionDate1": {
 					"type": "input",
-					"top": 316,
-					"left": 177,
+					"top": 243,
+					"left": 160,
 					"width": 246,
 					"height": 21,
 					"dataSource": "Form:C1466.current_item.reviewIntervalInDays",
@@ -479,16 +407,16 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 337,
+					"bottom": 264,
 					"dataSourceTypeHint": "date"
 				},
 				"entryField_isForm": {
 					"type": "checkbox",
 					"text": "Is this a form?",
-					"top": 449,
-					"left": 177,
+					"top": 332,
+					"left": 160,
 					"width": 246,
-					"height": 17,
+					"height": 19,
 					"events": [
 						"onClick"
 					],
@@ -499,8 +427,8 @@
 				"entryField_suppress": {
 					"type": "checkbox",
 					"text": "Suppress from publishing in table",
-					"top": 404,
-					"left": 177,
+					"top": 303,
+					"left": 160,
 					"width": 246,
 					"height": 19,
 					"events": [
@@ -556,7 +484,7 @@
 								"name": "Footer1"
 							},
 							"dataSource": "This:C1470.code",
-							"width": 59
+							"width": 160
 						},
 						{
 							"header": {
@@ -643,28 +571,9 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 379,
+	"geometryStamp": 427,
 	"method": "method.4dm",
 	"editor": {
-		"groups": {
-			"Group": [
-				"Rectangle3",
-				"label_0_5",
-				"entryField_remark"
-			],
-			"Group1": [
-				"Rectangle9",
-				"entryField_reviewDate",
-				"label_0_8",
-				"PopupDate1"
-			],
-			"Group8": [
-				"Rectangle1",
-				"entryField_revisionDate",
-				"label_0_3",
-				"PopupDate"
-			]
-		},
 		"activeView": "View 1",
 		"defaultView": "View 1",
 		"views": {

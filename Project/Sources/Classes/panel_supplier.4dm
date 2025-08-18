@@ -158,13 +158,13 @@ Function pup_enteredBy()
 	
 Function drawPup_division()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.current_item.drowPup("Division"; "divisionID"; "divisionID"; "pup_division")
+		Form:C1466.current_item.drowPup("Division"; "UUID"; "UUID_Division"; "pup_division")
 	End if 
 	
 	
 Function pup_division()
 	//Create pop up menu
-	Form:C1466.current_item.pup("divisions"; "Division"; "divisionID"; "divisionID")
+	Form:C1466.current_item.pup("divisions"; "Division"; "UUID"; "UUID_Division")
 	This:C1470.drawPup_division()
 	
 	
@@ -236,7 +236,7 @@ Function bActionDocument()
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_document"; $form)
 			If (OK=1)
-				Form:C1466.selectedDocument:=$form.details
+				Form:C1466.lb_documents.push($form.details)
 				//Form.current_item.attachedDocuments.documents.push($form.details)
 				cs:C1710.panel_supplier.me._activate_save_cancel_button()
 			End if 

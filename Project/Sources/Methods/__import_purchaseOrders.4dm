@@ -504,19 +504,19 @@ If (True:C214)
 		//$specification_e.division:=$record.Division  //TO CHANGE
 		$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($record.Division; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($division.length>0)
-			$specification_e.divisionID:=$division[0].divisionID
+			$specification_e.UUID_Division:=$division[0].UUID
 		Else 
-			$specification_e.divisionID:=0
+			$specification_e.UUID_Division:=""
 		End if 
 		
 		$specification_e.isForm:=$record.Form
 		
 		//$specification_e.category:=$record.PublishedDocCategory  //TO CHANGE
-		$category:=ds:C1482.SpecCategory.query("name =:1"; Split string:C1554($record.PublishedDocCategory; "\r"; sk trim spaces:K86:2).join("\r"))
+		$category:=ds:C1482.DocumentCategory.query("name =:1"; Split string:C1554($record.PublishedDocCategory; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($category.length>0)
-			$specification_e.categoryID:=$category[0].categoryID
+			$specification_e.UUID_DocumentCategory:=$category[0].UUID
 		Else 
-			$specification_e.categoryID:=0
+			$specification_e.UUID_DocumentCategory:=0
 		End if 
 		
 		$specification_e.remark:=$record.Remarks
@@ -526,11 +526,11 @@ If (True:C214)
 		$specification_e.reviewDate:=$record.Review_Date
 		
 		//$specification_e.departmentID:=$record.ControllingDept
-		$stecControllingDetpt:=ds:C1482.SpecControllingDept.query("name =:1"; Split string:C1554($record.ControllingDept; "\r"; sk trim spaces:K86:2).join("\r"))
+		$stecControllingDetpt:=ds:C1482.ControllingDepartment.query("name =:1"; Split string:C1554($record.ControllingDept; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($stecControllingDetpt.length>0)
-			$specification_e.departmentID:=$stecControllingDetpt[0].departmentID
+			$specification_e.UUID_ControllingDepartment:=$stecControllingDetpt[0].UUID
 		Else 
-			$specification_e.departmentID:=0
+			$specification_e.UUID_ControllingDepartment:=0
 		End if 
 		
 		

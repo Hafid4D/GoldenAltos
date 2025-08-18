@@ -56,15 +56,14 @@ If ($supplier_log.exists)
 		$eSupplier.name:=$supplier.Supplier
 		$eSupplier.code:=$supplier.code
 		
-		//$eSupplier.divisionID:=$supplier.Critical
 		$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($supplier.Division; "\r"; sk trim spaces:K86:2).join("\r"))
 		
 		If ($division.length>0)
 			
-			$eSupplier.divisionID:=$division[0].divisionID
+			$eSupplier.UUID_Division:=$division[0].UUID
 		Else 
 			
-			$eSupplier.divisionID:=0
+			$eSupplier.UUID_Division:=""
 		End if 
 		
 		$eSupplier.disqualified:=$supplier.Disqualified
@@ -252,15 +251,14 @@ If ($avml_log.exists)
 		$eAvml.service:=$avml.Service
 		$eAvml.serviceType:=$avml.Service_type
 		
-		//$eAvml.divisionID:=$avml.Division
 		$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($avml.Division; "\r"; sk trim spaces:K86:2).join("\r"))
 		
 		If ($division.length>0)
 			
-			$eAvml.divisionID:=$division[0].divisionID
+			$eAvml.UUID_Division:=$division[0].UUID
 		Else 
 			
-			$eAvml.divisionID:=0
+			$eAvml.UUID_Division:=""
 		End if 
 		
 		$eAvml.enteredBy:=$avml.EnteredBy
@@ -268,7 +266,6 @@ If ($avml_log.exists)
 		$eAvml.makeInactive:=$avml.MakeInactive
 		$eAvml.comment:=$avml.Comments
 		
-		//$eAvml.inventoryUnits:=$avml.InventoryUnits
 		$unit:=ds:C1482.Units.query("name =:1"; Split string:C1554($avml.InventoryUnits; "\r"; sk trim spaces:K86:2).join("\r"))
 		
 		If ($unit.length>0)
@@ -279,7 +276,7 @@ If ($avml_log.exists)
 			$eAvml.inventoryUnits:=0
 		End if 
 		
-		//$eAvml.procurementUnits:=$avml.ProcurementUnits
+		
 		$unit:=ds:C1482.Units.query("name =:1"; Split string:C1554($avml.ProcurementUnits; "\r"; sk trim spaces:K86:2).join("\r"))
 		
 		If ($unit.length>0)

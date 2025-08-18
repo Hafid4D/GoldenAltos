@@ -17,5 +17,5 @@ local Function cacheLoad()
 	
 	
 Function _loadAsCollection()->$specDepartements : Collection
-	$specDepartements:=This:C1470.all().toCollection("UUID, departmentID,name").orderBy("categoryID")
+	$specDepartements:=This:C1470.all().toCollection("UUID, levelID,name").orderBy("levelID")
 	
