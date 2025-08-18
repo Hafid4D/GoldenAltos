@@ -19,9 +19,9 @@ If (Form:C1466.sfw.lb_items.length>0)
 	$template:=WP Import document:C1318($file.platformPath)
 	
 	$context.length:=Form:C1466.sfw.lb_items.length
-	$context.location:=_ga_getListFiltersValues("EquipmentLocation"; "locationID")
-	$context.equipmentType:=_ga_getListFiltersValues("ToolType"; "UUID")  //("EquipmentType"; "typeID")
-	$context.division:=_ga_getListFiltersValues("Division"; "divisionID")
+	$context.location:=_ga_getListFiltersValues("EquipmentLocation"; "UUID")
+	$context.equipmentType:=_ga_getListFiltersValues("ToolType"; "UUID")
+	$context.division:=_ga_getListFiltersValues("Division"; "UUID")
 	$context.user:=Current machine:C483
 	
 	SET PRINT OPTION:C733(Orientation option:K47:2; 1)

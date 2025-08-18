@@ -22,7 +22,7 @@ If (True:C214)
 		For ($i; 0; $status.length-1)
 			
 			$eCustomerStatus:=ds:C1482.CustomerStatus.new()
-			$eCustomerStatus.statusID:=$i+1
+			$eCustomerStatus.levelID:=$i+1
 			$eCustomerStatus.name:=$status[$i]
 			$eCustomerStatus.color:=$colors[$i]
 			$eCustomerStatus.save()
@@ -33,7 +33,7 @@ If (True:C214)
 		For ($i; 0; $carriers.length-1)
 			
 			$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
-			$eCustomerCarrier.carrierID:=$i+1
+			$eCustomerCarrier.levelID:=$i+1
 			$eCustomerCarrier.name:=$carriers[$i]
 			$eCustomerCarrier.color:=""
 			$eCustomerCarrier.save()
@@ -45,8 +45,11 @@ If (True:C214)
 			$eCustomer.name:=$customer.Customer
 			$eCustomer.code:=$customer.Cust_Code
 			
-			$eCustomer.IDT_status:=$customer.idt_status
+			$customerStatus:=ds:C1482.CustomerStatus.query("levelID =:1"; $customer.idt_status)
 			
+			If ($customerStatus.length>0)
+				$eCustomer.UUID_CustomerStatus:=$customerStatus[0].UUID
+			End if 
 			//-----------------------------------------------------------
 			$eCustomer.contactDetails:=New object:C1471()
 			$eCustomer.contactDetails.addresses:=New collection:C1472()
@@ -80,38 +83,11 @@ If (True:C214)
 			
 			$eCustomer.contactDetails.communications:=New collection:C1472()
 			
-			////AP Contacts -> TODO : TO BE REMOVED LATER
-			//$comm:=New object()
-			//$comm.type:="AP Contact"
-			//$comm.detail:=New object()
-			//$comm.detail.email:=$customer.AP_email
-			//$comm.detail.phone:=$customer.AP_tel
-			//$comm.detail.fax:=$customer.AP_fax
-			//$comm.detail.mobile:=""
-			//$comm.detail.email_cc:=""
-			
-			//$eCustomer.contactDetails.communications.push($comm)
-			
-			
-			////Status Contacts -> TODO : TO BE REMOVED LATER
-			//$comm:=New object()
-			//$comm.type:="Status Contact"
-			//$comm.detail:=New object()
-			//$comm.detail.fax:=$customer.AP_fax
-			//$comm.detail.mobile:=""
-			//$comm.detail.email_cc:=""
-			//$comm.detail.phone:=$customer.Status_Tel
-			//$comm.detail.email:=$customer.StatusEmailAddresses
-			
-			//$eCustomer.contactDetails.communications.push($comm)
-			
-			//Checkand assign a Carrier if needed
+			//Check and assign a Carrier if needed
 			$carrier:=ds:C1482.CustomerCarrier.query("name =:1"; Split string:C1554($customer.Carrier; "\r"; sk trim spaces:K86:2).join("\r"))
 			
 			If ($carrier.length>0)
-				$eCustomer.IDT_carrier:=$carrier[0].carrierID
-			Else 
-				$eCustomer.IDT_carrier:=0
+				$eCustomer.UUID_CustomerCarrier:=$carrier[0].UUID
 			End if 
 			
 			$eCustomer.carrier:=$customer.Carrier

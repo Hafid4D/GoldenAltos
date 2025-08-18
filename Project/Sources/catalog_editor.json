@@ -165,19 +165,18 @@
 		},
 		"CustomerStatus": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 70,
+				"green": 115,
+				"blue": 190,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3773.9997558594,
-				"top": 244.33334350586,
-				"width": 210.2592010498,
-				"height": 131.33203125
+				"left": 1005.9997558594,
+				"top": 769.33337402344,
+				"width": 174.2592010498,
+				"height": 168.33203125
 			},
-			"displayable_fields_count": 4,
-			"fields_ordering": 1
+			"displayable_fields_count": 6
 		},
 		"QuoteLine": {
 			"color": {
@@ -489,14 +488,14 @@
 		},
 		"Customer": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 70,
+				"green": 115,
+				"blue": 190,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1279,
-				"top": 839,
+				"left": 1270,
+				"top": 830,
 				"width": 188.29302978516,
 				"height": 331.21447753906
 			},
@@ -1345,10 +1344,10 @@
 		},
 		"RepairLog": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 150,
+				"green": 216,
+				"blue": 175,
+				"alpha": 255
 			},
 			"coordinates": {
 				"left": 1177,
@@ -1375,19 +1374,18 @@
 		},
 		"EquipmentLocation": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 150,
+				"green": 216,
+				"blue": 175,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 789,
+				"left": 759,
 				"top": 0,
 				"width": 139,
 				"height": 190.33203125
 			},
-			"displayable_fields_count": 7,
-			"fields_ordering": 1
+			"displayable_fields_count": 7
 		},
 		"sfw_Counter": {
 			"color": {
@@ -1491,18 +1489,18 @@
 		},
 		"Equipment": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 150,
+				"green": 216,
+				"blue": 175,
+				"alpha": 255
 			},
 			"coordinates": {
 				"left": 941,
 				"top": 0,
-				"width": 182,
-				"height": 670.33203125
+				"width": 204,
+				"height": 673.33203125
 			},
-			"displayable_fields_count": 29
+			"displayable_fields_count": 30
 		},
 		"ContactEvent": {
 			"color": {
@@ -1512,8 +1510,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 470,
-				"top": 372,
+				"left": 4713,
+				"top": 760.66668701172,
 				"width": 164,
 				"height": 186.33203125
 			},
@@ -1528,10 +1526,10 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2595,
-				"top": 0,
-				"width": 167,
-				"height": 190.33203125
+				"left": 4715.3334960938,
+				"top": 535,
+				"width": 161,
+				"height": 191.33203125
 			},
 			"displayable_fields_count": 7
 		},
@@ -1613,18 +1611,18 @@
 		},
 		"CustomerCarrier": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 70,
+				"green": 115,
+				"blue": 190,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3567,
-				"top": 194,
-				"width": 169,
-				"height": 142.33203125
+				"left": 1003,
+				"top": 949,
+				"width": 175,
+				"height": 166.33203125
 			},
-			"displayable_fields_count": 4
+			"displayable_fields_count": 5
 		},
 		"Tool": {
 			"color": {
@@ -1779,8 +1777,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 680,
-				"top": 363,
+				"left": 673,
+				"top": 319,
 				"width": 183.95446777344,
 				"height": 256.15802001953
 			},
@@ -1788,6 +1786,78 @@
 		}
 	},
 	"relations": {
+		"FBC0F8D58BEE4D468E32DAE301646C43": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"7244ED91755F7E4DBD92D5DF80C5724E": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"277BE58DF3CA1E4ABBD5DD685B4B762E": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"955D7429936EA745A291C959AF600BA3": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"69CAE96E3D9AEC4CAEFC4614328AC072": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"C094CCAE645E404288AD6D06B0055F16": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"6DC2F4D462B73A4EA57FC5CF4B485D48": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"0A7463FE0FCEC94EA2A2F79201C0A462": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"CC7FA698F6998C4BBA34F1464A6A7E30": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"F9A518D72A481949B5ADB68DA975EE6A": {
 			"color": {
 				"red": 240,

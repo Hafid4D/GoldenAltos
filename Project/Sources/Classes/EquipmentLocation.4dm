@@ -17,7 +17,7 @@ local Function cacheLoad()
 	
 	
 Function _loadAsCollection()->$locations : Collection
-	$locations:=This:C1470.all().toCollection("UUID,locationID,name").orderBy("name")
+	$locations:=This:C1470.all().toCollection("UUID,levelID,name").orderBy("name")
 	
 	
 	

@@ -48,7 +48,7 @@ Function drawPup_XXX()
 	
 Function drawPup_CustomerStatus()
 	If (Form:C1466.current_item#Null:C1517)
-		$customerStatus:=ds:C1482.CustomerStatus.query("statusID= :1"; Form:C1466.current_item.IDT_status).first() || New object:C1471()
+		$customerStatus:=ds:C1482.CustomerStatus.query("UUID= :1"; Form:C1466.current_item.UUID_CustomerStatus).first() || New object:C1471()
 		$statusName:=$customerStatus.name
 		If ($statusName=Null:C1517)
 			$statusName:=""
@@ -70,7 +70,7 @@ Function pup_status()
 		For each ($eCustomerStatus; Storage:C1525.cache.customerStatus)
 			APPEND MENU ITEM:C411($menu; $eCustomerStatus.name; *)
 			SET MENU ITEM PARAMETER:C1004($menu; -1; $eCustomerStatus.UUID)
-			If ($eCustomerStatus.statusID=Form:C1466.current_item.IDT_status)
+			If ($eCustomerStatus.UUID=Form:C1466.current_item.UUID_CustomerStatus)
 				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
 				If (Is Windows:C1573)
 					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
@@ -83,7 +83,7 @@ Function pup_status()
 		Case of 
 			: ($choose#"")
 				$eCustomerStatus:=ds:C1482.CustomerStatus.get($choose)
-				Form:C1466.current_item.IDT_status:=$eCustomerStatus.statusID
+				Form:C1466.current_item.UUID_CustomerStatus:=$eCustomerStatus.UUID
 		End case 
 		
 	End if 
@@ -92,7 +92,7 @@ Function pup_status()
 	
 Function drawPup_CustomerCarrier()
 	If (Form:C1466.current_item#Null:C1517)
-		$customerCarrier:=ds:C1482.CustomerCarrier.query("carrierID= :1"; Form:C1466.current_item.IDT_carrier).first() || New object:C1471()
+		$customerCarrier:=ds:C1482.CustomerCarrier.query("UUID =:1"; Form:C1466.current_item.UUID_CustomerCarrier).first() || New object:C1471()
 		$carrierName:=$customerCarrier.name
 		If ($carrierName=Null:C1517)
 			$carrierName:=""
@@ -114,7 +114,7 @@ Function pup_carrier()
 		For each ($eCustomerCarrier; Storage:C1525.cache.customerCarriers)
 			APPEND MENU ITEM:C411($menu; $eCustomerCarrier.name; *)
 			SET MENU ITEM PARAMETER:C1004($menu; -1; $eCustomerCarrier.UUID)
-			If ($eCustomerCarrier.carrierID=Form:C1466.current_item.IDT_carrier)
+			If ($eCustomerCarrier.UUID=Form:C1466.current_item.UUID_CustomerCarrier)
 				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
 				If (Is Windows:C1573)
 					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
@@ -127,7 +127,7 @@ Function pup_carrier()
 		Case of 
 			: ($choose#"")
 				$eCustomerCarrier:=ds:C1482.CustomerCarrier.get($choose)
-				Form:C1466.current_item.IDT_carrier:=$eCustomerCarrier.carrierID
+				Form:C1466.current_item.UUID_CustomerCarrier:=$eCustomerCarrier.UUID
 		End case 
 		
 	End if 

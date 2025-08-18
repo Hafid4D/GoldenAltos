@@ -10,7 +10,7 @@ var $SpecControllingDepts : Collection:=New collection:C1472("All"; "Accounting"
 "Business Development"; "Customer"; "Electrical Test"; "EMS"; "ESD-LU"; "Facilities"; "FSO"; \
 "Hardware"; "HR"; "IT"; "Planning"; "Product Assurance"; "Program Management"; "Purchasing"; "QA"; \
 "Reliability"; "Test"; "Vendor")
-TRUNCATE TABLE:C1051([ControllingDepartment])
+TRUNCATE TABLE:C1051([ControllingDepartment:45])
 For ($i; 0; $SpecControllingDepts.length-1)
 	$eControllingDept:=ds:C1482.ControllingDepartment.new()
 	$eControllingDept.levelID:=$i
@@ -42,8 +42,9 @@ var $equipmentsLocations : Collection:=New collection:C1472("4TH OPTICAL"; "Burn
 TRUNCATE TABLE:C1051([EquipmentLocation:19])
 For ($i; 0; $equipmentsLocations.length-1)
 	$eEquipmentLocation:=ds:C1482.EquipmentLocation.new()
-	$eEquipmentLocation.locationID:=$i+1
+	$eEquipmentLocation.levelID:=$i+1
 	$eEquipmentLocation.name:=$equipmentsLocations[$i]
+	$eEquipmentLocation.color:="#FFFFFF"
 	$eEquipmentLocation.save()
 End for 
 
@@ -56,6 +57,7 @@ For ($i; 0; $divisions.length-1)
 	$eDivision:=ds:C1482.Division.new()
 	$eDivision.levelID:=$i+1
 	$eDivision.name:=$divisions[$i]
+	$eDivision.color:="#FFFFFF"
 	$eDivision.save()
 End for 
 

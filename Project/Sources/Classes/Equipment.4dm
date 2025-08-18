@@ -42,7 +42,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$filter:=cs:C1710.sfw_definitionFilter.new("filterEquipmentLocation")
 	$filter.setDefaultTitle("All locations")
-	$filter.setFilterByIDInTable("EquipmentLocation"; "locationID"; "locationID")
+	$filter.setFilterByLinkedEntity("EquipmentLocation"; "UUID_EquipmentLocation"; ""; "location")
 	$filter.setDynamicTitle("name"; "## equipment location")
 	$entry.addFilter($filter)
 	

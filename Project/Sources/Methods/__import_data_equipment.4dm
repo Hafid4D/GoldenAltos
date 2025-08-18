@@ -28,9 +28,8 @@ If ($equipment_Log.exists)
 		$location:=ds:C1482.EquipmentLocation.query("name =:1"; Split string:C1554($equipment.LOC; "\r"; sk trim spaces:K86:2).join("\r"))  //$eEquipment.location:=$equipment.LOC
 		
 		If ($location.length>0)
-			$eEquipment.locationID:=$location[0].locationID
-		Else 
-			$eEquipment.locationID:=0
+			$eEquipment.UUID_EquipmentLocation:=$location[0].UUID
+			
 		End if 
 		
 		$eEquipment.model:=$equipment.MODEL
