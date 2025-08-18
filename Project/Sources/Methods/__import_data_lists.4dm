@@ -4,33 +4,33 @@
 var $colors : Collection:=New collection:C1472("#3CB371"; "#FFFF00"; "#FF7F50"; "#1E90FF"; "#FF0000")
 
 
-//---->[SpecControllingDept]
-var $eControllingDept : cs:C1710.SpecControllingDeptEntity
+//---->[ControllingDepartment]
+var $eControllingDept : cs:C1710.ControllingDepartmentEntity
 var $SpecControllingDepts : Collection:=New collection:C1472("All"; "Accounting"; "Assembly"; "Beanch"; \
 "Business Development"; "Customer"; "Electrical Test"; "EMS"; "ESD-LU"; "Facilities"; "FSO"; \
 "Hardware"; "HR"; "IT"; "Planning"; "Product Assurance"; "Program Management"; "Purchasing"; "QA"; \
 "Reliability"; "Test"; "Vendor")
-TRUNCATE TABLE:C1051([SpecControllingDept:45])
+TRUNCATE TABLE:C1051([ControllingDepartment])
 For ($i; 0; $SpecControllingDepts.length-1)
-	$eControllingDept:=ds:C1482.SpecControllingDept.new()
-	$eControllingDept.departmentID:=$i
+	$eControllingDept:=ds:C1482.ControllingDepartment.new()
+	$eControllingDept.levelID:=$i
 	$eControllingDept.name:=$SpecControllingDepts[$i]
 	$eControllingDept.save()
 End for 
 
-//---->[SpecCategory]
-var $eCategory : cs:C1710.SpecCategoryEntity
-var $specificationCategories : Collection:=New collection:C1472("All"; "Customer Service"; "Document Control"; \
+////---->[SpecCategory]
+//var $eCategory : cs.SpecCategoryEntity
+//var $specificationCategories : Collection:=New collection("All"; "Customer Service"; "Document Control"; \
 "Golden Altos Forms (including Logs, Checklists)"; "Maintenance Engineering"; \
 "Military Standard"; "Process_Production Procedures"; "Quality Assurance"; "Quality Control"; \
 "Quality Manual"; "System Procedure"; "Training")
-TRUNCATE TABLE:C1051([SpecCategory:44])
-For ($i; 0; $specificationCategories.length-1)
-	$eCategory:=ds:C1482.SpecCategory.new()
-	$eCategory.categoryID:=$i
-	$eCategory.name:=$specificationCategories[$i]
-	$eCategory.save()
-End for 
+//TRUNCATE TABLE([SpecCategory])
+//For ($i; 0; $specificationCategories.length-1)
+//$eCategory:=ds.SpecCategory.new()
+//$eCategory.categoryID:=$i
+//$eCategory.name:=$specificationCategories[$i]
+//$eCategory.save()
+//End for 
 
 
 //----> [EquipementLocation]
@@ -54,7 +54,7 @@ var $divisions : Collection:=New collection:C1472("GAC")
 TRUNCATE TABLE:C1051([Division:20])
 For ($i; 0; $divisions.length-1)
 	$eDivision:=ds:C1482.Division.new()
-	$eDivision.divisionID:=$i+1
+	$eDivision.levelID:=$i+1
 	$eDivision.name:=$divisions[$i]
 	$eDivision.save()
 End for 
@@ -156,5 +156,17 @@ For ($i; 0; $units.length-1)
 	$eUnit.name:=$units[$i]
 	$eUnit.color:="#FFFFFF"
 	$eUnit.save()
+End for 
+
+
+var $eDocCategory : cs:C1710.DocumentCategoryEntity
+var $docCategories : Collection:=New collection:C1472("Internal- Procedure"; "Form. External Specifications"; "Military Standard"; "Industry Standards")
+TRUNCATE TABLE:C1051([DocumentCategory:42])
+For ($i; 0; $docCategories.length-1)
+	$eDocCategory:=ds:C1482.DocumentCategory.new()
+	$eDocCategory.levelID:=$i+1
+	$eDocCategory.name:=$docCategories[$i]
+	$eDocCategory.color:="#FFFFFF"
+	$eDocCategory.save()
 End for 
 

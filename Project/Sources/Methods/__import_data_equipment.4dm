@@ -45,9 +45,9 @@ If ($equipment_Log.exists)
 		$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($equipment.Division; "\r"; sk trim spaces:K86:2).join("\r"))  //$eEquipment.type:=$equipment.EquipmentType
 		
 		If ($division.length>0)
-			$eEquipment.divisionID:=$division[0].divisionID
+			$eEquipment.UUID_Division:=$division[0].UUID
 		Else 
-			$eEquipment.divisionID:=0
+			$eEquipment.UUID_Division:=""
 		End if 
 		
 		$eEquipment.engg:=$equipment.Engg

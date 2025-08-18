@@ -208,13 +208,13 @@ Function pup_procurementUnit()
 	
 Function drawPup_division()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.current_item.drowPup("Division"; "divisionID"; "divisionID"; "pup_division")
+		Form:C1466.current_item.drowPup("Division"; "UUID"; "UUID_Division"; "pup_division")
 	End if 
 	
 	
 Function pup_division()
 	//Create pop up menu
-	Form:C1466.current_item.pup("divisions"; "Division"; "divisionID"; "divisionID")
+	Form:C1466.current_item.pup("divisions"; "Division"; "UUID"; "UUID_Division")
 	This:C1470.drawPup_division()
 	
 	

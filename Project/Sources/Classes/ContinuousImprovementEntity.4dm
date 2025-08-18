@@ -26,12 +26,12 @@ local Function pup($cacheCollection; $dataClass; $queryField; $queryValue)
 			ds:C1482[$dataClass].cacheLoad()
 		End if 
 		
-		For each ($eImprovementPriority; Storage:C1525.cache[$cacheCollection])
-			APPEND MENU ITEM:C411($menu; $eImprovementPriority.name; *)
-			SET MENU ITEM PARAMETER:C1004($menu; -1; $eImprovementPriority.UUID)
+		For each ($eEntity; Storage:C1525.cache[$cacheCollection])
+			APPEND MENU ITEM:C411($menu; $eEntity.name; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $eEntity.UUID)
 			If ($queryField="UUID")  //# TO BE REMOVED
 				
-				If ($eImprovementPriority[$queryField]=Form:C1466.current_item[$queryValue])
+				If ($eEntity[$queryField]=Form:C1466.current_item[$queryValue])
 					SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
 					If (Is Windows:C1573)
 						SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
@@ -39,7 +39,7 @@ local Function pup($cacheCollection; $dataClass; $queryField; $queryValue)
 				End if 
 			Else 
 				
-				If (Num:C11($eImprovementPriority[$queryField])=Form:C1466.current_item[$queryValue])
+				If (Num:C11($eEntity[$queryField])=Form:C1466.current_item[$queryValue])
 					SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
 					If (Is Windows:C1573)
 						SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
@@ -54,8 +54,8 @@ local Function pup($cacheCollection; $dataClass; $queryField; $queryValue)
 		
 		Case of 
 			: ($choose#"")
-				$eImprovementPriority:=ds:C1482[$dataClass].get($choose)
-				Form:C1466.current_item[$queryValue]:=$eImprovementPriority[$queryField]
+				$eEntity:=ds:C1482[$dataClass].get($choose)
+				Form:C1466.current_item[$queryValue]:=$eEntity[$queryField]
 		End case 
 		
 	End if 
