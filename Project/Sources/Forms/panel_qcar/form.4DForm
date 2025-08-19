@@ -117,8 +117,8 @@
 				"label_device": {
 					"type": "text",
 					"top": 87,
-					"left": 12,
-					"width": 65,
+					"left": 214,
+					"width": 95,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Device"
@@ -126,8 +126,8 @@
 				"Field_device": {
 					"type": "input",
 					"top": 87,
-					"left": 82,
-					"width": 240,
+					"left": 322,
+					"width": 310,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.lot.device",
 					"focusable": false,
@@ -231,7 +231,7 @@
 					"type": "input",
 					"top": 62,
 					"left": 322,
-					"width": 308,
+					"width": 310,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.initialResponse",
 					"focusable": false,
@@ -243,7 +243,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"right": 630
+					"right": 632
 				},
 				"label_0_9": {
 					"type": "text",
@@ -302,7 +302,7 @@
 					"top": 12,
 					"left": 413,
 					"width": 19,
-					"height": 16,
+					"height": 17,
 					"dataSource": "Form:C1466.current_item.openDate",
 					"dataSourceTypeHint": "date",
 					"detailForm": "DateButton",
@@ -322,7 +322,7 @@
 					"top": 37,
 					"left": 611,
 					"width": 19,
-					"height": 16,
+					"height": 17,
 					"dataSource": "Form:C1466.current_item.creationDate",
 					"dataSourceTypeHint": "date",
 					"detailForm": "DateButton",
@@ -342,7 +342,7 @@
 					"top": 37,
 					"left": 413,
 					"width": 19,
-					"height": 16,
+					"height": 17,
 					"dataSource": "Form:C1466.current_item.targetCloseDate",
 					"dataSourceTypeHint": "date",
 					"detailForm": "DateButton",
@@ -387,10 +387,10 @@
 				"entryField_rb_internal": {
 					"type": "radio",
 					"text": "Internal",
-					"top": 113,
-					"left": 394,
-					"width": 89,
-					"height": 14,
+					"top": 87,
+					"left": 653,
+					"width": 60,
+					"height": 17,
 					"events": [
 						"onClick"
 					],
@@ -401,10 +401,10 @@
 				"entryField_rb_notInternal": {
 					"type": "radio",
 					"text": "External",
-					"top": 113,
-					"left": 534,
-					"width": 89,
-					"height": 14,
+					"top": 87,
+					"left": 803,
+					"width": 60,
+					"height": 17,
 					"events": [
 						"onClick"
 					],
@@ -414,9 +414,9 @@
 				},
 				"label_device1": {
 					"type": "text",
-					"top": 113,
-					"left": 470,
-					"width": 45,
+					"top": 87,
+					"left": 748,
+					"width": 20,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "or",
@@ -425,8 +425,8 @@
 				},
 				"label_device2": {
 					"type": "text",
-					"top": 87,
-					"left": 358,
+					"top": 62,
+					"left": 653,
 					"width": 65,
 					"height": 17,
 					"stroke": "#808080",
@@ -434,8 +434,8 @@
 				},
 				"entryField_category": {
 					"type": "input",
-					"top": 87,
-					"left": 428,
+					"top": 62,
+					"left": 723,
 					"width": 202,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.category",
@@ -448,7 +448,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"right": 630,
+					"right": 925,
 					"choiceList": {
 						"$ref": "/SOURCES/lists.json#/Reject_Criteria"
 					}
@@ -458,7 +458,7 @@
 					"top": 37,
 					"left": 844,
 					"width": 19,
-					"height": 16,
+					"height": 17,
 					"dataSource": "Form:C1466.current_item.actualCloseDate",
 					"dataSourceTypeHint": "date",
 					"detailForm": "DateButton",
@@ -839,8 +839,8 @@
 			}
 		}
 	],
-	"inheritedForm": "sfw_bkgd_header_4lines",
-	"geometryStamp": 2634,
+	"inheritedForm": "sfw_bkgd_header_3lines",
+	"geometryStamp": 2707,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
