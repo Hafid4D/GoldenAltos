@@ -677,6 +677,28 @@
 					"icon": "Images/building.png",
 					"iconFrames": 1,
 					"textPlacement": "right"
+				},
+				"main_bkgd2": {
+					"type": "rectangle",
+					"top": 687,
+					"left": 1323,
+					"width": 360,
+					"height": 1200,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"bottom": 1887
+				},
+				"main_bkgd3": {
+					"type": "rectangle",
+					"top": 687,
+					"left": 1685,
+					"width": 1500,
+					"height": 1200,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"bottom": 1887
 				}
 			},
 			"entryOrder": [
@@ -1289,7 +1311,7 @@
 		},
 		null
 	],
-	"geometryStamp": 795,
+	"geometryStamp": 796,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

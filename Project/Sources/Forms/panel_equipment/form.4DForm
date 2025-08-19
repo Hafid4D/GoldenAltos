@@ -684,10 +684,10 @@
 				},
 				"Text3": {
 					"type": "text",
-					"text": "Status history",
+					"text": "Equipment general informations",
 					"top": 121,
 					"left": 350,
-					"width": 119,
+					"width": 200,
 					"height": 16,
 					"fontWeight": "bold"
 				},
@@ -1123,7 +1123,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 730,
+	"geometryStamp": 731,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

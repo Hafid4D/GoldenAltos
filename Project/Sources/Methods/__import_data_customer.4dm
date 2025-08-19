@@ -90,7 +90,6 @@ If (True:C214)
 				$eCustomer.UUID_CustomerCarrier:=$carrier[0].UUID
 			End if 
 			
-			$eCustomer.carrier:=$customer.Carrier
 			$eCustomer.accountNum:=$customer.Account_num
 			$eCustomer.resaleLicenseNumber:=$customer.resaleLicenseNumber
 			$eCustomer.ftp:=New object:C1471()

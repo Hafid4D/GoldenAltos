@@ -10,9 +10,9 @@ Function formMethod()
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		
 		If (Form:C1466.situation.mode="add")
-			OBJECT SET VISIBLE:C603(*; "pup_equipmentId"; True:C214)
+			OBJECT SET ENTERABLE:C238(*; "pup_equipmentId"; True:C214)
 		Else 
-			OBJECT SET VISIBLE:C603(*; "pup_equipmentId"; False:C215)
+			OBJECT SET ENTERABLE:C238(*; "pup_equipmentId"; False:C215)
 		End if 
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
@@ -34,9 +34,16 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_reportOperator()
 	This:C1470.drawPup_EquipmentId()
 	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
-	If (Form:C1466.situation.mode#"add")
-		OBJECT SET ENTERABLE:C238(*; "entryField_systemID"; False:C215)
-	End if 
+	
+	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	OBJECT GET COORDINATES:C663(*; "entryField_problem"; $g; $h; $d; $b)
+	OBJECT SET COORDINATES:C1248(*; "entryField_problem"; $g; $h; $widthSubform-10; $b)
+	
+	OBJECT GET COORDINATES:C663(*; "entryField_fix"; $g; $h; $d; $b)
+	OBJECT SET COORDINATES:C1248(*; "entryField_fix"; $g; $h; $widthSubform-10; $heightSubform-10)
+	
+	OBJECT GET COORDINATES:C663(*; "entryField_status"; $g; $h; $d; $b)
+	OBJECT SET COORDINATES:C1248(*; "entryField_status"; $g; $h; $d; $heightSubform-10)
 	
 	
 Function drawPup_XXX()
@@ -68,7 +75,7 @@ Function pup_equipId()
 		For each ($equipmentId; ds:C1482.Equipment.all())  // Storage.cache.equipmentTypes)
 			APPEND MENU ITEM:C411($menu; $equipmentId.assignedID; *)
 			SET MENU ITEM PARAMETER:C1004($menu; -1; $equipmentId.UUID)
-			If ($equipmentId.assignedID=Form:C1466.current_item.equipment.assignedID)
+			If ($equipmentId.UUID=Form:C1466.current_item.UUID_Equipment)
 				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
 				If (Is Windows:C1573)
 					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
@@ -81,7 +88,7 @@ Function pup_equipId()
 		Case of 
 			: ($choose#"")
 				$equipmentId:=ds:C1482.Equipment.get($choose)
-				Form:C1466.current_item.equipment.assignedID:=$equipmentId.assignedID
+				Form:C1466.current_item.UUID_Equipment:=$equipmentId.UUID
 		End case 
 		
 	End if 

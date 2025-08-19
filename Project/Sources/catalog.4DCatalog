@@ -174,7 +174,7 @@
 	<table name="Equipment" uuid="FCE2D049B8944E4CA0AAB0152A549718" id="13">
 		<field name="UUID" uuid="576820214AE49648A0CC6ACA3DD19531" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="assignedID" uuid="28F9AB3445234D4987BA5B798C52930D" type="10" limiting_length="40" never_null="true" id="2"/>
-		<field name="UUID_EquipmentLocation" uuid="98083B716AB37741AB6E5024E6D44BFD" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="3">
+		<field name="UUID_EquipmentLocation" uuid="98083B716AB37741AB6E5024E6D44BFD" type="10" store_as_UUID="true" never_null="true" id="3">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="model" uuid="B32B6631D46552418CA3ABAB9D7C7B45" type="10" limiting_length="255" never_null="true" id="4"/>
@@ -290,7 +290,7 @@
 	<table name="RepairLog" uuid="E209D11E14110249AE69799CB8F51C7C" id="21">
 		<field name="UUID" uuid="8FD486DDACE0854DA8FB686A58B08089" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_Equipment" uuid="C56ACBF61233134FA887559C036F2D7A" type="10" store_as_UUID="true" never_null="true" id="2"/>
-		<field name="fixedBy" uuid="AC0D9388F1EFC04CA05EA8CBB47E3BF7" type="3" never_null="true" id="3"/>
+		<field name="fixedBy" uuid="AC0D9388F1EFC04CA05EA8CBB47E3BF7" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="3"/>
 		<field name="fixedDate" uuid="BFCFF4A84085C14BA123E73537FC98F4" type="8" never_null="true" id="4"/>
 		<field name="reportDate" uuid="741357BFDBEA23499DB051B8EDCB9EE8" type="8" never_null="true" id="5"/>
 		<field name="status" uuid="DA2945D648F7F24DB6ED519C615564F1" type="10" limiting_length="255" never_null="true" id="6"/>
@@ -302,7 +302,7 @@
 		<field name="upAt" uuid="7E6764EC95C7F74B89A8509FFD911EFE" type="9" never_null="true" id="12"/>
 		<field name="dateUp" uuid="8BE38F5B5B6E214D8C55B2E7F73DCE36" type="8" never_null="true" id="13"/>
 		<field name="isApproved" uuid="D1206F3FDDA66F49812596441E32BE6A" type="1" never_null="true" id="14"/>
-		<field name="reportedBy" uuid="0D41C3EAAF305248A7DDF508713A818A" type="3" never_null="true" id="15"/>
+		<field name="reportedBy" uuid="0D41C3EAAF305248A7DDF508713A818A" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="15"/>
 		<field name="approvedBy" uuid="C69BC87ECC3E8A40AFE2E649C3367539" type="10" limiting_length="255" never_null="true" id="16"/>
 		<field name="approvalDate" uuid="C58CFAD652E982459AD859AAC73FE8D3" type="8" never_null="true" id="17"/>
 		<field name="operators" uuid="0A3CC89837F0474693760937B65C8C46" type="21" blob_switch_size="2147483647" never_null="true" id="18"/>
@@ -896,11 +896,11 @@
 		<field name="UUID" uuid="37676CD94E8B423595ED98B5C0E9CF89" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="name" uuid="6408BE6907C146339726DEB3047C211E" type="10" limiting_length="255" never_null="true" id="2"/>
 		<field name="code" uuid="AF9DE89990E540D5986DAACE7A507FB0" type="10" limiting_length="255" never_null="true" id="3"/>
-		<field name="UUID_CustomerCarrier" uuid="C597A4092E2E4812ABE088A99BB5ADF5" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="4"/>
+		<field name="UUID_CustomerCarrier" uuid="C597A4092E2E4812ABE088A99BB5ADF5" type="10" store_as_UUID="true" never_null="true" id="4"/>
 		<field name="contactDetails" uuid="F3B5F489FCA349E798ABFC436DDD823C" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
 		<field name="accountNumber" uuid="5A3BBA99C17E4183BE08F3A2B8EC43BF" type="10" limiting_length="255" never_null="true" id="6"/>
 		<field name="resaleLicenseNumber" uuid="CA916083E95D431CB2D94D2DA814C36A" type="10" limiting_length="255" never_null="true" id="7"/>
-		<field name="UUID_CustomerStatus" uuid="C667491D1DBD4A238DB7F4B0766ADDB4" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="8"/>
+		<field name="UUID_CustomerStatus" uuid="C667491D1DBD4A238DB7F4B0766ADDB4" type="10" store_as_UUID="true" never_null="true" id="8"/>
 		<field name="accountNum" uuid="2B66CF6D4B0349D99F372D1F4BAD6F4F" type="10" limiting_length="255" never_null="true" id="10"/>
 		<field name="ftp" uuid="4D0C1F15F7D742BFB42D5259BA6576F6" type="21" blob_switch_size="2147483647" never_null="true" id="11"/>
 		<primary_key field_name="UUID" field_uuid="37676CD94E8B423595ED98B5C0E9CF89"/>
@@ -3118,6 +3118,11 @@
 			<table_ref uuid="BBEF22543374E24BBC6534C68EA6E3D2" name="Units"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="B0AC2F57EA76F746A8AC5D2307E3610F" type="3">
+		<field_ref uuid="AC0D9388F1EFC04CA05EA8CBB47E3BF7" name="fixedBy">
+			<table_ref uuid="E209D11E14110249AE69799CB8F51C7C" name="RepairLog"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="B1A2B84D24E6284B89649B659845D4AF" type="7">
 		<field_ref uuid="A0B2300D77BC874D9789248A024181BD" name="UUID">
 			<table_ref uuid="2125F2FDC0CF8B44888965E43127D9B3" name="ServiceType"/>
@@ -3376,6 +3381,11 @@
 	<index kind="regular" unique_keys="true" uuid="F79B3490BB86294E8ABCF568593399BF" type="7">
 		<field_ref uuid="8EFDF2BE837542E3849ECB064F30C5BD" name="UUID">
 			<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="F9FBFF78C52FD14D9DB56F5476189033" type="3">
+		<field_ref uuid="0D41C3EAAF305248A7DDF508713A818A" name="reportedBy">
+			<table_ref uuid="E209D11E14110249AE69799CB8F51C7C" name="RepairLog"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="FB7A08243A97934089A9BE54DDC795AB" type="3">
