@@ -126,7 +126,21 @@
 					"iconFrames": 4,
 					"method": "ObjectMethods/bSpecEdit.4dm"
 				},
-				"backgroundRectangle": {
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 113,
+					"left": 0,
+					"width": 5000,
+					"height": 704,
+					"fill": "#B1CFDE",
+					"strokeWidth": 2,
+					"stroke": "#FFFFFF"
+				}
+			}
+		},
+		{
+			"objects": {
+				"backgroundRectangle1": {
 					"type": "rectangle",
 					"top": 114,
 					"left": 0,
@@ -135,11 +149,7 @@
 					"fill": "#E3E3E3",
 					"strokeWidth": 0,
 					"stroke": "#FFFFFF"
-				}
-			}
-		},
-		{
-			"objects": {
+				},
 				"label_0_8": {
 					"type": "text",
 					"top": 274,
@@ -571,7 +581,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 427,
+	"geometryStamp": 431,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

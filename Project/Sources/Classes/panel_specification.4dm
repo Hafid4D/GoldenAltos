@@ -152,10 +152,7 @@ Function bActionDocument()
 				Form:C1466.current_item.documents.documentsCollection.remove(Form:C1466.selectedDocumentPos-1)
 				cs:C1710.panel_specification.me._activate_save_cancel_button()
 				
-				
 			End if 
-			
-			
 			
 	End case 
 	

@@ -43,7 +43,7 @@ Function redrawAndSetVisible()
 	
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	OBJECT GET COORDINATES:C663(*; "entryField_statusHistory"; $g; $h; $d; $b)
-	OBJECT SET COORDINATES:C1248(*; "entryField_statusHistory"; $g; $h; $widthSubform-50; $b)
+	OBJECT SET COORDINATES:C1248(*; "entryField_statusHistory"; $g; $h; $widthSubform-10; $b)
 	
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="Repair Log ("+String:C10(Form:C1466.lb_repairLog.length)+")"
