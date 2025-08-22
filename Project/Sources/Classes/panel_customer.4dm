@@ -7,17 +7,17 @@ Function formMethod()
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		Form:C1466.addressBilling:=1
 		Form:C1466.addressShipping:=0
+		Form:C1466.apContact:=1
+		Form:C1466.statusContact:=0
+		This:C1470.LoadContact()
 		This:C1470.loadAllTabs()
-		This:C1470.LoadApContact()
-		This:C1470.LoadStatusContact()
+		
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
 				// add load functions
-				This:C1470.LoadApContact()
-				This:C1470.LoadStatusContact()
-				
+				This:C1470.LoadContact()
 				
 			: (FORM Get current page:C276(*)=2)
 				This:C1470.loadPOs()
@@ -179,8 +179,7 @@ Function redrawAndSetVisible()
 	End case 
 	
 	This:C1470.contactDetails()
-	//OBJECT SET VISIBLE(*; "bActionApContact"; Form.sfw.checkIsInModification())
-	//OBJECT SET VISIBLE(*; "bActionStatusContact"; Form.sfw.checkIsInModification())
+	
 	This:C1470.drawPup_CustomerStatus()
 	This:C1470.drawPup_CustomerCarrier()
 	
@@ -200,8 +199,51 @@ Function contactDetails()
 	If (Form:C1466.current_item#Null:C1517)
 		Form:C1466.subFormAddress:=New object:C1471()
 		Form:C1466.subFormAddress.address:=Form:C1466.current_item.rebuildAddress()
+		Form:C1466.lb_contact:=Form:C1466.current_item.rebuildContact()
 		Form:C1466.subFormAddress.situation:=Form:C1466.situation
 	End if 
+	
+	
+Function bActionContact()
+	$refMenu:=Create menu:C408
+	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openInWindow")
+	
+	Case of 
+		: (Form:C1466.apContact=1)
+			$type:="AP"
+		: (Form:C1466.statusContact=1)
+			$type:="Status"
+	End case 
+	
+	If (ds:C1482.Contact.query("UUID_Company = :1"; Form:C1466.current_item.UUID).query("title=:1"; $type).first()=Null:C1517)
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	$choice:=Dynamic pop up menu:C1006($refMenu)
+	RELEASE MENU:C978($refMenu)
+	Case of 
+		: ($choice="openInWindow")
+			Form:C1466.sfw.openInANewWindow(ds:C1482.Contact.query("UUID_Company = :1"; Form:C1466.current_item.UUID).query("title=:1"; $type).first(); "customerService"; "contact")
+	End case 
+	This:C1470.LoadContact()
+	
+	
+	
+Function LoadContact()
+	
+	Case of 
+		: (Form:C1466.apContact=1)
+			$type:="AP"
+		: (Form:C1466.statusContact=1)
+			$type:="Status"
+	End case 
+	
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.lb_contact:=New collection:C1472()
+		Form:C1466.lb_contact:=Form:C1466.current_item.rebuildContact()
+	End if 
+	
 	
 	
 Function loadXXX()
@@ -215,62 +257,6 @@ Function loadAllTabs()
 	This:C1470.loadPlannings()
 	This:C1470.loadCFMReceiving()
 	This:C1470.loadInvoices()
-	
-	
-Function LoadApContact()
-	
-	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.lb_apContact:=New collection:C1472()
-		If (ds:C1482.Contact.query("UUID_Company=:1 & title=:2"; Form:C1466.current_item.UUID; "AP").first()#Null:C1517)
-			
-			Form:C1466.lb_apContact:=Form:C1466.current_item.rebuidComunications("AP")
-		End if 
-	End if 
-	
-	
-Function LoadStatusContact()
-	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.lb_statusContact:=New collection:C1472()
-		If (ds:C1482.Contact.query("UUID_Company=:1 & title=:2"; Form:C1466.current_item.UUID; "Status").first()#Null:C1517)
-			
-			Form:C1466.lb_statusContact:=Form:C1466.current_item.rebuidComunications("Status")
-			
-		End if 
-	End if 
-	
-	
-Function bActionApContact()
-	$refMenu:=Create menu:C408
-	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
-	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openInWindow")
-	If (ds:C1482.Contact.query("UUID_Company=:1 & title=:2"; Form:C1466.current_item.UUID; "AP").first()=Null:C1517)
-		DISABLE MENU ITEM:C150($refMenu; -1)
-	End if 
-	
-	$choice:=Dynamic pop up menu:C1006($refMenu)
-	RELEASE MENU:C978($refMenu)
-	Case of 
-		: ($choice="openInWindow")
-			Form:C1466.sfw.openInANewWindow(ds:C1482.Contact.query("UUID_Company=:1 & title=:2"; Form:C1466.current_item.UUID; "AP").first(); "customerService"; "contact")
-	End case 
-	This:C1470.LoadApContact()
-	
-	
-Function bActionStatusContact()
-	$refMenu:=Create menu:C408
-	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
-	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openInWindow")
-	If (ds:C1482.Contact.query("UUID_Company=:1 & title=:2"; Form:C1466.current_item.UUID; "Status").first()=Null:C1517)
-		DISABLE MENU ITEM:C150($refMenu; -1)
-	End if 
-	
-	$choice:=Dynamic pop up menu:C1006($refMenu)
-	RELEASE MENU:C978($refMenu)
-	Case of 
-		: ($choice="openInWindow")
-			Form:C1466.sfw.openInANewWindow(ds:C1482.Contact.query("UUID_Company=:1 & title=:2"; Form:C1466.current_item.UUID; "Status").first(); "customerService"; "contact")
-	End case 
-	This:C1470.LoadStatusContact()
 	
 	
 Function loadPOs()

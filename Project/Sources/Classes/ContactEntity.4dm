@@ -17,6 +17,20 @@ Function getCompanyType()->$company : Text
 		End if 
 	End if 
 	
+Function getCompanyName()->$companyName : Text
+	
+	var $supplier : cs:C1710.SupplierEntity
+	$supplier:=ds:C1482.Supplier.query("UUID = :1"; This:C1470.UUID_Company).first()
+	If ($supplier#Null:C1517)
+		$companyName:=$supplier.name
+	Else 
+		var $customer : cs:C1710.CustomerEntity
+		$customer:=ds:C1482.Customer.query("UUID = :1"; This:C1470.UUID_Company).first()
+		If ($customer#Null:C1517)
+			$companyName:=$customer.name
+		End if 
+	End if 
+	
 local Function rebuildAddress($type : Text)->$address : Object
 	$type:=String:C10($type)="" ? "main" : $type
 	If (This:C1470.contactDetails#Null:C1517) && (This:C1470.contactDetails.addresses#Null:C1517)

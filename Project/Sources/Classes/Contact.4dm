@@ -14,6 +14,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setPanelPage(1; "staff-32x32.png"; "Main")
 	$entry.setPanel("panel_contact")
+	//$entry.setLBItemsColumn("ds.Supplier.query(\"UUID =:1;UUID_Company\").first()#Null?ds.Supplier.query(\"UUID =:1;UUID_Company\").first().name: \"Company name\""; "Company name"; "width:200")
 	$entry.setLBItemsColumn("companyName"; "Company name"; "width:200")
 	$entry.setLBItemsColumn("title"; "Title"; "width:100")
 	$entry.setLBItemsOrderBy("companyName")
@@ -49,12 +50,12 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setView($view)
 	
 	
-Function suppliersContacts()->$contacts : cs:C1710.Contact
+Function suppliersContacts()->$contacts : cs:C1710.ContactSelection
 	var $suppliersUUIDs : Collection:=New collection:C1472()
 	$suppliersUUIDs:=ds:C1482.Supplier.all().toCollection().extract("UUID")  //$formula:=Formula(This.supplier#Null)
 	$contacts:=ds:C1482.Contact.query("UUID_Company IN :1"; $suppliersUUIDs)
 	
-Function customersContacts()->$contacts : cs:C1710.Contact
+Function customersContacts()->$contacts : cs:C1710.ContactSelection
 	var $customersUUIDs : Collection:=New collection:C1472()
 	$customersUUIDs:=ds:C1482.Customer.all().toCollection().extract("UUID")  //$formula:=Formula(This.customer#Null)
 	$contacts:=ds:C1482.Contact.query("UUID_Company IN :1"; $customersUUIDs)

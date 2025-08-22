@@ -153,7 +153,7 @@ If (True:C214)
 				$eContact.contactDetails.communications.push($comm)
 				
 				$comm:=New object:C1471()
-				$comm.type:="mail"
+				$comm.type:="email"
 				$comm.comment:=""
 				$comm.contact:=$contact.Email_address
 				$eContact.contactDetails.communications.push($comm)
@@ -179,7 +179,7 @@ $cContact.contactDetails.addresses:=New collection()
 $cContact.contactDetails.communications:=New collection()
 				
 $comm:=New object()
-$comm.type:="mail"
+$comm.type:="email"
 $comm.comment:=""
 $comm.contact:=$customer.AP_email
 $cContact.contactDetails.communications.push($comm)
@@ -203,7 +203,7 @@ $comm.comment:=""
 $cContact.contactDetails.communications.push($comm)
 				
 $comm:=New object()
-$comm.type:="mail"
+$comm.type:="email"
 $comm.contact:=""
 $comm.comment:="CC Email"
 $cContact.contactDetails.communications.push($comm)
@@ -243,13 +243,13 @@ $comm.comment:=""
 $cContact.contactDetails.communications.push($comm)
 				
 $comm:=New object()
-$comm.type:="mail"
+$comm.type:="email"
 $comm.comment:=""
 $comm.contact:=$customer.StatusEmailAddresses
 $cContact.contactDetails.communications.push($comm)
 				
 $comm:=New object()
-$comm.type:="mail"
+$comm.type:="email"
 $comm.comment:="CC Email"
 $comm.contact:=$customer.status_email_CC
 $cContact.contactDetails.communications.push($comm)
@@ -292,7 +292,7 @@ $eContact.UUID_Company:=$eCustomer.UUID
 				$cContact.contactDetails.communications:=New collection:C1472()
 				
 				$comm:=New object:C1471()
-				$comm.type:="mail"
+				$comm.type:="email"
 				$comm.comment:=""
 				$comm.contact:=$customer.AP_email
 				$cContact.contactDetails.communications.push($comm)
@@ -316,7 +316,7 @@ $eContact.UUID_Company:=$eCustomer.UUID
 				$cContact.contactDetails.communications.push($comm)
 				
 				$comm:=New object:C1471()
-				$comm.type:="mail"
+				$comm.type:="email"
 				$comm.contact:=""
 				$comm.comment:="CC Email"
 				$cContact.contactDetails.communications.push($comm)
@@ -357,13 +357,13 @@ $eContact.UUID_Company:=$eCustomer.UUID
 				$cContact.contactDetails.communications.push($comm)
 				
 				$comm:=New object:C1471()
-				$comm.type:="mail"
+				$comm.type:="email"
 				$comm.comment:=""
 				$comm.contact:=$customer.StatusEmailAddresses
 				$cContact.contactDetails.communications.push($comm)
 				
 				$comm:=New object:C1471()
-				$comm.type:="mail"
+				$comm.type:="email"
 				$comm.comment:="CC Email"
 				$comm.contact:=$customer.status_email_CC
 				$cContact.contactDetails.communications.push($comm)

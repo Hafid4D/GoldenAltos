@@ -77,7 +77,7 @@ local Function rebuildAddress()->$address : Object
 	
 	
 local Function rebuildContact()->$contacts : Collection
-	
+	var $communication : cs:C1710.ContactEntity
 	Case of 
 		: (Form:C1466.primaryContact=1)
 			$type:="Primary"
@@ -85,9 +85,9 @@ local Function rebuildContact()->$contacts : Collection
 			$type:="Secondary"
 	End case 
 	$contacts:=New collection:C1472()
-	$communications:=ds:C1482.Contact.query("UUID_Company = :1"; Form:C1466.current_item.UUID).query("title=:1"; $type).first().contactDetails.communications
-	If ($communications#Null:C1517)
-		
+	$communication:=ds:C1482.Contact.query("UUID_Company =:1"; Form:C1466.current_item.UUID).query("title=:1"; $type).first()
+	If ($communication#Null:C1517)
+		$communications:=$communication.contactDetails.communications
 		For ($i; 0; $communications.length-1)
 			
 			$object:=New object:C1471
