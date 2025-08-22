@@ -888,7 +888,7 @@
 					"type": "listbox",
 					"left": 132,
 					"top": 114,
-					"width": 1443,
+					"width": 800,
 					"height": 700,
 					"events": [
 						"onClick",
@@ -909,9 +909,11 @@
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
 					"headerHeight": "2em",
-					"right": 1575,
+					"right": 932,
 					"scrollbarHorizontal": "hidden",
 					"hideFocusRing": false,
+					"sizingX": "grow",
+					"sizingY": "grow",
 					"columns": [
 						{
 							"header": {
@@ -923,7 +925,8 @@
 							"footer": {
 								"name": "Footer5"
 							},
-							"dataSource": "This:C1470.reportID"
+							"dataSource": "This:C1470.reportID",
+							"resizable": false
 						},
 						{
 							"header": {
@@ -937,9 +940,10 @@
 							},
 							"dataSource": "This:C1470.problem",
 							"dataSourceTypeHint": "text",
-							"width": 379,
+							"width": 311,
 							"truncateMode": "withEllipsis",
-							"wordwrap": "none"
+							"wordwrap": "none",
+							"resizable": false
 						},
 						{
 							"header": {
@@ -952,7 +956,7 @@
 								"name": "Footer7"
 							},
 							"dataSource": "This:C1470.fix",
-							"width": 453,
+							"width": 231,
 							"truncateMode": "withEllipsis",
 							"wordwrap": "none"
 						},
@@ -967,7 +971,8 @@
 								"name": "Footer11"
 							},
 							"dataSource": "This:C1470.reportDate",
-							"dataSourceTypeHint": "date"
+							"dataSourceTypeHint": "date",
+							"resizable": false
 						}
 					]
 				},
@@ -996,7 +1001,7 @@
 					"type": "listbox",
 					"left": 132,
 					"top": 114,
-					"width": 1443,
+					"width": 800,
 					"height": 700,
 					"events": [
 						"onClick",
@@ -1017,7 +1022,7 @@
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
 					"headerHeight": "2em",
-					"right": 1575,
+					"right": 932,
 					"scrollbarHorizontal": "automatic",
 					"hideFocusRing": false,
 					"sizingX": "grow",
@@ -1036,7 +1041,8 @@
 								"name": "Footer1"
 							},
 							"dataSource": "This:C1470.code",
-							"width": 59
+							"width": 134,
+							"resizable": false
 						},
 						{
 							"header": {
@@ -1051,9 +1057,10 @@
 							},
 							"dataSource": "This:C1470.sourcePath",
 							"dataSourceTypeHint": "text",
-							"width": 198,
+							"width": 172,
 							"truncateMode": "withEllipsis",
-							"wordwrap": "none"
+							"wordwrap": "none",
+							"resizable": false
 						},
 						{
 							"header": {
@@ -1067,10 +1074,11 @@
 								"name": "Footer3"
 							},
 							"dataSource": "This:C1470.creationDateTime",
-							"width": 153,
+							"width": 162,
 							"truncateMode": "withEllipsis",
 							"wordwrap": "none",
-							"textAlign": "right"
+							"textAlign": "right",
+							"resizable": false
 						},
 						{
 							"header": {
@@ -1085,7 +1093,7 @@
 							},
 							"dataSource": "This:C1470.description",
 							"dataSourceTypeHint": "text",
-							"width": 224
+							"width": 253
 						},
 						{
 							"header": {
@@ -1098,7 +1106,9 @@
 							"dataSource": "This:C1470.isApproved",
 							"footer": {
 								"name": "Footer8"
-							}
+							},
+							"width": 79,
+							"resizable": false
 						}
 					]
 				},
@@ -1123,7 +1133,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 731,
+	"geometryStamp": 736,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

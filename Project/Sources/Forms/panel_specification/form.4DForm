@@ -452,11 +452,28 @@
 		},
 		{
 			"objects": {
+				"bActionDocument": {
+					"type": "button",
+					"text": "Actions",
+					"top": 137,
+					"left": 12,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionDocument.4dm",
+					"visibility": "visible"
+				},
 				"lb_documents": {
 					"type": "listbox",
 					"left": 132,
 					"top": 114,
-					"width": 1443,
+					"width": 800,
 					"height": 700,
 					"events": [
 						"onClick",
@@ -477,10 +494,12 @@
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
 					"headerHeight": "2em",
-					"right": 1575,
+					"right": 932,
 					"scrollbarHorizontal": "automatic",
 					"hideFocusRing": false,
-					"focusable": true,
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"scrollbarVertical": "automatic",
 					"columns": [
 						{
 							"header": {
@@ -494,7 +513,8 @@
 								"name": "Footer1"
 							},
 							"dataSource": "This:C1470.code",
-							"width": 160
+							"width": 134,
+							"resizable": false
 						},
 						{
 							"header": {
@@ -509,9 +529,10 @@
 							},
 							"dataSource": "This:C1470.sourcePath",
 							"dataSourceTypeHint": "text",
-							"width": 198,
+							"width": 172,
 							"truncateMode": "withEllipsis",
-							"wordwrap": "none"
+							"wordwrap": "none",
+							"resizable": false
 						},
 						{
 							"header": {
@@ -525,10 +546,11 @@
 								"name": "Footer3"
 							},
 							"dataSource": "This:C1470.creationDateTime",
-							"width": 153,
+							"width": 162,
 							"truncateMode": "withEllipsis",
 							"wordwrap": "none",
-							"textAlign": "right"
+							"textAlign": "right",
+							"resizable": false
 						},
 						{
 							"header": {
@@ -543,7 +565,7 @@
 							},
 							"dataSource": "This:C1470.description",
 							"dataSourceTypeHint": "text",
-							"width": 224
+							"width": 253
 						},
 						{
 							"header": {
@@ -556,32 +578,17 @@
 							"dataSource": "This:C1470.isApproved",
 							"footer": {
 								"name": "Footer8"
-							}
+							},
+							"width": 79,
+							"resizable": false
 						}
 					]
-				},
-				"bActionDocument": {
-					"type": "button",
-					"text": "Actions",
-					"top": 137,
-					"left": 12,
-					"width": 80,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"style": "custom",
-					"popupPlacement": "linked",
-					"icon": "/RESOURCES/sfw/image/picto/gear.png",
-					"textPlacement": "right",
-					"method": "ObjectMethods/bActionDocument.4dm",
-					"visibility": "visible"
 				}
 			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 431,
+	"geometryStamp": 433,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

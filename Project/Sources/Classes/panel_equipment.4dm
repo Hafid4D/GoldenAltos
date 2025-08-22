@@ -45,6 +45,23 @@ Function redrawAndSetVisible()
 	OBJECT GET COORDINATES:C663(*; "entryField_statusHistory"; $g; $h; $d; $b)
 	OBJECT SET COORDINATES:C1248(*; "entryField_statusHistory"; $g; $h; $widthSubform-10; $b)
 	
+	Case of 
+			
+		: (FORM Get current page:C276(*)=2)
+			OBJECT GET COORDINATES:C663(*; "lb_repairLog"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			$offset:=4
+			
+			OBJECT SET COORDINATES:C1248(*; "lb_repairLog"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			
+		: (FORM Get current page:C276(*)=3)
+			
+			OBJECT GET COORDINATES:C663(*; "lb_documents"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			$offset:=4
+			
+			OBJECT SET COORDINATES:C1248(*; "lb_documents"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			
+	End case 
+	
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="Repair Log ("+String:C10(Form:C1466.lb_repairLog.length)+")"
 		Form:C1466.sfw.entry.panel.pages[2].label:="Documents ("+String:C10(Form:C1466.lb_documents.length)+")"

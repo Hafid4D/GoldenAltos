@@ -501,7 +501,6 @@ If (True:C214)
 		$specification_e.revisionDate:=Date:C102($record.Revsion_Date)
 		$specification_e.revision:=$record.Rev
 		
-		//$specification_e.division:=$record.Division  //TO CHANGE
 		$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($record.Division; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($division.length>0)
 			$specification_e.UUID_Division:=$division[0].UUID
@@ -511,7 +510,6 @@ If (True:C214)
 		
 		$specification_e.isForm:=$record.Form
 		
-		//$specification_e.category:=$record.PublishedDocCategory  //TO CHANGE
 		$category:=ds:C1482.DocumentCategory.query("name =:1"; Split string:C1554($record.PublishedDocCategory; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($category.length>0)
 			$specification_e.UUID_DocumentCategory:=$category[0].UUID
@@ -525,7 +523,6 @@ If (True:C214)
 		$specification_e.reviewIntervalInDays:=$record.ReviewIntervalInDays
 		$specification_e.reviewDate:=$record.Review_Date
 		
-		//$specification_e.departmentID:=$record.ControllingDept
 		$stecControllingDetpt:=ds:C1482.ControllingDepartment.query("name =:1"; Split string:C1554($record.ControllingDept; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($stecControllingDetpt.length>0)
 			$specification_e.UUID_ControllingDepartment:=$stecControllingDetpt[0].UUID

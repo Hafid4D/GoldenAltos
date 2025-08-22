@@ -38,6 +38,7 @@ Function formMethod()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
+	
 	This:C1470.contactDetails()
 	This:C1470.drawPup_enteredBy()
 	This:C1470.drawPup_division()
@@ -51,11 +52,27 @@ Function redrawAndSetVisible()
 	End use 
 	
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
-	OBJECT GET COORDINATES:C663(*; "entryField_qaComment"; $g; $h; $d; $b)
-	OBJECT SET COORDINATES:C1248(*; "entryField_qaComment"; $g; $h; $widthSubform-25; $b)
 	
-	OBJECT GET COORDINATES:C663(*; "subFormAddress"; $g; $h; $d; $b)
-	OBJECT SET COORDINATES:C1248(*; "subFormAddress"; $g; $h; $widthSubform-10; $b)
+	Case of 
+			
+		: (FORM Get current page:C276(*)=1)
+			
+			OBJECT GET COORDINATES:C663(*; "entryField_qaComment"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "entryField_qaComment"; $g; $h; $widthSubform-10; $b)
+			
+		: (FORM Get current page:C276(*)=2)
+			
+			OBJECT GET COORDINATES:C663(*; "subFormAddress"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "subFormAddress"; $g; $h; $widthSubform-10; $b)
+			
+		: (FORM Get current page:C276(*)=3)
+			
+			OBJECT GET COORDINATES:C663(*; "lb_documents"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			$offset:=4
+			
+			OBJECT SET COORDINATES:C1248(*; "lb_documents"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			
+	End case 
 	
 	Form:C1466.sfw.drawHTab()
 	

@@ -654,7 +654,7 @@
 					"scrollbarHorizontal": "automatic",
 					"scrollbarVertical": "automatic",
 					"fill": "#FFFFFF",
-					"borderStyle": "system",
+					"borderStyle": "none",
 					"alternateFill": "#E4E4E4",
 					"horizontalLineStroke": "transparent",
 					"verticalLineStroke": "#C0C0C0",
@@ -744,11 +744,28 @@
 		},
 		{
 			"objects": {
+				"bActionDocument": {
+					"type": "button",
+					"text": "Actions",
+					"top": 137,
+					"left": 12,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionDocument.4dm",
+					"visibility": "visible"
+				},
 				"lb_documents": {
 					"type": "listbox",
 					"left": 132,
 					"top": 114,
-					"width": 1443,
+					"width": 800,
 					"height": 700,
 					"events": [
 						"onClick",
@@ -769,111 +786,101 @@
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
 					"headerHeight": "2em",
-					"right": 1575,
+					"right": 932,
 					"scrollbarHorizontal": "automatic",
 					"hideFocusRing": false,
-					"focusable": true,
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"scrollbarVertical": "automatic",
 					"columns": [
 						{
 							"header": {
 								"text": "Code",
-								"name": "Header5",
+								"name": "Header1",
 								"fontWeight": "bold",
 								"textAlign": "left"
 							},
-							"name": "Column5",
+							"name": "Column1",
 							"footer": {
-								"name": "Footer5"
+								"name": "Footer1"
 							},
 							"dataSource": "This:C1470.code",
-							"width": 59
+							"width": 134,
+							"resizable": false
 						},
 						{
 							"header": {
-								"name": "Header6",
+								"name": "Header2",
 								"text": "Source Path",
 								"fontWeight": "bold",
 								"textAlign": "left"
 							},
-							"name": "Column6",
+							"name": "Column2",
 							"footer": {
-								"name": "Footer6"
+								"name": "Footer2"
 							},
 							"dataSource": "This:C1470.sourcePath",
 							"dataSourceTypeHint": "text",
-							"width": 198,
+							"width": 172,
 							"truncateMode": "withEllipsis",
-							"wordwrap": "none"
+							"wordwrap": "none",
+							"resizable": true
 						},
 						{
 							"header": {
-								"name": "Header7",
+								"name": "Header3",
 								"text": "Date and Time of filling",
 								"fontWeight": "bold",
 								"textAlign": "right"
 							},
-							"name": "Column7",
+							"name": "Column3",
 							"footer": {
-								"name": "Footer7"
+								"name": "Footer3"
 							},
 							"dataSource": "This:C1470.creationDateTime",
-							"width": 153,
+							"width": 162,
 							"truncateMode": "withEllipsis",
 							"wordwrap": "none",
-							"textAlign": "right"
+							"textAlign": "right",
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header4",
+								"text": "Doc Description",
+								"fontWeight": "bold",
+								"textAlign": "center"
+							},
+							"name": "Column4",
+							"footer": {
+								"name": "Footer4"
+							},
+							"dataSource": "This:C1470.description",
+							"dataSourceTypeHint": "text",
+							"width": 253
 						},
 						{
 							"header": {
 								"name": "Header8",
-								"text": "Doc Description",
-								"fontWeight": "bold",
-								"textAlign": "left"
-							},
-							"name": "Column8",
-							"footer": {
-								"name": "Footer8"
-							},
-							"dataSource": "This:C1470.description",
-							"dataSourceTypeHint": "text",
-							"width": 224
-						},
-						{
-							"header": {
-								"name": "Header9",
 								"text": "QA Approval",
 								"fontWeight": "bold"
 							},
-							"name": "Column9",
+							"name": "Column8",
 							"dataSourceTypeHint": "boolean",
 							"dataSource": "This:C1470.isApproved",
 							"footer": {
-								"name": "Footer9"
-							}
+								"name": "Footer8"
+							},
+							"width": 79,
+							"resizable": false
 						}
 					]
-				},
-				"bActionDocument": {
-					"type": "button",
-					"text": "Actions",
-					"top": 137,
-					"left": 12,
-					"width": 80,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"style": "custom",
-					"popupPlacement": "linked",
-					"icon": "/RESOURCES/sfw/image/picto/gear.png",
-					"textPlacement": "right",
-					"method": "ObjectMethods/bActionDocument.4dm",
-					"visibility": "visible"
 				}
 			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 366,
+	"geometryStamp": 370,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

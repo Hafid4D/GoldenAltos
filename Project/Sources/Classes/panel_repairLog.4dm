@@ -36,14 +36,23 @@ Function redrawAndSetVisible()
 	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
 	
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
-	OBJECT GET COORDINATES:C663(*; "entryField_problem"; $g; $h; $d; $b)
-	OBJECT SET COORDINATES:C1248(*; "entryField_problem"; $g; $h; $widthSubform-10; $b)
 	
-	OBJECT GET COORDINATES:C663(*; "entryField_fix"; $g; $h; $d; $b)
-	OBJECT SET COORDINATES:C1248(*; "entryField_fix"; $g; $h; $widthSubform-10; $heightSubform-10)
+	Case of 
+			
+		: (FORM Get current page:C276(*)=1)
+			
+			OBJECT GET COORDINATES:C663(*; "entryField_problem"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "entryField_problem"; $g; $h; $widthSubform-10; $b)
+			
+			OBJECT GET COORDINATES:C663(*; "entryField_fix"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "entryField_fix"; $g; $h; $widthSubform-10; $heightSubform-10)
+			
+			OBJECT GET COORDINATES:C663(*; "entryField_status"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "entryField_status"; $g; $h; $d; $heightSubform-10)
+			
+	End case 
 	
-	OBJECT GET COORDINATES:C663(*; "entryField_status"; $g; $h; $d; $b)
-	OBJECT SET COORDINATES:C1248(*; "entryField_status"; $g; $h; $d; $heightSubform-10)
+	Form:C1466.sfw.drawHTab()
 	
 	
 Function drawPup_XXX()

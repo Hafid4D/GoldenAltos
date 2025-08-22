@@ -43,18 +43,19 @@
 				},
 				"label_0_1": {
 					"type": "text",
-					"top": 12,
-					"left": 12,
+					"top": 10,
+					"left": 8,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Name"
+					"text": "Name",
+					"textAlign": "right"
 				},
 				"entryField_name": {
 					"type": "input",
-					"top": 12,
-					"left": 132,
-					"width": 256,
+					"top": 10,
+					"left": 108,
+					"width": 200,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.name",
 					"focusable": false,
@@ -70,17 +71,18 @@
 				"label_0_2": {
 					"type": "text",
 					"top": 37,
-					"left": 12,
+					"left": 8,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Code"
+					"text": "Code",
+					"textAlign": "right"
 				},
 				"entryField_code": {
 					"type": "input",
 					"top": 37,
-					"left": 132,
-					"width": 256,
+					"left": 108,
+					"width": 200,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.code",
 					"focusable": false,
@@ -95,17 +97,18 @@
 				},
 				"label_0_3": {
 					"type": "text",
-					"top": 12,
-					"left": 419,
+					"top": 64,
+					"left": 8,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Status"
+					"text": "Status",
+					"textAlign": "right"
 				},
 				"pup_CustomerStatus": {
 					"type": "button",
-					"top": 9,
-					"left": 508,
+					"top": 61,
+					"left": 108,
 					"width": 200,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -723,7 +726,7 @@
 					"type": "listbox",
 					"left": 132,
 					"top": 114,
-					"width": 1443,
+					"width": 800,
 					"height": 700,
 					"events": [
 						"onClick",
@@ -744,7 +747,7 @@
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
 					"headerHeight": "2em",
-					"right": 1575,
+					"right": 932,
 					"scrollbarHorizontal": "hidden",
 					"hideFocusRing": false,
 					"columns": [
@@ -758,7 +761,9 @@
 							"footer": {
 								"name": "Footer5"
 							},
-							"dataSource": "This:C1470.division"
+							"dataSource": "This:C1470.division",
+							"width": 62,
+							"resizable": false
 						},
 						{
 							"header": {
@@ -771,7 +776,9 @@
 								"name": "Footer6"
 							},
 							"dataSource": "This:C1470.PO_date",
-							"dataSourceTypeHint": "date"
+							"dataSourceTypeHint": "date",
+							"width": 93,
+							"resizable": false
 						},
 						{
 							"header": {
@@ -783,7 +790,9 @@
 							"footer": {
 								"name": "Footer7"
 							},
-							"dataSource": "This:C1470.poNumber"
+							"dataSource": "This:C1470.poNumber",
+							"width": 87,
+							"resizable": false
 						},
 						{
 							"header": {
@@ -796,7 +805,7 @@
 								"name": "Footer8"
 							},
 							"dataSource": "This:C1470.identifier",
-							"width": 234
+							"width": 277
 						},
 						{
 							"header": {
@@ -809,7 +818,9 @@
 								"name": "Footer9"
 							},
 							"dataSource": "This:C1470.poAmount",
-							"dataSourceTypeHint": "number"
+							"dataSourceTypeHint": "number",
+							"width": 105,
+							"resizable": false
 						},
 						{
 							"header": {
@@ -822,7 +833,9 @@
 								"name": "Footer10"
 							},
 							"dataSource": "This:C1470.amountBilled",
-							"dataSourceTypeHint": "number"
+							"dataSourceTypeHint": "number",
+							"width": 89,
+							"resizable": false
 						},
 						{
 							"header": {
@@ -835,7 +848,9 @@
 								"name": "Footer11"
 							},
 							"dataSource": "This:C1470.invoices",
-							"dataSourceTypeHint": "number"
+							"dataSourceTypeHint": "number",
+							"width": 68,
+							"resizable": false
 						}
 					]
 				},
@@ -856,7 +871,7 @@
 					"type": "listbox",
 					"left": 132,
 					"top": 114,
-					"width": 1428,
+					"width": 800,
 					"height": 700,
 					"events": [
 						"onClick",
@@ -876,7 +891,7 @@
 					"alternateFill": "#E6E6E6",
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
-					"right": 1560,
+					"right": 932,
 					"scrollbarHorizontal": "hidden",
 					"headerHeight": "2em",
 					"columns": [
@@ -891,7 +906,8 @@
 								"name": "Footer12"
 							},
 							"dataSource": "This:C1470.dateCreated",
-							"dataSourceTypeHint": "date"
+							"dataSourceTypeHint": "date",
+							"resizable": false
 						},
 						{
 							"header": {
@@ -904,7 +920,8 @@
 								"name": "Footer13"
 							},
 							"dataSource": "This:C1470.jobNumber",
-							"dataSourceTypeHint": "number"
+							"dataSourceTypeHint": "number",
+							"resizable": false
 						},
 						{
 							"header": {
@@ -916,7 +933,8 @@
 							"footer": {
 								"name": "Footer14"
 							},
-							"dataSource": "This:C1470.poNumber"
+							"dataSource": "This:C1470.poNumber",
+							"resizable": false
 						},
 						{
 							"header": {
@@ -929,7 +947,7 @@
 								"name": "Footer15"
 							},
 							"dataSource": "This:C1470.process",
-							"width": 175
+							"width": 300
 						},
 						{
 							"header": {
@@ -941,7 +959,8 @@
 							"footer": {
 								"name": "Footer16"
 							},
-							"dataSource": "This:C1470.pr_qualifier"
+							"dataSource": "This:C1470.pr_qualifier",
+							"resizable": false
 						}
 					]
 				},
@@ -962,7 +981,7 @@
 					"type": "listbox",
 					"left": 132,
 					"top": 114,
-					"width": 1443,
+					"width": 800,
 					"height": 700,
 					"events": [
 						"onClick",
@@ -982,7 +1001,7 @@
 					"alternateFill": "#E6E6E6",
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
-					"right": 1575,
+					"right": 932,
 					"scrollbarHorizontal": "hidden",
 					"headerHeight": "2em",
 					"columns": [
@@ -996,7 +1015,9 @@
 							"footer": {
 								"name": "Footer17"
 							},
-							"dataSource": "This:C1470.lotNumber"
+							"dataSource": "This:C1470.lotNumber",
+							"width": 116,
+							"resizable": false
 						},
 						{
 							"header": {
@@ -1008,7 +1029,8 @@
 							"dataSource": "This:C1470.jobNumber",
 							"footer": {
 								"name": "Footer18"
-							}
+							},
+							"resizable": false
 						},
 						{
 							"header": {
@@ -1021,7 +1043,8 @@
 								"name": "Footer19"
 							},
 							"dataSource": "This:C1470.poNumber",
-							"dataSourceTypeHint": "text"
+							"dataSourceTypeHint": "text",
+							"resizable": false
 						},
 						{
 							"header": {
@@ -1034,7 +1057,8 @@
 								"name": "Footer20"
 							},
 							"dataSource": "This:C1470.dateIn",
-							"dataSourceTypeHint": "date"
+							"dataSourceTypeHint": "date",
+							"resizable": false
 						},
 						{
 							"header": {
@@ -1047,7 +1071,8 @@
 								"name": "Footer21"
 							},
 							"dataSource": "This:C1470.dateOut",
-							"dataSourceTypeHint": "date"
+							"dataSourceTypeHint": "date",
+							"resizable": false
 						},
 						{
 							"header": {
@@ -1072,7 +1097,9 @@
 								"name": "Footer33"
 							},
 							"dataSource": "This:C1470.ourCount",
-							"dataSourceTypeHint": "number"
+							"dataSourceTypeHint": "number",
+							"width": 65,
+							"resizable": false
 						}
 					]
 				},
@@ -1093,7 +1120,7 @@
 					"type": "listbox",
 					"left": 132,
 					"top": 114,
-					"width": 1443,
+					"width": 800,
 					"height": 700,
 					"events": [
 						"onClick",
@@ -1113,7 +1140,7 @@
 					"alternateFill": "#E6E6E6",
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
-					"right": 1575,
+					"right": 932,
 					"scrollbarHorizontal": "automatic",
 					"headerHeight": "2em",
 					"columns": [
@@ -1127,7 +1154,8 @@
 							"footer": {
 								"name": "Footer22"
 							},
-							"dataSource": "This:C1470.partNum"
+							"dataSource": "This:C1470.partNum",
+							"resizable": false
 						},
 						{
 							"header": {
@@ -1139,7 +1167,8 @@
 							"footer": {
 								"name": "Footer23"
 							},
-							"dataSource": "This:C1470.stockNum"
+							"dataSource": "This:C1470.stockNum",
+							"resizable": false
 						},
 						{
 							"header": {
@@ -1152,7 +1181,9 @@
 								"name": "Footer24"
 							},
 							"dataSource": "This:C1470.originalQty",
-							"dataSourceTypeHint": "number"
+							"dataSourceTypeHint": "number",
+							"width": 61,
+							"resizable": false
 						},
 						{
 							"header": {
@@ -1165,7 +1196,9 @@
 								"name": "Footer25"
 							},
 							"dataSource": "This:C1470.availableQty",
-							"dataSourceTypeHint": "number"
+							"dataSourceTypeHint": "number",
+							"width": 68,
+							"resizable": false
 						},
 						{
 							"header": {
@@ -1178,7 +1211,8 @@
 								"name": "Footer26"
 							},
 							"dataSource": "This:C1470.binLocation",
-							"width": 219
+							"width": 204,
+							"resizable": false
 						},
 						{
 							"header": {
@@ -1191,7 +1225,7 @@
 								"name": "Footer34"
 							},
 							"dataSource": "This:C1470.description",
-							"width": 353
+							"width": 210
 						}
 					]
 				},
@@ -1212,7 +1246,7 @@
 					"type": "listbox",
 					"left": 132,
 					"top": 114,
-					"width": 1443,
+					"width": 800,
 					"height": 700,
 					"events": [
 						"onClick",
@@ -1232,7 +1266,7 @@
 					"alternateFill": "#E6E6E6",
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
-					"right": 1575,
+					"right": 932,
 					"scrollbarHorizontal": "hidden",
 					"headerHeight": "2em",
 					"columns": [
@@ -1240,61 +1274,71 @@
 							"header": {
 								"text": "Invoice Date",
 								"name": "Header27",
-								"fontWeight": "bold"
+								"fontWeight": "bold",
+								"textAlign": "left"
 							},
 							"name": "Column27",
 							"footer": {
 								"name": "Footer27"
 							},
-							"dataSource": "This:C1470.date"
+							"dataSource": "This:C1470.date",
+							"resizable": false
 						},
 						{
 							"header": {
 								"name": "Header29",
 								"text": "Total Invoiced",
-								"fontWeight": "bold"
+								"fontWeight": "bold",
+								"textAlign": "left"
 							},
 							"name": "Column29",
 							"footer": {
 								"name": "Footer29"
 							},
-							"dataSource": "This:C1470.total"
+							"dataSource": "This:C1470.total",
+							"resizable": false
 						},
 						{
 							"header": {
 								"name": "Header30",
 								"text": "Amount Paid",
-								"fontWeight": "bold"
+								"fontWeight": "bold",
+								"textAlign": "left"
 							},
 							"name": "Column30",
 							"footer": {
 								"name": "Footer30"
 							},
-							"dataSource": "This:C1470.amountPaid"
+							"dataSource": "This:C1470.amountPaid",
+							"resizable": false
 						},
 						{
 							"header": {
 								"name": "Header31",
 								"text": "Net Due",
-								"fontWeight": "bold"
+								"fontWeight": "bold",
+								"textAlign": "left"
 							},
 							"name": "Column31",
 							"footer": {
 								"name": "Footer31"
 							},
-							"dataSource": "This:C1470.due"
+							"dataSource": "This:C1470.due",
+							"resizable": false
 						},
 						{
 							"header": {
 								"name": "Header35",
 								"text": "Sale Amount",
-								"fontWeight": "bold"
+								"fontWeight": "bold",
+								"textAlign": "left"
 							},
 							"name": "Column35",
 							"footer": {
 								"name": "Footer35"
 							},
-							"dataSource": "This:C1470.saleAmount"
+							"dataSource": "This:C1470.saleAmount",
+							"textAlign": "left"
 						}
 					]
 				},
@@ -1311,7 +1355,7 @@
 		},
 		null
 	],
-	"geometryStamp": 796,
+	"geometryStamp": 816,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
