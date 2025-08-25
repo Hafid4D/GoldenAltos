@@ -119,7 +119,7 @@
 		<field name="UUID" uuid="2A671DFB01797B4DBB6EC2EB4216DB75" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="spec" uuid="503731601352984F9BF5FB041C0CAC3E" type="10" limiting_length="255" never_null="true" id="2"/>
 		<field name="title" uuid="C957B882F419D841AC29C05D4B2E8D85" type="10" limiting_length="255" never_null="true" id="3"/>
-		<field name="revisionDate" uuid="73D94A9309F8BF44B438A516ECF1EBF3" type="8" never_null="true" id="4"/>
+		<field name="stmpRevisionDate" uuid="73D94A9309F8BF44B438A516ECF1EBF3" type="4" never_null="true" id="4"/>
 		<field name="revision" uuid="2A87C313C2550F45961A1D4291FAF99A" type="10" limiting_length="255" never_null="true" id="5"/>
 		<field name="UUID_Division" uuid="C4DB48A00B34314089C60749A12362E7" type="10" store_as_UUID="true" never_null="true" id="6"/>
 		<field name="isForm" uuid="A381E5FB374E414D88A95210588F22FA" type="1" never_null="true" id="7"/>
@@ -133,7 +133,7 @@
 		<field name="UUID_ControllingDepartment" uuid="00BBA10D3C697F408E164BC3494272E4" type="10" store_as_UUID="true" never_null="true" id="15"/>
 		<field name="addendumToSpec" uuid="4DB9F8A21A12A14398F05AF7C5F1BA5D" type="10" limiting_length="255" never_null="true" id="16"/>
 		<field name="reviewIntervalInDays" uuid="7413D34B72ACD04A8DAD654BFE162AAF" type="4" never_null="true" id="17"/>
-		<field name="reviewDate" uuid="87FFB43152B5CB40B41CA4ABE12A9474" type="8" never_null="true" id="18"/>
+		<field name="stmpReviewDate" uuid="87FFB43152B5CB40B41CA4ABE12A9474" type="4" never_null="true" id="18"/>
 		<primary_key field_name="UUID" field_uuid="2A671DFB01797B4DBB6EC2EB4216DB75"/>
 	</table>
 	<table name="CustomerEvent" uuid="0846217DF6043D4ABB7910378EBDF68A" id="11">

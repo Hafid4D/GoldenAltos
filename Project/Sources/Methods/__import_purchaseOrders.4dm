@@ -498,7 +498,7 @@ If (True:C214)
 		
 		$specification_e.spec:=$record.Spec
 		$specification_e.title:=$record.Spec_Title
-		$specification_e.revisionDate:=Date:C102($record.Revsion_Date)
+		$specification_e.stmpRevisionDate:=cs:C1710.sfw_stmp.me.build(Date:C102($record.Revsion_Date))
 		$specification_e.revision:=$record.Rev
 		
 		$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($record.Division; "\r"; sk trim spaces:K86:2).join("\r"))
@@ -521,7 +521,7 @@ If (True:C214)
 		$specification_e.extension:=$record.Dosext
 		$specification_e.suppress:=$record.Suppress
 		$specification_e.reviewIntervalInDays:=$record.ReviewIntervalInDays
-		$specification_e.reviewDate:=$record.Review_Date
+		$specification_e.stmpReviewDate:=cs:C1710.sfw_stmp.me.build(Date:C102($record.Review_Date))
 		
 		$stecControllingDetpt:=ds:C1482.ControllingDepartment.query("name =:1"; Split string:C1554($record.ControllingDept; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($stecControllingDetpt.length>0)

@@ -1,5 +1,18 @@
 Class extends Entity
 
+
+local Function get revisionDate()->$revisionDate : Date
+	$revisionDate:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpRevisionDate; True:C214)
+	
+local Function set revisionDate($revisionDate : Date)
+	This:C1470.stmpRevisionDate:=cs:C1710.sfw_stmp.me.build($revisionDate)
+	
+local Function get reviewDate()->$reviewDate : Date
+	$reviewDate:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpReviewDate; True:C214)
+	
+local Function set reviewDate($reviewDate : Date)
+	This:C1470.stmpReviewDate:=cs:C1710.sfw_stmp.me.build($reviewDate)
+	
 local Function drowPup($dataClass; $queryField; $queryValue; $pupName)
 	
 	$entity:=ds:C1482[$dataClass].query($queryField+" =:1"; Form:C1466.current_item[$queryValue]).first() || New object:C1471()
