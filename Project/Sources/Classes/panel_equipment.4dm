@@ -42,22 +42,20 @@ Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
-	OBJECT GET COORDINATES:C663(*; "entryField_statusHistory"; $g; $h; $d; $b)
-	OBJECT SET COORDINATES:C1248(*; "entryField_statusHistory"; $g; $h; $widthSubform-10; $b)
+	$offset:=4
 	
 	Case of 
 			
+		: (FORM Get current page:C276(*)=1)
+			OBJECT GET COORDINATES:C663(*; "entryField_statusHistory"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "entryField_statusHistory"; $g; $h; $widthSubform-25; $b)
+			
 		: (FORM Get current page:C276(*)=2)
 			OBJECT GET COORDINATES:C663(*; "lb_repairLog"; $left_lb; $top_lb; $right_lb; $bottom_lb)
-			$offset:=4
-			
 			OBJECT SET COORDINATES:C1248(*; "lb_repairLog"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
 			
 		: (FORM Get current page:C276(*)=3)
-			
 			OBJECT GET COORDINATES:C663(*; "lb_documents"; $left_lb; $top_lb; $right_lb; $bottom_lb)
-			$offset:=4
-			
 			OBJECT SET COORDINATES:C1248(*; "lb_documents"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
 			
 	End case 

@@ -53,28 +53,6 @@
 					"text": "Time down :",
 					"textAlign": "right"
 				},
-				"entryField_downAt": {
-					"type": "input",
-					"top": 37,
-					"left": 439,
-					"width": 190,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.downAt",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"textAlign": "left",
-					"dataSourceTypeHint": "time",
-					"timeFormat": "hh_mm_am",
-					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
-				},
 				"label_reportedID": {
 					"type": "text",
 					"top": 37,
@@ -145,27 +123,6 @@
 					"stroke": "#808080",
 					"text": "Time up :",
 					"textAlign": "right"
-				},
-				"entryField_upAt": {
-					"type": "input",
-					"top": 37,
-					"left": 710,
-					"width": 190,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.upAt",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"textAlign": "left",
-					"dataSourceTypeHint": "time",
-					"timeFormat": "hh_mm_am"
 				},
 				"label_dateUp": {
 					"type": "text",
@@ -355,7 +312,7 @@
 					"text": "Fix date :",
 					"textAlign": "right"
 				},
-				"entryField_dateUp1": {
+				"entryField_fixedDate": {
 					"type": "input",
 					"top": 64,
 					"left": 710,
@@ -450,6 +407,87 @@
 					"fill": "#B1CFDE",
 					"strokeWidth": 2,
 					"stroke": "#FFFFFF"
+				},
+				"entryField_downAt": {
+					"type": "input",
+					"top": 37,
+					"left": 439,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.downAt",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"dataSourceTypeHint": "text",
+					"visibility": "visible"
+				},
+				"entryField_upAt": {
+					"type": "input",
+					"top": 37,
+					"left": 710,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.upAt",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"dataSourceTypeHint": "time",
+					"timeFormat": "hh_mm_am",
+					"visibility": "visible"
+				},
+				"TimePicker1": {
+					"type": "button",
+					"text": " ",
+					"top": 34,
+					"left": 607,
+					"width": 23,
+					"height": 23,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/clock.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/TimePicker1.4dm",
+					"visibility": "visible",
+					"iconFrames": 1,
+					"focusable": false
+				},
+				"TimePicker2": {
+					"type": "button",
+					"text": " ",
+					"top": 34,
+					"left": 877,
+					"width": 23,
+					"height": 23,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/clock.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/TimePicker2.4dm",
+					"visibility": "visible",
+					"iconFrames": 1,
+					"focusable": false
 				}
 			}
 		},
@@ -577,8 +615,8 @@
 				},
 				"entryField_status": {
 					"type": "input",
-					"left": 8,
-					"top": 346,
+					"left": 9,
+					"top": 336,
 					"width": 341,
 					"height": 112,
 					"dataSource": "Form:C1466.current_item.status",
@@ -703,7 +741,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 321,
+	"geometryStamp": 353,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

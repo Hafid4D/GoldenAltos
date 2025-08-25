@@ -6,7 +6,7 @@ Function formMethod()
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		
-		Form:C1466.companyType:=Form:C1466.current_item.getCompanyType()
+		Form:C1466.companyType:=Form:C1466.current_item.companyType
 		
 	End if 
 	

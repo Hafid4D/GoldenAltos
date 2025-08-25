@@ -33,7 +33,10 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_fixOperator()
 	This:C1470.drawPup_reportOperator()
 	This:C1470.drawPup_EquipmentId()
+	This:C1470.drawPup_downTimePicker()
+	
 	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "TimePicker@"; Form:C1466.sfw.checkIsInModification())
 	
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	
@@ -60,19 +63,15 @@ Function drawPup_XXX()
 	Form:C1466.sfw.drawButtonPup("pup_xxx"; $xxxName; "xxxx.png"; (Form:C1466.current_item.xxxx=Null:C1517))
 	
 	
-Function pup_XXX()
-	//Create pop up menu
-	
-	
 Function drawPup_EquipmentId()
 	If (Form:C1466.current_item#Null:C1517)
-		$equipmentId:=ds:C1482.Equipment.query("UUID =:1"; Form:C1466.current_item.UUID_Equipment).first() || New object:C1471()  //ds.Equipment.query("assignedID= :1"; Form.current_item.systemID).first() || New object()
+		$equipmentId:=ds:C1482.Equipment.query("UUID =:1"; Form:C1466.current_item.UUID_Equipment).first() || New object:C1471()
 		$typeName:=$equipmentId.assignedID
 		If ($typeName=Null:C1517)
 			$typeName:=""
 		End if 
-		$color:=""  //cs.sfw_htmlColor.me.getName($equipmentId.color)
-		$pathIcon:=""  //($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		$color:=""
+		$pathIcon:=""
 		Form:C1466.sfw.drawButtonPup("pup_equipmentId"; $typeName; $pathIcon; ($equipmentId=Null:C1517))
 	End if 
 	
@@ -98,6 +97,7 @@ Function pup_equipId()
 			: ($choose#"")
 				$equipmentId:=ds:C1482.Equipment.get($choose)
 				Form:C1466.current_item.UUID_Equipment:=$equipmentId.UUID
+				cs:C1710.panel_repairLog.me._activate_save_cancel_button()
 		End case 
 		
 	End if 
@@ -260,3 +260,95 @@ Function btnOpenEquipment()
 	If ($es.length>0)
 		Form:C1466.sfw.openInANewWindow($es[0]; "qualityAssurance"; "equipment")
 	End if 
+	
+	
+	
+Function pup_downTimePicker()
+	If (Form:C1466.sfw.checkIsInModification())
+		$form:=New object:C1471
+		
+		$form.hour:=String:C10(cs:C1710.sfw_stmp.me.getHour(Form:C1466.current_item.downAt))
+		$form.minute:=String:C10(cs:C1710.sfw_stmp.me.getNbMinutes(Form:C1466.current_item.downAt)%60)
+		
+		OBJECT GET COORDINATES:C663(Self:C308->; $left; $top; $rigth; $bottom)
+		
+		CONVERT COORDINATES:C1365($left; $bottom; XY Current form:K27:5; XY Main window:K27:8)
+		Open window:C153($left; $bottom+30; $left+237; $bottom+206; Movable dialog box:K34:7; "Enter Time")
+		DIALOG:C40("_ga_TimePicker"; $form)
+		
+		If (OK=1)
+			
+			Form:C1466.current_item.downAt:=$form.timeStamp
+			$time:=Time string:C180($form.timeStamp)
+			
+			cs:C1710.panel_repairLog.me._activate_save_cancel_button()
+		End if 
+		
+	End if 
+	
+	This:C1470.drawPup_downTimePicker()
+	
+	
+	
+Function drawPup_downTimePicker()
+	If (Form:C1466.current_item#Null:C1517)
+		
+		$time:=Time string:C180(Form:C1466.current_item.downAt)
+		$hour:=cs:C1710.sfw_stmp.me.getHour(Form:C1466.current_item.downAt)
+		
+		If ($hour>12)
+			$when:="PM"
+		Else 
+			$when:="AM"
+		End if 
+		Form:C1466.downAt:=$time+" "+$when
+		//OBJECT SET TITLE(*; "entryField_downAt"; $time+" "+$when)
+		
+	End if 
+	
+	
+	
+	
+Function pup_upTimePicker()
+	If (Form:C1466.sfw.checkIsInModification())
+		$form:=New object:C1471
+		
+		$form.hour:=String:C10(cs:C1710.sfw_stmp.me.getHour(Form:C1466.current_item.upAt))
+		$form.minute:=String:C10(cs:C1710.sfw_stmp.me.getNbMinutes(Form:C1466.current_item.upAt)%60)
+		
+		OBJECT GET COORDINATES:C663(Self:C308->; $left; $top; $rigth; $bottom)
+		
+		CONVERT COORDINATES:C1365($left; $bottom; XY Current form:K27:5; XY Main window:K27:8)
+		Open window:C153($left; $bottom+30; $left+237; $bottom+206; Movable dialog box:K34:7; "Enter Time")
+		DIALOG:C40("_ga_TimePicker"; $form)
+		
+		If (OK=1)
+			
+			Form:C1466.current_item.upAt:=$form.timeStamp
+			$time:=Time string:C180($form.timeStamp)
+			
+			cs:C1710.panel_repairLog.me._activate_save_cancel_button()
+		End if 
+		
+	End if 
+	
+	This:C1470.drawPup_downTimePicker()
+	
+	
+	
+Function drawPup_upTimePicker()
+	If (Form:C1466.current_item#Null:C1517)
+		
+		$time:=Time string:C180(Form:C1466.current_item.upAt)
+		$hour:=cs:C1710.sfw_stmp.me.getHour(Form:C1466.current_item.upAt)
+		
+		If ($hour>12)
+			$when:="PM"
+		Else 
+			$when:="AM"
+		End if 
+		Form:C1466.upAt:=$time+" "+$when
+		
+	End if 
+	
+	
