@@ -58,7 +58,7 @@ Function redrawAndSetVisible()
 		: (FORM Get current page:C276(*)=1)
 			
 			OBJECT GET COORDINATES:C663(*; "entryField_qaComment"; $g; $h; $d; $b)
-			OBJECT SET COORDINATES:C1248(*; "entryField_qaComment"; $g; $h; $widthSubform-10; $b)
+			OBJECT SET COORDINATES:C1248(*; "entryField_qaComment"; $g; $h; $widthSubform-30; $b)
 			
 		: (FORM Get current page:C276(*)=2)
 			

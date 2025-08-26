@@ -417,7 +417,7 @@
 					"top": 305,
 					"left": 412,
 					"width": 458,
-					"height": 128,
+					"height": 152,
 					"dataSource": "Form:C1466.current_item.qaComment",
 					"focusable": false,
 					"enterable": false,
@@ -430,7 +430,7 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 433,
+					"bottom": 457,
 					"right": 870,
 					"sizingY": "move",
 					"sizingX": "grow",
@@ -481,6 +481,21 @@
 					"bottom": 225,
 					"right": 308,
 					"dataSourceTypeHint": "text"
+				},
+				"entryField_critical": {
+					"type": "checkbox",
+					"text": "Critical",
+					"top": 440,
+					"left": 8,
+					"width": 150,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.current_item.critical",
+					"fontWeight": "normal",
+					"dataSourceTypeHint": "boolean",
+					"right": 158
 				}
 			}
 		},
@@ -880,7 +895,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 370,
+	"geometryStamp": 375,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

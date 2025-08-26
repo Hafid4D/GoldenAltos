@@ -764,6 +764,7 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="attachedDocuments" uuid="926C9621239B634A8ACB2A923364231D" type="21" blob_switch_size="2147483647" never_null="true" id="17"/>
+		<field name="critical" uuid="440827CCA5765D4681267D848DDDFD54" type="1" never_null="true" id="18"/>
 		<primary_key field_name="UUID" field_uuid="CFBA7599E861DC4A91A0C1B26781C297"/>
 	</table>
 	<table name="PartData" uuid="68D645D2E1989F4CA36E905F914AD868" id="58">

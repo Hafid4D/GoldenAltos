@@ -749,10 +749,10 @@
 			"coordinates": {
 				"left": 3846,
 				"top": 3,
-				"width": 211,
-				"height": 422.33203125
+				"width": 217,
+				"height": 454.33203125
 			},
-			"displayable_fields_count": 18,
+			"displayable_fields_count": 19,
 			"fields": {
 				"UUID": {
 					"color": {
