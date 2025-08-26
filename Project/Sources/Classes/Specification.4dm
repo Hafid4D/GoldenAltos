@@ -143,11 +143,11 @@ local Function setDateInterval($pushUp; $title)
 	
 	
 Function docsLateInReviewing()->$specifications : cs:C1710.SpecificationSelection
-	$specifications:=ds:C1482.Specification.query("suppress =:1 & reviewIntervalInDays >0 & eval((cs.sfw_stmp.me.getDate(This.stmpRevisionDate; True)+This.reviewIntervalInDays)<Current date(*))"; False:C215)
+	$specifications:=ds:C1482.Specification.query("suppress =:1 & reviewIntervalInDays >0 & eval(revisionDate<Current date(*))"; False:C215)
 	
 	
 Function docsRequiringReviewSoon()->$specifications : cs:C1710.SpecificationSelection
-	$specifications:=ds:C1482.Specification.query("suppress =:1 & reviewIntervalInDays >0 & eval((cs.sfw_stmp.me.getDate(This.stmpReviewDate; True)+This.reviewIntervalInDays)<(Current date(*)+7))"; False:C215)
+	$specifications:=ds:C1482.Specification.query("suppress =:1 & reviewIntervalInDays >0 & eval(reviewDate<(Current date(*)+7))"; False:C215)
 	
 	
 Function OnlySpecs()->$specifications : cs:C1710.SpecificationSelection

@@ -76,7 +76,7 @@
 					],
 					"method": "ObjectMethods/entryField_hour.4dm",
 					"borderRadius": 5,
-					"hideFocusRing": false,
+					"hideFocusRing": true,
 					"entryFilter": "!0&9##",
 					"fontTheme": "normal",
 					"fontSize": 22

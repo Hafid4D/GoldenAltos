@@ -144,20 +144,19 @@ Function bNow()
 	Form:C1466.hour:=String:C10(cs:C1710.sfw_stmp.me.getHour(Form:C1466.time.display.timeStamp))
 	
 	If (Num:C11(Form:C1466.hour)>12)
+		Form:C1466.hour:=String:C10(Num:C11(Form:C1466.hour)%12)
 		Form:C1466.pm:=1
 	Else 
-		Form:C1466.am:=0
+		Form:C1466.am:=1
 	End if 
 	
-	If (Num:C11(Form:C1466.hour)>12)
-		Form:C1466.hour:=String:C10(Num:C11(Form:C1466.hour)%12)
-	End if 
 	$hour:=Num:C11(Form:C1466.hour)<10 ? String:C10("0"+String:C10(Num:C11(Form:C1466.hour))) : String:C10(Num:C11(Form:C1466.hour))
 	Form:C1466.hour:=$hour
 	Form:C1466.minute:=String:C10(cs:C1710.sfw_stmp.me.getNbMinutes(Form:C1466.time.display.timeStamp)%60)
 	$minute:=Num:C11(Form:C1466.minute)<10 ? String:C10("0"+String:C10(Num:C11(Form:C1466.minute))) : String:C10(Num:C11(Form:C1466.minute))
 	Form:C1466.minute:=$minute
 	
+	Form:C1466.second:=String:C10(cs:C1710.sfw_stmp.me.getTimeInSec(Form:C1466.time.display.timeStamp)%60)
 	
 	
 	
@@ -166,6 +165,7 @@ Function bClear()
 	Form:C1466.time.display.timeStamp:=cs:C1710.sfw_stmp.me.getTime(Time:C179("00:00:00"))
 	Form:C1466.hour:="00"
 	Form:C1466.minute:="00"
+	Form:C1466.second:=String:C10(cs:C1710.sfw_stmp.me.getTimeInSec(Form:C1466.time.display.timeStamp)%60)
 	Form:C1466.pm:=0
 	Form:C1466.am:=0
 	

@@ -303,7 +303,7 @@
 		<field name="isApproved" uuid="D1206F3FDDA66F49812596441E32BE6A" type="1" never_null="true" id="14"/>
 		<field name="reportedBy" uuid="0D41C3EAAF305248A7DDF508713A818A" type="10" store_as_UUID="true" never_null="true" id="15"/>
 		<field name="approvedBy" uuid="C69BC87ECC3E8A40AFE2E649C3367539" type="10" limiting_length="255" never_null="true" id="16"/>
-		<field name="approvalDate" uuid="C58CFAD652E982459AD859AAC73FE8D3" type="8" never_null="true" id="17"/>
+		<field name="stmpApproval" uuid="C58CFAD652E982459AD859AAC73FE8D3" type="4" never_null="true" id="17"/>
 		<field name="operators" uuid="0A3CC89837F0474693760937B65C8C46" type="21" blob_switch_size="2147483647" never_null="true" id="18"/>
 		<primary_key field_name="UUID" field_uuid="8FD486DDACE0854DA8FB686A58B08089"/>
 	</table>
@@ -342,7 +342,7 @@
 		<field name="UUID_CIPriority" uuid="204A3877A7ED4045B327D9DB0416ABE5" type="10" store_as_UUID="true" never_null="true" id="4">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="dateInitiated" uuid="57CB06CB6B0AF648A3E1C0461F93699D" type="8" never_null="true" id="5">
+		<field name="stmpInitiated" uuid="57CB06CB6B0AF648A3E1C0461F93699D" type="4" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="UUID_CIOrigin" uuid="CF8585AB695832449D20CA8998F9B964" type="10" store_as_UUID="true" never_null="true" id="6">
@@ -363,8 +363,8 @@
 		<field name="responsible" uuid="96611CD28BB0994F8C770FA4B1987ED1" type="10" limiting_length="255" never_null="true" id="13">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="originalDueDate" uuid="CC391D2EE2B9EB4E98168FC33C329764" type="8" never_null="true" id="14"/>
-		<field name="dateClosed" uuid="825F25FCE864FE47BF8B8151C38BCBED" type="8" never_null="true" id="15">
+		<field name="stmpOriginalDue" uuid="CC391D2EE2B9EB4E98168FC33C329764" type="4" never_null="true" id="14"/>
+		<field name="stmpClosed" uuid="825F25FCE864FE47BF8B8151C38BCBED" type="4" never_null="true" id="15">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="UUID_YesNoQuestion" uuid="D851DE695D3D1D469EFDF4554818DAE4" type="10" store_as_UUID="true" never_null="true" id="16">
@@ -374,7 +374,7 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="externalID" uuid="6CCF4B8B7E030544B21604F953DD5343" type="10" limiting_length="255" never_null="true" id="18"/>
-		<field name="currentDueDate" uuid="B232F043459B6B41B4B9D9A41D1722F1" type="8" never_null="true" id="19"/>
+		<field name="stmpCurrentDue" uuid="B232F043459B6B41B4B9D9A41D1722F1" type="4" never_null="true" id="19"/>
 		<field name="title" uuid="EB1C6D90466E244EAD12C83A24C318D6" type="10" limiting_length="255" never_null="true" id="20"/>
 		<field name="moreData" uuid="AF44BA36E88C4A4FB24D51AFC51A15F2" type="21" blob_switch_size="2147483647" never_null="true" id="21"/>
 		<primary_key field_name="UUID" field_uuid="E4F1F05A93EBEB4EB76E384419D62112"/>
@@ -729,7 +729,7 @@
 		</field>
 		<field name="approvedBy" uuid="66206A9C456E4B42A1A256C572E05B0E" type="10" limiting_length="255" never_null="true" id="20"/>
 		<field name="isApproved" uuid="CF4A58BB76CA9643BC2AE13AE3E91EA4" type="1" never_null="true" id="21"/>
-		<field name="approvalDate" uuid="5EC205F49069354E9F9AD6417AFA9C1C" type="8" never_null="true" id="22"/>
+		<field name="stmpApproval" uuid="5EC205F49069354E9F9AD6417AFA9C1C" type="4" never_null="true" id="22"/>
 		<primary_key field_name="UUID" field_uuid="87371A3102B02347880B2FF579DAE670"/>
 	</table>
 	<table name="Supplier" uuid="A0C8CDC075BBB546914E03F7689B897E" id="57">
@@ -757,10 +757,10 @@
 		</field>
 		<field name="contactDetails" uuid="FCA1BA48E1FC074C9BD23054EB6136A6" type="21" blob_switch_size="2147483647" never_null="true" id="13"/>
 		<field name="deactivated" uuid="4575DDDCCE24EC489147EEDEBA512348" type="1" never_null="true" id="14"/>
-		<field name="lastAuditDate" uuid="CF08CC6FC69B374CB96A8293FB969539" type="8" never_null="true" id="15">
+		<field name="stmpLastAudit" uuid="CF08CC6FC69B374CB96A8293FB969539" type="4" never_null="true" id="15">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="nextAuditDate" uuid="4C047305581E2E43A36A0378D0CF2E0A" type="8" never_null="true" id="16">
+		<field name="stmpNextAudit" uuid="4C047305581E2E43A36A0378D0CF2E0A" type="4" never_null="true" id="16">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="attachedDocuments" uuid="926C9621239B634A8ACB2A923364231D" type="21" blob_switch_size="2147483647" never_null="true" id="17"/>
@@ -2345,7 +2345,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="C094CCAE645E404288AD6D06B0055F16" name_Nto1="Link_90" name_1toN="Link_90_return" state="1">
+	<relation uuid="C094CCAE645E404288AD6D06B0055F16" name_Nto1="contact" name_1toN="contactEvents" state="1">
 		<related_field kind="source">
 			<field_ref uuid="60124B20690F5747A2BBC8F70DDA3EC8" name="UUID_Contact">
 				<table_ref uuid="756B4D1A24E97648A2025B11766FF873" name="ContactEvent"/>
@@ -2357,7 +2357,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="69CAE96E3D9AEC4CAEFC4614328AC072" name_Nto1="Link_91" name_1toN="Link_91_return" state="1">
+	<relation uuid="69CAE96E3D9AEC4CAEFC4614328AC072" name_Nto1="eventType" name_1toN="contactEvents" state="1">
 		<related_field kind="source">
 			<field_ref uuid="FCB619F3AFBA5A429F9E00016BDC214C" name="UUID_EventType">
 				<table_ref uuid="756B4D1A24E97648A2025B11766FF873" name="ContactEvent"/>
@@ -2369,7 +2369,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="955D7429936EA745A291C959AF600BA3" name_Nto1="Link_92" name_1toN="Link_92_return" state="1">
+	<relation uuid="955D7429936EA745A291C959AF600BA3" name_Nto1="user" name_1toN="contactEvents" state="1">
 		<related_field kind="source">
 			<field_ref uuid="05D4F1C022E68C4CA9162BF3CCD702A0" name="UUID_User">
 				<table_ref uuid="756B4D1A24E97648A2025B11766FF873" name="ContactEvent"/>
@@ -2381,7 +2381,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="277BE58DF3CA1E4ABBD5DD685B4B762E" name_Nto1="Link_93" name_1toN="Link_93_return" state="1">
+	<relation uuid="277BE58DF3CA1E4ABBD5DD685B4B762E" name_Nto1="customer" name_1toN="customerEvents" state="1">
 		<related_field kind="source">
 			<field_ref uuid="CB00FE253D56FC44B1CF00C8DEBB198C" name="UUID_Customer">
 				<table_ref uuid="0846217DF6043D4ABB7910378EBDF68A" name="CustomerEvent"/>
@@ -2393,7 +2393,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="7244ED91755F7E4DBD92D5DF80C5724E" name_Nto1="Link_94" name_1toN="Link_94_return" state="1">
+	<relation uuid="7244ED91755F7E4DBD92D5DF80C5724E" name_Nto1="eventType" name_1toN="customerEvents" state="1">
 		<related_field kind="source">
 			<field_ref uuid="698D73D9F68090418CB94E860829F882" name="UUID_EventType">
 				<table_ref uuid="0846217DF6043D4ABB7910378EBDF68A" name="CustomerEvent"/>
@@ -2405,7 +2405,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="FBC0F8D58BEE4D468E32DAE301646C43" name_Nto1="Link_95" name_1toN="Link_95_return" state="1">
+	<relation uuid="FBC0F8D58BEE4D468E32DAE301646C43" name_Nto1="user" name_1toN="customerEvents" state="1">
 		<related_field kind="source">
 			<field_ref uuid="F0D4AF95207D2642951A363048285FCE" name="UUID_User">
 				<table_ref uuid="0846217DF6043D4ABB7910378EBDF68A" name="CustomerEvent"/>

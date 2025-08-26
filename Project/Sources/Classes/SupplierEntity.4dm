@@ -1,6 +1,20 @@
 Class extends Entity
 
 
+local Function get nextAuditDate()->$nextAuditDate : Date
+	$nextAuditDate:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpNextAudit; True:C214)
+	
+local Function set nextAuditDate($nextAuditDate : Date)
+	This:C1470.stmpNextAudit:=cs:C1710.sfw_stmp.me.build($nextAuditDate)
+	
+	
+local Function get lastAuditDate()->$lastAuditDate : Date
+	$lastAuditDate:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpLastAudit; True:C214)
+	
+local Function set lastAuditDate($lastAuditDate : Date)
+	This:C1470.stmpLastAudit:=cs:C1710.sfw_stmp.me.build($lastAuditDate)
+	
+	
 local Function drowPup($dataClass; $queryField; $queryValue; $pupName)
 	
 	$entity:=ds:C1482[$dataClass].query($queryField+" =:1"; Form:C1466.current_item[$queryValue]).first() || New object:C1471()

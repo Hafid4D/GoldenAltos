@@ -134,7 +134,7 @@
 					"text": "Date up :",
 					"textAlign": "right"
 				},
-				"entryField_dateUp": {
+				" ": {
 					"type": "input",
 					"top": 10,
 					"left": 710,
@@ -615,8 +615,8 @@
 				},
 				"entryField_status": {
 					"type": "input",
-					"left": 9,
-					"top": 336,
+					"left": 8,
+					"top": 346,
 					"width": 341,
 					"height": 112,
 					"dataSource": "Form:C1466.current_item.status",
@@ -669,8 +669,7 @@
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"textAlign": "left",
-					"dataSourceTypeHint": "time",
-					"timeFormat": "hh_mm_am"
+					"dataSourceTypeHint": "text"
 				},
 				"label_approvedDate": {
 					"type": "text",
@@ -741,7 +740,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 353,
+	"geometryStamp": 355,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

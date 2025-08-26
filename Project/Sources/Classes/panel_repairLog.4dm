@@ -34,6 +34,7 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_reportOperator()
 	This:C1470.drawPup_EquipmentId()
 	This:C1470.drawPup_downTimePicker()
+	This:C1470.drawPup_upTimePicker()
 	
 	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET VISIBLE:C603(*; "TimePicker@"; Form:C1466.sfw.checkIsInModification())
@@ -122,32 +123,6 @@ Function pup_fixOperator()
 	//Create pop up menu
 	
 	If (Form:C1466.sfw.checkIsInModification())
-/*
-$menu:=Create menu
-If (Storage.cache=Null) || (Storage.cache.staffs=Null)
-ds.Staff.cacheLoad()
-End if 
-		
-For each ($fixOperator; Storage.cache.staffs)
-APPEND MENU ITEM($menu; $fixOperator.code; *)
-SET MENU ITEM PARAMETER($menu; -1; $fixOperator.code)
-If ($fixOperator.code=Form.current_item.fixedBy)
-SET MENU ITEM MARK($menu; -1; Char(18))
-If (Is Windows)
-SET MENU ITEM STYLE($menu; -1; Bold)
-End if 
-End if 
-End for each 
-$choose:=Dynamic pop up menu($menu)
-RELEASE MENU($menu)
-		
-Case of 
-: ($choose#"")
-$fixOperator:=ds.Employee.get($choose)
-Form.current_item.fixedBy:=$fixOperator.code
-End case 
-		
-*/
 		
 		OBJECT GET COORDINATES:C663(*; "pup_fixOperator"; $l; $t; $r; $b)
 		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
@@ -277,10 +252,7 @@ Function pup_downTimePicker()
 		DIALOG:C40("_ga_TimePicker"; $form)
 		
 		If (OK=1)
-			
 			Form:C1466.current_item.downAt:=$form.timeStamp
-			$time:=Time string:C180($form.timeStamp)
-			
 			cs:C1710.panel_repairLog.me._activate_save_cancel_button()
 		End if 
 		
@@ -296,17 +268,11 @@ Function drawPup_downTimePicker()
 		$time:=Time string:C180(Form:C1466.current_item.downAt)
 		$hour:=cs:C1710.sfw_stmp.me.getHour(Form:C1466.current_item.downAt)
 		
-		If ($hour>12)
-			$when:="PM"
-		Else 
-			$when:="AM"
-		End if 
-		Form:C1466.downAt:=$time+" "+$when
-		//OBJECT SET TITLE(*; "entryField_downAt"; $time+" "+$when)
+		$when:=$hour>12 ? "PM" : "AM"
+		
+		Form:C1466.downAt:=Form:C1466.current_item.downAt=0 ? $time : $time+" "+$when
 		
 	End if 
-	
-	
 	
 	
 Function pup_upTimePicker()
@@ -332,7 +298,7 @@ Function pup_upTimePicker()
 		
 	End if 
 	
-	This:C1470.drawPup_downTimePicker()
+	This:C1470.drawPup_upTimePicker()
 	
 	
 	
@@ -342,12 +308,9 @@ Function drawPup_upTimePicker()
 		$time:=Time string:C180(Form:C1466.current_item.upAt)
 		$hour:=cs:C1710.sfw_stmp.me.getHour(Form:C1466.current_item.upAt)
 		
-		If ($hour>12)
-			$when:="PM"
-		Else 
-			$when:="AM"
-		End if 
-		Form:C1466.upAt:=$time+" "+$when
+		$when:=$hour>12 ? "PM" : "AM"
+		
+		Form:C1466.upAt:=Form:C1466.current_item.upAt=0 ? $time : $time+" "+$when
 		
 	End if 
 	

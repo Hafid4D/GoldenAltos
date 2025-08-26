@@ -266,7 +266,6 @@ $eContact.UUID_Company:=$eCustomer.UUID
 				
 				If ($eCustomer#Null:C1517)
 					$eContact.UUID_Company:=$eCustomer.UUID
-					$eContact.companyName:=$eCustomer.name
 					$result:=$eContact.save()
 					If ($result.success=False:C215)
 						TRACE:C157
@@ -283,7 +282,6 @@ $eContact.UUID_Company:=$eCustomer.UUID
 				$cContact:=ds:C1482.Contact.new()
 				$cContact.title:="AP"
 				$cContact.UUID_Company:=$eCustomer.UUID
-				$cContact.companyName:=$customer.Customer
 				$cContact.firstName:=$customer.AP_contact_fn
 				$cContact.lastName:=$customer.AP_contact_ln
 				$cContact.contactDetails:=New object:C1471()
@@ -330,7 +328,6 @@ $eContact.UUID_Company:=$eCustomer.UUID
 				$cContact:=ds:C1482.Contact.new()
 				$cContact.title:="Status"
 				$cContact.UUID_Company:=$eCustomer.UUID
-				$cContact.companyName:=$customer.Customer
 				$cContact.firstName:=$customer.Status_Contact
 				$cContact.lastName:=""
 				$cContact.contactDetails:=New object:C1471()
