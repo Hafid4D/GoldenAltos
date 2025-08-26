@@ -75,8 +75,8 @@ If ($supplier_log.exists)
 		$eSupplier.webService:=$supplier.WebService
 		$eSupplier.auditRequired:=$supplier.Audit_Required
 		$eSupplier.deactivated:=$supplier.Deactivate
-		$eSupplier.lastAuditDate:=$supplier.Last_Audit_Date
-		$eSupplier.nextAuditDate:=$supplier.Next_Audit_Due
+		$eSupplier.stmpLastAudit:=cs:C1710.sfw_stmp.me.build(Date:C102($supplier.Last_Audit_Date))
+		$eSupplier.stmpNextAudit:=cs:C1710.sfw_stmp.me.build(Date:C102($supplier.Next_Audit_Due))
 		
 		$eSupplier.contactDetails:=New object:C1471()
 		$eSupplier.contactDetails.addresses:=New collection:C1472()
@@ -153,7 +153,6 @@ If ($supplier_log.exists)
 		//Primary contact
 		$eContact:=ds:C1482.Contact.new()
 		$eContact.UUID_Company:=$eSupplier.UUID
-		$eContact.companyName:=$supplier.Supplier
 		$eContact.firstName:=$supplier.C1_first_name
 		$eContact.lastName:=$supplier.C1_last_name
 		$eContact.title:="Primary"
@@ -191,7 +190,6 @@ If ($supplier_log.exists)
 		//Secondary contact
 		$eContact:=ds:C1482.Contact.new()
 		$eContact.UUID_Company:=$eSupplier.UUID
-		$eContact.companyName:=$supplier.Supplier
 		$eContact.firstName:=$supplier.C2_first_name
 		$eContact.lastName:=$supplier.C2_last_name
 		$eContact.title:="Secondary"

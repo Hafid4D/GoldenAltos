@@ -27,7 +27,7 @@
 					"type": "rectangle",
 					"top": 30,
 					"left": 0,
-					"width": 642,
+					"width": 450,
 					"height": 307,
 					"fill": "#DEDEDE",
 					"stroke": "transparent"
@@ -39,9 +39,9 @@
 				"lb_communications": {
 					"type": "listbox",
 					"left": 0,
-					"top": 32,
-					"width": 641,
-					"height": 305,
+					"top": 29,
+					"width": 450,
+					"height": 306,
 					"events": [
 						"onDoubleClick",
 						"onDataChange",
@@ -98,7 +98,7 @@
 							"width": 100,
 							"minWidth": 100,
 							"maxWidth": 100,
-							"resizable": false
+							"resizable": true
 						},
 						{
 							"header": {
@@ -138,7 +138,7 @@
 					"type": "rectangle",
 					"top": 0,
 					"left": 0,
-					"width": 642,
+					"width": 450,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
@@ -158,8 +158,8 @@
 				"bActions": {
 					"type": "button",
 					"text": "",
-					"top": 3,
-					"left": 607,
+					"top": 5,
+					"left": 425,
 					"width": 25,
 					"height": 25,
 					"events": [
@@ -175,7 +175,7 @@
 			}
 		}
 	],
-	"geometryStamp": 60,
+	"geometryStamp": 68,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

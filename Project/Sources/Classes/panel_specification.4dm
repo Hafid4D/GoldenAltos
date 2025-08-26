@@ -40,7 +40,18 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_category()
 	This:C1470.drawPup_departement()
 	
+	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	
+	Case of 
+			
+		: (FORM Get current page:C276(*)=2)
+			
+			OBJECT GET COORDINATES:C663(*; "lb_documents"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			$offset:=4
+			
+			OBJECT SET COORDINATES:C1248(*; "lb_documents"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			
+	End case 
 	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET VISIBLE:C603(*; "bSpecView"; Not:C34(Form:C1466.sfw.checkIsInModification()))
 	OBJECT SET VISIBLE:C603(*; "bSpecEdit"; Form:C1466.sfw.checkIsInModification())
@@ -152,10 +163,7 @@ Function bActionDocument()
 				Form:C1466.current_item.documents.documentsCollection.remove(Form:C1466.selectedDocumentPos-1)
 				cs:C1710.panel_specification.me._activate_save_cancel_button()
 				
-				
 			End if 
-			
-			
 			
 	End case 
 	

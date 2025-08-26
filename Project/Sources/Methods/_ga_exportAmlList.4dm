@@ -81,8 +81,7 @@ If (OK=1)
 				Case of 
 						
 					: ($headerName="Division")
-						$division:=ds:C1482.Division.query("divisionID =:1"; $aml_e["divisionID"]).first()
-						$data:=Replace string:C233(Replace string:C233(String:C10($division.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))
+						$data:=Replace string:C233(Replace string:C233(String:C10($aml_e.division.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))
 						SEND PACKET:C103($file; $data+$separator_col)
 						
 					: ($headerName="Internal Part")

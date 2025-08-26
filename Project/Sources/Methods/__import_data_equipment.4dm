@@ -28,17 +28,16 @@ If ($equipment_Log.exists)
 		$location:=ds:C1482.EquipmentLocation.query("name =:1"; Split string:C1554($equipment.LOC; "\r"; sk trim spaces:K86:2).join("\r"))  //$eEquipment.location:=$equipment.LOC
 		
 		If ($location.length>0)
-			$eEquipment.locationID:=$location[0].locationID
-		Else 
-			$eEquipment.locationID:=0
+			$eEquipment.UUID_EquipmentLocation:=$location[0].UUID
+			
 		End if 
 		
 		$eEquipment.model:=$equipment.MODEL
 		$eEquipment.serialNumber:=$equipment.SerialNumber
-		$eEquipment.nextCalDate:=$equipment.NextCalDate
-		$eEquipment.lastCalDate:=$equipment.LastCalDate
-		$eEquipment.lastPMDate:=$equipment.LastPMDate
-		$eEquipment.nextPMDate:=$equipment.NextPMDate
+		$eEquipment.stmpNextCal:=cs:C1710.sfw_stmp.me.build(Date:C102($equipment.NextCalDate))
+		$eEquipment.stmpLastCal:=cs:C1710.sfw_stmp.me.build(Date:C102($equipment.LastCalDate))
+		$eEquipment.stmpLastPM:=cs:C1710.sfw_stmp.me.build(Date:C102($equipment.LastPMDate))
+		$eEquipment.stmpNextPM:=cs:C1710.sfw_stmp.me.build(Date:C102($equipment.NextPMDate))
 		$eEquipment.notAtSite:=$equipment.Not_at_site
 		
 		//Checkand assign a division if needed
@@ -158,16 +157,16 @@ If ($repair_Log_file.exists)
 			$eRepair.operators.fixedBy:=""
 		End if 
 		
-		$eRepair.fixedDate:=$repair.Date_fixed
-		$eRepair.reportDate:=$repair.Rep_date
+		$eRepair.stmpFixed:=cs:C1710.sfw_stmp.me.build(Date:C102($repair.Date_fixed))
+		$eRepair.stmpReport:=cs:C1710.sfw_stmp.me.build(Date:C102($repair.Rep_date))
 		$eRepair.status:=$repair.E_status
 		$eRepair.problem:=Split string:C1554($repair.Problem; "\r"; sk trim spaces:K86:2).join("\r")
 		$eRepair.reportID:=$repair.Rep_num
 		$eRepair.fix:=$repair.Fix
 		$eRepair.downHrs:=$repair.Down_hrs
-		$eRepair.downAt:=$repair.Down_at
-		$eRepair.upAt:=$repair.Up_at
-		$eRepair.dateUp:=$repair.Date_fixed
+		$eRepair.downAtStmp:=cs:C1710.sfw_stmp.me.build(!00-00-00!; Time:C179($repair.Down_at))
+		$eRepair.upAtStmp:=cs:C1710.sfw_stmp.me.build(!00-00-00!; Time:C179($repair.Up_at))
+		$eRepair.stmpUp:=cs:C1710.sfw_stmp.me.build(Date:C102($repair.Date_fixed))
 		
 		
 		$res:=$eRepair.save()

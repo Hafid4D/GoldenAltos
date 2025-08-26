@@ -25,7 +25,7 @@ If ($cip_log.exists)
 			
 		End if 
 		
-		$eCip.dateInitiated:=$cip.dateInitiated
+		$eCip.stmpInitiated:=cs:C1710.sfw_stmp.me.build(Date:C102($cip.dateInitiated))
 		
 		$origin:=ds:C1482.CIOrigin.query("name =:1"; Split string:C1554($cip.origin; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($origin.length>0)
@@ -83,8 +83,8 @@ If ($cip_log.exists)
 		End if 
 		
 		$eCip.responsible:=$cip.responsible
-		$eCip.originalDueDate:=$cip.originalDueDate
-		$eCip.dateClosed:=$cip.dateClosed
+		$eCip.stmpOriginalDue:=cs:C1710.sfw_stmp.me.build(Date:C102($cip.originalDueDate))
+		$eCip.stmpClosed:=cs:C1710.sfw_stmp.me.build(Date:C102($cip.dateClosed))
 		
 		$IsAcceptable:=ds:C1482.YesNoQuestion.query("name =:1"; Split string:C1554($cip.IsAcceptable; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($IsAcceptable.length>0)
@@ -94,7 +94,7 @@ If ($cip_log.exists)
 		End if 
 		
 		$eCip.externalID:=$cip.externalID
-		$eCip.currentDueDate:=$cip.currentDueDate
+		$eCip.stmpCurrentDue:=cs:C1710.sfw_stmp.me.build(Date:C102($cip.currentDueDate))
 		$eCip.notes:=$cip.notes
 		$eCip.title:=""
 		

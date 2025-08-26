@@ -6,7 +6,7 @@ Function formMethod()
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		
-		Form:C1466.companyType:=Form:C1466.current_item.getCompanyType()
+		Form:C1466.companyType:=Form:C1466.current_item.companyType
 		
 	End if 
 	
@@ -140,6 +140,7 @@ Function pup_companyType()
 		Case of 
 			: ($choose#"")
 				Form:C1466.companyType:=$choose
+				
 		End case 
 		
 	End if 
@@ -148,6 +149,17 @@ Function pup_companyType()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
+	
+	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	$offset:=4
+	Case of 
+			
+		: (FORM Get current page:C276(*)=1)
+			
+			OBJECT GET COORDINATES:C663(*; "subFormAddress"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "subFormAddress"; $g; $h; $widthSubform; $b)
+			
+	End case 
 	
 	This:C1470.contactDetails()
 	This:C1470.drawPup_Customer()

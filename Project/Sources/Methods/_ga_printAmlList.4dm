@@ -12,19 +12,14 @@ If (Form:C1466.sfw.lb_items.length>0)
 	
 	var $identEntry : Text:=Form:C1466.sfw.view.ident
 	var $context : Object
-	var $divisions : Collection
 	
 	$context:=New object:C1471()
 	
 	$file:=Folder:C1567(fk resources folder:K87:11).file("4DWriteProPrintTemplates/amlListPrint.4wp")
 	$template:=WP Import document:C1318($file.platformPath)
-	$divisions:=New collection:C1472()
-	//For each ($item; Form.sfw.lb_items)
-	//$divisions.push(ds.Division.query("divisionID =:1"; $item.divisionID).first().name)
-	//End for each 
 	
 	$context.length:=Form:C1466.sfw.lb_items.length
-	$context.division:=_ga_getListFiltersValues("Division"; "divisionID")  //$divisions.distinct().join(","; ck ignore null or empty)
+	$context.division:=_ga_getListFiltersValues("Division"; "UUID")
 	$context.user:=Current machine:C483
 	$context.partNum:=_ga_getListFiltersValues("PartData"; "UUID"; "internalPartNum")
 	

@@ -32,7 +32,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	// MARK: -Filters
 	$filter:=cs:C1710.sfw_definitionFilter.new("filterCustomerStatus")
 	$filter.setDefaultTitle("All status")
-	$filter.setFilterByIDInTable("CustomerStatus"; "statusID"; "IDT_status")
+	$filter.setFilterByLinkedEntity("CustomerStatus"; "UUID_CustomerStatus"; ""; "customerStatus")
 	$filter.setDynamicTitle("name"; "## customer status")
 	$entry.addFilter($filter)
 	

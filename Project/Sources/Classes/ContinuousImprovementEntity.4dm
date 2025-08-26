@@ -2,6 +2,31 @@ Class extends Entity
 
 
 
+local Function get dateClosed()->$dateClosed : Date
+	$dateClosed:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpClosed; True:C214)
+	
+local Function set dateClosed($dateClosed : Date)
+	This:C1470.stmpClosed:=cs:C1710.sfw_stmp.me.build($dateClosed)
+	
+local Function get originalDueDate()->$originalDueDate : Date
+	$originalDueDate:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpOriginalDue; True:C214)
+	
+local Function set originalDueDate($originalDueDate : Date)
+	This:C1470.stmpOriginalDue:=cs:C1710.sfw_stmp.me.build($originalDueDate)
+	
+local Function get currentDueDate()->$currentDueDate : Date
+	$currentDueDate:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpCurrentDue; True:C214)
+	
+local Function set currentDueDate($currentDueDate : Date)
+	This:C1470.stmpCurrentDue:=cs:C1710.sfw_stmp.me.build($currentDueDate)
+	
+local Function get dateInitiated()->$dateInitiated : Date
+	$dateInitiated:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpInitiated; True:C214)
+	
+local Function set dateInitiated($dateInitiated : Date)
+	This:C1470.stmpInitiated:=cs:C1710.sfw_stmp.me.build($dateInitiated)
+	
+	
 local Function drowPup($dataClass; $queryField; $queryValue; $pupName)
 	
 	$entity:=ds:C1482[$dataClass].query($queryField+" =:1"; Form:C1466.current_item[$queryValue]).first() || New object:C1471()

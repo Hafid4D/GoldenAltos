@@ -79,7 +79,4 @@ Case of
 			DatePicker SET WEEK FIRST DAY($FormName; Wednesday:K10:15)  // lets start the week on wednesday (why not)
 		End if 
 		
-	: (Form event code:C388=On Data Change:K2:15)
-		CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
-		
 End case 

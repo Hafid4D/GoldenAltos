@@ -49,12 +49,12 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setView($view)
 	
 	
-Function suppliersContacts()->$contacts : cs:C1710.Contact
+Function suppliersContacts()->$contacts : cs:C1710.ContactSelection
 	var $suppliersUUIDs : Collection:=New collection:C1472()
 	$suppliersUUIDs:=ds:C1482.Supplier.all().toCollection().extract("UUID")  //$formula:=Formula(This.supplier#Null)
 	$contacts:=ds:C1482.Contact.query("UUID_Company IN :1"; $suppliersUUIDs)
 	
-Function customersContacts()->$contacts : cs:C1710.Contact
+Function customersContacts()->$contacts : cs:C1710.ContactSelection
 	var $customersUUIDs : Collection:=New collection:C1472()
 	$customersUUIDs:=ds:C1482.Customer.all().toCollection().extract("UUID")  //$formula:=Formula(This.customer#Null)
 	$contacts:=ds:C1482.Contact.query("UUID_Company IN :1"; $customersUUIDs)

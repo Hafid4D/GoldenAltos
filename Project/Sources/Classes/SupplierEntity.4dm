@@ -1,8 +1,20 @@
 Class extends Entity
 
 
-
-
+local Function get nextAuditDate()->$nextAuditDate : Date
+	$nextAuditDate:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpNextAudit; True:C214)
+	
+local Function set nextAuditDate($nextAuditDate : Date)
+	This:C1470.stmpNextAudit:=cs:C1710.sfw_stmp.me.build($nextAuditDate)
+	
+	
+local Function get lastAuditDate()->$lastAuditDate : Date
+	$lastAuditDate:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpLastAudit; True:C214)
+	
+local Function set lastAuditDate($lastAuditDate : Date)
+	This:C1470.stmpLastAudit:=cs:C1710.sfw_stmp.me.build($lastAuditDate)
+	
+	
 local Function drowPup($dataClass; $queryField; $queryValue; $pupName)
 	
 	$entity:=ds:C1482[$dataClass].query($queryField+" =:1"; Form:C1466.current_item[$queryValue]).first() || New object:C1471()
@@ -78,11 +90,18 @@ local Function rebuildAddress()->$address : Object
 	Form:C1466.subFormAddress:=Form:C1466.subFormAddress
 	
 	
-local Function rebuidComunications($contactType)->$contacts : Collection
-	
-	$communications:=ds:C1482.Contact.query("UUID_Company = :1"; Form:C1466.current_item.UUID).query("title=:1"; $contactType).first().contactDetails.communications
-	If ($communications#Null:C1517)
-		$contacts:=New collection:C1472()
+local Function rebuildContact()->$contacts : Collection
+	var $communication : cs:C1710.ContactEntity
+	Case of 
+		: (Form:C1466.primaryContact=1)
+			$type:="Primary"
+		: (Form:C1466.secondaryContact=1)
+			$type:="Secondary"
+	End case 
+	$contacts:=New collection:C1472()
+	$communication:=ds:C1482.Contact.query("UUID_Company =:1"; Form:C1466.current_item.UUID).query("title=:1"; $type).first()
+	If ($communication#Null:C1517)
+		$communications:=$communication.contactDetails.communications
 		For ($i; 0; $communications.length-1)
 			
 			$object:=New object:C1471
@@ -91,10 +110,10 @@ local Function rebuidComunications($contactType)->$contacts : Collection
 			$Object.comment:=$communications[$i].comment
 			$contacts.push($Object)
 			
-			
 		End for 
 		
 	End if 
+	Form:C1466.lb_contact:=$contacts
 	
 	
 	

@@ -29,10 +29,36 @@ local Function rebuidComunications($contactType)->$contacts : Collection
 			$Object.comment:=$communications[$i].comment
 			$contacts.push($Object)
 			
+		End for 
+		
+	End if 
+	
+	
+local Function rebuildContact()->$contacts : Collection
+	var $communication : cs:C1710.ContactEntity
+	Case of 
+		: (Form:C1466.apContact=1)
+			$type:="AP"
+		: (Form:C1466.statusContact=1)
+			$type:="Status"
+	End case 
+	$contacts:=New collection:C1472()
+	$communication:=ds:C1482.Contact.query("UUID_Company =:1"; Form:C1466.current_item.UUID).query("title=:1"; $type).first()
+	If ($communication#Null:C1517)
+		$communications:=$communication.contactDetails.communications
+		For ($i; 0; $communications.length-1)
+			
+			$object:=New object:C1471
+			$Object.name:=$communications[$i].type
+			$Object.value:=$communications[$i].contact
+			$Object.comment:=$communications[$i].comment
+			$contacts.push($Object)
 			
 		End for 
 		
 	End if 
+	Form:C1466.lb_contact:=$contacts
+	
 	
 	
 local Function get nameInWindowTitle()->$nameInWindowTitle : Text
