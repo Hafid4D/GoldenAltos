@@ -572,6 +572,33 @@
 		<field name="UUID_Specification" uuid="8A9C0B885868D54583D57B3105E9B3A8" type="10" store_as_UUID="true" never_null="true" id="3"/>
 		<primary_key field_name="UUID" field_uuid="AF2E663EC28F5E4399FC4407F055FCC2"/>
 	</table>
+	<table name="Audit" uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" id="44">
+		<field name="UUID" uuid="B55972B70F030349B5136DEE13BEA4D4" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="page" uuid="22471929E9671B4E94A57E0B3DB7FE63" type="4" never_null="true" id="2"/>
+		<field name="stmpPage" uuid="0FE27B7F46CCCE46BC77674614199497" type="4" never_null="true" id="3">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="supervisor" uuid="32B9133DC66E064AA45B12BA8F433CBA" type="10" limiting_length="255" never_null="true" id="4">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="dateTimeStamp" uuid="6E3BC2B6F5A13247AD1C1301295E5381" type="4" never_null="true" id="5">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="stmpCreationDate" uuid="1B32511C08D7CD4085801214B347A169" type="4" never_null="true" id="6">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="title" uuid="3DAE7A8540AA97418C34DEF66580AA4F" type="10" limiting_length="255" never_null="true" id="7">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="storageFilename" uuid="5A8A41C8A1EA534C8FFA52AA685F6AF9" type="10" limiting_length="255" never_null="true" id="8">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="attachedDocuments" uuid="C2A72C4EEAE0AE45AD2EA09A70F6C145" type="21" blob_switch_size="2147483647" never_null="true" id="10"/>
+		<field name="book" uuid="7C26ABF75C254B4CAEE237698AB70407" type="10" limiting_length="255" never_null="true" id="11">
+			<field_extra multi_line="false"/>
+		</field>
+		<primary_key field_name="UUID" field_uuid="B55972B70F030349B5136DEE13BEA4D4"/>
+	</table>
 	<table name="ControllingDepartment" uuid="C1BEBD5DDE0D1A45AEE41760FAE1229A" id="45">
 		<field name="UUID" uuid="1CB76A26D5B699429A95B9E10253FD00" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="levelID" uuid="48A065C367048045873CF6758D645135" type="3" never_null="true" id="2">
@@ -2561,6 +2588,11 @@
 	<index kind="regular" unique_keys="true" uuid="1FEAD11AEFB24168AD1B785362ACF144" type="1">
 		<field_ref uuid="8FC82746020F4EB6BA85B431DFE019A8" name="UUID">
 			<table_ref uuid="521E751963104DC299061CF1588CADEF" name="sfw_EMailLog"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="210807674D54B745836184B99CF7917F" type="7">
+		<field_ref uuid="B55972B70F030349B5136DEE13BEA4D4" name="UUID">
+			<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="217F18850D164B47A3813A83525C7283" type="3">
