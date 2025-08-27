@@ -179,9 +179,10 @@ Function redrawAndSetVisible()
 	
 Function contactDetails()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.subFormAddress:=New object:C1471()
-		Form:C1466.subFormAddress.address:=Form:C1466.current_item.rebuildAddress()
-		Form:C1466.subFormAddress.situation:=Form:C1466.situation
+		Form:C1466.current_item.rebuildAddress()
+		//Form.subFormAddress:=New object()
+		//Form.subFormAddress.address:=Form.current_item.rebuildAddress()
+		//Form.subFormAddress.situation:=Form.situation
 		
 		Form:C1466.subFormCommunication:=New object:C1471
 		If (Form:C1466.current_item.contactDetails.communications=Null:C1517)

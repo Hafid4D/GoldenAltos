@@ -364,6 +364,64 @@
 					"stroke": "#808080",
 					"text": ":",
 					"fontWeight": "normal"
+				},
+				"label_0_12": {
+					"type": "text",
+					"top": 65,
+					"left": 684,
+					"width": 82,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "LOT #"
+				},
+				"Field_poNumber": {
+					"type": "input",
+					"top": 65,
+					"left": 784,
+					"width": 120,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.lotNumber",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold"
+				},
+				"btnForward2": {
+					"type": "button",
+					"text": " ",
+					"top": 64,
+					"left": 908,
+					"width": 18,
+					"height": 18,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/forward-16x16.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnForward2.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
+				},
+				"label_0_13": {
+					"type": "text",
+					"top": 65,
+					"left": 776,
+					"width": 7,
+					"height": 17,
+					"stroke": "#808080",
+					"text": ":",
+					"fontWeight": "normal"
 				}
 			}
 		},
@@ -458,7 +516,7 @@
 					"type": "rectangle",
 					"top": 188,
 					"left": 300,
-					"width": 610,
+					"width": 930,
 					"height": 53,
 					"sizingX": "grow",
 					"fill": "#E4E4E4",
@@ -468,7 +526,7 @@
 					"type": "rectangle",
 					"top": 155,
 					"left": 300,
-					"width": 610,
+					"width": 930,
 					"height": 30,
 					"sizingX": "grow",
 					"fill": "#A2C6D8",
@@ -498,7 +556,7 @@
 					"type": "input",
 					"top": 196,
 					"left": 421,
-					"width": 477,
+					"width": 797,
 					"height": 17,
 					"dataSource": "Form:C1466.currentStep.comment1",
 					"focusable": false,
@@ -527,7 +585,7 @@
 					"type": "input",
 					"top": 220,
 					"left": 421,
-					"width": 477,
+					"width": 797,
 					"height": 17,
 					"dataSource": "Form:C1466.currentStep.comment2",
 					"focusable": false,
@@ -547,7 +605,7 @@
 					"type": "rectangle",
 					"top": 247,
 					"left": 5,
-					"width": 450,
+					"width": 610,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
@@ -568,7 +626,7 @@
 					"type": "rectangle",
 					"top": 280,
 					"left": 5,
-					"width": 450,
+					"width": 610,
 					"height": 118,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
@@ -579,7 +637,7 @@
 					"type": "listbox",
 					"left": 8,
 					"top": 283,
-					"width": 443,
+					"width": 603,
 					"height": 112,
 					"events": [
 						"onClick",
@@ -649,7 +707,7 @@
 							"footer": {
 								"name": "Footer6"
 							},
-							"width": 120,
+							"width": 280,
 							"dataSource": "This:C1470.tool.name",
 							"enterable": false
 						}
@@ -659,7 +717,7 @@
 					"type": "button",
 					"text": " ",
 					"top": 251,
-					"left": 423,
+					"left": 583,
 					"width": 26,
 					"height": 21,
 					"events": [
@@ -676,7 +734,7 @@
 					"type": "rectangle",
 					"top": 404,
 					"left": 5,
-					"width": 450,
+					"width": 610,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
@@ -697,7 +755,7 @@
 					"type": "rectangle",
 					"top": 437,
 					"left": 5,
-					"width": 450,
+					"width": 610,
 					"height": 119,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
@@ -708,7 +766,7 @@
 					"type": "listbox",
 					"left": 8,
 					"top": 440,
-					"width": 443,
+					"width": 603,
 					"height": 112,
 					"events": [
 						"onClick",
@@ -772,7 +830,7 @@
 							"footer": {
 								"name": "Footer12"
 							},
-							"width": 187,
+							"width": 347,
 							"dataSource": "This:C1470.description"
 						}
 					]
@@ -781,7 +839,7 @@
 					"type": "button",
 					"text": " ",
 					"top": 408,
-					"left": 423,
+					"left": 583,
 					"width": 26,
 					"height": 21,
 					"events": [
@@ -797,8 +855,8 @@
 				"header_bkgd5": {
 					"type": "rectangle",
 					"top": 247,
-					"left": 460,
-					"width": 450,
+					"left": 620,
+					"width": 610,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
@@ -807,7 +865,7 @@
 				"lbl_dataTable3": {
 					"type": "text",
 					"top": 254,
-					"left": 466,
+					"left": 626,
 					"width": 278,
 					"height": 17,
 					"stroke": "#000000",
@@ -818,8 +876,8 @@
 				"header_bkgd7": {
 					"type": "rectangle",
 					"top": 280,
-					"left": 460,
-					"width": 450,
+					"left": 620,
+					"width": 610,
 					"height": 118,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
@@ -828,9 +886,9 @@
 				},
 				"List Box3": {
 					"type": "listbox",
-					"left": 463,
+					"left": 623,
 					"top": 283,
-					"width": 443,
+					"width": 603,
 					"height": 112,
 					"events": [
 						"onClick",
@@ -870,7 +928,7 @@
 							"footer": {
 								"name": "Footer3"
 							},
-							"width": 326,
+							"width": 486,
 							"dataSource": "This:C1470.value",
 							"resizable": false,
 							"enterable": false
@@ -881,7 +939,7 @@
 					"type": "button",
 					"text": " ",
 					"top": 251,
-					"left": 878,
+					"left": 1198,
 					"width": 26,
 					"height": 21,
 					"events": [
@@ -897,8 +955,8 @@
 				"header_bkgd8": {
 					"type": "rectangle",
 					"top": 404,
-					"left": 460,
-					"width": 450,
+					"left": 620,
+					"width": 610,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
@@ -907,7 +965,7 @@
 				"lbl_dataTable4": {
 					"type": "text",
 					"top": 411,
-					"left": 466,
+					"left": 626,
 					"width": 278,
 					"height": 17,
 					"stroke": "#000000",
@@ -918,8 +976,8 @@
 				"header_bkgd12": {
 					"type": "rectangle",
 					"top": 437,
-					"left": 460,
-					"width": 450,
+					"left": 620,
+					"width": 610,
 					"height": 119,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
@@ -928,9 +986,9 @@
 				},
 				"List Box4": {
 					"type": "listbox",
-					"left": 463,
+					"left": 623,
 					"top": 440,
-					"width": 443,
+					"width": 603,
 					"height": 112,
 					"events": [
 						"onClick",
@@ -969,7 +1027,7 @@
 							"footer": {
 								"name": "Footer4"
 							},
-							"width": 326,
+							"width": 486,
 							"dataSource": "This:C1470.value",
 							"enterable": false
 						}
@@ -979,7 +1037,7 @@
 					"type": "button",
 					"text": " ",
 					"top": 408,
-					"left": 878,
+					"left": 1198,
 					"width": 26,
 					"height": 21,
 					"events": [
@@ -995,7 +1053,7 @@
 				"banner_lotOnHold_page1": {
 					"type": "input",
 					"top": 376,
-					"left": 629,
+					"left": 949,
 					"width": 285,
 					"height": 184,
 					"sizingX": "move",
@@ -1118,7 +1176,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_4lines",
-	"geometryStamp": 623,
+	"geometryStamp": 817,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

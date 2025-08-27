@@ -18,6 +18,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("title"; "Title"; "width:100")
 	$entry.setLBItemsOrderBy("companyName")
 	
+	$entry.setValidationRule("title"; "entryField_title"; "mandatory"; "message:The title is mandatory")
+	$entry.setValidationRule("firstName"; "entryField_firstName"; "mandatory"; "message:The first name is mandatory")
+	$entry.setValidationRule("lastName"; "entryField_lastName"; "mandatory"; "message:The last name is mandatory")
+	
 	$entry.enableTransaction()
 	
 	$entry.activateFavorite()

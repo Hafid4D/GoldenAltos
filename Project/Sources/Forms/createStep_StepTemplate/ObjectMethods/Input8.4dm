@@ -8,8 +8,6 @@ Case of
 		OBJECT SET SUBFORM:C1138(*; "sf_templateSearch"; "searchOnList")
 		OBJECT SET VISIBLE:C603(*; "sf_templateSearch"; True:C214)
 		
-	: (FORM Event:C1606.code=On Mouse Enter:K2:33)
+	: (FORM Event:C1606.code=On Mouse Move:K2:35)
 		SET CURSOR:C469(9000)
-	: (FORM Event:C1606.code=On Mouse Leave:K2:34)
-		SET CURSOR:C469()
 End case 
