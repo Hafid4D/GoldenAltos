@@ -476,17 +476,17 @@
 				"label_device3": {
 					"type": "text",
 					"top": 87,
-					"left": 638,
+					"left": 498,
 					"width": 45,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "RMA"
 				},
-				"entryField_rmaNumber": {
+				"Field_rmaNumber": {
 					"type": "input",
 					"top": 87,
-					"left": 688,
-					"width": 102,
+					"left": 548,
+					"width": 50,
 					"height": 17,
 					"dataSource": "Form:C1466.current_rma.rmaNumber",
 					"focusable": false,
@@ -498,15 +498,15 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"right": 790,
+					"right": 598,
 					"textAlign": "left",
-					"method": "ObjectMethods/entryField_rmaNumber.4dm"
+					"method": "ObjectMethods/Field_rmaNumber.4dm"
 				},
 				"btnForward": {
 					"type": "button",
 					"text": " ",
 					"top": 87,
-					"left": 772,
+					"left": 599,
 					"width": 18,
 					"height": 18,
 					"events": [
@@ -890,7 +890,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_4lines",
-	"geometryStamp": 2667,
+	"geometryStamp": 2713,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
