@@ -17,5 +17,5 @@ local Function cacheLoad()
 	
 	
 Function _loadAsCollection()->$ImprovementDispositions : Collection
-	$ImprovementDispositions:=This:C1470.all().toCollection("UUID, dispositionID,name").orderBy("dispositionID")
+	$ImprovementDispositions:=This:C1470.all().toCollection("UUID, levelID,name").orderBy("levelIDs")
 	

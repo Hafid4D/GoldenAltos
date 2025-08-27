@@ -1,9 +1,21 @@
 Class extends Entity
 
 
+local Function get revisionDate()->$revisionDate : Date
+	$revisionDate:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpRevisionDate; True:C214)
+	
+local Function set revisionDate($revisionDate : Date)
+	This:C1470.stmpRevisionDate:=cs:C1710.sfw_stmp.me.build($revisionDate)
+	
+local Function get reviewDate()->$reviewDate : Date
+	$reviewDate:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpReviewDate; True:C214)
+	
+local Function set reviewDate($reviewDate : Date)
+	This:C1470.stmpReviewDate:=cs:C1710.sfw_stmp.me.build($reviewDate)
+	
 local Function drowPup($dataClass; $queryField; $queryValue; $pupName)
 	
-	$entity:=ds:C1482[$dataClass].query($queryField+"= :1"; Form:C1466.current_item[$queryValue]).first() || New object:C1471()
+	$entity:=ds:C1482[$dataClass].query($queryField+" =:1"; Form:C1466.current_item[$queryValue]).first() || New object:C1471()
 	$name:=$entity.name
 	If ($name=Null:C1517)
 		$name:=""
@@ -25,23 +37,72 @@ local Function pup($cacheCollection; $dataClass; $queryField; $queryValue)
 			ds:C1482[$dataClass].cacheLoad()
 		End if 
 		
-		For each ($eImprovementPriority; Storage:C1525.cache[$cacheCollection])
-			APPEND MENU ITEM:C411($menu; $eImprovementPriority.name; *)
-			SET MENU ITEM PARAMETER:C1004($menu; -1; $eImprovementPriority.UUID)
-			If (Num:C11($eImprovementPriority[$queryField])=Form:C1466.current_item[$queryValue])
-				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
-				If (Is Windows:C1573)
-					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+		For each ($eEntity; Storage:C1525.cache[$cacheCollection])
+			APPEND MENU ITEM:C411($menu; $eEntity.name; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $eEntity.UUID)
+			If ($queryField="UUID")  //# TO BE REMOVED
+				
+				If ($eEntity[$queryField]=Form:C1466.current_item[$queryValue])
+					SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+					If (Is Windows:C1573)
+						SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+					End if 
 				End if 
+			Else 
+				
+				If (Num:C11($eEntity[$queryField])=Form:C1466.current_item[$queryValue])
+					SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+					If (Is Windows:C1573)
+						SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+					End if 
+				End if 
+				
 			End if 
+			
 		End for each 
 		$choose:=Dynamic pop up menu:C1006($menu)
 		RELEASE MENU:C978($menu)
 		
 		Case of 
 			: ($choose#"")
-				$eImprovementPriority:=ds:C1482[$dataClass].get($choose)
-				Form:C1466.current_item[$queryValue]:=$eImprovementPriority[$queryField]
+				$eEntity:=ds:C1482[$dataClass].get($choose)
+				Form:C1466.current_item[$queryValue]:=$eEntity[$queryField]
 		End case 
 		
 	End if 
+	
+	
+	
+	
+	
+	
+	//mark:-Callbacks
+	
+local Function afterCreation()
+	This:C1470._initReports()
+	
+	
+local Function loadAfterCreation()
+	// This callback is called after creating the new item but before displaying the panel.
+	This:C1470._initReports()
+	
+	
+local Function itemLoad()
+	// This callback is called when the item is selected in the itemList
+	This:C1470._initReports()
+	
+	
+	
+local Function isDeletable()->$isDeletable : Boolean
+	// This callback must return false to inactivate the deletion mode for the current item.
+	$isDeletable:=True:C214
+	
+	
+local Function _initReports()
+	
+	If (This:C1470.documents.documentsCollection=Null:C1517)
+		
+		This:C1470.documents.documentsCollection:=New collection:C1472()
+	End if 
+	
+	

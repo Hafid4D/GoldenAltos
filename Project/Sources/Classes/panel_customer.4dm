@@ -7,14 +7,19 @@ Function formMethod()
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		Form:C1466.addressBilling:=1
 		Form:C1466.addressShipping:=0
+		Form:C1466.apContact:=1
+		Form:C1466.statusContact:=0
+		This:C1470.LoadContact()
 		This:C1470.loadAllTabs()
-		This:C1470.loadContacts()
+		This:C1470.LoadApContact()
+		This:C1470.LoadStatusContact()
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
 				// add load functions
-				This:C1470.loadContacts()
+				This:C1470.LoadApContact()
+				This:C1470.LoadStatusContact()
 				
 				
 			: (FORM Get current page:C276(*)=2)
@@ -46,7 +51,7 @@ Function drawPup_XXX()
 	
 Function drawPup_CustomerStatus()
 	If (Form:C1466.current_item#Null:C1517)
-		$customerStatus:=ds:C1482.CustomerStatus.query("statusID= :1"; Form:C1466.current_item.IDT_status).first() || New object:C1471()
+		$customerStatus:=ds:C1482.CustomerStatus.query("UUID= :1"; Form:C1466.current_item.UUID_CustomerStatus).first() || New object:C1471()
 		$statusName:=$customerStatus.name
 		If ($statusName=Null:C1517)
 			$statusName:=""
@@ -68,7 +73,7 @@ Function pup_status()
 		For each ($eCustomerStatus; Storage:C1525.cache.customerStatus)
 			APPEND MENU ITEM:C411($menu; $eCustomerStatus.name; *)
 			SET MENU ITEM PARAMETER:C1004($menu; -1; $eCustomerStatus.UUID)
-			If ($eCustomerStatus.statusID=Form:C1466.current_item.IDT_status)
+			If ($eCustomerStatus.UUID=Form:C1466.current_item.UUID_CustomerStatus)
 				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
 				If (Is Windows:C1573)
 					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
@@ -81,7 +86,7 @@ Function pup_status()
 		Case of 
 			: ($choose#"")
 				$eCustomerStatus:=ds:C1482.CustomerStatus.get($choose)
-				Form:C1466.current_item.IDT_status:=$eCustomerStatus.statusID
+				Form:C1466.current_item.UUID_CustomerStatus:=$eCustomerStatus.UUID
 		End case 
 		
 	End if 
@@ -90,7 +95,7 @@ Function pup_status()
 	
 Function drawPup_CustomerCarrier()
 	If (Form:C1466.current_item#Null:C1517)
-		$customerCarrier:=ds:C1482.CustomerCarrier.query("carrierID= :1"; Form:C1466.current_item.IDT_carrier).first() || New object:C1471()
+		$customerCarrier:=ds:C1482.CustomerCarrier.query("UUID =:1"; Form:C1466.current_item.UUID_CustomerCarrier).first() || New object:C1471()
 		$carrierName:=$customerCarrier.name
 		If ($carrierName=Null:C1517)
 			$carrierName:=""
@@ -112,7 +117,7 @@ Function pup_carrier()
 		For each ($eCustomerCarrier; Storage:C1525.cache.customerCarriers)
 			APPEND MENU ITEM:C411($menu; $eCustomerCarrier.name; *)
 			SET MENU ITEM PARAMETER:C1004($menu; -1; $eCustomerCarrier.UUID)
-			If ($eCustomerCarrier.carrierID=Form:C1466.current_item.IDT_carrier)
+			If ($eCustomerCarrier.UUID=Form:C1466.current_item.UUID_CustomerCarrier)
 				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
 				If (Is Windows:C1573)
 					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
@@ -125,7 +130,7 @@ Function pup_carrier()
 		Case of 
 			: ($choose#"")
 				$eCustomerCarrier:=ds:C1482.CustomerCarrier.get($choose)
-				Form:C1466.current_item.IDT_carrier:=$eCustomerCarrier.carrierID
+				Form:C1466.current_item.UUID_CustomerCarrier:=$eCustomerCarrier.UUID
 		End case 
 		
 	End if 
@@ -134,14 +139,53 @@ Function pup_carrier()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
+	
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
-	OBJECT GET COORDINATES:C663(*; "subFormAddress"; $g; $h; $d; $b)
-	OBJECT SET COORDINATES:C1248(*; "subFormAddress"; $g; $h; $widthSubform-5; $b)
+	$offset:=4
+	Case of 
+			
+		: (FORM Get current page:C276(*)=1)
+			
+			OBJECT GET COORDINATES:C663(*; "subFormAddress"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "subFormAddress"; $g; $h; $widthSubform-5; $b)
+			
+		: (FORM Get current page:C276(*)=2)
+			
+			OBJECT GET COORDINATES:C663(*; "lb_POs"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			
+			OBJECT SET COORDINATES:C1248(*; "lb_POs"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			
+		: (FORM Get current page:C276(*)=3)
+			
+			OBJECT GET COORDINATES:C663(*; "lb_Jobs"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			
+			OBJECT SET COORDINATES:C1248(*; "lb_Jobs"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			
+		: (FORM Get current page:C276(*)=4)
+			
+			OBJECT GET COORDINATES:C663(*; "lb_Planning"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			
+			OBJECT SET COORDINATES:C1248(*; "lb_Planning"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			
+		: (FORM Get current page:C276(*)=5)
+			
+			OBJECT GET COORDINATES:C663(*; "lb_CFM_Receiving"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			
+			OBJECT SET COORDINATES:C1248(*; "lb_CFM_Receiving"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			
+		: (FORM Get current page:C276(*)=6)
+			
+			OBJECT GET COORDINATES:C663(*; "lb_Invoices"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			
+			OBJECT SET COORDINATES:C1248(*; "lb_Invoices"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			
+	End case 
+	
 	This:C1470.contactDetails()
-	//OBJECT SET VISIBLE(*; "bActionApContact"; Form.sfw.checkIsInModification())
-	//OBJECT SET VISIBLE(*; "bActionStatusContact"; Form.sfw.checkIsInModification())
+	
 	This:C1470.drawPup_CustomerStatus()
 	This:C1470.drawPup_CustomerCarrier()
+	
 	
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="POs ("+String:C10(Form:C1466.lb_POs.length)+")"
@@ -150,6 +194,7 @@ Function redrawAndSetVisible()
 		Form:C1466.sfw.entry.panel.pages[4].label:="CFM_Receiving ("+String:C10(Form:C1466.lb_CFM_Receiving.length)+")"
 		Form:C1466.sfw.entry.panel.pages[5].label:="Invoices ("+String:C10(Form:C1466.lb_Invoices.length)+")"
 	End use 
+	
 	Form:C1466.sfw.drawHTab()
 	
 	
@@ -157,8 +202,51 @@ Function contactDetails()
 	If (Form:C1466.current_item#Null:C1517)
 		Form:C1466.subFormAddress:=New object:C1471()
 		Form:C1466.subFormAddress.address:=Form:C1466.current_item.rebuildAddress()
+		Form:C1466.lb_contact:=Form:C1466.current_item.rebuildContact()
 		Form:C1466.subFormAddress.situation:=Form:C1466.situation
 	End if 
+	
+	
+Function bActionContact()
+	$refMenu:=Create menu:C408
+	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openInWindow")
+	
+	Case of 
+		: (Form:C1466.apContact=1)
+			$type:="AP"
+		: (Form:C1466.statusContact=1)
+			$type:="Status"
+	End case 
+	
+	If (ds:C1482.Contact.query("UUID_Company = :1"; Form:C1466.current_item.UUID).query("title=:1"; $type).first()=Null:C1517)
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	$choice:=Dynamic pop up menu:C1006($refMenu)
+	RELEASE MENU:C978($refMenu)
+	Case of 
+		: ($choice="openInWindow")
+			Form:C1466.sfw.openInANewWindow(ds:C1482.Contact.query("UUID_Company = :1"; Form:C1466.current_item.UUID).query("title=:1"; $type).first(); "customerService"; "contact")
+	End case 
+	This:C1470.LoadContact()
+	
+	
+	
+Function LoadContact()
+	
+	Case of 
+		: (Form:C1466.apContact=1)
+			$type:="AP"
+		: (Form:C1466.statusContact=1)
+			$type:="Status"
+	End case 
+	
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.lb_contact:=New collection:C1472()
+		Form:C1466.lb_contact:=Form:C1466.current_item.rebuildContact()
+	End if 
+	
 	
 	
 Function loadXXX()
@@ -174,9 +262,25 @@ Function loadAllTabs()
 	This:C1470.loadInvoices()
 	
 	
-Function loadContacts()
+Function LoadApContact()
+	
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.lb_contacts:=ds:C1482.Contact.query("UUID_Customer = :1"; Form:C1466.current_item.UUID)
+		Form:C1466.lb_apContact:=New collection:C1472()
+		If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()#Null:C1517)
+			
+			Form:C1466.lb_apContact:=Form:C1466.current_item.rebuidComunications("AP")
+		End if 
+	End if 
+	
+	
+Function LoadStatusContact()
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.lb_statusContact:=New collection:C1472()
+		If (Form:C1466.current_item.contacts.query("title=:1"; "Status").first()#Null:C1517)
+			
+			Form:C1466.lb_statusContact:=Form:C1466.current_item.rebuidComunications("Status")
+			
+		End if 
 	End if 
 	
 	
@@ -292,45 +396,40 @@ Function loadInvoices()
 	End if 
 	
 	
-Function bActionContact()
+Function bActionXXX()
+	//Manages actions: add, or remove, using dynamic menus and modification checks
+	
+Function bActionApContact()
 	$refMenu:=Create menu:C408
-	
-	APPEND MENU ITEM:C411($refMenu; "Add a new Contact"; *)
-	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--addNewContact")
-	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
-		DISABLE MENU ITEM:C150($refMenu; -1)
-	End if 
-	
 	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
-	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--openInWindow")
-	If (Form:C1466.selected_contact=Null:C1517)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openInWindow")
+	If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()=Null:C1517)
 		DISABLE MENU ITEM:C150($refMenu; -1)
 	End if 
 	
 	$choice:=Dynamic pop up menu:C1006($refMenu)
 	RELEASE MENU:C978($refMenu)
 	Case of 
-		: ($choice="--addNewContact")
-			$form:=New object:C1471()
-			
-			$winRef:=Open form window:C675("addNewContactToCustomer"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
-			DIALOG:C40("addNewContactToCustomer"; $form)
-			CLOSE WINDOW:C154
-			
-			If (ok=1)
-				For each ($contact; $form.selectedContacts)
-					$contact.UUID_Customer:=Form:C1466.current_item.UUID
-					
-					$res:=$contact.save()
-				End for each 
-				
-				This:C1470._activate_save_cancel_button()
-				This:C1470.loadContacts()
-			End if 
-			
-		: ($choice="--openInWindow")
-			Form:C1466.sfw.openInANewWindow(Form:C1466.selected_contact; "customerService"; "contact")
+		: ($choice="openInWindow")
+			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.contacts.query("title=:1"; "AP").first(); "customerService"; "contact")
 	End case 
+	This:C1470.LoadApContact()
+	
+Function bActionStatusContact()
+	$refMenu:=Create menu:C408
+	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openInWindow")
+	If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()=Null:C1517)
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	$choice:=Dynamic pop up menu:C1006($refMenu)
+	RELEASE MENU:C978($refMenu)
+	Case of 
+		: ($choice="openInWindow")
+			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.contacts.query("title=:1"; "Status").first(); "customerService"; "contact")
+	End case 
+	This:C1470.LoadStatusContact()
 	
 	
 Function loadDpAddress()

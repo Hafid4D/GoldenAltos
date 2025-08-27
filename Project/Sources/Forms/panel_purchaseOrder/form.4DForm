@@ -270,7 +270,8 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"textAlign": "left",
-					"fontWeight": "bold"
+					"fontWeight": "bold",
+					"visibility": "hidden"
 				},
 				"label_0_9": {
 					"type": "text",
@@ -285,8 +286,8 @@
 				"entryField_resaleNumber": {
 					"type": "input",
 					"top": 62,
-					"left": 363,
-					"width": 140,
+					"left": 364,
+					"width": 162,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.resaleNumber",
 					"focusable": false,
@@ -299,7 +300,8 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"textAlign": "left",
-					"fontWeight": "bold"
+					"fontWeight": "bold",
+					"right": 526
 				},
 				"label_0_23": {
 					"type": "text",
@@ -411,6 +413,28 @@
 					"visibility": "visible",
 					"iconFrames": 4,
 					"focusable": false
+				},
+				"pup_quote": {
+					"type": "button",
+					"top": 31,
+					"left": 363,
+					"width": 163,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_quote.4dm",
+					"events": [
+						"onClick",
+						"onDisplayDetail"
+					],
+					"fontWeight": "bold",
+					"right": 526
 				}
 			}
 		},
@@ -1701,7 +1725,7 @@
 			}
 		}
 	],
-	"geometryStamp": 3319,
+	"geometryStamp": 3152,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

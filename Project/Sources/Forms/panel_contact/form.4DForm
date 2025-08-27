@@ -32,15 +32,12 @@
 	"destination": "detailScreen",
 	"pages": [
 		{
-			"objects": {}
-		},
-		{
 			"objects": {
-				"entryField_firstName": {
+				"entryField_name2": {
 					"type": "input",
 					"top": 10,
-					"left": 125,
-					"width": 300,
+					"left": 108,
+					"width": 250,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.firstName",
 					"focusable": false,
@@ -55,9 +52,9 @@
 				},
 				"entryField_lastName": {
 					"type": "input",
-					"top": 39,
-					"left": 125,
-					"width": 300,
+					"top": 37,
+					"left": 108,
+					"width": 250,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.lastName",
 					"focusable": false,
@@ -72,9 +69,9 @@
 				},
 				"entryField_title": {
 					"type": "input",
-					"top": 10,
-					"left": 698,
-					"width": 300,
+					"top": 64,
+					"left": 108,
+					"width": 250,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.title",
 					"focusable": false,
@@ -91,29 +88,167 @@
 				"label_0_7": {
 					"type": "text",
 					"top": 10,
-					"left": 11,
-					"width": 111,
-					"height": 16,
-					"stroke": "#808080",
-					"text": "Firstname"
-				},
-				"label_0_8": {
-					"type": "text",
-					"top": 39,
-					"left": 11,
+					"left": 8,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Lastname"
+					"text": "Firstname",
+					"textAlign": "right"
+				},
+				"label_0_8": {
+					"type": "text",
+					"top": 37,
+					"left": 8,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Lastname",
+					"textAlign": "right"
 				},
 				"label_0_9": {
 					"type": "text",
-					"top": 10,
-					"left": 581,
-					"width": 111,
-					"height": 16,
+					"top": 64,
+					"left": 8,
+					"width": 90,
+					"height": 17,
 					"stroke": "#808080",
-					"text": "title"
+					"text": "title",
+					"textAlign": "right"
+				},
+				"label_customer": {
+					"type": "text",
+					"top": 37,
+					"left": 368,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Customer Name",
+					"textAlign": "right"
+				},
+				"pup_Customer": {
+					"type": "button",
+					"top": 34,
+					"left": 468,
+					"width": 300,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_Customer.4dm",
+					"events": [
+						"onClick"
+					],
+					"textAlign": "left"
+				},
+				"label_0_2": {
+					"type": "text",
+					"top": 10,
+					"left": 368,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Company Type Name",
+					"textAlign": "right"
+				},
+				"pup_companyType": {
+					"type": "button",
+					"top": 7,
+					"left": 468,
+					"width": 300,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_companyType.4dm",
+					"events": [
+						"onClick"
+					],
+					"textAlign": "left"
+				},
+				"label_supplier": {
+					"type": "text",
+					"top": 37,
+					"left": 368,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Supplier Name",
+					"textAlign": "right"
+				},
+				"pup_supplier": {
+					"type": "button",
+					"top": 34,
+					"left": 468,
+					"width": 300,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_supplier.4dm",
+					"events": [
+						"onClick"
+					],
+					"textAlign": "left"
+				},
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 113,
+					"left": 0,
+					"width": 5000,
+					"height": 704,
+					"fill": "#B1CFDE",
+					"strokeWidth": 2,
+					"stroke": "#FFFFFF"
+				}
+			}
+		},
+		{
+			"objects": {
+				"header_bkgd3": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 455,
+					"width": 2000,
+					"height": 1500,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"right": 2455
+				},
+				"main_bkgd1": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 0,
+					"width": 453,
+					"height": 1500,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent"
+				},
+				"subFormAddress": {
+					"type": "subform",
+					"left": 648,
+					"top": 141,
+					"width": 805,
+					"height": 305,
+					"detailForm": "sfw_subpanel_addressSingle",
+					"borderStyle": "none",
+					"dataSource": "Form:C1466.subFormAddress"
 				},
 				"label_0_1": {
 					"type": "text",
@@ -127,8 +262,8 @@
 				"header_bkgd2": {
 					"type": "rectangle",
 					"top": 114,
-					"left": 648,
-					"width": 805,
+					"left": 455,
+					"width": 2000,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
@@ -137,7 +272,7 @@
 				"lbl_address": {
 					"type": "text",
 					"top": 121,
-					"left": 659,
+					"left": 466,
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
@@ -161,6 +296,7 @@
 					"style": "bevel",
 					"method": "ObjectMethods/pup_Customer.4dm",
 					"events": [
+						"onLoad",
 						"onClick"
 					],
 					"textAlign": "left"
@@ -169,8 +305,8 @@
 					"type": "subform",
 					"left": 0,
 					"top": 114,
-					"width": 640,
-					"height": 330,
+					"width": 448,
+					"height": 332,
 					"detailForm": "_ga_subpanel_communication",
 					"dataSource": "Form:C1466.subFormCommunication",
 					"method": "",
@@ -193,7 +329,7 @@
 			"objects": {}
 		}
 	],
-	"geometryStamp": 425,
+	"geometryStamp": 324,
 	"method": "method.4dm",
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"editor": {

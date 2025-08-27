@@ -5,31 +5,38 @@ Function get fullName()->$fullName : Text
 	$fullName:=This:C1470.firstName+" "+This:C1470.lastName
 	
 	
-local Function rebuildAddress()
-	Form:C1466.subFormAddress:=New object:C1471
-	Form:C1466.subFormAddress.situation:=Form:C1466.situation
-	
-	$mainAddress:=Form:C1466.current_item.contactDetails.addresses.query("type = :1"; "main").first()
-	Form:C1466.subFormAddress.address:=$mainAddress
-	Form:C1466.subFormAddress:=Form:C1466.subFormAddress
-	
-	//If (Form.current_item#Null)
-	
-	//If (Form.current_item.title#"Status") && (Form.current_item.title#"AP")
-	//If (OB Is defined(Form.current_item.contactDetails; "addresses"))
-	//$address:=Form.current_item.contactDetails.addresses.query("type = :1"; "main").first()
-	//End if 
-	//End if 
-	//Form.subFormAddress.address:=$address
-	
-	//End if 
-	//Form.subFormAddress:=Form.subFormAddress
+Function get companyType()->$companyType : Text
+	$companyType:=ds:C1482.Supplier.query("UUID = :1"; This:C1470.UUID_Company).first()#Null:C1517 ? "Supplier" : "Customer"
 	
 	
-local Function rebuidComunications->$contacts : Collection
+Function get companyName()->$companyName : Text
+	var $supplier : cs:C1710.SupplierEntity
+	$supplier:=ds:C1482.Supplier.query("UUID = :1"; This:C1470.UUID_Company).first()
+	If ($supplier#Null:C1517)
+		$companyName:=$supplier.name
+	Else 
+		var $customer : cs:C1710.CustomerEntity
+		$customer:=ds:C1482.Customer.query("UUID = :1"; This:C1470.UUID_Company).first()
+		If ($customer#Null:C1517)
+			$companyName:=$customer.name
+		End if 
+	End if 
 	
-	If (OB Is defined:C1231(Form:C1466.current_item.contactDetails; "communications"))
-		$communications:=Form:C1466.current_item.contactDetails.communications
+	
+local Function rebuildAddress($type : Text)->$address : Object
+	$type:=String:C10($type)="" ? "main" : $type
+	If (This:C1470.contactDetails#Null:C1517) && (This:C1470.contactDetails.addresses#Null:C1517)
+		$addresses:=This:C1470.contactDetails.addresses.query("type = :1"; $type)
+		If ($addresses.length#0)
+			$address:=$addresses[0]
+		End if 
+	End if 
+	
+	
+local Function rebuidComunications->$communications : Collection
+	
+	If (This:C1470.contactDetails#Null:C1517) && (This:C1470.contactDetails.communications#Null:C1517)
+		$communications:=This:C1470.contactDetails.communications
 	Else 
 		$communications:=New collection:C1472()
 	End if 
@@ -120,15 +127,6 @@ local Function _initCommunication()
 	If (This:C1470.contactDetails.communications=Null:C1517)
 		This:C1470.contactDetails.communications:=New collection:C1472
 	End if 
-	//If (This.contactDetails.communications.length=0)
-	//$comm:=New object()
-	//$comm.phone:=""
-	//$comm.fax:=""
-	//$comm.mobile:=""
-	//$comm.email:=""
-	//$comm.email_cc:=""
-	//This.contactDetails.communications.push($comm)
-	//End if 
 	
 local Function _initAddress()
 	// This callback is called when the item is selected in the itemList

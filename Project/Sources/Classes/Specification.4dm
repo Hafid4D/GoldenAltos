@@ -4,28 +4,27 @@ Class extends DataClass
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	//Mark: entry : Specification
-	$entry:=cs:C1710.sfw_definitionEntry.new("specification"; ["qualityAssistance"]; "Specs Control")
+	$entry:=cs:C1710.sfw_definitionEntry.new("specification"; ["qualityAssurance"]; "Specs Control")
 	$entry.setDataclass("Specification")
 	$entry.setSearchboxField("spec")
 	$entry.setDisplayOrder(-600)
 	$entry.setIcon("image/entry/spec-control-white-50x50.png")
 	
-	$entry.setSearchboxField("spec"; "placeholder:Spec#")
+	$entry.setSearchboxField("spec")
+	
+	$entry.setPanel("panel_specification")
+	$entry.setPanelPage(1; ""; "Main")
+	$entry.setPanelPage(2; ""; "Documents")
 	
 	$entry.setLBItemsColumn("spec"; "Spec#"; "width:100")
 	$entry.setLBItemsColumn("revision"; "Revision"; "width:50")
 	$entry.setLBItemsColumn("title"; "Title")
 	$entry.setLBItemsOrderBy("spec")
-	$entry.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:specification"; "unitN:specifications")
+	//$entry.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:specification"; "unitN:specifications")
 	
-	$entry.setPanel("panel_specification")
-	
-	$entry.setPanelPage(1; ""; "Main")
-	$entry.setPanelPage(2; ""; "Documents")
-	
-	
-	$entry.setItemListAction("Print Spec"; "_ga_printSpec")
-	
+	$entry.setItemListAction("Export The List To Excel"; "_ga_exportSpecToExcel")
+	$entry.setItemListAction("-"; "-")
+	$entry.setItemListAction("Print The List"; "_ga_printSpecList")
 	
 	
 	
@@ -33,14 +32,14 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	
 	$filter:=cs:C1710.sfw_definitionFilter.new("filterSpecDocumentType")
-	$filter.setDefaultTitle("All Type")
+	$filter.setDefaultTitle("All Types")
 	$filter.setFilterByIDInTable("SpecCategory"; "categoryID"; "categoryID")
 	$filter.setDynamicTitle("name"; "## document  type")
 	$entry.addFilter($filter)
 	
 	$filter:=cs:C1710.sfw_definitionFilter.new("filterSpecDocumentType")
 	$filter.setDefaultTitle("All departments")
-	$filter.setFilterByIDInTable("SpecControllingDept"; "departmentID"; "controllingDeptID")
+	$filter.setFilterByIDInTable("SpecControllingDept"; "departmentID"; "departmentID")
 	$filter.setDynamicTitle("name"; "## controlling department")
 	$entry.addFilter($filter)
 	
@@ -48,16 +47,6 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	// MARK: - Views Definition
 	
-	
-	// MARK: All Addendums
-	$view:=cs:C1710.sfw_definitionView.new("allAddendums"; "All addendums")
-	$view.setLBItemsColumn("spec"; "Spec#"; "width:100")
-	$view.setLBItemsColumn("revision"; "Revision"; "width:50")
-	$view.setLBItemsColumn("title"; "Title")
-	$view.setLBItemsOrderBy("spec")
-	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:specification"; "unitN:specifications")
-	$view.setSubset("allAddendums")
-	$entry.setView($view)
 	
 	// MARK: Docs late in reviewing
 	$view:=cs:C1710.sfw_definitionView.new("docsLateInReviewing"; "Control Docs late in Reviewing")
@@ -69,8 +58,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setSubset("docsLateInReviewing")
 	$entry.setView($view)
 	
-	
-	// MARK: Docs late in reviewing
+	// MARK: ocs requiring review in 7 days
 	$view:=cs:C1710.sfw_definitionView.new("docsRequiringReviewSoon"; "Control Docs requiring review in 7 days")
 	$view.setLBItemsColumn("spec"; "Spec#"; "width:100")
 	$view.setLBItemsColumn("revision"; "Revision"; "width:50")
@@ -80,10 +68,31 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setSubset("docsRequiringReviewSoon")
 	$entry.setView($view)
 	
+	// MARK: Specs
+	$view:=cs:C1710.sfw_definitionView.new("OnlySpecs"; "Specs")
+	$view.setLBItemsColumn("spec"; "Spec#"; "width:100")
+	$view.setLBItemsColumn("revision"; "Revision"; "width:50")
+	$view.setLBItemsColumn("title"; "Title")
+	$view.setLBItemsOrderBy("spec")
+	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:specification"; "unitN:specifications")
+	$view.setSubset("OnlySpecs")
+	$entry.setView($view)
+	
+	// MARK: Forms
+	$view:=cs:C1710.sfw_definitionView.new("OnlyForms"; "Forms")
+	$view.setLBItemsColumn("spec"; "Spec#"; "width:100")
+	$view.setLBItemsColumn("revision"; "Revision"; "width:50")
+	$view.setLBItemsColumn("title"; "Title")
+	$view.setLBItemsOrderBy("spec")
+	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:specification"; "unitN:specifications")
+	$view.setSubset("OnlyForms")
+	$entry.setView($view)
+	
+	
+	
 	
 	
 	// MARK: - Query Functions
-	
 	
 	
 local Function cacheLoad()
@@ -134,17 +143,20 @@ local Function setDateInterval($pushUp; $title)
 	End use 
 	
 	
-Function allAddendums()->$specifications : cs:C1710.SpecificationSelection
-	$specifications:=ds:C1482.Specification.query("addendum =:1"; True:C214)
-	
-	
 Function docsLateInReviewing()->$specifications : cs:C1710.SpecificationSelection
-	$specifications:=ds:C1482.Specification.query("suppress =:1 & reviewIntervalInDays >0 & eval((This.reviewDate+This.reviewIntervalInDays)<Current date(*))"; False:C215)
+	$specifications:=ds:C1482.Specification.query("suppress =:1 & reviewIntervalInDays >0 & eval(revisionDate<Current date(*))"; False:C215)
 	
 	
 Function docsRequiringReviewSoon()->$specifications : cs:C1710.SpecificationSelection
-	$specifications:=ds:C1482.Specification.query("suppress =:1 & reviewIntervalInDays >0 & eval((This.reviewDate+This.reviewIntervalInDays)<(Current date(*)+7))"; False:C215)
+	$specifications:=ds:C1482.Specification.query("suppress =:1 & reviewIntervalInDays >0 & eval(reviewDate<(Current date(*)+7))"; False:C215)
 	
+	
+Function OnlySpecs()->$specifications : cs:C1710.SpecificationSelection
+	$specifications:=ds:C1482.Specification.query("suppress =:1 & isForm=:2"; False:C215; False:C215)
+	
+	
+Function OnlyForms()->$specifications : cs:C1710.SpecificationSelection
+	$specifications:=ds:C1482.Specification.query("suppress =:1 & isForm=:2"; False:C215; True:C214)
 	
 	
 	

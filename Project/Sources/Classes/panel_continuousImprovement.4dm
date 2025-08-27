@@ -2,6 +2,7 @@ singleton Class constructor
 	//It's a singleton class
 	
 Function _activate_save_cancel_button()
+	
 	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
 	
 Function formMethod()
@@ -24,17 +25,9 @@ Function formMethod()
 	End if 
 	
 	
-Function drawPup_XXX()
-	//This function updates the dropdown by displaying the name
-	Form:C1466.sfw.drawButtonPup("pup_xxx"; $xxxName; "xxxx.png"; (Form:C1466.current_item.xxxx=Null:C1517))
-	
-	
-Function pup_XXX()
-	//Create pop up menu
-	
-	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
+	
 	This:C1470.drawPup_priority()
 	This:C1470.drawPup_origin()
 	This:C1470.drawPup_category()
@@ -43,92 +36,103 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_yesNoQuestion()
 	This:C1470.drawPup_procedureType()
 	
-	If (OBJECT Get title:C1068(*; "pup_procedure")="QCAR#@")
-		OBJECT SET ENTERABLE:C238(*; "entryField_action"; False:C215)
-	Else 
-		OBJECT SET ENTERABLE:C238(*; "entryField_action"; True:C214)
-	End if 
-	
-	OBJECT SET ENTERABLE:C238(*; "entryField_interestedParty"; False:C215)
-	OBJECT SET ENTERABLE:C238(*; "entryField_responsible"; False:C215)
-	OBJECT SET VISIBLE:C603(*; "@Edit"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET TITLE:C194(*; "otherDisposition"; Form:C1466.current_item.moreData.disposition)
 	OBJECT SET VISIBLE:C603(*; "bActionRefresh"; Form:C1466.sfw.checkIsInModification())
-	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
-	OBJECT SET VISIBLE:C603(*; "Rectangl@"; Not:C34(Form:C1466.sfw.checkIsInModification()))
-	Form:C1466.sfw.drawHTab()
+	OBJECT SET VISIBLE:C603(*; "bResponsibleEdit"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "bInterestedPartyEdit"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "PopupDat@"; Form:C1466.sfw.checkIsInModification())
 	
+	OBJECT SET ENTERABLE:C238(*; "entryField@"; Form:C1466.sfw.checkIsInModification())
+	If (OBJECT Get title:C1068(*; "pup_procedure")="QCAR#@")
+		OBJECT SET ENTERABLE:C238(*; "entryField_action"; Not:C34(Form:C1466.sfw.checkIsInModification()))
+	Else 
+		OBJECT SET ENTERABLE:C238(*; "entryField_action"; Form:C1466.sfw.checkIsInModification())
+	End if 
 	
 	
 Function drawPup_priority()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.current_item.drowPup("CIPriority"; "priorityID"; "priority"; "pup_priority")
+		Form:C1466.current_item.drowPup("CIPriority"; "UUID"; "UUID_CIPriority"; "pup_priority")
 	End if 
 	
 	
 Function pup_priority()
 	//Create pop up menu
-	Form:C1466.current_item.pup("ImprovementPriorities"; "CIPriority"; "priorityID"; "priority")
+	Form:C1466.current_item.pup("ImprovementPriorities"; "CIPriority"; "UUID"; "UUID_CIPriority")
 	This:C1470.drawPup_priority()
 	
 	
 Function drawPup_origin()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.current_item.drowPup("CIOrigin"; "originID"; "origin"; "pup_origin")
+		Form:C1466.current_item.drowPup("CIOrigin"; "UUID"; "UUID_CIOrigin"; "pup_origin")
 	End if 
 	
 	
 Function pup_origin()
 	//Create pop up menu
-	Form:C1466.current_item.pup("ImprovementOrigins"; "CIOrigin"; "originID"; "origin")
+	Form:C1466.current_item.pup("ImprovementOrigins"; "CIOrigin"; "UUID"; "UUID_CIOrigin")
 	This:C1470.drawPup_origin()
 	
 	
 Function drawPup_category()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.current_item.drowPup("CICategory"; "categoryID"; "category"; "pup_category")
+		Form:C1466.current_item.drowPup("CICategory"; "UUID"; "UUID_CICategory"; "pup_category")
 	End if 
 	
 	
 Function pup_category()
 	//Create pop up menu
-	Form:C1466.current_item.pup("ImprovementCategories"; "CICategory"; "categoryID"; "category")
+	Form:C1466.current_item.pup("ImprovementCategories"; "CICategory"; "UUID"; "UUID_CICategory")
 	This:C1470.drawPup_category()
 	
 	
 Function drawPup_disposition()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.current_item.drowPup("CIDisposition"; "dispositionID"; "disposition"; "pup_disposition")
+		Form:C1466.current_item.drowPup("CIDisposition"; "UUID"; "UUID_CIDisposition"; "pup_disposition")
 	End if 
 	
 	
 Function pup_disposition()
 	//Create pop up menu
-	Form:C1466.current_item.pup("ImprovementDispositions"; "CIDisposition"; "dispositionID"; "disposition")
+	Form:C1466.current_item.pup("ImprovementDispositions"; "CIDisposition"; "UUID"; "UUID_CIDisposition")
+	
+	If (Form:C1466.current_item.disposition.name="Other")
+		$answer:=cs:C1710.sfw_dialog.me.request("Enter Disposition value"; Form:C1466.current_item.moreData.disposition; "Save"; "Cancel"; "trimSpace")
+		If ($answer.ok) & ($answer.answer#"")
+			Form:C1466.current_item.moreData.disposition:=$answer.answer
+			
+		End if 
+	Else 
+		Form:C1466.current_item.moreData.disposition:=""
+		
+	End if 
+	cs:C1710.panel_continuousImprovement.me._activate_save_cancel_button()
+	
 	This:C1470.drawPup_disposition()
 	
 	
 	
 Function drawPup_humanFactor()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.current_item.drowPup("CIHumanFactor"; "factorID"; "humanFactor"; "pup_humanFactor")
+		Form:C1466.current_item.drowPup("CIHumanFactor"; "UUID"; "UUID_CIHumanFactor"; "pup_humanFactor")
 	End if 
 	
 	
 Function pup_humanFactor()
 	//Create pop up menu
-	Form:C1466.current_item.pup("ImprovementFactors"; "CIHumanFactor"; "factorID"; "humanFactor")
+	Form:C1466.current_item.pup("ImprovementFactors"; "CIHumanFactor"; "UUID"; "UUID_CIHumanFactor")
 	This:C1470.drawPup_humanFactor()
 	
 	
 Function drawPup_yesNoQuestion()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.current_item.drowPup("YesNoQuestion"; "responseID"; "IsAcceptable"; "pup_yesNoQuestion")
+		Form:C1466.current_item.drowPup("YesNoQuestion"; "UUID"; "UUID_YesNoQuestion"; "pup_yesNoQuestion")
 	End if 
 	
 	
 Function pup_yesNoQuestion()
 	//Create pop up menu
-	Form:C1466.current_item.pup("ImprovementResponses"; "YesNoQuestion"; "responseID"; "IsAcceptable")
+	Form:C1466.current_item.pup("ImprovementResponses"; "YesNoQuestion"; "UUID"; "UUID_YesNoQuestion")
 	This:C1470.drawPup_yesNoQuestion()
 	
 	
@@ -160,8 +164,8 @@ Function pup_procedureType()
 		
 		$form:=New object:C1471(\
 			"colName"; "qcarNumberRef"; \
-			"lb_items"; ds:C1482.Qcar.all().toCollection().map(Formula:C1597(_ga_getQRef)); \
-			"allData"; ds:C1482.Qcar.all().toCollection().map(Formula:C1597(_ga_getQRef)); \
+			"lb_items"; ds:C1482.Qcar.all().toCollection().map(Formula:C1597(_ga_getQcarRef)); \
+			"allData"; ds:C1482.Qcar.all().toCollection().map(Formula:C1597(_ga_getQcarRef)); \
 			"dataclass"; "Qcar"\
 			)
 		
@@ -171,7 +175,7 @@ Function pup_procedureType()
 		
 		If (ok=1)
 			Form:C1466.current_item.action:=$form.item.qcarNumberRef
-			cs:C1710.panel_continuousImprovement.me._activate_save_cancel_button()
+			
 		End if 
 		
 	End if 
@@ -183,7 +187,6 @@ Function refreshAction()
 	If (Form:C1466.sfw.checkIsInModification())
 		OBJECT SET TITLE:C194(*; "pup_procedure"; "")
 		Form:C1466.current_item.action:=""
-		cs:C1710.panel_continuousImprovement.me._activate_save_cancel_button()
 		
 	End if 
 	
@@ -284,7 +287,7 @@ Function responsibleEdit()
 			
 			
 			Form:C1466.current_item.responsible:=$responsables.join(",")
-			cs:C1710.panel_continuousImprovement.me._activate_save_cancel_button()
+			
 		End if 
 		
 	End if 
@@ -293,7 +296,7 @@ Function responsibleEdit()
 Function interestedPartyEdit()
 	
 	$interestedParties:=New collection:C1472()
-	$allInterestedParties:=New collection:C1472("Company"; "Customer"; "Customers"; "DLA"; "Employees"; "Management"; "Operator"; "Organization"; "Supplier"; "Suppliers"; "Top Management")
+	$allInterestedParties:=New collection:C1472("Company"; "Customer"; "Customers"; "DLA"; "Employees"; "Management"; "Operator"; "Organization"; "Supplier"; "Suppliers"; "Top Management")  //TODO :Need clarification
 	
 	$currentInterestedParties:=Split string:C1554(Form:C1466.current_item.interestedParty; ",")
 	

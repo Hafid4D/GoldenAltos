@@ -194,10 +194,10 @@ Function _visions_definition()
 	$vision.setIcon("image/vision/production-24x24.png")
 	This:C1470._push_vision($vision)
 	
-	$vision:=cs:C1710.sfw_definitionVision.new("qualityAssistance"; "Quality assistance")
+	$vision:=cs:C1710.sfw_definitionVision.new("qualityAssurance"; "Quality Assurance")
 	$vision.setToolbarBackgroundColor("DarkCyan")
 	$vision.setFocusRingColor("darkred")
-	$vision.setIcon("image/vision/quality-assistance-24x24.png")
+	$vision.setIcon("image/vision/quality-assurance-24x24.png")
 	//$vision.setAllowedProfiles("qa")
 	This:C1470._push_vision($vision)
 	

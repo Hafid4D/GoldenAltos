@@ -3,21 +3,21 @@ Class extends DataClass
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	//Mark: entry : Contact
-	$entry:=cs:C1710.sfw_definitionEntry.new("repairLog"; ["qualityAssistance"]; "Repair Logs")
+	$entry:=cs:C1710.sfw_definitionEntry.new("repairLog"; ["qualityAssurance"]; "Repair Logs")
 	$entry.setDataclass("RepairLog")
-	$entry.setSearchboxField("systemID")
+	
 	$entry.setDisplayOrder(100)
 	$entry.setIcon("image/entry/repairLog-50x50.png")
 	
-	$entry.setSearchboxField("systemID"; "placeholder:equipment ID")
+	$entry.setSearchboxField("equipment.assignedID"; "placeholder:equipmentID")
 	
 	$entry.setPanel("panel_repairLog")
 	$entry.setPanelPage(1; ""; "Main")
 	
-	$entry.setLBItemsColumn("systemID"; "Equipment ID"; "width:200")
+	$entry.setLBItemsColumn("equipment.assignedID"; "Equipment ID"; "width:200")
 	$entry.setLBItemsColumn("reportID"; "Report ID"; "width:150")
 	$entry.setLBItemsColumn("fixedDate#!00-00-00-!"; "Fixed"; "type:boolean"; "orderByFormula:Bool(this.fixedDate#!00-00-00-!)"; "width:100")
-	$entry.setLBItemsOrderBy("systemID")
+	$entry.setLBItemsOrderBy("equipment.assignedID")
 	$entry.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:repairLog"; "unitN:repairLogs")
 	
 	$entry.enableTransaction()
@@ -30,20 +30,31 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	// MARK: -Filters
 	
+	
 	$filter:=cs:C1710.sfw_definitionFilter.new("filterFixOperator")
-	$filter.setDefaultTitle("All Report Operators")
-	$filter.setFilterByLinkedEntity("Employee"; "fixedBy"; ""; "UUID")
+	$filter.setDefaultTitle("All Fix Operators")
+	$filter.setFilterByLinkedEntity("Staff"; "operators.fixedBy"; "uuidStaff"; "")
 	$filter.setDynamicTitle("code"; "## Fixed by")
 	$filter.setOrderForItems("code")
 	$filter.setAttributeLabelForItem("code")
 	$entry.addFilter($filter)
 	
+	
 	$filter:=cs:C1710.sfw_definitionFilter.new("filterReportOperator")
-	$filter.setDefaultTitle("All Fix Operators")
-	$filter.setFilterByLinkedEntity("Employee"; "reportedBy"; ""; "UUID")
+	$filter.setDefaultTitle("All Report Operators")
+	$filter.setFilterByLinkedEntity("Staff"; "operators.reportedBy"; "uuidStaff"; "")
 	$filter.setDynamicTitle("code"; "## Reported by")
 	$filter.setOrderForItems("code")
 	$filter.setAttributeLabelForItem("code")
+	$entry.addFilter($filter)
+	
+	
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterReportOperator")
+	$filter.setDefaultTitle("All Equipments")
+	$filter.setFilterByLinkedEntity("Equipment"; "UUID_Equipment"; "uuidEquipment"; "")
+	$filter.setDynamicTitle("assignedID"; "## equipments")
+	$filter.setOrderForItems("assignedID")
+	$filter.setAttributeLabelForItem("assignedID")
 	$entry.addFilter($filter)
 	
 	
@@ -52,60 +63,33 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	// MARK: Cuurent problem - Not yet solved problems
 	$view:=cs:C1710.sfw_definitionView.new("currentProblems"; "Open problems")
-	$view.setLBItemsColumn("systemID"; "Equipment ID"; "width:200")
+	$view.setLBItemsColumn("equipment.assignedID"; "Equipment ID"; "width:200")
 	$view.setLBItemsColumn("reportID"; "Report ID"; "width:150")
 	$view.setLBItemsColumn("fixedDate#!00-00-00-!"; "Fixed"; "type:boolean"; "orderByFormula:Bool(this.fixedDate#!00-00-00-!)"; "width:100")
-	$view.setLBItemsOrderBy("systemID")
+	$view.setLBItemsOrderBy("equipment.assignedID")
 	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:repairLog"; "unitN:repairLogs")
 	$view.setSubset("currentProblems")
 	$entry.setView($view)
 	
 	// MARK: Problems by interval
 	$view:=cs:C1710.sfw_definitionView.new("problemsByInterval"; "Problems by interval")
-	$view.setLBItemsColumn("systemID"; "Equipment ID"; "width:200")
+	$view.setLBItemsColumn("equipment.assignedID"; "Equipment ID"; "width:200")
 	$view.setLBItemsColumn("reportID"; "Report ID"; "width:150")
 	$view.setLBItemsColumn("fixedDate#!00-00-00-!"; "Fixed"; "type:boolean"; "orderByFormula:Bool(this.fixedDate#!00-00-00-!)"; "width:100")
-	$view.setLBItemsOrderBy("systemID")
+	$view.setLBItemsOrderBy("equipment.assignedID")
 	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:repairLog"; "unitN:repairLogs")
 	$view.setSubset("problemsByInterval")
 	$entry.setView($view)
 	
 	// MARK: Due calibration List
 	$view:=cs:C1710.sfw_definitionView.new("repairsByInterval"; "Repairs by interval")
-	$view.setLBItemsColumn("systemID"; "Equipment ID"; "width:200")
+	$view.setLBItemsColumn("equipment.assignedID"; "Equipment ID"; "width:200")
 	$view.setLBItemsColumn("reportID"; "Report ID"; "width:150")
 	$view.setLBItemsColumn("fixedDate#!00-00-00-!"; "Fixed"; "type:boolean"; "orderByFormula:Bool(this.fixedDate#!00-00-00-!)"; "width:100")
-	$view.setLBItemsOrderBy("systemID")
+	$view.setLBItemsOrderBy("equipment.assignedID")
 	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:repairLog"; "unitN:repairLogs")
 	$view.setSubset("repairsByInterval")
 	$entry.setView($view)
-	
-	//// MARK: Cuurent problem - All fixes
-	//$view:=cs.sfw_definitionView.new("closedProblems"; "Fixed problems")
-	//$view.setLBItemsColumn("systemID"; "system ID")
-	//$view.setLBItemsColumn("reportID"; "report ID"; "width:200")
-	//$view.setLBItemsOrderBy("systemID")
-	//$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:repairLog"; "unitN:repairLogs")
-	//$view.setSubset("closedProblems")
-	//$entry.setView($view)
-	
-	//// MARK: Cuurent problem - Approved repairs
-	//$view:=cs.sfw_definitionView.new("approvedRepairs"; "Approved repairs")
-	//$view.setLBItemsColumn("systemID"; "system ID")
-	//$view.setLBItemsColumn("reportID"; "report ID"; "width:200")
-	//$view.setLBItemsOrderBy("systemID")
-	//$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:repairLog"; "unitN:repairLogs")
-	//$view.setSubset("approvedRepairs")
-	//$entry.setView($view)
-	
-	//// MARK: Cuurent problem - Not Yet Approved repairs
-	//$view:=cs.sfw_definitionView.new("notYetApprovedRepairs"; "Not yet approved repairs")
-	//$view.setLBItemsColumn("systemID"; "system ID")
-	//$view.setLBItemsColumn("reportID"; "report ID"; "width:200")
-	//$view.setLBItemsOrderBy("systemID")
-	//$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:repairLog"; "unitN:repairLogs")
-	//$view.setSubset("notYetApprovedRepairs")
-	//$entry.setView($view)
 	
 	
 	
@@ -172,18 +156,6 @@ local Function repairsByInterval()->$selection : cs:C1710.RepairLogSelection
 	$title:="Set date interval"
 	This:C1470.setDateInterval(False:C215; $title)
 	$selection:=ds:C1482.RepairLog.query("fixedDate>=:1 & fixedDate<=:2"; Storage:C1525.cache.startDate; Storage:C1525.cache.endDate)
-	
-	
-	//local Function closedProblems()->$selection : cs.RepairLogSelection
-	//$selection:=ds.RepairLog.query("fixedDate#:1"; !00-00-00!)
-	
-	
-	//local Function approvedRepairs->$selection : cs.RepairLogSelection
-	//$selection:=ds.RepairLog.query("isApproved=:1"; True)
-	
-	
-	//local Function notYetApprovedRepairs->$selection : cs.RepairLogSelection
-	//$selection:=ds.RepairLog.query("isApproved=:1"; False)
 	
 	
 	

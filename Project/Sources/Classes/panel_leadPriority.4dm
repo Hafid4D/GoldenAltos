@@ -10,6 +10,9 @@ Function formMethod()
 		Case of 
 			: (FORM Get current page:C276(*)=1)
 				// add load functions
+				If (Form:C1466.current_item.moreData=Null:C1517)
+					Form:C1466.current_item.moreData:=New object:C1471
+				End if 
 		End case 
 	End if 
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())  //It's time to resize the object or set visible

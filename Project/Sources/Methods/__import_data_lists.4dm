@@ -4,33 +4,33 @@
 var $colors : Collection:=New collection:C1472("#3CB371"; "#FFFF00"; "#FF7F50"; "#1E90FF"; "#FF0000")
 
 
-//---->[SpecControllingDept]
-var $eControllingDept : cs:C1710.SpecControllingDeptEntity
+//---->[ControllingDepartment]
+var $eControllingDept : cs:C1710.ControllingDepartmentEntity
 var $SpecControllingDepts : Collection:=New collection:C1472("All"; "Accounting"; "Assembly"; "Beanch"; \
 "Business Development"; "Customer"; "Electrical Test"; "EMS"; "ESD-LU"; "Facilities"; "FSO"; \
 "Hardware"; "HR"; "IT"; "Planning"; "Product Assurance"; "Program Management"; "Purchasing"; "QA"; \
 "Reliability"; "Test"; "Vendor")
-TRUNCATE TABLE:C1051([SpecControllingDept:45])
+TRUNCATE TABLE:C1051([ControllingDepartment:45])
 For ($i; 0; $SpecControllingDepts.length-1)
-	$eControllingDept:=ds:C1482.SpecControllingDept.new()
-	$eControllingDept.departmentID:=$i
+	$eControllingDept:=ds:C1482.ControllingDepartment.new()
+	$eControllingDept.levelID:=$i
 	$eControllingDept.name:=$SpecControllingDepts[$i]
 	$eControllingDept.save()
 End for 
 
-//---->[SpecCategory]
-var $eCategory : cs:C1710.SpecCategoryEntity
-var $specificationCategories : Collection:=New collection:C1472("All"; "Customer Service"; "Document Control"; \
+////---->[SpecCategory]
+//var $eCategory : cs.SpecCategoryEntity
+//var $specificationCategories : Collection:=New collection("All"; "Customer Service"; "Document Control"; \
 "Golden Altos Forms (including Logs, Checklists)"; "Maintenance Engineering"; \
 "Military Standard"; "Process_Production Procedures"; "Quality Assurance"; "Quality Control"; \
 "Quality Manual"; "System Procedure"; "Training")
-TRUNCATE TABLE:C1051([SpecCategory:44])
-For ($i; 0; $specificationCategories.length-1)
-	$eCategory:=ds:C1482.SpecCategory.new()
-	$eCategory.categoryID:=$i
-	$eCategory.name:=$specificationCategories[$i]
-	$eCategory.save()
-End for 
+//TRUNCATE TABLE([SpecCategory])
+//For ($i; 0; $specificationCategories.length-1)
+//$eCategory:=ds.SpecCategory.new()
+//$eCategory.categoryID:=$i
+//$eCategory.name:=$specificationCategories[$i]
+//$eCategory.save()
+//End for 
 
 
 //----> [EquipementLocation]
@@ -42,8 +42,9 @@ var $equipmentsLocations : Collection:=New collection:C1472("4TH OPTICAL"; "Burn
 TRUNCATE TABLE:C1051([EquipmentLocation:19])
 For ($i; 0; $equipmentsLocations.length-1)
 	$eEquipmentLocation:=ds:C1482.EquipmentLocation.new()
-	$eEquipmentLocation.locationID:=$i+1
+	$eEquipmentLocation.levelID:=$i+1
 	$eEquipmentLocation.name:=$equipmentsLocations[$i]
+	$eEquipmentLocation.color:="#FFFFFF"
 	$eEquipmentLocation.save()
 End for 
 
@@ -54,8 +55,9 @@ var $divisions : Collection:=New collection:C1472("GAC")
 TRUNCATE TABLE:C1051([Division:20])
 For ($i; 0; $divisions.length-1)
 	$eDivision:=ds:C1482.Division.new()
-	$eDivision.divisionID:=$i+1
+	$eDivision.levelID:=$i+1
 	$eDivision.name:=$divisions[$i]
+	$eDivision.color:="#FFFFFF"
 	$eDivision.save()
 End for 
 
@@ -69,8 +71,9 @@ var $cipCategories : Collection:=New collection:C1472("Internal Risk Mitigation"
 "SCAR"; "RMA-KPI"; "RMA-NonKPI"; "NCMR Only"; "Corrective Action and Training"; "Repair"; "Other")
 For ($i; 0; $cipCategories.length-1)
 	$eCipCategory:=ds:C1482.CICategory.new()
-	$eCipCategory.categoryID:=$i+1
+	$eCipCategory.levelID:=$i+1
 	$eCipCategory.name:=$cipCategories[$i]
+	$eCipCategory.color:="#FFFFFF"
 	$eCipCategory.save()
 End for 
 
@@ -80,8 +83,9 @@ var $questions : Collection:=New collection:C1472("Yes"; "No"; "N/A")
 TRUNCATE TABLE:C1051([YesNoQuestion:34])
 For ($i; 0; $questions.length-1)
 	$eQuestion:=ds:C1482.YesNoQuestion.new()
-	$eQuestion.responseID:=$i+1
+	$eQuestion.levelID:=$i+1
 	$eQuestion.name:=$questions[$i]
+	$eQuestion.color:="#FFFFFF"
 	$eQuestion.save()
 End for 
 
@@ -91,7 +95,7 @@ var $cipPriorities : Collection:=New collection:C1472("Active"; "Monitor"; "Defe
 TRUNCATE TABLE:C1051([CIPriority:27])
 For ($i; 0; $cipPriorities.length-1)
 	$ePriority:=ds:C1482.CIPriority.new()
-	$ePriority.priorityID:=$i+1
+	$ePriority.levelID:=$i+1
 	$ePriority.name:=$cipPriorities[$i]
 	$ePriority.color:=$colors[$i]
 	$ePriority.save()
@@ -105,8 +109,9 @@ var $cipOrigins : Collection:=New collection:C1472("NCR"; "NCMR"; "SWOT"; "Proce
 TRUNCATE TABLE:C1051([CIOrigin:31])
 For ($i; 0; $cipOrigins.length-1)
 	$eOrigin:=ds:C1482.CIOrigin.new()
-	$eOrigin.originID:=$i+1
+	$eOrigin.levelID:=$i+1
 	$eOrigin.name:=$cipOrigins[$i]
+	$eOrigin.color:="#FFFFFF"
 	$eOrigin.save()
 End for 
 
@@ -121,8 +126,9 @@ var $cipHumanFactors : Collection:=New collection:C1472("Not CAR"; "Not Applicab
 TRUNCATE TABLE:C1051([CIHumanFactor:29])
 For ($i; 0; $cipHumanFactors.length-1)
 	$eHumanFactor:=ds:C1482.CIHumanFactor.new()
-	$eHumanFactor.factorID:=$i+1
+	$eHumanFactor.levelID:=$i+1
 	$eHumanFactor.name:=$cipHumanFactors[$i]
+	$eHumanFactor.color:="#FFFFFF"
 	$eHumanFactor.save()
 End for 
 
@@ -130,13 +136,39 @@ End for
 //----> [CIDisposition]
 var $eDisposition : cs:C1710.CIDispositionEntity
 var $cipDispositions : Collection:=New collection:C1472("N/A (Not NCP)"; "Awaiting Disp."; "Scrap"; "Rework"; "Notified the customer"; \
-"Repair"; "Use As Is"; "Return To Vendor"; "Improve methods"; "Increase Inventory"; "Revise Spec, Training"; "Revise Procedure")
+"Repair"; "Use As Is"; "Return To Vendor"; "Improve methods"; "Increase Inventory"; "Revise Spec, Training"; "Revise Procedure"; "Other")
 TRUNCATE TABLE:C1051([CIDisposition:28])
 For ($i; 0; $cipDispositions.length-1)
 	$eDisposition:=ds:C1482.CIDisposition.new()
-	$eDisposition.dispositionID:=$i+1
+	$eDisposition.levelID:=$i+1
 	$eDisposition.name:=$cipDispositions[$i]
+	$eDisposition.color:="#FFFFFF"
 	$eDisposition.save()
 End for 
 
+
+//----> [Units]
+var $eUnit : cs:C1710.UnitsEntity
+var $units : Collection:=New collection:C1472("Bag"; "Can"; "EA"; "Hour"; "Lot"; "Pcs"; "Roll"; "Set"; "Box"; "Spool"; "Gallon"; "Ream"; "Case"; \
+"Pack"; "Yesr"; "Lbs"; "Pair")
+TRUNCATE TABLE:C1051([Units:49])
+For ($i; 0; $units.length-1)
+	$eUnit:=ds:C1482.Units.new()
+	$eUnit.levelID:=$i+1
+	$eUnit.name:=$units[$i]
+	$eUnit.color:="#FFFFFF"
+	$eUnit.save()
+End for 
+
+
+var $eDocCategory : cs:C1710.DocumentCategoryEntity
+var $docCategories : Collection:=New collection:C1472("Internal- Procedure"; "Form. External Specifications"; "Military Standard"; "Industry Standards")
+TRUNCATE TABLE:C1051([DocumentCategory:42])
+For ($i; 0; $docCategories.length-1)
+	$eDocCategory:=ds:C1482.DocumentCategory.new()
+	$eDocCategory.levelID:=$i+1
+	$eDocCategory.name:=$docCategories[$i]
+	$eDocCategory.color:="#FFFFFF"
+	$eDocCategory.save()
+End for 
 

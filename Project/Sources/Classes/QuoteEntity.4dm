@@ -1,15 +1,17 @@
 Class extends Entity
 
 Function preview()->$preview : Object
+	var $contact : cs:C1710.ContactEntity
 	$preview:=New object:C1471()
+	$contact:=This:C1470._mainContact_prv()
 	
-	$preview.contactFirstName:=This:C1470.contact.firstName
-	$preview.contactName:=This:C1470.contact.fullName
-	$preview.contactCompany:=This:C1470.contact.customer.name
+	$preview.contactFirstName:=String:C10($contact.firstName)
+	$preview.contactName:=String:C10($contact.fullName)
+	$preview.contactCompany:=String:C10($contact.customer.name)
 	
 	$preview.contactAddress:=""
-	If (This:C1470.contact.contactDetails#Null:C1517) && (This:C1470.contact.contactDetails.addresses#Null:C1517) && (This:C1470.contact.contactDetails.addresses.length#0)
-		$address:=This:C1470.contact.contactDetails.addresses[0]
+	If ($contact.contactDetails#Null:C1517) && ($contact.contactDetails.addresses#Null:C1517) && ($contact.contactDetails.addresses.length#0)
+		$address:=$contact.contactDetails.addresses[0]
 		If (String:C10($address.detail.street_1)#"")
 			$preview.contactAddress+=$address.detail.street_1+", "
 		End if 
@@ -33,12 +35,37 @@ Function preview()->$preview : Object
 		$preview.contactAddress:=" - "
 	End if 
 	
-	If (This:C1470.contact.contactDetails#Null:C1517) && (This:C1470.contact.contactDetails.communications#Null:C1517) && (This:C1470.contact.contactDetails.communications.length#0)
-		$comm:=This:C1470.contact.contactDetails.communications[0]
-		$preview.contactTel:=$comm.mobile
-		$preview.contactExt:=String:C10($comm.ext)
-		$preview.contactFax:=$comm.fax
-		$preview.contactEmail:=$comm.email
+	If ($contact.contactDetails#Null:C1517) && ($contact.contactDetails.communications#Null:C1517) && ($contact.contactDetails.communications.length#0)
+		$comms:=$contact.contactDetails.communications
+		
+		$items:=$comms.query("type == :1"; "mobile")
+		If ($items.length#0) && ($items[0].contact#"")
+			$preview.contactTel:=$items[0].contact
+		Else 
+			$preview.contactTel:=""
+		End if 
+		
+		$items:=$comms.query("type == :1"; "ext")
+		If ($items.length#0) && ($items[0].contact#"")
+			$preview.contactExt:=$items[0].contact
+		Else 
+			$preview.contactExt:=""
+		End if 
+		
+		$items:=$comms.query("type == :1"; "fax")
+		If ($items.length#0) && ($items[0].contact#"")
+			$preview.contactFax:=$items[0].contact
+		Else 
+			$preview.contactFax:=""
+		End if 
+		
+		$items:=$comms.query("type == :1"; "mail")
+		If ($items.length#0) && ($items[0].contact#"")
+			$preview.contactEmail:=$items[0].contact
+		Else 
+			$preview.contactEmail:=""
+		End if 
+		
 	Else 
 		$preview.contactTel:=""
 		$preview.contactExt:=""
@@ -46,9 +73,9 @@ Function preview()->$preview : Object
 		$preview.contactEmail:=""
 	End if 
 	
-	$preview.preparerName:=This:C1470.employee.fullName
-	If (This:C1470.employee.contactDetails#Null:C1517) && (This:C1470.employee.contactDetails.communications#Null:C1517) && (This:C1470.employee.contactDetails.communications.length#0)
-		$comm:=This:C1470.employee.contactDetails.communications[0]
+	$preview.preparerName:=This:C1470.staff.fullName
+	If (This:C1470.staff.contactDetails#Null:C1517) && (This:C1470.staff.contactDetails.communications#Null:C1517) && (This:C1470.staff.contactDetails.communications.length#0)
+		$comm:=This:C1470.staff.contactDetails.communications[0]
 		$preview.preparerEmail:=String:C10($comm.email)
 		$preview.preparerMobile:=String:C10($comm.mobile)
 		$preview.preparerExt:=String:C10($comm.ext)
@@ -62,7 +89,7 @@ Function preview()->$preview : Object
 	$preview.copyCommMeans:=""  // to get from the old database
 	
 	$preview.quoteNumber:=This:C1470.code
-	$preview.quoteRevision:=This:C1470.revision
+	$preview.quoteRevision:=String:C10(This:C1470.revision.name)
 	$preview.quoteDate:=String:C10(cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpCreation))
 	$preview.quoteSubject:=This:C1470.subject
 	$preview.quoteReference:=This:C1470.reference
@@ -74,4 +101,36 @@ Function preview()->$preview : Object
 	
 	$preview.conditions:=ds:C1482.TermCondition.query("UUID in :1"; This:C1470.termsConditions.UUIDs)
 	
+Function get dateCreation()->$createDate : Date
+	$createDate:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpCreation; True:C214)
 	
+Function get amount()->$amount : Real
+	$amount:=This:C1470.lines.sum("amount")
+	
+Function contacts()->$contacts : Collection
+	var $e_mainContact : cs:C1710.ContactEntity
+	var $secondaryContacts : cs:C1710.ContactSelection
+	
+	$contacts:=New collection:C1472()
+	If (This:C1470.moreData#Null:C1517) && (This:C1470.moreData.mainContact#Null:C1517)
+		$e_mainContact:=ds:C1482.Contact.get(This:C1470.moreData.mainContact.UUID)
+		If ($e_mainContact#Null:C1517)
+			$mainContact:=$e_mainContact.toObject()
+			$mainContact.type:="Main"
+			$contacts.push($mainContact)
+		End if 
+	End if 
+	
+	If (This:C1470.moreData#Null:C1517) && (This:C1470.moreData.secondaryContacts#Null:C1517)
+		$secondaryContacts:=ds:C1482.Contact.query("UUID in :1"; This:C1470.moreData.secondaryContacts)
+		For each ($e_contact; $secondaryContacts)
+			$contact:=$e_contact.toObject()
+			$contact.type:="Secondary"
+			$contacts.push($contact)
+		End for each 
+	End if 
+	
+Function _mainContact_prv()->$mainContact : cs:C1710.ContactEntity
+	If (This:C1470.moreData#Null:C1517) && (This:C1470.moreData.mainContact#Null:C1517)
+		$mainContact:=ds:C1482.Contact.get(This:C1470.moreData.mainContact.UUID)
+	End if 

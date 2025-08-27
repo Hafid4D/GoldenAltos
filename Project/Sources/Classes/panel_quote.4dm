@@ -11,13 +11,31 @@ Function formMethod()
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
-				This:C1470.loadQuoteLines()
+				Form:C1466.contactDetails:=This:C1470.contactInfo()
+				
+				If (Form:C1466.contactDetails.address#Null:C1517)
+					Form:C1466.subFormAddress:=New object:C1471
+					Form:C1466.subFormAddress.address:=Form:C1466.contactDetails.address
+				End if 
+				If (Form:C1466.contactDetails.communications#Null:C1517)
+					Form:C1466.subFormCommunication:=New object:C1471
+					Form:C1466.subFormCommunication.communications:=Form:C1466.contactDetails.communications
+				End if 
+				
+				If (Form:C1466.contactDetails.address#Null:C1517) || (Form:C1466.contactDetails.communications#Null:C1517)
+					Form:C1466.subFormCommunication:=Form:C1466.subFormCommunication
+				End if 
+				
+				This:C1470.loadContacts()
 				
 			: (FORM Get current page:C276(*)=2)
+				This:C1470.loadQuoteLines()
+				
+			: (FORM Get current page:C276(*)=3)
 				This:C1470.loadAssumptions()
 				This:C1470.loadTermsConditions()
 				
-			: (FORM Get current page:C276(*)=4)
+			: (FORM Get current page:C276(*)=5)
 				This:C1470.buildQuotePreview()
 				
 		End case 
@@ -34,7 +52,8 @@ Function formMethod()
 			
 	End case 
 	
-	
+Function loadContacts()
+	Form:C1466.lb_contacts:=Form:C1466.current_item.contacts()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
@@ -43,17 +62,35 @@ Function redrawAndSetVisible()
 	OBJECT SET VISIBLE:C603(*; "bActionTerms"; Form:C1466.sfw.checkIsInModification())
 	
 	This:C1470.drawPup_quoteStatus()
+	This:C1470.drawPup_quoteCustomer()
+	This:C1470.drawPup_serviceType()
+	This:C1470.drawPup_quoteRevision()
 	
-	Use (Form:C1466.sfw.entry.panel.pages)
-		Form:C1466.sfw.entry.panel.pages[0].label:="Lines ("+String:C10(Form:C1466.lb_quoteLines.length)+")"
-		Form:C1466.sfw.entry.panel.pages[1].label:="Assumptions and Terms ("+String:C10(Form:C1466.lb_assumptions.length)+")"
-	End use 
-	Form:C1466.sfw.drawHTab()
+	Form:C1466.contactDetails:=This:C1470.contactInfo()
+	
+	If (Form:C1466.contactDetails.address#Null:C1517)
+		Form:C1466.subFormAddress:=New object:C1471
+		Form:C1466.subFormAddress.address:=Form:C1466.contactDetails.address
+	End if 
+	If (Form:C1466.contactDetails.communications#Null:C1517)
+		Form:C1466.subFormCommunication:=New object:C1471
+		Form:C1466.subFormCommunication.communications:=Form:C1466.contactDetails.communications
+	End if 
+	
+	If (Form:C1466.contactDetails.address#Null:C1517) || (Form:C1466.contactDetails.communications#Null:C1517)
+		Form:C1466.subFormCommunication:=Form:C1466.subFormCommunication
+	End if 
+	
+	//Use (Form.sfw.entry.panel.pages)
+	//Form.sfw.entry.panel.pages[0].label:="Lines ("+String(Form.lb_quoteLines.length)+")"
+	//Form.sfw.entry.panel.pages[1].label:="Assumptions and Terms ("+String(Form.lb_assumptions.length)+")"
+	//End use 
+	//Form.sfw.drawHTab()
 	
 	
 Function loadAllTabs()
-	This:C1470.loadQuoteLines()
-	This:C1470.loadAssumptions()
+	//This.loadQuoteLines()
+	//This.loadAssumptions()
 	
 Function loadQuoteLines()
 	If (Form:C1466.current_item#Null:C1517)
@@ -410,6 +447,51 @@ Function onBoundVariableChange()
 		LISTBOX SELECT ROW:C912(*; "lb_quoteLines"; 0; lk remove from selection:K53:3)
 	End if 
 	
+Function pup_revision()
+	If (Form:C1466.sfw.checkIsInModification())
+		$menu:=Create menu:C408
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.quoteRevision=Null:C1517)
+			ds:C1482.Revision.cacheLoad()
+		End if 
+		
+		For each ($eRvision; Storage:C1525.cache.quoteRevision)
+			APPEND MENU ITEM:C411($menu; $eRvision.name; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $eRvision.UUID)
+			If ($eRvision.code=Form:C1466.current_item.revision.code)
+				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+				If (Is Windows:C1573)
+					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+				End if 
+			End if 
+		End for each 
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		Case of 
+			: ($choose#"")
+				Form:C1466.current_item.UUID_Revision:=$choose
+				cs:C1710.panel_quote.me._activate_save_cancel_button()
+		End case 
+		
+	End if 
+	This:C1470.drawPup_quoteRevision()
+	
+Function drawPup_quoteRevision()
+	var $quoteRevision : cs:C1710.RevisionEntity
+	If (Form:C1466.current_item#Null:C1517)
+		$quoteRevision:=Form:C1466.current_item.revision
+		If ($quoteRevision#Null:C1517)
+			$parts:=New collection:C1472($quoteRevision.code; $quoteRevision.name)
+			$revisionName:=$parts.join(" - "; ck ignore null or empty:K85:5)
+			$color:=cs:C1710.sfw_htmlColor.me.getName($quoteRevision.color)
+		Else 
+			$revisionName:="Revision"
+			$color:=""
+		End if 
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_QuoteRevision"; $revisionName; $pathIcon; ($quoteRevision=Null:C1517))
+	End if 
+	
 Function pup_status()
 	var $eQuoteStatus : cs:C1710.QuoteStatusEntity
 	
@@ -435,7 +517,8 @@ Function pup_status()
 		Case of 
 			: ($choose#"")
 				$eQuoteStatus:=ds:C1482.QuoteStatus.get($choose)
-				Form:C1466.current_item.currentStatusID:=$eQuoteStatus.statusID
+				Form:C1466.current_item.UUID_Status:=$eQuoteStatus.UUID
+				cs:C1710.panel_quote.me._activate_save_cancel_button()
 		End case 
 		
 	End if 
@@ -443,7 +526,7 @@ Function pup_status()
 	
 Function drawPup_quoteStatus()
 	If (Form:C1466.current_item#Null:C1517)
-		$quoteStatus:=ds:C1482.QuoteStatus.query("statusID= :1"; Form:C1466.current_item.currentStatusID).first() || New object:C1471()
+		$quoteStatus:=Form:C1466.current_item.status || New object:C1471()
 		$parts:=New collection:C1472($quoteStatus.code; $quoteStatus.name)
 		$statusName:=$parts.join(" - "; ck ignore null or empty:K85:5)
 		If ($statusName="")
@@ -453,3 +536,216 @@ Function drawPup_quoteStatus()
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
 		Form:C1466.sfw.drawButtonPup("pup_quoteStatus"; $statusName; $pathIcon; ($quoteStatus=Null:C1517))
 	End if 
+	
+Function drawPup_quoteCustomer()
+	If (Form:C1466.current_item#Null:C1517)
+		$name:=Form:C1466.current_item.customer.name || "Customer"
+		Form:C1466.sfw.drawButtonPup("pup_customer"; $name; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.customer=Null:C1517))
+	End if 
+	
+Function selectCustomer()
+	If (Form:C1466.sfw.checkIsInModification())
+		Case of 
+			: (FORM Event:C1606.code=On Getting Focus:K2:7) | (FORM Event:C1606.code=On Clicked:K2:4)
+				
+				OBJECT GET COORDINATES:C663(*; "entryField_customer"; $l; $t; $r; $b)
+				CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
+				$form:=New object:C1471()
+				$form.lb_items:=ds:C1482.Customer.all()
+				
+				
+				$winRef:=Open form window:C675("selectCustomer"; Pop up form window:K39:11; $l; $b+1)
+				DIALOG:C40("selectCustomer"; $form)
+				CLOSE WINDOW:C154($winRef)
+				If (ok=1)
+					Form:C1466.current_item.UUID_Customer:=$form.item.UUID
+					cs:C1710.panel_quote.me._activate_save_cancel_button()
+					This:C1470._clearInfoAfterChangingCustomer()
+				End if 
+		End case 
+	End if 
+	
+Function _clearInfoAfterChangingCustomer()
+	Form:C1466.current_item.moreData:=New object:C1471()
+	
+Function pup_serviceType()
+	var $eServiceType : cs:C1710.ServiceTypeEntity
+	If (Form:C1466.sfw.checkIsInModification())
+		$menu:=Create menu:C408
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.serviceType=Null:C1517)
+			ds:C1482.ServiceType.cacheLoad()
+		End if 
+		
+		For each ($serviceType; Storage:C1525.cache.serviceType)
+			APPEND MENU ITEM:C411($menu; $serviceType.code+" - "+$serviceType.name; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $serviceType.UUID)
+			If ($serviceType.UUID=Form:C1466.current_item.UUID_ServiceType)
+				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+				If (Is Windows:C1573)
+					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+				End if 
+			End if 
+		End for each 
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		
+		Case of 
+			: ($choose#"")
+				Form:C1466.current_item.UUID_ServiceType:=$choose
+		End case 
+	End if 
+	This:C1470.drawPup_serviceType()
+	
+Function drawPup_serviceType()
+	If (Form:C1466.current_item#Null:C1517)
+		$parts:=New collection:C1472(Form:C1466.current_item.serviceType.code; Form:C1466.current_item.serviceType.name)
+		$serviceName:=$parts.join(" - "; ck ignore null or empty:K85:5)
+		If ($serviceName="")
+			$serviceName:="Service"
+		End if 
+		$color:=cs:C1710.sfw_htmlColor.me.getName(Form:C1466.current_item.serviceType.color)
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_serviceType"; $serviceName; $pathIcon; (Form:C1466.current_item.serviceType=Null:C1517))
+	End if 
+	
+Function selectItem($items)->$UUIDItemSelected : Text
+	$obectName:=OBJECT Get name:C1087(Object current:K67:2)
+	OBJECT GET COORDINATES:C663(*; $obectName; $l; $t; $r; $b)
+	CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
+	$form:=New object:C1471()
+	$form.lb_items:=$items
+	
+	$winRef:=Open form window:C675("selectItem"; Pop up form window:K39:11; $l; $b)
+	DIALOG:C40("selectItem"; $form)
+	CLOSE WINDOW:C154($winRef)
+	If (ok=1)
+		$UUIDItemSelected:=$form.item.UUID
+	Else 
+		$UUIDItemSelected:=""
+	End if 
+	
+Function contactInfo()->$contactInfo : Object
+	var $contact : cs:C1710.ContactEntity
+	$contactInfo:={mainContact: Null:C1517; addressMainContact: Null:C1517}
+	If (Form:C1466.current_item.moreData#Null:C1517) && (Form:C1466.current_item.moreData.mainContact#Null:C1517)
+		$contact:=ds:C1482.Contact.get(Form:C1466.current_item.moreData.mainContact.UUID)
+		If ($contact#Null:C1517)
+			$contactInfo.mainContact:=$contact
+			$contactInfo.address:=$contact.rebuildAddress()
+			$contactInfo.communications:=$contact.rebuidComunications()
+		End if 
+	End if 
+	
+Function btnActionContacts()
+	//mark: better code 
+	$refMenu:=Create menu:C408()
+	
+	APPEND MENU ITEM:C411($refMenu; "Add main contact"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--addMainContact")
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	APPEND MENU ITEM:C411($refMenu; "Add secondary contact"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--addSeconaryContact")
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	APPEND MENU ITEM:C411($refMenu; "Delete contact"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--deleteContact")
+	If (Not:C34(Form:C1466.sfw.checkIsInModification())) || (Form:C1466.contact=Null:C1517)
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	$choice:=Dynamic pop up menu:C1006($refMenu)
+	RELEASE MENU:C978($refMenu)
+	
+	
+	
+	Case of 
+		: ($choice="")
+			
+		: ($choice="--addMainContact")
+			$uuids:=New collection:C1472()
+			If (Form:C1466.current_item.moreData#Null:C1517) && (Form:C1466.current_item.moreData.mainContact#Null:C1517)
+				$uuids.push(Form:C1466.current_item.moreData.mainContact.UUID)
+			End if 
+			If (Form:C1466.current_item.moreData#Null:C1517) && (Form:C1466.current_item.moreData.secondaryContacts#Null:C1517)
+				$uuids:=$uuids.concat(Form:C1466.current_item.moreData.secondaryContacts)
+			End if 
+			
+			$form:=New object:C1471()
+			$form.lb_contacts:=ds:C1482.Contact.query("customer.leads.UUID == :1 and not(UUID in :2)"; Form:C1466.current_item.UUID; $uuids)
+			$ref:=Open form window:C675("Lead_chooseMainContact"; Sheet form window:K39:12)
+			DIALOG:C40("Lead_chooseMainContact"; $form)
+			CLOSE WINDOW:C154($ref)
+			
+			If (ok=1)
+				If (Form:C1466.current_item.moreData=Null:C1517)
+					Form:C1466.current_item.moreData:=New object:C1471()
+				End if 
+				
+				If (Form:C1466.current_item.moreData.mainContact=Null:C1517)
+					Form:C1466.current_item.moreData.mainContact:=New object:C1471()
+				End if 
+				
+				Form:C1466.current_item.moreData.mainContact:={UUID: $form.current_contact.UUID}
+				This:C1470.loadContacts()
+				cs:C1710.panel_lead.me._activate_save_cancel_button()
+			End if 
+			
+		: ($choice="--addSeconaryContact")
+			$uuids:=New collection:C1472()
+			If (Form:C1466.current_item.moreData#Null:C1517) && (Form:C1466.current_item.moreData.mainContact#Null:C1517)
+				$uuids.push(Form:C1466.current_item.moreData.mainContact.UUID)
+			End if 
+			If (Form:C1466.current_item.moreData#Null:C1517) && (Form:C1466.current_item.moreData.secondaryContacts#Null:C1517)
+				$uuids:=$uuids.concat(Form:C1466.current_item.moreData.secondaryContacts)
+			End if 
+			
+			$form:=New object:C1471()
+			$form.lb_contacts:=ds:C1482.Contact.query("customer.quotes.UUID == :1 and not(UUID in :2)"; Form:C1466.current_item.UUID; $uuids).toCollection()
+			For each ($contact; $form.lb_contacts)
+				$contact.selected:=False:C215
+			End for each 
+			
+			$ref:=Open form window:C675("Lead_chooseSecondaryContacts"; Sheet form window:K39:12)
+			DIALOG:C40("Lead_chooseSecondaryContacts"; $form)
+			CLOSE WINDOW:C154($ref)
+			
+			If (ok=1)
+				If (Form:C1466.current_item.moreData=Null:C1517)
+					Form:C1466.current_item.moreData:=New object:C1471()
+				End if 
+				
+				If (Form:C1466.current_item.moreData.secondaryContacts=Null:C1517)
+					Form:C1466.current_item.moreData.secondaryContacts:=New collection:C1472()
+				End if 
+				
+				For each ($contact; $form.lb_contacts)
+					If ($contact.selected)
+						Form:C1466.current_item.moreData.secondaryContacts.push($contact.UUID)
+					End if 
+				End for each 
+				
+				This:C1470.loadContacts()
+				cs:C1710.panel_lead.me._activate_save_cancel_button()
+			End if 
+			
+			
+		: ($choice="--deleteContact")
+			
+			If (Form:C1466.contact.type="Main")
+				Form:C1466.current_item.moreData.mainContact:=Null:C1517
+			Else 
+				$index:=Form:C1466.current_item.moreData.secondaryContacts.indexOf(Form:C1466.contact.UUID)
+				If ($indexOf#-1)
+					Form:C1466.current_item.moreData.secondaryContacts.remove($index)
+				End if 
+			End if 
+			This:C1470.loadContacts()
+			cs:C1710.panel_lead.me._activate_save_cancel_button()
+	End case 
+	

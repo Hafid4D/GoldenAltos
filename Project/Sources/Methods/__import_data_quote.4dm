@@ -6,65 +6,21 @@ var $eContact : cs:C1710.ContactEntity
 var $eCostumer : cs:C1710.CustomerEntity
 var $eTermConditon : cs:C1710.TermConditionEntity
 var $eQuoteStatus : cs:C1710.QuoteStatusEntity
-var $eEmployee : cs:C1710.EmployeeEntity
+var $eEmployee : cs:C1710.StaffEntity
+var $eRevision : cs:C1710.RevisionEntity
 
 $assumptions_file:=Folder:C1567(fk data folder:K87:12).file("DataJson/quote_assumptions.json")
 If ($assumptions_file.exists)
 	TRUNCATE TABLE:C1051([QuoteLine:129])
 	TRUNCATE TABLE:C1051([Quote:128])
 	TRUNCATE TABLE:C1051([Assumption:2])
-	TRUNCATE TABLE:C1051([LotStep:5])
-	
-	If (True:C214)  //fill QuoteStatus table
-		$eQuoteStatus:=ds:C1482.QuoteStatus.new()
-		$eQuoteStatus.name:="Active"
-		$eQuoteStatus.code:="A"
-		$eQuoteStatus.statusID:=1
-		$eQuoteStatus.save()
-		
-		$eQuoteStatus:=ds:C1482.QuoteStatus.new()
-		$eQuoteStatus.name:="Close"
-		$eQuoteStatus.code:="C"
-		$eQuoteStatus.statusID:=2
-		$eQuoteStatus.save()
-		
-		$eQuoteStatus:=ds:C1482.QuoteStatus.new()
-		$eQuoteStatus.name:="Closed successfully"
-		$eQuoteStatus.code:="CS"
-		$eQuoteStatus.statusID:=3
-		$eQuoteStatus.save()
-		
-		$eQuoteStatus:=ds:C1482.QuoteStatus.new()
-		$eQuoteStatus.name:="Received Order"
-		$eQuoteStatus.code:="RO"
-		$eQuoteStatus.statusID:=4
-		$eQuoteStatus.save()
-		
-		$eQuoteStatus:=ds:C1482.QuoteStatus.new()
-		$eQuoteStatus.name:="Lost Order"
-		$eQuoteStatus.code:="LO"
-		$eQuoteStatus.statusID:=5
-		$eQuoteStatus.save()
-		
-		$eQuoteStatus:=ds:C1482.QuoteStatus.new()
-		$eQuoteStatus.name:="Require Follow-Up"
-		$eQuoteStatus.code:="RFU"
-		$eQuoteStatus.statusID:=6
-		$eQuoteStatus.save()
-		
-		$eQuoteStatus:=ds:C1482.QuoteStatus.new()
-		$eQuoteStatus.name:="Under Customer Review"
-		$eQuoteStatus.code:="UCR"
-		$eQuoteStatus.statusID:=7
-		$eQuoteStatus.save()
-	End if 
 	
 	$quote_file:=Folder:C1567(fk data folder:K87:12).file("DataJson/quotes.json")
 	If ($quote_file.exists)
 		$quotes:=JSON Parse:C1218($quote_file.getText())
+		
 		For each ($quote; $quotes)
 			$eQuote:=ds:C1482.Quote.new()
-			
 			
 			$eCostumer:=ds:C1482.Customer.query("name == :1"; $quote.Company).first()
 			If ($eCostumer=Null:C1517)
@@ -76,7 +32,7 @@ If ($assumptions_file.exists)
 			$eContact:=ds:C1482.Contact.query("code == :1"; $quote.ContactCode).first()
 			If ($eContact=Null:C1517)
 				$eContact:=ds:C1482.Contact.new()
-				$eContact.UUID_Customer:=$eCostumer.UUID
+				$eContact.UUID_Company:=$eCostumer.UUID
 				$eContact.firstName:=$quote.Fname
 				$eContact.lastName:=$quote.Lname
 				$eContact.code:=$quote.ContactCode
@@ -98,17 +54,38 @@ If ($assumptions_file.exists)
 				$eContact.contactDetails.addresses.push($address)
 				
 				$eContact.contactDetails.communications:=New collection:C1472()
-				$comm:=New object:C1471()
-				$comm.mobile:=$quote.tel_num
-				$comm.fax:=$quote.fax_num
-				$comm.email:=$quote.email_addr
-				$eContact.contactDetails.communications.push($comm)
+				
+				If ($quote.tel_num#"")
+					$comm:=New object:C1471()
+					$comm.type:="mobile"
+					$comm.comment:=""
+					$comm.contact:=$quote.tel_num
+					$eContact.contactDetails.communications.push($comm)
+				End if 
+				
+				If ($quote.fax_num#"")
+					$comm:=New object:C1471()
+					$comm.type:="fax"
+					$comm.comment:=""
+					$comm.contact:=$quote.fax_num
+					$eContact.contactDetails.communications.push($comm)
+				End if 
+				
+				If ($quote.email_addr#"")
+					$comm:=New object:C1471()
+					$comm.type:="email"
+					$comm.comment:=""
+					$comm.contact:=$quote.email_addr
+					$eContact.contactDetails.communications.push($comm)
+				End if 
 				
 				$eContact.save()
 			End if 
 			
 			
-			$eQuote.UUID_Contact:=$eContact.UUID
+			$eQuote.moreData:=New object:C1471()
+			$eQuote.moreData.mainContact:={UUID: $eContact.UUID}
+			$eQuote.UUID_Customer:=$eCostumer.UUID
 			$eQuote.code:=$quote.QuoteNumber
 			
 			If ($quote.Status#"")
@@ -116,9 +93,9 @@ If ($assumptions_file.exists)
 				If ($eQuoteStatus=Null:C1517)
 					TRACE:C157
 				End if 
-				$eQuote.currentStatusID:=$eQuoteStatus.statusID
-			Else 
-				$eQuote.currentStatusID:=0
+				$eQuote.UUID_Status:=$eQuoteStatus.UUID
+				//Else 
+				//$eQuote.UUID_Status:=""
 			End if 
 			$eQuote.subject:=cs:C1710.Util.me.trim($quote.Subject; [" "; "\r"])
 			$eQuote.reference:=cs:C1710.Util.me.trim($quote.Reference; [" "; "\r"])
@@ -126,9 +103,9 @@ If ($assumptions_file.exists)
 			$eQuote.termsConditions:=New object:C1471("UUIDs"; New collection:C1472())
 			
 			$motifs:=Split string:C1554($quote.PreparedBy; " "; sk ignore empty strings:K86:1+sk trim spaces:K86:2)
-			$eEmployee:=ds:C1482.Employee.query("lastName == :1"; $motifs[1]).first()
+			$eEmployee:=ds:C1482.Staff.query("lastName == :1"; $motifs[1]).first()
 			If ($eEmployee=Null:C1517)
-				$eEmployee:=ds:C1482.Employee.new()
+				$eEmployee:=ds:C1482.Staff.new()
 				$eEmployee.firstName:=$motifs[0]
 				$eEmployee.lastName:=$motifs[1]
 				$eEmployee.contactDetails:=New object:C1471()
@@ -156,11 +133,29 @@ If ($assumptions_file.exists)
 					$ext:=$motifs[1]
 				End if 
 				
-				$comm:=New object:C1471()
-				$comm.email:=$email
-				$comm.mobile:=$tel
-				$comm.ext:=$ext
-				$eEmployee.contactDetails.communications.push($comm)
+				If ($tel#"")
+					$comm:=New object:C1471()
+					$comm.type:="mobile"
+					$comm.comment:=""
+					$comm.contact:=$tel
+					$eContact.contactDetails.communications.push($comm)
+				End if 
+				
+				If ($ext#"")
+					$comm:=New object:C1471()
+					$comm.type:="ext"
+					$comm.comment:=""
+					$comm.contact:=$ext
+					$eContact.contactDetails.communications.push($comm)
+				End if 
+				
+				If ($email#"")
+					$comm:=New object:C1471()
+					$comm.type:="email"
+					$comm.comment:=""
+					$comm.contact:=$email
+					$eContact.contactDetails.communications.push($comm)
+				End if 
 				
 				$rss:=$eEmployee.save()
 				If ($rss.success=False:C215)
@@ -168,13 +163,28 @@ If ($assumptions_file.exists)
 				End if 
 			End if 
 			
-			$eQuote.UUID_Employee:=$eEmployee.UUID
+			$eQuote.UUID_Staff:=$eEmployee.UUID
 			$wpFile:=Folder:C1567(fk data folder:K87:12).file("DataJson/wpQuotes/"+$quote.QuoteNumber+".4wp")
 			If ($wpFile.exists)
 				$eQuote.optionalPreliminaryTxt_wr:=WP Import document:C1318($wpFile.platformPath)
 			End if 
 			$eQuote.stmpCreation:=cs:C1710.sfw_stmp.me.build(Date:C102($quote.Qdate))
-			$eQuote.revision:=$quote.Revision
+			
+			If ($quote.Revision#"")
+				$eRevision:=ds:C1482.Revision.query("name == :1"; $quote.Revision).first()
+				$levelRevision:=1
+				If ($eRevision=Null:C1517)
+					$eRevision:=ds:C1482.Revision.new()
+					$eRevision.name:=Uppercase:C13($quote.Revision)
+					$eRevision.code:=Uppercase:C13($quote.Revision)
+					$eRevision.levelID:=$levelRevision
+					$eRevision.save()
+					$levelRevision+=1
+				End if 
+				$eQuote.UUID_Revision:=$eRevision.UUID
+			Else 
+				$eQuote.UUID_Revision:=""
+			End if 
 			$eQuote.division:=$quote.Division
 			$eQuote.voided:=$quote.void
 			$eQuote.save()
@@ -250,7 +260,5 @@ If ($assumptions_file.exists)
 			$eQuoteLine.save()
 		End for each 
 	End if 
-	
-	
 	
 End if 

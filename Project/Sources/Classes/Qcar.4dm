@@ -2,7 +2,7 @@ Class extends DataClass
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
-	$entry:=cs:C1710.sfw_definitionEntry.new("qcar"; ["qualityAssistance"]; "QCARS")
+	$entry:=cs:C1710.sfw_definitionEntry.new("qcar"; ["qualityAssurance"]; "QCARS")
 	$entry.setDataclass("Qcar")
 	$entry.setDisplayOrder(-400)
 	$entry.setIcon("image/entry/qcar-white-50x50.png")

@@ -4,14 +4,11 @@ singleton Class constructor
 Function _activate_save_cancel_button()
 	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
 	
-	
 Function formMethod()
 	//This function manages the main logic for updating and refreshing the form
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
-		If (Form:C1466.current_item#Null:C1517)
-			OBJECT SET TITLE:C194(*; "statusHistory"; String:C10(Form:C1466.current_item.statusHistory))
-		End if 
+		
 		This:C1470.LoadAllTabs()
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
@@ -24,6 +21,7 @@ Function formMethod()
 				
 			: (FORM Get current page:C276(*)=3)
 				This:C1470.loadDocuments()
+				OBJECT SET ENTERABLE:C238(*; "lb_documents"; False:C215)
 				
 		End case 
 	End if 
@@ -42,19 +40,40 @@ Function pup_XXX()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
-	This:C1470.drawPup_EquipmentType()
-	This:C1470.drawPup_EquipmentLocation()
-	This:C1470.drawPup_Division()
-	If (Form:C1466.current_item#Null:C1517)
-		OBJECT SET TITLE:C194(*; "statusHistory"; String:C10(Form:C1466.current_item.statusHistory))
-	End if 
+	
+	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	$offset:=4
+	
+	Case of 
+			
+		: (FORM Get current page:C276(*)=1)
+			OBJECT GET COORDINATES:C663(*; "entryField_statusHistory"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "entryField_statusHistory"; $g; $h; $widthSubform-25; $b)
+			
+		: (FORM Get current page:C276(*)=2)
+			OBJECT GET COORDINATES:C663(*; "lb_repairLog"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			OBJECT SET COORDINATES:C1248(*; "lb_repairLog"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			
+		: (FORM Get current page:C276(*)=3)
+			OBJECT GET COORDINATES:C663(*; "lb_documents"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			OBJECT SET COORDINATES:C1248(*; "lb_documents"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			
+	End case 
 	
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="Repair Log ("+String:C10(Form:C1466.lb_repairLog.length)+")"
 		Form:C1466.sfw.entry.panel.pages[2].label:="Documents ("+String:C10(Form:C1466.lb_documents.length)+")"
 		
 	End use 
+	
+	This:C1470.drawPup_EquipmentType()
+	This:C1470.drawPup_EquipmentLocation()
+	This:C1470.drawPup_Division()
+	
+	OBJECT SET ENTERABLE:C238(*; "entryField_statusHistory"; False:C215)
+	
 	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
+	
 	Form:C1466.sfw.drawHTab()
 	
 	
@@ -74,27 +93,7 @@ Function drawPup_EquipmentType()
 Function pup_type()
 	//Create pop up menu
 	If (Form:C1466.sfw.checkIsInModification())
-/*
-$menu:=Create menu
-For each ($equipmentType; ds.ToolType.all())  // Storage.cache.equipmentTypes)
-APPEND MENU ITEM($menu; $equipmentType.name; *)
-SET MENU ITEM PARAMETER($menu; -1; $equipmentType.UUID)
-If ($equipmentType.UUID=Form.current_item.UUID_ToolType)
-SET MENU ITEM MARK($menu; -1; Char(18))
-If (Is Windows)
-SET MENU ITEM STYLE($menu; -1; Bold)
-End if 
-End if 
-End for each 
-$choose:=Dynamic pop up menu($menu)
-RELEASE MENU($menu)
 		
-Case of 
-: ($choose#"")
-$equipmentType:=ds.ToolType.get($choose)
-Form.current_item.UUID_ToolType:=$equipmentType.UUID
-End case 
-*/
 		OBJECT GET COORDINATES:C663(*; "pup_equipmentType"; $l; $t; $r; $b)
 		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
 		
@@ -110,7 +109,7 @@ End case
 		CLOSE WINDOW:C154($winRef)
 		
 		If (ok=1)
-			Form:C1466.current_item.UUID_ToolType:=$form.item.name
+			Form:C1466.current_item.UUID_ToolType:=$form.item.UUID
 			cs:C1710.panel_equipment.me._activate_save_cancel_button()
 		End if 
 		
@@ -120,7 +119,7 @@ End case
 	
 Function drawPup_EquipmentLocation()
 	If (Form:C1466.current_item#Null:C1517)
-		$equipmentLocation:=ds:C1482.EquipmentLocation.query("locationID= :1"; Form:C1466.current_item.locationID).first() || New object:C1471()
+		$equipmentLocation:=ds:C1482.EquipmentLocation.query("UUID= :1"; Form:C1466.current_item.UUID_EquipmentLocation).first() || New object:C1471()
 		$locationName:=$equipmentLocation.name
 		If ($locationName=Null:C1517)
 			$locationName:=""
@@ -142,7 +141,7 @@ Function pup_location()
 		For each ($equipmentLocation; Storage:C1525.cache.equipmentLocations)
 			APPEND MENU ITEM:C411($menu; $equipmentLocation.name; *)
 			SET MENU ITEM PARAMETER:C1004($menu; -1; $equipmentLocation.UUID)
-			If ($equipmentLocation.locationID=Form:C1466.current_item.locationID)
+			If ($equipmentLocation.UUID=Form:C1466.current_item.UUID_EquipmentLocation)
 				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
 				If (Is Windows:C1573)
 					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
@@ -155,7 +154,7 @@ Function pup_location()
 		Case of 
 			: ($choose#"")
 				$equipmentLocation:=ds:C1482.EquipmentLocation.get($choose)
-				Form:C1466.current_item.locationID:=$equipmentLocation.locationID
+				Form:C1466.current_item.UUID_EquipmentLocation:=$equipmentLocation.UUID
 		End case 
 		
 	End if 
@@ -164,7 +163,7 @@ Function pup_location()
 	
 Function drawPup_Division()
 	If (Form:C1466.current_item#Null:C1517)
-		$equipmentDivision:=ds:C1482.Division.query("divisionID= :1"; Form:C1466.current_item.divisionID).first() || New object:C1471()
+		$equipmentDivision:=ds:C1482.Division.query("UUID= :1"; Form:C1466.current_item.UUID_Division).first() || New object:C1471()
 		$divisionName:=$equipmentDivision.name
 		If ($divisionName=Null:C1517)
 			$divisionName:=""
@@ -186,7 +185,7 @@ Function pup_division()
 		For each ($equipmentDivision; Storage:C1525.cache.divisions)
 			APPEND MENU ITEM:C411($menu; $equipmentDivision.name; *)
 			SET MENU ITEM PARAMETER:C1004($menu; -1; $equipmentDivision.UUID)
-			If ($equipmentDivision.divisionID=Form:C1466.current_item.divisionID)
+			If ($equipmentDivision.UUID=Form:C1466.current_item.UUID_Division)
 				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
 				If (Is Windows:C1573)
 					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
@@ -199,7 +198,7 @@ Function pup_division()
 		Case of 
 			: ($choose#"")
 				$equipmentDivision:=ds:C1482.Division.get($choose)
-				Form:C1466.current_item.divisionID:=$equipmentDivision.divisionID
+				Form:C1466.current_item.UUID_Division:=$equipmentDivision.UUID
 		End case 
 		
 	End if 
@@ -210,7 +209,7 @@ Function loadRepairLog()
 	
 	If (Form:C1466.current_item#Null:C1517)
 		
-		Form:C1466.lb_repairLog:=ds:C1482.RepairLog.query("systemID =:1"; Form:C1466.current_item.assignedID).orderBy("systemID desc")
+		Form:C1466.lb_repairLog:=Form:C1466.current_item.repairLogs
 		
 	End if 
 	
@@ -225,7 +224,6 @@ Function loadDocuments()
 	
 	
 Function LoadAllTabs()
-	
 	This:C1470.loadRepairLog()
 	This:C1470.loadDocuments()
 	
@@ -259,7 +257,7 @@ Function bActionRepairLog()
 	RELEASE MENU:C978($refMenu)
 	Case of 
 		: ($choice="openInWindow")
-			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.repairLogs.query("UUID=:1"; Form:C1466.selectedRepaiLog.UUID).first(); "qualityAssistance"; "repairLog")
+			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.repairLogs.query("UUID=:1"; Form:C1466.selectedRepaiLog.UUID).first(); "qualityAssurance"; "repairLog")
 	End case 
 	
 	
@@ -322,7 +320,9 @@ Function bActionDocument()
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_document"; $form)
 			If (OK=1)
-				Form:C1466.current_item.reports.documents.push($form.details)
+				Form:C1466.lb_documents.push($form.details)
+				//Form.current_item.reports.documents.push($form.details)
+				cs:C1710.panel_equipment.me._activate_save_cancel_button()
 			End if 
 			
 			
@@ -334,19 +334,23 @@ Function bActionDocument()
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_document"; $form)
-			
+			If (OK=1)
+				Form:C1466.selectedDocument:=$form.details
+				//Form.current_item.reports.documents.push($form.details)
+				cs:C1710.panel_equipment.me._activate_save_cancel_button()
+			End if 
 			
 		: ($choice="--delete")
 			
 			$ok:=cs:C1710.sfw_dialog.me.confirm("Do you really want to delete this document? "; "Delete"; "CANCEL")
 			If ($ok)
-				
-				Form:C1466.current_item.reports.documents.remove(Form:C1466.selectedDocumentPos-1)
-				
+				Form:C1466.lb_documents.remove(Form:C1466.selectedDocumentPos-1)
+				//Form.current_item.reports.documents.remove(Form.selectedDocumentPos-1)
+				cs:C1710.panel_equipment.me._activate_save_cancel_button()
 				
 			End if 
 			
-			This:C1470.loadDocuments()
+			//This.loadDocuments()
 			
 	End case 
 	
