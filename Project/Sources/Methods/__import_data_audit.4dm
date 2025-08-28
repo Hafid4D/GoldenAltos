@@ -23,7 +23,7 @@ If ($audit_log.exists)
 	For each ($audit; $audits)
 		
 		$eAudit:=ds:C1482.Audit.new()
-		$eAudit.page:=$audit.Page
+		//$eAudit.page:=$audit.Page
 		$eAudit.stmpPage:=cs:C1710.sfw_stmp.me.build(Date:C102($audit.Page_Date))
 		$eAudit.supervisor:=$audit.Supervisor
 		$eAudit.dateTimeStamp:=$audit.DateTimeStamp

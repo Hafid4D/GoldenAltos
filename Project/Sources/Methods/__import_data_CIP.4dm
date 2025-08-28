@@ -72,8 +72,8 @@ If ($cip_log.exists)
 			
 		End if 
 		
-		$eCip.moreData:=New object:C1471()
-		$eCip.moreData.disposition:=""
+		//$eCip.moreData:=New object()
+		//$eCip.moreData.disposition:=""
 		
 		$humanFactor:=ds:C1482.CIHumanFactor.query("name =:1"; Split string:C1554($cip.humanFactor; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($humanFactor.length>0)

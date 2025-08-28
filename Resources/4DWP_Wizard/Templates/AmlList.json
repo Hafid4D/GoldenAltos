@@ -3,7 +3,7 @@
     "columns": [{
             "check": true,
             "header": "Division",
-            "source": "ds.Division.query(\"divisionID =:1\";This.item.divisionID).first().name"
+            "source": "This.item.division.name"
         }, {
             "check": true,
             "header": "Internal part#",

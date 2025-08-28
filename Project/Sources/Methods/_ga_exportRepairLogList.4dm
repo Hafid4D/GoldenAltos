@@ -79,9 +79,19 @@ If ($continue)
 			OB GET PROPERTY NAMES:C1232($log_es[0]; $headerNames; $arrTypes)
 			ARRAY TO COLLECTION:C1563($headers; $headerNames)
 			
+			$headers.push("fixedBy")
+			$headers.push("reportedBy")
+			$headers.push("systemID")
+			$headers:=$headers.remove($headers.indexOf("downAtStmp"))
+			$headers:=$headers.remove($headers.indexOf("upAtStmp"))
 			$headers:=$headers.remove($headers.indexOf("equipment"))
+			$headers:=$headers.remove($headers.indexOf("operators"))
+			$headers:=$headers.remove($headers.indexOf("UUID"))
+			$headers:=$headers.filter(Formula:C1597($1.value#"stmp@"))
+			$headers:=$headers.filter(Formula:C1597($1.value#"UUID_@"))
+			
 			If (Not:C34($allFields))
-				$headers:=$relevantFields.filter(Formula:C1597($relevantFields.indexOf($1.value)#-1))
+				$headers:=$relevantFields
 			End if 
 			$OK:=True:C214
 		Else 
@@ -106,6 +116,14 @@ If ($continue)
 						: ($headerName="systemID")
 							$systemID:=$log_e.equipment#Null:C1517 ? $log_e.equipment.assignedID : ""
 							SEND PACKET:C103($file; Replace string:C233(String:C10($systemID); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
+							
+						: ($headerName="fixedBy")
+							$value:=$log_e.equipment#Null:C1517 ? $log_e.operators.fixedBy : ""
+							SEND PACKET:C103($file; Replace string:C233(String:C10($value); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
+							
+						: ($headerName="reportedBy")
+							$value:=$log_e.equipment#Null:C1517 ? $log_e.operators.reportedBy : ""
+							SEND PACKET:C103($file; Replace string:C233(String:C10($value); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
 							
 						Else 
 							
