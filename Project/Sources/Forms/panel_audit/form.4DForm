@@ -36,8 +36,28 @@
 		},
 		{
 			"objects": {}
+		},
+		{
+			"objects": {
+				"Subform": {
+					"type": "subform",
+					"left": 1,
+					"top": 113,
+					"width": 492,
+					"height": 283,
+					"detailForm": "_ga_document"
+				}
+			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 1
+	"geometryStamp": 6,
+	"method": "method.4dm",
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
 }

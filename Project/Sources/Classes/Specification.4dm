@@ -151,9 +151,6 @@ Function docsLateInReviewing()->$specifications : cs:C1710.SpecificationSelectio
 	
 local Function docsRequiringReviewSoon()->$specifications : cs:C1710.SpecificationSelection
 	$title:="Set date interval"
-	Use (Storage:C1525.cache)
-		Storage:C1525.cache.startDate:=Current date:C33()
-	End use 
 	This:C1470.setDateInterval(False:C215; $title)
 	$statDate:=Storage:C1525.cache.startDate
 	$endDate:=Storage:C1525.cache.endDate

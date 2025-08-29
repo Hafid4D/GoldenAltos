@@ -12,6 +12,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setPanel("panel_audit")
 	$entry.setPanelPage(1; ""; "Main")
+	$entry.setPanelPage(1; ""; "Document")
 	
 	$entry.setLBItemsColumn("book"; "Operational Areas"; "width:150")
 	$entry.setLBItemsOrderBy("book")

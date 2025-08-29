@@ -42,6 +42,8 @@ Function redrawAndSetVisible()
 		: (FORM Get current page:C276(*)=1)
 			
 			
+		: (FORM Get current page:C276(*)=2)
+			
 			
 	End case 
 	

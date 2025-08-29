@@ -266,20 +266,27 @@ Function loadAllTabs()
 Function LoadApContact()
 	
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.lb_apContact:=New collection:C1472()
-		If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()#Null:C1517)
+		If (Not:C34(Undefined:C82(Form:C1466.current_item.contacts)))
+			Form:C1466.lb_apContact:=New collection:C1472()
+			If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()#Null:C1517)
+				
+				Form:C1466.lb_apContact:=Form:C1466.current_item.rebuidComunications("AP")
+			End if 
 			
-			Form:C1466.lb_apContact:=Form:C1466.current_item.rebuidComunications("AP")
 		End if 
+		
 	End if 
 	
 	
 Function LoadStatusContact()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.lb_statusContact:=New collection:C1472()
-		If (Form:C1466.current_item.contacts.query("title=:1"; "Status").first()#Null:C1517)
-			
-			Form:C1466.lb_statusContact:=Form:C1466.current_item.rebuidComunications("Status")
+		If (Not:C34(Undefined:C82(Form:C1466.current_item.contacts)))
+			Form:C1466.lb_statusContact:=New collection:C1472()
+			If (Form:C1466.current_item.contacts.query("title=:1"; "Status").first()#Null:C1517)
+				
+				Form:C1466.lb_statusContact:=Form:C1466.current_item.rebuidComunications("Status")
+				
+			End if 
 			
 		End if 
 	End if 
