@@ -33,27 +33,6 @@
 	"pages": [
 		{
 			"objects": {
-				"btnForward": {
-					"type": "button",
-					"text": " ",
-					"top": 39,
-					"left": 774,
-					"width": 18,
-					"height": 18,
-					"events": [
-						"onClick",
-						"onMouseEnter",
-						"onMouseLeave"
-					],
-					"style": "custom",
-					"popupPlacement": "none",
-					"icon": "/RESOURCES/image/element/forward-16x16.png",
-					"textPlacement": "center",
-					"method": "ObjectMethods/btnForward.4dm",
-					"visibility": "visible",
-					"iconFrames": 4,
-					"focusable": false
-				},
 				"entryField_name2": {
 					"type": "input",
 					"top": 10,
@@ -71,7 +50,7 @@
 					"fill": "transparent",
 					"borderStyle": "none"
 				},
-				"entryField_code3": {
+				"entryField_lastName": {
 					"type": "input",
 					"top": 37,
 					"left": 108,
@@ -88,7 +67,7 @@
 					"fill": "transparent",
 					"borderStyle": "none"
 				},
-				"entryField_code4": {
+				"entryField_title": {
 					"type": "input",
 					"top": 64,
 					"left": 108,
@@ -104,7 +83,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"method": "ObjectMethods/entryField_code4.4dm"
+					"method": "ObjectMethods/entryField_title.4dm"
 				},
 				"label_0_7": {
 					"type": "text",
@@ -263,13 +242,22 @@
 				},
 				"subFormAddress": {
 					"type": "subform",
-					"left": 455,
+					"left": 648,
 					"top": 141,
 					"width": 805,
 					"height": 305,
 					"detailForm": "sfw_subpanel_addressSingle",
 					"borderStyle": "none",
 					"dataSource": "Form:C1466.subFormAddress"
+				},
+				"label_0_1": {
+					"type": "text",
+					"top": 39,
+					"left": 581,
+					"width": 111,
+					"height": 16,
+					"stroke": "#808080",
+					"text": "Customer Name"
 				},
 				"header_bkgd2": {
 					"type": "rectangle",
@@ -292,6 +280,27 @@
 					"fontSize": 12,
 					"fontWeight": "bold"
 				},
+				"pup_Customer": {
+					"type": "button",
+					"top": 36,
+					"left": 698,
+					"width": 300,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Customer",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_Customer.4dm",
+					"events": [
+						"onLoad",
+						"onClick"
+					],
+					"textAlign": "left"
+				},
 				"communication_subform": {
 					"type": "subform",
 					"left": 0,
@@ -302,6 +311,17 @@
 					"dataSource": "Form:C1466.subFormCommunication",
 					"method": "",
 					"visibility": "visible"
+				},
+				"subFormAddress": {
+					"type": "subform",
+					"left": 648,
+					"top": 144,
+					"width": 759,
+					"height": 261,
+					"detailForm": "sfw_subpanel_addressSingle",
+					"borderStyle": "none",
+					"dataSource": "Form:C1466.subFormAddress",
+					"method": "ObjectMethods/subFormAddress.4dm"
 				}
 			}
 		},
@@ -309,7 +329,7 @@
 			"objects": {}
 		}
 	],
-	"geometryStamp": 428,
+	"geometryStamp": 324,
 	"method": "method.4dm",
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"editor": {
