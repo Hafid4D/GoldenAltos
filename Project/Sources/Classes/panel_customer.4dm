@@ -9,7 +9,6 @@ Function formMethod()
 		Form:C1466.addressShipping:=0
 		Form:C1466.apContact:=1
 		Form:C1466.statusContact:=0
-		This:C1470.LoadContact()
 		This:C1470.loadAllTabs()
 		
 	End if 
@@ -84,6 +83,7 @@ Function pup_status()
 			: ($choose#"")
 				$eCustomerStatus:=ds:C1482.CustomerStatus.get($choose)
 				Form:C1466.current_item.UUID_CustomerStatus:=$eCustomerStatus.UUID
+				cs:C1710.panel_equipment.me._activate_save_cancel_button()
 		End case 
 		
 	End if 
@@ -128,6 +128,7 @@ Function pup_carrier()
 			: ($choose#"")
 				$eCustomerCarrier:=ds:C1482.CustomerCarrier.get($choose)
 				Form:C1466.current_item.UUID_CustomerCarrier:=$eCustomerCarrier.UUID
+				cs:C1710.panel_equipment.me._activate_save_cancel_button()
 		End case 
 		
 	End if 

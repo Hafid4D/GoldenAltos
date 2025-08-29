@@ -12,7 +12,6 @@ Function formMethod()
 		Form:C1466.remitAddress:=0
 		Form:C1466.primaryContact:=1
 		Form:C1466.secondaryContact:=0
-		This:C1470.LoadContact()
 		This:C1470.LoadAllTabs()
 	End if 
 	
@@ -288,6 +287,6 @@ Function loadDocuments()
 Function LoadAllTabs()
 	
 	This:C1470.loadDocuments()
-	
+	This:C1470.LoadContact()
 	
 	
