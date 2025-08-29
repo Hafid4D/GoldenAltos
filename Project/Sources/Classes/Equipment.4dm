@@ -171,25 +171,25 @@ local Function setDateInterval($pushUp; $title)
 	End use 
 	
 	
-Function equipmentsOutOfCalibration()->$equipments : cs:C1710.EquipmentSelection
+local Function equipmentsOutOfCalibration()->$equipments : cs:C1710.EquipmentSelection
 	$title:="Set date interval"
 	This:C1470.setDateInterval(False:C215; $title)
 	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & calibrationNotRequired=:2 & notAtSite=:3"; Storage:C1525.cache.endDate; False:C215; False:C215)
 	
 	
-Function pmEquipments()->$equipments : cs:C1710.EquipmentSelection
+local Function pmEquipments()->$equipments : cs:C1710.EquipmentSelection
 	$title:="Set date interval"
 	This:C1470.setDateInterval(False:C215; $title)
 	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3"; Storage:C1525.cache.endDate; !00-00-00!; False:C215)
 	
 	
-Function dueCalibrationEquipments()->$equipments : cs:C1710.EquipmentSelection
+local Function dueCalibrationEquipments()->$equipments : cs:C1710.EquipmentSelection
 	$title:="Set date interval"
 	This:C1470.setDateInterval(False:C215; $title)
 	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & notAtSite=:2 & engg=:3"; Storage:C1525.cache.endDate; False:C215; False:C215)
 	
 	
-Function duePMEquipments()->$equipments : cs:C1710.EquipmentSelection
+local Function duePMEquipments()->$equipments : cs:C1710.EquipmentSelection
 	$title:="Set date interval"
 	This:C1470.setDateInterval(False:C215; $title)
 	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3 & engg=:4"; Storage:C1525.cache.endDate; !00-00-00!; False:C215; False:C215)

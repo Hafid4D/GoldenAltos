@@ -1,7 +1,7 @@
 //PopupDate sample code
 
 Case of 
-	
+		
 	: (Form event code:C388=On Load:K2:1)
 		
 		// Init the var itself
@@ -78,5 +78,9 @@ Case of
 		If ($Customise)
 			DatePicker SET WEEK FIRST DAY($FormName; Wednesday:K10:15)  // lets start the week on wednesday (why not)
 		End if 
+		
+	: (Form event code:C388=On Data Change:K2:15)
+		
+		cs:C1710.panel_specification.me._activate_save_cancel_button()
 		
 End case 

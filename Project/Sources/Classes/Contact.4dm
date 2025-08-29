@@ -79,6 +79,6 @@ local Function cacheLoad()
 	End if 
 	
 	
-Function _loadAsCollection()->$companyTypes : Collection
+local Function _loadAsCollection()->$companyTypes : Collection
 	$companyTypes:=New collection:C1472("Supplier"; "Customer")
 	

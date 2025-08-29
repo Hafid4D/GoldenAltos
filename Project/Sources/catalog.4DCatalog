@@ -74,7 +74,6 @@
 		<field name="inOperator" uuid="CE059EA6EFE7EB49A1FC2DAF5CB22E65" type="10" limiting_length="255" never_null="true" id="30"/>
 		<field name="actualHours" uuid="0AAC51C4B19BA74CBACF719D1C91656B" type="6" never_null="true" id="31"/>
 		<field name="plannedHours" uuid="1A3980D589D3284F863777C1F0CA1A1F" type="6" never_null="true" id="32"/>
-		<field name="minYield" uuid="901C0BE796303E42954B9B1EBB994B24" type="6" never_null="true" id="33"/>
 		<primary_key field_name="UUID" field_uuid="EE9C517A8C59724B8559A5DCB59FE560"/>
 	</table>
 	<table name="Tool" uuid="0FF66E5E37EDD74B8E6E39F15644C85F" id="6">
@@ -129,10 +128,8 @@
 		<field name="UUID_DocumentCategory" uuid="67905BE86C5BDA44814B3A2BCCFDCDB6" type="10" store_as_UUID="true" never_null="true" id="10"/>
 		<field name="remark" uuid="F4CD3DD5A915BB498EF945E380518B91" type="10" limiting_length="255" never_null="true" id="11"/>
 		<field name="extension" uuid="1743D4283CC7B74CAF65FB4A396AEE7C" type="10" limiting_length="255" never_null="true" id="12"/>
-		<field name="addendum" uuid="6DF08F80478E4F47A8CF52321A3E7801" type="1" never_null="true" id="13"/>
 		<field name="suppress" uuid="667B2B05F2E694439706686CE9DC412D" type="1" never_null="true" id="14"/>
 		<field name="UUID_ControllingDepartment" uuid="00BBA10D3C697F408E164BC3494272E4" type="10" store_as_UUID="true" never_null="true" id="15"/>
-		<field name="addendumToSpec" uuid="4DB9F8A21A12A14398F05AF7C5F1BA5D" type="10" limiting_length="255" never_null="true" id="16"/>
 		<field name="reviewIntervalInDays" uuid="7413D34B72ACD04A8DAD654BFE162AAF" type="4" never_null="true" id="17"/>
 		<field name="stmpReviewDate" uuid="87FFB43152B5CB40B41CA4ABE12A9474" type="4" never_null="true" id="18"/>
 		<primary_key field_name="UUID" field_uuid="2A671DFB01797B4DBB6EC2EB4216DB75"/>
@@ -612,36 +609,6 @@
 		</field>
 		<primary_key field_name="UUID" field_uuid="1CB76A26D5B699429A95B9E10253FD00"/>
 	</table>
-	<table name="RMA" uuid="0972FDFCC1ADC346B47694ABCDEAB593" id="46">
-		<field name="UUID" uuid="AF643B21840FF74A90FA006ABD3AB6A3" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="UUID_Qcar" uuid="6A2DBA4BC09BD248A715BF5D84181E0C" type="10" store_as_UUID="true" never_null="true" id="2">
-			<field_extra multi_line="false"/>
-		</field>
-		<field name="partNumber" uuid="EE0E7AE61E9594438179879AC1197166" type="4" never_null="true" id="3"/>
-		<field name="rmaNumber" uuid="DA4CBDC76C3AAB41B11CAF5A7306B820" type="4" unique="true" never_null="true" id="4">
-			<field_extra multi_line="false"/>
-		</field>
-		<field name="contact" uuid="70A701D0F72B554EB0B3E2CBEDB1425F" type="10" limiting_length="255" never_null="true" id="5"/>
-		<field name="invoiceNumber" uuid="C9C0354B08A8564EA739F4F729E667EC" type="4" never_null="true" id="6"/>
-		<field name="authorizedBy" uuid="324332C3C24C39499199C8A64F493DEA" type="10" limiting_length="255" never_null="true" id="7"/>
-		<field name="phone" uuid="215DA4A6B1FB504E95396D945ED0F3B0" type="10" limiting_length="255" never_null="true" id="8"/>
-		<field name="description" uuid="E2D4D5BA48D249499742BFFBC28FB2F1" type="10" limiting_length="255" never_null="true" id="9"/>
-		<field name="status" uuid="67985458BBA9C546B6CF5AFBE95CCFC1" type="10" limiting_length="255" never_null="true" id="10">
-			<field_extra multi_line="false"/>
-		</field>
-		<field name="dateClose" uuid="01A63159E30C1F43B31C4644692CF3E4" type="8" never_null="true" id="11">
-			<field_extra multi_line="false"/>
-		</field>
-		<field name="reasonForReturn" uuid="4F0F772ACC8F4D4C86F90FEE1C52D112" type="10" limiting_length="255" never_null="true" id="12"/>
-		<field name="materialDisposition" uuid="57ECB82FAD64FD439FC7702DC9642C33" type="10" limiting_length="255" never_null="true" id="13"/>
-		<field name="qaQc" uuid="3D9EAF25B41CD04D8C2E2635E2F5939D" type="10" limiting_length="255" never_null="true" id="14"/>
-		<field name="customerSvc" uuid="2F22A0D3180BE841BBC425A8C4070B04" type="10" limiting_length="255" never_null="true" id="15">
-			<field_extra multi_line="false"/>
-		</field>
-		<field name="receivedDate" uuid="A51A32C13F9D124CBCF9833FEB20F195" type="8" never_null="true" id="16"/>
-		<field name="customerPo" uuid="3FE0D1F68772C647A5D86AB3BED14F03" type="10" limiting_length="255" never_null="true" id="17"/>
-		<primary_key field_name="UUID" field_uuid="AF643B21840FF74A90FA006ABD3AB6A3"/>
-	</table>
 	<table name="Units" uuid="BBEF22543374E24BBC6534C68EA6E3D2" id="49">
 		<field name="UUID" uuid="2C3EE5FC26975842998856F7D02B3BA2" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="levelID" uuid="B8D8E68ABB8B0B478109C20BD0BBBCE8" type="3" never_null="true" id="2"/>
@@ -950,12 +917,8 @@
 	</table>
 	<table name="Customer" uuid="96D1CE81460A4F75B3F4275138C8F778" id="114">
 		<field name="UUID" uuid="37676CD94E8B423595ED98B5C0E9CF89" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="name" uuid="6408BE6907C146339726DEB3047C211E" type="10" limiting_length="255" never_null="true" id="2">
-			<field_extra multi_line="false"/>
-		</field>
-		<field name="code" uuid="AF9DE89990E540D5986DAACE7A507FB0" type="10" limiting_length="255" never_null="true" id="3">
-			<field_extra multi_line="false"/>
-		</field>
+		<field name="name" uuid="6408BE6907C146339726DEB3047C211E" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="code" uuid="AF9DE89990E540D5986DAACE7A507FB0" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="UUID_CustomerCarrier" uuid="C597A4092E2E4812ABE088A99BB5ADF5" type="10" store_as_UUID="true" never_null="true" id="4"/>
 		<field name="contactDetails" uuid="F3B5F489FCA349E798ABFC436DDD823C" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
 		<field name="accountNumber" uuid="5A3BBA99C17E4183BE08F3A2B8EC43BF" type="10" limiting_length="255" never_null="true" id="6"/>
@@ -1026,7 +989,7 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="code" uuid="1DB4FFCAB0BF4998B4F7C55A90D0C7E2" type="10" limiting_length="255" never_null="true" id="3"/>
-		<field name="jobNumber" uuid="0FA357DE65EF304D84620E34A9B9F37C" type="4" unique="true" never_null="true" id="4"/>
+		<field name="jobNumber" uuid="0FA357DE65EF304D84620E34A9B9F37C" type="4" never_null="true" id="4"/>
 		<field name="poNumber" uuid="049CCB3BE3EFB34D8C79A28B2E49EA72" type="4" never_null="true" id="5"/>
 		<field name="division" uuid="3F0901B7A9581B4F9D9BC0B2A02F764B" type="10" limiting_length="255" never_null="true" id="6"/>
 		<field name="dateCreated" uuid="7B92BACD0DE09D44B8682380511563AC" type="8" never_null="true" id="7"/>
@@ -1094,7 +1057,6 @@
 		<field name="location" uuid="E71C67E4282EA742B952D10FA12855F2" type="10" limiting_length="255" never_null="true" id="32"/>
 		<field name="status" uuid="A4CF20D716CEAA43B1BE11D28352EB13" type="4" never_null="true" id="33"/>
 		<field name="comment" uuid="CC820B6502BD5C4AB32C77A17C8B6F16" type="10" limiting_length="255" never_null="true" id="34"/>
-		<field name="prQualifier" uuid="F949637E15BBFA41A80C26F91D661DF4" type="10" limiting_length="255" never_null="true" id="35"/>
 		<primary_key field_name="UUID" field_uuid="AEF78036FB7D429A96DF35BE53A0E0AF"/>
 	</table>
 	<table name="StepFile" uuid="A6301A2C994D4680A851FC2AE85118BE" id="119">
@@ -1127,8 +1089,6 @@
 		<field name="dataTables" uuid="468EEB0CF147B142864EBFD9A3055821" type="21" blob_switch_size="2147483647" never_null="true" id="11"/>
 		<field name="parametricMeasurements" uuid="47D9EF2D2F80E341AAB6B04FA7D076A0" type="21" blob_switch_size="2147483647" never_null="true" id="12"/>
 		<field name="bins" uuid="6B94872039983E44AE583BF9A056484B" type="21" blob_switch_size="2147483647" never_null="true" id="13"/>
-		<field name="templateNumber" uuid="B598301DF5C0394E96AB0B31EB3B320D" type="4" never_null="true" id="14"/>
-		<field name="settings" uuid="03EE819B2D714444B932D9A45A4019B6" type="21" blob_switch_size="2147483647" never_null="true" id="15"/>
 		<primary_key field_name="UUID" field_uuid="3E46CC22F2F34DC0B68C304E1BC47991"/>
 	</table>
 	<table name="ToolType" uuid="C0C5EF5A4CD04FF7BB3897793A9DE6ED" id="122">
@@ -1322,6 +1282,7 @@
 		<field name="revisionDate" uuid="7891632079BA28459B431B9F8CEEF120" type="8" never_null="true" id="8"/>
 		<field name="initialResponse" uuid="BDB0BDD27F533246B95F4932EA9FAE2F" type="10" limiting_length="255" never_null="true" id="9"/>
 		<field name="initiator8D" uuid="15257E6F093C3347AE0A93CFCAAD80D2" type="10" limiting_length="255" never_null="true" id="10"/>
+		<field name="actualCloseDate" uuid="AB17B7F5A540A243A1EA6F8BEE38AD9A" type="8" never_null="true" id="11"/>
 		<field name="verifiedBy" uuid="E97BB2497556B4448868D3412B7DE3AF" type="10" limiting_length="255" never_null="true" id="12">
 			<field_extra multi_line="false"/>
 		</field>
@@ -1340,18 +1301,6 @@
 		<field name="verified" uuid="B5317F2936DAA84688754D5AD27F203A" type="1" never_null="true" id="25"/>
 		<primary_key field_name="UUID" field_uuid="129BD267EFE06D4EBCF1E64FCE762186"/>
 	</table>
-	<relation uuid="E2AF483B529D544AB1C2C73E91FCFA34" name_Nto1="qcar" name_1toN="rmas" state="1">
-		<related_field kind="source">
-			<field_ref uuid="6A2DBA4BC09BD248A715BF5D84181E0C" name="UUID_Qcar">
-				<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
-			</field_ref>
-		</related_field>
-		<related_field kind="destination">
-			<field_ref uuid="129BD267EFE06D4EBCF1E64FCE762186" name="UUID">
-				<table_ref uuid="446AB1ED27F3664C9C9747DD14114EF2" name="Qcar"/>
-			</field_ref>
-		</related_field>
-	</relation>
 	<relation uuid="28F035FB298D4CB6988212AA82A48186" name_Nto1="user" name_1toN="comments" state="1">
 		<related_field kind="source">
 			<field_ref uuid="F6AFD7AAF6B044F09997D72626D64838" name="UUID_User">
@@ -2777,11 +2726,6 @@
 			<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="4858D593E166D24DA96C7D3908527A07" type="7">
-		<field_ref uuid="AF643B21840FF74A90FA006ABD3AB6A3" name="UUID">
-			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
-		</field_ref>
-	</index>
 	<index kind="regular" unique_keys="true" uuid="490E6CB43D43F846A537EB3B601CBE03" type="1">
 		<field_ref uuid="10F414604ECF714E8F9B93A248D3CB6D" name="code">
 			<table_ref uuid="FD10D10C9E0015458AFF59F988A373BB" name="Staff"/>
@@ -3062,11 +3006,6 @@
 			<table_ref uuid="01CB0A8A61387F468A67DFD7FE5F4D16" name="sfw_Currency"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="8FEFB3E77F49D149B94826C063B3088B" type="1">
-		<field_ref uuid="0FA357DE65EF304D84620E34A9B9F37C" name="jobNumber">
-			<table_ref uuid="D3AC71CFD00F4948816121AA74EF8DFE" name="Job"/>
-		</field_ref>
-	</index>
 	<index kind="regular" unique_keys="true" uuid="90055F88CCC44E43AA42528D0A645F45" type="1">
 		<field_ref uuid="769E2352C948124B8164A955C5073333" name="UUID">
 			<table_ref uuid="63274D1841D8B94E868AEE5C2909EBE8" name="dfd_Template"/>
@@ -3130,11 +3069,6 @@
 	<index kind="regular" uuid="A0852CCA129D2C44A8BCDEDF3B506C8A" type="3">
 		<field_ref uuid="B31124481979DC4687A97B0CB724679E" name="UUID_Lot">
 			<table_ref uuid="21C997F4FF841640B547868BE38C05ED" name="LotStep"/>
-		</field_ref>
-	</index>
-	<index kind="regular" uuid="A11B1D1955002043BCBD098EEB9D3325" type="3">
-		<field_ref uuid="6A2DBA4BC09BD248A715BF5D84181E0C" name="UUID_Qcar">
-			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="A18B7A1BA8F46A4A953454D07300F4CB" type="3">
@@ -3450,11 +3384,6 @@
 	<index kind="regular" uuid="F20E165F0BE847BE813BD9F4E3EC7C7E" type="3">
 		<field_ref uuid="ABAA4737CB084A23A5749664C3DD08B2" name="UUID_StepTemplate">
 			<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="F3F3F35653E8CA4ABA89CB69247B4413" type="1">
-		<field_ref uuid="DA4CBDC76C3AAB41B11CAF5A7306B820" name="rmaNumber">
-			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="F61934622EB544168C29BC698E61DC4E" type="7">
