@@ -15,3 +15,4 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setLBItemsColumn("book"; "Operational Areas"; "width:150")
 	$entry.setLBItemsOrderBy("book")
+
