@@ -100,6 +100,7 @@ If (OK=1)
 				
 				Case of 
 					: ($headerName="UUID")
+<<<<<<< HEAD
 					: ($headerName="categoryID")
 						$category:=ds:C1482.SpecCategory.query("categoryID=:1"; $specification_e["categoryID"]).first()
 						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($category.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
@@ -107,6 +108,13 @@ If (OK=1)
 					: ($headerName="departmentID")
 						$departement:=ds:C1482.SpecControllingDept.query("departmentID=:1"; $specification_e["departmentID"]).first()
 						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($departement.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
+=======
+					: ($headerName="category")
+						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($specification_e.category.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
+						
+					: ($headerName="department")
+						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($specification_e.departement.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
+>>>>>>> 8d4bf51ff64d7c6e02a67ce9ca9190bf45546415
 						
 						
 					Else 
