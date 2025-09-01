@@ -2252,7 +2252,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="B6538AB6C0F9174B8E4C993C9C6D4AEE" name_Nto1="yesNoQuestion" name_1toN="cips" state="1">
+	<relation uuid="B6538AB6C0F9174B8E4C993C9C6D4AEE" name_Nto1="isAcceptable" name_1toN="cips" state="1">
 		<related_field kind="source">
 			<field_ref uuid="D851DE695D3D1D469EFDF4554818DAE4" name="UUID_YesNoQuestion">
 				<table_ref uuid="1BCF3E71728E56429B08B229161AD291" name="ContinuousImprovement"/>

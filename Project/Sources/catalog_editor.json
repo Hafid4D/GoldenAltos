@@ -953,13 +953,13 @@
 		},
 		"Audit": {
 			"color": {
-				"red": 234,
-				"green": 116,
-				"blue": 237,
+				"red": 160,
+				"green": 174,
+				"blue": 158,
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4116,
+				"left": 4118,
 				"top": 0,
 				"width": 209,
 				"height": 264.33203125
@@ -1131,7 +1131,7 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2426,
+				"left": 2452,
 				"top": 0,
 				"width": 129,
 				"height": 161.33203125
