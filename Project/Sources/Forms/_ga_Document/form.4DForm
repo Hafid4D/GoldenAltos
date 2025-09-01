@@ -488,5 +488,5 @@
 		}
 	},
 	"method": "method.4dm",
-	"shared": false
+	"shared": true
 }
