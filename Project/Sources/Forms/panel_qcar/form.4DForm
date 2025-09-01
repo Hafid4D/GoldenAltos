@@ -245,14 +245,14 @@
 					"borderStyle": "none",
 					"right": 632
 				},
-				"label_0_9": {
+				"label_originator": {
 					"type": "text",
 					"top": 12,
 					"left": 653,
 					"width": 95,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "8D Initiator"
+					"text": "Originator"
 				},
 				"entryField_initiator8D": {
 					"type": "input",
@@ -357,14 +357,14 @@
 					],
 					"focusable": true
 				},
-				"label_0_2": {
+				"label_car": {
 					"type": "text",
 					"top": 12,
 					"left": 444,
 					"width": 75,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Car #"
+					"text": "CAR #"
 				},
 				"Field_qcarNumber": {
 					"type": "input",
@@ -472,6 +472,32 @@
 						"onLoad"
 					],
 					"focusable": true
+				},
+				"label_externalParty": {
+					"type": "text",
+					"top": 87,
+					"left": 874,
+					"width": 87,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "External Party"
+				},
+				"EntryField_externalParty": {
+					"type": "input",
+					"top": 87,
+					"left": 958,
+					"width": 310,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.externalParty",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
 				}
 			}
 		},
@@ -837,10 +863,112 @@
 					"method": "ObjectMethods/subform_qcar.4dm"
 				}
 			}
+		},
+		{
+			"objects": {
+				"rec_bkgd_1": {
+					"type": "rectangle",
+					"top": 154,
+					"left": 5,
+					"width": 100,
+					"height": 442,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 105,
+					"bottom": 596
+				},
+				"lb_documents1": {
+					"type": "listbox",
+					"top": 155,
+					"left": 107,
+					"width": 402,
+					"height": 440,
+					"resizingMode": "legacy",
+					"listboxType": "collection",
+					"focusable": false,
+					"movableRows": false,
+					"dataSource": "Form:C1466.lb_documents",
+					"currentItemSource": "Form:C1466.selectedDocument",
+					"currentItemPositionSource": "",
+					"metaSource": "",
+					"scrollbarHorizontal": "hidden",
+					"horizontalLineStroke": "#c0c0c0",
+					"verticalLineStroke": "#C0C0C0",
+					"events": [
+						"onClick",
+						"onDataChange"
+					],
+					"fill": "automatic",
+					"alternateFill": "#F7F9FC",
+					"method": "ObjectMethods/lb_documents1.4dm",
+					"selectionMode": "single",
+					"singleClickEdit": false,
+					"rowFillSource": "highlightExpiredCertification",
+					"columns": [
+						{
+							"name": "header_certifName",
+							"dataSource": "This:C1470.name",
+							"width": 330,
+							"minWidth": 200,
+							"maxWidth": 340,
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"header": {
+								"name": "Entête3",
+								"text": "Name",
+								"fontTheme": "normal",
+								"textAlign": "left",
+								"fontWeight": "bold"
+							},
+							"footer": {
+								"name": "Pied3",
+								"timeFormat": "hh_mm_ss",
+								"fontFamily": "System Font Regular",
+								"fontSize": 10
+							},
+							"fontTheme": "normal",
+							"enterable": false,
+							"resizable": false
+						}
+					]
+				},
+				"Text2": {
+					"type": "text",
+					"text": "Objective Evidences",
+					"top": 161,
+					"left": 9,
+					"width": 92,
+					"height": 36,
+					"fontWeight": "bold",
+					"right": 101
+				},
+				"bActionManageDocuments1": {
+					"type": "button",
+					"text": "Actions",
+					"top": 571,
+					"left": 16,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionManageDocuments1.4dm",
+					"visibility": "visible",
+					"sizingX": "fixed",
+					"sizingY": "fixed"
+				}
+			}
 		}
 	],
-	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 2707,
+	"inheritedForm": "sfw_bkgd_header_4lines",
+	"geometryStamp": 2774,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
