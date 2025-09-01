@@ -3,35 +3,6 @@
 
 var $colors : Collection:=New collection:C1472("#3CB371"; "#FFFF00"; "#FF7F50"; "#1E90FF"; "#FF0000")
 
-var $carriers; $status; $customerStatuscolors : Collection
-$carriers:=New collection:C1472("GAC Driver"; "Fed-Ex Priority"; "fedex Std Overnight"; "fedex"; "fedex Ground"; "Customer Pickup"; "UPS 2nd Day"; "UPS Ground"; "UPS Next Day"; "DHL")
-$status:=New collection:C1472("Active"; "Hold"; "Retired"; "Void")
-$customerStatuscolors:=New collection:C1472("#32CD32"; "#1E90FF"; "#FF0000"; "#FFFF00")
-
-
-//----> [CustomerStatus]
-TRUNCATE TABLE:C1051([CustomerStatus:130])
-For ($i; 0; $status.length-1)
-	
-	$eCustomerStatus:=ds:C1482.CustomerStatus.new()
-	$eCustomerStatus.levelID:=$i+1
-	$eCustomerStatus.name:=$status[$i]
-	$eCustomerStatus.color:=$customerStatuscolors[$i]
-	$eCustomerStatus.save()
-	
-End for 
-
-//----> [CustomerCarrier]
-TRUNCATE TABLE:C1051([CustomerCarrier:7])
-For ($i; 0; $carriers.length-1)
-	
-	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
-	$eCustomerCarrier.levelID:=$i+1
-	$eCustomerCarrier.name:=$carriers[$i]
-	$eCustomerCarrier.color:=""
-	$eCustomerCarrier.save()
-End for 
-
 
 //---->[ControllingDepartment]
 var $eControllingDept : cs:C1710.ControllingDepartmentEntity
@@ -46,6 +17,20 @@ For ($i; 0; $SpecControllingDepts.length-1)
 	$eControllingDept.name:=$SpecControllingDepts[$i]
 	$eControllingDept.save()
 End for 
+
+////---->[SpecCategory]
+//var $eCategory : cs.SpecCategoryEntity
+//var $specificationCategories : Collection:=New collection("All"; "Customer Service"; "Document Control"; \
+"Golden Altos Forms (including Logs, Checklists)"; "Maintenance Engineering"; \
+"Military Standard"; "Process_Production Procedures"; "Quality Assurance"; "Quality Control"; \
+"Quality Manual"; "System Procedure"; "Training")
+//TRUNCATE TABLE([SpecCategory])
+//For ($i; 0; $specificationCategories.length-1)
+//$eCategory:=ds.SpecCategory.new()
+//$eCategory.categoryID:=$i
+//$eCategory.name:=$specificationCategories[$i]
+//$eCategory.save()
+//End for 
 
 
 //----> [EquipementLocation]

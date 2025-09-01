@@ -84,7 +84,6 @@ Function loadCurrentStep()
 	
 	If ($currentstep.length>0)
 		Form:C1466.currentStep:=$currentstep[0]
-		Form:C1466.currentStep.itemLoad()
 		
 		If (This:C1470.checkForCertifications())
 			Form:C1466.currentStepOrder:=Form:C1466.currentStep.order
@@ -337,6 +336,3 @@ Function bActionPMs()
 				End if 
 		End case 
 	End if 
-	
-Function btnOpenLot()
-	Form:C1466.sfw.openInANewWindow(Form:C1466.current_item; "customerService"; "lots")

@@ -34,148 +34,11 @@
 					"width": 116,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Template Number"
-				},
-				"Field_name": {
-					"type": "input",
-					"top": 12,
-					"left": 132,
-					"width": 140,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.templateNumber",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"textAlign": "left"
-				},
-				"label_operation": {
-					"type": "text",
-					"top": 39,
-					"left": 350,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Operation"
-				},
-				"entryField_operation": {
-					"type": "input",
-					"top": 39,
-					"left": 450,
-					"width": 140,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.operation",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"choiceList": {
-						"$ref": "/SOURCES/lists.json#/OperationTypes"
-					},
-					"requiredList": {
-						"$ref": "/SOURCES/lists.json#/OperationTypes"
-					}
-				},
-				"label_division": {
-					"type": "text",
-					"top": 12,
-					"left": 350,
-					"width": 70,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Division"
-				},
-				"Field_division": {
-					"type": "input",
-					"top": 12,
-					"left": 450,
-					"width": 100,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.division",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onClick",
-						"onMouseMove"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"sizingX": "fixed",
-					"method": "ObjectMethods/Field_division.4dm"
-				},
-				"label_status": {
-					"type": "text",
-					"top": 12,
-					"left": 657,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Status"
-				},
-				"label_binning": {
-					"type": "text",
-					"top": 37,
-					"left": 657,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Binning"
-				},
-				"entryField_status": {
-					"type": "checkbox",
-					"text": "Active",
-					"top": 7,
-					"left": 741,
-					"width": 72,
-					"height": 24,
-					"events": [
-						"onClick"
-					],
-					"fontWeight": "bold",
-					"dataSourceTypeHint": "boolean",
-					"dataSource": "Form:C1466.current_item.status"
-				},
-				"entryField_binning": {
-					"type": "checkbox",
-					"text": "Binning",
-					"top": 32,
-					"left": 741,
-					"width": 72,
-					"height": 24,
-					"events": [
-						"onClick"
-					],
-					"fontWeight": "bold",
-					"dataSourceTypeHint": "boolean",
-					"dataSource": "Form:C1466.current_item.binning"
-				},
-				"label_stepName1": {
-					"type": "text",
-					"top": 37,
-					"left": 12,
-					"width": 116,
-					"height": 17,
-					"stroke": "#808080",
 					"text": "Step Template Name"
 				},
-				"entryField_name1": {
+				"entryField_name": {
 					"type": "input",
-					"top": 37,
+					"top": 12,
 					"left": 132,
 					"width": 140,
 					"height": 17,
@@ -190,6 +53,107 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"fontWeight": "bold"
+				},
+				"label_operation": {
+					"type": "text",
+					"top": 37,
+					"left": 12,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Operation"
+				},
+				"entryField_operation": {
+					"type": "input",
+					"top": 37,
+					"left": 132,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.operation",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold"
+				},
+				"label_division": {
+					"type": "text",
+					"top": 12,
+					"left": 582,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Division"
+				},
+				"entryField_division": {
+					"type": "input",
+					"top": 12,
+					"left": 682,
+					"width": 100,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.division",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"sizingX": "fixed"
+				},
+				"label_status": {
+					"type": "text",
+					"top": 12,
+					"left": 352,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Status"
+				},
+				"label_binning": {
+					"type": "text",
+					"top": 37,
+					"left": 352,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Binning"
+				},
+				"entryField_status": {
+					"type": "checkbox",
+					"text": "Active",
+					"top": 7,
+					"left": 436,
+					"width": 72,
+					"height": 24,
+					"events": [
+						"onClick"
+					],
+					"fontWeight": "bold",
+					"dataSourceTypeHint": "boolean",
+					"dataSource": "Form:C1466.current_item.status"
+				},
+				"entryField_binning": {
+					"type": "checkbox",
+					"text": "Binning",
+					"top": 32,
+					"left": 436,
+					"width": 72,
+					"height": 24,
+					"events": [
+						"onClick"
+					],
+					"fontWeight": "bold",
+					"dataSourceTypeHint": "boolean",
+					"dataSource": "Form:C1466.current_item.binning"
 				}
 			}
 		},
@@ -199,7 +163,7 @@
 					"type": "rectangle",
 					"top": 129,
 					"left": 4,
-					"width": 870,
+					"width": 610,
 					"height": 53,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
@@ -209,7 +173,7 @@
 					"type": "rectangle",
 					"top": 96,
 					"left": 4,
-					"width": 870,
+					"width": 610,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
@@ -230,7 +194,7 @@
 					"type": "text",
 					"top": 137,
 					"left": 10,
-					"width": 99,
+					"width": 79,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Comment 1"
@@ -238,8 +202,8 @@
 				"EntryField_comment3": {
 					"type": "input",
 					"top": 137,
-					"left": 117,
-					"width": 747,
+					"left": 97,
+					"width": 507,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.comment1",
 					"focusable": false,
@@ -258,7 +222,7 @@
 					"type": "text",
 					"top": 161,
 					"left": 10,
-					"width": 99,
+					"width": 79,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Comment 2"
@@ -266,8 +230,8 @@
 				"entryField_comment4": {
 					"type": "input",
 					"top": 161,
-					"left": 117,
-					"width": 747,
+					"left": 97,
+					"width": 507,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.comment2",
 					"focusable": false,
@@ -285,7 +249,7 @@
 					"type": "rectangle",
 					"top": 188,
 					"left": 4,
-					"width": 610,
+					"width": 450,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
@@ -306,7 +270,7 @@
 					"type": "rectangle",
 					"top": 221,
 					"left": 4,
-					"width": 610,
+					"width": 450,
 					"height": 85,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
@@ -317,7 +281,7 @@
 					"type": "listbox",
 					"left": 7,
 					"top": 224,
-					"width": 603,
+					"width": 443,
 					"height": 79,
 					"events": [
 						"onClick",
@@ -343,7 +307,7 @@
 							"footer": {
 								"name": "Footer2"
 							},
-							"width": 590,
+							"width": 426,
 							"dataSource": "This:C1470.certification.name"
 						}
 					]
@@ -352,7 +316,7 @@
 					"type": "button",
 					"text": " ",
 					"top": 192,
-					"left": 582,
+					"left": 422,
 					"width": 26,
 					"height": 21,
 					"events": [
@@ -369,7 +333,7 @@
 					"type": "rectangle",
 					"top": 313,
 					"left": 4,
-					"width": 610,
+					"width": 450,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
@@ -390,7 +354,7 @@
 					"type": "rectangle",
 					"top": 346,
 					"left": 4,
-					"width": 610,
+					"width": 450,
 					"height": 85,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
@@ -401,7 +365,7 @@
 					"type": "listbox",
 					"left": 7,
 					"top": 349,
-					"width": 603,
+					"width": 443,
 					"height": 79,
 					"events": [
 						"onClick",
@@ -427,7 +391,7 @@
 							"footer": {
 								"name": "Footer1"
 							},
-							"width": 56,
+							"width": 36,
 							"textAlign": "center",
 							"dataSourceTypeHint": "number",
 							"dataSource": "This:C1470.order"
@@ -438,7 +402,7 @@
 								"text": "Header6"
 							},
 							"name": "Column6",
-							"width": 530,
+							"width": 390,
 							"footer": {
 								"name": "Footer6"
 							},
@@ -450,7 +414,7 @@
 					"type": "button",
 					"text": " ",
 					"top": 317,
-					"left": 582,
+					"left": 422,
 					"width": 26,
 					"height": 21,
 					"events": [
@@ -467,7 +431,7 @@
 					"type": "rectangle",
 					"top": 438,
 					"left": 4,
-					"width": 610,
+					"width": 450,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
@@ -488,7 +452,7 @@
 					"type": "rectangle",
 					"top": 471,
 					"left": 4,
-					"width": 610,
+					"width": 450,
 					"height": 85,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
@@ -499,7 +463,7 @@
 					"type": "listbox",
 					"left": 7,
 					"top": 474,
-					"width": 603,
+					"width": 443,
 					"height": 79,
 					"events": [
 						"onClick",
@@ -525,7 +489,7 @@
 							"footer": {
 								"name": "Footer3"
 							},
-							"width": 590,
+							"width": 426,
 							"dataSource": "This:C1470.key"
 						}
 					]
@@ -534,7 +498,7 @@
 					"type": "button",
 					"text": " ",
 					"top": 442,
-					"left": 582,
+					"left": 422,
 					"width": 26,
 					"height": 21,
 					"events": [
@@ -550,8 +514,8 @@
 				"header_bkgd10": {
 					"type": "rectangle",
 					"top": 129,
-					"left": 879,
-					"width": 350,
+					"left": 619,
+					"width": 290,
 					"height": 53,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
@@ -560,8 +524,8 @@
 				"header_bkgd11": {
 					"type": "rectangle",
 					"top": 96,
-					"left": 879,
-					"width": 350,
+					"left": 619,
+					"width": 290,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
@@ -570,7 +534,7 @@
 				"lbl_comments2": {
 					"type": "text",
 					"top": 103,
-					"left": 885,
+					"left": 625,
 					"width": 277,
 					"height": 17,
 					"stroke": "#000000",
@@ -581,7 +545,7 @@
 				"label_smallLayout": {
 					"type": "text",
 					"top": 137,
-					"left": 887,
+					"left": 627,
 					"width": 107,
 					"height": 17,
 					"stroke": "#808080",
@@ -590,8 +554,8 @@
 				"entryField_smallLayout": {
 					"type": "input",
 					"top": 137,
-					"left": 980,
-					"width": 240,
+					"left": 720,
+					"width": 180,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.smallLayout",
 					"focusable": false,
@@ -608,7 +572,7 @@
 				"label_largeLayout": {
 					"type": "text",
 					"top": 161,
-					"left": 887,
+					"left": 627,
 					"width": 107,
 					"height": 17,
 					"stroke": "#808080",
@@ -617,8 +581,8 @@
 				"entryField_largeLayout": {
 					"type": "input",
 					"top": 161,
-					"left": 980,
-					"width": 240,
+					"left": 720,
+					"width": 180,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.largeLayout",
 					"focusable": false,
@@ -635,8 +599,8 @@
 				"header_bkgd12": {
 					"type": "rectangle",
 					"top": 188,
-					"left": 619,
-					"width": 610,
+					"left": 459,
+					"width": 450,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
@@ -645,7 +609,7 @@
 				"lbl_dataTable4": {
 					"type": "text",
 					"top": 195,
-					"left": 625,
+					"left": 465,
 					"width": 278,
 					"height": 17,
 					"stroke": "#000000",
@@ -656,8 +620,8 @@
 				"header_bkgd13": {
 					"type": "rectangle",
 					"top": 221,
-					"left": 619,
-					"width": 610,
+					"left": 459,
+					"width": 450,
 					"height": 85,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
@@ -666,9 +630,9 @@
 				},
 				"List Box4": {
 					"type": "listbox",
-					"left": 622,
+					"left": 462,
 					"top": 224,
-					"width": 603,
+					"width": 443,
 					"height": 79,
 					"events": [
 						"onClick",
@@ -694,7 +658,7 @@
 							"footer": {
 								"name": "Footer4"
 							},
-							"width": 590,
+							"width": 426,
 							"dataSource": "This:C1470.key"
 						}
 					]
@@ -703,7 +667,7 @@
 					"type": "button",
 					"text": " ",
 					"top": 192,
-					"left": 1197,
+					"left": 877,
 					"width": 26,
 					"height": 21,
 					"events": [
@@ -719,8 +683,8 @@
 				"header_bkgd14": {
 					"type": "rectangle",
 					"top": 313,
-					"left": 619,
-					"width": 610,
+					"left": 459,
+					"width": 450,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
@@ -729,7 +693,7 @@
 				"lbl_dataTable5": {
 					"type": "text",
 					"top": 320,
-					"left": 625,
+					"left": 465,
 					"width": 278,
 					"height": 17,
 					"stroke": "#000000",
@@ -740,8 +704,8 @@
 				"header_bkgd15": {
 					"type": "rectangle",
 					"top": 346,
-					"left": 619,
-					"width": 610,
+					"left": 459,
+					"width": 450,
 					"height": 208,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
@@ -750,9 +714,9 @@
 				},
 				"List Box5": {
 					"type": "listbox",
-					"left": 622,
+					"left": 462,
 					"top": 349,
-					"width": 603,
+					"width": 443,
 					"height": 202,
 					"events": [
 						"onClick",
@@ -791,7 +755,7 @@
 							"footer": {
 								"name": "Footer5"
 							},
-							"width": 540,
+							"width": 386,
 							"dataSource": "This:C1470.definition"
 						}
 					]
@@ -800,7 +764,7 @@
 					"type": "button",
 					"text": " ",
 					"top": 317,
-					"left": 1197,
+					"left": 877,
 					"width": 26,
 					"height": 21,
 					"events": [
@@ -1062,121 +1026,11 @@
 					"height": 16,
 					"fontWeight": "bold",
 					"right": 101
-				},
-				"btn_openDocument": {
-					"type": "button",
-					"text": " ",
-					"top": 311,
-					"left": 922,
-					"width": 18,
-					"height": 18,
-					"events": [
-						"onClick",
-						"onMouseEnter",
-						"onMouseLeave"
-					],
-					"style": "custom",
-					"popupPlacement": "none",
-					"icon": "/RESOURCES/image/element/forward-16x16.png",
-					"textPlacement": "center",
-					"method": "ObjectMethods/btn_openDocument.4dm",
-					"visibility": "visible",
-					"iconFrames": 4,
-					"focusable": false
-				}
-			}
-		},
-		{
-			"objects": {
-				"bkgd_lb_properties": {
-					"type": "rectangle",
-					"top": 95,
-					"left": 106,
-					"width": 843,
-					"height": 442,
-					"stroke": "#c0c0c0",
-					"fill": "#F7F9FC",
-					"right": 949,
-					"bottom": 537
-				},
-				"lb_properties": {
-					"type": "listbox",
-					"left": 106,
-					"top": 96,
-					"width": 467,
-					"height": 440,
-					"events": [
-						"onDataChange"
-					],
-					"headerHeight": "24px",
-					"listboxType": "collection",
-					"visibility": "visible",
-					"dataSource": "Form:C1466.lb_properties",
-					"alternateFill": "#F7F9FC",
-					"selectionMode": "single",
-					"currentItemSource": "Form:C1466.selectedProperty",
-					"method": "ObjectMethods/lb_properties.4dm",
-					"scrollbarHorizontal": "hidden",
-					"columns": [
-						{
-							"header": {
-								"name": "Header8",
-								"text": "Property",
-								"fontWeight": "bold"
-							},
-							"name": "Column8",
-							"footer": {
-								"name": "Footer8"
-							},
-							"dataSource": "This:C1470.name",
-							"width": 388,
-							"enterable": false
-						},
-						{
-							"header": {
-								"name": "Header9",
-								"text": "",
-								"fontWeight": "bold"
-							},
-							"name": "entryField_checked",
-							"footer": {
-								"name": "Footer9"
-							},
-							"dataSource": "This:C1470.checked",
-							"width": 62,
-							"enterable": false,
-							"dataSourceTypeHint": "boolean",
-							"resizable": false,
-							"controlType": "checkbox"
-						}
-					]
-				},
-				"rec_bkgd_3": {
-					"type": "rectangle",
-					"top": 95,
-					"left": 5,
-					"width": 100,
-					"height": 442,
-					"sizingX": "fixed",
-					"fill": "#A2C6D8",
-					"stroke": "transparent",
-					"right": 105,
-					"bottom": 537
-				},
-				"Text1": {
-					"type": "text",
-					"text": "Properties",
-					"top": 105,
-					"left": 9,
-					"width": 92,
-					"height": 16,
-					"fontWeight": "bold",
-					"right": 101
 				}
 			}
 		}
 	],
-	"geometryStamp": 2192,
+	"geometryStamp": 1959,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

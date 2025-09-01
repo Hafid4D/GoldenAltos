@@ -9,27 +9,15 @@
 	"windowMinHeight": 0,
 	"windowMaxWidth": 32767,
 	"windowMaxHeight": 32767,
+
 	"rightMargin": 20,
 	"bottomMargin": 20,
-	"events": [
-		"onLoad",
-		"onPageChange",
-		"onValidate",
-		"onClick",
-		"onDoubleClick",
-		"onOutsideCall",
-		"onBeginDragOver",
-		"onDragOver",
-		"onDrop",
-		"onAfterKeystroke",
-		"onMenuSelect",
-		"onPluginArea",
-		"onAfterEdit",
-		"onTimer",
-		"onBoundVariableChange"
-	],
+
+	"events": ["onLoad","onPageChange","onValidate","onClick","onDoubleClick","onOutsideCall","onBeginDragOver","onDragOver","onDrop","onAfterKeystroke","onMenuSelect","onPluginArea","onAfterEdit","onTimer","onBoundVariableChange"],
+
 	"windowTitle": "window title",
 	"destination": "detailScreen",
+<<<<<<< HEAD
 	"pages": [
 		{
 			"objects": {}
@@ -61,3 +49,14 @@
 		}
 	}
 }
+=======
+	"pages" : [
+	{
+		"objects":{}
+	},
+	{
+		"objects":{}
+	}
+	]
+}
+>>>>>>> 14904ccf870c86d5f932c5ad7626da14af77f2f6

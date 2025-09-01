@@ -1,22 +1,14 @@
 singleton Class constructor
 	//It's a singleton class
 	
-Function _activate_save_cancel_button()
-	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
-	
 Function formMethod()
 	//This function manages the main logic for updating and refreshing the form
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh
 		This:C1470.loadAllTabs()
-		
-		Form:C1466.addressBilling:=1
-		Form:C1466.addressShipping:=0
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
-			: (FORM Get current page:C276(*)=1)
-				This:C1470.rebuildAddresses()
 			: (FORM Get current page:C276(*)=2)  //PO -> line items
 				This:C1470.loadPoLineItems()
 				
@@ -28,12 +20,12 @@ Function formMethod()
 		This:C1470.redrawAndSetVisible()
 	End if 
 	
-Function rebuildAddresses()
-	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.subFormAddress:=New object:C1471()
-		Form:C1466.subFormAddress.address:=Form:C1466.current_item.rebuildAddress()
-		Form:C1466.subFormAddress.situation:=Form:C1466.situation
-	End if 
+Function loadDpAddress()
+	Form:C1466.dpAddress:=New object:C1471(\
+		"values"; New collection:C1472("billing"; "shipping"); \
+		"index"; 0; \
+		"currentValue"; "Billing Address"\
+		)
 	
 	
 Function drawPup_XXX()
@@ -109,12 +101,8 @@ Function bActionAttachPoLine()
 		APPEND MENU ITEM:C411($refMenu; "Attach a PO Line")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--create")
 		APPEND MENU ITEM:C411($refMenu; "-")
-		
-		APPEND MENU ITEM:C411($refMenu; "Delete")
+		APPEND MENU ITEM:C411($refMenu; "(Delete")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")
-		If (Form:C1466.selectedPoLine=Null:C1517)
-			DISABLE MENU ITEM:C150($refMenu; -1)
-		End if 
 		
 		$choose:=Dynamic pop up menu:C1006($refMenu)
 		
@@ -131,20 +119,7 @@ Function bActionAttachPoLine()
 				End if 
 				
 			: ($choose="--delete")
-				If (Form:C1466.selectedPoLine#Null:C1517)
-					cs:C1710.sfw_dialog.me.confirm("Are you sure? !")
-					
-					If (ok=1)
-						Form:C1466.selectedPoLine.UUID_Job:=""
-						
-						$res:=Form:C1466.selectedPoLine.save()
-						
-						If ($res.success)
-							This:C1470.loadPoLineItems()
-							This:C1470._activate_save_cancel_button()
-						End if 
-					End if 
-				End if 
+				
 		End case 
 	Else 
 		$refMenu:=Create menu:C408
@@ -164,11 +139,8 @@ Function bActionAttachLot()
 		APPEND MENU ITEM:C411($refMenu; "Attach a Lot")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--create")
 		APPEND MENU ITEM:C411($refMenu; "-")
-		APPEND MENU ITEM:C411($refMenu; "Delete")
+		APPEND MENU ITEM:C411($refMenu; "(Delete")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")
-		If (Form:C1466.selectedLot=Null:C1517)
-			DISABLE MENU ITEM:C150($refMenu; -1)
-		End if 
 		
 		$choose:=Dynamic pop up menu:C1006($refMenu)
 		
@@ -185,20 +157,7 @@ Function bActionAttachLot()
 				End if 
 				
 			: ($choose="--delete")
-				If (Form:C1466.selectedLot#Null:C1517)
-					cs:C1710.sfw_dialog.me.confirm("Are you sure? !")
-					
-					If (ok=1)
-						Form:C1466.selectedLot.UUID_Job:=""
-						
-						$res:=Form:C1466.selectedLot.save()
-						
-						If ($res.success)
-							This:C1470.loadLots()
-							This:C1470._activate_save_cancel_button()
-						End if 
-					End if 
-				End if 
+				
 		End case 
 	Else 
 		$refMenu:=Create menu:C408
@@ -229,25 +188,4 @@ Function btnOpenPurchaseOrder()
 Function hideDatePickers()
 	OBJECT SET VISIBLE:C603(*; "dp_@"; Form:C1466.sfw.checkIsInModification())
 	
-Function selectPurchaseOrder()
-	If (Form:C1466.sfw.checkIsInModification())
-		Case of 
-			: (FORM Event:C1606.code=On Getting Focus:K2:7) | (FORM Event:C1606.code=On Clicked:K2:4)
-				OBJECT GET COORDINATES:C663(*; "Field_poNumber"; $l; $t; $r; $b)
-				CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
-				
-				$form:=New object:C1471()
-				
-				$winRef:=Open form window:C675("selectNto1_hier"; Pop up form window:K39:11; $l; $b-20)
-				DIALOG:C40("selectNto1_hier"; $form)
-				CLOSE WINDOW:C154($winRef)
-				
-				If (ok=1)
-					$form.poLine.UUID_Job:=Form:C1466.current_item.UUID
-					
-					Form:C1466.current_item.customer:=$form.poLine.purchaseOrder.customer.name
-					Form:C1466.current_item.poNumber:=$form.poLine.purchaseOrder.poNumber
-					cs:C1710.panel_purchaseOrder.me._activate_save_cancel_button()
-				End if 
-		End case 
-	End if 
+	
