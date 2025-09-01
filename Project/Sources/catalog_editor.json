@@ -655,8 +655,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 247.20071411133,
-				"top": 0.52043914794922,
+				"left": 239.20071411133,
+				"top": 0,
 				"width": 182,
 				"height": 232.33203125
 			},
@@ -747,8 +747,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3846,
-				"top": 3,
+				"left": 3841,
+				"top": 0,
 				"width": 211,
 				"height": 422.33203125
 			},
@@ -950,6 +950,22 @@
 				"height": 212.33203125
 			},
 			"displayable_fields_count": 8
+		},
+		"Audit": {
+			"color": {
+				"red": 234,
+				"green": 116,
+				"blue": 237,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 4116,
+				"top": 0,
+				"width": 209,
+				"height": 264.33203125
+			},
+			"displayable_fields_count": 10,
+			"fields_ordering": 1
 		},
 		"StepSpec": {
 			"color": {

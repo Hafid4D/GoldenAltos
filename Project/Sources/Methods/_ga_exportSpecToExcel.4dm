@@ -23,7 +23,7 @@ var $header; $separator_col; $separator_line : Text
 
 
 $listOfHeaders:=New collection:C1472("spec"; "revision"; "extension"; "title"; "revisionDate"; \
-"reviewDate"; "remark"; "categoryID"; "departmentID")
+"reviewDate"; "remark"; "category"; "department")
 $headers:=New collection:C1472()
 $separator_col:=Char:C90(Tab:K15:37)
 $separator_line:=Char:C90(Carriage return:K15:38)
@@ -78,9 +78,9 @@ If (OK=1)
 				$headerName:="Last  Review date"
 			: ($headers[$i]="remark")
 				$headerName:="remarks"
-			: ($headers[$i]="categoryID")
+			: ($headers[$i]="category")
 				$headerName:="Document Type"
-			: ($headers[$i]="departmentID")
+			: ($headers[$i]="department")
 				$headerName:="Controlling Dept"
 			Else 
 				$headerName:=$headers[$i]
@@ -100,14 +100,13 @@ If (OK=1)
 				
 				Case of 
 					: ($headerName="UUID")
-					: ($headerName="categoryID")
-						$category:=ds:C1482.SpecCategory.query("categoryID=:1"; $specification_e["categoryID"]).first()
-						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($category.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
+					: ($headerName="category")
 						
-					: ($headerName="departmentID")
-						$departement:=ds:C1482.SpecControllingDept.query("departmentID=:1"; $specification_e["departmentID"]).first()
-						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($departement.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
+						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($specification_e.category.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
 						
+					: ($headerName="department")
+						
+						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($specification_e.departement.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
 						
 					Else 
 						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($specification_e[$headerName]); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
