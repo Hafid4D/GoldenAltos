@@ -12,7 +12,7 @@ Function formMethod()
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
-				This:C1470.loadCurrentRMA()
+				// add load functions
 		End case 
 	End if 
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())  //It's time to resize the object or set visible
@@ -88,7 +88,7 @@ Function selectLot()
 	If (Form:C1466.sfw.checkIsInModification())
 		Case of 
 			: (FORM Event:C1606.code=On Getting Focus:K2:7) | (FORM Event:C1606.code=On Clicked:K2:4)
-				OBJECT GET COORDINATES:C663(*; "Field_lotNumber"; $l; $t; $r; $b)
+				OBJECT GET COORDINATES:C663(*; "Field_customerName"; $l; $t; $r; $b)
 				CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Screen:K27:7)
 				
 				$form:=New object:C1471(\
@@ -128,29 +128,5 @@ Function verifyQcar()
 			Form:C1466.current_item.verifiedBy:=cs:C1710.sfw_userManager.me.info.name
 			Form:C1466.current_item.verifiedDate:=Current date:C33()
 		End if 
-	End if 
-	
-	
-Function validateVerifiedBy()
-	If (Form:C1466.current_item.verifiedBy#"")
-		$staff_es:=ds:C1482.Staff.query("code = :1"; Form:C1466.current_item.verifiedBy)
-		
-		If ($staff_es.length=0)
-			cs:C1710.sfw_dialog.me.alert("There are no staff with this code: "+Form:C1466.current_item.verifiedBy)
-			
-			Form:C1466.current_item.verifiedBy:=""
-		End if 
-	End if 
-	
-	
-Function loadCurrentRMA()
-	Form:C1466.current_rma:=(Form:C1466.current_item.rmas.length>0) ? Form:C1466.current_item.rmas[0] : Null:C1517
-	
-	OBJECT SET ENABLED:C1123(*; "btnForward"; (Form:C1466.current_rma#Null:C1517))
-	
-	
-Function btnOpenRMA()
-	If (Form:C1466.current_rma#Null:C1517)
-		Form:C1466.sfw.openInANewWindow(Form:C1466.current_rma; "qualityAssistance"; "rma")
 	End if 
 	

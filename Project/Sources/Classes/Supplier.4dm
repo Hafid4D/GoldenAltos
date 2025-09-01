@@ -5,7 +5,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	//Mark: entry : Equipment
 	$entry:=cs:C1710.sfw_definitionEntry.new("AVL"; ["qualityAssurance"]; "AVL")
 	$entry.setDataclass("Supplier")
-	$entry.setDisplayOrder(-800)
+	$entry.setDisplayOrder(-700)
 	$entry.setIcon("image/entry/avl-white-50x50.png")
 	
 	$entry.setSearchboxField("name")

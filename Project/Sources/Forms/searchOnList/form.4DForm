@@ -82,8 +82,6 @@
 					"borderStyle": "solid",
 					"fill": "automatic",
 					"alternateFill": "#F7F9FC",
-					"sizingX": "grow",
-					"sizingY": "grow",
 					"columns": [
 						{
 							"header": {
@@ -115,6 +113,16 @@
 							"dataSource": "This:C1470[Form:C1466.colName]"
 						}
 					]
+				},
+				"header_bkgd1": {
+					"type": "rectangle",
+					"top": 31,
+					"left": 308,
+					"width": 31,
+					"height": 318,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
 				},
 				"header_bkgd2": {
 					"type": "rectangle",
@@ -168,21 +176,11 @@
 					"shortcutAlt": false,
 					"shortcutKey": "[Esc]",
 					"method": "ObjectMethods/Button.4dm"
-				},
-				"header_bkgd": {
-					"type": "rectangle",
-					"top": 31,
-					"left": 308,
-					"width": 31,
-					"height": 318,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
 				}
 			}
 		}
 	],
-	"geometryStamp": 306,
+	"geometryStamp": 303,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

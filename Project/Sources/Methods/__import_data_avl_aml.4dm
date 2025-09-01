@@ -2,15 +2,6 @@
 
 
 var $eContact : cs:C1710.ContactEntity
-var $contactSelection : cs:C1710.ContactSelection
-
-$contactSelection:=ds:C1482.Contact.query("companyType =:1"; "Supplier")
-For each ($eContact; $contactSelection)
-	$status:=$eContact.drop()
-	If ($status.success=False:C215)
-		
-	End if 
-End for each 
 
 //PartData
 var $ePartData : cs:C1710.PartDataEntity
@@ -185,7 +176,7 @@ If ($supplier_log.exists)
 			
 		End if 
 		$comm:=New object:C1471()
-		$comm.type:="email"
+		$comm.type:="mail"
 		$comm.comment:=""
 		$comm.contact:=$supplier.C1_Email
 		$eContact.contactDetails.communications.push($comm)
@@ -220,7 +211,7 @@ If ($supplier_log.exists)
 		$eContact.contactDetails.communications.push($comm)
 		
 		$comm:=New object:C1471()
-		$comm.type:="email"
+		$comm.type:="mail"
 		$comm.comment:=""
 		$comm.contact:=$supplier.C2_Email
 		$eContact.contactDetails.communications.push($comm)

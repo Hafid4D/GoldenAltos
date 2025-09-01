@@ -59,7 +59,6 @@ Function redrawAndSetVisible()
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="Documents ("+String:C10(Form:C1466.lb_documents.length)+")"
 	End use 
-	
 	Form:C1466.sfw.drawHTab()
 	
 	

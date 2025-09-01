@@ -168,15 +168,13 @@
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
-						"onClick",
-						"onMouseMove"
+						"onDataChange"
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"dataSourceTypeHint": "date",
-					"dateFormat": "long",
-					"method": "ObjectMethods/Field_division.4dm"
+					"dateFormat": "long"
 				},
 				"label_citizenShipStatus1": {
 					"type": "text",

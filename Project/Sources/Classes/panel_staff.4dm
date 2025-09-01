@@ -180,7 +180,7 @@ Function manageCertification()
 	//End if 
 	
 Function hideDatePickers()
-	OBJECT SET VISIBLE:C603(*; "dp_@"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "dp_@"; False:C215)
 	
 	//mark:- setting page
 	
@@ -290,36 +290,3 @@ Function bActionCertifications()
 		cs:C1710.sfw_dialog.me.alert("No Certification Selected !")
 	End if 
 	//End if 
-	
-Function selectDivision()
-	Case of 
-		: (FORM Event:C1606.code=On Clicked:K2:4)
-			If (Form:C1466.sfw.checkIsInModification())
-				OBJECT GET COORDINATES:C663(*; "Field_division"; $l; $t; $r; $b)
-				CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
-				
-				$form:=New object:C1471(\
-					"colName"; "name"; \
-					"lb_items"; ds:C1482.Division.all(); \
-					"allData"; ds:C1482.Division.all(); \
-					"dataclass"; "Division"\
-					)
-				
-				$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b)
-				DIALOG:C40("selectNto1"; $form)
-				CLOSE WINDOW:C154($winRef)
-				
-				If (ok=1)
-					If ($form.item#Null:C1517)
-						Form:C1466.current_item.division:=$form.item.name
-					Else 
-						Form:C1466.current_item.division:=""
-					End if 
-					
-					This:C1470._activate_save_cancel_button()
-				End if 
-			End if 
-			
-		: (FORM Event:C1606.code=On Mouse Move:K2:35)
-			SET CURSOR:C469(9000)
-	End case 

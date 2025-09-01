@@ -6,16 +6,13 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setDisplayOrder(100)
 	$entry.setIcon("image/entry/step-template-white-52x52.png")
 	
-	$entry.setSearchboxField("templateNumber")
 	$entry.setSearchboxField("name")
 	
 	$entry.setPanel("panel_stepTemplate")
 	$entry.setPanelPage(1; ""; "Main")
-	//$entry.setPanelPage(2; ""; "Steps")
-	$entry.setPanelPage(3; ""; "Settings")
+	$entry.setPanelPage(2; ""; "Steps")
 	
-	$entry.setLBItemsColumn("templateNumber"; "#"; "width:50")
 	$entry.setLBItemsColumn("name"; "Step Template Name"; "width:100")
 	
-	$entry.setLBItemsOrderBy("templateNumber")
+	$entry.setLBItemsOrderBy("name")
 	$entry.enableTransaction()

@@ -175,13 +175,13 @@
 					"stroke": "#808080",
 					"text": "Revision Date"
 				},
-				"Field_revisionDate": {
+				"Field_0_6": {
 					"type": "input",
 					"top": 37,
 					"left": 520,
 					"width": 110,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.revisionDate",
+					"dataSource": "Form:C1466.current_item.field2",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -286,7 +286,7 @@
 					"left": 753,
 					"width": 110,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.closedDate",
+					"dataSource": "Form:C1466.current_item.actualCloseDate",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -317,13 +317,13 @@
 					],
 					"focusable": true
 				},
-				"dp_revisionDate": {
+				"dp_creationDate1": {
 					"type": "subform",
 					"top": 37,
 					"left": 611,
 					"width": 19,
-					"height": 16,
-					"dataSource": "Form:C1466.current_item.revisionDate",
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.creationDate",
 					"dataSourceTypeHint": "date",
 					"detailForm": "DateButton",
 					"deletableInList": false,
@@ -331,7 +331,7 @@
 					"doubleClickInEmptyAreaAction": "addSubrecord",
 					"selectionMode": "multiple",
 					"printFrame": "variable",
-					"method": "ObjectMethods/dp_revisionDate.4dm",
+					"method": "ObjectMethods/dp_creationDate1.4dm",
 					"events": [
 						"onLoad"
 					],
@@ -453,13 +453,13 @@
 						"$ref": "/SOURCES/lists.json#/Reject_Criteria"
 					}
 				},
-				"dp_closedDate": {
+				"dp_actualCloseDate": {
 					"type": "subform",
 					"top": 37,
 					"left": 844,
 					"width": 19,
-					"height": 16,
-					"dataSource": "Form:C1466.current_item.closedDate",
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.actualCloseDate",
 					"dataSourceTypeHint": "date",
 					"detailForm": "DateButton",
 					"deletableInList": false,
@@ -467,61 +467,11 @@
 					"doubleClickInEmptyAreaAction": "addSubrecord",
 					"selectionMode": "multiple",
 					"printFrame": "variable",
-					"method": "ObjectMethods/dp_closedDate.4dm",
+					"method": "ObjectMethods/dp_actualCloseDate.4dm",
 					"events": [
 						"onLoad"
 					],
 					"focusable": true
-				},
-				"label_device3": {
-					"type": "text",
-					"top": 87,
-					"left": 498,
-					"width": 45,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "RMA"
-				},
-				"Field_rmaNumber": {
-					"type": "input",
-					"top": 87,
-					"left": 548,
-					"width": 50,
-					"height": 17,
-					"dataSource": "Form:C1466.current_rma.rmaNumber",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"right": 598,
-					"textAlign": "left",
-					"method": "ObjectMethods/Field_rmaNumber.4dm"
-				},
-				"btnForward": {
-					"type": "button",
-					"text": " ",
-					"top": 87,
-					"left": 599,
-					"width": 18,
-					"height": 18,
-					"events": [
-						"onClick",
-						"onMouseEnter",
-						"onMouseLeave"
-					],
-					"style": "custom",
-					"popupPlacement": "none",
-					"icon": "/RESOURCES/image/element/forward-16x16.png",
-					"textPlacement": "center",
-					"method": "ObjectMethods/btnForward.4dm",
-					"visibility": "visible",
-					"iconFrames": 4,
-					"focusable": false
 				}
 			}
 		},
@@ -715,7 +665,7 @@
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
-						"onDataChange"
+						"onClick"
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
@@ -889,8 +839,8 @@
 			}
 		}
 	],
-	"inheritedForm": "sfw_bkgd_header_4lines",
-	"geometryStamp": 2713,
+	"inheritedForm": "sfw_bkgd_header_3lines",
+	"geometryStamp": 2707,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
