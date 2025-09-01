@@ -13,7 +13,7 @@ Case of
 		
 	: (Form event code:C388=On Data Change:K2:15)
 		
-		$date:=Date:C102(OBJECT Get title:C1068(*; "pup_startDate"))+Num:C11(Form:C1466.interval)
-		OBJECT SET TITLE:C194(*; "pup_endDate"; String:C10($date))
-		Form:C1466.endDate:=$date
+		$date:=Date:C102(OBJECT Get title:C1068(*; "pup_endDate"))-Num:C11(Form:C1466.interval)
+		OBJECT SET TITLE:C194(*; "pup_startDate"; String:C10($date))
+		Form:C1466.startDate:=$date
 End case 

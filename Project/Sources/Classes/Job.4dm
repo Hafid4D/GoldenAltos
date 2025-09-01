@@ -14,10 +14,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(3; "lots-32x32.png"; "Lots")
 	
 	
-	$entry.setLBItemsColumn("jobNumber"; "Job #"; "width:60")
-	$entry.setLBItemsColumn("poNumber"; "PO #"; "width:90")
-	$entry.setLBItemsColumn("customer"; "Csutomer"; "width:220")
-	$entry.setLBItemsColumn("dateCreated"; "Created"; "width:80")
+	$entry.setLBItemsColumn("jobNumber"; "Job #"; "width:100")
+	$entry.setLBItemsColumn("division"; "Division"; "width:250")
+	$entry.setLBItemsColumn("dateCreated"; "Created"; "width:100")
 	
 	$entry.setLBItemsOrderBy("jobNumber")
 	

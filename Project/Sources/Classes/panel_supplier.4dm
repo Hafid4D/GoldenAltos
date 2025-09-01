@@ -12,6 +12,7 @@ Function formMethod()
 		Form:C1466.remitAddress:=0
 		Form:C1466.primaryContact:=1
 		Form:C1466.secondaryContact:=0
+		This:C1470.LoadContact()
 		This:C1470.LoadAllTabs()
 	End if 
 	
@@ -57,7 +58,7 @@ Function redrawAndSetVisible()
 		: (FORM Get current page:C276(*)=1)
 			
 			OBJECT GET COORDINATES:C663(*; "entryField_qaComment"; $g; $h; $d; $b)
-			OBJECT SET COORDINATES:C1248(*; "entryField_qaComment"; $g; $h; $widthSubform-30; $b)
+			OBJECT SET COORDINATES:C1248(*; "entryField_qaComment"; $g; $h; $widthSubform-10; $b)
 			
 		: (FORM Get current page:C276(*)=2)
 			
@@ -287,6 +288,6 @@ Function loadDocuments()
 Function LoadAllTabs()
 	
 	This:C1470.loadDocuments()
-	This:C1470.LoadContact()
+	
 	
 	

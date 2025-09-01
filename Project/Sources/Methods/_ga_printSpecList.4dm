@@ -39,8 +39,8 @@ If (Form:C1466.sfw.lb_items.length>0)
 				$template:=WP Import document:C1318($file.platformPath)
 				
 				
-				$context.controlDept:=_ga_getListFiltersValues("ControllingDepartment"; "UUID")
-				$context.documentType:=_ga_getListFiltersValues("DocumentCategory"; "UUID")
+				$context.controlDept:=_ga_getListFiltersValues("SpecControllingDept"; "departmentID")
+				$context.documentType:=_ga_getListFiltersValues("SpecCategory"; "categoryID")
 				If ($onlyForms=False:C215)
 					$context.footerLeft:="Form# MSI-QA-01-Rev A"  //Specs
 				Else 

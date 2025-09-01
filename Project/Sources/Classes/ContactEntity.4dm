@@ -40,62 +40,6 @@ local Function rebuidComunications->$communications : Collection
 	Else 
 		$communications:=New collection:C1472()
 	End if 
-	$contacts:=New collection:C1472()
-	
-	If (True:C214)
-		
-		If (Form:C1466#Null:C1517) && (Form:C1466.communicationTypes=Null:C1517)
-			$file:=Folder:C1567(fk resources folder:K87:11).file("sfw/communication/communicationTypes.json")
-			If ($file.exists)
-				$json:=$file.getText()
-				Form:C1466.communicationTypes:=JSON Parse:C1218($json)
-				For each ($type; Form:C1466.communicationTypes)
-					$file:=Folder:C1567(fk resources folder:K87:11).file("sfw/communication/"+$type.icon)
-					$blob:=$file.getContent()
-					BLOB TO PICTURE:C682($blob; $pict; ".png")
-					$type.displayedIcon:=$pict
-				End for each 
-				
-			End if 
-		End if 
-		
-		For each ($mean; $communications)
-			$item:=New object:C1471
-			$item.contact:=$mean.contact
-			$item.comment:=$mean.comment
-			$item.type:=$mean.type || "phone"
-			$indices:=Form:C1466.communicationTypes.indices("type = :1"; $item.type)
-			If ($indices.length>0)
-				$item.displayedType:=Form:C1466.communicationTypes[$indices[0]].label
-				$item.displayedIcon:=Form:C1466.communicationTypes[$indices[0]].displayedIcon
-				
-			Else 
-				$item.displayedType:=_Capitalize_text($mean.type)
-			End if 
-			$contacts.push($item)
-		End for each 
-		
-	Else 
-		
-		
-		
-		If ($communications#Null:C1517)
-			
-			For ($i; 0; $communications.length-1)
-				
-				OB GET PROPERTY NAMES:C1232($communications[$i]; arrNames; arrTypes)
-				For ($j; 1; Size of array:C274(arrNames))
-					$object:=New object:C1471
-					$Object.name:=arrNames{$j}
-					$Object.value:=OB Get:C1224($communications[$i]; $Object.name)
-					$contacts.push($Object)
-				End for 
-				
-			End for 
-			
-		End if 
-		
-	End if 
 	
 	
 	//mark:-Callbacks
@@ -141,7 +85,7 @@ local Function _initAddress()
 		$mainAddress:=New object:C1471
 		$mainAddress.type:="main"
 		$mainAddress.detail:=New object:C1471
-		$mainAddress.detail.country:="us"
+		$mainAddress.detail.country:="FR"
 		This:C1470.contactDetails.addresses.push($mainAddress)
 	End if 
 	

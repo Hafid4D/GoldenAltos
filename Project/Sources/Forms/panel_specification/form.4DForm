@@ -280,8 +280,7 @@
 					"fontWeight": "normal",
 					"textAlign": "left",
 					"bottom": 206,
-					"dataSourceTypeHint": "date",
-					"method": "ObjectMethods/entryField_revisionDate.4dm"
+					"dataSourceTypeHint": "date"
 				},
 				"entryField_revision": {
 					"type": "input",
@@ -319,8 +318,7 @@
 					"printFrame": "variable",
 					"method": "ObjectMethods/PopupDate.4dm",
 					"events": [
-						"onLoad",
-						"onDataChange"
+						"onLoad"
 					],
 					"focusable": true,
 					"borderStyle": "none"
@@ -590,7 +588,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 435,
+	"geometryStamp": 433,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
