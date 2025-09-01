@@ -31,6 +31,7 @@ Function formMethod()
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	This:C1470.hideDatePickers()
+	This:C1470.drawPup_citizenshipStatus()
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="Certifications Assignment ("+String:C10(Form:C1466.lb_assignments.length)+")"
@@ -323,3 +324,49 @@ Function selectDivision()
 		: (FORM Event:C1606.code=On Mouse Move:K2:35)
 			SET CURSOR:C469(9000)
 	End case 
+	
+Function pup_citizenshipStatus()
+	If (Form:C1466.sfw.checkIsInModification())
+		$menu:=Create menu:C408
+		
+		APPEND MENU ITEM:C411($menu; "US Citizen"; *)
+		SET MENU ITEM PARAMETER:C1004($menu; -1; "--us-citizen")
+		
+		If (Form:C1466.current_item.citizenShipStatus="US Citizen")
+			SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+			If (Is Windows:C1573)
+				SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+			End if 
+		End if 
+		
+		APPEND MENU ITEM:C411($menu; "US Permanent Resident"; *)
+		SET MENU ITEM PARAMETER:C1004($menu; -1; "--us-permanent-resident")
+		
+		If (Form:C1466.current_item.citizenShipStatus="US Permanent Resident")
+			SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+			If (Is Windows:C1573)
+				SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+			End if 
+		End if 
+		
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		Case of 
+			: ($choose="--us-citizen")
+				Form:C1466.current_item.citizenShipStatus:="US Citizen"
+				
+			: ($choose="--us-permanent-resident")
+				Form:C1466.current_item.citizenShipStatus:="US Permanent Resident"
+				
+			Else 
+				Form:C1466.current_item.citizenShipStatus:=""
+		End case 
+		
+	End if 
+	This:C1470.drawPup_citizenshipStatus()
+	
+Function drawPup_citizenshipStatus()
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.sfw.drawButtonPup("pup_citizenshipStatus"; Form:C1466.current_item.citizenShipStatus; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.citizenShipStatus=Null:C1517))
+	End if 
