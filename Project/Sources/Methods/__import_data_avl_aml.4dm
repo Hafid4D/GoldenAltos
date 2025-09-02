@@ -151,78 +151,92 @@ If ($supplier_log.exists)
 		
 		
 		//Primary contact
-		$eContact:=ds:C1482.Contact.new()
-		$eContact.UUID_Company:=$eSupplier.UUID
-		$eContact.firstName:=$supplier.C1_first_name
-		$eContact.lastName:=$supplier.C1_last_name
-		$eContact.title:="Primary"
-		$eContact.contactDetails:=New object:C1471()
-		$eContact.contactDetails.addresses:=New collection:C1472()
-		
-		$eContact.contactDetails.communications:=New collection:C1472()
-		
-		$comm:=New object:C1471()
-		$comm.type:="phone"
-		$comm.comment:=""
-		$comm.contact:=$supplier.C1_tel
-		$eContact.contactDetails.communications.push($comm)
-		
-		$comm:=New object:C1471()
-		$comm.type:="fax"
-		$comm.comment:=""
-		$comm.contact:=$supplier.C1_fax
-		$eContact.contactDetails.communications.push($comm)
-		If ($supplier.C1_fax#"")
+		$supplier.C1_first_name:=Split string:C1554($supplier.C1_first_name; ";"; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join(";")
+		$supplier.C1_first_name:=Split string:C1554($supplier.C1_first_name; ";"; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join(";")
+		If ($supplier.C1_first_name#"") || ($supplier.C1_last_name#"")
+			$eContact:=ds:C1482.Contact.new()
+			$eContact.UUID_Company:=$eSupplier.UUID
+			$eContact.firstName:=$supplier.C1_first_name
+			$eContact.lastName:=$supplier.C1_last_name
+			$eContact.title:="Primary"
+			$eContact.contactDetails:=New object:C1471()
+			$eContact.contactDetails.addresses:=New collection:C1472()
+			
+			$eContact.contactDetails.communications:=New collection:C1472()
+			
+			$comm:=New object:C1471()
+			$comm.type:="phone"
+			$comm.comment:=""
+			$comm.contact:=$supplier.C1_tel
+			$eContact.contactDetails.communications.push($comm)
+			
+			$comm:=New object:C1471()
+			$comm.type:="fax"
+			$comm.comment:=""
+			$comm.contact:=$supplier.C1_fax
+			$eContact.contactDetails.communications.push($comm)
+			If ($supplier.C1_fax#"")
+				
+			End if 
+			$comm:=New object:C1471()
+			$comm.type:="mail"
+			$comm.comment:=""
+			$comm.contact:=$supplier.C1_Email
+			$eContact.contactDetails.communications.push($comm)
+			
+			$result:=$eContact.save()
+			If ($result.success=False:C215)
+				TRACE:C157
+			End if 
+		Else 
 			
 		End if 
-		$comm:=New object:C1471()
-		$comm.type:="mail"
-		$comm.comment:=""
-		$comm.contact:=$supplier.C1_Email
-		$eContact.contactDetails.communications.push($comm)
-		
-		$result:=$eContact.save()
-		If ($result.success=False:C215)
-			TRACE:C157
-		End if 
-		
 		
 		//Secondary contact
-		$eContact:=ds:C1482.Contact.new()
-		$eContact.UUID_Company:=$eSupplier.UUID
-		$eContact.firstName:=$supplier.C2_first_name
-		$eContact.lastName:=$supplier.C2_last_name
-		$eContact.title:="Secondary"
-		$eContact.contactDetails:=New object:C1471()
-		$eContact.contactDetails.addresses:=New collection:C1472()
-		
-		$eContact.contactDetails.communications:=New collection:C1472()
-		
-		$comm:=New object:C1471()
-		$comm.type:="phone"
-		$comm.comment:=""
-		$comm.contact:=$supplier.C2_tel
-		$eContact.contactDetails.communications.push($comm)
-		
-		$comm:=New object:C1471()
-		$comm.type:="fax"
-		$comm.comment:=""
-		$comm.contact:=$supplier.C2_fax
-		$eContact.contactDetails.communications.push($comm)
-		
-		$comm:=New object:C1471()
-		$comm.type:="mail"
-		$comm.comment:=""
-		$comm.contact:=$supplier.C2_Email
-		$eContact.contactDetails.communications.push($comm)
-		
-		$result:=$eContact.save()
-		If ($result.success=False:C215)
-			TRACE:C157
+		$supplier.C2_first_name:=Split string:C1554($supplier.C2_first_name; ";"; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join(";")
+		$supplier.C2_last_name:=Split string:C1554($supplier.C2_last_name; ";"; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join(";")
+		If ($supplier.C2_first_name#"") || ($supplier.C1_last_name#"")
+			$eContact:=ds:C1482.Contact.new()
+			$eContact.UUID_Company:=$eSupplier.UUID
+			$eContact.firstName:=$supplier.C2_first_name
+			$eContact.lastName:=$supplier.C2_last_name
+			$eContact.title:="Secondary"
+			$eContact.contactDetails:=New object:C1471()
+			$eContact.contactDetails.addresses:=New collection:C1472()
+			
+			$eContact.contactDetails.communications:=New collection:C1472()
+			
+			$comm:=New object:C1471()
+			$comm.type:="phone"
+			$comm.comment:=""
+			$comm.contact:=$supplier.C2_tel
+			$eContact.contactDetails.communications.push($comm)
+			
+			$comm:=New object:C1471()
+			$comm.type:="fax"
+			$comm.comment:=""
+			$comm.contact:=$supplier.C2_fax
+			$eContact.contactDetails.communications.push($comm)
+			
+			$comm:=New object:C1471()
+			$comm.type:="mail"
+			$comm.comment:=""
+			$comm.contact:=$supplier.C2_Email
+			$eContact.contactDetails.communications.push($comm)
+			
+			$result:=$eContact.save()
+			If ($result.success=False:C215)
+				TRACE:C157
+			End if 
+			
+		Else 
+			
 		End if 
 		
 		
 	End for each 
+	
+	
 	
 End if 
 

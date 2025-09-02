@@ -1,8 +1,13 @@
 //%attributes = {}
 
+$a:="    "
+$a:=Split string:C1554($a; ";"; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join(";")
+If ($a="")
+	ALERT:C41("ok")
+End if 
 
-$es:=ds:C1482.Quote.all()
-[LeadEvent:50]
+
+
 //$file:=Folder(fk data folder).file("2300_Names.json")
 //$names:=JSON Parse($file.getText())
 
