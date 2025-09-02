@@ -34,12 +34,21 @@ Function pup_XXX()
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	
+	This:C1470.drawPup_docType()
+	This:C1470.drawPup_company()
+	This:C1470.drawPup_departement()
+	This:C1470.drawPup_status()
+	
+	OBJECT SET VISIBLE:C603(*; "bUploadDocument"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "PopupDaT@"; Form:C1466.sfw.checkIsInModification())
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	$offset:=4
 	
 	Case of 
 			
 		: (FORM Get current page:C276(*)=1)
+			OBJECT GET COORDINATES:C663(*; "lb_activities"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "lb_activities"; $g; $h; $widthSubform-5; $b)
 			
 			
 		: (FORM Get current page:C276(*)=2)
@@ -49,6 +58,125 @@ Function redrawAndSetVisible()
 	
 	Form:C1466.sfw.drawHTab()
 	
+	
+Function drawPup_docType()
+	If (Form:C1466.current_item#Null:C1517)
+		$customer:=ds:C1482.DocumentCategory.query("name =:1"; Form:C1466.current_item.document.code).first() || New object:C1471()
+		$customerName:=$customer.name
+		If ($customerName=Null:C1517)
+			$customerName:=""
+		End if 
+		$color:="#FFFFFF"  //cs.sfw_htmlColor.me.getName($customer.color)
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_docType"; $customerName; $pathIcon; ($customer=Null:C1517))
+	End if 
+	
+	
+Function pup_docType()
+	//Create pop up menu
+	If (Form:C1466.sfw.checkIsInModification())
+		var $hListItems : Collection
+		var $hSousListItems : Collection
+		
+		$hListItems:=ds:C1482.DocumentCategory.all().toCollection().extract("name")
+		
+		$hList:=Create menu:C408
+		
+		$hListItemsLength:=$hListItems.length
+		$k:=1
+		For ($i; 0; $hListItemsLength-1)
+			
+			APPEND MENU ITEM:C411($hList; $hListItems[$i]; *)
+			SET MENU ITEM PARAMETER:C1004($hList; -1; $hListItems[$i])
+			$k:=$k+1
+		End for 
+		
+		$choose:=Dynamic pop up menu:C1006($hList)
+		RELEASE MENU:C978($hList)
+		Case of 
+			: ($choose#"")
+				Form:C1466.current_item.document.code:=$choose
+		End case 
+		
+	End if 
+	
+	This:C1470.drawPup_docType()
+	
+	
+Function drawPup_company()
+	If (Form:C1466.current_item#Null:C1517)
+		$company:=ds:C1482.Supplier.query("UUID= :1"; Form:C1466.current_item.UUID_Company).first() || New object:C1471()
+		$companyName:=$company.name
+		If ($companyName=Null:C1517)
+			$companyName:=""
+		End if 
+		$color:=""
+		$pathIcon:=""
+		Form:C1466.sfw.drawButtonPup("pup_company"; $companyName; $pathIcon; ($company=Null:C1517))
+		
+	End if 
+	
+	
+Function pup_company()
+	//Create pop up menu
+	
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		OBJECT GET COORDINATES:C663(*; "pup_company"; $l; $t; $r; $b)
+		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
+		$allSuppliers:=ds:C1482.Supplier.all()
+		$form:=New object:C1471(\
+			"colName"; "name"; \
+			"lb_items"; $allSuppliers; \
+			"allData"; $allSuppliers; \
+			"dataclass"; "Supplier"\
+			)
+		
+		$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b)
+		DIALOG:C40("selectNto1"; $form)
+		CLOSE WINDOW:C154($winRef)
+		
+		If (ok=1)
+			Form:C1466.current_item.UUID_Company:=$form.item.UUID
+			cs:C1710.panel_audit.me._activate_save_cancel_button()
+		End if 
+	End if 
+	
+	This:C1470.drawPup_company()
+	
+	
+Function btnOpenCompany()
+	
+	$es:=ds:C1482.Supplier.query("UUID =:1"; Form:C1466.current_item.UUID_Company)
+	
+	If ($es.length>0)
+		Form:C1466.sfw.openInANewWindow($es[0]; "qualityAssurance"; "AVL")
+	End if 
+	
+	
+Function drawPup_departement()
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.current_item.drowPup("Department"; "UUID"; "UUID_Department"; "pup_departement")
+	End if 
+	
+	
+Function pup_departement()
+	//Create pop up menu
+	Form:C1466.current_item.pup("departements"; "Department"; "UUID"; "UUID_Department")
+	This:C1470.drawPup_departement()
+	
+	
+	
+Function drawPup_status()
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.current_item.drowPup("AuditStatus"; "UUID"; "UUID_AuditStatus"; "pup_status")
+	End if 
+	
+	
+Function pup_status()
+	//Create pop up menu
+	Form:C1466.current_item.pup("auditStatus"; "AuditStatus"; "UUID"; "UUID_AuditStatus")
+	This:C1470.drawPup_status()
 	
 	
 	
