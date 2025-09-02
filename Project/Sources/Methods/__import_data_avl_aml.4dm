@@ -188,14 +188,12 @@ If ($supplier_log.exists)
 			If ($result.success=False:C215)
 				TRACE:C157
 			End if 
-		Else 
-			
 		End if 
 		
 		//Secondary contact
 		$supplier.C2_first_name:=Split string:C1554($supplier.C2_first_name; ";"; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join(";")
 		$supplier.C2_last_name:=Split string:C1554($supplier.C2_last_name; ";"; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join(";")
-		If ($supplier.C2_first_name#"") || ($supplier.C1_last_name#"")
+		If ($supplier.C2_first_name#"") || ($supplier.C2_last_name#"")
 			$eContact:=ds:C1482.Contact.new()
 			$eContact.UUID_Company:=$eSupplier.UUID
 			$eContact.firstName:=$supplier.C2_first_name
@@ -228,9 +226,6 @@ If ($supplier_log.exists)
 			If ($result.success=False:C215)
 				TRACE:C157
 			End if 
-			
-		Else 
-			
 		End if 
 		
 		
