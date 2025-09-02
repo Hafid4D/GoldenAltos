@@ -574,7 +574,7 @@
 	</table>
 	<table name="Audit" uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" id="44">
 		<field name="UUID" uuid="B55972B70F030349B5136DEE13BEA4D4" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="page" uuid="22471929E9671B4E94A57E0B3DB7FE63" type="4" never_null="true" id="2"/>
+		<field name="auditNumber" uuid="22471929E9671B4E94A57E0B3DB7FE63" type="4" never_null="true" id="2"/>
 		<field name="stmpPage" uuid="0FE27B7F46CCCE46BC77674614199497" type="4" never_null="true" id="3">
 			<field_extra multi_line="false"/>
 		</field>
@@ -593,10 +593,30 @@
 		<field name="storageFilename" uuid="5A8A41C8A1EA534C8FFA52AA685F6AF9" type="10" limiting_length="255" never_null="true" id="8">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="attachedDocuments" uuid="C2A72C4EEAE0AE45AD2EA09A70F6C145" type="21" blob_switch_size="2147483647" never_null="true" id="10"/>
-		<field name="book" uuid="7C26ABF75C254B4CAEE237698AB70407" type="10" limiting_length="255" never_null="true" id="11">
+		<field name="UUID_AuditStatus" uuid="A8752F9F9EA00D49B87C2D3786BA417A" type="10" store_as_UUID="true" never_null="true" id="9"/>
+		<field name="document" uuid="C2A72C4EEAE0AE45AD2EA09A70F6C145" type="21" blob_switch_size="2147483647" never_null="true" id="10"/>
+		<field name="type" uuid="7C26ABF75C254B4CAEE237698AB70407" type="10" limiting_length="255" never_null="true" id="11">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="activities" uuid="1196179170EB774E911DB9970A168273" type="21" blob_switch_size="2147483647" never_null="true" id="12"/>
+		<field name="team" uuid="1E5EF93B7320A24E8F9E93B474D9694A" type="21" blob_switch_size="2147483647" never_null="true" id="13">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="UUID_Department" uuid="DBBC9E80F752DA41B020E37A427026A0" type="10" store_as_UUID="true" never_null="true" id="14"/>
+		<field name="UUID_Company" uuid="2DB51CB40B38B84999B7E4D2B4FDCF7D" type="10" store_as_UUID="true" never_null="true" id="15"/>
+		<field name="scope" uuid="8E0E8373DAB562408B730459DD2A881F" type="10" limiting_length="255" never_null="true" id="16"/>
+		<field name="objectives" uuid="9A4C1C5F3931294483602CD3E64FD393" type="10" limiting_length="255" never_null="true" id="17"/>
+		<field name="comments" uuid="D450D27C2ABEE841AF9ABC6ADC16B722" type="10" limiting_length="255" never_null="true" id="18"/>
+		<field name="findings" uuid="C04787E0917C584EB853F8F296FC48A5" type="10" limiting_length="255" never_null="true" id="19"/>
+		<field name="overallStatus" uuid="336E72168BEC7A4DB4AE02EF8CD1679A" type="10" limiting_length="255" never_null="true" id="20"/>
+		<field name="remainingGaps" uuid="610880615F16A549883CD8C7F6A539C8" type="10" limiting_length="255" never_null="true" id="21"/>
+		<field name="recommendations" uuid="BB71C8B54027AA4781F83F3C95FDFED7" type="10" limiting_length="255" never_null="true" id="22"/>
+		<field name="auditorSignature" uuid="6C5F11D904600845B498172BD54D5FA4" type="10" limiting_length="255" never_null="true" id="23"/>
+		<field name="AuditeeSignature" uuid="2A5724F5EBC6BA4B94CBD5F616117718" type="10" limiting_length="255" never_null="true" id="24"/>
+		<field name="IsNCRCorrected" uuid="5A95DB912ED7B442A440B37E7A539031" type="1" never_null="true" id="25"/>
+		<field name="IsCAEffective" uuid="F88991A804E04C4CB8479AC6D5867381" type="1" never_null="true" id="26"/>
+		<field name="IsOFIImplemented" uuid="888D702B9E5FBB4F8DBEAE3474D05C0E" type="1" never_null="true" id="27"/>
+		<field name="newRisksExists" uuid="481A5D63ACFB0A469347D0C9FBE71B9A" type="1" never_null="true" id="28"/>
 		<primary_key field_name="UUID" field_uuid="B55972B70F030349B5136DEE13BEA4D4"/>
 	</table>
 	<table name="ControllingDepartment" uuid="C1BEBD5DDE0D1A45AEE41760FAE1229A" id="45">
@@ -612,6 +632,20 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<primary_key field_name="UUID" field_uuid="1CB76A26D5B699429A95B9E10253FD00"/>
+	</table>
+	<table name="AuditStatus" uuid="86FDD37E294EC746A4557D00E52217ED" id="46">
+		<field name="UUID" uuid="9B44F9ED4FE59A46966ECF6D35DD27CA" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="levelID" uuid="05C29741F6A20A46860E1FB7C4E34160" type="4" never_null="true" id="2"/>
+		<field name="code" uuid="7750B15E70FBC04A937BA7DCC7891162" type="10" limiting_length="255" never_null="true" id="3">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="name" uuid="3425250762B71541A40C4CE7E616F357" type="10" limiting_length="255" never_null="true" id="4">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="color" uuid="A053FEBE2C2DC0478A312B190893D590" type="10" limiting_length="255" never_null="true" id="5">
+			<field_extra multi_line="false"/>
+		</field>
+		<primary_key field_name="UUID" field_uuid="9B44F9ED4FE59A46966ECF6D35DD27CA"/>
 	</table>
 	<table name="Units" uuid="BBEF22543374E24BBC6534C68EA6E3D2" id="49">
 		<field name="UUID" uuid="2C3EE5FC26975842998856F7D02B3BA2" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -1216,6 +1250,7 @@
 	<table name="Department" uuid="894004274A3B4909A39584EC0B879D18" id="132">
 		<field name="UUID" uuid="8D9FB8C795534689B56DE1CC69FD3D14" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="name" uuid="99BB28C34588457F89FCF838E93A19BD" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="levelID" uuid="D5144D6C83F4AF48AE72A0899E83F563" type="4" never_null="true" id="3"/>
 		<primary_key field_name="UUID" field_uuid="8D9FB8C795534689B56DE1CC69FD3D14"/>
 	</table>
 	<table name="QuoteStatus" uuid="6059D6A0DACF42889F97EAD171DE9723" id="133">
@@ -2444,6 +2479,42 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="21CCCB93C0707B4D9CAC866EA7A4CCF3" name_Nto1="status" name_1toN="audits" state="1">
+		<related_field kind="source">
+			<field_ref uuid="A8752F9F9EA00D49B87C2D3786BA417A" name="UUID_AuditStatus">
+				<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="9B44F9ED4FE59A46966ECF6D35DD27CA" name="UUID">
+				<table_ref uuid="86FDD37E294EC746A4557D00E52217ED" name="AuditStatus"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="5A6A240E15CEAC4F9754A849BB703AE5" name_Nto1="Link_97" name_1toN="Link_97_return" state="1">
+		<related_field kind="source">
+			<field_ref uuid="DBBC9E80F752DA41B020E37A427026A0" name="UUID_Department">
+				<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="8D9FB8C795534689B56DE1CC69FD3D14" name="UUID">
+				<table_ref uuid="894004274A3B4909A39584EC0B879D18" name="Department"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="D982B8553811B2468F440FBF6F888F44" name_Nto1="Link_98" name_1toN="Link_98_return" state="1">
+		<related_field kind="source">
+			<field_ref uuid="2DB51CB40B38B84999B7E4D2B4FDCF7D" name="UUID_Company">
+				<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="CFBA7599E861DC4A91A0C1B26781C297" name="UUID">
+				<table_ref uuid="A0C8CDC075BBB546914E03F7689B897E" name="Supplier"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="005E48A922A4464DB92973931B467ACF" type="3">
 		<field_ref uuid="17F71D68FA714CE9A75ED79CA63E3BE2" name="UUID_Lead">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
@@ -2769,6 +2840,11 @@
 			<table_ref uuid="B0A466FC99334B96B5FE810BAE186DC4" name="InventoryPull"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="5066ED7D8D58A84C9F439F68AB36F1D8" type="7">
+		<field_ref uuid="9B44F9ED4FE59A46966ECF6D35DD27CA" name="UUID">
+			<table_ref uuid="86FDD37E294EC746A4557D00E52217ED" name="AuditStatus"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="5178B9A5D14F4E9CB8BB65A1925EAA64" type="3">
 		<field_ref uuid="E0032020C5FC4E35A311A40ED4EF245B" name="UUID_Method">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
@@ -2827,6 +2903,11 @@
 	<index kind="regular" uuid="675DDEA34102494283E12FCAE91573AD" type="3">
 		<field_ref uuid="74D4489457374B57A51D090D4AC39E94" name="UUID_Lead">
 			<table_ref uuid="04F7E2A28A5349B4B0C70F6D644922BB" name="LeadEvent"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="694EC2493430C448A9AE3AAFF8C7CA40" type="3">
+		<field_ref uuid="DBBC9E80F752DA41B020E37A427026A0" name="UUID_Department">
+			<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="6A045DFC98664F6BBB847D9DF1F4DD10" type="3">
@@ -2902,6 +2983,11 @@
 	<index kind="regular" unique_keys="true" uuid="770880AC7588704C9385F72F115863CD" type="1">
 		<field_ref uuid="8D9FB8C795534689B56DE1CC69FD3D14" name="UUID">
 			<table_ref uuid="894004274A3B4909A39584EC0B879D18" name="Department"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="789A484B2F0BE5448615B14A43FB3D50" type="3">
+		<field_ref uuid="2DB51CB40B38B84999B7E4D2B4FDCF7D" name="UUID_Company">
+			<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="78A3E0E59CD449B095A5C975019E16B2" type="3">
@@ -3402,6 +3488,11 @@
 	<index kind="regular" uuid="F62C2A61AAAD5D4DBADE832EA3A90FB2" type="3">
 		<field_ref uuid="E69CC48F6A0A1F4480CF6295260128E1" name="UUID_dfd_Template">
 			<table_ref uuid="A1BFE9AD9486804BA249798C81722C4A" name="dfd_Document"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="F67778E68F30D942A1266D65E866E99D" type="3">
+		<field_ref uuid="A8752F9F9EA00D49B87C2D3786BA417A" name="UUID_AuditStatus">
+			<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="F742128C39FEF342A231E8FE599BC37A" type="7">

@@ -188,3 +188,17 @@ For ($i; 0; $docCategories.length-1)
 	$eDocCategory.save()
 End for 
 
+
+var $eAuditStatus : cs:C1710.DocumentCategoryEntity
+var $auditStatus : Collection:=New collection:C1472("C"; "OFI"; "NCR")
+TRUNCATE TABLE:C1051([AuditStatus:46])
+For ($i; 0; $auditStatus.length-1)
+	$eAuditStatus:=ds:C1482.AuditStatus.new()
+	$eAuditStatus.levelID:=$i+1
+	$eAuditStatus.name:=$auditStatus[$i]
+	$eAuditStatus.color:="#FFFFFF"
+	$eAuditStatus.save()
+End for 
+
+
+

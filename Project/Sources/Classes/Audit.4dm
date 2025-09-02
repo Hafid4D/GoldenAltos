@@ -8,11 +8,15 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setDisplayOrder(-900)
 	$entry.setIcon("image/entry/audit-50x50.png")
 	
-	$entry.setSearchboxField("book")
+	$entry.setSearchboxField("auditNumber")
 	
 	$entry.setPanel("panel_audit")
-	$entry.setPanelPage(1; ""; "Main")
-	$entry.setPanelPage(1; ""; "Document")
+	$entry.setPanelPage(1; ""; "Planning")
+	$entry.setPanelPage(2; ""; "Objective Evidence Record")
+	$entry.setPanelPage(3; ""; "Audit Findings")
+	$entry.setPanelPage(4; ""; "Follow Up Review")
+	$entry.setPanelPage(5; ""; "Document")
 	
-	$entry.setLBItemsColumn("book"; "Operational Areas"; "width:150")
-	$entry.setLBItemsOrderBy("book")
+	$entry.setLBItemsColumn("auditNumber"; "Entry Number"; "width:100")
+	$entry.setLBItemsColumn("title"; "Title"; "width:200")
+	$entry.setLBItemsOrderBy("auditNumber")

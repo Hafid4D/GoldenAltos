@@ -142,7 +142,7 @@ If (True:C214)
 				End if 
 				
 				$eCustomer:=ds:C1482.Customer.query("name = :1"; $contact.Company_Name).first()
-				//Commented because causing duplication due to manual entry on the old system -  STILL NEED TO DECIDE ON WHAT TO DO
+				//Commented because causing duplication due to manual entry in the old system -  STILL NEED TO DECIDE ON WHAT TO DO
 /*
 If ($eCustomer=Null)
 $eCustomer:=ds.Customer.new()
