@@ -10,6 +10,17 @@ End if
 $es:=ds:C1482.Customer.all()
 $dis:=ds:C1482.Customer.all().distinct("name")
 
+var $audit_e : cs:C1710.AuditEntity
+var $audit_es : cs:C1710.AuditEntity
+$audit_es:=ds:C1482.Audit.all()
+For each ($audit_e; $audit_es)
+	$file:=Temporary folder:C486+Folder separator:K24:12+$audit_e.attachedDocuments.documents.sourcePath
+	
+	BLOB TO DOCUMENT:C526($file; $audit_e.attachedDocuments.documents.blob)
+	
+End for each 
+
+
 //$file:=Folder(fk data folder).file("2300_Names.json")
 //$names:=JSON Parse($file.getText())
 

@@ -37,24 +37,6 @@ If (OK=1)
 	
 	$dataclass:=Form:C1466.sfw.entry.dataclass
 	
-	//$amls:=Form.sfw.lb_items
-	
-	
-	//For each ($entity; $amls)
-	//$oEntity:=New object
-	//For each ($attribute; ds[$dataclass])
-	//If (ds[$dataclass][$attribute].fieldType=Is object) && ($entity[$attribute]#Null) && (String($entity[$attribute].title)="4D Write Pro New Document")
-	//WP EXPORT VARIABLE($entity[$attribute]; $wpBlob; wk 4wp)
-	//BASE64 ENCODE($wpBlob; $wpEncodedBlob)
-	//$oEntity[$attribute]:=$wpEncodedBlob
-	//Else 
-	//$oEntity[$attribute]:=$entity[$attribute]
-	//End if 
-	
-	//End for each 
-	//$export.records.push($oEntity)
-	
-	//End for each 
 	
 	$aml_es:=Form:C1466.sfw.lb_items  //$export.records
 	
