@@ -141,118 +141,20 @@ If (True:C214)
 					$eContact.contactDetails.communications.push($comm)
 				End if 
 				
-				$eCustomer:=ds:C1482.Customer.query("name = :1"; $contact.Company_Name).first()
-				//Commented because causing duplication due to manual entry in the old system -  STILL NEED TO DECIDE ON WHAT TO DO
-/*
-If ($eCustomer=Null)
-$eCustomer:=ds.Customer.new()
-$eCustomer.name:=$contact.Company_Name
-$eCustomer.IDT_status:=1
-				
-				
-//AP Contact
-$cContact:=ds.Contact.new()
-$cContact.title:="AP"
-$cContact.UUID_Company:=$eCustomer.UUID
-$cContact.firstName:=""
-$cContact.lastName:=""
-$cContact.contactDetails:=New object()
-$cContact.contactDetails.addresses:=New collection()
-				
-$cContact.contactDetails.communications:=New collection()
-				
-$comm:=New object()
-$comm.type:="email"
-$comm.comment:=""
-$comm.contact:=$customer.AP_email
-$cContact.contactDetails.communications.push($comm)
-				
-$comm:=New object()
-$comm.type:="phone"
-$comm.comment:=""
-$comm.contact:=$customer.AP_tel
-$cContact.contactDetails.communications.push($comm)
-				
-$comm:=New object()
-$comm.type:="fax"
-$comm.comment:=""
-$comm.contact:=$customer.AP_fax
-$cContact.contactDetails.communications.push($comm)
-				
-$comm:=New object()
-$comm.type:="mobile"
-$comm.contact:=""
-$comm.comment:=""
-$cContact.contactDetails.communications.push($comm)
-				
-$comm:=New object()
-$comm.type:="email"
-$comm.contact:=""
-$comm.comment:="CC Email"
-$cContact.contactDetails.communications.push($comm)
-				
-$result:=$cContact.save()
-If ($result.success=False)
-TRACE
-End if 
-				
-//Status Contact
-$cContact:=ds.Contact.new()
-$cContact.title:="Status"
-$cContact.UUID_Company:=$eCustomer.UUID
-$cContact.firstName:=""
-$cContact.lastName:=""
-$cContact.contactDetails:=New object()
-$cContact.contactDetails.addresses:=New collection()
-				
-$cContact.contactDetails.communications:=New collection()
-				
-$comm:=New object()
-$comm.type:="phone"
-$comm.contact:=$customer.Status_Tel
-$comm.comment:=""
-$cContact.contactDetails.communications.push($comm)
-				
-$comm:=New object()
-$comm.type:="fax"
-$comm.contact:=$customer.Status_fax
-$comm.comment:=""
-$cContact.contactDetails.communications.push($comm)
-				
-$comm:=New object()
-$comm.type:="mobile"
-$comm.contact:=""
-$comm.comment:=""
-$cContact.contactDetails.communications.push($comm)
-				
-$comm:=New object()
-$comm.type:="email"
-$comm.comment:=""
-$comm.contact:=$customer.StatusEmailAddresses
-$cContact.contactDetails.communications.push($comm)
-				
-$comm:=New object()
-$comm.type:="email"
-$comm.comment:="CC Email"
-$comm.contact:=$customer.status_email_CC
-$cContact.contactDetails.communications.push($comm)
-				
-$result:=$cContact.save()
-If ($result.success=False)
-TRACE
-End if 
-				
-$eCustomer.save()
-End if 
-$eContact.UUID_Company:=$eCustomer.UUID
-*/
-				
-				If ($eCustomer#Null:C1517)
-					$eContact.UUID_Company:=$eCustomer.UUID
-					$result:=$eContact.save()
-					If ($result.success=False:C215)
-						TRACE:C157
+				$contact.Company_Name:=Split string:C1554($contact.Company_Name; ";"; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join(";")
+				If ($contact.Company_Name#"")
+					$eCustomer:=ds:C1482.Customer.query("name = :1"; $contact.Company_Name).first()
+					If ($eCustomer=Null:C1517)
+						$eCustomer:=ds:C1482.Customer.new()
+						$eCustomer.name:=$contact.Company_Name
+						$eCustomer.save()
 					End if 
+					$eContact.UUID_Company:=$eCustomer.UUID
+				End if 
+				
+				$result:=$eContact.save()
+				If ($result.success=False:C215)
+					TRACE:C157
 				End if 
 			End for each 
 			
@@ -262,92 +164,99 @@ $eContact.UUID_Company:=$eCustomer.UUID
 				$eCustomer:=ds:C1482.Customer.query("name = :1"; $customer.Customer).first()
 				
 				//AP Contact
-				$cContact:=ds:C1482.Contact.new()
-				$cContact.title:="AP"
-				$cContact.UUID_Company:=$eCustomer.UUID
-				$cContact.firstName:=$customer.AP_contact_fn
-				$cContact.lastName:=$customer.AP_contact_ln
-				$cContact.contactDetails:=New object:C1471()
-				$cContact.contactDetails.addresses:=New collection:C1472()
-				
-				$cContact.contactDetails.communications:=New collection:C1472()
-				
-				If ($contact.AP_email#"")
-					$comm:=New object:C1471()
-					$comm.type:="email"
-					$comm.comment:=""
-					$comm.contact:=$customer.AP_email
-					$cContact.contactDetails.communications.push($comm)
-				End if 
-				
-				If (String:C10($contact.AP_tel)#"")
-					$comm:=New object:C1471()
-					$comm.type:="phone"
-					$comm.comment:=""
-					$comm.contact:=$customer.AP_tel
-					$cContact.contactDetails.communications.push($comm)
-				End if 
-				
-				If (String:C10($contact.AP_fax)#"")
-					$comm:=New object:C1471()
-					$comm.type:="fax"
-					$comm.comment:=""
-					$comm.contact:=$customer.AP_fax
-					$cContact.contactDetails.communications.push($comm)
-				End if 
-				
-				$result:=$cContact.save()
-				If ($result.success=False:C215)
-					TRACE:C157
+				$customer.AP_contact_fn:=Split string:C1554($customer.AP_contact_fn; ";"; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join(";")
+				$customer.AP_contact_ln:=Split string:C1554($customer.AP_contact_ln; ";"; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join(";")
+				If ($customer.AP_contact_fn#"") || ($customer.AP_contact_ln#"")
+					$cContact:=ds:C1482.Contact.new()
+					$cContact.title:="AP"
+					$cContact.UUID_Company:=$eCustomer.UUID
+					$cContact.firstName:=$customer.AP_contact_fn
+					$cContact.lastName:=$customer.AP_contact_ln
+					$cContact.contactDetails:=New object:C1471()
+					$cContact.contactDetails.addresses:=New collection:C1472()
+					
+					$cContact.contactDetails.communications:=New collection:C1472()
+					
+					If ($contact.AP_email#"")
+						$comm:=New object:C1471()
+						$comm.type:="email"
+						$comm.comment:=""
+						$comm.contact:=$customer.AP_email
+						$cContact.contactDetails.communications.push($comm)
+					End if 
+					
+					If (String:C10($contact.AP_tel)#"")
+						$comm:=New object:C1471()
+						$comm.type:="phone"
+						$comm.comment:=""
+						$comm.contact:=$customer.AP_tel
+						$cContact.contactDetails.communications.push($comm)
+					End if 
+					
+					If (String:C10($contact.AP_fax)#"")
+						$comm:=New object:C1471()
+						$comm.type:="fax"
+						$comm.comment:=""
+						$comm.contact:=$customer.AP_fax
+						$cContact.contactDetails.communications.push($comm)
+					End if 
+					
+					$result:=$cContact.save()
+					If ($result.success=False:C215)
+						TRACE:C157
+					End if 
 				End if 
 				
 				//Status Contact
-				$cContact:=ds:C1482.Contact.new()
-				$cContact.title:="Status"
-				$cContact.UUID_Company:=$eCustomer.UUID
-				$cContact.firstName:=$customer.Status_Contact
-				$cContact.lastName:=""
-				$cContact.contactDetails:=New object:C1471()
-				$cContact.contactDetails.addresses:=New collection:C1472()
-				
-				$cContact.contactDetails.communications:=New collection:C1472()
-				
-				
-				If (String:C10($contact.Status_Tel)#"")
-					$comm:=New object:C1471()
-					$comm.type:="phone"
-					$comm.contact:=$customer.Status_Tel
-					$comm.comment:=""
-					$cContact.contactDetails.communications.push($comm)
-				End if 
-				
-				If (String:C10($contact.Status_fax)#"")
-					$comm:=New object:C1471()
-					$comm.type:="fax"
-					$comm.contact:=$customer.Status_fax
-					$comm.comment:=""
-					$cContact.contactDetails.communications.push($comm)
-				End if 
-				
-				If ($contact.StatusEmailAddresses#"")
-					$comm:=New object:C1471()
-					$comm.type:="email"
-					$comm.comment:=""
-					$comm.contact:=$customer.StatusEmailAddresses
-					$cContact.contactDetails.communications.push($comm)
-				End if 
-				
-				If ($contact.status_email_CC#"")
-					$comm:=New object:C1471()
-					$comm.type:="email"
-					$comm.comment:="CC Email"
-					$comm.contact:=$customer.status_email_CC
-					$cContact.contactDetails.communications.push($comm)
-				End if 
-				
-				$result:=$cContact.save()
-				If ($result.success=False:C215)
-					TRACE:C157
+				$customer.Status_Contact:=Split string:C1554($customer.Status_Contact; ";"; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join(";")
+				If ($customer.Status_Contact#"")
+					$cContact:=ds:C1482.Contact.new()
+					$cContact.title:="Status"
+					$cContact.UUID_Company:=$eCustomer.UUID
+					$cContact.firstName:=$customer.Status_Contact
+					$cContact.lastName:=""
+					$cContact.contactDetails:=New object:C1471()
+					$cContact.contactDetails.addresses:=New collection:C1472()
+					
+					$cContact.contactDetails.communications:=New collection:C1472()
+					
+					
+					If (String:C10($contact.Status_Tel)#"")
+						$comm:=New object:C1471()
+						$comm.type:="phone"
+						$comm.contact:=$customer.Status_Tel
+						$comm.comment:=""
+						$cContact.contactDetails.communications.push($comm)
+					End if 
+					
+					If (String:C10($contact.Status_fax)#"")
+						$comm:=New object:C1471()
+						$comm.type:="fax"
+						$comm.contact:=$customer.Status_fax
+						$comm.comment:=""
+						$cContact.contactDetails.communications.push($comm)
+					End if 
+					
+					If ($contact.StatusEmailAddresses#"")
+						$comm:=New object:C1471()
+						$comm.type:="email"
+						$comm.comment:=""
+						$comm.contact:=$customer.StatusEmailAddresses
+						$cContact.contactDetails.communications.push($comm)
+					End if 
+					
+					If ($contact.status_email_CC#"")
+						$comm:=New object:C1471()
+						$comm.type:="email"
+						$comm.comment:="CC Email"
+						$comm.contact:=$customer.status_email_CC
+						$cContact.contactDetails.communications.push($comm)
+					End if 
+					
+					$result:=$cContact.save()
+					If ($result.success=False:C215)
+						TRACE:C157
+					End if 
 				End if 
 				
 			End for each 
