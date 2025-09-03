@@ -635,7 +635,7 @@
 				},
 				"label_Criticality": {
 					"type": "text",
-					"top": 132,
+					"top": 153,
 					"left": 8,
 					"width": 90,
 					"height": 17,
@@ -645,7 +645,7 @@
 				},
 				"pup_status": {
 					"type": "button",
-					"top": 129,
+					"top": 150,
 					"left": 108,
 					"width": 200,
 					"height": 23,
@@ -664,21 +664,341 @@
 					"right": 308,
 					"fontWeight": "normal",
 					"textAlign": "left"
+				},
+				"label_process": {
+					"type": "text",
+					"top": 126,
+					"left": 8,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Process Name",
+					"textAlign": "right"
+				},
+				"entryField_process": {
+					"type": "input",
+					"top": 126,
+					"left": 108,
+					"width": 200,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.process",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"label_findings": {
+					"type": "text",
+					"top": 185,
+					"left": 108,
+					"width": 200,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Findings",
+					"textAlign": "left"
+				},
+				"entryField_findings": {
+					"type": "input",
+					"top": 210,
+					"left": 108,
+					"width": 791,
+					"height": 112,
+					"dataSource": "Form:C1466.current_item.findings",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"scrollbarVertical": "automatic"
 				}
 			}
 		},
 		{
 			"objects": {
-				"header_bkgd5": {
+				"main_bkgd": {
 					"type": "rectangle",
-					"top": 113,
+					"top": 114,
 					"left": 0,
-					"width": 2000,
+					"width": 341,
 					"height": 1500,
-					"sizingX": "fixed",
+					"sizingX": "grow",
 					"fill": "#E4E4E4",
-					"stroke": "transparent",
-					"right": 2000
+					"stroke": "transparent"
+				},
+				"main_bkgd2": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 342,
+					"width": 1500,
+					"height": 1500,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent"
+				},
+				"shipping_bkgd": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 0,
+					"width": 341,
+					"height": 30,
+					"sizingX": "grow",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"Text1": {
+					"type": "text",
+					"text": "Audit Conclusion",
+					"top": 121,
+					"left": 8,
+					"width": 119,
+					"height": 16,
+					"fontWeight": "bold"
+				},
+				"shipping_bkgd1": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 342,
+					"width": 1500,
+					"height": 30,
+					"sizingX": "grow",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"Text3": {
+					"type": "text",
+					"text": "",
+					"top": 121,
+					"left": 350,
+					"width": 200,
+					"height": 16,
+					"fontWeight": "bold"
+				},
+				"entryField_IsNCRCorrected": {
+					"type": "radio",
+					"text": "Yes",
+					"top": 157,
+					"left": 795,
+					"width": 50,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"radioGroup": "NCRStatus",
+					"dataSource": "Form:C1466.current_item.IsNCRCorrected"
+				},
+				"entryField_IsNotNCRCorrected": {
+					"type": "radio",
+					"text": "No",
+					"top": 157,
+					"left": 849,
+					"width": 50,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"radioGroup": "NCRStatus",
+					"dataSource": "Not:C34(Form:C1466.current_item.IsNCRCorrected)"
+				},
+				"label_IsNCRCorrected": {
+					"type": "text",
+					"top": 157,
+					"left": 361,
+					"width": 420,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Have all previous nonconformities corrected?",
+					"textAlign": "right"
+				},
+				"entryField_IsCAEffective": {
+					"type": "radio",
+					"text": "Yes",
+					"top": 181,
+					"left": 795,
+					"width": 50,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"radioGroup": "CAEffective",
+					"dataSource": "Form:C1466.current_item.IsCAEffective"
+				},
+				"entryField_IsNotCAEffective": {
+					"type": "radio",
+					"text": "No",
+					"top": 181,
+					"left": 849,
+					"width": 50,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"radioGroup": "CAEffective",
+					"dataSource": "Not:C34(Form:C1466.current_item.IsCAEffective)"
+				},
+				"label_IsNCRCorrected1": {
+					"type": "text",
+					"top": 181,
+					"left": 361,
+					"width": 420,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Are corrective actions effective in preventing recurrence? ",
+					"textAlign": "right"
+				},
+				"entryField_IsOFIImplemented": {
+					"type": "radio",
+					"text": "Yes",
+					"top": 205,
+					"left": 795,
+					"width": 50,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"radioGroup": "OFIImplemented",
+					"dataSource": "Form:C1466.current_item.IsOFIImplemented"
+				},
+				"entryField_IsNotOFIImplemented": {
+					"type": "radio",
+					"text": "No",
+					"top": 205,
+					"left": 849,
+					"width": 50,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"radioGroup": "OFIImplemented",
+					"dataSource": "Not:C34(Form:C1466.current_item.IsOFIImplemented)"
+				},
+				"label_IsNCRCorrected2": {
+					"type": "text",
+					"top": 205,
+					"left": 361,
+					"width": 420,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Have opportunities for improvement (OFIs) been implemented or considered? ",
+					"textAlign": "right"
+				},
+				"entryField_IsNewRisksExists": {
+					"type": "radio",
+					"text": "Yes",
+					"top": 231,
+					"left": 795,
+					"width": 50,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"radioGroup": "newRisksExists",
+					"dataSource": "Form:C1466.current_item.IsNewRisksExists"
+				},
+				"entryField_IsNotNewRisksExists": {
+					"type": "radio",
+					"text": "No",
+					"top": 231,
+					"left": 849,
+					"width": 50,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"radioGroup": "newRisksExists",
+					"dataSource": "Not:C34(Form:C1466.current_item.IsNewRisksExists)"
+				},
+				"label_IsNCRCorrected3": {
+					"type": "text",
+					"top": 231,
+					"left": 361,
+					"width": 420,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Are any new risks or issues identified during this follow-up? ",
+					"textAlign": "right"
+				},
+				"label_overallStatus": {
+					"type": "text",
+					"top": 157,
+					"left": 8,
+					"width": 200,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Overall Status",
+					"textAlign": "left"
+				},
+				"entryField_IsNCRCorrected1": {
+					"type": "radio",
+					"text": "All Issues Closed ",
+					"top": 181,
+					"left": 8,
+					"width": 50,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"radioGroup": "overallStatus",
+					"dataSource": "Form:C1466.current_item.IsNCRCorrected"
+				},
+				"entryField_IsNCRCorrected2": {
+					"type": "radio",
+					"text": "Yes",
+					"top": 181,
+					"left": 77,
+					"width": 50,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"radioGroup": "overallStatus",
+					"dataSource": "Form:C1466.current_item.IsNCRCorrected"
+				},
+				"entryField_IsNCRCorrected3": {
+					"type": "radio",
+					"text": "Yes",
+					"top": 181,
+					"left": 135,
+					"width": 50,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"radioGroup": "overallStatus",
+					"dataSource": "Form:C1466.current_item.IsNCRCorrected"
+				},
+				"entryField_IsNCRCorrected4": {
+					"type": "radio",
+					"text": "Yes",
+					"top": 181,
+					"left": 191,
+					"width": 50,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"radioGroup": "overallStatus",
+					"dataSource": "Form:C1466.current_item.IsNCRCorrected"
 				}
 			}
 		},
@@ -926,7 +1246,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 324,
+	"geometryStamp": 411,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

@@ -616,7 +616,8 @@
 		<field name="IsNCRCorrected" uuid="5A95DB912ED7B442A440B37E7A539031" type="1" never_null="true" id="25"/>
 		<field name="IsCAEffective" uuid="F88991A804E04C4CB8479AC6D5867381" type="1" never_null="true" id="26"/>
 		<field name="IsOFIImplemented" uuid="888D702B9E5FBB4F8DBEAE3474D05C0E" type="1" never_null="true" id="27"/>
-		<field name="newRisksExists" uuid="481A5D63ACFB0A469347D0C9FBE71B9A" type="1" never_null="true" id="28"/>
+		<field name="IsNewRisksExists" uuid="481A5D63ACFB0A469347D0C9FBE71B9A" type="1" never_null="true" id="28"/>
+		<field name="process" uuid="DE3F29F4218B284ABEA12A65E65EDEC8" type="10" limiting_length="255" never_null="true" id="29"/>
 		<primary_key field_name="UUID" field_uuid="B55972B70F030349B5136DEE13BEA4D4"/>
 	</table>
 	<table name="ControllingDepartment" uuid="C1BEBD5DDE0D1A45AEE41760FAE1229A" id="45">
