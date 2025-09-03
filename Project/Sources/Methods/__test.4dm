@@ -1,14 +1,10 @@
 //%attributes = {}
 
-$a:="    "
-$a:=Split string:C1554($a; ";"; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join(";")
-If ($a="")
-	//ALERT("ok")
-End if 
-
-
-//$es:=ds.Customer.all()
-//$dis:=ds.Customer.all().distinct("name")
+//$a:="    "
+//$a:=Split string($a; ";"; sk ignore empty strings+sk trim spaces).join(";")
+//If ($a="")
+////ALERT("ok")
+//End if 
 
 //var $audit_e : cs.AuditEntity
 //var $audit_es : cs.AuditEntity
@@ -21,21 +17,21 @@ End if
 //End for each 
 
 
-$file:=Folder:C1567(fk data folder:K87:12).file("2300_Names.json")
-$names:=JSON Parse:C1218($file.getText())
+//$file:=Folder(fk data folder).file("2300_Names.json")
+//$names:=JSON Parse($file.getText())
 
-$i:=0
-$es:=ds:C1482.Contact.all()
-For each ($e; $es)
-	$e.firstName:=$names[$i].firstName
-	$e.lastName:=$names[$i].lastName
-	$e.save()
-	$i+=1
-End for each 
+//$i:=0
+//$es:=ds.Contact.all()
+//For each ($e; $es)
+//$e.firstName:=$names[$i].firstName
+//$e.lastName:=$names[$i].lastName
+//$e.save()
+//$i+=1
+//End for each 
 
-$text:="   \r  "
+//$text:="   \r  "
 
-$text:=cs:C1710.Util.me.trim($text; [" "; "\r"])
+//$text:=cs.Util.me.trim($text; [" "; "\r"])
 
 
 
