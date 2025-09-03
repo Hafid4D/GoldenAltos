@@ -50,6 +50,7 @@ Function calculateCode()->$leadCode : Text
 	
 	
 local Function afterCreation()
+	var $staff : cs:C1710.StaffEntity
 	var $interaction : cs:C1710.InteractionEntity
 	If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.interactionTrigger=Null:C1517)
 		ds:C1482.InteractionTrigger.cacheLoad()
@@ -96,8 +97,11 @@ local Function afterCreation()
 		$context.Trigger:=$interaction.trigger.name
 		
 		$staff:=ds:C1482.Staff.query("UUID_User = :1"; cs:C1710.sfw_userManager.me.info.UUID).first()
-		$users:=New collection:C1472($staff.user.UUID)
-		cs:C1710.sfw_notificationManager.me._notify("InteractionScheduled"; $users; $context)
+		If ($staff#Null:C1517)
+			$users:=New collection:C1472($staff.user.UUID)
+			cs:C1710.sfw_notificationManager.me._notify("InteractionScheduled"; $users; $context)
+		End if 
+		
 		
 	Else 
 		ALERT:C41("")
