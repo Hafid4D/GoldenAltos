@@ -10,7 +10,7 @@ Function formMethod()
 			
 			Form:C1466.time:=New object:C1471
 			Form:C1466.time.display:=New object:C1471
-			Form:C1466.time.display.timeStamp:=cs:C1710.sfw_stmp.me.getTime(Current time:C178())  //(Form.timeStamp)
+			Form:C1466.time.display.timeStamp:=cs:C1710.sfw_stmp.me.getTime(Form:C1466.timeStamp)
 			This:C1470.wizard_timePicker_init()
 			
 			

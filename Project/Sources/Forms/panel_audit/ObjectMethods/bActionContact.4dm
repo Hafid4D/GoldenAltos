@@ -1,2 +1,2 @@
-cs:C1710.panel_customer.me.bActionTeam()
+cs:C1710.panel_audit.me.bActionTeam()
 

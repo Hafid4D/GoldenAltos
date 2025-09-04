@@ -41,12 +41,12 @@ If ($audit_log.exists)
 			//$eAudit.activities.collection.auditor:=""
 			//$eAudit.activities.collection.process:=""
 			//$eAudit.activities.collection.time:=""
-			//$eAudit.activities.collection.applicableCause:=""
+			
 			
 			$eAudit.team:=New object:C1471()
 			$eAudit.team.teamMembers:=New collection:C1472()
 			//$eAudit.team.teamMembers.name:=""
-			//$eAudit.team.teamMembers.role:=""
+			//$eAudit.team.teamMembers.title:=""
 			
 			
 			$eAudit.document:=New object:C1471()

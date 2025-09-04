@@ -151,7 +151,6 @@ Function pup_enteredBy()
 		
 		$form:=New object:C1471(\
 			"colName"; "code"; \
-			"lb_items"; ds:C1482.Staff.all(); \
 			"allData"; ds:C1482.Staff.all(); \
 			"dataclass"; "Staff"\
 			)

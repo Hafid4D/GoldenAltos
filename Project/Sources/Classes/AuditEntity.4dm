@@ -7,7 +7,14 @@ local Function get creationDate()->$creationDate : Date
 	$creationDate:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpCreationDate; True:C214)
 	
 local Function set creationDate($creationDate : Date)
-	This:C1470.stmpCreationDate:=cs:C1710.sfw_stmp.me.build($creationDate)
+	This:C1470.stmpCreationDate:=cs:C1710.sfw_stmp.me.build($creationDate; This:C1470.creationTime)
+	
+local Function get creationTime()->$creationTime : Time
+	$creationTime:=cs:C1710.sfw_stmp.me.getTime(This:C1470.stmpCreationDate)
+	
+local Function set creationTime($creationTime : Time)
+	This:C1470.stmpCreationDate:=cs:C1710.sfw_stmp.me.build(This:C1470.creationDate; $creationTime)
+	
 	
 local Function drowPup($dataClass; $queryField; $queryValue; $pupName)
 	
@@ -62,7 +69,9 @@ local Function pup($cacheCollection; $dataClass; $queryField; $queryValue)
 		Case of 
 			: ($choose#"")
 				$eEntity:=ds:C1482[$dataClass].get($choose)
-				Form:C1466.current_item[$queryValue]:=$eEntity[$queryField]
+				If ($eEntity#Null:C1517)
+					Form:C1466.current_item[$queryValue]:=$eEntity[$queryField]
+				End if 
 		End case 
 		
 	End if 

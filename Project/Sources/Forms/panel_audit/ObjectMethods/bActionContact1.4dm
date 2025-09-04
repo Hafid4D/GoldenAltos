@@ -1,2 +1,2 @@
-cs:C1710.panel_customer.me.bActionActivities()
+cs:C1710.panel_audit.me.bActionActivities()
 

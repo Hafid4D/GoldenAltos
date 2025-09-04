@@ -973,12 +973,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4104,
-				"top": 6,
+				"left": 4103,
+				"top": 0,
 				"width": 250,
-				"height": 652.33203125
+				"height": 675.33203125
 			},
-			"displayable_fields_count": 29
+			"displayable_fields_count": 30
 		},
 		"StepSpec": {
 			"color": {

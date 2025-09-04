@@ -397,7 +397,6 @@ Function selectCustomer()
 				
 				$form:=New object:C1471(\
 					"colName"; "name"; \
-					"lb_items"; ds:C1482.Customer.all(); \
 					"allData"; ds:C1482.Customer.all(); \
 					"dataclass"; "Customer"\
 					)
@@ -444,7 +443,6 @@ Function pup_quote()
 		
 		$form:=New object:C1471(\
 			"colName"; "code"; \
-			"lb_items"; ds:C1482.Quote.all(); \
 			"allData"; ds:C1482.Quote.all(); \
 			"dataclass"; "Quote"\
 			)

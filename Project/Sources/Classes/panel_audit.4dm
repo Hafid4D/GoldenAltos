@@ -9,6 +9,9 @@ Function formMethod()
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		
+		Form:C1466.allIssuesClosed:=Num:C11(Form:C1466.current_item.overallStatus=OBJECT Get title:C1068(*; "entryField_rb_allIssuesClosed"))
+		Form:C1466.someOpen:=Num:C11(Form:C1466.current_item.overallStatus=OBJECT Get title:C1068(*; "entryField_rb_someOpen"))
+		Form:C1466.furtherAction:=Num:C11(Form:C1466.current_item.overallStatus=OBJECT Get title:C1068(*; "entryField_rb_furtherAction"))
 		
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
@@ -38,9 +41,16 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_company()
 	This:C1470.drawPup_departement()
 	This:C1470.drawPup_status()
+	This:C1470.drawPup_auditType()
+	
 	
 	OBJECT SET VISIBLE:C603(*; "bUploadDocument"; Form:C1466.sfw.checkIsInModification())
-	OBJECT SET VISIBLE:C603(*; "PopupDaT@"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "btnDatePicker@"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "btnTimePick@"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "@_company"; (Form:C1466.current_item.type="External"))
+	
+	OBJECT SET ENABLED:C1123(*; "entryField_rb_@"; Form:C1466.sfw.checkIsInModification())
+	
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	$offset:=4
 	
@@ -50,8 +60,30 @@ Function redrawAndSetVisible()
 			OBJECT GET COORDINATES:C663(*; "lb_activities"; $g; $h; $d; $b)
 			OBJECT SET COORDINATES:C1248(*; "lb_activities"; $g; $h; $widthSubform-5; $b)
 			
+			OBJECT GET COORDINATES:C663(*; "entryField_scope"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "entryField_scope"; $g; $h; $d; $heightSubform-5)
+			
+			OBJECT GET COORDINATES:C663(*; "entryField_objectives"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "entryField_objectives"; $g; $h; $widthSubform-30; $heightSubform-5)
 			
 		: (FORM Get current page:C276(*)=2)
+			
+			OBJECT GET COORDINATES:C663(*; "entryField_comments"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "entryField_comments"; $g; $h; $d; $heightSubform-15)
+			
+		: (FORM Get current page:C276(*)=3)
+			
+			OBJECT GET COORDINATES:C663(*; "entryField_findings"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "entryField_findings"; $g; $h; $d; $heightSubform-15)
+			
+		: (FORM Get current page:C276(*)=4)
+			
+			OBJECT GET COORDINATES:C663(*; "entryField_recommendations"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "entryField_recommendations"; $g; $h; $d; $heightSubform-5)
+			
+			OBJECT GET COORDINATES:C663(*; "entryField_remainingGaps"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "entryField_remainingGaps"; $g; $h; $widthSubform-30; $heightSubform-5)
+			
 			
 			
 	End case 
@@ -127,7 +159,6 @@ Function pup_company()
 		$allSuppliers:=ds:C1482.Supplier.all()
 		$form:=New object:C1471(\
 			"colName"; "name"; \
-			"lb_items"; $allSuppliers; \
 			"allData"; $allSuppliers; \
 			"dataclass"; "Supplier"\
 			)
@@ -177,6 +208,103 @@ Function pup_status()
 	//Create pop up menu
 	Form:C1466.current_item.pup("auditStatus"; "AuditStatus"; "UUID"; "UUID_AuditStatus")
 	This:C1470.drawPup_status()
+	
+	
+Function drawPup_auditType()
+	If (Form:C1466.current_item#Null:C1517)
+		$auditTypeName:=Form:C1466.current_item.type  //$customer.name
+		If ($auditTypeName=Null:C1517)
+			$auditTypeName:=""
+		End if 
+		$color:="#FFFFFF"  //cs.sfw_htmlColor.me.getName($customer.color)
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_auditType"; $auditTypeName; $pathIcon; (Form:C1466.current_item=Null:C1517))
+	End if 
+	
+	
+Function pup_auditType()
+	//Create pop up menu
+	If (Form:C1466.sfw.checkIsInModification())
+		var $hListItems : Collection
+		var $hSousListItems : Collection
+		
+		$hListItems:=New collection:C1472("External"; "Internal")
+		
+		$hList:=Create menu:C408
+		
+		$hListItemsLength:=$hListItems.length
+		$k:=1
+		For ($i; 0; $hListItemsLength-1)
+			
+			APPEND MENU ITEM:C411($hList; $hListItems[$i]; *)
+			SET MENU ITEM PARAMETER:C1004($hList; -1; $hListItems[$i])
+			$k:=$k+1
+		End for 
+		
+		$choose:=Dynamic pop up menu:C1006($hList)
+		RELEASE MENU:C978($hList)
+		Case of 
+			: ($choose#"")
+				If ($choose="Internal")
+					Form:C1466.current_item.UUID_Company:=""
+				End if 
+				Form:C1466.current_item.type:=$choose
+				cs:C1710.panel_audit.me._activate_save_cancel_button()
+		End case 
+		
+	End if 
+	
+	This:C1470.drawPup_auditType()
+	
+	
+Function btnTimePickerCreate($object; $attribut)
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		$form:=New object:C1471
+		$form.timeStamp:=$object[$attribut]  //Form.current_item.stmpCreationDate
+		OBJECT GET COORDINATES:C663(Self:C308->; $left; $top; $rigth; $bottom)
+		
+		CONVERT COORDINATES:C1365($left; $bottom; XY Current form:K27:5; XY Main window:K27:8)
+		Open window:C153($left; $bottom+30; $left+237; $bottom+206; Movable dialog box:K34:7; "Enter Time")
+		DIALOG:C40("_ga_TimePicker"; $form)
+		
+		If (OK=1)
+			
+			$object[$attribut]:=cs:C1710.sfw_stmp.me.getTime($form.timeStamp)
+			This:C1470._activate_save_cancel_button()
+			
+		End if 
+		
+	End if 
+	
+	
+	
+Function btnDatePickerCreate($object; $attribut)
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		$form:=New object:C1471
+		$form.date:=$object[$attribut]  //Form.current_item.creationDate
+		
+		OBJECT GET COORDINATES:C663(Self:C308->; $left; $top; $rigth; $bottom)
+		CONVERT COORDINATES:C1365($left; $bottom; XY Current form:K27:5; XY Main window:K27:8)
+		Open window:C153($left; $bottom; $left+285; $bottom+210; Movable dialog box:K34:7; "calendar")
+		DIALOG:C40("_ga_calendar"; $form)
+		
+		If (OK=1)
+			$object[$attribut]:=$form.calendar.display.date
+			This:C1470._activate_save_cancel_button()
+		End if 
+		
+	End if 
+	
+	
+	
+Function bActionTeam()
+	
+	
+	
+Function bActionActivities()
+	
 	
 	
 	
