@@ -189,8 +189,8 @@ For ($i; 0; $docCategories.length-1)
 End for 
 
 
-var $eAuditStatus : cs:C1710.DocumentCategoryEntity
-var $auditStatus : Collection:=New collection:C1472("C"; "OFI"; "NCR")
+var $eAuditStatus : cs:C1710.AuditStatusEntity
+var $auditStatus : Collection:=New collection:C1472("C - Conforming"; "OFI - Opportunity for Improvement"; "NCR - Nonconformance")
 TRUNCATE TABLE:C1051([AuditStatus:46])
 For ($i; 0; $auditStatus.length-1)
 	$eAuditStatus:=ds:C1482.AuditStatus.new()

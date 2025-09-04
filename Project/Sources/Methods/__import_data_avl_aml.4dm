@@ -8,7 +8,7 @@ $contactSelection:=ds:C1482.Contact.query("companyType =:1"; "Supplier")
 For each ($eContact; $contactSelection)
 	$status:=$eContact.drop()
 	If ($status.success=False:C215)
-		
+		TRACE:C157
 	End if 
 End for each 
 

@@ -129,7 +129,6 @@ Function pup_fixOperator()
 		
 		$form:=New object:C1471(\
 			"colName"; "code"; \
-			"lb_items"; ds:C1482.Staff.all(); \
 			"allData"; ds:C1482.Staff.all(); \
 			"dataclass"; "Staff"\
 			)
@@ -169,7 +168,6 @@ Function pup_reportOperator()
 		
 		$form:=New object:C1471(\
 			"colName"; "code"; \
-			"lb_items"; ds:C1482.Staff.all(); \
 			"allData"; ds:C1482.Staff.all(); \
 			"dataclass"; "Staff"\
 			)
