@@ -20,3 +20,5 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("auditNumber"; "Entry Number"; "width:100")
 	$entry.setLBItemsColumn("title"; "Title"; "width:200")
 	$entry.setLBItemsOrderBy("auditNumber")
+
+	$entry.setItemAction("Print Audit Report"; "_ga_printAuditReport")
