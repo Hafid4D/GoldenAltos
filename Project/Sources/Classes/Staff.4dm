@@ -38,6 +38,11 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setPictoLabel("/RESOURCES/ga/image/picto/terminated-user-16x16.png")
 	$entry.setView($view)
 	
+	$view:=cs:C1710.sfw_definitionView.new("currentStaff"; "Current Staff"; "derivedFrom:main"; $entry)
+	$view.setSubset("currentStaff")
+	$view.setPictoLabel("/RESOURCES/ga/image/picto/terminated-user-16x16.png")
+	$entry.setView($view)
+	
 	//$entry.setAllowedProfiles("qa")
 	
 	$entry.enableTransaction()
@@ -68,6 +73,15 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$filter.setOrderForItems("id")
 	$entry.addFilter($filter)
 	
+Function currentStaff()->$staffs : cs:C1710.StaffSelection
+	$staffs:=ds:C1482.Staff.newSelection()
+	$users_es:=ds:C1482.sfw_User.query("login = :1"; Current user:C182)
+	
+	If ($users_es.length>0)
+		If ($users_es[0].staffs.length>0)
+			$staffs:=$users_es[0].staffs
+		End if 
+	End if 
 	
 Function terminatedStaff()->$staffs : cs:C1710.StaffSelection
 	$staffs:=ds:C1482.Staff.query("terminated = :1"; True:C214)
