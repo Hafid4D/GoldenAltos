@@ -668,6 +668,7 @@ If (True:C214)
 		If ($eDepartment=Null:C1517)
 			$eDepartment:=ds:C1482.Department.new()
 			$eDepartment.name:=$record.department
+			$eDepartment.levelID:=$counter
 			$eDepartment.save()
 		End if 
 		

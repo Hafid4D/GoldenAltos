@@ -58,7 +58,7 @@ Function redrawAndSetVisible()
 		: (FORM Get current page:C276(*)=1)
 			
 			OBJECT GET COORDINATES:C663(*; "entryField_qaComment"; $g; $h; $d; $b)
-			OBJECT SET COORDINATES:C1248(*; "entryField_qaComment"; $g; $h; $widthSubform-30; $b)
+			OBJECT SET COORDINATES:C1248(*; "entryField_qaComment"; $g; $h; $widthSubform-10; $b)
 			
 		: (FORM Get current page:C276(*)=2)
 			
@@ -151,7 +151,6 @@ Function pup_enteredBy()
 		
 		$form:=New object:C1471(\
 			"colName"; "code"; \
-			"lb_items"; ds:C1482.Staff.all(); \
 			"allData"; ds:C1482.Staff.all(); \
 			"dataclass"; "Staff"\
 			)

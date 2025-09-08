@@ -160,8 +160,7 @@
 				"width": 129.66145324707,
 				"height": 151.99871826172
 			},
-			"displayable_fields_count": 5,
-			"fields_ordering": 1
+			"displayable_fields_count": 5
 		},
 		"CustomerStatus": {
 			"color": {
@@ -655,8 +654,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 247.20071411133,
-				"top": 0.52043914794922,
+				"left": 239.20071411133,
+				"top": 0,
 				"width": 182,
 				"height": 232.33203125
 			},
@@ -747,12 +746,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3846,
-				"top": 3,
-				"width": 217,
-				"height": 454.33203125
+				"left": 3841,
+				"top": 0,
+				"width": 211,
+				"height": 422.33203125
 			},
-			"displayable_fields_count": 19,
+			"displayable_fields_count": 18,
 			"fields": {
 				"UUID": {
 					"color": {
@@ -936,6 +935,21 @@
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
+		"AuditStatus": {
+			"color": {
+				"red": 160,
+				"green": 174,
+				"blue": 158,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 4405,
+				"top": 2.66796875,
+				"width": 169,
+				"height": 172.33203125
+			},
+			"displayable_fields_count": 6
+		},
 		"ControllingDepartment": {
 			"color": {
 				"red": 249,
@@ -950,6 +964,21 @@
 				"height": 212.33203125
 			},
 			"displayable_fields_count": 8
+		},
+		"Audit": {
+			"color": {
+				"red": 160,
+				"green": 174,
+				"blue": 158,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 4103,
+				"top": 0,
+				"width": 250,
+				"height": 675.33203125
+			},
+			"displayable_fields_count": 30
 		},
 		"StepSpec": {
 			"color": {
@@ -1115,7 +1144,7 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2426,
+				"left": 2452,
 				"top": 0,
 				"width": 129,
 				"height": 161.33203125
@@ -1786,6 +1815,30 @@
 		}
 	},
 	"relations": {
+		"D982B8553811B2468F440FBF6F888F44": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"5A6A240E15CEAC4F9754A849BB703AE5": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"21CCCB93C0707B4D9CAC866EA7A4CCF3": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"FBC0F8D58BEE4D468E32DAE301646C43": {
 			"color": {
 				"red": 240,

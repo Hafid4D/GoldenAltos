@@ -51,7 +51,6 @@ Function pup_Customer()
 		
 		$form:=New object:C1471(\
 			"colName"; "name"; \
-			"lb_items"; ds:C1482.Customer.all(); \
 			"allData"; ds:C1482.Customer.all(); \
 			"dataclass"; "Customer"\
 			)
@@ -91,7 +90,6 @@ Function pup_supplier()
 		
 		$form:=New object:C1471(\
 			"colName"; "name"; \
-			"lb_items"; ds:C1482.Supplier.all(); \
 			"allData"; ds:C1482.Supplier.all(); \
 			"dataclass"; "Supplier"\
 			)
