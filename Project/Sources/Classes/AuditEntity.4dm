@@ -77,5 +77,25 @@ local Function pup($cacheCollection; $dataClass; $queryField; $queryValue)
 	End if 
 	
 	
+Function rebuidTeam()->$team : Collection
+	
+	If (This:C1470.team#Null:C1517) && (This:C1470.team.teamMembers#Null:C1517)
+		$team:=This:C1470.team.teamMembers
+	Else 
+		$team:=New collection:C1472()
+	End if 
+	
+	
+Function rebuidActivities()->$activites : Collection
+	
+	If (This:C1470.activities#Null:C1517) && (This:C1470.activities.collection#Null:C1517)
+		$activites:=This:C1470.activities.collection
+	Else 
+		$activites:=New collection:C1472()
+	End if 
+	
+	
+	
+	
 	
 	

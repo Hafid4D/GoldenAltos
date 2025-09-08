@@ -9,6 +9,9 @@ Function get companyType()->$companyType : Text
 	$companyType:=ds:C1482.Supplier.query("UUID = :1"; This:C1470.UUID_Company).first()#Null:C1517 ? "Supplier" : "Customer"
 	
 	
+Function set companyType()
+	
+	
 Function get companyName()->$companyName : Text
 	var $supplier : cs:C1710.SupplierEntity
 	$supplier:=ds:C1482.Supplier.query("UUID = :1"; This:C1470.UUID_Company).first()
