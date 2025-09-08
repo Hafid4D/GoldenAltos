@@ -52,7 +52,6 @@ If ($audit_log.exists)
 					$doc:=New object:C1471
 					
 					$doc.code:=$document.DocCode
-					$doc.dateTimeStamp:=$document.DateTimeStamp
 					$doc.creationDateTimeStamp:=$document.CreationDateTimeStamp
 					$doc.documentPath:=$document.DocumentPath
 					$doc.sourcePath:=$document.SourcePath
@@ -81,7 +80,6 @@ For each ($document; $_documents)
 $doc:=New object
 				
 $doc.code:=$document.DocCode
-$doc.dateTimeStamp:=$document.DateTimeStamp
 $doc.creationDateTimeStamp:=$document.CreationDateTimeStamp
 $doc.documentPath:=$document.DocumentPath
 $doc.sourcePath:=$document.SourcePath
