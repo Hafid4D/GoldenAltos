@@ -20,8 +20,6 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("customer.name"; "Customer Name"; "width:250")
 	$entry.setLBItemsColumn("amountBilled"; "Amount Billed"; "width:100"; "format:$##,###,###,##0.00")
 	
-	$entry.setValidationRule("poNumber"; "entryField_poNumber"; "mandatory"; "unique"; "message:The PO Number is mandatory and unique")
-	
 	$entry.setLBItemsOrderBy("poNumber")
 	$entry.enableTransaction()
 	

@@ -150,7 +150,7 @@ Function pup_displayYear()
 	$menu:=Create menu:C408
 	$refmenus.push($menu)
 	$yearToday:=Year of:C25(Current date:C33)
-	For ($year; $yearToday-25; $yearToday+10)
+	For ($year; Form:C1466.calendar.display.year-10; Form:C1466.calendar.display.year+10)  //($year; $yearToday-10; $yearToday+10)
 		APPEND MENU ITEM:C411($menu; String:C10($year))
 		$ref:=String:C10($year)
 		SET MENU ITEM PARAMETER:C1004($menu; -1; $ref)

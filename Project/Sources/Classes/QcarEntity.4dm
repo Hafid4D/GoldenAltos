@@ -1,11 +1,8 @@
 Class extends Entity
 
-local Function get nameInWindowTitle()->$nameInWindowTitle : Text
-	$nameInWindowTitle:=String:C10(This:C1470.qcarNumber)
-	
-	//local Function beforeSaveCreation()
-	//This._initCorrectiveActionReport()
-	
+//local Function beforeSaveCreation()
+//This._initCorrectiveActionReport()
+
 local Function loadAfterCreation()
 	// This callback is called after creating the new item but before displaying the panel.
 	This:C1470.qcarNumber:=ds:C1482.Qcar.all().max("qcarNumber")+1
@@ -35,9 +32,4 @@ local Function _initCorrectiveActionReport()
 		"others"; False:C215; \
 		"othersText"; ""\
 		)
-	
-local Function getRMA()->$rma_e : cs:C1710.RMAEntity
-	If (This:C1470.rmas.length>0)
-		$rma_e:=This:C1470.rmas[0]
-	End if 
 	

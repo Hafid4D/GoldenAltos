@@ -11,16 +11,13 @@ Function formMethod()
 		Form:C1466.statusContact:=0
 		This:C1470.LoadContact()
 		This:C1470.loadAllTabs()
-		This:C1470.LoadApContact()
-		This:C1470.LoadStatusContact()
+		
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
 				// add load functions
-				This:C1470.LoadApContact()
-				This:C1470.LoadStatusContact()
-				
+				This:C1470.LoadContact()
 				
 			: (FORM Get current page:C276(*)=2)
 				This:C1470.loadPOs()
@@ -42,6 +39,70 @@ Function formMethod()
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())  //It's time to resize the object or set visible
 		This:C1470.redrawAndSetVisible()
 	End if 
+	
+	
+	
+	
+Function redrawAndSetVisible()
+	//Adjusts the layout and visibility of form elements based on the current page and modification state
+	
+	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	$offset:=4
+	Case of 
+			
+		: (FORM Get current page:C276(*)=1)
+			
+			OBJECT GET COORDINATES:C663(*; "subFormAddress"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "subFormAddress"; $g; $h; $widthSubform-5; $b)
+			
+		: (FORM Get current page:C276(*)=2)
+			
+			OBJECT GET COORDINATES:C663(*; "lb_POs"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			
+			OBJECT SET COORDINATES:C1248(*; "lb_POs"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			
+		: (FORM Get current page:C276(*)=3)
+			
+			OBJECT GET COORDINATES:C663(*; "lb_Jobs"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			
+			OBJECT SET COORDINATES:C1248(*; "lb_Jobs"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			
+		: (FORM Get current page:C276(*)=4)
+			
+			OBJECT GET COORDINATES:C663(*; "lb_Planning"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			
+			OBJECT SET COORDINATES:C1248(*; "lb_Planning"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			
+		: (FORM Get current page:C276(*)=5)
+			
+			OBJECT GET COORDINATES:C663(*; "lb_CFM_Receiving"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			
+			OBJECT SET COORDINATES:C1248(*; "lb_CFM_Receiving"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			
+		: (FORM Get current page:C276(*)=6)
+			
+			OBJECT GET COORDINATES:C663(*; "lb_Invoices"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			
+			OBJECT SET COORDINATES:C1248(*; "lb_Invoices"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			
+	End case 
+	
+	This:C1470.contactDetails()
+	
+	This:C1470.drawPup_CustomerStatus()
+	This:C1470.drawPup_CustomerCarrier()
+	
+	
+	Use (Form:C1466.sfw.entry.panel.pages)
+		Form:C1466.sfw.entry.panel.pages[1].label:="POs ("+String:C10(Form:C1466.lb_POs.length)+")"
+		Form:C1466.sfw.entry.panel.pages[2].label:="Jobs ("+String:C10(Form:C1466.lb_Jobs.length)+")"
+		Form:C1466.sfw.entry.panel.pages[3].label:="Planning ("+String:C10(Form:C1466.lb_Planning.length)+")"
+		Form:C1466.sfw.entry.panel.pages[4].label:="CFM_Receiving ("+String:C10(Form:C1466.lb_CFM_Receiving.length)+")"
+		Form:C1466.sfw.entry.panel.pages[5].label:="Invoices ("+String:C10(Form:C1466.lb_Invoices.length)+")"
+	End use 
+	
+	Form:C1466.sfw.drawHTab()
+	
 	
 	
 Function drawPup_XXX()
@@ -137,66 +198,6 @@ Function pup_carrier()
 	This:C1470.drawPup_CustomerCarrier()
 	
 	
-Function redrawAndSetVisible()
-	//Adjusts the layout and visibility of form elements based on the current page and modification state
-	
-	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
-	$offset:=4
-	Case of 
-			
-		: (FORM Get current page:C276(*)=1)
-			
-			OBJECT GET COORDINATES:C663(*; "subFormAddress"; $g; $h; $d; $b)
-			OBJECT SET COORDINATES:C1248(*; "subFormAddress"; $g; $h; $widthSubform-5; $b)
-			
-		: (FORM Get current page:C276(*)=2)
-			
-			OBJECT GET COORDINATES:C663(*; "lb_POs"; $left_lb; $top_lb; $right_lb; $bottom_lb)
-			
-			OBJECT SET COORDINATES:C1248(*; "lb_POs"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
-			
-		: (FORM Get current page:C276(*)=3)
-			
-			OBJECT GET COORDINATES:C663(*; "lb_Jobs"; $left_lb; $top_lb; $right_lb; $bottom_lb)
-			
-			OBJECT SET COORDINATES:C1248(*; "lb_Jobs"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
-			
-		: (FORM Get current page:C276(*)=4)
-			
-			OBJECT GET COORDINATES:C663(*; "lb_Planning"; $left_lb; $top_lb; $right_lb; $bottom_lb)
-			
-			OBJECT SET COORDINATES:C1248(*; "lb_Planning"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
-			
-		: (FORM Get current page:C276(*)=5)
-			
-			OBJECT GET COORDINATES:C663(*; "lb_CFM_Receiving"; $left_lb; $top_lb; $right_lb; $bottom_lb)
-			
-			OBJECT SET COORDINATES:C1248(*; "lb_CFM_Receiving"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
-			
-		: (FORM Get current page:C276(*)=6)
-			
-			OBJECT GET COORDINATES:C663(*; "lb_Invoices"; $left_lb; $top_lb; $right_lb; $bottom_lb)
-			
-			OBJECT SET COORDINATES:C1248(*; "lb_Invoices"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
-			
-	End case 
-	
-	This:C1470.contactDetails()
-	
-	This:C1470.drawPup_CustomerStatus()
-	This:C1470.drawPup_CustomerCarrier()
-	
-	
-	Use (Form:C1466.sfw.entry.panel.pages)
-		Form:C1466.sfw.entry.panel.pages[1].label:="POs ("+String:C10(Form:C1466.lb_POs.length)+")"
-		Form:C1466.sfw.entry.panel.pages[2].label:="Jobs ("+String:C10(Form:C1466.lb_Jobs.length)+")"
-		Form:C1466.sfw.entry.panel.pages[3].label:="Planning ("+String:C10(Form:C1466.lb_Planning.length)+")"
-		Form:C1466.sfw.entry.panel.pages[4].label:="CFM_Receiving ("+String:C10(Form:C1466.lb_CFM_Receiving.length)+")"
-		Form:C1466.sfw.entry.panel.pages[5].label:="Invoices ("+String:C10(Form:C1466.lb_Invoices.length)+")"
-	End use 
-	
-	Form:C1466.sfw.drawHTab()
-	
 	
 Function contactDetails()
 	If (Form:C1466.current_item#Null:C1517)
@@ -260,28 +261,6 @@ Function loadAllTabs()
 	This:C1470.loadPlannings()
 	This:C1470.loadCFMReceiving()
 	This:C1470.loadInvoices()
-	
-	
-Function LoadApContact()
-	
-	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.lb_apContact:=New collection:C1472()
-		If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()#Null:C1517)
-			
-			Form:C1466.lb_apContact:=Form:C1466.current_item.rebuidComunications("AP")
-		End if 
-	End if 
-	
-	
-Function LoadStatusContact()
-	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.lb_statusContact:=New collection:C1472()
-		If (Form:C1466.current_item.contacts.query("title=:1"; "Status").first()#Null:C1517)
-			
-			Form:C1466.lb_statusContact:=Form:C1466.current_item.rebuidComunications("Status")
-			
-		End if 
-	End if 
 	
 	
 Function loadPOs()
@@ -399,37 +378,6 @@ Function loadInvoices()
 Function bActionXXX()
 	//Manages actions: add, or remove, using dynamic menus and modification checks
 	
-Function bActionApContact()
-	$refMenu:=Create menu:C408
-	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
-	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openInWindow")
-	If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()=Null:C1517)
-		DISABLE MENU ITEM:C150($refMenu; -1)
-	End if 
-	
-	$choice:=Dynamic pop up menu:C1006($refMenu)
-	RELEASE MENU:C978($refMenu)
-	Case of 
-		: ($choice="openInWindow")
-			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.contacts.query("title=:1"; "AP").first(); "customerService"; "contact")
-	End case 
-	This:C1470.LoadApContact()
-	
-Function bActionStatusContact()
-	$refMenu:=Create menu:C408
-	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
-	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openInWindow")
-	If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()=Null:C1517)
-		DISABLE MENU ITEM:C150($refMenu; -1)
-	End if 
-	
-	$choice:=Dynamic pop up menu:C1006($refMenu)
-	RELEASE MENU:C978($refMenu)
-	Case of 
-		: ($choice="openInWindow")
-			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.contacts.query("title=:1"; "Status").first(); "customerService"; "contact")
-	End case 
-	This:C1470.LoadStatusContact()
 	
 	
 Function loadDpAddress()
@@ -440,7 +388,7 @@ Function loadDpAddress()
 		)
 	
 	
-	
-	
 Function _activate_save_cancel_button()
 	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+	
+	

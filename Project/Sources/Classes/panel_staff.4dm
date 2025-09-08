@@ -181,7 +181,7 @@ Function manageCertification()
 	//End if 
 	
 Function hideDatePickers()
-	OBJECT SET VISIBLE:C603(*; "dp_@"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "dp_@"; False:C215)
 	
 	//mark:- setting page
 	

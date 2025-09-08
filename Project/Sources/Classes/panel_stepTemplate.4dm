@@ -23,9 +23,6 @@ Function formMethod()
 				
 			: (FORM Get current page:C276(*)=2)
 				This:C1470.loadSteps()
-				
-			: (FORM Get current page:C276(*)=3)
-				This:C1470.loadSettings()
 		End case 
 	End if 
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())  //It's time to resize the object or set visible
@@ -53,7 +50,9 @@ Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	This:C1470.displayStepLine()
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
-	
+	Use (Form:C1466.sfw.entry.panel.pages)
+		Form:C1466.sfw.entry.panel.pages[1].label:="Steps ("+String:C10(Form:C1466.lb_steps.length)+")"
+	End use 
 	Form:C1466.sfw.drawHTab()
 	
 	Case of 
@@ -72,18 +71,6 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "bkgd_lb_steps"; $left_bk_lb; $top_bk_lb; $widthSubform-$offset; $heightSubform-$offset)
 			OBJECT SET COORDINATES:C1248(*; "lb_steps"; $left_lb; $top_lb; $right_lb; $heightSubform-$offset-1)
 			OBJECT SET COORDINATES:C1248(*; "bActionSteps"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
-			
-		: (FORM Get current page:C276(*)=3)
-			OBJECT GET COORDINATES:C663(*; "rec_bkgd_3"; $left; $top; $right; $bottom)
-			OBJECT GET COORDINATES:C663(*; "bkgd_lb_properties"; $left_bk_lb; $top_bk_lb; $right_bk_lb; $bottom_bk_lb)
-			OBJECT GET COORDINATES:C663(*; "lb_properties"; $left_lb; $top_lb; $right_lb; $bottom_lb)
-			
-			$offset:=4
-			$offset_bAc:=10
-			
-			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_3"; $left; $top; $right; $heightSubform-$offset)
-			OBJECT SET COORDINATES:C1248(*; "bkgd_lb_properties"; $left_bk_lb; $top_bk_lb; $widthSubform-$offset; $heightSubform-$offset)
-			OBJECT SET COORDINATES:C1248(*; "lb_properties"; $left_lb; $top_lb; $right_lb; $heightSubform-$offset-1)
 	End case 
 	
 	
@@ -389,11 +376,6 @@ Function loadSteps
 Function displayStepLine()
 	OBJECT SET VISIBLE:C603(*; "label_stepLine@"; Not:C34((Form:C1466.selectedStep=Null:C1517)))
 	OBJECT SET VISIBLE:C603(*; "entryField_stepLine@"; Not:C34((Form:C1466.selectedStep=Null:C1517)))
-	OBJECT SET VISIBLE:C603(*; "btn_openDocument"; Not:C34((Form:C1466.selectedStep=Null:C1517)))
-	
-	If (OBJECT Get visible:C1075(*; "btn_openDocument")) && (Form:C1466.selectedStep#Null:C1517)
-		OBJECT SET ENABLED:C1123(*; "btn_openDocument"; Not:C34((Form:C1466.selectedStep.specification="")))
-	End if 
 	
 	
 Function bActionSteps()
@@ -443,58 +425,4 @@ Function bActionSteps()
 			End if 
 			
 		: ($choose="--delete")
-	End case 
-	
-Function btnDocument()
-	If (Form:C1466.selectedStep.specification#"")
-		$path:=System folder:C487(Desktop:K41:16)+"publishedDocuments"+Folder separator:K24:12+Form:C1466.selectedStep.specification+".pdf"
-		
-		OPEN URL:C673($path)
-	End if 
-	
-	
-Function loadSettings()
-	Form:C1466.lb_properties:=Form:C1466.current_item.settings.properties
-	
-	
-Function manageProperties()
-	Case of 
-		: (FORM Event:C1606.code=On Data Change:K2:15)
-			If (Form:C1466.selectedProperty.name="@Reserved@")
-				Form:C1466.selectedProperty.checked:=False:C215
-			End if 
-	End case 
-	
-	
-Function selectDivision()
-	Case of 
-		: (FORM Event:C1606.code=On Clicked:K2:4)
-			If (Form:C1466.sfw.checkIsInModification())
-				OBJECT GET COORDINATES:C663(*; "Field_division"; $l; $t; $r; $b)
-				CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
-				
-				$form:=New object:C1471(\
-					"colName"; "name"; \
-					"lb_items"; ds:C1482.Division.all(); \
-					"allData"; ds:C1482.Division.all(); \
-					"dataclass"; "Division"\
-					)
-				
-				$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b)
-				DIALOG:C40("selectNto1"; $form)
-				CLOSE WINDOW:C154($winRef)
-				
-				If (ok=1)
-					If ($form.item#Null:C1517)
-						Form:C1466.current_item.division:=$form.item.name
-					Else 
-						Form:C1466.current_item.division:=""
-					End if 
-					
-					cs:C1710.panel_contact.me._activate_save_cancel_button()
-				End if 
-			End if 
-			
-		: (FORM Event:C1606.code=On Mouse Move:K2:35)
-			SET CURSOR:C469(9000)
 	End case 

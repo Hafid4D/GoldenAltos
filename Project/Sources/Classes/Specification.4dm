@@ -6,8 +6,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	//Mark: entry : Specification
 	$entry:=cs:C1710.sfw_definitionEntry.new("specification"; ["qualityAssurance"]; "Specs Control")
 	$entry.setDataclass("Specification")
-	$entry.setSearchboxField("spec")
-	$entry.setDisplayOrder(-600)
+	$entry.setDisplayOrder(-500)
 	$entry.setIcon("image/entry/spec-control-white-50x50.png")
 	
 	$entry.setSearchboxField("spec")
@@ -147,8 +146,15 @@ Function docsLateInReviewing()->$specifications : cs:C1710.SpecificationSelectio
 	$specifications:=ds:C1482.Specification.query("suppress =:1 & reviewIntervalInDays >0 & eval(revisionDate<Current date(*))"; False:C215)
 	
 	
-Function docsRequiringReviewSoon()->$specifications : cs:C1710.SpecificationSelection
-	$specifications:=ds:C1482.Specification.query("suppress =:1 & reviewIntervalInDays >0 & eval(reviewDate<(Current date(*)+7))"; False:C215)
+local Function docsRequiringReviewSoon()->$specifications : cs:C1710.SpecificationSelection
+	$title:="Set date interval"
+	This:C1470.setDateInterval(False:C215; $title)
+	$statDate:=Storage:C1525.cache.startDate
+	$endDate:=Storage:C1525.cache.endDate
+	$formula_1:=Formula:C1597((This:C1470.reviewDate+This:C1470.reviewIntervalInDays)>=$statDate)
+	$formula_2:=Formula:C1597((This:C1470.reviewDate+This:C1470.reviewIntervalInDays)<$endDate)
+	$specifications:=This:C1470.myQuery(False:C215; 0; $formula_1; $formula_2)  //ds.Specification.query("suppress =:1 & reviewIntervalInDays >0 & :2 & :3"; False; $formula_1; $formula_2)
+	
 	
 	
 Function OnlySpecs()->$specifications : cs:C1710.SpecificationSelection
@@ -159,4 +165,5 @@ Function OnlyForms()->$specifications : cs:C1710.SpecificationSelection
 	$specifications:=ds:C1482.Specification.query("suppress =:1 & isForm=:2"; False:C215; True:C214)
 	
 	
+Function myQuery()
 	

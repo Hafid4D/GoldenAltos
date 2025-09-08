@@ -51,7 +51,6 @@ Function pup_Customer()
 		
 		$form:=New object:C1471(\
 			"colName"; "name"; \
-			"lb_items"; ds:C1482.Customer.all(); \
 			"allData"; ds:C1482.Customer.all(); \
 			"dataclass"; "Customer"\
 			)
@@ -91,7 +90,6 @@ Function pup_supplier()
 		
 		$form:=New object:C1471(\
 			"colName"; "name"; \
-			"lb_items"; ds:C1482.Supplier.all(); \
 			"allData"; ds:C1482.Supplier.all(); \
 			"dataclass"; "Supplier"\
 			)
@@ -179,10 +177,9 @@ Function redrawAndSetVisible()
 	
 Function contactDetails()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.current_item.rebuildAddress()
-		//Form.subFormAddress:=New object()
-		//Form.subFormAddress.address:=Form.current_item.rebuildAddress()
-		//Form.subFormAddress.situation:=Form.situation
+		Form:C1466.subFormAddress:=New object:C1471()
+		Form:C1466.subFormAddress.address:=Form:C1466.current_item.rebuildAddress()
+		Form:C1466.subFormAddress.situation:=Form:C1466.situation
 		
 		Form:C1466.subFormCommunication:=New object:C1471
 		If (Form:C1466.current_item.contactDetails.communications=Null:C1517)

@@ -160,8 +160,7 @@
 				"width": 129.66145324707,
 				"height": 151.99871826172
 			},
-			"displayable_fields_count": 5,
-			"fields_ordering": 1
+			"displayable_fields_count": 5
 		},
 		"CustomerStatus": {
 			"color": {
@@ -370,52 +369,10 @@
 			"coordinates": {
 				"left": 3031.6667480469,
 				"top": 630.66668701172,
-				"width": 198.048828125,
-				"height": 365.33203125
+				"width": 197.048828125,
+				"height": 356.33203125
 			},
-			"displayable_fields_count": 15,
-			"fields_ordering": 2,
-			"fields": {
-				"bins": {
-					"position": 15
-				},
-				"parametricMeasurements": {
-					"position": 14
-				},
-				"dataTables": {
-					"position": 13
-				},
-				"comment2": {
-					"position": 12
-				},
-				"comment1": {
-					"position": 11
-				},
-				"largeLayout": {
-					"position": 10
-				},
-				"smallLayout": {
-					"position": 9
-				},
-				"binning": {
-					"position": 7
-				},
-				"status": {
-					"position": 6
-				},
-				"division": {
-					"position": 5
-				},
-				"operation": {
-					"position": 4
-				},
-				"name": {
-					"position": 2
-				},
-				"UUID": {
-					"position": 1
-				}
-			}
+			"displayable_fields_count": 15
 		},
 		"Step": {
 			"color": {
@@ -476,10 +433,11 @@
 			"coordinates": {
 				"left": 2437.3334960938,
 				"top": 1052.6667480469,
-				"width": 169.69921875,
-				"height": 859.33203125
+				"width": 157.69921875,
+				"height": 755.33203125
 			},
-			"displayable_fields_count": 38
+			"displayable_fields_count": 34,
+			"fields_ordering": 1
 		},
 		"Job": {
 			"color": {
@@ -696,8 +654,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 247.20071411133,
-				"top": 0.52043914794922,
+				"left": 239.20071411133,
+				"top": 0,
 				"width": 182,
 				"height": 232.33203125
 			},
@@ -788,12 +746,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3846,
-				"top": 3,
-				"width": 217,
-				"height": 454.33203125
+				"left": 3841,
+				"top": 0,
+				"width": 211,
+				"height": 422.33203125
 			},
-			"displayable_fields_count": 19,
+			"displayable_fields_count": 18,
 			"fields": {
 				"UUID": {
 					"color": {
@@ -977,21 +935,20 @@
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
-		"RMA": {
+		"AuditStatus": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 160,
+				"green": 174,
+				"blue": 158,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 240,
-				"top": 40,
-				"width": 120,
-				"height": 167.33203125
+				"left": 4405,
+				"top": 2.66796875,
+				"width": 169,
+				"height": 172.33203125
 			},
-			"displayable_fields_count": 6,
-			"fields_ordering": 1
+			"displayable_fields_count": 6
 		},
 		"ControllingDepartment": {
 			"color": {
@@ -1007,6 +964,21 @@
 				"height": 212.33203125
 			},
 			"displayable_fields_count": 8
+		},
+		"Audit": {
+			"color": {
+				"red": 160,
+				"green": 174,
+				"blue": 158,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 4103,
+				"top": 0,
+				"width": 250,
+				"height": 675.33203125
+			},
+			"displayable_fields_count": 30
 		},
 		"StepSpec": {
 			"color": {
@@ -1172,7 +1144,7 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2426,
+				"left": 2452,
 				"top": 0,
 				"width": 129,
 				"height": 161.33203125
@@ -1709,7 +1681,7 @@
 				"width": 200.048828125,
 				"height": 758.33203125
 			},
-			"displayable_fields_count": 36,
+			"displayable_fields_count": 34,
 			"fields": {
 				"comment2": {
 					"position": 17
@@ -1843,6 +1815,30 @@
 		}
 	},
 	"relations": {
+		"D982B8553811B2468F440FBF6F888F44": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"5A6A240E15CEAC4F9754A849BB703AE5": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"21CCCB93C0707B4D9CAC866EA7A4CCF3": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"FBC0F8D58BEE4D468E32DAE301646C43": {
 			"color": {
 				"red": 240,

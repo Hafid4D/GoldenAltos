@@ -175,13 +175,13 @@
 					"stroke": "#808080",
 					"text": "Revision Date"
 				},
-				"Field_revisionDate": {
+				"Field_0_6": {
 					"type": "input",
 					"top": 37,
 					"left": 520,
 					"width": 110,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.revisionDate",
+					"dataSource": "Form:C1466.current_item.field2",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -245,14 +245,14 @@
 					"borderStyle": "none",
 					"right": 632
 				},
-				"label_0_9": {
+				"label_originator": {
 					"type": "text",
 					"top": 12,
 					"left": 653,
 					"width": 95,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "8D Initiator"
+					"text": "Originator"
 				},
 				"entryField_initiator8D": {
 					"type": "input",
@@ -286,7 +286,7 @@
 					"left": 753,
 					"width": 110,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.closedDate",
+					"dataSource": "Form:C1466.current_item.actualCloseDate",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -317,13 +317,13 @@
 					],
 					"focusable": true
 				},
-				"dp_revisionDate": {
+				"dp_creationDate1": {
 					"type": "subform",
 					"top": 37,
 					"left": 611,
 					"width": 19,
-					"height": 16,
-					"dataSource": "Form:C1466.current_item.revisionDate",
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.creationDate",
 					"dataSourceTypeHint": "date",
 					"detailForm": "DateButton",
 					"deletableInList": false,
@@ -331,7 +331,7 @@
 					"doubleClickInEmptyAreaAction": "addSubrecord",
 					"selectionMode": "multiple",
 					"printFrame": "variable",
-					"method": "ObjectMethods/dp_revisionDate.4dm",
+					"method": "ObjectMethods/dp_creationDate1.4dm",
 					"events": [
 						"onLoad"
 					],
@@ -357,14 +357,14 @@
 					],
 					"focusable": true
 				},
-				"label_0_2": {
+				"label_car": {
 					"type": "text",
 					"top": 12,
 					"left": 444,
 					"width": 75,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Car #"
+					"text": "CAR #"
 				},
 				"Field_qcarNumber": {
 					"type": "input",
@@ -453,13 +453,13 @@
 						"$ref": "/SOURCES/lists.json#/Reject_Criteria"
 					}
 				},
-				"dp_closedDate": {
+				"dp_actualCloseDate": {
 					"type": "subform",
 					"top": 37,
 					"left": 844,
 					"width": 19,
-					"height": 16,
-					"dataSource": "Form:C1466.current_item.closedDate",
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.actualCloseDate",
 					"dataSourceTypeHint": "date",
 					"detailForm": "DateButton",
 					"deletableInList": false,
@@ -467,28 +467,28 @@
 					"doubleClickInEmptyAreaAction": "addSubrecord",
 					"selectionMode": "multiple",
 					"printFrame": "variable",
-					"method": "ObjectMethods/dp_closedDate.4dm",
+					"method": "ObjectMethods/dp_actualCloseDate.4dm",
 					"events": [
 						"onLoad"
 					],
 					"focusable": true
 				},
-				"label_device3": {
+				"label_externalParty": {
 					"type": "text",
 					"top": 87,
-					"left": 498,
-					"width": 45,
+					"left": 874,
+					"width": 87,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "RMA"
+					"text": "External Party"
 				},
-				"Field_rmaNumber": {
+				"EntryField_externalParty": {
 					"type": "input",
 					"top": 87,
-					"left": 548,
-					"width": 50,
+					"left": 958,
+					"width": 310,
 					"height": 17,
-					"dataSource": "Form:C1466.current_rma.rmaNumber",
+					"dataSource": "Form:C1466.current_item.externalParty",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -497,31 +497,7 @@
 						"onDataChange"
 					],
 					"fill": "transparent",
-					"borderStyle": "none",
-					"right": 598,
-					"textAlign": "left",
-					"method": "ObjectMethods/Field_rmaNumber.4dm"
-				},
-				"btnForward": {
-					"type": "button",
-					"text": " ",
-					"top": 87,
-					"left": 599,
-					"width": 18,
-					"height": 18,
-					"events": [
-						"onClick",
-						"onMouseEnter",
-						"onMouseLeave"
-					],
-					"style": "custom",
-					"popupPlacement": "none",
-					"icon": "/RESOURCES/image/element/forward-16x16.png",
-					"textPlacement": "center",
-					"method": "ObjectMethods/btnForward.4dm",
-					"visibility": "visible",
-					"iconFrames": 4,
-					"focusable": false
+					"borderStyle": "none"
 				}
 			}
 		},
@@ -715,7 +691,7 @@
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
-						"onDataChange"
+						"onClick"
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
@@ -887,10 +863,112 @@
 					"method": "ObjectMethods/subform_qcar.4dm"
 				}
 			}
+		},
+		{
+			"objects": {
+				"rec_bkgd_1": {
+					"type": "rectangle",
+					"top": 154,
+					"left": 5,
+					"width": 100,
+					"height": 442,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 105,
+					"bottom": 596
+				},
+				"lb_documents1": {
+					"type": "listbox",
+					"top": 155,
+					"left": 107,
+					"width": 402,
+					"height": 440,
+					"resizingMode": "legacy",
+					"listboxType": "collection",
+					"focusable": false,
+					"movableRows": false,
+					"dataSource": "Form:C1466.lb_documents",
+					"currentItemSource": "Form:C1466.selectedDocument",
+					"currentItemPositionSource": "",
+					"metaSource": "",
+					"scrollbarHorizontal": "hidden",
+					"horizontalLineStroke": "#c0c0c0",
+					"verticalLineStroke": "#C0C0C0",
+					"events": [
+						"onClick",
+						"onDataChange"
+					],
+					"fill": "automatic",
+					"alternateFill": "#F7F9FC",
+					"method": "ObjectMethods/lb_documents1.4dm",
+					"selectionMode": "single",
+					"singleClickEdit": false,
+					"rowFillSource": "highlightExpiredCertification",
+					"columns": [
+						{
+							"name": "header_certifName",
+							"dataSource": "This:C1470.name",
+							"width": 330,
+							"minWidth": 200,
+							"maxWidth": 340,
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"header": {
+								"name": "Entête3",
+								"text": "Name",
+								"fontTheme": "normal",
+								"textAlign": "left",
+								"fontWeight": "bold"
+							},
+							"footer": {
+								"name": "Pied3",
+								"timeFormat": "hh_mm_ss",
+								"fontFamily": "System Font Regular",
+								"fontSize": 10
+							},
+							"fontTheme": "normal",
+							"enterable": false,
+							"resizable": false
+						}
+					]
+				},
+				"Text2": {
+					"type": "text",
+					"text": "Objective Evidences",
+					"top": 161,
+					"left": 9,
+					"width": 92,
+					"height": 36,
+					"fontWeight": "bold",
+					"right": 101
+				},
+				"bActionManageDocuments1": {
+					"type": "button",
+					"text": "Actions",
+					"top": 571,
+					"left": 16,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionManageDocuments1.4dm",
+					"visibility": "visible",
+					"sizingX": "fixed",
+					"sizingY": "fixed"
+				}
+			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_4lines",
-	"geometryStamp": 2713,
+	"geometryStamp": 2774,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

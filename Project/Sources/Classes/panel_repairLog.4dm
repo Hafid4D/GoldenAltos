@@ -129,7 +129,6 @@ Function pup_fixOperator()
 		
 		$form:=New object:C1471(\
 			"colName"; "code"; \
-			"lb_items"; ds:C1482.Staff.all(); \
 			"allData"; ds:C1482.Staff.all(); \
 			"dataclass"; "Staff"\
 			)
@@ -163,37 +162,12 @@ Function drawPup_reportOperator()
 Function pup_reportOperator()
 	//Create pop up menu
 	If (Form:C1466.sfw.checkIsInModification())
-/*
-$menu:=Create menu
-If (Storage.cache=Null) || (Storage.cache.staffs=Null)
-ds.Staff.cacheLoad()
-End if 
 		
-For each ($reportOperator; Storage.cache.staffs)
-APPEND MENU ITEM($menu; $reportOperator.code; *)
-SET MENU ITEM PARAMETER($menu; -1; $reportOperator.code)
-If ($reportOperator.code=Form.current_item.fixedBy)
-SET MENU ITEM MARK($menu; -1; Char(18))
-If (Is Windows)
-SET MENU ITEM STYLE($menu; -1; Bold)
-End if 
-End if 
-End for each 
-$choose:=Dynamic pop up menu($menu)
-RELEASE MENU($menu)
-		
-Case of 
-: ($choose#"")
-$reportOperator:=ds.Employee.get($choose)
-Form.current_item.reportedBy:=$reportOperator.code
-End case 
-*/
 		OBJECT GET COORDINATES:C663(*; "pup_reportOperator"; $l; $t; $r; $b)
 		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
 		
 		$form:=New object:C1471(\
 			"colName"; "code"; \
-			"lb_items"; ds:C1482.Staff.all(); \
 			"allData"; ds:C1482.Staff.all(); \
 			"dataclass"; "Staff"\
 			)

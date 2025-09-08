@@ -9,15 +9,9 @@ Function formMethod()
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		This:C1470.loadAllTabs()
-		
-		Form:C1466.addressBilling:=1
-		Form:C1466.addressShipping:=0
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
-			: (FORM Get current page:C276(*)=1)
-				This:C1470.rebuildAddresses()
-				
 			: (FORM Get current page:C276(*)=2)  //PO -> line items
 				OBJECT SET TITLE:C194(*; "pupFilter_status"; "All Status")
 				This:C1470.loadPoLineItems()
@@ -123,28 +117,22 @@ Function redrawAndSetVisible()
 		: (FORM Get current page:C276(*)=3)  // jobs
 			OBJECT GET COORDINATES:C663(*; "rec_bkgd_3"; $left; $top; $right; $bottom)
 			OBJECT GET COORDINATES:C663(*; "lb_jobs"; $left_lb; $top_lb; $right_lb; $bottom_lb)
-			OBJECT GET COORDINATES:C663(*; "bActionJobs"; $left_bAc; $top_bAc; $right_bAc; $bottom_bAc)
 			
 			$offset:=4
 			$offset_bAc:=10
-			$height_bAc:=$bottom_bAc-$top_bAc
 			
 			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_3"; $left; $top; $right; $heightSubform-$offset)
 			OBJECT SET COORDINATES:C1248(*; "lb_jobs"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
-			OBJECT SET COORDINATES:C1248(*; "bActionJobs"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
 			
 		: (FORM Get current page:C276(*)=4)  // lots
 			OBJECT GET COORDINATES:C663(*; "rec_bkgd_4"; $left; $top; $right; $bottom)
 			OBJECT GET COORDINATES:C663(*; "lb_lots"; $left_lb; $top_lb; $right_lb; $bottom_lb)
-			OBJECT GET COORDINATES:C663(*; "bActionLots"; $left_bAc; $top_bAc; $right_bAc; $bottom_bAc)
 			
 			$offset:=4
 			$offset_bAc:=10
-			$height_bAc:=$bottom_bAc-$top_bAc
 			
 			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_4"; $left; $top; $right; $heightSubform-$offset)
 			OBJECT SET COORDINATES:C1248(*; "lb_lots"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
-			OBJECT SET COORDINATES:C1248(*; "bActionLots"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
 			
 		: (FORM Get current page:C276(*)=5)  // invoices
 			OBJECT GET COORDINATES:C663(*; "rec_bkgd_5"; $left; $top; $right; $bottom)
@@ -200,11 +188,6 @@ Function bActionLineItems()
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--create")
 		APPEND MENU ITEM:C411($refMenu; "Edit Line Item")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--edit")
-		
-		If (Form:C1466.selectedPoLine=Null:C1517)
-			DISABLE MENU ITEM:C150($refMenu; -1)
-		End if 
-		
 		APPEND MENU ITEM:C411($refMenu; "-")
 		APPEND MENU ITEM:C411($refMenu; "Delete")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")
@@ -240,28 +223,26 @@ Function bActionLineItems()
 				End if 
 				
 			: ($choose="--edit")
-				If (Form:C1466.selectedPoLine#Null:C1517)
-					$form:=New object:C1471("poLine"; Form:C1466.selectedPoLine; "windowTitle"; "Edit Line Item")
+				$form:=New object:C1471("poLine"; Form:C1466.selectedPoLine)
+				
+				$winRef:=Open form window:C675("createPoLine"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
+				DIALOG:C40("createPoLine"; $form)
+				CLOSE WINDOW:C154($winRef)
+				
+				If (OK=1)
+					$lineItem:=$form.poLine
 					
-					$winRef:=Open form window:C675("createPoLine"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
-					DIALOG:C40("createPoLine"; $form)
-					CLOSE WINDOW:C154($winRef)
+					$res:=$lineItem.save()
 					
-					If (OK=1)
-						$lineItem:=$form.poLine
-						
-						$res:=$lineItem.save()
-						
-						If ($res.success)
-							This:C1470.loadPoLineItems()
-							This:C1470._activate_save_cancel_button()
-						End if 
+					If ($res.success)
+						This:C1470.loadPoLineItems()
+						This:C1470._activate_save_cancel_button()
 					End if 
-					
 				End if 
+				
 			: ($choose="--delete")
 				If (Form:C1466.selectedPoLine#Null:C1517)
-					cs:C1710.sfw_dialog.me.confirm("Are you sure ?")
+					CONFIRM:C162("Are you sure ?")
 					If (OK=1)
 						$res:=Form:C1466.selectedPoLine.drop()
 						
@@ -366,7 +347,7 @@ Function bActionInvoices()
 				
 			: ($choose="--delete")
 				If (Form:C1466.selectedInv#Null:C1517)
-					cs:C1710.sfw_dialog.me.confirm("Are you sure ?")
+					cs:C1710.sfw_dialog.me.confirm("No Inventory selected !")
 					
 					If (ok=1)
 						$res:=Form:C1466.selectedInv.drop()
@@ -416,7 +397,6 @@ Function selectCustomer()
 				
 				$form:=New object:C1471(\
 					"colName"; "name"; \
-					"lb_items"; ds:C1482.Customer.all(); \
 					"allData"; ds:C1482.Customer.all(); \
 					"dataclass"; "Customer"\
 					)
@@ -437,81 +417,6 @@ Function btnOpenCustomer()
 	Form:C1466.sfw.openInANewWindow($entity; "customerService"; "customer")
 	
 	
-Function rebuildAddresses()
-	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.subFormAddress:=New object:C1471()
-		Form:C1466.subFormAddress.address:=Form:C1466.current_item.rebuildAddress()
-		Form:C1466.subFormAddress.situation:=Form:C1466.situation
-	End if 
-	
-Function selectDivision()
-	Case of 
-		: (FORM Event:C1606.code=On Clicked:K2:4)
-			If (Form:C1466.sfw.checkIsInModification())
-				OBJECT GET COORDINATES:C663(*; "Field_division"; $l; $t; $r; $b)
-				CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
-				
-				$form:=New object:C1471(\
-					"colName"; "name"; \
-					"lb_items"; ds:C1482.Division.all(); \
-					"allData"; ds:C1482.Division.all(); \
-					"dataclass"; "Division"\
-					)
-				
-				$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b)
-				DIALOG:C40("selectNto1"; $form)
-				CLOSE WINDOW:C154($winRef)
-				
-				If (ok=1)
-					If ($form.item#Null:C1517)
-						Form:C1466.current_item.division:=$form.item.name
-					Else 
-						Form:C1466.current_item.division:=""
-					End if 
-					
-					This:C1470._activate_save_cancel_button()
-				End if 
-			End if 
-			
-		: (FORM Event:C1606.code=On Mouse Move:K2:35)
-			SET CURSOR:C469(9000)
-	End case 
-	
-Function bActionJobs()
-	$refMenu:=Create menu:C408
-	APPEND MENU ITEM:C411($refMenu; "Open Job")
-	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--open-job")
-	
-	If (Form:C1466.selectedJob=Null:C1517)
-		DISABLE MENU ITEM:C150($refMenu; -1)
-	End if 
-	
-	$choose:=Dynamic pop up menu:C1006($refMenu)
-	
-	Case of 
-		: ($choose="--open-job")
-			If (Form:C1466.selectedJob#Null:C1517)
-				Form:C1466.sfw.openInANewWindow(Form:C1466.selectedJob; "customerService"; "jobs")
-			End if 
-	End case 
-	
-Function bActionLots()
-	$refMenu:=Create menu:C408
-	APPEND MENU ITEM:C411($refMenu; "Open Lot")
-	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--open-lot")
-	
-	If (Form:C1466.selectedLot=Null:C1517)
-		DISABLE MENU ITEM:C150($refMenu; -1)
-	End if 
-	
-	$choose:=Dynamic pop up menu:C1006($refMenu)
-	
-	Case of 
-		: ($choose="--open-lot")
-			If (Form:C1466.selectedLot#Null:C1517)
-				Form:C1466.sfw.openInANewWindow(Form:C1466.selectedLot; "customerService"; "lots")
-			End if 
-	End case 
 	
 Function drawPup_quoteNumber()
 	If (Form:C1466.current_item#Null:C1517)
@@ -538,7 +443,6 @@ Function pup_quote()
 		
 		$form:=New object:C1471(\
 			"colName"; "code"; \
-			"lb_items"; ds:C1482.Quote.all(); \
 			"allData"; ds:C1482.Quote.all(); \
 			"dataclass"; "Quote"\
 			)
