@@ -11,15 +11,15 @@ Function formMethod()
 		Form:C1466.statusContact:=0
 		This:C1470.LoadContact()
 		This:C1470.loadAllTabs()
-		This:C1470.LoadApContact()
-		This:C1470.LoadStatusContact()
+		//This.LoadApContact()
+		//This.LoadStatusContact()
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
 				// add load functions
-				This:C1470.LoadApContact()
-				This:C1470.LoadStatusContact()
+				//This.LoadApContact()
+				//This.LoadStatusContact()
 				
 				
 			: (FORM Get current page:C276(*)=2)
@@ -202,7 +202,6 @@ Function contactDetails()
 	If (Form:C1466.current_item#Null:C1517)
 		Form:C1466.subFormAddress:=New object:C1471()
 		Form:C1466.subFormAddress.address:=Form:C1466.current_item.rebuildAddress()
-		Form:C1466.lb_contact:=Form:C1466.current_item.rebuildContact()
 		Form:C1466.subFormAddress.situation:=Form:C1466.situation
 	End if 
 	
@@ -399,10 +398,17 @@ Function loadInvoices()
 Function bActionXXX()
 	//Manages actions: add, or remove, using dynamic menus and modification checks
 	
-Function bActionApContact()
+	
+Function bActionContacts()
 	$refMenu:=Create menu:C408
+	APPEND MENU ITEM:C411($refMenu; "Add a new Contact"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--add-contact")
+	If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()=Null:C1517)
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
 	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
-	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openInWindow")
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--open-contact")
 	If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()=Null:C1517)
 		DISABLE MENU ITEM:C150($refMenu; -1)
 	End if 
@@ -410,26 +416,12 @@ Function bActionApContact()
 	$choice:=Dynamic pop up menu:C1006($refMenu)
 	RELEASE MENU:C978($refMenu)
 	Case of 
-		: ($choice="openInWindow")
-			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.contacts.query("title=:1"; "AP").first(); "customerService"; "contact")
+		: ($choice="--add-contact")
+		: ($choice="--open-contact")
+			If (Form:C1466.selectedContact#Null:C1517)
+				Form:C1466.sfw.openInANewWindow(Form:C1466.selectedContact; "customerService"; "contact")
+			End if 
 	End case 
-	This:C1470.LoadApContact()
-	
-Function bActionStatusContact()
-	$refMenu:=Create menu:C408
-	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
-	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openInWindow")
-	If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()=Null:C1517)
-		DISABLE MENU ITEM:C150($refMenu; -1)
-	End if 
-	
-	$choice:=Dynamic pop up menu:C1006($refMenu)
-	RELEASE MENU:C978($refMenu)
-	Case of 
-		: ($choice="openInWindow")
-			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.contacts.query("title=:1"; "Status").first(); "customerService"; "contact")
-	End case 
-	This:C1470.LoadStatusContact()
 	
 	
 Function loadDpAddress()
