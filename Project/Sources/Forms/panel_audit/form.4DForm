@@ -358,7 +358,7 @@
 					"height": 16,
 					"fontWeight": "bold"
 				},
-				"lb_teams": {
+				"lb_team": {
 					"type": "listbox",
 					"left": 0,
 					"top": 145,
@@ -372,10 +372,10 @@
 						"onBeginDragOver"
 					],
 					"listboxType": "collection",
-					"currentItemPositionSource": "Form:C1466.selectedMemberPos",
-					"currentItemSource": "Form:C1466.selectedMember",
-					"dataSource": "Form:C1466.lb_teams",
-					"method": "ObjectMethods/lb_teams.4dm",
+					"currentItemPositionSource": "Form:C1466.auditMemberPosition",
+					"currentItemSource": "Form:C1466.auditMember",
+					"dataSource": "Form:C1466.lb_team",
+					"method": "ObjectMethods/lb_team.4dm",
 					"selectionMode": "single",
 					"resizingMode": "rightToLeft",
 					"alternateFill": "#E6E6E6",
@@ -433,7 +433,7 @@
 						"onBeginDragOver"
 					],
 					"listboxType": "collection",
-					"currentItemPositionSource": "Form:C1466.selectedActivityPos",
+					"currentItemPositionSource": "Form:C1466.selectedActivityPosition",
 					"currentItemSource": "Form:C1466.selectedActivity",
 					"dataSource": "Form:C1466.lb_activities",
 					"method": "ObjectMethods/lb_activities.4dm",
@@ -499,7 +499,7 @@
 						}
 					]
 				},
-				"bActionContact": {
+				"bActionTeam": {
 					"type": "button",
 					"text": "Actions",
 					"top": 306,
@@ -513,10 +513,10 @@
 					"popupPlacement": "linked",
 					"icon": "/RESOURCES/sfw/image/picto/gear.png",
 					"textPlacement": "right",
-					"method": "ObjectMethods/bActionContact.4dm",
+					"method": "ObjectMethods/bActionTeam.4dm",
 					"visibility": "visible"
 				},
-				"bActionContact1": {
+				"bActionActivity": {
 					"type": "button",
 					"text": "Actions",
 					"top": 306,
@@ -530,7 +530,7 @@
 					"popupPlacement": "linked",
 					"icon": "/RESOURCES/sfw/image/picto/gear.png",
 					"textPlacement": "right",
-					"method": "ObjectMethods/bActionContact1.4dm",
+					"method": "ObjectMethods/bActionActivity.4dm",
 					"visibility": "visible"
 				},
 				"entryField_objectives": {
@@ -1374,7 +1374,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 622,
+	"geometryStamp": 626,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

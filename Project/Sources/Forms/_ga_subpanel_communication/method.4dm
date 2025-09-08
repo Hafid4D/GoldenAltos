@@ -33,7 +33,7 @@ Case of
 		$widthBa:=$ba_right-$ba_left
 		
 		OBJECT SET COORDINATES:C1248(*; "lb_communications"; $lb_left; $lb_top; $widthSubform; $lb_bottom)
-		OBJECT SET COORDINATES:C1248(*; "bActions"; $widthSubform-$widthBa-9; $ba_top; $widthSubform-9; $ba_bottom)
+		OBJECT SET COORDINATES:C1248(*; "bActions"; $widthSubform-$widthBa; $ba_top; $widthSubform-9; $ba_bottom)
 		OBJECT SET COORDINATES:C1248(*; "header_bkgd"; $hb_left; $hb_top; $widthSubform; $hb_bottom)
 		OBJECT SET COORDINATES:C1248(*; "communication_bkgd"; $cb_left; $cb_top; $widthSubform; $cb_bottom)
 		

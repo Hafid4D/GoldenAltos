@@ -33,21 +33,11 @@ If ($audit_log.exists)
 			$eAudit.storageFilename:=$audit.StoragedFilename
 			$eAudit.type:=Split string:C1554($audit.Book; "\r"; sk trim spaces:K86:2).join("\r")="Internal Audits" ? "Internal" : "External"
 			
-			//$eAudit.attachedDocuments:=New object()
-			//$eAudit.attachedDocuments.documents:=New collection()
-			
 			$eAudit.activities:=New object:C1471()
 			$eAudit.activities.collection:=New collection:C1472()
-			//$eAudit.activities.collection.auditor:=""
-			//$eAudit.activities.collection.process:=""
-			//$eAudit.activities.collection.time:=""
-			
 			
 			$eAudit.team:=New object:C1471()
 			$eAudit.team.teamMembers:=New collection:C1472()
-			//$eAudit.team.teamMembers.name:=""
-			//$eAudit.team.teamMembers.title:=""
-			
 			
 			$eAudit.document:=New object:C1471()
 			$_documents:=$documents.query("PrimaryKeyValue=:1"; String:C10($audit.Page))
@@ -70,7 +60,6 @@ If ($audit_log.exists)
 					$doc.approvalDate:=!00-00-00!
 					$doc.approvedBy:=""
 					$doc.isApproved:=False:C215
-					
 					
 					$report:=Folder:C1567(fk data folder:K87:12).file("DataJson/LogBookDocs/"+String:C10($document.UniqueID+$document.PrimaryKeyValue))
 					If ($report.exists)

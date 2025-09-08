@@ -9,27 +9,26 @@
 	"windowMinHeight": 0,
 	"windowMaxWidth": 32767,
 	"windowMaxHeight": 32767,
-	"rightMargin": 0,
-	"bottomMargin": 10,
+	"rightMargin": 20,
+	"bottomMargin": 20,
 	"events": [
 		"onLoad",
+		"onPageChange",
 		"onValidate",
 		"onClick",
-		"onOutsideCall",
 		"onDoubleClick",
+		"onOutsideCall",
+		"onBeginDragOver",
+		"onDragOver",
 		"onDrop",
+		"onAfterKeystroke",
 		"onMenuSelect",
 		"onPluginArea",
-		"onDataChange",
-		"onDragOver",
-		"onTimer",
-		"onAfterKeystroke",
 		"onAfterEdit",
-		"onBeginDragOver",
-		"onBoundVariableChange",
-		"onPageChange"
+		"onTimer",
+		"onBoundVariableChange"
 	],
-	"windowTitle": "",
+	"windowTitle": "window title",
 	"destination": "detailScreen",
 	"pages": [
 		{
@@ -54,14 +53,14 @@
 					"fill": "#69A4C0",
 					"stroke": "transparent"
 				},
-				"lbl_addCommunication": {
+				"lbl_addActivity": {
 					"type": "text",
 					"top": 10,
 					"left": 38,
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
-					"text": "Add new communication mean",
+					"text": "Add new activity",
 					"fontSize": 12,
 					"fontWeight": "bold"
 				},
@@ -108,7 +107,7 @@
 				},
 				"Text3": {
 					"type": "text",
-					"text": "Type",
+					"text": "Process",
 					"top": 46,
 					"left": 7,
 					"width": 102,
@@ -137,7 +136,7 @@
 				},
 				"Text5": {
 					"type": "text",
-					"text": "Contact",
+					"text": "Time",
 					"top": 78,
 					"left": 7,
 					"width": 102,
@@ -164,7 +163,7 @@
 					"fill": "#FFFFFF",
 					"stroke": "transparent"
 				},
-				"communication_item_contact": {
+				"activity_item_time": {
 					"type": "input",
 					"left": 151,
 					"top": 77,
@@ -172,9 +171,9 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.com.contact"
+					"dataSource": "Form:C1466.time"
 				},
-				"Button": {
+				"bCancel": {
 					"type": "button",
 					"top": 153,
 					"left": 300,
@@ -182,7 +181,7 @@
 					"height": 20,
 					"sizingX": "move",
 					"sizingY": "move",
-					"dataSource": "Button",
+					"dataSource": "bCancel",
 					"action": "cancel",
 					"shortcutKey": "",
 					"text": "Cancel",
@@ -194,7 +193,7 @@
 					"shortcutShift": false,
 					"shortcutAlt": false
 				},
-				"Button1": {
+				"bOk": {
 					"type": "button",
 					"top": 153,
 					"left": 380,
@@ -214,7 +213,7 @@
 					"shortcutControl": false,
 					"shortcutShift": false,
 					"shortcutAlt": false,
-					"method": "ObjectMethods/Button1.4dm"
+					"method": "ObjectMethods/bOk.4dm"
 				},
 				"header_bkgd8": {
 					"type": "rectangle",
@@ -228,7 +227,7 @@
 				},
 				"Text7": {
 					"type": "text",
-					"text": "Comment",
+					"text": "Auditor",
 					"top": 111,
 					"left": 7,
 					"width": 102,
@@ -255,7 +254,7 @@
 					"fill": "#FFFFFF",
 					"stroke": "transparent"
 				},
-				"communication_item_comment": {
+				"activity_item_auditor": {
 					"type": "input",
 					"left": 151,
 					"top": 110,
@@ -263,9 +262,9 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.com.comment"
+					"dataSource": "Form:C1466.auditor"
 				},
-				"communication_item_type": {
+				"activity_item_process": {
 					"type": "button",
 					"top": 40,
 					"left": 151,
@@ -274,30 +273,26 @@
 					"fontFamily": "System Font",
 					"fontSize": 13,
 					"focusable": false,
-					"text": "     Contact type",
-					"icon": "/RESOURCES/image/skin/contactType/all.png",
+					"text": "",
+					"icon": "",
 					"popupPlacement": "linked",
 					"textPlacement": "right",
 					"style": "bevel",
-					"method": "ObjectMethods/communication_item_type.4dm",
+					"method": "ObjectMethods/activity_item_process.4dm",
 					"events": [
 						"onClick"
 					],
 					"textAlign": "left"
 				}
 			}
-		},
-		{
-			"objects": {}
 		}
 	],
-	"geometryStamp": 158,
+	"geometryStamp": 10,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
 		"views": {
 			"View 1": {}
 		}
-	},
-	"method": "method.4dm"
+	}
 }

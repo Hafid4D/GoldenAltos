@@ -372,8 +372,8 @@
 				"rbShipping1": {
 					"type": "radio",
 					"text": "Shipping",
-					"top": 148,
-					"left": 575,
+					"top": 149,
+					"left": 577,
 					"width": 127,
 					"height": 21,
 					"events": [
@@ -461,8 +461,8 @@
 				"rbStatusContact": {
 					"type": "radio",
 					"text": "Status Contact",
-					"top": 151,
-					"left": 134,
+					"top": 152,
+					"left": 135,
 					"width": 127,
 					"height": 21,
 					"events": [
@@ -1229,7 +1229,7 @@
 		},
 		null
 	],
-	"geometryStamp": 927,
+	"geometryStamp": 930,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

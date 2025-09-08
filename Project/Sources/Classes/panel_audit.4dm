@@ -18,6 +18,8 @@ Function formMethod()
 		Case of 
 			: (FORM Get current page:C276(*)=1)
 				
+				This:C1470.loadTeam()
+				This:C1470.loadActivities()
 				
 		End case 
 	End if 
@@ -197,7 +199,6 @@ Function pup_departement()
 	This:C1470.drawPup_departement()
 	
 	
-	
 Function drawPup_status()
 	If (Form:C1466.current_item#Null:C1517)
 		Form:C1466.current_item.drowPup("AuditStatus"; "UUID"; "UUID_AuditStatus"; "pup_status")
@@ -278,12 +279,11 @@ Function btnTimePickerCreate($object; $attribut)
 	End if 
 	
 	
-	
 Function btnDatePickerCreate($object; $attribut)
 	If (Form:C1466.sfw.checkIsInModification())
 		
 		$form:=New object:C1471
-		$form.date:=$object[$attribut]  //Form.current_item.creationDate
+		$form.date:=$object[$attribut]
 		
 		OBJECT GET COORDINATES:C663(Self:C308->; $left; $top; $rigth; $bottom)
 		CONVERT COORDINATES:C1365($left; $bottom; XY Current form:K27:5; XY Main window:K27:8)
@@ -298,13 +298,194 @@ Function btnDatePickerCreate($object; $attribut)
 	End if 
 	
 	
+Function loadTeam()
+	
+	Form:C1466.lb_team:=New collection:C1472()
+	
+	If (Form:C1466.current_item#Null:C1517)
+		
+		Form:C1466.lb_team:=Form:C1466.current_item.rebuidTeam()
+		
+	End if 
+	
+	
+Function loadActivities()
+	
+	Form:C1466.lb_activities:=New collection:C1472()
+	
+	If (Form:C1466.current_item#Null:C1517)
+		
+		Form:C1466.lb_activities:=Form:C1466.current_item.rebuidActivities()
+		
+	End if 
+	
 	
 Function bActionTeam()
 	
+	$refMenus:=New collection:C1472
+	$mainMenu:=Create menu:C408
+	$refMenus.push($mainMenu)
+	
+	APPEND MENU ITEM:C411($mainMenu; "Add a team member"; *)
+	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--add")
+	If (sfw_checkIsInModification)=False:C215
+		DISABLE MENU ITEM:C150($mainMenu; -1)
+	End if 
+	
+	APPEND MENU ITEM:C411($mainMenu; "Delete a team member"; *)
+	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--delete")
+	If (sfw_checkIsInModification)=False:C215
+		DISABLE MENU ITEM:C150($mainMenu; -1)
+	Else 
+		If (Form:C1466.auditMember=Null:C1517)
+			DISABLE MENU ITEM:C150($mainMenu; -1)
+		End if 
+	End if 
+	
+	APPEND MENU ITEM:C411($mainMenu; "modify a team member"; *)
+	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--update")
+	
+	If (sfw_checkIsInModification)=False:C215
+		DISABLE MENU ITEM:C150($mainMenu; -1)
+	Else 
+		If (Form:C1466.auditMember=Null:C1517)
+			DISABLE MENU ITEM:C150($mainMenu; -1)
+		End if 
+	End if 
+	
+	OBJECT GET COORDINATES:C663(*; "bActionTeam"; $g; $h; $d; $b)
+	CONVERT COORDINATES:C1365($g; $b; XY Current form:K27:5; XY Current window:K27:6)
+	$choose:=Dynamic pop up menu:C1006($mainMenu; ""; $g; $b)
+	For each ($refMenu; $refMenus)
+		RELEASE MENU:C978($refMenu)
+	End for each 
+	
+	Case of 
+		: ($choose="")
+		: ($choose="--delete")
+			Form:C1466.lb_team.remove(Form:C1466.auditMemberPosition-1)
+			Form:C1466.current_item.team.teamMembers:=Form:C1466.lb_team
+			cs:C1710.panel_audit.me._activate_save_cancel_button()
+			
+		: ($choose="--add")
+			
+			$form:=New object:C1471()
+			
+			$winRef:=Open form window:C675("_ga_auditTeamSingle"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("_ga_auditTeamSingle"; $form)
+			CLOSE WINDOW:C154($winRef)
+			
+			If (OK=1)
+				
+				Form:C1466.current_item.team.teamMembers.push($form)
+				cs:C1710.panel_audit.me._activate_save_cancel_button()
+				
+			End if 
+			
+			$rebuildDisplayedLB:=True:C214
+			CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
+			
+		: ($choose="--update")
+			
+			$form:=New object:C1471
+			
+			$form:=OB Copy:C1225(Form:C1466.lb_team[Form:C1466.auditMemberPosition-1])
+			
+			$winRef:=Open form window:C675("_ga_auditTeamSingle"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("_ga_auditTeamSingle"; $form)
+			
+			If (OK=1)
+				Form:C1466.lb_team[Form:C1466.auditMemberPosition-1]:=$form
+				Form:C1466.current_item.team.teamMembers:=Form:C1466.lb_team
+				cs:C1710.panel_audit.me._activate_save_cancel_button()
+			End if 
+			
+			
+	End case 
 	
 	
 Function bActionActivities()
 	
+	$refMenus:=New collection:C1472
+	$mainMenu:=Create menu:C408
+	$refMenus.push($mainMenu)
 	
+	APPEND MENU ITEM:C411($mainMenu; "Add audit activity"; *)
+	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--add")
+	If (sfw_checkIsInModification)=False:C215
+		DISABLE MENU ITEM:C150($mainMenu; -1)
+	End if 
+	
+	APPEND MENU ITEM:C411($mainMenu; "Delete audit activity"; *)
+	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--delete")
+	If (sfw_checkIsInModification)=False:C215
+		DISABLE MENU ITEM:C150($mainMenu; -1)
+	Else 
+		If (Form:C1466.selectedActivity=Null:C1517)
+			DISABLE MENU ITEM:C150($mainMenu; -1)
+		End if 
+	End if 
+	
+	APPEND MENU ITEM:C411($mainMenu; "modify audit activity"; *)
+	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--update")
+	
+	If (sfw_checkIsInModification)=False:C215
+		DISABLE MENU ITEM:C150($mainMenu; -1)
+	Else 
+		If (Form:C1466.selectedActivity=Null:C1517)
+			DISABLE MENU ITEM:C150($mainMenu; -1)
+		End if 
+	End if 
+	
+	OBJECT GET COORDINATES:C663(*; "bActionActivity"; $g; $h; $d; $b)
+	CONVERT COORDINATES:C1365($g; $b; XY Current form:K27:5; XY Current window:K27:6)
+	$choose:=Dynamic pop up menu:C1006($mainMenu; ""; $g; $b)
+	For each ($refMenu; $refMenus)
+		RELEASE MENU:C978($refMenu)
+	End for each 
+	
+	Case of 
+		: ($choose="")
+		: ($choose="--delete")
+			Form:C1466.lb_activities.remove(Form:C1466.selectedActivityPosition-1)
+			Form:C1466.current_item.activities.collection:=Form:C1466.lb_activities
+			cs:C1710.panel_audit.me._activate_save_cancel_button()
+			
+		: ($choose="--add")
+			
+			$form:=New object:C1471()
+			
+			$winRef:=Open form window:C675("_ga_auditActivitySingle"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("_ga_auditActivitySingle"; $form)
+			CLOSE WINDOW:C154($winRef)
+			
+			If (OK=1)
+				
+				Form:C1466.current_item.activities.collection.push($form)
+				cs:C1710.panel_audit.me._activate_save_cancel_button()
+				
+			End if 
+			
+			$rebuildDisplayedLB:=True:C214
+			CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
+			
+		: ($choose="--update")
+			
+			
+			$form:=New object:C1471
+			
+			$form:=OB Copy:C1225(Form:C1466.lb_activities[Form:C1466.selectedActivityPosition-1])
+			
+			$winRef:=Open form window:C675("_ga_auditActivitySingle"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("_ga_auditActivitySingle"; $form)
+			
+			If (OK=1)
+				Form:C1466.lb_activities[Form:C1466.selectedActivityPosition-1]:=$form
+				Form:C1466.current_item.activities.collection:=Form:C1466.lb_activities
+				cs:C1710.panel_audit.me._activate_save_cancel_button()
+			End if 
+			
+			
+	End case 
 	
 	

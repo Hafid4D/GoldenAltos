@@ -13,23 +13,22 @@
 	"bottomMargin": 10,
 	"events": [
 		"onLoad",
+		"onPageChange",
 		"onValidate",
 		"onClick",
-		"onOutsideCall",
 		"onDoubleClick",
+		"onOutsideCall",
+		"onBeginDragOver",
+		"onDragOver",
 		"onDrop",
+		"onAfterKeystroke",
 		"onMenuSelect",
 		"onPluginArea",
-		"onDataChange",
-		"onDragOver",
-		"onTimer",
-		"onAfterKeystroke",
 		"onAfterEdit",
-		"onBeginDragOver",
-		"onBoundVariableChange",
-		"onPageChange"
+		"onTimer",
+		"onBoundVariableChange"
 	],
-	"windowTitle": "",
+	"windowTitle": "window title",
 	"destination": "detailScreen",
 	"pages": [
 		{
@@ -39,7 +38,7 @@
 					"top": 0,
 					"left": 0,
 					"width": 470,
-					"height": 140,
+					"height": 110,
 					"fill": "#E6E6E6",
 					"stroke": "transparent",
 					"strokeWidth": 0
@@ -54,14 +53,14 @@
 					"fill": "#69A4C0",
 					"stroke": "transparent"
 				},
-				"lbl_addCommunication": {
+				"lbl_addAuditTeamember": {
 					"type": "text",
 					"top": 10,
 					"left": 38,
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
-					"text": "Add new communication mean",
+					"text": "Add Audit Team Member",
 					"fontSize": 12,
 					"fontWeight": "bold"
 				},
@@ -88,7 +87,7 @@
 				},
 				"header_bkgd2": {
 					"type": "rectangle",
-					"top": 40,
+					"top": 74,
 					"left": 0,
 					"width": 140,
 					"height": 28,
@@ -98,7 +97,7 @@
 				},
 				"header_bkgd4": {
 					"type": "rectangle",
-					"top": 40,
+					"top": 74,
 					"left": 144,
 					"width": 306,
 					"height": 28,
@@ -108,8 +107,8 @@
 				},
 				"Text3": {
 					"type": "text",
-					"text": "Type",
-					"top": 46,
+					"text": "Role",
+					"top": 80,
 					"left": 7,
 					"width": 102,
 					"height": 15,
@@ -118,7 +117,7 @@
 				"Text4": {
 					"type": "text",
 					"text": ":",
-					"top": 46,
+					"top": 80,
 					"left": 114,
 					"width": 22,
 					"height": 15,
@@ -127,7 +126,7 @@
 				},
 				"header_bkgd3": {
 					"type": "rectangle",
-					"top": 72,
+					"top": 40,
 					"left": 0,
 					"width": 140,
 					"height": 28,
@@ -137,8 +136,8 @@
 				},
 				"Text5": {
 					"type": "text",
-					"text": "Contact",
-					"top": 78,
+					"text": "Name",
+					"top": 46,
 					"left": 7,
 					"width": 102,
 					"height": 15,
@@ -147,7 +146,7 @@
 				"Text6": {
 					"type": "text",
 					"text": ":",
-					"top": 78,
+					"top": 46,
 					"left": 114,
 					"width": 22,
 					"height": 15,
@@ -156,7 +155,7 @@
 				},
 				"header_bkgd5": {
 					"type": "rectangle",
-					"top": 72,
+					"top": 40,
 					"left": 144,
 					"width": 306,
 					"height": 28,
@@ -164,19 +163,19 @@
 					"fill": "#FFFFFF",
 					"stroke": "transparent"
 				},
-				"communication_item_contact": {
+				"entryField_name": {
 					"type": "input",
 					"left": 151,
-					"top": 77,
+					"top": 44,
 					"width": 293,
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.com.contact"
+					"dataSource": "Form:C1466.name"
 				},
-				"Button": {
+				"bCancel": {
 					"type": "button",
-					"top": 153,
+					"top": 117,
 					"left": 300,
 					"width": 70,
 					"height": 20,
@@ -194,9 +193,9 @@
 					"shortcutShift": false,
 					"shortcutAlt": false
 				},
-				"Button1": {
+				"bOK": {
 					"type": "button",
-					"top": 153,
+					"top": 117,
 					"left": 380,
 					"width": 70,
 					"height": 20,
@@ -214,84 +213,22 @@
 					"shortcutControl": false,
 					"shortcutShift": false,
 					"shortcutAlt": false,
-					"method": "ObjectMethods/Button1.4dm"
+					"method": "ObjectMethods/bOK.4dm"
 				},
-				"header_bkgd8": {
-					"type": "rectangle",
-					"top": 105,
-					"left": 0,
-					"width": 140,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Text7": {
-					"type": "text",
-					"text": "Comment",
-					"top": 111,
-					"left": 7,
-					"width": 102,
-					"height": 15,
-					"fontWeight": "bold"
-				},
-				"Text8": {
-					"type": "text",
-					"text": ":",
-					"top": 111,
-					"left": 114,
-					"width": 22,
-					"height": 15,
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"header_bkgd9": {
-					"type": "rectangle",
-					"top": 105,
-					"left": 144,
-					"width": 306,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#FFFFFF",
-					"stroke": "transparent"
-				},
-				"communication_item_comment": {
+				"entryField_title": {
 					"type": "input",
 					"left": 151,
-					"top": 110,
+					"top": 79,
 					"width": 293,
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.com.comment"
-				},
-				"communication_item_type": {
-					"type": "button",
-					"top": 40,
-					"left": 151,
-					"width": 299,
-					"height": 28,
-					"fontFamily": "System Font",
-					"fontSize": 13,
-					"focusable": false,
-					"text": "     Contact type",
-					"icon": "/RESOURCES/image/skin/contactType/all.png",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/communication_item_type.4dm",
-					"events": [
-						"onClick"
-					],
-					"textAlign": "left"
+					"dataSource": "Form:C1466.title"
 				}
 			}
-		},
-		{
-			"objects": {}
 		}
 	],
-	"geometryStamp": 158,
+	"geometryStamp": 39,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
