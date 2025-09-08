@@ -97,5 +97,53 @@ Function rebuidActivities()->$activites : Collection
 	
 	
 	
+	//mark:-Callbacks
+	
+local Function afterCreation()
+	This:C1470._initDocument()
+	
+	
+local Function loadAfterCreation()
+	// This callback is called after creating the new item but before displaying the panel.
+	This:C1470._initDocument()
+	
+	
+local Function itemLoad()
+	// This callback is called when the item is selected in the itemList
+	This:C1470._initDocument()
+	
+	
+	
+local Function isDeletable()->$isDeletable : Boolean
+	// This callback must return false to inactivate the deletion mode for the current item.
+	$isDeletable:=True:C214
+	
+	
+local Function _initDocument()
+	
+	C_BLOB:C604($blob)
+	$doc:=New object:C1471
+	
+	$doc.code:=""
+	$doc.creationDateTimeStamp:=0
+	$doc.documentPath:=""
+	$doc.sourcePath:=""
+	$doc.description:=""
+	$doc.approvalDate:=!00-00-00!
+	$doc.approvedBy:=""
+	$doc.isApproved:=False:C215
+	$doc.blob:=$blob
+	
+	This:C1470.document:=$doc
+	
+	This:C1470.activities:=New object:C1471()
+	This:C1470.activities.collection:=New collection:C1472()
+	
+	This:C1470.team:=New object:C1471()
+	This:C1470.team.teamMembers:=New collection:C1472()
+	
+	
+	
+	
 	
 	

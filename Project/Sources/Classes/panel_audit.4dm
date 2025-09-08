@@ -95,14 +95,15 @@ Function redrawAndSetVisible()
 	
 Function drawPup_docType()
 	If (Form:C1466.current_item#Null:C1517)
-		$customer:=ds:C1482.DocumentCategory.query("name =:1"; Form:C1466.current_item.document.code).first() || New object:C1471()
-		$customerName:=$customer.name
-		If ($customerName=Null:C1517)
-			$customerName:=""
+		$documentCategory:=ds:C1482.DocumentCategory.query("name =:1"; Form:C1466.current_item.document.code).first() || New object:C1471()
+		
+		$documentCategoryName:=$documentCategory.name
+		If ($documentCategoryName=Null:C1517)
+			$documentCategoryName:=""
 		End if 
-		$color:="#FFFFFF"  //cs.sfw_htmlColor.me.getName($customer.color)
+		$color:="#FFFFFF"
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
-		Form:C1466.sfw.drawButtonPup("pup_docType"; $customerName; $pathIcon; ($customer=Null:C1517))
+		Form:C1466.sfw.drawButtonPup("pup_docType"; $documentCategoryName; $pathIcon; ($documentCategory=Null:C1517))
 	End if 
 	
 	
@@ -382,8 +383,6 @@ Function bActionTeam()
 				
 			End if 
 			
-			$rebuildDisplayedLB:=True:C214
-			CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 			
 		: ($choose="--update")
 			
@@ -466,8 +465,6 @@ Function bActionActivities()
 				
 			End if 
 			
-			$rebuildDisplayedLB:=True:C214
-			CALL FORM:C1391(Current form window:C827; "sfw_main_draw_button")
 			
 		: ($choose="--update")
 			
