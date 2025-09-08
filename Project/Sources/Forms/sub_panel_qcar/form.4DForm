@@ -108,7 +108,7 @@
 					"width": 550,
 					"height": 17,
 					"stroke": "#000000",
-					"text": "D2 Problem Stateme,t/Description (quantify) (one defect per 8D):",
+					"text": "D2 Problem Statement/Description (quantify) (one defect per 8D):",
 					"fontSize": 12,
 					"fontWeight": "bold"
 				},
@@ -173,7 +173,7 @@
 					"stroke": "#808080",
 					"text": "Team Members"
 				},
-				"entryField_dropShipCustomer1": {
+				"Field_teamMembers": {
 					"type": "input",
 					"top": 91,
 					"left": 96,
@@ -185,10 +185,13 @@
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
-						"onDataChange"
+						"onClick",
+						"onGettingFocus",
+						"onMouseMove"
 					],
 					"fill": "transparent",
-					"borderStyle": "none"
+					"borderStyle": "none",
+					"method": "ObjectMethods/Field_teamMembers.4dm"
 				},
 				"entryField_dropShipCustomer2": {
 					"type": "input",
@@ -840,7 +843,8 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontSize": 11
+					"fontSize": 11,
+					"method": "ObjectMethods/entryField_othersText.4dm"
 				},
 				"header_bkgd17": {
 					"type": "rectangle",
@@ -996,11 +1000,32 @@
 						"onLoad"
 					],
 					"focusable": true
+				},
+				"btnForward": {
+					"type": "button",
+					"text": " ",
+					"top": 106,
+					"left": 75,
+					"width": 18,
+					"height": 18,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/add.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnForward.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
 				}
 			}
 		}
 	],
-	"geometryStamp": 334,
+	"geometryStamp": 343,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
