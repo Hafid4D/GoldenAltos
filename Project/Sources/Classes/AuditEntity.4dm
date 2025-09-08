@@ -121,28 +121,30 @@ local Function isDeletable()->$isDeletable : Boolean
 	
 local Function _initDocument()
 	
-	C_BLOB:C604($blob)
-	$doc:=New object:C1471
-	
-	$doc.code:=""
-	$doc.creationDateTimeStamp:=0
-	$doc.documentPath:=""
-	$doc.sourcePath:=""
-	$doc.description:=""
-	$doc.approvalDate:=!00-00-00!
-	$doc.approvedBy:=""
-	$doc.isApproved:=False:C215
-	$doc.blob:=$blob
-	
-	This:C1470.document:=$doc
-	
-	This:C1470.activities:=New object:C1471()
-	This:C1470.activities.collection:=New collection:C1472()
-	
-	This:C1470.team:=New object:C1471()
-	This:C1470.team.teamMembers:=New collection:C1472()
-	
-	
+	If (Form:C1466.situation.mode="add")
+		
+		C_BLOB:C604($blob)
+		$doc:=New object:C1471
+		
+		$doc.code:=""
+		$doc.creationDateTimeStamp:=0
+		$doc.documentPath:=""
+		$doc.sourcePath:=""
+		$doc.description:=""
+		$doc.approvalDate:=!00-00-00!
+		$doc.approvedBy:=""
+		$doc.isApproved:=False:C215
+		$doc.blob:=$blob
+		
+		This:C1470.document:=$doc
+		
+		This:C1470.activities:=New object:C1471()
+		This:C1470.activities.collection:=New collection:C1472()
+		
+		This:C1470.team:=New object:C1471()
+		This:C1470.team.teamMembers:=New collection:C1472()
+		
+	End if 
 	
 	
 	

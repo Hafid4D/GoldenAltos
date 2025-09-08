@@ -9,7 +9,7 @@ $audit_log:=Folder:C1567(fk data folder:K87:12).file("DataJson/log_book_export.j
 If ($audit_log.exists)
 	$audits:=JSON Parse:C1218($audit_log.getText())
 	
-	TRUNCATE TABLE:C1051([Audit:44])
+	TRUNCATE TABLE:C1051([Audit:59])
 	
 	$docs:=Folder:C1567(fk data folder:K87:12).file("DataJson/docServerIndex_export.json")
 	$count:=0
