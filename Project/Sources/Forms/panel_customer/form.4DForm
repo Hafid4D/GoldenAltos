@@ -558,8 +558,8 @@
 						"onHeaderClick"
 					],
 					"listboxType": "collection",
-					"dataSource": "Form:C1466.lb_apContact",
-					"selectionMode": "none",
+					"dataSource": "Form:C1466.lb_contacts",
+					"selectionMode": "single",
 					"resizingMode": "legacy",
 					"scrollbarHorizontal": "automatic",
 					"scrollbarVertical": "automatic",

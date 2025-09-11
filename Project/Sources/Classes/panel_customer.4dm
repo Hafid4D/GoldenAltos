@@ -7,9 +7,9 @@ Function formMethod()
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		Form:C1466.addressBilling:=1
 		Form:C1466.addressShipping:=0
-		Form:C1466.apContact:=1
-		Form:C1466.statusContact:=0
-		This:C1470.LoadContact()
+		//Form.apContact:=1
+		//Form.statusContact:=0
+		//This.LoadContact()
 		This:C1470.loadAllTabs()
 		//This.LoadApContact()
 		//This.LoadStatusContact()
@@ -20,6 +20,7 @@ Function formMethod()
 				// add load functions
 				//This.LoadApContact()
 				//This.LoadStatusContact()
+				This:C1470.loadContacts()
 				
 				
 			: (FORM Get current page:C276(*)=2)
@@ -248,8 +249,8 @@ Function LoadContact()
 	
 	
 	
-Function loadXXX()
-	//Loads and initializes a list
+Function loadContacts()
+	Form:C1466.lb_contacts:=ds:C1482.Contact.query("UUID_Customer = :1"; Form:C1466.current_item.UUID)
 	
 	
 Function loadAllTabs()
@@ -403,20 +404,41 @@ Function bActionContacts()
 	$refMenu:=Create menu:C408
 	APPEND MENU ITEM:C411($refMenu; "Add a new Contact"; *)
 	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--add-contact")
-	If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()=Null:C1517)
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
 		DISABLE MENU ITEM:C150($refMenu; -1)
 	End if 
 	
 	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
 	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--open-contact")
-	If (Form:C1466.current_item.contacts.query("title=:1"; "AP").first()=Null:C1517)
+	If (Form:C1466.selectedContact=Null:C1517)
 		DISABLE MENU ITEM:C150($refMenu; -1)
 	End if 
 	
 	$choice:=Dynamic pop up menu:C1006($refMenu)
 	RELEASE MENU:C978($refMenu)
+	
 	Case of 
 		: ($choice="--add-contact")
+			$form:=New object:C1471()
+			
+			$winRef:=Open form window:C675("addNewContactToCustomer"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("addNewContactToCustomer"; $form)
+			CLOSE WINDOW:C154($winRef)
+			
+			If (ok=1)
+				For each ($contact; $form.selectedContacts)
+					$contact.UUID_Customer:=Form:C1466.current_item.uuid
+					
+					$res:=$contact.save()
+					
+					If ($res.success)
+						This:C1470._activate_save_cancel_button()
+					End if 
+				End for each 
+				
+				This:C1470.loadContacts()
+			End if 
+			
 		: ($choice="--open-contact")
 			If (Form:C1466.selectedContact#Null:C1517)
 				Form:C1466.sfw.openInANewWindow(Form:C1466.selectedContact; "customerService"; "contact")

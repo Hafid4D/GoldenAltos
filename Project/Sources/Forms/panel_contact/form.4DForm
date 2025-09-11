@@ -243,12 +243,13 @@
 				"subFormAddress": {
 					"type": "subform",
 					"left": 648,
-					"top": 141,
-					"width": 805,
-					"height": 305,
+					"top": 144,
+					"width": 759,
+					"height": 261,
 					"detailForm": "sfw_subpanel_addressSingle",
 					"borderStyle": "none",
-					"dataSource": "Form:C1466.subFormAddress"
+					"dataSource": "Form:C1466.subFormAddress",
+					"method": "ObjectMethods/subFormAddress.4dm"
 				},
 				"label_0_1": {
 					"type": "text",
@@ -311,17 +312,6 @@
 					"dataSource": "Form:C1466.subFormCommunication",
 					"method": "",
 					"visibility": "visible"
-				},
-				"subFormAddress": {
-					"type": "subform",
-					"left": 648,
-					"top": 144,
-					"width": 759,
-					"height": 261,
-					"detailForm": "sfw_subpanel_addressSingle",
-					"borderStyle": "none",
-					"dataSource": "Form:C1466.subFormAddress",
-					"method": "ObjectMethods/subFormAddress.4dm"
 				}
 			}
 		},
@@ -329,7 +319,7 @@
 			"objects": {}
 		}
 	],
-	"geometryStamp": 324,
+	"geometryStamp": 325,
 	"method": "method.4dm",
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"editor": {

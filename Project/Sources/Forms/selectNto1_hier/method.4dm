@@ -28,7 +28,7 @@ Case of
 				APPEND TO LIST:C376($subList; $line.description; $id)
 			End for each 
 			
-			APPEND TO LIST:C376(Form:C1466.hList; $po.poNumber; $po.id; $subList; False:C215)
+			APPEND TO LIST:C376(Form:C1466.hList; String:C10($po.poNumber); $po.id; $subList; False:C215)
 			
 			Form:C1466.lb_items.push($po)
 		End for each 

@@ -4,6 +4,7 @@
 	<schema name="DEFAULT_SCHEMA"/>
 	<table name="Contact" uuid="694C4B7F93874E5BA8093878C35952BF" id="1">
 		<field name="UUID" uuid="8EFDF2BE837542E3849ECB064F30C5BD" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="UUID_Customer" uuid="6DB56F7ABADF7841B4031D951E68ADC3" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="2"/>
 		<field name="firstName" uuid="C6919856BA484AA8A838776B5BE82888" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="lastName" uuid="5653CC4F74FB4A1EA57050E7251F1DBB" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="contactDetails" uuid="7B2BE752FE4343B1A18596793976CEBB" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
@@ -2467,6 +2468,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="194675E2B140D94AB5BEF164415B15A8" name_Nto1="customer" name_1toN="contacts" state="1">
+		<related_field kind="source">
+			<field_ref uuid="6DB56F7ABADF7841B4031D951E68ADC3" name="UUID_Customer">
+				<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="37676CD94E8B423595ED98B5C0E9CF89" name="UUID">
+				<table_ref uuid="96D1CE81460A4F75B3F4275138C8F778" name="Customer"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="005E48A922A4464DB92973931B467ACF" type="3">
 		<field_ref uuid="17F71D68FA714CE9A75ED79CA63E3BE2" name="UUID_Lead">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
@@ -2500,6 +2513,11 @@
 	<index kind="regular" uuid="04632AED331AF2479E9AA1FA4BCEA25A" type="3">
 		<field_ref uuid="5660AB93B3B7BC4B9FA7BE938A9184A9" name="UUID_Division">
 			<table_ref uuid="FCE2D049B8944E4CA0AAB0152A549718" name="Equipment"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="0495A893180065459683D1D16A8E8AA6" type="3">
+		<field_ref uuid="6DB56F7ABADF7841B4031D951E68ADC3" name="UUID_Customer">
+			<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="05A5CB771A47C343B55CD143ED08FD46" type="3">
