@@ -142,7 +142,7 @@
 			"objects": {
 				"backgroundRectangle1": {
 					"type": "rectangle",
-					"top": 114,
+					"top": 113,
 					"left": 0,
 					"width": 5000,
 					"height": 704,
@@ -182,28 +182,6 @@
 					"bottom": 293,
 					"dataSourceTypeHint": "date",
 					"method": "ObjectMethods/entryField_reviewDate.4dm"
-				},
-				"PopupDate1": {
-					"type": "subform",
-					"top": 275,
-					"left": 387,
-					"width": 19,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.reviewDate",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/PopupDate1.4dm",
-					"events": [
-						"onLoad",
-						"onDataChange"
-					],
-					"focusable": true,
-					"borderStyle": "none"
 				},
 				"label_0_4": {
 					"type": "text",
@@ -301,27 +279,6 @@
 					"fontWeight": "normal",
 					"textAlign": "left",
 					"bottom": 150
-				},
-				"PopupDate": {
-					"type": "subform",
-					"top": 188,
-					"left": 387,
-					"width": 19,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.revisionDate",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/PopupDate.4dm",
-					"events": [
-						"onLoad"
-					],
-					"focusable": true,
-					"borderStyle": "none"
 				},
 				"label_0_5": {
 					"type": "text",
@@ -426,7 +383,7 @@
 					"top": 332,
 					"left": 160,
 					"width": 246,
-					"height": 19,
+					"height": 17,
 					"events": [
 						"onClick"
 					],
@@ -440,13 +397,140 @@
 					"top": 303,
 					"left": 160,
 					"width": 246,
-					"height": 19,
+					"height": 17,
 					"events": [
 						"onClick"
 					],
 					"dataSource": "Form:C1466.current_item.suppress",
 					"fontWeight": "normal",
 					"dataSourceTypeHint": "boolean"
+				},
+				"btnDatePickerRevision": {
+					"type": "button",
+					"text": " ",
+					"top": 189,
+					"left": 389,
+					"width": 17,
+					"height": 17,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/calendar_black.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnDatePickerRevision.4dm",
+					"visibility": "visible",
+					"iconFrames": 1,
+					"focusable": false,
+					"dataSource": ""
+				},
+				"btnDatePickerReview": {
+					"type": "button",
+					"text": " ",
+					"top": 275,
+					"left": 389,
+					"width": 17,
+					"height": 17,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/calendar_black.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnDatePickerReview.4dm",
+					"visibility": "visible",
+					"iconFrames": 1,
+					"focusable": false,
+					"dataSource": ""
+				},
+				"entryField_isApproved": {
+					"type": "checkbox",
+					"text": "QA Approval",
+					"top": 390,
+					"left": 160,
+					"width": 246,
+					"height": 19,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"fontWeight": "normal",
+					"right": 406,
+					"dataSource": "Form:C1466.current_item.isApproved"
+				},
+				"entryField_approver": {
+					"type": "input",
+					"left": 164,
+					"top": 421,
+					"width": 246,
+					"height": 19,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.current_item.approver"
+				},
+				"entryField_approvalDate": {
+					"type": "input",
+					"left": 160,
+					"top": 452,
+					"width": 246,
+					"height": 19,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.current_item.approvalDate",
+					"dataSourceTypeHint": "date",
+					"enterable": false,
+					"focusable": false,
+					"sizingX": "grow",
+					"events": [
+						"onDataChange"
+					]
+				},
+				"label_0_2": {
+					"type": "text",
+					"top": 452,
+					"left": 0,
+					"width": 150,
+					"height": 19,
+					"stroke": "#808080",
+					"text": "Approval Date",
+					"textAlign": "right",
+					"fontWeight": "normal"
+				},
+				"label_0_9": {
+					"type": "text",
+					"top": 421,
+					"left": 0,
+					"width": 150,
+					"height": 19,
+					"stroke": "#808080",
+					"text": "Approved by",
+					"textAlign": "right",
+					"fontWeight": "normal"
+				},
+				"btnDatePickerApproval": {
+					"type": "button",
+					"text": " ",
+					"top": 453,
+					"left": 389,
+					"width": 17,
+					"height": 17,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/calendar_black.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnDatePickerApproval.4dm",
+					"visibility": "visible",
+					"iconFrames": 1,
+					"focusable": false,
+					"dataSource": ""
 				}
 			}
 		},
@@ -588,7 +672,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 433,
+	"geometryStamp": 484,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

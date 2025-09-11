@@ -10,7 +10,12 @@ Function formMethod()
 			
 			Form:C1466.calendar:=New object:C1471
 			Form:C1466.calendar.display:=New object:C1471
-			Form:C1466.calendar.display.date:=Form:C1466.date
+			If (Form:C1466.date#!00-00-00!)
+				Form:C1466.calendar.display.date:=Form:C1466.date
+			Else 
+				Form:C1466.calendar.display.date:=Current date:C33(*)
+			End if 
+			
 			This:C1470.calendar_init()
 			
 		: (FORM Event:C1606.code=On Clicked:K2:4)

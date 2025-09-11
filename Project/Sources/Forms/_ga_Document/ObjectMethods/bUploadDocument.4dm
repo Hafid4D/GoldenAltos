@@ -12,6 +12,11 @@ Case of
 			Form:C1466.details.blob:=$blob
 			
 			OBJECT SET TITLE:C194(*; "fileName"; $vhDoc)
+			
+			Form:C1466.details.approvalDate:=!00-00-00!
+			Form:C1466.details.approvedBy:=""
+			Form:C1466.details.isApproved:=False:C215
+			
 		End if 
 		
 		

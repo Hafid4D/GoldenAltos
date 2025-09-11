@@ -134,6 +134,9 @@
 		<field name="addendumToSpec" uuid="4DB9F8A21A12A14398F05AF7C5F1BA5D" type="10" limiting_length="255" never_null="true" id="16"/>
 		<field name="reviewIntervalInDays" uuid="7413D34B72ACD04A8DAD654BFE162AAF" type="4" never_null="true" id="17"/>
 		<field name="stmpReviewDate" uuid="87FFB43152B5CB40B41CA4ABE12A9474" type="4" never_null="true" id="18"/>
+		<field name="stmpApproval" uuid="0728A515C1C5974E908C0F1B4A642154" type="4" never_null="true" id="19"/>
+		<field name="approver" uuid="E8F7599A7D12054C8F484BB635ED76B7" type="10" limiting_length="255" never_null="true" id="20"/>
+		<field name="isApproved" uuid="A6C9E87A2E41C24F8A66DC9BB3107C2F" type="1" never_null="true" id="21"/>
 		<primary_key field_name="UUID" field_uuid="2A671DFB01797B4DBB6EC2EB4216DB75"/>
 	</table>
 	<table name="CustomerEvent" uuid="0846217DF6043D4ABB7910378EBDF68A" id="11">

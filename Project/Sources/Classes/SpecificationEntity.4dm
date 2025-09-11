@@ -13,6 +13,12 @@ local Function get reviewDate()->$reviewDate : Date
 local Function set reviewDate($reviewDate : Date)
 	This:C1470.stmpReviewDate:=cs:C1710.sfw_stmp.me.build($reviewDate)
 	
+local Function get approvalDate()->$approvalDate : Date
+	$approvalDate:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpApproval; True:C214)
+	
+local Function set approvalDate($approvalDate : Date)
+	This:C1470.stmpApproval:=cs:C1710.sfw_stmp.me.build($approvalDate)
+	
 local Function drowPup($dataClass; $queryField; $queryValue; $pupName)
 	
 	$entity:=ds:C1482[$dataClass].query($queryField+" =:1"; Form:C1466.current_item[$queryValue]).first() || New object:C1471()
