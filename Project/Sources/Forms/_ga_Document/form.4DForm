@@ -388,7 +388,7 @@
 					"shortcutShift": false,
 					"shortcutAlt": false,
 					"shortcutKey": "[Return]",
-					"method": ""
+					"method": "ObjectMethods/bOk.4dm"
 				},
 				"bCancel": {
 					"type": "button",
@@ -407,7 +407,7 @@
 						"onClick"
 					],
 					"action": "cancel",
-					"method": ""
+					"method": "ObjectMethods/bCancel.4dm"
 				},
 				"pup_docTypes": {
 					"type": "button",
@@ -479,7 +479,7 @@
 			}
 		}
 	],
-	"geometryStamp": 214,
+	"geometryStamp": 215,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

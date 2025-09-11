@@ -136,7 +136,7 @@
 				},
 				"Text5": {
 					"type": "text",
-					"text": "Time",
+					"text": "Date",
 					"top": 78,
 					"left": 7,
 					"width": 102,
