@@ -189,7 +189,7 @@ If ($supplier_log.exists)
 				
 			End if 
 			$comm:=New object:C1471()
-			$comm.type:="mail"
+			$comm.type:="email"
 			$comm.comment:=""
 			$comm.contact:=$supplier.C1_Email
 			$eContact.contactDetails.communications.push($comm)

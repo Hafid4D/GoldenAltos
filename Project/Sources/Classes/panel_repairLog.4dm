@@ -216,9 +216,10 @@ Function pup_downTimePicker()
 	If (Form:C1466.sfw.checkIsInModification())
 		$form:=New object:C1471
 		
-		$form.hour:=String:C10(cs:C1710.sfw_stmp.me.getHour(Form:C1466.current_item.downAt))
-		$form.minute:=String:C10(cs:C1710.sfw_stmp.me.getNbMinutes(Form:C1466.current_item.downAt)%60)
+		//$form.hour:=String(cs.sfw_stmp.me.getHour(Form.current_item.downAt))
+		//$form.minute:=String(cs.sfw_stmp.me.getNbMinutes(Form.current_item.downAt)%60)
 		
+		$form.timeStamp:=Form:C1466.current_item.downAt
 		OBJECT GET COORDINATES:C663(Self:C308->; $left; $top; $rigth; $bottom)
 		
 		CONVERT COORDINATES:C1365($left; $bottom; XY Current form:K27:5; XY Main window:K27:8)
@@ -253,9 +254,10 @@ Function pup_upTimePicker()
 	If (Form:C1466.sfw.checkIsInModification())
 		$form:=New object:C1471
 		
-		$form.hour:=String:C10(cs:C1710.sfw_stmp.me.getHour(Form:C1466.current_item.upAt))
-		$form.minute:=String:C10(cs:C1710.sfw_stmp.me.getNbMinutes(Form:C1466.current_item.upAt)%60)
+		//$form.hour:=String(cs.sfw_stmp.me.getHour(Form.current_item.upAt))
+		//$form.minute:=String(cs.sfw_stmp.me.getNbMinutes(Form.current_item.upAt)%60)
 		
+		$form.timeStamp:=Form:C1466.current_item.upAt
 		OBJECT GET COORDINATES:C663(Self:C308->; $left; $top; $rigth; $bottom)
 		
 		CONVERT COORDINATES:C1365($left; $bottom; XY Current form:K27:5; XY Main window:K27:8)

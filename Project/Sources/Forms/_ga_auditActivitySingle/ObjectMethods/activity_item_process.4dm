@@ -1,3 +1,4 @@
+
 var $isInModification : Boolean
 
 
@@ -32,4 +33,4 @@ Case of
 End case 
 
 
-OBJECT SET FORMAT:C236(*; "activity_item_process"; Form:C1466.process+";0;3;1;1;8;0;0;0;1;0;1")
+OBJECT SET TITLE:C194(*; "activity_item_process"; Form:C1466.process)

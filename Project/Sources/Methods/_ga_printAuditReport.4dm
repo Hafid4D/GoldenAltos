@@ -11,65 +11,53 @@ Purpose : This method print the selected audit report
 
 If (Form:C1466.current_item#Null:C1517)
 	
-	var $identEntry : Text:=Form:C1466.sfw.view.ident
-	var $context : Object
-	
-	$context:=New object:C1471()
+	var $context : Object:=New object:C1471()
+	var $eSupplier : cs:C1710.SupplierEntity
+	var $eContact : cs:C1710.ContactEntity
 	
 	$file:=Folder:C1567(fk resources folder:K87:11).file("4DWriteProPrintTemplates/auditReportPrint.4wp")
 	$template:=WP Import document:C1318($file.platformPath)
 	
+	$eSupplier:=Form:C1466.current_item.supplier
 	
-	$context.length:=Form:C1466.sfw.lb_items.length
-	$context.division:=_ga_getListFiltersValues("Division"; "UUID")
-	$context.user:=Current machine:C483
-	$context.partNum:=_ga_getListFiltersValues("PartData"; "UUID"; "internalPartNum")
-	
-	If (Form:C1466.sfw.searchbox="")
+	If ($eSupplier#Null:C1517)
 		
-		$context.supplier:=_ga_getListFiltersValues("Supplier"; "UUID")
+		$eSupplierAdress:=$eSupplier.contactDetails.addresses.query("type =:1"; "main").first()
+		$eContact:=ds:C1482.Contact.query("UUID_Company =:1 & title =:2"; $eSupplier.UUID; "Primary").first()
+		
+		$context.company:=$eSupplier#Null:C1517 ? $eSupplier.name : ""
+		$context.address:=$eSupplierAdress
+		If ($eContact#Null:C1517)
+			$context.contact:=$eContact.fullName
+			$eContactEmail:=$eContact.contactDetails.communications.query("type =:1"; "mail")
+			If ($eContactEmail.length>0)
+				$context.emailAddress:=$eContactEmail[0].contact
+			End if 
+			
+		End if 
+		
 	Else 
-		$context.supplier:=Form:C1466.sfw.searchbox
+		
+		$section:=WP Get section:C1581($template; 2)
+		$range:=WP Text range:C1341($template; $section.start; $section.end)
+		WP SET TEXT:C1574($range; Char:C90(Carriage return:K15:38); wk replace:K81:177)
+		
 	End if 
 	
+	$context.item:=Form:C1466.current_item
+	$context.user:=Current machine:C483
+	
 	SET PRINT OPTION:C733(Orientation option:K47:2; 1)
-	
-/*
-Case of 
-: ($identEntry="main")
-	
-$context.subject:="AML"
-	
-: ($identEntry="productSuppliers")
-	
-$context.subject:="Products in AML"
-	
-: ($identEntry="serviceSuppliers")
-	
-$context.subject:="Services & suppliers in AML"
-	
-: ($identEntry="criticalProductSuppliers")
-	
-$context.subject:="Critical products & suppliers in AML"
-	
-: ($identEntry="criticalServicesSuppliers")
-	
-$context.subject:="Critical services & suppliers in AML"
-	
-Else 
-	
-End case 
-*/
 	
 	WP SET DATA CONTEXT:C1786($template; $context)
 	
 	PRINT SETTINGS:C106(2)
-	WP PRINT:C1343($template)
+	If (OK=1)
+		WP PRINT:C1343($template)
+	End if 
+	
 	
 Else 
 	cs:C1710.sfw_dialog.me.info(ds:C1482.sfw_readXliff("Info"; "Please select an audit first"))
 	
 End if 
-
-
-

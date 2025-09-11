@@ -468,7 +468,7 @@
 						{
 							"header": {
 								"name": "Header6",
-								"text": "Time",
+								"text": "Date",
 								"fontWeight": "bold",
 								"textAlign": "left"
 							},
@@ -476,10 +476,12 @@
 							"footer": {
 								"name": "Footer6"
 							},
-							"dataSource": "This:C1470.time",
-							"dataSourceTypeHint": "text",
+							"dataSource": "This:C1470.date",
+							"dataSourceTypeHint": "date",
 							"width": 100,
-							"resizable": false
+							"resizable": false,
+							"timeFormat": "systemShort",
+							"dateFormat": "systemShort"
 						},
 						{
 							"header": {
@@ -819,7 +821,7 @@
 					"type": "text",
 					"text": "",
 					"top": 121,
-					"left": 365,
+					"left": 361,
 					"width": 200,
 					"height": 16,
 					"fontWeight": "bold"
@@ -1043,7 +1045,7 @@
 				"entryField_remainingGaps": {
 					"type": "input",
 					"top": 308,
-					"left": 365,
+					"left": 361,
 					"width": 665,
 					"height": 128,
 					"dataSource": "Form:C1466.current_item.remainingGaps",
@@ -1057,7 +1059,7 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"scrollbarVertical": "automatic",
-					"right": 1030
+					"right": 1026
 				},
 				"shipping_bkgd4": {
 					"type": "rectangle",
@@ -1084,7 +1086,7 @@
 				"label_remainingGaps": {
 					"type": "text",
 					"top": 275,
-					"left": 365,
+					"left": 359,
 					"width": 200,
 					"height": 17,
 					"stroke": "#000000",
@@ -1095,7 +1097,7 @@
 				"entryField_recommendations": {
 					"type": "input",
 					"top": 308,
-					"left": 8,
+					"left": 12,
 					"width": 312,
 					"height": 128,
 					"dataSource": "Form:C1466.current_item.recommendations",
@@ -1109,12 +1111,12 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"scrollbarVertical": "automatic",
-					"right": 320
+					"right": 324
 				},
 				"label_recommendation": {
 					"type": "text",
 					"top": 275,
-					"left": 12,
+					"left": 8,
 					"width": 200,
 					"height": 17,
 					"stroke": "#000000",
@@ -1374,7 +1376,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 626,
+	"geometryStamp": 633,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

@@ -63,10 +63,10 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "lb_activities"; $g; $h; $widthSubform-5; $b)
 			
 			OBJECT GET COORDINATES:C663(*; "entryField_scope"; $g; $h; $d; $b)
-			OBJECT SET COORDINATES:C1248(*; "entryField_scope"; $g; $h; $d; $heightSubform-5)
+			OBJECT SET COORDINATES:C1248(*; "entryField_scope"; $g; $h; $d; $heightSubform-15)
 			
 			OBJECT GET COORDINATES:C663(*; "entryField_objectives"; $g; $h; $d; $b)
-			OBJECT SET COORDINATES:C1248(*; "entryField_objectives"; $g; $h; $widthSubform-30; $heightSubform-5)
+			OBJECT SET COORDINATES:C1248(*; "entryField_objectives"; $g; $h; $widthSubform-30; $heightSubform-15)
 			
 		: (FORM Get current page:C276(*)=2)
 			
@@ -81,10 +81,10 @@ Function redrawAndSetVisible()
 		: (FORM Get current page:C276(*)=4)
 			
 			OBJECT GET COORDINATES:C663(*; "entryField_recommendations"; $g; $h; $d; $b)
-			OBJECT SET COORDINATES:C1248(*; "entryField_recommendations"; $g; $h; $d; $heightSubform-5)
+			OBJECT SET COORDINATES:C1248(*; "entryField_recommendations"; $g; $h; $d; $heightSubform-15)
 			
 			OBJECT GET COORDINATES:C663(*; "entryField_remainingGaps"; $g; $h; $d; $b)
-			OBJECT SET COORDINATES:C1248(*; "entryField_remainingGaps"; $g; $h; $widthSubform-30; $heightSubform-5)
+			OBJECT SET COORDINATES:C1248(*; "entryField_remainingGaps"; $g; $h; $widthSubform-30; $heightSubform-15)
 			
 			
 			
@@ -263,7 +263,7 @@ Function btnTimePickerCreate($object; $attribut)
 	If (Form:C1466.sfw.checkIsInModification())
 		
 		$form:=New object:C1471
-		$form.timeStamp:=$object[$attribut]  //Form.current_item.stmpCreationDate
+		$form.timeStamp:=Form:C1466.current_item.stmpCreationDate
 		OBJECT GET COORDINATES:C663(Self:C308->; $left; $top; $rigth; $bottom)
 		
 		CONVERT COORDINATES:C1365($left; $bottom; XY Current form:K27:5; XY Main window:K27:8)
@@ -272,7 +272,7 @@ Function btnTimePickerCreate($object; $attribut)
 		
 		If (OK=1)
 			
-			$object[$attribut]:=cs:C1710.sfw_stmp.me.getTime($form.timeStamp)
+			$object[$attribut]:=$form.timeStamp
 			This:C1470._activate_save_cancel_button()
 			
 		End if 
@@ -453,7 +453,7 @@ Function bActionActivities()
 		: ($choose="--add")
 			
 			$form:=New object:C1471()
-			
+			$form.date:=Current date:C33(*)
 			$winRef:=Open form window:C675("_ga_auditActivitySingle"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_auditActivitySingle"; $form)
 			CLOSE WINDOW:C154($winRef)
