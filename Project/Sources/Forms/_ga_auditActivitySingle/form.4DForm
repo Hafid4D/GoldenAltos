@@ -163,7 +163,7 @@
 					"fill": "#FFFFFF",
 					"stroke": "transparent"
 				},
-				"activity_item_time": {
+				"activity_item_date": {
 					"type": "input",
 					"left": 151,
 					"top": 77,
@@ -171,7 +171,13 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.time"
+					"dataSource": "Form:C1466.date",
+					"dataSourceTypeHint": "time",
+					"timeFormat": "hh_mm_am",
+					"events": [
+						"onLoad",
+						"onDataChange"
+					]
 				},
 				"bCancel": {
 					"type": "button",
@@ -283,16 +289,38 @@
 						"onClick"
 					],
 					"textAlign": "left"
+				},
+				"btnDatePicker": {
+					"type": "button",
+					"text": " ",
+					"top": 78,
+					"left": 433,
+					"width": 17,
+					"height": 17,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/calendar_black.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnDatePicker.4dm",
+					"visibility": "visible",
+					"iconFrames": 1,
+					"focusable": false,
+					"dataSource": ""
 				}
 			}
 		}
 	],
-	"geometryStamp": 10,
+	"geometryStamp": 17,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
 		"views": {
 			"View 1": {}
 		}
-	}
+	},
+	"method": "method.4dm"
 }

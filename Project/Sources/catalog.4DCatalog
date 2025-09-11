@@ -819,13 +819,13 @@
 		</field>
 		<field name="UUID_Department" uuid="DBBC9E80F752DA41B020E37A427026A0" type="10" store_as_UUID="true" never_null="true" id="14"/>
 		<field name="UUID_Company" uuid="2DB51CB40B38B84999B7E4D2B4FDCF7D" type="10" store_as_UUID="true" never_null="true" id="15"/>
-		<field name="scope" uuid="8E0E8373DAB562408B730459DD2A881F" type="10" limiting_length="255" never_null="true" id="16"/>
-		<field name="objectives" uuid="9A4C1C5F3931294483602CD3E64FD393" type="10" limiting_length="255" never_null="true" id="17"/>
-		<field name="comments" uuid="D450D27C2ABEE841AF9ABC6ADC16B722" type="10" limiting_length="255" never_null="true" id="18"/>
-		<field name="findings" uuid="C04787E0917C584EB853F8F296FC48A5" type="10" limiting_length="255" never_null="true" id="19"/>
+		<field name="scope" uuid="8E0E8373DAB562408B730459DD2A881F" type="10" never_null="true" id="16"/>
+		<field name="objectives" uuid="9A4C1C5F3931294483602CD3E64FD393" type="10" never_null="true" id="17"/>
+		<field name="comments" uuid="D450D27C2ABEE841AF9ABC6ADC16B722" type="10" never_null="true" id="18"/>
+		<field name="findings" uuid="C04787E0917C584EB853F8F296FC48A5" type="10" never_null="true" id="19"/>
 		<field name="overallStatus" uuid="336E72168BEC7A4DB4AE02EF8CD1679A" type="10" limiting_length="255" never_null="true" id="20"/>
-		<field name="remainingGaps" uuid="610880615F16A549883CD8C7F6A539C8" type="10" limiting_length="255" never_null="true" id="21"/>
-		<field name="recommendations" uuid="BB71C8B54027AA4781F83F3C95FDFED7" type="10" limiting_length="255" never_null="true" id="22"/>
+		<field name="remainingGaps" uuid="610880615F16A549883CD8C7F6A539C8" type="10" never_null="true" id="21"/>
+		<field name="recommendations" uuid="BB71C8B54027AA4781F83F3C95FDFED7" type="10" never_null="true" id="22"/>
 		<field name="auditorSignature" uuid="6C5F11D904600845B498172BD54D5FA4" type="10" limiting_length="255" never_null="true" id="23"/>
 		<field name="AuditeeSignature" uuid="2A5724F5EBC6BA4B94CBD5F616117718" type="10" limiting_length="255" never_null="true" id="24"/>
 		<field name="IsNCRCorrected" uuid="5A95DB912ED7B442A440B37E7A539031" type="1" never_null="true" id="25"/>
@@ -2493,7 +2493,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="5A6A240E15CEAC4F9754A849BB703AE5" name_Nto1="Link_97" name_1toN="Link_97_return" state="1">
+	<relation uuid="5A6A240E15CEAC4F9754A849BB703AE5" name_Nto1="department" name_1toN="audits" state="1">
 		<related_field kind="source">
 			<field_ref uuid="DBBC9E80F752DA41B020E37A427026A0" name="UUID_Department">
 				<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
@@ -2505,7 +2505,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="D982B8553811B2468F440FBF6F888F44" name_Nto1="Link_98" name_1toN="Link_98_return" state="1">
+	<relation uuid="D982B8553811B2468F440FBF6F888F44" name_Nto1="supplier" name_1toN="audits" state="1">
 		<related_field kind="source">
 			<field_ref uuid="2DB51CB40B38B84999B7E4D2B4FDCF7D" name="UUID_Company">
 				<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
