@@ -312,8 +312,8 @@ import inventories
 If (True:C214)
 	TRUNCATE TABLE:C1051([Inventory:126])
 	TRUNCATE TABLE:C1051([InventoryPull:127])
-	TRUNCATE TABLE:C1051([Location:47])
-	TRUNCATE TABLE:C1051([Unit:48])
+	TRUNCATE TABLE:C1051([Location:44])
+	TRUNCATE TABLE:C1051([Unit:47])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/inventory_export.json")
 	
@@ -546,7 +546,7 @@ If (True:C214)
 		$specification_e.stmpRevisionDate:=cs:C1710.sfw_stmp.me.build(Date:C102($record.Revsion_Date))
 		$specification_e.revision:=$record.Rev
 		
-		$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($record.Division; "\r"; sk trim spaces:K86:2).join("\r"))
+		$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($record.division; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($division.length>0)
 			$specification_e.UUID_Division:=$division[0].UUID
 		Else 
