@@ -58,7 +58,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setView($view)
 	
 	// MARK: Docs requiring review in 7 days
-	$view:=cs:C1710.sfw_definitionView.new("docsRequiringReviewSoon"; "Control Docs requiring review in 7 days")
+	$view:=cs:C1710.sfw_definitionView.new("docsRequiringReviewSoon"; "Control Docs requiring review in X days")
 	$view.setLBItemsColumn("spec"; "Spec#"; "width:100")
 	$view.setLBItemsColumn("revision"; "Revision"; "width:50")
 	$view.setLBItemsColumn("title"; "Title")
@@ -143,17 +143,23 @@ local Function setDateInterval($pushUp; $title)
 	
 	
 Function docsLateInReviewing()->$specifications : cs:C1710.SpecificationSelection
-	$specifications:=ds:C1482.Specification.query("suppress =:1 & reviewIntervalInDays >0 & eval(revisionDate<Current date(*))"; False:C215)
-	
+	//$specifications:=ds.Specification.query("suppress =:1 & reviewIntervalInDays >0 & eval(reviewDate+reviewIntervalInDays)<Current date(*)"; False)
+	$statDate:=Current date:C33()
+	$formula_1:=Formula:C1597((This:C1470.reviewDate+This:C1470.reviewIntervalInDays)<$statDate)
+	$specifications:=This:C1470.myQuery(False:C215; 0; $formula_1)
 	
 local Function docsRequiringReviewSoon()->$specifications : cs:C1710.SpecificationSelection
 	$title:="Set date interval"
+	Use (Storage:C1525.cache)
+		Storage:C1525.cache.startDate:=Current date:C33()
+	End use 
 	This:C1470.setDateInterval(False:C215; $title)
 	$statDate:=Storage:C1525.cache.startDate
 	$endDate:=Storage:C1525.cache.endDate
 	$formula_1:=Formula:C1597((This:C1470.reviewDate+This:C1470.reviewIntervalInDays)>=$statDate)
 	$formula_2:=Formula:C1597((This:C1470.reviewDate+This:C1470.reviewIntervalInDays)<$endDate)
-	$specifications:=This:C1470.myQuery(False:C215; $formula_1; $formula_2)  //ds.Specification.query("suppress =:1 & reviewIntervalInDays >0 & :2 & :3"; False; $formula_1; $formula_2)
+	$specifications:=This:C1470.myQuery(False:C215; 0; $formula_1; $formula_2)  //ds.Specification.query("suppress =:1 & reviewIntervalInDays >0 & :2 & :3"; False; $formula_1; $formula_2)
+	
 	
 	
 Function OnlySpecs()->$specifications : cs:C1710.SpecificationSelection
@@ -164,7 +170,17 @@ Function OnlyForms()->$specifications : cs:C1710.SpecificationSelection
 	$specifications:=ds:C1482.Specification.query("suppress =:1 & isForm=:2"; False:C215; True:C214)
 	
 	
-Function myQuery($blool : Boolean;  ...  : Object)->$specifications : cs:C1710.SpecificationSelection
-	
-	$specifications:=ds:C1482.Specification.query("suppress =:1 & reviewIntervalInDays >0 & :2 & :3"; $1; $2; $3)
-	
+Function myQuery($param1 : Boolean; $param2 : Integer;  ...  : Object)->$specifications : cs:C1710.SpecificationSelection
+	$nbrsOfParameters:=Count parameters:C259
+	Case of 
+			
+		: ($nbrsOfParameters=3)
+			$specifications:=ds:C1482.Specification.query("suppress =:1 & reviewIntervalInDays > :2 & :3"; $1; $2; $3)
+			
+		: ($nbrsOfParameters=4)
+			$specifications:=ds:C1482.Specification.query("suppress =:1 & reviewIntervalInDays > :2 & :3 & :4"; $1; $2; $3; $4)
+			
+			
+		Else 
+			
+	End case 
