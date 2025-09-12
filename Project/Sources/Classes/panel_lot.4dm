@@ -16,6 +16,9 @@ Function formMethod()
 				This:C1470.manageReOrderBtns()
 				
 				This:C1470.loadLotSteps()
+				
+			: (FORM Get current page:C276(*)=3)
+				This:C1470.loadMaterials()
 		End case 
 	End if 
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())  //It's time to resize the object or set visible
@@ -401,3 +404,27 @@ Function selectJob()
 				End if 
 		End case 
 	End if 
+	
+Function bActionCustProvMat()
+	$refMenu:=Create menu:C408
+	
+	APPEND MENU ITEM:C411($refMenu; "Create a step from template")
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--create_from_template")
+	
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	$choose:=Dynamic pop up menu:C1006($refMenu)
+	
+	Case of 
+		: ($choose="--create_from_template")
+			$form:=New object:C1471()
+			
+			$winRef:=Open form window:C675("createManualInv_lot"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("createManualInv_lot"; $form)
+			CLOSE WINDOW:C154($winRef)
+	End case 
+	
+Function loadMaterials()
+	Form:C1466.lb_materials:=ds:C1482.Inventory.query("UUID_Lot = :1"; Form:C1466.current_item.UUID)

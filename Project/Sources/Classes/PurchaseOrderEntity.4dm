@@ -1,7 +1,7 @@
 Class extends Entity
 
 local Function get nameInWindowTitle()->$nameInWindowTitle : Text
-	$nameInWindowTitle:=This:C1470.poNumber
+	$nameInWindowTitle:=String:C10(This:C1470.poNumber)
 	
 local Function rebuildAddress()->$address : Object
 	Case of 
@@ -13,11 +13,11 @@ local Function rebuildAddress()->$address : Object
 	
 	If (This:C1470.address.addresses#Null:C1517) && (This:C1470.address.addresses#Null:C1517)
 		$address:=This:C1470.address.addresses.query("type = :1"; $type).first()
-
-
-
-//mark:-Callbacks
-
+		
+		
+		
+		//mark:-Callbacks
+		
 local Function afterCreation()
 	
 	

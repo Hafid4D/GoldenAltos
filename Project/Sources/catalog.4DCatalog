@@ -4,7 +4,7 @@
 	<schema name="DEFAULT_SCHEMA"/>
 	<table name="Contact" uuid="694C4B7F93874E5BA8093878C35952BF" id="1">
 		<field name="UUID" uuid="8EFDF2BE837542E3849ECB064F30C5BD" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="UUID_Customer" uuid="6DB56F7ABADF7841B4031D951E68ADC3" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="UUID_Customer" uuid="6DB56F7ABADF7841B4031D951E68ADC3" type="10" store_as_UUID="true" never_null="true" id="2"/>
 		<field name="firstName" uuid="C6919856BA484AA8A838776B5BE82888" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="lastName" uuid="5653CC4F74FB4A1EA57050E7251F1DBB" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="contactDetails" uuid="7B2BE752FE4343B1A18596793976CEBB" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
@@ -1147,8 +1147,8 @@
 		<field name="classification" uuid="6DF947C93902D64CA2C33D7660F64824" type="10" limiting_length="255" never_null="true" id="7"/>
 		<field name="lotNumber" uuid="AED556E31BE6934FA5C852DA598CF040" type="10" limiting_length="255" never_null="true" id="8"/>
 		<field name="stockNum" uuid="CFFFDDCAE6C2814391A242289EDACEB0" type="10" limiting_length="255" never_null="true" id="9"/>
-		<field name="dateIn" uuid="57B49098D3558B43BA959CDF8F78D78D" type="8" never_null="true" id="10"/>
-		<field name="expirationDate" uuid="C669118ADCC7ED47A513683782F68EB9" type="8" never_null="true" id="11"/>
+		<field name="dateIn" uuid="57B49098D3558B43BA959CDF8F78D78D" type="4" never_null="true" id="10"/>
+		<field name="expirationDate" uuid="C669118ADCC7ED47A513683782F68EB9" type="4" never_null="true" id="11"/>
 		<field name="qtyInStock" uuid="BA478A2638BCB24CA033881599889C5F" type="4" never_null="true" id="12"/>
 		<field name="unitCost" uuid="289ABA2CA6568245B4A521DD888FB092" type="6" never_null="true" id="13"/>
 		<field name="inventoryUnits" uuid="3FF65FBE3705DE458230FDB01D7F63AE" type="10" limiting_length="255" never_null="true" id="14"/>
@@ -1160,6 +1160,7 @@
 		<field name="property" uuid="CC532A7D1109F548B5ED16D57A454170" type="4" never_null="true" id="20"/>
 		<field name="originalQty" uuid="1625C64236086A498DF44C365A2DAF9F" type="10" limiting_length="255" never_null="true" id="21"/>
 		<field name="availableQty" uuid="D23A44CD0E3D3C4D80014A343D5FC1E4" type="10" limiting_length="255" never_null="true" id="22"/>
+		<field name="UUID_Lot" uuid="7FEE97DA30A98742B2582F6CEDCCAE66" type="10" store_as_UUID="true" never_null="true" id="23"/>
 		<primary_key field_name="UUID" field_uuid="F8D9EC71ECF843689AA0D416563422DC"/>
 	</table>
 	<table name="InventoryPull" uuid="B0A466FC99334B96B5FE810BAE186DC4" id="127">
@@ -2480,6 +2481,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="3AC0AC688CF06C4ABA1B8F54C7A176B3" name_Nto1="lot" name_1toN="inventories" state="1">
+		<related_field kind="source">
+			<field_ref uuid="7FEE97DA30A98742B2582F6CEDCCAE66" name="UUID_Lot">
+				<table_ref uuid="CA853413921F4B2A9BC70E6DE5F88235" name="Inventory"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="AEF78036FB7D429A96DF35BE53A0E0AF" name="UUID">
+				<table_ref uuid="67220A81398C4000A84C1F180E368020" name="Lot"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="005E48A922A4464DB92973931B467ACF" type="3">
 		<field_ref uuid="17F71D68FA714CE9A75ED79CA63E3BE2" name="UUID_Lead">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
@@ -3018,6 +3031,11 @@
 	<index kind="regular" unique_keys="true" uuid="896FD4EE0132488CA456E5EB29CC722B" type="7">
 		<field_ref uuid="99E586D88F7844DC88C7D6EB4AABFEFE" name="UUID">
 			<table_ref uuid="C0C5EF5A4CD04FF7BB3897793A9DE6ED" name="ToolType"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="8D509A005894F84BB8FD0B7AA2A29A41" type="3">
+		<field_ref uuid="7FEE97DA30A98742B2582F6CEDCCAE66" name="UUID_Lot">
+			<table_ref uuid="CA853413921F4B2A9BC70E6DE5F88235" name="Inventory"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="8D55D949B63840D6956A5F33050FDFB6" type="1">
