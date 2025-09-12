@@ -23,12 +23,6 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.activateFavorite()
 	
 	
-	$entry.activateEvent("ContactEvent"; "UUID_Contact")
-	$entry.setAttributesToTrackInModificationEvent("firstName"; "lastName"; "code"; "title")
-	$entry.setEventOptions("CreateModifyEventIfNoTrackingAttribute")
-	
-	
-	
 	// MARK: - Views Definition
 	
 	
