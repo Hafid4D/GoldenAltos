@@ -278,10 +278,85 @@
 			"coordinates": {
 				"left": 693.33325195312,
 				"top": 1214.9998779297,
-				"width": 159.052734375,
-				"height": 507.33203125
+				"width": 171.052734375,
+				"height": 558.33203125
 			},
-			"displayable_fields_count": 22
+			"displayable_fields_count": 24,
+			"fields_ordering": 2,
+			"fields": {
+				"UUID_Staff": {
+					"position": 3
+				},
+				"UUID_Customer": {
+					"position": 2
+				},
+				"availableQty": {
+					"position": 24
+				},
+				"originalQty": {
+					"position": 23
+				},
+				"property": {
+					"position": 22
+				},
+				"totalCost": {
+					"position": 21
+				},
+				"division": {
+					"position": 20
+				},
+				"recdBy": {
+					"position": 19
+				},
+				"binLocation": {
+					"position": 18
+				},
+				"currency": {
+					"position": 17
+				},
+				"inventoryUnits": {
+					"position": 16
+				},
+				"unitCost": {
+					"position": 15
+				},
+				"qtyInStock": {
+					"position": 14
+				},
+				"expirationDate": {
+					"position": 13
+				},
+				"dateIn": {
+					"position": 12
+				},
+				"stockNum": {
+					"position": 11
+				},
+				"lotNumber": {
+					"position": 10
+				},
+				"classification": {
+					"position": 9
+				},
+				"description": {
+					"position": 8
+				},
+				"vendor": {
+					"position": 7
+				},
+				"partNum": {
+					"position": 6
+				},
+				"customerSpecific": {
+					"position": 5
+				},
+				"customer_provided": {
+					"position": 4
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
 		},
 		"StepTemplateCertification": {
 			"color": {
@@ -1830,7 +1905,17 @@
 		}
 	},
 	"relations": {
-		"8970A6EB2425E344A91EAE0352603CBF": {
+
+		"A7E6B757539D504F9A0435ABDA7EC2F4": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"554984CA43DB454C960BF5F0CD2A61AA": {
+
 			"color": {
 				"red": 240,
 				"green": 240,

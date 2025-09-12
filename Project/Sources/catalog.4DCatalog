@@ -1196,6 +1196,8 @@
 		<field name="property" uuid="CC532A7D1109F548B5ED16D57A454170" type="4" never_null="true" id="20"/>
 		<field name="originalQty" uuid="1625C64236086A498DF44C365A2DAF9F" type="10" limiting_length="255" never_null="true" id="21"/>
 		<field name="availableQty" uuid="D23A44CD0E3D3C4D80014A343D5FC1E4" type="10" limiting_length="255" never_null="true" id="22"/>
+		<field name="UUID_Customer" uuid="82126B12FB764545B4300548927CEEA1" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="23"/>
+		<field name="UUID_Staff" uuid="64F93EDE8E74644C836516DCE3E22031" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="24"/>
 		<primary_key field_name="UUID" field_uuid="F8D9EC71ECF843689AA0D416563422DC"/>
 	</table>
 	<table name="InventoryPull" uuid="B0A466FC99334B96B5FE810BAE186DC4" id="127">
@@ -2540,6 +2542,30 @@
 		<related_field kind="destination">
 			<field_ref uuid="BD7F2A41DD18FE47B8E8F4AD6C1EE62D" name="UUID">
 				<table_ref uuid="97D73747E1BC924A8B02AAF6C525C798" name="ProcessType"/>
+	    </field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="554984CA43DB454C960BF5F0CD2A61AA" name_Nto1="customer" name_1toN="inventories" state="1">
+		<related_field kind="source">
+			<field_ref uuid="82126B12FB764545B4300548927CEEA1" name="UUID_Customer">
+				<table_ref uuid="CA853413921F4B2A9BC70E6DE5F88235" name="Inventory"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="37676CD94E8B423595ED98B5C0E9CF89" name="UUID">
+				<table_ref uuid="96D1CE81460A4F75B3F4275138C8F778" name="Customer"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="A7E6B757539D504F9A0435ABDA7EC2F4" name_Nto1="staff" name_1toN="inventories" state="1">
+		<related_field kind="source">
+			<field_ref uuid="64F93EDE8E74644C836516DCE3E22031" name="UUID_Staff">
+				<table_ref uuid="CA853413921F4B2A9BC70E6DE5F88235" name="Inventory"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="6941AB4C41898A4A9FBF25D5AC27CA2B" name="UUID">
+				<table_ref uuid="FD10D10C9E0015458AFF59F988A373BB" name="Staff"/>
 			</field_ref>
 		</related_field>
 	</relation>
@@ -2571,6 +2597,11 @@
 	<index kind="regular" unique_keys="true" uuid="033AEB213D35D04DA2778E4E3928A376" type="1">
 		<field_ref uuid="6A2CE8BD47C44B8EAC7B0C5C14CD21DB" name="UUID">
 			<table_ref uuid="6059D6A0DACF42889F97EAD171DE9723" name="QuoteStatus"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="0410A57E2F970146ACC88696682111AC" type="3">
+		<field_ref uuid="82126B12FB764545B4300548927CEEA1" name="UUID_Customer">
+			<table_ref uuid="CA853413921F4B2A9BC70E6DE5F88235" name="Inventory"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="04632AED331AF2479E9AA1FA4BCEA25A" type="3">
@@ -3466,6 +3497,11 @@
 	<index kind="regular" unique_keys="true" uuid="DF30050CCDC3414E8A2AA7F3D6AC41F5" type="7">
 		<field_ref uuid="D81F07A96F817641A43C05681384BC82" name="UUID">
 			<table_ref uuid="3B9C8B2E8B9769409AD8BB9F66CA3E6E" name="CIDisposition"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="DF5E3814DA39834EB84755523C0DB00A" type="3">
+		<field_ref uuid="64F93EDE8E74644C836516DCE3E22031" name="UUID_Staff">
+			<table_ref uuid="CA853413921F4B2A9BC70E6DE5F88235" name="Inventory"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="E1927A9B86B24B45A3A1F0FED26AFB1D" type="3">
