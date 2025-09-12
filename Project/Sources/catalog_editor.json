@@ -203,11 +203,10 @@
 			"coordinates": {
 				"left": 1450.0543212891,
 				"top": 0,
-				"width": 195.046875,
-				"height": 335.33203125
+				"width": 263.75323486328,
+				"height": 419.92266845703
 			},
-			"displayable_fields_count": 14,
-			"fields_ordering": 2,
+			"displayable_fields_count": 18,
 			"fields": {
 				"voided": {
 					"position": 14
@@ -221,7 +220,7 @@
 					},
 					"position": 12
 				},
-				"UUID_Employee": {
+				"UUID_Staff": {
 					"position": 3
 				},
 				"stmpCreation": {
@@ -242,14 +241,11 @@
 				"subject": {
 					"position": 6
 				},
-				"currentStatusID": {
+				"UUID_Status": {
 					"position": 5
 				},
 				"code": {
 					"position": 4
-				},
-				"UUID_Contact": {
-					"position": 2
 				},
 				"UUID": {
 					"position": 1
@@ -264,48 +260,13 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 943.66656494141,
-				"top": 1213.3332519531,
+				"left": 942.66656494141,
+				"top": 1214.3332519531,
 				"width": 149.0390625,
 				"height": 398.33203125
 			},
 			"displayable_fields_count": 17,
-			"fields_ordering": 2,
-			"fields": {
-				"lotNumber": {
-					"position": 7
-				},
-				"statusIQA": {
-					"position": 9
-				},
-				"performedBy": {
-					"position": 8
-				},
-				"uniqueID": {
-					"position": 11
-				},
-				"jobNumber": {
-					"position": 10
-				},
-				"date": {
-					"position": 3
-				},
-				"remaining": {
-					"position": 6
-				},
-				"qty": {
-					"position": 5
-				},
-				"type": {
-					"position": 4
-				},
-				"UUID_Inventory": {
-					"position": 2
-				},
-				"UUID": {
-					"position": 1
-				}
-			}
+			"fields_ordering": 1
 		},
 		"Inventory": {
 			"color": {
@@ -317,10 +278,85 @@
 			"coordinates": {
 				"left": 693.33325195312,
 				"top": 1214.9998779297,
-				"width": 159.052734375,
-				"height": 507.33203125
+				"width": 171.052734375,
+				"height": 558.33203125
 			},
-			"displayable_fields_count": 22
+			"displayable_fields_count": 24,
+			"fields_ordering": 2,
+			"fields": {
+				"UUID_Staff": {
+					"position": 3
+				},
+				"UUID_Customer": {
+					"position": 2
+				},
+				"availableQty": {
+					"position": 24
+				},
+				"originalQty": {
+					"position": 23
+				},
+				"property": {
+					"position": 22
+				},
+				"totalCost": {
+					"position": 21
+				},
+				"division": {
+					"position": 20
+				},
+				"recdBy": {
+					"position": 19
+				},
+				"binLocation": {
+					"position": 18
+				},
+				"currency": {
+					"position": 17
+				},
+				"inventoryUnits": {
+					"position": 16
+				},
+				"unitCost": {
+					"position": 15
+				},
+				"qtyInStock": {
+					"position": 14
+				},
+				"expirationDate": {
+					"position": 13
+				},
+				"dateIn": {
+					"position": 12
+				},
+				"stockNum": {
+					"position": 11
+				},
+				"lotNumber": {
+					"position": 10
+				},
+				"classification": {
+					"position": 9
+				},
+				"description": {
+					"position": 8
+				},
+				"vendor": {
+					"position": 7
+				},
+				"partNum": {
+					"position": 6
+				},
+				"customerSpecific": {
+					"position": 5
+				},
+				"customer_provided": {
+					"position": 4
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
 		},
 		"StepTemplateCertification": {
 			"color": {
@@ -1143,12 +1179,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1475,
-				"top": 1774,
-				"width": 149,
-				"height": 146.33203125
+				"left": 1611.9033813477,
+				"top": 1212.9949188232,
+				"width": 176.93957519531,
+				"height": 190.07992553711
 			},
-			"displayable_fields_count": 5
+			"displayable_fields_count": 7
 		},
 		"Lead": {
 			"color": {
@@ -1163,7 +1199,17 @@
 				"width": 383.04388427734,
 				"height": 466.03674316406
 			},
-			"displayable_fields_count": 18
+			"displayable_fields_count": 20,
+			"fields": {
+				"UUID_LeadNextStep": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
 		},
 		"YesNoQuestion": {
 			"color": {
@@ -1844,6 +1890,22 @@
 		}
 	},
 	"relations": {
+		"A7E6B757539D504F9A0435ABDA7EC2F4": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"554984CA43DB454C960BF5F0CD2A61AA": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"D982B8553811B2468F440FBF6F888F44": {
 			"color": {
 				"red": 240,
@@ -2381,6 +2443,14 @@
 			}
 		},
 		"4EEBB3B3CDCE4E4D8FB9E78C0A56728C": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"761F023AC9E24FF8B9A7192BD1698794": {
 			"color": {
 				"red": 255,
 				"green": 255,
