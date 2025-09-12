@@ -48,7 +48,7 @@ Function redrawAndSetVisible()
 			
 		: (FORM Get current page:C276(*)=1)
 			OBJECT GET COORDINATES:C663(*; "entryField_statusHistory"; $g; $h; $d; $b)
-			OBJECT SET COORDINATES:C1248(*; "entryField_statusHistory"; $g; $h; $widthSubform-25; $b)
+			OBJECT SET COORDINATES:C1248(*; "entryField_statusHistory"; $g; $h; $widthSubform-25; $heightSubform-15)
 			
 		: (FORM Get current page:C276(*)=2)
 			OBJECT GET COORDINATES:C663(*; "lb_repairLog"; $left_lb; $top_lb; $right_lb; $bottom_lb)
@@ -72,7 +72,7 @@ Function redrawAndSetVisible()
 	
 	OBJECT SET ENTERABLE:C238(*; "entryField_statusHistory"; False:C215)
 	
-	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "btnDatePicker@"; Form:C1466.sfw.checkIsInModification())
 	
 	Form:C1466.sfw.drawHTab()
 	
@@ -355,6 +355,23 @@ Function bActionDocument()
 	
 	
 	
+Function btnDatePicker($object; $attribut)
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		$form:=New object:C1471
+		$form.date:=$object[$attribut]
+		
+		OBJECT GET COORDINATES:C663(Self:C308->; $left; $top; $rigth; $bottom)
+		CONVERT COORDINATES:C1365($left; $bottom; XY Current form:K27:5; XY Main window:K27:8)
+		Open window:C153($left; $bottom; $left+285; $bottom+210; Movable dialog box:K34:7; "calendar")
+		DIALOG:C40("_ga_calendar"; $form)
+		
+		If (OK=1)
+			$object[$attribut]:=$form.calendar.display.date
+			This:C1470._activate_save_cancel_button()
+		End if 
+		
+	End if 
 	
 	
 	

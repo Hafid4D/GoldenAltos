@@ -48,25 +48,10 @@ local Function rebuidComunications->$communications : Collection
 	//mark:-Callbacks
 	
 	
-	
-local Function afterCreation()
-	This:C1470._initAddress()
-	This:C1470._initCommunication()
-	
 local Function loadAfterCreation()
 	// This callback is called after creating the new item but before displaying the panel.
 	This:C1470._initAddress()
 	This:C1470._initCommunication()
-	
-local Function itemLoad()
-	// This callback is called when the item is selected in the itemList
-	This:C1470._initAddress()
-	This:C1470._initCommunication()
-	
-	
-local Function isDeletable()->$isDeletable : Boolean
-	// This callback must return false to inactivate the deletion mode for the current item.
-	$isDeletable:=True:C214
 	
 	
 	//mark:-Sub functions

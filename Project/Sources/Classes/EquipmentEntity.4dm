@@ -30,26 +30,9 @@ local Function get nextPMDate()->$nextPMDate : Date
 local Function set nextPMDate($nextPMDate : Date)
 	This:C1470.stmpNextPM:=cs:C1710.sfw_stmp.me.build($nextPMDate)
 	
-	
-local Function afterCreation()
-	This:C1470._initReports()
-	
-	
 local Function loadAfterCreation()
 	// This callback is called after creating the new item but before displaying the panel.
 	This:C1470._initReports()
-	
-	
-local Function itemLoad()
-	// This callback is called when the item is selected in the itemList
-	This:C1470._initReports()
-	
-	
-	
-local Function isDeletable()->$isDeletable : Boolean
-	// This callback must return false to inactivate the deletion mode for the current item.
-	$isDeletable:=True:C214
-	
 	
 local Function _initReports()
 	
@@ -58,4 +41,6 @@ local Function _initReports()
 		This:C1470.reports.documents:=New collection:C1472()
 	End if 
 	
+local Function itemLoad()
+	// This callback is called when the item is selected in the itemList
 	

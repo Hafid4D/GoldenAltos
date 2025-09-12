@@ -33,6 +33,8 @@ If ($audit_log.exists)
 			$eAudit.storageFilename:=$audit.StoragedFilename
 			$eAudit.type:=Split string:C1554($audit.Book; "\r"; sk trim spaces:K86:2).join("\r")="Internal Audits" ? "Internal" : "External"
 			
+			$eAudit.auditReport:=WP New:C1317()
+			
 			$eAudit.activities:=New object:C1471()
 			$eAudit.activities.collection:=New collection:C1472()
 			
@@ -73,7 +75,7 @@ If ($audit_log.exists)
 					$eAudit.document:=$doc
 					
 				Else 
-					
+					TRACE:C157
 					
 /*
 For each ($document; $_documents)

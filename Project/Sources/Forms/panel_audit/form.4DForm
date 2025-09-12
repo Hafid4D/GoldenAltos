@@ -714,25 +714,8 @@
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Process Name",
+					"text": "Process",
 					"textAlign": "right"
-				},
-				"entryField_process": {
-					"type": "input",
-					"top": 126,
-					"left": 108,
-					"width": 300,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.process",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none"
 				},
 				"label_findings": {
 					"type": "text",
@@ -761,6 +744,26 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"scrollbarVertical": "automatic"
+				},
+				"pup_process": {
+					"type": "button",
+					"top": 120,
+					"left": 109,
+					"width": 299,
+					"height": 28,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_process.4dm",
+					"events": [
+						"onClick"
+					],
+					"textAlign": "left"
 				}
 			}
 		},
@@ -1130,6 +1133,77 @@
 			"objects": {
 				"header_bkgd6": {
 					"type": "rectangle",
+					"top": 114,
+					"left": 0,
+					"width": 2000,
+					"height": 1500,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"right": 2000
+				},
+				"bActionTeam1": {
+					"type": "button",
+					"text": "Actions",
+					"top": 118,
+					"left": 8,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionTeam1.4dm",
+					"visibility": "visible"
+				},
+				"entryField_wpDoc": {
+					"type": "write",
+					"top": 204,
+					"left": 108,
+					"width": 880,
+					"height": 590,
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"dataSource": "Form:C1466.current_item.auditReport",
+					"hideFocusRing": true,
+					"scrollbarVertical": "automatic",
+					"scrollbarHorizontal": "automatic",
+					"dpi": 0,
+					"borderStyle": "none",
+					"method": "ObjectMethods/entryField_wpDoc.4dm",
+					"events": [
+						"onLoad",
+						"onLosingFocus",
+						"onGettingFocus",
+						"onDataChange",
+						"onSelectionChange",
+						"onAfterEdit"
+					]
+				},
+				"WPtoolbar": {
+					"type": "subform",
+					"top": 114,
+					"left": 108,
+					"width": 880,
+					"height": 90,
+					"sizingX": "grow",
+					"detailForm": "WP_Toolbar",
+					"focusable": false,
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable"
+				}
+			}
+		},
+		{
+			"objects": {
+				"header_bkgd8": {
+					"type": "rectangle",
 					"top": 113,
 					"left": 0,
 					"width": 2000,
@@ -1139,7 +1213,7 @@
 					"stroke": "transparent",
 					"right": 2000
 				},
-				"label_documentPath": {
+				"label_documentPath1": {
 					"type": "text",
 					"text": "Document Path",
 					"top": 127,
@@ -1150,7 +1224,7 @@
 					"stroke": "#808080",
 					"textAlign": "right"
 				},
-				"label_sourcePath": {
+				"label_sourcePath1": {
 					"type": "text",
 					"text": "Source Path",
 					"top": 154,
@@ -1161,7 +1235,7 @@
 					"stroke": "#808080",
 					"textAlign": "right"
 				},
-				"entryField_sourcePath": {
+				"entryField_sourcePath1": {
 					"type": "input",
 					"left": 108,
 					"top": 154,
@@ -1171,7 +1245,7 @@
 					"fill": "transparent",
 					"dataSource": "Form:C1466.current_item.document.sourcePath"
 				},
-				"entryField_documentPath": {
+				"entryField_documentPath1": {
 					"type": "input",
 					"left": 108,
 					"top": 127,
@@ -1182,7 +1256,7 @@
 					"dataSource": "Form:C1466.current_item.document.documentPath",
 					"dataSourceTypeHint": "text"
 				},
-				"label_description": {
+				"label_description1": {
 					"type": "text",
 					"text": "Description",
 					"top": 181,
@@ -1193,7 +1267,7 @@
 					"stroke": "#808080",
 					"textAlign": "right"
 				},
-				"entryField_description": {
+				"entryField_description1": {
 					"type": "input",
 					"left": 108,
 					"top": 181,
@@ -1203,7 +1277,7 @@
 					"fill": "transparent",
 					"dataSource": "Form:C1466.current_item.document.description"
 				},
-				"label_type1": {
+				"label_type2": {
 					"type": "text",
 					"text": "Type",
 					"top": 208,
@@ -1215,7 +1289,7 @@
 					"stroke": "#808080",
 					"textAlign": "right"
 				},
-				"pup_docType": {
+				"pup_docType1": {
 					"type": "button",
 					"text": "",
 					"top": 205,
@@ -1226,14 +1300,14 @@
 						"onLoad",
 						"onClick"
 					],
-					"method": "ObjectMethods/pup_docType.4dm",
+					"method": "ObjectMethods/pup_docType1.4dm",
 					"textAlign": "left",
 					"dataSource": "",
 					"style": "bevel",
 					"popupPlacement": "linked",
 					"textPlacement": "left"
 				},
-				"bView": {
+				"bView1": {
 					"type": "button",
 					"text": "",
 					"top": 150,
@@ -1246,9 +1320,9 @@
 					"style": "custom",
 					"icon": "/RESOURCES/sfw/image/skin/rainbow/btn4states/eye-24x24.png",
 					"iconFrames": 4,
-					"method": "ObjectMethods/bView.4dm"
+					"method": "ObjectMethods/bView1.4dm"
 				},
-				"bUploadDocument": {
+				"bUploadDocument1": {
 					"type": "button",
 					"top": 248,
 					"left": 275,
@@ -1270,10 +1344,10 @@
 					"shortcutShift": false,
 					"shortcutAlt": false,
 					"shortcutKey": "",
-					"method": "ObjectMethods/bUploadDocument.4dm",
+					"method": "ObjectMethods/bUploadDocument1.4dm",
 					"fontWeight": "normal"
 				},
-				"fileName": {
+				"fileName1": {
 					"type": "text",
 					"text": "",
 					"top": 329,
@@ -1282,7 +1356,7 @@
 					"height": 17,
 					"textAlign": "left"
 				},
-				"entryField_isApproved": {
+				"entryField_isApproved1": {
 					"type": "checkbox",
 					"text": "QA Approval",
 					"top": 291,
@@ -1298,7 +1372,7 @@
 					"dataSource": "Form:C1466.current_item.document.isApproved",
 					"visibility": "hidden"
 				},
-				"abel_approvedDate": {
+				"abel_approvedDate1": {
 					"type": "text",
 					"text": "Approved date",
 					"top": 345,
@@ -1311,7 +1385,7 @@
 					"textAlign": "right",
 					"visibility": "hidden"
 				},
-				"entryField_approvedBy": {
+				"entryField_approvedBy1": {
 					"type": "input",
 					"left": 108,
 					"top": 318,
@@ -1322,7 +1396,7 @@
 					"dataSource": "Form:C1466.current_item.document.approvedBy",
 					"visibility": "hidden"
 				},
-				"entryField_approvalDate": {
+				"entryField_approvalDate1": {
 					"type": "input",
 					"left": 108,
 					"top": 345,
@@ -1337,7 +1411,7 @@
 					"sizingX": "grow",
 					"visibility": "hidden"
 				},
-				"label_approvedBy": {
+				"label_approvedBy1": {
 					"type": "text",
 					"text": "Appproved by",
 					"top": 318,
@@ -1350,7 +1424,7 @@
 					"textAlign": "right",
 					"visibility": "hidden"
 				},
-				"notPopupDate": {
+				"notPopupDate1": {
 					"type": "subform",
 					"top": 345,
 					"left": 389,
@@ -1364,7 +1438,7 @@
 					"doubleClickInEmptyAreaAction": "addSubrecord",
 					"selectionMode": "multiple",
 					"printFrame": "variable",
-					"method": "ObjectMethods/notPopupDate.4dm",
+					"method": "ObjectMethods/notPopupDate1.4dm",
 					"events": [
 						"onLoad"
 					],
@@ -1376,7 +1450,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 633,
+	"geometryStamp": 662,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
