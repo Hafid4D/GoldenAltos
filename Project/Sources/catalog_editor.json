@@ -807,10 +807,10 @@
 			"coordinates": {
 				"left": 4126,
 				"top": 0,
-				"width": 250,
-				"height": 675.33203125
+				"width": 256,
+				"height": 694.33203125
 			},
-			"displayable_fields_count": 30
+			"displayable_fields_count": 31
 		},
 		"PartData": {
 			"color": {
@@ -1054,6 +1054,21 @@
 				"height": 212.33203125
 			},
 			"displayable_fields_count": 8
+		},
+		"ProcessType": {
+			"color": {
+				"red": 160,
+				"green": 174,
+				"blue": 158,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 4425,
+				"top": 184,
+				"width": 171,
+				"height": 165.33203125
+			},
+			"displayable_fields_count": 5
 		},
 		"StepSpec": {
 			"color": {
@@ -1602,9 +1617,9 @@
 				"left": 941,
 				"top": 0,
 				"width": 204,
-				"height": 673.33203125
+				"height": 701.33203125
 			},
-			"displayable_fields_count": 30
+			"displayable_fields_count": 31
 		},
 		"ContactEvent": {
 			"color": {
@@ -1890,6 +1905,7 @@
 		}
 	},
 	"relations": {
+
 		"A7E6B757539D504F9A0435ABDA7EC2F4": {
 			"color": {
 				"red": 240,
@@ -1899,6 +1915,7 @@
 			}
 		},
 		"554984CA43DB454C960BF5F0CD2A61AA": {
+
 			"color": {
 				"red": 240,
 				"green": 240,

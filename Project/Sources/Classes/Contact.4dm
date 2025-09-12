@@ -23,12 +23,6 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.activateFavorite()
 	
 	
-	$entry.activateEvent("ContactEvent"; "UUID_Contact")
-	$entry.setAttributesToTrackInModificationEvent("firstName"; "lastName"; "code"; "title")
-	$entry.setEventOptions("CreateModifyEventIfNoTrackingAttribute")
-	
-	
-	
 	// MARK: - Views Definition
 	
 	
@@ -75,6 +69,6 @@ local Function cacheLoad()
 	End if 
 	
 	
-Function _loadAsCollection()->$companyTypes : Collection
+local Function _loadAsCollection()->$companyTypes : Collection
 	$companyTypes:=New collection:C1472("Supplier"; "Customer")
 	
