@@ -578,6 +578,14 @@
 		<field name="UUID_Specification" uuid="8A9C0B885868D54583D57B3105E9B3A8" type="10" store_as_UUID="true" never_null="true" id="3"/>
 		<primary_key field_name="UUID" field_uuid="AF2E663EC28F5E4399FC4407F055FCC2"/>
 	</table>
+	<table name="ProcessType" uuid="97D73747E1BC924A8B02AAF6C525C798" id="139">
+		<field name="UUID" uuid="BD7F2A41DD18FE47B8E8F4AD6C1EE62D" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="levelID" uuid="BF21383321732546902428505CAB4CB3" type="4" never_null="true" id="2"/>
+		<field name="code" uuid="EF6EA6AFF50A0A468763DB571F74B4AF" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="name" uuid="6354E42E14779643BC865F976168CC23" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="color" uuid="A254CAE9E24BD6418AAA63D0F786EA34" type="10" limiting_length="255" never_null="true" id="5"/>
+		<primary_key field_name="UUID" field_uuid="BD7F2A41DD18FE47B8E8F4AD6C1EE62D"/>
+	</table>
 	<table name="Location" uuid="CED40FBE513E6E4C840610BB17BAE1EE" id="44">
 		<field name="UUID" uuid="D244BC70CA183B4B80CDD231BD3B2B9C" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="name" uuid="D3BAD99580A29A44AF1530D36444B67C" type="10" limiting_length="255" never_null="true" id="2"/>
@@ -1207,8 +1215,14 @@
 		<field name="property" uuid="CC532A7D1109F548B5ED16D57A454170" type="4" never_null="true" id="20"/>
 		<field name="originalQty" uuid="1625C64236086A498DF44C365A2DAF9F" type="10" limiting_length="255" never_null="true" id="21"/>
 		<field name="availableQty" uuid="D23A44CD0E3D3C4D80014A343D5FC1E4" type="10" limiting_length="255" never_null="true" id="22"/>
-		<field name="UUID_Customer" uuid="82126B12FB764545B4300548927CEEA1" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="23"/>
-		<field name="UUID_Staff" uuid="64F93EDE8E74644C836516DCE3E22031" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="24"/>
+		<field name="UUID_Customer" uuid="82126B12FB764545B4300548927CEEA1" type="10" store_as_UUID="true" never_null="true" id="23"/>
+		<field name="UUID_Staff" uuid="64F93EDE8E74644C836516DCE3E22031" type="10" store_as_UUID="true" never_null="true" id="24"/>
+		<field name="units" uuid="D91BCBBEFEC4384FB19A84E61892D7C8" type="10" limiting_length="255" never_null="true" id="25"/>
+		<field name="location" uuid="F3AE3864A6FD7A40B17E26CE1EC0D250" type="10" limiting_length="255" never_null="true" id="26"/>
+		<field name="receivedBy" uuid="29208D9FBF94474C8184D2253B465F09" type="10" limiting_length="255" never_null="true" id="27"/>
+		<field name="initiallQty" uuid="8B45C11694E99947B58091EB4DADFEC9" type="4" never_null="true" id="28"/>
+		<field name="inventoryID" uuid="E8381EB585EABD48BAB29A323F1A3FCB" type="4" never_null="true" id="29"/>
+		<field name="code" uuid="45C08BCFD86E54439C1389BBAF582259" type="10" limiting_length="255" never_null="true" id="30"/>
 		<primary_key field_name="UUID" field_uuid="F8D9EC71ECF843689AA0D416563422DC"/>
 	</table>
 	<table name="InventoryPull" uuid="B0A466FC99334B96B5FE810BAE186DC4" id="127">
