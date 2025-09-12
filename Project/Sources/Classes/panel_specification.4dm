@@ -26,22 +26,6 @@ Function formMethod()
 	End if 
 	
 	
-Function redrawAndSetVisible()
-	//Adjusts the layout and visibility of form elements based on the current page and modification state
-	This:C1470.drawPup_category()
-	This:C1470.drawPup_departement()
-	
-	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
-	OBJECT SET VISIBLE:C603(*; "bSpecView"; Not:C34(Form:C1466.sfw.checkIsInModification()))
-	OBJECT SET VISIBLE:C603(*; "bSpecEdit"; Form:C1466.sfw.checkIsInModification())
-	
-	Use (Form:C1466.sfw.entry.panel.pages)
-		
-		Form:C1466.sfw.entry.panel.pages[1].label:="Documents ("+String:C10(Form:C1466.lb_documents.length)+")"
-		
-	End use 
-	Form:C1466.sfw.drawHTab()
-	
 Function drawPup_XXX()
 	//This function updates the dropdown by displaying the name
 	Form:C1466.sfw.drawButtonPup("pup_xxx"; $xxxName; "xxxx.png"; (Form:C1466.current_item.xxxx=Null:C1517))
@@ -49,6 +33,33 @@ Function drawPup_XXX()
 	
 Function pup_XXX()
 	//Create pop up menu
+	
+	
+Function redrawAndSetVisible()
+	//Adjusts the layout and visibility of form elements based on the current page and modification state
+	This:C1470.drawPup_category()
+	This:C1470.drawPup_departement()
+	
+	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	
+	Case of 
+			
+		: (FORM Get current page:C276(*)=2)
+			
+			OBJECT GET COORDINATES:C663(*; "lb_documents"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			$offset:=4
+			
+			OBJECT SET COORDINATES:C1248(*; "lb_documents"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			
+	End case 
+	OBJECT SET VISIBLE:C603(*; "btnDatePicker@"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "bSpecView"; Not:C34(Form:C1466.sfw.checkIsInModification()))
+	OBJECT SET VISIBLE:C603(*; "bSpecEdit"; Form:C1466.sfw.checkIsInModification())
+	
+	Use (Form:C1466.sfw.entry.panel.pages)
+		Form:C1466.sfw.entry.panel.pages[1].label:="Documents ("+String:C10(Form:C1466.lb_documents.length)+")"
+	End use 
+	Form:C1466.sfw.drawHTab()
 	
 	
 Function LoadAllTabs()
@@ -123,7 +134,9 @@ Function bActionDocument()
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_document"; $form)
+			
 			If (OK=1)
+				Form:C1466.lb_documents.push($form.details)
 				Form:C1466.current_item.documents.documentsCollection.push($form.details)
 				cs:C1710.panel_specification.me._activate_save_cancel_button()
 			End if 
@@ -131,49 +144,63 @@ Function bActionDocument()
 			
 		: ($choice="--modify")
 			
-			$form:=New object:C1471("details"; Form:C1466.current_item.documents.documentsCollection[Form:C1466.selectedDocumentPos-1])
+			$document:=OB Copy:C1225(Form:C1466.current_item.documents.documentsCollection[Form:C1466.selectedDocumentPos-1])
+			$form:=New object:C1471("details"; OB Copy:C1225(Form:C1466.current_item.documents.documentsCollection[Form:C1466.selectedDocumentPos-1]))
 			
 			$form.operation:="modify"
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_document"; $form)
 			
+			If (OK=1)
+				$blobHasBeenChanged:=JSON Stringify:C1217($document.blob)#JSON Stringify:C1217($form.details.blob)
+				
+				If ($blobHasBeenChanged)
+					Form:C1466.current_item.stmpApproval:=0  //!00-00-00!
+					Form:C1466.current_item.approver:=""
+					Form:C1466.current_item.isApproved:=False:C215
+					
+					
+				End if 
+				
+				Form:C1466.selectedDocument:=$form.details
+				cs:C1710.panel_specification.me._activate_save_cancel_button()
+			End if 
+			
 		: ($choice="--delete")
 			
 			$ok:=cs:C1710.sfw_dialog.me.confirm("Do you really want to delete this document? "; "Delete"; "CANCEL")
 			If ($ok)
-				
+				Form:C1466.lb_documents.remove(Form:C1466.selectedDocumentPos-1)
 				Form:C1466.current_item.documents.documentsCollection.remove(Form:C1466.selectedDocumentPos-1)
-				
+				cs:C1710.panel_specification.me._activate_save_cancel_button()
 				
 			End if 
-			
-			This:C1470.loadDocuments()
 			
 	End case 
 	
 	
 Function drawPup_category()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.current_item.drowPup("SpecCategory"; "categoryID"; "categoryID"; "pup_category")
+		Form:C1466.current_item.drowPup("DocumentCategory"; "UUID"; "UUID_DocumentCategory"; "pup_category")
 	End if 
 	
 	
 Function pup_category()
 	//Create pop up menu
-	Form:C1466.current_item.pup("specCategories"; "SpecCategory"; "categoryID"; "categoryID")
+	Form:C1466.current_item.pup("specCategories"; "DocumentCategory"; "UUID"; "UUID_DocumentCategory")
 	This:C1470.drawPup_category()
 	
 	
 Function drawPup_departement()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.current_item.drowPup("SpecControllingDept"; "departmentID"; "departmentID"; "pup_departement")
+		Form:C1466.current_item.drowPup("ControllingDepartment"; "UUID"; "UUID_ControllingDepartment"; "pup_departement")
 	End if 
 	
 	
 Function pup_departement()
-	Form:C1466.current_item.publishedDocumentBlob  //Create pop up menu
-	Form:C1466.current_item.pup("specDepartements"; "SpecControllingDept"; "departmentID"; "departmentID")
+	//Create pop up menu
+	Form:C1466.current_item.pup("specDepartements"; "ControllingDepartment"; "UUID"; "UUID_ControllingDepartment")
 	This:C1470.drawPup_departement()
 	
 	
@@ -191,6 +218,26 @@ Function bSpecEdit()
 		Form:C1466.current_item.publishedDocumentBlob:=$form.details.blob
 		cs:C1710.panel_specification.me._activate_save_cancel_button()
 	End if 
+	
+	
+Function btnDatePicker($object; $attribut)
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		$form:=New object:C1471
+		$form.date:=$object[$attribut]
+		
+		OBJECT GET COORDINATES:C663(Self:C308->; $left; $top; $rigth; $bottom)
+		CONVERT COORDINATES:C1365($left; $bottom; XY Current form:K27:5; XY Main window:K27:8)
+		Open window:C153($left; $bottom; $left+285; $bottom+210; Movable dialog box:K34:7; "calendar")
+		DIALOG:C40("_ga_calendar"; $form)
+		
+		If (OK=1)
+			$object[$attribut]:=$form.calendar.display.date
+			cs:C1710.panel_specification.me._activate_save_cancel_button()
+		End if 
+		
+	End if 
+	
 	
 	
 	

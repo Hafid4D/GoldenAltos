@@ -17,5 +17,5 @@ local Function cacheLoad()
 	
 	
 Function _loadAsCollection()->$customerStatusColl : Collection
-	$customerStatusColl:=This:C1470.all().toCollection("UUID, statusID,name, color").orderBy("statusID")
+	$customerStatusColl:=This:C1470.all().toCollection("UUID, levelID,name, color").orderBy("name")
 	

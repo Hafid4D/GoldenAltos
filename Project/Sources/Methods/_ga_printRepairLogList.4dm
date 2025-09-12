@@ -12,21 +12,15 @@ If (Form:C1466.sfw.lb_items.length>0)
 	
 	var $identEntry : Text:=Form:C1466.sfw.view.ident
 	var $context : Object
-	var $divisions : Collection
 	
 	$context:=New object:C1471()
 	
 	$file:=Folder:C1567(fk resources folder:K87:11).file("4DWriteProPrintTemplates/repairLogsListPrint.4wp")
 	$template:=WP Import document:C1318($file.platformPath)
-	$divisions:=New collection:C1472()
-	For each ($item; Form:C1466.sfw.lb_items)
-		If (Not:C34(Undefined:C82($item.equipment)))
-			$divisions.push(ds:C1482.Division.query("divisionID =:1"; $item.equipment.divisionID).first().name)
-		End if 
-	End for each 
+	
 	
 	$context.length:=Form:C1466.sfw.lb_items.length
-	$context.division:=$divisions.distinct().join(","; ck ignore null or empty:K85:5)
+	$context.division:=_ga_getListFiltersValues("Division"; "UUID")
 	$context.user:=Current machine:C483
 	
 	$startDate:=Storage:C1525.cache.startDate

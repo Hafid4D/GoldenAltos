@@ -11,7 +11,6 @@ Purpose : This method export the items on Spec Control View List to an .xls docu
 
 var $eSetting : cs:C1710.sfw_SettingEntity
 var $identEntry : Text:=Form:C1466.sfw.entry.ident
-var $identView : Text:=Form:C1466.sfw.view.ident
 var $entity : 4D:C1709.Entity
 var $info : Object
 var $wpBlob : 4D:C1709.Blob
@@ -24,14 +23,11 @@ var $header; $separator_col; $separator_line : Text
 
 
 $listOfHeaders:=New collection:C1472("spec"; "revision"; "extension"; "title"; "revisionDate"; \
-"reviewDate"; "remark"; "categoryID"; "departmentID")
+"reviewDate"; "remark"; "category"; "department")
 $headers:=New collection:C1472()
 $separator_col:=Char:C90(Tab:K15:37)
 $separator_line:=Char:C90(Carriage return:K15:38)
 
-If ($identView="main")
-	$identView:="Continuous Improvement Programs"
-End if 
 
 $file:=Create document:C266(""; "xls")
 
@@ -40,11 +36,10 @@ If (OK=1)
 	$export.records:=New collection:C1472
 	
 	$dataclass:=Form:C1466.sfw.entry.dataclass
-	If ($identView="Continuous Improvement Programs")
-		$specifications:=ds:C1482[$dataclass].all()
-	Else 
-		$specifications:=ds:C1482[$dataclass][$identView]()
-	End if 
+	
+	$specifications:=Form:C1466.sfw.lb_items
+	
+	
 	For each ($entity; $specifications)
 		$oEntity:=New object:C1471
 		For each ($attribute; ds:C1482[$dataclass])
@@ -83,9 +78,9 @@ If (OK=1)
 				$headerName:="Last  Review date"
 			: ($headers[$i]="remark")
 				$headerName:="remarks"
-			: ($headers[$i]="categoryID")
+			: ($headers[$i]="category")
 				$headerName:="Document Type"
-			: ($headers[$i]="departmentID")
+			: ($headers[$i]="department")
 				$headerName:="Controlling Dept"
 			Else 
 				$headerName:=$headers[$i]
@@ -105,14 +100,13 @@ If (OK=1)
 				
 				Case of 
 					: ($headerName="UUID")
-					: ($headerName="categoryID")
-						$category:=ds:C1482.SpecCategory.query("categoryID=:1"; $specification_e["categoryID"]).first()
-						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($category.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
+					: ($headerName="category")
 						
-					: ($headerName="departmentID")
-						$departement:=ds:C1482.SpecControllingDept.query("departmentID=:1"; $specification_e["departmentID"]).first()
-						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($departement.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
+						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($specification_e.category.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
 						
+					: ($headerName="department")
+						
+						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($specification_e.departement.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
 						
 					Else 
 						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($specification_e[$headerName]); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)

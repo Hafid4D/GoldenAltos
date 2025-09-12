@@ -16,5 +16,5 @@ local Function cacheLoad()
 	
 	
 Function _loadAsCollection()->$ImprovementFactors : Collection
-	$ImprovementFactors:=This:C1470.all().toCollection("UUID, factorID,name").orderBy("factorID")
+	$ImprovementFactors:=This:C1470.all().toCollection("UUID, levelID,name").orderBy("levelID")
 	

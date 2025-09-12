@@ -10,7 +10,12 @@ Function formMethod()
 			
 			Form:C1466.calendar:=New object:C1471
 			Form:C1466.calendar.display:=New object:C1471
-			Form:C1466.calendar.display.date:=Form:C1466.date
+			If (Form:C1466.date#!00-00-00!)
+				Form:C1466.calendar.display.date:=Form:C1466.date
+			Else 
+				Form:C1466.calendar.display.date:=Current date:C33(*)
+			End if 
+			
 			This:C1470.calendar_init()
 			
 		: (FORM Event:C1606.code=On Clicked:K2:4)
@@ -150,7 +155,7 @@ Function pup_displayYear()
 	$menu:=Create menu:C408
 	$refmenus.push($menu)
 	$yearToday:=Year of:C25(Current date:C33)
-	For ($year; $yearToday-25; $yearToday+10)
+	For ($year; Form:C1466.calendar.display.year-10; Form:C1466.calendar.display.year+10)  //($year; $yearToday-10; $yearToday+10)
 		APPEND MENU ITEM:C411($menu; String:C10($year))
 		$ref:=String:C10($year)
 		SET MENU ITEM PARAMETER:C1004($menu; -1; $ref)

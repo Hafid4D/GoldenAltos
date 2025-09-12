@@ -45,7 +45,12 @@ For ($i; 0; Form:C1466.filters.length-1)
 				Else 
 					
 					For ($j; 0; $allValues.length-1)
-						$valueName:=ds:C1482[$dataClass].query($field+"= :1"; $allValues[$j]).first().name
+						If (Count parameters:C259>2)
+							$valueName:=ds:C1482[$dataClass].query($field+" ==:1"; $allValues[$j]).first()[$3]
+							
+						Else 
+							ds:C1482[$dataClass].query($field+" ==:1"; $allValues[$j]).first().name
+						End if 
 						If ($j=0)
 							$value:=$valueName
 							

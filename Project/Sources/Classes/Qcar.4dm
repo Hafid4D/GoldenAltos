@@ -2,7 +2,7 @@ Class extends DataClass
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
-	$entry:=cs:C1710.sfw_definitionEntry.new("qcar"; ["qualityAssistance"]; "QCARS")
+	$entry:=cs:C1710.sfw_definitionEntry.new("qcar"; ["qualityAssurance"]; "QCARS")
 	$entry.setDataclass("Qcar")
 	$entry.setDisplayOrder(-400)
 	$entry.setIcon("image/entry/qcar-white-50x50.png")
@@ -16,6 +16,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanel("panel_qcar")
 	$entry.setPanelPage(1; ""; "Main")
 	$entry.setPanelPage(2; ""; "8D CA Report")
+	$entry.setPanelPage(3; ""; "Objective Evidence")
 	
 	$entry.setLBItemsColumn("qcarNumber"; "#"; "width:40"; "center")
 	$entry.setLBItemsColumn("customer.name"; "Customer"; "width:200")

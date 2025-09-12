@@ -18,7 +18,7 @@ local Function cacheLoad()
 	
 	
 Function _loadAsCollection()->$divisions : Collection
-	$divisions:=This:C1470.all().toCollection("UUID,divisionID,name").orderBy("name")
+	$divisions:=This:C1470.all().toCollection("UUID,levelID,name").orderBy("name")
 	
 	
 	

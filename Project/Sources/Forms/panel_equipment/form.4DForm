@@ -36,16 +36,17 @@
 				"label_0_1": {
 					"type": "text",
 					"top": 12,
-					"left": 12,
-					"width": 90,
+					"left": 8,
+					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "ID :"
+					"text": "ID :",
+					"textAlign": "right"
 				},
 				"entryField_assignedID": {
 					"type": "input",
 					"top": 12,
-					"left": 110,
+					"left": 128,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.assignedID",
@@ -58,16 +59,17 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"label_status": {
 					"type": "text",
 					"top": 12,
-					"left": 613,
-					"width": 90,
+					"left": 618,
+					"width": 80,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Status :"
+					"text": "Status :",
+					"textAlign": "right"
 				},
 				"entryField_status": {
 					"type": "input",
@@ -86,32 +88,34 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"method": "ObjectMethods/entryField_status.4dm"
 				},
 				"label_0_4": {
 					"type": "text",
 					"top": 12,
-					"left": 315,
-					"width": 90,
+					"left": 328,
+					"width": 80,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Owner/Site : "
+					"text": "Owner/Site : ",
+					"textAlign": "right"
 				},
 				"label_0_5": {
 					"type": "text",
 					"top": 66,
-					"left": 12,
-					"width": 90,
+					"left": 8,
+					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Serial Number :"
+					"text": "Serial Number :",
+					"textAlign": "right"
 				},
 				"entryField_serialNumber": {
 					"type": "input",
 					"top": 66,
-					"left": 110,
+					"left": 128,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.serialNumber",
@@ -124,22 +128,23 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"label_model": {
 					"type": "text",
 					"top": 39,
-					"left": 12,
-					"width": 90,
+					"left": 8,
+					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Model :",
-					"bottom": 56
+					"bottom": 56,
+					"textAlign": "right"
 				},
 				"entryField_model": {
 					"type": "input",
 					"top": 39,
-					"left": 110,
+					"left": 128,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.model",
@@ -152,46 +157,34 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"bottom": 56
 				},
 				"label_location": {
 					"type": "text",
 					"top": 39,
-					"left": 315,
-					"width": 90,
+					"left": 328,
+					"width": 80,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Location :"
+					"text": "Location :",
+					"textAlign": "right"
 				},
 				"label_type": {
 					"type": "text",
 					"top": 66,
-					"left": 315,
-					"width": 90,
+					"left": 328,
+					"width": 80,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Type :"
-				},
-				"entryField_engg": {
-					"type": "checkbox",
-					"text": "Engineering Use Only (NPU)",
-					"top": 12,
-					"left": 918,
-					"width": 190,
-					"height": 17,
-					"events": [
-						"onClick"
-					],
-					"dataSource": "Form:C1466.current_item.engg",
-					"fontWeight": "bold",
-					"dataSourceTypeHint": "boolean"
+					"text": "Type :",
+					"textAlign": "right"
 				},
 				"pup_equipmentType": {
 					"type": "button",
 					"top": 63,
-					"left": 413,
+					"left": 418,
 					"width": 190,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -212,7 +205,7 @@
 				"pup_equipmentLocation": {
 					"type": "button",
 					"top": 36,
-					"left": 413,
+					"left": 418,
 					"width": 190,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -233,7 +226,7 @@
 				"pup_equipmentDivision": {
 					"type": "button",
 					"top": 9,
-					"left": 413,
+					"left": 418,
 					"width": 190,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -249,41 +242,18 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"right": 603,
+					"right": 608,
 					"fontWeight": "bold"
-				},
-				"Rectangle": {
-					"type": "rectangle",
-					"top": 114,
-					"left": 1,
-					"width": 5000,
-					"height": 704,
-					"fill": "#B1CFDE",
-					"strokeWidth": 0,
-					"stroke": "#FFFFFF"
-				},
-				"entryField_down": {
-					"type": "checkbox",
-					"text": "Down",
-					"top": 39,
-					"left": 918,
-					"width": 190,
-					"height": 17,
-					"events": [
-						"onClick"
-					],
-					"dataSource": "Form:C1466.current_item.down",
-					"fontWeight": "bold",
-					"dataSourceTypeHint": "boolean"
 				},
 				"label_manufacturer": {
 					"type": "text",
 					"top": 39,
-					"left": 613,
-					"width": 90,
+					"left": 618,
+					"width": 80,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Manufacturer :"
+					"text": "Manufacturer :",
+					"textAlign": "right"
 				},
 				"entryField_manufacturer": {
 					"type": "input",
@@ -301,78 +271,18 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left"
 				},
-				"label_testerType": {
-					"type": "text",
-					"top": 66,
-					"left": 613,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Tester type :"
-				},
-				"entryField_testerType": {
-					"type": "input",
-					"top": 66,
-					"left": 708,
-					"width": 190,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.testerType",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"textAlign": "left"
-				},
-				"entryField_calibrationNotRequired": {
-					"type": "checkbox",
-					"text": "Calibration Not Required",
-					"top": 66,
-					"left": 918,
-					"width": 190,
-					"height": 17,
-					"events": [
-						"onClick"
-					],
-					"dataSource": "Form:C1466.current_item.calibrationNotRequired",
-					"fontWeight": "bold",
-					"dataSourceTypeHint": "boolean"
-				},
-				"entryField_notAtSite": {
-					"type": "checkbox",
-					"text": "Not at site",
-					"top": 12,
-					"left": 1128,
-					"width": 190,
-					"height": 17,
-					"events": [
-						"onClick"
-					],
-					"dataSource": "Form:C1466.current_item.notAtSite",
-					"fontWeight": "bold",
-					"dataSourceTypeHint": "boolean"
-				},
-				"entryField_pmNotRequired": {
-					"type": "checkbox",
-					"text": "PM Not Required",
-					"top": 39,
-					"left": 1128,
-					"width": 190,
-					"height": 17,
-					"events": [
-						"onClick"
-					],
-					"dataSource": "Form:C1466.current_item.pmNotRequired",
-					"fontWeight": "bold",
-					"dataSourceTypeHint": "boolean"
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 113,
+					"left": 0,
+					"width": 5000,
+					"height": 704,
+					"fill": "#B1CFDE",
+					"strokeWidth": 2,
+					"stroke": "#FFFFFF"
 				}
 			}
 		},
@@ -382,8 +292,38 @@
 					"type": "rectangle",
 					"top": 114,
 					"left": 0,
-					"width": 2192,
-					"height": 700,
+					"width": 341,
+					"height": 176,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent"
+				},
+				"main_bkgd1": {
+					"type": "rectangle",
+					"top": 289,
+					"left": 0,
+					"width": 341,
+					"height": 600,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent"
+				},
+				"main_bkgd2": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 342,
+					"width": 1500,
+					"height": 176,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent"
+				},
+				"main_bkgd3": {
+					"type": "rectangle",
+					"top": 289,
+					"left": 342,
+					"width": 1500,
+					"height": 600,
 					"sizingX": "grow",
 					"fill": "#E4E4E4",
 					"stroke": "transparent"
@@ -392,7 +332,7 @@
 					"type": "rectangle",
 					"top": 114,
 					"left": 0,
-					"width": 480,
+					"width": 341,
 					"height": 30,
 					"sizingX": "grow",
 					"fill": "#A2C6D8",
@@ -409,9 +349,9 @@
 				},
 				"shipping_bkgd1": {
 					"type": "rectangle",
-					"top": 332,
+					"top": 289,
 					"left": 0,
-					"width": 480,
+					"width": 341,
 					"height": 30,
 					"sizingX": "grow",
 					"fill": "#A2C6D8",
@@ -420,7 +360,7 @@
 				"Text2": {
 					"type": "text",
 					"text": "PM data",
-					"top": 339,
+					"top": 296,
 					"left": 8,
 					"width": 119,
 					"height": 16,
@@ -428,17 +368,18 @@
 				},
 				"label_lastCalDate": {
 					"type": "text",
-					"top": 193,
+					"top": 181,
 					"left": 8,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Last Cal Date : "
+					"text": "Last Cal Date : ",
+					"textAlign": "right"
 				},
 				"entryField_lastCalDate": {
 					"type": "input",
-					"top": 193,
-					"left": 145,
+					"top": 181,
+					"left": 128,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.lastCalDate",
@@ -451,24 +392,24 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
-					"dataSourceTypeHint": "date",
-					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
+					"dataSourceTypeHint": "date"
 				},
 				"label_pmDueDate": {
 					"type": "text",
-					"top": 377,
+					"top": 329,
 					"left": 8,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Next PM Date : "
+					"text": "Next PM Date : ",
+					"textAlign": "right"
 				},
 				"entryField_nextCalDate": {
 					"type": "input",
-					"top": 161,
-					"left": 145,
+					"top": 154,
+					"left": 128,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.nextCalDate",
@@ -481,24 +422,25 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"dataSourceTypeHint": "date",
-					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
+					"method": "ObjectMethods/entryField_nextCalDate.4dm"
 				},
 				"label_calDue": {
 					"type": "text",
-					"top": 161,
+					"top": 154,
 					"left": 8,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Next Cal Date : "
+					"text": "Next Cal Date : ",
+					"textAlign": "right"
 				},
 				"entryField_nextPMDate": {
 					"type": "input",
-					"top": 382,
-					"left": 145,
+					"top": 329,
+					"left": 128,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.nextPMDate",
@@ -511,24 +453,24 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
-					"dataSourceTypeHint": "date",
-					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
+					"dataSourceTypeHint": "date"
 				},
 				"label_lastPMDate": {
 					"type": "text",
-					"top": 409,
+					"top": 356,
 					"left": 8,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Last PM Date : "
+					"text": "Last PM Date : ",
+					"textAlign": "right"
 				},
 				"entryField_lastPMDate": {
 					"type": "input",
-					"top": 414,
-					"left": 145,
+					"top": 356,
+					"left": 128,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.lastPMDate",
@@ -541,24 +483,24 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
-					"dataSourceTypeHint": "date",
-					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
+					"dataSourceTypeHint": "date"
 				},
 				"label_calInDays": {
 					"type": "text",
-					"top": 257,
+					"top": 235,
 					"left": 8,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Cal interval in days : "
+					"text": "Cal interval in days : ",
+					"textAlign": "right"
 				},
 				"entryField_calInterval": {
 					"type": "input",
-					"top": 257,
-					"left": 145,
+					"top": 235,
+					"left": 128,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.calInterval",
@@ -571,19 +513,20 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
-					"dataSourceTypeHint": "date"
+					"dataSourceTypeHint": "text",
+					"method": "ObjectMethods/entryField_calInterval.4dm"
 				},
 				"entryField_calTech": {
 					"type": "input",
-					"top": 225,
-					"left": 145,
+					"top": 208,
+					"left": 128,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.calTech",
 					"focusable": false,
-					"enterable": false,
+					"enterable": true,
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
@@ -591,37 +534,40 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
-					"dataSourceTypeHint": "date"
+					"dataSourceTypeHint": "text",
+					"method": "ObjectMethods/entryField_calTech.4dm"
 				},
 				"label_calBy": {
 					"type": "text",
-					"top": 225,
+					"top": 208,
 					"left": 8,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Calibrated by : "
+					"text": "Calibrated by : ",
+					"textAlign": "right"
 				},
 				"label_calInDays1": {
 					"type": "text",
-					"top": 478,
+					"top": 410,
 					"left": 8,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "PM interval in days : "
+					"text": "PM interval in days : ",
+					"textAlign": "right"
 				},
 				"entryField_pmInterval": {
 					"type": "input",
-					"top": 478,
-					"left": 145,
+					"top": 410,
+					"left": 128,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.pmInterval",
 					"focusable": false,
-					"enterable": false,
+					"enterable": true,
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
@@ -629,19 +575,20 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
-					"dataSourceTypeHint": "date"
+					"dataSourceTypeHint": "date",
+					"method": "ObjectMethods/entryField_pmInterval.4dm"
 				},
 				"entryField_pmTech": {
 					"type": "input",
-					"top": 446,
-					"left": 145,
+					"top": 383,
+					"left": 128,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.pmTech",
 					"focusable": false,
-					"enterable": false,
+					"enterable": true,
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
@@ -649,32 +596,25 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
-					"dataSourceTypeHint": "date"
+					"dataSourceTypeHint": "text",
+					"method": "ObjectMethods/entryField_pmTech.4dm"
 				},
 				"label_calBy1": {
 					"type": "text",
-					"top": 446,
+					"top": 383,
 					"left": 8,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "PM by : "
-				},
-				"label_calDocument": {
-					"type": "text",
-					"top": 289,
-					"left": 8,
-					"width": 110,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Cal Document : "
+					"text": "PM by : ",
+					"textAlign": "right"
 				},
 				"entryField_calDocument": {
 					"type": "input",
-					"top": 289,
-					"left": 145,
+					"top": 262,
+					"left": 128,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.calDocument",
@@ -687,28 +627,29 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"dataSourceTypeHint": "date"
 				},
 				"label_calDocument1": {
 					"type": "text",
-					"top": 510,
+					"top": 437,
 					"left": 8,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "PM Document : "
+					"text": "PM Document : ",
+					"textAlign": "right"
 				},
 				"entryField_pmDocument1": {
 					"type": "input",
-					"top": 510,
-					"left": 145,
+					"top": 437,
+					"left": 128,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.pmDocument",
 					"focusable": false,
-					"enterable": false,
+					"enterable": true,
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
@@ -716,44 +657,26 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
-					"dataSourceTypeHint": "date"
+					"dataSourceTypeHint": "text",
+					"method": "ObjectMethods/entryField_pmDocument1.4dm"
 				},
 				"label_calDocument2": {
 					"type": "text",
-					"top": 289,
+					"top": 262,
 					"left": 8,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Cal Document : "
-				},
-				"entryField_calDocument1": {
-					"type": "input",
-					"top": 289,
-					"left": 145,
-					"width": 190,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.calDocument",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"textAlign": "left",
-					"dataSourceTypeHint": "date"
+					"text": "Cal Document : ",
+					"textAlign": "right"
 				},
 				"shipping_bkgd2": {
 					"type": "rectangle",
-					"top": 552,
-					"left": 0,
-					"width": 480,
+					"top": 114,
+					"left": 342,
+					"width": 1500,
 					"height": 30,
 					"sizingX": "grow",
 					"fill": "#A2C6D8",
@@ -761,25 +684,17 @@
 				},
 				"Text3": {
 					"type": "text",
-					"text": "Status history",
-					"top": 559,
-					"left": 8,
-					"width": 119,
+					"text": "Equipment general informations",
+					"top": 121,
+					"left": 350,
+					"width": 200,
 					"height": 16,
 					"fontWeight": "bold"
 				},
-				"statusHistory": {
-					"type": "text",
-					"text": "",
-					"top": 611,
-					"left": 19,
-					"width": 451,
-					"height": 120
-				},
 				"PopupDate1": {
 					"type": "subform",
-					"top": 161,
-					"left": 316,
+					"top": 154,
+					"left": 299,
 					"width": 19,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.nextCalDate",
@@ -792,15 +707,16 @@
 					"printFrame": "variable",
 					"method": "ObjectMethods/PopupDate1.4dm",
 					"events": [
-						"onLoad"
+						"onLoad",
+						"onDataChange"
 					],
 					"focusable": true,
 					"borderStyle": "none"
 				},
 				"PopupDate2": {
 					"type": "subform",
-					"top": 193,
-					"left": 316,
+					"top": 181,
+					"left": 299,
 					"width": 19,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.lastCalDate",
@@ -813,15 +729,16 @@
 					"printFrame": "variable",
 					"method": "ObjectMethods/PopupDate2.4dm",
 					"events": [
-						"onLoad"
+						"onLoad",
+						"onDataChange"
 					],
 					"focusable": true,
 					"borderStyle": "none"
 				},
 				"PopupDate3": {
 					"type": "subform",
-					"top": 382,
-					"left": 316,
+					"top": 329,
+					"left": 299,
 					"width": 19,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.nextPMDate",
@@ -834,15 +751,16 @@
 					"printFrame": "variable",
 					"method": "ObjectMethods/PopupDate3.4dm",
 					"events": [
-						"onLoad"
+						"onLoad",
+						"onDataChange"
 					],
 					"focusable": true,
 					"borderStyle": "none"
 				},
 				"PopupDate4": {
 					"type": "subform",
-					"top": 414,
-					"left": 316,
+					"top": 356,
+					"left": 299,
 					"width": 19,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.lastPMDate",
@@ -855,10 +773,112 @@
 					"printFrame": "variable",
 					"method": "ObjectMethods/PopupDate4.4dm",
 					"events": [
-						"onLoad"
+						"onLoad",
+						"onDataChange"
 					],
 					"focusable": true,
 					"borderStyle": "none"
+				},
+				"shipping_bkgd3": {
+					"type": "rectangle",
+					"top": 289,
+					"left": 342,
+					"width": 1500,
+					"height": 30,
+					"sizingX": "grow",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"Text4": {
+					"type": "text",
+					"text": "Status history",
+					"top": 296,
+					"left": 350,
+					"width": 119,
+					"height": 16,
+					"fontWeight": "bold"
+				},
+				"entryField_engg": {
+					"type": "checkbox",
+					"text": "Engineering Use Only (NPU)",
+					"top": 151,
+					"left": 350,
+					"width": 190,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.current_item.engg",
+					"fontWeight": "normal",
+					"dataSourceTypeHint": "boolean"
+				},
+				"entryField_down": {
+					"type": "checkbox",
+					"text": "Down",
+					"top": 178,
+					"left": 350,
+					"width": 190,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.current_item.down",
+					"fontWeight": "normal",
+					"dataSourceTypeHint": "boolean"
+				},
+				"entryField_calibrationNotRequired": {
+					"type": "checkbox",
+					"text": "Calibration Not Required",
+					"top": 205,
+					"left": 350,
+					"width": 190,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.current_item.calibrationNotRequired",
+					"fontWeight": "normal",
+					"dataSourceTypeHint": "boolean"
+				},
+				"entryField_notAtSite": {
+					"type": "checkbox",
+					"text": "Not at site",
+					"top": 232,
+					"left": 350,
+					"width": 190,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.current_item.notAtSite",
+					"fontWeight": "normal",
+					"dataSourceTypeHint": "boolean"
+				},
+				"entryField_pmNotRequired": {
+					"type": "checkbox",
+					"text": "PM Not Required",
+					"top": 259,
+					"left": 350,
+					"width": 190,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.current_item.pmNotRequired",
+					"fontWeight": "normal",
+					"dataSourceTypeHint": "boolean"
+				},
+				"entryField_statusHistory": {
+					"type": "input",
+					"left": 350,
+					"top": 329,
+					"width": 548,
+					"height": 125,
+					"right": 898,
+					"bottom": 454,
+					"dataSource": "Form:C1466.current_item.statusHistory",
+					"scrollbarVertical": "automatic",
+					"fontWeight": "normal"
 				}
 			}
 		},
@@ -868,7 +888,7 @@
 					"type": "listbox",
 					"left": 132,
 					"top": 114,
-					"width": 1443,
+					"width": 800,
 					"height": 700,
 					"events": [
 						"onClick",
@@ -889,9 +909,11 @@
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
 					"headerHeight": "2em",
-					"right": 1575,
+					"right": 932,
 					"scrollbarHorizontal": "hidden",
 					"hideFocusRing": false,
+					"sizingX": "grow",
+					"sizingY": "grow",
 					"columns": [
 						{
 							"header": {
@@ -903,7 +925,8 @@
 							"footer": {
 								"name": "Footer5"
 							},
-							"dataSource": "This:C1470.reportID"
+							"dataSource": "This:C1470.reportID",
+							"resizable": false
 						},
 						{
 							"header": {
@@ -917,9 +940,10 @@
 							},
 							"dataSource": "This:C1470.problem",
 							"dataSourceTypeHint": "text",
-							"width": 379,
+							"width": 311,
 							"truncateMode": "withEllipsis",
-							"wordwrap": "none"
+							"wordwrap": "none",
+							"resizable": false
 						},
 						{
 							"header": {
@@ -932,7 +956,7 @@
 								"name": "Footer7"
 							},
 							"dataSource": "This:C1470.fix",
-							"width": 453,
+							"width": 231,
 							"truncateMode": "withEllipsis",
 							"wordwrap": "none"
 						},
@@ -947,7 +971,8 @@
 								"name": "Footer11"
 							},
 							"dataSource": "This:C1470.reportDate",
-							"dataSourceTypeHint": "date"
+							"dataSourceTypeHint": "date",
+							"resizable": false
 						}
 					]
 				},
@@ -976,7 +1001,7 @@
 					"type": "listbox",
 					"left": 132,
 					"top": 114,
-					"width": 1443,
+					"width": 800,
 					"height": 700,
 					"events": [
 						"onClick",
@@ -997,7 +1022,7 @@
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
 					"headerHeight": "2em",
-					"right": 1575,
+					"right": 932,
 					"scrollbarHorizontal": "automatic",
 					"hideFocusRing": false,
 					"sizingX": "grow",
@@ -1016,7 +1041,8 @@
 								"name": "Footer1"
 							},
 							"dataSource": "This:C1470.code",
-							"width": 59
+							"width": 134,
+							"resizable": false
 						},
 						{
 							"header": {
@@ -1031,9 +1057,10 @@
 							},
 							"dataSource": "This:C1470.sourcePath",
 							"dataSourceTypeHint": "text",
-							"width": 198,
+							"width": 172,
 							"truncateMode": "withEllipsis",
-							"wordwrap": "none"
+							"wordwrap": "none",
+							"resizable": false
 						},
 						{
 							"header": {
@@ -1047,10 +1074,11 @@
 								"name": "Footer3"
 							},
 							"dataSource": "This:C1470.creationDateTime",
-							"width": 153,
+							"width": 162,
 							"truncateMode": "withEllipsis",
 							"wordwrap": "none",
-							"textAlign": "right"
+							"textAlign": "right",
+							"resizable": false
 						},
 						{
 							"header": {
@@ -1065,7 +1093,7 @@
 							},
 							"dataSource": "This:C1470.description",
 							"dataSourceTypeHint": "text",
-							"width": 224
+							"width": 253
 						},
 						{
 							"header": {
@@ -1078,7 +1106,9 @@
 							"dataSource": "This:C1470.isApproved",
 							"footer": {
 								"name": "Footer8"
-							}
+							},
+							"width": 79,
+							"resizable": false
 						}
 					]
 				},
@@ -1103,7 +1133,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 514,
+	"geometryStamp": 736,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

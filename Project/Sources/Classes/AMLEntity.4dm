@@ -1,7 +1,14 @@
 Class extends Entity
 
 
-
+local Function get approvalDate()->$approvalDate : Date
+	$approvalDate:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpApproval; True:C214)
+	
+local Function set approvalDate($approvalDate : Date)
+	This:C1470.stmpApproval:=cs:C1710.sfw_stmp.me.build($approvalDate)
+	
+	
+	
 local Function rebuildAddress()->$address : Object
 	
 	
@@ -10,7 +17,7 @@ local Function rebuildAddress()->$address : Object
 		If (Form:C1466.current_item.supplier#Null:C1517)
 			
 			If (OB Is defined:C1231(Form:C1466.current_item.supplier.contactDetails; "addresses"))
-				$address:=Form:C1466.current_item.supplier.contactDetails.addresses.query("type = :1"; "main").first()
+				$address:=Form:C1466.current_item.supplier.contactDetails.addresses.query("type =:1"; "main").first()
 			End if 
 		End if 
 		Form:C1466.subFormAddress.address:=$address
@@ -21,7 +28,7 @@ local Function rebuildAddress()->$address : Object
 	
 local Function drowPup($dataClass; $queryField; $queryValue; $pupName)
 	
-	$entity:=ds:C1482[$dataClass].query($queryField+"= :1"; Form:C1466.current_item[$queryValue]).first() || New object:C1471()
+	$entity:=ds:C1482[$dataClass].query($queryField+" =:1"; Form:C1466.current_item[$queryValue]).first() || New object:C1471()
 	$name:=$entity.name
 	If ($name=Null:C1517)
 		$name:=""
@@ -30,7 +37,7 @@ local Function drowPup($dataClass; $queryField; $queryValue; $pupName)
 		$color:=cs:C1710.sfw_htmlColor.me.getName($entity.color)
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
 	Else 
-		$pathIcon:=""
+		$pathIcon:="sfw/colors/GhostWhite-circle.png"
 	End if 
 	Form:C1466.sfw.drawButtonPup($pupName; $name; $pathIcon; ($entity=Null:C1517))
 	

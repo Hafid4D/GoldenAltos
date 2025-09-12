@@ -25,6 +25,13 @@ Function formMethod()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
+	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	OBJECT GET COORDINATES:C663(*; "subFormAddress"; $g; $h; $d; $b)
+	OBJECT SET COORDINATES:C1248(*; "subFormAddress"; $g; $h; $widthSubform-10; $b)
+	
+	OBJECT GET COORDINATES:C663(*; "entryField_comment"; $g; $h; $d; $b)
+	OBJECT SET COORDINATES:C1248(*; "entryField_comment"; $g; $h; $widthSubform-30; $b)
+	
 	
 	This:C1470.supplierAddressDetails()
 	This:C1470.drawPup_approvedBy()
@@ -72,7 +79,6 @@ Function pup_supplier()
 		
 		$form:=New object:C1471(\
 			"colName"; "name"; \
-			"lb_items"; ds:C1482.Supplier.all(); \
 			"allData"; ds:C1482.Supplier.all(); \
 			"dataclass"; "Supplier"\
 			)
@@ -115,7 +121,6 @@ Function pup_approvedBy()
 		
 		$form:=New object:C1471(\
 			"colName"; "code"; \
-			"lb_items"; ds:C1482.Staff.all(); \
 			"allData"; ds:C1482.Staff.all(); \
 			"dataclass"; "Staff"\
 			)
@@ -152,12 +157,11 @@ Function pup_empCode()
 	
 	If (Form:C1466.sfw.checkIsInModification())
 		
-		OBJECT GET COORDINATES:C663(*; "pup_approvedBy"; $l; $t; $r; $b)
+		OBJECT GET COORDINATES:C663(*; "pup_empCode"; $l; $t; $r; $b)
 		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
 		
 		$form:=New object:C1471(\
 			"colName"; "code"; \
-			"lb_items"; ds:C1482.Staff.all(); \
 			"allData"; ds:C1482.Staff.all(); \
 			"dataclass"; "Staff"\
 			)
@@ -177,37 +181,37 @@ Function pup_empCode()
 	
 Function drawPup_inventoryUnit()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.current_item.drowPup("Units"; "unitID"; "inventoryUnits"; "pup_inventoryUnit")
+		Form:C1466.current_item.drowPup("Units"; "levelID"; "inventoryUnits"; "pup_inventoryUnit")
 	End if 
 	
 	
 Function pup_inventoryUnit()
 	//Create pop up menu
-	Form:C1466.current_item.pup("units"; "Units"; "unitID"; "inventoryUnits")
+	Form:C1466.current_item.pup("units"; "Units"; "levelID"; "inventoryUnits")
 	This:C1470.drawPup_inventoryUnit()
 	
 	
 Function drawPup_procurementUnit()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.current_item.drowPup("Units"; "unitID"; "inventoryUnits"; "pup_procurementUnit")
+		Form:C1466.current_item.drowPup("Units"; "levelID"; "procurementUnits"; "pup_procurementUnit")
 	End if 
 	
 	
 Function pup_procurementUnit()
 	//Create pop up menu
-	Form:C1466.current_item.pup("units"; "Units"; "unitID"; "procurementUnits")
+	Form:C1466.current_item.pup("units"; "Units"; "levelID"; "procurementUnits")
 	This:C1470.drawPup_procurementUnit()
 	
 	
 Function drawPup_division()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.current_item.drowPup("Division"; "divisionID"; "divisionID"; "pup_division")
+		Form:C1466.current_item.drowPup("Division"; "UUID"; "UUID_Division"; "pup_division")
 	End if 
 	
 	
 Function pup_division()
 	//Create pop up menu
-	Form:C1466.current_item.pup("divisions"; "Division"; "divisionID"; "divisionID")
+	Form:C1466.current_item.pup("divisions"; "Division"; "UUID"; "UUID_Division")
 	This:C1470.drawPup_division()
 	
 	
@@ -216,6 +220,6 @@ Function btnOpenSupplier()
 	$es:=ds:C1482.Supplier.query("UUID =:1"; Form:C1466.current_item.UUID_Supplier)
 	
 	If ($es.length>0)
-		Form:C1466.sfw.openInANewWindow($es[0]; "qualityAssistance"; "AVL")
+		Form:C1466.sfw.openInANewWindow($es[0]; "qualityAssurance"; "AVL")
 	End if 
 	

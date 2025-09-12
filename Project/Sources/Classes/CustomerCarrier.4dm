@@ -17,5 +17,5 @@ local Function cacheLoad()
 	
 	
 Function _loadAsCollection()->$customerCarrierColl : Collection
-	$customerCarrierColl:=This:C1470.all().toCollection("UUID, carrierID,name, color").orderBy("carrierID")
+	$customerCarrierColl:=This:C1470.all().toCollection("UUID, levelID,name, color").orderBy("name")
 	

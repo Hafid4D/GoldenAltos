@@ -1,6 +1,20 @@
 //%attributes = {}
 
+//$a:="    "
+//$a:=Split string($a; ";"; sk ignore empty strings+sk trim spaces).join(";")
+//If ($a="")
+////ALERT("ok")
+//End if 
 
+//var $audit_e : cs.AuditEntity
+//var $audit_es : cs.AuditEntity
+//$audit_es:=ds.Audit.all()
+//For each ($audit_e; $audit_es)
+//$file:=Temporary folder+Folder separator+$audit_e.attachedDocuments.documents.sourcePath
+
+//BLOB TO DOCUMENT($file; $audit_e.attachedDocuments.documents.blob)
+
+//End for each 
 
 
 //$file:=Folder(fk data folder).file("2300_Names.json")

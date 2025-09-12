@@ -1,26 +1,35 @@
 Class extends DataClass
 
 
-
-
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	//Mark: entry : Equipment
-	$entry:=cs:C1710.sfw_definitionEntry.new("AVL"; ["qualityAssistance"]; "AVL")
+	$entry:=cs:C1710.sfw_definitionEntry.new("AVL"; ["qualityAssurance"]; "AVL")
 	$entry.setDataclass("Supplier")
-	$entry.setSearchboxField("partData.internalPartNum")
 	$entry.setDisplayOrder(-700)
 	$entry.setIcon("image/entry/avl-white-50x50.png")
 	
-	$entry.setSearchboxField("name"; "placeholder:Supplier name")
+	$entry.setSearchboxField("name")
 	
 	$entry.setPanel("panel_supplier")
 	$entry.setPanelPage(1; ""; "Main")
+	$entry.setPanelPage(2; ""; "Contacts & Address")
+	$entry.setPanelPage(3; ""; "Documents")
 	
 	$entry.setLBItemsColumn("name"; "Supplier Name"; "width:250")
 	$entry.setLBItemsColumn("approvedByQA?\"Approved\":\"Not Approved\""; "QA Approval"; "width:150"; "orderByFormula:this.approvedByQA")
 	$entry.setLBItemsOrderBy("name")
 	
+	$entry.setItemListAction("Export selection to excel"; "_ga_exportSupplierList")
 	
+	
+	
+	// MARK: -Filters
+	
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterEquipmentDivision")
+	$filter.setDefaultTitle("All divisions")
+	$filter.setFilterByLinkedEntity("Division"; "UUID_Division"; ""; "division")
+	$filter.setDynamicTitle("name"; "## equipment division")
+	$entry.addFilter($filter)
 	
 	
 	// MARK: - Views Definition

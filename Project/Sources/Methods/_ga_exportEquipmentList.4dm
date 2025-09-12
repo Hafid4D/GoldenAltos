@@ -10,7 +10,6 @@ Purpose : This method export the items on Equipment View List to an .xls documen
 
 var $eSetting : cs:C1710.sfw_SettingEntity
 var $identEntry : Text:=Form:C1466.sfw.entry.ident
-var $identView : Text:=Form:C1466.sfw.view.ident
 var $entity : 4D:C1709.Entity
 var $info : Object
 var $wpBlob : 4D:C1709.Blob
@@ -46,10 +45,6 @@ If ($continue)
 	$separator_line:=Char:C90(Carriage return:K15:38)
 	
 	
-	If ($identView="main")
-		$identView:="allEquipments"
-	End if 
-	
 	$file:=Create document:C266(""; "xls")
 	
 	If (OK=1)
@@ -57,11 +52,9 @@ If ($continue)
 		$export.records:=New collection:C1472
 		
 		$dataclass:=Form:C1466.sfw.entry.dataclass
-		If ($identView="allEquipments")
-			$equipments:=ds:C1482[$dataclass].all()
-		Else 
-			$equipments:=ds:C1482[$dataclass][$identView]()
-		End if 
+		
+		$equipments:=Form:C1466.sfw.lb_items
+		
 		For each ($entity; $equipments)
 			$oEntity:=New object:C1471
 			For each ($attribute; ds:C1482[$dataclass])
@@ -85,12 +78,15 @@ If ($continue)
 			ARRAY TO COLLECTION:C1563($headers; $headerNames)
 			
 			$headers:=$headers.remove($headers.indexOf("repairLogs"))
-			$headers[$headers.indexOf("locationID")]:="location"
-			$headers[$headers.indexOf("UUID_ToolType")]:="type"
-			$headers[$headers.indexOf("divisionID")]:="division"
+			$headers:=$headers.remove($headers.indexOf("reports"))
+			
+			$headers:=$headers.remove($headers.indexOf("UUID"))
+			$headers:=$headers.filter(Formula:C1597($1.value#"stmp@"))
+			$headers:=$headers.filter(Formula:C1597($1.value#"UUID_@"))
+			
 			If (Not:C34($allFields))
-				$headers:=$relevantFields.filter(Formula:C1597($relevantFields.indexOf($1.value)#-1))
-			End if 
+				$headers:=$relevantFields
+			End if
 			$OK:=True:C214
 		Else 
 			$OK:=False:C215
@@ -112,15 +108,12 @@ If ($continue)
 					Case of 
 							
 						: ($headerName="location")
-							$location:=ds:C1482.EquipmentLocation.query("locationID=:1"; $equipment_e["locationID"]).first()
-							SEND PACKET:C103($file; Replace string:C233(String:C10($location.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
+							SEND PACKET:C103($file; Replace string:C233(String:C10($equipment_e.location.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
 						: ($headerName="type")
-							$type:=ds:C1482.ToolType.query("UUID=:1"; $equipment_e["UUID_ToolType"]).first()
-							SEND PACKET:C103($file; Replace string:C233(String:C10($type.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
+							SEND PACKET:C103($file; Replace string:C233(String:C10($equipment_e.type.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
 							
 						: ($headerName="division")
-							$division:=ds:C1482.Division.query("divisionID=:1"; $equipment_e["divisionID"]).first()
-							SEND PACKET:C103($file; Replace string:C233(String:C10($division.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
+							SEND PACKET:C103($file; Replace string:C233(String:C10($equipment_e.division.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
 							
 						: ($headerName="reports")
 							

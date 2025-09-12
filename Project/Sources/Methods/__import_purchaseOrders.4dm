@@ -543,41 +543,36 @@ If (True:C214)
 		
 		$specification_e.spec:=$record.Spec
 		$specification_e.title:=$record.Spec_Title
-		$specification_e.revisionDate:=Date:C102($record.Revsion_Date)
+		$specification_e.stmpRevisionDate:=cs:C1710.sfw_stmp.me.build(Date:C102($record.Revsion_Date))
 		$specification_e.revision:=$record.Rev
 		
-		//$specification_e.division:=$record.Division  //TO CHANGE
 		$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($record.Division; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($division.length>0)
-			$specification_e.divisionID:=$division[0].divisionID
+			$specification_e.UUID_Division:=$division[0].UUID
 		Else 
-			$specification_e.divisionID:=0
+			$specification_e.UUID_Division:=""
 		End if 
 		
 		$specification_e.isForm:=$record.Form
 		
-		//$specification_e.category:=$record.PublishedDocCategory  //TO CHANGE
-		$category:=ds:C1482.SpecCategory.query("name =:1"; Split string:C1554($record.PublishedDocCategory; "\r"; sk trim spaces:K86:2).join("\r"))
+		$category:=ds:C1482.DocumentCategory.query("name =:1"; Split string:C1554($record.PublishedDocCategory; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($category.length>0)
-			$specification_e.categoryID:=$category[0].categoryID
+			$specification_e.UUID_DocumentCategory:=$category[0].UUID
 		Else 
-			$specification_e.categoryID:=0
+			$specification_e.UUID_DocumentCategory:=0
 		End if 
 		
 		$specification_e.remark:=$record.Remarks
 		$specification_e.extension:=$record.Dosext
-		$specification_e.addendum:=$record.Addendum
-		$specification_e.addendumToSpec:=$record.AddendumToSpec
 		$specification_e.suppress:=$record.Suppress
 		$specification_e.reviewIntervalInDays:=$record.ReviewIntervalInDays
-		$specification_e.reviewDate:=$record.Review_Date
+		$specification_e.stmpReviewDate:=cs:C1710.sfw_stmp.me.build(Date:C102($record.Review_Date))
 		
-		//$specification_e.departmentID:=$record.ControllingDept
-		$stecControllingDetpt:=ds:C1482.SpecControllingDept.query("name =:1"; Split string:C1554($record.ControllingDept; "\r"; sk trim spaces:K86:2).join("\r"))
+		$stecControllingDetpt:=ds:C1482.ControllingDepartment.query("name =:1"; Split string:C1554($record.ControllingDept; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($stecControllingDetpt.length>0)
-			$specification_e.departmentID:=$stecControllingDetpt[0].departmentID
+			$specification_e.UUID_ControllingDepartment:=$stecControllingDetpt[0].UUID
 		Else 
-			$specification_e.departmentID:=0
+			$specification_e.UUID_ControllingDepartment:=0
 		End if 
 		
 		
@@ -710,12 +705,15 @@ If (True:C214)
 	
 	$records:=JSON Parse:C1218($file.getText())
 	
-	
+	$counter:=0
 	For each ($record; $records)
+		$counter:=$counter+1
+		
 		$eDepartment:=ds:C1482.Department.query("name == :1"; $record.department).first()
 		If ($eDepartment=Null:C1517)
 			$eDepartment:=ds:C1482.Department.new()
 			$eDepartment.name:=$record.department
+			$eDepartment.levelID:=$counter
 			$eDepartment.save()
 		End if 
 		
@@ -725,14 +723,13 @@ If (True:C214)
 		$staff_e.retrainDate:=$record.retrainDate
 		$staff_e.terminationDate:=$record.terminationDate
 		$staff_e.creationDate:=cs:C1710.sfw_stmp.me.getDate($record.creationDate)
-		$staff_e.code:=$record.code
+		$staff_e.code:=Split string:C1554($record.code; "\r"; sk trim spaces:K86:2).join("\r")
 		$staff_e.UUID_Department:=$eDepartment.UUID
 		$staff_e.terminated:=$record.terminated
 		$staff_e.hireDate:=$record.hireDate
 		$staff_e.division:=$record.division
 		$staff_e.citizenShipStatus:=$record.citizenShipStatus
 		$staff_e.contactDetails:=$record.contactDetails
-		
 		//If ($staff_e.firstName="Analyn") & ($staff_e.lastName="Tolentino")
 		//TRACE
 		//End if 

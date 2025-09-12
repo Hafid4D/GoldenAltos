@@ -16,5 +16,5 @@ local Function cacheLoad()
 	
 	
 Function _loadAsCollection()->$ImprovementOrigins : Collection
-	$ImprovementOrigins:=This:C1470.all().toCollection("UUID,originID,name").orderBy("originID")
+	$ImprovementOrigins:=This:C1470.all().toCollection("UUID,levelID,name").orderBy("levelID")
 	

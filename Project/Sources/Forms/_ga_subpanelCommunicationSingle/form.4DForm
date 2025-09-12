@@ -10,7 +10,7 @@
 	"windowMaxWidth": 32767,
 	"windowMaxHeight": 32767,
 	"rightMargin": 0,
-	"bottomMargin": 20,
+	"bottomMargin": 10,
 	"events": [
 		"onLoad",
 		"onValidate",
@@ -38,7 +38,7 @@
 					"type": "rectangle",
 					"top": 0,
 					"left": 0,
-					"width": 480,
+					"width": 470,
 					"height": 140,
 					"fill": "#E6E6E6",
 					"stroke": "transparent",
@@ -48,7 +48,7 @@
 					"type": "rectangle",
 					"top": 0,
 					"left": 0,
-					"width": 482,
+					"width": 470,
 					"height": 35,
 					"sizingX": "fixed",
 					"fill": "#69A4C0",
@@ -176,8 +176,8 @@
 				},
 				"Button": {
 					"type": "button",
-					"top": 160,
-					"left": 330,
+					"top": 153,
+					"left": 300,
 					"width": 70,
 					"height": 20,
 					"sizingX": "move",
@@ -196,8 +196,8 @@
 				},
 				"Button1": {
 					"type": "button",
-					"top": 160,
-					"left": 410,
+					"top": 153,
+					"left": 380,
 					"width": 70,
 					"height": 20,
 					"sizingX": "move",
@@ -291,7 +291,7 @@
 			"objects": {}
 		}
 	],
-	"geometryStamp": 151,
+	"geometryStamp": 158,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

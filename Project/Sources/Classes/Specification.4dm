@@ -4,27 +4,25 @@ Class extends DataClass
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	//Mark: entry : Specification
-	$entry:=cs:C1710.sfw_definitionEntry.new("specification"; ["qualityAssistance"]; "Specs Control")
+	$entry:=cs:C1710.sfw_definitionEntry.new("specification"; ["qualityAssurance"]; "Specs Control")
 	$entry.setDataclass("Specification")
-	$entry.setSearchboxField("spec")
 	$entry.setDisplayOrder(-500)
 	$entry.setIcon("image/entry/spec-control-white-50x50.png")
 	
-	$entry.setSearchboxField("spec"; "placeholder:Spec#")
+	$entry.setSearchboxField("spec")
+	
+	$entry.setPanel("panel_specification")
+	$entry.setPanelPage(1; ""; "Main")
+	$entry.setPanelPage(2; ""; "Documents")
 	
 	$entry.setLBItemsColumn("spec"; "Spec#"; "width:100")
 	$entry.setLBItemsColumn("revision"; "Revision"; "width:50")
 	$entry.setLBItemsColumn("title"; "Title")
 	$entry.setLBItemsOrderBy("spec")
-	$entry.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:specification"; "unitN:specifications")
-	
-	$entry.setPanel("panel_specification")
-	
-	$entry.setPanelPage(1; ""; "Main")
-	$entry.setPanelPage(2; ""; "Documents")
-	
+	//$entry.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:specification"; "unitN:specifications")
 	
 	$entry.setItemListAction("Export The List To Excel"; "_ga_exportSpecToExcel")
+	$entry.setItemListAction("-"; "-")
 	$entry.setItemListAction("Print The List"; "_ga_printSpecList")
 	
 	
@@ -49,16 +47,6 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	// MARK: - Views Definition
 	
 	
-	// MARK: All Addendums
-	$view:=cs:C1710.sfw_definitionView.new("allAddendums"; "All addendums")
-	$view.setLBItemsColumn("spec"; "Spec#"; "width:100")
-	$view.setLBItemsColumn("revision"; "Revision"; "width:50")
-	$view.setLBItemsColumn("title"; "Title")
-	$view.setLBItemsOrderBy("spec")
-	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:specification"; "unitN:specifications")
-	$view.setSubset("allAddendums")
-	$entry.setView($view)
-	
 	// MARK: Docs late in reviewing
 	$view:=cs:C1710.sfw_definitionView.new("docsLateInReviewing"; "Control Docs late in Reviewing")
 	$view.setLBItemsColumn("spec"; "Spec#"; "width:100")
@@ -69,7 +57,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setSubset("docsLateInReviewing")
 	$entry.setView($view)
 	
-	// MARK: Docs late in reviewing
+	// MARK: ocs requiring review in 7 days
 	$view:=cs:C1710.sfw_definitionView.new("docsRequiringReviewSoon"; "Control Docs requiring review in 7 days")
 	$view.setLBItemsColumn("spec"; "Spec#"; "width:100")
 	$view.setLBItemsColumn("revision"; "Revision"; "width:50")
@@ -154,16 +142,19 @@ local Function setDateInterval($pushUp; $title)
 	End use 
 	
 	
-Function allAddendums()->$specifications : cs:C1710.SpecificationSelection
-	$specifications:=ds:C1482.Specification.query("addendum =:1"; True:C214)
-	
-	
 Function docsLateInReviewing()->$specifications : cs:C1710.SpecificationSelection
-	$specifications:=ds:C1482.Specification.query("suppress =:1 & reviewIntervalInDays >0 & eval((This.reviewDate+This.reviewIntervalInDays)<Current date(*))"; False:C215)
+	$specifications:=ds:C1482.Specification.query("suppress =:1 & reviewIntervalInDays >0 & eval(revisionDate<Current date(*))"; False:C215)
 	
 	
-Function docsRequiringReviewSoon()->$specifications : cs:C1710.SpecificationSelection
-	$specifications:=ds:C1482.Specification.query("suppress =:1 & reviewIntervalInDays >0 & eval((This.reviewDate+This.reviewIntervalInDays)<(Current date(*)+7))"; False:C215)
+local Function docsRequiringReviewSoon()->$specifications : cs:C1710.SpecificationSelection
+	$title:="Set date interval"
+	This:C1470.setDateInterval(False:C215; $title)
+	$statDate:=Storage:C1525.cache.startDate
+	$endDate:=Storage:C1525.cache.endDate
+	$formula_1:=Formula:C1597((This:C1470.reviewDate+This:C1470.reviewIntervalInDays)>=$statDate)
+	$formula_2:=Formula:C1597((This:C1470.reviewDate+This:C1470.reviewIntervalInDays)<$endDate)
+	$specifications:=This:C1470.myQuery(False:C215; 0; $formula_1; $formula_2)  //ds.Specification.query("suppress =:1 & reviewIntervalInDays >0 & :2 & :3"; False; $formula_1; $formula_2)
+	
 	
 	
 Function OnlySpecs()->$specifications : cs:C1710.SpecificationSelection
@@ -174,4 +165,5 @@ Function OnlyForms()->$specifications : cs:C1710.SpecificationSelection
 	$specifications:=ds:C1482.Specification.query("suppress =:1 & isForm=:2"; False:C215; True:C214)
 	
 	
+Function myQuery()
 	

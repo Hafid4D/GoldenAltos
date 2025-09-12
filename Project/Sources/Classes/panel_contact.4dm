@@ -1,18 +1,25 @@
 singleton Class constructor
 	//It's a singleton class
 	
+	
+Function _activate_save_cancel_button()
+	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+	
+	
 Function formMethod()
 	//This function manages the main logic for updating and refreshing the form
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		
+		Form:C1466.companyType:=Form:C1466.current_item.companyType
 		
 	End if 
+	
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
 				// add load functions
-				This:C1470.loadContact()
+				//This.loadContact()
 				
 		End case 
 	End if 
@@ -29,7 +36,7 @@ Function drawPup_XXX()
 	
 Function drawPup_Customer()
 	If (Form:C1466.current_item#Null:C1517)
-		$customer:=ds:C1482.Customer.query("UUID= :1"; Form:C1466.current_item.UUID_Customer).first() || New object:C1471()
+		$customer:=ds:C1482.Customer.query("UUID =:1"; Form:C1466.current_item.UUID_Company).first() || New object:C1471()
 		$customerName:=$customer.name
 		If ($customerName=Null:C1517)
 			$customerName:=""
@@ -43,37 +50,12 @@ Function drawPup_Customer()
 Function pup_Customer()
 	//Create pop up menu
 	If (Form:C1466.sfw.checkIsInModification())
-/*
-$menu:=Create menu
-If (Storage.cache=Null) || (Storage.cache.customers=Null)
-ds.Customer.cacheLoad()
-End if 
 		
-For each ($eCustomer; Storage.cache.customers)
-APPEND MENU ITEM($menu; $eCustomer.name; *)
-SET MENU ITEM PARAMETER($menu; -1; $eCustomer.UUID)
-If ($eCustomer.UUID=Form.current_item.UUID_Customer)
-SET MENU ITEM MARK($menu; -1; Char(18))
-If (Is Windows)
-SET MENU ITEM STYLE($menu; -1; Bold)
-End if 
-End if 
-End for each 
-$choose:=Dynamic pop up menu($menu)
-RELEASE MENU($menu)
-		
-Case of 
-: ($choose#"")
-$eCustomer:=ds.Customer.get($choose)
-Form.current_item.UUID_Customer:=$eCustomer.UUID
-End case 
-*/
 		OBJECT GET COORDINATES:C663(*; "pup_Customer"; $l; $t; $r; $b)
 		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
 		
 		$form:=New object:C1471(\
 			"colName"; "name"; \
-			"lb_items"; ds:C1482.Customer.all(); \
 			"allData"; ds:C1482.Customer.all(); \
 			"dataclass"; "Customer"\
 			)
@@ -83,7 +65,7 @@ End case
 		CLOSE WINDOW:C154($winRef)
 		
 		If (ok=1)
-			Form:C1466.current_item.UUID_Customer:=$form.item.UUID
+			Form:C1466.current_item.UUID_Company:=$form.item.UUID
 			cs:C1710.panel_contact.me._activate_save_cancel_button()
 		End if 
 	End if 
@@ -91,12 +73,110 @@ End case
 	This:C1470.drawPup_Customer()
 	
 	
+Function drawPup_supplier()
+	If (Form:C1466.current_item#Null:C1517)
+		$supplier:=ds:C1482.Supplier.query("UUID =:1"; Form:C1466.current_item.UUID_Company).first() || New object:C1471()
+		$supplierName:=$supplier.name
+		If ($supplierName=Null:C1517)
+			$supplierName:=""
+		End if 
+		$color:="#FFFFFF"  //cs.sfw_htmlColor.me.getName($supplier.color)
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_supplier"; $supplierName; $pathIcon; ($supplier=Null:C1517))
+	End if 
+	
+	
+Function pup_supplier()
+	//Create pop up menu
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		OBJECT GET COORDINATES:C663(*; "pup_supplier"; $l; $t; $r; $b)
+		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
+		
+		$form:=New object:C1471(\
+			"colName"; "name"; \
+			"allData"; ds:C1482.Supplier.all(); \
+			"dataclass"; "Supplier"\
+			)
+		
+		$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b)
+		DIALOG:C40("selectNto1"; $form)
+		CLOSE WINDOW:C154($winRef)
+		
+		If (ok=1)
+			Form:C1466.current_item.UUID_Company:=$form.item.UUID
+			cs:C1710.panel_contact.me._activate_save_cancel_button()
+		End if 
+	End if 
+	
+	This:C1470.drawPup_supplier()
+	
+	
+	
+Function drawPup_companyType()
+	If (Form:C1466.current_item#Null:C1517)
+		$companyType:=New object:C1471
+		$companyTypeName:=Form:C1466.companyType
+		$color:=""
+		$pathIcon:=""
+		Form:C1466.sfw.drawButtonPup("pup_companyType"; $companyTypeName; $pathIcon; ($companyType=Null:C1517))
+	End if 
+	
+	
+Function pup_companyType()
+	//Create pop up menu
+	If (Form:C1466.sfw.checkIsInModification())
+		$menu:=Create menu:C408
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.companyTypes=Null:C1517)
+			ds:C1482.Contact.cacheLoad()
+		End if 
+		$count:=0
+		For each ($eCompanyType; Storage:C1525.cache.companyTypes)
+			$count:=$count+1
+			APPEND MENU ITEM:C411($menu; $eCompanyType; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $eCompanyType)
+			
+		End for each 
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		Case of 
+			: ($choose#"")
+				Form:C1466.companyType:=$choose
+				
+		End case 
+		
+	End if 
+	This:C1470.drawPup_companyType()
+	
+	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	
+	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	$offset:=4
+	Case of 
+			
+		: (FORM Get current page:C276(*)=1)
+			
+			OBJECT GET COORDINATES:C663(*; "subFormAddress"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "subFormAddress"; $g; $h; $widthSubform; $b)
+			
+	End case 
+	
 	This:C1470.contactDetails()
 	This:C1470.drawPup_Customer()
+	This:C1470.drawPup_supplier()
+	This:C1470.drawPup_companyType()
+	
 	OBJECT SET VISIBLE:C603(*; "bActionContact"; Form:C1466.sfw.checkIsInModification())
+	
+	OBJECT SET VISIBLE:C603(*; "pup_supplier"; (Form:C1466.companyType="Supplier"))
+	OBJECT SET VISIBLE:C603(*; "pup_Customer"; (Form:C1466.companyType="Customer"))
+	
+	OBJECT SET VISIBLE:C603(*; "label_supplier"; (Form:C1466.companyType="Supplier"))
+	OBJECT SET VISIBLE:C603(*; "label_customer"; (Form:C1466.companyType="Customer"))
+	
 	
 	
 	
@@ -119,159 +199,187 @@ Function contactDetails()
 	End if 
 	
 	
+	
+	
 Function loadXXX()
 	//Loads and initializes a list
 	
 	
+/*
 Function loadContact()
 	
-	Form:C1466.lb_contact:=New collection:C1472()
+Form.lb_contact:=New collection()
 	
-	If (Form:C1466.current_item#Null:C1517)
-		
-		Form:C1466.lb_contact:=Form:C1466.current_item.rebuidComunications()
-		
-		This:C1470.displayContact()
-	End if 
+If (Form.current_item#Null)
+	
+Form.lb_contact:=Form.current_item.rebuidComunications()
+	
+This.displayContact()
+End if 
+	
+	
 	
 Function displayContact()
 	
 	
-	OBJECT SET ENTERABLE:C238(*; "entryField_contact@"; False:C215)
+OBJECT SET ENTERABLE(*; "entryField_contact@"; False)
 	
-	If (Form:C1466.current_contact=Null:C1517)
-		OBJECT SET VISIBLE:C603(*; "label_contact@"; False:C215)
-		OBJECT SET VISIBLE:C603(*; "entryField_contact@"; False:C215)
-		OBJECT SET VISIBLE:C603(*; "bSave"; False:C215)
-	Else 
-		OBJECT SET VISIBLE:C603(*; "label_contact@"; True:C214)
-		OBJECT SET VISIBLE:C603(*; "entryField_contact@"; True:C214)
-		OBJECT SET VISIBLE:C603(*; "bSave"; True:C214)
-		
-	End if 
+If (Form.current_contact=Null)
+OBJECT SET VISIBLE(*; "label_contact@"; False)
+OBJECT SET VISIBLE(*; "entryField_contact@"; False)
+OBJECT SET VISIBLE(*; "bSave"; False)
+Else 
+OBJECT SET VISIBLE(*; "label_contact@"; True)
+OBJECT SET VISIBLE(*; "entryField_contact@"; True)
+OBJECT SET VISIBLE(*; "bSave"; True)
+	
+End if 
 	
 	
-Function bActionXXX()
-	//Manages actions: add, or remove, using dynamic menus and modification checks
 	
 Function bActionContact()
 	
-	$mainMenu:=Create menu:C408
+$mainMenu:=Create menu
 	
-	APPEND MENU ITEM:C411($mainMenu; "Add contact"; *)
-	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--addContact")
-	SET MENU ITEM SHORTCUT:C423($mainMenu; -1; "L"; Command key mask:K16:1)
-	APPEND MENU ITEM:C411($mainMenu; "-")
+APPEND MENU ITEM($mainMenu; "Add contact"; *)
+SET MENU ITEM PARAMETER($mainMenu; -1; "--addContact")
+SET MENU ITEM SHORTCUT($mainMenu; -1; "L"; Command key mask)
+APPEND MENU ITEM($mainMenu; "-")
 	
-	APPEND MENU ITEM:C411($mainMenu; "Delete contact"; *)
-	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--deleteContact")
-	APPEND MENU ITEM:C411($mainMenu; "-")
+APPEND MENU ITEM($mainMenu; "Delete contact"; *)
+SET MENU ITEM PARAMETER($mainMenu; -1; "--deleteContact")
+APPEND MENU ITEM($mainMenu; "-")
 	
-	APPEND MENU ITEM:C411($mainMenu; "Modify contact"; *)
-	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--modifyContact")
+APPEND MENU ITEM($mainMenu; "Modify contact"; *)
+SET MENU ITEM PARAMETER($mainMenu; -1; "--modifyContact")
 	
-	If (Form:C1466.current_contact=Null:C1517)
-		DISABLE MENU ITEM:C150($mainMenu; 3)
-		DISABLE MENU ITEM:C150($mainMenu; 5)
-	End if 
-	
-	
-	$choose:=Dynamic pop up menu:C1006($mainMenu)
-	RELEASE MENU:C978($mainMenu)
-	
-	Case of 
-		: ($choose="--addContact")
-			
-			//$refWindow:=Open form window("sfw_subpanel_communicationSingle"; Modal form dialog box)
-			$winRef:=Open form window:C675("sfw_subpanel_communicationSingle"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
-			DIALOG:C40("sfw_subpanel_communicationSingle"; $form)
-			CLOSE WINDOW:C154($winRef)
-			
-			
-			$contact:=New object:C1471()
-			
-			OB SET:C1220($contact; "name"; "contact type")
-			OB SET:C1220($contact; "value"; "contact value")
-			
-			Form:C1466.lb_contact.push($contact)
-			LISTBOX INSERT ROWS:C913(*; "lb_contact"; Form:C1466.lb_contact.length; 1)
-			This:C1470._activate_save_cancel_button()
-			LISTBOX SELECT ROW:C912(*; "lb_contact"; Form:C1466.lb_contact.length; lk replace selection:K53:1)
-			Form:C1466.current_contact:=$contact
-			This:C1470.displayContact()
-			
-			GOTO OBJECT:C206(*; "entryField_contactType")
-			OBJECT SET ENTERABLE:C238(*; "label_contact@"; True:C214)
-			OBJECT SET ENTERABLE:C238(*; "entryField_contact@"; True:C214)
-			
-		: ($choose="--deleteContact")
-			
-			OBJECT SET ENTERABLE:C238(*; "label_contact@"; False:C215)
-			OBJECT SET ENTERABLE:C238(*; "entryField_contact@"; False:C215)
-			
-			$ok:=cs:C1710.sfw_dialog.me.confirm("Do you really want to delete this contact? "; "Delete"; "CANCEL")
-			If ($ok)
-				If (Form:C1466.current_item#Null:C1517)
-					OB REMOVE:C1226(Form:C1466.current_item.contactDetails.communications[0]; Form:C1466.current_contact.name)
-					This:C1470.loadContact()
-				End if 
-			End if 
-			
-			
-		: ($choose="--modifyContact")
-			
-			OBJECT SET ENTERABLE:C238(*; "label_contact@"; True:C214)
-			OBJECT SET ENTERABLE:C238(*; "entryField_contact@"; True:C214)
-			OBJECT SET VISIBLE:C603(*; "bSave"; True:C214)
-			
-	End case 
+If (Form.current_contact=Null)
+DISABLE MENU ITEM($mainMenu; 3)
+DISABLE MENU ITEM($mainMenu; 5)
+End if 
 	
 	
-Function _activate_save_cancel_button()
-	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+$choose:=Dynamic pop up menu($mainMenu)
+RELEASE MENU($mainMenu)
+	
+Case of 
+: ($choose="--addContact")
+	
+//$refWindow:=Open form window("sfw_subpanel_communicationSingle"; Modal form dialog box)
+$winRef:=Open form window("sfw_subpanel_communicationSingle"; Plain form window; Horizontally centered; Vertically centered)
+DIALOG("sfw_subpanel_communicationSingle"; $form)
+CLOSE WINDOW($winRef)
+	
+	
+$contact:=New object()
+	
+OB SET($contact; "name"; "contact type")
+OB SET($contact; "value"; "contact value")
+	
+Form.lb_contact.push($contact)
+LISTBOX INSERT ROWS(*; "lb_contact"; Form.lb_contact.length; 1)
+This._activate_save_cancel_button()
+LISTBOX SELECT ROW(*; "lb_contact"; Form.lb_contact.length; lk replace selection)
+Form.current_contact:=$contact
+//This.displayContact()
+	
+GOTO OBJECT(*; "entryField_contactType")
+OBJECT SET ENTERABLE(*; "label_contact@"; True)
+OBJECT SET ENTERABLE(*; "entryField_contact@"; True)
+	
+: ($choose="--deleteContact")
+	
+OBJECT SET ENTERABLE(*; "label_contact@"; False)
+OBJECT SET ENTERABLE(*; "entryField_contact@"; False)
+	
+$ok:=cs.sfw_dialog.me.confirm("Do you really want to delete this contact? "; "Delete"; "CANCEL")
+If ($ok)
+If (Form.current_item#Null)
+OB REMOVE(Form.current_item.contactDetails.communications[0]; Form.current_contact.name)
+This.loadContact()
+End if 
+End if 
+	
+	
+: ($choose="--modifyContact")
+	
+OBJECT SET ENTERABLE(*; "label_contact@"; True)
+OBJECT SET ENTERABLE(*; "entryField_contact@"; True)
+OBJECT SET VISIBLE(*; "bSave"; True)
+	
+End case 
 	
 	
 Function saveContact()
 	
-	If (Form:C1466.current_contact.name#"contact type") & (Form:C1466.current_contact.value#"contact value")
-		
-		var $comm : Object
-		
-		If (OB Is defined:C1231(Form:C1466.current_item.contactDetails; "communications"))
+If (Form.current_contact.name#"contact type") & (Form.current_contact.value#"contact value")
+	
+var $comm : Object
+	
+If (OB Is defined(Form.current_item.contactDetails; "communications"))
+	
+	
+If (Form.current_item.contactDetails.communications.length>0)
+OB SET(Form.current_item.contactDetails.communications[0]; Form.current_contact.name; Form.current_contact.value)
+	
+	
+Else 
+	
+$comm:=New object()
+Form.current_item.contactDetails.communications.push($comm)
+OB SET(Form.current_item.contactDetails.communications[0]; Form.current_contact.name; Form.current_contact.value)
+	
+End if 
+	
+Else 
+	
+Form.current_item.contactDetails.communications:=New collection()
+$comm:=New object()
+Form.current_item.contactDetails.communications.push($comm)
+OB SET(Form.current_item.contactDetails.communications[0]; Form.current_contact.name; Form.current_contact.value)
+	
+End if 
+	
+OBJECT SET VISIBLE(*; "label_contact@"; False)
+OBJECT SET VISIBLE(*; "entryField_contact@"; False)
+OBJECT SET VISIBLE(*; "bSave"; False)
+Else 
+	
+cs.sfw_dialog.me.alert("'contact type' and 'contact value' are default values. Please enter valid value")
+	
+End if 
+*/
+	
+	
+	
+	
+	
+	
+Function btnOpenCompany()
+	
+	Case of 
+			
+		: (Form:C1466.companyType="Supplier")
+			
+			$es:=ds:C1482.Supplier.query("UUID =:1"; Form:C1466.current_item.UUID_Company)
+			
+			If ($es.length>0)
+				Form:C1466.sfw.openInANewWindow($es[0]; "qualityAssurance"; "AVL")
+			End if 
 			
 			
-			If (Form:C1466.current_item.contactDetails.communications.length>0)
-				OB SET:C1220(Form:C1466.current_item.contactDetails.communications[0]; Form:C1466.current_contact.name; Form:C1466.current_contact.value)
-				
-				
-			Else 
-				
-				$comm:=New object:C1471()
-				Form:C1466.current_item.contactDetails.communications.push($comm)
-				OB SET:C1220(Form:C1466.current_item.contactDetails.communications[0]; Form:C1466.current_contact.name; Form:C1466.current_contact.value)
-				
+		: (Form:C1466.companyType="Customer")
+			
+			$es:=ds:C1482.Customer.query("UUID =:1"; Form:C1466.current_item.UUID_Company)
+			
+			If ($es.length>0)
+				Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "customer")
 			End if 
 			
 		Else 
 			
-			Form:C1466.current_item.contactDetails.communications:=New collection:C1472()
-			$comm:=New object:C1471()
-			Form:C1466.current_item.contactDetails.communications.push($comm)
-			OB SET:C1220(Form:C1466.current_item.contactDetails.communications[0]; Form:C1466.current_contact.name; Form:C1466.current_contact.value)
 			
-		End if 
-		
-		OBJECT SET VISIBLE:C603(*; "label_contact@"; False:C215)
-		OBJECT SET VISIBLE:C603(*; "entryField_contact@"; False:C215)
-		OBJECT SET VISIBLE:C603(*; "bSave"; False:C215)
-	Else 
-		
-		cs:C1710.sfw_dialog.me.alert("'contact type' and 'contact value' are default values. Please enter valid value")
-		
-	End if 
-	
-	
-	
+	End case 
 	
 	
 	

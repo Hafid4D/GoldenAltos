@@ -1,6 +1,5 @@
 Class extends DataClass
 
-
 local Function cacheLoad()
 	
 	If (Storage:C1525.cache=Null:C1517)
@@ -17,6 +16,5 @@ local Function cacheLoad()
 	
 	
 Function _loadAsCollection()->$units : Collection
-	$units:=This:C1470.all().toCollection("UUID, unitID,name").orderBy("unitID")
-	
+	$units:=This:C1470.all().toCollection("UUID, levelID,name").orderBy("levelID")
 	

@@ -191,8 +191,7 @@ Function pup_serviceType()
 		
 		Case of 
 			: ($choose#"")
-				$eServiceType:=ds:C1482.ServiceType.get($choose)
-				Form:C1466.current_item.UUID_ServiceType:=$eServiceType.UUID
+				Form:C1466.current_item.UUID_ServiceType:=$choose
 		End case 
 	End if 
 	This:C1470.drawPup_serviceType()
@@ -586,7 +585,7 @@ Function btnOpenCustomer()
 	
 Function btnOpenStaff()
 	$entity:=Form:C1466.current_item.staff
-	Form:C1466.sfw.openInANewWindow($entity; "qualityAssistance"; "staff")
+	Form:C1466.sfw.openInANewWindow($entity; "qualityAssurance"; "staff")
 	
 Function btnCreateCustomer()
 	Form:C1466.sfw.openCreateWindow("customerService"; "customer")
@@ -670,7 +669,7 @@ Function btnActionContacts()
 			End if 
 			
 			$form:=New object:C1471()
-			$form.lb_contacts:=ds:C1482.Contact.query("customer.leads.UUID == :1 and not(UUID in :2)"; Form:C1466.current_item.UUID; $uuids)
+			$form.lb_contacts:=ds:C1482.Contact.query("UUID_Company == :1 and not(UUID in :2)"; Form:C1466.current_item.UUID_Customer; $uuids)
 			$ref:=Open form window:C675("Lead_chooseMainContact"; Sheet form window:K39:12)
 			DIALOG:C40("Lead_chooseMainContact"; $form)
 			CLOSE WINDOW:C154($ref)
@@ -699,7 +698,7 @@ Function btnActionContacts()
 			End if 
 			
 			$form:=New object:C1471()
-			$form.lb_contacts:=ds:C1482.Contact.query("customer.leads.UUID == :1 and not(UUID in :2)"; Form:C1466.current_item.UUID; $uuids).toCollection()
+			$form.lb_contacts:=ds:C1482.Contact.query("UUID_Company == :1 and not(UUID in :2)"; Form:C1466.current_item.UUID_Customer; $uuids).toCollection()
 			For each ($contact; $form.lb_contacts)
 				$contact.selected:=False:C215
 			End for each 

@@ -33,49 +33,13 @@
 	"pages": [
 		{
 			"objects": {
-				"label_systemID": {
-					"type": "text",
-					"top": 12,
-					"left": 12,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "System ID :"
-				},
-				"entryField_systemID": {
+				"entryField_reportedBy": {
 					"type": "input",
-					"top": 12,
-					"left": 110,
-					"width": 190,
+					"top": 64,
+					"left": 108,
+					"width": 75,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.systemID",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold"
-				},
-				"label_timeDown": {
-					"type": "text",
-					"top": 39,
-					"left": 339,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Time down :"
-				},
-				"entryField_downAt": {
-					"type": "input",
-					"top": 39,
-					"left": 434,
-					"width": 190,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.downAt",
+					"dataSource": "Form:C1466.current_item.operators.reportedBy",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -87,24 +51,65 @@
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"textAlign": "left",
-					"dataSourceTypeHint": "time",
-					"timeFormat": "hh_mm_am",
-					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
+					"bottom": 81,
+					"visibility": "hidden"
+				},
+				"entryField_fixedBy": {
+					"type": "input",
+					"top": 64,
+					"left": 439,
+					"width": 75,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.operators.fixedBy",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"bottom": 81,
+					"visibility": "hidden"
+				},
+				"label_systemID": {
+					"type": "text",
+					"top": 10,
+					"left": 8,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "System ID :",
+					"textAlign": "right"
+				},
+				"label_timeDown": {
+					"type": "text",
+					"top": 37,
+					"left": 339,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Time down :",
+					"textAlign": "right"
 				},
 				"label_reportedID": {
 					"type": "text",
-					"top": 39,
-					"left": 12,
+					"top": 37,
+					"left": 8,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Reported ID :",
-					"bottom": 56
+					"bottom": 54,
+					"textAlign": "right"
 				},
 				"entryField_reportID": {
 					"type": "input",
-					"top": 39,
-					"left": 110,
+					"top": 37,
+					"left": 108,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.reportID",
@@ -119,21 +124,22 @@
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"textAlign": "left",
-					"bottom": 56
+					"bottom": 54
 				},
 				"label_dateDown": {
 					"type": "text",
-					"top": 12,
+					"top": 10,
 					"left": 339,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Date down :"
+					"text": "Date down :",
+					"textAlign": "right"
 				},
 				"entryField_reportDate": {
 					"type": "input",
-					"top": 12,
-					"left": 434,
+					"top": 10,
+					"left": 439,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.reportDate",
@@ -148,52 +154,32 @@
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"textAlign": "left",
-					"dataSourceTypeHint": "date",
-					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
+					"dataSourceTypeHint": "date"
 				},
 				"label_timeUp": {
 					"type": "text",
-					"top": 39,
-					"left": 659,
-					"width": 90,
+					"top": 37,
+					"left": 650,
+					"width": 50,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Time up :"
-				},
-				"entryField_upAt": {
-					"type": "input",
-					"top": 39,
-					"left": 754,
-					"width": 190,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.upAt",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"textAlign": "left",
-					"dataSourceTypeHint": "time",
-					"timeFormat": "hh_mm_am"
+					"text": "Time up :",
+					"textAlign": "right"
 				},
 				"label_dateUp": {
 					"type": "text",
-					"top": 12,
-					"left": 659,
-					"width": 90,
+					"top": 10,
+					"left": 650,
+					"width": 50,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Date up :"
+					"text": "Date up :",
+					"textAlign": "right"
 				},
-				"entryField_dateUp": {
+				" ": {
 					"type": "input",
-					"top": 12,
-					"left": 754,
+					"top": 10,
+					"left": 710,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.dateUp",
@@ -208,33 +194,34 @@
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"textAlign": "left",
-					"dataSourceTypeHint": "date",
-					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
+					"dataSourceTypeHint": "date"
 				},
 				"label_reportedID1": {
 					"type": "text",
-					"top": 68,
-					"left": 12,
+					"top": 64,
+					"left": 8,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Reported by :",
-					"bottom": 85
+					"bottom": 81,
+					"textAlign": "right"
 				},
 				"label_fixedBy": {
 					"type": "text",
-					"top": 68,
+					"top": 64,
 					"left": 339,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Fixed by :",
-					"bottom": 85
+					"bottom": 81,
+					"textAlign": "right"
 				},
 				"pup_fixOperator": {
 					"type": "button",
-					"top": 65,
-					"left": 434,
+					"top": 61,
+					"left": 439,
 					"width": 75,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -250,12 +237,13 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"fontWeight": "bold"
+					"fontWeight": "bold",
+					"visibility": "visible"
 				},
 				"pup_reportOperator": {
 					"type": "button",
-					"top": 65,
-					"left": 110,
+					"top": 61,
+					"left": 108,
 					"width": 75,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -271,13 +259,14 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"fontWeight": "bold"
+					"fontWeight": "bold",
+					"visibility": "visible"
 				},
 				"btnForward": {
 					"type": "button",
 					"text": " ",
-					"top": 65,
-					"left": 190,
+					"top": 61,
+					"left": 188,
 					"width": 23,
 					"height": 23,
 					"events": [
@@ -297,8 +286,8 @@
 				"btnForward1": {
 					"type": "button",
 					"text": " ",
-					"top": 65,
-					"left": 514,
+					"top": 61,
+					"left": 519,
 					"width": 23,
 					"height": 23,
 					"events": [
@@ -315,105 +304,10 @@
 					"iconFrames": 4,
 					"focusable": false
 				},
-				"label_approvedBy": {
-					"type": "text",
-					"top": 67,
-					"left": 978,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Approved by :"
-				},
-				"entryField_approvedBy": {
-					"type": "input",
-					"top": 67,
-					"left": 1073,
-					"width": 190,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.approvedBy",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"textAlign": "left",
-					"dataSourceTypeHint": "time",
-					"timeFormat": "hh_mm_am"
-				},
-				"label_approvedDate": {
-					"type": "text",
-					"top": 38,
-					"left": 978,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Approved Date :"
-				},
-				"entryField_approvalDate": {
-					"type": "input",
-					"top": 38,
-					"left": 1073,
-					"width": 190,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.approvalDate",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"textAlign": "left",
-					"dataSourceTypeHint": "date",
-					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
-				},
-				"entryField_isApproved": {
-					"type": "checkbox",
-					"text": "Approved",
-					"top": 11,
-					"left": 1073,
-					"width": 190,
-					"height": 17,
-					"events": [
-						"onClick"
-					],
-					"dataSource": "Form:C1466.current_item.isApproved",
-					"fontWeight": "bold",
-					"dataSourceTypeHint": "boolean"
-				},
-				"PopupDate": {
-					"type": "subform",
-					"top": 39,
-					"left": 1244,
-					"width": 19,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.approvalDate",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/PopupDate.4dm",
-					"events": [
-						"onLoad"
-					],
-					"focusable": true,
-					"borderStyle": "none"
-				},
 				"PopupDate1": {
 					"type": "subform",
-					"top": 12,
-					"left": 605,
+					"top": 10,
+					"left": 610,
 					"width": 19,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.reportDate",
@@ -433,8 +327,8 @@
 				},
 				"PopupDate2": {
 					"type": "subform",
-					"top": 12,
-					"left": 925,
+					"top": 10,
+					"left": 881,
 					"width": 19,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.dateUp",
@@ -454,17 +348,18 @@
 				},
 				"label_fixDate": {
 					"type": "text",
-					"top": 68,
-					"left": 659,
-					"width": 90,
+					"top": 64,
+					"left": 650,
+					"width": 50,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Fix date :"
+					"text": "Fix date :",
+					"textAlign": "right"
 				},
-				"entryField_dateUp1": {
+				"entryField_fixedDate": {
 					"type": "input",
-					"top": 68,
-					"left": 754,
+					"top": 64,
+					"left": 710,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.fixedDate",
@@ -479,13 +374,12 @@
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"textAlign": "left",
-					"dataSourceTypeHint": "date",
-					"entryFilter": "!0&9Month: ## Day: ## Year: ####"
+					"dataSourceTypeHint": "date"
 				},
 				"PopupDate3": {
 					"type": "subform",
-					"top": 68,
-					"left": 925,
+					"top": 64,
+					"left": 881,
 					"width": 19,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.fixedDate",
@@ -505,9 +399,9 @@
 				},
 				"pup_equipmentId": {
 					"type": "button",
-					"top": 10,
+					"top": 8,
 					"left": 108,
-					"width": 194,
+					"width": 190,
 					"height": 23,
 					"fontFamily": "System Font",
 					"fontSize": 13,
@@ -524,17 +418,174 @@
 						"onDisplayDetail"
 					],
 					"fontWeight": "bold",
-					"right": 302
+					"right": 298,
+					"textAlign": "left"
+				},
+				"btnForward2": {
+					"type": "button",
+					"text": " ",
+					"top": 8,
+					"left": 303,
+					"width": 23,
+					"height": 23,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/forward-16x16.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnForward2.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
+				},
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 113,
+					"left": 0,
+					"width": 5000,
+					"height": 704,
+					"fill": "#B1CFDE",
+					"strokeWidth": 2,
+					"stroke": "#FFFFFF"
+				},
+				"entryField_downAt": {
+					"type": "input",
+					"top": 37,
+					"left": 439,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.downAt",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"dataSourceTypeHint": "text",
+					"visibility": "visible"
+				},
+				"entryField_upAt": {
+					"type": "input",
+					"top": 37,
+					"left": 710,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.upAt",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"dataSourceTypeHint": "time",
+					"timeFormat": "hh_mm_am",
+					"visibility": "visible"
+				},
+				"TimePicker1": {
+					"type": "button",
+					"text": " ",
+					"top": 34,
+					"left": 607,
+					"width": 23,
+					"height": 23,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/clock.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/TimePicker1.4dm",
+					"visibility": "visible",
+					"iconFrames": 1,
+					"focusable": false
+				},
+				"TimePicker2": {
+					"type": "button",
+					"text": " ",
+					"top": 34,
+					"left": 877,
+					"width": 23,
+					"height": 23,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/clock.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/TimePicker2.4dm",
+					"visibility": "visible",
+					"iconFrames": 1,
+					"focusable": false
 				}
 			}
 		},
 		{
 			"objects": {
+				"main_bkgd": {
+					"type": "rectangle",
+					"top": 145,
+					"left": 0,
+					"width": 360,
+					"height": 160,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"bottom": 305
+				},
+				"main_bkgd1": {
+					"type": "rectangle",
+					"top": 336,
+					"left": 0,
+					"width": 360,
+					"height": 1200,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"bottom": 1536
+				},
+				"main_bkgd2": {
+					"type": "rectangle",
+					"top": 336,
+					"left": 362,
+					"width": 1500,
+					"height": 1200,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"bottom": 1536
+				},
+				"main_bkgd3": {
+					"type": "rectangle",
+					"top": 145,
+					"left": 362,
+					"width": 1500,
+					"height": 160,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"bottom": 305
+				},
 				"shipping_bkgd": {
 					"type": "rectangle",
 					"top": 114,
 					"left": 0,
-					"width": 480,
+					"width": 360,
 					"height": 30,
 					"sizingX": "grow",
 					"fill": "#A2C6D8",
@@ -542,27 +593,28 @@
 				},
 				"Text1": {
 					"type": "text",
-					"text": "Problem",
+					"text": "Approval",
 					"top": 121,
 					"left": 8,
-					"width": 119,
+					"width": 125,
 					"height": 16,
 					"fontWeight": "bold"
 				},
 				"entryField_problem": {
 					"type": "input",
-					"left": 24,
-					"top": 158,
-					"width": 452,
-					"height": 120,
+					"left": 372,
+					"top": 154,
+					"width": 545,
+					"height": 142,
 					"dataSource": "Form:C1466.current_item.problem",
-					"borderStyle": "none"
+					"borderStyle": "none",
+					"bottom": 296
 				},
 				"shipping_bkgd1": {
 					"type": "rectangle",
-					"top": 495,
-					"left": 0,
-					"width": 480,
+					"top": 306,
+					"left": 362,
+					"width": 1500,
 					"height": 30,
 					"sizingX": "grow",
 					"fill": "#A2C6D8",
@@ -571,18 +623,18 @@
 				"Text2": {
 					"type": "text",
 					"text": "Fix",
-					"top": 502,
-					"left": 8,
+					"top": 313,
+					"left": 370,
 					"width": 119,
 					"height": 16,
 					"fontWeight": "bold"
 				},
 				"entryField_fix": {
 					"type": "input",
-					"left": 24,
-					"top": 539,
-					"width": 455,
-					"height": 120,
+					"left": 370,
+					"top": 346,
+					"width": 547,
+					"height": 112,
 					"dataSource": "Form:C1466.current_item.fix",
 					"borderStyle": "none"
 				},
@@ -590,7 +642,7 @@
 					"type": "rectangle",
 					"top": 306,
 					"left": 0,
-					"width": 480,
+					"width": 360,
 					"height": 30,
 					"sizingX": "grow",
 					"fill": "#A2C6D8",
@@ -607,18 +659,132 @@
 				},
 				"entryField_status": {
 					"type": "input",
-					"left": 24,
-					"top": 350,
-					"width": 455,
-					"height": 120,
+					"left": 8,
+					"top": 346,
+					"width": 341,
+					"height": 112,
 					"dataSource": "Form:C1466.current_item.status",
+					"borderStyle": "none"
+				},
+				"shipping_bkgd3": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 362,
+					"width": 1500,
+					"height": 30,
+					"sizingX": "grow",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"Text4": {
+					"type": "text",
+					"text": "Problem",
+					"top": 121,
+					"left": 370,
+					"width": 119,
+					"height": 16,
+					"fontWeight": "bold"
+				},
+				"label_approvedBy": {
+					"type": "text",
+					"top": 208,
+					"left": 8,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Approved by :",
+					"textAlign": "right"
+				},
+				"entryField_approvedBy": {
+					"type": "input",
+					"top": 208,
+					"left": 108,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.approvedBy",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"dataSourceTypeHint": "text"
+				},
+				"label_approvedDate": {
+					"type": "text",
+					"top": 181,
+					"left": 8,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Approved Date :",
+					"textAlign": "right"
+				},
+				"entryField_approvalDate": {
+					"type": "input",
+					"top": 181,
+					"left": 108,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.approvalDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"dataSourceTypeHint": "date"
+				},
+				"entryField_isApproved": {
+					"type": "checkbox",
+					"text": "Approved",
+					"top": 154,
+					"left": 108,
+					"width": 190,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.current_item.isApproved",
+					"fontWeight": "bold",
+					"dataSourceTypeHint": "boolean"
+				},
+				"PopupDate": {
+					"type": "subform",
+					"top": 181,
+					"left": 279,
+					"width": 19,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.approvalDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/PopupDate.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true,
 					"borderStyle": "none"
 				}
 			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 165,
+	"geometryStamp": 376,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

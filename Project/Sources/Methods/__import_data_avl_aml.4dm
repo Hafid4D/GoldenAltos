@@ -2,6 +2,16 @@
 
 
 var $eContact : cs:C1710.ContactEntity
+var $contactSelection : cs:C1710.ContactSelection
+
+$contactSelection:=ds:C1482.Contact.query("companyType =:1"; "Supplier")
+For each ($eContact; $contactSelection)
+	$status:=$eContact.drop()
+	If ($status.success=False:C215)
+		TRACE:C157
+	End if 
+End for each 
+
 
 //PartData
 var $ePartData : cs:C1710.PartDataEntity
@@ -11,7 +21,7 @@ $partData_log:=Folder:C1567(fk data folder:K87:12).file("DataJson/partData_expor
 If ($partData_log.exists)
 	$partDatas:=JSON Parse:C1218($partData_log.getText())
 	
-	TRUNCATE TABLE:C1051([PartData:48])
+	TRUNCATE TABLE:C1051([PartData:58])
 	
 	For each ($partData; $partDatas)
 		
@@ -37,7 +47,17 @@ $supplier_log:=Folder:C1567(fk data folder:K87:12).file("DataJson/suppliers_expo
 If ($supplier_log.exists)
 	$suppliers:=JSON Parse:C1218($supplier_log.getText())
 	
-	TRUNCATE TABLE:C1051([Supplier:47])
+	TRUNCATE TABLE:C1051([Supplier:57])
+	
+	
+	$docs:=Folder:C1567(fk data folder:K87:12).file("DataJson/docServerIndex_export.json")
+	$count:=0
+	If ($docs.exists)
+		
+		$documents:=JSON Parse:C1218($docs.getText())
+		
+	End if 
+	
 	
 	For each ($supplier; $suppliers)
 		
@@ -46,15 +66,14 @@ If ($supplier_log.exists)
 		$eSupplier.name:=$supplier.Supplier
 		$eSupplier.code:=$supplier.code
 		
-		//$eSupplier.divisionID:=$supplier.Critical
 		$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($supplier.Division; "\r"; sk trim spaces:K86:2).join("\r"))
 		
 		If ($division.length>0)
 			
-			$eSupplier.divisionID:=$division[0].divisionID
+			$eSupplier.UUID_Division:=$division[0].UUID
 		Else 
 			
-			$eSupplier.divisionID:=0
+			$eSupplier.UUID_Division:=""
 		End if 
 		
 		$eSupplier.disqualified:=$supplier.Disqualified
@@ -66,8 +85,8 @@ If ($supplier_log.exists)
 		$eSupplier.webService:=$supplier.WebService
 		$eSupplier.auditRequired:=$supplier.Audit_Required
 		$eSupplier.deactivated:=$supplier.Deactivate
-		$eSupplier.lastAuditDate:=$supplier.Last_Audit_Date
-		$eSupplier.nextAuditDate:=$supplier.Next_Audit_Due
+		$eSupplier.stmpLastAudit:=cs:C1710.sfw_stmp.me.build(Date:C102($supplier.Last_Audit_Date))
+		$eSupplier.stmpNextAudit:=cs:C1710.sfw_stmp.me.build(Date:C102($supplier.Next_Audit_Due))
 		
 		$eSupplier.contactDetails:=New object:C1471()
 		$eSupplier.contactDetails.addresses:=New collection:C1472()
@@ -100,6 +119,39 @@ If ($supplier_log.exists)
 		$address.detail.state:=$supplier.remit_st
 		$eSupplier.contactDetails.addresses.push($address)
 		
+		$_documents:=$documents.query("PrimaryKeyValue=:1 & TableNumber=:2"; String:C10($supplier.UniqueID); 18)
+		
+		$eSupplier.attachedDocuments:=New object:C1471()
+		$eSupplier.attachedDocuments.documents:=New collection:C1472()
+		
+		For each ($document; $_documents)
+			$doc:=New object:C1471
+			
+			$doc.code:=$document.DocCode
+			$doc.dateTimeStamp:=$document.DateTimeStamp
+			$doc.creationDateTimeStamp:=$document.CreationDateTimeStamp
+			$doc.documentPath:=$document.DocumentPath
+			$doc.sourcePath:=$document.SourcePath
+			$doc.description:=$document.DocDescription
+			$doc.approvalDate:=!00-00-00!
+			$doc.approvedBy:=""
+			$doc.isApproved:=False:C215
+			
+			
+			$report:=Folder:C1567(fk data folder:K87:12).file("DataJson/SuppliersDocs/"+String:C10($document.UniqueID+$document.PrimaryKeyValue))
+			If ($report.exists)
+				
+				C_BLOB:C604($blob)
+				DOCUMENT TO BLOB:C525($report.platformPath; $blob)
+				
+				$doc.blob:=$blob
+				
+			End if 
+			
+			$eSupplier.attachedDocuments.documents.push($doc)
+			
+		End for each 
+		
 		
 		//Save the supplier
 		$res:=$eSupplier.save()
@@ -109,33 +161,46 @@ If ($supplier_log.exists)
 		
 		
 		//Primary contact
-		$eContact:=ds:C1482.Contact.new()
-		$eContact.UUID_Supplier:=$eSupplier.UUID
-		$eContact.firstName:=$supplier.C1_first_name
-		$eContact.lastName:=$supplier.C1_last_name
-		$eContact.title:="PSC"
-		
-		$eContact.contactDetails:=New object:C1471()
-		$eContact.contactDetails.addresses:=New collection:C1472()
-		
-		$eContact.contactDetails.communications:=New collection:C1472()
-		
-		$comm:=New object:C1471()
-		$comm.type:="phone"
-		$comm.comment:=""
-		$comm.contact:=$supplier.C1_tel
-		$eContact.contactDetails.communications.push($comm)
-		
-		$comm:=New object:C1471()
-		$comm.type:="fax"
-		$comm.comment:=""
-		$comm.contact:=$supplier.C1_fax
-		$eContact.contactDetails.communications.push($comm)
-		If ($supplier.C1_fax#"")
+		$supplier.C1_first_name:=Split string:C1554($supplier.C1_first_name; ";"; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join(";")
+		$supplier.C1_first_name:=Split string:C1554($supplier.C1_first_name; ";"; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join(";")
+		If ($supplier.C1_first_name#"") || ($supplier.C1_last_name#"")
+			$eContact:=ds:C1482.Contact.new()
+			$eContact.UUID_Company:=$eSupplier.UUID
+			$eContact.firstName:=$supplier.C1_first_name
+			$eContact.lastName:=$supplier.C1_last_name
+			$eContact.title:="Primary"
+			$eContact.contactDetails:=New object:C1471()
+			$eContact.contactDetails.addresses:=New collection:C1472()
 			
+			$eContact.contactDetails.communications:=New collection:C1472()
+			
+			$comm:=New object:C1471()
+			$comm.type:="phone"
+			$comm.comment:=""
+			$comm.contact:=$supplier.C1_tel
+			$eContact.contactDetails.communications.push($comm)
+			
+			$comm:=New object:C1471()
+			$comm.type:="fax"
+			$comm.comment:=""
+			$comm.contact:=$supplier.C1_fax
+			$eContact.contactDetails.communications.push($comm)
+			If ($supplier.C1_fax#"")
+				
+			End if 
+			$comm:=New object:C1471()
+			$comm.type:="email"
+			$comm.comment:=""
+			$comm.contact:=$supplier.C1_Email
+			$eContact.contactDetails.communications.push($comm)
+			
+			$result:=$eContact.save()
+			If ($result.success=False:C215)
+				TRACE:C157
+			End if 
 		End if 
 		$comm:=New object:C1471()
-		$comm.type:="mail"
+		$comm.type:="email"
 		$comm.comment:=""
 		$comm.contact:=$supplier.C1_Email
 		$eContact.contactDetails.communications.push($comm)
@@ -148,11 +213,10 @@ If ($supplier_log.exists)
 		
 		//Secondary contact
 		$eContact:=ds:C1482.Contact.new()
-		$eContact.UUID_Supplier:=$eSupplier.UUID
+		$eContact.UUID_Company:=$eSupplier.UUID
 		$eContact.firstName:=$supplier.C2_first_name
 		$eContact.lastName:=$supplier.C2_last_name
-		$eContact.title:="SSC"
-		
+		$eContact.title:="Secondary"
 		$eContact.contactDetails:=New object:C1471()
 		$eContact.contactDetails.addresses:=New collection:C1472()
 		
@@ -171,7 +235,7 @@ If ($supplier_log.exists)
 		$eContact.contactDetails.communications.push($comm)
 		
 		$comm:=New object:C1471()
-		$comm.type:="mail"
+		$comm.type:="email"
 		$comm.comment:=""
 		$comm.contact:=$supplier.C2_Email
 		$eContact.contactDetails.communications.push($comm)
@@ -179,10 +243,13 @@ If ($supplier_log.exists)
 		$result:=$eContact.save()
 		If ($result.success=False:C215)
 			TRACE:C157
+			
 		End if 
 		
 		
 	End for each 
+	
+	
 	
 End if 
 
@@ -198,27 +265,25 @@ $avml_log:=Folder:C1567(fk data folder:K87:12).file("DataJson/avlAml_export.json
 If ($avml_log.exists)
 	$avmls:=JSON Parse:C1218($avml_log.getText())
 	
-	TRUNCATE TABLE:C1051([AML:46])
+	TRUNCATE TABLE:C1051([AML:56])
 	
 	For each ($avml; $avmls)
 		
 		$eAvml:=ds:C1482.AML.new()
 		
 		$eAvml.vendorPartnum:=$avml.Vendor_partnum
-		$eAvml.UUID_Supplier:=$avml.Vendor_partnum
 		$eAvml.critical:=$avml.Critical
 		$eAvml.service:=$avml.Service
 		$eAvml.serviceType:=$avml.Service_type
 		
-		//$eAvml.divisionID:=$avml.Division
 		$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($avml.Division; "\r"; sk trim spaces:K86:2).join("\r"))
 		
 		If ($division.length>0)
 			
-			$eAvml.divisionID:=$division[0].divisionID
+			$eAvml.UUID_Division:=$division[0].UUID
 		Else 
 			
-			$eAvml.divisionID:=0
+			$eAvml.UUID_Division:=""
 		End if 
 		
 		$eAvml.enteredBy:=$avml.EnteredBy
@@ -226,23 +291,22 @@ If ($avml_log.exists)
 		$eAvml.makeInactive:=$avml.MakeInactive
 		$eAvml.comment:=$avml.Comments
 		
-		//$eAvml.inventoryUnits:=$avml.InventoryUnits
 		$unit:=ds:C1482.Units.query("name =:1"; Split string:C1554($avml.InventoryUnits; "\r"; sk trim spaces:K86:2).join("\r"))
 		
 		If ($unit.length>0)
 			
-			$eAvml.inventoryUnits:=$unit[0].unitID
+			$eAvml.inventoryUnits:=$unit[0].levelID
 		Else 
 			
 			$eAvml.inventoryUnits:=0
 		End if 
 		
-		//$eAvml.procurementUnits:=$avml.ProcurementUnits
+		
 		$unit:=ds:C1482.Units.query("name =:1"; Split string:C1554($avml.ProcurementUnits; "\r"; sk trim spaces:K86:2).join("\r"))
 		
 		If ($unit.length>0)
 			
-			$eAvml.procurementUnits:=$unit[0].unitID
+			$eAvml.procurementUnits:=$unit[0].levelID
 		Else 
 			
 			$eAvml.procurementUnits:=0
@@ -257,11 +321,25 @@ If ($avml_log.exists)
 		$partNum:=ds:C1482.PartData.query("internalPartNum =:1"; Split string:C1554($avml.OUR_partnum; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($partNum.length>0)
 			$eAvml.UUID_PartData:=$partNum[0].UUID
+		Else 
+			
+			$ePartData:=ds:C1482.PartData.new()
+			$ePartData.internalPartNum:=$avml.OUR_partnum
+			
+			$res:=$ePartData.save()
+			If (Not:C34($res.success))
+				TRACE:C157
+			End if 
+			
+			$eAvml.UUID_PartData:=$ePartData.UUID
+			
 		End if 
 		
 		$supplier:=ds:C1482.Supplier.query("name =:1"; Split string:C1554($avml.Supplier; "\r"; sk trim spaces:K86:2).join("\r"))
-		If ($partNum.length>0)
+		If ($supplier.length>0)
 			$eAvml.UUID_Supplier:=$supplier[0].UUID
+		Else 
+			
 		End if 
 		
 		$res:=$eAvml.save()

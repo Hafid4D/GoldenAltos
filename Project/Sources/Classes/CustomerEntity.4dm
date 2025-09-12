@@ -18,7 +18,7 @@ local Function rebuildAddress()->$address : Object
 	
 local Function rebuidComunications($contactType)->$contacts : Collection
 	
-	$communications:=Form:C1466.current_item.contacts.query("title=:1"; $contactType).first().contactDetails.communications
+	$communications:=ds:C1482.Contact.query("UUID_Company=:1 & title=:2"; Form:C1466.current_item.UUID; $contactType).first().contactDetails.communications
 	If ($communications#Null:C1517)
 		$contacts:=New collection:C1472()
 		For ($i; 0; $communications.length-1)
@@ -29,10 +29,36 @@ local Function rebuidComunications($contactType)->$contacts : Collection
 			$Object.comment:=$communications[$i].comment
 			$contacts.push($Object)
 			
+		End for 
+		
+	End if 
+	
+	
+local Function rebuildContact()->$contacts : Collection
+	var $communication : cs:C1710.ContactEntity
+	Case of 
+		: (Form:C1466.apContact=1)
+			$type:="AP"
+		: (Form:C1466.statusContact=1)
+			$type:="Status"
+	End case 
+	$contacts:=New collection:C1472()
+	$communication:=ds:C1482.Contact.query("UUID_Company =:1"; Form:C1466.current_item.UUID).query("title=:1"; $type).first()
+	If ($communication#Null:C1517)
+		$communications:=$communication.contactDetails.communications
+		For ($i; 0; $communications.length-1)
+			
+			$object:=New object:C1471
+			$Object.name:=$communications[$i].type
+			$Object.value:=$communications[$i].contact
+			$Object.comment:=$communications[$i].comment
+			$contacts.push($Object)
 			
 		End for 
 		
 	End if 
+	Form:C1466.lb_contact:=$contacts
+	
 	
 	
 local Function get nameInWindowTitle()->$nameInWindowTitle : Text
@@ -67,11 +93,11 @@ local Function _initCommunication()
 	//This.contactDetails.communications:=New collection
 	//End if 
 	
-	If (ds:C1482.Contact.query("UUID_Customer=:1"; This:C1470.UUID).extract("title").indexOf("AP")=-1)
+	If (ds:C1482.Contact.query("UUID_Company=:1"; This:C1470.UUID).extract("title").indexOf("AP")=-1)
 		var $apContact : cs:C1710.ContactEntity
 		$apContact:=ds:C1482.Contact.new()
 		$apContact.title:="AP"
-		$apContact.UUID_Customer:=This:C1470.UUID
+		$apContact.UUID_Company:=This:C1470.UUID
 		
 		$apContact.contactDetails:=New object:C1471
 		
@@ -91,11 +117,11 @@ local Function _initCommunication()
 		$apContact.save()
 	End if 
 	
-	If (ds:C1482.Contact.query("UUID_Customer=:1"; This:C1470.UUID).extract("title").indexOf("Status")=-1)
+	If (ds:C1482.Contact.query("UUID_Company=:1"; This:C1470.UUID).extract("title").indexOf("Status")=-1)
 		var $statusContact : cs:C1710.ContactEntity
 		$statusContact:=ds:C1482.Contact.new()
 		$statusContact.title:="Status"
-		$statusContact.UUID_Customer:=This:C1470.UUID
+		$statusContact.UUID_Company:=This:C1470.UUID
 		
 		$statusContact.contactDetails:=New object:C1471
 		

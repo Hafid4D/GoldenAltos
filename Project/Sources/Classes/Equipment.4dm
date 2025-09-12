@@ -4,7 +4,7 @@ Class extends DataClass
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	//Mark: entry : Equipment
-	$entry:=cs:C1710.sfw_definitionEntry.new("equipment"; ["qualityAssistance"]; "Equipments")
+	$entry:=cs:C1710.sfw_definitionEntry.new("equipment"; ["qualityAssurance"]; "Equipments")
 	$entry.setDataclass("Equipment")
 	$entry.setSearchboxField("assignedID")
 	$entry.setDisplayOrder(100)
@@ -31,7 +31,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListAction("Print PM Sticker"; "_ga_printPMStickers")
 	
 	$entry.setItemAction("Print Repair Log Report"; "_ga_printRepairLogReport")
-	$entry.setItemAction("Print Usage Log Equip/Traveler"; "_ga_usageLogReport")
+	
+	$entry.setItemAction("Print Usage Log EquipTraveler"; "_ga_usageLogReport")
+	
 	
 	
 	$entry.enableTransaction()
@@ -40,7 +42,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$filter:=cs:C1710.sfw_definitionFilter.new("filterEquipmentLocation")
 	$filter.setDefaultTitle("All locations")
-	$filter.setFilterByIDInTable("EquipmentLocation"; "locationID"; "locationID")
+	$filter.setFilterByLinkedEntity("EquipmentLocation"; "UUID_EquipmentLocation"; ""; "location")
 	$filter.setDynamicTitle("name"; "## equipment location")
 	$entry.addFilter($filter)
 	
@@ -52,7 +54,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$filter:=cs:C1710.sfw_definitionFilter.new("filterEquipmentDivision")
 	$filter.setDefaultTitle("All divisions")
-	$filter.setFilterByIDInTable("Division"; "divisionID"; "divisionID")
+	$filter.setFilterByLinkedEntity("Division"; "UUID_Division"; ""; "division")
 	$filter.setDynamicTitle("name"; "## equipment division")
 	$entry.addFilter($filter)
 	

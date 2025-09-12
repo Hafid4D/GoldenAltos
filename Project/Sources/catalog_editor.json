@@ -8,12 +8,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 698,
-				"top": 691,
-				"width": 164,
-				"height": 369.33203125
+				"left": 681,
+				"top": 605,
+				"width": 228,
+				"height": 582.33203125
 			},
-			"displayable_fields_count": 15,
+			"displayable_fields_count": 25,
 			"fields_ordering": 1
 		},
 		"Membership": {
@@ -24,8 +24,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2659,
-				"top": 367.66796875,
+				"left": 2589,
+				"top": 405.66796875,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -40,8 +40,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2867,
-				"top": 454.66796875,
+				"left": 2883.6665039062,
+				"top": 631.33459472656,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -56,12 +56,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2437,
-				"top": 197,
-				"width": 207.05078125,
-				"height": 379.33203125
+				"left": 2159.4692382812,
+				"top": 533.47967529297,
+				"width": 226.30639648438,
+				"height": 417.9924621582
 			},
-			"displayable_fields_count": 16,
+			"displayable_fields_count": 17,
 			"fields": {
 				"contactDetails": {
 					"position": 15
@@ -78,7 +78,13 @@
 				"terminated": {
 					"position": 6
 				},
-				"department": {
+				"UUID_Department": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					},
 					"position": 12
 				},
 				"code": {
@@ -118,12 +124,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2110,
-				"top": 642,
-				"width": 169,
-				"height": 165.33203125
+				"left": 1864.3333740234,
+				"top": 1070.6667480469,
+				"width": 194,
+				"height": 171.33203125
 			},
-			"displayable_fields_count": 5
+			"displayable_fields_count": 6
 		},
 		"QuoteStatus": {
 			"color": {
@@ -133,10 +139,10 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3778.3332519531,
-				"top": 402.33331298828,
-				"width": 207.68237304688,
-				"height": 178.33203125
+				"left": 1732.4149169922,
+				"top": 444.59408569336,
+				"width": 167.68237304688,
+				"height": 176.99865722656
 			},
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
@@ -149,45 +155,27 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1894,
-				"top": 214,
-				"width": 93.66145324707,
-				"height": 129.33203125
+				"left": 1931.2374267578,
+				"top": 432.95132446289,
+				"width": 129.66145324707,
+				"height": 151.99871826172
 			},
-			"displayable_fields_count": 4,
-			"fields_ordering": 1
-		},
-		"Employee": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			},
-			"coordinates": {
-				"left": 1640,
-				"top": 204,
-				"width": 159.685546875,
-				"height": 219.33203125
-			},
-			"displayable_fields_count": 8,
-			"fields_ordering": 1
+			"displayable_fields_count": 5
 		},
 		"CustomerStatus": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 70,
+				"green": 115,
+				"blue": 190,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3773.9997558594,
-				"top": 244.33334350586,
-				"width": 210.2592010498,
-				"height": 131.33203125
+				"left": 1005.9997558594,
+				"top": 769.33337402344,
+				"width": 174.2592010498,
+				"height": 168.33203125
 			},
-			"displayable_fields_count": 4,
-			"fields_ordering": 1
+			"displayable_fields_count": 6
 		},
 		"QuoteLine": {
 			"color": {
@@ -197,12 +185,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1783,
+				"left": 1746.9506835938,
 				"top": 0,
-				"width": 127.669921875,
-				"height": 167.33203125
+				"width": 147.00085449219,
+				"height": 192.73617553711
 			},
-			"displayable_fields_count": 6,
+			"displayable_fields_count": 7,
 			"fields_ordering": 1
 		},
 		"Quote": {
@@ -213,7 +201,7 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1297,
+				"left": 1450.0543212891,
 				"top": 0,
 				"width": 195.046875,
 				"height": 335.33203125
@@ -224,10 +212,13 @@
 				"voided": {
 					"position": 14
 				},
-				"division": {
-					"position": 13
-				},
-				"revision": {
+				"UUID_Revision": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					},
 					"position": 12
 				},
 				"UUID_Employee": {
@@ -324,105 +315,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 706.33325195312,
-				"top": 1111.9998779297,
+				"left": 693.33325195312,
+				"top": 1214.9998779297,
 				"width": 159.052734375,
-				"height": 629.33203125
+				"height": 507.33203125
 			},
-			"displayable_fields_count": 28,
-			"fields_ordering": 2,
-			"fields": {
-				"UUID_Staff": {
-					"position": 3
-				},
-				"comment": {
-					"position": 28
-				},
-				"IQA_status": {
-					"position": 27
-				},
-				"IQA_required": {
-					"position": 26
-				},
-				"actualValue": {
-					"position": 16
-				},
-				"inventoryID": {
-					"color": {
-						"red": 255,
-						"green": 255,
-						"blue": 255,
-						"alpha": 0
-					},
-					"position": 25
-				},
-				"availableQty": {
-					"position": 24
-				},
-				"initiallQty": {
-					"position": 23
-				},
-				"UUID_Customer": {
-					"position": 2
-				},
-				"totalCost": {
-					"position": 22
-				},
-				"code": {
-					"position": 21
-				},
-				"receivedBy": {
-					"position": 20
-				},
-				"location": {
-					"position": 19
-				},
-				"currency": {
-					"position": 18
-				},
-				"units": {
-					"position": 17
-				},
-				"unitCost": {
-					"position": 15
-				},
-				"qtyInStock": {
-					"position": 14
-				},
-				"expirationDate": {
-					"position": 13
-				},
-				"dateIn": {
-					"position": 12
-				},
-				"stockNum": {
-					"position": 11
-				},
-				"partLotNumber": {
-					"position": 10
-				},
-				"classification": {
-					"position": 9
-				},
-				"description": {
-					"position": 8
-				},
-				"vendor": {
-					"position": 7
-				},
-				"partNumber": {
-					"position": 6
-				},
-				"customerSpecific": {
-					"position": 5
-				},
-				"customer_provided": {
-					"position": 4
-				},
-				"UUID": {
-					"position": 1
-				}
-			}
+			"displayable_fields_count": 22
 		},
 		"StepTemplateCertification": {
 			"color": {
@@ -432,8 +330,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2667.6667480469,
-				"top": 602,
+				"left": 2658.3334960938,
+				"top": 630,
 				"width": 180.92706298828,
 				"height": 126.33203125
 			},
@@ -462,8 +360,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3297.6667480469,
-				"top": 921,
+				"left": 3308.6667480469,
+				"top": 851,
 				"width": 170.80078125,
 				"height": 147.33203125
 			},
@@ -492,8 +390,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3671.6667480469,
-				"top": 742,
+				"left": 3555.6667480469,
+				"top": 748,
 				"width": 99.017578125,
 				"height": 151.33203125
 			},
@@ -510,58 +408,10 @@
 			"coordinates": {
 				"left": 3031.6667480469,
 				"top": 630.66668701172,
-				"width": 198.048828125,
-				"height": 365.33203125
+				"width": 197.048828125,
+				"height": 356.33203125
 			},
-			"displayable_fields_count": 15,
-			"fields_ordering": 2,
-			"fields": {
-				"settings": {
-					"position": 8
-				},
-				"templateNumber": {
-					"position": 3
-				},
-				"bins": {
-					"position": 15
-				},
-				"parametricMeasurements": {
-					"position": 14
-				},
-				"dataTables": {
-					"position": 13
-				},
-				"comment2": {
-					"position": 12
-				},
-				"comment1": {
-					"position": 11
-				},
-				"largeLayout": {
-					"position": 10
-				},
-				"smallLayout": {
-					"position": 9
-				},
-				"binning": {
-					"position": 7
-				},
-				"status": {
-					"position": 6
-				},
-				"division": {
-					"position": 5
-				},
-				"operation": {
-					"position": 4
-				},
-				"name": {
-					"position": 2
-				},
-				"UUID": {
-					"position": 1
-				}
-			}
+			"displayable_fields_count": 15
 		},
 		"Step": {
 			"color": {
@@ -571,8 +421,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2725,
-				"top": 776,
+				"left": 2677,
+				"top": 777.33331298828,
 				"width": 170.80078125,
 				"height": 210.33203125
 			},
@@ -622,10 +472,11 @@
 			"coordinates": {
 				"left": 2437.3334960938,
 				"top": 1052.6667480469,
-				"width": 169.69921875,
-				"height": 859.33203125
+				"width": 157.69921875,
+				"height": 755.33203125
 			},
-			"displayable_fields_count": 38
+			"displayable_fields_count": 34,
+			"fields_ordering": 1
 		},
 		"Job": {
 			"color": {
@@ -635,8 +486,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2079.0002441406,
-				"top": 1021.6667480469,
+				"left": 2144.3334960938,
+				"top": 1145,
 				"width": 171.73828125,
 				"height": 686.33203125
 			},
@@ -650,8 +501,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1834,
-				"top": 508,
+				"left": 1939.0001220703,
+				"top": 621.66662597656,
 				"width": 189.73828125,
 				"height": 398.33203125
 			},
@@ -666,8 +517,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1578,
-				"top": 503,
+				"left": 1519,
+				"top": 519.33337402344,
 				"width": 157.048828125,
 				"height": 575.33203125
 			},
@@ -675,37 +526,19 @@
 		},
 		"Customer": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 70,
+				"green": 115,
+				"blue": 190,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1296,
-				"top": 686,
-				"width": 173.724609375,
-				"height": 292.33203125
+				"left": 1270,
+				"top": 830,
+				"width": 188.29302978516,
+				"height": 331.21447753906
 			},
-			"displayable_fields_count": 11,
-			"fields_ordering": 1,
-			"fields": {
-				"code": {
-					"color": {
-						"red": 255,
-						"green": 255,
-						"blue": 255,
-						"alpha": 0
-					}
-				},
-				"name": {
-					"color": {
-						"red": 255,
-						"green": 255,
-						"blue": 255,
-						"alpha": 0
-					}
-				}
-			}
+			"displayable_fields_count": 13,
+			"fields_ordering": 1
 		},
 		"sfw_NotificationType": {
 			"color": {
@@ -715,8 +548,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 574.33331298828,
-				"top": 116.33333587646,
+				"left": 460.33331298828,
+				"top": 3.3333358764648,
 				"width": 180,
 				"height": 167.33203125
 			},
@@ -732,7 +565,7 @@
 			},
 			"coordinates": {
 				"left": 0,
-				"top": 1592.9031982422,
+				"top": 1674.9031982422,
 				"width": 173,
 				"height": 167.33203125
 			},
@@ -748,7 +581,7 @@
 			},
 			"coordinates": {
 				"left": 0,
-				"top": 1382,
+				"top": 1450,
 				"width": 136.10581970215,
 				"height": 188.33203125
 			},
@@ -764,7 +597,7 @@
 			},
 			"coordinates": {
 				"left": 0,
-				"top": 1223,
+				"top": 1293,
 				"width": 171,
 				"height": 125.33203125
 			},
@@ -779,12 +612,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 505.33331298828,
-				"top": 426.66665649414,
+				"left": 0,
+				"top": 2053,
 				"width": 166,
-				"height": 125.33203125
+				"height": 189.33203125
 			},
-			"displayable_fields_count": 4,
+			"displayable_fields_count": 7,
 			"fields_ordering": 1
 		},
 		"sfw_UserInscription": {
@@ -795,8 +628,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 282.66665649414,
-				"top": 320.66665649414,
+				"left": 0,
+				"top": 816.66662597656,
 				"width": 169,
 				"height": 167.33203125
 			},
@@ -811,8 +644,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 281.66668701172,
-				"top": 1184.3334960938,
+				"left": 0,
+				"top": 1868.3334960938,
 				"width": 170.025390625,
 				"height": 146.33203125
 			},
@@ -845,7 +678,7 @@
 			},
 			"coordinates": {
 				"left": 0,
-				"top": 988,
+				"top": 1032,
 				"width": 172.3828125,
 				"height": 209.33203125
 			},
@@ -860,8 +693,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 283.66665649414,
-				"top": 48.333335876465,
+				"left": 239.20071411133,
+				"top": 0,
 				"width": 182,
 				"height": 232.33203125
 			},
@@ -878,23 +711,7 @@
 				}
 			}
 		},
-		"sfw_EventType": {
-			"color": {
-				"red": 237,
-				"green": 211,
-				"blue": 181,
-				"alpha": 255
-			},
-			"coordinates": {
-				"left": 0,
-				"top": 855,
-				"width": 183.41665649414,
-				"height": 104.33203125
-			},
-			"displayable_fields_count": 3,
-			"fields_ordering": 1
-		},
-		"Classification": {
+		"QuoteEvent": {
 			"color": {
 				"red": 255,
 				"green": 255,
@@ -902,148 +719,305 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3597,
-				"top": 540,
-				"width": 123.54817199707,
-				"height": 120.33203125
+				"left": 4713.4065856934,
+				"top": 976.88204956055,
+				"width": 169,
+				"height": 193.33203125
 			},
-			"displayable_fields_count": 3
-		},
-		"Unit": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			},
-			"coordinates": {
-				"left": 3495.015625,
-				"top": 442.33203125,
-				"width": 87.017578125,
-				"height": 83.33203125
-			},
-			"displayable_fields_count": 2
-		},
-		"Location": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			},
-			"coordinates": {
-				"left": 3609.015625,
-				"top": 424,
-				"width": 87.017578125,
-				"height": 83.33203125
-			},
-			"displayable_fields_count": 2
-		},
-		"RMA": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			},
-			"coordinates": {
-				"left": 1123,
-				"top": 973.33203125,
-				"width": 162.033203125,
-				"height": 430.33203125
-			},
-			"displayable_fields_count": 18,
+			"displayable_fields_count": 7,
 			"fields": {
-				"customerPo": {
-					"position": 5
-				},
-				"receivedDate": {
-					"position": 6
-				},
-				"customerSvc": {
-					"position": 17
-				},
-				"qaQc": {
-					"position": 16
-				},
-				"materialDisposition": {
-					"position": 15
-				},
-				"reasonForReturn": {
-					"position": 13
-				},
-				"dateClose": {
-					"position": 7
-				},
-				"status": {
-					"position": 12
-				},
-				"description": {
-					"position": 14
-				},
-				"phone": {
-					"position": 11
-				},
-				"authorizedBy": {
-					"position": 10
-				},
-				"invoiceNumber": {
-					"position": 9
-				},
-				"contact": {
-					"position": 8
-				},
-				"rmaNumber": {
-					"position": 3
-				},
-				"partNumber": {
-					"position": 4
-				},
-				"UUID_Qcar": {
+				"UUID": {
 					"color": {
 						"red": 255,
 						"green": 255,
 						"blue": 255,
 						"alpha": 0
-					},
-					"position": 2
-				},
-				"UUID": {
-					"position": 1
+					}
 				}
 			}
 		},
-		"SpecControllingDept": {
+		"Revision": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 207,
+				"green": 209,
+				"blue": 165,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3561,
-				"top": 33,
-				"width": 144,
-				"height": 119.33203125
+				"left": 1740.3526611328,
+				"top": 248.39376831055,
+				"width": 162,
+				"height": 163.33203125
 			},
-			"displayable_fields_count": 3,
-			"fields_ordering": 1
+			"displayable_fields_count": 5,
+			"fields": {
+				"UUID": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
 		},
-		"SpecCategory": {
+		"Audit": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 160,
+				"green": 174,
+				"blue": 158,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3349,
-				"top": 26,
-				"width": 154,
-				"height": 131.33203125
+				"left": 4126,
+				"top": 0,
+				"width": 250,
+				"height": 675.33203125
+			},
+			"displayable_fields_count": 30
+		},
+		"PartData": {
+			"color": {
+				"red": 128,
+				"green": 255,
+				"blue": 128,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 3347,
+				"top": 0,
+				"width": 186,
+				"height": 127.33203125
 			},
 			"displayable_fields_count": 4,
 			"fields_ordering": 1
+		},
+		"Supplier": {
+			"color": {
+				"red": 128,
+				"green": 255,
+				"blue": 128,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 3841,
+				"top": 0,
+				"width": 211,
+				"height": 422.33203125
+			},
+			"displayable_fields_count": 18,
+			"fields": {
+				"UUID": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
+		},
+		"AML": {
+			"color": {
+				"red": 128,
+				"green": 255,
+				"blue": 128,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 3586,
+				"top": 0,
+				"width": 205,
+				"height": 533.33203125
+			},
+			"displayable_fields_count": 23,
+			"fields": {
+				"UUID": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
+		},
+		"InteractionMethod": {
+			"color": {
+				"red": 207,
+				"green": 209,
+				"blue": 165,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 1878.7624511719,
+				"top": 2283.6591796875,
+				"width": 162,
+				"height": 163.33203125
+			},
+			"displayable_fields_count": 5,
+			"fields": {
+				"UUID": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
+		},
+		"InteractionOutcome": {
+			"color": {
+				"red": 207,
+				"green": 209,
+				"blue": 165,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 1670.4926757812,
+				"top": 2282.5024414062,
+				"width": 162,
+				"height": 163.33203125
+			},
+			"displayable_fields_count": 5,
+			"fields": {
+				"UUID": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
+		},
+		"InteractionTrigger": {
+			"color": {
+				"red": 207,
+				"green": 209,
+				"blue": 165,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 852.18231201172,
+				"top": 2307.9233398438,
+				"width": 165.71719360352,
+				"height": 177.60284423828
+			},
+			"displayable_fields_count": 6
+		},
+		"sfw_EventType": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 244,
+				"top": 1394,
+				"width": 190,
+				"height": 169.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
+		"Interaction": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 1303.8548583984,
+				"top": 2277.5395507812,
+				"width": 285.34545898438,
+				"height": 338.83685302734
+			},
+			"displayable_fields_count": 14,
+			"fields": {
+				"UUID": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
+		},
+		"LeadEvent": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 4713.7133026123,
+				"top": 1231.5030670166,
+				"width": 169,
+				"height": 193.33203125
+			},
+			"displayable_fields_count": 7,
+			"fields": {
+				"UUID": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
+		},
+		"Units": {
+			"color": {
+				"red": 128,
+				"green": 255,
+				"blue": 128,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 3354,
+				"top": 169,
+				"width": 186,
+				"height": 169.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
+		"AuditStatus": {
+			"color": {
+				"red": 160,
+				"green": 174,
+				"blue": 158,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 4425,
+				"top": 0,
+				"width": 169,
+				"height": 172.33203125
+			},
+			"displayable_fields_count": 6
+		},
+		"ControllingDepartment": {
+			"color": {
+				"red": 249,
+				"green": 130,
+				"blue": 127,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 3123,
+				"top": 0,
+				"width": 148,
+				"height": 212.33203125
+			},
+			"displayable_fields_count": 8
 		},
 		"StepSpec": {
 			"color": {
@@ -1060,36 +1034,45 @@
 			},
 			"displayable_fields_count": 3
 		},
-		"(InteractionType)": {
+		"DocumentCategory": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 249,
+				"green": 130,
+				"blue": 127,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1209.015625,
-				"top": 2104.013671875,
-				"width": 193,
-				"height": 131.33203125
+				"left": 3122,
+				"top": 232,
+				"width": 152,
+				"height": 201.33203125
 			},
-			"displayable_fields_count": 4,
-			"fields_ordering": 1
+			"displayable_fields_count": 7
 		},
-		"LeadInteraction": {
+		"InteractionType": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 207,
+				"green": 209,
+				"blue": 165,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 860.015625,
-				"top": 2010.013671875,
-				"width": 230,
-				"height": 227.33203125
+				"left": 1075.8306884766,
+				"top": 2319.2586669922,
+				"width": 162,
+				"height": 163.33203125
 			},
-			"displayable_fields_count": 8
+			"displayable_fields_count": 5,
+			"fields": {
+				"UUID": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
 		},
 		"LeadNextStep": {
 			"color": {
@@ -1099,8 +1082,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 771.68432617188,
-				"top": 1802,
+				"left": 838.68432617188,
+				"top": 2091,
 				"width": 183,
 				"height": 172.33203125
 			},
@@ -1114,8 +1097,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 970,
-				"top": 1770,
+				"left": 1079,
+				"top": 2115,
 				"width": 155,
 				"height": 159.33203125
 			},
@@ -1129,8 +1112,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1245,
-				"top": 1759,
+				"left": 1293,
+				"top": 2079,
 				"width": 162,
 				"height": 163.33203125
 			},
@@ -1144,8 +1127,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 282,
-				"top": 722.66668701172,
+				"left": 254,
+				"top": 486.66668701172,
 				"width": 179,
 				"height": 146.33203125
 			},
@@ -1175,42 +1158,42 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1156,
-				"top": 1298,
-				"width": 365,
-				"height": 425.33203125
+				"left": 1167.6898193359,
+				"top": 1192.286895752,
+				"width": 383.04388427734,
+				"height": 466.03674316406
 			},
 			"displayable_fields_count": 18
 		},
 		"YesNoQuestion": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 114,
+				"green": 209,
+				"blue": 221,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2426,
+				"left": 2452,
 				"top": 0,
-				"width": 153,
-				"height": 133.33203125
+				"width": 129,
+				"height": 161.33203125
 			},
-			"displayable_fields_count": 4
+			"displayable_fields_count": 5
 		},
 		"CICategory": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 114,
+				"green": 209,
+				"blue": 221,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1937,
-				"top": 357,
-				"width": 120,
-				"height": 127.33203125
+				"left": 1938,
+				"top": 180,
+				"width": 122,
+				"height": 160.33203125
 			},
-			"displayable_fields_count": 4
+			"displayable_fields_count": 5
 		},
 		"sfw_Currency": {
 			"color": {
@@ -1221,7 +1204,7 @@
 			},
 			"coordinates": {
 				"left": 0,
-				"top": 727,
+				"top": 705,
 				"width": 183.50390625,
 				"height": 104.33203125
 			},
@@ -1230,13 +1213,13 @@
 		},
 		"CIOrigin": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 114,
+				"green": 209,
+				"blue": 221,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1929,
+				"left": 1936,
 				"top": 0,
 				"width": 120,
 				"height": 167.33203125
@@ -1252,7 +1235,7 @@
 			},
 			"coordinates": {
 				"left": 0,
-				"top": 516,
+				"top": 520,
 				"width": 186.029296875,
 				"height": 167.33203125
 			},
@@ -1261,40 +1244,40 @@
 		},
 		"CIHumanFactor": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 114,
+				"green": 209,
+				"blue": 221,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2281,
-				"top": 332,
-				"width": 120,
-				"height": 117.33203125
+				"left": 2288,
+				"top": 180,
+				"width": 118,
+				"height": 162.33203125
 			},
-			"displayable_fields_count": 3
+			"displayable_fields_count": 5
 		},
 		"CIDisposition": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 114,
+				"green": 209,
+				"blue": 221,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2283,
-				"top": 173,
-				"width": 120,
-				"height": 134.33203125
+				"left": 2428,
+				"top": 179,
+				"width": 122,
+				"height": 153.33203125
 			},
-			"displayable_fields_count": 4
+			"displayable_fields_count": 5
 		},
 		"CIPriority": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 114,
+				"green": 209,
+				"blue": 221,
+				"alpha": 255
 			},
 			"coordinates": {
 				"left": 2290,
@@ -1312,8 +1295,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 494,
-				"top": 1193,
+				"left": 246,
+				"top": 1163,
 				"width": 192,
 				"height": 191.33203125
 			},
@@ -1322,18 +1305,18 @@
 		},
 		"ContinuousImprovement": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 114,
+				"green": 209,
+				"blue": 221,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2066,
+				"left": 2074,
 				"top": 0,
 				"width": 197,
-				"height": 484.33203125
+				"height": 513.33203125
 			},
-			"displayable_fields_count": 21,
+			"displayable_fields_count": 22,
 			"fields": {
 				"notes": {
 					"color": {
@@ -1353,10 +1336,10 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 485.30187988281,
-				"top": 2109.4272460938,
-				"width": 203.5625,
-				"height": 180.89453125
+				"left": 245.30187988281,
+				"top": 2089.4272460938,
+				"width": 221.5625,
+				"height": 176.89453125
 			},
 			"displayable_fields_count": 6
 		},
@@ -1368,12 +1351,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 180.39337158203,
-				"top": 2153.5737304688,
-				"width": 174.30340576172,
-				"height": 141.44006347656
+				"left": 248.39337158203,
+				"top": 2297.5737304688,
+				"width": 218.30340576172,
+				"height": 147.44006347656
 			},
-			"displayable_fields_count": 4
+			"displayable_fields_count": 5
 		},
 		"dfd_Document": {
 			"color": {
@@ -1383,8 +1366,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 170.18225097656,
-				"top": 1884.2108154297,
+				"left": 242.18225097656,
+				"top": 1616.2108154297,
 				"width": 224.55322265625,
 				"height": 235.21725463867
 			},
@@ -1419,18 +1402,18 @@
 		},
 		"RepairLog": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 150,
+				"green": 216,
+				"blue": 175,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 902,
-				"top": 520,
+				"left": 1177,
+				"top": 0,
 				"width": 176,
-				"height": 422.33203125
+				"height": 462.33203125
 			},
-			"displayable_fields_count": 18
+			"displayable_fields_count": 20
 		},
 		"Division": {
 			"color": {
@@ -1440,8 +1423,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3009,
-				"top": 442,
+				"left": 2625,
+				"top": 166,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -1449,19 +1432,18 @@
 		},
 		"EquipmentLocation": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 150,
+				"green": 216,
+				"blue": 175,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 752,
+				"left": 761,
 				"top": 0,
-				"width": 120,
-				"height": 167.33203125
+				"width": 139,
+				"height": 190.33203125
 			},
-			"displayable_fields_count": 6,
-			"fields_ordering": 1
+			"displayable_fields_count": 7
 		},
 		"sfw_Counter": {
 			"color": {
@@ -1472,9 +1454,9 @@
 			},
 			"coordinates": {
 				"left": 0,
-				"top": 404,
-				"width": 187.1484375,
-				"height": 104.33203125
+				"top": 394,
+				"width": 189.1484375,
+				"height": 114.33203125
 			},
 			"displayable_fields_count": 3,
 			"fields_ordering": 1
@@ -1487,8 +1469,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 283.33331298828,
-				"top": 535.66668701172,
+				"left": 251.33331298828,
+				"top": 283.66668701172,
 				"width": 181,
 				"height": 167.33203125
 			},
@@ -1504,7 +1486,7 @@
 			},
 			"coordinates": {
 				"left": 0,
-				"top": 212,
+				"top": 210,
 				"width": 189.33984375,
 				"height": 168.33203125
 			},
@@ -1519,8 +1501,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 15,
-				"top": 6,
+				"left": 0,
+				"top": 0,
 				"width": 187.373046875,
 				"height": 188.33203125
 			},
@@ -1535,9 +1517,9 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 483.6943359375,
-				"top": 1904.4036865234,
-				"width": 243.97706604004,
+				"left": 243.6943359375,
+				"top": 1884.4036865234,
+				"width": 223.97706604004,
 				"height": 184.03462219238
 			},
 			"displayable_fields_count": 6,
@@ -1565,18 +1547,18 @@
 		},
 		"Equipment": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 150,
+				"green": 216,
+				"blue": 175,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1029,
-				"top": 22,
-				"width": 182,
-				"height": 670.33203125
+				"left": 941,
+				"top": 0,
+				"width": 204,
+				"height": 673.33203125
 			},
-			"displayable_fields_count": 29
+			"displayable_fields_count": 30
 		},
 		"ContactEvent": {
 			"color": {
@@ -1586,12 +1568,13 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2827,
-				"top": 222,
-				"width": 169,
-				"height": 193.33203125
+				"left": 4713,
+				"top": 760.66668701172,
+				"width": 164,
+				"height": 186.33203125
 			},
-			"displayable_fields_count": 7
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
 		},
 		"CustomerEvent": {
 			"color": {
@@ -1601,27 +1584,27 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2632,
-				"top": 0,
-				"width": 167,
-				"height": 190.33203125
+				"left": 4715.3334960938,
+				"top": 535,
+				"width": 161,
+				"height": 191.33203125
 			},
 			"displayable_fields_count": 7
 		},
 		"Specification": {
 			"color": {
-				"red": 181,
-				"green": 145,
-				"blue": 209,
+				"red": 249,
+				"green": 130,
+				"blue": 127,
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3093.015625,
+				"left": 2820.015625,
 				"top": 0,
-				"width": 190.697265625,
-				"height": 446.33203125
+				"width": 258.697265625,
+				"height": 537.33203125
 			},
-			"displayable_fields_count": 19
+			"displayable_fields_count": 23
 		},
 		"sfw_DocumentFolder": {
 			"color": {
@@ -1631,10 +1614,10 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 493.33319091797,
-				"top": 957.33337402344,
-				"width": 162.66662597656,
-				"height": 183.33203125
+				"left": 249.33319091797,
+				"top": 942.33337402344,
+				"width": 190.66662597656,
+				"height": 187.33203125
 			},
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
@@ -1647,8 +1630,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 250.66662597656,
-				"top": 914.66674804688,
+				"left": 246.66662597656,
+				"top": 672.66674804688,
 				"width": 194.66665649414,
 				"height": 239.99870300293
 			},
@@ -1686,18 +1669,18 @@
 		},
 		"CustomerCarrier": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 70,
+				"green": 115,
+				"blue": 190,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3567,
-				"top": 194,
-				"width": 169,
-				"height": 142.33203125
+				"left": 1003,
+				"top": 949,
+				"width": 175,
+				"height": 166.33203125
 			},
-			"displayable_fields_count": 4
+			"displayable_fields_count": 5
 		},
 		"Tool": {
 			"color": {
@@ -1722,12 +1705,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2686,
-				"top": 989.33325195312,
-				"width": 202.048828125,
-				"height": 798.33203125
+				"left": 2688.6667480469,
+				"top": 1041.3332519531,
+				"width": 200.048828125,
+				"height": 758.33203125
 			},
-			"displayable_fields_count": 36,
+			"displayable_fields_count": 34,
 			"fields": {
 				"comment2": {
 					"position": 17
@@ -1805,8 +1788,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1297,
-				"top": 378,
+				"left": 1257.6667480469,
+				"top": 481.33331298828,
 				"width": 179.712890625,
 				"height": 301.33203125
 			},
@@ -1820,8 +1803,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3759,
-				"top": 0,
+				"left": 3043,
+				"top": 1344,
 				"width": 211.29681396484,
 				"height": 104.33203125
 			},
@@ -1836,8 +1819,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3765,
-				"top": 117.66667175293,
+				"left": 3081,
+				"top": 1529.6667480469,
 				"width": 211.01448059082,
 				"height": 104.33203125
 			},
@@ -1852,17 +1835,16 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 692,
-				"top": 423,
-				"width": 149.015625,
-				"height": 196.33203125
+				"left": 681,
+				"top": 321,
+				"width": 223.95446777344,
+				"height": 268.15802001953
 			},
-			"displayable_fields_count": 7,
-			"fields_ordering": 1
+			"displayable_fields_count": 10
 		}
 	},
 	"relations": {
-		"BFCDEDAB8580A14081685777FD8DF952": {
+		"D982B8553811B2468F440FBF6F888F44": {
 			"color": {
 				"red": 240,
 				"green": 240,
@@ -1870,7 +1852,7 @@
 				"alpha": 0
 			}
 		},
-		"3CB586C9B8431B41B3BC1FDE8726D98F": {
+		"5A6A240E15CEAC4F9754A849BB703AE5": {
 			"color": {
 				"red": 240,
 				"green": 240,
@@ -1878,7 +1860,327 @@
 				"alpha": 0
 			}
 		},
-		"E2AF483B529D544AB1C2C73E91FCFA34": {
+		"21CCCB93C0707B4D9CAC866EA7A4CCF3": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"FBC0F8D58BEE4D468E32DAE301646C43": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"7244ED91755F7E4DBD92D5DF80C5724E": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"277BE58DF3CA1E4ABBD5DD685B4B762E": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"955D7429936EA745A291C959AF600BA3": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"69CAE96E3D9AEC4CAEFC4614328AC072": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"C094CCAE645E404288AD6D06B0055F16": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"6DC2F4D462B73A4EA57FC5CF4B485D48": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"0A7463FE0FCEC94EA2A2F79201C0A462": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"CC7FA698F6998C4BBA34F1464A6A7E30": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"F9A518D72A481949B5ADB68DA975EE6A": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"C60AC1EB28D5CD45AC93BCDF4ADFE38C": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"3209E38B53909145B2E7C20384F5F5C0": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"A28F33D93BF32F42AF61697D6DDDAF45": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"A99D1043A588BB4286DB331DC8266D35": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"5353B4D22D663942A1EE2AA86278AAE8": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"B6538AB6C0F9174B8E4C993C9C6D4AEE": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"1B51D73996015F4D9E201259802D52BA": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"96B3C280735714459AB0879D2376BCC9": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"AB2454F1B5B6FE4E93B14808E478CD69": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"B11C0BD997CA7A449E5DBF942E8A30B6": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"935904C8F2EAE94A9D2D25CADEA390E4": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"85096A5E94564B19A0DB035D1B689839": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"309393617FBD4C159CCC9DA605D0AD2A": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"3D75BC15FEE941B8802DEACACC2C7566": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"F525F81F4C1F4801B743AD30F535F348": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"C25C35B1A209492C83653EC7F60E5561": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"ABCDD9EC48614C7C93F6B133B4942C86": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"AD6BBF2F268242C0B04A46CEBCCC5DEA": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"F01472D43AF045ECB5F37A14F2FBD275": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"FC01FE8AFB1B4C998C2ECA9DDCE44478": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"068E44D3BD334FFF88492120C25B4C9A": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"C09BC2389C8D4BF6BFF5034684908093": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"DBA2364367CE440FBDE4F5879B7D3579": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"048335A1E87F481DA33D76A3585C79EE": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"0593618F32AA47E0B03B170604C8D3B2": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"6120D9486B32444088E89AFECD087224": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"AE19CBDB010A4D53BA5D456EB90C3671": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"42BCCE20373BB84ABBBDF798B52E0EA3": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"4397240B422CC64C80533458CFAD745E": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"C4A8CC154AD81D4D986804038C278648": {
 			"color": {
 				"red": 240,
 				"green": 240,
@@ -1902,19 +2204,19 @@
 				"alpha": 0
 			}
 		},
-		"24BB5D155DE423499AE0F96C27851857": {
+		"BB1DFB317C5D463D9934C6D6D89016BA": {
 			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
+				"red": 255,
+				"green": 255,
+				"blue": 255,
 				"alpha": 0
 			}
 		},
-		"BB2D5D424F97EB448E57F69E217877FF": {
+		"ECC18FA98010492F9CECB0539C699C53": {
 			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
+				"red": 255,
+				"green": 255,
+				"blue": 255,
 				"alpha": 0
 			}
 		},
@@ -2054,6 +2356,14 @@
 				"alpha": 0
 			}
 		},
+		"BCF4A60895A2A543A55AEF7B2BCAF5D3": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"DB8D79B14BDE42479CDD27271248450D": {
 			"color": {
 				"red": 240,
@@ -2070,15 +2380,7 @@
 				"alpha": 0
 			}
 		},
-		"A2FC9314D488E043A1D505B9967275F1": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"CF3063584FFE4334AC18A5B8B1445D95": {
+		"4EEBB3B3CDCE4E4D8FB9E78C0A56728C": {
 			"color": {
 				"red": 255,
 				"green": 255,
