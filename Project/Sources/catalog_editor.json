@@ -203,10 +203,11 @@
 			"coordinates": {
 				"left": 1450.0543212891,
 				"top": 0,
-				"width": 263.75323486328,
-				"height": 419.92266845703
+				"width": 195.046875,
+				"height": 335.33203125
 			},
-			"displayable_fields_count": 18,
+			"displayable_fields_count": 14,
+			"fields_ordering": 2,
 			"fields": {
 				"voided": {
 					"position": 14
@@ -220,7 +221,7 @@
 					},
 					"position": 12
 				},
-				"UUID_Staff": {
+				"UUID_Employee": {
 					"position": 3
 				},
 				"stmpCreation": {
@@ -241,11 +242,14 @@
 				"subject": {
 					"position": 6
 				},
-				"UUID_Status": {
+				"currentStatusID": {
 					"position": 5
 				},
 				"code": {
 					"position": 4
+				},
+				"UUID_Contact": {
+					"position": 2
 				},
 				"UUID": {
 					"position": 1
@@ -260,13 +264,48 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 942.66656494141,
-				"top": 1214.3332519531,
+				"left": 943.66656494141,
+				"top": 1213.3332519531,
 				"width": 149.0390625,
 				"height": 398.33203125
 			},
 			"displayable_fields_count": 17,
-			"fields_ordering": 1
+			"fields_ordering": 2,
+			"fields": {
+				"lotNumber": {
+					"position": 7
+				},
+				"statusIQA": {
+					"position": 9
+				},
+				"performedBy": {
+					"position": 8
+				},
+				"uniqueID": {
+					"position": 11
+				},
+				"jobNumber": {
+					"position": 10
+				},
+				"date": {
+					"position": 3
+				},
+				"remaining": {
+					"position": 6
+				},
+				"qty": {
+					"position": 5
+				},
+				"type": {
+					"position": 4
+				},
+				"UUID_Inventory": {
+					"position": 2
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
 		},
 		"Inventory": {
 			"color": {
@@ -1104,12 +1143,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1611.9033813477,
-				"top": 1212.9949188232,
-				"width": 176.93957519531,
-				"height": 190.07992553711
+				"left": 1475,
+				"top": 1774,
+				"width": 149,
+				"height": 146.33203125
 			},
-			"displayable_fields_count": 7
+			"displayable_fields_count": 5
 		},
 		"Lead": {
 			"color": {
@@ -1124,17 +1163,7 @@
 				"width": 383.04388427734,
 				"height": 466.03674316406
 			},
-			"displayable_fields_count": 20,
-			"fields": {
-				"UUID_LeadNextStep": {
-					"color": {
-						"red": 255,
-						"green": 255,
-						"blue": 255,
-						"alpha": 0
-					}
-				}
-			}
+			"displayable_fields_count": 18
 		},
 		"YesNoQuestion": {
 			"color": {
@@ -2352,14 +2381,6 @@
 			}
 		},
 		"4EEBB3B3CDCE4E4D8FB9E78C0A56728C": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"761F023AC9E24FF8B9A7192BD1698794": {
 			"color": {
 				"red": 255,
 				"green": 255,

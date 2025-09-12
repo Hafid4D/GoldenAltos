@@ -2,5 +2,5 @@ Class extends Entity
 
 
 local Function get nameInWindowTitle()->$nameInWindowTitle : Text
-	$nameInWindowTitle:=This:C1470.code
+	$nameInWindowTitle:=String:C10(This:C1470.jobNumber)
 	
