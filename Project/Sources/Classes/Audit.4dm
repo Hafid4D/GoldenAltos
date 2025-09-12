@@ -15,10 +15,11 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(2; ""; "Objective Evidence Record")
 	$entry.setPanelPage(3; ""; "Audit Findings")
 	$entry.setPanelPage(4; ""; "Follow Up Review")
-	$entry.setPanelPage(5; ""; "Document")
+	$entry.setPanelPage(5; ""; "Preview")
+	$entry.setPanelPage(6; ""; "Document")
 	
 	$entry.setLBItemsColumn("auditNumber"; "Entry Number"; "width:100")
 	$entry.setLBItemsColumn("title"; "Title"; "width:200")
 	$entry.setLBItemsOrderBy("auditNumber")
-
+	
 	$entry.setItemAction("Print Audit Report"; "_ga_printAuditReport")

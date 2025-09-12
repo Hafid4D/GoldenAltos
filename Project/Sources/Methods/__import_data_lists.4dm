@@ -188,7 +188,7 @@ For ($i; 0; $docCategories.length-1)
 	$eDocCategory.save()
 End for 
 
-
+//----> [AuditStatus]
 var $eAuditStatus : cs:C1710.AuditStatusEntity
 var $auditStatus : Collection:=New collection:C1472("C - Conforming"; "OFI - Opportunity for Improvement"; "NCR - Nonconformance")
 TRUNCATE TABLE:C1051([AuditStatus:46])
@@ -201,4 +201,20 @@ For ($i; 0; $auditStatus.length-1)
 End for 
 
 
+//----> [ProcessType]
+var $eProcessType : cs:C1710.ProcessTypeEntity
+$processTypes:=New collection:C1472("Assembly"; "Assembly_AE"; "Assembly_AO"; "Assembly_AP"; "Assembly_D"; "Assembly_E"; "Assembly_M"; \
+"Assembly_O"; "Assembly_W"; "Burn-In"; "Environmental"; "Environmental_B1"; "Environmental_B1, B2, B3"; "Environmental_B2"; \
+"Environmental_B3"; "Environmental_B4"; "Environmental_B5"; "Environmental_B6"; "Environmental_B7"; "Environmental_B8"; \
+"Environmental_C1"; "Environmental_C2"; "Environmental_C3"; "Environmental_C4"; "Environmental_D1"; "Environmental_D1, D4"; \
+"Environmental_D2"; "Environmental_D3"; "Environmental_D4"; "Environmental_D5"; "Environmental_D6"; "Environmental_D7"; \
+"Environmental_D8"; "Environmental_D9"; "Program Management")
+TRUNCATE TABLE:C1051([ProcessType:44])
+For ($i; 0; $processTypes.length-1)
+	$eProcessType:=ds:C1482.ProcessType.new()
+	$eProcessType.levelID:=$i+1
+	$eProcessType.name:=$processTypes[$i]
+	$eProcessType.color:="#FFFFFF"
+	$eProcessType.save()
+End for 
 

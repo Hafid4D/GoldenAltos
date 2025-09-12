@@ -44,7 +44,7 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_departement()
 	This:C1470.drawPup_status()
 	This:C1470.drawPup_auditType()
-	
+	This:C1470.drawPup_process()
 	
 	OBJECT SET VISIBLE:C603(*; "bUploadDocument"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET VISIBLE:C603(*; "btnDatePicker@"; Form:C1466.sfw.checkIsInModification())
@@ -86,9 +86,23 @@ Function redrawAndSetVisible()
 			OBJECT GET COORDINATES:C663(*; "entryField_remainingGaps"; $g; $h; $d; $b)
 			OBJECT SET COORDINATES:C1248(*; "entryField_remainingGaps"; $g; $h; $widthSubform-30; $heightSubform-15)
 			
+		: (FORM Get current page:C276(*)=5)
 			
+			OBJECT GET COORDINATES:C663(*; "entryField_wpDoc"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "entryField_wpDoc"; $g; $h; $d; $heightSubform)
 			
 	End case 
+	
+	If (FORM Get current page:C276(*)#5) & (FORM Get current page:C276(*)#6)
+		_ga_buildAuditReport()
+		
+	Else 
+		If (Split string:C1554(WP Get text:C1575(Form:C1466.current_item.auditReport); ";"; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join(";")="")
+			_ga_buildAuditReport()
+			
+		End if 
+		
+	End if 
 	
 	Form:C1466.sfw.drawHTab()
 	
@@ -118,12 +132,12 @@ Function pup_docType()
 		$hList:=Create menu:C408
 		
 		$hListItemsLength:=$hListItems.length
-		$k:=1
+		
 		For ($i; 0; $hListItemsLength-1)
 			
 			APPEND MENU ITEM:C411($hList; $hListItems[$i]; *)
 			SET MENU ITEM PARAMETER:C1004($hList; -1; $hListItems[$i])
-			$k:=$k+1
+			
 		End for 
 		
 		$choose:=Dynamic pop up menu:C1006($hList)
@@ -210,6 +224,18 @@ Function pup_status()
 	//Create pop up menu
 	Form:C1466.current_item.pup("auditStatus"; "AuditStatus"; "UUID"; "UUID_AuditStatus")
 	This:C1470.drawPup_status()
+	
+	
+Function drawPup_process()
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.current_item.drowPup("ProcessType"; "UUID"; "UUID_ProcessType"; "pup_process")
+	End if 
+	
+	
+Function pup_process()
+	//Create pop up menu
+	Form:C1466.current_item.pup("processTypes"; "ProcessType"; "UUID"; "UUID_ProcessType")
+	This:C1470.drawPup_process()
 	
 	
 Function drawPup_auditType()

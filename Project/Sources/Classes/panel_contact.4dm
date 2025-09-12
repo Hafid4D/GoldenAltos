@@ -11,7 +11,7 @@ Function formMethod()
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		
-		Form:C1466.companyType:=Form:C1466.current_item.companyType
+		//Form.companyType:=Form.current_item.companyType
 		
 	End if 
 	
@@ -116,7 +116,7 @@ Function pup_supplier()
 Function drawPup_companyType()
 	If (Form:C1466.current_item#Null:C1517)
 		$companyType:=New object:C1471
-		$companyTypeName:=Form:C1466.companyType
+		$companyTypeName:=Form:C1466.current_item.companyType || ""  //Form.current_item.companyType
 		$color:=""
 		$pathIcon:=""
 		Form:C1466.sfw.drawButtonPup("pup_companyType"; $companyTypeName; $pathIcon; ($companyType=Null:C1517))
@@ -142,7 +142,7 @@ Function pup_companyType()
 		
 		Case of 
 			: ($choose#"")
-				Form:C1466.companyType:=$choose
+				Form:C1466.current_item.companyType:=$choose
 				
 		End case 
 		
@@ -171,11 +171,11 @@ Function redrawAndSetVisible()
 	
 	OBJECT SET VISIBLE:C603(*; "bActionContact"; Form:C1466.sfw.checkIsInModification())
 	
-	OBJECT SET VISIBLE:C603(*; "pup_supplier"; (Form:C1466.companyType="Supplier"))
-	OBJECT SET VISIBLE:C603(*; "pup_Customer"; (Form:C1466.companyType="Customer"))
+	OBJECT SET VISIBLE:C603(*; "pup_supplier"; (Form:C1466.current_item.companyType="Supplier"))
+	OBJECT SET VISIBLE:C603(*; "pup_Customer"; (Form:C1466.current_item.companyType="Customer"))
 	
-	OBJECT SET VISIBLE:C603(*; "label_supplier"; (Form:C1466.companyType="Supplier"))
-	OBJECT SET VISIBLE:C603(*; "label_customer"; (Form:C1466.companyType="Customer"))
+	OBJECT SET VISIBLE:C603(*; "label_supplier"; (Form:C1466.current_item.companyType="Supplier"))
+	OBJECT SET VISIBLE:C603(*; "label_customer"; (Form:C1466.current_item.companyType="Customer"))
 	
 	
 	
@@ -199,167 +199,11 @@ Function contactDetails()
 	End if 
 	
 	
-	
-	
-Function loadXXX()
-	//Loads and initializes a list
-	
-	
-/*
-Function loadContact()
-	
-Form.lb_contact:=New collection()
-	
-If (Form.current_item#Null)
-	
-Form.lb_contact:=Form.current_item.rebuidComunications()
-	
-This.displayContact()
-End if 
-	
-	
-	
-Function displayContact()
-	
-	
-OBJECT SET ENTERABLE(*; "entryField_contact@"; False)
-	
-If (Form.current_contact=Null)
-OBJECT SET VISIBLE(*; "label_contact@"; False)
-OBJECT SET VISIBLE(*; "entryField_contact@"; False)
-OBJECT SET VISIBLE(*; "bSave"; False)
-Else 
-OBJECT SET VISIBLE(*; "label_contact@"; True)
-OBJECT SET VISIBLE(*; "entryField_contact@"; True)
-OBJECT SET VISIBLE(*; "bSave"; True)
-	
-End if 
-	
-	
-	
-Function bActionContact()
-	
-$mainMenu:=Create menu
-	
-APPEND MENU ITEM($mainMenu; "Add contact"; *)
-SET MENU ITEM PARAMETER($mainMenu; -1; "--addContact")
-SET MENU ITEM SHORTCUT($mainMenu; -1; "L"; Command key mask)
-APPEND MENU ITEM($mainMenu; "-")
-	
-APPEND MENU ITEM($mainMenu; "Delete contact"; *)
-SET MENU ITEM PARAMETER($mainMenu; -1; "--deleteContact")
-APPEND MENU ITEM($mainMenu; "-")
-	
-APPEND MENU ITEM($mainMenu; "Modify contact"; *)
-SET MENU ITEM PARAMETER($mainMenu; -1; "--modifyContact")
-	
-If (Form.current_contact=Null)
-DISABLE MENU ITEM($mainMenu; 3)
-DISABLE MENU ITEM($mainMenu; 5)
-End if 
-	
-	
-$choose:=Dynamic pop up menu($mainMenu)
-RELEASE MENU($mainMenu)
-	
-Case of 
-: ($choose="--addContact")
-	
-//$refWindow:=Open form window("sfw_subpanel_communicationSingle"; Modal form dialog box)
-$winRef:=Open form window("sfw_subpanel_communicationSingle"; Plain form window; Horizontally centered; Vertically centered)
-DIALOG("sfw_subpanel_communicationSingle"; $form)
-CLOSE WINDOW($winRef)
-	
-	
-$contact:=New object()
-	
-OB SET($contact; "name"; "contact type")
-OB SET($contact; "value"; "contact value")
-	
-Form.lb_contact.push($contact)
-LISTBOX INSERT ROWS(*; "lb_contact"; Form.lb_contact.length; 1)
-This._activate_save_cancel_button()
-LISTBOX SELECT ROW(*; "lb_contact"; Form.lb_contact.length; lk replace selection)
-Form.current_contact:=$contact
-//This.displayContact()
-	
-GOTO OBJECT(*; "entryField_contactType")
-OBJECT SET ENTERABLE(*; "label_contact@"; True)
-OBJECT SET ENTERABLE(*; "entryField_contact@"; True)
-	
-: ($choose="--deleteContact")
-	
-OBJECT SET ENTERABLE(*; "label_contact@"; False)
-OBJECT SET ENTERABLE(*; "entryField_contact@"; False)
-	
-$ok:=cs.sfw_dialog.me.confirm("Do you really want to delete this contact? "; "Delete"; "CANCEL")
-If ($ok)
-If (Form.current_item#Null)
-OB REMOVE(Form.current_item.contactDetails.communications[0]; Form.current_contact.name)
-This.loadContact()
-End if 
-End if 
-	
-	
-: ($choose="--modifyContact")
-	
-OBJECT SET ENTERABLE(*; "label_contact@"; True)
-OBJECT SET ENTERABLE(*; "entryField_contact@"; True)
-OBJECT SET VISIBLE(*; "bSave"; True)
-	
-End case 
-	
-	
-Function saveContact()
-	
-If (Form.current_contact.name#"contact type") & (Form.current_contact.value#"contact value")
-	
-var $comm : Object
-	
-If (OB Is defined(Form.current_item.contactDetails; "communications"))
-	
-	
-If (Form.current_item.contactDetails.communications.length>0)
-OB SET(Form.current_item.contactDetails.communications[0]; Form.current_contact.name; Form.current_contact.value)
-	
-	
-Else 
-	
-$comm:=New object()
-Form.current_item.contactDetails.communications.push($comm)
-OB SET(Form.current_item.contactDetails.communications[0]; Form.current_contact.name; Form.current_contact.value)
-	
-End if 
-	
-Else 
-	
-Form.current_item.contactDetails.communications:=New collection()
-$comm:=New object()
-Form.current_item.contactDetails.communications.push($comm)
-OB SET(Form.current_item.contactDetails.communications[0]; Form.current_contact.name; Form.current_contact.value)
-	
-End if 
-	
-OBJECT SET VISIBLE(*; "label_contact@"; False)
-OBJECT SET VISIBLE(*; "entryField_contact@"; False)
-OBJECT SET VISIBLE(*; "bSave"; False)
-Else 
-	
-cs.sfw_dialog.me.alert("'contact type' and 'contact value' are default values. Please enter valid value")
-	
-End if 
-*/
-	
-	
-	
-	
-	
-	
 Function btnOpenCompany()
 	
 	Case of 
 			
-		: (Form:C1466.companyType="Supplier")
+		: (Form:C1466.current_item.companyType="Supplier")
 			
 			$es:=ds:C1482.Supplier.query("UUID =:1"; Form:C1466.current_item.UUID_Company)
 			
@@ -368,7 +212,7 @@ Function btnOpenCompany()
 			End if 
 			
 			
-		: (Form:C1466.companyType="Customer")
+		: (Form:C1466.current_item.companyType="Customer")
 			
 			$es:=ds:C1482.Customer.query("UUID =:1"; Form:C1466.current_item.UUID_Company)
 			

@@ -57,7 +57,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setSubset("docsLateInReviewing")
 	$entry.setView($view)
 	
-	// MARK: ocs requiring review in 7 days
+	// MARK: Docs requiring review in 7 days
 	$view:=cs:C1710.sfw_definitionView.new("docsRequiringReviewSoon"; "Control Docs requiring review in 7 days")
 	$view.setLBItemsColumn("spec"; "Spec#"; "width:100")
 	$view.setLBItemsColumn("revision"; "Revision"; "width:50")
@@ -153,8 +153,7 @@ local Function docsRequiringReviewSoon()->$specifications : cs:C1710.Specificati
 	$endDate:=Storage:C1525.cache.endDate
 	$formula_1:=Formula:C1597((This:C1470.reviewDate+This:C1470.reviewIntervalInDays)>=$statDate)
 	$formula_2:=Formula:C1597((This:C1470.reviewDate+This:C1470.reviewIntervalInDays)<$endDate)
-	$specifications:=This:C1470.myQuery(False:C215; 0; $formula_1; $formula_2)  //ds.Specification.query("suppress =:1 & reviewIntervalInDays >0 & :2 & :3"; False; $formula_1; $formula_2)
-	
+	$specifications:=This:C1470.myQuery(False:C215; $formula_1; $formula_2)  //ds.Specification.query("suppress =:1 & reviewIntervalInDays >0 & :2 & :3"; False; $formula_1; $formula_2)
 	
 	
 Function OnlySpecs()->$specifications : cs:C1710.SpecificationSelection
@@ -165,5 +164,7 @@ Function OnlyForms()->$specifications : cs:C1710.SpecificationSelection
 	$specifications:=ds:C1482.Specification.query("suppress =:1 & isForm=:2"; False:C215; True:C214)
 	
 	
-Function myQuery()
+Function myQuery($blool : Boolean;  ...  : Object)->$specifications : cs:C1710.SpecificationSelection
+	
+	$specifications:=ds:C1482.Specification.query("suppress =:1 & reviewIntervalInDays >0 & :2 & :3"; $1; $2; $3)
 	

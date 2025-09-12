@@ -123,6 +123,17 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setView($view)
 	
 	
+	// MARK:  List of equipment Decommissioned
+	$view:=cs:C1710.sfw_definitionView.new("decommissionedEquipment"; "Decommissioned Equipments")
+	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
+	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
+	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
+	$view.setLBItemsOrderBy("assignedID")
+	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
+	$view.setSubset("decommissionedEquipment")
+	$entry.setView($view)
+	
+	
 local Function cacheLoad()
 	
 	If (Storage:C1525.cache=Null:C1517)
@@ -161,7 +172,7 @@ local Function setDateInterval($pushUp; $title)
 		$mouseX:=$mouseX-100
 	End if 
 	$form.pushUp:=$pushUp
-	$windRef:=Open window:C153($mouseX; $mouseY; $mouseX+270; $mouseY+165; Movable dialog box:K34:7; $title)
+	$windRef:=Open window:C153($mouseX; $mouseY; $mouseX+270; $mouseY+165; Movable dialog box:K34:7; "Set date interval")
 	DIALOG:C40("_ga_setDateInterval"; $form)
 	CLOSE WINDOW:C154($windRef)
 	Use (Storage:C1525.cache)
@@ -171,38 +182,36 @@ local Function setDateInterval($pushUp; $title)
 	End use 
 	
 	
-Function equipmentsOutOfCalibration()->$equipments : cs:C1710.EquipmentSelection
-	$title:="Set date interval"
-	This:C1470.setDateInterval(False:C215; $title)
+local Function equipmentsOutOfCalibration()->$equipments : cs:C1710.EquipmentSelection
+	This:C1470.setDateInterval(False:C215)
 	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & calibrationNotRequired=:2 & notAtSite=:3"; Storage:C1525.cache.endDate; False:C215; False:C215)
 	
 	
-Function pmEquipments()->$equipments : cs:C1710.EquipmentSelection
-	$title:="Set date interval"
-	This:C1470.setDateInterval(False:C215; $title)
+local Function pmEquipments()->$equipments : cs:C1710.EquipmentSelection
+	This:C1470.setDateInterval(False:C215)
 	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3"; Storage:C1525.cache.endDate; !00-00-00!; False:C215)
 	
 	
-Function dueCalibrationEquipments()->$equipments : cs:C1710.EquipmentSelection
-	$title:="Set date interval"
-	This:C1470.setDateInterval(False:C215; $title)
+local Function dueCalibrationEquipments()->$equipments : cs:C1710.EquipmentSelection
+	This:C1470.setDateInterval(False:C215)
 	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & notAtSite=:2 & engg=:3"; Storage:C1525.cache.endDate; False:C215; False:C215)
 	
 	
-Function duePMEquipments()->$equipments : cs:C1710.EquipmentSelection
-	$title:="Set date interval"
-	This:C1470.setDateInterval(False:C215; $title)
+local Function duePMEquipments()->$equipments : cs:C1710.EquipmentSelection
+	This:C1470.setDateInterval(False:C215)
 	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3 & engg=:4"; Storage:C1525.cache.endDate; !00-00-00!; False:C215; False:C215)
 	
 	
-Function equipmentsDownOrOnHold()->$equipments : cs:C1710.EquipmentSelection
+local Function equipmentsDownOrOnHold()->$equipments : cs:C1710.EquipmentSelection
 	
 	$equipments:=ds:C1482.Equipment.query("down=:1"; True:C214)
 	
 	
-Function calibrationExemptList()->$equipments : cs:C1710.EquipmentSelection
+local Function calibrationExemptList()->$equipments : cs:C1710.EquipmentSelection
 	
 	$equipments:=ds:C1482.Equipment.query("calibrationNotRequired=:1"; True:C214)
 	
+local Function decommissionedEquipment()->$equipments : cs:C1710.EquipmentSelection
+	$equipments:=ds:C1482.Equipment.query("decommissioned=:1"; True:C214)
 	
 	
