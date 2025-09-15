@@ -1,5 +1,20 @@
 {
 	"tables": {
+		"ProcessType": {
+			"color": {
+				"red": 160,
+				"green": 174,
+				"blue": 158,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 4425,
+				"top": 184,
+				"width": 171,
+				"height": 165.33203125
+			},
+			"displayable_fields_count": 5
+		},
 		"Qcar": {
 			"color": {
 				"red": 255,
@@ -343,9 +358,6 @@
 				},
 				"vendor": {
 					"position": 7
-				},
-				"partNum": {
-					"position": 6
 				},
 				"customerSpecific": {
 					"position": 5
@@ -1025,6 +1037,38 @@
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
+		"Classification": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 640,
+				"top": 40,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
+		"Unit": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 440,
+				"top": 40,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
 		"AuditStatus": {
 			"color": {
 				"red": 160,
@@ -1055,20 +1099,21 @@
 			},
 			"displayable_fields_count": 8
 		},
-		"ProcessType": {
+		"Location": {
 			"color": {
-				"red": 160,
-				"green": 174,
-				"blue": 158,
-				"alpha": 255
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
 			},
 			"coordinates": {
-				"left": 4425,
-				"top": 184,
-				"width": 171,
-				"height": 165.33203125
+				"left": 240,
+				"top": 40,
+				"width": 120,
+				"height": 167.33203125
 			},
-			"displayable_fields_count": 5
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
 		},
 		"StepSpec": {
 			"color": {
@@ -1905,24 +1950,6 @@
 		}
 	},
 	"relations": {
-
-		"A7E6B757539D504F9A0435ABDA7EC2F4": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"554984CA43DB454C960BF5F0CD2A61AA": {
-
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
 		"D982B8553811B2468F440FBF6F888F44": {
 			"color": {
 				"red": 240,

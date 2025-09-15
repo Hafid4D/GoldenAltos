@@ -1,11 +1,5 @@
 Class extends Entity
 
-
-
-
-//mark:-Callbacks
-
-
 local Function get nextCalDate()->$nextCalDate : Date
 	$nextCalDate:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpNextCal; True:C214)
 	
@@ -31,6 +25,7 @@ local Function set nextPMDate($nextPMDate : Date)
 	This:C1470.stmpNextPM:=cs:C1710.sfw_stmp.me.build($nextPMDate)
 	
 local Function loadAfterCreation()
+	
 	// This callback is called after creating the new item but before displaying the panel.
 	This:C1470._initReports()
 	
@@ -39,8 +34,12 @@ local Function _initReports()
 	If (This:C1470.reports.documents=Null:C1517)
 		
 		This:C1470.reports.documents:=New collection:C1472()
+		
 	End if 
 	
-local Function itemLoad()
-	// This callback is called when the item is selected in the itemList
 	
+	// Mark:-Callbacks
+	
+local Function itemLoad()
+	
+	// This callback is called when the item is selected in the itemList

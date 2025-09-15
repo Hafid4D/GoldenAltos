@@ -79,6 +79,11 @@ If ($equipment_Log.exists)
 		$eEquipment.pmDocument:=$equipment.PMDocument
 		$eEquipment.pmNotRequired:=$equipment.PMnotRequired
 		
+		If ($eEquipment.calibrationNotRequired=False:C215) & ($eEquipment.notAtSite=False:C215) & ($eEquipment.nextCalDate<=Current date:C33(*))
+			$eEquipment.outOfCalibration:=True:C214
+			
+		End if 
+		
 		$_documents:=$documents.query("PrimaryKeyValue=:1 & TableNumber=:2"; String:C10($equipment.UniqueID); 10)
 		
 		$eEquipment.reports:=New object:C1471()
@@ -100,7 +105,7 @@ If ($equipment_Log.exists)
 			$report:=Folder:C1567(fk data folder:K87:12).file("DataJson/EquipmentReports/"+String:C10($document.UniqueID+$document.PrimaryKeyValue))
 			If ($report.exists)
 				
-				C_BLOB:C604($blob)
+				var $blob : Blob
 				DOCUMENT TO BLOB:C525($report.platformPath; $blob)
 				
 				$doc.blob:=$blob

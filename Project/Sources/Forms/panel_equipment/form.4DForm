@@ -769,8 +769,8 @@
 				"entryField_pmNotRequired": {
 					"type": "checkbox",
 					"text": "PM Not Required",
-					"top": 259,
-					"left": 350,
+					"top": 178,
+					"left": 589,
 					"width": 190,
 					"height": 17,
 					"events": [
@@ -888,13 +888,14 @@
 					],
 					"dataSource": "Form:C1466.current_item.outOfCalibration",
 					"fontWeight": "normal",
-					"dataSourceTypeHint": "boolean"
+					"dataSourceTypeHint": "boolean",
+					"method": "ObjectMethods/entryField_outOfCalibration.4dm"
 				},
 				"entryField_decommissioned": {
 					"type": "checkbox",
 					"text": "Decommissioned",
-					"top": 181,
-					"left": 589,
+					"top": 262,
+					"left": 350,
 					"width": 190,
 					"height": 17,
 					"events": [
@@ -1157,7 +1158,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 769,
+	"geometryStamp": 772,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
