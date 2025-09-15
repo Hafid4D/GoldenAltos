@@ -110,7 +110,7 @@ local Function _initDocument()
 	
 	If (Form:C1466.situation.mode="add")
 		
-		C_BLOB:C604($blob)
+		var $blob : Blob
 		$doc:=New object:C1471
 		
 		$doc.code:=""

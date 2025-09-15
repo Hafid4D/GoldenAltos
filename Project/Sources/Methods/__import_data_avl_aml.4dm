@@ -141,7 +141,7 @@ If ($supplier_log.exists)
 			$report:=Folder:C1567(fk data folder:K87:12).file("DataJson/SuppliersDocs/"+String:C10($document.UniqueID+$document.PrimaryKeyValue))
 			If ($report.exists)
 				
-				C_BLOB:C604($blob)
+				var $blob : Blob
 				DOCUMENT TO BLOB:C525($report.platformPath; $blob)
 				
 				$doc.blob:=$blob
