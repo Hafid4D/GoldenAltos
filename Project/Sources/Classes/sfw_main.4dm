@@ -1,9 +1,17 @@
-property lb_items : Collection
+property lb_items : Variant
 property searchbox : Text
 property entry : cs:C1710.sfw_definitionEntry
 property view : Object
 property vision : Object  //the current vision
 property lastRefItemInList : Integer
+property multiselection : Object
+property flags : Object
+property allowedViews : Collection
+property lb_items_dontPlayOnSelectionChange : Boolean
+property searchHighlightParts : Collection
+property HLEntries : Object
+property currentItemRef : Integer
+property rl_itemUUIDs : Collection
 
 Class extends sfw_foundations
 
@@ -42,6 +50,10 @@ Function lb_items_define()
 	var $i : Integer
 	var $column : Object
 	
+	If (This:C1470.view=Null:C1517) && (Form:C1466.view#Null:C1517)
+		This:C1470.view:=Form:C1466.view
+	End if 
+	
 	If (This:C1470.view=Null:C1517)
 		This:C1470.allowedViews:=New collection:C1472
 		$authorizedProfiles:=cs:C1710.sfw_userManager.me.authorizedProfiles
@@ -72,144 +84,171 @@ Function lb_items_define()
 	
 	Form:C1466.itemListColumnGroups:=New collection:C1472
 	$i:=0
+	For each ($column; This:C1470.view.lb_items.columns)
+		$i:=$i+1
+		If (Not:C34(Bool:C1537($column.hidden)))
+			If ($column.group#Null:C1517)
+				$columnName:=$column.columnName || ("col_"+String:C10($i))
+				$groups:=Form:C1466.itemListColumnGroups.query("group = :1"; $column.group)
+				If ($groups.length#0)
+					$group:=$groups[0]
+					$group.countColumns+=1
+					$i-=1
+					continue
+				Else 
+					Form:C1466.itemListColumnGroups.push({group: $column.group; columnNum: $i; case: 1; columnName: $columnName; countColumns: 1})
+				End if 
+			End if 
+		End if 
+	End for each 
+	Form:C1466.itemListColumnGroups:=Form:C1466.itemListColumnGroups.query("countColumns >1")
+	Form:C1466.itemListColumnGroups2:=New collection:C1472
+	$i:=0
 	$firstDefaultColumnOrderBy:=Try(Form:C1466.sfw.entry.lb_items.orderBy[0].propertyPath) || ""
 	For each ($column; This:C1470.view.lb_items.columns)
 		$i:=$i+1
-		$columnName:=$column.columnName || ("col_"+String:C10($i))
-		$headerName:="header_"+String:C10($i)
-		$columnType:=Is text:K8:3
-		$columnFormula:="Form:C1466.sfw._lb_items_highlight(This."+$column.attribute+")"
-		Case of 
-			: ($column.type=Null:C1517)
-			: ($column.type="text")
-				$columnType:=Is text:K8:3
-				If ($column.formula=Null:C1517)
-					$columnFormula:="Form:C1466.sfw._lb_items_highlight(This."+$column.attribute+")"
-				Else 
-					$columnFormula:="Form:C1466.sfw._lb_items_highlight("+$column.formula+")"
-				End if 
-				
-			: ($column.type="picture")
-				$columnType:=Is picture:K8:10
-				If ($column.formula=Null:C1517)
-					$columnFormula:="This."+$column.attribute
-				Else 
-					$columnFormula:=$column.formula
-				End if 
-				If ($column.format=Null:C1517)
+		If (Not:C34(Bool:C1537($column.hidden)))
+			$columnName:=$column.columnName || ("col_"+String:C10($i))
+			$headerName:="header_"+String:C10($i)
+			$columnType:=Is text:K8:3
+			$columnFormula:="Form:C1466.sfw._lb_items_highlight(This."+$column.attribute+")"
+			Case of 
+				: ($column.type=Null:C1517)
+				: ($column.type="text")
+					$columnType:=Is text:K8:3
+					If ($column.formula=Null:C1517)
+						$columnFormula:="Form:C1466.sfw._lb_items_highlight(This."+$column.attribute+")"
+					Else 
+						$columnFormula:="Form:C1466.sfw._lb_items_highlight("+$column.formula+")"
+					End if 
+					
+				: ($column.type="picture")
+					$columnType:=Is picture:K8:10
+					If ($column.formula=Null:C1517)
+						$columnFormula:="This."+$column.attribute
+					Else 
+						$columnFormula:=$column.formula
+					End if 
+					If ($column.format=Null:C1517)
+						Use ($column)
+							$column.format:=Char:C90(Truncated centered:K6:1)
+						End use 
+					End if 
+					
+				: ($column.type="num")
+					$columnType:=Is real:K8:4
+					If ($column.formula=Null:C1517)
+						$columnFormula:="This."+$column.attribute
+					Else 
+						$columnFormula:=$column.formula
+					End if 
+					If ($column.format=Null:C1517)
+						Use ($column)
+							$column.format:="###,###,###,##0"
+						End use 
+					End if 
+					
+				: ($column.type="date")
+					$columnType:=Is date:K8:7
+					If ($column.format=Null:C1517)
+						Use ($column)
+							$column.formatDate:=System date short:K1:1
+						End use 
+					Else 
+						Use ($column)
+							$column.formatDate:=Num:C11($column.format)
+						End use 
+					End if 
+					
+					$columnFormula:="String:C10(This."+$column.attribute+";"+String:C10($column.formatDate+Blank if null date:K1:9)+")"
+					
+				: ($column.type="bool") || ($column.type="boolean")
+					$columnType:=Is boolean:K8:9
+					If ($column.formula=Null:C1517)
+						$columnFormula:="Bool(This."+$column.attribute+")"
+					Else 
+						$columnFormula:=$column.formula
+					End if 
+					
+				: ($column.type="flag")
+					$columnType:=Is picture:K8:10
 					Use ($column)
 						$column.format:=Char:C90(Truncated centered:K6:1)
 					End use 
-				End if 
-				
-			: ($column.type="num")
-				$columnType:=Is real:K8:4
-				If ($column.formula=Null:C1517)
-					$columnFormula:="This."+$column.attribute
+					$columnFormula:="Form.sfw._lb_drawFlagInColumn(This."+$column.attribute+")"
+					
+			End case 
+			Use ($column)
+				$column.calculatedFormula:=$columnFormula
+				$column.calculatedType:=$columnType
+			End use 
+			If ($column.group#Null:C1517)
+				If (Form:C1466.itemListColumnGroups2.indices("group = :1"; $column.group).length#0)
+					$i-=1
+					continue
 				Else 
-					$columnFormula:=$column.formula
+					Form:C1466.itemListColumnGroups2.push({group: $column.group; columnNum: $i; case: 1; columnName: $columnName})
 				End if 
-				If ($column.format=Null:C1517)
-					Use ($column)
-						$column.format:="###,###,###,##0"
-					End use 
+			End if 
+			
+			LISTBOX INSERT COLUMN FORMULA:C970(*; "lb_items"; 1000; $columnName; $columnFormula; $columnType; $headerName; $nil)
+			Case of 
+				: ($columnType=Is text:K8:3)
+					LISTBOX SET PROPERTY:C1440(*; $columnName; lk multi style:K53:71; lk yes:K53:69)
+					LISTBOX SET PROPERTY:C1440(*; $columnName; lk truncate:K53:37; lk without ellipsis:K53:64)
+				: ($columnType=Is boolean:K8:9)
+					OBJECT SET FORMAT:C236(*; $columnName; " ")
+			End case 
+			OBJECT SET TITLE:C194(*; $headerName; ds:C1482.sfw_readXliff($column.xliff; $column.label))
+			Case of 
+				: ($column.width#Null:C1517) && ($column.widthMin#Null:C1517) && ($column.widthMax#Null:C1517)
+					LISTBOX SET COLUMN WIDTH:C833(*; $columnName; Num:C11($column.width); Num:C11($column.widthMin); Num:C11($column.widthMax))
+				: ($column.width#Null:C1517) && ($column.widthMin#Null:C1517)
+					LISTBOX SET COLUMN WIDTH:C833(*; $columnName; Num:C11($column.width); Num:C11($column.widthMin))
+				: ($column.width#Null:C1517)
+					LISTBOX SET COLUMN WIDTH:C833(*; $columnName; Num:C11($column.width))
+			End case 
+			If ($column.header#Null:C1517)
+				If ($column.header.alignment#Null:C1517)
+					OBJECT SET HORIZONTAL ALIGNMENT:C706(*; $headerName; $column.header.alignment)
 				End if 
-				
-			: ($column.type="date")
-				$columnType:=Is date:K8:7
-				If ($column.format=Null:C1517)
-					Use ($column)
-						$column.formatDate:=System date short:K1:1
-					End use 
+				If ($column.header.stroke#Null:C1517)
+					OBJECT SET RGB COLORS:C628(*; $headerName; $column.header.stroke)
+				End if 
+			End if 
+			If ($column.group#Null:C1517) && (Form:C1466.itemListColumnGroups.query("group = :1"; $column.group).length>0)
+				OBJECT SET FORMAT:C236(*; $headerName; "file:sfw/image/picto/control-skip-090-small.png;2")
+			End if 
+			If ($column.alignment#Null:C1517)
+				OBJECT SET HORIZONTAL ALIGNMENT:C706(*; $columnName; $column.alignment)
+			End if 
+			Case of 
+				: ($column.formatDate#Null:C1517)
+					//OBJECT SET FORMAT(*; $columnName; Char(System date long))
+					
+				: ($column.format#Null:C1517)
+					OBJECT SET FORMAT:C236(*; $columnName; $column.format)
+					
 				Else 
-					Use ($column)
-						$column.formatDate:=Num:C11($column.format)
-					End use 
-				End if 
-				
-				$columnFormula:="String:C10(This."+$column.attribute+";"+String:C10($column.formatDate+Blank if null date:K1:9)+")"
-				
-			: ($column.type="bool") || ($column.type="boolean")
-				$columnType:=Is boolean:K8:9
-				If ($column.formula=Null:C1517)
-					$columnFormula:="Bool(This."+$column.attribute+")"
-				Else 
-					$columnFormula:=$column.formula
-				End if 
-				
-			: ($column.type="flag")
-				$columnType:=Is picture:K8:10
-				Use ($column)
-					$column.format:=Char:C90(Truncated centered:K6:1)
-				End use 
-				$columnFormula:="Form.sfw._lb_drawFlagInColumn(This."+$column.attribute+")"
-				
-		End case 
-		Use ($column)
-			$column.calculatedFormula:=$columnFormula
-			$column.calculatedType:=$columnType
-		End use 
-		If ($column.group#Null:C1517)
-			$group:=$column.group
-			If (Form:C1466.itemListColumnGroups.indices("group = :1"; $group).length#0)
-				$i-=1
-				continue
+					OBJECT SET FORMAT:C236(*; $columnName; "")
+			End case 
+			$ptrHeader:=OBJECT Get pointer:C1124(Object named:K67:5; $headerName)
+			If ($firstDefaultColumnOrderBy=$column.attribute)
+				$ptrHeader->:=1
 			Else 
-				Form:C1466.itemListColumnGroups.push({group: $group; columnNum: $i; case: 1})
+				$ptrHeader->:=0
 			End if 
-		End if 
-		
-		LISTBOX INSERT COLUMN FORMULA:C970(*; "lb_items"; 1000; $columnName; $columnFormula; $columnType; $headerName; $nil)
-		Case of 
-			: ($columnType=Is text:K8:3)
-				LISTBOX SET PROPERTY:C1440(*; $columnName; lk multi style:K53:71; lk yes:K53:69)
-				LISTBOX SET PROPERTY:C1440(*; $columnName; lk truncate:K53:37; lk without ellipsis:K53:64)
-			: ($columnType=Is boolean:K8:9)
-				OBJECT SET FORMAT:C236(*; $columnName; " ")
-		End case 
-		OBJECT SET TITLE:C194(*; $headerName; ds:C1482.sfw_readXliff($column.xliff; $column.label))
-		If ($column.width#Null:C1517)
-			LISTBOX SET COLUMN WIDTH:C833(*; $columnName; Num:C11($column.width))
-		End if 
-		If ($column.header#Null:C1517)
-			If ($column.header.alignment#Null:C1517)
-				OBJECT SET HORIZONTAL ALIGNMENT:C706(*; $headerName; $column.header.alignment)
-			End if 
-			If ($column.header.stroke#Null:C1517)
-				OBJECT SET RGB COLORS:C628(*; $headerName; $column.header.stroke)
-			End if 
-		End if 
-		If ($column.group#Null:C1517)
-			OBJECT SET FORMAT:C236(*; $headerName; "file:sfw/image/picto/control-skip-090-small.png;2")
-		End if 
-		If ($column.alignment#Null:C1517)
-			OBJECT SET HORIZONTAL ALIGNMENT:C706(*; $columnName; $column.alignment)
-		End if 
-		Case of 
-			: ($column.formatDate#Null:C1517)
-				//OBJECT SET FORMAT(*; $columnName; Char(System date long))
-				
-			: ($column.format#Null:C1517)
-				OBJECT SET FORMAT:C236(*; $columnName; $column.format)
-				
-			Else 
-				OBJECT SET FORMAT:C236(*; $columnName; "")
-		End case 
-		$ptrHeader:=OBJECT Get pointer:C1124(Object named:K67:5; $headerName)
-		If ($firstDefaultColumnOrderBy=$column.attribute)
-			$ptrHeader->:=1
-		Else 
-			$ptrHeader->:=0
 		End if 
 	End for each 
+	//Form.itemListColumnGroups
 	LISTBOX SET PROPERTY:C1440(*; "lb_items"; lk sortable:K53:45; lk no:K53:68)
-	$selectionMode:=(This:C1470.entry.multiselection) ? lk multiple:K53:59 : lk single:K53:58
+	$selectionMode:=(This:C1470.entry.multiselection#Null:C1517) ? lk multiple:K53:59 : lk single:K53:58
 	LISTBOX SET PROPERTY:C1440(*; "lb_items"; lk selection mode:K53:35; $selectionMode)
 	If (This:C1470.view.lb_items.metaExpression#Null:C1517) && (This:C1470.view.lb_items.metaExpression#"")
 		LISTBOX SET PROPERTY:C1440(*; "lb_items"; lk meta expression:K53:75; String:C10(This:C1470.view.lb_items.metaExpression))
 	End if 
 	
-	This:C1470.displayDefaultPanel()
+	//This.displayDefaultPanel()
 	
 Function displayDefaultPanel()
 	var $table : Pointer
@@ -262,6 +301,7 @@ Function lb_items_search()
 			End case 
 			
 		: (This:C1470.searchbox="")
+			This:C1470.searchHighlightParts:=Null:C1517
 			This:C1470.lb_items:=ds:C1482[This:C1470.entry.dataclass].all().copy()
 		Else 
 			This:C1470._searchEngine()
@@ -276,7 +316,9 @@ Function lb_items_search()
 	Case of 
 		: (This:C1470.view.displayType="listbox")
 			Form:C1466.current_item:=Null:C1517
-			This:C1470.lb_items_selectionChange()
+			If (Form:C1466.subForm#Null:C1517)
+				This:C1470.lb_items_selectionChange()
+			End if 
 			
 		: (This:C1470.view.displayType="hierarchical")
 			This:C1470._drawHierarchicalList()
@@ -302,6 +344,24 @@ Function lb_items_counter_format()
 	End if 
 	OBJECT SET FORMAT:C236(*; "lb_items_counter"; $counterFormat)
 	OBJECT SET HORIZONTAL ALIGNMENT:C706(*; "lb_items_counter"; Align right:K42:4)
+	
+	If (This:C1470.entry.multiselection#Null:C1517)
+		If (This:C1470.entry.multiselection.counterSelected#Null:C1517)
+			$counterFormat:=This:C1470.entry.multiselection.counterSelected.format
+			If (Form:C1466.current_lb_item_selected.length=1)
+				$counterFormat:=Replace string:C233($counterFormat; "^1"; ds:C1482.sfw_readXliff(String:C10(This:C1470.entry.multiselection.counterSelected.unit1xliff); This:C1470.entry.multiselection.counterSelected.unit1))
+			Else 
+				$counterFormat:=Replace string:C233($counterFormat; "^1"; ds:C1482.sfw_readXliff(String:C10(This:C1470.entry.multiselection.counterSelected.unitNxliff); This:C1470.entry.multiselection.counterSelected.unitN))
+			End if 
+		Else 
+			$counterFormat:="###,###,##0;;"
+		End if 
+		OBJECT SET FORMAT:C236(*; "lb_items_counterSelected"; $counterFormat)
+		OBJECT SET HORIZONTAL ALIGNMENT:C706(*; "lb_items_counterSelected"; Align right:K42:4)
+		OBJECT SET VISIBLE:C603(*; "lb_items_counterSelected"; (This:C1470.entry.multiselection.counterSelected.nbMinimum<=Form:C1466.current_lb_item_selected.length))
+	Else 
+		OBJECT SET VISIBLE:C603(*; "lb_items_counterSelected"; False:C215)
+	End if 
 	
 Function lb_items_sort()
 	Case of 
@@ -354,8 +414,34 @@ Function lb_items_selectionChange()
 	End if 
 	cs:C1710.sfw_window.me.setWindowTitle()
 	This:C1470._displayHeaderTabFavorite()
+	This:C1470._displayHeaderTabSubscription()
+	This:C1470._displayHeaderTabAssignation()
 	This:C1470._displayHeaderTabComment()
 	This:C1470._displayHeaderTabEvent()
+	
+	
+	
+Function lb_items_selectorManage()
+	Case of 
+		: (FORM Event:C1606.code=On Double Clicked:K2:5)
+			Form:C1466.current_item:=Form:C1466.current_lb_item
+			Form:C1466.selected:=True:C214
+			ACCEPT:C269
+			
+		: (FORM Event:C1606.code=On Clicked:K2:4)
+			This:C1470.lb_items_selectorChange()
+			
+			
+		: (FORM Event:C1606.code=On Header Click:K2:40) & (Contextual click:C713 || Right click:C712)
+			This:C1470.lb_items_doEventContextualHeaderClic()
+			
+		: (FORM Event:C1606.code=On Header Click:K2:40)
+			This:C1470.lb_items_doEventHeaderClic()
+			
+	End case 
+	
+Function lb_items_selectorChange()
+	
 	
 Function lb_items_doEvent()
 	var $orderBy : Text
@@ -454,125 +540,159 @@ Function lb_items_doEvent()
 			
 		: (FORM Event:C1606.code=On Header Click:K2:40) & (Contextual click:C713 || Right click:C712)
 			
-			$group:=Form:C1466.itemListColumnGroups.query("columnNum = :1"; FORM Event:C1606.column).first()
-			If ($group=Null:C1517)
-				//ALERT("pas de group!")
-				//continue
-			Else 
-				$groupName:=$group.group
-				$groupCase:=$group.case
-				$refMenu:=Create menu:C408
-				$columns:=Form:C1466.sfw.view.lb_items.columns.query("group = :1"; $groupName)
-				$i:=0
-				For each ($column; $columns)
+			This:C1470.lb_items_doEventContextualHeaderClic()
+			
+		: (FORM Event:C1606.code=On Header Click:K2:40)
+			This:C1470.lb_items_doEventHeaderClic()
+			
+			
+			
+	End case 
+	
+	This:C1470.lb_items_counter_format()
+	
+	
+Function lb_items_doEventHeaderClic()
+	
+	$headerButton:=OBJECT Get pointer:C1124(Object named:K67:5; FORM Event:C1606.headerName)
+	$columnNum:=Num:C11(Split string:C1554(FORM Event:C1606.headerName; "_").pop())
+	$group:=Form:C1466.itemListColumnGroups.query("columnName = :1"; FORM Event:C1606.columnName).first()
+	If ($group=Null:C1517)
+		$column:=This:C1470.view.lb_items.columns.query("columnName = :1"; String:C10(FORM Event:C1606.columnName)).first()
+		If ($column=Null:C1517)
+			$column:=This:C1470.view.lb_items.columns[$columnNum-1]
+		End if 
+	Else 
+		$column:=Form:C1466.sfw.view.lb_items.columns.query("group=:1"; $group.group)[$group.case-1]
+	End if 
+	$orderBy:=""
+	If ($column.orderBy#Null:C1517)
+		Case of 
+			: ($column.orderBy.path#Null:C1517)
+				$orderBy:=$column.orderBy.path
+			: ($column.orderBy.formula#Null:C1517)
+				$orderByFormula:=Formula from string:C1601($column.orderBy.formula)
+		End case 
+	Else 
+		$orderBy:=$column.attribute
+	End if 
+	If ($orderByFormula=Null:C1517)
+		Case of 
+			: ($headerButton->=0) | ($headerButton->=2)
+				$headerButton->:=1
+				This:C1470.lb_items:=This:C1470.lb_items.orderBy($orderBy)
+			: ($headerButton->=1)
+				$orderBy:=$orderBy+" desc"
+				$headerButton->:=2
+				This:C1470.lb_items:=This:C1470.lb_items.orderBy($orderBy)
+		End case 
+	Else 
+		Case of 
+			: ($headerButton->=0) | ($headerButton->=2)
+				$headerButton->:=1
+				This:C1470.lb_items:=This:C1470.lb_items.orderByFormula($orderByFormula)
+			: ($headerButton->=1)
+				$headerButton->:=2
+				This:C1470.lb_items:=This:C1470.lb_items.orderByFormula($orderByFormula; dk descending:K85:32)
+		End case 
+	End if 
+	
+Function lb_items_doEventContextualHeaderClic()
+	
+	var $orderBy : Text
+	var $orderByFormula : Object
+	var $previousItem : 4D:C1709.Entity
+	
+	$group:=Form:C1466.itemListColumnGroups.query("columnName = :1"; FORM Event:C1606.columnName).first()
+	If ($group=Null:C1517)
+		//ALERT("pas de group!")
+		//continue
+	Else 
+		$groupName:=$group.group
+		$groupCase:=$group.case
+		$refMenu:=Create menu:C408
+		$columns:=Form:C1466.sfw.view.lb_items.columns.query("group = :1"; $groupName)
+		$i:=0
+		For each ($column; $columns)
+			Case of 
+				: ($column.hidden)
+				Else 
 					$i+=1
 					APPEND MENU ITEM:C411($refMenu; $column.label)
 					SET MENU ITEM PARAMETER:C1004($refMenu; -1; "case:"+String:C10($i))
 					If ($groupCase=$i)
 						SET MENU ITEM MARK:C208($refMenu; -1; Char:C90(18))
 					End if 
-				End for each 
-				$choice:=Dynamic pop up menu:C1006($refMenu)
-				RELEASE MENU:C978($refMenu)
-				
-				Case of 
-					: ($choice="case:@")
-						$numCase:=Num:C11(Substring:C12($choice; 6))
-						If ($group.case#$numCase)
-							$column:=$columns[$numCase-1]
-							LISTBOX SET COLUMN FORMULA:C1203(*; FORM Event:C1606.columnName; $column.calculatedFormula; $column.calculatedType)
-							OBJECT SET TITLE:C194(*; "Header_"+String:C10(FORM Event:C1606.column); $column.label)
-							$group.case:=$numCase
-							$headerButton:=OBJECT Get pointer:C1124(Object named:K67:5; FORM Event:C1606.headerName)
-							If ($column.format#Null:C1517)
-								OBJECT SET FORMAT:C236(*; FORM Event:C1606.columnName; $column.format)
-							Else 
-								OBJECT SET FORMAT:C236(*; FORM Event:C1606.columnName; "")
-							End if 
-							
-							$orderBy:=""
-							If ($column.orderBy#Null:C1517)
-								Case of 
-									: ($column.orderBy.path#Null:C1517)
-										$orderBy:=$column.orderBy.path
-									: ($column.orderBy.formula#Null:C1517)
-										$orderByFormula:=Formula from string:C1601($column.orderBy.formula)
-								End case 
-							Else 
-								$orderBy:=$column.attribute
-							End if 
-							If ($orderByFormula=Null:C1517)
-								Case of 
-									: ($headerButton->=0)
-									: ($headerButton->=1)
-										This:C1470.lb_items:=This:C1470.lb_items.orderBy($orderBy)
-									: ($headerButton->=2)
-										$orderBy:=$orderBy+" desc"
-										This:C1470.lb_items:=This:C1470.lb_items.orderBy($orderBy)
-								End case 
-							Else 
-								Case of 
-									: ($headerButton->=0)
-									: ($headerButton->=1)
-										This:C1470.lb_items:=This:C1470.lb_items.orderByFormula($orderByFormula)
-									: ($headerButton->=2)
-										This:C1470.lb_items:=This:C1470.lb_items.orderByFormula($orderByFormula; dk descending:K85:32)
-								End case 
-							End if 
-						End if 
-				End case 
-				
-			End if 
-			
-			
-		: (FORM Event:C1606.code=On Header Click:K2:40)
-			$headerButton:=OBJECT Get pointer:C1124(Object named:K67:5; FORM Event:C1606.headerName)
-			$columnNum:=Num:C11(Split string:C1554(FORM Event:C1606.headerName; "_").pop())
-			$group:=Form:C1466.itemListColumnGroups.query("columnNum = :1"; FORM Event:C1606.column).first()
-			If ($group=Null:C1517)
-				$column:=This:C1470.view.lb_items.columns[$columnNum-1]
-			Else 
-				$column:=Form:C1466.sfw.view.lb_items.columns.query("group=:1"; $group.group)[$group.case-1]
-			End if 
-			$orderBy:=""
-			If ($column.orderBy#Null:C1517)
-				Case of 
-					: ($column.orderBy.path#Null:C1517)
-						$orderBy:=$column.orderBy.path
-					: ($column.orderBy.formula#Null:C1517)
-						$orderByFormula:=Formula from string:C1601($column.orderBy.formula)
-				End case 
-			Else 
-				$orderBy:=$column.attribute
-			End if 
-			If ($orderByFormula=Null:C1517)
-				Case of 
-					: ($headerButton->=0) | ($headerButton->=2)
-						$headerButton->:=1
-						This:C1470.lb_items:=This:C1470.lb_items.orderBy($orderBy)
-					: ($headerButton->=1)
-						$orderBy:=$orderBy+" desc"
-						$headerButton->:=2
-						This:C1470.lb_items:=This:C1470.lb_items.orderBy($orderBy)
-				End case 
-			Else 
-				Case of 
-					: ($headerButton->=0) | ($headerButton->=2)
-						$headerButton->:=1
-						This:C1470.lb_items:=This:C1470.lb_items.orderByFormula($orderByFormula)
-					: ($headerButton->=1)
-						$headerButton->:=2
-						This:C1470.lb_items:=This:C1470.lb_items.orderByFormula($orderByFormula; dk descending:K85:32)
-				End case 
-			End if 
-			
-	End case 
-	
-	
+			End case 
+		End for each 
+		$choice:=Dynamic pop up menu:C1006($refMenu)
+		RELEASE MENU:C978($refMenu)
+		
+		Case of 
+			: ($choice="case:@")
+				$numCase:=Num:C11(Substring:C12($choice; 6))
+				If ($group.case#$numCase)
+					$column:=$columns[$numCase-1]
+					LISTBOX SET COLUMN FORMULA:C1203(*; FORM Event:C1606.columnName; $column.calculatedFormula; $column.calculatedType)
+					OBJECT SET TITLE:C194(*; "Header_"+String:C10(FORM Event:C1606.column); $column.label)
+					$group.case:=$numCase
+					$headerButton:=OBJECT Get pointer:C1124(Object named:K67:5; FORM Event:C1606.headerName)
+					If ($column.format#Null:C1517)
+						OBJECT SET FORMAT:C236(*; FORM Event:C1606.columnName; $column.format)
+					Else 
+						OBJECT SET FORMAT:C236(*; FORM Event:C1606.columnName; "")
+					End if 
+					Case of 
+						: ($column.width#Null:C1517) && ($column.widthMin#Null:C1517) && ($column.widthMax#Null:C1517)
+							LISTBOX SET COLUMN WIDTH:C833(*; FORM Event:C1606.columnName; Num:C11($column.width); Num:C11($column.widthMin); Num:C11($column.widthMax))
+						: ($column.width#Null:C1517) && ($column.widthMin#Null:C1517)
+							LISTBOX SET COLUMN WIDTH:C833(*; FORM Event:C1606.columnName; Num:C11($column.width); Num:C11($column.widthMin))
+						: ($column.width#Null:C1517)
+							LISTBOX SET COLUMN WIDTH:C833(*; FORM Event:C1606.columnName; Num:C11($column.width))
+					End case 
+					$orderBy:=""
+					If ($column.orderBy#Null:C1517)
+						Case of 
+							: ($column.orderBy.path#Null:C1517)
+								$orderBy:=$column.orderBy.path
+							: ($column.orderBy.formula#Null:C1517)
+								$orderByFormula:=Formula from string:C1601($column.orderBy.formula)
+						End case 
+					Else 
+						$orderBy:=$column.attribute
+					End if 
+					If ($orderByFormula=Null:C1517)
+						Case of 
+							: ($headerButton->=0)
+							: ($headerButton->=1)
+								This:C1470.lb_items:=This:C1470.lb_items.orderBy($orderBy)
+							: ($headerButton->=2)
+								$orderBy:=$orderBy+" desc"
+								This:C1470.lb_items:=This:C1470.lb_items.orderBy($orderBy)
+						End case 
+					Else 
+						Case of 
+							: ($headerButton->=0)
+							: ($headerButton->=1)
+								This:C1470.lb_items:=This:C1470.lb_items.orderByFormula($orderByFormula)
+							: ($headerButton->=2)
+								This:C1470.lb_items:=This:C1470.lb_items.orderByFormula($orderByFormula; dk descending:K85:32)
+						End case 
+					End if 
+				End if 
+		End case 
+		
+	End if 
 	
 	
 Function _displayHeaderTabFavorite()
 	cs:C1710.sfw_favoriteManager.me._displayHeaderTabFavorite()
+	
+Function _displayHeaderTabSubscription()
+	cs:C1710.sfw_subscriptionManager.me._displayHeaderTabSubscription()
+	
+Function _displayHeaderTabAssignation()
+	cs:C1710.sfw_assignationManager.me._displayHeaderTabAssignation()
 	
 Function _displayHeaderTabComment()
 	cs:C1710.sfw_commentManager.me._displayHeaderTabComment()
@@ -607,6 +727,7 @@ Function _lb_items_highlight($value : Variant)->$result : Text
 	$text:=String:C10($value)
 	$result:=$text
 	If (This:C1470.searchHighlightParts#Null:C1517)
+		$doReplace:=False:C215
 		For each ($valueSearch; This:C1470.searchHighlightParts)
 			$search:=$valueSearch
 			If ("@"=$search[[1]])
@@ -617,15 +738,34 @@ Function _lb_items_highlight($value : Variant)->$result : Text
 					$search:=Substring:C12($search; 1; Length:C16($search)-1)
 				End if 
 				If (Length:C16($search)>0)
-					$position:=Position:C15($search; $result)
-					If ($position>0)
-						$result:=Substring:C12($result; 1; $position-1)+(Char:C90(60001)*3)+Substring:C12($result; $position; Length:C16($search))+(Char:C90(60002)*3)+Substring:C12($result; $position+Length:C16($search))
+					If (Position:C15("@"; $search)>0)
+						$resultParts:=Split string:C1554($result; " ")
+						$newResultParts:=New collection:C1472
+						For each ($resultPart; $resultParts)
+							If ($resultPart=$search)
+								$newResultParts.push((Char:C90(60001)*3)+$resultPart+(Char:C90(60002)*3))
+								$doReplace:=True:C214
+							Else 
+								$newResultParts.push($resultPart)
+							End if 
+						End for each 
+						$result:=$newResultParts.join(" ")
+					Else 
+						$position:=Position:C15($search; $result)
+						If ($position>0)
+							$result:=Substring:C12($result; 1; $position-1)+(Char:C90(60001)*3)+Substring:C12($result; $position; Length:C16($search))+(Char:C90(60002)*3)+Substring:C12($result; $position+Length:C16($search))
+							$doReplace:=True:C214
+						End if 
 					End if 
 				End if 
 			End if 
 		End for each 
-		$result:=Replace string:C233($result; (Char:C90(60001)*3); "<SPAN STYLE=\"background-color:aqua\">")
-		$result:=Replace string:C233($result; (Char:C90(60002)*3); "</SPAN>")
+		If ($doReplace)
+			$result:=Replace string:C233($result; (Char:C90(60001)*3); "<SPAN STYLE=\"background-color:aqua\">")
+			$result:=Replace string:C233($result; (Char:C90(60002)*3); "</SPAN>")
+			
+			$result:=Replace string:C233($result; "&"; "&amp;")
+		End if 
 	End if 
 	
 	
@@ -1065,15 +1205,15 @@ Function _drawRecursiveList()
 	//This.view.RLDefinition
 	This:C1470.rl_itemUUIDs:=This:C1470.lb_items.extract("UUID")
 	If (This:C1470.searchbox#"")
-		$uuids:=This:C1470.rl_itemUUIDs.copy()
+		$UUIDs:=This:C1470.rl_itemUUIDs.copy()
 		For each ($uuid; This:C1470.rl_itemUUIDs)
 			$e:=ds:C1482[This:C1470.entry.dataclass].get($uuid)
 			While ($e[This:C1470.view.RLDefinition.recursiveAttribute]#Null:C1517)
 				$e:=$e[This:C1470.view.RLDefinition.recursiveAttribute]
-				$uuids.push($e.getKey())
+				$UUIDs.push($e.getKey())
 			End while 
 		End for each 
-		This:C1470.lb_items:=ds:C1482[This:C1470.entry.dataclass].query("UUID in :1"; $uuids)
+		This:C1470.lb_items:=ds:C1482[This:C1470.entry.dataclass].query("UUID in :1"; $UUIDs)
 	End if 
 	This:C1470.clearHierarchicalEntries()
 	This:C1470.lastRefItemInList:=0
@@ -1163,7 +1303,7 @@ Function pupFilterClic()
 			
 			APPEND MENU ITEM:C411($refMenu; $filter.defaultTitle; *)
 			SET MENU ITEM PARAMETER:C1004($refMenu; -1; "all")
-			If ($filter.UUIDS=Null:C1517)
+			If ($filter.UUIDs=Null:C1517)
 				SET MENU ITEM MARK:C208($refMenu; -1; Char:C90(18))
 			End if 
 			APPEND MENU ITEM:C411($refMenu; "-")
@@ -1180,18 +1320,31 @@ Function pupFilterClic()
 			Else 
 				$sourceEntities:=ds:C1482[$filter.linkedDataclassName].all().orderBy($orderForItems)
 			End if 
+			
+			If ($filter.displayCount#Null:C1517)
+				$pathParts:=Split string:C1554($filter.displayCount; ".")
+				$lastAttribute:=$pathParts.pop()
+				$source:=This:C1470.lb_items
+				For each ($part; $pathParts)
+					$source:=$source[$part]
+				End for each 
+				$counts:=$source.distinct($lastAttribute; ck count values:K85:37)
+			End if 
+			
 			For each ($entity; $sourceEntities)
 				$uuid:=$entity["UUID"]  //.getKey(dk key as string)
-				$mark:=($filter.UUIDS#Null:C1517) && ($filter.UUIDS.indexOf($uuid)#-1)
+				//$mark:=($filter.UUIDs#Null) && ($filter.UUIDs.indexOf($uuid)#-1)
 				$labelForItem:=$filter.labelForItem || "name"
-				//If (Is Windows) && ($entity.color#Null)
-				//$label:=("✅ "*Num($mark))+$entity[$labelForItem]
-				//Else 
 				$label:=$entity[$labelForItem]
-				//End if 
+				If ($filter.displayCount#Null:C1517)
+					$indices:=$counts.indices("value = :1"; $uuid)
+					If ($indices.length#0)
+						$label+=" ["+String:C10($counts[$indices[0]].count)+"]"
+					End if 
+				End if 
 				APPEND MENU ITEM:C411($refMenu; $label; *)
 				SET MENU ITEM PARAMETER:C1004($refMenu; -1; "UUID:"+$uuid)
-				If ($filter.UUIDS#Null:C1517) && ($filter.UUIDS.indexOf($uuid)#-1)
+				If ($filter.UUIDs#Null:C1517) && ($filter.UUIDs.indexOf($uuid)#-1)
 					SET MENU ITEM MARK:C208($refMenu; -1; Char:C90(18))
 					SET MENU ITEM STYLE:C425($refMenu; -1; Bold:K14:2)
 				End if 
@@ -1215,7 +1368,7 @@ Function pupFilterClic()
 						If ($filter.queryString#Null:C1517)
 							OB REMOVE:C1226($filter; "queryString")
 							OB REMOVE:C1226($filter; "queryParameters")
-							OB REMOVE:C1226($filter; "UUIDS")
+							OB REMOVE:C1226($filter; "UUIDs")
 						End if 
 						OBJECT SET TITLE:C194(*; $objectName; $filter.defaultTitle)
 						OBJECT SET FONT STYLE:C166(*; $objectName; Plain:K14:1)
@@ -1225,33 +1378,33 @@ Function pupFilterClic()
 						
 					: ($choice="UUID:@")
 						If ($choice="UUID:all")
-							$filter.UUIDS:=$sourceEntities.UUID
+							$filter.UUIDs:=$sourceEntities.UUID
 						Else 
 							$uuid:=Substring:C12($choice; 6)
-							$filter.UUIDS:=$filter.UUIDS || New collection:C1472
-							$index:=$filter.UUIDS.indexOf($uuid)
+							$filter.UUIDs:=$filter.UUIDs || New collection:C1472
+							$index:=$filter.UUIDs.indexOf($uuid)
 							If ($index#-1)
-								$filter.UUIDS.remove($index)
+								$filter.UUIDs.remove($index)
 							Else 
-								$filter.UUIDS.push($uuid)
+								$filter.UUIDs.push($uuid)
 							End if 
 						End if 
-						If ($filter.UUIDS.length=0)
+						If ($filter.UUIDs.length=0)
 							$choice:="all"
 							continue
 						Else 
 							$filter.queryString:=$filter.attributeForLink+" in :"+$filter.placeholderForLink
 							$filter.queryParameters:=$filter.queryParameters || New object:C1471
-							$filter.queryParameters[$filter.placeholderForLink]:=$filter.UUIDS
-							If ($filter.UUIDS.length=1)
-								$entity:=ds:C1482[$filter.linkedDataclassName].get($filter.UUIDS[0])
+							$filter.queryParameters[$filter.placeholderForLink]:=$filter.UUIDs
+							If ($filter.UUIDs.length=1)
+								$entity:=ds:C1482[$filter.linkedDataclassName].get($filter.UUIDs[0])
 								$attributeForSingleTitle:=$filter.attributeForSingleTitle || "name"
 								OBJECT SET TITLE:C194(*; $objectName; $entity[$attributeForSingleTitle])
 							Else 
 								If ($filter.formatForMutipleTitles#Null:C1517)
-									OBJECT SET TITLE:C194(*; $objectName; String:C10($filter.UUIDS.length; $filter.formatForMutipleTitles))
+									OBJECT SET TITLE:C194(*; $objectName; String:C10($filter.UUIDs.length; $filter.formatForMutipleTitles))
 								Else 
-									OBJECT SET TITLE:C194(*; $objectName; String:C10($filter.UUIDS.length)+" items")
+									OBJECT SET TITLE:C194(*; $objectName; String:C10($filter.UUIDs.length)+" items")
 								End if 
 							End if 
 							OBJECT SET FONT STYLE:C166(*; $objectName; Bold:K14:2)
@@ -1281,11 +1434,25 @@ Function pupFilterClic()
 			Else 
 				$sourceEntities:=ds:C1482[$filter.linkedDataclassName].all().orderBy($orderForItems)
 			End if 
-			
+			If ($filter.displayCount#Null:C1517)
+				$pathParts:=Split string:C1554($filter.displayCount; ".")
+				$lastAttribute:=$pathParts.pop()
+				$source:=This:C1470.lb_items
+				For each ($part; $pathParts)
+					$source:=$source[$part]
+				End for each 
+				$counts:=$source.distinct($lastAttribute; ck count values:K85:37)
+			End if 
 			For each ($entity; $sourceEntities)
 				$id:=$entity[$filter.attributeID]
 				$labelForItem:=$filter.labelForItem || "name"
 				$label:=$entity[$labelForItem]
+				If ($filter.displayCount#Null:C1517)
+					$indices:=$counts.indices("value = :1"; $id)
+					If ($indices.length#0)
+						$label+=" ["+String:C10($counts[$indices[0]].count)+"]"
+					End if 
+				End if 
 				APPEND MENU ITEM:C411($refMenu; $label; *)
 				SET MENU ITEM PARAMETER:C1004($refMenu; -1; "ID:"+String:C10($id))
 				If ($filter.IDS#Null:C1517) && ($filter.IDS.indexOf($id)#-1)
@@ -1369,21 +1536,37 @@ Function pupFilterClic()
 			
 			$orderForItems:=$filter.orderForItems || "name"
 			
-			If (Shift down:C543)
+			If (Shift down:C543) || ($filter.notOrphans)
 				$pathParts:=Split string:C1554($filter.pathManyToMany; ".")
 				$source:=This:C1470.lb_items
 				For each ($part; $pathParts)
 					$source:=$source[$part]
 				End for each 
-				$uuids:=$source.distinct("UUID")
-				$sourceEntities:=ds:C1482[$filter.finalDataclassName].query("UUID in :1 order by "+$orderForItems; $uuids)
+				$UUIDs:=$source.distinct("UUID")
+				$sourceEntities:=ds:C1482[$filter.finalDataclassName].query("UUID in :1 order by "+$orderForItems; $UUIDs)
 			Else 
 				$sourceEntities:=ds:C1482[$filter.finalDataclassName].all().orderBy($orderForItems)
+			End if 
+			
+			If ($filter.displayCount#Null:C1517)
+				$pathParts:=Split string:C1554($filter.displayCount; ".")
+				$lastAttribute:=$pathParts.pop()
+				$source:=This:C1470.lb_items
+				For each ($part; $pathParts)
+					$source:=$source[$part]
+				End for each 
+				$counts:=$source.distinct($lastAttribute; ck count values:K85:37)
 			End if 
 			
 			For each ($entity; $sourceEntities)
 				$labelForItem:=$filter.labelForItem || "name"
 				$label:=$entity[$labelForItem]
+				If ($filter.displayCount#Null:C1517)
+					$indices:=$counts.indices("value = :1"; $entity.getKey())
+					If ($indices.length#0)
+						$label+=" ["+String:C10($counts[$indices[0]].count)+"]"
+					End if 
+				End if 
 				APPEND MENU ITEM:C411($refMenu; $label; *)
 				SET MENU ITEM PARAMETER:C1004($refMenu; -1; "UUID:"+String:C10($entity.getKey()))
 				If ($filter.UUIDs#Null:C1517) && ($filter.UUIDs.indexOf($entity.UUID)#-1)
@@ -1545,7 +1728,7 @@ Function _applyFilters()
 	//Mark:-Search
 	
 	
-Function searchBox()
+Function searchBox($option : Integer)
 	var $bestwidth; $bestheight : Integer
 	
 	OBJECT GET COORDINATES:C663(*; "searchbox_roundRectangle"; $groundRectangle; $hroundRectangle; $droundRectangle; $broundRectangle)
@@ -1556,7 +1739,7 @@ Function searchBox()
 	$textForCalculation:=Get edited text:C655
 	
 	Case of 
-		: (FORM Event:C1606.code=On Data Change:K2:15)
+		: (FORM Event:C1606.code=On Data Change:K2:15) || (Count parameters:C259>0)
 			Form:C1466.sfw.lb_items_search()
 			
 		: (FORM Event:C1606.code=On Getting Focus:K2:7)

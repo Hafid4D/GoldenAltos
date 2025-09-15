@@ -1,5 +1,5 @@
 Case of 
-	: (FORM Event:C1606.code=On Clicked:K2:4)
+	: (FORM Event:C1606.code=On Clicked:K2:4) & (Contextual click:C713)
 		$row:=Num:C11(FORM Event:C1606.row)
 		If ($row<=Form:C1466.lb_results.length) & ($row>0)
 			$line:=Form:C1466.lb_results[$row-1]
@@ -44,5 +44,27 @@ Case of
 					
 			End case 
 			
+		End if 
+		
+	: (FORM Event:C1606.code=On Double Clicked:K2:5)
+		$row:=Num:C11(FORM Event:C1606.row)
+		If ($row<=Form:C1466.lb_results.length) & ($row>0)
+			$line:=Form:C1466.lb_results[$row-1]
+			Case of 
+				: ($line.kind="entity")
+					$key:=$line.entity.getKey()
+					
+					$formData:=New object:C1471()
+					//singleton for the framework useCase of 
+					
+					$indices:=Form:C1466.entries.indices("dataclass = :1"; $line.dataclass)
+					$entry:=Form:C1466.entries[$indices[0]]
+					$formData.sfw:=cs:C1710.sfw_item.new()
+					
+					$formData.sfw.vision:=Form:C1466.vision
+					$formData.sfw.entry:=$entry
+					$formData.current_item:=$line.entity
+					$formData.sfw.openForm($formData)
+			End case 
 		End if 
 End case 

@@ -2471,7 +2471,7 @@ Function column_variable_type()
 				If ($choose#"")
 					Form:C1466.variable.type:=This:C1470.tool_display_ValueType(Form:C1466.variable.value)
 					Form:C1466.current_item.variableItems[Form:C1466.variable.name]:=Form:C1466.variable.value
-					This:C1470.ctivate_saveCancel()
+					This:C1470.activate_saveCancel()
 				End if 
 			End if 
 			

@@ -44,7 +44,7 @@ Function drawPup_documentFolder()
 Function pup_documentFolder()
 	If (Form:C1466.sfw.checkIsInModification())
 		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.documentFolder=Null:C1517)
-			ds:C1482.sfw_DocumentFolder.cacheLoad()
+			ds:C1482.sfw_DocumentFolder.cacheLoad(1)
 		End if 
 		
 		This:C1470.hpup_menus:=New collection:C1472
@@ -78,8 +78,9 @@ Function _hpup_documentFolder($uuid_parent : Text)->$menu : Text
 	var $parentFolder : Object
 	var $parentFolders : Collection
 	
+	
 	If (Count parameters:C259=0)
-		$parentFolders:=Storage:C1525.cache.documentFolder.query("UUID_ParentFolder = :1"; (16*"00"))
+		$parentFolders:=Storage:C1525.cache.documentFolder.query("UUID_ParentFolder in :1"; [(16*"00"); (16*"20"); ""])
 	Else 
 		$parentFolders:=Storage:C1525.cache.documentFolder.query("UUID_ParentFolder = :1 order by name"; $uuid_parent)
 		This:C1470.hpup_parentUUIDS.push($uuid_parent)
@@ -89,6 +90,13 @@ Function _hpup_documentFolder($uuid_parent : Text)->$menu : Text
 	Else 
 		$menu:=Create menu:C408
 		This:C1470.hpup_menus.push($menu)
+		If (Count parameters:C259=0)
+		Else 
+			$folder:=Storage:C1525.cache.documentFolder.query("UUID=:1"; $uuid_parent).first()
+			APPEND MENU ITEM:C411($menu; $folder.name; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $folder.UUID)
+			APPEND MENU ITEM:C411($menu; "-")
+		End if 
 		For each ($parentFolder; $parentFolders)
 			$subMenu:=This:C1470._hpup_documentFolder($parentFolder.UUID)
 			If ($subMenu="")

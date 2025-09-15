@@ -5,4 +5,3 @@ sfw_on_server_startup_database("goldenAltos_definition")
 
 //appointments_cleaner
 
-sfw_w_load_routes

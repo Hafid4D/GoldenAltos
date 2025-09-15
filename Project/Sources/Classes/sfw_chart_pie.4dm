@@ -1,3 +1,8 @@
+property refSvg : Text
+property _center; margin : Object
+property _pieRadius : Real
+property _series : Collection
+
 Class extends sfw_chart
 
 property withLightEffect : Boolean
@@ -21,8 +26,10 @@ Function setAreaSize($width : Integer; $height : Integer)
 	This:C1470._center.X:=This:C1470._pieRadius+This:C1470.margin.left
 	This:C1470._center.Y:=This:C1470._pieRadius+This:C1470.margin.top
 	
-Function drawGraph()->$picture : Picture
+Function drawGraph($option : Object)->$picture : Picture
 	var $colors : Collection:=[]
+	$option:=$option||new object()
+	$option.groupAfterXslices:=$option.groupAfterXslices || 1000
 	$colors:=This:C1470._series.extract("color")
 	If ($colors.length#This:C1470._series.length)
 		$colors:=This:C1470._loadShades()
@@ -36,18 +43,35 @@ Function drawGraph()->$picture : Picture
 	$start:=0
 	This:C1470.gutter:=70
 	$i:=0
+	$values:=0
+	$nb_others:=0
 	For each ($serie; This:C1470._series)
 		$i+=1
-		$finish:=$start+(360*$serie.value/$grandTotal)
-		SVG_New_arc(This:C1470.refSvg; This:C1470._center.X; This:C1470._center.Y; This:C1470._pieRadius; $start; $finish; "none"; $colors[$i-1]; 1)
-		SVG_New_text(This:C1470.refSvg; String:C10($serie.value/$grandTotal*100; "###.0%"); This:C1470.margin.left+(This:C1470._pieRadius*2)+This:C1470.gutter-12; 18+(($i-1)*25); "Arial"; 12; 0; 4)
-		SVG_New_rect(This:C1470.refSvg; This:C1470.margin.left+(This:C1470._pieRadius*2)+This:C1470.gutter; 20+(($i-1)*25); 10; 10; 2; 2; "black"; $colors[$i-1]+":50"; 1)
-		SVG_New_text(This:C1470.refSvg; $serie.name+" : "+String:C10($serie.value; "### ##0"); This:C1470.margin.left+(This:C1470._pieRadius*2)+This:C1470.gutter+20; 18+(($i-1)*25); "Arial"; 12)
-		$start:=$finish
+		If ($i<$option.groupAfterXslices)
+			$finish:=$start+(360*$serie.value/$grandTotal)
+			SVG_New_arc(This:C1470.refSvg; This:C1470._center.X; This:C1470._center.Y; This:C1470._pieRadius; $start; $finish; "none"; $colors[$i-1]; 1)
+			SVG_New_text(This:C1470.refSvg; String:C10($serie.value/$grandTotal*100; "###.0%"); This:C1470.margin.left+(This:C1470._pieRadius*2)+This:C1470.gutter-12; 18+(($i-1)*25); "Arial"; 12; 0; 4)
+			SVG_New_rect(This:C1470.refSvg; This:C1470.margin.left+(This:C1470._pieRadius*2)+This:C1470.gutter; 20+(($i-1)*25); 10; 10; 2; 2; "black"; $colors[$i-1]+":50"; 1)
+			SVG_New_text(This:C1470.refSvg; $serie.name+" : "+String:C10($serie.value; "### ### ##0"); This:C1470.margin.left+(This:C1470._pieRadius*2)+This:C1470.gutter+20; 18+(($i-1)*25); "Arial"; 10.5)
+			$start:=$finish
+		Else 
+			$values+=$serie.value
+			$nb_others+=1
+		End if 
 	End for each 
-	$i:=$i+1
+	$finish:=$start+(360*$values/$grandTotal)
 	
-	SVG_New_text(This:C1470.refSvg; "Total : "+String:C10($grandTotal; "### ##0"); This:C1470.margin.left+(This:C1470._pieRadius*2)+This:C1470.gutter+20; 18+(($i-1)*25); "Arial"; 12)
+	$i:=$i+1
+	If ($i>$option.groupAfterXslices)
+		$i:=$option.groupAfterXslices
+		SVG_New_arc(This:C1470.refSvg; This:C1470._center.X; This:C1470._center.Y; This:C1470._pieRadius; $start; $finish; "none"; "silver"; 1)
+		SVG_New_text(This:C1470.refSvg; String:C10($values/$grandTotal*100; "###.0%"); This:C1470.margin.left+(This:C1470._pieRadius*2)+This:C1470.gutter-12; 18+(($i-1)*25); "Arial"; 12; 0; 4)
+		SVG_New_rect(This:C1470.refSvg; This:C1470.margin.left+(This:C1470._pieRadius*2)+This:C1470.gutter; 20+(($i-1)*25); 10; 10; 2; 2; "black"; "silver:50"; 1)
+		SVG_New_text(This:C1470.refSvg; String:C10($nb_others)+" others values : "+String:C10($values; "### ### ##0"); This:C1470.margin.left+(This:C1470._pieRadius*2)+This:C1470.gutter+20; 18+(($i-1)*25); "Arial"; 10.5)
+		$i+=1
+	End if 
+	
+	SVG_New_text(This:C1470.refSvg; "Total : "+String:C10($grandTotal; "### ### ##0"); This:C1470.margin.left+(This:C1470._pieRadius*2)+This:C1470.gutter+20; 18+(($i-1)*25); "Arial"; 10.5)
 	
 	If (This:C1470.withLightEffect)
 		$nameOfGradient:="myGradient"

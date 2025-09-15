@@ -33,3 +33,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setValidationRule("type"; ""; "notZero"; "message:the type is mandatory")
 	
 	//$entry.setAllowedProfiles(cs.sfw_globalParameters.me.dfd.entryDocument.allowedProfiles || "admin")
+	
+	$entry.activateSubscription()
+	
+	

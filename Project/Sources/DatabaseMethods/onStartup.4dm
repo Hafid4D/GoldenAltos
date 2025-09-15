@@ -1,7 +1,11 @@
+SET DATABASE LOCALIZATION:C1104("en_us")
 
-If (Num:C11(Application version:C493)<2060)  // Compatibility starting with 4D 20 R6
-	$ok:=cs:C1710.sfw_dialog.me.confirm("This database should be opened with 4D20 R6\rOpen anyway? (Cancel will QUIT 4D)")
-	If ($ok)
+$version:=Num:C11(Substring:C12(Application version:C493; 1; 2))
+$revision:=Substring:C12(Application version:C493; 3; 1)
+
+If (Not:C34(($version=20) && (Position:C15($revision; "9ABCDEF")>0)))  // Compatibility starting with 4D 20 R9
+	$ok:=cs:C1710.sfw_dialog.me.confirm("This database should be opened with 4D20 R9\rOpen anyway? (Cancel will QUIT 4D)")
+	If ($ok=False:C215)
 		QUIT 4D:C291
 	End if 
 End if 

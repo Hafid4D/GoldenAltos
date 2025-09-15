@@ -1,4 +1,5 @@
 property availableTypes : Collection
+property hpup_menus : Collection
 
 singleton Class constructor
 	//It's a singleton class
@@ -189,7 +190,7 @@ Function _hpup_documentFolder($uuid_parent : Text)->$menu : Text
 	var $parentFolders : Collection
 	
 	If (Count parameters:C259=0)
-		$parentFolders:=Storage:C1525.cache.documentFolder.query("UUID_ParentFolder = :1"; (16*"00"))
+		$parentFolders:=Storage:C1525.cache.documentFolder.query("UUID_ParentFolder in :1 or parentFolder = null"; [16*"00"; "20"*16; ""])
 	Else 
 		$parentFolders:=Storage:C1525.cache.documentFolder.query("UUID_ParentFolder = :1 order by name"; $uuid_parent)
 	End if 

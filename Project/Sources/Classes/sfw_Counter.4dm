@@ -2,21 +2,23 @@ Class extends DataClass
 
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
-	$entry:=cs:C1710.sfw_definitionEntry.new("counter"; "administration"; "Counter")
-	$entry.setXliffLabel("counter.counter")
-	$entry.setDataclass("sfw_Counter")
-	$entry.setIcon("sfw/entry/counter-50x50.png")
-	$entry.setSearchboxField("ident")
-	$entry.setSearchboxField("currentValue")
-	$entry.setPanel("sfw_panel_counter")
-	$entry.setLBItemsColumn("ident"; " ")
-	$entry.setLBItemsColumn("currentValue"; "Current value"; "xliff:counter.field.currentvalue")
-	$entry.setLBItemsOrderBy("ident")
-	$entry.setDisplayOrder(-100)
-	
-	$entry.setItemListPreconfigAction("exportReferenceRecords")
-	$entry.setItemListPreconfigAction("importReferenceRecords")
-	$entry.setItemListPreconfigAction("copyItemsListToPasteboard")
+	If (cs:C1710.sfw_definition.me.globalParameters.counters.activate)
+		$entry:=cs:C1710.sfw_definitionEntry.new("counter"; "administration"; "Counter")
+		$entry.setXliffLabel("counter.counter")
+		$entry.setDataclass("sfw_Counter")
+		$entry.setIcon("sfw/entry/counter-50x50.png")
+		$entry.setSearchboxField("ident")
+		$entry.setSearchboxField("currentValue")
+		$entry.setPanel("sfw_panel_counter")
+		$entry.setLBItemsColumn("ident"; " ")
+		$entry.setLBItemsColumn("currentValue"; "Current value"; "xliff:counter.field.currentvalue")
+		$entry.setLBItemsOrderBy("ident")
+		$entry.setDisplayOrder(-100)
+		
+		$entry.setItemListPreconfigAction("exportReferenceRecords")
+		$entry.setItemListPreconfigAction("importReferenceRecords")
+		$entry.setItemListPreconfigAction("copyItemsListToPasteboard")
+	End if
 	
 local Function getNextValue($ident : Text)->$value : Integer
 	

@@ -1,3 +1,6 @@
+property workerRunning : Boolean
+property schedulers : cs:C1710.sfw_SchedulerSelection
+
 singleton Class constructor
 	
 	Case of 

@@ -1,3 +1,6 @@
+property active : Boolean
+property description : Text
+
 Class constructor
 	
 	

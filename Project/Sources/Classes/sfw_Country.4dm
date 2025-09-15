@@ -8,9 +8,15 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setDataclass("sfw_Country")
 	$entry.setIcon("sfw/entry/world-50x50-1.png"; "sfw/entry/world-50x50.png")
 	$entry.setDisplayOrder(-1100)
-	$entry.setSearchboxField("name")
-	$entry.setSearchboxField("iso_code_2")
-	$entry.setSearchboxField("iso_code_3")
+	//$entry.setSearchboxField("name")
+	//$entry.setSearchboxField("iso_code_2")
+	//$entry.setSearchboxField("iso_code_3")
+	
+	$entry.setSearchField("attribute:name"; "tag:name")
+	$entry.setSearchField("attribute:iso_code_2"; "tag:isoCode2")
+	$entry.setSearchField("attribute:iso_code_3"; "tag:isoCode3")
+	
+	
 	$entry.setPanel("sfw_panel_country")
 	$entry.setPanelPage(1; "address-32x32.png"; "Addresses")
 	$entry.setLBItemsColumn("flag"; " "; "type:picture"; "width:30"; "orderByFormula:this.iso_code_2")
@@ -74,4 +80,26 @@ Function trigger()
 	
 Function _loadAsCollection()->$countriesColl : Collection
 	
+	If (This:C1470.getCount()=0)
+		$file:=Folder:C1567(fk resources folder:K87:11).file("sfw/startdata/country_new.json")
+		$records:=JSON Parse:C1218($file.getText())
+		For each ($record; $records)
+			$country:=ds:C1482.sfw_Country.new()
+			$country.name:=$record.name
+			$country.capitalCity:=$record.capitalCity
+			$country.iso_code_2:=$record.iso_code_2
+			$country.iso_code_3:=$record.iso_code_3
+			$country.address_format:=New object:C1471()
+			$country.address_format:=$record.address_format
+			$country.moreData:=$record.moreData
+			
+			$info:=$country.save()
+			If (Not:C34($info.success))
+				TRACE:C157
+			End if 
+			
+		End for each 
+	End if 
 	$countriesColl:=This:C1470.all().toCollection("name, iso_code_2, address_format").orderBy("name")
+	
+	

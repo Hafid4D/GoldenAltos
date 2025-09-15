@@ -1,3 +1,5 @@
+property lastExportFolder : 4D:C1709.Folder
+
 shared singleton Class constructor
 	
 	

@@ -8,6 +8,7 @@ property subset : Object
 property HLItems : Object
 property HLEntries : Object
 property RLDefinition : Object
+property allowedProfiles : Collection
 
 Class constructor($ident : Text; $label : Text;  ...  : Variant)
 	var $view : cs:C1710.sfw_definitionView
@@ -61,7 +62,21 @@ Function setLBItemsColumn($attribute : Text; $label : Text;  ...  : Text)
 			: ($selector="type")
 				$column.type:=$params[0]
 			: ($selector="width")
-				$column.width:=Num:C11($params[0])
+				$column.width:=Num:C11($params.shift())
+				If ($params.length>0)
+					$val:=$params.shift()
+					Case of 
+						: ($val="fixed")
+							$column.widthMin:=$column.width
+							$column.widthMax:=$column.width
+						Else 
+							$column.widthMin:=Num:C11($val)
+					End case 
+				End if 
+				If ($params.length>0)
+					$val:=$params.shift()
+					$column.widthMax:=Num:C11($val)
+				End if 
 			: ($selector="orderByFormula")
 				$column.orderBy:=$column.orderBy || New object:C1471
 				$column.orderBy.formula:=$params[0]
@@ -96,7 +111,10 @@ Function setLBItemsColumn($attribute : Text; $label : Text;  ...  : Text)
 				$column.alignment:=Align default:K42:1
 			: ($selector="columnName")
 				$column.columnName:=$params[0]
-				
+			: ($selector="hidden")
+				$column.hidden:=True:C214
+			: ($selector="notExported")
+				$column.notExported:=True:C214
 		End case 
 	End for 
 	

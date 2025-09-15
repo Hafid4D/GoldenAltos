@@ -1,3 +1,7 @@
+property refMenuWindows : Text
+property windows : Collection
+property toolbarWindowRef : Integer
+
 shared singleton Class constructor
 	
 	

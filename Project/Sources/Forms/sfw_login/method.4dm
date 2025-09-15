@@ -4,8 +4,6 @@ Case of
 		var $logoFile : 4D:C1709.File
 		var $path : Text
 		
-		
-		
 		Case of 
 			: (Application type:C494=4D Remote mode:K5:5)
 				$path:=(cs:C1710.sfw_definition.me.globalParameters.login.defaultLogo) ? cs:C1710.sfw_definition.me.globalParameters.login.defaultLogo : cs:C1710.sfw_definition.me.globalParameters.panel.defaultLogo

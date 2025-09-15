@@ -1,3 +1,5 @@
+
+
 Class extends DataClass
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
@@ -41,17 +43,21 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 Function getActiveUsers()->$esUsers : cs:C1710.sfw_UserSelection
 	var $eRelated : 4D:C1709.Entity
 	
-	$esUsers:=ds:C1482.sfw_User.newSelection()
-	For each ($eUser; ds:C1482.sfw_User.query("isInactive != True"))
-		Try
-			$eRelated:=ds:C1482[cs:C1710.sfw_definition.me.globalParameters.users.linkedDataclass].query("UUID_User = :1"; $eUser.UUID).first()
-			If ($eRelated#Null:C1517)
-				$esUsers.add($eUser)
-			End if 
-		Catch
-			
-		End try
-	End for each 
+	If (cs:C1710.sfw_definition.me.globalParameters.users.linkedDataclass#Null:C1517)
+		$esUsers:=ds:C1482.sfw_User.newSelection()
+		For each ($eUser; ds:C1482.sfw_User.query("isInactive != True"))
+			Try
+				$eRelated:=ds:C1482[cs:C1710.sfw_definition.me.globalParameters.users.linkedDataclass].query("UUID_User = :1"; $eUser.UUID).first()
+				If ($eRelated#Null:C1517)
+					$esUsers.add($eUser)
+				End if 
+			Catch
+				
+			End try
+		End for each 
+	Else 
+		$esUsers:=ds:C1482.sfw_User.query("isInactive != True")
+	End if 
 	
 	
 Function capitalize_all()
@@ -68,3 +74,9 @@ Function cleanUpProfileInscriptions()
 	$uuidsProfiles:=ds:C1482.sfw_UserProfile.all().extract("UUID")
 	$esInscriptionsWithoutProfile:=ds:C1482.sfw_UserInscription.query("not(UUID_UserProfile in :1)"; $uuidsProfiles)
 	$info:=$esInscriptionsWithoutProfile.drop()
+	
+	
+local Function closeBoxMainForm()
+	If (Form:C1466.subForm#Null:C1517) && (Form:C1466.subForm.hl_permissions#Null:C1517) && (Is a list:C621(Form:C1466.subForm.hl_permissions))
+		CLEAR LIST:C377(Form:C1466.subForm.hl_permissions; *)
+	End if 

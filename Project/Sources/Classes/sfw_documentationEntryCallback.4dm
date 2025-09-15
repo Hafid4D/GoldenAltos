@@ -1,3 +1,5 @@
+property callbacks : Collection
+
 shared singleton Class constructor
 	
 	var $callback : Object

@@ -56,7 +56,7 @@
 				},
 				"Texte": {
 					"type": "text",
-					"top": 24,
+					"top": 22,
 					"left": 72,
 					"width": 237,
 					"height": 17,
@@ -64,12 +64,12 @@
 				},
 				"Image1": {
 					"type": "picture",
-					"top": 5,
-					"left": 5,
-					"width": 50,
-					"height": 50,
+					"top": 12,
+					"left": 10,
+					"width": 37,
+					"height": 37,
 					"pictureFormat": "scaled",
-					"picture": "/RESOURCES/sfw/entry/notifications-50x50.png"
+					"picture": "/RESOURCES/sfw/entry/notifications-37x37-white.png"
 				},
 				"lb_notifications": {
 					"type": "listbox",
@@ -339,7 +339,7 @@
 			}
 		}
 	],
-	"geometryStamp": 117,
+	"geometryStamp": 123,
 	"formSizeAnchor": "bkgd_bottomBar",
 	"method": "method.4dm",
 	"editor": {

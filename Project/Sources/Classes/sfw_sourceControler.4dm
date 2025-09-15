@@ -1,3 +1,7 @@
+property data : Object
+property dataFile : Text
+
+
 Class constructor
 	
 	var $folder : 4D:C1709.Folder

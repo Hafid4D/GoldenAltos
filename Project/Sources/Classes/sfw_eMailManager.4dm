@@ -1,8 +1,10 @@
+property SMTP_object : Object
+
 singleton Class constructor
 	
 	//This.serverSMTP:=cs.sfw_definition.me.globalParameters.serverSMTP
 	//This.serverSMTP.logFile:="LogMail.txt"  //Extended log to save in the Logs folder
-	This:C1470.SMTP_object:=cs:C1710.microsoftGraphAPI.new()  //SMTP New transporter(This.serverSMTP)
+	This:C1470.SMTP_object:=cs:C1710.sfw_microsoftGraphAPI.new()  //SMTP New transporter(This.serverSMTP)
 	
 	//This.launch()
 	

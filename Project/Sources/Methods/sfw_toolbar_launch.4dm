@@ -15,7 +15,7 @@ Else
 		
 		$formData:=New object:C1471
 		$formData.sfw:=cs:C1710.sfw_toolbar.new()
-		$formData.sfw.vision:=cs:C1710.sfw_definition.me.visions.orderBy("displayOrder desc")[0]
+		$formData.sfw.vision:=cs:C1710.sfw_definition.me.visions.query("label # :1"; "-").orderBy("displayOrder desc")[0]
 		DELAY PROCESS:C323(Current process:C322; 60)  //wait for the 4D interface initialization or update (in case of "restart interpreted")
 		
 		$toolbarWindow:=cs:C1710.sfw_window.me.openFormWindow("sfw_toolbar"; Toolbar form window:K39:16)

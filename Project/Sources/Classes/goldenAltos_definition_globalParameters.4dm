@@ -25,6 +25,11 @@ Function _global_parameters()
 	
 	This:C1470.toolbar:=New object:C1471("visionsLogo"; "/RESOURCES/image/logo/golden_atos_100x25.png"; "visionsLogoLocal"; "/RESOURCES/image/logo/golden_atos_100x25.png")
 	This:C1470.toolbar.entryIconsResize:=True:C214
+	This:C1470.toolbar.entryIconsResize:=True:C214
+	This:C1470.toolbar.entryIconsAutoWidth:=True:C214
+	This:C1470.toolbar.entryIconsMargin:=3
+	This:C1470.toolbar.entryIconsSameWidth:=True:C214
+	This:C1470.toolbar.changeLanguage:=False:C215
 	
 	This:C1470.mainInterface:=New object:C1471("window"; New object:C1471)
 	This:C1470.mainInterface.window:=New object:C1471("width"; 1800; "height"; 850)
@@ -48,6 +53,7 @@ Function _global_parameters()
 	
 	
 	This:C1470.notifications:=New object:C1471("activate"; True:C214)
+	This:C1470.todoList:=New object:C1471("activate"; True:C214)
 	
 	If (Application type:C494#4D Remote mode:K5:5)
 		This:C1470.documentsStorageOnServer:=New object:C1471

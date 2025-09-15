@@ -20,8 +20,10 @@ property itemListProjections : Collection
 property itemListOutsides : Collection
 property views : Collection
 property allowFavorite : Boolean
+property allowSubscription : Boolean
+property allowAssignation : Boolean
 property allowDocument : Object
-property multiselection : Boolean
+property multiselection : Object
 property allowedProfiles : Collection
 property allowedProfilesForCreation : Collection
 property allowedProfilesForDeletion : Collection
@@ -38,6 +40,10 @@ property comment : Object
 property filters : Collection
 property specificAddModes : Collection
 property splitter : Object
+property orderByDefault : Text
+property transaction : Object
+property searchPreferedTags : Collection
+
 
 Class constructor($ident : Text; $vision_ident : Variant; $labelPlurial : Text; $labelSingle : Text)
 	
@@ -64,12 +70,13 @@ Class constructor($ident : Text; $vision_ident : Variant; $labelPlurial : Text; 
 	This:C1470.itemListOutsides:=New collection:C1472
 	This:C1470.views:=New collection:C1472
 	This:C1470.allowFavorite:=True:C214
+	This:C1470.allowSubscription:=False:C215
 	This:C1470.allowDocument:=Null:C1517
-	This:C1470.multiselection:=False:C215
-	This:C1470.allowedProfiles:=New collection:C1472
+	This:C1470.multiselection:=Null:C1517
 	This:C1470.allowedProfilesForCreation:=New collection:C1472
 	This:C1470.allowedProfilesForDeletion:=New collection:C1472
 	This:C1470.allowedProfilesForModification:=New collection:C1472
+	This:C1470.searchPreferedTags:=New collection:C1472
 	
 Function setXliffLabel($xliff : Text)
 	This:C1470.xliff:=$xliff
@@ -113,42 +120,7 @@ Function setDisplayOrder($order : Integer)
 	This:C1470.displayOrder:=$order
 	
 	
-Function setSearchboxField($attribute : Text;  ...  : Variant)
-	var $field : Object:=New object:C1471
 	
-	$field.attribute:=$attribute
-	
-	For ($i; 2; Count parameters:C259)
-		$params:=Split string:C1554(${$i}; ":")
-		$selector:=$params.shift()
-		Case of 
-			: ($selector="placeholder")
-				$field.fieldPlaceHolder:=$params[0]
-		End case 
-	End for 
-	
-	This:C1470.searchbox.fields.push($field)
-	
-	
-Function setSearchboxSpecific($tag : Text;  ...  : Variant)
-	var $specific : Object:=New object:C1471
-	
-	$specific.tag:=$tag
-	For ($i; 2; Count parameters:C259)
-		$params:=Split string:C1554(${$i}; ":")
-		$selector:=$params.shift()
-		Case of 
-			: ($selector="queryString")
-				$specific.queryString:=$params.join(":")
-			: ($selector="formula")
-				$specific.formula:=$params.join(":")
-			: ($selector="collectionBuilder")
-				$specific.collectionBuilder:=$params.join(":")
-			: ($selector="inCollection")
-				$specific.inCollection:=$params.join(":")
-		End case 
-	End for 
-	This:C1470.searchbox.specificSearches.push($specific)
 	
 Function setPanel($panelName : Text; $currentPage : Integer)
 	ARRAY TEXT:C222($_names; 0)
@@ -161,6 +133,7 @@ Function setPanel($panelName : Text; $currentPage : Integer)
 	If (Count parameters:C259>1)
 		This:C1470.panel.currentPage:=$currentPage
 	End if 
+	
 	
 	
 Function setPanelPage($pageNum : Integer; $pict : Text; $label : Text;  ...  : Text)
@@ -178,8 +151,21 @@ Function setPanelPage($pageNum : Integer; $pict : Text; $label : Text;  ...  : T
 		Case of 
 			: ($selector="allowedProfiles")
 				$page.allowedProfiles:=$params
+			: ($selector="condition")
+				$page.condition:=$params.join(":")
+			: ($selector="disabled")
+				If ($params.length=0)
+					$page.disabled:=True:C214
+				Else 
+					$page.disabled:=$params.join(":")
+				End if 
+			: ($selector="suffixLabel")
+				$page.suffixLabel:=$params.join(":")
+			: ($selector="countFormula")
+				$page.countFormula:=$params.join(":")
 		End case 
 	End for 
+	
 	
 	
 	This:C1470.panel.pages.push($page)
@@ -202,6 +188,18 @@ Function setPanelDynamicPage($pageNum : Integer; $pict : Text; $label : Text; $d
 		Case of 
 			: ($selector="allowedProfiles")
 				$page.allowedProfiles:=$params
+			: ($selector="condition")
+				$page.condition:=$params.join(":")
+			: ($selector="disabled")
+				If ($params.length=0)
+					$page.disabled:=True:C214
+				Else 
+					$page.disabled:=$params.join(":")
+				End if 
+			: ($selector="suffixLabel")
+				$page.suffixLabel:=$params.join(":")
+			: ($selector="countFormula")
+				$page.countFormula:=$params.join(":")
 		End case 
 	End for 
 	
@@ -348,6 +346,10 @@ Function setItemListAction($label : Text; $method : Text;  ...  : Text)
 				$action.xliff:=$params[0]
 			: ($selector="allowedProfiles")
 				$action.allowedProfiles:=$params
+			: ($selector="pathIcon")
+				$action.pathIcon:=$params[0]
+			: ($selector="scope")
+				$action.scope:=$params[0]
 		End case 
 	End for 
 	This:C1470.itemListActions.push($action)
@@ -386,6 +388,48 @@ Function setItemListPreconfigAction($actionIdent : Text;  ...  : Text)
 			
 		: ($actionIdent="copyItemsListToPasteboard") && (cs:C1710.sfw_userManager.me.canImportExportReferenceRecords())
 			$action.label:=ds:C1482.sfw_readXliff("definitionEntry.preconfig.copy")
+			This:C1470.itemListActions.push($action)
+			
+		: ($actionIdent="textToolCapitalize")
+			For ($p; 2; Count parameters:C259)
+				$params:=Split string:C1554(${$p}; ":")
+				$selector:=$params.shift()
+				Case of 
+					: ($selector="attributeToCapitalize")
+						$action.attributesToCapitalize:=$action.attributesToCapitalize || New collection:C1472
+						$action.attributesToCapitalize.push($params.shift())
+					: ($selector="label")
+						$action.label:=$params.shift()
+					: ($selector="pathIcon")
+						$action.pathIcon:=$params.shift()
+					: ($selector="allowedProfiles")
+						$action.allowedProfiles:=$params
+				End case 
+			End for 
+			$action.label:=$action.label || ds:C1482.sfw_readXliff("definitionEntry.preconfig.capitalize")  //"Capitalize the name"  //OKXLIFF
+			$action.pathIcon:=$action.pathIcon || "sfw/image/skin/rainbow/icon/capitalize_24x24.png"
+			$action.attributesToCapitalize:=$action.attributesToCapitalize || New collection:C1472("name")
+			This:C1470.itemListActions.push($action)
+			
+		: ($actionIdent="textToolUppercase")
+			For ($p; 2; Count parameters:C259)
+				$params:=Split string:C1554(${$p}; ":")
+				$selector:=$params.shift()
+				Case of 
+					: ($selector="attributeToUppercase")
+						$action.attributesToUppercase:=$action.attributesToUppercase || New collection:C1472
+						$action.attributesToUppercase.push($params.shift())
+					: ($selector="label")
+						$action.label:=$params.shift()
+					: ($selector="pathIcon")
+						$action.pathIcon:=$params.shift()
+					: ($selector="allowedProfiles")
+						$action.allowedProfiles:=$params
+				End case 
+			End for 
+			$action.label:=$action.label || ds:C1482.sfw_readXliff("definitionEntry.preconfig.upper")  //"Uppercase the name"  //OKXLIFF
+			$action.pathIcon:=$action.pathIcon || "sfw/image/skin/rainbow/icon/upperCase_24x24.png"
+			$action.attributesToUppercase:=$action.attributesToUppercase || New collection:C1472("name")
 			This:C1470.itemListActions.push($action)
 			
 	End case 
@@ -489,7 +533,7 @@ Function setVirtualItem($item : cs:C1710.sfw_definitionVirtualItem)
 	
 	This:C1470.items.push($item)
 	
-Function activateComment()
+Function activateComment( ...  : Text)
 	
 	If (ds:C1482["sfw_Comment"]=Null:C1517)
 		cs:C1710.sfw_dialog.me.alert("The table sfw_Comment is missing to use the comment managment feature.")
@@ -499,6 +543,19 @@ Function activateComment()
 	This:C1470.comment.unit0:="no comment"
 	This:C1470.comment.unit1:="one comment"
 	This:C1470.comment.unitN:="comments"
+	
+	For ($p; 1; Count parameters:C259)
+		$params:=Split string:C1554(${$p}; ":")
+		$selector:=$params.shift()
+		Case of 
+			: ($selector="withComment") || ($selector="inComment") || ($selector="levelComment")
+				This:C1470.setSearchField($selector)
+			: ($selector="activateSearchTags")
+				This:C1470.setSearchField("withComment")
+				This:C1470.setSearchField("inComment")
+				This:C1470.setSearchField("levelComment")
+		End case 
+	End for 
 	
 	
 Function enableTransaction()
@@ -607,6 +664,20 @@ Function activateFavorite($activate : Boolean)
 		This:C1470.allowFavorite:=$activate
 	End if 
 	
+Function activateSubscription($activate : Boolean)
+	If (Count parameters:C259=0)
+		This:C1470.allowSubscription:=cs:C1710.sfw_definition.me.globalParameters.notifications.activate
+	Else 
+		This:C1470.allowSubscription:=$activate && cs:C1710.sfw_definition.me.globalParameters.notifications.activate
+	End if 
+	
+Function activateAssignation($activate : Boolean)
+	If (Count parameters:C259=0)
+		This:C1470.allowAssignation:=cs:C1710.sfw_definition.me.globalParameters.todoList.activate
+	Else 
+		This:C1470.allowAssignation:=$activate && cs:C1710.sfw_definition.me.globalParameters.todoList.activate
+	End if 
+	
 	
 Function activateDocument( ...  : Text)
 	This:C1470.allowDocument:=New object:C1471
@@ -624,16 +695,39 @@ Function activateDocument( ...  : Text)
 	This:C1470.setPanelDynamicPage(This:C1470.panel.pages.length+1; ""; "Documents"; $pageDocuments)
 	
 	
-Function allowMultiSelectionInLB($allow : Boolean)
+Function allowMultiSelectionInLB( ...  : Variant)
 	
-	If (Count parameters:C259=0)
-		This:C1470.multiselection:=True:C214
-	Else 
-		This:C1470.multiselection:=$allow
-	End if 
+	Case of 
+		: (Count parameters:C259=0)
+			This:C1470.multiselection:=New object:C1471
+		: (Value type:C1509($1)=Is boolean:K8:9) && ($allow=False:C215)
+			This:C1470.multiselection:=Null:C1517
+		Else 
+			This:C1470.multiselection:=New object:C1471
+			This:C1470.multiselection.counterSelected:=New object:C1471
+			This:C1470.multiselection.counterSelected.format:=$1
+			For ($i; 2; Count parameters:C259)
+				$params:=Split string:C1554(${$i}; ":")
+				$selector:=$params.shift()
+				Case of 
+					: ($selector="unit1")
+						This:C1470.multiselection.counterSelected.unit1:=$params[0]
+					: ($selector="unitN")
+						This:C1470.multiselection.counterSelected.unitN:=$params[0]
+					: ($selector="unit1xliff")
+						This:C1470.multiselection.counterSelected.unit1xliff:=$params[0]
+					: ($selector="unitNxliff")
+						This:C1470.multiselection.counterSelected.unitNxliff:=$params[0]
+					: ($selector="nbMinimum")
+						This:C1470.multiselection.counterSelected.nbMinimum:=Num:C11($params[0])
+				End case 
+			End for 
+			
+	End case 
 	
 	
 Function setAllowedProfiles( ...  : Variant)
+	This:C1470.allowedProfiles:=This:C1470.allowedProfiles || New collection:C1472
 	var $p : Integer
 	For ($p; 1; Count parameters:C259)
 		Case of 
@@ -688,6 +782,45 @@ Function setAllowedProfilesForModification( ...  : Variant)
 	End for 
 	
 	
+	//mark:-Search 
+	
+Function setSearchboxField($attribute : Text;  ...  : Variant)
+	var $field : Object:=New object:C1471
+	
+	$field.attribute:=$attribute
+	
+	For ($i; 2; Count parameters:C259)
+		$params:=Split string:C1554(${$i}; ":")
+		$selector:=$params.shift()
+		Case of 
+			: ($selector="placeholder")
+				$field.fieldPlaceHolder:=$params[0]
+		End case 
+	End for 
+	
+	This:C1470.searchbox.fields.push($field)
+	
+	
+Function setSearchboxSpecific($tag : Text;  ...  : Variant)
+	var $specific : Object:=New object:C1471
+	
+	$specific.tag:=$tag
+	For ($i; 2; Count parameters:C259)
+		$params:=Split string:C1554(${$i}; ":")
+		$selector:=$params.shift()
+		Case of 
+			: ($selector="queryString")
+				$specific.queryString:=$params.join(":")
+			: ($selector="formula")
+				$specific.formula:=$params.join(":")
+			: ($selector="collectionBuilder")
+				$specific.collectionBuilder:=$params.join(":")
+			: ($selector="inCollection")
+				$specific.inCollection:=$params.join(":")
+		End case 
+	End for 
+	This:C1470.searchbox.specificSearches.push($specific)
+	
 	
 Function setSearchField( ...  : Text)
 	var $searchfield : Object:=New object:C1471
@@ -718,12 +851,60 @@ Function setSearchField( ...  : Text)
 				$searchfield.type:=Is time:K8:8
 			: ($selector="date")
 				$searchfield.type:=Is date:K8:7
+			: ($selector="boolean")
+				$searchfield.type:=Is boolean:K8:9
+				$searchfield.onlyWithTag:=True:C214
+			: ($selector="integer")
+				$searchfield.type:=Is integer:K8:5
+			: ($selector="real")
+				$searchfield.type:=Is real:K8:4
+			: ($selector="withComment")
+				$searchfield.withComment:=True:C214
+				$searchfield.onlyWithTag:=True:C214
+				$searchfield.tag:=(Get database localization:C1009(Current localization:K5:22)="fr") ? "avecCommentaire" : "withComment"
+				$searchfield.type:=Is text:K8:3
+				$searchfield.popupPart:="_comments"
+			: ($selector="inComment")
+				$searchfield.inComment:=True:C214
+				$searchfield.onlyWithTag:=True:C214
+				$searchfield.tag:=(Get database localization:C1009(Current localization:K5:22)="fr") ? "dansCommentaire" : "inComment"
+				$searchfield.type:=Is text:K8:3
+				$searchfield.popupPart:="_comments"
+			: ($selector="levelComment")
+				$searchfield.levelComment:=True:C214
+				$searchfield.onlyWithTag:=True:C214
+				$searchfield.tag:=(Get database localization:C1009(Current localization:K5:22)="fr") ? "niveauCommentaire" : "levelComment"
+				$searchfield.type:=Is text:K8:3
+				$searchfield.popupPart:="_comments"
+			: ($selector="withDocument")
+				$searchfield.withDocument:=True:C214
+				$searchfield.onlyWithTag:=True:C214
+				$searchfield.tag:=(Get database localization:C1009(Current localization:K5:22)="fr") ? "avecDocument" : "withDocument"
+				$searchfield.type:=Is text:K8:3
+				$searchfield.popupPart:="_documents"
+			: ($selector="inDocumentName")
+				$searchfield.inDocunentName:=True:C214
+				$searchfield.onlyWithTag:=True:C214
+				$searchfield.tag:=(Get database localization:C1009(Current localization:K5:22)="fr") ? "dansNomDocument" : "inDocumentName"
+				$searchfield.type:=Is text:K8:3
+				$searchfield.popupPart:="_documents"
+			: ($selector="popupPart")
+				$searchfield.popupPart:=$parts[0]
+			: ($selector="popupDescription")
+				$searchfield.popupDescription:=$parts.join(":")
+				
 		End case 
 	End for 
 	This:C1470.searchfields.push($searchfield)
 	
 	
+Function setSearchPreferedTags( ...  : Text)
+	For ($p; 1; Count parameters:C259)
+		This:C1470.searchPreferedTags.push(${$p})
+	End for 
 	
+	
+	//Mark:-
 Function setLaunchingExpression($expression : Text)
 	
 	This:C1470.launchingExpression:=$expression
@@ -731,4 +912,36 @@ Function setLaunchingExpression($expression : Text)
 	
 Function setAsSplitter()
 	This:C1470.splitter:=New object:C1471
+	
+	
+	
+Function isDisplayable()->$isDisplayable : Boolean
+	var $esUserProfiles : cs:C1710.sfw_UserProfileSelection:=cs:C1710.sfw_userManager.me.userProfiles
+	var $authorizedProfiles : Collection:=cs:C1710.sfw_userManager.me.authorizedProfiles
+	
+	If ($entry.allowedProfiles#Null:C1517) && ($entry.allowedProfiles.length>0)
+		$isDisplayable:=False:C215
+		For each ($authorizedProfile; $authorizedProfiles)
+			$isDisplayable:=$isDisplayable || ($entry.allowedProfiles.indexOf($authorizedProfile)#-1)
+			For each ($eUserProfile; $esUserProfiles) Until ($isDisplayable)
+				$isDisplayable:=$isDisplayable || ($entry.allowedProfiles.indexOf($eUserProfile.ident)#-1)
+			End for each 
+		End for each 
+	Else 
+		$isDisplayable:=True:C214
+	End if 
+	If (Not:C34($isDisplayable))
+		For each ($eUserProfile; $esUserProfiles) Until ($isDisplayable)
+			If ($eUserProfile.moreData.allowedEntries#Null:C1517)
+				$isDisplayable:=$isDisplayable || ($eUserProfile.moreData.allowedEntries.indexOf($entry.ident)#-1)
+			End if 
+		End for each 
+	End if 
+	If ($isDisplayable)
+		For each ($eUserProfile; $esUserProfiles) While ($isDisplayable)
+			If ($eUserProfile.moreData.restrictEntries#Null:C1517) && ($eUserProfile.moreData.restrictEntries.indexOf($entry.ident)#-1)
+				$isDisplayable:=False:C215
+			End if 
+		End for each 
+	End if 
 	

@@ -1,3 +1,5 @@
+property typeOfMacro : Text
+
 Class constructor($macro : Object)
 	This:C1470.typeOfMacro:=$macro.type
 	

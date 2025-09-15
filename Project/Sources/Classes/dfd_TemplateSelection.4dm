@@ -5,8 +5,7 @@ Function projectionToDocuments()->$esDocument : cs:C1710.dfd_Document
 	
 	$esDocument:=This:C1470.documents
 	
-Function projectionToLines()->$esLine : cs:C1710.dfd_Line
-	var $esLines : cs:C1710.dfd_LineSelection
+Function projectionToLines()->$esLine : cs:C1710.dfd_LineSelection
 	var $line : cs:C1710.dfd_LineEntity
 	
 	$esLines:=ds:C1482.dfd_Line.newSelection()
@@ -19,5 +18,4 @@ Function projectionToLines()->$esLine : cs:C1710.dfd_Line
 		End for each 
 	End for each 
 	
-	$esLine:=$esLines
 	

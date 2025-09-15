@@ -1,3 +1,9 @@
+property monthNames : Collection
+property dayNames : Collection
+property originDate : Date
+property precisionSeconds : Integer
+
+
 shared singleton Class constructor
 	
 	This:C1470.originDate:=!2003-01-01!
@@ -189,24 +195,24 @@ Function getRelativeDay($date : Date)->$result : Text
 	$result:=""
 	Case of 
 		: ($date=Current date:C33)
-			$result:=Get localized string:C991("dateAndTime.today")
+			$result:=Localized string:C991("dateAndTime.today")
 		: ($date=(Current date:C33-1))
-			$result:=Get localized string:C991("dateAndTime.yesterday")
+			$result:=Localized string:C991("dateAndTime.yesterday")
 		: ($date=(Current date:C33-2))
-			$result:=Get localized string:C991("dateAndTime.beforeyesterday")
+			$result:=Localized string:C991("dateAndTime.beforeyesterday")
 		: ($date=(Current date:C33+1))
-			$result:=Get localized string:C991("dateAndTime.tomorrow")
+			$result:=Localized string:C991("dateAndTime.tomorrow")
 		: ($date=(Current date:C33+2))
-			$result:=Get localized string:C991("dateAndTime.aftertomorrow")
+			$result:=Localized string:C991("dateAndTime.aftertomorrow")
 		: ($date>(Current date:C33-7)) & ($date<(Current date:C33-2))
 			$jour:=Day number:C114($date)
-			$days:=Split string:C1554(Get localized string:C991("dateAndTime.days"); ";")
+			$days:=Split string:C1554(Localized string:C991("dateAndTime.days"); ";")
 			$result:=$days[$jour-1]
 			
 			
 		: ($date<(Current date:C33+7)) & ($date>(Current date:C33+2))
 			$jour:=Day number:C114($date)
-			$days:=Split string:C1554(Get localized string:C991("dateAndTime.nextdays"); ";")
+			$days:=Split string:C1554(Localized string:C991("dateAndTime.nextdays"); ";")
 			$result:=$days[$jour-1]
 			
 		Else 
@@ -336,15 +342,40 @@ Function getHour($stmp : Integer)->$hour : Integer
 	
 	
 Function queryFunction($storageAttribute : Text; $event : Object)->$result : Object
-	
+	var $date : Variant
 	$operator:=$event.operator
 	$parameters:=New collection:C1472
 	Case of 
 		: ($operator="==")
 			$date:=$event.value
 			$query:=$storageAttribute+" >= :1 AND "+$storageAttribute+" < :2"
-			$parameters.push(cs:C1710.sfw_stmp.me.build($date; ?00:00:00?))
-			$parameters.push(cs:C1710.sfw_stmp.me.build($date+1; ?00:00:00?))
+			Case of 
+				: (Value type:C1509($date)=Is date:K8:7)
+					$parameters.push(cs:C1710.sfw_stmp.me.build($date; ?00:00:00?))
+					$parameters.push(cs:C1710.sfw_stmp.me.build($date+1; ?00:00:00?))
+				: (Value type:C1509($date)=Is text:K8:3)
+					If ("@"=Substring:C12($date; 1; 1))
+						$date:=Substring:C12($date; 2)
+					End if 
+					If ("@"=Substring:C12($date; Length:C16($date); 1))
+						$date:=Substring:C12($date; 1; Length:C16($date)-1)
+					End if 
+					Case of 
+						: (Length:C16($date)=4) && (String:C10(Num:C11($date))=$date)
+							$year:=Num:C11($date)
+							$parameters.push(cs:C1710.sfw_stmp.me.build(Add to date:C393(!00-00-00!; $year; 1; 1); ?00:00:00?))
+							$parameters.push(cs:C1710.sfw_stmp.me.build(Add to date:C393(!00-00-00!; $year; 12; 31); ?00:00:00?))
+						: (Length:C16($date)=2) && (String:C10(Num:C11($date))=$date)
+							$year:=Num:C11($date)
+							If ($year+2000>Year of:C25(Current date:C33))
+								$year+=1900
+							Else 
+								$year+=2000
+							End if 
+							$parameters.push(cs:C1710.sfw_stmp.me.build(Add to date:C393(!00-00-00!; $year; 1; 1); ?00:00:00?))
+							$parameters.push(cs:C1710.sfw_stmp.me.build(Add to date:C393(!00-00-00!; $year; 12; 31); ?00:00:00?))
+					End case 
+			End case 
 			
 		: ($operator=">")
 			$date:=$event.value

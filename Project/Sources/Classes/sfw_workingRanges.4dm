@@ -1,3 +1,7 @@
+property workingRange : Collection
+property maxSimultany : Integer
+property ranges : Collection
+
 singleton Class constructor
 	
 	This:C1470.workingRange:=New collection:C1472

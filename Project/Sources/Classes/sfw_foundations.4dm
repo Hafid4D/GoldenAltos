@@ -1,5 +1,10 @@
 property entry : cs:C1710.sfw_definitionEntry
 property view : cs:C1710.sfw_definitionView
+property searchHighlightParts : Collection
+property searchbox : Text
+property lb_items : Variant  //entity selection or collection
+property analyseIsInAQuestionMark : Boolean
+property specificSearchTags : Collection
 
 Class constructor
 	
@@ -100,6 +105,7 @@ Function _openFormInProcess($formData : Object)
 		$formData.window.left:=$left
 		$formData.window.top:=$top
 		$formData.sfw.openForm($formData)
+		
 	End if 
 	
 	
@@ -760,6 +766,12 @@ Function arrangeHeaderTabs()
 	If (OBJECT Get visible:C1075(*; "headerTabFavorite_title"))
 		$tabsToArrange.unshift("headerTabFavorite")
 	End if 
+	If (OBJECT Get visible:C1075(*; "headerTabSubscription_title"))
+		$tabsToArrange.unshift("headerTabSubscription")
+	End if 
+	If (OBJECT Get visible:C1075(*; "headerTabAssignation_title"))
+		$tabsToArrange.unshift("headerTabAssignation")
+	End if 
 	If (OBJECT Get visible:C1075(*; "headerTabComment_title"))
 		$tabsToArrange.unshift("headerTabComment")
 	End if 
@@ -845,7 +857,7 @@ Function bItemCreate()
 	Form:C1466.subForm.calculation:=New object:C1471
 	Form:C1466.subForm:=Form:C1466.subForm
 	$newEntity:=ds:C1482[Form:C1466.sfw.entry.dataclass].get(Form:C1466.current_item.UUID)
-	If (Form:C1466.sfw.lb_items#Null:C1517)
+	If (Form:C1466.sfw.lb_items#Null:C1517) && (OB Class:C1730(Form:C1466.sfw).name#"sfw_item")
 		Try
 			Form:C1466.sfw.lb_items:=Form:C1466.sfw.lb_items.copy().add($newEntity)
 			Form:C1466.sfw.lb_items_sort()
@@ -855,7 +867,7 @@ Function bItemCreate()
 		$indexInEntitySelection:=$newEntity.indexOf(Form:C1466.sfw.lb_items)
 		Case of 
 			: (This:C1470.view.displayType="recursiveList")
-				This:C1470._drawRecursiveList()
+				Form:C1466.sfw._drawRecursiveList()
 			Else 
 				Form:C1466.sfw.lb_items:=Form:C1466.sfw.lb_items
 				LISTBOX SELECT ROW:C912(*; "lb_items"; $indexInEntitySelection+1; lk replace selection:K53:1)
@@ -866,6 +878,12 @@ Function bItemCreate()
 	End if 
 	Form:C1466.situation.mode:="Modify"  //when we save a new item, we continue with the modify mode
 	Form:C1466.sfw.drawButtons()
+	
+	
+	If (Form:C1466.callbackAfterCreation#Null:C1517) && (Num:C11(Form:C1466.startingWindow)#0)
+		CALL FORM:C1391(Form:C1466.startingWindow; "sfw_selector_callback"; Form:C1466.callbackAfterCreation; Form:C1466.current_item.getKey())
+	End if 
+	
 	
 Function bItemDelete()
 	$ok:=cs:C1710.sfw_dialog.me.confirm(\
@@ -920,7 +938,11 @@ Function bItemRenounce()
 	Form:C1466.subForm.calculation:=New object:C1471
 	Form:C1466.subForm:=Form:C1466.subForm
 	This:C1470.cancelTransaction()
-	Form:C1466.sfw.lb_items_selectionChange()
+	If (Form:C1466.sfw.lb_items_selectionChange#Null:C1517)
+		Form:C1466.sfw.lb_items_selectionChange()
+	Else 
+		CANCEL:C270
+	End if 
 	
 Function bItemSave($option : Text)
 	var $callbackBeforeSave : Text
@@ -932,7 +954,18 @@ Function bItemSave($option : Text)
 	This:C1470._uploadDocumentsOnServer()
 	This:C1470.callbackOnCurrentItem("beforeSave")
 	Form:C1466.info:=Form:C1466.current_item.save()
-	
+	If (Form:C1466.sfw.entry.allowSubscription)
+		$esSubscriptions:=ds:C1482.sfw_Subscription.query("UUID_target = :1 and entryIdent = :2"; Form:C1466.current_item.UUID; Form:C1466.sfw.entry.ident)
+		If ($esSubscriptions.length>0)
+			$context:=New object:C1471
+			$context.target:=Form:C1466.current_item.UUID
+			$context.targetDataclass:=Form:C1466.sfw.entry.ident
+			$context.recordName:=Form:C1466.current_item.nameInWindowTitle
+			$context.dataclassName:=Form:C1466.sfw.entry.label
+			$users:=New collection:C1472  //$esSubscriptions.distinct("UUID_User")
+			cs:C1710.sfw_notificationManager.me.notify("sfw_updateRecord"; $users; $context)
+		End if 
+	End if 
 	If (Form:C1466.sfw.entry.event#Null:C1517)
 		$moreData:=New object:C1471
 		If (Form:C1466.sfw.entry.event#Null:C1517) && (Form:C1466.sfw.entry.event.attributesToTrackInModificationEvent.length>0)
@@ -1089,9 +1122,32 @@ Function _buildMenuAction($refMenus : Collection)->$refMenu : Text
 			$actionAllowed:=True:C214
 		End if 
 		If ($actionAllowed)
+			Case of 
+				: ($action.pathIcon#Null:C1517)
+					$pathIcon:="Path:/RESOURCES/"+$action.pathIcon
+				: ($action.preconfigAction="exportReferenceRecords")
+					$pathIcon:="Path:/RESOURCES/sfw/image/skin/rainbow/icon/exportRefRecord-24x24.png"
+				: ($action.preconfigAction="importReferenceRecords")
+					$pathIcon:="Path:/RESOURCES/sfw/image/skin/rainbow/icon/importRefRecord-24x24.png"
+				Else 
+					$pathIcon:="Path:/RESOURCES/sfw/image/skin/rainbow/icon/action-24x24.png"
+			End case 
 			APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff($action.xliff; $action.label))
 			SET MENU ITEM PARAMETER:C1004($refMenu; -1; "action:"+String:C10($a))
-			SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/action-24x24.png")
+			SET MENU ITEM ICON:C984($refMenu; -1; $pathIcon)
+			Case of 
+				: ($action.scope=Null:C1517)
+				: ($action.scope="2orMoreSelectedItems")
+					If (Form:C1466.current_lb_item_selected.length<2)
+						DISABLE MENU ITEM:C150($refMenu; -1)
+					End if 
+			End case 
+			Case of 
+				: ($action.preconfigAction="textToolCapitalize") || ($action.preconfigAction="textToolUppercase")
+					If (Form:C1466.situation.mode#"view")
+						DISABLE MENU ITEM:C150($refMenu; -1)
+					End if 
+			End case 
 		End if 
 	End for each 
 	
@@ -1116,13 +1172,19 @@ Function _executeMenuAction($choose : Text)
 				: ($action.preconfigAction#Null:C1517)
 					Case of 
 						: ($action.preconfigAction="exportReferenceRecords")
-							This:C1470._exportReferenceRecords()
+							This:C1470._exportReferenceRecords($action)
 							
 						: ($action.preconfigAction="importReferenceRecords")
-							This:C1470._importReferenceRecords()
+							This:C1470._importReferenceRecords($action)
 							
 						: ($action.preconfigAction="copyItemsListToPasteboard")
-							This:C1470._copyItemsListToPasteboad()
+							This:C1470._copyItemsListToPasteboad($action)
+							
+						: ($action.preconfigAction="textToolCapitalize")
+							This:C1470._textToolCapitalize($action)
+							
+						: ($action.preconfigAction="textToolUppercase")
+							This:C1470._textToolUppercase($action)
 							
 					End case 
 					
@@ -1134,14 +1196,14 @@ Function bItemListProjection()
 	$refMenus:=New collection:C1472
 	$refMenu:=This:C1470._buildMenuProjection($refMenus)
 	
-	
-	
 	$choose:=Dynamic pop up menu:C1006($refMenu)
 	For each ($refMenu; $refMenus)
 		RELEASE MENU:C978($refMenu)
 	End for each 
 	
 	This:C1470._executeMenuProjection($choose)
+	
+	
 	
 Function _buildMenuProjection($refMenus : Collection)->$refMenu : Text
 	var $esFavorites : cs:C1710.sfw_FavoriteSelection
@@ -1265,6 +1327,11 @@ Function bIcon_entry()
 			APPEND MENU ITEM:C411($refMenu; "entry panel ("+Form:C1466.sfw.entry.panel.name+")"; *)
 			SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--openEntryPanel")
 			SET MENU ITEM ICON:C984($refMenu; -1; "file:sfw/image/menu/panel.png")
+			If (Form:C1466.sfw.entry.panelIfNoItemSelected#Null:C1517)
+				APPEND MENU ITEM:C411($refMenu; "panel if no item selected ("+Form:C1466.sfw.entry.panelIfNoItemSelected+")"; *)
+				SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--openPanelIfNoItemSelected")
+				SET MENU ITEM ICON:C984($refMenu; -1; "file:sfw/image/menu/panel.png")
+			End if 
 			
 			If (cs:C1710[Form:C1466.sfw.entry.panel.name]#Null:C1517)
 				$className:=Form:C1466.sfw.entry.panel.name
@@ -1379,6 +1446,10 @@ Function bIcon_entry()
 					$form:=Form:C1466.sfw.entry.panel.name
 					FORM EDIT:C1749($form)
 					
+				: ($choose="--openPanelIfNoItemSelected")
+					$form:=Form:C1466.sfw.entry.panelIfNoItemSelected
+					FORM EDIT:C1749($form)
+					
 				: ($choose="--class:@")
 					$class:=Substring:C12($choose; 9)
 					METHOD OPEN PATH:C1213("[class]/"+$class)
@@ -1426,15 +1497,35 @@ Function bIcon_entry()
 			APPEND MENU ITEM:C411($refMenu; "-")
 			$uuids:=Form:C1466.sfw.lb_items.distinct("UUID")
 			For each ($eFavorite; $esFavorites)
-				$favoritesItem:=ds:C1482[Form:C1466.sfw.entry.dataclass].get($eFavorite.UUID_target)
-				$label:=$favoritesItem.fullName || $favoritesItem.name || $favoritesItem.label || $favoritesItem.title
+				$favorizedItem:=ds:C1482[Form:C1466.sfw.entry.dataclass].get($eFavorite.UUID_target)
+				$label:=$favorizedItem.fullName || $favorizedItem.name || $favorizedItem.label || $favorizedItem.title
 				APPEND MENU ITEM:C411($refMenu; $label; *)
 				SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--target:"+String:C10($eFavorite.UUID_target))
 				SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/picto/star.png")
-				If ($uuids.indexOf($favoritesItem.UUID)=-1)
+				If ($uuids.indexOf($favorizedItem.UUID)=-1)
 					DISABLE MENU ITEM:C150($refMenu; -1)
 				End if 
 			End for each 
+			
+			If (cs:C1710.sfw_definition.me.globalParameters.notifications.activate)
+				If (cs:C1710.sfw_userManager.me.info.UUID=("00"*16))
+					$esSubscriptions:=ds:C1482.sfw_Subscription.query("entryIdent = :1 and UUID_target # null"; Form:C1466.sfw.entry.ident)
+				Else 
+					$esSubscriptions:=ds:C1482.sfw_Subscription.query("entryIdent = :1 and UUID_User = :2 and UUID_target # null"; Form:C1466.sfw.entry.ident; cs:C1710.sfw_userManager.me.info.UUID)
+				End if 
+				APPEND MENU ITEM:C411($refMenu; "-")
+				$uuids:=Form:C1466.sfw.lb_items.distinct("UUID")
+				For each ($eSubscription; $esSubscriptions)
+					$subsciptedItem:=ds:C1482[Form:C1466.sfw.entry.dataclass].get($eSubscription.UUID_target)
+					$label:=$subsciptedItem.fullName || $subsciptedItem.name || $subsciptedItem.label || $subsciptedItem.title
+					APPEND MENU ITEM:C411($refMenu; $label; *)
+					SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--target:"+String:C10($eSubscription.UUID_target))
+					SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/picto/bell.png")
+					If ($uuids.indexOf($subsciptedItem.UUID)=-1)
+						DISABLE MENU ITEM:C150($refMenu; -1)
+					End if 
+				End for each 
+			End if 
 			
 			OBJECT GET COORDINATES:C663(*; "bIcon_entry"; $g; $h; $d; $b)
 			$choose:=Dynamic pop up menu:C1006($refMenu; ""; $g; $b)
@@ -1582,13 +1673,15 @@ Function bMode()
 				$modificationAllowed:=True:C214
 			End if 
 			If ($modificationAllowed)
+				$isModifiable:=This:C1470.functionCallbackOnCurrentItem("isModifiable"; Form:C1466.current_item; True:C214)
+				
 				APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("crud.mode.modification"; "Modification"); *)
 				SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/skin/rainbow/icon/edit-24x24.png")
 				SET MENU ITEM PARAMETER:C1004($refMenu; -1; "modify")
 				If (Form:C1466.situation.mode="modify")
 					SET MENU ITEM MARK:C208($refMenu; -1; Char:C90(18))
 				End if 
-				If (Form:C1466.current_item=Null:C1517) || (Form:C1466.situation.mode="add") || (Form:C1466.situation.mode="duplicate") || (Form:C1466.situation.mode="none") || ($somethingToSaveOrCancel) || (Form:C1466.sfw.entry.modifiable=False:C215)
+				If (Form:C1466.current_item=Null:C1517) || (Form:C1466.situation.mode="add") || (Form:C1466.situation.mode="duplicate") || (Form:C1466.situation.mode="none") || ($somethingToSaveOrCancel) || (Form:C1466.sfw.entry.modifiable=False:C215) || ($isModifiable=False:C215)
 					DISABLE MENU ITEM:C150($refMenu; -1)
 				End if 
 			End if 
@@ -1825,17 +1918,23 @@ Function _change_bMode($choose : Text)
 					
 				Else 
 					//mark:modify
-					
-					$info:=Form:C1466.current_item.lock(dk reload if stamp changed:K85:15)
-					If ($info.success=False:C215)
+					$isModifiable:=This:C1470.functionCallbackOnCurrentItem("isModifiable"; Form:C1466.current_item; True:C214)
+					If ($isModifiable)
+						$info:=Form:C1466.current_item.lock(dk reload if stamp changed:K85:15)
+						If ($info.success=False:C215)
+							Form:C1466.situation.mode:="view"
+							$reload:=($previousMode#Form:C1466.situation.mode)
+							This:C1470.cancelTransaction()
+							This:C1470._displayBannerLockedRecord($info)
+						Else 
+							This:C1470.startTransaction()
+						End if 
+					Else 
 						Form:C1466.situation.mode:="view"
 						$reload:=($previousMode#Form:C1466.situation.mode)
 						This:C1470.cancelTransaction()
 						This:C1470._displayBannerLockedRecord($info)
-					Else 
-						This:C1470.startTransaction()
 					End if 
-					
 			End case 
 			
 			If ($reload)
@@ -2023,7 +2122,7 @@ Function cancelAndRestartTransaction()
 	
 	//Mark:-preconfigActions
 	
-Function _exportReferenceRecords()
+Function _exportReferenceRecords($action : Object)
 	var $eSetting : cs:C1710.sfw_SettingEntity
 	var $identEntry : Text:=Form:C1466.sfw.entry.ident
 	var $entity : 4D:C1709.Entity
@@ -2115,7 +2214,7 @@ Function _exportReferenceRecords()
 	SHOW ON DISK:C922($file.platformPath)
 	
 	
-Function _importReferenceRecords()
+Function _importReferenceRecords($action : Object)
 	var $eSetting : cs:C1710.sfw_SettingEntity
 	var $identEntry : Text:=Form:C1466.sfw.entry.ident
 	var $file : 4D:C1709.File
@@ -2250,30 +2349,97 @@ Function _importReferenceRecords()
 	End if 
 	RESUME TRANSACTION:C1386
 	
-Function _copyItemsListToPasteboad()
+Function _copyItemsListToPasteboad($action : Object)
 	var $text : Text
 	var $lines : Collection:=New collection:C1472
 	var $eToDrop : 4D:C1709.Entity
-	
-	$text:=Form:C1466.sfw.view.lb_items.columns.extract("label").join("\t")
-	$text+="\r"
+	var $source : Variant
+	$text:=""
+	$itemCols:=New collection:C1472
+	For each ($column; Form:C1466.sfw.view.lb_items.columns)
+		Case of 
+			: (Bool:C1537($column.notExported))
+			Else 
+				$itemCols.push($column.label)
+		End case 
+	End for each 
+	$text+=$itemCols.join("\t")+"\r"
 	
 	For each ($item; Form:C1466.sfw.lb_items)
 		
 		$itemCols:=New collection:C1472
 		For each ($column; Form:C1466.sfw.view.lb_items.columns)
 			Case of 
+				: (Bool:C1537($column.notExported))
 				: ($column.attribute="color@") && (Value type:C1509($item[$column.attribute])=Is picture:K8:10)
 					$itemCols.push($item.color)
 					
 				: (Value type:C1509($item[$column.attribute])#Is picture:K8:10)
-					$itemCols.push($item[$column.attribute])
+					
+					$pathParts:=Split string:C1554($column.attribute; ".")
+					$lastAttribute:=$pathParts.pop()
+					$source:=$item
+					For each ($pathPart; $pathParts)
+						$source:=$source[$pathPart]
+					End for each 
+					$value:=$source[$lastAttribute]
+					If ($action.blankIfNull) && ($value=Null:C1517)
+						$value:=""
+					End if 
+					$itemCols.push($value)
 					
 			End case 
 		End for each 
 		$text+=$itemCols.join("\t")+"\r"
 	End for each 
 	SET TEXT TO PASTEBOARD:C523($text)
+	
+Function _textToolCapitalize($action : Object)
+	var $item : 4D:C1709.Entity
+	var $nbError : Integer:=0
+	
+	ds:C1482.startTransaction()
+	For each ($item; Form:C1466.sfw.lb_items)
+		For each ($attribute; $action.attributesToCapitalize)
+			$item[$attribute]:=cs:C1710.sfw_string.me.stringCapitalize($item[$attribute])
+		End for each 
+		$info:=$item.save()
+		$nbError+=Num:C11($info.success#True:C214)
+	End for each 
+	If ($nbError=0)
+		ds:C1482.validateTransaction()
+	Else 
+		$message:=ds:C1482.sfw_readXliff("foundations.message")  //okXLIFF
+		$message+="\r"+String:C10($nbError)+(($nbError=1) ? ds:C1482.sfw_readXliff("foundations.messagesingle") : ds:C1482.sfw_readXliff("foundations.messageplural"))  //okXLIFF
+		If (cs:C1710.sfw_dialog.me.confirm($message; ds:C1482.sfw_readXliff("foundations.validate"); ds:C1482.sfw_readXliff("foundations.cancel")))  //okXLIFF
+			ds:C1482.validateTransaction()
+		Else 
+			ds:C1482.cancelTransaction()
+		End if 
+	End if 
+	
+Function _textToolUppercase($action : Object)
+	var $item : 4D:C1709.Entity
+	var $nbError : Integer:=0
+	
+	For each ($item; Form:C1466.sfw.lb_items)
+		For each ($attribute; $action.attributesToUppercase)
+			$item[$attribute]:=Uppercase:C13($item[$attribute])
+		End for each 
+		$info:=$item.save()
+		$nbError+=Num:C11($info.success#True:C214)
+	End for each 
+	If ($nbError=0)
+		ds:C1482.validateTransaction()
+	Else 
+		$message:=ds:C1482.sfw_readXliff("foundations.message")  //okXLIFF
+		$message+="\r"+String:C10($nbError)+(($nbError=1) ? ds:C1482.sfw_readXliff("foundations.messagesingle") : ds:C1482.sfw_readXliff("foundations.messageplural"))  //okXLIFF
+		If (cs:C1710.sfw_dialog.me.confirm($message; ds:C1482.sfw_readXliff("foundations.validate"); ds:C1482.sfw_readXliff("foundations.cancel")))  //okXLIFF
+			ds:C1482.validateTransaction()
+		Else 
+			ds:C1482.cancelTransaction()
+		End if 
+	End if 
 	
 Function _getSettingVersionReferenceRecords($identEntry : Text)->$eSetting : cs:C1710.sfw_SettingEntity
 	var $ident : Text
@@ -2549,8 +2715,11 @@ Function panelFormMethod()
 		OBJECT SET COORDINATES:C1248(*; "vTabBar_subform"; 0; $h; $d; $height_subform)
 	End if 
 	
-	If (Bool:C1537(Form:C1466.useHTab)) && (FORM Get current page:C276(*)#Form:C1466.useHTab_current_page)
-		Form:C1466.useHTab_current_page:=FORM Get current page:C276(*)
+	//If (Bool(Form.useHTab)) && (FORM Get current page(*)#Form.useHTab_current_page)
+	//Form.useHTab_current_page:=FORM Get current page(*)
+	////Form.sfw.drawHTab()
+	//End if 
+	If (Bool:C1537(Form:C1466.useHTab))  //&& (FORM Event.code=On Load)
 		Form:C1466.sfw.drawHTab()
 	End if 
 	
@@ -2566,6 +2735,7 @@ Function updateOfPanelNeeded()->$updateNeeded : Boolean
 		End if 
 	End if 
 	If ($updateNeeded)
+		Form:C1466.sfw.drawHTab()
 		cs:C1710.sfw_tracker.me.internal("updateOfPanelNeeded")
 		For each ($panelPage; This:C1470.entry.panel.pages)
 			If ($panelPage.dynamicSource#Null:C1517)
@@ -2606,10 +2776,27 @@ Function recalculationOfPanelPageNeeded()->$calcNeeded : Boolean
 		: (FORM Event:C1606.code=On Display Detail:K2:22)
 			
 		: (FORM Event:C1606.code=On Bound Variable Change:K2:52)
-			$calcNeeded:=True:C214
+			If (Bool:C1537(Form:C1466.resizeAsked))
+				Form:C1466.resizeAsked:=False:C215
+				$continue:=True:C214
+				For each ($panelPage; This:C1470.entry.panel.pages) While ($continue)
+					If ($panelPage.page=FORM Get current page:C276(*)) && ($panelPage.dynamicSource#Null:C1517) && ($panelPage.dynamicSource._setDataSourceForDynamicPage#Null:C1517)
+						$panelPage.dynamicSource.resizePanel()
+					End if 
+				End for each 
+				$calcNeeded:=False:C215
+			Else 
+				$calcNeeded:=True:C214
+			End if 
 			
 		: (FORM Event:C1606.code=On Page Change:K2:54)
 			$calcNeeded:=True:C214
+			
+		: (FORM Event:C1606.code=On Timer:K2:25)
+			
+			
+		: (FORM Event:C1606.code=On Resize:K2:27)
+			
 			
 	End case 
 	If ($calcNeeded)
@@ -2723,6 +2910,9 @@ Function displayItemPanel()
 					: ($dynamicClass="sfw_definitionPageDocuments")
 						$panelPage.dynamicSource._insertDynamicDocumentsPage($formDefinition; $panelPage; $offsetHorizontal; $offsetVertical)
 						
+					: ($dynamicClass="sfw_definitionPageMoreData")
+						$panelPage.dynamicSource._insertDynamicPage($formDefinition; $panelPage; $offsetHorizontal; $offsetVertical)
+						
 				End case 
 			End if 
 		End for each 
@@ -2814,7 +3004,8 @@ Function drawHTab()
 	$authorizedProfiles:=cs:C1710.sfw_userManager.me.authorizedProfiles
 	$hGutter:=2
 	$hOffset:=$hGutter*2
-	For each ($tab; Form:C1466.sfw.entry.panel.pages)
+	$tabsAllowed:=New collection:C1472
+	For each ($tab; Form:C1466.sfw.entry.panel.pages.copy())
 		If ($tab.allowedProfiles#Null:C1517) && ($tab.allowedProfiles.length>0)
 			$tabAllowed:=False:C215
 			For each ($authorizedProfile; $authorizedProfiles)
@@ -2823,36 +3014,114 @@ Function drawHTab()
 		Else 
 			$tabAllowed:=True:C214
 		End if 
+		If ($tabAllowed) && ($tab.condition#Null:C1517) && (Form:C1466.current_item#Null:C1517)
+			$formula:=Formula from string:C1601($tab.condition)
+			$tabAllowed:=Bool:C1537($formula.call())
+		End if 
 		If ($tabAllowed)
-			//$button.page
-			//$button.label
-			If (FORM Get current page:C276(*)=$tab.page)
-				$fill:="#458DE8"
-				$stroke:="none"
-				$top:=0
-				$style:=Bold:K14:2
-				$strokeText:="white"
-				$hText:=5
-			Else 
-				$fill:="#B9D9FF"
-				$stroke:="none"
-				$top:=4
-				$style:=Normal:K14:15
-				$strokeText:="222222"
-				$hText:=7
-			End if 
-			If (String:C10($tab.extraLabel)="")
-				$label:=$tab.label
-				$withTab:=$tab.width+20
-			Else 
-				$label:=$tab.label+String:C10($tab.extraLabel)
-				OBJECT SET TITLE:C194(*; "TextWidthCalculator"; $tab.extraLabel)
-				OBJECT GET BEST SIZE:C717(*; "TextWidthCalculator"; $bestWidth; $bestHeight)
-				$withTab:=$tab.width+20+$bestWidth
-			End if 
-			$rect:=SVG_New_rect($svg; $hOffset; $top; $withTab; 27; 5; 5; $stroke; $fill; 1)
-			SVG_SET_ID($rect; "page:"+String:C10($tab.page))
+			$disabled:=False:C215
 			
+			Case of 
+				: ($tab.disabled#Null:C1517) && (Value type:C1509($tab.disabled)=Is boolean:K8:9) && (Form:C1466.current_item#Null:C1517)
+					$fill:="lightgrey"
+					$stroke:="none"
+					$top:=4
+					$style:=Normal:K14:15
+					$strokeText:="white"
+					$hText:=5
+					$disabled:=True:C214
+					
+				: ($tab.disabled#Null:C1517) && (Value type:C1509($tab.disabled)=Is text:K8:3) && (Form:C1466.current_item#Null:C1517)
+					$formula:=Formula from string:C1601($tab.disabled)
+					$resutatFormula:=$formula.call()
+					Case of 
+						: ($resutatFormula)
+							$fill:="lightgrey"
+							$stroke:="none"
+							$top:=4
+							$style:=Normal:K14:15
+							$strokeText:="white"
+							$hText:=5
+							$disabled:=True:C214
+						: (Form:C1466.useHTab_current_page=$tab.page)
+							$fill:="#458DE8"
+							$stroke:="none"
+							$top:=0
+							$style:=Bold:K14:2
+							$strokeText:="white"
+							$hText:=5
+						Else 
+							$fill:="#B9D9FF"
+							$stroke:="none"
+							$top:=4
+							$style:=Normal:K14:15
+							$strokeText:="222222"
+							$hText:=7
+					End case 
+					
+				: ($tab.dynamicSource#Null:C1517) && (OB Class:C1730($tab.dynamicSource).name="sfw_definitionPageMoreData")
+					If (Form:C1466.useHTab_current_page=$tab.page)
+						$fill:="FireBrick"
+						$stroke:="none"
+						$top:=0
+						$style:=Bold:K14:2
+						$strokeText:="white"
+						$hText:=5
+					Else 
+						$fill:="IndianRed"
+						$stroke:="none"
+						$top:=4
+						$style:=Normal:K14:15
+						$strokeText:="Ghostwhite"
+						$hText:=7
+					End if 
+					
+				: (Form:C1466.useHTab_current_page=$tab.page)
+					$fill:="#458DE8"
+					$stroke:="none"
+					$top:=0
+					$style:=Bold:K14:2
+					$strokeText:="white"
+					$hText:=5
+				Else 
+					$fill:="#B9D9FF"
+					$stroke:="none"
+					$top:=4
+					$style:=Normal:K14:15
+					$strokeText:="222222"
+					$hText:=7
+			End case 
+			Case of 
+				: ($tab.suffixLabel#Null:C1517) && (Form:C1466.current_item#Null:C1517)
+					$formula:=Formula from string:C1601($tab.suffixLabel)
+					$suffix:=$formula.call()
+					$label:=$tab.label+String:C10($suffix)
+					OBJECT SET TITLE:C194(*; "TextWidthCalculator"; $suffix)
+					OBJECT GET BEST SIZE:C717(*; "TextWidthCalculator"; $bestWidth; $bestHeight)
+					$withTab:=$tab.width+20+$bestWidth
+				: ($tab.countFormula#Null:C1517) && (Form:C1466.current_item#Null:C1517)
+					$formula:=Formula from string:C1601($tab.countFormula)
+					$count:=$formula.call()
+					$suffix:=$count#0 ? " ["+String:C10($count)+"]" : ""
+					$label:=$tab.label+String:C10($suffix)
+					OBJECT SET TITLE:C194(*; "TextWidthCalculator"; $suffix)
+					OBJECT GET BEST SIZE:C717(*; "TextWidthCalculator"; $bestWidth; $bestHeight)
+					$withTab:=$tab.width+20+$bestWidth
+				: (String:C10($tab.extraLabel)#"")
+					$label:=$tab.label+String:C10($tab.extraLabel)
+					OBJECT SET TITLE:C194(*; "TextWidthCalculator"; $tab.extraLabel)
+					OBJECT GET BEST SIZE:C717(*; "TextWidthCalculator"; $bestWidth; $bestHeight)
+					$withTab:=$tab.width+20+$bestWidth
+				Else 
+					$label:=$tab.label
+					$withTab:=$tab.width+20
+			End case 
+			$rect:=SVG_New_rect($svg; $hOffset; $top; $withTab; 27; 5; 5; $stroke; $fill; 1)
+			If (Not:C34($disabled))
+				SVG_SET_ID($rect; "page:"+String:C10($tab.page))
+			End if 
+			$tab.isDisabled:=$disabled
+			$tabsAllowed.push($tab)
 			$text:=SVG_New_text($svg; $label; $hOffset+($withTab/2); $hText; $fonFamily; 12; $style; Align center:K42:3; $strokeText)
 			$hOffset+=$hGutter+$withTab
 		End if 
@@ -2862,15 +3131,53 @@ Function drawHTab()
 	SVG_CLEAR($svg)
 	Form:C1466.hTabBar:=$pict
 	
-	
-Function clicHTab()
-	$id:=SVG Find element ID by coordinates:C1054(*; FORM Event:C1606.objectName; mouseX; mouseY)
-	If ($id="page:@")
-		FORM GOTO PAGE:C247(Num:C11(Substring:C12($id; 6)); *)
-		//Form.sfw.drawHTab()
+	$targetedPages:=New collection:C1472
+	If (FORM Event:C1606.code#On Load:K2:1)
+		$targetedPages.push(FORM Get current page:C276(*))
 	End if 
+	$targetedPages.push(Form:C1466.sfw.entry.panel.currentPage)
+	$targetedPages.push(0)
+	For each ($targetedPage; $targetedPages)
+		If ($targetedPage#0) && ($tabsAllowed.length>0)
+			$targets:=$tabsAllowed.query("page = :1"; $targetedPage)
+			If ($targets.length>0)
+				Case of 
+					: ($targets[0].isDisabled)
+						This:C1470.clicHTab($tabsAllowed[0].page)
+						break
+					: (FORM Event:C1606.code=On Load:K2:1)
+						This:C1470.clicHTab($targetedPage)
+						break
+					: ($targetedPage#Form:C1466.useHTab_current_page) && (FORM Event:C1606.objectName#"hTabBar")
+						This:C1470.clicHTab($targetedPage)
+						break
+					Else 
+						break
+				End case 
+			End if 
+		Else 
+			If ($tabsAllowed.length>0)
+				This:C1470.clicHTab($tabsAllowed[0].page)
+			End if 
+			break
+		End if 
+	End for each 
 	
-	
+Function clicHTab($page : Integer)
+	$redraw:=False:C215
+	If (Count parameters:C259=0)
+		$id:=SVG Find element ID by coordinates:C1054(*; FORM Event:C1606.objectName; mouseX; mouseY)
+		If ($id="page:@")
+			$page:=Num:C11(Substring:C12($id; 6))
+			$redraw:=True:C214
+		End if 
+	Else 
+		$redraw:=True:C214
+	End if 
+	If ($redraw)
+		FORM GOTO PAGE:C247($page; *)
+		Form:C1466.useHTab_current_page:=$page
+	End if 
 	
 	//MARK: - formObject functions
 	

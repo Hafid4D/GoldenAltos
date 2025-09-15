@@ -1,3 +1,7 @@
+
+property window : Integer
+property displayLineNb : Integer
+
 shared singleton Class constructor
 	This:C1470.window:=0
 	This:C1470.displayLineNb:=0
@@ -29,11 +33,11 @@ Function launch()
 Function mark($message : Text)
 	If (This:C1470.window#0)
 		
-		$chain:=Get call chain:C1662
+		$chain:=Call chain:C1662
 		$form:=New object:C1471
 		$form.code:=$chain[1].type+" "+$chain[1].name
 		$form.line:=$chain[1].line
-		$form.callChain:=Get call chain:C1662
+		$form.callChain:=Call chain:C1662
 		$formula:=This:C1470._update
 		CALL FORM:C1391(This:C1470.window; $formula; $message; $form)
 		
@@ -43,11 +47,11 @@ Function mark($message : Text)
 Function internal($message : Text)
 	If (This:C1470.window#0)
 		
-		$chain:=Get call chain:C1662
+		$chain:=Call chain:C1662
 		$form:=New object:C1471
 		$form.code:=$chain[1].type+" "+$chain[1].name
 		$form.line:=$chain[1].line
-		$form.callChain:=Get call chain:C1662
+		$form.callChain:=Call chain:C1662
 		$form.internal:=True:C214
 		$formula:=This:C1470._update
 		CALL FORM:C1391(This:C1470.window; $formula; $message; $form)

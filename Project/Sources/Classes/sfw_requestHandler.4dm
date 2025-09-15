@@ -1,4 +1,5 @@
 
+property url : Text
 
 Class constructor($url : Text)
 	ARRAY TEXT:C222($_names; 0)

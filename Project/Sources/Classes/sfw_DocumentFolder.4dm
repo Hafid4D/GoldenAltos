@@ -68,14 +68,14 @@ local Function cacheClear()
 	End if 
 	
 	
-local Function cacheLoad()
+local Function cacheLoad($option : Integer)
 	
 	If (Storage:C1525.cache=Null:C1517)
 		Use (Storage:C1525)
 			Storage:C1525.cache:=New shared object:C1526
 		End use 
 	End if 
-	If (Storage:C1525.cache.documentFolder=Null:C1517)
+	If (Storage:C1525.cache.documentFolder=Null:C1517) || (Count parameters:C259>0)
 		$documentFolder:=This:C1470._loadAsCollection()
 		Use (Storage:C1525.cache)
 			Storage:C1525.cache.documentFolder:=$documentFolder.copy(ck shared:K85:29; Storage:C1525.cache)

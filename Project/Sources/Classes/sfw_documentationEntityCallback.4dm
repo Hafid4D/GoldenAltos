@@ -1,3 +1,5 @@
+property callbacks : Collection
+
 shared singleton Class constructor
 	var $callback : Object
 	
@@ -6,7 +8,7 @@ shared singleton Class constructor
 	
 	$callback:=New object:C1471
 	$callback.title:="get nameInWindowTitle"
-	$callback.syntax:="local Function get nameInWindowTitle()->$nameInWindowTitle : Text"
+	$callback.syntax:="local Function get nameInWindowTitle()->$nameInWindowTitle : Text\r\r$nameInWindowTitle:=This.name"
 	$callback.comment:="With this callback you return the name to displayed in the title of the window for the current item"
 	This:C1470.callbacks.push(OB Copy:C1225($callback; ck shared:K85:29))
 	
@@ -78,8 +80,15 @@ shared singleton Class constructor
 	
 	$callback:=New object:C1471
 	$callback.title:="isDeletable"
-	$callback.syntax:="local Function isDeletable()->$isDeletable : Boolean"
+	$callback.syntax:="local Function isDeletable()->$isDeletable : Boolean\r\r$isDeletable:=False"
 	$callback.comment:="This callback must return false to inactivate the deletion mode for the current item."
+	This:C1470.callbacks.push(OB Copy:C1225($callback; ck shared:K85:29))
+	
+	
+	$callback:=New object:C1471
+	$callback.title:="isModifiable"
+	$callback.syntax:="local Function isModifiable()->$isModifiable : Boolean\r\r$isModifiable:=False"
+	$callback.comment:="This callback must return false to inactivate the edition mode for the current item."
 	This:C1470.callbacks.push(OB Copy:C1225($callback; ck shared:K85:29))
 	
 	This:C1470.callbacks:=This:C1470.callbacks.orderBy("title")

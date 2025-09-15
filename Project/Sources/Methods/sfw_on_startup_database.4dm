@@ -19,7 +19,7 @@ End if
 
 cs:C1710.sfw_userManager.me.login()
 
-ds:C1482.dataMaintenance()
+ds:C1482.sfw_dataMaintenance()
 
 cs:C1710.sfw_userManager.me.onStartup()
 cs:C1710.sfw_notificationManager.me.onStartup()

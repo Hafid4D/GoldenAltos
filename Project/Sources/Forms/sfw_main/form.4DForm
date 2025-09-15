@@ -138,7 +138,7 @@
 					"height": 24,
 					"sizingX": "move",
 					"pictureFormat": "scaled",
-					"picture": "/RESOURCES/image/logo/loupe.png"
+					"picture": "/RESOURCES/sfw/image/icon/loupe.png"
 				},
 				"bIcon_entry": {
 					"type": "button",
