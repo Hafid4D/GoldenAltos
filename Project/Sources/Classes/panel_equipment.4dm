@@ -100,8 +100,6 @@ Function redrawAndSetVisible()
 	
 	OBJECT SET ENTERABLE:C238(*; "entryField_outOfCalibration"; False:C215)
 	
-	OBJECT SET ENTERABLE:C238(*; "entryField_pmNotRequired"; False:C215)
-	
 	OBJECT SET ENTERABLE:C238(*; "entryField_statusHistory"; False:C215)
 	
 	OBJECT SET VISIBLE:C603(*; "btnDatePicker@"; Form:C1466.sfw.checkIsInModification())
