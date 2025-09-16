@@ -133,7 +133,7 @@ If ($OK)
 		WP SET ATTRIBUTES:C1342($range; wk font family:K81:65; "New Times Roman")
 		WP SET ATTRIBUTES:C1342($range; wk font size:K81:66; 12; wk text underline style:K81:73; wk none:K81:91; wk font bold:K81:68; wk true:K81:174)
 		WP SET TEXT:C1574($wp; Char:C90(Carriage return:K15:38); wk append:K81:179)
-		WP SET TEXT:C1574($wp; "There is are usage Logs for this period"; wk append:K81:179)
+		WP SET TEXT:C1574($wp; "There is no usage Log for this period"; wk append:K81:179)
 		WP SET TEXT:C1574($wp; Char:C90(Carriage return:K15:38); wk append:K81:179)
 		
 		$range:=WP Text range:C1341($wp; wk end text:K81:164; wk end text:K81:164)

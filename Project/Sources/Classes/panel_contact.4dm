@@ -11,7 +11,7 @@ Function formMethod()
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		
-		//Form.companyType:=Form.current_item.companyType
+		Form:C1466.companyType:=Form:C1466.current_item.companyType
 		
 	End if 
 	
@@ -116,7 +116,7 @@ Function pup_supplier()
 Function drawPup_companyType()
 	If (Form:C1466.current_item#Null:C1517)
 		$companyType:=New object:C1471
-		$companyTypeName:=Form:C1466.current_item.companyType || ""  //Form.current_item.companyType
+		$companyTypeName:=Form:C1466.companyType
 		$color:=""
 		$pathIcon:=""
 		Form:C1466.sfw.drawButtonPup("pup_companyType"; $companyTypeName; $pathIcon; ($companyType=Null:C1517))
@@ -142,7 +142,7 @@ Function pup_companyType()
 		
 		Case of 
 			: ($choose#"")
-				Form:C1466.current_item.companyType:=$choose
+				Form:C1466.companyType:=$choose
 				
 		End case 
 		
@@ -171,11 +171,11 @@ Function redrawAndSetVisible()
 	
 	OBJECT SET VISIBLE:C603(*; "bActionContact"; Form:C1466.sfw.checkIsInModification())
 	
-	OBJECT SET VISIBLE:C603(*; "pup_supplier"; (Form:C1466.current_item.companyType="Supplier"))
-	OBJECT SET VISIBLE:C603(*; "pup_Customer"; (Form:C1466.current_item.companyType="Customer"))
+	OBJECT SET VISIBLE:C603(*; "pup_supplier"; (Form:C1466.companyType="Supplier"))
+	OBJECT SET VISIBLE:C603(*; "pup_Customer"; (Form:C1466.companyType="Customer"))
 	
-	OBJECT SET VISIBLE:C603(*; "label_supplier"; (Form:C1466.current_item.companyType="Supplier"))
-	OBJECT SET VISIBLE:C603(*; "label_customer"; (Form:C1466.current_item.companyType="Customer"))
+	OBJECT SET VISIBLE:C603(*; "label_supplier"; (Form:C1466.companyType="Supplier"))
+	OBJECT SET VISIBLE:C603(*; "label_customer"; (Form:C1466.companyType="Customer"))
 	
 	
 	
@@ -203,7 +203,7 @@ Function btnOpenCompany()
 	
 	Case of 
 			
-		: (Form:C1466.current_item.companyType="Supplier")
+		: (Form:C1466.companyType="Supplier")
 			
 			$es:=ds:C1482.Supplier.query("UUID =:1"; Form:C1466.current_item.UUID_Company)
 			
@@ -212,7 +212,7 @@ Function btnOpenCompany()
 			End if 
 			
 			
-		: (Form:C1466.current_item.companyType="Customer")
+		: (Form:C1466.companyType="Customer")
 			
 			$es:=ds:C1482.Customer.query("UUID =:1"; Form:C1466.current_item.UUID_Company)
 			
