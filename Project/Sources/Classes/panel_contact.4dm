@@ -34,31 +34,57 @@ Function drawPup_XXX()
 	
 	
 	
-Function drawPup_Customer()
+Function drawPup_Company()
+	
 	If (Form:C1466.current_item#Null:C1517)
-		$customer:=ds:C1482.Customer.query("UUID =:1"; Form:C1466.current_item.UUID_Company).first() || New object:C1471()
-		$customerName:=$customer.name
-		If ($customerName=Null:C1517)
-			$customerName:=""
+		
+		Case of 
+				
+			: (Form:C1466.companyType="Customer")
+				$company:=ds:C1482.Customer.query("UUID =:1"; Form:C1466.current_item.UUID_Company).first() || New object:C1471()
+				
+			: (Form:C1466.companyType="Supplier")
+				$company:=ds:C1482.Supplier.query("UUID =:1"; Form:C1466.current_item.UUID_Company).first() || New object:C1471()
+				
+		End case 
+		
+		
+		$companyName:=$company.name
+		If ($companyName=Null:C1517)
+			$companyName:=""
 		End if 
-		$color:="#FFFFFF"  //cs.sfw_htmlColor.me.getName($customer.color)
+		$color:="#FFFFFF"  //cs.sfw_htmlColor.me.getName($company.color)
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
-		Form:C1466.sfw.drawButtonPup("pup_Customer"; $customerName; $pathIcon; ($customer=Null:C1517))
+		Form:C1466.sfw.drawButtonPup("pup_company"; $companyName; $pathIcon; ($company=Null:C1517))
 	End if 
 	
 	
-Function pup_Customer()
+Function pup_company()
 	//Create pop up menu
 	If (Form:C1466.sfw.checkIsInModification())
 		
-		OBJECT GET COORDINATES:C663(*; "pup_Customer"; $l; $t; $r; $b)
+		OBJECT GET COORDINATES:C663(*; "pup_company"; $l; $t; $r; $b)
 		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
 		
-		$form:=New object:C1471(\
-			"colName"; "name"; \
-			"allData"; ds:C1482.Customer.all(); \
-			"dataclass"; "Customer"\
-			)
+		Case of 
+				
+			: (Form:C1466.companyType="Customer")
+				
+				$form:=New object:C1471(\
+					"colName"; "name"; \
+					"allData"; ds:C1482.Customer.all(); \
+					"dataclass"; "Customer"\
+					)
+				
+			: (Form:C1466.companyType="Supplier")
+				
+				$form:=New object:C1471(\
+					"colName"; "name"; \
+					"allData"; ds:C1482.Supplier.all(); \
+					"dataclass"; "Supplier"\
+					)
+				
+		End case 
 		
 		$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b)
 		DIALOG:C40("selectNto1"; $form)
@@ -70,46 +96,7 @@ Function pup_Customer()
 		End if 
 	End if 
 	
-	This:C1470.drawPup_Customer()
-	
-	
-Function drawPup_supplier()
-	If (Form:C1466.current_item#Null:C1517)
-		$supplier:=ds:C1482.Supplier.query("UUID =:1"; Form:C1466.current_item.UUID_Company).first() || New object:C1471()
-		$supplierName:=$supplier.name
-		If ($supplierName=Null:C1517)
-			$supplierName:=""
-		End if 
-		$color:="#FFFFFF"  //cs.sfw_htmlColor.me.getName($supplier.color)
-		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
-		Form:C1466.sfw.drawButtonPup("pup_supplier"; $supplierName; $pathIcon; ($supplier=Null:C1517))
-	End if 
-	
-	
-Function pup_supplier()
-	//Create pop up menu
-	If (Form:C1466.sfw.checkIsInModification())
-		
-		OBJECT GET COORDINATES:C663(*; "pup_supplier"; $l; $t; $r; $b)
-		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
-		
-		$form:=New object:C1471(\
-			"colName"; "name"; \
-			"allData"; ds:C1482.Supplier.all(); \
-			"dataclass"; "Supplier"\
-			)
-		
-		$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b)
-		DIALOG:C40("selectNto1"; $form)
-		CLOSE WINDOW:C154($winRef)
-		
-		If (ok=1)
-			Form:C1466.current_item.UUID_Company:=$form.item.UUID
-			cs:C1710.panel_contact.me._activate_save_cancel_button()
-		End if 
-	End if 
-	
-	This:C1470.drawPup_supplier()
+	This:C1470.drawPup_Company()
 	
 	
 	
@@ -143,7 +130,8 @@ Function pup_companyType()
 		Case of 
 			: ($choose#"")
 				Form:C1466.companyType:=$choose
-				
+				Form:C1466.current_item.UUID_Company:=""
+				OBJECT SET TITLE:C194(*; "pup_company"; "")
 		End case 
 		
 	End if 
@@ -165,17 +153,24 @@ Function redrawAndSetVisible()
 	End case 
 	
 	This:C1470.contactDetails()
-	This:C1470.drawPup_Customer()
-	This:C1470.drawPup_supplier()
+	This:C1470.drawPup_Company()
+	//This.drawPup_supplier()
 	This:C1470.drawPup_companyType()
 	
 	OBJECT SET VISIBLE:C603(*; "bActionContact"; Form:C1466.sfw.checkIsInModification())
 	
-	OBJECT SET VISIBLE:C603(*; "pup_supplier"; (Form:C1466.companyType="Supplier"))
-	OBJECT SET VISIBLE:C603(*; "pup_Customer"; (Form:C1466.companyType="Customer"))
+	Case of 
+			
+		: (Form:C1466.companyType="Customer")
+			OBJECT SET TITLE:C194(*; "label_company"; "Customer Name")
+			
+		: (Form:C1466.companyType="Supplier")
+			
+			OBJECT SET TITLE:C194(*; "label_company"; "Supplier Name")
+			
+	End case 
 	
-	OBJECT SET VISIBLE:C603(*; "label_supplier"; (Form:C1466.companyType="Supplier"))
-	OBJECT SET VISIBLE:C603(*; "label_customer"; (Form:C1466.companyType="Customer"))
+	
 	
 	
 	

@@ -136,17 +136,17 @@
 					"text": "title",
 					"textAlign": "right"
 				},
-				"label_customer": {
+				"label_company": {
 					"type": "text",
 					"top": 37,
 					"left": 368,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Customer Name",
+					"text": "",
 					"textAlign": "right"
 				},
-				"pup_Customer": {
+				"pup_company": {
 					"type": "button",
 					"top": 34,
 					"left": 468,
@@ -160,7 +160,7 @@
 					"popupPlacement": "linked",
 					"textPlacement": "right",
 					"style": "bevel",
-					"method": "ObjectMethods/pup_Customer.4dm",
+					"method": "ObjectMethods/pup_company.4dm",
 					"events": [
 						"onClick"
 					],
@@ -191,36 +191,6 @@
 					"textPlacement": "right",
 					"style": "bevel",
 					"method": "ObjectMethods/pup_companyType.4dm",
-					"events": [
-						"onClick"
-					],
-					"textAlign": "left"
-				},
-				"label_supplier": {
-					"type": "text",
-					"top": 37,
-					"left": 368,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Supplier Name",
-					"textAlign": "right"
-				},
-				"pup_supplier": {
-					"type": "button",
-					"top": 34,
-					"left": 468,
-					"width": 300,
-					"height": 23,
-					"fontFamily": "System Font",
-					"fontSize": 13,
-					"focusable": false,
-					"text": "",
-					"icon": "",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/pup_supplier.4dm",
 					"events": [
 						"onClick"
 					],
@@ -309,7 +279,7 @@
 			"objects": {}
 		}
 	],
-	"geometryStamp": 430,
+	"geometryStamp": 436,
 	"method": "method.4dm",
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"editor": {
