@@ -63,7 +63,7 @@ Function openSelector()
 		$x:=(This:C1470.hPosition="right") ? $d-This:C1470.widthForm : $g
 		$y:=(This:C1470.vPosition="top") ? $h-This:C1470.heightForm : $b
 	End if 
-	CONVERT COORDINATES:C1365($x; $y; XY Current form:K27:5; XY Screen:K27:7)
+	CONVERT COORDINATES:C1365($x; $y; XY Current form:K27:5; XY Main window:K27:8)  //Screen)
 	$ref:=Open form window:C675("sfw_selector"; Pop up form window:K39:11; $x; $y)
 	DIALOG:C40("sfw_selector"; This:C1470)
 	CLOSE WINDOW:C154($ref)

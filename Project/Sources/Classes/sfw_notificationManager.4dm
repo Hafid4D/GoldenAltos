@@ -51,7 +51,7 @@ Function formMethod()
 	
 Function loadNotifications()
 	
-	Form:C1466.lb_notifications:=ds:C1482.sfw_Notification.query("UUID_User = :1 order by stmp desc"; cs:C1710.sfw_userManager.me.info.UUID)
+	Form:C1466.lb_notifications:=ds:C1482.sfw_Notification.query("UUID_User = :1 and stmpOver = :2 order by stmp desc"; cs:C1710.sfw_userManager.me.info.UUID; 0)
 	
 	
 Function refreshNotification()

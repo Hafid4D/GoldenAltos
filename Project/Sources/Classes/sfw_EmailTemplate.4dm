@@ -37,21 +37,21 @@ Function prepareEmail($templateIdent : Text; $dataContext : Object)->$email : Ob
 	var $emailMime : Object
 	$email:=New object:C1471
 	
-	$emailTemplate:=ds:C1482.sfw_EmailTemplate.query("ident = :1"; $templateIdent).first()
-	If ($emailTemplate#Null:C1517)
-		
-		$wpDoc:=WP New:C1317($emailTemplate.descriptionWP)
-		WP SET DATA CONTEXT:C1786($wpDoc; $dataContext)
-		WP EXPORT VARIABLE:C1319($wpDoc; $emailBody; wk mime html:K81:1)
-		
-		$emailMime:=MAIL Convert from MIME:C1681($emailBody)
-		
-		$email.body:=New object:C1471
-		$email.body.content:=""
-		For each ($part; $emailMime.bodyValues)
-			$email.body.content+=$emailMime.bodyValues[$part].value
-		End for each 
-		$email.body.contentType:="HTML"  // or HTML
-		
-		$email.subject:=$emailTemplate.subject
-	End if 
+	//$emailTemplate:=ds.sfw_EmailTemplate.query("ident = :1"; $templateIdent).first()
+	//If ($emailTemplate#Null)
+	
+	//$wpDoc:=WP New($emailTemplate.descriptionWP)
+	//WP SET DATA CONTEXT($wpDoc; $dataContext)
+	//WP EXPORT VARIABLE($wpDoc; $emailBody; wk mime html)
+	
+	//$emailMime:=MAIL Convert from MIME($emailBody)
+	
+	//$email.body:=New object
+	//$email.body.content:=""
+	//For each ($part; $emailMime.bodyValues)
+	//$email.body.content+=$emailMime.bodyValues[$part].value
+	//End for each 
+	//$email.body.contentType:="HTML"  // or HTML
+	
+	//$email.subject:=$emailTemplate.subject
+	//End if 

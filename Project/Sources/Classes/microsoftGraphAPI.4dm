@@ -20,8 +20,8 @@ Function sendMail($email : Object)->$status : Object
 	
 	
 Function _getSettings()->$data : Object
-	$data:=cs:C1710.sfw_definition.me.globalParameters.microsoftGraphAPI
-	$data.sender:=cs:C1710.sfw_definition.me.globalParameters.mail.sender
+	//$data:=cs.sfw_definition.me.globalParameters.microsoftGraphAPI
+	//$data.sender:=cs.sfw_definition.me.globalParameters.mail.sender
 	
 Function getToken()->$token : Object
 	var $eSetting : cs:C1710.sfw_SettingEntity

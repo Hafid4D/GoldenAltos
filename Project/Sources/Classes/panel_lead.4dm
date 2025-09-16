@@ -346,7 +346,7 @@ Function drawPup_customer()
 	End if 
 	
 	
-Function selectCustomer()
+Function selectCustomerOld()
 	If (Form:C1466.sfw.checkIsInModification())
 		Case of 
 			: (FORM Event:C1606.code=On Getting Focus:K2:7) | (FORM Event:C1606.code=On Clicked:K2:4)
@@ -821,8 +821,8 @@ Function bActionInteractions()
 				$context.target:=Form:C1466.current_item.UUID
 				$context.targetDataclass:="Lead"
 				$context.Followupdate:=$followUPDate
-				$context.Contact:=$interaction.contact.fullName
-				$context.Trigger:=$interaction.trigger.name
+				$context.Contact:=$interaction.contact.fullName || ""
+				$context.Trigger:=$interaction.trigger.name || ""
 				
 				$staff:=ds:C1482.Staff.query("UUID_User = :1"; cs:C1710.sfw_userManager.me.info.UUID).first()
 				$users:=New collection:C1472($staff.user.UUID)
@@ -884,8 +884,8 @@ Function bActionInteractions()
 					$context.target:=Form:C1466.current_item.UUID
 					$context.targetDataclass:="Lead"
 					$context.Followupdate:=$followUPDate
-					$context.Contact:=$scheduledInteraction.contact.fullName
-					$context.Trigger:=$scheduledInteraction.trigger.name
+					$context.Contact:=$scheduledInteraction.contact.fullName || ""
+					$context.Trigger:=$scheduledInteraction.trigger.name || ""
 					
 					$staff:=ds:C1482.Staff.query("UUID_User = :1"; cs:C1710.sfw_userManager.me.info.UUID).first()
 					$users:=New collection:C1472($staff.user.UUID)
@@ -1044,3 +1044,46 @@ Function pup_filter($filterType : Text)
 	If ($label#"")
 		OBJECT SET TITLE:C194(*; "pupFilter_"+$filterType; $label)
 	End if 
+	
+	
+	
+Function selectCustomer()
+	
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		$selector:=cs:C1710.sfw_definitionSelector.new("selectorCustomers"; "customer")
+		$selector.setTitle("Choose a Customer")
+		$selector.setCurrentItem(Form:C1466.current_item.customer)
+		$selector.setOptions("noCutLink")
+		$selector.openSelector()
+		
+		Case of 
+			: ($selector.isSelected())
+				$itemSeleted:=$selector.getCurrentItem()
+				
+				Case of 
+					: ($itemSeleted=Null:C1517)
+					: (cs:C1710.sfw_string.me.isAnEmptyUUID($itemSeleted.UUID)=False:C215)
+						Form:C1466.current_item.UUID_Customer:=$itemSeleted.UUID
+						If (cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_Customer)=True:C214)
+							Form:C1466.current_item.UUID_Customer:=16*"00"
+						End if 
+				End case 
+				This:C1470.drawPup_customer()
+				
+			: ($selector.asCutTheLink())
+				Form:C1466.current_item.UUID_Customer:=16*"00"
+				
+			: ($selector.needCreation())
+				$selector.createANewEntity("cs.panel_lead.me.callbackAfterCreationCustomer($1)")
+				
+		End case 
+	End if 
+	
+	
+Function callbackAfterCreationCustomer($key : Text)
+	Form:C1466.current_item.UUID_Customer:=$key
+	If (cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_Customer)=True:C214)
+		Form:C1466.current_item.UUID_Customer:=16*"00"
+	End if 
+	This:C1470.drawPup_customer()

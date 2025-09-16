@@ -1,7 +1,7 @@
 //%attributes = {}
 #DECLARE($definitionClassName : Text; $globalParametersClassName : Text)
 
-
+//TRACE
 Use (Storage:C1525)
 	Storage:C1525.definitionClass:=New shared object:C1526("name"; $definitionClassName)
 	Use (Storage:C1525.definitionClass)

@@ -48,6 +48,11 @@
 		]
 	},
 	"Tables par défaut": {},
-	"Web": {},
+	"Web": {
+		"methods": [
+			"sfw_w_home_page",
+			"sfw_w_logout"
+		]
+	},
 	"trash": {}
 }
