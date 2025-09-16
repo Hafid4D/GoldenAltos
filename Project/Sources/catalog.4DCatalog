@@ -2671,11 +2671,6 @@
 			<table_ref uuid="FCE2D049B8944E4CA0AAB0152A549718" name="Equipment"/>
 		</field_ref>
 	</index>
-	<index kind="regular" uuid="0F6DD27221AB43CE9207E017C21E5D9C" type="3">
-		<field_ref uuid="A276955D955E41BCA8E3E93B8F5D0B9D" name="UUID_target">
-			<table_ref uuid="BBA10D61B3A54D38A2C335D8A5A1BF6E" name="sfw_Favorite"/>
-		</field_ref>
-	</index>
 	<index kind="regular" unique_keys="true" uuid="111598E1CC456F47B5CF1913ED4BC852" type="7">
 		<field_ref uuid="2A671DFB01797B4DBB6EC2EB4216DB75" name="UUID">
 			<table_ref uuid="B187BEFD3CC6B147886F91E311E96B3A" name="Specification"/>
@@ -2694,6 +2689,11 @@
 	<index kind="regular" unique_keys="true" uuid="154853B0D64B3F4BAC1493F426D7CDDA" type="7">
 		<field_ref uuid="57B2843F4E0D9844849760E738191BA9" name="UUID">
 			<table_ref uuid="89B8693B8BA31D46A5E7CC5F40548E73" name="Membership"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="15A0892D9DB0744C912C88669AE16189" type="3">
+		<field_ref uuid="A276955D955E41BCA8E3E93B8F5D0B9D" name="UUID_target">
+			<table_ref uuid="BBA10D61B3A54D38A2C335D8A5A1BF6E" name="sfw_Favorite"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="15E1329A640CEA48A1DACE8F3364DB03" type="7">
