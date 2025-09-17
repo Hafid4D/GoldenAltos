@@ -119,7 +119,7 @@ If ($OK)
 			WP SET ATTRIBUTES:C1342($table; wk font family:K81:65; "New Times Roman")
 			WP SET ATTRIBUTES:C1342($table; wk font size:K81:66; 9; wk text underline style:K81:73; wk none:K81:91)
 			$row:=WP Table get rows:C1475($table; 1)
-			WP SET ATTRIBUTES:C1342($row; wk font bold:K81:68; True:C214; wk font size:K81:66)
+			WP SET ATTRIBUTES:C1342($row; wk font bold:K81:68; True:C214; wk font size:K81:66; 9)
 			
 			WP SET TEXT:C1574($wp; Char:C90(Carriage return:K15:38); wk append:K81:179)
 			

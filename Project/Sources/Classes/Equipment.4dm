@@ -157,6 +157,16 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setSubset("decommissionedEquipment")
 	$entry.setView($view)
 	
+	// MARK:  PM Required Equipements
+	$view:=cs:C1710.sfw_definitionView.new("PMRequiredEquipments"; "PM Required")
+	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
+	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
+	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
+	$view.setLBItemsOrderBy("assignedID")
+	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
+	$view.setSubset("PMRequiredEquipments")
+	$entry.setView($view)
+	
 	
 local Function cacheLoad()
 	
@@ -228,8 +238,8 @@ local Function calibrationNotRequired()->$equipments : cs:C1710.EquipmentSelecti
 	
 	
 	
-	//local Function PMRequiredEquipments()->$equipments : cs.EquipmentSelection  //PM Required Equipments
-	//$equipments:=ds.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3"; Current date(*); !00-00-00!; False)  // Storage.cache.endDate
+local Function PMRequiredEquipments()->$equipments : cs:C1710.EquipmentSelection  //PM Required Equipments
+	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3"; Current date:C33(*); !00-00-00!; False:C215)  // Storage.cache.endDate
 	
 local Function pmEquipments()->$equipments : cs:C1710.EquipmentSelection  //Prevent Maintenance equipments within X days
 	Use (Storage:C1525.cache)
