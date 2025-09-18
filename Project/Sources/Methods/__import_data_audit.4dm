@@ -26,8 +26,7 @@ If ($audit_log.exists)
 			$eAudit:=ds:C1482.Audit.new()
 			$eAudit.auditNumber:=$audit.Page
 			$eAudit.stmpPage:=cs:C1710.sfw_stmp.me.build(Date:C102($audit.Page_Date))
-			$eAudit.supervisor:=$audit.Supervisor
-			$eAudit.dateTimeStamp:=$audit.DateTimeStamp
+			$eAudit.supervisor:=$audit.Supervisor  //  TODO : Change to createdBy
 			$eAudit.stmpCreationDate:=$audit.CreationDateTimeStamp
 			$eAudit.title:=$audit.LogTitle
 			$eAudit.storageFilename:=$audit.StoragedFilename
