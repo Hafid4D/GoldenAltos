@@ -759,6 +759,21 @@
 				}
 			}
 		},
+		"ManagementReview": {
+			"color": {
+				"red": 175,
+				"green": 188,
+				"blue": 191,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 4633,
+				"top": 2,
+				"width": 211,
+				"height": 211.33203125
+			},
+			"displayable_fields_count": 8
+		},
 		"QuoteEvent": {
 			"color": {
 				"red": 255,

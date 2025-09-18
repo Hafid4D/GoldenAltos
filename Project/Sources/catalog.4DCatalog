@@ -818,9 +818,6 @@
 		<field name="supervisor" uuid="32B9133DC66E064AA45B12BA8F433CBA" type="10" limiting_length="255" never_null="true" id="4">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="dateTimeStamp" uuid="6E3BC2B6F5A13247AD1C1301295E5381" type="4" never_null="true" id="5">
-			<field_extra multi_line="false"/>
-		</field>
 		<field name="stmpCreationDate" uuid="1B32511C08D7CD4085801214B347A169" type="4" never_null="true" id="6">
 			<field_extra multi_line="false"/>
 		</field>
@@ -888,6 +885,20 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<primary_key field_name="UUID" field_uuid="DDC7BD1CB35145F7AFC4AE55E00287E5"/>
+	</table>
+	<table name="ManagementReview" uuid="572B912B43B47A4399AC534EE9F136C8" id="62">
+		<field name="UUID" uuid="03E75EA1C2D7384BB331516DE41D1D6D" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="managementReviewNumber" uuid="98F22987D04162459868C2B9A0F260CA" type="4" never_null="true" id="2">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="createdBy" uuid="582D462F4AD1E143BC8D52191E2E8967" type="10" limiting_length="255" never_null="true" id="3">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="title" uuid="54FC526E8EFDF348B4391A8772B682F9" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="document" uuid="F0AE336B4E76724C9D86BDF500104703" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
+		<field name="stmpCreationDate" uuid="37176F2858BE5A40BACB2EE2CB1DF714" type="4" never_null="true" id="6"/>
+		<field name="stmpPage" uuid="CFDD3A35D0E79540A097F1D9577DBB00" type="4" never_null="true" id="7"/>
+		<primary_key field_name="UUID" field_uuid="03E75EA1C2D7384BB331516DE41D1D6D"/>
 	</table>
 	<table name="sfw_Notification" uuid="5B73B25D951B4B17AB99971FB0079E64" id="69">
 		<field name="UUID" uuid="37203E4F21D84C8EBC40DFC936CBFFA1" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -3268,6 +3279,11 @@
 	<index kind="regular" uuid="A763967F47AE43C1A41A368356A98D54" type="3">
 		<field_ref uuid="01F27F9F3CFC417E837112079B4D290B" name="UUID_Customer">
 			<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="A8219BA3EEB9CC419BB70AF39CE0F6B6" type="7">
+		<field_ref uuid="03E75EA1C2D7384BB331516DE41D1D6D" name="UUID">
+			<table_ref uuid="572B912B43B47A4399AC534EE9F136C8" name="ManagementReview"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="A90F65BE848BB84D827F3D9B3B5A26BA" type="3">
