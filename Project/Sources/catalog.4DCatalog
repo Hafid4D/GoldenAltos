@@ -800,6 +800,7 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="attachedDocuments" uuid="926C9621239B634A8ACB2A923364231D" type="21" blob_switch_size="2147483647" never_null="true" id="17"/>
+		<field name="critical" uuid="2109C2A463C9164CA3DDFBA9731FEF2B" type="1" never_null="true" id="18"/>
 		<primary_key field_name="UUID" field_uuid="CFBA7599E861DC4A91A0C1B26781C297"/>
 	</table>
 	<table name="PartData" uuid="68D645D2E1989F4CA36E905F914AD868" id="58">
@@ -2661,6 +2662,11 @@
 			<table_ref uuid="FCE2D049B8944E4CA0AAB0152A549718" name="Equipment"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="0F9F6B99FBF651468F3C728F879BD66C" type="1">
+		<field_ref uuid="B55972B70F030349B5136DEE13BEA4D4" name="UUID">
+			<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="111598E1CC456F47B5CF1913ED4BC852" type="7">
 		<field_ref uuid="2A671DFB01797B4DBB6EC2EB4216DB75" name="UUID">
 			<table_ref uuid="B187BEFD3CC6B147886F91E311E96B3A" name="Specification"/>
@@ -2994,11 +3000,6 @@
 	<index kind="regular" unique_keys="true" uuid="6B32C8DEC9CEEB449F96F5750E84D233" type="3">
 		<field_ref uuid="B16B9E9117F74E4D836B97A7A8CDE8F6" name="levelID">
 			<table_ref uuid="4EB6C9D117A3DC4B91D031D6BC0C7DA9" name="CustomerCarrier"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="6B53631198FC5444B8A39A5CB0FFC53C" type="1">
-		<field_ref uuid="B55972B70F030349B5136DEE13BEA4D4" name="UUID">
-			<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="6B9F071AF0A3F643915ABDB0950D7BF5" type="7">
