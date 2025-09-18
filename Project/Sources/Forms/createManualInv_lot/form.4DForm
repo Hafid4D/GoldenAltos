@@ -310,7 +310,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invoice.invoice"
+					"dataSource": "Form:C1466.inventory_e.vendor"
 				},
 				"header_bkgd10": {
 					"type": "rectangle",
@@ -340,7 +340,8 @@
 					"height": 58,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invoice.division"
+					"dataSource": "Form:C1466.inventory_e.description",
+					"enterable": false
 				},
 				"header_bkgd12": {
 					"type": "rectangle",
@@ -370,7 +371,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invoice.currency"
+					"dataSource": "Form:C1466.inventory_e.stockNum"
 				},
 				"header_bkgd20": {
 					"type": "rectangle",
@@ -392,7 +393,7 @@
 					"fill": "#B1CFDE",
 					"stroke": "transparent"
 				},
-				"Input5": {
+				"fld_classification": {
 					"type": "input",
 					"left": 131,
 					"top": 181,
@@ -400,9 +401,10 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invoice.date",
+					"dataSource": "Form:C1466.inventory_e.classification",
 					"dataSourceTypeHint": "date",
-					"enterable": false
+					"enterable": false,
+					"method": "ObjectMethods/fld_classification.4dm"
 				},
 				"header_bkgd24": {
 					"type": "rectangle",
@@ -432,7 +434,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invoice.total",
+					"dataSource": "Form:C1466.inventory_e.lot.lotNumber",
 					"dataSourceTypeHint": "number",
 					"numberFormat": "$##,###,###,##0.00"
 				},
@@ -530,11 +532,13 @@
 					"type": "input",
 					"left": 131,
 					"top": 277,
-					"width": 280,
+					"width": 140,
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invoice.due"
+					"dataSource": "Form:C1466.inventory_e.dateIn",
+					"dataSourceTypeHint": "date",
+					"dateFormat": "short"
 				},
 				"header_bkgd16": {
 					"type": "rectangle",
@@ -589,11 +593,11 @@
 					"type": "input",
 					"left": 131,
 					"top": 309,
-					"width": 280,
+					"width": 137,
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invoice.slip"
+					"dataSource": "Form:C1466.inventory_e.qtyinStock"
 				},
 				"header_bkgd26": {
 					"type": "rectangle",
@@ -652,7 +656,9 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invoice.due"
+					"dataSource": "Form:C1466.inventory_e.expirationDate",
+					"dataSourceTypeHint": "date",
+					"dateFormat": "short"
 				},
 				"header_bkgd29": {
 					"type": "rectangle",
@@ -711,7 +717,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invoice.slip"
+					"dataSource": "Form:C1466.inventory_e.inventoryUnits"
 				},
 				"header_bkgd32": {
 					"type": "rectangle",
@@ -770,7 +776,8 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invoice.slip"
+					"dataSource": "unitCost",
+					"dataSourceTypeHint": "number"
 				},
 				"header_bkgd35": {
 					"type": "rectangle",
@@ -829,7 +836,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invoice.slip"
+					"dataSource": "Form:C1466.inventory_e.currency"
 				},
 				"header_bkgd38": {
 					"type": "rectangle",
@@ -888,7 +895,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invoice.currency"
+					"dataSource": "Form:C1466.inventory_e.binLocation"
 				},
 				"header_bkgd41": {
 					"type": "rectangle",
@@ -947,7 +954,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invoice.currency"
+					"dataSource": "Form:C1466.inventory_e.recdBy"
 				},
 				"btnDatePicker_dateIn": {
 					"type": "button",
@@ -982,7 +989,7 @@
 			}
 		}
 	],
-	"geometryStamp": 3540,
+	"geometryStamp": 3558,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

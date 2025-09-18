@@ -27,6 +27,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setView($view)
 	
 	$entry.setLBItemsOrderBy("lotNumber")
+	
+	$entry.setItemAction("Split Lot"; "lot_split")
+	
 	$entry.enableTransaction()
 	
 Function onlyPunchIn()->$punchIN_es : cs:C1710.LotStepSelection
