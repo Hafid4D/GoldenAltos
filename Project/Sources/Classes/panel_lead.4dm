@@ -519,6 +519,7 @@ Function drawPup_job()
 	
 	
 Function selectJob()
+	
 	If (Form:C1466.sfw.checkIsInModification())
 		Case of 
 			: (FORM Event:C1606.code=On Getting Focus:K2:7) | (FORM Event:C1606.code=On Clicked:K2:4)
@@ -532,19 +533,20 @@ Function selectJob()
 				Else 
 					$form.lb_items:=Form:C1466.current_item.customer.purchaseOrders.lineItems
 				End if 
-				$form.lb_items:=ds:C1482.Job.query("UUID in :1"; $form.lb_items.distinct("UUID_Job"))
-				$form.current_item:=$form.lb_items
-				$form.oo:=""
-				
-				$winRef:=Open form window:C675("selectJob"; Pop up form window:K39:11; $l; $b+1)
-				DIALOG:C40("selectJob"; $form)
-				CLOSE WINDOW:C154($winRef)
-				
-				If (ok=1)
-					Form:C1466.current_item.UUID_Job:=$form.item.UUID
-					Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+				If ($form.lb_items#Null:C1517)
+					$form.lb_items:=ds:C1482.Job.query("UUID in :1"; $form.lb_items.distinct("UUID_Job"))
+					$form.current_item:=$form.lb_items
+					$form.oo:=""
+					
+					$winRef:=Open form window:C675("selectJob"; Pop up form window:K39:11; $l; $b+1)
+					DIALOG:C40("selectJob"; $form)
+					CLOSE WINDOW:C154($winRef)
+					
+					If (ok=1)
+						Form:C1466.current_item.UUID_Job:=$form.item.UUID
+						Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+					End if 
 				End if 
-				
 		End case 
 	End if 
 	This:C1470.drawPup_job()
@@ -575,7 +577,7 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "bActionInteractions"; $g; $heightSubform-$verticalMargin-$heightButton; $d; $heightSubform-$verticalMargin)
 			
 			
-			//OBJECT SET ENABLED(*; "bActionInteractions"; Form.sfw.checkIsInModification())
+			OBJECT SET ENABLED:C1123(*; "bActionInteractions"; Form:C1466.current_item.customer#Null:C1517)
 			This:C1470.drawPup_Interaction(["method"; "outcome"; "trigger"; "contact"; "sales"; "type"])
 			This:C1470.display_interactionDetails()
 			
