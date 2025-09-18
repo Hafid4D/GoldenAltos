@@ -386,28 +386,50 @@ Function drawPup_staff()
 	End if 
 	
 Function selectStaff()
+	
+	
+	
+	
 	If (Form:C1466.sfw.checkIsInModification())
+		
+		$selector:=cs:C1710.sfw_definitionSelector.new("selectorOwners"; "staff")
+		$selector.setTitle("Choose a Owner")
+		$selector.setCurrentItem(Form:C1466.current_item.staff)
+		$selector.setOptions("noCutLink")
+		$selector.openSelector()
+		
 		Case of 
-			: (FORM Event:C1606.code=On Getting Focus:K2:7) | (FORM Event:C1606.code=On Clicked:K2:4)
+			: ($selector.isSelected())
+				$itemSeleted:=$selector.getCurrentItem()
 				
-				OBJECT GET COORDINATES:C663(*; "pup_staff"; $l; $t; $r; $b)
-				CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
-				$form:=New object:C1471()
-				$form.lb_items:=ds:C1482.Staff.all()
-				$form.oo:=""
+				Case of 
+					: ($itemSeleted=Null:C1517)
+					: (cs:C1710.sfw_string.me.isAnEmptyUUID($itemSeleted.UUID)=False:C215)
+						Form:C1466.current_item.UUID_Staff:=$itemSeleted.UUID
+						If (cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_Staff)=True:C214)
+							Form:C1466.current_item.UUID_Staff:=16*"00"
+						End if 
+				End case 
+				This:C1470.drawPup_customer()
 				
-				$winRef:=Open form window:C675("selectStaff"; Pop up form window:K39:11; $l; $b+1)
-				DIALOG:C40("selectStaff"; $form)
-				CLOSE WINDOW:C154($winRef)
+			: ($selector.asCutTheLink())
+				Form:C1466.current_item.UUID_Staff:=16*"00"
 				
-				If (ok=1)
-					Form:C1466.current_item.UUID_Staff:=$form.item.UUID
-					Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
-				End if 
+			: ($selector.needCreation())
+				$selector.createANewEntity("cs.panel_lead.me.callbackAfterCreationOwner($1)")
 				
 		End case 
 	End if 
-	This:C1470.drawPup_staff()
+	
+	
+Function callbackAfterCreationOwner($key : Text)
+	Form:C1466.current_item.UUID_Staff:=$key
+	If (cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_Staff)=True:C214)
+		Form:C1466.current_item.UUID_Staff:=16*"00"
+	End if 
+	EXECUTE METHOD IN SUBFORM:C1085("detail_panel"; Formula:C1597(cs:C1710.panel_lead.me.drawPup_staff()); *)
+	
+	
 	
 	//mark:quote
 Function drawPup_quote()
@@ -535,20 +557,35 @@ Function redrawAndSetVisible()
 	
 	Case of 
 		: (FORM Get current page:C276(*)=1)
-			OBJECT GET COORDINATES:C663(*; "Rec_note"; $g; $t; $r; $b)
-			OBJECT SET COORDINATES:C1248(*; "Rec_note"; $g; $t; $r; $heightSubform)
+			OBJECT GET COORDINATES:C663(*; "lb_contacts"; $g; $t; $r; $b)
+			OBJECT SET COORDINATES:C1248(*; "lb_contacts"; $g; $t; $r; $heightSubform)
 			
 			
-			OBJECT GET COORDINATES:C663(*; "bar_history"; $g; $t; $r; $b)
-			OBJECT GET COORDINATES:C663(*; "Rec_history"; $gh; $th; $rh; $bh)
+			//OBJECT GET COORDINATES(*; "bar_history"; $g; $t; $r; $b)
+			//OBJECT GET COORDINATES(*; "Rec_history"; $gh; $th; $rh; $bh)
 			
-			OBJECT SET COORDINATES:C1248(*; "bar_history"; $g; $t; $widthSubform; $b)
-			OBJECT SET COORDINATES:C1248(*; "Rec_history"; $gh; $th; $widthSubform; $heightSubform)
+			//OBJECT SET COORDINATES(*; "bar_history"; $g; $t; $widthSubform; $b)
+			//OBJECT SET COORDINATES(*; "Rec_history"; $gh; $th; $widthSubform; $heightSubform)
 			
 		: (FORM Get current page:C276(*)=2)
-			OBJECT SET ENABLED:C1123(*; "bActionInteractions"; Form:C1466.sfw.checkIsInModification())
+			//OBJECT GET COORDINATES(*; "bActionInteractions"; $g; $t; $r; $b)
+			//OBJECT SET COORDINATES(*; "bActionInteractions"; $g; $heightSubform-(2*($b-$t)-$verticalMargin); $r; $heightSubform-($b-$t)-$verticalMargin)
+			OBJECT GET COORDINATES:C663(*; "bActionInteractions"; $g; $h; $d; $b)
+			$heightButton:=$b-$h
+			OBJECT SET COORDINATES:C1248(*; "bActionInteractions"; $g; $heightSubform-$verticalMargin-$heightButton; $d; $heightSubform-$verticalMargin)
+			
+			
+			//OBJECT SET ENABLED(*; "bActionInteractions"; Form.sfw.checkIsInModification())
 			This:C1470.drawPup_Interaction(["method"; "outcome"; "trigger"; "contact"; "sales"; "type"])
 			This:C1470.display_interactionDetails()
+			
+			OBJECT GET COORDINATES:C663(*; "Rectangle2"; $g; $t; $r; $b)
+			OBJECT SET COORDINATES:C1248(*; "Rectangle2"; $g; $t; $r; $heightSubform)
+			
+			
+			
+			OBJECT GET COORDINATES:C663(*; "lb_interactions"; $g; $t; $r; $b)
+			OBJECT SET COORDINATES:C1248(*; "lb_interactions"; $g; $t; $r; $heightSubform)
 			
 		: (FORM Get current page:C276(*)=3)
 			
@@ -575,7 +612,8 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_po()
 	This:C1470.drawPup_job()
 	
-	OBJECT SET ENABLED:C1123(*; "entryField_reasonWL"; (Form:C1466.current_item.currentStageID=6) || (Form:C1466.current_item.currentStageID=7))
+	//OBJECT SET ENABLED(*; "entryField_reasonWL"; (Form.current_item.currentStageID=6) || (Form.current_item.currentStageID=7))
+	OBJECT SET VISIBLE:C603(*; "entryField_reasonWL"; (Form:C1466.current_item.currentStageID=6) || (Form:C1466.current_item.currentStageID=7))
 	
 	
 	//mark:-BTN 
@@ -594,7 +632,7 @@ Function btnDatePickerCreate($object; $attribut; $stmp; $minMax)
 	var $currentDate : Date
 	$name:=OBJECT Get name:C1087
 	OBJECT GET COORDINATES:C663(*; $name; $x1; $y1; $x2; $y2)
-	CONVERT COORDINATES:C1365($x1; $y1; XY Current form:K27:5; XY Current window:K27:6)
+	CONVERT COORDINATES:C1365($x1; $y1; XY Current form:K27:5; XY Main window:K27:8)
 	
 	$currentDate:=Current date:C33()
 	Case of 
@@ -765,10 +803,16 @@ Function bActionInteractions()
 	$mainMenu:=Create menu:C408
 	
 	APPEND MENU ITEM:C411($mainMenu; "Cancel interaction"; *)
-	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--cancel")
+	If (Form:C1466.sfw.checkIsInModification())
+		SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--cancel")
+	Else 
+		DISABLE MENU ITEM:C150($mainMenu; -1)
+	End if 
+	
 	If (Form:C1466.current_interaction=Null:C1517) || (Form:C1466.current_interaction#Null:C1517 && Form:C1466.current_interaction.UUID_Type#$scheduledUUID)
 		DISABLE MENU ITEM:C150($mainMenu; -1)
 	End if 
+	
 	
 	//APPEND MENU ITEM($mainMenu; "Complete follow up"; *)
 	//SET MENU ITEM PARAMETER($mainMenu; -1; "--complete")
@@ -777,10 +821,20 @@ Function bActionInteractions()
 	//End if 
 	
 	APPEND MENU ITEM:C411($mainMenu; "Schedule follow up"; *)
-	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--schedule")
+	
+	If (Form:C1466.sfw.checkIsInModification())
+		SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--schedule")
+	Else 
+		DISABLE MENU ITEM:C150($mainMenu; -1)
+	End if 
 	
 	APPEND MENU ITEM:C411($mainMenu; "Log interaction"; *)
-	SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--log")
+	
+	If (Form:C1466.sfw.checkIsInModification())
+		SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "--log")
+	Else 
+		DISABLE MENU ITEM:C150($mainMenu; -1)
+	End if 
 	
 	
 	$choice:=Dynamic pop up menu:C1006($mainMenu)
@@ -1086,4 +1140,5 @@ Function callbackAfterCreationCustomer($key : Text)
 	If (cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_Customer)=True:C214)
 		Form:C1466.current_item.UUID_Customer:=16*"00"
 	End if 
-	This:C1470.drawPup_customer()
+	EXECUTE METHOD IN SUBFORM:C1085("detail_panel"; Formula:C1597(cs:C1710.panel_lead.me.drawPup_customer()); *)
+	

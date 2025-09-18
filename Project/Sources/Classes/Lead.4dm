@@ -1,7 +1,7 @@
 Class extends DataClass
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
-	$entry:=cs:C1710.sfw_definitionEntry.new("lead"; ["salesAndQuotes"]; "Leads")
+	$entry:=cs:C1710.sfw_definitionEntry.new("lead"; ["salesAndQuotes"]; "   Leads   ")
 	$entry.setDataclass("Lead")
 	$entry.setDisplayOrder(-500)
 	$entry.setIcon("image/entry/lead-50x50.png")
@@ -15,7 +15,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(3; ""; "Jobs & Deliveries")
 	
 	
-	$entry.setLBItemsColumn("leadCode"; "Lead ID"; "width:50")
+	$entry.setLBItemsColumn("leadCode"; "ID"; "width:50")
 	$entry.setLBItemsColumn("customerName"; "Customer"; "subject"; "width:300")
 	$entry.setLBItemsColumn("amountText"; "Amount"; "width:80"; "left"; "headerCenter")
 	
@@ -30,7 +30,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.activateComment()
 	$entry.activateSubscription()
 	//$entry.setValidationRule("UUID_Staff"; ""; "UUIDNotNull"; "message:The staff must be defined")
-	//$entry.setValidationRule("UUID_Customer"; ""; "UUIDNotNull"; "message:The customer must be defined")
+	$entry.setValidationRule("UUID_Customer"; ""; "UUIDNotNull"; "message:The customer must be defined")
 	//$entry.setValidationRule("dateCreation"; "entryField_dateCreation"; "mandatory")
 	//$entry.setValidationRule("UUID_ServiceType"; ""; "UUIDNotNull"; "message:The service must be defined")
 	//$entry.setValidationRule("currentStageID"; "entryField_dateCreation"; "mandatory")
