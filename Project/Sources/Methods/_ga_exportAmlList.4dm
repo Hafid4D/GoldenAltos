@@ -9,19 +9,13 @@ Purpose : This method export the items on Spec Control View List to an .xls docu
 */
 
 
-var $eSetting : cs:C1710.sfw_SettingEntity
-var $identEntry : Text:=Form:C1466.sfw.entry.ident
-var $entity : 4D:C1709.Entity
-var $info : Object
-var $wpBlob : 4D:C1709.Blob
-var $wpEncodedBlob : Text
 var $aml_es : cs:C1710.AMLSelection
 var $aml_e : cs:C1710.AMLEntity
 var $OK : Boolean
 var $listOfHeaders : Collection
 var $header; $separator_col; $separator_line : Text
 var $headers : Collection:=New collection:C1472()
-//var $aml_es : Collection:=New collection()
+
 
 $headers:=New collection:C1472("Division"; "Internal Part"; "Vendor Part"; "Description"; "Comments"; "Critical?")
 
@@ -87,7 +81,7 @@ If (OK=1)
 						
 						
 					: ($headerName="Critical?")
-						$data:=String:C10($supplier_e["critical"]=True:C214 ? "Yes" : "No")
+						$data:=String:C10($aml_e["critical"]=True:C214 ? "Yes" : "No")
 						SEND PACKET:C103($file; $data+$separator_col)
 						
 					Else 
