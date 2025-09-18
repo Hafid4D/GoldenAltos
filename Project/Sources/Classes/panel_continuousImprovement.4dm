@@ -258,6 +258,7 @@ Function responsibleEdit()
 		
 		$form.teams:=$hListItems
 		$winRef:=Open form window:C675("_ga_staffsPerTeam"; Movable dialog box:K34:7; Horizontally centered:K39:1; Vertically centered:K39:4)
+		SET WINDOW TITLE:C213("Select responsible persons")
 		DIALOG:C40("_ga_staffsPerTeam"; $form)
 		
 		If (OK=1)
