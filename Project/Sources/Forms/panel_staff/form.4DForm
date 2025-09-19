@@ -45,7 +45,7 @@
 					"stroke": "#808080",
 					"text": "Employee ID"
 				},
-				"entryField_code": {
+				"Field_code": {
 					"type": "input",
 					"top": 12,
 					"left": 112,
@@ -856,7 +856,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 1106,
+	"geometryStamp": 1107,
 	"editor": {
 		"groups": {
 			"Group": [
