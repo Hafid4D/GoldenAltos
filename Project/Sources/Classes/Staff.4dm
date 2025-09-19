@@ -22,9 +22,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("firstName"; "First Name"; "width:190")
 	$entry.setLBItemsColumn("lastName"; "Last Name"; "width:190")
 	
-	$entry.setLBItemsOrderBy("firstName")
+	$entry.setLBItemsOrderBy("code")
 	
-	$entry.setValidationRule("code"; "entryField_code"; "mandatory"; "trimSpace"; "message:The code is mandatory")
+	//$entry.setValidationRule("code"; "entryField_code"; "mandatory"; "trimSpace"; "message:The code is mandatory")
 	$entry.setValidationRule("firstName"; "entryField_firstName"; "mandatory"; "message:The first name is mandatory")
 	$entry.setValidationRule("lastName"; "entryField_lastName"; "mandatory"; "message:The last name is mandatory")
 	
@@ -70,7 +70,14 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$filter.setDefaultTitle("All Teams")
 	$filter.setFilterByManyToManyEntity("Team"; "name"; "memberships.team")
 	$filter.setDynamicTitle("name"; "## Team")
-	$filter.setOrderForItems("id")
+	$filter.setOrderForItems("name")
+	$entry.addFilter($filter)
+	
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterRole")
+	$filter.setDefaultTitle("All Roles")
+	$filter.setFilterByManyToManyEntity("Role"; "name"; "roles.role")
+	$filter.setDynamicTitle("name"; "## Role")
+	$filter.setOrderForItems("name")
 	$entry.addFilter($filter)
 	
 Function currentStaff()->$staffs : cs:C1710.StaffSelection
