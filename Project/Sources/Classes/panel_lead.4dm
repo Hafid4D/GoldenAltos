@@ -4,6 +4,8 @@ singleton Class constructor
 Function formMethod()
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
+		Form:C1466.lb_interactions:=ds:C1482.Interaction.newSelection()
+		
 		If (Form:C1466.current_item.dateCreation=!00-00-00!)
 			Form:C1466.current_item.dateCreation:=Current date:C33()
 		End if 
