@@ -56,8 +56,9 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2160.4692382812,
-				"top": 538.47967529297,
+				"left": 2147.4692382812,
+				"top": 587.47967529297,
+
 				"width": 226.30639648438,
 				"height": 417.9924621582
 			},
@@ -272,12 +273,79 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 693.33325195312,
-				"top": 1214.9998779297,
-				"width": 201.052734375,
-				"height": 554.33203125
+				"left": 694.33325195312,
+				"top": 1302.9998779297,
+				"width": 171.052734375,
+				"height": 591.33203125
 			},
-			"displayable_fields_count": 24
+			"displayable_fields_count": 26,
+			"fields_ordering": 2,
+			"fields": {
+				"UUID_Staff": {
+					"position": 3
+				},
+				"UUID_Customer": {
+					"position": 2
+				},
+				"availableQty": {
+					"position": 24
+				},
+				"originalQty": {
+					"position": 23
+				},
+				"property": {
+					"position": 22
+				},
+				"totalCost": {
+					"position": 21
+				},
+				"division": {
+					"position": 20
+				},
+				"recdBy": {
+					"position": 19
+				},
+				"binLocation": {
+					"position": 18
+				},
+				"currency": {
+					"position": 17
+				},
+				"inventoryUnits": {
+					"position": 16
+				},
+				"unitCost": {
+					"position": 15
+				},
+				"qtyInStock": {
+					"position": 14
+				},
+				"stockNum": {
+					"position": 11
+				},
+				"lotNumber": {
+					"position": 10
+				},
+				"classification": {
+					"position": 9
+				},
+				"description": {
+					"position": 8
+				},
+				"vendor": {
+					"position": 7
+				},
+				"customerSpecific": {
+					"position": 5
+				},
+				"customer_provided": {
+					"position": 4
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
+
 		},
 		"StepTemplateCertification": {
 			"color": {
@@ -471,10 +539,13 @@
 			"coordinates": {
 				"left": 2437.3334960938,
 				"top": 1052.6667480469,
-				"width": 169.69921875,
-				"height": 859.33203125
+
+				"width": 157.69921875,
+				"height": 845.33203125
 			},
-			"displayable_fields_count": 38
+			"displayable_fields_count": 38,
+			"fields_ordering": 1
+
 		},
 		"Job": {
 			"color": {
@@ -709,6 +780,70 @@
 				}
 			}
 		},
+		"Role": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 2454,
+				"top": 367,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
+		"RMA": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 485,
+				"top": 632,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
+		"StaffRole": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 2298,
+				"top": 369,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
+		"ManagementReview": {
+			"color": {
+				"red": 175,
+				"green": 188,
+				"blue": 191,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 4633,
+				"top": 2,
+				"width": 211,
+				"height": 211.33203125
+			},
+			"displayable_fields_count": 8
+		},
+
 		"QuoteEvent": {
 			"color": {
 				"red": 255,
@@ -1853,7 +1988,40 @@
 		}
 	},
 	"relations": {
-		"E7CDD4D8342FAC4D95737B5A1A5C9773": {
+		"0E72BCE9F2D1DD42AACAC9D9A43D448A": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"3A4C3C11226BB04AA8CC2E4638B32E50": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"4A57E13735132C4BB0F404855AB33900": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"4AA8439DBD366C4AA81A8F055DBFB727": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"D982B8553811B2468F440FBF6F888F44": {
+
 			"color": {
 				"red": 240,
 				"green": 240,
