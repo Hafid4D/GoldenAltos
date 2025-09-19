@@ -71,8 +71,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2159.4692382812,
-				"top": 533.47967529297,
+				"left": 2147.4692382812,
+				"top": 587.47967529297,
 				"width": 226.30639648438,
 				"height": 417.9924621582
 			},
@@ -337,12 +337,6 @@
 				},
 				"qtyInStock": {
 					"position": 14
-				},
-				"expirationDate": {
-					"position": 13
-				},
-				"dateIn": {
-					"position": 12
 				},
 				"stockNum": {
 					"position": 11
@@ -758,6 +752,54 @@
 					}
 				}
 			}
+		},
+		"Role": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 2454,
+				"top": 367,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
+		"RMA": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 485,
+				"top": 632,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
+		"StaffRole": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 2298,
+				"top": 369,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
 		},
 		"ManagementReview": {
 			"color": {
@@ -1965,6 +2007,30 @@
 		}
 	},
 	"relations": {
+		"3A4C3C11226BB04AA8CC2E4638B32E50": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"4A57E13735132C4BB0F404855AB33900": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"4AA8439DBD366C4AA81A8F055DBFB727": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"D982B8553811B2468F440FBF6F888F44": {
 			"color": {
 				"red": 240,
