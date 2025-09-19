@@ -291,12 +291,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 693.33325195312,
-				"top": 1214.9998779297,
+				"left": 694.33325195312,
+				"top": 1302.9998779297,
 				"width": 171.052734375,
-				"height": 558.33203125
+				"height": 591.33203125
 			},
-			"displayable_fields_count": 24,
+			"displayable_fields_count": 26,
 			"fields_ordering": 2,
 			"fields": {
 				"UUID_Staff": {
@@ -515,9 +515,9 @@
 				"left": 2437.3334960938,
 				"top": 1052.6667480469,
 				"width": 157.69921875,
-				"height": 755.33203125
+				"height": 845.33203125
 			},
-			"displayable_fields_count": 34,
+			"displayable_fields_count": 38,
 			"fields_ordering": 1
 		},
 		"Job": {
@@ -2007,6 +2007,14 @@
 		}
 	},
 	"relations": {
+		"0E72BCE9F2D1DD42AACAC9D9A43D448A": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"3A4C3C11226BB04AA8CC2E4638B32E50": {
 			"color": {
 				"red": 240,
