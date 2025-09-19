@@ -4,7 +4,6 @@ singleton Class constructor
 Function formMethod()
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
-		Form:C1466.lb_interactions:=ds:C1482.Interaction.newSelection()
 		
 		If (Form:C1466.current_item.dateCreation=!00-00-00!)
 			Form:C1466.current_item.dateCreation:=Current date:C33()
@@ -875,16 +874,16 @@ Function bActionInteractions()
 				End if 
 				$result:=$interaction.save()
 				
-				$context:=New object:C1471
-				$context.target:=Form:C1466.current_item.UUID
-				$context.targetDataclass:="Lead"
-				$context.Followupdate:=$followUPDate
-				$context.Contact:=$interaction.contact.fullName || ""
-				$context.Trigger:=$interaction.trigger.name || ""
+				//$context:=New object
+				//$context.target:=Form.current_item.UUID
+				//$context.targetDataclass:="Lead"
+				//$context.Followupdate:=$followUPDate
+				//$context.Contact:=$interaction.contact.fullName || ""
+				//$context.Trigger:=$interaction.trigger.name || ""
 				
-				$staff:=ds:C1482.Staff.query("UUID_User = :1"; cs:C1710.sfw_userManager.me.info.UUID).first()
-				$users:=New collection:C1472($staff.user.UUID)
-				cs:C1710.sfw_notificationManager.me._notify("InteractionScheduled"; $users; $context)
+				//$staff:=ds.Staff.query("UUID_User = :1"; cs.sfw_userManager.me.info.UUID).first()
+				//$users:=New collection($staff.user.UUID)
+				//cs.sfw_notificationManager.me._notify("InteractionScheduled"; $users; $context)
 				
 				Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($interaction).orderBy("stmpCreation desc")
 				cs:C1710.panel_lead.me._activate_save_cancel_button()
