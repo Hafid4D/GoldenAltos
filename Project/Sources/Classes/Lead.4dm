@@ -6,8 +6,13 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setDisplayOrder(-500)
 	$entry.setIcon("image/entry/lead-50x50.png")
 	
-	$entry.setSearchboxField("leadCode")
-	$entry.setSearchboxField("customerName")
+	//$entry.setSearchboxField("leadCode")
+	//$entry.setSearchboxField("customerName")
+	
+	$entry.setSearchField("attribute:numCode"; "tag:numCode"; "integer")
+	$entry.setSearchField("attribute:leadCode"; "tag:code")
+	$entry.setSearchField("attribute:customerName"; "tag:customer")
+	
 	$entry.setPanel("panel_lead"; 1)
 	
 	$entry.setPanelPage(1; ""; "Main")
@@ -29,6 +34,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.activateComment()
 	$entry.activateSubscription()
+	$entry.activateAssignation()
 	//$entry.setValidationRule("UUID_Staff"; ""; "UUIDNotNull"; "message:The staff must be defined")
 	$entry.setValidationRule("UUID_Customer"; ""; "UUIDNotNull"; "message:The customer must be defined")
 	//$entry.setValidationRule("dateCreation"; "entryField_dateCreation"; "mandatory")

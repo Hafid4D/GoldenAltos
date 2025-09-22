@@ -211,8 +211,8 @@ Function datePickerIcon($sourceExpression : Text)
 		: (FORM Event:C1606.code=On Load:K2:1)
 			$ptr->:=New object:C1471("hostForm"; Form:C1466; "hostSource"; $sourceExpression)
 			OBJECT GET COORDINATES:C663(*; FORM Event:C1606.objectName; $g; $h; $d; $b)
-			CONVERT COORDINATES:C1365($g; $h; XY Current form:K27:5; XY Screen:K27:7)
-			CONVERT COORDINATES:C1365($d; $b; XY Current form:K27:5; XY Screen:K27:7)
+			CONVERT COORDINATES:C1365($g; $h; XY Current form:K27:5; XY Main window:K27:8)
+			CONVERT COORDINATES:C1365($d; $b; XY Current form:K27:5; XY Main window:K27:8)
 			$ptr->hostCoordinates:=New object:C1471("left"; $g; "top"; $h; "right"; $d; "bottom"; $b)
 	End case 
 	

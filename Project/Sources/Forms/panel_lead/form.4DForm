@@ -915,10 +915,11 @@
 					"top": 158,
 					"width": 261,
 					"height": 17,
-					"dataSourceTypeHint": "text",
+					"dataSourceTypeHint": "date",
 					"dataSource": "Form:C1466.current_interaction.creationDate",
 					"borderStyle": "none",
-					"enterable": false
+					"enterable": false,
+					"entryFilter": "!0&9##/##/####"
 				},
 				"pup_method": {
 					"type": "button",
@@ -1092,10 +1093,11 @@
 					"top": 192,
 					"width": 261,
 					"height": 17,
-					"dataSourceTypeHint": "text",
+					"dataSourceTypeHint": "date",
 					"dataSource": "Form:C1466.current_interaction.followUPDate",
 					"borderStyle": "none",
-					"enterable": false
+					"enterable": false,
+					"entryFilter": "!0&9##/##/####"
 				},
 				"btnDatePickerCreate2": {
 					"type": "button",
@@ -1229,7 +1231,7 @@
 					"type": "listbox",
 					"left": 125,
 					"top": 114,
-					"width": 1161,
+					"width": 1009,
 					"height": 472,
 					"events": [
 						"onClick",
@@ -1254,8 +1256,11 @@
 							"footer": {
 								"name": "Footer12"
 							},
-							"width": 55,
-							"dataSource": "This:C1470.jobNumber"
+							"width": 45,
+							"dataSource": "This:C1470.jobNumber",
+							"maxWidth": 45,
+							"minWidth": 45,
+							"textAlign": "left"
 						},
 						{
 							"header": {
@@ -1266,7 +1271,9 @@
 							"footer": {
 								"name": "Footer7"
 							},
-							"width": 50
+							"width": 45,
+							"maxWidth": 45,
+							"minWidth": 45
 						},
 						{
 							"header": {
@@ -1277,7 +1284,9 @@
 							"footer": {
 								"name": "Footer4"
 							},
-							"width": 54
+							"width": 45,
+							"maxWidth": 45,
+							"minWidth": 45
 						},
 						{
 							"header": {
@@ -1288,8 +1297,10 @@
 							"footer": {
 								"name": "Footer6"
 							},
-							"width": 72,
-							"dataSource": "This:C1470.poNumber"
+							"width": 45,
+							"dataSource": "This:C1470.poNumber",
+							"maxWidth": 45,
+							"minWidth": 45
 						},
 						{
 							"header": {
@@ -1300,7 +1311,9 @@
 							"footer": {
 								"name": "Footer11"
 							},
-							"width": 85
+							"width": 60,
+							"minWidth": 60,
+							"maxWidth": 60
 						},
 						{
 							"header": {
@@ -1311,7 +1324,9 @@
 							"footer": {
 								"name": "Footer10"
 							},
-							"width": 87
+							"width": 80,
+							"maxWidth": 80,
+							"minWidth": 80
 						},
 						{
 							"header": {
@@ -1322,7 +1337,9 @@
 							"footer": {
 								"name": "Footer14"
 							},
-							"width": 76
+							"width": 70,
+							"maxWidth": 70,
+							"minWidth": 70
 						},
 						{
 							"header": {
@@ -1333,7 +1350,9 @@
 							"footer": {
 								"name": "Footer9"
 							},
-							"width": 61
+							"width": 65,
+							"maxWidth": 65,
+							"minWidth": 65
 						},
 						{
 							"header": {
@@ -1344,8 +1363,10 @@
 							"footer": {
 								"name": "Footer13"
 							},
-							"width": 125,
-							"dataSource": "This:C1470.jobComment"
+							"width": 90,
+							"dataSource": "This:C1470.jobComment",
+							"minWidth": 90,
+							"maxWidth": 90
 						},
 						{
 							"header": {
@@ -1356,7 +1377,9 @@
 							"footer": {
 								"name": "Footer16"
 							},
-							"width": 68
+							"width": 90,
+							"maxWidth": 90,
+							"minWidth": 90
 						},
 						{
 							"header": {
@@ -1367,7 +1390,9 @@
 							"footer": {
 								"name": "Footer17"
 							},
-							"width": 70
+							"width": 90,
+							"maxWidth": 90,
+							"minWidth": 90
 						},
 						{
 							"header": {
@@ -1378,7 +1403,9 @@
 							"footer": {
 								"name": "Footer8"
 							},
-							"width": 61
+							"width": 50,
+							"minWidth": 50,
+							"maxWidth": 50
 						},
 						{
 							"header": {
@@ -1390,7 +1417,9 @@
 								"name": "Footer18"
 							},
 							"dataSource": "This:C1470.process",
-							"width": 98
+							"width": 100,
+							"minWidth": 100,
+							"maxWidth": 100
 						},
 						{
 							"header": {
@@ -1402,7 +1431,9 @@
 								"name": "Footer15"
 							},
 							"dataSource": "",
-							"width": 95
+							"width": 100,
+							"minWidth": 100,
+							"maxWidth": 100
 						},
 						{
 							"header": {
@@ -1414,7 +1445,9 @@
 								"name": "Footer5"
 							},
 							"dataSource": "",
-							"width": 101
+							"width": 90,
+							"maxWidth": 3000000,
+							"minWidth": 90
 						}
 					]
 				},
@@ -1460,7 +1493,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 829,
+	"geometryStamp": 831,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {

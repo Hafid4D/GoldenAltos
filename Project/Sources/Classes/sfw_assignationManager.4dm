@@ -14,7 +14,7 @@ Function clicOnHeader
 	
 	
 	OBJECT GET COORDINATES:C663(*; "headerTabAssignation_bkgdbottom"; $g; $h; $d; $b)
-	CONVERT COORDINATES:C1365($g; $b; XY Current form:K27:5; XY Screen:K27:7)
+	CONVERT COORDINATES:C1365($g; $b; XY Current form:K27:5; XY Main window:K27:8)
 	$formData:=New object:C1471
 	$formData.current_item:=Form:C1466.current_item
 	$formData.entry:=Form:C1466.sfw.entry

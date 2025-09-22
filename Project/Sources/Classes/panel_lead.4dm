@@ -76,6 +76,27 @@ Function calculateCode()->$leadCode : Text
 	
 	$leadCode+=String:C10($test; "00000")
 	
+	
+Function btnDatePicker($object; $attribut)
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		$form:=New object:C1471
+		$form.date:=$object[$attribut]
+		
+		OBJECT GET COORDINATES:C663(Self:C308->; $left; $top; $rigth; $bottom)
+		CONVERT COORDINATES:C1365($left; $bottom; XY Current form:K27:5; XY Main window:K27:8)
+		Open window:C153($left; $bottom; $left+285; $bottom+210; Movable dialog box:K34:7; "calendar")
+		DIALOG:C40("_ga_calendar"; $form)
+		
+		If (OK=1)
+			$object[$attribut]:=$form.calendar.display.date
+			This:C1470._activate_save_cancel_button()
+		End if 
+		
+	End if 
+	
+	
+	
 Function loadInteractions()
 	$queryString:=""
 	$settings:=New object:C1471("parameters"; New object:C1471)
@@ -524,33 +545,6 @@ Function selectPO()
 		End case 
 	End if 
 	
-	//$selector:=cs.sfw_definitionSelector.new("selectorPO"; "purchaseOrders")
-	//$selector.setTitle("Select a Purchase Order")
-	//$selector.setCurrentItem(Form.current_item.customer.purchaseOrders)  //ds.Vacancier.get(Form.current_item.UUID_Vacancier))
-	//This.current_item:=Form.current_item
-	//$selector.setSubset("cs.panel_lead.me.subsetSelectorPurchaseOrders($1)")
-	//$selector.setOptions("noCreation")
-	////$selector.hPosition:="left"
-	//$selector.vPosition:="top"
-	//$selector.openSelector()
-	
-	//Case of 
-	//: ($selector.isSelected())
-	//$itemSeleted:=$selector.getCurrentItem()
-	
-	//Case of 
-	//: ($itemSeleted=Null)
-	//: (cs.sfw_string.me.isAnEmptyUUID($itemSeleted.UUID)=False)
-	//Form.current_item.UUID_PurchaseOrder:=$itemSeleted.UUID
-	//End case 
-	//This.drawPup_po()
-	//: ($selector.asCutTheLink())
-	//Form.current_item.UUID_PurchaseOrder:=16*"00"
-	
-	////: ($selector.needCreation())
-	////$selector.createANewEntity("cs.panel_inscription.me.callbackAfterCreationCollectivite($1)")
-	
-	//End case 
 	
 Function subsetSelectorPurchaseOrders()->$esPO : cs:C1710.PurchaseOrderSelection
 	
@@ -1181,13 +1175,13 @@ Function selectCustomer()
 						End if 
 				End case 
 				This:C1470.drawPup_customer()
-				
+				Form:C1466.current_item.deal:=True:C214
 			: ($selector.asCutTheLink())
 				Form:C1466.current_item.UUID_Customer:=16*"00"
 				
 			: ($selector.needCreation())
 				$selector.createANewEntity("cs.panel_lead.me.callbackAfterCreationCustomer($1)")
-				
+				Form:C1466.current_item.deal:=False:C215
 		End case 
 	End if 
 	

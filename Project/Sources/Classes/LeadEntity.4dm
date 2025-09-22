@@ -31,6 +31,8 @@ Function get dealType()->$name : Text
 		$name:="New customer"
 	End if 
 	
+Function get numCode()->$num : Integer
+	$num:=Num:C11(This:C1470.leadCode)
 	
 	
 	

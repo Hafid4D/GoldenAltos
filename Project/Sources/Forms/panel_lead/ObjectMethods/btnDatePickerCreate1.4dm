@@ -1,4 +1,5 @@
-cs:C1710.panel_lead.me.btnDatePickerCreate(Form:C1466.current_interaction; "stmpCreation"; True:C214; 2)
+//cs.panel_lead.me.btnDatePickerCreate(Form.current_interaction; "stmpCreation"; True; 2)
+cs:C1710.panel_lead.me.btnDatePicker(Form:C1466.current_interaction; "creationDate")
 //$info:=Form.current_interaction.save()
 //Form.current_interaction.reload()
 cs:C1710.panel_lead.me._activate_save_cancel_button()
