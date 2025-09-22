@@ -62,10 +62,51 @@ Function loadInventoryPulls()
 	
 Function bActionInvPull()
 	$refMenu:=Create menu:C408
-	APPEND MENU ITEM:C411($refMenu; "(New Inv Pull")
-	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--create")
-	APPEND MENU ITEM:C411($refMenu; "-")
-	APPEND MENU ITEM:C411($refMenu; "(Delete")
-	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")
+	
+	APPEND MENU ITEM:C411($refMenu; "Pull")
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--pull")
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
 	
 	$choose:=Dynamic pop up menu:C1006($refMenu)
+	
+	If ($choose#"")
+		$form:=New object:C1471(\
+			"invPull"; New object:C1471(\
+			"order"; Form:C1466.lb_pulls.length+1; \
+			"isPull"; True:C214; \
+			"date"; Current date:C33(); \
+			"currentQty"; Form:C1466.current_item.availableQty; \
+			"qtyToPull"; 0; \
+			"pulledBy"; "Hassan Sribet"; \
+			"note"; ""\
+			))
+		
+		$winRef:=Open form window:C675("create_invPull"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
+		DIALOG:C40("create_invPull"; $form)
+		CLOSE WINDOW:C154($winRef)
+		
+		If (OK=1)
+			$pull_e:=ds:C1482.InventoryPull.new()
+			
+			$pull_e.type:="Pull"
+			$pull_e.date:=cs:C1710.sfw_stmp.me.build($form.invPull.date)
+			$pull_e.qty:=$form.invPull.qtyToPull
+			$pull_e.remaining:=$form.invPull.currentQty-$form.invPull.qtyToPull
+			$pull_e.performedBy:=$form.invPull.pulledBy
+			$pull_e.lotNumber:=Form:C1466.currentStep.lotNumber
+			$pull_e.statusIQA:="N/A"
+			
+			$pull_e.UUID_Inventory:=Form:C1466.current_item.UUID
+			
+			$res:=$pull_e.save()
+			
+			If ($res.success)
+				Form:C1466.current_item.availableQty:=$pull_e.remaining
+				
+				This:C1470.loadInventoryPulls()
+				This:C1470._activate_save_cancel_button()
+			End if 
+		End if 
+	End if 

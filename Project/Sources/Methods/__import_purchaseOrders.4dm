@@ -1,5 +1,5 @@
 //%attributes = {"executedOnServer":true}
-var $eDepartment : cs:C1710.DepartmentEntity
+//var $eDepartment : cs.DepartmentEntity
 
 /**
 import po & po lines (po <-- po_lines)

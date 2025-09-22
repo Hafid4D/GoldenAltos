@@ -536,9 +536,9 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.inventory_e.dateIn",
+					"dataSource": "(Form:C1466.inventory_e.dateIn=0) ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(Form:C1466.inventory_e.dateIn)",
 					"dataSourceTypeHint": "date",
-					"dateFormat": "short"
+					"enterable": false
 				},
 				"header_bkgd16": {
 					"type": "rectangle",
@@ -656,9 +656,11 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.inventory_e.expirationDate",
+					"dataSource": "(Form:C1466.inventory_e.expirationDate=0) ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(Form:C1466.inventory_e.expirationDate)",
 					"dataSourceTypeHint": "date",
-					"dateFormat": "short"
+					"dateFormat": "short",
+					"method": "ObjectMethods/Input8.4dm",
+					"enterable": false
 				},
 				"header_bkgd29": {
 					"type": "rectangle",

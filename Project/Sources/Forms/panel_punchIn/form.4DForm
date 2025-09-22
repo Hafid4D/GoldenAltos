@@ -1173,10 +1173,191 @@
 					"style": "custom"
 				}
 			}
+		},
+		{
+			"objects": {
+				"lb_pulls": {
+					"type": "listbox",
+					"left": 107,
+					"top": 155,
+					"width": 782,
+					"height": 440,
+					"events": [
+						"onClick"
+					],
+					"headerHeight": "24px",
+					"listboxType": "collection",
+					"visibility": "visible",
+					"dataSource": "Form:C1466.lb_pulls",
+					"alternateFill": "#F7F9FC",
+					"right": 889,
+					"bottom": 595,
+					"currentItemSource": "Form:C1466.selectedPull",
+					"selectionMode": "single",
+					"method": "ObjectMethods/lb_pulls.4dm",
+					"columns": [
+						{
+							"header": {
+								"name": "Header13",
+								"text": "Date",
+								"fontWeight": "bold"
+							},
+							"name": "Column11",
+							"width": 80,
+							"dataSource": "cs:C1710.sfw_stmp.me.getDate(This:C1470.date)",
+							"footer": {
+								"name": "Footer13"
+							},
+							"resizable": false,
+							"enterable": false,
+							"dataSourceTypeHint": "date",
+							"textAlign": "center",
+							"dateFormat": "short"
+						},
+						{
+							"header": {
+								"text": "Type",
+								"name": "Header14",
+								"fontWeight": "bold"
+							},
+							"name": "Column12",
+							"footer": {
+								"name": "Footer14"
+							},
+							"width": 125,
+							"dataSource": "This:C1470.type",
+							"resizable": false,
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "Header15",
+								"text": "Quantity",
+								"fontWeight": "bold"
+							},
+							"name": "Column13",
+							"footer": {
+								"name": "Footer15"
+							},
+							"width": 110,
+							"dataSource": "This:C1470.qty",
+							"resizable": false,
+							"enterable": false,
+							"dataSourceTypeHint": "number",
+							"textAlign": "center"
+						},
+						{
+							"header": {
+								"name": "Header16",
+								"text": "Remaining Items",
+								"fontWeight": "bold"
+							},
+							"name": "Column14",
+							"footer": {
+								"name": "Footer16"
+							},
+							"width": 110,
+							"dataSource": "This:C1470.remaining",
+							"resizable": false,
+							"enterable": false,
+							"dataSourceTypeHint": "number",
+							"textAlign": "center"
+						},
+						{
+							"header": {
+								"name": "Header17",
+								"text": "Lot #",
+								"fontWeight": "bold"
+							},
+							"name": "Column15",
+							"footer": {
+								"name": "Footer17"
+							},
+							"width": 90,
+							"dataSource": "This:C1470.lotNumber",
+							"dataSourceTypeHint": "date",
+							"textAlign": "center",
+							"dateFormat": "short",
+							"resizable": false,
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "Header18",
+								"text": "Performed By",
+								"fontWeight": "bold"
+							},
+							"name": "Column16",
+							"footer": {
+								"name": "Footer18"
+							},
+							"width": 150,
+							"dataSource": "This:C1470.performedBy",
+							"dataSourceTypeHint": "date",
+							"textAlign": "center",
+							"dateFormat": "short",
+							"resizable": false,
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "Header19",
+								"text": "IQA Status",
+								"fontWeight": "bold"
+							},
+							"name": "Column17",
+							"footer": {
+								"name": "Footer19"
+							},
+							"width": 100,
+							"dataSource": "This:C1470.statusIQA",
+							"resizable": false,
+							"enterable": false
+						}
+					]
+				},
+				"rec_bkgd_2": {
+					"type": "rectangle",
+					"top": 154,
+					"left": 5,
+					"width": 100,
+					"height": 442,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"bActionPulls": {
+					"type": "button",
+					"text": "Actions",
+					"top": 571,
+					"left": 16,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionPulls.4dm",
+					"visibility": "visible"
+				},
+				"Text1": {
+					"type": "text",
+					"text": "Inventory Pulls",
+					"top": 161,
+					"left": 9,
+					"width": 92,
+					"height": 16,
+					"fontWeight": "bold",
+					"right": 101
+				}
+			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_4lines",
-	"geometryStamp": 817,
+	"geometryStamp": 859,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
