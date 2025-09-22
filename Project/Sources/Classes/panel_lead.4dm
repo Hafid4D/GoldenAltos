@@ -4,7 +4,9 @@ singleton Class constructor
 Function formMethod()
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
-		
+		If (Form:C1466.current_item.leadCode="")
+			Form:C1466.current_item.leadCode:=This:C1470.calculateCode()
+		End if 
 		If (Form:C1466.current_item.dateCreation=!00-00-00!)
 			Form:C1466.current_item.dateCreation:=Current date:C33()
 		End if 
@@ -67,6 +69,12 @@ Function formMethod()
 			
 	End case 
 	
+Function calculateCode()->$leadCode : Text
+	$leadCode:="L"
+	$test:=ds:C1482.sfw_Counter.query("ident = :1"; "leadCode").first().currentValue+1
+	
+	$leadCode+=String:C10($test; "00000")
+	
 Function loadInteractions()
 	$queryString:=""
 	$settings:=New object:C1471("parameters"; New object:C1471)
@@ -84,10 +92,10 @@ Function loadInteractions()
 	End if 
 	
 	If ($queryString="")
-		Form:C1466.lb_interactions:=Form:C1466.current_item.interactions.orderBy("stmpCreation desc")
+		Form:C1466.lb_interactions:=Form:C1466.current_item.interactions.orderBy("stmpCreation desc").copy()
 	Else 
 		$queryString+=" order by stmpCreation desc"
-		Form:C1466.lb_interactions:=Form:C1466.current_item.interactions.query($queryString; $settings)
+		Form:C1466.lb_interactions:=Form:C1466.current_item.interactions.query($queryString; $settings).copy()
 	End if 
 	
 Function loadContacts()
@@ -107,7 +115,7 @@ Function drawPup_serviceType()
 		$parts:=New collection:C1472(Form:C1466.current_item.serviceType.code; Form:C1466.current_item.serviceType.name)
 		$serviceName:=$parts.join(" - "; ck ignore null or empty:K85:5)
 		If ($serviceName="")
-			$serviceName:="Service"
+			$serviceName:=" "
 		End if 
 		$color:=cs:C1710.sfw_htmlColor.me.getName(Form:C1466.current_item.serviceType.color)
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
@@ -116,9 +124,11 @@ Function drawPup_serviceType()
 	
 Function display_interactionDetails()
 	OBJECT SET VISIBLE:C603(*; "interaction@"; Form:C1466.current_interaction#Null:C1517)
-	OBJECT SET VISIBLE:C603(*; "Inter_input@"; Form:C1466.current_interaction#Null:C1517)
+	OBJECT SET VISIBLE:C603(*; "entryField_Inter_input@"; Form:C1466.current_interaction#Null:C1517)
 	OBJECT SET VISIBLE:C603(*; "btnDatePickerCreate@"; Form:C1466.current_interaction#Null:C1517)
 	
+	OBJECT SET ENTERABLE:C238(*; "entryField_Inter_input@"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET ENABLED:C1123(*; "entryField_Inter_input@"; Form:C1466.sfw.checkIsInModification())
 Function drawPup_Interaction($widgets : Collection)
 	var $item : Object
 	For each ($widget; $widgets)
@@ -342,7 +352,7 @@ Function pup_nextStep()
 	//mark:Customer
 Function drawPup_customer()
 	If (Form:C1466.current_item#Null:C1517)
-		$name:=Form:C1466.current_item.customer.name || "Customer"
+		$name:=Form:C1466.current_item.customer.name || " "
 		Form:C1466.sfw.drawButtonPup("pup_customer"; $name; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.customer=Null:C1517))
 	End if 
 	
@@ -382,7 +392,7 @@ Function _clearInfoAfterChangingCustomer()
 	//mark:Staff
 Function drawPup_staff()
 	If (Form:C1466.current_item#Null:C1517)
-		$staffName:=Form:C1466.current_item.staff.fullName || "Staff"
+		$staffName:=Form:C1466.current_item.staff.fullName || ""
 		Form:C1466.sfw.drawButtonPup("pup_staff"; $staffName; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.staff=Null:C1517))
 	End if 
 	
@@ -633,32 +643,34 @@ Function btnCreateCustomer()
 	
 Function btnDatePickerCreate($object; $attribut; $stmp; $minMax)
 	var $currentDate : Date
-	$name:=OBJECT Get name:C1087
-	OBJECT GET COORDINATES:C663(*; $name; $x1; $y1; $x2; $y2)
-	CONVERT COORDINATES:C1365($x1; $y1; XY Current form:K27:5; XY Main window:K27:8)
 	
-	$currentDate:=Current date:C33()
-	Case of 
-		: (Num:C11($minMax)=1)
-			DatePicker SET DEFAULT MAX DATE(!2040-01-01!)
-			DatePicker SET DEFAULT MIN DATE($currentDate)
-			
-		: (Num:C11($minMax)=2)
-			DatePicker SET DEFAULT MIN DATE(!2004-01-01!)
-			DatePicker SET DEFAULT MAX DATE($currentDate)
-			
-	End case 
-	
-	
-	$test:=DatePicker Display Dialog($x1; $y1; Current date:C33())
-	If ($test#!00-00-00!)
-		If (Bool:C1537($stmp))
-			$object[$attribut]:=cs:C1710.sfw_stmp.me.build($test)
-		Else 
-			$object[$attribut]:=$test
+	If (Form:C1466.sfw.checkIsInModification())
+		$name:=OBJECT Get name:C1087
+		OBJECT GET COORDINATES:C663(*; $name; $x1; $y1; $x2; $y2)
+		CONVERT COORDINATES:C1365($x1; $y1; XY Current window:K27:6; XY Current window:K27:6)
+		
+		$currentDate:=Current date:C33()
+		Case of 
+			: (Num:C11($minMax)=1)
+				DatePicker SET DEFAULT MAX DATE(!2040-01-01!)
+				DatePicker SET DEFAULT MIN DATE($currentDate)
+				
+			: (Num:C11($minMax)=2)
+				DatePicker SET DEFAULT MIN DATE(!2004-01-01!)
+				DatePicker SET DEFAULT MAX DATE($currentDate)
+				
+		End case 
+		
+		
+		$test:=DatePicker Display Dialog($x1; $y1; Current date:C33())
+		If ($test#!00-00-00!)
+			If (Bool:C1537($stmp))
+				$object[$attribut]:=cs:C1710.sfw_stmp.me.build($test)
+			Else 
+				$object[$attribut]:=$test
+			End if 
 		End if 
 	End if 
-	
 	
 Function btnDatePickerClose()
 	If (Form:C1466.sfw.checkIsInModification())
@@ -791,6 +803,7 @@ Function _activate_save_cancel_button()
 Function bActionInteractions()
 	var $interaction : cs:C1710.InteractionEntity
 	var $status : cs:C1710.InteractionTypeEntity
+	var $selection : cs:C1710.InteractionSelection:=ds:C1482.Interaction.newSelection()
 	
 	If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.interactionType=Null:C1517)
 		ds:C1482.InteractionType.cacheLoad()
@@ -874,18 +887,12 @@ Function bActionInteractions()
 				End if 
 				$result:=$interaction.save()
 				
-				//$context:=New object
-				//$context.target:=Form.current_item.UUID
-				//$context.targetDataclass:="Lead"
-				//$context.Followupdate:=$followUPDate
-				//$context.Contact:=$interaction.contact.fullName || ""
-				//$context.Trigger:=$interaction.trigger.name || ""
 				
-				//$staff:=ds.Staff.query("UUID_User = :1"; cs.sfw_userManager.me.info.UUID).first()
-				//$users:=New collection($staff.user.UUID)
-				//cs.sfw_notificationManager.me._notify("InteractionScheduled"; $users; $context)
+				$selection:=$selection.add(Form:C1466.lb_interactions)
 				
-				Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($interaction).orderBy("stmpCreation desc")
+				$selection:=$selection.add($interaction)
+				
+				Form:C1466.lb_interactions:=$selection.orderBy("stmpCreation desc")
 				cs:C1710.panel_lead.me._activate_save_cancel_button()
 			End if 
 			

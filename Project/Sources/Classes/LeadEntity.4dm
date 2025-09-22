@@ -31,6 +31,9 @@ Function get dealType()->$name : Text
 		$name:="New customer"
 	End if 
 	
+	
+	
+	
 Function get stage()->$stage : Text
 	var $eLeadStage : cs:C1710.LeadStageEntity
 	$eLeadStage:=ds:C1482.LeadStage.query("stageID = :1"; Num:C11(This:C1470.currentStageID)).first()
@@ -147,7 +150,8 @@ local Function mainContact()->$mainContact : cs:C1710.ContactEntity
 	
 	
 local Function beforeSave()
-	// This callback is called before saving the current item
+	
+	
 	
 	$updatedInteractions:=Form:C1466.current_clone.interactions.minus(Form:C1466.current_item.interactions)
 	If ($updatedInteractions.length>0)
@@ -165,4 +169,7 @@ local Function beforeSave()
 			
 		End for each 
 	End if 
+	
+	
+	
 	
