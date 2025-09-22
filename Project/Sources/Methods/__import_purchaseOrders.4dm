@@ -205,7 +205,8 @@ If (True:C214)
 		End for each 
 		
 		
-		For each ($lot; $record.lots)
+		For each ($lot; $record.lots.orderBy("parentLotNumber asc"))
+			
 			$lot_e:=ds:C1482.Lot.new()
 			
 			$lot_e.lotNumber:=$lot.lotNum
@@ -249,6 +250,16 @@ If (True:C214)
 			$lot_e.status:=$lot.status
 			
 			$lot_e.UUID_Job:=$job.UUID
+			
+			If ($lot.parentLotNumber#"")
+				$lots_es:=ds:C1482.Lot.query("lotNumber = :1"; $lot.parentLotNumber)
+				
+				If ($lots_es.length>0)
+					$lot_e.UUID_LotParent:=$lots_es[0].UUID
+				Else 
+					TRACE:C157
+				End if 
+			End if 
 			
 			$res:=$lot_e.save()
 			
@@ -304,6 +315,29 @@ If (True:C214)
 		End for each 
 		
 	End for each 
+	
+/**
+fix lotParent for some lots
+**/
+	
+	$lots_es:=ds:C1482.Lot.all().minus(ds:C1482.Lot.all().lotParent.subLots).query("lotNumber = :1"; "@-@")
+	
+	For each ($lot; $lots_es)
+		$parentLotNumber:=Split string:C1554($lot.lotNumber; "-")[0]
+		
+		$parent_es:=ds:C1482.Lot.query("lotNumber = :1"; $parentLotNumber)
+		
+		If ($parent_es.length>0)
+			$lot.UUID_LotParent:=$parent_es[0].UUID
+			
+			$res:=$lot.save()
+			
+			If (Not:C34($res.success))
+				TRACE:C157
+			End if 
+		End if 
+	End for each 
+	
 End if 
 
 /**

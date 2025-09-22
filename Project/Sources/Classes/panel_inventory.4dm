@@ -78,6 +78,7 @@ Function loadInventoryPulls()
 	
 Function bActionInvPull()
 	$refMenu:=Create menu:C408
+
 	APPEND MENU ITEM:C411($refMenu; "Put Back")
 	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--put-back")
 	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
@@ -111,7 +112,6 @@ Function bActionInvPull()
 		
 		If (OK=1)
 			$pull_e:=ds:C1482.InventoryPull.new()
-			
 			$pull_e.type:=($form.invPull.isPull) ? "Pull" : "Put Back"
 			$pull_e.date:=cs:C1710.sfw_stmp.me.build($form.invPull.date)
 			$pull_e.qty:=$form.invPull.qtyToPull

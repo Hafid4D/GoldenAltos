@@ -11,11 +11,10 @@ Function formMethod()
 		
 		Form:C1466.addressBilling:=1
 		Form:C1466.addressShipping:=0
-		Form:C1466.apContact:=1
-		Form:C1466.statusContact:=0
-		This:C1470.LoadContact()
+		//Form.apContact:=1
+		//Form.statusContact:=0
+		//This.LoadContact()
 		This:C1470.loadAllTabs()
-		
 	End if 
 	
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  // a page is displayed so it's time to load the sources of data to display
@@ -27,6 +26,7 @@ Function formMethod()
 				
 				// add load functions
 				This:C1470.LoadContact()
+
 				
 				//________________________________________
 			: (FORM Get current page:C276(*)=2)
@@ -301,7 +301,6 @@ Function contactDetails()
 		Form:C1466.subFormAddress:=New object:C1471(\
 			)
 		Form:C1466.subFormAddress.address:=Form:C1466.current_item.rebuildAddress()
-		Form:C1466.lb_contact:=Form:C1466.current_item.rebuildContact()
 		Form:C1466.subFormAddress.situation:=Form:C1466.situation
 		
 	End if 
@@ -372,6 +371,7 @@ Function LoadContact()
 	End if 
 	
 Function loadXXX()
+
 	
 	// Loads and initializes a list
 	
