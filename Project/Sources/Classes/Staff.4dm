@@ -18,7 +18,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(3; ""; "Settings"; "allowedProfiles:admin")
 	
 	
-	$entry.setLBItemsColumn("code"; "Code"; "width:70"; "center")
+	$entry.setLBItemsColumn("code"; "Code"; "width:50"; "center")
 	$entry.setLBItemsColumn("firstName"; "First Name"; "width:190")
 	$entry.setLBItemsColumn("lastName"; "Last Name"; "width:190")
 	

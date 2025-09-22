@@ -19,8 +19,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(6; "staff-32x32.png"; "Invoices")
 	//$entry.setPanelPage(7; "staff-32x32.png"; "Timeline")
 	
-	$entry.setLBItemsColumn("name"; "Name"; "xliff:entry.customer.field.name"; "width:300")
-	$entry.setLBItemsColumn("code"; "Code"; "xliff:entry.customer.field.name"; "width:200")
+	
+	$entry.setLBItemsColumn("code"; "Code"; "xliff:entry.customer.field.name"; "width:80")
+	$entry.setLBItemsColumn("name"; "Name"; "xliff:entry.customer.field.name"; "width:200")
+	
 	
 	$entry.setLBItemsOrderBy("name")
 	

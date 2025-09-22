@@ -1,3 +1,4 @@
+property current_item : cs:C1710.LeadEntity
 singleton Class constructor
 	
 	
@@ -125,6 +126,7 @@ Function drawPup_serviceType()
 Function display_interactionDetails()
 	OBJECT SET VISIBLE:C603(*; "interaction@"; Form:C1466.current_interaction#Null:C1517)
 	OBJECT SET VISIBLE:C603(*; "entryField_Inter_input@"; Form:C1466.current_interaction#Null:C1517)
+	OBJECT SET VISIBLE:C603(*; "Inter_input_number"; Form:C1466.current_interaction#Null:C1517)
 	OBJECT SET VISIBLE:C603(*; "btnDatePickerCreate@"; Form:C1466.current_interaction#Null:C1517)
 	
 	OBJECT SET ENTERABLE:C238(*; "entryField_Inter_input@"; Form:C1466.sfw.checkIsInModification())
@@ -457,15 +459,16 @@ Function drawPup_method()
 	
 	
 Function selectQuote
-	If (Form:C1466.sfw.checkIsInModification())
+	If (Form:C1466.sfw.checkIsInModification()) && (Form:C1466.current_item.customer.quotes.length>0)
+		
 		Case of 
 			: (FORM Event:C1606.code=On Getting Focus:K2:7) | (FORM Event:C1606.code=On Clicked:K2:4)
 				
 				OBJECT GET COORDINATES:C663(*; "pup_quote"; $l; $t; $r; $b)
 				CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
 				$form:=New object:C1471()
-				$form.lb_items:=Form:C1466.current_item.customer.contacts.quotes
-				$form.current_item:=Form:C1466.current_item.customer.contacts.quotes
+				$form.lb_items:=Form:C1466.current_item.customer.quotes
+				$form.current_item:=Form:C1466.current_item.customer.quotes
 				$form.oo:=""
 				
 				$winRef:=Open form window:C675("selectQuote"; Pop up form window:K39:11; $l; $b+1)
@@ -478,6 +481,7 @@ Function selectQuote
 				End if 
 				
 		End case 
+		
 	End if 
 	This:C1470.drawPup_quote()
 	
@@ -492,7 +496,8 @@ Function drawPup_po()
 	
 	
 Function selectPO()
-	If (Form:C1466.sfw.checkIsInModification())
+	var $selector : cs:C1710.sfw_definitionSelector
+	If (Form:C1466.sfw.checkIsInModification()) && (Form:C1466.current_item.customer.purchaseOrders.length>0)
 		Case of 
 			: (FORM Event:C1606.code=On Getting Focus:K2:7) | (FORM Event:C1606.code=On Clicked:K2:4)
 				
@@ -512,13 +517,44 @@ Function selectPO()
 				
 				If (ok=1)
 					Form:C1466.current_item.UUID_PurchaseOrder:=$form.item.UUID
+					Form:C1466.current_item.job:=Null:C1517
 					Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
 				End if 
 				
 		End case 
 	End if 
 	
-	This:C1470.drawPup_po()
+	//$selector:=cs.sfw_definitionSelector.new("selectorPO"; "purchaseOrders")
+	//$selector.setTitle("Select a Purchase Order")
+	//$selector.setCurrentItem(Form.current_item.customer.purchaseOrders)  //ds.Vacancier.get(Form.current_item.UUID_Vacancier))
+	//This.current_item:=Form.current_item
+	//$selector.setSubset("cs.panel_lead.me.subsetSelectorPurchaseOrders($1)")
+	//$selector.setOptions("noCreation")
+	////$selector.hPosition:="left"
+	//$selector.vPosition:="top"
+	//$selector.openSelector()
+	
+	//Case of 
+	//: ($selector.isSelected())
+	//$itemSeleted:=$selector.getCurrentItem()
+	
+	//Case of 
+	//: ($itemSeleted=Null)
+	//: (cs.sfw_string.me.isAnEmptyUUID($itemSeleted.UUID)=False)
+	//Form.current_item.UUID_PurchaseOrder:=$itemSeleted.UUID
+	//End case 
+	//This.drawPup_po()
+	//: ($selector.asCutTheLink())
+	//Form.current_item.UUID_PurchaseOrder:=16*"00"
+	
+	////: ($selector.needCreation())
+	////$selector.createANewEntity("cs.panel_inscription.me.callbackAfterCreationCollectivite($1)")
+	
+	//End case 
+	
+Function subsetSelectorPurchaseOrders()->$esPO : cs:C1710.PurchaseOrderSelection
+	
+	$esPO:=This:C1470.current_item.customer.purchaseOrders
 	
 	//mark:Job
 Function drawPup_job()
@@ -531,7 +567,7 @@ Function drawPup_job()
 	
 Function selectJob()
 	
-	If (Form:C1466.sfw.checkIsInModification())
+	If (Form:C1466.sfw.checkIsInModification()) && (Form:C1466.current_item.purchaseOrder#Null:C1517)
 		Case of 
 			: (FORM Event:C1606.code=On Getting Focus:K2:7) | (FORM Event:C1606.code=On Clicked:K2:4)
 				
@@ -627,7 +663,10 @@ Function redrawAndSetVisible()
 	
 	//OBJECT SET ENABLED(*; "entryField_reasonWL"; (Form.current_item.currentStageID=6) || (Form.current_item.currentStageID=7))
 	OBJECT SET VISIBLE:C603(*; "entryField_reasonWL"; (Form:C1466.current_item.currentStageID=6) || (Form:C1466.current_item.currentStageID=7))
-	
+	OBJECT SET ENABLED:C1123(*; "pup_quote"; (Form:C1466.current_item.customer.quotes.length>0))
+	OBJECT SET ENABLED:C1123(*; "pup_po"; (Form:C1466.current_item.customer.purchaseOrders.length>0))
+	OBJECT SET ENABLED:C1123(*; "pup_job"; (Form:C1466.current_item.purchaseOrder#Null:C1517))
+	This:C1470.display_interactionDetails()
 	
 	//mark:-BTN 
 Function btnOpenCustomer()
@@ -647,7 +686,7 @@ Function btnDatePickerCreate($object; $attribut; $stmp; $minMax)
 	If (Form:C1466.sfw.checkIsInModification())
 		$name:=OBJECT Get name:C1087
 		OBJECT GET COORDINATES:C663(*; $name; $x1; $y1; $x2; $y2)
-		CONVERT COORDINATES:C1365($x1; $y1; XY Current window:K27:6; XY Current window:K27:6)
+		CONVERT COORDINATES:C1365($x1; $y1; XY Current form:K27:5; XY Current window:K27:6)
 		
 		$currentDate:=Current date:C33()
 		Case of 
@@ -925,8 +964,11 @@ Function bActionInteractions()
 					$interaction.UUID_Type:=$status.UUID
 				End if 
 				$result:=$interaction.save()
-				Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($interaction).orderBy("stmpCreation desc")
+				//Form.lb_interactions:=Form.lb_interactions.add($interaction).orderBy("stmpCreation desc")  // aaa
 				
+				$selection:=$selection.add(Form:C1466.lb_interactions)
+				$selection:=$selection.add($interaction)
+				Form:C1466.lb_interactions:=$selection.orderBy("stmpCreation desc")
 				
 				If ($form.nextFollowUp)
 					$scheduledInteraction:=ds:C1482.Interaction.new()
@@ -955,7 +997,12 @@ Function bActionInteractions()
 					$users:=New collection:C1472($staff.user.UUID)
 					cs:C1710.sfw_notificationManager.me._notify("InteractionScheduled"; $users; $context)
 					
-					Form:C1466.lb_interactions:=Form:C1466.lb_interactions.add($scheduledInteraction).orderBy("number desc")
+					//Form.lb_interactions:=Form.lb_interactions.add($scheduledInteraction).orderBy("number desc")
+					
+					$selection:=$selection.add(Form:C1466.lb_interactions)
+					$selection:=$selection.add($interaction)
+					Form:C1466.lb_interactions:=$selection.orderBy("stmpCreation desc")
+					
 					
 				End if 
 				
