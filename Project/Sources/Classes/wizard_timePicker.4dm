@@ -10,7 +10,7 @@ Function formMethod()
 			
 			Form:C1466.time:=New object:C1471
 			Form:C1466.time.display:=New object:C1471
-			Form:C1466.time.display.timeStamp:=cs:C1710.sfw_stmp.me.getTime(Current time:C178())  //(Form.timeStamp)
+			Form:C1466.time.display.timeStamp:=cs:C1710.sfw_stmp.me.getTime(Form:C1466.timeStamp)
 			This:C1470.wizard_timePicker_init()
 			
 			
@@ -59,11 +59,12 @@ Function wizard_timePicker_init()
 				Form:C1466.hour:="12"
 			End if 
 			Form:C1466.pm:=1
-			
+			Form:C1466.am:=0
 		Else 
 			
 			If (Num:C11(Form:C1466.hour)#0)
 				Form:C1466.am:=1
+				Form:C1466.pm:=0
 			End if 
 			
 	End case 
@@ -146,8 +147,10 @@ Function bNow()
 	If (Num:C11(Form:C1466.hour)>12)
 		Form:C1466.hour:=String:C10(Num:C11(Form:C1466.hour)%12)
 		Form:C1466.pm:=1
+		Form:C1466.am:=0
 	Else 
 		Form:C1466.am:=1
+		Form:C1466.pm:=0
 	End if 
 	
 	$hour:=Num:C11(Form:C1466.hour)<10 ? String:C10("0"+String:C10(Num:C11(Form:C1466.hour))) : String:C10(Num:C11(Form:C1466.hour))

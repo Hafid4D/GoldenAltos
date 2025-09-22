@@ -63,7 +63,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	// MARK: - Views Definition
 	
 	// MARK: Equipment out of calibration List
-	$view:=cs:C1710.sfw_definitionView.new("equipmentsOutOfCalibration"; "Equipments out of calibration")
+	$view:=cs:C1710.sfw_definitionView.new("equipmentsOutOfCalibration"; "Equipments out of calibration")  //Calibration Overdue
 	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
 	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
 	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
@@ -72,18 +72,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setSubset("equipmentsOutOfCalibration")
 	$entry.setView($view)
 	
-	// MARK: Prevent Maintenance List
-	$view:=cs:C1710.sfw_definitionView.new("pmEquipments"; "Prevent Maintenance equipments")
-	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
-	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
-	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
-	$view.setLBItemsOrderBy("assignedID")
-	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
-	$view.setSubset("pmEquipments")
-	$entry.setView($view)
-	
-	// MARK: Due calibration List
-	$view:=cs:C1710.sfw_definitionView.new("dueCalibrationEquipments"; "Due calibration equipments")
+	// MARK: List of Equipments to be calibrated in X days
+	$view:=cs:C1710.sfw_definitionView.new("dueCalibrationEquipments"; "Equipments to be calibrated in X days")
 	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
 	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
 	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
@@ -92,14 +82,58 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setSubset("dueCalibrationEquipments")
 	$entry.setView($view)
 	
-	// MARK: Due Prevent Maintenance List
-	$view:=cs:C1710.sfw_definitionView.new("duePMEquipments"; "Due Prevent Maintenance equipments")
+	// MARK: List of Equipments to be calibrated in X days Exclude NPU
+	$view:=cs:C1710.sfw_definitionView.new("dueCalibrationEquipmentsExculeNPU"; "Equipments to be calibrated in X days exclude NPU")
 	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
 	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
 	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
 	$view.setLBItemsOrderBy("assignedID")
 	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
-	$view.setSubset("duePMEquipments")
+	$view.setSubset("dueCalibrationEquipmentsExculeNPU")
+	$entry.setView($view)
+	
+	// MARK:  List of equipment not requiring calibration
+	$view:=cs:C1710.sfw_definitionView.new("calibrationNotRequired"; "Equipments not requiring calibration")
+	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
+	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
+	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
+	$view.setLBItemsOrderBy("assignedID")
+	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
+	$view.setSubset("calibrationNotRequired")
+	$entry.setView($view)
+	
+	
+	
+	// MARK: Prevent Maintenance equipments within X days
+	$view:=cs:C1710.sfw_definitionView.new("pmEquipments"; "Prevent Maintenance within X days")
+	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
+	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
+	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
+	$view.setLBItemsOrderBy("assignedID")
+	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
+	$view.setSubset("pmEquipments")
+	$entry.setView($view)
+	
+	
+	// MARK: Prevent Maintenance equipments within X days Exlude NPU
+	$view:=cs:C1710.sfw_definitionView.new("duePMEquipmentsExcludeNPU"; "Prevent Maintenance within X days exclude NPU")
+	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
+	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
+	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
+	$view.setLBItemsOrderBy("assignedID")
+	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
+	$view.setSubset("duePMEquipmentsExcludeNPU")
+	$entry.setView($view)
+	
+	
+	// MARK: NPU Equipments list
+	$view:=cs:C1710.sfw_definitionView.new("NPUEquipments"; "NPU Equipments")
+	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
+	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
+	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
+	$view.setLBItemsOrderBy("assignedID")
+	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
+	$view.setSubset("NPUEquipments")
 	$entry.setView($view)
 	
 	// MARK:  List of equipment down
@@ -112,14 +146,25 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setSubset("equipmentsDownOrOnHold")
 	$entry.setView($view)
 	
-	// MARK:  List of equipment down
-	$view:=cs:C1710.sfw_definitionView.new("calibrationExemptList"; "Calibration-exempt list")
+	
+	// MARK:  List of equipment Decommissioned
+	$view:=cs:C1710.sfw_definitionView.new("decommissionedEquipment"; "Decommissioned Equipments")
 	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
 	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
 	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
 	$view.setLBItemsOrderBy("assignedID")
 	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
-	$view.setSubset("calibrationExemptList")
+	$view.setSubset("decommissionedEquipment")
+	$entry.setView($view)
+	
+	// MARK:  PM Required Equipements
+	$view:=cs:C1710.sfw_definitionView.new("PMRequiredEquipments"; "PM Required")
+	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
+	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
+	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
+	$view.setLBItemsOrderBy("assignedID")
+	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
+	$view.setSubset("PMRequiredEquipments")
 	$entry.setView($view)
 	
 	
@@ -161,7 +206,7 @@ local Function setDateInterval($pushUp; $title)
 		$mouseX:=$mouseX-100
 	End if 
 	$form.pushUp:=$pushUp
-	$windRef:=Open window:C153($mouseX; $mouseY; $mouseX+270; $mouseY+165; Movable dialog box:K34:7; $title)
+	$windRef:=Open window:C153($mouseX; $mouseY; $mouseX+270; $mouseY+165; Movable dialog box:K34:7; "Set date interval")
 	DIALOG:C40("_ga_setDateInterval"; $form)
 	CLOSE WINDOW:C154($windRef)
 	Use (Storage:C1525.cache)
@@ -171,38 +216,56 @@ local Function setDateInterval($pushUp; $title)
 	End use 
 	
 	
-Function equipmentsOutOfCalibration()->$equipments : cs:C1710.EquipmentSelection
-	$title:="Set date interval"
-	This:C1470.setDateInterval(False:C215; $title)
-	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & calibrationNotRequired=:2 & notAtSite=:3"; Storage:C1525.cache.endDate; False:C215; False:C215)
+local Function equipmentsOutOfCalibration()->$equipments : cs:C1710.EquipmentSelection  //Calibration Overdue
+	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & calibrationNotRequired=:2 & notAtSite=:3"; Current date:C33(*); False:C215; False:C215)  // Storage.cache.endDate
 	
+local Function dueCalibrationEquipments()->$equipments : cs:C1710.EquipmentSelection  //List of equip to be calibrated within X days
+	Use (Storage:C1525.cache)
+		Storage:C1525.cache.startDate:=Current date:C33(*)
+	End use 
+	This:C1470.setDateInterval(False:C215)
+	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & notAtSite=:2"; Storage:C1525.cache.endDate; False:C215)
 	
-Function pmEquipments()->$equipments : cs:C1710.EquipmentSelection
-	$title:="Set date interval"
-	This:C1470.setDateInterval(False:C215; $title)
-	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3"; Storage:C1525.cache.endDate; !00-00-00!; False:C215)
-	
-	
-Function dueCalibrationEquipments()->$equipments : cs:C1710.EquipmentSelection
-	$title:="Set date interval"
-	This:C1470.setDateInterval(False:C215; $title)
+local Function dueCalibrationEquipmentsExculeNPU()->$equipments : cs:C1710.EquipmentSelection  //List of equip to be calibrated within X days exclude NPU 
+	Use (Storage:C1525.cache)
+		Storage:C1525.cache.startDate:=Current date:C33(*)
+	End use 
+	This:C1470.setDateInterval(False:C215)
 	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & notAtSite=:2 & engg=:3"; Storage:C1525.cache.endDate; False:C215; False:C215)
 	
+local Function calibrationNotRequired()->$equipments : cs:C1710.EquipmentSelection
+	$equipments:=ds:C1482.Equipment.query("calibrationNotRequired=:1"; True:C214)
 	
-Function duePMEquipments()->$equipments : cs:C1710.EquipmentSelection
-	$title:="Set date interval"
-	This:C1470.setDateInterval(False:C215; $title)
+	
+	
+local Function PMRequiredEquipments()->$equipments : cs:C1710.EquipmentSelection  //PM Required Equipments
+	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3"; Current date:C33(*); !00-00-00!; False:C215)  // Storage.cache.endDate
+	
+local Function pmEquipments()->$equipments : cs:C1710.EquipmentSelection  //Prevent Maintenance equipments within X days
+	Use (Storage:C1525.cache)
+		Storage:C1525.cache.startDate:=Current date:C33(*)
+	End use 
+	This:C1470.setDateInterval(False:C215)
+	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3"; Storage:C1525.cache.endDate; !00-00-00!; False:C215)
+	
+local Function duePMEquipmentsExcludeNPU()->$equipments : cs:C1710.EquipmentSelection  //Prevent Maintenance equipments within X days exclude NPU
+	Use (Storage:C1525.cache)
+		Storage:C1525.cache.startDate:=Current date:C33(*)
+	End use 
+	This:C1470.setDateInterval(False:C215)
 	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3 & engg=:4"; Storage:C1525.cache.endDate; !00-00-00!; False:C215; False:C215)
 	
 	
-Function equipmentsDownOrOnHold()->$equipments : cs:C1710.EquipmentSelection
 	
+local Function NPUEquipments()->$equipments : cs:C1710.EquipmentSelection  //NPU List
+	$equipments:=ds:C1482.Equipment.query("notAtSite=:1 & engg=:2"; False:C215; True:C214)
+	
+local Function equipmentsDownOrOnHold()->$equipments : cs:C1710.EquipmentSelection
 	$equipments:=ds:C1482.Equipment.query("down=:1"; True:C214)
 	
+local Function decommissionedEquipment()->$equipments : cs:C1710.EquipmentSelection
+	$equipments:=ds:C1482.Equipment.query("decommissioned=:1"; True:C214)
 	
-Function calibrationExemptList()->$equipments : cs:C1710.EquipmentSelection
-	
-	$equipments:=ds:C1482.Equipment.query("calibrationNotRequired=:1"; True:C214)
 	
 	
 	

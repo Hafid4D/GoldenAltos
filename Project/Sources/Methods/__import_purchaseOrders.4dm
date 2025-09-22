@@ -178,6 +178,7 @@ If (True:C214)
 		$job.shipMemo:=$record.shipMemo
 		$job.jobComment:=$record.jobComment
 		$job.archived:=$record.archived
+		$job.pr_qualifier:=$record.pr_qualifier
 		
 		$res:=$job.save()
 		
@@ -247,7 +248,6 @@ If (True:C214)
 			$lot_e.location:=$lot.location
 			$lot_e.comment:=$lot.comment
 			$lot_e.status:=$lot.status
-			$job.pr_qualifier:=$record.pr_qualifier
 			
 			$lot_e.UUID_Job:=$job.UUID
 			
@@ -287,7 +287,6 @@ If (True:C214)
 					$lotStep_e.inOperator:=$step.inOperator
 					$lotStep_e.actualHours:=$step.actualHours
 					$lotStep_e.plannedHours:=$step.plannedHours
-					$lotStep_e.minYield:=$step.minYield
 					$lotStep_e.tools:=New object:C1471()
 					$lotStep_e.tools:=$step.tools
 					
@@ -347,6 +346,8 @@ import inventories
 If (True:C214)
 	TRUNCATE TABLE:C1051([Inventory:126])
 	TRUNCATE TABLE:C1051([InventoryPull:127])
+	TRUNCATE TABLE:C1051()
+	TRUNCATE TABLE:C1051()
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/inventory_export.json")
 	
@@ -356,61 +357,104 @@ If (True:C214)
 		$inventory_e:=ds:C1482.Inventory.new()
 		
 		$inventory_e.customerSpecific:=$record.customerSpecific
-		$inventory_e.partNum:=$record.partNum
+		$inventory_e.partNumber:=$record.partNum
 		$inventory_e.vendor:=$record.vendor
 		$inventory_e.description:=$record.description
 		$inventory_e.classification:=$record.classification
-		$inventory_e.lotNumber:=$record.lotNumber
+		//$inventory_e.partLotNumber:=$record.lotNumber
 		$inventory_e.stockNum:=$record.stockNum
-		$inventory_e.dateIn:=$record.dateIn
+		$inventory_e.dateIn:=cs:C1710.sfw_stmp.me.build(Date:C102($record.dateIn))
 		$inventory_e.expirationDate:=$record.expirationDate
 		$inventory_e.qtyInStock:=$record.qtyInStock
 		$inventory_e.unitCost:=$record.unitCost
-		$inventory_e.inventoryUnits:=$record.inventoryUnits
+		$inventory_e.units:=$record.inventoryUnits
 		$inventory_e.currency:=$record.currency
-		$inventory_e.binLocation:=$record.binLocation
-		$inventory_e.recdBy:=$record.recdBy
-		$inventory_e.division:=$record.division
+		$inventory_e.location:=$record.binLocation
+		$inventory_e.receivedBy:=$record.recdBy
 		$inventory_e.totalCost:=$record.totalCost
-		$inventory_e.property:=$record.property
 		$inventory_e.availableQty:=$record.AvailableQty
-		$inventory_e.originalQty:=$record.originalQty
+		$inventory_e.initiallQty:=$record.originalQty
+		$inventory_e.inventoryID:=(ds:C1482.Inventory.all().length>0) ? ds:C1482.Inventory.all().max("inventoryID")+1 : 1
+		$inventory_e.code:="INV"+String:C10($inventory_e.inventoryID; "00000#")
+		
+		$staff_es:=ds:C1482.Staff.query("code = :1"; $inventory_e.receivedBy)
+		
+		If ($staff_es.length>0)
+			$inventory_e.UUID_Staff:=$staff_es[0].UUID
+		End if 
 		
 		$res:=$inventory_e.save()
 		
 		If (Not:C34($res.success))
 			TRACE:C157
 		Else 
-			For each ($pull; $record.pulls)
-				$pull_e:=ds:C1482.InventoryPull.new()
-				
-				$pull_e.partNum:=$pull.partNum
-				$pull_e.qty:=$pull.qty
-				$pull_e.cost:=$pull.partNum
-				$pull_e.datePulled:=$pull.datePulled
-				$pull_e.jobNumber:=$pull.jobNumber
-				$pull_e.uniqueID:=$pull.uniqueID
-				$pull_e.pulledBy:=$pull.pulledBy
-				$pull_e.division:=$pull.division
-				$pull_e.docsInDocServer:=$pull.docsInDocServer
-				$pull_e.currency:=$pull.currency
-				$pull_e.units:=$pull.units
-				$pull_e.currency:=$pull.currency
-				$pull_e.pullMode:=$pull.pullMode
-				$pull_e.lotNumber:=$pull.lotNumber
-				$pull_e.property:=$pull.property
-				$pull_e.jobInvoiceDate:=$pull.jobInvoiceDate
-				$pull_e.UUID_Inventory:=$inventory_e.UUID
-				
-				$res:=$pull_e.save()
-				
-				If (Not:C34($res.success))
-					TRACE:C157
-				End if 
-			End for each 
+			//For each ($pull; $record.pulls)
+			//$pull_e:=ds.InventoryPull.new()
+			
+			//$pull_e.partNum:=$pull.partNum
+			//$pull_e.qty:=$pull.qty
+			//$pull_e.cost:=$pull.partNum
+			//$pull_e.datePulled:=$pull.datePulled
+			//$pull_e.jobNumber:=$pull.jobNumber
+			//$pull_e.uniqueID:=$pull.uniqueID
+			//$pull_e.pulledBy:=$pull.pulledBy
+			//$pull_e.division:=$pull.division
+			//$pull_e.docsInDocServer:=$pull.docsInDocServer
+			//$pull_e.currency:=$pull.currency
+			//$pull_e.units:=$pull.units
+			//$pull_e.currency:=$pull.currency
+			//$pull_e.pullMode:=$pull.pullMode
+			//$pull_e.lotNumber:=$pull.lotNumber
+			//$pull_e.property:=$pull.property
+			//$pull_e.jobInvoiceDate:=$pull.jobInvoiceDate
+			//$pull_e.UUID_Inventory:=$inventory_e.UUID
+			
+			//$res:=$pull_e.save()
+			
+			//If (Not($res.success))
+			//TRACE
+			//End if 
+			//End for each 
 		End if 
 		
 	End for each 
+	
+	$locations:=ds:C1482.Inventory.all().distinct("location")
+	
+	For each ($location; $locations)
+		$location_e:=ds:C1482.Location.new()
+		$location_e.name:=$location
+		$res:=$location_e.save()
+		
+		If (Not:C34($res.success))
+			TRACE:C157
+		End if 
+	End for each 
+	
+	$units:=ds:C1482.Inventory.all().distinct("units")
+	
+	For each ($unit; $units)
+		$unit_e:=ds:C1482.Unit.new()
+		$unit_e.name:=$unit
+		$res:=$unit_e.save()
+		
+		If (Not:C34($res.success))
+			TRACE:C157
+		End if 
+	End for each 
+	
+	$classifications:=ds:C1482.Inventory.all().distinct("classification")
+	
+	For each ($classification; $classifications)
+		$classification_e:=ds:C1482.Classification.new()
+		$classification_e.name:=$classification
+		$res:=$classification_e.save()
+		
+		If (Not:C34($res.success))
+			TRACE:C157
+		End if 
+	End for each 
+	
 End if 
 
 /**
@@ -435,17 +479,6 @@ If (True:C214)
 		$stepTemplate_e.largeLayout:=$record.largeLayout
 		$stepTemplate_e.comment1:=$record.comment1
 		$stepTemplate_e.comment2:=$record.comment2
-		$stepTemplate_e.templateNumber:=$record.templateNumber
-		
-		$stepTemplate_e._initSettings()
-		
-		If ($record.settings>0)
-			
-			For ($i; 1; 32)
-				$stepTemplate_e.settings.properties[$i-1].checked:=(($record.settings & (2^($i-1)))=(2^($i-1)))
-			End for 
-			
-		End if 
 		
 		$res:=$stepTemplate_e.save()
 		
@@ -547,7 +580,7 @@ If (True:C214)
 		$specification_e.stmpRevisionDate:=cs:C1710.sfw_stmp.me.build(Date:C102($record.Revsion_Date))
 		$specification_e.revision:=$record.Rev
 		
-		$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($record.Division; "\r"; sk trim spaces:K86:2).join("\r"))
+		$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($record.division; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($division.length>0)
 			$specification_e.UUID_Division:=$division[0].UUID
 		Else 
@@ -698,66 +731,98 @@ End if
 import staffs
 **/
 If (True:C214)
+	$file_excel:=Folder:C1567(fk data folder:K87:12).file("DataJson/GA_employee_list.csv")
 	
+	$records_excel:=Split string:C1554($file_excel.getText(); "\r\n")
+	
+	$records_excel.shift()  //remove the header
+	
+	$staffs_excel:=New collection:C1472()
+	
+	For each ($record; $records_excel)
+		$staffs_excel.push(New object:C1471(\
+			"lastName"; Split string:C1554(Split string:C1554($record; ";")[1]; ",")[0]; \
+			"firstName"; Split string:C1554(Split string:C1554($record; ";")[1]; ",")[1]; \
+			"roles"; Split string:C1554(Split string:C1554($record; ";")[2]; ","); \
+			"teams"; Split string:C1554(Split string:C1554($record; ";")[3]; ",")\
+			))
+	End for each 
+	
+	TRUNCATE TABLE:C1051([Team:136])
+	TRUNCATE TABLE:C1051([Membership:137])
+	TRUNCATE TABLE:C1051([Role:132])
+	TRUNCATE TABLE:C1051([StaffRole:44])
 	TRUNCATE TABLE:C1051([Staff:135])
-	TRUNCATE TABLE:C1051([Department:132])
 	
-	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/staff_export.json")
+	SET DATABASE PARAMETER:C642([Staff:135]; Table sequence number:K37:31; 0)
 	
-	$records:=JSON Parse:C1218($file.getText())
-	
-	$counter:=0
-	For each ($record; $records)
-		$counter:=$counter+1
-		
-		$eDepartment:=ds:C1482.Department.query("name == :1"; $record.department).first()
-		If ($eDepartment=Null:C1517)
-			$eDepartment:=ds:C1482.Department.new()
-			$eDepartment.name:=$record.department
-			$eDepartment.save()
-		End if 
-		
+	For each ($staff; $staffs_excel)
 		$staff_e:=ds:C1482.Staff.new()
-		$staff_e.firstName:=$record.firstName
-		$staff_e.lastName:=$record.lastName
-		$staff_e.retrainDate:=$record.retrainDate
-		$staff_e.terminationDate:=$record.terminationDate
-		$staff_e.creationDate:=cs:C1710.sfw_stmp.me.getDate($record.creationDate)
-		$staff_e.code:=Split string:C1554($record.code; "\r"; sk trim spaces:K86:2).join("\r")
-		$staff_e.UUID_Department:=$eDepartment.UUID
-		$staff_e.terminated:=$record.terminated
-		$staff_e.hireDate:=$record.hireDate
-		$staff_e.division:=$record.division
-		$staff_e.citizenShipStatus:=$record.citizenShipStatus
-		$staff_e.contactDetails:=$record.contactDetails
-		//If ($staff_e.firstName="Analyn") & ($staff_e.lastName="Tolentino")
-		//TRACE
-		//End if 
 		
-		For ($i; 1; 31)
-			$value:=$record.teamMemberShip[String:C10($i)]
-			
-			If ($value)
-				$team_es:=ds:C1482.Team.query("id = :1"; $i)
+		$staff_e.code:=String:C10($staff_e.codeID; "00000#")
+		$staff_e.firstName:=$staff.firstName
+		$staff_e.lastName:=$staff.lastName
+		
+		$res:=$staff_e.save()
+		
+		If ($res.success)
+			For each ($team; $staff.teams)
+				$teams_es:=ds:C1482.Team.query("name = :1"; $team)
 				
-				If ($team_es.length>0)
-					$membership_e:=ds:C1482.Membership.new()
-					$membership_e.UUID_Staff:=$staff_e.UUID
-					$membership_e.UUID_Team:=$team_es[0].UUID
+				If ($teams_es.length>0)
+					$team_e:=$teams_es[0]
+				Else 
+					$team_e:=ds:C1482.Team.new()
 					
-					$res:=$membership_e.save()
+					$team_e.name:=$team
+					
+					$res:=$team_e.save()
 					
 					If (Not:C34($res.success))
 						TRACE:C157
 					End if 
 				End if 
-			End if 
-		End for 
-		
-		$res:=$staff_e.save()
-		
-		If (Not:C34($res.success))
-			TRACE:C157
+				
+				$membership_e:=ds:C1482.Membership.new()
+				
+				$membership_e.UUID_Staff:=$staff_e.UUID
+				$membership_e.UUID_Team:=$team_e.UUID
+				
+				$res:=$membership_e.save()
+				
+				If (Not:C34($res.success))
+					TRACE:C157
+				End if 
+			End for each 
+			
+			For each ($role; $staff.roles)
+				$roles_es:=ds:C1482.Role.query("name = :1"; $role)
+				
+				If ($roles_es.length>0)
+					$role_e:=$roles_es[0]
+				Else 
+					$role_e:=ds:C1482.Role.new()
+					
+					$role_e.name:=$role
+					
+					$res:=$role_e.save()
+					
+					If (Not:C34($res.success))
+						TRACE:C157
+					End if 
+				End if 
+				
+				$staffRole_e:=ds:C1482.StaffRole.new()
+				
+				$staffRole_e.UUID_Staff:=$staff_e.UUID
+				$staffRole_e.UUID_Role:=$role_e.UUID
+				
+				$res:=$staffRole_e.save()
+				
+				If (Not:C34($res.success))
+					TRACE:C157
+				End if 
+			End for each 
 		End if 
 	End for each 
 End if 
@@ -779,7 +844,7 @@ If (True:C214)
 		$qcar_e.device:=$record.device
 		$qcar_e.closedDate:=$record.closedDate
 		$qcar_e.targetCloseDate:=$record.targetCloseDate
-		//$qcar_e.actualCloseDate:=$record.actualCloseDate
+		$qcar_e.actualCloseDate:=$record.actualCloseDate
 		$qcar_e.verifiedBy:=$record.verifiedBy
 		$qcar_e.verifiedDate:=$record.verifiedDate
 		$qcar_e.void:=$record.void
@@ -793,26 +858,18 @@ If (True:C214)
 		$qcar_e._initCorrectiveActionReport()
 		
 		
-		//$customer_es:=ds.Customer.query("name = :1"; $record.customer)
+		$customer_es:=ds:C1482.Customer.query("name = :1"; $record.customer)
 		
-		//If ($customer_es.length>0)
-		//$qcar_e.UUID_Customer:=$customer_es[0].UUID
-		//Else 
-		////TRACE
-		//End if 
+		If ($customer_es.length>0)
+			$qcar_e.UUID_Customer:=$customer_es[0].UUID
+		Else 
+			//TRACE
+		End if 
 		
 		$lot_es:=ds:C1482.Lot.query("lotNumber = :1"; $record.lotNumber)
 		
 		If ($lot_es.length>0)
 			$qcar_e.UUID_Lot:=$lot_es[0].UUID
-			
-			$customer_es:=ds:C1482.Customer.query("name = :1"; $lot_es[0].customer)
-			
-			If ($customer_es.length>0)
-				$qcar_e.UUID_Customer:=$customer_es[0].UUID
-			Else 
-				//TRACE
-			End if 
 		Else 
 			//TRACE
 		End if 

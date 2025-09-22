@@ -43,9 +43,9 @@
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Code"
+					"text": "Employee ID"
 				},
-				"entryField_code": {
+				"Field_code": {
 					"type": "input",
 					"top": 12,
 					"left": 112,
@@ -135,7 +135,7 @@
 					"left": 432,
 					"width": 138,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.department",
+					"dataSource": "Form:C1466.current_item.department.name",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -168,15 +168,13 @@
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
-						"onClick",
-						"onMouseMove"
+						"onDataChange"
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
 					"fontWeight": "bold",
 					"dataSourceTypeHint": "date",
-					"dateFormat": "long",
-					"method": "ObjectMethods/Field_division.4dm"
+					"dateFormat": "long"
 				},
 				"label_citizenShipStatus1": {
 					"type": "text",
@@ -186,26 +184,6 @@
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Citizenship Status"
-				},
-				"EntryField_citizenShipStatus1": {
-					"type": "input",
-					"top": 37,
-					"left": 432,
-					"width": 138,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.citizenShipStatus",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"dataSourceTypeHint": "date",
-					"dateFormat": "long"
 				},
 				"wr30_background": {
 					"type": "rectangle",
@@ -239,6 +217,27 @@
 					"picture": "/RESOURCES/sfw/image/icon/alert-50x50.png",
 					"pictureFormat": "scaled",
 					"visibility": "visible"
+				},
+				"pup_citizenshipStatus": {
+					"type": "button",
+					"top": 34,
+					"left": 432,
+					"width": 180,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 12,
+					"focusable": false,
+					"text": "Citizenship Status",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_citizenshipStatus.4dm",
+					"events": [
+						"onClick",
+						"onDisplayDetail"
+					],
+					"fontWeight": "bold"
 				}
 			}
 		},
@@ -857,7 +856,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 1085,
+	"geometryStamp": 1107,
 	"editor": {
 		"groups": {
 			"Group": [

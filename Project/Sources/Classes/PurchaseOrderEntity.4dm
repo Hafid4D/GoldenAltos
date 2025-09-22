@@ -1,5 +1,6 @@
 Class extends Entity
 
+<<<<<<< HEAD
 local Function get nameInWindowTitle()->$nameInWindowTitle : Text
 	$nameInWindowTitle:=String:C10(This:C1470.poNumber)
 	
@@ -13,11 +14,7 @@ local Function rebuildAddress()->$address : Object
 	
 	If (This:C1470.address.addresses#Null:C1517) && (This:C1470.address.addresses#Null:C1517)
 		$address:=This:C1470.address.addresses.query("type = :1"; $type).first()
-		
-		
-		
-		//mark:-Callbacks
-		
+	end if
 local Function afterCreation()
 	
 	

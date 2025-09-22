@@ -79,7 +79,6 @@ Function pup_supplier()
 		
 		$form:=New object:C1471(\
 			"colName"; "name"; \
-			"lb_items"; ds:C1482.Supplier.all(); \
 			"allData"; ds:C1482.Supplier.all(); \
 			"dataclass"; "Supplier"\
 			)
@@ -122,7 +121,6 @@ Function pup_approvedBy()
 		
 		$form:=New object:C1471(\
 			"colName"; "code"; \
-			"lb_items"; ds:C1482.Staff.all(); \
 			"allData"; ds:C1482.Staff.all(); \
 			"dataclass"; "Staff"\
 			)
@@ -164,7 +162,6 @@ Function pup_empCode()
 		
 		$form:=New object:C1471(\
 			"colName"; "code"; \
-			"lb_items"; ds:C1482.Staff.all(); \
 			"allData"; ds:C1482.Staff.all(); \
 			"dataclass"; "Staff"\
 			)

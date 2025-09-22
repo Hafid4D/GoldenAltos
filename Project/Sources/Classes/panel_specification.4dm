@@ -52,7 +52,7 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "lb_documents"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
 			
 	End case 
-	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "btnDatePicker@"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET VISIBLE:C603(*; "bSpecView"; Not:C34(Form:C1466.sfw.checkIsInModification()))
 	OBJECT SET VISIBLE:C603(*; "bSpecEdit"; Form:C1466.sfw.checkIsInModification())
 	
@@ -134,6 +134,7 @@ Function bActionDocument()
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_document"; $form)
+			
 			If (OK=1)
 				Form:C1466.lb_documents.push($form.details)
 				Form:C1466.current_item.documents.documentsCollection.push($form.details)
@@ -143,15 +144,26 @@ Function bActionDocument()
 			
 		: ($choice="--modify")
 			
-			$form:=New object:C1471("details"; Form:C1466.current_item.documents.documentsCollection[Form:C1466.selectedDocumentPos-1])
+			$document:=OB Copy:C1225(Form:C1466.current_item.documents.documentsCollection[Form:C1466.selectedDocumentPos-1])
+			$form:=New object:C1471("details"; OB Copy:C1225(Form:C1466.current_item.documents.documentsCollection[Form:C1466.selectedDocumentPos-1]))
 			
 			$form.operation:="modify"
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_document"; $form)
+			
 			If (OK=1)
+				$blobHasBeenChanged:=JSON Stringify:C1217($document.blob)#JSON Stringify:C1217($form.details.blob)
+				
+				If ($blobHasBeenChanged)
+					Form:C1466.current_item.stmpApproval:=0  //!00-00-00!
+					Form:C1466.current_item.approver:=""
+					Form:C1466.current_item.isApproved:=False:C215
+					
+					
+				End if 
+				
 				Form:C1466.selectedDocument:=$form.details
-				//Form.current_item.documents.documentsCollection.push($form.details)
 				cs:C1710.panel_specification.me._activate_save_cancel_button()
 			End if 
 			
@@ -206,6 +218,26 @@ Function bSpecEdit()
 		Form:C1466.current_item.publishedDocumentBlob:=$form.details.blob
 		cs:C1710.panel_specification.me._activate_save_cancel_button()
 	End if 
+	
+	
+Function btnDatePicker($object; $attribut)
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		$form:=New object:C1471
+		$form.date:=$object[$attribut]
+		
+		OBJECT GET COORDINATES:C663(Self:C308->; $left; $top; $rigth; $bottom)
+		CONVERT COORDINATES:C1365($left; $bottom; XY Current form:K27:5; XY Main window:K27:8)
+		Open window:C153($left; $bottom; $left+285; $bottom+210; Movable dialog box:K34:7; "calendar")
+		DIALOG:C40("_ga_calendar"; $form)
+		
+		If (OK=1)
+			$object[$attribut]:=$form.calendar.display.date
+			cs:C1710.panel_specification.me._activate_save_cancel_button()
+		End if 
+		
+	End if 
+	
 	
 	
 	

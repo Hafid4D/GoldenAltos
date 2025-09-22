@@ -12,7 +12,9 @@ Function formMethod()
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
-				This:C1470.loadCurrentRMA()
+				// add load functions
+			: (FORM Get current page:C276(*)=3)
+				This:C1470.loadObjectiveEvidences()
 		End case 
 	End if 
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())  //It's time to resize the object or set visible
@@ -38,6 +40,7 @@ Function redrawAndSetVisible()
 	
 	This:C1470.qcarManage()
 	This:C1470.hideDatePickers()
+	This:C1470.manageExternal()
 	
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	
@@ -88,7 +91,7 @@ Function selectLot()
 	If (Form:C1466.sfw.checkIsInModification())
 		Case of 
 			: (FORM Event:C1606.code=On Getting Focus:K2:7) | (FORM Event:C1606.code=On Clicked:K2:4)
-				OBJECT GET COORDINATES:C663(*; "Field_lotNumber"; $l; $t; $r; $b)
+				OBJECT GET COORDINATES:C663(*; "Field_customerName"; $l; $t; $r; $b)
 				CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Screen:K27:7)
 				
 				$form:=New object:C1471(\
@@ -130,27 +133,75 @@ Function verifyQcar()
 		End if 
 	End if 
 	
+Function manageExternal()
+	OBJECT SET VISIBLE:C603(*; "label_externalParty"; Not:C34(Form:C1466.current_item.internal))
+	OBJECT SET VISIBLE:C603(*; "EntryField_externalParty"; Not:C34(Form:C1466.current_item.internal))
 	
-Function validateVerifiedBy()
-	If (Form:C1466.current_item.verifiedBy#"")
-		$staff_es:=ds:C1482.Staff.query("code = :1"; Form:C1466.current_item.verifiedBy)
-		
-		If ($staff_es.length=0)
-			cs:C1710.sfw_dialog.me.alert("There are no staff with this code: "+Form:C1466.current_item.verifiedBy)
+Function loadObjectiveEvidences()
+	Form:C1466.lb_documents:=ds:C1482.ObjectiveEvidence.query("UUID_Qcar = :1"; Form:C1466.current_item.UUID)
+	
+Function bActionManageDocuments()
+	$refMenu:=Create menu:C408
+	APPEND MENU ITEM:C411($refMenu; "Add Document")
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--add")
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	APPEND MENU ITEM:C411($refMenu; "View Document")
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--view")
+	If (Form:C1466.selectedDocument=Null:C1517)
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	APPEND MENU ITEM:C411($refMenu; "Delete Document")
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()) | (Form:C1466.selectedDocument=Null:C1517))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	$choose:=Dynamic pop up menu:C1006($refMenu)
+	
+	Case of 
+		: ($choose="--add")
+			$doc:=Select document:C905(""; "*"; "Select Documet: "; Allow alias files:K24:10)
 			
-			Form:C1466.current_item.verifiedBy:=""
-		End if 
-	End if 
-	
-	
-Function loadCurrentRMA()
-	Form:C1466.current_rma:=(Form:C1466.current_item.rmas.length>0) ? Form:C1466.current_item.rmas[0] : Null:C1517
-	
-	OBJECT SET ENABLED:C1123(*; "btnForward"; (Form:C1466.current_rma#Null:C1517))
-	
-	
-Function btnOpenRMA()
-	If (Form:C1466.current_rma#Null:C1517)
-		Form:C1466.sfw.openInANewWindow(Form:C1466.current_rma; "qualityAssistance"; "rma")
-	End if 
-	
+			If (OK=1)
+				$document_o:=Path to object:C1547(Document)
+				DOCUMENT TO BLOB:C525(Document; $blob)
+				
+				$oe_e:=ds:C1482.ObjectiveEvidence.new()
+				
+				$oe_e.name:=$document_o.name
+				$oe_e.extension:=$document_o.extension
+				$oe_e.blob:=$blob
+				
+				$oe_e.UUID_Qcar:=Form:C1466.current_item.UUID
+				
+				$res:=$oe_e.save()
+				
+				If ($res.success)
+					This:C1470.loadObjectiveEvidences()
+					This:C1470._activate_save_cancel_button()
+				End if 
+				
+			End if 
+		: ($choose="--view")
+			If (BLOB size:C605(Form:C1466.selectedDocument.blob)>0)
+				$path:=Temporary folder:C486+Form:C1466.selectedDocument.name+Form:C1466.selectedDocument.extension
+				
+				BLOB TO DOCUMENT:C526($path; Form:C1466.selectedDocument.blob)
+				
+				OPEN URL:C673($path)
+			End if 
+		: ($choose="--delete")
+			$ok:=cs:C1710.sfw_dialog.me.confirm("Are you sure ?")
+			If ($ok)
+				$res:=Form:C1466.selectedDocument.drop()
+				
+				If ($res.success)
+					This:C1470.loadObjectiveEvidences()
+					This:C1470._activate_save_cancel_button()
+				End if 
+			End if 
+	End case 

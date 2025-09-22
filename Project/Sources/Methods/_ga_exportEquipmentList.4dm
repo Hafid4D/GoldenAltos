@@ -78,12 +78,15 @@ If ($continue)
 			ARRAY TO COLLECTION:C1563($headers; $headerNames)
 			
 			$headers:=$headers.remove($headers.indexOf("repairLogs"))
-			$headers[$headers.indexOf("UUID_EquipmentLocation")]:="location"
-			$headers[$headers.indexOf("UUID_ToolType")]:="type"
-			$headers[$headers.indexOf("UUID_Division")]:="division"
+			$headers:=$headers.remove($headers.indexOf("reports"))
+			
+			$headers:=$headers.remove($headers.indexOf("UUID"))
+			$headers:=$headers.filter(Formula:C1597($1.value#"stmp@"))
+			$headers:=$headers.filter(Formula:C1597($1.value#"UUID_@"))
+			
 			If (Not:C34($allFields))
-				$headers:=$relevantFields.filter(Formula:C1597($relevantFields.indexOf($1.value)#-1))
-			End if 
+				$headers:=$relevantFields
+			End if
 			$OK:=True:C214
 		Else 
 			$OK:=False:C215
@@ -107,8 +110,7 @@ If ($continue)
 						: ($headerName="location")
 							SEND PACKET:C103($file; Replace string:C233(String:C10($equipment_e.location.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
 						: ($headerName="type")
-							$type:=ds:C1482.ToolType.query("UUID=:1"; $equipment_e["UUID_ToolType"]).first()
-							SEND PACKET:C103($file; Replace string:C233(String:C10($type.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
+							SEND PACKET:C103($file; Replace string:C233(String:C10($equipment_e.type.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
 							
 						: ($headerName="division")
 							SEND PACKET:C103($file; Replace string:C233(String:C10($equipment_e.division.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)

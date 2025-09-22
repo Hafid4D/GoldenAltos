@@ -32,10 +32,10 @@ Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	This:C1470.drawPup_fixOperator()
 	This:C1470.drawPup_reportOperator()
-	This:C1470.drawPup_EquipmentId()
 	This:C1470.drawPup_downTimePicker()
 	This:C1470.drawPup_upTimePicker()
 	
+	OBJECT SET ENTERABLE:C238(*; "entryField_systemID"; False:C215)
 	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET VISIBLE:C603(*; "TimePicker@"; Form:C1466.sfw.checkIsInModification())
 	
@@ -64,48 +64,6 @@ Function drawPup_XXX()
 	Form:C1466.sfw.drawButtonPup("pup_xxx"; $xxxName; "xxxx.png"; (Form:C1466.current_item.xxxx=Null:C1517))
 	
 	
-Function drawPup_EquipmentId()
-	If (Form:C1466.current_item#Null:C1517)
-		$equipmentId:=ds:C1482.Equipment.query("UUID =:1"; Form:C1466.current_item.UUID_Equipment).first() || New object:C1471()
-		$typeName:=$equipmentId.assignedID
-		If ($typeName=Null:C1517)
-			$typeName:=""
-		End if 
-		$color:=""
-		$pathIcon:=""
-		Form:C1466.sfw.drawButtonPup("pup_equipmentId"; $typeName; $pathIcon; ($equipmentId=Null:C1517))
-	End if 
-	
-	
-Function pup_equipId()
-	//Create pop up menu
-	If (Form:C1466.sfw.checkIsInModification())
-		$menu:=Create menu:C408
-		For each ($equipmentId; ds:C1482.Equipment.all())  // Storage.cache.equipmentTypes)
-			APPEND MENU ITEM:C411($menu; $equipmentId.assignedID; *)
-			SET MENU ITEM PARAMETER:C1004($menu; -1; $equipmentId.UUID)
-			If ($equipmentId.UUID=Form:C1466.current_item.UUID_Equipment)
-				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
-				If (Is Windows:C1573)
-					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
-				End if 
-			End if 
-		End for each 
-		$choose:=Dynamic pop up menu:C1006($menu)
-		RELEASE MENU:C978($menu)
-		
-		Case of 
-			: ($choose#"")
-				$equipmentId:=ds:C1482.Equipment.get($choose)
-				Form:C1466.current_item.UUID_Equipment:=$equipmentId.UUID
-				cs:C1710.panel_repairLog.me._activate_save_cancel_button()
-		End case 
-		
-	End if 
-	This:C1470.drawPup_EquipmentId()
-	
-	
-	
 Function drawPup_fixOperator()
 	If (Form:C1466.current_item#Null:C1517)
 		$fixOperator:=ds:C1482.Staff.query("UUID= :1"; Form:C1466.current_item.operators.fixedBy).first() || New object:C1471()
@@ -129,7 +87,6 @@ Function pup_fixOperator()
 		
 		$form:=New object:C1471(\
 			"colName"; "code"; \
-			"lb_items"; ds:C1482.Staff.all(); \
 			"allData"; ds:C1482.Staff.all(); \
 			"dataclass"; "Staff"\
 			)
@@ -163,37 +120,12 @@ Function drawPup_reportOperator()
 Function pup_reportOperator()
 	//Create pop up menu
 	If (Form:C1466.sfw.checkIsInModification())
-/*
-$menu:=Create menu
-If (Storage.cache=Null) || (Storage.cache.staffs=Null)
-ds.Staff.cacheLoad()
-End if 
 		
-For each ($reportOperator; Storage.cache.staffs)
-APPEND MENU ITEM($menu; $reportOperator.code; *)
-SET MENU ITEM PARAMETER($menu; -1; $reportOperator.code)
-If ($reportOperator.code=Form.current_item.fixedBy)
-SET MENU ITEM MARK($menu; -1; Char(18))
-If (Is Windows)
-SET MENU ITEM STYLE($menu; -1; Bold)
-End if 
-End if 
-End for each 
-$choose:=Dynamic pop up menu($menu)
-RELEASE MENU($menu)
-		
-Case of 
-: ($choose#"")
-$reportOperator:=ds.Employee.get($choose)
-Form.current_item.reportedBy:=$reportOperator.code
-End case 
-*/
 		OBJECT GET COORDINATES:C663(*; "pup_reportOperator"; $l; $t; $r; $b)
 		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
 		
 		$form:=New object:C1471(\
 			"colName"; "code"; \
-			"lb_items"; ds:C1482.Staff.all(); \
 			"allData"; ds:C1482.Staff.all(); \
 			"dataclass"; "Staff"\
 			)
@@ -242,9 +174,10 @@ Function pup_downTimePicker()
 	If (Form:C1466.sfw.checkIsInModification())
 		$form:=New object:C1471
 		
-		$form.hour:=String:C10(cs:C1710.sfw_stmp.me.getHour(Form:C1466.current_item.downAt))
-		$form.minute:=String:C10(cs:C1710.sfw_stmp.me.getNbMinutes(Form:C1466.current_item.downAt)%60)
+		//$form.hour:=String(cs.sfw_stmp.me.getHour(Form.current_item.downAt))
+		//$form.minute:=String(cs.sfw_stmp.me.getNbMinutes(Form.current_item.downAt)%60)
 		
+		$form.timeStamp:=Form:C1466.current_item.downAt
 		OBJECT GET COORDINATES:C663(Self:C308->; $left; $top; $rigth; $bottom)
 		
 		CONVERT COORDINATES:C1365($left; $bottom; XY Current form:K27:5; XY Main window:K27:8)
@@ -279,9 +212,10 @@ Function pup_upTimePicker()
 	If (Form:C1466.sfw.checkIsInModification())
 		$form:=New object:C1471
 		
-		$form.hour:=String:C10(cs:C1710.sfw_stmp.me.getHour(Form:C1466.current_item.upAt))
-		$form.minute:=String:C10(cs:C1710.sfw_stmp.me.getNbMinutes(Form:C1466.current_item.upAt)%60)
+		//$form.hour:=String(cs.sfw_stmp.me.getHour(Form.current_item.upAt))
+		//$form.minute:=String(cs.sfw_stmp.me.getNbMinutes(Form.current_item.upAt)%60)
 		
+		$form.timeStamp:=Form:C1466.current_item.upAt
 		OBJECT GET COORDINATES:C663(Self:C308->; $left; $top; $rigth; $bottom)
 		
 		CONVERT COORDINATES:C1365($left; $bottom; XY Current form:K27:5; XY Main window:K27:8)

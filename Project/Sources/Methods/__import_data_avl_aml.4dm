@@ -2,6 +2,16 @@
 
 
 var $eContact : cs:C1710.ContactEntity
+var $contactSelection : cs:C1710.ContactSelection
+
+$contactSelection:=ds:C1482.Contact.query("companyType =:1"; "Supplier")
+For each ($eContact; $contactSelection)
+	$status:=$eContact.drop()
+	If ($status.success=False:C215)
+		TRACE:C157
+	End if 
+End for each 
+
 
 //PartData
 var $ePartData : cs:C1710.PartDataEntity
@@ -131,7 +141,7 @@ If ($supplier_log.exists)
 			$report:=Folder:C1567(fk data folder:K87:12).file("DataJson/SuppliersDocs/"+String:C10($document.UniqueID+$document.PrimaryKeyValue))
 			If ($report.exists)
 				
-				C_BLOB:C604($blob)
+				var $blob : Blob
 				DOCUMENT TO BLOB:C525($report.platformPath; $blob)
 				
 				$doc.blob:=$blob
@@ -151,32 +161,46 @@ If ($supplier_log.exists)
 		
 		
 		//Primary contact
-		$eContact:=ds:C1482.Contact.new()
-		$eContact.UUID_Company:=$eSupplier.UUID
-		$eContact.firstName:=$supplier.C1_first_name
-		$eContact.lastName:=$supplier.C1_last_name
-		$eContact.title:="Primary"
-		$eContact.contactDetails:=New object:C1471()
-		$eContact.contactDetails.addresses:=New collection:C1472()
-		
-		$eContact.contactDetails.communications:=New collection:C1472()
-		
-		$comm:=New object:C1471()
-		$comm.type:="phone"
-		$comm.comment:=""
-		$comm.contact:=$supplier.C1_tel
-		$eContact.contactDetails.communications.push($comm)
-		
-		$comm:=New object:C1471()
-		$comm.type:="fax"
-		$comm.comment:=""
-		$comm.contact:=$supplier.C1_fax
-		$eContact.contactDetails.communications.push($comm)
-		If ($supplier.C1_fax#"")
+		$supplier.C1_first_name:=Split string:C1554($supplier.C1_first_name; ";"; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join(";")
+		$supplier.C1_first_name:=Split string:C1554($supplier.C1_first_name; ";"; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join(";")
+		If ($supplier.C1_first_name#"") || ($supplier.C1_last_name#"")
+			$eContact:=ds:C1482.Contact.new()
+			$eContact.UUID_Company:=$eSupplier.UUID
+			$eContact.firstName:=$supplier.C1_first_name
+			$eContact.lastName:=$supplier.C1_last_name
+			$eContact.title:="Primary"
+			$eContact.contactDetails:=New object:C1471()
+			$eContact.contactDetails.addresses:=New collection:C1472()
 			
+			$eContact.contactDetails.communications:=New collection:C1472()
+			
+			$comm:=New object:C1471()
+			$comm.type:="phone"
+			$comm.comment:=""
+			$comm.contact:=$supplier.C1_tel
+			$eContact.contactDetails.communications.push($comm)
+			
+			$comm:=New object:C1471()
+			$comm.type:="fax"
+			$comm.comment:=""
+			$comm.contact:=$supplier.C1_fax
+			$eContact.contactDetails.communications.push($comm)
+			If ($supplier.C1_fax#"")
+				
+			End if 
+			$comm:=New object:C1471()
+			$comm.type:="email"
+			$comm.comment:=""
+			$comm.contact:=$supplier.C1_Email
+			$eContact.contactDetails.communications.push($comm)
+			
+			$result:=$eContact.save()
+			If ($result.success=False:C215)
+				TRACE:C157
+			End if 
 		End if 
 		$comm:=New object:C1471()
-		$comm.type:="mail"
+		$comm.type:="email"
 		$comm.comment:=""
 		$comm.contact:=$supplier.C1_Email
 		$eContact.contactDetails.communications.push($comm)
@@ -211,7 +235,7 @@ If ($supplier_log.exists)
 		$eContact.contactDetails.communications.push($comm)
 		
 		$comm:=New object:C1471()
-		$comm.type:="mail"
+		$comm.type:="email"
 		$comm.comment:=""
 		$comm.contact:=$supplier.C2_Email
 		$eContact.contactDetails.communications.push($comm)
@@ -219,14 +243,15 @@ If ($supplier_log.exists)
 		$result:=$eContact.save()
 		If ($result.success=False:C215)
 			TRACE:C157
+			
 		End if 
 		
 		
 	End for each 
 	
+	
+	
 End if 
-
-
 
 
 //AML table
@@ -324,4 +349,28 @@ If ($avml_log.exists)
 	End for each 
 	
 End if 
+
+
+
+//Build Supplier Critical history
+
+$suppliers:=ds:C1482.Supplier.all()
+For each ($eSupplier; $suppliers)
+	$isCritical:=Bool:C1537($eSupplier.parts.extract("critical").filter(Formula:C1597($1.value=True:C214)).length)
+	
+	If ($isCritical)
+		
+		$eSupplier.critical:=True:C214
+	End if 
+	
+	//Save the supplier
+	$res:=$eSupplier.save()
+	If (Not:C34($res.success))
+		TRACE:C157
+	End if 
+	
+End for each 
+
+
+
 

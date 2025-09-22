@@ -9,19 +9,13 @@ Purpose : This method export the items on Spec Control View List to an .xls docu
 */
 
 
-var $eSetting : cs:C1710.sfw_SettingEntity
-var $identEntry : Text:=Form:C1466.sfw.entry.ident
-var $entity : 4D:C1709.Entity
-var $info : Object
-var $wpBlob : 4D:C1709.Blob
-var $wpEncodedBlob : Text
 var $aml_es : cs:C1710.AMLSelection
 var $aml_e : cs:C1710.AMLEntity
 var $OK : Boolean
 var $listOfHeaders : Collection
 var $header; $separator_col; $separator_line : Text
 var $headers : Collection:=New collection:C1472()
-//var $aml_es : Collection:=New collection()
+
 
 $headers:=New collection:C1472("Division"; "Internal Part"; "Vendor Part"; "Description"; "Comments"; "Critical?")
 
@@ -37,24 +31,6 @@ If (OK=1)
 	
 	$dataclass:=Form:C1466.sfw.entry.dataclass
 	
-	//$amls:=Form.sfw.lb_items
-	
-	
-	//For each ($entity; $amls)
-	//$oEntity:=New object
-	//For each ($attribute; ds[$dataclass])
-	//If (ds[$dataclass][$attribute].fieldType=Is object) && ($entity[$attribute]#Null) && (String($entity[$attribute].title)="4D Write Pro New Document")
-	//WP EXPORT VARIABLE($entity[$attribute]; $wpBlob; wk 4wp)
-	//BASE64 ENCODE($wpBlob; $wpEncodedBlob)
-	//$oEntity[$attribute]:=$wpEncodedBlob
-	//Else 
-	//$oEntity[$attribute]:=$entity[$attribute]
-	//End if 
-	
-	//End for each 
-	//$export.records.push($oEntity)
-	
-	//End for each 
 	
 	$aml_es:=Form:C1466.sfw.lb_items  //$export.records
 	
@@ -105,7 +81,7 @@ If (OK=1)
 						
 						
 					: ($headerName="Critical?")
-						$data:=String:C10($supplier_e["critical"]=True:C214 ? "Yes" : "No")
+						$data:=String:C10($aml_e["critical"]=True:C214 ? "Yes" : "No")
 						SEND PACKET:C103($file; $data+$separator_col)
 						
 					Else 

@@ -117,17 +117,20 @@ If (OK=1)
 						SEND PACKET:C103($file; $data+$separator_col)
 						
 					: ($headerName="firstName")
-						$data:=$contact_e#Null:C1517 ? Replace string:C233(Replace string:C233(String:C10($contact_e[$headerName]); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42)) : ""
-						SEND PACKET:C103($file; $data+$separator_col)
-						
+						If ($contact_e#Null:C1517)
+							$data:=$contact_e#Null:C1517 ? Replace string:C233(Replace string:C233(String:C10($contact_e[$headerName]); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42)) : ""
+							SEND PACKET:C103($file; $data+$separator_col)
+						End if 
 					: ($headerName="lastName")
-						$data:=$contact_e#Null:C1517 ? Replace string:C233(Replace string:C233(String:C10($contact_e[$headerName]); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42)) : ""
-						SEND PACKET:C103($file; $data+$separator_col)
-						
+						If ($contact_e#Null:C1517)
+							$data:=$contact_e#Null:C1517 ? Replace string:C233(Replace string:C233(String:C10($contact_e[$headerName]); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42)) : ""
+							SEND PACKET:C103($file; $data+$separator_col)
+						End if 
 					: ($headerName="tel")
-						$data:=Replace string:C233(Replace string:C233(String:C10($contact_e.contactDetails.communications.query("type =:1"; "phone")[0]["contact"]); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))
-						SEND PACKET:C103($file; $data+$separator_col)
-						
+						If ($contact_e#Null:C1517)
+							$data:=Replace string:C233(Replace string:C233(String:C10($contact_e.contactDetails.communications.query("type =:1"; "phone")[0]["contact"]); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))
+							SEND PACKET:C103($file; $data+$separator_col)
+						End if 
 					: ($headerName="approved By QA")
 						$data:=String:C10($supplier_e["ApprovedByQA"]=True:C214 ? "Yes" : "No")
 						SEND PACKET:C103($file; $data+$separator_col)

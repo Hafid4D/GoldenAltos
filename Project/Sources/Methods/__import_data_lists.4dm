@@ -4,6 +4,36 @@
 var $colors : Collection:=New collection:C1472("#3CB371"; "#FFFF00"; "#FF7F50"; "#1E90FF"; "#FF0000")
 
 
+var $carriers; $status; $customerStatuscolors : Collection
+$carriers:=New collection:C1472("GAC Driver"; "Fed-Ex Priority"; "fedex Std Overnight"; "fedex"; "fedex Ground"; "Customer Pickup"; "UPS 2nd Day"; "UPS Ground"; "UPS Next Day"; "DHL")
+$status:=New collection:C1472("Active"; "Hold"; "Retired"; "Void")
+$customerStatuscolors:=New collection:C1472("#32CD32"; "#1E90FF"; "#FF0000"; "#FFFF00")
+
+
+//----> [CustomerStatus]
+TRUNCATE TABLE:C1051([CustomerStatus:130])
+For ($i; 0; $status.length-1)
+	
+	$eCustomerStatus:=ds:C1482.CustomerStatus.new()
+	$eCustomerStatus.levelID:=$i+1
+	$eCustomerStatus.name:=$status[$i]
+	$eCustomerStatus.color:=$customerStatuscolors[$i]
+	$eCustomerStatus.save()
+	
+End for 
+
+//----> [CustomerCarrier]
+TRUNCATE TABLE:C1051([CustomerCarrier:7])
+For ($i; 0; $carriers.length-1)
+	
+	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
+	$eCustomerCarrier.levelID:=$i+1
+	$eCustomerCarrier.name:=$carriers[$i]
+	$eCustomerCarrier.color:=""
+	$eCustomerCarrier.save()
+End for 
+
+
 //---->[ControllingDepartment]
 var $eControllingDept : cs:C1710.ControllingDepartmentEntity
 var $SpecControllingDepts : Collection:=New collection:C1472("All"; "Accounting"; "Assembly"; "Beanch"; \
@@ -17,20 +47,6 @@ For ($i; 0; $SpecControllingDepts.length-1)
 	$eControllingDept.name:=$SpecControllingDepts[$i]
 	$eControllingDept.save()
 End for 
-
-////---->[SpecCategory]
-//var $eCategory : cs.SpecCategoryEntity
-//var $specificationCategories : Collection:=New collection("All"; "Customer Service"; "Document Control"; \
-"Golden Altos Forms (including Logs, Checklists)"; "Maintenance Engineering"; \
-"Military Standard"; "Process_Production Procedures"; "Quality Assurance"; "Quality Control"; \
-"Quality Manual"; "System Procedure"; "Training")
-//TRUNCATE TABLE([SpecCategory])
-//For ($i; 0; $specificationCategories.length-1)
-//$eCategory:=ds.SpecCategory.new()
-//$eCategory.categoryID:=$i
-//$eCategory.name:=$specificationCategories[$i]
-//$eCategory.save()
-//End for 
 
 
 //----> [EquipementLocation]
@@ -170,5 +186,35 @@ For ($i; 0; $docCategories.length-1)
 	$eDocCategory.name:=$docCategories[$i]
 	$eDocCategory.color:="#FFFFFF"
 	$eDocCategory.save()
+End for 
+
+//----> [AuditStatus]
+var $eAuditStatus : cs:C1710.AuditStatusEntity
+var $auditStatus : Collection:=New collection:C1472("C - Conforming"; "OFI - Opportunity for Improvement"; "NCR - Nonconformance")
+TRUNCATE TABLE:C1051([AuditStatus:46])
+For ($i; 0; $auditStatus.length-1)
+	$eAuditStatus:=ds:C1482.AuditStatus.new()
+	$eAuditStatus.levelID:=$i+1
+	$eAuditStatus.name:=$auditStatus[$i]
+	$eAuditStatus.color:="#FFFFFF"
+	$eAuditStatus.save()
+End for 
+
+
+//----> [ProcessType]
+var $eProcessType : cs:C1710.ProcessTypeEntity
+$processTypes:=New collection:C1472("Assembly"; "Assembly_AE"; "Assembly_AO"; "Assembly_AP"; "Assembly_D"; "Assembly_E"; "Assembly_M"; \
+"Assembly_O"; "Assembly_W"; "Burn-In"; "Environmental"; "Environmental_B1"; "Environmental_B1, B2, B3"; "Environmental_B2"; \
+"Environmental_B3"; "Environmental_B4"; "Environmental_B5"; "Environmental_B6"; "Environmental_B7"; "Environmental_B8"; \
+"Environmental_C1"; "Environmental_C2"; "Environmental_C3"; "Environmental_C4"; "Environmental_D1"; "Environmental_D1, D4"; \
+"Environmental_D2"; "Environmental_D3"; "Environmental_D4"; "Environmental_D5"; "Environmental_D6"; "Environmental_D7"; \
+"Environmental_D8"; "Environmental_D9"; "Program Management")
+TRUNCATE TABLE:C1051([ProcessType:139])
+For ($i; 0; $processTypes.length-1)
+	$eProcessType:=ds:C1482.ProcessType.new()
+	$eProcessType.levelID:=$i+1
+	$eProcessType.name:=$processTypes[$i]
+	$eProcessType.color:="#FFFFFF"
+	$eProcessType.save()
 End for 
 

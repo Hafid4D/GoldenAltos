@@ -128,15 +128,11 @@ Function bActionSteps()
 		
 		APPEND MENU ITEM:C411($refMenu; "Edit a step")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--edit")
-		If (Form:C1466.selectedLot=Null:C1517)
-			DISABLE MENU ITEM:C150($refMenu; -1)
-		End if 
+		DISABLE MENU ITEM:C150($refMenu; -1)
 		
 		APPEND MENU ITEM:C411($refMenu; "Remove a step")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--remove")
-		If (Form:C1466.selectedLot=Null:C1517)
-			DISABLE MENU ITEM:C150($refMenu; -1)
-		End if 
+		DISABLE MENU ITEM:C150($refMenu; -1)
 		
 		APPEND MENU ITEM:C411($refMenu; "Add steps from step file")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--create_from_step_file")
@@ -194,35 +190,7 @@ Function bActionSteps()
 				End if 
 				
 			: ($choose="--edit")
-				$form:=New object:C1471(\
-					"lotStep"; Form:C1466.selectedLot; \
-					"title"; "Edit a step"\
-					)
-				
-				$winRef:=Open form window:C675("createStep_StepTemplate"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
-				DIALOG:C40("createStep_StepTemplate"; $form)
-				CLOSE WINDOW:C154($winRef)
-				
-				If (ok=1)
-					$res:=Form:C1466.selectedLot.save()
-					
-					If (ok=1)
-						This:C1470._activate_save_cancel_button()
-					End if 
-				End if 
 			: ($choose="--remove")
-				If (Form:C1466.selectedLot#Null:C1517)
-					cs:C1710.sfw_dialog.me.confirm("Are you sure? !")
-					
-					If (ok=1)
-						$res:=Form:C1466.selectedLot.drop()
-						
-						If ($res.success)
-							This:C1470.loadLotSteps()
-							This:C1470._activate_save_cancel_button()
-						End if 
-					End if 
-				End if 
 		End case 
 		
 	Else 

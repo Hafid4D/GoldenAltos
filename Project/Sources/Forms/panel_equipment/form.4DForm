@@ -40,7 +40,7 @@
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "ID :",
+					"text": "ID",
 					"textAlign": "right"
 				},
 				"entryField_assignedID": {
@@ -68,7 +68,7 @@
 					"width": 80,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Status :",
+					"text": "PM/Cal Status",
 					"textAlign": "right"
 				},
 				"entryField_status": {
@@ -99,7 +99,7 @@
 					"width": 80,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Owner/Site : ",
+					"text": "Owner/Site",
 					"textAlign": "right"
 				},
 				"label_0_5": {
@@ -109,7 +109,7 @@
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Serial Number :",
+					"text": "Serial Number",
 					"textAlign": "right"
 				},
 				"entryField_serialNumber": {
@@ -137,7 +137,7 @@
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Model :",
+					"text": "Model",
 					"bottom": 56,
 					"textAlign": "right"
 				},
@@ -168,7 +168,7 @@
 					"width": 80,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Location :",
+					"text": "Location",
 					"textAlign": "right"
 				},
 				"label_type": {
@@ -178,7 +178,7 @@
 					"width": 80,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Type :",
+					"text": "Type",
 					"textAlign": "right"
 				},
 				"pup_equipmentType": {
@@ -200,7 +200,7 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"pup_equipmentLocation": {
 					"type": "button",
@@ -221,7 +221,7 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"pup_equipmentDivision": {
 					"type": "button",
@@ -243,7 +243,7 @@
 						"onDisplayDetail"
 					],
 					"right": 608,
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"label_manufacturer": {
 					"type": "text",
@@ -252,7 +252,7 @@
 					"width": 80,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Manufacturer :",
+					"text": "Manufacturer",
 					"textAlign": "right"
 				},
 				"entryField_manufacturer": {
@@ -373,7 +373,7 @@
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Last Cal Date : ",
+					"text": "Last Cal Date",
 					"textAlign": "right"
 				},
 				"entryField_lastCalDate": {
@@ -403,7 +403,7 @@
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Next PM Date : ",
+					"text": "Next PM Date",
 					"textAlign": "right"
 				},
 				"entryField_nextCalDate": {
@@ -434,7 +434,7 @@
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Next Cal Date : ",
+					"text": "Next Cal Date",
 					"textAlign": "right"
 				},
 				"entryField_nextPMDate": {
@@ -464,7 +464,7 @@
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Last PM Date : ",
+					"text": "Last PM Date",
 					"textAlign": "right"
 				},
 				"entryField_lastPMDate": {
@@ -494,7 +494,7 @@
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Cal interval in days : ",
+					"text": "Cal interval in days",
 					"textAlign": "right"
 				},
 				"entryField_calInterval": {
@@ -546,7 +546,7 @@
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Calibrated by : ",
+					"text": "Calibrated by",
 					"textAlign": "right"
 				},
 				"label_calInDays1": {
@@ -556,7 +556,7 @@
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "PM interval in days : ",
+					"text": "PM interval in days",
 					"textAlign": "right"
 				},
 				"entryField_pmInterval": {
@@ -608,7 +608,7 @@
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "PM by : ",
+					"text": "PM by",
 					"textAlign": "right"
 				},
 				"entryField_calDocument": {
@@ -638,7 +638,7 @@
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "PM Document : ",
+					"text": "PM Document",
 					"textAlign": "right"
 				},
 				"entryField_pmDocument1": {
@@ -669,7 +669,7 @@
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Cal Document : ",
+					"text": "Cal Document",
 					"textAlign": "right"
 				},
 				"shipping_bkgd2": {
@@ -691,94 +691,6 @@
 					"height": 16,
 					"fontWeight": "bold"
 				},
-				"PopupDate1": {
-					"type": "subform",
-					"top": 154,
-					"left": 299,
-					"width": 19,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.nextCalDate",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/PopupDate1.4dm",
-					"events": [
-						"onLoad",
-						"onDataChange"
-					],
-					"focusable": true,
-					"borderStyle": "none"
-				},
-				"PopupDate2": {
-					"type": "subform",
-					"top": 181,
-					"left": 299,
-					"width": 19,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.lastCalDate",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/PopupDate2.4dm",
-					"events": [
-						"onLoad",
-						"onDataChange"
-					],
-					"focusable": true,
-					"borderStyle": "none"
-				},
-				"PopupDate3": {
-					"type": "subform",
-					"top": 329,
-					"left": 299,
-					"width": 19,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.nextPMDate",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/PopupDate3.4dm",
-					"events": [
-						"onLoad",
-						"onDataChange"
-					],
-					"focusable": true,
-					"borderStyle": "none"
-				},
-				"PopupDate4": {
-					"type": "subform",
-					"top": 356,
-					"left": 299,
-					"width": 19,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.lastPMDate",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/PopupDate4.4dm",
-					"events": [
-						"onLoad",
-						"onDataChange"
-					],
-					"focusable": true,
-					"borderStyle": "none"
-				},
 				"shipping_bkgd3": {
 					"type": "rectangle",
 					"top": 289,
@@ -791,10 +703,10 @@
 				},
 				"Text4": {
 					"type": "text",
-					"text": "Status history",
+					"text": "PM/Cal Status History",
 					"top": 296,
 					"left": 350,
-					"width": 119,
+					"width": 150,
 					"height": 16,
 					"fontWeight": "bold"
 				},
@@ -857,8 +769,8 @@
 				"entryField_pmNotRequired": {
 					"type": "checkbox",
 					"text": "PM Not Required",
-					"top": 259,
-					"left": 350,
+					"top": 178,
+					"left": 589,
 					"width": 190,
 					"height": 17,
 					"events": [
@@ -879,6 +791,119 @@
 					"dataSource": "Form:C1466.current_item.statusHistory",
 					"scrollbarVertical": "automatic",
 					"fontWeight": "normal"
+				},
+				"btnDatePickerNextCal": {
+					"type": "button",
+					"text": " ",
+					"top": 154,
+					"left": 301,
+					"width": 17,
+					"height": 17,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/calendar_black.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnDatePickerNextCal.4dm",
+					"visibility": "visible",
+					"iconFrames": 1,
+					"focusable": false,
+					"dataSource": ""
+				},
+				"btnDatePickerlLastCal": {
+					"type": "button",
+					"text": " ",
+					"top": 181,
+					"left": 301,
+					"width": 17,
+					"height": 17,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/calendar_black.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnDatePickerlLastCal.4dm",
+					"visibility": "visible",
+					"iconFrames": 1,
+					"focusable": false,
+					"dataSource": ""
+				},
+				"btnDatePickerNextPM": {
+					"type": "button",
+					"text": " ",
+					"top": 329,
+					"left": 301,
+					"width": 17,
+					"height": 17,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/calendar_black.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnDatePickerNextPM.4dm",
+					"visibility": "visible",
+					"iconFrames": 1,
+					"focusable": false,
+					"dataSource": ""
+				},
+				"btnDatePickerLastPM": {
+					"type": "button",
+					"text": " ",
+					"top": 356,
+					"left": 301,
+					"width": 17,
+					"height": 17,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/calendar_black.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnDatePickerLastPM.4dm",
+					"visibility": "visible",
+					"iconFrames": 1,
+					"focusable": false,
+					"dataSource": ""
+				},
+				"entryField_outOfCalibration": {
+					"type": "checkbox",
+					"text": "Out Of Calibration",
+					"top": 154,
+					"left": 589,
+					"width": 190,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.current_item.outOfCalibration",
+					"fontWeight": "normal",
+					"dataSourceTypeHint": "boolean",
+					"method": "ObjectMethods/entryField_outOfCalibration.4dm"
+				},
+				"entryField_decommissioned": {
+					"type": "checkbox",
+					"text": "Decommissioned",
+					"top": 262,
+					"left": 350,
+					"width": 190,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.current_item.decommissioned",
+					"fontWeight": "normal",
+					"dataSourceTypeHint": "boolean"
 				}
 			}
 		},
@@ -1133,7 +1158,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 736,
+	"geometryStamp": 772,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

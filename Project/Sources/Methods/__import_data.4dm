@@ -11,5 +11,7 @@ __import_country
 __import_data_CIP
 __import_data_avl_aml
 __import_data_quote
+__import_data_audit
+__import_data_managementReview
 
 ALERT:C41("Import done")

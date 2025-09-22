@@ -22,9 +22,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("firstName"; "First Name"; "width:190")
 	$entry.setLBItemsColumn("lastName"; "Last Name"; "width:190")
 	
-	$entry.setLBItemsOrderBy("firstName")
+	$entry.setLBItemsOrderBy("code")
 	
-	$entry.setValidationRule("code"; "entryField_code"; "mandatory"; "trimSpace"; "message:The code is mandatory")
+	//$entry.setValidationRule("code"; "entryField_code"; "mandatory"; "trimSpace"; "message:The code is mandatory")
 	$entry.setValidationRule("firstName"; "entryField_firstName"; "mandatory"; "message:The first name is mandatory")
 	$entry.setValidationRule("lastName"; "entryField_lastName"; "mandatory"; "message:The last name is mandatory")
 	
@@ -35,6 +35,11 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$view:=cs:C1710.sfw_definitionView.new("retrainingStaff"; "Staff retraining in 30 days"; "derivedFrom:main"; $entry)
 	$view.setSubset("retrainingStaff")
+	$view.setPictoLabel("/RESOURCES/ga/image/picto/terminated-user-16x16.png")
+	$entry.setView($view)
+	
+	$view:=cs:C1710.sfw_definitionView.new("currentStaff"; "Current Staff"; "derivedFrom:main"; $entry)
+	$view.setSubset("currentStaff")
 	$view.setPictoLabel("/RESOURCES/ga/image/picto/terminated-user-16x16.png")
 	$entry.setView($view)
 	
@@ -65,9 +70,25 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$filter.setDefaultTitle("All Teams")
 	$filter.setFilterByManyToManyEntity("Team"; "name"; "memberships.team")
 	$filter.setDynamicTitle("name"; "## Team")
-	$filter.setOrderForItems("id")
+	$filter.setOrderForItems("name")
 	$entry.addFilter($filter)
 	
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterRole")
+	$filter.setDefaultTitle("All Roles")
+	$filter.setFilterByManyToManyEntity("Role"; "name"; "roles.role")
+	$filter.setDynamicTitle("name"; "## Role")
+	$filter.setOrderForItems("name")
+	$entry.addFilter($filter)
+	
+Function currentStaff()->$staffs : cs:C1710.StaffSelection
+	$staffs:=ds:C1482.Staff.newSelection()
+	$users_es:=ds:C1482.sfw_User.query("login = :1"; Current user:C182)
+	
+	If ($users_es.length>0)
+		If ($users_es[0].staffs.length>0)
+			$staffs:=$users_es[0].staffs
+		End if 
+	End if 
 	
 Function terminatedStaff()->$staffs : cs:C1710.StaffSelection
 	$staffs:=ds:C1482.Staff.query("terminated = :1"; True:C214)

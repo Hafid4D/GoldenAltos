@@ -97,7 +97,7 @@
 					"stroke": "#808080",
 					"text": "Job #"
 				},
-				"Field_customer": {
+				"entryField_customer": {
 					"type": "input",
 					"top": 37,
 					"left": 132,
@@ -109,14 +109,12 @@
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
-						"onClick",
-						"onMouseMove"
+						"onDataChange"
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
 					"fontWeight": "bold",
-					"textAlign": "left",
-					"method": "ObjectMethods/Field_customer.4dm"
+					"textAlign": "left"
 				},
 				"label_jobNumber1": {
 					"type": "text",
@@ -155,13 +153,13 @@
 					"stroke": "#808080",
 					"text": "PO #"
 				},
-				"Field_poNumber": {
+				"entryField_poNumber": {
 					"type": "input",
 					"top": 62,
 					"left": 132,
 					"width": 140,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.job.poNumber",
+					"dataSource": "Form:C1466.current_item.poNumber",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -192,7 +190,7 @@
 					"stroke": "#808080",
 					"text": "Customer"
 				},
-				"Field_device1": {
+				"entryField_device1": {
 					"type": "input",
 					"top": 12,
 					"left": 396,
@@ -1095,11 +1093,11 @@
 					"text": "Ready to Ship",
 					"right": 433
 				},
-				"Field_readyToShip": {
+				"entryField_commit2": {
 					"type": "input",
 					"top": 304,
 					"left": 441,
-					"width": 90,
+					"width": 406,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.readyToShipDate",
 					"focusable": false,
@@ -1264,26 +1262,6 @@
 						"onLoad"
 					],
 					"focusable": true
-				},
-				"dp_readyToShipDate": {
-					"type": "subform",
-					"top": 305,
-					"left": 512,
-					"width": 19,
-					"height": 16,
-					"dataSource": "Form:C1466.current_item.readyToShipDate",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/dp_readyToShipDate.4dm",
-					"events": [
-						"onLoad"
-					],
-					"focusable": true
 				}
 			}
 		},
@@ -1376,24 +1354,6 @@
 							"width": 185,
 							"enterable": false,
 							"minWidth": 185,
-							"resizable": false
-						},
-						{
-							"header": {
-								"name": "Header1",
-								"text": "Min Yield",
-								"fontWeight": "bold"
-							},
-							"name": "Column1",
-							"footer": {
-								"name": "Footer1"
-							},
-							"dataSource": "This:C1470.minYield",
-							"width": 65,
-							"dataSourceTypeHint": "number",
-							"dateFormat": "short",
-							"textAlign": "center",
-							"enterable": false,
 							"resizable": false
 						},
 						{

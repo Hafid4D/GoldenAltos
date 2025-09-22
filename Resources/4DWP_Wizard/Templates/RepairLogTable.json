@@ -7,7 +7,7 @@
         }, {
             "check": true,
             "header": "Sys ID",
-            "source": "This.item.systemID"
+            "source": "This.item.equipment#Null ? String(This.item.equipment.assignedID) : \"\""
         }, {
             "check": true,
             "header": "Report date",

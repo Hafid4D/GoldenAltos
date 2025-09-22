@@ -417,7 +417,7 @@
 					"top": 305,
 					"left": 412,
 					"width": 458,
-					"height": 152,
+					"height": 128,
 					"dataSource": "Form:C1466.current_item.qaComment",
 					"focusable": false,
 					"enterable": false,
@@ -430,7 +430,7 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 457,
+					"bottom": 433,
 					"right": 870,
 					"sizingY": "move",
 					"sizingX": "grow",
@@ -895,7 +895,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 375,
+	"geometryStamp": 374,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

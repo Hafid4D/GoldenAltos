@@ -164,7 +164,6 @@ Function pup_procedureType()
 		
 		$form:=New object:C1471(\
 			"colName"; "qcarNumberRef"; \
-			"lb_items"; ds:C1482.Qcar.all().toCollection().map(Formula:C1597(_ga_getQcarRef)); \
 			"allData"; ds:C1482.Qcar.all().toCollection().map(Formula:C1597(_ga_getQcarRef)); \
 			"dataclass"; "Qcar"\
 			)
@@ -259,6 +258,7 @@ Function responsibleEdit()
 		
 		$form.teams:=$hListItems
 		$winRef:=Open form window:C675("_ga_staffsPerTeam"; Movable dialog box:K34:7; Horizontally centered:K39:1; Vertically centered:K39:4)
+		SET WINDOW TITLE:C213("Select responsible persons")
 		DIALOG:C40("_ga_staffsPerTeam"; $form)
 		
 		If (OK=1)
