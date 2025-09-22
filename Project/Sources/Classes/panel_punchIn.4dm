@@ -44,13 +44,15 @@ Function redrawAndSetVisible()
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	
 	Case of 
-		: (FORM Get current page:C276(*)=1)  // Main page
+		: (FORM Get current page:C276(*)=1) | (FORM Get current page:C276(*)=2) | (FORM Get current page:C276(*)=3)
 			OBJECT GET COORDINATES:C663(*; "banner_lotOnHold_page"+String:C10(FORM Get current page:C276(*)); $left; $top; $right; $bottom)
 			
 			$width:=$right-$left
 			$height:=$bottom-$top
 			
 			OBJECT SET COORDINATES:C1248(*; "banner_lotOnHold_page"+String:C10(FORM Get current page:C276(*)); $widthSubform-$width; $heightSubform-$height; $widthSubform; $heightSubform)
+			
+		: (FORM Get current page:C276(*)=4)
 	End case 
 	
 Function checkForCertifications()->$valid : Boolean
@@ -77,7 +79,6 @@ Function checkForCertifications()->$valid : Boolean
 	End if 
 	
 Function loadCurrentStep()
-	
 	Form:C1466.currentStep:=Null:C1517
 	Form:C1466.currentStepOrder:=0
 	$currentstep:=Form:C1466.current_item.steps.query("qtyIn = :1 AND qtyOut = :1 AND dateIn = :2 AND dateOut = :2"; 0; !00-00-00!).orderBy("order asc")
@@ -97,34 +98,9 @@ Function loadCurrentStep()
 			OBJECT SET PLACEHOLDER:C1295(*; "EntryField_comment1"; Replace string:C233(Form:C1466.currentStep.commentFormat1; "#"; "_"))
 			OBJECT SET PLACEHOLDER:C1295(*; "EntryField_comment2"; Replace string:C233(Form:C1466.currentStep.commentFormat2; "#"; "_"))
 			
-			//If (Form.currentStep.tools=Null)
-			//Form.currentStep.tools:=New object("items"; New collection())
-			
-			//If (Form.currentStep.stepTemplate#Null)
-			//For each ($stepTemplateTool; Form.currentStep.stepTemplate.stepTemplateTools)
-			//$tool_ob:=New object(\
-				"order"; $stepTemplateTool.order; \
-				"toolType"; $stepTemplateTool.toolType.name; \
-				"tool"; New object("tool"; ""; "UUID_Tool"; ""); \
-				"date"; !00-00-00!\
-				)
-			//End for each 
-			//End if 
-			//End if 
-			
-			//If (Form.currentStep.parametricMeasurements=Null)
-			
-			//End if 
-			
-			//If (Form.currentStep.stepInterruptions=Null)
-			//Form.currentStep.stepInterruptions:=New object("items"; New collection())
-			//End if 
-			
-			//If (Form.currentStep.dataTables=Null)
-			
-			//End if 
-			
-			FORM GOTO PAGE:C247(1; *)
+			If (FORM Get current page:C276(*)#4)
+				FORM GOTO PAGE:C247(1; *)
+			End if 
 		Else 
 			Form:C1466.currentStepOrder:=0
 			FORM GOTO PAGE:C247(3; *)

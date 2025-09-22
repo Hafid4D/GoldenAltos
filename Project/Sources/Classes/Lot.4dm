@@ -13,7 +13,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanel("panel_lot")
 	$entry.setPanelPage(1; "po-infos-32x32.png"; "Main")
 	$entry.setPanelPage(2; "lot-steps-32x32.png"; "Lot Steps")
-	//$entry.setPanelPage(3; "inventories-32x32.png"; "Inventories")
+	$entry.setPanelPage(3; ""; "Customer Provided Material")
 	
 	
 	$entry.setLBItemsColumn("lotNumber"; "Lot #"; "width:100")
@@ -22,6 +22,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("dateOut"; "Date OUT"; "width:75"; "center")
 	
 	$entry.setLBItemsOrderBy("lotNumber")
+	
+	$entry.setItemAction("Split Lot"; "lot_split")
+	
 	$entry.enableTransaction()
 	
 Function onlyPunchIn()->$punchIN_es : cs:C1710.LotStepSelection

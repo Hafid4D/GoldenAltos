@@ -16,6 +16,9 @@ Function formMethod()
 				This:C1470.manageReOrderBtns()
 				
 				This:C1470.loadLotSteps()
+				
+			: (FORM Get current page:C276(*)=3)
+				This:C1470.loadMaterials()
 		End case 
 	End if 
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())  //It's time to resize the object or set visible
@@ -82,6 +85,22 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "btnMoveUp"; $widthSubform-$offset_btns_r-$width_mu; $top_mu; $widthSubform-$offset_btns_r; $bottom_mu)
 			OBJECT SET COORDINATES:C1248(*; "btnMoveDown"; $widthSubform-$offset_btns_r-$width_md; $top_md; $widthSubform-$offset_btns_r; $bottom_md)
 			OBJECT SET COORDINATES:C1248(*; "btnMoveBottom"; $widthSubform-$offset_btns_r-$width_mb; $top_mb; $widthSubform-$offset_btns_r; $bottom_mb)
+			
+		: (FORM Get current page:C276(*)=3)  // Customer Provided Material
+			OBJECT GET COORDINATES:C663(*; "rec_bkgd_"+String:C10(FORM Get current page:C276(*)); $left; $top; $right; $bottom)
+			OBJECT GET COORDINATES:C663(*; "lb_materials"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			OBJECT GET COORDINATES:C663(*; "bActionCustProvMat"; $left_bAc; $top_bAc; $right_bAc; $bottom_bAc)
+			
+			$offset:=4
+			$offset_r:=5
+			$offset_bAc:=10
+			
+			$height_bAc:=$bottom_bAc-$top_bAc
+			
+			
+			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_"+String:C10(FORM Get current page:C276(*)); $left; $top; $right; $heightSubform-$offset)
+			OBJECT SET COORDINATES:C1248(*; "lb_materials"; $left_lb; $top_lb; $widthSubform-$offset_r; $heightSubform-$offset-1)
+			OBJECT SET COORDINATES:C1248(*; "bActionCustProvMat"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
 	End case 
 	
 Function loadAllTabs()
@@ -343,3 +362,125 @@ Function pup_status()
 		
 	End if 
 	This:C1470.drawPup_LotStatus()
+	
+Function selectJob()
+	If (Form:C1466.sfw.checkIsInModification())
+		Case of 
+			: (FORM Event:C1606.code=On Getting Focus:K2:7) | (FORM Event:C1606.code=On Clicked:K2:4)
+				OBJECT GET COORDINATES:C663(*; "Field_customerName"; $l; $t; $r; $b)
+				CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
+				
+				$form:=New object:C1471(\
+					"colName"; "jobNumber"; \
+					"lb_items"; ds:C1482.Job.all().orderBy("jobNumber"); \
+					"allData"; ds:C1482.Job.all().orderBy("jobNumber"); \
+					"dataclass"; "Job"\
+					)
+				
+				$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b-20)
+				DIALOG:C40("selectNto1"; $form)
+				CLOSE WINDOW:C154($winRef)
+				
+				If (ok=1)
+					Form:C1466.current_item.UUID_Job:=$form.item.UUID
+					
+					cs:C1710.panel_purchaseOrder.me._activate_save_cancel_button()
+				End if 
+		End case 
+	End if 
+	
+Function bActionCustProvMat()
+	$refMenu:=Create menu:C408
+	
+	APPEND MENU ITEM:C411($refMenu; "Receive Material")
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--receive_material")
+	
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	$choose:=Dynamic pop up menu:C1006($refMenu)
+	
+	Case of 
+		: ($choose="--receive_material")
+			$form:=New object:C1471(\
+				"inventory_e"; ds:C1482.Inventory.new()\
+				)
+			
+			$form.inventory_e.vendor:=Form:C1466.current_item.job.customer
+			$form.inventory_e.UUID_Lot:=Form:C1466.current_item.UUID
+			$form.inventory_e.stockNum:="man_"+String:C10(ds:C1482.Inventory.all().length)+String:C10(Milliseconds:C459)
+			
+			$winRef:=Open form window:C675("createManualInv_lot"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("createManualInv_lot"; $form)
+			CLOSE WINDOW:C154($winRef)
+			
+			If (ok=1)
+				$res:=$form.inventory_e.save()
+				
+				If ($res.success)
+					$form.inventory_e.afterCreation()
+				End if 
+			End if 
+	End case 
+	
+	
+Function loadMaterials()
+	Form:C1466.lb_materials:=ds:C1482.Inventory.query("UUID_Lot = :1"; Form:C1466.current_item.UUID)
+	
+	
+Function btnOpenLotParent()
+	$entity:=Form:C1466.current_item.lotParent
+	Form:C1466.sfw.openInANewWindow($entity; "customerService"; "lots")
+	
+	
+Function splitLot()
+	If (Form:C1466.sfw.checkIsInModification())
+		If (Undefined:C82(Form:C1466.current_item.lotParent))
+			
+			$newLot:=ds:C1482.Lot.new()
+			
+			$dataclassObject:=ds:C1482.Lot
+			
+			$id:=Form:C1466.current_item.subLots.length+1
+			
+			$newLotNumber:=Form:C1466.current_item.lotNumber+"-"+String:C10($id)
+			
+			$lot_es:=ds:C1482.Lot.query("lotNumber = :1"; $newLotNumber)
+			
+			While ($lot_es.length>0)
+				$id:=$id+1
+				
+				$newLotNumber:=(Form:C1466.current_item.lotNumber)+"-"+String:C10($id)
+				
+				$lot_es:=ds:C1482.Lot.query("lotNumber = :1"; $newLotNumber)
+			End while 
+			
+			For each ($attributeName; $dataclassObject)
+				$attribute:=$dataclassObject[$attributeName]
+				
+				If ($attribute.kind="storage")
+					Case of 
+						: ($attributeName="UUID") & ($attribute.type="string")
+							$newLot[$attributeName]:=Generate UUID:C1066
+						: ($attributeName="UUID_LotParent") & ($attribute.type="string")
+							$newLot.UUID_LotParent:=Form:C1466.current_item.UUID
+						: ($attributeName="lotNumber")
+							$newLot.lotNumber:=$newLotNumber
+						Else 
+							$newLot[$attributeName]:=Form:C1466.current_item[$attributeName]
+					End case 
+				End if 
+			End for each 
+			
+			$res:=$newLot.save()
+			
+			If ($res.success)
+				This:C1470._activate_save_cancel_button()
+			End if 
+			
+		Else 
+			//Sub Lot
+			ALERT:C41("sub lot")
+		End if 
+	End if 

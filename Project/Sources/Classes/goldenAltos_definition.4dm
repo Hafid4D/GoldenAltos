@@ -221,7 +221,7 @@ Function _entries_definition()
 	
 	$entry.setPanel("panel_punchIn")
 	$entry.setPanelPage(1; "po-infos-32x32.png"; "Main")
-	//$entry.setPanelPage(3; "inventories-32x32.png"; "Inventories")
+	$entry.setPanelPage(4; ""; "Inventory Pulls")
 	
 	
 	$entry.setLBItemsColumn("lotNumber"; "Lot #"; "width:450")
