@@ -1,5 +1,9 @@
 Class extends Entity
 
+local Function get nameInWindowTitle()->$nameInWindowTitle : Text
+	$nameInWindowTitle:=This:C1470.code
+	
+	
 Function preview()->$preview : Object
 	var $contact : cs:C1710.ContactEntity
 	$preview:=New object:C1471()
