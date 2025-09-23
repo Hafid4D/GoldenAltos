@@ -346,8 +346,9 @@ import inventories
 If (True:C214)
 	TRUNCATE TABLE:C1051([Inventory:126])
 	TRUNCATE TABLE:C1051([InventoryPull:127])
-	TRUNCATE TABLE:C1051()
-	TRUNCATE TABLE:C1051()
+	TRUNCATE TABLE:C1051([Location:47])
+	TRUNCATE TABLE:C1051([Unit:48])
+	TRUNCATE TABLE:C1051([Classification:59])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/inventory_export.json")
 	
@@ -373,7 +374,7 @@ If (True:C214)
 		$inventory_e.receivedBy:=$record.recdBy
 		$inventory_e.totalCost:=$record.totalCost
 		$inventory_e.availableQty:=$record.AvailableQty
-		$inventory_e.initiallQty:=$record.originalQty
+		$inventory_e.initialQty:=$record.originalQty
 		$inventory_e.inventoryID:=(ds:C1482.Inventory.all().length>0) ? ds:C1482.Inventory.all().max("inventoryID")+1 : 1
 		$inventory_e.code:="INV"+String:C10($inventory_e.inventoryID; "00000#")
 		
@@ -751,7 +752,7 @@ If (True:C214)
 	TRUNCATE TABLE:C1051([Team:136])
 	TRUNCATE TABLE:C1051([Membership:137])
 	TRUNCATE TABLE:C1051([Role:132])
-	TRUNCATE TABLE:C1051([StaffRole:44])
+	TRUNCATE TABLE:C1051([StaffRole:63])
 	TRUNCATE TABLE:C1051([Staff:135])
 	
 	SET DATABASE PARAMETER:C642([Staff:135]; Table sequence number:K37:31; 0)

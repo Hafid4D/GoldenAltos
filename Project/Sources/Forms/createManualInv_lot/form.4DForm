@@ -434,9 +434,9 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.inventory_e.lot.lotNumber",
+					"dataSource": "Form:C1466.inventory_e.lot_e.lotNumber",
 					"dataSourceTypeHint": "number",
-					"numberFormat": "$##,###,###,##0.00"
+					"enterable": false
 				},
 				"Button": {
 					"type": "button",
@@ -597,7 +597,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.inventory_e.qtyinStock"
+					"dataSource": "Form:C1466.inventory_e.qtyInStock"
 				},
 				"header_bkgd26": {
 					"type": "rectangle",
@@ -719,7 +719,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.inventory_e.inventoryUnits"
+					"dataSource": "Form:C1466.inventory_e.units"
 				},
 				"header_bkgd32": {
 					"type": "rectangle",
@@ -774,11 +774,11 @@
 					"type": "input",
 					"left": 131,
 					"top": 341,
-					"width": 280,
+					"width": 140,
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "unitCost",
+					"dataSource": "Form:C1466.inventory_e.unitCost",
 					"dataSourceTypeHint": "number"
 				},
 				"header_bkgd35": {
@@ -897,7 +897,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.inventory_e.binLocation"
+					"dataSource": "Form:C1466.inventory_e.location"
 				},
 				"header_bkgd41": {
 					"type": "rectangle",
@@ -956,7 +956,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.inventory_e.recdBy"
+					"dataSource": "Form:C1466.inventory_e.receivedBy"
 				},
 				"btnDatePicker_dateIn": {
 					"type": "button",
@@ -991,7 +991,7 @@
 			}
 		}
 	],
-	"geometryStamp": 3558,
+	"geometryStamp": 3569,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

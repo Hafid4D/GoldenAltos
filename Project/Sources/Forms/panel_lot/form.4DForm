@@ -1588,7 +1588,7 @@
 					"columns": [
 						{
 							"header": {
-								"text": "Part #",
+								"text": "INV #",
 								"name": "Header2",
 								"fontWeight": "bold"
 							},
@@ -1597,7 +1597,7 @@
 								"name": "Footer2"
 							},
 							"width": 100,
-							"dataSource": "This:C1470.order",
+							"dataSource": "This:C1470.code",
 							"textAlign": "center",
 							"dataSourceTypeHint": "number",
 							"enterable": false,
@@ -1613,26 +1613,10 @@
 							"footer": {
 								"name": "Footer3"
 							},
-							"dataSource": "This:C1470.description",
+							"dataSource": "This:C1470.vendor",
 							"width": 200,
 							"enterable": false,
 							"minWidth": 200
-						},
-						{
-							"header": {
-								"name": "Header4",
-								"text": "Lot #",
-								"fontWeight": "bold"
-							},
-							"name": "Column4",
-							"footer": {
-								"name": "Footer4"
-							},
-							"dataSource": "This:C1470.alert",
-							"width": 100,
-							"enterable": false,
-							"minWidth": 100,
-							"resizable": false
 						},
 						{
 							"header": {
@@ -1644,8 +1628,8 @@
 							"footer": {
 								"name": "Footer5"
 							},
-							"dataSource": "This:C1470.minYield",
-							"width": 100,
+							"dataSource": "This:C1470.stockNum",
+							"width": 150,
 							"dataSourceTypeHint": "number",
 							"dateFormat": "short",
 							"textAlign": "center",
@@ -1663,7 +1647,7 @@
 							"footer": {
 								"name": "Footer6"
 							},
-							"dataSource": "This:C1470.qtyIn",
+							"dataSource": "This:C1470.qtyInStock",
 							"width": 80,
 							"dataSourceTypeHint": "number",
 							"dateFormat": "short",
@@ -1675,17 +1659,17 @@
 						{
 							"header": {
 								"name": "Header7",
-								"text": "IQADone",
+								"text": "Date IN",
 								"fontWeight": "bold"
 							},
 							"name": "Column7",
 							"footer": {
 								"name": "Footer7"
 							},
-							"dataSource": "This:C1470.qtyOut",
-							"width": 75,
+							"dataSource": "(This:C1470.dateIn=0) ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.dateIn)",
+							"width": 85,
 							"textAlign": "center",
-							"dataSourceTypeHint": "boolean",
+							"dataSourceTypeHint": "date",
 							"dateFormat": "short",
 							"enterable": false,
 							"resizable": false,
@@ -1694,33 +1678,33 @@
 						{
 							"header": {
 								"name": "Header8",
-								"text": "IQAPass",
+								"text": "Exp. Date",
 								"fontWeight": "bold"
 							},
 							"name": "Column8",
 							"footer": {
 								"name": "Footer8"
 							},
-							"dataSource": "This:C1470.dateIn",
-							"width": 75,
+							"dataSource": "(This:C1470.expirationDate=0) ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.expirationDate)",
+							"width": 85,
 							"dateFormat": "short",
 							"textAlign": "center",
-							"dataSourceTypeHint": "boolean",
+							"dataSourceTypeHint": "date",
 							"enterable": false,
 							"resizable": false
 						},
 						{
 							"header": {
 								"name": "Header9",
-								"text": "IQADoneBy",
+								"text": "Received By",
 								"fontWeight": "bold"
 							},
 							"name": "Column9",
 							"footer": {
 								"name": "Footer9"
 							},
-							"dataSource": "This:C1470.dateOut",
-							"width": 85,
+							"dataSource": "This:C1470.receivedBy",
+							"width": 165,
 							"dateFormat": "short",
 							"textAlign": "center",
 							"dataSourceTypeHint": "date",

@@ -389,6 +389,7 @@ Function selectJob()
 		End case 
 	End if 
 	
+	
 Function bActionCustProvMat()
 	$refMenu:=Create menu:C408
 	
@@ -410,16 +411,23 @@ Function bActionCustProvMat()
 			$form.inventory_e.vendor:=Form:C1466.current_item.job.customer
 			$form.inventory_e.UUID_Lot:=Form:C1466.current_item.UUID
 			$form.inventory_e.stockNum:="man_"+String:C10(ds:C1482.Inventory.all().length)+String:C10(Milliseconds:C459)
+			$form.inventory_e.inventoryID:=(ds:C1482.Inventory.all().length>0) ? ds:C1482.Inventory.all().max("inventoryID")+1 : 1
+			$form.inventory_e.code:="INV"+String:C10($form.inventory_e.inventoryID; "00000#")
 			
 			$winRef:=Open form window:C675("createManualInv_lot"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("createManualInv_lot"; $form)
 			CLOSE WINDOW:C154($winRef)
 			
 			If (ok=1)
+				$form.inventory_e.initialQty:=$form.inventory_e.qtyInStock
+				$form.inventory_e.availableQty:=$form.inventory_e.qtyInStock
+				
 				$res:=$form.inventory_e.save()
 				
 				If ($res.success)
+					This:C1470.loadMaterials()
 					$form.inventory_e.afterCreation()
+					This:C1470._activate_save_cancel_button()
 				End if 
 			End if 
 	End case 

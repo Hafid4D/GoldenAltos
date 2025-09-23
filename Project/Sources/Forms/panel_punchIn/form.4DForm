@@ -1122,7 +1122,7 @@
 					"type": "listbox",
 					"left": 107,
 					"top": 155,
-					"width": 782,
+					"width": 882,
 					"height": 440,
 					"events": [
 						"onClick"
@@ -1132,12 +1132,26 @@
 					"visibility": "visible",
 					"dataSource": "Form:C1466.lb_pulls",
 					"alternateFill": "#F7F9FC",
-					"right": 889,
+					"right": 989,
 					"bottom": 595,
 					"currentItemSource": "Form:C1466.selectedPull",
 					"selectionMode": "single",
 					"method": "ObjectMethods/lb_pulls.4dm",
 					"columns": [
+						{
+							"header": {
+								"name": "Header20",
+								"text": "INV #",
+								"fontWeight": "bold"
+							},
+							"name": "Column18",
+							"width": 100,
+							"dataSource": "This:C1470.inventory.code",
+							"enterable": false,
+							"footer": {
+								"name": "Footer20"
+							}
+						},
 						{
 							"header": {
 								"name": "Header13",
@@ -1216,7 +1230,7 @@
 								"name": "Footer17"
 							},
 							"width": 90,
-							"dataSource": "This:C1470.lotNumber",
+							"dataSource": "This:C1470.inventory.lot_e.lotNumber",
 							"dataSourceTypeHint": "date",
 							"textAlign": "center",
 							"dateFormat": "short",
@@ -1258,7 +1272,7 @@
 						}
 					]
 				},
-				"rec_bkgd_2": {
+				"rec_bkgd_4": {
 					"type": "rectangle",
 					"top": 154,
 					"left": 5,
@@ -1299,7 +1313,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_4lines",
-	"geometryStamp": 817,
+	"geometryStamp": 823,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

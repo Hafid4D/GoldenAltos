@@ -20,6 +20,9 @@ Function formMethod()
 				This:C1470.loadPMs()
 				This:C1470.loadStepInterruptions()
 				This:C1470.loadDataTables()
+				
+			: (FORM Get current page:C276(*)=4)
+				This:C1470.loadInventoryPulls()
 		End case 
 	End if 
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())  //It's time to resize the object or set visible
@@ -53,6 +56,18 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "banner_lotOnHold_page"+String:C10(FORM Get current page:C276(*)); $widthSubform-$width; $heightSubform-$height; $widthSubform; $heightSubform)
 			
 		: (FORM Get current page:C276(*)=4)
+			OBJECT GET COORDINATES:C663(*; "rec_bkgd_4"; $left; $top; $right; $bottom)
+			OBJECT GET COORDINATES:C663(*; "lb_pulls"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			OBJECT GET COORDINATES:C663(*; "bActionPulls"; $left_bAc; $top_bAc; $right_bAc; $bottom_bAc)
+			
+			$offset:=4
+			$offset_bAc:=10
+			
+			$height_bAc:=$bottom_bAc-$top_bAc
+			
+			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_4"; $left; $top; $right; $heightSubform-$offset)
+			OBJECT SET COORDINATES:C1248(*; "lb_pulls"; $left_lb; $top_lb; $right_lb; $heightSubform-$offset-1)
+			OBJECT SET COORDINATES:C1248(*; "bActionPulls"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
 	End case 
 	
 Function checkForCertifications()->$valid : Boolean
@@ -312,3 +327,67 @@ Function bActionPMs()
 				End if 
 		End case 
 	End if 
+	
+Function loadInventoryPulls()
+	Form:C1466.lb_pulls:=ds:C1482.Inventory.query("UUID_Lot = :1"; Form:C1466.currentStep.lot.UUID).pulls.orderBy("inventory.code asc")
+	
+Function bActionInvPull()
+	$refMenu:=Create menu:C408
+	
+	APPEND MENU ITEM:C411($refMenu; "Pull")
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--pull")
+	If (Not:C34(Form:C1466.sfw.checkIsInModification())) || (Form:C1466.selectedPull=Null:C1517)
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	$choose:=Dynamic pop up menu:C1006($refMenu)
+	
+	If ($choose#"")
+		$form:=New object:C1471(\
+			"invPull"; New object:C1471(\
+			"order"; Form:C1466.lb_pulls.length+1; \
+			"isPull"; True:C214; \
+			"date"; Current date:C33(); \
+			"currentQty"; Form:C1466.selectedPull.inventory.availableQty; \
+			"qtyToPull"; 0; \
+			"pulledBy"; ""; \
+			"note"; ""\
+			))
+		
+		$user_es:=ds:C1482.sfw_User.query("login = :1"; Current user:C182)
+		
+		$form.invPull.pulledBy:=($user_es.length>0) ? $user_es[0].fullName : ""
+		
+		$winRef:=Open form window:C675("create_invPull"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
+		DIALOG:C40("create_invPull"; $form)
+		CLOSE WINDOW:C154($winRef)
+		
+		If (OK=1)
+			$pull_e:=ds:C1482.InventoryPull.new()
+			$pull_e.type:="Pull"
+			$pull_e.date:=cs:C1710.sfw_stmp.me.build($form.invPull.date)
+			$pull_e.qty:=$form.invPull.qtyToPull
+			$pull_e.remaining:=$form.invPull.currentQty-$form.invPull.qtyToPull
+			$pull_e.performedBy:=$form.invPull.pulledBy
+			//$pull_e.lotNumber:="N/A"
+			$pull_e.statusIQA:="N/A"
+			
+			$pull_e.UUID_Inventory:=Form:C1466.selectedPull.inventory.UUID
+			
+			$res:=$pull_e.save()
+			
+			If ($res.success)
+				Form:C1466.selectedPull.inventory.availableQty:=$pull_e.remaining
+				
+				
+				$res:=Form:C1466.selectedPull.inventory.save()
+				
+				If (Not:C34($res.success))
+					//TRACE
+				End if 
+				This:C1470.loadInventoryPulls()
+				This:C1470._activate_save_cancel_button()
+			End if 
+		End if 
+	End if 
+	

@@ -380,7 +380,7 @@
 					"left": 133,
 					"width": 80,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.initiallQty",
+					"dataSource": "Form:C1466.current_item.initialQty",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -403,7 +403,7 @@
 					"stroke": "#808080",
 					"text": "Available Quantity"
 				},
-				"Field_availableQty": {
+				"EntryField_availableQty": {
 					"type": "input",
 					"top": 208,
 					"left": 133,
@@ -468,7 +468,7 @@
 					"left": 133,
 					"width": 80,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.unitCost",
+					"dataSource": "Form:C1466.current_item.docsInServer",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1031,7 +1031,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1032,
+	"geometryStamp": 1033,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

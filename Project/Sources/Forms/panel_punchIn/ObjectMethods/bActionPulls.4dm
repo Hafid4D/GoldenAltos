@@ -1,1 +1,1 @@
-cs:C1710.panel_inventory.me.bActionInvPull()
+cs:C1710.panel_punchIn.me.bActionInvPull()
