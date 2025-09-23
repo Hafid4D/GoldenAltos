@@ -88,7 +88,7 @@
 					"height": 24,
 					"sizingX": "move",
 					"pictureFormat": "scaled",
-					"picture": "/RESOURCES/image/logo/loupe.png"
+					"picture": "/RESOURCES/sfw/image/icon/loupe.png"
 				},
 				"bToolbar_1": {
 					"type": "button",
@@ -398,7 +398,7 @@
 						"onClick"
 					],
 					"style": "toolbar",
-					"icon": "/RESOURCES/image/flags/tiny/FR.png",
+					"icon": "/RESOURCES/sfw/flags/tiny/FR.png",
 					"popupPlacement": "linked",
 					"method": "ObjectMethods/bLangage.4dm",
 					"sizingX": "move",
@@ -434,7 +434,7 @@
 					"height": 18,
 					"sizingX": "move",
 					"fontWeight": "bold",
-					"stroke": "#FFFFFF",
+					"stroke": "#ff0000",
 					"focusable": false,
 					"text": "X",
 					"iconFrames": 4,
@@ -465,7 +465,7 @@
 				"bkgdNotifications": {
 					"type": "rectangle",
 					"top": 6,
-					"left": 1208,
+					"left": 1203,
 					"width": 35,
 					"height": 19,
 					"borderRadius": 9,
@@ -475,7 +475,7 @@
 				},
 				"counterNotifications": {
 					"type": "input",
-					"left": 1211,
+					"left": 1206,
 					"top": 7,
 					"width": 28,
 					"height": 17,
@@ -524,22 +524,24 @@
 					"imageHugsTitle": true,
 					"fontSize": 9,
 					"sizingX": "move",
-					"stroke": "#FFFFFF"
+					"stroke": "#FFFFFF",
+					"visibility": "hidden"
 				},
 				"bkgdToDoList": {
 					"type": "rectangle",
 					"top": 6,
-					"left": 1141,
+					"left": 1136,
 					"width": 35,
 					"height": 19,
 					"borderRadius": 9,
 					"stroke": "transparent",
 					"fill": "#ff0000",
-					"sizingX": "move"
+					"sizingX": "move",
+					"visibility": "hidden"
 				},
 				"counterToDoList": {
 					"type": "input",
-					"left": 1144,
+					"left": 1139,
 					"top": 7,
 					"width": 28,
 					"height": 17,
@@ -551,7 +553,8 @@
 					"dataSource": "Form:C1466.todoListCount",
 					"stroke": "#FFFFFF",
 					"textAlign": "center",
-					"sizingX": "move"
+					"sizingX": "move",
+					"visibility": "hidden"
 				},
 				"pupVisions": {
 					"type": "input",
@@ -786,7 +789,7 @@
 		"version": "1",
 		"kind": "form"
 	},
-	"geometryStamp": 560,
+	"geometryStamp": 568,
 	"editor": {
 		"groups": {
 			"Group": [

@@ -1,3 +1,8 @@
+
+property current_pathParts : Collection
+property current_pathDataclassParts : Collection
+property startDataclass : Text
+
 singleton Class constructor
 	
 	

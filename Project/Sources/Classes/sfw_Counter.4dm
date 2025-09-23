@@ -2,6 +2,7 @@ Class extends DataClass
 
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
+	//If (cs.sfw_definition.me.globalParameters.counters.activate)
 	$entry:=cs:C1710.sfw_definitionEntry.new("counter"; "administration"; "Counter")
 	$entry.setXliffLabel("counter.counter")
 	$entry.setDataclass("sfw_Counter")
@@ -17,6 +18,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListPreconfigAction("exportReferenceRecords")
 	$entry.setItemListPreconfigAction("importReferenceRecords")
 	$entry.setItemListPreconfigAction("copyItemsListToPasteboard")
+	//End if 
 	
 local Function getNextValue($ident : Text)->$value : Integer
 	

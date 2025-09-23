@@ -73,8 +73,7 @@
 					"dataSource": "Form:C1466.pup_users",
 					"dataSourceTypeHint": "object",
 					"sizingX": "fixed",
-					"sizingY": "fixed",
-					"method": "ObjectMethods/pup_users.4dm"
+					"sizingY": "fixed"
 				},
 				"input_password": {
 					"type": "input",
@@ -158,7 +157,7 @@
 				},
 				"bCancel": {
 					"type": "button",
-					"top": 348,
+					"top": 354,
 					"left": 142,
 					"width": 100,
 					"height": 32,
@@ -177,7 +176,7 @@
 				},
 				"bOk": {
 					"type": "button",
-					"top": 348,
+					"top": 354,
 					"left": 270,
 					"width": 100,
 					"height": 32,
@@ -203,7 +202,7 @@
 			}
 		}
 	],
-	"geometryStamp": 260,
+	"geometryStamp": 268,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
@@ -211,5 +210,6 @@
 			"View 1": {}
 		}
 	},
-	"method": "method.4dm"
+	"method": "method.4dm",
+	"bottomMargin": 10
 }

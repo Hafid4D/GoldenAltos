@@ -7,11 +7,14 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setXliffLabel("setting.title")
 	$entry.setDataclass("sfw_Setting")
 	$entry.setDisplayOrder(-10000)
-	$entry.setIcon("image/entry/settings-50x50.png")
-	$entry.setSearchboxField("ident")
-	$entry.setSearchboxField("name")
-	$entry.setPanel("sfw_panel_setting"; 2)
+	$entry.setIcon("sfw/entry/settings-50x50.png")
 	
+	$entry.setSearchField("attribute:ident"; "tag:ident")
+	$entry.setSearchField("attribute:name"; "tag:name")
+	
+	
+	$entry.setPanel("sfw_panel_setting"; 2)
+	$entry.setPanelPage(1; ""; "Détails"; "disabled")
 	
 	$entry.setValidationRule("ident"; "entryField_ident"; "mandatory"; "trimSpace"; "capitalize")
 	$entry.setValidationRule("name"; "entryField_name"; "mandatory"; "trimSpace"; "capitalize")

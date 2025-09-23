@@ -96,8 +96,8 @@ local Function generateTemporaryPassword()->$password : Text
 local Function sendTemporaryPassword()
 	// todo: send an email with the temporary password
 	
-	$formula:=Formula from string:C1601("ds.sfw_User.get($1)."+cs:C1710.sfw_definition.me.globalParameters.users.linkedPathToEmailFromUserEntity)
-	$userEmail:=$formula.call(Null:C1517; This:C1470.UUID)
+	//$formula:=Formula from string("ds.sfw_User.get($1)."+cs.sfw_definition.me.globalParameters.users.linkedPathToEmailFromUserEntity)
+	//$userEmail:=$formula.call(Null; This.UUID)
 	
 	//If ($userEmail#"")
 	//$email:=New object

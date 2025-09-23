@@ -1,3 +1,5 @@
+property functions : Collection
+
 shared singleton Class constructor
 	
 	var $fonction : Object

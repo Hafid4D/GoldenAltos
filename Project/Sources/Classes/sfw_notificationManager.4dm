@@ -1,15 +1,28 @@
+property notificationWorkerName : Text
+property currentToolbarWindowRef : Integer
+property currentWizardWindowRef : Integer
+
 singleton Class constructor
 	
 	This:C1470.currentToolbarWindowRef:=0
 	This:C1470.currentWizardWindowRef:=0
 	This:C1470.notificationWorkerName:="NotificationWorker"
 	
+	If (cs:C1710.sfw_definition.me.globalParameters.notifications.activate)
+		
+		$definition:=cs:C1710.sfw_definitionNotificationType.new()
+		$definition.setDescription("The record ##recordName## of the dataclass ##dataclassName## is updated.")
+		$definition.setActive()
+		This:C1470.createTypeIfNotExist("sfw_updateRecord"; "Update of the record"; $definition)
+		
+	End if 
+	
 	
 Function openWizardNotifications()
 	
 	If (This:C1470.currentWizardWindowRef=0)
 		$dialogName:="sfw_wizard_notification"
-		$windowType:=Palette form window:K39:9
+		$windowType:=Plain form window:K39:10
 		This:C1470.currentWizardWindowRef:=cs:C1710.sfw_window.me.openFormWindow($dialogName; $windowType)
 		DIALOG:C40($dialogName)
 		cs:C1710.sfw_window.me.closeWindow(This:C1470.currentWizardWindowRef)
@@ -38,7 +51,7 @@ Function formMethod()
 	
 Function loadNotifications()
 	
-	Form:C1466.lb_notifications:=ds:C1482.sfw_Notification.query("UUID_User = :1 order by stmp desc"; cs:C1710.sfw_userManager.me.info.UUID)
+	Form:C1466.lb_notifications:=ds:C1482.sfw_Notification.query("UUID_User = :1 and stmpOver = :2 order by stmp desc"; cs:C1710.sfw_userManager.me.info.UUID; 0)
 	
 	
 Function refreshNotification()
@@ -51,16 +64,17 @@ Function refreshNotification()
 	End if 
 	
 Function bOpenRelatedRecord()
+	$entity:=4D:C1709.Entity
 	
-	$entry:=cs:C1710.sfw_definition.me.entries.query("dataclass = :1"; Form:C1466.current_notification.moreData.targetDataclass).first()
+	$entry:=cs:C1710.sfw_definition.me.entries.query("ident = :1"; Form:C1466.current_notification.moreData.targetDataclass).first()
 	$visionIdent:=$entry.visions[0]
 	
-	If (ds:C1482[Form:C1466.current_notification.moreData.targetDataclass].get(Form:C1466.current_notification.UUID_target)=Null:C1517)
+	$entity:=ds:C1482[$entry.dataclass].get(Form:C1466.current_notification.UUID_target)
+	If ($entity=Null:C1517)
 		$notifications:=ds:C1482.sfw_Notification.query("UUID_target =:1"; Form:C1466.current_notification.UUID_target)
 		$info:=$notifications.drop()
 		cs:C1710.sfw_notificationManager.me.updateNodifications()
 	Else 
-		$entity:=ds:C1482[Form:C1466.current_notification.moreData.targetDataclass].get(Form:C1466.current_notification.UUID_target)
 		Form:C1466.sfw.openInANewWindow($entity; $visionIdent; $entry.ident)
 	End if 
 	
@@ -91,8 +105,15 @@ Function _notify($ident : Text; $users : Collection; $context : Object)
 	var $eNotificationType : cs:C1710.sfw_NotificationTypeEntity
 	var $eNotification : cs:C1710.sfw_NotificationEntity
 	
+	If ($context.targetDataclass#Null:C1517)
+		$esSubscriptions:=ds:C1482.sfw_Subscription.query("UUID_target = :1 and entryIdent = :2"; $context.target; $context.targetDataclass)
+		If ($esSubscriptions.length>0)
+			$users:=$users.concat($esSubscriptions.distinct("UUID_User")).distinct()
+		End if 
+	End if 
+	
 	$eNotificationType:=ds:C1482.sfw_NotificationType.query("ident = :1"; $ident).first()
-	$staff:=ds:C1482.Staff.query("UUID_User = :1"; cs:C1710.sfw_userManager.me.info.UUID).first()
+	//$staff:=ds.Staff.query("UUID_User = :1"; cs.sfw_userManager.me.info.UUID).first()
 	If ($eNotificationType#Null:C1517)
 		For each ($user; $users)
 			

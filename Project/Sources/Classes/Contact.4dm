@@ -14,8 +14,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setPanelPage(1; "staff-32x32.png"; "Main")
 	$entry.setPanel("panel_contact")
+	$entry.setLBItemsColumn("fullName"; "Full Name"; "width:200")
 	$entry.setLBItemsColumn("companyName"; "Company name"; "width:200")
-	$entry.setLBItemsColumn("title"; "Title"; "width:100")
+	//$entry.setLBItemsColumn("title"; "Title"; "width:100")
 	$entry.setLBItemsOrderBy("companyName")
 	
 	$entry.enableTransaction()

@@ -6,20 +6,22 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setXliffLabel("currency.title")
 	$entry.setDataclass("sfw_Currency")
 	$entry.setDisplayOrder(100)
-	$entry.setIcon("image/entry/currency-50x50-1.png"; "image/entry/currency-50x50.png")
+	$entry.setIcon("sfw/entry/currency-50x50-1.png"; "sfw/entry/currency-50x50.png")
 	$entry.setDisplayOrder(-2000)
 	
-	$entry.setSearchboxField("symbol")
-	$entry.setSearchboxField("name")
+	$entry.setSearchField("attribute:symbol"; "tag:symbol")
+	$entry.setSearchField("attribute:name"; "tag:name")
 	
-	$entry.setPanel("panel_currency"; 1)
+	$entry.setPanel("sfw_panel_currency"; 1)
+	$entry.setPanelPage(1; ""; "Détails"; "disabled")
+	
 	$entry.setLBItemsColumn("symbol"; "Symbol"; "width:100"; "xliff:currency.field.symbol")
 	$entry.setLBItemsColumn("name"; "Name"; "width:200"; "xliff:currency.field.name")
 	$entry.setLBItemsOrderBy("symbol")
 	
 	$entry.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:currency"; "unitN:currencies")
 	$entry.setValidationRule("symbol"; "entryField_symbol"; "mandatory"; "trimSpace"; "uppercase")
-	$entry.setValidationRule("name"; "entryField_name"; "mandatory"; "trimSpace"; "capitalize")
+	//$entry.setValidationRule("name"; "entryField_name"; "mandatory"; "trimSpace"; "capitalize")
 	
 	$entry.setItemListPreconfigAction("exportReferenceRecords")
 	$entry.setItemListPreconfigAction("importReferenceRecords")
@@ -57,7 +59,7 @@ local Function cacheGet($uuid : Text)->$currency : Object
 	If (Storage:C1525.cache=Null:C1517)
 		This:C1470.cacheLoad()
 	Else 
-		If (Storage:C1525.cache.sfw_country=Null:C1517)
+		If (Storage:C1525.cache.sfw_currency=Null:C1517)
 			This:C1470.cacheLoad()
 		End if 
 	End if 

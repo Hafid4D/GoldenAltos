@@ -31,6 +31,11 @@ Function get dealType()->$name : Text
 		$name:="New customer"
 	End if 
 	
+Function get numCode()->$num : Integer
+	$num:=Num:C11(This:C1470.leadCode)
+	
+	
+	
 Function get stage()->$stage : Text
 	var $eLeadStage : cs:C1710.LeadStageEntity
 	$eLeadStage:=ds:C1482.LeadStage.query("stageID = :1"; Num:C11(This:C1470.currentStageID)).first()
@@ -142,3 +147,31 @@ local Function mainContact()->$mainContact : cs:C1710.ContactEntity
 	Else 
 		$mainContact:=Null:C1517
 	End if 
+	
+	
+	
+	
+local Function beforeSave()
+	
+	
+	
+	$updatedInteractions:=Form:C1466.current_clone.interactions.minus(Form:C1466.current_item.interactions)
+	If ($updatedInteractions.length>0)
+		For each ($interaction; $updatedInteractions)
+			$context:=New object:C1471
+			$context.target:=Form:C1466.current_item.UUID
+			$context.targetDataclass:="Lead"
+			$context.Followupdate:=$followUPDate
+			$context.Contact:=$interaction.contact.fullName || ""
+			$context.Trigger:=$interaction.trigger.name || ""
+			
+			$staff:=ds:C1482.Staff.query("UUID_User = :1"; cs:C1710.sfw_userManager.me.info.UUID).first()
+			$users:=New collection:C1472($staff.user.UUID)
+			cs:C1710.sfw_notificationManager.me.notify("InteractionScheduled"; $users; $context)
+			
+		End for each 
+	End if 
+	
+	
+	
+	

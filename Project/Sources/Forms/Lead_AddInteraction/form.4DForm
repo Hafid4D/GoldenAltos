@@ -80,7 +80,7 @@
 				},
 				"Text": {
 					"type": "text",
-					"text": "Lon an integration",
+					"text": "Log an integration",
 					"top": 15,
 					"left": 8,
 					"width": 195,
@@ -294,7 +294,9 @@
 					"height": 17,
 					"dataSourceTypeHint": "integer",
 					"dataSource": "Form:C1466.number",
-					"enterable": false
+					"enterable": false,
+					"borderStyle": "none",
+					"textAlign": "left"
 				},
 				"Text9": {
 					"type": "text",

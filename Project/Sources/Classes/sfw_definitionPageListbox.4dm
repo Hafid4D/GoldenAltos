@@ -1,3 +1,11 @@
+property filters : Collection
+property actions : Collection
+property ident : Text
+property columns : Collection
+property dataSource : Text
+property orderBy : Text
+
+
 Class constructor($ident : Text)
 	
 	This:C1470.ident:=$ident
@@ -119,70 +127,6 @@ Function _insertDynamicListbox($formDefinition : Object; $panelPage : Object; $o
 	$widthDetailPanel:=$d-$g
 	$heightDetailPanel:=$b-$h
 	
-	If (123#123)
-		//$offsetHorizontal:=0
-		//$offsetVertical:=0
-		//$definitions:=New collection($formDefinition)
-		//If ($formDefinition.inheritedForm#Null)
-		//$folderForm:=Folder(fk database folder).folder("Project/Sources/Forms/"+$formDefinition.inheritedForm)
-		//$file:=$folderForm.file("form.4DForm")
-		//$cacheFile:=Folder(fk resources folder).file("DynamicForm/"+$formDefinition.inheritedForm+"form.4XForm")
-		//If ($file.exists)
-		//$file:=$folderForm.file("form.4DForm")
-		//$definition:=JSON Parse($file.getText())
-		//$definitions.push($definition)
-		//TEXT TO BLOB(JSON Stringify($definition); $blob; UTF8 text without length)
-		//COMPRESS BLOB($blob; Fast compression mode)
-		//$cacheFile.setContent($blob)
-		//Else 
-		//$blob:=$cacheFile.getContent()
-		//EXPAND BLOB($blob)
-		//$json:=BLOB to text($blob; UTF8 text without length)
-		//$definition:=JSON Parse($json)
-		//$definitions.push($definition)
-		//End if 
-		//End if 
-		//For each ($definition; $definitions)
-		//For each ($page; $definition.pages)
-		//$page:=$page || New object
-		//$page.objects:=$page.objects || New object
-		//For each ($objectName; $page.objects)
-		//$object:=$page.objects[$objectName]
-		//Case of 
-		//: ($objectName="header_bkgd")
-		//$offsetVertical:=$object.top+$object.height
-		//: ($objectName="vTabBar_subform")
-		//$offsetHorizontal:=$object.left+$object.width
-		//End case 
-		//Case of 
-		//: ($object.type="listbox")
-		//If ($object.method="ObjectMethods@")
-		//$object.method:="sfw_dynamicForm_script"
-		//End if 
-		//For each ($column; $page.objects[$objectName].columns)
-		//If ($column.method="ObjectMethods@")
-		//$column.method:="sfw_dynamicForm_script"
-		//End if 
-		//End for each 
-		//: ($object.method#Null)
-		//$object.method:="sfw_dynamicForm_script"
-		//End case 
-		
-		//End for each 
-		//End for each 
-		//End for each 
-		
-		//If ($panelPage.page<$formDefinition.pages.length)
-		//$pageDefinition:=$formDefinition.pages[$panelPage.page]
-		//If ($pageDefinition=Null)
-		//$pageDefinition:=New object("objects"; New object)
-		//$formDefinition.pages[$panelPage.page]:=$pageDefinition
-		//End if 
-		//Else 
-		//$pageDefinition:=New object("objects"; New object)
-		//$formDefinition.pages[$panelPage.page]:=$pageDefinition
-		//End if 
-	End if 
 	$pageDefinition:=$formDefinition.pages[$panelPage.page]
 	
 	$gutter:=5

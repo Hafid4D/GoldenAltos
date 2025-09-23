@@ -27,7 +27,7 @@ local Function getAndCreateIfNotExist($ident : Text; $name : Text;  ...  : Text)
 	
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
-	$entry:=cs:C1710.sfw_definitionEntry.new("profile"; "userManagement"; "Profiles")
+	$entry:=cs:C1710.sfw_definitionEntry.new("profile"; "userManagement"; "Profiles")  //okXLIFF
 	$entry.setXliffLabel("profile.profiles")
 	$entry.setDataclass("sfw_UserProfile")
 	
@@ -36,14 +36,31 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setSearchboxField("ident")
 	
 	$entry.setPanel("sfw_panel_profile")
+	$entry.setPanelPage(1; ""; "Permissions")  //okXLIFF
 	
 	$entry.setLBItemsColumn("ident"; "Identifier"; "width:65"; "xliff:profile.field.ident")
 	$entry.setLBItemsColumn("name"; "Name"; "xliff:profile.field.name")
 	
 	$entry.setLBItemsOrderBy("ident")
 	
-	$entry.setLBItemsCounter("###0###0##0^1;;"; "unit1: profile"; "unitN: profiles")
+	$entry.setLBItemsCounter("###0###0##0^1;;"; "unit1: profile"; "unitN: profiles"; "unit1xliff:profile.single"; "unitNxliff:profile.plural")  //okXLIFF
 	
 	$entry.setAddable("hiddenLineInModeMenu")
 	
 	$entry.setAllowedProfiles(cs:C1710.sfw_globalParameters.me.userVision.entryProfile.allowedProfiles || "admin")
+	
+	$entry.enableTransaction()
+	
+	$entry.setValidationRule("ident"; "entryField_ident"; "mandatory"; "trimSpace"; "capitalize"; "message:The ident is mandatory")
+	$entry.setValidationRule("ident"; "entryField_ident"; "unique"; "message:The ident must be unique")
+	$entry.setValidationRule("name"; "entryField_name"; "mandatory"; "trimSpace"; "capitalize"; "capitalize"; "message:The name is mandatory")
+	
+	
+	
+local Function closeBoxMainForm()
+	If (Form:C1466.subForm#Null:C1517) && (Form:C1466.subForm.hl_permissions#Null:C1517) && (Is a list:C621(Form:C1466.subForm.hl_permissions))
+		CLEAR LIST:C377(Form:C1466.subForm.hl_permissions; *)
+	End if 
+	If (Form:C1466.subForm#Null:C1517) && (Form:C1466.subForm.hl_entryPermissions#Null:C1517) && (Is a list:C621(Form:C1466.subForm.hl_entryPermissions))
+		CLEAR LIST:C377(Form:C1466.subForm.hl_entryPermissions; *)
+	End if 

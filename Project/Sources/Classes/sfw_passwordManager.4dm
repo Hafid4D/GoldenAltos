@@ -1,3 +1,6 @@
+property hashOptions : Object
+property authorizedChars : Object
+property passwordLength : Integer
 
 shared singleton Class constructor
 	

@@ -93,7 +93,7 @@
 					"type": "rectangle",
 					"top": 8,
 					"left": 5,
-					"width": 200,
+					"width": 321,
 					"height": 27,
 					"sizingX": "move",
 					"stroke": "#008B8B",
@@ -115,7 +115,7 @@
 					"type": "input",
 					"top": 13,
 					"left": 41,
-					"width": 137,
+					"width": 254,
 					"height": 16,
 					"sizingX": "move",
 					"dataSource": "Form:C1466.words",
@@ -136,7 +136,7 @@
 				"searchbox_cross": {
 					"type": "button",
 					"top": 13,
-					"left": 178,
+					"left": 300,
 					"width": 14,
 					"height": 18,
 					"sizingX": "move",
@@ -154,7 +154,7 @@
 			}
 		}
 	],
-	"geometryStamp": 59,
+	"geometryStamp": 62,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

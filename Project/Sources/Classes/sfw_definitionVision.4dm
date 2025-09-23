@@ -13,7 +13,6 @@ Class constructor($ident : Text; $label : Text)
 	This:C1470.xliff:=""
 	This:C1470.toolbar:={color: "#E0E0E0"}
 	This:C1470.displayOrder:=0
-	This:C1470.allowedProfiles:=New collection:C1472
 	
 Function setToolbarBackgroundColor($color : Text)
 	This:C1470.toolbar.color:=$color
@@ -32,6 +31,8 @@ Function setDisplayOrder($order : Integer)
 	
 	
 Function setAllowedProfiles( ...  : Variant)
+	This:C1470.allowedProfiles:=This:C1470.allowedProfiles || New collection:C1472
+	
 	var $p : Integer
 	For ($p; 1; Count parameters:C259)
 		Case of 

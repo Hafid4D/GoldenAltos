@@ -133,16 +133,16 @@
         {"name": "Linen","hex": "#FAF0E6","rgb": "rgb(250, 240, 230)","dominant": "white"},
         {"name": "LavenderBlush","hex": "#FFF0F5","rgb": "rgb(255, 240, 245)","dominant": "white"},
         {"name": "MistyRose","hex": "#FFE4E1","rgb": "rgb(255, 228, 225)","dominant": "white"},
-        { "name": "Gainsboro", "hex": "#DCDCDC", "dominant": "Gray" },
-        { "name": "LightGray", "hex": "#D3D3D3" , "dominant": "Gray"},
-        { "name": "Silver", "hex": "#C0C0C0" , "dominant": "Gray"},
-        { "name": "DarkGray", "hex": "#A9A9A9" , "dominant": "Gray"},
-        { "name": "Gray", "hex": "#808080" , "dominant": "Gray"},
-        { "name": "DimGray", "hex": "#696969" , "dominant": "Gray"},
-        { "name": "LightSlateGray", "hex": "#778899" , "dominant": "Gray"},
-        { "name": "SlateGray", "hex": "#708090" , "dominant": "Gray"},
-        { "name": "DarkSlateGray", "hex": "#2F4F4F", "dominant": "Gray" },
-        { "name": "Black", "hex": "#000000" , "dominant": "Gray"}
+        { "name": "Gainsboro", "hex": "#DCDCDC", "dominant": "Grey" },
+        { "name": "LightGrey", "hex": "#D3D3D3" , "dominant": "Grey"},
+        { "name": "Silver", "hex": "#C0C0C0" , "dominant": "Grey"},
+        { "name": "DarkGrey", "hex": "#A9A9A9" , "dominant": "Grey"},
+        { "name": "Grey", "hex": "#808080" , "dominant": "Grey"},
+        { "name": "DimGrey", "hex": "#696969" , "dominant": "Grey"},
+        { "name": "LightSlateGrey", "hex": "#778899" , "dominant": "Grey"},
+        { "name": "SlateGrey", "hex": "#708090" , "dominant": "Grey"},
+        { "name": "DarkSlateGrey", "hex": "#2F4F4F", "dominant": "Grey" },
+        { "name": "Black", "hex": "#000000" , "dominant": "Grey"}
     ]
   }
   

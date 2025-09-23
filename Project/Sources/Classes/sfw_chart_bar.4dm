@@ -1,4 +1,8 @@
 Class extends sfw_chart_twoAxis
+property xAxis : Object
+property yAxis : Object
+property barPC : Real
+property rectangleWidth : Real
 
 Class constructor
 	
@@ -95,6 +99,7 @@ Function _drawBars($values : Collection; $color : Text; $nSerie : Integer)
 		$width:=This:C1470.rectangleWidth-($gutter*2)
 		$height:=This:C1470.xAxis.y-$top
 		$objectRef:=SVG_New_rect(This:C1470.refSvg; $left; $top; $width; $height; 0; 0; "black"; $color; 1)
+		SVG_SET_ID($objectRef; String:C10($i)+"-"+String:C10($nSerie))
 	End for 
 	
 	$crayon:=1

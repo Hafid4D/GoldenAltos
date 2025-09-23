@@ -18,7 +18,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsOrderBy("code")
 	$entry.setLBItemsOrderBy("name")
 	
-	$entry.setLBItemsCounter("###0###0##0^1;;"; "unit1:type"; "unitN:types")
+	$entry.setLBItemsCounter("###0###0##0 ^1;;"; "unit1:type"; "unitN:types")
 	
 	$entry.setValidationRule("code"; "entryField_code"; "mandatory"; "trimSpace"; "uppercase")
 	$entry.setValidationRule("name"; "entryField_name"; "mandatory"; "trimSpace"; "capitalize")

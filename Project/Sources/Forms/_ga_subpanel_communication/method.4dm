@@ -22,8 +22,8 @@ Case of
 	: (FORM Event:C1606.code=On Load:K2:1)
 		$setActivation:=True:C214
 		$rebuildDisplayedLB:=True:C214
-		
 		OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+		
 		
 		OBJECT GET COORDINATES:C663(*; "lb_communications"; $lb_left; $lb_top; $lb_right; $lb_bottom)
 		OBJECT GET COORDINATES:C663(*; "bActions"; $ba_left; $ba_top; $ba_right; $ba_bottom)

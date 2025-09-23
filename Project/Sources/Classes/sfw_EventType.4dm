@@ -7,11 +7,15 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setXliffLabel("eventtype.title")
 	$entry.setDataclass("sfw_EventType")
 	$entry.setDisplayOrder(-6500)
-	$entry.setIcon("image/entry/eventType-50x50.png")
-	$entry.setSearchboxField("ident")
-	$entry.setSearchboxField("label")
+	$entry.setIcon("sfw/entry/eventType-50x50.png")
+	
+	
+	$entry.setSearchField("attribute:ident"; "tag:ident")
+	$entry.setSearchField("attribute:label"; "tag:label")
+	
 	
 	$entry.setPanel("sfw_panel_eventType"; 2)
+	$entry.setPanelPage(1; ""; "Détails"; "disabled")
 	$entry.setLBItemsColumn("ident"; "Identifier"; "width:100"; "xliff:eventtype.field.ident")
 	$entry.setLBItemsColumn("label"; "Label"; "xliff:eventtype.field.label")
 	$entry.setLBItemsOrderBy("ident")

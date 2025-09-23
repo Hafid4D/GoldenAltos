@@ -1,3 +1,8 @@
+property definitionClassName : Text
+property storedVisions : Collection
+property storedEntries : Collection
+property storedGlobalParameters : Object
+
 shared singleton Class constructor
 	
 	This:C1470.definitionClassName:=Storage:C1525.definitionClass.name
@@ -6,7 +11,7 @@ shared singleton Class constructor
 	
 	
 shared Function get visions->$visions : Collection
-	If (This:C1470.storedVision=Null:C1517) || ((Not:C34(Is compiled mode:C492)) && ((FORM Event:C1606.objectName="bToolbar@") || (FORM Event:C1606.objectName="pupVision")))
+	If (This:C1470.storedVisions=Null:C1517) || ((Not:C34(Is compiled mode:C492)) && ((FORM Event:C1606.objectName="bToolbar@") || (FORM Event:C1606.objectName="pupVision")))
 		$visions:=cs:C1710[This:C1470.definitionClassName].new().visions
 		This:C1470.storedVisions:=$visions.copy(ck shared:K85:29; This:C1470)
 	Else 

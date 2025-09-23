@@ -1,7 +1,7 @@
 //%attributes = {}
 #DECLARE($definitionClassName : Text; $globalParametersClassName : Text)
 
-
+//TRACE
 Use (Storage:C1525)
 	Storage:C1525.definitionClass:=New shared object:C1526("name"; $definitionClassName)
 	Use (Storage:C1525.definitionClass)
@@ -19,7 +19,7 @@ End if
 
 cs:C1710.sfw_userManager.me.login()
 
-ds:C1482.dataMaintenance()
+ds:C1482.sfw_dataMaintenance()
 
 cs:C1710.sfw_userManager.me.onStartup()
 cs:C1710.sfw_notificationManager.me.onStartup()

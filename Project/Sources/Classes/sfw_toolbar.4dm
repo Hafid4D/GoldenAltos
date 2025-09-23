@@ -2,6 +2,8 @@ Class extends sfw_foundations
 
 
 property vision : Object
+property refMenus : Collection
+property searchbox : Text
 
 Class constructor()
 	Super:C1705()
@@ -37,7 +39,10 @@ Function formMethod()
 					$framework.pushCurrentUserButton()
 					
 				: (String:C10(FORM Event:C1606.objectName)="bNotifications")
-					$framework.pushCurrentNotification()
+					$framework.pushbNotifications()
+					
+				: (String:C10(FORM Event:C1606.objectName)="bToDoList")
+					$framework.pushbToDoList()
 					
 			End case 
 			
@@ -72,6 +77,7 @@ Function formMethod()
 	$color:=Form:C1466.vision.toolbar.color
 	OBJECT SET RGB COLORS:C628(*; "pupVisions"; $color; Background color none:K23:10)
 	
+	OBJECT SET VISIBLE:C603(*; "searchbox_cross"; (Form:C1466.sfw.searchbox#""))
 	
 Function init()
 	
@@ -83,7 +89,7 @@ Function init()
 	
 Function drawToolbar($identVision : Text)
 	var $color : Text
-	var $entry : Object
+	var $entry : cs:C1710.sfw_definitionEntry
 	var $i : Integer
 	var $iconNum : Integer
 	var $format : Text
@@ -91,6 +97,8 @@ Function drawToolbar($identVision : Text)
 	var vToolBarIcon01; vToolBarIcon02; vToolBarIcon03; vToolBarIcon04; vToolBarIcon05; vToolBarIcon06; vToolBarIcon07; vToolBarIcon08; vToolBarIcon09; vToolBarIcon10 : Picture
 	var vToolBarIcon11; vToolBarIcon12; vToolBarIcon13; vToolBarIcon14; vToolBarIcon15; vToolBarIcon16 : Picture
 	var $iconFile : 4D:C1709.File
+	var $eUserProfile : cs:C1710.sfw_UserProfileEntity
+	var $esUserProfiles : cs:C1710.sfw_UserProfileSelection:=ds:C1482.sfw_UserProfile.query("ident in :1"; cs:C1710.sfw_userManager.me.authorizedProfiles)
 	
 	Form:C1466.currentTB:=$identVision
 	
@@ -102,55 +110,114 @@ Function drawToolbar($identVision : Text)
 	
 	Form:C1466.entries:=cs:C1710.sfw_definition.me.entries.query("visions[] = :1"; $identVision)
 	
+	
+	$previousWasAnIcon:=False:C215
+	Form:C1466.toolBarEntries:=New collection:C1472
+	$authorizedProfiles:=cs:C1710.sfw_userManager.me.authorizedProfiles
+	$entriesToDisplay:=New collection:C1472
+	$width_bToolbar_max:=0
+	For each ($entry; Form:C1466.entries.query("toolBarGroup = null").orderBy("displayOrder desc"))
+		If ($entry.splitter#Null:C1517)
+			If ($previousWasAnIcon)
+				$entriesToDisplay.push($entry)
+				$previousWasAnIcon:=False:C215
+			End if 
+		Else 
+			$displayEntry:=$entry.isDisplayable()
+			
+			If ($displayEntry)
+				$entriesToDisplay.push($entry)
+				If (cs:C1710.sfw_definition.me.globalParameters.toolbar.entryIconsSameWidth)
+					OBJECT SET TITLE:C194(*; "bToolbar_1"; ds:C1482.sfw_readXliff($entry.xliff; $entry.toolbarLabel))
+					OBJECT GET BEST SIZE:C717(*; "bToolbar_1"; $width_bToolbar; $bestHight)
+					If ($width_bToolbar>$width_bToolbar_max)
+						$width_bToolbar_max:=$width_bToolbar
+					End if 
+				End if 
+				$previousWasAnIcon:=True:C214
+			End if 
+		End if 
+	End for each 
+	
+	
+	Form:C1466.toolBarGroups:=New collection:C1472
+	For each ($entry; Form:C1466.entries.query("toolBarGroup # null").orderBy("toolbar.displayOrder desc, displayOrder desc"))
+		//If ($entry.allowedProfiles#Null) && ($entry.allowedProfiles.length>0)
+		//$displayEntry:=False
+		//For each ($authorizedProfile; $authorizedProfiles)
+		//$displayEntry:=$displayEntry || ($entry.allowedProfiles.indexOf($authorizedProfile)#-1)
+		//End for each 
+		//Else 
+		//$displayEntry:=True
+		//End if 
+		$displayEntry:=$entry.isDisplayable()
+		
+		If ($displayEntry)
+			$identGroup:=$entry.toolBarGroup.ident
+			$indices:=Form:C1466.toolBarGroups.query("ident = :1"; $identGroup)
+			If ($indices.length=0)
+				$group:=$entry.toolBarGroup
+				Form:C1466.toolBarGroups.push($group)
+				
+				If (cs:C1710.sfw_definition.me.globalParameters.toolbar.entryIconsSameWidth)
+					OBJECT SET TITLE:C194(*; "bToolbar_1"; ds:C1482.sfw_readXliff($entry.xliff; $group.label))
+					OBJECT GET BEST SIZE:C717(*; "bToolbar_1"; $width_bToolbar; $bestHight)
+					If ($width_bToolbar>$width_bToolbar_max)
+						$width_bToolbar_max:=$width_bToolbar
+					End if 
+				End if 
+				
+			End if 
+		End if 
+	End for each 
+	
+	
 	$format:=OBJECT Get format:C894(*; "bToolbar_1")
 	OBJECT GET COORDINATES:C663(*; "bToolbar_1"; $left_bToolbar_1; $top_bToolbar_1; $right_bToolbar_1; $bottom_bToolbar_1)
 	OBJECT SET COORDINATES:C1248(*; "vSplitter_@"; 10000; 10000; 10000; 10000)
 	$width_bToolbar_1:=$right_bToolbar_1-$left_bToolbar_1
 	$offset_bToolBar:=$left_bToolbar_1
-	$margin_bToolBar:=1
+	$margin_bToolBar:=cs:C1710.sfw_definition.me.globalParameters.toolbar.entryIconsMargin
 	$iconNum:=1
-	$previousWasAnIcon:=False:C215
-	Form:C1466.toolBarEntries:=New collection:C1472
-	$authorizedProfiles:=cs:C1710.sfw_userManager.me.authorizedProfiles
-	For each ($entry; Form:C1466.entries.query("toolBarGroup = null").orderBy("displayOrder desc"))
+	For each ($entry; $entriesToDisplay)
 		If ($entry.splitter#Null:C1517)
-			If ($previousWasAnIcon)
-				$offset_bToolBar+=$margin_bToolBar
-				OBJECT SET COORDINATES:C1248(*; "vSplitter_"+String:C10($iconNum); $offset_bToolBar; $top_bToolbar_1-3; $offset_bToolBar; $bottom_bToolbar_1+3)
-				$offset_bToolBar+=$margin_bToolBar
-				$previousWasAnIcon:=False:C215
-			End if 
+			$offset_bToolBar+=$margin_bToolBar
+			OBJECT SET COORDINATES:C1248(*; "vSplitter_"+String:C10($iconNum); $offset_bToolBar; $top_bToolbar_1-3; $offset_bToolBar; $bottom_bToolbar_1+3)
+			$offset_bToolBar+=$margin_bToolBar
+			
 		Else 
-			If ($entry.allowedProfiles#Null:C1517) && ($entry.allowedProfiles.length>0)
-				$displayEntry:=False:C215
-				For each ($authorizedProfile; $authorizedProfiles)
-					$displayEntry:=$displayEntry || ($entry.allowedProfiles.indexOf($authorizedProfile)#-1)
-				End for each 
+			$iconFile:=Folder:C1567(fk resources folder:K87:11).file($entry.icon)
+			READ PICTURE FILE:C678($iconFile.platformPath; $icon)
+			$iconVariableName:="vToolBarIcon"+String:C10($iconNum; "00")
+			
+			If (Bool:C1537(cs:C1710.sfw_definition.me.globalParameters.toolbar.entryIconsResize)=True:C214)
+				(Get pointer:C304($iconVariableName))->:=$icon*0.75
 			Else 
-				$displayEntry:=True:C214
+				(Get pointer:C304($iconVariableName))->:=$icon
 			End if 
-			If ($displayEntry)
-				$iconFile:=Folder:C1567(fk resources folder:K87:11).file($entry.icon)
-				READ PICTURE FILE:C678($iconFile.platformPath; $icon)
-				$iconVariableName:="vToolBarIcon"+String:C10($iconNum; "00")
-				
-				If (Bool:C1537(cs:C1710.sfw_definition.me.globalParameters.toolbar.entryIconsResize)=True:C214)
-					(Get pointer:C304($iconVariableName))->:=$icon*0.75
+			
+			OBJECT SET FORMAT:C236(*; "bToolbar_"+String:C10($iconNum); ds:C1482.sfw_readXliff($entry.xliff; $entry.toolbarLabel)+";"+$iconVariableName+";0;4;1;1;0;0;0;0;0;0;1;0")
+			OBJECT SET VISIBLE:C603(*; "bToolbar_"+String:C10($iconNum); True:C214)
+			OBJECT SET HELP TIP:C1181(*; "bToolbar_"+String:C10($iconNum); ds:C1482.sfw_readXliff($entry.xliff; $entry.label))
+			Case of 
+				: (cs:C1710.sfw_definition.me.globalParameters.toolbar.entryIconsSameWidth)
+					$width_bToolbar:=$width_bToolbar_max
+				: (cs:C1710.sfw_definition.me.globalParameters.toolbar.entryIconsAutoWidth)
+					OBJECT GET BEST SIZE:C717(*; "bToolbar_"+String:C10($iconNum); $width_bToolbar; $bestHight)
 				Else 
-					(Get pointer:C304($iconVariableName))->:=$icon
-				End if 
-				
-				OBJECT SET FORMAT:C236(*; "bToolbar_"+String:C10($iconNum); ds:C1482.sfw_readXliff($entry.xliff; $entry.toolbarLabel)+";"+$iconVariableName+";0;4;1;1;0;0;0;0;0;0;1;0")
-				OBJECT SET VISIBLE:C603(*; "bToolbar_"+String:C10($iconNum); True:C214)
-				OBJECT SET HELP TIP:C1181(*; "bToolbar_"+String:C10($iconNum); ds:C1482.sfw_readXliff($entry.xliff; $entry.label))
-				OBJECT SET COORDINATES:C1248(*; "bToolbar_"+String:C10($iconNum); $offset_bToolBar; $top_bToolbar_1; $offset_bToolBar+$width_bToolbar_1; $bottom_bToolbar_1)
-				$offset_bToolBar+=$width_bToolbar_1+$margin_bToolBar
-				$iconNum:=$iconNum+1
-				$previousWasAnIcon:=True:C214
-				Form:C1466.toolBarEntries.push($entry)
+					$width_bToolbar:=$width_bToolbar_1
+			End case 
+			If ($width_bToolbar<$width_bToolbar_1)
+				//$width_bToolbar:=$width_bToolbar_1
 			End if 
+			OBJECT SET COORDINATES:C1248(*; "bToolbar_"+String:C10($iconNum); $offset_bToolBar; $top_bToolbar_1; $offset_bToolBar+$width_bToolbar; $bottom_bToolbar_1)
+			$offset_bToolBar+=$width_bToolbar+$margin_bToolBar
+			$iconNum:=$iconNum+1
+			Form:C1466.toolBarEntries.push($entry)
 		End if 
 	End for each 
+	
+	
 	Form:C1466.toolBarGroups:=New collection:C1472
 	For each ($entry; Form:C1466.entries.query("toolBarGroup # null").orderBy("toolbar.displayOrder desc, displayOrder desc"))
 		If ($entry.allowedProfiles#Null:C1517) && ($entry.allowedProfiles.length>0)
@@ -172,13 +239,26 @@ Function drawToolbar($identVision : Text)
 				$iconVariableName:="vToolBarIcon"+String:C10($iconNum; "00")
 				(Get pointer:C304($iconVariableName))->:=$icon*0.75
 				OBJECT SET FORMAT:C236(*; "bToolbar_"+String:C10($iconNum); ds:C1482.sfw_readXliff($entry.xliff; $group.label)+";"+$iconVariableName+";0;4;1;1;0;0;0;0;1;0;1;0")
-				//OBJECT SET FORMAT(*; "bToolbar_"+String($iconNum); ds.sfw_readXliff($group.xliff; $group.label)+";#"+$group.icon+";0;4;1;1;0;0;0;0;1;0;1;0")
 				OBJECT SET VISIBLE:C603(*; "bToolbar_"+String:C10($iconNum); True:C214)
 				OBJECT SET HELP TIP:C1181(*; "bToolbar_"+String:C10($iconNum); ds:C1482.sfw_readXliff($group.xliff; $group.label))
+				Case of 
+					: (cs:C1710.sfw_definition.me.globalParameters.toolbar.entryIconsSameWidth)
+						$width_bToolbar:=$width_bToolbar_max
+					: (cs:C1710.sfw_definition.me.globalParameters.toolbar.entryIconsAutoWidth)
+						OBJECT GET BEST SIZE:C717(*; "bToolbar_"+String:C10($iconNum); $width_bToolbar; $bestHight)
+					Else 
+						$width_bToolbar:=$width_bToolbar_1
+				End case 
+				If ($width_bToolbar<$width_bToolbar_1)
+					//$width_bToolbar:=$width_bToolbar_1
+				End if 
+				OBJECT SET COORDINATES:C1248(*; "bToolbar_"+String:C10($iconNum); $offset_bToolBar; $top_bToolbar_1; $offset_bToolBar+$width_bToolbar; $bottom_bToolbar_1)
+				$offset_bToolBar+=$width_bToolbar+$margin_bToolBar
 				$iconNum:=$iconNum+1
 			End if 
 		End if 
 	End for each 
+	
 	For ($i; $iconNum; 16)
 		OBJECT SET VISIBLE:C603(*; "bToolbar_"+String:C10($i); False:C215)
 	End for 
@@ -201,8 +281,10 @@ Function drawToolbar($identVision : Text)
 		Else 
 			$iconFlag:=$lprog
 	End case 
-	$formatLangage:=";#image/flags/tiny/"+$iconFlag+".png;0;0;0;1;3;0;0;0;1;0;1"
+	$formatLangage:=";#sfw/flags/tiny/"+$iconFlag+".png;0;0;0;1;3;0;0;0;1;0;1"
 	OBJECT SET FORMAT:C236(*; "bLangage"; $formatLangage)
+	OBJECT SET VISIBLE:C603(*; "bLangage"; Bool:C1537(cs:C1710.sfw_definition.me.globalParameters.toolbar.changeLanguage))
+	
 	
 	If (String:C10(This:C1470.searchbox)#"")
 		This:C1470.launchGlobalSearch()
@@ -226,9 +308,20 @@ Function displayNotification()
 	End if 
 	
 Function displayToDoList()
-	OBJECT SET VISIBLE:C603(*; "@ToDoList"; False:C215)
-	OBJECT SET VISIBLE:C603(*; "bToDoList"; True:C214)
-	
+	If (Bool:C1537(cs:C1710.sfw_definition.me.globalParameters.todoList.activate))
+		Form:C1466.todoListCount:=cs:C1710.sfw_todoListManager.me.getNbTodo()
+		If (Form:C1466.todoListCount="!@")
+			Form:C1466.todoListCount:=Substring:C12(Form:C1466.todoListCount; 2)
+			OBJECT SET RGB COLORS:C628(*; "bkgdToDoList"; "red"; "red")
+		Else 
+			OBJECT SET RGB COLORS:C628(*; "bkgdToDoList"; "green"; "green")
+		End if 
+		OBJECT SET VISIBLE:C603(*; "bToDoList"; True:C214)
+		OBJECT SET VISIBLE:C603(*; "counterToDoList"; (Form:C1466.todoListCount#"0"))
+		OBJECT SET VISIBLE:C603(*; "bkgdToDoList"; (Form:C1466.todoListCount#"0"))
+	Else 
+		OBJECT SET VISIBLE:C603(*; "@ToDoList"; False:C215)
+	End if 
 	
 Function pushEntryButton()
 	
@@ -264,7 +357,12 @@ Function pushEntryButton()
 				Else 
 					$favorites:=ds:C1482.sfw_Favorite.query("entryIdent = :1 and UUID_User = :2"; $entry.ident; cs:C1710.sfw_userManager.me.info.UUID)
 				End if 
-				If ($windows.length>0) || ($favorites.length>0)
+				If (cs:C1710.sfw_userManager.me.info.UUID=("00"*16))
+					$subscriptions:=ds:C1482.sfw_Subscription.query("entryIdent = :1"; $entry.ident)
+				Else 
+					$subscriptions:=ds:C1482.sfw_Subscription.query("entryIdent = :1 and UUID_User = :2"; $entry.ident; cs:C1710.sfw_userManager.me.info.UUID)
+				End if 
+				If ($windows.length>0) || ($favorites.length>0) || ($subscriptions.length>0)
 					$launch:=False:C215
 					$refMenu:=Create menu:C408
 					
@@ -282,13 +380,27 @@ Function pushEntryButton()
 						APPEND MENU ITEM:C411($refMenu; "-")
 						APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("toolbar.favorites"; "Favorites"))
 						DISABLE MENU ITEM:C150($refMenu; -1)
-						$favoritesItem:=ds:C1482[$entry.dataclass].query("UUID in :1 order by nameInWindowTitle"; $favorites.UUID_target)
-						For each ($favorite; $favoritesItem)
+						$favoriteItems:=ds:C1482[$entry.dataclass].query("UUID in :1 order by nameInWindowTitle"; $favorites.UUID_target)
+						For each ($favorite; $favoriteItems)
 							APPEND MENU ITEM:C411($refMenu; $favorite.nameInWindowTitle; *)
 							SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--favorite:"+String:C10($favorite.UUID))
 							SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/picto/star.png")
 						End for each 
 					End if 
+					
+					If ($subscriptions.length>0) && (cs:C1710.sfw_definition.me.globalParameters.notifications.activate)
+						APPEND MENU ITEM:C411($refMenu; "-")
+						APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("toolbar.subcriptions"; "Subcriptions"))
+						DISABLE MENU ITEM:C150($refMenu; -1)
+						$subscriptedItems:=ds:C1482[$entry.dataclass].query("UUID in :1 order by nameInWindowTitle"; $subscriptions.UUID_target)
+						For each ($subscriptedItem; $subscriptedItems)
+							APPEND MENU ITEM:C411($refMenu; $subscriptedItem.nameInWindowTitle; *)
+							SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--favorite:"+String:C10($subscriptedItem.UUID))
+							SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/picto/bell.png")
+						End for each 
+					End if 
+					
+					
 					OBJECT GET COORDINATES:C663(*; $formEvent.objectName; $left; $top; $right; $bottom)
 					
 					$choose:=Dynamic pop up menu:C1006($refMenu; ""; $left; $bottom)
@@ -337,7 +449,12 @@ Function pushEntryButton()
 			Else 
 				$favorites:=ds:C1482.sfw_Favorite.query("entryIdent = :1 and UUID_User = :2"; $entry.ident; cs:C1710.sfw_userManager.me.info.UUID)
 			End if 
-			If ($windows.length>0) || ($favorites.length>0)
+			If (cs:C1710.sfw_userManager.me.info.UUID=("00"*16))
+				$subscriptions:=ds:C1482.sfw_Subscription.query("entryIdent = :1"; $entry.ident)
+			Else 
+				$subscriptions:=ds:C1482.sfw_Subscription.query("entryIdent = :1 and UUID_User = :2"; $entry.ident; cs:C1710.sfw_userManager.me.info.UUID)
+			End if 
+			If ($windows.length>0) || ($favorites.length>0) || ($subscriptions.length>0)
 				$refClassesMenu:=Create menu:C408
 				This:C1470.refMenus.push($refClassesMenu)
 				$launch:=False:C215
@@ -357,13 +474,26 @@ Function pushEntryButton()
 					APPEND MENU ITEM:C411($refClassesMenu; "-")
 					APPEND MENU ITEM:C411($refClassesMenu; ds:C1482.sfw_readXliff("toolbar.favorites"; "Favorites"))
 					DISABLE MENU ITEM:C150($refClassesMenu; -1)
-					$favoritesItem:=ds:C1482[$entry.dataclass].query("UUID in :1 order by nameInWindowTitle"; $favorites.UUID_target)
-					For each ($favorite; $favoritesItem)
+					$favoriteItems:=ds:C1482[$entry.dataclass].query("UUID in :1 order by nameInWindowTitle"; $favorites.UUID_target)
+					For each ($favorite; $favoriteItems)
 						APPEND MENU ITEM:C411($refClassesMenu; $favorite.nameInWindowTitle; *)
 						SET MENU ITEM PARAMETER:C1004($refClassesMenu; -1; "--favorite:"+String:C10($favorite.UUID)+":"+$entry.ident)
 						SET MENU ITEM ICON:C984($refClassesMenu; -1; "Path:/RESOURCES/sfw/image/picto/star.png")
 					End for each 
 				End if 
+				
+				If ($subscriptions.length>0) && (cs:C1710.sfw_definition.me.globalParameters.notifications.activate)
+					APPEND MENU ITEM:C411($refClassesMenu; "-")
+					APPEND MENU ITEM:C411($refClassesMenu; ds:C1482.sfw_readXliff("toolbar.subscriptions"; "Subscriptions"))
+					DISABLE MENU ITEM:C150($refClassesMenu; -1)
+					$subscriptedItems:=ds:C1482[$entry.dataclass].query("UUID in :1 order by nameInWindowTitle"; $favorites.UUID_target)
+					For each ($subscriptedItem; $subscriptedItems)
+						APPEND MENU ITEM:C411($refClassesMenu; $subscriptedItem.nameInWindowTitle; *)
+						SET MENU ITEM PARAMETER:C1004($refClassesMenu; -1; "--favorite:"+String:C10($subscriptedItem.UUID)+":"+$entry.ident)
+						SET MENU ITEM ICON:C984($refClassesMenu; -1; "Path:/RESOURCES/sfw/image/picto/bell.png")
+					End for each 
+				End if 
+				
 				APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff($entry.xliff; $entry.toolbarLabel); $refClassesMenu; *)
 			Else 
 				APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff($entry.xliff; $entry.toolbarLabel); *)
@@ -616,8 +746,11 @@ Function pushCurrentUserButton()
 		
 	End if 
 	
+	OBJECT GET COORDINATES:C663(*; FORM Event:C1606.objectName; $left; $top; $right; $bottom)
 	
 	$choose:=Dynamic pop up menu:C1006($refMenu; ""; $left; $bottom)
+	
+	
 	For each ($refMenu; This:C1470.refMenus)
 		RELEASE MENU:C978($refMenu)
 	End for each 
@@ -730,11 +863,21 @@ Function _menuFunction($className : Text; $pathIcon : Text)->$refMenu : Text
 	
 	
 	
-Function pushCurrentNotification()
+Function pushbNotifications()
 	var $window : Object
 	$window:=cs:C1710.sfw_window.me.windows.query("process.name = :1"; cs:C1710.sfw_notificationManager.me.notificationWorkerName).first()
 	If ($window=Null:C1517)
 		CALL WORKER:C1389(cs:C1710.sfw_notificationManager.me.notificationWorkerName; Formula:C1597(cs:C1710.sfw_notificationManager.me.openWizardNotifications()))
+	End if 
+	
+	
+Function pushbToDoList()
+	var $window : Object
+	$window:=cs:C1710.sfw_window.me.windows.query("process.name = :1"; cs:C1710.sfw_todoListManager.me.todoListWorkerName).first()
+	If ($window=Null:C1517)
+		CALL WORKER:C1389(cs:C1710.sfw_todoListManager.me.todoListWorkerName; Formula:C1597(cs:C1710.sfw_todoListManager.me.openWizardtodoList()))
+	Else 
+		BRING TO FRONT:C326($window.process.number)
 	End if 
 	
 Function launchGlobalSearch()
@@ -774,18 +917,33 @@ Function launchGlobalSearch()
 	
 	
 Function pupVisions()
-	
+	var $eUserProfile : cs:C1710.sfw_UserProfileEntity
+	var $esUserProfiles : cs:C1710.sfw_UserProfileSelection:=ds:C1482.sfw_UserProfile.query("ident in :1"; cs:C1710.sfw_userManager.me.authorizedProfiles)
 	$menusToRelease:=New collection:C1472
 	$mainMenu:=Create menu:C408
 	$menusToRelease.push($mainMenu)
 	For each ($vision; cs:C1710.sfw_definition.me.visions.orderBy("displayOrder desc"))
 		If ($vision.allowedProfiles#Null:C1517) && ($vision.allowedProfiles.length>0)
 			$displayVision:=False:C215
-			For each ($authorizedProfile; cs:C1710.sfw_userManager.me.authorizedProfiles)
-				$displayVision:=$displayVision || ($vision.allowedProfiles.indexOf($authorizedProfile)#-1)
+			For each ($eUserProfile; $esUserProfiles) Until ($displayVision)
+				$displayVision:=$displayVision || ($vision.allowedProfiles.indexOf($eUserProfile.ident)#-1)
 			End for each 
 		Else 
 			$displayVision:=True:C214
+		End if 
+		If (Not:C34($displayVision))
+			For each ($eUserProfile; $esUserProfiles) Until ($displayVision)
+				If ($eUserProfile.moreData.allowedVisions#Null:C1517)
+					$displayVision:=$displayVision || ($eUserProfile.moreData.allowedVisions.indexOf($vision.ident)#-1)
+				End if 
+			End for each 
+		End if 
+		If ($displayVision)
+			For each ($eUserProfile; $esUserProfiles) While ($displayVision)
+				If ($eUserProfile.moreData.restrictVisions#Null:C1517) && ($eUserProfile.moreData.restrictVisions.indexOf($vision.ident)#-1)
+					$displayVision:=False:C215
+				End if 
+			End for each 
 		End if 
 		If ($displayVision)
 			$label:=ds:C1482.sfw_readXliff($vision.xliff; $vision.label)
@@ -876,17 +1034,35 @@ Function pupLogo()
 	Else 
 		$esFavorites:=ds:C1482.sfw_Favorite.query("UUID_target # null and UUID_User = :1 order by entryIdent"; cs:C1710.sfw_userManager.me.info.UUID)
 	End if 
+	If (cs:C1710.sfw_userManager.me.info.UUID=("00"*16))
+		$esSubscriptions:=ds:C1482.sfw_Subscription.query("UUID_target # null order by entryIdent")
+	Else 
+		$esSubscriptions:=ds:C1482.sfw_Subscription.query("UUID_target # null and UUID_User = :1 order by entryIdent"; cs:C1710.sfw_userManager.me.info.UUID)
+	End if 
 	If ($esFavorites.length>0)
 		$refSubMenuFavorite:=Create menu:C408
 		$refMenus.push($refSubMenuFavorite)
 		For each ($eFavorite; $esFavorites)
 			$entry:=cs:C1710.sfw_definition.me.getEntryByIdent($eFavorite.entryIdent)
-			$favoritesItem:=ds:C1482[$entry.dataclass].get($eFavorite.UUID_target)
-			APPEND MENU ITEM:C411($refSubMenuFavorite; $entry.label+": "+$favoritesItem.nameInWindowTitle; *)
-			SET MENU ITEM PARAMETER:C1004($refSubMenuFavorite; -1; "--favorite:"+String:C10($favoritesItem.UUID)+":"+$entry.ident)
+			$favoriteItems:=ds:C1482[$entry.dataclass].get($eFavorite.UUID_target)
+			APPEND MENU ITEM:C411($refSubMenuFavorite; $entry.label+": "+$favoriteItems.nameInWindowTitle; *)
+			SET MENU ITEM PARAMETER:C1004($refSubMenuFavorite; -1; "--favorite:"+String:C10($favoriteItems.UUID)+":"+$entry.ident)
 			SET MENU ITEM ICON:C984($refSubMenuFavorite; -1; "Path:/RESOURCES/sfw/image/picto/star.png")
 		End for each 
 		APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("toolbar.favoriteItems"; "Favorite items"); $refSubMenuFavorite; *)
+	End if 
+	
+	If ($esSubscriptions.length>0) && (cs:C1710.sfw_definition.me.globalParameters.notifications.activate)
+		$refSubMenuSubscriptions:=Create menu:C408
+		$refMenus.push($refSubMenuSubscriptions)
+		For each ($eSubscription; $esSubscriptions)
+			$entry:=cs:C1710.sfw_definition.me.getEntryByIdent($eSubscription.entryIdent)
+			$subscriptedItem:=ds:C1482[$entry.dataclass].get($eSubscription.UUID_target)
+			APPEND MENU ITEM:C411($refSubMenuSubscriptions; $entry.label+": "+$subscriptedItem.nameInWindowTitle; *)
+			SET MENU ITEM PARAMETER:C1004($refSubMenuSubscriptions; -1; "--favorite:"+String:C10($subscriptedItem.UUID)+":"+$entry.ident)
+			SET MENU ITEM ICON:C984($refSubMenuSubscriptions; -1; "Path:/RESOURCES/sfw/image/picto/bell.png")
+		End for each 
+		APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("toolbar.subscriptedItems"; "Subscripted items"); $refSubMenuSubscriptions; *)
 	End if 
 	
 	OBJECT GET COORDINATES:C663(*; "bkgd_logo"; $g; $h; $d; $b)

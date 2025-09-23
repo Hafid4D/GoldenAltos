@@ -1,6 +1,8 @@
 property info : Object
 property authorizations : Object
 property authorizedProfiles : Collection
+property userProfiles : cs:C1710.sfw_UserProfileSelection
+property icon : Object
 
 shared singleton Class constructor
 	
@@ -32,10 +34,11 @@ shared Function defineUser()
 			This:C1470.info.email:=""
 		End if 
 		
-		$dcName:=cs:C1710.sfw_definition.me.globalParameters.users.linkedDataclass
-		$formula:=Formula from string:C1601("ds."+$dcName+".query(\"UUID_User = :1\";$1).first().UUID")
-		This:C1470.info["UUID_"+$dcName]:=$formula.call(Null:C1517; This:C1470.info.UUID)
-		
+		If (cs:C1710.sfw_definition.me.globalParameters.users.linkedDataclass#Null:C1517)
+			$dcName:=cs:C1710.sfw_definition.me.globalParameters.users.linkedDataclass
+			$formula:=Formula from string:C1601("ds."+$dcName+".query(\"UUID_User = :1\";$1).first().UUID")
+			This:C1470.info["UUID_"+$dcName]:=$formula.call(Null:C1517; This:C1470.info.UUID)
+		End if 
 		
 	Else 
 		This:C1470.info.asDesigner:=True:C214
@@ -185,3 +188,5 @@ shared Function getAuthorizedProfiles()
 	If (This:C1470.authorizedProfiles.indexOf("admin")<0) && (This:C1470.info.asDesigner)
 		This:C1470.authorizedProfiles.push("admin")
 	End if 
+	
+	This:C1470.userProfiles:=ds:C1482.sfw_UserProfile.query("ident in :1"; This:C1470.authorizedProfiles)

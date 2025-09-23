@@ -43,7 +43,7 @@
 					"stroke": "#808080",
 					"text": "Identifier"
 				},
-				"test": {
+				"entryField_ident": {
 					"type": "input",
 					"top": 12,
 					"left": 132,
@@ -69,11 +69,11 @@
 					"stroke": "#808080",
 					"text": "Name"
 				},
-				"test1": {
+				"entryField_name": {
 					"type": "input",
 					"top": 37,
 					"left": 132,
-					"width": 140,
+					"width": 240,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.name",
 					"focusable": false,
@@ -90,73 +90,47 @@
 		},
 		{
 			"objects": {
-				"bkgd_lb_inscriptions": {
+				"bkgd_hl_entryPermissions": {
 					"type": "rectangle",
-					"top": 93,
-					"left": 0,
-					"width": 323,
+					"top": 198,
+					"left": 322,
+					"width": 545,
+					"height": 344,
+					"stroke": "#c0c0c0",
+					"fill": "#EDF3FC"
+				},
+				"bkgd_hl_permissions": {
+					"type": "rectangle",
+					"top": 91,
+					"left": -1,
+					"width": 324,
 					"height": 451,
 					"stroke": "#c0c0c0",
 					"fill": "#F7F9FC"
 				},
-				"lb_inscriptions": {
-					"type": "listbox",
-					"top": 91,
-					"left": 0,
+				"hl_permissions": {
+					"type": "list",
+					"left": -1,
+					"top": 92,
 					"width": 323,
-					"height": 419,
-					"resizingMode": "legacy",
-					"listboxType": "collection",
-					"focusable": false,
-					"movableRows": false,
-					"dataSource": "Form:C1466.lb_inscriptions",
-					"currentItemSource": "Form:C1466.inscription",
-					"currentItemPositionSource": "Form:C1466.inscription_position",
-					"metaSource": "This:C1470.meta",
-					"scrollbarHorizontal": "hidden",
-					"horizontalLineStroke": "transparent",
-					"verticalLineStroke": "#C0C0C0",
+					"height": 416,
 					"events": [
 						"onClick",
-						"onDataChange",
-						"onSelectionChange",
-						"onHeaderClick"
+						"onSelectionChange"
 					],
-					"fill": "#FFFFFF",
-					"alternateFill": "#F7F9FC",
-					"method": "",
-					"columns": [
-						{
-							"name": "Colonne3",
-							"dataSource": "This:C1470.user.login",
-							"width": 172,
-							"minWidth": 10,
-							"maxWidth": 32000,
-							"events": [
-								"onClick",
-								"onDataChange"
-							],
-							"header": {
-								"name": "user",
-								"text": "User",
-								"fontTheme": "normal",
-								"textAlign": "left"
-							},
-							"footer": {
-								"name": "Pied3",
-								"timeFormat": "hh_mm_ss",
-								"fontFamily": "System Font Regular",
-								"fontSize": 10
-							},
-							"fontTheme": "normal"
-						}
-					]
+					"scrollbarHorizontal": "hidden",
+					"dataSource": "Form:C1466.hl_permissions",
+					"method": "ObjectMethods/hl_permissions.4dm",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent"
 				},
-				"bActionInscriptions": {
+				"bAction_hl_permissions": {
 					"type": "button",
 					"text": "Actions",
 					"top": 514,
-					"left": 5,
+					"left": 6,
 					"width": 82,
 					"height": 24,
 					"events": [
@@ -166,14 +140,357 @@
 					"popupPlacement": "linked",
 					"icon": "/RESOURCES/sfw/image/picto/gear.png",
 					"textPlacement": "right",
-					"method": "ObjectMethods/bActionInscriptions.4dm"
+					"method": "ObjectMethods/bAction_hl_permissions.4dm"
+				},
+				"label_userFullName": {
+					"type": "text",
+					"top": 99,
+					"left": 332,
+					"width": 111,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "User"
+				},
+				"userFullName": {
+					"type": "input",
+					"top": 99,
+					"left": 452,
+					"width": 240,
+					"height": 17,
+					"dataSource": "Form:C1466.hl_permissions_current_item.userInscription.user.fullName",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"label_inscriptionSince": {
+					"type": "text",
+					"top": 123,
+					"left": 332,
+					"width": 111,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Since"
+				},
+				"inscriptionSince": {
+					"type": "input",
+					"top": 123,
+					"left": 452,
+					"width": 240,
+					"height": 17,
+					"dataSource": "Form:C1466.hl_permissions_current_item.userInscription.since",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"label_givenBy": {
+					"type": "text",
+					"top": 147,
+					"left": 332,
+					"width": 111,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Who has given"
+				},
+				"givenBy": {
+					"type": "input",
+					"top": 147,
+					"left": 452,
+					"width": 240,
+					"height": 17,
+					"dataSource": "Form:C1466.hl_permissions_current_item.userInscription.userHasGiven.fullName",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"wariningInscription": {
+					"type": "text",
+					"top": 172,
+					"left": 452,
+					"width": 245,
+					"height": 16,
+					"stroke": "#ff0000",
+					"text": "Registered automatically, not deletable"
+				},
+				"bUnregisterUser": {
+					"type": "button",
+					"text": "Unregister the user",
+					"top": 168,
+					"left": 452,
+					"width": 240,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"style": "bevel",
+					"method": "ObjectMethods/bUnregisterUser.4dm"
+				},
+				"label_visionLabel": {
+					"type": "text",
+					"top": 99,
+					"left": 332,
+					"width": 111,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Vision"
+				},
+				"visionLabel": {
+					"type": "input",
+					"top": 99,
+					"left": 452,
+					"width": 240,
+					"height": 17,
+					"dataSource": "Form:C1466.hl_permissions_current_item.vision.label",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"warningVisionAllowedByCode": {
+					"type": "text",
+					"top": 123,
+					"left": 452,
+					"width": 245,
+					"height": 46,
+					"stroke": "#ff0000",
+					"text": "This vision is authorized for this profile by default and cannot be removed."
+				},
+				"bVisionAllowAccess": {
+					"type": "radio",
+					"text": "Allow access to this vision for this profile",
+					"top": 123,
+					"left": 452,
+					"width": 289,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"radioGroup": "visionAllowAccess",
+					"dataSource": "Form:C1466.bVisionAllowAccess",
+					"focusable": false,
+					"method": "ObjectMethods/bVisionAllowAccess.4dm"
+				},
+				"bVisionNotAllowAccess": {
+					"type": "radio",
+					"text": "Do not allow access to this vision for this profile",
+					"top": 148,
+					"left": 452,
+					"width": 327,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"radioGroup": "visionAllowAccess",
+					"dataSource": "Form:C1466.bVisionNotAllowAccess",
+					"focusable": false,
+					"method": "ObjectMethods/bVisionNotAllowAccess.4dm"
+				},
+				"bVisionRestrictAccess": {
+					"type": "radio",
+					"text": "Prohibit access to this vision for this profile",
+					"top": 173,
+					"left": 452,
+					"width": 327,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"radioGroup": "visionAllowAccess",
+					"dataSource": "Form:C1466.bVisionRestrictAccess",
+					"focusable": false,
+					"method": "ObjectMethods/bVisionRestrictAccess.4dm"
+				},
+				"label_entryLabel": {
+					"type": "text",
+					"top": 97,
+					"left": 332,
+					"width": 111,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Entry"
+				},
+				"entryLabel": {
+					"type": "input",
+					"top": 97,
+					"left": 452,
+					"width": 240,
+					"height": 17,
+					"dataSource": "Form:C1466.hl_permissions_current_item.entry.label",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"warningEntryAllowedByCode": {
+					"type": "text",
+					"top": 121,
+					"left": 452,
+					"width": 245,
+					"height": 46,
+					"stroke": "#ff0000",
+					"text": "This entry is authorized for this profile by default and cannot be removed."
+				},
+				"bEntryAllowAccess": {
+					"type": "radio",
+					"text": "Allow access to this entry for this profile",
+					"top": 121,
+					"left": 452,
+					"width": 289,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"radioGroup": "visionAllowAccess",
+					"dataSource": "Form:C1466.bEntryAllowAccess",
+					"focusable": false,
+					"method": "ObjectMethods/bEntryAllowAccess.4dm"
+				},
+				"bEntryNotAllowAccess": {
+					"type": "radio",
+					"text": "Do not allow access to this entry for this profile",
+					"top": 146,
+					"left": 452,
+					"width": 327,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"radioGroup": "visionAllowAccess",
+					"dataSource": "Form:C1466.bEntryNotAllowAccess",
+					"focusable": false,
+					"method": "ObjectMethods/bEntryNotAllowAccess.4dm"
+				},
+				"bEntryRestrictAccess": {
+					"type": "radio",
+					"text": "Prohibit access to this entry for this profile",
+					"top": 171,
+					"left": 452,
+					"width": 327,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"radioGroup": "visionAllowAccess",
+					"dataSource": "Form:C1466.bEntryRestrictAccess",
+					"focusable": false,
+					"method": "ObjectMethods/bEntryRestrictAccess.4dm"
+				},
+				"label_visionLabelAccess": {
+					"type": "text",
+					"top": 123,
+					"left": 332,
+					"width": 111,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Access"
+				},
+				"label_entryLabelAccess": {
+					"type": "text",
+					"top": 121,
+					"left": 332,
+					"width": 111,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Access"
+				},
+				"hl_entryPermissions": {
+					"type": "list",
+					"left": 332,
+					"top": 204,
+					"width": 535,
+					"height": 272,
+					"events": [
+						"onClick",
+						"onSelectionChange"
+					],
+					"scrollbarHorizontal": "hidden",
+					"dataSource": "Form:C1466.hl_entryPermissions",
+					"enterable": false,
+					"focusable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"method": "ObjectMethods/hl_entryPermissions.4dm",
+					"selectionMode": "multiple"
+				},
+				"bAction_hl_entryPermissions": {
+					"type": "button",
+					"text": "Actions",
+					"top": 514,
+					"left": 327,
+					"width": 82,
+					"height": 24,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bAction_hl_entryPermissions.4dm"
 				}
 			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_2lines",
-	"geometryStamp": 8,
+	"geometryStamp": 254,
 	"editor": {
+		"groups": {
+			"Group": [
+				"label_userFullName",
+				"userFullName",
+				"label_inscriptionSince",
+				"inscriptionSince",
+				"label_givenBy",
+				"givenBy",
+				"wariningInscription",
+				"bUnregisterUser"
+			],
+			"Group1": [
+				"label_visionLabel",
+				"visionLabel",
+				"warningVisionAllowedByCode",
+				"bVisionAllowAccess",
+				"bVisionNotAllowAccess",
+				"bVisionRestrictAccess",
+				"label_visionLabelAccess"
+			],
+			"Group2": [
+				"label_entryLabel",
+				"entryLabel",
+				"warningEntryAllowedByCode",
+				"bEntryAllowAccess",
+				"bEntryNotAllowAccess",
+				"bEntryRestrictAccess",
+				"label_entryLabelAccess"
+			]
+		},
 		"activeView": "View 1",
 		"defaultView": "View 1",
 		"views": {

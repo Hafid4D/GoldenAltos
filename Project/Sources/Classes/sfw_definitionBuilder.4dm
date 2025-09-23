@@ -25,7 +25,7 @@ Class constructor
 	This:C1470._push_vision($vision)
 	
 	$vision:=cs:C1710.sfw_definitionVision.new("userManagement"; ds:C1482.sfw_readXliff("user.vision"))
-	$vision.setToolbarBackgroundColor("tan")
+	$vision.setToolbarBackgroundColor("LightSlateGray")
 	$vision.setXliffLabel("user.vision")
 	$vision.setDisplayOrder(-1004)
 	$vision.setIcon("sfw/vision/user-24x24.png")
@@ -60,12 +60,13 @@ Class constructor
 	End for each 
 	
 	//Mark: entry : scheduler
-	$entry:=cs:C1710.sfw_definitionEntry.new("scheduler"; "administration"; "Scheduler")
-	$entry.setXliffLabel("scheduler.title")
-	$entry.setIcon("sfw/entry/scheduler-50x50.png")
-	$entry.setWizard("sfw_wizard_scheduler"; "palette")
-	This:C1470._push_entry($entry)
-	
+	If (cs:C1710.sfw_definition.me.globalParameters.schedulers.activate)
+		$entry:=cs:C1710.sfw_definitionEntry.new("scheduler"; "administration"; "Scheduler")
+		$entry.setXliffLabel("scheduler.title")
+		$entry.setIcon("sfw/entry/scheduler-50x50.png")
+		$entry.setWizard("sfw_wizard_scheduler"; "palette")
+		This:C1470._push_entry($entry)
+	End if 
 	
 	
 	

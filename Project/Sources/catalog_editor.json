@@ -1,5 +1,37 @@
 {
 	"tables": {
+		"sfw_Subscription": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 40,
+				"top": 2510,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
+		"sfw_Todo": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 440,
+				"top": 287,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
 		"Department": {
 			"color": {
 				"red": 255,
@@ -2129,6 +2161,30 @@
 				"alpha": 0
 			}
 		},
+		"4AA8439DBD366C4AA81A8F055DBFB727": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"36DD83EE5A35AA46B2C4808AFAEB9040": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"10727A709C83D84C81934A0D0DCF318D": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"18E921374C52F243882D443A49032F38": {
 			"color": {
 				"red": 240,
@@ -2178,22 +2234,6 @@
 			}
 		},
 		"78C267F9FD9FB64EB96B0BA2021CA475": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"36DD83EE5A35AA46B2C4808AFAEB9040": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"10727A709C83D84C81934A0D0DCF318D": {
 			"color": {
 				"red": 240,
 				"green": 240,

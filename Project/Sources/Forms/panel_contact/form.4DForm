@@ -239,7 +239,8 @@
 					"height": 305,
 					"detailForm": "sfw_subpanel_addressSingle",
 					"borderStyle": "none",
-					"dataSource": "Form:C1466.subFormAddress"
+					"dataSource": "Form:C1466.subFormAddress",
+					"method": "ObjectMethods/subFormAddress.4dm"
 				},
 				"header_bkgd2": {
 					"type": "rectangle",

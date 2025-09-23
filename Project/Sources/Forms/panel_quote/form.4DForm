@@ -45,10 +45,10 @@
 					"stroke": "#808080",
 					"text": "Quote ID"
 				},
-				"entryField_name": {
+				"name": {
 					"type": "input",
 					"top": 12,
-					"left": 132,
+					"left": 113,
 					"width": 177,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.code",
@@ -62,38 +62,10 @@
 					"fill": "transparent",
 					"borderStyle": "none"
 				},
-				"label_0_2": {
-					"type": "text",
-					"top": 37,
-					"left": 12,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Lead ID"
-				},
-				"entryField_subject": {
-					"type": "input",
-					"top": 37,
-					"left": 132,
-					"width": 177,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.leads[0].leadCode",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onClick",
-						"onGettingFocus"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"method": "ObjectMethods/entryField_subject.4dm"
-				},
 				"label_0_3": {
 					"type": "text",
-					"top": 12,
-					"left": 346,
+					"top": 37,
+					"left": 368,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
@@ -101,8 +73,8 @@
 				},
 				"label_0_4": {
 					"type": "text",
-					"top": 37,
-					"left": 346,
+					"top": 12,
+					"left": 741,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
@@ -110,14 +82,14 @@
 				},
 				"pup_QuoteStatus": {
 					"type": "button",
-					"top": 6,
-					"left": 815,
+					"top": 34,
+					"left": 835,
 					"width": 172,
 					"height": 23,
 					"fontFamily": "System Font",
 					"fontSize": 13,
 					"focusable": false,
-					"text": "Status",
+					"text": " ",
 					"icon": "",
 					"popupPlacement": "linked",
 					"textPlacement": "right",
@@ -136,12 +108,12 @@
 					"stroke": "#808080",
 					"text": "Date"
 				},
-				"entryField_subject1": {
+				"entryField_dateCreation": {
 					"type": "input",
 					"top": 62,
-					"left": 132,
-					"width": 177,
-					"height": 17,
+					"left": 113,
+					"width": 187,
+					"height": 16,
 					"dataSource": "Form:C1466.current_item.dateCreation",
 					"focusable": false,
 					"enterable": false,
@@ -151,21 +123,23 @@
 						"onDataChange"
 					],
 					"fill": "transparent",
-					"borderStyle": "none"
+					"borderStyle": "none",
+					"dataSourceTypeHint": "date",
+					"entryFilter": "!0&9##/##/####"
 				},
 				"label_0_6": {
 					"type": "text",
 					"top": 62,
-					"left": 346,
+					"left": 368,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Total"
 				},
-				"entryField_subject2": {
+				"amount": {
 					"type": "input",
 					"top": 62,
-					"left": 435,
+					"left": 457,
 					"width": 172,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.amount",
@@ -177,11 +151,12 @@
 						"onDataChange"
 					],
 					"fill": "transparent",
-					"borderStyle": "none"
+					"borderStyle": "none",
+					"textAlign": "left"
 				},
 				"label_0_7": {
 					"type": "text",
-					"top": 9,
+					"top": 37,
 					"left": 741,
 					"width": 90,
 					"height": 17,
@@ -191,8 +166,8 @@
 				"btnForward": {
 					"type": "button",
 					"text": " ",
-					"top": 6,
-					"left": 657,
+					"top": 36,
+					"left": 659,
 					"width": 18,
 					"height": 18,
 					"events": [
@@ -207,35 +182,16 @@
 					"iconFrames": 4,
 					"focusable": false
 				},
-				"btnForward1": {
-					"type": "button",
-					"text": " ",
-					"top": 6,
-					"left": 677,
-					"width": 18,
-					"height": 18,
-					"events": [
-						"onClick"
-					],
-					"style": "custom",
-					"popupPlacement": "none",
-					"icon": "/RESOURCES/image/element/add.png",
-					"textPlacement": "center",
-					"method": "ObjectMethods/btnForward1.4dm",
-					"visibility": "visible",
-					"iconFrames": 4,
-					"focusable": false
-				},
 				"pup_serviceType": {
 					"type": "button",
-					"top": 34,
-					"left": 435,
-					"width": 215,
-					"height": 23,
+					"top": 10,
+					"left": 835,
+					"width": 196,
+					"height": 20,
 					"fontFamily": "System Font",
 					"fontSize": 13,
 					"focusable": false,
-					"text": "Service",
+					"text": " ",
 					"icon": "",
 					"popupPlacement": "linked",
 					"textPlacement": "right",
@@ -245,35 +201,16 @@
 						"onClick"
 					]
 				},
-				"entryField_customer": {
-					"type": "input",
-					"top": 12,
-					"left": 435,
-					"width": 210,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.customer.name",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onClick",
-						"onGettingFocus"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"method": "ObjectMethods/entryField_customer.4dm"
-				},
 				"pup_QuoteRevision": {
 					"type": "button",
-					"top": 34,
-					"left": 815,
+					"top": 59,
+					"left": 835,
 					"width": 172,
 					"height": 23,
 					"fontFamily": "System Font",
 					"fontSize": 13,
 					"focusable": false,
-					"text": "Revision",
+					"text": " ",
 					"icon": "",
 					"popupPlacement": "linked",
 					"textPlacement": "right",
@@ -285,12 +222,104 @@
 				},
 				"label_0_9": {
 					"type": "text",
-					"top": 37,
+					"top": 62,
 					"left": 741,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Revision"
+				},
+				"pup_customer": {
+					"type": "button",
+					"top": 35,
+					"left": 457,
+					"width": 196,
+					"height": 20,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": " ",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_customer.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"label_0_2": {
+					"type": "text",
+					"top": 13,
+					"left": 368,
+					"width": 64,
+					"height": 15,
+					"stroke": "#808080",
+					"text": "Owner"
+				},
+				"btnForward2": {
+					"type": "button",
+					"text": " ",
+					"top": 11,
+					"left": 659,
+					"width": 18,
+					"height": 18,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/arrowForward.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnForward2.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
+				},
+				"pup_staff": {
+					"type": "button",
+					"top": 9,
+					"left": 457,
+					"width": 177,
+					"height": 20,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_staff.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"label_0_10": {
+					"type": "text",
+					"top": 37,
+					"left": 12,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Subject"
+				},
+				"entryField_subject": {
+					"type": "input",
+					"top": 37,
+					"left": 113,
+					"width": 187,
+					"height": 16,
+					"dataSource": "Form:C1466.current_item.subject",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
 				}
 			}
 		},
@@ -332,7 +361,7 @@
 					"height": 15,
 					"fontWeight": "bold"
 				},
-				"List Box": {
+				"lb_contacts": {
 					"type": "listbox",
 					"left": 531,
 					"top": 147,
@@ -968,7 +997,7 @@
 		},
 		{
 			"objects": {
-				"entryField_WParea": {
+				"WPArea_opt": {
 					"type": "write",
 					"top": 204,
 					"left": 0,
@@ -982,7 +1011,7 @@
 					"scrollbarHorizontal": "automatic",
 					"dpi": 0,
 					"borderStyle": "none",
-					"method": "ObjectMethods/entryField_WParea.4dm",
+					"method": "ObjectMethods/WPArea_opt.4dm",
 					"events": [
 						"onLoad",
 						"onLosingFocus",
@@ -992,7 +1021,7 @@
 						"onAfterEdit"
 					]
 				},
-				"WPtoolbar": {
+				"WPtoolbar_opt": {
 					"type": "subform",
 					"top": 114,
 					"left": 0,
@@ -1011,7 +1040,7 @@
 		},
 		{
 			"objects": {
-				"entryField_preview": {
+				"WParea_preview": {
 					"type": "write",
 					"top": 204,
 					"left": 0,
@@ -1025,7 +1054,7 @@
 					"scrollbarHorizontal": "automatic",
 					"dpi": 0,
 					"borderStyle": "none",
-					"method": "ObjectMethods/entryField_preview.4dm",
+					"method": "ObjectMethods/WParea_preview.4dm",
 					"events": [
 						"onLoad",
 						"onLosingFocus",
@@ -1034,7 +1063,7 @@
 						"onAfterEdit"
 					]
 				},
-				"WPtoolbar1": {
+				"WPtoolbar_preview": {
 					"type": "subform",
 					"top": 114,
 					"left": 0,
@@ -1047,12 +1076,13 @@
 					"doubleClickInRowAction": "editSubrecord",
 					"doubleClickInEmptyAreaAction": "addSubrecord",
 					"selectionMode": "multiple",
-					"printFrame": "variable"
+					"printFrame": "variable",
+					"method": ""
 				}
 			}
 		}
 	],
-	"geometryStamp": 722,
+	"geometryStamp": 778,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {

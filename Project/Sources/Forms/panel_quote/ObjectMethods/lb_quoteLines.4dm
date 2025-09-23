@@ -1,1 +1,1 @@
-cs:C1710.panel_quote.me.loadQuoteLines()
+cs:C1710.panel_quote.me.displayQuoteLine()

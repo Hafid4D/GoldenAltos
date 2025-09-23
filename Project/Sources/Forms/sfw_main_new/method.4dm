@@ -24,6 +24,7 @@ Case of
 		Case of 
 			: ($framework.entry.dataclass#Null:C1517)
 				$framework.lb_items_define()
+				$framework.displayDefaultPanel()
 				If ($framework.lb_items=Null:C1517) || ($framework.lb_items.length=0)
 					$framework.lb_items_search()
 					
@@ -32,6 +33,7 @@ Case of
 				
 			: (String:C10($framework.entry.virtual)="collection")
 				$framework.virtual_lb_items_define()
+				$framework.displayDefaultPanel()
 				$framework.virtual_lb_items_fill()
 				$framework.drawButtons_virtual()
 				
@@ -45,6 +47,7 @@ Case of
 		
 	: (FORM Event:C1606.code=On Resize:K2:27)
 		Form:C1466.subForm:=Form:C1466.subForm
+		Form:C1466.subForm.resizeAsked:=True:C214
 		OBJECT GET SUBFORM CONTAINER SIZE:C1148($form_width; $form_height)
 		OBJECT GET COORDINATES:C663(*; "vSplitter"; $gvspliter; $hvspliter; $dvspliter; $bvspliter)
 		OBJECT GET COORDINATES:C663(*; "bkgd_topBar"; $gtopbar; $htopbar; $dtopbar; $btopbar)
@@ -57,6 +60,8 @@ Case of
 		Else 
 			SHOW TOOL BAR:C433
 		End if 
+		
+		
 		
 	: (FORM Event:C1606.code=On Close Box:K2:21)
 		
@@ -76,6 +81,10 @@ Case of
 		Case of 
 			: (FORM Event:C1606.objectName="headerTabFavorite_button")
 				cs:C1710.sfw_favoriteManager.me.clicOnHeader()
+			: (FORM Event:C1606.objectName="headerTabSubscription_button")
+				cs:C1710.sfw_subscriptionManager.me.clicOnHeader()
+			: (FORM Event:C1606.objectName="headerTabAssignation_button")
+				cs:C1710.sfw_assignationManager.me.clicOnHeader()
 			: (FORM Event:C1606.objectName="headerTabComment_title")
 				cs:C1710.sfw_commentManager.me.clicOnHeader(Form:C1466.current_item.UUID)
 			: (FORM Event:C1606.objectName="headerTabEvent_title")
@@ -102,7 +111,7 @@ Case of
 		
 		
 	: (FORM Event:C1606.code=On Timer:K2:25)
-		SET TIMER:C645(0)
+		//SET TIMER(0)
 		
 End case 
 

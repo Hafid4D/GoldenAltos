@@ -1,5 +1,7 @@
 Class extends sfw_foundations
 
+property vision : Object
+
 Class constructor
 	Super:C1705()
 	
@@ -40,6 +42,12 @@ Function selectionChange()
 	
 Function _displayHeaderTabFavorite()
 	cs:C1710.sfw_favoriteManager.me._displayHeaderTabFavorite()
+	
+Function _displayHeaderTabSubscription()
+	cs:C1710.sfw_subscriptionManager.me._displayHeaderTabSubscription()
+	
+Function _displayHeaderTabAssignation()
+	cs:C1710.sfw_assignationManager.me._displayHeaderTabAssignation()
 	
 Function _displayHeaderTabComment()
 	cs:C1710.sfw_commentManager.me._displayHeaderTabComment()

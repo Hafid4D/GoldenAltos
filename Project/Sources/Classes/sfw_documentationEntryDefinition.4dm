@@ -1,3 +1,5 @@
+property functions : Collection
+
 shared singleton Class constructor
 	
 	var $fonction : Object
@@ -33,6 +35,14 @@ shared singleton Class constructor
 	$fonction.title:="setSearchboxField"
 	$fonction.syntax:="$entry.setSearchboxField(\"\")"
 	$fonction.comment:="It defines the field used for searching within this entry"
+	This:C1470.functions.push(OB Copy:C1225($fonction; ck shared:K85:29))
+	
+	
+	
+	$fonction:=New object:C1471
+	$fonction.title:="setSearchField"
+	$fonction.syntax:="$entry.setSearchField(\"\")"
+	$fonction.comment:="Dynamically creates and configures a search field for the application.\r//Each field can have attributes, data type (text, date, boolean, etc.),\r//tags, a placeholder, and can be linked to comments or documents."
 	This:C1470.functions.push(OB Copy:C1225($fonction; ck shared:K85:29))
 	
 	
@@ -107,7 +117,7 @@ shared singleton Class constructor
 	$fonction:=New object:C1471
 	$fonction.title:="activateComment"
 	$fonction.syntax:="$entry.activateComment()"
-	$fonction.comment:="to activate or enable the comment feature for an entry"
+	$fonction.comment:="To activate the comment feature for an entry. \r //You can use \"activateSearchTags\" to add all three tags (withComment, inComment, levelComment) at once,\r // or add each tag separately using a semicolon (;)"
 	This:C1470.functions.push(OB Copy:C1225($fonction; ck shared:K85:29))
 	
 	$fonction:=New object:C1471

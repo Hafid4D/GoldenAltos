@@ -498,7 +498,7 @@
 					"visibility": "hidden",
 					"sizingX": "move"
 				},
-				"headerTabFavorite_bkgdbottom1": {
+				"headerTabFavorite_bkgdbottom": {
 					"type": "rectangle",
 					"top": 42,
 					"left": 374,
@@ -509,7 +509,7 @@
 					"sizingX": "fixed",
 					"visibility": "hidden"
 				},
-				"headerTabFavorite_bkgdtop1": {
+				"headerTabFavorite_bkgdtop": {
 					"type": "rectangle",
 					"top": 32,
 					"left": 374,
@@ -534,6 +534,82 @@
 					"style": "custom",
 					"icon": "/RESOURCES/sfw/image/picto/star-empty.png",
 					"visibility": "hidden"
+				},
+				"headerTabSubscription_bkgdbottom": {
+					"type": "rectangle",
+					"top": 42,
+					"left": 412,
+					"width": 34,
+					"height": 18,
+					"stroke": "transparent",
+					"fill": "#FFFFFF",
+					"sizingX": "fixed",
+					"visibility": "hidden"
+				},
+				"headerTabSubscription_bkgdtop": {
+					"type": "rectangle",
+					"top": 32,
+					"left": 412,
+					"width": 34,
+					"height": 18,
+					"stroke": "transparent",
+					"fill": "#FFFFFF",
+					"borderRadius": 8,
+					"sizingX": "fixed",
+					"visibility": "hidden"
+				},
+				"headerTabAssignation_bkgdbottom": {
+					"type": "rectangle",
+					"top": 42,
+					"left": 450,
+					"width": 34,
+					"height": 18,
+					"stroke": "transparent",
+					"fill": "#FFFFFF",
+					"sizingX": "fixed",
+					"visibility": "hidden"
+				},
+				"headerTabAssignation_bkgdtop": {
+					"type": "rectangle",
+					"top": 32,
+					"left": 450,
+					"width": 34,
+					"height": 18,
+					"stroke": "transparent",
+					"fill": "#FFFFFF",
+					"borderRadius": 8,
+					"sizingX": "fixed",
+					"visibility": "hidden"
+				},
+				"headerTabSubscription_button": {
+					"type": "button",
+					"text": "",
+					"top": 39,
+					"left": 420,
+					"width": 16,
+					"height": 16,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"icon": "/RESOURCES/sfw/image/picto/bell-empty.png",
+					"visibility": "hidden",
+					"sizingX": "fixed"
+				},
+				"headerTabAssignation_button": {
+					"type": "button",
+					"text": "",
+					"top": 38,
+					"left": 458,
+					"width": 16,
+					"height": 16,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"icon": "/RESOURCES/sfw/image/picto/task.png",
+					"visibility": "hidden",
+					"sizingX": "fixed"
 				}
 			}
 		}
@@ -549,5 +625,5 @@
 			"View 1": {}
 		}
 	},
-	"geometryStamp": 267
+	"geometryStamp": 282
 }

@@ -1,3 +1,5 @@
+property countries : Collection
+
 singleton Class constructor
 	ds:C1482.sfw_Country.cacheLoad()
 	This:C1470.countries:=Storage:C1525.cache.sfw_country

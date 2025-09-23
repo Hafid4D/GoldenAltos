@@ -44,7 +44,7 @@
 					"height": 113,
 					"sizingX": "fixed",
 					"fill": "#E3E3E3",
-					"stroke": "#F5F7FA"
+					"stroke": "transparent"
 				},
 				"hTabBar": {
 					"type": "input",

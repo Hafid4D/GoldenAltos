@@ -3,6 +3,12 @@ Class extends sfw_chart
 
 property yAxis : Object
 property xAxis : Object
+property averageLine : Boolean
+property valuexOffset : Integer
+
+property _series : Collection
+property _yValuesKeys : Collection
+property _nbSeries : Integer
 
 Class constructor
 	
@@ -108,7 +114,7 @@ Function _drawOrdinateAxis
 		This:C1470.yAxis.heightStep:=This:C1470.yAxis.max/This:C1470.areaSize.graphHeight
 		
 		
-		$collMax:=New collection:C1472(1000; 750; 500; 250; 200; 100; 50; 20; 10; 5; 2; 1)
+		$collMax:=New collection:C1472(1000; 750; 500; 250; 200; 100; 75; 50; 20; 10; 5; 2; 1)
 		$graduationStep:=0
 		For each ($val; $collMax) Until ($graduationStep>0)
 			If (This:C1470.yAxis.unitMax>$val)

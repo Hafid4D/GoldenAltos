@@ -1,4 +1,7 @@
 
+property xliff : Text
+property name : Text
+property panel : Object
 
 
 Class constructor($name : Text; $panel : Text))

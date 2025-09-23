@@ -79,7 +79,7 @@ If ($isVisible)
 			
 			$scheduleElementCopy:=OB Copy:C1225(Form:C1466.period.element)
 			
-			$pict:=schedule_drawWorkingRanges($scheduleElementCopy.work)
+			//$pict:=schedule_drawWorkingRanges($scheduleElementCopy.work)
 			
 			
 			(OBJECT Get pointer:C1124((Object named:K67:5); "working_ranges_pict")->):=$pict

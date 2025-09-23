@@ -3,7 +3,7 @@ Class extends DataClass
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	//Mark: entry : Quote
-	$entry:=cs:C1710.sfw_definitionEntry.new("quote"; ["salesAndQuotes"]; "Quotes")
+	$entry:=cs:C1710.sfw_definitionEntry.new("quote"; ["salesAndQuotes"]; "  Quotes  ")
 	$entry.setDataclass("Quote")
 	$entry.setDisplayOrder(-500)
 	$entry.setIcon("image/entry/contract-white-50x50.png")
@@ -18,8 +18,11 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(4; "staff-32x32.png"; "Optional premilinary text")
 	$entry.setPanelPage(5; "staff-32x32.png"; "Preview")
 	
-	$entry.setLBItemsColumn("subject"; "Subject"; "subject"; "width:300")
-	$entry.setLBItemsColumn("code"; "Code"; "code"; "width:100")
+	
+	$entry.setLBItemsColumn("code"; "Code"; "code"; "width:50")
+	$entry.setLBItemsColumn("subject"; "Subject"; "subject"; "width:320")
+	$entry.setLBItemsColumn("currentStatus"; "Status"; "width:50:fixed"; "columnName:columnStatus"; "center")
+	$entry.setLBItemsMetaExpression("this.metaColor()")
 	
 	$entry.setLBItemsOrderBy("subject")
 	

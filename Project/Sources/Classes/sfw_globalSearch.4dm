@@ -1,3 +1,7 @@
+property lb_items : Variant
+property lb_results : Collection
+property searchbox : Text
+
 Class extends sfw_foundations
 
 

@@ -85,6 +85,50 @@
 		},
 		{
 			"objects": {
+				"Rectangle7": {
+					"type": "rectangle",
+					"top": 8,
+					"left": 869,
+					"width": 37,
+					"height": 21,
+					"borderRadius": 8,
+					"stroke": "transparent",
+					"fill": "#0000cd",
+					"visibility": "hidden"
+				},
+				"Rectangle6": {
+					"type": "rectangle",
+					"top": 8,
+					"left": 804,
+					"width": 60,
+					"height": 21,
+					"borderRadius": 8,
+					"stroke": "transparent",
+					"fill": "#00ff00",
+					"visibility": "hidden"
+				},
+				"Rectangle5": {
+					"type": "rectangle",
+					"top": 8,
+					"left": 749,
+					"width": 50,
+					"height": 21,
+					"borderRadius": 8,
+					"stroke": "transparent",
+					"fill": "#00ff00",
+					"visibility": "hidden"
+				},
+				"Rectangle4": {
+					"type": "rectangle",
+					"top": 8,
+					"left": 703,
+					"width": 41,
+					"height": 21,
+					"borderRadius": 8,
+					"stroke": "transparent",
+					"fill": "#ffff00",
+					"visibility": "hidden"
+				},
 				"lb_items": {
 					"type": "listbox",
 					"top": 92,
@@ -137,7 +181,8 @@
 					"doubleClickInEmptyAreaAction": "addSubrecord",
 					"selectionMode": "multiple",
 					"printFrame": "variable",
-					"borderStyle": "none"
+					"borderStyle": "none",
+					"method": "ObjectMethods/detail_panel.4dm"
 				},
 				"bIcon_entry": {
 					"type": "button",
@@ -181,9 +226,9 @@
 				"lb_items_counter": {
 					"type": "input",
 					"top": 626,
-					"left": 259,
-					"width": 162,
-					"height": 14,
+					"left": 232,
+					"width": 220,
+					"height": 15,
 					"sizingX": "move",
 					"sizingY": "move",
 					"dataSource": "Form:C1466.sfw.lb_items.length",
@@ -843,7 +888,7 @@
 					"height": 22,
 					"sizingX": "grow",
 					"pictureFormat": "scaled",
-					"picture": "/RESOURCES/explo/image/travel/searchBox/searchbox_middle.png"
+					"picture": "/RESOURCES/sfw/searchBox/searchbox_middle.png"
 				},
 				"Search_Box_Right": {
 					"type": "picture",
@@ -853,7 +898,7 @@
 					"height": 22,
 					"sizingX": "move",
 					"pictureFormat": "scaled",
-					"picture": "/RESOURCES/explo/image/travel/searchBox/searchbox_right.png"
+					"picture": "/RESOURCES/sfw/searchBox/searchbox_right.png"
 				},
 				"Search_Box_Left": {
 					"type": "button",
@@ -862,7 +907,7 @@
 					"width": 26,
 					"height": 22,
 					"focusable": false,
-					"icon": "/RESOURCES/explo/image/travel/searchBox/searchbox_left.png",
+					"icon": "/RESOURCES/sfw/searchBox/searchbox_left.png",
 					"style": "custom",
 					"method": "ObjectMethods/Search_Box_Left.4dm",
 					"events": [
@@ -907,7 +952,7 @@
 					"fontSize": 9,
 					"stroke": "#FF0099",
 					"focusable": false,
-					"icon": "/RESOURCES/explo/image/travel/searchBox/searchbox_close.png",
+					"icon": "/RESOURCES/sfw/searchBox/searchbox_close.png",
 					"iconFrames": 4,
 					"style": "custom",
 					"method": "ObjectMethods/Search_Erase.4dm",
@@ -922,7 +967,7 @@
 					"width": 30,
 					"height": 28,
 					"pictureFormat": "scaled",
-					"picture": "/RESOURCES/explo/image/travel/searchBox/FocusRing_left.png",
+					"picture": "/RESOURCES/sfw/searchBox/FocusRing_left.png",
 					"visibility": "hidden"
 				},
 				"Search_Focus_Middle": {
@@ -933,7 +978,7 @@
 					"height": 28,
 					"sizingX": "grow",
 					"pictureFormat": "scaled",
-					"picture": "/RESOURCES/explo/image/travel/searchBox/FocusRing_middle.png",
+					"picture": "/RESOURCES/sfw/searchBox/FocusRing_middle.png",
 					"visibility": "hidden"
 				},
 				"Search_Focus_Right": {
@@ -944,7 +989,7 @@
 					"height": 28,
 					"sizingX": "move",
 					"pictureFormat": "scaled",
-					"picture": "/RESOURCES/explo/image/travel/searchBox/FocusRing_right.png",
+					"picture": "/RESOURCES/sfw/searchBox/FocusRing_right.png",
 					"visibility": "hidden"
 				},
 				"Rectangle2": {
@@ -976,7 +1021,7 @@
 					"picture": "Images/Static Picture2.tif",
 					"pictureFormat": "scaled"
 				},
-				"headerTabFavorite_bkgdbottom1": {
+				"headerTabFavorite_bkgdbottom": {
 					"type": "rectangle",
 					"top": 42,
 					"left": 474,
@@ -987,10 +1032,133 @@
 					"sizingX": "fixed",
 					"visibility": "hidden"
 				},
-				"headerTabFavorite_bkgdtop1": {
+				"headerTabFavorite_bkgdtop": {
 					"type": "rectangle",
 					"top": 32,
 					"left": 474,
+					"width": 34,
+					"height": 18,
+					"stroke": "transparent",
+					"fill": "#FFFFFF",
+					"borderRadius": 8,
+					"sizingX": "fixed",
+					"visibility": "hidden"
+				},
+				"Static Picture3": {
+					"type": "picture",
+					"top": 0,
+					"left": 678,
+					"width": 21,
+					"height": 41,
+					"picture": "Images/Static Picture5.tif",
+					"pictureFormat": "scaled",
+					"visibility": "hidden"
+				},
+				"Text": {
+					"type": "text",
+					"text": "VIP",
+					"top": 10,
+					"left": 712,
+					"width": 23,
+					"height": 16,
+					"visibility": "hidden",
+					"textAlign": "center"
+				},
+				"Text1": {
+					"type": "text",
+					"text": "Editor",
+					"top": 10,
+					"left": 756,
+					"width": 39,
+					"height": 16,
+					"visibility": "hidden",
+					"textAlign": "center"
+				},
+				"Text2": {
+					"type": "text",
+					"text": "Partner",
+					"top": 10,
+					"left": 812,
+					"width": 46,
+					"height": 16,
+					"visibility": "hidden",
+					"textAlign": "center"
+				},
+				"Text3": {
+					"type": "text",
+					"text": "sfw",
+					"top": 10,
+					"left": 875,
+					"width": 25,
+					"height": 16,
+					"stroke": "#FFFFFF",
+					"visibility": "hidden",
+					"textAlign": "center"
+				},
+				"lb_items_counterSelected": {
+					"type": "input",
+					"top": 643,
+					"left": 232,
+					"width": 220,
+					"height": 15,
+					"sizingX": "move",
+					"sizingY": "move",
+					"dataSource": "Form:C1466.current_lb_item_selected.length",
+					"dataSourceTypeHint": "number",
+					"stroke": "#dc143c",
+					"textAlign": "right",
+					"fontFamily": "System Font Regular",
+					"fontSize": 11,
+					"focusable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"enterable": false,
+					"contextMenu": "none",
+					"numberFormat": "###,###,##0 selected;;",
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					]
+				},
+				"headerTabSubscription_bkgdbottom": {
+					"type": "rectangle",
+					"top": 42,
+					"left": 512,
+					"width": 34,
+					"height": 18,
+					"stroke": "transparent",
+					"fill": "#FFFFFF",
+					"sizingX": "fixed",
+					"visibility": "hidden"
+				},
+				"headerTabSubscription_bkgdtop": {
+					"type": "rectangle",
+					"top": 32,
+					"left": 512,
+					"width": 34,
+					"height": 18,
+					"stroke": "transparent",
+					"fill": "#FFFFFF",
+					"borderRadius": 8,
+					"sizingX": "fixed",
+					"visibility": "hidden"
+				},
+				"headerTabAssignation_bkgdbottom": {
+					"type": "rectangle",
+					"top": 42,
+					"left": 550,
+					"width": 34,
+					"height": 18,
+					"stroke": "transparent",
+					"fill": "#FFFFFF",
+					"sizingX": "fixed",
+					"visibility": "hidden"
+				},
+				"headerTabAssignation_bkgdtop": {
+					"type": "rectangle",
+					"top": 32,
+					"left": 550,
 					"width": 34,
 					"height": 18,
 					"stroke": "transparent",
@@ -1013,6 +1181,36 @@
 					"icon": "/RESOURCES/sfw/image/picto/star-empty.png",
 					"visibility": "hidden",
 					"sizingX": "fixed"
+				},
+				"headerTabSubscription_button": {
+					"type": "button",
+					"text": "",
+					"top": 39,
+					"left": 520,
+					"width": 16,
+					"height": 16,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"icon": "/RESOURCES/sfw/image/picto/bell-empty.png",
+					"visibility": "hidden",
+					"sizingX": "fixed"
+				},
+				"headerTabAssignation_button": {
+					"type": "button",
+					"text": "",
+					"top": 38,
+					"left": 558,
+					"width": 16,
+					"height": 16,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"icon": "/RESOURCES/sfw/image/picto/task.png",
+					"visibility": "hidden",
+					"sizingX": "fixed"
 				}
 			}
 		}
@@ -1028,6 +1226,6 @@
 			"View 1": {}
 		}
 	},
-	"geometryStamp": 1100,
+	"geometryStamp": 1408,
 	"windowMaxWidth": 5000
 }

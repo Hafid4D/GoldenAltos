@@ -396,7 +396,7 @@ Function _buildHLDocuments($uuidParent : Text)->$refList : Integer
 		If ($displayingAllowed) && (($documentFolder.moreData.allowedEntries=Null:C1517) || ($documentFolder.moreData.allowedEntries.indexOf(Form:C1466.sfw.entry.ident)>=0))
 			$sublist:=This:C1470._buildHLDocuments($documentFolder.UUID)
 			If (Count list items:C380($sublist)=0)
-				CLEAR LIST:C377($sublist)
+				CLEAR LIST:C377($sublist; *)
 				$sublist:=0
 				$pict:=This:C1470.hl_icon_document["folder"]
 			Else 
@@ -489,30 +489,38 @@ Function _bAction()
 	$refSubMenu:=Create menu:C408
 	$refMenus.push($refSubMenu)
 	$esModels:=ds:C1482.sfw_DocumentModel.query("UUID_DocumentFolder = :1 order by name"; Form:C1466.hl_current_uuid)
-	For each ($eModel; $esModels)
-		$propose:=True:C214
-		Case of 
-			: ($eModel.moreData.allowedProfiles=Null:C1517) && (($eModel.moreData.allowedEntries=Null:C1517) || ($eModel.moreData.allowedEntries.indexOf(Form:C1466.sfw.entry.ident)>=0))
-			: ($eModel.moreData.allowedProfiles#Null:C1517) && (($eModel.moreData.allowedEntries=Null:C1517) || ($eModel.moreData.allowedEntries.indexOf(Form:C1466.sfw.entry.ident)>=0))
-				$propose:=False:C215
-				For each ($authorizedProfile; $authorizedProfiles)
-					$propose:=$propose || ($eModel.moreData.allowedProfiles.indexOf($authorizedProfile)#-1)
-				End for each 
-			Else 
-				$propose:=False:C215
-		End case 
-		
-		If ($propose)
-			APPEND MENU ITEM:C411($refSubMenu; $eModel.name; *)  // XLIFF
-			Case of 
-				: ($eModel.type=1)
-					SET MENU ITEM ICON:C984($refSubMenu; -1; "Path:/RESOURCES/sfw/image/menu/text.png")
-				: ($eModel.type=2)
-					SET MENU ITEM ICON:C984($refSubMenu; -1; "Path:/RESOURCES/sfw/image/menu/write.png")
-			End case 
-			SET MENU ITEM PARAMETER:C1004($refSubMenu; -1; "--useModel:"+$eModel.UUID)
-		End if 
-	End for each 
+	For ($type; 1; 2)
+		$firstItem:=$type#1
+		For each ($eModel; $esModels)
+			If ($eModel.type=$type)
+				$propose:=True:C214
+				Case of 
+					: ($eModel.moreData.allowedProfiles=Null:C1517) && (($eModel.moreData.allowedEntries=Null:C1517) || ($eModel.moreData.allowedEntries.indexOf(Form:C1466.sfw.entry.ident)>=0))
+					: ($eModel.moreData.allowedProfiles#Null:C1517) && (($eModel.moreData.allowedEntries=Null:C1517) || ($eModel.moreData.allowedEntries.indexOf(Form:C1466.sfw.entry.ident)>=0))
+						$propose:=False:C215
+						For each ($authorizedProfile; $authorizedProfiles)
+							$propose:=$propose || ($eModel.moreData.allowedProfiles.indexOf($authorizedProfile)#-1)
+						End for each 
+					Else 
+						$propose:=False:C215
+				End case 
+				
+				If ($propose)
+					If ($firstItem)
+						APPEND MENU ITEM:C411($refSubMenu; "-")
+					End if 
+					APPEND MENU ITEM:C411($refSubMenu; $eModel.name; *)
+					Case of 
+						: ($eModel.type=1)
+							SET MENU ITEM ICON:C984($refSubMenu; -1; "Path:/RESOURCES/sfw/image/menu/text.png")
+						: ($eModel.type=2)
+							SET MENU ITEM ICON:C984($refSubMenu; -1; "Path:/RESOURCES/sfw/image/menu/write.png")
+					End case 
+					SET MENU ITEM PARAMETER:C1004($refSubMenu; -1; "--useModel:"+$eModel.UUID)
+				End if 
+			End if 
+		End for each 
+	End for 
 	APPEND MENU ITEM:C411($refMenu; ds:C1482.sfw_readXliff("pagedocument.adddocmodel"); $refSubMenu; *)
 	SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/menu/plus-circle.png")
 	If (Count menu items:C405($refSubMenu)#0) && (Form:C1466.sfw.checkIsInModification()) && (Form:C1466.hl_current_ref#0) && (Form:C1466.hl_current_kind="folder")
@@ -636,7 +644,8 @@ Function _load_hl_item_properties($option : Integer)
 	var $kind : Text
 	
 	GET LIST ITEM:C378(Form:C1466.hl_documents; *; $refItem; $textItem; $sublist; $expanded)
-	If ($refItem#Form:C1466.hl_current_ref) || (Count parameters:C259>0)
+	Form:C1466.lb_properties:=New collection:C1472
+	If ($refItem#0) && (($refItem#Form:C1466.hl_current_ref) || (Count parameters:C259>0))
 		Form:C1466.hl_current_ref:=$refItem
 		Form:C1466.hl_current_text:=$textItem
 		Form:C1466.hl_current_sublist:=$sublist
@@ -647,7 +656,6 @@ Function _load_hl_item_properties($option : Integer)
 		Form:C1466.hl_current_kind:=$kind
 		This:C1470._showHideAreas()
 		
-		Form:C1466.lb_properties:=New collection:C1472
 		Case of 
 			: (Form:C1466.hl_current_kind="document")
 				Form:C1466.eDocument:=ds:C1482.sfw_Document.get(Form:C1466.hl_current_uuid)
@@ -737,6 +745,7 @@ Function _uploadFile()
 		SET LIST ITEM PARAMETER:C986(Form:C1466.hl_current_sublist; Form:C1466.hl_documents_refCounter; "kind"; "document")
 		$pict:=This:C1470.hl_icon_document["document"]
 		SET LIST ITEM ICON:C950(Form:C1466.hl_current_sublist; Form:C1466.hl_documents_refCounter; $pict)
+		SORT LIST:C391(Form:C1466.hl_current_sublist)
 		SELECT LIST ITEMS BY REFERENCE:C630(Form:C1466.hl_documents; Form:C1466.hl_documents_refCounter)
 		
 		Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
@@ -867,11 +876,12 @@ Function _useDfdTemplate()
 	$label:=$eDfdDocument.name
 	$subList:=Form:C1466.hl_current_sublist
 	$test:=Is a list:C621($subList)
-	APPEND TO LIST:C376($subList; $label; Form:C1466.hl_documents_refCounter; *)
+	APPEND TO LIST:C376($subList; $label; Form:C1466.hl_documents_refCounter)
 	SET LIST ITEM PARAMETER:C986($subList; Form:C1466.hl_documents_refCounter; "UUID"; $eDfdDocument.UUID)
 	SET LIST ITEM PARAMETER:C986($subList; Form:C1466.hl_documents_refCounter; "kind"; "dfdDocument")
 	$pict:=This:C1470.hl_icon_document["dfd"]
 	SET LIST ITEM ICON:C950($subList; Form:C1466.hl_documents_refCounter; $pict)
+	SORT LIST:C391($subList)
 	SELECT LIST ITEMS BY REFERENCE:C630(Form:C1466.hl_documents; Form:C1466.hl_documents_refCounter)
 	
 	This:C1470._load_hl_item_properties()
@@ -944,9 +954,11 @@ Function _useModel()
 	$label:=$eDocument.name
 	$subList:=Form:C1466.hl_current_sublist
 	$test:=Is a list:C621($subList)
-	APPEND TO LIST:C376($subList; $label; Form:C1466.hl_documents_refCounter; *)
+	APPEND TO LIST:C376($subList; $label; Form:C1466.hl_documents_refCounter)
 	SET LIST ITEM PARAMETER:C986($subList; Form:C1466.hl_documents_refCounter; "UUID"; $eDocument.UUID)
 	SET LIST ITEM PARAMETER:C986($subList; Form:C1466.hl_documents_refCounter; "kind"; $kind)
+	SET LIST ITEM PARAMETER:C986($subList; Form:C1466.hl_documents_refCounter; Additional text:K28:7; String:C10($eDocument.date; Internal date short:K1:7))
+	SORT LIST:C391($subList)
 	$pict:=This:C1470.hl_icon_document[$icon]
 	SET LIST ITEM ICON:C950($subList; Form:C1466.hl_documents_refCounter; $pict)
 	SELECT LIST ITEMS BY REFERENCE:C630(Form:C1466.hl_documents; Form:C1466.hl_documents_refCounter)
@@ -1027,6 +1039,8 @@ Function _displayDocument($eDocument : cs:C1710.sfw_DocumentEntity)
 	
 	
 Function _displayDfdDocument()
+	var $formName : Text
+	var $formDefinition : Object
 	
 	Form:C1466.eDfdDocument:=ds:C1482.dfd_Document.get(Form:C1466.hl_current_uuid)
 	This:C1470._showHideAreas("dfdSubform")
@@ -1044,7 +1058,9 @@ Function _displayDfdDocument()
 	Form:C1466.dfd_context.document:=Form:C1466.eDfdDocument
 	
 	cs:C1710.dfd_panel_document.me.redraw_preview(Form:C1466.dfd_context; "--subform")
-	OBJECT SET SUBFORM:C1138(*; "dfdSubform_"+This:C1470.ident; Form:C1466.dfd_context.formDefinition)
+	$formName:="dfdSubform_"+This:C1470.ident
+	$formDefinition:=Form:C1466.dfd_context.formDefinition
+	OBJECT SET SUBFORM:C1138(*; $formName; $formDefinition)
 	
 	
 Function _reorganize()
@@ -1081,7 +1097,7 @@ Function _reorganize()
 	
 Function resizePanel()
 	This:C1470._reorganize()
-	SET TIMER:C645(5)
+	SET TIMER:C645(30)
 	
 Function timerPanel()
 	SET TIMER:C645(0)

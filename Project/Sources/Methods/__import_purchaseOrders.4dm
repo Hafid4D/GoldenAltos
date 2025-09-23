@@ -349,6 +349,7 @@ If (True:C214)
 	TRUNCATE TABLE:C1051([Location:47])
 	TRUNCATE TABLE:C1051([Unit:48])
 	TRUNCATE TABLE:C1051([Classification:59])
+
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/inventory_export.json")
 	

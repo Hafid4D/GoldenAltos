@@ -31,9 +31,10 @@
 					"height": 530,
 					"events": [
 						"onClick",
-						"onHeaderClick",
+						"onDoubleClick",
 						"onDataChange",
-						"onSelectionChange"
+						"onSelectionChange",
+						"onHeaderClick"
 					],
 					"listboxType": "collection",
 					"dataSource": "Form:C1466.lb_results",

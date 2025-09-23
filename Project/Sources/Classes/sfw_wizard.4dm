@@ -1,3 +1,5 @@
+property vision : Object
+
 Class extends sfw_foundations
 
 Class constructor()

@@ -1,3 +1,17 @@
+property hourly : Boolean
+property daily : Boolean
+property weekly : Boolean
+property monthly : Boolean
+property yearly : Boolean
+property dayNumbers : Collection
+property hourToStart : Integer
+property minuteToStart : Integer
+property hourMini : Integer
+property hourMaxi : Integer
+property dayNumber : Integer
+property minutesToStart : Collection
+property displayOrder : Integer
+
 Class constructor($typePeriodicity : Text)
 	
 	Case of 

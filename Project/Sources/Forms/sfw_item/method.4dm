@@ -12,7 +12,16 @@ Case of
 		Form:C1466.situation:=New object:C1471()
 		Form:C1466.situation.isInModification:=False:C215
 		
-		Form:C1466.situation.mode:="view"  // modify, add, delete, view
+		If (Form:C1466.current_item=Null:C1517)
+			Form:C1466.situation.mode:="add"
+			Form:C1466.sfw.cancelAndRestartTransaction()
+			//Form.current_item:=ds[Form.entry.dataclass].new()
+			//Form.current_item.UUID:=Generate UUID
+			Form:C1466.sfw._createANewEntity()
+			Form:C1466.sfw.callbackOnCurrentItem("loadAfterCreation")
+		Else 
+			Form:C1466.situation.mode:="view"
+		End if 
 		
 		Form:C1466.subForm.sfw:=cs:C1710.sfw_item.new()
 		Form:C1466.subForm.sfw.vision:=$framework.vision
@@ -24,6 +33,8 @@ Case of
 		Case of 
 			: ($framework.entry.dataclass#Null:C1517)
 				Form:C1466.sfw._displayHeaderTabFavorite()
+				Form:C1466.sfw._displayHeaderTabSubscription()
+				Form:C1466.sfw._displayHeaderTabAssignation()
 				Form:C1466.sfw._displayHeaderTabComment()
 				Form:C1466.sfw._displayHeaderTabEvent()
 				cs:C1710.sfw_window.me.setWindowTitle()
@@ -49,6 +60,10 @@ Case of
 		Case of 
 			: (FORM Event:C1606.objectName="headerTabFavorite_button")
 				cs:C1710.sfw_favoriteManager.me.clicOnHeader()
+			: (FORM Event:C1606.objectName="headerTabSubscription_button")
+				cs:C1710.sfw_subscriptionManager.me.clicOnHeader()
+			: (FORM Event:C1606.objectName="headerTabAssignation_button")
+				cs:C1710.sfw_assignationManager.me.clicOnHeader()
 			: (FORM Event:C1606.objectName="headerTabComment_title")
 				cs:C1710.sfw_commentManager.me.clicOnHeader(Form:C1466.current_item.UUID)
 			: (FORM Event:C1606.objectName="headerTabEvent_title")
