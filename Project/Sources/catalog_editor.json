@@ -24,8 +24,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2467,
-				"top": 380.66796875,
+				"left": 2552,
+				"top": 425.66796875,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -56,8 +56,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2147.4692382812,
-				"top": 587.47967529297,
+				"left": 2167.4692382812,
+				"top": 576.47967529297,
 				"width": 226.30639648438,
 				"height": 417.9924621582
 			},
@@ -150,8 +150,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2454,
-				"top": 367,
+				"left": 2004,
+				"top": 554,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -258,11 +258,43 @@
 			"coordinates": {
 				"left": 942.66656494141,
 				"top": 1214.3332519531,
-				"width": 149.0390625,
-				"height": 398.33203125
+				"width": 196.0390625,
+				"height": 463.33203125
 			},
-			"displayable_fields_count": 17,
-			"fields_ordering": 1
+			"displayable_fields_count": 20,
+			"fields_ordering": 2,
+			"fields": {
+				"lotNumber": {
+					"position": 7
+				},
+				"statusIQA": {
+					"position": 9
+				},
+				"performedBy": {
+					"position": 8
+				},
+				"jobNumber": {
+					"position": 10
+				},
+				"date": {
+					"position": 3
+				},
+				"remaining": {
+					"position": 6
+				},
+				"qty": {
+					"position": 5
+				},
+				"type": {
+					"position": 4
+				},
+				"UUID_Inventory": {
+					"position": 2
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
 		},
 		"Inventory": {
 			"color": {
@@ -272,13 +304,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 694.33325195312,
-				"top": 1302.9998779297,
-				"width": 197.052734375,
-				"height": 678.33203125
+				"left": 601.33325195312,
+				"top": 1263.9998779297,
+				"width": 219.052734375,
+				"height": 741.33203125
 			},
-			"displayable_fields_count": 30,
-			"fields_ordering": 2,
+			"displayable_fields_count": 33,
 			"fields": {
 				"UUID_Staff": {
 					"position": 3
@@ -286,59 +317,17 @@
 				"UUID_Customer": {
 					"position": 2
 				},
-				"availableQty": {
-					"position": 24
+				"UUID_Lot": {
+					"position": 4
 				},
-				"originalQty": {
-					"position": 23
-				},
-				"property": {
-					"position": 22
-				},
-				"totalCost": {
-					"position": 21
-				},
-				"division": {
-					"position": 20
-				},
-				"recdBy": {
-					"position": 19
-				},
-				"binLocation": {
-					"position": 18
-				},
-				"currency": {
-					"position": 17
-				},
-				"inventoryUnits": {
-					"position": 16
-				},
-				"unitCost": {
-					"position": 15
-				},
-				"qtyInStock": {
-					"position": 14
-				},
-				"stockNum": {
-					"position": 11
-				},
-				"lotNumber": {
-					"position": 10
-				},
-				"classification": {
-					"position": 9
-				},
-				"description": {
-					"position": 8
-				},
-				"vendor": {
+				"partNumber": {
 					"position": 7
 				},
 				"customerSpecific": {
-					"position": 5
+					"position": 6
 				},
 				"customer_provided": {
-					"position": 4
+					"position": 5
 				},
 				"UUID": {
 					"position": 1
@@ -800,8 +789,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1987,
-				"top": 615,
+				"left": 1952,
+				"top": 748,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -1980,7 +1969,15 @@
 		}
 	},
 	"relations": {
-		"0E72BCE9F2D1DD42AACAC9D9A43D448A": {
+		"FC14A35413BB26458BA778E50E40F64F": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"6A7F6B7A673D4C4A88D4EF3C41A44E09": {
 			"color": {
 				"red": 240,
 				"green": 240,
@@ -2025,6 +2022,14 @@
 				"red": 240,
 				"green": 240,
 				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"3AC0AC688CF06C4ABA1B8F54C7A176B3": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
 				"alpha": 0
 			}
 		},

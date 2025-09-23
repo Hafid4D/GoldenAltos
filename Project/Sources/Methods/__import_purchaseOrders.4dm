@@ -205,7 +205,8 @@ If (True:C214)
 		End for each 
 		
 		
-		For each ($lot; $record.lots)
+		For each ($lot; $record.lots.orderBy("parentLotNumber asc"))
+			
 			$lot_e:=ds:C1482.Lot.new()
 			
 			$lot_e.lotNumber:=$lot.lotNum
@@ -249,6 +250,16 @@ If (True:C214)
 			$lot_e.status:=$lot.status
 			
 			$lot_e.UUID_Job:=$job.UUID
+			
+			If ($lot.parentLotNumber#"")
+				$lots_es:=ds:C1482.Lot.query("lotNumber = :1"; $lot.parentLotNumber)
+				
+				If ($lots_es.length>0)
+					$lot_e.UUID_LotParent:=$lots_es[0].UUID
+				Else 
+					TRACE:C157
+				End if 
+			End if 
 			
 			$res:=$lot_e.save()
 			
@@ -304,6 +315,29 @@ If (True:C214)
 		End for each 
 		
 	End for each 
+	
+/**
+fix lotParent for some lots
+**/
+	
+	$lots_es:=ds:C1482.Lot.all().minus(ds:C1482.Lot.all().lotParent.subLots).query("lotNumber = :1"; "@-@")
+	
+	For each ($lot; $lots_es)
+		$parentLotNumber:=Split string:C1554($lot.lotNumber; "-")[0]
+		
+		$parent_es:=ds:C1482.Lot.query("lotNumber = :1"; $parentLotNumber)
+		
+		If ($parent_es.length>0)
+			$lot.UUID_LotParent:=$parent_es[0].UUID
+			
+			$res:=$lot.save()
+			
+			If (Not:C34($res.success))
+				TRACE:C157
+			End if 
+		End if 
+	End for each 
+	
 End if 
 
 /**
@@ -312,8 +346,9 @@ import inventories
 If (True:C214)
 	TRUNCATE TABLE:C1051([Inventory:126])
 	TRUNCATE TABLE:C1051([InventoryPull:127])
-	TRUNCATE TABLE:C1051()
-	TRUNCATE TABLE:C1051()
+	TRUNCATE TABLE:C1051([Location:47])
+	TRUNCATE TABLE:C1051([Unit:48])
+	TRUNCATE TABLE:C1051([Classification:59])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/inventory_export.json")
 	
@@ -339,7 +374,7 @@ If (True:C214)
 		$inventory_e.receivedBy:=$record.recdBy
 		$inventory_e.totalCost:=$record.totalCost
 		$inventory_e.availableQty:=$record.AvailableQty
-		$inventory_e.initiallQty:=$record.originalQty
+		$inventory_e.initialQty:=$record.originalQty
 		$inventory_e.inventoryID:=(ds:C1482.Inventory.all().length>0) ? ds:C1482.Inventory.all().max("inventoryID")+1 : 1
 		$inventory_e.code:="INV"+String:C10($inventory_e.inventoryID; "00000#")
 		
@@ -717,7 +752,7 @@ If (True:C214)
 	TRUNCATE TABLE:C1051([Team:136])
 	TRUNCATE TABLE:C1051([Membership:137])
 	TRUNCATE TABLE:C1051([Role:132])
-	TRUNCATE TABLE:C1051([StaffRole:44])
+	TRUNCATE TABLE:C1051([StaffRole:63])
 	TRUNCATE TABLE:C1051([Staff:135])
 	
 	SET DATABASE PARAMETER:C642([Staff:135]; Table sequence number:K37:31; 0)

@@ -491,7 +491,8 @@
 					"style": "custom",
 					"popupPlacement": "none",
 					"icon": "/RESOURCES/image/element/MacCollapse.png",
-					"method": "ObjectMethods/Button4.4dm"
+					"method": "ObjectMethods/Button4.4dm",
+					"visibility": "hidden"
 				},
 				"header_bkgd20": {
 					"type": "rectangle",
@@ -1017,7 +1018,7 @@
 			}
 		}
 	],
-	"geometryStamp": 343,
+	"geometryStamp": 344,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

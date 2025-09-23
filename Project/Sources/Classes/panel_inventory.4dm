@@ -78,6 +78,7 @@ Function loadInventoryPulls()
 	
 Function bActionInvPull()
 	$refMenu:=Create menu:C408
+	
 	APPEND MENU ITEM:C411($refMenu; "Put Back")
 	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--put-back")
 	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
@@ -101,9 +102,13 @@ Function bActionInvPull()
 			"date"; Current date:C33(); \
 			"currentQty"; Form:C1466.current_item.availableQty; \
 			"qtyToPull"; 0; \
-			"pulledBy"; "Hassan Sribet"; \
+			"pulledBy"; ""; \
 			"note"; ""\
 			))
+		
+		$user_es:=ds:C1482.sfw_User.query("login = :1"; Current user:C182)
+		
+		$form.invPull.pulledBy:=($user_es.length>0) ? $user_es[0].fullName : ""
 		
 		$winRef:=Open form window:C675("create_invPull"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
 		DIALOG:C40("create_invPull"; $form)
@@ -111,7 +116,6 @@ Function bActionInvPull()
 		
 		If (OK=1)
 			$pull_e:=ds:C1482.InventoryPull.new()
-			
 			$pull_e.type:=($form.invPull.isPull) ? "Pull" : "Put Back"
 			$pull_e.date:=cs:C1710.sfw_stmp.me.build($form.invPull.date)
 			$pull_e.qty:=$form.invPull.qtyToPull

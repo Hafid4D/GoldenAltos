@@ -347,6 +347,55 @@
 						"onClick",
 						"onDisplayDetail"
 					]
+				},
+				"label_jobNumber6": {
+					"type": "text",
+					"top": 12,
+					"left": 916,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Parent Lot"
+				},
+				"Field_parentLotNumber": {
+					"type": "input",
+					"top": 12,
+					"left": 996,
+					"width": 100,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.lotParent.lotNumber",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"method": "ObjectMethods/Field_parentLotNumber.4dm"
+				},
+				"btnForward3": {
+					"type": "button",
+					"text": " ",
+					"top": 12,
+					"left": 1097,
+					"width": 18,
+					"height": 18,
+					"events": [
+						"onClick",
+						"onMouseMove"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/forward-16x16.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnForward3.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
 				}
 			}
 		},
@@ -1495,10 +1544,206 @@
 			}
 		},
 		{
-			"objects": {}
+			"objects": {
+				"rec_bkgd_3": {
+					"type": "rectangle",
+					"top": 118,
+					"left": 5,
+					"width": 100,
+					"height": 442,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 105,
+					"bottom": 560
+				},
+				"lb_materials": {
+					"type": "listbox",
+					"left": 107,
+					"top": 119,
+					"width": 832,
+					"height": 440,
+					"events": [
+						"onClick",
+						"onDrop",
+						"onDataChange",
+						"onSelectionChange",
+						"onBeginDragOver"
+					],
+					"headerHeight": "24px",
+					"listboxType": "collection",
+					"visibility": "visible",
+					"dataSource": "Form:C1466.lb_materials",
+					"alternateFill": "#F7F9FC",
+					"method": "ObjectMethods/lb_materials.4dm",
+					"selectionMode": "single",
+					"dragging": "custom",
+					"dropping": "custom",
+					"currentItemSource": "Form:C1466.selectedLot",
+					"currentItemPositionSource": "Form:C1466.selectedLotPos",
+					"metaSource": "",
+					"rowFillSource": "highlightCurrentStep",
+					"right": 939,
+					"bottom": 559,
+					"columns": [
+						{
+							"header": {
+								"text": "INV #",
+								"name": "Header2",
+								"fontWeight": "bold"
+							},
+							"name": "Column2",
+							"footer": {
+								"name": "Footer2"
+							},
+							"width": 100,
+							"dataSource": "This:C1470.code",
+							"textAlign": "center",
+							"dataSourceTypeHint": "number",
+							"enterable": false,
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header3",
+								"text": "Description",
+								"fontWeight": "bold"
+							},
+							"name": "Column3",
+							"footer": {
+								"name": "Footer3"
+							},
+							"dataSource": "This:C1470.vendor",
+							"width": 200,
+							"enterable": false,
+							"minWidth": 200
+						},
+						{
+							"header": {
+								"name": "Header5",
+								"text": "Stock #",
+								"fontWeight": "bold"
+							},
+							"name": "Column5",
+							"footer": {
+								"name": "Footer5"
+							},
+							"dataSource": "This:C1470.stockNum",
+							"width": 150,
+							"dataSourceTypeHint": "number",
+							"dateFormat": "short",
+							"textAlign": "center",
+							"enterable": false,
+							"resizable": false,
+							"minWidth": 100
+						},
+						{
+							"header": {
+								"name": "Header6",
+								"text": "Qty in Stock",
+								"fontWeight": "bold"
+							},
+							"name": "Column6",
+							"footer": {
+								"name": "Footer6"
+							},
+							"dataSource": "This:C1470.qtyInStock",
+							"width": 80,
+							"dataSourceTypeHint": "number",
+							"dateFormat": "short",
+							"textAlign": "center",
+							"enterable": false,
+							"resizable": false,
+							"minWidth": 80
+						},
+						{
+							"header": {
+								"name": "Header7",
+								"text": "Date IN",
+								"fontWeight": "bold"
+							},
+							"name": "Column7",
+							"footer": {
+								"name": "Footer7"
+							},
+							"dataSource": "(This:C1470.dateIn=0) ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.dateIn)",
+							"width": 85,
+							"textAlign": "center",
+							"dataSourceTypeHint": "date",
+							"dateFormat": "short",
+							"enterable": false,
+							"resizable": false,
+							"minWidth": 75
+						},
+						{
+							"header": {
+								"name": "Header8",
+								"text": "Exp. Date",
+								"fontWeight": "bold"
+							},
+							"name": "Column8",
+							"footer": {
+								"name": "Footer8"
+							},
+							"dataSource": "(This:C1470.expirationDate=0) ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.expirationDate)",
+							"width": 85,
+							"dateFormat": "short",
+							"textAlign": "center",
+							"dataSourceTypeHint": "date",
+							"enterable": false,
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header9",
+								"text": "Received By",
+								"fontWeight": "bold"
+							},
+							"name": "Column9",
+							"footer": {
+								"name": "Footer9"
+							},
+							"dataSource": "This:C1470.receivedBy",
+							"width": 165,
+							"dateFormat": "short",
+							"textAlign": "center",
+							"dataSourceTypeHint": "date",
+							"enterable": false,
+							"resizable": false
+						}
+					]
+				},
+				"bActionCustProvMat": {
+					"type": "button",
+					"text": "Actions",
+					"top": 535,
+					"left": 16,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionCustProvMat.4dm",
+					"visibility": "visible"
+				},
+				"Text1": {
+					"type": "text",
+					"text": "Customer Provided Material",
+					"top": 125,
+					"left": 9,
+					"width": 92,
+					"height": 56,
+					"fontWeight": "bold",
+					"right": 101
+				}
+			}
 		}
 	],
-	"geometryStamp": 1604,
+	"geometryStamp": 1754,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
