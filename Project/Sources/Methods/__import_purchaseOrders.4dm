@@ -581,7 +581,7 @@ If (True:C214)
 		$specification_e.stmpRevisionDate:=cs:C1710.sfw_stmp.me.build(Date:C102($record.Revsion_Date))
 		$specification_e.revision:=$record.Rev
 		
-		$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($record.division; "\r"; sk trim spaces:K86:2).join("\r"))
+		$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($record.Division; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($division.length>0)
 			$specification_e.UUID_Division:=$division[0].UUID
 		Else 
@@ -845,7 +845,7 @@ If (True:C214)
 		$qcar_e.device:=$record.device
 		$qcar_e.closedDate:=$record.closedDate
 		$qcar_e.targetCloseDate:=$record.targetCloseDate
-		$qcar_e.actualCloseDate:=$record.actualCloseDate
+		//$qcar_e.actualCloseDate:=$record.actualCloseDate
 		$qcar_e.verifiedBy:=$record.verifiedBy
 		$qcar_e.verifiedDate:=$record.verifiedDate
 		$qcar_e.void:=$record.void
