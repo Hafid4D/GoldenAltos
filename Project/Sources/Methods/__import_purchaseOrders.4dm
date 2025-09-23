@@ -846,7 +846,7 @@ If (True:C214)
 		$qcar_e.device:=$record.device
 		$qcar_e.closedDate:=$record.closedDate
 		$qcar_e.targetCloseDate:=$record.targetCloseDate
-		$qcar_e.actualCloseDate:=$record.actualCloseDate
+		//$qcar_e.actualCloseDate:=$record.actualCloseDate
 		$qcar_e.verifiedBy:=$record.verifiedBy
 		$qcar_e.verifiedDate:=$record.verifiedDate
 		$qcar_e.void:=$record.void
