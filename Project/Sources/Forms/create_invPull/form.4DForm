@@ -529,7 +529,7 @@
 				},
 				"Text13": {
 					"type": "text",
-					"text": "Pull Back",
+					"text": "Put Back",
 					"top": 47,
 					"left": 241,
 					"width": 236,
@@ -548,7 +548,7 @@
 					"fontSize": 12,
 					"fontWeight": "bold"
 				},
-				"Button7": {
+				"btn_putBack": {
 					"type": "button",
 					"text": "",
 					"top": 40,
@@ -560,7 +560,7 @@
 						"onMouseMove"
 					],
 					"style": "custom",
-					"method": "ObjectMethods/Button7.4dm"
+					"method": "ObjectMethods/btn_putBack.4dm"
 				}
 			}
 		},
@@ -981,7 +981,7 @@
 				},
 				"Text27": {
 					"type": "text",
-					"text": "Pull Back",
+					"text": "Put Back",
 					"top": 47,
 					"left": 241,
 					"width": 236,
@@ -1018,7 +1018,7 @@
 			}
 		}
 	],
-	"geometryStamp": 344,
+	"geometryStamp": 347,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

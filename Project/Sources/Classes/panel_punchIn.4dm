@@ -329,7 +329,7 @@ Function bActionPMs()
 	End if 
 	
 Function loadInventoryPulls()
-	Form:C1466.lb_pulls:=ds:C1482.Inventory.query("UUID_Lot = :1"; Form:C1466.currentStep.lot.UUID).pulls.orderBy("inventory.code asc")
+	Form:C1466.lb_pulls:=ds:C1482.Inventory.query("UUID_Lot = :1"; Form:C1466.currentStep.lot.UUID; "Pull").pulls.query("type = :1"; "Pull").orderBy("inventory.code asc")
 	
 Function bActionInvPull()
 	$refMenu:=Create menu:C408
@@ -344,6 +344,7 @@ Function bActionInvPull()
 	
 	If ($choose#"")
 		$form:=New object:C1471(\
+			"onlyPull"; True:C214; \
 			"invPull"; New object:C1471(\
 			"order"; Form:C1466.lb_pulls.length+1; \
 			"isPull"; True:C214; \
