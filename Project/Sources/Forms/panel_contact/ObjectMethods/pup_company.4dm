@@ -9,5 +9,4 @@ If (Form:C1466.situation.mode="add")
 	//cs.panel_contact.me.pup_Customer()
 	//End case 
 	
-
 End if 
