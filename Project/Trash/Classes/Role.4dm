@@ -18,4 +18,3 @@ local Function cacheLoad()
 Function _loadAsCollection()->$departments : Collection
 	$departments:=This:C1470.all().toCollection("UUID, levelID,name").orderBy("levelID")
 	
-	

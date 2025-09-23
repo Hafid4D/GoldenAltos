@@ -73,10 +73,10 @@ Function drawPup_Company()
 		$pathIcon:=(Length:C16($color)#0) ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
 		Form:C1466.sfw.drawButtonPup("pup_company"; $companyName; $pathIcon; ($company=Null:C1517))
 		
-
 	End if 
 	
 Function pup_company()
+	
 
 	// Create pop up menu
 	If (Form:C1466.sfw.checkIsInModification())
@@ -200,6 +200,7 @@ Function redrawAndSetVisible()
 	OBJECT SET VISIBLE:C603(*; "bActionContact"; Form:C1466.sfw.checkIsInModification())
 	
 	Case of 
+
 			//________________________________________
 		: (Form:C1466.companyType="Customer")
 			
@@ -239,6 +240,7 @@ Function contactDetails()
 Function btnOpenCompany()
 	
 	Case of 
+
 			//________________________________________
 		: (Form:C1466.companyType="Supplier")
 			
