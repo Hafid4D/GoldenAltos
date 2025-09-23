@@ -1499,7 +1499,9 @@ Function bIcon_entry()
 			For each ($eFavorite; $esFavorites)
 				$favorizedItem:=ds:C1482[Form:C1466.sfw.entry.dataclass].get($eFavorite.UUID_target)
 				$label:=$favorizedItem.fullName || $favorizedItem.name || $favorizedItem.label || $favorizedItem.title
-				APPEND MENU ITEM:C411($refMenu; $label; *)
+				If ($label#Null:C1517)  // todo
+					APPEND MENU ITEM:C411($refMenu; $label; *)
+				End if 
 				SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--target:"+String:C10($eFavorite.UUID_target))
 				SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/picto/star.png")
 				If ($uuids.indexOf($favorizedItem.UUID)=-1)
@@ -1517,8 +1519,10 @@ Function bIcon_entry()
 				$uuids:=Form:C1466.sfw.lb_items.distinct("UUID")
 				For each ($eSubscription; $esSubscriptions)
 					$subsciptedItem:=ds:C1482[Form:C1466.sfw.entry.dataclass].get($eSubscription.UUID_target)
-					$label:=$subsciptedItem.fullName || $subsciptedItem.name || $subsciptedItem.label || $subsciptedItem.title
-					APPEND MENU ITEM:C411($refMenu; $label; *)
+					$label:=$subsciptedItem.fullName || $subsciptedItem.name || $subsciptedItem.label || $subsciptedItem.title || $subsciptedItem.nameInWindowTitle
+					If ($label#Null:C1517)  //todo
+						APPEND MENU ITEM:C411($refMenu; $label; *)
+					End if 
 					SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--target:"+String:C10($eSubscription.UUID_target))
 					SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/sfw/image/picto/bell.png")
 					If ($uuids.indexOf($subsciptedItem.UUID)=-1)

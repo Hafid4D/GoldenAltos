@@ -1,0 +1,1 @@
+OBJECT SET ENABLED:C1123(*; "Button1"; Form:C1466.choosen_contacts#Null:C1517)

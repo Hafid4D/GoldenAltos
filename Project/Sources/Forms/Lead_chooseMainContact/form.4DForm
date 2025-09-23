@@ -148,7 +148,8 @@
 					"defaultButton": true,
 					"events": [
 						"onClick"
-					]
+					],
+					"method": ""
 				}
 			}
 		}

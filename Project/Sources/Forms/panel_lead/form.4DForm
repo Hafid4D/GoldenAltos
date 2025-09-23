@@ -1076,7 +1076,9 @@
 					"focusable": false,
 					"borderStyle": "none",
 					"method": "",
-					"events": []
+					"events": [
+						"onMouseMove"
+					]
 				},
 				"Interaction3": {
 					"type": "text",
@@ -1273,7 +1275,8 @@
 							},
 							"width": 45,
 							"maxWidth": 45,
-							"minWidth": 45
+							"minWidth": 45,
+							"dataSource": "This:C1470.leads[0].quote.code"
 						},
 						{
 							"header": {
@@ -1286,7 +1289,8 @@
 							},
 							"width": 45,
 							"maxWidth": 45,
-							"minWidth": 45
+							"minWidth": 45,
+							"dataSource": "This:C1470.leads[0].leadCode"
 						},
 						{
 							"header": {

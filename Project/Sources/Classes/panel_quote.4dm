@@ -5,6 +5,11 @@ Function formMethod()
 	//This function manages the main logic for updating and refreshing the form
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh
+		
+		If (Form:C1466.current_item.code="")
+			Form:C1466.current_item.code:=This:C1470.calculateCode()
+		End if 
+		This:C1470.drawPup_staff()
 		This:C1470.loadAllTabs()
 	End if 
 	
@@ -52,11 +57,28 @@ Function formMethod()
 			
 	End case 
 	
+Function calculateCode()->$leadCode : Text
+	$leadCode:="Q"
+	$test:=ds:C1482.sfw_Counter.query("ident = :1"; "quoteCode").first().currentValue+1
+	
+	$leadCode+=String:C10($test; "00000")
+	
+Function btnOpenStaff()
+	$entity:=Form:C1466.current_item.staff
+	Form:C1466.sfw.openInANewWindow($entity; "qualityAssurance"; "staff")
+	
+Function btnOpenCustomer()
+	$entity:=Form:C1466.current_item.customer
+	Form:C1466.sfw.openInANewWindow($entity; "customerService"; "customer")
+	
+	
 Function loadContacts()
 	Form:C1466.lb_contacts:=Form:C1466.current_item.contacts()
 	
 Function redrawAndSetVisible()
-	//Adjusts the layout and visibility of form elements based on the current page and modification state
+	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	$verticalMargin:=3
+	
 	OBJECT SET VISIBLE:C603(*; "bActionQuoteLines"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET VISIBLE:C603(*; "bActionAssumptions"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET VISIBLE:C603(*; "bActionTerms"; Form:C1466.sfw.checkIsInModification())
@@ -65,6 +87,7 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_quoteCustomer()
 	This:C1470.drawPup_serviceType()
 	This:C1470.drawPup_quoteRevision()
+	This:C1470.drawPup_staff()
 	
 	Form:C1466.contactDetails:=This:C1470.contactInfo()
 	
@@ -80,6 +103,60 @@ Function redrawAndSetVisible()
 	If (Form:C1466.contactDetails.address#Null:C1517) || (Form:C1466.contactDetails.communications#Null:C1517)
 		Form:C1466.subFormCommunication:=Form:C1466.subFormCommunication
 	End if 
+	
+	
+	Case of 
+		: (FORM Get current page:C276(*)=2)
+			OBJECT GET COORDINATES:C663(*; "bkgd_lb_consumptions_detail"; $g; $t; $r; $b)
+			OBJECT SET COORDINATES:C1248(*; "bkgd_lb_consumptions_detail"; $g; $t; $widthSubform; $b)
+			
+			
+			OBJECT GET COORDINATES:C663(*; "bkgd_lb_consumptions1"; $g; $t; $r; $b)
+			OBJECT SET COORDINATES:C1248(*; "bkgd_lb_consumptions1"; $g; $t; $widthSubform; $heightSubform)
+			
+			
+		: (FORM Get current page:C276(*)=3)
+			OBJECT GET COORDINATES:C663(*; "bkgd_lb_consumptions2"; $g; $t; $r; $b)
+			OBJECT SET COORDINATES:C1248(*; "bkgd_lb_consumptions2"; $g; $t; $widthSubform; $b)
+			
+			OBJECT GET COORDINATES:C663(*; "bActionTerms"; $g; $h; $d; $b)
+			$heightButton:=$b-$h
+			OBJECT SET COORDINATES:C1248(*; "bActionTerms"; $g; $heightSubform-$verticalMargin-$heightButton; $d; $heightSubform-$verticalMargin)
+			
+			OBJECT GET COORDINATES:C663(*; "bkgd_lb_consumptions3"; $g; $h; $d; $b)
+			OBJECT GET COORDINATES:C663(*; "lb_terms"; $gt; $ht; $dt; $bt)
+			OBJECT SET COORDINATES:C1248(*; "lb_terms"; $g+1; $ht; $dt; $heightSubform-$verticalMargin-$heightButton-$verticalMargin)
+			
+			OBJECT GET COORDINATES:C663(*; "description"; $gt; $ht; $rt; $bt)
+			OBJECT SET COORDINATES:C1248(*; "description"; $gt; $ht; $widthSubform-20; $heightSubform-$verticalMargin-$heightButton-$verticalMargin)
+			
+			OBJECT SET COORDINATES:C1248(*; "bkgd_lb_consumptions3"; $g; $h; $widthSubform; $heightSubform)
+			
+		: (FORM Get current page:C276(*)=4)  // Resume
+			OBJECT GET COORDINATES:C663(*; "WPToolbar_opt"; $gTB; $hTB; $dTB; $bTB)
+			OBJECT GET COORDINATES:C663(*; "WPArea_opt"; $g; $h; $d; $b)
+			If (Form:C1466.sfw.checkIsInModification())
+				OBJECT SET VISIBLE:C603(*; "WPToolbar_opt"; True:C214)
+				
+				OBJECT SET ENTERABLE:C238(*; "WParea_opt"; True:C214)
+				OBJECT SET ENTERABLE:C238(*; "WPtoolbar_opt"; True:C214)
+				
+				OBJECT SET COORDINATES:C1248(*; "WPArea_opt"; $g; $bTB; $widthSubform; $heightSubform)
+				OBJECT SET COORDINATES:C1248(*; "WPToolbar_opt"; $gTB; $hTB; $widthSubform; $bTB)
+			Else 
+				OBJECT SET VISIBLE:C603(*; "WPToolbar_opt"; False:C215)
+				
+				OBJECT SET ENTERABLE:C238(*; "WParea_opt"; False:C215)
+				OBJECT SET ENTERABLE:C238(*; "WPtoolbar_opt"; False:C215)
+				
+				OBJECT SET COORDINATES:C1248(*; "WPArea_opt"; $g; $hTB; $widthSubform; $heightSubform)
+			End if 
+			
+			
+			
+	End case 
+	
+	
 	
 	//Use (Form.sfw.entry.panel.pages)
 	//Form.sfw.entry.panel.pages[0].label:="Lines ("+String(Form.lb_quoteLines.length)+")"
@@ -118,15 +195,19 @@ Function bActionQuoteLines()
 	
 	Case of 
 		: ($choose="--addQuoteLine")
+			
+			
 			$eQuoteLine:=ds:C1482.QuoteLine.new()
 			$eQuoteLine.UUID_Quote:=Form:C1466.current_item.UUID
 			$info:=$eQuoteLine.save()
-			This:C1470._activate_save_cancel_button()
 			Form:C1466.current_quoteLine:=$eQuoteLine
+			This:C1470._activate_save_cancel_button()
 			This:C1470.displayQuoteLine()
 			Form:C1466.lb_quoteLines:=ds:C1482.QuoteLine.query("UUID_Quote == :1"; Form:C1466.current_item.UUID)
 			LISTBOX SELECT ROW:C912(*; "lb_quoteLines"; Form:C1466.lb_quoteLines.length; lk replace selection:K53:1)
 			GOTO OBJECT:C206(*; "entryField_quoteLineQuantity")
+			
+			
 			
 		: ($choose="--deleteQuoteLine")
 			$ok:=cs:C1710.sfw_dialog.me.confirm("Do you really want to delete this quote line? "; "Delete"; "CANCEL")
@@ -144,15 +225,16 @@ Function bActionQuoteLines()
 	End case 
 	
 Function displayQuoteLine()
-	If (Form:C1466.current_quoteLine=Null:C1517)
-		OBJECT SET VISIBLE:C603(*; "label_quoteLine@"; False:C215)
-		OBJECT SET VISIBLE:C603(*; "entryField_quoteLine@"; False:C215)
-		
-	Else 
-		OBJECT SET VISIBLE:C603(*; "label_quoteLine@"; True:C214)
-		OBJECT SET VISIBLE:C603(*; "entryField_quoteLine@"; True:C214)
-		
-	End if 
+	OBJECT SET VISIBLE:C603(*; "label_quoteLine@"; Form:C1466.current_quoteLine#Null:C1517)
+	OBJECT SET VISIBLE:C603(*; "entryField_quoteLine@"; Form:C1466.current_quoteLine#Null:C1517)
+	
+	//If (Form.current_quoteLine=Null)
+	//OBJECT SET VISIBLE(*; "label_quoteLine@"; False)
+	//OBJECT SET VISIBLE(*; "entryField_quoteLine@"; False)
+	//Else 
+	//OBJECT SET VISIBLE(*; "label_quoteLine@"; True)
+	//OBJECT SET VISIBLE(*; "entryField_quoteLine@"; True)
+	//End if 
 	
 Function loadAssumptions()
 	Form:C1466.lb_assumptions:=ds:C1482.Assumption.query("UUID in :1"; Form:C1466.current_item.assumptions.UUIDs)
@@ -292,7 +374,7 @@ Function buildQuotePreview()
 	$section:=WP Get section:C1581(Form:C1466.preview; 1)
 	
 	$header:=WP New header:C1586($section)
-	WP INSERT PICTURE:C1437($header; $headerLogoPict; wk append:K81:179)
+	WP Insert picture:C1437($header; $headerLogoPict; wk append:K81:179)
 	
 	$footer:=WP New footer:C1587($section)
 	WP SET TEXT:C1574($footer; "CONFIDENTIAL. For the exclusive use og the customer named herein. Please destroy or return to sender immediately if you are not the customer named."; wk append:K81:179)
@@ -303,63 +385,66 @@ Function buildQuotePreview()
 	WP SET ATTRIBUTES:C1342($leftTxtBox; wk border color:K81:34; "white")
 	WP SET ATTRIBUTES:C1342($leftTxtBox; wk width:K81:45; "9cm")
 	WP SET TEXT:C1574($leftTxtBox; "Quotation#: "+$preview.quoteNumber+"\tRevision: "+$preview.quoteRevision+"\tDated: "+$preview.quoteDate; wk append:K81:179)
-	WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
-	WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
+	WP Insert break:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
+	WP Insert break:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
 	WP SET TEXT:C1574($leftTxtBox; "From: "+$preview.preparerName; wk append:K81:179)
-	WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
+	WP Insert break:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
 	If ($preview.preparerEmail#"")
 		WP SET TEXT:C1574($leftTxtBox; "\t"+$preview.preparerEmail; wk append:K81:179)
-		WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
+		WP Insert break:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
 	End if 
 	If ($preview.preparerMobile#"")
 		WP SET TEXT:C1574($leftTxtBox; "\tTel: "+$preview.preparerMobile; wk append:K81:179)
-		WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
+		WP Insert break:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
 	End if 
 	If ($preview.preparerExt#"")
 		WP SET TEXT:C1574($leftTxtBox; "\t"+$preview.preparerExt; wk append:K81:179)
-		WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
+		WP Insert break:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
 	End if 
-	WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
-	WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
+	WP Insert break:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
+	WP Insert break:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
 	WP SET TEXT:C1574($leftTxtBox; "Copy: "+$preview.copyName; wk append:K81:179)
-	WP INSERT BREAK:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
+	WP Insert break:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
 	WP SET TEXT:C1574($leftTxtBox; "\t"+$preview.copyCommMeans; wk append:K81:179)
 	
 	$paragraph:=WP Get elements:C1550($section; wk type paragraph:K81:191)[0]
 	WP SET ATTRIBUTES:C1342($paragraph; wk width:K81:45; "7cm")
+	If ($preview.contactName#Null:C1517)
+		WP SET TEXT:C1574($paragraph; $preview.contactName; wk append:K81:179)
+		WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+		WP SET TEXT:C1574($paragraph; $preview.contactCompany; wk append:K81:179)
+		WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+		WP SET TEXT:C1574($paragraph; $preview.contactAddress; wk append:K81:179)
+		WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+		WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+		WP SET TEXT:C1574($paragraph; "Tel: "+$preview.contactTel+" ext: "+$preview.contactExt+" Fax: "+$preview.contactFax; wk append:K81:179)
+		WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+		WP SET TEXT:C1574($paragraph; "Email: "+$preview.contactEmail; wk append:K81:179)
+	Else 
+		cs:C1710.sfw_dialog.me.alert("You need to add a main contact in order to include contact information in your document.")
+	End if 
 	
-	WP SET TEXT:C1574($paragraph; $preview.contactName; wk append:K81:179)
-	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
-	WP SET TEXT:C1574($paragraph; $preview.contactCompany; wk append:K81:179)
-	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
-	WP SET TEXT:C1574($paragraph; $preview.contactAddress; wk append:K81:179)
-	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
-	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
-	WP SET TEXT:C1574($paragraph; "Tel: "+$preview.contactTel+" ext: "+$preview.contactExt+" Fax: "+$preview.contactFax; wk append:K81:179)
-	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
-	WP SET TEXT:C1574($paragraph; "Email: "+$preview.contactEmail; wk append:K81:179)
-	
-	
-	WP INSERT BREAK:C1413($section; wk paragraph break:K81:259; wk append:K81:179)
+	WP Insert break:C1413($section; wk paragraph break:K81:259; wk append:K81:179)
 	$paragraph:=WP Get elements:C1550($section; wk type paragraph:K81:191)[1]
 	WP SET ATTRIBUTES:C1342($paragraph; wk width:K81:45; "auto")
 	
-	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
-	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
-	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
-	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
-	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
-	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 	WP SET TEXT:C1574($paragraph; "Subject:\t"+$preview.quoteSubject; wk append:K81:179)
-	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 	WP SET TEXT:C1574($paragraph; "Reference:\t"+$preview.quoteReference; wk append:K81:179)
 	
-	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
-	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	$contactFirstName:=$preview.contactFirstName || ""
 	WP SET TEXT:C1574($paragraph; "  Dear "+$preview.contactFirstName; wk append:K81:179)
-	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 	WP SET TEXT:C1574($paragraph; "We are pleased to submit to you the following quotation:"; wk append:K81:179)
-	WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+	WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 	
 	$table:=WP Insert table:C1473($paragraph; wk append:K81:179; wk include in range:K81:180)
 	$tableHeaders:=WP Table append row:C1474($table; "Item#"; "Description"; "Qty"; "Unit-Price"; "Amount")
@@ -380,51 +465,51 @@ Function buildQuotePreview()
 	End for each 
 	
 	
-	WP INSERT BREAK:C1413($section; wk paragraph break:K81:259; wk append:K81:179)
+	WP Insert break:C1413($section; wk paragraph break:K81:259; wk append:K81:179)
 	$paragraphs:=WP Get elements:C1550($section; wk type paragraph:K81:191)
 	$paragraph:=$paragraphs[$paragraphs.length-1]
 	WP SET ATTRIBUTES:C1342($paragraph; wk width:K81:45; "auto")
-	WP INSERT DOCUMENT:C1411($paragraph; Form:C1466.current_item.optionalPreliminaryTxt_wr; wk append:K81:179)
+	WP Insert document body:C1411($paragraph; Form:C1466.current_item.optionalPreliminaryTxt_wr; wk append:K81:179)
 	
 	
 	$paragraphs:=WP Get elements:C1550($section; wk type paragraph:K81:191)
 	$paragraph:=$paragraphs[$paragraphs.length-1]
 	
 	If ($preview.assumptions.length#0)
-		WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
-		WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
-		WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+		WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+		WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+		WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 		WP SET TEXT:C1574($paragraph; "Assumptions:"; wk append:K81:179)
-		WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+		WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 		
 		For each ($assumption; $preview.assumptions)
 			WP SET TEXT:C1574($paragraph; " - "+$assumption.value; wk append:K81:179)
-			WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+			WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 		End for each 
 	End if 
 	
 	
 	If ($preview.conditions.length#0)
-		WP INSERT BREAK:C1413($section; wk page break:K81:188; wk append:K81:179)
-		WP INSERT BREAK:C1413($section; wk paragraph break:K81:259; wk append:K81:179)
+		WP Insert break:C1413($section; wk page break:K81:188; wk append:K81:179)
+		WP Insert break:C1413($section; wk paragraph break:K81:259; wk append:K81:179)
 		$paragraphs:=WP Get elements:C1550($section; wk type paragraph:K81:191)
 		$paragraph:=$paragraphs[$paragraphs.length-1]
 		WP SET TEXT:C1574($paragraph; "GOLDEN ALTOS"; wk append:K81:179)
 		WP SET ATTRIBUTES:C1342($paragraph; wk text align:K81:49; wk center:K81:99)
-		WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+		WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 		WP SET TEXT:C1574($paragraph; "Terms and conditions of sales"; wk append:K81:179)
-		WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+		WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 		
 		WP SET ATTRIBUTES:C1342($paragraph; wk text color:K81:64; "grey")
 		
-		WP INSERT BREAK:C1413($section; wk paragraph break:K81:259; wk append:K81:179)
+		WP Insert break:C1413($section; wk paragraph break:K81:259; wk append:K81:179)
 		$paragraphs:=WP Get elements:C1550($section; wk type paragraph:K81:191)
 		$paragraph:=$paragraphs[$paragraphs.length-1]
 		
 		$index:=1
 		For each ($condition; $preview.conditions)
 			WP SET TEXT:C1574($paragraph; String:C10($index)+".  "+$condition.code+": "+$condition.value; wk append:K81:179)
-			WP INSERT BREAK:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
+			WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 			$index+=1
 		End for each 
 		WP SET ATTRIBUTES:C1342($paragraph; wk text align:K81:49; wk left:K81:95)
@@ -485,7 +570,7 @@ Function drawPup_quoteRevision()
 			$revisionName:=$parts.join(" - "; ck ignore null or empty:K85:5)
 			$color:=cs:C1710.sfw_htmlColor.me.getName($quoteRevision.color)
 		Else 
-			$revisionName:="Revision"
+			$revisionName:=" "
 			$color:=""
 		End if 
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
@@ -530,7 +615,7 @@ Function drawPup_quoteStatus()
 		$parts:=New collection:C1472($quoteStatus.code; $quoteStatus.name)
 		$statusName:=$parts.join(" - "; ck ignore null or empty:K85:5)
 		If ($statusName="")
-			$statusName:="Status"
+			$statusName:=" "
 		End if 
 		$color:=cs:C1710.sfw_htmlColor.me.getName($quoteStatus.color)
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
@@ -539,32 +624,74 @@ Function drawPup_quoteStatus()
 	
 Function drawPup_quoteCustomer()
 	If (Form:C1466.current_item#Null:C1517)
-		$name:=Form:C1466.current_item.customer.name || "Customer"
+		$name:=Form:C1466.current_item.customer.name || " "
 		Form:C1466.sfw.drawButtonPup("pup_customer"; $name; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.customer=Null:C1517))
 	End if 
 	
 Function selectCustomer()
 	If (Form:C1466.sfw.checkIsInModification())
+		
+		$selector:=cs:C1710.sfw_definitionSelector.new("selectorCustomers"; "customer")
+		$selector.setTitle("Choose a Customer")
+		$selector.setCurrentItem(Form:C1466.current_item.customer)
+		$selector.setOptions("noCutLink")
+		$selector.openSelector()
+		
 		Case of 
-			: (FORM Event:C1606.code=On Getting Focus:K2:7) | (FORM Event:C1606.code=On Clicked:K2:4)
+			: ($selector.isSelected())
+				$itemSeleted:=$selector.getCurrentItem()
 				
-				OBJECT GET COORDINATES:C663(*; "entryField_customer"; $l; $t; $r; $b)
-				CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
-				$form:=New object:C1471()
-				$form.lb_items:=ds:C1482.Customer.all()
+				Case of 
+					: ($itemSeleted=Null:C1517)
+					: (cs:C1710.sfw_string.me.isAnEmptyUUID($itemSeleted.UUID)=False:C215)
+						Form:C1466.current_item.UUID_Customer:=$itemSeleted.UUID
+						If (cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_Customer)=True:C214)
+							Form:C1466.current_item.UUID_Customer:=16*"00"
+						End if 
+				End case 
+				This:C1470.drawPup_quoteCustomer()
 				
+			: ($selector.asCutTheLink())
+				Form:C1466.current_item.UUID_Customer:=16*"00"
 				
-				$winRef:=Open form window:C675("selectCustomer"; Pop up form window:K39:11; $l; $b+1)
-				DIALOG:C40("selectCustomer"; $form)
-				CLOSE WINDOW:C154($winRef)
-				If (ok=1)
-					Form:C1466.current_item.UUID_Customer:=$form.item.UUID
-					cs:C1710.panel_quote.me._activate_save_cancel_button()
-					This:C1470._clearInfoAfterChangingCustomer()
-				End if 
+			: ($selector.needCreation())
+				$selector.createANewEntity("cs.panel_quote.me.callbackAfterCreationCustomer($1)")
+				
 		End case 
+		
 	End if 
 	
+Function callbackAfterCreationCustomer($key : Text)
+	Form:C1466.current_item.UUID_Customer:=$key
+	If (cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_Customer)=True:C214)
+		Form:C1466.current_item.UUID_Customer:=16*"00"
+	End if 
+	EXECUTE METHOD IN SUBFORM:C1085("detail_panel"; Formula:C1597(cs:C1710.panel_quote.me.drawPup_quoteCustomer()); *)
+	
+	
+	
+	
+	
+	//Case of 
+	//: (FORM Event.code=On Getting Focus) | (FORM Event.code=On Clicked)
+	
+	//OBJECT GET COORDINATES(*; "entryField_customer"; $l; $t; $r; $b)
+	//CONVERT COORDINATES($l; $b; XY Current form; XY Main window)
+	//$form:=New object()
+	//$form.lb_items:=ds.Customer.all()
+	
+	
+	//$winRef:=Open form window("selectCustomer"; Pop up form window; $l; $b+1)
+	//DIALOG("selectCustomer"; $form)
+	//CLOSE WINDOW($winRef)
+	//If (ok=1)
+	//Form.current_item.UUID_Customer:=$form.item.UUID
+	//cs.panel_quote.me._activate_save_cancel_button()
+	//This._clearInfoAfterChangingCustomer()
+	//End if 
+	//End case 
+End if 
+
 Function _clearInfoAfterChangingCustomer()
 	Form:C1466.current_item.moreData:=New object:C1471()
 	
@@ -602,7 +729,7 @@ Function drawPup_serviceType()
 		$parts:=New collection:C1472(Form:C1466.current_item.serviceType.code; Form:C1466.current_item.serviceType.name)
 		$serviceName:=$parts.join(" - "; ck ignore null or empty:K85:5)
 		If ($serviceName="")
-			$serviceName:="Service"
+			$serviceName:=" "
 		End if 
 		$color:=cs:C1710.sfw_htmlColor.me.getName(Form:C1466.current_item.serviceType.color)
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
@@ -642,14 +769,18 @@ Function btnActionContacts()
 	$refMenu:=Create menu:C408()
 	
 	APPEND MENU ITEM:C411($refMenu; "Add main contact"; *)
-	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--addMainContact")
-	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+	
+	If (Form:C1466.sfw.checkIsInModification()) && (Form:C1466.current_item.customer#Null:C1517)
+		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--addMainContact")
+	Else 
 		DISABLE MENU ITEM:C150($refMenu; -1)
 	End if 
 	
 	APPEND MENU ITEM:C411($refMenu; "Add secondary contact"; *)
-	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--addSeconaryContact")
-	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+	
+	If (Form:C1466.sfw.checkIsInModification()) && (Form:C1466.current_item.customer#Null:C1517)
+		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--addSeconaryContact")
+	Else 
 		DISABLE MENU ITEM:C150($refMenu; -1)
 	End if 
 	
@@ -677,11 +808,12 @@ Function btnActionContacts()
 			End if 
 			
 			$form:=New object:C1471()
-			$form.lb_contacts:=ds:C1482.Contact.query("customer.leads.UUID == :1 and not(UUID in :2)"; Form:C1466.current_item.UUID; $uuids)
-			$ref:=Open form window:C675("Lead_chooseMainContact"; Sheet form window:K39:12)
-			DIALOG:C40("Lead_chooseMainContact"; $form)
-			CLOSE WINDOW:C154($ref)
-			
+			$form.lb_contacts:=ds:C1482.Contact.query("UUID_Company == :1 and not(UUID in :2)"; Form:C1466.current_item.customer.UUID; $uuids)
+			If ($form.lb_contacts.length>0)
+				$ref:=Open form window:C675("Lead_chooseMainContact"; Sheet form window:K39:12)
+				DIALOG:C40("Lead_chooseMainContact"; $form)
+				CLOSE WINDOW:C154($ref)
+			End if 
 			If (ok=1)
 				If (Form:C1466.current_item.moreData=Null:C1517)
 					Form:C1466.current_item.moreData:=New object:C1471()
@@ -706,15 +838,15 @@ Function btnActionContacts()
 			End if 
 			
 			$form:=New object:C1471()
-			$form.lb_contacts:=ds:C1482.Contact.query("customer.quotes.UUID == :1 and not(UUID in :2)"; Form:C1466.current_item.UUID; $uuids).toCollection()
+			$form.lb_contacts:=ds:C1482.Contact.query("UUID_Company == :1 and not(UUID in :2)"; Form:C1466.current_item.customer.UUID; $uuids).toCollection()
 			For each ($contact; $form.lb_contacts)
 				$contact.selected:=False:C215
 			End for each 
-			
-			$ref:=Open form window:C675("Lead_chooseSecondaryContacts"; Sheet form window:K39:12)
-			DIALOG:C40("Lead_chooseSecondaryContacts"; $form)
-			CLOSE WINDOW:C154($ref)
-			
+			If ($form.lb_contacts.length>0)
+				$ref:=Open form window:C675("Lead_chooseSecondaryContacts"; Sheet form window:K39:12)
+				DIALOG:C40("Lead_chooseSecondaryContacts"; $form)
+				CLOSE WINDOW:C154($ref)
+			End if 
 			If (ok=1)
 				If (Form:C1466.current_item.moreData=Null:C1517)
 					Form:C1466.current_item.moreData:=New object:C1471()
@@ -749,3 +881,101 @@ Function btnActionContacts()
 			cs:C1710.panel_lead.me._activate_save_cancel_button()
 	End case 
 	
+	
+	
+	
+	
+	
+Function drawPup_quoteLead()
+	If (Form:C1466.current_item#Null:C1517)
+		$name:=Form:C1466.current_item.leads[0].leadCode || " "
+		Form:C1466.sfw.drawButtonPup("pup_lead"; $name; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.Form.current_item.leads[0]=Null:C1517))
+	End if 
+	
+Function selectLead()
+	var $selection : cs:C1710.LeadSelection
+	
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		$selector:=cs:C1710.sfw_definitionSelector.new("selectorLeads"; "lead")
+		$selector.setTitle("Choose a Lead")
+		//$selector.setCurrentItem(Form.current_item.leads[0])
+		$selector.setOptions("noCutLink")
+		$selector.openSelector()
+		
+		Case of 
+			: ($selector.isSelected())
+				$itemSeleted:=$selector.getCurrentItem()
+				
+				Case of 
+					: ($itemSeleted=Null:C1517)
+					: (cs:C1710.sfw_string.me.isAnEmptyUUID($itemSeleted.UUID)=False:C215)
+						
+						$selection:=ds:C1482.Lead.newSelection()
+						$selection:=$selection.add(Form:C1466.current_item.leads)
+						$selection:=$selection.add($itemSeleted)
+						
+						Form:C1466.current_item.leads:=$selection
+						
+				End case 
+				This:C1470.drawPup_quoteCustomer()
+				
+			: ($selector.asCutTheLink())
+				
+				$selection:=ds:C1482.Lead.newSelection()
+				$selection:=$selection.add(Form:C1466.current_item.leads)
+				$selection:=$selection.drop($itemSeleted)
+				
+				Form:C1466.current_item.leads:=$selection
+		End case 
+		
+	End if 
+	
+	
+Function drawPup_staff()
+	If (Form:C1466.current_item#Null:C1517)
+		$staffName:=Form:C1466.current_item.staff.fullName || " "
+		Form:C1466.sfw.drawButtonPup("pup_staff"; $staffName; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.staff=Null:C1517))
+	End if 
+	
+Function selectStaff()
+	
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		$selector:=cs:C1710.sfw_definitionSelector.new("selectorOwners"; "staff")
+		$selector.setTitle("Choose a Owner")
+		$selector.setCurrentItem(Form:C1466.current_item.staff)
+		$selector.setOptions("noCutLink")
+		$selector.openSelector()
+		
+		Case of 
+			: ($selector.isSelected())
+				$itemSeleted:=$selector.getCurrentItem()
+				
+				Case of 
+					: ($itemSeleted=Null:C1517)
+					: (cs:C1710.sfw_string.me.isAnEmptyUUID($itemSeleted.UUID)=False:C215)
+						Form:C1466.current_item.UUID_Staff:=$itemSeleted.UUID
+						If (cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_Staff)=True:C214)
+							Form:C1466.current_item.UUID_Staff:=16*"00"
+						End if 
+				End case 
+				This:C1470.drawPup_staff()
+				
+			: ($selector.asCutTheLink())
+				Form:C1466.current_item.UUID_Staff:=16*"00"
+				
+				//: ($selector.needCreation())
+				//$selector.createANewEntity("cs.panel_lead.me.callbackAfterCreationOwner($1)")
+				
+		End case 
+	End if 
+	
+	
+	
+Function WParea_opt()
+	WP UpdateWidget("WPtoolbar_opt"; "WParea_opt")
+	
+	
+Function WParea_preview()
+	WP UpdateWidget("WPtoolbar_opt"; "WParea_opt")
