@@ -1,5 +1,142 @@
 {
 	"tables": {
+		"AuditStatus": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 4466,
+				"top": 230,
+				"width": 93.6796875,
+				"height": 146.33203125
+			},
+			"displayable_fields_count": 5,
+			"fields_ordering": 1
+		},
+		"ProcessType": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 4445,
+				"top": 398.66796875,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
+		"Audit": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 4145,
+				"top": 252,
+				"width": 162.369140625,
+				"height": 650.33203125
+			},
+			"displayable_fields_count": 29,
+			"fields_ordering": 2,
+			"fields": {
+				"auditReport": {
+					"position": 29
+				},
+				"UUID_ProcessType": {
+					"position": 3
+				},
+				"IsNewRisksExists": {
+					"position": 28
+				},
+				"IsOFIImplemented": {
+					"position": 27
+				},
+				"IsCAEffective": {
+					"position": 26
+				},
+				"IsNCRCorrected": {
+					"position": 25
+				},
+				"AuditeeSignature": {
+					"position": 24
+				},
+				"auditorSignature": {
+					"position": 23
+				},
+				"recommendations": {
+					"position": 22
+				},
+				"remainingGaps": {
+					"position": 21
+				},
+				"overallStatus": {
+					"position": 20
+				},
+				"findings": {
+					"position": 19
+				},
+				"comments": {
+					"position": 18
+				},
+				"objectives": {
+					"position": 17
+				},
+				"scope": {
+					"position": 16
+				},
+				"UUID_Company": {
+					"position": 15
+				},
+				"UUID_Department": {
+					"position": 14
+				},
+				"team": {
+					"position": 13
+				},
+				"activities": {
+					"position": 12
+				},
+				"type": {
+					"position": 11
+				},
+				"document": {
+					"position": 10
+				},
+				"UUID_AuditStatus": {
+					"position": 2
+				},
+				"storageFilename": {
+					"position": 9
+				},
+				"title": {
+					"position": 8
+				},
+				"stmpCreationDate": {
+					"position": 7
+				},
+				"supervisor": {
+					"position": 6
+				},
+				"stmpPage": {
+					"position": 5
+				},
+				"auditNumber": {
+					"position": 4
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
+		},
 		"Qcar": {
 			"color": {
 				"red": 255,
@@ -150,8 +287,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2004,
-				"top": 554,
+				"left": 2010,
+				"top": 556,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -1969,6 +2106,22 @@
 		}
 	},
 	"relations": {
+		"797CC71F57ABA44A8A7CEF5E0BB3122F": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"3B172FB0C738E148A8C8B4CF9E8B5019": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"FC14A35413BB26458BA778E50E40F64F": {
 			"color": {
 				"red": 240,

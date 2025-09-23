@@ -1429,27 +1429,27 @@
 		<primary_key field_name="UUID" field_uuid="B55972B70F030349B5136DEE13BEA4D4"/>
 	</table>
 	<table name="ProcessType" uuid="97D73747E1BC924A8B02AAF6C525C798" id="140">
-        <field name="UUID" uuid="BD7F2A41DD18FE47B8E8F4AD6C1EE62D" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-        <field name="levelID" uuid="BF21383321732546902428505CAB4CB3" type="4" never_null="true" id="2"/>
-        <field name="code" uuid="EF6EA6AFF50A0A468763DB571F74B4AF" type="10" limiting_length="255" never_null="true" id="3"/>
-        <field name="name" uuid="6354E42E14779643BC865F976168CC23" type="10" limiting_length="255" never_null="true" id="4"/>
-        <field name="color" uuid="A254CAE9E24BD6418AAA63D0F786EA34" type="10" limiting_length="255" never_null="true" id="5"/>
-        <primary_key field_name="UUID" field_uuid="BD7F2A41DD18FE47B8E8F4AD6C1EE62D"/>
-    </table>
+		<field name="UUID" uuid="BD7F2A41DD18FE47B8E8F4AD6C1EE62D" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="levelID" uuid="BF21383321732546902428505CAB4CB3" type="4" never_null="true" id="2"/>
+		<field name="code" uuid="EF6EA6AFF50A0A468763DB571F74B4AF" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="name" uuid="6354E42E14779643BC865F976168CC23" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="color" uuid="A254CAE9E24BD6418AAA63D0F786EA34" type="10" limiting_length="255" never_null="true" id="5"/>
+		<primary_key field_name="UUID" field_uuid="BD7F2A41DD18FE47B8E8F4AD6C1EE62D"/>
+	</table>
 	<table name="AuditStatus" uuid="86FDD37E294EC746A4557D00E52217ED" id="141">
-        <field name="UUID" uuid="9B44F9ED4FE59A46966ECF6D35DD27CA" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-        <field name="levelID" uuid="05C29741F6A20A46860E1FB7C4E34160" type="4" never_null="true" id="2"/>
-        <field name="code" uuid="7750B15E70FBC04A937BA7DCC7891162" type="10" limiting_length="255" never_null="true" id="3">
-            <field_extra multi_line="false"/>
-        </field>
-        <field name="name" uuid="3425250762B71541A40C4CE7E616F357" type="10" limiting_length="255" never_null="true" id="4">
-            <field_extra multi_line="false"/>
-        </field>
-        <field name="color" uuid="A053FEBE2C2DC0478A312B190893D590" type="10" limiting_length="255" never_null="true" id="5">
-            <field_extra multi_line="false"/>
-        </field>
-        <primary_key field_name="UUID" field_uuid="9B44F9ED4FE59A46966ECF6D35DD27CA"/>
-    </table>
+		<field name="UUID" uuid="9B44F9ED4FE59A46966ECF6D35DD27CA" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="levelID" uuid="05C29741F6A20A46860E1FB7C4E34160" type="4" never_null="true" id="2"/>
+		<field name="code" uuid="7750B15E70FBC04A937BA7DCC7891162" type="10" limiting_length="255" never_null="true" id="3">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="name" uuid="3425250762B71541A40C4CE7E616F357" type="10" limiting_length="255" never_null="true" id="4">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="color" uuid="A053FEBE2C2DC0478A312B190893D590" type="10" limiting_length="255" never_null="true" id="5">
+			<field_extra multi_line="false"/>
+		</field>
+		<primary_key field_name="UUID" field_uuid="9B44F9ED4FE59A46966ECF6D35DD27CA"/>
+	</table>
 	<relation uuid="E2AF483B529D544AB1C2C73E91FCFA34" name_Nto1="qcar" name_1toN="rmas" state="1">
 		<related_field kind="source">
 			<field_ref uuid="6A2DBA4BC09BD248A715BF5D84181E0C" name="UUID_Qcar">
@@ -2710,6 +2710,30 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="3B172FB0C738E148A8C8B4CF9E8B5019" name_Nto1="auditStatus" name_1toN="audits" state="1">
+		<related_field kind="source">
+			<field_ref uuid="A8752F9F9EA00D49B87C2D3786BA417A" name="UUID_AuditStatus">
+				<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="9B44F9ED4FE59A46966ECF6D35DD27CA" name="UUID">
+				<table_ref uuid="86FDD37E294EC746A4557D00E52217ED" name="AuditStatus"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="797CC71F57ABA44A8A7CEF5E0BB3122F" name_Nto1="processType" name_1toN="audits" state="1">
+		<related_field kind="source">
+			<field_ref uuid="DE3F29F4218B284ABEA12A65E65EDEC8" name="UUID_ProcessType">
+				<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="BD7F2A41DD18FE47B8E8F4AD6C1EE62D" name="UUID">
+				<table_ref uuid="97D73747E1BC924A8B02AAF6C525C798" name="ProcessType"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="005E48A922A4464DB92973931B467ACF" type="3">
 		<field_ref uuid="17F71D68FA714CE9A75ED79CA63E3BE2" name="UUID_Lead">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
@@ -2733,6 +2757,16 @@
 	<index kind="regular" unique_keys="true" uuid="0251966533F64ABA91350A53A8C4F2A0" type="1">
 		<field_ref uuid="781351B073D04C208690E0F1E35AE1FC" name="UUID">
 			<table_ref uuid="46D5D228874048E390B37970A681AAD0" name="sfw_EmailTemplate"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="026D64A6AC90AF458333F55B51E52108" type="3">
+		<field_ref uuid="A8752F9F9EA00D49B87C2D3786BA417A" name="UUID_AuditStatus">
+			<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="027A71C22DFFA14EAB0036D39A3B7C5C" type="1">
+		<field_ref uuid="DA4CBDC76C3AAB41B11CAF5A7306B820" name="rmaNumber">
+			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="031249732BE5714E8D57906FBC93768C" type="3">
@@ -2965,6 +2999,11 @@
 			<table_ref uuid="521E751963104DC299061CF1588CADEF" name="sfw_EMailLog"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="41A6EFB1A0029340988367888E046703" type="3">
+		<field_ref uuid="DE3F29F4218B284ABEA12A65E65EDEC8" name="UUID_ProcessType">
+			<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="41D626DCF0E04F4F827CB1D110C13972" type="3">
 		<field_ref uuid="67283794017E8F49A82B9A08EE6BB3F2" name="UUID_ToolType">
 			<table_ref uuid="0FF66E5E37EDD74B8E6E39F15644C85F" name="Tool"/>
@@ -3038,6 +3077,11 @@
 	<index kind="regular" unique_keys="true" uuid="4CEB84F14E20EA408DA945D8F7CD1EEE" type="7">
 		<field_ref uuid="129BD267EFE06D4EBCF1E64FCE762186" name="UUID">
 			<table_ref uuid="446AB1ED27F3664C9C9747DD14114EF2" name="Qcar"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="4EDC90771EE4D541BDC6A6DE062214CE" type="1">
+		<field_ref uuid="AF643B21840FF74A90FA006ABD3AB6A3" name="UUID">
+			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="4EF303D62F454942AA8026FF7896539A" type="7">
@@ -3200,11 +3244,6 @@
 			<table_ref uuid="BBA10D61B3A54D38A2C335D8A5A1BF6E" name="sfw_Favorite"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="796E92A2716E1D4B870A5388220224C5" type="1">
-		<field_ref uuid="DA4CBDC76C3AAB41B11CAF5A7306B820" name="rmaNumber">
-			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
-		</field_ref>
-	</index>
 	<index kind="regular" uuid="7B5F890268AC8D4694DE94997DF66E36" type="3">
 		<field_ref uuid="8E8814A889814010890030637A9BFFF5" name="UUID_target">
 			<table_ref uuid="5E1C3E25225441628E3DBCF58BFAABF4" name="sfw_Document"/>
@@ -3308,11 +3347,6 @@
 	<index kind="regular" uuid="8E88516D98380544B46FFC3C4ED53C85" type="3">
 		<field_ref uuid="4348C8943690B243AFF8327DE0DA1368" name="UUID_User">
 			<table_ref uuid="FD10D10C9E0015458AFF59F988A373BB" name="Staff"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="8F7D7B96A26F474BAE3A8AF5D5E9C295" type="1">
-		<field_ref uuid="AF643B21840FF74A90FA006ABD3AB6A3" name="UUID">
-			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="8F90D65B0D4D429BB56122F0AA29A5D7" type="1">
@@ -3443,6 +3477,11 @@
 	<index kind="regular" uuid="A992C7CB1B564FA59F02C9C9762DE2F7" type="3">
 		<field_ref uuid="20A7DC63F00546FA8D1ED0B398852569" name="UUID_EventType">
 			<table_ref uuid="9829CFB4F3294A3989861E788C0AF7D4" name="QuoteEvent"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="A9A38647A35FF44985A0753E9B5A4063" type="1">
+		<field_ref uuid="B55972B70F030349B5136DEE13BEA4D4" name="UUID">
+			<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="AA064FCFF3604B159A1E8BE07FD321D7" type="3">
@@ -3610,6 +3649,11 @@
 			<table_ref uuid="1A0A4A7549092346949531F66E6DC503" name="DocumentCategory"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="CF44D5325B4C494991C81D80299CDF6C" type="1">
+		<field_ref uuid="9B44F9ED4FE59A46966ECF6D35DD27CA" name="UUID">
+			<table_ref uuid="86FDD37E294EC746A4557D00E52217ED" name="AuditStatus"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="D4C20100F3A44711AF8343819AC0567F" type="1">
 		<field_ref uuid="F7AEB814F6504C649074F8ABB1E85E01" name="UUID">
 			<table_ref uuid="A2E5AA68898A4B1595645CE229236B67" name="InteractionOutcome"/>
@@ -3618,6 +3662,11 @@
 	<index kind="regular" unique_keys="true" uuid="D4CC8B0748494261824D0B7ABD37C4BD" type="1">
 		<field_ref uuid="5D20BF5E221E4AB5AA75260DDD551A9D" name="UUID">
 			<table_ref uuid="05967663C56F44398D96379354ABCC89" name="sfw_Setting"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="D51C853D9AFABD498BDFCE7495ADA289" type="1">
+		<field_ref uuid="BD7F2A41DD18FE47B8E8F4AD6C1EE62D" name="UUID">
+			<table_ref uuid="97D73747E1BC924A8B02AAF6C525C798" name="ProcessType"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="D60C2B210E7143F5BBC9C2FA3073DCCA" type="3">
