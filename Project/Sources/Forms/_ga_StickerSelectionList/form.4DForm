@@ -9,8 +9,8 @@
 	"windowMinHeight": 0,
 	"windowMaxWidth": 32767,
 	"windowMaxHeight": 32767,
-	"rightMargin": 20,
-	"bottomMargin": 20,
+	"rightMargin": 0,
+	"bottomMargin": 0,
 	"events": [
 		"onLoad",
 		"onPageChange",
@@ -60,7 +60,7 @@
 				"lb_equipments": {
 					"type": "listbox",
 					"left": 0,
-					"top": 31,
+					"top": 33,
 					"width": 912,
 					"height": 692,
 					"events": [
@@ -155,7 +155,7 @@
 			}
 		}
 	],
-	"geometryStamp": 41,
+	"geometryStamp": 45,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

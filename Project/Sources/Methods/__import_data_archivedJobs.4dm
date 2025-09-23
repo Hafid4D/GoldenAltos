@@ -13,7 +13,7 @@ If (True:C214)
 		$job.jobNumber:=$record.jobNumber
 		
 		//$job.poNumber:=$record.poNumber
-		$po_s:=ds:C1482.PurchaseOrder.query("oldPoNumber =:1"; Split string:C1554($record.poNumber; "\r"; sk trim spaces:K86:2).join("\r"))
+		$po_s:=ds:C1482.PurchaseOrder.query("oldPoNumber =:1"; cs:C1710.sfw_string.me.trimSpace($record.poNumber))
 		If ($po_s.length>0)
 			$job.poNumber:=$po_s[0].poNumber
 		Else 

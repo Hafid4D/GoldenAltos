@@ -82,5 +82,15 @@ Function get fullName()->$fullName : Text
 	
 local Function itemLoad()
 	// This callback is called when the item is selected in the itemList
-	
 	This:C1470._initCommunication()
+	
+local Function afterCreation()
+	// This callback is called after saving the new item
+	//This.code:=String(This.codeID; "00000#")
+	
+local Function loadAfterCreation()
+	// This callback is called after creating the new item but before displaying the panel.
+	This:C1470.codeID:=ds:C1482.Staff.all().max("codeID")+1
+	This:C1470.code:=String:C10(This:C1470.codeID; "00000#")
+	
+	

@@ -56,7 +56,7 @@ If (OK=1)
 	If ($cip_es.length>0)
 		OB GET PROPERTY NAMES:C1232($cip_es[0]; $headerNames; $arrTypes)
 		ARRAY TO COLLECTION:C1563($headers; $headerNames)
-	
+		
 		$headers.remove($headers.indexOf("UUID"))
 		$headers.remove($headers.indexOf("moreData"))
 		$headers:=$headers.filter(Formula:C1597($1.value#"stmp@"))
@@ -85,38 +85,38 @@ If (OK=1)
 						
 					: ($headerName="priority")
 						
-						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($cip_e.priotity.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
+						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(Replace string:C233(String:C10($cip_e.priority.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42)); Char:C90(Tab:K15:37); Char:C90(Space:K15:42))+$separator_col)
 						
 					: ($headerName="origin")
-					
-						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($cip_e.origin.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
+						
+						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(Replace string:C233(String:C10($cip_e.origin.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42)); Char:C90(Tab:K15:37); Char:C90(Space:K15:42))+$separator_col)
 						
 					: ($headerName="humanFactor")
-					
-						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($cip_e.humanFactor.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
+						
+						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(Replace string:C233(String:C10($cip_e.humanFactor.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42)); Char:C90(Tab:K15:37); Char:C90(Space:K15:42))+$separator_col)
 						
 					: ($headerName="disposition")
 						If ($cip_e.moreData.disposition#"")
-							SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($cip_e.moreData.disposition); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
+							SEND PACKET:C103($file; Replace string:C233(Replace string:C233(Replace string:C233(String:C10($cip_e.moreData.disposition); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42)); Char:C90(Tab:K15:37); Char:C90(Space:K15:42))+$separator_col)
 							
 						Else 
 							
-							SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($cip_e.disposition.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
+							SEND PACKET:C103($file; Replace string:C233(Replace string:C233(Replace string:C233(String:C10($cip_e.disposition.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42)); Char:C90(Tab:K15:37); Char:C90(Space:K15:42))+$separator_col)
 						End if 
 						
 					: ($headerName="category")
-					
-						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($cip_e.category.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
 						
-					: ($headerName="IsAcceptable")
-				
-						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($cip_e.IsAcceptable.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
+						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(Replace string:C233(String:C10($cip_e.category.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42)); Char:C90(Tab:K15:37); Char:C90(Space:K15:42))+$separator_col)
+						
+					: ($headerName="isAcceptable")
+						
+						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(Replace string:C233(String:C10($cip_e.isAcceptable.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42)); Char:C90(Tab:K15:37); Char:C90(Space:K15:42))+$separator_col)
 						
 						
 					Else 
-						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($cip_e[$headerName]); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
+						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(Replace string:C233(String:C10($cip_e[$headerName]); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42)); Char:C90(Tab:K15:37); Char:C90(Space:K15:42))+$separator_col)
 						
-		
+						
 				End case 
 				
 			End for each 

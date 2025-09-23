@@ -1,5 +1,5 @@
 //%attributes = {"executedOnServer":true}
-var $eDepartment : cs:C1710.DepartmentEntity
+//var $eDepartment : cs.DepartmentEntity
 
 /**
 import po & po lines (po <-- po_lines)
@@ -205,7 +205,8 @@ If (True:C214)
 		End for each 
 		
 		
-		For each ($lot; $record.lots)
+		For each ($lot; $record.lots.orderBy("parentLotNumber asc"))
+			
 			$lot_e:=ds:C1482.Lot.new()
 			
 			$lot_e.lotNumber:=$lot.lotNum
@@ -249,6 +250,16 @@ If (True:C214)
 			$lot_e.status:=$lot.status
 			
 			$lot_e.UUID_Job:=$job.UUID
+			
+			If ($lot.parentLotNumber#"")
+				$lots_es:=ds:C1482.Lot.query("lotNumber = :1"; $lot.parentLotNumber)
+				
+				If ($lots_es.length>0)
+					$lot_e.UUID_LotParent:=$lots_es[0].UUID
+				Else 
+					TRACE:C157
+				End if 
+			End if 
 			
 			$res:=$lot_e.save()
 			
@@ -304,6 +315,29 @@ If (True:C214)
 		End for each 
 		
 	End for each 
+	
+/**
+fix lotParent for some lots
+**/
+	
+	$lots_es:=ds:C1482.Lot.all().minus(ds:C1482.Lot.all().lotParent.subLots).query("lotNumber = :1"; "@-@")
+	
+	For each ($lot; $lots_es)
+		$parentLotNumber:=Split string:C1554($lot.lotNumber; "-")[0]
+		
+		$parent_es:=ds:C1482.Lot.query("lotNumber = :1"; $parentLotNumber)
+		
+		If ($parent_es.length>0)
+			$lot.UUID_LotParent:=$parent_es[0].UUID
+			
+			$res:=$lot.save()
+			
+			If (Not:C34($res.success))
+				TRACE:C157
+			End if 
+		End if 
+	End for each 
+	
 End if 
 
 /**
@@ -314,6 +348,8 @@ If (True:C214)
 	TRUNCATE TABLE:C1051([InventoryPull:127])
 	TRUNCATE TABLE:C1051([Location:47])
 	TRUNCATE TABLE:C1051([Unit:48])
+	TRUNCATE TABLE:C1051([Classification:59])
+
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/inventory_export.json")
 	
@@ -339,7 +375,7 @@ If (True:C214)
 		$inventory_e.receivedBy:=$record.recdBy
 		$inventory_e.totalCost:=$record.totalCost
 		$inventory_e.availableQty:=$record.AvailableQty
-		$inventory_e.initiallQty:=$record.originalQty
+		$inventory_e.initialQty:=$record.originalQty
 		$inventory_e.inventoryID:=(ds:C1482.Inventory.all().length>0) ? ds:C1482.Inventory.all().max("inventoryID")+1 : 1
 		$inventory_e.code:="INV"+String:C10($inventory_e.inventoryID; "00000#")
 		
@@ -697,67 +733,98 @@ End if
 import staffs
 **/
 If (True:C214)
+	$file_excel:=Folder:C1567(fk data folder:K87:12).file("DataJson/GA_employee_list.csv")
 	
+	$records_excel:=Split string:C1554($file_excel.getText(); "\r\n")
+	
+	$records_excel.shift()  //remove the header
+	
+	$staffs_excel:=New collection:C1472()
+	
+	For each ($record; $records_excel)
+		$staffs_excel.push(New object:C1471(\
+			"lastName"; Split string:C1554(Split string:C1554($record; ";")[1]; ",")[0]; \
+			"firstName"; Split string:C1554(Split string:C1554($record; ";")[1]; ",")[1]; \
+			"roles"; Split string:C1554(Split string:C1554($record; ";")[2]; ","); \
+			"teams"; Split string:C1554(Split string:C1554($record; ";")[3]; ",")\
+			))
+	End for each 
+	
+	TRUNCATE TABLE:C1051([Team:136])
+	TRUNCATE TABLE:C1051([Membership:137])
+	TRUNCATE TABLE:C1051([Role:132])
+	TRUNCATE TABLE:C1051([StaffRole:63])
 	TRUNCATE TABLE:C1051([Staff:135])
-	TRUNCATE TABLE:C1051([Department:132])
 	
-	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/staff_export.json")
+	SET DATABASE PARAMETER:C642([Staff:135]; Table sequence number:K37:31; 0)
 	
-	$records:=JSON Parse:C1218($file.getText())
-	
-	$counter:=0
-	For each ($record; $records)
-		$counter:=$counter+1
-		
-		$eDepartment:=ds:C1482.Department.query("name == :1"; $record.department).first()
-		If ($eDepartment=Null:C1517)
-			$eDepartment:=ds:C1482.Department.new()
-			$eDepartment.name:=$record.department
-			$eDepartment.levelID:=$counter
-			$eDepartment.save()
-		End if 
-		
+	For each ($staff; $staffs_excel)
 		$staff_e:=ds:C1482.Staff.new()
-		$staff_e.firstName:=$record.firstName
-		$staff_e.lastName:=$record.lastName
-		$staff_e.retrainDate:=$record.retrainDate
-		$staff_e.terminationDate:=$record.terminationDate
-		$staff_e.creationDate:=cs:C1710.sfw_stmp.me.getDate($record.creationDate)
-		$staff_e.code:=Split string:C1554($record.code; "\r"; sk trim spaces:K86:2).join("\r")
-		$staff_e.UUID_Department:=$eDepartment.UUID
-		$staff_e.terminated:=$record.terminated
-		$staff_e.hireDate:=$record.hireDate
-		$staff_e.division:=$record.division
-		$staff_e.citizenShipStatus:=$record.citizenShipStatus
-		$staff_e.contactDetails:=$record.contactDetails
-		//If ($staff_e.firstName="Analyn") & ($staff_e.lastName="Tolentino")
-		//TRACE
-		//End if 
 		
-		For ($i; 1; 31)
-			$value:=$record.teamMemberShip[String:C10($i)]
-			
-			If ($value)
-				$team_es:=ds:C1482.Team.query("id = :1"; $i)
+		$staff_e.code:=String:C10($staff_e.codeID; "00000#")
+		$staff_e.firstName:=$staff.firstName
+		$staff_e.lastName:=$staff.lastName
+		
+		$res:=$staff_e.save()
+		
+		If ($res.success)
+			For each ($team; $staff.teams)
+				$teams_es:=ds:C1482.Team.query("name = :1"; $team)
 				
-				If ($team_es.length>0)
-					$membership_e:=ds:C1482.Membership.new()
-					$membership_e.UUID_Staff:=$staff_e.UUID
-					$membership_e.UUID_Team:=$team_es[0].UUID
+				If ($teams_es.length>0)
+					$team_e:=$teams_es[0]
+				Else 
+					$team_e:=ds:C1482.Team.new()
 					
-					$res:=$membership_e.save()
+					$team_e.name:=$team
+					
+					$res:=$team_e.save()
 					
 					If (Not:C34($res.success))
 						TRACE:C157
 					End if 
 				End if 
-			End if 
-		End for 
-		
-		$res:=$staff_e.save()
-		
-		If (Not:C34($res.success))
-			TRACE:C157
+				
+				$membership_e:=ds:C1482.Membership.new()
+				
+				$membership_e.UUID_Staff:=$staff_e.UUID
+				$membership_e.UUID_Team:=$team_e.UUID
+				
+				$res:=$membership_e.save()
+				
+				If (Not:C34($res.success))
+					TRACE:C157
+				End if 
+			End for each 
+			
+			For each ($role; $staff.roles)
+				$roles_es:=ds:C1482.Role.query("name = :1"; $role)
+				
+				If ($roles_es.length>0)
+					$role_e:=$roles_es[0]
+				Else 
+					$role_e:=ds:C1482.Role.new()
+					
+					$role_e.name:=$role
+					
+					$res:=$role_e.save()
+					
+					If (Not:C34($res.success))
+						TRACE:C157
+					End if 
+				End if 
+				
+				$staffRole_e:=ds:C1482.StaffRole.new()
+				
+				$staffRole_e.UUID_Staff:=$staff_e.UUID
+				$staffRole_e.UUID_Role:=$role_e.UUID
+				
+				$res:=$staffRole_e.save()
+				
+				If (Not:C34($res.success))
+					TRACE:C157
+				End if 
+			End for each 
 		End if 
 	End for each 
 End if 

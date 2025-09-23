@@ -26,8 +26,7 @@ If ($audit_log.exists)
 			$eAudit:=ds:C1482.Audit.new()
 			$eAudit.auditNumber:=$audit.Page
 			$eAudit.stmpPage:=cs:C1710.sfw_stmp.me.build(Date:C102($audit.Page_Date))
-			$eAudit.supervisor:=$audit.Supervisor
-			$eAudit.dateTimeStamp:=$audit.DateTimeStamp
+			$eAudit.supervisor:=$audit.Supervisor  //  TODO : Change to createdBy
 			$eAudit.stmpCreationDate:=$audit.CreationDateTimeStamp
 			$eAudit.title:=$audit.LogTitle
 			$eAudit.storageFilename:=$audit.StoragedFilename
@@ -65,7 +64,7 @@ If ($audit_log.exists)
 					$report:=Folder:C1567(fk data folder:K87:12).file("DataJson/LogBookDocs/"+String:C10($document.UniqueID+$document.PrimaryKeyValue))
 					If ($report.exists)
 						
-						C_BLOB:C604($blob)
+						var $blob : Blob
 						DOCUMENT TO BLOB:C525($report.platformPath; $blob)
 						
 						$doc.blob:=$blob

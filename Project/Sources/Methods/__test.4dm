@@ -1,5 +1,7 @@
 //%attributes = {}
 
+
+ds:C1482.ContinuousImprovementall().toCollection().
 //$a:="    "
 //$a:=Split string($a; ";"; sk ignore empty strings+sk trim spaces).join(";")
 //If ($a="")

@@ -22,7 +22,7 @@ local Function loadAfterCreation()
 local Function afterCreation()
 	// This callback is called after saving the new item
 	
-	This:C1470.availableQty:=This:C1470.initiallQty
+	This:C1470.availableQty:=This:C1470.initialQty
 	
 	$res:=This:C1470.save()
 	
@@ -30,8 +30,8 @@ local Function afterCreation()
 	
 	$pull.date:=cs:C1710.sfw_stmp.me.now()
 	$pull.type:="Initial Stock"
-	$pull.qty:=This:C1470.initiallQty
-	$pull.remaining:=This:C1470.initiallQty
+	$pull.qty:=This:C1470.initialQty
+	$pull.remaining:=This:C1470.initialQty
 	$pull.lotNumber:="N/A"
 	$pull.statusIQA:="Pending"
 	

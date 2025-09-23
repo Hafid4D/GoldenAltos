@@ -1,5 +1,35 @@
 {
 	"tables": {
+		"Unit": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 4366.7133789062,
+				"top": 117,
+				"width": 87.017578125,
+				"height": 83.33203125
+			},
+			"displayable_fields_count": 2
+		},
+		"Location": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 4144.7133789062,
+				"top": 116,
+				"width": 87.017578125,
+				"height": 83.33203125
+			},
+			"displayable_fields_count": 2
+		},
 		"Qcar": {
 			"color": {
 				"red": 255,
@@ -8,8 +38,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1330.5,
-				"top": 605.625,
+				"left": 681,
+				"top": 605,
 				"width": 228,
 				"height": 582.33203125
 			},
@@ -24,8 +54,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3238.5,
-				"top": 406.29296875,
+				"left": 2469,
+				"top": 391.66796875,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -40,8 +70,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3533.1665039062,
-				"top": 631.95959472656,
+				"left": 2665.6665039062,
+				"top": 377.33459472656,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -56,8 +86,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2808.9692382812,
-				"top": 534.10467529297,
+				"left": 2121.4692382812,
+				"top": 567.47967529297,
 				"width": 226.30639648438,
 				"height": 417.9924621582
 			},
@@ -73,40 +103,34 @@
 					"position": 13
 				},
 				"hireDate": {
-					"position": 9
-				},
-				"terminated": {
-					"position": 6
-				},
-				"UUID_Department": {
-					"color": {
-						"red": 255,
-						"green": 255,
-						"blue": 255,
-						"alpha": 0
-					},
 					"position": 12
 				},
-				"code": {
+				"terminated": {
 					"position": 11
 				},
-				"creationDate": {
-					"position": 8
-				},
-				"terminationDate": {
-					"position": 5
-				},
-				"inactive": {
-					"position": 7
-				},
-				"lastName": {
+				"code": {
 					"position": 4
 				},
-				"firstName": {
+				"creationDate": {
+					"position": 10
+				},
+				"terminationDate": {
+					"position": 9
+				},
+				"codeID": {
 					"position": 3
 				},
+				"inactive": {
+					"position": 8
+				},
+				"lastName": {
+					"position": 7
+				},
+				"firstName": {
+					"position": 6
+				},
 				"retrainDate": {
-					"position": 10
+					"position": 5
 				},
 				"UUID_User": {
 					"position": 2
@@ -124,8 +148,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2513.8333740234,
-				"top": 1071.2917480469,
+				"left": 1854.3333740234,
+				"top": 1241.6667480469,
 				"width": 194,
 				"height": 171.33203125
 			},
@@ -139,15 +163,15 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2381.9149169922,
-				"top": 445.21908569336,
+				"left": 1888.4149169922,
+				"top": 395.59408569336,
 				"width": 167.68237304688,
 				"height": 176.99865722656
 			},
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
-		"Department": {
+		"Role": {
 			"color": {
 				"red": 255,
 				"green": 255,
@@ -155,12 +179,13 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2580.7374267578,
-				"top": 433.57632446289,
-				"width": 129.66145324707,
-				"height": 151.99871826172
+				"left": 1975,
+				"top": 595,
+				"width": 120,
+				"height": 167.33203125
 			},
-			"displayable_fields_count": 5
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
 		},
 		"CustomerStatus": {
 			"color": {
@@ -170,8 +195,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1655.4997558594,
-				"top": 769.95837402344,
+				"left": 1005.9997558594,
+				"top": 769.33337402344,
 				"width": 174.2592010498,
 				"height": 168.33203125
 			},
@@ -185,8 +210,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2396.4506835938,
-				"top": 0.625,
+				"left": 1746.9506835938,
+				"top": 0,
 				"width": 147.00085449219,
 				"height": 192.73617553711
 			},
@@ -201,8 +226,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2099.5543212891,
-				"top": 0.625,
+				"left": 1450.0543212891,
+				"top": 0,
 				"width": 263.75323486328,
 				"height": 419.92266845703
 			},
@@ -260,13 +285,45 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1592.1665649414,
-				"top": 1214.9582519531,
-				"width": 149.0390625,
-				"height": 398.33203125
+				"left": 942.66656494141,
+				"top": 1214.3332519531,
+				"width": 196.0390625,
+				"height": 463.33203125
 			},
-			"displayable_fields_count": 17,
-			"fields_ordering": 1
+			"displayable_fields_count": 20,
+			"fields_ordering": 2,
+			"fields": {
+				"lotNumber": {
+					"position": 7
+				},
+				"statusIQA": {
+					"position": 9
+				},
+				"performedBy": {
+					"position": 8
+				},
+				"jobNumber": {
+					"position": 10
+				},
+				"date": {
+					"position": 3
+				},
+				"remaining": {
+					"position": 6
+				},
+				"qty": {
+					"position": 5
+				},
+				"type": {
+					"position": 4
+				},
+				"UUID_Inventory": {
+					"position": 2
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
 		},
 		"Inventory": {
 			"color": {
@@ -276,76 +333,30 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1342.8332519531,
-				"top": 1215.6248779297,
-				"width": 171.052734375,
-				"height": 558.33203125
+				"left": 601.33325195312,
+				"top": 1263.9998779297,
+				"width": 219.052734375,
+				"height": 741.33203125
 			},
-			"displayable_fields_count": 24,
-			"fields_ordering": 2,
+			"displayable_fields_count": 33,
 			"fields": {
-				"availableQty": {
-					"position": 24
+				"UUID_Staff": {
+					"position": 3
 				},
-				"originalQty": {
-					"position": 23
+				"UUID_Customer": {
+					"position": 2
 				},
-				"property": {
-					"position": 22
+				"UUID_Lot": {
+					"position": 4
 				},
-				"totalCost": {
-					"position": 21
-				},
-				"division": {
-					"position": 20
-				},
-				"recdBy": {
-					"position": 19
-				},
-				"binLocation": {
-					"position": 18
-				},
-				"currency": {
-					"position": 17
-				},
-				"inventoryUnits": {
-					"position": 16
-				},
-				"unitCost": {
-					"position": 15
-				},
-				"qtyInStock": {
-					"position": 14
-				},
-				"expirationDate": {
-					"position": 13
-				},
-				"dateIn": {
-					"position": 12
-				},
-				"stockNum": {
-					"position": 11
-				},
-				"lotNumber": {
-					"position": 10
-				},
-				"classification": {
-					"position": 9
-				},
-				"description": {
-					"position": 8
-				},
-				"vendor": {
+				"partNumber": {
 					"position": 7
 				},
-				"partNum": {
+				"customerSpecific": {
 					"position": 6
 				},
-				"customerSpecific": {
-					"position": 5
-				},
 				"customer_provided": {
-					"position": 4
+					"position": 5
 				},
 				"UUID": {
 					"position": 1
@@ -360,8 +371,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3307.8334960938,
-				"top": 630.625,
+				"left": 2658.3334960938,
+				"top": 630,
 				"width": 180.92706298828,
 				"height": 126.33203125
 			},
@@ -375,8 +386,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3086.1667480469,
-				"top": 593.625,
+				"left": 2436.6667480469,
+				"top": 593,
 				"width": 103.2421875,
 				"height": 146.33203125
 			},
@@ -390,8 +401,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3958.1667480469,
-				"top": 851.625,
+				"left": 3308.6667480469,
+				"top": 851,
 				"width": 170.80078125,
 				"height": 147.33203125
 			},
@@ -420,8 +431,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4205.1667480469,
-				"top": 748.625,
+				"left": 3555.6667480469,
+				"top": 748,
 				"width": 99.017578125,
 				"height": 151.33203125
 			},
@@ -436,12 +447,54 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3681.1667480469,
-				"top": 631.29168701172,
-				"width": 197.048828125,
-				"height": 356.33203125
+				"left": 3031.6667480469,
+				"top": 630.66668701172,
+				"width": 198.048828125,
+				"height": 365.33203125
 			},
-			"displayable_fields_count": 15
+			"displayable_fields_count": 15,
+			"fields_ordering": 2,
+			"fields": {
+				"bins": {
+					"position": 15
+				},
+				"parametricMeasurements": {
+					"position": 14
+				},
+				"dataTables": {
+					"position": 13
+				},
+				"comment2": {
+					"position": 12
+				},
+				"comment1": {
+					"position": 11
+				},
+				"largeLayout": {
+					"position": 10
+				},
+				"smallLayout": {
+					"position": 9
+				},
+				"binning": {
+					"position": 7
+				},
+				"status": {
+					"position": 6
+				},
+				"division": {
+					"position": 5
+				},
+				"operation": {
+					"position": 4
+				},
+				"name": {
+					"position": 2
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
 		},
 		"Step": {
 			"color": {
@@ -451,8 +504,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3326.5,
-				"top": 777.95831298828,
+				"left": 2677,
+				"top": 777.33331298828,
 				"width": 170.80078125,
 				"height": 210.33203125
 			},
@@ -484,8 +537,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3054.5,
-				"top": 761.625,
+				"left": 2405,
+				"top": 761,
 				"width": 161.33203125,
 				"height": 209.33203125
 			},
@@ -500,12 +553,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3086.8334960938,
-				"top": 1053.2917480469,
+				"left": 2437.3334960938,
+				"top": 1052.6667480469,
 				"width": 157.69921875,
-				"height": 755.33203125
+				"height": 845.33203125
 			},
-			"displayable_fields_count": 34,
+			"displayable_fields_count": 38,
 			"fields_ordering": 1
 		},
 		"Job": {
@@ -516,8 +569,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2793.8334960938,
-				"top": 1145.625,
+				"left": 2144.3334960938,
+				"top": 1145,
 				"width": 171.73828125,
 				"height": 686.33203125
 			},
@@ -531,8 +584,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2588.5001220703,
-				"top": 622.29162597656,
+				"left": 1749.0001220703,
+				"top": 649.66662597656,
 				"width": 189.73828125,
 				"height": 398.33203125
 			},
@@ -547,8 +600,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2168.5,
-				"top": 519.95837402344,
+				"left": 1519,
+				"top": 519.33337402344,
 				"width": 157.048828125,
 				"height": 575.33203125
 			},
@@ -562,8 +615,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1919.5,
-				"top": 830.625,
+				"left": 1270,
+				"top": 830,
 				"width": 188.29302978516,
 				"height": 331.21447753906
 			},
@@ -594,8 +647,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3.58984375,
-				"top": 1486.0086669922,
+				"left": 0,
+				"top": 1674.9031982422,
 				"width": 173,
 				"height": 167.33203125
 			},
@@ -610,8 +663,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3.58984375,
-				"top": 1261.10546875,
+				"left": 0,
+				"top": 1450,
 				"width": 136.10581970215,
 				"height": 188.33203125
 			},
@@ -626,8 +679,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3.58984375,
-				"top": 1104.10546875,
+				"left": 0,
+				"top": 1293,
 				"width": 171,
 				"height": 125.33203125
 			},
@@ -642,8 +695,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 542.5546875,
-				"top": 275.52734375,
+				"left": 0,
+				"top": 2053,
 				"width": 166,
 				"height": 189.33203125
 			},
@@ -658,8 +711,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 273.9765625,
-				"top": 271.42443847656,
+				"left": 0,
+				"top": 816.66662597656,
 				"width": 169,
 				"height": 167.33203125
 			},
@@ -674,8 +727,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 280.2421875,
-				"top": 851.8647460938,
+				"left": 0,
+				"top": 1868.3334960938,
 				"width": 170.025390625,
 				"height": 146.33203125
 			},
@@ -707,8 +760,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3.9296875,
-				"top": 843.91015625,
+				"left": 0,
+				"top": 1032,
 				"width": 172.3828125,
 				"height": 209.33203125
 			},
@@ -723,8 +776,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 239.20071411133,
-				"top": 0,
+				"left": 247.20071411133,
+				"top": 0.52043914794922,
 				"width": 182,
 				"height": 232.33203125
 			},
@@ -741,6 +794,52 @@
 				}
 			}
 		},
+		"RMA": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 240,
+				"top": 40,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
+		"StaffRole": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 1952,
+				"top": 748,
+				"width": 119.671875,
+				"height": 104.33203125
+			},
+			"displayable_fields_count": 3
+		},
+		"ManagementReview": {
+			"color": {
+				"red": 175,
+				"green": 188,
+				"blue": 191,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 4633,
+				"top": 2,
+				"width": 211,
+				"height": 211.33203125
+			},
+			"displayable_fields_count": 8
+		},
 		"QuoteEvent": {
 			"color": {
 				"red": 255,
@@ -749,8 +848,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 5362.9065856934,
-				"top": 977.50704956055,
+				"left": 4713.4065856934,
+				"top": 976.88204956055,
 				"width": 169,
 				"height": 193.33203125
 			},
@@ -774,8 +873,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2389.8526611328,
-				"top": 249.01876831055,
+				"left": 1750.3526611328,
+				"top": 226.39376831055,
 				"width": 162,
 				"height": 163.33203125
 			},
@@ -791,20 +890,20 @@
 				}
 			}
 		},
-		"Audit": {
+		"Classification": {
 			"color": {
-				"red": 160,
-				"green": 174,
-				"blue": 158,
-				"alpha": 255
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
 			},
 			"coordinates": {
-				"left": 4775.5,
-				"top": 0.625,
-				"width": 256,
-				"height": 694.33203125
+				"left": 4247.7133789062,
+				"top": 116,
+				"width": 102.54817199707,
+				"height": 83.33203125
 			},
-			"displayable_fields_count": 31
+			"displayable_fields_count": 2
 		},
 		"PartData": {
 			"color": {
@@ -814,8 +913,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3996.5,
-				"top": 0.625,
+				"left": 3347,
+				"top": 0,
 				"width": 186,
 				"height": 127.33203125
 			},
@@ -830,12 +929,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4490.5,
-				"top": 0.625,
-				"width": 211,
-				"height": 422.33203125
+				"left": 3846,
+				"top": 3,
+				"width": 217,
+				"height": 454.33203125
 			},
-			"displayable_fields_count": 18,
+			"displayable_fields_count": 19,
 			"fields": {
 				"UUID": {
 					"color": {
@@ -855,8 +954,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4235.5,
-				"top": 0.625,
+				"left": 3586,
+				"top": 0,
 				"width": 205,
 				"height": 533.33203125
 			},
@@ -880,8 +979,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2528.2624511719,
-				"top": 2284.2841796875,
+				"left": 1878.7624511719,
+				"top": 2283.6591796875,
 				"width": 162,
 				"height": 163.33203125
 			},
@@ -905,8 +1004,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2319.9926757812,
-				"top": 2283.1274414062,
+				"left": 1670.4926757812,
+				"top": 2282.5024414062,
 				"width": 162,
 				"height": 163.33203125
 			},
@@ -930,8 +1029,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1501.6823120117,
-				"top": 2308.5483398438,
+				"left": 852.18231201172,
+				"top": 2307.9233398438,
 				"width": 165.71719360352,
 				"height": 177.60284423828
 			},
@@ -961,8 +1060,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1953.3548583984,
-				"top": 2278.1645507812,
+				"left": 1303.8548583984,
+				"top": 2277.5395507812,
 				"width": 285.34545898438,
 				"height": 338.83685302734
 			},
@@ -986,8 +1085,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 5363.2133026123,
-				"top": 1232.1280670166,
+				"left": 4713.7133026123,
+				"top": 1231.5030670166,
 				"width": 169,
 				"height": 193.33203125
 			},
@@ -1011,8 +1110,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4003.5,
-				"top": 169.625,
+				"left": 3354,
+				"top": 169,
 				"width": 186,
 				"height": 169.33203125
 			},
@@ -1021,53 +1120,35 @@
 		},
 		"sfw_Subscription": {
 			"color": {
-				"red": 168,
-				"green": 206,
-				"blue": 226,
-				"alpha": 255
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
 			},
 			"coordinates": {
-				"left": 571.8984375,
-				"top": 600.34765625,
-				"width": 183.98828125,
-				"height": 168.12109375
+				"left": 640,
+				"top": 40,
+				"width": 120,
+				"height": 167.33203125
 			},
 			"displayable_fields_count": 6,
-			"fields": {
-				"UUID_User": {
-					"position": 3
-				}
-			}
+			"fields_ordering": 1
 		},
 		"sfw_Todo": {
 			"color": {
-				"red": 226,
-				"green": 158,
-				"blue": 214,
-				"alpha": 255
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
 			},
 			"coordinates": {
-				"left": 729.296875,
-				"top": 5.85546875,
-				"width": 204.1171875,
-				"height": 290.2890625
+				"left": 440,
+				"top": 40,
+				"width": 120,
+				"height": 167.33203125
 			},
-			"displayable_fields_count": 11
-		},
-		"AuditStatus": {
-			"color": {
-				"red": 160,
-				"green": 174,
-				"blue": 158,
-				"alpha": 255
-			},
-			"coordinates": {
-				"left": 5074.5,
-				"top": 0.625,
-				"width": 169,
-				"height": 172.33203125
-			},
-			"displayable_fields_count": 6
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
 		},
 		"ControllingDepartment": {
 			"color": {
@@ -1077,8 +1158,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3772.5,
-				"top": 0.625,
+				"left": 3123,
+				"top": 0,
 				"width": 148,
 				"height": 212.33203125
 			},
@@ -1086,18 +1167,19 @@
 		},
 		"ProcessType": {
 			"color": {
-				"red": 160,
-				"green": 174,
-				"blue": 158,
-				"alpha": 255
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
 			},
 			"coordinates": {
-				"left": 5074.5,
-				"top": 184.625,
-				"width": 171,
-				"height": 165.33203125
+				"left": 4445,
+				"top": 398.66796875,
+				"width": 120,
+				"height": 167.33203125
 			},
-			"displayable_fields_count": 5
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
 		},
 		"StepSpec": {
 			"color": {
@@ -1107,8 +1189,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3622.212890625,
-				"top": 1092.625,
+				"left": 2972.712890625,
+				"top": 1092,
 				"width": 167.689453125,
 				"height": 104.33203125
 			},
@@ -1122,8 +1204,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3771.5,
-				"top": 232.625,
+				"left": 3122,
+				"top": 232,
 				"width": 152,
 				"height": 201.33203125
 			},
@@ -1137,8 +1219,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1725.3306884766,
-				"top": 2319.8836669922,
+				"left": 1075.8306884766,
+				"top": 2319.2586669922,
 				"width": 162,
 				"height": 163.33203125
 			},
@@ -1162,8 +1244,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1488.1843261719,
-				"top": 2091.625,
+				"left": 838.68432617188,
+				"top": 2091,
 				"width": 183,
 				"height": 172.33203125
 			},
@@ -1177,8 +1259,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1728.5,
-				"top": 2115.625,
+				"left": 1079,
+				"top": 2115,
 				"width": 155,
 				"height": 159.33203125
 			},
@@ -1192,8 +1274,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1942.5,
-				"top": 2079.625,
+				"left": 1293,
+				"top": 2079,
 				"width": 162,
 				"height": 163.33203125
 			},
@@ -1207,8 +1289,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 282.94140625,
-				"top": 645.33465576172,
+				"left": 254,
+				"top": 486.66668701172,
 				"width": 179,
 				"height": 146.33203125
 			},
@@ -1223,8 +1305,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2261.4033813477,
-				"top": 1213.6199188232,
+				"left": 1611.9033813477,
+				"top": 1212.9949188232,
 				"width": 176.93957519531,
 				"height": 190.07992553711
 			},
@@ -1238,8 +1320,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1817.1898193359,
-				"top": 1192.911895752,
+				"left": 1167.6898193359,
+				"top": 1192.286895752,
 				"width": 383.04388427734,
 				"height": 466.03674316406
 			},
@@ -1263,8 +1345,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3101.5,
-				"top": 0.625,
+				"left": 2426,
+				"top": 0,
 				"width": 129,
 				"height": 161.33203125
 			},
@@ -1278,8 +1360,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2587.5,
-				"top": 180.625,
+				"left": 1938,
+				"top": 180,
 				"width": 122,
 				"height": 160.33203125
 			},
@@ -1309,8 +1391,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2585.5,
-				"top": 0.625,
+				"left": 1936,
+				"top": 0,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -1340,8 +1422,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2937.5,
-				"top": 180.625,
+				"left": 2290,
+				"top": 180,
 				"width": 118,
 				"height": 162.33203125
 			},
@@ -1355,8 +1437,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3077.5,
-				"top": 179.625,
+				"left": 2428,
+				"top": 179,
 				"width": 122,
 				"height": 153.33203125
 			},
@@ -1370,8 +1452,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2939.5,
-				"top": 0.625,
+				"left": 2290,
+				"top": 0,
 				"width": 120,
 				"height": 157.33203125
 			},
@@ -1385,8 +1467,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 654.95703125,
-				"top": 1175.16015625,
+				"left": 246,
+				"top": 1163,
 				"width": 192,
 				"height": 191.33203125
 			},
@@ -1401,8 +1483,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2723.5,
-				"top": 0.625,
+				"left": 2074,
+				"top": 0,
 				"width": 197,
 				"height": 513.33203125
 			},
@@ -1426,8 +1508,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 83.01281738281,
-				"top": 2033.7514648438,
+				"left": 245.30187988281,
+				"top": 2089.4272460938,
 				"width": 221.5625,
 				"height": 176.89453125
 			},
@@ -1441,8 +1523,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 428.82696533203,
-				"top": 2009.8862304688,
+				"left": 248.39337158203,
+				"top": 2297.5737304688,
 				"width": 218.30340576172,
 				"height": 147.44006347656
 			},
@@ -1456,8 +1538,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 83.21350097656,
-				"top": 1768.1639404297,
+				"left": 242.18225097656,
+				"top": 1616.2108154297,
 				"width": 224.55322265625,
 				"height": 235.21725463867
 			},
@@ -1498,8 +1580,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1826.5,
-				"top": 0.625,
+				"left": 1177,
+				"top": 0,
 				"width": 176,
 				"height": 462.33203125
 			},
@@ -1513,8 +1595,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3274.5,
-				"top": 166.625,
+				"left": 2625,
+				"top": 166,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -1528,8 +1610,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1410.5,
-				"top": 0.625,
+				"left": 761,
+				"top": 0,
 				"width": 139,
 				"height": 190.33203125
 			},
@@ -1559,8 +1641,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 289.32940673828,
-				"top": 455.41278076172,
+				"left": 251.33331298828,
+				"top": 283.66668701172,
 				"width": 181,
 				"height": 167.33203125
 			},
@@ -1575,8 +1657,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 0.65625,
-				"top": 220.20703125,
+				"left": 0,
+				"top": 210,
 				"width": 189.33984375,
 				"height": 168.33203125
 			},
@@ -1593,10 +1675,11 @@
 			"coordinates": {
 				"left": 0,
 				"top": 0,
-				"width": 188.228515625,
-				"height": 212.6015625
+				"width": 187.373046875,
+				"height": 188.33203125
 			},
-			"displayable_fields_count": 8
+			"displayable_fields_count": 7,
+			"fields_ordering": 1
 		},
 		"dfd_Template": {
 			"color": {
@@ -1606,8 +1689,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 433.2646484375,
-				"top": 1769.7904052734,
+				"left": 243.6943359375,
+				"top": 1884.4036865234,
 				"width": 223.97706604004,
 				"height": 184.03462219238
 			},
@@ -1642,12 +1725,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1590.5,
-				"top": 0.625,
+				"left": 941,
+				"top": 0,
 				"width": 204,
-				"height": 701.33203125
+				"height": 673.33203125
 			},
-			"displayable_fields_count": 31
+			"displayable_fields_count": 30
 		},
 		"ContactEvent": {
 			"color": {
@@ -1657,8 +1740,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 5362.5,
-				"top": 761.29168701172,
+				"left": 4713,
+				"top": 760.66668701172,
 				"width": 164,
 				"height": 186.33203125
 			},
@@ -1673,8 +1756,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 5364.8334960938,
-				"top": 535.625,
+				"left": 4715.3334960938,
+				"top": 535,
 				"width": 161,
 				"height": 191.33203125
 			},
@@ -1688,12 +1771,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3469.515625,
-				"top": 0.625,
+				"left": 2820.015625,
+				"top": 0,
 				"width": 258.697265625,
-				"height": 537.33203125
+				"height": 453.33203125
 			},
-			"displayable_fields_count": 23
+			"displayable_fields_count": 19
 		},
 		"sfw_DocumentFolder": {
 			"color": {
@@ -1703,8 +1786,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 657.50897216797,
-				"top": 966.81384277344,
+				"left": 249.33319091797,
+				"top": 942.33337402344,
 				"width": 190.66662597656,
 				"height": 187.33203125
 			},
@@ -1719,12 +1802,13 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 281.50646972656,
-				"top": 1064.0612792969,
-				"width": 199.37759399414,
-				"height": 264.14323425293
+				"left": 246.66662597656,
+				"top": 672.66674804688,
+				"width": 194.66665649414,
+				"height": 239.99870300293
 			},
-			"displayable_fields_count": 10,
+			"displayable_fields_count": 9,
+			"fields_ordering": 5,
 			"fields": {
 				"UUID_DocumentModel": {
 					"position": 2
@@ -1763,8 +1847,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1652.5,
-				"top": 949.625,
+				"left": 1003,
+				"top": 949,
 				"width": 175,
 				"height": 166.33203125
 			},
@@ -1778,8 +1862,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3971.1667480469,
-				"top": 628.625,
+				"left": 3321.6667480469,
+				"top": 628,
 				"width": 148.556640625,
 				"height": 171.33203125
 			},
@@ -1793,12 +1877,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3338.1667480469,
-				"top": 1041.9582519531,
+				"left": 2688.6667480469,
+				"top": 1041.3332519531,
 				"width": 200.048828125,
 				"height": 758.33203125
 			},
-			"displayable_fields_count": 34,
+			"displayable_fields_count": 36,
 			"fields": {
 				"comment2": {
 					"position": 17
@@ -1876,8 +1960,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1907.1667480469,
-				"top": 481.95831298828,
+				"left": 1257.6667480469,
+				"top": 481.33331298828,
 				"width": 179.712890625,
 				"height": 301.33203125
 			},
@@ -1891,8 +1975,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3692.5,
-				"top": 1344.625,
+				"left": 3043,
+				"top": 1344,
 				"width": 211.29681396484,
 				"height": 104.33203125
 			},
@@ -1907,8 +1991,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3730.5,
-				"top": 1530.2917480469,
+				"left": 3081,
+				"top": 1529.6667480469,
 				"width": 211.01448059082,
 				"height": 104.33203125
 			},
@@ -1923,8 +2007,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1330.5,
-				"top": 321.625,
+				"left": 681,
+				"top": 321,
 				"width": 223.95446777344,
 				"height": 268.15802001953
 			},
@@ -1932,43 +2016,51 @@
 		}
 	},
 	"relations": {
-		"FE30A9EA86E04BC093122DBF00B3EDA6": {
+		"FC14A35413BB26458BA778E50E40F64F": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"6A7F6B7A673D4C4A88D4EF3C41A44E09": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"4AA8439DBD366C4AA81A8F055DBFB727": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"36DD83EE5A35AA46B2C4808AFAEB9040": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"10727A709C83D84C81934A0D0DCF318D": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"3AC0AC688CF06C4ABA1B8F54C7A176B3": {
 			"color": {
 				"red": 255,
 				"green": 255,
 				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"43488167CD0C42D8926B5798C93C8CC9": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"D982B8553811B2468F440FBF6F888F44": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"5A6A240E15CEAC4F9754A849BB703AE5": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"21CCCB93C0707B4D9CAC866EA7A4CCF3": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
 				"alpha": 0
 			}
 		},
@@ -2189,14 +2281,6 @@
 			}
 		},
 		"AD6BBF2F268242C0B04A46CEBCCC5DEA": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"F01472D43AF045ECB5F37A14F2FBD275": {
 			"color": {
 				"red": 255,
 				"green": 255,

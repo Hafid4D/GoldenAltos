@@ -122,7 +122,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"bottom": 54
 				},
@@ -152,7 +152,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"dataSourceTypeHint": "date"
 				},
@@ -192,7 +192,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"dataSourceTypeHint": "date"
 				},
@@ -237,7 +237,7 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"visibility": "visible"
 				},
 				"pup_reportOperator": {
@@ -259,7 +259,7 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"visibility": "visible"
 				},
 				"btnForward": {
@@ -372,7 +372,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"dataSourceTypeHint": "date"
 				},
@@ -396,30 +396,6 @@
 					],
 					"focusable": true,
 					"borderStyle": "none"
-				},
-				"pup_equipmentId": {
-					"type": "button",
-					"top": 8,
-					"left": 108,
-					"width": 190,
-					"height": 23,
-					"fontFamily": "System Font",
-					"fontSize": 13,
-					"focusable": false,
-					"text": "",
-					"icon": "",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/pup_equipmentId.4dm",
-					"events": [
-						"onLoad",
-						"onClick",
-						"onDisplayDetail"
-					],
-					"fontWeight": "bold",
-					"right": 298,
-					"textAlign": "left"
 				},
 				"btnForward2": {
 					"type": "button",
@@ -468,7 +444,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"dataSourceTypeHint": "text",
 					"visibility": "visible"
@@ -489,7 +465,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"dataSourceTypeHint": "time",
 					"timeFormat": "hh_mm_am",
@@ -532,6 +508,26 @@
 					"visibility": "visible",
 					"iconFrames": 1,
 					"focusable": false
+				},
+				"entryField_systemID": {
+					"type": "input",
+					"top": 10,
+					"left": 108,
+					"width": 190,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.equipment.assignedID",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "normal",
+					"textAlign": "left",
+					"bottom": 27
 				}
 			}
 		},
@@ -711,7 +707,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"dataSourceTypeHint": "text"
 				},
@@ -741,7 +737,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"dataSourceTypeHint": "date"
 				},
@@ -756,7 +752,7 @@
 						"onClick"
 					],
 					"dataSource": "Form:C1466.current_item.isApproved",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"dataSourceTypeHint": "boolean"
 				},
 				"PopupDate": {
@@ -784,7 +780,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 376,
+	"geometryStamp": 384,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
