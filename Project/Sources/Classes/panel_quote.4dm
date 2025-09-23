@@ -176,6 +176,7 @@ Function loadQuoteLines()
 	End if 
 	
 Function bActionQuoteLines()
+	//var $selection : cs.QuoteLineSelection
 	$mainMenu:=Create menu:C408
 	
 	APPEND MENU ITEM:C411($mainMenu; "Add quote line..."; *)
@@ -201,12 +202,12 @@ Function bActionQuoteLines()
 			$eQuoteLine.UUID_Quote:=Form:C1466.current_item.UUID
 			$info:=$eQuoteLine.save()
 			Form:C1466.current_quoteLine:=$eQuoteLine
-			This:C1470._activate_save_cancel_button()
 			This:C1470.displayQuoteLine()
+			This:C1470._activate_save_cancel_button()
+			
 			Form:C1466.lb_quoteLines:=ds:C1482.QuoteLine.query("UUID_Quote == :1"; Form:C1466.current_item.UUID)
 			LISTBOX SELECT ROW:C912(*; "lb_quoteLines"; Form:C1466.lb_quoteLines.length; lk replace selection:K53:1)
 			GOTO OBJECT:C206(*; "entryField_quoteLineQuantity")
-			
 			
 			
 		: ($choose="--deleteQuoteLine")
