@@ -106,6 +106,13 @@ Function redrawAndSetVisible()
 	
 	
 	Case of 
+		: (FORM Get current page:C276(*)=1)
+			OBJECT GET COORDINATES:C663(*; "communication_subform"; $g; $t; $r; $b)
+			OBJECT GET COORDINATES:C663(*; "lb_contacts"; $gc; $tc; $rc; $bc)
+			
+			OBJECT SET COORDINATES:C1248(*; "lb_contacts"; $gc; $tc; $rc; $t)
+			OBJECT SET COORDINATES:C1248(*; "communication_subform"; $g; $t; $rc; $b)
+			
 		: (FORM Get current page:C276(*)=2)
 			OBJECT GET COORDINATES:C663(*; "bkgd_lb_consumptions_detail"; $g; $t; $r; $b)
 			OBJECT SET COORDINATES:C1248(*; "bkgd_lb_consumptions_detail"; $g; $t; $widthSubform; $b)
