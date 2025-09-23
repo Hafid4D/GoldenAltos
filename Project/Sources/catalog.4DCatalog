@@ -2854,22 +2854,47 @@
 			<table_ref uuid="D3AC71CFD00F4948816121AA74EF8DFE" name="Job"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="0199770DD39C7672BF03BD32A67AFC76" type="7">
-		<field_ref uuid="8D9FB8C795534689B56DE1CC69FD3D14" name="UUID">
-			<table_ref uuid="894004274A3B4909A39584EC0B879D18" name="Department"/>
+	<index kind="regular" unique_keys="true" uuid="0199772D5E7077648405C7BB203EF081" type="1">
+		<field_ref uuid="8EFDF2BE837542E3849ECB064F30C5BD" name="UUID">
+			<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="0199770DD3A17EAC88F4156086E66DA4" type="1">
+	<index kind="regular" unique_keys="true" uuid="0199772D5E707824923314A116838126" type="1">
+		<field_ref uuid="E33DA69061AB7744853A3E6B6DF6BB8D" name="UUID">
+			<table_ref uuid="0FF66E5E37EDD74B8E6E39F15644C85F" name="Tool"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="0199772D5E70787AA10485C83A5C9B3C" type="1">
+		<field_ref uuid="34E9F9D48BE14DCD95127852F83BF1FB" name="UUID">
+			<table_ref uuid="2C75E07E18FC4733A8C98A0B31D40656" name="sfw_User"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="0199772D5E7078D9867D2875636F8FB3" type="1">
+		<field_ref uuid="F82EDBE20F7F0A4C9658EA6A94789558" name="UUID">
+			<table_ref uuid="FB580C7C6B7BC3458D7137D33E9FC6B2" name="LeadStage"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="0199772D5E707906A5307EC9EF2FE7C3" type="1">
 		<field_ref uuid="AF643B21840FF74A90FA006ABD3AB6A3" name="UUID">
 			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="0199770DD3A17F3F8688B1DC03CB5B1C" type="1">
+	<index kind="regular" unique_keys="true" uuid="0199772D5E707926949792F2DD30A382" type="1">
 		<field_ref uuid="DA4CBDC76C3AAB41B11CAF5A7306B820" name="rmaNumber">
 			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="0199770DD3A27010A2ABB3F255D1F2AD" type="1">
+	<index kind="regular" unique_keys="true" uuid="0199772D5E7079BA863086AC5EF5AB97" type="1">
+		<field_ref uuid="4040F42F6150451FA3FB8EB06B445ED9" name="UUID">
+			<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="0199772D5E707A1CB7700B851141281C" type="1">
+		<field_ref uuid="DDEAA2AF9B9A44BD99857817933C03AA" name="UUID">
+			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="0199772D5E707A4598C40F721B63E3CC" type="1">
 		<field_ref uuid="8D9FB8C795534689B56DE1CC69FD3D14" name="UUID">
 			<table_ref uuid="894004274A3B4909A39584EC0B879D18" name="Role"/>
 		</field_ref>
@@ -3424,11 +3449,6 @@
 			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="886992468A830B4EBF1158DDE2BCAD24" type="1">
-		<field_ref uuid="8D9FB8C795534689B56DE1CC69FD3D14" name="UUID">
-			<table_ref uuid="894004274A3B4909A39584EC0B879D18" name="Department"/>
-		</field_ref>
-	</index>
 	<index kind="regular" unique_keys="true" uuid="88B26D6CFC3F2E4CA5FCF09883CCA88D" type="3">
 		<field_ref uuid="F4CD905FEF414ED89C867A2B79E6A86C" name="levelID">
 			<table_ref uuid="CF8DC4373C97487884111398B4383812" name="CustomerStatus"/>
@@ -3461,7 +3481,7 @@
 	</index>
 	<index kind="regular" unique_keys="true" uuid="8D683B83D704D1478C325E143D496C6A" type="1">
 		<field_ref uuid="8D9FB8C795534689B56DE1CC69FD3D14" name="UUID">
-			<table_ref uuid="894004274A3B4909A39584EC0B879D18" name="Role"/>
+			<table_ref uuid="894004274A3B4909A39584EC0B879D18" name="Department"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="8DE884007CA4E54DB22B4ABE8C29C057" type="1">
@@ -3699,14 +3719,6 @@
 			<table_ref uuid="BBADA9B28C42FC4AA02504E477DEF5BB" name="AML"/>
 		</field_ref>
 	</index>
-<<<<<<< HEAD
-=======
-	<index kind="regular" unique_keys="true" uuid="B916844F21CE684A90A019A205992E98" type="1">
-		<field_ref uuid="DA4CBDC76C3AAB41B11CAF5A7306B820" name="rmaNumber">
-			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
-		</field_ref>
-	</index>
->>>>>>> Develop
 	<index kind="regular" unique_keys="true" uuid="BA9A24A631304F64B16D7EA3EA4C0EF2" type="7">
 		<field_ref uuid="3E46CC22F2F34DC0B68C304E1BC47991" name="UUID">
 			<table_ref uuid="6330FD4D08D74130BF3869222CDECBA6" name="StepTemplate"/>
