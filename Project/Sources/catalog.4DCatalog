@@ -1397,6 +1397,74 @@
 		<field name="verified" uuid="B5317F2936DAA84688754D5AD27F203A" type="1" never_null="true" id="25"/>
 		<primary_key field_name="UUID" field_uuid="129BD267EFE06D4EBCF1E64FCE762186"/>
 	</table>
+	<table name="Audit" uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" id="139">
+		<field name="UUID" uuid="B55972B70F030349B5136DEE13BEA4D4" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="auditNumber" uuid="22471929E9671B4E94A57E0B3DB7FE63" type="4" never_null="true" id="2"/>
+		<field name="stmpPage" uuid="0FE27B7F46CCCE46BC77674614199497" type="4" never_null="true" id="3">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="supervisor" uuid="32B9133DC66E064AA45B12BA8F433CBA" type="10" limiting_length="255" never_null="true" id="4">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="stmpCreationDate" uuid="1B32511C08D7CD4085801214B347A169" type="4" never_null="true" id="6">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="title" uuid="3DAE7A8540AA97418C34DEF66580AA4F" type="10" limiting_length="255" never_null="true" id="7">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="storageFilename" uuid="5A8A41C8A1EA534C8FFA52AA685F6AF9" type="10" limiting_length="255" never_null="true" id="8">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="UUID_AuditStatus" uuid="A8752F9F9EA00D49B87C2D3786BA417A" type="10" store_as_UUID="true" never_null="true" id="9"/>
+		<field name="document" uuid="C2A72C4EEAE0AE45AD2EA09A70F6C145" type="21" blob_switch_size="2147483647" never_null="true" id="10"/>
+		<field name="type" uuid="7C26ABF75C254B4CAEE237698AB70407" type="10" limiting_length="255" never_null="true" id="11">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="activities" uuid="1196179170EB774E911DB9970A168273" type="21" blob_switch_size="2147483647" never_null="true" id="12"/>
+		<field name="team" uuid="1E5EF93B7320A24E8F9E93B474D9694A" type="21" blob_switch_size="2147483647" never_null="true" id="13">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="UUID_Department" uuid="DBBC9E80F752DA41B020E37A427026A0" type="10" store_as_UUID="true" never_null="true" id="14"/>
+		<field name="UUID_Company" uuid="2DB51CB40B38B84999B7E4D2B4FDCF7D" type="10" store_as_UUID="true" never_null="true" id="15"/>
+		<field name="scope" uuid="8E0E8373DAB562408B730459DD2A881F" type="10" never_null="true" id="16"/>
+		<field name="objectives" uuid="9A4C1C5F3931294483602CD3E64FD393" type="10" never_null="true" id="17"/>
+		<field name="comments" uuid="D450D27C2ABEE841AF9ABC6ADC16B722" type="10" never_null="true" id="18"/>
+		<field name="findings" uuid="C04787E0917C584EB853F8F296FC48A5" type="10" never_null="true" id="19"/>
+		<field name="overallStatus" uuid="336E72168BEC7A4DB4AE02EF8CD1679A" type="10" limiting_length="255" never_null="true" id="20"/>
+		<field name="remainingGaps" uuid="610880615F16A549883CD8C7F6A539C8" type="10" never_null="true" id="21"/>
+		<field name="recommendations" uuid="BB71C8B54027AA4781F83F3C95FDFED7" type="10" never_null="true" id="22"/>
+		<field name="auditorSignature" uuid="6C5F11D904600845B498172BD54D5FA4" type="10" limiting_length="255" never_null="true" id="23"/>
+		<field name="AuditeeSignature" uuid="2A5724F5EBC6BA4B94CBD5F616117718" type="10" limiting_length="255" never_null="true" id="24"/>
+		<field name="IsNCRCorrected" uuid="5A95DB912ED7B442A440B37E7A539031" type="1" never_null="true" id="25"/>
+		<field name="IsCAEffective" uuid="F88991A804E04C4CB8479AC6D5867381" type="1" never_null="true" id="26"/>
+		<field name="IsOFIImplemented" uuid="888D702B9E5FBB4F8DBEAE3474D05C0E" type="1" never_null="true" id="27"/>
+		<field name="IsNewRisksExists" uuid="481A5D63ACFB0A469347D0C9FBE71B9A" type="1" never_null="true" id="28"/>
+		<field name="UUID_ProcessType" uuid="DE3F29F4218B284ABEA12A65E65EDEC8" type="10" store_as_UUID="true" never_null="true" id="29"/>
+		<field name="auditReport" uuid="66ADA768650DFA4C8C95696D044352D7" type="21" blob_switch_size="2147483647" never_null="true" id="30"/>
+		<primary_key field_name="UUID" field_uuid="B55972B70F030349B5136DEE13BEA4D4"/>
+	</table>
+	<table name="ProcessType" uuid="97D73747E1BC924A8B02AAF6C525C798" id="140">
+        <field name="UUID" uuid="BD7F2A41DD18FE47B8E8F4AD6C1EE62D" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+        <field name="levelID" uuid="BF21383321732546902428505CAB4CB3" type="4" never_null="true" id="2"/>
+        <field name="code" uuid="EF6EA6AFF50A0A468763DB571F74B4AF" type="10" limiting_length="255" never_null="true" id="3"/>
+        <field name="name" uuid="6354E42E14779643BC865F976168CC23" type="10" limiting_length="255" never_null="true" id="4"/>
+        <field name="color" uuid="A254CAE9E24BD6418AAA63D0F786EA34" type="10" limiting_length="255" never_null="true" id="5"/>
+        <primary_key field_name="UUID" field_uuid="BD7F2A41DD18FE47B8E8F4AD6C1EE62D"/>
+    </table>
+	<table name="AuditStatus" uuid="86FDD37E294EC746A4557D00E52217ED" id="141">
+        <field name="UUID" uuid="9B44F9ED4FE59A46966ECF6D35DD27CA" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+        <field name="levelID" uuid="05C29741F6A20A46860E1FB7C4E34160" type="4" never_null="true" id="2"/>
+        <field name="code" uuid="7750B15E70FBC04A937BA7DCC7891162" type="10" limiting_length="255" never_null="true" id="3">
+            <field_extra multi_line="false"/>
+        </field>
+        <field name="name" uuid="3425250762B71541A40C4CE7E616F357" type="10" limiting_length="255" never_null="true" id="4">
+            <field_extra multi_line="false"/>
+        </field>
+        <field name="color" uuid="A053FEBE2C2DC0478A312B190893D590" type="10" limiting_length="255" never_null="true" id="5">
+            <field_extra multi_line="false"/>
+        </field>
+        <primary_key field_name="UUID" field_uuid="9B44F9ED4FE59A46966ECF6D35DD27CA"/>
+    </table>
 	<relation uuid="E2AF483B529D544AB1C2C73E91FCFA34" name_Nto1="qcar" name_1toN="rmas" state="1">
 		<related_field kind="source">
 			<field_ref uuid="6A2DBA4BC09BD248A715BF5D84181E0C" name="UUID_Qcar">
