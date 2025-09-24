@@ -2779,15 +2779,15 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="4AA8439DBD366C4AA81A8F055DBFB727" name_Nto1="qcar" name_1toN="rmas" state="1">
+	<relation uuid="A42CA698B074BA48A2701B05262B020E" name_Nto1="supplier" name_1toN="audits" state="1">
 		<related_field kind="source">
-			<field_ref uuid="6A2DBA4BC09BD248A715BF5D84181E0C" name="UUID_Qcar">
-				<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
+			<field_ref uuid="2DB51CB40B38B84999B7E4D2B4FDCF7D" name="UUID_Company">
+				<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
 			</field_ref>
 		</related_field>
 		<related_field kind="destination">
-			<field_ref uuid="129BD267EFE06D4EBCF1E64FCE762186" name="UUID">
-				<table_ref uuid="446AB1ED27F3664C9C9747DD14114EF2" name="Qcar"/>
+			<field_ref uuid="CFBA7599E861DC4A91A0C1B26781C297" name="UUID">
+				<table_ref uuid="A0C8CDC075BBB546914E03F7689B897E" name="Supplier"/>
 			</field_ref>
 		</related_field>
 	</relation>
@@ -2836,6 +2836,18 @@
 		<related_field kind="destination">
 			<field_ref uuid="34E9F9D48BE14DCD95127852F83BF1FB" name="UUID">
 				<table_ref uuid="2C75E07E18FC4733A8C98A0B31D40656" name="sfw_User"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="FBF8DFBD3EB3B54A8CF39C9449C75497" name_Nto1="status" name_1toN="audits" state="1">
+		<related_field kind="source">
+			<field_ref uuid="A8752F9F9EA00D49B87C2D3786BA417A" name="UUID_AuditStatus">
+				<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="9B44F9ED4FE59A46966ECF6D35DD27CA" name="UUID">
+				<table_ref uuid="86FDD37E294EC746A4557D00E52217ED" name="AuditStatus"/>
 			</field_ref>
 		</related_field>
 	</relation>
@@ -3049,6 +3061,11 @@
 			<table_ref uuid="AD9AFF574E6E2745A70D65CE48ABAB7E" name="dfd_Line"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="280403135D488C40B1111F754C08E10E" type="1">
+		<field_ref uuid="8D9FB8C795534689B56DE1CC69FD3D14" name="UUID">
+			<table_ref uuid="894004274A3B4909A39584EC0B879D18" name="Role"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="2A8FF9A5455141689A96101C4A7D5338" type="3">
 		<field_ref uuid="2E2FF42359124C978D041A838CB8866E" name="UUID_User">
 			<table_ref uuid="0A7AAD6A6AAB448E9F91A0CF0CC592C6" name="sfw_SchedulerLog"/>
@@ -3082,11 +3099,6 @@
 	<index kind="regular" uuid="34F76064C30E2F4C9C144E533921C827" type="3">
 		<field_ref uuid="0CA34F14FEE5FF429B1A694BD2DD1C6B" name="UUID_Staff">
 			<table_ref uuid="89B8693B8BA31D46A5E7CC5F40548E73" name="Membership"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="36194DDF2D313B49AB131AEBB4CCB639" type="1">
-		<field_ref uuid="8D9FB8C795534689B56DE1CC69FD3D14" name="UUID">
-			<table_ref uuid="894004274A3B4909A39584EC0B879D18" name="Role"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="37DD5B98EEBB504BA55FB5367243C469" type="3">
@@ -3259,14 +3271,14 @@
 			<table_ref uuid="CA853413921F4B2A9BC70E6DE5F88235" name="Inventory"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="5F118F2AF095D7429BAF68939D07A6E5" type="3">
+		<field_ref uuid="6DB56F7ABADF7841B4031D951E68ADC3" name="UUID_Customer">
+			<table_ref uuid="694C4B7F93874E5BA8093878C35952BF" name="Contact"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="5F5C17476B8F481D93BCC7DBFA70DAF2" type="3">
 		<field_ref uuid="8A589FC02D27422896AAEB8585D15059" name="UUID_target">
 			<table_ref uuid="E82BBE2952C449BE995135760C788E8F" name="sfw_Comment"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="5F6E78C4B0166E4A955D56F383F0EA32" type="1">
-		<field_ref uuid="DA4CBDC76C3AAB41B11CAF5A7306B820" name="rmaNumber">
-			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="600ACB50FB7D97468EEBEA94AB7BB795" type="7">
@@ -3292,11 +3304,6 @@
 	<index kind="regular" unique_keys="true" uuid="63FD0912E575514B8DED3ADA8CE00BE3" type="1">
 		<field_ref uuid="DDEAA2AF9B9A44BD99857817933C03AA" name="UUID">
 			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="66A0A03D4F238E4185442A28FB736EEE" type="1">
-		<field_ref uuid="AF643B21840FF74A90FA006ABD3AB6A3" name="UUID">
-			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="675DDEA34102494283E12FCAE91573AD" type="3">
@@ -3834,6 +3841,11 @@
 			<table_ref uuid="05967663C56F44398D96379354ABCC89" name="sfw_Setting"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="D50C1CBC0B59A342AF4CC046234250E0" type="1">
+		<field_ref uuid="DA4CBDC76C3AAB41B11CAF5A7306B820" name="rmaNumber">
+			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="D51C853D9AFABD498BDFCE7495ADA289" type="1">
 		<field_ref uuid="BD7F2A41DD18FE47B8E8F4AD6C1EE62D" name="UUID">
 			<table_ref uuid="97D73747E1BC924A8B02AAF6C525C798" name="ProcessType"/>
@@ -3917,6 +3929,11 @@
 	<index kind="regular" uuid="E1AF2C1E50FF9B48B7E1243D38EB15A1" type="3">
 		<field_ref uuid="1FBF2EAB42691642930AB78E5C113913" name="UUID_Quote">
 			<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="E1CD0EAD0E71BC4DB2716D1E36DF6570" type="1">
+		<field_ref uuid="AF643B21840FF74A90FA006ABD3AB6A3" name="UUID">
+			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="E3FE6D69E136D048AE44F2672D4110DE" type="1">
