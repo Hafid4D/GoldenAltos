@@ -24,8 +24,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 440,
-				"top": 287,
+				"left": 467,
+				"top": 286,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -2153,6 +2153,14 @@
 		}
 	},
 	"relations": {
+		"FBF8DFBD3EB3B54A8CF39C9449C75497": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"CF558440884CD84E9F39268E6E74624F": {
 			"color": {
 				"red": 240,
@@ -2161,7 +2169,7 @@
 				"alpha": 0
 			}
 		},
-		"4AA8439DBD366C4AA81A8F055DBFB727": {
+		"A42CA698B074BA48A2701B05262B020E": {
 			"color": {
 				"red": 240,
 				"green": 240,
