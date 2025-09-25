@@ -201,7 +201,7 @@ Function drawToolbar($identVision : Text)
 			OBJECT SET HELP TIP:C1181(*; "bToolbar_"+String:C10($iconNum); ds:C1482.sfw_readXliff($entry.xliff; $entry.label))
 			Case of 
 				: (cs:C1710.sfw_definition.me.globalParameters.toolbar.entryIconsSameWidth)
-					$width_bToolbar:=$width_bToolbar_max
+					$width_bToolbar:=$width_bToolbar_max+10
 				: (cs:C1710.sfw_definition.me.globalParameters.toolbar.entryIconsAutoWidth)
 					OBJECT GET BEST SIZE:C717(*; "bToolbar_"+String:C10($iconNum); $width_bToolbar; $bestHight)
 				Else 

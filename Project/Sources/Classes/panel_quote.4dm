@@ -449,7 +449,7 @@ Function buildQuotePreview()
 	WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 	WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 	$contactFirstName:=$preview.contactFirstName || ""
-	WP SET TEXT:C1574($paragraph; "  Dear "+$preview.contactFirstName; wk append:K81:179)
+	WP SET TEXT:C1574($paragraph; "  Dear "+$contactFirstName; wk append:K81:179)
 	WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)
 	WP SET TEXT:C1574($paragraph; "We are pleased to submit to you the following quotation:"; wk append:K81:179)
 	WP Insert break:C1413($paragraph; wk line break:K81:186; wk append:K81:179)

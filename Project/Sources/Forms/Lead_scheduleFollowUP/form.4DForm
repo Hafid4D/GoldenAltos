@@ -9,8 +9,6 @@
 	"windowMinHeight": 0,
 	"windowMaxWidth": 32767,
 	"windowMaxHeight": 32767,
-	"rightMargin": 20,
-	"bottomMargin": 20,
 	"events": [
 		"onLoad",
 		"onPageChange",
@@ -76,7 +74,8 @@
 					"width": 438,
 					"height": 32,
 					"fill": "#00A4A4",
-					"stroke": "transparent"
+					"stroke": "transparent",
+					"sizingX": "grow"
 				},
 				"Text": {
 					"type": "text",
@@ -102,7 +101,8 @@
 					"width": 261,
 					"height": 17,
 					"dataSourceTypeHint": "text",
-					"dataSource": "Form:C1466.followUPDate"
+					"dataSource": "Form:C1466.followUPDate",
+					"sizingX": "grow"
 				},
 				"btnDatePickerCreate": {
 					"type": "button",
@@ -123,7 +123,8 @@
 					"visibility": "visible",
 					"iconFrames": 4,
 					"focusable": false,
-					"dataSource": ""
+					"dataSource": "",
+					"sizingX": "move"
 				},
 				"pup_sales": {
 					"type": "button",
@@ -142,7 +143,8 @@
 					"method": "ObjectMethods/pup_sales.4dm",
 					"events": [
 						"onClick"
-					]
+					],
+					"sizingX": "grow"
 				},
 				"Text4": {
 					"type": "text",
@@ -168,7 +170,9 @@
 					"height": 145,
 					"dataSourceTypeHint": "text",
 					"dataSource": "Form:C1466.notes",
-					"multiline": "yes"
+					"multiline": "yes",
+					"sizingY": "grow",
+					"sizingX": "grow"
 				},
 				"pup_contact": {
 					"type": "button",
@@ -187,7 +191,8 @@
 					"method": "ObjectMethods/pup_contact.4dm",
 					"events": [
 						"onClick"
-					]
+					],
+					"sizingX": "grow"
 				},
 				"Text6": {
 					"type": "text",
@@ -214,7 +219,8 @@
 					"method": "ObjectMethods/pup_trigger.4dm",
 					"events": [
 						"onClick"
-					]
+					],
+					"sizingX": "grow"
 				},
 				"Text7": {
 					"type": "text",
@@ -227,7 +233,7 @@
 			}
 		}
 	],
-	"geometryStamp": 162,
+	"geometryStamp": 183,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
@@ -235,5 +241,6 @@
 			"View 1": {}
 		}
 	},
-	"method": "method.4dm"
+	"method": "method.4dm",
+	"bottomMargin": 20
 }

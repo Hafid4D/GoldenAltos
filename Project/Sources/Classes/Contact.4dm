@@ -10,6 +10,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setDisplayOrder(-700)
 	$entry.setIcon("image/entry/contact-white-50x50.png")
 	
+	$entry.setSearchboxField("fullName")
 	$entry.setSearchboxField("companyName"; "placeholder:companyName")
 	
 	$entry.setPanelPage(1; "staff-32x32.png"; "Main")

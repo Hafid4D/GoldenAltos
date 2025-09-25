@@ -280,7 +280,7 @@
 					"type": "button",
 					"top": 9,
 					"left": 457,
-					"width": 177,
+					"width": 196,
 					"height": 20,
 					"fontFamily": "System Font",
 					"fontSize": 13,
@@ -1082,7 +1082,7 @@
 			}
 		}
 	],
-	"geometryStamp": 778,
+	"geometryStamp": 779,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {
