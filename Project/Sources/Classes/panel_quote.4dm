@@ -506,8 +506,9 @@ Function buildQuotePreview()
 	$paragraphs:=WP Get elements:C1550($section; wk type paragraph:K81:191)
 	$paragraph:=$paragraphs[$paragraphs.length-1]
 	WP SET ATTRIBUTES:C1342($paragraph; wk width:K81:45; "auto")
-	WP Insert document body:C1411($paragraph; Form:C1466.current_item.optionalPreliminaryTxt_wr; wk append:K81:179)
-	
+	If (Form:C1466.current_item.optionalPreliminaryTxt_wr.title#Null:C1517)
+		WP Insert document body:C1411($paragraph; Form:C1466.current_item.optionalPreliminaryTxt_wr; wk append:K81:179)
+	End if 
 	
 	$paragraphs:=WP Get elements:C1550($section; wk type paragraph:K81:191)
 	$paragraph:=$paragraphs[$paragraphs.length-1]

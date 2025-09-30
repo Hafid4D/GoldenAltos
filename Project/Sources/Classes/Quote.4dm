@@ -32,6 +32,12 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setLBItemsOrderBy("subject")
 	
+	$entry.setValidationRule("UUID_Staff"; ""; "UUIDNotNull"; "message:The owner must be defined")
+	$entry.setValidationRule("UUID_Customer"; ""; "UUIDNotNull"; "message:The customer must be defined")
+	
+	
+	
+	
 	$entry.enableTransaction()
 	
 	$entry.activateEvent("QuoteEvent"; "UUID_Quote")
