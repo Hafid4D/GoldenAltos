@@ -82,10 +82,10 @@
 				},
 				"pup_QuoteStatus": {
 					"type": "button",
-					"top": 34,
+					"top": 35,
 					"left": 835,
-					"width": 172,
-					"height": 23,
+					"width": 196,
+					"height": 20,
 					"fontFamily": "System Font",
 					"fontSize": 13,
 					"focusable": false,
@@ -112,7 +112,7 @@
 					"type": "input",
 					"top": 62,
 					"left": 113,
-					"width": 187,
+					"width": 162,
 					"height": 16,
 					"dataSource": "Form:C1466.current_item.dateCreation",
 					"focusable": false,
@@ -203,10 +203,10 @@
 				},
 				"pup_QuoteRevision": {
 					"type": "button",
-					"top": 59,
+					"top": 60,
 					"left": 835,
-					"width": 172,
-					"height": 23,
+					"width": 196,
+					"height": 20,
 					"fontFamily": "System Font",
 					"fontSize": 13,
 					"focusable": false,
@@ -320,6 +320,26 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none"
+				},
+				"btnDatePicker": {
+					"type": "button",
+					"text": " ",
+					"top": 61,
+					"left": 282,
+					"width": 18,
+					"height": 18,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/calendar.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnDatePicker.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false,
+					"dataSource": ""
 				}
 			}
 		},
@@ -1082,7 +1102,7 @@
 			}
 		}
 	],
-	"geometryStamp": 779,
+	"geometryStamp": 798,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {

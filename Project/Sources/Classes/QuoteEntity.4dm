@@ -114,6 +114,15 @@ Function get dateCreation()->$createDate : Date
 Function set dateCreation($createDate : Date)
 	This:C1470.stmpCreation:=cs:C1710.sfw_stmp.me.build($createDate)
 	
+	
+Function get yearCreation()->$year : Integer
+	$year:=Year of:C25(Date:C102(This:C1470.dateCreation))
+	
+Function get monthCreation()->$month : Integer
+	$month:=Month of:C24(Date:C102(This:C1470.dateCreation))
+	
+	
+	
 Function get amount()->$amountText : Text
 	$amount:=This:C1470.lines.sum("amount")
 	$amountText:="$"+String:C10($amount; "###,###,###,#00.00")
@@ -176,6 +185,8 @@ local Function metaColor()->$meta : Object
 	//Mark:-call back functions
 local Function beforeSaveCreation()
 	This:C1470.code:=This:C1470.calculateCode()
+	This:C1470.addAssumptions()
+	This:C1470.addTermsAndConditions()
 	
 	
 	
@@ -187,3 +198,27 @@ Function calculateCode()->$leadCode : Text
 	
 	
 	
+Function addAssumptions()
+	
+	$assumptions:=ds:C1482.Assumption.all().distinct("UUID")
+	If (This:C1470.assumptions=Null:C1517)
+		This:C1470.assumptions:=New object:C1471()
+	End if 
+	If (This:C1470.assumptions.UUIDs=Null:C1517)
+		This:C1470.assumptions.UUIDs:=New collection:C1472()
+	End if 
+	This:C1470.assumptions.UUIDs:=$assumptions
+	
+	
+Function addTermsAndConditions()
+	
+	$terms:=ds:C1482.TermCondition.all().distinct("UUID")
+	If (This:C1470.termsConditions=Null:C1517)
+		This:C1470.termsConditions:=New object:C1471()
+	End if 
+	If (This:C1470.termsConditions.UUIDs=Null:C1517)
+		This:C1470.termsConditions.UUIDs:=New collection:C1472()
+	End if 
+	
+	
+	This:C1470.termsConditions.UUIDs:=$terms

@@ -9,6 +9,20 @@ Function formMethod()
 		If (Form:C1466.current_item.code="")
 			Form:C1466.current_item.code:=This:C1470.calculateCode()
 		End if 
+		
+		If (Form:C1466.current_item.dateCreation=!00-00-00!)
+			Form:C1466.current_item.dateCreation:=Current date:C33()
+		End if 
+		
+		If (Form:C1466.current_item.staff=Null:C1517)
+			If (cs:C1710.sfw_userManager.me.info.UUID_Staff#Null:C1517)
+				Form:C1466.current_item.staff:=ds:C1482.Staff.query("UUID = :1"; cs:C1710.sfw_userManager.me.info.UUID_Staff).first()
+			Else 
+				
+			End if 
+		End if 
+		
+		
 		This:C1470.drawPup_staff()
 		This:C1470.loadAllTabs()
 	End if 
@@ -56,6 +70,23 @@ Function formMethod()
 			This:C1470.onBoundVariableChange()
 			
 	End case 
+	
+	
+Function btnDatePicker($object; $attribut)
+	
+	$form:=New object:C1471
+	$form.date:=$object[$attribut]
+	
+	OBJECT GET COORDINATES:C663(Self:C308->; $left; $top; $rigth; $bottom)
+	CONVERT COORDINATES:C1365($left; $bottom; XY Current form:K27:5; XY Main window:K27:8)
+	Open window:C153($left; $bottom; $left+285; $bottom+210; Movable dialog box:K34:7; "calendar")
+	DIALOG:C40("_ga_calendar"; $form)
+	
+	If (OK=1)
+		$object[$attribut]:=$form.calendar.display.date
+		This:C1470._activate_save_cancel_button()
+	End if 
+	
 	
 Function calculateCode()->$leadCode : Text
 	$leadCode:="Q"
@@ -236,16 +267,11 @@ Function displayQuoteLine()
 	OBJECT SET VISIBLE:C603(*; "label_quoteLine@"; Form:C1466.current_quoteLine#Null:C1517)
 	OBJECT SET VISIBLE:C603(*; "entryField_quoteLine@"; Form:C1466.current_quoteLine#Null:C1517)
 	
-	//If (Form.current_quoteLine=Null)
-	//OBJECT SET VISIBLE(*; "label_quoteLine@"; False)
-	//OBJECT SET VISIBLE(*; "entryField_quoteLine@"; False)
-	//Else 
-	//OBJECT SET VISIBLE(*; "label_quoteLine@"; True)
-	//OBJECT SET VISIBLE(*; "entryField_quoteLine@"; True)
-	//End if 
-	
 Function loadAssumptions()
-	Form:C1466.lb_assumptions:=ds:C1482.Assumption.query("UUID in :1"; Form:C1466.current_item.assumptions.UUIDs)
+	If (Form:C1466.current_item.assumptions.UUIDs#Null:C1517)
+		Form:C1466.lb_assumptions:=ds:C1482.Assumption.query("UUID in :1"; Form:C1466.current_item.assumptions.UUIDs)
+	End if 
+	
 	
 Function bActionAssumptions()
 	$mainMenu:=Create menu:C408
@@ -307,7 +333,10 @@ Function bActionAssumptions()
 	End case 
 	
 Function loadTermsConditions()
-	Form:C1466.lb_terms:=ds:C1482.TermCondition.query("UUID in :1"; Form:C1466.current_item.termsConditions.UUIDs)
+	If (Form:C1466.current_item.termsConditions.UUIDs)
+		Form:C1466.lb_terms:=ds:C1482.TermCondition.query("UUID in :1"; Form:C1466.current_item.termsConditions.UUIDs)
+	End if 
+	
 	
 Function bActionTerms()
 	$mainMenu:=Create menu:C408
@@ -623,7 +652,7 @@ Function drawPup_quoteStatus()
 		$parts:=New collection:C1472($quoteStatus.code; $quoteStatus.name)
 		$statusName:=$parts.join(" - "; ck ignore null or empty:K85:5)
 		If ($statusName="")
-			$statusName:=" "
+			$statusName:=""
 		End if 
 		$color:=cs:C1710.sfw_htmlColor.me.getName($quoteStatus.color)
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"

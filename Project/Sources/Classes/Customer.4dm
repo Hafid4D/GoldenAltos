@@ -26,6 +26,15 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setLBItemsOrderBy("name")
 	
+	//mark:-Projection
+	$entry.setItemListProjection("Projection to quotes"; "projectionToQuotes"; "quote"; "salesAndQuotes")
+	$entry.setItemListProjection("Projection to leads"; "projectionToLeads"; "lead"; "salesAndQuotes")
+	
+	
+	$entry.allowMultiSelectionInLB("###,###,##0 ^1;;"; "unit1:customer selected"; "unitN:customers selected"; "nbMinimum:2")
+	
+	
+	
 	
 	// MARK: -Filters
 	$filter:=cs:C1710.sfw_definitionFilter.new("filterCustomerStatus")

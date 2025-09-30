@@ -836,6 +836,7 @@ Function bActionInteractions()
 	var $status : cs:C1710.InteractionTypeEntity
 	var $selection : cs:C1710.InteractionSelection:=ds:C1482.Interaction.newSelection()
 	
+	
 	If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.interactionType=Null:C1517)
 		ds:C1482.InteractionType.cacheLoad()
 	End if 

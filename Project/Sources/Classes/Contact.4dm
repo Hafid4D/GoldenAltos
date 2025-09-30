@@ -19,6 +19,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("companyName"; "Company name"; "width:200")
 	//$entry.setLBItemsColumn("title"; "Title"; "width:100")
 	$entry.setLBItemsOrderBy("companyName")
+	$entry.setMainViewLabel("All contacts")
 	
 	$entry.enableTransaction()
 	
