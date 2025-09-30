@@ -589,29 +589,6 @@
 					"fontSize": 12,
 					"fontWeight": "bold"
 				},
-				"pup_approvedBy": {
-					"type": "button",
-					"top": 444,
-					"left": 739,
-					"width": 70,
-					"height": 23,
-					"fontFamily": "System Font",
-					"fontSize": 13,
-					"focusable": false,
-					"text": "",
-					"icon": "",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/pup_approvedBy.4dm",
-					"events": [
-						"onClick",
-						"onDisplayDetail"
-					],
-					"right": 809,
-					"fontWeight": "normal",
-					"textAlign": "left"
-				},
 				"label_approvedBy": {
 					"type": "text",
 					"top": 447,
@@ -750,6 +727,27 @@
 					"textAlign": "left",
 					"bottom": 188,
 					"right": 463
+				},
+				"entryField_approver": {
+					"type": "input",
+					"top": 447,
+					"left": 739,
+					"width": 70,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.approvedBy",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "normal",
+					"textAlign": "left",
+					"bottom": 464,
+					"dataSourceTypeHint": "number"
 				}
 			}
 		},
@@ -826,7 +824,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 785,
+	"geometryStamp": 790,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

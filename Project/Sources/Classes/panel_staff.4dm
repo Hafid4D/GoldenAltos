@@ -83,7 +83,7 @@ Function loadCertifications()
 	
 	$find:=""
 	
-	$find:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($1.value=$2)); "qa")
+	$find:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($1.value=$2)); "qm")
 	
 	If ($find#"")
 		//TRACE
@@ -130,7 +130,7 @@ Function manageCertification()
 			This:C1470._activate_save_cancel_button()
 			
 		: (FORM Event:C1606.code=On Clicked:K2:4)
-			$find:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($1.value=$2)); "qa")
+			$find:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($1.value=$2)); "qm")
 			
 			If ($find#"")
 				
@@ -370,3 +370,4 @@ Function drawPup_citizenshipStatus()
 	If (Form:C1466.current_item#Null:C1517)
 		Form:C1466.sfw.drawButtonPup("pup_citizenshipStatus"; Form:C1466.current_item.citizenShipStatus; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.citizenShipStatus=Null:C1517))
 	End if 
+	

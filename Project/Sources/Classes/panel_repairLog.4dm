@@ -56,6 +56,36 @@ Function redrawAndSetVisible()
 			
 	End case 
 	
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		$eUser:=cs:C1710.sfw_UserEntity
+		
+		$eUser:=ds:C1482.sfw_User.query("login = :1"; Current user:C182).first()
+		
+		If ($eUser#Null:C1517)
+			
+			$approverProfile:=New collection:C1472("qs"; "pm")
+			$hasAuthorizedProfile:=$eUser.userInscriptions.extract("userProfile").query("ident in :1"; $approverProfile).length>0
+			
+			$isFromAuthorizedTeam:=$eUser.staffs.query("fullName =:1"; Current user:C182).memberships.query("team.name =:1"; "Facilities").length>0
+			
+			$hasAuthorizationToApprove:=($hasAuthorizedProfile | $isFromAuthorizedTeam)
+			OBJECT SET ENABLED:C1123(*; "pup_reportOperator"; $hasAuthorizationToApprove)
+			
+			$isFromAuthorizedTeam:=$eUser.staffs.query("fullName =:1"; Current user:C182).memberships.query("team.name =:1"; "Facilities").length>0
+			OBJECT SET ENABLED:C1123(*; "pup_fixOperator"; $isFromAuthorizedTeam)
+			
+			$isFromAuthorizedTeam:=$eUser.staffs.query("fullName =:1"; Current user:C182).memberships.query("team.name =:1"; "Facilities").length>0
+			OBJECT SET ENABLED:C1123(*; "entryField_isApproved"; $hasAuthorizedProfile)
+			OBJECT SET ENABLED:C1123(*; "entryField_approvalDate"; $hasAuthorizedProfile)
+			OBJECT SET ENABLED:C1123(*; "entryField_approvedBy"; $hasAuthorizedProfile)
+			OBJECT SET VISIBLE:C603(*; "PopupDate"; $hasAuthorizedProfile)
+			
+			
+		End if 
+		
+	End if 
+	
 	Form:C1466.sfw.drawHTab()
 	
 	

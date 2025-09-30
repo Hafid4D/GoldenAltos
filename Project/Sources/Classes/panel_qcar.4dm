@@ -53,6 +53,28 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "subform_qcar"; $left; $top; $right; $heightSubform-$offset)
 	End case 
 	
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		$eUser:=cs:C1710.sfw_UserEntity
+		
+		$eUser:=ds:C1482.sfw_User.query("login = :1"; Current user:C182).first()
+		
+		$approverProfile:=New collection:C1472("qs"; "qm")
+		If ($eUser#Null:C1517)
+			$hasAuthorizedProfile:=$eUser.userInscriptions.extract("userProfile").query("ident in :1"; $approverProfile).length>0
+			
+			OBJECT SET ENABLED:C1123(*; "entryField_issuedTo"; $hasAuthorizedProfile)
+			OBJECT SET ENABLED:C1123(*; "EntryField_issuedBy"; $hasAuthorizedProfile)
+			OBJECT SET ENABLED:C1123(*; "entryField_approvalDate"; $hasAuthorizedProfile)
+			OBJECT SET ENABLED:C1123(*; "entryField_verifiedDate"; $hasAuthorizedProfile)
+			OBJECT SET ENABLED:C1123(*; "entryField_verifiedBy"; $hasAuthorizedProfile)
+			OBJECT SET ENABLED:C1123(*; "entryField_verified"; $hasAuthorizedProfile)
+			
+		End if 
+		
+	End if 
+	
+	
 Function qcarManage()
 	If (Form:C1466.current_item#Null:C1517)
 		If (Form:C1466.situation.mode="add")

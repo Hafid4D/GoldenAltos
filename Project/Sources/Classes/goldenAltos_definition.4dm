@@ -198,14 +198,14 @@ Function _visions_definition()
 	$vision.setToolbarBackgroundColor("DarkCyan")
 	$vision.setFocusRingColor("darkred")
 	$vision.setIcon("image/vision/quality-assurance-24x24.png")
-	//$vision.setAllowedProfiles("qa")
+	//$vision.setAllowedProfiles("qm")
 	This:C1470._push_vision($vision)
 	
 	$vision:=cs:C1710.sfw_definitionVision.new("salesAndQuotes"; "Sales & Quotes")
 	$vision.setToolbarBackgroundColor("DarkCyan")
 	$vision.setFocusRingColor("darkred")
 	$vision.setIcon("image/vision/sales-and-quotes-24x24.png")
-	//$vision.setAllowedProfiles("qa")
+	//$vision.setAllowedProfiles("qm")
 	This:C1470._push_vision($vision)
 	
 	
@@ -256,12 +256,11 @@ Function _entries_definition()
 	This:C1470._push_entry($entry)
 	
 Function _profiles_definition()
-	$eQA:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("qa"; "Quality Assitance"; "autoCreation")
-	
-	//$ePM:=ds.sfw_UserProfile.getAndCreateIfNotExist("pm"; "project manager"; "autoCreation")
-	//$eAM:=ds.sfw_UserProfile.getAndCreateIfNotExist("am"; "account manager"; "autoCreation")
-	//$eTAM:=ds.sfw_UserProfile.getAndCreateIfNotExist("tam"; "technical account manager"; "autoCreation")
-	//$eTest:=ds.sfw_UserProfile.getAndCreateIfNotExist("tst"; "tester"; "autoCreation")
+	$eQM:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("qm"; "Quality Manager"; "autoCreation")
+	$eDC:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("dc"; "Document Control"; "autoCreation")
+	$eQI:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("qi"; "Quality Inspector"; "autoCreation")
+	$eQS:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("qs"; "Quality Supervisor"; "autoCreation")
+	$ePM:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("pm"; "Production Manager"; "autoCreation")
 	
 Function _documentFolders_definition()
 	

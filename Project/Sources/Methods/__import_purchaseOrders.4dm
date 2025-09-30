@@ -349,7 +349,7 @@ If (True:C214)
 	TRUNCATE TABLE:C1051([Location:47])
 	TRUNCATE TABLE:C1051([Unit:48])
 	TRUNCATE TABLE:C1051([Classification:59])
-
+	
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/inventory_export.json")
 	
@@ -669,14 +669,14 @@ If (True:C214)
 	TRUNCATE TABLE:C1051([Staff:135])
 	TRUNCATE TABLE:C1051([sfw_User:16])
 	
-	//$user:=ds.sfw_User.new()
-	//$user.firstName:="Hassan"
-	//$user.lastName:="Sribet"
-	//$user.login:="hassansribet"
-	//$user.accesses:=JSON Parse("{\"asDesigner\":true,\"password\":{\"temporary\":false,\"sendTemporaryByMail\":false,\"lastReset\":705253775,\"hash\":\"$2b$10$cLpZxBy5QcJCQ0K5DbscjuC3KC2bUblf0l5IJLtByF342d6OFlmFS\",\"lastChange\":705253879}}")
-	//$user.asDesigner:=True
+	$user:=ds:C1482.sfw_User.new()
+	$user.firstName:="Hassan"
+	$user.lastName:="Sribet"
+	$user.login:="hassansribet"
+	$user.accesses:=JSON Parse:C1218("{\"asDesigner\":true,\"password\":{\"temporary\":false,\"sendTemporaryByMail\":false,\"lastReset\":705253775,\"hash\":\"$2b$10$cLpZxBy5QcJCQ0K5DbscjuC3KC2bUblf0l5IJLtByF342d6OFlmFS\",\"lastChange\":705253879}}")
+	$user.asDesigner:=True:C214
 	
-	//$res:=$user.save()
+	$res:=$user.save()
 	
 	If (Not:C34($res.success))
 		TRACE:C157
@@ -699,13 +699,13 @@ If (True:C214)
 		TRACE:C157
 	End if 
 	
-	//$user:=ds.sfw_User.new()
-	//$user.firstName:="Omar"
-	//$user.lastName:="Debbagh"
-	//$user.login:="omardebbagh"
-	//$user.accesses:=JSON Parse("{\"asDesigner\":true,\"password\":{\"temporary\":false,\"sendTemporaryByMail\":false,\"lastReset\":706358866,\"hash\":\"$2b$10$jWCPtle9cInwDJfVJbCrsecHbiVfbbBISVGEOOGXMILflvJnv9aJG\",\"lastChange\":706358916}}")
+	$user:=ds:C1482.sfw_User.new()
+	$user.firstName:="Omar"
+	$user.lastName:="Debbagh"
+	$user.login:="omardebbagh"
+	$user.accesses:=JSON Parse:C1218("{\"asDesigner\":true,\"password\":{\"temporary\":false,\"sendTemporaryByMail\":false,\"lastReset\":706358866,\"hash\":\"$2b$10$jWCPtle9cInwDJfVJbCrsecHbiVfbbBISVGEOOGXMILflvJnv9aJG\",\"lastChange\":706358916}}")
 	
-	//$res:=$user.save()
+	$res:=$user.save()
 	
 	If (Not:C34($res.success))
 		TRACE:C157
@@ -754,7 +754,7 @@ If (True:C214)
 	TRUNCATE TABLE:C1051([Membership:137])
 	TRUNCATE TABLE:C1051([Role:132])
 	TRUNCATE TABLE:C1051([StaffRole:63])
-	TRUNCATE TABLE:C1051([Staff:135])
+	//TRUNCATE TABLE([Staff])
 	
 	SET DATABASE PARAMETER:C642([Staff:135]; Table sequence number:K37:31; 0)
 	
@@ -764,6 +764,12 @@ If (True:C214)
 		$staff_e.code:=String:C10($staff_e.codeID; "00000#")
 		$staff_e.firstName:=$staff.firstName
 		$staff_e.lastName:=$staff.lastName
+		
+		$staff_e.contactDetails:=New object:C1471(\
+			"addresses"; New collection:C1472(); \
+			"communications"; New collection:C1472()\
+			)
+		
 		
 		$res:=$staff_e.save()
 		
@@ -825,6 +831,9 @@ If (True:C214)
 					TRACE:C157
 				End if 
 			End for each 
+			
+			
+			
 		End if 
 	End for each 
 End if 
