@@ -40,7 +40,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setPictoLabel("/RESOURCES/ga/image/picto/verified-qcars-16x16.png")
 	$entry.setView($view)
 	
-	//$entry.setAllowedProfiles("qa")
+	//$entry.setAllowedProfiles(qm)
 	
 	$entry.enableTransaction()
 	

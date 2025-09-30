@@ -65,55 +65,22 @@
 					"dataSourceTypeHint": "number",
 					"textAlign": "left"
 				},
-				"label_partyName": {
-					"type": "text",
-					"top": 38,
-					"left": 12,
-					"width": 143,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Interested Party Name ",
-					"bottom": 55,
-					"right": 155,
-					"textAlign": "right",
-					"fontWeight": "normal"
-				},
-				"entryField_interestedParty": {
-					"type": "input",
-					"top": 38,
-					"left": 170,
-					"width": 200,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.interestedParty",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "normal",
-					"textAlign": "left",
-					"bottom": 55
-				},
 				"label_externalID": {
 					"type": "text",
-					"top": 65,
+					"top": 38,
 					"left": 12,
 					"width": 143,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "External ID ",
-					"bottom": 82,
+					"bottom": 55,
 					"right": 155,
 					"textAlign": "right",
 					"fontWeight": "normal"
 				},
 				"entryField_externalID": {
 					"type": "input",
-					"top": 65,
+					"top": 38,
 					"left": 170,
 					"width": 200,
 					"height": 17,
@@ -129,22 +96,7 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 82
-				},
-				"bInterestedPartyEdit": {
-					"type": "button",
-					"text": "",
-					"top": 30,
-					"left": 374,
-					"width": 30,
-					"height": 32,
-					"events": [
-						"onClick"
-					],
-					"style": "custom",
-					"icon": "/RESOURCES/sfw/image/skin/rainbow/btn4states/edit-24x24.png",
-					"iconFrames": 4,
-					"method": "ObjectMethods/bInterestedPartyEdit.4dm"
+					"bottom": 55
 				},
 				"backgroundRectangle": {
 					"type": "rectangle",
@@ -243,8 +195,8 @@
 				"label_0_10": {
 					"type": "text",
 					"top": 65,
-					"left": 410,
-					"width": 134,
+					"left": 12,
+					"width": 143,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Requirement/Procedure#",
@@ -254,7 +206,7 @@
 				"entryField_requirement": {
 					"type": "input",
 					"top": 65,
-					"left": 559,
+					"left": 170,
 					"width": 200,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.requirement",
@@ -270,7 +222,7 @@
 					"fontWeight": "normal",
 					"textAlign": "left",
 					"bottom": 82,
-					"right": 759
+					"right": 370
 				}
 			}
 		},
@@ -828,10 +780,10 @@
 				"bResponsibleEdit": {
 					"type": "button",
 					"text": "",
-					"top": 421,
+					"top": 423,
 					"left": 761,
-					"width": 30,
-					"height": 32,
+					"width": 28,
+					"height": 28,
 					"events": [
 						"onClick"
 					],
@@ -848,6 +800,54 @@
 					"width": 332,
 					"height": 17,
 					"right": 741
+				},
+				"label_partyName": {
+					"type": "text",
+					"top": 456,
+					"left": 12,
+					"width": 143,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Interested Party Name ",
+					"bottom": 473,
+					"right": 155,
+					"textAlign": "right",
+					"fontWeight": "normal"
+				},
+				"entryField_interestedParty": {
+					"type": "input",
+					"top": 456,
+					"left": 169,
+					"width": 589,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.interestedParty",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "normal",
+					"textAlign": "left",
+					"bottom": 473
+				},
+				"bInterestedPartyEdit": {
+					"type": "button",
+					"text": "",
+					"top": 452,
+					"left": 761,
+					"width": 28,
+					"height": 28,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"icon": "/RESOURCES/sfw/image/skin/rainbow/btn4states/edit-24x24.png",
+					"iconFrames": 4,
+					"method": "ObjectMethods/bInterestedPartyEdit.4dm"
 				}
 			}
 		},
@@ -992,7 +992,7 @@
 			}
 		}
 	],
-	"geometryStamp": 804,
+	"geometryStamp": 838,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"editor": {
 		"activeView": "View 1",
