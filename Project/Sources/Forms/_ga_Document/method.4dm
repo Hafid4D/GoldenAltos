@@ -13,7 +13,7 @@ Case of
 		
 		If ($eUser#Null:C1517)
 			
-			If (Form:C1466.approverProfile=Null:C1517)
+			If (Form:C1466.approverProfile#Null:C1517)
 				$hasAuthorizedProfile:=$eUser.userInscriptions.extract("userProfile").query("ident in :1"; Form:C1466.approverProfile).length>0
 			End if 
 			

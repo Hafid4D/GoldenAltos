@@ -137,6 +137,9 @@
 		<field name="addendumToSpec" uuid="4DB9F8A21A12A14398F05AF7C5F1BA5D" type="10" limiting_length="255" never_null="true" id="16"/>
 		<field name="reviewIntervalInDays" uuid="7413D34B72ACD04A8DAD654BFE162AAF" type="4" never_null="true" id="17"/>
 		<field name="stmpReviewDate" uuid="87FFB43152B5CB40B41CA4ABE12A9474" type="4" never_null="true" id="18"/>
+		<field name="isApproved" uuid="6E95A7D0C58BDC4899360EE36C97D369" type="1" never_null="true" id="19"/>
+		<field name="approver" uuid="2015FC7753D0DF4A80971FE195909538" type="10" limiting_length="255" never_null="true" id="20"/>
+		<field name="stmpApproval" uuid="9F6075D8C50BA54DB4FB0DAE5ADCAB9C" type="4" never_null="true" id="21"/>
 		<primary_key field_name="UUID" field_uuid="2A671DFB01797B4DBB6EC2EB4216DB75"/>
 	</table>
 	<table name="CustomerEvent" uuid="0846217DF6043D4ABB7910378EBDF68A" id="11">
@@ -1413,7 +1416,7 @@
 		<field name="team" uuid="1E5EF93B7320A24E8F9E93B474D9694A" type="21" blob_switch_size="2147483647" never_null="true" id="13">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="UUID_Department" uuid="DBBC9E80F752DA41B020E37A427026A0" type="10" store_as_UUID="true" never_null="true" id="14"/>
+		<field name="UUID_Team" uuid="DBBC9E80F752DA41B020E37A427026A0" type="10" store_as_UUID="true" never_null="true" id="14"/>
 		<field name="UUID_Company" uuid="2DB51CB40B38B84999B7E4D2B4FDCF7D" type="10" store_as_UUID="true" never_null="true" id="15"/>
 		<field name="scope" uuid="8E0E8373DAB562408B730459DD2A881F" type="10" never_null="true" id="16"/>
 		<field name="objectives" uuid="9A4C1C5F3931294483602CD3E64FD393" type="10" never_null="true" id="17"/>
@@ -2796,6 +2799,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="B352F441EBF22147B64DF438FAFD3EC6" name_Nto1="team" name_1toN="audits" state="1">
+		<related_field kind="source">
+			<field_ref uuid="DBBC9E80F752DA41B020E37A427026A0" name="UUID_Team">
+				<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="2407878C5D46474F9669463CE4A10D45" name="UUID">
+				<table_ref uuid="7B297BB3C8DBDA42B6756D36DC233D8B" name="Team"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="005E48A922A4464DB92973931B467ACF" type="3">
 		<field_ref uuid="17F71D68FA714CE9A75ED79CA63E3BE2" name="UUID_Lead">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
@@ -3917,7 +3932,7 @@
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="F1BBE0A36C76D248B875D6BF4E6D87D7" type="3">
-		<field_ref uuid="DBBC9E80F752DA41B020E37A427026A0" name="UUID_Department">
+		<field_ref uuid="DBBC9E80F752DA41B020E37A427026A0" name="UUID_Team">
 			<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
 		</field_ref>
 	</index>

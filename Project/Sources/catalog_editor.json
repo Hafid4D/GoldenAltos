@@ -128,7 +128,7 @@
 				"UUID_Company": {
 					"position": 15
 				},
-				"UUID_Department": {
+				"UUID_Team": {
 					"position": 14
 				},
 				"team": {
@@ -1892,12 +1892,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2820.015625,
-				"top": 0,
+				"left": 2826.015625,
+				"top": 1,
 				"width": 258.697265625,
-				"height": 453.33203125
+				"height": 526.33203125
 			},
-			"displayable_fields_count": 19
+			"displayable_fields_count": 23
 		},
 		"sfw_DocumentFolder": {
 			"color": {
@@ -2137,6 +2137,14 @@
 		}
 	},
 	"relations": {
+		"B352F441EBF22147B64DF438FAFD3EC6": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"FBF8DFBD3EB3B54A8CF39C9449C75497": {
 			"color": {
 				"red": 240,
