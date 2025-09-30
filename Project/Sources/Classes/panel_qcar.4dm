@@ -65,10 +65,13 @@ Function redrawAndSetVisible()
 			
 			OBJECT SET ENABLED:C1123(*; "entryField_issuedTo"; $hasAuthorizedProfile)
 			OBJECT SET ENABLED:C1123(*; "EntryField_issuedBy"; $hasAuthorizedProfile)
-			OBJECT SET ENABLED:C1123(*; "entryField_approvalDate"; $hasAuthorizedProfile)
+			OBJECT SET ENABLED:C1123(*; "entryField_issuedDate"; $hasAuthorizedProfile)
 			OBJECT SET ENABLED:C1123(*; "entryField_verifiedDate"; $hasAuthorizedProfile)
 			OBJECT SET ENABLED:C1123(*; "entryField_verifiedBy"; $hasAuthorizedProfile)
 			OBJECT SET ENABLED:C1123(*; "entryField_verified"; $hasAuthorizedProfile)
+			
+			OBJECT SET VISIBLE:C603(*; "dp_verifiedDate"; $hasAuthorizedProfile)
+			OBJECT SET VISIBLE:C603(*; "dp_issuedDate"; $hasAuthorizedProfile)
 			
 		End if 
 		

@@ -57,7 +57,7 @@ Function redrawAndSetVisible()
 	End case 
 	
 	If (Form:C1466.sfw.checkIsInModification())
-		
+		OBJECT SET ENABLED:C1123(*; "entryField_approvedBy"; False:C215)
 		$eUser:=cs:C1710.sfw_UserEntity
 		
 		$eUser:=ds:C1482.sfw_User.query("login = :1"; Current user:C182).first()
@@ -78,7 +78,7 @@ Function redrawAndSetVisible()
 			$isFromAuthorizedTeam:=$eUser.staffs.query("fullName =:1"; Current user:C182).memberships.query("team.name =:1"; "Facilities").length>0
 			OBJECT SET ENABLED:C1123(*; "entryField_isApproved"; $hasAuthorizedProfile)
 			OBJECT SET ENABLED:C1123(*; "entryField_approvalDate"; $hasAuthorizedProfile)
-			OBJECT SET ENABLED:C1123(*; "entryField_approvedBy"; $hasAuthorizedProfile)
+			
 			OBJECT SET VISIBLE:C603(*; "PopupDate"; $hasAuthorizedProfile)
 			
 			

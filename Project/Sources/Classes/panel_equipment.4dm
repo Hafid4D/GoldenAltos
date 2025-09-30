@@ -432,7 +432,7 @@ Function bActionDocument()
 				
 				Form:C1466.lb_documents.push($form.details)
 				
-				//Form.current_item.reports.documents.push($form.details)
+				Form:C1466.current_item.reports.documents.push($form.details)
 				cs:C1710.panel_equipment.me._activate_save_cancel_button()
 				
 			End if 
@@ -442,7 +442,8 @@ Function bActionDocument()
 			
 			$form:=New object:C1471(\
 				"details"; Form:C1466.current_item.reports.documents[Form:C1466.selectedDocumentPos-1])  // Form.selectedDocument)
-			
+			$form.approverProfile:=New collection:C1472("qs")
+			$form.approverTeam:=New collection:C1472("Facilities")
 			$form.operation:="modify"
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
@@ -452,7 +453,7 @@ Function bActionDocument()
 				
 				Form:C1466.selectedDocument:=$form.details
 				
-				//Form.current_item.reports.documents.push($form.details)
+				Form:C1466.current_item.reports.documents.push($form.details)
 				cs:C1710.panel_equipment.me._activate_save_cancel_button()
 				
 			End if 
@@ -466,7 +467,7 @@ Function bActionDocument()
 				
 				Form:C1466.lb_documents.remove(Form:C1466.selectedDocumentPos-1)
 				
-				// Form.current_item.reports.documents.remove(Form.selectedDocumentPos-1)
+				Form:C1466.current_item.reports.documents.remove(Form:C1466.selectedDocumentPos-1)
 				cs:C1710.panel_equipment.me._activate_save_cancel_button()
 				
 			End if 

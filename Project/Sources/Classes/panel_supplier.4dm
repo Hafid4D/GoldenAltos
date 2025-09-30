@@ -255,7 +255,7 @@ Function bActionDocument()
 			DIALOG:C40("_ga_document"; $form)
 			If (OK=1)
 				Form:C1466.lb_documents.push($form.details)
-				//Form.current_item.attachedDocuments.documents.push($form.details)
+				Form:C1466.current_item.attachedDocuments.documents.push($form.details)
 				cs:C1710.panel_supplier.me._activate_save_cancel_button()
 			End if 
 			
@@ -263,14 +263,14 @@ Function bActionDocument()
 		: ($choice="--modify")
 			
 			$form:=New object:C1471("details"; Form:C1466.current_item.attachedDocuments.documents[Form:C1466.selectedDocumentPos-1])
-			
+			$form.approverProfile:=New collection:C1472("qs"; "qm")
 			$form.operation:="modify"
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_document"; $form)
 			If (OK=1)
 				Form:C1466.selectedDocument:=$form.details
-				//Form.current_item.attachedDocuments.documents.push($form.details)
+				Form:C1466.current_item.attachedDocuments.documents.push($form.details)
 				cs:C1710.panel_supplier.me._activate_save_cancel_button()
 			End if 
 			
@@ -280,7 +280,7 @@ Function bActionDocument()
 			If ($ok)
 				
 				Form:C1466.lb_documents.remove(Form:C1466.selectedDocumentPos-1)
-				//Form.current_item.attachedDocuments.documents.remove(Form.selectedDocumentPos-1)
+				Form:C1466.current_item.attachedDocuments.documents.remove(Form:C1466.selectedDocumentPos-1)
 				cs:C1710.panel_supplier.me._activate_save_cancel_button()
 				
 			End if 

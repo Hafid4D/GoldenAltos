@@ -2831,6 +2831,11 @@
 			<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="0306DB29F5A8004786832E06A7B3F240" type="1">
+		<field_ref uuid="DA4CBDC76C3AAB41B11CAF5A7306B820" name="rmaNumber">
+			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="031249732BE5714E8D57906FBC93768C" type="3">
 		<field_ref uuid="8E4BF5B27969464981C64AD7543BE951" name="UUID_Quote">
 			<table_ref uuid="1E733AC1BDB87C40B151040C49BD164B" name="Lead"/>
@@ -3036,11 +3041,6 @@
 			<table_ref uuid="348628FCA4DC451085D7519B226BD509" name="QuoteLine"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="3356DC5591E67A4DA8C3DB4774A605C2" type="1">
-		<field_ref uuid="DA4CBDC76C3AAB41B11CAF5A7306B820" name="rmaNumber">
-			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
-		</field_ref>
-	</index>
 	<index kind="regular" uuid="34F76064C30E2F4C9C144E533921C827" type="3">
 		<field_ref uuid="0CA34F14FEE5FF429B1A694BD2DD1C6B" name="UUID_Staff">
 			<table_ref uuid="89B8693B8BA31D46A5E7CC5F40548E73" name="Membership"/>
@@ -3171,7 +3171,7 @@
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="546FE00ACABC2A459BF1FFD3D6D4954C" type="1">
+	<index kind="regular" unique_keys="true" uuid="51D65A3D3E839C4E900E4FA6591BBD52" type="1">
 		<field_ref uuid="AF643B21840FF74A90FA006ABD3AB6A3" name="UUID">
 			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
 		</field_ref>
@@ -3919,6 +3919,11 @@
 	<index kind="regular" uuid="F1BBE0A36C76D248B875D6BF4E6D87D7" type="3">
 		<field_ref uuid="DBBC9E80F752DA41B020E37A427026A0" name="UUID_Department">
 			<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="F9027BC9CC6E8C4FA7DB6346C4CBB5F4" type="1">
+		<field_ref uuid="DA4CBDC76C3AAB41B11CAF5A7306B820" name="rmaNumber">
+			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
 		</field_ref>
 	</index>
 	<base_extra data_file_path=":HWMHp.4DD">
