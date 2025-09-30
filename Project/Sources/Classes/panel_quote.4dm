@@ -333,7 +333,7 @@ Function bActionAssumptions()
 	End case 
 	
 Function loadTermsConditions()
-	If (Form:C1466.current_item.termsConditions.UUIDs)
+	If (Form:C1466.current_item.termsConditions.UUIDs#Null:C1517)
 		Form:C1466.lb_terms:=ds:C1482.TermCondition.query("UUID in :1"; Form:C1466.current_item.termsConditions.UUIDs)
 	End if 
 	
