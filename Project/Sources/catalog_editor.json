@@ -193,8 +193,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 681,
-				"top": 605,
+				"left": 828,
+				"top": 529,
 				"width": 228,
 				"height": 582.33203125
 			},
@@ -949,22 +949,6 @@
 				}
 			}
 		},
-		"RMA": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			},
-			"coordinates": {
-				"left": 503,
-				"top": 784,
-				"width": 120,
-				"height": 167.33203125
-			},
-			"displayable_fields_count": 6,
-			"fields_ordering": 1
-		},
 		"StaffRole": {
 			"color": {
 				"red": 255,
@@ -1317,6 +1301,75 @@
 				"height": 212.33203125
 			},
 			"displayable_fields_count": 8
+		},
+		"RMA": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 542,
+				"top": 729.33203125,
+				"width": 158.373046875,
+				"height": 398.33203125
+			},
+			"displayable_fields_count": 17,
+			"fields_ordering": 2,
+			"fields": {
+				"customerPo": {
+					"position": 15
+				},
+				"stmpReceived": {
+					"position": 17
+				},
+				"customerSvc": {
+					"position": 14
+				},
+				"qaQc": {
+					"position": 13
+				},
+				"materialDisposition": {
+					"position": 12
+				},
+				"reasonForReturn": {
+					"position": 11
+				},
+				"stmpClose": {
+					"position": 16
+				},
+				"status": {
+					"position": 10
+				},
+				"description": {
+					"position": 9
+				},
+				"phone": {
+					"position": 8
+				},
+				"authorizedBy": {
+					"position": 7
+				},
+				"invoiceNumber": {
+					"position": 6
+				},
+				"contact": {
+					"position": 5
+				},
+				"partNumber": {
+					"position": 4
+				},
+				"rmaNumber": {
+					"position": 3
+				},
+				"UUID_Qcar": {
+					"position": 2
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
 		},
 		"StepSpec": {
 			"color": {
@@ -2798,6 +2851,14 @@
 				"red": 255,
 				"green": 255,
 				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"C837E79703352945913A5A2AD4B6BDF2": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
 				"alpha": 0
 			}
 		}

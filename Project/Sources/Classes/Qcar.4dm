@@ -45,6 +45,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.enableTransaction()
 	
 	$entry.setItemAction("Print Report"; "QCARS_print_corrective_report")
+	$entry.setItemAction("Print RMA"; "QCARS_print_rma_report")
 	
 	
 Function openQcars()->$qcars : cs:C1710.QcarSelection
