@@ -2579,18 +2579,6 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="3AC0AC688CF06C4ABA1B8F54C7A176B3" name_Nto1="lot_e" name_1toN="inventories" state="1">
-		<related_field kind="source">
-			<field_ref uuid="7FEE97DA30A98742B2582F6CEDCCAE66" name="UUID_Lot">
-				<table_ref uuid="CA853413921F4B2A9BC70E6DE5F88235" name="Inventory"/>
-			</field_ref>
-		</related_field>
-		<related_field kind="destination">
-			<field_ref uuid="AEF78036FB7D429A96DF35BE53A0E0AF" name="UUID">
-				<table_ref uuid="67220A81398C4000A84C1F180E368020" name="Lot"/>
-			</field_ref>
-		</related_field>
-	</relation>
 	<relation uuid="10727A709C83D84C81934A0D0DCF318D" name_Nto1="lotParent" name_1toN="subLots" state="1">
 		<related_field kind="source">
 			<field_ref uuid="BAF908735168A94093DFC22B57192BF3" name="UUID_LotParent">
@@ -2806,11 +2794,6 @@
 			<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="0306DB29F5A8004786832E06A7B3F240" type="1">
-		<field_ref uuid="DA4CBDC76C3AAB41B11CAF5A7306B820" name="rmaNumber">
-			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
-		</field_ref>
-	</index>
 	<index kind="regular" uuid="031249732BE5714E8D57906FBC93768C" type="3">
 		<field_ref uuid="8E4BF5B27969464981C64AD7543BE951" name="UUID_Quote">
 			<table_ref uuid="1E733AC1BDB87C40B151040C49BD164B" name="Lead"/>
@@ -2869,11 +2852,6 @@
 	<index kind="regular" uuid="0D9AF7545E59F44DB4E3E9F768C2AC71" type="7">
 		<field_ref uuid="B32B6631D46552418CA3ABAB9D7C7B45" name="model">
 			<table_ref uuid="FCE2D049B8944E4CA0AAB0152A549718" name="Equipment"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="0E3B7A242EEBA14799A1820EC2549386" type="1">
-		<field_ref uuid="8D9FB8C795534689B56DE1CC69FD3D14" name="UUID">
-			<table_ref uuid="894004274A3B4909A39584EC0B879D18" name="Role"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="0EFF5E4E14EE464B892F04231017597F" type="3">
@@ -3171,11 +3149,6 @@
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="51D65A3D3E839C4E900E4FA6591BBD52" type="1">
-		<field_ref uuid="AF643B21840FF74A90FA006ABD3AB6A3" name="UUID">
-			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
-		</field_ref>
-	</index>
 	<index kind="regular" unique_keys="true" uuid="56055D62FB10E34284F6A64FDAB1B5C4" type="7">
 		<field_ref uuid="319814755AB5A945864EA37F29F3FDE1" name="UUID">
 			<table_ref uuid="4EB6C9D117A3DC4B91D031D6BC0C7DA9" name="CustomerCarrier"/>
@@ -3316,14 +3289,14 @@
 			<table_ref uuid="29604671FA2A4476BBFC5BF467B80F05" name="Revision"/>
 		</field_ref>
 	</index>
-	<index kind="regular" uuid="7590604B48EADD4D8FBA805883A81D46" type="3">
-		<field_ref uuid="378FB0F2EB71F243BA08605B15A340E4" name="UUID_Team">
-			<table_ref uuid="89B8693B8BA31D46A5E7CC5F40548E73" name="Membership"/>
-		</field_ref>
-	</index>
 	<index kind="regular" uuid="74F1AF279ECC8E488AC880523D14A504" type="3">
 		<field_ref uuid="92E85CDB4FCA9E4EABDCC6C8061D6E32" name="UUID_Qcar">
 			<table_ref uuid="A58980BC7EB27B42960AE8925366922F" name="RMA"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="7590604B48EADD4D8FBA805883A81D46" type="3">
+		<field_ref uuid="378FB0F2EB71F243BA08605B15A340E4" name="UUID_Team">
+			<table_ref uuid="89B8693B8BA31D46A5E7CC5F40548E73" name="Membership"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="760FF94F8E4F8148896D2CB3C7AA51C4" type="7">
@@ -3904,11 +3877,6 @@
 	<index kind="regular" uuid="F1BBE0A36C76D248B875D6BF4E6D87D7" type="3">
 		<field_ref uuid="DBBC9E80F752DA41B020E37A427026A0" name="UUID_Team">
 			<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="F9027BC9CC6E8C4FA7DB6346C4CBB5F4" type="1">
-		<field_ref uuid="DA4CBDC76C3AAB41B11CAF5A7306B820" name="rmaNumber">
-			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="F2C1B363EE9A4D4DBA58D427D32D9429" type="7">
