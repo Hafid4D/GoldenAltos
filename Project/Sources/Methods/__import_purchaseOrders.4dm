@@ -665,7 +665,7 @@ End if
 /**
 Create user: sfw_User & Staff tables
 **/
-If (True:C214)
+If (False:C215)
 	TRUNCATE TABLE:C1051([Staff:135])
 	TRUNCATE TABLE:C1051([sfw_User:16])
 	
@@ -754,7 +754,7 @@ If (True:C214)
 	TRUNCATE TABLE:C1051([Membership:137])
 	TRUNCATE TABLE:C1051([Role:132])
 	TRUNCATE TABLE:C1051([StaffRole:63])
-	//TRUNCATE TABLE([Staff])
+	TRUNCATE TABLE:C1051([Staff:135])
 	
 	SET DATABASE PARAMETER:C642([Staff:135]; Table sequence number:K37:31; 0)
 	
