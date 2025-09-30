@@ -183,6 +183,31 @@ local Function metaColor()->$meta : Object
 	
 	
 	//Mark:-call back functions
+local Function itemLoad()
+	$assumptions:=ds:C1482.Assumption.all().distinct("UUID")
+	If (This:C1470.assumptions=Null:C1517)
+		This:C1470.assumptions:=New object:C1471()
+	End if 
+	If (This:C1470.assumptions.UUIDs=Null:C1517)
+		This:C1470.assumptions.UUIDs:=New collection:C1472()
+		This:C1470.assumptions.UUIDs:=$assumptions
+	End if 
+	
+	$terms:=ds:C1482.TermCondition.all().distinct("UUID")
+	If (This:C1470.termsConditions=Null:C1517)
+		This:C1470.termsConditions:=New object:C1471()
+	End if 
+	If (This:C1470.termsConditions.UUIDs=Null:C1517)
+		This:C1470.termsConditions.UUIDs:=New collection:C1472()
+		This:C1470.termsConditions.UUIDs:=$terms
+	End if 
+	
+	
+	
+	
+	
+	
+	
 local Function beforeSaveCreation()
 	This:C1470.code:=This:C1470.calculateCode()
 	This:C1470.addAssumptions()
