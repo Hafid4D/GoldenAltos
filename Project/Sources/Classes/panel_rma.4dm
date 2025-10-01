@@ -24,6 +24,23 @@ Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	This:C1470.hideDatePickers()
 	
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		$eUser:=cs:C1710.sfw_UserEntity
+		
+		$eUser:=ds:C1482.sfw_User.query("login = :1"; Current user:C182).first()
+		
+		$approverProfile:=New collection:C1472("qs"; "qm")
+		If ($eUser#Null:C1517)
+			$hasAuthorizedProfile:=$eUser.userInscriptions.extract("userProfile").query("ident in :1"; $approverProfile).length>0
+			
+			OBJECT SET ENABLED:C1123(*; "entryField_qaQc"; $hasAuthorizedProfile)
+			
+		End if 
+		
+	End if 
+	
+	
 Function hideDatePickers()
 	OBJECT SET VISIBLE:C603(*; "dp_@"; Form:C1466.sfw.checkIsInModification())
 	
