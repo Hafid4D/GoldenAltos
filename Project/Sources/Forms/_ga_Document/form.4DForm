@@ -256,7 +256,7 @@
 					"textAlign": "right",
 					"fontWeight": "bold"
 				},
-				"Check Box": {
+				"isApproved": {
 					"type": "checkbox",
 					"text": "QA Approval",
 					"top": 127,
@@ -269,11 +269,12 @@
 					"dataSourceTypeHint": "boolean",
 					"fontWeight": "normal",
 					"right": 452,
-					"dataSource": "Form:C1466.details.isApproved"
+					"dataSource": "Form:C1466.details.isApproved",
+					"method": "ObjectMethods/isApproved.4dm"
 				},
 				"Text3": {
 					"type": "text",
-					"text": "Approved date",
+					"text": "Approval date",
 					"top": 198,
 					"left": 7,
 					"width": 102,
@@ -301,7 +302,7 @@
 					"textAlign": "right",
 					"fontWeight": "bold"
 				},
-				"Input8": {
+				"approvedBy": {
 					"type": "input",
 					"left": 151,
 					"top": 165,
@@ -309,7 +310,8 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.details.approvedBy"
+					"dataSource": "Form:C1466.details.approvedBy",
+					"enterable": false
 				},
 				"Text16": {
 					"type": "text",
@@ -321,7 +323,7 @@
 					"textAlign": "right",
 					"fontWeight": "bold"
 				},
-				"Field_approvalDate": {
+				"approvalDate": {
 					"type": "input",
 					"left": 151,
 					"top": 197,
@@ -337,7 +339,7 @@
 				},
 				"Text1": {
 					"type": "text",
-					"text": "Appproved by",
+					"text": "Approver code",
 					"top": 167,
 					"left": 7,
 					"width": 102,
@@ -382,7 +384,7 @@
 					"events": [
 						"onClick"
 					],
-					"action": "accept",
+					"action": "",
 					"shortcutAccel": false,
 					"shortcutControl": false,
 					"shortcutShift": false,
@@ -479,7 +481,7 @@
 			}
 		}
 	],
-	"geometryStamp": 215,
+	"geometryStamp": 218,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

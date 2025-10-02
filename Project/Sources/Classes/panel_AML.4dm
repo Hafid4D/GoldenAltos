@@ -42,6 +42,24 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_supplier()
 	
 	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
+	
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		$eUser:=cs:C1710.sfw_UserEntity
+		
+		$eUser:=ds:C1482.sfw_User.query("login = :1"; Current user:C182).first()
+		
+		$approverProfile:=New collection:C1472("qs"; "qm")
+		If ($eUser#Null:C1517)
+			$hasAuthorizedProfile:=$eUser.userInscriptions.extract("userProfile").query("ident in :1"; $approverProfile).length>0
+			
+			OBJECT SET ENABLED:C1123(*; "entryField_isApproved"; $hasAuthorizedProfile)
+			OBJECT SET ENABLED:C1123(*; "entryField_approver"; $hasAuthorizedProfile)
+			OBJECT SET ENABLED:C1123(*; "entryField_approvalDate"; $hasAuthorizedProfile)
+			
+		End if 
+		
+	End if 
 	Form:C1466.sfw.drawHTab()
 	
 	

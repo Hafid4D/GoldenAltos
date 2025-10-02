@@ -204,13 +204,13 @@ Function btnOpenCompany()
 	
 Function drawPup_departement()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.current_item.drowPup("Department"; "UUID"; "UUID_Department"; "pup_departement")
+		Form:C1466.current_item.drowPup("Department"; "UUID"; "UUID_Team"; "pup_departement")
 	End if 
 	
 	
 Function pup_departement()
 	//Create pop up menu
-	Form:C1466.current_item.pup("departements"; "Department"; "UUID"; "UUID_Department")
+	Form:C1466.current_item.pup("departements"; "Department"; "UUID"; "UUID_Team")
 	This:C1470.drawPup_departement()
 	
 	

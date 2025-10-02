@@ -40,11 +40,12 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setPictoLabel("/RESOURCES/ga/image/picto/verified-qcars-16x16.png")
 	$entry.setView($view)
 	
-	//$entry.setAllowedProfiles("qa")
+	//$entry.setAllowedProfiles(qm)
 	
 	$entry.enableTransaction()
 	
 	$entry.setItemAction("Print Report"; "QCARS_print_corrective_report")
+	$entry.setItemAction("Print RMA"; "QCARS_print_rma_report")
 	
 	
 Function openQcars()->$qcars : cs:C1710.QcarSelection

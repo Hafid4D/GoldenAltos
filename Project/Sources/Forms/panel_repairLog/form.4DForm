@@ -753,7 +753,8 @@
 					],
 					"dataSource": "Form:C1466.current_item.isApproved",
 					"fontWeight": "normal",
-					"dataSourceTypeHint": "boolean"
+					"dataSourceTypeHint": "boolean",
+					"method": "ObjectMethods/entryField_isApproved.4dm"
 				},
 				"PopupDate": {
 					"type": "subform",

@@ -8,8 +8,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 40,
-				"top": 2510,
+				"left": 12,
+				"top": 2285,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -26,22 +26,6 @@
 			"coordinates": {
 				"left": 467,
 				"top": 286,
-				"width": 120,
-				"height": 167.33203125
-			},
-			"displayable_fields_count": 6,
-			"fields_ordering": 1
-		},
-		"Department": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			},
-			"coordinates": {
-				"left": 1941,
-				"top": 943.66662597656,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -144,7 +128,7 @@
 				"UUID_Company": {
 					"position": 15
 				},
-				"UUID_Department": {
+				"UUID_Team": {
 					"position": 14
 				},
 				"team": {
@@ -193,8 +177,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 681,
-				"top": 605,
+				"left": 828,
+				"top": 529,
 				"width": 228,
 				"height": 582.33203125
 			},
@@ -209,8 +193,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2469,
-				"top": 391.66796875,
+				"left": 2526,
+				"top": 376.66796875,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -241,8 +225,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2121.4692382812,
-				"top": 567.47967529297,
+				"left": 2135.4692382812,
+				"top": 557.47967529297,
 				"width": 226.30639648438,
 				"height": 417.9924621582
 			},
@@ -334,8 +318,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1975,
-				"top": 595,
+				"left": 2315,
+				"top": 359,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -931,8 +915,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 247.20071411133,
-				"top": 0.52043914794922,
+				"left": 240.20071411133,
+				"top": 7.62939453125E-06,
 				"width": 182,
 				"height": 232.33203125
 			},
@@ -949,22 +933,6 @@
 				}
 			}
 		},
-		"RMA": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			},
-			"coordinates": {
-				"left": 503,
-				"top": 784,
-				"width": 120,
-				"height": 167.33203125
-			},
-			"displayable_fields_count": 6,
-			"fields_ordering": 1
-		},
 		"StaffRole": {
 			"color": {
 				"red": 255,
@@ -973,10 +941,10 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1952,
-				"top": 748,
-				"width": 119.671875,
-				"height": 104.33203125
+				"left": 1978,
+				"top": 644,
+				"width": 122.671875,
+				"height": 124.33203125
 			},
 			"displayable_fields_count": 3
 		},
@@ -1317,6 +1285,75 @@
 				"height": 212.33203125
 			},
 			"displayable_fields_count": 8
+		},
+		"RMA": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 542,
+				"top": 729.33203125,
+				"width": 158.373046875,
+				"height": 398.33203125
+			},
+			"displayable_fields_count": 17,
+			"fields_ordering": 2,
+			"fields": {
+				"customerPo": {
+					"position": 15
+				},
+				"stmpReceived": {
+					"position": 17
+				},
+				"customerSvc": {
+					"position": 14
+				},
+				"qaQc": {
+					"position": 13
+				},
+				"materialDisposition": {
+					"position": 12
+				},
+				"reasonForReturn": {
+					"position": 11
+				},
+				"stmpClose": {
+					"position": 16
+				},
+				"status": {
+					"position": 10
+				},
+				"description": {
+					"position": 9
+				},
+				"phone": {
+					"position": 8
+				},
+				"authorizedBy": {
+					"position": 7
+				},
+				"invoiceNumber": {
+					"position": 6
+				},
+				"contact": {
+					"position": 5
+				},
+				"partNumber": {
+					"position": 4
+				},
+				"rmaNumber": {
+					"position": 3
+				},
+				"UUID_Qcar": {
+					"position": 2
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
 		},
 		"StepSpec": {
 			"color": {
@@ -1908,12 +1945,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2820.015625,
-				"top": 0,
+				"left": 2826.015625,
+				"top": 1,
 				"width": 258.697265625,
-				"height": 453.33203125
+				"height": 526.33203125
 			},
-			"displayable_fields_count": 19
+			"displayable_fields_count": 23
 		},
 		"sfw_DocumentFolder": {
 			"color": {
@@ -2150,656 +2187,6 @@
 				"height": 268.15802001953
 			},
 			"displayable_fields_count": 10
-		}
-	},
-	"relations": {
-		"FBF8DFBD3EB3B54A8CF39C9449C75497": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"CF558440884CD84E9F39268E6E74624F": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"A42CA698B074BA48A2701B05262B020E": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"36DD83EE5A35AA46B2C4808AFAEB9040": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"10727A709C83D84C81934A0D0DCF318D": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"18E921374C52F243882D443A49032F38": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"3C23E0F423789746B7C3CCBDA2F0BB48": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"797CC71F57ABA44A8A7CEF5E0BB3122F": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"3B172FB0C738E148A8C8B4CF9E8B5019": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"FC14A35413BB26458BA778E50E40F64F": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"6A7F6B7A673D4C4A88D4EF3C41A44E09": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"78C267F9FD9FB64EB96B0BA2021CA475": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"3AC0AC688CF06C4ABA1B8F54C7A176B3": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"FBC0F8D58BEE4D468E32DAE301646C43": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"7244ED91755F7E4DBD92D5DF80C5724E": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"277BE58DF3CA1E4ABBD5DD685B4B762E": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"955D7429936EA745A291C959AF600BA3": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"69CAE96E3D9AEC4CAEFC4614328AC072": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"C094CCAE645E404288AD6D06B0055F16": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"6DC2F4D462B73A4EA57FC5CF4B485D48": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"0A7463FE0FCEC94EA2A2F79201C0A462": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"CC7FA698F6998C4BBA34F1464A6A7E30": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"F9A518D72A481949B5ADB68DA975EE6A": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"C60AC1EB28D5CD45AC93BCDF4ADFE38C": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"3209E38B53909145B2E7C20384F5F5C0": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"A28F33D93BF32F42AF61697D6DDDAF45": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"A99D1043A588BB4286DB331DC8266D35": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"5353B4D22D663942A1EE2AA86278AAE8": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"B6538AB6C0F9174B8E4C993C9C6D4AEE": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"1B51D73996015F4D9E201259802D52BA": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"96B3C280735714459AB0879D2376BCC9": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"AB2454F1B5B6FE4E93B14808E478CD69": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"B11C0BD997CA7A449E5DBF942E8A30B6": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"935904C8F2EAE94A9D2D25CADEA390E4": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"85096A5E94564B19A0DB035D1B689839": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"309393617FBD4C159CCC9DA605D0AD2A": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"3D75BC15FEE941B8802DEACACC2C7566": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"F525F81F4C1F4801B743AD30F535F348": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"C25C35B1A209492C83653EC7F60E5561": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"ABCDD9EC48614C7C93F6B133B4942C86": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"AD6BBF2F268242C0B04A46CEBCCC5DEA": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"FC01FE8AFB1B4C998C2ECA9DDCE44478": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"068E44D3BD334FFF88492120C25B4C9A": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"C09BC2389C8D4BF6BFF5034684908093": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"DBA2364367CE440FBDE4F5879B7D3579": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"048335A1E87F481DA33D76A3585C79EE": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"0593618F32AA47E0B03B170604C8D3B2": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"6120D9486B32444088E89AFECD087224": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"AE19CBDB010A4D53BA5D456EB90C3671": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"42BCCE20373BB84ABBBDF798B52E0EA3": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"4397240B422CC64C80533458CFAD745E": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"C4A8CC154AD81D4D986804038C278648": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"F7A12367E0E7E44682B1512B34B69AAC": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"45A43F51ED95C047B8A7E61F371E3C59": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"BB1DFB317C5D463D9934C6D6D89016BA": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"ECC18FA98010492F9CECB0539C699C53": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"DBBCF9672F086D48A93D8C8AC22B8557": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"7535E31683B9724F9BD5369549E72CA1": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"64B0D1E2168AB04DAF6DA8C01B5BE75C": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"501938D48107BD4E89B47217F659169B": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"586EE5400CA2464DBBE3B9162480749C": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"53BB40AE7C83FC4384BE73C431F1DB89": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"169DABBC5600C0469F8583F46BDCDFA4": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"ADD3451DE4C0DF41A843F29EF0A9F98F": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"F6F0A513B569CF478CD5428CF28D8E51": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"FDC5A1E6258BD846948597EDE0DBB2A7": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"21F24064B21BD049B14117B76DB3F13A": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"F4287A8F63DFD843A448C38B9636BE8D": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"955286728075C248B78E5075BB881DB4": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"9C3AD456B7975A40B4C15270FF7B5D8F": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"84BF33579076854CB20F845EFFAB3BED": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"F8BCB75C48864E4594EEFCFEB523C3EE": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"0302D12C89828444A3C8D136FC09412A": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"BCF4A60895A2A543A55AEF7B2BCAF5D3": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"DB8D79B14BDE42479CDD27271248450D": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"2AD91F4788D14BC589D0DC658413CE3C": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"4EEBB3B3CDCE4E4D8FB9E78C0A56728C": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"761F023AC9E24FF8B9A7192BD1698794": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"11F0C8076E4447F69CE41059EC85B05C": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"0DF1DB360B8B48BE84653E6CA2F326BE": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"020C26A086DA424C9FD1FFACE8A52D62": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
 		}
 	}
 }
