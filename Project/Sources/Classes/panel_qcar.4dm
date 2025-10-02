@@ -55,25 +55,21 @@ Function redrawAndSetVisible()
 	
 	If (Form:C1466.sfw.checkIsInModification())
 		
-		$eUser:=cs:C1710.sfw_UserEntity
-		
-		$eUser:=ds:C1482.sfw_User.query("login = :1"; Current user:C182).first()
-		
 		$approverProfile:=New collection:C1472("qs"; "qm")
-		If ($eUser#Null:C1517)
-			$hasAuthorizedProfile:=$eUser.userInscriptions.extract("userProfile").query("ident in :1"; $approverProfile).length>0
-			
-			OBJECT SET ENABLED:C1123(*; "entryField_issuedTo"; $hasAuthorizedProfile)
-			OBJECT SET ENABLED:C1123(*; "EntryField_issuedBy"; $hasAuthorizedProfile)
-			OBJECT SET ENABLED:C1123(*; "entryField_issuedDate"; $hasAuthorizedProfile)
-			OBJECT SET ENABLED:C1123(*; "entryField_verifiedDate"; $hasAuthorizedProfile)
-			OBJECT SET ENABLED:C1123(*; "entryField_verifiedBy"; $hasAuthorizedProfile)
-			OBJECT SET ENABLED:C1123(*; "entryField_verified"; $hasAuthorizedProfile)
-			
-			OBJECT SET VISIBLE:C603(*; "dp_verifiedDate"; $hasAuthorizedProfile)
-			OBJECT SET VISIBLE:C603(*; "dp_issuedDate"; $hasAuthorizedProfile)
-			
-		End if 
+		
+		$hasAuthorizedProfile:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($approverProfile.indexOf($1.value)#-1)))#Null:C1517
+		
+		OBJECT SET ENABLED:C1123(*; "entryField_issuedTo"; $hasAuthorizedProfile)
+		OBJECT SET ENABLED:C1123(*; "EntryField_issuedBy"; $hasAuthorizedProfile)
+		OBJECT SET ENABLED:C1123(*; "entryField_issuedDate"; $hasAuthorizedProfile)
+		OBJECT SET ENABLED:C1123(*; "entryField_verifiedDate"; $hasAuthorizedProfile)
+		OBJECT SET ENABLED:C1123(*; "entryField_verifiedBy"; $hasAuthorizedProfile)
+		OBJECT SET ENABLED:C1123(*; "entryField_verified"; $hasAuthorizedProfile)
+		
+		OBJECT SET VISIBLE:C603(*; "dp_verifiedDate"; $hasAuthorizedProfile)
+		OBJECT SET VISIBLE:C603(*; "dp_issuedDate"; $hasAuthorizedProfile)
+		
+		
 		
 	End if 
 	

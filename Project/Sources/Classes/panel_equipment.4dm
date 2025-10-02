@@ -430,7 +430,7 @@ Function bActionDocument()
 			
 			If (OK=1)
 				
-				Form:C1466.lb_documents.push($form.details)
+				//Form.lb_documents.push($form.details)
 				
 				Form:C1466.current_item.reports.documents.push($form.details)
 				cs:C1710.panel_equipment.me._activate_save_cancel_button()
@@ -451,9 +451,9 @@ Function bActionDocument()
 			
 			If (OK=1)
 				
-				Form:C1466.selectedDocument:=$form.details
+				//Form.selectedDocument:=$form.details
 				
-				Form:C1466.current_item.reports.documents.push($form.details)
+				Form:C1466.current_item.reports.documents[Form:C1466.selectedDocumentPos-1]:=$form.details
 				cs:C1710.panel_equipment.me._activate_save_cancel_button()
 				
 			End if 
@@ -465,17 +465,19 @@ Function bActionDocument()
 			
 			If ($ok)
 				
-				Form:C1466.lb_documents.remove(Form:C1466.selectedDocumentPos-1)
+				//Form.lb_documents.remove(Form.selectedDocumentPos-1)
 				
 				Form:C1466.current_item.reports.documents.remove(Form:C1466.selectedDocumentPos-1)
 				cs:C1710.panel_equipment.me._activate_save_cancel_button()
 				
 			End if 
 			
-			// This.loadDocuments()
-			
 			//________________________________________
 	End case 
+	
+	This:C1470.loadDocuments()
+	
+	
 	
 Function btnDatePicker($object; $attribut)
 	

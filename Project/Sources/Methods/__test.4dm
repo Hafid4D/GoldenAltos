@@ -1,7 +1,12 @@
 //%attributes = {}
 
+$staff:=ds:C1482.Staff.query("user.userInscriptions.userProfile.ident = :1 | memberships.team.name =:2"; "pm"; "Facilities")
 
-ds:C1482.ContinuousImprovementall().toCollection().
+$users:=$staff.extract("user").extract("UUID")
+
+
+
+
 //$a:="    "
 //$a:=Split string($a; ";"; sk ignore empty strings+sk trim spaces).join(";")
 //If ($a="")
