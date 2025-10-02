@@ -58,31 +58,23 @@ Function redrawAndSetVisible()
 	
 	If (Form:C1466.sfw.checkIsInModification())
 		OBJECT SET ENABLED:C1123(*; "entryField_approvedBy"; False:C215)
-		$eUser:=cs:C1710.sfw_UserEntity
 		
-		$eUser:=ds:C1482.sfw_User.query("login = :1"; Current user:C182).first()
+		$approverProfile:=New collection:C1472("qs"; "pm")
 		
-		If ($eUser#Null:C1517)
-			
-			$approverProfile:=New collection:C1472("qs"; "pm")
-			$hasAuthorizedProfile:=$eUser.userInscriptions.extract("userProfile").query("ident in :1"; $approverProfile).length>0
-			
-			$isFromAuthorizedTeam:=$eUser.staffs.query("fullName =:1"; Current user:C182).memberships.query("team.name =:1"; "Facilities").length>0
-			
-			$hasAuthorizationToApprove:=($hasAuthorizedProfile | $isFromAuthorizedTeam)
-			OBJECT SET ENABLED:C1123(*; "pup_reportOperator"; $hasAuthorizationToApprove)
-			
-			$isFromAuthorizedTeam:=$eUser.staffs.query("fullName =:1"; Current user:C182).memberships.query("team.name =:1"; "Facilities").length>0
-			OBJECT SET ENABLED:C1123(*; "pup_fixOperator"; $isFromAuthorizedTeam)
-			
-			$isFromAuthorizedTeam:=$eUser.staffs.query("fullName =:1"; Current user:C182).memberships.query("team.name =:1"; "Facilities").length>0
-			OBJECT SET ENABLED:C1123(*; "entryField_isApproved"; $hasAuthorizedProfile)
-			OBJECT SET ENABLED:C1123(*; "entryField_approvalDate"; $hasAuthorizedProfile)
-			
-			OBJECT SET VISIBLE:C603(*; "PopupDate"; $hasAuthorizedProfile)
-			
-			
-		End if 
+		$hasAuthorizedProfile:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($approverProfile.indexOf($1.value)#-1)))#Null:C1517
+		
+		$isFromAuthorizedTeam:=ds:C1482.Staff.query("UUID_User = :1 & memberships.team.name =:2"; cs:C1710.sfw_userManager.me.info.UUID; "Facilities")#Null:C1517
+		
+		$hasAuthorizationToApprove:=($hasAuthorizedProfile | $isFromAuthorizedTeam)
+		OBJECT SET ENABLED:C1123(*; "pup_reportOperator"; $hasAuthorizationToApprove)
+		
+		OBJECT SET ENABLED:C1123(*; "pup_fixOperator"; $isFromAuthorizedTeam)
+		
+		OBJECT SET ENABLED:C1123(*; "entryField_isApproved"; $isFromAuthorizedTeam)
+		OBJECT SET ENABLED:C1123(*; "entryField_approvalDate"; $isFromAuthorizedTeam)
+		
+		OBJECT SET VISIBLE:C603(*; "PopupDate"; $isFromAuthorizedTeam)
+		
 		
 	End if 
 	

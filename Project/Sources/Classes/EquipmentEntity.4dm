@@ -43,3 +43,22 @@ local Function _initReports()
 local Function itemLoad()
 	
 	// This callback is called when the item is selected in the itemList
+	
+	
+	
+local Function beforeSave()
+	
+	If (Form:C1466.current_item.down=True:C214)
+		
+		$context:=New object:C1471
+		$context.target:=Form:C1466.current_item.UUID
+		$context.targetDataclass:="Equipment"
+		$context.assignedID:=Form:C1466.current_item.assignedID
+		
+		$staff:=ds:C1482.Staff.query("user.userInscriptions.userProfile.ident = :1 | memberships.team.name =:2"; "pm"; "Facilities")
+		
+		$users:=$staff.extract("user").extract("UUID").distinct()
+		cs:C1710.sfw_notificationManager.me.notify("EquipmentDown"; $users; $context)
+		
+	End if 
+	

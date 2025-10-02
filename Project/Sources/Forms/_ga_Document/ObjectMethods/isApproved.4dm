@@ -10,6 +10,7 @@ Case of
 			
 		Else 
 			Form:C1466.details.approvedBy:=""
+			Form:C1466.details.approvalDate:=Date:C102(!00-00-00!)
 		End if 
 		
 End case 
