@@ -191,7 +191,7 @@ End for
 //----> [AuditStatus]
 var $eAuditStatus : cs:C1710.AuditStatusEntity
 var $auditStatus : Collection:=New collection:C1472("C - Conforming"; "OFI - Opportunity for Improvement"; "NCR - Nonconformance")
-TRUNCATE TABLE:C1051([AuditStatus:46])
+TRUNCATE TABLE:C1051([AuditStatus:141])
 For ($i; 0; $auditStatus.length-1)
 	$eAuditStatus:=ds:C1482.AuditStatus.new()
 	$eAuditStatus.levelID:=$i+1
@@ -209,7 +209,7 @@ $processTypes:=New collection:C1472("Assembly"; "Assembly_AE"; "Assembly_AO"; "A
 "Environmental_C1"; "Environmental_C2"; "Environmental_C3"; "Environmental_C4"; "Environmental_D1"; "Environmental_D1, D4"; \
 "Environmental_D2"; "Environmental_D3"; "Environmental_D4"; "Environmental_D5"; "Environmental_D6"; "Environmental_D7"; \
 "Environmental_D8"; "Environmental_D9"; "Program Management")
-TRUNCATE TABLE:C1051([ProcessType:139])
+TRUNCATE TABLE:C1051([Audit:139])
 For ($i; 0; $processTypes.length-1)
 	$eProcessType:=ds:C1482.ProcessType.new()
 	$eProcessType.levelID:=$i+1

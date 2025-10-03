@@ -10,7 +10,7 @@ Function formMethod()
 			Form:C1466.current_item.code:=This:C1470.calculateCode()
 		End if 
 		
-		If (Form:C1466.current_item.dateCreation=!00-00-00!)
+		If (Form:C1466.current_item.dateCreation=!00-00-00!) || (Form:C1466.current_item.dateCreation=Null:C1517)
 			Form:C1466.current_item.dateCreation:=Current date:C33()
 		End if 
 		
@@ -163,7 +163,7 @@ Function redrawAndSetVisible()
 			OBJECT GET COORDINATES:C663(*; "lb_contacts"; $gc; $tc; $rc; $bc)
 			
 			OBJECT SET COORDINATES:C1248(*; "lb_contacts"; $gc; $tc; $rc; $t)
-			OBJECT SET COORDINATES:C1248(*; "communication_subform"; $g; $t; $rc; $b)
+			//OBJECT SET COORDINATES(*; "communication_subform"; $g; $t; $rc; $b)
 			
 		: (FORM Get current page:C276(*)=2)
 			OBJECT GET COORDINATES:C663(*; "bkgd_lb_consumptions_detail"; $g; $t; $r; $b)
@@ -558,15 +558,18 @@ Function buildQuotePreview()
 	WP SET TEXT:C1574($leftTxtBox; "From: "+$preview.preparerName; wk append:K81:179)
 	WP Insert break:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
 	If ($preview.preparerEmail#"")
-		WP SET TEXT:C1574($leftTxtBox; "\t"+$preview.preparerEmail; wk append:K81:179)
+		$preparerEmail:=$preview.preparerEmail || ""
+		WP SET TEXT:C1574($leftTxtBox; "\t"+$preparerEmail; wk append:K81:179)
 		WP Insert break:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
 	End if 
 	If ($preview.preparerMobile#"")
-		WP SET TEXT:C1574($leftTxtBox; "\tTel: "+$preview.preparerMobile; wk append:K81:179)
+		$preparerMobile:=$preview.preparerMobile || ""
+		WP SET TEXT:C1574($leftTxtBox; "\tTel: "+$preparerMobile; wk append:K81:179)
 		WP Insert break:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
 	End if 
 	If ($preview.preparerExt#"")
-		WP SET TEXT:C1574($leftTxtBox; "\t"+$preview.preparerExt; wk append:K81:179)
+		$preparerExt:=$preview.preparerExt || ""
+		WP SET TEXT:C1574($leftTxtBox; "\t"+$preparerExt; wk append:K81:179)
 		WP Insert break:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)
 	End if 
 	WP Insert break:C1413($leftTxtBox; wk line break:K81:186; wk append:K81:179)

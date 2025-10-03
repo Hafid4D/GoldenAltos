@@ -358,7 +358,7 @@
 					"type": "text",
 					"text": "Quotation to",
 					"top": 122,
-					"left": 19,
+					"left": 12,
 					"width": 149,
 					"height": 16,
 					"fontWeight": "bold"
@@ -484,7 +484,7 @@
 					"top": 393,
 					"width": 524,
 					"height": 170,
-					"detailForm": "_ga_subpanel_communication",
+					"detailForm": "_ga_subpanel_communication1",
 					"dataSource": "Form:C1466.subFormCommunication",
 					"method": "ObjectMethods/communication_subform.4dm",
 					"visibility": "visible"
@@ -1102,7 +1102,7 @@
 			}
 		}
 	],
-	"geometryStamp": 798,
+	"geometryStamp": 799,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {

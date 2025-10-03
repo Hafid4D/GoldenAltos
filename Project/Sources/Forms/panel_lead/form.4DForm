@@ -1063,23 +1063,6 @@
 					"height": 16,
 					"stroke": "#808080"
 				},
-				"entryField_Inter_input_notes": {
-					"type": "input",
-					"left": 704,
-					"top": 435,
-					"width": 460,
-					"height": 145,
-					"dataSourceTypeHint": "text",
-					"dataSource": "Form:C1466.current_interaction.notes",
-					"multiline": "yes",
-					"enterable": false,
-					"focusable": false,
-					"borderStyle": "none",
-					"method": "",
-					"events": [
-						"onMouseMove"
-					]
-				},
 				"Interaction3": {
 					"type": "text",
 					"text": "Follow-up date",
@@ -1215,6 +1198,23 @@
 					"visibility": "visible",
 					"focusable": false,
 					"method": "ObjectMethods/pupFilter_trigger.4dm"
+				},
+				"entryField_Inter_input_notes1": {
+					"type": "input",
+					"left": 704,
+					"top": 435,
+					"width": 405,
+					"height": 92,
+					"dataSourceTypeHint": "text",
+					"dataSource": "Form:C1466.current_interaction.notes",
+					"borderStyle": "none",
+					"enterable": false,
+					"method": "ObjectMethods/entryField_Inter_input_notes1.4dm",
+					"events": [
+						"onDataChange"
+					],
+					"bottom": 527,
+					"right": 1109
 				}
 			}
 		},
@@ -1497,7 +1497,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 831,
+	"geometryStamp": 844,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {

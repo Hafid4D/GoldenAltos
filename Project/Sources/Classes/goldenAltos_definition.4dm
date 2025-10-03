@@ -156,26 +156,25 @@ Function _notification_definition()
 	$definition.setActive()
 	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("EquipmentDown"; "Equipment is down"; $definition)
 	
+	$definition:=cs:C1710.sfw_definitionNotificationType.new()
+	$definition.setDescription("Calibration for the equipment ##assignedID## is due in 30 days. Action required")
+	$definition.setActive()
+	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("EquipmentSoonDueCalibration"; "Equipment out of calibration in 30 days"; $definition)
 	
-	//$definition:=cs.sfw_definitionNotificationType.new()
-	//$definition.setDescription("A new task time is added for the project ##projectName## by ##staffName##.")
-	//$definition.setActive()
-	//cs.sfw_notificationManager.me.createTypeIfNotExist("NewTaskTime"; "New tasktime"; $definition)
+	$definition:=cs:C1710.sfw_definitionNotificationType.new()
+	$definition.setDescription("Equipment ##assignedID## calibration overdue.Immediate action is required")
+	$definition.setActive()
+	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("DueEquipmentOutOfCalibration"; "Due Equipment out of calibration"; $definition)
 	
-	//$definition:=cs.sfw_definitionNotificationType.new()
-	//$definition.setDescription("A new meeting time is added by ##staffName##.")
-	//$definition.setActive()
-	//cs.sfw_notificationManager.me.createTypeIfNotExist("NewMeetingTime"; "New meeting time"; $definition)
+	$definition:=cs:C1710.sfw_definitionNotificationType.new()
+	$definition.setDescription("PM for the equipment ##assignedID## is due in 30 days. Action required")
+	$definition.setActive()
+	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("EquipmentSoonDuePM"; "Equipment out of PM in 30 days"; $definition)
 	
-	//$definition:=cs.sfw_definitionNotificationType.new()
-	//$definition.setDescription("A new customer time is added for customer ##customerName## by ##staffName##.")
-	//$definition.setActive()
-	//cs.sfw_notificationManager.me.createTypeIfNotExist("NewCustomerTime"; "New customer time"; $definition)
-	
-	//$definition:=cs.sfw_definitionNotificationType.new()
-	//$definition.setDescription("A new administrative time is added by ##staffName##.")
-	//$definition.setActive()
-	//cs.sfw_notificationManager.me.createTypeIfNotExist("NewMeetingTime"; "New meeting time"; $definition)
+	$definition:=cs:C1710.sfw_definitionNotificationType.new()
+	$definition.setDescription("Equipment ##assignedID## PM overdue. Immediate action is required")
+	$definition.setActive()
+	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("DueEquipmentOutOfPM"; "Due Equipment out of PM"; $definition)
 	
 	
 	//Mark:-Visions defintion
@@ -267,6 +266,9 @@ Function _profiles_definition()
 	$eQI:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("qi"; "Quality Inspector"; "autoCreation")
 	$eQS:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("qs"; "Quality Supervisor"; "autoCreation")
 	$ePM:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("pm"; "Production Manager"; "autoCreation")
+	$ePS:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("ps"; "Production Supervisor"; "autoCreation")
+	$eVP:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("vp"; "VP"; "autoCreation")
+	$eGM:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("gm"; "General Manager"; "autoCreation")
 	
 Function _documentFolders_definition()
 	

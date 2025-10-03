@@ -13,6 +13,10 @@ Function formMethod()
 			Form:C1466.current_item.dateCreation:=Current date:C33()
 		End if 
 		
+		If (Form:C1466.current_item.dateClose=Null:C1517)
+			Form:C1466.current_item.dateClose:=!00-00-00!
+		End if 
+		
 		If (Form:C1466.current_item.staff=Null:C1517)
 			If (cs:C1710.sfw_userManager.me.info.UUID_Staff#Null:C1517)
 				Form:C1466.current_item.staff:=ds:C1482.Staff.query("UUID = :1"; cs:C1710.sfw_userManager.me.info.UUID_Staff).first()
@@ -97,6 +101,8 @@ Function btnDatePicker($object; $attribut)
 	
 	
 Function loadInteractions()
+	//Form.current_interaction:=Null
+	
 	$queryString:=""
 	$settings:=New object:C1471("parameters"; New object:C1471)
 	If (Form:C1466.interactons_filters.status.length#0)

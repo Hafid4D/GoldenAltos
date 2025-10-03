@@ -79,6 +79,13 @@ If ($equipment_Log.exists)
 		$eEquipment.pmDocument:=$equipment.PMDocument
 		$eEquipment.pmNotRequired:=$equipment.PMnotRequired
 		
+		$eEquipment.moreData:=New object:C1471()
+		$eEquipment.moreData.soonDueCal:=False:C215
+		$eEquipment.moreData.dueCal:=False:C215
+		$eEquipment.moreData.soonDuePM:=False:C215
+		$eEquipment.moreData.duePM:=False:C215
+		
+		
 		If ($eEquipment.calibrationNotRequired=False:C215) & ($eEquipment.notAtSite=False:C215) & ($eEquipment.nextCalDate<=Current date:C33(*))
 			$eEquipment.outOfCalibration:=True:C214
 			
