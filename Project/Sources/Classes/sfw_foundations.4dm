@@ -1498,7 +1498,7 @@ Function bIcon_entry()
 			$uuids:=Form:C1466.sfw.lb_items.distinct("UUID")
 			For each ($eFavorite; $esFavorites)
 				$favorizedItem:=ds:C1482[Form:C1466.sfw.entry.dataclass].get($eFavorite.UUID_target)
-				$label:=$favorizedItem.fullName || $favorizedItem.name || $favorizedItem.label || $favorizedItem.title
+				$label:=$favorizedItem.fullName || $favorizedItem.name || $favorizedItem.label || $favorizedItem.title || $favorizedItem.nameInWindowTitle
 				If ($label#Null:C1517)  // todo
 					APPEND MENU ITEM:C411($refMenu; $label; *)
 				End if 

@@ -9,7 +9,7 @@
 	"windowMinHeight": 0,
 	"windowMaxWidth": 32767,
 	"windowMaxHeight": 32767,
-	"rightMargin": 20,
+	"rightMargin": 0,
 	"bottomMargin": 20,
 	"events": [
 		"onLoad",
@@ -76,7 +76,8 @@
 					"width": 438,
 					"height": 32,
 					"fill": "#00A4A4",
-					"stroke": "transparent"
+					"stroke": "transparent",
+					"sizingX": "grow"
 				},
 				"Text": {
 					"type": "text",
@@ -102,7 +103,8 @@
 					"width": 261,
 					"height": 17,
 					"dataSourceTypeHint": "text",
-					"dataSource": "Form:C1466.creationDate"
+					"dataSource": "Form:C1466.creationDate",
+					"sizingX": "grow"
 				},
 				"btnDatePickerCreate": {
 					"type": "button",
@@ -123,7 +125,8 @@
 					"visibility": "visible",
 					"iconFrames": 4,
 					"focusable": false,
-					"dataSource": ""
+					"dataSource": "",
+					"sizingX": "move"
 				},
 				"pup_method": {
 					"type": "button",
@@ -142,7 +145,8 @@
 					"method": "ObjectMethods/pup_method.4dm",
 					"events": [
 						"onClick"
-					]
+					],
+					"sizingX": "grow"
 				},
 				"Text2": {
 					"type": "text",
@@ -169,7 +173,8 @@
 					"method": "ObjectMethods/pup_outcome.4dm",
 					"events": [
 						"onClick"
-					]
+					],
+					"sizingX": "grow"
 				},
 				"Text3": {
 					"type": "text",
@@ -196,7 +201,8 @@
 					"method": "ObjectMethods/pup_sales.4dm",
 					"events": [
 						"onClick"
-					]
+					],
+					"sizingX": "grow"
 				},
 				"Text4": {
 					"type": "text",
@@ -222,7 +228,9 @@
 					"height": 145,
 					"dataSourceTypeHint": "text",
 					"dataSource": "Form:C1466.notes",
-					"multiline": "yes"
+					"multiline": "yes",
+					"sizingY": "grow",
+					"sizingX": "grow"
 				},
 				"pup_contact": {
 					"type": "button",
@@ -241,7 +249,8 @@
 					"method": "ObjectMethods/pup_contact.4dm",
 					"events": [
 						"onClick"
-					]
+					],
+					"sizingX": "grow"
 				},
 				"Text6": {
 					"type": "text",
@@ -268,7 +277,8 @@
 					"method": "ObjectMethods/pup_trigger.4dm",
 					"events": [
 						"onClick"
-					]
+					],
+					"sizingX": "grow"
 				},
 				"Text7": {
 					"type": "text",
@@ -304,7 +314,8 @@
 					"top": 459,
 					"left": 24,
 					"width": 118,
-					"height": 16
+					"height": 16,
+					"sizingY": "move"
 				},
 				"followUPDate": {
 					"type": "input",
@@ -314,7 +325,9 @@
 					"height": 17,
 					"dataSourceTypeHint": "text",
 					"dataSource": "Form:C1466.followUPDate",
-					"visibility": "hidden"
+					"visibility": "hidden",
+					"sizingX": "grow",
+					"sizingY": "move"
 				},
 				"followUPDateBtnDatePickerCreate": {
 					"type": "button",
@@ -335,7 +348,9 @@
 					"visibility": "hidden",
 					"iconFrames": 4,
 					"focusable": false,
-					"dataSource": ""
+					"dataSource": "",
+					"sizingX": "move",
+					"sizingY": "move"
 				},
 				"Check Box": {
 					"type": "checkbox",
@@ -349,12 +364,13 @@
 					],
 					"dataSourceTypeHint": "boolean",
 					"dataSource": "Form:C1466.nextFollowUp",
-					"method": "ObjectMethods/Check Box.4dm"
+					"method": "ObjectMethods/Check Box.4dm",
+					"sizingY": "move"
 				}
 			}
 		}
 	],
-	"geometryStamp": 142,
+	"geometryStamp": 160,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

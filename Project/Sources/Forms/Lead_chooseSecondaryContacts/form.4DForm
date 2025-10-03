@@ -61,12 +61,7 @@
 					"scrollbarHorizontal": "hidden",
 					"horizontalLineStroke": "transparent",
 					"verticalLineStroke": "#C0C0C0",
-					"events": [
-						"onClick",
-						"onDataChange",
-						"onSelectionChange",
-						"onHeaderClick"
-					],
+					"events": [],
 					"fill": "#FFFFFF",
 					"alternateFill": "#F7F9FC",
 					"borderStyle": "system",
@@ -85,7 +80,10 @@
 							"footer": {
 								"name": "Footer1"
 							},
-							"method": "ObjectMethods/Column1.4dm"
+							"method": "ObjectMethods/Column1.4dm",
+							"events": [
+								"onClick"
+							]
 						},
 						{
 							"name": "Colonne3",

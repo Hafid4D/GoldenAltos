@@ -4,7 +4,7 @@ Class extends DataClass
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry:=cs:C1710.sfw_definitionEntry.new("interactionType"; "administration"; "Interaction types")
 	$entry.setDataclass("InteractionType")
-	$entry.setIcon("image/entry/priority-50x50-W.png"; "image/entry/priority-50x50-B.png")
+	$entry.setIcon("image/entry/interactionType-50x50-W.png"; "image/entry/interactionType-50x50-B.png")
 	$entry.setDisplayOrder(-30000)
 	
 	$entry.setSearchboxField("levelID")

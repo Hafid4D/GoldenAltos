@@ -4,7 +4,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry:=cs:C1710.sfw_definitionEntry.new("revision"; "administration"; "Revision")
 	$entry.setDataclass("Revision")
-	$entry.setIcon("image/entry/quoteStatus-50x50-W.png"; "image/entry/quoteStatus-50x50-B.png")
+	$entry.setIcon("image/entry/revision-50x50-W.png"; "image/entry/revision-50x50-B.png")
 	$entry.setSearchboxField("name")
 	$entry.setDisplayOrder(-20000)
 	
