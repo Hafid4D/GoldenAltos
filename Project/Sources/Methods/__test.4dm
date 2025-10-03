@@ -1,11 +1,10 @@
 //%attributes = {}
 
-$staff:=ds:C1482.Staff.query("user.userInscriptions.userProfile.ident = :1 | memberships.team.name =:2"; "pm"; "Facilities")
+//ds.sfw_Notification.all().drop()
 
-$users:=$staff.extract("user").extract("UUID")
+//$staff:=ds.Staff.query("user.userInscriptions.userProfile.ident = :1 | memberships.team.name =:2"; "pm"; "Facilities")
 
-
-
+//$users:=$staff.extract("user").extract("UUID")
 
 //$a:="    "
 //$a:=Split string($a; ";"; sk ignore empty strings+sk trim spaces).join(";")
