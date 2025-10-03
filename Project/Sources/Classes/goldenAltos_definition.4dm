@@ -167,12 +167,12 @@ Function _notification_definition()
 	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("DueEquipmentOutOfCalibration"; "Due Equipment out of calibration"; $definition)
 	
 	$definition:=cs:C1710.sfw_definitionNotificationType.new()
-	$definition.setDescription("PM for the equipment ##assignedID## is due in 30 days. Action required")
+	$definition.setDescription("Preventive maintenance for the equipment ##assignedID## is due in 30 days. Action required")
 	$definition.setActive()
 	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("EquipmentSoonDuePM"; "Equipment out of PM in 30 days"; $definition)
 	
 	$definition:=cs:C1710.sfw_definitionNotificationType.new()
-	$definition.setDescription("Equipment ##assignedID## PM overdue. Immediate action is required")
+	$definition.setDescription("Preventive maintenance overdue for equipment ##assignedID##. Immediate action is required")
 	$definition.setActive()
 	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("DueEquipmentOutOfPM"; "Due Equipment out of PM"; $definition)
 	
