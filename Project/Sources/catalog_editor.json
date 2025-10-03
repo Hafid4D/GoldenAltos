@@ -852,8 +852,8 @@
 			"coordinates": {
 				"left": 0,
 				"top": 816.66662597656,
-				"width": 169,
-				"height": 167.33203125
+				"width": 171,
+				"height": 186.33203125
 			},
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
@@ -2187,6 +2187,16 @@
 				"height": 268.15802001953
 			},
 			"displayable_fields_count": 10
+		}
+	},
+	"relations": {
+		"80581F9F528F0F49A10ACED99EB37F4B": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
 		}
 	}
 }

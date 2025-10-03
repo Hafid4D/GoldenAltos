@@ -13,7 +13,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanel("panel_lead"; 1)
 	$entry.setPanelPage(1; ""; "Main")
 	$entry.setPanelPage(2; ""; "Interactions")
-	$entry.setPanelPage(3; ""; "Jobs & Deliveries")
+	$entry.setPanelPage(3; ""; "Jobs & Deliveries"; "disabled")
 	
 	$entry.setLBItemsColumn("leadCode"; "ID"; "width:50")
 	$entry.setLBItemsColumn("customerName"; "Customer"; "subject"; "width:300")
@@ -45,7 +45,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	
 	//mark:-Projection
-	$entry.setItemListProjection("Projection to customers"; "projectionToCustomers"; "customer"; "customerService")
+	//$entry.setItemListProjection("Projection to customers"; "projectionToCustomers"; "customer"; "customerService")
 	
 	$entry.allowMultiSelectionInLB("###,###,##0 ^1;;"; "unit1:customer selected"; "unitN:customers selected"; "nbMinimum:2")
 	

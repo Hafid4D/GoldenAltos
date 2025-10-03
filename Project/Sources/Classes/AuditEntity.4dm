@@ -100,10 +100,10 @@ Function rebuidActivities()->$activites : Collection
 	//mark:-Callbacks
 	
 Function beforeSaveCreation()
-	
+	This:C1470._initDocument()
 	
 local Function afterCreation()
-	This:C1470._initDocument()
+	
 	
 	
 local Function _initDocument()

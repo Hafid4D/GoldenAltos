@@ -84,7 +84,7 @@ local Function afterCreation()
 		$nbrDaysAfter:=Num:C11($items[0].moreData.daysAfterLeadCreation)
 		
 		$interaction:=ds:C1482.Interaction.new()
-		$interaction.number:=ds:C1482.Interaction.sequence
+		$interaction.number:=ds:C1482.Interaction.sequence()
 		$interaction.stmpCreation:=cs:C1710.sfw_stmp.me.build()
 		$interaction.stmpFollowUp:=cs:C1710.sfw_stmp.me.build(Add to date:C393(Current date:C33; 0; 0; $nbrDaysAfter))
 		$interaction.UUID_Staff:=cs:C1710.sfw_userManager.me.info.UUID

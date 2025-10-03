@@ -62,19 +62,13 @@ Function redrawAndSetVisible()
 	
 	If (Form:C1466.sfw.checkIsInModification())
 		
-		$eUser:=cs:C1710.sfw_UserEntity
-		
-		$eUser:=ds:C1482.sfw_User.query("login = :1"; Current user:C182).first()
-		
 		$approverProfile:=New collection:C1472("qs"; "qm")
-		If ($eUser#Null:C1517)
-			$hasAuthorizedProfile:=$eUser.userInscriptions.extract("userProfile").query("ident in :1"; $approverProfile).length>0
-			
-			OBJECT SET ENABLED:C1123(*; "entryField_isApproved"; $hasAuthorizedProfile)
-			OBJECT SET ENABLED:C1123(*; "entryField_approver"; $hasAuthorizedProfile)
-			OBJECT SET ENABLED:C1123(*; "entryField_approvalDate"; $hasAuthorizedProfile)
-			
-		End if 
+		
+		$hasAuthorizedProfile:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($approverProfile.indexOf($1.value)#-1)))#Null:C1517
+		
+		OBJECT SET ENABLED:C1123(*; "entryField_isApproved"; $hasAuthorizedProfile)
+		OBJECT SET ENABLED:C1123(*; "entryField_approver"; $hasAuthorizedProfile)
+		OBJECT SET ENABLED:C1123(*; "entryField_approvalDate"; $hasAuthorizedProfile)
 		
 	End if 
 	
@@ -155,7 +149,7 @@ Function bActionDocument()
 			DIALOG:C40("_ga_document"; $form)
 			
 			If (OK=1)
-				Form:C1466.lb_documents.push($form.details)
+				//Form.lb_documents.push($form.details)
 				Form:C1466.current_item.documents.documentsCollection.push($form.details)
 				cs:C1710.panel_specification.me._activate_save_cancel_button()
 			End if 
@@ -182,7 +176,8 @@ Function bActionDocument()
 					
 				End if 
 				
-				Form:C1466.selectedDocument:=$form.details
+				//Form.selectedDocument:=$form.details
+				Form:C1466.current_item.documents.documentsCollection[Form:C1466.selectedDocumentPos-1]:=$form.details
 				cs:C1710.panel_specification.me._activate_save_cancel_button()
 			End if 
 			
@@ -190,13 +185,15 @@ Function bActionDocument()
 			
 			$ok:=cs:C1710.sfw_dialog.me.confirm("Do you really want to delete this document? "; "Delete"; "CANCEL")
 			If ($ok)
-				Form:C1466.lb_documents.remove(Form:C1466.selectedDocumentPos-1)
+				//Form.lb_documents.remove(Form.selectedDocumentPos-1)
 				Form:C1466.current_item.documents.documentsCollection.remove(Form:C1466.selectedDocumentPos-1)
 				cs:C1710.panel_specification.me._activate_save_cancel_button()
 				
 			End if 
 			
 	End case 
+	
+	This:C1470.loadDocuments()
 	
 	
 Function drawPup_category()

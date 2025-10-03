@@ -2779,21 +2779,6 @@
 			<table_ref uuid="2C75E07E18FC4733A8C98A0B31D40656" name="sfw_User"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="019980FD8EB37BBA87484591CE25D408" type="1">
-		<field_ref uuid="AF643B21840FF74A90FA006ABD3AB6A3" name="UUID">
-			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="019980FD8EB37C8B959FFCB7450F19D6" type="1">
-		<field_ref uuid="DA4CBDC76C3AAB41B11CAF5A7306B820" name="rmaNumber">
-			<table_ref uuid="0972FDFCC1ADC346B47694ABCDEAB593" name="RMA"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="019980FD8EB37DA5A6147FA36F7539A3" type="1">
-		<field_ref uuid="8D9FB8C795534689B56DE1CC69FD3D14" name="UUID">
-			<table_ref uuid="894004274A3B4909A39584EC0B879D18" name="Role"/>
-		</field_ref>
-	</index>
 	<index kind="regular" uuid="01FFC43C52345F419633337DD918BF46" type="3">
 		<field_ref uuid="F366253E5C84F04CB554CDDE20773CD3" name="UUID_Role">
 			<table_ref uuid="3FCFA1819BB8A549A967817552E5B346" name="StaffRole"/>
@@ -2983,11 +2968,6 @@
 		<field_ref uuid="0526ECAF73946E4E90574CB0C2FC9FA1" name="UUID">
 			<table_ref uuid="AD9AFF574E6E2745A70D65CE48ABAB7E" name="dfd_Line"/>
 		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="280403135D488C40B1111F754C08E10E" type="1">
-		<field_ref uuid="8D9FB8C795534689B56DE1CC69FD3D14" name="UUID">
-			<table_ref uuid="894004274A3B4909A39584EC0B879D18" name="Department"/>
-			</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="285C76893B33FC499CC89E0F413C3C33" type="1">
 		<field_ref uuid="4040F42F6150451FA3FB8EB06B445ED9" name="UUID">

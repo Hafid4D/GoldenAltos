@@ -21,7 +21,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(4; "staff-32x32.png"; "Optional premilinary text")
 	$entry.setPanelPage(5; "staff-32x32.png"; "Preview")
 	
-	$entry.setPanelIfNoItemSelected("panel_quote_summary")
+	//$entry.setPanelIfNoItemSelected("panel_quote_summary")
 	
 	$entry.setLBItemsColumn("code"; "Code"; "code"; "width:50")
 	$entry.setLBItemsColumn("subject"; "Subject"; "subject"; "width:320")
@@ -49,7 +49,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setAllowedProfilesForDeletion("admin")
 	
 	//mark:-Projection
-	$entry.setItemListProjection("Projection to customers"; "projectionToCustomers"; "customer"; "customerService")
+	//$entry.setItemListProjection("Projection to customers"; "projectionToCustomers"; "customer"; "customerService")
 	
 	$entry.allowMultiSelectionInLB("###,###,##0 ^1;;"; "unit1:quote selected"; "unitN:quotes selected"; "nbMinimum:2")
 	
@@ -84,15 +84,15 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	//Mark:-Views
 	
-	$view:=cs:C1710.sfw_definitionView.new("closedQuotes"; "Closed Quotes"; "derivedFrom:main"; $entry)
-	$view.setSubset("closedQuotes")
-	$view.setPictoLabel("/RESOURCES/sfw/image/picto/view-white-subset.png")
-	$entry.setView($view)
+	//$view:=cs.sfw_definitionView.new("closedQuotes"; "Closed Quotes"; "derivedFrom:main"; $entry)
+	//$view.setSubset("closedQuotes")
+	//$view.setPictoLabel("/RESOURCES/sfw/image/picto/view-white-subset.png")
+	//$entry.setView($view)
 	
 	
-Function closedQuotes()->$es : cs:C1710.QuoteSelection
+	//Function closedQuotes()->$es : cs.QuoteSelection
 	
-	$es:=This:C1470.query("status.code = :1 "; "C")
+	//$es:=This.query("status.code = :1 "; "C")
 	
 	
 	

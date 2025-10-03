@@ -83,6 +83,7 @@ Function preview()->$preview : Object
 	$preview.preparerName:=This:C1470.staff.fullName
 	If (This:C1470.staff.contactDetails#Null:C1517) && (This:C1470.staff.contactDetails.communications#Null:C1517) && (This:C1470.staff.contactDetails.communications.length#0)
 		$comm:=This:C1470.staff.contactDetails.communications[0]
+		TRACE:C157
 		$preview.preparerEmail:=String:C10($comm.email)
 		$preview.preparerMobile:=String:C10($comm.mobile)
 		$preview.preparerExt:=String:C10($comm.ext)

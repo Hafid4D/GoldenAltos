@@ -151,6 +151,12 @@ Function _notification_definition()
 	$definition.setActive()
 	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("CertificationRetraining"; "Retraining due within 30 days"; $definition)
 	
+	$definition:=cs:C1710.sfw_definitionNotificationType.new()
+	$definition.setDescription("Equipment ##assignedID## is down. Immediate action required.")
+	$definition.setActive()
+	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("EquipmentDown"; "Equipment is down"; $definition)
+	
+	
 	//$definition:=cs.sfw_definitionNotificationType.new()
 	//$definition.setDescription("A new task time is added for the project ##projectName## by ##staffName##.")
 	//$definition.setActive()

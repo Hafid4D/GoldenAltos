@@ -8,7 +8,8 @@ Function formMethod()
 		If (Form:C1466.current_item.leadCode="")
 			Form:C1466.current_item.leadCode:=This:C1470.calculateCode()
 		End if 
-		If (Form:C1466.current_item.dateCreation=!00-00-00!)
+		
+		If (Form:C1466.current_item.dateCreation=!00-00-00!) || (Form:C1466.current_item.dateCreation=Null:C1517)
 			Form:C1466.current_item.dateCreation:=Current date:C33()
 		End if 
 		
@@ -443,13 +444,15 @@ Function selectStaff()
 						End if 
 				End case 
 				This:C1470.drawPup_customer()
-				
+				This:C1470._clearInfoAfterChangingCustomer()
+				This:C1470.loadContacts()
 			: ($selector.asCutTheLink())
 				Form:C1466.current_item.UUID_Staff:=16*"00"
 				
 			: ($selector.needCreation())
 				$selector.createANewEntity("cs.panel_lead.me.callbackAfterCreationOwner($1)")
-				
+				This:C1470._clearInfoAfterChangingCustomer()
+				This:C1470.loadContacts()
 		End case 
 	End if 
 	
@@ -895,7 +898,7 @@ Function bActionInteractions()
 			$form:=New object:C1471
 			$form.creationDate:=Current date:C33()
 			$form.current_item:=Form:C1466.current_item
-			$form.number:=ds:C1482.Interaction.sequence
+			$form.number:=ds:C1482.Interaction.sequence()
 			$form.followUPDate:=Add to date:C393(Current date:C33; 0; 0; 1)
 			
 			$ref:=Open form window:C675("Lead_scheduleFollowUP"; Sheet form window:K39:12)
@@ -932,7 +935,7 @@ Function bActionInteractions()
 			$form:=New object:C1471
 			$form.creationDate:=Current date:C33()
 			$form.current_item:=Form:C1466.current_item
-			$form.number:=ds:C1482.Interaction.sequence
+			$form.number:=ds:C1482.Interaction.sequence()
 			$form.nextFollowUp:=False:C215
 			$form.followUPDate:=Add to date:C393(Current date:C33; 0; 0; 1)
 			
@@ -966,7 +969,7 @@ Function bActionInteractions()
 				If ($form.nextFollowUp)
 					$scheduledInteraction:=ds:C1482.Interaction.new()
 					$scheduledInteraction.fromObject($form)
-					$scheduledInteraction.number:=ds:C1482.Interaction.sequence
+					$scheduledInteraction.number:=ds:C1482.Interaction.sequence()
 					$scheduledInteraction.UUID_Lead:=Form:C1466.current_item.UUID
 					$scheduledInteraction.notes:=""
 					$scheduledInteraction.UUID_Lead:=Form:C1466.current_item.UUID
@@ -1173,14 +1176,16 @@ Function selectCustomer()
 							Form:C1466.current_item.UUID_Customer:=16*"00"
 						End if 
 				End case 
+				This:C1470._clearInfoAfterChangingCustomer()
 				This:C1470.drawPup_customer()
 				Form:C1466.current_item.deal:=True:C214
 			: ($selector.asCutTheLink())
 				Form:C1466.current_item.UUID_Customer:=16*"00"
-				
+				This:C1470._clearInfoAfterChangingCustomer()
 			: ($selector.needCreation())
 				$selector.createANewEntity("cs.panel_lead.me.callbackAfterCreationCustomer($1)")
 				Form:C1466.current_item.deal:=False:C215
+				This:C1470._clearInfoAfterChangingCustomer()
 		End case 
 	End if 
 	

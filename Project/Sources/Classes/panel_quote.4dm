@@ -397,8 +397,118 @@ Function bActionTerms()
 			
 	End case 
 	
+Function preview()->$preview : Object
+	var $contact : cs:C1710.ContactEntity
+	$preview:=New object:C1471()
+	$contact:=Form:C1466.current_item._mainContact_prv()
+	If ($contact#Null:C1517)
+		$preview.contactFirstName:=String:C10($contact.firstName)
+		$preview.contactName:=String:C10($contact.fullName)
+		
+		$customer:=ds:C1482.Customer.query("UUID = :1"; $contact.UUID_Company).first()
+		
+		$preview.contactCompany:=String:C10($customer.name)
+		
+		$preview.contactAddress:=""
+		If ($contact.contactDetails#Null:C1517) && ($contact.contactDetails.addresses#Null:C1517) && ($contact.contactDetails.addresses.length#0)
+			$address:=$contact.contactDetails.addresses[0]
+			If (String:C10($address.detail.street_1)#"")
+				$preview.contactAddress+=$address.detail.street_1+", "
+			End if 
+			
+			If (String:C10($address.detail.street_2)#"")
+				$preview.contactAddress+=$address.detail.street_2+", "
+			End if 
+			
+			If (String:C10($address.detail.city)#"")
+				$preview.contactAddress+=$address.detail.city+", "
+			End if 
+			
+			If (String:C10($address.detail.state)#"") & (String:C10($address.detail.postcode)#"")
+				$preview.contactAddress+=$address.detail.state+" "+$address.detail.postcode+", "
+			End if 
+			
+			If (String:C10($address.detail.country)#"")
+				$preview.contactAddress+=$address.detail.country
+			End if 
+		Else 
+			$preview.contactAddress:=" - "
+		End if 
+		
+		If ($contact.contactDetails#Null:C1517) && ($contact.contactDetails.communications#Null:C1517) && ($contact.contactDetails.communications.length#0)
+			$comms:=$contact.contactDetails.communications
+			
+			$items:=$comms.query("type == :1"; "mobile")
+			If ($items.length#0) && ($items[0].contact#"")
+				$preview.contactTel:=$items[0].contact
+			Else 
+				$preview.contactTel:=""
+			End if 
+			
+			$items:=$comms.query("type == :1"; "ext")
+			If ($items.length#0) && ($items[0].contact#"")
+				$preview.contactExt:=$items[0].contact
+			Else 
+				$preview.contactExt:=""
+			End if 
+			
+			$items:=$comms.query("type == :1"; "fax")
+			If ($items.length#0) && ($items[0].contact#"")
+				$preview.contactFax:=$items[0].contact
+			Else 
+				$preview.contactFax:=""
+			End if 
+			
+			$items:=$comms.query("type == :1"; "mail")
+			If ($items.length#0) && ($items[0].contact#"")
+				$preview.contactEmail:=$items[0].contact
+			Else 
+				$preview.contactEmail:=""
+			End if 
+			
+		Else 
+			$preview.contactTel:=""
+			$preview.contactExt:=""
+			$preview.contactFax:=""
+			$preview.contactEmail:=""
+		End if 
+	End if 
+	$preview.preparerName:=Form:C1466.current_item.staff.fullName
+	If (Form:C1466.current_item.staff.contactDetails#Null:C1517) && (Form:C1466.current_item.staff.contactDetails.communications#Null:C1517) && (Form:C1466.current_item.staff.contactDetails.communications.length#0)
+		$comm:=Form:C1466.current_item.staff.contactDetails.communications[0]
+		//TRACE
+		$preview.preparerEmail:=String:C10($comm.email)
+		$preview.preparerMobile:=String:C10($comm.mobile)
+		$preview.preparerExt:=String:C10($comm.ext)
+	Else 
+		$preview.preparerEmail:=$comm.email
+		$preview.preparerMobile:=$comm.mobile
+		$preview.preparerExt:=$comm.ext
+	End if 
+	
+	$preview.copyName:=""  // to get from the old database
+	$preview.copyCommMeans:=""  // to get from the old database
+	
+	$preview.quoteNumber:=Form:C1466.current_item.code
+	$preview.quoteRevision:=String:C10(Form:C1466.current_item.revision.name)
+	$preview.quoteDate:=String:C10(cs:C1710.sfw_stmp.me.getDate(Form:C1466.current_item.stmpCreation))
+	$preview.quoteSubject:=Form:C1466.current_item.subject
+	$preview.quoteReference:=Form:C1466.current_item.reference
+	
+	$preview.quoteLines:=Form:C1466.current_item.lines
+	$preview.optionalPreliminaryTxt_wr:=Form:C1466.current_item.optionalPreliminaryTxt_wr
+	
+	$preview.assumptions:=ds:C1482.Assumption.query("UUID in :1"; Form:C1466.current_item.assumptions.UUIDs)
+	
+	$preview.conditions:=ds:C1482.TermCondition.query("UUID in :1"; Form:C1466.current_item.termsConditions.UUIDs)
+	
+	
+	
+	
+	
+	
 Function buildQuotePreview()
-	$preview:=Form:C1466.current_item.preview()
+	$preview:=This:C1470.preview()
 	
 	
 	Form:C1466.preview:=WP New:C1317()
@@ -687,14 +797,15 @@ Function selectCustomer()
 							Form:C1466.current_item.UUID_Customer:=16*"00"
 						End if 
 				End case 
+				This:C1470._clearInfoAfterChangingCustomer()
 				This:C1470.drawPup_quoteCustomer()
 				
 			: ($selector.asCutTheLink())
 				Form:C1466.current_item.UUID_Customer:=16*"00"
-				
+				This:C1470._clearInfoAfterChangingCustomer()
 			: ($selector.needCreation())
 				$selector.createANewEntity("cs.panel_quote.me.callbackAfterCreationCustomer($1)")
-				
+				This:C1470._clearInfoAfterChangingCustomer()
 		End case 
 		
 	End if 
@@ -728,8 +839,7 @@ Function callbackAfterCreationCustomer($key : Text)
 	//This._clearInfoAfterChangingCustomer()
 	//End if 
 	//End case 
-End if 
-
+	
 Function _clearInfoAfterChangingCustomer()
 	Form:C1466.current_item.moreData:=New object:C1471()
 	
@@ -847,11 +957,11 @@ Function btnActionContacts()
 			
 			$form:=New object:C1471()
 			$form.lb_contacts:=ds:C1482.Contact.query("UUID_Company == :1 and not(UUID in :2)"; Form:C1466.current_item.customer.UUID; $uuids)
-			If ($form.lb_contacts.length>0)
-				$ref:=Open form window:C675("Lead_chooseMainContact"; Sheet form window:K39:12)
-				DIALOG:C40("Lead_chooseMainContact"; $form)
-				CLOSE WINDOW:C154($ref)
-			End if 
+			//If ($form.lb_contacts.length>0)
+			$ref:=Open form window:C675("Lead_chooseMainContact"; Sheet form window:K39:12)
+			DIALOG:C40("Lead_chooseMainContact"; $form)
+			CLOSE WINDOW:C154($ref)
+			//End if 
 			If (ok=1)
 				If (Form:C1466.current_item.moreData=Null:C1517)
 					Form:C1466.current_item.moreData:=New object:C1471()
@@ -880,11 +990,11 @@ Function btnActionContacts()
 			For each ($contact; $form.lb_contacts)
 				$contact.selected:=False:C215
 			End for each 
-			If ($form.lb_contacts.length>0)
-				$ref:=Open form window:C675("Lead_chooseSecondaryContacts"; Sheet form window:K39:12)
-				DIALOG:C40("Lead_chooseSecondaryContacts"; $form)
-				CLOSE WINDOW:C154($ref)
-			End if 
+			//If ($form.lb_contacts.length>0)
+			$ref:=Open form window:C675("Lead_chooseSecondaryContacts"; Sheet form window:K39:12)
+			DIALOG:C40("Lead_chooseSecondaryContacts"; $form)
+			CLOSE WINDOW:C154($ref)
+			//End if 
 			If (ok=1)
 				If (Form:C1466.current_item.moreData=Null:C1517)
 					Form:C1466.current_item.moreData:=New object:C1471()
