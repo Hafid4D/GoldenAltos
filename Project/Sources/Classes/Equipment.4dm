@@ -220,16 +220,19 @@ local Function equipmentsOutOfCalibration()->$equipments : cs:C1710.EquipmentSel
 	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & calibrationNotRequired=:2 & notAtSite=:3"; Current date:C33(*); False:C215; False:C215)  // Storage.cache.endDate
 	
 local Function dueCalibrationEquipments()->$equipments : cs:C1710.EquipmentSelection  //List of equip to be calibrated within X days
-	Use (Storage:C1525.cache)
-		Storage:C1525.cache.startDate:=Current date:C33(*)
-	End use 
+	//Use (Storage)
+	//Storage.cache:=New shared object
+	//End use 
+	//Use (Storage.cache)
+	//Storage.cache.startDate:=Current date(*)
+	//End use 
 	This:C1470.setDateInterval(False:C215)
 	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & notAtSite=:2"; Storage:C1525.cache.endDate; False:C215)
 	
 local Function dueCalibrationEquipmentsExculeNPU()->$equipments : cs:C1710.EquipmentSelection  //List of equip to be calibrated within X days exclude NPU 
-	Use (Storage:C1525.cache)
-		Storage:C1525.cache.startDate:=Current date:C33(*)
-	End use 
+	//Use (Storage.cache)
+	//Storage.cache.startDate:=Current date(*)
+	//End use 
 	This:C1470.setDateInterval(False:C215)
 	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & notAtSite=:2 & engg=:3"; Storage:C1525.cache.endDate; False:C215; False:C215)
 	
@@ -242,16 +245,16 @@ local Function PMRequiredEquipments()->$equipments : cs:C1710.EquipmentSelection
 	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3"; Current date:C33(*); !00-00-00!; False:C215)  // Storage.cache.endDate
 	
 local Function pmEquipments()->$equipments : cs:C1710.EquipmentSelection  //Prevent Maintenance equipments within X days
-	Use (Storage:C1525.cache)
-		Storage:C1525.cache.startDate:=Current date:C33(*)
-	End use 
+	//Use (Storage.cache)
+	//Storage.cache.startDate:=Current date(*)
+	//End use 
 	This:C1470.setDateInterval(False:C215)
 	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3"; Storage:C1525.cache.endDate; !00-00-00!; False:C215)
 	
 local Function duePMEquipmentsExcludeNPU()->$equipments : cs:C1710.EquipmentSelection  //Prevent Maintenance equipments within X days exclude NPU
-	Use (Storage:C1525.cache)
-		Storage:C1525.cache.startDate:=Current date:C33(*)
-	End use 
+	//Use (Storage.cache)
+	//Storage.cache.startDate:=Current date(*)
+	//End use 
 	This:C1470.setDateInterval(False:C215)
 	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3 & engg=:4"; Storage:C1525.cache.endDate; !00-00-00!; False:C215; False:C215)
 	

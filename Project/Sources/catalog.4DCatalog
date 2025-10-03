@@ -222,6 +222,7 @@
 		<field name="reports" uuid="6E1DF8765704A1488DCA7F7119AE167C" type="21" blob_switch_size="2147483647" never_null="true" id="29"/>
 		<field name="outOfCalibration" uuid="83F3D63311DB024AA874BF2E9F1E273B" type="1" never_null="true" id="30"/>
 		<field name="decommissioned" uuid="0C85E5D2376B2B4AA945603B5D454F7D" type="1" never_null="true" id="31"/>
+		<field name="moreData" uuid="F15F65A93E0D5147A84C8D359DD06895" type="21" blob_switch_size="2147483647" never_null="true" id="32"/>
 		<primary_key field_name="UUID" field_uuid="576820214AE49648A0CC6ACA3DD19531"/>
 	</table>
 	<table name="dfd_Template" uuid="63274D1841D8B94E868AEE5C2909EBE8" id="14">
