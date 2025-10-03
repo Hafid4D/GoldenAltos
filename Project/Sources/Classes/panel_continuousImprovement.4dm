@@ -296,7 +296,8 @@ Function responsibleEdit()
 Function interestedPartyEdit()
 	
 	$interestedParties:=New collection:C1472()
-	$allInterestedParties:=New collection:C1472("Company"; "Customer"; "Customers"; "DLA"; "Employees"; "Management"; "Operator"; "Organization"; "Supplier"; "Suppliers"; "Top Management")  //TODO :Need clarification
+	$allInterestedParties:=New collection:C1472("Company"; "Customers"; "DLA"; "Employees"; "Management"; "Operator"; "Organization"; \
+		"Suppliers"; "Top Management")
 	
 	$currentInterestedParties:=Split string:C1554(Form:C1466.current_item.interestedParty; ",")
 	

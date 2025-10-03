@@ -455,7 +455,8 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"dataSourceTypeHint": "date"
+					"dataSourceTypeHint": "date",
+					"method": "ObjectMethods/entryField_nextPMDate.4dm"
 				},
 				"label_lastPMDate": {
 					"type": "text",

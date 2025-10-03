@@ -2190,6 +2190,14 @@
 		}
 	},
 	"relations": {
+		"BCF4A60895A2A543A55AEF7B2BCAF5D3": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
 		"80581F9F528F0F49A10ACED99EB37F4B": {
 			"color": {
 				"red": 255,

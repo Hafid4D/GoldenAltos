@@ -299,7 +299,6 @@
 	<table name="RepairLog" uuid="E209D11E14110249AE69799CB8F51C7C" id="21">
 		<field name="UUID" uuid="8FD486DDACE0854DA8FB686A58B08089" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_Equipment" uuid="C56ACBF61233134FA887559C036F2D7A" type="10" store_as_UUID="true" never_null="true" id="2"/>
-		<field name="fixedBy" uuid="AC0D9388F1EFC04CA05EA8CBB47E3BF7" type="10" store_as_UUID="true" never_null="true" id="3"/>
 		<field name="stmpFixed" uuid="BFCFF4A84085C14BA123E73537FC98F4" type="4" never_null="true" id="4"/>
 		<field name="stmpReport" uuid="741357BFDBEA23499DB051B8EDCB9EE8" type="4" never_null="true" id="5"/>
 		<field name="status" uuid="DA2945D648F7F24DB6ED519C615564F1" type="10" limiting_length="255" never_null="true" id="6"/>
@@ -311,7 +310,6 @@
 		<field name="upAtStmp" uuid="7E6764EC95C7F74B89A8509FFD911EFE" type="4" never_null="true" id="12"/>
 		<field name="stmpUp" uuid="8BE38F5B5B6E214D8C55B2E7F73DCE36" type="4" never_null="true" id="13"/>
 		<field name="isApproved" uuid="D1206F3FDDA66F49812596441E32BE6A" type="1" never_null="true" id="14"/>
-		<field name="reportedBy" uuid="0D41C3EAAF305248A7DDF508713A818A" type="10" store_as_UUID="true" never_null="true" id="15"/>
 		<field name="approvedBy" uuid="C69BC87ECC3E8A40AFE2E649C3367539" type="10" limiting_length="255" never_null="true" id="16"/>
 		<field name="stmpApproval" uuid="C58CFAD652E982459AD859AAC73FE8D3" type="4" never_null="true" id="17"/>
 		<field name="operators" uuid="0A3CC89837F0474693760937B65C8C46" type="21" blob_switch_size="2147483647" never_null="true" id="18"/>
@@ -1836,7 +1834,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="BCF4A60895A2A543A55AEF7B2BCAF5D3" name_Nto1="equipment" name_1toN="repairLogs" auto_load_Nto1="true" auto_load_1toN="true" state="1">
+	<relation uuid="BCF4A60895A2A543A55AEF7B2BCAF5D3" name_Nto1="equipment" name_1toN="repairLogs" auto_load_Nto1="true" auto_load_1toN="true" state="1" integrity="delete">
 		<related_field kind="source">
 			<field_ref uuid="C56ACBF61233134FA887559C036F2D7A" name="UUID_Equipment">
 				<table_ref uuid="E209D11E14110249AE69799CB8F51C7C" name="RepairLog"/>
@@ -3598,11 +3596,6 @@
 	<index kind="regular" unique_keys="true" uuid="AE83CD1FD23F074388E41D1EB7FB0173" type="1">
 		<field_ref uuid="2C3EE5FC26975842998856F7D02B3BA2" name="UUID">
 			<table_ref uuid="BBEF22543374E24BBC6534C68EA6E3D2" name="Units"/>
-		</field_ref>
-	</index>
-	<index kind="regular" uuid="B0AC2F57EA76F746A8AC5D2307E3610F" type="3">
-		<field_ref uuid="AC0D9388F1EFC04CA05EA8CBB47E3BF7" name="fixedBy">
-			<table_ref uuid="E209D11E14110249AE69799CB8F51C7C" name="RepairLog"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="B1A2B84D24E6284B89649B659845D4AF" type="7">
