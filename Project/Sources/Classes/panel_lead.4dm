@@ -860,7 +860,7 @@ Function bActionInteractions()
 		DISABLE MENU ITEM:C150($mainMenu; -1)
 	End if 
 	
-	If (Form:C1466.current_interaction=Null:C1517) || (Form:C1466.current_interaction#Null:C1517 && Form:C1466.current_interaction.UUID_Type#$scheduledUUID)
+	If (Form:C1466.current_interaction=Null:C1517) || ((Form:C1466.current_interaction#Null:C1517) && (Form:C1466.current_interaction.UUID_Type#$scheduledUUID))
 		DISABLE MENU ITEM:C150($mainMenu; -1)
 	End if 
 	
