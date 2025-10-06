@@ -268,7 +268,7 @@
 				"firstName": {
 					"position": 6
 				},
-				"retrainDate": {
+				"stmpRetrainDate": {
 					"position": 5
 				},
 				"UUID_User": {

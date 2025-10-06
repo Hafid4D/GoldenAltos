@@ -1288,7 +1288,7 @@
 	<table name="Staff" uuid="FD10D10C9E0015458AFF59F988A373BB" id="135">
 		<field name="UUID" uuid="6941AB4C41898A4A9FBF25D5AC27CA2B" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_User" uuid="4348C8943690B243AFF8327DE0DA1368" type="10" store_as_UUID="true" never_null="true" id="2"/>
-		<field name="retrainDate" uuid="E05AFD8B07FC254FBBBAE2880867F189" type="4" never_null="true" id="3"/>
+		<field name="stmpRetrainDate" uuid="E05AFD8B07FC254FBBBAE2880867F189" type="4" never_null="true" id="3"/>
 		<field name="firstName" uuid="A922C209EFD24B41BE6B687860BE3C78" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="lastName" uuid="30C1F33ACB30EE4CBA2D2DD6218EF823" type="10" limiting_length="255" never_null="true" id="5">
 			<field_extra multi_line="false"/>
@@ -1298,6 +1298,7 @@
 		<field name="terminationDate" uuid="9711BE3164B4C44BA4E865C89B7B0507" type="4" never_null="true" id="8"/>
 		<field name="creationDate" uuid="2EA2F0715821A44A8A08F4EFB2CF2EDE" type="4" never_null="true" id="9"/>
 		<field name="code" uuid="10F414604ECF714E8F9B93A248D3CB6D" type="10" limiting_length="255" unique="true" never_null="true" id="10"/>
+		<field name="moreData" uuid="CA1A592537C51B41A4A86CA83F177055" type="21" blob_switch_size="2147483647" never_null="true" id="11"/>
 		<field name="terminated" uuid="6D60DE6AF3ED654EB394FFE7695CB9DF" type="1" never_null="true" id="12"/>
 		<field name="hireDate" uuid="7EBB8EEF817496498EE3FA0CC391675E" type="4" never_null="true" id="13"/>
 		<field name="division" uuid="C307EB019AE88F48B0C093CC7A4B60B1" type="10" limiting_length="255" never_null="true" id="14"/>

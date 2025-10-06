@@ -770,6 +770,10 @@ If (True:C214)
 			"communications"; New collection:C1472()\
 			)
 		
+		$staff_e.moreData:=New object:C1471(\
+			"retrainNotified"; False:C215\
+			)
+		
 		
 		$res:=$staff_e.save()
 		

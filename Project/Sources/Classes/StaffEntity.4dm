@@ -79,6 +79,13 @@ Function get fullName()->$fullName : Text
 	$fullName:=[This:C1470.firstName; This:C1470.lastName].join(" ")
 	
 	
+local Function get retrainDate()->$retrainDate : Date
+	$retrainDate:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpRetrainDate; True:C214)
+	
+local Function set retrainDate($retrainDate : Date)
+	This:C1470.stmpRetrainDate:=cs:C1710.sfw_stmp.me.build($retrainDate)
+	
+	
 	
 local Function itemLoad()
 	// This callback is called when the item is selected in the itemList
