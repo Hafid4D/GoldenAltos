@@ -176,6 +176,11 @@ Function _notification_definition()
 	$definition.setActive()
 	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("DueEquipmentOutOfPM"; "Due Equipment out of PM"; $definition)
 	
+	$definition:=cs:C1710.sfw_definitionNotificationType.new()
+	$definition.setDescription("Employee ##fullName## retraining due in the next 30 days")
+	$definition.setActive()
+	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("EmployeeRetrainRequired"; "Employees requiring retraining in the next 30 days"; $definition)
+	
 	
 	//Mark:-Visions defintion
 Function _visions_definition()

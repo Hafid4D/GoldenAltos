@@ -32,3 +32,10 @@ Due Equipment out of PM Notification
 */
 $equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3"; Current date:C33(*); !00-00-00!; False:C215)
 _ga_equipmentNotification(->$equipments; "duePM"; "DueEquipmentOutOfPM")
+
+/*
+Employees requiring retraining in the next 30 days
+*/
+var $staffs : cs:C1710.StaffRoleSelection
+$staffs:=ds:C1482.Equipment.query("retrainDate<=:1 & retrainDate#:2"; Current date:C33(*)+30; !00-00-00!)
+_ga_equipmentNotification(->$equipments; "retrainNotified"; "EmployeeRetrainRequired")
