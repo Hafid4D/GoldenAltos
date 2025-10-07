@@ -290,7 +290,7 @@ If (True:C214)
 					$lotStep_e.tools:=New object:C1471()
 					$lotStep_e.tools:=$step.tools
 					
-					While ($lotStep_e.tools.items.indexOf("")#-1)
+					While (($lotStep_e.tools#Null:C1517) && ($lotStep_e.tools.items.indexOf("")#-1))
 						
 						$lotStep_e.tools.items:=$lotStep_e.tools.items.remove($lotStep_e.tools.items.indexOf(""))
 						

@@ -76,8 +76,17 @@ Function formMethod()
 	End case 
 	
 Function calculateCode()->$leadCode : Text
+	var $eleadCounter : cs:C1710.sfw_CounterEntity
+	
 	$leadCode:="L"
-	$test:=ds:C1482.sfw_Counter.query("ident = :1"; "leadCode").first().currentValue+1
+	$eleadCounter:=ds:C1482.sfw_Counter.query("ident = :1"; "leadCode").first()
+	If ($eleadCounter=Null:C1517)
+		$eleadCounter:=ds:C1482.sfw_Counter.new()
+		$eleadCounter.ident:="leadCode"
+		$eleadCounter.currentValue:=1
+		$info:=$eleadCounter.save()
+	End if 
+	$test:=$eleadCounter.currentValue+1
 	
 	$leadCode+=String:C10($test; "00000")
 	

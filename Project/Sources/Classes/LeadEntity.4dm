@@ -48,6 +48,8 @@ local Function beforeSaveCreation()
 	
 	
 Function calculateCode()->$leadCode : Text
+	var $eleadCounter : cs:C1710.sfw_CounterEntity
+	
 	$leadCode:="L"
 	$test:=ds:C1482.sfw_Counter.getNextValue("leadCode")
 	
@@ -118,28 +120,28 @@ local Function _initContacts()
 		This:C1470.moreData.secondaryContacts:=New collection:C1472
 	End if 
 	
-	//Function contacts()->$contacts : Collection
-	//var $e_mainContact : cs.ContactEntity
-	//var $secondaryContacts : cs.ContactSelection
+Function contacts()->$contacts : Collection
+	var $e_mainContact : cs:C1710.ContactEntity
+	var $secondaryContacts : cs:C1710.ContactSelection
 	
-	//$contacts:=New collection()
-	//If (This.moreData#Null) && (This.moreData.mainContact#Null)
-	//$e_mainContact:=ds.Contact.get(This.moreData.mainContact.UUID)
-	//If ($e_mainContact#Null)
-	//$mainContact:=$e_mainContact.toObject()
-	//$mainContact.type:="Main"
-	//$contacts.push($mainContact)
-	//End if 
-	//End if 
+	$contacts:=New collection:C1472()
+	If (This:C1470.moreData#Null:C1517) && (This:C1470.moreData.mainContact#Null:C1517)
+		$e_mainContact:=ds:C1482.Contact.get(This:C1470.moreData.mainContact.UUID)
+		If ($e_mainContact#Null:C1517)
+			$mainContact:=$e_mainContact.toObject()
+			$mainContact.type:="Main"
+			$contacts.push($mainContact)
+		End if 
+	End if 
 	
-	//If (This.moreData#Null) && (This.moreData.secondaryContacts#Null)
-	//$secondaryContacts:=ds.Contact.query("UUID in :1"; This.moreData.secondaryContacts)
-	//For each ($e_contact; $secondaryContacts)
-	//$contact:=$e_contact.toObject()
-	//$contact.type:="Secondary"
-	//$contacts.push($contact)
-	//End for each 
-	//End if 
+	If (This:C1470.moreData#Null:C1517) && (This:C1470.moreData.secondaryContacts#Null:C1517)
+		$secondaryContacts:=ds:C1482.Contact.query("UUID in :1"; This:C1470.moreData.secondaryContacts)
+		For each ($e_contact; $secondaryContacts)
+			$contact:=$e_contact.toObject()
+			$contact.type:="Secondary"
+			$contacts.push($contact)
+		End for each 
+	End if 
 	
 local Function mainContact()->$mainContact : cs:C1710.ContactEntity
 	If (This:C1470.moreData#Null:C1517) && (This:C1470.moreData.mainContact#Null:C1517)
