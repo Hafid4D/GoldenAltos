@@ -119,6 +119,16 @@ local Function rebuildContact()->$contacts : Collection
 	
 	//mark:-Callbacks
 	
+local Function beforeSave()
+	
+	If (Form:C1466.current_item.nextAuditDate#!00-00-00!) & (Form:C1466.current_item.nextAuditDate<=Current date:C33(*)) & (Form:C1466.current_item.critical=True:C214) & (Form:C1466.current_item.critical#Form:C1466.current_clone.critical)
+		var $suppliers : cs:C1710.SupplierSelection
+		$suppliers:=ds:C1482.Supplier.query("UUID =:1"; Form:C1466.current_item.UUID)
+		_ga_notifier(->$suppliers; "criticalOverdueAudit"; "CriticalSuppliersWithOverdueAudits"; "Supplier"; "name")
+		
+	End if 
+	
+	
 local Function afterCreation()
 	This:C1470._initAddress()
 	This:C1470._initCommunication()
@@ -141,9 +151,17 @@ local Function isDeletable()->$isDeletable : Boolean
 	
 	//mark:-Sub functions
 local Function _initCommunication()
-	//If (This.contactDetails.communications=Null)
-	//This.contactDetails.communications:=New collection
-	//End if 
+	This:C1470._initattachedDocuments()
+	
+	
+local Function _initattachedDocuments()
+	
+	If (This:C1470.attachedDocuments.documents=Null:C1517)
+		
+		This:C1470.attachedDocuments.documents:=New collection:C1472()
+		
+	End if 
+	
 	
 	If (ds:C1482.Contact.query("UUID_Company=:1"; This:C1470.UUID).extract("title").indexOf("Primary")=-1)
 		var $apContact : cs:C1710.ContactEntity

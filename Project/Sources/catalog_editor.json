@@ -131,7 +131,7 @@
 				"UUID_Team": {
 					"position": 14
 				},
-				"team": {
+				"auditTeam": {
 					"position": 13
 				},
 				"activities": {
@@ -177,8 +177,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 828,
-				"top": 529,
+				"left": 706,
+				"top": 550,
 				"width": 228,
 				"height": 582.33203125
 			},
@@ -1294,8 +1294,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 542,
-				"top": 729.33203125,
+				"left": 517,
+				"top": 718.33203125,
 				"width": 158.373046875,
 				"height": 398.33203125
 			},

@@ -1,6 +1,13 @@
 //%attributes = {}
 
+
+
+//$hashOptions:=New shared object("algorithm"; "bcrypt"; "cost"; 10)
+//$newPassword:="pSzjGX!Ey9P1c~p"
+//$hash:=Generate password hash($newPassword; $hashOptions)
+
 //ds.sfw_Notification.all().drop()
+//ds.sfw_User.all().drop()
 
 //$staff:=ds.Staff.query("user.userInscriptions.userProfile.ident = :1 | memberships.team.name =:2"; "pm"; "Facilities")
 

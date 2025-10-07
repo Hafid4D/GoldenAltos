@@ -106,7 +106,7 @@ If (OK=1)
 						
 					: ($headerName="department")
 						
-						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($specification_e.departement.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
+						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($specification_e.controllingDeppartment.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
 						
 					Else 
 						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($specification_e[$headerName]); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)

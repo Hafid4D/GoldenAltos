@@ -181,6 +181,11 @@ Function _notification_definition()
 	$definition.setActive()
 	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("EmployeeRetrainRequired"; "Employees requiring retraining in the next 30 days"; $definition)
 	
+	$definition:=cs:C1710.sfw_definitionNotificationType.new()
+	$definition.setDescription("Critical supplier ##name## audits pending. Schedule immediately")
+	$definition.setActive()
+	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("CriticalSuppliersWithOverdueAudits"; "Critical suppliers with overdue audits"; $definition)
+	
 	
 	//Mark:-Visions defintion
 Function _visions_definition()

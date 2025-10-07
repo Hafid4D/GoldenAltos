@@ -204,13 +204,13 @@ Function btnOpenCompany()
 	
 Function drawPup_departement()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.current_item.drowPup("Department"; "UUID"; "UUID_Team"; "pup_departement")
+		Form:C1466.current_item.drowPup("Team"; "UUID"; "UUID_Team"; "pup_departement")
 	End if 
 	
 	
 Function pup_departement()
 	//Create pop up menu
-	Form:C1466.current_item.pup("departements"; "Department"; "UUID"; "UUID_Team")
+	Form:C1466.current_item.pup("teams"; "Team"; "UUID"; "UUID_Team")
 	This:C1470.drawPup_departement()
 	
 	
@@ -391,7 +391,7 @@ Function bActionTeam()
 		: ($choose="")
 		: ($choose="--delete")
 			Form:C1466.lb_team.remove(Form:C1466.auditMemberPosition-1)
-			Form:C1466.current_item.team.teamMembers:=Form:C1466.lb_team
+			Form:C1466.current_item.auditTeam.teamMembers:=Form:C1466.lb_team
 			cs:C1710.panel_audit.me._activate_save_cancel_button()
 			
 		: ($choose="--add")
@@ -404,7 +404,7 @@ Function bActionTeam()
 			
 			If (OK=1)
 				
-				Form:C1466.current_item.team.teamMembers.push($form)
+				Form:C1466.current_item.auditTeam.teamMembers.push($form)
 				cs:C1710.panel_audit.me._activate_save_cancel_button()
 				
 			End if 
@@ -421,7 +421,7 @@ Function bActionTeam()
 			
 			If (OK=1)
 				Form:C1466.lb_team[Form:C1466.auditMemberPosition-1]:=$form
-				Form:C1466.current_item.team.teamMembers:=Form:C1466.lb_team
+				Form:C1466.current_item.auditTeam.teamMembers:=Form:C1466.lb_team
 				cs:C1710.panel_audit.me._activate_save_cancel_button()
 			End if 
 			

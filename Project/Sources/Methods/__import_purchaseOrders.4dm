@@ -665,7 +665,7 @@ End if
 /**
 Create user: sfw_User & Staff tables
 **/
-If (False:C215)
+If (True:C214)
 	TRUNCATE TABLE:C1051([Staff:135])
 	TRUNCATE TABLE:C1051([sfw_User:16])
 	
@@ -673,7 +673,7 @@ If (False:C215)
 	$user.firstName:="Hassan"
 	$user.lastName:="Sribet"
 	$user.login:="hassansribet"
-	$user.accesses:=JSON Parse:C1218("{\"asDesigner\":true,\"password\":{\"temporary\":false,\"sendTemporaryByMail\":false,\"lastReset\":705253775,\"hash\":\"$2b$10$cLpZxBy5QcJCQ0K5DbscjuC3KC2bUblf0l5IJLtByF342d6OFlmFS\",\"lastChange\":705253879}}")
+	$user.accesses:=JSON Parse:C1218("{\"asDesigner\":true,\"password\":{\"temporary\":false,\"sendTemporaryByMail\":false,\"lastReset\":705253775,\"hash\":\"$2b$10$1KIfSf/DkyivGUKEeHHPDulQ51F9LSOuyFmHy6X9TvAXi1K79E4ri\",\"lastChange\":705253879}}")
 	$user.asDesigner:=True:C214
 	
 	$res:=$user.save()
@@ -703,7 +703,7 @@ If (False:C215)
 	$user.firstName:="Omar"
 	$user.lastName:="Debbagh"
 	$user.login:="omardebbagh"
-	$user.accesses:=JSON Parse:C1218("{\"asDesigner\":true,\"password\":{\"temporary\":false,\"sendTemporaryByMail\":false,\"lastReset\":706358866,\"hash\":\"$2b$10$jWCPtle9cInwDJfVJbCrsecHbiVfbbBISVGEOOGXMILflvJnv9aJG\",\"lastChange\":706358916}}")
+	$user.accesses:=JSON Parse:C1218("{\"asDesigner\":true,\"password\":{\"temporary\":false,\"sendTemporaryByMail\":false,\"lastReset\":706358866,\"hash\":\"$2b$10$1KIfSf/DkyivGUKEeHHPDulQ51F9LSOuyFmHy6X9TvAXi1K79E4ri\",\"lastChange\":706358916}}")
 	
 	$res:=$user.save()
 	
@@ -732,7 +732,7 @@ End if
 /**
 import staffs
 **/
-If (True:C214)
+If (False:C215)
 	$file_excel:=Folder:C1567(fk data folder:K87:12).file("DataJson/GA_employee_list.csv")
 	
 	$records_excel:=Split string:C1554($file_excel.getText(); "\r\n")
@@ -754,7 +754,7 @@ If (True:C214)
 	TRUNCATE TABLE:C1051([Membership:137])
 	TRUNCATE TABLE:C1051([Role:132])
 	TRUNCATE TABLE:C1051([StaffRole:63])
-	TRUNCATE TABLE:C1051([Staff:135])
+	//TRUNCATE TABLE([Staff])
 	
 	SET DATABASE PARAMETER:C642([Staff:135]; Table sequence number:K37:31; 0)
 	
@@ -777,7 +777,9 @@ If (True:C214)
 		
 		$res:=$staff_e.save()
 		
+		
 		If ($res.success)
+			
 			For each ($team; $staff.teams)
 				$teams_es:=ds:C1482.Team.query("name = :1"; $team)
 				
@@ -785,7 +787,7 @@ If (True:C214)
 					$team_e:=$teams_es[0]
 				Else 
 					$team_e:=ds:C1482.Team.new()
-					
+					$team_e.levelID:=ds:C1482.Team.all().length+1
 					$team_e.name:=$team
 					
 					$res:=$team_e.save()
