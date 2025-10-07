@@ -62,7 +62,8 @@ If (Form:C1466.sfw.lb_items.length>0)
 	WP SET DATA CONTEXT:C1786($template; $context)
 	
 	PRINT SETTINGS:C106(2)
-	WP PRINT:C1343($template)
+	WP COMPUTE FORMULAS:C1707($template)
+	WP PRINT:C1343($template; wk do not recompute expressions:K81:312)
 	
 Else 
 	cs:C1710.sfw_dialog.me.info(ds:C1482.sfw_readXliff("Info"; "No items in the list to print"))

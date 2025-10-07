@@ -58,18 +58,18 @@ If ($continue)
 		$logs:=Form:C1466.sfw.lb_items
 		
 		For each ($entity; $logs)
-			$oEntity:=New object:C1471
-			For each ($attribute; ds:C1482[$dataclass])
-				If (ds:C1482[$dataclass][$attribute].fieldType=Is object:K8:27) && ($entity[$attribute]#Null:C1517) && (String:C10($entity[$attribute].title)="4D Write Pro New Document")
-					WP EXPORT VARIABLE:C1319($entity[$attribute]; $wpBlob; wk 4wp:K81:4)
-					BASE64 ENCODE:C895($wpBlob; $wpEncodedBlob)
-					$oEntity[$attribute]:=$wpEncodedBlob
-				Else 
-					$oEntity[$attribute]:=$entity[$attribute]
-				End if 
-				
-			End for each 
-			$export.records.push($oEntity)
+			//$oEntity:=New object
+			//For each ($attribute; ds[$dataclass])
+			//If (ds[$dataclass][$attribute].fieldType=Is object) && ($entity[$attribute]#Null) && (String($entity[$attribute].title)="4D Write Pro New Document")
+			//WP EXPORT VARIABLE($entity[$attribute]; $wpBlob; wk 4wp)
+			//BASE64 ENCODE($wpBlob; $wpEncodedBlob)
+			//$oEntity[$attribute]:=$wpEncodedBlob
+			//Else 
+			//$oEntity[$attribute]:=$entity[$attribute]
+			//End if 
+			
+			//End for each 
+			$export.records.push($entity)  //($oEntity)
 			
 		End for each 
 		
@@ -83,13 +83,12 @@ If ($continue)
 			$headers.push("fixedBy")
 			$headers.push("reportedBy")
 			$headers.push("systemID")
-			$headers:=$headers.remove($headers.indexOf("downAtStmp"))
-			$headers:=$headers.remove($headers.indexOf("upAtStmp"))
+			$headers:=$headers.remove($headers.indexOf("@Stmp"))
 			$headers:=$headers.remove($headers.indexOf("equipment"))
-			$headers:=$headers.remove($headers.indexOf("operators"))
-			$headers:=$headers.remove($headers.indexOf("UUID"))
+			//$headers:=$headers.remove($headers.indexOf("operators"))
+			//$headers:=$headers.remove($headers.indexOf("UUID"))
 			$headers:=$headers.filter(Formula:C1597($1.value#"stmp@"))
-			$headers:=$headers.filter(Formula:C1597($1.value#"UUID_@"))
+			$headers:=$headers.filter(Formula:C1597($1.value#"UUID@"))
 			
 			If (Not:C34($allFields))
 				$headers:=$relevantFields
@@ -116,19 +115,26 @@ If ($continue)
 							
 						: ($headerName="systemID")
 							$systemID:=$log_e.equipment#Null:C1517 ? $log_e.equipment.assignedID : ""
-							SEND PACKET:C103($file; Replace string:C233(String:C10($systemID); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
-						
+							//SEND PACKET($file; Replace string(String($systemID); Char(Carriage return); Char(Space))+$separator_col)
+							SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($systemID); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
+							
 						: ($headerName="fixedBy")
 							$value:=$log_e.equipment#Null:C1517 ? $log_e.operators.fixedBy : ""
-							SEND PACKET:C103($file; Replace string:C233(String:C10($value); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
+							//SEND PACKET($file; Replace string(String($value); Char(Carriage return); Char(Space))+$separator_col)
+							SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($value); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
 							
 						: ($headerName="reportedBy")
 							$value:=$log_e.equipment#Null:C1517 ? $log_e.operators.reportedBy : ""
-							SEND PACKET:C103($file; Replace string:C233(String:C10($value); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
-								
+							//SEND PACKET($file; Replace string(String($value); Char(Carriage return); Char(Space))+$separator_col)
+							SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($value); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
+							
+						: ($headerName="operators")
+							
 						Else 
 							
-							SEND PACKET:C103($file; Replace string:C233(String:C10($log_e[$headerName]); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42))+$separator_col)
+							//SEND PACKET($file; Replace string(String($log_e[$headerName]); Char(Carriage return); Char(Space))+$separator_col)
+							SEND PACKET:C103($file; Replace string:C233(Replace string:C233(String:C10($log_e[$headerName]); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))+$separator_col)
+							
 					End case 
 					
 				End for each 

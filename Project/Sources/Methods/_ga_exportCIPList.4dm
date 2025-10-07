@@ -108,9 +108,9 @@ If (OK=1)
 						
 						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(Replace string:C233(String:C10($cip_e.category.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42)); Char:C90(Tab:K15:37); Char:C90(Space:K15:42))+$separator_col)
 						
-					: ($headerName="isAcceptable")
+					: ($headerName="yesNoQuestion")
 						
-						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(Replace string:C233(String:C10($cip_e.isAcceptable.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42)); Char:C90(Tab:K15:37); Char:C90(Space:K15:42))+$separator_col)
+						SEND PACKET:C103($file; Replace string:C233(Replace string:C233(Replace string:C233(String:C10($cip_e.yesNoQuestion.name); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42)); Char:C90(Tab:K15:37); Char:C90(Space:K15:42))+$separator_col)
 						
 						
 					Else 

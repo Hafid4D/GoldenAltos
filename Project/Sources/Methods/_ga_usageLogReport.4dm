@@ -27,15 +27,16 @@ If ($OK)
 	$lotStepSelection:=ds:C1482.LotStep.query("dateIn>=:1 & dateOut<=:2 & type#:3 & type#:4 & type#:5"; Storage:C1525.cache.startDate; Storage:C1525.cache.endDate; 9; 10; 540)
 	
 	For each ($lotStep; $lotStepSelection)
-		$toolItems:=$lotStep.tools.items
-		
-		
-		If ($toolItems.indexOf(String:C10(Form:C1466.current_item.assignedID+"@"))#-1)
+		If ($lotStep.tools#Null:C1517)
+			$toolItems:=$lotStep.tools.items
 			
-			$entityCollection.push($lotStep)
 			
+			If ($toolItems.indexOf(String:C10(Form:C1466.current_item.assignedID+"@"))#-1)
+				
+				$entityCollection.push($lotStep)
+				
+			End if 
 		End if 
-		
 	End for each 
 	
 	SET PRINT OPTION:C733(Orientation option:K47:2; 2)
