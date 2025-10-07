@@ -129,28 +129,28 @@ Function get amount()->$amountText : Text
 	$amountText:="$"+String:C10($amount; "###,###,###,#00.00")
 	
 	
-	//Function contacts()->$contacts : Collection
-	//var $e_mainContact : cs.ContactEntity
-	//var $secondaryContacts : cs.ContactSelection
+Function contacts()->$contacts : Collection
+	var $e_mainContact : cs:C1710.ContactEntity
+	var $secondaryContacts : cs:C1710.ContactSelection
 	
-	//$contacts:=New collection()
-	//If (This.moreData#Null) && (This.moreData.mainContact#Null)
-	//$e_mainContact:=ds.Contact.get(This.moreData.mainContact.UUID)
-	//If ($e_mainContact#Null)
-	//$mainContact:=$e_mainContact.toObject()
-	//$mainContact.type:="Main"
-	//$contacts.push($mainContact)
-	//End if 
-	//End if 
+	$contacts:=New collection:C1472()
+	If (This:C1470.moreData#Null:C1517) && (This:C1470.moreData.mainContact#Null:C1517)
+		$e_mainContact:=ds:C1482.Contact.get(This:C1470.moreData.mainContact.UUID)
+		If ($e_mainContact#Null:C1517)
+			$mainContact:=$e_mainContact.toObject()
+			$mainContact.type:="Main"
+			$contacts.push($mainContact)
+		End if 
+	End if 
 	
-	//If (This.moreData#Null) && (This.moreData.secondaryContacts#Null)
-	//$secondaryContacts:=ds.Contact.query("UUID in :1"; This.moreData.secondaryContacts)
-	//For each ($e_contact; $secondaryContacts)
-	//$contact:=$e_contact.toObject()
-	//$contact.type:="Secondary"
-	//$contacts.push($contact)
-	//End for each 
-	//End if 
+	If (This:C1470.moreData#Null:C1517) && (This:C1470.moreData.secondaryContacts#Null:C1517)
+		$secondaryContacts:=ds:C1482.Contact.query("UUID in :1"; This:C1470.moreData.secondaryContacts)
+		For each ($e_contact; $secondaryContacts)
+			$contact:=$e_contact.toObject()
+			$contact.type:="Secondary"
+			$contacts.push($contact)
+		End for each 
+	End if 
 	
 Function _mainContact_prv()->$mainContact : cs:C1710.ContactEntity
 	If (This:C1470.moreData#Null:C1517) && (This:C1470.moreData.mainContact#Null:C1517)
@@ -217,7 +217,16 @@ local Function beforeSaveCreation()
 	
 	
 Function calculateCode()->$leadCode : Text
+	
+	var $eQuoteCounter : cs:C1710.sfw_CounterEntity
+	
 	$leadCode:="Q"
+	//$eQuoteCounter:=ds.sfw_Counter.query("ident = :1"; "quoteCode").first()
+	//If ($eQuoteCounter=Null)
+	//$eQuoteCounter:=ds.sfw_Counter.new()
+	//$eQuoteCounter.ident:="quoteCode"
+	//$eQuoteCounter.currentValue:=1
+	//End if 
 	$test:=ds:C1482.sfw_Counter.getNextValue("quoteCode")
 	
 	$leadCode+=String:C10($test; "00000")

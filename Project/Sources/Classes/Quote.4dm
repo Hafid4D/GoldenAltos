@@ -8,8 +8,11 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setDisplayOrder(-500)
 	$entry.setIcon("image/entry/contract-white-50x50.png")
 	
-	$entry.setSearchboxField("subject")
-	$entry.setSearchboxField("code")
+	//$entry.setSearchboxField("subject")
+	//$entry.setSearchboxField("code")
+	$entry.setSearchField("attribute:subject"; "tag:subject")
+	$entry.setSearchField("attribute:code"; "tag:code")
+	
 	$entry.setSearchField("attribute:yearCreation"; "tag:yearCreation"; "popupPart:creation"; "onlyWithTag")
 	$entry.setSearchField("attribute:monthCreation"; "tag:monthCreation"; "popupPart:creation"; "onlyWithTag")
 	
