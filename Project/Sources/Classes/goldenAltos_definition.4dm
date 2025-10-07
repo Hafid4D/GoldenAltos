@@ -182,6 +182,12 @@ Function _notification_definition()
 	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("EmployeeRetrainRequired"; "Employees requiring retraining in the next 30 days"; $definition)
 	
 	
+	$definition:=cs:C1710.sfw_definitionNotificationType.new()
+	$definition.setDescription("With ##Contact## On ##Followupdate## Due To ##Trigger##")
+	$definition.setActive()
+	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("InteractionScheduled"; "Interaction Scheduled"; $definition)
+	
+	
 	//Mark:-Visions defintion
 Function _visions_definition()
 	var $vision : cs:C1710.sfw_definitionVision

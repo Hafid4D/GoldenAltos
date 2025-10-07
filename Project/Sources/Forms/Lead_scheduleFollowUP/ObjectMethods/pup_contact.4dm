@@ -21,3 +21,5 @@ If ($choice#"")
 	Form:C1466.UUID_Contact:=$items[0]
 	OBJECT SET TITLE:C194(*; "pup_contact"; $items[1])
 End if 
+
+OBJECT SET ENABLED:C1123(*; "pup_contact"; $contacts.length>0)

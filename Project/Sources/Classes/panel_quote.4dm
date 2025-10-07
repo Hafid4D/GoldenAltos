@@ -89,8 +89,17 @@ Function btnDatePicker($object; $attribut)
 	
 	
 Function calculateCode()->$leadCode : Text
+	var $eQuoteCounter : cs:C1710.sfw_CounterEntity
 	$leadCode:="Q"
-	$test:=ds:C1482.sfw_Counter.query("ident = :1"; "quoteCode").first().currentValue+1
+	
+	$eQuoteCounter:=ds:C1482.sfw_Counter.query("ident = :1"; "quoteCode").first()
+	If ($eQuoteCounter=Null:C1517)
+		$eQuoteCounter:=ds:C1482.sfw_Counter.new()
+		$eQuoteCounter.ident:="quoteCode"
+		$eQuoteCounter.currentValue:=1
+		$info:=$eQuoteCounter.save()
+	End if 
+	$test:=$eQuoteCounter.currentValue+1
 	
 	$leadCode+=String:C10($test; "00000")
 	

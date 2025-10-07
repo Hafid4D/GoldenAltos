@@ -1,4 +1,4 @@
-$sales:=ds:C1482.Staff.query("department.name == :1"; "Sales")
+$sales:=ds:C1482.Staff.query("memberships.team.name == :1"; "Sales")
 
 
 $menu:=Create menu:C408
