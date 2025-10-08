@@ -803,6 +803,7 @@
 		</field>
 		<field name="attachedDocuments" uuid="926C9621239B634A8ACB2A923364231D" type="21" blob_switch_size="2147483647" never_null="true" id="17"/>
 		<field name="critical" uuid="440827CCA5765D4681267D848DDDFD54" type="1" never_null="true" id="18"/>
+		<field name="moreData" uuid="E4523C5432BFD949ACA300E41D10CCC6" type="21" blob_switch_size="2147483647" never_null="true" id="19"/>
 		<primary_key field_name="UUID" field_uuid="CFBA7599E861DC4A91A0C1B26781C297"/>
 	</table>
 	<table name="PartData" uuid="68D645D2E1989F4CA36E905F914AD868" id="58">
@@ -1309,9 +1310,8 @@
 	</table>
 	<table name="Team" uuid="7B297BB3C8DBDA42B6756D36DC233D8B" id="136">
 		<field name="UUID" uuid="2407878C5D46474F9669463CE4A10D45" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="id" uuid="38C4DA5CA6FC7341BBEEABE68E6A01FA" type="4" never_null="true" id="2"/>
+		<field name="levelID" uuid="38C4DA5CA6FC7341BBEEABE68E6A01FA" type="4" never_null="true" id="2"/>
 		<field name="name" uuid="9911EF98C0E7C941827A98923504109D" type="10" limiting_length="255" never_null="true" id="3"/>
-		<field name="name" uuid="9911EF98C0E7C941827A98923504109D" type="10" limiting_length="255" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="2407878C5D46474F9669463CE4A10D45"/>
 	</table>
 	<table name="Membership" uuid="89B8693B8BA31D46A5E7CC5F40548E73" id="137">
@@ -1373,7 +1373,7 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="activities" uuid="1196179170EB774E911DB9970A168273" type="21" blob_switch_size="2147483647" never_null="true" id="12"/>
-		<field name="team" uuid="1E5EF93B7320A24E8F9E93B474D9694A" type="21" blob_switch_size="2147483647" never_null="true" id="13">
+		<field name="auditTeam" uuid="1E5EF93B7320A24E8F9E93B474D9694A" type="21" blob_switch_size="2147483647" never_null="true" id="13">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="UUID_Team" uuid="DBBC9E80F752DA41B020E37A427026A0" type="10" store_as_UUID="true" never_null="true" id="14"/>

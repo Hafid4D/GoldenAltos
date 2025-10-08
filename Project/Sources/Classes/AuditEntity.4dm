@@ -79,8 +79,8 @@ local Function pup($cacheCollection; $dataClass; $queryField; $queryValue)
 	
 Function rebuidTeam()->$team : Collection
 	
-	If (This:C1470.team#Null:C1517) && (This:C1470.team.teamMembers#Null:C1517)
-		$team:=This:C1470.team.teamMembers
+	If (This:C1470.auditTeam#Null:C1517) && (This:C1470.auditTeam.teamMembers#Null:C1517)
+		$team:=This:C1470.auditTeam.teamMembers
 	Else 
 		$team:=New collection:C1472()
 	End if 
@@ -128,8 +128,8 @@ local Function _initDocument()
 		This:C1470.activities:=New object:C1471()
 		This:C1470.activities.collection:=New collection:C1472()
 		
-		This:C1470.team:=New object:C1471()
-		This:C1470.team.teamMembers:=New collection:C1472()
+		This:C1470.auditTeam:=New object:C1471()
+		This:C1470.auditTeam.teamMembers:=New collection:C1472()
 		
 	End if 
 	

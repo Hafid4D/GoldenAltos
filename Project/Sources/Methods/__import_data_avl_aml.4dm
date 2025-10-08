@@ -66,6 +66,10 @@ If ($supplier_log.exists)
 		$eSupplier.name:=$supplier.Supplier
 		$eSupplier.code:=$supplier.code
 		
+		$eSupplier.moreData:=New object:C1471(\
+			"criticalOverdueAudit"; False:C215\
+			)
+		
 		$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($supplier.Division; "\r"; sk trim spaces:K86:2).join("\r"))
 		
 		If ($division.length>0)

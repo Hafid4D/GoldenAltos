@@ -48,7 +48,7 @@ local Function itemLoad()
 	
 local Function beforeSave()
 	
-	If (Form:C1466.current_item.down=True:C214)
+	If (Form:C1466.current_item.down=True:C214) & (Form:C1466.current_item.down#Form:C1466.current_clone.down)
 		
 		$context:=New object:C1471
 		$context.target:=Form:C1466.current_item.UUID

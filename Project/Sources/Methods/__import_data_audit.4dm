@@ -9,7 +9,7 @@ $audit_log:=Folder:C1567(fk data folder:K87:12).file("DataJson/log_book_export.j
 If ($audit_log.exists)
 	$audits:=JSON Parse:C1218($audit_log.getText())
 	
-	TRUNCATE TABLE:C1051([Audit:59])
+	TRUNCATE TABLE:C1051([Audit:139])
 	
 	$docs:=Folder:C1567(fk data folder:K87:12).file("DataJson/docServerIndex_export.json")
 	$count:=0
@@ -37,8 +37,8 @@ If ($audit_log.exists)
 			$eAudit.activities:=New object:C1471()
 			$eAudit.activities.collection:=New collection:C1472()
 			
-			$eAudit.team:=New object:C1471()
-			$eAudit.team.teamMembers:=New collection:C1472()
+			$eAudit.auditTeam:=New object:C1471()
+			$eAudit.auditTeam.teamMembers:=New collection:C1472()
 			
 			$eAudit.document:=New object:C1471()
 			$_documents:=$documents.query("PrimaryKeyValue=:1"; String:C10($audit.Page))

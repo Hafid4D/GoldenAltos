@@ -460,7 +460,8 @@
 					"dataSourceTypeHint": "boolean",
 					"fontWeight": "normal",
 					"right": 406,
-					"dataSource": "Form:C1466.current_item.isApproved"
+					"dataSource": "Form:C1466.current_item.isApproved",
+					"method": "ObjectMethods/entryField_isApproved.4dm"
 				},
 				"entryField_approver": {
 					"type": "input",
