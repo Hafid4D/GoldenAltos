@@ -11,7 +11,7 @@ Equipment out of calibration in 30 days Notifications
 */
 $equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & notAtSite=:2"; Current date:C33(*)+30; False:C215)
 _ga_notifier(->$equipments; "soonDueCal"; "EquipmentSoonDueCalibration"; "Equipment"; "assignedID")
-TRACE:C157
+
 /*
 Due Equipment out of calibration
 */

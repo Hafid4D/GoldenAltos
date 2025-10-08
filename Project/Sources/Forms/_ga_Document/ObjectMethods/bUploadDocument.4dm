@@ -16,7 +16,7 @@ Case of
 			Form:C1466.details.approvalDate:=!00-00-00!
 			Form:C1466.details.approvedBy:=""
 			Form:C1466.details.isApproved:=False:C215
-			
+			Form:C1466.changed:=True:C214
 		End if 
 		
 		
