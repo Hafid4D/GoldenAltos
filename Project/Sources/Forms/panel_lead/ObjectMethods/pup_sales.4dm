@@ -1,6 +1,6 @@
 
 If (Form:C1466.sfw.checkIsInModification())
-	$sales:=ds:C1482.Staff.query("department.name == :1"; "Sales")
+	$sales:=ds:C1482.Staff.query("memberships.team.name == :1"; "Sales")
 	
 	
 	$menu:=Create menu:C408

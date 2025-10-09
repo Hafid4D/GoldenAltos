@@ -1,4 +1,4 @@
-//%attributes = {}
+//%attributes = {"executedOnServer":true}
 var $eInteractionMethod : cs:C1710.InteractionMethodEntity
 var $eInteractionOutcome : cs:C1710.InteractionOutcomeEntity
 var $eInteractionTrigger : cs:C1710.InteractionTriggerEntity
