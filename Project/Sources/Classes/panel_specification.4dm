@@ -143,8 +143,8 @@ Function bActionDocument()
 			
 			$form:=New object:C1471("details"; $details)  // Form.selectedDocument)
 			$form.approverProfile:=New collection:C1472("qs"; "qm")
-			$form.operation:="create"
-			$form.documentHasChanged:=False:C215
+			$form.displayApprovalFields:=True:C214
+			$form.documentHasChanged:=True:C214
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_document"; $form)
@@ -168,7 +168,7 @@ Function bActionDocument()
 			$document:=OB Copy:C1225(Form:C1466.current_item.documents.documentsCollection[Form:C1466.selectedDocumentPos-1])
 			$form:=New object:C1471("details"; OB Copy:C1225(Form:C1466.current_item.documents.documentsCollection[Form:C1466.selectedDocumentPos-1]))
 			$form.approverProfile:=New collection:C1472("qs"; "qm")
-			$form.operation:="modify"
+			$form.displayApprovalFields:=True:C214
 			$form.documentHasChanged:=False:C215
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
@@ -232,7 +232,6 @@ Function bSpecEdit()
 	$details:=New object:C1471("blob"; Form:C1466.current_item.publishedDocumentBlob; "docPath"; ""; "docName"; Form:C1466.current_item.spec)
 	
 	$form:=New object:C1471("details"; $details)
-	$form.operation:="modify"
 	$form.documentHasChanged:=False:C215
 	
 	$winRef:=Open form window:C675("_ga_uploadDocument"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)

@@ -244,7 +244,7 @@ Function bActionDocument()
 			
 			$form:=New object:C1471("details"; $details)  // Form.selectedDocument)
 			$form.approverProfile:=New collection:C1472("qs"; "qm")
-			$form.operation:="create"
+			$form.displayApprovalFields:=False:C215
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_document"; $form)
@@ -259,7 +259,7 @@ Function bActionDocument()
 			
 			$form:=New object:C1471("details"; Form:C1466.current_item.attachedDocuments.documents[Form:C1466.selectedDocumentPos-1])
 			$form.approverProfile:=New collection:C1472("qs"; "qm")
-			$form.operation:="modify"
+			$form.displayApprovalFields:=False:C215
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_document"; $form)
