@@ -112,3 +112,23 @@ local Function _initReports()
 	End if 
 	
 	
+local Function beforeSave()
+	
+	If (Form:C1466.current_item.isApproved=False:C215) & (Form:C1466.current_item.isApproved#Form:C1466.current_clone.isApproved)
+		
+		$context:=New object:C1471
+		$context.target:=Form:C1466.current_item.UUID
+		$context.targetDataclass:="Specification"
+		$context.spec:=Form:C1466.current_item.spec
+		
+		$profiles:=New collection:C1472("qm"; "qs"; "pm"; "ps"; "vp"; "gm")
+		$staff:=ds:C1482.Staff.query("user.userInscriptions.userProfile.ident in :1 | memberships.team.name =:2"; $profiles; "Facilities")
+		
+		$users:=$staff.extract("user").extract("UUID").distinct()
+		cs:C1710.sfw_notificationManager.me.notify("SpecControlApproval"; $users; $context)
+		
+	End if 
+	
+	
+	
+	

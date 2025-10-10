@@ -144,11 +144,19 @@ Function bActionDocument()
 			$form:=New object:C1471("details"; $details)  // Form.selectedDocument)
 			$form.approverProfile:=New collection:C1472("qs"; "qm")
 			$form.operation:="create"
+			$form.documentHasChanged:=False:C215
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_document"; $form)
 			
 			If (OK=1)
+				
+				If ($form.documentHasChanged) | Not:C34($form.details.isApproved)
+					Form:C1466.current_item.stmpApproval:=0
+					Form:C1466.current_item.approver:=""
+					Form:C1466.current_item.isApproved:=False:C215
+				End if 
+				
 				//Form.lb_documents.push($form.details)
 				Form:C1466.current_item.documents.documentsCollection.push($form.details)
 				cs:C1710.panel_specification.me._activate_save_cancel_button()
@@ -161,20 +169,19 @@ Function bActionDocument()
 			$form:=New object:C1471("details"; OB Copy:C1225(Form:C1466.current_item.documents.documentsCollection[Form:C1466.selectedDocumentPos-1]))
 			$form.approverProfile:=New collection:C1472("qs"; "qm")
 			$form.operation:="modify"
+			$form.documentHasChanged:=False:C215
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_document"; $form)
 			
 			If (OK=1)
-				$blobHasBeenChanged:=JSON Stringify:C1217($document.blob)#JSON Stringify:C1217($form.details.blob)
 				
-				If ($blobHasBeenChanged)
-					Form:C1466.current_item.stmpApproval:=0  //!00-00-00!
+				If ($form.documentHasChanged) | Not:C34($form.details.isApproved)
+					Form:C1466.current_item.stmpApproval:=0
 					Form:C1466.current_item.approver:=""
 					Form:C1466.current_item.isApproved:=False:C215
-					
-					
 				End if 
+				//$blobHasBeenChanged:=JSON Stringify($document.blob)#JSON Stringify($form.details.blob)
 				
 				//Form.selectedDocument:=$form.details
 				Form:C1466.current_item.documents.documentsCollection[Form:C1466.selectedDocumentPos-1]:=$form.details
@@ -226,11 +233,20 @@ Function bSpecEdit()
 	
 	$form:=New object:C1471("details"; $details)
 	$form.operation:="modify"
+	$form.documentHasChanged:=False:C215
 	
 	$winRef:=Open form window:C675("_ga_uploadDocument"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 	DIALOG:C40("_ga_uploadDocument"; $form)
 	
 	If (OK=1)
+		
+		If ($form.documentHasChanged)
+			Form:C1466.current_item.revisionDate:=Current date:C33(*)
+			Form:C1466.current_item.stmpApproval:=0
+			Form:C1466.current_item.approver:=""
+			Form:C1466.current_item.isApproved:=False:C215
+		End if 
+		Form:C1466.current_item.revisionDate:=Current date:C33(*)
 		Form:C1466.current_item.publishedDocumentBlob:=$form.details.blob
 		cs:C1710.panel_specification.me._activate_save_cancel_button()
 	End if 

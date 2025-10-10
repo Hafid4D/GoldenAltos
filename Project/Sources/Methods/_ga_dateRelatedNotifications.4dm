@@ -49,4 +49,13 @@ $suppliers:=ds:C1482.Supplier.query("nextAuditDate<=:1 & nextAuditDate#:2 & crit
 _ga_notifier(->$suppliers; "criticalOverdueAudit"; "CriticalSuppliersWithOverdueAudits"; "Supplier"; "name")
 
 
+/*
+Specs Control Approval
+*/
+var $specification : cs:C1710.SpecificationSelection
+$formula_1:=Formula:C1597((This:C1470.reviewDate+This:C1470.reviewIntervalInDays)<Current date:C33(*))
+$specification:=ds:C1482.Specification.query($formula_1)
+//ds.Specification.query("reviewDate<=:1 & reviewDate#:2"; Current date(*); !00-00-00!)
+_ga_notifier(->$specification; "dueReview"; "SpecReviewOverdue"; "Specification"; "spec")
+
 

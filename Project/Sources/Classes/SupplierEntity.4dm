@@ -122,9 +122,17 @@ local Function rebuildContact()->$contacts : Collection
 local Function beforeSave()
 	
 	If (Form:C1466.current_item.nextAuditDate#!00-00-00!) & (Form:C1466.current_item.nextAuditDate<=Current date:C33(*)) & (Form:C1466.current_item.critical=True:C214) & (Form:C1466.current_item.critical#Form:C1466.current_clone.critical)
-		var $suppliers : cs:C1710.SupplierSelection
-		$suppliers:=ds:C1482.Supplier.query("UUID =:1"; Form:C1466.current_item.UUID)
-		_ga_notifier(->$suppliers; "criticalOverdueAudit"; "CriticalSuppliersWithOverdueAudits"; "Supplier"; "name")
+		
+		$context:=New object:C1471
+		$context.target:=Form:C1466.current_item.UUID
+		$context.targetDataclass:="Supplier"
+		$context.name:=Form:C1466.current_item.name
+		
+		$profiles:=New collection:C1472("qm"; "qs"; "pm"; "ps"; "vp"; "gm")
+		$staff:=ds:C1482.Staff.query("user.userInscriptions.userProfile.ident in :1 | memberships.team.name =:2"; $profiles; "Facilities")
+		
+		$users:=$staff.extract("user").extract("UUID").distinct()
+		cs:C1710.sfw_notificationManager.me.notify("CriticalSuppliersWithOverdueAudits"; $users; $context)
 		
 	End if 
 	

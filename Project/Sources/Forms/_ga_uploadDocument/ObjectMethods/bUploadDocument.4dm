@@ -12,6 +12,8 @@ Case of
 			Form:C1466.details.blob:=$blob
 			Form:C1466.details.docPath:=$vhDoc
 			OBJECT SET TITLE:C194(*; "fileName"; $vhDoc)
+			
+			Form:C1466.documentHasChanged:=True:C214
 		End if 
 		
 		

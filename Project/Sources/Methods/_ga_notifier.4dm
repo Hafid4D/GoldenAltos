@@ -16,7 +16,7 @@ var $identifier : Text:=$5
 
 For each ($entity; $entitySelection)
 	
-	If ($entity.moreData[$boolField]=False:C215)
+	If (Not:C34($entity.moreData[$boolField]))
 		
 		$context:=New object:C1471
 		$context.target:=$entity.UUID
