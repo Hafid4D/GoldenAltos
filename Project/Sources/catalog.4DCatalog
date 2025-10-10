@@ -769,6 +769,7 @@
 		<field name="approvedBy" uuid="66206A9C456E4B42A1A256C572E05B0E" type="10" limiting_length="255" never_null="true" id="20"/>
 		<field name="isApproved" uuid="CF4A58BB76CA9643BC2AE13AE3E91EA4" type="1" never_null="true" id="21"/>
 		<field name="stmpApproval" uuid="5EC205F49069354E9F9AD6417AFA9C1C" type="4" never_null="true" id="22"/>
+		<field name="attachedDocuments" uuid="31CBB580D95617499D3A1AFB0E4C5989" type="21" blob_switch_size="2147483647" never_null="true" id="23"/>
 		<primary_key field_name="UUID" field_uuid="87371A3102B02347880B2FF579DAE670"/>
 	</table>
 	<table name="Supplier" uuid="A0C8CDC075BBB546914E03F7689B897E" id="57">

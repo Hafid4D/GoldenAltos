@@ -71,6 +71,33 @@ local Function pup($cacheCollection; $dataClass; $queryField; $queryValue)
 		
 	End if 
 	
+local Function afterCreation()
+	This:C1470._initattachedDocuments()
+	
+local Function loadAfterCreation()
+	// This callback is called after creating the new item but before displaying the panel.
+	This:C1470._initattachedDocuments()
+	
+local Function itemLoad()
+	// This callback is called when the item is selected in the itemList
+	This:C1470._initattachedDocuments()
+	
+	
+local Function isDeletable()->$isDeletable : Boolean
+	// This callback must return false to inactivate the deletion mode for the current item.
+	$isDeletable:=True:C214
+	
+	
+	//mark:-Sub functions
+	
+local Function _initattachedDocuments()
+	
+	If (This:C1470.attachedDocuments.documents=Null:C1517)
+		
+		This:C1470.attachedDocuments.documents:=New collection:C1472()
+		
+	End if 
+	
 	
 	
 	

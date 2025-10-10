@@ -8,13 +8,18 @@ Function formMethod()
 	//This function manages the main logic for updating and refreshing the form
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
-		
+		This:C1470.LoadAllTabs()
 	End if 
 	
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
 				
+			: (FORM Get current page:C276(*)=2)
+				
+			: (FORM Get current page:C276(*)=3)
+				This:C1470.loadDocuments()
+				OBJECT SET ENTERABLE:C238(*; "lb_documents"; False:C215)
 				
 		End case 
 	End if 
@@ -25,13 +30,34 @@ Function formMethod()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
+	
+	Use (Form:C1466.sfw.entry.panel.pages)
+		Form:C1466.sfw.entry.panel.pages[2].label:="Documents ("+String:C10(Form:C1466.lb_documents.length)+")"
+	End use 
+	
+	
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
-	OBJECT GET COORDINATES:C663(*; "subFormAddress"; $g; $h; $d; $b)
-	OBJECT SET COORDINATES:C1248(*; "subFormAddress"; $g; $h; $widthSubform-10; $b)
 	
-	OBJECT GET COORDINATES:C663(*; "entryField_comment"; $g; $h; $d; $b)
-	OBJECT SET COORDINATES:C1248(*; "entryField_comment"; $g; $h; $widthSubform-30; $b)
-	
+	Case of 
+			
+		: (FORM Get current page:C276(*)=1)
+			
+			OBJECT GET COORDINATES:C663(*; "entryField_comment"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "entryField_comment"; $g; $h; $widthSubform-30; $b)
+			
+		: (FORM Get current page:C276(*)=2)
+			
+			OBJECT GET COORDINATES:C663(*; "subFormAddress"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "subFormAddress"; $g; $h; $widthSubform-10; $b)
+			
+		: (FORM Get current page:C276(*)=3)
+			
+			OBJECT GET COORDINATES:C663(*; "lb_documents"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			$offset:=4
+			
+			OBJECT SET COORDINATES:C1248(*; "lb_documents"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+			
+	End case 
 	
 	This:C1470.supplierAddressDetails()
 	This:C1470.drawPup_approvedBy()
@@ -52,8 +78,6 @@ Function redrawAndSetVisible()
 		OBJECT SET ENABLED:C1123(*; "entryField_isApproved"; $hasAuthorizedProfile)
 		OBJECT SET ENABLED:C1123(*; "entryField_approver"; $hasAuthorizedProfile)
 		OBJECT SET ENABLED:C1123(*; "entryField_approvalDate"; $hasAuthorizedProfile)
-		
-		
 		
 	End if 
 	Form:C1466.sfw.drawHTab()
@@ -237,3 +261,108 @@ Function btnOpenSupplier()
 		Form:C1466.sfw.openInANewWindow($es[0]; "qualityAssurance"; "AVL")
 	End if 
 	
+	
+Function bActionDocument()
+	
+	$refMenu:=Create menu:C408
+	APPEND MENU ITEM:C411($refMenu; "View report"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; 1; "--view")
+	If (Form:C1466.selectedDocument=Null:C1517) | (Undefined:C82(Form:C1466.selectedDocument))
+		DISABLE MENU ITEM:C150($refMenu; 1)
+	End if 
+	
+	APPEND MENU ITEM:C411($refMenu; "add report"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; 2; "--add")
+	If (sfw_checkIsInModification=False:C215)
+		DISABLE MENU ITEM:C150($refMenu; 2)
+	End if 
+	
+	APPEND MENU ITEM:C411($refMenu; "modify report"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; 3; "--modify")
+	If (sfw_checkIsInModification=False:C215) | (Form:C1466.selectedDocument=Null:C1517) | Undefined:C82(Form:C1466.selectedDocument)
+		DISABLE MENU ITEM:C150($refMenu; 3)
+	End if 
+	
+	APPEND MENU ITEM:C411($refMenu; "delete report"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; 4; "--delete")
+	If (sfw_checkIsInModification=False:C215) | (Form:C1466.selectedDocument=Null:C1517) | Undefined:C82(Form:C1466.selectedDocument)
+		DISABLE MENU ITEM:C150($refMenu; 4)
+	End if 
+	
+	$choice:=Dynamic pop up menu:C1006($refMenu)
+	RELEASE MENU:C978($refMenu)
+	Case of 
+		: ($choice="--view")
+			
+			$LocalFile:=Temporary folder:C486+Folder separator:K24:12+Form:C1466.selectedDocument.sourcePath
+			BLOB TO DOCUMENT:C526($LocalFile; Form:C1466.selectedDocument.blob)
+			OPEN URL:C673($LocalFile; *)
+			
+			
+		: ($choice="--add")
+			
+			$details:=New object:C1471
+			OB SET:C1220($details; "code"; ""; \
+				"dateTimeStamp"; _ga_setDateTimeStamp(Current date:C33(*); Current time:C178(*)); \
+				"creationDateTimeStamp"; _ga_setDateTimeStamp(Current date:C33(*); Current time:C178(*)); \
+				"documentPath"; ""; \
+				"sourcePath"; ""; \
+				"description"; ""; \
+				"approvalDate"; Date:C102(!00-00-00!); \
+				"approvedBy"; ""; \
+				"isApproved"; False:C215)
+			
+			
+			$form:=New object:C1471("details"; $details)  // Form.selectedDocument)
+			$form.approverProfile:=New collection:C1472("qs"; "qm")
+			$form.displayApprovalFields:=False:C215
+			
+			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("_ga_document"; $form)
+			If (OK=1)
+				Form:C1466.lb_documents.push($form.details)
+				Form:C1466.current_item.attachedDocuments.documents.push($form.details)
+				cs:C1710.panel_supplier.me._activate_save_cancel_button()
+			End if 
+			
+			
+		: ($choice="--modify")
+			
+			$form:=New object:C1471("details"; Form:C1466.current_item.attachedDocuments.documents[Form:C1466.selectedDocumentPos-1])
+			$form.approverProfile:=New collection:C1472("qs"; "qm")
+			$form.displayApprovalFields:=False:C215
+			
+			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("_ga_document"; $form)
+			If (OK=1)
+				Form:C1466.selectedDocument:=$form.details
+				Form:C1466.current_item.attachedDocuments.documents.push($form.details)
+				cs:C1710.panel_supplier.me._activate_save_cancel_button()
+			End if 
+			
+		: ($choice="--delete")
+			
+			$ok:=cs:C1710.sfw_dialog.me.confirm("Do you really want to delete this document? "; "Delete"; "CANCEL")
+			If ($ok)
+				
+				Form:C1466.lb_documents.remove(Form:C1466.selectedDocumentPos-1)
+				Form:C1466.current_item.attachedDocuments.documents.remove(Form:C1466.selectedDocumentPos-1)
+				cs:C1710.panel_supplier.me._activate_save_cancel_button()
+				
+			End if 
+			
+			//This.loadDocuments()
+			
+	End case 
+	
+Function loadDocuments()
+	
+	If (Form:C1466.current_item#Null:C1517)
+		
+		Form:C1466.lb_documents:=Form:C1466.current_item.attachedDocuments.documents.map(Formula:C1597(_ga_getDateTime))
+		
+	End if 
+	
+Function LoadAllTabs()
+	
+	This:C1470.loadDocuments()

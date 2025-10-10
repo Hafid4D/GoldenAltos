@@ -137,9 +137,9 @@ If ($supplier_log.exists)
 			$doc.documentPath:=$document.DocumentPath
 			$doc.sourcePath:=$document.SourcePath
 			$doc.description:=$document.DocDescription
-			$doc.approvalDate:=!00-00-00!
-			$doc.approvedBy:=""
-			$doc.isApproved:=False:C215
+			//$doc.approvalDate:=!00-00-00!
+			//$doc.approvedBy:=""
+			//$doc.isApproved:=False
 			
 			
 			$report:=Folder:C1567(fk data folder:K87:12).file("DataJson/SuppliersDocs/"+String:C10($document.UniqueID+$document.PrimaryKeyValue))
@@ -343,6 +343,11 @@ If ($avml_log.exists)
 		Else 
 			
 		End if 
+		
+		//Attached Documents
+		
+		$eAvml.attachedDocuments:=New object:C1471()
+		$eAvml.attachedDocuments.documents:=New collection:C1472()
 		
 		$res:=$eAvml.save()
 		If (Not:C34($res.success))

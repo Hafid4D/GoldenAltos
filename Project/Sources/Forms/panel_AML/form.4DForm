@@ -95,7 +95,7 @@
 				"entryField_service": {
 					"type": "checkbox",
 					"text": "Service",
-					"top": 39,
+					"top": 38,
 					"left": 584,
 					"width": 63,
 					"height": 17,
@@ -159,46 +159,49 @@
 					"strokeWidth": 2,
 					"stroke": "#FFFFFF",
 					"right": 1900
+				},
+				"Rectangle1": {
+					"type": "rectangle",
+					"top": 113,
+					"left": 0,
+					"width": 5000,
+					"height": 704,
+					"fill": "#B1CFDE",
+					"strokeWidth": 2,
+					"stroke": "#FFFFFF"
+				},
+				"entryField_makeInactive": {
+					"type": "checkbox",
+					"text": "Make Inactive",
+					"top": 65,
+					"left": 584,
+					"width": 90,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.current_item.makeInactive",
+					"fontWeight": "normal",
+					"dataSourceTypeHint": "boolean",
+					"right": 674
 				}
 			}
 		},
 		{
 			"objects": {
-				"label_0_2": {
-					"type": "text",
-					"top": 199,
-					"left": -2,
-					"width": 155,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Service/Product",
-					"textAlign": "right",
-					"fontWeight": "normal"
-				},
-				"entryField_serviceType": {
-					"type": "input",
-					"top": 199,
-					"left": 167,
-					"width": 296,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.serviceType",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "normal",
-					"textAlign": "left",
-					"bottom": 216,
-					"right": 463
+				"main_bkgd1": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 0,
+					"width": 1500,
+					"height": 1500,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent"
 				},
 				"label_0_3": {
 					"type": "text",
-					"top": 226,
+					"top": 198,
 					"left": 1,
 					"width": 155,
 					"height": 17,
@@ -244,10 +247,10 @@
 				},
 				"entryField_description": {
 					"type": "input",
-					"top": 226,
+					"top": 198,
 					"left": 167,
-					"width": 296,
-					"height": 17,
+					"width": 308,
+					"height": 42,
 					"dataSource": "Form:C1466.current_item.description",
 					"focusable": false,
 					"enterable": false,
@@ -260,8 +263,9 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 243,
-					"right": 463
+					"bottom": 240,
+					"right": 475,
+					"scrollbarVertical": "automatic"
 				},
 				"pup_procurementUnit": {
 					"type": "button",
@@ -530,21 +534,6 @@
 					"fontWeight": "normal",
 					"textAlign": "left"
 				},
-				"entryField_makeInactive": {
-					"type": "checkbox",
-					"text": "Make Inactive",
-					"top": 280,
-					"left": 373,
-					"width": 90,
-					"height": 17,
-					"events": [
-						"onClick"
-					],
-					"dataSource": "Form:C1466.current_item.makeInactive",
-					"fontWeight": "normal",
-					"dataSourceTypeHint": "boolean",
-					"right": 463
-				},
 				"header_bkgd1": {
 					"type": "rectangle",
 					"top": 114,
@@ -711,7 +700,7 @@
 					"type": "input",
 					"top": 154,
 					"left": 167,
-					"width": 296,
+					"width": 308,
 					"height": 34,
 					"dataSource": "Form:C1466.current_item.vendorPartnum",
 					"focusable": false,
@@ -726,7 +715,8 @@
 					"fontWeight": "normal",
 					"textAlign": "left",
 					"bottom": 188,
-					"right": 463
+					"right": 475,
+					"scrollbarVertical": "automatic"
 				},
 				"entryField_approver": {
 					"type": "input",
@@ -748,11 +738,54 @@
 					"textAlign": "left",
 					"bottom": 464,
 					"dataSourceTypeHint": "number"
+				},
+				"label_0_2": {
+					"type": "text",
+					"top": 252,
+					"left": 239,
+					"width": 100,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Service/Product",
+					"textAlign": "right",
+					"fontWeight": "normal"
+				},
+				"entryField_serviceType": {
+					"type": "input",
+					"top": 253,
+					"left": 351,
+					"width": 124,
+					"height": 45,
+					"dataSource": "Form:C1466.current_item.serviceType",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "normal",
+					"textAlign": "left",
+					"bottom": 298,
+					"right": 475,
+					"scrollbarVertical": "automatic"
 				}
 			}
 		},
 		{
 			"objects": {
+				"main_bkgd2": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 0,
+					"width": 1500,
+					"height": 1500,
+					"sizingX": "grow",
+					"fill": "#E4E4E4",
+					"stroke": "transparent"
+				},
 				"header_bkgd8": {
 					"type": "rectangle",
 					"top": 142,
@@ -821,10 +854,131 @@
 					"focusable": false
 				}
 			}
+		},
+		{
+			"objects": {
+				"bActionDocument": {
+					"type": "button",
+					"text": "Actions",
+					"top": 137,
+					"left": 12,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionDocument.4dm",
+					"visibility": "visible"
+				},
+				"lb_documents": {
+					"type": "listbox",
+					"left": 132,
+					"top": 114,
+					"width": 800,
+					"height": 700,
+					"events": [
+						"onClick",
+						"onDataChange",
+						"onSelectionChange",
+						"onHeaderClick",
+						"onBeginDragOver"
+					],
+					"listboxType": "collection",
+					"currentItemPositionSource": "Form:C1466.selectedDocumentPos",
+					"currentItemSource": "Form:C1466.selectedDocument",
+					"dataSource": "Form:C1466.lb_documents",
+					"method": "",
+					"selectionMode": "single",
+					"resizingMode": "rightToLeft",
+					"alternateFill": "#E6E6E6",
+					"horizontalLineStroke": "transparent",
+					"borderStyle": "none",
+					"verticalLineStroke": "transparent",
+					"headerHeight": "2em",
+					"right": 932,
+					"scrollbarHorizontal": "automatic",
+					"hideFocusRing": false,
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"scrollbarVertical": "automatic",
+					"columns": [
+						{
+							"header": {
+								"text": "Code",
+								"name": "Header1",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column1",
+							"footer": {
+								"name": "Footer1"
+							},
+							"dataSource": "This:C1470.code",
+							"width": 134,
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header2",
+								"text": "Source Path",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column2",
+							"footer": {
+								"name": "Footer2"
+							},
+							"dataSource": "This:C1470.sourcePath",
+							"dataSourceTypeHint": "text",
+							"width": 176,
+							"truncateMode": "withEllipsis",
+							"wordwrap": "none",
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header3",
+								"text": "Date and Time of filling",
+								"fontWeight": "bold",
+								"textAlign": "right"
+							},
+							"name": "Column3",
+							"footer": {
+								"name": "Footer3"
+							},
+							"dataSource": "This:C1470.creationDateTime",
+							"width": 162,
+							"truncateMode": "withEllipsis",
+							"wordwrap": "none",
+							"textAlign": "right",
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header4",
+								"text": "Doc Description",
+								"fontWeight": "bold",
+								"textAlign": "center"
+							},
+							"name": "Column4",
+							"footer": {
+								"name": "Footer4"
+							},
+							"dataSource": "This:C1470.description",
+							"dataSourceTypeHint": "text",
+							"width": 330
+						}
+					]
+				}
+			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 790,
+	"geometryStamp": 834,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
