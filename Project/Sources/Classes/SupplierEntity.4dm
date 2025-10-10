@@ -139,17 +139,17 @@ local Function beforeSave()
 	
 local Function afterCreation()
 	This:C1470._initAddress()
-	This:C1470._initCommunication()
+	This:C1470._initattachedDocuments()
 	
 local Function loadAfterCreation()
 	// This callback is called after creating the new item but before displaying the panel.
 	This:C1470._initAddress()
-	This:C1470._initCommunication()
+	This:C1470._initattachedDocuments()
 	
 local Function itemLoad()
 	// This callback is called when the item is selected in the itemList
 	This:C1470._initAddress()
-	This:C1470._initCommunication()
+	This:C1470._initattachedDocuments()
 	
 	
 local Function isDeletable()->$isDeletable : Boolean
@@ -158,9 +158,6 @@ local Function isDeletable()->$isDeletable : Boolean
 	
 	
 	//mark:-Sub functions
-local Function _initCommunication()
-	This:C1470._initattachedDocuments()
-	
 	
 local Function _initattachedDocuments()
 	

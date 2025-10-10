@@ -839,7 +839,7 @@
 							"width": 172,
 							"truncateMode": "withEllipsis",
 							"wordwrap": "none",
-							"resizable": true
+							"resizable": false
 						},
 						{
 							"header": {
@@ -872,22 +872,7 @@
 							},
 							"dataSource": "This:C1470.description",
 							"dataSourceTypeHint": "text",
-							"width": 253
-						},
-						{
-							"header": {
-								"name": "Header8",
-								"text": "QA Approval",
-								"fontWeight": "bold"
-							},
-							"name": "Column8",
-							"dataSourceTypeHint": "boolean",
-							"dataSource": "This:C1470.isApproved",
-							"footer": {
-								"name": "Footer8"
-							},
-							"width": 79,
-							"resizable": false
+							"width": 330
 						}
 					]
 				}
