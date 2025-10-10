@@ -140,6 +140,7 @@
 		<field name="isApproved" uuid="6E95A7D0C58BDC4899360EE36C97D369" type="1" never_null="true" id="19"/>
 		<field name="approver" uuid="2015FC7753D0DF4A80971FE195909538" type="10" limiting_length="255" never_null="true" id="20"/>
 		<field name="stmpApproval" uuid="9F6075D8C50BA54DB4FB0DAE5ADCAB9C" type="4" never_null="true" id="21"/>
+		<field name="moreData" uuid="86882ADD493C3A47B0512C350571D19E" type="21" blob_switch_size="2147483647" never_null="true" id="22"/>
 		<primary_key field_name="UUID" field_uuid="2A671DFB01797B4DBB6EC2EB4216DB75"/>
 	</table>
 	<table name="CustomerEvent" uuid="0846217DF6043D4ABB7910378EBDF68A" id="11">

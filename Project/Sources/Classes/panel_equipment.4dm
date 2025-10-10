@@ -430,7 +430,7 @@ Function bActionDocument()
 			
 			If (OK=1)
 				
-				//Form.lb_documents.push($form.details)
+				//Form.lb_documents.push($form.details) 
 				
 				Form:C1466.current_item.reports.documents.push($form.details)
 				cs:C1710.panel_equipment.me._activate_save_cancel_button()

@@ -604,6 +604,11 @@ If (True:C214)
 		$specification_e.reviewIntervalInDays:=$record.ReviewIntervalInDays
 		$specification_e.stmpReviewDate:=cs:C1710.sfw_stmp.me.build(Date:C102($record.Review_Date))
 		
+		$specification_e.moreData:=New object:C1471(\
+			"dueReview"; False:C215; \
+			"dueApproval"; False:C215\
+			)
+		
 		$stecControllingDetpt:=ds:C1482.ControllingDepartment.query("name =:1"; Split string:C1554($record.ControllingDept; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($stecControllingDetpt.length>0)
 			$specification_e.UUID_ControllingDepartment:=$stecControllingDetpt[0].UUID
