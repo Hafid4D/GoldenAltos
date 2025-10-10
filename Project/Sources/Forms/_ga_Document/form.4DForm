@@ -68,7 +68,7 @@
 					"fill": "#FFFFFF",
 					"stroke": "transparent"
 				},
-				"header_bkgd9": {
+				"approval_bkgd": {
 					"type": "rectangle",
 					"top": 160,
 					"left": 151,
@@ -78,7 +78,7 @@
 					"fill": "#FFFFFF",
 					"stroke": "transparent"
 				},
-				"header_bkgd10": {
+				"approval_bkgd1": {
 					"type": "rectangle",
 					"top": 192,
 					"left": 151,
@@ -98,7 +98,7 @@
 					"fill": "#FFFFFF",
 					"stroke": "transparent"
 				},
-				"header_bkgd7": {
+				"approval_bkgd3": {
 					"type": "rectangle",
 					"top": 192,
 					"left": 0,
@@ -272,7 +272,7 @@
 					"dataSource": "Form:C1466.details.isApproved",
 					"method": "ObjectMethods/isApproved.4dm"
 				},
-				"Text3": {
+				"approval_text3": {
 					"type": "text",
 					"text": "Approval date",
 					"top": 198,
@@ -282,7 +282,7 @@
 					"fontWeight": "bold",
 					"class": ""
 				},
-				"header_bkgd5": {
+				"approval_bkgd2": {
 					"type": "rectangle",
 					"top": 160,
 					"left": 0,
@@ -292,7 +292,7 @@
 					"fill": "#B1CFDE",
 					"stroke": "transparent"
 				},
-				"Text14": {
+				"approval_text1": {
 					"type": "text",
 					"text": ":",
 					"top": 166,
@@ -313,7 +313,7 @@
 					"dataSource": "Form:C1466.details.approvedBy",
 					"enterable": false
 				},
-				"Text16": {
+				"approval_text": {
 					"type": "text",
 					"text": ":",
 					"top": 198,
@@ -337,7 +337,7 @@
 					"focusable": false,
 					"sizingX": "grow"
 				},
-				"Text1": {
+				"approval_text2": {
 					"type": "text",
 					"text": "Approver code",
 					"top": 167,
@@ -481,7 +481,7 @@
 			}
 		}
 	],
-	"geometryStamp": 218,
+	"geometryStamp": 232,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
@@ -490,5 +490,6 @@
 		}
 	},
 	"method": "method.4dm",
-	"shared": true
+	"shared": true,
+	"formSizeAnchor": "Rectangle"
 }

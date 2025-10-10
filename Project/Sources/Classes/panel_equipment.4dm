@@ -422,7 +422,7 @@ Function bActionDocument()
 				"details"; $details)  // Form.selectedDocument)
 			$form.approverProfile:=New collection:C1472("qs")
 			$form.approverTeam:=New collection:C1472("Facilities")
-			$form.operation:="create"
+			$form.displayApprovalFields:=False:C215
 			
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
@@ -444,7 +444,7 @@ Function bActionDocument()
 				"details"; Form:C1466.current_item.reports.documents[Form:C1466.selectedDocumentPos-1])  // Form.selectedDocument)
 			$form.approverProfile:=New collection:C1472("qs")
 			$form.approverTeam:=New collection:C1472("Facilities")
-			$form.operation:="modify"
+			$form.displayApprovalFields:=False:C215
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_document"; $form)
