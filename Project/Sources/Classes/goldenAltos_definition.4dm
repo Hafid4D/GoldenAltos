@@ -177,7 +177,7 @@ Function _notification_definition()
 	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("DueEquipmentOutOfPM"; "Due Equipment out of PM"; $definition)
 	
 	$definition:=cs:C1710.sfw_definitionNotificationType.new()
-	$definition.setDescription("Employee ##fullName## retraining due in the next 30 days")
+	$definition.setDescription("Employee ##fullName## retraining due in the next 30 days.Action required")
 	$definition.setActive()
 	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("EmployeeRetrainRequired"; "Employees requiring retraining in the next 30 days"; $definition)
 	
@@ -186,11 +186,20 @@ Function _notification_definition()
 	$definition.setActive()
 	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("CriticalSuppliersWithOverdueAudits"; "Critical suppliers with overdue audits"; $definition)
 	
-	
 	$definition:=cs:C1710.sfw_definitionNotificationType.new()
 	$definition.setDescription("With ##Contact## On ##Followupdate## Due To ##Trigger##")
 	$definition.setActive()
 	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("InteractionScheduled"; "Interaction Scheduled"; $definition)
+	
+	$definition:=cs:C1710.sfw_definitionNotificationType.new()
+	$definition.setDescription("Specification ##spec## review overdue.Immediate action is required")
+	$definition.setActive()
+	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("SpecReviewOverdue"; "Specs review overdue"; $definition)
+	
+	$definition:=cs:C1710.sfw_definitionNotificationType.new()
+	$definition.setDescription("Specification ##spec## QA pending approval.Action required")
+	$definition.setActive()
+	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("SpecControlApproval"; "Specs Control Approval"; $definition)
 	
 	
 	//Mark:-Visions defintion

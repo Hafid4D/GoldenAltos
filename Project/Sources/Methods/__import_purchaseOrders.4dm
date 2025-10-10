@@ -604,6 +604,11 @@ If (True:C214)
 		$specification_e.reviewIntervalInDays:=$record.ReviewIntervalInDays
 		$specification_e.stmpReviewDate:=cs:C1710.sfw_stmp.me.build(Date:C102($record.Review_Date))
 		
+		$specification_e.moreData:=New object:C1471(\
+			"dueReview"; False:C215; \
+			"dueApproval"; False:C215\
+			)
+		
 		$stecControllingDetpt:=ds:C1482.ControllingDepartment.query("name =:1"; Split string:C1554($record.ControllingDept; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($stecControllingDetpt.length>0)
 			$specification_e.UUID_ControllingDepartment:=$stecControllingDetpt[0].UUID
@@ -686,7 +691,7 @@ If (True:C214)
 	$staff.UUID_User:=$user.UUID
 	$staff.firstName:="Hassan"
 	$staff.lastName:="Sribet"
-	$staff.code:="001144"
+	$staff.code:=String:C10($staff.codeID; "00000#")  //"021144"
 	
 	$staff.contactDetails:=New object:C1471(\
 		"addresses"; New collection:C1472(); \
@@ -715,7 +720,7 @@ If (True:C214)
 	$staff.UUID_User:=$user.UUID
 	$staff.firstName:="Omar"
 	$staff.lastName:="Debbagh"
-	$staff.code:="001155"
+	$staff.code:=String:C10($staff.codeID; "00000#")  //"021155"
 	
 	$staff.contactDetails:=New object:C1471(\
 		"addresses"; New collection:C1472(); \
@@ -732,7 +737,7 @@ End if
 /**
 import staffs
 **/
-If (False:C215)
+If (True:C214)
 	$file_excel:=Folder:C1567(fk data folder:K87:12).file("DataJson/GA_employee_list.csv")
 	
 	$records_excel:=Split string:C1554($file_excel.getText(); "\r\n")
@@ -756,7 +761,7 @@ If (False:C215)
 	TRUNCATE TABLE:C1051([StaffRole:63])
 	//TRUNCATE TABLE([Staff])
 	
-	SET DATABASE PARAMETER:C642([Staff:135]; Table sequence number:K37:31; 0)
+	//SET DATABASE PARAMETER([Staff]; Table sequence number; 2)
 	
 	For each ($staff; $staffs_excel)
 		$staff_e:=ds:C1482.Staff.new()
