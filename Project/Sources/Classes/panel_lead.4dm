@@ -465,6 +465,7 @@ Function selectStaff()
 		$selector.setTitle("Choose a Owner")
 		$selector.setCurrentItem(Form:C1466.current_item.staff)
 		$selector.setOptions("noCutLink")
+		$selector.setOptions("noCreation")
 		$selector.openSelector()
 		
 		Case of 

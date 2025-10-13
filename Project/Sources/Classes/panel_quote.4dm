@@ -697,8 +697,9 @@ Function buildQuotePreview()
 	End if 
 	
 Function _activate_save_cancel_button()
-	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
-	
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+	End if 
 Function onBoundVariableChange()
 	This:C1470.loadQuoteLines()
 	
@@ -1159,4 +1160,4 @@ Function WParea_opt()
 	
 	
 Function WParea_preview()
-	WP UpdateWidget("WPtoolbar_opt"; "WParea_opt")
+	WP UpdateWidget("WPtoolbar_preview"; "WParea_preview")
