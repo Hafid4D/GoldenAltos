@@ -481,6 +481,7 @@ If (True:C214)
 		$stepTemplate_e.largeLayout:=$record.largeLayout
 		$stepTemplate_e.comment1:=$record.comment1
 		$stepTemplate_e.comment2:=$record.comment2
+		$stepTemplate_e.areas:=$record.areas
 		
 		$res:=$stepTemplate_e.save()
 		

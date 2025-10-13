@@ -1140,6 +1140,7 @@
 		<field name="bins" uuid="6B94872039983E44AE583BF9A056484B" type="21" blob_switch_size="2147483647" never_null="true" id="13"/>
 		<field name="templateNumber" uuid="B598301DF5C0394E96AB0B31EB3B320D" type="4" never_null="true" id="14"/>
 		<field name="settings" uuid="03EE819B2D714444B932D9A45A4019B6" type="21" blob_switch_size="2147483647" never_null="true" id="15"/>
+		<field name="areas" uuid="BBD8E635D0E5904191F9484E27067B61" type="10" limiting_length="255" never_null="true" id="16"/>
 		<primary_key field_name="UUID" field_uuid="3E46CC22F2F34DC0B68C304E1BC47991"/>
 	</table>
 	<table name="ToolType" uuid="C0C5EF5A4CD04FF7BB3897793A9DE6ED" id="122">
