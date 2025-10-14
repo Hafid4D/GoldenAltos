@@ -76,6 +76,10 @@
 		<field name="actualHours" uuid="0AAC51C4B19BA74CBACF719D1C91656B" type="6" never_null="true" id="31"/>
 		<field name="plannedHours" uuid="1A3980D589D3284F863777C1F0CA1A1F" type="6" never_null="true" id="32"/>
 		<field name="minYield" uuid="901C0BE796303E42954B9B1EBB994B24" type="6" never_null="true" id="33"/>
+		<field name="areas" uuid="5F7042E680C95A4EB1D9F50910B6963D" type="10" limiting_length="255" never_null="true" id="34"/>
+		<field name="approver" uuid="5609A192BA358D4DB149ADC855D83F1D" type="10" limiting_length="255" never_null="true" id="35"/>
+		<field name="stmpApproval" uuid="4D975AB1E6EFD744BDBAA31DC2010345" type="4" never_null="true" id="36"/>
+		<field name="isApproved" uuid="FEE932B57CBD9A48AA0EFCA36230EA6B" type="1" never_null="true" id="37"/>
 		<primary_key field_name="UUID" field_uuid="EE9C517A8C59724B8559A5DCB59FE560"/>
 	</table>
 	<table name="Tool" uuid="0FF66E5E37EDD74B8E6E39F15644C85F" id="6">

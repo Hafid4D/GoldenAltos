@@ -65,8 +65,8 @@
 				},
 				"label_0_11": {
 					"type": "text",
-					"top": 90,
-					"left": 12,
+					"top": 41,
+					"left": 284,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
@@ -343,8 +343,8 @@
 				"Field_onHold": {
 					"type": "checkbox",
 					"text": "Lot On Hold",
-					"top": 86,
-					"left": 112,
+					"top": 37,
+					"left": 384,
 					"width": 161,
 					"height": 22,
 					"events": [
@@ -357,8 +357,8 @@
 				},
 				"label_0_8": {
 					"type": "text",
-					"top": 90,
-					"left": 102,
+					"top": 41,
+					"left": 374,
 					"width": 7,
 					"height": 17,
 					"stroke": "#808080",
@@ -371,7 +371,7 @@
 			"objects": {
 				"header_bkgd4": {
 					"type": "rectangle",
-					"top": 188,
+					"top": 152,
 					"left": 5,
 					"width": 450,
 					"height": 133,
@@ -381,7 +381,7 @@
 				},
 				"header_bkgd3": {
 					"type": "rectangle",
-					"top": 155,
+					"top": 119,
 					"left": 5,
 					"width": 450,
 					"height": 30,
@@ -391,18 +391,18 @@
 				},
 				"lbl_punchIn": {
 					"type": "text",
-					"top": 162,
+					"top": 126,
 					"left": 11,
 					"width": 277,
 					"height": 17,
 					"stroke": "#000000",
-					"text": "Punch IN",
+					"text": "Punch OUT",
 					"fontSize": 12,
 					"fontWeight": "bold"
 				},
 				"label_qtyOut": {
 					"type": "text",
-					"top": 196,
+					"top": 160,
 					"left": 11,
 					"width": 119,
 					"height": 17,
@@ -411,7 +411,7 @@
 				},
 				"entryField_qtyInOut": {
 					"type": "input",
-					"top": 196,
+					"top": 160,
 					"left": 138,
 					"width": 307,
 					"height": 17,
@@ -428,7 +428,7 @@
 				},
 				"label_dateOut": {
 					"type": "text",
-					"top": 220,
+					"top": 184,
 					"left": 11,
 					"width": 119,
 					"height": 17,
@@ -437,7 +437,7 @@
 				},
 				"entryField_dateOut": {
 					"type": "input",
-					"top": 220,
+					"top": 184,
 					"left": 138,
 					"width": 307,
 					"height": 17,
@@ -454,7 +454,7 @@
 				},
 				"header_bkgd5": {
 					"type": "rectangle",
-					"top": 155,
+					"top": 119,
 					"left": 460,
 					"width": 450,
 					"height": 30,
@@ -464,7 +464,7 @@
 				},
 				"lbl_binning": {
 					"type": "text",
-					"top": 162,
+					"top": 126,
 					"left": 466,
 					"width": 278,
 					"height": 17,
@@ -475,21 +475,21 @@
 				},
 				"header_bkgd7": {
 					"type": "rectangle",
-					"top": 188,
+					"top": 152,
 					"left": 460,
 					"width": 450,
 					"height": 225,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
 					"stroke": "transparent",
-					"bottom": 413
+					"bottom": 377
 				},
 				"List Box3": {
 					"type": "listbox",
 					"left": 463,
-					"top": 191,
+					"top": 155,
 					"width": 443,
-					"height": 219,
+					"height": 259,
 					"events": [
 						"onClick",
 						"onHeaderClick",
@@ -549,7 +549,7 @@
 				"bActionBins": {
 					"type": "button",
 					"text": " ",
-					"top": 159,
+					"top": 123,
 					"left": 878,
 					"width": 26,
 					"height": 21,
@@ -565,7 +565,7 @@
 				},
 				"label_timeOut": {
 					"type": "text",
-					"top": 244,
+					"top": 208,
 					"left": 11,
 					"width": 119,
 					"height": 17,
@@ -574,7 +574,7 @@
 				},
 				"entryField_timeOut": {
 					"type": "input",
-					"top": 244,
+					"top": 208,
 					"left": 138,
 					"width": 307,
 					"height": 17,
@@ -591,7 +591,7 @@
 				},
 				"label_good": {
 					"type": "text",
-					"top": 268,
+					"top": 232,
 					"left": 11,
 					"width": 119,
 					"height": 17,
@@ -600,7 +600,7 @@
 				},
 				"entryField_good": {
 					"type": "input",
-					"top": 268,
+					"top": 232,
 					"left": 138,
 					"width": 307,
 					"height": 17,
@@ -617,7 +617,7 @@
 				},
 				"label_comment6": {
 					"type": "text",
-					"top": 292,
+					"top": 256,
 					"left": 11,
 					"width": 119,
 					"height": 17,
@@ -626,7 +626,7 @@
 				},
 				"entryField_comment6": {
 					"type": "input",
-					"top": 292,
+					"top": 256,
 					"left": 138,
 					"width": 307,
 					"height": 17,
@@ -643,7 +643,7 @@
 				},
 				"banner_lotOnHold_page1": {
 					"type": "input",
-					"top": 376,
+					"top": 340,
 					"left": 629,
 					"width": 285,
 					"height": 184,
@@ -664,14 +664,146 @@
 					],
 					"dataSource": "Form:C1466.bannerOnHold",
 					"pictureFormat": "truncatedTopLeft"
+				},
+				"header_bkgd2": {
+					"type": "rectangle",
+					"top": 322,
+					"left": 5,
+					"width": 450,
+					"height": 92,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent"
+				},
+				"entryField_isApproved": {
+					"type": "checkbox",
+					"text": "QA Approval",
+					"top": 332,
+					"left": 139,
+					"width": 246,
+					"height": 19,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"fontWeight": "normal",
+					"right": 385,
+					"dataSource": "Form:C1466.currentStep.isApproved",
+					"method": "ObjectMethods/entryField_isApproved.4dm"
+				},
+				"entryField_approver": {
+					"type": "input",
+					"left": 139,
+					"top": 358,
+					"width": 200,
+					"height": 19,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.currentStep.approver"
+				},
+				"entryField_approvalDate": {
+					"type": "input",
+					"left": 139,
+					"top": 384,
+					"width": 200,
+					"height": 19,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.currentStep.approvalDate",
+					"dataSourceTypeHint": "date",
+					"enterable": false,
+					"focusable": false,
+					"sizingX": "grow",
+					"events": [
+						"onDataChange"
+					]
+				},
+				"label_0_12": {
+					"type": "text",
+					"top": 384,
+					"left": 12,
+					"width": 119,
+					"height": 19,
+					"stroke": "#808080",
+					"text": "Approval Date",
+					"textAlign": "left",
+					"fontWeight": "normal"
+				},
+				"label_0_13": {
+					"type": "text",
+					"top": 358,
+					"left": 12,
+					"width": 119,
+					"height": 19,
+					"stroke": "#808080",
+					"text": "Approved by",
+					"textAlign": "left",
+					"fontWeight": "normal"
+				},
+				"btnDatePickerApproval": {
+					"type": "button",
+					"text": " ",
+					"top": 385,
+					"left": 322,
+					"width": 17,
+					"height": 17,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/calendar_black.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnDatePickerApproval.4dm",
+					"visibility": "visible",
+					"iconFrames": 1,
+					"focusable": false,
+					"dataSource": ""
+				},
+				"header_bkgd1": {
+					"type": "rectangle",
+					"top": 288,
+					"left": 5,
+					"width": 450,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"lb_qaApproval": {
+					"type": "text",
+					"top": 295,
+					"left": 11,
+					"width": 277,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "QA Approval",
+					"fontSize": 12,
+					"fontWeight": "bold"
 				}
 			}
 		}
 	],
-	"inheritedForm": "sfw_bkgd_header_4lines",
-	"geometryStamp": 124,
+	"inheritedForm": "sfw_bkgd_header_3lines",
+	"geometryStamp": 176,
 	"method": "method.4dm",
 	"editor": {
+		"groups": {
+			"Group": [
+				"entryField_isApproved",
+				"entryField_approver",
+				"entryField_approvalDate",
+				"label_0_12",
+				"label_0_13",
+				"btnDatePickerApproval"
+			],
+			"Group1": [
+				"header_bkgd2",
+				"header_bkgd1",
+				"lb_qaApproval"
+			]
+		},
 		"activeView": "View 1",
 		"defaultView": "View 1",
 		"views": {

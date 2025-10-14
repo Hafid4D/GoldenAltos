@@ -77,7 +77,7 @@ Function drawPup_Company()
 	
 Function pup_company()
 	
-
+	
 	// Create pop up menu
 	If (Form:C1466.sfw.checkIsInModification())
 		
@@ -120,7 +120,7 @@ Function pup_company()
 	End if 
 	
 	This:C1470.drawPup_Company()
-
+	
 	
 Function drawPup_companyType()
 	
@@ -200,7 +200,7 @@ Function redrawAndSetVisible()
 	OBJECT SET VISIBLE:C603(*; "bActionContact"; Form:C1466.sfw.checkIsInModification())
 	
 	Case of 
-
+			
 			//________________________________________
 		: (Form:C1466.companyType="Customer")
 			
@@ -240,7 +240,7 @@ Function contactDetails()
 Function btnOpenCompany()
 	
 	Case of 
-
+			
 			//________________________________________
 		: (Form:C1466.companyType="Supplier")
 			
@@ -248,7 +248,7 @@ Function btnOpenCompany()
 			
 			If ($es.length>0)
 				
-				Form:C1466.sfw.openInANewWindow($es[0]; "qualityAssurance"; "AVL")
+				Form:C1466.sfw.openInANewWindow($es[0]; "qualityAssurance"; "supplier")
 				
 			End if 
 			//________________________________________
