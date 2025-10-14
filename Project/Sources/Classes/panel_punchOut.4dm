@@ -50,6 +50,8 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "banner_lotOnHold_page"+String:C10(FORM Get current page:C276(*)); $widthSubform-$width; $heightSubform-$height; $widthSubform; $heightSubform)
 	End case 
 	
+	OBJECT SET VISIBLE:C603(*; "btnDatePicker@"; Form:C1466.sfw.checkIsInModification())
+	
 Function loadCurrentStep()
 	Form:C1466.currentStep:=Null:C1517
 	$currentstep:=Form:C1466.current_item.steps.query("qtyIn # :1 AND qtyOut = :1 AND dateIn # :2 AND dateOut = :2"; 0; !00-00-00!).orderBy("order asc")
@@ -120,5 +122,27 @@ Function bActionBins()
 					End if 
 				End if 
 		End case 
+	End if 
+	
+	
+Function btnDatePicker($object; $attribut)
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		If ($object#Null:C1517)
+			$form:=New object:C1471
+			$form.date:=$object[$attribut]
+			
+			OBJECT GET COORDINATES:C663(Self:C308->; $left; $top; $rigth; $bottom)
+			CONVERT COORDINATES:C1365($left; $bottom; XY Current form:K27:5; XY Main window:K27:8)
+			Open window:C153($left; $bottom; $left+285; $bottom+210; Movable dialog box:K34:7; "calendar")
+			DIALOG:C40("_ga_calendar"; $form)
+			
+			If (OK=1)
+				$object[$attribut]:=$form.calendar.display.date
+				This:C1470._activate_save_cancel_button()
+			End if 
+			
+		End if 
+		
 	End if 
 	
