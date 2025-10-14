@@ -17,6 +17,5 @@ Case of
 			End if 
 		End if 
 		
-		//cs.panel_punchOut.me._activate_save_cancel_button()
 		
 End case 

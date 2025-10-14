@@ -52,6 +52,31 @@ Function redrawAndSetVisible()
 	
 	OBJECT SET VISIBLE:C603(*; "btnDatePicker@"; Form:C1466.sfw.checkIsInModification())
 	
+	If (Form:C1466.currentStep#Null:C1517)
+		
+		OBJECT SET VISIBLE:C603(*; "header_bkgd2"; (Form:C1466.currentStep.areas="QC"))
+		OBJECT SET VISIBLE:C603(*; "lb_qaApproval"; (Form:C1466.currentStep.areas="QC"))
+		OBJECT SET VISIBLE:C603(*; "header_bkgd1"; (Form:C1466.currentStep.areas="QC"))
+		OBJECT SET VISIBLE:C603(*; "label_approver"; (Form:C1466.currentStep.areas="QC"))
+		OBJECT SET VISIBLE:C603(*; "label_approvalDate"; (Form:C1466.currentStep.areas="QC"))
+		OBJECT SET VISIBLE:C603(*; "entryField_approvalDate"; (Form:C1466.currentStep.areas="QC"))
+		OBJECT SET VISIBLE:C603(*; "entryField_approver"; (Form:C1466.currentStep.areas="QC"))
+		OBJECT SET VISIBLE:C603(*; "entryField_isApproved"; (Form:C1466.currentStep.areas="QC"))
+		OBJECT SET VISIBLE:C603(*; "entryField_isApproved"; (Form:C1466.currentStep.areas="QC"))
+	Else 
+		OBJECT SET VISIBLE:C603(*; "header_bkgd2"; False:C215)
+		OBJECT SET VISIBLE:C603(*; "lb_qaApproval"; False:C215)
+		OBJECT SET VISIBLE:C603(*; "header_bkgd1"; False:C215)
+		OBJECT SET VISIBLE:C603(*; "label_approver"; False:C215)
+		OBJECT SET VISIBLE:C603(*; "label_approvalDate"; False:C215)
+		OBJECT SET VISIBLE:C603(*; "entryField_approvalDate"; False:C215)
+		OBJECT SET VISIBLE:C603(*; "entryField_approver"; False:C215)
+		OBJECT SET VISIBLE:C603(*; "entryField_isApproved"; False:C215)
+		OBJECT SET VISIBLE:C603(*; "entryField_isApproved"; False:C215)
+		
+	End if 
+	
+	
 Function loadCurrentStep()
 	Form:C1466.currentStep:=Null:C1517
 	$currentstep:=Form:C1466.current_item.steps.query("qtyIn # :1 AND qtyOut = :1 AND dateIn # :2 AND dateOut = :2"; 0; !00-00-00!).orderBy("order asc")
@@ -139,7 +164,7 @@ Function btnDatePicker($object; $attribut)
 			
 			If (OK=1)
 				$object[$attribut]:=$form.calendar.display.date
-				This:C1470._activate_save_cancel_button()
+				//This._activate_save_cancel_button()
 			End if 
 			
 		End if 
