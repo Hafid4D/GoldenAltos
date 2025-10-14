@@ -326,21 +326,6 @@ If (True:C214)
 					$lotStep_e.tools:=$step.tools
 					$lotStep_e.areas:=$step.areas
 					
-					//$stepTemplate:=ds.StepTemplate.query("templateNumber =:1"; $step.type)
-					//If ($stepTemplate.length=1)
-					//$lotStep_e.areas:=$stepTemplate.areas
-					//Else 
-					
-					//If ($stepTemplate.length>0)
-					
-					//Else 
-					
-					//End if 
-					
-					//End if 
-					
-					
-					
 					
 					While (($lotStep_e.tools#Null:C1517) && ($lotStep_e.tools.items.indexOf("")#-1))
 						

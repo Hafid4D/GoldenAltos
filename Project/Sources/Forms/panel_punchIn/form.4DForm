@@ -61,7 +61,7 @@
 					"borderStyle": "none",
 					"textFormat": "$##,###,###,##0.00",
 					"textAlign": "left",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"label_0_11": {
 					"type": "text",
@@ -100,7 +100,7 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"textAlign": "left",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"label_0_2": {
 					"type": "text",
@@ -130,7 +130,7 @@
 					"borderStyle": "none",
 					"textFormat": "$##,###,###,##0.00",
 					"textAlign": "left",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"label_0_4": {
 					"type": "text",
@@ -159,7 +159,7 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"textAlign": "left",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"sizingX": "grow",
 					"dataSourceTypeHint": "number"
 				},
@@ -190,7 +190,7 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"textAlign": "left",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"label_0_7": {
 					"type": "text",
@@ -219,7 +219,7 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"textAlign": "left",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"label_0_9": {
 					"type": "text",
@@ -248,7 +248,7 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"textAlign": "left",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"label_0_23": {
 					"type": "text",
@@ -350,7 +350,7 @@
 					"events": [
 						"onClick"
 					],
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"dataSourceTypeHint": "boolean",
 					"dataSource": "Form:C1466.current_item.onHold",
 					"enterable": false
