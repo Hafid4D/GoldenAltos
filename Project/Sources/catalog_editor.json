@@ -932,6 +932,31 @@
 				}
 			}
 		},
+		"BuyingOrderLine": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 2682,
+				"top": 2323.3764648438,
+				"width": 166.34765625,
+				"height": 398.33203125
+			},
+			"displayable_fields_count": 17,
+			"fields": {
+				"supPsNumber": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
+		},
 		"StaffRole": {
 			"color": {
 				"red": 255,
@@ -1269,6 +1294,39 @@
 				"height": 83.33203125
 			},
 			"displayable_fields_count": 2
+		},
+		"BuyingOrder": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 2343,
+				"top": 2237.3764648438,
+				"width": 172.34765625,
+				"height": 524.33203125
+			},
+			"displayable_fields_count": 23,
+			"fields": {
+				"termsCriticalMaterials": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				},
+				"netDays": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
 		},
 		"ControllingDepartment": {
 			"color": {
@@ -2189,6 +2247,14 @@
 		}
 	},
 	"relations": {
+		"4D8D4A0F11111D4D907CE33428DB49AA": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"F7A12367E0E7E44682B1512B34B69AAC": {
 			"color": {
 				"red": 255,
