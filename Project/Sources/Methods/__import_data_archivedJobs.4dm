@@ -115,6 +115,16 @@ If (True:C214)
 			
 			$lot_e.UUID_Job:=$job.UUID
 			
+			If ($lot.parentLotNumber#"") & Not:C34(Undefined:C82($lot.parentLotNumber))
+				$lots_es:=ds:C1482.Lot.query("lotNumber = :1"; $lot.parentLotNumber)
+				
+				If ($lots_es.length>0)
+					$lot_e.UUID_LotParent:=$lots_es[0].UUID
+				Else 
+					TRACE:C157
+				End if 
+			End if 
+			
 			$res:=$lot_e.save()
 			
 			If (Not:C34($res.success))
@@ -143,6 +153,7 @@ If (True:C214)
 					$lotStep_e.plannedHours:=$step.plannedHours
 					$lotStep_e.tools:=New object:C1471()
 					$lotStep_e.tools:=$step.tools
+					$lotStep_e.areas:=$step.areas
 					
 					While ($lotStep_e.tools.items.indexOf("")#-1)
 						

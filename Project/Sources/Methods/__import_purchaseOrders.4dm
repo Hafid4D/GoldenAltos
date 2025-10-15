@@ -2,6 +2,41 @@
 //var $eDepartment : cs.DepartmentEntity
 
 /**
+import step template
+**/
+If (True:C214)
+	TRUNCATE TABLE:C1051([StepTemplate:121])
+	
+	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/step_template_export.json")
+	
+	$records:=JSON Parse:C1218($file.getText())
+	
+	For each ($record; $records)
+		$stepTemplate_e:=ds:C1482.StepTemplate.new()
+		
+		$stepTemplate_e.name:=$record.name
+		$stepTemplate_e.operation:=$record.operation
+		$stepTemplate_e.division:=$record.division
+		$stepTemplate_e.status:=$record.status
+		$stepTemplate_e.binning:=$record.binning
+		$stepTemplate_e.smallLayout:=$record.smallLayout
+		$stepTemplate_e.largeLayout:=$record.largeLayout
+		$stepTemplate_e.comment1:=$record.comment1
+		$stepTemplate_e.comment2:=$record.comment2
+		$stepTemplate_e.areas:=$record.areas
+		$stepTemplate_e.templateNumber:=$record.templateNumber
+		
+		
+		$res:=$stepTemplate_e.save()
+		
+		If (Not:C34($res.success))
+			
+		End if 
+	End for each 
+End if 
+
+
+/**
 import po & po lines (po <-- po_lines)
 **/
 If (True:C214)
@@ -251,7 +286,7 @@ If (True:C214)
 			
 			$lot_e.UUID_Job:=$job.UUID
 			
-			If ($lot.parentLotNumber#"")
+			If ($lot.parentLotNumber#"") & Not:C34(Undefined:C82($lot.parentLotNumber))
 				$lots_es:=ds:C1482.Lot.query("lotNumber = :1"; $lot.parentLotNumber)
 				
 				If ($lots_es.length>0)
@@ -289,6 +324,8 @@ If (True:C214)
 					$lotStep_e.plannedHours:=$step.plannedHours
 					$lotStep_e.tools:=New object:C1471()
 					$lotStep_e.tools:=$step.tools
+					$lotStep_e.areas:=$step.areas
+					
 					
 					While (($lotStep_e.tools#Null:C1517) && ($lotStep_e.tools.items.indexOf("")#-1))
 						
@@ -459,37 +496,6 @@ If (True:C214)
 	
 End if 
 
-/**
-import step template
-**/
-If (True:C214)
-	TRUNCATE TABLE:C1051([StepTemplate:121])
-	
-	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/step_template_export.json")
-	
-	$records:=JSON Parse:C1218($file.getText())
-	
-	For each ($record; $records)
-		$stepTemplate_e:=ds:C1482.StepTemplate.new()
-		
-		$stepTemplate_e.name:=$record.name
-		$stepTemplate_e.operation:=$record.operation
-		$stepTemplate_e.division:=$record.division
-		$stepTemplate_e.status:=$record.status
-		$stepTemplate_e.binning:=$record.binning
-		$stepTemplate_e.smallLayout:=$record.smallLayout
-		$stepTemplate_e.largeLayout:=$record.largeLayout
-		$stepTemplate_e.comment1:=$record.comment1
-		$stepTemplate_e.comment2:=$record.comment2
-		$stepTemplate_e.areas:=$record.areas
-		
-		$res:=$stepTemplate_e.save()
-		
-		If (Not:C34($res.success))
-			
-		End if 
-	End for each 
-End if 
 
 /**
 import tools

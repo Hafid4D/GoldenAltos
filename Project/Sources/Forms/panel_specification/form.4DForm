@@ -465,7 +465,7 @@
 				},
 				"entryField_approver": {
 					"type": "input",
-					"left": 164,
+					"left": 160,
 					"top": 421,
 					"width": 246,
 					"height": 19,
@@ -673,7 +673,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 485,
+	"geometryStamp": 486,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

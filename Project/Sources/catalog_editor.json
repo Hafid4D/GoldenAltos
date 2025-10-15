@@ -642,8 +642,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2660,
-				"top": 782.33331298828,
+				"left": 2652,
+				"top": 789.33331298828,
 				"width": 170.80078125,
 				"height": 210.33203125
 			},
@@ -675,8 +675,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2405,
-				"top": 761,
+				"left": 2427,
+				"top": 802,
 				"width": 161.33203125,
 				"height": 209.33203125
 			},
@@ -2111,9 +2111,9 @@
 				"left": 2688.6667480469,
 				"top": 1041.3332519531,
 				"width": 200.048828125,
-				"height": 758.33203125
+				"height": 866.33203125
 			},
-			"displayable_fields_count": 36,
+			"displayable_fields_count": 39,
 			"fields": {
 				"comment2": {
 					"position": 17

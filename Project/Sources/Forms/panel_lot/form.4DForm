@@ -1336,9 +1336,9 @@
 								"name": "Footer29"
 							},
 							"dataSource": "This:C1470.description",
-							"width": 230,
+							"width": 210,
 							"enterable": false,
-							"minWidth": 230
+							"minWidth": 210
 						},
 						{
 							"header": {
@@ -1351,9 +1351,9 @@
 								"name": "Footer30"
 							},
 							"dataSource": "This:C1470.alert",
-							"width": 185,
+							"width": 170,
 							"enterable": false,
-							"minWidth": 185,
+							"minWidth": 170,
 							"resizable": false
 						},
 						{
@@ -1367,7 +1367,7 @@
 								"name": "Footer31"
 							},
 							"dataSource": "This:C1470.qtyIn",
-							"width": 65,
+							"width": 50,
 							"dataSourceTypeHint": "number",
 							"dateFormat": "short",
 							"textAlign": "center",
@@ -1385,7 +1385,7 @@
 								"name": "Footer32"
 							},
 							"dataSource": "This:C1470.qtyOut",
-							"width": 65,
+							"width": 50,
 							"textAlign": "center",
 							"dataSourceTypeHint": "number",
 							"dateFormat": "short",
@@ -1427,6 +1427,22 @@
 							"dataSourceTypeHint": "date",
 							"enterable": false,
 							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header1",
+								"text": "Approved",
+								"fontWeight": "bold"
+							},
+							"name": "Column1",
+							"footer": {
+								"name": "Footer1"
+							},
+							"dataSource": "This:C1470.isApproved",
+							"width": 60,
+							"dataSourceTypeHint": "boolean",
+							"resizable": false,
+							"enterable": false
 						}
 					]
 				},
