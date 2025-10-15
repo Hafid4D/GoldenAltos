@@ -1278,7 +1278,7 @@
 		<field name="partLotNumber" uuid="D0FD4C93A611184AA47927C6E4B63986" type="10" limiting_length="255" never_null="true" id="8"/>
 		<field name="stockNum" uuid="CD91DBACEDD2874791509E649023D28B" type="10" limiting_length="255" never_null="true" id="9"/>
 		<field name="dateIn" uuid="A490A82A0D2F414A9F47033EA8F4A5A1" type="4" never_null="true" id="10"/>
-		<field name="UUID_Jot" uuid="7FEE97DA30A98742B2582F6CEDCCAE66" type="10" autogenerate="true" store_as_UUID="true" never_null="true" id="11"/>
+		<field name="UUID_Job" uuid="7FEE97DA30A98742B2582F6CEDCCAE66" type="10" autogenerate="true" store_as_UUID="true" never_null="true" id="11"/>
 		<field name="expirationDate" uuid="777382FC3F897B438C401FD7B27E4C7E" type="4" never_null="true" id="12"/>
 		<field name="qtyInStock" uuid="951206A58EE6554691FBED3444EF8C74" type="4" never_null="true" id="13"/>
 		<field name="unitCost" uuid="B93F8D8EC815DE42ADA26FF622856DA5" type="6" never_null="true" id="14"/>
@@ -2702,7 +2702,7 @@
 	</relation>
 	<relation uuid="A8DEBE3262DCDE4A9FD220EB930EC3D5" name_Nto1="job" name_1toN="inventories" state="1">
 		<related_field kind="source">
-			<field_ref uuid="7FEE97DA30A98742B2582F6CEDCCAE66" name="UUID_Jot">
+			<field_ref uuid="7FEE97DA30A98742B2582F6CEDCCAE66" name="UUID_Job">
 				<table_ref uuid="CA853413921F4B2A9BC70E6DE5F88235" name="Inventory"/>
 			</field_ref>
 		</related_field>
@@ -3497,7 +3497,7 @@
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="8D509A005894F84BB8FD0B7AA2A29A41" type="3">
-		<field_ref uuid="7FEE97DA30A98742B2582F6CEDCCAE66" name="UUID_Jot">
+		<field_ref uuid="7FEE97DA30A98742B2582F6CEDCCAE66" name="UUID_Job">
 			<table_ref uuid="CA853413921F4B2A9BC70E6DE5F88235" name="Inventory"/>
 		</field_ref>
 	</index>
