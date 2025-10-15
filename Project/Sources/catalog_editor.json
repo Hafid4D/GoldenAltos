@@ -485,7 +485,7 @@
 				"UUID_Customer": {
 					"position": 2
 				},
-				"UUID_Lot": {
+				"UUID_Jot": {
 					"position": 4
 				},
 				"partNumber": {
@@ -2248,6 +2248,14 @@
 	},
 	"relations": {
 		"4D8D4A0F11111D4D907CE33428DB49AA": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"A8DEBE3262DCDE4A9FD220EB930EC3D5": {
 			"color": {
 				"red": 240,
 				"green": 240,

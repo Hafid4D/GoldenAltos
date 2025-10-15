@@ -20,6 +20,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setLBItemsOrderBy("boNumber")
 	
+	$entry.setItemListAction("Print Buy Order"; "BuyingOrders_printBuyOrder")
+	$entry.setItemListAction("Export Selection"; "BuyingOrders_exportSelection")
+	
 	$entry.enableTransaction()
 	
 	$entry.activateFavorite()

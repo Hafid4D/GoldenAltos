@@ -1,6 +1,9 @@
 singleton Class constructor
 	//It's a singleton class
 	
+Function _activate_save_cancel_button()
+	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+	
 Function formMethod()
 	//This function manages the main logic for updating and refreshing the form
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
@@ -138,9 +141,17 @@ Function bActionAttachLot()
 		$refMenu:=Create menu:C408
 		APPEND MENU ITEM:C411($refMenu; "Attach a Lot")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--create")
-		APPEND MENU ITEM:C411($refMenu; "-")
 		APPEND MENU ITEM:C411($refMenu; "(Delete")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")
+		
+		APPEND MENU ITEM:C411($refMenu; "-")
+		
+		APPEND MENU ITEM:C411($refMenu; "Split Lot")
+		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--split-lot")
+		
+		If (Form:C1466.selectedLot=Null:C1517)
+			DISABLE MENU ITEM:C150($refMenu; -1)
+		End if 
 		
 		$choose:=Dynamic pop up menu:C1006($refMenu)
 		
@@ -156,16 +167,82 @@ Function bActionAttachLot()
 					This:C1470.loadLots()
 				End if 
 				
-			: ($choose="--delete")
+			: ($choose="--split-lot")
+				$answer:=cs:C1710.sfw_dialog.me.request("Would you like to split the Lot into : ")
+				If ($answer.ok) & ($answer.answer#"")
+					$subLots:=Num:C11($answer.answer)
+				End if 
+				
+				If ($subLots>0)
+					If (Undefined:C82(Form:C1466.selectedLot.lotParent))
+						
+						$dataclassObject:=ds:C1482.Lot
+						
+						For ($i; 1; $subLots)
+							$newLot:=ds:C1482.Lot.new()
+							
+							$id:=Form:C1466.selectedLot.subLots.length+$i
+							
+							$newLotNumber:=Form:C1466.selectedLot.lotNumber+"-"+String:C10($id)
+							
+							$lot_es:=ds:C1482.Lot.query("lotNumber = :1"; $newLotNumber)
+							
+							While ($lot_es.length>0)
+								$id:=$id+1
+								
+								$newLotNumber:=(Form:C1466.selectedLot.lotNumber)+"-"+String:C10($id)
+								
+								$lot_es:=ds:C1482.Lot.query("lotNumber = :1"; $newLotNumber)
+							End while 
+							
+							For each ($attributeName; $dataclassObject)
+								$attribute:=$dataclassObject[$attributeName]
+								
+								If ($attribute.kind="storage")
+									Case of 
+										: ($attributeName="UUID") & ($attribute.type="string")
+											$newLot[$attributeName]:=Generate UUID:C1066
+										: ($attributeName="UUID_LotParent") & ($attribute.type="string")
+											$newLot.UUID_LotParent:=Form:C1466.selectedLot.UUID
+										: ($attributeName="lotNumber")
+											$newLot.lotNumber:=$newLotNumber
+										: ($attributeName="original")
+											$newLot.original:=0
+										: ($attributeName="ourCount")
+											$newLot.ourCount:=0
+										Else 
+											$newLot[$attributeName]:=Form:C1466.selectedLot[$attributeName]
+									End case 
+								End if 
+							End for each 
+							
+							$res:=$newLot.save()
+							
+							If ($res.success)
+								//cs.panel_lot.me._activate_save_cancel_button()
+								Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+							End if 
+						End for 
+						
+						This:C1470.loadLots()
+						
+					Else 
+						//Sub Lot
+						ALERT:C41("sub lot")
+					End if 
+				End if 
 				
 		End case 
 	Else 
 		$refMenu:=Create menu:C408
 		APPEND MENU ITEM:C411($refMenu; "(Attach a Lot")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--create")
-		APPEND MENU ITEM:C411($refMenu; "-")
 		APPEND MENU ITEM:C411($refMenu; "(Delete")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")
+		APPEND MENU ITEM:C411($refMenu; "-")
+		APPEND MENU ITEM:C411($refMenu; "Split Lot")
+		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--split-lot")
+		DISABLE MENU ITEM:C150($refMenu; -1)
 		
 		$choose:=Dynamic pop up menu:C1006($refMenu)
 		
@@ -188,4 +265,47 @@ Function btnOpenPurchaseOrder()
 Function hideDatePickers()
 	OBJECT SET VISIBLE:C603(*; "dp_@"; Form:C1466.sfw.checkIsInModification())
 	
+Function loadMaterials()
+	Form:C1466.lb_materials:=ds:C1482.Inventory.query("UUID_Job = :1"; Form:C1466.current_item.UUID)
 	
+Function bActionCustProvMat()
+	$refMenu:=Create menu:C408
+	
+	APPEND MENU ITEM:C411($refMenu; "Receive Material")
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--receive_material")
+	
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	$choose:=Dynamic pop up menu:C1006($refMenu)
+	
+	Case of 
+		: ($choose="--receive_material")
+			$form:=New object:C1471(\
+				"inventory_e"; ds:C1482.Inventory.new()\
+				)
+			
+			$form.inventory_e.vendor:=Form:C1466.current_item.job.customer
+			$form.inventory_e.UUID_Job:=Form:C1466.current_item.UUID
+			$form.inventory_e.stockNum:="man_"+String:C10(ds:C1482.Inventory.all().length)+String:C10(Milliseconds:C459)
+			$form.inventory_e.inventoryID:=(ds:C1482.Inventory.all().length>0) ? ds:C1482.Inventory.all().max("inventoryID")+1 : 1
+			$form.inventory_e.code:="INV"+String:C10($form.inventory_e.inventoryID; "00000#")
+			
+			$winRef:=Open form window:C675("createManualInv_lot"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("createManualInv_lot"; $form)
+			CLOSE WINDOW:C154($winRef)
+			
+			If (ok=1)
+				$form.inventory_e.initialQty:=$form.inventory_e.qtyInStock
+				$form.inventory_e.availableQty:=$form.inventory_e.qtyInStock
+				
+				$res:=$form.inventory_e.save()
+				
+				If ($res.success)
+					This:C1470.loadMaterials()
+					$form.inventory_e.afterCreation()
+					This:C1470._activate_save_cancel_button()
+				End if 
+			End if 
+	End case 

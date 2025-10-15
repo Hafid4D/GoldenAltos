@@ -1284,9 +1284,208 @@
 					"right": 101
 				}
 			}
+		},
+		{
+			"objects": {
+				"rec_bkgd_1": {
+					"type": "rectangle",
+					"top": 118,
+					"left": 5,
+					"width": 100,
+					"height": 442,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 105,
+					"bottom": 560
+				},
+				"lb_materials": {
+					"type": "listbox",
+					"left": 107,
+					"top": 119,
+					"width": 832,
+					"height": 440,
+					"events": [
+						"onClick",
+						"onDrop",
+						"onDataChange",
+						"onSelectionChange",
+						"onBeginDragOver"
+					],
+					"headerHeight": "24px",
+					"listboxType": "collection",
+					"visibility": "visible",
+					"dataSource": "Form:C1466.lb_materials",
+					"alternateFill": "#F7F9FC",
+					"method": "ObjectMethods/lb_materials.4dm",
+					"selectionMode": "single",
+					"dragging": "custom",
+					"dropping": "custom",
+					"currentItemSource": "Form:C1466.selectedLot",
+					"currentItemPositionSource": "Form:C1466.selectedLotPos",
+					"metaSource": "",
+					"rowFillSource": "highlightCurrentStep",
+					"right": 939,
+					"bottom": 559,
+					"columns": [
+						{
+							"header": {
+								"text": "INV #",
+								"name": "Header3",
+								"fontWeight": "bold"
+							},
+							"name": "Column3",
+							"footer": {
+								"name": "Footer3"
+							},
+							"width": 100,
+							"dataSource": "This:C1470.code",
+							"textAlign": "center",
+							"dataSourceTypeHint": "number",
+							"enterable": false,
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header18",
+								"text": "Description",
+								"fontWeight": "bold"
+							},
+							"name": "Column18",
+							"footer": {
+								"name": "Footer18"
+							},
+							"dataSource": "This:C1470.vendor",
+							"width": 200,
+							"enterable": false,
+							"minWidth": 200
+						},
+						{
+							"header": {
+								"name": "Header19",
+								"text": "Stock #",
+								"fontWeight": "bold"
+							},
+							"name": "Column19",
+							"footer": {
+								"name": "Footer19"
+							},
+							"dataSource": "This:C1470.stockNum",
+							"width": 150,
+							"dataSourceTypeHint": "number",
+							"dateFormat": "short",
+							"textAlign": "center",
+							"enterable": false,
+							"resizable": false,
+							"minWidth": 100
+						},
+						{
+							"header": {
+								"name": "Header20",
+								"text": "Qty in Stock",
+								"fontWeight": "bold"
+							},
+							"name": "Column20",
+							"footer": {
+								"name": "Footer20"
+							},
+							"dataSource": "This:C1470.qtyInStock",
+							"width": 80,
+							"dataSourceTypeHint": "number",
+							"dateFormat": "short",
+							"textAlign": "center",
+							"enterable": false,
+							"resizable": false,
+							"minWidth": 80
+						},
+						{
+							"header": {
+								"name": "Header21",
+								"text": "Date IN",
+								"fontWeight": "bold"
+							},
+							"name": "Column21",
+							"footer": {
+								"name": "Footer21"
+							},
+							"dataSource": "(This:C1470.dateIn=0) ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.dateIn)",
+							"width": 85,
+							"textAlign": "center",
+							"dataSourceTypeHint": "date",
+							"dateFormat": "short",
+							"enterable": false,
+							"resizable": false,
+							"minWidth": 75
+						},
+						{
+							"header": {
+								"name": "Header22",
+								"text": "Exp. Date",
+								"fontWeight": "bold"
+							},
+							"name": "Column22",
+							"footer": {
+								"name": "Footer22"
+							},
+							"dataSource": "(This:C1470.expirationDate=0) ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.expirationDate)",
+							"width": 85,
+							"dateFormat": "short",
+							"textAlign": "center",
+							"dataSourceTypeHint": "date",
+							"enterable": false,
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header23",
+								"text": "Received By",
+								"fontWeight": "bold"
+							},
+							"name": "Column23",
+							"footer": {
+								"name": "Footer23"
+							},
+							"dataSource": "This:C1470.receivedBy",
+							"width": 165,
+							"dateFormat": "short",
+							"textAlign": "center",
+							"dataSourceTypeHint": "date",
+							"enterable": false,
+							"resizable": false
+						}
+					]
+				},
+				"bActionCustProvMat": {
+					"type": "button",
+					"text": "Actions",
+					"top": 535,
+					"left": 16,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionCustProvMat.4dm",
+					"visibility": "visible"
+				},
+				"Text3": {
+					"type": "text",
+					"text": "Customer Provided Material",
+					"top": 125,
+					"left": 9,
+					"width": 92,
+					"height": 56,
+					"fontWeight": "bold",
+					"right": 101
+				}
+			}
 		}
 	],
-	"geometryStamp": 1223,
+	"geometryStamp": 1225,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
