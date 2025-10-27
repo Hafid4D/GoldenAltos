@@ -171,3 +171,7 @@ Function btnDatePicker($object; $attribut)
 		
 	End if 
 	
+	
+Function actionRejectionNotice()
+	
+	
