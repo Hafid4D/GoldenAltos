@@ -694,10 +694,9 @@
 				"left": 2437.3334960938,
 				"top": 1052.6667480469,
 				"width": 157.69921875,
-				"height": 845.33203125
+				"height": 1015.33203125
 			},
-			"displayable_fields_count": 38,
-			"fields_ordering": 1
+			"displayable_fields_count": 46
 		},
 		"Job": {
 			"color": {
