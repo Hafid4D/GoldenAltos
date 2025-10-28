@@ -262,7 +262,7 @@ End if
 var $eAvml : cs:C1710.AMLEntity
 
 
-$avml_log:=Folder:C1567(fk data folder:K87:12).file("DataJson/avlAml_export.json")
+$avml_log:=Folder:C1567(fk data folder:K87:12).file("DataJson/aml_export.json")
 
 If ($avml_log.exists)
 	$avmls:=JSON Parse:C1218($avml_log.getText())
