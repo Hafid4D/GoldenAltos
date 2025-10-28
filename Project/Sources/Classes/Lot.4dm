@@ -27,6 +27,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.enableTransaction()
 	
+	$entry.setItemAction("Generate Certificate of Conformance"; "_ga_generateCofC")
+	
 Function onlyPunchIn()->$punchIN_es : cs:C1710.LotStepSelection
 	$punchIN_es:=ds:C1482.Lot.query("steps.qtyIn = :1 AND steps.qtyOut = :1 AND steps.dateIn = :2 AND steps.dateOut = :2"; 0; !00-00-00!).orderBy("lotNumber asc")
 	

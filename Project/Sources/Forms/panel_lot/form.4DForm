@@ -85,7 +85,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"label_0_4": {
@@ -141,7 +141,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"label_0_5": {
@@ -206,7 +206,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"label_jobNumber4": {
@@ -234,7 +234,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"label_jobNumber5": {
@@ -262,7 +262,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left"
 				},
 				"btnForward": {
@@ -346,7 +346,8 @@
 					"events": [
 						"onClick",
 						"onDisplayDetail"
-					]
+					],
+					"fontWeight": "normal"
 				},
 				"label_jobNumber6": {
 					"type": "text",
@@ -373,7 +374,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"textAlign": "left",
 					"method": "ObjectMethods/Field_parentLotNumber.4dm"
 				},

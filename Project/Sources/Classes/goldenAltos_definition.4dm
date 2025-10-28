@@ -289,11 +289,13 @@ Function _entries_definition()
 	$entry.setLBItemsOrderBy("lotNumber")
 	$entry.enableTransaction()
 	
+	$entry.setItemAction("Rejection form"; "_ga_rejectionForm")
+	
 	This:C1470._push_entry($entry)
 	
 Function _profiles_definition()
 	$eQM:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("qm"; "Quality Manager"; "autoCreation")
-	$eDC:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("dc"; "Document Control"; "autoCreation")
+	$eDC:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("dc"; "Document Controller"; "autoCreation")
 	$eQI:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("qi"; "Quality Inspector"; "autoCreation")
 	$eQS:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("qs"; "Quality Supervisor"; "autoCreation")
 	$ePM:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("pm"; "Production Manager"; "autoCreation")

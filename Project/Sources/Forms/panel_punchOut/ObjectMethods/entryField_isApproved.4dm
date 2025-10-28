@@ -12,7 +12,7 @@ Case of
 				
 			Else 
 				Form:C1466.currentStep.approver:=""
-				Form:C1466.currentStep.approvalDate:=Date:C102(!00-00-00!)
+				Form:C1466.currentStep.approvalDate:=Date:C102("00/00/00")
 				
 			End if 
 		End if 

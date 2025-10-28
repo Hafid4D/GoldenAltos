@@ -63,6 +63,7 @@ Function redrawAndSetVisible()
 		OBJECT SET VISIBLE:C603(*; "entryField_approver"; (Form:C1466.currentStep.areas="QC"))
 		OBJECT SET VISIBLE:C603(*; "entryField_isApproved"; (Form:C1466.currentStep.areas="QC"))
 		OBJECT SET VISIBLE:C603(*; "entryField_isApproved"; (Form:C1466.currentStep.areas="QC"))
+		OBJECT SET VISIBLE:C603(*; "btnDatePickerApproval"; (Form:C1466.currentStep.areas="QC"))
 	Else 
 		OBJECT SET VISIBLE:C603(*; "header_bkgd2"; False:C215)
 		OBJECT SET VISIBLE:C603(*; "lb_qaApproval"; False:C215)
@@ -73,6 +74,7 @@ Function redrawAndSetVisible()
 		OBJECT SET VISIBLE:C603(*; "entryField_approver"; False:C215)
 		OBJECT SET VISIBLE:C603(*; "entryField_isApproved"; False:C215)
 		OBJECT SET VISIBLE:C603(*; "entryField_isApproved"; False:C215)
+		OBJECT SET VISIBLE:C603(*; "btnDatePickerApproval"; False:C215)
 		
 	End if 
 	
@@ -170,4 +172,6 @@ Function btnDatePicker($object; $attribut)
 		End if 
 		
 	End if 
+	
+	
 	
