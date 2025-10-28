@@ -65,8 +65,8 @@
 				},
 				"label_0_11": {
 					"type": "text",
-					"top": 41,
-					"left": 284,
+					"top": 69,
+					"left": 684,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
@@ -343,9 +343,9 @@
 				"Field_onHold": {
 					"type": "checkbox",
 					"text": "Lot On Hold",
-					"top": 37,
-					"left": 384,
-					"width": 161,
+					"top": 65,
+					"left": 784,
+					"width": 120,
 					"height": 22,
 					"events": [
 						"onClick"
@@ -357,8 +357,8 @@
 				},
 				"label_0_8": {
 					"type": "text",
-					"top": 41,
-					"left": 374,
+					"top": 69,
+					"left": 774,
 					"width": 7,
 					"height": 17,
 					"stroke": "#808080",
@@ -1313,7 +1313,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 826,
+	"geometryStamp": 829,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

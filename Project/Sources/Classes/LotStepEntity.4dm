@@ -2,10 +2,18 @@ Class extends Entity
 
 
 local Function get approvalDate()->$approvalDate : Date
-	$approvalDate:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpApproval; True:C214)
-	
+	If (This:C1470.stmpApproval=0)
+		$approvalDate:=!00-00-00!
+	Else 
+		$approvalDate:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpApproval; True:C214)
+	End if 
 local Function set approvalDate($approvalDate : Date)
-	This:C1470.stmpApproval:=cs:C1710.sfw_stmp.me.build($approvalDate)
+	If ($approvalDate=!00-00-00!)
+		This:C1470.stmpApproval:=0
+	Else 
+		This:C1470.stmpApproval:=cs:C1710.sfw_stmp.me.build($approvalDate)
+	End if 
+	
 	
 local Function afterCreation()
 	This:C1470._initTools()

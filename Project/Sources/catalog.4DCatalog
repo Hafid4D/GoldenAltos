@@ -80,6 +80,7 @@
 		<field name="approver" uuid="5609A192BA358D4DB149ADC855D83F1D" type="10" limiting_length="255" never_null="true" id="35"/>
 		<field name="stmpApproval" uuid="4D975AB1E6EFD744BDBAA31DC2010345" type="4" never_null="true" id="36"/>
 		<field name="isApproved" uuid="FEE932B57CBD9A48AA0EFCA36230EA6B" type="1" never_null="true" id="37"/>
+		<field name="rejectionBlob" uuid="D7A7BE2E5D78C047B07034BEC36F104E" type="18" never_null="true" id="38"/>
 		<primary_key field_name="UUID" field_uuid="EE9C517A8C59724B8559A5DCB59FE560"/>
 	</table>
 	<table name="Tool" uuid="0FF66E5E37EDD74B8E6E39F15644C85F" id="6">
