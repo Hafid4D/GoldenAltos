@@ -709,9 +709,9 @@
 				"left": 2144.3334960938,
 				"top": 1145,
 				"width": 171.73828125,
-				"height": 686.33203125
+				"height": 717.33203125
 			},
-			"displayable_fields_count": 30
+			"displayable_fields_count": 32
 		},
 		"PurchaseOrderLine": {
 			"color": {
@@ -2107,8 +2107,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2688.6667480469,
-				"top": 1041.3332519531,
+				"left": 2693.6667480469,
+				"top": 1062.3332519531,
 				"width": 200.048828125,
 				"height": 866.33203125
 			},
@@ -2193,9 +2193,9 @@
 				"left": 1257.6667480469,
 				"top": 481.33331298828,
 				"width": 179.712890625,
-				"height": 301.33203125
+				"height": 316.33203125
 			},
-			"displayable_fields_count": 12
+			"displayable_fields_count": 13
 		},
 		"TermCondition": {
 			"color": {

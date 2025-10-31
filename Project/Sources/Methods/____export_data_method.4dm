@@ -1,17 +1,27 @@
 //%attributes = {}
 
-/*
-Instruncion:
+//Instruncion : 
 
-- Do not execute on this version
-- copy the method and paste in the old version of the application
-- modify if needed and execute to exportdata the DataJson folder(Folder that contain the exported data)
-- if you made some modifications, copy the method content from old system to this for update and push to git
-
-*/
+//-Do not execute on this version
+//-copy the method and paste in the old version of the application
+//-modify if needed and execute to export data to the DataJson folder(Folder that contain the exported data)
+//-if you made some modifications, copy the method content from old system to this
 
 
-If (False:C215)  // export po & po lines (po <-- po_lines)
+
+var $folderPath : Text
+var $myFolder : Object
+
+$folderPath:=Get 4D folder:C485(Database folder:K5:14)+"DataJson"
+
+$myFolder:=Folder:C1567(Convert path system to POSIX:C1106($folderPath))
+
+If (Not:C34($myFolder.exists))
+	$myFolder.create()
+End if 
+
+
+If (True:C214)  // export po & po lines (po <-- po_lines)
 	ALL RECORDS:C47([PO_LOG])
 	
 	$records:=New collection:C1472()
@@ -107,12 +117,18 @@ If (False:C215)  // export po & po lines (po <-- po_lines)
 		NEXT RECORD:C51([PO_LOG])
 	End while 
 	
-	TEXT TO DOCUMENT:C1237("DataJson/po_log_export.json"; JSON Stringify:C1217($records))
 	
-	//SHOW ON DISK("DataJson/po_log_export.json")
+	//TEXT TO DOCUMENT($myFolder.platformPath+"po_log_export.json"; JSON Stringify($records))
+	vhDoc:=Create document:C266($myFolder.platformPath+"po_log_export.json")
+	
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; JSON Stringify:C1217($records))
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	//SHOW ON DISK($myFolder.platformPath+"po_log_export.json")
 End if 
 
-If (False:C215)  // export jobs & lot (job <-- lots)
+If (True:C214)  // export jobs & lot (job <-- lots)
 	$records:=New collection:C1472()
 	
 	ALL RECORDS:C47([Receiver])
@@ -159,6 +175,7 @@ If (False:C215)  // export jobs & lot (job <-- lots)
 			"qtyOnHand"; [Receiver]QtyOnHand; \
 			"shipMemo"; [Receiver]Ship_Memo; \
 			"jobComment"; [Receiver]Job_Comment; \
+			"dropShipCustomer"; [Receiver]Drop_Ship_Customer; \
 			"archived"; False:C215; \
 			"address"; New object:C1471("addresses"; New collection:C1472()); \
 			"poLines"; New collection:C1472(); \
@@ -252,7 +269,8 @@ If (False:C215)  // export jobs & lot (job <-- lots)
 				"dateOut"; [Lotinfo]Dateout; \
 				"process"; [Lotinfo]Process; \
 				"device"; [Lotinfo]Device; \
-				"altLotNumber"; [Lotinfo]AltDevNum; \
+				"altDevNumber"; [Lotinfo]AltDevNum; \
+				"altLotNumber"; [Lotinfo]AltLotNumber; \
 				"deviceTableLink"; [Lotinfo]LinkToDeviceTable; \
 				"onHold"; [Lotinfo]Hold; \
 				"holdDate"; [Lotinfo]Hold_date; \
@@ -280,6 +298,7 @@ If (False:C215)  // export jobs & lot (job <-- lots)
 				"ID"; [Lotinfo]ID; \
 				"parentID"; [Lotinfo]ParentID; \
 				"parentLotNumber"; $parentLotNumber; \
+				"packageType"; [Lotinfo]PackageType1; \
 				"steps"; $steps\
 				))
 			
@@ -290,12 +309,18 @@ If (False:C215)  // export jobs & lot (job <-- lots)
 		NEXT RECORD:C51([Receiver])
 	End while 
 	
-	TEXT TO DOCUMENT:C1237("DataJson/job_log_export.json"; JSON Stringify:C1217($records))
+	//TEXT TO DOCUMENT($myFolder.platformPath+"job_log_export.json"; JSON Stringify($records))
+	vhDoc:=Create document:C266($myFolder.platformPath+"job_log_export.json")
 	
-	//SHOW ON DISK("DataJson/job_log_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; JSON Stringify:C1217($records))
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	
+	//SHOW ON DISK($myFolder.platformPath+"job_log_export.json")
 End if 
 
-If (False:C215)  //export Inventory
+If (True:C214)  //export Inventory
 	$records:=New collection:C1472()
 	
 	ALL RECORDS:C47([Inventory:126])
@@ -354,12 +379,17 @@ If (False:C215)  //export Inventory
 		NEXT RECORD:C51([Inventory:126])
 	End while 
 	
-	TEXT TO DOCUMENT:C1237("DataJson/inventory_export.json"; JSON Stringify:C1217($records))
+	//TEXT TO DOCUMENT($myFolder.platformPath+"inventory_export.json"; JSON Stringify($records))
+	vhDoc:=Create document:C266($myFolder.platformPath+"inventory_export.json")
 	
-	//SHOW ON DISK("DataJson/inventory_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; JSON Stringify:C1217($records))
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	//SHOW ON DISK($myFolder.platformPath+"inventory_export.json")
 End if 
 
-If (False:C215)  // export stepTemplates
+If (True:C214)  // export stepTemplates
 	ALL RECORDS:C47([Template_definitions])
 	
 	$records:=New collection:C1472()
@@ -393,12 +423,17 @@ If (False:C215)  // export stepTemplates
 		NEXT RECORD:C51([Template_definitions])
 	End while 
 	
-	TEXT TO DOCUMENT:C1237("DataJson/step_template_export.json"; JSON Stringify:C1217($records))
+	//TEXT TO DOCUMENT($myFolder.platformPath+"step_template_export.json"; JSON Stringify($records))
+	vhDoc:=Create document:C266($myFolder.platformPath+"step_template_export.json")
 	
-	//SHOW ON DISK("DataJson/step_template_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; JSON Stringify:C1217($records))
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	//SHOW ON DISK($myFolder.platformPath+"step_template_export.json")
 End if 
 
-If (False:C215)  // export tools
+If (True:C214)  // export tools
 	QUERY:C277([Save_lists]; [Save_lists]List_name="z@")
 	
 	$records:=New collection:C1472()
@@ -426,12 +461,17 @@ If (False:C215)  // export tools
 		NEXT RECORD:C51([Save_lists])
 	End while 
 	
-	TEXT TO DOCUMENT:C1237("DataJson/tools_export.json"; JSON Stringify:C1217($records))
+	//TEXT TO DOCUMENT($myFolder.platformPath+"tools_export.json"; JSON Stringify($records))
+	vhDoc:=Create document:C266($myFolder.platformPath+"tools_export.json")
 	
-	//SHOW ON DISK("DataJson/tools_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; JSON Stringify:C1217($records))
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	//SHOW ON DISK($myFolder.platformPath+"tools_export.json")
 End if 
 
-If (False:C215)  // export certifications
+If (True:C214)  // export certifications
 	$listRef:=Load list:C383("Certification list")
 	
 	$records:=New collection:C1472()
@@ -447,12 +487,17 @@ If (False:C215)  // export certifications
 		End if 
 	End for 
 	
-	TEXT TO DOCUMENT:C1237("DataJson/certifications_export.json"; JSON Stringify:C1217($records))
+	//TEXT TO DOCUMENT($myFolder.platformPath+"certifications_export.json"; JSON Stringify($records))
+	vhDoc:=Create document:C266($myFolder.platformPath+"certifications_export.json")
 	
-	//SHOW ON DISK("DataJson/certifications_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; JSON Stringify:C1217($records))
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	//SHOW ON DISK($myFolder.platformPath+"certifications_export.json")
 End if 
 
-If (False:C215)  // export employees
+If (True:C214)  // export employees
 	ALL RECORDS:C47([Employees])
 	
 	$records:=New collection:C1472()
@@ -526,12 +571,17 @@ If (False:C215)  // export employees
 		NEXT RECORD:C51([Employees])
 	End while 
 	
-	TEXT TO DOCUMENT:C1237("DataJson/staff_export.json"; JSON Stringify:C1217($records))
+	//TEXT TO DOCUMENT($myFolder.platformPath+"staff_export.json"; JSON Stringify($records))
+	vhDoc:=Create document:C266($myFolder.platformPath+"staff_export.json")
 	
-	//SHOW ON DISK("DataJson/staff_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; JSON Stringify:C1217($records))
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	//SHOW ON DISK($myFolder.platformPath+"staff_export.json")
 End if 
 
-If (False:C215)  // export qcars
+If (True:C214)  // export qcars
 	ALL RECORDS:C47([QCARS])
 	
 	$records:=New collection:C1472()
@@ -566,12 +616,18 @@ If (False:C215)  // export qcars
 		NEXT RECORD:C51([QCARS])
 	End while 
 	
-	TEXT TO DOCUMENT:C1237("DataJson/qcar_export.json"; JSON Stringify:C1217($records))
+	//TEXT TO DOCUMENT($myFolder.platformPath+"qcar_export.json"; JSON Stringify($records))
+	vhDoc:=Create document:C266($myFolder.platformPath+"qcar_export.json")
 	
-	//SHOW ON DISK("DataJson/qcar_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; JSON Stringify:C1217($records))
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	
+	//SHOW ON DISK($myFolder.platformPath+"qcar_export.json")
 End if 
 
-If (False:C215)  // export byt_orders
+If (True:C214)  // export byt_orders
 	
 	ALL RECORDS:C47([BUY_ORDERS])
 	
@@ -653,12 +709,17 @@ If (False:C215)  // export byt_orders
 		NEXT RECORD:C51([BUY_ORDERS])
 	End while 
 	
-	TEXT TO DOCUMENT:C1237("DataJson/buyOrders_export.json"; JSON Stringify:C1217($records))
+	//TEXT TO DOCUMENT($myFolder.platformPath+"buyOrders_export.json"; JSON Stringify($records))
+	vhDoc:=Create document:C266($myFolder.platformPath+"buyOrders_export.json")
 	
-	//SHOW ON DISK("DataJson/buyOrders_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; JSON Stringify:C1217($records))
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	//SHOW ON DISK($myFolder.platformPath+"buyOrders_export.json")
 End if 
 
-If (False:C215)  // export archived jobs & lot (job <-- lots)
+If (True:C214)  // export archived jobs & lot (job <-- lots)
 	$records:=New collection:C1472()
 	
 	ALL RECORDS:C47([ARCHIVES])
@@ -706,6 +767,7 @@ If (False:C215)  // export archived jobs & lot (job <-- lots)
 			"qtyOnHand"; 0; \
 			"shipMemo"; [ARCHIVES]Ship_Memo; \
 			"jobComment"; ""; \
+			"dropShipCustomer"; [ARCHIVES]Drop_Ship_Customer; \
 			"archived"; False:C215; \
 			"address"; New object:C1471(\
 			"billing"; New object:C1471("street"; ""; "additionalAddress"; ""; "city"; [ARCHIVES]Bill_addr_City; "state"; [ARCHIVES]Bill_addr_ST; "zipCode"; [ARCHIVES]Bill_addr_ZIP; "country"; [ARCHIVES]BillAddrCountry); \
@@ -788,7 +850,8 @@ If (False:C215)  // export archived jobs & lot (job <-- lots)
 				"dateOut"; [Lotinfo]Dateout; \
 				"process"; [Lotinfo]Process; \
 				"device"; [Lotinfo]Device; \
-				"altLotNumber"; [Lotinfo]AltDevNum; \
+				"altDevNumber"; [Lotinfo]AltDevNum; \
+				"altLotNumber"; [Lotinfo]AltLotNumber; \
 				"deviceTableLink"; [Lotinfo]LinkToDeviceTable; \
 				"onHold"; [Lotinfo]Hold; \
 				"holdDate"; [Lotinfo]Hold_date; \
@@ -816,6 +879,7 @@ If (False:C215)  // export archived jobs & lot (job <-- lots)
 				"ID"; [Lotinfo]ID; \
 				"parentID"; [Lotinfo]ParentID; \
 				"parentLotNumber"; $parentLotNumber; \
+				"packageType"; [Lotinfo]PackageType1; \
 				"steps"; $steps\
 				))
 			
@@ -828,29 +892,34 @@ If (False:C215)  // export archived jobs & lot (job <-- lots)
 		NEXT RECORD:C51([ARCHIVES])
 	End while 
 	
-	TEXT TO DOCUMENT:C1237("DataJson/archived_jobs_export.json"; JSON Stringify:C1217($records))
+	//TEXT TO DOCUMENT($myFolder.platformPath+"archived_jobs_export.json"; JSON Stringify($records))
+	vhDoc:=Create document:C266($myFolder.platformPath+"archived_jobs_export.json")
 	
-	//SHOW ON DISK("DataJson/archived_jobs_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; JSON Stringify:C1217($records))
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	//SHOW ON DISK($myFolder.platformPath+"archived_jobs_export.json")
 End if 
 
-If (False:C215)  // export Repair_Log
+If (True:C214)  // export Repair_Log
 	
 	ALL RECORDS:C47([Repair_Log])
 	$jsonString:=Selection to JSON:C1234([Repair_Log])
-	C_TIME:C306(vhDoc)
-	vhDoc:=Create document:C266("DataJson/DataJson/repair_log_export.json")
+	
+	vhDoc:=Create document:C266($myFolder.platformPath+"repair_log_export.json")
 	If (OK=1)
 		SEND PACKET:C103(vhDoc; $jsonString)
 		CLOSE DOCUMENT:C267(vhDoc)
 	End if 
 End if 
 
-If (False:C215)  // export Equipments
+If (True:C214)  // export Equipments
 	
 	ALL RECORDS:C47([ATE])
 	$jsonString:=Selection to JSON:C1234([ATE])
-	C_TIME:C306(vhDoc)
-	vhDoc:=Create document:C266("DataJson/equipment_export.json")
+	
+	vhDoc:=Create document:C266($myFolder.platformPath+"equipment_export.json")
 	If (OK=1)
 		SEND PACKET:C103(vhDoc; $jsonString)
 		CLOSE DOCUMENT:C267(vhDoc)
@@ -858,12 +927,12 @@ If (False:C215)  // export Equipments
 	
 End if 
 
-If (False:C215)  // export DocServerIndex
+If (True:C214)  // export DocServerIndex
 	
 	ALL RECORDS:C47([DocServerIndex])
 	$jsonString:=Selection to JSON:C1234([DocServerIndex])
-	C_TIME:C306(vhDoc)
-	vhDoc:=Create document:C266("DataJson/docServerIndex_export.json")
+	
+	vhDoc:=Create document:C266($myFolder.platformPath+"docServerIndex_export.json")
 	If (OK=1)
 		SEND PACKET:C103(vhDoc; $jsonString)
 		CLOSE DOCUMENT:C267(vhDoc)
@@ -871,7 +940,7 @@ If (False:C215)  // export DocServerIndex
 	
 End if 
 
-If (False:C215)  // export Equipments Documents
+If (True:C214)  // export Equipments Documents
 	
 	QUERY:C277([DocServerIndex]; [DocServerIndex]TableNumber=10)
 	
@@ -885,16 +954,18 @@ If (False:C215)  // export Equipments Documents
 			$path:=Get external data path:C1133([DocServerIndex]DocBlob)
 			FLUSH CACHE:C297(*)
 			
-			
-			$file:=Folder:C1567(fk resources folder:K87:11).file("EquipmentReports/"+String:C10([DocServerIndex]UniqueID+[DocServerIndex]PrimaryKeyValue))
-			
-			If (Not:C34($file.exists))
+			If (String:C10([DocServerIndex]UniqueID+[DocServerIndex]PrimaryKeyValue)#"")
 				
-				$file.create()
+				$file:=File:C1566(Convert path system to POSIX:C1106($myFolder.platformPath+"EquipmentReports/"+String:C10([DocServerIndex]UniqueID+[DocServerIndex]PrimaryKeyValue)))
+				
+				If (Not:C34($file.exists))
+					
+					$file.create()
+				End if 
+				
+				BLOB TO DOCUMENT:C526($file.platformPath; [DocServerIndex]DocBlob)
+				
 			End if 
-			
-			BLOB TO DOCUMENT:C526($file.platformPath; [DocServerIndex]DocBlob)
-			
 			
 		End if 
 		
@@ -903,12 +974,12 @@ If (False:C215)  // export Equipments Documents
 	End for 
 End if 
 
-If (False:C215)  // export Spec_control
+If (True:C214)  // export Spec_control
 	
 	ALL RECORDS:C47([Spec_Control])
 	$jsonString:=Selection to JSON:C1234([Spec_Control])
-	C_TIME:C306(vhDoc)
-	vhDoc:=Create document:C266("DataJson/specification_export.json")
+	
+	vhDoc:=Create document:C266($myFolder.platformPath+"specification_export.json")
 	If (OK=1)
 		SEND PACKET:C103(vhDoc; $jsonString)
 		CLOSE DOCUMENT:C267(vhDoc)
@@ -916,12 +987,12 @@ If (False:C215)  // export Spec_control
 	
 End if 
 
-If (False:C215)  // export PartData
+If (True:C214)  // export PartData
 	
 	ALL RECORDS:C47([PartData:58])
 	$jsonString:=Selection to JSON:C1234([PartData:58])
-	C_TIME:C306(vhDoc)
-	vhDoc:=Create document:C266("DataJson/partData_export.json")
+	
+	vhDoc:=Create document:C266($myFolder.platformPath+"partData_export.json")
 	If (OK=1)
 		SEND PACKET:C103(vhDoc; $jsonString)
 		CLOSE DOCUMENT:C267(vhDoc)
@@ -929,12 +1000,12 @@ If (False:C215)  // export PartData
 	
 End if 
 
-If (False:C215)  // export Suppliers
+If (True:C214)  // export Suppliers
 	
 	ALL RECORDS:C47([AVL_Supplies])
 	$jsonString:=Selection to JSON:C1234([AVL_Supplies])
-	C_TIME:C306(vhDoc)
-	vhDoc:=Create document:C266("DataJson/suppliers_export.json")
+	
+	vhDoc:=Create document:C266($myFolder.platformPath+"suppliers_export.json")
 	If (OK=1)
 		SEND PACKET:C103(vhDoc; $jsonString)
 		CLOSE DOCUMENT:C267(vhDoc)
@@ -942,12 +1013,12 @@ If (False:C215)  // export Suppliers
 	
 End if 
 
-If (False:C215)  // export AML
+If (True:C214)  // export AML
 	
 	ALL RECORDS:C47([AVL_Supplies])
 	$jsonString:=Selection to JSON:C1234([AVL_Supplies])
-	C_TIME:C306(vhDoc)
-	vhDoc:=Create document:C266("DataJson/aml_export.json")
+	
+	vhDoc:=Create document:C266($myFolder.platformPath+"aml_export.json")
 	If (OK=1)
 		SEND PACKET:C103(vhDoc; $jsonString)
 		CLOSE DOCUMENT:C267(vhDoc)
@@ -955,12 +1026,12 @@ If (False:C215)  // export AML
 	
 End if 
 
-If (False:C215)  //export  ManagementReview & Audit
+If (True:C214)  //export  ManagementReview & Audit
 	
 	ALL RECORDS:C47([Log_Book])
 	$jsonString:=Selection to JSON:C1234([Log_Book])
-	C_TIME:C306(vhDoc)
-	vhDoc:=Create document:C266("DataJson/log_book_export.json")
+	
+	vhDoc:=Create document:C266($myFolder.platformPath+"log_book_export.json")
 	If (OK=1)
 		SEND PACKET:C103(vhDoc; $jsonString)
 		CLOSE DOCUMENT:C267(vhDoc)
@@ -968,14 +1039,17 @@ If (False:C215)  //export  ManagementReview & Audit
 	
 End if 
 
-If (False:C215)  //export Pictures from [Pict] table
+If (True:C214)  //export Pictures from [Pict] table
 	
 	ALL RECORDS:C47([Picts])
-	C_PICTURE:C286($picture)
 	
 	For ($i; 0; Records in selection:C76([Picts]))
 		
-		$file:=Folder:C1567(fk resources folder:K87:11).file("PictsTable/"+String:C10([Picts]Pic_Name)+".png")
+		$file:=File:C1566(Convert path system to POSIX:C1106($myFolder.platformPath+"PictsTable/"+String:C10([Picts]Pic_Name)+".png"))
+		If (Not:C34($file.exists))
+			
+			$file.create()
+		End if 
 		$picture:=[Picts]Picture4d_
 		CONVERT PICTURE:C1002($picture; "png")
 		WRITE PICTURE FILE:C680($file.platformPath; $picture)
@@ -985,21 +1059,24 @@ If (False:C215)  //export Pictures from [Pict] table
 	End for 
 End if 
 
-If (False:C215)  //export LogBook(audit and managementReview) documents
+If (True:C214)  //export LogBook(audit and managementReview) documents
 	
 	QUERY:C277([DocServerIndex]; [DocServerIndex]TableNumber=39)
 	
 	FIRST RECORD:C50([DocServerIndex])
 	For ($i; 1; Records in selection:C76([DocServerIndex]))
 		
-		$file:=Folder:C1567(fk resources folder:K87:11).file("LogBookDocs/"+String:C10([DocServerIndex]UniqueID+[DocServerIndex]PrimaryKeyValue))
-		
-		If (Not:C34($file.exists))
+		If (String:C10([DocServerIndex]UniqueID+[DocServerIndex]PrimaryKeyValue)#"")
+			$file:=File:C1566(Convert path system to POSIX:C1106($myFolder.platformPath+"LogBookDocs/"+String:C10([DocServerIndex]UniqueID+[DocServerIndex]PrimaryKeyValue)))
 			
-			$file.create()
+			If (Not:C34($file.exists))
+				
+				$file.create()
+			End if 
+			
+			BLOB TO DOCUMENT:C526($file.platformPath; [DocServerIndex]DocBlob)  //$blob)
+			
 		End if 
-		
-		BLOB TO DOCUMENT:C526($file.platformPath; [DocServerIndex]DocBlob)  //$blob)
 		
 		NEXT RECORD:C51([DocServerIndex])
 		
@@ -1007,7 +1084,7 @@ If (False:C215)  //export LogBook(audit and managementReview) documents
 	
 End if 
 
-If (False:C215)  // export Specification Documents
+If (True:C214)  // export Specification Documents
 	
 	QUERY:C277([DocServerIndex]; [DocServerIndex]TableNumber=21)
 	$sizee:=Records in selection:C76([DocServerIndex])
@@ -1015,29 +1092,31 @@ If (False:C215)  // export Specification Documents
 	FIRST RECORD:C50([DocServerIndex])
 	For ($i; 0; Records in selection:C76([DocServerIndex]))
 		
-		$file:=Folder:C1567(fk resources folder:K87:11).file("SpecificationsDocuments/"+String:C10([DocServerIndex]UniqueID+[DocServerIndex]PrimaryKeyValue))
-		
-		If (Not:C34($file.exists))
+		If (String:C10([DocServerIndex]UniqueID+[DocServerIndex]PrimaryKeyValue)#"")
+			$file:=File:C1566(Convert path system to POSIX:C1106($myFolder.platformPath+"SpecificationsDocuments/"+String:C10([DocServerIndex]UniqueID+[DocServerIndex]PrimaryKeyValue)))
 			
-			$file.create()
+			If (Not:C34($file.exists))
+				
+				$file.create()
+			End if 
+			
+			BLOB TO DOCUMENT:C526($file.platformPath; [DocServerIndex]DocBlob)
+			
 		End if 
-		
-		BLOB TO DOCUMENT:C526($file.platformPath; [DocServerIndex]DocBlob)
 		
 		NEXT RECORD:C51([DocServerIndex])
 		
 	End for 
 End if 
 
-If (False:C215)  // export Specification PublishedDocumentBlob Field
+If (True:C214)  // export Specification PublishedDocumentBlob Field
 	
 	ALL RECORDS:C47([Spec_Control])
 	FIRST RECORD:C50([Spec_Control])
 	For ($i; 0; Records in selection:C76([Spec_Control]))
 		If ([Spec_Control]Spec#"")
 			
-			$counter_a:=$counter_a+1
-			$file:=Folder:C1567(fk resources folder:K87:11).file("SpecificationsPublishedDocumentBlobField/"+String:C10([Spec_Control]Spec))
+			$file:=File:C1566(Convert path system to POSIX:C1106($myFolder.platformPath+"SpecificationsPublishedDocumentBlobField/"+String:C10([Spec_Control]Spec)))
 			
 			If (Not:C34($file.exists))
 				
@@ -1054,12 +1133,12 @@ If (False:C215)  // export Specification PublishedDocumentBlob Field
 	
 End if 
 
-If (False:C215)  // export specification
+If (True:C214)  // export specification
 	
 	ALL RECORDS:C47([Spec_Control])
 	$jsonString:=Selection to JSON:C1234([Spec_Control])
-	C_TIME:C306(vhDoc)
-	vhDoc:=Create document:C266("DataJson/specification_export.json")
+	
+	vhDoc:=Create document:C266($myFolder.platformPath+"specification_export.json")
 	If (OK=1)
 		SEND PACKET:C103(vhDoc; $jsonString)
 		CLOSE DOCUMENT:C267(vhDoc)

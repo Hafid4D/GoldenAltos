@@ -99,8 +99,17 @@ Function redrawAndSetVisible()
 			
 			
 			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_"+String:C10(FORM Get current page:C276(*)); $left; $top; $right; $heightSubform-$offset)
-			OBJECT SET COORDINATES:C1248(*; "lb_materials"; $left_lb; $top_lb; $widthSubform-$offset_r; $heightSubform-$offset-1)
+			OBJECT SET COORDINATES:C1248(*; "lb_materials"; $left_lb; $top_lb; $widthSubform-$offset_r; -$heightSubform-$offset-1)
 			OBJECT SET COORDINATES:C1248(*; "bActionCustProvMat"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
+			
+		: (FORM Get current page:C276(*)=4)
+			
+			OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+			$offset:=4
+			
+			OBJECT GET COORDINATES:C663(*; "entryField_cOfCRemarks"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "entryField_cOfCRemarks"; $g; $h; $widthSubform-30; $b)
+			
 	End case 
 	
 Function loadAllTabs()
@@ -492,3 +501,29 @@ Function splitLot()
 			ALERT:C41("sub lot")
 		End if 
 	End if 
+	
+	
+	
+Function generateCofC()
+	
+	var $context : Object
+	
+	$context:=New object:C1471()
+	
+	$file:=Folder:C1567(fk resources folder:K87:11).file("4DWriteProPrintTemplates/COfCTemplate.4wp")
+	$template:=WP Import document:C1318($file.platformPath)
+	
+	$context.user:=Current machine:C483
+	$context.lot:=Form:C1466.current_item
+	
+	SET PRINT OPTION:C733(Orientation option:K47:2; 1)
+	
+	
+	
+	WP SET DATA CONTEXT:C1786($template; $context)
+	
+	PRINT SETTINGS:C106(2)
+	
+	WP PRINT:C1343($template)
+	
+	

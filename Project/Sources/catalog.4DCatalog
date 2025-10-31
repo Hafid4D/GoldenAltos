@@ -1164,6 +1164,7 @@
 		<field name="lastShipDate" uuid="8B39A43798850E449C946B0ECDB60979" type="8" never_null="true" id="28"/>
 		<field name="archivedDate" uuid="A310D42571F1E9449B87A88E35E1734E" type="8" never_null="true" id="29"/>
 		<field name="pr_qualifier" uuid="C05E81445733BF4399D0F30ABA121A1D" type="10" limiting_length="255" never_null="true" id="30"/>
+		<field name="dropShipCustomer" uuid="21DEEF44B59645428651C744EBD1C277" type="10" limiting_length="255" never_null="true" id="31"/>
 		<primary_key field_name="UUID" field_uuid="D70DED62813D485DA8CFB0CFD1FF994C"/>
 	</table>
 	<table name="Lot" uuid="67220A81398C4000A84C1F180E368020" id="118">
@@ -1201,7 +1202,7 @@
 		<field name="readyToShipDate" uuid="9B3A63399CCF23428B2DC8DEB6795CA2" type="8" never_null="true" id="30"/>
 		<field name="shippingMemo" uuid="DCA47DF91424DD4894BC10AF89D2D09E" type="10" never_null="true" id="31"/>
 		<field name="location" uuid="E71C67E4282EA742B952D10FA12855F2" type="10" limiting_length="255" never_null="true" id="32"/>
-		<field name="status" uuid="A4CF20D716CEAA43B1BE11D28352EB13" type="4" never_null="true" id="33"/>
+		<field name="IsApproved" uuid="A4CF20D716CEAA43B1BE11D28352EB13" type="1" never_null="true" id="33"/>
 		<field name="comment" uuid="CC820B6502BD5C4AB32C77A17C8B6F16" type="10" limiting_length="255" never_null="true" id="34"/>
 		<field name="prQualifier" uuid="F949637E15BBFA41A80C26F91D661DF4" type="10" limiting_length="255" never_null="true" id="35"/>
 		<field name="cOfCRemarks" uuid="0BF661E0E9C2CA47933A32ECD6A5E9D8" type="10" limiting_length="255" never_null="true" id="36"/>
