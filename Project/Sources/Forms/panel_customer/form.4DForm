@@ -276,7 +276,7 @@
 					"top": 7,
 					"left": 691,
 					"width": 175,
-					"height": 27,
+					"height": 23,
 					"fontFamily": "System Font",
 					"fontSize": 13,
 					"focusable": false,
@@ -289,7 +289,7 @@
 					"events": [
 						"onClick"
 					],
-					"bottom": 34
+					"bottom": 30
 				}
 			}
 		},
@@ -1229,7 +1229,7 @@
 		},
 		null
 	],
-	"geometryStamp": 930,
+	"geometryStamp": 931,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

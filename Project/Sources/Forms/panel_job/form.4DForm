@@ -91,8 +91,8 @@
 				},
 				"label_0_3": {
 					"type": "text",
-					"top": 62,
-					"left": 12,
+					"top": 11,
+					"left": 627,
 					"width": 70,
 					"height": 17,
 					"stroke": "#808080",
@@ -166,8 +166,8 @@
 				"entryField_archived": {
 					"type": "checkbox",
 					"text": "Archived",
-					"top": 58,
-					"left": 92,
+					"top": 7,
+					"left": 707,
 					"width": 168,
 					"height": 22,
 					"events": [
@@ -230,6 +230,36 @@
 					],
 					"dataSource": "Form:C1466.current_item.shipped",
 					"dataSourceTypeHint": "boolean"
+				},
+				"label_0_20": {
+					"type": "text",
+					"top": 62,
+					"left": 7,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Job Type",
+					"textAlign": "left"
+				},
+				"pup_jobType": {
+					"type": "button",
+					"top": 59,
+					"left": 92,
+					"width": 160,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_jobType.4dm",
+					"events": [
+						"onClick"
+					],
+					"bottom": 82
 				}
 			}
 		},
@@ -1485,7 +1515,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1225,
+	"geometryStamp": 1241,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

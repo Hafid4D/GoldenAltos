@@ -20,6 +20,12 @@ If (True:C214)
 			$job.poNumber:=0
 		End if 
 		
+		If ($record.lineItem=True:C214)
+			$job.UUID_JobType:=ds:C1482.JobType.query("name =:1"; "NR Job Order").first().UUID
+		Else 
+			$job.UUID_JobType:=ds:C1482.JobType.query("name =:1"; "Job Order").first().UUID
+		End if 
+		
 		$job.division:=$record.division
 		$job.dateCreated:=$record.dateCreated
 		$job.expectedDate:=$record.expectedDate

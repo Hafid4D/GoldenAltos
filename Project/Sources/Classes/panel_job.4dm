@@ -45,6 +45,7 @@ Function pup_XXX()
 	
 Function redrawAndSetVisible()
 	This:C1470.hideDatePickers()
+	This:C1470.drawPup_jobType()
 	
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
@@ -52,6 +53,8 @@ Function redrawAndSetVisible()
 		Form:C1466.sfw.entry.panel.pages[1].label:="PO Lines ("+String:C10(Form:C1466.lb_lineItems.length)+")"
 		Form:C1466.sfw.entry.panel.pages[2].label:="Lots ("+String:C10(Form:C1466.lb_lots.length)+")"
 	End use 
+	
+	OBJECT SET ENABLED:C1123(*; "pup_jobType"; Form:C1466.situation.mode="add")
 	Form:C1466.sfw.drawHTab()
 	
 	
@@ -309,3 +312,17 @@ Function bActionCustProvMat()
 				End if 
 			End if 
 	End case 
+	
+	
+Function drawPup_jobType()
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.current_item.drowPup("JobType"; "UUID"; "UUID_JobType"; "pup_jobType")
+	End if 
+	
+Function pup_jobType()
+	//Create pop up menu
+	Form:C1466.current_item.pup("jobTypes"; "JobType"; "UUID"; "UUID_JobType")
+	This:C1470.drawPup_jobType()
+	
+	
+	

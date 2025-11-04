@@ -1,7 +1,6 @@
 //%attributes = {}
 
 
-
 //$hashOptions:=New shared object("algorithm"; "bcrypt"; "cost"; 10)
 //$newPassword:="pSzjGX!Ey9P1c~p"
 //$hash:=Generate password hash($newPassword; $hashOptions)
