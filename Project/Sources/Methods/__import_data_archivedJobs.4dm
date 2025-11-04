@@ -45,6 +45,8 @@ If (True:C214)
 		$job.jobComment:=$record.jobComment
 		$job.archived:=True:C214
 		$job.pr_qualifier:=$record.pr_qualifier
+		$job.dropShipCustomer:=$record.dropShipCustomer
+		
 		
 		$res:=$job.save()
 		If (Not:C34($res.success))
@@ -112,6 +114,9 @@ If (True:C214)
 			$lot_e.location:=$lot.location
 			$lot_e.comment:=$lot.comment
 			$lot_e.status:=$lot.status
+			$lot_e.cOfCInspector:=$lot.cOfCInspector
+			$lot_e.packageType:=$lot.packageType
+			$lot_e.dateCode:=$lot.dateCode
 			
 			$lot_e.UUID_Job:=$job.UUID
 			

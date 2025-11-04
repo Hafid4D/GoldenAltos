@@ -694,9 +694,9 @@
 				"left": 2437.3334960938,
 				"top": 1052.6667480469,
 				"width": 157.69921875,
-				"height": 1015.33203125
+				"height": 948.33190917969
 			},
-			"displayable_fields_count": 46
+			"displayable_fields_count": 43
 		},
 		"Job": {
 			"color": {
@@ -2110,7 +2110,7 @@
 				"left": 2693.6667480469,
 				"top": 1062.3332519531,
 				"width": 200.048828125,
-				"height": 866.33203125
+				"height": 864.33203125
 			},
 			"displayable_fields_count": 39,
 			"fields": {
@@ -2279,6 +2279,14 @@
 			}
 		},
 		"80581F9F528F0F49A10ACED99EB37F4B": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"F9B1A300D7A54EFC9326B35FBB01CED9": {
 			"color": {
 				"red": 255,
 				"green": 255,

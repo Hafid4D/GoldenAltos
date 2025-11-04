@@ -1183,7 +1183,7 @@
 		<field name="onHold" uuid="48EE8785E550BD4E986F0B6FA33836C3" type="1" never_null="true" id="11"/>
 		<field name="holdDate" uuid="855D7C0B15685E4CA65CBF608CA69D96" type="8" never_null="true" id="12"/>
 		<field name="holdTime" uuid="BF222EC28410E94A807E0BA2B474D55E" type="9" never_null="true" id="13"/>
-		<field name="poNumber" uuid="024D16950875954DA9309F78117327B4" type="4" never_null="true" id="14"/>
+		<field name="poNumber" uuid="024D16950875954DA9309F78117327B4" type="10" limiting_length="255" never_null="true" id="14"/>
 		<field name="altLotNumber" uuid="8C21F47DBEC09E4B968E2662C8331613" type="10" limiting_length="255" never_null="true" id="15"/>
 		<field name="customer" uuid="7D2FDB70AA5AE541B98B3E5F622A791C" type="10" limiting_length="255" never_null="true" id="16"/>
 		<field name="deviceTableLink" uuid="110C46C6E72DA44594C32945C204852F" type="10" limiting_length="255" never_null="true" id="17"/>
@@ -1202,14 +1202,15 @@
 		<field name="readyToShipDate" uuid="9B3A63399CCF23428B2DC8DEB6795CA2" type="8" never_null="true" id="30"/>
 		<field name="shippingMemo" uuid="DCA47DF91424DD4894BC10AF89D2D09E" type="10" never_null="true" id="31"/>
 		<field name="location" uuid="E71C67E4282EA742B952D10FA12855F2" type="10" limiting_length="255" never_null="true" id="32"/>
-		<field name="IsApproved" uuid="A4CF20D716CEAA43B1BE11D28352EB13" type="1" never_null="true" id="33"/>
+		<field name="status" uuid="A4CF20D716CEAA43B1BE11D28352EB13" type="4" never_null="true" id="33"/>
 		<field name="comment" uuid="CC820B6502BD5C4AB32C77A17C8B6F16" type="10" limiting_length="255" never_null="true" id="34"/>
 		<field name="prQualifier" uuid="F949637E15BBFA41A80C26F91D661DF4" type="10" limiting_length="255" never_null="true" id="35"/>
 		<field name="cOfCRemarks" uuid="0BF661E0E9C2CA47933A32ECD6A5E9D8" type="10" limiting_length="255" never_null="true" id="36"/>
 		<field name="UUID_LotParent" uuid="BAF908735168A94093DFC22B57192BF3" type="10" store_as_UUID="true" never_null="true" id="37"/>
 		<field name="cOfCInspector" uuid="3930B9C1D5D44B49BA8257994808E54C" type="10" limiting_length="255" never_null="true" id="38"/>
-		<field name="shipAddress" uuid="1AD24DECDD4C024E96AA252861F93673" type="10" limiting_length="255" never_null="true" id="39"/>
+		<field name="altDevNumber" uuid="04A1D5951BE7B24CA6E70D8CB790AF53" type="10" limiting_length="255" never_null="true" id="39"/>
 		<field name="packageType" uuid="5F37F4460E065E4FA7E459B34717481B" type="10" limiting_length="255" never_null="true" id="40"/>
+		<field name="dateCode" uuid="316DF221DE628140AEBD8A716A946D96" type="8" never_null="true" id="41"/>
 		<primary_key field_name="UUID" field_uuid="AEF78036FB7D429A96DF35BE53A0E0AF"/>
 	</table>
 	<table name="StepFile" uuid="A6301A2C994D4680A851FC2AE85118BE" id="119">

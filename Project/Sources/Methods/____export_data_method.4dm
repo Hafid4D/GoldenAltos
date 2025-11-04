@@ -1,6 +1,6 @@
 //%attributes = {}
 
-//Instruncion : 
+//Instruntion : 
 
 //-Do not execute on this version
 //-copy the method and paste in the old version of the application
@@ -299,6 +299,8 @@ If (True:C214)  // export jobs & lot (job <-- lots)
 				"parentID"; [Lotinfo]ParentID; \
 				"parentLotNumber"; $parentLotNumber; \
 				"packageType"; [Lotinfo]PackageType1; \
+				"cOfCInspector"; [Lotinfo]CofCInspector; \
+				"dateCode"; [Lotinfo]datecode; \
 				"steps"; $steps\
 				))
 			
@@ -880,6 +882,8 @@ If (True:C214)  // export archived jobs & lot (job <-- lots)
 				"parentID"; [Lotinfo]ParentID; \
 				"parentLotNumber"; $parentLotNumber; \
 				"packageType"; [Lotinfo]PackageType1; \
+				"cOfCInspector"; [Lotinfo]CofCInspector; \
+				"dateCode"; [Lotinfo]datecode; \
 				"steps"; $steps\
 				))
 			
@@ -1002,8 +1006,8 @@ End if
 
 If (True:C214)  // export Suppliers
 	
-	ALL RECORDS:C47([AVL_Supplies])
-	$jsonString:=Selection to JSON:C1234([AVL_Supplies])
+	ALL RECORDS:C47([Suppliers])
+	$jsonString:=Selection to JSON:C1234([Suppliers])
 	
 	vhDoc:=Create document:C266($myFolder.platformPath+"suppliers_export.json")
 	If (OK=1)
@@ -1148,5 +1152,29 @@ If (True:C214)  // export specification
 	
 End if 
 
+If (True:C214)  // export Supplier Documents
+	
+	QUERY:C277([DocServerIndex]; [DocServerIndex]TableNumber=18)
+	FIRST RECORD:C50([DocServerIndex])
+	For ($i; 1; Records in selection:C76([DocServerIndex]))
+		
+		If (String:C10([DocServerIndex]UniqueID+[DocServerIndex]PrimaryKeyValue)#"")
+			$file:=File:C1566(Convert path system to POSIX:C1106($myFolder.platformPath+"SuppliersDocs/"+String:C10([DocServerIndex]UniqueID+[DocServerIndex]PrimaryKeyValue)))
+			
+			If (Not:C34($file.exists))
+				
+				$file.create()
+			End if 
+			
+			BLOB TO DOCUMENT:C526($file.platformPath; [DocServerIndex]DocBlob)  //$blob)
+			
+		End if 
+		
+		NEXT RECORD:C51([DocServerIndex])
+		
+	End for 
+	
+	
+End if 
 
 ALERT:C41("END!")
