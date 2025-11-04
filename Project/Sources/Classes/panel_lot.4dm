@@ -505,62 +505,72 @@ Function splitLot()
 	
 	
 Function generateCofC()
-	
-	var $context : Object
-	var $pictureVar : Picture
-	var $filePath : Text
-	
-	$context:=New object:C1471()
-	
-	$file:=Folder:C1567(fk resources folder:K87:11).file("4DWriteProPrintTemplates/COfCTemplate.4wp")
-	$template:=WP Import document:C1318($file.platformPath)
-	
-	$context.user:=Current machine:C483
-	$context.lot:=Form:C1466.current_item
-	
-	$images:=WP Get elements:C1550($template; wk type image:K81:192)
-	$lotStep:=Form:C1466.current_item.steps.query("type =:1"; 999)
-	If ($lotStep.length#1) | ((Form:C1466.current_item.dateOut#!00-00-00!) & (Form:C1466.current_item.readyToShipDate#!00-00-00!))
-		WP DELETE PICTURE:C1701($images[0])
+	//Check if all QC Steps are done :
+	$qcLotStepsDateOut:=Form:C1466.lb_steps.query("areas =:1"; "QC").toCollection().extract("dateOut")
+	$allDone:=False:C215
+	If ($qcLotStepsDateOut.indexOf(!00-00-00!)=-1)
+		$allDone:=True:C214
 	End if 
 	
-	$context.lotStep:=$lotStep
-	$shippingAddress:=Form:C1466.current_item.job.address.shipping
-	$address:=$shippingAddress.street+"\n"+$shippingAddress.city+"\n"+$shippingAddress.state+" "+$shippingAddress.zipCode+"\n"+$shippingAddress.country
-	
-	$context.address:=Form:C1466.current_item.job.dropShipCustomer+"\n"+$address
-	
-	
-	
-	//TO DO : To be changed and store stamp in database
-	Case of 
-			
-		: (Form:C1466.current_item.status=1)
-			$filePath:=Get 4D folder:C485(Current resources folder:K5:16)+"picts_GA"+Folder separator:K24:12+"QAStampAccept"+Form:C1466.current_item.cOfCInspector+".jpeg"
-		: (Form:C1466.current_item.status=2)
-			$filePath:=Get 4D folder:C485(Current resources folder:K5:16)+"picts_GA"+Folder separator:K24:12+"QAStampReject"+Form:C1466.current_item.cOfCInspector+".jpeg"
-		Else 
-			
-	End case 
-	
-	READ PICTURE FILE:C678($filePath; $pictureVar)
-	TRANSFORM PICTURE:C988($pictureVar; Scale:K61:2; 0.8; 0.8)
-	$context.stamp:=$pictureVar
-	
-	//TO DO : To be changed and store signature in database
-	If (Form:C1466.current_item.status>0) | (Form:C1466.current_item.location="Completed") | (Form:C1466.current_item.dateOut=!00-00-00!)
-		$filePath:=Get 4D folder:C485(Current resources folder:K5:16)+"picts_GA"+Folder separator:K24:12+"QASignature"+Form:C1466.current_item.cOfCInspector+".jpeg"
+	If ($allDone)
+		var $context : Object
+		var $pictureVar : Picture
+		var $filePath : Text
+		
+		$context:=New object:C1471()
+		
+		$file:=Folder:C1567(fk resources folder:K87:11).file("4DWriteProPrintTemplates/COfCTemplate.4wp")
+		$template:=WP Import document:C1318($file.platformPath)
+		
+		$context.user:=Current machine:C483
+		$context.lot:=Form:C1466.current_item
+		
+		$images:=WP Get elements:C1550($template; wk type image:K81:192)
+		$lotStep:=Form:C1466.current_item.steps.query("type =:1"; 999)
+		If ($lotStep.length#1) | ((Form:C1466.current_item.dateOut#!00-00-00!) & (Form:C1466.current_item.readyToShipDate#!00-00-00!))
+			WP DELETE PICTURE:C1701($images[0])
+		End if 
+		
+		$context.lotStep:=$lotStep
+		$shippingAddress:=Form:C1466.current_item.job.address.shipping
+		$address:=$shippingAddress.street+"\n"+$shippingAddress.city+"\n"+$shippingAddress.state+" "+$shippingAddress.zipCode+"\n"+$shippingAddress.country
+		
+		$context.address:=Form:C1466.current_item.job.dropShipCustomer+"\n"+$address
+		
+		
+		
+		//TO DO : To be changed and store stamp in database
+		Case of 
+				
+			: (Form:C1466.current_item.status=1)
+				$filePath:=Get 4D folder:C485(Current resources folder:K5:16)+"picts_GA"+Folder separator:K24:12+"QAStampAccept"+Form:C1466.current_item.cOfCInspector+".jpeg"
+			: (Form:C1466.current_item.status=2)
+				$filePath:=Get 4D folder:C485(Current resources folder:K5:16)+"picts_GA"+Folder separator:K24:12+"QAStampReject"+Form:C1466.current_item.cOfCInspector+".jpeg"
+			Else 
+				
+		End case 
 		
 		READ PICTURE FILE:C678($filePath; $pictureVar)
-		TRANSFORM PICTURE:C988($pictureVar; Scale:K61:2; 0.5; 0.5)
-		$context.signature:=$pictureVar
+		TRANSFORM PICTURE:C988($pictureVar; Scale:K61:2; 0.8; 0.8)
+		$context.stamp:=$pictureVar
+		
+		//TO DO : To be changed and store signature in database
+		If (Form:C1466.current_item.status>0) | (Form:C1466.current_item.location="Completed") | (Form:C1466.current_item.dateOut=!00-00-00!)
+			$filePath:=Get 4D folder:C485(Current resources folder:K5:16)+"picts_GA"+Folder separator:K24:12+"QASignature"+Form:C1466.current_item.cOfCInspector+".jpeg"
+			
+			READ PICTURE FILE:C678($filePath; $pictureVar)
+			TRANSFORM PICTURE:C988($pictureVar; Scale:K61:2; 0.5; 0.5)
+			$context.signature:=$pictureVar
+		End if 
+		
+		SET PRINT OPTION:C733(Orientation option:K47:2; 1)
+		
+		WP SET DATA CONTEXT:C1786($template; $context)
+		
+		PRINT SETTINGS:C106(2)
+		
+		WP PRINT:C1343($template)
+		
+	Else 
+		cs:C1710.sfw_dialog.me.info(ds:C1482.sfw_readXliff("Info"; "Can't print the Certificate of Conformance.Some QC steps still not done yet!"))
 	End if 
-	
-	SET PRINT OPTION:C733(Orientation option:K47:2; 1)
-	
-	WP SET DATA CONTEXT:C1786($template; $context)
-	
-	PRINT SETTINGS:C106(2)
-	
-	WP PRINT:C1343($template)
-	
