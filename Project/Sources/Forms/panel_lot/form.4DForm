@@ -1758,9 +1758,55 @@
 					"right": 101
 				}
 			}
+		},
+		{
+			"objects": {
+				"header_bkgd11": {
+					"type": "rectangle",
+					"top": 115,
+					"left": 0,
+					"width": 2000,
+					"height": 1500,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"right": 2000
+				},
+				"entryField_cOfCRemarks": {
+					"type": "input",
+					"left": 132,
+					"top": 149,
+					"width": 742,
+					"height": 160,
+					"dataSource": "Form:C1466.current_item.cOfCRemarks",
+					"scrollbarVertical": "automatic"
+				},
+				"label_cOfCRemarks": {
+					"type": "text",
+					"top": 149,
+					"left": 12,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Remarks"
+				},
+				"bCofC": {
+					"type": "button",
+					"text": "Generate certificate of Compliance",
+					"top": 329,
+					"left": 132,
+					"width": 229,
+					"height": 30,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "",
+					"method": "ObjectMethods/bCofC.4dm"
+				}
+			}
 		}
 	],
-	"geometryStamp": 1754,
+	"geometryStamp": 1776,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

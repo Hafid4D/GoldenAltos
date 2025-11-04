@@ -48,35 +48,43 @@ Function redrawAndSetVisible()
 			$height:=$bottom-$top
 			
 			OBJECT SET COORDINATES:C1248(*; "banner_lotOnHold_page"+String:C10(FORM Get current page:C276(*)); $widthSubform-$width; $heightSubform-$height; $widthSubform; $heightSubform)
+			
+			
+			
+			If (Form:C1466.currentStep#Null:C1517)
+				
+				OBJECT SET VISIBLE:C603(*; "header_bkgd2"; (Form:C1466.currentStep.areas="QC"))
+				OBJECT SET VISIBLE:C603(*; "lb_qaApproval"; (Form:C1466.currentStep.areas="QC"))
+				OBJECT SET VISIBLE:C603(*; "header_bkgd1"; (Form:C1466.currentStep.areas="QC"))
+				OBJECT SET VISIBLE:C603(*; "label_approver"; (Form:C1466.currentStep.areas="QC"))
+				OBJECT SET VISIBLE:C603(*; "label_approvalDate"; (Form:C1466.currentStep.areas="QC"))
+				OBJECT SET VISIBLE:C603(*; "entryField_approvalDate"; (Form:C1466.currentStep.areas="QC"))
+				OBJECT SET VISIBLE:C603(*; "entryField_approver"; (Form:C1466.currentStep.areas="QC"))
+				OBJECT SET VISIBLE:C603(*; "entryField_isApproved"; (Form:C1466.currentStep.areas="QC"))
+				OBJECT SET VISIBLE:C603(*; "entryField_isApproved"; (Form:C1466.currentStep.areas="QC"))
+				OBJECT SET VISIBLE:C603(*; "btnDatePickerApproval"; (Form:C1466.currentStep.areas="QC"))
+				OBJECT SET VISIBLE:C603(*; "btnDatePicker@"; ((Form:C1466.sfw.checkIsInModification()) & (Form:C1466.currentStep.areas="QC")))
+				
+			Else 
+				OBJECT SET VISIBLE:C603(*; "header_bkgd2"; False:C215)
+				OBJECT SET VISIBLE:C603(*; "lb_qaApproval"; False:C215)
+				OBJECT SET VISIBLE:C603(*; "header_bkgd1"; False:C215)
+				OBJECT SET VISIBLE:C603(*; "label_approver"; False:C215)
+				OBJECT SET VISIBLE:C603(*; "label_approvalDate"; False:C215)
+				OBJECT SET VISIBLE:C603(*; "entryField_approvalDate"; False:C215)
+				OBJECT SET VISIBLE:C603(*; "entryField_approver"; False:C215)
+				OBJECT SET VISIBLE:C603(*; "entryField_isApproved"; False:C215)
+				OBJECT SET VISIBLE:C603(*; "entryField_isApproved"; False:C215)
+				OBJECT SET VISIBLE:C603(*; "btnDatePickerApproval"; False:C215)
+				OBJECT SET VISIBLE:C603(*; "btnDatePicker@"; False:C215)
+				
+				
+			End if 
+			
+			
+			//: (FORM Get current page(*)=2)
+			//OBJECT SET VISIBLE(*; "bUploadDocument"; Form.sfw.checkIsInModification())
 	End case 
-	
-	OBJECT SET VISIBLE:C603(*; "btnDatePicker@"; Form:C1466.sfw.checkIsInModification())
-	
-	If (Form:C1466.currentStep#Null:C1517)
-		
-		OBJECT SET VISIBLE:C603(*; "header_bkgd2"; (Form:C1466.currentStep.areas="QC"))
-		OBJECT SET VISIBLE:C603(*; "lb_qaApproval"; (Form:C1466.currentStep.areas="QC"))
-		OBJECT SET VISIBLE:C603(*; "header_bkgd1"; (Form:C1466.currentStep.areas="QC"))
-		OBJECT SET VISIBLE:C603(*; "label_approver"; (Form:C1466.currentStep.areas="QC"))
-		OBJECT SET VISIBLE:C603(*; "label_approvalDate"; (Form:C1466.currentStep.areas="QC"))
-		OBJECT SET VISIBLE:C603(*; "entryField_approvalDate"; (Form:C1466.currentStep.areas="QC"))
-		OBJECT SET VISIBLE:C603(*; "entryField_approver"; (Form:C1466.currentStep.areas="QC"))
-		OBJECT SET VISIBLE:C603(*; "entryField_isApproved"; (Form:C1466.currentStep.areas="QC"))
-		OBJECT SET VISIBLE:C603(*; "entryField_isApproved"; (Form:C1466.currentStep.areas="QC"))
-		OBJECT SET VISIBLE:C603(*; "btnDatePickerApproval"; (Form:C1466.currentStep.areas="QC"))
-	Else 
-		OBJECT SET VISIBLE:C603(*; "header_bkgd2"; False:C215)
-		OBJECT SET VISIBLE:C603(*; "lb_qaApproval"; False:C215)
-		OBJECT SET VISIBLE:C603(*; "header_bkgd1"; False:C215)
-		OBJECT SET VISIBLE:C603(*; "label_approver"; False:C215)
-		OBJECT SET VISIBLE:C603(*; "label_approvalDate"; False:C215)
-		OBJECT SET VISIBLE:C603(*; "entryField_approvalDate"; False:C215)
-		OBJECT SET VISIBLE:C603(*; "entryField_approver"; False:C215)
-		OBJECT SET VISIBLE:C603(*; "entryField_isApproved"; False:C215)
-		OBJECT SET VISIBLE:C603(*; "entryField_isApproved"; False:C215)
-		OBJECT SET VISIBLE:C603(*; "btnDatePickerApproval"; False:C215)
-		
-	End if 
 	
 	
 Function loadCurrentStep()

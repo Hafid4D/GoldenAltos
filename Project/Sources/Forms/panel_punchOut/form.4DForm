@@ -791,10 +791,96 @@
 					"visibility": "hidden"
 				}
 			}
+		},
+		{
+			"objects": {
+				"header_bkgd8": {
+					"type": "rectangle",
+					"top": 113,
+					"left": 0,
+					"width": 2000,
+					"height": 1500,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"right": 2000
+				},
+				"label_documentPath": {
+					"type": "text",
+					"text": "Document name",
+					"top": 127,
+					"left": 8,
+					"width": 90,
+					"height": 17,
+					"fontWeight": "normal",
+					"stroke": "#808080",
+					"textAlign": "right"
+				},
+				"entryField_documentPath": {
+					"type": "input",
+					"left": 108,
+					"top": 127,
+					"width": 300,
+					"height": 17,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.current_item.document.documentPath",
+					"dataSourceTypeHint": "text"
+				},
+				"bView": {
+					"type": "button",
+					"text": "",
+					"top": 123,
+					"left": 414,
+					"width": 30,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"icon": "/RESOURCES/sfw/image/skin/rainbow/btn4states/eye-24x24.png",
+					"iconFrames": 4,
+					"method": "ObjectMethods/bView.4dm"
+				},
+				"bUploadDocument": {
+					"type": "button",
+					"top": 178,
+					"left": 279,
+					"width": 133,
+					"height": 23,
+					"sizingY": "move",
+					"focusable": false,
+					"text": " Upload document",
+					"icon": "/RESOURCES/sfw/image/menu/upload.png",
+					"iconFrames": 1,
+					"textPlacement": "right",
+					"style": "roundedBevel",
+					"events": [
+						"onClick"
+					],
+					"action": "",
+					"shortcutAccel": false,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": false,
+					"shortcutKey": "",
+					"method": "ObjectMethods/bUploadDocument.4dm",
+					"fontWeight": "normal"
+				},
+				"fileName": {
+					"type": "text",
+					"text": "",
+					"top": 181,
+					"left": 12,
+					"width": 247,
+					"height": 17,
+					"textAlign": "left"
+				}
+			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 190,
+	"geometryStamp": 199,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

@@ -20,6 +20,7 @@ If (Form:C1466.subForm.currentStep#Null:C1517)
 	$form:=New object:C1471("details"; $details)
 	
 	$form.uploadDisplayOnly:=True:C214
+	$form.type:="Reject Form"
 	
 	$winRef:=Open form window:C675("_ga_uploadDocument"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 	
