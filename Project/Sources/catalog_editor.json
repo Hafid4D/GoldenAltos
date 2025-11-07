@@ -931,21 +931,6 @@
 				}
 			}
 		},
-		"JobType": {
-			"color": {
-				"red": 224,
-				"green": 234,
-				"blue": 104,
-				"alpha": 255
-			},
-			"coordinates": {
-				"left": 1965,
-				"top": 1727,
-				"width": 120,
-				"height": 167.33203125
-			},
-			"displayable_fields_count": 6
-		},
 		"BuyingOrderLine": {
 			"color": {
 				"red": 255,
@@ -2261,14 +2246,6 @@
 		}
 	},
 	"relations": {
-		"F31F501648C4FF49917D60308F39F6C6": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
 		"4D8D4A0F11111D4D907CE33428DB49AA": {
 			"color": {
 				"red": 240,

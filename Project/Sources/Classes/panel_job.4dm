@@ -325,7 +325,6 @@ Function drawPup_jobType()
 		Form:C1466.sfw.drawButtonPup("pup_jobType"; $typeName; $pathIcon; ($jobType=Null:C1517))
 	End if 
 	
-	
 Function pup_jobType()
 	//Create pop up menu
 	If (Form:C1466.sfw.checkIsInModification())
@@ -334,7 +333,7 @@ Function pup_jobType()
 		For each ($eType; $jobTypes)
 			APPEND MENU ITEM:C411($menu; $eType.name; *)
 			SET MENU ITEM PARAMETER:C1004($menu; -1; $eType.name)
-			If ($eType.name=Form:C1466.current_item.name)
+			If ($eType.name=Form:C1466.current_item.jobType)
 				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
 				If (Is Windows:C1573)
 					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
