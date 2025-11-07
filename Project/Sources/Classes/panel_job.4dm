@@ -45,6 +45,7 @@ Function pup_XXX()
 	
 Function redrawAndSetVisible()
 	This:C1470.hideDatePickers()
+	This:C1470.drawPup_jobType()
 	
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
@@ -52,6 +53,8 @@ Function redrawAndSetVisible()
 		Form:C1466.sfw.entry.panel.pages[1].label:="PO Lines ("+String:C10(Form:C1466.lb_lineItems.length)+")"
 		Form:C1466.sfw.entry.panel.pages[2].label:="Lots ("+String:C10(Form:C1466.lb_lots.length)+")"
 	End use 
+	
+	OBJECT SET ENABLED:C1123(*; "pup_jobType"; Form:C1466.situation.mode="add")
 	Form:C1466.sfw.drawHTab()
 	
 	
@@ -309,3 +312,43 @@ Function bActionCustProvMat()
 				End if 
 			End if 
 	End case 
+	
+Function drawPup_jobType()
+	If (Form:C1466.current_item#Null:C1517)
+		$jobType:=Form:C1466.current_item || New object:C1471()
+		$typeName:=$jobType.lineItem=False:C215 ? "Job Order" : "NR Job Order"
+		If ($typeName=Null:C1517)
+			$typeName:=""
+		End if 
+		$color:=""  //cs.sfw_htmlColor.me.getName($jobType.color)
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_jobType"; $typeName; $pathIcon; ($jobType=Null:C1517))
+	End if 
+	
+	
+Function pup_jobType()
+	//Create pop up menu
+	If (Form:C1466.sfw.checkIsInModification())
+		$menu:=Create menu:C408
+		$jobTypes:=New collection:C1472(New object:C1471("name"; "Job Order"; "lineItem"; False:C215); New object:C1471("name"; "NR Job Order"; "lineItem"; True:C214))
+		For each ($eType; $jobTypes)
+			APPEND MENU ITEM:C411($menu; $eType.name; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $eType.name)
+			If ($eType.name=Form:C1466.current_item.name)
+				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+				If (Is Windows:C1573)
+					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+				End if 
+			End if 
+		End for each 
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		Case of 
+			: ($choose#"")
+				Form:C1466.current_item.lineItem:=$choose="Job Order" ? False:C215 : True:C214
+		End case 
+		
+	End if 
+	This:C1470.drawPup_jobType()
+	

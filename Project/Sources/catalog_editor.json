@@ -709,9 +709,9 @@
 				"left": 2144.3334960938,
 				"top": 1145,
 				"width": 171.73828125,
-				"height": 717.33203125
+				"height": 812.33203125
 			},
-			"displayable_fields_count": 32
+			"displayable_fields_count": 36
 		},
 		"PurchaseOrderLine": {
 			"color": {
@@ -930,6 +930,21 @@
 					}
 				}
 			}
+		},
+		"JobType": {
+			"color": {
+				"red": 224,
+				"green": 234,
+				"blue": 104,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 1965,
+				"top": 1727,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6
 		},
 		"BuyingOrderLine": {
 			"color": {
@@ -1535,8 +1550,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1611.9033813477,
-				"top": 1212.9949188232,
+				"left": 1626.9034423828,
+				"top": 1167.9948730469,
 				"width": 176.93957519531,
 				"height": 190.07992553711
 			},
@@ -2246,6 +2261,14 @@
 		}
 	},
 	"relations": {
+		"F31F501648C4FF49917D60308F39F6C6": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"4D8D4A0F11111D4D907CE33428DB49AA": {
 			"color": {
 				"red": 240,

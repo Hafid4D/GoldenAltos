@@ -3,6 +3,18 @@
 
 var $colors : Collection:=New collection:C1472("#3CB371"; "#FFFF00"; "#FF7F50"; "#1E90FF"; "#FF0000")
 
+var $jobTypes : Collection:=New collection:C1472("Job Order"; "NR Job Order")
+//----> [JobType]
+TRUNCATE TABLE:C1051([JobType:65])
+For ($i; 0; $jobTypes.length-1)
+	
+	$eJobType:=ds:C1482.JobType.new()
+	$eJobType.levelID:=$i+1
+	$eJobType.name:=$jobTypes[$i]
+	$eJobType.color:=$colors[$i]
+	$eJobType.save()
+	
+End for 
 
 var $carriers; $status; $customerStatuscolors : Collection
 $carriers:=New collection:C1472("GAC Driver"; "Fed-Ex Priority"; "fedex Std Overnight"; "fedex"; "fedex Ground"; "Customer Pickup"; "UPS 2nd Day"; "UPS Ground"; "UPS Next Day"; "DHL")
