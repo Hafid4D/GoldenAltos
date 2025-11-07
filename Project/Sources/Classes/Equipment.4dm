@@ -63,219 +63,129 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	// MARK: - Views Definition
 	
 	// MARK: Equipment out of calibration List
-	$view:=cs:C1710.sfw_definitionView.new("equipmentsOutOfCalibration"; "Equipments out of calibration")  //Calibration Overdue
-	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
-	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
-	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
-	$view.setLBItemsOrderBy("assignedID")
-	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
+	$view:=cs:C1710.sfw_definitionView.new("equipmentsOutOfCalibration"; "Equipments out of calibration"; "derivedFrom:main"; $entry)  //Calibration Overdue
 	$view.setSubset("equipmentsOutOfCalibration")
 	$entry.setView($view)
 	
 	// MARK: List of Equipments to be calibrated in X days
-	$view:=cs:C1710.sfw_definitionView.new("dueCalibrationEquipments"; "Equipments to be calibrated in X days")
-	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
-	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
-	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
-	$view.setLBItemsOrderBy("assignedID")
-	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
+	$view:=cs:C1710.sfw_definitionView.new("dueCalibrationEquipments"; "Equipments to be calibrated in X days"; "derivedFrom:main"; $entry)
 	$view.setSubset("dueCalibrationEquipments")
 	$entry.setView($view)
 	
 	// MARK: List of Equipments to be calibrated in X days Exclude NPU
-	$view:=cs:C1710.sfw_definitionView.new("dueCalibrationEquipmentsExculeNPU"; "Equipments to be calibrated in X days exclude NPU")
-	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
-	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
-	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
-	$view.setLBItemsOrderBy("assignedID")
-	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
+	$view:=cs:C1710.sfw_definitionView.new("dueCalibrationEquipmentsExculeNPU"; "Equipments to be calibrated in X days exclude NPU"; "derivedFrom:main"; $entry)
 	$view.setSubset("dueCalibrationEquipmentsExculeNPU")
 	$entry.setView($view)
 	
 	// MARK:  List of equipment not requiring calibration
-	$view:=cs:C1710.sfw_definitionView.new("calibrationNotRequired"; "Equipments not requiring calibration")
-	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
-	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
-	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
-	$view.setLBItemsOrderBy("assignedID")
-	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
+	$view:=cs:C1710.sfw_definitionView.new("calibrationNotRequired"; "Equipments not requiring calibration"; "derivedFrom:main"; $entry)
 	$view.setSubset("calibrationNotRequired")
 	$entry.setView($view)
 	
-	
-	
 	// MARK: Prevent Maintenance equipments within X days
-	$view:=cs:C1710.sfw_definitionView.new("pmEquipments"; "Prevent Maintenance within X days")
-	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
-	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
-	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
-	$view.setLBItemsOrderBy("assignedID")
-	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
+	$view:=cs:C1710.sfw_definitionView.new("pmEquipments"; "Prevent Maintenance within X days"; "derivedFrom:main"; $entry)
 	$view.setSubset("pmEquipments")
 	$entry.setView($view)
 	
-	
 	// MARK: Prevent Maintenance equipments within X days Exlude NPU
-	$view:=cs:C1710.sfw_definitionView.new("duePMEquipmentsExcludeNPU"; "Prevent Maintenance within X days exclude NPU")
-	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
-	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
-	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
-	$view.setLBItemsOrderBy("assignedID")
-	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
+	$view:=cs:C1710.sfw_definitionView.new("duePMEquipmentsExcludeNPU"; "Prevent Maintenance within X days exclude NPU"; "derivedFrom:main"; $entry)
 	$view.setSubset("duePMEquipmentsExcludeNPU")
 	$entry.setView($view)
 	
-	
 	// MARK: NPU Equipments list
-	$view:=cs:C1710.sfw_definitionView.new("NPUEquipments"; "NPU Equipments")
-	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
-	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
-	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
-	$view.setLBItemsOrderBy("assignedID")
-	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
+	$view:=cs:C1710.sfw_definitionView.new("NPUEquipments"; "NPU Equipments"; "derivedFrom:main"; $entry)
 	$view.setSubset("NPUEquipments")
 	$entry.setView($view)
 	
 	// MARK:  List of equipment down
-	$view:=cs:C1710.sfw_definitionView.new("equipmentsDownOrOnHold"; "Equipments down")
-	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
-	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
-	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
-	$view.setLBItemsOrderBy("assignedID")
-	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
+	$view:=cs:C1710.sfw_definitionView.new("equipmentsDownOrOnHold"; "Equipments down"; "derivedFrom:main"; $entry)
 	$view.setSubset("equipmentsDownOrOnHold")
 	$entry.setView($view)
 	
 	
 	// MARK:  List of equipment Decommissioned
-	$view:=cs:C1710.sfw_definitionView.new("decommissionedEquipment"; "Decommissioned Equipments")
-	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
-	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
-	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
-	$view.setLBItemsOrderBy("assignedID")
-	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
+	$view:=cs:C1710.sfw_definitionView.new("decommissionedEquipment"; "Decommissioned Equipments"; "derivedFrom:main"; $entry)
 	$view.setSubset("decommissionedEquipment")
 	$entry.setView($view)
 	
 	// MARK:  PM Required Equipements
-	$view:=cs:C1710.sfw_definitionView.new("PMRequiredEquipments"; "PM Required")
-	$view.setLBItemsColumn("assignedID"; "Equipment ID"; "width:125")
-	$view.setLBItemsColumn("serialNumber"; "Serial number"; "width:125")
-	$view.setLBItemsColumn("type.name"; "Equipment Type"; "width:200")
-	$view.setLBItemsOrderBy("assignedID")
-	$view.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:equipment"; "unitN:equipments")
+	$view:=cs:C1710.sfw_definitionView.new("PMRequiredEquipments"; "PM Required"; "derivedFrom:main"; $entry)
 	$view.setSubset("PMRequiredEquipments")
 	$entry.setView($view)
 	
-	
+/*
 local Function cacheLoad()
 	
-	If (Storage:C1525.cache=Null:C1517)
-		Use (Storage:C1525)
-			Storage:C1525.cache:=New shared object:C1526
-		End use 
-	End if 
-	If (Storage:C1525.cache.startDate=Null:C1517)
-		Use (Storage:C1525.cache)
-			Storage:C1525.cache.startDate:=Current date:C33()
-		End use 
-	End if 
-	If (Storage:C1525.cache.endDate=Null:C1517)
-		Use (Storage:C1525.cache)
-			Storage:C1525.cache.endDate:=Current date:C33()
-		End use 
-	End if 
-	If (Undefined:C82(Storage:C1525.cache.interval))
-		Use (Storage:C1525.cache)
-			Storage:C1525.cache.interval:="0"
-		End use 
-	End if 
+If (Storage.cache=Null)
+Use (Storage)
+Storage.cache:=New shared object
+End use 
+End if 
+If (Storage.cache.startDate=Null)
+Use (Storage.cache)
+Storage.cache.startDate:=Current date()
+End use 
+End if 
+If (Storage.cache.endDate=Null)
+Use (Storage.cache)
+Storage.cache.endDate:=Current date()
+End use 
+End if 
+If (Undefined(Storage.cache.interval))
+Use (Storage.cache)
+Storage.cache.interval:="0"
+End use 
+End if 
 	
 	
 local Function setDateInterval($pushUp; $title)
-	This:C1470.cacheLoad()
+This.cacheLoad()
 	
-	$form:=New object:C1471
-	$form.startDate:=Storage:C1525.cache.startDate
-	$form.endDate:=Storage:C1525.cache.endDate
-	$form.interval:=Storage:C1525.cache.interval
-	MOUSE POSITION:C468($mouseX; $mouseY; $mouseButtons)
-	CONVERT COORDINATES:C1365($mouseX; $mouseY; XY Current form:K27:5; XY Main window:K27:8)
-	If ($pushUp)
-		$mouseY:=$mouseY-190
-		$mouseX:=$mouseX-100
-	End if 
-	$form.pushUp:=$pushUp
-	$windRef:=Open window:C153($mouseX; $mouseY; $mouseX+270; $mouseY+165; Movable dialog box:K34:7; "Set date interval")
-	DIALOG:C40("_ga_setDateInterval"; $form)
-	CLOSE WINDOW:C154($windRef)
-	Use (Storage:C1525.cache)
-		Storage:C1525.cache.startDate:=$form.startDate
-		Storage:C1525.cache.endDate:=$form.endDate
-		Storage:C1525.cache.interval:=$form.interval
-	End use 
-	
+$form:=New object
+$form.startDate:=Storage.cache.startDate
+$form.endDate:=Storage.cache.endDate
+$form.interval:=Storage.cache.interval
+MOUSE POSITION($mouseX; $mouseY; $mouseButtons)
+CONVERT COORDINATES($mouseX; $mouseY; XY Current form; XY Main window)
+If ($pushUp)
+$mouseY:=$mouseY-190
+$mouseX:=$mouseX-100
+End if 
+$form.pushUp:=$pushUp
+$windRef:=Open window($mouseX; $mouseY; $mouseX+270; $mouseY+165; Movable dialog box; "Set date interval")
+DIALOG("_ga_setDateInterval"; $form)
+CLOSE WINDOW($windRef)
+Use (Storage.cache)
+Storage.cache.startDate:=$form.startDate
+Storage.cache.endDate:=$form.endDate
+Storage.cache.interval:=$form.interval
+End use 
+*/
 	
 local Function equipmentsOutOfCalibration()->$equipments : cs:C1710.EquipmentSelection  //Calibration Overdue
 	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & calibrationNotRequired=:2 & notAtSite=:3"; Current date:C33(*); False:C215; False:C215)  // Storage.cache.endDate
 	
 local Function dueCalibrationEquipments()->$equipments : cs:C1710.EquipmentSelection  //List of equip to be calibrated within X days
-	If (Storage:C1525.cache=Null:C1517)
-		Use (Storage:C1525)
-			Storage:C1525.cache:=New shared object:C1526
-		End use 
-	End if 
-	Use (Storage:C1525.cache)
-		Storage:C1525.cache.startDate:=Current date:C33(*)
-	End use 
-	This:C1470.setDateInterval(False:C215)
+	cs:C1710.Util.me.setDateInterval(False:C215)
 	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & notAtSite=:2"; Storage:C1525.cache.endDate; False:C215)
 	
 local Function dueCalibrationEquipmentsExculeNPU()->$equipments : cs:C1710.EquipmentSelection  //List of equip to be calibrated within X days exclude NPU 
-	If (Storage:C1525.cache=Null:C1517)
-		Use (Storage:C1525)
-			Storage:C1525.cache:=New shared object:C1526
-		End use 
-	End if 
-	Use (Storage:C1525.cache)
-		Storage:C1525.cache.startDate:=Current date:C33(*)
-	End use 
-	This:C1470.setDateInterval(False:C215)
+	cs:C1710.Util.me.setDateInterval(False:C215)
 	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & notAtSite=:2 & engg=:3"; Storage:C1525.cache.endDate; False:C215; False:C215)
 	
 local Function calibrationNotRequired()->$equipments : cs:C1710.EquipmentSelection
 	$equipments:=ds:C1482.Equipment.query("calibrationNotRequired=:1"; True:C214)
 	
-	
-	
 local Function PMRequiredEquipments()->$equipments : cs:C1710.EquipmentSelection  //PM Required Equipments
 	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3"; Current date:C33(*); !00-00-00!; False:C215)  // Storage.cache.endDate
 	
 local Function pmEquipments()->$equipments : cs:C1710.EquipmentSelection  //Prevent Maintenance equipments within X days
-	If (Storage:C1525.cache=Null:C1517)
-		Use (Storage:C1525)
-			Storage:C1525.cache:=New shared object:C1526
-		End use 
-	End if 
-	Use (Storage:C1525.cache)
-		Storage:C1525.cache.startDate:=Current date:C33(*)
-	End use 
-	This:C1470.setDateInterval(False:C215)
+	cs:C1710.Util.me.setDateInterval(False:C215)
 	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3"; Storage:C1525.cache.endDate; !00-00-00!; False:C215)
 	
 local Function duePMEquipmentsExcludeNPU()->$equipments : cs:C1710.EquipmentSelection  //Prevent Maintenance equipments within X days exclude NPU
-	If (Storage:C1525.cache=Null:C1517)
-		Use (Storage:C1525)
-			Storage:C1525.cache:=New shared object:C1526
-		End use 
-	End if 
-	Use (Storage:C1525.cache)
-		Storage:C1525.cache.startDate:=Current date:C33(*)
-	End use 
-	This:C1470.setDateInterval(False:C215)
+	cs:C1710.Util.me.setDateInterval(False:C215)
 	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3 & engg=:4"; Storage:C1525.cache.endDate; !00-00-00!; False:C215; False:C215)
-	
-	
 	
 local Function NPUEquipments()->$equipments : cs:C1710.EquipmentSelection  //NPU List
 	$equipments:=ds:C1482.Equipment.query("notAtSite=:1 & engg=:2"; False:C215; True:C214)

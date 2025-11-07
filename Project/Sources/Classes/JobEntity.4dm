@@ -11,6 +11,9 @@ Function get quoteCode()->$code : Text
 		$po:=This:C1470.purchaseOrderLines.first().purchaseOrder
 	End if 
 	
+Function get jobType()->$jobType : Text
+	$jobType:=Form:C1466.current_item.lineItem=False:C215 ? "Job Order" : "NR Job Order"
+	
 	
 local Function drowPup($dataClass; $queryField; $queryValue; $pupName)
 	

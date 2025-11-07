@@ -751,7 +751,7 @@ If (True:C214)  // export archived jobs & lot (job <-- lots)
 			"expectedDate"; Null:C1517; \
 			"invoiceDate"; [ARCHIVES]Invoice_Date; \
 			"lastShipDate"; [ARCHIVES]Last_lot_ship_date; \
-			"archivedDate"; !00-00-00!; \
+			"archivedDate"; [ARCHIVES]Archive_Date; \
 			"deviceNumber"; [ARCHIVES]Device_Number; \
 			"process"; [ARCHIVES]Process; \
 			"salesTax"; [ARCHIVES]Sales_Tax; \
