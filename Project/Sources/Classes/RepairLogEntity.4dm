@@ -36,3 +36,21 @@ local Function get approvalDate()->$approvalDate : Date
 	
 local Function set approvalDate($approvalDate : Date)
 	This:C1470.stmpApproval:=cs:C1710.sfw_stmp.me.build($approvalDate)
+	
+	
+	
+local Function loadAfterCreation()
+	
+	// This callback is called after creating the new item but before displaying the panel.
+	This:C1470._initOperators()
+	
+local Function _initOperators()
+	
+	If (This:C1470.operators.reportedBy=Null:C1517)
+		This:C1470.operators.reportedBy:=""
+	End if 
+	If (This:C1470.operators.fixedBy=Null:C1517)
+		This:C1470.operators.fixedBy:=""
+	End if 
+	
+	

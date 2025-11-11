@@ -14,6 +14,7 @@ Function formMethod()
 		Else 
 			OBJECT SET ENTERABLE:C238(*; "pup_equipmentId"; False:C215)
 		End if 
+		This:C1470.drawPup_equipment()
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
@@ -34,8 +35,9 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_reportOperator()
 	This:C1470.drawPup_downTimePicker()
 	This:C1470.drawPup_upTimePicker()
+	This:C1470.drawPup_equipment()
 	
-	OBJECT SET ENTERABLE:C238(*; "entryField_systemID"; False:C215)
+	OBJECT SET ENABLED:C1123(*; "pup_equipment"; String:C10(Form:C1466.situation.mode)="add")
 	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET VISIBLE:C603(*; "TimePicker@"; Form:C1466.sfw.checkIsInModification())
 	
@@ -184,10 +186,8 @@ Function btnOpenOperator($operatorType)
 	
 Function btnOpenEquipment()
 	
-	$es:=ds:C1482.Equipment.query("UUID = :1"; Form:C1466.current_item.UUID_Equipment)
-	
-	If ($es.length>0)
-		Form:C1466.sfw.openInANewWindow($es[0]; "qualityAssurance"; "equipment")
+	If (Form:C1466.current_item.equipment#Null:C1517)
+		Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.equipment; "qualityAssurance"; "equipment")
 	End if 
 	
 	
@@ -268,6 +268,49 @@ Function drawPup_upTimePicker()
 		
 		Form:C1466.upAt:=Form:C1466.current_item.upAt=0 ? $time : $time+" "+$when
 		
+	End if 
+	
+	
+	
+Function drawPup_equipment()
+	If (Form:C1466.current_item#Null:C1517)
+		$equipmentID:=Form:C1466.current_item.equipment.assignedID || " "
+		Form:C1466.sfw.drawButtonPup("pup_equipment"; $equipmentID; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.equipment=Null:C1517))
+	End if 
+	
+	
+	
+Function selectEquipment()
+	
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		$selector:=cs:C1710.sfw_definitionSelector.new("selectorEquipment"; "equipment")
+		$selector.setTitle("Choose an Equipment")
+		$selector.setCurrentItem(Form:C1466.current_item.equipment)
+		$selector.setOptions("noCutLink")
+		$selector.openSelector()
+		
+		Case of 
+			: ($selector.isSelected())
+				$itemSeleted:=$selector.getCurrentItem()
+				
+				Case of 
+					: ($itemSeleted=Null:C1517)
+					: (cs:C1710.sfw_string.me.isAnEmptyUUID($itemSeleted.UUID)=False:C215)
+						Form:C1466.current_item.UUID_Equipment:=$itemSeleted.UUID
+						If (cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_Equipment)=True:C214)
+							Form:C1466.current_item.UUID_Equipment:=16*"00"
+						End if 
+				End case 
+				This:C1470.drawPup_equipment()
+				
+			: ($selector.asCutTheLink())
+				Form:C1466.current_item.UUID_Equipment:=16*"00"
+				
+				//: ($selector.needCreation())
+				//$selector.createANewEntity("cs.panel_lead.me.callbackAfterCreationOwner($1)")
+				
+		End case 
 	End if 
 	
 	
