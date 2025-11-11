@@ -88,6 +88,16 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "bActionLots"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
 	End case 
 	
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		$authorizedProfile:=New collection:C1472("qs"; "qm")
+		
+		$hasAuthorizedProfile:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($authorizedProfile.indexOf($1.value)#-1)))#Null:C1517
+		
+		OBJECT SET ENABLED:C1123(*; "entryField_shipMemo"; $hasAuthorizedProfile)
+		
+	End if 
+	
 	
 Function loadAllTabs()
 	This:C1470.loadPoLineItems()
