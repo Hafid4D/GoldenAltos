@@ -1,6 +1,19 @@
 //%attributes = {}
 
 
+$file:=Folder:C1567(fk resources folder:K87:11).file("excelTemplates/jobsTemplate.xlsx")
+
+var $fields : Collection:=New collection:C1472("jobNumber"; "expectedDate"; "recommitDate"; \
+"lastShipDate"; "invoiceDate"; "customer"; "poNumber"; "process"; "currency"; "totalCharge"; \
+"shipped"; "postToPO")
+$jobs:=ds:C1482.Job.query("lineItem =:1"; True:C214)
+$offscreen:=cs:C1710.jobDataExporter.new($file.platformPath; $fields; $jobs; "TestJobExport")
+$excelSheet:=VP Run offscreen area($offscreen)
+
+
+
+
+
 //$hashOptions:=New shared object("algorithm"; "bcrypt"; "cost"; 10)
 //$newPassword:="pSzjGX!Ey9P1c~p"
 //$hash:=Generate password hash($newPassword; $hashOptions)

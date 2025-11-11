@@ -46,7 +46,8 @@ If (True:C214)
 		$job.archived:=True:C214
 		$job.pr_qualifier:=$record.pr_qualifier
 		$job.dropShipCustomer:=$record.dropShipCustomer
-		
+		$Job.recommitDate:=$record.recommitDate
+		$job.currency:=$record.currency
 		
 		$res:=$job.save()
 		If (Not:C34($res.success))
