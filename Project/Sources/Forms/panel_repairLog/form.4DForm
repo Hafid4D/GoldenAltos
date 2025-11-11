@@ -420,8 +420,8 @@
 				},
 				"Rectangle": {
 					"type": "rectangle",
-					"top": 113,
-					"left": 0,
+					"top": 109,
+					"left": 1,
 					"width": 5000,
 					"height": 704,
 					"fill": "#B1CFDE",
@@ -511,8 +511,8 @@
 				},
 				"entryField_systemID": {
 					"type": "input",
-					"top": 10,
-					"left": 108,
+					"top": 236,
+					"left": 124,
 					"width": 190,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.equipment.assignedID",
@@ -527,7 +527,26 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"textAlign": "left",
-					"bottom": 27
+					"bottom": 253
+				},
+				"pup_equipment": {
+					"type": "button",
+					"top": 7,
+					"left": 108,
+					"width": 196,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_equipment.4dm",
+					"events": [
+						"onClick"
+					]
 				}
 			}
 		},
@@ -781,7 +800,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 384,
+	"geometryStamp": 395,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
