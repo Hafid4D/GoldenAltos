@@ -1,7 +1,7 @@
 //%attributes = {}
 /*
 _ga_testUserCreation()
-
+--> Test user creation automatically
 */
 
 
