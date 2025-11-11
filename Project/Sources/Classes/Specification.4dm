@@ -153,7 +153,7 @@ local Function docsRequiringReviewSoon()->$specifications : cs:C1710.Specificati
 	Use (Storage:C1525.cache)
 		Storage:C1525.cache.startDate:=Current date:C33()
 	End use 
-	This:C1470.setDateInterval(False:C215; $title)
+	cs:C1710.Util.me.setDateInterval(False:C215; $title)
 	$startDate:=Storage:C1525.cache.startDate
 	$endDate:=Storage:C1525.cache.endDate
 	$formula_1:=Formula:C1597((This:C1470.reviewDate+This:C1470.reviewIntervalInDays)>=$startDate)

@@ -18,7 +18,7 @@ $entityCollection:=New collection:C1472()
 $wp:=WP New:C1317()
 $OK:=False:C215
 
-ds:C1482.Equipment.setDateInterval(True:C214; "set date interval")
+cs:C1710.Util.me.setDateInterval(True:C214; "set date interval")
 
 $OK:=cs:C1710.sfw_dialog.me.confirm("Print Usage Log for "+Form:C1466.current_item.assignedID+"  Period "+String:C10(Storage:C1525.cache.startDate)+" to "+String:C10(Storage:C1525.cache.endDate)+"? "; "yes"; "no")
 

@@ -20,6 +20,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setLBItemsOrderBy("jobNumber")
 	
+	$entry.setItemListAction("Export th selection to Excel"; "_ga_exportJobSelection")
+	
 	// MARK: -Views
 	$view:=cs:C1710.sfw_definitionView.new("archivedJobs"; "Archived Jobs"; "derivedFrom:main"; $entry)
 	$view.setSubset("archivedJobs")
@@ -58,15 +60,15 @@ Function archivedJobs()->$jobs : cs:C1710.JobSelection
 	
 Function shippedJobs()->$jobs : cs:C1710.JobSelection
 	cs:C1710.Util.me.setDateInterval(False:C215)
-	$jobs:=ds:C1482.Job.query("shipped =:1 & lastShipDate >=:2 & lastShipDate <=:3"; True:C214; Storage:C1525.cache.startDate; Storage:C1525.cache.endDate)
+	$jobs:=ds:C1482.Job.query("shipped =:1 & lastShipDate >=:2 & lastShipDate <=:3 & archived =:4"; True:C214; Storage:C1525.cache.startDate; Storage:C1525.cache.endDate; False:C215)
 	
 Function invoicedJobs()->$jobs : cs:C1710.JobSelection
 	cs:C1710.Util.me.setDateInterval(False:C215)
-	$jobs:=ds:C1482.Job.query("invoiceDate #:1 & invoiceDate >=:2 & invoiceDate <=:3"; !00-00-00!; Storage:C1525.cache.startDate; Storage:C1525.cache.endDate)
+	$jobs:=ds:C1482.Job.query("postToPO =:1 & invoiceDate >=:2 & invoiceDate <=:3 & archived =:4"; True:C214; Storage:C1525.cache.startDate; Storage:C1525.cache.endDate; False:C215)
 	
 Function lotRelatedJobs()->$jobs : cs:C1710.JobSelection
-	$jobs:=ds:C1482.Job.query("lineItem =:1"; False:C215)
+	$jobs:=ds:C1482.Job.query("lineItem =:1 & archived =:2"; False:C215; False:C215)
 	
 Function notRelatedJobs()->$jobs : cs:C1710.JobSelection
-	$jobs:=ds:C1482.Job.query("lineItem =:1"; True:C214)
+	$jobs:=ds:C1482.Job.query("lineItem =:1 & archived =:2"; True:C214; False:C215)
 	

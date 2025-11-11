@@ -148,13 +148,13 @@ local Function currentProblems()->$selection : cs:C1710.RepairLogSelection
 	
 local Function problemsByInterval()->$selection : cs:C1710.RepairLogSelection
 	$title:="Set date interval"
-	This:C1470.setDateInterval(False:C215; $title)
+	cs:C1710.Util.me.setDateInterval(False:C215; $title)
 	$selection:=ds:C1482.RepairLog.query("reportDate>=:1 & reportDate<=:2"; Storage:C1525.cache.startDate; Storage:C1525.cache.endDate)
 	
 	
 local Function repairsByInterval()->$selection : cs:C1710.RepairLogSelection
 	$title:="Set date interval"
-	This:C1470.setDateInterval(False:C215; $title)
+	cs:C1710.Util.me.setDateInterval(False:C215; $title)
 	$selection:=ds:C1482.RepairLog.query("fixedDate>=:1 & fixedDate<=:2"; Storage:C1525.cache.startDate; Storage:C1525.cache.endDate)
 	
 	
