@@ -26,7 +26,7 @@ Function redrawAndSetVisible()
 	
 	If (Form:C1466.sfw.checkIsInModification())
 		
-		$approverProfile:=New collection:C1472("qs"; "qm")
+		$approverProfile:=New collection:C1472("qs"; "qm")  // only QC Team allowed to modify
 		
 		$hasAuthorizedProfile:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($approverProfile.indexOf($1.value)#-1)))#Null:C1517
 		

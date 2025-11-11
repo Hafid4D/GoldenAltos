@@ -301,6 +301,7 @@ Function _profiles_definition()
 	$ePS:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("ps"; "Production Supervisor"; "autoCreation")
 	$eVP:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("vp"; "VP"; "autoCreation")
 	$eGM:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("gm"; "General Manager"; "autoCreation")
+	$eSR:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("sr"; "Shipper & receiver"; "autoCreation")
 	
 Function _documentFolders_definition()
 	

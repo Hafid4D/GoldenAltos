@@ -636,14 +636,14 @@
 					"fill": "#A2C6D8",
 					"stroke": "transparent"
 				},
-				"lbl_address4": {
+				"lbl_jobComment": {
 					"type": "text",
 					"top": 345,
 					"left": 7,
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
-					"text": "Job Comments",
+					"text": "Receiving & Processing comments",
 					"fontSize": 12,
 					"fontWeight": "bold"
 				},
@@ -1535,7 +1535,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1432,
+	"geometryStamp": 1433,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
