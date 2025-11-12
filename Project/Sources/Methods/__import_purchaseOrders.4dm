@@ -212,10 +212,11 @@ If (True:C214)
 		$job.qtyOnHand:=$record.qtyOnHand
 		$job.shipMemo:=$record.shipMemo
 		$job.jobComment:=$record.jobComment
-		$job.archived:=$record.archived
+		$job.archived:=False:C215
 		$job.pr_qualifier:=$record.pr_qualifier
 		$job.dropShipCustomer:=$record.dropShipCustomer
-		
+		$Job.recommitDate:=$record.recommitDate
+		$job.currency:=$record.currency
 		
 		$res:=$job.save()
 		

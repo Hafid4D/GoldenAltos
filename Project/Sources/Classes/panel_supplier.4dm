@@ -76,7 +76,7 @@ Function redrawAndSetVisible()
 	
 	If (Form:C1466.sfw.checkIsInModification())
 		
-		$approverProfile:=New collection:C1472("qs"; "qm")
+		$approverProfile:=New collection:C1472("qs"; "qm")  // only QC Team allowed to modify
 		
 		$hasAuthorizedProfile:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($approverProfile.indexOf($1.value)#-1)))#Null:C1517
 		
@@ -243,7 +243,7 @@ Function bActionDocument()
 			
 			
 			$form:=New object:C1471("details"; $details)  // Form.selectedDocument)
-			$form.approverProfile:=New collection:C1472("qs"; "qm")
+			$form.approverProfile:=New collection:C1472("qs"; "qm")  // only QC Team allowed to modify
 			$form.displayApprovalFields:=False:C215
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
@@ -258,7 +258,7 @@ Function bActionDocument()
 		: ($choice="--modify")
 			
 			$form:=New object:C1471("details"; Form:C1466.current_item.attachedDocuments.documents[Form:C1466.selectedDocumentPos-1])
-			$form.approverProfile:=New collection:C1472("qs"; "qm")
+			$form.approverProfile:=New collection:C1472("qs"; "qm")  // only QC Team allowed to modify 
 			$form.displayApprovalFields:=False:C215
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)

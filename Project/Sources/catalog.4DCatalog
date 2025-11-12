@@ -1165,6 +1165,8 @@
 		<field name="archivedDate" uuid="A310D42571F1E9449B87A88E35E1734E" type="8" never_null="true" id="29"/>
 		<field name="pr_qualifier" uuid="C05E81445733BF4399D0F30ABA121A1D" type="10" limiting_length="255" never_null="true" id="30"/>
 		<field name="dropShipCustomer" uuid="21DEEF44B59645428651C744EBD1C277" type="10" limiting_length="255" never_null="true" id="31"/>
+		<field name="currency" uuid="84B0C0958BBDC9489392DFE303C06DB6" type="10" limiting_length="255" never_null="true" id="32"/>
+		<field name="recommitDate" uuid="1C26D9922290404BB40BE484CE2603A3" type="8" never_null="true" id="33"/>
 		<primary_key field_name="UUID" field_uuid="D70DED62813D485DA8CFB0CFD1FF994C"/>
 	</table>
 	<table name="Lot" uuid="67220A81398C4000A84C1F180E368020" id="118">
