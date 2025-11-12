@@ -1138,7 +1138,7 @@
 		<field name="jobNumber" uuid="0FA357DE65EF304D84620E34A9B9F37C" type="4" unique="true" never_null="true" id="4"/>
 		<field name="poNumber" uuid="049CCB3BE3EFB34D8C79A28B2E49EA72" type="4" never_null="true" id="5"/>
 		<field name="division" uuid="3F0901B7A9581B4F9D9BC0B2A02F764B" type="10" limiting_length="255" never_null="true" id="6"/>
-		<field name="dateCreated" uuid="7B92BACD0DE09D44B8682380511563AC" type="8" never_null="true" id="7"/>
+		<field name="dateCreated" uuid="7B92BACD0DE09D44B8682380511563AC" type="4" never_null="true" id="7"/>
 		<field name="deviceNumber" uuid="EA8629F484A5E54DB5D5380CA9DEE7AC" type="10" limiting_length="255" never_null="true" id="8"/>
 		<field name="process" uuid="B99706F5D99D38409877AFE421C77B0D" type="10" limiting_length="255" never_null="true" id="9"/>
 		<field name="salesTax" uuid="C38CF266A5AAE74C8B1918CEB92C3EBA" type="6" never_null="true" id="10"/>

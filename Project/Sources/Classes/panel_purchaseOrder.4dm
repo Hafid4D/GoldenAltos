@@ -8,10 +8,15 @@ Function formMethod()
 	//This function manages the main logic for updating and refreshing the form
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
+		Form:C1466.addressBilling:=1
+		Form:C1466.addressShipping:=0
+		
 		This:C1470.loadAllTabs()
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
+			: (FORM Get current page:C276(*)=1)
+				This:C1470.initAddresses()
 			: (FORM Get current page:C276(*)=2)  //PO -> line items
 				OBJECT SET TITLE:C194(*; "pupFilter_status"; "All Status")
 				This:C1470.loadPoLineItems()
@@ -35,6 +40,14 @@ Function formMethod()
 Function drawPup_XXX()
 	//This function updates the dropdown by displaying the name
 	//Form.sfw.drawButtonPup("pup_xxx"; $xxxName; "xxxx.png"; (Form.current_item.xxxx=Null))
+	
+	
+Function initAddresses()
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.subFormAddress:=New object:C1471()
+		Form:C1466.subFormAddress.address:=Form:C1466.current_item.rebuildAddress()
+		Form:C1466.subFormAddress.situation:=Form:C1466.situation
+	End if 
 	
 	
 Function pup_lineItemsStatus()

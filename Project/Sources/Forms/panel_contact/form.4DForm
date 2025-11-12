@@ -231,16 +231,6 @@
 					"fill": "#E4E4E4",
 					"stroke": "transparent"
 				},
-				"subFormAddress": {
-					"type": "subform",
-					"left": 455,
-					"top": 141,
-					"width": 805,
-					"height": 305,
-					"detailForm": "sfw_subpanel_addressSingle",
-					"borderStyle": "none",
-					"dataSource": "Form:C1466.subFormAddress"
-				},
 				"header_bkgd2": {
 					"type": "rectangle",
 					"top": 114,
@@ -272,6 +262,16 @@
 					"dataSource": "Form:C1466.subFormCommunication",
 					"method": "",
 					"visibility": "visible"
+				},
+				"subFormAddress1": {
+					"type": "subform",
+					"left": 455,
+					"top": 141,
+					"width": 779,
+					"height": 261,
+					"detailForm": "sfw_subpanel_addressSingle",
+					"borderStyle": "none",
+					"dataSource": "Form:C1466.subFormAddress"
 				}
 			}
 		},
@@ -279,7 +279,7 @@
 			"objects": {}
 		}
 	],
-	"geometryStamp": 431,
+	"geometryStamp": 463,
 	"method": "method.4dm",
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"editor": {

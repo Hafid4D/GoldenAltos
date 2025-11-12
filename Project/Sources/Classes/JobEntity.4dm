@@ -73,3 +73,21 @@ local Function pup($cacheCollection; $dataClass; $queryField; $queryValue)
 		
 	End if 
 	
+local Function loadAfterCreation()
+	// This callback is called after creating the new item but before displaying the panel.
+	This:C1470.dateCreated:=cs:C1710.sfw_stmp.me.now()
+	
+	
+local Function rebuildAddress()->$address : Object
+	Case of 
+		: (Form:C1466.addressBilling=1)
+			$type:="billing"
+		: (Form:C1466.addressShipping=1)
+			$type:="shipping"
+	End case 
+	
+	If (This:C1470.address.addresses#Null:C1517)
+		$address:=This:C1470.address.addresses.query("type = :1"; $type).first()
+		Form:C1466.subFormAddress.address:=$address
+	End if 
+	Form:C1466.subFormAddress:=Form:C1466.subFormAddress
