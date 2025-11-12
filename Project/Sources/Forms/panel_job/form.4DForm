@@ -70,7 +70,7 @@
 					"stroke": "#808080",
 					"text": "PO #"
 				},
-				"entryField_shippers": {
+				"Field_shippers": {
 					"type": "input",
 					"top": 37,
 					"left": 78,
@@ -365,7 +365,8 @@
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
-					"stroke": "transparent"
+					"stroke": "transparent",
+					"right": 785
 				},
 				"lbl_address": {
 					"type": "text",
@@ -520,8 +521,8 @@
 				},
 				"lbl_address1": {
 					"type": "text",
-					"top": 295,
-					"left": 495,
+					"top": 306,
+					"left": 795,
 					"width": 130,
 					"height": 17,
 					"stroke": "#000000",
@@ -531,8 +532,8 @@
 				},
 				"header_bkgd4": {
 					"type": "rectangle",
-					"top": 319,
-					"left": 482,
+					"top": 332,
+					"left": 789,
 					"width": 360,
 					"height": 31,
 					"sizingX": "fixed",
@@ -541,8 +542,8 @@
 				},
 				"label_qty": {
 					"type": "text",
-					"top": 326,
-					"left": 495,
+					"top": 338,
+					"left": 797,
 					"width": 60,
 					"height": 17,
 					"stroke": "#808080",
@@ -550,8 +551,8 @@
 				},
 				"entryField_qty": {
 					"type": "input",
-					"top": 326,
-					"left": 555,
+					"top": 338,
+					"left": 857,
 					"width": 80,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.qty",
@@ -568,8 +569,8 @@
 				},
 				"label_qtyOnHand": {
 					"type": "text",
-					"top": 326,
-					"left": 663,
+					"top": 338,
+					"left": 965,
 					"width": 80,
 					"height": 17,
 					"stroke": "#808080",
@@ -577,8 +578,8 @@
 				},
 				"entryField_qtyOnHand": {
 					"type": "input",
-					"top": 326,
-					"left": 751,
+					"top": 338,
+					"left": 1053,
 					"width": 80,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.qtyOnHand",
@@ -595,19 +596,19 @@
 				},
 				"header_bkgd5": {
 					"type": "rectangle",
-					"top": 351,
-					"left": 482,
+					"top": 369,
+					"left": 790,
 					"width": 360,
 					"height": 30,
 					"sizingX": "grow",
 					"fill": "#A2C6D8",
 					"stroke": "transparent",
-					"right": 842
+					"right": 1150
 				},
 				"lbl_shippingMemo": {
 					"type": "text",
-					"top": 358,
-					"left": 495,
+					"top": 376,
+					"left": 797,
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
@@ -617,13 +618,89 @@
 				},
 				"header_bkgd6": {
 					"type": "rectangle",
-					"top": 382,
-					"left": 482,
+					"top": 402,
+					"left": 790,
 					"width": 360,
 					"height": 99,
 					"sizingX": "grow",
 					"fill": "#E4E4E4",
 					"stroke": "transparent",
+					"right": 1150
+				},
+				"label_0_15": {
+					"type": "text",
+					"top": 410,
+					"left": 798,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Alt Shipping Address"
+				},
+				"entryField_alternateShipAddress": {
+					"type": "checkbox",
+					"text": "Alternate Shipping Address",
+					"top": 408,
+					"left": 923,
+					"width": 222,
+					"height": 18,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"sizingX": "grow",
+					"dataSource": "Form:C1466.current_item.alternateShipAddress"
+				},
+				"label_0_7": {
+					"type": "text",
+					"top": 437,
+					"left": 798,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "All lots shipped"
+				},
+				"entryField_shipped": {
+					"type": "checkbox",
+					"text": "All lots shipped",
+					"top": 435,
+					"left": 923,
+					"width": 222,
+					"height": 18,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"sizingX": "grow",
+					"dataSource": "Form:C1466.current_item.shipped"
+				},
+				"label_0_9": {
+					"type": "text",
+					"top": 464,
+					"left": 798,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Line-Item Job"
+				},
+				"entryField_lineItem": {
+					"type": "checkbox",
+					"text": "Line-Item Job",
+					"top": 462,
+					"left": 923,
+					"width": 222,
+					"height": 18,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"sizingX": "grow",
+					"dataSource": "Form:C1466.current_item.lineItem"
+				},
+				"header_bkgd9": {
+					"type": "rectangle",
+					"top": 440,
+					"left": 6,
+					"width": 779,
 					"right": 842
 				},
 				"header_bkgd9": {
@@ -638,8 +715,8 @@
 				},
 				"lbl_jobComment": {
 					"type": "text",
-					"top": 345,
-					"left": 7,
+					"top": 447,
+					"left": 13,
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
@@ -649,10 +726,10 @@
 				},
 				"header_bkgd10": {
 					"type": "rectangle",
-					"top": 369,
-					"left": 0,
-					"width": 480,
-					"height": 112,
+					"top": 473,
+					"left": 6,
+					"width": 779,
+					"height": 171,
 					"sizingX": "grow",
 					"fill": "#E4E4E4",
 					"stroke": "transparent",
@@ -660,10 +737,10 @@
 				},
 				"entryField_jobComment": {
 					"type": "input",
-					"top": 374,
-					"left": 7,
-					"width": 454,
-					"height": 90,
+					"top": 482,
+					"left": 14,
+					"width": 753,
+					"height": 155,
 					"dataSource": "Form:C1466.current_item.jobComment",
 					"focusable": false,
 					"enterable": false,
@@ -678,6 +755,33 @@
 					"scrollbarHorizontal": "hidden",
 					"scrollbarVertical": "automatic"
 				},
+				"label_0_16": {
+					"type": "text",
+					"top": 491,
+					"left": 798,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Open PO"
+				},
+				"entryField_noLots": {
+					"type": "checkbox",
+					"text": "No-Lots",
+					"top": 489,
+					"left": 923,
+					"width": 222,
+					"height": 18,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"sizingX": "grow",
+					"dataSource": "Form:C1466.current_item.noLots"
+				},
+				"header_bkgd7": {
+					"type": "rectangle",
+					"top": 119,
+					"left": 790,
 				"header_bkgd7": {
 					"type": "rectangle",
 					"top": 114,
@@ -687,12 +791,12 @@
 					"sizingX": "grow",
 					"fill": "#A2C6D8",
 					"stroke": "transparent",
-					"right": 842
+					"right": 1150
 				},
 				"lbl_address3": {
 					"type": "text",
-					"top": 120,
-					"left": 495,
+					"top": 126,
+					"left": 797,
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
@@ -702,8 +806,8 @@
 				},
 				"header_bkgd8": {
 					"type": "rectangle",
-					"top": 145,
-					"left": 482,
+					"top": 152,
+					"left": 790,
 					"width": 360,
 					"height": 140,
 					"sizingX": "grow",
@@ -722,8 +826,8 @@
 				},
 				"label_0_17": {
 					"type": "text",
-					"top": 179,
-					"left": 495,
+					"top": 187,
+					"left": 798,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
@@ -731,8 +835,8 @@
 				},
 				"label_0_18": {
 					"type": "text",
-					"top": 206,
-					"left": 495,
+					"top": 214,
+					"left": 798,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
@@ -740,8 +844,8 @@
 				},
 				"label_0_19": {
 					"type": "text",
-					"top": 233,
-					"left": 495,
+					"top": 241,
+					"left": 798,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
@@ -749,8 +853,8 @@
 				},
 				"label_0_21": {
 					"type": "text",
-					"top": 260,
-					"left": 495,
+					"top": 268,
+					"left": 798,
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
@@ -758,11 +862,11 @@
 				},
 				"Field_dataCreated": {
 					"type": "input",
-					"top": 152,
-					"left": 619,
+					"top": 160,
+					"left": 922,
 					"width": 110,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.dateCreated",
+					"dataSource": "cs:C1710.sfw_stmp.me.getDate(Form:C1466.current_item.dateCreated)",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -816,8 +920,8 @@
 				},
 				"Field_lastShipDate": {
 					"type": "input",
-					"top": 233,
-					"left": 619,
+					"top": 241,
+					"left": 922,
 					"width": 110,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.lastShipDate",
@@ -835,8 +939,8 @@
 				},
 				"Field_archivedDate": {
 					"type": "input",
-					"top": 260,
-					"left": 619,
+					"top": 268,
+					"left": 922,
 					"width": 110,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.archivedDate",
@@ -854,8 +958,8 @@
 				},
 				"dp_expectedDate": {
 					"type": "subform",
-					"top": 179,
-					"left": 710,
+					"top": 187,
+					"left": 1013,
 					"width": 19,
 					"height": 16,
 					"dataSource": "Form:C1466.current_item.expectedDate",
@@ -874,8 +978,8 @@
 				},
 				"dp_invoiceDate": {
 					"type": "subform",
-					"top": 206,
-					"left": 710,
+					"top": 214,
+					"left": 1013,
 					"width": 19,
 					"height": 16,
 					"dataSource": "Form:C1466.current_item.invoiceDate",
@@ -914,8 +1018,8 @@
 				},
 				"dp_archivedDate": {
 					"type": "subform",
-					"top": 260,
-					"left": 710,
+					"top": 268,
+					"left": 1013,
 					"width": 19,
 					"height": 16,
 					"dataSource": "Form:C1466.current_item.archivedDate",
@@ -932,25 +1036,55 @@
 					],
 					"focusable": true
 				},
-				"entryField_shipMemo": {
-					"type": "input",
-					"top": 394,
-					"left": 495,
-					"width": 320,
-					"height": 70,
-					"dataSource": "Form:C1466.current_item.shipMemo",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
+				"subFormAddress": {
+					"type": "subform",
+					"left": 5,
+					"top": 174,
+					"width": 779,
+					"height": 261,
+					"detailForm": "sfw_subpanel_addressSingle",
 					"borderStyle": "none",
-					"sizingX": "fixed",
-					"scrollbarHorizontal": "hidden",
-					"scrollbarVertical": "automatic"
+					"dataSource": "Form:C1466.subFormAddress"
+				},
+				"rbBilling1": {
+					"type": "radio",
+					"text": "Billing",
+					"top": 151,
+					"left": 5,
+					"width": 127,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "bevel",
+					"dataSource": "Form:C1466.addressBilling",
+					"radioGroup": "address",
+					"fontSize": 11,
+					"focusable": false,
+					"method": "ObjectMethods/rbBilling1.4dm",
+					"icon": "Images/user.png",
+					"iconFrames": 1,
+					"textPlacement": "right"
+				},
+				"rbShipping1": {
+					"type": "radio",
+					"text": "Shipping",
+					"top": 151,
+					"left": 133,
+					"width": 127,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "bevel",
+					"dataSource": "Form:C1466.addressShipping",
+					"radioGroup": "address",
+					"fontSize": 11,
+					"focusable": false,
+					"method": "ObjectMethods/rbShipping1.4dm",
+					"icon": "Images/building.png",
+					"iconFrames": 1,
+					"textPlacement": "right"
 				}
 			}
 		},

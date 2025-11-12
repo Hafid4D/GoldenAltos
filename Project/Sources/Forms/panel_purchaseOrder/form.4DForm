@@ -438,154 +438,21 @@
 		},
 		{
 			"objects": {
-				"header_bkgd1": {
-					"type": "rectangle",
-					"top": 118,
-					"left": 5,
-					"width": 480,
-					"height": 30,
-					"sizingX": "fixed",
-					"fill": "#A2C6D8",
-					"stroke": "transparent"
-				},
 				"header_bkgd2": {
 					"type": "rectangle",
 					"top": 118,
-					"left": 490,
+					"left": 790,
 					"width": 360,
 					"height": 30,
 					"sizingX": "grow",
 					"fill": "#A2C6D8",
 					"stroke": "transparent",
-					"right": 850
-				},
-				"lbl_address": {
-					"type": "text",
-					"top": 125,
-					"left": 11,
-					"width": 250,
-					"height": 17,
-					"stroke": "#000000",
-					"text": "Address",
-					"fontSize": 12,
-					"fontWeight": "bold"
-				},
-				"header_bkgd3": {
-					"type": "rectangle",
-					"top": 151,
-					"left": 5,
-					"width": 480,
-					"height": 187,
-					"sizingX": "fixed",
-					"fill": "#E4E4E4",
-					"stroke": "transparent"
-				},
-				"Popup Dropdown List": {
-					"type": "dropdown",
-					"left": 12,
-					"top": 157,
-					"width": 125,
-					"height": 18,
-					"events": [
-						"onLoad"
-					],
-					"method": "ObjectMethods/Popup Dropdown List.4dm",
-					"dataSource": "Form:C1466.dpAddress"
-				},
-				"entryField_po_address_street": {
-					"type": "input",
-					"left": 144,
-					"top": 177,
-					"width": 332,
-					"height": 18,
-					"dataSource": "Form:C1466.current_item.address[Form:C1466.dpAddress.currentValue].street",
-					"fill": "transparent"
-				},
-				"entryField_po_address_city": {
-					"type": "input",
-					"left": 144,
-					"top": 265,
-					"width": 100,
-					"height": 18,
-					"dataSource": "Form:C1466.current_item.address[Form:C1466.dpAddress.currentValue].city",
-					"fill": "transparent"
-				},
-				"entryField_po_address_state": {
-					"type": "input",
-					"left": 260,
-					"top": 265,
-					"width": 100,
-					"height": 18,
-					"dataSource": "Form:C1466.current_item.address[Form:C1466.dpAddress.currentValue].state",
-					"fill": "transparent"
-				},
-				"entryField_po_address_zipCode": {
-					"type": "input",
-					"left": 376,
-					"top": 265,
-					"width": 100,
-					"height": 18,
-					"dataSource": "Form:C1466.current_item.address[Form:C1466.dpAddress.currentValue].zipCode",
-					"fill": "transparent"
-				},
-				"label_0_10": {
-					"type": "text",
-					"top": 160,
-					"left": 144,
-					"width": 150,
-					"height": 15,
-					"stroke": "#808080",
-					"text": "Street"
-				},
-				"entryField_po_address_addtio": {
-					"type": "input",
-					"left": 144,
-					"top": 221,
-					"width": 332,
-					"height": 18,
-					"dataSource": "Form:C1466.current_item.address[Form:C1466.dpAddress.currentValue].additionalAddress",
-					"fill": "transparent"
-				},
-				"label_0_11": {
-					"type": "text",
-					"top": 203,
-					"left": 144,
-					"width": 150,
-					"height": 15,
-					"stroke": "#808080",
-					"text": "Additional Address"
-				},
-				"label_0_12": {
-					"type": "text",
-					"top": 247,
-					"left": 144,
-					"width": 90,
-					"height": 15,
-					"stroke": "#808080",
-					"text": "City"
-				},
-				"label_0_13": {
-					"type": "text",
-					"top": 247,
-					"left": 261,
-					"width": 90,
-					"height": 15,
-					"stroke": "#808080",
-					"text": "State"
-				},
-				"label_0_14": {
-					"type": "text",
-					"top": 247,
-					"left": 376,
-					"width": 90,
-					"height": 15,
-					"stroke": "#808080",
-					"text": "ZIP Code"
+					"right": 1150
 				},
 				"lbl_address1": {
 					"type": "text",
 					"top": 125,
-					"left": 497,
+					"left": 797,
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
@@ -596,18 +463,18 @@
 				"header_bkgd4": {
 					"type": "rectangle",
 					"top": 151,
-					"left": 490,
+					"left": 790,
 					"width": 360,
 					"height": 57,
 					"sizingX": "grow",
 					"fill": "#E4E4E4",
 					"stroke": "transparent",
-					"right": 850
+					"right": 1150
 				},
 				"label_0_15": {
 					"type": "text",
 					"top": 159,
-					"left": 498,
+					"left": 798,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
@@ -616,7 +483,7 @@
 				"label_0_16": {
 					"type": "text",
 					"top": 183,
-					"left": 498,
+					"left": 798,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
@@ -625,7 +492,7 @@
 				"entryField_releaseNumber": {
 					"type": "input",
 					"top": 183,
-					"left": 603,
+					"left": 903,
 					"width": 240,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.releaseNumber",
@@ -643,7 +510,7 @@
 				"header_bkgd5": {
 					"type": "rectangle",
 					"top": 291,
-					"left": 490,
+					"left": 790,
 					"width": 360,
 					"height": 30,
 					"sizingX": "grow",
@@ -653,7 +520,7 @@
 				"lbl_address2": {
 					"type": "text",
 					"top": 298,
-					"left": 497,
+					"left": 797,
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
@@ -664,9 +531,9 @@
 				"header_bkgd6": {
 					"type": "rectangle",
 					"top": 324,
-					"left": 490,
+					"left": 790,
 					"width": 360,
-					"height": 232,
+					"height": 316,
 					"sizingX": "grow",
 					"fill": "#E4E4E4",
 					"stroke": "transparent"
@@ -674,9 +541,9 @@
 				"entryField_description": {
 					"type": "input",
 					"top": 333,
-					"left": 498,
+					"left": 798,
 					"width": 340,
-					"height": 213,
+					"height": 297,
 					"dataSource": "Form:C1466.current_item.description",
 					"focusable": false,
 					"enterable": false,
@@ -691,17 +558,18 @@
 				},
 				"header_bkgd7": {
 					"type": "rectangle",
-					"top": 345,
+					"top": 439,
 					"left": 5,
-					"width": 480,
+					"width": 780,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
-					"stroke": "transparent"
+					"stroke": "transparent",
+					"right": 785
 				},
 				"lbl_address3": {
 					"type": "text",
-					"top": 352,
+					"top": 446,
 					"left": 11,
 					"width": 250,
 					"height": 17,
@@ -712,17 +580,18 @@
 				},
 				"header_bkgd8": {
 					"type": "rectangle",
-					"top": 378,
+					"top": 472,
 					"left": 5,
-					"width": 480,
-					"height": 56,
+					"width": 780,
+					"height": 51,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
-					"stroke": "transparent"
+					"stroke": "transparent",
+					"right": 785
 				},
 				"label_0_17": {
 					"type": "text",
-					"top": 386,
+					"top": 480,
 					"left": 13,
 					"width": 110,
 					"height": 17,
@@ -731,7 +600,7 @@
 				},
 				"entryField_altBillTo": {
 					"type": "input",
-					"top": 386,
+					"top": 480,
 					"left": 138,
 					"width": 340,
 					"height": 17,
@@ -748,17 +617,18 @@
 				},
 				"header_bkgd9": {
 					"type": "rectangle",
-					"top": 440,
+					"top": 529,
 					"left": 5,
-					"width": 480,
+					"width": 780,
 					"height": 30,
 					"sizingX": "fixed",
 					"fill": "#A2C6D8",
-					"stroke": "transparent"
+					"stroke": "transparent",
+					"right": 785
 				},
 				"lbl_address4": {
 					"type": "text",
-					"top": 447,
+					"top": 536,
 					"left": 11,
 					"width": 250,
 					"height": 17,
@@ -769,17 +639,18 @@
 				},
 				"header_bkgd10": {
 					"type": "rectangle",
-					"top": 473,
+					"top": 562,
 					"left": 5,
-					"width": 480,
-					"height": 83,
+					"width": 780,
+					"height": 78,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
-					"stroke": "transparent"
+					"stroke": "transparent",
+					"right": 785
 				},
 				"label_0_18": {
 					"type": "text",
-					"top": 481,
+					"top": 570,
 					"left": 13,
 					"width": 115,
 					"height": 17,
@@ -788,7 +659,7 @@
 				},
 				"label_0_19": {
 					"type": "text",
-					"top": 506,
+					"top": 595,
 					"left": 13,
 					"width": 115,
 					"height": 17,
@@ -797,7 +668,7 @@
 				},
 				"entryField_timeBillingRate": {
 					"type": "input",
-					"top": 506,
+					"top": 595,
 					"left": 138,
 					"width": 335,
 					"height": 17,
@@ -814,7 +685,7 @@
 				},
 				"label_0_20": {
 					"type": "text",
-					"top": 531,
+					"top": 620,
 					"left": 13,
 					"width": 115,
 					"height": 17,
@@ -825,7 +696,7 @@
 					"type": "checkbox",
 					"text": "Open PO",
 					"top": 157,
-					"left": 603,
+					"left": 903,
 					"width": 240,
 					"height": 18,
 					"events": [
@@ -838,7 +709,7 @@
 				"entryField_forTimeBilling": {
 					"type": "checkbox",
 					"text": "Resource Time Billing",
-					"top": 479,
+					"top": 568,
 					"left": 138,
 					"width": 232,
 					"height": 18,
@@ -851,7 +722,7 @@
 				"entryField_timeBilling": {
 					"type": "checkbox",
 					"text": "Used Time Billing",
-					"top": 529,
+					"top": 618,
 					"left": 138,
 					"width": 232,
 					"height": 18,
@@ -861,27 +732,9 @@
 					"dataSourceTypeHint": "boolean",
 					"dataSource": "Form:C1466.current_item.timeBilling"
 				},
-				"entryField_po_address_country": {
-					"type": "input",
-					"left": 144,
-					"top": 310,
-					"width": 332,
-					"height": 18,
-					"dataSource": "Form:C1466.current_item.address[Form:C1466.dpAddress.currentValue].country",
-					"fill": "transparent"
-				},
-				"label_0_22": {
-					"type": "text",
-					"top": 292,
-					"left": 144,
-					"width": 150,
-					"height": 15,
-					"stroke": "#808080",
-					"text": "Country"
-				},
 				"label_0_21": {
 					"type": "text",
-					"top": 410,
+					"top": 504,
 					"left": 13,
 					"width": 110,
 					"height": 17,
@@ -890,7 +743,7 @@
 				},
 				"entryField_dropShipCustomer": {
 					"type": "input",
-					"top": 410,
+					"top": 504,
 					"left": 138,
 					"width": 340,
 					"height": 17,
@@ -908,18 +761,18 @@
 				"header_bkgd11": {
 					"type": "rectangle",
 					"top": 216,
-					"left": 490,
+					"left": 790,
 					"width": 360,
 					"height": 30,
 					"sizingX": "grow",
 					"fill": "#A2C6D8",
 					"stroke": "transparent",
-					"right": 850
+					"right": 1150
 				},
 				"lbl_identifier": {
 					"type": "text",
 					"top": 223,
-					"left": 497,
+					"left": 797,
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
@@ -930,18 +783,18 @@
 				"header_bkgd12": {
 					"type": "rectangle",
 					"top": 249,
-					"left": 490,
+					"left": 790,
 					"width": 360,
 					"height": 34,
 					"sizingX": "grow",
 					"fill": "#E4E4E4",
 					"stroke": "transparent",
-					"right": 850
+					"right": 1150
 				},
 				"label_0_33": {
 					"type": "text",
 					"top": 258,
-					"left": 498,
+					"left": 798,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
@@ -950,7 +803,7 @@
 				"entryField_identifier1": {
 					"type": "input",
 					"top": 258,
-					"left": 603,
+					"left": 903,
 					"width": 240,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.identifier",
@@ -968,7 +821,7 @@
 				"filler_hos": {
 					"type": "rectangle",
 					"top": 118,
-					"left": 855,
+					"left": 1155,
 					"width": 54,
 					"height": 438,
 					"sizingX": "fixed",
@@ -977,7 +830,7 @@
 				},
 				"filler_ver": {
 					"type": "rectangle",
-					"top": 561,
+					"top": 645,
 					"left": 5,
 					"width": 845,
 					"height": 38,
@@ -985,6 +838,78 @@
 					"fill": "#F3F3F3",
 					"stroke": "transparent",
 					"right": 850
+				},
+				"subFormAddress": {
+					"type": "subform",
+					"left": 5,
+					"top": 173,
+					"width": 779,
+					"height": 261,
+					"detailForm": "sfw_subpanel_addressSingle",
+					"borderStyle": "none",
+					"dataSource": "Form:C1466.subFormAddress"
+				},
+				"rbBilling": {
+					"type": "radio",
+					"text": "Billing",
+					"top": 150,
+					"left": 5,
+					"width": 127,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "bevel",
+					"dataSource": "Form:C1466.addressBilling",
+					"radioGroup": "address",
+					"fontSize": 11,
+					"focusable": false,
+					"method": "ObjectMethods/rbBilling.4dm",
+					"icon": "Images/user.png",
+					"iconFrames": 1,
+					"textPlacement": "right"
+				},
+				"rbShipping": {
+					"type": "radio",
+					"text": "Shipping",
+					"top": 150,
+					"left": 133,
+					"width": 127,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "bevel",
+					"dataSource": "Form:C1466.addressShipping",
+					"radioGroup": "address",
+					"fontSize": 11,
+					"focusable": false,
+					"method": "ObjectMethods/rbShipping.4dm",
+					"icon": "Images/building.png",
+					"iconFrames": 1,
+					"textPlacement": "right"
+				},
+				"header_bkgd1": {
+					"type": "rectangle",
+					"top": 118,
+					"left": 5,
+					"width": 780,
+					"height": 30,
+					"sizingX": "grow",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 785
+				},
+				"lbl_address5": {
+					"type": "text",
+					"top": 125,
+					"left": 12,
+					"width": 250,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Addresses",
+					"fontSize": 12,
+					"fontWeight": "bold"
 				}
 			}
 		},
@@ -1768,7 +1693,7 @@
 			}
 		}
 	],
-	"geometryStamp": 3163,
+	"geometryStamp": 3480,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
