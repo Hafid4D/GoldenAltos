@@ -22,6 +22,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setItemListAction("Export th selection to Excel"; "_ga_exportJobSelection")
 	
+	$entry.setItemAction("Print Shipper"; "_ga_printShipper")
+	
 	// MARK: -Views
 	$view:=cs:C1710.sfw_definitionView.new("archivedJobs"; "Archived Jobs"; "derivedFrom:main"; $entry)
 	$view.setSubset("archivedJobs")

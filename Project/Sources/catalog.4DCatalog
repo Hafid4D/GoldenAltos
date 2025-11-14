@@ -1167,6 +1167,8 @@
 		<field name="dropShipCustomer" uuid="21DEEF44B59645428651C744EBD1C277" type="10" limiting_length="255" never_null="true" id="31"/>
 		<field name="currency" uuid="84B0C0958BBDC9489392DFE303C06DB6" type="10" limiting_length="255" never_null="true" id="32"/>
 		<field name="recommitDate" uuid="1C26D9922290404BB40BE484CE2603A3" type="8" never_null="true" id="33"/>
+		<field name="altDeviceNumber" uuid="0728EAEDC621C342B0CFA1E7961A3F6D" type="10" limiting_length="255" never_null="true" id="34"/>
+		<field name="customerShipper" uuid="2D52050871F24947B2ED4FC976221C59" type="10" limiting_length="255" never_null="true" id="35"/>
 		<primary_key field_name="UUID" field_uuid="D70DED62813D485DA8CFB0CFD1FF994C"/>
 	</table>
 	<table name="Lot" uuid="67220A81398C4000A84C1F180E368020" id="118">
@@ -1212,7 +1214,9 @@
 		<field name="cOfCInspector" uuid="3930B9C1D5D44B49BA8257994808E54C" type="10" limiting_length="255" never_null="true" id="38"/>
 		<field name="altDevNumber" uuid="04A1D5951BE7B24CA6E70D8CB790AF53" type="10" limiting_length="255" never_null="true" id="39"/>
 		<field name="packageType" uuid="5F37F4460E065E4FA7E459B34717481B" type="10" limiting_length="255" never_null="true" id="40"/>
-		<field name="dateCode" uuid="316DF221DE628140AEBD8A716A946D96" type="8" never_null="true" id="41"/>
+		<field name="dateCode" uuid="316DF221DE628140AEBD8A716A946D96" type="10" limiting_length="255" never_null="true" id="41"/>
+		<field name="carrier" uuid="BEE08C23148B3B4897EFC137CA2DB898" type="10" limiting_length="255" never_null="true" id="42"/>
+		<field name="shipRel" uuid="F792354104D250419A635B5CEA955144" type="4" never_null="true" id="43"/>
 		<primary_key field_name="UUID" field_uuid="AEF78036FB7D429A96DF35BE53A0E0AF"/>
 	</table>
 	<table name="StepFile" uuid="A6301A2C994D4680A851FC2AE85118BE" id="119">

@@ -85,3 +85,15 @@ local Function pup($cacheCollection; $dataClass; $queryField; $queryValue)
 		
 	End if 
 	
+	
+	
+local Function loadAfterCreation()
+	
+	// This callback is called after creating the new item but before displaying the panel.
+	
+	If (This:C1470.moreData.disposition=Null:C1517)
+		
+		This:C1470.moreData.disposition:=""
+		
+	End if 
+	
