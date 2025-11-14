@@ -48,6 +48,8 @@ If (True:C214)
 		$job.dropShipCustomer:=$record.dropShipCustomer
 		$Job.recommitDate:=$record.recommitDate
 		$job.currency:=$record.currency
+		$job.altDeviceNumber:=$record.altDeviceNumber
+		$job.customerShipper:=$record.customerShipper
 		
 		$res:=$job.save()
 		If (Not:C34($res.success))
@@ -118,6 +120,8 @@ If (True:C214)
 			$lot_e.cOfCInspector:=$lot.cOfCInspector
 			$lot_e.packageType:=$lot.packageType
 			$lot_e.dateCode:=$lot.dateCode
+			$lot_e.carrier:=$lot.carrier
+			$lot_e.shipRel:=$lot.shipRel
 			
 			$lot_e.UUID_Job:=$job.UUID
 			

@@ -178,6 +178,8 @@ If (True:C214)  // export jobs & lot (job <-- lots)
 			"dropShipCustomer"; [Receiver]Drop_Ship_Customer; \
 			"currency"; [Receiver]Currency; \
 			"recommitDate"; [Receiver]RecommitDate; \
+			"altDeviceNumber"; [Receiver]AltDevice_Number; \
+			"customerShipper"; [Receiver]Customer_Shipper; \
 			"archived"; False:C215; \
 			"address"; New object:C1471("addresses"; New collection:C1472()); \
 			"poLines"; New collection:C1472(); \
@@ -303,6 +305,8 @@ If (True:C214)  // export jobs & lot (job <-- lots)
 				"packageType"; [Lotinfo]PackageType1; \
 				"cOfCInspector"; [Lotinfo]CofCInspector; \
 				"dateCode"; [Lotinfo]Datecode; \
+				"shipRel"; [Lotinfo]ShipRel; \
+				"carrier"; [Lotinfo]Carrier; \
 				"steps"; $steps\
 				))
 			
@@ -770,10 +774,12 @@ If (True:C214)  // export archived jobs & lot (job <-- lots)
 			"qty"; [ARCHIVES]Qty; \
 			"qtyOnHand"; 0; \
 			"shipMemo"; [ARCHIVES]Ship_Memo; \
-			"jobComment"; ""; \
+			"jobComment"; [ARCHIVES]MEMO; \
 			"currency"; [ARCHIVES]Currency; \
 			"dropShipCustomer"; [ARCHIVES]Drop_Ship_Customer; \
 			"recommitDate"; !00-00-00!; \
+			"altDeviceNumber"; [ARCHIVES]AltDevice_Number; \
+			"customerShipper"; [ARCHIVES]Customer_Shipper; \
 			"archived"; False:C215; \
 			"address"; New object:C1471(\
 			"billing"; New object:C1471("street"; ""; "additionalAddress"; ""; "city"; [ARCHIVES]Bill_addr_City; "state"; [ARCHIVES]Bill_addr_ST; "zipCode"; [ARCHIVES]Bill_addr_ZIP; "country"; [ARCHIVES]BillAddrCountry); \
@@ -888,6 +894,8 @@ If (True:C214)  // export archived jobs & lot (job <-- lots)
 				"packageType"; [Lotinfo]PackageType1; \
 				"cOfCInspector"; [Lotinfo]CofCInspector; \
 				"dateCode"; [Lotinfo]Datecode; \
+				"shipRel"; [Lotinfo]ShipRel; \
+				"carrier"; [Lotinfo]Carrier; \
 				"steps"; $steps\
 				))
 			
