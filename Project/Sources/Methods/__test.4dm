@@ -1,6 +1,7 @@
 //%attributes = {}
 
 
+
 $file:=Folder:C1567(fk resources folder:K87:11).file("excelTemplates/jobsTemplate.xlsx")
 
 var $fields : Collection:=New collection:C1472("jobNumber"; "expectedDate"; "recommitDate"; \
@@ -10,6 +11,7 @@ $jobs:=ds:C1482.Job.query("lineItem =:1"; True:C214)
 $offscreen:=cs:C1710.jobDataExporter.new($file.platformPath; $fields; $jobs; "TestJobExport")
 $excelSheet:=VP Run offscreen area($offscreen)
 
+//$offscreen.fillDataAndExport($offscreen)
 
 
 

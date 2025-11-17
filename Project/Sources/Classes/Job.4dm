@@ -20,7 +20,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setLBItemsOrderBy("jobNumber")
 	
-	$entry.setItemListAction("Export th selection to Excel"; "_ga_exportJobSelection")
+	$entry.setItemListAction("Export to Excel"; "_ga_exportJobSelection")
 	
 	$entry.setItemAction("Print Shipper"; "_ga_printShipper")
 	
