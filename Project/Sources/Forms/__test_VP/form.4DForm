@@ -9,8 +9,8 @@
 	"windowMinHeight": 0,
 	"windowMaxWidth": 32767,
 	"windowMaxHeight": 32767,
-	"rightMargin": 0,
-	"bottomMargin": 0,
+	"rightMargin": 20,
+	"bottomMargin": 20,
 	"events": [
 		"onLoad",
 		"onPageChange",
@@ -32,42 +32,28 @@
 	"destination": "detailScreen",
 	"pages": [
 		{
-			"objects": {
-				"Rectangle": {
-					"type": "rectangle",
-					"top": 0,
-					"left": 0,
-					"width": 237,
-					"height": 206,
-					"stroke": "#FFFFFF",
-					"fill": "#FFFFFF"
-				}
-			}
+			"objects": {}
 		},
 		{
 			"objects": {
-				"Button": {
-					"type": "button",
-					"text": "Button",
-					"top": 15,
-					"left": 10,
-					"width": 197,
-					"height": 27,
+				"ViewProArea": {
+					"type": "view",
+					"left": 5,
+					"top": 7,
+					"width": 720,
+					"height": 720,
+					"userInterface": "ribbon",
+					"withFormulaBar": true,
+					"sizingX": "grow",
+					"sizingY": "grow",
 					"events": [
-						"onLoad",
-						"onClick"
-					],
-					"method": "ObjectMethods/Button.4dm"
+						"onVPReady",
+						"onSelectionChange",
+						"onVPRangeChanged"
+					]
 				}
 			}
 		}
 	],
-	"geometryStamp": 168,
-	"editor": {
-		"activeView": "View 1",
-		"defaultView": "View 1",
-		"views": {
-			"View 1": {}
-		}
-	}
+	"geometryStamp": 2
 }
