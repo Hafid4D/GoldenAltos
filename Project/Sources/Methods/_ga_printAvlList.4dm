@@ -24,7 +24,7 @@ If (Form:C1466.sfw.lb_items.length>0)
 	$context.length:=Form:C1466.sfw.lb_items.length
 	$context.division:=_ga_getListFiltersValues("Division"; "UUID")
 	$context.user:=Current machine:C483
-	$context.partNum:=_ga_getListFiltersValues("PartData"; "UUID"; "internalPartNum")
+	//$context.partNum:=Form.current_item.ourPartNum  //_ga_getListFiltersValues("PartData"; "UUID"; "internalPartNum")
 	
 	If (Form:C1466.sfw.searchbox="")
 		

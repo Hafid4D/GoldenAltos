@@ -1,5 +1,6 @@
 //%attributes = {}
 
+TRUNCATE TABLE:C1051([sfw_Favorite:37])
 
 
 $file:=Folder:C1567(fk resources folder:K87:11).file("excelTemplates/jobsTemplate.xlsx")

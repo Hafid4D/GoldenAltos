@@ -72,33 +72,41 @@ local Function pup($cacheCollection; $dataClass; $queryField; $queryValue)
 	
 	//mark:-Callbacks
 	
-Function beforeSaveCreation()
-	
-	
-local Function afterCreation()
+local Function itemLoad()
+	// This callback is called when the item is selected in the itemList
 	This:C1470._initDocument()
 	
+Function beforeSaveCreation()
+	This:C1470._initDocument()
+	
+local Function afterCreation()
+	
+	This:C1470._initDocument()
 	
 local Function _initDocument()
 	
-	//If (Form.situation.mode="add")
+	If (Form:C1466.situation.mode="add")
+		
+		var $blob : Blob
+		$doc:=New object:C1471
+		
+		$doc.code:=""
+		$doc.creationDateTimeStamp:=0
+		$doc.documentPath:=""
+		$doc.sourcePath:=""
+		$doc.description:=""
+		$doc.approvalDate:=!00-00-00!
+		$doc.approvedBy:=""
+		$doc.isApproved:=False:C215
+		$doc.blob:=$blob
+		
+		This:C1470.document:=$doc
+		
+	End if 
 	
-	//var $blob : Blob
-	//$doc:=New object
 	
-	//$doc.code:=""
-	//$doc.creationDateTimeStamp:=0
-	//$doc.documentPath:=""
-	//$doc.sourcePath:=""
-	//$doc.description:=""
-	//$doc.approvalDate:=!00-00-00!
-	//$doc.approvedBy:=""
-	//$doc.isApproved:=False
-	//$doc.blob:=$blob
-	
-	//This.document:=$doc
-	
-	//End if 
+local Function get nameInWindowTitle()->$nameInWindowTitle : Text
+	$nameInWindowTitle:=String:C10(This:C1470.managementReviewNumber)
 	
 	
 	

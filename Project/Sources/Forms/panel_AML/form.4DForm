@@ -64,7 +64,7 @@
 					"left": 167,
 					"width": 296,
 					"height": 41,
-					"dataSource": "Form:C1466.current_item.partData.internalPartNum",
+					"dataSource": "Form:C1466.current_item.ourPartNum",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
