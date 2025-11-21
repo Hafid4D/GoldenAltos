@@ -962,6 +962,23 @@
 		</field>
 		<primary_key field_name="UUID" field_uuid="DD082E45822D34438F391901E3773042"/>
 	</table>
+
+	<table name="JobInvoice" uuid="FD34803EFD49454B9F38092174A0003C" id="65">
+		<field name="UUID" uuid="665BE88AE92589409E64B35A9DB0075E" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="invoiceStmp" uuid="4BE20AA10BD39143A2F76F6BB07916D3" type="4" never_null="true" id="2"/>
+		<field name="paid" uuid="67E93BE4E9C01547BC28BDBBF03C54CD" type="1" never_null="true" id="3"/>
+		<field name="closed" uuid="C235FB8792C8E249B73579CD86826016" type="1" never_null="true" id="4">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="miscCharges" uuid="B4B7217B09505743A051A4048E70DCE7" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
+		<field name="currency" uuid="C2FFC38D9530B740B9EBF74435B70193" type="10" limiting_length="255" never_null="true" id="6"/>
+		<field name="type" uuid="877716DD45FAEB43BD6515DEE21E0545" type="10" limiting_length="255" never_null="true" id="7">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="inoiceNumber" uuid="B62D8270332604438E6883BE1DB5007F" type="10" limiting_length="255" never_null="true" id="8"/>
+		<primary_key field_name="UUID" field_uuid="665BE88AE92589409E64B35A9DB0075E"/>
+  </table>
+  
 	<table name="AuditEvent" uuid="3382E9847A639840BEB98DE07BAF4613" id="65">
 		<field name="UUID" uuid="00CCFE9E143B72409BA8D975BF377810" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_Audit" uuid="D1038A4EE5884445BAFCB6F492183C34" type="10" store_as_UUID="true" never_null="true" id="2"/>
@@ -4047,6 +4064,11 @@
 	<index kind="regular" unique_keys="true" uuid="FBBAD51FDFD2D8439D24316E1C3E823B" type="1">
 		<field_ref uuid="E26B906EA27E6F4C82FC5EC71A3F908E" name="boNumber">
 			<table_ref uuid="34498A1D7FE0BD4783FE5183EE6C5BA2" name="BuyingOrder"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="FDCC84D7C517294EB6FA134B86B0AA3D" type="7">
+		<field_ref uuid="665BE88AE92589409E64B35A9DB0075E" name="UUID">
+			<table_ref uuid="FD34803EFD49454B9F38092174A0003C" name="JobInvoice"/>
 		</field_ref>
 	</index>
 	<base_extra data_file_path=":HWMHp.4DD">

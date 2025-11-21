@@ -931,6 +931,7 @@
 				}
 			}
 		},
+
 		"AuditEvent": {
 			"color": {
 				"red": 255,
@@ -939,6 +940,7 @@
 				"alpha": 0
 			},
 			"coordinates": {
+
 				"left": 4715,
 				"top": 310,
 				"width": 153,
