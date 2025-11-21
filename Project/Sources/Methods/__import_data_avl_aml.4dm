@@ -319,7 +319,7 @@ If ($avml_log.exists)
 		$eAvml.minInventoryLevel:=$avml.MinInventoryLevel
 		$eAvml.description:=$avml.Description
 		
-		//$eAvml.ourPartNum:=$avml.OUR_partnum
+		$eAvml.ourPartNum:=$avml.OUR_partnum
 		$partNum:=ds:C1482.PartData.query("internalPartNum =:1"; Split string:C1554($avml.OUR_partnum; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($partNum.length>0)
 			$eAvml.UUID_PartData:=$partNum[0].UUID

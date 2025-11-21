@@ -61,7 +61,7 @@ If (OK=1)
 						SEND PACKET:C103($file; $data+$separator_col)
 						
 					: ($headerName="Internal Part")
-						$data:=Replace string:C233(Replace string:C233(String:C10($aml_e.partData.internalPartNum); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))
+						$data:=Replace string:C233(Replace string:C233(String:C10($aml_e.ourPartNum); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))
 						SEND PACKET:C103($file; $data+$separator_col)
 						
 						
