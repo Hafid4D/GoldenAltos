@@ -78,6 +78,7 @@ Function redrawAndSetVisible()
 		OBJECT SET ENABLED:C1123(*; "entryField_isApproved"; $hasAuthorizedProfile)
 		OBJECT SET ENABLED:C1123(*; "entryField_approver"; $hasAuthorizedProfile)
 		OBJECT SET ENABLED:C1123(*; "entryField_approvalDate"; $hasAuthorizedProfile)
+		OBJECT SET VISIBLE:C603(*; "PopupDate1"; $hasAuthorizedProfile)
 		
 	End if 
 	Form:C1466.sfw.drawHTab()

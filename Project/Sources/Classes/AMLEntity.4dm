@@ -99,5 +99,8 @@ local Function _initattachedDocuments()
 	End if 
 	
 	
+local Function get nameInWindowTitle()->$nameInWindowTitle : Text
+	$nameInWindowTitle:=String:C10(This:C1470.ourPartNum)
+	
 	
 	

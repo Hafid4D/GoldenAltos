@@ -8,22 +8,23 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setDisplayOrder(-600)
 	$entry.setIcon("image/entry/aml-white-50x50.png")
 	
-	$entry.setSearchboxField("partData.internalPartNum")
+	$entry.setSearchboxField("ourPartNum"; "placeholder:internalPartNum")
 	
 	$entry.setPanel("panel_AML")
 	$entry.setPanelPage(1; ""; "Main")
 	$entry.setPanelPage(2; ""; "Address")
 	$entry.setPanelPage(3; ""; "Documents")
 	
-	$entry.setLBItemsColumn("partData.internalPartNum"; "Internal Part#"; "width:150")
+	$entry.setLBItemsColumn("ourPartNum"; "Internal Part#"; "width:150")
 	$entry.setLBItemsColumn("vendorPartnum"; "Vendor Part#"; "width:150")
 	$entry.setLBItemsColumn("supplier.name"; "Supplier"; "width:250")
-	$entry.setLBItemsOrderBy("partData.internalPartNum")
+	$entry.setLBItemsOrderBy("ourPartNum")
 	
 	$entry.setItemListAction("Export selection to excel"; "_ga_exportAmlList")
 	$entry.setItemListAction("-"; "-")
 	$entry.setItemListAction("Print selection"; "_ga_printAmlList")
 	
+	$entry.activateFavorite()
 	
 	// MARK: -Filters
 	
@@ -54,37 +55,37 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	// MARK: All  product Suppliers
 	$view:=cs:C1710.sfw_definitionView.new("productSuppliers"; "Show Product Suppliers")
-	$view.setLBItemsColumn("partData.internalPartNum"; "Internal Part#"; "width:150")
+	$view.setLBItemsColumn("ourPartNum"; "Internal Part#"; "width:150")
 	$view.setLBItemsColumn("vendorPartnum"; "Vendor Part#"; "width:150")
 	$view.setLBItemsColumn("supplier.name"; "Supplier"; "width:250")
-	$view.setLBItemsOrderBy("partData.internalPartNum")
+	$view.setLBItemsOrderBy("ourPartNum")
 	$view.setSubset("productSuppliers")
 	$entry.setView($view)
 	
 	// MARK: All  service Suppliers
 	$view:=cs:C1710.sfw_definitionView.new("serviceSuppliers"; "Show Service Suppliers")
-	$view.setLBItemsColumn("partData.internalPartNum"; "Internal Part#"; "width:150")
+	$view.setLBItemsColumn("ourPartNum"; "Internal Part#"; "width:150")
 	$view.setLBItemsColumn("vendorPartnum"; "Vendor Part#"; "width:150")
 	$view.setLBItemsColumn("supplier.name"; "Supplier"; "width:250")
-	$view.setLBItemsOrderBy("partData.internalPartNum")
+	$view.setLBItemsOrderBy("ourPartNum")
 	$view.setSubset("serviceSuppliers")
 	$entry.setView($view)
 	
 	// MARK: All  critical product Suppliers
 	$view:=cs:C1710.sfw_definitionView.new("criticalProductSuppliers"; "Show Critical Product Suppliers")
-	$view.setLBItemsColumn("partData.internalPartNum"; "Internal Part#"; "width:150")
+	$view.setLBItemsColumn("ourPartNum"; "Internal Part#"; "width:150")
 	$view.setLBItemsColumn("vendorPartnum"; "Vendor Part#"; "width:150")
 	$view.setLBItemsColumn("supplier.name"; "Supplier"; "width:250")
-	$view.setLBItemsOrderBy("partData.internalPartNum")
+	$view.setLBItemsOrderBy("ourPartNum")
 	$view.setSubset("criticalProductSuppliers")
 	$entry.setView($view)
 	
 	// MARK: All  critical service Suppliers
 	$view:=cs:C1710.sfw_definitionView.new("criticalServicesSuppliers"; "Show Critical Service Suppliers")
-	$view.setLBItemsColumn("partData.internalPartNum"; "Internal Part#"; "width:150")
+	$view.setLBItemsColumn("ourPartNum"; "Internal Part#"; "width:150")
 	$view.setLBItemsColumn("vendorPartnum"; "Vendor Part#"; "width:150")
 	$view.setLBItemsColumn("supplier.name"; "Supplier"; "width:250")
-	$view.setLBItemsOrderBy("partData.internalPartNum")
+	$view.setLBItemsOrderBy("ourPartNum")
 	$view.setSubset("criticalServiceSuppliers")
 	$entry.setView($view)
 	

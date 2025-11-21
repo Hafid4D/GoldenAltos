@@ -69,6 +69,7 @@ Function redrawAndSetVisible()
 		OBJECT SET ENABLED:C1123(*; "entryField_isApproved"; $hasAuthorizedProfile)
 		OBJECT SET ENABLED:C1123(*; "entryField_approver"; $hasAuthorizedProfile)
 		OBJECT SET ENABLED:C1123(*; "entryField_approvalDate"; $hasAuthorizedProfile)
+		OBJECT SET ENABLED:C1123(*; "btnDatePickerApproval"; $hasAuthorizedProfile)
 		
 	End if 
 	
