@@ -1,0 +1,1 @@
+cs:C1710.panel_jobInvoice.me.btnDatePicker(Form:C1466.current_item; "invoiceDate")

@@ -42,6 +42,383 @@
 					"fill": "#B1CFDE",
 					"strokeWidth": 2,
 					"stroke": "#FFFFFF"
+				},
+				"label_InvoiceNumber": {
+					"type": "text",
+					"top": 12,
+					"left": 12,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Invoice #",
+					"textAlign": "right"
+				},
+				"entryField_jobNumber": {
+					"type": "input",
+					"top": 12,
+					"left": 92,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.invoiceNumber",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"label_job": {
+					"type": "text",
+					"top": 37,
+					"left": 12,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Job #",
+					"textAlign": "right"
+				},
+				"btnForward1": {
+					"type": "button",
+					"text": " ",
+					"top": 36,
+					"left": 234,
+					"width": 18,
+					"height": 18,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/forward-16x16.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnForward1.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
+				},
+				"label_pup_invoiceType": {
+					"type": "text",
+					"top": 62,
+					"left": 12,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Type",
+					"textAlign": "right"
+				},
+				"pup_invoiceType": {
+					"type": "button",
+					"top": 59,
+					"left": 92,
+					"width": 140,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_invoiceType.4dm",
+					"events": [
+						"onClick"
+					],
+					"bottom": 82,
+					"visibility": "visible"
+				},
+				"pup_job": {
+					"type": "button",
+					"top": 34,
+					"left": 92,
+					"width": 140,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_job.4dm",
+					"events": [
+						"onClick"
+					],
+					"bottom": 57
+				},
+				"btnForward2": {
+					"type": "button",
+					"text": " ",
+					"top": 11,
+					"left": 482,
+					"width": 18,
+					"height": 18,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/forward-16x16.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnForward2.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
+				},
+				"label_poNumber": {
+					"type": "text",
+					"top": 12,
+					"left": 260,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "PO #",
+					"textAlign": "right"
+				},
+				"entryField_jobPoNumber": {
+					"type": "input",
+					"top": 12,
+					"left": 340,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.job.poNumber",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"label_0_4": {
+					"type": "text",
+					"top": 37,
+					"left": 260,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Customer",
+					"textAlign": "right"
+				},
+				"entryField_jobCustomer": {
+					"type": "input",
+					"top": 37,
+					"left": 340,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.job.customer",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"label_0_5": {
+					"type": "text",
+					"top": 62,
+					"left": 260,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Process",
+					"textAlign": "right"
+				},
+				"entryField_jobProcess": {
+					"type": "input",
+					"top": 62,
+					"left": 340,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.job.process",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"label_0_1": {
+					"type": "text",
+					"top": 11,
+					"left": 510,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Initials",
+					"textAlign": "right"
+				},
+				"entryField_jobInitials": {
+					"type": "input",
+					"top": 11,
+					"left": 590,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.job.initials",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"label_0_2": {
+					"type": "text",
+					"top": 36,
+					"left": 510,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Device",
+					"textAlign": "right"
+				},
+				"entryField_jobDeviceNumber": {
+					"type": "input",
+					"top": 36,
+					"left": 590,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.job.deviceNumber",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"label_0_3": {
+					"type": "text",
+					"top": 62,
+					"left": 510,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Pr Qualifier",
+					"textAlign": "right"
+				},
+				"entryField_jobPr_qualifier": {
+					"type": "input",
+					"top": 62,
+					"left": 590,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.job.pr_qualifier",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"btnForward3": {
+					"type": "button",
+					"text": " ",
+					"top": 36,
+					"left": 482,
+					"width": 18,
+					"height": 18,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/forward-16x16.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnForward3.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
+				},
+				"label_0_6": {
+					"type": "text",
+					"top": 87,
+					"left": 510,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Invoice Date",
+					"textAlign": "right"
+				},
+				"entryField_invoiceDate": {
+					"type": "input",
+					"top": 87,
+					"left": 590,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.job.invoiceDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"btnDatePickerNextPM": {
+					"type": "button",
+					"text": " ",
+					"top": 87,
+					"left": 713,
+					"width": 17,
+					"height": 17,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/calendar_black.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnDatePickerNextPM.4dm",
+					"visibility": "visible",
+					"iconFrames": 1,
+					"focusable": false,
+					"dataSource": ""
 				}
 			}
 		},
@@ -59,8 +436,46 @@
 					"right": 2000
 				}
 			}
+		},
+		{
+			"objects": {
+				"header_bkgd1": {
+					"type": "rectangle",
+					"top": 113,
+					"left": 0,
+					"width": 2000,
+					"height": 1500,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"right": 2000
+				}
+			}
+		},
+		{
+			"objects": {
+				"header_bkgd3": {
+					"type": "rectangle",
+					"top": 113,
+					"left": 0,
+					"width": 2000,
+					"height": 1500,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"right": 2000
+				}
+			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 3
+	"geometryStamp": 103,
+	"method": "method.4dm",
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
 }

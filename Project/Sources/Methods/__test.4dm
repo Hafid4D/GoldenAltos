@@ -1,6 +1,8 @@
 //%attributes = {}
 
 
+$idents:=cs:C1710.sfw_definition.me.entries.extract("ident")
+
 $counter:=0
 String:C10($counter+1; "00000#")
 

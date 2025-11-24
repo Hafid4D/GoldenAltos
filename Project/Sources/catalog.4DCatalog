@@ -1190,6 +1190,7 @@
 		<field name="recommitDate" uuid="1C26D9922290404BB40BE484CE2603A3" type="8" never_null="true" id="33"/>
 		<field name="altDeviceNumber" uuid="0728EAEDC621C342B0CFA1E7961A3F6D" type="10" limiting_length="255" never_null="true" id="34"/>
 		<field name="customerShipper" uuid="2D52050871F24947B2ED4FC976221C59" type="10" limiting_length="255" never_null="true" id="35"/>
+		<field name="initials" uuid="3E94628C6118B241AB78802ADC164ACB" type="10" limiting_length="255" never_null="true" id="36"/>
 		<primary_key field_name="UUID" field_uuid="D70DED62813D485DA8CFB0CFD1FF994C"/>
 	</table>
 	<table name="Lot" uuid="67220A81398C4000A84C1F180E368020" id="118">
