@@ -913,8 +913,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 240.20071411133,
-				"top": 7.62939453125E-06,
+				"left": 250.20071411133,
+				"top": 0,
 				"width": 182,
 				"height": 232.33203125
 			},
@@ -930,6 +930,21 @@
 					}
 				}
 			}
+		},
+		"JobInvoice": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 1934,
+				"top": 1515,
+				"width": 169,
+				"height": 291.33203125
+			},
+			"displayable_fields_count": 11
 		},
 		"AuditEvent": {
 			"color": {
@@ -1809,8 +1824,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1177,
-				"top": 0,
+				"left": 1335,
+				"top": 58,
 				"width": 176,
 				"height": 462.33203125
 			},
@@ -2245,6 +2260,14 @@
 		}
 	},
 	"relations": {
+		"8CA8631235EF5D45B8F9BF2EDC07631B": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"CF612C3C7162224F85F6C66F413D9D12": {
 			"color": {
 				"red": 240,
