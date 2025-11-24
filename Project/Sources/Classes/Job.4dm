@@ -74,3 +74,25 @@ Function lotRelatedJobs()->$jobs : cs:C1710.JobSelection
 Function notRelatedJobs()->$jobs : cs:C1710.JobSelection
 	$jobs:=ds:C1482.Job.query("lineItem =:1 & archived =:2"; True:C214; False:C215)
 	
+	
+	
+local Function cacheLoad()
+	
+	If (Storage:C1525.cache=Null:C1517)
+		Use (Storage:C1525)
+			Storage:C1525.cache:=New shared object:C1526
+		End use 
+	End if 
+	If (Storage:C1525.cache.jobs=Null:C1517)
+		$jobs:=This:C1470._loadAsCollection()
+		Use (Storage:C1525.cache)
+			Storage:C1525.cache.jobs:=$jobs.copy(ck shared:K85:29; Storage:C1525.cache)
+		End use 
+	End if 
+	
+	
+Function _loadAsCollection()->$jobs : Collection
+	$jobs:=This:C1470.all().toCollection("UUID,jobNumber").orderBy("jobNumber")
+	
+	
+	

@@ -13,8 +13,11 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setSearchboxField("invoiceNumber")
 	$entry.setSearchboxField("invoiceNumber"; "placeholder:invoiceNumber")
 	
-	$entry.setPanelPage(1; "staff-32x32.png"; "Main")
 	$entry.setPanel("panel_jobInvoice")
+	$entry.setPanelPage(1; ""; "Main")
+	$entry.setPanelPage(2; ""; "Lot Qty Amt Based")
+	$entry.setPanelPage(3; ""; "PO Items Based")
+	
 	$entry.setLBItemsColumn("invoiceNumber"; "Invoice#"; "width:100")
 	$entry.setLBItemsColumn("job.jobNumber"; "Job#"; "width:100")
 	$entry.setLBItemsColumn("job.customer"; "customer"; "width:100")
