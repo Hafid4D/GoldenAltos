@@ -906,7 +906,7 @@
 	</table>
 	<table name="ManagementReview" uuid="572B912B43B47A4399AC534EE9F136C8" id="62">
 		<field name="UUID" uuid="03E75EA1C2D7384BB331516DE41D1D6D" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="managementReviewNumber" uuid="98F22987D04162459868C2B9A0F260CA" type="4" never_null="true" id="2">
+		<field name="managementReviewNumber" uuid="98F22987D04162459868C2B9A0F260CA" type="4" unique="true" autosequence="true" never_null="true" id="2">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="createdBy" uuid="582D462F4AD1E143BC8D52191E2E8967" type="10" limiting_length="255" never_null="true" id="3">
@@ -962,23 +962,6 @@
 		</field>
 		<primary_key field_name="UUID" field_uuid="DD082E45822D34438F391901E3773042"/>
 	</table>
-
-	<table name="JobInvoice" uuid="FD34803EFD49454B9F38092174A0003C" id="65">
-		<field name="UUID" uuid="665BE88AE92589409E64B35A9DB0075E" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="invoiceStmp" uuid="4BE20AA10BD39143A2F76F6BB07916D3" type="4" never_null="true" id="2"/>
-		<field name="paid" uuid="67E93BE4E9C01547BC28BDBBF03C54CD" type="1" never_null="true" id="3"/>
-		<field name="closed" uuid="C235FB8792C8E249B73579CD86826016" type="1" never_null="true" id="4">
-			<field_extra multi_line="false"/>
-		</field>
-		<field name="miscCharges" uuid="B4B7217B09505743A051A4048E70DCE7" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
-		<field name="currency" uuid="C2FFC38D9530B740B9EBF74435B70193" type="10" limiting_length="255" never_null="true" id="6"/>
-		<field name="type" uuid="877716DD45FAEB43BD6515DEE21E0545" type="10" limiting_length="255" never_null="true" id="7">
-			<field_extra multi_line="false"/>
-		</field>
-		<field name="inoiceNumber" uuid="B62D8270332604438E6883BE1DB5007F" type="10" limiting_length="255" never_null="true" id="8"/>
-		<primary_key field_name="UUID" field_uuid="665BE88AE92589409E64B35A9DB0075E"/>
-  </table>
-  
 	<table name="AuditEvent" uuid="3382E9847A639840BEB98DE07BAF4613" id="65">
 		<field name="UUID" uuid="00CCFE9E143B72409BA8D975BF377810" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_Audit" uuid="D1038A4EE5884445BAFCB6F492183C34" type="10" store_as_UUID="true" never_null="true" id="2"/>
@@ -995,6 +978,18 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<primary_key field_name="UUID" field_uuid="00CCFE9E143B72409BA8D975BF377810"/>
+	</table>
+	<table name="JobInvoice" uuid="FD34803EFD49454B9F38092174A0003C" id="66">
+		<field name="UUID" uuid="665BE88AE92589409E64B35A9DB0075E" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="invoiceStmp" uuid="4BE20AA10BD39143A2F76F6BB07916D3" type="4" never_null="true" id="2"/>
+		<field name="status" uuid="67E93BE4E9C01547BC28BDBBF03C54CD" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="miscCharges" uuid="B4B7217B09505743A051A4048E70DCE7" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
+		<field name="type" uuid="877716DD45FAEB43BD6515DEE21E0545" type="10" limiting_length="255" never_null="true" id="7">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="invoiceNumber" uuid="B62D8270332604438E6883BE1DB5007F" type="10" limiting_length="255" unique="true" never_null="true" id="8"/>
+		<field name="UUID_Job" uuid="23BC7DB129B8C44583BCD2B16ED41753" type="10" store_as_UUID="true" never_null="true" id="10"/>
+		<primary_key field_name="UUID" field_uuid="665BE88AE92589409E64B35A9DB0075E"/>
 	</table>
 	<table name="sfw_Notification" uuid="5B73B25D951B4B17AB99971FB0079E64" id="69">
 		<field name="UUID" uuid="37203E4F21D84C8EBC40DFC936CBFFA1" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -2875,7 +2870,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="5BAB5EB6A354924CB1E9C121463A4EBC" name_Nto1="Link_110" name_1toN="Link_110_return" state="1">
+	<relation uuid="5BAB5EB6A354924CB1E9C121463A4EBC" name_Nto1="audit" name_1toN="auditEvents" state="1">
 		<related_field kind="source">
 			<field_ref uuid="D1038A4EE5884445BAFCB6F492183C34" name="UUID_Audit">
 				<table_ref uuid="3382E9847A639840BEB98DE07BAF4613" name="AuditEvent"/>
@@ -2887,7 +2882,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="4CF9075BCA6ACC4DB2E5B91EEDA117E5" name_Nto1="Link_111" name_1toN="Link_111_return" state="1">
+	<relation uuid="4CF9075BCA6ACC4DB2E5B91EEDA117E5" name_Nto1="eventType" name_1toN="auditEvents" state="1">
 		<related_field kind="source">
 			<field_ref uuid="8599C10DC067DA4BA2306B532BFC7A7C" name="UUID_EventType">
 				<table_ref uuid="3382E9847A639840BEB98DE07BAF4613" name="AuditEvent"/>
@@ -2899,7 +2894,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="CF612C3C7162224F85F6C66F413D9D12" name_Nto1="Link_112" name_1toN="Link_112_return" state="1">
+	<relation uuid="CF612C3C7162224F85F6C66F413D9D12" name_Nto1="user" name_1toN="auditEvents" state="1">
 		<related_field kind="source">
 			<field_ref uuid="EC394ED5CE73FB4E9ADD87299AA63123" name="UUID_User">
 				<table_ref uuid="3382E9847A639840BEB98DE07BAF4613" name="AuditEvent"/>
@@ -2908,6 +2903,18 @@
 		<related_field kind="destination">
 			<field_ref uuid="34E9F9D48BE14DCD95127852F83BF1FB" name="UUID">
 				<table_ref uuid="2C75E07E18FC4733A8C98A0B31D40656" name="sfw_User"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="8CA8631235EF5D45B8F9BF2EDC07631B" name_Nto1="job" name_1toN="invoices" state="1">
+		<related_field kind="source">
+			<field_ref uuid="23BC7DB129B8C44583BCD2B16ED41753" name="UUID_Job">
+				<table_ref uuid="FD34803EFD49454B9F38092174A0003C" name="JobInvoice"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="D70DED62813D485DA8CFB0CFD1FF994C" name="UUID">
+				<table_ref uuid="D3AC71CFD00F4948816121AA74EF8DFE" name="Job"/>
 			</field_ref>
 		</related_field>
 	</relation>
@@ -3261,6 +3268,11 @@
 			<table_ref uuid="FD10D10C9E0015458AFF59F988A373BB" name="Staff"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="49415FF2DCFB714D944E925EACF16711" type="1">
+		<field_ref uuid="665BE88AE92589409E64B35A9DB0075E" name="UUID">
+			<table_ref uuid="FD34803EFD49454B9F38092174A0003C" name="JobInvoice"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="494707026F4445E39B210152D5EFBFAA" type="3">
 		<field_ref uuid="B24DECF1CAF741CABEBD6960E1AD5595" name="UUID_target">
 			<table_ref uuid="5B73B25D951B4B17AB99971FB0079E64" name="sfw_Notification"/>
@@ -3311,6 +3323,11 @@
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="5600B010EB061944931792C5AAEF1513" type="3">
+		<field_ref uuid="23BC7DB129B8C44583BCD2B16ED41753" name="UUID_Job">
+			<table_ref uuid="FD34803EFD49454B9F38092174A0003C" name="JobInvoice"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="56055D62FB10E34284F6A64FDAB1B5C4" type="7">
 		<field_ref uuid="319814755AB5A945864EA37F29F3FDE1" name="UUID">
 			<table_ref uuid="4EB6C9D117A3DC4B91D031D6BC0C7DA9" name="CustomerCarrier"/>
@@ -3339,6 +3356,11 @@
 	<index kind="regular" unique_keys="true" uuid="5ABD2A7BEF65C844A211BA0EF547DB3E" type="7">
 		<field_ref uuid="6941AB4C41898A4A9FBF25D5AC27CA2B" name="UUID">
 			<table_ref uuid="FD10D10C9E0015458AFF59F988A373BB" name="Staff"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="5CAD417F79D5424BA976B0E749297BC9" type="1">
+		<field_ref uuid="B62D8270332604438E6883BE1DB5007F" name="invoiceNumber">
+			<table_ref uuid="FD34803EFD49454B9F38092174A0003C" name="JobInvoice"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="5EC34A5424A076419C7CE9310F422E7E" type="3">
@@ -3558,6 +3580,11 @@
 	</index>
 	<index kind="regular" unique_keys="true" uuid="8CE3EC1228F73545848CCADD26CD999E" type="1">
 		<field_ref uuid="03E75EA1C2D7384BB331516DE41D1D6D" name="UUID">
+			<table_ref uuid="572B912B43B47A4399AC534EE9F136C8" name="ManagementReview"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="8D05FD99AB74F241BF9416601B989F44" type="1">
+		<field_ref uuid="98F22987D04162459868C2B9A0F260CA" name="managementReviewNumber">
 			<table_ref uuid="572B912B43B47A4399AC534EE9F136C8" name="ManagementReview"/>
 		</field_ref>
 	</index>
@@ -4064,11 +4091,6 @@
 	<index kind="regular" unique_keys="true" uuid="FBBAD51FDFD2D8439D24316E1C3E823B" type="1">
 		<field_ref uuid="E26B906EA27E6F4C82FC5EC71A3F908E" name="boNumber">
 			<table_ref uuid="34498A1D7FE0BD4783FE5183EE6C5BA2" name="BuyingOrder"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="FDCC84D7C517294EB6FA134B86B0AA3D" type="7">
-		<field_ref uuid="665BE88AE92589409E64B35A9DB0075E" name="UUID">
-			<table_ref uuid="FD34803EFD49454B9F38092174A0003C" name="JobInvoice"/>
 		</field_ref>
 	</index>
 	<base_extra data_file_path=":HWMHp.4DD">

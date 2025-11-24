@@ -6,8 +6,10 @@ If (True:C214)
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/archived_jobs_export.json")
 	
 	$records:=JSON Parse:C1218($file.getText())
+	$counter:=ds:C1482.JobInvoice.all().extract("invoiceNumber").map(Formula:C1597(Num:C11($1.value))).max()
 	
 	For each ($record; $records)
+		$counter:=$counter+1
 		$job:=ds:C1482.Job.new()
 		
 		$job.jobNumber:=$record.jobNumber
@@ -46,7 +48,7 @@ If (True:C214)
 		$job.archived:=True:C214
 		$job.pr_qualifier:=$record.pr_qualifier
 		$job.dropShipCustomer:=$record.dropShipCustomer
-		$Job.recommitDate:=$record.recommitDate
+		$job.recommitDate:=$record.recommitDate
 		$job.currency:=$record.currency
 		$job.altDeviceNumber:=$record.altDeviceNumber
 		$job.customerShipper:=$record.customerShipper
@@ -55,6 +57,27 @@ If (True:C214)
 		If (Not:C34($res.success))
 			TRACE:C157
 		End if 
+		
+		
+		$jobInvoice:=ds:C1482.JobInvoice.new()
+		
+		$job_s:=ds:C1482.Job.query(" jobNumber =:1"; $record.jobNumber)
+		If ($job_s.length>0)
+			$jobInvoice.UUID_Job:=$job_s[0].UUID
+		Else 
+			$jobInvoice.UUID_Job:=16*"00"
+		End if 
+		$jobInvoice.invoiceNumber:=String:C10($counter+1; "00000#")
+		$jobInvoice.miscCharges:=$record.miscCharges
+		$jobInvoice.invoiceStmp:=Date:C102($record.invoiceDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.invoiceDate))
+		$jobInvoice.status:=$record.lineItem=True:C214 ? "NR Job" : "Job Lot Related"
+		
+		$res:=$jobInvoice.save()
+		
+		If (Not:C34($res.success))
+			TRACE:C157
+		End if 
+		
 		
 		For each ($poline; $record.poLines)
 			$poLine_es:=ds:C1482.PurchaseOrderLine.query("seqNum = :1"; $poLine.seqNum)

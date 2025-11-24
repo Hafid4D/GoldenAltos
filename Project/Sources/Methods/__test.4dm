@@ -1,6 +1,8 @@
 //%attributes = {}
 
-TRUNCATE TABLE:C1051([sfw_Favorite:37])
+
+$counter:=0
+String:C10($counter+1; "00000#")
 
 
 $file:=Folder:C1567(fk resources folder:K87:11).file("excelTemplates/jobsTemplate.xlsx")
