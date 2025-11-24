@@ -3,6 +3,7 @@ If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.processTypes=Null:C1
 	ds:C1482.ProcessType.cacheLoad()
 End if 
 
+Form:C1466.process:=""
 $menu:=Create menu:C408
 
 For each ($process; Storage:C1525.cache.processTypes.extract("name"))
