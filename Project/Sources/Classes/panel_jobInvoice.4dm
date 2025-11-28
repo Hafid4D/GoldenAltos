@@ -7,16 +7,22 @@ Function _activate_save_cancel_button()
 Function formMethod()
 	//This function manages the main logic for updating and refreshing the form
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
-	
+	If (Form:C1466.sfw.updateOfPanelNeeded())
+		
+		This:C1470.loadAllTabs()
+		Form:C1466.current_item.poBasedCharges:=Form:C1466.lb_poLines.sum("total")-Form:C1466.lb_poLines.sum("saleTax")
+		
+	End if 
 	This:C1470.drawPup_job()
-	This:C1470.drawPup_invoiceType()
+	This:C1470.drawPup_status()
 	
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
-				
+				This:C1470.loadPoLines()
 			: (FORM Get current page:C276(*)=2)
-				
+				This:C1470.loadLots()
+				This:C1470.loadPoLines()
 			: (FORM Get current page:C276(*)=3)
 				
 		End case 
@@ -30,15 +36,16 @@ Function redrawAndSetVisible()
 	
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	This:C1470.drawPup_job()
-	//This.drawPup_invoiceType()
+	This:C1470.drawPup_status()
 	
-	//Use (Form.sfw.entry.panel.pages)
-	//Form.sfw.entry.panel.pages[1].label:="PO Lines ("+String(Form.lb_lineItems.length)+")"
-	//Form.sfw.entry.panel.pages[2].label:="Lots ("+String(Form.lb_lots.length)+")"
-	//End use 
+	Use (Form:C1466.sfw.entry.panel.pages)
+		Form:C1466.sfw.entry.panel.pages[1].label:="Lot Qty Amt Based ("+String:C10(Form:C1466.lb_lots.length)+")"
+		Form:C1466.sfw.entry.panel.pages[2].label:="PO Items Based ("+String:C10(Form:C1466.lb_poLines.length)+")"
+	End use 
 	
 	OBJECT SET ENTERABLE:C238(*; "pup_invoiceType"; False:C215)
 	OBJECT SET ENTERABLE:C238(*; "entryField_job@"; False:C215)
+	OBJECT SET VISIBLE:C603(*; "btnDatePickerInvoiceDate"; Form:C1466.sfw.checkIsInModification())
 	Form:C1466.sfw.drawHTab()
 	
 	
@@ -91,48 +98,6 @@ Function callbackAfterCreatioJob($key : Text)
 Function _clearInfoAfterChangingJob()
 	Form:C1466.current_item.UUID_Job:=Null:C1517
 	
-	///*
-Function drawPup_invoiceType()
-	If (Form:C1466.current_item#Null:C1517)
-		$job:=Form:C1466.current_item.job || New object:C1471()
-		If ($job#Null:C1517)
-			$typeName:=$job.lineItem=False:C215 ? "Job Lot Related" : "Not Related Job Order"
-		Else 
-			$typeName:=""
-		End if 
-		
-		$color:=""
-		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
-		Form:C1466.sfw.drawButtonPup("pup_invoiceType"; $typeName; $pathIcon; ($job=Null:C1517))
-	End if 
-	
-Function pup_invoiceType()
-	//Create pop up menu
-	If (Form:C1466.sfw.checkIsInModification())
-		$menu:=Create menu:C408
-		$jobTypes:=New collection:C1472(New object:C1471("name"; "Job Lot Related"; "lineItem"; False:C215); New object:C1471("name"; "Not Related Job Order"; "lineItem"; True:C214))
-		For each ($eType; $jobTypes)
-			APPEND MENU ITEM:C411($menu; $eType.name; *)
-			SET MENU ITEM PARAMETER:C1004($menu; -1; $eType.name)
-			If ($eType.name=Form:C1466.current_item.jobType)
-				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
-				If (Is Windows:C1573)
-					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
-				End if 
-			End if 
-		End for each 
-		$choose:=Dynamic pop up menu:C1006($menu)
-		RELEASE MENU:C978($menu)
-		
-		Case of 
-			: ($choose#"")
-				Form:C1466.current_item.type:=$choose="Job Lot Related" ? False:C215 : True:C214
-		End case 
-		
-	End if 
-	This:C1470.drawPup_invoiceType()
-	//*/
-	
 Function btnOpenJob()
 	$entity:=Form:C1466.current_item.job
 	If ($entity#Null:C1517)
@@ -150,7 +115,6 @@ Function btnOpenCustomer()
 	If ($es.length>0)
 		Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "customer")
 	End if 
-	
 	
 Function btnDatePicker($object; $attribut)
 	
@@ -171,3 +135,91 @@ Function btnDatePicker($object; $attribut)
 			
 		End if 
 	End if 
+	
+	
+Function drawPup_status()
+	If (Form:C1466.current_item#Null:C1517)
+		$job:=Form:C1466.current_item
+		
+		$invoiceStatus:=Form:C1466.current_item.status
+		
+		$color:=""
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_status"; $invoiceStatus; $pathIcon; ($job=Null:C1517))
+	End if 
+	
+	
+Function pup_status()
+	//Create pop up menu
+	If (Form:C1466.sfw.checkIsInModification())
+		$menu:=Create menu:C408
+		$invoiceStatus:=New collection:C1472(New object:C1471("name"; "paid"))  //; New object("name"; "closed"))  
+		For each ($eType; $invoiceStatus)
+			APPEND MENU ITEM:C411($menu; $eType.name; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $eType.name)
+			If ($eType.name=Form:C1466.current_item.staus)
+				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+				If (Is Windows:C1573)
+					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+				End if 
+			End if 
+		End for each 
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		Case of 
+			: ($choose#"")
+				Form:C1466.current_item.status:=$choose
+				This:C1470._activate_save_cancel_button()
+		End case 
+		
+	End if 
+	This:C1470.drawPup_status()
+	
+	
+Function bActionLot()
+	
+	$refMenu:=Create menu:C408
+	APPEND MENU ITEM:C411($refMenu; "Open in new window"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "openInWindow")
+	
+	If (Form:C1466.selectedLot=Null:C1517) | (Undefined:C82(Form:C1466.selectedLot))
+		
+		DISABLE MENU ITEM:C150($refMenu; -1)
+		
+	End if 
+	
+	$choice:=Dynamic pop up menu:C1006($refMenu)
+	RELEASE MENU:C978($refMenu)
+	
+	Case of 
+			
+		: ($choice="openInWindow")
+			
+			Form:C1466.sfw.openInANewWindow(Form:C1466.current_item.job.lots.query("UUID=:1"; Form:C1466.selectedLot.UUID).first(); "customerService"; "lots")
+			
+	End case 
+	
+	
+Function loadLots()
+	
+	If (Form:C1466.current_item#Null:C1517)
+		
+		Form:C1466.lb_lots:=Form:C1466.current_item.job.lots
+		
+	End if 
+	
+Function loadPoLines()
+	
+	If (Form:C1466.current_item#Null:C1517)
+		
+		Form:C1466.lb_poLines:=ds:C1482.PurchaseOrderLine.query("UUID_Job = :1"; Form:C1466.current_item.job.UUID)  //Form.current_item.job.purchaseOrderLines
+		
+	End if 
+	
+Function loadAllTabs()
+	This:C1470.loadLots()
+	This:C1470.loadPoLines()
+	
+	
+	

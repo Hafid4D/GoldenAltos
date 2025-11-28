@@ -52,6 +52,12 @@ If (True:C214)
 		$job.currency:=$record.currency
 		$job.altDeviceNumber:=$record.altDeviceNumber
 		$job.customerShipper:=$record.customerShipper
+		$job.initials:=$record.initials
+		$job.miscCharges:=$record.miscCharges
+		$job.miscNote:=$record.miscNote
+		$job.glAcc:=$record.glAcc
+		$job.taxable:=$record.taxable
+		$job.salesTaxRate:=$record.salesTaxRate
 		
 		$res:=$job.save()
 		If (Not:C34($res.success))
@@ -68,9 +74,8 @@ If (True:C214)
 			$jobInvoice.UUID_Job:=16*"00"
 		End if 
 		$jobInvoice.invoiceNumber:=String:C10($counter+1; "00000#")
-		$jobInvoice.miscCharges:=$record.miscCharges
 		$jobInvoice.invoiceStmp:=Date:C102($record.invoiceDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.invoiceDate))
-		$jobInvoice.status:=$record.lineItem=True:C214 ? "NR Job" : "Job Lot Related"
+		$jobInvoice.status:=$record.lineItem=True:C214 ? "Not Related Job Order" : "Job Lot Related"
 		
 		$res:=$jobInvoice.save()
 		
@@ -87,6 +92,9 @@ If (True:C214)
 				
 				If ($poLine_e.purchaseOrder.oldPoNumber=$record.poNumber) & ($poline.description=$poLine_e.description)
 					$poLine_e.UUID_Job:=$job.UUID
+					$poLine_e.total:=$line.total
+					$poLine_e.saleTax:=$line.saleTax
+					$poLine_e.taxable:=$line.taxable
 					
 					$res:=$poLine_e.save()
 					
@@ -215,6 +223,30 @@ If (True:C214)
 		
 		
 	End for each 
+	
+	
+/**
+fix lotParent for some lots
+**/
+	
+	$lots_es:=ds:C1482.Lot.all().minus(ds:C1482.Lot.all().lotParent.subLots).query("lotNumber = :1"; "@-@")
+	
+	For each ($lot; $lots_es)
+		$parentLotNumber:=Split string:C1554($lot.lotNumber; "-")[0]
+		
+		$parent_es:=ds:C1482.Lot.query("lotNumber = :1"; $parentLotNumber)
+		
+		If ($parent_es.length>0)
+			$lot.UUID_LotParent:=$parent_es[0].UUID
+			
+			$res:=$lot.save()
+			
+			If (Not:C34($res.success))
+				TRACE:C157
+			End if 
+		End if 
+	End for each 
+	
 End if 
 
 

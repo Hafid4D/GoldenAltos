@@ -983,10 +983,10 @@
 		<field name="UUID" uuid="665BE88AE92589409E64B35A9DB0075E" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="invoiceStmp" uuid="4BE20AA10BD39143A2F76F6BB07916D3" type="4" never_null="true" id="2"/>
 		<field name="status" uuid="67E93BE4E9C01547BC28BDBBF03C54CD" type="10" limiting_length="255" never_null="true" id="3"/>
-		<field name="miscCharges" uuid="B4B7217B09505743A051A4048E70DCE7" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
-		<field name="type" uuid="877716DD45FAEB43BD6515DEE21E0545" type="10" limiting_length="255" never_null="true" id="7">
-			<field_extra multi_line="false"/>
-		</field>
+		<field name="poBasedCharges" uuid="381E040E56D8C643B7D3C00B31287C53" type="6" never_null="true" id="4"/>
+		<field name="travBasedCharges" uuid="BB13D6CE99107E46A5BF0A83BDE15376" type="6" never_null="true" id="5"/>
+		<field name="totalSalesTax" uuid="945A85013925C94EB6D2FA93B0CF2AAD" type="6" never_null="true" id="6"/>
+		<field name="total" uuid="6FD77761840FEA43B840FAF046041A69" type="6" never_null="true" id="7"/>
 		<field name="invoiceNumber" uuid="B62D8270332604438E6883BE1DB5007F" type="10" limiting_length="255" unique="true" never_null="true" id="8"/>
 		<field name="UUID_Job" uuid="23BC7DB129B8C44583BCD2B16ED41753" type="10" store_as_UUID="true" never_null="true" id="10"/>
 		<primary_key field_name="UUID" field_uuid="665BE88AE92589409E64B35A9DB0075E"/>
@@ -1148,6 +1148,9 @@
 		<field name="unreleased" uuid="4AEB8633C82AEE41A3E5BE8B4DA10A20" type="1" never_null="true" id="15"/>
 		<field name="closed" uuid="94B31E82F5006F448E3C690373DCD943" type="1" never_null="true" id="16"/>
 		<field name="seqNum" uuid="A73ADB1F7DFF5B4EA5D8B6CB5F5733B1" type="4" never_null="true" id="17"/>
+		<field name="taxable" uuid="ADE114514884474BB99D61037D6A0263" type="1" never_null="true" id="18"/>
+		<field name="saleTax" uuid="3AC96A766FA76A4DA767C37743C9F42D" type="6" never_null="true" id="19"/>
+		<field name="total" uuid="4EB996748881404BBB4AAAAB32741AB7" type="6" never_null="true" id="20"/>
 		<primary_key field_name="UUID" field_uuid="EB0656993E0B478582FC3B4868BE55FC"/>
 	</table>
 	<table name="Job" uuid="D3AC71CFD00F4948816121AA74EF8DFE" id="117">
@@ -1191,6 +1194,11 @@
 		<field name="altDeviceNumber" uuid="0728EAEDC621C342B0CFA1E7961A3F6D" type="10" limiting_length="255" never_null="true" id="34"/>
 		<field name="customerShipper" uuid="2D52050871F24947B2ED4FC976221C59" type="10" limiting_length="255" never_null="true" id="35"/>
 		<field name="initials" uuid="3E94628C6118B241AB78802ADC164ACB" type="10" limiting_length="255" never_null="true" id="36"/>
+		<field name="miscCharges" uuid="C2E4597C5C210E40AE12AF2DAE599ACD" type="6" never_null="true" id="37"/>
+		<field name="miscNote" uuid="3B42C8B890EA0746B74693833DE05109" type="10" limiting_length="255" never_null="true" id="38"/>
+		<field name="glAcc" uuid="8570D07AA00149499CCC8C438F68418B" type="10" limiting_length="255" never_null="true" id="39"/>
+		<field name="taxable" uuid="2C5A2D0B69D67540985F28871A182629" type="1" never_null="true" id="40"/>
+		<field name="salesTaxRate" uuid="E7E8F5774B480C44AC8505D6A83D7672" type="6" never_null="true" id="41"/>
 		<primary_key field_name="UUID" field_uuid="D70DED62813D485DA8CFB0CFD1FF994C"/>
 	</table>
 	<table name="Lot" uuid="67220A81398C4000A84C1F180E368020" id="118">
@@ -1239,6 +1247,8 @@
 		<field name="dateCode" uuid="316DF221DE628140AEBD8A716A946D96" type="10" limiting_length="255" never_null="true" id="41"/>
 		<field name="carrier" uuid="BEE08C23148B3B4897EFC137CA2DB898" type="10" limiting_length="255" never_null="true" id="42"/>
 		<field name="shipRel" uuid="F792354104D250419A635B5CEA955144" type="4" never_null="true" id="43"/>
+		<field name="totalCharge" uuid="006ACEB1C6FFE9449C5F03EF9E11441A" type="6" never_null="true" id="44"/>
+		<field name="unitCost" uuid="A6BF0EEA9B282E4F9F6CB5C0DB8B212E" type="6" never_null="true" id="45"/>
 		<primary_key field_name="UUID" field_uuid="AEF78036FB7D429A96DF35BE53A0E0AF"/>
 	</table>
 	<table name="StepFile" uuid="A6301A2C994D4680A851FC2AE85118BE" id="119">

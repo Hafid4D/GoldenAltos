@@ -694,9 +694,9 @@
 				"left": 2437.3334960938,
 				"top": 1052.6667480469,
 				"width": 157.69921875,
-				"height": 968.33190917969
+				"height": 1034.3319091797
 			},
-			"displayable_fields_count": 44
+			"displayable_fields_count": 47
 		},
 		"Job": {
 			"color": {
@@ -709,9 +709,9 @@
 				"left": 2168.3334960938,
 				"top": 1097,
 				"width": 171.73828125,
-				"height": 812.33203125
+				"height": 952.33203125
 			},
-			"displayable_fields_count": 36
+			"displayable_fields_count": 43
 		},
 		"PurchaseOrderLine": {
 			"color": {
@@ -724,10 +724,9 @@
 				"left": 1749.0001220703,
 				"top": 649.66662597656,
 				"width": 189.73828125,
-				"height": 398.33203125
+				"height": 479.33203125
 			},
-			"displayable_fields_count": 17,
-			"fields_ordering": 1
+			"displayable_fields_count": 20
 		},
 		"PurchaseOrder": {
 			"color": {
@@ -2341,6 +2340,22 @@
 			}
 		},
 		"F9B1A300D7A54EFC9326B35FBB01CED9": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"0DF1DB360B8B48BE84653E6CA2F326BE": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"8E8138A046DA4192B3E4E216B7597DB6": {
 			"color": {
 				"red": 255,
 				"green": 255,
