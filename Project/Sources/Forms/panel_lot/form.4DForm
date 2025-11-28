@@ -1020,7 +1020,7 @@
 					"top": 248,
 					"left": 344,
 					"width": 510,
-					"height": 262,
+					"height": 273,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
 					"stroke": "transparent",
@@ -1263,6 +1263,98 @@
 						"onLoad"
 					],
 					"focusable": true
+				},
+				"header_bkgd12": {
+					"type": "rectangle",
+					"top": 427,
+					"left": 5,
+					"width": 332,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 337
+				},
+				"lbl_dates5": {
+					"type": "text",
+					"top": 434,
+					"left": 12,
+					"width": 250,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "OQA Info",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"header_bkgd13": {
+					"type": "rectangle",
+					"top": 460,
+					"left": 5,
+					"width": 332,
+					"height": 61,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent",
+					"right": 337
+				},
+				"label_unitCost": {
+					"type": "text",
+					"top": 466,
+					"left": 13,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Unit Cost"
+				},
+				"entryField_unitCost": {
+					"type": "input",
+					"top": 466,
+					"left": 91,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.unitCost",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "integer",
+					"textAlign": "right",
+					"method": "ObjectMethods/entryField_unitCost.4dm"
+				},
+				"label_totalCharge": {
+					"type": "text",
+					"top": 493,
+					"left": 13,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Total Charge"
+				},
+				"entryField_totalCharge": {
+					"type": "input",
+					"top": 493,
+					"left": 91,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.totalCharge",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"sizingX": "grow",
+					"dataSourceTypeHint": "number",
+					"textAlign": "right"
 				}
 			}
 		},
@@ -1806,7 +1898,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1777,
+	"geometryStamp": 1795,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

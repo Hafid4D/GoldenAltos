@@ -181,6 +181,11 @@ If (True:C214)  // export jobs & lot (job <-- lots)
 			"altDeviceNumber"; [Receiver]AltDevice_Number; \
 			"customerShipper"; [Receiver]Customer_Shipper; \
 			"initials"; [Receiver]Initials; \
+			"miscCharges"; [Receiver]Misc_Charge; \
+			"miscNote"; [Receiver]Misc_Description; \
+			"glAcc"; [Receiver]GLAC; \
+			"taxable"; [Receiver]Taxable; \
+			"salesTaxRate"; [Receiver]SalesTax_Rate; \
 			"archived"; False:C215; \
 			"address"; New object:C1471("addresses"; New collection:C1472()); \
 			"poLines"; New collection:C1472(); \
@@ -204,7 +209,10 @@ If (True:C214)  // export jobs & lot (job <-- lots)
 				For ($i; 1; AInvPO_itemID)
 					$record.poLines.push(New object:C1471(\
 						"description"; AInvPO_itemDesc{$i}; \
-						"seqNum"; AInvPO_itemID{$i}\
+						"seqNum"; AInvPO_itemID{$i}; \
+						"taxable"; AInvPO_itemTaxable{$i}; \
+						"saleTax"; AInvPO_itemSalesTax{$i}; \
+						"total"; AInvPO_itemTotal{$i}\
 						))
 				End for 
 			End if 
@@ -308,6 +316,8 @@ If (True:C214)  // export jobs & lot (job <-- lots)
 				"dateCode"; [Lotinfo]Datecode; \
 				"shipRel"; [Lotinfo]ShipRel; \
 				"carrier"; [Lotinfo]Carrier; \
+				"totalCharge"; [Lotinfo]TotalCharge; \
+				"unitCost"; [Lotinfo]UnitCost; \
 				"steps"; $steps\
 				))
 			
@@ -782,7 +792,12 @@ If (True:C214)  // export archived jobs & lot (job <-- lots)
 			"altDeviceNumber"; [ARCHIVES]AltDevice_Number; \
 			"customerShipper"; [ARCHIVES]Customer_Shipper; \
 			"initials"; [ARCHIVES]Initials; \
-			"archived"; False:C215; \
+			"miscCharges"; [ARCHIVES]Misc_Charge; \
+			"miscNote"; [ARCHIVES]Misc_Description; \
+			"glAcc"; [ARCHIVES]GLAC; \
+			"taxable"; [ARCHIVES]Taxable; \
+			"salesTaxRate"; [ARCHIVES]SalesTax_Rate; \
+			"archived"; True:C214; \
 			"address"; New object:C1471(\
 			"billing"; New object:C1471("street"; ""; "additionalAddress"; ""; "city"; [ARCHIVES]Bill_addr_City; "state"; [ARCHIVES]Bill_addr_ST; "zipCode"; [ARCHIVES]Bill_addr_ZIP; "country"; [ARCHIVES]BillAddrCountry); \
 			"shipping"; New object:C1471("street"; [ARCHIVES]Ship_add1; "additionalAddress"; [ARCHIVES]Ship_add2; "city"; [ARCHIVES]Ship_addr_City; "state"; [ARCHIVES]Ship_addr_ST; "zipCode"; [ARCHIVES]Ship_addr_ZIP; "country"; [ARCHIVES]ShipAddrCountry)\
@@ -803,7 +818,10 @@ If (True:C214)  // export archived jobs & lot (job <-- lots)
 					
 					$record.poLines.push(New object:C1471(\
 						"description"; AInvPO_itemDesc{$i}; \
-						"seqNum"; AInvPO_itemID{$i}\
+						"seqNum"; AInvPO_itemID{$i}; \
+						"taxable"; AInvPO_itemTaxable{$i}; \
+						"saleTax"; AInvPO_itemSalesTax{$i}; \
+						"total"; AInvPO_itemTotal{$i}\
 						))
 				End for 
 			End if 
@@ -898,6 +916,8 @@ If (True:C214)  // export archived jobs & lot (job <-- lots)
 				"dateCode"; [Lotinfo]Datecode; \
 				"shipRel"; [Lotinfo]ShipRel; \
 				"carrier"; [Lotinfo]Carrier; \
+				"totalCharge"; [Lotinfo]TotalCharge; \
+				"unitCost"; [Lotinfo]UnitCost; \
 				"steps"; $steps\
 				))
 			

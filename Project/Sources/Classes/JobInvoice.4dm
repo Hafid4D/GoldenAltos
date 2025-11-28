@@ -15,8 +15,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setPanel("panel_jobInvoice")
 	$entry.setPanelPage(1; ""; "Main")
-	$entry.setPanelPage(2; ""; "Lot Qty Amt Based")
+	$entry.setPanelPage(2; ""; "Lot Qty Amt Based"; "disabled:Form.current_item.job.lineItem=True")
 	$entry.setPanelPage(3; ""; "PO Items Based")
+	$entry.setPanelPage(4; ""; "Order Item"; "disabled:Form.current_item.job.lineItem=False")
+	//$entry.setPanelPage(5; ""; "PO Items")
 	
 	$entry.setLBItemsColumn("invoiceNumber"; "Invoice#"; "width:100")
 	$entry.setLBItemsColumn("job.jobNumber"; "Job#"; "width:100")
