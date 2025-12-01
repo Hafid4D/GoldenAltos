@@ -10,8 +10,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setPanel("panel_job"; 1)
 	$entry.setPanelPage(1; "po-infos-32x32.png"; "Main")
-	$entry.setPanelPage(2; "po-lines-32x32.png"; "Line Items")
-	$entry.setPanelPage(3; "lots-32x32.png"; "Lots"; "disabled:Form.current_item.lineItem=True")
+	$entry.setPanelPage(2; "po-addresses-32x32.png"; "Addresses")
+	$entry.setPanelPage(3; "po-lines-32x32.png"; "Line Items")
+	$entry.setPanelPage(4; "lots-32x32.png"; "Lots"; "disabled:Form.current_item.lineItem=True")
 	
 	
 	$entry.setLBItemsColumn("jobNumber"; "Job #"; "width:100")

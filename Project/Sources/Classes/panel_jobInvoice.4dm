@@ -19,11 +19,18 @@ Function formMethod()
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
-				This:C1470.loadPoLines()
+				
+				//This.loadPoLines()
 			: (FORM Get current page:C276(*)=2)
 				This:C1470.loadLots()
-				This:C1470.loadPoLines()
+				//This.loadPoLines()
+				
+				
 			: (FORM Get current page:C276(*)=3)
+				This:C1470.loadPoLines()
+				
+			: (FORM Get current page:C276(*)=4)
+				
 				
 		End case 
 	End if 
@@ -43,7 +50,7 @@ Function redrawAndSetVisible()
 		Form:C1466.sfw.entry.panel.pages[2].label:="PO Items Based ("+String:C10(Form:C1466.lb_poLines.length)+")"
 	End use 
 	
-	OBJECT SET ENTERABLE:C238(*; "pup_invoiceType"; False:C215)
+	OBJECT SET ENTERABLE:C238(*; "entryField_type"; False:C215)
 	OBJECT SET ENTERABLE:C238(*; "entryField_job@"; False:C215)
 	OBJECT SET VISIBLE:C603(*; "btnDatePickerInvoiceDate"; Form:C1466.sfw.checkIsInModification())
 	Form:C1466.sfw.drawHTab()
@@ -205,7 +212,7 @@ Function loadLots()
 	
 	If (Form:C1466.current_item#Null:C1517)
 		
-		Form:C1466.lb_lots:=Form:C1466.current_item.job.lots
+		Form:C1466.lb_lots:=ds:C1482.Lot.query("UUID_Job =:1"; Form:C1466.current_item.job.UUID)
 		
 	End if 
 	
@@ -213,7 +220,7 @@ Function loadPoLines()
 	
 	If (Form:C1466.current_item#Null:C1517)
 		
-		Form:C1466.lb_poLines:=ds:C1482.PurchaseOrderLine.query("UUID_Job = :1"; Form:C1466.current_item.job.UUID)  //Form.current_item.job.purchaseOrderLines
+		Form:C1466.lb_poLines:=ds:C1482.PurchaseOrderLine.query("UUID_Job =:1"; Form:C1466.current_item.job.UUID)  //Form.current_item.job.purchaseOrderLines
 		
 	End if 
 	
@@ -222,4 +229,42 @@ Function loadAllTabs()
 	This:C1470.loadPoLines()
 	
 	
+Function bActionAttachPoLine()
+	//Manages actions: add, or remove, using dynamic menus and modification checks
+	If (Form:C1466.sfw.checkIsInModification())
+		$refMenu:=Create menu:C408
+		APPEND MENU ITEM:C411($refMenu; "Attach a PO Line")
+		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--create")
+		APPEND MENU ITEM:C411($refMenu; "-")
+		APPEND MENU ITEM:C411($refMenu; "(Delete")
+		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")
+		
+		$choose:=Dynamic pop up menu:C1006($refMenu)
+		
+		Case of 
+			: ($choose="--create")
+				$form:=New object:C1471("job"; Form:C1466.current_item.job)
+				
+				$winRef:=Open form window:C675("createPoLine_jobInvoice"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
+				DIALOG:C40("createPoLine_jobInvoice"; $form)
+				CLOSE WINDOW:C154($winRef)
+				
+				If (OK=1)
+					This:C1470.loadPoLines()
+				End if 
+				
+			: ($choose="--delete")
+				
+		End case 
+	Else 
+		$refMenu:=Create menu:C408
+		APPEND MENU ITEM:C411($refMenu; "(Attach a PO Line")
+		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--create")
+		APPEND MENU ITEM:C411($refMenu; "-")
+		APPEND MENU ITEM:C411($refMenu; "(Delete")
+		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")
+		
+		$choose:=Dynamic pop up menu:C1006($refMenu)
+		
+	End if 
 	

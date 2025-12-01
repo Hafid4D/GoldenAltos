@@ -201,12 +201,15 @@ If (True:C214)  // export jobs & lot (job <-- lots)
 			"type"; "shipping"; \
 			"detail"; New object:C1471("street_1"; [Receiver]Ship_add1; "street_2"; [Receiver]Ship_add2; "city"; [Receiver]Ship_addr_City; "state"; [Receiver]Ship_addr_ST; "postcode"; [Receiver]Ship_addr_ZIP; "country"; "US"; "iso_code_2"; "US")\
 			))
+		If ([Receiver]ErpJobNumber=11067)
+			TRACE:C157
+		End if 
 		
 		If (BLOB size:C605([Receiver]POLineItems)>0)
 			GET_VAR_FROM_BLOB(->[Receiver]POLineItems; ->AInvItemNum; ->AInvPO_ItemPartNum; ->AInvPO_itemOrderDate; ->AInvPO_itemDesc; ->AInvPO_itemQty; ->AInvPO_UnitPrice; ->AInvPO_itemTaxable; ->AInvPO_itemTotal; ->AInvPO_itemID; ->AInvPO_itemSalesTax)
 			
 			If (Size of array:C274(AInvPO_itemID)>0)
-				For ($i; 1; AInvPO_itemID)
+				For ($i; 1; Size of array:C274(AInvPO_itemID))
 					$record.poLines.push(New object:C1471(\
 						"description"; AInvPO_itemDesc{$i}; \
 						"seqNum"; AInvPO_itemID{$i}; \
