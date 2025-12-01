@@ -18,10 +18,12 @@ Function formMethod()
 			: (FORM Get current page:C276(*)=1)
 				This:C1470.initAddresses()
 				
-			: (FORM Get current page:C276(*)=2)  //PO -> line items
-				This:C1470.loadPoLineItems()
+			: (FORM Get current page:C276(*)=2)
 				
 			: (FORM Get current page:C276(*)=3)  //PO -> line items
+				This:C1470.loadPoLineItems()
+				
+			: (FORM Get current page:C276(*)=4)  //PO -> line items
 				This:C1470.loadLots()
 		End case 
 	End if 
@@ -56,8 +58,8 @@ Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	Use (Form:C1466.sfw.entry.panel.pages)
-		Form:C1466.sfw.entry.panel.pages[1].label:="PO Lines ("+String:C10(Form:C1466.lb_lineItems.length)+")"
-		Form:C1466.sfw.entry.panel.pages[2].label:="Lots ("+String:C10(Form:C1466.lb_lots.length)+")"
+		Form:C1466.sfw.entry.panel.pages[2].label:="PO Lines ("+String:C10(Form:C1466.lb_lineItems.length)+")"
+		Form:C1466.sfw.entry.panel.pages[3].label:="Lots ("+String:C10(Form:C1466.lb_lots.length)+")"
 	End use 
 	
 	OBJECT SET ENABLED:C1123(*; "pup_jobType"; Form:C1466.situation.mode="add")
@@ -65,7 +67,35 @@ Function redrawAndSetVisible()
 	
 	
 	Case of 
-		: (FORM Get current page:C276(*)=2)  // po lines
+			
+		: (FORM Get current page:C276(*)=1)
+			
+			OBJECT GET COORDINATES:C663(*; "header_bkgd9"; $left; $top; $right; $bottom)
+			OBJECT GET COORDINATES:C663(*; "header_bkgd5"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			OBJECT GET COORDINATES:C663(*; "header_bkgd6"; $left_bAc; $top_bAc; $right_bAc; $bottom_bAc)
+			OBJECT GET COORDINATES:C663(*; "entryField_jobComment"; $left_l; $top_l; $right_l; $bottom_l)
+			OBJECT GET COORDINATES:C663(*; "header_bkgd10"; $left_c; $top_c; $right_c; $bottom_c)
+			
+			$offset:=2
+			
+			OBJECT SET COORDINATES:C1248(*; "header_bkgd9"; $left; $top; $widthSubform-$offset; $bottom)
+			OBJECT SET COORDINATES:C1248(*; "header_bkgd5"; $left_lb; $top_lb; $widthSubform-$offset; $bottom_lb)
+			OBJECT SET COORDINATES:C1248(*; "header_bkgd6"; $left_bAc; $top_bAc; $widthSubform-$offset; $bottom_bAc)
+			OBJECT SET COORDINATES:C1248(*; "entryField_jobComment"; $left_l; $top_l; $widthSubform-30; $heightSubform-10)
+			OBJECT SET COORDINATES:C1248(*; "header_bkgd10"; $left_c; $top_c; $widthSubform-$offset; $heightSubform-$offset)
+			
+		: (FORM Get current page:C276(*)=2)
+			
+			OBJECT GET COORDINATES:C663(*; "subFormAddress"; $left_l; $top_l; $right_l; $bottom_l)
+			OBJECT GET COORDINATES:C663(*; "header_bkgd3"; $left_c; $top_c; $right_c; $bottom_c)
+			
+			$offset:=2
+			
+			OBJECT SET COORDINATES:C1248(*; "subFormAddress"; $left_l; $top_l; $widthSubform-30; $heightSubform-10)
+			OBJECT SET COORDINATES:C1248(*; "header_bkgd3"; $left_c; $top_c; $widthSubform-$offset; $heightSubform-$offset)
+			
+			
+		: (FORM Get current page:C276(*)=3)  // po lines
 			OBJECT GET COORDINATES:C663(*; "rec_bkgd_2"; $left; $top; $right; $bottom)
 			OBJECT GET COORDINATES:C663(*; "lb_poLinesItems"; $left_lb; $top_lb; $right_lb; $bottom_lb)
 			OBJECT GET COORDINATES:C663(*; "bActionLineItems"; $left_bAc; $top_bAc; $right_bAc; $bottom_bAc)
@@ -79,7 +109,7 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "lb_poLinesItems"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
 			OBJECT SET COORDINATES:C1248(*; "bActionLineItems"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
 			
-		: (FORM Get current page:C276(*)=3)  // lots
+		: (FORM Get current page:C276(*)=4)  // lots
 			OBJECT GET COORDINATES:C663(*; "rec_bkgd_3"; $left; $top; $right; $bottom)
 			OBJECT GET COORDINATES:C663(*; "lb_poLinesItems"; $left_lb; $top_lb; $right_lb; $bottom_lb)
 			OBJECT GET COORDINATES:C663(*; "bActionLineItems"; $left_bAc; $top_bAc; $right_bAc; $bottom_bAc)
@@ -100,13 +130,13 @@ Function redrawAndSetVisible()
 		
 		$hasAuthorizedProfile:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($authorizedProfile.indexOf($1.value)#-1)))#Null:C1517
 		
-		OBJECT SET ENABLED:C1123(*; "entryField_shipMemo"; $hasAuthorizedProfile)
+		OBJECT SET ENTERABLE:C238(*; "entryField_shipMemo"; $hasAuthorizedProfile)
 		
 		$authorizedProfile:=New collection:C1472("sr")  // only Shipping and Receiving Team allowed to modify 
 		
 		$hasAuthorizedProfile:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($authorizedProfile.indexOf($1.value)#-1)))#Null:C1517
 		
-		OBJECT SET ENABLED:C1123(*; "entryField_jobComment"; $hasAuthorizedProfile)
+		OBJECT SET ENTERABLE:C238(*; "entryField_jobComment"; $hasAuthorizedProfile)
 		
 	End if 
 	

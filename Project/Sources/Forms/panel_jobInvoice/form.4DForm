@@ -113,27 +113,6 @@
 					"text": "Type",
 					"textAlign": "right"
 				},
-				"pup_invoiceType": {
-					"type": "button",
-					"top": 59,
-					"left": 92,
-					"width": 140,
-					"height": 23,
-					"fontFamily": "System Font",
-					"fontSize": 13,
-					"focusable": false,
-					"text": "",
-					"icon": "",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/pup_invoiceType.4dm",
-					"events": [
-						"onClick"
-					],
-					"bottom": 82,
-					"visibility": "visible"
-				},
 				"pup_job": {
 					"type": "button",
 					"top": 34,
@@ -419,6 +398,25 @@
 					"iconFrames": 1,
 					"focusable": false,
 					"dataSource": ""
+				},
+				"entryField_type": {
+					"type": "input",
+					"top": 62,
+					"left": 92,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.type",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
 				}
 			}
 		},
@@ -554,7 +552,7 @@
 					"textAlign": "right",
 					"right": 395
 				},
-				"entryField_totalPoBasedCharges": {
+				"entryField_jobTotalPoBasedCharges": {
 					"type": "input",
 					"top": 157,
 					"left": 405,
@@ -612,7 +610,7 @@
 					"text": "Trav. Based Charges",
 					"textAlign": "right"
 				},
-				"entryField_totalTravBasedCharges": {
+				"entryField_jobTotalTravBasedCharges": {
 					"type": "input",
 					"top": 182,
 					"left": 405,
@@ -1250,7 +1248,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 304,
+	"geometryStamp": 311,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

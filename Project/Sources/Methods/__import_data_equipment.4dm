@@ -2,7 +2,7 @@
 var $eEquipment : cs:C1710.EquipmentEntity
 var $eRepair : cs:C1710.RepairLogEntity
 
-$equipment_Log:=Folder:C1567(fk data folder:K87:12).file("DataJson/equipments_export.json")
+$equipment_Log:=Folder:C1567(fk data folder:K87:12).file("DataJson/equipment_export.json")
 
 If ($equipment_Log.exists)
 	$equipments:=JSON Parse:C1218($equipment_Log.getText())

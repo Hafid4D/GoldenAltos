@@ -231,6 +231,7 @@ If (True:C214)
 		$job.glAcc:=$record.glAcc
 		$job.taxable:=$record.taxable
 		$job.salesTaxRate:=$record.salesTaxRate
+		$job.freight:=$record.freight
 		
 		$res:=$job.save()
 		
@@ -250,7 +251,7 @@ If (True:C214)
 		End if 
 		$jobInvoice.invoiceNumber:=String:C10($counter; "00000#")
 		$jobInvoice.invoiceStmp:=Date:C102($record.invoiceDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.invoiceDate))
-		$jobInvoice.status:=$record.lineItem=True:C214 ? "Not Related Job Order" : "Job Lot Related"
+		//$jobInvoice.status:="Paid" or "Closed"
 		
 		$res:=$jobInvoice.save()
 		
@@ -260,6 +261,7 @@ If (True:C214)
 		
 		
 		For each ($poline; $record.poLines)
+			
 			$poLine_es:=ds:C1482.PurchaseOrderLine.query("seqNum = :1"; $poLine.seqNum)
 			
 			If ($poLine_es.length>0)
@@ -267,9 +269,9 @@ If (True:C214)
 				
 				If ($poLine_e.purchaseOrder.oldPoNumber=$record.poNumber) & ($poline.description=$poLine_e.description)
 					$poLine_e.UUID_Job:=$job.UUID
-					$poLine_e.total:=$line.total
-					$poLine_e.saleTax:=$line.saleTax
-					$poLine_e.taxable:=$line.taxable
+					$poLine_e.total:=$poline.total
+					$poLine_e.saleTax:=$poline.saleTax
+					$poLine_e.taxable:=$poline.taxable
 					
 					$res:=$poLine_e.save()
 					
@@ -281,6 +283,27 @@ If (True:C214)
 				
 			End if 
 		End for each 
+		
+		//$poLines:=ds.PurchaseOrderLine.query("shipJobNumber = :1"; $job.jobNumber)
+		
+		//For each ($poline; $poLines)
+		
+		//If ($poline.purchaseOrder.oldPoNumber=$record.poNumber)  //& ($poline.description=$poLine_e.description)
+		//$poline.UUID_Job:=$job.UUID
+		//$poline.total:=$line.total
+		//$poline.saleTax:=$line.saleTax
+		//$poline.taxable:=$line.taxable
+		
+		//$res:=$poLine_e.save()
+		
+		//If (Not($res.success))
+		//TRACE
+		//End if 
+		
+		//End if 
+		
+		//End for each 
+		
 		
 		
 		For each ($lot; $record.lots.orderBy("parentLotNumber asc"))

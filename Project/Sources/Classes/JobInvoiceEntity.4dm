@@ -69,13 +69,16 @@ local Function pup($cacheCollection; $dataClass; $queryField; $queryValue; $disp
 local Function get nameInWindowTitle()->$nameInWindowTitle : Text
 	$nameInWindowTitle:=String:C10(This:C1470.invoiceNumber)
 	
-local Function get poBasedCharges()->$poBasedCharges : Real
-	//If (Not(Undefined(Form.lb_poLines)))
-	//$poBasedCharges:=Form.lb_poLines.sum("total")-Form.lb_poLines.sum("saleTax")
-	//End if 
+Function get type()->$type : Text
+	$type:=This:C1470.job.lineItem=True:C214 ? "Not Related Job Order" : "Job Lot Related"
 	
-local Function get travBasedCharges()->$poBasedCharges : Real
+	//local Function get poBasedCharges()->$poBasedCharges : Real
+	////If (Not(Undefined(Form.lb_poLines)))
+	////$poBasedCharges:=Form.lb_poLines.sum("total")-Form.lb_poLines.sum("saleTax")
+	////End if 
 	
-local Function get totalSalesTax()->$totalSalesTax : Real
+	//local Function get travBasedCharges()->$poBasedCharges : Real
 	
-local Function get total()->$total : Real
+	//local Function get totalSalesTax()->$totalSalesTax : Real
+	
+	//local Function get total()->$total : Real
