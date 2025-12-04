@@ -709,9 +709,9 @@
 				"left": 2168.3334960938,
 				"top": 1097,
 				"width": 171.73828125,
-				"height": 952.33203125
+				"height": 979.33203125
 			},
-			"displayable_fields_count": 43
+			"displayable_fields_count": 44
 		},
 		"PurchaseOrderLine": {
 			"color": {
@@ -938,12 +938,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1934,
-				"top": 1515,
+				"left": 1951,
+				"top": 1462,
 				"width": 169,
-				"height": 291.33203125
+				"height": 255.33203125
 			},
-			"displayable_fields_count": 11
+			"displayable_fields_count": 10
 		},
 		"AuditEvent": {
 			"color": {
@@ -1079,6 +1079,21 @@
 				"height": 83.33203125
 			},
 			"displayable_fields_count": 2
+		},
+		"JobLineItem": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 1950,
+				"top": 1736,
+				"width": 169,
+				"height": 312.33203125
+			},
+			"displayable_fields_count": 12
 		},
 		"Supplier": {
 			"color": {

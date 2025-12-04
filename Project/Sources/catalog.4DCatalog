@@ -868,6 +868,29 @@
 		<field name="moreData" uuid="E4523C5432BFD949ACA300E41D10CCC6" type="21" blob_switch_size="2147483647" never_null="true" id="19"/>
 		<primary_key field_name="UUID" field_uuid="CFBA7599E861DC4A91A0C1B26781C297"/>
 	</table>
+	<table name="JobLineItem" uuid="C34CD032C4F6EB4C8F51682914D18AB0" id="58">
+		<field name="UUID" uuid="BF7D80F3E4F99D4BA932F724A65AA951" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="itemNumber" uuid="828EEFC926D73F45A615876803BB4BCE" type="10" limiting_length="255" never_null="true" id="2">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="description" uuid="72123A149F801E44AFC4867D3C90BC7D" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="quantity" uuid="3670FB8674AEBA448CB363DDB5E48DD9" type="4" never_null="true" id="4">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="unitPrice" uuid="992FA4920B7C1840BAE095CFDCA960FC" type="6" never_null="true" id="5">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="taxable" uuid="BE66B042EFFE3646B63079DE652DF6E3" type="1" never_null="true" id="6">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="lineTotal" uuid="1C23BE67AC38EE4DAE1FD295364BCAE0" type="6" never_null="true" id="7">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="timeCharge" uuid="41F7BF044987C84BA61C1293EDC77617" type="6" never_null="true" id="8"/>
+		<field name="salesTax" uuid="7A2C91A58D47A741B7D4D5C73A91117C" type="6" never_null="true" id="9"/>
+		<field name="hourCount" uuid="BA1BE81D7FC8CA4E9E7E33D7BC2A8C3A" type="6" never_null="true" id="10"/>
+		<primary_key field_name="UUID" field_uuid="BF7D80F3E4F99D4BA932F724A65AA951"/>
+	</table>
 	<table name="Classification" uuid="F31AF6CBA06D9D40BC44E9A83AA47D7E" id="59">
 		<field name="UUID" uuid="A643D54CE62FF14A8A5DF7520FE96178" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="name" uuid="B6E77424E1E4454ABDB882A43365E003" type="10" limiting_length="255" never_null="true" id="2"/>
@@ -983,10 +1006,6 @@
 		<field name="UUID" uuid="665BE88AE92589409E64B35A9DB0075E" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="invoiceStmp" uuid="4BE20AA10BD39143A2F76F6BB07916D3" type="4" never_null="true" id="2"/>
 		<field name="status" uuid="67E93BE4E9C01547BC28BDBBF03C54CD" type="10" limiting_length="255" never_null="true" id="3"/>
-		<field name="poBasedCharges" uuid="381E040E56D8C643B7D3C00B31287C53" type="6" never_null="true" id="4"/>
-		<field name="travBasedCharges" uuid="BB13D6CE99107E46A5BF0A83BDE15376" type="6" never_null="true" id="5"/>
-		<field name="totalSalesTax" uuid="945A85013925C94EB6D2FA93B0CF2AAD" type="6" never_null="true" id="6"/>
-		<field name="total" uuid="6FD77761840FEA43B840FAF046041A69" type="6" never_null="true" id="7"/>
 		<field name="invoiceNumber" uuid="B62D8270332604438E6883BE1DB5007F" type="10" limiting_length="255" unique="true" never_null="true" id="8"/>
 		<field name="UUID_Job" uuid="23BC7DB129B8C44583BCD2B16ED41753" type="10" store_as_UUID="true" never_null="true" id="10"/>
 		<primary_key field_name="UUID" field_uuid="665BE88AE92589409E64B35A9DB0075E"/>
@@ -3758,6 +3777,11 @@
 	<index kind="regular" unique_keys="true" uuid="A5AE436EE8050948AB9B961F0A7E1491" type="7">
 		<field_ref uuid="5692BDD57E88304092FB8E31BA284F2D" name="UUID">
 			<table_ref uuid="061A7E4F30DD8C46A92C801EB9B9ACC5" name="CertificationAssignment"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="A616783536536A4986187DFA05CB96F5" type="7">
+		<field_ref uuid="BF7D80F3E4F99D4BA932F724A65AA951" name="UUID">
+			<table_ref uuid="C34CD032C4F6EB4C8F51682914D18AB0" name="JobLineItem"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="A63EFE0573EBCB469014B82020453C34" type="3">

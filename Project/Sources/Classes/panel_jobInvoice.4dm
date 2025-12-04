@@ -10,11 +10,11 @@ Function formMethod()
 	If (Form:C1466.sfw.updateOfPanelNeeded())
 		
 		This:C1470.loadAllTabs()
-		Form:C1466.current_item.poBasedCharges:=Form:C1466.lb_poLines.sum("total")-Form:C1466.lb_poLines.sum("saleTax")
+		//Form.current_item.poBasedCharges:=Form.lb_poLines.sum("total")-Form.lb_poLines.sum("saleTax")
 		
 	End if 
-	This:C1470.drawPup_job()
-	This:C1470.drawPup_status()
+	//This.drawPup_job()
+	//This.drawPup_status()
 	
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
@@ -43,7 +43,7 @@ Function redrawAndSetVisible()
 	
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	This:C1470.drawPup_job()
-	This:C1470.drawPup_status()
+	//This.drawPup_status()
 	
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="Lot Qty Amt Based ("+String:C10(Form:C1466.lb_lots.length)+")"
@@ -58,42 +58,55 @@ Function redrawAndSetVisible()
 	
 	//mark:Job
 Function drawPup_job()
-	var $jobName : Text
+	///*
 	If (Form:C1466.current_item#Null:C1517)
-		$jobName:=String:C10(Form:C1466.current_item.job.jobNumber) || "Select job"
-		Form:C1466.sfw.drawButtonPup("pup_job"; $jobName; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.job=Null:C1517))
+		Form:C1466.current_item.drowPup("Job"; "UUID"; "UUID_Job"; "pup_job"; "jobNumber")
 	End if 
+	//*/
+/*
+var $jobName : Text
+If (Form.current_item#Null)
+$jobName:=String(Form.current_item.job.jobNumber) || "Select job"
+Form.sfw.drawButtonPup("pup_job"; $jobName; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form.current_item.job=Null))
+End if 
+*/
 	
 Function selectJob()
+	///*
+	Form:C1466.current_item.pup("jobs"; "Job"; "UUID"; "UUID_Job"; "jobNumber")
+	This:C1470.drawPup_job()
+	//*/
+/*
 	
-	If (Form:C1466.sfw.checkIsInModification())
-		
-		$selector:=cs:C1710.sfw_definitionSelector.new("selectorJob"; "jobs")
-		$selector.setTitle("Choose a Job")
-		$selector.setCurrentItem(Form:C1466.current_item.job)
-		$selector.setOptions("noCutLink")
-		$selector.openSelector()
-		
-		Case of 
-			: ($selector.isSelected())
-				$itemSeleted:=$selector.getCurrentItem()
-				
-				Case of 
-					: ($itemSeleted=Null:C1517)
-					: (cs:C1710.sfw_string.me.isAnEmptyUUID($itemSeleted.UUID)=False:C215)
-						Form:C1466.current_item.UUID_Job:=$itemSeleted.UUID
-						If (cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_Job)=True:C214)
-							Form:C1466.current_item.UUID_Job:=16*"00"
-						End if 
-				End case 
-				This:C1470.drawPup_job()
-				
-			: ($selector.needCreation())
-				$selector.createANewEntity("cs.panel_jobInvoice.me.callbackAfterCreatioJob($1)")
-				This:C1470._clearInfoAfterChangingJob()
-				
-		End case 
-	End if 
+If (Form.sfw.checkIsInModification())
+	
+$selector:=cs.sfw_definitionSelector.new("selectorJob"; "jobs")
+$selector.setTitle("Choose a Job")
+$selector.setCurrentItem(Form.current_item.job)
+$selector.setOptions("noCutLink")
+$selector.openSelector()
+	
+Case of 
+: ($selector.isSelected())
+$itemSeleted:=$selector.getCurrentItem()
+	
+Case of 
+: ($itemSeleted=Null)
+: (cs.sfw_string.me.isAnEmptyUUID($itemSeleted.UUID)=False)
+Form.current_item.UUID_Job:=$itemSeleted.UUID
+If (cs.sfw_string.me.isAnEmptyUUID(Form.current_item.UUID_Job)=True)
+Form.current_item.UUID_Job:=16*"00"
+End if 
+End case 
+This.drawPup_job()
+	
+: ($selector.needCreation())
+//$selector.createANewEntity("cs.panel_jobInvoice.me.callbackAfterCreatioJob($1)")
+//This._clearInfoAfterChangingJob()
+	
+End case 
+End if 
+*/
 	
 Function callbackAfterCreatioJob($key : Text)
 	Form:C1466.current_item.UUID_Job:=$key
@@ -143,7 +156,7 @@ Function btnDatePicker($object; $attribut)
 		End if 
 	End if 
 	
-	
+	///*
 Function drawPup_status()
 	If (Form:C1466.current_item#Null:C1517)
 		$job:=Form:C1466.current_item
@@ -183,6 +196,7 @@ Function pup_status()
 	End if 
 	This:C1470.drawPup_status()
 	
+	//*/
 	
 Function bActionLot()
 	

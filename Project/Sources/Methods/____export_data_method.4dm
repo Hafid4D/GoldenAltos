@@ -186,6 +186,7 @@ If (True:C214)  // export jobs & lot (job <-- lots)
 			"glAcc"; [Receiver]GLAC; \
 			"taxable"; [Receiver]Taxable; \
 			"salesTaxRate"; [Receiver]SalesTax_Rate; \
+			"freight"; [Receiver]JobFreight; \
 			"archived"; False:C215; \
 			"address"; New object:C1471("addresses"; New collection:C1472()); \
 			"poLines"; New collection:C1472(); \
@@ -800,6 +801,7 @@ If (True:C214)  // export archived jobs & lot (job <-- lots)
 			"glAcc"; [ARCHIVES]GLAC; \
 			"taxable"; [ARCHIVES]Taxable; \
 			"salesTaxRate"; [ARCHIVES]SalesTax_Rate; \
+			"freight"; [ARCHIVES]Freight; \
 			"archived"; True:C214; \
 			"address"; New object:C1471(\
 			"billing"; New object:C1471("street"; ""; "additionalAddress"; ""; "city"; [ARCHIVES]Bill_addr_City; "state"; [ARCHIVES]Bill_addr_ST; "zipCode"; [ARCHIVES]Bill_addr_ZIP; "country"; [ARCHIVES]BillAddrCountry); \
@@ -1213,5 +1215,21 @@ If (True:C214)  // export Supplier Documents
 	
 	
 End if 
+
+If (True:C214)  // export receiverSubLot
+	
+	ALL RECORDS:C47([Receiver_LotsSubT])
+	$jsonString:=Selection to JSON:C1234([Receiver_LotsSubT])
+	
+	vhDoc:=Create document:C266($myFolder.platformPath+"receiverSubLot_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	
+	//SHOW ON DISK("specification_export.json")
+	
+End if 
+
 
 ALERT:C41("END!")
