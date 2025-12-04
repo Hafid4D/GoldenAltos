@@ -77,6 +77,8 @@ Function notRelatedJobs()->$jobs : cs:C1710.JobSelection
 	
 	
 	
+	// MARK: -
+	
 local Function cacheLoad()
 	
 	If (Storage:C1525.cache=Null:C1517)
@@ -93,7 +95,7 @@ local Function cacheLoad()
 	
 	
 Function _loadAsCollection()->$jobs : Collection
-	$jobs:=This:C1470.all().toCollection("UUID,jobNumber").orderBy("jobNumber")
+	$jobs:=This:C1470.query("shipped =:1 & postToPO =:2"; True:C214; False:C215).toCollection("UUID,jobNumber").orderBy("jobNumber")
 	
 	
 	

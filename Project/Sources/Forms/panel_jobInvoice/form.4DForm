@@ -1139,7 +1139,7 @@
 					"columns": [
 						{
 							"header": {
-								"text": "Lot#",
+								"text": "#",
 								"name": "Header17",
 								"fontWeight": "bold"
 							},
@@ -1149,7 +1149,7 @@
 							},
 							"dataSource": "This:C1470.reportID",
 							"resizable": false,
-							"width": 80
+							"width": 50
 						},
 						{
 							"header": {
@@ -1161,9 +1161,9 @@
 							"footer": {
 								"name": "Footer18"
 							},
-							"dataSource": "This:C1470.problem",
+							"dataSource": "This:C1470.description",
 							"dataSourceTypeHint": "text",
-							"width": 360,
+							"width": 402,
 							"truncateMode": "withEllipsis",
 							"wordwrap": "none",
 							"resizable": true
@@ -1178,11 +1178,12 @@
 							"footer": {
 								"name": "Footer19"
 							},
-							"dataSource": "This:C1470.fix",
+							"dataSource": "This:C1470.quantity",
 							"width": 80,
 							"truncateMode": "withEllipsis",
 							"wordwrap": "none",
-							"resizable": false
+							"resizable": false,
+							"dataSourceTypeHint": "number"
 						},
 						{
 							"header": {
@@ -1194,10 +1195,10 @@
 							"footer": {
 								"name": "Footer20"
 							},
-							"dataSource": "This:C1470.reportDate",
-							"dataSourceTypeHint": "date",
+							"dataSource": "This:C1470.unitPrice",
+							"dataSourceTypeHint": "number",
 							"resizable": false,
-							"width": 100
+							"width": 80
 						},
 						{
 							"header": {
@@ -1209,8 +1210,9 @@
 							"footer": {
 								"name": "Footer21"
 							},
-							"width": 80,
-							"resizable": false
+							"width": 60,
+							"resizable": false,
+							"dataSource": "This:C1470.taxable"
 						},
 						{
 							"header": {
@@ -1223,7 +1225,9 @@
 								"name": "Footer22"
 							},
 							"resizable": false,
-							"width": 80
+							"width": 111,
+							"dataSource": "This:C1470.lineTotal",
+							"dataSourceTypeHint": "number"
 						}
 					]
 				},

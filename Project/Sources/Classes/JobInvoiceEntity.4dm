@@ -10,7 +10,7 @@ local Function set invoiceDate($invoiceDate : Date)
 local Function drowPup($dataClass; $queryField; $queryValue; $pupName; $displayField)
 	
 	$entity:=ds:C1482[$dataClass].query($queryField+" =:1"; Form:C1466.current_item[$queryValue]).first() || New object:C1471()
-	$name:=$entity[$displayField]  //.name
+	$name:=String:C10($entity[$displayField])  //.name
 	If ($name=Null:C1517)
 		$name:=""
 	End if 
@@ -72,13 +72,13 @@ local Function get nameInWindowTitle()->$nameInWindowTitle : Text
 Function get type()->$type : Text
 	$type:=This:C1470.job.lineItem=True:C214 ? "Not Related Job Order" : "Job Lot Related"
 	
-	//local Function get poBasedCharges()->$poBasedCharges : Real
-	////If (Not(Undefined(Form.lb_poLines)))
-	////$poBasedCharges:=Form.lb_poLines.sum("total")-Form.lb_poLines.sum("saleTax")
-	////End if 
+local Function get poBasedCharges()->$poBasedCharges : Real
+	//If (Not(Undefined(Form.lb_poLines)))
+	//$poBasedCharges:=Form.lb_poLines.sum("total")-Form.lb_poLines.sum("saleTax")
+	//End if 
 	
-	//local Function get travBasedCharges()->$poBasedCharges : Real
+local Function get travBasedCharges()->$poBasedCharges : Real
 	
-	//local Function get totalSalesTax()->$totalSalesTax : Real
+local Function get totalSalesTax()->$totalSalesTax : Real
 	
-	//local Function get total()->$total : Real
+local Function get total()->$total : Real

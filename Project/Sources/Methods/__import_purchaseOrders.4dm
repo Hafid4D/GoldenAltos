@@ -240,25 +240,27 @@ If (True:C214)
 		End if 
 		
 		//JobInvoice
-		
-		$jobInvoice:=ds:C1482.JobInvoice.new()
-		
-		$job_s:=ds:C1482.Job.query(" jobNumber =:1"; $record.jobNumber)
-		If ($job_s.length>0)
-			$jobInvoice.UUID_Job:=$job_s[0].UUID
-		Else 
-			$jobInvoice.UUID_Job:=16*"00"
+		If ($job.shipped) & Not:C34($job.postToPO)
+			
+			$jobInvoice:=ds:C1482.JobInvoice.new()
+			
+			$job_s:=ds:C1482.Job.query(" jobNumber =:1"; $record.jobNumber)
+			If ($job_s.length>0)
+				$jobInvoice.UUID_Job:=$job_s[0].UUID
+			Else 
+				$jobInvoice.UUID_Job:=16*"00"
+			End if 
+			$jobInvoice.invoiceNumber:=String:C10($counter; "00000#")
+			$jobInvoice.invoiceStmp:=Date:C102($record.invoiceDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.invoiceDate))
+			//$jobInvoice.status:="Paid" or "Closed"
+			
+			$res:=$jobInvoice.save()
+			
+			If (Not:C34($res.success))
+				TRACE:C157
+			End if 
+			
 		End if 
-		$jobInvoice.invoiceNumber:=String:C10($counter; "00000#")
-		$jobInvoice.invoiceStmp:=Date:C102($record.invoiceDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.invoiceDate))
-		//$jobInvoice.status:="Paid" or "Closed"
-		
-		$res:=$jobInvoice.save()
-		
-		If (Not:C34($res.success))
-			TRACE:C157
-		End if 
-		
 		
 		For each ($poline; $record.poLines)
 			
@@ -283,26 +285,6 @@ If (True:C214)
 				
 			End if 
 		End for each 
-		
-		//$poLines:=ds.PurchaseOrderLine.query("shipJobNumber = :1"; $job.jobNumber)
-		
-		//For each ($poline; $poLines)
-		
-		//If ($poline.purchaseOrder.oldPoNumber=$record.poNumber)  //& ($poline.description=$poLine_e.description)
-		//$poline.UUID_Job:=$job.UUID
-		//$poline.total:=$line.total
-		//$poline.saleTax:=$line.saleTax
-		//$poline.taxable:=$line.taxable
-		
-		//$res:=$poLine_e.save()
-		
-		//If (Not($res.success))
-		//TRACE
-		//End if 
-		
-		//End if 
-		
-		//End for each 
 		
 		
 		
