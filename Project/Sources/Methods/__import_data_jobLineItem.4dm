@@ -21,8 +21,8 @@ If ($jobLineItem_log.exists)
 		$ejobLineItem.unitPrice:=$jobLineItem.Charge
 		$ejobLineItem.taxable:=$jobLineItem.SpecialCharges
 		$ejobLineItem.lineTotal:=$jobLineItem.Line_item_total
-		//$ejobLineItem.timeCharge:=$jobLineItem.InternalPatnum
-		//$ejobLineItem.salesTax:=$jobLineItem.InternalPatnum
+		//$ejobLineItem.timeCharge:=$jobLineItem.timeCharge
+		//$ejobLineItem.salesTax:=$jobLineItem.salesTax
 		$ejobLineItem.hourCount:=$jobLineItem.TBhours
 		
 		$res:=$ejobLineItem.save()
