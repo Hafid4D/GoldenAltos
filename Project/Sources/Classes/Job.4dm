@@ -53,9 +53,6 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.enableTransaction()
 	
-local Function dueCalibrationEquipments()->$equipments : cs:C1710.EquipmentSelection  //List of equip to be calibrated within X days
-	cs:C1710.Util.me.setDateInterval(False:C215)
-	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & notAtSite=:2"; Storage:C1525.cache.endDate; False:C215)
 	
 Function archivedJobs()->$jobs : cs:C1710.JobSelection
 	cs:C1710.Util.me.setDateInterval(False:C215)
@@ -67,7 +64,7 @@ Function shippedJobs()->$jobs : cs:C1710.JobSelection
 	
 Function invoicedJobs()->$jobs : cs:C1710.JobSelection
 	cs:C1710.Util.me.setDateInterval(False:C215)
-	$jobs:=ds:C1482.Job.query("postToPO =:1 & invoiceDate >=:2 & invoiceDate <=:3 & archived =:4"; True:C214; Storage:C1525.cache.startDate; Storage:C1525.cache.endDate; False:C215)
+	$jobs:=ds:C1482.Job.query("shipped =:1 & invoiceDate >=:2 & invoiceDate <=:3 & archived =:4"; True:C214; Storage:C1525.cache.startDate; Storage:C1525.cache.endDate; False:C215)
 	
 Function lotRelatedJobs()->$jobs : cs:C1710.JobSelection
 	$jobs:=ds:C1482.Job.query("lineItem =:1 & archived =:2"; False:C215; False:C215)
