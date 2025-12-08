@@ -30,7 +30,7 @@ Function formMethod()
 				This:C1470.loadPoLines()
 				
 			: (FORM Get current page:C276(*)=4)
-				
+				This:C1470.loadJobLineItems()
 				
 		End case 
 	End if 
@@ -48,10 +48,12 @@ Function redrawAndSetVisible()
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="Lot Qty Amt Based ("+String:C10(Form:C1466.lb_lots.length)+")"
 		Form:C1466.sfw.entry.panel.pages[2].label:="PO Items Based ("+String:C10(Form:C1466.lb_poLines.length)+")"
+		Form:C1466.sfw.entry.panel.pages[3].label:="Order Items ("+String:C10(Form:C1466.lb_jobLineItems.length)+")"
 	End use 
 	
 	OBJECT SET ENTERABLE:C238(*; "entryField_type"; False:C215)
 	OBJECT SET ENTERABLE:C238(*; "entryField_job@"; False:C215)
+	OBJECT SET ENABLED:C1123(*; "pup_job"; (Form:C1466.situation.mode="add"))
 	OBJECT SET VISIBLE:C603(*; "btnDatePickerInvoiceDate"; Form:C1466.sfw.checkIsInModification())
 	Form:C1466.sfw.drawHTab()
 	
@@ -222,6 +224,11 @@ Function bActionLot()
 	End case 
 	
 	
+Function bActionJobLineItem()
+	
+	
+	
+	
 Function loadLots()
 	
 	If (Form:C1466.current_item#Null:C1517)
@@ -238,12 +245,21 @@ Function loadPoLines()
 		
 	End if 
 	
+Function loadJobLineItems()
+	
+	If (Form:C1466.current_item#Null:C1517)
+		
+		Form:C1466.lb_jobLineItems:=ds:C1482.JobLineItem.query("UUID_Job =:1"; Form:C1466.current_item.job.UUID)
+		
+	End if 
+	
 Function loadAllTabs()
 	This:C1470.loadLots()
 	This:C1470.loadPoLines()
+	This:C1470.loadJobLineItems()
 	
 	
-Function bActionAttachPoLine()
+Function bActionPoLine()
 	//Manages actions: add, or remove, using dynamic menus and modification checks
 	If (Form:C1466.sfw.checkIsInModification())
 		$refMenu:=Create menu:C408

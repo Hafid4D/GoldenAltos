@@ -169,13 +169,14 @@ If (True:C214)
 End if 
 
 /**
-import jobs & lot (job <-- lots) & Archives
+import jobs & lot (job <-- lots) 
 **/
 If (True:C214)
 	TRUNCATE TABLE:C1051([Job:117])
 	TRUNCATE TABLE:C1051([Lot:118])
 	TRUNCATE TABLE:C1051([LotStep:5])
 	TRUNCATE TABLE:C1051([JobInvoice:66])
+	TRUNCATE TABLE:C1051([JobLineItem:58])
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/job_log_export.json")
 	
@@ -244,12 +245,12 @@ If (True:C214)
 			
 			$jobInvoice:=ds:C1482.JobInvoice.new()
 			
-			$job_s:=ds:C1482.Job.query(" jobNumber =:1"; $record.jobNumber)
-			If ($job_s.length>0)
-				$jobInvoice.UUID_Job:=$job_s[0].UUID
-			Else 
-				$jobInvoice.UUID_Job:=16*"00"
-			End if 
+			//$job_s:=ds.Job.query(" jobNumber =:1"; $record.jobNumber)
+			//If ($job_s.length>0)
+			$jobInvoice.UUID_Job:=$job.UUID  //$job_s[0].UUID
+			//Else 
+			//$jobInvoice.UUID_Job:=16*"00"
+			//End if 
 			$jobInvoice.invoiceNumber:=String:C10($counter; "00000#")
 			$jobInvoice.invoiceStmp:=Date:C102($record.invoiceDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.invoiceDate))
 			//$jobInvoice.status:="Paid" or "Closed"
@@ -261,6 +262,30 @@ If (True:C214)
 			End if 
 			
 		End if 
+		
+		var $ejobLineItem : cs:C1710.JobLineItemEntity
+		
+		For each ($jobLineItem; $record.jobLineItems)
+			
+			$ejobLineItem:=ds:C1482.JobLineItem.new()
+			$ejobLineItem.UUID_Job:=$job.UUID
+			$ejobLineItem.itemNumber:=$jobLineItem.itemNumber
+			$ejobLineItem.description:=$jobLineItem.description
+			$ejobLineItem.quantity:=$jobLineItem.quantity
+			$ejobLineItem.unitPrice:=$jobLineItem.unitPrice
+			$ejobLineItem.taxable:=$jobLineItem.taxable
+			$ejobLineItem.lineTotal:=$jobLineItem.lineTotal
+			$ejobLineItem.hourCount:=$jobLineItem.hourCount
+			//$ejobLineItem.timeCharge:=$jobLineItem.timeCharge
+			$ejobLineItem.salesTax:=$jobLineItem.salesTax
+			
+			$res:=$ejobLineItem.save()
+			If (Not:C34($res.success))
+				TRACE:C157
+			End if 
+			
+		End for each 
+		
 		
 		For each ($poline; $record.poLines)
 			

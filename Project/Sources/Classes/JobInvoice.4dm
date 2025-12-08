@@ -10,16 +10,17 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setDisplayOrder(-800)
 	$entry.setIcon("image/entry/invoice-white-50x50.png")
 	
-	$entry.setSearchField("attribute:invoiceNumber"; "tag:InvoiceNumber")
-	$entry.setSearchField("path:job.customer"; "tag:Customer"; "popupPart:Job"; "placeholder:customerName")
-	$entry.setSearchField("path:job.jobNumber"; "tag:Job"; "placeholder:jobNumer")
-	$entry.setSearchField("path:job.poNumber"; "tag:PO"; "placeholder:poNumber"; "onlyWithTag")
+	$entry.setSearchField("attribute:invoiceNumber"; "tag:InvoiceNumber"; "popupDescription:the invoice number")
+	$entry.setSearchField("path:job.customer"; "tag:Customer"; "popupPart:Job"; "placeholder:customerName"; "popupDescription:the customer name")
+	$entry.setSearchField("path:job.jobNumber"; "tag:Job"; "placeholder:jobNumer"; "popupDescription:the job number")
+	$entry.setSearchField("path:job.poNumber"; "tag:PO"; "placeholder:poNumber"; "popupDescription:the Purchase Order number"; "onlyWithTag"; "pupopPart:invoice")
+	$entry.setSearchField("path:job.invoiceDate"; "tag:invoiceDate"; "placeholder:invoiceDate"; "date"; "onlyWithTag")
 	
 	$entry.setPanel("panel_jobInvoice")
 	$entry.setPanelPage(1; ""; "Main")
 	$entry.setPanelPage(2; ""; "Lot Qty Amt Based"; "disabled:Form.current_item.job.lineItem=True")
 	$entry.setPanelPage(3; ""; "PO Items Based")
-	$entry.setPanelPage(4; ""; "Order Item"; "disabled:Form.current_item.job.lineItem=False")
+	$entry.setPanelPage(4; ""; "Order Items"; "disabled:Form.current_item.job.lineItem=False")
 	
 	$entry.setLBItemsColumn("invoiceNumber"; "Invoice#"; "width:100")
 	$entry.setLBItemsColumn("job.jobNumber"; "Job#"; "width:100")
@@ -37,19 +38,6 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	// MARK: -Filters
 	
-	//$filter:=cs.sfw_definitionFilter.new("filterCustomerInvoices")
-	//$filter.setDefaultTitle("All Customers")
-	//$filter.setFilterByLinkedEntity("Customer"; "UUID_Job"; ""; "")
-	//$filter.setDynamicTitle("name"; "## AML  supplier")
-	//$entry.addFilter($filter)
-	
-	//$filter:=cs.sfw_definitionFilter.new("filterJob")
-	//$filter.setDefaultTitle("All Jobs")
-	//$filter.setFilterByLinkedEntity("Job"; "UUID_Job"; ""; "jobNumber")
-	//$filter.setDynamicTitle("internalPartNum"; "## AML  ParNumber")
-	//$filter.setOrderForItems("internalPartNum")
-	//$filter.setAttributeLabelForItem("internalPartNum")
-	//$entry.addFilter($filter)
 	
 	
 	// MARK: -Views
