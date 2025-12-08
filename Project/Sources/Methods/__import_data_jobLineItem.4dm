@@ -21,9 +21,9 @@ If ($jobLineItem_log.exists)
 		$ejobLineItem.unitPrice:=$jobLineItem.Charge
 		$ejobLineItem.taxable:=$jobLineItem.SpecialCharges
 		$ejobLineItem.lineTotal:=$jobLineItem.Line_item_total
+		$ejobLineItem.hourCount:=$jobLineItem.TBhours
 		//$ejobLineItem.timeCharge:=$jobLineItem.timeCharge
 		//$ejobLineItem.salesTax:=$jobLineItem.salesTax
-		$ejobLineItem.hourCount:=$jobLineItem.TBhours
 		
 		$res:=$ejobLineItem.save()
 		If (Not:C34($res.success))

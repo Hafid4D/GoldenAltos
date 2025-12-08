@@ -1106,7 +1106,7 @@
 		},
 		{
 			"objects": {
-				"lb_lots2": {
+				"lb_jobLineItems": {
 					"type": "listbox",
 					"left": 132,
 					"top": 114,
@@ -1120,10 +1120,10 @@
 						"onBeginDragOver"
 					],
 					"listboxType": "collection",
-					"currentItemPositionSource": "Form:C1466.selectedLotPos",
-					"currentItemSource": "Form:C1466.selectedLot",
-					"dataSource": "Form:C1466.lb_lots",
-					"method": "ObjectMethods/lb_lots2.4dm",
+					"currentItemPositionSource": "Form:C1466.selectedJobLineItemPos",
+					"currentItemSource": "Form:C1466.selectedJobLineItem",
+					"dataSource": "Form:C1466.lb_jobLineItems",
+					"method": "ObjectMethods/lb_jobLineItems.4dm",
 					"selectionMode": "single",
 					"resizingMode": "rightToLeft",
 					"alternateFill": "#E6E6E6",
@@ -1252,7 +1252,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 311,
+	"geometryStamp": 312,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

@@ -1,3 +1,3 @@
-cs:C1710.panel_equipment.me.bActionRepairLog()
+cs:C1710.panel_jobInvoice.me.bActionJobLineItem()
 
 

@@ -1,1 +1,1 @@
-cs:C1710.panel_jobInvoice.me.bActionAttachPoLine()
+cs:C1710.panel_jobInvoice.me.bActionPoLine()
