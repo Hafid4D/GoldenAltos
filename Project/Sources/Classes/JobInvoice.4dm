@@ -30,6 +30,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsOrderBy("invoiceNumber")
 	$entry.setMainViewLabel("All Invoices")
 	
+	$entry.setItemAction("Print Invoice"; "_ga_printInvoice")
+	
 	$entry.enableTransaction()
 	
 	$entry.activateFavorite()
@@ -51,17 +53,17 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setLBItemsOrderBy("invoiceNumber")
 	$entry.setView($view)
 	
-	$view:=cs:C1710.sfw_definitionView.new("allReadyToInvoice"; "All ready to invoice")  //; "derivedFrom:main"; $entry)
-	$view.setSubset("allReadyToInvoice")
-	$view.setPictoLabel("/RESOURCES/ga/image/picto/archived-16x16.png")
-	$view.setLBItemsColumn("invoiceNumber"; "Invoice#"; "width:100")
-	$view.setLBItemsColumn("job.jobNumber"; "Job#"; "width:100")
-	$view.setLBItemsColumn("job.customer"; "customer"; "width:100")
-	$view.setLBItemsColumn("invoiceDate"; "Invoice Date"; "width:100")
-	$view.setLBItemsOrderBy("invoiceNumber")
-	$entry.setView($view)
+	//$view:=cs.sfw_definitionView.new("allReadyToInvoice"; "All Invoice")  //; "derivedFrom:main"; $entry)
+	//$view.setSubset("allReadyToInvoice")
+	//$view.setPictoLabel("/RESOURCES/ga/image/picto/archived-16x16.png")
+	//$view.setLBItemsColumn("invoiceNumber"; "Invoice#"; "width:100")
+	//$view.setLBItemsColumn("job.jobNumber"; "Job#"; "width:100")
+	//$view.setLBItemsColumn("job.customer"; "customer"; "width:100")
+	//$view.setLBItemsColumn("invoiceDate"; "Invoice Date"; "width:100")
+	//$view.setLBItemsOrderBy("invoiceNumber")
+	//$entry.setView($view)
 	
-	$view:=cs:C1710.sfw_definitionView.new("lineItemJobInvoices"; "Ready to invoice - Line-Item Jobs")  //; "derivedFrom:main"; $entry)
+	$view:=cs:C1710.sfw_definitionView.new("lineItemJobInvoices"; "Invoices - Line-Item Jobs")  //; "derivedFrom:main"; $entry)
 	$view.setSubset("lineItemJobInvoices")
 	$view.setPictoLabel("/RESOURCES/ga/image/picto/archived-16x16.png")
 	$view.setLBItemsColumn("invoiceNumber"; "Invoice#"; "width:100")
@@ -71,7 +73,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setLBItemsOrderBy("invoiceNumber")
 	$entry.setView($view)
 	
-	$view:=cs:C1710.sfw_definitionView.new("travelerBasedJobInvoices"; "Ready to invoice - Traveler-based Jobs")  //; "derivedFrom:main"; $entry)
+	$view:=cs:C1710.sfw_definitionView.new("travelerBasedJobInvoices"; "Invoices - Traveler-based Jobs")  //; "derivedFrom:main"; $entry)
 	$view.setSubset("travelerBasedJobInvoices")
 	$view.setPictoLabel("/RESOURCES/ga/image/picto/archived-16x16.png")
 	$view.setLBItemsColumn("invoiceNumber"; "Invoice#"; "width:100")
@@ -87,9 +89,9 @@ Function postedInvoices()->$invoices : cs:C1710.JobInvoiceSelection
 	//cs.Util.me.setDateInterval(False)
 	$invoices:=ds:C1482.JobInvoice.query("job.postToPO =:1 & job.archived =:2"; True:C214; False:C215)
 	
-Function allReadyToInvoice()->$invoices : cs:C1710.JobInvoiceSelection
-	//cs.Util.me.setDateInterval(False)
-	$invoices:=ds:C1482.JobInvoice.query("job.postToPO =:1 & job.archived =:2 & job.shipped =:3"; False:C215; False:C215; True:C214)
+	//Function allReadyToInvoice()->$invoices : cs.JobInvoiceSelection
+	////cs.Util.me.setDateInterval(False)
+	//$invoices:=ds.JobInvoice.query("job.postToPO =:1 & job.archived =:2 & job.shipped =:3"; False; False; True)
 	
 Function lineItemJobInvoices()->$invoices : cs:C1710.JobInvoiceSelection
 	//cs.Util.me.setDateInterval(False)

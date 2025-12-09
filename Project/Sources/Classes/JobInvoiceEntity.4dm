@@ -72,13 +72,44 @@ local Function get nameInWindowTitle()->$nameInWindowTitle : Text
 Function get type()->$type : Text
 	$type:=This:C1470.job.lineItem=True:C214 ? "Not Related Job Order" : "Job Lot Related"
 	
-local Function get poBasedCharges()->$poBasedCharges : Real
+	//local Function get poBasedCharges()->$poBasedCharges : Real
 	//If (Not(Undefined(Form.lb_poLines)))
 	//$poBasedCharges:=Form.lb_poLines.sum("total")-Form.lb_poLines.sum("saleTax")
 	//End if 
 	
-local Function get travBasedCharges()->$poBasedCharges : Real
+	//local Function get travBasedCharges()->$poBasedCharges : Real
 	
-local Function get totalSalesTax()->$totalSalesTax : Real
+	//local Function get totalSalesTax()->$totalSalesTax : Real
 	
-local Function get total()->$total : Real
+	//local Function get total()->$total : Real
+	
+	
+local Function afterCreation()
+	This:C1470._initDataOnCreation()
+	
+local Function loadAfterCreation()
+	// This callback is called after creating the new item but before displaying the panel.
+	This:C1470._initDataOnCreation()
+	
+local Function itemLoad()
+	// This callback is called when the item is selected in the itemList
+	This:C1470._initDataOnCreation()
+	
+	
+local Function isDeletable()->$isDeletable : Boolean
+	// This callback must return false to inactivate the deletion mode for the current item.
+	$isDeletable:=True:C214
+	
+	
+	//mark:-Sub functions
+	
+local Function _initDataOnCreation()
+	If (Form:C1466.current_item#Null:C1517) & (This:C1470.invoiceNumber="")
+		$counter:=ds:C1482.JobInvoice.all().extract("invoiceNumber").map(Formula:C1597(Num:C11($1.value))).max()
+		This:C1470.invoiceNumber:=String:C10($counter+1; "00000#")
+		
+	End if 
+	
+	
+	
+	

@@ -9,22 +9,23 @@ Function formMethod()
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())
 		
-		This:C1470.loadAllTabs()
-		//Form.current_item.poBasedCharges:=Form.lb_poLines.sum("total")-Form.lb_poLines.sum("saleTax")
+		If (Form:C1466.situation.mode#"add")
+			This:C1470.loadAllTabs()
+		End if 
+		
+		This:C1470.salesTaxUpdate()
+		This:C1470.chargesCalculation()
+		
 		
 	End if 
-	//This.drawPup_job()
-	//This.drawPup_status()
 	
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
 				
-				//This.loadPoLines()
+				
 			: (FORM Get current page:C276(*)=2)
 				This:C1470.loadLots()
-				//This.loadPoLines()
-				
 				
 			: (FORM Get current page:C276(*)=3)
 				This:C1470.loadPoLines()
@@ -43,7 +44,7 @@ Function redrawAndSetVisible()
 	
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	This:C1470.drawPup_job()
-	//This.drawPup_status()
+	This:C1470.drawPup_status()
 	
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="Lot Qty Amt Based ("+String:C10(Form:C1466.lb_lots.length)+")"
@@ -51,10 +52,19 @@ Function redrawAndSetVisible()
 		Form:C1466.sfw.entry.panel.pages[3].label:="Order Items ("+String:C10(Form:C1466.lb_jobLineItems.length)+")"
 	End use 
 	
-	OBJECT SET ENTERABLE:C238(*; "entryField_type"; False:C215)
-	OBJECT SET ENTERABLE:C238(*; "entryField_job@"; False:C215)
+	
 	OBJECT SET ENABLED:C1123(*; "pup_job"; (Form:C1466.situation.mode="add"))
 	OBJECT SET VISIBLE:C603(*; "btnDatePickerInvoiceDate"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "entryField_jobTotalTravBasedCharges"; Form:C1466.current_item.job.lineItem=False:C215)
+	OBJECT SET VISIBLE:C603(*; "label_travBasedCharges"; Form:C1466.current_item.job.lineItem=False:C215)
+	OBJECT SET VISIBLE:C603(*; "entryField_orderItemsCharges"; Form:C1466.current_item.job.lineItem=True:C214)
+	OBJECT SET VISIBLE:C603(*; "label_orderItemsCharge"; Form:C1466.current_item.job.lineItem=True:C214)
+	OBJECT SET VISIBLE:C603(*; "entryField_jobTotalPoBasedCharges"; Form:C1466.current_item.job.lineItem=False:C215)
+	OBJECT SET VISIBLE:C603(*; "label_poBasedCharges"; Form:C1466.current_item.job.lineItem=False:C215)
+	
+	OBJECT SET ENTERABLE:C238(*; "entryField_type"; False:C215)
+	OBJECT SET ENTERABLE:C238(*; "entryField_job@"; False:C215)
+	
 	Form:C1466.sfw.drawHTab()
 	
 	
@@ -117,8 +127,10 @@ Function callbackAfterCreatioJob($key : Text)
 	End if 
 	EXECUTE METHOD IN SUBFORM:C1085("detail_panel"; Formula:C1597(cs:C1710.panel_lead.me.drawPup_job()); *)
 	
+	
 Function _clearInfoAfterChangingJob()
 	Form:C1466.current_item.UUID_Job:=Null:C1517
+	
 	
 Function btnOpenJob()
 	$entity:=Form:C1466.current_item.job
@@ -126,17 +138,20 @@ Function btnOpenJob()
 		Form:C1466.sfw.openInANewWindow($entity; "customerService"; "jobs")
 	End if 
 	
+	
 Function btnOpenPurchaseOrder()
 	$es:=ds:C1482.PurchaseOrder.query("poNumber =:1"; Form:C1466.current_item.job.poNumber)
 	If ($es.length>0)
 		Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "purchaseOrders")
 	End if 
 	
+	
 Function btnOpenCustomer()
 	$es:=ds:C1482.Customer.query("name =:1"; Form:C1466.current_item.job.customer)
 	If ($es.length>0)
 		Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "customer")
 	End if 
+	
 	
 Function btnDatePicker($object; $attribut)
 	
@@ -227,8 +242,6 @@ Function bActionLot()
 Function bActionJobLineItem()
 	
 	
-	
-	
 Function loadLots()
 	
 	If (Form:C1466.current_item#Null:C1517)
@@ -236,6 +249,7 @@ Function loadLots()
 		Form:C1466.lb_lots:=ds:C1482.Lot.query("UUID_Job =:1"; Form:C1466.current_item.job.UUID)
 		
 	End if 
+	
 	
 Function loadPoLines()
 	
@@ -245,6 +259,7 @@ Function loadPoLines()
 		
 	End if 
 	
+	
 Function loadJobLineItems()
 	
 	If (Form:C1466.current_item#Null:C1517)
@@ -252,6 +267,7 @@ Function loadJobLineItems()
 		Form:C1466.lb_jobLineItems:=ds:C1482.JobLineItem.query("UUID_Job =:1"; Form:C1466.current_item.job.UUID)
 		
 	End if 
+	
 	
 Function loadAllTabs()
 	This:C1470.loadLots()
@@ -297,4 +313,148 @@ Function bActionPoLine()
 		$choose:=Dynamic pop up menu:C1006($refMenu)
 		
 	End if 
+	
+	
+Function salesTaxUpdate()
+	If (Form:C1466.current_item.job.taxable=True:C214)
+		Form:C1466.current_item.job.salesTax:=Form:C1466.current_item.job.miscCharges*(Form:C1466.current_item.job.salesTaxRate/100)
+	Else 
+		Form:C1466.current_item.job.salesTax:=0
+	End if 
+	Form:C1466.current_item.job.salesTax:=Form:C1466.current_item.job.salesTax+Form:C1466.lb_poLines.sum("saleTax")
+	
+	
+Function chargesCalculation()  //--> Subr_Total
+	
+	//--> Po-Line-Item Charges
+	Form:C1466.current_item.poBasedCharges:=Form:C1466.lb_poLines.sum("total")-Form:C1466.lb_poLines.sum("saleTax")
+	
+	//-->Unit Cost cases
+	
+	
+	//--> Total charges
+	Form:C1466.current_item.total:=Form:C1466.current_item.total+Form:C1466.current_item.travBasedCharges+Form:C1466.current_item.poBasedCharges
+	$total1:=Form:C1466.current_item.total
+	
+	//MixedDevices:=DoesJobHaveMixedDevices
+	// | 
+	//-->$MixedDevices:=False
+	//SubrRelateRecvrSubLots
+	//ORDER BY([Receiver_LotsSubT]; [Receiver_LotsSubT]Device; >)
+	//FIRST RECORD([Receiver_LotsSubT])
+	//$Device:=[Receiver_LotsSubT]Device
+	
+	//Case of 
+	//: (Records in selection([Receiver_LotsSubT])>1)
+	//For ($i; 1; Records in selection([Receiver_LotsSubT]))
+	
+	//NEXT RECORD([Receiver_LotsSubT])
+	//If ($Device#[Receiver_LotsSubT]Device)
+	//$MixedDevices:=True
+	//End if 
+	//End for 
+	//End case 
+	//SubrRelateRecvrSubLots
+	//$0:=$MixedDevices
+	
+	Case of 
+			
+		: (Form:C1466.current_item.job.boxStockShipment=True:C214)
+			Form:C1466.current_item.total:=Form:C1466.lb_lots.sum("totalCharge")
+			
+			
+			//: () 
+			//Case Job.invFormat --> Calculate UnitCost
+			
+			//Form.current_item.total:=Form.lb_lots.sum("totalCharge")
+			
+			//Case of 
+			
+			//: ($total1=Form.current_item.total) & ($total1#0)
+			
+			
+			//End case 
+			
+			
+		Else 
+			
+	End case 
+	
+	
+	Form:C1466.current_item.total:=Form:C1466.current_item.total+Form:C1466.current_item.job.miscCharges
+	
+	//Case of 
+	//: (Records in selection([Unit_Cost])=1)
+	//If ([Receiver]Total_Charge<[Unit_Cost]MinJobCharge) & ([Receiver]MinimumJobCharge=True)
+	//[Receiver]Total_Charge:=[Unit_Cost]MinJobCharge
+	//End if 
+	//End case 
+	
+	
+	//Has it all
+	Form:C1466.current_item.total:=Form:C1466.current_item.total+Form:C1466.current_item.job.salesTax+Form:C1466.current_item.job.freight
+	
+	
+	
+Function IsPOShort()
+	
+	//Check and alert
+	$POs:=ds:C1482.PurchaseOrder.query("poNumber =:1"; Form:C1466.current_item.job.poNumber)
+	
+	Case of 
+			
+		: ($POs.length=1)
+			$po:=$POs[0]
+			If ($po.amountBilled>$po.poAmount)
+				
+				If (Form:C1466.current_item.job.postToPO=True:C214)
+					$poAmtBilled:=$po.amountBilled
+				Else 
+					$poAmtBilled:=Form:C1466.current_item.total+$po[0].amountBilled
+				End if 
+				
+				If ($poAmtBilled>($po.poAmount+0.01)) & (Read only state:C362([Job:117]))
+					
+					Case of 
+							
+						: (Form:C1466.current_item.total<=0.01)
+							
+							$error:="WARNING: "
+						: (($poAmtBilled-Form:C1466.current_item.job.salesTax)<$po.poAmount+1)
+							
+							$error:="WARNING: "
+						Else 
+							
+							$error:="Error: "
+					End case 
+					
+					//If ($error="WARNING@")
+					//cs.sfw_dialog.me.info(ds.sfw_readXliff($error; "PO has run over by "+String($po.poAmount-$poAmtBilled; "|money")))
+					//Else 
+					cs:C1710.sfw_dialog.me.info(ds:C1482.sfw_readXliff($error; "PO has run over by "+String:C10($po.poAmount-$poAmtBilled; "|money")))
+					//End if 
+					
+				End if 
+				
+			End if 
+			
+			
+			
+			
+	End case 
+	
+	
+	If ($po#Null:C1517)
+		If ($po.amountBilled>$po.poAmount)
+			
+			$error:=This:C1470.IsPOShort()
+			
+		End if 
+	End if 
+	
+	
+	
+	
+	
+	
 	
