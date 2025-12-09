@@ -14,6 +14,7 @@ Function get quoteCode()->$code : Text
 Function get jobType()->$jobType : Text
 	$jobType:=Form:C1466.current_item.lineItem=False:C215 ? "Job Order" : "NR Job Order"
 	
+Function get
 	
 local Function drowPup($dataClass; $queryField; $queryValue; $pupName)
 	

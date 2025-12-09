@@ -95,16 +95,26 @@ Function rebuidActivities()->$activites : Collection
 	End if 
 	
 	
+local Function get nameInWindowTitle()->$nameInWindowTitle : Text
+	$nameInWindowTitle:=String:C10(This:C1470.auditNumber)
 	
 	
 	//mark:-Callbacks
+	
+local Function isDeletable()->$isDeletable : Boolean
+	// This callback must return false to inactivate the deletion mode for the current item.
+	$isDeletable:=True:C214
+	
+local Function itemLoad()
+	// This callback is called when the item is selected in the itemList
+	This:C1470._initDocument()
 	
 Function beforeSaveCreation()
 	This:C1470._initDocument()
 	
 local Function afterCreation()
 	
-	
+	This:C1470._initDocument()
 	
 local Function _initDocument()
 	

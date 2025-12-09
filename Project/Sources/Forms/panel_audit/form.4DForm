@@ -1297,7 +1297,6 @@
 					"width": 300,
 					"height": 23,
 					"events": [
-						"onLoad",
 						"onClick"
 					],
 					"method": "ObjectMethods/pup_docType.4dm",

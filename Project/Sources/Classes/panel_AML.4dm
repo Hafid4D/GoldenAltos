@@ -78,6 +78,7 @@ Function redrawAndSetVisible()
 		OBJECT SET ENABLED:C1123(*; "entryField_isApproved"; $hasAuthorizedProfile)
 		OBJECT SET ENABLED:C1123(*; "entryField_approver"; $hasAuthorizedProfile)
 		OBJECT SET ENABLED:C1123(*; "entryField_approvalDate"; $hasAuthorizedProfile)
+		OBJECT SET VISIBLE:C603(*; "PopupDate1"; $hasAuthorizedProfile)
 		
 	End if 
 	Form:C1466.sfw.drawHTab()
@@ -258,7 +259,7 @@ Function btnOpenSupplier()
 	$es:=ds:C1482.Supplier.query("UUID =:1"; Form:C1466.current_item.UUID_Supplier)
 	
 	If ($es.length>0)
-		Form:C1466.sfw.openInANewWindow($es[0]; "qualityAssurance"; "AVL")
+		Form:C1466.sfw.openInANewWindow($es[0]; "qualityAssurance"; "Supplier")
 	End if 
 	
 	

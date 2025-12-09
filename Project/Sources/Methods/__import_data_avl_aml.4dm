@@ -11,33 +11,33 @@ For each ($eContact; $contactSelection)
 		TRACE:C157
 	End if 
 End for each 
-
+/*
 
 //PartData
-var $ePartData : cs:C1710.PartDataEntity
+var $ePartData : cs.PartDataEntity
 
-$partData_log:=Folder:C1567(fk data folder:K87:12).file("DataJson/partData_export.json")
+$partData_log:=Folder(fk data folder).file("DataJson/partData_export.json")
 
 If ($partData_log.exists)
-	$partDatas:=JSON Parse:C1218($partData_log.getText())
-	
-	TRUNCATE TABLE:C1051([PartData:58])
-	
-	For each ($partData; $partDatas)
-		
-		$ePartData:=ds:C1482.PartData.new()
-		$ePartData.internalPartNum:=$partData.InternalPatnum
-		
-		$res:=$ePartData.save()
-		If (Not:C34($res.success))
-			TRACE:C157
-		End if 
-		
-	End for each 
-	
+$partDatas:=JSON Parse($partData_log.getText())
+
+TRUNCATE TABLE()
+
+For each ($partData; $partDatas)
+
+$ePartData:=ds.PartData.new()
+$ePartData.internalPartNum:=$partData.InternalPatnum
+
+$res:=$ePartData.save()
+If (Not($res.success))
+TRACE
 End if 
 
+End for each 
 
+End if 
+
+*/
 //supplier table
 var $eSupplier : cs:C1710.SupplierEntity
 
@@ -319,23 +319,26 @@ If ($avml_log.exists)
 		$eAvml.minInventoryLevel:=$avml.MinInventoryLevel
 		$eAvml.description:=$avml.Description
 		
-		//$eAvml.ourPartNum:=$avml.OUR_partnum
-		$partNum:=ds:C1482.PartData.query("internalPartNum =:1"; Split string:C1554($avml.OUR_partnum; "\r"; sk trim spaces:K86:2).join("\r"))
-		If ($partNum.length>0)
-			$eAvml.UUID_PartData:=$partNum[0].UUID
-		Else 
-			
-			$ePartData:=ds:C1482.PartData.new()
-			$ePartData.internalPartNum:=$avml.OUR_partnum
-			
-			$res:=$ePartData.save()
-			If (Not:C34($res.success))
-				TRACE:C157
-			End if 
-			
-			$eAvml.UUID_PartData:=$ePartData.UUID
-			
-		End if 
+		$eAvml.ourPartNum:=$avml.OUR_partnum
+		
+/*
+$partNum:=ds.PartData.query("internalPartNum =:1"; Split string($avml.OUR_partnum; "\r"; sk trim spaces).join("\r"))
+If ($partNum.length>0)
+$eAvml.UUID_PartData:=$partNum[0].UUID
+Else 
+		
+$ePartData:=ds.PartData.new()
+$ePartData.internalPartNum:=$avml.OUR_partnum
+		
+$res:=$ePartData.save()
+If (Not($res.success))
+TRACE
+End if 
+		
+$eAvml.UUID_PartData:=$ePartData.UUID
+		
+End if 
+*/
 		
 		$supplier:=ds:C1482.Supplier.query("name =:1"; Split string:C1554($avml.Supplier; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($supplier.length>0)

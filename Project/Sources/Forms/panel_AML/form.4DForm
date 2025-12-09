@@ -64,7 +64,7 @@
 					"left": 167,
 					"width": 296,
 					"height": 41,
-					"dataSource": "Form:C1466.current_item.partData.internalPartNum",
+					"dataSource": "Form:C1466.current_item.ourPartNum",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -283,8 +283,7 @@
 					"style": "bevel",
 					"method": "ObjectMethods/pup_procurementUnit.4dm",
 					"events": [
-						"onClick",
-						"onDisplayDetail"
+						"onClick"
 					],
 					"right": 235,
 					"fontWeight": "normal",
@@ -332,8 +331,7 @@
 					"style": "bevel",
 					"method": "ObjectMethods/pup_inventoryUnit.4dm",
 					"events": [
-						"onClick",
-						"onDisplayDetail"
+						"onClick"
 					],
 					"right": 235,
 					"fontWeight": "normal",
@@ -491,8 +489,7 @@
 					"style": "bevel",
 					"method": "ObjectMethods/pup_empCode.4dm",
 					"events": [
-						"onClick",
-						"onDisplayDetail"
+						"onClick"
 					],
 					"right": 235,
 					"fontWeight": "normal",
@@ -527,8 +524,7 @@
 					"style": "bevel",
 					"method": "ObjectMethods/pup_division.4dm",
 					"events": [
-						"onClick",
-						"onDisplayDetail"
+						"onClick"
 					],
 					"right": 235,
 					"fontWeight": "normal",

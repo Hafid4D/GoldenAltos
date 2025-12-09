@@ -1,13 +1,15 @@
 //%attributes = {"executedOnServer":true}
-
+// Archived Lots -->{ARCHIVES] in the old sytem
 
 If (True:C214)
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/archived_jobs_export.json")
 	
 	$records:=JSON Parse:C1218($file.getText())
+	$counter:=ds:C1482.JobInvoice.all().extract("invoiceNumber").map(Formula:C1597(Num:C11($1.value))).max()
 	
 	For each ($record; $records)
+		$counter:=$counter+1
 		$job:=ds:C1482.Job.new()
 		
 		$job.jobNumber:=$record.jobNumber
@@ -46,15 +48,48 @@ If (True:C214)
 		$job.archived:=True:C214
 		$job.pr_qualifier:=$record.pr_qualifier
 		$job.dropShipCustomer:=$record.dropShipCustomer
-		$Job.recommitDate:=$record.recommitDate
+		$job.recommitDate:=$record.recommitDate
 		$job.currency:=$record.currency
+		$job.altDeviceNumber:=$record.altDeviceNumber
+		$job.customerShipper:=$record.customerShipper
+		$job.initials:=$record.initials
+		$job.miscCharges:=$record.miscCharges
+		$job.miscNote:=$record.miscNote
+		$job.glAcc:=$record.glAcc
+		$job.taxable:=$record.taxable
+		$job.salesTaxRate:=$record.salesTaxRate
+		$job.freight:=$record.freight
 		
 		$res:=$job.save()
 		If (Not:C34($res.success))
 			TRACE:C157
 		End if 
 		
+		If ($job.shipped) & Not:C34($job.postToPO)
+			
+			$jobInvoice:=ds:C1482.JobInvoice.new()
+			
+			//$job_s:=ds.Job.query(" jobNumber =:1"; $record.jobNumber)
+			//If ($job_s.length>0)
+			$jobInvoice.UUID_Job:=$job.UUID  //$job_s[0].UUID
+			//Else 
+			//$jobInvoice.UUID_Job:=16*"00"
+			//End if 
+			$jobInvoice.invoiceNumber:=String:C10($counter; "00000#")
+			$jobInvoice.invoiceStmp:=Date:C102($record.invoiceDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.invoiceDate))
+			//$jobInvoice.status:="Paid" or "Closed"
+			
+			$res:=$jobInvoice.save()
+			
+			If (Not:C34($res.success))
+				TRACE:C157
+			End if 
+			
+		End if 
+		
+		
 		For each ($poline; $record.poLines)
+			
 			$poLine_es:=ds:C1482.PurchaseOrderLine.query("seqNum = :1"; $poLine.seqNum)
 			
 			If ($poLine_es.length>0)
@@ -62,6 +97,9 @@ If (True:C214)
 				
 				If ($poLine_e.purchaseOrder.oldPoNumber=$record.poNumber) & ($poline.description=$poLine_e.description)
 					$poLine_e.UUID_Job:=$job.UUID
+					$poLine_e.total:=$poline.total
+					$poLine_e.saleTax:=$poline.saleTax
+					$poLine_e.taxable:=$poline.taxable
 					
 					$res:=$poLine_e.save()
 					
@@ -118,6 +156,8 @@ If (True:C214)
 			$lot_e.cOfCInspector:=$lot.cOfCInspector
 			$lot_e.packageType:=$lot.packageType
 			$lot_e.dateCode:=$lot.dateCode
+			$lot_e.carrier:=$lot.carrier
+			$lot_e.shipRel:=$lot.shipRel
 			
 			$lot_e.UUID_Job:=$job.UUID
 			
@@ -184,10 +224,35 @@ If (True:C214)
 					End if 
 				End for each 
 			End if 
+			
 		End for each 
 		
 		
 	End for each 
+	
+	
+/**
+fix lotParent for some lots
+**/
+	
+	$lots_es:=ds:C1482.Lot.all().minus(ds:C1482.Lot.all().lotParent.subLots).query("lotNumber = :1"; "@-@")
+	
+	For each ($lot; $lots_es)
+		$parentLotNumber:=Split string:C1554($lot.lotNumber; "-")[0]
+		
+		$parent_es:=ds:C1482.Lot.query("lotNumber = :1"; $parentLotNumber)
+		
+		If ($parent_es.length>0)
+			$lot.UUID_LotParent:=$parent_es[0].UUID
+			
+			$res:=$lot.save()
+			
+			If (Not:C34($res.success))
+				TRACE:C157
+			End if 
+		End if 
+	End for each 
+	
 End if 
 
 

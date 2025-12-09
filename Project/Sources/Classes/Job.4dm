@@ -10,8 +10,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setPanel("panel_job"; 1)
 	$entry.setPanelPage(1; "po-infos-32x32.png"; "Main")
-	$entry.setPanelPage(2; "po-lines-32x32.png"; "Line Items")
-	$entry.setPanelPage(3; "lots-32x32.png"; "Lots"; "disabled:Form.current_item.lineItem=True")
+	$entry.setPanelPage(2; "po-addresses-32x32.png"; "Addresses")
+	$entry.setPanelPage(3; "po-lines-32x32.png"; "Line Items")
+	$entry.setPanelPage(4; "lots-32x32.png"; "Lots"; "disabled:Form.current_item.lineItem=True")
 	
 	
 	$entry.setLBItemsColumn("jobNumber"; "Job #"; "width:100")
@@ -20,7 +21,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setLBItemsOrderBy("jobNumber")
 	
-	$entry.setItemListAction("Export th selection to Excel"; "_ga_exportJobSelection")
+	$entry.setItemListAction("Export to Excel"; "_ga_exportJobSelection")
+	
+	$entry.setItemAction("Print Shipper"; "_ga_printShipper")
 	
 	// MARK: -Views
 	$view:=cs:C1710.sfw_definitionView.new("archivedJobs"; "Archived Jobs"; "derivedFrom:main"; $entry)
@@ -50,9 +53,6 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.enableTransaction()
 	
-local Function dueCalibrationEquipments()->$equipments : cs:C1710.EquipmentSelection  //List of equip to be calibrated within X days
-	cs:C1710.Util.me.setDateInterval(False:C215)
-	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & notAtSite=:2"; Storage:C1525.cache.endDate; False:C215)
 	
 Function archivedJobs()->$jobs : cs:C1710.JobSelection
 	cs:C1710.Util.me.setDateInterval(False:C215)
@@ -64,11 +64,35 @@ Function shippedJobs()->$jobs : cs:C1710.JobSelection
 	
 Function invoicedJobs()->$jobs : cs:C1710.JobSelection
 	cs:C1710.Util.me.setDateInterval(False:C215)
-	$jobs:=ds:C1482.Job.query("postToPO =:1 & invoiceDate >=:2 & invoiceDate <=:3 & archived =:4"; True:C214; Storage:C1525.cache.startDate; Storage:C1525.cache.endDate; False:C215)
+	$jobs:=ds:C1482.Job.query("shipped =:1 & invoiceDate >=:2 & invoiceDate <=:3 & archived =:4"; True:C214; Storage:C1525.cache.startDate; Storage:C1525.cache.endDate; False:C215)
 	
 Function lotRelatedJobs()->$jobs : cs:C1710.JobSelection
 	$jobs:=ds:C1482.Job.query("lineItem =:1 & archived =:2"; False:C215; False:C215)
 	
 Function notRelatedJobs()->$jobs : cs:C1710.JobSelection
 	$jobs:=ds:C1482.Job.query("lineItem =:1 & archived =:2"; True:C214; False:C215)
+	
+	
+	
+	// MARK: -
+	
+local Function cacheLoad()
+	
+	If (Storage:C1525.cache=Null:C1517)
+		Use (Storage:C1525)
+			Storage:C1525.cache:=New shared object:C1526
+		End use 
+	End if 
+	If (Storage:C1525.cache.jobs=Null:C1517)
+		$jobs:=This:C1470._loadAsCollection()
+		Use (Storage:C1525.cache)
+			Storage:C1525.cache.jobs:=$jobs.copy(ck shared:K85:29; Storage:C1525.cache)
+		End use 
+	End if 
+	
+	
+Function _loadAsCollection()->$jobs : Collection
+	$jobs:=This:C1470.query("shipped =:1 & postToPO =:2"; True:C214; False:C215).toCollection("UUID,jobNumber").orderBy("jobNumber")
+	
+	
 	

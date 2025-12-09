@@ -178,6 +178,15 @@ If (True:C214)  // export jobs & lot (job <-- lots)
 			"dropShipCustomer"; [Receiver]Drop_Ship_Customer; \
 			"currency"; [Receiver]Currency; \
 			"recommitDate"; [Receiver]RecommitDate; \
+			"altDeviceNumber"; [Receiver]AltDevice_Number; \
+			"customerShipper"; [Receiver]Customer_Shipper; \
+			"initials"; [Receiver]Initials; \
+			"miscCharges"; [Receiver]Misc_Charge; \
+			"miscNote"; [Receiver]Misc_Description; \
+			"glAcc"; [Receiver]GLAC; \
+			"taxable"; [Receiver]Taxable; \
+			"salesTaxRate"; [Receiver]SalesTax_Rate; \
+			"freight"; [Receiver]JobFreight; \
 			"archived"; False:C215; \
 			"address"; New object:C1471("addresses"; New collection:C1472()); \
 			"poLines"; New collection:C1472(); \
@@ -193,15 +202,21 @@ If (True:C214)  // export jobs & lot (job <-- lots)
 			"type"; "shipping"; \
 			"detail"; New object:C1471("street_1"; [Receiver]Ship_add1; "street_2"; [Receiver]Ship_add2; "city"; [Receiver]Ship_addr_City; "state"; [Receiver]Ship_addr_ST; "postcode"; [Receiver]Ship_addr_ZIP; "country"; "US"; "iso_code_2"; "US")\
 			))
+		If ([Receiver]ErpJobNumber=11067)
+			TRACE:C157
+		End if 
 		
 		If (BLOB size:C605([Receiver]POLineItems)>0)
 			GET_VAR_FROM_BLOB(->[Receiver]POLineItems; ->AInvItemNum; ->AInvPO_ItemPartNum; ->AInvPO_itemOrderDate; ->AInvPO_itemDesc; ->AInvPO_itemQty; ->AInvPO_UnitPrice; ->AInvPO_itemTaxable; ->AInvPO_itemTotal; ->AInvPO_itemID; ->AInvPO_itemSalesTax)
 			
 			If (Size of array:C274(AInvPO_itemID)>0)
-				For ($i; 1; AInvPO_itemID)
+				For ($i; 1; Size of array:C274(AInvPO_itemID))
 					$record.poLines.push(New object:C1471(\
 						"description"; AInvPO_itemDesc{$i}; \
-						"seqNum"; AInvPO_itemID{$i}\
+						"seqNum"; AInvPO_itemID{$i}; \
+						"taxable"; AInvPO_itemTaxable{$i}; \
+						"saleTax"; AInvPO_itemSalesTax{$i}; \
+						"total"; AInvPO_itemTotal{$i}\
 						))
 				End for 
 			End if 
@@ -303,6 +318,10 @@ If (True:C214)  // export jobs & lot (job <-- lots)
 				"packageType"; [Lotinfo]PackageType1; \
 				"cOfCInspector"; [Lotinfo]CofCInspector; \
 				"dateCode"; [Lotinfo]Datecode; \
+				"shipRel"; [Lotinfo]ShipRel; \
+				"carrier"; [Lotinfo]Carrier; \
+				"totalCharge"; [Lotinfo]TotalCharge; \
+				"unitCost"; [Lotinfo]UnitCost; \
 				"steps"; $steps\
 				))
 			
@@ -770,11 +789,20 @@ If (True:C214)  // export archived jobs & lot (job <-- lots)
 			"qty"; [ARCHIVES]Qty; \
 			"qtyOnHand"; 0; \
 			"shipMemo"; [ARCHIVES]Ship_Memo; \
-			"jobComment"; ""; \
+			"jobComment"; [ARCHIVES]MEMO; \
 			"currency"; [ARCHIVES]Currency; \
 			"dropShipCustomer"; [ARCHIVES]Drop_Ship_Customer; \
 			"recommitDate"; !00-00-00!; \
-			"archived"; False:C215; \
+			"altDeviceNumber"; [ARCHIVES]AltDevice_Number; \
+			"customerShipper"; [ARCHIVES]Customer_Shipper; \
+			"initials"; [ARCHIVES]Initials; \
+			"miscCharges"; [ARCHIVES]Misc_Charge; \
+			"miscNote"; [ARCHIVES]Misc_Description; \
+			"glAcc"; [ARCHIVES]GLAC; \
+			"taxable"; [ARCHIVES]Taxable; \
+			"salesTaxRate"; [ARCHIVES]SalesTax_Rate; \
+			"freight"; [ARCHIVES]Freight; \
+			"archived"; True:C214; \
 			"address"; New object:C1471(\
 			"billing"; New object:C1471("street"; ""; "additionalAddress"; ""; "city"; [ARCHIVES]Bill_addr_City; "state"; [ARCHIVES]Bill_addr_ST; "zipCode"; [ARCHIVES]Bill_addr_ZIP; "country"; [ARCHIVES]BillAddrCountry); \
 			"shipping"; New object:C1471("street"; [ARCHIVES]Ship_add1; "additionalAddress"; [ARCHIVES]Ship_add2; "city"; [ARCHIVES]Ship_addr_City; "state"; [ARCHIVES]Ship_addr_ST; "zipCode"; [ARCHIVES]Ship_addr_ZIP; "country"; [ARCHIVES]ShipAddrCountry)\
@@ -795,7 +823,10 @@ If (True:C214)  // export archived jobs & lot (job <-- lots)
 					
 					$record.poLines.push(New object:C1471(\
 						"description"; AInvPO_itemDesc{$i}; \
-						"seqNum"; AInvPO_itemID{$i}\
+						"seqNum"; AInvPO_itemID{$i}; \
+						"taxable"; AInvPO_itemTaxable{$i}; \
+						"saleTax"; AInvPO_itemSalesTax{$i}; \
+						"total"; AInvPO_itemTotal{$i}\
 						))
 				End for 
 			End if 
@@ -888,6 +919,10 @@ If (True:C214)  // export archived jobs & lot (job <-- lots)
 				"packageType"; [Lotinfo]PackageType1; \
 				"cOfCInspector"; [Lotinfo]CofCInspector; \
 				"dateCode"; [Lotinfo]Datecode; \
+				"shipRel"; [Lotinfo]ShipRel; \
+				"carrier"; [Lotinfo]Carrier; \
+				"totalCharge"; [Lotinfo]TotalCharge; \
+				"unitCost"; [Lotinfo]UnitCost; \
 				"steps"; $steps\
 				))
 			
@@ -997,8 +1032,8 @@ End if
 
 If (True:C214)  // export PartData
 	
-	ALL RECORDS:C47([PartData:58])
-	$jsonString:=Selection to JSON:C1234([PartData:58])
+	ALL RECORDS:C47([PartData])
+	$jsonString:=Selection to JSON:C1234([PartData])
 	
 	vhDoc:=Create document:C266($myFolder.platformPath+"partData_export.json")
 	If (OK=1)
@@ -1180,5 +1215,21 @@ If (True:C214)  // export Supplier Documents
 	
 	
 End if 
+
+If (True:C214)  // export receiverSubLot
+	
+	ALL RECORDS:C47([Receiver_LotsSubT])
+	$jsonString:=Selection to JSON:C1234([Receiver_LotsSubT])
+	
+	vhDoc:=Create document:C266($myFolder.platformPath+"receiverSubLot_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	
+	//SHOW ON DISK("specification_export.json")
+	
+End if 
+
 
 ALERT:C41("END!")
