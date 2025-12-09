@@ -75,7 +75,7 @@ If (True:C214)
 			//Else 
 			//$jobInvoice.UUID_Job:=16*"00"
 			//End if 
-			$jobInvoice.invoiceNumber:=String:C10($counter+1; "00000#")
+			$jobInvoice.invoiceNumber:=String:C10($counter; "00000#")
 			$jobInvoice.invoiceStmp:=Date:C102($record.invoiceDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.invoiceDate))
 			//$jobInvoice.status:="Paid" or "Closed"
 			

@@ -726,7 +726,7 @@
 				},
 				"label_note1": {
 					"type": "text",
-					"top": 379,
+					"top": 404,
 					"left": 260,
 					"width": 135,
 					"height": 17,
@@ -734,13 +734,71 @@
 					"text": "Total",
 					"textAlign": "right"
 				},
-				"entryField_total": {
+				"entryField_jobTotal": {
+					"type": "input",
+					"top": 404,
+					"left": 405,
+					"width": 200,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.total",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"label_orderItemsCharge": {
+					"type": "text",
+					"top": 181,
+					"left": 260,
+					"width": 135,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Order Items Charges",
+					"textAlign": "right"
+				},
+				"entryField_orderItemsCharges": {
+					"type": "input",
+					"top": 182,
+					"left": 405,
+					"width": 200,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.orderItemsCharges",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"label_freight": {
+					"type": "text",
+					"top": 379,
+					"left": 260,
+					"width": 135,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Freight",
+					"textAlign": "right"
+				},
+				"entryField_jobFreight": {
 					"type": "input",
 					"top": 379,
 					"left": 405,
 					"width": 200,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.total",
+					"dataSource": "Form:C1466.current_item.job.freight",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1252,7 +1310,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 312,
+	"geometryStamp": 326,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

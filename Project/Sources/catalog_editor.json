@@ -709,9 +709,9 @@
 				"left": 2168.3334960938,
 				"top": 1097,
 				"width": 171.73828125,
-				"height": 946.33203125
+				"height": 973.33203125
 			},
-			"displayable_fields_count": 43
+			"displayable_fields_count": 44
 		},
 		"PurchaseOrderLine": {
 			"color": {
@@ -941,7 +941,7 @@
 				"left": 1951,
 				"top": 1462,
 				"width": 169,
-				"height": 255.33203125
+				"height": 260.33203125
 			},
 			"displayable_fields_count": 10
 		},
