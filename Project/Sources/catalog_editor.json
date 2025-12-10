@@ -59,7 +59,7 @@
 				"left": 4350,
 				"top": 177.66796875,
 				"width": 125,
-				"height": 147.33203125
+				"height": 148.33203125
 			},
 			"displayable_fields_count": 5,
 			"fields_ordering": 1
@@ -75,9 +75,9 @@
 				"left": 4127,
 				"top": 0,
 				"width": 162.369140625,
-				"height": 688.33203125
+				"height": 650.33203125
 			},
-			"displayable_fields_count": 30,
+			"displayable_fields_count": 29,
 			"fields_ordering": 2,
 			"fields": {
 				"auditReport": {
@@ -472,8 +472,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 562.33325195312,
-				"top": 1525.9998779297,
+				"left": 601.33325195312,
+				"top": 1263.9998779297,
 				"width": 219.052734375,
 				"height": 741.33203125
 			},
@@ -694,9 +694,9 @@
 				"left": 2437.3334960938,
 				"top": 1052.6667480469,
 				"width": 157.69921875,
-				"height": 1008.3319091797
+				"height": 948.33190917969
 			},
-			"displayable_fields_count": 46
+			"displayable_fields_count": 43
 		},
 		"Job": {
 			"color": {
@@ -706,12 +706,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2168.3334960938,
-				"top": 1097,
+				"left": 2144.3334960938,
+				"top": 1145,
 				"width": 171.73828125,
-				"height": 973.33203125
+				"height": 812.33203125
 			},
-			"displayable_fields_count": 44
+			"displayable_fields_count": 36
 		},
 		"PurchaseOrderLine": {
 			"color": {
@@ -721,12 +721,13 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1750.0001220703,
-				"top": 644.66662597656,
+				"left": 1749.0001220703,
+				"top": 649.66662597656,
 				"width": 189.73828125,
-				"height": 479.33203125
+				"height": 398.33203125
 			},
-			"displayable_fields_count": 20
+			"displayable_fields_count": 17,
+			"fields_ordering": 1
 		},
 		"PurchaseOrder": {
 			"color": {
@@ -912,8 +913,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 250.20071411133,
-				"top": 0,
+				"left": 240.20071411133,
+				"top": 7.62939453125E-06,
 				"width": 182,
 				"height": 232.33203125
 			},
@@ -929,36 +930,6 @@
 					}
 				}
 			}
-		},
-		"JobInvoice": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			},
-			"coordinates": {
-				"left": 1951,
-				"top": 1462,
-				"width": 169,
-				"height": 260.33203125
-			},
-			"displayable_fields_count": 10
-		},
-		"AuditEvent": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			},
-			"coordinates": {
-				"left": 4715,
-				"top": 310,
-				"width": 153,
-				"height": 173.33203125
-			},
-			"displayable_fields_count": 6
 		},
 		"BuyingOrderLine": {
 			"color": {
@@ -1080,20 +1051,21 @@
 			},
 			"displayable_fields_count": 2
 		},
-		"JobLineItem": {
+		"PartData": {
 			"color": {
-				"red": 255,
+				"red": 128,
 				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"blue": 128,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1951,
-				"top": 1733,
-				"width": 169,
-				"height": 312.33203125
+				"left": 3347,
+				"top": 0,
+				"width": 186,
+				"height": 127.33203125
 			},
-			"displayable_fields_count": 12
+			"displayable_fields_count": 4,
+			"fields_ordering": 1
 		},
 		"Supplier": {
 			"color": {
@@ -1218,8 +1190,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 277,
-				"top": 1413,
+				"left": 244,
+				"top": 1394,
 				"width": 190,
 				"height": 169.33203125
 			},
@@ -1284,8 +1256,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3377,
-				"top": 179,
+				"left": 3354,
+				"top": 169,
 				"width": 186,
 				"height": 169.33203125
 			},
@@ -1725,8 +1697,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 249,
-				"top": 1142,
+				"left": 246,
+				"top": 1163,
 				"width": 192,
 				"height": 191.33203125
 			},
@@ -1838,8 +1810,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1335,
-				"top": 58,
+				"left": 1177,
+				"top": 0,
 				"width": 176,
 				"height": 462.33203125
 			},
@@ -2137,10 +2109,10 @@
 			"coordinates": {
 				"left": 2693.6667480469,
 				"top": 1062.3332519531,
-				"width": 200.048828125,
-				"height": 864.33203125
+				"width": 193.048828125,
+				"height": 902.33203125
 			},
-			"displayable_fields_count": 39,
+			"displayable_fields_count": 41,
 			"fields": {
 				"comment2": {
 					"position": 17
@@ -2218,8 +2190,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1203.6667480469,
-				"top": 493.33331298828,
+				"left": 1257.6667480469,
+				"top": 481.33331298828,
 				"width": 179.712890625,
 				"height": 316.33203125
 			},
@@ -2274,59 +2246,11 @@
 		}
 	},
 	"relations": {
-		"6E96AEAE4BC19E4FB27E421B081A26B0": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"8CA8631235EF5D45B8F9BF2EDC07631B": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"CF612C3C7162224F85F6C66F413D9D12": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"4CF9075BCA6ACC4DB2E5B91EEDA117E5": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"5BAB5EB6A354924CB1E9C121463A4EBC": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
 		"4D8D4A0F11111D4D907CE33428DB49AA": {
 			"color": {
 				"red": 240,
 				"green": 240,
 				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"10727A709C83D84C81934A0D0DCF318D": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
 				"alpha": 0
 			}
 		},
@@ -2371,22 +2295,6 @@
 			}
 		},
 		"F9B1A300D7A54EFC9326B35FBB01CED9": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"0DF1DB360B8B48BE84653E6CA2F326BE": {
-			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
-			}
-		},
-		"8E8138A046DA4192B3E4E216B7597DB6": {
 			"color": {
 				"red": 255,
 				"green": 255,
