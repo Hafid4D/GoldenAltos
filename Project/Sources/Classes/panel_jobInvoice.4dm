@@ -326,6 +326,8 @@ Function salesTaxUpdate()
 	
 Function chargesCalculation()  //--> Subr_Total
 	
+	Form:C1466.current_item.total:=0
+	
 	//--> Po-Line-Item Charges
 	Form:C1466.current_item.poBasedCharges:=Form:C1466.lb_poLines.sum("total")-Form:C1466.lb_poLines.sum("saleTax")
 	
@@ -394,6 +396,8 @@ Function chargesCalculation()  //--> Subr_Total
 	//Has it all
 	Form:C1466.current_item.total:=Form:C1466.current_item.total+Form:C1466.current_item.job.salesTax+Form:C1466.current_item.job.freight
 	
+	This:C1470.IsPOShort()
+	
 	
 	
 Function IsPOShort()
@@ -438,19 +442,9 @@ Function IsPOShort()
 				
 			End if 
 			
-			
-			
-			
 	End case 
 	
 	
-	If ($po#Null:C1517)
-		If ($po.amountBilled>$po.poAmount)
-			
-			$error:=This:C1470.IsPOShort()
-			
-		End if 
-	End if 
 	
 	
 	

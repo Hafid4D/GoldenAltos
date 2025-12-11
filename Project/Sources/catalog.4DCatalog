@@ -1226,6 +1226,7 @@
 		<field name="salesTaxRate" uuid="E7E8F5774B480C44AC8505D6A83D7672" type="6" never_null="true" id="41"/>
 		<field name="freight" uuid="3D964A3B2A4DE541AA48FD66F4967173" type="6" never_null="true" id="42"/>
 		<field name="boxStockShipment" uuid="DFC1039599AAF14698872DCD1612B9E5" type="1" never_null="true" id="43"/>
+		<field name="minimumJobCharge" uuid="F6211AB1F8E9084C95B7804321E05876" type="10" limiting_length="255" never_null="true" id="45"/>
 		<primary_key field_name="UUID" field_uuid="D70DED62813D485DA8CFB0CFD1FF994C"/>
 	</table>
 	<table name="Lot" uuid="67220A81398C4000A84C1F180E368020" id="118">

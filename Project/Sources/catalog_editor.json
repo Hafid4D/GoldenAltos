@@ -706,12 +706,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2168.3334960938,
-				"top": 1097,
+				"left": 2166.3334960938,
+				"top": 1098,
 				"width": 171.73828125,
-				"height": 973.33203125
+				"height": 1010.33203125
 			},
-			"displayable_fields_count": 44
+			"displayable_fields_count": 46
 		},
 		"PurchaseOrderLine": {
 			"color": {
@@ -1303,9 +1303,9 @@
 				"left": 4004.7133789062,
 				"top": 660,
 				"width": 87.017578125,
-				"height": 83.33203125
+				"height": 80.33203125
 			},
-			"displayable_fields_count": 2
+			"displayable_fields_count": 1
 		},
 		"Location": {
 			"color": {
