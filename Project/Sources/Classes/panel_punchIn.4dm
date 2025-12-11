@@ -11,7 +11,7 @@ Function formMethod()
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		This:C1470.loadCurrentStep()
-		This:C1470.displayBannerLotOnHold()
+		//This.displayBannerLotOnHold()
 		
 		Case of 
 			: (FORM Get current page:C276(*)=1)
@@ -21,8 +21,11 @@ Function formMethod()
 				This:C1470.loadStepInterruptions()
 				This:C1470.loadDataTables()
 				
-			: (FORM Get current page:C276(*)=4)
+			: (FORM Get current page:C276(*)=2)
 				This:C1470.loadInventoryPulls()
+				
+			: (FORM Get current page:C276(*)=3)
+				This:C1470.loadSerialization()
 		End case 
 	End if 
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())  //It's time to resize the object or set visible
@@ -45,30 +48,54 @@ Function pup_XXX()
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	OBJECT SET VISIBLE:C603(*; "banner_page_1"; (Form:C1466.currentStepOrder=0))
+	
+	If (OBJECT Get visible:C1075(*; "banner_lotOnHold_page"+String:C10(FORM Get current page:C276(*))))
+		OBJECT GET COORDINATES:C663(*; "banner_lotOnHold_page"+String:C10(FORM Get current page:C276(*)); $left; $top; $right; $bottom)
+		
+		$width:=$right-$left
+		$height:=$bottom-$top
+		
+		OBJECT SET COORDINATES:C1248(*; "banner_lotOnHold_page"+String:C10(FORM Get current page:C276(*)); $widthSubform-$width; $heightSubform-$height; $widthSubform; $heightSubform)
+		
+	End if 
 	
 	Case of 
-		: (FORM Get current page:C276(*)=1) | (FORM Get current page:C276(*)=2) | (FORM Get current page:C276(*)=3)
-			OBJECT GET COORDINATES:C663(*; "banner_lotOnHold_page"+String:C10(FORM Get current page:C276(*)); $left; $top; $right; $bottom)
-			
-			$width:=$right-$left
-			$height:=$bottom-$top
-			
-			OBJECT SET COORDINATES:C1248(*; "banner_lotOnHold_page"+String:C10(FORM Get current page:C276(*)); $widthSubform-$width; $heightSubform-$height; $widthSubform; $heightSubform)
-			
-		: (FORM Get current page:C276(*)=4)
-			OBJECT GET COORDINATES:C663(*; "rec_bkgd_4"; $left; $top; $right; $bottom)
-			OBJECT GET COORDINATES:C663(*; "lb_pulls"; $left_lb; $top_lb; $right_lb; $bottom_lb)
-			OBJECT GET COORDINATES:C663(*; "bActionPulls"; $left_bAc; $top_bAc; $right_bAc; $bottom_bAc)
+		: (FORM Get current page:C276(*)=2)
+			OBJECT GET COORDINATES:C663(*; "rec_bkgd_2"; $left; $top; $right; $bottom)
+			OBJECT GET COORDINATES:C663(*; "lb_pulls_2"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			OBJECT GET COORDINATES:C663(*; "bActionPulls_2"; $left_bAc; $top_bAc; $right_bAc; $bottom_bAc)
 			
 			$offset:=4
 			$offset_bAc:=10
 			
 			$height_bAc:=$bottom_bAc-$top_bAc
 			
-			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_4"; $left; $top; $right; $heightSubform-$offset)
-			OBJECT SET COORDINATES:C1248(*; "lb_pulls"; $left_lb; $top_lb; $right_lb; $heightSubform-$offset-1)
-			OBJECT SET COORDINATES:C1248(*; "bActionPulls"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
+			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_2"; $left; $top; $right; $heightSubform-$offset)
+			OBJECT SET COORDINATES:C1248(*; "lb_pulls_2"; $left_lb; $top_lb; $right_lb; $heightSubform-$offset-1)
+			OBJECT SET COORDINATES:C1248(*; "bActionPulls_2"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
+			
+		: (FORM Get current page:C276(*)=3)
+			OBJECT GET COORDINATES:C663(*; "rec_bkgd_3"; $left; $top; $right; $bottom)
+			OBJECT GET COORDINATES:C663(*; "rec_bkgd_sel_3"; $left_sel; $top_sel; $right_sel; $bottom_sel)
+			OBJECT GET COORDINATES:C663(*; "lb_serializations_3"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			
+			$offset:=4
+			$offset_bAc:=10
+			
+			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_3"; $left; $top; $right; $heightSubform-$offset)
+			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_sel_3"; $left_sel; $top_sel; $right_sel; $heightSubform-$offset)
+			OBJECT SET COORDINATES:C1248(*; "lb_serializations_3"; $left_lb; $top_lb; $right_lb; $heightSubform-$offset-1)
+			
+			
+			This:C1470.displaySerialization()
 	End case 
+	
+Function displaySerialization()
+	OBJECT SET VISIBLE:C603(*; "selectedItemlabel_@"; Not:C34(Form:C1466.selectedItem=Null:C1517))
+	OBJECT SET VISIBLE:C603(*; "Field_selectedItem_@"; Not:C34(Form:C1466.selectedItem=Null:C1517))
+	OBJECT SET VISIBLE:C603(*; "entryField_selectedItem_@"; Not:C34(Form:C1466.selectedItem=Null:C1517))
+	
 	
 Function checkForCertifications()->$valid : Boolean
 	$staff_es:=ds:C1482.sfw_User.query("login = :1"; Current user:C182).first().staffs
@@ -96,6 +123,7 @@ Function checkForCertifications()->$valid : Boolean
 Function loadCurrentStep()
 	Form:C1466.currentStep:=Null:C1517
 	Form:C1466.currentStepOrder:=0
+	
 	$currentstep:=Form:C1466.current_item.steps.query("qtyIn = :1 AND qtyOut = :1 AND dateIn = :2 AND dateOut = :2"; 0; !00-00-00!).orderBy("order asc")
 	
 	If ($currentstep.length>0)
@@ -114,16 +142,17 @@ Function loadCurrentStep()
 			OBJECT SET PLACEHOLDER:C1295(*; "EntryField_comment2"; Replace string:C233(Form:C1466.currentStep.commentFormat2; "#"; "_"))
 			
 			If (FORM Get current page:C276(*)#4)
-				FORM GOTO PAGE:C247(1; *)
+				//FORM GOTO PAGE(1; *)
 			End if 
 		Else 
 			Form:C1466.currentStepOrder:=0
-			FORM GOTO PAGE:C247(3; *)
+			//FORM GOTO PAGE(3; *)
 			//cs.sfw_dialog.me.alert("Some certifications are required for this lotStep !")
 		End if 
 	Else 
 		Form:C1466.currentStepOrder:=0
-		FORM GOTO PAGE:C247(2; *)
+		//FORM GOTO PAGE(2; *)
+		This:C1470.displayBanner("No Current Step !!")
 	End if 
 	
 	
@@ -158,25 +187,41 @@ Function loadDataTables()
 		Form:C1466.lb_dataTables:=New collection:C1472()
 	End if 
 	
-Function displayBannerLotOnHold
+	//Function displayBannerLotOnHold()
+	//var $pict : Picture
+	
+	//If (Form.current_item.onHold)
+	//OBJECT SET VISIBLE(*; "banner_lotOnHold"; True)
+	//$bannerMessage:="Lot On Hold"
+	
+	//$svg:=SVG_New(285; 184)
+	//$group:=SVG_New_group($svg; "onHold")
+	//$rect:=SVG_New_rect($group; 0; 0; 500; 30; 0; 0; "green:50"; "orangered:50"; 1)
+	//$text:=SVG_New_text($group; $bannerMessage; 175; 7; "helvetica"; 10; Bold; 3)
+	//SVG_SET_TRANSFORM_ROTATE($group; -30; 250; 20)
+	//SVG_SET_TRANSFORM_TRANSLATE($group; -50; 50)
+	//SVG EXPORT TO PICTURE($svg; $pict)
+	//SVG_CLEAR($svg)
+	//Else 
+	//OBJECT SET VISIBLE(*; "banner_lotOnHold"; False)
+	//End if 
+	//Form.bannerOnHold:=$pict
+	
+Function displayBanner($bannerMessage : Text)
 	var $pict : Picture
 	
-	If (Form:C1466.current_item.onHold)
-		OBJECT SET VISIBLE:C603(*; "banner_lotOnHold"; True:C214)
-		$bannerMessage:="Lot On Hold"
-		
-		$svg:=SVG_New(285; 184)
-		$group:=SVG_New_group($svg; "onHold")
-		$rect:=SVG_New_rect($group; 0; 0; 500; 30; 0; 0; "green:50"; "orangered:50"; 1)
-		$text:=SVG_New_text($group; $bannerMessage; 175; 7; "helvetica"; 10; Bold:K14:2; 3)
-		SVG_SET_TRANSFORM_ROTATE($group; -30; 250; 20)
-		SVG_SET_TRANSFORM_TRANSLATE($group; -50; 50)
-		SVG EXPORT TO PICTURE:C1017($svg; $pict)
-		SVG_CLEAR($svg)
-	Else 
-		OBJECT SET VISIBLE:C603(*; "banner_lotOnHold"; False:C215)
-	End if 
-	Form:C1466.bannerOnHold:=$pict
+	OBJECT SET VISIBLE:C603(*; "banner_page_1"; True:C214)
+	
+	$svg:=SVG_New(285; 184)
+	$group:=SVG_New_group($svg; "onHold")
+	$rect:=SVG_New_rect($group; 0; 0; 500; 30; 0; 0; "green:50"; "orangered:50"; 1)
+	$text:=SVG_New_text($group; $bannerMessage; 175; 7; "helvetica"; 10; Bold:K14:2; 3)
+	SVG_SET_TRANSFORM_ROTATE($group; -30; 250; 20)
+	SVG_SET_TRANSFORM_TRANSLATE($group; -50; 50)
+	SVG EXPORT TO PICTURE:C1017($svg; $pict)
+	SVG_CLEAR($svg)
+	
+	Form:C1466.banner:=$pict
 	
 Function bActionChooseSkill()
 	If (Form:C1466.currentToolType=Null:C1517)
@@ -392,5 +437,11 @@ Function bActionInvPull()
 				This:C1470._activate_save_cancel_button()
 			End if 
 		End if 
+	End if 
+	
+	
+Function loadSerialization()
+	If (Form:C1466.currentStep#Null:C1517)
+		Form:C1466.lb_serialization:=(Form:C1466.currentStep.serialization#Null:C1517) ? Form:C1466.currentStep.serialization.items : New collection:C1472()
 	End if 
 	

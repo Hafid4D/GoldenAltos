@@ -747,5 +747,85 @@
 				}
 			}
 		]
+	},
+	"StepProperty": {
+		"editable": false,
+		"items": [
+			{
+				"text": "Hold Point",
+				"ref": 1,
+				"editable": true
+			},
+			{
+				"text": "Supervisor's Signoff is required",
+				"ref": 2,
+				"editable": true
+			},
+			{
+				"text": "QA signoff is required",
+				"ref": 3,
+				"editable": true
+			},
+			{
+				"text": "SN loggiing for all units in current-step",
+				"ref": 4,
+				"editable": true
+			},
+			{
+				"text": "SN logging for current-step Fails",
+				"ref": 5,
+				"editable": true
+			},
+			{
+				"text": "SN logging at Punch-IN",
+				"ref": 6,
+				"editable": true
+			},
+			{
+				"text": "Step may be performed non-sequentially",
+				"ref": 7,
+				"editable": true
+			},
+			{
+				"text": "Outside of Count Rules",
+				"ref": 8,
+				"editable": true
+			},
+			{
+				"text": "Final QA Approval with Stamp",
+				"ref": 9,
+				"editable": true
+			},
+			{
+				"text": "Pareto in Traveler",
+				"ref": 10,
+				"editable": true
+			},
+			{
+				"text": "QA Final Review",
+				"ref": 11,
+				"editable": true
+			}
+		]
+	},
+	"serializationStatus": {
+		"editable": false,
+		"items": [
+			{
+				"text": "PASS",
+				"ref": 1,
+				"editable": true
+			},
+			{
+				"text": "FAIL",
+				"ref": 2,
+				"editable": true
+			},
+			{
+				"text": "NOT-TESTED",
+				"ref": 3,
+				"editable": true
+			}
+		]
 	}
 }

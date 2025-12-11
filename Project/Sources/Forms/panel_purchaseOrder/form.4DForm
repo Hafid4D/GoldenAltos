@@ -233,7 +233,8 @@
 					"dropping": "custom",
 					"events": [
 						"onClick",
-						"onGettingFocus"
+						"onGettingFocus",
+						"onMouseMove"
 					],
 					"fill": "transparent",
 					"borderStyle": "none",

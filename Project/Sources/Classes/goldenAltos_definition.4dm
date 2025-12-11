@@ -256,8 +256,14 @@ Function _entries_definition()
 	
 	
 	$entry.setPanel("panel_punchIn")
-	$entry.setPanelPage(1; "po-infos-32x32.png"; "Main")
-	$entry.setPanelPage(4; ""; "Inventory Pulls")
+	
+	$entry.setPanelPage(1; ""; "Main"; "disabled:Form.current_item.getCurrentStep()=0")
+	$entry.setPanelPage(2; ""; "Inventory Pulls"; "disabled:Form.current_item.getCurrentStep()=0")
+	$entry.setPanelPage(3; ""; "Serialization"; "disabled:Form.current_item.getCurrentStep()=0")
+	
+	//$entry.setPanelPage(1; ""; "Main")
+	//$entry.setPanelPage(2; ""; "Inventory Pulls")
+	//$entry.setPanelPage(3; ""; "Serialization")
 	
 	
 	$entry.setLBItemsColumn("lotNumber"; "Lot #"; "width:450")
