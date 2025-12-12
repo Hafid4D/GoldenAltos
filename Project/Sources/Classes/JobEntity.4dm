@@ -76,20 +76,6 @@ local Function pup($cacheCollection; $dataClass; $queryField; $queryValue)
 	
 local Function loadAfterCreation()
 	// This callback is called after creating the new item but before displaying the panel.
-	If (This:C1470.jobNumber=0)
-		This:C1470.jobNumber:=ds:C1482.Job.all().max("jobNumber")+1
-		This:C1470.address:=New object:C1471("addresses"; New collection:C1472())
-		
-		This:C1470.address.addresses.push(New object:C1471(\
-			"type"; "billing"; \
-			"detail"; New object:C1471("city"; ""; "country"; ""; "iso_code_2"; ""; "postcode"; ""; "state"; ""; "street_1"; ""; "street_2"; "")\
-			))
-		This:C1470.address.addresses.push(New object:C1471(\
-			"type"; "shipping"; \
-			"detail"; New object:C1471("city"; ""; "country"; ""; "iso_code_2"; ""; "postcode"; ""; "state"; ""; "street_1"; ""; "street_2"; "")\
-			))
-	End if 
-	
 	This:C1470.dateCreated:=cs:C1710.sfw_stmp.me.now()
 	
 	

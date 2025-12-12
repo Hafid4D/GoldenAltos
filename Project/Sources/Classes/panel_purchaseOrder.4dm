@@ -420,14 +420,8 @@ Function selectCustomer()
 				
 				If (ok=1)
 					Form:C1466.current_item.UUID_Customer:=$form.item.UUID
-					
-					Form:C1466.current_item.address.addresses:=$form.item.contactDetails.addresses
-					Form:C1466.current_item.rebuildAddress()
-					
 					cs:C1710.panel_purchaseOrder.me._activate_save_cancel_button()
 				End if 
-			: (FORM Event:C1606.code=On Mouse Move:K2:35)
-				SET CURSOR:C469(9000)
 		End case 
 	End if 
 	

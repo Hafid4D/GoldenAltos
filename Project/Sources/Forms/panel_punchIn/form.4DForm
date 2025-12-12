@@ -992,7 +992,7 @@
 					"method": "ObjectMethods/bActionSkills3.4dm",
 					"visibility": "visible"
 				},
-				"banner_page_1": {
+				"banner_lotOnHold_page1": {
 					"type": "input",
 					"top": 339,
 					"left": 628,
@@ -1009,17 +1009,26 @@
 					"enterable": false,
 					"contextMenu": "none",
 					"dragging": "none",
-					"method": "ObjectMethods/banner_page_1.4dm",
+					"method": "ObjectMethods/banner_lotOnHold_page1.4dm",
 					"events": [
 						"onClick"
 					],
-					"dataSource": "Form:C1466.banner",
+					"dataSource": "Form:C1466.bannerOnHold",
 					"pictureFormat": "truncatedTopLeft"
 				}
 			}
 		},
 		{
 			"objects": {
+				"Static Picture2": {
+					"type": "picture",
+					"top": 194,
+					"left": 303,
+					"width": 300,
+					"height": 300,
+					"picture": "Images/no-current-step-error-message1.png",
+					"pictureFormat": "scaled"
+				},
 				"Button": {
 					"type": "button",
 					"text": "",
@@ -1032,198 +1041,7 @@
 					],
 					"style": "custom"
 				},
-				"lb_pulls_2": {
-					"type": "listbox",
-					"left": 107,
-					"top": 120,
-					"width": 882,
-					"height": 440,
-					"events": [
-						"onClick"
-					],
-					"headerHeight": "24px",
-					"listboxType": "collection",
-					"visibility": "visible",
-					"dataSource": "Form:C1466.lb_pulls",
-					"alternateFill": "#F7F9FC",
-					"right": 989,
-					"bottom": 560,
-					"currentItemSource": "Form:C1466.selectedPull",
-					"selectionMode": "single",
-					"method": "ObjectMethods/lb_pulls_2.4dm",
-					"columns": [
-						{
-							"header": {
-								"name": "Header21",
-								"text": "INV #",
-								"fontWeight": "bold"
-							},
-							"name": "Column19",
-							"width": 100,
-							"dataSource": "This:C1470.inventory.code",
-							"enterable": false,
-							"footer": {
-								"name": "Footer21"
-							}
-						},
-						{
-							"header": {
-								"name": "Header22",
-								"text": "Date",
-								"fontWeight": "bold"
-							},
-							"name": "Column20",
-							"width": 80,
-							"dataSource": "cs:C1710.sfw_stmp.me.getDate(This:C1470.date)",
-							"footer": {
-								"name": "Footer22"
-							},
-							"resizable": false,
-							"enterable": false,
-							"dataSourceTypeHint": "date",
-							"textAlign": "center",
-							"dateFormat": "short"
-						},
-						{
-							"header": {
-								"text": "Type",
-								"name": "Header23",
-								"fontWeight": "bold"
-							},
-							"name": "Column21",
-							"footer": {
-								"name": "Footer23"
-							},
-							"width": 125,
-							"dataSource": "This:C1470.type",
-							"resizable": false,
-							"enterable": false
-						},
-						{
-							"header": {
-								"name": "Header24",
-								"text": "Quantity",
-								"fontWeight": "bold"
-							},
-							"name": "Column22",
-							"footer": {
-								"name": "Footer24"
-							},
-							"width": 110,
-							"dataSource": "This:C1470.qty",
-							"resizable": false,
-							"enterable": false,
-							"dataSourceTypeHint": "number",
-							"textAlign": "center"
-						},
-						{
-							"header": {
-								"name": "Header25",
-								"text": "Remaining Items",
-								"fontWeight": "bold"
-							},
-							"name": "Column23",
-							"footer": {
-								"name": "Footer25"
-							},
-							"width": 110,
-							"dataSource": "This:C1470.remaining",
-							"resizable": false,
-							"enterable": false,
-							"dataSourceTypeHint": "number",
-							"textAlign": "center"
-						},
-						{
-							"header": {
-								"name": "Header26",
-								"text": "Lot #",
-								"fontWeight": "bold"
-							},
-							"name": "Column24",
-							"footer": {
-								"name": "Footer26"
-							},
-							"width": 90,
-							"dataSource": "This:C1470.inventory.lot_e.lotNumber",
-							"dataSourceTypeHint": "date",
-							"textAlign": "center",
-							"dateFormat": "short",
-							"resizable": false,
-							"enterable": false
-						},
-						{
-							"header": {
-								"name": "Header27",
-								"text": "Performed By",
-								"fontWeight": "bold"
-							},
-							"name": "Column25",
-							"footer": {
-								"name": "Footer27"
-							},
-							"width": 150,
-							"dataSource": "This:C1470.performedBy",
-							"dataSourceTypeHint": "date",
-							"textAlign": "center",
-							"dateFormat": "short",
-							"resizable": false,
-							"enterable": false
-						},
-						{
-							"header": {
-								"name": "Header28",
-								"text": "IQA Status",
-								"fontWeight": "bold"
-							},
-							"name": "Column26",
-							"footer": {
-								"name": "Footer28"
-							},
-							"width": 100,
-							"dataSource": "This:C1470.statusIQA",
-							"resizable": false,
-							"enterable": false
-						}
-					]
-				},
-				"rec_bkgd_2": {
-					"type": "rectangle",
-					"top": 119,
-					"left": 5,
-					"width": 100,
-					"height": 442,
-					"sizingX": "fixed",
-					"fill": "#A2C6D8",
-					"stroke": "transparent"
-				},
-				"bActionPulls_2": {
-					"type": "button",
-					"text": "Actions",
-					"top": 536,
-					"left": 16,
-					"width": 80,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"style": "custom",
-					"popupPlacement": "linked",
-					"icon": "/RESOURCES/sfw/image/picto/gear.png",
-					"textPlacement": "right",
-					"method": "ObjectMethods/bActionPulls_2.4dm",
-					"visibility": "visible"
-				},
-				"Text2": {
-					"type": "text",
-					"text": "Inventory Pulls",
-					"top": 126,
-					"left": 9,
-					"width": 92,
-					"height": 16,
-					"fontWeight": "bold",
-					"right": 101
-				},
-				"banner_page_2": {
+				"banner_lotOnHold_page2": {
 					"type": "input",
 					"top": 376,
 					"left": 629,
@@ -1240,7 +1058,7 @@
 					"enterable": false,
 					"contextMenu": "none",
 					"dragging": "none",
-					"method": "ObjectMethods/banner_page_2.4dm",
+					"method": "ObjectMethods/banner_lotOnHold_page2.4dm",
 					"events": [
 						"onClick"
 					],
@@ -1251,6 +1069,39 @@
 		},
 		{
 			"objects": {
+				"Static Picture1": {
+					"type": "picture",
+					"top": 194,
+					"left": 303,
+					"width": 300,
+					"height": 300,
+					"picture": "Images/some-certifications-are-required.png",
+					"pictureFormat": "scaled"
+				},
+				"banner_lotOnHold_page3": {
+					"type": "input",
+					"top": 376,
+					"left": 629,
+					"width": 285,
+					"height": 184,
+					"sizingX": "move",
+					"sizingY": "move",
+					"dataSourceTypeHint": "picture",
+					"fontFamily": "System Font Regular",
+					"fontSize": 13,
+					"focusable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"enterable": false,
+					"contextMenu": "none",
+					"dragging": "none",
+					"method": "ObjectMethods/banner_lotOnHold_page3.4dm",
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.bannerOnHold",
+					"pictureFormat": "truncatedTopLeft"
+				},
 				"Button1": {
 					"type": "button",
 					"text": "",
@@ -1262,229 +1113,207 @@
 						"onClick"
 					],
 					"style": "custom"
-				},
-				"rec_bkgd_sel_3": {
-					"type": "rectangle",
-					"top": 118,
-					"left": 515,
-					"width": 421,
-					"height": 442,
-					"sizingX": "fixed",
-					"fill": "#E4E4E4",
-					"stroke": "transparent"
-				},
-				"selectedItemlabel_sn": {
-					"type": "text",
-					"top": 166,
-					"left": 540,
-					"width": 80,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "SN#"
-				},
-				"Field_selectedItem_sn": {
-					"type": "input",
-					"top": 166,
-					"left": 636,
-					"width": 153,
-					"height": 17,
-					"dataSource": "Form:C1466.selectedItem.sn",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"method": "ObjectMethods/Field_selectedItem_sn.4dm",
-					"dataSourceTypeHint": "number",
-					"textAlign": "left"
-				},
-				"selectedItemlabel_status": {
-					"type": "text",
-					"top": 191,
-					"left": 540,
-					"width": 80,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Status"
-				},
-				"entryField_selectedItem_status": {
-					"type": "input",
-					"top": 190,
-					"left": 636,
-					"width": 153,
-					"height": 17,
-					"dataSource": "Form:C1466.selectedItem.status",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"method": "ObjectMethods/entryField_selectedItem_status.4dm",
-					"dataSourceTypeHint": "number",
-					"textAlign": "left",
-					"choiceList": {
-						"$ref": "/SOURCES/lists.json#/serializationStatus"
-					},
-					"requiredList": {
-						"$ref": "/SOURCES/lists.json#/serializationStatus"
-					}
-				},
-				"selectedItemlabel_comments": {
-					"type": "text",
-					"top": 216,
-					"left": 540,
-					"width": 80,
-					"height": 16,
-					"stroke": "#808080",
-					"text": "Comments"
-				},
-				"entryField_selectedItem_comments": {
-					"type": "input",
-					"top": 216,
-					"left": 636,
-					"width": 277,
-					"height": 197,
-					"dataSource": "Form:C1466.selectedItem.comments",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"method": "ObjectMethods/entryField_selectedItem_comments.4dm",
-					"dataSourceTypeHint": "text",
-					"textAlign": "left",
-					"scrollbarHorizontal": "hidden",
-					"scrollbarVertical": "automatic"
-				},
-				"rec_bkgd_3": {
-					"type": "rectangle",
-					"top": 118,
-					"left": 5,
-					"width": 100,
-					"height": 442,
-					"sizingX": "fixed",
-					"fill": "#A2C6D8",
-					"stroke": "transparent",
-					"right": 105,
-					"bottom": 560
-				},
-				"lb_serializations_3": {
+				}
+			}
+		},
+		{
+			"objects": {
+				"lb_pulls": {
 					"type": "listbox",
 					"left": 107,
-					"top": 119,
-					"width": 408,
+					"top": 155,
+					"width": 882,
 					"height": 440,
 					"events": [
-						"onClick",
-						"onSelectionChange"
+						"onClick"
 					],
 					"headerHeight": "24px",
 					"listboxType": "collection",
 					"visibility": "visible",
-					"dataSource": "Form:C1466.lb_serialization",
-					"selectionMode": "single",
-					"verticalLineStroke": "#C0C0C0",
+					"dataSource": "Form:C1466.lb_pulls",
 					"alternateFill": "#F7F9FC",
-					"currentItemSource": "Form:C1466.selectedItem",
-					"currentItemPositionSource": "",
-					"method": "ObjectMethods/lb_serializations_3.4dm",
+					"right": 989,
+					"bottom": 595,
+					"currentItemSource": "Form:C1466.selectedPull",
+					"selectionMode": "single",
+					"method": "ObjectMethods/lb_pulls.4dm",
 					"columns": [
 						{
 							"header": {
-								"name": "Header29",
-								"text": "SN#",
+								"name": "Header20",
+								"text": "INV #",
 								"fontWeight": "bold"
 							},
-							"name": "Column27",
-							"width": 80,
-							"dataSource": "This:C1470.sn",
+							"name": "Column18",
+							"width": 100,
+							"dataSource": "This:C1470.inventory.code",
+							"enterable": false,
 							"footer": {
-								"name": "Footer29"
+								"name": "Footer20"
+							}
+						},
+						{
+							"header": {
+								"name": "Header13",
+								"text": "Date",
+								"fontWeight": "bold"
 							},
+							"name": "Column11",
+							"width": 80,
+							"dataSource": "cs:C1710.sfw_stmp.me.getDate(This:C1470.date)",
+							"footer": {
+								"name": "Footer13"
+							},
+							"resizable": false,
+							"enterable": false,
+							"dataSourceTypeHint": "date",
+							"textAlign": "center",
+							"dateFormat": "short"
+						},
+						{
+							"header": {
+								"text": "Type",
+								"name": "Header14",
+								"fontWeight": "bold"
+							},
+							"name": "Column12",
+							"footer": {
+								"name": "Footer14"
+							},
+							"width": 125,
+							"dataSource": "This:C1470.type",
 							"resizable": false,
 							"enterable": false
 						},
 						{
 							"header": {
-								"text": "Status",
-								"name": "Header30",
+								"name": "Header15",
+								"text": "Quantity",
 								"fontWeight": "bold"
 							},
-							"name": "Column28",
+							"name": "Column13",
 							"footer": {
-								"name": "Footer30"
+								"name": "Footer15"
 							},
-							"width": 120,
-							"dataSource": "This:C1470.status",
+							"width": 110,
+							"dataSource": "This:C1470.qty",
+							"resizable": false,
 							"enterable": false,
-							"resizable": false
+							"dataSourceTypeHint": "number",
+							"textAlign": "center"
 						},
 						{
 							"header": {
-								"name": "Header31",
-								"text": "Comment",
+								"name": "Header16",
+								"text": "Remaining Items",
 								"fontWeight": "bold"
 							},
-							"name": "Column29",
-							"width": 191,
-							"dataSource": "This:C1470.comments",
+							"name": "Column14",
 							"footer": {
-								"name": "Footer31"
+								"name": "Footer16"
 							},
+							"width": 110,
+							"dataSource": "This:C1470.remaining",
+							"resizable": false,
+							"enterable": false,
+							"dataSourceTypeHint": "number",
+							"textAlign": "center"
+						},
+						{
+							"header": {
+								"name": "Header17",
+								"text": "Lot #",
+								"fontWeight": "bold"
+							},
+							"name": "Column15",
+							"footer": {
+								"name": "Footer17"
+							},
+							"width": 90,
+							"dataSource": "This:C1470.inventory.lot_e.lotNumber",
+							"dataSourceTypeHint": "date",
+							"textAlign": "center",
+							"dateFormat": "short",
+							"resizable": false,
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "Header18",
+								"text": "Performed By",
+								"fontWeight": "bold"
+							},
+							"name": "Column16",
+							"footer": {
+								"name": "Footer18"
+							},
+							"width": 150,
+							"dataSource": "This:C1470.performedBy",
+							"dataSourceTypeHint": "date",
+							"textAlign": "center",
+							"dateFormat": "short",
+							"resizable": false,
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "Header19",
+								"text": "IQA Status",
+								"fontWeight": "bold"
+							},
+							"name": "Column17",
+							"footer": {
+								"name": "Footer19"
+							},
+							"width": 100,
+							"dataSource": "This:C1470.statusIQA",
 							"resizable": false,
 							"enterable": false
 						}
 					]
 				},
-				"Text": {
+				"rec_bkgd_4": {
+					"type": "rectangle",
+					"top": 154,
+					"left": 5,
+					"width": 100,
+					"height": 442,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"bActionPulls": {
+					"type": "button",
+					"text": "Actions",
+					"top": 571,
+					"left": 16,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionPulls.4dm",
+					"visibility": "visible"
+				},
+				"Text1": {
 					"type": "text",
-					"text": "Serializations",
-					"top": 125,
+					"text": "Inventory Pulls",
+					"top": 161,
 					"left": 9,
 					"width": 92,
 					"height": 16,
 					"fontWeight": "bold",
 					"right": 101
-				},
-				"banner_page_3": {
-					"type": "input",
-					"top": 376,
-					"left": 629,
-					"width": 285,
-					"height": 184,
-					"sizingX": "move",
-					"sizingY": "move",
-					"dataSourceTypeHint": "picture",
-					"fontFamily": "System Font Regular",
-					"fontSize": 13,
-					"focusable": false,
-					"fill": "transparent",
-					"borderStyle": "none",
-					"enterable": false,
-					"contextMenu": "none",
-					"dragging": "none",
-					"method": "ObjectMethods/banner_page_3.4dm",
-					"events": [
-						"onClick"
-					],
-					"dataSource": "Form:C1466.banner",
-					"pictureFormat": "truncatedTopLeft"
 				}
 			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 846,
+	"geometryStamp": 829,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
