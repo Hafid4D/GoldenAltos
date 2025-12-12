@@ -13,20 +13,21 @@
 	"bottomMargin": 0,
 	"events": [
 		"onLoad",
-		"onPageChange",
 		"onValidate",
 		"onClick",
-		"onDoubleClick",
 		"onOutsideCall",
-		"onBeginDragOver",
-		"onDragOver",
+		"onDoubleClick",
 		"onDrop",
-		"onAfterKeystroke",
 		"onMenuSelect",
 		"onPluginArea",
-		"onAfterEdit",
+		"onDataChange",
+		"onDragOver",
 		"onTimer",
-		"onBoundVariableChange"
+		"onAfterKeystroke",
+		"onAfterEdit",
+		"onBeginDragOver",
+		"onBoundVariableChange",
+		"onPageChange"
 	],
 	"windowTitle": "window title",
 	"destination": "detailScreen",
@@ -1372,11 +1373,38 @@
 					"right": 105,
 					"bottom": 560
 				},
+				"bActionLotSteps": {
+					"type": "button",
+					"text": "Actions",
+					"top": 535,
+					"left": 16,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionLotSteps.4dm",
+					"visibility": "visible"
+				},
+				"Text": {
+					"type": "text",
+					"text": "Lot Steps",
+					"top": 125,
+					"left": 9,
+					"width": 92,
+					"height": 16,
+					"fontWeight": "bold",
+					"right": 101
+				},
 				"lb_steps": {
 					"type": "listbox",
 					"left": 107,
 					"top": 119,
-					"width": 742,
+					"width": 802,
 					"height": 440,
 					"events": [
 						"onClick",
@@ -1398,7 +1426,7 @@
 					"currentItemPositionSource": "Form:C1466.selectedLotPos",
 					"metaSource": "",
 					"rowFillSource": "highlightCurrentStep",
-					"right": 849,
+					"right": 909,
 					"bottom": 559,
 					"columns": [
 						{
@@ -1536,31 +1564,31 @@
 							"dataSourceTypeHint": "boolean",
 							"resizable": false,
 							"enterable": false
+						},
+						{
+							"header": {
+								"name": "Header4",
+								"text": "Serialized",
+								"fontWeight": "bold"
+							},
+							"name": "entryField_serialized",
+							"width": 65,
+							"footer": {
+								"name": "Footer4"
+							},
+							"dataSourceTypeHint": "boolean",
+							"dataSource": "This:C1470.beSerialized",
+							"resizable": false,
+							"verticalAlign": "automatic",
+							"textAlign": "center"
 						}
 					]
-				},
-				"bActionLotSteps": {
-					"type": "button",
-					"text": "Actions",
-					"top": 535,
-					"left": 16,
-					"width": 80,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"style": "custom",
-					"popupPlacement": "linked",
-					"icon": "/RESOURCES/sfw/image/picto/gear.png",
-					"textPlacement": "right",
-					"method": "ObjectMethods/bActionLotSteps.4dm",
-					"visibility": "visible"
 				},
 				"btnMoveTop": {
 					"type": "button",
 					"text": " ",
 					"top": 204,
-					"left": 869,
+					"left": 929,
 					"width": 26,
 					"height": 26,
 					"events": [
@@ -1581,7 +1609,7 @@
 					"type": "button",
 					"text": " ",
 					"top": 237,
-					"left": 869,
+					"left": 929,
 					"width": 26,
 					"height": 26,
 					"events": [
@@ -1602,7 +1630,7 @@
 					"type": "button",
 					"text": " ",
 					"top": 270,
-					"left": 869,
+					"left": 929,
 					"width": 26,
 					"height": 26,
 					"events": [
@@ -1623,7 +1651,7 @@
 					"type": "button",
 					"text": " ",
 					"top": 303,
-					"left": 869,
+					"left": 929,
 					"width": 26,
 					"height": 26,
 					"events": [
@@ -1639,16 +1667,6 @@
 					"visibility": "visible",
 					"iconFrames": 4,
 					"focusable": false
-				},
-				"Text": {
-					"type": "text",
-					"text": "Lot Steps",
-					"top": 125,
-					"left": 9,
-					"width": 92,
-					"height": 16,
-					"fontWeight": "bold",
-					"right": 101
 				}
 			}
 		},
@@ -1898,7 +1916,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1795,
+	"geometryStamp": 1797,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
