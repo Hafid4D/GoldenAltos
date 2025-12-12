@@ -1170,6 +1170,7 @@
 		<field name="dropShipCustomer" uuid="21DEEF44B59645428651C744EBD1C277" type="10" limiting_length="255" never_null="true" id="31"/>
 		<field name="currency" uuid="84B0C0958BBDC9489392DFE303C06DB6" type="10" limiting_length="255" never_null="true" id="32"/>
 		<field name="recommitDate" uuid="1C26D9922290404BB40BE484CE2603A3" type="8" never_null="true" id="33"/>
+<<<<<<< HEAD
 		<field name="altDeviceNumber" uuid="0728EAEDC621C342B0CFA1E7961A3F6D" type="10" limiting_length="255" never_null="true" id="34"/>
 		<field name="customerShipper" uuid="2D52050871F24947B2ED4FC976221C59" type="10" limiting_length="255" never_null="true" id="35"/>
 		<field name="initials" uuid="3E94628C6118B241AB78802ADC164ACB" type="10" limiting_length="255" never_null="true" id="36"/>
@@ -1181,6 +1182,8 @@
 		<field name="freight" uuid="3D964A3B2A4DE541AA48FD66F4967173" type="6" never_null="true" id="42"/>
 		<field name="boxStockShipment" uuid="DFC1039599AAF14698872DCD1612B9E5" type="1" never_null="true" id="43"/>
 		<field name="minimumJobCharge" uuid="F6211AB1F8E9084C95B7804321E05876" type="10" limiting_length="255" never_null="true" id="45"/>
+=======
+>>>>>>> e213aa94963b3b7443b4bebc449325f64d72c3c5
 		<primary_key field_name="UUID" field_uuid="D70DED62813D485DA8CFB0CFD1FF994C"/>
 	</table>
 	<table name="Lot" uuid="67220A81398C4000A84C1F180E368020" id="118">
