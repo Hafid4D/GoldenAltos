@@ -59,6 +59,9 @@ If (True:C214)
 		$job.taxable:=$record.taxable
 		$job.salesTaxRate:=$record.salesTaxRate
 		$job.freight:=$record.freight
+		//$job.unitPriceCode:=$record.unitPriceCode
+		$job.minimumJobCharge:=$record.minimumJobCharge
+		$job.boxStockShipment:=$record.boxStockShipment
 		
 		$res:=$job.save()
 		If (Not:C34($res.success))
@@ -69,12 +72,7 @@ If (True:C214)
 			
 			$jobInvoice:=ds:C1482.JobInvoice.new()
 			
-			//$job_s:=ds.Job.query(" jobNumber =:1"; $record.jobNumber)
-			//If ($job_s.length>0)
-			$jobInvoice.UUID_Job:=$job.UUID  //$job_s[0].UUID
-			//Else 
-			//$jobInvoice.UUID_Job:=16*"00"
-			//End if 
+			$jobInvoice.UUID_Job:=$job.UUID
 			$jobInvoice.invoiceNumber:=String:C10($counter; "00000#")
 			$jobInvoice.invoiceStmp:=Date:C102($record.invoiceDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.invoiceDate))
 			//$jobInvoice.status:="Paid" or "Closed"
@@ -86,6 +84,14 @@ If (True:C214)
 			End if 
 			
 		End if 
+		
+		
+		//var $unitCost : cs.UnitCostEntity
+		
+		//$unitCost:=ds.UnitCost.query("device =:1"; $job.unitPriceCode).first()
+		//If ($unitCost#Null)
+		//$job.UUID_UnitCost:=$unitCost.UUID
+		//End if 
 		
 		
 		For each ($poline; $record.poLines)
