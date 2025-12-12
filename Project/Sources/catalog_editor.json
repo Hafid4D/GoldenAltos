@@ -694,9 +694,9 @@
 				"left": 2437.3334960938,
 				"top": 1052.6667480469,
 				"width": 157.69921875,
-				"height": 948.33190917969
+				"height": 1013.3319091797
 			},
-			"displayable_fields_count": 43
+			"displayable_fields_count": 46
 		},
 		"Job": {
 			"color": {
@@ -706,21 +706,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-<<<<<<< HEAD
 				"left": 2166.3334960938,
 				"top": 1098,
 				"width": 171.73828125,
 				"height": 1010.33203125
 			},
 			"displayable_fields_count": 46
-=======
-				"left": 2144.3334960938,
-				"top": 1145,
-				"width": 171.73828125,
-				"height": 812.33203125
-			},
-			"displayable_fields_count": 36
->>>>>>> e213aa94963b3b7443b4bebc449325f64d72c3c5
 		},
 		"PurchaseOrderLine": {
 			"color": {
@@ -922,8 +913,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 240.20071411133,
-				"top": 7.62939453125E-06,
+				"left": 268.20071411133,
+				"top": 0,
 				"width": 182,
 				"height": 232.33203125
 			},
@@ -939,6 +930,54 @@
 					}
 				}
 			}
+		},
+		"JobInvoice": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 1968,
+				"top": 1443,
+				"width": 165,
+				"height": 261.33203125
+			},
+			"displayable_fields_count": 10,
+			"fields_ordering": 1
+		},
+		"AuditEvent": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 440,
+				"top": 40,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
+		"JobLineItem": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 1970,
+				"top": 1721,
+				"width": 159,
+				"height": 298.33203125
+			},
+			"displayable_fields_count": 12,
+			"fields_ordering": 1
 		},
 		"BuyingOrderLine": {
 			"color": {
@@ -2119,9 +2158,9 @@
 				"left": 2693.6667480469,
 				"top": 1062.3332519531,
 				"width": 193.048828125,
-				"height": 902.33203125
+				"height": 925.33203125
 			},
-			"displayable_fields_count": 41,
+			"displayable_fields_count": 42,
 			"fields": {
 				"comment2": {
 					"position": 17
