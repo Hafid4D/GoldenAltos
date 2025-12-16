@@ -22,7 +22,14 @@ If (True:C214)
 			$job.poNumber:=0
 		End if 
 		
-		$job.division:=$record.division
+		$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($record.division; "\r"; sk trim spaces:K86:2).join("\r"))
+		If ($division.length>0)
+			$job.UUID_Division:=$division[0].UUID
+		Else 
+			
+		End if 
+		
+		//$job.division:=$record.division
 		$job.dateCreated:=$record.dateCreated
 		$job.expectedDate:=$record.expectedDate
 		$job.invoiceDate:=$record.invoiceDate
@@ -59,9 +66,9 @@ If (True:C214)
 		$job.taxable:=$record.taxable
 		$job.salesTaxRate:=$record.salesTaxRate
 		$job.freight:=$record.freight
-		//$job.unitPriceCode:=$record.unitPriceCode
 		$job.minimumJobCharge:=$record.minimumJobCharge
 		$job.boxStockShipment:=$record.boxStockShipment
+		$job.poRel:=$record.poRel
 		
 		$res:=$job.save()
 		If (Not:C34($res.success))
@@ -76,6 +83,10 @@ If (True:C214)
 			$jobInvoice.invoiceNumber:=String:C10($counter; "00000#")
 			$jobInvoice.invoiceStmp:=Date:C102($record.invoiceDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.invoiceDate))
 			//$jobInvoice.status:="Paid" or "Closed"
+			$jobInvoice.poBasedCharges:=$record.poBasedCharges
+			$jobInvoice.travBasedCharges:=$record.travBasedCharges
+			$jobInvoice.totalSalesTax:=$record.salesTax
+			$jobInvoice.total:=$record.totalCharge
 			
 			$res:=$jobInvoice.save()
 			

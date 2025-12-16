@@ -1027,6 +1027,17 @@
 		<field name="UUID_Job" uuid="23BC7DB129B8C44583BCD2B16ED41753" type="10" store_as_UUID="true" never_null="true" id="10"/>
 		<primary_key field_name="UUID" field_uuid="665BE88AE92589409E64B35A9DB0075E"/>
 	</table>
+	<table name="DivisionInfo" uuid="6BD779120B353443AB63B97FD27C1351" id="68">
+		<field name="UUID" uuid="EAFD50ABF7723348A09876EBD72C02F7" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="UUID_Division" uuid="5E981E007AACAB40827C10DAA4897F56" type="10" unique="true" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="site" uuid="34AA22257896AC45BC7FDCAE506AD0FB" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="payTo" uuid="9F293C619A5B7248BA26BB51C7EC163F" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="parent" uuid="199B2EB631AAB34C8037E61E94F3F18D" type="1" never_null="true" id="6">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="contactDetails" uuid="C343129D357F8F44AE1F9021A00895D8" type="21" blob_switch_size="2147483647" never_null="true" id="7"/>
+		<primary_key field_name="UUID" field_uuid="EAFD50ABF7723348A09876EBD72C02F7"/>
+	</table>
 	<table name="sfw_Notification" uuid="5B73B25D951B4B17AB99971FB0079E64" id="69">
 		<field name="UUID" uuid="37203E4F21D84C8EBC40DFC936CBFFA1" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_target" uuid="B24DECF1CAF741CABEBD6960E1AD5595" type="10" store_as_UUID="true" id="2"/>
@@ -1197,7 +1208,7 @@
 		<field name="code" uuid="1DB4FFCAB0BF4998B4F7C55A90D0C7E2" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="jobNumber" uuid="0FA357DE65EF304D84620E34A9B9F37C" type="4" unique="true" never_null="true" id="4"/>
 		<field name="poNumber" uuid="049CCB3BE3EFB34D8C79A28B2E49EA72" type="4" never_null="true" id="5"/>
-		<field name="division" uuid="3F0901B7A9581B4F9D9BC0B2A02F764B" type="10" limiting_length="255" never_null="true" id="6"/>
+		<field name="UUID_Division" uuid="3F0901B7A9581B4F9D9BC0B2A02F764B" type="10" store_as_UUID="true" never_null="true" id="6"/>
 		<field name="dateCreated" uuid="7B92BACD0DE09D44B8682380511563AC" type="4" never_null="true" id="7"/>
 		<field name="deviceNumber" uuid="EA8629F484A5E54DB5D5380CA9DEE7AC" type="10" limiting_length="255" never_null="true" id="8"/>
 		<field name="process" uuid="B99706F5D99D38409877AFE421C77B0D" type="10" limiting_length="255" never_null="true" id="9"/>
@@ -1237,6 +1248,7 @@
 		<field name="salesTaxRate" uuid="E7E8F5774B480C44AC8505D6A83D7672" type="6" never_null="true" id="41"/>
 		<field name="freight" uuid="3D964A3B2A4DE541AA48FD66F4967173" type="6" never_null="true" id="42"/>
 		<field name="boxStockShipment" uuid="DFC1039599AAF14698872DCD1612B9E5" type="1" never_null="true" id="43"/>
+		<field name="poRel" uuid="A76C5D298BD4C94CA97E6E570FD7E87B" type="3" never_null="true" id="44"/>
 		<field name="minimumJobCharge" uuid="F6211AB1F8E9084C95B7804321E05876" type="10" limiting_length="255" never_null="true" id="45"/>
 		<primary_key field_name="UUID" field_uuid="D70DED62813D485DA8CFB0CFD1FF994C"/>
 	</table>
@@ -2992,6 +3004,30 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="2E49914E3573C042BADB5ECDEF057414" name_Nto1="division" name_1toN="divisionInfos" state="1">
+		<related_field kind="source">
+			<field_ref uuid="5E981E007AACAB40827C10DAA4897F56" name="UUID_Division">
+				<table_ref uuid="6BD779120B353443AB63B97FD27C1351" name="DivisionInfo"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="3B46C986029743428A30E84AA5F8ADC4" name="UUID">
+				<table_ref uuid="F25CD20FCCFE2044A3D568BAFE905227" name="Division"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="727872E4C64C29448F9A487E703099D2" name_Nto1="division" name_1toN="jobs" state="1">
+		<related_field kind="source">
+			<field_ref uuid="3F0901B7A9581B4F9D9BC0B2A02F764B" name="UUID_Division">
+				<table_ref uuid="D3AC71CFD00F4948816121AA74EF8DFE" name="Job"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="3B46C986029743428A30E84AA5F8ADC4" name="UUID">
+				<table_ref uuid="F25CD20FCCFE2044A3D568BAFE905227" name="Division"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="005E48A922A4464DB92973931B467ACF" type="3">
 		<field_ref uuid="17F71D68FA714CE9A75ED79CA63E3BE2" name="UUID_Lead">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
@@ -3062,6 +3098,11 @@
 			<table_ref uuid="9829CFB4F3294A3989861E788C0AF7D4" name="QuoteEvent"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="073E29AA2AA9ED4FAF8B760222EB9487" type="7">
+		<field_ref uuid="EAFD50ABF7723348A09876EBD72C02F7" name="UUID">
+			<table_ref uuid="6BD779120B353443AB63B97FD27C1351" name="DivisionInfo"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="0AB4B76A5A7F264580BEAD68233D31D8" type="1">
 		<field_ref uuid="577600A2563B73478DFC7BE8A0C79156" name="qcarNumber">
 			<table_ref uuid="446AB1ED27F3664C9C9747DD14114EF2" name="Qcar"/>
@@ -3095,6 +3136,11 @@
 	<index kind="regular" unique_keys="true" uuid="111598E1CC456F47B5CF1913ED4BC852" type="7">
 		<field_ref uuid="2A671DFB01797B4DBB6EC2EB4216DB75" name="UUID">
 			<table_ref uuid="B187BEFD3CC6B147886F91E311E96B3A" name="Specification"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="11C28FE27989C34BA14DF314B664D143" type="1">
+		<field_ref uuid="5E981E007AACAB40827C10DAA4897F56" name="UUID_Division">
+			<table_ref uuid="6BD779120B353443AB63B97FD27C1351" name="DivisionInfo"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="1244B3D707B44F92951833C39F497055" type="7">
@@ -3260,6 +3306,11 @@
 	<index kind="regular" uuid="37DD5B98EEBB504BA55FB5367243C469" type="3">
 		<field_ref uuid="F0D4AF95207D2642951A363048285FCE" name="UUID_User">
 			<table_ref uuid="0846217DF6043D4ABB7910378EBDF68A" name="CustomerEvent"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="3864159B44E2284BA76DE9C24678C1A5" type="3">
+		<field_ref uuid="3F0901B7A9581B4F9D9BC0B2A02F764B" name="UUID_Division">
+			<table_ref uuid="D3AC71CFD00F4948816121AA74EF8DFE" name="Job"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="38C0A9F5C72D45409EBDE48B0E0381A5" type="3">
