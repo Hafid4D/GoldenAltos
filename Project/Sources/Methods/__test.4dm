@@ -1,6 +1,14 @@
 //%attributes = {}
 
 
+
+
+
+
+$svgRef:=SVG_New
+$objectRef:=SVG_New_line($svgRef; 0; 1; 730; 1; "black"; 1)
+SVG_SAVE_AS_PICTURE($svgRef; "test.png")
+
 $idents:=cs:C1710.sfw_definition.me.entries.extract("ident")
 
 $counter:=0

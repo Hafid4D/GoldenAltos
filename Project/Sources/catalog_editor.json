@@ -193,8 +193,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2526,
-				"top": 376.66796875,
+				"left": 2516,
+				"top": 401.66796875,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -209,8 +209,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2665.6665039062,
-				"top": 377.33459472656,
+				"left": 2658.6665039062,
+				"top": 400.33459472656,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -709,7 +709,7 @@
 				"left": 2166.3334960938,
 				"top": 1098,
 				"width": 171.73828125,
-				"height": 1010.33203125
+				"height": 1022.33203125
 			},
 			"displayable_fields_count": 46
 		},
@@ -724,9 +724,9 @@
 				"left": 1749.0001220703,
 				"top": 649.66662597656,
 				"width": 189.73828125,
-				"height": 398.33203125
+				"height": 480.33203125
 			},
-			"displayable_fields_count": 17,
+			"displayable_fields_count": 20,
 			"fields_ordering": 1
 		},
 		"PurchaseOrder": {
@@ -931,6 +931,21 @@
 				}
 			}
 		},
+		"DivisionInfo": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 2623,
+				"top": 0,
+				"width": 136,
+				"height": 185.33203125
+			},
+			"displayable_fields_count": 6
+		},
 		"JobInvoice": {
 			"color": {
 				"red": 255,
@@ -971,8 +986,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1970,
-				"top": 1721,
+				"left": 1968,
+				"top": 1745,
 				"width": 159,
 				"height": 298.33203125
 			},
@@ -1874,11 +1889,11 @@
 			},
 			"coordinates": {
 				"left": 2625,
-				"top": 166,
-				"width": 120,
-				"height": 167.33203125
+				"top": 194,
+				"width": 134,
+				"height": 160.33203125
 			},
-			"displayable_fields_count": 6
+			"displayable_fields_count": 5
 		},
 		"EquipmentLocation": {
 			"color": {
@@ -2294,6 +2309,22 @@
 		}
 	},
 	"relations": {
+		"727872E4C64C29448F9A487E703099D2": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"2E49914E3573C042BADB5ECDEF057414": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"4D8D4A0F11111D4D907CE33428DB49AA": {
 			"color": {
 				"red": 240,

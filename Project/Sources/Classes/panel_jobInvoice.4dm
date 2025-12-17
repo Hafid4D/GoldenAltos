@@ -13,7 +13,7 @@ Function formMethod()
 			This:C1470.loadAllTabs()
 		End if 
 		
-		This:C1470.salesTaxUpdate()
+		//This.salesTaxUpdate()
 		This:C1470.chargesCalculation()
 		
 		
@@ -28,7 +28,6 @@ Function formMethod()
 				This:C1470.loadLots()
 				
 			: (FORM Get current page:C276(*)=3)
-				This:C1470.loadPoLines()
 				
 			: (FORM Get current page:C276(*)=4)
 				This:C1470.loadJobLineItems()
@@ -55,10 +54,10 @@ Function redrawAndSetVisible()
 	
 	OBJECT SET ENABLED:C1123(*; "pup_job"; (Form:C1466.situation.mode="add"))
 	OBJECT SET VISIBLE:C603(*; "btnDatePickerInvoiceDate"; Form:C1466.sfw.checkIsInModification())
-	OBJECT SET VISIBLE:C603(*; "entryField_jobTotalTravBasedCharges"; Form:C1466.current_item.job.lineItem=False:C215)
-	OBJECT SET VISIBLE:C603(*; "label_travBasedCharges"; Form:C1466.current_item.job.lineItem=False:C215)
-	OBJECT SET VISIBLE:C603(*; "entryField_orderItemsCharges"; Form:C1466.current_item.job.lineItem=True:C214)
-	OBJECT SET VISIBLE:C603(*; "label_orderItemsCharge"; Form:C1466.current_item.job.lineItem=True:C214)
+	OBJECT SET VISIBLE:C603(*; "entryField_jobTotalTravBasedCharges"; False:C215)  // Form.current_item.job.lineItem=False)
+	OBJECT SET VISIBLE:C603(*; "label_travBasedCharges"; False:C215)  // Form.current_item.job.lineItem=False)
+	OBJECT SET VISIBLE:C603(*; "entryField_orderItemsCharges"; False:C215)  //Form.current_item.job.lineItem=True)
+	OBJECT SET VISIBLE:C603(*; "label_orderItemsCharge"; False:C215)  //Form.current_item.job.lineItem=True)
 	OBJECT SET VISIBLE:C603(*; "entryField_jobTotalPoBasedCharges"; Form:C1466.current_item.job.lineItem=False:C215)
 	OBJECT SET VISIBLE:C603(*; "label_poBasedCharges"; Form:C1466.current_item.job.lineItem=False:C215)
 	
@@ -246,7 +245,7 @@ Function loadLots()
 	
 	If (Form:C1466.current_item#Null:C1517)
 		
-		Form:C1466.lb_lots:=ds:C1482.Lot.query("UUID_Job =:1"; Form:C1466.current_item.job.UUID)
+		Form:C1466.lb_lots:=ds:C1482.Lot.query("UUID_Job =:1"; Form:C1466.current_item.UUID_Job)
 		
 	End if 
 	
@@ -255,7 +254,7 @@ Function loadPoLines()
 	
 	If (Form:C1466.current_item#Null:C1517)
 		
-		Form:C1466.lb_poLines:=ds:C1482.PurchaseOrderLine.query("UUID_Job =:1"; Form:C1466.current_item.job.UUID)  //Form.current_item.job.purchaseOrderLines
+		Form:C1466.lb_poLines:=ds:C1482.PurchaseOrderLine.query("UUID_Job =:1"; Form:C1466.current_item.UUID_Job)  //Form.current_item.job.purchaseOrderLines
 		
 	End if 
 	
@@ -264,7 +263,7 @@ Function loadJobLineItems()
 	
 	If (Form:C1466.current_item#Null:C1517)
 		
-		Form:C1466.lb_jobLineItems:=ds:C1482.JobLineItem.query("UUID_Job =:1"; Form:C1466.current_item.job.UUID)
+		Form:C1466.lb_jobLineItems:=ds:C1482.JobLineItem.query("UUID_Job =:1"; Form:C1466.current_item.UUID_Job)
 		
 	End if 
 	
@@ -289,6 +288,7 @@ Function bActionPoLine()
 		
 		Case of 
 			: ($choose="--create")
+				
 				$form:=New object:C1471("job"; Form:C1466.current_item.job)
 				
 				$winRef:=Open form window:C675("createPoLine_jobInvoice"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
@@ -297,6 +297,7 @@ Function bActionPoLine()
 				
 				If (OK=1)
 					This:C1470.loadPoLines()
+					This:C1470.chargesCalculation()
 				End if 
 				
 			: ($choose="--delete")
@@ -365,14 +366,25 @@ Function chargesCalculation()  //--> Subr_Total
 			Form:C1466.current_item.total:=Form:C1466.lb_lots.sum("totalCharge")
 			
 			
-			//: () 
-			//Case Job.invFormat --> Calculate UnitCost
-			
-			//Form.current_item.total:=Form.lb_lots.sum("totalCharge")
+			//: [Receiver]Inv_Format=<>a_inv_format{1})  // `Lot_Qty_Amt --> Job.invFormat --> Calculate UnitCost  Lot_Qty_Amt
 			
 			//Case of 
+			//: (Records in selection([Unit_Cost])=1) & ($MixedDevices=False)
+			//For ($i; 1; Records in selection([Lotinfo]))
+			//[Lotinfo]UnitCost:=[Unit_Cost]Singular_Unit_Price
+			//apply_unit_cost_to_lot_qty_out
+			//NEXT RECORD([Lotinfo])
+			//End for 
+			//End case 
+			//[Receiver]Total_Charge:=Sum([Lotinfo]TotalCharge)  --> Form.current_item.total:=Form.lb_lots.sum("totalCharge")
 			
-			//: ($total1=Form.current_item.total) & ($total1#0)
+			
+			//Case of 
+			//: ($total1#[Receiver]Total_Charge) & ($total1#0) --> ($total1=Form.current_item.total) & ($total1#0)
+			//BEEP
+			//ALERT("You are changing format but invoice has  unit-cost-per-step and/or setup-charges") --> QUESTION : What is the meaning of invoice has  unit-cost-per-step and/or setup-charges
+			//End case 
+			
 			
 			
 			//End case 
@@ -397,7 +409,6 @@ Function chargesCalculation()  //--> Subr_Total
 	Form:C1466.current_item.total:=Form:C1466.current_item.total+Form:C1466.current_item.job.salesTax+Form:C1466.current_item.job.freight
 	
 	This:C1470.IsPOShort()
-	
 	
 	
 Function IsPOShort()
@@ -443,6 +454,39 @@ Function IsPOShort()
 			End if 
 			
 	End case 
+	
+	
+Function UpdateItemTax()  // --> upd_itemstax
+	
+	For each ($joblineItem; Form:C1466.lb_jobLineItems)
+		
+		//If() --> Check if time_billing invoice
+		Form:C1466.current_item.job.salesTax:=Form:C1466.current_item.job.salesTax+(($joblineItem.quantity*$joblineItem.unitPrice)*(Form:C1466.current_item.job.salesTaxRate/100)*Num:C11($joblineItem.taxable))
+		$joblineItem.lineTotal:=($joblineItem.quantity*$joblineItem.unitPrice)+(($joblineItem.quantity*$joblineItem.unitPrice)*(Form:C1466.current_item.job.salesTaxRate/100)*Num:C11($joblineItem.taxable))
+		
+		////Else
+		//Form.current_item.job.salesTax:=Form.current_item.job.salesTax+(($joblineItem.quantity*$joblineItem.unitPrice)*(Form.current_item.job.salesTaxRate/100)*Num($joblineItem.taxable))
+		//$joblineItem.lineTotal:=($joblineItem.hourCount*$joblineItem.unitPrice)+(($joblineItem.hourCount*$joblineItem.unitPrice)*(Form.current_item.job.salesTaxRate/100)*Num($joblineItem.taxable))
+		
+		//End if
+		
+		If (Form:C1466.current_item.job.taxable=True:C214)
+			Form:C1466.current_item.job.salesTax:=Form:C1466.current_item.job.miscCharges*(Form:C1466.current_item.job.salesTaxRate/100)
+		End if 
+		
+	End for each 
+	
+	
+Function pgmTotal()
+	
+	This:C1470.UpdateItemTax()
+	
+	Form:C1466.current_item.total:=0
+	Form:C1466.current_item.total:=Form:C1466.lb_jobLineItems.sum("lineTotal")
+	Form:C1466.current_item.total:=Form:C1466.current_item.total+Form:C1466.current_item.job.miscCharges+Form:C1466.current_item.job.freight
+	If (Form:C1466.current_item.job.taxable=True:C214)
+		Form:C1466.current_item.total:=Form:C1466.current_item.total+(Form:C1466.current_item.job.miscCharges*(Form:C1466.current_item.job.salesTaxRate/100))
+	End if 
 	
 	
 	

@@ -3,21 +3,21 @@
 
 var $colors : Collection:=New collection:C1472("#3CB371"; "#FFFF00"; "#FF7F50"; "#1E90FF"; "#FF0000")
 
-var $carriers; $status; $customerStatuscolors : Collection
+var $carriers; $status; $recordStatuscolors : Collection
 $carriers:=New collection:C1472("GAC Driver"; "Fed-Ex Priority"; "fedex Std Overnight"; "fedex"; "fedex Ground"; "Customer Pickup"; "UPS 2nd Day"; "UPS Ground"; "UPS Next Day"; "DHL")
 $status:=New collection:C1472("Active"; "Hold"; "Retired"; "Void")
-$customerStatuscolors:=New collection:C1472("#32CD32"; "#1E90FF"; "#FF0000"; "#FFFF00")
+$recordStatuscolors:=New collection:C1472("#32CD32"; "#1E90FF"; "#FF0000"; "#FFFF00")
 
 
 //----> [CustomerStatus]
 TRUNCATE TABLE:C1051([CustomerStatus:130])
 For ($i; 0; $status.length-1)
 	
-	$eCustomerStatus:=ds:C1482.CustomerStatus.new()
-	$eCustomerStatus.levelID:=$i+1
-	$eCustomerStatus.name:=$status[$i]
-	$eCustomerStatus.color:=$customerStatuscolors[$i]
-	$eCustomerStatus.save()
+	$divisionInfo_eStatus:=ds:C1482.CustomerStatus.new()
+	$divisionInfo_eStatus.levelID:=$i+1
+	$divisionInfo_eStatus.name:=$status[$i]
+	$divisionInfo_eStatus.color:=$recordStatuscolors[$i]
+	$divisionInfo_eStatus.save()
 	
 End for 
 
@@ -25,11 +25,11 @@ End for
 TRUNCATE TABLE:C1051([CustomerCarrier:7])
 For ($i; 0; $carriers.length-1)
 	
-	$eCustomerCarrier:=ds:C1482.CustomerCarrier.new()
-	$eCustomerCarrier.levelID:=$i+1
-	$eCustomerCarrier.name:=$carriers[$i]
-	$eCustomerCarrier.color:=""
-	$eCustomerCarrier.save()
+	$divisionInfo_eCarrier:=ds:C1482.CustomerCarrier.new()
+	$divisionInfo_eCarrier.levelID:=$i+1
+	$divisionInfo_eCarrier.name:=$carriers[$i]
+	$divisionInfo_eCarrier.color:=""
+	$divisionInfo_eCarrier.save()
 End for 
 
 
@@ -216,4 +216,120 @@ For ($i; 0; $processTypes.length-1)
 	$eProcessType.color:="#FFFFFF"
 	$eProcessType.save()
 End for 
+
+
+
+
+
+If (True:C214)
+	TRUNCATE TABLE:C1051([DivisionInfo:68])
+	
+	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/divisionInfo_export.json")
+	
+	$records:=JSON Parse:C1218($file.getText())
+	
+	For each ($record; $records)
+		$divisionInfo_e:=ds:C1482.DivisionInfo.new()
+		
+		$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($record.Div; "\r"; sk trim spaces:K86:2).join("\r"))
+		If ($division.length>0)
+			$divisionInfo_e.UUID_Division:=$division[0].UUID
+		Else 
+			
+		End if 
+		
+		
+		$divisionInfo_e.site:=$record.Site
+		$divisionInfo_e.payTo:=$record.Pay_to
+		$divisionInfo_e.parent:=$record.parent
+		
+		$divisionInfo_e.contactDetails:=New object:C1471()
+		$divisionInfo_e.contactDetails.addresses:=New collection:C1472()
+		
+		$address:=New object:C1471()
+		$address.type:="billing"
+		$address.detail:=New object:C1471()
+		$address.detail.country:="US"
+		$address.detail.street_1:=$record.BillingAddress1
+		
+		If (String:C10($record.BillingAddress2)#"")
+			$add2:=Split string:C1554($record.BillingAddress2; " ")
+			
+			If ($add2.length>0)
+				$address.detail.city:=Replace string:C233($add2[0]; ","; "")
+			End if 
+			
+			If ($add2.length>1)
+				$address.detail.state:=$add2[1]
+			End if 
+			
+			If ($add2.length>2)
+				$address.detail.postcode:=$add2[2]
+			End if 
+			
+		End if 
+		$address.detail.iso_code_2:="US"
+		
+		$divisionInfo_e.contactDetails.addresses.push($address)
+		
+		
+		$address:=New object:C1471()
+		$address.type:="site"
+		$address.detail:=New object:C1471()
+		$address.detail.country:="US"
+		$address.detail.street_1:=$record.SiteAdd1
+		
+		If (String:C10($record.SiteAdd2)#"")
+			$add2:=Split string:C1554($record.SiteAdd2; " ")
+			
+			If ($add2.length>0)
+				$address.detail.city:=Replace string:C233($add2[0]; ","; "")
+			End if 
+			
+			If ($add2.length>1)
+				$address.detail.state:=$add2[1]
+			End if 
+			
+			If ($add2.length>2)
+				$address.detail.postcode:=$add2[2]
+			End if 
+			
+		End if 
+		$address.detail.iso_code_2:="US"
+		$divisionInfo_e.contactDetails.addresses.push($address)
+		
+		$address:=New object:C1471()
+		$address.type:="remit"
+		$address.detail:=New object:C1471()
+		$address.detail.country:="US"
+		$address.detail.street_1:=$record.Remit_add1
+		
+		If (String:C10($record.Remit_add2)#"")
+			$add2:=Split string:C1554($record.Remit_add2; " ")
+			
+			If ($add2.length>0)
+				$address.detail.city:=Replace string:C233($add2[0]; ","; "")
+			End if 
+			
+			If ($add2.length>1)
+				$address.detail.state:=$add2[1]
+			End if 
+			
+			If ($add2.length>2)
+				$address.detail.postcode:=$add2[2]
+			End if 
+			
+		End if 
+		$address.detail.iso_code_2:="US"
+		$divisionInfo_e.contactDetails.addresses.push($address)
+		
+		$res:=$divisionInfo_e.save()
+		
+		If (Not:C34($res.success))
+			
+		End if 
+	End for each 
+End if 
+
+
 
