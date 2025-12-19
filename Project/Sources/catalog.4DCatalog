@@ -975,9 +975,6 @@
 	</table>
 	<table name="JobLineItem" uuid="C34CD032C4F6EB4C8F51682914D18AB0" id="65">
 		<field name="UUID" uuid="BF7D80F3E4F99D4BA932F724A65AA951" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="itemNumber" uuid="828EEFC926D73F45A615876803BB4BCE" type="10" limiting_length="255" never_null="true" id="2">
-			<field_extra multi_line="false"/>
-		</field>
 		<field name="description" uuid="72123A149F801E44AFC4867D3C90BC7D" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="quantity" uuid="3670FB8674AEBA448CB363DDB5E48DD9" type="4" never_null="true" id="4">
 			<field_extra multi_line="false"/>
@@ -991,9 +988,7 @@
 		<field name="lineTotal" uuid="1C23BE67AC38EE4DAE1FD295364BCAE0" type="6" never_null="true" id="7">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="timeCharge" uuid="41F7BF044987C84BA61C1293EDC77617" type="6" never_null="true" id="8"/>
 		<field name="salesTax" uuid="7A2C91A58D47A741B7D4D5C73A91117C" type="6" never_null="true" id="9"/>
-		<field name="hourCount" uuid="BA1BE81D7FC8CA4E9E7E33D7BC2A8C3A" type="6" never_null="true" id="10"/>
 		<field name="UUID_Job" uuid="D88B918D259EE0448B4256D3C123C909" type="10" store_as_UUID="true" never_null="true" id="11"/>
 		<primary_key field_name="UUID" field_uuid="BF7D80F3E4F99D4BA932F724A65AA951"/>
 	</table>
@@ -1222,7 +1217,7 @@
 		<field name="noLots" uuid="92F9F5E9A01EF643811107631ACD1FCE" type="1" never_null="true" id="17"/>
 		<field name="alternateShipAddress" uuid="4CC67AFF99829B44A25ADAAF14BBC184" type="1" never_null="true" id="18"/>
 		<field name="shippers" uuid="68D06CFB734F00408D8B88E555FDBC24" type="4" never_null="true" id="19"/>
-		<field name="customer" uuid="CC2070838A81634AAF3697A90E8219DA" type="10" limiting_length="255" never_null="true" id="20"/>
+		<field name="customerName" uuid="CC2070838A81634AAF3697A90E8219DA" type="10" limiting_length="255" never_null="true" id="20"/>
 		<field name="qty" uuid="C0DF144C2E0D8E44AEBF939E37841A3B" type="4" never_null="true" id="21"/>
 		<field name="qtyOnHand" uuid="CA086E06A7CE3344B87651AB65FBF225" type="4" never_null="true" id="22"/>
 		<field name="shipMemo" uuid="8693F8D5DEA83E4F94859DD68174D2FB" type="10" never_null="true" id="23"/>
@@ -1250,6 +1245,8 @@
 		<field name="boxStockShipment" uuid="DFC1039599AAF14698872DCD1612B9E5" type="1" never_null="true" id="43"/>
 		<field name="poRel" uuid="A76C5D298BD4C94CA97E6E570FD7E87B" type="3" never_null="true" id="44"/>
 		<field name="minimumJobCharge" uuid="F6211AB1F8E9084C95B7804321E05876" type="10" limiting_length="255" never_null="true" id="45"/>
+		<field name="UUID_PurchaseOrder" uuid="9B63E59CE2F1C64DB9F8852D9C114C1C" type="10" store_as_UUID="true" never_null="true" id="46"/>
+		<field name="UUID_Customer" uuid="17F4D9479A9EC746BDF87419776A0B09" type="10" store_as_UUID="true" never_null="true" id="47"/>
 		<primary_key field_name="UUID" field_uuid="D70DED62813D485DA8CFB0CFD1FF994C"/>
 	</table>
 	<table name="Lot" uuid="67220A81398C4000A84C1F180E368020" id="118">
@@ -1300,6 +1297,7 @@
 		<field name="shipRel" uuid="F792354104D250419A635B5CEA955144" type="4" never_null="true" id="43"/>
 		<field name="totalCharge" uuid="006ACEB1C6FFE9449C5F03EF9E11441A" type="6" never_null="true" id="44"/>
 		<field name="unitCost" uuid="A6BF0EEA9B282E4F9F6CB5C0DB8B212E" type="6" never_null="true" id="45"/>
+		<field name="UUID_PurchaseOrder" uuid="8BB3D41EAF8FBA4AA88FD526BB596350" type="10" store_as_UUID="true" never_null="true" id="46"/>
 		<primary_key field_name="UUID" field_uuid="AEF78036FB7D429A96DF35BE53A0E0AF"/>
 	</table>
 	<table name="StepFile" uuid="A6301A2C994D4680A851FC2AE85118BE" id="119">
@@ -3028,6 +3026,42 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="CAD20F99931DF74284C4ECA3F7558445" name_Nto1="customer" name_1toN="jobs" state="1">
+		<related_field kind="source">
+			<field_ref uuid="17F4D9479A9EC746BDF87419776A0B09" name="UUID_Customer">
+				<table_ref uuid="D3AC71CFD00F4948816121AA74EF8DFE" name="Job"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="37676CD94E8B423595ED98B5C0E9CF89" name="UUID">
+				<table_ref uuid="96D1CE81460A4F75B3F4275138C8F778" name="Customer"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="D50821228D3A2D4697A5522A774BAFD6" name_Nto1="purchaseOrder" name_1toN="jobs" state="1">
+		<related_field kind="source">
+			<field_ref uuid="9B63E59CE2F1C64DB9F8852D9C114C1C" name="UUID_PurchaseOrder">
+				<table_ref uuid="D3AC71CFD00F4948816121AA74EF8DFE" name="Job"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="9C187AB4BBD84246AF62E935FF20415E" name="UUID">
+				<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="DC8453134760634790AF6C2B627E8F9C" name_Nto1="purchaseOrder" name_1toN="lots" state="1">
+		<related_field kind="source">
+			<field_ref uuid="8BB3D41EAF8FBA4AA88FD526BB596350" name="UUID_PurchaseOrder">
+				<table_ref uuid="67220A81398C4000A84C1F180E368020" name="Lot"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="9C187AB4BBD84246AF62E935FF20415E" name="UUID">
+				<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="005E48A922A4464DB92973931B467ACF" type="3">
 		<field_ref uuid="17F71D68FA714CE9A75ED79CA63E3BE2" name="UUID_Lead">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
@@ -3668,6 +3702,11 @@
 			<table_ref uuid="F25CD20FCCFE2044A3D568BAFE905227" name="Division"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="7F7920BA72A2CD42B95E3B697CC59591" type="3">
+		<field_ref uuid="8BB3D41EAF8FBA4AA88FD526BB596350" name="UUID_PurchaseOrder">
+			<table_ref uuid="67220A81398C4000A84C1F180E368020" name="Lot"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="81B92667ECA840CC88E29D368B48B43D" type="7">
 		<field_ref uuid="F8D9EC71ECF843689AA0D416563422DC" name="UUID">
 			<table_ref uuid="CA853413921F4B2A9BC70E6DE5F88235" name="Inventory"/>
@@ -4023,6 +4062,11 @@
 			<table_ref uuid="1BCF3E71728E56429B08B229161AD291" name="ContinuousImprovement"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="C2362D6A725D0C44A5092A84A90666D0" type="3">
+		<field_ref uuid="9B63E59CE2F1C64DB9F8852D9C114C1C" name="UUID_PurchaseOrder">
+			<table_ref uuid="D3AC71CFD00F4948816121AA74EF8DFE" name="Job"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="C2FF4C838C8DF24E9EAF2D4973188DE2" type="3">
 		<field_ref uuid="51E9BC9408544D40A527B62C43DBA725" name="UUID_Step">
 			<table_ref uuid="74CB192F1AF3134C9082ABA4683C0838" name="StepSpec"/>
@@ -4181,6 +4225,11 @@
 	<index kind="regular" uuid="E1AF2C1E50FF9B48B7E1243D38EB15A1" type="3">
 		<field_ref uuid="1FBF2EAB42691642930AB78E5C113913" name="UUID_Quote">
 			<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="E3A1154A0B80FC41B80F92258DFBFA10" type="3">
+		<field_ref uuid="17F4D9479A9EC746BDF87419776A0B09" name="UUID_Customer">
+			<table_ref uuid="D3AC71CFD00F4948816121AA74EF8DFE" name="Job"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="E3FE6D69E136D048AE44F2672D4110DE" type="1">

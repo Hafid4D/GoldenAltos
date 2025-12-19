@@ -199,7 +199,7 @@
 					"left": 340,
 					"width": 140,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.job.customer",
+					"dataSource": "Form:C1466.current_item.job.customerName",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1172,6 +1172,7 @@
 					"height": 700,
 					"events": [
 						"onClick",
+						"onDisplayDetail",
 						"onDataChange",
 						"onSelectionChange",
 						"onHeaderClick",
@@ -1205,9 +1206,10 @@
 							"footer": {
 								"name": "Footer17"
 							},
-							"dataSource": "This:C1470.reportID",
+							"dataSource": "This:C1470.indexOf()+1",
 							"resizable": false,
-							"width": 50
+							"width": 50,
+							"dataSourceTypeHint": "number"
 						},
 						{
 							"header": {

@@ -12,6 +12,7 @@ Function formMethod()
 		Form:C1466.addressShipping:=0
 		
 		This:C1470.loadAllTabs()
+		
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
@@ -54,6 +55,12 @@ Function pup_XXX()
 Function redrawAndSetVisible()
 	This:C1470.hideDatePickers()
 	This:C1470.drawPup_jobType()
+	This:C1470.drawPup_PO()
+	This:C1470.drawPup_Customer()
+	
+	OBJECT SET ENABLED:C1123(*; "entryField_jobNumber"; False:C215)
+	OBJECT SET ENABLED:C1123(*; "entryField_jobNumber"; Form:C1466.situation.mode="add")
+	OBJECT SET ENABLED:C1123(*; "entryField_jobNumber"; Form:C1466.situation.mode="add")
 	
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
@@ -312,14 +319,14 @@ Function bActionAttachLot()
 	End if 
 	
 Function btnOpenCustomer()
-	$es:=ds:C1482.Customer.query("name = :1"; Form:C1466.current_item.customer)
+	$es:=ds:C1482.Customer.query("name = :1"; Form:C1466.current_item.customer.name)
 	
 	If ($es.length>0)
 		Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "customer")
 	End if 
 	
 Function btnOpenPurchaseOrder()
-	$es:=ds:C1482.PurchaseOrder.query("poNumber = :1"; Form:C1466.current_item.poNumber)
+	$es:=ds:C1482.PurchaseOrder.query("poNumber = :1"; Form:C1466.current_item.purchaseOrder.poNumber)
 	
 	If ($es.length>0)
 		Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "purchaseOrders")
@@ -349,7 +356,7 @@ Function bActionCustProvMat()
 				"inventory_e"; ds:C1482.Inventory.new()\
 				)
 			
-			$form.inventory_e.vendor:=Form:C1466.current_item.job.customer
+			$form.inventory_e.vendor:=Form:C1466.current_item.job.customerName
 			$form.inventory_e.UUID_Job:=Form:C1466.current_item.UUID
 			$form.inventory_e.stockNum:="man_"+String:C10(ds:C1482.Inventory.all().length)+String:C10(Milliseconds:C459)
 			$form.inventory_e.inventoryID:=(ds:C1482.Inventory.all().length>0) ? ds:C1482.Inventory.all().max("inventoryID")+1 : 1
@@ -410,4 +417,82 @@ Function pup_jobType()
 		
 	End if 
 	This:C1470.drawPup_jobType()
+	
+	
+	
+Function drawPup_PO()
+	If (Form:C1466.current_item#Null:C1517)
+		$poNumber:=String:C10(Form:C1466.current_item.purchaseOrder.poNumber) || " "
+		Form:C1466.sfw.drawButtonPup("pup_purchaseOrder"; $poNumber; ""; (Form:C1466.current_item.purchaseOrder=Null:C1517))
+	End if 
+	//sfw/image/skin/rainbow/icon/spacer-1x24.png
+	
+Function selectPO()
+	
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		$selector:=cs:C1710.sfw_definitionSelector.new("selectorPurchaseOrder"; "purchaseOrders")
+		$selector.setTitle("Choose a Purchase Order")
+		$selector.setCurrentItem(Form:C1466.current_item.purchaseOrder)
+		$selector.setOptions("noCutLink")
+		$selector.openSelector()
+		
+		Case of 
+			: ($selector.isSelected())
+				$itemSeleted:=$selector.getCurrentItem()
+				
+				Case of 
+					: ($itemSeleted=Null:C1517)
+					: (cs:C1710.sfw_string.me.isAnEmptyUUID($itemSeleted.UUID)=False:C215)
+						Form:C1466.current_item.UUID_PurchaseOrder:=$itemSeleted.UUID
+						If (cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_PurchaseOrder)=True:C214)
+							Form:C1466.current_item.UUID_PurchaseOrder:=16*"00"
+						End if 
+				End case 
+				This:C1470.drawPup_PO()
+				
+			: ($selector.asCutTheLink())
+				Form:C1466.current_item.UUID_PurchaseOrder:=16*"00"
+				
+		End case 
+	End if 
+	
+	
+Function drawPup_Customer()
+	If (Form:C1466.current_item#Null:C1517)
+		$customerName:=String:C10(Form:C1466.current_item.customer.name) || " "
+		Form:C1466.sfw.drawButtonPup("pup_customer"; $customerName; ""; (Form:C1466.current_item.customer=Null:C1517))
+	End if 
+	//sfw/image/skin/rainbow/icon/spacer-1x24.png
+	
+Function selectCustomer()
+	
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		$selector:=cs:C1710.sfw_definitionSelector.new("selectorCustomer"; "customer")
+		$selector.setTitle("Choose a Customer")
+		$selector.setCurrentItem(Form:C1466.current_item.customer)
+		$selector.setOptions("noCutLink")
+		$selector.openSelector()
+		
+		Case of 
+			: ($selector.isSelected())
+				$itemSeleted:=$selector.getCurrentItem()
+				
+				Case of 
+					: ($itemSeleted=Null:C1517)
+					: (cs:C1710.sfw_string.me.isAnEmptyUUID($itemSeleted.UUID)=False:C215)
+						Form:C1466.current_item.UUID_Customer:=$itemSeleted.UUID
+						If (cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_Customer)=True:C214)
+							Form:C1466.current_item.UUID_Customer:=16*"00"
+						End if 
+				End case 
+				This:C1470.drawPup_Customer()
+				
+			: ($selector.asCutTheLink())
+				Form:C1466.current_item.UUID_Customer:=16*"00"
+				
+		End case 
+	End if 
+	
 	
