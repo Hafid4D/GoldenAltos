@@ -693,10 +693,10 @@
 			"coordinates": {
 				"left": 2437.3334960938,
 				"top": 1052.6667480469,
-				"width": 157.69921875,
-				"height": 1013.3319091797
+				"width": 184.69921875,
+				"height": 1031.3319091797
 			},
-			"displayable_fields_count": 46
+			"displayable_fields_count": 47
 		},
 		"Job": {
 			"color": {
@@ -706,12 +706,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2166.3334960938,
-				"top": 1098,
+				"left": 2168.3334960938,
+				"top": 1099,
 				"width": 171.73828125,
-				"height": 1022.33203125
+				"height": 1149.33203125
 			},
-			"displayable_fields_count": 46
+			"displayable_fields_count": 52
 		},
 		"PurchaseOrderLine": {
 			"color": {
@@ -738,7 +738,7 @@
 			},
 			"coordinates": {
 				"left": 1519,
-				"top": 519.33337402344,
+				"top": 521.33337402344,
 				"width": 157.048828125,
 				"height": 575.33203125
 			},
@@ -2309,6 +2309,30 @@
 		}
 	},
 	"relations": {
+		"DC8453134760634790AF6C2B627E8F9C": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"D50821228D3A2D4697A5522A774BAFD6": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"CAD20F99931DF74284C4ECA3F7558445": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"727872E4C64C29448F9A487E703099D2": {
 			"color": {
 				"red": 240,

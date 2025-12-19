@@ -34,7 +34,7 @@ If (Form:C1466.current_item#Null:C1517)
 	$context.invoiceNumber:=Form:C1466.current_item.invoiceNumber
 	$context.jobNumber:=Form:C1466.current_item.job.jobNumber
 	$context.invoiceDate:=Form:C1466.current_item.invoiceDate
-	$context.customer:=Form:C1466.current_item.job.customer
+	$context.customer:=Form:C1466.current_item.job.customerName
 	$context.posted:=Form:C1466.current_item.job.postToPO
 	
 	$case_a_cocher:=WP Get element by ID:C1549($template; "textBox6")
@@ -112,6 +112,7 @@ If (Form:C1466.current_item#Null:C1517)
 			
 		: (Form:C1466.current_item.boxStockShipment=True:C214)
 			
+			//Notice that boxStockShipment is always false so this piece of cade never executed --> TODO : CHECK FURTHER 
 			
 		: (Form:C1466.current_item.lineItem=True:C214)
 			
@@ -151,8 +152,8 @@ If (Form:C1466.current_item#Null:C1517)
 	WP SET TEXT:C1574($endRange; Char:C90(Carriage return:K15:38); wk append:K81:179; wk include in range:K81:180)
 	
 	
-	If (Form:C1466.current_item.taxable=False:C215)
-		$text:=Char:C90(Carriage return:K15:38)+Char:C90(Tab:K15:37)+Char:C90(Tab:K15:37)+"□ Taxable"
+	If (Form:C1466.current_item.job.taxable=False:C215)
+		$text:=Char:C90(Carriage return:K15:38)+Char:C90(Tab:K15:37)+Char:C90(Tab:K15:37)+"☐ Taxable"
 	Else 
 		$text:=Char:C90(Carriage return:K15:38)+Char:C90(Tab:K15:37)+Char:C90(Tab:K15:37)+"☒ Taxable"
 	End if 

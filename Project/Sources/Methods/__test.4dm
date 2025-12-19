@@ -1,6 +1,15 @@
 //%attributes = {}
+$nameA:="897673"
+$nameB:="897673_1"
 
+$bool:=$nameA=$nameB
 
+var $JobLineItem : cs:C1710.JobLineItemEntity
+$selection:=ds:C1482.JobLineItem.query("itemNumber=:1"; 0)
+For each ($JobLineItem; $selection)
+	$JobLineItem.drop()
+	
+End for each 
 
 
 

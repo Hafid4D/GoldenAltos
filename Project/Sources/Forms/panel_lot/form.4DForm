@@ -38,16 +38,16 @@
 					"type": "text",
 					"top": 12,
 					"left": 12,
-					"width": 90,
+					"width": 50,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Lot #"
 				},
-				"Field_lotNumber": {
+				"entryField_lotNumber": {
 					"type": "input",
 					"top": 12,
-					"left": 132,
-					"width": 140,
+					"left": 72,
+					"width": 100,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.lotNumber",
 					"focusable": false,
@@ -59,7 +59,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold"
+					"fontWeight": "normal"
 				},
 				"label_jobNumber": {
 					"type": "text",
@@ -93,29 +93,10 @@
 					"type": "text",
 					"top": 37,
 					"left": 12,
-					"width": 90,
+					"width": 50,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Job #"
-				},
-				"entryField_customer": {
-					"type": "input",
-					"top": 37,
-					"left": 132,
-					"width": 140,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.job.jobNumber",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"textAlign": "left"
 				},
 				"label_jobNumber1": {
 					"type": "text",
@@ -149,7 +130,7 @@
 					"type": "text",
 					"top": 62,
 					"left": 12,
-					"width": 90,
+					"width": 50,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "PO #"
@@ -157,12 +138,12 @@
 				"entryField_poNumber": {
 					"type": "input",
 					"top": 62,
-					"left": 132,
-					"width": 140,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.poNumber",
+					"left": 72,
+					"width": 100,
+					"height": 16,
+					"dataSource": "Form:C1466.current_item.job.poNumber",
 					"focusable": false,
-					"enterable": false,
+					"enterable": true,
 					"dragging": "none",
 					"dropping": "custom",
 					"events": [
@@ -170,8 +151,9 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
-					"dataSourceTypeHint": "integer"
+					"fontWeight": "normal",
+					"dataSourceTypeHint": "integer",
+					"method": "ObjectMethods/entryField_poNumber.4dm"
 				},
 				"label_jobNumber2": {
 					"type": "text",
@@ -185,19 +167,19 @@
 				"label_jobNumber3": {
 					"type": "text",
 					"top": 12,
-					"left": 312,
+					"left": 202,
 					"width": 78,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Customer"
 				},
-				"entryField_device1": {
+				"entryField_CustomerName": {
 					"type": "input",
 					"top": 12,
-					"left": 396,
-					"width": 140,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.job.customer",
+					"left": 290,
+					"width": 245,
+					"height": 16,
+					"dataSource": "Form:C1466.current_item.job.customerName",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -213,7 +195,7 @@
 				"label_jobNumber4": {
 					"type": "text",
 					"top": 37,
-					"left": 312,
+					"left": 202,
 					"width": 78,
 					"height": 17,
 					"stroke": "#808080",
@@ -222,8 +204,8 @@
 				"entryField_device2": {
 					"type": "input",
 					"top": 37,
-					"left": 396,
-					"width": 140,
+					"left": 290,
+					"width": 245,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.location",
 					"focusable": false,
@@ -241,7 +223,7 @@
 				"label_jobNumber5": {
 					"type": "text",
 					"top": 62,
-					"left": 312,
+					"left": 202,
 					"width": 78,
 					"height": 17,
 					"stroke": "#808080",
@@ -250,8 +232,8 @@
 				"entryField_device3": {
 					"type": "input",
 					"top": 62,
-					"left": 396,
-					"width": 140,
+					"left": 290,
+					"width": 245,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.comment",
 					"focusable": false,
@@ -270,7 +252,7 @@
 					"type": "button",
 					"text": " ",
 					"top": 12,
-					"left": 540,
+					"left": 538,
 					"width": 18,
 					"height": 18,
 					"events": [
@@ -290,8 +272,8 @@
 				"btnForward1": {
 					"type": "button",
 					"text": " ",
-					"top": 36,
-					"left": 276,
+					"top": 33,
+					"left": 174,
 					"width": 18,
 					"height": 18,
 					"events": [
@@ -311,8 +293,8 @@
 				"btnForward2": {
 					"type": "button",
 					"text": " ",
-					"top": 61,
-					"left": 276,
+					"top": 58,
+					"left": 174,
 					"width": 18,
 					"height": 18,
 					"events": [
@@ -398,6 +380,24 @@
 					"visibility": "visible",
 					"iconFrames": 4,
 					"focusable": false
+				},
+				"pup_job": {
+					"type": "button",
+					"top": 31,
+					"left": 72,
+					"width": 100,
+					"height": 23,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_job.4dm",
+					"events": [
+						"onClick"
+					],
+					"textAlign": "left"
 				}
 			}
 		},
@@ -1916,7 +1916,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1797,
+	"geometryStamp": 1859,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

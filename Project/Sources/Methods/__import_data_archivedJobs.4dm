@@ -15,9 +15,11 @@ If (True:C214)
 		$job.jobNumber:=$record.jobNumber
 		
 		//$job.poNumber:=$record.poNumber
-		$po_s:=ds:C1482.PurchaseOrder.query("oldPoNumber =:1"; cs:C1710.sfw_string.me.trimSpace($record.poNumber))
+		$po_s:=ds:C1482.PurchaseOrder.query("oldPoNumber =:1"; Split string:C1554($record.poNumber; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($po_s.length>0)
 			$job.poNumber:=$po_s[0].poNumber
+			$job.UUID_PurchaseOrder:=$po_s[0].UUID
+			
 		Else 
 			$job.poNumber:=0
 		End if 
@@ -47,7 +49,14 @@ If (True:C214)
 		$job.address:=$record.address
 		$job.alternateShipAddress:=$record.alternateShipAddress
 		$job.shippers:=$record.shippers
-		$job.customer:=$record.customer
+		
+		$customer:=ds:C1482.Customer.query("name =:1"; Split string:C1554($record.customer; "\r"; sk trim spaces:K86:2).join("\r"))
+		If ($customer.length>0)
+			$job.UUID_Customer:=$customer[0].UUID
+		Else 
+			
+		End if 
+		$job.customerName:=$record.customer
 		$job.qty:=$record.qty
 		$job.qtyOnHand:=$record.qtyOnHand
 		$job.shipMemo:=$record.shipMemo
@@ -147,6 +156,7 @@ If (True:C214)
 			$po_s:=ds:C1482.PurchaseOrder.query("oldPoNumber =:1"; Split string:C1554($record.poNumber; "\r"; sk trim spaces:K86:2).join("\r"))
 			If ($po_s.length>0)
 				$lot_e.poNumber:=$po_s[0].poNumber
+				$lot_e.UUID_PurchaseOrder:=$po_s[0].UUID
 			Else 
 				$lot_e.poNumber:=0
 			End if 
