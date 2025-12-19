@@ -218,7 +218,10 @@ Function bActionLineItems()
 					$lineItem.itemNum:=1
 				End if 
 				
-				$form:=New object:C1471("poLine"; $lineItem)
+				$form:=New object:C1471(\
+					"poLine"; $lineItem; \
+					"quoteLines"; Form:C1466.current_item.quote.lines\
+					)
 				
 				$winRef:=Open form window:C675("createPoLine"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
 				DIALOG:C40("createPoLine"; $form)
@@ -236,7 +239,10 @@ Function bActionLineItems()
 				End if 
 				
 			: ($choose="--edit")
-				$form:=New object:C1471("poLine"; Form:C1466.selectedPoLine)
+				$form:=New object:C1471(\
+					"poLine"; Form:C1466.selectedPoLine; \
+					"quoteLines"; Form:C1466.current_item.quote.lines\
+					)
 				
 				$winRef:=Open form window:C675("createPoLine"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
 				DIALOG:C40("createPoLine"; $form)
