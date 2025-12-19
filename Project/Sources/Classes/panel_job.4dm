@@ -58,9 +58,9 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_PO()
 	This:C1470.drawPup_Customer()
 	
-	OBJECT SET ENABLED:C1123(*; "entryField_jobNumber"; False:C215)
-	OBJECT SET ENABLED:C1123(*; "entryField_jobNumber"; Form:C1466.situation.mode="add")
-	OBJECT SET ENABLED:C1123(*; "entryField_jobNumber"; Form:C1466.situation.mode="add")
+	OBJECT SET ENTERABLE:C238(*; "entryField_jobNumber"; False:C215)
+	OBJECT SET ENTERABLE:C238(*; "entryField_customer"; False:C215)
+	OBJECT SET ENABLED:C1123(*; "pup_purchaseOrder"; Form:C1466.situation.mode="add")
 	
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)

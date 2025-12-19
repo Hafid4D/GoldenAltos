@@ -347,8 +347,8 @@
 				},
 				"pup_customer": {
 					"type": "button",
-					"top": 9,
-					"left": 342,
+					"top": 10,
+					"left": 823,
 					"width": 195,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -363,6 +363,25 @@
 					"events": [
 						"onClick"
 					]
+				},
+				"entryField_customer": {
+					"type": "input",
+					"top": 13,
+					"left": 342,
+					"width": 195,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.purchaseOrder.customer.name",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
 				}
 			}
 		},
@@ -1510,7 +1529,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1578,
+	"geometryStamp": 1585,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
