@@ -2308,7 +2308,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="C4A8CC154AD81D4D986804038C278648" name_Nto1="Link_57" name_1toN="Link_57_return" state="1">
+	<relation uuid="C4A8CC154AD81D4D986804038C278648" name_Nto1="quote" name_1toN="purchaseOrders" state="1">
 		<related_field kind="source">
 			<field_ref uuid="1FBF2EAB42691642930AB78E5C113913" name="UUID_Quote">
 				<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
