@@ -12,6 +12,7 @@ Function formMethod()
 		Form:C1466.addressShipping:=0
 		
 		This:C1470.loadAllTabs()
+		This:C1470.drawPup_PO()
 		
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
@@ -56,11 +57,13 @@ Function redrawAndSetVisible()
 	This:C1470.hideDatePickers()
 	This:C1470.drawPup_jobType()
 	This:C1470.drawPup_PO()
-	This:C1470.drawPup_Customer()
+	This:C1470.drawPup_tax()
+	//This.drawPup_Customer()
 	
 	OBJECT SET ENTERABLE:C238(*; "entryField_jobNumber"; False:C215)
 	OBJECT SET ENTERABLE:C238(*; "entryField_customer"; False:C215)
 	OBJECT SET ENABLED:C1123(*; "pup_purchaseOrder"; Form:C1466.situation.mode="add")
+	OBJECT SET ENTERABLE:C238(*; "entryField_taxRate"; False:C215)
 	
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
@@ -88,7 +91,7 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "header_bkgd9"; $left; $top; $widthSubform-$offset; $bottom)
 			OBJECT SET COORDINATES:C1248(*; "header_bkgd5"; $left_lb; $top_lb; $widthSubform-$offset; $bottom_lb)
 			OBJECT SET COORDINATES:C1248(*; "header_bkgd6"; $left_bAc; $top_bAc; $widthSubform-$offset; $bottom_bAc)
-			OBJECT SET COORDINATES:C1248(*; "entryField_jobComment"; $left_l; $top_l; $widthSubform-30; $heightSubform-10)
+			OBJECT SET COORDINATES:C1248(*; "entryField_jobComment"; $left_l; $top_l; $right_l; $heightSubform-10)
 			OBJECT SET COORDINATES:C1248(*; "header_bkgd10"; $left_c; $top_c; $widthSubform-$offset; $heightSubform-$offset)
 			
 		: (FORM Get current page:C276(*)=2)
@@ -319,6 +322,7 @@ Function bActionAttachLot()
 	End if 
 	
 Function btnOpenCustomer()
+	
 	If (Form:C1466.current_item.purchaseOrder.customer#Null:C1517)
 		$es:=ds:C1482.Customer.query("name = :1"; Form:C1466.current_item.purchaseOrder.customer.name)
 		
@@ -327,10 +331,13 @@ Function btnOpenCustomer()
 		End if 
 	End if 
 Function btnOpenPurchaseOrder()
-	$es:=ds:C1482.PurchaseOrder.query("poNumber = :1"; Form:C1466.current_item.purchaseOrder.poNumber)
-	
-	If ($es.length>0)
-		Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "purchaseOrders")
+	If (Form:C1466.current_item.purchaseOrder#Null:C1517)
+		var $es : Object
+		$es:=ds:C1482.PurchaseOrder.query("poNumber = :1"; Form:C1466.current_item.purchaseOrder.poNumber)
+		
+		If ($es.length>0)
+			Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "purchaseOrders")
+		End if 
 	End if 
 	
 Function hideDatePickers()
@@ -423,7 +430,13 @@ Function pup_jobType()
 	
 Function drawPup_PO()
 	If (Form:C1466.current_item#Null:C1517)
-		$poNumber:=String:C10(Form:C1466.current_item.purchaseOrder.poNumber) || " "
+		var $po : Object
+		$po:=ds:C1482.PurchaseOrder.query("UUID =:1"; Form:C1466.current_item.UUID_PurchaseOrder).first()  //String(Form.current_item.purchaseOrder.poNumber) 
+		If ($po#Null:C1517)
+			$poNumber:=String:C10($po.poNumber)
+		Else 
+			$poNumber:=""
+		End if 
 		Form:C1466.sfw.drawButtonPup("pup_purchaseOrder"; $poNumber; ""; (Form:C1466.current_item.purchaseOrder=Null:C1517))
 	End if 
 	//sfw/image/skin/rainbow/icon/spacer-1x24.png
@@ -459,41 +472,87 @@ Function selectPO()
 	End if 
 	
 	
-Function drawPup_Customer()
+Function drawPup_tax()
 	If (Form:C1466.current_item#Null:C1517)
-		$customerName:=String:C10(Form:C1466.current_item.customer.name) || " "
-		Form:C1466.sfw.drawButtonPup("pup_customer"; $customerName; ""; (Form:C1466.current_item.customer=Null:C1517))
+		
+		$tax:=ds:C1482.SalesTax.query("UUID =:1"; Form:C1466.current_item.UUID_SalesTax).first() || New object:C1471()
+		$taxRate:=$tax#Null:C1517 ? $tax.code : ""
+		$color:=""
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_tax"; $taxRate; $pathIcon; ($tax=Null:C1517))
 	End if 
-	//sfw/image/skin/rainbow/icon/spacer-1x24.png
+	
+	
+Function pup_tax()
+	//Create pop up menu
+	If (Form:C1466.sfw.checkIsInModification())
+		$menu:=Create menu:C408
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.taxes=Null:C1517)
+			ds:C1482.SalesTax.cacheLoad()
+		End if 
+		
+		For each ($eTax; Storage:C1525.cache.taxes)
+			APPEND MENU ITEM:C411($menu; $eTax.code; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $eTax.UUID)
+			If ($eTax.UUID=Form:C1466.current_item.UUID_SalesTax)
+				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+				If (Is Windows:C1573)
+					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+				End if 
+			End if 
+		End for each 
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		Case of 
+			: ($choose#"")
+				$eTax:=ds:C1482.SalesTax.get($choose)
+				Form:C1466.current_item.UUID_SalesTax:=$eTax.UUID
+		End case 
+		
+		
+	End if 
+	This:C1470.drawPup_tax()
+	
+	
+	
+	
+/*
+Function drawPup_Customer()
+If (Form.current_item#Null)
+$customerName:=String(Form.current_item.customer.name) || " "
+Form.sfw.drawButtonPup("pup_customer"; $customerName; ""; (Form.current_item.customer=Null))
+End if 
+//sfw/image/skin/rainbow/icon/spacer-1x24.png
 	
 Function selectCustomer()
 	
-	If (Form:C1466.sfw.checkIsInModification())
-		
-		$selector:=cs:C1710.sfw_definitionSelector.new("selectorCustomer"; "customer")
-		$selector.setTitle("Choose a Customer")
-		$selector.setCurrentItem(Form:C1466.current_item.customer)
-		$selector.setOptions("noCutLink")
-		$selector.openSelector()
-		
-		Case of 
-			: ($selector.isSelected())
-				$itemSeleted:=$selector.getCurrentItem()
-				
-				Case of 
-					: ($itemSeleted=Null:C1517)
-					: (cs:C1710.sfw_string.me.isAnEmptyUUID($itemSeleted.UUID)=False:C215)
-						Form:C1466.current_item.UUID_Customer:=$itemSeleted.UUID
-						If (cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_Customer)=True:C214)
-							Form:C1466.current_item.UUID_Customer:=16*"00"
-						End if 
-				End case 
-				This:C1470.drawPup_Customer()
-				
-			: ($selector.asCutTheLink())
-				Form:C1466.current_item.UUID_Customer:=16*"00"
-				
-		End case 
-	End if 
+If (Form.sfw.checkIsInModification())
 	
+$selector:=cs.sfw_definitionSelector.new("selectorCustomer"; "customer")
+$selector.setTitle("Choose a Customer")
+$selector.setCurrentItem(Form.current_item.customer)
+$selector.setOptions("noCutLink")
+$selector.openSelector()
 	
+Case of 
+: ($selector.isSelected())
+$itemSeleted:=$selector.getCurrentItem()
+	
+Case of 
+: ($itemSeleted=Null)
+: (cs.sfw_string.me.isAnEmptyUUID($itemSeleted.UUID)=False)
+Form.current_item.UUID_Customer:=$itemSeleted.UUID
+If (cs.sfw_string.me.isAnEmptyUUID(Form.current_item.UUID_Customer)=True)
+Form.current_item.UUID_Customer:=16*"00"
+End if 
+End case 
+This.drawPup_Customer()
+	
+: ($selector.asCutTheLink())
+Form.current_item.UUID_Customer:=16*"00"
+	
+End case 
+End if 
+	
+*/

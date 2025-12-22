@@ -153,7 +153,8 @@
 					"borderStyle": "none",
 					"fontWeight": "normal",
 					"dataSourceTypeHint": "integer",
-					"method": "ObjectMethods/entryField_poNumber.4dm"
+					"method": "ObjectMethods/entryField_poNumber.4dm",
+					"textAlign": "left"
 				},
 				"label_jobNumber2": {
 					"type": "text",

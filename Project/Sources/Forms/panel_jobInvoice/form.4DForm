@@ -587,7 +587,7 @@
 					"left": 405,
 					"width": 200,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.job.salesTax",
+					"dataSource": "Form:C1466.current_item.job.totalTax",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1312,7 +1312,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 329,
+	"geometryStamp": 343,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

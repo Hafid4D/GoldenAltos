@@ -347,8 +347,8 @@
 				},
 				"pup_customer": {
 					"type": "button",
-					"top": 10,
-					"left": 823,
+					"top": 12,
+					"left": 887,
 					"width": 195,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -362,7 +362,8 @@
 					"method": "ObjectMethods/pup_customer.4dm",
 					"events": [
 						"onClick"
-					]
+					],
+					"visibility": "hidden"
 				},
 				"entryField_customer": {
 					"type": "input",
@@ -539,9 +540,9 @@
 				},
 				"entryField_jobComment": {
 					"type": "input",
-					"top": 398,
-					"left": 8,
-					"width": 690,
+					"top": 389,
+					"left": 7,
+					"width": 335,
 					"height": 80,
 					"dataSource": "Form:C1466.current_item.jobComment",
 					"focusable": false,
@@ -556,7 +557,7 @@
 					"sizingX": "fixed",
 					"scrollbarHorizontal": "hidden",
 					"scrollbarVertical": "automatic",
-					"bottom": 478
+					"bottom": 469
 				},
 				"header_bkgd7": {
 					"type": "rectangle",
@@ -886,6 +887,66 @@
 					"dataSourceTypeHint": "text",
 					"textAlign": "left",
 					"scrollbarVertical": "automatic"
+				},
+				"label_salesTaxCode": {
+					"type": "text",
+					"top": 412,
+					"left": 439,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Tax Code",
+					"textAlign": "right"
+				},
+				"entryField_taxRate": {
+					"type": "input",
+					"top": 439,
+					"left": 519,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.salesTax.rate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "number",
+					"textAlign": "left"
+				},
+				"label_salesTaxRate": {
+					"type": "text",
+					"top": 439,
+					"left": 439,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Tax Rate",
+					"textAlign": "right"
+				},
+				"pup_tax": {
+					"type": "button",
+					"top": 409,
+					"left": 519,
+					"width": 140,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_tax.4dm",
+					"events": [
+						"onClick"
+					],
+					"bottom": 432,
+					"visibility": "visible"
 				}
 			}
 		},
@@ -1529,7 +1590,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1585,
+	"geometryStamp": 1592,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

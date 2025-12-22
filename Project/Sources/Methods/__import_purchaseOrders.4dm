@@ -218,7 +218,7 @@ If (True:C214)
 		$job.archivedDate:=$record.archivedDate
 		$job.deviceNumber:=$record.deviceNumber
 		$job.process:=$record.process
-		$job.salesTax:=$record.salesTax
+		$job.totalTax:=$record.salesTax
 		$job.totalCharge:=$record.totalCharge
 		$job.shipped:=$record.shipped
 		$job.lineItem:=$record.lineItem
@@ -229,7 +229,13 @@ If (True:C214)
 		$job.alternateShipAddress:=$record.alternateShipAddress
 		$job.shippers:=$record.shippers
 		
+		//$customer:=ds.Customer.query("name =:1"; Split string($record.customer; "\r"; sk trim spaces).join("\r"))
+		//If ($customer.length>0)
+		//$job.UUID_Customer:=$customer[0].UUID
+		//Else 
 		
+		//End if 
+
 		$job.customerName:=$record.customer
 		$job.qty:=$record.qty
 		$job.qtyOnHand:=$record.qtyOnHand
@@ -247,7 +253,14 @@ If (True:C214)
 		$job.miscNote:=$record.miscNote
 		$job.glAcc:=$record.glAcc
 		$job.taxable:=$record.taxable
-		$job.salesTaxRate:=$record.salesTaxRate
+		
+		$salesTax:=ds:C1482.SalesTax.query("rate =:1"; $record.salesTaxRate)
+		If ($salesTax.length>0)
+			$job.UUID_SalesTax:=$salesTax[0].UUID
+		Else 
+			$job.UUID_SalesTax:=16*"00"
+		End if 
+		
 		$job.freight:=$record.freight
 		$job.minimumJobCharge:=$record.minimumJobCharge
 		$job.boxStockShipment:=$record.boxStockShipment
@@ -381,6 +394,15 @@ If (True:C214)
 			$lot_e.holdDate:=$lot.holdDate
 			$lot_e.holdTime:=$lot.holdTime
 			
+			$po_s:=ds:C1482.PurchaseOrder.query("oldPoNumber =:1"; Split string:C1554($record.poNumber; "\r"; sk trim spaces:K86:2).join("\r"))
+			If ($po_s.length>0)
+				$lot_e.poNumber:=$po_s[0].poNumber
+				//$lot_e.UUID_PurchaseOrder:=$po_s[0].UUID
+				
+			Else 
+				$lot_e.poNumber:=0
+			End if 
+
 			$lot_e.poNumber:=$lot.poNumber
 			
 			$lot_e.customer:=$lot.customer
