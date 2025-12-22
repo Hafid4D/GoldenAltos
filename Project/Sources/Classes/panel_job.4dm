@@ -57,11 +57,13 @@ Function redrawAndSetVisible()
 	This:C1470.hideDatePickers()
 	This:C1470.drawPup_jobType()
 	This:C1470.drawPup_PO()
+	This:C1470.drawPup_tax()
 	//This.drawPup_Customer()
 	
 	OBJECT SET ENTERABLE:C238(*; "entryField_jobNumber"; False:C215)
 	OBJECT SET ENTERABLE:C238(*; "entryField_customer"; False:C215)
 	OBJECT SET ENABLED:C1123(*; "pup_purchaseOrder"; Form:C1466.situation.mode="add")
+	OBJECT SET ENTERABLE:C238(*; "entryField_taxRate"; False:C215)
 	
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
@@ -89,7 +91,7 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "header_bkgd9"; $left; $top; $widthSubform-$offset; $bottom)
 			OBJECT SET COORDINATES:C1248(*; "header_bkgd5"; $left_lb; $top_lb; $widthSubform-$offset; $bottom_lb)
 			OBJECT SET COORDINATES:C1248(*; "header_bkgd6"; $left_bAc; $top_bAc; $widthSubform-$offset; $bottom_bAc)
-			OBJECT SET COORDINATES:C1248(*; "entryField_jobComment"; $left_l; $top_l; $widthSubform-30; $heightSubform-10)
+			OBJECT SET COORDINATES:C1248(*; "entryField_jobComment"; $left_l; $top_l; $right_l; $heightSubform-10)
 			OBJECT SET COORDINATES:C1248(*; "header_bkgd10"; $left_c; $top_c; $widthSubform-$offset; $heightSubform-$offset)
 			
 		: (FORM Get current page:C276(*)=2)
@@ -468,6 +470,52 @@ Function selectPO()
 				
 		End case 
 	End if 
+	
+	
+Function drawPup_tax()
+	If (Form:C1466.current_item#Null:C1517)
+		
+		$tax:=ds:C1482.SalesTax.query("UUID =:1"; Form:C1466.current_item.UUID_SalesTax).first() || New object:C1471()
+		$taxRate:=$tax#Null:C1517 ? $tax.code : ""
+		$color:=""
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_tax"; $taxRate; $pathIcon; ($tax=Null:C1517))
+	End if 
+	
+	
+Function pup_tax()
+	//Create pop up menu
+	If (Form:C1466.sfw.checkIsInModification())
+		$menu:=Create menu:C408
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.taxes=Null:C1517)
+			ds:C1482.SalesTax.cacheLoad()
+		End if 
+		
+		For each ($eTax; Storage:C1525.cache.taxes)
+			APPEND MENU ITEM:C411($menu; $eTax.code; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $eTax.UUID)
+			If ($eTax.UUID=Form:C1466.current_item.UUID_SalesTax)
+				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+				If (Is Windows:C1573)
+					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+				End if 
+			End if 
+		End for each 
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		Case of 
+			: ($choose#"")
+				$eTax:=ds:C1482.SalesTax.get($choose)
+				Form:C1466.current_item.UUID_SalesTax:=$eTax.UUID
+		End case 
+		
+		
+	End if 
+	This:C1470.drawPup_tax()
+	
+	
+	
 	
 /*
 Function drawPup_Customer()

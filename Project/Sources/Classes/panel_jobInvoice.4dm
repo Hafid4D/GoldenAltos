@@ -20,14 +20,12 @@ Function formMethod()
 			This:C1470.pgmTotal()
 		End if 
 		
-		
-		
-		
 	End if 
 	
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
+				
 				If (Form:C1466.current_item.job.lineItem=False:C215)
 					This:C1470.salesTaxUpdate()
 					This:C1470.chargesCalculation()
@@ -57,6 +55,7 @@ Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	This:C1470.drawPup_job()
 	This:C1470.drawPup_status()
+	This:C1470.drawPup_tax()
 	
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="Lot Qty Amt Based ("+String:C10(Form:C1466.lb_lots.length)+")"
@@ -226,47 +225,6 @@ Function pup_status()
 	This:C1470.drawPup_status()
 	
 	//*/
-	
-	
-Function drawPup_tax()
-	If (Form:C1466.current_item#Null:C1517)
-		
-		$tax:=ds:C1482.SalesTax.query("UUID =:1"; Form:C1466.current_item.UUID_SalesTax) || New object:C1471()
-		$taxRate:=$tax#Null:C1517 ? $tax.name : ""
-		$color:=""
-		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
-		Form:C1466.sfw.drawButtonPup("pup_tax"; $taxRate; $pathIcon; ($tax=Null:C1517))
-	End if 
-	
-	
-Function pup_tax()
-	//Create pop up menu
-	If (Form:C1466.sfw.checkIsInModification())
-		$menu:=Create menu:C408
-		$invoiceStatus:=New collection:C1472(New object:C1471("name"; "paid"))  //; New object("name"; "closed"))  
-		For each ($eType; $invoiceStatus)
-			APPEND MENU ITEM:C411($menu; $eType.name; *)
-			SET MENU ITEM PARAMETER:C1004($menu; -1; $eType.name)
-			If ($eType.name=Form:C1466.current_item.staus)
-				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
-				If (Is Windows:C1573)
-					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
-				End if 
-			End if 
-		End for each 
-		$choose:=Dynamic pop up menu:C1006($menu)
-		RELEASE MENU:C978($menu)
-		
-		Case of 
-			: ($choose#"")
-				Form:C1466.current_item.status:=$choose
-				This:C1470._activate_save_cancel_button()
-		End case 
-		
-	End if 
-	This:C1470.drawPup_status()
-	
-	
 	
 Function bActionLot()
 	
