@@ -12,6 +12,7 @@ Function formMethod()
 		Form:C1466.addressShipping:=0
 		
 		This:C1470.loadAllTabs()
+		This:C1470.drawPup_PO()
 		
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
@@ -56,7 +57,7 @@ Function redrawAndSetVisible()
 	This:C1470.hideDatePickers()
 	This:C1470.drawPup_jobType()
 	This:C1470.drawPup_PO()
-	This:C1470.drawPup_Customer()
+	//This.drawPup_Customer()
 	
 	OBJECT SET ENTERABLE:C238(*; "entryField_jobNumber"; False:C215)
 	OBJECT SET ENTERABLE:C238(*; "entryField_customer"; False:C215)
@@ -319,17 +320,23 @@ Function bActionAttachLot()
 	End if 
 	
 Function btnOpenCustomer()
-	$es:=ds:C1482.Customer.query("name = :1"; Form:C1466.current_item.customer.name)
-	
-	If ($es.length>0)
-		Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "customer")
+	If (Form:C1466.current_item.customer#Null:C1517)
+		var $es : Object
+		$es:=ds:C1482.Customer.query("name = :1"; Form:C1466.current_item.customer.name)
+		
+		If ($es.length>0)
+			Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "customer")
+		End if 
 	End if 
 	
 Function btnOpenPurchaseOrder()
-	$es:=ds:C1482.PurchaseOrder.query("poNumber = :1"; Form:C1466.current_item.purchaseOrder.poNumber)
-	
-	If ($es.length>0)
-		Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "purchaseOrders")
+	If (Form:C1466.current_item.purchaseOrder#Null:C1517)
+		var $es : Object
+		$es:=ds:C1482.PurchaseOrder.query("poNumber = :1"; Form:C1466.current_item.purchaseOrder.poNumber)
+		
+		If ($es.length>0)
+			Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "purchaseOrders")
+		End if 
 	End if 
 	
 Function hideDatePickers()
@@ -422,7 +429,13 @@ Function pup_jobType()
 	
 Function drawPup_PO()
 	If (Form:C1466.current_item#Null:C1517)
-		$poNumber:=String:C10(Form:C1466.current_item.purchaseOrder.poNumber) || " "
+		var $po : Object
+		$po:=ds:C1482.PurchaseOrder.query("UUID =:1"; Form:C1466.current_item.UUID_PurchaseOrder).first()  //String(Form.current_item.purchaseOrder.poNumber) 
+		If ($po#Null:C1517)
+			$poNumber:=String:C10($po.poNumber)
+		Else 
+			$poNumber:=""
+		End if 
 		Form:C1466.sfw.drawButtonPup("pup_purchaseOrder"; $poNumber; ""; (Form:C1466.current_item.purchaseOrder=Null:C1517))
 	End if 
 	//sfw/image/skin/rainbow/icon/spacer-1x24.png
@@ -457,42 +470,42 @@ Function selectPO()
 		End case 
 	End if 
 	
-	
+/*
 Function drawPup_Customer()
-	If (Form:C1466.current_item#Null:C1517)
-		$customerName:=String:C10(Form:C1466.current_item.customer.name) || " "
-		Form:C1466.sfw.drawButtonPup("pup_customer"; $customerName; ""; (Form:C1466.current_item.customer=Null:C1517))
-	End if 
-	//sfw/image/skin/rainbow/icon/spacer-1x24.png
+If (Form.current_item#Null)
+$customerName:=String(Form.current_item.customer.name) || " "
+Form.sfw.drawButtonPup("pup_customer"; $customerName; ""; (Form.current_item.customer=Null))
+End if 
+//sfw/image/skin/rainbow/icon/spacer-1x24.png
 	
 Function selectCustomer()
 	
-	If (Form:C1466.sfw.checkIsInModification())
-		
-		$selector:=cs:C1710.sfw_definitionSelector.new("selectorCustomer"; "customer")
-		$selector.setTitle("Choose a Customer")
-		$selector.setCurrentItem(Form:C1466.current_item.customer)
-		$selector.setOptions("noCutLink")
-		$selector.openSelector()
-		
-		Case of 
-			: ($selector.isSelected())
-				$itemSeleted:=$selector.getCurrentItem()
-				
-				Case of 
-					: ($itemSeleted=Null:C1517)
-					: (cs:C1710.sfw_string.me.isAnEmptyUUID($itemSeleted.UUID)=False:C215)
-						Form:C1466.current_item.UUID_Customer:=$itemSeleted.UUID
-						If (cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_Customer)=True:C214)
-							Form:C1466.current_item.UUID_Customer:=16*"00"
-						End if 
-				End case 
-				This:C1470.drawPup_Customer()
-				
-			: ($selector.asCutTheLink())
-				Form:C1466.current_item.UUID_Customer:=16*"00"
-				
-		End case 
-	End if 
+If (Form.sfw.checkIsInModification())
 	
+$selector:=cs.sfw_definitionSelector.new("selectorCustomer"; "customer")
+$selector.setTitle("Choose a Customer")
+$selector.setCurrentItem(Form.current_item.customer)
+$selector.setOptions("noCutLink")
+$selector.openSelector()
 	
+Case of 
+: ($selector.isSelected())
+$itemSeleted:=$selector.getCurrentItem()
+	
+Case of 
+: ($itemSeleted=Null)
+: (cs.sfw_string.me.isAnEmptyUUID($itemSeleted.UUID)=False)
+Form.current_item.UUID_Customer:=$itemSeleted.UUID
+If (cs.sfw_string.me.isAnEmptyUUID(Form.current_item.UUID_Customer)=True)
+Form.current_item.UUID_Customer:=16*"00"
+End if 
+End case 
+This.drawPup_Customer()
+	
+: ($selector.asCutTheLink())
+Form.current_item.UUID_Customer:=16*"00"
+	
+End case 
+End if 
+	
+*/

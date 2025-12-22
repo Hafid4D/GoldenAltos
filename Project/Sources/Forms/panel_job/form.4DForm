@@ -347,8 +347,8 @@
 				},
 				"pup_customer": {
 					"type": "button",
-					"top": 10,
-					"left": 823,
+					"top": 12,
+					"left": 887,
 					"width": 195,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -362,7 +362,8 @@
 					"method": "ObjectMethods/pup_customer.4dm",
 					"events": [
 						"onClick"
-					]
+					],
+					"visibility": "hidden"
 				},
 				"entryField_customer": {
 					"type": "input",
@@ -1529,7 +1530,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1585,
+	"geometryStamp": 1587,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

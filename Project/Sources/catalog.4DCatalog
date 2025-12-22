@@ -1067,6 +1067,12 @@
 		<primary_key field_name="UUID" field_uuid="C368AB256E3246BAAA4F0BA10076F44E"/>
 		<table_extra output_form="List"/>
 	</table>
+	<table name="SalesTax" uuid="DF2BA266C1EE294B9508F9997CCE2C22" id="72">
+		<field name="UUID" uuid="D694579CEB4CD741865BD4C94B64E596" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="code" uuid="AACAC371F0D228479882CC4698A20308" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="rate" uuid="42D2A1E35CD08C429568794FFF151509" type="6" never_null="true" id="3"/>
+		<primary_key field_name="UUID" field_uuid="D694579CEB4CD741865BD4C94B64E596"/>
+	</table>
 	<table name="sfw_UserInscription" uuid="AC225FD836FF49F7841FC1B78EC96243" id="81">
 		<field name="UUID" uuid="211EC274251B4A748F6C5C28741E0FB3" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_User" uuid="29D5804D61304EFEBBA1081D06154F5C" type="10" store_as_UUID="true" id="2"/>
@@ -1207,7 +1213,7 @@
 		<field name="dateCreated" uuid="7B92BACD0DE09D44B8682380511563AC" type="4" never_null="true" id="7"/>
 		<field name="deviceNumber" uuid="EA8629F484A5E54DB5D5380CA9DEE7AC" type="10" limiting_length="255" never_null="true" id="8"/>
 		<field name="process" uuid="B99706F5D99D38409877AFE421C77B0D" type="10" limiting_length="255" never_null="true" id="9"/>
-		<field name="salesTax" uuid="C38CF266A5AAE74C8B1918CEB92C3EBA" type="6" never_null="true" id="10"/>
+		<field name="totalTax" uuid="C38CF266A5AAE74C8B1918CEB92C3EBA" type="6" never_null="true" id="10"/>
 		<field name="totalCharge" uuid="30E9D2080C440F4E849E15E0DF77609D" type="6" never_null="true" id="11"/>
 		<field name="shipped" uuid="4F67A8740A04D54A8048E1384E9F07BF" type="1" never_null="true" id="12"/>
 		<field name="postToPO" uuid="89334A7BDE29A94BA224EAF5EFA0FC3E" type="1" never_null="true" id="13"/>
@@ -1240,13 +1246,12 @@
 		<field name="miscNote" uuid="3B42C8B890EA0746B74693833DE05109" type="10" limiting_length="255" never_null="true" id="38"/>
 		<field name="glAcc" uuid="8570D07AA00149499CCC8C438F68418B" type="10" limiting_length="255" never_null="true" id="39"/>
 		<field name="taxable" uuid="2C5A2D0B69D67540985F28871A182629" type="1" never_null="true" id="40"/>
-		<field name="salesTaxRate" uuid="E7E8F5774B480C44AC8505D6A83D7672" type="6" never_null="true" id="41"/>
 		<field name="freight" uuid="3D964A3B2A4DE541AA48FD66F4967173" type="6" never_null="true" id="42"/>
 		<field name="boxStockShipment" uuid="DFC1039599AAF14698872DCD1612B9E5" type="1" never_null="true" id="43"/>
 		<field name="poRel" uuid="A76C5D298BD4C94CA97E6E570FD7E87B" type="3" never_null="true" id="44"/>
 		<field name="minimumJobCharge" uuid="F6211AB1F8E9084C95B7804321E05876" type="10" limiting_length="255" never_null="true" id="45"/>
 		<field name="UUID_PurchaseOrder" uuid="9B63E59CE2F1C64DB9F8852D9C114C1C" type="10" store_as_UUID="true" never_null="true" id="46"/>
-		<field name="UUID_Customer" uuid="17F4D9479A9EC746BDF87419776A0B09" type="10" store_as_UUID="true" never_null="true" id="47"/>
+		<field name="UUID_SalesTax" uuid="E0F2DD6ADB69C0448E956C9720A9784B" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="47"/>
 		<primary_key field_name="UUID" field_uuid="D70DED62813D485DA8CFB0CFD1FF994C"/>
 	</table>
 	<table name="Lot" uuid="67220A81398C4000A84C1F180E368020" id="118">
@@ -1297,7 +1302,6 @@
 		<field name="shipRel" uuid="F792354104D250419A635B5CEA955144" type="4" never_null="true" id="43"/>
 		<field name="totalCharge" uuid="006ACEB1C6FFE9449C5F03EF9E11441A" type="6" never_null="true" id="44"/>
 		<field name="unitCost" uuid="A6BF0EEA9B282E4F9F6CB5C0DB8B212E" type="6" never_null="true" id="45"/>
-		<field name="UUID_PurchaseOrder" uuid="8BB3D41EAF8FBA4AA88FD526BB596350" type="10" store_as_UUID="true" never_null="true" id="46"/>
 		<primary_key field_name="UUID" field_uuid="AEF78036FB7D429A96DF35BE53A0E0AF"/>
 	</table>
 	<table name="StepFile" uuid="A6301A2C994D4680A851FC2AE85118BE" id="119">
@@ -3026,18 +3030,6 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="CAD20F99931DF74284C4ECA3F7558445" name_Nto1="customer" name_1toN="jobs" state="1">
-		<related_field kind="source">
-			<field_ref uuid="17F4D9479A9EC746BDF87419776A0B09" name="UUID_Customer">
-				<table_ref uuid="D3AC71CFD00F4948816121AA74EF8DFE" name="Job"/>
-			</field_ref>
-		</related_field>
-		<related_field kind="destination">
-			<field_ref uuid="37676CD94E8B423595ED98B5C0E9CF89" name="UUID">
-				<table_ref uuid="96D1CE81460A4F75B3F4275138C8F778" name="Customer"/>
-			</field_ref>
-		</related_field>
-	</relation>
 	<relation uuid="D50821228D3A2D4697A5522A774BAFD6" name_Nto1="purchaseOrder" name_1toN="jobs" state="1">
 		<related_field kind="source">
 			<field_ref uuid="9B63E59CE2F1C64DB9F8852D9C114C1C" name="UUID_PurchaseOrder">
@@ -3050,15 +3042,15 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="DC8453134760634790AF6C2B627E8F9C" name_Nto1="purchaseOrder" name_1toN="lots" state="1">
+	<relation uuid="6D8F16511CF7924F82B86C5F69449F1F" name_Nto1="salesTax" name_1toN="jobs" state="1">
 		<related_field kind="source">
-			<field_ref uuid="8BB3D41EAF8FBA4AA88FD526BB596350" name="UUID_PurchaseOrder">
-				<table_ref uuid="67220A81398C4000A84C1F180E368020" name="Lot"/>
+			<field_ref uuid="E0F2DD6ADB69C0448E956C9720A9784B" name="UUID_SalesTax">
+				<table_ref uuid="D3AC71CFD00F4948816121AA74EF8DFE" name="Job"/>
 			</field_ref>
 		</related_field>
 		<related_field kind="destination">
-			<field_ref uuid="9C187AB4BBD84246AF62E935FF20415E" name="UUID">
-				<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
+			<field_ref uuid="D694579CEB4CD741865BD4C94B64E596" name="UUID">
+				<table_ref uuid="DF2BA266C1EE294B9508F9997CCE2C22" name="SalesTax"/>
 			</field_ref>
 		</related_field>
 	</relation>
@@ -3325,6 +3317,11 @@
 	<index kind="regular" uuid="2F43555942CD426DA98581247C28392E" type="3">
 		<field_ref uuid="252F726A4DA54A89B97834C4A86C2301" name="UUID_Quote">
 			<table_ref uuid="348628FCA4DC451085D7519B226BD509" name="QuoteLine"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="31930DCC0C4E5B43BBCE9BC313F466DD" type="3">
+		<field_ref uuid="E0F2DD6ADB69C0448E956C9720A9784B" name="UUID_SalesTax">
+			<table_ref uuid="D3AC71CFD00F4948816121AA74EF8DFE" name="Job"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="34F76064C30E2F4C9C144E533921C827" type="3">
@@ -3700,11 +3697,6 @@
 	<index kind="regular" unique_keys="true" uuid="7E197F46BD838349B434193A2013A37B" type="7">
 		<field_ref uuid="3B46C986029743428A30E84AA5F8ADC4" name="UUID">
 			<table_ref uuid="F25CD20FCCFE2044A3D568BAFE905227" name="Division"/>
-		</field_ref>
-	</index>
-	<index kind="regular" uuid="7F7920BA72A2CD42B95E3B697CC59591" type="3">
-		<field_ref uuid="8BB3D41EAF8FBA4AA88FD526BB596350" name="UUID_PurchaseOrder">
-			<table_ref uuid="67220A81398C4000A84C1F180E368020" name="Lot"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="81B92667ECA840CC88E29D368B48B43D" type="7">
@@ -4227,11 +4219,6 @@
 			<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
 		</field_ref>
 	</index>
-	<index kind="regular" uuid="E3A1154A0B80FC41B80F92258DFBFA10" type="3">
-		<field_ref uuid="17F4D9479A9EC746BDF87419776A0B09" name="UUID_Customer">
-			<table_ref uuid="D3AC71CFD00F4948816121AA74EF8DFE" name="Job"/>
-		</field_ref>
-	</index>
 	<index kind="regular" unique_keys="true" uuid="E3FE6D69E136D048AE44F2672D4110DE" type="1">
 		<field_ref uuid="AC37D94799FAA74089EE6777FABCEAAF" name="UUID">
 			<table_ref uuid="37B76DEC3444474BA87B456E6A1D1708" name="sfw_DocumentModel"/>
@@ -4260,6 +4247,11 @@
 	<index kind="regular" uuid="E9107C9C14254D3AB8B9C9A725CCE5E6" type="3">
 		<field_ref uuid="5D9A39B0F2984CED9C5FECF964794B22" name="UUID_ServiceType">
 			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="E91FBC0A28B4AF48819A7072E8EBDC96" type="7">
+		<field_ref uuid="D694579CEB4CD741865BD4C94B64E596" name="UUID">
+			<table_ref uuid="DF2BA266C1EE294B9508F9997CCE2C22" name="SalesTax"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="EE70B7EACA4C464DBC64151FE6BB5C3D" type="3">

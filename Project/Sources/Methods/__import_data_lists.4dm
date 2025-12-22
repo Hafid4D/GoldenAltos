@@ -9,6 +9,33 @@ $status:=New collection:C1472("Active"; "Hold"; "Retired"; "Void")
 $recordStatuscolors:=New collection:C1472("#32CD32"; "#1E90FF"; "#FF0000"; "#FFFF00")
 
 
+
+//----> [SalesTax]
+$salesTaxes:=New collection:C1472(\
+New object:C1471("code"; "T_082"; "value"; "0.0825"); \
+New object:C1471("code"; "T_092"; "value"; "0.0925"); \
+New object:C1471("code"; "T5_187"; "value"; "5.1875"); \
+New object:C1471("code"; "T7_250"; "value"; "7.25"); \
+New object:C1471("code"; "T7_750"; "value"; "7.75"); \
+New object:C1471("code"; "T8_250"; "value"; "8.25"); \
+New object:C1471("code"; "T8_500"; "value"; "8.5"); \
+New object:C1471("code"; "T9_125"; "value"; "9.125"); \
+New object:C1471("code"; "T9_250"; "value"; "9.25"); \
+New object:C1471("code"; "T9_375"; "value"; "9.375"); \
+New object:C1471("code"; "T9_500"; "value"; "9.5"); \
+New object:C1471("code"; "T10_250"; "value"; "10.25")\
+)
+TRUNCATE TABLE:C1051([SalesTax:72])
+For ($i; 0; $salesTaxes.length-1)
+	
+	$salesTax:=ds:C1482.SalesTax.new()
+	$salesTax.code:=$salesTaxes[$i].code
+	$salesTax.rate:=$salesTaxes[$i].value
+	$salesTax.save()
+	
+End for 
+
+
 //----> [CustomerStatus]
 TRUNCATE TABLE:C1051([CustomerStatus:130])
 For ($i; 0; $status.length-1)

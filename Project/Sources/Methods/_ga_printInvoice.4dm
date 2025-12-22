@@ -49,14 +49,6 @@ If (Form:C1466.current_item#Null:C1517)
 	$context.deviceNumber:=Form:C1466.current_item.job.deviceNumber
 	$context.poRel:=Form:C1466.current_item.job.poRel
 	
-	//$context.miscNote:=Form.current_item.job.miscNote
-	//$context.miscCharges:=Form.current_item.job.miscCharges
-	
-	//$context.salesTax:=Form.current_item.job.salesTax
-	//$context.freight:=Form.current_item.job.freight=0 ? "  " : Form.current_item.job.freight
-	//$context.total:=Form.current_item.total=0 ? "  " : Form.current_item.total
-	
-	
 	//Add table
 	$paragraphs:=WP Get elements:C1550($template; wk type paragraph:K81:191)
 	
@@ -163,7 +155,9 @@ If (Form:C1466.current_item#Null:C1517)
 	
 	WP SET TEXT:C1574($endRange; Char:C90(Carriage return:K15:38); wk append:K81:179; wk include in range:K81:180)
 	
-	$text:=Char:C90(Carriage return:K15:38)+Char:C90(Tab:K15:37)+"Tax@ "+String:C10(Form:C1466.current_item.job.salesTaxRate)+"%"+Char:C90(Tab:K15:37)+"US$"+String:C10(Form:C1466.current_item.job.salesTax; "###,###,##0.00")
+	$tax:=Form:C1466.current_item.job.salesTax#Null:C1517 ? Form:C1466.current_item.job.salesTax.rate : 0
+	
+	$text:=Char:C90(Carriage return:K15:38)+Char:C90(Tab:K15:37)+"Tax@ "+String:C10($tax)+"%"+Char:C90(Tab:K15:37)+"US$"+String:C10(Form:C1466.current_item.job.totalTax; "###,###,##0.00")
 	
 	$text:=$text+Char:C90(Carriage return:K15:38)+Char:C90(Tab:K15:37)+"Freight"+Char:C90(Tab:K15:37)+"US$"+String:C10(Form:C1466.current_item.job.freight; "###,###,##0.00")
 	

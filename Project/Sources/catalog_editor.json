@@ -709,9 +709,9 @@
 				"left": 2168.3334960938,
 				"top": 1099,
 				"width": 171.73828125,
-				"height": 1149.33203125
+				"height": 1069.33203125
 			},
-			"displayable_fields_count": 52
+			"displayable_fields_count": 48
 		},
 		"PurchaseOrderLine": {
 			"color": {
@@ -855,6 +855,21 @@
 			},
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
+		},
+		"SalesTax": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 1975,
+				"top": 2096,
+				"width": 120,
+				"height": 140.33203125
+			},
+			"displayable_fields_count": 4
 		},
 		"sfw_SchedulerLog": {
 			"color": {
@@ -2309,7 +2324,7 @@
 		}
 	},
 	"relations": {
-		"DC8453134760634790AF6C2B627E8F9C": {
+		"6D8F16511CF7924F82B86C5F69449F1F": {
 			"color": {
 				"red": 240,
 				"green": 240,
@@ -2318,14 +2333,6 @@
 			}
 		},
 		"D50821228D3A2D4697A5522A774BAFD6": {
-			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
-				"alpha": 0
-			}
-		},
-		"CAD20F99931DF74284C4ECA3F7558445": {
 			"color": {
 				"red": 240,
 				"green": 240,

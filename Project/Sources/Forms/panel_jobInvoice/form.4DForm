@@ -587,7 +587,7 @@
 					"left": 405,
 					"width": 200,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.job.salesTax",
+					"dataSource": "Form:C1466.current_item.job.totalTax",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -810,6 +810,66 @@
 					"borderStyle": "none",
 					"dataSourceTypeHint": "text",
 					"textAlign": "left"
+				},
+				"label_salesTaxCode": {
+					"type": "text",
+					"top": 235,
+					"left": 12,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Tax Code",
+					"textAlign": "right"
+				},
+				"entryField_taxRate": {
+					"type": "input",
+					"top": 262,
+					"left": 92,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.job.salesTax.rate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "number",
+					"textAlign": "left"
+				},
+				"label_salesTaxRate": {
+					"type": "text",
+					"top": 262,
+					"left": 12,
+					"width": 70,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Tax Rate",
+					"textAlign": "right"
+				},
+				"pup_tax": {
+					"type": "button",
+					"top": 232,
+					"left": 92,
+					"width": 140,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_tax.4dm",
+					"events": [
+						"onClick"
+					],
+					"bottom": 255,
+					"visibility": "visible"
 				}
 			}
 		},
@@ -1312,7 +1372,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 329,
+	"geometryStamp": 342,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

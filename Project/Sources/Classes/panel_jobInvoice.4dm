@@ -28,6 +28,12 @@ Function formMethod()
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
+				If (Form:C1466.current_item.job.lineItem=False:C215)
+					This:C1470.salesTaxUpdate()
+					This:C1470.chargesCalculation()
+				Else 
+					This:C1470.pgmTotal()
+				End if 
 				
 				
 			: (FORM Get current page:C276(*)=2)
@@ -37,6 +43,7 @@ Function formMethod()
 				
 			: (FORM Get current page:C276(*)=4)
 				This:C1470.loadJobLineItems()
+				This:C1470.pgmTotal()
 				
 		End case 
 	End if 
@@ -220,6 +227,47 @@ Function pup_status()
 	
 	//*/
 	
+	
+Function drawPup_tax()
+	If (Form:C1466.current_item#Null:C1517)
+		
+		$tax:=ds:C1482.SalesTax.query("UUID =:1"; Form:C1466.current_item.UUID_SalesTax) || New object:C1471()
+		$taxRate:=$tax#Null:C1517 ? $tax.name : ""
+		$color:=""
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_tax"; $taxRate; $pathIcon; ($tax=Null:C1517))
+	End if 
+	
+	
+Function pup_tax()
+	//Create pop up menu
+	If (Form:C1466.sfw.checkIsInModification())
+		$menu:=Create menu:C408
+		$invoiceStatus:=New collection:C1472(New object:C1471("name"; "paid"))  //; New object("name"; "closed"))  
+		For each ($eType; $invoiceStatus)
+			APPEND MENU ITEM:C411($menu; $eType.name; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $eType.name)
+			If ($eType.name=Form:C1466.current_item.staus)
+				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+				If (Is Windows:C1573)
+					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+				End if 
+			End if 
+		End for each 
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		Case of 
+			: ($choose#"")
+				Form:C1466.current_item.status:=$choose
+				This:C1470._activate_save_cancel_button()
+		End case 
+		
+	End if 
+	This:C1470.drawPup_status()
+	
+	
+	
 Function bActionLot()
 	
 	$refMenu:=Create menu:C408
@@ -288,7 +336,7 @@ Function bActionJobLineItem()
 				$form:=New object:C1471("operation"; "create"; \
 					"itemNumber"; Form:C1466.lb_jobLineItems.length+1; \
 					"jobUUID"; Form:C1466.current_item.job.UUID; \
-					"jobTaxRate"; Form:C1466.current_item.job.salesTaxRate; \
+					"jobTaxRate"; Form:C1466.current_item.job.salesTax#Null:C1517 ? Form:C1466.current_item.job.salesTax.rate : 0; \
 					"lineItem"; $eJobLineItem)
 				
 				$winRef:=Open form window:C675("createJobLineItem"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
@@ -309,8 +357,8 @@ Function bActionJobLineItem()
 				
 				$form:=New object:C1471("operation"; "modify"; \
 					"itemNumber"; Form:C1466.lb_jobLineItems.length+1; \
-					"jobUUID"; Form:C1466.current_item.job.UUID; "jobTaxRate"; \
-					Form:C1466.current_item.job.salesTaxRate; \
+					"jobUUID"; Form:C1466.current_item.job.UUID; \
+					"jobTaxRate"; Form:C1466.current_item.job.salesTax#Null:C1517 ? Form:C1466.current_item.job.salesTax.rate : 0; \
 					"lineItem"; Form:C1466.selectedJobLineItem)
 				
 				$winRef:=Open form window:C675("createJobLineItem"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
@@ -327,6 +375,14 @@ Function bActionJobLineItem()
 				
 			: ($choose="--delete")
 				SUSPEND TRANSACTION:C1385
+				
+				$eJobLineItem:=ds:C1482.JobLineItem.get(Form:C1466.lineItem.UUID)
+				
+				$info:=$eJobLineItem.drop()
+				
+				If (Not:C34($info.success))
+					TRACE:C157
+				End if 
 				
 				RESUME TRANSACTION:C1386
 				
@@ -409,12 +465,14 @@ Function bActionPoLine()
 	
 Function salesTaxUpdate()
 	If (Form:C1466.current_item.job#Null:C1517)
+		$taxRate:=Form:C1466.current_item.job.salesTax#Null:C1517 ? Form:C1466.current_item.job.salesTax.rate : 0
 		If (Form:C1466.current_item.job.taxable=True:C214)
-			Form:C1466.current_item.job.salesTax:=Form:C1466.current_item.job.miscCharges*(Form:C1466.current_item.job.salesTaxRate/100)
+			
+			Form:C1466.current_item.job.totalTax:=Form:C1466.current_item.job.miscCharges*($taxRate/100)
 		Else 
-			Form:C1466.current_item.job.salesTax:=0
+			Form:C1466.current_item.job.totalTax:=0
 		End if 
-		Form:C1466.current_item.job.salesTax:=Form:C1466.current_item.job.salesTax+Form:C1466.lb_poLines.sum("saleTax")
+		Form:C1466.current_item.job.totalTax:=Form:C1466.current_item.job.totalTax+Form:C1466.lb_poLines.sum("saleTax")
 		
 	End if 
 	
@@ -499,7 +557,7 @@ Function chargesCalculation()  //--> Subr_Total
 	
 	
 	//Has it all
-	Form:C1466.current_item.total:=Form:C1466.current_item.total+Form:C1466.current_item.job.salesTax+Form:C1466.current_item.job.freight
+	Form:C1466.current_item.total:=Form:C1466.current_item.total+Form:C1466.current_item.job.totalTax+Form:C1466.current_item.job.freight
 	
 	This:C1470.IsPOShort()
 	
@@ -528,7 +586,7 @@ Function IsPOShort()
 						: (Form:C1466.current_item.total<=0.01)
 							
 							$error:="WARNING: "
-						: (($poAmtBilled-Form:C1466.current_item.job.salesTax)<$po.poAmount+1)
+						: (($poAmtBilled-Form:C1466.current_item.job.totalTax)<$po.poAmount+1)
 							
 							$error:="WARNING: "
 						Else 
@@ -553,19 +611,31 @@ Function UpdateItemTax()  // --> upd_itemstax
 	
 	For each ($joblineItem; Form:C1466.lb_jobLineItems)
 		If (Form:C1466.current_item.job#Null:C1517)
+			$taxRate:=Form:C1466.current_item.job.salesTax#Null:C1517 ? Form:C1466.current_item.job.salesTax.rate : 0
 			//If() --> Check if time_billing invoice
-			Form:C1466.current_item.job.salesTax:=Form:C1466.current_item.job.salesTax+(($joblineItem.quantity*$joblineItem.unitPrice)*(Form:C1466.current_item.job.salesTaxRate/100)*Num:C11($joblineItem.taxable))
-			$joblineItem.lineTotal:=($joblineItem.quantity*$joblineItem.unitPrice)+(($joblineItem.quantity*$joblineItem.unitPrice)*(Form:C1466.current_item.job.salesTaxRate/100)*Num:C11($joblineItem.taxable))
+			Form:C1466.current_item.job.totalTax:=Form:C1466.current_item.job.totalTax+(($joblineItem.quantity*$joblineItem.unitPrice)*($taxRate/100)*Num:C11($joblineItem.taxable))
+			$joblineItem.lineTotal:=($joblineItem.quantity*$joblineItem.unitPrice)+(($joblineItem.quantity*$joblineItem.unitPrice)*($taxRate/100)*Num:C11($joblineItem.taxable))
 			
 			////Else
-			//Form.current_item.job.salesTax:=Form.current_item.job.salesTax+(($joblineItem.quantity*$joblineItem.unitPrice)*(Form.current_item.job.salesTaxRate/100)*Num($joblineItem.taxable))
-			//$joblineItem.lineTotal:=($joblineItem.hourCount*$joblineItem.unitPrice)+(($joblineItem.hourCount*$joblineItem.unitPrice)*(Form.current_item.job.salesTaxRate/100)*Num($joblineItem.taxable))
+			//Form.current_item.job.totalTax:=Form.current_item.job.totalTax+(($joblineItem.quantity*$joblineItem.unitPrice)*($taxRate/100)*Num($joblineItem.taxable))
+			//$joblineItem.lineTotal:=($joblineItem.hourCount*$joblineItem.unitPrice)+(($joblineItem.hourCount*$joblineItem.unitPrice)*($taxRate/100)*Num($joblineItem.taxable))
 			
 			//End if
 			
 			If (Form:C1466.current_item.job.taxable=True:C214)
-				Form:C1466.current_item.job.salesTax:=Form:C1466.current_item.job.miscCharges*(Form:C1466.current_item.job.salesTaxRate/100)
+				Form:C1466.current_item.job.totalTax:=Form:C1466.current_item.job.totalTax+Form:C1466.current_item.job.miscCharges*($taxRate/100)
 			End if 
+			
+			SUSPEND TRANSACTION:C1385
+			$job:=ds:C1482.Job.query("UUID =:1"; Form:C1466.current_item.job.UUID).first()
+			$job:=Form:C1466.current_item.job
+			$info:=$job.save()
+			If (Not:C34($info.success))
+				TRACE:C157
+			End if 
+			
+			RESUME TRANSACTION:C1386
+			
 		End if 
 	End for each 
 	
@@ -579,7 +649,8 @@ Function pgmTotal()
 	If (Form:C1466.current_item.job#Null:C1517)
 		Form:C1466.current_item.total:=Form:C1466.current_item.total+Form:C1466.current_item.job.miscCharges+Form:C1466.current_item.job.freight
 		If (Form:C1466.current_item.job.taxable=True:C214)
-			Form:C1466.current_item.total:=Form:C1466.current_item.total+(Form:C1466.current_item.job.miscCharges*(Form:C1466.current_item.job.salesTaxRate/100))
+			$taxRate:=Form:C1466.current_item.job.salesTax#Null:C1517 ? Form:C1466.current_item.job.salesTax.rate : 0
+			Form:C1466.current_item.total:=Form:C1466.current_item.total+(Form:C1466.current_item.job.miscCharges*($taxRate/100))
 		End if 
 	End if 
 	
