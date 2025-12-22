@@ -290,17 +290,21 @@ Function manageReOrderBtns()
 	End if 
 	
 Function btnOpenCustomer()
-	$es:=ds:C1482.Customer.query("name = :1"; Form:C1466.current_item.job.customerName)
-	
-	If ($es.length>0)
-		Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "customer")
+	If (Form:C1466.current_item.purchaseOrder.customer#Null:C1517)
+		$es:=ds:C1482.Customer.query("name = :1"; Form:C1466.current_item.job.purchaseOrder.customer.name)
+		
+		If ($es.length>0)
+			Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "customer")
+		End if 
 	End if 
 	
 Function btnOpenPurchaseOrder()
-	$es:=ds:C1482.PurchaseOrder.query("poNumber = :1"; Form:C1466.current_item.job.poNumber)
-	
-	If ($es.length>0)
-		Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "purchaseOrders")
+	If (Form:C1466.current_item.job.purchaseOrder#Null:C1517)
+		$es:=ds:C1482.PurchaseOrder.query("poNumber = :1"; Form:C1466.current_item.job.purchaseOrder.poNumber)
+		
+		If ($es.length>0)
+			Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "purchaseOrders")
+		End if 
 	End if 
 	
 Function btnOpenJob()

@@ -141,7 +141,7 @@
 					"left": 72,
 					"width": 100,
 					"height": 16,
-					"dataSource": "Form:C1466.current_item.job.poNumber",
+					"dataSource": "Form:C1466.current_item.job.purchaseOrder.poNumber",
 					"focusable": false,
 					"enterable": true,
 					"dragging": "none",
@@ -179,7 +179,7 @@
 					"left": 290,
 					"width": 245,
 					"height": 16,
-					"dataSource": "Form:C1466.current_item.job.customerName",
+					"dataSource": "Form:C1466.current_item.job.purchaseOrder.customer.name",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -190,7 +190,8 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"fontWeight": "normal",
-					"textAlign": "left"
+					"textAlign": "left",
+					"method": "ObjectMethods/entryField_CustomerName.4dm"
 				},
 				"label_jobNumber4": {
 					"type": "text",
