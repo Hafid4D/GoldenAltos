@@ -320,15 +320,14 @@ Function bActionAttachLot()
 	End if 
 	
 Function btnOpenCustomer()
-	If (Form:C1466.current_item.customer#Null:C1517)
-		var $es : Object
-		$es:=ds:C1482.Customer.query("name = :1"; Form:C1466.current_item.customer.name)
+	
+	If (Form:C1466.current_item.purchaseOrder.customer#Null:C1517)
+		$es:=ds:C1482.Customer.query("name = :1"; Form:C1466.current_item.purchaseOrder.customer.name)
 		
 		If ($es.length>0)
 			Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "customer")
 		End if 
 	End if 
-	
 Function btnOpenPurchaseOrder()
 	If (Form:C1466.current_item.purchaseOrder#Null:C1517)
 		var $es : Object

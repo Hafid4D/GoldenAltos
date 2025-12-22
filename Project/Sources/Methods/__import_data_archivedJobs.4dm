@@ -56,6 +56,7 @@ If (True:C214)
 		//Else 
 		
 		//End if 
+
 		$job.customerName:=$record.customer
 		$job.qty:=$record.qty
 		$job.qtyOnHand:=$record.qtyOnHand
@@ -159,14 +160,7 @@ If (True:C214)
 			$lot_e.holdDate:=$lot.holdDate
 			$lot_e.holdTime:=$lot.holdTime
 			
-			//$lot_e.poNumber:=$lot.poNumber
-			$po_s:=ds:C1482.PurchaseOrder.query("oldPoNumber =:1"; Split string:C1554($record.poNumber; "\r"; sk trim spaces:K86:2).join("\r"))
-			If ($po_s.length>0)
-				$lot_e.poNumber:=$po_s[0].poNumber
-				//$lot_e.UUID_PurchaseOrder:=$po_s[0].UUID
-			Else 
-				$lot_e.poNumber:=0
-			End if 
+			$lot_e.poNumber:=$lot.poNumber
 			
 			$lot_e.customer:=$lot.customer
 			$lot_e.commit:=$lot.commit

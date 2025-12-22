@@ -1251,7 +1251,7 @@
 		<field name="poRel" uuid="A76C5D298BD4C94CA97E6E570FD7E87B" type="3" never_null="true" id="44"/>
 		<field name="minimumJobCharge" uuid="F6211AB1F8E9084C95B7804321E05876" type="10" limiting_length="255" never_null="true" id="45"/>
 		<field name="UUID_PurchaseOrder" uuid="9B63E59CE2F1C64DB9F8852D9C114C1C" type="10" store_as_UUID="true" never_null="true" id="46"/>
-		<field name="UUID_SalesTax" uuid="E0F2DD6ADB69C0448E956C9720A9784B" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="47"/>
+		<field name="UUID_SalesTax" uuid="E0F2DD6ADB69C0448E956C9720A9784B" type="10" store_as_UUID="true" never_null="true" id="47"/>
 		<primary_key field_name="UUID" field_uuid="D70DED62813D485DA8CFB0CFD1FF994C"/>
 	</table>
 	<table name="Lot" uuid="67220A81398C4000A84C1F180E368020" id="118">
