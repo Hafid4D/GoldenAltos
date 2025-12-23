@@ -137,7 +137,7 @@ If (Form:C1466.current_item#Null:C1517)
 	
 	WP SET ATTRIBUTES:C1342($endRange; wk tabs:K81:278; New collection:C1472($tab_1; $tab))
 	
-	$text:=Char:C90(Carriage return:K15:38)+Form:C1466.current_item.job.miscNote+Char:C90(Tab:K15:37)+Char:C90(Tab:K15:37)+"US$"+String:C10(Form:C1466.current_item.job.miscCharges; "###,###,##0.00")
+	$text:=Char:C90(Carriage return:K15:38)+Form:C1466.current_item.job.miscNote+Char:C90(Tab:K15:37)+Char:C90(Tab:K15:37)+Form:C1466.current_item.job.currency+String:C10(Form:C1466.current_item.job.miscCharges; "###,###,##0.00")
 	
 	WP SET TEXT:C1574($endRange; $text; wk append:K81:179; wk include in range:K81:180)
 	
@@ -157,9 +157,9 @@ If (Form:C1466.current_item#Null:C1517)
 	
 	$tax:=Form:C1466.current_item.job.salesTax#Null:C1517 ? Form:C1466.current_item.job.salesTax.rate : 0
 	
-	$text:=Char:C90(Carriage return:K15:38)+Char:C90(Tab:K15:37)+"Tax@ "+String:C10($tax)+"%"+Char:C90(Tab:K15:37)+"US$"+String:C10(Form:C1466.current_item.job.totalTax; "###,###,##0.00")
+	$text:=Char:C90(Carriage return:K15:38)+Char:C90(Tab:K15:37)+"Tax@ "+String:C10($tax)+"%"+Char:C90(Tab:K15:37)+Form:C1466.current_item.job.currency+String:C10(Form:C1466.current_item.job.totalTax; "###,###,##0.00")
 	
-	$text:=$text+Char:C90(Carriage return:K15:38)+Char:C90(Tab:K15:37)+"Freight"+Char:C90(Tab:K15:37)+"US$"+String:C10(Form:C1466.current_item.job.freight; "###,###,##0.00")
+	$text:=$text+Char:C90(Carriage return:K15:38)+Char:C90(Tab:K15:37)+"Freight"+Char:C90(Tab:K15:37)+Form:C1466.current_item.job.currency+String:C10(Form:C1466.current_item.job.freight; "###,###,##0.00")
 	
 	WP SET TEXT:C1574($endRange; $text; wk append:K81:179; wk include in range:K81:180)
 	
@@ -178,7 +178,7 @@ If (Form:C1466.current_item#Null:C1517)
 	
 	WP SET ATTRIBUTES:C1342($endRange; wk tabs:K81:278; New collection:C1472($tab_1; $tab))
 	
-	$text:=Char:C90(Tab:K15:37)+"US$"+String:C10(Form:C1466.current_item.total; "###,###,##0.00")
+	$text:=Char:C90(Tab:K15:37)+Form:C1466.current_item.job.currency+String:C10(Form:C1466.current_item.total; "###,###,##0.00")
 	
 	WP SET TEXT:C1574($endRange; $text; wk append:K81:179; wk include in range:K81:180)
 	

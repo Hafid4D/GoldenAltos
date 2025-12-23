@@ -30,6 +30,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsOrderBy("invoiceNumber")
 	$entry.setMainViewLabel("All Invoices")
 	
+	$entry.setItemListAction("Export to Excel"; "_ga_exportInvoicesSelection")
+	
 	$entry.setItemAction("Print Invoice"; "_ga_printInvoice")
 	
 	$entry.enableTransaction()

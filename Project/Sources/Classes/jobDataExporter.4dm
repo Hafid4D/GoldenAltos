@@ -3,11 +3,12 @@
 property filePath : Text
 property fields : Collection:=New collection:C1472()
 property area : Text
-property jobs : cs:C1710.JobSelection
+property jobs : Collection  //cs.JobSelection
 property fileName : Text
 property folderPath : Text
+property autoQuit : Boolean
 
-Class constructor($path : Text; $fields : Collection; $jobs : cs:C1710.JobSelection; $fileName : Text; $folderPath : Text)
+Class constructor($path : Text; $fields : Collection; $jobs : Collection; $fileName : Text; $folderPath : Text)
 	This:C1470.filePath:=$path
 	This:C1470.fields:=$fields
 	This:C1470.jobs:=$jobs

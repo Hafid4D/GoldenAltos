@@ -131,7 +131,8 @@
 					"events": [
 						"onClick"
 					],
-					"bottom": 57
+					"bottom": 57,
+					"textAlign": "left"
 				},
 				"btnForward2": {
 					"type": "button",
