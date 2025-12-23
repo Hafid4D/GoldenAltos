@@ -12,9 +12,39 @@ Function get quoteCode()->$code : Text
 	End if 
 	
 Function get jobType()->$jobType : Text
-	$jobType:=Form:C1466.current_item.lineItem=False:C215 ? "Job Order" : "NR Job Order"
+	$jobType:=This:C1470.lineItem=False:C215 ? "Job Order" : "NR Job Order"
 	
-Function get
+	
+local Function get dateCreated()->$date : Date
+	$date:=This:C1470.stmpCreated=0 ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpCreated; True:C214)
+	
+local Function set dateCreated($date : Date)
+	This:C1470.stmpCreated:=$date=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($date)
+	
+local Function get expectedDate()->$date : Date
+	$date:=This:C1470.stmpExpected=0 ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpExpected; True:C214)
+	
+local Function set expectedDate($date : Date)
+	This:C1470.stmpExpected:=$date=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($date)
+	
+local Function get invoiceDate()->$date : Date
+	$date:=This:C1470.stmpInvoiced=0 ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpInvoiced; True:C214)
+	
+local Function set invoiceDate($date : Date)
+	This:C1470.stmpInvoiced:=$date=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($date)
+	
+local Function get lastShipDate()->$date : Date
+	$date:=This:C1470.stmpLastShipped=0 ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpLastShipped; True:C214)
+	
+local Function set lastShipDate($date : Date)
+	This:C1470.stmpLastShipped:=$date=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($date)
+	
+local Function get archivedDate()->$date : Date
+	$date:=This:C1470.stmpArchived=0 ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpArchived; True:C214)
+	
+local Function set archivedDate($date : Date)
+	This:C1470.stmpArchived:=$date=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($date)
+	
 	
 local Function drowPup($dataClass; $queryField; $queryValue; $pupName)
 	

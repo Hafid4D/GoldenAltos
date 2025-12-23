@@ -1,4 +1,8 @@
 //%attributes = {}
+
+$job:=ds:C1482.Job.all().first()
+
+
 $nameA:="897673"
 $nameB:="897673_1"
 

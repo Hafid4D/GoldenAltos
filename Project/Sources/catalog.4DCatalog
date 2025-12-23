@@ -1210,7 +1210,7 @@
 		<field name="jobNumber" uuid="0FA357DE65EF304D84620E34A9B9F37C" type="4" unique="true" never_null="true" id="4"/>
 		<field name="poNumber" uuid="049CCB3BE3EFB34D8C79A28B2E49EA72" type="4" never_null="true" id="5"/>
 		<field name="UUID_Division" uuid="3F0901B7A9581B4F9D9BC0B2A02F764B" type="10" store_as_UUID="true" never_null="true" id="6"/>
-		<field name="dateCreated" uuid="7B92BACD0DE09D44B8682380511563AC" type="4" never_null="true" id="7"/>
+		<field name="stmpCreated" uuid="7B92BACD0DE09D44B8682380511563AC" type="4" never_null="true" id="7"/>
 		<field name="deviceNumber" uuid="EA8629F484A5E54DB5D5380CA9DEE7AC" type="10" limiting_length="255" never_null="true" id="8"/>
 		<field name="process" uuid="B99706F5D99D38409877AFE421C77B0D" type="10" limiting_length="255" never_null="true" id="9"/>
 		<field name="totalTax" uuid="C38CF266A5AAE74C8B1918CEB92C3EBA" type="6" never_null="true" id="10"/>
@@ -1231,14 +1231,14 @@
 			<field_extra multi_line="true"/>
 		</field>
 		<field name="archived" uuid="77227527298C3F469BEAFE9D191D2689" type="1" never_null="true" id="25"/>
-		<field name="expectedDate" uuid="580CC9E1B864CD4FB422BDFBA8643B10" type="8" never_null="true" id="26"/>
-		<field name="invoiceDate" uuid="AEB29DFEDBC2BB459951D70176EE4977" type="8" never_null="true" id="27"/>
-		<field name="lastShipDate" uuid="8B39A43798850E449C946B0ECDB60979" type="8" never_null="true" id="28"/>
-		<field name="archivedDate" uuid="A310D42571F1E9449B87A88E35E1734E" type="8" never_null="true" id="29"/>
+		<field name="stmpExpected" uuid="580CC9E1B864CD4FB422BDFBA8643B10" type="4" never_null="true" id="26"/>
+		<field name="stmpInvoiced" uuid="AEB29DFEDBC2BB459951D70176EE4977" type="4" never_null="true" id="27"/>
+		<field name="stmpLastShipped" uuid="8B39A43798850E449C946B0ECDB60979" type="4" never_null="true" id="28"/>
+		<field name="stmpArchived" uuid="A310D42571F1E9449B87A88E35E1734E" type="4" never_null="true" id="29"/>
 		<field name="pr_qualifier" uuid="C05E81445733BF4399D0F30ABA121A1D" type="10" limiting_length="255" never_null="true" id="30"/>
 		<field name="dropShipCustomer" uuid="21DEEF44B59645428651C744EBD1C277" type="10" limiting_length="255" never_null="true" id="31"/>
 		<field name="currency" uuid="84B0C0958BBDC9489392DFE303C06DB6" type="10" limiting_length="255" never_null="true" id="32"/>
-		<field name="recommitDate" uuid="1C26D9922290404BB40BE484CE2603A3" type="8" never_null="true" id="33"/>
+		<field name="smtpRecommit" uuid="1C26D9922290404BB40BE484CE2603A3" type="4" never_null="true" id="33"/>
 		<field name="altDeviceNumber" uuid="0728EAEDC621C342B0CFA1E7961A3F6D" type="10" limiting_length="255" never_null="true" id="34"/>
 		<field name="customerShipper" uuid="2D52050871F24947B2ED4FC976221C59" type="10" limiting_length="255" never_null="true" id="35"/>
 		<field name="initials" uuid="3E94628C6118B241AB78802ADC164ACB" type="10" limiting_length="255" never_null="true" id="36"/>
@@ -1246,12 +1246,19 @@
 		<field name="miscNote" uuid="3B42C8B890EA0746B74693833DE05109" type="10" limiting_length="255" never_null="true" id="38"/>
 		<field name="glAcc" uuid="8570D07AA00149499CCC8C438F68418B" type="10" limiting_length="255" never_null="true" id="39"/>
 		<field name="taxable" uuid="2C5A2D0B69D67540985F28871A182629" type="1" never_null="true" id="40"/>
+		<field name="packageType" uuid="D6782ED22EBA634BAA5711E6B432E9E4" type="10" limiting_length="255" never_null="true" id="41">
+			<field_extra multi_line="false"/>
+		</field>
 		<field name="freight" uuid="3D964A3B2A4DE541AA48FD66F4967173" type="6" never_null="true" id="42"/>
 		<field name="boxStockShipment" uuid="DFC1039599AAF14698872DCD1612B9E5" type="1" never_null="true" id="43"/>
 		<field name="poRel" uuid="A76C5D298BD4C94CA97E6E570FD7E87B" type="3" never_null="true" id="44"/>
 		<field name="minimumJobCharge" uuid="F6211AB1F8E9084C95B7804321E05876" type="10" limiting_length="255" never_null="true" id="45"/>
 		<field name="UUID_PurchaseOrder" uuid="9B63E59CE2F1C64DB9F8852D9C114C1C" type="10" store_as_UUID="true" never_null="true" id="46"/>
 		<field name="UUID_SalesTax" uuid="E0F2DD6ADB69C0448E956C9720A9784B" type="10" store_as_UUID="true" never_null="true" id="47"/>
+		<field name="testerType" uuid="9A161E5A25D33B41A8B17EF16FCE8D68" type="10" limiting_length="255" never_null="true" id="48"/>
+		<field name="acNote" uuid="314A98BDF2B4DC4C97A9E9580A2CEA91" type="10" limiting_length="255" never_null="true" id="49"/>
+		<field name="inventoryCost" uuid="829DC14C06E9C749983A5F8363FC093E" type="6" never_null="true" id="50"/>
+		<field name="directCost" uuid="61CFBDDFD41A544B9119E8CA97CC6669" type="6" never_null="true" id="51"/>
 		<primary_key field_name="UUID" field_uuid="D70DED62813D485DA8CFB0CFD1FF994C"/>
 	</table>
 	<table name="Lot" uuid="67220A81398C4000A84C1F180E368020" id="118">

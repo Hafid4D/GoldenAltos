@@ -707,11 +707,11 @@
 			},
 			"coordinates": {
 				"left": 2168.3334960938,
-				"top": 1099,
+				"top": 1106,
 				"width": 171.73828125,
-				"height": 1069.33203125
+				"height": 1138.33203125
 			},
-			"displayable_fields_count": 48
+			"displayable_fields_count": 52
 		},
 		"PurchaseOrderLine": {
 			"color": {

@@ -211,11 +211,12 @@ If (True:C214)
 		End if 
 		
 		//$job.division:=$record.division
-		$job.dateCreated:=$record.dateCreated
-		$job.expectedDate:=$record.expectedDate
-		$job.invoiceDate:=$record.invoiceDate
-		$job.lastShipDate:=$record.lastShipDate
-		$job.archivedDate:=$record.archivedDate
+		$job.stmpCreated:=Date:C102($record.dateCreated)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.dateCreated))  //$record.dateCreated
+		$job.stmpExpected:=Date:C102($record.expectedDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.expectedDate))  //$record.expectedDate
+		$job.stmpInvoiced:=Date:C102($record.invoiceDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.invoiceDate))  //$record.invoiceDate
+		$job.stmpLastShipped:=Date:C102($record.lastShipDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.lastShipDate))  //$record.lastShipDate
+		$job.stmpArchived:=Date:C102($record.archivedDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.archivedDate))  //$record.archivedDate
+		
 		$job.deviceNumber:=$record.deviceNumber
 		$job.process:=$record.process
 		$job.totalTax:=$record.salesTax
@@ -235,7 +236,7 @@ If (True:C214)
 		//Else 
 		
 		//End if 
-
+		
 		$job.customerName:=$record.customer
 		$job.qty:=$record.qty
 		$job.qtyOnHand:=$record.qtyOnHand
@@ -244,7 +245,9 @@ If (True:C214)
 		$job.archived:=False:C215
 		$job.pr_qualifier:=$record.pr_qualifier
 		$job.dropShipCustomer:=$record.dropShipCustomer
-		$job.recommitDate:=$record.recommitDate
+		
+		$job.smtpRecommit:=Date:C102($record.recommitDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.recommitDate))  //$record.recommitDate
+		
 		$job.currency:=$record.currency
 		$job.altDeviceNumber:=$record.altDeviceNumber
 		$job.customerShipper:=$record.customerShipper
@@ -265,6 +268,11 @@ If (True:C214)
 		$job.minimumJobCharge:=$record.minimumJobCharge
 		$job.boxStockShipment:=$record.boxStockShipment
 		$job.poRel:=$record.poRel
+		$job.packageType:=$record.packageType
+		$job.testerType:=$record.testerType
+		$job.acNote:=$record.acNote
+		$job.inventoryCost:=$record.inventoryCost
+		$job.directCost:=$record.directCost
 		
 		$res:=$job.save()
 		
@@ -402,7 +410,7 @@ If (True:C214)
 			Else 
 				$lot_e.poNumber:=0
 			End if 
-
+			
 			$lot_e.poNumber:=$lot.poNumber
 			
 			$lot_e.customer:=$lot.customer

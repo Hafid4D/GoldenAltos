@@ -35,8 +35,8 @@ If (Form:C1466.sfw.lb_items.length>0)
 	$folderPath:=Get 4D folder:C485(Current resources folder:K5:16)+"exportedData"  //+Folder separator+"Jobs"
 	
 	$fileName:=Split string:C1554(String:C10($fileName+"_"+Replace string:C233(String:C10(Date:C102(Timestamp:C1445)); "/"; "_")); " "; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join("")
-	
-	$offscreen:=cs:C1710.jobDataExporter.new($file.platformPath; $fields; Form:C1466.sfw.lb_items; $fileName; $folderPath)
+	$collection:=Form:C1466.sfw.lb_items.toCollection()
+	$offscreen:=cs:C1710.jobDataExporter.new($file.platformPath; $fields; $collection; $fileName; $folderPath)
 	$excelSheet:=VP Run offscreen area($offscreen)
 	
 	//cs.sfw_dialog.me.info(ds.sfw_readXliff("export.done"; "The export is done"))
