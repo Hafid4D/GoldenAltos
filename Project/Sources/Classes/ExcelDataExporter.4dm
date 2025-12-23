@@ -7,15 +7,16 @@ property entitySelection
 property fileName : Text
 property destinationFolderPath : Text
 property autoQuit : Boolean
+property title : Text
 
-
-Class constructor($templatePath : Text; $mapping : Collection; $entitySelection; $destinationFileName : Text; $destinationFolderPath : Text)
+Class constructor($templatePath : Text; $mapping : Collection; $entitySelection; $destinationFileName : Text; $destinationFolderPath : Text; $title : Text)
 	This:C1470.templatePath:=$templatePath
 	This:C1470.mapping:=$mapping
 	This:C1470.entitySelection:=$entitySelection
 	This:C1470.destinationFileName:=$destinationFileName
 	This:C1470.autoQuit:=False:C215
 	This:C1470.destinationFolderPath:=$destinationFolderPath
+	This:C1470.title:=$title
 	
 	// This function will be called on each event of the offscreen area 
 Function onEvent()
@@ -26,12 +27,30 @@ Function onEvent()
 			
 			$excelOptions:={includeStyles: False:C215; includeFormulas: True:C214; openMode: ""}
 			$o.excelOptions:=$excelOptions
-			$o.formula:=Formula:C1597(SET TIMER:C645(30))
+			$o.formula:=Formula:C1597(SET TIMER:C645(1))
 			VP IMPORT DOCUMENT(This:C1470.area; This:C1470.templatePath; $o)  // make an asynch callback
 			
 		: (Form event code:C388=On Timer:K2:25)
 			
 			SET TIMER:C645(0)
+			
+			$row:=1
+			$col:=0
+			
+			//Title
+			
+			
+			// The title style
+			$style:=New object:C1471
+			$style.font:="14pt Arial bold"
+			//$style.backColor:="#DCDCDC"
+			$style.borderBottom:=New object:C1471("color"; "black"; "style"; vk line style thin:K89:39)
+			
+			VP SET CELL STYLE(VP Cells(This:C1470.area; 0; $row; This:C1470.mapping.length; 1); $style)
+			VP SET ROW ATTRIBUTES(VP Row(This:C1470.area; $row); New object:C1471("height"; 35))
+			VP SET TEXT VALUE(VP Cell(This:C1470.area; $col; $row); This:C1470.title)
+			VP Combine ranges(VP Cells(This:C1470.area; 0; $row; 2; 1); VP Cells(This:C1470.area; 3; $row; This:C1470.mapping.length; 1))
+			
 			
 			$row:=2
 			$col:=0
@@ -44,16 +63,19 @@ Function onEvent()
 			
 			// The header style
 			$style:=New object:C1471
-			$style.font:="bold"
+			$style.font:="bold Arial"
 			$style.backColor:="#FFFF00"
 			
-			VP ADD STYLESHEET(This:C1470.area; "header"; $style)
-			
-			VP SET CELL STYLE(VP Cells(This:C1470.area; 0; $row; $col+1; 1); New object:C1471("name"; "header"))
-			
+			VP SET CELL STYLE(VP Cells(This:C1470.area; 0; $row; $col+1; 1); $style)
+			VP SET ROW ATTRIBUTES(VP Row(This:C1470.area; $row); New object:C1471("height"; 30))
 			
 			$row:=$row+1
 			$col:=0
+			
+			$footerValues:=New collection:C1472()
+			
+			$colomnWith:=This:C1470.mapping.extract("header").map(Formula:C1597(Length:C16($1.value)))
+			
 			
 			//Data
 			For each ($entity; This:C1470.entitySelection)
@@ -83,18 +105,34 @@ Function onEvent()
 								
 							End for 
 							
+							//Fill the footer collection
+							Case of 
+									
+								: (This:C1470.mapping.extract("footerOperation")[$col]="sum")
+									
+									If ($row=3)
+										$footerValues[$col]:=0
+									End if 
+									
+									$footerValues[$col]:=Num:C11($footerValues[$col])+Num:C11($content)
+									
+								Else 
+									
+							End case 
+							
+							//Fill the columns width collection
+							If (Length:C16(String:C10($content))>$colomnWith[$col])
+								$colomnWith[$col]:=Length:C16(String:C10($content))
+							End if 
+							
 							If (String:C10($content)="False") | (String:C10($content)="True")
 								$content:=$content=False:C215 ? "N" : "Y"
 							End if 
 							
-							//If (Type($content)=Is integer) | (Type($content)=Is real) | (Type($content)=Is longint) | (Type($content)=Is integer 64 bits)
 							VP SET VALUE(VP Cell(This:C1470.area; $col; $row); New object:C1471("value"; $content))
-							//Else 
-							//VP SET TEXT VALUE(VP Cell(This.area; $col; $row); String($content))
-							//End if 
-							
 							
 					End case 
+					
 					$col:=$col+1
 				End for each 
 				$row:=$row+1
@@ -102,6 +140,30 @@ Function onEvent()
 				VP INSERT ROWS(VP Row(This:C1470.area; $row; 1))
 			End for each 
 			
+			
+			//Footer
+			For each ($value; $footerValues)
+				
+				VP SET VALUE(VP Cell(This:C1470.area; $col; $row); New object:C1471("value"; $value))
+				$col:=$col+1
+			End for each 
+			
+			// The footer style
+			$style:=New object:C1471
+			$style.font:="bold underline"
+			$style.backColor:="#D3D3D3"
+			$style.borderTop:=New object:C1471("color"; "black"; "style"; vk line style thin:K89:39)
+			
+			VP SET CELL STYLE(VP Cells(This:C1470.area; 0; $row; $col+1; 1); $style)
+			
+			//Columns With
+			For ($i; 0; $colomnWith.length-1)
+				$size:=$colomnWith[$i]*10
+				VP SET COLUMN ATTRIBUTES(VP Column(This:C1470.area; $i); New object:C1471("width"; $size))
+			End for 
+			
+			
+			//Export the content
 			$file:=Folder:C1567(Convert path system to POSIX:C1106(This:C1470.destinationFolderPath)).file(This:C1470.destinationFileName)
 			
 			If (Not:C34($file.exists))
