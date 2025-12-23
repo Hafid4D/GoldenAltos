@@ -864,8 +864,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1975,
-				"top": 2096,
+				"left": 1971,
+				"top": 1998,
 				"width": 120,
 				"height": 140.33203125
 			},
@@ -1002,11 +1002,11 @@
 			},
 			"coordinates": {
 				"left": 1968,
-				"top": 1745,
+				"top": 1732,
 				"width": 159,
-				"height": 298.33203125
+				"height": 239.33203125
 			},
-			"displayable_fields_count": 12,
+			"displayable_fields_count": 9,
 			"fields_ordering": 1
 		},
 		"BuyingOrderLine": {
