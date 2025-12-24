@@ -34,32 +34,35 @@ If (Form:C1466.sfw.lb_items.length>0)
 	End if 
 	
 	$context.equipment:=$equipment
+	
+	$context.subject:=Form:C1466.sfw.view.label
+	
 	SET PRINT OPTION:C733(Orientation option:K47:2; 1)
 	
-	Case of 
-		: ($identEntry="main") & (Count parameters:C259=0)
-			
-			$context.subject:="Repairs Logs"
-			
-		: ($identEntry="currentProblems") & (Count parameters:C259=0)
-			
-			$context.subject:="Open problems"
-			
-		: ($identEntry="problemsByInterval") & (Count parameters:C259=0)
-			
-			$context.subject:="Problems from "+String:C10($startDate)+" to "+String:C10($endDate)
-			
-		: ($identEntry="repairsByInterval") & (Count parameters:C259=0)
-			
-			$context.subject:="Repairs between "+String:C10($startDate)+" to "+String:C10($endDate)
-			
-		Else 
-			If (Count parameters:C259=1)
-				$context.subject:="Down incident report"
-			End if 
-			
-			
-	End case 
+	//Case of 
+	//: ($identEntry="main") & (Count parameters=0)
+	
+	//$context.subject:="Repairs Logs"
+	
+	//: ($identEntry="currentProblems") & (Count parameters=0)
+	
+	//$context.subject:="Open problems"
+	
+	//: ($identEntry="problemsByInterval") & (Count parameters=0)
+	
+	//$context.subject:="Problems from "+String($startDate)+" to "+String($endDate)
+	
+	//: ($identEntry="repairsByInterval") & (Count parameters=0)
+	
+	//$context.subject:="Repairs between "+String($startDate)+" to "+String($endDate)
+	
+	//Else 
+	//If (Count parameters=1)
+	//$context.subject:="Down incident report"
+	//End if 
+	
+	
+	//End case 
 	
 	
 	WP SET DATA CONTEXT:C1786($template; $context)

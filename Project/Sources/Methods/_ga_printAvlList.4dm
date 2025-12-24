@@ -33,32 +33,34 @@ If (Form:C1466.sfw.lb_items.length>0)
 		$context.supplier:=Form:C1466.sfw.searchbox
 	End if 
 	
+	$context.subject:=Form:C1466.sfw.view.label
+	
 	SET PRINT OPTION:C733(Orientation option:K47:2; 1)
 	
-	Case of 
-		: ($identEntry="main")
-			
-			$context.subject:="AML"
-			
-		: ($identEntry="productSuppliers")
-			
-			$context.subject:="Products in AML"
-			
-		: ($identEntry="serviceSuppliers")
-			
-			$context.subject:="Services & suppliers in AML"
-			
-		: ($identEntry="criticalProductSuppliers")
-			
-			$context.subject:="Critical products & suppliers in AML"
-			
-		: ($identEntry="criticalServicesSuppliers")
-			
-			$context.subject:="Critical services & suppliers in AML"
-			
-		Else 
-			
-	End case 
+	//Case of 
+	//: ($identEntry="main")
+	
+	//$context.subject:="AML"
+	
+	//: ($identEntry="productSuppliers")
+	
+	//$context.subject:="Products in AML"
+	
+	//: ($identEntry="serviceSuppliers")
+	
+	//$context.subject:="Services & suppliers in AML"
+	
+	//: ($identEntry="criticalProductSuppliers")
+	
+	//$context.subject:="Critical products & suppliers in AML"
+	
+	//: ($identEntry="criticalServicesSuppliers")
+	
+	//$context.subject:="Critical services & suppliers in AML"
+	
+	//Else 
+	
+	//End case 
 	
 	
 	WP SET DATA CONTEXT:C1786($template; $context)
