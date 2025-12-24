@@ -32,6 +32,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setItemListAction("Export to Excel"; "_ga_exportInvoicesSelection")
 	
+	$entry.setItemListAction("Print selection"; "_ga_printInvoicesSelection")
+	
 	$entry.setItemAction("Print Invoice"; "_ga_printInvoice")
 	
 	$entry.enableTransaction()

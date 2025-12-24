@@ -23,40 +23,41 @@ If (Form:C1466.sfw.lb_items.length>0)
 	$context.equipmentType:=_ga_getListFiltersValues("ToolType"; "UUID")
 	$context.division:=_ga_getListFiltersValues("Division"; "UUID")
 	$context.user:=Current machine:C483
+	$context.subject:=Form:C1466.sfw.view.label
 	
 	SET PRINT OPTION:C733(Orientation option:K47:2; 1)
 	
-	Case of 
-		: ($identEntry="main")
-			
-			$context.subject:="equipments"
-			
-		: ($identEntry="equipmentsOutOfCalibration")
-			
-			$context.subject:="equipments out of calibration"
-			
-		: ($identEntry="pmEquipments")
-			
-			$context.subject:="PM equipments"
-			
-		: ($identEntry="dueCalibrationEquipments")
-			
-			$context.subject:="equipments overdue for calibration"
-			
-		: ($identEntry="duePMEquipments")
-			
-			$context.subject:="Due PM Equipments"
-			
-		: ($identEntry="equipmentsDownOrOnHold")
-			
-			$context.subject:="equipments down"
-			
-		: ($identEntry="calibrationExemptList")
-			
-			$context.subject:="equipments that do not required calibration"
-			
-			
-	End case 
+	//Case of 
+	//: ($identEntry="main")
+	
+	//$context.subject:="equipments"
+	
+	//: ($identEntry="equipmentsOutOfCalibration")
+	
+	//$context.subject:="equipments out of calibration"
+	
+	//: ($identEntry="pmEquipments")
+	
+	//$context.subject:="PM equipments"
+	
+	//: ($identEntry="dueCalibrationEquipments")
+	
+	//$context.subject:="equipments overdue for calibration"
+	
+	//: ($identEntry="duePMEquipments")
+	
+	//$context.subject:="Due PM Equipments"
+	
+	//: ($identEntry="equipmentsDownOrOnHold")
+	
+	//$context.subject:="equipments down"
+	
+	//: ($identEntry="calibrationExemptList")
+	
+	//$context.subject:="equipments that do not required calibration"
+	
+	
+	//End case 
 	
 	
 	WP SET DATA CONTEXT:C1786($template; $context)
