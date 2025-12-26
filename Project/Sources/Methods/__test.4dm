@@ -1,5 +1,7 @@
 //%attributes = {}
 
+$staff:=ds:C1482.Staff.query("lastName =:1"; "LOSENDO")
+
 $job:=ds:C1482.Job.all().first()
 
 

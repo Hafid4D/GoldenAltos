@@ -43,7 +43,8 @@
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Employee ID"
+					"text": "Employee ID",
+					"textAlign": "right"
 				},
 				"Field_code": {
 					"type": "input",
@@ -61,7 +62,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"right": 250
 				},
 				"label_firstName": {
@@ -71,7 +72,8 @@
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "First Name"
+					"text": "First Name",
+					"textAlign": "right"
 				},
 				"entryField_firstName": {
 					"type": "input",
@@ -89,7 +91,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"right": 250
 				},
 				"label_lastName": {
@@ -99,7 +101,8 @@
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Last Name"
+					"text": "Last Name",
+					"textAlign": "right"
 				},
 				"entryField_lastName": {
 					"type": "input",
@@ -117,7 +120,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"right": 250
 				},
 				"label_department": {
@@ -127,25 +130,8 @@
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Department"
-				},
-				"entryField_department": {
-					"type": "input",
-					"top": 12,
-					"left": 432,
-					"width": 138,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.department.name",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold"
+					"text": "Department",
+					"textAlign": "right"
 				},
 				"label_division": {
 					"type": "text",
@@ -154,27 +140,8 @@
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Division"
-				},
-				"Field_division": {
-					"type": "input",
-					"top": 12,
-					"left": 732,
-					"width": 138,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.division",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"dataSourceTypeHint": "date",
-					"dateFormat": "long"
+					"text": "Division",
+					"textAlign": "right"
 				},
 				"label_citizenShipStatus1": {
 					"type": "text",
@@ -183,7 +150,8 @@
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Citizenship Status"
+					"text": "Citizenship Status",
+					"textAlign": "right"
 				},
 				"wr30_background": {
 					"type": "rectangle",
@@ -237,7 +205,51 @@
 						"onClick",
 						"onDisplayDetail"
 					],
-					"fontWeight": "bold"
+					"fontWeight": "normal"
+				},
+				"pup_department": {
+					"type": "button",
+					"top": 9,
+					"left": 432,
+					"width": 180,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 12,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_department.4dm",
+					"events": [
+						"onClick",
+						"onDisplayDetail"
+					],
+					"fontWeight": "normal",
+					"dataSource": ""
+				},
+				"pup_division": {
+					"type": "button",
+					"top": 9,
+					"left": 729,
+					"width": 180,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 12,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_division.4dm",
+					"events": [
+						"onClick",
+						"onDisplayDetail"
+					],
+					"fontWeight": "normal",
+					"dataSource": ""
 				}
 			}
 		},
@@ -856,7 +868,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 1107,
+	"geometryStamp": 1123,
 	"editor": {
 		"groups": {
 			"Group": [

@@ -933,6 +933,14 @@ If (True:C214)
 		$staff_e.firstName:=$staff.firstName
 		$staff_e.lastName:=$staff.lastName
 		
+		//$division:=ds.Division.query("name =:1"; Split string($staff_e.division; "\r"; sk trim spaces).join("\r"))
+		
+		//If ($division.length>0)
+		//$staff_e.UUID_Division:=$division[0].UUID
+		//Else 
+		//$staff_e.UUID_Division:=16*"00"
+		//End if 
+		
 		$staff_e.contactDetails:=New object:C1471(\
 			"addresses"; New collection:C1472(); \
 			"communications"; New collection:C1472()\
