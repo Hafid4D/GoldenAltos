@@ -90,10 +90,26 @@ local Function pup($cacheCollection; $dataClass; $queryField; $queryValue)
 local Function loadAfterCreation()
 	
 	// This callback is called after creating the new item but before displaying the panel.
-	
+	This:C1470._setItemNumber()
 	If (This:C1470.moreData.disposition=Null:C1517)
 		
 		This:C1470.moreData.disposition:=""
 		
 	End if 
+	
+local Function afterCreation()
+	This:C1470._setItemNumber()
+	
+local Function itemLoad()
+	// This callback is called when the item is selected in the itemList
+	This:C1470._setItemNumber()
+	
+	
+local Function _setItemNumber()
+	If (Form:C1466.current_item#Null:C1517) & (This:C1470.item=0)
+		$counter:=ds:C1482.ContinuousImprovement.all().extract("item").map(Formula:C1597(Num:C11($1.value))).max()
+		This:C1470.item:=$counter+1
+		
+	End if 
+	
 	
