@@ -30,13 +30,22 @@ Function formMethod()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
-	This:C1470.hideDatePickers()
+	
+	OBJECT SET VISIBLE:C603(*; "dp_terminationDate"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "dp_retrainDate"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "dp_hireDate"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "dp_creationDate"; Form:C1466.sfw.checkIsInModification())
+	
+	//This.hideDatePickers()
 	This:C1470.drawPup_citizenshipStatus()
+	This:C1470.drawPup_Department()
+	This:C1470.drawPup_Division()
+	
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="Certifications Assignment ("+String:C10(Form:C1466.lb_assignments.length)+")"
 	End use 
-	Form:C1466.sfw.drawHTab()
+	
 	
 	Case of 
 		: (FORM Get current page:C276(*)=2)  // assignments
@@ -52,6 +61,9 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "lb_assignments"; $left_lb; $top_lb; $right_lb; $heightSubform-$offset-1)
 			OBJECT SET COORDINATES:C1248(*; "bActionCertifications"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
 	End case 
+	
+	//Form.sfw.drawHTab()
+	
 	
 Function loadAllTabs()
 	This:C1470.loadCertifications()
@@ -291,12 +303,12 @@ Function bActionCertifications()
 		cs:C1710.sfw_dialog.me.alert("No Certification Selected !")
 	End if 
 	//End if 
-	
-Function selectDivision()
+	///*
+Function pup_division()  //selectDivision()
 	Case of 
 		: (FORM Event:C1606.code=On Clicked:K2:4)
 			If (Form:C1466.sfw.checkIsInModification())
-				OBJECT GET COORDINATES:C663(*; "Field_division"; $l; $t; $r; $b)
+				OBJECT GET COORDINATES:C663(*; "pup_division"; $l; $t; $r; $b)
 				CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
 				
 				$form:=New object:C1471(\
@@ -312,18 +324,90 @@ Function selectDivision()
 				
 				If (ok=1)
 					If ($form.item#Null:C1517)
-						Form:C1466.current_item.division:=$form.item.name
+						Form:C1466.current_item.UUID_Division:=$form.item.UUID
 					Else 
-						Form:C1466.current_item.division:=""
+						Form:C1466.current_item.UUID_Division:=16*"00"
 					End if 
 					
 					This:C1470._activate_save_cancel_button()
 				End if 
 			End if 
+			This:C1470.drawPup_Division()
 			
 		: (FORM Event:C1606.code=On Mouse Move:K2:35)
 			SET CURSOR:C469(9000)
 	End case 
+	
+	//*/
+	
+	
+Function drawPup_Division()
+	
+	If (Form:C1466.current_item#Null:C1517)
+		
+		$division:=ds:C1482.Division.query("UUID= :1"; Form:C1466.current_item.UUID_Division).first() || New object:C1471()
+		$divisionName:=$division.name || ""
+		
+		//If ($divisionName=Null)
+		
+		//$divisionName:=""
+		
+		//End if 
+		
+		$color:=""
+		$pathIcon:=(Length:C16($color)#0) ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_division"; $divisionName; $pathIcon; ($division=Null:C1517))
+		
+	End if 
+	
+/*
+Function pup_division()
+	
+// Create pop up menu
+If (Form.sfw.checkIsInModification())
+	
+$menu:=Create menu
+	
+If (Storage.cache=Null) || (Storage.cache.divisions=Null)
+	
+ds.Division.cacheLoad()
+	
+End if 
+	
+For each ($equipmentDivision; Storage.cache.divisions)
+	
+APPEND MENU ITEM($menu; $equipmentDivision.name; *)
+SET MENU ITEM PARAMETER($menu; -1; $equipmentDivision.UUID)
+	
+If ($equipmentDivision.UUID=Form.current_item.UUID_Division)
+	
+SET MENU ITEM MARK($menu; -1; Char(18))
+	
+If (Is Windows)
+	
+SET MENU ITEM STYLE($menu; -1; Bold)
+	
+End if 
+End if 
+End for each 
+	
+$choose:=Dynamic pop up menu($menu)
+RELEASE MENU($menu)
+	
+Case of 
+	
+//________________________________________
+: (Length($choose)#0)
+	
+$equipmentDivision:=ds.Division.get($choose)
+Form.current_item.UUID_Division:=$equipmentDivision.UUID
+This._activate_save_cancel_button()
+//________________________________________
+End case 
+End if 
+	
+This.drawPup_Division()
+*/
 	
 Function pup_citizenshipStatus()
 	If (Form:C1466.sfw.checkIsInModification())
@@ -371,3 +455,92 @@ Function drawPup_citizenshipStatus()
 		Form:C1466.sfw.drawButtonPup("pup_citizenshipStatus"; Form:C1466.current_item.citizenShipStatus; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.citizenShipStatus=Null:C1517))
 	End if 
 	
+	
+	//TODO - Check the logic and fix the data Structure 
+Function drawPup_Department()
+	
+	If (Form:C1466.current_item#Null:C1517)
+		
+		$memberships:=ds:C1482.Membership.query("UUID_Staff= :1"; Form:C1466.current_item.UUID)  //.first() || New object()
+		If ($memberships.length>0)
+			$team:=$memberships[0].team
+			If ($team#Null:C1517)
+				$teamName:=$team.name
+			Else 
+				$teamName:=""
+			End if 
+		Else 
+			$teamName:=""
+		End if 
+		
+		$color:=""
+		$pathIcon:=(Length:C16($color)#0) ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_department"; $teamName; $pathIcon; ($team=Null:C1517))
+		
+	End if 
+	
+	///*
+Function pup_department()
+	
+	// Create pop up menu
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		$menu:=Create menu:C408
+		
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.teams=Null:C1517)
+			
+			ds:C1482.Team.cacheLoad()
+			
+		End if 
+		
+		For each ($team; Storage:C1525.cache.teams)
+			
+			APPEND MENU ITEM:C411($menu; $team.name; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $team.UUID)
+			If (Form:C1466.current_item.memberships.length>0)
+				If ($team.UUID=Form:C1466.current_item.memberships[0].UUID_Team)
+					
+					SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+					
+					If (Is Windows:C1573)
+						
+						SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+						
+					End if 
+				End if 
+			End if 
+		End for each 
+		
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		Case of 
+				
+				//________________________________________
+			: (Length:C16($choose)#0)
+				
+				$team:=ds:C1482.Team.get($choose)
+				//START TRANSACTION
+				If (Form:C1466.current_item.memberships.length>0)
+					
+					$memberShip:=ds:C1482.Membership.get(Form:C1466.current_item.memberships[0].UUID)
+					$memberShip.UUID_Team:=$team.UUID
+					$res:=$memberShip.save()
+					
+				Else 
+					$memberShip:=ds:C1482.Membership.new()
+					$memberShip.UUID_Team:=$team.UUID
+					$memberShip.UUID_Staff:=Form:C1466.current_item.UUID
+					$res:=$memberShip.save()
+					
+				End if 
+				//VALIDATE TRANSACTION
+				This:C1470._activate_save_cancel_button()
+				
+				//________________________________________
+		End case 
+	End if 
+	
+	This:C1470.drawPup_Department()
+	
+	//*/

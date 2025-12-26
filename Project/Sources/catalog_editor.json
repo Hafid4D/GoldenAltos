@@ -193,8 +193,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2516,
-				"top": 401.66796875,
+				"left": 2479,
+				"top": 409.66796875,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -212,7 +212,7 @@
 				"left": 2658.6665039062,
 				"top": 400.33459472656,
 				"width": 120,
-				"height": 167.33203125
+				"height": 175.33203125
 			},
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
@@ -225,12 +225,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2135.4692382812,
-				"top": 557.47967529297,
-				"width": 226.30639648438,
-				"height": 417.9924621582
+				"left": 2150.4692382812,
+				"top": 595.47967529297,
+				"width": 149.05078125,
+				"height": 377.33203125
 			},
-			"displayable_fields_count": 17,
+			"displayable_fields_count": 16,
 			"fields": {
 				"contactDetails": {
 					"position": 15
@@ -238,10 +238,10 @@
 				"citizenShipStatus": {
 					"position": 14
 				},
-				"division": {
+				"UUID_Division": {
 					"position": 13
 				},
-				"hireDate": {
+				"stmpHire": {
 					"position": 12
 				},
 				"terminated": {
@@ -250,10 +250,10 @@
 				"code": {
 					"position": 4
 				},
-				"creationDate": {
+				"stmpCreation": {
 					"position": 10
 				},
-				"terminationDate": {
+				"stmpTermination": {
 					"position": 9
 				},
 				"codeID": {
@@ -268,7 +268,7 @@
 				"firstName": {
 					"position": 6
 				},
-				"stmpRetrainDate": {
+				"stmpRetrain": {
 					"position": 5
 				},
 				"UUID_User": {
@@ -2321,6 +2321,16 @@
 				"height": 268.15802001953
 			},
 			"displayable_fields_count": 10
+		}
+	},
+	"relations": {
+		"2A9D2BAE962E0D4D8CE2C97183A5977F": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
 		}
 	}
 }

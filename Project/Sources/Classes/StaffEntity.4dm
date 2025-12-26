@@ -79,12 +79,29 @@ Function get fullName()->$fullName : Text
 	$fullName:=[This:C1470.firstName; This:C1470.lastName].join(" ")
 	
 	
-local Function get retrainDate()->$retrainDate : Date
-	$retrainDate:=cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpRetrainDate; True:C214)
+local Function get retrainDate()->$date : Date
+	$date:=This:C1470.stmpRetrain=0 ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpRetrain; True:C214)
 	
-local Function set retrainDate($retrainDate : Date)
-	This:C1470.stmpRetrainDate:=cs:C1710.sfw_stmp.me.build($retrainDate)
+local Function set retrainDate($date : Date)
+	This:C1470.stmpRetrain:=$date=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($date)
 	
+local Function get hireDate()->$date : Date
+	$date:=This:C1470.stmpHire=0 ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpHire; True:C214)
+	
+local Function set hireDate($date : Date)
+	This:C1470.stmpHire:=$date=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($date)
+	
+local Function get terminationDate()->$date : Date
+	$date:=This:C1470.stmpTermination=0 ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpTermination; True:C214)
+	
+local Function set terminationDate($date : Date)
+	This:C1470.stmpTermination:=$date=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($date)
+	
+local Function get creationDate()->$date : Date
+	$date:=This:C1470.stmpCreation=0 ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpCreation; True:C214)
+	
+local Function set creationDate($date : Date)
+	This:C1470.stmpCreation:=$date=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($date)
 	
 	
 local Function itemLoad()

@@ -1495,20 +1495,20 @@
 	<table name="Staff" uuid="FD10D10C9E0015458AFF59F988A373BB" id="135">
 		<field name="UUID" uuid="6941AB4C41898A4A9FBF25D5AC27CA2B" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_User" uuid="4348C8943690B243AFF8327DE0DA1368" type="10" store_as_UUID="true" never_null="true" id="2"/>
-		<field name="stmpRetrainDate" uuid="E05AFD8B07FC254FBBBAE2880867F189" type="4" never_null="true" id="3"/>
+		<field name="stmpRetrain" uuid="E05AFD8B07FC254FBBBAE2880867F189" type="4" never_null="true" id="3"/>
 		<field name="firstName" uuid="A922C209EFD24B41BE6B687860BE3C78" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="lastName" uuid="30C1F33ACB30EE4CBA2D2DD6218EF823" type="10" limiting_length="255" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="inactive" uuid="20CEA4B6D6E1A645AEC79369DCC34F13" type="1" never_null="true" id="6"/>
 		<field name="codeID" uuid="DA219A966C5E0346B979B7BD4A2E6591" type="4" unique="true" autosequence="true" never_null="true" id="7"/>
-		<field name="terminationDate" uuid="9711BE3164B4C44BA4E865C89B7B0507" type="4" never_null="true" id="8"/>
-		<field name="creationDate" uuid="2EA2F0715821A44A8A08F4EFB2CF2EDE" type="4" never_null="true" id="9"/>
+		<field name="stmpTermination" uuid="9711BE3164B4C44BA4E865C89B7B0507" type="4" never_null="true" id="8"/>
+		<field name="stmpCreation" uuid="2EA2F0715821A44A8A08F4EFB2CF2EDE" type="4" never_null="true" id="9"/>
 		<field name="code" uuid="10F414604ECF714E8F9B93A248D3CB6D" type="10" limiting_length="255" unique="true" never_null="true" id="10"/>
 		<field name="moreData" uuid="CA1A592537C51B41A4A86CA83F177055" type="21" blob_switch_size="2147483647" never_null="true" id="11"/>
 		<field name="terminated" uuid="6D60DE6AF3ED654EB394FFE7695CB9DF" type="1" never_null="true" id="12"/>
-		<field name="hireDate" uuid="7EBB8EEF817496498EE3FA0CC391675E" type="4" never_null="true" id="13"/>
-		<field name="division" uuid="C307EB019AE88F48B0C093CC7A4B60B1" type="10" limiting_length="255" never_null="true" id="14"/>
+		<field name="stmpHire" uuid="7EBB8EEF817496498EE3FA0CC391675E" type="4" never_null="true" id="13"/>
+		<field name="UUID_Division" uuid="C307EB019AE88F48B0C093CC7A4B60B1" type="10" store_as_UUID="true" never_null="true" id="14"/>
 		<field name="citizenShipStatus" uuid="94BC1376AD162B4A9CB7ACBB60EA56E3" type="10" limiting_length="255" never_null="true" id="15"/>
 		<field name="contactDetails" uuid="DFFE835335868749B15EECAADA389EB4" type="21" blob_switch_size="2147483647" never_null="true" id="16"/>
 		<primary_key field_name="UUID" field_uuid="6941AB4C41898A4A9FBF25D5AC27CA2B"/>
@@ -3061,6 +3061,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="2A9D2BAE962E0D4D8CE2C97183A5977F" name_Nto1="division" name_1toN="staffs" state="1">
+		<related_field kind="source">
+			<field_ref uuid="C307EB019AE88F48B0C093CC7A4B60B1" name="UUID_Division">
+				<table_ref uuid="FD10D10C9E0015458AFF59F988A373BB" name="Staff"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="3B46C986029743428A30E84AA5F8ADC4" name="UUID">
+				<table_ref uuid="F25CD20FCCFE2044A3D568BAFE905227" name="Division"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="005E48A922A4464DB92973931B467ACF" type="3">
 		<field_ref uuid="17F71D68FA714CE9A75ED79CA63E3BE2" name="UUID_Lead">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
@@ -3194,6 +3206,11 @@
 	<index kind="regular" unique_keys="true" uuid="154853B0D64B3F4BAC1493F426D7CDDA" type="7">
 		<field_ref uuid="57B2843F4E0D9844849760E738191BA9" name="UUID">
 			<table_ref uuid="89B8693B8BA31D46A5E7CC5F40548E73" name="Membership"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="1593FE1DEF9EE04487485FCDFEC06B0C" type="3">
+		<field_ref uuid="C307EB019AE88F48B0C093CC7A4B60B1" name="UUID_Division">
+			<table_ref uuid="FD10D10C9E0015458AFF59F988A373BB" name="Staff"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="15E1329A640CEA48A1DACE8F3364DB03" type="7">
