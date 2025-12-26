@@ -48,7 +48,7 @@ Function redrawAndSetVisible()
 	Else 
 		OBJECT SET ENTERABLE:C238(*; "entryField_action"; Form:C1466.sfw.checkIsInModification())
 	End if 
-	
+	OBJECT SET ENTERABLE:C238(*; "entryField_item"; False:C215)
 	
 Function drawPup_priority()
 	If (Form:C1466.current_item#Null:C1517)

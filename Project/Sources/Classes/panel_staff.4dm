@@ -303,6 +303,7 @@ Function bActionCertifications()
 		cs:C1710.sfw_dialog.me.alert("No Certification Selected !")
 	End if 
 	//End if 
+	
 	///*
 Function pup_division()  //selectDivision()
 	Case of 

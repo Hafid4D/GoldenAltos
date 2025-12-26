@@ -1,4 +1,5 @@
 //%attributes = {}
+var $current_rma : Object
 $current_rma:=(Form:C1466.current_item.rmas.length>0) ? Form:C1466.current_item.rmas[0] : Null:C1517
 
 If ($current_rma#Null:C1517)
