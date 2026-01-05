@@ -1,5 +1,15 @@
 //%attributes = {}
 
+var $picture : Picture
+var $status : Object
+
+READ PICTURE FILE:C678(""; $picture; *)
+$status:=ZINT
+
+
+
+
+
 $staff:=ds:C1482.Staff.query("lastName =:1"; "LOSENDO")
 
 $job:=ds:C1482.Job.all().first()
