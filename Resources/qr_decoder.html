@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <script src="jsQR.js"></script>
+    <style>
+        body { font-family: sans-serif; padding: 10px; }
+        #result-box { 
+            width: 100%; 
+            margin-top: 10px; 
+            padding: 10px; 
+            border: 1px solid #ccc; 
+            background-color: #f9f9f9;
+            min-height: 50px;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="result-box">Attente du décodage...</div>
+    
+    <canvas id="canvas" style="display:none;"></canvas>
+
+    <script type="text/javascript">
+        
+    //    function  decodeQR(base64Image) {
+    //         return new Promise((resolve) => {
+    //             const image = new Image();
+    //             image.src = base64Image;
+                
+    //             image.onload = () => {
+    //                 const canvas = document.getElementById('canvas');
+    //                 const context = canvas.getContext('2d');
+    //                 const resultBox = document.getElementById('result-box');
+                    
+    //                 canvas.width = image.width;
+    //                 canvas.height = image.height;
+    //                 context.drawImage(image, 0, 0);
+                    
+    //                 const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    //                 const code = jsQR(imageData.data, imageData.width, imageData.height);
+                    
+    //                 let finalResult = "";
+    //                 if (code) {
+    //                     finalResult = code.data;
+    //                 } else {
+    //                     finalResult = "ERREUR : Aucun QR Code détecté";
+    //                 }
+
+                    
+    //                 resultBox.innerText = finalResult;
+    //                 resolve(finalResult);
+    //                 console.log(finalResult)
+    //             };
+
+    //             image.onerror = () => {
+    //                 const errorMsg = "ERREUR : Image invalide";
+    //                 document.getElementById('result-box').innerText = errorMsg;
+    //                 resolve(errorMsg);
+    //             };
+    //         });
+    //     }
+
+    function decodeQR(base64Image) {
+    const image = new Image();
+    // On s'assure que le préfixe est là
+    image.src = base64Image.startsWith('data:') ? base64Image : "data:image/png;base64," + base64Image;
+
+    
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        const resultBox = document.getElementById('result-box');
+
+        image.onload = () => {
+        canvas.width = image.width;
+        canvas.height = image.height;
+        context.drawImage(image, 0, 0);
+
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        const code = jsQR(imageData.data, imageData.width, imageData.height);
+
+        let finalResult = "";
+        if (code) {
+            finalResult = code.data;
+        } else {
+            finalResult = "ERREUR : Aucun QR Code détecté";
+        }
+
+        resultBox.innerText = finalResult;
+        
+        document.title = "DECODAGE_TERMINE"; 
+        
+        console.log("Terminé : " + finalResult);
+        };
+
+    image.onerror = () => {
+        document.getElementById('result-box').innerText = "ERREUR : Image invalide";
+        document.title = "DECODAGE_TERMINE";
+    };
+}
+
+       
+        window.onload = function() {
+          
+            const urlParams = new URLSearchParams(window.location.search);
+            const defaultBase64 = urlParams.get('image') || "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="; 
+          
+            // console.log(defaultBase64)
+              decodeQR(defaultBase64);
+        };
+    </script>
+</body>
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script src="jsQR.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script> -->
+<!-- </head>
+<body>
+    <canvas id="canvas" style="display:none;"></canvas>
+    <script>
+        function decodeQR(base64Image) {
+            return new Promise((resolve, reject) => {
+                const image = new Image();
+                image.src = base64Image;
+                image.onload = () => {
+                    const canvas = document.getElementById('canvas');
+                    const context = canvas.getContext('2d');
+                    canvas.width = image.width;
+                    canvas.height = image.height;
+                    context.drawImage(image, 0, 0);
+                    
+                    const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+                    
+                    const code = jsQR(imageData.data, imageData.width, imageData.height);
+                    
+                    if (code) {
+                        resolve(String("Result")); 
+                    } else {
+                        resolve("ERREUR : Aucun QR Code détecté");
+                    }
+                };
+                image.onerror = () => resolve("ERREUR : Image invalide");
+            });
+        }
+    </script>
+</body>
+</html> -->

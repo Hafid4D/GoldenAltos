@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <script src="qrcode.min.js"></script>
+    <style>
+        body { margin: 0; padding: 0; overflow: hidden; }
+        #canvas { display: block; }
+    </style>
+</head>
+<body>
+
+    <div id="canvas"></div>
+
+    <script type="text/javascript">
+        // Initialisation de l'objet QRCode
+        var qrcode = new QRCode(document.getElementById("canvas"), {
+            width: 256,
+            height: 256,
+            correctLevel : QRCode.CorrectLevel.H
+        });
+
+        function generateQR(type, data) {
+            let finalValue = data;
+
+            if (type === 'email') {
+                finalValue = "mailto:" + data;
+            } else if (type === 'url') {
+                if (!data.startsWith('http')) {
+                    finalValue = "https://" + data;
+                }
+            }
+
+            qrcode.makeCode(finalValue);
+
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    const img = document.querySelector('#canvas img');
+                    resolve(img ? img.src : "");
+                }, 100);
+            });
+        }
+
+        // --- DÉCLENCHEMENT AUTOMATIQUE AU CHARGEMENT ---
+       window.onload = function() {
+      
+        const urlParams = new URLSearchParams(window.location.search);
+        
+      
+        const typeParam = urlParams.get('type') || "text";
+        const dataParam = urlParams.get('data') || "";
+
+        if (dataParam !== "") {
+            generateQR(typeParam, dataParam);
+        }
+        };
+    </script>
+</body>
+</html>
