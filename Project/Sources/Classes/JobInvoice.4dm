@@ -4,7 +4,7 @@ Class extends DataClass
 
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
-	//Mark: entry : Contact
+	//Mark: entry : Invoice
 	$entry:=cs:C1710.sfw_definitionEntry.new("JobInvoice"; ["customerService"]; "Invoices")
 	$entry.setDataclass("JobInvoice")
 	$entry.setDisplayOrder(-800)

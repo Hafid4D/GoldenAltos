@@ -856,6 +856,51 @@
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
+		"CAOTypeDetail": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 3242,
+				"top": 2009,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6
+		},
+		"CAOType": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 3247,
+				"top": 2198,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6
+		},
+		"CAO": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 2973,
+				"top": 2015,
+				"width": 166,
+				"height": 271.33203125
+			},
+			"displayable_fields_count": 10
+		},
 		"SalesTax": {
 			"color": {
 				"red": 255,
@@ -2324,6 +2369,22 @@
 		}
 	},
 	"relations": {
+		"08D76CA12383BA4793905A464D245859": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"CAFE79B8BED129468F8D09B022F7FC48": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"2A9D2BAE962E0D4D8CE2C97183A5977F": {
 			"color": {
 				"red": 240,
