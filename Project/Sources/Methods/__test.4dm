@@ -1,6 +1,7 @@
 //%attributes = {}
 
 
+
 _ga_findScannerSeriaPort
 
 
@@ -36,7 +37,6 @@ SET CHANNEL:C77($portNum; $setting)
 
 
 SET CHANNEL:C77($portNum; $setting)
-
 
 
 
