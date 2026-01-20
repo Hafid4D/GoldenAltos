@@ -2,8 +2,6 @@
 
 
 
-_ga_findScannerSeriaPort
-
 
 var $commandLine; $output; $in : Text
 
