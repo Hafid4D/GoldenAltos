@@ -82,7 +82,7 @@ Case of
 				
 				SET TIMEOUT:C268(30)
 				Form:C1466.failedConnect:=Form:C1466.failedConnect+1
-				If (Form:C1466.failedConnect>0)
+				If (Form:C1466.failedConnect>5)
 					ALERT:C41("Erreur : failed to Connect to the Scanner!Restart the app.")
 					SET TIMER:C645(0)
 				End if 
