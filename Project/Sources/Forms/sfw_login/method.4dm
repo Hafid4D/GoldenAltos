@@ -33,3 +33,4 @@ Case of
 		Form:C1466.storeAccess:=False:C215
 End case 
 OBJECT SET ENABLED:C1123(*; "btn_login"; (Form:C1466.password#"") && (Form:C1466.pup_users.index>=0))
+

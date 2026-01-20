@@ -7,11 +7,11 @@ var $finalImage : Picture
 var $params:=New object:C1471
 
 $type:="text"
-$data:="My name is Medard"
+$data:=ds:C1482.Customer.all().first().UUID  //"My name is Medard"
 $params.url:="file:///C:/Users/HP/Desktop/GoldenAltos/Resources/qr_encoder.html?type="+$type+"&data="+$data
 
 // Add a callback method called on event
-$params.onEvent:=Formula:C1597(___qrCodeUtil("encoder"))
+$params.onEvent:=Formula:C1597(_ga_qrBarCodeUtil("encoder"))
 
 $base64Full:=WA Run offscreen area:C1727($params)
 
@@ -22,5 +22,5 @@ BASE64 DECODE:C896($base64Data; $imageBlob)
 
 BLOB TO PICTURE:C682($imageBlob; $finalImage)
 
-WRITE PICTURE FILE:C680("C:\\Users\\HP\\Desktop\\GoldenAltos\\resources\\QRCodes\\TextQRcode.png"; $finalImage)
+WRITE PICTURE FILE:C680("C:\\Users\\HP\\Desktop\\GoldenAltos\\resources\\QRCodes\\"+$data+".png"; $finalImage)
 

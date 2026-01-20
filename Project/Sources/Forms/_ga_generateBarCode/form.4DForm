@@ -1,0 +1,180 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 0,
+	"bottomMargin": 0,
+	"events": [
+		"onLoad",
+		"onPageChange",
+		"onValidate",
+		"onClick",
+		"onDoubleClick",
+		"onOutsideCall",
+		"onBeginDragOver",
+		"onDragOver",
+		"onDrop",
+		"onAfterKeystroke",
+		"onMenuSelect",
+		"onPluginArea",
+		"onAfterEdit",
+		"onTimer",
+		"onBoundVariableChange"
+	],
+	"windowTitle": "Generate Barcode",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {
+				"header_bkgd2": {
+					"type": "rectangle",
+					"top": 10,
+					"left": 0,
+					"width": 140,
+					"height": 23,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent",
+					"visibility": "hidden"
+				},
+				"Text3": {
+					"type": "text",
+					"text": "Table",
+					"top": 14,
+					"left": 7,
+					"width": 102,
+					"height": 15,
+					"fontWeight": "bold",
+					"visibility": "hidden"
+				},
+				"Text4": {
+					"type": "text",
+					"text": ":",
+					"top": 14,
+					"left": 114,
+					"width": 22,
+					"height": 15,
+					"textAlign": "right",
+					"fontWeight": "bold",
+					"visibility": "hidden"
+				},
+				"entry_Table": {
+					"type": "input",
+					"left": 148,
+					"top": 10,
+					"width": 243,
+					"height": 23,
+					"dataSource": "Form:C1466.table",
+					"visibility": "hidden"
+				},
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 0,
+					"left": 0,
+					"width": 465,
+					"height": 311,
+					"stroke": "transparent",
+					"fill": "#E6E6E6"
+				}
+			}
+		},
+		{
+			"objects": {
+				"header_bkgd1": {
+					"type": "rectangle",
+					"top": 14,
+					"left": 7,
+					"width": 140,
+					"height": 23,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
+				"Text1": {
+					"type": "text",
+					"text": "Field",
+					"top": 18,
+					"left": 14,
+					"width": 102,
+					"height": 15,
+					"fontWeight": "bold"
+				},
+				"Text2": {
+					"type": "text",
+					"text": ":",
+					"top": 18,
+					"left": 121,
+					"width": 22,
+					"height": 15,
+					"textAlign": "right",
+					"fontWeight": "bold"
+				},
+				"Button": {
+					"type": "button",
+					"text": "Generate Barcode",
+					"top": 53,
+					"left": 3,
+					"width": 140,
+					"height": 23,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/Button.4dm"
+				},
+				"pup_fields": {
+					"type": "dropdown",
+					"left": 155,
+					"top": 14,
+					"width": 300,
+					"height": 23,
+					"events": [
+						"onDataChange"
+					],
+					"dataSource": "Form:C1466.pup_fields"
+				},
+				"barCode": {
+					"type": "input",
+					"left": 7,
+					"top": 92,
+					"width": 448,
+					"height": 160,
+					"dataSourceTypeHint": "picture",
+					"dataSource": "Form:C1466.barCode",
+					"scrollbarVertical": "automatic",
+					"scrollbarHorizontal": "automatic",
+					"pictureFormat": "truncatedCenter",
+					"borderStyle": "none"
+				},
+				"bPtintBarcode": {
+					"type": "button",
+					"text": "Print barCode",
+					"top": 272,
+					"left": 311,
+					"width": 144,
+					"height": 23,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "",
+					"method": "ObjectMethods/bPtintBarcode.4dm"
+				}
+			}
+		}
+	],
+	"geometryStamp": 85,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	},
+	"method": "method.4dm"
+}
