@@ -22,9 +22,10 @@ If (Form:C1466.sfw.lb_items.length>0)
 	$context.length:=Form:C1466.sfw.lb_items.length
 	$context.division:=_ga_getListFiltersValues("Division"; "UUID")
 	$context.user:=Current machine:C483
-	
-	$startDate:=Storage:C1525.cache.startDate
-	$endDate:=Storage:C1525.cache.endDate
+	Use (Storage:C1525)
+		$startDate:=Storage:C1525.cache.startDate
+		$endDate:=Storage:C1525.cache.endDate
+	End use 
 	
 	If (Form:C1466.sfw.searchbox="")
 		

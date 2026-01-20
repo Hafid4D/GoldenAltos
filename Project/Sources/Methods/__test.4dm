@@ -1,11 +1,41 @@
 //%attributes = {}
 
-var $picture : Picture
-var $status : Object
 
-READ PICTURE FILE:C678(""; $picture; *)
-$status:=ZINT
+_ga_findScannerSeriaPort
 
+
+var $commandLine; $output; $in : Text
+
+$commandLine:="powershell Get-CimInstance Win32_SerialPort | Where-Object { ($_.PNPDeviceID -like '*USB*') -or ($_.PNPDeviceID -like '*BTHENUM*') } | ForEach-Object { $_.DeviceID }"
+SET ENVIRONMENT VARIABLE:C812("_4D_OPTION_HIDE_CONSOLE"; "true")
+LAUNCH EXTERNAL PROCESS:C811($commandLine; $in; $output; $error; $pid)
+
+$result:=Split string:C1554($output; "\r\n"; sk ignore empty strings:K86:1+sk trim spaces:K86:2)  //; ""; sk ignore empty strings+sk trim spaces)
+
+
+
+
+//$dolder:=System folder()
+
+$file:=Get 4D folder:C485(Active 4D Folder:K5:10)  //+"ScannerConfig.json")
+
+$data:="Q4Oa2w20kkOKyfVpcNk02w=="
+$isUUID:=(Substring:C12($data; 23)="==")
+
+
+$setting:=0
+$portNum:=104
+
+SET CHANNEL:C77(11)
+SET CHANNEL:C77($portNum; $setting)
+
+
+SET CHANNEL:C77(11)
+DELAY PROCESS:C323(Current process:C322; 120)
+SET CHANNEL:C77($portNum; $setting)
+
+
+SET CHANNEL:C77($portNum; $setting)
 
 
 

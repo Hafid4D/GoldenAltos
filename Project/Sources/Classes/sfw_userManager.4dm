@@ -135,9 +135,18 @@ shared Function login()
 				End if 
 			End if 
 		End if 
-		$ref:=Open form window:C675("sfw_login"; Palette form window:K39:9)
-		DIALOG:C40("sfw_login"; $form)
-		CLOSE WINDOW:C154($ref)
+		
+		If (True:C214)  //TODO:RESTORE
+			$ref:=Open form window:C675("_ga_login"; Palette form window:K39:9)
+			DIALOG:C40("_ga_login"; $form)
+			CLOSE WINDOW:C154($ref)
+		Else 
+			//This is the initial code
+			$ref:=Open form window:C675("sfw_login"; Palette form window:K39:9)
+			DIALOG:C40("sfw_login"; $form)
+			CLOSE WINDOW:C154($ref)
+		End if 
+		
 		If (ok=1)
 			If ($form.currentUser.accesses#Null:C1517) && (Bool:C1537($form.currentUser.accesses.password.temporary)=True:C214)
 				var $result : Object
