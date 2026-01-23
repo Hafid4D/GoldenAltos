@@ -5,9 +5,9 @@ Class extends DataClass
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	//Mark: entry : CAO
-	$entry:=cs:C1710.sfw_definitionEntry.new("CAO"; ["customerService"]; "CAOs"; "CAO")
+	$entry:=cs:C1710.sfw_definitionEntry.new("CAO"; ["accounting"]; "CAOs"; "CAO")
 	$entry.setDataclass("CAO")
-	$entry.setDisplayOrder(-900)
+	$entry.setDisplayOrder(-100)
 	$entry.setIcon("image/entry/charOfAccount-white-50x50.png")
 	
 	$entry.setSearchboxField("name")
