@@ -1078,16 +1078,16 @@
 		<field name="name" uuid="556C99B03319B84FAEE853D284C672E7" type="10" limiting_length="255" never_null="true" id="2">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="UUID_CAOTypeDetail" uuid="73487696174E0C4DABAC3F1B166EEB2D" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="3">
+		<field name="UUID_CAOTypeDetail" uuid="73487696174E0C4DABAC3F1B166EEB2D" type="10" store_as_UUID="true" never_null="true" id="3">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="UUID_CAOType" uuid="9FC600F4E2713448A5FACD288EA42999" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="4">
+		<field name="UUID_CAOType" uuid="9FC600F4E2713448A5FACD288EA42999" type="10" store_as_UUID="true" never_null="true" id="4">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="balance" uuid="A371AED1D415F241ABAEA0BFC64A0946" type="6" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="accountNumber" uuid="D646A3E3FC6B6B43B45F2EE99E2DD080" type="10" limiting_length="255" never_null="true" id="6">
+		<field name="accountNumber" uuid="D646A3E3FC6B6B43B45F2EE99E2DD080" type="4" never_null="true" id="6">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="description" uuid="5EAD41F3CCAA5E4292A7651B55A65F31" type="10" limiting_length="255" never_null="true" id="7">
@@ -1100,6 +1100,7 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="isActive" uuid="1F401707FB1C4B49922C3FF51538E38F" type="1" never_null="true" id="10"/>
+		<field name="isSubaccount" uuid="83EB32DE8F19C64F9C3807E5F726A634" type="1" never_null="true" id="11"/>
 		<primary_key field_name="UUID" field_uuid="65FB781A111BBA4A9C7EAE76C9C35795"/>
 	</table>
 	<table name="CAOType" uuid="9BE9AE3D0CAD0E468514C2CB9ADAD6F0" id="74">

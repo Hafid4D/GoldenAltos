@@ -15,7 +15,7 @@ If (Form:C1466.sfw.lb_items.length>0)
 	
 	$fileName:=Form:C1466.sfw.view.ident
 	
-	$templateFile:=Folder:C1567(fk resources folder:K87:11).file("excelTemplates/invoiceTemplate.xlsx")
+	$templateFile:=Folder:C1567(fk resources folder:K87:11).file("excelTemplates/excelExportTemplate.xlsx")
 	
 	$mapping:=New collection:C1472(\
 		New object:C1471("header"; "Div"; "field"; "job.division.name"; "footerOperation"; ""); \
@@ -42,17 +42,21 @@ If (Form:C1466.sfw.lb_items.length>0)
 		New object:C1471("header"; "Derect-cost"; "field"; "job.directCost"; "footerOperation"; "")\
 		)
 	
-	
 	If ($fileName="main")
+		$title:="All Invoices"
 		$fileName:="AllInvoices"
+	Else 
+		$title:=$fileName
+		$fileName:=Replace string:C233($fileName; " "; "")
 	End if 
 	
-	$destinationFolderPath:=Get 4D folder:C485(Current resources folder:K5:16)+"exportedData"  //+Folder separator+"Jobs"
+	
+	$destinationFolderPath:=Get 4D folder:C485(Current resources folder:K5:16)+"exportedData"+Folder separator:K24:12+"Invoices"
 	
 	$destinationFileName:=Split string:C1554(String:C10($fileName+"_"+Replace string:C233(String:C10(Date:C102(Timestamp:C1445)); "/"; "_")); " "; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join("")
-	$title:=Form:C1466.sfw.view.ident+" "
+	$sheetName:=$fileName
 	$selection:=Form:C1466.sfw.lb_items
-	$offscreen:=cs:C1710.ExcelDataExporter.new($templateFile.platformPath; $mapping; $selection; $destinationFileName; $destinationFolderPath; $title)
+	$offscreen:=cs:C1710.ExcelDataExporter.new($templateFile.platformPath; $mapping; $selection; $destinationFileName; $destinationFolderPath; $title; $sheetName)
 	$excelSheet:=VP Run offscreen area($offscreen)
 	
 	//cs.sfw_dialog.me.info(ds.sfw_readXliff("export.done"; "The export is done"))

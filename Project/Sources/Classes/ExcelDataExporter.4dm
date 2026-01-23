@@ -8,8 +8,9 @@ property fileName : Text
 property destinationFolderPath : Text
 property autoQuit : Boolean
 property title : Text
+property sheetName : Text
 
-Class constructor($templatePath : Text; $mapping : Collection; $entitySelection; $destinationFileName : Text; $destinationFolderPath : Text; $title : Text)
+Class constructor($templatePath : Text; $mapping : Collection; $entitySelection; $destinationFileName : Text; $destinationFolderPath : Text; $title : Text; $sheetName : Text)
 	This:C1470.templatePath:=$templatePath
 	This:C1470.mapping:=$mapping
 	This:C1470.entitySelection:=$entitySelection
@@ -17,6 +18,7 @@ Class constructor($templatePath : Text; $mapping : Collection; $entitySelection;
 	This:C1470.autoQuit:=False:C215
 	This:C1470.destinationFolderPath:=$destinationFolderPath
 	This:C1470.title:=$title
+	This:C1470.sheetName:=$sheetName
 	
 	// This function will be called on each event of the offscreen area 
 Function onEvent()
@@ -34,6 +36,7 @@ Function onEvent()
 			
 			SET TIMER:C645(0)
 			
+			$columnCount:=VP Get column count(This:C1470.area)
 			$row:=1
 			$col:=0
 			
@@ -66,7 +69,7 @@ Function onEvent()
 			$style.font:="bold Arial"
 			$style.backColor:="#FFFF00"
 			
-			VP SET CELL STYLE(VP Cells(This:C1470.area; 0; $row; $col+1; 1); $style)
+			VP SET CELL STYLE(VP Cells(This:C1470.area; 0; $row; $col; 1); $style)
 			VP SET ROW ATTRIBUTES(VP Row(This:C1470.area; $row); New object:C1471("height"; 30))
 			
 			$row:=$row+1
@@ -154,7 +157,7 @@ Function onEvent()
 			$style.backColor:="#D3D3D3"
 			$style.borderTop:=New object:C1471("color"; "black"; "style"; vk line style thin:K89:39)
 			
-			VP SET CELL STYLE(VP Cells(This:C1470.area; 0; $row; $col+1; 1); $style)
+			VP SET CELL STYLE(VP Cells(This:C1470.area; 0; $row; $columnCount; 1); $style)
 			
 			//Columns With
 			For ($i; 0; $colomnWith.length-1)
@@ -162,6 +165,8 @@ Function onEvent()
 				VP SET COLUMN ATTRIBUTES(VP Column(This:C1470.area; $i); New object:C1471("width"; $size))
 			End for 
 			
+			//Set Sheet Name
+			VP SET SHEET NAME(This:C1470.area; This:C1470.sheetName; 0)
 			
 			//Export the content
 			$file:=Folder:C1567(Convert path system to POSIX:C1106(This:C1470.destinationFolderPath)).file(This:C1470.destinationFileName)
