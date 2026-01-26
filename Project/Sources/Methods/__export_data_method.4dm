@@ -8,7 +8,6 @@
 //-if you made some modifications, copy the method content from old system to framework version
 
 
-
 var $folderPath : Text
 var $myFolder : Object
 
@@ -195,6 +194,10 @@ If (True:C214)  // export jobs & lot (job <-- lots)
 			"travBasedCharges"; [Receiver]Step_Charge; \
 			"pr_qualifier"; [Receiver]Pr_qualifier; \
 			"packageType"; [Receiver]Pkg_Type; \
+			"testerType"; [Receiver]TesterType; \
+			"acNote"; [Receiver]AC_note; \
+			"inventoryCost"; [Receiver]Inventory_Cost; \
+			"directCost"; [Receiver]Direct_Cost; \
 			"archived"; False:C215; \
 			"address"; New object:C1471("addresses"; New collection:C1472()); \
 			"poLines"; New collection:C1472(); \
@@ -872,6 +875,10 @@ If (True:C214)  // export archived jobs & lot (job <-- lots)
 			"poBasedCharges"; [ARCHIVES]POLinesTotal; \
 			"travBasedCharges"; [ARCHIVES]Step_Charge; \
 			"packageType"; [ARCHIVES]Pkg_Type; \
+			"testerType"; [ARCHIVES]TesterType; \
+			"acNote"; [ARCHIVES]AC_note; \
+			"inventoryCost"; [ARCHIVES]Inventory_Cost; \
+			"directCost"; [ARCHIVES]Direct_Cost; \
 			"archived"; False:C215; \
 			"archived"; True:C214; \
 			"address"; New object:C1471(\
@@ -1312,6 +1319,38 @@ If (True:C214)  // export Housekeeping_div_add
 	SHOW ON DISK:C922($myFolder.platformPath+"divisionInfo_export.json")
 	
 End if 
+
+
+If (True:C214)  // export [CHART_OF_AC]
+	
+	ALL RECORDS:C47([CHART_OF_AC])
+	$jsonString:=Selection to JSON:C1234([CHART_OF_AC])
+	
+	vhDoc:=Create document:C266($myFolder.platformPath+"chartOfAcc_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	
+	SHOW ON DISK:C922($myFolder.platformPath+"chartOfAcc_export.json")
+	
+End if 
+
+If (True:C214)  // export [CHART_OF_AC]
+	
+	ALL RECORDS:C47([Asset_List])
+	$jsonString:=Selection to JSON:C1234([Asset_List])
+	
+	vhDoc:=Create document:C266($myFolder.platformPath+"assetList_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	
+	SHOW ON DISK:C922($myFolder.platformPath+"assetList_export.json")
+	
+End if 
+
 
 
 ALERT:C41("END!")

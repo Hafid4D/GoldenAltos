@@ -1135,8 +1135,35 @@
 	</table>
 	<table name="Asset" uuid="2A5FFBEA0CA13546A52A683860C62D9A" id="76">
 		<field name="UUID" uuid="F7A86C3065419D4680941CAC657A43B7" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="Field_2" uuid="3B01CCE80CE9714EA4A45453171B9BB6" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="assetNumber" uuid="3B01CCE80CE9714EA4A45453171B9BB6" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="UUID_AssetType" uuid="67561D6E1B3EFB4386E0925C6DBB6F33" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="3"/>
+		<field name="UUID_Vendor" uuid="25B7FA3475702848BF192D5766B4DA38" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="4"/>
+		<field name="description" uuid="20115DE699DD3A4DBDBE5B437416F133" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="UUID_PurchaseOrder" uuid="82A10DEE95CF0249AA3E3115D4B5D78D" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="6"/>
+		<field name="originalCost" uuid="BACD4F64BD5D034D9F5A4A37E26E2BB3" type="10" limiting_length="255" never_null="true" id="7"/>
+		<field name="salvage" uuid="4DE5ED8C0EDFFB4FBE9A02DDDF9100A2" type="10" limiting_length="255" never_null="true" id="8"/>
+		<field name="monthInService" uuid="F3FE775AE41A0541BE282606282B8E6C" type="10" limiting_length="255" never_null="true" id="9"/>
+		<field name="lifePerTax" uuid="B8CBD640BAA6954F948079E710615EE7" type="10" limiting_length="255" never_null="true" id="10"/>
+		<field name="bookValue" uuid="C49E6DB5C4570847B51B079DB5B016AB" type="10" limiting_length="255" never_null="true" id="11"/>
+		<field name="currentMonthDepreciation" uuid="C9F5087E0C94124EB8755D812B4777D3" type="10" limiting_length="255" never_null="true" id="12"/>
+		<field name="totalAccountDepreciation" uuid="9F9595FDA62F4C4CADCEBC7784866BA6" type="10" limiting_length="255" never_null="true" id="13"/>
+		<field name="isScrapped" uuid="778BDCA5650B6A4AA1C4A1486D30A4EE" type="1" never_null="true" id="14"/>
+		<field name="divestStmp" uuid="BE511C5A6504424BBF28BF0E8B2B6640" type="4" never_null="true" id="15"/>
 		<primary_key field_name="UUID" field_uuid="F7A86C3065419D4680941CAC657A43B7"/>
+	</table>
+	<table name="AssetType" uuid="14147D8EB06A0B4DA397400A67A5F1C6" id="77">
+		<field name="UUID" uuid="0EC0E81B04921E4DAFEA472DC5D0C354" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="levelID" uuid="B9F661A940122444B62D7054461AF25A" type="4" never_null="true" id="2"/>
+		<field name="code" uuid="8843E460FCE94E44A1BF4CBD4EFF837C" type="10" limiting_length="255" never_null="true" id="3">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="name" uuid="2F2C85A06FCDE84E9F589AF3C7B17A20" type="10" limiting_length="255" never_null="true" id="4">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="color" uuid="F3061A047376A742BAB1B438E76A52B9" type="10" limiting_length="255" never_null="true" id="5">
+			<field_extra multi_line="false"/>
+		</field>
+		<primary_key field_name="UUID" field_uuid="0EC0E81B04921E4DAFEA472DC5D0C354"/>
 	</table>
 	<table name="sfw_UserInscription" uuid="AC225FD836FF49F7841FC1B78EC96243" id="81">
 		<field name="UUID" uuid="211EC274251B4A748F6C5C28741E0FB3" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -3162,6 +3189,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="042DFBBBC8AA1D4DADAC82B140D76057" name_Nto1="assetType" name_1toN="assets" state="1">
+		<related_field kind="source">
+			<field_ref uuid="67561D6E1B3EFB4386E0925C6DBB6F33" name="UUID_AssetType">
+				<table_ref uuid="2A5FFBEA0CA13546A52A683860C62D9A" name="Asset"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="0EC0E81B04921E4DAFEA472DC5D0C354" name="UUID">
+				<table_ref uuid="14147D8EB06A0B4DA397400A67A5F1C6" name="AssetType"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="005E48A922A4464DB92973931B467ACF" type="3">
 		<field_ref uuid="17F71D68FA714CE9A75ED79CA63E3BE2" name="UUID_Lead">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
@@ -3382,6 +3421,11 @@
 			<table_ref uuid="250C49949B7EEE4DAAA8A5D319A94DF6" name="CIPriority"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="2612D1986EAA3342B970C2A539CFE5AC" type="3">
+		<field_ref uuid="82A10DEE95CF0249AA3E3115D4B5D78D" name="UUID_PurchaseOrder">
+			<table_ref uuid="2A5FFBEA0CA13546A52A683860C62D9A" name="Asset"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="26B5486B90AD42B8B4DE300E4F87D8DE" type="3">
 		<field_ref uuid="CACC091D0D6247B385C4B1F8772EE52B" name="UUID_DocumentFolder">
 			<table_ref uuid="5E1C3E25225441628E3DBCF58BFAABF4" name="sfw_Document"/>
@@ -3460,6 +3504,11 @@
 	<index kind="regular" uuid="38C0A9F5C72D45409EBDE48B0E0381A5" type="3">
 		<field_ref uuid="6BCBC4FC87DA473BAD822CDA79785DDC" name="UUID_Quote">
 			<table_ref uuid="9829CFB4F3294A3989861E788C0AF7D4" name="QuoteEvent"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="39F24A167791054389F4E5F2E8C520FA" type="3">
+		<field_ref uuid="25B7FA3475702848BF192D5766B4DA38" name="UUID_Vendor">
+			<table_ref uuid="2A5FFBEA0CA13546A52A683860C62D9A" name="Asset"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="3AA763F9E150A24191C0D1CCE2C7A774" type="7">
@@ -4252,6 +4301,11 @@
 			<table_ref uuid="477EC72D2995454193887CAC5D6DE686" name="sfw_Subscription"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="D03573A4B16E7B4E9D7B09F28E28B1A2" type="3">
+		<field_ref uuid="67561D6E1B3EFB4386E0925C6DBB6F33" name="UUID_AssetType">
+			<table_ref uuid="2A5FFBEA0CA13546A52A683860C62D9A" name="Asset"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="D4C20100F3A44711AF8343819AC0567F" type="1">
 		<field_ref uuid="F7AEB814F6504C649074F8ABB1E85E01" name="UUID">
 			<table_ref uuid="A2E5AA68898A4B1595645CE229236B67" name="InteractionOutcome"/>
@@ -4280,6 +4334,11 @@
 	<index kind="regular" unique_keys="true" uuid="D6D025148CC09B408A7571C32FCA0F49" type="1">
 		<field_ref uuid="E4F1F05A93EBEB4EB76E384419D62112" name="UUID">
 			<table_ref uuid="1BCF3E71728E56429B08B229161AD291" name="ContinuousImprovement"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="D799F1F3D26B3F43A5D4C1BAA5755EBA" type="7">
+		<field_ref uuid="0EC0E81B04921E4DAFEA472DC5D0C354" name="UUID">
+			<table_ref uuid="14147D8EB06A0B4DA397400A67A5F1C6" name="AssetType"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="D868849D65404F07B7AFC515FE5768A9" type="3">

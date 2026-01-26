@@ -856,20 +856,35 @@
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
-		"Asset": {
+		"AssetType": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 150,
+				"green": 216,
+				"blue": 175,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 5323,
-				"top": 0,
-				"width": 148,
-				"height": 239.33203125
+				"left": 4595,
+				"top": 310,
+				"width": 120,
+				"height": 167.33203125
 			},
-			"displayable_fields_count": 9
+			"displayable_fields_count": 6
+		},
+		"Asset": {
+			"color": {
+				"red": 150,
+				"green": 216,
+				"blue": 175,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 4853,
+				"top": 328,
+				"width": 185,
+				"height": 407.33203125
+			},
+			"displayable_fields_count": 17
 		},
 		"CAOTypeDetail": {
 			"color": {
@@ -2384,6 +2399,14 @@
 		}
 	},
 	"relations": {
+		"042DFBBBC8AA1D4DADAC82B140D76057": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"08D76CA12383BA4793905A464D245859": {
 			"color": {
 				"red": 240,

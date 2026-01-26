@@ -1,6 +1,7 @@
 //%attributes = {}
 
 
+ARRAY TO COLLECTION:C1563($APointerToCollection; APointerToColArray)
 
 
 var $commandLine; $output; $in : Text
