@@ -109,16 +109,6 @@
 		},
 		{
 			"objects": {
-				"main_bkgd1": {
-					"type": "rectangle",
-					"top": 114,
-					"left": 0,
-					"width": 1500,
-					"height": 1500,
-					"sizingX": "grow",
-					"fill": "#E4E4E4",
-					"stroke": "transparent"
-				},
 				"header_bkgd2": {
 					"type": "rectangle",
 					"top": 114,
@@ -295,7 +285,7 @@
 			}
 		}
 	],
-	"geometryStamp": 101,
+	"geometryStamp": 103,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"editor": {
 		"activeView": "View 1",
