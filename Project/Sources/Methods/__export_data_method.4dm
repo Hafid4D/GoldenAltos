@@ -2,10 +2,10 @@
 
 //Instruntion : 
 
-//-Do not execute on this version
+//-Do not execute on framework version
 //-copy the method and paste in the old version of the application
 //-modify if needed and execute to export data to the DataJson folder(Folder that contain the exported data)
-//-if you made some modifications, copy the method content from old system to this
+//-if you made some modifications, copy the method content from old system to framework version
 
 
 

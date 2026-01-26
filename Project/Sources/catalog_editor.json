@@ -856,6 +856,21 @@
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
+		"Asset": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 5323,
+				"top": 0,
+				"width": 148,
+				"height": 239.33203125
+			},
+			"displayable_fields_count": 9
+		},
 		"CAOTypeDetail": {
 			"color": {
 				"red": 255,

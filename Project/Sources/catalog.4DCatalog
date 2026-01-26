@@ -1133,6 +1133,11 @@
 		</field>
 		<primary_key field_name="UUID" field_uuid="F14284E7477D8D4BBF2407848DC069C8"/>
 	</table>
+	<table name="Asset" uuid="2A5FFBEA0CA13546A52A683860C62D9A" id="76">
+		<field name="UUID" uuid="F7A86C3065419D4680941CAC657A43B7" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="Field_2" uuid="3B01CCE80CE9714EA4A45453171B9BB6" type="10" limiting_length="255" never_null="true" id="2"/>
+		<primary_key field_name="UUID" field_uuid="F7A86C3065419D4680941CAC657A43B7"/>
+	</table>
 	<table name="sfw_UserInscription" uuid="AC225FD836FF49F7841FC1B78EC96243" id="81">
 		<field name="UUID" uuid="211EC274251B4A748F6C5C28741E0FB3" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_User" uuid="29D5804D61304EFEBBA1081D06154F5C" type="10" store_as_UUID="true" id="2"/>
@@ -3960,6 +3965,11 @@
 	<index kind="regular" uuid="937D8396A2FC454C8FB085F2953DE28B" type="3">
 		<field_ref uuid="77AF3DA079C03A43BAD250289F15EF39" name="UUID_LeadNextStep">
 			<table_ref uuid="1E733AC1BDB87C40B151040C49BD164B" name="Lead"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="93A347F403070C4BBDF1414D8B5ECF9F" type="7">
+		<field_ref uuid="F7A86C3065419D4680941CAC657A43B7" name="UUID">
+			<table_ref uuid="2A5FFBEA0CA13546A52A683860C62D9A" name="Asset"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="9616512DD0FB414A9CA2BF6D7E6ED62F" type="3">

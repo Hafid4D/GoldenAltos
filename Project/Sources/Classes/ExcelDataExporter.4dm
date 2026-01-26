@@ -120,7 +120,7 @@ Function onEvent()
 									$footerValues[$col]:=Num:C11($footerValues[$col])+Num:C11($content)
 									
 								Else 
-									
+									$footerValues[$col]:=This:C1470.mapping.extract("footerOperation")[$col]
 							End case 
 							
 							//Fill the columns width collection

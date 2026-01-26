@@ -33,7 +33,7 @@ Case of
 		Form:C1466.storeAccess:=False:C215
 		
 		OBJECT SET ENABLED:C1123(*; "input_user"; False:C215)
-		OBJECT SET ENABLED:C1123(*; "btn_login"; (Form:C1466.password#"") && (Form:C1466.user#""))  // (Form.pup_users.index>=0))
+		//OBJECT SET ENABLED(*; "bOk"; (Form.password#"") && (Form.user#""))  // (Form.pup_users.index>=0))
 		OBJECT SET ENABLED:C1123(*; "input_password"; (Form:C1466.user#""))  //(Form.pup_users.index>=0)
 		
 		SET TIMER:C645(1)
@@ -71,7 +71,7 @@ Case of
 							SET CHANNEL:C77(11)
 						Else 
 							Form:C1466.user:=""
-							SET TIMEOUT:C268(30)
+							SET TIMER:C645(30)
 						End if 
 						
 					End if 
@@ -80,7 +80,7 @@ Case of
 				
 			Else 
 				
-				SET TIMEOUT:C268(30)
+				SET TIMER:C645(30)
 				Form:C1466.failedConnect:=Form:C1466.failedConnect+1
 				If (Form:C1466.failedConnect>5)
 					ALERT:C41("Erreur : failed to Connect to the Scanner!Restart the app.")
@@ -97,7 +97,7 @@ Case of
 End case 
 
 OBJECT SET ENABLED:C1123(*; "input_user"; False:C215)
-OBJECT SET ENABLED:C1123(*; "btn_login"; (Form:C1466.password#"") && (Form:C1466.user#""))  // (Form.pup_users.index>=0))
+//OBJECT SET ENABLED(*; "bOk"; (Form.password#"") && (Form.user#""))  // (Form.pup_users.index>=0))
 OBJECT SET ENABLED:C1123(*; "input_password"; (Form:C1466.user#""))  //(Form.pup_users.index>=0)
 
 

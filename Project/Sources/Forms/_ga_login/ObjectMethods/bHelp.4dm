@@ -14,7 +14,7 @@ Case of
 			: ($choose="--selectPort")
 				
 				var $commandLine; $output; $in : Text
-				var $ports : Collection
+				var $ports : Collection:=New collection:C1472()
 				
 				$commandLine:="powershell Get-CimInstance Win32_SerialPort | Where-Object { (($_.PNPDeviceID -like '*USB*') -or ($_.PNPDeviceID -like '*BTHENUM*')) -and ($_.PNPDeviceID-like '*VID*') }  | ForEach-Object { $_.DeviceID +':'+ $_.Name }"
 				
@@ -30,6 +30,7 @@ Case of
 					
 				End for 
 				
+				var $form : Object:=New object:C1471()
 				$form.ports:=ports
 				$winRef:=Open form window:C675("_ga_selectSerialPort"; Movable dialog box:K34:7; Horizontally centered:K39:1; Vertically centered:K39:4)
 				//SET WINDOW TITLE("Select the Scanner Port"; $winRef)
@@ -50,13 +51,14 @@ Case of
 					
 				End if 
 				
-				$portsList:=$ports.join(";")
-				MOUSE POSITION:C468(mX; mY; $mouseBtn)
-				$choice:=Pop up menu:C542($portsList; mX; mY)
+				//$portsList:=$ports.join(";")
+				//MOUSE POSITION(mX; mY; $mouseBtn)
+				//$choice:=Pop up menu($portsList; mX; mY)
 				
-				If ($choice#"")
-					_ga_findScannerSeriaPort($choice)
-					
+				If ($serialPort#"")
+					_ga_findScannerSeriaPort($serialPort)
+					_ga_openScannerSerialPort
+					SET TIMER:C645(1)
 				End if 
 				
 		End case 

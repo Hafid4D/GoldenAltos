@@ -30,3 +30,18 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.enableTransaction()
 	
 	$entry.activateFavorite()
+	
+	
+	
+	// MARK: -Views
+	$view:=cs:C1710.sfw_definitionView.new("inactiveCAOs"; "Inactive Accounts"; "derivedFrom:main"; $entry)
+	$view.setSubset("inactiveCAOs")
+	$view.setPictoLabel("/RESOURCES/ga/image/picto/caos-16x16.png")
+	$entry.setView($view)
+	
+	
+Function inactiveCAOs()->$caos : cs:C1710.CAOSelection
+	$caos:=ds:C1482.CAO.query("isActive =:1 "; True:C214)
+	
+	
+	

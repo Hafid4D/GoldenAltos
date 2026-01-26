@@ -5,6 +5,9 @@ var $records : Collection:=New collection:C1472()
 
 
 If (True:C214)
+	
+	$oldSystemData:=Folder:C1567(fk data folder:K87:12).file("DataJson/chartOfAcc_export.json")
+	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/chartOfAcount.json")
 	
 	$records:=JSON Parse:C1218($file.getText())

@@ -87,7 +87,7 @@ If (Storage:C1525.cache=Null:C1517)
 		Storage:C1525.cache:=New shared object:C1526
 	End use 
 End if 
-If (Storage:C1525.cache.scannerSerailPort=Null:C1517)
+If (Storage:C1525.cache.scannerSerailPort=Null:C1517) | ($caller="_ga_login.bHelp")
 	Use (Storage:C1525.cache)
 		Storage:C1525.cache.scannerSerailPort:=$portNumber
 	End use 
