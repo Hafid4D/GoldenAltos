@@ -1,7 +1,7 @@
 //%attributes = {}
 
 
-ARRAY TO COLLECTION:C1563($APointerToCollection; APointerToColArray)
+$assets:=ds:C1482.Asset.all()
 
 
 var $commandLine; $output; $in : Text

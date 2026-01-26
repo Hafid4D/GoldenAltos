@@ -25,42 +25,17 @@ Function formMethod()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
-	This:C1470.drawPup_type()
-	This:C1470.drawPup_typeDetail()
+	
 	
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	OBJECT GET COORDINATES:C663(*; "header_bkgd5"; $g; $h; $d; $b)
+	OBJECT SET COORDINATES:C1248(*; "header_bkgd5"; $g; $h; $widthSubform; $heightSubform)
+	
 	$offset:=5
 	Case of 
 			
 		: (FORM Get current page:C276(*)=1)
 			
-			OBJECT GET COORDINATES:C663(*; "header_bkgd5"; $g; $h; $d; $b)
-			OBJECT SET COORDINATES:C1248(*; "header_bkgd5"; $g; $h; $widthSubform; $heightSubform)
-			
-			OBJECT GET COORDINATES:C663(*; "header_bkgd2"; $g; $h; $d; $b)
-			OBJECT SET COORDINATES:C1248(*; "header_bkgd2"; $g; $h; $widthSubform; $b)
 			
 	End case 
-	
-Function drawPup_type()
-	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.current_item.drowPup("CAOType"; "UUID"; "UUID_CAOType"; "pup_type")
-	End if 
-	
-	
-Function selectType()
-	Form:C1466.current_item.pup("CAOTypes"; "CAOType"; "UUID"; "UUID_CAOType")
-	This:C1470.drawPup_type()
-	
-Function drawPup_typeDetail()
-	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.current_item.drowPup("CAOTypeDetail"; "UUID"; "UUID_CAOTypeDetail"; "pup_typeDetail")
-	End if 
-	
-Function selectTypeDetail()
-	Form:C1466.current_item.pup("CAOTypeDetails"; "CAOTypeDetail"; "UUID"; "UUID_CAOTypeDetail")
-	This:C1470.drawPup_typeDetail()
-	
-	
-	
 	

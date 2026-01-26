@@ -55,6 +55,11 @@ If (True:C214)
 		$eAsset.divestStmp:=$record.Divest_Date
 		
 		
+		$info:=$eAsset.save()
+		If (Not:C34($info.success))
+			TRACE:C157
+		End if 
+		
 	End for each 
 	
 	
