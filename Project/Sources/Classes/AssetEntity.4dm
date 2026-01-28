@@ -2,7 +2,7 @@ Class extends Entity
 
 
 local Function get nameInWindowTitle()->$nameInWindowTitle : Text
-	$nameInWindowTitle:=This:C1470.assetNumber
+	$nameInWindowTitle:=String:C10(This:C1470.assetNumber)
 	
 	
 local Function drowPup($dataClass; $queryField; $queryValue; $pupName)
@@ -63,5 +63,21 @@ local Function pup($cacheCollection; $dataClass; $queryField; $queryValue)
 		
 	End if 
 	
+	
+Function get monthlyDepreciation($usefulLife)->$monthlyDepreciation : Real
+	$monthlyDepreciation:=This:C1470.originalCost/$usefulLife
+	
+Function get totalAccDepreciation($usefulLife)->$totalAccDepreciation : Real
+	$totalAccDepreciation:=This:C1470.originalCost/$usefulLife
+	
+	
+local Function get acquiredDate()->$date : Date
+	$date:=cs:C1710.sfw_stmp.me.getDate(This:C1470.acquiredStmp; True:C214)
+	
+local Function set acquiredDate($date : Date)
+	This:C1470.acquiredStmp:=cs:C1710.sfw_stmp.me.build($date)
+	
+local Function get bookValue()->$bookValue : Real
+	$bookValue:=This:C1470.originalCost-This:C1470.totalAccDepreciation
 	
 	

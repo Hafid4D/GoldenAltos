@@ -13,8 +13,11 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setPanel("panel_asset"; 1)
 	$entry.setPanelPage(1; ""; "Main")
+	$entry.setSubset("main")
 	
-	$entry.setLBItemsColumn("assetNumber"; "Asset #"; "width:100")
+	$entry.setLBItemsColumn("assetNumber"; "Asset #"; "width:50")
+	$entry.setLBItemsColumn("description"; "Description"; "width:200")
+	$entry.setLBItemsColumn("originalCost"; "Original Cost"; "width:100")
 	
 	$entry.setLBItemsOrderBy("assetNumber")
 	$entry.setMainViewLabel("All assets")
@@ -32,6 +35,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	
 	// MARK: -Views
+	
 	$view:=cs:C1710.sfw_definitionView.new("fullyDepreciatedAssets"; "Assets fully Depreciated [Not Archived]"; "derivedFrom:main"; $entry)
 	$view.setSubset("fullyDepreciatedAssets")
 	$view.setPictoLabel("/RESOURCES/ga/image/picto/assets-16x16.png")
@@ -43,12 +47,14 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setPictoLabel("/RESOURCES/ga/image/picto/assets-16x16.png")
 	$entry.setView($view)
 	
+Function main()->$assets : cs:C1710.AssetSelection
+	$assets:=ds:C1482.Asset.query("excludeFmDepreciationList =:1"; False:C215)
 	
 Function fullyDepreciatedAssets()->$assets : cs:C1710.AssetSelection
-	$assets:=ds:C1482.Asset.all()
+	$assets:=ds:C1482.Asset.query("excludeFmDepreciationList =:1"; False:C215)
 	
 Function archivedorScrappedAssets()->$assets : cs:C1710.AssetSelection
-	$assets:=ds:C1482.Asset.all()
+	$assets:=ds:C1482.Asset.query("excludeFmDepreciationList =:1"; False:C215)
 	
 	
 	
