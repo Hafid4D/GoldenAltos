@@ -1,82 +1,86 @@
 //%attributes = {}
 
 
-$assets:=ds:C1482.Asset.all()
+$project:=cs:C1710.Util_entryFactory.new()
 
 
-var $commandLine; $output; $in : Text
-
-$commandLine:="powershell Get-CimInstance Win32_SerialPort | Where-Object { ($_.PNPDeviceID -like '*USB*') -or ($_.PNPDeviceID -like '*BTHENUM*') } | ForEach-Object { $_.DeviceID }"
-SET ENVIRONMENT VARIABLE:C812("_4D_OPTION_HIDE_CONSOLE"; "true")
-LAUNCH EXTERNAL PROCESS:C811($commandLine; $in; $output; $error; $pid)
-
-$result:=Split string:C1554($output; "\r\n"; sk ignore empty strings:K86:1+sk trim spaces:K86:2)  //; ""; sk ignore empty strings+sk trim spaces)
 
 
+//$sharedParam:=New shared object("result"; New shared object())
+
+//$assets:=ds.AssetType.all()
+
+//var $commandLine; $output; $in : Text
+
+//$commandLine:="powershell Get-CimInstance Win32_SerialPort | Where-Object { ($_.PNPDeviceID -like '*USB*') -or ($_.PNPDeviceID -like '*BTHENUM*') } | ForEach-Object { $_.DeviceID }"
+//SET ENVIRONMENT VARIABLE("_4D_OPTION_HIDE_CONSOLE"; "true")
+//LAUNCH EXTERNAL PROCESS($commandLine; $in; $output; $error; $pid)
+
+//$result:=Split string($output; "\r\n"; sk ignore empty strings+sk trim spaces)  //; ""; sk ignore empty strings+sk trim spaces)
 
 
 //$dolder:=System folder()
 
-$file:=Get 4D folder:C485(Active 4D Folder:K5:10)  //+"ScannerConfig.json")
+//$file:=Get 4D folder(Active 4D Folder)  //+"ScannerConfig.json")
 
-$data:="Q4Oa2w20kkOKyfVpcNk02w=="
-$isUUID:=(Substring:C12($data; 23)="==")
-
-
-$setting:=0
-$portNum:=104
-
-SET CHANNEL:C77(11)
-SET CHANNEL:C77($portNum; $setting)
+//$data:="Q4Oa2w20kkOKyfVpcNk02w=="
+//$isUUID:=(Substring($data; 23)="==")
 
 
-SET CHANNEL:C77(11)
-DELAY PROCESS:C323(Current process:C322; 120)
-SET CHANNEL:C77($portNum; $setting)
+//$setting:=0
+//$portNum:=104
+
+//SET CHANNEL(11)
+//SET CHANNEL($portNum; $setting)
 
 
-SET CHANNEL:C77($portNum; $setting)
+//SET CHANNEL(11)
+//DELAY PROCESS(Current process; 120)
+//SET CHANNEL($portNum; $setting)
 
 
-
-$staff:=ds:C1482.Staff.query("lastName =:1"; "LOSENDO")
-
-$job:=ds:C1482.Job.all().first()
-
-
-$nameA:="897673"
-$nameB:="897673_1"
-
-$bool:=$nameA=$nameB
-
-var $JobLineItem : cs:C1710.JobLineItemEntity
-$selection:=ds:C1482.JobLineItem.query("itemNumber=:1"; 0)
-For each ($JobLineItem; $selection)
-	$JobLineItem.drop()
-	
-End for each 
+//SET CHANNEL($portNum; $setting)
 
 
 
+//$staff:=ds.Staff.query("lastName =:1"; "LOSENDO")
 
-$svgRef:=SVG_New
-$objectRef:=SVG_New_line($svgRef; 0; 1; 730; 1; "black"; 1)
-SVG_SAVE_AS_PICTURE($svgRef; "test.png")
-
-$idents:=cs:C1710.sfw_definition.me.entries.extract("ident")
-
-$counter:=0
-String:C10($counter+1; "00000#")
+//$job:=ds.Job.all().first()
 
 
-$file:=Folder:C1567(fk resources folder:K87:11).file("excelTemplates/jobsTemplate.xlsx")
+//$nameA:="897673"
+//$nameB:="897673_1"
 
-var $fields : Collection:=New collection:C1472("jobNumber"; "expectedDate"; "recommitDate"; \
+//$bool:=$nameA=$nameB
+
+//var $JobLineItem : cs.JobLineItemEntity
+//$selection:=ds.JobLineItem.query("itemNumber=:1"; 0)
+//For each ($JobLineItem; $selection)
+//$JobLineItem.drop()
+
+//End for each 
+
+
+
+
+//$svgRef:=SVG_New
+//$objectRef:=SVG_New_line($svgRef; 0; 1; 730; 1; "black"; 1)
+//SVG_SAVE_AS_PICTURE($svgRef; "test.png")
+
+//$idents:=cs.sfw_definition.me.entries.extract("ident")
+
+//$counter:=0
+//String($counter+1; "00000#")
+
+
+//$file:=Folder(fk resources folder).file("excelTemplates/jobsTemplate.xlsx")
+
+//var $fields : Collection:=New collection("jobNumber"; "expectedDate"; "recommitDate"; \
 "lastShipDate"; "invoiceDate"; "customer"; "poNumber"; "process"; "currency"; "totalCharge"; \
 "shipped"; "postToPO")
-$jobs:=ds:C1482.Job.query("lineItem =:1"; True:C214)
-$offscreen:=cs:C1710.jobDataExporter.new($file.platformPath; $fields; $jobs; "TestJobExport")
-$excelSheet:=VP Run offscreen area($offscreen)
+//$jobs:=ds.Job.query("lineItem =:1"; True)
+//$offscreen:=cs.jobDataExporter.new($file.platformPath; $fields; $jobs; "TestJobExport")
+//$excelSheet:=VP Run offscreen area($offscreen)
 
 //$offscreen.fillDataAndExport($offscreen)
 

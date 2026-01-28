@@ -1135,20 +1135,20 @@
 	</table>
 	<table name="Asset" uuid="2A5FFBEA0CA13546A52A683860C62D9A" id="76">
 		<field name="UUID" uuid="F7A86C3065419D4680941CAC657A43B7" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="assetNumber" uuid="3B01CCE80CE9714EA4A45453171B9BB6" type="10" limiting_length="255" never_null="true" id="2"/>
-		<field name="UUID_AssetType" uuid="67561D6E1B3EFB4386E0925C6DBB6F33" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="3"/>
-		<field name="UUID_Vendor" uuid="25B7FA3475702848BF192D5766B4DA38" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="4"/>
-		<field name="description" uuid="20115DE699DD3A4DBDBE5B437416F133" type="10" limiting_length="255" never_null="true" id="5"/>
-		<field name="UUID_PurchaseOrder" uuid="82A10DEE95CF0249AA3E3115D4B5D78D" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="6"/>
-		<field name="originalCost" uuid="BACD4F64BD5D034D9F5A4A37E26E2BB3" type="10" limiting_length="255" never_null="true" id="7"/>
+		<field name="assetNumber" uuid="3B01CCE80CE9714EA4A45453171B9BB6" type="4" never_null="true" id="2"/>
+		<field name="UUID_AssetType" uuid="67561D6E1B3EFB4386E0925C6DBB6F33" type="10" store_as_UUID="true" never_null="true" id="3"/>
+		<field name="UUID_Vendor" uuid="25B7FA3475702848BF192D5766B4DA38" type="10" store_as_UUID="true" never_null="true" id="4"/>
+		<field name="description" uuid="20115DE699DD3A4DBDBE5B437416F133" type="10" never_null="true" id="5"/>
+		<field name="UUID_PurchaseOrder" uuid="82A10DEE95CF0249AA3E3115D4B5D78D" type="10" store_as_UUID="true" never_null="true" id="6"/>
+		<field name="originalCost" uuid="BACD4F64BD5D034D9F5A4A37E26E2BB3" type="6" never_null="true" id="7"/>
 		<field name="salvage" uuid="4DE5ED8C0EDFFB4FBE9A02DDDF9100A2" type="10" limiting_length="255" never_null="true" id="8"/>
-		<field name="monthInService" uuid="F3FE775AE41A0541BE282606282B8E6C" type="10" limiting_length="255" never_null="true" id="9"/>
+		<field name="monthInService" uuid="F3FE775AE41A0541BE282606282B8E6C" type="4" never_null="true" id="9"/>
 		<field name="lifePerTax" uuid="B8CBD640BAA6954F948079E710615EE7" type="10" limiting_length="255" never_null="true" id="10"/>
-		<field name="bookValue" uuid="C49E6DB5C4570847B51B079DB5B016AB" type="10" limiting_length="255" never_null="true" id="11"/>
 		<field name="currentMonthDepreciation" uuid="C9F5087E0C94124EB8755D812B4777D3" type="10" limiting_length="255" never_null="true" id="12"/>
-		<field name="totalAccountDepreciation" uuid="9F9595FDA62F4C4CADCEBC7784866BA6" type="10" limiting_length="255" never_null="true" id="13"/>
 		<field name="isScrapped" uuid="778BDCA5650B6A4AA1C4A1486D30A4EE" type="1" never_null="true" id="14"/>
 		<field name="divestStmp" uuid="BE511C5A6504424BBF28BF0E8B2B6640" type="4" never_null="true" id="15"/>
+		<field name="excludeFmDepreciationList" uuid="10586EF0D30A364AAF11A4D164C52C4D" type="1" never_null="true" id="16"/>
+		<field name="acquiredStmp" uuid="74AA24FF64853E4E9AADBCBB97A60696" type="4" never_null="true" id="17"/>
 		<primary_key field_name="UUID" field_uuid="F7A86C3065419D4680941CAC657A43B7"/>
 	</table>
 	<table name="AssetType" uuid="14147D8EB06A0B4DA397400A67A5F1C6" id="77">
@@ -3198,6 +3198,18 @@
 		<related_field kind="destination">
 			<field_ref uuid="0EC0E81B04921E4DAFEA472DC5D0C354" name="UUID">
 				<table_ref uuid="14147D8EB06A0B4DA397400A67A5F1C6" name="AssetType"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="FD2C423406590B48AD2AC6AB7E002BA9" name_Nto1="vendor" name_1toN="assets" state="1">
+		<related_field kind="source">
+			<field_ref uuid="25B7FA3475702848BF192D5766B4DA38" name="UUID_Vendor">
+				<table_ref uuid="2A5FFBEA0CA13546A52A683860C62D9A" name="Asset"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="CFBA7599E861DC4A91A0C1B26781C297" name="UUID">
+				<table_ref uuid="A0C8CDC075BBB546914E03F7689B897E" name="Supplier"/>
 			</field_ref>
 		</related_field>
 	</relation>

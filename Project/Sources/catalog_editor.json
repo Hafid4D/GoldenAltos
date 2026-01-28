@@ -881,10 +881,10 @@
 			"coordinates": {
 				"left": 4853,
 				"top": 328,
-				"width": 185,
-				"height": 407.33203125
+				"width": 203,
+				"height": 458.33203125
 			},
-			"displayable_fields_count": 17
+			"displayable_fields_count": 19
 		},
 		"CAOTypeDetail": {
 			"color": {
@@ -1147,7 +1147,7 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 5314.4067382812,
+				"left": 5319.4067382812,
 				"top": 952.88208007812,
 				"width": 169,
 				"height": 193.33203125
@@ -2399,6 +2399,14 @@
 		}
 	},
 	"relations": {
+		"FD2C423406590B48AD2AC6AB7E002BA9": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"042DFBBBC8AA1D4DADAC82B140D76057": {
 			"color": {
 				"red": 240,

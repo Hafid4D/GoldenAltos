@@ -57,7 +57,7 @@ Case of
 				
 				If ($serialPort#"")
 					_ga_findScannerSeriaPort($serialPort)
-					_ga_openScannerSerialPort
+					//_ga_openScannerSerialPort
 					SET TIMER:C645(1)
 				End if 
 				

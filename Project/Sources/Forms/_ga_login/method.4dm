@@ -1,5 +1,7 @@
 
 
+OBJECT SET VISIBLE:C603(*; "bHelp"; False:C215)
+
 Case of 
 	: (FORM Event:C1606.code=On Load:K2:1)
 		var $logo : Picture
@@ -40,13 +42,16 @@ Case of
 		
 	: (Form event code:C388=On Timer:K2:25)
 		
+		SET TIMER:C645(0)
+		
 		If (Form:C1466.user="")
 			
 			$OK:=_ga_openScannerSerialPort
 			
 			If ($OK=1)
 				
-				While (Form:C1466.user="")
+				$userFined:=False:C215
+				While (Form:C1466.user="") | ($userFined=False:C215)
 					
 					RECEIVE BUFFER:C172($data)
 					
@@ -69,9 +74,11 @@ Case of
 							Form:C1466.user:=Form:C1466.userEntity.login
 							SET TIMER:C645(0)
 							SET CHANNEL:C77(11)
+							$userFined:=True:C214
 						Else 
 							Form:C1466.user:=""
-							SET TIMER:C645(30)
+							$userFined:=False:C215
+							//SET TIMER(30)
 						End if 
 						
 					End if 
