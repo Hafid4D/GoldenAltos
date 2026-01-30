@@ -9,7 +9,7 @@
 	"windowMinHeight": 0,
 	"windowMaxWidth": 32767,
 	"windowMaxHeight": 32767,
-	"rightMargin": 20,
+	"rightMargin": 0,
 	"bottomMargin": 20,
 	"events": [
 		"onLoad",
@@ -38,7 +38,7 @@
 					"type": "rectangle",
 					"top": 0,
 					"left": 0,
-					"width": 381,
+					"width": 387,
 					"height": 344,
 					"sizingX": "fixed",
 					"fill": "#FFFFFF",
@@ -47,8 +47,8 @@
 				},
 				"imgLogo": {
 					"type": "input",
-					"left": 14,
-					"top": 10,
+					"left": 16,
+					"top": 11,
 					"width": 356,
 					"height": 97,
 					"dataSourceTypeHint": "picture",
@@ -134,8 +134,8 @@
 				"Button": {
 					"type": "button",
 					"text": "shortcut",
-					"top": 319,
-					"left": 295,
+					"top": 317,
+					"left": 301,
 					"width": 75,
 					"height": 17,
 					"events": [
@@ -151,8 +151,8 @@
 				"bCancel": {
 					"type": "button",
 					"top": 354,
-					"left": 142,
-					"width": 100,
+					"left": 202,
+					"width": 60,
 					"height": 32,
 					"sizingY": "move",
 					"focusable": false,
@@ -170,8 +170,8 @@
 				"bOk": {
 					"type": "button",
 					"top": 354,
-					"left": 270,
-					"width": 100,
+					"left": 316,
+					"width": 60,
 					"height": 32,
 					"sizingY": "move",
 					"focusable": false,
@@ -226,11 +226,36 @@
 					"shortcutAlt": false,
 					"shortcutKey": "",
 					"method": "ObjectMethods/bHelp.4dm"
+				},
+				"bOk1": {
+					"type": "button",
+					"top": 169,
+					"left": 353,
+					"width": 23,
+					"height": 23,
+					"sizingY": "fixed",
+					"focusable": false,
+					"text": "",
+					"icon": "/RESOURCES/image/button/barcode-scan.png",
+					"iconFrames": 1,
+					"textPlacement": "right",
+					"style": "regular",
+					"events": [
+						"onClick"
+					],
+					"action": "",
+					"sizingX": "fixed",
+					"method": "ObjectMethods/bOk1.4dm",
+					"shortcutAccel": false,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": false,
+					"shortcutKey": ""
 				}
 			}
 		}
 	],
-	"geometryStamp": 48,
+	"geometryStamp": 77,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
