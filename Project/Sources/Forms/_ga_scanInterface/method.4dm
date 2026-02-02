@@ -12,6 +12,8 @@ Case of
 		ON EVENT CALL:C190("_ga_scanningEventHandler")
 		
 	: (Form event code:C388=On Timer:K2:25)
+		//Serial port implementation
+		
 		//ON EVENT CALL("_ga_scanningEventHandler")
 		//$data:=""
 		//While ($data="")
@@ -21,7 +23,7 @@ Case of
 		//End while 
 		//Form.barcodeData:=$data
 		//SET TIMER(0)
-		//ON EVENT CALL("")
+		
 		//ACCEPT
 		
 	: (Form event code:C388=On Unload:K2:2)
@@ -29,5 +31,6 @@ Case of
 			Form:C1466.barcodeData:=Storage:C1525.scanner.scanBuffer
 			
 		End use 
+		ON EVENT CALL:C190("")
 End case 
 

@@ -40,6 +40,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
 	
+	$entry.setItemListAction("Search by Scanning"; "_ga_searchByBarcodeScanning")
+	
 Function getActiveUsers()->$esUsers : cs:C1710.sfw_UserSelection
 	var $eRelated : 4D:C1709.Entity
 	

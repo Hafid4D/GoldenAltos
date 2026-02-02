@@ -843,7 +843,9 @@ If (True:C214)
 	$user.login:="hassansribet"
 	$user.accesses:=JSON Parse:C1218("{\"asDesigner\":true,\"password\":{\"temporary\":false,\"sendTemporaryByMail\":false,\"lastReset\":705253775,\"hash\":\"$2b$10$1KIfSf/DkyivGUKEeHHPDulQ51F9LSOuyFmHy6X9TvAXi1K79E4ri\",\"lastChange\":705253879}}")  //pSzjGX!Ey9P1c~p
 	$user.asDesigner:=True:C214
-	
+	$user.moreData:=New object:C1471()
+	$recodNumber:=ds:C1482.sfw_Counter.getNextValue("sfw_User")
+	$user.moreData.barcodeData:=String:C10($recodNumber; "0000000000")
 	$res:=$user.save()
 	
 	If (Not:C34($res.success))
@@ -854,7 +856,7 @@ If (True:C214)
 	$staff.UUID_User:=$user.UUID
 	$staff.firstName:="Hassan"
 	$staff.lastName:="Sribet"
-	$staff.code:=String:C10($staff.codeID; "00000#")  //"021144"
+	$staff.code:=String:C10($staff.codeID; "00000#")
 	
 	$staff.contactDetails:=New object:C1471(\
 		"addresses"; New collection:C1472(); \
@@ -872,7 +874,9 @@ If (True:C214)
 	$user.lastName:="Debbagh"
 	$user.login:="omardebbagh"
 	$user.accesses:=JSON Parse:C1218("{\"asDesigner\":true,\"password\":{\"temporary\":false,\"sendTemporaryByMail\":false,\"lastReset\":706358866,\"hash\":\"$2b$10$1KIfSf/DkyivGUKEeHHPDulQ51F9LSOuyFmHy6X9TvAXi1K79E4ri\",\"lastChange\":706358916}}")
-	
+	$user.moreData:=New object:C1471()
+	$recodNumber:=ds:C1482.sfw_Counter.getNextValue("sfw_User")
+	$user.moreData.barcodeData:=String:C10($recodNumber; "0000000000")
 	$res:=$user.save()
 	
 	If (Not:C34($res.success))
@@ -883,7 +887,7 @@ If (True:C214)
 	$staff.UUID_User:=$user.UUID
 	$staff.firstName:="Omar"
 	$staff.lastName:="Debbagh"
-	$staff.code:=String:C10($staff.codeID; "00000#")  //"021155"
+	$staff.code:=String:C10($staff.codeID; "00000#")
 	
 	$staff.contactDetails:=New object:C1471(\
 		"addresses"; New collection:C1472(); \

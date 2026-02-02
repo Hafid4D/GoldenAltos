@@ -1,7 +1,35 @@
 //%attributes = {}
+$file:=Folder:C1567(fk resources folder:K87:11).file("excelTemplates/jobsTemplate.xlsx")
+// Method: Method_GenerateBarcode -> Text
+//var $uuid : Text
+//var $barcode : Text
+
+// Generate a full UUID (32 chars)
+//$uuid:=Generate UUID
+
+// Use a Digest to ensure better distribution and take the first 16 chars
+// This creates a unique 16-character Hexadecimal string
+//$barcode:=Substring(Generate digest($uuid; MD5 digest); 1; 16)
+
+//return $barcode
 
 
-$code:=Char:C90(Carriage return:K15:38)
+
+//var $ident : Text:="sfw_User"
+//var $signal : 4D.Signal
+
+//$signal:=New signal()
+//Use ($signal)
+//$signal.ident:=$ident
+//End use 
+
+//CALL WORKER("sfw_Counter_worker"; Formula(ds.sfw_Counter._getNextValueWK($1)); $signal)
+
+//$signal.wait(100)
+
+//If ($signal.signaled)
+//$value:=Num($signal.nextValue)
+//End if 
 
 
 //var $picture_a; $picture_b; $resultPicture : Picture
@@ -88,7 +116,7 @@ $code:=Char:C90(Carriage return:K15:38)
 //String($counter+1; "00000#")
 
 
-//$file:=Folder(fk resources folder).file("excelTemplates/jobsTemplate.xlsx")
+
 
 //var $fields : Collection:=New collection("jobNumber"; "expectedDate"; "recommitDate"; \
 "lastShipDate"; "invoiceDate"; "customer"; "poNumber"; "process"; "currency"; "totalCharge"; \
