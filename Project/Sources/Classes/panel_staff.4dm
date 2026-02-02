@@ -242,6 +242,11 @@ Function pup_user()
 				$eUser:=ds:C1482.sfw_User.new()
 				$eUser.firstName:=Form:C1466.current_item.firstName
 				$eUser.lastName:=Form:C1466.current_item.lastName
+				
+				$eUser.moreData:=New object:C1471()
+				$recodNumber:=ds:C1482.sfw_Counter.getNextValue("sfw_User")
+				$eUser.moreData.barcodeData:=String:C10($recodNumber; "0000000000")
+				
 				$info:=$eUser.save()
 				$eUser.setLogin()
 				$info:=$eUser.save()
