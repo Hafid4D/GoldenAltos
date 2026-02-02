@@ -3,14 +3,24 @@
 var $base64Full; $base64Data : Text
 var $imageBlob : Blob
 var $finalImage : Picture
-
+var $text : Text:=""
 var $params:=New object:C1471
 $data:=$1
 var $0 : Picture
 
-$type:="CODE39"
-$data:="AB"  //ds[$table].query("fullName = :1"; "Hassan Sribet").first()[$field]  //.login  .
-$text:=ds:C1482.sfw_User.query("fullName = :1"; "Hassan Sribet").first().fullName
+$data:="hassansribet"  // For testing
+If (Length:C16($data)=32)  //(Form.pup_fields.currentValue="UUID")
+	$text:=ds:C1482.sfw_User.get($data).fullName
+	$data:=_ga_UUID32To22($data)
+	$type:="CODE128"
+Else 
+	$type:="CODE128"
+End if 
+
+//$data:="AB"  //ds[$table].query("fullName = :1"; "Hassan Sribet").first()[$field]  //.login  .
+//If 
+
+//End if 
 //If ($field="UUID")
 //$data:=_ga_UUID32To22($data)
 //$data:=Replace string($data; "="; "")
@@ -34,7 +44,7 @@ End if
 
 $0:=$finalImage
 
-WRITE PICTURE FILE:C680("C:\\Users\\HP\\Desktop\\GoldenAltos\\Resources\\QRCodes\\"+$data+"Barcode.png"; $finalImage)
+WRITE PICTURE FILE:C680("C:\\Users\\HP\\Desktop\\GoldenAltos\\Resources\\QRCodes\\"+$text+"Barcode.png"; $finalImage)
 
 //$data:=Uppercase(___UUID22TO32($data))
 

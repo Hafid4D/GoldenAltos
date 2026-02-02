@@ -2042,10 +2042,9 @@
 				"left": 0,
 				"top": 200,
 				"width": 189.33984375,
-				"height": 168.33203125
+				"height": 185.33203125
 			},
-			"displayable_fields_count": 6,
-			"fields_ordering": 1
+			"displayable_fields_count": 6
 		},
 		"sfw_Country": {
 			"color": {

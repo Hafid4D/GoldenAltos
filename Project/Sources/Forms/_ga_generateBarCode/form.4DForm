@@ -159,8 +159,8 @@
 				"bPtintBarcode": {
 					"type": "button",
 					"text": "Print barCode",
-					"top": 233,
-					"left": 315,
+					"top": 229,
+					"left": 7,
 					"width": 144,
 					"height": 23,
 					"events": [
@@ -168,11 +168,24 @@
 					],
 					"dataSource": "",
 					"method": "ObjectMethods/bPtintBarcode.4dm"
+				},
+				"bCancel": {
+					"type": "button",
+					"text": "Close",
+					"top": 229,
+					"left": 311,
+					"width": 144,
+					"height": 23,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "",
+					"method": "ObjectMethods/bCancel.4dm"
 				}
 			}
 		}
 	],
-	"geometryStamp": 95,
+	"geometryStamp": 100,
 	"editor": {
 		"groups": {
 			"fieldInputGroup": [

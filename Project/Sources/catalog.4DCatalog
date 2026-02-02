@@ -262,6 +262,7 @@
 		<field name="login" uuid="C3D4E0743AF343B1820D56205B8EA6D7" type="10" limiting_length="255" unique="true" never_null="true" id="4"/>
 		<field name="accesses" uuid="59F315A4605F473EA20430712F41D938" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
 		<field name="isInactive" uuid="5DA1968FF3354DE6B95E29BBAAE3F680" type="1" never_null="true" id="6"/>
+		<field name="moreData" uuid="F03AD8EE4FF24646ABE6471AB803939F" type="21" blob_switch_size="2147483647" never_null="true" id="7"/>
 		<primary_key field_name="UUID" field_uuid="34E9F9D48BE14DCD95127852F83BF1FB"/>
 	</table>
 	<table name="sfw_Comment" uuid="E82BBE2952C449BE995135760C788E8F" id="17">
