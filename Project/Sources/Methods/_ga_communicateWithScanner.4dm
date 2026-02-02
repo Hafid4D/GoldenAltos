@@ -2,7 +2,7 @@
 
 
 If (True:C214)
-	//Keybord implementation
+	//Keyboard implementation
 	
 	$winRef:=Open form window:C675("_ga_scanInterface"; Movable dialog box:K34:7; Horizontally centered:K39:1; Vertically centered:K39:4)
 	
