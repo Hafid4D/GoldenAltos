@@ -13,20 +13,22 @@
 	"bottomMargin": 20,
 	"events": [
 		"onLoad",
-		"onPageChange",
 		"onValidate",
 		"onClick",
-		"onDoubleClick",
 		"onOutsideCall",
-		"onBeginDragOver",
-		"onDragOver",
+		"onDoubleClick",
 		"onDrop",
-		"onAfterKeystroke",
+		"onBeforeKeystroke",
 		"onMenuSelect",
 		"onPluginArea",
-		"onAfterEdit",
+		"onDragOver",
+		"onUnload",
 		"onTimer",
-		"onBoundVariableChange"
+		"onAfterKeystroke",
+		"onAfterEdit",
+		"onBeginDragOver",
+		"onBoundVariableChange",
+		"onPageChange"
 	],
 	"windowTitle": "Scan",
 	"destination": "detailScreen",
@@ -49,10 +51,10 @@
 				},
 				"image": {
 					"type": "input",
-					"left": 36,
-					"top": 43,
-					"width": 228,
-					"height": 160,
+					"left": 50,
+					"top": 30,
+					"width": 200,
+					"height": 144,
 					"dataSourceTypeHint": "picture",
 					"enterable": false,
 					"focusable": false,
@@ -62,25 +64,45 @@
 					"dataSource": "image",
 					"pictureFormat": "scaled"
 				},
-				"Button": {
+				"bCancel": {
 					"type": "button",
 					"text": "CANCEL",
-					"top": 237,
-					"left": 36,
-					"width": 228,
-					"height": 48,
+					"top": 260,
+					"left": 75,
+					"width": 150,
+					"height": 40,
 					"events": [
 						"onClick"
 					],
 					"borderStyle": "none",
 					"style": "regular",
-					"action": "cancel",
-					"method": "ObjectMethods/Button.4dm"
+					"action": "",
+					"method": "ObjectMethods/bCancel.4dm",
+					"stroke": "automatic",
+					"textPlacement": "center",
+					"defaultButton": false,
+					"focusable": false
+				},
+				"Text": {
+					"type": "text",
+					"text": "Scan the barcode",
+					"top": 195,
+					"left": 25,
+					"width": 250,
+					"height": 45,
+					"stroke": "#517AB3",
+					"fontSize": 25,
+					"textAlign": "center",
+					"fontWeight": "normal"
 				}
-			}
+			},
+			"entryOrder": [
+				"bCancel",
+				"image"
+			]
 		}
 	],
-	"geometryStamp": 13,
+	"geometryStamp": 59,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

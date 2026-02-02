@@ -2008,13 +2008,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 0,
-				"top": 394,
+				"left": 1,
+				"top": 377,
 				"width": 189.1484375,
-				"height": 114.33203125
+				"height": 129.33203125
 			},
-			"displayable_fields_count": 3,
-			"fields_ordering": 1
+			"displayable_fields_count": 4
 		},
 		"sfw_Comment": {
 			"color": {
@@ -2041,7 +2040,7 @@
 			},
 			"coordinates": {
 				"left": 0,
-				"top": 210,
+				"top": 200,
 				"width": 189.33984375,
 				"height": 168.33203125
 			},

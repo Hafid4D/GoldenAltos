@@ -1,7 +1,22 @@
 //%attributes = {}
 
 
-$project:=cs:C1710.Util_entryFactory.new()
+$code:=Char:C90(Carriage return:K15:38)
+
+
+//var $picture_a; $picture_b; $resultPicture : Picture
+//READ PICTURE FILE("C:\\Users\\HP\\Desktop\\a.png"; $picture_a)
+
+//READ PICTURE FILE("C:\\Users\\HP\\Desktop\\b.png"; $picture_b)
+
+//COMBINE PICTURES($resultPicture; $picture_a; Horizontal concatenation; $picture_b)
+
+//WRITE PICTURE FILE("C:\\Users\\HP\\Desktop\\GoldenAltos\\Resources\\QRCodes\\ResultBarcode.png"; $resultPicture)
+
+
+
+//ON EVENT CALL()
+//$project:=ds.sfw_Counter.all()
 
 
 

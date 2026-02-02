@@ -33,6 +33,7 @@
                 // Récupération des paramètres (Valeur et Type)
                 const val = urlParams.get('value') || "123456789012";
                 const type = urlParams.get('type') || "CODE128";
+                 const text = urlParams.get('text') || "User";
 
                 // Génération du Code-barre
                 JsBarcode("#barcode-canvas", val, {
@@ -41,6 +42,7 @@
                     width: 1,
                     height: 80,
                     fontSize:16,
+                    text:text,
                     // margin:0,
                     displayValue: true // Affiche le texte en dessous
                 });

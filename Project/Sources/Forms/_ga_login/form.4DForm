@@ -206,7 +206,8 @@
 						"onLosingFocus",
 						"onAfterEdit"
 					],
-					"method": "ObjectMethods/input_user.4dm"
+					"method": "ObjectMethods/input_user.4dm",
+					"visibility": "hidden"
 				},
 				"bHelp": {
 					"type": "button",
@@ -219,7 +220,7 @@
 						"onLoad",
 						"onClick"
 					],
-					"visibility": "visible",
+					"visibility": "hidden",
 					"shortcutAccel": false,
 					"shortcutControl": false,
 					"shortcutShift": false,
@@ -227,9 +228,9 @@
 					"shortcutKey": "",
 					"method": "ObjectMethods/bHelp.4dm"
 				},
-				"bOk1": {
+				"bScan": {
 					"type": "button",
-					"top": 169,
+					"top": 164,
 					"left": 353,
 					"width": 23,
 					"height": 23,
@@ -245,17 +246,32 @@
 					],
 					"action": "",
 					"sizingX": "fixed",
-					"method": "ObjectMethods/bOk1.4dm",
+					"method": "ObjectMethods/bScan.4dm",
 					"shortcutAccel": false,
 					"shortcutControl": false,
 					"shortcutShift": false,
 					"shortcutAlt": false,
 					"shortcutKey": ""
+				},
+				"pup_users": {
+					"type": "dropdown",
+					"left": 153,
+					"top": 162,
+					"width": 194,
+					"height": 27,
+					"events": [
+						"onDataChange"
+					],
+					"dataSource": "Form:C1466.pup_users",
+					"dataSourceTypeHint": "object",
+					"sizingX": "fixed",
+					"sizingY": "fixed",
+					"method": "ObjectMethods/pup_users.4dm"
 				}
 			}
 		}
 	],
-	"geometryStamp": 77,
+	"geometryStamp": 86,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
