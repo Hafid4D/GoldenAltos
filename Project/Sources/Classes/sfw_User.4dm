@@ -13,6 +13,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setSearchboxField("firstName")
 	$entry.setSearchboxField("lastName")
 	$entry.setSearchboxField("login")
+	$entry.setSearchboxField("moreData.barcodeData"; "placeholder:barcode")
 	$entry.setPanel("sfw_panel_user")
 	$entry.setPanelPage(1; "address-32x32.png"; "Profiles")
 	$entry.setLBItemsColumn("firstName"; "First name"; "xliff:user.field.firstname")
