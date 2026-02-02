@@ -10,11 +10,8 @@ Case of
 		
 		$barcodeData:=_ga_communicateWithScanner()
 		
-		Form:C1466.userEntity:=ds:C1482.sfw_User.query("moreData.barcodeData = :1"; $barcodeData).first()
+		$esUsers:=ds:C1482.sfw_User.query("moreData.barcodeData = :1"; $barcodeData)
 		
-		Form:C1466.pup_users.currentValue:=(Form:C1466.userEntity#Null:C1517) ? Form:C1466.userEntity.login : ""
-		
-		$esUsers:=ds:C1482.sfw_User.query("login = :1"; Form:C1466.pup_users.currentValue)
 		If ($esUsers.length=1)
 			$eUser:=$esUsers.first()
 			

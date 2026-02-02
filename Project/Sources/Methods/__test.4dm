@@ -1,16 +1,15 @@
 //%attributes = {}
-
-
+$file:=Folder:C1567(fk resources folder:K87:11).file("excelTemplates/jobsTemplate.xlsx")
 // Method: Method_GenerateBarcode -> Text
-var $uuid : Text
-var $barcode : Text
+//var $uuid : Text
+//var $barcode : Text
 
 // Generate a full UUID (32 chars)
-$uuid:=Generate UUID:C1066
+//$uuid:=Generate UUID
 
 // Use a Digest to ensure better distribution and take the first 16 chars
 // This creates a unique 16-character Hexadecimal string
-$barcode:=Substring:C12(Generate digest:C1147($uuid; MD5 digest:K66:1); 1; 16)
+//$barcode:=Substring(Generate digest($uuid; MD5 digest); 1; 16)
 
 //return $barcode
 
@@ -117,7 +116,7 @@ $barcode:=Substring:C12(Generate digest:C1147($uuid; MD5 digest:K66:1); 1; 16)
 //String($counter+1; "00000#")
 
 
-//$file:=Folder(fk resources folder).file("excelTemplates/jobsTemplate.xlsx")
+
 
 //var $fields : Collection:=New collection("jobNumber"; "expectedDate"; "recommitDate"; \
 "lastShipDate"; "invoiceDate"; "customer"; "poNumber"; "process"; "currency"; "totalCharge"; \
