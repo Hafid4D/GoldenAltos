@@ -38,7 +38,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setAllowedProfiles(cs:C1710.sfw_globalParameters.me.userVision.entryUser.allowedProfiles || "admin")
 	
-	$entry.setItemAction("Generate barCode"; "_ga_openBarCodeForm")
+	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
 	
 Function getActiveUsers()->$esUsers : cs:C1710.sfw_UserSelection
 	var $eRelated : 4D:C1709.Entity

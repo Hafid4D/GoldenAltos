@@ -79,14 +79,10 @@
 					"top": 0,
 					"left": 0,
 					"width": 465,
-					"height": 311,
+					"height": 280,
 					"stroke": "transparent",
 					"fill": "#E6E6E6"
-				}
-			}
-		},
-		{
-			"objects": {
+				},
 				"header_bkgd1": {
 					"type": "rectangle",
 					"top": 14,
@@ -95,7 +91,8 @@
 					"height": 23,
 					"sizingX": "fixed",
 					"fill": "#B1CFDE",
-					"stroke": "transparent"
+					"stroke": "transparent",
+					"visibility": "hidden"
 				},
 				"Text1": {
 					"type": "text",
@@ -104,7 +101,8 @@
 					"left": 14,
 					"width": 102,
 					"height": 15,
-					"fontWeight": "bold"
+					"fontWeight": "bold",
+					"visibility": "hidden"
 				},
 				"Text2": {
 					"type": "text",
@@ -114,19 +112,8 @@
 					"width": 22,
 					"height": 15,
 					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"Button": {
-					"type": "button",
-					"text": "Generate Barcode",
-					"top": 53,
-					"left": 3,
-					"width": 140,
-					"height": 23,
-					"events": [
-						"onClick"
-					],
-					"method": "ObjectMethods/Button.4dm"
+					"fontWeight": "bold",
+					"visibility": "hidden"
 				},
 				"pup_fields": {
 					"type": "dropdown",
@@ -137,12 +124,29 @@
 					"events": [
 						"onDataChange"
 					],
-					"dataSource": "Form:C1466.pup_fields"
+					"dataSource": "Form:C1466.pup_fields",
+					"visibility": "hidden"
+				}
+			}
+		},
+		{
+			"objects": {
+				"Button": {
+					"type": "button",
+					"text": "Generate Barcode",
+					"top": 14,
+					"left": 7,
+					"width": 140,
+					"height": 23,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/Button.4dm"
 				},
 				"barCode": {
 					"type": "input",
-					"left": 7,
-					"top": 92,
+					"left": 11,
+					"top": 53,
 					"width": 448,
 					"height": 160,
 					"dataSourceTypeHint": "picture",
@@ -155,8 +159,8 @@
 				"bPtintBarcode": {
 					"type": "button",
 					"text": "Print barCode",
-					"top": 272,
-					"left": 311,
+					"top": 233,
+					"left": 315,
 					"width": 144,
 					"height": 23,
 					"events": [
@@ -168,8 +172,16 @@
 			}
 		}
 	],
-	"geometryStamp": 85,
+	"geometryStamp": 95,
 	"editor": {
+		"groups": {
+			"fieldInputGroup": [
+				"header_bkgd1",
+				"Text1",
+				"Text2",
+				"pup_fields"
+			]
+		},
 		"activeView": "View 1",
 		"defaultView": "View 1",
 		"views": {

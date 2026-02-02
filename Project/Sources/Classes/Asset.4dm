@@ -22,7 +22,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsOrderBy("assetNumber")
 	$entry.setMainViewLabel("All assets")
 	
-	$entry.setItemListAction("View Depeciation History"; "_ga_viewDepreciationHistory")
+	$entry.setItemListAction("View Depreciation History"; "_ga_viewDepreciationHistory")
 	$entry.setItemListAction("Print Asset List"; "_ga_printAssetSelection")
 	$entry.setItemListAction("Export Asset List"; "_ga_exportAssetSelection")
 	$entry.setItemListAction("Activate Automatique Depreciation"; "_ga_activateAutomatiqueDepreciation")

@@ -277,6 +277,7 @@
 		<field name="UUID" uuid="FE8325F6DB5E4D85A5D0C28F5B6584F1" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="ident" uuid="0FA173C6924748D4B87BF825693844FA" type="10" limiting_length="255" never_null="true" id="2"/>
 		<field name="currentValue" uuid="2FF105F7F7134B568F0024F73D7627A4" type="4" never_null="true" id="3"/>
+		<field name="moreData" uuid="8D7E4D88F84E3E409EEBAF189C77DE7B" type="21" blob_switch_size="2147483647" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="FE8325F6DB5E4D85A5D0C28F5B6584F1"/>
 	</table>
 	<table name="EquipmentLocation" uuid="3758196088EF454FAE6DE1AA847DFBAF" id="19">
