@@ -2,6 +2,7 @@
 
 
 // Method: _util_generate_entry_structure
+
 // Parameter: $tableName (Text)
 #DECLARE($tableName : Text)
 

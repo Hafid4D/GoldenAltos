@@ -11,7 +11,7 @@ If (True:C214)
 	$form.winRef:=$winRef
 	SET WINDOW TITLE:C213("Scan the bar code"; $winRef)
 	DIALOG:C40("_ga_scanInterface"; $form)
-	
+	CLOSE WINDOW:C154($winRef)
 	$0:=(OK=1) ? $form.barcodeData : ""
 	
 	
