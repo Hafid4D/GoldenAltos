@@ -856,6 +856,21 @@
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
+		"CreditMemo": {
+			"color": {
+				"red": 114,
+				"green": 209,
+				"blue": 221,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 4581,
+				"top": 524,
+				"width": 178,
+				"height": 281.33203125
+			},
+			"displayable_fields_count": 11
+		},
 		"AssetType": {
 			"color": {
 				"red": 150,
@@ -2397,6 +2412,30 @@
 		}
 	},
 	"relations": {
+		"2EF435FC5064A246B08E2DA48DC942D8": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"2E7C95B545076F45B5866817F9D55227": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"A60234F79F03354EB9C3F5DC37924776": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"FD2C423406590B48AD2AC6AB7E002BA9": {
 			"color": {
 				"red": 240,
