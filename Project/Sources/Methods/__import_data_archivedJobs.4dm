@@ -100,26 +100,26 @@ If (True:C214)
 			TRACE:C157
 		End if 
 		
-		If ($job.shipped) & Not:C34($job.postToPO)
-			
-			$jobInvoice:=ds:C1482.JobInvoice.new()
-			
-			$jobInvoice.UUID_Job:=$job.UUID
-			$jobInvoice.invoiceNumber:=String:C10($counter; "00000#")
-			$jobInvoice.invoiceStmp:=Date:C102($record.invoiceDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.invoiceDate))
-			//$jobInvoice.status:="Paid" or "Closed"
-			$jobInvoice.poBasedCharges:=$record.poBasedCharges
-			$jobInvoice.travBasedCharges:=$record.travBasedCharges
-			$jobInvoice.totalSalesTax:=$record.salesTax
-			$jobInvoice.total:=$record.totalCharge
-			
-			$res:=$jobInvoice.save()
-			
-			If (Not:C34($res.success))
-				TRACE:C157
-			End if 
-			
+		//If ($job.shipped) & Not($job.postToPO)
+		
+		$jobInvoice:=ds:C1482.JobInvoice.new()
+		
+		$jobInvoice.UUID_Job:=$job.UUID
+		$jobInvoice.invoiceNumber:=String:C10($counter; "00000#")
+		$jobInvoice.invoiceStmp:=Date:C102($record.invoiceDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.invoiceDate))
+		//$jobInvoice.status:="Paid" or "Closed"
+		$jobInvoice.poBasedCharges:=$record.poBasedCharges
+		$jobInvoice.travBasedCharges:=$record.travBasedCharges
+		$jobInvoice.totalSalesTax:=$record.salesTax
+		$jobInvoice.total:=$record.totalCharge
+		
+		$res:=$jobInvoice.save()
+		
+		If (Not:C34($res.success))
+			TRACE:C157
 		End if 
+		
+		//End if 
 		
 		
 		//var $unitCost : cs.UnitCostEntity
