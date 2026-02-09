@@ -27,8 +27,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("job.purchaseOrder.customer.name"; "customer"; "width:100")
 	$entry.setLBItemsColumn("invoiceDate"; "Invoice Date"; "width:100")
 	
+	//$entry.setSubset("main")
+	
 	$entry.setLBItemsOrderBy("invoiceNumber")
-	$entry.setMainViewLabel("All Invoices")
+	$entry.setMainViewLabel("Ready to invoices")
 	
 	$entry.setItemListAction("Export to Excel"; "_ga_exportInvoicesSelection")
 	
@@ -88,6 +90,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setView($view)
 	
 	
+Function main()->$invoices : cs:C1710.JobInvoiceSelection
+	$invoices:=ds:C1482.JobInvoice.query("job.postToPO =:1 & job.archived =:2 & job.shipped =:3"; False:C215; False:C215; True:C214)
 	
 Function postedInvoices()->$invoices : cs:C1710.JobInvoiceSelection
 	//cs.Util.me.setDateInterval(False)

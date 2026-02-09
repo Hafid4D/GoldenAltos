@@ -1169,24 +1169,40 @@
 	</table>
 	<table name="CreditMemo" uuid="742061D6375A2B43B9C36073A1C58ABA" id="78">
 		<field name="UUID" uuid="23E2B2C1C1B0BC40B998AE5899B77F0F" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="UUID_Customer" uuid="E1D6BD6944AABE4C975760B924D31DB1" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="2">
-			<field_extra multi_line="false"/>
-		</field>
-		<field name="UUID_Invoice" uuid="1847C4DC7C1B5343A0962FBC1824BAB8" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="3">
+		<field name="salesTax" uuid="4C426E591384194BB56C0B57A014F240" type="6" never_null="true" id="2"/>
+		<field name="reason" uuid="0BAAA06A644C6340AF3E463DC2787C55" type="10" limiting_length="255" never_null="true" id="3">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="cmStmp" uuid="7832939EE716234D8214F422DABD4F16" type="4" never_null="true" id="4"/>
-		<field name="cmTotal" uuid="EF7249773FD103488F7C4C31E4DECD56" type="4" never_null="true" id="5">
+		<field name="cmTotal" uuid="EF7249773FD103488F7C4C31E4DECD56" type="6" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="cmNum" uuid="0B67D3A2C311CF4BB6F9DFACEC01535D" type="4" never_null="true" id="6">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="UUID_Division" uuid="8BFA6D76FA74C54993829D8A61A47597" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="7">
+		<field name="UUID_Division" uuid="8BFA6D76FA74C54993829D8A61A47597" type="10" store_as_UUID="true" never_null="true" id="7">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="Description" uuid="065A87E1C4B6584885D2D8FE535BEAAC" type="10" limiting_length="255" never_null="true" id="8"/>
+		<field name="description" uuid="065A87E1C4B6584885D2D8FE535BEAAC" type="10" limiting_length="255" never_null="true" id="8"/>
+		<field name="enteredBy" uuid="937424109AFBB147BFA84C54FA8CF87A" type="10" limiting_length="255" never_null="true" id="9">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="approvedBy" uuid="D39F4526BDA7554E92060202B84C2867" type="10" limiting_length="255" never_null="true" id="10">
+			<field_extra multi_line="false"/>
+		</field>
 		<primary_key field_name="UUID" field_uuid="23E2B2C1C1B0BC40B998AE5899B77F0F"/>
+	</table>
+	<table name="CMItem" uuid="EB7DFA80F73C13439169DB6F9D657543" id="79">
+		<field name="UUID" uuid="2AA014FD5078A94F99E4DBC284E82B2A" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="UUID_Invoice" uuid="27A45EFCFC88EB4DB4C48E215FFA08C1" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="amount" uuid="9C65BCC3696163459638C2617C84DF3C" type="6" never_null="true" id="3"/>
+		<field name="currency" uuid="04975E9817EDAA4AB5E3A043E0AA38DA" type="10" limiting_length="255" never_null="true" id="4">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="UUID_Customer" uuid="05C61772B64B4849BCAFBA6BF9A4F345" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="5"/>
+		<field name="salesTaxPortion" uuid="736540D43BAC79419F6EC7B03D16A567" type="6" never_null="true" id="6"/>
+		<field name="UUID_CreditMemo" uuid="6EA1295900E8744C9AEFD442B6ABB5C3" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="7"/>
+		<primary_key field_name="UUID" field_uuid="2AA014FD5078A94F99E4DBC284E82B2A"/>
 	</table>
 	<table name="sfw_UserInscription" uuid="AC225FD836FF49F7841FC1B78EC96243" id="81">
 		<field name="UUID" uuid="211EC274251B4A748F6C5C28741E0FB3" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -3236,10 +3252,10 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="A60234F79F03354EB9C3F5DC37924776" name_Nto1="customer" name_1toN="creditMemos" state="1">
+	<relation uuid="ECFC49BF855535449244A131D090CA96" name_Nto1="customer" name_1toN="cmItems" state="1">
 		<related_field kind="source">
-			<field_ref uuid="E1D6BD6944AABE4C975760B924D31DB1" name="UUID_Customer">
-				<table_ref uuid="742061D6375A2B43B9C36073A1C58ABA" name="CreditMemo"/>
+			<field_ref uuid="05C61772B64B4849BCAFBA6BF9A4F345" name="UUID_Customer">
+				<table_ref uuid="EB7DFA80F73C13439169DB6F9D657543" name="CMItem"/>
 			</field_ref>
 		</related_field>
 		<related_field kind="destination">
@@ -3248,15 +3264,15 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="2E7C95B545076F45B5866817F9D55227" name_Nto1="invoice" name_1toN="creditMemos" state="1">
+	<relation uuid="58967B03FA1AA64E919C1BC21DB06166" name_Nto1="invoice" name_1toN="cmItems" state="1">
 		<related_field kind="source">
-			<field_ref uuid="1847C4DC7C1B5343A0962FBC1824BAB8" name="UUID_Invoice">
-				<table_ref uuid="742061D6375A2B43B9C36073A1C58ABA" name="CreditMemo"/>
+			<field_ref uuid="27A45EFCFC88EB4DB4C48E215FFA08C1" name="UUID_Invoice">
+				<table_ref uuid="EB7DFA80F73C13439169DB6F9D657543" name="CMItem"/>
 			</field_ref>
 		</related_field>
 		<related_field kind="destination">
-			<field_ref uuid="665BE88AE92589409E64B35A9DB0075E" name="UUID">
-				<table_ref uuid="FD34803EFD49454B9F38092174A0003C" name="JobInvoice"/>
+			<field_ref uuid="D4F459308B965340B21C8A6DE2F2F78F" name="UUID">
+				<table_ref uuid="EE7D7176EC836345924AC9AE6C1866B0" name="Invoice"/>
 			</field_ref>
 		</related_field>
 	</relation>
@@ -3272,9 +3288,26 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="4B25DBE1DA546342B5C5EBE68E00FE9A" name_Nto1="creditMemo" name_1toN="cmItems" state="1">
+		<related_field kind="source">
+			<field_ref uuid="6EA1295900E8744C9AEFD442B6ABB5C3" name="UUID_CreditMemo">
+				<table_ref uuid="EB7DFA80F73C13439169DB6F9D657543" name="CMItem"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="23E2B2C1C1B0BC40B998AE5899B77F0F" name="UUID">
+				<table_ref uuid="742061D6375A2B43B9C36073A1C58ABA" name="CreditMemo"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="005E48A922A4464DB92973931B467ACF" type="3">
 		<field_ref uuid="17F71D68FA714CE9A75ED79CA63E3BE2" name="UUID_Lead">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="0075D22C6FB6174799C90CE4B02C1FF6" type="3">
+		<field_ref uuid="6EA1295900E8744C9AEFD442B6ABB5C3" name="UUID_CreditMemo">
+			<table_ref uuid="EB7DFA80F73C13439169DB6F9D657543" name="CMItem"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="01619F9BF52940F3AFF8C52A4A82535D" type="3">
@@ -3590,11 +3623,6 @@
 	<index kind="regular" uuid="3AA763F9E150A24191C0D1CCE2C7A774" type="7">
 		<field_ref uuid="B1F81EC2F5F12749BB2EF9BFABD9EAF7" name="total">
 			<table_ref uuid="FD34803EFD49454B9F38092174A0003C" name="JobInvoice"/>
-		</field_ref>
-	</index>
-	<index kind="regular" uuid="3C366A8997564B43BEA79153EB7A38F4" type="3">
-		<field_ref uuid="1847C4DC7C1B5343A0962FBC1824BAB8" name="UUID_Invoice">
-			<table_ref uuid="742061D6375A2B43B9C36073A1C58ABA" name="CreditMemo"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="3CA9FF147FB3B64B9AA3C70C1E2C72FF" type="1">
@@ -3962,6 +3990,11 @@
 			<table_ref uuid="3382E9847A639840BEB98DE07BAF4613" name="AuditEvent"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="8644E5D44CFD854C966A9D2F6C30ED02" type="7">
+		<field_ref uuid="2AA014FD5078A94F99E4DBC284E82B2A" name="UUID">
+			<table_ref uuid="EB7DFA80F73C13439169DB6F9D657543" name="CMItem"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="866AC73A0570C443A12494C3DF0771C5" type="3">
 		<field_ref uuid="95C3CA62BD079647A666AAE41D7B984A" name="UUID_StepTemplate">
 			<table_ref uuid="73EFE2D78C61400397353509CBA87D18" name="Step"/>
@@ -4172,6 +4205,11 @@
 			<table_ref uuid="061A7E4F30DD8C46A92C801EB9B9ACC5" name="CertificationAssignment"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="A614703BBD592B4984CABABD3C59DA9E" type="3">
+		<field_ref uuid="27A45EFCFC88EB4DB4C48E215FFA08C1" name="UUID_Invoice">
+			<table_ref uuid="EB7DFA80F73C13439169DB6F9D657543" name="CMItem"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="A616783536536A4986187DFA05CB96F5" type="7">
 		<field_ref uuid="BF7D80F3E4F99D4BA932F724A65AA951" name="UUID">
 			<table_ref uuid="C34CD032C4F6EB4C8F51682914D18AB0" name="JobLineItem"/>
@@ -4235,6 +4273,11 @@
 	<index kind="regular" unique_keys="true" uuid="AE83CD1FD23F074388E41D1EB7FB0173" type="1">
 		<field_ref uuid="2C3EE5FC26975842998856F7D02B3BA2" name="UUID">
 			<table_ref uuid="BBEF22543374E24BBC6534C68EA6E3D2" name="Units"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="AFEA257A9122A14C9A1FEC90A997D19C" type="3">
+		<field_ref uuid="05C61772B64B4849BCAFBA6BF9A4F345" name="UUID_Customer">
+			<table_ref uuid="EB7DFA80F73C13439169DB6F9D657543" name="CMItem"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="B1A2B84D24E6284B89649B659845D4AF" type="7">
@@ -4570,11 +4613,6 @@
 	<index kind="regular" unique_keys="true" uuid="FBBAD51FDFD2D8439D24316E1C3E823B" type="1">
 		<field_ref uuid="E26B906EA27E6F4C82FC5EC71A3F908E" name="boNumber">
 			<table_ref uuid="34498A1D7FE0BD4783FE5183EE6C5BA2" name="BuyingOrder"/>
-		</field_ref>
-	</index>
-	<index kind="regular" uuid="FD6FE76B53EC3E439E93AE8C1963B128" type="3">
-		<field_ref uuid="E1D6BD6944AABE4C975760B924D31DB1" name="UUID_Customer">
-			<table_ref uuid="742061D6375A2B43B9C36073A1C58ABA" name="CreditMemo"/>
 		</field_ref>
 	</index>
 	<base_extra data_file_path=":HWMHp.4DD">
