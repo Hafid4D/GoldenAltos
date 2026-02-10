@@ -856,6 +856,36 @@
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
+		"CMItem": {
+			"color": {
+				"red": 114,
+				"green": 209,
+				"blue": 221,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 4373,
+				"top": 469,
+				"width": 146,
+				"height": 240.33203125
+			},
+			"displayable_fields_count": 9
+		},
+		"CreditMemo": {
+			"color": {
+				"red": 114,
+				"green": 209,
+				"blue": 221,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 4581,
+				"top": 524,
+				"width": 178,
+				"height": 281.33203125
+			},
+			"displayable_fields_count": 11
+		},
 		"AssetType": {
 			"color": {
 				"red": 150,
@@ -1079,9 +1109,9 @@
 				"left": 1968,
 				"top": 1732,
 				"width": 159,
-				"height": 229.33203125
+				"height": 246.33203125
 			},
-			"displayable_fields_count": 8,
+			"displayable_fields_count": 9,
 			"fields_ordering": 1
 		},
 		"BuyingOrderLine": {
@@ -2397,6 +2427,38 @@
 		}
 	},
 	"relations": {
+		"4B25DBE1DA546342B5C5EBE68E00FE9A": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"2EF435FC5064A246B08E2DA48DC942D8": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"58967B03FA1AA64E919C1BC21DB06166": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"ECFC49BF855535449244A131D090CA96": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"FD2C423406590B48AD2AC6AB7E002BA9": {
 			"color": {
 				"red": 240,
@@ -2434,6 +2496,38 @@
 				"red": 240,
 				"green": 240,
 				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"6E96AEAE4BC19E4FB27E421B081A26B0": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"12D1D9706CB57E419C97D36A6F786FAF": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"F9B1A300D7A54EFC9326B35FBB01CED9": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"0DF1DB360B8B48BE84653E6CA2F326BE": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
 				"alpha": 0
 			}
 		}

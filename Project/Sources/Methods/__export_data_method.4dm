@@ -1336,7 +1336,7 @@ If (True:C214)  // export [CHART_OF_AC]
 	
 End if 
 
-If (True:C214)  // export [CHART_OF_AC]
+If (True:C214)  // export [Asset_List]
 	
 	ALL RECORDS:C47([Asset_List])
 	$jsonString:=Selection to JSON:C1234([Asset_List])
@@ -1351,6 +1351,36 @@ If (True:C214)  // export [CHART_OF_AC]
 	
 End if 
 
+If (True:C214)  // export [Credit_Memo]
+	
+	ALL RECORDS:C47([Credit_Memo])
+	$jsonString:=Selection to JSON:C1234([Credit_Memo])
+	
+	vhDoc:=Create document:C266($myFolder.platformPath+"Credit_Memo_list_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	
+	SHOW ON DISK:C922($myFolder.platformPath+"Credit_Memo_list_export.json")
+	
+End if 
+
+
+If (True:C214)  // export [CM_items]
+	
+	ALL RECORDS:C47([CM_items])
+	$jsonString:=Selection to JSON:C1234([CM_items])
+	
+	vhDoc:=Create document:C266($myFolder.platformPath+"CM_items_list_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	
+	SHOW ON DISK:C922($myFolder.platformPath+"CM_items_list_export.json")
+	
+End if 
 
 
 ALERT:C41("END!")
