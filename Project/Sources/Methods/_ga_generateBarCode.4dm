@@ -8,7 +8,6 @@ var $params:=New object:C1471
 $data:=$1
 var $0 : Picture
 
-$data:="0000000005"  // For testing
 If (Length:C16($data)=32)  //(Form.pup_fields.currentValue="UUID")
 	$text:=ds:C1482.sfw_User.get($data).fullName
 	$data:=_ga_UUID32To22($data)
@@ -40,7 +39,7 @@ If ($template.exists)
 	
 	$0:=$finalImage
 	
-	//WRITE PICTURE FILE("C:\\Users\\HP\\Desktop\\GoldenAltos\\Resources\\QRCodes\\"+$text+"Barcode.png"; $finalImage)  //For testing purpose
+	//WRITE PICTURE FILE(""; $finalImage)  //For testing purpose
 	
 End if 
 //$data:=Uppercase(___UUID22TO32($data))

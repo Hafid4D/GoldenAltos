@@ -305,6 +305,27 @@ Function _entries_definition()
 	
 	This:C1470._push_entry($entry)
 	
+	$entry:=cs:C1710.sfw_definitionEntry.new("receiver"; ["customerService"]; "Receiver")
+	$entry.setDataclass("Lot")
+	$entry.setDisplayOrder(-300)
+	$entry.setIcon("image/entry/receiver-50x50.png")
+	
+	$entry.setSearchboxField("lotNumber")
+	
+	
+	$entry.setPanel("panel_receiver")
+	$entry.setPanelPage(1; ""; "Main")
+	$entry.setPanelPage(2; ""; "Customer Provided Material")
+	
+	$entry.setLBItemsColumn("lotNumber"; "Lot #"; "width:450")
+	
+	$entry.setLBItemsOrderBy("lotNumber")
+	$entry.enableTransaction()
+	
+	$entry.setItemAction("Sample Lot Traveler TAG"; "Receiver_travelerTag")
+	
+	This:C1470._push_entry($entry)
+	
 Function _profiles_definition()
 	$eQM:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("qm"; "Quality Manager"; "autoCreation")
 	$eDC:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("dc"; "Document Controller"; "autoCreation")
