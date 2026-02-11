@@ -7,6 +7,8 @@ var $text : Text:=""
 var $params:=New object:C1471
 $data:=$1
 var $0 : Picture
+$type:="CODE39"
+
 
 If (Length:C16($data)=32)  //(Form.pup_fields.currentValue="UUID")
 	$text:=ds:C1482.sfw_User.get($data).fullName
@@ -15,7 +17,6 @@ If (Length:C16($data)=32)  //(Form.pup_fields.currentValue="UUID")
 Else 
 	$type:="CODE39"
 End if 
-
 
 $template:=Folder:C1567(fk resources folder:K87:11).file("barCode_encoder.html")
 If ($template.exists)

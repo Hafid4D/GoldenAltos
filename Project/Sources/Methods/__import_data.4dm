@@ -1,8 +1,8 @@
 //%attributes = {}
 
 
-__import_quote_param()
-__import_lead_param()
+__import_quote_param
+__import_lead_param
 __import_data_lists
 __import_data_customer
 //__import_data_employees
@@ -18,5 +18,6 @@ __import_data_audit
 __import_data_managementReview
 __import_data_chartOfAccount
 __import_data_assetList
+__import_data_creditMemo
 
 ALERT:C41("Import done")
