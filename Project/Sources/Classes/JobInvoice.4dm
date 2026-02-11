@@ -27,7 +27,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("job.purchaseOrder.customer.name"; "customer"; "width:100")
 	$entry.setLBItemsColumn("invoiceDate"; "Invoice Date"; "width:100")
 	
-	//$entry.setSubset("main")
+	$entry.setSubset("main")
 	
 	$entry.setLBItemsOrderBy("invoiceNumber")
 	$entry.setMainViewLabel("Ready to invoices")

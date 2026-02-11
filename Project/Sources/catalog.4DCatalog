@@ -1194,14 +1194,14 @@
 	</table>
 	<table name="CMItem" uuid="EB7DFA80F73C13439169DB6F9D657543" id="79">
 		<field name="UUID" uuid="2AA014FD5078A94F99E4DBC284E82B2A" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="UUID_Invoice" uuid="27A45EFCFC88EB4DB4C48E215FFA08C1" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="UUID_Invoice" uuid="27A45EFCFC88EB4DB4C48E215FFA08C1" type="10" store_as_UUID="true" never_null="true" id="2"/>
 		<field name="amount" uuid="9C65BCC3696163459638C2617C84DF3C" type="6" never_null="true" id="3"/>
 		<field name="currency" uuid="04975E9817EDAA4AB5E3A043E0AA38DA" type="10" limiting_length="255" never_null="true" id="4">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="UUID_Customer" uuid="05C61772B64B4849BCAFBA6BF9A4F345" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="5"/>
+		<field name="UUID_Customer" uuid="05C61772B64B4849BCAFBA6BF9A4F345" type="10" store_as_UUID="true" never_null="true" id="5"/>
 		<field name="salesTaxPortion" uuid="736540D43BAC79419F6EC7B03D16A567" type="6" never_null="true" id="6"/>
-		<field name="UUID_CreditMemo" uuid="6EA1295900E8744C9AEFD442B6ABB5C3" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="7"/>
+		<field name="UUID_CreditMemo" uuid="6EA1295900E8744C9AEFD442B6ABB5C3" type="10" store_as_UUID="true" never_null="true" id="7"/>
 		<primary_key field_name="UUID" field_uuid="2AA014FD5078A94F99E4DBC284E82B2A"/>
 	</table>
 	<table name="sfw_UserInscription" uuid="AC225FD836FF49F7841FC1B78EC96243" id="81">

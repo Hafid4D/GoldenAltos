@@ -59,16 +59,16 @@ If (True:C214)
 		
 		$eAsset.description:=$record.Comments
 		//$eAsset.UUID_PurchaseOrder:=$record.assetNumber
-		$eAsset.originalCost:=$record.Cost
+		//$eAsset.originalCost:=$record.Cost
 		//$eAsset.salvage:=$record.assetNumber
 		//$eAsset.monthInService:=$record.assetNumber
 		//$eAsset.lifePerTax:=$record.assetNumber
-		$eAsset.bookValue:=$record.Value
+		//$eAsset.bookValue:=$record.Value
 		//$eAsset.currentMonthDepreciation:=$record.assetNumber
-		$eAsset.totalAccountDepreciation:=$record.Acc_dep
-		$eAsset.isScrapped:=$record.Scrapped
-		$eAsset.divestStmp:=$record.Divest_Date
-		$eAsset.excludeFmDepreciationList:=$record.ExcludeFmDepreciationList
+		//$eAsset.totalAccountDepreciation:=$record.Acc_dep
+		//$eAsset.isScrapped:=$record.Scrapped
+		//$eAsset.divestStmp:=$record.Divest_Date
+		//$eAsset.excludeFmDepreciationList:=$record.ExcludeFmDepreciationList
 		
 		$info:=$eAsset.save()
 		If (Not:C34($info.success))

@@ -147,9 +147,9 @@ If (True:C214)
 				$poLine.unreleased:=$line.unreleased
 				$poLine.closed:=$line.closed
 				$poLine.seqNum:=$line.seqNum
-				//$poLine.total:=$line.total
-				//$poLine.saleTax:=$line.saleTax
-				//$poLine.taxable:=$line.taxable
+				$poLine.total:=$line.total
+				$poLine.saleTax:=$line.saleTax
+				$poLine.taxable:=$line.taxable
 				
 				
 				$res:=$poLine.save()
@@ -334,33 +334,6 @@ If (True:C214)
 		
 		
 		
-		//For each ($poline; $record.jobPOLines)
-		
-		//$poLine_es:=ds.PurchaseOrderLine.query("seqNum = :1"; $poLine.seqNum)
-		
-		//If ($poLine_es.length>0)
-		//$poLine_e:=$poLine_es[0]
-		
-		//Else 
-		//$poLine_e:=ds.PurchaseOrderLine.new()
-		
-		//End if 
-		
-		
-		
-		//$res:=$poLine_e.save()
-		
-		//If (Not($res.success))
-		//TRACE
-		//End if 
-		
-		////End if 
-		
-		////End if 
-		//End for each 
-		
-		
-		
 		For each ($poline; $record.poLines)
 			
 			$poLine_es:=ds:C1482.PurchaseOrderLine.query("seqNum = :1"; $poLine.seqNum)
@@ -373,14 +346,22 @@ If (True:C214)
 					$poLine_e.total:=$poline.total
 					$poLine_e.saleTax:=$poline.saleTax
 					$poLine_e.taxable:=$poline.taxable
+					$poLine_e.total:=$poline.total
+					$poLine_e.unitPrice:=$poline.unitPrice
+					$poLine_e.taxable:=$poline.taxable
 					
 					$res:=$poLine_e.save()
 					
 					If (Not:C34($res.success))
 						TRACE:C157
 					End if 
+				Else 
+					
 					
 				End if 
+				
+			Else 
+				
 				
 			End if 
 		End for each 
