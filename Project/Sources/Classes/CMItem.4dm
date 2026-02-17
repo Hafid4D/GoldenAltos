@@ -11,7 +11,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setSearchboxField("creditMemo.cmNum")
 	
-	$entry.setPanel("panel_CreditMemo"; 1)
+	$entry.setPanel("panel_cmItem"; 1)
 	$entry.setPanelPage(1; ""; "Main")
 	
 	$entry.setLBItemsColumn("creditMemo.cmNum"; "Credit Memo #"; "width:50")
@@ -20,7 +20,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("creditMemo.cmTotal"; "Total"; "width:100")
 	
 	$entry.setLBItemsOrderBy("creditMemo.cmNum")
-	$entry.setMainViewLabel("All Credit Memos")
+	$entry.setMainViewLabel("All Credit Items")
 	
 	$entry.setItemListAction("Print Credit Note"; "_ga_printCreditNote")
 	

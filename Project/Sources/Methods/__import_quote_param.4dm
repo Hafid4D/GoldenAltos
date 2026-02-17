@@ -1,4 +1,4 @@
-//%attributes = {}
+//%attributes = {"executedOnServer":true}
 var $eQuoteStatus : cs:C1710.QuoteStatusEntity
 var $eRevision : cs:C1710.RevisionEntity
 

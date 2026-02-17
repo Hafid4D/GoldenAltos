@@ -79,7 +79,15 @@ If (True:C214)
 		$invoice:=ds:C1482.Invoice.query("invoice =:1"; String:C10($record.Invoice))
 		If ($invoice.length>0)
 			$eCmItem.UUID_Invoice:=$invoice[0].UUID
+			If ($record.Invoice>0) & ($record.Invoice=1502)
+				
+			End if 
+			
 		Else 
+			If ($record.Invoice>0) & ($record.Invoice=1502)
+				
+			End if 
+			
 			$eCmItem.UUID_Invoice:="00"*16
 		End if 
 		

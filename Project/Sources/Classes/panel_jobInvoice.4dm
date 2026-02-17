@@ -441,7 +441,7 @@ Function chargesCalculation()  //--> Subr_Total
 	Form:C1466.current_item.poBasedCharges:=Form:C1466.lb_poLines.sum("total")-Form:C1466.lb_poLines.sum("saleTax")
 	
 	//-->Unit Cost cases
-	
+	//TODO : Check if still in use
 	
 	//--> Total charges
 	Form:C1466.current_item.total:=Form:C1466.current_item.total+Form:C1466.current_item.travBasedCharges+Form:C1466.current_item.poBasedCharges

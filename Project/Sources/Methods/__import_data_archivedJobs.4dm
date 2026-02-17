@@ -129,6 +129,26 @@ If (True:C214)
 		//$job.UUID_UnitCost:=$unitCost.UUID
 		//End if 
 		
+		var $ejobLineItem : cs:C1710.JobLineItemEntity
+		
+		For each ($jobLineItem; $record.jobLineItems)
+			
+			$ejobLineItem:=ds:C1482.JobLineItem.new()
+			$ejobLineItem.UUID_Job:=$job.UUID
+			$ejobLineItem.description:=$jobLineItem.description
+			$ejobLineItem.quantity:=$jobLineItem.quantity
+			$ejobLineItem.unitPrice:=$jobLineItem.unitPrice
+			$ejobLineItem.taxable:=$jobLineItem.taxable
+			$ejobLineItem.lineTotal:=$jobLineItem.lineTotal
+			$ejobLineItem.salesTax:=$jobLineItem.salesTax
+			
+			$res:=$ejobLineItem.save()
+			If (Not:C34($res.success))
+				TRACE:C157
+			End if 
+			
+		End for each 
+		
 		
 		For each ($poline; $record.poLines)
 			
@@ -194,6 +214,8 @@ If (True:C214)
 			$lot_e.dateCode:=$lot.dateCode
 			$lot_e.carrier:=$lot.carrier
 			$lot_e.shipRel:=$lot.shipRel
+			$lot_e.totalCharge:=$lot.totalCharge
+			$lot_e.unitCost:=$lot.unitCost
 			
 			$lot_e.UUID_Job:=$job.UUID
 			

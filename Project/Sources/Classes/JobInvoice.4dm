@@ -90,6 +90,17 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setView($view)
 	
 	
+	$view:=cs:C1710.sfw_definitionView.new("archivedJobInvoice"; "Archived Jobs Invoices")  //; "derivedFrom:main"; $entry)
+	$view.setSubset("archivedJobInvoice")
+	$view.setPictoLabel("/RESOURCES/ga/image/picto/archived-16x16.png")
+	$view.setLBItemsColumn("invoiceNumber"; "Invoice#"; "width:100")
+	$view.setLBItemsColumn("job.jobNumber"; "Job#"; "width:100")
+	$view.setLBItemsColumn("job.purchaseOrder.customer.name"; "customer"; "width:100")
+	$view.setLBItemsColumn("invoiceDate"; "Invoice Date"; "width:100")
+	$view.setLBItemsOrderBy("invoiceNumber")
+	$entry.setView($view)
+	
+	
 Function main()->$invoices : cs:C1710.JobInvoiceSelection
 	$invoices:=ds:C1482.JobInvoice.query("job.postToPO =:1 & job.archived =:2 & job.shipped =:3"; False:C215; False:C215; True:C214)
 	
@@ -108,5 +119,8 @@ Function lineItemJobInvoices()->$invoices : cs:C1710.JobInvoiceSelection
 Function travelerBasedJobInvoices()->$invoices : cs:C1710.JobInvoiceSelection
 	//cs.Util.me.setDateInterval(False)
 	$invoices:=ds:C1482.JobInvoice.query("job.postToPO =:1 & job.archived =:2 & job.shipped =:3 & job.lineItem =:4"; False:C215; False:C215; True:C214; False:C215)
+	
+Function archivedJobInvoice()->$invoices : cs:C1710.JobInvoiceSelection
+	$invoices:=ds:C1482.JobInvoice.query("job.archived =:1"; True:C214)
 	
 	
