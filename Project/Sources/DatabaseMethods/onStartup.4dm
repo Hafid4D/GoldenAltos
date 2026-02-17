@@ -11,7 +11,7 @@ If (Not:C34(($version=20) && (Position:C15($revision; "9ABCDEF")>0)))  // Compat
 End if 
 
 _ga_setAllowedMethods()
-_ga_findScannerSeriaPort()
+//_ga_findScannerSeriaPort()
 
 sfw_on_startup_database("goldenAltos_definition")
 

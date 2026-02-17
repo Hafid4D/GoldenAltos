@@ -17,17 +17,21 @@ If (Form:C1466.current_item#Null:C1517)
 	
 	$billingAddress:=Form:C1466.current_item.job.address.addresses.query("type =:1"; "billing").first()
 	$billingAddress.detail.state:=$billingAddress.detail.state#Null:C1517 ? $billingAddress.detail.state : ""
-	$address:=$billingAddress.detail.street_1+"\n"+$billingAddress.detail.city+"\n"+\
-		$billingAddress.detail.state+" "+$billingAddress.detail.postcode+"\n"+$billingAddress.detail.country
-	
+	$address:=Undefined:C82($billingAddress.detail.street_1) ? $billingAddress.detail.street : $billingAddress.detail.street_1
+	$address:=$address+"\n"+$billingAddress.detail.city+"\n"+\
+		$billingAddress.detail.state+" "  //+$billingAddress.detail.postcode+"\n"
+	$address:=Undefined:C82($billingAddress.detail.postcode) ? $address+$billingAddress.detail.zipCode+"\n" : $address+$billingAddress.detail.postcode+"\n"
+	$address:=$address+$billingAddress.detail.country
 	$context.accountAddress:=$address
 	
 	$payToAddressInfo:=ds:C1482.DivisionInfo.query("UUID_Division =:1"; Form:C1466.current_item.job.UUID_Division).first()
 	
 	$payToAdress:=$payToAddressInfo.contactDetails.addresses.query("type =:1"; "remit").first()
 	$payToAdress.detail.state:=$payToAdress.detail.state#Null:C1517 ? $payToAdress.detail.state : ""
-	$address:=$payToAdress.detail.street_1+"\n"+$payToAdress.detail.city+","+\
-		$payToAdress.detail.state+" "+$payToAdress.detail.postcode+"\n"  //+$payToAdress.detail.country
+	$address:=Undefined:C82($payToAdress.detail.street_1) ? $payToAdress.detail.street : $payToAdress.detail.street_1
+	$address:=$address+"\n"+$payToAdress.detail.city+","+\
+		$payToAdress.detail.state+" "  //+$payToAdress.detail.postcode+"\n"  //+$payToAdress.detail.country
+	$address:=Undefined:C82($payToAdress.detail.postcode) ? $address+$payToAdress.detail.zipCode+"\n" : $address+$payToAdress.detail.postcode+"\n"
 	
 	$context.remitAddress:=$address
 	

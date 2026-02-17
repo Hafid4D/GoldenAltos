@@ -13,213 +13,32 @@
 	"bottomMargin": 20,
 	"events": [
 		"onLoad",
-		"onPageChange",
 		"onValidate",
 		"onClick",
-		"onDoubleClick",
 		"onOutsideCall",
-		"onBeginDragOver",
-		"onDragOver",
+		"onActivate",
+		"onDoubleClick",
 		"onDrop",
-		"onAfterKeystroke",
 		"onMenuSelect",
 		"onPluginArea",
-		"onAfterEdit",
+		"onDragOver",
 		"onTimer",
-		"onBoundVariableChange"
+		"onAfterKeystroke",
+		"onBeginDragOver",
+		"onBoundVariableChange",
+		"onPageChange"
 	],
 	"windowTitle": "window title",
 	"destination": "detailScreen",
 	"pages": [
 		{
-			"objects": {
-				"label_creditMemo#": {
-					"type": "text",
-					"top": 12,
-					"left": 12,
-					"width": 120,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Credit Memo #",
-					"textAlign": "right",
-					"right": 132
-				},
-				"entryField_cmNum": {
-					"type": "input",
-					"top": 12,
-					"left": 142,
-					"width": 200,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.cmNum",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"dataSourceTypeHint": "text",
-					"textAlign": "left"
-				},
-				"label_customer": {
-					"type": "text",
-					"top": 37,
-					"left": 12,
-					"width": 120,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Customer",
-					"textAlign": "right",
-					"right": 132
-				},
-				"pup_type": {
-					"type": "button",
-					"top": 34,
-					"left": 142,
-					"width": 200,
-					"height": 23,
-					"fontFamily": "System Font",
-					"fontSize": 13,
-					"focusable": false,
-					"text": "",
-					"icon": "",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/pup_type.4dm",
-					"events": [
-						"onClick"
-					],
-					"bottom": 57,
-					"textAlign": "left"
-				},
-				"label_creditMemoDate": {
-					"type": "text",
-					"top": 12,
-					"left": 357,
-					"width": 120,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Credit Memo Date",
-					"textAlign": "right",
-					"right": 477
-				},
-				"entryField_assetNumber1": {
-					"type": "input",
-					"top": 12,
-					"left": 487,
-					"width": 200,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.assetNumber",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"dataSourceTypeHint": "text",
-					"textAlign": "left"
-				},
-				"label_invoice": {
-					"type": "text",
-					"top": 37,
-					"left": 357,
-					"width": 120,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Invoice",
-					"textAlign": "right",
-					"right": 477
-				},
-				"pup_type1": {
-					"type": "button",
-					"top": 34,
-					"left": 487,
-					"width": 200,
-					"height": 23,
-					"fontFamily": "System Font",
-					"fontSize": 13,
-					"focusable": false,
-					"text": "",
-					"icon": "",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/pup_type1.4dm",
-					"events": [
-						"onClick"
-					],
-					"bottom": 57,
-					"textAlign": "left"
-				}
-			}
+			"objects": {}
 		},
 		{
-			"objects": {
-				"header_bkgd5": {
-					"type": "rectangle",
-					"top": 114,
-					"left": 0,
-					"width": 1000,
-					"height": 805,
-					"sizingX": "fixed",
-					"fill": "#E4E4E4",
-					"stroke": "transparent"
-				},
-				"header_bkgd2": {
-					"type": "rectangle",
-					"top": 114,
-					"left": 0,
-					"width": 1500,
-					"height": 30,
-					"sizingX": "fixed",
-					"fill": "#A2C6D8",
-					"stroke": "transparent",
-					"right": 1500
-				},
-				"Text": {
-					"type": "text",
-					"top": 121,
-					"left": 8,
-					"width": 250,
-					"height": 17,
-					"stroke": "#000000",
-					"text": "Credit Memo Informations",
-					"fontSize": 12,
-					"fontWeight": "bold"
-				},
-				"Subform": {
-					"type": "subform",
-					"left": 0,
-					"top": 187,
-					"width": 659,
-					"height": 134
-				},
-				"Text1": {
-					"type": "text",
-					"text": "Memo : ",
-					"top": 341,
-					"left": 8,
-					"width": 50,
-					"height": 17
-				},
-				"entryField_memo": {
-					"type": "input",
-					"left": 64,
-					"top": 341,
-					"width": 595,
-					"height": 80,
-					"scrollbarVertical": "automatic"
-				}
-			}
+			"objects": {}
 		}
 	],
-	"geometryStamp": 31,
+	"geometryStamp": 110,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"method": "method.4dm",
 	"editor": {

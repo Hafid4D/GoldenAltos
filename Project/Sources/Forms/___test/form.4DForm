@@ -39,41 +39,64 @@
 		},
 		{
 			"objects": {
-				"Input": {
-					"type": "input",
-					"left": 22,
-					"top": 29,
-					"width": 497,
-					"height": 112,
+				"listbox": {
+					"type": "listbox",
+					"left": 0,
+					"top": 4,
+					"width": 678,
+					"height": 204,
 					"events": [
-						"onLoad",
-						"onValidate",
-						"onHeader",
-						"onPrintingBreak",
-						"onPrintingFooter",
-						"onDisplayDetail",
 						"onDoubleClick",
-						"onLosingFocus",
-						"onGettingFocus",
-						"onDrop",
-						"onBeforeKeystroke",
 						"onDataChange",
-						"onDragOver",
-						"onPrintingDetail",
-						"onUnload",
-						"onAfterKeystroke",
 						"onSelectionChange",
-						"onMouseEnter",
-						"onAfterEdit",
-						"onBeginDragOver"
+						"onHeaderClick"
 					],
-					"method": "ObjectMethods/Input.4dm",
-					"dataSource": "textEexpression"
+					"lockedColumnCount": 0,
+					"showHeaders": true,
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.listbox",
+					"scrollbarHorizontal": "hidden",
+					"borderStyle": "none",
+					"currentItemSource": "Form:C1466.currentItem",
+					"currentItemPositionSource": "Form:C1466.currentItemPosition",
+					"horizontalLineStroke": "transparent",
+					"verticalLineStroke": "#C0C0C0",
+					"fill": "automatic",
+					"alternateFill": "#DFDFDF",
+					"resizingMode": "rightToLeft",
+					"selectionMode": "single",
+					"headerHeight": "1em",
+					"singleClickEdit": false,
+					"rowHeightAutoMin": "1em",
+					"rowHeightAutoMax": "1600em",
+					"scrollbarVertical": "automatic",
+					"columns": [
+						{
+							"header": {
+								"name": "Header1",
+								"text": "#",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "col_itemNumber",
+							"footer": {
+								"name": "Footer1"
+							},
+							"dataSource": "This:C1470.indexOf()+1",
+							"enterable": false,
+							"width": 30,
+							"dataSourceTypeHint": "text",
+							"pictureFormat": "truncatedCenter",
+							"minWidth": 30,
+							"maxWidth": 50,
+							"resizable": true
+						}
+					]
 				}
 			}
 		}
 	],
-	"geometryStamp": 8,
+	"geometryStamp": 11,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

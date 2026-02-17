@@ -66,7 +66,7 @@ If (True:C214)
 			$erreur.push($record.customer_name)
 		End if 
 		
-		//$po.customer_name:=$record.customer_name
+		$po.customer_name:=$record.customer_name
 		
 		$po.poNumber:=$poNumber
 		$po.oldPoNumber:=$record.poNumber
@@ -113,7 +113,7 @@ If (True:C214)
 				$invoice_e:=ds:C1482.Invoice.new()
 				
 				$invoice_e.division:=$invoice.division
-				$invoice_e.invoice:=$invoice.invoice
+				$invoice_e.invoice:=Split string:C1554($invoice.invoice; "\r"; sk trim spaces:K86:2).join("\r")
 				$invoice_e.date:=$invoice.date
 				$invoice_e.currency:=$invoice.currency
 				$invoice_e.total:=$invoice.total
@@ -420,6 +420,8 @@ If (True:C214)
 			$lot_e.dateCode:=$lot.dateCode
 			$lot_e.carrier:=$lot.carrier
 			$lot_e.shipRel:=$lot.shipRel
+			$lot_e.totalCharge:=$lot.totalCharge
+			$lot_e.unitCost:=$lot.unitCost
 			
 			$lot_e.UUID_Job:=$job.UUID
 			
