@@ -65,7 +65,7 @@ local Function pup($cacheCollection; $dataClass; $queryField; $queryValue)
 	
 	
 Function get monthlyDepreciation($usefulLife)->$monthlyDepreciation : Real
-	$monthlyDepreciation:=This:C1470.originalCost/$usefulLife
+	$monthlyDepreciation:=This:C1470.originalCost  ///$usefulLife
 	
 Function get totalAccDepreciation()->$totalAccDepreciation : Real
 	$totalAccDepreciation:=This:C1470.originalCost

@@ -2070,11 +2070,11 @@
 			},
 			"coordinates": {
 				"left": 0,
-				"top": 200,
+				"top": 202,
 				"width": 189.33984375,
-				"height": 185.33203125
+				"height": 226.33203125
 			},
-			"displayable_fields_count": 6
+			"displayable_fields_count": 8
 		},
 		"sfw_Country": {
 			"color": {
@@ -2427,6 +2427,14 @@
 		}
 	},
 	"relations": {
+		"119B9F3D5781AB44835D44CAD1BF728E": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"4B25DBE1DA546342B5C5EBE68E00FE9A": {
 			"color": {
 				"red": 240,

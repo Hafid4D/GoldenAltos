@@ -134,18 +134,18 @@
 				"label_vendor": {
 					"type": "text",
 					"top": 161,
-					"left": 12,
+					"left": 34,
 					"width": 120,
 					"height": 17,
 					"stroke": "#808080",
 					"text": "Vendor",
 					"textAlign": "right",
-					"right": 132
+					"right": 154
 				},
 				"pup_vendor": {
 					"type": "button",
 					"top": 158,
-					"left": 142,
+					"left": 164,
 					"width": 268,
 					"height": 23,
 					"fontFamily": "System Font",
@@ -162,11 +162,352 @@
 					],
 					"bottom": 181,
 					"textAlign": "left"
+				},
+				"label_description": {
+					"type": "text",
+					"top": 189,
+					"left": 34,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Description",
+					"textAlign": "right",
+					"right": 154
+				},
+				"entryField_description": {
+					"type": "input",
+					"top": 189,
+					"left": 164,
+					"width": 268,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.description",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"label_lifePerTax": {
+					"type": "text",
+					"top": 378,
+					"left": 34,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Life Per Tax",
+					"textAlign": "right",
+					"right": 154
+				},
+				"entryField_lifePerTax": {
+					"type": "input",
+					"top": 378,
+					"left": 164,
+					"width": 268,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.lifePerTax",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"label_salvage": {
+					"type": "text",
+					"top": 356,
+					"left": 34,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Salvage",
+					"textAlign": "right",
+					"right": 154
+				},
+				"entryField_salvage": {
+					"type": "input",
+					"top": 356,
+					"left": 164,
+					"width": 268,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.salvage",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"label_PurchaseDate": {
+					"type": "text",
+					"top": 336,
+					"left": 34,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Purchase Date",
+					"textAlign": "right",
+					"right": 154
+				},
+				"entryField_purchaseDate": {
+					"type": "input",
+					"top": 336,
+					"left": 164,
+					"width": 268,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.purchaseDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"label_currentMonthDepreciation": {
+					"type": "text",
+					"top": 307,
+					"left": 34,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Current Month Depreciation",
+					"textAlign": "right",
+					"right": 154
+				},
+				"entryField_currentMonth": {
+					"type": "input",
+					"top": 307,
+					"left": 164,
+					"width": 268,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.currentMonth",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"label_bookValue": {
+					"type": "text",
+					"top": 283,
+					"left": 34,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Book Value",
+					"textAlign": "right",
+					"right": 154
+				},
+				"entryField_bookValue": {
+					"type": "input",
+					"top": 283,
+					"left": 164,
+					"width": 268,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.bookValue",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"label_monthInService": {
+					"type": "text",
+					"top": 260,
+					"left": 34,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Month In Service",
+					"textAlign": "right",
+					"right": 154
+				},
+				"entryField_monthInService": {
+					"type": "input",
+					"top": 260,
+					"left": 164,
+					"width": 268,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.monthInService",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"label_originalCost": {
+					"type": "text",
+					"top": 235,
+					"left": 34,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Original Cost",
+					"textAlign": "right",
+					"right": 154
+				},
+				"entryField_originalCost": {
+					"type": "input",
+					"top": 235,
+					"left": 164,
+					"width": 268,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.originalCost",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"label_purchaseOrder": {
+					"type": "text",
+					"top": 213,
+					"left": 34,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Purchase Order #",
+					"textAlign": "right",
+					"right": 154
+				},
+				"entryField_purchaseOrder": {
+					"type": "input",
+					"top": 213,
+					"left": 164,
+					"width": 268,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.purchaseOrder",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"label_totalAccumDepreciation": {
+					"type": "text",
+					"top": 399,
+					"left": 34,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Total Accum Depreciation",
+					"textAlign": "right",
+					"right": 154
+				},
+				"entryField_totalAccum": {
+					"type": "input",
+					"top": 399,
+					"left": 164,
+					"width": 268,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.totalAccum",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"label_digestDate": {
+					"type": "text",
+					"top": 423,
+					"left": 34,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Digest Date",
+					"textAlign": "right",
+					"right": 154
+				},
+				"entryField_digestDate": {
+					"type": "input",
+					"top": 423,
+					"left": 164,
+					"width": 268,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.digestDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"Check Box": {
+					"type": "checkbox",
+					"text": "Scapped",
+					"top": 453,
+					"left": 164,
+					"width": 70,
+					"height": 17,
+					"events": [
+						"onClick"
+					]
 				}
 			}
 		}
 	],
-	"geometryStamp": 13,
+	"geometryStamp": 83,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"method": "method.4dm",
 	"editor": {
