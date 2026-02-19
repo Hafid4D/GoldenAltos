@@ -157,7 +157,7 @@ Function btnOpenPurchaseOrder()
 	
 	
 Function btnOpenCustomer()
-	$es:=ds:C1482.Customer.query("name =:1"; Form:C1466.current_item.job.customerName)
+	$es:=ds:C1482.Customer.query("name =:1"; Form:C1466.current_item.job.customer.name)  //customerName)
 	If ($es.length>0)
 		Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "customer")
 	End if 

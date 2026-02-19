@@ -101,3 +101,14 @@ Function drawPup_customer()
 	
 	
 	
+	
+Function selectInvoice()
+	
+	
+Function drawPup_invoice()
+	If (Form:C1466.current_item#Null:C1517)
+		$name:=Form:C1466.current_item.customer.name || " "
+		Form:C1466.sfw.drawButtonPup("pup_customer"; $name; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.customer=Null:C1517))
+	End if 
+	
+	

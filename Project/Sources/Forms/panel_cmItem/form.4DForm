@@ -154,6 +154,28 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"dataSourceTypeHint": "text",
+					"textAlign": "left",
+					"visibility": "hidden"
+				},
+				"pup_invoice": {
+					"type": "button",
+					"top": 37,
+					"left": 581,
+					"width": 300,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_invoice.4dm",
+					"events": [
+						"onClick"
+					],
+					"bottom": 60,
 					"textAlign": "left"
 				}
 			}
@@ -332,7 +354,7 @@
 			}
 		}
 	],
-	"geometryStamp": 13,
+	"geometryStamp": 19,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

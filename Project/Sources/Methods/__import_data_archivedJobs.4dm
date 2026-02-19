@@ -51,12 +51,12 @@ If (True:C214)
 		$job.alternateShipAddress:=$record.alternateShipAddress
 		$job.shippers:=$record.shippers
 		
-		//$customer:=ds.Customer.query("name =:1"; Split string($record.customer; "\r"; sk trim spaces).join("\r"))
-		//If ($customer.length>0)
-		//$job.UUID_Customer:=$customer[0].UUID
-		//Else 
-		
-		//End if 
+		$customer:=ds:C1482.Customer.query("name =:1"; Split string:C1554($record.customer; "\r"; sk trim spaces:K86:2).join("\r"))
+		If ($customer.length>0)
+			$job.UUID_Customer:=$customer[0].UUID
+		Else 
+			
+		End if 
 		
 		$job.customerName:=$record.customer
 		$job.qty:=$record.qty
