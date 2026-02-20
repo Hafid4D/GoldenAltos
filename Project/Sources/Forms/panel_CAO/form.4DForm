@@ -224,7 +224,7 @@
 					"textAlign": "left",
 					"scrollbarVertical": "automatic"
 				},
-				"Check Box": {
+				"entryField_isSubAccount": {
 					"type": "checkbox",
 					"text": "Make this a subaccount",
 					"top": 295,
@@ -237,18 +237,18 @@
 					"dataSourceTypeHint": "boolean",
 					"dataSource": "Form:C1466.current_item.isSubaccount"
 				},
-				"label_typeDetail1": {
+				"label_parentAccount": {
 					"type": "text",
 					"top": 328,
 					"left": 12,
 					"width": 120,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Type Details",
+					"text": "Parent account",
 					"textAlign": "right",
 					"right": 132
 				},
-				"pup_typeDetail1": {
+				"pup_subAccount": {
 					"type": "button",
 					"top": 325,
 					"left": 142,
@@ -262,14 +262,14 @@
 					"popupPlacement": "linked",
 					"textPlacement": "right",
 					"style": "bevel",
-					"method": "ObjectMethods/pup_typeDetail1.4dm",
+					"method": "ObjectMethods/pup_subAccount.4dm",
 					"events": [
 						"onClick"
 					],
 					"bottom": 348,
 					"textAlign": "left"
 				},
-				"Check Box1": {
+				"entryField_isInactive": {
 					"type": "checkbox",
 					"text": "Inactive Account",
 					"top": 358,
@@ -280,12 +280,12 @@
 						"onClick"
 					],
 					"dataSourceTypeHint": "boolean",
-					"dataSource": "Form:C1466.current_item.isActive"
+					"dataSource": "Form:C1466.current_item.isInacActive"
 				}
 			}
 		}
 	],
-	"geometryStamp": 103,
+	"geometryStamp": 113,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"editor": {
 		"activeView": "View 1",

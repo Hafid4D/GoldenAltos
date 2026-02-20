@@ -1,1 +1,0 @@
-//cs.panel_CAO.me.selectTypeDetail()

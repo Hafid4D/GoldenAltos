@@ -67,8 +67,13 @@ If (True:C214)
 		End if 
 		
 		$eChartOfAccount.balance:=$record.totalBalance
-		//$eChartOfAccount.accountNumber:=
+		$recodNumber:=ds:C1482.sfw_Counter.getNextValue("CAO")
+		$eChartOfAccount.accountNumber:=String:C10($recodNumber; "00000")
 		$eChartOfAccount.description:=$record.totalBalance
+		$eChartOfAccount.isInacActive:=False:C215
+		
+		$eChartOfAccount.UUID_ParentAccount:="00"*16
+		
 		
 		$info:=$eChartOfAccount.save()
 		If (Not:C34($info.success))

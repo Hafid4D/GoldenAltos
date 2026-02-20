@@ -27,6 +27,7 @@ Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	This:C1470.drawPup_type()
 	This:C1470.drawPup_typeDetail()
+	This:C1470.drawPup_subAccount()
 	
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	$offset:=5
@@ -42,11 +43,17 @@ Function redrawAndSetVisible()
 			
 	End case 
 	
+	OBJECT SET ENABLED:C1123(*; "pup_@"; Not:C34(Form:C1466.current_item.isInacActive))
+	OBJECT SET ENABLED:C1123(*; "entryField_@"; Not:C34(Form:C1466.current_item.isInacActive))
+	OBJECT SET ENABLED:C1123(*; "entryField_isInactive"; True:C214)
+	//OBJECT SET ENABLED(*; "pup_subAccount"; (Form.current_item.isSubaccount) & Not(Form.current_item.isInacActive))
+	OBJECT SET VISIBLE:C603(*; "pup_subAccount"; (Form:C1466.current_item.isSubaccount) & Not:C34(Form:C1466.current_item.isInacActive))
+	OBJECT SET VISIBLE:C603(*; "label_parentAccount"; (Form:C1466.current_item.isSubaccount) & Not:C34(Form:C1466.current_item.isInacActive))
+	
 Function drawPup_type()
 	If (Form:C1466.current_item#Null:C1517)
 		Form:C1466.current_item.drowPup("CAOType"; "UUID"; "UUID_CAOType"; "pup_type")
 	End if 
-	
 	
 Function selectType()
 	Form:C1466.current_item.pup("CAOTypes"; "CAOType"; "UUID"; "UUID_CAOType")
@@ -61,6 +68,15 @@ Function selectTypeDetail()
 	Form:C1466.current_item.pup("CAOTypeDetails"; "CAOTypeDetail"; "UUID"; "UUID_CAOTypeDetail")
 	This:C1470.drawPup_typeDetail()
 	
+	
+Function drawPup_subAccount()
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.current_item.drowPup("CAO"; "UUID"; "UUID_ParentAccount"; "pup_subAccount")
+	End if 
+	
+Function selectSubAccount()
+	Form:C1466.current_item.pup("parentAccounts"; "CAO"; "UUID"; "UUID_ParentAccount")
+	This:C1470.drawPup_subAccount()
 	
 	
 	
