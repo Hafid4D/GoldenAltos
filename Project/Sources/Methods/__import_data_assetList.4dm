@@ -58,15 +58,21 @@ If (True:C214)
 		End if 
 		
 		$eAsset.description:=$record.Comments
+		$eAsset.originalCost:=$record.Cost
+		$eAsset.isScrapped:=$record.Scrapped
+		$eAsset.life:=$record.Life
+		$eAsset.acquiredStmp:=Date:C102($record.Date_Acquired)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.Date_Acquired))
+		$eAsset.divestStmp:=Date:C102($record.Divest_Date)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.Divest_Date))
+		
 		//$eAsset.UUID_PurchaseOrder:=$record.assetNumber
-		//$eAsset.originalCost:=$record.Cost
+		
 		//$eAsset.salvage:=$record.assetNumber
-		//$eAsset.monthInService:=$record.assetNumber
-		//$eAsset.lifePerTax:=$record.assetNumber
+		//$eAsset.monthInService:=$record.Life
+		
 		//$eAsset.bookValue:=$record.Value
 		//$eAsset.currentMonthDepreciation:=$record.assetNumber
-		//$eAsset.totalAccountDepreciation:=$record.Acc_dep
-		//$eAsset.isScrapped:=$record.Scrapped
+		//$eAsset.totalAccDepreciation:=$record.Acc_dep
+		
 		//$eAsset.divestStmp:=$record.Divest_Date
 		//$eAsset.excludeFmDepreciationList:=$record.ExcludeFmDepreciationList
 		

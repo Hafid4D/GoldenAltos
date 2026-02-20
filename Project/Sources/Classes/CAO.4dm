@@ -21,8 +21,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("typeDetail.name"; "Type Detail"; "width:100")
 	$entry.setLBItemsColumn("balance"; "Balance"; "width:50")
 	
+	$entry.setSubset("activeCAOs")
 	$entry.setLBItemsOrderBy("name")
-	$entry.setMainViewLabel("All Chart of Account")
+	$entry.setMainViewLabel("All Actives Account")
 	
 	$entry.setItemListAction("Print Chart Of Account List"; "_ga_printCAOSelection")
 	$entry.setItemListAction("Export Chart Of Account List"; "_ga_exportCAOSelection")
@@ -40,8 +41,32 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setView($view)
 	
 	
+Function activeCAOs()->$caos : cs:C1710.CAOSelection
+	$caos:=ds:C1482.CAO.query("isInacActive =:1 "; False:C215)
+	
+	
 Function inactiveCAOs()->$caos : cs:C1710.CAOSelection
-	$caos:=ds:C1482.CAO.query("isActive =:1 "; True:C214)
+	$caos:=ds:C1482.CAO.query("isInacActive =:1 "; True:C214)
+	
+	
+	
+local Function cacheLoad()
+	
+	If (Storage:C1525.cache=Null:C1517)
+		Use (Storage:C1525)
+			Storage:C1525.cache:=New shared object:C1526
+		End use 
+	End if 
+	If (Storage:C1525.cache.parentAccounts=Null:C1517)
+		$parentAccounts:=This:C1470._loadAsCollection()
+		Use (Storage:C1525.cache)
+			Storage:C1525.cache.parentAccounts:=$parentAccounts.copy(ck shared:K85:29; Storage:C1525.cache)
+		End use 
+	End if 
+	
+	
+Function _loadAsCollection()->$parentAccounts : Collection
+	$parentAccounts:=ds:C1482.CAO.query("UUID #:1"; Form:C1466.current_item.UUID).toCollection("UUID,name,accountNumber,description").orderBy("accountNumber")
 	
 	
 	

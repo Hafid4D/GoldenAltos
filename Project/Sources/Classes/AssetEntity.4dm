@@ -64,19 +64,60 @@ local Function pup($cacheCollection; $dataClass; $queryField; $queryValue)
 	End if 
 	
 	
-Function get monthlyDepreciation($usefulLife)->$monthlyDepreciation : Real
-	$monthlyDepreciation:=This:C1470.originalCost  ///$usefulLife
+Function get monthlyDepreciation()->$monthlyDepreciation : Real
+	If (This:C1470.life#0)
+		$monthlyDepreciation:=This:C1470.originalCost/This:C1470.life
+	End if 
+	
+Function get monthInService()->$monthInService : Integer
+	
+	$monthInService:=Month of:C24(This:C1470.acquiredDate)
+	$acquiredYear:=Year of:C25(This:C1470.acquiredDate)
+	$currentYear:=Year of:C25(Current date:C33(*))
+	$currentMonth:=Month of:C24(Current date:C33(*))
+	Case of 
+		: ($currentYear=$acquiredYear)
+			$monthInService:=$currentMonth-$monthInService
+			
+		: ($currentYear>$acquiredYear)
+			$monthInService:=(12-$monthInService)+(12*($currentYear-$acquiredYear-1))+$currentMonth
+			
+	End case 
 	
 Function get totalAccDepreciation()->$totalAccDepreciation : Real
-	$totalAccDepreciation:=This:C1470.originalCost
+	
+	Case of 
+		: (This:C1470.monthInService>=This:C1470.life)
+			$totalAccDepreciation:=This:C1470.monthlyDepreciation*This:C1470.life
+			
+		Else 
+			$totalAccDepreciation:=This:C1470.monthlyDepreciation*This:C1470.monthInService
+			
+	End case 
+	
 	
 local Function get acquiredDate()->$date : Date
-	$date:=cs:C1710.sfw_stmp.me.getDate(This:C1470.acquiredStmp; True:C214)
+	$date:=This:C1470.acquiredStmp=0 ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.acquiredStmp; True:C214)
 	
 local Function set acquiredDate($date : Date)
-	This:C1470.acquiredStmp:=cs:C1710.sfw_stmp.me.build($date)
+	This:C1470.acquiredStmp:=$date=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($date)
+	
+local Function get divestDate()->$date : Date
+	$date:=This:C1470.divestStmp=0 ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.divestStmp; True:C214)
+	
+local Function set divestDate($date : Date)
+	This:C1470.divestStmp:=$date=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($date)
 	
 local Function get bookValue()->$bookValue : Real
-	$bookValue:=This:C1470.originalCost-This:C1470.totalAccDepreciation
-	
-	
+	Case of 
+			
+		: (This:C1470.monthInService>=This:C1470.life)
+			$bookValue:=0
+		: (This:C1470.isScrapped=True:C214) & (This:C1470.divestDate<=Current date:C33(*))
+			$bookValue:=0
+			This:C1470.totalAccDepreciation:=This:C1470.originalCost
+			
+		Else 
+			$bookValue:=Round:C94(This:C1470.originalCost-This:C1470.totalAccDepreciation; 2)
+			
+	End case 

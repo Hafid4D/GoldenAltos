@@ -210,7 +210,7 @@
 					"left": 164,
 					"width": 268,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.lifePerTax",
+					"dataSource": "Form:C1466.current_item.life",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -270,7 +270,7 @@
 					"left": 164,
 					"width": 268,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.purchaseDate",
+					"dataSource": "Form:C1466.current_item.acquiredDate",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -444,13 +444,13 @@
 					"textAlign": "right",
 					"right": 154
 				},
-				"entryField_totalAccum": {
+				"entryField_totalAccDepreciation": {
 					"type": "input",
 					"top": 399,
 					"left": 164,
 					"width": 268,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.totalAccum",
+					"dataSource": "Form:C1466.current_item.totalAccDepreciation",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -463,24 +463,24 @@
 					"dataSourceTypeHint": "text",
 					"textAlign": "left"
 				},
-				"label_digestDate": {
+				"label_divestDate": {
 					"type": "text",
 					"top": 423,
 					"left": 34,
 					"width": 120,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Digest Date",
+					"text": "Divest Date",
 					"textAlign": "right",
 					"right": 154
 				},
-				"entryField_digestDate": {
+				"entryField_divestDate": {
 					"type": "input",
 					"top": 423,
 					"left": 164,
 					"width": 268,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.digestDate",
+					"dataSource": "Form:C1466.current_item.divestDate",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -507,7 +507,7 @@
 			}
 		}
 	],
-	"geometryStamp": 83,
+	"geometryStamp": 86,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"method": "method.4dm",
 	"editor": {

@@ -51,10 +51,10 @@ Function main()->$assets : cs:C1710.AssetSelection
 	$assets:=ds:C1482.Asset.query("excludeFmDepreciationList =:1"; False:C215)
 	
 Function fullyDepreciatedAssets()->$assets : cs:C1710.AssetSelection
-	$assets:=ds:C1482.Asset.query("excludeFmDepreciationList =:1"; False:C215)
+	$assets:=ds:C1482.Asset.query("excludeFmDepreciationList =:1"; True:C214)
 	
 Function archivedorScrappedAssets()->$assets : cs:C1710.AssetSelection
-	$assets:=ds:C1482.Asset.query("excludeFmDepreciationList =:1"; False:C215)
+	$assets:=ds:C1482.Asset.query("excludeFmDepreciationList =:1 & isScrapped =:2"; False:C215; True:C214)
 	
 	
 	

@@ -1101,8 +1101,9 @@
 		<field name="activeAccount" uuid="28A67E8A9D5DB34B9F2787D3AC296E74" type="10" limiting_length="255" never_null="true" id="9">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="isActive" uuid="1F401707FB1C4B49922C3FF51538E38F" type="1" never_null="true" id="10"/>
+		<field name="isInacActive" uuid="1F401707FB1C4B49922C3FF51538E38F" type="1" never_null="true" id="10"/>
 		<field name="isSubaccount" uuid="83EB32DE8F19C64F9C3807E5F726A634" type="1" never_null="true" id="11"/>
+		<field name="UUID_ParentAccount" uuid="59F59B14BA3D334E950CA0E04F61C6CD" type="10" store_as_UUID="true" never_null="true" id="12"/>
 		<primary_key field_name="UUID" field_uuid="65FB781A111BBA4A9C7EAE76C9C35795"/>
 	</table>
 	<table name="CAOType" uuid="9BE9AE3D0CAD0E468514C2CB9ADAD6F0" id="74">
@@ -1144,9 +1145,9 @@
 		<field name="UUID_PurchaseOrder" uuid="82A10DEE95CF0249AA3E3115D4B5D78D" type="10" store_as_UUID="true" never_null="true" id="6"/>
 		<field name="originalCost" uuid="BACD4F64BD5D034D9F5A4A37E26E2BB3" type="6" never_null="true" id="7"/>
 		<field name="salvage" uuid="4DE5ED8C0EDFFB4FBE9A02DDDF9100A2" type="10" limiting_length="255" never_null="true" id="8"/>
-		<field name="monthInService" uuid="F3FE775AE41A0541BE282606282B8E6C" type="4" never_null="true" id="9"/>
 		<field name="lifePerTax" uuid="B8CBD640BAA6954F948079E710615EE7" type="10" limiting_length="255" never_null="true" id="10"/>
 		<field name="currentMonthDepreciation" uuid="C9F5087E0C94124EB8755D812B4777D3" type="10" limiting_length="255" never_null="true" id="12"/>
+		<field name="life" uuid="B3AD7DDA49643147B8F003B01DC00B34" type="3" never_null="true" id="13"/>
 		<field name="isScrapped" uuid="778BDCA5650B6A4AA1C4A1486D30A4EE" type="1" never_null="true" id="14"/>
 		<field name="divestStmp" uuid="BE511C5A6504424BBF28BF0E8B2B6640" type="4" never_null="true" id="15"/>
 		<field name="excludeFmDepreciationList" uuid="10586EF0D30A364AAF11A4D164C52C4D" type="1" never_null="true" id="16"/>
@@ -3313,6 +3314,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="4B2BA8FB532C7C4393AF836D5665F337" name_Nto1="parentAccount" name_1toN="subAccounts" state="1">
+		<related_field kind="source">
+			<field_ref uuid="59F59B14BA3D334E950CA0E04F61C6CD" name="UUID_ParentAccount">
+				<table_ref uuid="F580775371C0FC479B47D767C6CA2D9F" name="CAO"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="65FB781A111BBA4A9C7EAE76C9C35795" name="UUID">
+				<table_ref uuid="F580775371C0FC479B47D767C6CA2D9F" name="CAO"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="005E48A922A4464DB92973931B467ACF" type="3">
 		<field_ref uuid="17F71D68FA714CE9A75ED79CA63E3BE2" name="UUID_Lead">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
@@ -3921,6 +3934,11 @@
 	<index kind="regular" uuid="72D8F1D0BCF0486BBE43C46E84F16301" type="3">
 		<field_ref uuid="7B50ED3E956E4D61A6BECCCFC24BDB01" name="UUID_Scheduler">
 			<table_ref uuid="0A7AAD6A6AAB448E9F91A0CF0CC592C6" name="sfw_SchedulerLog"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="738877565A81A34BBA1CF23BD64109C9" type="3">
+		<field_ref uuid="59F59B14BA3D334E950CA0E04F61C6CD" name="UUID_ParentAccount">
+			<table_ref uuid="F580775371C0FC479B47D767C6CA2D9F" name="CAO"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="74B1CBE438144A4580385CB3823B89E4" type="1">
