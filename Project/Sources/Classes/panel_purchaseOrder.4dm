@@ -170,7 +170,9 @@ Function redrawAndSetVisible()
 		OBJECT SET VISIBLE:C603(*; "amountError"; False:C215)
 	End if 
 	
-	OBJECT SET ENABLED:C1123(*; "entryField_taxPercentage"; Form:C1466.current_item.taxApplied)
+	OBJECT SET VISIBLE:C603(*; "label_taxPercentage"; Form:C1466.current_item.taxApplied)
+	OBJECT SET VISIBLE:C603(*; "label_taxPercentage2"; Form:C1466.current_item.taxApplied)
+	OBJECT SET VISIBLE:C603(*; "entryField_taxPercentage"; Form:C1466.current_item.taxApplied)
 	
 	This:C1470.drawPup_quoteNumber()
 	

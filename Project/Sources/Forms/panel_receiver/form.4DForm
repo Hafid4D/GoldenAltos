@@ -383,22 +383,23 @@
 					"iconFrames": 4,
 					"focusable": false
 				},
-				"pup_job": {
-					"type": "button",
-					"top": 31,
+				"Field_jobNumber": {
+					"type": "input",
+					"top": 37,
 					"left": 112,
 					"width": 100,
-					"height": 23,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.job.jobNumber",
 					"focusable": false,
-					"text": "",
-					"icon": "",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/pup_job.4dm",
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
 					"events": [
-						"onClick"
+						"onDataChange"
 					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "normal",
 					"textAlign": "left"
 				}
 			}
@@ -1561,7 +1562,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1866,
+	"geometryStamp": 1889,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

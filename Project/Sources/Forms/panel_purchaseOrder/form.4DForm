@@ -471,7 +471,7 @@
 					"type": "checkbox",
 					"text": "Tax Applied",
 					"top": 12,
-					"left": 926,
+					"left": 946,
 					"width": 170,
 					"height": 17,
 					"events": [
@@ -484,7 +484,7 @@
 				"label_0_10": {
 					"type": "text",
 					"top": 12,
-					"left": 824,
+					"left": 844,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
@@ -494,17 +494,17 @@
 				"label_0_12": {
 					"type": "text",
 					"top": 12,
-					"left": 914,
+					"left": 934,
 					"width": 7,
 					"height": 17,
 					"stroke": "#808080",
 					"text": ":",
 					"fontWeight": "normal"
 				},
-				"label_0_11": {
+				"label_taxPercentage": {
 					"type": "text",
 					"top": 37,
-					"left": 824,
+					"left": 844,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
@@ -514,7 +514,7 @@
 				"entryField_taxPercentage": {
 					"type": "input",
 					"top": 37,
-					"left": 924,
+					"left": 944,
 					"width": 60,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.taxPercentage",
@@ -530,12 +530,13 @@
 					"textAlign": "left",
 					"fontWeight": "normal",
 					"dataSourceTypeHint": "integer",
-					"numberFormat": "###,##0.00%"
+					"numberFormat": "###,##0.00%",
+					"method": "ObjectMethods/entryField_taxPercentage.4dm"
 				},
-				"label_0_13": {
+				"label_taxPercentage2": {
 					"type": "text",
 					"top": 37,
-					"left": 914,
+					"left": 934,
 					"width": 7,
 					"height": 17,
 					"stroke": "#808080",
@@ -1801,7 +1802,7 @@
 			}
 		}
 	],
-	"geometryStamp": 3612,
+	"geometryStamp": 3615,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
