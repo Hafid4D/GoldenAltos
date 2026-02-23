@@ -73,6 +73,7 @@ local Function loadAfterCreation()
 	// This callback is called after creating the new item but before displaying the panel.
 	This:C1470._initAddress()
 	This:C1470._initCommunication()
+	This:C1470.codeNumber:=ds:C1482.Customer.all().max("codeNumber")+1
 	
 	
 	

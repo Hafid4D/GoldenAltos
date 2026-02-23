@@ -20,7 +20,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	//$entry.setPanelPage(7; "staff-32x32.png"; "Timeline")
 	
 	
-	$entry.setLBItemsColumn("code"; "Code"; "xliff:entry.customer.field.name"; "width:80")
+	$entry.setLBItemsColumn("codeNumber"; "Code"; "xliff:entry.customer.field.name"; "width:80")
 	$entry.setLBItemsColumn("name"; "Name"; "xliff:entry.customer.field.name"; "width:200")
 	
 	
@@ -42,6 +42,24 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$filter.setFilterByLinkedEntity("CustomerStatus"; "UUID_CustomerStatus"; ""; "customerStatus")
 	$filter.setDynamicTitle("name"; "## customer status")
 	$entry.addFilter($filter)
+	
+	//Mark: -Views
+	$view:=cs:C1710.sfw_definitionView.new("openPOs"; "Customer with Open POs"; "derivedFrom:main"; $entry)
+	$view.setSubset("openPOs")
+	$entry.setView($view)
+	
+	$view:=cs:C1710.sfw_definitionView.new("openTravelers"; "Customer with Open Travelers"; "derivedFrom:main"; $entry)
+	$view.setSubset("openTravelers")
+	$entry.setView($view)
+	
+	
+Function openPOs()->$customers : cs:C1710.CustomerSelection
+	$customers:=ds:C1482.PurchaseOrder.query("openPO = :1"; True:C214).customer
+	
+	
+Function openTravelers()->$customers : cs:C1710.CustomerSelection
+	$customers:=ds:C1482.Job.query("shipped = :1"; False:C215).purchaseOrder.customer
+	
 	
 local Function cacheLoad()
 	

@@ -19,6 +19,7 @@ If (True:C214)
 			$eCustomer:=ds:C1482.Customer.new()
 			$eCustomer.name:=$customer.Customer
 			$eCustomer.code:=$customer.Cust_Code
+			$eCustomer.codeNumber:=Num:C11(Replace string:C233($eCustomer.code; "-"; ""))
 			
 			$customerStatus:=ds:C1482.CustomerStatus.query("levelID =:1"; $customer.idt_status)
 			
@@ -146,6 +147,7 @@ If (True:C214)
 					$eCustomer:=ds:C1482.Customer.query("name = :1"; $contact.Company_Name).first()
 					If ($eCustomer=Null:C1517)
 						$eCustomer:=ds:C1482.Customer.new()
+						$eCustomer.codeNumber:=ds:C1482.Customer.all().max("codeNumber")+1
 						$eCustomer.name:=$contact.Company_Name
 						$eCustomer.save()
 					End if 

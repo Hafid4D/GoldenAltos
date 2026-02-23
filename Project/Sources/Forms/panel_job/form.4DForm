@@ -308,7 +308,7 @@
 					"width": 110,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Open PO",
+					"text": "No Lots",
 					"textAlign": "right"
 				},
 				"entryField_noLots": {

@@ -758,7 +758,42 @@
 				"height": 331.21447753906
 			},
 			"displayable_fields_count": 13,
-			"fields_ordering": 1
+			"fields_ordering": 2,
+			"fields": {
+				"ftp": {
+					"position": 11
+				},
+				"accountNum": {
+					"position": 10
+				},
+				"codeNumber": {
+					"position": 4
+				},
+				"UUID_CustomerStatus": {
+					"position": 9
+				},
+				"resaleLicenseNumber": {
+					"position": 8
+				},
+				"accountNumber": {
+					"position": 7
+				},
+				"contactDetails": {
+					"position": 6
+				},
+				"UUID_CustomerCarrier": {
+					"position": 5
+				},
+				"code": {
+					"position": 3
+				},
+				"name": {
+					"position": 2
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
 		},
 		"sfw_NotificationType": {
 			"color": {
