@@ -129,6 +129,10 @@ Function get amount()->$amountText : Text
 	$amountText:="$"+String:C10($amount; "###,###,###,#00.00")
 	
 	
+Function get amountNumber()->$amount : Real
+	$amount:=This:C1470.lines.sum("amount")
+	
+	
 Function contacts()->$contacts : Collection
 	var $e_mainContact : cs:C1710.ContactEntity
 	var $secondaryContacts : cs:C1710.ContactSelection

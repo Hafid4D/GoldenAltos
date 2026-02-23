@@ -162,7 +162,16 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "bActionInvoices"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
 	End case 
 	
-	OBJECT SET ENTERABLE:C238(*; "entryField_poNumber"; False:C215)
+	//OBJECT SET ENTERABLE(*; "entryField_poNumber"; False)
+	
+	If (Form:C1466.current_item.quote#Null:C1517)
+		OBJECT SET VISIBLE:C603(*; "amountError"; (Form:C1466.current_item.poAmount#Form:C1466.current_item.quote.amountNumber))
+	Else 
+		OBJECT SET VISIBLE:C603(*; "amountError"; False:C215)
+	End if 
+	
+	OBJECT SET ENABLED:C1123(*; "entryField_taxPercentage"; Form:C1466.current_item.taxApplied)
+	
 	This:C1470.drawPup_quoteNumber()
 	
 	

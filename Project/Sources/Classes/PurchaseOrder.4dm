@@ -21,5 +21,11 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("amountBilled"; "Amount Billed"; "width:100"; "format:$##,###,###,##0.00")
 	
 	$entry.setLBItemsOrderBy("poNumber")
+	
+	//$entry.setValidationRule("poNumber"; "entryField_poNumber"; "mandatory"; "message:the poNumber is mandatory")
+	$entry.setValidationRule("poNumber"; "entryField_poNumber"; "notZero"; "message:the poNumber is mandatory")
+	$entry.setValidationRule("poNumber"; "entryField_poNumber"; "unique"; "message:the ident is must be unique")
+	
+	
 	$entry.enableTransaction()
 	

@@ -61,7 +61,9 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"textAlign": "left",
-					"fontWeight": "normal"
+					"fontWeight": "normal",
+					"dataSourceTypeHint": "number",
+					"method": "ObjectMethods/entryField_poNumber.4dm"
 				},
 				"label_0_2": {
 					"type": "text",
@@ -256,7 +258,7 @@
 					"type": "input",
 					"top": 37,
 					"left": 364,
-					"width": 140,
+					"width": 70,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.ourQuote",
 					"focusable": false,
@@ -417,7 +419,7 @@
 					"type": "button",
 					"top": 31,
 					"left": 363,
-					"width": 163,
+					"width": 73,
 					"height": 23,
 					"fontFamily": "System Font",
 					"fontSize": 13,
@@ -433,7 +435,112 @@
 						"onDisplayDetail"
 					],
 					"fontWeight": "bold",
+					"right": 436
+				},
+				"Field_quoteAmount": {
+					"type": "input",
+					"top": 37,
+					"left": 442,
+					"width": 84,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.quote.amountNumber",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"textFormat": "$##,###,###,##0.00",
+					"textAlign": "left",
+					"fontWeight": "normal",
 					"right": 526
+				},
+				"amountError": {
+					"type": "picture",
+					"top": 38,
+					"left": 256,
+					"width": 16,
+					"height": 16,
+					"picture": "Images/bouton-supprimer.png",
+					"pictureFormat": "scaled"
+				},
+				"entryField_lineItem": {
+					"type": "checkbox",
+					"text": "Tax Applied",
+					"top": 12,
+					"left": 926,
+					"width": 170,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"sizingX": "grow",
+					"dataSource": "Form:C1466.current_item.taxApplied"
+				},
+				"label_0_10": {
+					"type": "text",
+					"top": 12,
+					"left": 824,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Tax Applied",
+					"fontWeight": "normal"
+				},
+				"label_0_12": {
+					"type": "text",
+					"top": 12,
+					"left": 914,
+					"width": 7,
+					"height": 17,
+					"stroke": "#808080",
+					"text": ":",
+					"fontWeight": "normal"
+				},
+				"label_0_11": {
+					"type": "text",
+					"top": 37,
+					"left": 824,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Tax Percentage",
+					"fontWeight": "normal"
+				},
+				"entryField_taxPercentage": {
+					"type": "input",
+					"top": 37,
+					"left": 924,
+					"width": 60,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.taxPercentage",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"textAlign": "left",
+					"fontWeight": "normal",
+					"dataSourceTypeHint": "integer",
+					"numberFormat": "###,##0.00%"
+				},
+				"label_0_13": {
+					"type": "text",
+					"top": 37,
+					"left": 914,
+					"width": 7,
+					"height": 17,
+					"stroke": "#808080",
+					"text": ":",
+					"fontWeight": "normal"
 				}
 			}
 		},
@@ -1694,7 +1801,7 @@
 			}
 		}
 	],
-	"geometryStamp": 3480,
+	"geometryStamp": 3612,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

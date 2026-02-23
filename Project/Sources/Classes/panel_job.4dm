@@ -10,6 +10,7 @@ Function formMethod()
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh
 		Form:C1466.addressBilling:=1
 		Form:C1466.addressShipping:=0
+		Form:C1466.sfw.entry.setAllowedProfilesForCreation("nothing")
 		
 		This:C1470.loadAllTabs()
 		This:C1470.drawPup_PO()

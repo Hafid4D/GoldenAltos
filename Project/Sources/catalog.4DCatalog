@@ -1305,6 +1305,8 @@
 		<field name="log_date" uuid="EDECD6CDEB33AA4EAFAC878522C7B8BE" type="8" never_null="true" id="22"/>
 		<field name="oldPoNumber" uuid="93CA241241BCEB45A02DBBEE34B09346" type="10" limiting_length="255" never_null="true" id="23"/>
 		<field name="UUID_Quote" uuid="1FBF2EAB42691642930AB78E5C113913" type="10" store_as_UUID="true" never_null="true" id="24"/>
+		<field name="taxApplied" uuid="5FFD8A5DD47F4CC3B8DC04EDCEECE371" type="1" never_null="true" id="25"/>
+		<field name="taxPercentage" uuid="EB6CA36B465344DFB50756E3CB68BFF0" type="6" never_null="true" id="26"/>
 		<primary_key field_name="UUID" field_uuid="9C187AB4BBD84246AF62E935FF20415E"/>
 	</table>
 	<table name="PurchaseOrderLine" uuid="2CC1E163267E4DFE808464C271CC4C9F" id="116">
