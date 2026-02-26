@@ -1,17 +1,20 @@
 //%attributes = {}
 
 
-$data:=ds:C1482.CreditMemo.all().extract("cmNum").distinct()
+$barCode:=_ga_generateBarCode(ds:C1482.Lot.all().first().lotNumber)
+WRITE PICTURE FILE:C680(""; $barCode)
 
-$po:=ds:C1482.PurchaseOrder.query("oldPoNumber =:1"; "4513841818")
+//$data:=ds.CreditMemo.all().extract("cmNum").distinct()
 
-$jobs:=ds:C1482.Job.query("jobNumber =:1"; 1664)
+//$po:=ds.PurchaseOrder.query("oldPoNumber =:1"; "4513841818")
 
-$poLines:=ds:C1482.CAOTypeDetail.all()
-$invoiceNum:=725
-$invoices:=ds:C1482.Invoice.all().extract("invoice").orderBy(ck ascending:K85:9)
-$invoice:=ds:C1482.Invoice.query("invoice = :1"; String:C10(1502))
-//SET TEXT TO PASTEBOARD($invoices.join("\n"))
+//$jobs:=ds.Job.query("jobNumber =:1"; 1664)
+
+//$poLines:=ds.CAOTypeDetail.all()
+//$invoiceNum:=725
+//$invoices:=ds.Invoice.all().extract("invoice").orderBy(ck ascending)
+//$invoice:=ds.Invoice.query("purchaseOrder.customer.name = :1"; "ALDETEC")
+////SET TEXT TO PASTEBOARD($invoices.join("\n"))
 
 
 

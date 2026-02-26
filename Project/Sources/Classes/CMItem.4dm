@@ -9,7 +9,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setDisplayOrder(-300)
 	$entry.setIcon("image/entry/creditMemo-white-50x50.png")
 	
-	$entry.setSearchboxField("creditMemo.cmNum")
+	$entry.setSearchboxField("creditMemo.cmNum"; "placeholder:cmNum")
+	$entry.setSearchboxField("customer.name"; "placeholder:customer")
 	
 	$entry.setPanel("panel_cmItem"; 1)
 	$entry.setPanelPage(1; ""; "Main")
@@ -23,6 +24,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setMainViewLabel("All Credit Items")
 	
 	$entry.setItemListAction("Print Credit Note"; "_ga_printCreditNote")
+	
+	$entry.setItemAction("Print Invoices"; "_ga_printCmInvoice")
 	
 	$entry.enableTransaction()
 	

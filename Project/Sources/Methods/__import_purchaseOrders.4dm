@@ -435,6 +435,10 @@ If (True:C214)
 				End if 
 			End if 
 			
+			$lot_e.moreData:=New object:C1471()
+			$recodNumber:=ds:C1482.sfw_Counter.getNextValue("Lot")
+			$lot_e.moreData.barcodeData:=String:C10($recodNumber; "0000000000")
+			
 			$res:=$lot_e.save()
 			
 			If (Not:C34($res.success))
