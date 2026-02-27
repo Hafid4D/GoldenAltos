@@ -10,19 +10,22 @@
 		<field name="contactDetails" uuid="7B2BE752FE4343B1A18596793976CEBB" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
 		<field name="code" uuid="A0AA3A2CDD0F4B4C98340D8C3643BC81" type="10" limiting_length="255" never_null="true" id="6"/>
 		<field name="title" uuid="6A7FDC50467B441E8639D0536CFB133A" type="10" limiting_length="255" never_null="true" id="7"/>
-		<field name="UUID_Company" uuid="1CA2A874935E4649B7EC63D11EF51140" type="10" store_as_UUID="true" never_null="true" id="12"/>
+		<field name="moreData" uuid="C7AC679CF0DB0B4F8D555A9B1205CE2A" type="21" blob_switch_size="2147483647" never_null="true" id="8"/>
+		<field name="UUID_Company" uuid="1CA2A874935E4649B7EC63D11EF51140" type="10" store_as_UUID="true" never_null="true" id="13"/>
 		<primary_key field_name="UUID" field_uuid="8EFDF2BE837542E3849ECB064F30C5BD"/>
 	</table>
 	<table name="Assumption" uuid="F74C797683A840F69C35777C0FF641E7" id="2">
 		<field name="UUID" uuid="EA4BF9CC573745C5BF902F88DA00BD6E" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="code" uuid="7712EA2DE9BD4B75A3AECC0C5EBA64E5" type="10" limiting_length="255" never_null="true" id="2"/>
 		<field name="value" uuid="B8D9648C48A94FC19B2A146E4591876F" type="10" never_null="true" id="3"/>
+		<field name="moreData" uuid="3D7A0338C0809941A04FD183C6A61B1F" type="21" blob_switch_size="2147483647" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="EA4BF9CC573745C5BF902F88DA00BD6E"/>
 	</table>
 	<table name="TermCondition" uuid="C426BFF1DD3F4326A89BD125EFA71348" id="3">
 		<field name="UUID" uuid="5ABBAB6EFCCD482ABFEA64F31B89770D" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="code" uuid="1F05536B569C49CEBE5484847CE8D4D7" type="10" limiting_length="255" never_null="true" id="2"/>
 		<field name="value" uuid="C99A01CCBFF04219BBB18E97E966B065" type="10" never_null="true" id="3"/>
+		<field name="moreData" uuid="50560722E8410D4A9EBDFB60A95B364B" type="21" blob_switch_size="2147483647" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="5ABBAB6EFCCD482ABFEA64F31B89770D"/>
 	</table>
 	<table name="Invoice" uuid="EE7D7176EC836345924AC9AE6C1866B0" id="4">
@@ -40,6 +43,7 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="saleAmount" uuid="ECE4D03D5B04824CA8A4D50031BCB86E" type="6" never_null="true" id="12"/>
+		<field name="moreData" uuid="D861EE913F7F11488ABFD097E4410A77" type="21" blob_switch_size="2147483647" never_null="true" id="13"/>
 		<primary_key field_name="UUID" field_uuid="D4F459308B965340B21C8A6DE2F2F78F"/>
 	</table>
 	<table name="LotStep" uuid="21C997F4FF841640B547868BE38C05ED" id="5">
@@ -84,6 +88,7 @@
 		<field name="beSerialized" uuid="CAF8366D6A694A1FBCD866246F71E957" type="1" never_null="true" id="39"/>
 		<field name="serialization" uuid="C025334374AD4EE3817470B44450C598" type="21" blob_switch_size="2147483647" never_null="true" id="40"/>
 		<field name="properties" uuid="9C1165AA49804B62B8DA4E3CC31D10A6" type="21" blob_switch_size="2147483647" never_null="true" id="41"/>
+		<field name="moreData" uuid="792F9726D802684281D40DE2FA022E6C" type="21" blob_switch_size="2147483647" never_null="true" id="42"/>
 		<primary_key field_name="UUID" field_uuid="EE9C517A8C59724B8559A5DCB59FE560"/>
 	</table>
 	<table name="Tool" uuid="0FF66E5E37EDD74B8E6E39F15644C85F" id="6">
@@ -91,6 +96,7 @@
 		<field name="UUID_ToolType" uuid="67283794017E8F49A82B9A08EE6BB3F2" type="10" store_as_UUID="true" never_null="true" id="2"/>
 		<field name="name" uuid="4ABD00DB48B7A1459C049A14E6C57F14" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="date" uuid="7ABD558C55CC4B4383245A48A3089A5A" type="8" never_null="true" id="4"/>
+		<field name="moreData" uuid="2A333293C3A2E6498C197228031BCABE" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
 		<primary_key field_name="UUID" field_uuid="E33DA69061AB7744853A3E6B6DF6BB8D"/>
 	</table>
 	<table name="CustomerCarrier" uuid="4EB6C9D117A3DC4B91D031D6BC0C7DA9" id="7">
@@ -103,6 +109,7 @@
 		<field name="color" uuid="45DCF92178DEE1488E4DBF89F06125AF" type="10" limiting_length="255" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="moreData" uuid="45A9EABE37F17748B13E6D6AEE1E8749" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="319814755AB5A945864EA37F29F3FDE1"/>
 	</table>
 	<table name="sfw_Document" uuid="5E1C3E25225441628E3DBCF58BFAABF4" id="8">
@@ -253,7 +260,7 @@
 		<field name="address_format" uuid="BE9E6B8DD3DF4918B10EF7F888B149CB" type="21" id="7"/>
 		<field name="moreData" uuid="F8C539E7DBC749E89C6260687EF1C8A4" type="21" blob_switch_size="2147483647" never_null="true" id="8"/>
 		<primary_key field_name="UUID" field_uuid="FDA14E8A26704F7091EC668E332108FB"/>
-		<table_extra trigger_insert="true" trigger_update="true" trigger_delete="true" input_form="Entrée" output_form="Sortie"/>
+		<table_extra input_form="Entrée" output_form="Sortie" trigger_delete="true" trigger_insert="true" trigger_update="true"/>
 	</table>
 	<table name="sfw_User" uuid="2C75E07E18FC4733A8C98A0B31D40656" id="16">
 		<field name="UUID" uuid="34E9F9D48BE14DCD95127852F83BF1FB" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -291,6 +298,7 @@
 		<field name="color" uuid="94725FF689E73C4A980063B4B6C5CD2E" type="10" limiting_length="255" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="moreData" uuid="7DD22E5E4B72354C9C637E91399D11C9" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="52CADD4F2C4DE44B83A36B7204B3ED3B"/>
 	</table>
 	<table name="Division" uuid="F25CD20FCCFE2044A3D568BAFE905227" id="20">
@@ -305,25 +313,27 @@
 		<field name="color" uuid="28617CDB57CF8B40A2A2AE1CF1891A37" type="10" limiting_length="255" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="moreData" uuid="9081CDCEB033674D96039AB4C4E10AC4" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="3B46C986029743428A30E84AA5F8ADC4"/>
 	</table>
 	<table name="RepairLog" uuid="E209D11E14110249AE69799CB8F51C7C" id="21">
 		<field name="UUID" uuid="8FD486DDACE0854DA8FB686A58B08089" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_Equipment" uuid="C56ACBF61233134FA887559C036F2D7A" type="10" store_as_UUID="true" never_null="true" id="2"/>
-		<field name="stmpFixed" uuid="BFCFF4A84085C14BA123E73537FC98F4" type="4" never_null="true" id="4"/>
-		<field name="stmpReport" uuid="741357BFDBEA23499DB051B8EDCB9EE8" type="4" never_null="true" id="5"/>
-		<field name="status" uuid="DA2945D648F7F24DB6ED519C615564F1" type="10" limiting_length="255" never_null="true" id="6"/>
-		<field name="problem" uuid="F35B240CA3E0504AB0D8E25B17534FBF" type="10" never_null="true" id="7"/>
-		<field name="reportID" uuid="EECBB96290F06F42B157E3F5D74CB367" type="4" never_null="true" id="8"/>
-		<field name="fix" uuid="BD82D562133F984B90190C8F06453963" type="10" never_null="true" id="9"/>
-		<field name="downHrs" uuid="AE2C3C7917087B4FBD5E3814DBE6703B" type="6" never_null="true" id="10"/>
-		<field name="downAtStmp" uuid="4033EAEBDBD0E941A0CD4C53AFD01C46" type="4" never_null="true" id="11"/>
-		<field name="upAtStmp" uuid="7E6764EC95C7F74B89A8509FFD911EFE" type="4" never_null="true" id="12"/>
-		<field name="stmpUp" uuid="8BE38F5B5B6E214D8C55B2E7F73DCE36" type="4" never_null="true" id="13"/>
-		<field name="isApproved" uuid="D1206F3FDDA66F49812596441E32BE6A" type="1" never_null="true" id="14"/>
-		<field name="approvedBy" uuid="C69BC87ECC3E8A40AFE2E649C3367539" type="10" limiting_length="255" never_null="true" id="16"/>
-		<field name="stmpApproval" uuid="C58CFAD652E982459AD859AAC73FE8D3" type="4" never_null="true" id="17"/>
-		<field name="operators" uuid="0A3CC89837F0474693760937B65C8C46" type="21" blob_switch_size="2147483647" never_null="true" id="18"/>
+		<field name="moreData" uuid="72A96BD508CB1F4796595DC2392BAE3A" type="21" blob_switch_size="2147483647" never_null="true" id="3"/>
+		<field name="stmpFixed" uuid="BFCFF4A84085C14BA123E73537FC98F4" type="4" never_null="true" id="5"/>
+		<field name="stmpReport" uuid="741357BFDBEA23499DB051B8EDCB9EE8" type="4" never_null="true" id="6"/>
+		<field name="status" uuid="DA2945D648F7F24DB6ED519C615564F1" type="10" limiting_length="255" never_null="true" id="7"/>
+		<field name="problem" uuid="F35B240CA3E0504AB0D8E25B17534FBF" type="10" never_null="true" id="8"/>
+		<field name="reportID" uuid="EECBB96290F06F42B157E3F5D74CB367" type="4" never_null="true" id="9"/>
+		<field name="fix" uuid="BD82D562133F984B90190C8F06453963" type="10" never_null="true" id="10"/>
+		<field name="downHrs" uuid="AE2C3C7917087B4FBD5E3814DBE6703B" type="6" never_null="true" id="11"/>
+		<field name="downAtStmp" uuid="4033EAEBDBD0E941A0CD4C53AFD01C46" type="4" never_null="true" id="12"/>
+		<field name="upAtStmp" uuid="7E6764EC95C7F74B89A8509FFD911EFE" type="4" never_null="true" id="13"/>
+		<field name="stmpUp" uuid="8BE38F5B5B6E214D8C55B2E7F73DCE36" type="4" never_null="true" id="14"/>
+		<field name="isApproved" uuid="D1206F3FDDA66F49812596441E32BE6A" type="1" never_null="true" id="15"/>
+		<field name="approvedBy" uuid="C69BC87ECC3E8A40AFE2E649C3367539" type="10" limiting_length="255" never_null="true" id="17"/>
+		<field name="stmpApproval" uuid="C58CFAD652E982459AD859AAC73FE8D3" type="4" never_null="true" id="18"/>
+		<field name="operators" uuid="0A3CC89837F0474693760937B65C8C46" type="21" blob_switch_size="2147483647" never_null="true" id="19"/>
 		<primary_key field_name="UUID" field_uuid="8FD486DDACE0854DA8FB686A58B08089"/>
 	</table>
 	<table name="dfd_Document" uuid="A1BFE9AD9486804BA249798C81722C4A" id="22">
@@ -341,6 +351,7 @@
 		<field name="UUID" uuid="8013445C4C06E347B2DE86E727AC4A67" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="name" uuid="F0DF983556224144A01214254FCBBE4E" type="10" limiting_length="255" id="2"/>
 		<field name="picture" uuid="6569007F2D5717449DDD2B2215588C04" type="12" id="3"/>
+		<field name="moreData" uuid="2E615141A46315489559F849B7834776" type="21" blob_switch_size="2147483647" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="8013445C4C06E347B2DE86E727AC4A67"/>
 	</table>
 	<table name="dfd_Line" uuid="AD9AFF574E6E2745A70D65CE48ABAB7E" id="24">
@@ -417,6 +428,7 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="code" uuid="168E550C46A27C4381AD0BE454AD21C7" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="moreData" uuid="0590D3FCB09CEA45B085B7076B4037DC" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="3D5820337641C0429DE0E451B4C553BC"/>
 	</table>
 	<table name="CIDisposition" uuid="3B9C8B2E8B9769409AD8BB9F66CA3E6E" id="28">
@@ -431,6 +443,7 @@
 		<field name="code" uuid="DA598B1200DD384FA7E9BF79A014C06A" type="10" limiting_length="255" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="moreData" uuid="95422E64B514054DBEE005B035A878A3" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="D81F07A96F817641A43C05681384BC82"/>
 	</table>
 	<table name="CIHumanFactor" uuid="2B3270362A7A6342B4A9D49F4266C1F5" id="29">
@@ -445,6 +458,7 @@
 		<field name="code" uuid="7B924A31DB242F41B62B0B272A41CCE2" type="10" limiting_length="255" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="moreData" uuid="205DCB02218714459C5763F67D30330F" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="01A4D0E8E7BA9B48A30792F1EDE4BAD6"/>
 	</table>
 	<table name="sfw_Setting" uuid="05967663C56F44398D96379354ABCC89" id="30">
@@ -464,6 +478,7 @@
 		<field name="code" uuid="6D9FBA9D5BCE4846B25380B568410CDF" type="10" limiting_length="255" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="moreData" uuid="7EAAF571BC773B40921A5FBEE45D1D65" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="FAB7EB268BAD3741BE4520A0518A4764"/>
 	</table>
 	<table name="sfw_Currency" uuid="01CB0A8A61387F468A67DFD7FE5F4D16" id="32">
@@ -480,6 +495,7 @@
 		<field name="code" uuid="ECDEA5D3D10F004C95AC28AF4FE163FC" type="10" limiting_length="255" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="moreData" uuid="1BDE3B77B5EF144BB991A9E51BDE192E" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="ABB5485D67861C4884D7E9EF218BFD1A"/>
 	</table>
 	<table name="YesNoQuestion" uuid="EF08E8961B35724A90161EC3FDC9D950" id="34">
@@ -494,6 +510,7 @@
 		<field name="code" uuid="6E9027C676850A4D99892712D7F94676" type="10" limiting_length="255" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="moreData" uuid="3DA16F7A6CE95C468B7A202840A88806" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="F4F183C203267641A55226527FCEE721"/>
 	</table>
 	<table name="Lead" uuid="1E733AC1BDB87C40B151040C49BD164B" id="35">
@@ -525,6 +542,7 @@
 		<field name="name" uuid="01E11E5B73D71E4796B158056501C161" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="color" uuid="E858E790BF5C694FA95061370A5AC02F" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="levelID" uuid="BD5039159E564DF2B7932E595166FD19" type="3" never_null="true" id="5"/>
+		<field name="moreData" uuid="4926DD1218E73E448965657DCA35B401" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="A0B2300D77BC874D9789248A024181BD"/>
 	</table>
 	<table name="sfw_Favorite" uuid="BBA10D61B3A54D38A2C335D8A5A1BF6E" id="37">
@@ -541,6 +559,7 @@
 		<field name="code" uuid="F24A641E9DD6D242AC56145F26C3D448" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="name" uuid="49C29821AA37E344AA174DC45340184C" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="color" uuid="2D9581B9C0C8234685541FCE717FC573" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="moreData" uuid="0245A3E9AFA3634D9D32090F16AE5974" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="3973C514AA15664BB316858DE7C5DB34"/>
 	</table>
 	<table name="LeadStage" uuid="FB580C7C6B7BC3458D7137D33E9FC6B2" id="39">
@@ -549,6 +568,7 @@
 		<field name="code" uuid="7B8D354C69B6E645A8D356890096EB82" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="name" uuid="F3283935A5138D468A43D291716EF06C" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="color" uuid="1F06FC21290EA44DBD230347A18CA356" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="moreData" uuid="888610F78ABD4441B55E4135AAA48CC9" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="F82EDBE20F7F0A4C9658EA6A94789558"/>
 	</table>
 	<table name="LeadNextStep" uuid="D96F66F181815C4C8B54C0F2DB6B1B1A" id="40">
@@ -557,6 +577,7 @@
 		<field name="code" uuid="2A096374FF0BCE4C816BC28093E98182" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="name" uuid="2191096C7F76D74F823C6955E32B3575" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="color" uuid="2D95A760379E1F48B6DABA4CBAF685EE" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="moreData" uuid="74F414A31B02C640AE3AF49D8D2C18E3" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="99E1A49B9010EC458423F8D8D2A94E3A"/>
 	</table>
 	<table name="InteractionType" uuid="E21DDA28779D4AABABA59B474AF4D1AD" id="41">
@@ -567,6 +588,7 @@
 		<field name="code" uuid="4CCF1F13CF234775AC259431514225F4" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="name" uuid="4216492E5C3D44A9BC9ED1B6891725BB" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="color" uuid="035BDC8F08F24283B5BD5F480C37867F" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="moreData" uuid="99EE32E77F8DDA41809A1A61ED77E999" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="A4C6B18253DB4C32978E0EDA5E5507FD"/>
 	</table>
 	<table name="DocumentCategory" uuid="1A0A4A7549092346949531F66E6DC503" id="42">
@@ -583,12 +605,14 @@
 		<field name="color" uuid="14B2521B1565C24AB664CE4E880D2D5F" type="10" limiting_length="255" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="moreData" uuid="F53237E9B623E84D89318FB54BDA2040" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="631CE0E5A951BF41ADB675F1135A675F"/>
 	</table>
 	<table name="StepSpec" uuid="74CB192F1AF3134C9082ABA4683C0838" id="43">
 		<field name="UUID" uuid="AF2E663EC28F5E4399FC4407F055FCC2" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_Step" uuid="51E9BC9408544D40A527B62C43DBA725" type="10" store_as_UUID="true" never_null="true" id="2"/>
 		<field name="UUID_Specification" uuid="8A9C0B885868D54583D57B3105E9B3A8" type="10" store_as_UUID="true" never_null="true" id="3"/>
+		<field name="moreData" uuid="37149C33991873498728BF3E83EA7207" type="21" blob_switch_size="2147483647" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="AF2E663EC28F5E4399FC4407F055FCC2"/>
 	</table>
 	<table name="RMA" uuid="A58980BC7EB27B42960AE8925366922F" id="44">
@@ -609,6 +633,7 @@
 		<field name="customerSvc" uuid="ECEED407BDBF3847AFEA02A47D368333" type="10" limiting_length="255" never_null="true" id="15"/>
 		<field name="stmpReceived" uuid="380979107F1E7E47828DDB054B1CC5D3" type="4" never_null="true" id="16"/>
 		<field name="customerPo" uuid="02789B7C609CBD46B36B634F4FF021AB" type="10" limiting_length="255" never_null="true" id="17"/>
+		<field name="moreData" uuid="717FC5141867714EA2D2F3EF3A5752D0" type="21" blob_switch_size="2147483647" never_null="true" id="18"/>
 		<primary_key field_name="UUID" field_uuid="7DE1FE0E75E78443A6CCEA990AC54031"/>
 	</table>
 	<table name="ControllingDepartment" uuid="C1BEBD5DDE0D1A45AEE41760FAE1229A" id="45">
@@ -623,6 +648,7 @@
 		<field name="color" uuid="A84069A790869C4DB30621E6F66F1565" type="10" limiting_length="255" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="moreData" uuid="AE55678CBFF42A42BD982A142E550320" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="1CB76A26D5B699429A95B9E10253FD00"/>
 	</table>
 	<table name="BuyingOrder" uuid="34498A1D7FE0BD4783FE5183EE6C5BA2" id="46">
@@ -679,16 +705,19 @@
 		<field name="termsCriticalService" uuid="E1DAE741F1D44B48AB30BF8A4469B24E" type="21" blob_switch_size="2147483647" never_null="true" id="23">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="moreData" uuid="EBFDD78066BBD14ABCCFAD417EFF51C8" type="21" blob_switch_size="2147483647" never_null="true" id="24"/>
 		<primary_key field_name="UUID" field_uuid="2C36FF767DF13E42905F5E16E2D31F5F"/>
 	</table>
 	<table name="Location" uuid="41A5B9E922A8A342822BE4F91D477117" id="47">
 		<field name="UUID" uuid="1C39B36C5D52F54096C15BB4C482030C" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="name" uuid="4D263CA35051EE43A90191B56A1ED7AF" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="moreData" uuid="61298F237C04FF4C8D8AEAE959AD6EBF" type="21" blob_switch_size="2147483647" never_null="true" id="3"/>
 		<primary_key field_name="UUID" field_uuid="1C39B36C5D52F54096C15BB4C482030C"/>
 	</table>
 	<table name="Unit" uuid="4953D4E1A4DBC44C9A5A17FAE5272A9A" id="48">
 		<field name="UUID" uuid="3FE414F572CC6D4D83E98816E5F8757A" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="name" uuid="5D4E11190BD79246ABA4B6C873D98C20" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="moreData" uuid="919F340DD7B8B740A7A09ACA9368B344" type="21" blob_switch_size="2147483647" never_null="true" id="3"/>
 		<primary_key field_name="UUID" field_uuid="3FE414F572CC6D4D83E98816E5F8757A"/>
 	</table>
 	<table name="Units" uuid="BBEF22543374E24BBC6534C68EA6E3D2" id="49">
@@ -699,6 +728,7 @@
 		</field>
 		<field name="name" uuid="66342D72F1BD1045A4476EDC0CFB80DA" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="color" uuid="C3C602807A2B7A4E9331F48E8166FCA9" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="moreData" uuid="0435743C11F6364C95F11BF1C190E590" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="2C3EE5FC26975842998856F7D02B3BA2"/>
 	</table>
 	<table name="LeadEvent" uuid="04F7E2A28A5349B4B0C70F6D644922BB" id="50">
@@ -750,6 +780,7 @@
 		<field name="UUID_Method" uuid="E0032020C5FC4E35A311A40ED4EF245B" type="10" store_as_UUID="true" never_null="true" id="11"/>
 		<field name="UUID_Outcome" uuid="7F025E2A765243A2BC9E00979FB9D560" type="10" store_as_UUID="true" never_null="true" id="12"/>
 		<field name="UUID_Interaction" uuid="3B1FDCAA377A43DB99C8AFA0198EFCF5" type="10" store_as_UUID="true" never_null="true" id="13"/>
+		<field name="moreData" uuid="F308BE72E72B674491D81DD41819D3FB" type="21" blob_switch_size="2147483647" never_null="true" id="14"/>
 		<primary_key field_name="UUID" field_uuid="26E185DCFBC74FF3AF6AD248B2DFF24C"/>
 	</table>
 	<table name="sfw_EventType" uuid="C482A0FBAE724304A8E05A0570FD55D6" id="52">
@@ -776,6 +807,7 @@
 		<field name="name" uuid="E74DC3AAF54543538DC9144636D64530" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="color" uuid="491956C0D96A4E54B03601F3A1E21839" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="levelID" uuid="B870F07E56C6431087A4C10FD9498893" type="3" never_null="true" id="5"/>
+		<field name="moreData" uuid="29904E8D389A4644A20CFD8B4E22E1E1" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="F7AEB814F6504C649074F8ABB1E85E01"/>
 	</table>
 	<table name="InteractionMethod" uuid="792557810EFF47988FA0FB782C00D29A" id="55">
@@ -786,6 +818,7 @@
 		<field name="name" uuid="7122C25DCFB1420E8A79A2C627B5EEC7" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="color" uuid="0D2C5911A364470D8717884D3C774D57" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="levelID" uuid="FB849C44CC3F48F58AFE34FC14572125" type="3" never_null="true" id="5"/>
+		<field name="moreData" uuid="CF6A7B6C1FCC3E4BACDE1B73CFAAD959" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="42B24EAE59DD4900B3A2BAF05FC016F1"/>
 	</table>
 	<table name="AML" uuid="BBADA9B28C42FC4AA02504E477DEF5BB" id="56">
@@ -836,6 +869,7 @@
 		<field name="isApproved" uuid="CF4A58BB76CA9643BC2AE13AE3E91EA4" type="1" never_null="true" id="21"/>
 		<field name="stmpApproval" uuid="5EC205F49069354E9F9AD6417AFA9C1C" type="4" never_null="true" id="22"/>
 		<field name="attachedDocuments" uuid="31CBB580D95617499D3A1AFB0E4C5989" type="21" blob_switch_size="2147483647" never_null="true" id="23"/>
+		<field name="moreData" uuid="4703702666B1A8429E29515803C2136A" type="21" blob_switch_size="2147483647" never_null="true" id="24"/>
 		<primary_key field_name="UUID" field_uuid="87371A3102B02347880B2FF579DAE670"/>
 	</table>
 	<table name="Supplier" uuid="A0C8CDC075BBB546914E03F7689B897E" id="57">
@@ -876,7 +910,8 @@
 	</table>
 	<table name="PartData" uuid="68D645D2E1989F4CA36E905F914AD868" id="58">
 		<field name="UUID" uuid="C1A74BC4B22D5045AF2DB98046B4965F" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="internalPartNum" uuid="7A85388CD512C046A81BE5DA02676256" type="10" limiting_length="255" never_null="true" id="3">
+		<field name="moreData" uuid="63E2BF75D9494344904062503C340DAD" type="21" blob_switch_size="2147483647" never_null="true" id="2"/>
+		<field name="internalPartNum" uuid="7A85388CD512C046A81BE5DA02676256" type="10" limiting_length="255" never_null="true" id="4">
 			<field_extra multi_line="false"/>
 		</field>
 		<primary_key field_name="UUID" field_uuid="C1A74BC4B22D5045AF2DB98046B4965F"/>
@@ -884,6 +919,7 @@
 	<table name="Classification" uuid="F31AF6CBA06D9D40BC44E9A83AA47D7E" id="59">
 		<field name="UUID" uuid="A643D54CE62FF14A8A5DF7520FE96178" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="name" uuid="B6E77424E1E4454ABDB882A43365E003" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="moreData" uuid="4B01261ECB836549B5E61A16E078B7A7" type="21" blob_switch_size="2147483647" never_null="true" id="3"/>
 		<primary_key field_name="UUID" field_uuid="A643D54CE62FF14A8A5DF7520FE96178"/>
 	</table>
 	<table name="Revision" uuid="29604671FA2A4476BBFC5BF467B80F05" id="60">
@@ -894,6 +930,7 @@
 		<field name="code" uuid="E923321DB669447C8EEADF3578BFD874" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="name" uuid="338CC40E187A4215A367882E574CCE0B" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="color" uuid="DA797FA43F604FEA90014A99C8F316F4" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="moreData" uuid="0336A38343BFD84B9346058C0E48305F" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="5F21577CC2BE493CA3F18E8E33520528"/>
 	</table>
 	<table name="QuoteEvent" uuid="9829CFB4F3294A3989861E788C0AF7D4" id="61">
@@ -929,12 +966,14 @@
 		<field name="document" uuid="F0AE336B4E76724C9D86BDF500104703" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
 		<field name="stmpCreationDate" uuid="37176F2858BE5A40BACB2EE2CB1DF714" type="4" never_null="true" id="6"/>
 		<field name="stmpPage" uuid="CFDD3A35D0E79540A097F1D9577DBB00" type="4" never_null="true" id="7"/>
+		<field name="moreData" uuid="5B3351C7C734DD4284043B0F8DA96E0D" type="21" blob_switch_size="2147483647" never_null="true" id="8"/>
 		<primary_key field_name="UUID" field_uuid="03E75EA1C2D7384BB331516DE41D1D6D"/>
 	</table>
 	<table name="StaffRole" uuid="3FCFA1819BB8A549A967817552E5B346" id="63">
 		<field name="UUID" uuid="DC50AD7F164D8F46AB20561207C737E1" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_Staff" uuid="925B000C01112B4294F0F04F09516F32" type="10" autogenerate="true" store_as_UUID="true" never_null="true" id="2"/>
 		<field name="UUID_Role" uuid="F366253E5C84F04CB554CDDE20773CD3" type="10" store_as_UUID="true" never_null="true" id="3"/>
+		<field name="moreData" uuid="8CCFD843EACF754AA6AEAB65BCDACCF8" type="21" blob_switch_size="2147483647" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="DC50AD7F164D8F46AB20561207C737E1"/>
 	</table>
 	<table name="BuyingOrderLine" uuid="E53D02B236D68C44A666FF404D6BE05B" id="64">
@@ -973,25 +1012,27 @@
 		<field name="supPsNumber" uuid="C1AE6FC76A8EB54890E2AFC141AC49E3" type="4" never_null="true" id="17">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="moreData" uuid="DABF5DD4F5A3DE4CB246FEDAB4A45FAE" type="21" blob_switch_size="2147483647" never_null="true" id="18"/>
 		<primary_key field_name="UUID" field_uuid="DD082E45822D34438F391901E3773042"/>
 	</table>
 	<table name="JobLineItem" uuid="C34CD032C4F6EB4C8F51682914D18AB0" id="65">
 		<field name="UUID" uuid="BF7D80F3E4F99D4BA932F724A65AA951" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="description" uuid="72123A149F801E44AFC4867D3C90BC7D" type="10" limiting_length="255" never_null="true" id="3"/>
-		<field name="quantity" uuid="3670FB8674AEBA448CB363DDB5E48DD9" type="4" never_null="true" id="4">
+		<field name="moreData" uuid="5EB4B39E949B6242986CECF703B46B79" type="21" blob_switch_size="2147483647" never_null="true" id="2"/>
+		<field name="description" uuid="72123A149F801E44AFC4867D3C90BC7D" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="quantity" uuid="3670FB8674AEBA448CB363DDB5E48DD9" type="4" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="unitPrice" uuid="992FA4920B7C1840BAE095CFDCA960FC" type="6" never_null="true" id="5">
+		<field name="unitPrice" uuid="992FA4920B7C1840BAE095CFDCA960FC" type="6" never_null="true" id="6">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="taxable" uuid="BE66B042EFFE3646B63079DE652DF6E3" type="1" never_null="true" id="6">
+		<field name="taxable" uuid="BE66B042EFFE3646B63079DE652DF6E3" type="1" never_null="true" id="7">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="lineTotal" uuid="1C23BE67AC38EE4DAE1FD295364BCAE0" type="6" never_null="true" id="7">
+		<field name="lineTotal" uuid="1C23BE67AC38EE4DAE1FD295364BCAE0" type="6" never_null="true" id="8">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="salesTax" uuid="7A2C91A58D47A741B7D4D5C73A91117C" type="6" never_null="true" id="9"/>
-		<field name="UUID_Job" uuid="D88B918D259EE0448B4256D3C123C909" type="10" store_as_UUID="true" never_null="true" id="11"/>
+		<field name="salesTax" uuid="7A2C91A58D47A741B7D4D5C73A91117C" type="6" never_null="true" id="10"/>
+		<field name="UUID_Job" uuid="D88B918D259EE0448B4256D3C123C909" type="10" store_as_UUID="true" never_null="true" id="12"/>
 		<primary_key field_name="UUID" field_uuid="BF7D80F3E4F99D4BA932F724A65AA951"/>
 	</table>
 	<table name="AuditEvent" uuid="3382E9847A639840BEB98DE07BAF4613" id="66">
@@ -1022,6 +1063,7 @@
 		<field name="invoiceNumber" uuid="B62D8270332604438E6883BE1DB5007F" type="10" limiting_length="255" unique="true" never_null="true" id="8"/>
 		<field name="orderItemsCharges" uuid="AFF52F89F9D34F4684CEB3CF762975B3" type="6" never_null="true" id="9"/>
 		<field name="UUID_Job" uuid="23BC7DB129B8C44583BCD2B16ED41753" type="10" store_as_UUID="true" never_null="true" id="10"/>
+		<field name="moreData" uuid="53874558C2024340A5655C2653BC5096" type="21" blob_switch_size="2147483647" never_null="true" id="11"/>
 		<primary_key field_name="UUID" field_uuid="665BE88AE92589409E64B35A9DB0075E"/>
 	</table>
 	<table name="DivisionInfo" uuid="6BD779120B353443AB63B97FD27C1351" id="68">
@@ -1029,10 +1071,11 @@
 		<field name="UUID_Division" uuid="5E981E007AACAB40827C10DAA4897F56" type="10" unique="true" store_as_UUID="true" never_null="true" id="2"/>
 		<field name="site" uuid="34AA22257896AC45BC7FDCAE506AD0FB" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="payTo" uuid="9F293C619A5B7248BA26BB51C7EC163F" type="10" limiting_length="255" never_null="true" id="4"/>
-		<field name="parent" uuid="199B2EB631AAB34C8037E61E94F3F18D" type="1" never_null="true" id="6">
+		<field name="moreData" uuid="084AD3A3CF89734F83CB7E464C318488" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
+		<field name="parent" uuid="199B2EB631AAB34C8037E61E94F3F18D" type="1" never_null="true" id="7">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="contactDetails" uuid="C343129D357F8F44AE1F9021A00895D8" type="21" blob_switch_size="2147483647" never_null="true" id="7"/>
+		<field name="contactDetails" uuid="C343129D357F8F44AE1F9021A00895D8" type="21" blob_switch_size="2147483647" never_null="true" id="8"/>
 		<primary_key field_name="UUID" field_uuid="EAFD50ABF7723348A09876EBD72C02F7"/>
 	</table>
 	<table name="sfw_Notification" uuid="5B73B25D951B4B17AB99971FB0079E64" id="69">
@@ -1073,6 +1116,7 @@
 		<field name="UUID" uuid="D694579CEB4CD741865BD4C94B64E596" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="code" uuid="AACAC371F0D228479882CC4698A20308" type="10" limiting_length="255" never_null="true" id="2"/>
 		<field name="rate" uuid="42D2A1E35CD08C429568794FFF151509" type="6" never_null="true" id="3"/>
+		<field name="moreData" uuid="4601522333A17347A385730547F74E3A" type="21" blob_switch_size="2147483647" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="D694579CEB4CD741865BD4C94B64E596"/>
 	</table>
 	<table name="CAO" uuid="F580775371C0FC479B47D767C6CA2D9F" id="73">
@@ -1104,6 +1148,7 @@
 		<field name="isInacActive" uuid="1F401707FB1C4B49922C3FF51538E38F" type="1" never_null="true" id="10"/>
 		<field name="isSubaccount" uuid="83EB32DE8F19C64F9C3807E5F726A634" type="1" never_null="true" id="11"/>
 		<field name="UUID_ParentAccount" uuid="59F59B14BA3D334E950CA0E04F61C6CD" type="10" store_as_UUID="true" never_null="true" id="12"/>
+		<field name="moreData" uuid="0A8F5FDDF0CB7C43A72C777DC119505C" type="21" blob_switch_size="2147483647" never_null="true" id="13"/>
 		<primary_key field_name="UUID" field_uuid="65FB781A111BBA4A9C7EAE76C9C35795"/>
 	</table>
 	<table name="CAOType" uuid="9BE9AE3D0CAD0E468514C2CB9ADAD6F0" id="74">
@@ -1118,6 +1163,7 @@
 		<field name="color" uuid="A9D2060243983741B9BDD463ECF091D4" type="10" limiting_length="255" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="moreData" uuid="C93763390239934A88FA9F0EA4DE4EB6" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="AF9343A77DF3D247B8E8DBB7B2731793"/>
 	</table>
 	<table name="CAOTypeDetail" uuid="71B4B2295DE0A644A1A75B747DA00375" id="75">
@@ -1134,6 +1180,7 @@
 		<field name="color" uuid="3A1830B3F0B1404E9A79AC1CFD47ACC5" type="10" limiting_length="255" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="moreData" uuid="EB3883808A23F74BB252C4D8B8521B1B" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="F14284E7477D8D4BBF2407848DC069C8"/>
 	</table>
 	<table name="Asset" uuid="2A5FFBEA0CA13546A52A683860C62D9A" id="76">
@@ -1145,13 +1192,14 @@
 		<field name="UUID_PurchaseOrder" uuid="82A10DEE95CF0249AA3E3115D4B5D78D" type="10" store_as_UUID="true" never_null="true" id="6"/>
 		<field name="originalCost" uuid="BACD4F64BD5D034D9F5A4A37E26E2BB3" type="6" never_null="true" id="7"/>
 		<field name="salvage" uuid="4DE5ED8C0EDFFB4FBE9A02DDDF9100A2" type="10" limiting_length="255" never_null="true" id="8"/>
-		<field name="lifePerTax" uuid="B8CBD640BAA6954F948079E710615EE7" type="10" limiting_length="255" never_null="true" id="10"/>
-		<field name="currentMonthDepreciation" uuid="C9F5087E0C94124EB8755D812B4777D3" type="10" limiting_length="255" never_null="true" id="12"/>
-		<field name="life" uuid="B3AD7DDA49643147B8F003B01DC00B34" type="3" never_null="true" id="13"/>
-		<field name="isScrapped" uuid="778BDCA5650B6A4AA1C4A1486D30A4EE" type="1" never_null="true" id="14"/>
-		<field name="divestStmp" uuid="BE511C5A6504424BBF28BF0E8B2B6640" type="4" never_null="true" id="15"/>
-		<field name="excludeFmDepreciationList" uuid="10586EF0D30A364AAF11A4D164C52C4D" type="1" never_null="true" id="16"/>
-		<field name="acquiredStmp" uuid="74AA24FF64853E4E9AADBCBB97A60696" type="4" never_null="true" id="17"/>
+		<field name="moreData" uuid="05FD2C62965518478D15B8F2EB919C2C" type="21" blob_switch_size="2147483647" never_null="true" id="9"/>
+		<field name="lifePerTax" uuid="B8CBD640BAA6954F948079E710615EE7" type="10" limiting_length="255" never_null="true" id="11"/>
+		<field name="currentMonthDepreciation" uuid="C9F5087E0C94124EB8755D812B4777D3" type="10" limiting_length="255" never_null="true" id="13"/>
+		<field name="life" uuid="B3AD7DDA49643147B8F003B01DC00B34" type="3" never_null="true" id="14"/>
+		<field name="isScrapped" uuid="778BDCA5650B6A4AA1C4A1486D30A4EE" type="1" never_null="true" id="15"/>
+		<field name="divestStmp" uuid="BE511C5A6504424BBF28BF0E8B2B6640" type="4" never_null="true" id="16"/>
+		<field name="excludeFmDepreciationList" uuid="10586EF0D30A364AAF11A4D164C52C4D" type="1" never_null="true" id="17"/>
+		<field name="acquiredStmp" uuid="74AA24FF64853E4E9AADBCBB97A60696" type="4" never_null="true" id="18"/>
 		<primary_key field_name="UUID" field_uuid="F7A86C3065419D4680941CAC657A43B7"/>
 	</table>
 	<table name="AssetType" uuid="14147D8EB06A0B4DA397400A67A5F1C6" id="77">
@@ -1166,6 +1214,7 @@
 		<field name="color" uuid="F3061A047376A742BAB1B438E76A52B9" type="10" limiting_length="255" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="moreData" uuid="700B0930280B8B4BA98A5292AC601A09" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="0EC0E81B04921E4DAFEA472DC5D0C354"/>
 	</table>
 	<table name="CreditMemo" uuid="742061D6375A2B43B9C36073A1C58ABA" id="78">
@@ -1191,6 +1240,7 @@
 		<field name="approvedBy" uuid="D39F4526BDA7554E92060202B84C2867" type="10" limiting_length="255" never_null="true" id="10">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="moreData" uuid="0CFE8D337C721D43A7BEE1398E5F3909" type="21" blob_switch_size="2147483647" never_null="true" id="11"/>
 		<primary_key field_name="UUID" field_uuid="23E2B2C1C1B0BC40B998AE5899B77F0F"/>
 	</table>
 	<table name="CMItem" uuid="EB7DFA80F73C13439169DB6F9D657543" id="79">
@@ -1203,6 +1253,7 @@
 		<field name="UUID_Customer" uuid="05C61772B64B4849BCAFBA6BF9A4F345" type="10" store_as_UUID="true" never_null="true" id="5"/>
 		<field name="salesTaxPortion" uuid="736540D43BAC79419F6EC7B03D16A567" type="6" never_null="true" id="6"/>
 		<field name="UUID_CreditMemo" uuid="6EA1295900E8744C9AEFD442B6ABB5C3" type="10" store_as_UUID="true" never_null="true" id="7"/>
+		<field name="moreData" uuid="C632A3BB1442D54B9C49B088C0225868" type="21" blob_switch_size="2147483647" never_null="true" id="8"/>
 		<primary_key field_name="UUID" field_uuid="2AA014FD5078A94F99E4DBC284E82B2A"/>
 	</table>
 	<table name="sfw_UserInscription" uuid="AC225FD836FF49F7841FC1B78EC96243" id="81">
@@ -1274,6 +1325,7 @@
 		<field name="codeNumber" uuid="8F7DD9B9CFD54E35B8F6F27F62B3133A" type="4" never_null="true" id="9"/>
 		<field name="accountNum" uuid="2B66CF6D4B0349D99F372D1F4BAD6F4F" type="10" limiting_length="255" never_null="true" id="10"/>
 		<field name="ftp" uuid="4D0C1F15F7D742BFB42D5259BA6576F6" type="21" blob_switch_size="2147483647" never_null="true" id="11"/>
+		<field name="moreData" uuid="DD18E443B5BE6B4FB18A89D692A3C443" type="21" blob_switch_size="2147483647" never_null="true" id="12"/>
 		<primary_key field_name="UUID" field_uuid="37676CD94E8B423595ED98B5C0E9CF89"/>
 	</table>
 	<table name="PurchaseOrder" uuid="CCC415D8C3C546D09E90E672FE1988CF" id="115">
@@ -1307,6 +1359,7 @@
 		<field name="UUID_Quote" uuid="1FBF2EAB42691642930AB78E5C113913" type="10" store_as_UUID="true" never_null="true" id="24"/>
 		<field name="taxApplied" uuid="5FFD8A5DD47F4CC3B8DC04EDCEECE371" type="1" never_null="true" id="25"/>
 		<field name="taxPercentage" uuid="EB6CA36B465344DFB50756E3CB68BFF0" type="6" never_null="true" id="26"/>
+		<field name="moreData" uuid="3A76901A334B9942AB8026A8EB31A92A" type="21" blob_switch_size="2147483647" never_null="true" id="27"/>
 		<primary_key field_name="UUID" field_uuid="9C187AB4BBD84246AF62E935FF20415E"/>
 	</table>
 	<table name="PurchaseOrderLine" uuid="2CC1E163267E4DFE808464C271CC4C9F" id="116">
@@ -1334,6 +1387,7 @@
 		<field name="taxable" uuid="ADE114514884474BB99D61037D6A0263" type="1" never_null="true" id="18"/>
 		<field name="saleTax" uuid="3AC96A766FA76A4DA767C37743C9F42D" type="6" never_null="true" id="19"/>
 		<field name="total" uuid="4EB996748881404BBB4AAAAB32741AB7" type="6" never_null="true" id="20"/>
+		<field name="moreData" uuid="A6640AF1B053F04B8A6AA31103E4BCA2" type="21" blob_switch_size="2147483647" never_null="true" id="21"/>
 		<primary_key field_name="UUID" field_uuid="EB0656993E0B478582FC3B4868BE55FC"/>
 	</table>
 	<table name="Job" uuid="D3AC71CFD00F4948816121AA74EF8DFE" id="117">
@@ -1395,6 +1449,7 @@
 		<field name="inventoryCost" uuid="829DC14C06E9C749983A5F8363FC093E" type="6" never_null="true" id="50"/>
 		<field name="directCost" uuid="61CFBDDFD41A544B9119E8CA97CC6669" type="6" never_null="true" id="51"/>
 		<field name="UUID_Customer" uuid="41A726B6A46D804E9FFC1C4F3C2FB0B1" type="10" store_as_UUID="true" never_null="true" id="52"/>
+		<field name="moreData" uuid="FD094CF90FA71B4EB617A6595693A110" type="21" blob_switch_size="2147483647" never_null="true" id="53"/>
 		<primary_key field_name="UUID" field_uuid="D70DED62813D485DA8CFB0CFD1FF994C"/>
 	</table>
 	<table name="Lot" uuid="67220A81398C4000A84C1F180E368020" id="118">
@@ -1445,10 +1500,12 @@
 		<field name="shipRel" uuid="F792354104D250419A635B5CEA955144" type="4" never_null="true" id="43"/>
 		<field name="totalCharge" uuid="006ACEB1C6FFE9449C5F03EF9E11441A" type="6" never_null="true" id="44"/>
 		<field name="unitCost" uuid="A6BF0EEA9B282E4F9F6CB5C0DB8B212E" type="6" never_null="true" id="45"/>
+		<field name="moreData" uuid="DC5D71A96D03344CBABBEABD99B742F4" type="21" blob_switch_size="2147483647" never_null="true" id="46"/>
 		<primary_key field_name="UUID" field_uuid="AEF78036FB7D429A96DF35BE53A0E0AF"/>
 	</table>
 	<table name="StepFile" uuid="A6301A2C994D4680A851FC2AE85118BE" id="119">
 		<field name="UUID" uuid="B1C018048ECD473CB25C3F879D15164C" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="moreData" uuid="B66853ED84C36841B83BF1483363C8EA" type="21" blob_switch_size="2147483647" never_null="true" id="2"/>
 		<primary_key field_name="UUID" field_uuid="B1C018048ECD473CB25C3F879D15164C"/>
 	</table>
 	<table name="Step" uuid="73EFE2D78C61400397353509CBA87D18" id="120">
@@ -1461,6 +1518,7 @@
 		<field name="specification" uuid="200CC3EEAB9DEA419A347C450B5123A4" type="10" limiting_length="255" never_null="true" id="5"/>
 		<field name="areas" uuid="874E3CD01538034CAE6F623D6FE639AF" type="10" limiting_length="255" never_null="true" id="6"/>
 		<field name="operationCode" uuid="30C8C57D94AFE7499EF72CA3A15D8650" type="10" limiting_length="255" never_null="true" id="7"/>
+		<field name="moreData" uuid="07BB854D1999E54DADA7CDCC1B5C232C" type="21" blob_switch_size="2147483647" never_null="true" id="8"/>
 		<primary_key field_name="UUID" field_uuid="3C357DD66006453994A5995B3E57D007"/>
 	</table>
 	<table name="StepTemplate" uuid="6330FD4D08D74130BF3869222CDECBA6" id="121">
@@ -1480,6 +1538,7 @@
 		<field name="templateNumber" uuid="B598301DF5C0394E96AB0B31EB3B320D" type="4" never_null="true" id="14"/>
 		<field name="settings" uuid="03EE819B2D714444B932D9A45A4019B6" type="21" blob_switch_size="2147483647" never_null="true" id="15"/>
 		<field name="areas" uuid="BBD8E635D0E5904191F9484E27067B61" type="10" limiting_length="255" never_null="true" id="16"/>
+		<field name="moreData" uuid="F7586EDB8E350841BCE86C2750582275" type="21" blob_switch_size="2147483647" never_null="true" id="17"/>
 		<primary_key field_name="UUID" field_uuid="3E46CC22F2F34DC0B68C304E1BC47991"/>
 	</table>
 	<table name="ToolType" uuid="C0C5EF5A4CD04FF7BB3897793A9DE6ED" id="122">
@@ -1487,6 +1546,7 @@
 		<field name="name" uuid="A0367347E17D48119DA48858766EF6F2" type="10" limiting_length="255" never_null="true" id="2"/>
 		<field name="type" uuid="1B6E1550C757446CBC6E4C0D210225D3" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="date" uuid="12FB9C6D0AD44B7686AFC590437526A6" type="8" never_null="true" id="4"/>
+		<field name="moreData" uuid="FC9FBDE85E285A41B62A4C3E92D6C428" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
 		<primary_key field_name="UUID" field_uuid="99E586D88F7844DC88C7D6EB4AABFEFE"/>
 	</table>
 	<table name="StepTemplateTool" uuid="12C47689CD7449C5B91DA7E216FC5FC3" id="123">
@@ -1494,6 +1554,7 @@
 		<field name="UUID_Tool" uuid="951D3770910B43BBBFCAB95E4B3A1C65" type="10" store_as_UUID="true" never_null="true" id="2"/>
 		<field name="UUID_StepTemplate" uuid="ABAA4737CB084A23A5749664C3DD08B2" type="10" store_as_UUID="true" never_null="true" id="3"/>
 		<field name="order" uuid="1B372B89F4C1BA40BB4A115CEEA3743E" type="4" never_null="true" id="4"/>
+		<field name="moreData" uuid="DF3D78747BDE96489F69276391D599C4" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
 		<primary_key field_name="UUID" field_uuid="4040F42F6150451FA3FB8EB06B445ED9"/>
 	</table>
 	<table name="Certification" uuid="71FD451F60934C9995C7A6D899CA2B51" id="124">
@@ -1502,6 +1563,7 @@
 		<field name="ref" uuid="66AE759FD5E4834687653ACC2ECBF0BE" type="4" unique="true" never_null="true" id="3"/>
 		<field name="duration" uuid="2C416E8F43E7FF47873E9F787A42DB2F" type="4" never_null="true" id="4"/>
 		<field name="oneTime" uuid="12EA1AFB18F4154F883825FDFD517862" type="1" never_null="true" id="5"/>
+		<field name="moreData" uuid="9B5E7B4A9314C44692992B295AA83BD9" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="46A023E9F16E49DBA21C7DCCBAA82770"/>
 	</table>
 	<table name="StepTemplateCertification" uuid="7A8F1179566C46A6AB8E4B04DD19B496" id="125">
@@ -1510,6 +1572,7 @@
 		<field name="UUID_StepTemplate" uuid="DB99D889130B4E138C02DC979C707EAE" type="10" store_as_UUID="true" never_null="true" id="3">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="moreData" uuid="14CB24A9EC5B384A8A7DBF76D927BD3D" type="21" blob_switch_size="2147483647" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="06082B4C48E941B1831630EDE47BA25D"/>
 	</table>
 	<table name="Inventory" uuid="CA853413921F4B2A9BC70E6DE5F88235" id="126">
@@ -1544,6 +1607,7 @@
 		<field name="comment" uuid="BA0A6F1EB17AA8419A0EAABDE0BB0E22" type="10" limiting_length="255" never_null="true" id="29"/>
 		<field name="code" uuid="F4DBA643456B0848A381697242190228" type="10" limiting_length="255" never_null="true" id="30"/>
 		<field name="docsInServer" uuid="1676C0FBCD6B4D448328B62C56F0DB43" type="4" never_null="true" id="31"/>
+		<field name="moreData" uuid="A07EECF43AE0BE48818EB9E6B3D3CCC2" type="21" blob_switch_size="2147483647" never_null="true" id="32"/>
 		<primary_key field_name="UUID" field_uuid="F8D9EC71ECF843689AA0D416563422DC"/>
 	</table>
 	<table name="InventoryPull" uuid="B0A466FC99334B96B5FE810BAE186DC4" id="127">
@@ -1554,9 +1618,10 @@
 		<field name="remaining" uuid="9CE1D93CE4DE694AB35F257B1E8BBD86" type="4" never_null="true" id="5"/>
 		<field name="date" uuid="DDCC3B57DE2B7C438D3018B84449744B" type="4" never_null="true" id="6"/>
 		<field name="jobNumber" uuid="4036B8D59A9A6443BAFF12DABACFB4FA" type="4" never_null="true" id="7"/>
-		<field name="performedBy" uuid="7D43065F5CF10E43B49EFD464C3DBAD5" type="10" limiting_length="255" never_null="true" id="9"/>
-		<field name="statusIQA" uuid="63B55B293028584B9AECB90EC9ACC7A9" type="10" limiting_length="255" never_null="true" id="10"/>
-		<field name="lotNumber" uuid="6FAF1168A73F1C41AA8EF9CDCCF2847D" type="10" limiting_length="255" never_null="true" id="15"/>
+		<field name="moreData" uuid="A00C174F0EA26D42AE8BFF1348837DE4" type="21" blob_switch_size="2147483647" never_null="true" id="8"/>
+		<field name="performedBy" uuid="7D43065F5CF10E43B49EFD464C3DBAD5" type="10" limiting_length="255" never_null="true" id="10"/>
+		<field name="statusIQA" uuid="63B55B293028584B9AECB90EC9ACC7A9" type="10" limiting_length="255" never_null="true" id="11"/>
+		<field name="lotNumber" uuid="6FAF1168A73F1C41AA8EF9CDCCF2847D" type="10" limiting_length="255" never_null="true" id="16"/>
 		<primary_key field_name="UUID" field_uuid="627A32C87CCB4069BFFC9D5D94AE4473"/>
 	</table>
 	<table name="Quote" uuid="98A20403539048D2B775AEAED975966B" id="128">
@@ -1591,6 +1656,7 @@
 		<field name="unitPrice" uuid="126E581B1DD0412C95B1B2129E2F0197" type="6" never_null="true" id="4"/>
 		<field name="description" uuid="14E872702E7249AFBA7A6BF1CF53D2A2" type="10" never_null="true" id="5"/>
 		<field name="num" uuid="F3B0D504DDC3476E858B2D6367A94F0C" type="4" never_null="true" id="6"/>
+		<field name="moreData" uuid="C280C8901429314C8600A589EB6A5F41" type="21" blob_switch_size="2147483647" never_null="true" id="7"/>
 		<primary_key field_name="UUID" field_uuid="5520537F6684489F9BB29D56C4A9F2C6"/>
 	</table>
 	<table name="CustomerStatus" uuid="CF8DC4373C97487884111398B4383812" id="130">
@@ -1601,11 +1667,13 @@
 		<field name="color" uuid="BC721D564E5AF843A984382F5E9C0FDB" type="10" limiting_length="255" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="moreData" uuid="7A7D1C9F65C4E34EA077A9B408E1B9E1" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="9C6030E6F9384C39A4FDB9E6453F235A"/>
 	</table>
 	<table name="Role" uuid="894004274A3B4909A39584EC0B879D18" id="132">
 		<field name="UUID" uuid="8D9FB8C795534689B56DE1CC69FD3D14" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="name" uuid="99BB28C34588457F89FCF838E93A19BD" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="moreData" uuid="8CA10D3032DBD74684AD5A3B8EF30AB9" type="21" blob_switch_size="2147483647" never_null="true" id="3"/>
 		<primary_key field_name="UUID" field_uuid="8D9FB8C795534689B56DE1CC69FD3D14"/>
 	</table>
 	<table name="QuoteStatus" uuid="6059D6A0DACF42889F97EAD171DE9723" id="133">
@@ -1618,6 +1686,7 @@
 		<field name="color" uuid="089809E0229C476BA6EA9DA1F9788B9C" type="10" limiting_length="255" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="moreData" uuid="8061AEE6427E2249BC671DFEAC27744E" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="6A2CE8BD47C44B8EAC7B0C5C14CD21DB"/>
 	</table>
 	<table name="CertificationAssignment" uuid="061A7E4F30DD8C46A92C801EB9B9ACC5" id="134">
@@ -1626,6 +1695,7 @@
 		<field name="UUID_Certification" uuid="76DD5A5DDBC91146A24857EF820BB589" type="10" store_as_UUID="true" never_null="true" id="3"/>
 		<field name="certificationDate" uuid="FEAF37B2E5CD0144B364A0AD7D00A310" type="4" never_null="true" id="4"/>
 		<field name="expiredIn" uuid="9D053CBCB6006843B6342AD00FAECD72" type="4" never_null="true" id="5"/>
+		<field name="moreData" uuid="DBA3BD0EFD5BE04D83487485D8AAC463" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="5692BDD57E88304092FB8E31BA284F2D"/>
 	</table>
 	<table name="Staff" uuid="FD10D10C9E0015458AFF59F988A373BB" id="135">
@@ -1654,12 +1724,14 @@
 		<field name="UUID" uuid="2407878C5D46474F9669463CE4A10D45" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="levelID" uuid="38C4DA5CA6FC7341BBEEABE68E6A01FA" type="4" never_null="true" id="2"/>
 		<field name="name" uuid="9911EF98C0E7C941827A98923504109D" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="moreData" uuid="B862FA4F76F00A4F95BA99A828C9527D" type="21" blob_switch_size="2147483647" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="2407878C5D46474F9669463CE4A10D45"/>
 	</table>
 	<table name="Membership" uuid="89B8693B8BA31D46A5E7CC5F40548E73" id="137">
 		<field name="UUID" uuid="57B2843F4E0D9844849760E738191BA9" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_Staff" uuid="0CA34F14FEE5FF429B1A694BD2DD1C6B" type="10" store_as_UUID="true" never_null="true" id="2"/>
 		<field name="UUID_Team" uuid="378FB0F2EB71F243BA08605B15A340E4" type="10" store_as_UUID="true" never_null="true" id="3"/>
+		<field name="moreData" uuid="C69CB509C7A7854CBDD7875DF4E727D2" type="21" blob_switch_size="2147483647" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="57B2843F4E0D9844849760E738191BA9"/>
 	</table>
 	<table name="Qcar" uuid="446AB1ED27F3664C9C9747DD14114EF2" id="138">
@@ -1673,22 +1745,23 @@
 		<field name="revisionDate" uuid="7891632079BA28459B431B9F8CEEF120" type="8" never_null="true" id="8"/>
 		<field name="initialResponse" uuid="BDB0BDD27F533246B95F4932EA9FAE2F" type="10" limiting_length="255" never_null="true" id="9"/>
 		<field name="initiator8D" uuid="15257E6F093C3347AE0A93CFCAAD80D2" type="10" limiting_length="255" never_null="true" id="10"/>
-		<field name="verifiedBy" uuid="E97BB2497556B4448868D3412B7DE3AF" type="10" limiting_length="255" never_null="true" id="12">
+		<field name="moreData" uuid="D5AA33269621A046BD2A0DAB0E50F7EA" type="21" blob_switch_size="2147483647" never_null="true" id="11"/>
+		<field name="verifiedBy" uuid="E97BB2497556B4448868D3412B7DE3AF" type="10" limiting_length="255" never_null="true" id="13">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="void" uuid="C936F2AC2824B44DB3D7EA6A1BD326C8" type="1" never_null="true" id="13"/>
-		<field name="submit" uuid="3DD04D5C50CC8048985037684A78C8E0" type="1" never_null="true" id="14"/>
-		<field name="submitDate" uuid="19183AA58CC5DE4297EA1A81E1D6E652" type="8" never_null="true" id="15"/>
-		<field name="category" uuid="1EFFD250540A5C42ABDA48B40C2B1DC5" type="10" limiting_length="255" never_null="true" id="16"/>
-		<field name="issuedBy" uuid="DA02EB22A8AF3649BBADB5854B94A74A" type="10" limiting_length="255" never_null="true" id="17"/>
-		<field name="issuedTo" uuid="5CFBA75EF365C04A9879CA74CFD4169D" type="10" limiting_length="255" never_null="true" id="18"/>
-		<field name="issuedDate" uuid="9AF8CA702C2C7448806FCD7CB0F76A9B" type="8" never_null="true" id="19"/>
-		<field name="verifiedDate" uuid="0B85C7C16DCE9747A40CD5980B0F4C9E" type="8" never_null="true" id="20"/>
-		<field name="inLine" uuid="5B4D465362DD5F49B47F51360FE6FC0C" type="1" never_null="true" id="21"/>
-		<field name="internal" uuid="F49902FC522A7C4FB90630EBE787A9D4" type="1" never_null="true" id="22"/>
-		<field name="correctiveActionReport" uuid="1701324EEA8F954597D6F9CC393FB6AA" type="21" blob_switch_size="2147483647" never_null="true" id="23"/>
-		<field name="closedDate" uuid="2395A06581078341A84621D83B30DE97" type="8" never_null="true" id="24"/>
-		<field name="verified" uuid="B5317F2936DAA84688754D5AD27F203A" type="1" never_null="true" id="25"/>
+		<field name="void" uuid="C936F2AC2824B44DB3D7EA6A1BD326C8" type="1" never_null="true" id="14"/>
+		<field name="submit" uuid="3DD04D5C50CC8048985037684A78C8E0" type="1" never_null="true" id="15"/>
+		<field name="submitDate" uuid="19183AA58CC5DE4297EA1A81E1D6E652" type="8" never_null="true" id="16"/>
+		<field name="category" uuid="1EFFD250540A5C42ABDA48B40C2B1DC5" type="10" limiting_length="255" never_null="true" id="17"/>
+		<field name="issuedBy" uuid="DA02EB22A8AF3649BBADB5854B94A74A" type="10" limiting_length="255" never_null="true" id="18"/>
+		<field name="issuedTo" uuid="5CFBA75EF365C04A9879CA74CFD4169D" type="10" limiting_length="255" never_null="true" id="19"/>
+		<field name="issuedDate" uuid="9AF8CA702C2C7448806FCD7CB0F76A9B" type="8" never_null="true" id="20"/>
+		<field name="verifiedDate" uuid="0B85C7C16DCE9747A40CD5980B0F4C9E" type="8" never_null="true" id="21"/>
+		<field name="inLine" uuid="5B4D465362DD5F49B47F51360FE6FC0C" type="1" never_null="true" id="22"/>
+		<field name="internal" uuid="F49902FC522A7C4FB90630EBE787A9D4" type="1" never_null="true" id="23"/>
+		<field name="correctiveActionReport" uuid="1701324EEA8F954597D6F9CC393FB6AA" type="21" blob_switch_size="2147483647" never_null="true" id="24"/>
+		<field name="closedDate" uuid="2395A06581078341A84621D83B30DE97" type="8" never_null="true" id="25"/>
+		<field name="verified" uuid="B5317F2936DAA84688754D5AD27F203A" type="1" never_null="true" id="26"/>
 		<primary_key field_name="UUID" field_uuid="129BD267EFE06D4EBCF1E64FCE762186"/>
 	</table>
 	<table name="Audit" uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" id="139">
@@ -1700,41 +1773,42 @@
 		<field name="supervisor" uuid="32B9133DC66E064AA45B12BA8F433CBA" type="10" limiting_length="255" never_null="true" id="4">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="stmpCreationDate" uuid="1B32511C08D7CD4085801214B347A169" type="4" never_null="true" id="6">
+		<field name="moreData" uuid="7B021202B71FF34DBF2EE596687CDE4E" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
+		<field name="stmpCreationDate" uuid="1B32511C08D7CD4085801214B347A169" type="4" never_null="true" id="7">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="title" uuid="3DAE7A8540AA97418C34DEF66580AA4F" type="10" limiting_length="255" never_null="true" id="7">
+		<field name="title" uuid="3DAE7A8540AA97418C34DEF66580AA4F" type="10" limiting_length="255" never_null="true" id="8">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="storageFilename" uuid="5A8A41C8A1EA534C8FFA52AA685F6AF9" type="10" limiting_length="255" never_null="true" id="8">
+		<field name="storageFilename" uuid="5A8A41C8A1EA534C8FFA52AA685F6AF9" type="10" limiting_length="255" never_null="true" id="9">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="UUID_AuditStatus" uuid="A8752F9F9EA00D49B87C2D3786BA417A" type="10" store_as_UUID="true" never_null="true" id="9"/>
-		<field name="document" uuid="C2A72C4EEAE0AE45AD2EA09A70F6C145" type="21" blob_switch_size="2147483647" never_null="true" id="10"/>
-		<field name="type" uuid="7C26ABF75C254B4CAEE237698AB70407" type="10" limiting_length="255" never_null="true" id="11">
+		<field name="UUID_AuditStatus" uuid="A8752F9F9EA00D49B87C2D3786BA417A" type="10" store_as_UUID="true" never_null="true" id="10"/>
+		<field name="document" uuid="C2A72C4EEAE0AE45AD2EA09A70F6C145" type="21" blob_switch_size="2147483647" never_null="true" id="11"/>
+		<field name="type" uuid="7C26ABF75C254B4CAEE237698AB70407" type="10" limiting_length="255" never_null="true" id="12">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="activities" uuid="1196179170EB774E911DB9970A168273" type="21" blob_switch_size="2147483647" never_null="true" id="12"/>
-		<field name="auditTeam" uuid="1E5EF93B7320A24E8F9E93B474D9694A" type="21" blob_switch_size="2147483647" never_null="true" id="13">
+		<field name="activities" uuid="1196179170EB774E911DB9970A168273" type="21" blob_switch_size="2147483647" never_null="true" id="13"/>
+		<field name="auditTeam" uuid="1E5EF93B7320A24E8F9E93B474D9694A" type="21" blob_switch_size="2147483647" never_null="true" id="14">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="UUID_Team" uuid="DBBC9E80F752DA41B020E37A427026A0" type="10" store_as_UUID="true" never_null="true" id="14"/>
-		<field name="UUID_Company" uuid="2DB51CB40B38B84999B7E4D2B4FDCF7D" type="10" store_as_UUID="true" never_null="true" id="15"/>
-		<field name="scope" uuid="8E0E8373DAB562408B730459DD2A881F" type="10" never_null="true" id="16"/>
-		<field name="objectives" uuid="9A4C1C5F3931294483602CD3E64FD393" type="10" never_null="true" id="17"/>
-		<field name="comments" uuid="D450D27C2ABEE841AF9ABC6ADC16B722" type="10" never_null="true" id="18"/>
-		<field name="findings" uuid="C04787E0917C584EB853F8F296FC48A5" type="10" never_null="true" id="19"/>
-		<field name="overallStatus" uuid="336E72168BEC7A4DB4AE02EF8CD1679A" type="10" limiting_length="255" never_null="true" id="20"/>
-		<field name="remainingGaps" uuid="610880615F16A549883CD8C7F6A539C8" type="10" never_null="true" id="21"/>
-		<field name="recommendations" uuid="BB71C8B54027AA4781F83F3C95FDFED7" type="10" never_null="true" id="22"/>
-		<field name="auditorSignature" uuid="6C5F11D904600845B498172BD54D5FA4" type="10" limiting_length="255" never_null="true" id="23"/>
-		<field name="AuditeeSignature" uuid="2A5724F5EBC6BA4B94CBD5F616117718" type="10" limiting_length="255" never_null="true" id="24"/>
-		<field name="IsNCRCorrected" uuid="5A95DB912ED7B442A440B37E7A539031" type="1" never_null="true" id="25"/>
-		<field name="IsCAEffective" uuid="F88991A804E04C4CB8479AC6D5867381" type="1" never_null="true" id="26"/>
-		<field name="IsOFIImplemented" uuid="888D702B9E5FBB4F8DBEAE3474D05C0E" type="1" never_null="true" id="27"/>
-		<field name="IsNewRisksExists" uuid="481A5D63ACFB0A469347D0C9FBE71B9A" type="1" never_null="true" id="28"/>
-		<field name="UUID_ProcessType" uuid="DE3F29F4218B284ABEA12A65E65EDEC8" type="10" store_as_UUID="true" never_null="true" id="29"/>
-		<field name="auditReport" uuid="66ADA768650DFA4C8C95696D044352D7" type="21" blob_switch_size="2147483647" never_null="true" id="30"/>
+		<field name="UUID_Team" uuid="DBBC9E80F752DA41B020E37A427026A0" type="10" store_as_UUID="true" never_null="true" id="15"/>
+		<field name="UUID_Company" uuid="2DB51CB40B38B84999B7E4D2B4FDCF7D" type="10" store_as_UUID="true" never_null="true" id="16"/>
+		<field name="scope" uuid="8E0E8373DAB562408B730459DD2A881F" type="10" never_null="true" id="17"/>
+		<field name="objectives" uuid="9A4C1C5F3931294483602CD3E64FD393" type="10" never_null="true" id="18"/>
+		<field name="comments" uuid="D450D27C2ABEE841AF9ABC6ADC16B722" type="10" never_null="true" id="19"/>
+		<field name="findings" uuid="C04787E0917C584EB853F8F296FC48A5" type="10" never_null="true" id="20"/>
+		<field name="overallStatus" uuid="336E72168BEC7A4DB4AE02EF8CD1679A" type="10" limiting_length="255" never_null="true" id="21"/>
+		<field name="remainingGaps" uuid="610880615F16A549883CD8C7F6A539C8" type="10" never_null="true" id="22"/>
+		<field name="recommendations" uuid="BB71C8B54027AA4781F83F3C95FDFED7" type="10" never_null="true" id="23"/>
+		<field name="auditorSignature" uuid="6C5F11D904600845B498172BD54D5FA4" type="10" limiting_length="255" never_null="true" id="24"/>
+		<field name="AuditeeSignature" uuid="2A5724F5EBC6BA4B94CBD5F616117718" type="10" limiting_length="255" never_null="true" id="25"/>
+		<field name="IsNCRCorrected" uuid="5A95DB912ED7B442A440B37E7A539031" type="1" never_null="true" id="26"/>
+		<field name="IsCAEffective" uuid="F88991A804E04C4CB8479AC6D5867381" type="1" never_null="true" id="27"/>
+		<field name="IsOFIImplemented" uuid="888D702B9E5FBB4F8DBEAE3474D05C0E" type="1" never_null="true" id="28"/>
+		<field name="IsNewRisksExists" uuid="481A5D63ACFB0A469347D0C9FBE71B9A" type="1" never_null="true" id="29"/>
+		<field name="UUID_ProcessType" uuid="DE3F29F4218B284ABEA12A65E65EDEC8" type="10" store_as_UUID="true" never_null="true" id="30"/>
+		<field name="auditReport" uuid="66ADA768650DFA4C8C95696D044352D7" type="21" blob_switch_size="2147483647" never_null="true" id="31"/>
 		<primary_key field_name="UUID" field_uuid="B55972B70F030349B5136DEE13BEA4D4"/>
 	</table>
 	<table name="ProcessType" uuid="97D73747E1BC924A8B02AAF6C525C798" id="140">
@@ -1743,6 +1817,7 @@
 		<field name="code" uuid="EF6EA6AFF50A0A468763DB571F74B4AF" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="name" uuid="6354E42E14779643BC865F976168CC23" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="color" uuid="A254CAE9E24BD6418AAA63D0F786EA34" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="moreData" uuid="8A79A0591A2DA945AC84E9A6A2F2030B" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="BD7F2A41DD18FE47B8E8F4AD6C1EE62D"/>
 	</table>
 	<table name="AuditStatus" uuid="86FDD37E294EC746A4557D00E52217ED" id="141">
@@ -1757,6 +1832,7 @@
 		<field name="color" uuid="A053FEBE2C2DC0478A312B190893D590" type="10" limiting_length="255" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="moreData" uuid="AC04E2857E9F624C8C5E7F1BCD058F3D" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="9B44F9ED4FE59A46966ECF6D35DD27CA"/>
 	</table>
 	<table name="sfw_Todo" uuid="5DB5EC5859BC4655B933B6AD8069E3E6" id="144">

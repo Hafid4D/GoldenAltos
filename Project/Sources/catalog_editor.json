@@ -2440,9 +2440,9 @@
 				"left": 3048,
 				"top": 1513.6667480469,
 				"width": 211.01448059082,
-				"height": 104.33203125
+				"height": 166.33203125
 			},
-			"displayable_fields_count": 3,
+			"displayable_fields_count": 5,
 			"fields_ordering": 1
 		},
 		"Contact": {
