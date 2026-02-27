@@ -11,7 +11,7 @@ For ($tableNumber; 1; Last table number:C254)
 		$tableName:=Table name:C256($tableNumber)
 		//$entityName:=$tableName+"$entity"
 		
-		If ($tableName#"sfw_@")
+		If ($tableName#"sfw_@") & ($tableName#"dfd_@")
 			
 			For each ($entity; ds:C1482[$tableName].all())
 				//var $entity : cs[$entityName]
@@ -33,3 +33,5 @@ For ($tableNumber; 1; Last table number:C254)
 	End if 
 	
 End for 
+
+

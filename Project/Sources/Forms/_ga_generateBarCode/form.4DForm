@@ -78,54 +78,10 @@
 					"type": "rectangle",
 					"top": 0,
 					"left": 0,
-					"width": 465,
-					"height": 280,
+					"width": 470,
+					"height": 320,
 					"stroke": "transparent",
 					"fill": "#E6E6E6"
-				},
-				"header_bkgd1": {
-					"type": "rectangle",
-					"top": 14,
-					"left": 7,
-					"width": 140,
-					"height": 23,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent",
-					"visibility": "hidden"
-				},
-				"Text1": {
-					"type": "text",
-					"text": "Field",
-					"top": 18,
-					"left": 14,
-					"width": 102,
-					"height": 15,
-					"fontWeight": "bold",
-					"visibility": "hidden"
-				},
-				"Text2": {
-					"type": "text",
-					"text": ":",
-					"top": 18,
-					"left": 121,
-					"width": 22,
-					"height": 15,
-					"textAlign": "right",
-					"fontWeight": "bold",
-					"visibility": "hidden"
-				},
-				"pup_fields": {
-					"type": "dropdown",
-					"left": 155,
-					"top": 14,
-					"width": 300,
-					"height": 23,
-					"events": [
-						"onDataChange"
-					],
-					"dataSource": "Form:C1466.pup_fields",
-					"visibility": "hidden"
 				}
 			}
 		},
@@ -134,7 +90,7 @@
 				"Button": {
 					"type": "button",
 					"text": "Generate Barcode",
-					"top": 14,
+					"top": 72,
 					"left": 7,
 					"width": 140,
 					"height": 23,
@@ -146,7 +102,7 @@
 				"barCode": {
 					"type": "input",
 					"left": 11,
-					"top": 53,
+					"top": 111,
 					"width": 448,
 					"height": 160,
 					"dataSourceTypeHint": "picture",
@@ -159,7 +115,7 @@
 				"bPtintBarcode": {
 					"type": "button",
 					"text": "Print barCode",
-					"top": 229,
+					"top": 287,
 					"left": 7,
 					"width": 144,
 					"height": 23,
@@ -172,7 +128,7 @@
 				"bCancel": {
 					"type": "button",
 					"text": "Close",
-					"top": 229,
+					"top": 287,
 					"left": 311,
 					"width": 144,
 					"height": 23,
@@ -181,17 +137,62 @@
 					],
 					"dataSource": "",
 					"method": "ObjectMethods/bCancel.4dm"
+				},
+				"header_bkgd1": {
+					"type": "rectangle",
+					"top": 38,
+					"left": 11,
+					"width": 165,
+					"height": 23,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent",
+					"visibility": "visible"
+				},
+				"label": {
+					"type": "text",
+					"text": "Choose data to display",
+					"top": 42,
+					"left": 18,
+					"width": 130,
+					"height": 15,
+					"fontWeight": "bold",
+					"visibility": "visible"
+				},
+				"pup_fields": {
+					"type": "dropdown",
+					"left": 180,
+					"top": 38,
+					"width": 275,
+					"height": 23,
+					"events": [
+						"onDataChange"
+					],
+					"dataSource": "Form:C1466.pup_fields",
+					"visibility": "visible"
+				},
+				"Check Box": {
+					"type": "checkbox",
+					"text": "Display data barcode",
+					"top": 16,
+					"left": 11,
+					"width": 152,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/Check Box.4dm",
+					"dataSource": "Form:C1466.displayData"
 				}
 			}
 		}
 	],
-	"geometryStamp": 100,
+	"geometryStamp": 158,
 	"editor": {
 		"groups": {
 			"fieldInputGroup": [
 				"header_bkgd1",
-				"Text1",
-				"Text2",
+				"label",
 				"pup_fields"
 			]
 		},

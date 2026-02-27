@@ -17,7 +17,7 @@ If (Form:C1466.current_item#Null:C1517)
 	$file:=Folder:C1567(fk resources folder:K87:11).file("4DWriteProPrintTemplates/shipperPrintOutTemplate.4wp")
 	$template:=WP Import document:C1318($file.platformPath)
 	
-	$customer:=ds:C1482.Customer.query("name =:1"; Form:C1466.current_item.customer).first()
+	$customer:=ds:C1482.Customer.query("name =:1"; Form:C1466.current_item.customer.name).first()
 	
 	$shippingAddress:=$customer.contactDetails.addresses.query("type =:1"; "shipping").first()
 	$shippingAddress.detail.state:=$shippingAddress.detail.state#Null:C1517 ? $shippingAddress.detail.state : ""
