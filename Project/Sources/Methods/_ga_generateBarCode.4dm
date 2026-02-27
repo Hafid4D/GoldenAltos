@@ -5,7 +5,10 @@ var $imageBlob : Blob
 var $finalImage : Picture
 var $text : Text:=""
 var $params:=New object:C1471
-$data:=$1
+$data:=Form:C1466.current_item.moreData.barcodeData  //$1
+If (Count parameters:C259=1)
+	$text:=$1
+End if 
 var $0 : Picture
 $type:="CODE39"
 

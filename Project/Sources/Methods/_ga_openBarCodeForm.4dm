@@ -6,7 +6,21 @@
 
 
 $form:=New object:C1471
-$form.barcodeData:=Form:C1466.current_item.moreData.barcodeData
+If (Form:C1466.current_item.moreData#Null:C1517)
+	If (OB Is defined:C1231(Form:C1466.current_item.moreData; "barcodeData"))
+		$form.barcodeData:=Form:C1466.current_item.moreData.barcodeData
+		
+		$winRef:=Open form window:C675("_ga_generateBarCode"; Movable dialog box:K34:7; Horizontally centered:K39:1; Vertically centered:K39:4)
+		SET WINDOW TITLE:C213("Generate Bar code "; $winRef)  //for "+String(Form.current_item.fullName)
+		DIALOG:C40("_ga_generateBarCode"; $form)
+		
+	Else 
+		ALERT:C41("Not data for the barcode")
+	End if 
+Else 
+	ALERT:C41("Not data for the barcode")
+End if 
+
 
 //If (Form.lastPanelDisplayed="sfw_panel_user")
 //$form.barcodeData:=Form.current_item.UUID
@@ -19,9 +33,7 @@ $form.barcodeData:=Form:C1466.current_item.moreData.barcodeData
 //ARRAY TO COLLECTION($form.fieldsNames; $fieldTitles)
 
 
-$winRef:=Open form window:C675("_ga_generateBarCode"; Movable dialog box:K34:7; Horizontally centered:K39:1; Vertically centered:K39:4)
-SET WINDOW TITLE:C213("Generate Bar code for "+String:C10(Form:C1466.current_item.fullName); $winRef)
-DIALOG:C40("_ga_generateBarCode"; $form)
+
 
 
 

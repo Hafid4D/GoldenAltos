@@ -1,6 +1,9 @@
 //%attributes = {"executedOnServer":true}
 
 
+//create moreData.barcodeData on all tables
+
+
 var $colors : Collection:=New collection:C1472("#3CB371"; "#FFFF00"; "#FF7F50"; "#1E90FF"; "#FF0000")
 
 var $carriers; $status; $recordStatuscolors : Collection
