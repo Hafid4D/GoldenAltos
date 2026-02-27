@@ -75,7 +75,7 @@
 				"left": 4127,
 				"top": 0,
 				"width": 162.369140625,
-				"height": 650.33203125
+				"height": 659.33203125
 			},
 			"displayable_fields_count": 29,
 			"fields_ordering": 2,
@@ -1296,7 +1296,7 @@
 				"left": 3846,
 				"top": 3,
 				"width": 217,
-				"height": 454.33203125
+				"height": 457.33203125
 			},
 			"displayable_fields_count": 19,
 			"fields": {
@@ -1321,7 +1321,7 @@
 				"left": 3586,
 				"top": 0,
 				"width": 205,
-				"height": 533.33203125
+				"height": 544.33203125
 			},
 			"displayable_fields_count": 23,
 			"fields": {
@@ -1710,9 +1710,9 @@
 				"left": 1079,
 				"top": 2115,
 				"width": 155,
-				"height": 159.33203125
+				"height": 171.33203125
 			},
-			"displayable_fields_count": 5
+			"displayable_fields_count": 6
 		},
 		"LeadPriority": {
 			"color": {

@@ -29,7 +29,8 @@ For ($i; 1; $totalTables)  //Loop on all tables
 	
 	DOM GET XML ATTRIBUTE BY NAME:C728($tableNode; "name"; $tableName)
 	
-	If ($tableName#"sfw_@")
+	If ($tableName#"sfw_@") & ($tableName#"dfd_@")
+		
 		$targetedChildToSearch:="field"
 		
 		$totalfields:=DOM Count XML elements:C726($tableNode; $targetedChildToSearch)

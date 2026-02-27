@@ -400,6 +400,31 @@
 						"onClick"
 					],
 					"textAlign": "left"
+				},
+				"bScan1": {
+					"type": "button",
+					"top": 31,
+					"left": 174,
+					"width": 23,
+					"height": 23,
+					"sizingY": "fixed",
+					"focusable": false,
+					"text": "",
+					"icon": "/RESOURCES/image/button/barcode-scan.png",
+					"iconFrames": 1,
+					"textPlacement": "right",
+					"style": "regular",
+					"events": [
+						"onClick"
+					],
+					"action": "",
+					"sizingX": "fixed",
+					"method": "ObjectMethods/bScan1.4dm",
+					"shortcutAccel": false,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": false,
+					"shortcutKey": ""
 				}
 			}
 		},
@@ -1918,7 +1943,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1859,
+	"geometryStamp": 1864,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
