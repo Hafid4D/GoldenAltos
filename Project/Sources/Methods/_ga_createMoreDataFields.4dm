@@ -7,8 +7,7 @@ Create moreData field if it does not exist in each table of the data base
 */
 
 
-
-C_TEXT:C284($XmlCatalog; $catalogPath; $elementTosearch)
+var $XmlCatalog; $catalogPath; $elementTosearch : Text
 
 $catalogPath:=Folder:C1567(fk database folder:K87:14).folder("Project").folder("Sources").file("catalog.4DCatalog").platformPath
 

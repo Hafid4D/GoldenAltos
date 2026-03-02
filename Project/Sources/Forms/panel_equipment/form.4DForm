@@ -1119,7 +1119,22 @@
 							},
 							"dataSource": "This:C1470.description",
 							"dataSourceTypeHint": "text",
-							"width": 332
+							"width": 212
+						},
+						{
+							"header": {
+								"name": "Header8",
+								"text": "QA approved",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column8",
+							"footer": {
+								"name": "Footer8"
+							},
+							"dataSourceTypeHint": "boolean",
+							"dataSource": "This:C1470.isApproved",
+							"textAlign": "left"
 						}
 					]
 				},
@@ -1144,7 +1159,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 772,
+	"geometryStamp": 774,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

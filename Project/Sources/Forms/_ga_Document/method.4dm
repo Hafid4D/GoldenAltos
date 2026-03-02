@@ -21,14 +21,14 @@ Case of
 		OBJECT SET ENABLED:C1123(*; "isApproved"; Form:C1466.hasAuthorizationToApprove)
 		OBJECT SET ENABLED:C1123(*; "approvedBy"; False:C215)
 		OBJECT SET ENABLED:C1123(*; "approvalDate"; False:C215)
-		//OBJECT SET VISIBLE(*; "PopupDate"; Form.hasAuthorizationToApprove)
+		OBJECT SET VISIBLE:C603(*; "PopupDate"; False:C215)  //Form.hasAuthorizationToApprove)
 		
 		
-		OBJECT SET VISIBLE:C603(*; "isApproved"; Form:C1466.displayApprovalFields)
-		OBJECT SET VISIBLE:C603(*; "approvedBy"; Form:C1466.displayApprovalFields)
-		OBJECT SET VISIBLE:C603(*; "approvalDate"; Form:C1466.displayApprovalFields)
-		OBJECT SET VISIBLE:C603(*; "PopupDate"; (Form:C1466.displayApprovalFields & Form:C1466.hasAuthorizationToApprove))
-		OBJECT SET VISIBLE:C603(*; "approval_@"; Form:C1466.displayApprovalFields)
+		//OBJECT SET VISIBLE(*; "isApproved"; Form.displayApprovalFields)
+		//OBJECT SET VISIBLE(*; "approvedBy"; Form.displayApprovalFields)
+		//OBJECT SET VISIBLE(*; "approvalDate"; Form.displayApprovalFields)
+		//OBJECT SET VISIBLE(*; "PopupDate"; (Form.displayApprovalFields & Form.hasAuthorizationToApprove))
+		//OBJECT SET VISIBLE(*; "approval_@"; Form.displayApprovalFields)
 		
 		//OBJECT GET COORDINATES(*; "Rectangle"; $left_lb; $top_lb; $right_lb; $bottom_lb)
 		

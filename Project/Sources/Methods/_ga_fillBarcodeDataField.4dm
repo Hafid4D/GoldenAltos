@@ -1,4 +1,4 @@
-//%attributes = {}
+//%attributes = {"executedOnServer":true}
 /*
 _ga_fillBarcodeDataField
 

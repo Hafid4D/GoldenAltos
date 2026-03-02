@@ -1,4 +1,4 @@
-//%attributes = {}
+//%attributes = {"executedOnServer":true}
 
 
 var $records : Collection:=New collection:C1472()
