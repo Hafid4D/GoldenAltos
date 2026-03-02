@@ -1157,7 +1157,7 @@
 					"icon": "/RESOURCES/sfw/image/picto/gear.png",
 					"textPlacement": "right",
 					"method": "ObjectMethods/bActionTeam1.4dm",
-					"visibility": "visible"
+					"visibility": "hidden"
 				},
 				"entryField_wpDoc": {
 					"type": "write",
@@ -1449,7 +1449,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 682,
+	"geometryStamp": 683,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

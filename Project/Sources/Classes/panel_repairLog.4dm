@@ -37,6 +37,7 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_upTimePicker()
 	This:C1470.drawPup_equipment()
 	
+	OBJECT SET VISIBLE:C603(*; "bScan@"; ((Form:C1466.situation.mode="add") || (Form:C1466.situation.mode="modify")))
 	OBJECT SET ENABLED:C1123(*; "pup_equipment"; String:C10(Form:C1466.situation.mode)="add")
 	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET VISIBLE:C603(*; "TimePicker@"; Form:C1466.sfw.checkIsInModification())

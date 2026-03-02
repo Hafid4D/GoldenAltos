@@ -57,6 +57,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemAction("Print Badge"; "staff_print_badge")
 	$entry.setItemAction("Print Certification Training"; "staff_print_cert_training")
 	
+	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
+	
+	
 	// MARK: -Filters
 	
 	$filter:=cs:C1710.sfw_definitionFilter.new("filterCertification")

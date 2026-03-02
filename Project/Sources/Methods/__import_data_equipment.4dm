@@ -105,9 +105,9 @@ If ($equipment_Log.exists)
 			$doc.documentPath:=$document.DocumentPath
 			$doc.sourcePath:=$document.SourcePath
 			$doc.description:=$document.DocDescription
-			//$doc.approvalDate:=!00-00-00!
-			//$doc.approvedBy:=""
-			//$doc.isApproved:=False
+			$doc.approvalDate:=!00-00-00!
+			$doc.approvedBy:=""
+			$doc.isApproved:=False:C215
 			
 			$report:=Folder:C1567(fk data folder:K87:12).file("DataJson/EquipmentReports/"+String:C10($document.UniqueID+$document.PrimaryKeyValue))
 			If ($report.exists)

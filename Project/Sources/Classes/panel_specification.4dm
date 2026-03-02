@@ -67,9 +67,9 @@ Function redrawAndSetVisible()
 		$hasAuthorizedProfile:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($approverProfile.indexOf($1.value)#-1)))#Null:C1517
 		
 		OBJECT SET ENABLED:C1123(*; "entryField_isApproved"; $hasAuthorizedProfile)
-		OBJECT SET ENABLED:C1123(*; "entryField_approver"; $hasAuthorizedProfile)
-		OBJECT SET ENABLED:C1123(*; "entryField_approvalDate"; $hasAuthorizedProfile)
-		OBJECT SET ENABLED:C1123(*; "btnDatePickerApproval"; $hasAuthorizedProfile)
+		OBJECT SET ENABLED:C1123(*; "entryField_approver"; False:C215)  // $hasAuthorizedProfile)
+		OBJECT SET ENABLED:C1123(*; "entryField_approvalDate"; False:C215)  //$hasAuthorizedProfile)
+		OBJECT SET ENABLED:C1123(*; "btnDatePickerApproval"; False:C215)  //$hasAuthorizedProfile)
 		
 	End if 
 	

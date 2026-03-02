@@ -1,5 +1,6 @@
 //%attributes = {}
 
+_ga_createMoreDataFields
 
 __import_quote_param
 __import_lead_param
@@ -20,4 +21,7 @@ __import_data_chartOfAccount
 __import_data_assetList
 __import_data_creditMemo
 
+_ga_fillBarcodeDataField
+
 ALERT:C41("Import done")
+

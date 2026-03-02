@@ -795,12 +795,62 @@
 					],
 					"focusable": true,
 					"borderStyle": "none"
+				},
+				"bScan1": {
+					"type": "button",
+					"top": 61,
+					"left": 188,
+					"width": 23,
+					"height": 23,
+					"sizingY": "fixed",
+					"focusable": false,
+					"text": "",
+					"icon": "/RESOURCES/image/button/barcode-scan.png",
+					"iconFrames": 1,
+					"textPlacement": "right",
+					"style": "regular",
+					"events": [
+						"onClick"
+					],
+					"action": "",
+					"sizingX": "fixed",
+					"method": "ObjectMethods/bScan1.4dm",
+					"shortcutAccel": false,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": false,
+					"shortcutKey": ""
+				},
+				"bScan2": {
+					"type": "button",
+					"top": 61,
+					"left": 519,
+					"width": 23,
+					"height": 23,
+					"sizingY": "fixed",
+					"focusable": false,
+					"text": "",
+					"icon": "/RESOURCES/image/button/barcode-scan.png",
+					"iconFrames": 1,
+					"textPlacement": "right",
+					"style": "regular",
+					"events": [
+						"onClick"
+					],
+					"action": "",
+					"sizingX": "fixed",
+					"method": "ObjectMethods/bScan2.4dm",
+					"shortcutAccel": false,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": false,
+					"shortcutKey": ""
 				}
 			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 395,
+	"geometryStamp": 399,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
