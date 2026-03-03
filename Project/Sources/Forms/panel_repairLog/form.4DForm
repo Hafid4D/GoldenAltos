@@ -33,48 +33,6 @@
 	"pages": [
 		{
 			"objects": {
-				"entryField_reportedBy": {
-					"type": "input",
-					"top": 64,
-					"left": 108,
-					"width": 75,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.operators.reportedBy",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"textAlign": "left",
-					"bottom": 81,
-					"visibility": "hidden"
-				},
-				"entryField_fixedBy": {
-					"type": "input",
-					"top": 64,
-					"left": 439,
-					"width": 75,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.operators.fixedBy",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"textAlign": "left",
-					"bottom": 81,
-					"visibility": "hidden"
-				},
 				"label_systemID": {
 					"type": "text",
 					"top": 10,
@@ -304,48 +262,6 @@
 					"iconFrames": 4,
 					"focusable": false
 				},
-				"PopupDate1": {
-					"type": "subform",
-					"top": 10,
-					"left": 610,
-					"width": 19,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.reportDate",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/PopupDate1.4dm",
-					"events": [
-						"onLoad"
-					],
-					"focusable": true,
-					"borderStyle": "none"
-				},
-				"PopupDate2": {
-					"type": "subform",
-					"top": 10,
-					"left": 881,
-					"width": 19,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.dateUp",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/PopupDate2.4dm",
-					"events": [
-						"onLoad"
-					],
-					"focusable": true,
-					"borderStyle": "none"
-				},
 				"label_fixDate": {
 					"type": "text",
 					"top": 64,
@@ -375,27 +291,6 @@
 					"fontWeight": "normal",
 					"textAlign": "left",
 					"dataSourceTypeHint": "date"
-				},
-				"PopupDate3": {
-					"type": "subform",
-					"top": 64,
-					"left": 881,
-					"width": 19,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.fixedDate",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/PopupDate3.4dm",
-					"events": [
-						"onLoad"
-					],
-					"focusable": true,
-					"borderStyle": "none"
 				},
 				"btnForward2": {
 					"type": "button",
@@ -474,10 +369,10 @@
 				"TimePicker1": {
 					"type": "button",
 					"text": " ",
-					"top": 34,
-					"left": 607,
-					"width": 23,
-					"height": 23,
+					"top": 37,
+					"left": 612,
+					"width": 17,
+					"height": 17,
 					"events": [
 						"onClick"
 					],
@@ -493,10 +388,10 @@
 				"TimePicker2": {
 					"type": "button",
 					"text": " ",
-					"top": 34,
-					"left": 877,
-					"width": 23,
-					"height": 23,
+					"top": 37,
+					"left": 883,
+					"width": 17,
+					"height": 17,
 					"events": [
 						"onClick"
 					],
@@ -547,6 +442,119 @@
 					"events": [
 						"onClick"
 					]
+				},
+				"bScan1": {
+					"type": "button",
+					"top": 61,
+					"left": 188,
+					"width": 23,
+					"height": 23,
+					"sizingY": "fixed",
+					"focusable": false,
+					"text": "",
+					"icon": "/RESOURCES/image/button/barcode-scan.png",
+					"iconFrames": 1,
+					"textPlacement": "right",
+					"style": "regular",
+					"events": [
+						"onClick"
+					],
+					"action": "",
+					"sizingX": "fixed",
+					"method": "ObjectMethods/bScan1.4dm",
+					"shortcutAccel": false,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": false,
+					"shortcutKey": ""
+				},
+				"bScan2": {
+					"type": "button",
+					"top": 61,
+					"left": 519,
+					"width": 23,
+					"height": 23,
+					"sizingY": "fixed",
+					"focusable": false,
+					"text": "",
+					"icon": "/RESOURCES/image/button/barcode-scan.png",
+					"iconFrames": 1,
+					"textPlacement": "right",
+					"style": "regular",
+					"events": [
+						"onClick"
+					],
+					"action": "",
+					"sizingX": "fixed",
+					"method": "ObjectMethods/bScan2.4dm",
+					"shortcutAccel": false,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": false,
+					"shortcutKey": ""
+				},
+				"btnDatePicker1": {
+					"type": "button",
+					"text": " ",
+					"top": 11,
+					"left": 613,
+					"width": 17,
+					"height": 17,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/calendar_black.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnDatePicker1.4dm",
+					"visibility": "visible",
+					"iconFrames": 1,
+					"focusable": false,
+					"dataSource": ""
+				},
+				"btnDatePicker2": {
+					"type": "button",
+					"text": " ",
+					"top": 11,
+					"left": 883,
+					"width": 17,
+					"height": 17,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/calendar_black.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnDatePicker2.4dm",
+					"visibility": "visible",
+					"iconFrames": 1,
+					"focusable": false,
+					"dataSource": ""
+				},
+				"btnDatePicker3": {
+					"type": "button",
+					"text": " ",
+					"top": 64,
+					"left": 883,
+					"width": 17,
+					"height": 17,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/calendar_black.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnDatePicker3.4dm",
+					"visibility": "visible",
+					"iconFrames": 1,
+					"focusable": false,
+					"dataSource": ""
 				}
 			}
 		},
@@ -774,83 +782,12 @@
 					"fontWeight": "normal",
 					"dataSourceTypeHint": "boolean",
 					"method": "ObjectMethods/entryField_isApproved.4dm"
-				},
-				"PopupDate": {
-					"type": "subform",
-					"top": 181,
-					"left": 279,
-					"width": 19,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.approvalDate",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/PopupDate.4dm",
-					"events": [
-						"onLoad"
-					],
-					"focusable": true,
-					"borderStyle": "none"
-				},
-				"bScan1": {
-					"type": "button",
-					"top": 61,
-					"left": 188,
-					"width": 23,
-					"height": 23,
-					"sizingY": "fixed",
-					"focusable": false,
-					"text": "",
-					"icon": "/RESOURCES/image/button/barcode-scan.png",
-					"iconFrames": 1,
-					"textPlacement": "right",
-					"style": "regular",
-					"events": [
-						"onClick"
-					],
-					"action": "",
-					"sizingX": "fixed",
-					"method": "ObjectMethods/bScan1.4dm",
-					"shortcutAccel": false,
-					"shortcutControl": false,
-					"shortcutShift": false,
-					"shortcutAlt": false,
-					"shortcutKey": ""
-				},
-				"bScan2": {
-					"type": "button",
-					"top": 61,
-					"left": 519,
-					"width": 23,
-					"height": 23,
-					"sizingY": "fixed",
-					"focusable": false,
-					"text": "",
-					"icon": "/RESOURCES/image/button/barcode-scan.png",
-					"iconFrames": 1,
-					"textPlacement": "right",
-					"style": "regular",
-					"events": [
-						"onClick"
-					],
-					"action": "",
-					"sizingX": "fixed",
-					"method": "ObjectMethods/bScan2.4dm",
-					"shortcutAccel": false,
-					"shortcutControl": false,
-					"shortcutShift": false,
-					"shortcutAlt": false,
-					"shortcutKey": ""
 				}
 			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 399,
+	"geometryStamp": 437,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

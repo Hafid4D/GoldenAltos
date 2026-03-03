@@ -335,27 +335,6 @@
 					"dataSourceTypeHint": "boolean",
 					"right": 158
 				},
-				"PopupDate1": {
-					"type": "subform",
-					"top": 154,
-					"left": 289,
-					"width": 19,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.lastAuditDate",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/PopupDate1.4dm",
-					"events": [
-						"onLoad"
-					],
-					"focusable": true,
-					"borderStyle": "none"
-				},
 				"label_nextAuditDate": {
 					"type": "text",
 					"top": 181,
@@ -390,27 +369,6 @@
 					"bottom": 198,
 					"right": 308,
 					"dataSourceTypeHint": "date"
-				},
-				"PopupDate2": {
-					"type": "subform",
-					"top": 181,
-					"left": 289,
-					"width": 19,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.nextAuditDate",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/PopupDate2.4dm",
-					"events": [
-						"onLoad"
-					],
-					"focusable": true,
-					"borderStyle": "none"
 				},
 				"entryField_qaComment": {
 					"type": "input",
@@ -496,6 +454,48 @@
 					"fontWeight": "normal",
 					"dataSourceTypeHint": "boolean",
 					"right": 158
+				},
+				"btnDatePicker1": {
+					"type": "button",
+					"text": " ",
+					"top": 154,
+					"left": 291,
+					"width": 17,
+					"height": 17,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/calendar_black.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnDatePicker1.4dm",
+					"visibility": "visible",
+					"iconFrames": 1,
+					"focusable": false,
+					"dataSource": ""
+				},
+				"btnDatePicker2": {
+					"type": "button",
+					"text": " ",
+					"top": 181,
+					"left": 291,
+					"width": 17,
+					"height": 17,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/calendar_black.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnDatePicker2.4dm",
+					"visibility": "visible",
+					"iconFrames": 1,
+					"focusable": false,
+					"dataSource": ""
 				}
 			}
 		},
@@ -880,7 +880,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 375,
+	"geometryStamp": 386,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

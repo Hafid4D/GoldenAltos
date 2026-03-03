@@ -348,27 +348,6 @@
 					"fontWeight": "bold",
 					"class": ""
 				},
-				"PopupDate": {
-					"type": "subform",
-					"top": 250,
-					"left": 427,
-					"width": 19,
-					"height": 17,
-					"dataSource": "Form:C1466.details.approvalDate",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/PopupDate.4dm",
-					"events": [
-						"onLoad"
-					],
-					"focusable": true,
-					"borderStyle": "none"
-				},
 				"bOk": {
 					"type": "button",
 					"top": 287,
@@ -482,7 +461,7 @@
 			}
 		}
 	],
-	"geometryStamp": 244,
+	"geometryStamp": 245,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

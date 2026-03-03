@@ -37,20 +37,29 @@ local Function get approvalDate()->$approvalDate : Date
 local Function set approvalDate($approvalDate : Date)
 	This:C1470.stmpApproval:=cs:C1710.sfw_stmp.me.build($approvalDate)
 	
+local Function get fixer()->$operatorCode : Text
+	$staffs:=ds:C1482.Staff.query("UUID =:1"; This:C1470.UUID_Fixer)
+	$operatorCode:=$staffs.length>0 ? $staffs.first().code : ""
 	
+local Function get reporter()->$operatorCode : Text
+	$staffs:=ds:C1482.Staff.query("UUID =:1"; This:C1470.UUID_Reporter)
+	$operatorCode:=$staffs.length>0 ? $staffs.first().code : ""
+	
+	
+	//local Function set fixer()
 	
 local Function loadAfterCreation()
 	
 	// This callback is called after creating the new item but before displaying the panel.
-	This:C1470._initOperators()
+	//This._initOperators()
 	
-local Function _initOperators()
+	//local Function _initOperators()
 	
-	If (This:C1470.operators.reportedBy=Null:C1517)
-		This:C1470.operators.reportedBy:=""
-	End if 
-	If (This:C1470.operators.fixedBy=Null:C1517)
-		This:C1470.operators.fixedBy:=""
-	End if 
+	//If (This.UUID_Reporter=Null)
+	//This.UUID_Reporter:=""
+	//End if 
+	//If (This.UUID_Fixer=Null)
+	//This.UUID_Fixer:=""
+	//End if 
 	
 	

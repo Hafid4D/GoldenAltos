@@ -81,7 +81,7 @@
 		<field name="plannedHours" uuid="1A3980D589D3284F863777C1F0CA1A1F" type="6" never_null="true" id="32"/>
 		<field name="minYield" uuid="901C0BE796303E42954B9B1EBB994B24" type="6" never_null="true" id="33"/>
 		<field name="areas" uuid="5F7042E680C95A4EB1D9F50910B6963D" type="10" limiting_length="255" never_null="true" id="34"/>
-		<field name="approver" uuid="5609A192BA358D4DB149ADC855D83F1D" type="10" limiting_length="255" never_null="true" id="35"/>
+		<field name="approvedBy" uuid="5609A192BA358D4DB149ADC855D83F1D" type="10" limiting_length="255" never_null="true" id="35"/>
 		<field name="stmpApproval" uuid="4D975AB1E6EFD744BDBAA31DC2010345" type="4" never_null="true" id="36"/>
 		<field name="isApproved" uuid="FEE932B57CBD9A48AA0EFCA36230EA6B" type="1" never_null="true" id="37"/>
 		<field name="rejectionBlob" uuid="D7A7BE2E5D78C047B07034BEC36F104E" type="18" never_null="true" id="38"/>
@@ -153,7 +153,7 @@
 		<field name="reviewIntervalInDays" uuid="7413D34B72ACD04A8DAD654BFE162AAF" type="4" never_null="true" id="17"/>
 		<field name="stmpReviewDate" uuid="87FFB43152B5CB40B41CA4ABE12A9474" type="4" never_null="true" id="18"/>
 		<field name="isApproved" uuid="6E95A7D0C58BDC4899360EE36C97D369" type="1" never_null="true" id="19"/>
-		<field name="approver" uuid="2015FC7753D0DF4A80971FE195909538" type="10" limiting_length="255" never_null="true" id="20"/>
+		<field name="approvedBy" uuid="2015FC7753D0DF4A80971FE195909538" type="10" limiting_length="255" never_null="true" id="20"/>
 		<field name="stmpApproval" uuid="9F6075D8C50BA54DB4FB0DAE5ADCAB9C" type="4" never_null="true" id="21"/>
 		<field name="moreData" uuid="86882ADD493C3A47B0512C350571D19E" type="21" blob_switch_size="2147483647" never_null="true" id="22"/>
 		<primary_key field_name="UUID" field_uuid="2A671DFB01797B4DBB6EC2EB4216DB75"/>
@@ -320,6 +320,7 @@
 		<field name="UUID" uuid="8FD486DDACE0854DA8FB686A58B08089" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_Equipment" uuid="C56ACBF61233134FA887559C036F2D7A" type="10" store_as_UUID="true" never_null="true" id="2"/>
 		<field name="moreData" uuid="72A96BD508CB1F4796595DC2392BAE3A" type="21" blob_switch_size="2147483647" never_null="true" id="3"/>
+		<field name="UUID_Reporter" uuid="B893EEBE842A4F9BA147E2BAF714F1F2" type="10" store_as_UUID="true" never_null="true" id="4"/>
 		<field name="stmpFixed" uuid="BFCFF4A84085C14BA123E73537FC98F4" type="4" never_null="true" id="5"/>
 		<field name="stmpReport" uuid="741357BFDBEA23499DB051B8EDCB9EE8" type="4" never_null="true" id="6"/>
 		<field name="status" uuid="DA2945D648F7F24DB6ED519C615564F1" type="10" limiting_length="255" never_null="true" id="7"/>
@@ -331,6 +332,7 @@
 		<field name="upAtStmp" uuid="7E6764EC95C7F74B89A8509FFD911EFE" type="4" never_null="true" id="13"/>
 		<field name="stmpUp" uuid="8BE38F5B5B6E214D8C55B2E7F73DCE36" type="4" never_null="true" id="14"/>
 		<field name="isApproved" uuid="D1206F3FDDA66F49812596441E32BE6A" type="1" never_null="true" id="15"/>
+		<field name="UUID_Fixer" uuid="C190618F27864FD58ADE250C1A329577" type="10" store_as_UUID="true" never_null="true" id="16"/>
 		<field name="approvedBy" uuid="C69BC87ECC3E8A40AFE2E649C3367539" type="10" limiting_length="255" never_null="true" id="17"/>
 		<field name="stmpApproval" uuid="C58CFAD652E982459AD859AAC73FE8D3" type="4" never_null="true" id="18"/>
 		<field name="operators" uuid="0A3CC89837F0474693760937B65C8C46" type="21" blob_switch_size="2147483647" never_null="true" id="19"/>
@@ -4095,6 +4097,11 @@
 			<table_ref uuid="CA853413921F4B2A9BC70E6DE5F88235" name="Inventory"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="8489F2F22625424582C6BD335E54682A" type="3">
+		<field_ref uuid="B893EEBE842A4F9BA147E2BAF714F1F2" name="UUID_Reporter">
+			<table_ref uuid="E209D11E14110249AE69799CB8F51C7C" name="RepairLog"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="8557C24DB496914FB0F9837682DEAD2D" type="7">
 		<field_ref uuid="00CCFE9E143B72409BA8D975BF377810" name="UUID">
 			<table_ref uuid="3382E9847A639840BEB98DE07BAF4613" name="AuditEvent"/>
@@ -4408,6 +4415,11 @@
 	<index kind="regular" uuid="B530007B6761954194108DE5FD455EFD" type="3">
 		<field_ref uuid="E173FD33973C144A94C23938A1C7A92F" name="UUID_ServiceType">
 			<table_ref uuid="1E733AC1BDB87C40B151040C49BD164B" name="Lead"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="B710CF2183DF4AAA98380EB67AACB19D" type="3">
+		<field_ref uuid="C190618F27864FD58ADE250C1A329577" name="UUID_Fixer">
+			<table_ref uuid="E209D11E14110249AE69799CB8F51C7C" name="RepairLog"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="B761A9A87A1A4180B6093B39B6B17544" type="7">

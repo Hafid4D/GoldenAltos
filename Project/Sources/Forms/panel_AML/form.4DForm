@@ -656,28 +656,8 @@
 					"dataSource": "Form:C1466.current_item.isApproved",
 					"fontWeight": "normal",
 					"dataSourceTypeHint": "boolean",
-					"right": 156
-				},
-				"PopupDate1": {
-					"type": "subform",
-					"top": 447,
-					"left": 543,
-					"width": 19,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.approvalDate",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/PopupDate1.4dm",
-					"events": [
-						"onLoad"
-					],
-					"focusable": true,
-					"borderStyle": "none"
+					"right": 156,
+					"method": "ObjectMethods/entryField_isApproved.4dm"
 				},
 				"label_vendorPartNum": {
 					"type": "text",
@@ -767,6 +747,27 @@
 					"bottom": 298,
 					"right": 475,
 					"scrollbarVertical": "automatic"
+				},
+				"btnForward4": {
+					"type": "button",
+					"text": " ",
+					"top": 446,
+					"left": 819,
+					"width": 18,
+					"height": 18,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/forward-16x16.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnForward4.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
 				}
 			}
 		},
@@ -974,7 +975,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 834,
+	"geometryStamp": 839,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

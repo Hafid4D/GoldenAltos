@@ -76,9 +76,9 @@ Function redrawAndSetVisible()
 		$hasAuthorizedProfile:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($approverProfile.indexOf($1.value)#-1)))#Null:C1517
 		
 		OBJECT SET ENABLED:C1123(*; "entryField_isApproved"; $hasAuthorizedProfile)
-		OBJECT SET ENABLED:C1123(*; "entryField_approver"; $hasAuthorizedProfile)
-		OBJECT SET ENABLED:C1123(*; "entryField_approvalDate"; $hasAuthorizedProfile)
-		OBJECT SET VISIBLE:C603(*; "PopupDate1"; $hasAuthorizedProfile)
+		OBJECT SET ENABLED:C1123(*; "entryField_approver"; False:C215)  //$hasAuthorizedProfile)
+		OBJECT SET ENABLED:C1123(*; "entryField_approvalDate"; False:C215)  //$hasAuthorizedProfile)
+		OBJECT SET VISIBLE:C603(*; "PopupDate1"; False:C215)  // $hasAuthorizedProfile)
 		
 	End if 
 	Form:C1466.sfw.drawHTab()
@@ -367,3 +367,16 @@ Function loadDocuments()
 Function LoadAllTabs()
 	
 	This:C1470.loadDocuments()
+	
+	
+Function btnOpenApprover()
+	
+	$es:=ds:C1482.Staff.query("code =:1"; Form:C1466.current_item.approvedBy)
+	
+	If ($es.length>0)
+		Form:C1466.sfw.openInANewWindow($es[0]; "qualityAssurance"; "Staff")
+	End if 
+	
+	
+	
+	

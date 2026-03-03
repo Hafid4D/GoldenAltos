@@ -21,7 +21,7 @@ Case of
 		OBJECT SET ENABLED:C1123(*; "isApproved"; Form:C1466.hasAuthorizationToApprove)
 		OBJECT SET ENABLED:C1123(*; "approvedBy"; False:C215)
 		OBJECT SET ENABLED:C1123(*; "approvalDate"; False:C215)
-		OBJECT SET VISIBLE:C603(*; "PopupDate"; False:C215)  //Form.hasAuthorizationToApprove)
+		//OBJECT SET VISIBLE(*; "PopupDate"; False)  //Form.hasAuthorizationToApprove)
 		
 		
 		//OBJECT SET VISIBLE(*; "isApproved"; Form.displayApprovalFields)

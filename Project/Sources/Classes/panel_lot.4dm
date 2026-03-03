@@ -673,23 +673,7 @@ Function selectJob()
 	End if 
 	
 	
-Function btnScanner()
 	
-	//$barcodeData:=_ga_communicateWithScanner()
-	//$eJobs:=ds.Job.query("moreData.barcodeData = :1"; $barcodeData)
-	
-	//Case of 
-	//: ($eJobs.length=1)
-	//$eJob:=$eJobs.first()
-	//Form.current_item.UUID_Job:=$eJob.UUID
-	//This._activate_save_cancel_button()
-	
-	//Else 
-	
-	//End case 
-	//This._activate_save_cancel_button()
-	
-	//This.drawPup_Job()
 	
 	
 	

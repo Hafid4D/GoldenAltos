@@ -1,7 +1,7 @@
 singleton Class constructor
 	
 	
-Function dropDownListSelection($dataClass; $foreignKey; $fieldRedrawer)
+Function dropDownListSelection($dataClass; $foreignKey; $fieldRedrawer; $pannelClass)
 	
 	$barcodeData:=This:C1470.communicateWithScanner()
 	
@@ -15,17 +15,17 @@ Function dropDownListSelection($dataClass; $foreignKey; $fieldRedrawer)
 				
 			: ($eEntities.length=1)
 				$eEntity:=$eEntities.first()
-				$keys:=Split string:C1554($foreignKey; ".")
-				Case of 
-					: ($keys.length=1)
-						Form:C1466.current_item[$foreignKey]:=$eEntity.UUID
-						
-					: ($keys.length=2)  //Repair_Log case where fixer and reporter are saved as attribute of an object name operators
-						Form:C1466.current_item[$keys[0]][$keys[1]]:=$eEntity.UUID
-						
-					Else 
-						
-				End case 
+				//$keys:=Split string($foreignKey; ".")
+				//Case of 
+				//: ($keys.length=1)
+				Form:C1466.current_item[$foreignKey]:=$eEntity.UUID
+				
+				//: ($keys.length=2)  //Repair_Log case where fixer and reporter are saved as attribute of an object name operators
+				//Form.current_item[$keys[0]][$keys[1]]:=$eEntity.UUID
+				
+				//Else 
+				
+				//End case 
 				
 			: ($eEntities.length>1)
 				cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("Error"; "Multiples Records Found for the Barcode Scanned"))
@@ -35,10 +35,10 @@ Function dropDownListSelection($dataClass; $foreignKey; $fieldRedrawer)
 		End case 
 		
 		$nomFonction:="_activate_save_cancel_button"
-		$formule:=Formula from string:C1601("cs.panel_lot.me."+$nomFonction+"()")
+		$formule:=Formula from string:C1601("cs."+$pannelClass+".me."+$nomFonction+"()")
 		$resultat:=$formule.source
 		
-		$formule:=Formula from string:C1601("cs.panel_lot.me."+$fieldRedrawer+"()")
+		$formule:=Formula from string:C1601("cs."+$pannelClass+".me."+$fieldRedrawer+"()")
 		$resultat:=$formule.source
 		
 	End if 
@@ -47,13 +47,12 @@ Function dropDownListSelection($dataClass; $foreignKey; $fieldRedrawer)
 Function scanForInputField()
 	
 	
-	
-Function UserApprovalByScanning($dataClass)
+Function UserApprovalByScanning($type)
 	
 	$barcodeData:=This:C1470.communicateWithScanner()
 	
 	If (OK=1)
-		$eEntities:=ds:C1482[$dataClass].query("moreData.barcodeData = :1"; $barcodeData)
+		$eEntities:=ds:C1482.Staff.query("moreData.barcodeData = :1"; $barcodeData)
 		
 		Case of 
 				
@@ -62,15 +61,45 @@ Function UserApprovalByScanning($dataClass)
 				
 			: ($eEntities.length=1)
 				$eEntity:=$eEntities.first()
-				//todo-> uniformiser
 				
-				//If (Form.details.isApproved)
-				//Form.details.approvedBy:=$eEntity.staffs[0].code  //ds.sfw_User.query("login = :1"; Current user).first().staffs[0].code
-				//Form.details.approvalDate:=Current date(*)
-				//Else 
-				//Form.details.approvedBy:=""
-				//Form.details.approvalDate:=Date(!00-00-00!)
-				//End if 
+				//TODO : IMPROVE
+				Case of 
+					: ($type="document")
+						If (Form:C1466.details.isApproved)
+							Form:C1466.details.approvedBy:=$eEntity.code
+							Form:C1466.details.approvalDate:=Current date:C33(*)
+						Else 
+							Form:C1466.details.approvedBy:=""
+							Form:C1466.details.approvalDate:=Date:C102(!00-00-00!)
+						End if 
+						
+					: ($type="steps")
+						
+						If (Form:C1466.currentStep.isApproved)
+							Form:C1466.currentStep.approvedBy:=$eEntity.code
+							Form:C1466.currentStep.approvalDate:=Current date:C33(*)
+							
+						Else 
+							Form:C1466.currentStep.approvedBy:=""
+							Form:C1466.currentStep.approvalDate:=Date:C102(!00-00-00!)
+							
+						End if 
+						
+						
+					: ($type="other")
+						
+						If (Form:C1466.current_item.isApproved)
+							Form:C1466.current_item.approvalDate:=Current date:C33(*)
+							Form:C1466.current_item.approvedBy:=$eEntity.code
+						Else 
+							Form:C1466.current_item.approvalDate:=Date:C102(!00-00-00!)
+							Form:C1466.current_item.approvedBy:=""
+						End if 
+						
+					Else 
+						
+				End case 
+				
 				
 				
 			: ($eEntities.length>1)
@@ -80,7 +109,6 @@ Function UserApprovalByScanning($dataClass)
 				
 		End case 
 	End if 
-	
 	
 	
 Function communicateWithScanner()->$barcodeData : Text

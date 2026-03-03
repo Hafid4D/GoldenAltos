@@ -30,7 +30,7 @@
             try {
                 const urlParams = new URLSearchParams(window.location.search);
                 
-                // Récupération des paramètres (Valeur et Type)
+                // Récupération des paramètres (Valeur,Type et text d'affichage)
                 const val = urlParams.get('value') || "123456789012";
                 const type = urlParams.get('type') || "CODE128";
                 const text = urlParams.get('text') || "";
@@ -38,13 +38,17 @@
                 // Génération du Code-barre
                 JsBarcode("#barcode-canvas", val, {
                     format: type,
-                    lineColor: "#000",
+                    lineColor: "#000000",
                     width: 1,
                     height: 80,
-                    fontSize:16,
+                    fontSize:15,
                     text:text,
-                    // margin:0,
+                    textAlign:"center",
+                    textPosition:"bottom",
+                    background:"#ffffff",
                     displayValue: (text === "") ? false : true // Affiche le texte en dessous
+                
+                    // margin:0,
                 });
 
               
@@ -54,12 +58,12 @@
                 // On met le Base64 dans l'attribut "data-base64"
                 resultBox.setAttribute("data-base64", canvas.toDataURL("image/png"));
                 
-                document.getElementById('status').innerText = "Statut : Prêt";
-                document.title = "READY";
+                // document.getElementById('status').innerText = "Statut : Prêt";
+                // document.title = "READY";
 
             } catch (e) {
-                document.getElementById('status').innerText = "Erreur : " + e.message;
-                document.title = "ERROR";
+                // document.getElementById('status').innerText = "Erreur : " + e.message;
+                // document.title = "ERROR";
             }
         };
     </script>
