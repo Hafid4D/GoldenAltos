@@ -156,17 +156,17 @@ If ($repair_Log_file.exists)
 		$staff:=ds:C1482.Staff.query("code =:1"; Split string:C1554($repair.Rep_by; "\r"; sk trim spaces:K86:2).join("\r"))
 		
 		If ($staff.length>0)
-			$eRepair.operators.reportedBy:=$staff[0].UUID
+			$eRepair.UUID_Reporter:=$staff[0].UUID
 		Else 
-			$eRepair.operators.reportedBy:=""
+			$eRepair.UUID_Reporter:="00"*16
 		End if 
 		
 		$staff:=ds:C1482.Staff.query("code =:1"; Split string:C1554($repair.Fixed_by; "\r"; sk trim spaces:K86:2).join("\r"))
 		
 		If ($staff.length>0)
-			$eRepair.operators.fixedBy:=$staff[0].UUID
+			$eRepair.UUID_Fixer:=$staff[0].UUID
 		Else 
-			$eRepair.operators.fixedBy:=""
+			$eRepair.UUID_Fixer:="00"*16
 		End if 
 		
 		$eRepair.stmpFixed:=Date:C102($repair.Date_fixed)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($repair.Date_fixed))
@@ -190,7 +190,8 @@ If ($repair_Log_file.exists)
 	End for each 
 	
 End if 
-SET TEXT TO PASTEBOARD:C523($text)
+TRACE:C157
+//SET TEXT TO PASTEBOARD($text)
 
 
 

@@ -701,7 +701,7 @@
 					"height": 19,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.currentStep.approver",
+					"dataSource": "Form:C1466.currentStep.approvedBy",
 					"visibility": "hidden"
 				},
 				"entryField_approvalDate": {
@@ -745,27 +745,6 @@
 					"textAlign": "left",
 					"fontWeight": "normal",
 					"visibility": "hidden"
-				},
-				"btnDatePickerApproval": {
-					"type": "button",
-					"text": " ",
-					"top": 385,
-					"left": 322,
-					"width": 17,
-					"height": 17,
-					"events": [
-						"onClick",
-						"onDoubleClick"
-					],
-					"style": "custom",
-					"popupPlacement": "none",
-					"icon": "/RESOURCES/image/element/calendar_black.png",
-					"textPlacement": "center",
-					"method": "ObjectMethods/btnDatePickerApproval.4dm",
-					"visibility": "hidden",
-					"iconFrames": 1,
-					"focusable": false,
-					"dataSource": ""
 				},
 				"header_bkgd1": {
 					"type": "rectangle",
@@ -880,7 +859,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 199,
+	"geometryStamp": 200,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

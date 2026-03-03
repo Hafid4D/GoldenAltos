@@ -33,7 +33,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$filter:=cs:C1710.sfw_definitionFilter.new("filterFixOperator")
 	$filter.setDefaultTitle("All Fix Operators")
-	$filter.setFilterByLinkedEntity("Staff"; "operators.fixedBy"; "uuidStaff"; "")
+	$filter.setFilterByLinkedEntity("Staff"; "UUID_Fixer"; "uuidStaff"; "")
 	$filter.setDynamicTitle("code"; "## Fixed by")
 	$filter.setOrderForItems("code")
 	$filter.setAttributeLabelForItem("code")
@@ -42,7 +42,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$filter:=cs:C1710.sfw_definitionFilter.new("filterReportOperator")
 	$filter.setDefaultTitle("All Report Operators")
-	$filter.setFilterByLinkedEntity("Staff"; "operators.reportedBy"; "uuidStaff"; "")
+	$filter.setFilterByLinkedEntity("Staff"; "UUID_Reporter"; "uuidStaff"; "")
 	$filter.setDynamicTitle("code"; "## Reported by")
 	$filter.setOrderForItems("code")
 	$filter.setAttributeLabelForItem("code")

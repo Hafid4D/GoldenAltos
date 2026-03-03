@@ -43,8 +43,8 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_enteredBy()
 	This:C1470.drawPup_division()
 	
-	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
 	
+	OBJECT SET VISIBLE:C603(*; "btnDatePicker@"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET ENTERABLE:C238(*; "lb_contact"; False:C215)
 	
 	Use (Form:C1466.sfw.entry.panel.pages)

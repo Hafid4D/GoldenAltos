@@ -471,7 +471,7 @@
 					"height": 19,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.current_item.approver"
+					"dataSource": "Form:C1466.current_item.approvedBy"
 				},
 				"entryField_approvalDate": {
 					"type": "input",

@@ -40,6 +40,7 @@ Function redrawAndSetVisible()
 	OBJECT SET VISIBLE:C603(*; "bScan@"; ((Form:C1466.situation.mode="add") || (Form:C1466.situation.mode="modify")))
 	OBJECT SET ENABLED:C1123(*; "pup_equipment"; String:C10(Form:C1466.situation.mode)="add")
 	OBJECT SET VISIBLE:C603(*; "PopupDa@"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "btnDatePicker@"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET VISIBLE:C603(*; "TimePicker@"; Form:C1466.sfw.checkIsInModification())
 	
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
@@ -74,9 +75,8 @@ Function redrawAndSetVisible()
 		OBJECT SET ENABLED:C1123(*; "pup_fixOperator"; $isFromAuthorizedTeam)
 		
 		OBJECT SET ENABLED:C1123(*; "entryField_isApproved"; $isFromAuthorizedTeam)
-		OBJECT SET ENABLED:C1123(*; "entryField_approvalDate"; $isFromAuthorizedTeam)
+		OBJECT SET ENABLED:C1123(*; "entryField_approvalDate"; False:C215)  //$isFromAuthorizedTeam)
 		
-		OBJECT SET VISIBLE:C603(*; "PopupDate"; $isFromAuthorizedTeam)
 		
 		
 	End if 
@@ -91,7 +91,7 @@ Function drawPup_XXX()
 	
 Function drawPup_fixOperator()
 	If (Form:C1466.current_item#Null:C1517)
-		$fixOperator:=ds:C1482.Staff.query("UUID= :1"; Form:C1466.current_item.operators.fixedBy).first() || New object:C1471()
+		$fixOperator:=ds:C1482.Staff.query("UUID= :1"; Form:C1466.current_item.UUID_Fixer).first() || New object:C1471()
 		$operatorCode:=$fixOperator.code
 		If ($operatorCode=Null:C1517)
 			$operatorCode:=""
@@ -121,7 +121,7 @@ Function pup_fixOperator()
 		CLOSE WINDOW:C154($winRef)
 		
 		If (ok=1)
-			Form:C1466.current_item.operators.fixedBy:=$form.item.UUID
+			Form:C1466.current_item.UUID_Fixer:=$form.item.UUID
 			cs:C1710.panel_repairLog.me._activate_save_cancel_button()
 		End if 
 	End if 
@@ -131,7 +131,7 @@ Function pup_fixOperator()
 	
 Function drawPup_reportOperator()
 	If (Form:C1466.current_item#Null:C1517)
-		$reportOperator:=ds:C1482.Staff.query("UUID= :1"; Form:C1466.current_item.operators.reportedBy).first() || New object:C1471()
+		$reportOperator:=ds:C1482.Staff.query("UUID= :1"; Form:C1466.current_item.UUID_Reporter).first() || New object:C1471()
 		$operatorCode:=$reportOperator.code
 		If ($operatorCode=Null:C1517)
 			$operatorCode:=""
@@ -160,7 +160,7 @@ Function pup_reportOperator()
 		CLOSE WINDOW:C154($winRef)
 		
 		If (ok=1)
-			Form:C1466.current_item.operators.reportedBy:=$form.item.UUID
+			Form:C1466.current_item.UUID_Reporter:=$form.item.UUID
 			cs:C1710.panel_repairLog.me._activate_save_cancel_button()
 		End if 
 	End if 
@@ -173,10 +173,10 @@ Function btnOpenOperator($operatorType)
 	Case of 
 			
 		: ($operatorType="fixedBy")
-			$es:=ds:C1482.Staff.query("UUID = :1"; Form:C1466.current_item.operators.fixedBy)
+			$es:=ds:C1482.Staff.query("UUID = :1"; Form:C1466.current_item.UUID_Fixer)
 			
 		: ($operatorType="reportedBy")
-			$es:=ds:C1482.Staff.query("UUID = :1"; Form:C1466.current_item.operators.reportedBy)
+			$es:=ds:C1482.Staff.query("UUID = :1"; Form:C1466.current_item.UUID_Reporter)
 			
 	End case 
 	
@@ -313,5 +313,7 @@ Function selectEquipment()
 				
 		End case 
 	End if 
+	
+	
 	
 	

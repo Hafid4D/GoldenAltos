@@ -1,7 +1,11 @@
 //%attributes = {}
 
 /*
-_ga_generateBarCode : 
+_ga_generateBarCode($parameters) : generate the barcode 
+
+$parameters -> is an object with two attrubutes :
+    - data : data to encode. It is always moreData.barcode of the record
+    - text : the text to display on the barcode. If you don't want a text to display juste assigne empty string to this attribute
 
 */
 
@@ -12,12 +16,14 @@ var $text : Text:=""
 var $offScreanParams:=New object:C1471
 var $urlParams:=New object:C1471()
 $urlParams:=$1
-
+If (Undefined:C82($urlParams.text))
+	$urlParams.text:=""
+End if 
 $type:="CODE39"
 
 $template:=Folder:C1567(fk resources folder:K87:11).file("barCode_encoder.html")
 
-If ($template.exists) & ($urlParams.data#"")
+If ($template.exists) & ($urlParams.data#"") & (Not:C34(Undefined:C82($urlParams.data)))
 	
 	$templatePath:=Convert path system to POSIX:C1106($template.platformPath)
 	

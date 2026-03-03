@@ -41,6 +41,7 @@ Function redrawAndSetVisible()
 	OBJECT SET VISIBLE:C603(*; "bResponsibleEdit"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET VISIBLE:C603(*; "bInterestedPartyEdit"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET VISIBLE:C603(*; "PopupDat@"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET VISIBLE:C603(*; "btnDatePicker@"; Form:C1466.sfw.checkIsInModification())
 	
 	OBJECT SET ENTERABLE:C238(*; "entryField@"; Form:C1466.sfw.checkIsInModification())
 	If (OBJECT Get title:C1068(*; "pup_procedure")="QCAR#@")

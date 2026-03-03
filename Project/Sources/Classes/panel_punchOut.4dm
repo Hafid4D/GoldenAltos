@@ -62,7 +62,6 @@ Function redrawAndSetVisible()
 				OBJECT SET VISIBLE:C603(*; "entryField_approver"; (Form:C1466.currentStep.areas="QC"))
 				OBJECT SET VISIBLE:C603(*; "entryField_isApproved"; (Form:C1466.currentStep.areas="QC"))
 				OBJECT SET VISIBLE:C603(*; "entryField_isApproved"; (Form:C1466.currentStep.areas="QC"))
-				OBJECT SET VISIBLE:C603(*; "btnDatePickerApproval"; (Form:C1466.currentStep.areas="QC"))
 				OBJECT SET VISIBLE:C603(*; "btnDatePicker@"; ((Form:C1466.sfw.checkIsInModification()) & (Form:C1466.currentStep.areas="QC")))
 				
 			Else 
@@ -75,7 +74,6 @@ Function redrawAndSetVisible()
 				OBJECT SET VISIBLE:C603(*; "entryField_approver"; False:C215)
 				OBJECT SET VISIBLE:C603(*; "entryField_isApproved"; False:C215)
 				OBJECT SET VISIBLE:C603(*; "entryField_isApproved"; False:C215)
-				OBJECT SET VISIBLE:C603(*; "btnDatePickerApproval"; False:C215)
 				OBJECT SET VISIBLE:C603(*; "btnDatePicker@"; False:C215)
 				
 				
@@ -85,6 +83,8 @@ Function redrawAndSetVisible()
 			//: (FORM Get current page(*)=2)
 			//OBJECT SET VISIBLE(*; "bUploadDocument"; Form.sfw.checkIsInModification())
 	End case 
+	OBJECT SET ENABLED:C1123(*; "entryField_approvalDate"; False:C215)
+	OBJECT SET ENABLED:C1123(*; "entryField_approver"; False:C215)
 	
 	
 Function loadCurrentStep()
@@ -160,26 +160,6 @@ Function bActionBins()
 	End if 
 	
 	
-Function btnDatePicker($object; $attribut)
-	If (Form:C1466.sfw.checkIsInModification())
-		
-		If ($object#Null:C1517)
-			$form:=New object:C1471
-			$form.date:=$object[$attribut]
-			
-			OBJECT GET COORDINATES:C663(Self:C308->; $left; $top; $rigth; $bottom)
-			CONVERT COORDINATES:C1365($left; $bottom; XY Current form:K27:5; XY Main window:K27:8)
-			Open window:C153($left; $bottom; $left+285; $bottom+210; Movable dialog box:K34:7; "calendar")
-			DIALOG:C40("_ga_calendar"; $form)
-			
-			If (OK=1)
-				$object[$attribut]:=$form.calendar.display.date
-				//This._activate_save_cancel_button()
-			End if 
-			
-		End if 
-		
-	End if 
 	
 	
 	

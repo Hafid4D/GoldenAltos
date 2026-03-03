@@ -1,9 +1,12 @@
 //%attributes = {}
 var $check; $uncheked : Picture
 var $context_o : Object
+var $parameters : Object:=New object:C1471
 $wpDoc:=WP New:C1317()
 
-$barcode:=_ga_generateBarCode(Form:C1466.current_item.lotNumber)
+$parameters.data:=Form:C1466.current_item.moreData.barcodeData
+//$parameters.text:=Form.current_item.lotNumber
+$barcode:=_ga_generateBarCode($parameters)  //Form.current_item.lotNumber)
 
 $context:=New object:C1471(\
 "travelerNumber"; Form:C1466.current_item.job.jobNumber; \

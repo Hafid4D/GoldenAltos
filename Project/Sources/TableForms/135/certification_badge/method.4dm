@@ -3,12 +3,14 @@ Case of
 		var $certifications; $barcode : Picture
 		var $bar; $Zint_Params : Object
 		var $barcodeType : Text
+		var $parameters : Object:=New object:C1471()
 		
 		//MARK: employee information
 		Form:C1466.employee:=New object:C1471(\
 			"firstName"; [Staff:135]firstName:4; \
 			"lastName"; [Staff:135]lastName:5; \
-			"code"; [Staff:135]code:10\
+			"code"; [Staff:135]code:10; \
+			"barcodeData"; [Staff:135]moreData:11.barcodeData\
 			)
 		
 		
@@ -43,22 +45,32 @@ Case of
 		SVG_CLEAR($svg)
 		
 		//MARK: barcode
-		$barcodeType:="Code39"
-		
-		$Zint_Params:=New object:C1471
-		
-		OB SET:C1220($Zint_Params; ZINT_FORMAT; ZINT_Format_SVG)
-		OB SET:C1220($zint_params; ZINT_WHITE_SPACE; 5)
-		
-		
-		OB SET:C1220($Zint_Params; ZINT_NO_TEXT; False:C215)
-		OB SET:C1220($zint_params; ZINT_HEIGHT; 20)
-		
-		OB SET:C1220($Zint_Params; ZINT_TYPE; BARCODE_CODE39)
-		
-		$bar:=ZINT(Form:C1466.employee.code; $Zint_Params)
-		
-		$barcode:=$bar.image
+		If (False:C215)  //using plugin
+			$barcodeType:="Code39"
+			
+			$Zint_Params:=New object:C1471
+			
+			OB SET:C1220($Zint_Params; ZINT_FORMAT; ZINT_Format_SVG)
+			OB SET:C1220($zint_params; ZINT_WHITE_SPACE; 5)
+			
+			
+			OB SET:C1220($Zint_Params; ZINT_NO_TEXT; False:C215)
+			OB SET:C1220($zint_params; ZINT_HEIGHT; 20)
+			
+			OB SET:C1220($Zint_Params; ZINT_TYPE; BARCODE_CODE39)
+			
+			$bar:=ZINT(Form:C1466.employee.code; $Zint_Params)
+			
+			$barcode:=$bar.image
+			
+		Else   //using offscreen webArea
+			
+			$parameters.data:=Form:C1466.employee.barcodeData
+			$parameters.text:=""
+			
+			$barcode:=_ga_generateBarCode($parameters)
+			
+		End if 
 		
 		PICTURE PROPERTIES:C457($barcode; $PicWidth; $PicHeight)
 		

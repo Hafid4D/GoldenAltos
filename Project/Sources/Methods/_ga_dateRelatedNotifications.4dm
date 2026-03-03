@@ -36,7 +36,7 @@ _ga_notifier(->$equipments; "duePM"; "DueEquipmentOutOfPM"; "Equipment"; "assign
 /*
 Employees requiring retraining in the next 30 days
 */
-var $staffs : cs:C1710.StaffRoleSelection
+var $staffs : cs:C1710.StaffSelection
 $staffs:=ds:C1482.Staff.query("retrainDate<=:1 & retrainDate#:2"; Current date:C33(*)+30; !00-00-00!)
 _ga_notifier(->$staffs; "retrainNotified"; "EmployeeRetrainRequired"; "Staff"; "fullName")
 

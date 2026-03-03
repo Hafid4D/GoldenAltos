@@ -9,6 +9,7 @@ property destinationFolderPath : Text
 property autoQuit : Boolean
 property title : Text
 property sheetName : Text
+property destinationFileName : Text
 
 Class constructor($templatePath : Text; $mapping : Collection; $entitySelection; $destinationFileName : Text; $destinationFolderPath : Text; $title : Text; $sheetName : Text)
 	This:C1470.templatePath:=$templatePath
@@ -96,11 +97,14 @@ Function onEvent()
 							
 						Else 
 							
+							var $content : Variant
+							
 							$linksFields:=Split string:C1554($field; "."; sk ignore empty strings:K86:1+sk trim spaces:K86:2)
+							
 							$content:=$entity[String:C10($linksFields[0])]
 							
 							For ($i; 1; $linksFields.length-1)
-								$content:=$content[String:C10($linksFields[$i])]
+								$content:=String:C10($content[String:C10($linksFields[$i])])
 								If ($content=Null:C1517)
 									$content:=""
 									break
@@ -161,7 +165,7 @@ Function onEvent()
 			
 			//Columns With
 			For ($i; 0; $colomnWith.length-1)
-				$size:=$colomnWith[$i]*10
+				$size:=$colomnWith[$i]*10>500 ? 500 : $colomnWith[$i]*10
 				VP SET COLUMN ATTRIBUTES(VP Column(This:C1470.area; $i); New object:C1471("width"; $size))
 			End for 
 			
