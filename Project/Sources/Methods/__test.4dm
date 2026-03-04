@@ -1,6 +1,60 @@
 //%attributes = {}
 
 $time:=Replace string:C233(String:C10(Time:C179(Timestamp:C1445); System time short:K7:9); ";"; "")
+C_TEXT:C284($1; $data)  // Ex: "12345"
+C_TEXT:C284($svg; $pattern; $char; $color)
+C_LONGINT:C283($i; $j; $width; $posX)
+C_COLLECTION:C1488($dict)
+
+$data:="12345"  //$1
+$dict:=New collection:C1472(\
+"nnnWWnWnn"; \
+"WnnWnnnnW"; \
+"nnWWnnnnW"; \
+"WnWWnnnnn"; \
+"nnnWWnnnW"; \
+"WnnWWnnnn"; \
+"nnWWWnnnn"; \
+"nnnWnnWnW"; \
+"WnnWnnWnn"; \
+"nnWWnnWnn"; \
+"nWnWnnnnn"\
+)
+
+
+$fullData:=$data  //"*"+$data+"*"  // Ajout des Start/Stop
+//$svg:="<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'>"
+$svg:=DOM Create XML Ref:C861("svg"; "http://www.w3.org/2000/svg")
+DOM SET XML ATTRIBUTE:C866($svg; "width"; "100%"; "height"; "100%")
+$posX:=0
+
+For ($i; 1; Length:C16($fullData))
+	$char:=$fullData[[$i]]
+	$pattern:=$dict[Num:C11($char)]
+	
+	If ($pattern#Null:C1517)
+		For ($j; 1; 9)
+			// Déterminer la largeur : Large=3 unités, Étroit=1 unité
+			$width:=Choose:C955($pattern[[$j]]="W"; 3; 1)
+			
+			// Alternance : J impair = Noir, J pair = Blanc (on ne dessine que le noir)
+			If ($j%2#0)
+				$svg+="<rect x='"+String:C10($posX)+"' y='0' width='"+String:C10($width)+"' height='50' fill='black' />"
+				
+			End if 
+			
+			$posX:=$posX+$width
+		End for 
+		$posX:=$posX+1  // Espace inter-caractère (blanc étroit obligatoire)
+	End if 
+End for 
+
+$svg+="</svg>"
+
+// Utilisation du résultat :
+$picture:=SVG EXPORT TO PICTURE:C1017($svg)
+
+
 //ZINT PLUGIN TESTING
 
 //$Zint_Params:=New object

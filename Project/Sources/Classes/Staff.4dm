@@ -54,6 +54,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListAction("Export Employees - PDF"; "Staff_export_employees_pdf")
 	$entry.setItemListAction("Print Badges"; "Staff_print_badges")
 	
+	$entry.setItemListAction("print Barcode for the selection"; "_ga_multipleBarcodePrint")
+	
 	$entry.setItemAction("Print Badge"; "staff_print_badge")
 	$entry.setItemAction("Print Certification Training"; "staff_print_cert_training")
 	
