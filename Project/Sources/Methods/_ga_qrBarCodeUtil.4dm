@@ -4,7 +4,7 @@ WA OPEN URL:C1020(*; This:C1470.area; This:C1470.url)
 
 Case of 
 		
-	: ($1="encoder")
+	: ($1="encoder")  //QR CODE
 		
 		If (FORM Event:C1606.code=On End URL Loading:K2:47)
 			$js:="document.getElementById('canvas').getElementsByTagName('img')[0].src"
@@ -12,7 +12,7 @@ Case of
 			This:C1470.result:=WA Evaluate JavaScript:C1029(*; This:C1470.area; $js)
 		End if 
 		
-	: ($1="decoder")
+	: ($1="decoder")  //QR CODE
 		
 		If (FORM Event:C1606.code=On End URL Loading:K2:47)
 			DELAY PROCESS:C323(Current process:C322; 120)
@@ -28,7 +28,7 @@ Case of
 			This:C1470.result:=WA Evaluate JavaScript:C1029(*; This:C1470.area; $js)  // $jsCode)
 		End if 
 		
-	: ($1="GenerateBarCode")
+	: ($1="GenerateBarCode")  //BARCODE
 		
 		If (FORM Event:C1606.code=On End URL Loading:K2:47)
 			$js:="document.getElementById('result-box').getAttribute('data-base64')"
@@ -36,7 +36,7 @@ Case of
 			This:C1470.result:=WA Evaluate JavaScript:C1029(*; This:C1470.area; $js)
 		End if 
 		
-	: ($1="readBarCode")
+	: ($1="readBarCode")  //BARCODE
 		
 		If (FORM Event:C1606.code=On End URL Loading:K2:47)
 			DELAY PROCESS:C323(Current process:C322; 120)
