@@ -10,22 +10,25 @@ If (Form:C1466.sfw.lb_items.length>0)
 	var $wp : Object:=WP New:C1317()
 	var $parameters : Object:=New object:C1471()
 	
-	$width_us_letter_r:=10  //21.59
-	$height_us_letter_r:=10  //27.94
+	//$width_us_letter_r:=10  //21.59
+	//$height_us_letter_r:=10  //27.94
 	
-	WP SET ATTRIBUTES:C1342($wp; wk page width:K81:262; $width_us_letter_r; wk page height:K81:263; $height_us_letter_r)  //; wk page orientation; wk portrait)
+	//WP SET ATTRIBUTES($wp; wk layout unit; wk unit cm)
+	
+	//WP SET ATTRIBUTES($wp; wk page width; $width_us_letter_r; wk page height; $height_us_letter_r)  //; wk page orientation; wk portrait)
+	
+	WP SET ATTRIBUTES:C1342($wp; wk text align:K81:49; wk center:K81:99)
+	
+	$Zint_Params:=New object:C1471
+	
+	OB SET:C1220($Zint_Params; ZINT_FORMAT; ZINT_Format_SVG)
+	OB SET:C1220($zint_params; ZINT_WHITE_SPACE; 1)
 	
 	
-	//$Zint_Params:=New object
-	
-	//OB SET($Zint_Params; ZINT_FORMAT; ZINT_Format_SVG)
-	//OB SET($zint_params; ZINT_WHITE_SPACE; 1)
-	
-	
-	//OB SET($Zint_Params; ZINT_NO_TEXT; False)
-	//OB SET($zint_params; ZINT_HEIGHT; 35)
-	//OB SET($zint_params; ZINT_SCALE; 0.2)
-	//OB SET($Zint_Params; ZINT_TYPE; BARCODE_CODE39)
+	OB SET:C1220($Zint_Params; ZINT_NO_TEXT; False:C215)
+	OB SET:C1220($zint_params; ZINT_HEIGHT; 35)
+	OB SET:C1220($zint_params; ZINT_SCALE; 0.2)
+	OB SET:C1220($Zint_Params; ZINT_TYPE; BARCODE_CODE39)
 	
 	
 	For each ($record; Form:C1466.sfw.lb_items)
@@ -67,7 +70,8 @@ If (Form:C1466.sfw.lb_items.length>0)
 		
 	End for each 
 	
-	PRINT SETTINGS:C106
+	//PRINT SETTINGS
+	SET PRINT PREVIEW:C364(True:C214)
 	OPEN PRINTING JOB:C995
 	WP PRINT:C1343($wp)
 	CLOSE PRINTING JOB:C996
