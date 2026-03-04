@@ -91,7 +91,7 @@ Function get totalAccDepreciation()->$totalAccDepreciation : Real
 			$totalAccDepreciation:=This:C1470.monthlyDepreciation*This:C1470.life
 			
 		Else 
-			$totalAccDepreciation:=This:C1470.monthlyDepreciation*This:C1470.monthInService
+			$totalAccDepreciation:=This:C1470.monthlyDepreciation*Num:C11(This:C1470.monthInService)
 			
 	End case 
 	
