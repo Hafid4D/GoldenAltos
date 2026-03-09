@@ -40,6 +40,10 @@ Function redrawAndSetVisible()
 			OBJECT GET COORDINATES:C663(*; "header_bkgd2"; $g; $h; $d; $b)
 			OBJECT SET COORDINATES:C1248(*; "header_bkgd2"; $g; $h; $widthSubform; $b)
 			
+		: (FORM Get current page:C276(*)=2)
+			OBJECT GET COORDINATES:C663(*; "entryField_deprecationHistory"; $g; $h; $d; $b)
+			OBJECT SET COORDINATES:C1248(*; "entryField_deprecationHistory"; $g; $h; $d; $heightSubform-15)
+			
 	End case 
 	
 	OBJECT SET ENTERABLE:C238(*; "entryField_assetNumber"; False:C215)

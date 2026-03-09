@@ -1,10 +1,11 @@
 //%attributes = {}
 
 $time:=Replace string:C233(String:C10(Time:C179(Timestamp:C1445); System time short:K7:9); ";"; "")
-C_TEXT:C284($1; $data)  // Ex: "12345"
-C_TEXT:C284($svg; $pattern; $char; $color)
-C_LONGINT:C283($i; $j; $width; $posX)
-C_COLLECTION:C1488($dict)
+var $1; $data : Text  // Ex: "12345"
+var $pattern; $char; $color : Text
+var $i; $j; $width; $posX : Integer
+var $dict : Collection:=New collection:C1472()
+var $vpict : Picture
 
 $data:="12345"  //$1
 $dict:=New collection:C1472(\
@@ -39,8 +40,8 @@ For ($i; 1; Length:C16($fullData))
 			
 			// Alternance : J impair = Noir, J pair = Blanc (on ne dessine que le noir)
 			If ($j%2#0)
-				$svg+="<rect x='"+String:C10($posX)+"' y='0' width='"+String:C10($width)+"' height='50' fill='black' />"
-				
+				//$svg+="<rect x='"+String($posX)+"' y='0' width='"+String($width)+"' height='50' fill='black' />"
+				$ref:=DOM Create XML element:C865($svg; "rect"; "x"; String:C10($posX); "y"; 0; "width"; String:C10($width); "height"; "50"; "fill"; "black")
 			End if 
 			
 			$posX:=$posX+$width
@@ -49,11 +50,28 @@ For ($i; 1; Length:C16($fullData))
 	End if 
 End for 
 
-$svg+="</svg>"
+//Utilisation du résultat : 
+SVG EXPORT TO PICTURE:C1017($svg; $vpict; Copy XML data source:K45:17)
 
-// Utilisation du résultat :
-$picture:=SVG EXPORT TO PICTURE:C1017($svg)
 
+//var vpict : Picture
+//$svg:=DOM Create XML Ref("svg"; "http://www.w3.org/2000/svg")
+//$ref:=DOM Create XML element($svg; "text"; "font-size"; 26; "fill"; "red")
+//DOM SET XML ATTRIBUTE($ref; "y"; "1em")
+//DOM SET XML ELEMENT VALUE($ref; "Hello World")
+//SVG EXPORT TO PICTURE($svg; $vpict; Copy XML data source)
+//DOM CLOSE XML($svg)
+
+//WRITE PICTURE FILE(""; $vpict)
+
+TRANSFORM PICTURE:C988($vpict; Scale:K61:2; 1; 0.99)
+$doc:=WP New:C1317()
+$range:=WP Text range:C1341($doc; wk end text:K81:164; wk end text:K81:164)
+WP Insert picture:C1437($range; $vpict; wk append:K81:179)
+
+SET PRINT PREVIEW:C364(True:C214)
+
+WP PRINT:C1343($doc)
 
 //ZINT PLUGIN TESTING
 

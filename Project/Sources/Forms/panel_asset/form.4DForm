@@ -505,9 +505,41 @@
 					]
 				}
 			}
+		},
+		{
+			"objects": {
+				"label_deprecationHistory": {
+					"type": "text",
+					"top": 134,
+					"left": 108,
+					"width": 200,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Deprecation history",
+					"textAlign": "left"
+				},
+				"entryField_deprecationHistory": {
+					"type": "input",
+					"top": 164,
+					"left": 108,
+					"width": 750,
+					"height": 192,
+					"dataSource": "Form:C1466.current_item.deprecationHistory",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"scrollbarVertical": "automatic"
+				}
+			}
 		}
 	],
-	"geometryStamp": 86,
+	"geometryStamp": 90,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"method": "method.4dm",
 	"editor": {

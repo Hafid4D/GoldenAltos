@@ -13,6 +13,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setPanel("panel_asset"; 1)
 	$entry.setPanelPage(1; ""; "Main")
+	$entry.setPanelPage(2; ""; "Deprecation History")
 	$entry.setSubset("main")
 	
 	$entry.setLBItemsColumn("assetNumber"; "Asset #"; "width:50")

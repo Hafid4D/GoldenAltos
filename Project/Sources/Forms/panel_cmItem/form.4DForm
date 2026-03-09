@@ -247,17 +247,17 @@
 				"Text1": {
 					"type": "text",
 					"text": "Memo : ",
-					"top": 401,
-					"left": 12,
+					"top": 253,
+					"left": 686,
 					"width": 50,
 					"height": 17
 				},
 				"entryField_memo": {
 					"type": "input",
-					"left": 68,
-					"top": 401,
-					"width": 593,
-					"height": 75,
+					"left": 697,
+					"top": 290,
+					"width": 179,
+					"height": 288,
 					"scrollbarVertical": "automatic"
 				},
 				"label_subTotal": {
@@ -371,11 +371,124 @@
 					"text": "Credit Memo Informations",
 					"fontSize": 12,
 					"fontWeight": "bold"
+				},
+				"header_bkgd3": {
+					"type": "rectangle",
+					"top": 401,
+					"left": 0,
+					"width": 677,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 677
+				},
+				"Text3": {
+					"type": "text",
+					"top": 408,
+					"left": 8,
+					"width": 250,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Memo infos",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"List Box": {
+					"type": "listbox",
+					"left": 0,
+					"top": 433,
+					"width": 677,
+					"height": 144,
+					"events": [
+						"onClick",
+						"onHeaderClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"selectionMode": "single",
+					"horizontalLineStroke": "transparent",
+					"scrollbarHorizontal": "automatic",
+					"alternateFill": "#E6E6E6",
+					"borderStyle": "none",
+					"columns": [
+						{
+							"header": {
+								"text": "#",
+								"name": "Header1",
+								"fontWeight": "bold"
+							},
+							"name": "Column1",
+							"footer": {
+								"name": "Footer1"
+							},
+							"width": 30
+						},
+						{
+							"header": {
+								"name": "Header2",
+								"text": "Description",
+								"fontWeight": "bold"
+							},
+							"name": "Column2",
+							"footer": {
+								"name": "Footer2"
+							},
+							"width": 281
+						},
+						{
+							"header": {
+								"name": "Header3",
+								"text": "Account",
+								"fontWeight": "bold"
+							},
+							"name": "Column3",
+							"footer": {
+								"name": "Footer3"
+							},
+							"width": 77
+						},
+						{
+							"header": {
+								"name": "Header4",
+								"text": "Qty",
+								"fontWeight": "bold"
+							},
+							"name": "Column4",
+							"footer": {
+								"name": "Footer4"
+							},
+							"width": 67
+						},
+						{
+							"header": {
+								"name": "Header5",
+								"text": "Rate",
+								"fontWeight": "bold"
+							},
+							"name": "Column5",
+							"footer": {
+								"name": "Footer5"
+							},
+							"width": 85
+						},
+						{
+							"header": {
+								"name": "Header6",
+								"text": "Amount",
+								"fontWeight": "bold"
+							},
+							"name": "Column6",
+							"footer": {
+								"name": "Footer6"
+							}
+						}
+					]
 				}
 			}
 		}
 	],
-	"geometryStamp": 23,
+	"geometryStamp": 41,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
