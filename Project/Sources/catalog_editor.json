@@ -795,6 +795,36 @@
 				}
 			}
 		},
+		"TransactionStatus": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 4628,
+				"top": 836,
+				"width": 120,
+				"height": 204.33203125
+			},
+			"displayable_fields_count": 7
+		},
+		"TransactionType": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 4416,
+				"top": 836,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6
+		},
 		"sfw_NotificationType": {
 			"color": {
 				"red": 168,
@@ -890,6 +920,21 @@
 			},
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
+		},
+		"SalesTransaction": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 4869,
+				"top": 826,
+				"width": 185,
+				"height": 288.33203125
+			},
+			"displayable_fields_count": 11
 		},
 		"CMItem": {
 			"color": {
@@ -2462,6 +2507,30 @@
 		}
 	},
 	"relations": {
+		"EF2F0BDA062744EAA9F189FBD02C739C": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"F89075FC9E0E459B877454870E600049": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"83C998D7DBA343C8B5B10AC8FBECE8E3": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"4B2BA8FB532C7C4393AF836D5665F337": {
 			"color": {
 				"red": 240,

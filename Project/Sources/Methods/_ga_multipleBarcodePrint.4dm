@@ -29,7 +29,7 @@ If (Form:C1466.sfw.lb_items.length>0)
 	OB SET:C1220($zint_params; ZINT_HEIGHT; 35)
 	OB SET:C1220($zint_params; ZINT_SCALE; 0.2)
 	OB SET:C1220($Zint_Params; ZINT_TYPE; BARCODE_CODE39)
-	
+	//OB SET($Zint_Params; ZINT_PRIMARY; $parameters.text)
 	
 	For each ($record; Form:C1466.sfw.lb_items)
 		
@@ -43,9 +43,6 @@ If (Form:C1466.sfw.lb_items.length>0)
 			
 		Else 
 			
-			
-			//OB SET($Zint_Params; ZINT_PRIMARY; $parameters.text)
-			
 			$bar:=ZINT($parameters.data; $Zint_Params)
 			$barcode:=$bar.image
 			
@@ -57,10 +54,8 @@ If (Form:C1466.sfw.lb_items.length>0)
 		
 		//$paragraph:=WP Get elements($wp; wk type image)
 		
-		
 		// Assuming $pictRef is a reference to your image element
 		//WP SET ATTRIBUTES($paragraph[$paragraph.length-1]; wk image alternate text; "NOthing")
-		
 		
 		WP Insert break:C1413($wp; wk page break:K81:188; wk append:K81:179)
 		
@@ -72,9 +67,9 @@ If (Form:C1466.sfw.lb_items.length>0)
 	
 	//PRINT SETTINGS
 	SET PRINT PREVIEW:C364(True:C214)
-	OPEN PRINTING JOB:C995
+	//OPEN PRINTING JOB
 	WP PRINT:C1343($wp)
-	CLOSE PRINTING JOB:C996
+	//CLOSE PRINTING JOB
 	
 	$end:=Current time:C178()
 	$time:=$end-$start
