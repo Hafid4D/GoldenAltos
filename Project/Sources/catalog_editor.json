@@ -803,12 +803,13 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 5316,
-				"top": 0,
-				"width": 160,
-				"height": 201.33203125
+				"left": 5340,
+				"top": 16,
+				"width": 154,
+				"height": 175.33203125
 			},
-			"displayable_fields_count": 7
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
 		},
 		"TransactionStatus": {
 			"color": {
@@ -2524,9 +2525,9 @@
 	"relations": {
 		"C7D48852530842BA9BC07499FAF8A048": {
 			"color": {
-				"red": 240,
-				"green": 240,
-				"blue": 240,
+				"red": 255,
+				"green": 255,
+				"blue": 255,
 				"alpha": 0
 			}
 		},

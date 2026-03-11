@@ -820,6 +820,9 @@ End if
 /**
 Create user: sfw_User & Staff tables
 **/
+
+
+
 If (True:C214)
 	TRUNCATE TABLE:C1051([Staff:135])
 	TRUNCATE TABLE:C1051([sfw_User:16])
@@ -918,8 +921,27 @@ If (True:C214)
 	//SET DATABASE PARAMETER([Staff]; Table sequence number; 2)
 	
 	For each ($staff; $staffs_excel)
+		
+		
+		$user:=ds:C1482.sfw_User.new()
+		$user.firstName:=$staff.firstName
+		$user.lastName:=$staff.lastName
+		$user.login:=Lowercase:C14($staff.firstName+$staff.lastName)
+		$user.accesses:=JSON Parse:C1218("{\"asDesigner\":true,\"password\":{\"temporary\":false,\"sendTemporaryByMail\":false,\"lastReset\":705253775,\"hash\":\"$2b$10$1KIfSf/DkyivGUKEeHHPDulQ51F9LSOuyFmHy6X9TvAXi1K79E4ri\",\"lastChange\":705253879}}")  //pSzjGX!Ey9P1c~p
+		$user.asDesigner:=True:C214
+		$user.moreData:=New object:C1471()
+		$recodNumber:=ds:C1482.sfw_Counter.getNextValue("sfw_User")
+		$user.moreData.barcodeData:=String:C10($recodNumber; "0000000000")
+		$res:=$user.save()
+		
+		If (Not:C34($res.success))
+			TRACE:C157
+		End if 
+		
+		
 		$staff_e:=ds:C1482.Staff.new()
 		
+		$staff.UUID_User:=$user.UUID
 		$staff_e.code:=String:C10($staff_e.codeID; "00000#")
 		$staff_e.firstName:=$staff.firstName
 		$staff_e.lastName:=$staff.lastName

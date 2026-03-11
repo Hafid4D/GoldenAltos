@@ -1,0 +1,570 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 0,
+	"bottomMargin": 0,
+	"events": [
+		"onLoad",
+		"onValidate",
+		"onClick",
+		"onOutsideCall",
+		"onDoubleClick",
+		"onDrop",
+		"onMenuSelect",
+		"onPluginArea",
+		"onDataChange",
+		"onDragOver",
+		"onTimer",
+		"onAfterKeystroke",
+		"onAfterEdit",
+		"onBeginDragOver",
+		"onBoundVariableChange",
+		"onPageChange"
+	],
+	"windowTitle": "window title",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {
+				"label_0_1": {
+					"type": "text",
+					"top": 12,
+					"left": 12,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Customer"
+				},
+				"label_0_2": {
+					"type": "text",
+					"top": 37,
+					"left": 12,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Step File Name"
+				},
+				"entryField_name": {
+					"type": "input",
+					"top": 37,
+					"left": 132,
+					"width": 266,
+					"height": 16,
+					"dataSource": "Form:C1466.current_item.name",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"entryField_status": {
+					"type": "checkbox",
+					"text": "Active",
+					"top": 7,
+					"left": 436,
+					"width": 72,
+					"height": 24,
+					"events": [
+						"onClick"
+					],
+					"fontWeight": "bold",
+					"dataSourceTypeHint": "boolean",
+					"dataSource": "Form:C1466.current_item.status"
+				},
+				"label_status": {
+					"type": "text",
+					"top": 12,
+					"left": 352,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Status"
+				},
+				"pup_customer": {
+					"type": "button",
+					"top": 10,
+					"left": 132,
+					"width": 196,
+					"height": 20,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": " ",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_customer.4dm",
+					"events": [
+						"onClick"
+					]
+				}
+			}
+		},
+		{
+			"objects": {
+				"pup_process": {
+					"type": "button",
+					"top": 95,
+					"left": 102,
+					"width": 146,
+					"height": 26,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": " ",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_process.4dm",
+					"events": [
+						"onClick"
+					],
+					"textAlign": "center"
+				},
+				"btnMoveTop": {
+					"type": "button",
+					"text": " ",
+					"top": 389,
+					"left": 1093,
+					"width": 26,
+					"height": 26,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/arrow-top.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnMoveTop.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
+				},
+				"btnMoveUp": {
+					"type": "button",
+					"text": " ",
+					"top": 422,
+					"left": 1093,
+					"width": 26,
+					"height": 26,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/arrow-up.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnMoveUp.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
+				},
+				"btnMoveDown": {
+					"type": "button",
+					"text": " ",
+					"top": 455,
+					"left": 1093,
+					"width": 26,
+					"height": 26,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/arrow-down.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnMoveDown.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
+				},
+				"btnMoveBottom": {
+					"type": "button",
+					"text": " ",
+					"top": 488,
+					"left": 1093,
+					"width": 26,
+					"height": 26,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/arrow-bottom.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnMoveBottom.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
+				},
+				"lb_selectedSteps": {
+					"type": "listbox",
+					"left": 102,
+					"top": 322,
+					"width": 971,
+					"height": 292,
+					"events": [
+						"onClick",
+						"onDoubleClick",
+						"onDrop",
+						"onDataChange",
+						"onSelectionChange",
+						"onBeginDragOver"
+					],
+					"headerHeight": "24px",
+					"listboxType": "collection",
+					"visibility": "visible",
+					"dataSource": "Form:C1466.selectedSteps",
+					"alternateFill": "#F7F9FC",
+					"method": "ObjectMethods/lb_selectedSteps.4dm",
+					"selectionMode": "single",
+					"dragging": "custom",
+					"dropping": "custom",
+					"currentItemSource": "Form:C1466.step",
+					"currentItemPositionSource": "Form:C1466.stepPos",
+					"metaSource": "",
+					"rowFillSource": "",
+					"right": 1073,
+					"bottom": 614,
+					"scrollbarHorizontal": "hidden",
+					"borderStyle": "system",
+					"fill": "#FFFFFF",
+					"focusable": true,
+					"horizontalLineStroke": "transparent",
+					"sizingY": "grow",
+					"columns": [
+						{
+							"header": {
+								"name": "Header13",
+								"text": "#"
+							},
+							"name": "Column13",
+							"width": 34,
+							"resizable": false,
+							"footer": {
+								"name": "Footer13"
+							},
+							"dataSource": "This:C1470.order"
+						},
+						{
+							"header": {
+								"name": "Header6",
+								"text": "Operation",
+								"fontWeight": "bold"
+							},
+							"name": "Column6",
+							"footer": {
+								"name": "Footer6"
+							},
+							"dataSource": "This:C1470.step.moreData.Process",
+							"width": 112,
+							"enterable": false,
+							"minWidth": 90,
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header7",
+								"text": "Published Step",
+								"fontWeight": "bold"
+							},
+							"name": "Column7",
+							"footer": {
+								"name": "Footer7"
+							},
+							"dataSource": "This:C1470.step.description",
+							"width": 500,
+							"enterable": false,
+							"minWidth": 200,
+							"resizable": true
+						},
+						{
+							"header": {
+								"name": "Header8",
+								"text": "Popup Step Alert"
+							},
+							"name": "Column8",
+							"dataSource": "This:C1470.step.alert",
+							"minWidth": 50,
+							"width": 100,
+							"footer": {
+								"name": "Footer8"
+							},
+							"events": [
+								"onDoubleClick"
+							],
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header9",
+								"text": "Type"
+							},
+							"name": "Column9",
+							"dataSource": "This:C1470.step.moreData.Template",
+							"minWidth": 50,
+							"width": 50,
+							"footer": {
+								"name": "Footer9"
+							},
+							"textAlign": "center",
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header10",
+								"text": "Area",
+								"dataSource": ""
+							},
+							"name": "Column10",
+							"dataSource": "This:C1470.step.area",
+							"minWidth": 50,
+							"width": 92,
+							"footer": {
+								"name": "Footer10"
+							},
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header11",
+								"text": "Property"
+							},
+							"name": "Column11",
+							"dataSource": "This:C1470.step.moreData.StepProperty",
+							"width": 100,
+							"minWidth": 50,
+							"footer": {
+								"name": "Footer11"
+							},
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header12",
+								"text": "Specification"
+							},
+							"name": "Column12",
+							"dataSource": "This:C1470.step.moreData.ControlSpec",
+							"footer": {
+								"name": "Footer12"
+							},
+							"minWidth": 50,
+							"resizable": false
+						}
+					]
+				},
+				"rec_bkgd": {
+					"type": "rectangle",
+					"top": 90,
+					"left": 1,
+					"width": 100,
+					"height": 399,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 101,
+					"bottom": 489
+				},
+				"Text": {
+					"type": "text",
+					"text": "Steps",
+					"top": 100,
+					"left": 5,
+					"width": 92,
+					"height": 16,
+					"fontWeight": "bold",
+					"right": 97
+				},
+				"bAction_delete": {
+					"type": "button",
+					"text": "Actions",
+					"top": 466,
+					"left": 5,
+					"width": 78,
+					"height": 23,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bAction_delete.4dm"
+				},
+				"lb_steps": {
+					"type": "listbox",
+					"left": 102,
+					"top": 128,
+					"width": 1044,
+					"height": 185,
+					"events": [
+						"onDoubleClick",
+						"onDataChange"
+					],
+					"headerHeight": "24px",
+					"listboxType": "collection",
+					"visibility": "visible",
+					"dataSource": "Form:C1466.steps_lb",
+					"alternateFill": "#F7F9FC",
+					"method": "ObjectMethods/lb_steps.4dm",
+					"selectionMode": "single",
+					"dragging": "custom",
+					"dropping": "custom",
+					"currentItemSource": "Form:C1466.selectedStep",
+					"currentItemPositionSource": "Form:C1466.selectedStepPos",
+					"metaSource": "",
+					"rowFillSource": "",
+					"right": 1146,
+					"bottom": 313,
+					"scrollbarHorizontal": "hidden",
+					"borderStyle": "system",
+					"fill": "#FFFFFF",
+					"focusable": true,
+					"horizontalLineStroke": "transparent",
+					"sizingY": "grow",
+					"columns": [
+						{
+							"header": {
+								"name": "Header15",
+								"text": "Operation",
+								"fontWeight": "bold"
+							},
+							"name": "Column15",
+							"footer": {
+								"name": "Footer15"
+							},
+							"dataSource": "This:C1470.moreData.Process",
+							"width": 112,
+							"enterable": false,
+							"minWidth": 90,
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header16",
+								"text": "Published Step",
+								"fontWeight": "bold"
+							},
+							"name": "Column16",
+							"footer": {
+								"name": "Footer16"
+							},
+							"dataSource": "This:C1470.description",
+							"width": 500,
+							"enterable": false,
+							"minWidth": 200,
+							"resizable": true
+						},
+						{
+							"header": {
+								"name": "Header17",
+								"text": "Popup Step Alert"
+							},
+							"name": "Column17",
+							"dataSource": "This:C1470.alert",
+							"minWidth": 50,
+							"width": 100,
+							"footer": {
+								"name": "Footer17"
+							},
+							"events": [
+								"onDoubleClick"
+							],
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header18",
+								"text": "Type"
+							},
+							"name": "Column18",
+							"dataSource": "This:C1470.moreData.Template",
+							"minWidth": 50,
+							"width": 50,
+							"footer": {
+								"name": "Footer18"
+							},
+							"textAlign": "center",
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header19",
+								"text": "Area",
+								"dataSource": ""
+							},
+							"name": "Column19",
+							"dataSource": "This:C1470.area",
+							"minWidth": 50,
+							"width": 92,
+							"footer": {
+								"name": "Footer19"
+							},
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header20",
+								"text": "Property"
+							},
+							"name": "Column20",
+							"dataSource": "This:C1470.moreData.StepProperty",
+							"width": 100,
+							"minWidth": 50,
+							"footer": {
+								"name": "Footer20"
+							},
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header21",
+								"text": "Specification"
+							},
+							"name": "Column21",
+							"dataSource": "This:C1470.moreData.ControlSpec",
+							"footer": {
+								"name": "Footer21"
+							},
+							"minWidth": 50,
+							"resizable": false
+						}
+					]
+				}
+			}
+		}
+	],
+	"inheritedForm": "sfw_bkgd_header_2lines",
+	"geometryStamp": 152,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	},
+	"method": "method.4dm"
+}

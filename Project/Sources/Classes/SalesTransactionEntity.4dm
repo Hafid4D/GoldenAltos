@@ -9,6 +9,5 @@ local Function get transactionDate()->$date : Date
 	
 local Function set transactionDate($date : Date)
 	This:C1470.stmpTransaction:=$date=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($date)
-	
-	
+
 	
