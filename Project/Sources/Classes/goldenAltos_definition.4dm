@@ -7,7 +7,7 @@ Class constructor
 	Super:C1705()
 	This:C1470._visions_definition()
 	This:C1470._entries_definition()
-	//This._event_definition()
+	This:C1470._event_definition()
 	This:C1470._scheduler_definition()
 	This:C1470._notification_definition()
 	This:C1470._profiles_definition()
