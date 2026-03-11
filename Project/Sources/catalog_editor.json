@@ -812,6 +812,7 @@
 			"fields_ordering": 1
 		},
 		"TransactionStatus": {
+
 			"color": {
 				"red": 255,
 				"green": 255,
@@ -819,27 +820,42 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 4628,
-				"top": 836,
-				"width": 120,
-				"height": 204.33203125
+				"left": 5316,
+				"top": 0,
+				"width": 160,
+				"height": 201.33203125
 			},
 			"displayable_fields_count": 7
 		},
-		"TransactionType": {
+		"TransactionStatus": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 196,
+				"green": 193,
+				"blue": 186,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4416,
-				"top": 836,
-				"width": 120,
-				"height": 167.33203125
+				"left": 5119,
+				"top": 837,
+				"width": 133,
+				"height": 168.33203125
 			},
 			"displayable_fields_count": 6
+		},
+		"TransactionType": {
+			"color": {
+				"red": 196,
+				"green": 193,
+				"blue": 186,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 4581,
+				"top": 835,
+				"width": 143,
+				"height": 159.33203125
+			},
+			"displayable_fields_count": 5
 		},
 		"sfw_NotificationType": {
 			"color": {
@@ -939,18 +955,18 @@
 		},
 		"SalesTransaction": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 196,
+				"green": 193,
+				"blue": 186,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4869,
-				"top": 826,
-				"width": 185,
-				"height": 288.33203125
+				"left": 4840,
+				"top": 828,
+				"width": 192,
+				"height": 244.33203125
 			},
-			"displayable_fields_count": 11
+			"displayable_fields_count": 9
 		},
 		"CMItem": {
 			"color": {
@@ -2235,9 +2251,9 @@
 				"left": 941,
 				"top": 0,
 				"width": 204,
-				"height": 723.33203125
+				"height": 743.33203125
 			},
-			"displayable_fields_count": 32
+			"displayable_fields_count": 33
 		},
 		"ContactEvent": {
 			"color": {
@@ -2523,7 +2539,9 @@
 		}
 	},
 	"relations": {
-		"6E09B9A28820464A9EB68DB09524503F": {
+
+		"C7D48852530842BA9BC07499FAF8A048": {
+
 			"color": {
 				"red": 240,
 				"green": 240,
@@ -2531,7 +2549,18 @@
 				"alpha": 0
 			}
 		},
-		"215BA7F197BF486293C764A60AF2A4EF": {
+
+		"6D5CE3CD6C584B38B020580EEF08F69A": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"FDFB2C9EE67C48029A5321539BBDE3F4": {
+
+
 			"color": {
 				"red": 240,
 				"green": 240,
@@ -2668,6 +2697,14 @@
 			}
 		},
 		"6E96AEAE4BC19E4FB27E421B081A26B0": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"CF612C3C7162224F85F6C66F413D9D12": {
 			"color": {
 				"red": 255,
 				"green": 255,

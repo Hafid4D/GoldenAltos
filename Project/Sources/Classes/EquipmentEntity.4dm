@@ -62,6 +62,7 @@ local Function beforeSave()
 		
 	End if 
 	
+
 	//If (Form.subForm.bufferOfEvents#Null) && (Form.subForm.bufferOfEvents.length>0)
 	//This._saveBufferOfEvents(Form.subForm.bufferOfEvents)
 	//Form.subForm.bufferOfEvents:=New collection

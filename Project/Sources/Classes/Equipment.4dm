@@ -41,6 +41,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setEventOptions("dontCreateModifyEventIfNoTrackingAttribute")
 	$entry.setLinkManyToOneToTrackInModificationEvent("EquipmentLocation"; "UUID_EquipmentLocation"; "location.name")
 	//$entry.setAttributesToTrackInModificationEvent("customerUID"; "name"; "completeName")
+
 	$entry.enableTransaction()
 	
 	
