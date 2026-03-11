@@ -1567,6 +1567,10 @@
 	<table name="StepFile" uuid="A6301A2C994D4680A851FC2AE85118BE" id="119">
 		<field name="UUID" uuid="B1C018048ECD473CB25C3F879D15164C" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="moreData" uuid="B66853ED84C36841B83BF1483363C8EA" type="21" blob_switch_size="2147483647" never_null="true" id="2"/>
+		<field name="UUID_Customer" uuid="2941A87B2DF3485887552929F23FDFBC" type="10" store_as_UUID="true" never_null="true" id="3"/>
+		<field name="name" uuid="574BD070F5B047F59D4AC45678554878" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="creationDate" uuid="939B0620507643A7B544B48D6F812300" type="8" never_null="true" id="5"/>
+		<field name="status" uuid="4802F3D65DFF4E749446CC169A34D534" type="1" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="B1C018048ECD473CB25C3F879D15164C"/>
 	</table>
 	<table name="Step" uuid="73EFE2D78C61400397353509CBA87D18" id="120">
@@ -3502,6 +3506,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
+
 	<relation uuid="FDFB2C9EE67C48029A5321539BBDE3F4" name_Nto1="equipment" name_1toN="EquipmentEvents" state="1">
 		<related_field kind="source">
 			<field_ref uuid="F024226278134107AAB92DE70E968846" name="UUID_Equipment">
@@ -3535,6 +3540,17 @@
 		<related_field kind="destination">
 			<field_ref uuid="34E9F9D48BE14DCD95127852F83BF1FB" name="UUID">
 				<table_ref uuid="2C75E07E18FC4733A8C98A0B31D40656" name="sfw_User"/>
+	 		</field_ref>
+	</related_field>
+	<relation uuid="215BA7F197BF486293C764A60AF2A4EF" name_Nto1="customer" name_1toN="stepFiles" state="1">
+		<related_field kind="source">
+			<field_ref uuid="2941A87B2DF3485887552929F23FDFBC" name="UUID_Customer">
+				<table_ref uuid="A6301A2C994D4680A851FC2AE85118BE" name="StepFile"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="37676CD94E8B423595ED98B5C0E9CF89" name="UUID">
+				<table_ref uuid="96D1CE81460A4F75B3F4275138C8F778" name="Customer"/>
 			</field_ref>
 		</related_field>
 	</relation>
@@ -4451,6 +4467,11 @@
 	<index kind="regular" uuid="A3B576932D35914CA79E9D0E093469C3" type="3">
 		<field_ref uuid="C56ACBF61233134FA887559C036F2D7A" name="UUID_Equipment">
 			<table_ref uuid="E209D11E14110249AE69799CB8F51C7C" name="RepairLog"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="A45543093808414897936EAD27B511D7" type="3">
+		<field_ref uuid="2941A87B2DF3485887552929F23FDFBC" name="UUID_Customer">
+			<table_ref uuid="A6301A2C994D4680A851FC2AE85118BE" name="StepFile"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="A515E3CF9D24F742A592D06398A9DE4C" type="3">
