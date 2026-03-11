@@ -1,5 +1,8 @@
 //%attributes = {}
 
+$users:=ds:C1482.sfw_User.getActiveUsers()
+
+
 $time:=Replace string:C233(String:C10(Time:C179(Timestamp:C1445); System time short:K7:9); ";"; "")
 var $1; $data : Text  // Ex: "12345"
 var $pattern; $char; $color : Text
