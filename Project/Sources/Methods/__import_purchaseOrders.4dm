@@ -929,6 +929,7 @@ If (True:C214)
 		$user.login:=Lowercase:C14($staff.firstName+$staff.lastName)
 		$user.accesses:=JSON Parse:C1218("{\"asDesigner\":true,\"password\":{\"temporary\":false,\"sendTemporaryByMail\":false,\"lastReset\":705253775,\"hash\":\"$2b$10$1KIfSf/DkyivGUKEeHHPDulQ51F9LSOuyFmHy6X9TvAXi1K79E4ri\",\"lastChange\":705253879}}")  //pSzjGX!Ey9P1c~p
 		$user.asDesigner:=True:C214
+		$user.isInactive:=False:C215
 		$user.moreData:=New object:C1471()
 		$recodNumber:=ds:C1482.sfw_Counter.getNextValue("sfw_User")
 		$user.moreData.barcodeData:=String:C10($recodNumber; "0000000000")
@@ -941,7 +942,7 @@ If (True:C214)
 		
 		$staff_e:=ds:C1482.Staff.new()
 		
-		$staff.UUID_User:=$user.UUID
+		$staff_e.UUID_User:=$user.UUID
 		$staff_e.code:=String:C10($staff_e.codeID; "00000#")
 		$staff_e.firstName:=$staff.firstName
 		$staff_e.lastName:=$staff.lastName
