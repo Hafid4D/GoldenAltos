@@ -1,6 +1,6 @@
 //%attributes = {}
 
-$users:=ds:C1482.sfw_User.getActiveUsers()
+$users:=ds:C1482.Equipment.all()
 
 
 $time:=Replace string:C233(String:C10(Time:C179(Timestamp:C1445); System time short:K7:9); ";"; "")
