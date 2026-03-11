@@ -35,8 +35,14 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemAction("Print Usage Log EquipTraveler"; "_ga_usageLogReport")
 	
 	
-	
+	$entry.activateEvent("EquipmentEvent"; "UUID_Equipment")
+	//$entry.setAttributesToTrackInModificationEvent("reports"; "reports"; "documents")
+	//$entry.setAttributesToTrackInModificationEvent("currentNextStep")
+	$entry.setEventOptions("dontCreateModifyEventIfNoTrackingAttribute")
+	$entry.setLinkManyToOneToTrackInModificationEvent("EquipmentLocation"; "UUID_EquipmentLocation"; "location.name")
+	//$entry.setAttributesToTrackInModificationEvent("customerUID"; "name"; "completeName")
 	$entry.enableTransaction()
+	
 	
 	// MARK: -Filters
 	
@@ -78,8 +84,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setView($view)
 	
 	// MARK:  List of equipment not requiring calibration
-	$view:=cs:C1710.sfw_definitionView.new("calibrationNotRequired"; "Equipments not requiring calibration"; "derivedFrom:main"; $entry)
-	$view.setSubset("calibrationNotRequired")
+	$view:=cs:C1710.sfw_definitionView.new("calibrationNotRequiredEquipments"; "Equipments not requiring calibration"; "derivedFrom:main"; $entry)
+	$view.setSubset("calibrationNotRequiredEquipments")
 	$entry.setView($view)
 	
 	// MARK: Prevent Maintenance equipments within X days
@@ -167,13 +173,13 @@ local Function equipmentsOutOfCalibration()->$equipments : cs:C1710.EquipmentSel
 	
 local Function dueCalibrationEquipments()->$equipments : cs:C1710.EquipmentSelection  //List of equip to be calibrated within X days
 	cs:C1710.Util.me.setDateInterval(False:C215)
-	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & notAtSite=:2"; Storage:C1525.cache.endDate; False:C215)
+	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1  & nextCalDate>:2 & notAtSite=:3"; Storage:C1525.cache.endDate; Current date:C33(*); False:C215)
 	
 local Function dueCalibrationEquipmentsExculeNPU()->$equipments : cs:C1710.EquipmentSelection  //List of equip to be calibrated within X days exclude NPU 
 	cs:C1710.Util.me.setDateInterval(False:C215)
-	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & notAtSite=:2 & engg=:3"; Storage:C1525.cache.endDate; False:C215; False:C215)
+	$equipments:=ds:C1482.Equipment.query("nextCalDate<=:1 & nextCalDate>:2 & notAtSite=:3 & engg=:4"; Storage:C1525.cache.endDate; Current date:C33(*); False:C215; False:C215)
 	
-local Function calibrationNotRequired()->$equipments : cs:C1710.EquipmentSelection
+local Function calibrationNotRequiredEquipments()->$equipments : cs:C1710.EquipmentSelection
 	$equipments:=ds:C1482.Equipment.query("calibrationNotRequired=:1"; True:C214)
 	
 local Function PMRequiredEquipments()->$equipments : cs:C1710.EquipmentSelection  //PM Required Equipments
@@ -181,11 +187,11 @@ local Function PMRequiredEquipments()->$equipments : cs:C1710.EquipmentSelection
 	
 local Function pmEquipments()->$equipments : cs:C1710.EquipmentSelection  //Prevent Maintenance equipments within X days
 	cs:C1710.Util.me.setDateInterval(False:C215)
-	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3"; Storage:C1525.cache.endDate; !00-00-00!; False:C215)
+	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate>:2 & nextPMDate#:3 & notAtSite=:3"; Storage:C1525.cache.endDate; Current date:C33(*); !00-00-00!; False:C215)
 	
 local Function duePMEquipmentsExcludeNPU()->$equipments : cs:C1710.EquipmentSelection  //Prevent Maintenance equipments within X days exclude NPU
 	cs:C1710.Util.me.setDateInterval(False:C215)
-	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate#:2 & notAtSite=:3 & engg=:4"; Storage:C1525.cache.endDate; !00-00-00!; False:C215; False:C215)
+	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate>:2 &  nextPMDate#:2 & notAtSite=:3 & engg=:4"; Storage:C1525.cache.endDate; Current date:C33(*); !00-00-00!; False:C215; False:C215)
 	
 local Function NPUEquipments()->$equipments : cs:C1710.EquipmentSelection  //NPU List
 	$equipments:=ds:C1482.Equipment.query("notAtSite=:1 & engg=:2"; False:C215; True:C214)

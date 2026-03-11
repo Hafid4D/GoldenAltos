@@ -20,6 +20,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("transactionType.name"; "Type"; "width:100")
 	
 	//$entry.setLBItemsColumn("creditMemo.cmTotal"; "Total"; "width:100")
+	$entry.setLBItemsColumn("transactionDate"; "Date"; "width:50")
 	
 	//$entry.setLBItemsOrderBy("creditMemo.cmNum")
 	$entry.setMainViewLabel("All sales transaction")

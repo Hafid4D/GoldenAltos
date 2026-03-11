@@ -795,6 +795,22 @@
 				}
 			}
 		},
+		"EquipmentEvent": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 5340,
+				"top": 16,
+				"width": 154,
+				"height": 175.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
 		"TransactionStatus": {
 			"color": {
 				"red": 255,
@@ -2507,6 +2523,14 @@
 		}
 	},
 	"relations": {
+		"6E09B9A28820464A9EB68DB09524503F": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"215BA7F197BF486293C764A60AF2A4EF": {
 			"color": {
 				"red": 240,
@@ -2668,6 +2692,14 @@
 			}
 		},
 		"0DF1DB360B8B48BE84653E6CA2F326BE": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"C7D48852530842BA9BC07499FAF8A048": {
 			"color": {
 				"red": 255,
 				"green": 255,

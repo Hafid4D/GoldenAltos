@@ -62,3 +62,20 @@ local Function beforeSave()
 		
 	End if 
 	
+	//If (Form.subForm.bufferOfEvents#Null) && (Form.subForm.bufferOfEvents.length>0)
+	//This._saveBufferOfEvents(Form.subForm.bufferOfEvents)
+	//Form.subForm.bufferOfEvents:=New collection
+	//End if 
+	
+	
+	//local Function beforeSaveCreation()
+	
+	//This._saveBufferOfEvents(Form.subForm.bufferOfEvents)
+	
+	
+	//Function _saveBufferOfEvents($bufferOfEvents : Collection)
+	//For each ($buffer; $bufferOfEvents)
+	//$moreData:=New object
+	//$moreData.comment:=$buffer.label
+	//cs.sfw_eventManager.me.addEvent(Form.sfw.entry; $buffer.event; This.UUID; $moreData; $buffer.stmp)
+	//End for each 
