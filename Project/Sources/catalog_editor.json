@@ -588,10 +588,10 @@
 			"coordinates": {
 				"left": 3031.6667480469,
 				"top": 630.66668701172,
-				"width": 201.048828125,
-				"height": 378.33203125
+				"width": 244.048828125,
+				"height": 436.33203125
 			},
-			"displayable_fields_count": 16,
+			"displayable_fields_count": 18,
 			"fields": {
 				"bins": {
 					"position": 15
@@ -644,10 +644,10 @@
 			"coordinates": {
 				"left": 2652,
 				"top": 789.33331298828,
-				"width": 170.80078125,
-				"height": 210.33203125
+				"width": 190.80078125,
+				"height": 230.33203125
 			},
-			"displayable_fields_count": 8,
+			"displayable_fields_count": 9,
 			"fields_ordering": 2,
 			"fields": {
 				"specification": {
@@ -675,13 +675,13 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2427,
-				"top": 802,
+				"left": 2440,
+				"top": 789,
 				"width": 161.33203125,
 				"height": 209.33203125
 			},
 			"displayable_fields_count": 8,
-			"fields_ordering": 1
+			"fields_ordering": 6
 		},
 		"Lot": {
 			"color": {
@@ -2507,6 +2507,14 @@
 		}
 	},
 	"relations": {
+		"215BA7F197BF486293C764A60AF2A4EF": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"EF2F0BDA062744EAA9F189FBD02C739C": {
 			"color": {
 				"red": 240,

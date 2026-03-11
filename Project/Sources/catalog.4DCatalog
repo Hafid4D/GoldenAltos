@@ -1261,12 +1261,12 @@
 	</table>
 	<table name="SalesTransaction" uuid="A26EDBD8B62D4DE087E21A5FA8D05B4D" id="80">
 		<field name="UUID" uuid="66A7606CC88C405AA14D3FA527D8C964" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="UUID_Customer" uuid="CF2616FE10474C159FAF5E5758D7FA83" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="2"/>
-		<field name="UUID_TransactionType" uuid="478337B5124D4F2FABB90EEE5AE18A62" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="3">
+		<field name="UUID_Customer" uuid="CF2616FE10474C159FAF5E5758D7FA83" type="10" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="UUID_TransactionType" uuid="478337B5124D4F2FABB90EEE5AE18A62" type="10" store_as_UUID="true" never_null="true" id="3">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="transactionNumber" uuid="DFD5B830983341E997E7A4FB5DE039B7" type="4" never_null="true" id="4"/>
-		<field name="UUID_TransactionStatus" uuid="076760C785B44B198C24EDAC736E7E55" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="5"/>
+		<field name="UUID_TransactionStatus" uuid="076760C785B44B198C24EDAC736E7E55" type="10" store_as_UUID="true" never_null="true" id="5"/>
 		<field name="stmpTransaction" uuid="4EC7D7A66D974F65B872071C9AC6FA79" type="4" never_null="true" id="6"/>
 		<field name="openBalance" uuid="8392CD8EA0F849F8B70DA5FE3842ACE3" type="6" never_null="true" id="7"/>
 		<field name="Amount" uuid="F6A488844A504894BEFFE0B1117F49C0" type="6" never_null="true" id="8">
@@ -1547,6 +1547,10 @@
 	<table name="StepFile" uuid="A6301A2C994D4680A851FC2AE85118BE" id="119">
 		<field name="UUID" uuid="B1C018048ECD473CB25C3F879D15164C" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="moreData" uuid="B66853ED84C36841B83BF1483363C8EA" type="21" blob_switch_size="2147483647" never_null="true" id="2"/>
+		<field name="UUID_Customer" uuid="2941A87B2DF3485887552929F23FDFBC" type="10" store_as_UUID="true" never_null="true" id="3"/>
+		<field name="name" uuid="574BD070F5B047F59D4AC45678554878" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="creationDate" uuid="939B0620507643A7B544B48D6F812300" type="8" never_null="true" id="5"/>
+		<field name="status" uuid="4802F3D65DFF4E749446CC169A34D534" type="1" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="B1C018048ECD473CB25C3F879D15164C"/>
 	</table>
 	<table name="Step" uuid="73EFE2D78C61400397353509CBA87D18" id="120">
@@ -3482,6 +3486,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="215BA7F197BF486293C764A60AF2A4EF" name_Nto1="customer" name_1toN="stepFiles" state="1">
+		<related_field kind="source">
+			<field_ref uuid="2941A87B2DF3485887552929F23FDFBC" name="UUID_Customer">
+				<table_ref uuid="A6301A2C994D4680A851FC2AE85118BE" name="StepFile"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="37676CD94E8B423595ED98B5C0E9CF89" name="UUID">
+				<table_ref uuid="96D1CE81460A4F75B3F4275138C8F778" name="Customer"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="005E48A922A4464DB92973931B467ACF" type="3">
 		<field_ref uuid="17F71D68FA714CE9A75ED79CA63E3BE2" name="UUID_Lead">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
@@ -4390,6 +4406,11 @@
 	<index kind="regular" uuid="A3B576932D35914CA79E9D0E093469C3" type="3">
 		<field_ref uuid="C56ACBF61233134FA887559C036F2D7A" name="UUID_Equipment">
 			<table_ref uuid="E209D11E14110249AE69799CB8F51C7C" name="RepairLog"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="A45543093808414897936EAD27B511D7" type="3">
+		<field_ref uuid="2941A87B2DF3485887552929F23FDFBC" name="UUID_Customer">
+			<table_ref uuid="A6301A2C994D4680A851FC2AE85118BE" name="StepFile"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="A515E3CF9D24F742A592D06398A9DE4C" type="3">
