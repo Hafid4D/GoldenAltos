@@ -34,7 +34,12 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setItemAction("Print Usage Log EquipTraveler"; "_ga_usageLogReport")
 	
-	
+	$entry.activateEvent("EquipmentEvent"; "UUID_Equipment")
+	$entry.setAttributesToTrackInModificationEvent("reports"; "reports"; "documents")
+	//$entry.setAttributesToTrackInModificationEvent("currentNextStep")
+	$entry.setEventOptions("dontCreateModifyEventIfNoTrackingAttribute")
+	$entry.setLinkManyToOneToTrackInModificationEvent("EquipmentLocation"; "UUID_EquipmentLocation"; "location.name")
+	$entry.setAttributesToTrackInModificationEvent("customerUID"; "name"; "completeName")
 	
 	$entry.enableTransaction()
 	

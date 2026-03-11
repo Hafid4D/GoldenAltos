@@ -1261,12 +1261,12 @@
 	</table>
 	<table name="SalesTransaction" uuid="A26EDBD8B62D4DE087E21A5FA8D05B4D" id="80">
 		<field name="UUID" uuid="66A7606CC88C405AA14D3FA527D8C964" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="UUID_Customer" uuid="CF2616FE10474C159FAF5E5758D7FA83" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="2"/>
-		<field name="UUID_TransactionType" uuid="478337B5124D4F2FABB90EEE5AE18A62" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="3">
+		<field name="UUID_Customer" uuid="CF2616FE10474C159FAF5E5758D7FA83" type="10" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="UUID_TransactionType" uuid="478337B5124D4F2FABB90EEE5AE18A62" type="10" store_as_UUID="true" never_null="true" id="3">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="transactionNumber" uuid="DFD5B830983341E997E7A4FB5DE039B7" type="4" never_null="true" id="4"/>
-		<field name="UUID_TransactionStatus" uuid="076760C785B44B198C24EDAC736E7E55" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="5"/>
+		<field name="UUID_TransactionStatus" uuid="076760C785B44B198C24EDAC736E7E55" type="10" store_as_UUID="true" never_null="true" id="5"/>
 		<field name="stmpTransaction" uuid="4EC7D7A66D974F65B872071C9AC6FA79" type="4" never_null="true" id="6"/>
 		<field name="openBalance" uuid="8392CD8EA0F849F8B70DA5FE3842ACE3" type="6" never_null="true" id="7"/>
 		<field name="Amount" uuid="F6A488844A504894BEFFE0B1117F49C0" type="6" never_null="true" id="8">
@@ -1332,6 +1332,9 @@
 		<field name="name" uuid="5264878BA8234F898FB3691C2370E727" type="10" limiting_length="255" never_null="true" id="2">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="levelID" uuid="E1F7AEA0581A43EBAD7A036761C5AAAF" type="4" never_null="true" id="3"/>
+		<field name="code" uuid="01B99CB5AC9749AE8B628A9E7263E17A" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="color" uuid="2307150406CC45E2AB754A37AEDDAD89" type="10" limiting_length="255" never_null="true" id="5"/>
 		<primary_key field_name="UUID" field_uuid="1B0DAC21909B44EA969E5B9C6C73D944"/>
 	</table>
 	<table name="TransactionStatus" uuid="3E02BE63C9254086A8942339745654D1" id="88">
@@ -1349,6 +1352,23 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<primary_key field_name="UUID" field_uuid="643CE8A4FC6E4DF3B9EF602ABF49DA55"/>
+	</table>
+	<table name="EquipmentEvent" uuid="FF22DCE3DFF1417CBA5017AE961C87F6" id="89">
+		<field name="UUID" uuid="71A6AAF645094A41BD9F71F16C7D2366" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="UUID_Equipment" uuid="F024226278134107AAB92DE70E968846" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="2">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="UUID_EventType" uuid="290B61CE8FA147F781B5C680DEA46E3D" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="3">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="UUID_User" uuid="32ED16A2B45746E6B8EFE6EA6FE606A3" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="4">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="stmp" uuid="59FDAF55FA74476C9175E5FFAFD9ADD8" type="4" never_null="true" id="5">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="moreData" uuid="CA835A6CDEEC45F6903F80ED16E1CB86" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
+		<primary_key field_name="UUID" field_uuid="71A6AAF645094A41BD9F71F16C7D2366"/>
 	</table>
 	<table name="Customer" uuid="96D1CE81460A4F75B3F4275138C8F778" id="114">
 		<field name="UUID" uuid="37676CD94E8B423595ED98B5C0E9CF89" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -3482,6 +3502,42 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="FDFB2C9EE67C48029A5321539BBDE3F4" name_Nto1="equipment" name_1toN="EquipmentEvents" state="1">
+		<related_field kind="source">
+			<field_ref uuid="F024226278134107AAB92DE70E968846" name="UUID_Equipment">
+				<table_ref uuid="FF22DCE3DFF1417CBA5017AE961C87F6" name="EquipmentEvent"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="576820214AE49648A0CC6ACA3DD19531" name="UUID">
+				<table_ref uuid="FCE2D049B8944E4CA0AAB0152A549718" name="Equipment"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="6D5CE3CD6C584B38B020580EEF08F69A" name_Nto1="eventType" name_1toN="EquipmentEvents" state="1">
+		<related_field kind="source">
+			<field_ref uuid="290B61CE8FA147F781B5C680DEA46E3D" name="UUID_EventType">
+				<table_ref uuid="FF22DCE3DFF1417CBA5017AE961C87F6" name="EquipmentEvent"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="AEE9BE0296924CA7899B7E5DB37ACE13" name="UUID">
+				<table_ref uuid="C482A0FBAE724304A8E05A0570FD55D6" name="sfw_EventType"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="C7D48852530842BA9BC07499FAF8A048" name_Nto1="user" name_1toN="EquipmentEvents" state="1">
+		<related_field kind="source">
+			<field_ref uuid="32ED16A2B45746E6B8EFE6EA6FE606A3" name="UUID_User">
+				<table_ref uuid="FF22DCE3DFF1417CBA5017AE961C87F6" name="EquipmentEvent"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="34E9F9D48BE14DCD95127852F83BF1FB" name="UUID">
+				<table_ref uuid="2C75E07E18FC4733A8C98A0B31D40656" name="sfw_User"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="005E48A922A4464DB92973931B467ACF" type="3">
 		<field_ref uuid="17F71D68FA714CE9A75ED79CA63E3BE2" name="UUID_Lead">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
@@ -3645,6 +3701,11 @@
 	<index kind="regular" unique_keys="true" uuid="17AEAFB62770A046B6DA4E9BFA85B12F" type="7">
 		<field_ref uuid="3FE414F572CC6D4D83E98816E5F8757A" name="UUID">
 			<table_ref uuid="4953D4E1A4DBC44C9A5A17FAE5272A9A" name="Unit"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="194101E58FB5432BBC2C279BD083F0D0" type="3">
+		<field_ref uuid="F024226278134107AAB92DE70E968846" name="UUID_Equipment">
+			<table_ref uuid="FF22DCE3DFF1417CBA5017AE961C87F6" name="EquipmentEvent"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="1AAB39487A27AF41AFC1D4CBCFA0772A" type="7">
@@ -4452,6 +4513,11 @@
 			<table_ref uuid="A26EDBD8B62D4DE087E21A5FA8D05B4D" name="SalesTransaction"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="AAB1198C9057422290F0D93D733B8628" type="7">
+		<field_ref uuid="71A6AAF645094A41BD9F71F16C7D2366" name="UUID">
+			<table_ref uuid="FF22DCE3DFF1417CBA5017AE961C87F6" name="EquipmentEvent"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="AC9AD076B2671047AAB787FC0FB1283F" type="1">
 		<field_ref uuid="DDD1D8B9DED6419FA5277AF0AF879E0A" name="UUID">
 			<table_ref uuid="BE46414800704294A200CFC78A849926" name="InteractionTrigger"/>
@@ -4810,6 +4876,16 @@
 	<index kind="regular" unique_keys="true" uuid="E91FBC0A28B4AF48819A7072E8EBDC96" type="7">
 		<field_ref uuid="D694579CEB4CD741865BD4C94B64E596" name="UUID">
 			<table_ref uuid="DF2BA266C1EE294B9508F9997CCE2C22" name="SalesTax"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="EB204F57F8E3473886E6AA45180984EA" type="3">
+		<field_ref uuid="290B61CE8FA147F781B5C680DEA46E3D" name="UUID_EventType">
+			<table_ref uuid="FF22DCE3DFF1417CBA5017AE961C87F6" name="EquipmentEvent"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="EB55C3C1891A4E4291C6C6A851EFEA48" type="3">
+		<field_ref uuid="32ED16A2B45746E6B8EFE6EA6FE606A3" name="UUID_User">
+			<table_ref uuid="FF22DCE3DFF1417CBA5017AE961C87F6" name="EquipmentEvent"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="EE70B7EACA4C464DBC64151FE6BB5C3D" type="3">
