@@ -192,23 +192,6 @@
 					"shortcutAlt": false,
 					"shortcutKey": "[Return]"
 				},
-				"input_user": {
-					"type": "input",
-					"left": 153,
-					"top": 172,
-					"width": 194,
-					"height": 17,
-					"textAlign": "automatic",
-					"sizingX": "fixed",
-					"sizingY": "fixed",
-					"dataSource": "Form:C1466.user",
-					"events": [
-						"onLosingFocus",
-						"onAfterEdit"
-					],
-					"method": "ObjectMethods/input_user.4dm",
-					"visibility": "hidden"
-				},
 				"bHelp": {
 					"type": "button",
 					"text": "Help",
@@ -231,7 +214,7 @@
 				"bScan": {
 					"type": "button",
 					"top": 164,
-					"left": 353,
+					"left": 347,
 					"width": 23,
 					"height": 23,
 					"sizingY": "fixed",
@@ -256,7 +239,7 @@
 				"pup_users": {
 					"type": "dropdown",
 					"left": 153,
-					"top": 162,
+					"top": 159,
 					"width": 194,
 					"height": 27,
 					"events": [
@@ -271,7 +254,7 @@
 			}
 		}
 	],
-	"geometryStamp": 88,
+	"geometryStamp": 93,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
