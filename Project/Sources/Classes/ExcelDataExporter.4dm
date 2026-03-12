@@ -1,4 +1,4 @@
-// Class to export data to excel using template
+// Class to export data to excel using one template
 
 property templatePath : Text
 property mapping : Collection:=New collection:C1472()
@@ -37,7 +37,7 @@ Function onEvent()
 			
 			SET TIMER:C645(0)
 			
-			$columnCount:=VP Get column count(This:C1470.area)
+			
 			$row:=1
 			$col:=0
 			
@@ -64,6 +64,8 @@ Function onEvent()
 				VP SET TEXT VALUE(VP Cell(This:C1470.area; $col; $row); $header)
 				$col:=$col+1
 			End for each 
+			
+			$columnCount:=$col  //VP Get column count(This.area)
 			
 			// The header style
 			$style:=New object:C1471

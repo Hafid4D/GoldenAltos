@@ -320,8 +320,15 @@ Function bActionDocument()
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_document"; $form)
+			
 			If (OK=1)
 				//Form.lb_documents.push($form.details)
+				$buffer:=New object:C1471()
+				$buffer.event:="addDocument"
+				$buffer.label:="Document "+$form.details.sourcePath+" added"
+				$buffer.stmp:=cs:C1710.sfw_stmp.me.now()
+				Form:C1466.bufferOfEvents.push($buffer)
+				
 				Form:C1466.current_item.attachedDocuments.documents.push($form.details)
 				cs:C1710.panel_supplier.me._activate_save_cancel_button()
 			End if 
@@ -350,6 +357,12 @@ Function bActionDocument()
 			If ($ok)
 				
 				//Form.lb_documents.remove(Form.selectedDocumentPos-1)
+				
+				$buffer:=New object:C1471()
+				$buffer.event:="deleteDocument"
+				$buffer.label:="Document "+Form:C1466.current_item.attachedDocuments.documents[Form:C1466.selectedDocumentPos-1].sourcePath+" deleted"
+				$buffer.stmp:=cs:C1710.sfw_stmp.me.now()
+				Form:C1466.bufferOfEvents.push($buffer)
 				Form:C1466.current_item.attachedDocuments.documents.remove(Form:C1466.selectedDocumentPos-1)
 				cs:C1710.panel_supplier.me._activate_save_cancel_button()
 				

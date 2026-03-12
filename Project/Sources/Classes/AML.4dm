@@ -54,7 +54,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	
 	// MARK: All  product Suppliers
-	$view:=cs:C1710.sfw_definitionView.new("productSuppliers"; "Show Product Suppliers")
+	$view:=cs:C1710.sfw_definitionView.new("productSuppliers"; "All Products")
 	$view.setLBItemsColumn("ourPartNum"; "Internal Part#"; "width:150")
 	$view.setLBItemsColumn("vendorPartnum"; "Vendor Part#"; "width:150")
 	$view.setLBItemsColumn("supplier.name"; "Supplier"; "width:250")
@@ -63,7 +63,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setView($view)
 	
 	// MARK: All  service Suppliers
-	$view:=cs:C1710.sfw_definitionView.new("serviceSuppliers"; "Show Service Suppliers")
+	$view:=cs:C1710.sfw_definitionView.new("serviceSuppliers"; "All Services")
 	$view.setLBItemsColumn("ourPartNum"; "Internal Part#"; "width:150")
 	$view.setLBItemsColumn("vendorPartnum"; "Vendor Part#"; "width:150")
 	$view.setLBItemsColumn("supplier.name"; "Supplier"; "width:250")
@@ -72,7 +72,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setView($view)
 	
 	// MARK: All  critical product Suppliers
-	$view:=cs:C1710.sfw_definitionView.new("criticalProductSuppliers"; "Show Critical Product Suppliers")
+	$view:=cs:C1710.sfw_definitionView.new("criticalProductSuppliers"; "Criticals Products")
 	$view.setLBItemsColumn("ourPartNum"; "Internal Part#"; "width:150")
 	$view.setLBItemsColumn("vendorPartnum"; "Vendor Part#"; "width:150")
 	$view.setLBItemsColumn("supplier.name"; "Supplier"; "width:250")
@@ -81,7 +81,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setView($view)
 	
 	// MARK: All  critical service Suppliers
-	$view:=cs:C1710.sfw_definitionView.new("criticalServicesSuppliers"; "Show Critical Service Suppliers")
+	$view:=cs:C1710.sfw_definitionView.new("criticalServicesSuppliers"; "Criticals Services")
 	$view.setLBItemsColumn("ourPartNum"; "Internal Part#"; "width:150")
 	$view.setLBItemsColumn("vendorPartnum"; "Vendor Part#"; "width:150")
 	$view.setLBItemsColumn("supplier.name"; "Supplier"; "width:250")
