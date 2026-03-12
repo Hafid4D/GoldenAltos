@@ -15,7 +15,7 @@ var $mapping : Collection:=New collection:C1472()
 
 If (Form:C1466.sfw.lb_items.length>0)
 	
-	$fileName:=Form:C1466.sfw.view.ident
+	$fileName:=Form:C1466.sfw.view.label
 	
 	$templateFile:=Folder:C1567(fk resources folder:K87:11).file("excelTemplates/excelExportTemplate.xlsx")
 	
@@ -32,7 +32,7 @@ If (Form:C1466.sfw.lb_items.length>0)
 		New object:C1471("header"; "Total accumelated depreciation"; "field"; "totalAccDepreciation"; "footerOperation"; "sum")\
 		)
 	
-	If ($fileName="main")
+	If ($fileName="main") | ($fileName="Main view")
 		$title:="All Assets"
 		$fileName:="AllAssets"
 	Else 

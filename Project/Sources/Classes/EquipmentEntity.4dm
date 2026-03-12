@@ -44,7 +44,8 @@ local Function itemLoad()
 	
 	// This callback is called when the item is selected in the itemList
 	
-	
+local Function beforeDelete()
+	KILL WORKER:C1390(Current process:C322)
 	
 local Function beforeSave()
 	

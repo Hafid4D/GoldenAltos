@@ -438,6 +438,12 @@ Function bActionDocument()
 				
 				//Form.lb_documents.push($form.details) 
 				
+				$buffer:=New object:C1471()
+				$buffer.event:="addDocument"
+				$buffer.label:="Document "+$form.details.sourcePath+" added"
+				$buffer.stmp:=cs:C1710.sfw_stmp.me.now()
+				Form:C1466.bufferOfEvents.push($buffer)
+				
 				Form:C1466.current_item.reports.documents.push($form.details)
 				cs:C1710.panel_equipment.me._activate_save_cancel_button()
 				
@@ -474,6 +480,12 @@ Function bActionDocument()
 			If ($ok)
 				
 				//Form.lb_documents.remove(Form.selectedDocumentPos-1)
+				
+				$buffer:=New object:C1471()
+				$buffer.event:="deleteDocument"
+				$buffer.label:="Document "+Form:C1466.current_item.reports.documents[Form:C1466.selectedDocumentPos-1].sourcePath+" deleted"
+				$buffer.stmp:=cs:C1710.sfw_stmp.me.now()
+				Form:C1466.bufferOfEvents.push($buffer)
 				
 				Form:C1466.current_item.reports.documents.remove(Form:C1466.selectedDocumentPos-1)
 				cs:C1710.panel_equipment.me._activate_save_cancel_button()

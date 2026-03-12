@@ -26,6 +26,14 @@ local Function get dateInitiated()->$dateInitiated : Date
 local Function set dateInitiated($dateInitiated : Date)
 	This:C1470.stmpInitiated:=cs:C1710.sfw_stmp.me.build($dateInitiated)
 	
+local Function get eDisposition()->$disposition : Text
+	
+	If (This:C1470.moreData.disposition#"")
+		$disposition:=This:C1470.moreData.disposition
+	Else 
+		$disposition:=This:C1470.disposition.name
+	End if 
+	
 	
 local Function drowPup($dataClass; $queryField; $queryValue; $pupName)
 	
@@ -84,7 +92,6 @@ local Function pup($cacheCollection; $dataClass; $queryField; $queryValue)
 		End case 
 		
 	End if 
-	
 	
 	
 local Function loadAfterCreation()

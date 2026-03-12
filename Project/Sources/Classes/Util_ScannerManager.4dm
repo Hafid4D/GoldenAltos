@@ -64,7 +64,7 @@ Function UserApprovalByScanning($object)  //$type)
 				
 				If ($object.isApproved)
 					$object.approvedBy:=$eEntity.code
-					$object->approvalDate:=Current date:C33(*)
+					$object.approvalDate:=Current date:C33(*)
 				Else 
 					$object.approvedBy:=""
 					$object.approvalDate:=Date:C102(!00-00-00!)

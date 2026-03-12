@@ -1,7 +1,7 @@
 //%attributes = {}
 
-C_LONGINT:C283($time; $days)
-C_TIME:C306($TimeType)
+var $time; $days : Integer
+var $TimeType : Time
 $days:=Trunc:C95($1.value.creationDateTimeStamp/86400; 0)
 $time:=$1.value.creationDateTimeStamp%86400
 $TimeType:=?00:00:00?+$time

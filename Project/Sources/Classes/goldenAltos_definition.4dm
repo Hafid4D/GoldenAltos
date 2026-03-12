@@ -49,65 +49,65 @@ Function _global_parameters()
 	
 Function _event_definition()
 	
-	cs:C1710.sfw_eventManager.me.createIfNotExist("addSkill"; "Add skill to a staff")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("closeSkill"; "Close a skill for a staff")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("startSkill"; "Start a skill for a staff")
+	//cs.sfw_eventManager.me.createIfNotExist("addSkill"; "Add skill to a staff")
+	//cs.sfw_eventManager.me.createIfNotExist("closeSkill"; "Close a skill for a staff")
+	//cs.sfw_eventManager.me.createIfNotExist("startSkill"; "Start a skill for a staff")
 	
-	// phase
-	cs:C1710.sfw_eventManager.me.createIfNotExist("addPhase"; "Add phase to project")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("renamePhase"; "Rename a phase of project")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("modifyPhase"; "Modify aphase of project")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("deletePhase"; "Delete a phase from project")
+	//// phase
+	//cs.sfw_eventManager.me.createIfNotExist("addPhase"; "Add phase to project")
+	//cs.sfw_eventManager.me.createIfNotExist("renamePhase"; "Rename a phase of project")
+	//cs.sfw_eventManager.me.createIfNotExist("modifyPhase"; "Modify aphase of project")
+	//cs.sfw_eventManager.me.createIfNotExist("deletePhase"; "Delete a phase from project")
 	
-	// lot
-	cs:C1710.sfw_eventManager.me.createIfNotExist("addLot"; "Add lot to phase")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("renameLot"; "Rename lot in phase")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("modifyLot"; "Modify lot in phase")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("deleteLot"; "Delete lot from phase")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("moveLotUp"; "Move lot up in phase")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("moveLotDown"; "Move lot down in phase")
+	//// lot
+	//cs.sfw_eventManager.me.createIfNotExist("addLot"; "Add lot to phase")
+	//cs.sfw_eventManager.me.createIfNotExist("renameLot"; "Rename lot in phase")
+	//cs.sfw_eventManager.me.createIfNotExist("modifyLot"; "Modify lot in phase")
+	//cs.sfw_eventManager.me.createIfNotExist("deleteLot"; "Delete lot from phase")
+	//cs.sfw_eventManager.me.createIfNotExist("moveLotUp"; "Move lot up in phase")
+	//cs.sfw_eventManager.me.createIfNotExist("moveLotDown"; "Move lot down in phase")
 	
-	// task
-	cs:C1710.sfw_eventManager.me.createIfNotExist("addTask"; "Add task to lot")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("modifyTask"; "Modify task in lot")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("deleteTask"; "Delete task from lot")
+	//// task
+	//cs.sfw_eventManager.me.createIfNotExist("addTask"; "Add task to lot")
+	//cs.sfw_eventManager.me.createIfNotExist("modifyTask"; "Modify task in lot")
+	//cs.sfw_eventManager.me.createIfNotExist("deleteTask"; "Delete task from lot")
 	
-	// taskTime
-	cs:C1710.sfw_eventManager.me.createIfNotExist("addTaskTime"; "Add task time")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("modifyTaskTime"; "Modify task time")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("deleteTaskTime"; "Delete task time")
+	//// taskTime
+	//cs.sfw_eventManager.me.createIfNotExist("addTaskTime"; "Add task time")
+	//cs.sfw_eventManager.me.createIfNotExist("modifyTaskTime"; "Modify task time")
+	//cs.sfw_eventManager.me.createIfNotExist("deleteTaskTime"; "Delete task time")
 	
-	//KeyDate
-	cs:C1710.sfw_eventManager.me.createIfNotExist("addKeyDate"; "Add keyDate")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("modifyKeyDate"; "Modify keyDate")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("deleteKeyDate"; "Delete keyDate")
+	////KeyDate
+	//cs.sfw_eventManager.me.createIfNotExist("addKeyDate"; "Add keyDate")
+	//cs.sfw_eventManager.me.createIfNotExist("modifyKeyDate"; "Modify keyDate")
+	//cs.sfw_eventManager.me.createIfNotExist("deleteKeyDate"; "Delete keyDate")
 	
-	//progress report
-	cs:C1710.sfw_eventManager.me.createIfNotExist("addProgressReport"; "Add progress report")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("modifyProgressReport"; "Modify progress report")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("deleteProgressReport"; "Delete progress report")
+	////progress report
+	//cs.sfw_eventManager.me.createIfNotExist("addProgressReport"; "Add progress report")
+	//cs.sfw_eventManager.me.createIfNotExist("modifyProgressReport"; "Modify progress report")
+	//cs.sfw_eventManager.me.createIfNotExist("deleteProgressReport"; "Delete progress report")
 	
 	
-	// customerTime
-	cs:C1710.sfw_eventManager.me.createIfNotExist("addCustomerTime"; "Add customer time")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("modifyCustomerTime"; "Modify customer time")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("deleteCustomerTime"; "Delete customer time")
+	//// customerTime
+	//cs.sfw_eventManager.me.createIfNotExist("addCustomerTime"; "Add customer time")
+	//cs.sfw_eventManager.me.createIfNotExist("modifyCustomerTime"; "Modify customer time")
+	//cs.sfw_eventManager.me.createIfNotExist("deleteCustomerTime"; "Delete customer time")
 	
-	// meetingTime
-	cs:C1710.sfw_eventManager.me.createIfNotExist("addMeetingTime"; "Add meeting time")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("modifyMeetingTime"; "Modify meeting time")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("deleteMeetingTime"; "Delete meeting time")
+	//// meetingTime
+	//cs.sfw_eventManager.me.createIfNotExist("addMeetingTime"; "Add meeting time")
+	//cs.sfw_eventManager.me.createIfNotExist("modifyMeetingTime"; "Modify meeting time")
+	//cs.sfw_eventManager.me.createIfNotExist("deleteMeetingTime"; "Delete meeting time")
 	
-	// adminTime
-	cs:C1710.sfw_eventManager.me.createIfNotExist("addAdminTime"; "Add administrative time")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("modifyAdminTime"; "Modify administrative time")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("deleteAdminTime"; "Delete administrative time")
+	//// adminTime
+	//cs.sfw_eventManager.me.createIfNotExist("addAdminTime"; "Add administrative time")
+	//cs.sfw_eventManager.me.createIfNotExist("modifyAdminTime"; "Modify administrative time")
+	//cs.sfw_eventManager.me.createIfNotExist("deleteAdminTime"; "Delete administrative time")
 	
 	
 	//Documents
-	cs:C1710.sfw_eventManager.me.createIfNotExist("addDocument"; "Add Document")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("modifyDocument"; "Modify Document")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("deleteDocument"; "Delete Document")
+	cs:C1710.sfw_eventManager.me.createIfNotExist("addDocument"; "Add a document")
+	cs:C1710.sfw_eventManager.me.createIfNotExist("modifyDocument"; "Modify a document")
+	cs:C1710.sfw_eventManager.me.createIfNotExist("deleteDocument"; "Delete a document")
 	
 	
 	
