@@ -803,8 +803,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 5340,
-				"top": 16,
+				"left": 5313,
+				"top": 5,
 				"width": 154,
 				"height": 175.33203125
 			},
@@ -2684,6 +2684,14 @@
 			}
 		},
 		"CF612C3C7162224F85F6C66F413D9D12": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"3209E38B53909145B2E7C20384F5F5C0": {
 			"color": {
 				"red": 255,
 				"green": 255,

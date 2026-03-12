@@ -132,8 +132,8 @@ Function bActionDocument()
 			
 			$details:=New object:C1471
 			OB SET:C1220($details; "code"; ""; \
-				"dateTimeStamp"; _ga_setDateTimeStamp(Current date:C33(*); Current time:C178(*)); \
-				"creationDateTimeStamp"; _ga_setDateTimeStamp(Current date:C33(*); Current time:C178(*)); \
+				"dateTimeStamp"; cs:C1710.sfw_stmp.me.now(); \
+				"creationDateTimeStamp"; cs:C1710.sfw_stmp.me.now(); \
 				"documentPath"; ""; \
 				"sourcePath"; ""; \
 				"description"; ""; \
@@ -183,10 +183,11 @@ Function bActionDocument()
 					Form:C1466.current_item.isApproved:=False:C215
 				End if 
 				//$blobHasBeenChanged:=JSON Stringify($document.blob)#JSON Stringify($form.details.blob)
-				
-				//Form.selectedDocument:=$form.details
-				Form:C1466.current_item.documents.documentsCollection[Form:C1466.selectedDocumentPos-1]:=$form.details
-				cs:C1710.panel_specification.me._activate_save_cancel_button()
+				If ($form.modified) | ($form.documentHasChanged)
+					//Form.selectedDocument:=$form.details
+					Form:C1466.current_item.documents.documentsCollection[Form:C1466.selectedDocumentPos-1]:=$form.details
+					cs:C1710.panel_specification.me._activate_save_cancel_button()
+				End if 
 			End if 
 			
 		: ($choice="--delete")

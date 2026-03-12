@@ -104,10 +104,10 @@ Function _event_definition()
 	cs:C1710.sfw_eventManager.me.createIfNotExist("deleteAdminTime"; "Delete administrative time")
 	
 	
-	// Contact
-	cs:C1710.sfw_eventManager.me.createIfNotExist("addContact"; "Add contact")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("modifyContact"; "Modify contact")
-	cs:C1710.sfw_eventManager.me.createIfNotExist("deleteContact"; "Delete contact")
+	//Documents
+	cs:C1710.sfw_eventManager.me.createIfNotExist("addDocument"; "Add Document")
+	cs:C1710.sfw_eventManager.me.createIfNotExist("modifyDocument"; "Modify Document")
+	cs:C1710.sfw_eventManager.me.createIfNotExist("deleteDocument"; "Delete Document")
 	
 	
 	

@@ -62,21 +62,24 @@ local Function beforeSave()
 		
 	End if 
 	
-
-	//If (Form.subForm.bufferOfEvents#Null) && (Form.subForm.bufferOfEvents.length>0)
-	//This._saveBufferOfEvents(Form.subForm.bufferOfEvents)
-	//Form.subForm.bufferOfEvents:=New collection
-	//End if 
+	
+	If (Form:C1466.subForm.bufferOfEvents#Null:C1517) && (Form:C1466.subForm.bufferOfEvents.length>0)
+		This:C1470._saveBufferOfEvents(Form:C1466.subForm.bufferOfEvents)
+		Form:C1466.subForm.bufferOfEvents:=New collection:C1472
+	End if 
 	
 	
-	//local Function beforeSaveCreation()
+local Function beforeSaveCreation()
 	
-	//This._saveBufferOfEvents(Form.subForm.bufferOfEvents)
+	This:C1470._saveBufferOfEvents(Form:C1466.subForm.bufferOfEvents)
 	
 	
-	//Function _saveBufferOfEvents($bufferOfEvents : Collection)
-	//For each ($buffer; $bufferOfEvents)
-	//$moreData:=New object
-	//$moreData.comment:=$buffer.label
-	//cs.sfw_eventManager.me.addEvent(Form.sfw.entry; $buffer.event; This.UUID; $moreData; $buffer.stmp)
-	//End for each 
+Function _saveBufferOfEvents($bufferOfEvents : Collection)
+	For each ($buffer; $bufferOfEvents)
+		$moreData:=New object:C1471
+		$moreData.comment:=$buffer.label
+		cs:C1710.sfw_eventManager.me.addEvent(Form:C1466.sfw.entry; $buffer.event; This:C1470.UUID; $moreData; $buffer.stmp)
+	End for each 
+	
+	//cs.sfw_eventManager.me.addEvent(Form.sfw.entry; "modifyDocument"; Form.current_item.UUID)
+	

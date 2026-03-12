@@ -47,7 +47,7 @@ Function dropDownListSelection($dataClass; $foreignKey; $fieldRedrawer; $pannelC
 Function scanForInputField()
 	
 	
-Function UserApprovalByScanning($type)
+Function UserApprovalByScanning($object)  //$type)
 	
 	$barcodeData:=This:C1470.communicateWithScanner()
 	
@@ -62,45 +62,54 @@ Function UserApprovalByScanning($type)
 			: ($eEntities.length=1)
 				$eEntity:=$eEntities.first()
 				
-				//TODO : IMPROVE
-				Case of 
-					: ($type="document")
-						If (Form:C1466.details.isApproved)
-							Form:C1466.details.approvedBy:=$eEntity.code
-							Form:C1466.details.approvalDate:=Current date:C33(*)
-						Else 
-							Form:C1466.details.approvedBy:=""
-							Form:C1466.details.approvalDate:=Date:C102(!00-00-00!)
-						End if 
-						
-					: ($type="steps")
-						
-						If (Form:C1466.currentStep.isApproved)
-							Form:C1466.currentStep.approvedBy:=$eEntity.code
-							Form:C1466.currentStep.approvalDate:=Current date:C33(*)
-							
-						Else 
-							Form:C1466.currentStep.approvedBy:=""
-							Form:C1466.currentStep.approvalDate:=Date:C102(!00-00-00!)
-							
-						End if 
-						
-						
-					: ($type="other")
-						
-						If (Form:C1466.current_item.isApproved)
-							Form:C1466.current_item.approvalDate:=Current date:C33(*)
-							Form:C1466.current_item.approvedBy:=$eEntity.code
-						Else 
-							Form:C1466.current_item.approvalDate:=Date:C102(!00-00-00!)
-							Form:C1466.current_item.approvedBy:=""
-						End if 
-						
-					Else 
-						
-				End case 
+				If ($object.isApproved)
+					$object.approvedBy:=$eEntity.code
+					$object->approvalDate:=Current date:C33(*)
+				Else 
+					$object.approvedBy:=""
+					$object.approvalDate:=Date:C102(!00-00-00!)
+				End if 
+				
+/*
+//TODO : IMPROVE
+Case of 
+: ($type="document")
+If (Form.details.isApproved)
+Form.details.approvedBy:=$eEntity.code
+Form.details.approvalDate:=Current date(*)
+Else 
+Form.details.approvedBy:=""
+Form.details.approvalDate:=Date(!00-00-00!)
+End if 
+				
+: ($type="steps")
+				
+If (Form.currentStep.isApproved)
+Form.currentStep.approvedBy:=$eEntity.code
+Form.currentStep.approvalDate:=Current date(*)
+				
+Else 
+Form.currentStep.approvedBy:=""
+Form.currentStep.approvalDate:=Date(!00-00-00!)
+				
+End if 
 				
 				
+: ($type="other")
+				
+If (Form.current_item.isApproved)
+Form.current_item.approvalDate:=Current date(*)
+Form.current_item.approvedBy:=$eEntity.code
+Else 
+Form.current_item.approvalDate:=Date(!00-00-00!)
+Form.current_item.approvedBy:=""
+End if 
+				
+Else 
+				
+End case 
+				
+*/
 				
 			: ($eEntities.length>1)
 				cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("Multiples Users Found for the Barcode Scanned"))
@@ -108,6 +117,11 @@ Function UserApprovalByScanning($type)
 			Else 
 				
 		End case 
+		
+	Else 
+		
+		$object.isApproved:=Form:C1466.details.clone.isApproved
+		
 	End if 
 	
 	

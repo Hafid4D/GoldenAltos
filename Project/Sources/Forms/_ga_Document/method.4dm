@@ -21,8 +21,14 @@ Case of
 		OBJECT SET ENABLED:C1123(*; "isApproved"; Form:C1466.hasAuthorizationToApprove)
 		OBJECT SET ENABLED:C1123(*; "approvedBy"; False:C215)
 		OBJECT SET ENABLED:C1123(*; "approvalDate"; False:C215)
+		
 		//OBJECT SET VISIBLE(*; "PopupDate"; False)  //Form.hasAuthorizationToApprove)
 		
+		Form:C1466.details.clone:=OB Copy:C1225(Form:C1466.details)
+		
+		Form:C1466.modified:=False:C215
+		
+		Form:C1466.documentHasChanged:=False:C215
 		
 		//OBJECT SET VISIBLE(*; "isApproved"; Form.displayApprovalFields)
 		//OBJECT SET VISIBLE(*; "approvedBy"; Form.displayApprovalFields)

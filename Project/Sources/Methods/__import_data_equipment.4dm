@@ -190,7 +190,7 @@ If ($repair_Log_file.exists)
 	End for each 
 	
 End if 
-TRACE:C157
+//TRACE
 //SET TEXT TO PASTEBOARD($text)
 
 
