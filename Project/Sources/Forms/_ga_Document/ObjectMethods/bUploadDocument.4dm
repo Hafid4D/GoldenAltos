@@ -17,6 +17,13 @@ Case of
 			Form:C1466.details.approvedBy:=""
 			Form:C1466.details.isApproved:=False:C215
 			Form:C1466.documentHasChanged:=True:C214
+			
+			$buffer:=New object:C1471()
+			$buffer.event:="modifyDocument"
+			$buffer.label:="New Document uploaded"
+			$buffer.stmp:=cs:C1710.sfw_stmp.me.now()
+			Form:C1466.bufferOfEvents.push($buffer)
+			
 		End if 
 		
 		

@@ -120,7 +120,7 @@ local Function loadAfterCreation()
 			))
 	End if 
 	
-	This:C1470.dateCreated:=cs:C1710.sfw_stmp.me.now()
+	This:C1470.dateCreated:=Current date:C33(*)  //cs.sfw_stmp.me.now()
 	
 	
 local Function rebuildAddress()->$address : Object

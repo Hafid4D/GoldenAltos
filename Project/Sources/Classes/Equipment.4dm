@@ -36,12 +36,18 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	
 	$entry.activateEvent("EquipmentEvent"; "UUID_Equipment")
-	//$entry.setAttributesToTrackInModificationEvent("reports"; "reports"; "documents")
-	//$entry.setAttributesToTrackInModificationEvent("currentNextStep")
-	$entry.setEventOptions("dontCreateModifyEventIfNoTrackingAttribute")
+	
 	$entry.setLinkManyToOneToTrackInModificationEvent("EquipmentLocation"; "UUID_EquipmentLocation"; "location.name")
+	$entry.setLinkManyToOneToTrackInModificationEvent("ToolType"; "UUID_ToolType"; "type.name")
+	$entry.setLinkManyToOneToTrackInModificationEvent("Division"; "UUID_Division"; "division.name")
+	
+	//$entry.setAttributesToTrackInModificationEvent("Equipment"; "reports"; "reports.documents")
+	//$entry.setAttributesToTrackInModificationEvent("currentNextStep")
+	
+	//$entry.setEventOptions("dontCreateModifyEventIfNoTrackingAttribute")
+	
 	//$entry.setAttributesToTrackInModificationEvent("customerUID"; "name"; "completeName")
-
+	
 	$entry.enableTransaction()
 	
 	

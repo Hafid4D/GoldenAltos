@@ -3530,7 +3530,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="FDFB2C9EE67C48029A5321539BBDE3F4" name_Nto1="equipment" name_1toN="EquipmentEvents" state="1">
+	<relation uuid="FDFB2C9EE67C48029A5321539BBDE3F4" name_Nto1="equipment" name_1toN="equipmentEvents" state="1">
 		<related_field kind="source">
 			<field_ref uuid="F024226278134107AAB92DE70E968846" name="UUID_Equipment">
 				<table_ref uuid="FF22DCE3DFF1417CBA5017AE961C87F6" name="EquipmentEvent"/>

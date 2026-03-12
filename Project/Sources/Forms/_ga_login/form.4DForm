@@ -213,7 +213,7 @@
 				},
 				"bScan": {
 					"type": "button",
-					"top": 164,
+					"top": 161,
 					"left": 347,
 					"width": 23,
 					"height": 23,
@@ -254,7 +254,7 @@
 			}
 		}
 	],
-	"geometryStamp": 93,
+	"geometryStamp": 94,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
