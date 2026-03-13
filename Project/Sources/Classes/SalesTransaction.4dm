@@ -18,9 +18,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("transactionNumber"; "#"; "width:50")
 	$entry.setLBItemsColumn("customer.name"; "Customer"; "width:200")
 	$entry.setLBItemsColumn("transactionType.name"; "Type"; "width:100")
-
+	
 	//$entry.setLBItemsColumn("creditMemo.cmTotal"; "Total"; "width:100")
-
+	
 	$entry.setLBItemsColumn("transactionDate"; "Date"; "width:50")
 	
 	//$entry.setLBItemsOrderBy("creditMemo.cmNum")
@@ -30,6 +30,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setItemListAction("Print selection"; "_ga_printSalesTransactionSelection")
 	
+	$entry.setItemAction("Receive Payement"; "_ga_receivePayement")
 	
 	$entry.enableTransaction()
 	

@@ -10,9 +10,9 @@ Function rebuildInvoices()->$data : Object
 	
 	$data:=New object:C1471()
 	Case of 
-			
+		: (This:C1470.job=Null:C1517)
 		: (This:C1470.job.invoices[0].poBasedCharges#0)
-			$data.invoices:=This:C1470.job.purchaseOrderLines
+			$data.invoices:=ds:C1482.PurchaseOrderLine.query("UUID_Job =:1"; This:C1470.job.UUID)  //This.job.purchaseOrderLines
 			$colSettings:=New collection:C1472(\
 				New object:C1471("field"; "indexOf()+1"; "title"; "#"; "fieldType"; Is text:K8:3; "width"; 30; "minWidth"; 30; "maxWidth"; 50); \
 				New object:C1471("field"; "description"; "title"; "Description"; "fieldType"; Is text:K8:3; "width"; 280; "minWidth"; 100; "maxWidth"; 500); \
