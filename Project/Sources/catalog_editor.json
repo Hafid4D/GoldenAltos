@@ -2470,9 +2470,9 @@
 				"left": 1257.6667480469,
 				"top": 481.33331298828,
 				"width": 179.712890625,
-				"height": 316.33203125
+				"height": 337.33203125
 			},
-			"displayable_fields_count": 13
+			"displayable_fields_count": 14
 		},
 		"TermCondition": {
 			"color": {
@@ -2700,6 +2700,14 @@
 			}
 		},
 		"42BCCE20373BB84ABBBDF798B52E0EA3": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"7535E31683B9724F9BD5369549E72CA1": {
 			"color": {
 				"red": 255,
 				"green": 255,

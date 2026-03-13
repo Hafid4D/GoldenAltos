@@ -132,7 +132,7 @@ If (OK=1)
 							SEND PACKET:C103($file; $data+$separator_col)
 						End if 
 					: ($headerName="approved By QA")
-						$data:=String:C10($supplier_e["ApprovedByQA"]=True:C214 ? "Yes" : "No")
+						$data:=String:C10($supplier_e["approvedByQA"]=True:C214 ? "Yes" : "No")
 						SEND PACKET:C103($file; $data+$separator_col)
 						
 					: ($headerName="disqualified")
@@ -171,3 +171,51 @@ If (OK=1)
 	End if 
 	
 End if 
+
+/*
+var $fields : Collection
+var $mapping : Collection:=New collection()
+
+If (Form.sfw.lb_items.length>0)
+
+$fileName:=Form.sfw.view.label
+
+$templateFile:=Folder(fk resources folder).file("excelTemplates/excelExportTemplate.xlsx")
+
+$mapping:=New collection(\
+New object("header"; "Name"; "field"; "item"; "footerOperation"; ""); \
+New object("header"; "Street1"; "field"; "interestedParty"; "footerOperation"; ""); \
+New object("header"; "Street2"; "field"; "procedureType"; "footerOperation"; ""); \
+New object("header"; "City"; "field"; "action"; "footerOperation"; ""); \
+New object("header"; "Zip"; "field"; "requirement"; "footerOperation"; ""); \
+New object("header"; "FirstName"; "field"; "responsible"; "footerOperation"; ""); \
+New object("header"; "LastName"; "field"; "notes"; "footerOperation"; ""); \
+New object("header"; "Tel"; "field"; "externalID"; "footerOperation"; ""); \
+New object("header"; "Approved"; "field"; "approvedByQA"; "footerOperation"; ""); \
+New object("header"; "Disqualified"; "field"; "disqualified"; "footerOperation"; ""); \
+New object("header"; "Desactivated"; "field"; "deactivated"; "footerOperation"; "")\
+)
+
+If ($fileName="main") | ($fileName="Main view")
+$title:="All Suppliers"
+$fileName:="AllSuppliers"
+Else 
+$title:=$fileName
+$fileName:=Replace string($fileName; " "; "")
+End if 
+
+$destinationFolderPath:=Get 4D folder(Current resources folder)+"exportedData"+Folder separator+"Suppliers"
+
+$destinationFileName:=Split string(String($fileName+"_"+Replace string(String(Date(Timestamp)); "/"; "_")); " "; sk ignore empty strings+sk trim spaces).join("")
+$sheetName:=$fileName
+$selection:=Form.sfw.lb_items
+$offscreen:=cs.ExcelDataExporter.new($templateFile.platformPath; $mapping; $selection; $destinationFileName; $destinationFolderPath; $title; $sheetName)
+$excelSheet:=VP Run offscreen area($offscreen)
+
+
+Else 
+
+cs.sfw_dialog.me.alert(ds.sfw_readXliff("No items in the list to Export"))
+
+End if 
+*/

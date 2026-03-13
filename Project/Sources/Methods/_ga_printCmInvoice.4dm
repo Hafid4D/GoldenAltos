@@ -70,6 +70,7 @@ If (Form:C1466.current_item#Null:C1517)
 	$table:=WP Insert table:C1473($range; wk replace:K81:177; wk include in range:K81:180)
 	
 	Case of 
+		: ($job=Null:C1517)
 			
 		: ($job.invoices[0].poBasedCharges#0)
 			

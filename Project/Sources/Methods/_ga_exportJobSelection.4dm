@@ -4,6 +4,7 @@
 Method Name : _ga_exportEquipmentList
 Author : Medard /4D PS
 Date : 10-November-2025
+Last modification date : 12-march-2026
 Purpose : This method export current job selection to an .xlsx document
 */
 

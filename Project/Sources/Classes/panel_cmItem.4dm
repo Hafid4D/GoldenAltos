@@ -110,7 +110,7 @@ Function selectInvoice()
 		
 		$form:=New object:C1471(\
 			"colName"; "invoice"; \
-			"allData"; ds:C1482.Invoice.query("purchaseOrder.customer.name = :1"; Form:C1466.current_item.customer.name); \
+			"allData"; ds:C1482.Invoice.query("purchaseOrder.customer.name = :1 & readyToDel = :2"; Form:C1466.current_item.customer.name; False:C215); \
 			"dataclass"; "Invoice"\
 			)
 		
@@ -118,8 +118,7 @@ Function selectInvoice()
 		DIALOG:C40("selectNto1"; $form)
 		CLOSE WINDOW:C154($winRef)
 		
-		If (ok=1)
-			
+		If (ok=1) & ($form.item#Null:C1517)
 			Form:C1466.current_item.UUID_Invoice:=$form.item.UUID
 			cs:C1710.panel_cmItem.me._activate_save_cancel_button()
 			
