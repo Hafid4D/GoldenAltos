@@ -69,7 +69,7 @@
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Supplier",
+					"text": "Name",
 					"textAlign": "right"
 				},
 				"entryField_supplier": {
@@ -877,10 +877,300 @@
 					]
 				}
 			}
+		},
+		{
+			"objects": {
+				"bActionRating": {
+					"type": "button",
+					"text": "Actions",
+					"top": 137,
+					"left": 12,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionRating.4dm",
+					"visibility": "visible"
+				},
+				"lb_rating": {
+					"type": "listbox",
+					"left": 132,
+					"top": 114,
+					"width": 2362,
+					"height": 700,
+					"events": [
+						"onClick",
+						"onDataChange",
+						"onSelectionChange",
+						"onHeaderClick",
+						"onBeginDragOver"
+					],
+					"listboxType": "collection",
+					"currentItemPositionSource": "Form:C1466.selectedRatingItemPos",
+					"currentItemSource": "Form:C1466.selectedRatingItem",
+					"dataSource": "Form:C1466.lb_rating",
+					"method": "",
+					"selectionMode": "single",
+					"resizingMode": "rightToLeft",
+					"alternateFill": "#E6E6E6",
+					"horizontalLineStroke": "transparent",
+					"borderStyle": "none",
+					"verticalLineStroke": "transparent",
+					"headerHeight": "2em",
+					"right": 2494,
+					"scrollbarHorizontal": "visible",
+					"hideFocusRing": false,
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"scrollbarVertical": "visible",
+					"columns": [
+						{
+							"header": {
+								"text": "Date",
+								"name": "Header5",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column5",
+							"footer": {
+								"name": "Footer5"
+							},
+							"dataSource": "This:C1470.code",
+							"width": 70,
+							"resizable": false,
+							"dataSourceTypeHint": "date"
+						},
+						{
+							"header": {
+								"name": "Header6",
+								"text": "Receiving Total Lots",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column6",
+							"footer": {
+								"name": "Footer6"
+							},
+							"dataSource": "This:C1470.sourcePath",
+							"dataSourceTypeHint": "text",
+							"width": 120,
+							"truncateMode": "withEllipsis",
+							"wordwrap": "none",
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header7",
+								"text": "Receiving without NMNs",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column7",
+							"footer": {
+								"name": "Footer7"
+							},
+							"dataSource": "This:C1470.creationDateTime",
+							"width": 150,
+							"truncateMode": "withEllipsis",
+							"wordwrap": "none",
+							"textAlign": "right",
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header8",
+								"text": "Receiving % LAR",
+								"fontWeight": "bold",
+								"textAlign": "center"
+							},
+							"name": "Column8",
+							"footer": {
+								"name": "Footer8"
+							},
+							"dataSource": "This:C1470.description",
+							"dataSourceTypeHint": "text",
+							"width": 100
+						},
+						{
+							"header": {
+								"name": "Header9",
+								"text": "Functional Total Lots",
+								"fontWeight": "bold"
+							},
+							"name": "Column9",
+							"footer": {
+								"name": "Footer9"
+							},
+							"width": 130
+						},
+						{
+							"header": {
+								"name": "Header12",
+								"text": "Functional Without NMNs",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column13",
+							"footer": {
+								"name": "Footer13"
+							},
+							"width": 155
+						},
+						{
+							"header": {
+								"name": "Header13",
+								"text": "Functional % LAR",
+								"textAlign": "left",
+								"fontWeight": "bold"
+							},
+							"name": "Column14",
+							"footer": {
+								"name": "Footer14"
+							},
+							"width": 110
+						},
+						{
+							"header": {
+								"name": "Header14",
+								"text": "Delivery Total Lots",
+								"textAlign": "left",
+								"fontWeight": "bold"
+							},
+							"name": "Column15",
+							"footer": {
+								"name": "Footer15"
+							},
+							"width": 110
+						},
+						{
+							"header": {
+								"name": "Header15",
+								"text": "Delivery Minor Delay w/in 10 days",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column16",
+							"footer": {
+								"name": "Footer16"
+							},
+							"width": 200
+						},
+						{
+							"header": {
+								"name": "Header16",
+								"text": "Delivery Minor Delay over 10 days",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column17",
+							"footer": {
+								"name": "Footer17"
+							},
+							"width": 200
+						},
+						{
+							"header": {
+								"name": "Header17",
+								"text": "Delivery % LAR",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column18",
+							"footer": {
+								"name": "Footer18"
+							},
+							"width": 100
+						},
+						{
+							"header": {
+								"name": "Header18",
+								"text": "Composite % Over-all Rating",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column19",
+							"footer": {
+								"name": "Footer19"
+							},
+							"width": 170
+						},
+						{
+							"header": {
+								"name": "Header19",
+								"text": "Year",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column20",
+							"footer": {
+								"name": "Footer20"
+							},
+							"width": 40
+						},
+						{
+							"header": {
+								"name": "Header20",
+								"text": "Month",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column21",
+							"footer": {
+								"name": "Footer21"
+							},
+							"width": 50
+						},
+						{
+							"header": {
+								"name": "Header21",
+								"text": "Quarter",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column22",
+							"footer": {
+								"name": "Footer22"
+							},
+							"width": 50
+						},
+						{
+							"header": {
+								"name": "Header22",
+								"text": "ISO Certified",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column23",
+							"footer": {
+								"name": "Footer23"
+							},
+							"width": 80
+						},
+						{
+							"header": {
+								"name": "Header23",
+								"text": "Loc",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column24",
+							"footer": {
+								"name": "Footer24"
+							},
+							"width": 40
+						}
+					]
+				}
+			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 386,
+	"geometryStamp": 395,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

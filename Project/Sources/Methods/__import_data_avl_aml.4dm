@@ -123,6 +123,18 @@ If ($supplier_log.exists)
 		$address.detail.state:=$supplier.remit_st
 		$eSupplier.contactDetails.addresses.push($address)
 		
+		$eSupplier.RatingData:=New object:C1471()
+		$eSupplier.RatingData.items:=New collection:C1472()
+		
+		$file_excel:=Folder:C1567(fk data folder:K87:12).file("DataJson/MonitorProgramSupplierRating.csv")
+		
+		$records_excel:=Split string:C1554($file_excel.getText(); "\r\n")
+		
+		$records_excel.shift()  //remove the header
+		
+		$staffs_excel:=New collection:C1472()
+		
+		
 		$_documents:=$documents.query("PrimaryKeyValue=:1 & TableNumber=:2"; String:C10($supplier.UniqueID); 18)
 		
 		$eSupplier.attachedDocuments:=New object:C1471()
@@ -137,10 +149,9 @@ If ($supplier_log.exists)
 			$doc.documentPath:=$document.DocumentPath
 			$doc.sourcePath:=$document.SourcePath
 			$doc.description:=$document.DocDescription
-			//$doc.approvalDate:=!00-00-00!
-			//$doc.approvedBy:=""
-			//$doc.isApproved:=False
-			
+			$doc.approvalDate:=!00-00-00!
+			$doc.approvedBy:=""
+			$doc.isApproved:=False:C215
 			
 			$report:=Folder:C1567(fk data folder:K87:12).file("DataJson/SuppliersDocs/"+String:C10($document.UniqueID+$document.PrimaryKeyValue))
 			If ($report.exists)
