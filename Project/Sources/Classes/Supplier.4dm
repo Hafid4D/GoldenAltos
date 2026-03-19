@@ -14,6 +14,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(1; ""; "Main")
 	$entry.setPanelPage(2; ""; "Contacts & Address")
 	$entry.setPanelPage(3; ""; "Documents")
+	$entry.setPanelPage(4; ""; "Rating")
 	
 	$entry.setLBItemsColumn("name"; "Supplier Name"; "width:250")
 	$entry.setLBItemsColumn("approvedByQA?\"Approved\":\"Not Approved\""; "QA Approval"; "width:150"; "orderByFormula:this.approvedByQA")

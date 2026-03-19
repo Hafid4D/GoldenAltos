@@ -1221,9 +1221,9 @@
 				"left": 2682,
 				"top": 2323.3764648438,
 				"width": 166.34765625,
-				"height": 398.33203125
+				"height": 474.33203125
 			},
-			"displayable_fields_count": 17,
+			"displayable_fields_count": 20,
 			"fields": {
 				"supPsNumber": {
 					"color": {
@@ -1581,12 +1581,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2343,
-				"top": 2237.3764648438,
+				"left": 2418,
+				"top": 2201.3764648438,
 				"width": 172.34765625,
-				"height": 524.33203125
+				"height": 639.33203125
 			},
-			"displayable_fields_count": 23,
+			"displayable_fields_count": 28,
 			"fields": {
 				"termsCriticalMaterials": {
 					"color": {
@@ -2523,6 +2523,14 @@
 		}
 	},
 	"relations": {
+		"044BAECA4CA14DF3BB6BA8E4215235CB": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"C7D48852530842BA9BC07499FAF8A048": {
 			"color": {
 				"red": 255,

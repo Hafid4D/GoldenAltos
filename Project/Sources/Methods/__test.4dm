@@ -1,17 +1,22 @@
 //%attributes = {}
 
-$users:=ds:C1482.Equipment.all()
+
+$buyOrders:=ds:C1482.BuyingOrder.all()
+
+$buyOrdersItems:=ds:C1482.BuyingOrderLine.all()
 
 
-$time:=Replace string:C233(String:C10(Time:C179(Timestamp:C1445); System time short:K7:9); ";"; "")
+/*
+
+$time:=Replace string(String(Time(Timestamp); System time short); ";"; "")
 var $1; $data : Text  // Ex: "12345"
 var $pattern; $char; $color : Text
 var $i; $j; $width; $posX : Integer
-var $dict : Collection:=New collection:C1472()
+var $dict : Collection:=New collection()
 var $vpict : Picture
 
 $data:="12345"  //$1
-$dict:=New collection:C1472(\
+$dict:=New collection(\
 "nnnWWnWnn"; \
 "WnnWnnnnW"; \
 "nnWWnnnnW"; \
@@ -28,34 +33,34 @@ $dict:=New collection:C1472(\
 
 $fullData:=$data  //"*"+$data+"*"  // Ajout des Start/Stop
 //$svg:="<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'>"
-$svg:=DOM Create XML Ref:C861("svg"; "http://www.w3.org/2000/svg")
-DOM SET XML ATTRIBUTE:C866($svg; "width"; "100%"; "height"; "100%")
+$svg:=DOM Create XML Ref("svg"; "http://www.w3.org/2000/svg")
+DOM SET XML ATTRIBUTE($svg; "width"; "100%"; "height"; "100%")
 $posX:=0
 
-For ($i; 1; Length:C16($fullData))
-	$char:=$fullData[[$i]]
-	$pattern:=$dict[Num:C11($char)]
-	
-	If ($pattern#Null:C1517)
-		For ($j; 1; 9)
-			// Déterminer la largeur : Large=3 unités, Étroit=1 unité
-			$width:=Choose:C955($pattern[[$j]]="W"; 3; 1)
-			
-			// Alternance : J impair = Noir, J pair = Blanc (on ne dessine que le noir)
-			If ($j%2#0)
-				//$svg+="<rect x='"+String($posX)+"' y='0' width='"+String($width)+"' height='50' fill='black' />"
-				$ref:=DOM Create XML element:C865($svg; "rect"; "x"; String:C10($posX); "y"; 0; "width"; String:C10($width); "height"; "50"; "fill"; "black")
-			End if 
-			
-			$posX:=$posX+$width
-		End for 
-		$posX:=$posX+1  // Espace inter-caractère (blanc étroit obligatoire)
-	End if 
+For ($i; 1; Length($fullData))
+$char:=$fullData[[$i]]
+$pattern:=$dict[Num($char)]
+
+If ($pattern#Null)
+For ($j; 1; 9)
+// Déterminer la largeur : Large=3 unités, Étroit=1 unité
+$width:=Choose($pattern[[$j]]="W"; 3; 1)
+
+// Alternance : J impair = Noir, J pair = Blanc (on ne dessine que le noir)
+If ($j%2#0)
+//$svg+="<rect x='"+String($posX)+"' y='0' width='"+String($width)+"' height='50' fill='black' />"
+$ref:=DOM Create XML element($svg; "rect"; "x"; String($posX); "y"; 0; "width"; String($width); "height"; "50"; "fill"; "black")
+End if 
+
+$posX:=$posX+$width
+End for 
+$posX:=$posX+1  // Espace inter-caractère (blanc étroit obligatoire)
+End if 
 End for 
 
 //Utilisation du résultat : 
-SVG EXPORT TO PICTURE:C1017($svg; $vpict; Copy XML data source:K45:17)
-
+SVG EXPORT TO PICTURE($svg; $vpict; Copy XML data source)
+*/
 
 //var vpict : Picture
 //$svg:=DOM Create XML Ref("svg"; "http://www.w3.org/2000/svg")
@@ -67,14 +72,14 @@ SVG EXPORT TO PICTURE:C1017($svg; $vpict; Copy XML data source:K45:17)
 
 //WRITE PICTURE FILE(""; $vpict)
 
-TRANSFORM PICTURE:C988($vpict; Scale:K61:2; 1; 0.99)
-$doc:=WP New:C1317()
-$range:=WP Text range:C1341($doc; wk end text:K81:164; wk end text:K81:164)
-WP Insert picture:C1437($range; $vpict; wk append:K81:179)
+//TRANSFORM PICTURE($vpict; Scale; 1; 0.99)
+//$doc:=WP New()
+//$range:=WP Text range($doc; wk end text; wk end text)
+//WP Insert picture($range; $vpict; wk append)
 
-SET PRINT PREVIEW:C364(True:C214)
+//SET PRINT PREVIEW(True)
 
-WP PRINT:C1343($doc)
+//WP PRINT($doc)
 
 //ZINT PLUGIN TESTING
 
