@@ -318,4 +318,109 @@ Function LoadAllTabs()
 	This:C1470.loadDocuments()
 	
 	
+Function bActionRating()
+	
+	$refMenu:=Create menu:C408
+	
+	APPEND MENU ITEM:C411($refMenu; "add report"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; 1; "--add")
+	If (sfw_checkIsInModification=False:C215)
+		DISABLE MENU ITEM:C150($refMenu; 1)
+	End if 
+	
+	APPEND MENU ITEM:C411($refMenu; "modify report"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; 2; "--modify")
+	If (sfw_checkIsInModification=False:C215) | (Form:C1466.selectedRatingItem=Null:C1517) | Undefined:C82(Form:C1466.selectedRatingItem)
+		DISABLE MENU ITEM:C150($refMenu; 2)
+	End if 
+	
+	APPEND MENU ITEM:C411($refMenu; "delete report"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; 3; "--delete")
+	If (sfw_checkIsInModification=False:C215) | (Form:C1466.selectedRatingItem=Null:C1517) | Undefined:C82(Form:C1466.selectedRatingItem)
+		DISABLE MENU ITEM:C150($refMenu; 3)
+	End if 
+	
+	$choice:=Dynamic pop up menu:C1006($refMenu)
+	RELEASE MENU:C978($refMenu)
+	Case of 
+			
+		: ($choice="--add")
+			
+			$details:=New object:C1471
+			OB SET:C1220($details; "code"; ""; \
+				"date"; Current date:C33(*); \
+				"receivingTotalLots"; 0; \
+				"receivingWithoutNMNs"; 0; \
+				"functionalTotalLots"; 0; \
+				"functionalWithoutNMNs"; 0; \
+				"deliveryTotalLots"; 0; \
+				"deliveryMinorDelay"; 0; \
+				"deliveryMajorDelay"; 0; \
+				"ISOCertified"; ""\
+				)
+			
+			
+			$form:=New object:C1471("details"; $details)
+			//$form.approverProfile:=New collection("qs"; "qm")  // only QC Team allowed to modify
+			//$form.displayApprovalFields:=False
+			
+			$winRef:=Open form window:C675("_ga_vendorRatingForm"; Movable dialog box:K34:7; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("_ga_vendorRatingForm"; $form)
+			If (OK=1)
+				//Form.lb_documents.push($form.details)
+				
+				//$buffer:=New object()
+				//$buffer.event:="addDocument"
+				//$buffer.label:="Document "+$form.details.sourcePath+" added"
+				//$buffer.stmp:=cs.sfw_stmp.me.now()
+				//Form.bufferOfEvents.push($buffer)
+				
+				Form:C1466.current_item.RatingData.items.push($form.details)
+				cs:C1710.panel_supplier.me._activate_save_cancel_button()
+			End if 
+			
+			
+		: ($choice="--modify")
+			
+			$form:=New object:C1471("details"; OB Copy:C1225(Form:C1466.current_item.RatingData.items[Form:C1466.selectedRatingItemPos-1]))
+			$form.approverProfile:=New collection:C1472("qs"; "qm")  // only QC Team allowed to modify 
+			$form.displayApprovalFields:=False:C215
+			
+			$winRef:=Open form window:C675("_ga_document"; Movable dialog box:K34:7; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("_ga_vendorRatingForm"; $form)
+			
+			If (OK=1)
+				If ($form.modified) | ($form.documentHasChanged)
+					
+					Form:C1466.current_item.RatingData.items[Form:C1466.selectedRatingItemPos-1]:=$form.details
+					cs:C1710.panel_supplier.me._activate_save_cancel_button()
+				End if 
+			End if 
+			
+		: ($choice="--delete")
+			
+			$ok:=cs:C1710.sfw_dialog.me.confirm("Do you really want to delete this document? "; "Delete"; "CANCEL")
+			If ($ok)
+				
+				
+				//$buffer:=New object()
+				//$buffer.event:="deleteDocument"
+				//$buffer.label:="Document "+Form.current_item.RatingData.items[Form.selectedRatingItemPos-1].sourcePath+" deleted"
+				//$buffer.stmp:=cs.sfw_stmp.me.now()
+				//Form.bufferOfEvents.push($buffer)
+				
+				Form:C1466.current_item.RatingData.items.remove(Form:C1466.selectedDocumentPos-1)
+				cs:C1710.panel_supplier.me._activate_save_cancel_button()
+				
+			End if 
+			
+			
+			
+	End case 
+	
+	//This.loadDocuments()
+	
+	
+	
+	
 	
