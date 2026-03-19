@@ -128,7 +128,6 @@ Function redrawAndSetVisible()
 Function loadAllTabs()
 	This:C1470.loadLotSteps()
 	
-	
 Function loadLotSteps()
 	//Form.lb_steps:=Form.current_item.steps.orderBy("order asc")
 	Form:C1466.currentstep:=0
@@ -144,6 +143,9 @@ Function bActionSteps()
 	//Manages actions: add, or remove, using dynamic menus and modification checks
 	If (Form:C1466.sfw.checkIsInModification())
 		$refMenu:=Create menu:C408
+		
+		APPEND MENU ITEM:C411($refMenu; "Create from step file")
+		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--create_from_stepfile")
 		
 		APPEND MENU ITEM:C411($refMenu; "Create a step from template")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--create_from_template")
@@ -162,6 +164,32 @@ Function bActionSteps()
 		$choose:=Dynamic pop up menu:C1006($refMenu)
 		
 		Case of 
+			: ($choose="--create_from_stepfile")
+				$form:=New object:C1471("lotInfo"; New object:C1471("customer"; Form:C1466.current_item.customer))
+				
+				$winRef:=Open form window:C675("createFromStepFile"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
+				DIALOG:C40("createFromStepFile"; $form)
+				CLOSE WINDOW:C154($winRef)
+				
+				If (ok=1)
+					For each ($step; $form.stepFile.moreData.selectedSteps)
+						$step_o:=ds:C1482.Step.query("UUID = :1"; $step.UUID).first()
+						$step_o:=$step_o.toObject("description, alert")
+						
+						$step_new:=ds:C1482.LotStep.new()
+						
+						$step_new.fromObject($step_o)
+						$step_new.UUID_Lot:=Form:C1466.current_item.UUID
+						$step_new.order:=$step.order
+						
+						$res:=$step_new.save()
+					End for each 
+					
+					This:C1470.loadLotSteps()
+					
+					This:C1470._activate_save_cancel_button()
+				End if 
+				
 			: ($choose="--create_from_template")
 				$form:=New object:C1471(\
 					"lotStep"; ds:C1482.LotStep.new()\
@@ -217,6 +245,10 @@ Function bActionSteps()
 		
 	Else 
 		$refMenu:=Create menu:C408
+		
+		APPEND MENU ITEM:C411($refMenu; "Create from step file")
+		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--create_from_stepfile")
+		DISABLE MENU ITEM:C150($refMenu; -1)
 		
 		APPEND MENU ITEM:C411($refMenu; "Create a step from template")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--create_from_template")

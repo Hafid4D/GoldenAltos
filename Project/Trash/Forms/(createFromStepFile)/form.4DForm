@@ -79,18 +79,18 @@
 			"objects": {
 				"header_bkgd2": {
 					"type": "rectangle",
-					"top": 79,
+					"top": 131,
 					"left": 0,
 					"width": 140,
-					"height": 316,
+					"height": 264,
 					"sizingX": "fixed",
 					"fill": "#B1CFDE",
 					"stroke": "transparent"
 				},
 				"header_bkgd4": {
 					"type": "rectangle",
-					"top": 79,
-					"left": 144,
+					"top": 87,
+					"left": 145,
 					"width": 306,
 					"height": 28,
 					"sizingX": "fixed",
@@ -99,10 +99,10 @@
 				},
 				"header_bkgd6": {
 					"type": "rectangle",
-					"top": 79,
+					"top": 35,
 					"left": 450,
 					"width": 32,
-					"height": 316,
+					"height": 360,
 					"sizingX": "fixed",
 					"fill": "#B1CFDE",
 					"stroke": "transparent"
@@ -110,7 +110,7 @@
 				"Text": {
 					"type": "text",
 					"text": "Step",
-					"top": 85,
+					"top": 145,
 					"left": 7,
 					"width": 102,
 					"height": 15,
@@ -139,7 +139,7 @@
 				"Button": {
 					"type": "button",
 					"top": 407,
-					"left": 322,
+					"left": 282,
 					"width": 70,
 					"height": 20,
 					"sizingX": "move",
@@ -190,26 +190,16 @@
 				"header_bkgd27": {
 					"type": "rectangle",
 					"top": 47,
-					"left": 144,
-					"width": 306,
+					"left": 145,
+					"width": 305,
 					"height": 28,
 					"sizingX": "fixed",
 					"fill": "#FFFFFF",
 					"stroke": "transparent"
 				},
-				"header_bkgd28": {
-					"type": "rectangle",
-					"top": 47,
-					"left": 450,
-					"width": 32,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
 				"Text5": {
 					"type": "text",
-					"text": "Lot #",
+					"text": "costumer\r",
 					"top": 53,
 					"left": 7,
 					"width": 102,
@@ -246,9 +236,9 @@
 				"List Box": {
 					"type": "listbox",
 					"left": 145,
-					"top": 80,
+					"top": 131,
 					"width": 305,
-					"height": 314,
+					"height": 263,
 					"events": [
 						"onClick",
 						"onHeaderClick",
@@ -295,21 +285,29 @@
 						}
 					]
 				},
-				"sf_lotsSearch": {
-					"type": "subform",
-					"left": 142,
-					"top": 45,
-					"width": 340,
-					"height": 350,
-					"detailForm": "",
-					"visibility": "visible",
-					"method": "ObjectMethods/sf_lotsSearch.4dm",
-					"dataSource": "Form:C1466.sf_lotsSearch"
+				"header_bkgd3": {
+					"type": "rectangle",
+					"top": 87,
+					"left": 0,
+					"width": 140,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
+				"Text2": {
+					"type": "text",
+					"text": "stepfile name",
+					"top": 93,
+					"left": 7,
+					"width": 102,
+					"height": 15,
+					"fontWeight": "bold"
 				}
 			}
 		}
 	],
-	"geometryStamp": 3505,
+	"geometryStamp": 3534,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

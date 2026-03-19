@@ -123,6 +123,7 @@ If (True:C214)
 				$invoice_e.customerId:=$invoice.customerId
 				$invoice_e.amountPaid:=$invoice.amountPaid
 				$invoice_e.saleAmount:=$invoice.saleAmount
+				$invoice_e.readyToDel:=$invoice.readyToDel
 				$res:=$invoice_e.save()
 				
 				If (Not:C34($res.success))

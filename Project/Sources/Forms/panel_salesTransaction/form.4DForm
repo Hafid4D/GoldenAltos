@@ -50,7 +50,7 @@
 					"left": 142,
 					"width": 300,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.transaction",
+					"dataSource": "Form:C1466.current_item.transactionNumber",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -200,15 +200,169 @@
 					"visibility": "visible",
 					"iconFrames": 4,
 					"focusable": false
+				},
+				"header_bkgd5": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 0,
+					"width": 1000,
+					"height": 805,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent"
 				}
 			}
 		},
 		{
-			"objects": {}
+			"objects": {
+				"header_bkgd2": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 0,
+					"width": 677,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 677
+				},
+				"Text": {
+					"type": "text",
+					"top": 121,
+					"left": 8,
+					"width": 250,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Transaction Infos",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"label_openBalance": {
+					"type": "text",
+					"top": 212,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Open Balance",
+					"textAlign": "right",
+					"right": 132
+				},
+				"entryField_accountNumber": {
+					"type": "input",
+					"top": 212,
+					"left": 142,
+					"width": 268,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.v",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"label_memo": {
+					"type": "text",
+					"top": 239,
+					"left": 12,
+					"width": 120,
+					"height": 16,
+					"stroke": "#808080",
+					"text": "Memo",
+					"textAlign": "right",
+					"right": 132
+				},
+				"entryField_name2": {
+					"type": "input",
+					"top": 239,
+					"left": 142,
+					"width": 515,
+					"height": 64,
+					"dataSource": "Form:C1466.current_item.name",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left",
+					"scrollbarVertical": "automatic"
+				},
+				"label_amount": {
+					"type": "text",
+					"top": 186,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Amount",
+					"textAlign": "right",
+					"right": 132
+				},
+				"entryField_amount": {
+					"type": "input",
+					"top": 186,
+					"left": 142,
+					"width": 268,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.amount",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"label_transactionDate": {
+					"type": "text",
+					"top": 164,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Transaction Date ",
+					"textAlign": "right",
+					"right": 132
+				},
+				"entryField_accountNumber2": {
+					"type": "input",
+					"top": 164,
+					"left": 142,
+					"width": 268,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.accountNumber",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				}
+			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 13,
+	"geometryStamp": 30,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
