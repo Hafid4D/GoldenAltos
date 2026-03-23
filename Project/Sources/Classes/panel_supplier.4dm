@@ -14,6 +14,7 @@ Function formMethod()
 		Form:C1466.secondaryContact:=0
 		This:C1470.LoadContact()
 		This:C1470.LoadAllTabs()
+		
 	End if 
 	
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
@@ -28,6 +29,9 @@ Function formMethod()
 				This:C1470.loadDocuments()
 				OBJECT SET ENTERABLE:C238(*; "lb_documents"; False:C215)
 				
+			: (FORM Get current page:C276(*)=4)
+				This:C1470.loadRatingData()
+				OBJECT SET ENTERABLE:C238(*; "lb_rating"; False:C215)
 				
 		End case 
 	End if 
@@ -138,7 +142,6 @@ Function LoadContact()
 	End if 
 	
 	
-	
 Function drawPup_enteredBy()
 	If (Form:C1466.current_item#Null:C1517)
 		$operator:=ds:C1482.Staff.query("code= :1"; Form:C1466.current_item.enteredBy).first() || New object:C1471()
@@ -151,6 +154,7 @@ Function drawPup_enteredBy()
 		Form:C1466.sfw.drawButtonPup("pup_enteredBy"; $operatorCode; $pathIcon; ($operator=Null:C1517))
 		
 	End if 
+	
 	
 Function pup_enteredBy()
 	//Create pop up menu
@@ -318,102 +322,102 @@ Function LoadAllTabs()
 	This:C1470.loadDocuments()
 	
 	
+Function loadRatingData()
+	
+	var $buyingOrders : cs:C1710.BuyingOrderSelection
+	var $object : Object:=New object:C1471()
+	var $data : Collection:=New collection:C1472()
+	var $quarter : Integer
+	$buyingOrders:=ds:C1482.BuyingOrder.query("supplier.name =:1"; Form:C1466.current_item.name)
+	$buyingOrderLines:=New collection:C1472()
+	If ($buyingOrders#Null:C1517)
+		For each ($buyingOrder; $buyingOrders)
+			$buyingOrderLines:=$buyingOrderLines.concat($buyingOrder.boLines.toCollection())
+		End for each 
+	End if 
+	
+	For ($i; 0; $buyingOrderLines.length-1)
+		
+		$year:=String:C10(Year of:C25($buyingOrderLines[$i].orderDate))
+		If (OB Is defined:C1231($object; $year))
+		Else 
+			OB SET:C1220($object; $year; New object:C1471())
+		End if 
+		
+		$month:=String:C10(Month of:C24($buyingOrderLines[$i].orderDate); "0#")
+		$date:=$month+"-"+$year
+		
+		$lineItem:=$data.query("date =:1"; $date).first()
+		$indinces:=$data.indices("date =:1"; $date)
+		If ($indinces.length=0)
+			
+			OB SET:C1220($object[$year]; $month; New collection:C1472())
+			
+			$quarter:=Num:C11($month)<=3 ? 1 : (Num:C11($month)>3 && Num:C11($month)<=6) ? 2 : (Num:C11($month)>6 && Num:C11($month)<=9) ? 3 : 4
+			
+			$line:=New object:C1471(\
+				"date"; $date; \
+				"year"; $year; \
+				"month"; $month; \
+				"quarter"; $quarter; \
+				"receivingTotalLots"; $buyingOrderLines[$i].qty; \
+				"receivingWithoutNMNs"; $buyingOrderLines[$i].qtyReceived; \
+				"receivingLAR"; 0; \
+				"functionalTotalLots"; $buyingOrderLines[$i].qty; \
+				"functionalWithoutNMNs"; $buyingOrderLines[$i].qtyFunctional; \
+				"functionalLAR"; 0; \
+				"deliveryTotalLots"; 0; \
+				"deliveryMinorDelay"; 0; \
+				"deliveryMajorDelay"; 0; \
+				"deliveryLAR"; 0; \
+				"compositeOverAllRating"; 0; \
+				"ISOCertified"; "N"\
+				)
+			
+			$data.push($line)
+			
+		Else 
+			
+			$lineItem.receivingTotalLots:=$lineItem.receivingTotalLots+$buyingOrderLines[$i].qty
+			$lineItem.receivingWithoutNMNs:=$lineItem.receivingWithoutNMNs+$buyingOrderLines[$i].qtyReceived
+			$lineItem.functionalTotalLots:=$lineItem.functionalTotalLots+$buyingOrderLines[$i].qty
+			$lineItem.functionalWithoutNMNs:=$lineItem.functionalWithoutNMNs+$buyingOrderLines[$i].qtyFunctional
+			
+			$data.remove($indinces[0])
+			
+			$data.push($lineItem)
+			
+			
+		End if 
+		
+	End for 
+	
+	//Finish Calculations
+	For ($i; 0; $data.length-1)
+		$data[$i].receivingLAR:=($data[$i].receivingWithoutNMNs/$data[$i].receivingTotalLots)*100
+		$data[$i].functionalLAR:=($data[$i].functionalWithoutNMNs/$data[$i].functionalTotalLots)*100
+		
+	End for 
+	Form:C1466.lb_rating:=$data
+	
 Function bActionRating()
 	
 	$refMenu:=Create menu:C408
 	
-	APPEND MENU ITEM:C411($refMenu; "add report"; *)
-	SET MENU ITEM PARAMETER:C1004($refMenu; 1; "--add")
-	If (sfw_checkIsInModification=False:C215)
-		DISABLE MENU ITEM:C150($refMenu; 1)
-	End if 
+	APPEND MENU ITEM:C411($refMenu; "export to Excel"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; 1; "--export")
 	
-	APPEND MENU ITEM:C411($refMenu; "modify report"; *)
-	SET MENU ITEM PARAMETER:C1004($refMenu; 2; "--modify")
-	If (sfw_checkIsInModification=False:C215) | (Form:C1466.selectedRatingItem=Null:C1517) | Undefined:C82(Form:C1466.selectedRatingItem)
-		DISABLE MENU ITEM:C150($refMenu; 2)
-	End if 
-	
-	APPEND MENU ITEM:C411($refMenu; "delete report"; *)
-	SET MENU ITEM PARAMETER:C1004($refMenu; 3; "--delete")
-	If (sfw_checkIsInModification=False:C215) | (Form:C1466.selectedRatingItem=Null:C1517) | Undefined:C82(Form:C1466.selectedRatingItem)
-		DISABLE MENU ITEM:C150($refMenu; 3)
-	End if 
+	APPEND MENU ITEM:C411($refMenu; "print"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; 2; "--print")
 	
 	$choice:=Dynamic pop up menu:C1006($refMenu)
 	RELEASE MENU:C978($refMenu)
 	Case of 
 			
-		: ($choice="--add")
-			
-			$details:=New object:C1471
-			OB SET:C1220($details; "code"; ""; \
-				"date"; Current date:C33(*); \
-				"receivingTotalLots"; 0; \
-				"receivingWithoutNMNs"; 0; \
-				"functionalTotalLots"; 0; \
-				"functionalWithoutNMNs"; 0; \
-				"deliveryTotalLots"; 0; \
-				"deliveryMinorDelay"; 0; \
-				"deliveryMajorDelay"; 0; \
-				"ISOCertified"; ""\
-				)
+		: ($choice="--export")
 			
 			
-			$form:=New object:C1471("details"; $details)
-			//$form.approverProfile:=New collection("qs"; "qm")  // only QC Team allowed to modify
-			//$form.displayApprovalFields:=False
-			
-			$winRef:=Open form window:C675("_ga_vendorRatingForm"; Movable dialog box:K34:7; Horizontally centered:K39:1; Vertically centered:K39:4)
-			DIALOG:C40("_ga_vendorRatingForm"; $form)
-			If (OK=1)
-				//Form.lb_documents.push($form.details)
-				
-				//$buffer:=New object()
-				//$buffer.event:="addDocument"
-				//$buffer.label:="Document "+$form.details.sourcePath+" added"
-				//$buffer.stmp:=cs.sfw_stmp.me.now()
-				//Form.bufferOfEvents.push($buffer)
-				
-				Form:C1466.current_item.RatingData.items.push($form.details)
-				cs:C1710.panel_supplier.me._activate_save_cancel_button()
-			End if 
-			
-			
-		: ($choice="--modify")
-			
-			$form:=New object:C1471("details"; OB Copy:C1225(Form:C1466.current_item.RatingData.items[Form:C1466.selectedRatingItemPos-1]))
-			$form.approverProfile:=New collection:C1472("qs"; "qm")  // only QC Team allowed to modify 
-			$form.displayApprovalFields:=False:C215
-			
-			$winRef:=Open form window:C675("_ga_document"; Movable dialog box:K34:7; Horizontally centered:K39:1; Vertically centered:K39:4)
-			DIALOG:C40("_ga_vendorRatingForm"; $form)
-			
-			If (OK=1)
-				If ($form.modified) | ($form.documentHasChanged)
-					
-					Form:C1466.current_item.RatingData.items[Form:C1466.selectedRatingItemPos-1]:=$form.details
-					cs:C1710.panel_supplier.me._activate_save_cancel_button()
-				End if 
-			End if 
-			
-		: ($choice="--delete")
-			
-			$ok:=cs:C1710.sfw_dialog.me.confirm("Do you really want to delete this document? "; "Delete"; "CANCEL")
-			If ($ok)
-				
-				
-				//$buffer:=New object()
-				//$buffer.event:="deleteDocument"
-				//$buffer.label:="Document "+Form.current_item.RatingData.items[Form.selectedRatingItemPos-1].sourcePath+" deleted"
-				//$buffer.stmp:=cs.sfw_stmp.me.now()
-				//Form.bufferOfEvents.push($buffer)
-				
-				Form:C1466.current_item.RatingData.items.remove(Form:C1466.selectedDocumentPos-1)
-				cs:C1710.panel_supplier.me._activate_save_cancel_button()
-				
-			End if 
-			
+		: ($choice="--print")
 			
 			
 	End case 

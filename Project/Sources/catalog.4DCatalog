@@ -1019,6 +1019,10 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="moreData" uuid="DABF5DD4F5A3DE4CB246FEDAB4A45FAE" type="21" blob_switch_size="2147483647" never_null="true" id="18"/>
+		<field name="qtyReceived" uuid="20FC1941B74048599114926C637584C6" type="4" never_null="true" id="19"/>
+		<field name="actualDeliveryStmp" uuid="2D0DE62C09FB40ACBF32CA0769853C32" type="4" never_null="true" id="20"/>
+		<field name="expectedDeliveryStmp" uuid="B15E9BE6A8D14EAF9AE82881B85C0E1F" type="4" never_null="true" id="21"/>
+		<field name="qtyFunctional" uuid="F17239258B234099B0424E1A4A3EC57B" type="4" never_null="true" id="22"/>
 		<primary_key field_name="UUID" field_uuid="DD082E45822D34438F391901E3773042"/>
 	</table>
 	<table name="JobLineItem" uuid="C34CD032C4F6EB4C8F51682914D18AB0" id="65">

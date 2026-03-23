@@ -24,3 +24,15 @@ local Function get paidDate()->$date : Date
 	
 local Function set paidDate($date : Date)
 	This:C1470.paidStmp:=$date=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($date)
+	
+local Function get expectedDeliveryDate()->$date : Date
+	$date:=This:C1470.expectedDeliveryStmp=0 ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.expectedDeliveryStmp; True:C214)
+	
+local Function set expectedDeliveryDate($date : Date)
+	This:C1470.expectedDeliveryStmp:=$date=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($date)
+	
+local Function get actualDeliveryDate()->$date : Date
+	$date:=This:C1470.actualDeliveryStmp=0 ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.actualDeliveryStmp; True:C214)
+	
+local Function set actualDeliveryDate($date : Date)
+	This:C1470.actualDeliveryStmp:=$date=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($date)

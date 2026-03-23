@@ -78,7 +78,6 @@ Function drawPup_supplier()
 		
 	End if 
 	
-	
 Function pup_supplier()
 	//Create pop up menu
 	
@@ -105,5 +104,143 @@ Function pup_supplier()
 	
 	This:C1470.drawPup_supplier()
 	
+	
+	
+Function bActionBuyItems()
+	
+	$refMenu:=Create menu:C408
+	
+	APPEND MENU ITEM:C411($refMenu; "add an Item"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; 1; "--add")
+	If (sfw_checkIsInModification=False:C215)
+		DISABLE MENU ITEM:C150($refMenu; 1)
+	End if 
+	
+	APPEND MENU ITEM:C411($refMenu; "modify an Itenm"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; 2; "--modify")
+	If (sfw_checkIsInModification=False:C215) | (Form:C1466.selectedBoLine=Null:C1517) | Undefined:C82(Form:C1466.selectedBoLine)
+		DISABLE MENU ITEM:C150($refMenu; 2)
+	End if 
+	
+	APPEND MENU ITEM:C411($refMenu; "delete an Item"; *)
+	SET MENU ITEM PARAMETER:C1004($refMenu; 3; "--delete")
+	If (sfw_checkIsInModification=False:C215) | (Form:C1466.selectedBoLine=Null:C1517) | Undefined:C82(Form:C1466.selectedBoLine)
+		DISABLE MENU ITEM:C150($refMenu; 3)
+	End if 
+	
+	$choice:=Dynamic pop up menu:C1006($refMenu)
+	RELEASE MENU:C978($refMenu)
+	Case of 
+			
+		: ($choice="--add")
+			
+			START TRANSACTION:C239
+			$buyItem:=ds:C1482.BuyingOrderLine.new()
+			$buyItem.UUID_BuyingOrder:=Form:C1466.current_item.UUID
+			$buyItem.boNumber:=Form:C1466.current_item.boNumber
+			$buyItem.orderDate:=Current date:C33(*)
+			
+			$form:=New object:C1471("details"; $buyItem)
+			
+			//$form.approverProfile:=New collection("qs"; "qm")  // only QC Team allowed to modify
+			//$form.displayApprovalFields:=False
+			
+			$winRef:=Open form window:C675("_ga_buyingOrderLine"; Movable dialog box:K34:7; Horizontally centered:K39:1; Vertically centered:K39:4)
+			SET WINDOW TITLE:C213("Add Buying Item"; $winRef)
+			DIALOG:C40("_ga_buyingOrderLine"; $form)
+			
+			If (OK=1)
+				//Form.lb_documents.push($form.details)
+				
+				//$buffer:=New object()
+				//$buffer.event:="addDocument"
+				//$buffer.label:="Document "+$form.details.sourcePath+" added"
+				//$buffer.stmp:=cs.sfw_stmp.me.now()
+				//Form.bufferOfEvents.push($buffer)
+				
+				$buyItem:=$form.details
+				
+				$res:=$buyItem.save()
+				
+				If ($res.success)
+					
+					VALIDATE TRANSACTION:C240
+					
+					This:C1470.loadLineItems()
+					This:C1470._activate_save_cancel_button()
+				Else 
+					CANCEL TRANSACTION:C241
+				End if 
+			Else 
+				CANCEL TRANSACTION:C241
+				
+			End if 
+			
+			
+		: ($choice="--modify")
+			
+			START TRANSACTION:C239
+			$buyItem:=ds:C1482.BuyingOrderLine.query("UUID = :1"; Form:C1466.lb_boLines[Form:C1466.selectedBoLinePos-1].UUID).first()
+			
+			$form:=New object:C1471("details"; $buyItem)
+			
+			//$form.approverProfile:=New collection("qs"; "qm")  // only QC Team allowed to modify 
+			//$form.displayApprovalFields:=False
+			
+			$winRef:=Open form window:C675("_ga_buyingOrderLine"; Movable dialog box:K34:7; Horizontally centered:K39:1; Vertically centered:K39:4)
+			SET WINDOW TITLE:C213("Modify Buying Item"; $winRef)
+			DIALOG:C40("_ga_buyingOrderLine"; $form)
+			
+			If (OK=1)
+				
+				$buyItem:=$form.details
+				
+				$res:=$buyItem.save()
+				
+				If ($res.success)
+					
+					VALIDATE TRANSACTION:C240
+					
+					This:C1470.loadLineItems()
+					This:C1470._activate_save_cancel_button()
+				Else 
+					CANCEL TRANSACTION:C241
+				End if 
+			Else 
+				
+				CANCEL TRANSACTION:C241
+			End if 
+			
+		: ($choice="--delete")
+			
+			$ok:=cs:C1710.sfw_dialog.me.confirm("Do you really want to delete this Item? "; "Delete"; "CANCEL")
+			If ($ok)
+				
+				
+				//$buffer:=New object()
+				//$buffer.event:="deleteDocument"
+				//$buffer.label:="Document "+Form.current_item.RatingData.items[Form.selectedRatingItemPos-1].sourcePath+" deleted"
+				//$buffer.stmp:=cs.sfw_stmp.me.now()
+				//Form.bufferOfEvents.push($buffer)
+				
+				START TRANSACTION:C239
+				$buyItem:=ds:C1482.BuyingOrderLine.query("UUID = :1"; Form:C1466.lb_boLines[Form:C1466.selectedBoLinePos-1].UUID).first()
+				
+				$res:=$buyItem.drop()
+				
+				If ($res.success)
+					
+					VALIDATE TRANSACTION:C240
+					
+					This:C1470.loadLineItems()
+					This:C1470._activate_save_cancel_button()
+				Else 
+					CANCEL TRANSACTION:C241
+				End if 
+				
+			End if 
+			
+			
+	End case 
 	
 	

@@ -7,6 +7,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setIcon("image/entry/buyingOrders-50x50.png")
 	
 	$entry.setSearchboxField("boNumber"; "placeholder:boNumber")
+	$entry.setSearchboxField("supplier.name"; "placeholder:supplierName")
 	
 	$entry.setPanel("panel_buyingOrder")
 	

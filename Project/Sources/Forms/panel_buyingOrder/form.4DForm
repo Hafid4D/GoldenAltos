@@ -790,7 +790,7 @@
 					"type": "listbox",
 					"left": 103,
 					"top": 115,
-					"width": 1205,
+					"width": 1580,
 					"height": 440,
 					"events": [
 						"onClick",
@@ -803,7 +803,7 @@
 					"visibility": "visible",
 					"dataSource": "Form:C1466.lb_boLines",
 					"selectionMode": "single",
-					"currentItemSource": "Form:C1466.selectedPoLine",
+					"currentItemSource": "Form:C1466.selectedBoLine",
 					"alternateFill": "#E6E6E6",
 					"sizingX": "grow",
 					"sizingY": "grow",
@@ -812,6 +812,7 @@
 					"scrollbarVertical": "automatic",
 					"horizontalLineStroke": "transparent",
 					"verticalLineStroke": "transparent",
+					"currentItemPositionSource": "Form:C1466.selectedBoLinePos",
 					"columns": [
 						{
 							"header": {
@@ -842,22 +843,24 @@
 							"width": 240,
 							"dataSource": "This:C1470.description",
 							"resizable": true,
-							"enterable": false
+							"enterable": false,
+							"minWidth": 130
 						},
 						{
 							"header": {
 								"name": "Header3",
-								"text": "QTY",
+								"text": "Qty Ordered",
 								"fontWeight": "bold"
 							},
 							"name": "Column3",
 							"footer": {
 								"name": "Footer3"
 							},
-							"width": 50,
+							"width": 80,
 							"dataSource": "This:C1470.qty",
 							"resizable": false,
-							"enterable": false
+							"enterable": false,
+							"dataSourceTypeHint": "number"
 						},
 						{
 							"header": {
@@ -871,7 +874,7 @@
 							},
 							"width": 70,
 							"dataSource": "This:C1470.unitPrice",
-							"dataSourceTypeHint": "date",
+							"dataSourceTypeHint": "number",
 							"textAlign": "center",
 							"dateFormat": "short",
 							"resizable": false,
@@ -889,7 +892,7 @@
 							},
 							"width": 80,
 							"dataSource": "This:C1470.lineTotal",
-							"dataSourceTypeHint": "date",
+							"dataSourceTypeHint": "number",
 							"textAlign": "center",
 							"dateFormat": "short",
 							"resizable": false,
@@ -923,7 +926,8 @@
 							"width": 80,
 							"dataSource": "This:C1470.orderDate",
 							"resizable": false,
-							"enterable": false
+							"enterable": false,
+							"dataSourceTypeHint": "date"
 						},
 						{
 							"header": {
@@ -938,7 +942,8 @@
 							"width": 80,
 							"dataSource": "This:C1470.requiredDate",
 							"resizable": false,
-							"enterable": false
+							"enterable": false,
+							"dataSourceTypeHint": "date"
 						},
 						{
 							"header": {
@@ -953,7 +958,8 @@
 							"width": 80,
 							"dataSource": "This:C1470.dateIn",
 							"resizable": false,
-							"enterable": false
+							"enterable": false,
+							"dataSourceTypeHint": "date"
 						},
 						{
 							"header": {
@@ -983,7 +989,8 @@
 							},
 							"dataSource": "This:C1470.paidDate",
 							"resizable": false,
-							"enterable": false
+							"enterable": false,
+							"dataSourceTypeHint": "date"
 						},
 						{
 							"header": {
@@ -998,7 +1005,8 @@
 							},
 							"dataSource": "This:C1470.amountPaid",
 							"resizable": false,
-							"enterable": false
+							"enterable": false,
+							"dataSourceTypeHint": "number"
 						},
 						{
 							"header": {
@@ -1044,6 +1052,50 @@
 							"dataSource": "This:C1470.supPsNumber",
 							"resizable": false,
 							"enterable": false
+						},
+						{
+							"header": {
+								"name": "Header16",
+								"text": "Qty Received",
+								"fontWeight": "bold"
+							},
+							"name": "Column16",
+							"footer": {
+								"name": "Footer16"
+							},
+							"width": 80,
+							"dataSource": "This:C1470.qtyReceived",
+							"dataSourceTypeHint": "number",
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header17",
+								"text": "Scheduled Delivery Date",
+								"fontWeight": "bold"
+							},
+							"name": "Column17",
+							"footer": {
+								"name": "Footer17"
+							},
+							"width": 145,
+							"dataSource": "This:C1470.expectedDeliveryDate",
+							"dataSourceTypeHint": "date",
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header18",
+								"text": "Actual Delivery Date",
+								"fontWeight": "bold"
+							},
+							"name": "Column18",
+							"footer": {
+								"name": "Footer18"
+							},
+							"dataSource": "This:C1470.actualDeliveryDate",
+							"dataSourceTypeHint": "date",
+							"resizable": false
 						}
 					]
 				},
@@ -1205,7 +1257,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1301,
+	"geometryStamp": 1303,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
