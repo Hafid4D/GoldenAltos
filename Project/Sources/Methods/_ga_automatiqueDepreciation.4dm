@@ -1,6 +1,6 @@
 //%attributes = {}
 /*
-_ga_activateAutomatiqueDepreciation
+_ga_automatiqueDepreciation
 For testing purpose
 
 */

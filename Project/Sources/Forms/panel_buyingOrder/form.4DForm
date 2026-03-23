@@ -250,17 +250,18 @@
 				"label_accountNumber": {
 					"type": "text",
 					"top": 155,
-					"left": 6,
-					"width": 79,
+					"left": 12,
+					"width": 75,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Account #"
+					"text": "Account #",
+					"textAlign": "right"
 				},
 				"entryField_accountNumber": {
 					"type": "input",
 					"top": 155,
-					"left": 93,
-					"width": 249,
+					"left": 97,
+					"width": 234,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.accountNumber",
 					"focusable": false,
@@ -273,22 +274,23 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"method": "ObjectMethods/entryField_accountNumber.4dm",
-					"right": 342,
+					"right": 331,
 					"dataSourceTypeHint": "integer"
 				},
 				"label_salesTaxRate": {
 					"type": "text",
 					"top": 179,
-					"left": 6,
-					"width": 79,
+					"left": 12,
+					"width": 75,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Sales Tax Rate"
+					"text": "Sales Tax Rate",
+					"textAlign": "right"
 				},
 				"entryField_salesTaxRate": {
 					"type": "input",
 					"top": 179,
-					"left": 93,
+					"left": 97,
 					"width": 60,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.salesTaxRate",
@@ -307,7 +309,7 @@
 				"label_currency": {
 					"type": "text",
 					"top": 179,
-					"left": 190,
+					"left": 167,
 					"width": 84,
 					"height": 17,
 					"stroke": "#808080",
@@ -317,8 +319,8 @@
 				"entryField_currency": {
 					"type": "input",
 					"top": 179,
-					"left": 282,
-					"width": 60,
+					"left": 261,
+					"width": 70,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.currency",
 					"focusable": false,
@@ -335,16 +337,17 @@
 				"label_discount": {
 					"type": "text",
 					"top": 203,
-					"left": 6,
-					"width": 79,
+					"left": 12,
+					"width": 75,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Discount"
+					"text": "Discount",
+					"textAlign": "right"
 				},
 				"entryField_discount": {
 					"type": "input",
 					"top": 203,
-					"left": 93,
+					"left": 97,
 					"width": 60,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.discount",
@@ -363,7 +366,7 @@
 				"label_discountDays": {
 					"type": "text",
 					"top": 203,
-					"left": 190,
+					"left": 167,
 					"width": 84,
 					"height": 17,
 					"stroke": "#808080",
@@ -373,8 +376,8 @@
 				"entryField_discountDays": {
 					"type": "input",
 					"top": 203,
-					"left": 282,
-					"width": 60,
+					"left": 261,
+					"width": 70,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.discountDays",
 					"focusable": false,
@@ -392,16 +395,17 @@
 				"label_netDays": {
 					"type": "text",
 					"top": 227,
-					"left": 6,
-					"width": 79,
+					"left": 12,
+					"width": 75,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Net (Days)"
+					"text": "Net (Days)",
+					"textAlign": "right"
 				},
 				"entryField_netDays": {
 					"type": "input",
 					"top": 227,
-					"left": 93,
+					"left": 97,
 					"width": 60,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.netDays",
@@ -441,17 +445,18 @@
 				"label_shippingAddress": {
 					"type": "text",
 					"top": 296,
-					"left": 6,
-					"width": 109,
+					"left": 12,
+					"width": 115,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Shipping Address"
+					"text": "Shipping Address",
+					"textAlign": "right"
 				},
 				"entryField_shippingAddress": {
 					"type": "input",
 					"top": 296,
-					"left": 123,
-					"width": 219,
+					"left": 137,
+					"width": 194,
 					"height": 53,
 					"dataSource": "Form:C1466.current_item.shippingAddress",
 					"focusable": false,
@@ -464,22 +469,23 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"method": "ObjectMethods/entryField_shippingAddress.4dm",
-					"right": 342
+					"right": 331
 				},
 				"label_fobDeliveryTerms": {
 					"type": "text",
 					"top": 355,
-					"left": 6,
-					"width": 111,
+					"left": 12,
+					"width": 115,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "FOB (Delivery Terms)"
+					"text": "FOB (Delivery Terms)",
+					"textAlign": "right"
 				},
 				"entryField_fob": {
 					"type": "input",
 					"top": 355,
-					"left": 123,
-					"width": 219,
+					"left": 137,
+					"width": 194,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.fob",
 					"focusable": false,
@@ -492,22 +498,23 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"method": "ObjectMethods/entryField_fob.4dm",
-					"right": 342
+					"right": 331
 				},
 				"label_shipVia": {
 					"type": "text",
 					"top": 379,
-					"left": 6,
-					"width": 111,
+					"left": 12,
+					"width": 115,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Ship Via"
+					"text": "Ship Via",
+					"textAlign": "right"
 				},
 				"entryField_shipVia": {
 					"type": "input",
 					"top": 379,
-					"left": 123,
-					"width": 219,
+					"left": 137,
+					"width": 194,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.shipVia",
 					"focusable": false,
@@ -520,7 +527,7 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"method": "ObjectMethods/entryField_shipVia.4dm",
-					"right": 342
+					"right": 331
 				},
 				"header_bkgd8": {
 					"type": "rectangle",
@@ -547,16 +554,17 @@
 					"type": "text",
 					"top": 155,
 					"left": 358,
-					"width": 99,
+					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Division"
+					"text": "Division",
+					"textAlign": "right"
 				},
 				"entryField_division": {
 					"type": "input",
 					"top": 155,
-					"left": 460,
-					"width": 232,
+					"left": 458,
+					"width": 200,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.division",
 					"focusable": false,
@@ -569,22 +577,23 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"method": "ObjectMethods/entryField_division.4dm",
-					"right": 692
+					"right": 658
 				},
 				"label_requestedBy": {
 					"type": "text",
 					"top": 179,
 					"left": 358,
-					"width": 99,
+					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Requested By"
+					"text": "Requested By",
+					"textAlign": "right"
 				},
 				"entryField_requestedBy": {
 					"type": "input",
 					"top": 179,
-					"left": 460,
-					"width": 232,
+					"left": 458,
+					"width": 200,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.requestedBy",
 					"focusable": false,
@@ -597,22 +606,23 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"method": "ObjectMethods/entryField_requestedBy.4dm",
-					"right": 692
+					"right": 658
 				},
 				"label_salesTax": {
 					"type": "text",
 					"top": 203,
 					"left": 358,
-					"width": 99,
+					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Sales Tax"
+					"text": "Sales Tax",
+					"textAlign": "right"
 				},
 				"entryField_salesTax": {
 					"type": "input",
 					"top": 203,
-					"left": 460,
-					"width": 232,
+					"left": 458,
+					"width": 200,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.salesTax",
 					"focusable": false,
@@ -625,23 +635,24 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"method": "ObjectMethods/entryField_salesTax.4dm",
-					"right": 692,
+					"right": 658,
 					"dataSourceTypeHint": "number"
 				},
 				"label_lineItemsTotal": {
 					"type": "text",
 					"top": 227,
 					"left": 358,
-					"width": 99,
+					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Line Items Total"
+					"text": "Line Items Total",
+					"textAlign": "right"
 				},
 				"entryField_lineItemsTotal": {
 					"type": "input",
 					"top": 227,
-					"left": 460,
-					"width": 232,
+					"left": 458,
+					"width": 200,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.lineItemsTotal",
 					"focusable": false,
@@ -654,23 +665,24 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"method": "ObjectMethods/entryField_lineItemsTotal.4dm",
-					"right": 692,
+					"right": 658,
 					"dataSourceTypeHint": "number"
 				},
 				"label_approver1": {
 					"type": "text",
 					"top": 262,
 					"left": 358,
-					"width": 99,
+					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Approver 1"
+					"text": "Approver 1",
+					"textAlign": "right"
 				},
 				"entryField_approver1": {
 					"type": "input",
 					"top": 262,
-					"left": 460,
-					"width": 292,
+					"left": 458,
+					"width": 200,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.approver1",
 					"focusable": false,
@@ -683,22 +695,23 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"method": "ObjectMethods/entryField_approver1.4dm",
-					"right": 752
+					"right": 658
 				},
 				"label_approver2": {
 					"type": "text",
 					"top": 284,
 					"left": 358,
-					"width": 99,
+					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Approver 2"
+					"text": "Approver 2",
+					"textAlign": "right"
 				},
 				"entryField_approver2": {
 					"type": "input",
 					"top": 284,
-					"left": 460,
-					"width": 292,
+					"left": 458,
+					"width": 200,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.approver2",
 					"focusable": false,
@@ -711,22 +724,23 @@
 					"fill": "transparent",
 					"borderStyle": "none",
 					"method": "ObjectMethods/entryField_approver2.4dm",
-					"right": 752
+					"right": 658
 				},
 				"label_signature1": {
 					"type": "text",
 					"top": 308,
 					"left": 358,
-					"width": 79,
+					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Signature"
+					"text": "Signature",
+					"textAlign": "right"
 				},
 				"entryField_signature1": {
 					"type": "input",
 					"top": 308,
-					"left": 445,
-					"width": 86,
+					"left": 458,
+					"width": 200,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.signature1",
 					"focusable": false,
@@ -744,16 +758,17 @@
 					"type": "text",
 					"top": 332,
 					"left": 358,
-					"width": 79,
+					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Signature"
+					"text": "Signature",
+					"textAlign": "right"
 				},
 				"entryField_signature2": {
 					"type": "input",
 					"top": 332,
-					"left": 445,
-					"width": 86,
+					"left": 458,
+					"width": 200,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.signature2",
 					"focusable": false,
@@ -1032,30 +1047,11 @@
 						}
 					]
 				},
-				"pupFilter_status": {
-					"type": "button",
-					"text": "All Status",
-					"top": 151,
-					"left": 4,
-					"width": 95,
-					"height": 20,
-					"events": [
-						"onClick"
-					],
-					"style": "bevel",
-					"popupPlacement": "linked",
-					"fontSize": 10,
-					"icon": "/RESOURCES/sfw/image/picto/funnel-small.png",
-					"textPlacement": "right",
-					"visibility": "hidden",
-					"focusable": false,
-					"method": "ObjectMethods/pupFilter_status.4dm"
-				},
 				"bActionLineItems": {
 					"type": "button",
 					"text": "Actions",
-					"top": 531,
-					"left": 12,
+					"top": 151,
+					"left": 5,
 					"width": 80,
 					"height": 21,
 					"events": [
@@ -1209,7 +1205,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1213,
+	"geometryStamp": 1301,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

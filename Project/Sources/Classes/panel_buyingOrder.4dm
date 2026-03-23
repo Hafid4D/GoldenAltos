@@ -39,10 +39,6 @@ Function redrawAndSetVisible()
 			OBJECT GET COORDINATES:C663(*; "lb_boLines"; $left_lb; $top_lb; $right_lb; $bottom_lb)
 			OBJECT SET COORDINATES:C1248(*; "lb_boLines"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset)
 			
-			OBJECT GET COORDINATES:C663(*; "bActionLineItems"; $left_lb; $top_lb; $right_lb; $bottom_lb)
-			OBJECT SET COORDINATES:C1248(*; "bActionLineItems"; $left_lb; $heightSubform-21-$offset; $right_lb; $heightSubform-$offset)
-			
-			
 			
 	End case 
 	

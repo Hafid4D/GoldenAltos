@@ -709,7 +709,7 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="moreData" uuid="EBFDD78066BBD14ABCCFAD417EFF51C8" type="21" blob_switch_size="2147483647" never_null="true" id="24"/>
-		<field name="UUID_Supplier" uuid="E0C9ABA7B4AB40A4B5D373148ACAB0A3" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="25"/>
+		<field name="UUID_Supplier" uuid="E0C9ABA7B4AB40A4B5D373148ACAB0A3" type="10" store_as_UUID="true" never_null="true" id="25"/>
 		<field name="buyer" uuid="70D3B282BA154164926D9A72A4F6D757" type="10" limiting_length="255" never_null="true" id="26"/>
 		<primary_key field_name="UUID" field_uuid="2C36FF767DF13E42905F5E16E2D31F5F"/>
 	</table>
