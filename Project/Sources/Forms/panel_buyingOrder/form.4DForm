@@ -790,7 +790,7 @@
 					"type": "listbox",
 					"left": 103,
 					"top": 115,
-					"width": 1580,
+					"width": 1701,
 					"height": 440,
 					"events": [
 						"onClick",
@@ -1096,6 +1096,20 @@
 							"dataSource": "This:C1470.actualDeliveryDate",
 							"dataSourceTypeHint": "date",
 							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header19",
+								"text": "Functional Total Lot",
+								"fontWeight": "bold"
+							},
+							"name": "Column19",
+							"footer": {
+								"name": "Footer19"
+							},
+							"dataSource": "This:C1470.qtyFunctional",
+							"dataSourceTypeHint": "number",
+							"resizable": false
 						}
 					]
 				},
@@ -1257,7 +1271,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1303,
+	"geometryStamp": 1305,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

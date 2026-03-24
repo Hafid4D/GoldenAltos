@@ -9,8 +9,8 @@
 	"windowMinHeight": 0,
 	"windowMaxWidth": 32767,
 	"windowMaxHeight": 32767,
-	"rightMargin": 20,
-	"bottomMargin": 20,
+	"rightMargin": 0,
+	"bottomMargin": 0,
 	"events": [
 		"onLoad",
 		"onPageChange",
@@ -899,8 +899,8 @@
 				},
 				"lb_rating": {
 					"type": "listbox",
-					"left": 132,
-					"top": 114,
+					"left": 131,
+					"top": 113,
 					"width": 2362,
 					"height": 700,
 					"events": [
@@ -918,11 +918,11 @@
 					"selectionMode": "single",
 					"resizingMode": "rightToLeft",
 					"alternateFill": "#E6E6E6",
-					"horizontalLineStroke": "automatic",
+					"horizontalLineStroke": "transparent",
 					"borderStyle": "none",
 					"verticalLineStroke": "transparent",
 					"headerHeight": "2em",
-					"right": 2494,
+					"right": 2493,
 					"scrollbarHorizontal": "automatic",
 					"hideFocusRing": false,
 					"sizingX": "grow",
@@ -1226,7 +1226,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 395,
+	"geometryStamp": 399,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

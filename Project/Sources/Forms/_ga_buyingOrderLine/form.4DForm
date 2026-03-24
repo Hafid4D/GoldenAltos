@@ -38,7 +38,7 @@
 					"top": 0,
 					"left": 0,
 					"width": 491,
-					"height": 648,
+					"height": 654,
 					"stroke": "#FFFFFF",
 					"strokeWidth": 0,
 					"fill": "#E0E0E0"
@@ -295,7 +295,7 @@
 				},
 				"bOk": {
 					"type": "button",
-					"top": 605,
+					"top": 600,
 					"left": 426,
 					"width": 30,
 					"height": 32,
@@ -319,7 +319,7 @@
 				},
 				"bCancel": {
 					"type": "button",
-					"top": 605,
+					"top": 600,
 					"left": 380,
 					"width": 32,
 					"height": 32,
@@ -915,7 +915,7 @@
 			}
 		}
 	],
-	"geometryStamp": 285,
+	"geometryStamp": 303,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
