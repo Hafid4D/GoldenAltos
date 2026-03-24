@@ -1,1 +1,1 @@
-cs:C1710.panel_purchaseOrder.me.bActionLineItems()
+cs:C1710.panel_buyingOrder.me.bActionBuyItems()

@@ -45,6 +45,9 @@ If (True:C214)
 		
 		$vendor:=ds:C1482.Supplier.query("name =:1"; Split string:C1554($record.VENDOR; "\r"; sk trim spaces:K86:2).join("\r"))
 		If ($vendor.length>0)
+			//If ($record.VENDOR="XYZ@")
+			
+			//End if 
 			$buyingOrder.UUID_Supplier:=$vendor[0].UUID
 		Else 
 			$buyingOrder.UUID_Supplier:="00"*16

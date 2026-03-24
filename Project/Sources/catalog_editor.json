@@ -1218,12 +1218,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2682,
-				"top": 2323.3764648438,
-				"width": 166.34765625,
-				"height": 474.33203125
+				"left": 2677,
+				"top": 2335.3764648438,
+				"width": 237.34765625,
+				"height": 586.33203125
 			},
-			"displayable_fields_count": 20,
+			"displayable_fields_count": 25,
 			"fields": {
 				"supPsNumber": {
 					"color": {

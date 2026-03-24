@@ -12,6 +12,7 @@ property documentsStorageOnServer : Object
 property dfd : Object
 property userVision : Object
 property mainInterface : Object
+property constants : Object
 
 
 Class extends sfw_definition_globalParameters
@@ -117,6 +118,11 @@ Function _global_parameters()
 	This:C1470.userVision.entryProfile.allowedProfilesForModification:=["pm"]
 	
 	
+	
+	//mark:- constants 
+	
+	This:C1470.constants:=New object:C1471
+	This:C1470.constants.deleveryMinimunDelay:=10
 	
 	
 	

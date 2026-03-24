@@ -709,7 +709,7 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="moreData" uuid="EBFDD78066BBD14ABCCFAD417EFF51C8" type="21" blob_switch_size="2147483647" never_null="true" id="24"/>
-		<field name="UUID_Supplier" uuid="E0C9ABA7B4AB40A4B5D373148ACAB0A3" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="25"/>
+		<field name="UUID_Supplier" uuid="E0C9ABA7B4AB40A4B5D373148ACAB0A3" type="10" store_as_UUID="true" never_null="true" id="25"/>
 		<field name="buyer" uuid="70D3B282BA154164926D9A72A4F6D757" type="10" limiting_length="255" never_null="true" id="26"/>
 		<primary_key field_name="UUID" field_uuid="2C36FF767DF13E42905F5E16E2D31F5F"/>
 	</table>
@@ -1019,6 +1019,10 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="moreData" uuid="DABF5DD4F5A3DE4CB246FEDAB4A45FAE" type="21" blob_switch_size="2147483647" never_null="true" id="18"/>
+		<field name="qtyReceived" uuid="20FC1941B74048599114926C637584C6" type="4" never_null="true" id="19"/>
+		<field name="actualDeliveryStmp" uuid="2D0DE62C09FB40ACBF32CA0769853C32" type="4" never_null="true" id="20"/>
+		<field name="expectedDeliveryStmp" uuid="B15E9BE6A8D14EAF9AE82881B85C0E1F" type="4" never_null="true" id="21"/>
+		<field name="qtyFunctional" uuid="F17239258B234099B0424E1A4A3EC57B" type="4" never_null="true" id="22"/>
 		<primary_key field_name="UUID" field_uuid="DD082E45822D34438F391901E3773042"/>
 	</table>
 	<table name="JobLineItem" uuid="C34CD032C4F6EB4C8F51682914D18AB0" id="65">
