@@ -1383,6 +1383,7 @@
 		<field name="moreData" uuid="CA835A6CDEEC45F6903F80ED16E1CB86" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="71A6AAF645094A41BD9F71F16C7D2366"/>
 	</table>
+
 	<table name="StepTemplateLayout" uuid="EE0919F4685942B2AADAD0E171EA9BC3" id="91">
 		<field name="UUID" uuid="2F5E04FFB58D433F939F8C0656F71336" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="type" uuid="0836C195E0584C8DA6BF3F042B65997A" type="10" limiting_length="255" never_null="true" id="2">

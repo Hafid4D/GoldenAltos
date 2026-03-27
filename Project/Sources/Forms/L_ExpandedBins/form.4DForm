@@ -1,4 +1,5 @@
 {
+
 	"destination": "detailScreen",
 	"rightMargin": 15,
 	"bottomMargin": 0,
@@ -3050,7 +3051,7 @@
 					"width": 29,
 					"height": 11,
 					"stroke": "#000000",
-					"class": "PrintFontSmall",
+					"class": "PrintFontSmall",                      
 					"text": "Too13:"
 				}
 			}

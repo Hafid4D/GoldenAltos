@@ -589,9 +589,11 @@
 				"left": 3031.6667480469,
 				"top": 630.66668701172,
 				"width": 201.048828125,
+
 				"height": 445.33203125
 			},
 			"displayable_fields_count": 19,
+
 			"fields": {
 				"bins": {
 					"position": 15
@@ -802,10 +804,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
+
 				"left": 2835,
 				"top": 783,
 				"width": 145,
 				"height": 193.33203125
+
 			},
 			"displayable_fields_count": 7
 		},
