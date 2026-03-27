@@ -1379,6 +1379,16 @@
 		<field name="moreData" uuid="CA835A6CDEEC45F6903F80ED16E1CB86" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="71A6AAF645094A41BD9F71F16C7D2366"/>
 	</table>
+	<table name="StepTemplateLayout" uuid="EE0919F4685942B2AADAD0E171EA9BC3" id="90">
+		<field name="UUID" uuid="2F5E04FFB58D433F939F8C0656F71336" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="type" uuid="0836C195E0584C8DA6BF3F042B65997A" type="10" limiting_length="255" never_null="true" id="2">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="name" uuid="BA433561F475415CA80553CBF76B7387" type="10" limiting_length="255" never_null="true" id="3">
+			<field_extra multi_line="false"/>
+		</field>
+		<primary_key field_name="UUID" field_uuid="2F5E04FFB58D433F939F8C0656F71336"/>
+	</table>
 	<table name="Customer" uuid="96D1CE81460A4F75B3F4275138C8F778" id="114">
 		<field name="UUID" uuid="37676CD94E8B423595ED98B5C0E9CF89" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="name" uuid="6408BE6907C146339726DEB3047C211E" type="10" limiting_length="255" never_null="true" id="2">
@@ -1602,8 +1612,8 @@
 		<field name="division" uuid="72DA41DEB169DF46B1B384015640754B" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="status" uuid="A9AD90B0A5506E409BB48FE4B219C01A" type="1" never_null="true" id="5"/>
 		<field name="binning" uuid="B2C3C551F5EB9B4094BF2B8C0B3B5CA7" type="1" never_null="true" id="6"/>
-		<field name="smallLayout" uuid="E692454F40F16F4AA982D1B2B2955EC9" type="10" limiting_length="255" never_null="true" id="7"/>
-		<field name="largeLayout" uuid="CD5AA4FB574CBF4CB36F9274DE50375E" type="10" limiting_length="255" never_null="true" id="8"/>
+		<field name="smallLayout_UUID" uuid="E692454F40F16F4AA982D1B2B2955EC9" type="10" store_as_UUID="true" never_null="true" id="7"/>
+		<field name="largeLayout_UUID" uuid="CD5AA4FB574CBF4CB36F9274DE50375E" type="10" store_as_UUID="true" never_null="true" id="8"/>
 		<field name="comment1" uuid="8BB0BEEBAB42CE4BB75167E78C1DFA87" type="10" limiting_length="255" never_null="true" id="9"/>
 		<field name="comment2" uuid="6035172B450A3A439FD3A26DE1B62B3F" type="10" limiting_length="255" never_null="true" id="10"/>
 		<field name="dataTables" uuid="468EEB0CF147B142864EBFD9A3055821" type="21" blob_switch_size="2147483647" never_null="true" id="11"/>
@@ -4042,6 +4052,11 @@
 	<index kind="regular" unique_keys="true" uuid="4EF303D62F454942AA8026FF7896539A" type="7">
 		<field_ref uuid="1CB76A26D5B699429A95B9E10253FD00" name="UUID">
 			<table_ref uuid="C1BEBD5DDE0D1A45AEE41760FAE1229A" name="ControllingDepartment"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="4F2D87170037465EB52CC3427397533B" type="7">
+		<field_ref uuid="2F5E04FFB58D433F939F8C0656F71336" name="UUID">
+			<table_ref uuid="EE0919F4685942B2AADAD0E171EA9BC3" name="StepTemplateLayout"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="4FA46263FA2E426BAF05C717690A91D3" type="3">

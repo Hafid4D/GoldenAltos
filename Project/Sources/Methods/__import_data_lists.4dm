@@ -229,7 +229,6 @@ For ($i; 0; $auditStatus.length-1)
 	$eAuditStatus.save()
 End for 
 
-
 //----> [ProcessType]
 var $eProcessType : cs:C1710.ProcessTypeEntity
 $processTypes:=New collection:C1472("Assembly"; "Assembly_AE"; "Assembly_AO"; "Assembly_AP"; "Assembly_D"; "Assembly_E"; "Assembly_M"; \
@@ -246,10 +245,6 @@ For ($i; 0; $processTypes.length-1)
 	$eProcessType.color:="#FFFFFF"
 	$eProcessType.save()
 End for 
-
-
-
-
 
 If (True:C214)
 	TRUNCATE TABLE:C1051([DivisionInfo:68])
@@ -362,4 +357,15 @@ If (True:C214)
 End if 
 
 
+//----[StepTemplateLayout]
+var $eStepTemplateLayout : cs:C1710.StepTemplateLayoutEntity
+var $layouts : Collection:=New collection:C1472("bake"; "bin_wise_out"; "burnin_L"; "data_prep"; "L_Elec_test"; "L_ExpandedBins"; \
+"L_plain"; "N/A"; "PDA"; "PlainUniversalWithBinsAndMark"; "WS")
+TRUNCATE TABLE:C1051([StepTemplateLayout:90])
+For ($i; 0; $layouts.length-1)
+	$eStepTemplateLayout:=ds:C1482.StepTemplateLayout.new()
+	//$eStepTemplateLayout.type:=$i
+	$eStepTemplateLayout.name:=$layouts[$i]
+	$eStepTemplateLayout.save()
+End for 
 
