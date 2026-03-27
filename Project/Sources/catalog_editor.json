@@ -510,8 +510,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2658.3334960938,
-				"top": 630,
+				"left": 2649.3334960938,
+				"top": 602,
 				"width": 180.92706298828,
 				"height": 126.33203125
 			},
@@ -589,9 +589,9 @@
 				"left": 3031.6667480469,
 				"top": 630.66668701172,
 				"width": 201.048828125,
-				"height": 378.33203125
+				"height": 471.33203125
 			},
-			"displayable_fields_count": 16,
+			"displayable_fields_count": 20,
 			"fields": {
 				"bins": {
 					"position": 15
@@ -608,10 +608,10 @@
 				"comment1": {
 					"position": 11
 				},
-				"largeLayout": {
+				"largeLayout_UUID": {
 					"position": 10
 				},
-				"smallLayout": {
+				"smallLayout_UUID": {
 					"position": 9
 				},
 				"binning": {
@@ -794,6 +794,21 @@
 					"position": 1
 				}
 			}
+		},
+		"StepTemplateLayout": {
+			"color": {
+				"red": 181,
+				"green": 145,
+				"blue": 209,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 2837,
+				"top": 930,
+				"width": 177,
+				"height": 197.33203125
+			},
+			"displayable_fields_count": 7
 		},
 		"EquipmentEvent": {
 			"color": {
@@ -2724,6 +2739,14 @@
 			}
 		},
 		"12D1D9706CB57E419C97D36A6F786FAF": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
+		"9FD8DE349FF6BE42B935C2539539EA6F": {
 			"color": {
 				"red": 255,
 				"green": 255,

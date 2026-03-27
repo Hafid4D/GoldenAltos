@@ -1,5 +1,6 @@
 //%attributes = {}
 
+TRUNCATE TABLE:C1051([sfw_Notification:69])
 
 var $buyingOrders : cs:C1710.BuyingOrderSelection
 $buyingOrders:=ds:C1482.BuyingOrder.query("supplier.name =:1"; "XYZ@")
@@ -38,7 +39,7 @@ For ($i; 0; $buyingOrderLines.length-1)
 		
 		OB SET:C1220($object[$year]; $month; New collection:C1472())
 		
-		$quarter:=Num:C11($month)<=3 ? 1 : (Num:C11($month)>3 && Num:C11($month)<=6) ? 2 : (Num:C11($month)>6 && Num:C11($month)<=9) ? 3 : 4
+		$quarter:=(Num:C11($month)<=3) ? 1 : (Num:C11($month)>3 && Num:C11($month)<=6) ? 2 : (Num:C11($month)>6 && Num:C11($month)<=9) ? 3 : 4
 		
 		$line:=New object:C1471(\
 			"date"; $date; \
