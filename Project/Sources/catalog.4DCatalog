@@ -1281,6 +1281,7 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="memo" uuid="00AA66F48EFF4A66A5AE6C0E6BE0CA54" type="10" limiting_length="255" never_null="true" id="9"/>
+		<field name="moreData" uuid="F0114B3B885148F992B8FCBBFDEDA205" type="21" blob_switch_size="2147483647" never_null="true" id="10"/>
 		<primary_key field_name="UUID" field_uuid="66A7606CC88C405AA14D3FA527D8C964"/>
 	</table>
 	<table name="sfw_UserInscription" uuid="AC225FD836FF49F7841FC1B78EC96243" id="81">
@@ -1344,6 +1345,7 @@
 		<field name="levelID" uuid="E1F7AEA0581A43EBAD7A036761C5AAAF" type="4" never_null="true" id="3"/>
 		<field name="code" uuid="01B99CB5AC9749AE8B628A9E7263E17A" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="color" uuid="2307150406CC45E2AB754A37AEDDAD89" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="moreData" uuid="E0D422E0C36B48D9AABD6F15A2D7F1A2" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="1B0DAC21909B44EA969E5B9C6C73D944"/>
 	</table>
 	<table name="TransactionStatus" uuid="3E02BE63C9254086A8942339745654D1" id="88">
@@ -1357,7 +1359,8 @@
 		<field name="levelID" uuid="E53B334DDF1C4C0E9E6860E4D7853496" type="4" never_null="true" id="4">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="color" uuid="FF573F8D7F4E45C8B10D3C3127257042" type="10" limiting_length="255" never_null="true" id="6">
+		<field name="moreData" uuid="84A9AA14F9844F259A61BA2EEC4AAACF" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
+		<field name="color" uuid="FF573F8D7F4E45C8B10D3C3127257042" type="10" limiting_length="255" never_null="true" id="7">
 			<field_extra multi_line="false"/>
 		</field>
 		<primary_key field_name="UUID" field_uuid="643CE8A4FC6E4DF3B9EF602ABF49DA55"/>
@@ -1387,6 +1390,7 @@
 		<field name="name" uuid="BA433561F475415CA80553CBF76B7387" type="10" limiting_length="255" never_null="true" id="3">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="moreData" uuid="4D2A6CE8F94043D5A7847C7D0A64EF11" type="21" blob_switch_size="2147483647" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="2F5E04FFB58D433F939F8C0656F71336"/>
 	</table>
 	<table name="Customer" uuid="96D1CE81460A4F75B3F4275138C8F778" id="114">

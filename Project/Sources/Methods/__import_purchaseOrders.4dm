@@ -19,8 +19,24 @@ If (True:C214)
 		$stepTemplate_e.division:=$record.division
 		$stepTemplate_e.status:=$record.status
 		$stepTemplate_e.binning:=$record.binning
-		$stepTemplate_e.smallLayout:=$record.smallLayout
-		$stepTemplate_e.largeLayout:=$record.largeLayout
+		
+		$template:=ds:C1482.StepTemplateLayout.query("name =:1"; Split string:C1554($record.smallLayout; "\r"; sk trim spaces:K86:2).join("\r"))
+		If ($template.length>0)
+			$stepTemplate_e.smallLayout_UUID:=$template[0].UUID
+		Else 
+			$stepTemplate_e.smallLayout_UUID:="00"*16
+		End if 
+		
+		$template:=ds:C1482.StepTemplateLayout.query("name =:1"; Split string:C1554($record.largeLayout; "\r"; sk trim spaces:K86:2).join("\r"))
+		If ($template.length>0)
+			$stepTemplate_e.largeLayout_UUID:=$template[0].UUID
+		Else 
+			$stepTemplate_e.largeLayout_UUID:="00"*16
+		End if 
+		
+		
+		//$stepTemplate_e.smallLayout:=$record.smallLayout
+		//$stepTemplate_e.largeLayout:=$record.largeLayout
 		$stepTemplate_e.comment1:=$record.comment1
 		$stepTemplate_e.comment2:=$record.comment2
 		$stepTemplate_e.areas:=$record.areas
