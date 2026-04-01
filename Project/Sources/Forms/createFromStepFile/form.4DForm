@@ -77,6 +77,16 @@
 		},
 		{
 			"objects": {
+				"header_bkgd9": {
+					"type": "rectangle",
+					"top": 143,
+					"left": 450,
+					"width": 32,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
 				"header_bkgd2": {
 					"type": "rectangle",
 					"top": 79,
@@ -220,19 +230,9 @@
 					"top": 143,
 					"left": 144,
 					"width": 306,
-					"height": 124,
+					"height": 28,
 					"sizingX": "fixed",
 					"fill": "#FFFFFF",
-					"stroke": "transparent"
-				},
-				"header_bkgd9": {
-					"type": "rectangle",
-					"top": 143,
-					"left": 450,
-					"width": 32,
-					"height": 124,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
 					"stroke": "transparent"
 				},
 				"Input2": {
@@ -240,7 +240,7 @@
 					"left": 151,
 					"top": 148,
 					"width": 293,
-					"height": 114,
+					"height": 32,
 					"borderStyle": "none",
 					"fill": "transparent",
 					"dataSource": "Form:C1466.stepFile.status"
@@ -354,7 +354,7 @@
 				},
 				"header_bkgd10": {
 					"type": "rectangle",
-					"top": 271,
+					"top": 175,
 					"left": 0,
 					"width": 140,
 					"height": 28,
@@ -364,8 +364,8 @@
 				},
 				"Text4": {
 					"type": "text",
-					"text": "Alert",
-					"top": 277,
+					"text": "Steps",
+					"top": 181,
 					"left": 7,
 					"width": 102,
 					"height": 15,
@@ -374,7 +374,7 @@
 				"Text6": {
 					"type": "text",
 					"text": ":",
-					"top": 278,
+					"top": 182,
 					"left": 114,
 					"width": 22,
 					"height": 15,
@@ -383,33 +383,23 @@
 				},
 				"header_bkgd11": {
 					"type": "rectangle",
-					"top": 271,
+					"top": 175,
 					"left": 144,
 					"width": 306,
-					"height": 124,
+					"height": 220,
 					"sizingX": "fixed",
 					"fill": "#FFFFFF",
 					"stroke": "transparent"
 				},
 				"header_bkgd12": {
 					"type": "rectangle",
-					"top": 271,
+					"top": 174,
 					"left": 450,
 					"width": 32,
-					"height": 124,
+					"height": 222,
 					"sizingX": "fixed",
 					"fill": "#B1CFDE",
 					"stroke": "transparent"
-				},
-				"Input3": {
-					"type": "input",
-					"left": 151,
-					"top": 276,
-					"width": 293,
-					"height": 114,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.lotStep.alert"
 				},
 				"Input": {
 					"type": "input",
@@ -428,9 +418,55 @@
 						"onMouseLeave"
 					]
 				},
+				"List Box": {
+					"type": "listbox",
+					"left": 144,
+					"top": 175,
+					"width": 306,
+					"height": 220,
+					"events": [
+						"onClick",
+						"onHeaderClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"dataSource": "Form:C1466.steps",
+					"listboxType": "collection",
+					"showHeaders": true,
+					"scrollbarHorizontal": "hidden",
+					"scrollbarVertical": "hidden",
+					"columns": [
+						{
+							"header": {
+								"text": "Order",
+								"name": "Header2"
+							},
+							"name": "Column2",
+							"footer": {
+								"name": "Footer2"
+							},
+							"dataSource": "This:C1470.order",
+							"textAlign": "left",
+							"width": 61
+						},
+						{
+							"header": {
+								"text": "Description",
+								"name": "Header1"
+							},
+							"name": "Column1",
+							"footer": {
+								"name": "Footer1"
+							},
+							"dataSource": "This:C1470.description",
+							"textAlign": "left",
+							"width": 245
+						}
+					]
+				},
 				"sf_customerSearch": {
 					"type": "subform",
-					"left": 144,
+					"left": 142,
 					"top": 47,
 					"width": 340,
 					"height": 350,
@@ -441,7 +477,7 @@
 				},
 				"sf_stepFileSearch": {
 					"type": "subform",
-					"left": 144,
+					"left": 142,
 					"top": 47,
 					"width": 340,
 					"height": 350,
@@ -449,12 +485,45 @@
 					"visibility": "visible",
 					"method": "ObjectMethods/sf_stepFileSearch.4dm",
 					"dataSource": "Form:C1466.sf_stepFileSearch"
+				},
+				"replace": {
+					"type": "radio",
+					"text": "Replace",
+					"top": 401,
+					"left": 145,
+					"width": 79,
+					"height": 18,
+					"events": [
+						"onLoad",
+						"onClick"
+					],
+					"radioGroup": "Group1",
+					"method": "ObjectMethods/replace.4dm"
+				},
+				"append": {
+					"type": "radio",
+					"text": "Append",
+					"top": 401,
+					"left": 229,
+					"width": 58,
+					"height": 18,
+					"events": [
+						"onClick"
+					],
+					"radioGroup": "Group1",
+					"method": "ObjectMethods/append.4dm"
 				}
 			}
 		}
 	],
-	"geometryStamp": 4054,
+	"geometryStamp": 4354,
 	"editor": {
+		"groups": {
+			"Group": [
+				"replace",
+				"append"
+			]
+		},
 		"activeView": "View 1",
 		"defaultView": "View 1",
 		"views": {

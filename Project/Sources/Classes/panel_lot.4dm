@@ -165,13 +165,14 @@ Function bActionSteps()
 		
 		Case of 
 			: ($choose="--create_from_stepfile")
-				$form:=New object:C1471("lotInfo"; New object:C1471("customer"; Form:C1466.current_item.customer))
+				$form:=New object:C1471("lotInfo"; New object:C1471("customer"; Form:C1466.current_item.job.purchaseOrder.customer))
 				
 				$winRef:=Open form window:C675("createFromStepFile"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
 				DIALOG:C40("createFromStepFile"; $form)
 				CLOSE WINDOW:C154($winRef)
 				
 				If (ok=1)
+					$length:=Form:C1466.lb_steps.length
 					For each ($step; $form.stepFile.moreData.selectedSteps)
 						$step_o:=ds:C1482.Step.query("UUID = :1"; $step.UUID).first()
 						$step_o:=$step_o.toObject("description, alert")
@@ -180,10 +181,20 @@ Function bActionSteps()
 						
 						$step_new.fromObject($step_o)
 						$step_new.UUID_Lot:=Form:C1466.current_item.UUID
-						$step_new.order:=$step.order
+						
+						If ($form.mode="append")
+							$step_new.order:=$length+1
+							$length:=$length+1
+						Else 
+							$step_new.order:=$step.order
+						End if 
 						
 						$res:=$step_new.save()
 					End for each 
+					
+					If ($form.mode="replace")
+						Form:C1466.lb_steps.drop()
+					End if 
 					
 					This:C1470.loadLotSteps()
 					
