@@ -1,4 +1,4 @@
-//%attributes = {}
+//%attributes = {"executedOnServer":true}
 /**
 import buyingOrders
 **/
@@ -10,9 +10,9 @@ If (True:C214)
 	
 	$records:=JSON Parse:C1218($file.getText())
 	
-	$terms:=WP Import document:C1318(Folder:C1567(fk data folder:K87:12).file("DataJson/terms.4wp").platformPath)
-	$termsCriticalMaterials:=WP Import document:C1318(Folder:C1567(fk data folder:K87:12).file("DataJson/termsCriticalMaterials.4wp").platformPath)
-	$termsCriticalService:=WP Import document:C1318(Folder:C1567(fk data folder:K87:12).file("DataJson/termsCriticalService.4wp").platformPath)
+	$terms:=WP Import document:C1318(Folder:C1567(fk data folder:K87:12).file("DataJson/BuyOrderTerms.4wp").platformPath)
+	$termsCriticalMaterials:=WP Import document:C1318(Folder:C1567(fk data folder:K87:12).file("DataJson/BuyOrderTerms_CriticalMaterials.4wp").platformPath)
+	$termsCriticalService:=WP Import document:C1318(Folder:C1567(fk data folder:K87:12).file("DataJson/BuyOrderTerms_CriticalService.4wp").platformPath)
 	
 	For each ($record; $records)
 		$buyingOrder:=ds:C1482.BuyingOrder.new()
