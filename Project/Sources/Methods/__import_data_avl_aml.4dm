@@ -126,13 +126,13 @@ If ($supplier_log.exists)
 		$eSupplier.RatingData:=New object:C1471()
 		$eSupplier.RatingData.items:=New collection:C1472()
 		
-		$file_excel:=Folder:C1567(fk data folder:K87:12).file("DataJson/MonitorProgramSupplierRating.csv")
+		//$file_excel:=Folder(fk data folder).file("DataJson/MonitorProgramSupplierRating.csv")
 		
-		$records_excel:=Split string:C1554($file_excel.getText(); "\r\n")
+		//$records_excel:=Split string($file_excel.getText(); "\r\n")
 		
-		$records_excel.shift()  //remove the header
+		//$records_excel.shift()  //remove the header
 		
-		$staffs_excel:=New collection:C1472()
+		//$staffs_excel:=New collection()
 		
 		
 		$_documents:=$documents.query("PrimaryKeyValue=:1 & TableNumber=:2"; String:C10($supplier.UniqueID); 18)

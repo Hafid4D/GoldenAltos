@@ -30,19 +30,18 @@ Function onEvent()
 			
 			$excelOptions:={includeStyles: False:C215; includeFormulas: True:C214; openMode: ""}
 			$o.excelOptions:=$excelOptions
-			$o.formula:=Formula:C1597(SET TIMER:C645(1))
+			//$o.formula:=Formula(SET TIMER(1))
 			VP IMPORT DOCUMENT(This:C1470.area; This:C1470.templatePath; $o)  // make an asynch callback
 			
-		: (Form event code:C388=On Timer:K2:25)
+			//: (Form event code=On Timer)
 			
-			SET TIMER:C645(0)
+			//SET TIMER(0)
 			
 			
 			$row:=1
 			$col:=0
 			
 			//Title
-			
 			
 			// The title style
 			$style:=New object:C1471

@@ -1,5 +1,108 @@
 //%attributes = {}
 
+TRUNCATE TABLE:C1051([sfw_Notification:69])
+
+var $buyingOrders : cs:C1710.BuyingOrderSelection
+$buyingOrders:=ds:C1482.BuyingOrder.query("supplier.name =:1"; "XYZ@")
+$buyingOrderLines:=New collection:C1472()
+If ($buyingOrders#Null:C1517)
+	For each ($buyingOrder; $buyingOrders)
+		$buyingOrderLines:=$buyingOrderLines.concat($buyingOrder.boLines.toCollection())
+		//For each ($buyingOrderLine; $buyingOrder.boLines)
+		//$buyingOrderLines.push($buyingOrderLine)
+		
+		//End for each 
+	End for each 
+End if 
+$buyingOrderLines.orderBy("orderDate")
+$tags:=$buyingOrderLines.map(Formula:C1597(String:C10(Month of:C24($1.value.orderDate))+"-"+String:C10(Year of:C25($1.value.orderDate)))).distinct()
+$allDates:=$buyingOrderLines.extract("orderDate")
+
+$object:=New object:C1471()
+$data:=New collection:C1472()
+var $quarter : Integer
+
+For ($i; 0; $buyingOrderLines.length-1)
+	
+	$year:=String:C10(Year of:C25($buyingOrderLines[$i].orderDate))
+	If (OB Is defined:C1231($object; $year))
+	Else 
+		OB SET:C1220($object; $year; New object:C1471())
+	End if 
+	
+	$month:=String:C10(Month of:C24($buyingOrderLines[$i].orderDate))
+	$date:=$month+"-"+$year
+	
+	$lineItem:=$data.query("date =:1"; $date).first()
+	$indinces:=$data.indices("date =:1"; $date)
+	If ($indinces.length=0)  //OB Is defined($object[$year]; $month))
+		
+		OB SET:C1220($object[$year]; $month; New collection:C1472())
+		
+		$quarter:=(Num:C11($month)<=3) ? 1 : (Num:C11($month)>3 && Num:C11($month)<=6) ? 2 : (Num:C11($month)>6 && Num:C11($month)<=9) ? 3 : 4
+		
+		$line:=New object:C1471(\
+			"date"; $date; \
+			"year"; $year; \
+			"month"; $month; \
+			"quarter"; $quarter; \
+			"receivingTotalLots"; $buyingOrderLines[$i].qty; \
+			"receivingWithoutNMNs"; $buyingOrderLines[$i].qtyReceived; \
+			"receivingLAR"; 0; \
+			"functionalTotalLots"; $buyingOrderLines[$i].qty; \
+			"functionalWithoutNMNs"; $buyingOrderLines[$i].qtyFunctional; \
+			"functionalLAR"; 0; \
+			"deliveryTotalLots"; 0; \
+			"deliveryMinorDelay"; 0; \
+			"deliveryMajorDelay"; 0; \
+			"deliveryLAR"; 0; \
+			"compositeOverAllRating"; 0; \
+			"ISOCertified"; ""\
+			)
+		
+		$data.push($line)
+		
+	Else 
+		
+		$lineItem.receivingTotalLots:=$lineItem.receivingTotalLots+$buyingOrderLines[$i].qty
+		$lineItem.receivingWithoutNMNs:=$lineItem.receivingWithoutNMNs+$buyingOrderLines[$i].qty
+		$lineItem.functionalTotalLots:=$lineItem.functionalTotalLots+$buyingOrderLines[$i].qty
+		$lineItem.functionalWithoutNMNs:=$lineItem.functionalWithoutNMNs+$buyingOrderLines[$i].qtyFunctional
+		
+		$data.remove($indinces[0])
+		
+		$data.push($lineItem)
+		
+		
+	End if 
+	
+End for 
+
+//Finish Calculations
+For ($i; 0; $data.length-1)
+	$data[$i].receivingLAR:=($data[$i].receivingWithoutNMNs/$data[$i].receivingTotalLots)*100
+	$data[$i].functionalLAR:=($data[$i].functionalWithoutNMNs/$data[$i].functionalTotalLots)*100
+	
+End for 
+
+
+
+$buyItems_file:=Folder:C1567(fk data folder:K87:12).file("DataJson/buy_items_export.json")
+var $text : Text:=""
+If ($buyItems_file.exists)
+	$buyItems:=JSON Parse:C1218($buyItems_file.getText())
+	
+	
+	For each ($buyItem; $buyItems)
+		If ($buyItem.PO_NUM=34274)
+			
+		End if 
+		
+		
+	End for each 
+	
+End if 
+
 
 $buyOrders:=ds:C1482.BuyingOrder.all()
 

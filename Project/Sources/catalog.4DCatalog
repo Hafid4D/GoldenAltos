@@ -711,6 +711,7 @@
 		<field name="moreData" uuid="EBFDD78066BBD14ABCCFAD417EFF51C8" type="21" blob_switch_size="2147483647" never_null="true" id="24"/>
 		<field name="UUID_Supplier" uuid="E0C9ABA7B4AB40A4B5D373148ACAB0A3" type="10" store_as_UUID="true" never_null="true" id="25"/>
 		<field name="buyer" uuid="70D3B282BA154164926D9A72A4F6D757" type="10" limiting_length="255" never_null="true" id="26"/>
+		<field name="accountNumber" uuid="0C6C0FCEDBD04E7BB9BE3DD52101F31F" type="4" never_null="true" id="27"/>
 		<primary_key field_name="UUID" field_uuid="2C36FF767DF13E42905F5E16E2D31F5F"/>
 	</table>
 	<table name="Location" uuid="41A5B9E922A8A342822BE4F91D477117" id="47">
@@ -1019,6 +1020,10 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="moreData" uuid="DABF5DD4F5A3DE4CB246FEDAB4A45FAE" type="21" blob_switch_size="2147483647" never_null="true" id="18"/>
+		<field name="qtyReceived" uuid="20FC1941B74048599114926C637584C6" type="4" never_null="true" id="19"/>
+		<field name="actualDeliveryStmp" uuid="2D0DE62C09FB40ACBF32CA0769853C32" type="4" never_null="true" id="20"/>
+		<field name="expectedDeliveryStmp" uuid="B15E9BE6A8D14EAF9AE82881B85C0E1F" type="4" never_null="true" id="21"/>
+		<field name="qtyFunctional" uuid="F17239258B234099B0424E1A4A3EC57B" type="4" never_null="true" id="22"/>
 		<primary_key field_name="UUID" field_uuid="DD082E45822D34438F391901E3773042"/>
 	</table>
 	<table name="JobLineItem" uuid="C34CD032C4F6EB4C8F51682914D18AB0" id="65">
@@ -1277,6 +1282,7 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="memo" uuid="00AA66F48EFF4A66A5AE6C0E6BE0CA54" type="10" limiting_length="255" never_null="true" id="9"/>
+		<field name="moreData" uuid="F0114B3B885148F992B8FCBBFDEDA205" type="21" blob_switch_size="2147483647" never_null="true" id="10"/>
 		<primary_key field_name="UUID" field_uuid="66A7606CC88C405AA14D3FA527D8C964"/>
 	</table>
 	<table name="sfw_UserInscription" uuid="AC225FD836FF49F7841FC1B78EC96243" id="81">
@@ -1340,6 +1346,7 @@
 		<field name="levelID" uuid="E1F7AEA0581A43EBAD7A036761C5AAAF" type="4" never_null="true" id="3"/>
 		<field name="code" uuid="01B99CB5AC9749AE8B628A9E7263E17A" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="color" uuid="2307150406CC45E2AB754A37AEDDAD89" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="moreData" uuid="E0D422E0C36B48D9AABD6F15A2D7F1A2" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="1B0DAC21909B44EA969E5B9C6C73D944"/>
 	</table>
 	<table name="TransactionStatus" uuid="3E02BE63C9254086A8942339745654D1" id="88">
@@ -1353,7 +1360,8 @@
 		<field name="levelID" uuid="E53B334DDF1C4C0E9E6860E4D7853496" type="4" never_null="true" id="4">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="color" uuid="FF573F8D7F4E45C8B10D3C3127257042" type="10" limiting_length="255" never_null="true" id="6">
+		<field name="moreData" uuid="84A9AA14F9844F259A61BA2EEC4AAACF" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
+		<field name="color" uuid="FF573F8D7F4E45C8B10D3C3127257042" type="10" limiting_length="255" never_null="true" id="7">
 			<field_extra multi_line="false"/>
 		</field>
 		<primary_key field_name="UUID" field_uuid="643CE8A4FC6E4DF3B9EF602ABF49DA55"/>
@@ -1374,6 +1382,17 @@
 		</field>
 		<field name="moreData" uuid="CA835A6CDEEC45F6903F80ED16E1CB86" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="71A6AAF645094A41BD9F71F16C7D2366"/>
+	</table>
+	<table name="StepTemplateLayout" uuid="EE0919F4685942B2AADAD0E171EA9BC3" id="90">
+		<field name="UUID" uuid="2F5E04FFB58D433F939F8C0656F71336" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="type" uuid="0836C195E0584C8DA6BF3F042B65997A" type="10" limiting_length="255" never_null="true" id="2">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="name" uuid="BA433561F475415CA80553CBF76B7387" type="10" limiting_length="255" never_null="true" id="3">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="moreData" uuid="4D2A6CE8F94043D5A7847C7D0A64EF11" type="21" blob_switch_size="2147483647" never_null="true" id="4"/>
+		<primary_key field_name="UUID" field_uuid="2F5E04FFB58D433F939F8C0656F71336"/>
 	</table>
 	<table name="Customer" uuid="96D1CE81460A4F75B3F4275138C8F778" id="114">
 		<field name="UUID" uuid="37676CD94E8B423595ED98B5C0E9CF89" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -1598,8 +1617,8 @@
 		<field name="division" uuid="72DA41DEB169DF46B1B384015640754B" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="status" uuid="A9AD90B0A5506E409BB48FE4B219C01A" type="1" never_null="true" id="5"/>
 		<field name="binning" uuid="B2C3C551F5EB9B4094BF2B8C0B3B5CA7" type="1" never_null="true" id="6"/>
-		<field name="smallLayout" uuid="E692454F40F16F4AA982D1B2B2955EC9" type="10" limiting_length="255" never_null="true" id="7"/>
-		<field name="largeLayout" uuid="CD5AA4FB574CBF4CB36F9274DE50375E" type="10" limiting_length="255" never_null="true" id="8"/>
+		<field name="smallLayout_UUID" uuid="E692454F40F16F4AA982D1B2B2955EC9" type="10" store_as_UUID="true" never_null="true" id="7"/>
+		<field name="largeLayout_UUID" uuid="CD5AA4FB574CBF4CB36F9274DE50375E" type="10" store_as_UUID="true" never_null="true" id="8"/>
 		<field name="comment1" uuid="8BB0BEEBAB42CE4BB75167E78C1DFA87" type="10" limiting_length="255" never_null="true" id="9"/>
 		<field name="comment2" uuid="6035172B450A3A439FD3A26DE1B62B3F" type="10" limiting_length="255" never_null="true" id="10"/>
 		<field name="dataTables" uuid="468EEB0CF147B142864EBFD9A3055821" type="21" blob_switch_size="2147483647" never_null="true" id="11"/>
@@ -4038,6 +4057,11 @@
 	<index kind="regular" unique_keys="true" uuid="4EF303D62F454942AA8026FF7896539A" type="7">
 		<field_ref uuid="1CB76A26D5B699429A95B9E10253FD00" name="UUID">
 			<table_ref uuid="C1BEBD5DDE0D1A45AEE41760FAE1229A" name="ControllingDepartment"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="4F2D87170037465EB52CC3427397533B" type="7">
+		<field_ref uuid="2F5E04FFB58D433F939F8C0656F71336" name="UUID">
+			<table_ref uuid="EE0919F4685942B2AADAD0E171EA9BC3" name="StepTemplateLayout"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="4FA46263FA2E426BAF05C717690A91D3" type="3">
