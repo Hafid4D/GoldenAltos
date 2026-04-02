@@ -53,7 +53,9 @@ Function redrawAndSetVisible()
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="Steps ("+String:C10(Form:C1466.lb_steps.length)+")"
 	End use 
-	Form:C1466.sfw.drawHTab()
+	
+	This:C1470.drawPup_smallLayout()
+	This:C1470.drawPup_largeLayout()
 	
 	Case of 
 		: (FORM Get current page:C276(*)=2)  // steps
@@ -73,6 +75,7 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "bActionSteps"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
 	End case 
 	
+	Form:C1466.sfw.drawHTab()
 	
 Function bActionSkills()
 	//Manages actions: add, or remove, using dynamic menus and modification checks
@@ -434,8 +437,20 @@ Function drawPup_smallLayout()
 		Form:C1466.current_item.drowPup("StepTemplateLayout"; "UUID"; "smallLayout_UUID"; "pup_smallLayout")
 	End if 
 	
-	
 Function pup_smallLayout()
 	//Create pop up menu
 	Form:C1466.current_item.pup("stepTemplateLayouts"; "StepTemplateLayout"; "UUID"; "smallLayout_UUID")
 	This:C1470.drawPup_smallLayout()
+	
+	
+Function drawPup_largeLayout()
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.current_item.drowPup("StepTemplateLayout"; "UUID"; "largeLayout_UUID"; "pup_largeLayout")
+	End if 
+	
+Function pup_largeLayout()
+	//Create pop up menu
+	Form:C1466.current_item.pup("stepTemplateLayouts"; "StepTemplateLayout"; "UUID"; "largeLayout_UUID")
+	This:C1470.drawPup_largeLayout()
+	
+	
