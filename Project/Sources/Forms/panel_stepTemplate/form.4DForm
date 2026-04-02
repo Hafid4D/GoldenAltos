@@ -553,8 +553,8 @@
 				},
 				"entryField_smallLayout": {
 					"type": "input",
-					"top": 137,
-					"left": 720,
+					"top": 21,
+					"left": 815,
 					"width": 180,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.smallLayout",
@@ -580,8 +580,8 @@
 				},
 				"entryField_largeLayout": {
 					"type": "input",
-					"top": 161,
-					"left": 720,
+					"top": 59,
+					"left": 815,
 					"width": 180,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.largeLayout",
@@ -776,6 +776,29 @@
 					"textPlacement": "right",
 					"method": "ObjectMethods/bActionBins.4dm",
 					"visibility": "visible"
+				},
+				"pup_smallLayout": {
+					"type": "button",
+					"top": 134,
+					"left": 700,
+					"width": 202,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_smallLayout.4dm",
+					"events": [
+						"onClick",
+						"onDisplayDetail"
+					],
+					"right": 902,
+					"fontWeight": "normal",
+					"textAlign": "left"
 				}
 			}
 		},
@@ -1030,7 +1053,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1959,
+	"geometryStamp": 1967,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
