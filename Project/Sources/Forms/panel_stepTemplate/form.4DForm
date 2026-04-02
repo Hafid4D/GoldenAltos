@@ -799,6 +799,29 @@
 					"right": 902,
 					"fontWeight": "normal",
 					"textAlign": "left"
+				},
+				"pup_largeLayout": {
+					"type": "button",
+					"top": 158,
+					"left": 700,
+					"width": 202,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_largeLayout.4dm",
+					"events": [
+						"onClick",
+						"onDisplayDetail"
+					],
+					"right": 902,
+					"fontWeight": "normal",
+					"textAlign": "left"
 				}
 			}
 		},
@@ -1053,7 +1076,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1967,
+	"geometryStamp": 1971,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
