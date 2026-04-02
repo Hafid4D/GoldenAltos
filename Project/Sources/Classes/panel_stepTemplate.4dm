@@ -426,3 +426,16 @@ Function bActionSteps()
 			
 		: ($choose="--delete")
 	End case 
+	
+	
+	
+Function drawPup_smallLayout()
+	If (Form:C1466.current_item#Null:C1517)
+		Form:C1466.current_item.drowPup("StepTemplateLayout"; "UUID"; "smallLayout_UUID"; "pup_smallLayout")
+	End if 
+	
+	
+Function pup_smallLayout()
+	//Create pop up menu
+	Form:C1466.current_item.pup("stepTemplateLayouts"; "StepTemplateLayout"; "UUID"; "smallLayout_UUID")
+	This:C1470.drawPup_smallLayout()
