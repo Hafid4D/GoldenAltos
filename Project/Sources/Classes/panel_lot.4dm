@@ -592,10 +592,12 @@ Function generateCofC()
 		End if 
 		
 		$context.lotStep:=$lotStep
-		$shippingAddress:=Form:C1466.current_item.job.address.shipping
-		$address:=$shippingAddress.street+"\n"+$shippingAddress.city+"\n"+$shippingAddress.state+" "+$shippingAddress.zipCode+"\n"+$shippingAddress.country
-		
-		$context.address:=Form:C1466.current_item.job.dropShipCustomer+"\n"+$address
+		If (Not:C34(Undefined:C82(Form:C1466.current_item.job.address.shipping)))
+			$shippingAddress:=Form:C1466.current_item.job.address.shipping
+			$address:=$shippingAddress.street+"\n"+$shippingAddress.city+"\n"+$shippingAddress.state+" "+$shippingAddress.zipCode+"\n"+$shippingAddress.country
+			
+			$context.address:=Form:C1466.current_item.job.dropShipCustomer+"\n"+$address
+		End if 
 		
 		
 		

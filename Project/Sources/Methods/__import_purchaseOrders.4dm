@@ -46,8 +46,9 @@ If (True:C214)
 		For ($i; 0; 31)
 			
 			$bin:=New object:C1471()
-			$bin.name:="Bin "+String:C10($i+1)
-			$bin.description:=$record.bins.items[$i]
+			$bin.num:=$i+1
+			$bin.definition:=$record.bins.items[$i]
+			$bin.type:=""
 			
 			If (Split string:C1554($record.bins.items[$i]; "\r"; sk trim spaces:K86:2).join("\r")#"")
 				$stepTemplate_e.bins.items.push($bin)

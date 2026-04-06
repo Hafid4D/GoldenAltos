@@ -216,7 +216,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"dataSource": "Form:C1466.bin"
+					"dataSource": "Form:C1466.bin",
+					"method": "ObjectMethods/pup_bin.4dm"
 				}
 			}
 		}
