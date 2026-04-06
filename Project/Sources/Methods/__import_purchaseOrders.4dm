@@ -42,6 +42,18 @@ If (True:C214)
 		$stepTemplate_e.areas:=$record.areas
 		$stepTemplate_e.templateNumber:=$record.templateNumber
 		
+		$stepTemplate_e.bins:=New object:C1471("items"; New collection:C1472())
+		For ($i; 0; 31)
+			
+			$bin:=New object:C1471()
+			$bin.name:="Bin "+String:C10($i+1)
+			$bin.description:=$record.bins.items[$i]
+			
+			If (Split string:C1554($record.bins.items[$i]; "\r"; sk trim spaces:K86:2).join("\r")#"")
+				$stepTemplate_e.bins.items.push($bin)
+			End if 
+			
+		End for 
 		
 		$res:=$stepTemplate_e.save()
 		
