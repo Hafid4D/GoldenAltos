@@ -54,61 +54,6 @@
 					"borderStyle": "none",
 					"fontWeight": "bold"
 				},
-				"label_operation": {
-					"type": "text",
-					"top": 37,
-					"left": 12,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Operation"
-				},
-				"entryField_operation": {
-					"type": "input",
-					"top": 37,
-					"left": 132,
-					"width": 140,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.operation",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold"
-				},
-				"label_division": {
-					"type": "text",
-					"top": 12,
-					"left": 582,
-					"width": 70,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Division"
-				},
-				"entryField_division": {
-					"type": "input",
-					"top": 12,
-					"left": 682,
-					"width": 100,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.division",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"fontWeight": "bold",
-					"sizingX": "fixed"
-				},
 				"label_status": {
 					"type": "text",
 					"top": 12,
@@ -154,6 +99,96 @@
 					"fontWeight": "bold",
 					"dataSourceTypeHint": "boolean",
 					"dataSource": "Form:C1466.current_item.binning"
+				},
+				"label_operation1": {
+					"type": "text",
+					"top": 37,
+					"left": 582,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Operation"
+				},
+				"label_0_4": {
+					"type": "text",
+					"top": 12,
+					"left": 582,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Division",
+					"textAlign": "left"
+				},
+				"pup_division": {
+					"type": "button",
+					"top": 9,
+					"left": 680,
+					"width": 175,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_division.4dm",
+					"events": [
+						"onClick"
+					],
+					"bottom": 32,
+					"textAlign": "left"
+				},
+				"pup_operation": {
+					"type": "button",
+					"top": 34,
+					"left": 680,
+					"width": 175,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_operation.4dm",
+					"events": [
+						"onClick"
+					],
+					"bottom": 57,
+					"textAlign": "left"
+				},
+				"label_stepName1": {
+					"type": "text",
+					"top": 37,
+					"left": 12,
+					"width": 116,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Step Template ID"
+				},
+				"entryField_number": {
+					"type": "input",
+					"top": 37,
+					"left": 132,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.templateNumber",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "bold",
+					"textAlign": "left",
+					"method": "ObjectMethods/entryField_number.4dm"
 				}
 			}
 		},
@@ -553,8 +588,8 @@
 				},
 				"entryField_smallLayout": {
 					"type": "input",
-					"top": 21,
-					"left": 815,
+					"top": 12,
+					"left": 911,
 					"width": 180,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.smallLayout",
@@ -580,8 +615,8 @@
 				},
 				"entryField_largeLayout": {
 					"type": "input",
-					"top": 59,
-					"left": 815,
+					"top": 50,
+					"left": 911,
 					"width": 180,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.largeLayout",
@@ -1093,7 +1128,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1971,
+	"geometryStamp": 1977,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

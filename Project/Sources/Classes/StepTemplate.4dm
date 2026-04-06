@@ -12,6 +12,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(1; ""; "Main")
 	$entry.setPanelPage(2; ""; "Steps")
 	
+	$entry.setLBItemsColumn("templateNumber"; "Step Template ID")
 	$entry.setLBItemsColumn("name"; "Step Template Name"; "width:100")
 	
 	$entry.setLBItemsOrderBy("name")
