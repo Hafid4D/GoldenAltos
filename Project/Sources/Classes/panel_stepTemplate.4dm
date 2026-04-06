@@ -258,12 +258,25 @@ Function bActionBins()
 		End if 
 	End if 
 	
+	
+	APPEND MENU ITEM:C411($refMenu; "Modify a Bin")
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--modify")
+	SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/image/button/edit.png")
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	Else 
+		If (Form:C1466.currentBin=Null:C1517)
+			DISABLE MENU ITEM:C150($refMenu; -1)
+		End if 
+	End if 
+	
+	
 	$choose:=Dynamic pop up menu:C1006($refMenu)
 	
 	Case of 
 		: ($choose="--add")
 			$form:=New object:C1471(\
-				"binDefinition"; New object:C1471("num"; 0; "definition"; ""; "value"; ""); \
+				"binDefinition"; New object:C1471("num"; 0; "definition"; ""; "type"; ""; "action"; "add"); \
 				"existingBins"; Form:C1466.lb_bins\
 				)
 			
@@ -283,6 +296,32 @@ Function bActionBins()
 			End if 
 		: ($choose="--delete")
 			ALERT:C41("Remove a Bin")
+			
+		: ($choose="--modify")
+			$form:=New object:C1471(\
+				"binDefinition"; New object:C1471("num"; Form:C1466.currentBin.num; "definition"; Form:C1466.currentBin.definition; "type"; Form:C1466.currentBin.type; "action"; "modify"); \
+				"existingBins"; Form:C1466.lb_bins\
+				)
+			
+			$winRef:=Open form window:C675("createBins_st"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("createBins_st"; $form)
+			CLOSE WINDOW:C154($winRef)
+			
+			If (ok=1)
+				If (Form:C1466.current_item.bins=Null:C1517)
+					Form:C1466.current_item.bins:=New object:C1471("items"; New collection:C1472())
+				End if 
+				
+				Form:C1466.currentBin.num:=$form.binDefinition.num
+				Form:C1466.currentBin.definition:=$form.binDefinition.definition
+				Form:C1466.currentBin.type:=$form.binDefinition.type
+				
+				//Form.current_item.bins.items.push($form.binDefinition)
+				
+				
+				This:C1470._activate_save_cancel_button()
+			End if 
+			
 	End case 
 	
 	

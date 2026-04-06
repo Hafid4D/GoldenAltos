@@ -744,7 +744,9 @@
 							"footer": {
 								"name": "Footer7"
 							},
-							"dataSource": "\"Bin \"+String:C10(This:C1470.num)"
+							"dataSource": "\"Bin \"+String:C10(This:C1470.num)",
+							"enterable": false,
+							"resizable": false
 						},
 						{
 							"header": {
@@ -755,8 +757,23 @@
 							"footer": {
 								"name": "Footer5"
 							},
-							"width": 386,
-							"dataSource": "This:C1470.definition"
+							"width": 250,
+							"dataSource": "This:C1470.definition",
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "Header8",
+								"text": "Header8"
+							},
+							"name": "Column8",
+							"footer": {
+								"name": "Footer8"
+							},
+							"resizable": false,
+							"dataSource": "This:C1470.type",
+							"enterable": false,
+							"width": 126
 						}
 					]
 				},
