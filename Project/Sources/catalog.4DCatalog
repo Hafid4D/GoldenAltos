@@ -3959,6 +3959,11 @@
 			<table_ref uuid="521E751963104DC299061CF1588CADEF" name="sfw_EMailLog"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="41748AEFBBB3411EB2E1F04014BEE85B" type="3">
+		<field_ref uuid="E692454F40F16F4AA982D1B2B2955EC9" name="smallLayout_UUID">
+			<table_ref uuid="6330FD4D08D74130BF3869222CDECBA6" name="StepTemplate"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="41A6EFB1A0029340988367888E046703" type="3">
 		<field_ref uuid="DE3F29F4218B284ABEA12A65E65EDEC8" name="UUID_ProcessType">
 			<table_ref uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" name="Audit"/>
@@ -4042,6 +4047,11 @@
 	<index kind="regular" uuid="4B93A87EA0104FD49AA1C09BFB1CD2A0" type="3">
 		<field_ref uuid="29D5804D61304EFEBBA1081D06154F5C" name="UUID_User">
 			<table_ref uuid="AC225FD836FF49F7841FC1B78EC96243" name="sfw_UserInscription"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="4BE1D19A135F4D5C84086747CCC78CB0" type="3">
+		<field_ref uuid="CD5AA4FB574CBF4CB36F9274DE50375E" name="largeLayout_UUID">
+			<table_ref uuid="6330FD4D08D74130BF3869222CDECBA6" name="StepTemplate"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="4CEB84F14E20EA408DA945D8F7CD1EEE" type="7">
