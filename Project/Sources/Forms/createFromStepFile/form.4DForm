@@ -29,7 +29,7 @@
 		"onBoundVariableChange",
 		"onPageChange"
 	],
-	"windowTitle": "Add a Line",
+	"windowTitle": "Add Steps",
 	"destination": "detailScreen",
 	"pages": [
 		{
@@ -61,7 +61,7 @@
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
-					"text": "Add a line",
+					"text": "Add Steps",
 					"fontSize": 12,
 					"fontWeight": "bold"
 				},
