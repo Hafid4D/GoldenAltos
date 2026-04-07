@@ -7,6 +7,7 @@ import step template
 If (True:C214)
 	TRUNCATE TABLE:C1051([StepTemplate:121])
 	TRUNCATE TABLE:C1051([StepTemplateRule:92])
+	TRUNCATE TABLE:C1051([ContainerCode:93])
 	
 	var $rulesToImport : Collection
 	$rulesToImport:=New collection:C1472(\
@@ -44,7 +45,33 @@ If (True:C214)
 		$res:=$stepRule_e.save()
 		
 		If (Not:C34($res.success))
-			
+			TRACE:C157
+		End if 
+		
+	End for 
+	
+	
+	var $containerCodesToImport : Collection
+	$containerCodesToImport:=New collection:C1472(\
+		New object:C1471("name"; "DisplayContainerList"; "description"; "Display Container List / BI Board draw button"; "mask"; 0x0001); \
+		New object:C1471("name"; "AllowLoadingContainers"; "description"; "Allow loading of Containers"; "mask"; 0x0002); \
+		New object:C1471("name"; "AllowUnloadingContainers"; "description"; "Allow unloading of Containers"; "mask"; 0x0004); \
+		New object:C1471("name"; "MandatoryContainerCheck"; "description"; "Perform mandatory check of Container-list during punch-in"; "mask"; 0x0008); \
+		New object:C1471("name"; "CollectAttributeData"; "description"; "Collect Attribute Data"; "mask"; 0x1000); \
+		New object:C1471("name"; "CopyCountRulesToProperty"; "description"; "Outside of Count Rules Copied from Template to LotStep Property"; "mask"; 0x00100000); \
+		New object:C1471("name"; "FinalQAApprovalStamp"; "description"; "Final QA Approval with Stamp"; "mask"; 0x00200000)\
+		)
+	
+	For ($i; 0; $containerCodesToImport.length-1)
+		$containerCode_e:=ds:C1482.ContainerCode.new()
+		$containerCode_e.name:=$containerCodesToImport[$i].name
+		$containerCode_e.description:=$containerCodesToImport[$i].description
+		$containerCode_e.levelID:=$i+1
+		
+		$res:=$containerCode_e.save()
+		
+		If (Not:C34($res.success))
+			TRACE:C157
 		End if 
 		
 	End for 
@@ -125,10 +152,22 @@ If (True:C214)
 			End if 
 		End for each 
 		
+		$stepTemplate_e.containerCodes:=New object:C1471("items"; New collection:C1472())
+		For each ($containerCode; $containerCodesToImport)
+			If (($record.containerCode & $containerCode.mask)=$containerCode.mask)
+				$stepcontainerCode:=New object:C1471()
+				$stepcontainerCode.name:=$containerCode.name
+				$stepcontainerCode.description:=$containerCode.description
+				
+				$stepTemplate_e.containerCodes.items.push($stepcontainerCode)
+			End if 
+		End for each 
+		
+		
 		$res:=$stepTemplate_e.save()
 		
 		If (Not:C34($res.success))
-			
+			TRACE:C157
 		End if 
 	End for each 
 End if 

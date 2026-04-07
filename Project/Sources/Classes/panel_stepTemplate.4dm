@@ -60,6 +60,7 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_operation()
 	Case of 
 		: (FORM Get current page:C276(*)=2)  // steps
+			OBJECT GET COORDINATES:C663(*; "rec_bkgd_1"; $left; $top; $right; $bottom)
 			OBJECT GET COORDINATES:C663(*; "rec_bkgd_2"; $left; $top; $right; $bottom)
 			OBJECT GET COORDINATES:C663(*; "bkgd_lb_steps"; $left_bk_lb; $top_bk_lb; $right_bk_lb; $bottom_bk_lb)
 			OBJECT GET COORDINATES:C663(*; "lb_steps"; $left_lb; $top_lb; $right_lb; $bottom_lb)
@@ -72,6 +73,7 @@ Function redrawAndSetVisible()
 			
 			$height_bAc:=$bottom_bAc-$top_bAc
 			
+			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_1"; $left; $top; $right; $heightSubform-$offset)
 			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_2"; $left; $top; $right; $heightSubform-$offset)
 			OBJECT SET COORDINATES:C1248(*; "bkgd_lb_steps"; $left_bk_lb; $top_bk_lb; $widthSubform-$offset; $heightSubform-$offset)
 			OBJECT SET COORDINATES:C1248(*; "lb_steps"; $left_lb; $top_lb; $right_lb; $heightSubform-$offset-1)
@@ -382,7 +384,7 @@ Function bActionPMs()
 Function loadAllTabs()
 	This:C1470.loadSteps()
 	This:C1470.loadStepRules()
-	
+	This:C1470.loadStepContainerCodes()
 	
 Function loadTools()
 	Form:C1466.lb_tools:=ds:C1482.StepTemplateTool.query("UUID_StepTemplate = :1"; Form:C1466.current_item.UUID)
@@ -422,9 +424,12 @@ Function loadSteps
 	Form:C1466.lb_steps:=ds:C1482.Step.query("UUID_StepTemplate = :1"; Form:C1466.current_item.UUID)
 	
 Function loadStepRules
-	Form:C1466.selectedStep:=Null:C1517
 	
 	Form:C1466.lb_stepRules:=Form:C1466.current_item.rules.items
+	
+Function loadStepContainerCodes
+	
+	Form:C1466.lb_stepContainerCodes:=Form:C1466.current_item.containerCodes.items
 	
 Function displayStepLine()
 	OBJECT SET VISIBLE:C603(*; "label_stepLine@"; Not:C34((Form:C1466.selectedStep=Null:C1517)))
@@ -497,9 +502,9 @@ Function bActionStepRules()
 	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
 		DISABLE MENU ITEM:C150($refMenu; -1)
 	Else 
-		//If (Form.selectedStepRule=Null)
-		//DISABLE MENU ITEM($refMenu; -1)
-		//End if 
+		If (Form:C1466.selectedStepRule=Null:C1517)
+			DISABLE MENU ITEM:C150($refMenu; -1)
+		End if 
 	End if 
 	
 	$choose:=Dynamic pop up menu:C1006($refMenu)
@@ -510,9 +515,9 @@ Function bActionStepRules()
 			$rules:=ds:C1482.StepTemplateRule.query("NOT(name IN :1)"; Form:C1466.current_item.rules.items.extract("name"))
 			$form.stepRules:=$rules
 			$form.stepRulesSelected:=New collection:C1472
-			$winRef:=Open form window:C675("_ga_selectRules"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+			$winRef:=Open form window:C675("_ga_multiSelectListbox"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			SET WINDOW TITLE:C213("Select rules to add"; $winRef)
-			DIALOG:C40("_ga_selectRules"; $form)
+			DIALOG:C40("_ga_multiSelectListbox"; $form)
 			
 			If (OK=1)
 				For each ($rule; $form.stepRulesSelected)
@@ -534,6 +539,62 @@ Function bActionStepRules()
 			
 			
 	End case 
+	
+	
+Function bActionStepContainerCodes()
+	$refMenu:=Create menu:C408
+	
+	APPEND MENU ITEM:C411($refMenu; "Add step rule")
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--add")
+	SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/image/button/add.png")
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	APPEND MENU ITEM:C411($refMenu; "Delete step rule")
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")
+	SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/image/button/delete.png")
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	Else 
+		If (Form:C1466.selectedStepContainerCode=Null:C1517)
+			DISABLE MENU ITEM:C150($refMenu; -1)
+		End if 
+	End if 
+	
+	$choose:=Dynamic pop up menu:C1006($refMenu)
+	
+	Case of 
+		: ($choose="--add")
+			$form:=New object:C1471
+			$codes:=ds:C1482.ContainerCode.query("NOT(name IN :1)"; Form:C1466.current_item.containerCodes.items.extract("name"))
+			$form.stepRules:=$codes
+			$form.dataSelected:=New collection:C1472
+			$winRef:=Open form window:C675("_ga_multiSelectListbox"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+			SET WINDOW TITLE:C213("Select container code to add"; $winRef)
+			DIALOG:C40("_ga_multiSelectListbox"; $form)
+			
+			If (OK=1)
+				For each ($rule; $form.dataSelected)
+					Form:C1466.current_item.containerCodes.items.push($rule)
+				End for each 
+				
+				This:C1470.loadStepContainerCodes()
+				This:C1470._activate_save_cancel_button()
+			End if 
+			
+		: ($choose="--delete")
+			
+			Form:C1466.current_item.containerCodes.items:=Form:C1466.current_item.containerCodes.items.filter(Formula:C1597($1.value.name#Form:C1466.selectedStepContainerCode.name))
+			
+			This:C1470.loadStepContainerCodes()
+			This:C1470._activate_save_cancel_button()
+			//End if 
+			
+			
+			
+	End case 
+	
 	
 	
 Function drawPup_smallLayout()
