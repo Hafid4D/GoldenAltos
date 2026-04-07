@@ -586,12 +586,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 3031.6667480469,
-				"top": 630.66668701172,
+				"left": 3048.6667480469,
+				"top": 544.66668701172,
 				"width": 201.048828125,
-				"height": 445.33203125
+				"height": 495.33203125
 			},
-			"displayable_fields_count": 19,
+			"displayable_fields_count": 21,
 			"fields": {
 				"bins": {
 					"position": 15
@@ -794,6 +794,21 @@
 				}
 			}
 		},
+		"StepTemplateRule": {
+			"color": {
+				"red": 181,
+				"green": 145,
+				"blue": 209,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 2875,
+				"top": 545,
+				"width": 145,
+				"height": 193.33203125
+			},
+			"displayable_fields_count": 7
+		},
 		"StepTemplateLayout": {
 			"color": {
 				"red": 181,
@@ -802,8 +817,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2835,
-				"top": 783,
+				"left": 2871,
+				"top": 1088,
 				"width": 145,
 				"height": 193.33203125
 			},

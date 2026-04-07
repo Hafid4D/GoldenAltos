@@ -32,16 +32,26 @@
 	"destination": "detailScreen",
 	"pages": [
 		{
-			"objects": {}
+			"objects": {
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 0,
+					"left": 0,
+					"width": 575,
+					"height": 552,
+					"fill": "#E0E0E0",
+					"stroke": "transparent"
+				}
+			}
 		},
 		{
 			"objects": {
-				"interestedParties": {
+				"List Box": {
 					"type": "listbox",
-					"left": 6,
-					"top": 6,
-					"width": 292,
-					"height": 492,
+					"left": 0,
+					"top": 0,
+					"width": 575,
+					"height": 502,
 					"events": [
 						"onClick",
 						"onHeaderClick",
@@ -49,67 +59,48 @@
 						"onSelectionChange"
 					],
 					"horizontalLineStroke": "transparent",
-					"resizingMode": "legacy",
+					"verticalLineStroke": "automatic",
+					"alternateFill": "#DFDFDF",
 					"listboxType": "collection",
-					"verticalLineStroke": "transparent",
-					"selectionMode": "single",
-					"currentItemSource": "Form:C1466.currentParty",
-					"scrollbarHorizontal": "automatic",
+					"dataSource": "Form:C1466.stepRules",
+					"scrollbarHorizontal": "hidden",
 					"scrollbarVertical": "automatic",
-					"fill": "transparent",
-					"borderStyle": "none",
-					"stroke": "#000000",
-					"sizingX": "fixed",
-					"sizingY": "grow",
-					"dataSource": "Form:C1466.interestedParties",
-					"selectedItemsSource": "Form:C1466.partySelection",
-					"currentItemPositionSource": "Form:C1466.currentPartyPos",
+					"selectedItemsSource": "Form:C1466.stepRulesSelected",
 					"columns": [
 						{
 							"header": {
-								"text": "",
-								"name": "Header3"
+								"text": "Name",
+								"name": "Header1",
+								"fontWeight": "bold",
+								"textAlign": "left"
 							},
-							"name": "membersChecBox",
+							"name": "stepName",
 							"footer": {
-								"name": "Footer3"
+								"name": "Footer1"
 							},
-							"width": 30,
-							"dataSource": "This:C1470.selected",
-							"dataSourceTypeHint": "boolean",
-							"textAlign": "right",
-							"stroke": "#000000",
-							"events": [
-								"onClick",
-								"onDataChange"
-							],
-							"method": ""
+							"width": 220,
+							"dataSource": "This:C1470.name"
 						},
 						{
 							"header": {
-								"name": "Header4",
-								"text": "Interested Parties",
-								"fontWeight": "bold"
+								"name": "Header2",
+								"text": "Description",
+								"fontWeight": "bold",
+								"textAlign": "left"
 							},
-							"name": "Column4",
+							"name": "StepDescription",
 							"footer": {
-								"name": "Footer4"
+								"name": "Footer2"
 							},
-							"dataSource": "This:C1470.name",
-							"textAlign": "left",
-							"stroke": "#000000",
-							"enterable": false,
-							"events": [
-								"onClick",
-								"onDataChange"
-							]
+							"width": 356,
+							"dataSource": "This:C1470.description"
 						}
 					]
 				},
 				"bOk": {
 					"type": "button",
-					"top": 507,
-					"left": 260,
+					"top": 511,
+					"left": 532,
 					"width": 30,
 					"height": 32,
 					"sizingY": "move",
@@ -128,12 +119,12 @@
 					"shortcutShift": false,
 					"shortcutAlt": false,
 					"shortcutKey": "[Return]",
-					"sizingX": "move"
+					"method": "ObjectMethods/bOk.4dm"
 				},
 				"bCancel": {
 					"type": "button",
-					"top": 507,
-					"left": 214,
+					"top": 511,
+					"left": 486,
 					"width": 32,
 					"height": 32,
 					"sizingY": "move",
@@ -147,13 +138,12 @@
 						"onClick"
 					],
 					"action": "cancel",
-					"method": "",
-					"sizingX": "move"
+					"method": "ObjectMethods/bCancel.4dm"
 				}
 			}
 		}
 	],
-	"geometryStamp": 5,
+	"geometryStamp": 30,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

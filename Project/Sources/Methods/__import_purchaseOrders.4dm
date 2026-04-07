@@ -6,6 +6,49 @@ import step template
 **/
 If (True:C214)
 	TRUNCATE TABLE:C1051([StepTemplate:121])
+	TRUNCATE TABLE:C1051([StepTemplateRule:92])
+	
+	var $rulesToImport : Collection
+	$rulesToImport:=New collection:C1472(\
+		New object:C1471("name"; "TransformationStep"; "description"; "Show Transformation Control (1)"; "mask"; 0x0001); \
+		New object:C1471("name"; "LabelsButton"; "description"; "Show Labels Button (2)"; "mask"; 0x0002); \
+		New object:C1471("name"; "ShowInpar1"; "description"; "Make [LOTSTEPS] field In_Par1 available (4)"; "mask"; 0x0004); \
+		New object:C1471("name"; "ShowInpar2"; "description"; "Make [LOTSTEPS] field In_Par2 available (8)"; "mask"; 0x0008); \
+		New object:C1471("name"; "ShowInpar3"; "description"; "Make [LOTSTEPS] field In_Par3 available (16)"; "mask"; 0x0010); \
+		New object:C1471("name"; "ShowOutpar1"; "description"; "Make [LOTSTEPS] field Out_Par1 available (32)"; "mask"; 0x0020); \
+		New object:C1471("name"; "ShowOutpar2"; "description"; "Make [LOTSTEPS] field Out_Par2 available (64)"; "mask"; 0x0040); \
+		New object:C1471("name"; "ShowOutpar3"; "description"; "Make [LOTSTEPS] field Out_Par3 available (128)"; "mask"; 0x0080); \
+		New object:C1471("name"; "ShowAuxillaryCounts"; "description"; "Make [LOTSTEPS] Auxillary-Count available (256)"; "mask"; 0x0100); \
+		New object:C1471("name"; "MarkingPicture"; "description"; "Make marking picture available in traveler & lotstep"; "mask"; 0x0200); \
+		New object:C1471("name"; "WaferSortSubTable"; "description"; "Wafer-Sort Template will enable Sub-table for each wafer"; "mask"; 0x0400); \
+		New object:C1471("name"; "ElectricalTest"; "description"; "Electrical-Test Template"; "mask"; 0x0800); \
+		New object:C1471("name"; "ElectricalTestRescreen"; "description"; "Electrical-Test-Rescreen Template"; "mask"; 0x1000); \
+		New object:C1471("name"; "Bake"; "description"; "Bake"; "mask"; 0x2000); \
+		New object:C1471("name"; "Reserved_Bit15"; "description"; "Reserved"; "mask"; 0x4000); \
+		New object:C1471("name"; "Reserved_Bit16"; "description"; "Reserved"; "mask"; 0x8000); \
+		New object:C1471("name"; "ShowComment1"; "description"; "Show Comment1 field"; "mask"; 0x00010000); \
+		New object:C1471("name"; "ShowComment2"; "description"; "Show Comment2 field"; "mask"; 0x00020000); \
+		New object:C1471("name"; "Reserved_Bit19"; "description"; "Reserved"; "mask"; 0x00040000); \
+		New object:C1471("name"; "ShowTestWindowControl"; "description"; "Show Test-Window Control Check-Box"; "mask"; 0x00080000); \
+		New object:C1471("name"; "MinWaitTimeWindow"; "description"; "Time Window specifies a minimum time wait instead of Max"; "mask"; 0x00100000); \
+		New object:C1471("name"; "ListOfValuesDataTable"; "description"; "Data table is a list of values in column 2"; "mask"; 0x00200000); \
+		New object:C1471("name"; "AutoWidthsForDataTableEPL"; "description"; "Column Widths in EPL for Data Table are set automatically"; "mask"; 0x00400000)\
+		)
+	
+	For ($i; 0; $rulesToImport.length-1)
+		$stepRule_e:=ds:C1482.StepTemplateRule.new()
+		$stepRule_e.name:=$rulesToImport[$i].name
+		$stepRule_e.description:=$rulesToImport[$i].description
+		$stepRule_e.levelID:=$i+1
+		
+		$res:=$stepRule_e.save()
+		
+		If (Not:C34($res.success))
+			
+		End if 
+		
+	End for 
+	
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/step_template_export.json")
 	
@@ -15,8 +58,23 @@ If (True:C214)
 		$stepTemplate_e:=ds:C1482.StepTemplate.new()
 		
 		$stepTemplate_e.name:=$record.name
-		$stepTemplate_e.operation:=$record.operation
-		$stepTemplate_e.division:=$record.division
+		
+		//$stepTemplate_e.operation:=$record.operation
+		$operations:=ds:C1482.Operation.query("name =:1"; Split string:C1554($record.operation; "\r"; sk trim spaces:K86:2).join("\r"))
+		If ($operations.length>0)
+			$stepTemplate_e.UUID_Operation:=$operations[0].UUID
+		Else 
+			$stepTemplate_e.UUID_Operation:="00"*16
+		End if 
+		
+		//$stepTemplate_e.division:=$record.division
+		$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($record.division; "\r"; sk trim spaces:K86:2).join("\r"))
+		If ($division.length>0)
+			$stepTemplate_e.UUID_Division:=$division[0].UUID
+		Else 
+			$stepTemplate_e.UUID_Division:="00"*16
+		End if 
+		
 		$stepTemplate_e.status:=$record.status
 		$stepTemplate_e.binning:=$record.binning
 		
@@ -55,6 +113,17 @@ If (True:C214)
 			End if 
 			
 		End for 
+		
+		$stepTemplate_e.rules:=New object:C1471("items"; New collection:C1472())
+		For each ($rule; $rulesToImport)
+			If (($record.miscellaneousControl & $rule.mask)=$rule.mask)
+				$stepRule:=New object:C1471()
+				$stepRule.name:=$rule.name
+				$stepRule.description:=$rule.description
+				
+				$stepTemplate_e.rules.items.push($stepRule)
+			End if 
+		End for each 
 		
 		$res:=$stepTemplate_e.save()
 		
