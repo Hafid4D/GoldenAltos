@@ -22,7 +22,7 @@ Function formMethod()
 				This:C1470.loadBins()
 				
 			: (FORM Get current page:C276(*)=2)
-				This:C1470.loadSteps()
+				//This.loadSteps()
 		End case 
 	End if 
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())  //It's time to resize the object or set visible
@@ -64,6 +64,8 @@ Function redrawAndSetVisible()
 			OBJECT GET COORDINATES:C663(*; "bkgd_lb_steps"; $left_bk_lb; $top_bk_lb; $right_bk_lb; $bottom_bk_lb)
 			OBJECT GET COORDINATES:C663(*; "lb_steps"; $left_lb; $top_lb; $right_lb; $bottom_lb)
 			OBJECT GET COORDINATES:C663(*; "bActionSteps"; $left_bAc; $top_bAc; $right_bAc; $bottom_bAc)
+			OBJECT GET COORDINATES:C663(*; "lb_stepRules"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			OBJECT GET COORDINATES:C663(*; "bActionStepRules"; $left_bAc; $top_bAc; $right_bAc; $bottom_bAc)
 			
 			$offset:=4
 			$offset_bAc:=10
@@ -74,6 +76,9 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "bkgd_lb_steps"; $left_bk_lb; $top_bk_lb; $widthSubform-$offset; $heightSubform-$offset)
 			OBJECT SET COORDINATES:C1248(*; "lb_steps"; $left_lb; $top_lb; $right_lb; $heightSubform-$offset-1)
 			OBJECT SET COORDINATES:C1248(*; "bActionSteps"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
+			OBJECT SET COORDINATES:C1248(*; "lb_stepRules"; $left_lb; $top_lb; $right_lb; $heightSubform-$offset-1)
+			OBJECT SET COORDINATES:C1248(*; "bActionStepRules"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
+			
 	End case 
 	
 	Form:C1466.sfw.drawHTab()
@@ -376,6 +381,7 @@ Function bActionPMs()
 	
 Function loadAllTabs()
 	This:C1470.loadSteps()
+	This:C1470.loadStepRules()
 	
 	
 Function loadTools()
@@ -411,10 +417,14 @@ Function loadBins
 	
 	
 Function loadSteps
-	Form:C1466.selectedStep:=Null:C1517
+	Form:C1466.selectedStepRule:=Null:C1517
 	
 	Form:C1466.lb_steps:=ds:C1482.Step.query("UUID_StepTemplate = :1"; Form:C1466.current_item.UUID)
 	
+Function loadStepRules
+	Form:C1466.selectedStep:=Null:C1517
+	
+	Form:C1466.lb_stepRules:=Form:C1466.current_item.rules.items
 	
 Function displayStepLine()
 	OBJECT SET VISIBLE:C603(*; "label_stepLine@"; Not:C34((Form:C1466.selectedStep=Null:C1517)))
@@ -470,6 +480,60 @@ Function bActionSteps()
 		: ($choose="--delete")
 	End case 
 	
+	
+Function bActionStepRules()
+	$refMenu:=Create menu:C408
+	
+	APPEND MENU ITEM:C411($refMenu; "Add step rule")
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--add")
+	SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/image/button/add.png")
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	APPEND MENU ITEM:C411($refMenu; "Delete step rule")
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")
+	SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/image/button/delete.png")
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	Else 
+		//If (Form.selectedStepRule=Null)
+		//DISABLE MENU ITEM($refMenu; -1)
+		//End if 
+	End if 
+	
+	$choose:=Dynamic pop up menu:C1006($refMenu)
+	
+	Case of 
+		: ($choose="--add")
+			$form:=New object:C1471
+			$rules:=ds:C1482.StepTemplateRule.query("NOT(name IN :1)"; Form:C1466.current_item.rules.items.extract("name"))
+			$form.stepRules:=$rules
+			$form.stepRulesSelected:=New collection:C1472
+			$winRef:=Open form window:C675("_ga_selectRules"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
+			SET WINDOW TITLE:C213("Select rules to add"; $winRef)
+			DIALOG:C40("_ga_selectRules"; $form)
+			
+			If (OK=1)
+				For each ($rule; $form.stepRulesSelected)
+					Form:C1466.current_item.rules.items.push($rule)
+				End for each 
+				
+				This:C1470.loadStepRules()
+				This:C1470._activate_save_cancel_button()
+			End if 
+			
+		: ($choose="--delete")
+			
+			Form:C1466.current_item.rules.items:=Form:C1466.current_item.rules.items.filter(Formula:C1597($1.value.name#Form:C1466.selectedStepRule.name))
+			
+			This:C1470.loadStepRules()
+			This:C1470._activate_save_cancel_button()
+			//End if 
+			
+			
+			
+	End case 
 	
 	
 Function drawPup_smallLayout()

@@ -1127,9 +1127,106 @@
 					"right": 101
 				}
 			}
+		},
+		{
+			"objects": {
+				"lb_stepRules": {
+					"type": "listbox",
+					"left": 106,
+					"top": 96,
+					"width": 573,
+					"height": 440,
+					"events": [
+						"onClick",
+						"onHeaderClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"headerHeight": "24px",
+					"listboxType": "collection",
+					"visibility": "visible",
+					"dataSource": "Form:C1466.lb_stepRules",
+					"alternateFill": "#F7F9FC",
+					"selectionMode": "single",
+					"currentItemSource": "Form:C1466.selectedStepRule",
+					"method": "ObjectMethods/lb_stepRules.4dm",
+					"scrollbarHorizontal": "hidden",
+					"currentItemPositionSource": "Form:C1466.selectedStepRulePos",
+					"columns": [
+						{
+							"header": {
+								"name": "Header9",
+								"text": "Name",
+								"fontWeight": "bold"
+							},
+							"name": "Column9",
+							"footer": {
+								"name": "Footer9"
+							},
+							"dataSource": "This:C1470.name",
+							"width": 180,
+							"enterable": false,
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header10",
+								"text": "Description",
+								"fontWeight": "bold"
+							},
+							"name": "Column10",
+							"footer": {
+								"name": "Footer10"
+							},
+							"dataSource": "This:C1470.description",
+							"width": 376,
+							"enterable": false
+						}
+					]
+				},
+				"rec_bkgd_1": {
+					"type": "rectangle",
+					"top": 95,
+					"left": 5,
+					"width": 100,
+					"height": 442,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 105,
+					"bottom": 537
+				},
+				"bActionStepRules": {
+					"type": "button",
+					"text": "Actions",
+					"top": 512,
+					"left": 16,
+					"width": 80,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"icon": "/RESOURCES/sfw/image/picto/gear.png",
+					"textPlacement": "right",
+					"method": "ObjectMethods/bActionStepRules.4dm",
+					"visibility": "visible"
+				},
+				"Text1": {
+					"type": "text",
+					"text": "Rules",
+					"top": 105,
+					"left": 9,
+					"width": 92,
+					"height": 16,
+					"fontWeight": "bold",
+					"right": 101
+				}
+			}
 		}
 	],
-	"geometryStamp": 1977,
+	"geometryStamp": 1984,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
