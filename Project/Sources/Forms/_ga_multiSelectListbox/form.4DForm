@@ -65,7 +65,7 @@
 					"dataSource": "Form:C1466.stepRules",
 					"scrollbarHorizontal": "hidden",
 					"scrollbarVertical": "automatic",
-					"selectedItemsSource": "Form:C1466.stepRulesSelected",
+					"selectedItemsSource": "Form:C1466.dataSelected",
 					"columns": [
 						{
 							"header": {
