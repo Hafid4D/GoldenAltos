@@ -20,11 +20,12 @@ Case of
 		If (Form:C1466.binDefinition.action="add")
 			
 			Form:C1466.bin.index:=-1
-			Form:C1466.bin.value:="Select a bin Number"
+			Form:C1466.bin.currentValue:="Select a bin Number"
 			
 			Form:C1466.binType.index:=-1
-			Form:C1466.binType.value:="Select a bin Type"
-			Form:C1466.binDefinition.definition:=""
+			Form:C1466.binType.currentValue:="Select a bin Type"
+			
+			//Form.binDefinition.definition:=""
 			OBJECT SET ENABLED:C1123(*; "pup_bin"; True:C214)
 			
 		Else 
@@ -32,7 +33,9 @@ Case of
 			Form:C1466.bin.index:=Form:C1466.bin.values.indexOf(Form:C1466.binDefinition.num)
 			Form:C1466.binType.index:=Form:C1466.binType.values.indexOf(Form:C1466.binDefinition.type)
 			
-			Form:C1466.bin.value:=Form:C1466.binDefinition.num
+			Form:C1466.bin.currentValue:=Form:C1466.binDefinition.num
+			Form:C1466.binType.currentValue:=Form:C1466.binDefinition.type
+			
 			OBJECT SET ENABLED:C1123(*; "pup_bin"; False:C215)
 			
 		End if 

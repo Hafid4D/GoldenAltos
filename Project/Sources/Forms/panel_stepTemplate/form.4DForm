@@ -767,6 +767,7 @@
 					"dataSource": "Form:C1466.lb_bins",
 					"selectionMode": "single",
 					"currentItemSource": "Form:C1466.currentBin",
+					"rowFillSource": "highlightBins",
 					"columns": [
 						{
 							"header": {

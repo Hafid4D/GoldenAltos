@@ -213,10 +213,10 @@
 					"height": 20,
 					"sizingX": "move",
 					"sizingY": "move",
-					"dataSource": "Button",
+					"dataSource": "bOK",
 					"action": "",
 					"shortcutKey": "",
-					"text": "OK",
+					"text": "Save",
 					"defaultButton": true,
 					"events": [
 						"onClick"
