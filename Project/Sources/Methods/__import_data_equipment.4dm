@@ -7,7 +7,7 @@ $equipment_Log:=Folder:C1567(fk data folder:K87:12).file("DataJson/equipment_exp
 If ($equipment_Log.exists)
 	$equipments:=JSON Parse:C1218($equipment_Log.getText())
 	TRUNCATE TABLE:C1051([Equipment:13])
-	
+	//TRACE
 	
 	$docs:=Folder:C1567(fk data folder:K87:12).file("DataJson/docServerIndex_export.json")
 	$count:=0
