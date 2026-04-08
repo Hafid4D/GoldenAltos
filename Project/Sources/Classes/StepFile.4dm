@@ -15,6 +15,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("name"; "Step File Name"; "width:190")
 	$entry.setLBItemsColumn("creationDate"; "Creation date"; "type:date"; "width:50"; "center")
 	
+	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
+	
+	$entry.setItemListAction("Search by Scanning"; "_ga_searchByBarcodeScanning")
 	
 	$entry.setLBItemsOrderBy("creationDate"; True:C214)
 	

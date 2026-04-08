@@ -23,7 +23,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setValidationRule("code"; "entryField_code"; "mandatory"; "trimSpace"; "uppercase")
 	$entry.setValidationRule("name"; "entryField_name"; "mandatory"; "trimSpace"; "capitalize")
 	
+	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
 	
+	$entry.setItemListAction("Search by Scanning"; "_ga_searchByBarcodeScanning")
 	
 	$entry.setItemListPreconfigAction("exportReferenceRecords")
 	$entry.setItemListPreconfigAction("importReferenceRecords")

@@ -34,6 +34,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setItemAction("Print Usage Log EquipTraveler"; "_ga_usageLogReport")
 	
+	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
+	
+	$entry.setItemListAction("Search by Scanning"; "_ga_searchByBarcodeScanning")
+	
 	
 	$entry.activateEvent("EquipmentEvent"; "UUID_Equipment")
 	

@@ -8,10 +8,12 @@ Case of
 		
 		$range:=WP Text range:C1341($doc; wk end text:K81:164; wk end text:K81:164)
 		
-		WP INSERT PICTURE:C1437($range; Form:C1466.barCode; wk append:K81:179)
+		WP Insert picture:C1437($range; Form:C1466.barCode; wk append:K81:179)
 		
 		PRINT SETTINGS:C106
 		
 		WP PRINT:C1343($doc)
+		
+		//WRITE PICTURE FILE(""; Form.barCode)
 		
 End case 

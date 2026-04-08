@@ -22,6 +22,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("firstName"; "First Name"; "width:190")
 	$entry.setLBItemsColumn("lastName"; "Last Name"; "width:190")
 	
+	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
+	
+	$entry.setItemListAction("Search by Scanning"; "_ga_searchByBarcodeScanning")
+	
 	$entry.setLBItemsOrderBy("code")
 	
 	//$entry.setValidationRule("code"; "entryField_code"; "mandatory"; "trimSpace"; "message:The code is mandatory")
@@ -59,7 +63,6 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemAction("Print Badge"; "staff_print_badge")
 	$entry.setItemAction("Print Certification Training"; "staff_print_cert_training")
 	
-	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
 	
 	
 	// MARK: -Filters

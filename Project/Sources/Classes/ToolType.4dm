@@ -18,6 +18,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("name"; "Name"; "width:250")
 	$entry.setLBItemsColumn("date"; "Date"; "width:100")
 	
+	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
+	
+	$entry.setItemListAction("Search by Scanning"; "_ga_searchByBarcodeScanning")
+	
 	$entry.setLBItemsOrderBy("name")
 	$entry.enableTransaction()
 	
