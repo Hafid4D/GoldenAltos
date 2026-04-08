@@ -47,6 +47,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemAction("Print Report"; "QCARS_print_corrective_report")
 	$entry.setItemAction("Print RMA"; "QCARS_print_rma_report")
 	
+	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
+	
+	$entry.setItemListAction("Search by Scanning"; "_ga_searchByBarcodeScanning")
+	
 	
 Function openQcars()->$qcars : cs:C1710.QcarSelection
 	$qcars:=ds:C1482.Qcar.query("closedDate = :1"; !00-00-00!)

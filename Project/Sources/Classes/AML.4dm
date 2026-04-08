@@ -24,6 +24,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListAction("-"; "-")
 	$entry.setItemListAction("Print selection"; "_ga_printAmlList")
 	
+	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
+	
+	$entry.setItemListAction("Search by Scanning"; "_ga_searchByBarcodeScanning")
+	
 	$entry.activateFavorite()
 	
 	// MARK: -Filters

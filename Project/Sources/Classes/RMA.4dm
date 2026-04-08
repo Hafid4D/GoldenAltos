@@ -19,6 +19,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("invoiceNumber"; "Invoice"; "width:140")
 	$entry.setLBItemsColumn("receivedDate"; "Received"; "width:70"; "center")
 	
+	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
+	
+	$entry.setItemListAction("Search by Scanning"; "_ga_searchByBarcodeScanning")
+	
 	$entry.setLBItemsOrderBy("rmaNumber")
 	
 	$entry.enableTransaction()

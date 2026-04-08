@@ -24,6 +24,10 @@ Class extends DataClass
 
 //$entry.setItemListAction("Print Credit Note"; "_ga_printCreditNote")
 
+//$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
+
+//$entry.setItemListAction("Search by Scanning"; "_ga_searchByBarcodeScanning")
+
 //$entry.enableTransaction()
 
 //$entry.activateFavorite()

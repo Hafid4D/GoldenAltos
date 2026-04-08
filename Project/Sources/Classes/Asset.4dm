@@ -28,6 +28,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListAction("Export Asset List"; "_ga_exportAssetSelection")
 	$entry.setItemListAction("Activate Automatique Depreciation"; "_ga_activateAutomatiqueDepreciation")
 	
+	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
+	
+	$entry.setItemListAction("Search by Scanning"; "_ga_searchByBarcodeScanning")
 	
 	$entry.enableTransaction()
 	

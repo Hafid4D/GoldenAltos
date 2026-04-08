@@ -21,6 +21,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsOrderBy("companyName")
 	$entry.setMainViewLabel("All contacts")
 	
+	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
+	
+	$entry.setItemListAction("Search by Scanning"; "_ga_searchByBarcodeScanning")
+	
 	$entry.enableTransaction()
 	
 	$entry.activateFavorite()

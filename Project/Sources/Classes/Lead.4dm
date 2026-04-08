@@ -33,6 +33,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListPreconfigAction("importReferenceRecords")
 	$entry.setAllowedProfilesForDeletion("admin")
 	
+	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
+	
+	$entry.setItemListAction("Search by Scanning"; "_ga_searchByBarcodeScanning")
+	
 	
 	$entry.setMainViewLabel("All leads")
 	$entry.enableTransaction()

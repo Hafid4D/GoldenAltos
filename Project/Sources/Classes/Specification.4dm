@@ -21,6 +21,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsOrderBy("spec")
 	//$entry.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:specification"; "unitN:specifications")
 	
+	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
+	
+	$entry.setItemListAction("Search by Scanning"; "_ga_searchByBarcodeScanning")
+	
 	$entry.setItemListAction("Export The List To Excel"; "_ga_exportSpecToExcel")
 	$entry.setItemListAction("-"; "-")
 	$entry.setItemListAction("Print The List"; "_ga_printSpecList")

@@ -28,6 +28,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListAction("Print Chart Of Account List"; "_ga_printCAOSelection")
 	$entry.setItemListAction("Export Chart Of Account List"; "_ga_exportCAOSelection")
 	
+	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
+	
+	$entry.setItemListAction("Search by Scanning"; "_ga_searchByBarcodeScanning")
+	
 	$entry.enableTransaction()
 	
 	$entry.activateFavorite()
