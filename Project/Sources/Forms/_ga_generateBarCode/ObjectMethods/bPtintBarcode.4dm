@@ -14,6 +14,6 @@ Case of
 		
 		WP PRINT:C1343($doc)
 		
-		WRITE PICTURE FILE:C680(""; Form:C1466.barCode)
+		//WRITE PICTURE FILE(""; Form.barCode)
 		
 End case 
