@@ -425,11 +425,14 @@ Function loadSteps
 	
 Function loadStepRules
 	
-	Form:C1466.lb_stepRules:=Form:C1466.current_item.rules.items
+	If (Form:C1466.current_item.rules#Null:C1517)
+		Form:C1466.lb_stepRules:=Form:C1466.current_item.rules.items
+	End if 
 	
 Function loadStepContainerCodes
-	
-	Form:C1466.lb_stepContainerCodes:=Form:C1466.current_item.containerCodes.items
+	If (Form:C1466.current_item.containerCodes#Null:C1517)
+		Form:C1466.lb_stepContainerCodes:=Form:C1466.current_item.containerCodes.items
+	End if 
 	
 Function displayStepLine()
 	OBJECT SET VISIBLE:C603(*; "label_stepLine@"; Not:C34((Form:C1466.selectedStep=Null:C1517)))
