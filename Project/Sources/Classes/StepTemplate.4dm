@@ -19,3 +19,4 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setLBItemsOrderBy("name")
 	$entry.enableTransaction()
+	$entry.setItemListAction("Duplicate Steptemplate"; "duplicate_steptemplate"; "pathIcon:sfw/image/skin/rainbow/icon/duplicate-24x24.png")

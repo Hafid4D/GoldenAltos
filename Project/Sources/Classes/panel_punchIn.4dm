@@ -98,7 +98,10 @@ Function displaySerialization()
 	
 	
 Function checkForCertifications()->$valid : Boolean
-	$staff_es:=ds:C1482.sfw_User.query("login = :1"; Current user:C182).first().staffs
+	
+	If (ds:C1482.sfw_User.query("login = :1"; Current user:C182).length>0)
+		$staff_es:=ds:C1482.sfw_User.query("login = :1"; Current user:C182).first().staffs
+	End if 
 	
 	If ($staff_es.length>0)
 		$staff_e:=$staff_es[0]
@@ -128,18 +131,26 @@ Function loadCurrentStep()
 	
 	If ($currentstep.length>0)
 		Form:C1466.currentStep:=$currentstep[0]
+		OBJECT SET FORMAT:C236(*; "EntryField_comment1"; Form:C1466.currentStep.commentFormat1)
+		OBJECT SET FILTER:C235(*; "EntryField_comment1"; Form:C1466.currentStep.commentFormat1)
+		
+		OBJECT SET FORMAT:C236(*; "EntryField_comment2"; Form:C1466.currentStep.commentFormat2)
+		OBJECT SET FILTER:C235(*; "EntryField_comment2"; Form:C1466.currentStep.commentFormat2)
+		
+		OBJECT SET PLACEHOLDER:C1295(*; "EntryField_comment1"; Replace string:C233(Form:C1466.currentStep.commentFormat1; "#"; "_"))
+		OBJECT SET PLACEHOLDER:C1295(*; "EntryField_comment2"; Replace string:C233(Form:C1466.currentStep.commentFormat2; "#"; "_"))
 		
 		If (This:C1470.checkForCertifications())
 			Form:C1466.currentStepOrder:=Form:C1466.currentStep.order
 			
-			OBJECT SET FORMAT:C236(*; "EntryField_comment1"; Form:C1466.currentStep.commentFormat1)
-			OBJECT SET FILTER:C235(*; "EntryField_comment1"; Form:C1466.currentStep.commentFormat1)
+			//OBJECT SET FORMAT(*; "EntryField_comment1"; Form.currentStep.commentFormat1)
+			//OBJECT SET FILTER(*; "EntryField_comment1"; Form.currentStep.commentFormat1)
 			
-			OBJECT SET FORMAT:C236(*; "EntryField_comment2"; Form:C1466.currentStep.commentFormat2)
-			OBJECT SET FILTER:C235(*; "EntryField_comment2"; Form:C1466.currentStep.commentFormat2)
+			//OBJECT SET FORMAT(*; "EntryField_comment2"; Form.currentStep.commentFormat2)
+			//OBJECT SET FILTER(*; "EntryField_comment2"; Form.currentStep.commentFormat2)
 			
-			OBJECT SET PLACEHOLDER:C1295(*; "EntryField_comment1"; Replace string:C233(Form:C1466.currentStep.commentFormat1; "#"; "_"))
-			OBJECT SET PLACEHOLDER:C1295(*; "EntryField_comment2"; Replace string:C233(Form:C1466.currentStep.commentFormat2; "#"; "_"))
+			//OBJECT SET PLACEHOLDER(*; "EntryField_comment1"; Replace string(Form.currentStep.commentFormat1; "#"; "_"))
+			//OBJECT SET PLACEHOLDER(*; "EntryField_comment2"; Replace string(Form.currentStep.commentFormat2; "#"; "_"))
 			
 			If (FORM Get current page:C276(*)#4)
 				//FORM GOTO PAGE(1; *)
