@@ -617,7 +617,23 @@ If (True:C214)
 					$lotStep_e.parametricMeasurements:=New object:C1471("items"; New collection:C1472())
 					$lotStep_e.stepInterruptions:=New object:C1471("items"; New collection:C1472())
 					$lotStep_e.dataTables:=New object:C1471("items"; New collection:C1472())
+					
+					//$lotStep_e.bins:=New object("items"; New collection())
+					
 					$lotStep_e.bins:=New object:C1471("items"; New collection:C1472())
+					For ($i; 0; $step.bins.items.length-1)
+						
+						$bin:=New object:C1471()
+						$bin.num:=$i+1
+						$bin.definition:=$step.bins.items[$i]
+						$bin.type:=""
+						
+						//If (Split string($step.bins.items[$i]; "\r"; sk trim spaces).join("\r")#"")
+						$lotStep_e.bins.items.push($bin)
+						//End if 
+						
+					End for 
+					
 					$lotStep_e.skills:=New object:C1471("items"; New collection:C1472())
 					$lotStep_e.requitedCertifications:=New object:C1471("items"; New collection:C1472())
 					

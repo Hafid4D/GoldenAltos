@@ -4,7 +4,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry:=cs:C1710.sfw_definitionEntry.new("certifications"; ["housekeeping"]; "Certification")
 	$entry.setDataclass("Certification")
-	$entry.setDisplayOrder(-200)
+	$entry.setDisplayOrder(-400)
 	$entry.setIcon("image/entry/certification-white-50x50.png")
 	
 	$entry.setSearchboxField("ref")

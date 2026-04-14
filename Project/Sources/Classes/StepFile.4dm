@@ -3,7 +3,7 @@ Class extends DataClass
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry:=cs:C1710.sfw_definitionEntry.new("stepFile"; ["housekeeping"]; "Step File"; "Step Files")
 	$entry.setDataclass("StepFile")
-	$entry.setDisplayOrder(100)
+	$entry.setDisplayOrder(-100)
 	$entry.setIcon("image/entry/stepFile-52x52.png")
 	
 	$entry.setSearchboxField("name")

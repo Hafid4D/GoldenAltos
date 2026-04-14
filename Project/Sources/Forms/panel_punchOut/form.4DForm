@@ -26,7 +26,8 @@
 		"onPluginArea",
 		"onAfterEdit",
 		"onTimer",
-		"onBoundVariableChange"
+		"onBoundVariableChange",
+		"onDataChange"
 	],
 	"windowTitle": "window title",
 	"destination": "detailScreen",
@@ -348,7 +349,8 @@
 					"width": 120,
 					"height": 22,
 					"events": [
-						"onClick"
+						"onClick",
+						"onDataChange"
 					],
 					"fontWeight": "normal",
 					"dataSourceTypeHint": "boolean",
@@ -371,8 +373,8 @@
 			"objects": {
 				"header_bkgd4": {
 					"type": "rectangle",
-					"top": 152,
-					"left": 5,
+					"top": 147,
+					"left": 0,
 					"width": 450,
 					"height": 133,
 					"sizingX": "fixed",
@@ -381,8 +383,8 @@
 				},
 				"header_bkgd3": {
 					"type": "rectangle",
-					"top": 119,
-					"left": 5,
+					"top": 114,
+					"left": 0,
 					"width": 450,
 					"height": 30,
 					"sizingX": "fixed",
@@ -391,8 +393,8 @@
 				},
 				"lbl_punchIn": {
 					"type": "text",
-					"top": 126,
-					"left": 11,
+					"top": 121,
+					"left": 6,
 					"width": 277,
 					"height": 17,
 					"stroke": "#000000",
@@ -402,8 +404,8 @@
 				},
 				"label_qtyOut": {
 					"type": "text",
-					"top": 160,
-					"left": 11,
+					"top": 155,
+					"left": 6,
 					"width": 119,
 					"height": 17,
 					"stroke": "#808080",
@@ -411,8 +413,8 @@
 				},
 				"entryField_qtyInOut": {
 					"type": "input",
-					"top": 160,
-					"left": 138,
+					"top": 155,
+					"left": 133,
 					"width": 307,
 					"height": 17,
 					"dataSource": "Form:C1466.currentStep.qtyOut",
@@ -428,8 +430,8 @@
 				},
 				"label_dateOut": {
 					"type": "text",
-					"top": 184,
-					"left": 11,
+					"top": 179,
+					"left": 6,
 					"width": 119,
 					"height": 17,
 					"stroke": "#808080",
@@ -437,8 +439,8 @@
 				},
 				"entryField_dateOut": {
 					"type": "input",
-					"top": 184,
-					"left": 138,
+					"top": 179,
+					"left": 133,
 					"width": 307,
 					"height": 17,
 					"dataSource": "Form:C1466.currentStep.dateOut",
@@ -452,121 +454,21 @@
 					"fill": "transparent",
 					"borderStyle": "none"
 				},
-				"header_bkgd5": {
-					"type": "rectangle",
-					"top": 119,
-					"left": 460,
-					"width": 450,
-					"height": 30,
-					"sizingX": "fixed",
-					"fill": "#A2C6D8",
-					"stroke": "transparent"
-				},
-				"lbl_binning": {
-					"type": "text",
-					"top": 126,
-					"left": 466,
-					"width": 278,
-					"height": 17,
-					"stroke": "#000000",
-					"text": "Binning",
-					"fontSize": 12,
-					"fontWeight": "bold"
-				},
 				"header_bkgd7": {
 					"type": "rectangle",
-					"top": 152,
-					"left": 460,
+					"top": 161,
+					"left": 1266,
 					"width": 450,
-					"height": 225,
+					"height": 578,
 					"sizingX": "fixed",
 					"fill": "#E4E4E4",
 					"stroke": "transparent",
-					"bottom": 377
-				},
-				"List Box3": {
-					"type": "listbox",
-					"left": 463,
-					"top": 155,
-					"width": 443,
-					"height": 259,
-					"events": [
-						"onClick",
-						"onHeaderClick",
-						"onDataChange",
-						"onSelectionChange"
-					],
-					"scrollbarVertical": "visible",
-					"scrollbarHorizontal": "hidden",
-					"showHeaders": false,
-					"listboxType": "collection",
-					"alternateFill": "#F7F9FC",
-					"dataSource": "Form:C1466.lb_bins",
-					"currentItemSource": "Form:C1466.currentBin",
-					"selectionMode": "single",
-					"columns": [
-						{
-							"header": {
-								"text": "Name",
-								"name": "Header3"
-							},
-							"name": "Column3",
-							"footer": {
-								"name": "Footer3"
-							},
-							"width": 50,
-							"dataSource": "This:C1470.num",
-							"enterable": false
-						},
-						{
-							"header": {
-								"name": "Header1",
-								"text": "Header1"
-							},
-							"name": "Column1",
-							"width": 150,
-							"footer": {
-								"name": "Footer1"
-							},
-							"dataSource": "This:C1470.definition",
-							"enterable": false
-						},
-						{
-							"header": {
-								"name": "Header2",
-								"text": "Header2"
-							},
-							"name": "Column2",
-							"width": 300,
-							"footer": {
-								"name": "Footer2"
-							},
-							"dataSource": "This:C1470.value",
-							"enterable": false
-						}
-					]
-				},
-				"bActionBins": {
-					"type": "button",
-					"text": " ",
-					"top": 123,
-					"left": 878,
-					"width": 26,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"style": "custom",
-					"popupPlacement": "linked",
-					"icon": "/RESOURCES/sfw/image/picto/gear.png",
-					"textPlacement": "right",
-					"method": "ObjectMethods/bActionBins.4dm",
-					"visibility": "visible"
+					"bottom": 739
 				},
 				"label_timeOut": {
 					"type": "text",
-					"top": 208,
-					"left": 11,
+					"top": 203,
+					"left": 6,
 					"width": 119,
 					"height": 17,
 					"stroke": "#808080",
@@ -574,8 +476,8 @@
 				},
 				"entryField_timeOut": {
 					"type": "input",
-					"top": 208,
-					"left": 138,
+					"top": 203,
+					"left": 133,
 					"width": 307,
 					"height": 17,
 					"dataSource": "Form:C1466.currentStep.timeOut",
@@ -591,8 +493,8 @@
 				},
 				"label_good": {
 					"type": "text",
-					"top": 232,
-					"left": 11,
+					"top": 227,
+					"left": 6,
 					"width": 119,
 					"height": 17,
 					"stroke": "#808080",
@@ -600,8 +502,8 @@
 				},
 				"entryField_good": {
 					"type": "input",
-					"top": 232,
-					"left": 138,
+					"top": 227,
+					"left": 133,
 					"width": 307,
 					"height": 17,
 					"dataSource": "Form:C1466.currentStep.good",
@@ -617,8 +519,8 @@
 				},
 				"label_comment6": {
 					"type": "text",
-					"top": 256,
-					"left": 11,
+					"top": 251,
+					"left": 6,
 					"width": 119,
 					"height": 17,
 					"stroke": "#808080",
@@ -626,8 +528,8 @@
 				},
 				"entryField_comment6": {
 					"type": "input",
-					"top": 256,
-					"left": 138,
+					"top": 251,
+					"left": 133,
 					"width": 307,
 					"height": 17,
 					"dataSource": "Form:C1466.currentStep.rejects",
@@ -641,34 +543,10 @@
 					"fill": "transparent",
 					"borderStyle": "none"
 				},
-				"banner_lotOnHold_page1": {
-					"type": "input",
-					"top": 340,
-					"left": 629,
-					"width": 285,
-					"height": 184,
-					"sizingX": "move",
-					"sizingY": "move",
-					"dataSourceTypeHint": "picture",
-					"fontFamily": "System Font Regular",
-					"fontSize": 13,
-					"focusable": false,
-					"fill": "transparent",
-					"borderStyle": "none",
-					"enterable": false,
-					"contextMenu": "none",
-					"dragging": "none",
-					"method": "ObjectMethods/banner_lotOnHold_page1.4dm",
-					"events": [
-						"onClick"
-					],
-					"dataSource": "Form:C1466.bannerOnHold",
-					"pictureFormat": "truncatedTopLeft"
-				},
 				"header_bkgd2": {
 					"type": "rectangle",
-					"top": 322,
-					"left": 5,
+					"top": 317,
+					"left": 0,
 					"width": 450,
 					"height": 92,
 					"sizingX": "fixed",
@@ -679,8 +557,8 @@
 				"entryField_isApproved": {
 					"type": "checkbox",
 					"text": "QA Approval",
-					"top": 332,
-					"left": 139,
+					"top": 327,
+					"left": 134,
 					"width": 246,
 					"height": 19,
 					"events": [
@@ -688,15 +566,15 @@
 					],
 					"dataSourceTypeHint": "boolean",
 					"fontWeight": "normal",
-					"right": 385,
+					"right": 380,
 					"dataSource": "Form:C1466.currentStep.isApproved",
 					"method": "ObjectMethods/entryField_isApproved.4dm",
 					"visibility": "hidden"
 				},
 				"entryField_approver": {
 					"type": "input",
-					"left": 139,
-					"top": 358,
+					"left": 134,
+					"top": 353,
 					"width": 200,
 					"height": 19,
 					"borderStyle": "none",
@@ -706,8 +584,8 @@
 				},
 				"entryField_approvalDate": {
 					"type": "input",
-					"left": 139,
-					"top": 384,
+					"left": 134,
+					"top": 379,
 					"width": 200,
 					"height": 19,
 					"borderStyle": "none",
@@ -724,8 +602,8 @@
 				},
 				"label_approvalDate": {
 					"type": "text",
-					"top": 384,
-					"left": 12,
+					"top": 379,
+					"left": 7,
 					"width": 119,
 					"height": 19,
 					"stroke": "#808080",
@@ -736,8 +614,8 @@
 				},
 				"label_approver": {
 					"type": "text",
-					"top": 358,
-					"left": 12,
+					"top": 353,
+					"left": 7,
 					"width": 119,
 					"height": 19,
 					"stroke": "#808080",
@@ -748,8 +626,8 @@
 				},
 				"header_bkgd1": {
 					"type": "rectangle",
-					"top": 288,
-					"left": 5,
+					"top": 283,
+					"left": 0,
 					"width": 450,
 					"height": 30,
 					"sizingX": "fixed",
@@ -759,8 +637,8 @@
 				},
 				"lb_qaApproval": {
 					"type": "text",
-					"top": 295,
-					"left": 11,
+					"top": 290,
+					"left": 6,
 					"width": 277,
 					"height": 17,
 					"stroke": "#000000",
@@ -768,6 +646,16 @@
 					"fontSize": 12,
 					"fontWeight": "bold",
 					"visibility": "hidden"
+				},
+				"entryField_subFormBin": {
+					"type": "subform",
+					"left": 454,
+					"top": 114,
+					"width": 467,
+					"height": 272,
+					"scrollbarVertical": "visible",
+					"dataSource": "Form:C1466.subFormBins",
+					"detailForm": "_ga_bins_subform"
 				}
 			}
 		},
@@ -856,10 +744,102 @@
 					"textAlign": "left"
 				}
 			}
+		},
+		{
+			"objects": {
+				"List Box3": {
+					"type": "listbox",
+					"left": 0,
+					"top": 115,
+					"width": 443,
+					"height": 259,
+					"events": [
+						"onClick",
+						"onHeaderClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"scrollbarVertical": "visible",
+					"scrollbarHorizontal": "hidden",
+					"showHeaders": false,
+					"listboxType": "collection",
+					"alternateFill": "#F7F9FC",
+					"dataSource": "Form:C1466.lb_bins",
+					"currentItemSource": "Form:C1466.currentBin",
+					"selectionMode": "single",
+					"singleClickEdit": true,
+					"columns": [
+						{
+							"header": {
+								"text": "Name",
+								"name": "Header3"
+							},
+							"name": "Column3",
+							"footer": {
+								"name": "Footer3"
+							},
+							"width": 50,
+							"dataSource": "This:C1470.num",
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "Header1",
+								"text": "Header1"
+							},
+							"name": "Column1",
+							"width": 150,
+							"footer": {
+								"name": "Footer1"
+							},
+							"dataSource": "This:C1470.definition",
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "Header2",
+								"text": "Header2"
+							},
+							"name": "Column2",
+							"width": 300,
+							"footer": {
+								"name": "Footer2"
+							},
+							"dataSource": "This:C1470.value",
+							"enterable": true,
+							"entryFilter": "&9"
+						}
+					]
+				},
+				"banner_lotOnHold_page1": {
+					"type": "input",
+					"top": 152,
+					"left": 105,
+					"width": 285,
+					"height": 184,
+					"sizingX": "move",
+					"sizingY": "move",
+					"dataSourceTypeHint": "picture",
+					"fontFamily": "System Font Regular",
+					"fontSize": 13,
+					"focusable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"enterable": false,
+					"contextMenu": "none",
+					"dragging": "none",
+					"method": "ObjectMethods/banner_lotOnHold_page1.4dm",
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.bannerOnHold",
+					"pictureFormat": "truncatedTopLeft"
+				}
+			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 200,
+	"geometryStamp": 438,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

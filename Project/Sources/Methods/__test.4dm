@@ -1,5 +1,28 @@
 //%attributes = {}
 
+
+ds:C1482.Step.all()
+$position:=-500
+$searchField:="description"
+$tableName:="Step"
+$moduleName:="housekeeping"
+$titleField:="description"
+$entryImagePath:="Step-white-50x50.png"
+
+$gen:=cs:C1710.Util_entryFactory.new()
+$fields:=New collection:C1472()
+$fields.push(New object:C1471("name"; "description"; "label"; "Description"; "width"; "150"))
+$fields.push(New object:C1471("name"; "stepTemplate.name"; "label"; "Template Name"; "width"; "100"))
+$gen.buildEntry($tableName; $moduleName; $fields; $position; $searchField; $titleField; $entryImagePath)
+
+
+// 🔄 FORCER LE RAFRAÎCHISSEMENT
+RELOAD PROJECT:C1739
+
+$text:=cs:C1710.Util.me.firstLetterLowerCase("LotStep")
+
+
+
 TRUNCATE TABLE:C1051([sfw_Notification:69])
 
 var $buyingOrders : cs:C1710.BuyingOrderSelection

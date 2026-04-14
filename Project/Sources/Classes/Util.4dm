@@ -56,7 +56,6 @@ Function setDateInterval($pushUp; $title)
 	End use 
 	
 	
-	
 Function btnDatePicker($object; $attribut)
 	//If (Form.sfw.checkIsInModification())
 	
@@ -74,4 +73,17 @@ Function btnDatePicker($object; $attribut)
 	End if 
 	
 	//End if 
+Function firstLetterLowerCase($inText : Text)->$outText : Text
+	
+	If (Length:C16($inText)>0)
+		$inText[[1]]:=Lowercase:C14($inText[[1]])
+	End if 
+	$outText:=$inText
+	
+Function firstLetterUpperCase($inText : Text)->$outText : Text
+	
+	If (Length:C16($inText)>0)
+		$inText[[1]]:=Uppercase:C13($inText[[1]])
+	End if 
+	$outText:=$inText
 	

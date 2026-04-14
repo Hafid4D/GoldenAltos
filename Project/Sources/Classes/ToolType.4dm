@@ -4,7 +4,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry:=cs:C1710.sfw_definitionEntry.new("toolType"; ["housekeeping"]; "Tool Type")
 	$entry.setDataclass("ToolType")
-	$entry.setDisplayOrder(-100)
+	$entry.setDisplayOrder(-300)
 	$entry.setIcon("image/entry/tools-white-50x50.png")
 	
 	$entry.setSearchboxField("type")
