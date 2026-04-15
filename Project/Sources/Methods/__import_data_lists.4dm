@@ -361,7 +361,7 @@ End if
 var $eStepTemplateLayout : cs:C1710.StepTemplateLayoutEntity
 var $layouts : Collection:=New collection:C1472("bake"; "bin_wise_out"; "burnin_L"; "data_prep"; "L_Elec_test"; "L_ExpandedBins"; \
 "L_plain"; "N/A"; "PDA"; "PlainUniversalWithBinsAndMark"; "WS")
-TRUNCATE TABLE:C1051([StepTemplateLayout:90])
+TRUNCATE TABLE:C1051([StepTemplateLayout:91])
 For ($i; 0; $layouts.length-1)
 	$eStepTemplateLayout:=ds:C1482.StepTemplateLayout.new()
 	//$eStepTemplateLayout.type:=$i

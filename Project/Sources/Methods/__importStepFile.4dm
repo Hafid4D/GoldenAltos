@@ -3,8 +3,8 @@ var $step : cs:C1710.StepEntity
 var $template : cs:C1710.StepTemplateEntity
 var $stepFile : cs:C1710.StepFileEntity
 var $customer : cs:C1710.CustomerEntity
-//TRUNCATE TABLE([Step])
-//TRUNCATE TABLE([StepFile])
+TRUNCATE TABLE:C1051([Step:120])
+TRUNCATE TABLE:C1051([StepFile:119])
 
 //MARK:-template_definition
 //$file:=Folder(fk resources folder).file("template_definition_export.json")

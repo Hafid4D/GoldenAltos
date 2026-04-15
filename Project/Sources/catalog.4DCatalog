@@ -1425,6 +1425,18 @@
 		<field name="levelID" uuid="C965BE78ED954A03BABAC6B2AB0E5888" type="4" never_null="true" id="5"/>
 		<primary_key field_name="UUID" field_uuid="945AA490390543C3A79C1CE5BF6F9C08"/>
 	</table>
+	<table name="StepProperty" uuid="E7AF2F374A794AB492A6BC469134F948" id="94">
+		<field name="UUID" uuid="93FB2C0FDC6B4FF9ACE3B0E9D3D29F40" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="levelID" uuid="88C8213885DF44E3871F69C573D3DE8A" type="4" never_null="true" id="2">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="name" uuid="BFA2897334154A1A9E7E6FD42E2BAC32" type="10" limiting_length="255" never_null="true" id="3">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="moreData" uuid="1955C65BA1564298878E17619C18C374" type="21" blob_switch_size="2147483647" never_null="true" id="4"/>
+		<field name="description" uuid="B856229BA1CD4E5D8E9752D2BB13043B" type="10" limiting_length="255" never_null="true" id="5"/>
+		<primary_key field_name="UUID" field_uuid="93FB2C0FDC6B4FF9ACE3B0E9D3D29F40"/>
+	</table>
 	<table name="Customer" uuid="96D1CE81460A4F75B3F4275138C8F778" id="114">
 		<field name="UUID" uuid="37676CD94E8B423595ED98B5C0E9CF89" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="name" uuid="6408BE6907C146339726DEB3047C211E" type="10" limiting_length="255" never_null="true" id="2">
@@ -1639,6 +1651,7 @@
 		<field name="areas" uuid="874E3CD01538034CAE6F623D6FE639AF" type="10" limiting_length="255" never_null="true" id="6"/>
 		<field name="operationCode" uuid="30C8C57D94AFE7499EF72CA3A15D8650" type="10" limiting_length="255" never_null="true" id="7"/>
 		<field name="moreData" uuid="07BB854D1999E54DADA7CDCC1B5C232C" type="21" blob_switch_size="2147483647" never_null="true" id="8"/>
+		<field name="stepProperties" uuid="BBB947E5FFD3494F974EB483FA9D7AD6" type="21" blob_switch_size="2147483647" never_null="true" id="9"/>
 		<primary_key field_name="UUID" field_uuid="3C357DD66006453994A5995B3E57D007"/>
 	</table>
 	<table name="StepTemplate" uuid="6330FD4D08D74130BF3869222CDECBA6" id="121">
@@ -4043,6 +4056,11 @@
 	<index kind="regular" uuid="41D626DCF0E04F4F827CB1D110C13972" type="3">
 		<field_ref uuid="67283794017E8F49A82B9A08EE6BB3F2" name="UUID_ToolType">
 			<table_ref uuid="0FF66E5E37EDD74B8E6E39F15644C85F" name="Tool"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="426BB4C267DD4597B22C09001D8142B1" type="1">
+		<field_ref uuid="93FB2C0FDC6B4FF9ACE3B0E9D3D29F40" name="UUID">
+			<table_ref uuid="E7AF2F374A794AB492A6BC469134F948" name="StepProperty"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="4466D060A399E74F8AA1C4B7D2CC91EE" type="1">

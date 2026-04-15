@@ -1,10 +1,32 @@
 Class extends DataClass
 
+// ----------------------------------------------
+// entryDefinition
+// ----------------------------------------------
 
-
-
-
-//Mark:- Function to manage the cache
+local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
+	$entry:=cs:C1710.sfw_definitionEntry.new("Step"; ["housekeeping"]; "Step"; "Steps")
+	$entry.setDataclass("Step")
+	$entry.setDisplayOrder(-200)
+	$entry.setIcon("image/entry/Step-white-50x50.png")
+	
+	$entry.setSearchboxField("description")
+	
+	$entry.setPanel("panel_step")
+	
+	$entry.setPanelPage(1; ""; "Main")
+	$entry.setPanelPage(2; ""; "Settings")
+	
+	$entry.setLBItemsColumn("description"; "Description"; "width:150")
+	$entry.setLBItemsColumn("stepTemplate.name"; "Template Name"; "width:100")
+	$entry.setLBItemsOrderBy("description")
+	
+	$entry.enableTransaction()
+	
+	$entry.activateComment()
+	
+	
+	//Mark:- Function to manage the cache
 local Function cacheClear()
 	If (Storage:C1525.cache#Null:C1517)
 		Use (Storage:C1525.cache)
@@ -40,3 +62,4 @@ Function _loadAsCollection()->$processColl : Collection
 	var $file : 4D:C1709.File
 	var $img : Picture
 	$processColl:=This:C1470.all().distinct("moreData.Process")
+	
