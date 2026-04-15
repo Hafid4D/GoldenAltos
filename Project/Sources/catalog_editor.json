@@ -642,13 +642,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2652,
-				"top": 789.33331298828,
+				"left": 2641,
+				"top": 757.33331298828,
 				"width": 170.80078125,
-				"height": 210.33203125
+				"height": 271.33203125
 			},
-			"displayable_fields_count": 8,
-			"fields_ordering": 2,
+			"displayable_fields_count": 10,
 			"fields": {
 				"specification": {
 					"position": 5
@@ -675,8 +674,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2401,
-				"top": 792,
+				"left": 2257,
+				"top": 775,
 				"width": 161.33203125,
 				"height": 209.33203125
 			},
@@ -794,6 +793,21 @@
 				}
 			}
 		},
+		"StepProperty": {
+			"color": {
+				"red": 181,
+				"green": 145,
+				"blue": 209,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 2470,
+				"top": 786,
+				"width": 145,
+				"height": 164.33203125
+			},
+			"displayable_fields_count": 5
+		},
 		"ContainerCode": {
 			"color": {
 				"red": 181,
@@ -802,8 +816,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2879,
-				"top": 867,
+				"left": 2858,
+				"top": 878,
 				"width": 145,
 				"height": 158.33203125
 			},
@@ -832,8 +846,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2878,
-				"top": 723,
+				"left": 2884,
+				"top": 725,
 				"width": 145,
 				"height": 133.33203125
 			},

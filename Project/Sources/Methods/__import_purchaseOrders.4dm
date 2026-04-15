@@ -172,6 +172,90 @@ If (True:C214)
 	End for each 
 End if 
 
+//MARK:- import StepTemplates -> [Step]
+
+TRUNCATE TABLE:C1051([Step:120])
+TRUNCATE TABLE:C1051([StepProperty:94])
+
+
+var $stepPropertiesToImport : Collection
+$stepPropertiesToImport:=New collection:C1472(\
+New object:C1471("name"; "HoldPoint"; "description"; "01. Hold Point"; "mask"; 0x0001); \
+New object:C1471("name"; "Reserved2"; "description"; "02. Reserved"; "mask"; 0x0002); \
+New object:C1471("name"; "FreezeTraveler"; "description"; "04. Reserved {Freeze Traveler}"; "mask"; 0x0004); \
+New object:C1471("name"; "Reserved4"; "description"; "08. Reserved"; "mask"; 0x0008); \
+New object:C1471("name"; "SupervisorSignoffReqd"; "description"; "16. Supervisor's Signoff is required"; "mask"; 0x0010); \
+New object:C1471("name"; "QASignoffReqd"; "description"; "32. QA signoff is required"; "mask"; 0x0020); \
+New object:C1471("name"; "SNTableForAllUnits"; "description"; "64. SN logging for all units"; "mask"; 0x0040); \
+New object:C1471("name"; "SNTableForFailsOnly"; "description"; "128. SN logging for current-step Fails"; "mask"; 0x0080); \
+New object:C1471("name"; "SNTableAtPunchin"; "description"; "256. SN logging at Punch-IN"; "mask"; 0x0100); \
+New object:C1471("name"; "Reserved10"; "description"; "512. Reserved"; "mask"; 0x0200); \
+New object:C1471("name"; "NonSequentialProcessing"; "description"; "1024. Step may be performed non-sequentially"; "mask"; 0x0400); \
+New object:C1471("name"; "OutsideOfCountRules"; "description"; "2048. Outside of Count Rules"; "mask"; 0x0800); \
+New object:C1471("name"; "FinalQAApprovalWithStamp"; "description"; "4096. Final QA Approval with Stamp"; "mask"; 0x1000); \
+New object:C1471("name"; "Reserved14"; "description"; "Reserved (Bit 14)"; "mask"; 0x2000); \
+New object:C1471("name"; "Reserved15"; "description"; "Reserved (Bit 15)"; "mask"; 0x4000); \
+New object:C1471("name"; "Reserved16"; "description"; "Reserved (Bit 16)"; "mask"; 0x8000); \
+New object:C1471("name"; "WasStepManuallyAdded"; "description"; "Was Step Manually Added"; "mask"; 0x00010000); \
+New object:C1471("name"; "ParetoInTraveler"; "description"; "Pareto in Traveler"; "mask"; 0x00020000); \
+New object:C1471("name"; "Reserved19"; "description"; "Reserved (Bit 19)"; "mask"; 0x00040000); \
+New object:C1471("name"; "QAFinalReview"; "description"; "QA Final Review"; "mask"; 0x00080000); \
+New object:C1471("name"; "Clear"; "description"; "Clear"; "mask"; 0x00100000)\
+)
+
+For ($i; 0; $stepPropertiesToImport.length-1)
+	$stepProperty_e:=ds:C1482.StepProperty.new()
+	$stepProperty_e.name:=$stepPropertiesToImport[$i].name
+	$stepProperty_e.description:=$stepPropertiesToImport[$i].description
+	$stepProperty_e.levelID:=$i+1
+	
+	$res:=$stepProperty_e.save()
+	
+	If (Not:C34($res.success))
+		TRACE:C157
+	End if 
+	
+End for 
+
+
+$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/steps.json")
+
+$records:=JSON Parse:C1218($file.getText())
+For each ($record; $records)
+	$template:=ds:C1482.StepTemplate.query("templateNumber = :1"; $record.Template).first()
+	
+	If ($template=Null:C1517)
+		$template:=ds:C1482.StepTemplate.new()
+		$template.templateNumber:=$record.Template
+		$template.name:=$record.Process
+		$info:=$template.save()
+	End if 
+	
+	$step:=ds:C1482.Step.new()
+	$step.UUID_StepTemplate:=$template.UUID
+	
+	$step.stepProperties:=New object:C1471("items"; New collection:C1472())
+	For each ($property; $stepPropertiesToImport)
+		If (($record.StepProperty & $property.mask)=$property.mask)
+			$stepProperty:=New object:C1471()
+			$stepProperty.name:=$property.name
+			$stepProperty.description:=$property.description
+			
+			$step.stepProperties.items.push($stepProperty)
+		End if 
+	End for each 
+	
+	$step.description:=$record.Description
+	$step.alert:=$record.Step_Alert
+	$step.specification:=$record.StepProperty
+	$step.areas:=$record.Area
+	$step.moreData:=New object:C1471()
+	//$step.moreData:=$record
+	$succ:=$step.save()
+	
+End for each 
+
+
 
 /**
 import po & po lines (po <-- po_lines)
