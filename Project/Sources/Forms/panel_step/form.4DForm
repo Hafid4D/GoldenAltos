@@ -124,7 +124,7 @@
 				},
 				"Text1": {
 					"type": "text",
-					"text": "Rules",
+					"text": "Step Properties",
 					"top": 124,
 					"left": 6,
 					"width": 92,

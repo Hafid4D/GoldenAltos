@@ -62,7 +62,7 @@
 					"verticalLineStroke": "automatic",
 					"alternateFill": "#DFDFDF",
 					"listboxType": "collection",
-					"dataSource": "Form:C1466.stepRules",
+					"dataSource": "Form:C1466.data",
 					"scrollbarHorizontal": "hidden",
 					"scrollbarVertical": "automatic",
 					"selectedItemsSource": "Form:C1466.dataSelected",

@@ -516,14 +516,16 @@ Function bActionStepRules()
 		: ($choose="--add")
 			$form:=New object:C1471
 			$rules:=ds:C1482.StepTemplateRule.query("NOT(name IN :1)"; Form:C1466.current_item.rules.items.extract("name"))
-			$form.stepRules:=$rules
-			$form.stepRulesSelected:=New collection:C1472
+			$form.data:=$rules
+			$form.dataSelected:=New collection:C1472
 			$winRef:=Open form window:C675("_ga_multiSelectListbox"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			SET WINDOW TITLE:C213("Select rules to add"; $winRef)
 			DIALOG:C40("_ga_multiSelectListbox"; $form)
 			
 			If (OK=1)
-				For each ($rule; $form.stepRulesSelected)
+				$cleanedSelectedData:=$form.dataSelected.toCollection().map(Formula:C1597(New object:C1471("description"; $1.value.description; "name"; $1.value.name)))
+				
+				For each ($rule; $cleanedSelectedData)
 					Form:C1466.current_item.rules.items.push($rule)
 				End for each 
 				
@@ -571,15 +573,17 @@ Function bActionStepContainerCodes()
 		: ($choose="--add")
 			$form:=New object:C1471
 			$codes:=ds:C1482.ContainerCode.query("NOT(name IN :1)"; Form:C1466.current_item.containerCodes.items.extract("name"))
-			$form.stepRules:=$codes
+			$form.data:=$codes
 			$form.dataSelected:=New collection:C1472
 			$winRef:=Open form window:C675("_ga_multiSelectListbox"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			SET WINDOW TITLE:C213("Select container code to add"; $winRef)
 			DIALOG:C40("_ga_multiSelectListbox"; $form)
 			
 			If (OK=1)
-				For each ($rule; $form.dataSelected)
-					Form:C1466.current_item.containerCodes.items.push($rule)
+				$cleanedSelectedData:=$form.dataSelected.toCollection().map(Formula:C1597(New object:C1471("description"; $1.value.description; "name"; $1.value.name)))
+				
+				For each ($containerCode; $cleanedSelectedData)
+					Form:C1466.current_item.containerCodes.items.push($containerCode)
 				End for each 
 				
 				This:C1470.loadStepContainerCodes()

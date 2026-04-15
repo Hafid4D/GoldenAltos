@@ -101,8 +101,8 @@ Function bActionStepProperties()
 			$form:=New object:C1471
 			$existingNames:=Form:C1466.current_item.stepProperties.items.extract("name")
 			$properties:=ds:C1482.StepProperty.query("NOT(name IN :1)"; $existingNames)
-			$form.stepRules:=$properties
-			$form.stepRulesSelected:=New collection:C1472
+			$form.data:=$properties
+			$form.dataSelected:=New collection:C1472
 			
 			$winRef:=Open form window:C675("_ga_multiSelectListbox"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			SET WINDOW TITLE:C213("Select step properties to add"; $winRef)
@@ -110,7 +110,10 @@ Function bActionStepProperties()
 			CLOSE WINDOW:C154($winRef)
 			
 			If (OK=1)
-				For each ($property; $form.stepRulesSelected)
+				
+				$cleanedSelectedData:=$form.dataSelected.toCollection().map(Formula:C1597(New object:C1471("description"; $1.value.description; "name"; $1.value.name)))
+				
+				For each ($property; $cleanedSelectedData)  // $form.dataSelected)
 					Form:C1466.current_item.stepProperties.items.push($property)
 				End for each 
 				
