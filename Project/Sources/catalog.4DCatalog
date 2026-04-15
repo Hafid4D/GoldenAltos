@@ -1645,7 +1645,7 @@
 		<field name="alert" uuid="99E6A566FCC6874A9AABC563F7454111" type="10" limiting_length="255" never_null="true" id="2">
 			<field_extra multi_line="false"/>
 		</field>
-		<field name="description" uuid="CF97C41065B9C24391123C7337F8C7CB" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="description" uuid="CF97C41065B9C24391123C7337F8C7CB" type="10" never_null="true" id="3"/>
 		<field name="UUID_StepTemplate" uuid="95C3CA62BD079647A666AAE41D7B984A" type="10" store_as_UUID="true" never_null="true" id="4"/>
 		<field name="specification" uuid="200CC3EEAB9DEA419A347C450B5123A4" type="10" limiting_length="255" never_null="true" id="5"/>
 		<field name="areas" uuid="874E3CD01538034CAE6F623D6FE639AF" type="10" limiting_length="255" never_null="true" id="6"/>
