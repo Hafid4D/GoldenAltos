@@ -32,7 +32,101 @@
 	"destination": "detailScreen",
 	"pages": [
 		{
-			"objects": {}
+			"objects": {
+				"label_stepTemplate": {
+					"type": "text",
+					"top": 11,
+					"left": 12,
+					"width": 143,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Step Template",
+					"textAlign": "right",
+					"fontWeight": "normal"
+				},
+				"pup_stepTemplate": {
+					"type": "button",
+					"top": 8,
+					"left": 170,
+					"width": 240,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_stepTemplate.4dm",
+					"events": [
+						"onClick",
+						"onDisplayDetail"
+					],
+					"fontWeight": "normal",
+					"textAlign": "left"
+				},
+				"label_description": {
+					"type": "text",
+					"top": 38,
+					"left": 12,
+					"width": 143,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Description",
+					"textAlign": "right",
+					"fontWeight": "normal"
+				},
+				"entryField_description": {
+					"type": "input",
+					"top": 38,
+					"left": 170,
+					"width": 440,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.description",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "normal",
+					"textAlign": "left"
+				},
+				"label_alert": {
+					"type": "text",
+					"top": 65,
+					"left": 12,
+					"width": 143,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Alert",
+					"textAlign": "right",
+					"fontWeight": "normal"
+				},
+				"entryField_alert": {
+					"type": "input",
+					"top": 65,
+					"left": 170,
+					"width": 440,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.alert",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontWeight": "normal",
+					"textAlign": "left"
+				}
+			}
 		},
 		{
 			"objects": {}

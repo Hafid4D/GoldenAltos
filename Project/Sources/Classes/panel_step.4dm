@@ -20,6 +20,7 @@ Function formMethod()
 	Form:C1466.sfw.panelFormMethod()  // The main body of the form method and basic sfw functionalities
 	If (Form:C1466.sfw.updateOfPanelNeeded())  // The current item is changed or reloaded, so it's necessary to refresh
 		This:C1470.loadStepProperties()
+		This:C1470.drawPup_stepTemplate()
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  // A page is displayed so it's time to load the data sources
 		Case of 
@@ -39,6 +40,8 @@ Function formMethod()
 	// ----------------------------------------------
 Function redrawAndSetVisible()
 	// Adjusts the layout and visibility of form elements based on the current page and modification state to be implemented
+	This:C1470.drawPup_stepTemplate()
+	
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	Case of 
 		: (FORM Get current page:C276(*)=2)
@@ -56,6 +59,42 @@ Function redrawAndSetVisible()
 	End case 
 	
 	Form:C1466.sfw.drawHTab()
+	
+	
+Function drawPup_stepTemplate()
+	If ((Form:C1466.current_item#Null:C1517) & (FORM Get current page:C276(*)=1))
+		$stepTemplateName:=String:C10(Form:C1466.current_item.stepTemplate.name)
+		Form:C1466.sfw.drawButtonPup("pup_stepTemplate"; $stepTemplateName; ""; (Form:C1466.current_item.stepTemplate=Null:C1517))
+	End if 
+	
+	
+Function pup_stepTemplate()
+	If (Form:C1466.sfw.checkIsInModification())
+		$selector:=cs:C1710.sfw_definitionSelector.new("selectorStepTemplate"; "stepTemplate")
+		$selector.setTitle("Choose a Step Template")
+		$selector.setCurrentItem(Form:C1466.current_item.stepTemplate)
+		$selector.setOptions("noCutLink")
+		$selector.openSelector()
+		
+		Case of 
+			: ($selector.isSelected())
+				$itemSelected:=$selector.getCurrentItem()
+				
+				Case of 
+					: ($itemSelected=Null:C1517)
+					: (cs:C1710.sfw_string.me.isAnEmptyUUID($itemSelected.UUID)=False:C215)
+						Form:C1466.current_item.UUID_StepTemplate:=$itemSelected.UUID
+						If (cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_StepTemplate)=True:C214)
+							Form:C1466.current_item.UUID_StepTemplate:=16*"00"
+						End if 
+				End case 
+				
+			: ($selector.asCutTheLink())
+				Form:C1466.current_item.UUID_StepTemplate:=16*"00"
+		End case 
+	End if 
+	
+	This:C1470.drawPup_stepTemplate()
 	
 	
 Function loadStepProperties
