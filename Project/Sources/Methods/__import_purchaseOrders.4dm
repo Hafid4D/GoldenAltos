@@ -709,7 +709,7 @@ If (True:C214)
 						
 						$bin:=New object:C1471()
 						$bin.num:=$i+1
-						$bin.definition:=$step.bins.items[$i]
+						$bin.definition:=""
 						$bin.type:=""
 						
 						//If (Split string($step.bins.items[$i]; "\r"; sk trim spaces).join("\r")#"")

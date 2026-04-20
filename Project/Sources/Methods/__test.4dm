@@ -1,6 +1,10 @@
 //%attributes = {}
 
 
+
+$locations:=ds:C1482.Location.all().extract("name").distinct()
+
+
 ds:C1482.Step.all()
 $position:=-500
 $searchField:="description"

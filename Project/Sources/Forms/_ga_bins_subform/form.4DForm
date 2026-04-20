@@ -13,19 +13,9 @@
 	"bottomMargin": 0,
 	"events": [
 		"onLoad",
-		"onPageChange",
-		"onValidate",
 		"onClick",
-		"onDoubleClick",
-		"onOutsideCall",
-		"onBeginDragOver",
-		"onDragOver",
-		"onDrop",
-		"onAfterKeystroke",
-		"onMenuSelect",
-		"onPluginArea",
-		"onAfterEdit",
-		"onTimer",
+		"onDataChange",
+		"onResize",
 		"onBoundVariableChange"
 	],
 	"windowTitle": "window title",
@@ -38,7 +28,7 @@
 					"top": 0,
 					"left": 0,
 					"width": 464,
-					"height": 611,
+					"height": 615,
 					"fill": "#E6E6E6",
 					"stroke": "transparent",
 					"strokeWidth": 0
@@ -53,7 +43,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[0].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -61,8 +51,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num30": {
 					"type": "input",
@@ -70,7 +60,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[30].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -78,8 +68,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num29": {
 					"type": "input",
@@ -87,7 +77,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[29].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -95,8 +85,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num28": {
 					"type": "input",
@@ -104,7 +94,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[28].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -112,8 +102,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num27": {
 					"type": "input",
@@ -121,7 +111,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[27].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -129,8 +119,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num26": {
 					"type": "input",
@@ -138,7 +128,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[26].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -146,8 +136,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num25": {
 					"type": "input",
@@ -155,7 +145,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[25].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -163,8 +153,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num24": {
 					"type": "input",
@@ -172,7 +162,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[24].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -180,8 +170,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num23": {
 					"type": "input",
@@ -189,7 +179,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[23].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -197,8 +187,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num22": {
 					"type": "input",
@@ -206,7 +196,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[22].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -214,8 +204,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num21": {
 					"type": "input",
@@ -223,7 +213,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[21].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -231,8 +221,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num20": {
 					"type": "input",
@@ -240,7 +230,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[20].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -248,8 +238,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num19": {
 					"type": "input",
@@ -257,7 +247,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[19].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -265,8 +255,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num18": {
 					"type": "input",
@@ -274,7 +264,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[18].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -282,8 +272,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num17": {
 					"type": "input",
@@ -291,7 +281,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[17].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -299,8 +289,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num16": {
 					"type": "input",
@@ -308,7 +298,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[16].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -316,8 +306,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num15": {
 					"type": "input",
@@ -325,7 +315,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[15].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -333,8 +323,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num14": {
 					"type": "input",
@@ -342,7 +332,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[14].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -350,8 +340,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num13": {
 					"type": "input",
@@ -359,7 +349,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[13].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -367,8 +357,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num12": {
 					"type": "input",
@@ -376,7 +366,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[12].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -384,8 +374,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num11": {
 					"type": "input",
@@ -393,7 +383,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[11].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -401,8 +391,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num10": {
 					"type": "input",
@@ -410,7 +400,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[10].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -418,8 +408,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num9": {
 					"type": "input",
@@ -427,7 +417,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[9].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -435,8 +425,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num8": {
 					"type": "input",
@@ -444,7 +434,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[8].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -452,8 +442,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num7": {
 					"type": "input",
@@ -461,7 +451,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[7].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -469,8 +459,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num6": {
 					"type": "input",
@@ -478,7 +468,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[6].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -486,8 +476,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num5": {
 					"type": "input",
@@ -495,7 +485,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[5].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -503,8 +493,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num4": {
 					"type": "input",
@@ -512,7 +502,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[4].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -520,8 +510,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num3": {
 					"type": "input",
@@ -529,7 +519,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[3].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -537,8 +527,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num2": {
 					"type": "input",
@@ -546,7 +536,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[2].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -554,8 +544,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_num1": {
 					"type": "input",
@@ -563,7 +553,7 @@
 					"left": 5,
 					"width": 70,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].num",
+					"dataSource": "Form:C1466.bins[1].num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -571,8 +561,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition": {
 					"type": "input",
@@ -580,7 +570,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[0].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -588,8 +578,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty": {
 					"type": "input",
@@ -597,7 +587,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[0].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -605,25 +595,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
-				},
-				"entryField_definition1": {
-					"type": "input",
-					"top": 37,
-					"left": 78,
-					"width": 310,
-					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition2": {
 					"type": "input",
@@ -631,7 +604,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[30].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -639,8 +612,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition3": {
 					"type": "input",
@@ -648,7 +621,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[29].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -656,8 +629,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition4": {
 					"type": "input",
@@ -665,7 +638,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[28].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -673,8 +646,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition5": {
 					"type": "input",
@@ -682,7 +655,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[27].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -690,8 +663,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition6": {
 					"type": "input",
@@ -699,7 +672,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[26].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -707,8 +680,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition7": {
 					"type": "input",
@@ -716,7 +689,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[25].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -724,8 +697,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition8": {
 					"type": "input",
@@ -733,7 +706,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[24].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -741,8 +714,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition9": {
 					"type": "input",
@@ -750,7 +723,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[23].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -758,8 +731,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition10": {
 					"type": "input",
@@ -767,7 +740,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[22].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -775,8 +748,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition11": {
 					"type": "input",
@@ -784,7 +757,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[21].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -792,8 +765,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition12": {
 					"type": "input",
@@ -801,7 +774,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[20].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -809,8 +782,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition13": {
 					"type": "input",
@@ -818,7 +791,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[19].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -826,8 +799,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition14": {
 					"type": "input",
@@ -835,7 +808,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[18].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -843,8 +816,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition15": {
 					"type": "input",
@@ -852,7 +825,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[17].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -860,8 +833,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition16": {
 					"type": "input",
@@ -869,7 +842,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[16].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -877,8 +850,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition17": {
 					"type": "input",
@@ -886,7 +859,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[15].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -894,8 +867,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition18": {
 					"type": "input",
@@ -903,7 +876,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[14].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -911,8 +884,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition19": {
 					"type": "input",
@@ -920,7 +893,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[13].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -928,8 +901,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition20": {
 					"type": "input",
@@ -937,7 +910,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[12].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -945,8 +918,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition21": {
 					"type": "input",
@@ -954,7 +927,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[11].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -962,8 +935,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition22": {
 					"type": "input",
@@ -971,7 +944,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[10].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -979,8 +952,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition23": {
 					"type": "input",
@@ -988,7 +961,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[9].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -996,8 +969,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition24": {
 					"type": "input",
@@ -1005,7 +978,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[8].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1013,8 +986,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition25": {
 					"type": "input",
@@ -1022,7 +995,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[7].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1030,8 +1003,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition26": {
 					"type": "input",
@@ -1039,7 +1012,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[6].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1047,8 +1020,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition27": {
 					"type": "input",
@@ -1056,7 +1029,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[5].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1064,8 +1037,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition28": {
 					"type": "input",
@@ -1073,7 +1046,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[4].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1081,8 +1054,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition29": {
 					"type": "input",
@@ -1090,7 +1063,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[3].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1098,8 +1071,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition30": {
 					"type": "input",
@@ -1107,7 +1080,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[2].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1115,8 +1088,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_definition31": {
 					"type": "input",
@@ -1124,7 +1097,7 @@
 					"left": 78,
 					"width": 310,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].definition",
+					"dataSource": "Form:C1466.bins[1].definition",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1132,25 +1105,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
-				},
-				"entryField_qty1": {
-					"type": "input",
-					"top": 37,
-					"left": 391,
-					"width": 60,
-					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty2": {
 					"type": "input",
@@ -1158,7 +1114,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[30].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1166,8 +1122,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty3": {
 					"type": "input",
@@ -1175,7 +1131,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[29].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1183,8 +1139,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty4": {
 					"type": "input",
@@ -1192,7 +1148,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[28].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1200,8 +1156,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty5": {
 					"type": "input",
@@ -1209,7 +1165,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[27].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1217,8 +1173,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty6": {
 					"type": "input",
@@ -1226,7 +1182,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[26].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1234,8 +1190,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty7": {
 					"type": "input",
@@ -1243,7 +1199,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[25].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1251,8 +1207,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty8": {
 					"type": "input",
@@ -1260,7 +1216,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[24].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1268,8 +1224,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty9": {
 					"type": "input",
@@ -1277,7 +1233,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[23].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1285,8 +1241,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty10": {
 					"type": "input",
@@ -1294,7 +1250,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[22].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1302,8 +1258,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty11": {
 					"type": "input",
@@ -1311,7 +1267,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[21].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1319,8 +1275,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty12": {
 					"type": "input",
@@ -1328,7 +1284,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[20].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1336,8 +1292,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty13": {
 					"type": "input",
@@ -1345,7 +1301,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[19].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1353,8 +1309,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty14": {
 					"type": "input",
@@ -1362,7 +1318,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[18].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1370,8 +1326,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty15": {
 					"type": "input",
@@ -1379,7 +1335,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[17].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1387,8 +1343,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty16": {
 					"type": "input",
@@ -1396,7 +1352,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[16].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1404,8 +1360,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty17": {
 					"type": "input",
@@ -1413,7 +1369,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[15].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1421,8 +1377,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty18": {
 					"type": "input",
@@ -1430,7 +1386,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[14].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1438,8 +1394,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty19": {
 					"type": "input",
@@ -1447,7 +1403,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[13].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1455,8 +1411,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty20": {
 					"type": "input",
@@ -1464,7 +1420,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[12].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1472,8 +1428,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty21": {
 					"type": "input",
@@ -1481,7 +1437,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[11].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1489,8 +1445,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty22": {
 					"type": "input",
@@ -1498,7 +1454,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[10].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1506,8 +1462,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty23": {
 					"type": "input",
@@ -1515,7 +1471,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[9].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1523,8 +1479,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty24": {
 					"type": "input",
@@ -1532,7 +1488,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[8].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1540,8 +1496,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty25": {
 					"type": "input",
@@ -1549,7 +1505,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[7].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1557,8 +1513,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty26": {
 					"type": "input",
@@ -1566,7 +1522,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[6].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1574,8 +1530,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty27": {
 					"type": "input",
@@ -1583,7 +1539,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[5].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1591,8 +1547,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty28": {
 					"type": "input",
@@ -1600,7 +1556,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[4].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1608,8 +1564,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty29": {
 					"type": "input",
@@ -1617,7 +1573,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[3].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1625,8 +1581,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty30": {
 					"type": "input",
@@ -1634,7 +1590,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[2].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1642,8 +1598,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"entryField_qty31": {
 					"type": "input",
@@ -1651,7 +1607,7 @@
 					"left": 391,
 					"width": 60,
 					"height": 12,
-					"dataSource": "Form:C1466.currentStep.bins[0].value",
+					"dataSource": "Form:C1466.bins[1].value",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1659,8 +1615,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"fill": "transparent",
-					"borderStyle": "raised"
+					"fill": "automatic",
+					"borderStyle": "none"
 				},
 				"header_bkgd5": {
 					"type": "rectangle",
@@ -1699,112 +1655,98 @@
 					"textPlacement": "right",
 					"method": "ObjectMethods/bActionBins.4dm",
 					"visibility": "visible"
+				},
+				"entryField_num31": {
+					"type": "input",
+					"top": 595,
+					"left": 5,
+					"width": 70,
+					"height": 12,
+					"dataSource": "Form:C1466.bins[31].num",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "automatic",
+					"borderStyle": "none"
+				},
+				"entryField_definition32": {
+					"type": "input",
+					"top": 595,
+					"left": 78,
+					"width": 310,
+					"height": 12,
+					"dataSource": "Form:C1466.bins[31].definition",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "automatic",
+					"borderStyle": "none"
+				},
+				"entryField_qty32": {
+					"type": "input",
+					"top": 595,
+					"left": 391,
+					"width": 60,
+					"height": 12,
+					"dataSource": "Form:C1466.bins[31].value",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "automatic",
+					"borderStyle": "none"
 				}
-			}
+			},
+			"entryOrder": [
+				"entryField_qty",
+				"entryField_qty31",
+				"entryField_qty30",
+				"entryField_qty29",
+				"entryField_qty28",
+				"entryField_qty27",
+				"entryField_qty26",
+				"entryField_qty25",
+				"entryField_qty24",
+				"entryField_qty23",
+				"entryField_qty22",
+				"entryField_qty21",
+				"entryField_qty20",
+				"entryField_qty19",
+				"entryField_qty18",
+				"entryField_qty17",
+				"entryField_qty16",
+				"entryField_qty15",
+				"entryField_qty14",
+				"entryField_qty13",
+				"entryField_qty12",
+				"entryField_qty11",
+				"entryField_qty10",
+				"entryField_qty9",
+				"entryField_qty8",
+				"entryField_qty7",
+				"entryField_qty6",
+				"entryField_qty5",
+				"entryField_qty4",
+				"entryField_qty3",
+				"entryField_qty2",
+				"entryField_qty32"
+			]
 		}
 	],
-	"geometryStamp": 54,
+	"geometryStamp": 71,
 	"method": "method.4dm",
 	"editor": {
-		"groups": {
-			"Group": [
-				"entryField_num",
-				"entryField_num30",
-				"entryField_num29",
-				"entryField_num28",
-				"entryField_num27",
-				"entryField_num26",
-				"entryField_num25",
-				"entryField_num24",
-				"entryField_num23",
-				"entryField_num22",
-				"entryField_num21",
-				"entryField_num20",
-				"entryField_num19",
-				"entryField_num18",
-				"entryField_num17",
-				"entryField_num16",
-				"entryField_num15",
-				"entryField_num14",
-				"entryField_num13",
-				"entryField_num12",
-				"entryField_num11",
-				"entryField_num10",
-				"entryField_num9",
-				"entryField_num8",
-				"entryField_num7",
-				"entryField_num6",
-				"entryField_num5",
-				"entryField_num4",
-				"entryField_num3",
-				"entryField_num2",
-				"entryField_num1",
-				"entryField_definition",
-				"entryField_qty",
-				"entryField_definition1",
-				"entryField_definition2",
-				"entryField_definition3",
-				"entryField_definition4",
-				"entryField_definition5",
-				"entryField_definition6",
-				"entryField_definition7",
-				"entryField_definition8",
-				"entryField_definition9",
-				"entryField_definition10",
-				"entryField_definition11",
-				"entryField_definition12",
-				"entryField_definition13",
-				"entryField_definition14",
-				"entryField_definition15",
-				"entryField_definition16",
-				"entryField_definition17",
-				"entryField_definition18",
-				"entryField_definition19",
-				"entryField_definition20",
-				"entryField_definition21",
-				"entryField_definition22",
-				"entryField_definition23",
-				"entryField_definition24",
-				"entryField_definition25",
-				"entryField_definition26",
-				"entryField_definition27",
-				"entryField_definition28",
-				"entryField_definition29",
-				"entryField_definition30",
-				"entryField_definition31",
-				"entryField_qty1",
-				"entryField_qty2",
-				"entryField_qty3",
-				"entryField_qty4",
-				"entryField_qty5",
-				"entryField_qty6",
-				"entryField_qty7",
-				"entryField_qty8",
-				"entryField_qty9",
-				"entryField_qty10",
-				"entryField_qty11",
-				"entryField_qty12",
-				"entryField_qty13",
-				"entryField_qty14",
-				"entryField_qty15",
-				"entryField_qty16",
-				"entryField_qty17",
-				"entryField_qty18",
-				"entryField_qty19",
-				"entryField_qty20",
-				"entryField_qty21",
-				"entryField_qty22",
-				"entryField_qty23",
-				"entryField_qty24",
-				"entryField_qty25",
-				"entryField_qty26",
-				"entryField_qty27",
-				"entryField_qty28",
-				"entryField_qty29",
-				"entryField_qty30",
-				"entryField_qty31"
-			]
-		},
 		"activeView": "View 1",
 		"defaultView": "View 1",
 		"views": {

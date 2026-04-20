@@ -1,49 +1,16 @@
 
 
-//Case of 
-
-//: (Form event code=On Load)
-
-//Form.listbox:=New collection(New object("nom"; "Alice"; "age"; 30); New object("nom"; "Bob"; "age"; 25); \
-New object("nom"; "Medard"; "age"; 29); New object("nom"; "Angele"; "age"; 26))
-
-
-//$listboxName:="listbox"
-//cs.Util_DynamicListBox.me.deleteAllColumns($listboxName)
-
-//$colSettings:=New collection(\
-New object("field"; "nom"; "title"; "User Name"; "minWidth"; 150; "maxWidth"; 250); \
-New object("field"; "age"; "title"; "User Age"; "minWidth"; 150; "maxWidth"; 250)\
-)
-//cs.Util_DynamicListBox.me.insertColumns($listboxName; $colSettings)
-
-////$colSettings:=New object("field"; "nom"; "title"; "User Name"; "minWidth"; 150; "maxWidth"; 250)
-////cs.Util_ListBox.me.insertColumn($listboxName; $colSettings)
-
-////$colSettings:=New object("field"; "age"; "title"; "User Age"; "minWidth"; 150; "maxWidth"; 250)
-////cs.Util_ListBox.me.insertColumn($listboxName; $colSettings)
-
-//////OBJECT SET DATA SOURCE(*; "listbox"; ->Form.maCollection)
-////var HeaderVarName; $Last : Integer
-////$last:=LISTBOX Get number of columns(*; "listbox")+1
-
-//////First column
-////$colFormula:="This.nom"
-////LISTBOX INSERT COLUMN FORMULA(*; "listbox"; $last; "col_test"; "This.nom"; Is text; "HeaderName"; HeaderVarName)
-////OBJECT SET TITLE(*; "HeaderName"; "Test Header")
-////LISTBOX SET COLUMN WIDTH(*; "listbox"; 100; 200)
-////OBJECT SET FONT STYLE(*; "HeaderName"; Bold)
-
-////// Boucle ou série d'insertions pour vos colonnes dynamiques
-////LISTBOX INSERT COLUMN FORMULA(*; "LB_Generique"; 1; "Col1"; "This.id"; Is longint; "H1"; ->[])
-////OBJECT SET TITLE(*; "H1"; "ID")
-////OBJECT SET WIDTH(*; "Col1"; 50)
-
-////LISTBOX INSERT COLUMN FORMULA(*; "LB_Generique"; 2; "Col2"; "This.libelle"; Is text; "H2"; ->[])
-////OBJECT SET TITLE(*; "H2"; "Désignation")
-////OBJECT SET WIDTH(*; "Col2"; 250)
-
-//Else 
-
-//End case 
+Case of 
+	: (Form event code:C388=On Load:K2:1)
+		Form.paths:=New collection("ASSY OSS RACK/IQC/B1"; "ASSY OSS RACK/IQC/B10"; "ASSY OSS RACK/IQC/B15"; "ASSY OSS RACK/IQC/B16"; "ASSY OSS RACK/IQC/B20"; "ASSY OSS RACK/IQC/B7"; "ASSY OSS RACK/IQC/B8"; "ASSY OSS RACK/IQC/B9"; "BACKEND/IQC/B16"; "BACKEND/IQC/B20"; "Line/IQC/B1"; "Line/IQC/B10"; "Line/IQC/B11"; "Line/IQC/B12"; "Line/IQC/B15"; "Line/IQC/B16"; "Line/IQC/B19"; "Line/IQC/B20"; "Line/IQC/B5"; "Line/IQC/B7"; "Line/IQC/B8"; "WareHouse/ASSY OSS RACK"; "WareHouse/BACKEND"; "WareHouse/CBNT2/BIN 16"; "WareHouse/CBNT 3"; "WareHouse/CBNT1"; "WareHouse/CBNT1/B1"; "WareHouse/CBNT1/B10"; "WareHouse/CBNT1/B2"; "WareHouse/CBNT1/B3"; "WareHouse/CBNT1/B4"; "WareHouse/CBNT1/B5"; "WareHouse/CBNT1/B6"; "WareHouse/CBNT1/B7"; "WareHouse/CBNT1/B8"; "WareHouse/CBNT1/B9"; "WareHouse/CBNT10"; "WareHouse/CBNT11"; "WareHouse/CBNT12"; "WareHouse/CBNT2/B11"; "WareHouse/CBNT2/B12"; "WareHouse/CBNT2/B13"; "WareHouse/CBNT2/B14"; "WareHouse/CBNT2/B15"; "WareHouse/CBNT2/B16"; "WareHouse/CBNT2/B17"; "WareHouse/CBNT2/B18"; "WareHouse/CBNT2/B19"; "WareHouse/CBNT3/B21"; "WareHouse/CBNT4"; "WareHouse/DESICCATOR"; "WareHouse/Engineering"; "WareHouse/FOL-CABINET/75"; "WareHouse/FOL-CABINET/76"; "WareHouse/FOL-CABINET/77"; "WareHouse/FOL-CABINET/79"; "WareHouse/Freezer/1 (FOL)"; "WareHouse/Freezer/2"; "WareHouse/Inventory/CBNT 12/ROW A"; "WareHouse/Inventory/CBNT 12/ROW B"; "WareHouse/Inventory/CBNT 12/ROW C"; "WareHouse/Inventory/CBNT 12/ROW D"; "WareHouse/Inventory/CBNT 13/ROW A"; "WareHouse/Inventory/CBNT 13/ROW B"; "WareHouse/Inventory/CBNT 13/ROW C"; "WareHouse/Inventory/CBNT 13/ROW D"; "WareHouse/Inventory/CBNT 13/ROW E"; "WareHouse/Inventory/CBNT 14/ROW A"; "WareHouse/Inventory/CBNT 14/ROW C"; "WareHouse/Inventory/CBNT 14/ROW D"; "WareHouse/Inventory/CBNT 4/ROW A"; "WareHouse/Inventory/CBNT 4/ROW B"; "WareHouse/Inventory/CBNT 4/ROW C"; "WareHouse/Inventory/CBNT 4/ROW D"; "WareHouse/Inventory/CBNT 4/ROW E"; "WareHouse/Inventory/CBNT 5/ROW A"; "WareHouse/Inventory/CBNT 5/ROW B"; "WareHouse/Inventory/CBNT 5/ROW C"; "WareHouse/Inventory/CBNT 5/ROW D"; "WareHouse/Inventory/CBNT 6/ROW A"; "WareHouse/Inventory/CBNT 6/ROW B"; "WareHouse/Inventory/CBNT 6/ROW C"; "WareHouse/Inventory/CBNT 6/ROW D"; "WareHouse/Inventory/CBNT 6/ROW E"; "WareHouse/Inventory/CBNT 8/ROW A"; "WareHouse/Inventory/CBNT 8/ROW B"; "WareHouse/Inventory/CBNT 8/ROW C"; "WareHouse/Inventory/CBNT 8/ROW D"; "WareHouse/Inventory/CBNT 8/ROW E"; "WareHouse/Inventory/Milpitas"; "WareHouse/Inventory/OQC Rack"; "WareHouse/Inventory/Roller"; "WareHouse/Inventory/Shelve A"; "WareHouse/Inventory/Shelve B"; "WareHouse/Inventory/Shelve C"; "WareHouse/Inventory/Shelve E"; "WareHouse/Inventory/Shelve J"; "WareHouse/Inventory/Desiccator/Bank 22"; "WareHouse/Inventory/Desiccator/Bank 23"; "WareHouse/Inventory/Desiccator/Bank 24"; "WareHouse/Inventory/Desiccator/Bank 25"; "WareHouse/Inventory/Desiccator/Bank 26"; "WareHouse/LAB"; "WareHouse/LAB OSS RACK"; "WareHouse/Line"; "WareHouse/Vault/1"; "WareHouse/Vault/2")
+		Form.sel1:=""
+		Form.sel2:=""
+		Form.sel3:=""
+		Form.sel4:=""
+		Form.selectedPath:=""
+		OBJECT SET TITLE:C194(*; "pup_level1"; "Choisir emplacement")
+		OBJECT SET VISIBLE:C603(*; "pup_level2"; False:C215)
+		OBJECT SET VISIBLE:C603(*; "pup_level3"; False:C215)
+		OBJECT SET VISIBLE:C603(*; "pup_level4"; False:C215)
+End case 
 

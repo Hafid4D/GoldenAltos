@@ -10,7 +10,7 @@ Function formMethod()
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
-		This:C1470.loadBins()
+		//This.loadBins()
 		This:C1470.loadCurrentStep()
 		This:C1470.displayBannerLotOnHold()
 		
@@ -38,6 +38,12 @@ Function pup_XXX()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
+	If (Form:C1466.subFormBins=Null:C1517)
+		Form:C1466.subFormBins:=New object:C1471
+	End if 
+	// Trigger subform On Bound Variable Change when mode changes.
+	Form:C1466.subFormBins.mode:=Form:C1466.situation.mode
+	
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	
 	Case of 
@@ -86,6 +92,8 @@ Function redrawAndSetVisible()
 	OBJECT SET ENABLED:C1123(*; "entryField_approvalDate"; False:C215)
 	OBJECT SET ENABLED:C1123(*; "entryField_approver"; False:C215)
 	
+	This:C1470.loadBins()
+	
 	
 Function loadCurrentStep()
 	Form:C1466.currentStep:=Null:C1517
@@ -127,6 +135,12 @@ Function loadBins()
 	Else 
 		Form:C1466.lb_bins:=New collection:C1472()
 	End if 
+	Form:C1466.subFormBins:=New object:C1471
+	
+	Form:C1466.subFormBins.bins:=Form:C1466.lb_bins
+	Form:C1466.subFormBins.situation:=Form:C1466.situation
+	Form:C1466.subFormBins:=Form:C1466.subFormBins
+	
 	
 Function bActionBins()
 	If (Form:C1466.currentBin=Null:C1517)
