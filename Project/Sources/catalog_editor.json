@@ -1639,12 +1639,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3747.7136230469,
-				"top": 654,
-				"width": 87.017578125,
-				"height": 83.33203125
+				"left": 3707.7136230469,
+				"top": 729,
+				"width": 111.017578125,
+				"height": 140.33203125
 			},
-			"displayable_fields_count": 2
+			"displayable_fields_count": 4
 		},
 		"BuyingOrder": {
 			"color": {

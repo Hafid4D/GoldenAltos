@@ -8,7 +8,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry:=cs:C1710.sfw_definitionEntry.new("Step"; ["housekeeping"]; "Step"; "Steps")
 	$entry.setDataclass("Step")
 	$entry.setDisplayOrder(-200)
-	$entry.setIcon("image/entry/Step-white-50x50.png")
+	$entry.setIcon("image/entry/step-white-50x50.png")
 	
 	$entry.setSearchboxField("description")
 	
