@@ -1441,6 +1441,7 @@
 		<field name="UUID" uuid="9611B9D925D54FF6A5F4F5B6D3F11A0E" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="binLocationPath" uuid="D41AA708EEBC4ABCB41C3C16671126A1" type="10" limiting_length="255" never_null="true" id="2"/>
 		<field name="isEmpty" uuid="CA1EE3EA063F4AE88EF079A3FCA9863C" type="1" never_null="true" id="3"/>
+		<field name="moreData" uuid="E2DCC68B00A44A80A7F976AEDB548DF6" type="21" blob_switch_size="2147483647" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="9611B9D925D54FF6A5F4F5B6D3F11A0E"/>
 	</table>
 	<table name="Customer" uuid="96D1CE81460A4F75B3F4275138C8F778" id="114">

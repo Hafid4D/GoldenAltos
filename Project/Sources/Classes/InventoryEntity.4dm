@@ -14,6 +14,27 @@ Function refreshDateIn_d()
 	
 	
 	
+local Function afterSave()
+	// Auto-recalculate isEmpty on the linked Bin whenever this Inventory is saved (create or update)
+	If (This:C1470.UUID_Location#"")
+		$bin:=ds:C1482.Bin.query("UUID = :1"; This:C1470.UUID_Location).first()
+		If ($bin#Null:C1517)
+			$hasStock:=($bin.inventories.query("qtyInStock > :1"; 0).length>0)
+			$newIsEmpty:=Not:C34($hasStock)
+			If ($newIsEmpty#$bin.isEmpty)
+				$bin.isEmpty:=$newIsEmpty
+				$bin.save()
+			End if 
+			// Invalidate bin cache so the picker reflects new occupancy status immediately
+			If (Storage:C1525.cache#Null:C1517)
+				Use (Storage:C1525.cache)
+					Storage:C1525.cache.bins:=Null:C1517
+				End use 
+			End if 
+		End if 
+	End if 
+
+
 local Function loadAfterCreation()
 	// This callback is called after creating the new item but before displaying the panel.
 	This:C1470.inventoryID:=ds:C1482.Inventory.all().max("inventoryID")+1

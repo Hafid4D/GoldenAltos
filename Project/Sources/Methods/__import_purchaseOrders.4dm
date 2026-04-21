@@ -759,6 +759,11 @@ fix lotParent for some lots
 End if 
 
 /**
+import archived Jobs
+**/
+__import_data_archivedJobs
+
+/**
 import inventories
 **/
 If (True:C214)
@@ -841,10 +846,12 @@ If (True:C214)
 		$formula:=Formula:C1597(Replace string:C233(Replace string:C233(This:C1470.binLocationPath; "/"; " "); " "; "")=Replace string:C233($record.binLocation; " "; ""))
 		$bin:=ds:C1482.Bin.query($formula)
 		If ($bin.length>0)
-			$inventory_e.UUID_Location:=$bin[0].UUID
+			var $bin_e : cs:C1710.BinEntity
+			$bin_e:=$bin[0]
+			$inventory_e.UUID_Location:=$bin_e.UUID
 			
-			$bin[0].isEmpty:=False:C215
-			$res:=$bin[0].save()
+			$bin_e.isEmpty:=False:C215
+			$res:=$bin_e.save()
 			If (Not:C34($res.success))
 				TRACE:C157
 			End if 
@@ -939,6 +946,7 @@ If (True:C214)
 	End for each 
 	
 End if 
+_ga_updateBinIsEmpty
 
 
 /**

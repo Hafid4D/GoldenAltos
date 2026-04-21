@@ -307,7 +307,7 @@ Function _entries_definition()
 	
 	$entry:=cs:C1710.sfw_definitionEntry.new("receiver"; ["customerService"]; "Receiver")
 	$entry.setDataclass("Lot")
-	$entry.setDisplayOrder(-300)
+	$entry.setDisplayOrder(-400)
 	$entry.setIcon("image/entry/receiver-50x50.png")
 	
 	$entry.setSearchboxField("lotNumber")

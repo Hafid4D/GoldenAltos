@@ -99,6 +99,25 @@
 					"sizingY": "move",
 					"stroke": "#C8C8C8"
 				},
+				"btn_createSublevel": {
+					"type": "button",
+					"text": "",
+					"top": 428,
+					"left": 4,
+					"width": 32,
+					"height": 32,
+					"sizingX": "fixed",
+					"sizingY": "move",
+					"style": "custom",
+					"events": [
+						"onClick"
+					],
+					"icon": "/RESOURCES/image/button/add-24x24.png",
+					"iconFrames": 1,
+					"focusable": false,
+					"visibility": "hidden",
+					"method": "ObjectMethods/btn_createSublevel.4dm"
+				},
 				"b_cancel": {
 					"type": "button",
 					"top": 428,

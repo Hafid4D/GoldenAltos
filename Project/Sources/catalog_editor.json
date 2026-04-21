@@ -795,14 +795,14 @@
 		},
 		"Bin": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 168,
+				"green": 206,
+				"blue": 226,
+				"alpha": 255
 			},
 			"coordinates": {
 				"left": 899.71362304688,
-				"top": 1825,
+				"top": 1827,
 				"width": 154.017578125,
 				"height": 147.33203125
 			},

@@ -817,7 +817,7 @@
 					"left": 133,
 					"width": 230,
 					"height": 23,
-					"text": "Location",
+					"text": "Select Location",
 					"events": [
 						"onClick"
 					],
