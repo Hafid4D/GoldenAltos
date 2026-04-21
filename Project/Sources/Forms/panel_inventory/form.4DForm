@@ -13,20 +13,20 @@
 	"bottomMargin": 0,
 	"events": [
 		"onLoad",
-		"onPageChange",
 		"onValidate",
 		"onClick",
-		"onDoubleClick",
 		"onOutsideCall",
-		"onBeginDragOver",
-		"onDragOver",
+		"onActivate",
+		"onDoubleClick",
 		"onDrop",
-		"onAfterKeystroke",
 		"onMenuSelect",
 		"onPluginArea",
-		"onAfterEdit",
+		"onDragOver",
 		"onTimer",
-		"onBoundVariableChange"
+		"onAfterKeystroke",
+		"onBeginDragOver",
+		"onBoundVariableChange",
+		"onPageChange"
 	],
 	"windowTitle": "window title",
 	"destination": "detailScreen",
@@ -344,27 +344,6 @@
 					"stroke": "#808080",
 					"text": "Location"
 				},
-				"entryField_location": {
-					"type": "input",
-					"top": 156,
-					"left": 133,
-					"width": 230,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.location",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"sizingX": "grow",
-					"dataSourceTypeHint": "text",
-					"textAlign": "left",
-					"method": "ObjectMethods/entryField_location.4dm"
-				},
 				"label_0_6": {
 					"type": "text",
 					"top": 182,
@@ -481,21 +460,6 @@
 					"sizingX": "grow",
 					"dataSourceTypeHint": "number",
 					"textAlign": "left"
-				},
-				"dp_locations": {
-					"type": "button",
-					"text": "",
-					"top": 157,
-					"left": 346,
-					"width": 17,
-					"height": 15,
-					"events": [
-						"onClick",
-						"onMouseMove"
-					],
-					"style": "custom",
-					"popupPlacement": "linked",
-					"method": "ObjectMethods/dp_locations.4dm"
 				},
 				"dp_units": {
 					"type": "button",
@@ -846,6 +810,21 @@
 					],
 					"dataSourceTypeHint": "boolean",
 					"dataSource": "Form:C1466.current_item.IQA_required"
+				},
+				"pup_binLocation": {
+					"type": "button",
+					"top": 153,
+					"left": 133,
+					"width": 230,
+					"height": 23,
+					"text": "Location",
+					"events": [
+						"onClick"
+					],
+					"style": "bevel",
+					"method": "ObjectMethods/pup_binLocation.4dm",
+					"textPlacement": "center",
+					"popupPlacement": "linked"
 				}
 			}
 		},
@@ -1031,7 +1010,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1033,
+	"geometryStamp": 1043,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

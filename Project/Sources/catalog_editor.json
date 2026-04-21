@@ -793,6 +793,21 @@
 				}
 			}
 		},
+		"Bin": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 899.71362304688,
+				"top": 1825,
+				"width": 154.017578125,
+				"height": 147.33203125
+			},
+			"displayable_fields_count": 5
+		},
 		"StepProperty": {
 			"color": {
 				"red": 181,
@@ -1639,8 +1654,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 3707.7136230469,
-				"top": 729,
+				"left": 1200.7136230469,
+				"top": 1709,
 				"width": 111.017578125,
 				"height": 140.33203125
 			},
@@ -2596,6 +2611,14 @@
 		}
 	},
 	"relations": {
+		"186BE09E21AF4F4BAA5DA11DC36BD83F": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"07FC888CCCFB4C7B921879D9681A2155": {
 			"color": {
 				"red": 240,

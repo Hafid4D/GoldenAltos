@@ -2,6 +2,10 @@
 
 
 
+$record:="ASSY OSS RACK IQC B1"
+$formula:=Formula:C1597(Replace string:C233(This:C1470.binLocationPath; "/"; " ")=$record)
+$bin:=ds:C1482.Bin.query($formula)
+
 $locations:=ds:C1482.Location.all().extract("name").distinct()
 
 

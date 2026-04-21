@@ -21,29 +21,24 @@ Function formMethod()
 	End if 
 	
 	
-Function drawPup_XXX()
-	//This function updates the dropdown by displaying the name
-	Form:C1466.sfw.drawButtonPup("pup_xxx"; $xxxName; "xxxx.png"; (Form:C1466.current_item.xxxx=Null:C1517))
-	
-	
-Function pup_XXX()
-	//Create pop up menu
-	If (Form:C1466.sfw.checkIsInModification())
-	End if 
-	This:C1470.drawPup_XXX()
-	
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
-	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="Inventory Pulls ("+String:C10(Form:C1466.lb_pulls.length)+")"
 	End use 
-	Form:C1466.sfw.drawHTab()
+	
+	This:C1470.drawPup_customer()
+	This:C1470.drawPup_status_IQA()
+	This:C1470.drawPup_staff()
+	This:C1470.drawPup_binLocation()
+	
 	
 	OBJECT SET ENABLED:C1123(*; "dp_locations"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET ENABLED:C1123(*; "dp_units"; Form:C1466.sfw.checkIsInModification())
 	
+	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	Case of 
 		: (FORM Get current page:C276(*)=2)  // po lines
 			OBJECT GET COORDINATES:C663(*; "rec_bkgd_2"; $left; $top; $right; $bottom)
@@ -66,9 +61,10 @@ Function redrawAndSetVisible()
 	OBJECT SET VISIBLE:C603(*; "entryField_vendor"; (Form:C1466.current_item.customerSpecific))
 	OBJECT SET VISIBLE:C603(*; "pup_customer"; Not:C34(Form:C1466.current_item.customerSpecific))
 	
-	This:C1470.drawPup_customer()
-	This:C1470.drawPup_status_IQA()
-	This:C1470.drawPup_staff()
+	
+	Form:C1466.sfw.drawHTab()
+	
+	
 	
 Function loadAllTabs()
 	This:C1470.loadInventoryPulls()
@@ -383,3 +379,189 @@ Function btnOpenCustomer()
 	If ($entity#Null:C1517)
 		Form:C1466.sfw.openInANewWindow($entity; "customerService"; "customer")
 	End if 
+	
+	
+Function drawPup_binLocation()
+	If (Form:C1466.current_item#Null:C1517)
+		$binLocation:=ds:C1482.Bin.query("UUID= :1"; Form:C1466.current_item.UUID_Location).first() || New object:C1471()
+		$locationName:=$binLocation.binLocationPath
+		If ($locationName=Null:C1517)
+			$locationName:=""
+		End if 
+		$color:=""  //cs.sfw_htmlColor.me.getName($binLocation.color)
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_binLocation"; $locationName; $pathIcon; ($binLocation=Null:C1517))
+	End if 
+	
+Function pup_binLocation()
+	
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		var $value; $choice; $currentPath; $param; $candidate : Text
+		var $depth; $i; $idx : Integer
+		var $left; $top; $right; $bottom; $menuX; $menuY : Integer
+		var $wLeft; $wTop; $wRight; $wBottom; $btnWidth : Integer
+		var $stop; $isTerm : Boolean
+		var $parts; $options; $partsChoice; $terminalFlags; $opts : Collection
+		var $params : Object
+		var $winRef : Integer
+		
+		If (Form:C1466.current_item.UUID_Location#"") & (Form:C1466.current_item.UUID_Location#String:C10("00"*16))
+			$currentPath:=Form:C1466.current_item.bin.binLocationPath
+		Else 
+			$currentPath:=""
+		End if 
+		
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.bins=Null:C1517)
+			ds:C1482.Bin.cacheLoad()
+		End if 
+		
+		If ($currentPath#"")
+			$isTerm:=True:C214
+			For each ($bin; Storage:C1525.cache.bins) Until (Not:C34($isTerm))
+				If (Length:C16($bin.binLocationPath)>=(Length:C16($currentPath)+2))
+					If (Substring:C12($bin.binLocationPath; 1; Length:C16($currentPath)+1)=($currentPath+"/"))
+						$isTerm:=False:C215
+					End if 
+				End if 
+			End for each 
+			If ($isTerm)
+				$partsChoice:=Split string:C1554($currentPath; "/")
+				$currentPath:=""
+				For ($i; 0; $partsChoice.length-2)
+					If ($currentPath="")
+						$currentPath:=$partsChoice[$i]
+					Else 
+						$currentPath:=$currentPath+"/"+$partsChoice[$i]
+					End if 
+				End for 
+			End if 
+		End if 
+		
+		$stop:=False:C215
+		OBJECT GET COORDINATES:C663(*; "pup_binLocation"; $left; $top; $right; $bottom)
+		CONVERT COORDINATES:C1365($left; $bottom; XY Current form:K27:5; XY Main window:K27:8)
+		$menuX:=$left
+		$menuY:=$bottom+30
+		
+		Repeat 
+			$parts:=New collection:C1472
+			If ($currentPath#"")
+				$parts:=Split string:C1554($currentPath; "/")
+			End if 
+			$depth:=$parts.length
+			
+			$options:=New collection:C1472
+			For each ($bin; Storage:C1525.cache.bins)
+				$partsChoice:=Split string:C1554($bin.binLocationPath; "/")
+				If ($partsChoice.length>$depth)
+					$param:=""
+					For ($i; 0; $depth-1)
+						If ($partsChoice[$i]#$parts[$i])
+							$param:="noMatch"
+							$i:=$depth
+						End if 
+					End for 
+					If ($param#"noMatch")
+						$value:=$partsChoice[$depth]
+						If ($options.indexOf($value)=-1)
+							$options.push($value)
+						End if 
+					End if 
+				End if 
+			End for each 
+			
+			$terminalFlags:=New collection:C1472
+			For each ($value; $options)
+				If ($currentPath="")
+					$candidate:=$value
+				Else 
+					$candidate:=$currentPath+"/"+$value
+				End if 
+				$isTerm:=True:C214
+				For each ($bin; Storage:C1525.cache.bins) Until (Not:C34($isTerm))
+					If (Length:C16($bin.binLocationPath)>=(Length:C16($candidate)+2))
+						If (Substring:C12($bin.binLocationPath; 1; Length:C16($candidate)+1)=($candidate+"/"))
+							$isTerm:=False:C215
+						End if 
+					End if 
+				End for each 
+				$terminalFlags.push($isTerm)
+			End for each 
+			
+			$opts:=New collection:C1472
+			$idx:=0
+			For each ($value; $options)
+				If ($terminalFlags[$idx])
+					$opts.push(New object:C1471("label"; $value; "value"; "selectFinal|"+$value; "kind"; "green"))
+				Else 
+					$opts.push(New object:C1471("label"; $value; "value"; "select|"+$value; "kind"; "blue"))
+				End if 
+				$idx:=$idx+1
+			End for each 
+			
+			If ($depth>0)
+				//$opts.push(New object("label"; "--------------------"; "value"; ""; "kind"; "separator"))
+				$opts.push(New object:C1471("label"; "<"; "value"; "back"))
+				$opts.push(New object:C1471("label"; "<<"; "value"; "backToRoot"))
+			End if 
+			
+			$params:=New object:C1471("options"; $opts; "choice"; ""; "width"; $btnWidth)
+			$winRef:=Open form window:C675("_popup_binLocation"; Movable form dialog box:K39:8; $menuX; $menuY)
+			SET WINDOW TITLE:C213("Select a Location"; $winRef)
+			DIALOG:C40("_popup_binLocation"; $params)
+			CLOSE WINDOW:C154($winRef)
+			
+			If (ok=1)
+				$choice:=$params.choice
+			Else 
+				$choice:=""
+			End if 
+			
+			If ($choice="")
+				$stop:=True:C214
+			Else 
+				Case of 
+					: ($choice="back")
+						$partsChoice:=Split string:C1554($currentPath; "/")
+						$currentPath:=""
+						For ($i; 0; $partsChoice.length-2)
+							If ($currentPath="")
+								$currentPath:=$partsChoice[$i]
+							Else 
+								$currentPath:=$currentPath+"/"+$partsChoice[$i]
+							End if 
+						End for 
+					: ($choice="backToRoot")
+						$currentPath:=""
+					: ($choice="finish")
+						$stop:=True:C214
+					Else 
+						$partsChoice:=Split string:C1554($choice; "|")
+						If ($partsChoice.length>1)
+							If (($partsChoice[0]="select") | ($partsChoice[0]="selectFinal"))
+								If ($currentPath="")
+									$currentPath:=$partsChoice[1]
+								Else 
+									$currentPath:=$currentPath+"/"+$partsChoice[1]
+								End if 
+								If ($partsChoice[0]="selectFinal")
+									$stop:=True:C214
+								End if 
+							End if 
+						End if 
+				End case 
+			End if 
+		Until ($stop)
+		
+		If ($currentPath#"")
+			Form:C1466.selectedBins:=Storage:C1525.cache.bins.query("binLocationPath = :1"; $currentPath)
+			If (Form:C1466.selectedBins#Null:C1517)
+				Form:C1466.current_item.UUID_Location:=Form:C1466.selectedBins.first().UUID
+				This:C1470._activate_save_cancel_button()
+			End if 
+			
+		End if 
+		
+	End if 
+	This:C1470.drawPup_binLocation()

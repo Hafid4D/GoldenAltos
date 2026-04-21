@@ -1,8 +1,8 @@
-var $path; $value; $choice; $currentPath; $newName; $param : Text
-var $depth; $i; $bIndex; $bValue : Integer
+var $path; $value; $choice; $currentPath; $newName; $param; $candidate; $prefix : Text
+var $depth; $i; $bIndex; $bValue; $idx : Integer
 var $left; $top; $right; $bottom; $menuX; $menuY : Integer
-var $stop; $isTerminalB; $hasBChildren; $isCurrentPathExisting : Boolean
-var $parts; $options; $partsChoice : Collection
+var $stop; $isTerminalB; $hasBChildren; $isCurrentPathExisting; $isTerm : Boolean
+var $parts; $options; $partsChoice; $terminalFlags : Collection
 
 If (Form.selectedPath#"")
 	$currentPath:=Form.selectedPath
@@ -57,10 +57,35 @@ Repeat
 		End if 
 	End for each 
 	
-	$menu:=Create menu:C408
+	$terminalFlags:=New collection
 	For each ($value; $options)
-		APPEND MENU ITEM:C411($menu; $value)
+		If ($currentPath="")
+			$candidate:=$value
+		Else 
+			$candidate:=$currentPath+"/"+$value
+		End if 
+		$isTerm:=True
+		For each ($path; Form.paths) Until (Not:C34($isTerm))
+			If (Length:C16($path)>=(Length:C16($candidate)+2))
+				If (Substring:C12($path; 1; Length:C16($candidate)+1)=($candidate+"/"))
+					$isTerm:=False
+				End if 
+			End if 
+		End for each 
+		$terminalFlags.push($isTerm)
+	End for each 
+	
+	$menu:=Create menu:C408
+	$idx:=0
+	For each ($value; $options)
+		If ($terminalFlags[$idx])
+			$prefix:="🟩 "
+		Else 
+			$prefix:="🟦 "
+		End if 
+		APPEND MENU ITEM:C411($menu; $prefix+$value)
 		SET MENU ITEM PARAMETER:C1004($menu; -1; "select|"+$value)
+		$idx:=$idx+1
 	End for each 
 	
 	If ($depth>0)
@@ -135,7 +160,7 @@ Repeat
 						$path:=$currentPath+"/"+$value
 					End if 
 					If (Form.paths.indexOf($path)=-1)
-						APPEND MENU ITEM:C411($menu; $value)
+						APPEND MENU ITEM:C411($menu; "🟩 "+$value)
 						SET MENU ITEM PARAMETER:C1004($menu; -1; $value)
 						$hasBChildren:=True
 					End if 
