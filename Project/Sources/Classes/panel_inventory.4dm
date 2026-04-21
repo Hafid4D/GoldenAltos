@@ -9,6 +9,7 @@ Function formMethod()
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		This:C1470.loadAllTabs()
+		Form:C1466.currentPath:=""
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
@@ -21,29 +22,24 @@ Function formMethod()
 	End if 
 	
 	
-Function drawPup_XXX()
-	//This function updates the dropdown by displaying the name
-	Form:C1466.sfw.drawButtonPup("pup_xxx"; $xxxName; "xxxx.png"; (Form:C1466.current_item.xxxx=Null:C1517))
-	
-	
-Function pup_XXX()
-	//Create pop up menu
-	If (Form:C1466.sfw.checkIsInModification())
-	End if 
-	This:C1470.drawPup_XXX()
-	
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
-	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="Inventory Pulls ("+String:C10(Form:C1466.lb_pulls.length)+")"
 	End use 
-	Form:C1466.sfw.drawHTab()
+	
+	This:C1470.drawPup_customer()
+	This:C1470.drawPup_status_IQA()
+	This:C1470.drawPup_staff()
+	This:C1470.drawPup_binLocation()
+	
 	
 	OBJECT SET ENABLED:C1123(*; "dp_locations"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET ENABLED:C1123(*; "dp_units"; Form:C1466.sfw.checkIsInModification())
 	
+	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	Case of 
 		: (FORM Get current page:C276(*)=2)  // po lines
 			OBJECT GET COORDINATES:C663(*; "rec_bkgd_2"; $left; $top; $right; $bottom)
@@ -66,9 +62,10 @@ Function redrawAndSetVisible()
 	OBJECT SET VISIBLE:C603(*; "entryField_vendor"; (Form:C1466.current_item.customerSpecific))
 	OBJECT SET VISIBLE:C603(*; "pup_customer"; Not:C34(Form:C1466.current_item.customerSpecific))
 	
-	This:C1470.drawPup_customer()
-	This:C1470.drawPup_status_IQA()
-	This:C1470.drawPup_staff()
+	
+	Form:C1466.sfw.drawHTab()
+	
+	
 	
 Function loadAllTabs()
 	This:C1470.loadInventoryPulls()
@@ -383,3 +380,35 @@ Function btnOpenCustomer()
 	If ($entity#Null:C1517)
 		Form:C1466.sfw.openInANewWindow($entity; "customerService"; "customer")
 	End if 
+	
+	
+Function drawPup_binLocation()
+	If (Form:C1466.current_item#Null:C1517)
+		
+		$binLocation:=ds:C1482.Bin.query("UUID= :1"; Form:C1466.current_item.UUID_Location).first() || New object:C1471()
+		$locationName:=$binLocation.binLocationPath
+		If ($locationName=Null:C1517)
+			$locationName:=""
+		End if 
+		cs:C1710.Util_binLocationPicker.me.draw("pup_binLocation"; $locationName)
+		
+	End if 
+	
+Function pup_binLocation()
+	
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		$result:=cs:C1710.Util_binLocationPicker.me.pickReadOnly("pup_binLocation"; Form:C1466.currentPath)
+		If ($result#"")
+			Form:C1466.currentPath:=$result
+			Form:C1466.selectedBins:=Storage:C1525.cache.bins.query("binLocationPath = :1"; Form:C1466.currentPath)
+			If (Form:C1466.selectedBins#Null:C1517)
+				Form:C1466.current_item.UUID_Location:=Form:C1466.selectedBins.first().UUID
+				This:C1470._activate_save_cancel_button()
+			End if 
+			This:C1470.drawPup_binLocation()
+			
+		End if 
+		
+	End if 
+	

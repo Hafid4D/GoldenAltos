@@ -2,7 +2,7 @@
 /*
 _ga_createMoreDataFields
 
-Create moreData field if it does not exist in each table of the data base
+Create moreData field if it does not exist in each table of the database
 
 */
 

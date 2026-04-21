@@ -889,16 +889,6 @@
 					"fill": "#B1CFDE",
 					"stroke": "transparent"
 				},
-				"Input12": {
-					"type": "input",
-					"left": 131,
-					"top": 373,
-					"width": 440,
-					"height": 18,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.inventory_e.location"
-				},
 				"header_bkgd41": {
 					"type": "rectangle",
 					"top": 400,
@@ -987,11 +977,24 @@
 					"popupPlacement": "none",
 					"icon": "/RESOURCES/image/element/calendar-16x16.png",
 					"method": "ObjectMethods/btnDatePicker_expirationDate.4dm"
+				},
+				"pup_binLocation": {
+					"type": "button",
+					"top": 368,
+					"left": 124,
+					"width": 453,
+					"height": 28,
+					"text": "choose bin location",
+					"events": [
+						"onClick"
+					],
+					"style": "bevel",
+					"method": "ObjectMethods/pup_binLocation.4dm"
 				}
 			}
 		}
 	],
-	"geometryStamp": 3569,
+	"geometryStamp": 3580,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

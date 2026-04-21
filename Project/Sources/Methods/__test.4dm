@@ -2,10 +2,35 @@
 
 
 
+$bins:=ds:C1482.Bin.all().extract("inventories")
+
+$position:=-600
+$searchField:="binLocationPath"
+$tableName:="Bin"
+$moduleName:="customerService"
+$titleField:="binLocationPath"
+$entryImagePath:="bin-white-50x50.png"
+
+$gen:=cs:C1710.Util_entryFactory.new()
+$fields:=New collection:C1472()
+$fields.push(New object:C1471("name"; "binLocationPath"; "label"; "Location Path"; "width"; "200"))
+$fields.push(New object:C1471("name"; "isEmpty"; "label"; "Empty"; "width"; "80"))
+$gen.buildEntry($tableName; $moduleName; $fields; $position; $searchField; $titleField; $entryImagePath)
+
+// 🔄 FORCER LE RAFRAÎCHISSEMENT
+RELOAD PROJECT:C1739
+
+
+
+$record:="ASSY OSS RACK IQC B1"
+$formula:=Formula:C1597(Replace string:C233(This:C1470.binLocationPath; "/"; " ")=$record)
+$bin:=ds:C1482.Bin.query($formula)
+
 $locations:=ds:C1482.Location.all().extract("name").distinct()
 
 
 ds:C1482.Step.all()
+
 $position:=-500
 $searchField:="description"
 $tableName:="Step"

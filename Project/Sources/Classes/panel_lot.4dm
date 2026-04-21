@@ -530,7 +530,7 @@ Function bActionCustProvMat()
 				)
 			
 			$form.inventory_e.vendor:=Form:C1466.current_item.job.customerName
-			$form.inventory_e.UUID_Lot:=Form:C1466.current_item.UUID
+			$form.inventory_e.UUID_Lotzz:=Form:C1466.current_item.UUID
 			$form.inventory_e.stockNum:="man_"+String:C10(ds:C1482.Inventory.all().length)+String:C10(Milliseconds:C459)
 			$form.inventory_e.inventoryID:=(ds:C1482.Inventory.all().length>0) ? ds:C1482.Inventory.all().max("inventoryID")+1 : 1
 			$form.inventory_e.code:="INV"+String:C10($form.inventory_e.inventoryID; "00000#")

@@ -759,6 +759,11 @@ fix lotParent for some lots
 End if 
 
 /**
+import archived Jobs
+**/
+__import_data_archivedJobs
+
+/**
 import inventories
 **/
 If (True:C214)
@@ -767,6 +772,53 @@ If (True:C214)
 	TRUNCATE TABLE:C1051([Location:47])
 	TRUNCATE TABLE:C1051([Unit:48])
 	TRUNCATE TABLE:C1051([Classification:59])
+	TRUNCATE TABLE:C1051([Bin:95])
+	
+	$binLocations:=New collection:C1472("ASSY OSS RACK/IQC/B1"; \
+		"ASSY OSS RACK/IQC/B10"; "ASSY OSS RACK/IQC/B15"; \
+		"ASSY OSS RACK/IQC/B16"; "ASSY OSS RACK/IQC/B20"; "ASSY OSS RACK/IQC/B7"; \
+		"ASSY OSS RACK/IQC/B8"; "ASSY OSS RACK/IQC/B9"; "BACKEND/IQC/B16"; \
+		"BACKEND/IQC/B20"; "Line/IQC/B1"; "Line/IQC/B10"; "Line/IQC/B11"; \
+		"Line/IQC/B12"; "Line/IQC/B15"; "Line/IQC/B16"; "Line/IQC/B19"; "Line/IQC/B20"; \
+		"Line/IQC/B5"; "Line/IQC/B7"; "Line/IQC/B8"; "WareHouse/ASSY OSS RACK"; \
+		"WareHouse/BACKEND"; "WareHouse/CBNT2/BIN 16"; "WareHouse/CBNT 3"; \
+		"WareHouse/CBNT1"; "WareHouse/CBNT1/B1"; "WareHouse/CBNT1/B10"; \
+		"WareHouse/CBNT1/B2"; "WareHouse/CBNT1/B3"; "WareHouse/CBNT1/B4"; \
+		"WareHouse/CBNT1/B5"; "WareHouse/CBNT1/B6"; "WareHouse/CBNT1/B7"; \
+		"WareHouse/CBNT1/B8"; "WareHouse/CBNT1/B9"; "WareHouse/CBNT10"; \
+		"WareHouse/CBNT11"; "WareHouse/CBNT12"; "WareHouse/CBNT2/B11"; \
+		"WareHouse/CBNT2/B12"; "WareHouse/CBNT2/B13"; "WareHouse/CBNT2/B14"; \
+		"WareHouse/CBNT2/B15"; "WareHouse/CBNT2/B16"; "WareHouse/CBNT2/B17"; \
+		"WareHouse/CBNT2/B18"; "WareHouse/CBNT2/B19"; "WareHouse/CBNT3/B21"; \
+		"WareHouse/CBNT4"; "WareHouse/DESICCATOR"; "WareHouse/Engineering"; \
+		"WareHouse/FOL-CABINET/75"; "WareHouse/FOL-CABINET/76"; "WareHouse/FOL-CABINET/77"; \
+		"WareHouse/FOL-CABINET/79"; "WareHouse/Freezer/1 (FOL)"; "WareHouse/Freezer/2"; \
+		"WareHouse/Inventory/CBNT 12/ROW A"; "WareHouse/Inventory/CBNT 12/ROW B"; \
+		"WareHouse/Inventory/CBNT 12/ROW C"; "WareHouse/Inventory/CBNT 12/ROW D"; \
+		"WareHouse/Inventory/CBNT 13/ROW A"; "WareHouse/Inventory/CBNT 13/ROW B"; \
+		"WareHouse/Inventory/CBNT 13/ROW C"; "WareHouse/Inventory/CBNT 13/ROW D"; \
+		"WareHouse/Inventory/CBNT 13/ROW E"; "WareHouse/Inventory/CBNT 14/ROW A"; \
+		"WareHouse/Inventory/CBNT 14/ROW C"; "WareHouse/Inventory/CBNT 14/ROW D"; \
+		"WareHouse/Inventory/CBNT 4/ROW A"; "WareHouse/Inventory/CBNT 4/ROW B"; \
+		"WareHouse/Inventory/CBNT 4/ROW C"; "WareHouse/Inventory/CBNT 4/ROW D"; \
+		"WareHouse/Inventory/CBNT 4/ROW E"; "WareHouse/Inventory/CBNT 5/ROW A"; \
+		"WareHouse/Inventory/CBNT 5/ROW B"; "WareHouse/Inventory/CBNT 5/ROW C"; \
+		"WareHouse/Inventory/CBNT 5/ROW D"; "WareHouse/Inventory/CBNT 6/ROW A"; \
+		"WareHouse/Inventory/CBNT 6/ROW B"; "WareHouse/Inventory/CBNT 6/ROW C"; \
+		"WareHouse/Inventory/CBNT 6/ROW D"; "WareHouse/Inventory/CBNT 6/ROW E"; \
+		"WareHouse/Inventory/CBNT 8/ROW A"; "WareHouse/Inventory/CBNT 8/ROW B"; "WareHouse/Inventory/CBNT 8/ROW C"; "WareHouse/Inventory/CBNT 8/ROW D"; "WareHouse/Inventory/CBNT 8/ROW E"; "WareHouse/Inventory/Milpitas"; "WareHouse/Inventory/OQC Rack"; "WareHouse/Inventory/Roller"; "WareHouse/Inventory/Shelve A"; "WareHouse/Inventory/Shelve B"; "WareHouse/Inventory/Shelve C"; "WareHouse/Inventory/Shelve E"; "WareHouse/Inventory/Shelve J"; "WareHouse/Inventory/Desiccator/Bank 22"; "WareHouse/Inventory/Desiccator/Bank 23"; "WareHouse/Inventory/Desiccator/Bank 24"; "WareHouse/Inventory/Desiccator/Bank 25"; "WareHouse/Inventory/Desiccator/Bank 26"; "WareHouse/LAB"; "WareHouse/LAB OSS RACK"; "WareHouse/Line"; "WareHouse/Vault/1"; "WareHouse/Vault/2")
+	
+	
+	For each ($binLocation; $binLocations)
+		$binLocation_e:=ds:C1482.Bin.new()
+		$binLocation_e.binLocationPath:=$binLocation
+		$binLocation_e.isEmpty:=True:C214
+		$res:=$binLocation_e.save()
+		
+		If (Not:C34($res.success))
+			TRACE:C157
+		End if 
+	End for each 
 	
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/inventory_export.json")
@@ -789,7 +841,25 @@ If (True:C214)
 		$inventory_e.unitCost:=$record.unitCost
 		$inventory_e.units:=$record.inventoryUnits
 		$inventory_e.currency:=$record.currency
-		$inventory_e.location:=$record.binLocation
+		
+		//$inventory_e.location:=$record.binLocation
+		$formula:=Formula:C1597(Replace string:C233(Replace string:C233(This:C1470.binLocationPath; "/"; " "); " "; "")=Replace string:C233($record.binLocation; " "; ""))
+		$bin:=ds:C1482.Bin.query($formula)
+		If ($bin.length>0)
+			var $bin_e : cs:C1710.BinEntity
+			$bin_e:=$bin[0]
+			$inventory_e.UUID_Location:=$bin_e.UUID
+			
+			$bin_e.isEmpty:=False:C215
+			$res:=$bin_e.save()
+			If (Not:C34($res.success))
+				TRACE:C157
+			End if 
+			
+		Else 
+			$inventory_e.UUID_Location:="00"*16
+		End if 
+		
 		$inventory_e.receivedBy:=$record.recdBy
 		$inventory_e.totalCost:=$record.totalCost
 		$inventory_e.availableQty:=$record.AvailableQty
@@ -876,6 +946,7 @@ If (True:C214)
 	End for each 
 	
 End if 
+_ga_updateBinIsEmpty
 
 
 /**
