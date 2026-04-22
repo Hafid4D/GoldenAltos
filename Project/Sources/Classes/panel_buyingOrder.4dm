@@ -67,11 +67,17 @@ Function loadTerms()
 	
 Function drawPup_supplier()
 	If (Form:C1466.current_item#Null:C1517)
-		$supplier:=ds:C1482.Supplier.query("UUID= :1"; Form:C1466.current_item.UUID_Supplier).first() || New object:C1471()
-		$supplierName:=$supplier.name
-		If ($supplierName=Null:C1517)
+		//$supplier:=ds.Supplier.query("UUID= :1"; Form.current_item.UUID_Supplier).first() || New object()
+		$supplier:=Form:C1466.current_item.supplier
+		If ($supplier#Null:C1517)
+			$supplierName:=$supplier.name
+			If ($supplierName=Null:C1517)
+				$supplierName:=""
+			End if 
+		Else 
 			$supplierName:=""
 		End if 
+		
 		$color:=""
 		$pathIcon:=""
 		Form:C1466.sfw.drawButtonPup("pup_supplier"; $supplierName; $pathIcon; ($supplier=Null:C1517))

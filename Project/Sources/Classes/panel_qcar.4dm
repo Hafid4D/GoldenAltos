@@ -101,18 +101,20 @@ Function selectCustomer()
 				DIALOG:C40("selectNto1"; $form)
 				CLOSE WINDOW:C154($winRef)
 				
-				If (ok=1)
-					Form:C1466.current_item.UUID_Customer:=$form.item.UUID
-					cs:C1710.panel_purchaseOrder.me._activate_save_cancel_button()
-				End if 
-		End case 
+			If (ok=1)
+				Form:C1466.current_item.UUID_Customer:=$form.item.UUID
+				// Apr 22, 2026 4DFix: was calling panel_purchaseOrder singleton instead of panel_qcar
+				cs:C1710.panel_qcar.me._activate_save_cancel_button()
+			End if 
+	End case 
 	End if 
 	
 Function selectLot()
 	If (Form:C1466.sfw.checkIsInModification())
 		Case of 
 			: (FORM Event:C1606.code=On Getting Focus:K2:7) | (FORM Event:C1606.code=On Clicked:K2:4)
-				OBJECT GET COORDINATES:C663(*; "Field_customerName"; $l; $t; $r; $b)
+				// Apr 22, 2026 4DFix: was using "Field_customerName" coordinates for the lot popup — corrected to "Field_lotNumber"
+				OBJECT GET COORDINATES:C663(*; "Field_lotNumber"; $l; $t; $r; $b)
 				CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Screen:K27:7)
 				
 				$form:=New object:C1471(\
@@ -124,11 +126,11 @@ Function selectLot()
 				DIALOG:C40("selectNto1"; $form)
 				CLOSE WINDOW:C154($winRef)
 				
-				If (ok=1)
-					Form:C1466.current_item.UUID_Lot:=$form.item.UUID
-					
-					cs:C1710.panel_purchaseOrder.me._activate_save_cancel_button()
-				End if 
+			If (ok=1)
+				Form:C1466.current_item.UUID_Lot:=$form.item.UUID
+				// Apr 22, 2026 4DFix: was calling panel_purchaseOrder singleton instead of panel_qcar
+				cs:C1710.panel_qcar.me._activate_save_cancel_button()
+			End if 
 		End case 
 	End if 
 	

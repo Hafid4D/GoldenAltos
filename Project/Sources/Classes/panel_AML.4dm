@@ -330,7 +330,8 @@ Function bActionDocument()
 				Form:C1466.bufferOfEvents.push($buffer)
 				
 				Form:C1466.current_item.attachedDocuments.documents.push($form.details)
-				cs:C1710.panel_supplier.me._activate_save_cancel_button()
+				// Apr 22, 2026 4DFix: was calling panel_supplier singleton instead of panel_AML
+				cs:C1710.panel_AML.me._activate_save_cancel_button()
 			End if 
 			
 			
@@ -347,7 +348,8 @@ Function bActionDocument()
 				If ($form.modified) | ($form.documentHasChanged)
 					//Form.selectedDocument:=$form.details
 					Form:C1466.current_item.attachedDocuments.documents[Form:C1466.selectedDocumentPos-1]:=$form.details
-					cs:C1710.panel_supplier.me._activate_save_cancel_button()
+					// Apr 22, 2026 4DFix: was calling panel_supplier singleton instead of panel_AML
+					cs:C1710.panel_AML.me._activate_save_cancel_button()
 				End if 
 			End if 
 			
@@ -364,7 +366,8 @@ Function bActionDocument()
 				$buffer.stmp:=cs:C1710.sfw_stmp.me.now()
 				Form:C1466.bufferOfEvents.push($buffer)
 				Form:C1466.current_item.attachedDocuments.documents.remove(Form:C1466.selectedDocumentPos-1)
-				cs:C1710.panel_supplier.me._activate_save_cancel_button()
+				// Apr 22, 2026 4DFix: was calling panel_supplier singleton instead of panel_AML
+				cs:C1710.panel_AML.me._activate_save_cancel_button()
 				
 			End if 
 			

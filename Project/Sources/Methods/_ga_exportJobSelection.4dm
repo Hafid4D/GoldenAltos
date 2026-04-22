@@ -1,4 +1,4 @@
-//%attributes = {}
+﻿//%attributes = {}
 
 /*
 Method Name : _ga_exportEquipmentList
@@ -64,7 +64,7 @@ If (Form:C1466.sfw.lb_items.length>0)
 	$destinationFileName:=Split string:C1554(String:C10($fileName+"_"+Replace string:C233(String:C10(Date:C102(Timestamp:C1445)); "/"; "_")); " "; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join("")
 	$sheetName:=$fileName
 	$selection:=Form:C1466.sfw.lb_items
-	$offscreen:=cs:C1710.ExcelDataExporter.new($templateFile.platformPath; $mapping; $selection; $destinationFileName; $destinationFolderPath; $title; $sheetName)
+	$offscreen:=cs:C1710.ExcelDataExporter.new($templateFile.platformPath; $mapping; $selection; $destinationFileName; $destinationFolderPath; $title; $sheetName; True:C214)
 	$excelSheet:=VP Run offscreen area($offscreen)
 	
 	

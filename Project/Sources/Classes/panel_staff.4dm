@@ -66,6 +66,8 @@ Function redrawAndSetVisible()
 	
 	
 Function loadAllTabs()
+	// Apr 22, 2026 4DFix: loadCommunications() was missing — communications could be stale when switching records while staying on tab 1
+	This:C1470.loadCommunications()
 	This:C1470.loadCertifications()
 	
 Function loadCommunications()

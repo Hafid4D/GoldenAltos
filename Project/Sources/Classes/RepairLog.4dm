@@ -53,7 +53,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.addFilter($filter)
 	
 	
-	$filter:=cs:C1710.sfw_definitionFilter.new("filterReportOperator")
+	// Apr 22, 2026 4DFix: duplicate filter ident "filterReportOperator" was causing the second filter to collide/overwrite the first
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterEquipment")
 	$filter.setDefaultTitle("All Equipments")
 	$filter.setFilterByLinkedEntity("Equipment"; "UUID_Equipment"; "uuidEquipment"; "")
 	$filter.setDynamicTitle("assignedID"; "## equipments")

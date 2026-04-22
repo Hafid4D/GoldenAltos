@@ -2,7 +2,7 @@ Class extends DataClass
 
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
-	//Mark: entry : Equipment
+	//Mark: entry : Supplier
 	$entry:=cs:C1710.sfw_definitionEntry.new("Supplier"; ["qualityAssurance"]; "AVL")
 	$entry.setDataclass("Supplier")
 	$entry.setDisplayOrder(-700)
@@ -25,15 +25,16 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListAction("Search by Scanning"; "_ga_searchByBarcodeScanning")
 	
 	$entry.setItemListAction("Export selection to excel"; "_ga_exportSupplierList")
+	$entry.setItemListAction("Export all ratings to Excel"; "_ga_exportAllSupplierRatings")
 	
 	
 	
 	// MARK: -Filters
 	
-	$filter:=cs:C1710.sfw_definitionFilter.new("filterEquipmentDivision")
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterSupplierDivision")
 	$filter.setDefaultTitle("All divisions")
 	$filter.setFilterByLinkedEntity("Division"; "UUID_Division"; ""; "division")
-	$filter.setDynamicTitle("name"; "## equipment division")
+	$filter.setDynamicTitle("name"; "## supplier division")
 	$entry.addFilter($filter)
 	
 	
@@ -72,16 +73,18 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setSubset("customerApprovedSuppliers")
 	$entry.setView($view)
 	
-	// MARK: All in-activated Suppliers
-	$view:=cs:C1710.sfw_definitionView.new("disqualifiedSuppliers"; "All in-activated Suppliers")
+	// Apr 22, 2026 4DFix: view title was "All in-activated Suppliers" but subset queries disqualified=true — corrected label
+	// MARK: All Disqualified Suppliers
+	$view:=cs:C1710.sfw_definitionView.new("disqualifiedSuppliers"; "All Disqualified Suppliers")
 	$view.setLBItemsColumn("name"; "Supplier Name"; "width:250")
 	$view.setLBItemsColumn("approvedByQA?\"Approved\":\"Not Approved\""; "QA Approval"; "width:150"; "orderByFormula:this.approvedByQA")
 	$view.setLBItemsOrderBy("name")
 	$view.setSubset("disqualifiedSuppliers")
 	$entry.setView($view)
 	
-	// MARK: All Disqualified Suppliers
-	$view:=cs:C1710.sfw_definitionView.new("inactivatedSuppliers"; "All Disqualified Suppliers")
+	// Apr 22, 2026 4DFix: view title was "All Disqualified Suppliers" but subset queries deactivated=true — corrected label
+	// MARK: All In-activated Suppliers
+	$view:=cs:C1710.sfw_definitionView.new("inactivatedSuppliers"; "All In-activated Suppliers")
 	$view.setLBItemsColumn("name"; "Supplier Name"; "width:250")
 	$view.setLBItemsColumn("approvedByQA?\"Approved\":\"Not Approved\""; "QA Approval"; "width:150"; "orderByFormula:this.approvedByQA")
 	$view.setLBItemsOrderBy("name")
@@ -106,6 +109,6 @@ Function disqualifiedSuppliers()->$suppliers : cs:C1710.SupplierSelection
 	$suppliers:=ds:C1482.Supplier.query("disqualified =:1"; True:C214)
 	
 Function inactivatedSuppliers()->$suppliers : cs:C1710.SupplierSelection
-	$suppliers:=ds:C1482.Supplier.query("deactivated =:"; True:C214)
+	$suppliers:=ds:C1482.Supplier.query("deactivated =:1"; True:C214)
 	
 	

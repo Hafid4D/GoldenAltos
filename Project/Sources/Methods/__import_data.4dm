@@ -18,6 +18,7 @@ __import_data_avl_aml
 __import_data_quote
 __import_data_audit
 __import_data_managementReview
+__import_data_buyingOrders
 __import_data_chartOfAccount
 __import_data_assetList
 __import_data_creditMemo
