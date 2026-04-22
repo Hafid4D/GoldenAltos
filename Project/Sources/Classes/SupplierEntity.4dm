@@ -244,6 +244,86 @@ local Function _initAddress()
 	End if 
 	
 	
+// Builds the aggregated monthly rating data for this supplier from its buying order lines.
+// Returns a collection of objects, one per month, with LAR and composite rating computed.
+// Used by panel_supplier.loadRatingData() and _ga_exportAllSupplierRatings.
+local Function buildRatingData()->$data : Collection
+	var $buyingOrders : cs:C1710.BuyingOrderSelection
+	var $object : Object:=New object:C1471()
+	var $data : Collection:=New collection:C1472()
+	var $quarter : Integer
+	
+	$buyingOrders:=ds:C1482.BuyingOrder.query("UUID_Supplier =:1"; This:C1470.UUID)
+	$buyingOrderLines:=New collection:C1472()
+	
+	If ($buyingOrders#Null:C1517)
+		For each ($buyingOrder; $buyingOrders)
+			$formula:=Formula:C1597(($1.value.expectedDeliveryDate#!00-00-00!) & ($1.value.actualDeliveryDate#!00-00-00!))
+			$buyingOrderLines:=$buyingOrderLines.concat($buyingOrder.boLines.toCollection().filter($formula))
+		End for each 
+	End if 
+	
+	For ($i; 0; $buyingOrderLines.length-1)
+		
+		$year:=String:C10(Year of:C25($buyingOrderLines[$i].orderDate))
+		If (Not:C34(OB Is defined:C1231($object; $year)))
+			OB SET:C1220($object; $year; New object:C1471())
+		End if 
+		
+		$month:=String:C10(Month of:C24($buyingOrderLines[$i].orderDate); "0#")
+		$date:=$month+"-"+$year
+		
+		$indices:=$data.indices("date =:1"; $date)
+		If ($indices.length=0)
+			
+			OB SET:C1220($object[$year]; $month; New collection:C1472())
+			$quarter:=(Num:C11($month)<=3) ? 1 : (Num:C11($month)>3) && (Num:C11($month)<=6) ? 2 : (Num:C11($month)>6) && (Num:C11($month)<=9) ? 3 : 4
+			
+			$line:=New object:C1471(\
+				"date"; $date; \
+				"year"; $year; \
+				"month"; $month; \
+				"quarter"; $quarter; \
+				"receivingTotalLots"; $buyingOrderLines[$i].qty; \
+				"receivingWithoutNMNs"; $buyingOrderLines[$i].qtyReceived; \
+				"receivingLAR"; 0; \
+				"functionalTotalLots"; $buyingOrderLines[$i].qtyReceived; \
+				"functionalWithoutNMNs"; $buyingOrderLines[$i].qtyFunctional; \
+				"functionalLAR"; 0; \
+				"deliveryTotalLots"; $buyingOrderLines[$i].qtyReceived; \
+				"deliveryMinorDelay"; $buyingOrderLines[$i].qtyDeliveredMinDelay; \
+				"deliveryMajorDelay"; $buyingOrderLines[$i].qtyDeliveredMajDelay; \
+				"deliveryLAR"; 0; \
+				"compositeOverAllRating"; 0; \
+				"ISOCertified"; "N"\
+				)
+			$data.push($line)
+			
+		Else 
+			
+			$lineItem:=$data[$indices[0]]
+			$lineItem.receivingTotalLots:=$lineItem.receivingTotalLots+$buyingOrderLines[$i].qty
+			$lineItem.receivingWithoutNMNs:=$lineItem.receivingWithoutNMNs+$buyingOrderLines[$i].qtyReceived
+			$lineItem.functionalTotalLots:=$lineItem.functionalTotalLots+$buyingOrderLines[$i].qtyReceived
+			$lineItem.functionalWithoutNMNs:=$lineItem.functionalWithoutNMNs+$buyingOrderLines[$i].qtyFunctional
+			$lineItem.deliveryTotalLots:=$lineItem.deliveryTotalLots+$buyingOrderLines[$i].qtyReceived
+			$lineItem.deliveryMinorDelay:=$lineItem.deliveryMinorDelay+$buyingOrderLines[$i].qtyDeliveredMinDelay
+			$lineItem.deliveryMajorDelay:=$lineItem.deliveryMajorDelay+$buyingOrderLines[$i].qtyDeliveredMajDelay
+			$data.remove($indices[0])
+			$data.push($lineItem)
+			
+		End if 
+		
+	End for 
+	
+	For ($i; 0; $data.length-1)
+		$data[$i].receivingLAR:=($data[$i].receivingWithoutNMNs/$data[$i].receivingTotalLots)*100
+		$data[$i].functionalLAR:=($data[$i].functionalWithoutNMNs/$data[$i].functionalTotalLots)*100
+		$data[$i].deliveryLAR:=(100-(($data[$i].deliveryMinorDelay*0.5)+($data[$i].deliveryMajorDelay*1.5)))/100
+		$data[$i].compositeOverAllRating:=($data[$i].receivingLAR+$data[$i].functionalLAR+$data[$i].deliveryLAR)/3
+	End for 
+	
+
 local Function get nameInWindowTitle()->$nameInWindowTitle : Text
 	$nameInWindowTitle:=String:C10(This:C1470.name)
 	

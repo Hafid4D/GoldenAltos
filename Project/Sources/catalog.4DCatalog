@@ -4303,6 +4303,11 @@
 			<table_ref uuid="04F7E2A28A5349B4B0C70F6D644922BB" name="LeadEvent"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="693CFB03E2474724BB9E72E83A585A9B" type="1">
+		<field_ref uuid="1D7BBD937086184FA34B8CBC13CDDEF8" name="name">
+			<table_ref uuid="A0C8CDC075BBB546914E03F7689B897E" name="Supplier"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="6A045DFC98664F6BBB847D9DF1F4DD10" type="3">
 		<field_ref uuid="3418CA848D644E838C17B86DB079529A" name="UUID_User">
 			<table_ref uuid="9829CFB4F3294A3989861E788C0AF7D4" name="QuoteEvent"/>

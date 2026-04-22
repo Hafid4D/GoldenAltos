@@ -17,7 +17,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("rmaNumber"; "#"; "width:40"; "center")
 	$entry.setLBItemsColumn("qcar.customer.name"; "Customer"; "width:200")
 	$entry.setLBItemsColumn("invoiceNumber"; "Invoice"; "width:140")
-	$entry.setLBItemsColumn("receivedDate"; "Received"; "width:70"; "center")
+	// Apr 22, 2026 4DFix: "receivedDate" did not match the computed attribute name "dateReceived" in RMAEntity — column was always empty
+	$entry.setLBItemsColumn("dateReceived"; "Received"; "width:70"; "center")
 	
 	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
 	

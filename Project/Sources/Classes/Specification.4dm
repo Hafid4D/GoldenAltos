@@ -40,7 +40,8 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$filter.setDynamicTitle("name"; "## document  type")
 	$entry.addFilter($filter)
 	
-	$filter:=cs:C1710.sfw_definitionFilter.new("filterSpecDocumentType")
+	// Apr 22, 2026 4DFix: duplicate filter ident "filterSpecDocumentType" was colliding with the first filter — renamed to "filterSpecDepartment"
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterSpecDepartment")
 	$filter.setDefaultTitle("All departments")
 	$filter.setFilterByIDInTable("SpecControllingDept"; "departmentID"; "departmentID")
 	$filter.setDynamicTitle("name"; "## controlling department")

@@ -107,7 +107,8 @@
 					"stroke": "#808080",
 					"text": "Service",
 					"fontWeight": "normal",
-					"textAlign": "right"
+					"textAlign": "right",
+					"visibility": "hidden"
 				},
 				"pup_quote1": {
 					"type": "button",
@@ -129,7 +130,8 @@
 						"onDisplayDetail"
 					],
 					"fontWeight": "bold",
-					"right": 509
+					"right": 509,
+					"visibility": "hidden"
 				},
 				"label_buyOrderLimit": {
 					"type": "text",
@@ -1271,7 +1273,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1306,
+	"geometryStamp": 1308,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

@@ -126,11 +126,13 @@ Function checkRetraining($days : Integer)->$retraining : Collection
 	$retraining:=New collection:C1472()
 	
 	For each ($staff_e; $staff_es)
-		$notif_es:=ds:C1482.sfw_Notification.query("moreData.UUID_Staff = :1 AND moreData.date = :2"; $staff_e.UUID; Current date:C33)
+		// Apr 22, 2026 4DFix: Current date:C33 was missing () — was passing the command reference instead of the date value
+		$notif_es:=ds:C1482.sfw_Notification.query("moreData.UUID_Staff = :1 AND moreData.date = :2"; $staff_e.UUID; Current date:C33())
 		
 		If ($notif_es.length=0)
 			CREATE RECORD:C68([sfw_Notification:69])
-			[sfw_Notification:69]UUID_NotificationType:4:=ds:C1482.sfw_NotificationType.all().first().UUID
+			// Apr 22, 2026 4DFix: was using .all().first() which returns a random notification type — now queries for the correct "EmployeeRetrainRequired" type
+			[sfw_Notification:69]UUID_NotificationType:4:=ds:C1482.sfw_NotificationType.query("ident = :1"; "EmployeeRetrainRequired").first().UUID
 			[sfw_Notification:69]UUID_User:3:=cs:C1710.sfw_userManager.me.info.UUID
 			[sfw_Notification:69]UUID_target:2:=$staff_e.UUID
 			[sfw_Notification:69]comment:5:=$staff_e.firstName+" "+$staff_e.lastName+" :"+"Retraining for "+String:C10($staff_e.getCertiExpiredIn(30).length)+" certifications due within 30 days."
@@ -143,7 +145,8 @@ Function checkRetraining($days : Integer)->$retraining : Collection
 	End for each 
 	
 	If ($retraining.length>0)
-		cs:C1710.sfw_notificationManager.me.updateNodifications()
+		// Apr 22, 2026 4DFix: typo "updateNodifications" corrected to "updateNotifications"
+		cs:C1710.sfw_notificationManager.me.updateNotifications()
 	End if 
 	
 	

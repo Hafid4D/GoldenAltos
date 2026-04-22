@@ -74,7 +74,7 @@ If (OK=1)
 		
 		For ($i; 0; $headers.length-1)
 			
-			SEND PACKET:C103($file; _capitalize_text($headers[$i])+$separator_col)
+			SEND PACKET:C103($file; _Capitalize_text($headers[$i])+$separator_col)
 			
 		End for 
 		
@@ -128,8 +128,10 @@ If (OK=1)
 						End if 
 					: ($headerName="tel")
 						If ($contact_e#Null:C1517)
-							$data:=Replace string:C233(Replace string:C233(String:C10($contact_e.contactDetails.communications.query("type =:1"; "phone")[0]["contact"]); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))
-							SEND PACKET:C103($file; $data+$separator_col)
+							If ($contact_e.contactDetails.communications.length>0)
+								$data:=Replace string:C233(Replace string:C233(String:C10($contact_e.contactDetails.communications.query("type =:1"; "phone")[0]["contact"]); Char:C90(Carriage return:K15:38); Char:C90(Space:K15:42); *); Char:C90(Line feed:K15:40); Char:C90(Space:K15:42))
+								SEND PACKET:C103($file; $data+$separator_col)
+							End if 
 						End if 
 					: ($headerName="approved By QA")
 						$data:=String:C10($supplier_e["approvedByQA"]=True:C214 ? "Yes" : "No")

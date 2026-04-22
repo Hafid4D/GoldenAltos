@@ -248,7 +248,8 @@ Function btnOpenCompany()
 			
 			If ($es.length>0)
 				
-				Form:C1466.sfw.openInANewWindow($es[0]; "qualityAssurance"; "supplier")
+				// Apr 22, 2026 4DFix: entry ident was "supplier" (lowercase) but Supplier.entryDefinition() registers it as "Supplier" — open-in-window was silently failing
+Form:C1466.sfw.openInANewWindow($es[0]; "qualityAssurance"; "Supplier")
 				
 			End if 
 			//________________________________________

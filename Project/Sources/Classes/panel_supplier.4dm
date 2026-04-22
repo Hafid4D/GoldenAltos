@@ -328,91 +328,8 @@ Function LoadAllTabs()
 	
 	
 Function loadRatingData()
-	
-	var $buyingOrders : cs:C1710.BuyingOrderSelection
-	var $object : Object:=New object:C1471()
-	var $data : Collection:=New collection:C1472()
-	var $quarter : Integer
-	$buyingOrders:=ds:C1482.BuyingOrder.query("supplier.name =:1"; Form:C1466.current_item.name)
-	$buyingOrderLines:=New collection:C1472()
-	If ($buyingOrders#Null:C1517)
-		For each ($buyingOrder; $buyingOrders)
-			$formula:=Formula:C1597(($1.value.expectedDeliveryDate#!00-00-00!) & ($1.value.actualDeliveryDate#!00-00-00!))
-			$buyingOrderLines:=$buyingOrderLines.concat($buyingOrder.boLines.toCollection().filter($formula))
-		End for each 
-	End if 
-	
-	For ($i; 0; $buyingOrderLines.length-1)
-		
-		$year:=String:C10(Year of:C25($buyingOrderLines[$i].orderDate))
-		If (OB Is defined:C1231($object; $year))
-		Else 
-			OB SET:C1220($object; $year; New object:C1471())
-		End if 
-		
-		$month:=String:C10(Month of:C24($buyingOrderLines[$i].orderDate); "0#")
-		$date:=$month+"-"+$year
-		
-		$lineItem:=$data.query("date =:1"; $date).first()
-		$indinces:=$data.indices("date =:1"; $date)
-		If ($indinces.length=0)
-			
-			OB SET:C1220($object[$year]; $month; New collection:C1472())
-			
-			$quarter:=(Num:C11($month)<=3) ? 1 : (Num:C11($month)>3) && (Num:C11($month)<=6) ? 2 : (Num:C11($month)>6) && (Num:C11($month)<=9) ? 3 : 4
-			
-			$line:=New object:C1471(\
-				"date"; $date; \
-				"year"; $year; \
-				"month"; $month; \
-				"quarter"; $quarter; \
-				"receivingTotalLots"; $buyingOrderLines[$i].qty; \
-				"receivingWithoutNMNs"; $buyingOrderLines[$i].qtyReceived; \
-				"receivingLAR"; 0; \
-				"functionalTotalLots"; $buyingOrderLines[$i].qtyReceived; \
-				"functionalWithoutNMNs"; $buyingOrderLines[$i].qtyFunctional; \
-				"functionalLAR"; 0; \
-				"deliveryTotalLots"; $buyingOrderLines[$i].qtyReceived; \
-				"deliveryMinorDelay"; $buyingOrderLines[$i].qtyDeliveredMinDelay; \
-				"deliveryMajorDelay"; $buyingOrderLines[$i].qtyDeliveredMajDelay; \
-				"deliveryLAR"; 0; \
-				"compositeOverAllRating"; 0; \
-				"ISOCertified"; "N"\
-				)
-			
-			$data.push($line)
-			
-		Else 
-			
-			$lineItem.receivingTotalLots:=$lineItem.receivingTotalLots+$buyingOrderLines[$i].qty
-			$lineItem.receivingWithoutNMNs:=$lineItem.receivingWithoutNMNs+$buyingOrderLines[$i].qtyReceived
-			$lineItem.functionalTotalLots:=$lineItem.functionalTotalLots+$buyingOrderLines[$i].qtyReceived
-			$lineItem.functionalWithoutNMNs:=$lineItem.functionalWithoutNMNs+$buyingOrderLines[$i].qtyFunctional
-			
-			$lineItem.deliveryTotalLots:=$lineItem.deliveryTotalLots+$buyingOrderLines[$i].qtyReceived
-			$lineItem.deliveryMinorDelay:=$lineItem.deliveryMinorDelay+$buyingOrderLines[$i].qtyDeliveredMinDelay
-			$lineItem.deliveryMajorDelay:=$lineItem.deliveryMajorDelay+$buyingOrderLines[$i].qtyDeliveredMajDelay
-			
-			$data.remove($indinces[0])
-			
-			$data.push($lineItem)
-			
-			
-		End if 
-		
-	End for 
-	
-	//Finish Calculations
-	For ($i; 0; $data.length-1)
-		$data[$i].receivingLAR:=($data[$i].receivingWithoutNMNs/$data[$i].receivingTotalLots)*100
-		$data[$i].functionalLAR:=($data[$i].functionalWithoutNMNs/$data[$i].functionalTotalLots)*100
-		$data[$i].deliveryLAR:=(100-(($data[$i].deliveryMinorDelay*0.5)+($data[$i].deliveryMajorDelay*1.5)))/100
-		
-		$data[$i].compositeOverAllRating:=($data[$i].receivingLAR+$data[$i].functionalLAR+$data[$i].deliveryLAR)/3
-		
-	End for 
-	
-	Form:C1466.lb_rating:=$data
+	// Delegates rating computation to SupplierEntity.buildRatingData() to keep logic in one place
+	Form:C1466.lb_rating:=Form:C1466.current_item.buildRatingData()
 	
 Function bActionRating()
 	
@@ -421,18 +338,49 @@ Function bActionRating()
 	APPEND MENU ITEM:C411($refMenu; "export to Excel"; *)
 	SET MENU ITEM PARAMETER:C1004($refMenu; 1; "--export")
 	
-	APPEND MENU ITEM:C411($refMenu; "print"; *)
-	SET MENU ITEM PARAMETER:C1004($refMenu; 2; "--print")
-	
 	$choice:=Dynamic pop up menu:C1006($refMenu)
 	RELEASE MENU:C978($refMenu)
 	Case of 
-			
+		
 		: ($choice="--export")
 			
-			
-		: ($choice="--print")
-			
+			If (Form:C1466.lb_rating.length>0)
+				
+				$templateFile:=Folder:C1567(fk resources folder:K87:11).file("excelTemplates/excelExportTemplate.xlsx")
+				
+				$mapping:=New collection:C1472(\
+					New object:C1471("header"; "Date"; "field"; "date"; "footerOperation"; ""); \
+					New object:C1471("header"; "Year"; "field"; "year"; "footerOperation"; ""); \
+					New object:C1471("header"; "Month"; "field"; "month"; "footerOperation"; ""); \
+					New object:C1471("header"; "Quarter"; "field"; "quarter"; "footerOperation"; ""); \
+					New object:C1471("header"; "Receiving Total Lots"; "field"; "receivingTotalLots"; "footerOperation"; "sum"); \
+					New object:C1471("header"; "Receiving without NMNs"; "field"; "receivingWithoutNMNs"; "footerOperation"; "sum"); \
+					New object:C1471("header"; "Receiving % LAR"; "field"; "receivingLAR"; "footerOperation"; ""); \
+					New object:C1471("header"; "Functional Total Lots"; "field"; "functionalTotalLots"; "footerOperation"; "sum"); \
+					New object:C1471("header"; "Functional Without NMNs"; "field"; "functionalWithoutNMNs"; "footerOperation"; "sum"); \
+					New object:C1471("header"; "Functional % LAR"; "field"; "functionalLAR"; "footerOperation"; ""); \
+					New object:C1471("header"; "Delivery Total Lots"; "field"; "deliveryTotalLots"; "footerOperation"; "sum"); \
+					New object:C1471("header"; "Delivery Minor Delay w/in 10 days"; "field"; "deliveryMinorDelay"; "footerOperation"; "sum"); \
+					New object:C1471("header"; "Delivery Major Delay over 10 days"; "field"; "deliveryMajorDelay"; "footerOperation"; "sum"); \
+					New object:C1471("header"; "Delivery % LAR"; "field"; "deliveryLAR"; "footerOperation"; ""); \
+					New object:C1471("header"; "Composite % Over-all Rating"; "field"; "compositeOverAllRating"; "footerOperation"; ""); \
+					New object:C1471("header"; "ISO Certified"; "field"; "ISOCertified"; "footerOperation"; "")\
+					)
+				
+			$supplierName:=Replace string:C233(Form:C1466.current_item.name; " "; "_")
+			$fileName:="SupplierRating_"+$supplierName
+				$destinationFolderPath:=Get 4D folder:C485(Current resources folder:K5:16)+"exportedData"+Folder separator:K24:12+"Suppliers"
+				$destinationFileName:=Split string:C1554(String:C10($fileName+"_"+Replace string:C233(String:C10(Date:C102(Timestamp:C1445)); "/"; "_")); " "; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join("")
+				$sheetName:="Supplier Rating"
+				
+				$offscreen:=cs:C1710.ExcelDataExporter.new($templateFile.platformPath; $mapping; Form:C1466.lb_rating; $destinationFileName; $destinationFolderPath; ""; $sheetName; False:C215)
+				$excelSheet:=VP Run offscreen area($offscreen)
+				
+			Else 
+				
+				cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("No items in the list to Export"))
+				
+			End if 
 			
 	End case 
 	

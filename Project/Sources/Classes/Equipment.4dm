@@ -198,11 +198,14 @@ local Function PMRequiredEquipments()->$equipments : cs:C1710.EquipmentSelection
 	
 local Function pmEquipments()->$equipments : cs:C1710.EquipmentSelection  //Prevent Maintenance equipments within X days
 	cs:C1710.Util.me.setDateInterval(False:C215)
-	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate>:2 & nextPMDate#:3 & notAtSite=:3"; Storage:C1525.cache.endDate; Current date:C33(*); !00-00-00!; False:C215)
+	// Apr 22, 2026 4DFix: placeholder :3 was used twice for both nextPMDate# and notAtSite — notAtSite now uses :4
+	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate>:2 & nextPMDate#:3 & notAtSite=:4"; Storage:C1525.cache.endDate; Current date:C33(*); !00-00-00!; False:C215)
 	
 local Function duePMEquipmentsExcludeNPU()->$equipments : cs:C1710.EquipmentSelection  //Prevent Maintenance equipments within X days exclude NPU
 	cs:C1710.Util.me.setDateInterval(False:C215)
-	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate>:2 &  nextPMDate#:2 & notAtSite=:3 & engg=:4"; Storage:C1525.cache.endDate; Current date:C33(*); !00-00-00!; False:C215; False:C215)
+	// Apr 22, 2026 4DFix: placeholder :2 was used twice for nextPMDate>:2 and nextPMDate#:2 with different intended values
+	// (Current date vs !00-00-00!). Added :3 for !00-00-00!, shifted notAtSite to :4 and engg to :5
+	$equipments:=ds:C1482.Equipment.query("nextPMDate<=:1 & nextPMDate>:2 & nextPMDate#:3 & notAtSite=:4 & engg=:5"; Storage:C1525.cache.endDate; Current date:C33(*); !00-00-00!; False:C215; False:C215)
 	
 local Function NPUEquipments()->$equipments : cs:C1710.EquipmentSelection  //NPU List
 	$equipments:=ds:C1482.Equipment.query("notAtSite=:1 & engg=:2"; False:C215; True:C214)

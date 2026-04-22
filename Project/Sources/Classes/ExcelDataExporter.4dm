@@ -10,8 +10,9 @@ property autoQuit : Boolean
 property title : Text
 property sheetName : Text
 property destinationFileName : Text
+property showFooter : Boolean
 
-Class constructor($templatePath : Text; $mapping : Collection; $entitySelection; $destinationFileName : Text; $destinationFolderPath : Text; $title : Text; $sheetName : Text)
+Class constructor($templatePath : Text; $mapping : Collection; $entitySelection; $destinationFileName : Text; $destinationFolderPath : Text; $title : Text; $sheetName : Text; $showFooter : Boolean)
 	This:C1470.templatePath:=$templatePath
 	This:C1470.mapping:=$mapping
 	This:C1470.entitySelection:=$entitySelection
@@ -20,6 +21,7 @@ Class constructor($templatePath : Text; $mapping : Collection; $entitySelection;
 	This:C1470.destinationFolderPath:=$destinationFolderPath
 	This:C1470.title:=$title
 	This:C1470.sheetName:=$sheetName
+	This:C1470.showFooter:=$showFooter
 	
 	// This function will be called on each event of the offscreen area 
 Function onEvent()
@@ -38,15 +40,14 @@ Function onEvent()
 			//SET TIMER(0)
 			
 			
-			$row:=1
-			$col:=0
+		$row:=1
+		$col:=0
+		
+		//Title (only if non-empty)
+		If (This:C1470.title#"")
 			
-			//Title
-			
-			// The title style
 			$style:=New object:C1471
 			$style.font:="14pt Arial bold"
-			//$style.backColor:="#DCDCDC"
 			$style.borderBottom:=New object:C1471("color"; "black"; "style"; vk line style thin:K89:39)
 			
 			VP SET CELL STYLE(VP Cells(This:C1470.area; 0; $row; This:C1470.mapping.length; 1); $style)
@@ -54,115 +55,113 @@ Function onEvent()
 			VP SET TEXT VALUE(VP Cell(This:C1470.area; $col; $row); This:C1470.title)
 			VP Combine ranges(VP Cells(This:C1470.area; 0; $row; 2; 1); VP Cells(This:C1470.area; 3; $row; This:C1470.mapping.length; 1))
 			
-			
 			$row:=2
-			$col:=0
 			
-			//Headers
-			For each ($header; This:C1470.mapping.extract("header"))
-				VP SET TEXT VALUE(VP Cell(This:C1470.area; $col; $row); $header)
+		End if 
+		
+		$col:=0
+		
+		//Headers
+		For each ($header; This:C1470.mapping.extract("header"))
+			VP SET TEXT VALUE(VP Cell(This:C1470.area; $col; $row); $header)
+			$col:=$col+1
+		End for each 
+		
+		$columnCount:=$col
+		
+		$style:=New object:C1471
+		$style.font:="bold Arial"
+		$style.backColor:="#FFFF00"
+		
+		VP SET CELL STYLE(VP Cells(This:C1470.area; 0; $row; $col; 1); $style)
+		VP SET ROW ATTRIBUTES(VP Row(This:C1470.area; $row); New object:C1471("height"; 30))
+		
+		$row:=$row+1
+		$col:=0
+		
+		$colomnWith:=This:C1470.mapping.extract("header").map(Formula:C1597(Length:C16($1.value)))
+		
+		// Pre-initialize footer values
+		$footerValues:=New collection:C1472()
+		For ($j; 0; This:C1470.mapping.length-1)
+			If (This:C1470.mapping[$j].footerOperation="sum")
+				$footerValues[$j]:=0
+			Else 
+				$footerValues[$j]:=This:C1470.mapping[$j].footerOperation
+			End if 
+		End for 
+		
+		//Data
+		For each ($entity; This:C1470.entitySelection)
+			
+			For each ($field; This:C1470.mapping.extract("field"))
+				
+				Case of 
+						
+					: ($field="")
+						
+					: (String:C10($entity[$field])="False") | (String:C10($entity[$field])="True")  //Boolean fields
+						
+						$content:=$entity[$field]=False:C215 ? "N" : "Y"
+						VP SET TEXT VALUE(VP Cell(This:C1470.area; $col; $row); $content)
+						
+					Else 
+						
+						var $content : Variant
+						
+						$linksFields:=Split string:C1554($field; "."; sk ignore empty strings:K86:1+sk trim spaces:K86:2)
+						
+						$content:=$entity[String:C10($linksFields[0])]
+						
+						For ($i; 1; $linksFields.length-1)
+							$content:=String:C10($content[String:C10($linksFields[$i])])
+							If ($content=Null:C1517)
+								$content:=""
+								break
+							End if 
+							
+						End for 
+						
+						If (This:C1470.mapping.extract("footerOperation")[$col]="sum")
+							$footerValues[$col]:=Num:C11($footerValues[$col])+Num:C11($content)
+						End if 
+						
+						//Fill the columns width collection
+						If (Length:C16(String:C10($content))>$colomnWith[$col])
+							$colomnWith[$col]:=Length:C16(String:C10($content))
+						End if 
+						
+						If (String:C10($content)="False") | (String:C10($content)="True")
+							$content:=$content=False:C215 ? "N" : "Y"
+						End if 
+						
+						VP SET VALUE(VP Cell(This:C1470.area; $col; $row); New object:C1471("value"; $content))
+						
+				End case 
+				
 				$col:=$col+1
 			End for each 
-			
-			$columnCount:=$col  //VP Get column count(This.area)
-			
-			// The header style
-			$style:=New object:C1471
-			$style.font:="bold Arial"
-			$style.backColor:="#FFFF00"
-			
-			VP SET CELL STYLE(VP Cells(This:C1470.area; 0; $row; $col; 1); $style)
-			VP SET ROW ATTRIBUTES(VP Row(This:C1470.area; $row); New object:C1471("height"; 30))
-			
 			$row:=$row+1
 			$col:=0
+			VP INSERT ROWS(VP Row(This:C1470.area; $row; 1))
+		End for each 
+		
+		//Footer (only if requested)
+		If (This:C1470.showFooter)
 			
-			$footerValues:=New collection:C1472()
-			
-			$colomnWith:=This:C1470.mapping.extract("header").map(Formula:C1597(Length:C16($1.value)))
-			
-			
-			//Data
-			For each ($entity; This:C1470.entitySelection)
-				
-				For each ($field; This:C1470.mapping.extract("field"))
-					
-					Case of 
-							
-						: ($field="")
-							
-						: (String:C10($entity[$field])="False") | (String:C10($entity[$field])="True")  //Boolean fields
-							
-							$content:=$entity[$field]=False:C215 ? "N" : "Y"
-							VP SET TEXT VALUE(VP Cell(This:C1470.area; $col; $row); $content)
-							
-						Else 
-							
-							var $content : Variant
-							
-							$linksFields:=Split string:C1554($field; "."; sk ignore empty strings:K86:1+sk trim spaces:K86:2)
-							
-							$content:=$entity[String:C10($linksFields[0])]
-							
-							For ($i; 1; $linksFields.length-1)
-								$content:=String:C10($content[String:C10($linksFields[$i])])
-								If ($content=Null:C1517)
-									$content:=""
-									break
-								End if 
-								
-							End for 
-							
-							//Fill the footer collection
-							Case of 
-									
-								: (This:C1470.mapping.extract("footerOperation")[$col]="sum")
-									
-									If ($row=3)
-										$footerValues[$col]:=0
-									End if 
-									
-									$footerValues[$col]:=Num:C11($footerValues[$col])+Num:C11($content)
-									
-								Else 
-									$footerValues[$col]:=This:C1470.mapping.extract("footerOperation")[$col]
-							End case 
-							
-							//Fill the columns width collection
-							If (Length:C16(String:C10($content))>$colomnWith[$col])
-								$colomnWith[$col]:=Length:C16(String:C10($content))
-							End if 
-							
-							If (String:C10($content)="False") | (String:C10($content)="True")
-								$content:=$content=False:C215 ? "N" : "Y"
-							End if 
-							
-							VP SET VALUE(VP Cell(This:C1470.area; $col; $row); New object:C1471("value"; $content))
-							
-					End case 
-					
-					$col:=$col+1
-				End for each 
-				$row:=$row+1
-				$col:=0
-				VP INSERT ROWS(VP Row(This:C1470.area; $row; 1))
-			End for each 
-			
-			
-			//Footer
 			For each ($value; $footerValues)
-				
 				VP SET VALUE(VP Cell(This:C1470.area; $col; $row); New object:C1471("value"; $value))
 				$col:=$col+1
 			End for each 
 			
-			// The footer style
 			$style:=New object:C1471
 			$style.font:="bold underline"
 			$style.backColor:="#D3D3D3"
 			$style.borderTop:=New object:C1471("color"; "black"; "style"; vk line style thin:K89:39)
 			
 			VP SET CELL STYLE(VP Cells(This:C1470.area; 0; $row; $columnCount; 1); $style)
+			
+		End if 
 			
 			//Columns With
 			For ($i; 0; $colomnWith.length-1)
