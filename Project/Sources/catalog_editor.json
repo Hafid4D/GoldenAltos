@@ -804,7 +804,7 @@
 				"left": 1664,
 				"top": 1684,
 				"width": 217,
-				"height": 483.33203125
+				"height": 502.33203125
 			},
 			"displayable_fields_count": 21
 		},
@@ -2641,6 +2641,14 @@
 		}
 	},
 	"relations": {
+		"19CBBAB2CD48489CB8085D279B75B7E6": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"0190757795B04487B0239E6033600B33": {
 			"color": {
 				"red": 240,

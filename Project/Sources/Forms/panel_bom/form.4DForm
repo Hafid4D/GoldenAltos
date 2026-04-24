@@ -49,7 +49,7 @@
 					"left": 118,
 					"width": 200,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.costumer.name",
+					"dataSource": "Form:C1466.current_item.customer.name",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -114,7 +114,8 @@
 						"onDataChange"
 					],
 					"fill": "transparent",
-					"borderStyle": "none"
+					"borderStyle": "none",
+					"textAlign": "left"
 				},
 				"label_0_8": {
 					"type": "text",
@@ -141,7 +142,8 @@
 						"onDataChange"
 					],
 					"fill": "transparent",
-					"borderStyle": "none"
+					"borderStyle": "none",
+					"textAlign": "left"
 				},
 				"label_0_4": {
 					"type": "text",
@@ -180,7 +182,7 @@
 					"left": 118,
 					"width": 200,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.partNumber",
+					"dataSource": "Form:C1466.current_item.Bom_Part_Num",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -218,6 +220,37 @@
 					],
 					"dataSource": "Form:C1466.current_item.PhaseOut",
 					"dataSourceTypeHint": "boolean"
+				},
+				"pup_division": {
+					"type": "button",
+					"top": 61,
+					"left": 413,
+					"width": 175,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_division.4dm",
+					"events": [
+						"onClick"
+					],
+					"bottom": 84,
+					"textAlign": "left"
+				},
+				"label_0_6": {
+					"type": "text",
+					"top": 64,
+					"left": 313,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Division",
+					"textAlign": "right"
 				}
 			}
 		},
@@ -249,53 +282,52 @@
 					"headerHeight": "24px",
 					"listboxType": "collection",
 					"visibility": "visible",
-					"dataSource": "Form:C1466.lb_steps",
+					"dataSource": "Form:C1466.lb_bomItems",
 					"alternateFill": "#F7F9FC",
 					"selectionMode": "single",
-					"currentItemSource": "Form:C1466.selectedStep",
-					"method": "ObjectMethods/lb_steps.4dm",
+					"currentItemSource": "Form:C1466.selectedItem",
 					"scrollbarHorizontal": "hidden",
 					"columns": [
 						{
 							"header": {
 								"name": "Header29",
-								"text": "Description",
+								"text": "Part Number",
 								"fontWeight": "bold"
 							},
 							"name": "Column29",
 							"footer": {
 								"name": "Footer29"
 							},
-							"dataSource": "This:C1470.UniqueID",
-							"width": 180,
+							"dataSource": "This:C1470.Bom_Part_Num",
+							"width": 142,
 							"enterable": false
 						},
 						{
 							"header": {
 								"name": "Header30",
-								"text": "Customer",
+								"text": "Supplier",
 								"fontWeight": "bold"
 							},
 							"name": "Column30",
 							"footer": {
 								"name": "Footer30"
 							},
-							"dataSource": "This:C1470.Supplier_partnum",
-							"width": 180,
+							"dataSource": "This:C1470.Supplier",
+							"width": 120,
 							"enterable": false
 						},
 						{
 							"header": {
 								"name": "Header31",
-								"text": "Specification",
+								"text": "Description",
 								"fontWeight": "bold"
 							},
 							"name": "Column31",
 							"footer": {
 								"name": "Footer31"
 							},
-							"dataSource": "This:C1470.Division",
-							"width": 90,
+							"dataSource": "This:C1470.PartDescription",
+							"width": 190,
 							"dataSourceTypeHint": "date",
 							"dateFormat": "short",
 							"textAlign": "center",
@@ -342,38 +374,20 @@
 					"height": 15,
 					"fontWeight": "bold"
 				},
-				"entryField_stepLine_operationCode": {
+				"entryField_Supplier": {
 					"type": "input",
-					"left": 713,
-					"top": 273,
+					"left": 708,
+					"top": 154,
 					"width": 263,
-					"height": 18,
+					"height": 15,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.selectedStep.operationCode",
-					"choiceList": {
-						"$ref": "/SOURCES/lists.json#/OperationCodes"
-					},
-					"enterable": false,
+					"dataSource": "Form:C1466.selectedItem.Supplier",
+					"method": "ObjectMethods/entryField_Supplier.4dm",
 					"events": [
 						"onDataChange"
 					],
-					"right": 976,
-					"method": "ObjectMethods/entryField_stepLine_operationCode.4dm"
-				},
-				"entryField_stepLine_description": {
-					"type": "input",
-					"left": 713,
-					"top": 153,
-					"width": 263,
-					"height": 32,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.selectedStep.description",
-					"method": "ObjectMethods/entryField_stepLine_description.4dm",
-					"events": [
-						"onDataChange"
-					]
+					"textAlign": "left"
 				},
 				"label_stepLine_specification": {
 					"type": "text",
@@ -392,55 +406,6 @@
 					"width": 92,
 					"height": 15,
 					"fontWeight": "bold"
-				},
-				"entryField_stepLine_alert": {
-					"type": "input",
-					"left": 713,
-					"top": 181,
-					"width": 263,
-					"height": 32,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.selectedStep.alert",
-					"method": "ObjectMethods/entryField_stepLine_alert.4dm",
-					"events": [
-						"onDataChange"
-					]
-				},
-				"entryField_stepLine_areas": {
-					"type": "input",
-					"left": 713,
-					"top": 241,
-					"width": 263,
-					"height": 18,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.selectedStep.areas",
-					"enterable": false,
-					"method": "ObjectMethods/entryField_stepLine_areas.4dm",
-					"events": [
-						"onDataChange"
-					],
-					"choiceList": {
-						"$ref": "/SOURCES/lists.json#/Areas"
-					},
-					"right": 976
-				},
-				"entryField_stepLine_specification": {
-					"type": "input",
-					"left": 713,
-					"top": 209,
-					"width": 263,
-					"height": 18,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.selectedStep.specification",
-					"enterable": false,
-					"events": [
-						"onDataChange"
-					],
-					"method": "ObjectMethods/entryField_stepLine_specification.4dm",
-					"right": 976
 				},
 				"Text": {
 					"type": "text",
@@ -461,25 +426,6 @@
 					"height": 15,
 					"fontWeight": "bold"
 				},
-				"entryField_stepLine_operationCode1": {
-					"type": "input",
-					"left": 713,
-					"top": 333,
-					"width": 263,
-					"height": 18,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.selectedStep.operationCode",
-					"choiceList": {
-						"$ref": "/SOURCES/lists.json#/OperationCodes"
-					},
-					"enterable": false,
-					"events": [
-						"onDataChange"
-					],
-					"right": 976,
-					"method": "ObjectMethods/entryField_stepLine_operationCode1.4dm"
-				},
 				"label_stepLine_operationCode2": {
 					"type": "text",
 					"text": "Qty in inventory",
@@ -488,25 +434,6 @@
 					"width": 92,
 					"height": 15,
 					"fontWeight": "bold"
-				},
-				"entryField_stepLine_operationCode2": {
-					"type": "input",
-					"left": 713,
-					"top": 353,
-					"width": 263,
-					"height": 18,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.selectedStep.operationCode",
-					"choiceList": {
-						"$ref": "/SOURCES/lists.json#/OperationCodes"
-					},
-					"enterable": false,
-					"events": [
-						"onDataChange"
-					],
-					"right": 976,
-					"method": "ObjectMethods/entryField_stepLine_operationCode2.4dm"
 				},
 				"label_stepLine_operationCode3": {
 					"type": "text",
@@ -517,25 +444,6 @@
 					"height": 15,
 					"fontWeight": "bold"
 				},
-				"entryField_stepLine_operationCode3": {
-					"type": "input",
-					"left": 713,
-					"top": 373,
-					"width": 263,
-					"height": 18,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.selectedStep.operationCode",
-					"choiceList": {
-						"$ref": "/SOURCES/lists.json#/OperationCodes"
-					},
-					"enterable": false,
-					"events": [
-						"onDataChange"
-					],
-					"right": 976,
-					"method": "ObjectMethods/entryField_stepLine_operationCode3.4dm"
-				},
 				"label_stepLine_operationCode4": {
 					"type": "text",
 					"text": "Unit price",
@@ -544,25 +452,6 @@
 					"width": 92,
 					"height": 15,
 					"fontWeight": "bold"
-				},
-				"entryField_stepLine_operationCode4": {
-					"type": "input",
-					"left": 713,
-					"top": 393,
-					"width": 263,
-					"height": 18,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.selectedStep.operationCode",
-					"choiceList": {
-						"$ref": "/SOURCES/lists.json#/OperationCodes"
-					},
-					"enterable": false,
-					"events": [
-						"onDataChange"
-					],
-					"right": 976,
-					"method": "ObjectMethods/entryField_stepLine_operationCode4.4dm"
 				},
 				"label_stepLine_operationCode5": {
 					"type": "text",
@@ -573,25 +462,6 @@
 					"height": 15,
 					"fontWeight": "bold"
 				},
-				"entryField_stepLine_operationCode5": {
-					"type": "input",
-					"left": 713,
-					"top": 413,
-					"width": 263,
-					"height": 18,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.selectedStep.operationCode",
-					"choiceList": {
-						"$ref": "/SOURCES/lists.json#/OperationCodes"
-					},
-					"enterable": false,
-					"events": [
-						"onDataChange"
-					],
-					"right": 976,
-					"method": "ObjectMethods/entryField_stepLine_operationCode5.4dm"
-				},
 				"label_stepLine_operationCode6": {
 					"type": "text",
 					"text": "SequenceID",
@@ -600,25 +470,6 @@
 					"width": 92,
 					"height": 15,
 					"fontWeight": "bold"
-				},
-				"entryField_stepLine_operationCode6": {
-					"type": "input",
-					"left": 713,
-					"top": 433,
-					"width": 263,
-					"height": 18,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.selectedStep.operationCode",
-					"choiceList": {
-						"$ref": "/SOURCES/lists.json#/OperationCodes"
-					},
-					"enterable": false,
-					"events": [
-						"onDataChange"
-					],
-					"right": 976,
-					"method": "ObjectMethods/entryField_stepLine_operationCode6.4dm"
 				},
 				"label_stepLine_operationCode7": {
 					"type": "text",
@@ -629,29 +480,175 @@
 					"height": 15,
 					"fontWeight": "bold"
 				},
-				"entryField_stepLine_operationCode7": {
+				"entryField_TimesFactor": {
 					"type": "input",
-					"left": 713,
-					"top": 453,
+					"left": 708,
+					"top": 274,
 					"width": 263,
-					"height": 18,
+					"height": 15,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.selectedStep.operationCode",
-					"choiceList": {
-						"$ref": "/SOURCES/lists.json#/OperationCodes"
-					},
-					"enterable": false,
+					"dataSource": "Form:C1466.selectedItem.TimesFactor",
+					"method": "ObjectMethods/entryField_TimesFactor.4dm",
 					"events": [
 						"onDataChange"
 					],
-					"right": 976,
-					"method": "ObjectMethods/entryField_stepLine_operationCode7.4dm"
+					"textAlign": "left"
+				},
+				"entryField_InternalPartNum": {
+					"type": "input",
+					"left": 708,
+					"top": 334,
+					"width": 263,
+					"height": 15,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.selectedItem.InternalPartNum",
+					"method": "ObjectMethods/entryField_InternalPartNum.4dm",
+					"events": [
+						"onDataChange"
+					],
+					"textAlign": "left"
+				},
+				"entryField_QtyInInventory": {
+					"type": "input",
+					"left": 708,
+					"top": 354,
+					"width": 263,
+					"height": 15,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.selectedItem.QtyInInventory",
+					"method": "ObjectMethods/entryField_QtyInInventory.4dm",
+					"events": [
+						"onDataChange"
+					],
+					"textAlign": "left"
+				},
+				"entryField_BOnumber": {
+					"type": "input",
+					"left": 708,
+					"top": 374,
+					"width": 263,
+					"height": 15,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.selectedItem.BOnumber",
+					"method": "ObjectMethods/entryField_BOnumber.4dm",
+					"events": [
+						"onDataChange"
+					],
+					"textAlign": "left"
+				},
+				"entryField_UnitPrice": {
+					"type": "input",
+					"left": 708,
+					"top": 394,
+					"width": 263,
+					"height": 15,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.selectedItem.UnitPrice",
+					"method": "ObjectMethods/entryField_UnitPrice.4dm",
+					"events": [
+						"onDataChange"
+					],
+					"textAlign": "left"
+				},
+				"entryField_PartDescription": {
+					"type": "input",
+					"left": 708,
+					"top": 414,
+					"width": 263,
+					"height": 15,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.selectedItem.PartDescription",
+					"method": "ObjectMethods/entryField_PartDescription.4dm",
+					"events": [
+						"onDataChange"
+					],
+					"textAlign": "left"
+				},
+				"entryField_SequenceID": {
+					"type": "input",
+					"left": 708,
+					"top": 434,
+					"width": 263,
+					"height": 15,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.selectedItem.SequenceID",
+					"method": "ObjectMethods/entryField_SequenceID.4dm",
+					"events": [
+						"onDataChange"
+					],
+					"textAlign": "left"
+				},
+				"entryField_Units": {
+					"type": "input",
+					"left": 708,
+					"top": 454,
+					"width": 263,
+					"height": 15,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.selectedItem.Units",
+					"method": "ObjectMethods/entryField_Units.4dm",
+					"events": [
+						"onDataChange"
+					],
+					"textAlign": "left"
+				},
+				"entryField_BomQty": {
+					"type": "input",
+					"left": 708,
+					"top": 242,
+					"width": 263,
+					"height": 15,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.selectedItem.BomQty",
+					"method": "ObjectMethods/entryField_BomQty.4dm",
+					"events": [
+						"onDataChange"
+					],
+					"textAlign": "left"
+				},
+				"entryField_SupplierPartNum": {
+					"type": "input",
+					"left": 708,
+					"top": 210,
+					"width": 263,
+					"height": 15,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.selectedItem.SupplierPartNum",
+					"method": "ObjectMethods/entryField_SupplierPartNum.4dm",
+					"events": [
+						"onDataChange"
+					],
+					"textAlign": "left"
+				},
+				"entryField_division": {
+					"type": "input",
+					"left": 708,
+					"top": 182,
+					"width": 263,
+					"height": 15,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.selectedItem.division.name",
+					"method": "ObjectMethods/entryField_division.4dm",
+					"events": [
+						"onDataChange"
+					],
+					"textAlign": "left"
 				}
 			}
 		}
 	],
-	"geometryStamp": 103,
+	"geometryStamp": 219,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"editor": {
 		"activeView": "View 1",
@@ -659,5 +656,6 @@
 		"views": {
 			"View 1": {}
 		}
-	}
+	},
+	"method": "method.4dm"
 }
