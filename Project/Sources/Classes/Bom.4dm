@@ -3,9 +3,9 @@ Class extends DataClass
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry:=cs:C1710.sfw_definitionEntry.new("bom"; ["customerService"]; "Bom"; "Bom")
-	$entry.setDataclass("Bom")
+	$entry.setDataclass("BOM")
 	$entry.setDisplayOrder(-1000)
-	$entry.setIcon("image/entry/purchase-orders-white-50x50.png")
+	$entry.setIcon("image/entry/bill.png")
 	
 	$entry.setSearchboxField("customer.name")
 	
