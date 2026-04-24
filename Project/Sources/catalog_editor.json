@@ -793,6 +793,36 @@
 				}
 			}
 		},
+		"BomItem": {
+			"color": {
+				"red": 0,
+				"green": 255,
+				"blue": 0,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 1664,
+				"top": 1684,
+				"width": 217,
+				"height": 483.33203125
+			},
+			"displayable_fields_count": 21
+		},
+		"BOM": {
+			"color": {
+				"red": 0,
+				"green": 255,
+				"blue": 0,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 1365,
+				"top": 1678,
+				"width": 220,
+				"height": 366.33203125
+			},
+			"displayable_fields_count": 15
+		},
 		"Bin": {
 			"color": {
 				"red": 168,
@@ -2611,6 +2641,30 @@
 		}
 	},
 	"relations": {
+		"0190757795B04487B0239E6033600B33": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"DB6BA8FA3C104FD1B2C29A3270C51291": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
+		"62184D519C7A4C148ACFB7E3AD4B0335": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"186BE09E21AF4F4BAA5DA11DC36BD83F": {
 			"color": {
 				"red": 240,
