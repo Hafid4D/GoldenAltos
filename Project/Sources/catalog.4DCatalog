@@ -1444,6 +1444,99 @@
 		<field name="moreData" uuid="E2DCC68B00A44A80A7F976AEDB548DF6" type="21" blob_switch_size="2147483647" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="9611B9D925D54FF6A5F4F5B6D3F11A0E"/>
 	</table>
+	<table name="BOM" uuid="B323638126AF4BD7A4B7A486B0ACF9DA" id="96">
+		<field name="UUID" uuid="F5B5AFDC41774988B9579BC25C16F6E5" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="Bom_Part_Num" uuid="5C431589DCF34031A673416246AD876E" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="Inv_Status_Date" uuid="D3F7B2206F064837AB4B74967449D3DD" type="8" never_null="true" id="3"/>
+		<field name="Inv_Status_Time" uuid="E5496497064F444ABD9E5E4975D1467C" type="9" never_null="true" id="4">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="CreatedBy" uuid="4BEE3BEB216D4C12B7F1C7B6BBFFAD15" type="10" limiting_length="255" never_null="true" id="5">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="Rev" uuid="E5A5EF0E27F4496EA2564E9750F5AAEA" type="6" never_null="true" id="6">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="RevDate" uuid="1DB37805FF7340F29A79F572A553C326" type="8" never_null="true" id="7">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="RevHistory" uuid="02948D21FDA44EC6980D1B8236676BB1" type="10" never_null="true" id="8">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="ReasonForLastChange" uuid="12AF52498B0F4B858E3F2ADD44C13EF6" type="10" never_null="true" id="9">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="DateTimeStamp" uuid="7A75CA2825704B05921DF5BDA2F6F11B" type="4" never_null="true" id="10">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="CreationDateTimeStamp" uuid="4800068FDEFE44529C2361F15F38E76A" type="4" never_null="true" id="11">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="Void" uuid="D8BC10AC457D408EAB424F4044E68AB6" type="1" never_null="true" id="12">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="PhaseOut" uuid="2F67DF31699F430A9BCED36A2398D978" type="1" never_null="true" id="13">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="UUID_Division" uuid="82A67D0769A5481790282EF72EC080EF" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="14"/>
+		<field name="UUID_Customer" uuid="BADBA2E2DBB84AE8847CF285FF1427D0" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="15"/>
+		<primary_key field_name="UUID" field_uuid="F5B5AFDC41774988B9579BC25C16F6E5"/>
+	</table>
+	<table name="BomItem" uuid="AF8FB5DC864D4AA78E5B5588F33F76AE" id="97">
+		<field name="UUID" uuid="6E72F8C970FE4568B1B5F6FB9DB00814" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="Bom_Part_Num" uuid="1C0FD421460E4CB28BC2CBCE3416A8FF" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="SupplierPartNum" uuid="4FD55A9389214BE78DDB208BEDFC21CC" type="10" limiting_length="255" never_null="true" id="3">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="TimesFactor" uuid="B0C42763418647039FC164E7C911713A" type="6" never_null="true" id="4">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="InternalPartNum" uuid="52F99E045E6843F0BDD5B727EB8DD2E8" type="10" limiting_length="255" never_null="true" id="5">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="DispensedByTool" uuid="64D75AC3B0B04CCDB46A0EFBE12789B8" type="1" never_null="true" id="6">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="BomQty" uuid="B250B4014B364DD7810E12DA6EF75CA8" type="4" never_null="true" id="7">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="QtyInInventory" uuid="8D5DB8D3CD9A43DB9D2741C242A75FB0" type="4" never_null="true" id="8">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="Supplier" uuid="287F108889B94F9D85396D76B171F8C3" type="10" limiting_length="255" never_null="true" id="9">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="BOnumber" uuid="E43B4E3BE14442D48F59F43F093DC828" type="4" never_null="true" id="10">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="BOlineItemNum" uuid="87B8A64A0FF84379BBCF3987969EBDDF" type="6" never_null="true" id="11">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="UnitPrice" uuid="7EBC796993C842EAAC11370FD84D3977" type="6" never_null="true" id="12">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="PartDescription" uuid="27E006B892AA4CA88C81CE54814944EA" type="10" limiting_length="255" never_null="true" id="13">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="Units" uuid="2245A48CE50F4554B7A77739828D4789" type="10" limiting_length="255" never_null="true" id="14">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="MinAbsoluteQty" uuid="52217EA1938C45D280F5BEB087E29203" type="6" never_null="true" id="15">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="BuyUnitsDivFactor" uuid="2B1BC99289C34191A3EA427081F6AB74" type="6" never_null="true" id="16">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="DateTimeStamp" uuid="8B03144373EF4AB4B8B8F322ACC328DB" type="4" never_null="true" id="17">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="SequenceID" uuid="7ADB722079D74E328793894F914BB00A" type="4" never_null="true" id="18">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="CreationDateTimeStamp" uuid="2CE0E48ED73C41D69E16A7D0F5904AFF" type="4" never_null="true" id="19"/>
+		<field name="UUID_Bom" uuid="6E5478EBE33B4F208337C5BEC61EA8C4" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="20"/>
+		<primary_key field_name="UUID" field_uuid="6E72F8C970FE4568B1B5F6FB9DB00814"/>
+	</table>
 	<table name="Customer" uuid="96D1CE81460A4F75B3F4275138C8F778" id="114">
 		<field name="UUID" uuid="37676CD94E8B423595ED98B5C0E9CF89" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="name" uuid="6408BE6907C146339726DEB3047C211E" type="10" limiting_length="255" never_null="true" id="2">
@@ -3708,6 +3801,42 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="62184D519C7A4C148ACFB7E3AD4B0335" name_Nto1="bom" name_1toN="bomitems" state="1">
+		<related_field kind="source">
+			<field_ref uuid="6E5478EBE33B4F208337C5BEC61EA8C4" name="UUID_Bom">
+				<table_ref uuid="AF8FB5DC864D4AA78E5B5588F33F76AE" name="BomItem"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="F5B5AFDC41774988B9579BC25C16F6E5" name="UUID">
+				<table_ref uuid="B323638126AF4BD7A4B7A486B0ACF9DA" name="BOM"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="DB6BA8FA3C104FD1B2C29A3270C51291" name_Nto1="customer" name_1toN="boms" state="1">
+		<related_field kind="source">
+			<field_ref uuid="BADBA2E2DBB84AE8847CF285FF1427D0" name="UUID_Customer">
+				<table_ref uuid="B323638126AF4BD7A4B7A486B0ACF9DA" name="BOM"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="37676CD94E8B423595ED98B5C0E9CF89" name="UUID">
+				<table_ref uuid="96D1CE81460A4F75B3F4275138C8F778" name="Customer"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="0190757795B04487B0239E6033600B33" name_Nto1="division" name_1toN="boms" state="1">
+		<related_field kind="source">
+			<field_ref uuid="82A67D0769A5481790282EF72EC080EF" name="UUID_Division">
+				<table_ref uuid="B323638126AF4BD7A4B7A486B0ACF9DA" name="BOM"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="3B46C986029743428A30E84AA5F8ADC4" name="UUID">
+				<table_ref uuid="F25CD20FCCFE2044A3D568BAFE905227" name="Division"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="005E48A922A4464DB92973931B467ACF" type="3">
 		<field_ref uuid="17F71D68FA714CE9A75ED79CA63E3BE2" name="UUID_Lead">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
@@ -4748,6 +4877,11 @@
 			<table_ref uuid="A26EDBD8B62D4DE087E21A5FA8D05B4D" name="SalesTransaction"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="ABAEBB32A2ED443EA9B32FEEA5AD2653" type="7">
+		<field_ref uuid="F5B5AFDC41774988B9579BC25C16F6E5" name="UUID">
+			<table_ref uuid="B323638126AF4BD7A4B7A486B0ACF9DA" name="BOM"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="AC9AD076B2671047AAB787FC0FB1283F" type="1">
 		<field_ref uuid="DDD1D8B9DED6419FA5277AF0AF879E0A" name="UUID">
 			<table_ref uuid="BE46414800704294A200CFC78A849926" name="InteractionTrigger"/>
@@ -5121,6 +5255,11 @@
 	<index kind="regular" unique_keys="true" uuid="E91FBC0A28B4AF48819A7072E8EBDC96" type="7">
 		<field_ref uuid="D694579CEB4CD741865BD4C94B64E596" name="UUID">
 			<table_ref uuid="DF2BA266C1EE294B9508F9997CCE2C22" name="SalesTax"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="EB1B97DED8B74D52941844CD9DD171F6" type="7">
+		<field_ref uuid="6E72F8C970FE4568B1B5F6FB9DB00814" name="UUID">
+			<table_ref uuid="AF8FB5DC864D4AA78E5B5588F33F76AE" name="BomItem"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="EB204F57F8E3473886E6AA45180984EA" type="3">
