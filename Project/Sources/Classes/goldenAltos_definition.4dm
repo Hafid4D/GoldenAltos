@@ -244,6 +244,12 @@ Function _visions_definition()
 	$vision.setIcon("image/vision/buying-24x24.png")
 	This:C1470._push_vision($vision)
 	
+	$vision:=cs:C1710.sfw_definitionVision.new("receiving"; "Receiving")
+	$vision.setToolbarBackgroundColor("SteelBlue")
+	$vision.setFocusRingColor("darkred")
+	$vision.setIcon("image/vision/receiving-24x24.png")
+	This:C1470._push_vision($vision)
+	
 	$vision:=cs:C1710.sfw_definitionVision.new("accounting"; "Accounting")
 	$vision.setToolbarBackgroundColor("#20B2AA")
 	$vision.setFocusRingColor("navy")
@@ -323,6 +329,24 @@ Function _entries_definition()
 	$entry.enableTransaction()
 	
 	$entry.setItemAction("Sample Lot Traveler TAG"; "Receiver_travelerTag")
+	
+	This:C1470._push_entry($entry)
+	
+	$entry:=cs:C1710.sfw_definitionEntry.new("customerReceivedMaterial"; ["receiving"]; "Customer Received Material")
+	$entry.setDataclass("Lot")
+	$entry.setDisplayOrder(-400)
+	$entry.setIcon("image/entry/receiver-50x50.png")
+	
+	$entry.setSearchboxField("lotNumber")
+	
+	$entry.setPanel("panel_customerReceivedMaterial")
+	$entry.setPanelPage(1; ""; "Main")
+	$entry.setPanelPage(2; ""; "Customer Provided Material")
+	
+	$entry.setLBItemsColumn("lotNumber"; "Lot #"; "width:450")
+	
+	$entry.setLBItemsOrderBy("lotNumber")
+	$entry.enableTransaction()
 	
 	This:C1470._push_entry($entry)
 	
