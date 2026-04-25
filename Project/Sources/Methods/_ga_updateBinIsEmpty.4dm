@@ -30,6 +30,12 @@ For each ($bin; $bins)
 	
 End for each 
 
+If (Storage:C1525.cache=Null:C1517)
+	Use (Storage:C1525)
+		Storage:C1525.cache:=New shared object:C1526
+	End use 
+End if 
+
 // Invalidate and reload the bin cache
 Use (Storage:C1525.cache)
 	Storage:C1525.cache.bins:=Null:C1517
