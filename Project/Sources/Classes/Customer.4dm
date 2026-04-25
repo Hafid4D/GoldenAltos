@@ -9,6 +9,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setIcon("image/entry/customers-white-50x50.png")
 	
 	$entry.setSearchboxField("name")
+	$entry.setValidationRule("name"; "entryField_name"; "mandatory"; "trimSpace"; "unique"; "message:Customer name is mandatory and must be unique")
 	
 	$entry.setPanel("panel_customer")
 	$entry.setPanelPage(1; ""; "Main")
