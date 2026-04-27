@@ -1535,7 +1535,7 @@
 		</field>
 		<field name="CreationDateTimeStamp" uuid="2CE0E48ED73C41D69E16A7D0F5904AFF" type="4" never_null="true" id="19"/>
 		<field name="UUID_Bom" uuid="6E5478EBE33B4F208337C5BEC61EA8C4" type="10" store_as_UUID="true" never_null="true" id="20"/>
-		<field name="UUID_Division" uuid="7D434A94762249A882DD7CB7D49AD7EF" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="21"/>
+		<field name="UUID_Division" uuid="7D434A94762249A882DD7CB7D49AD7EF" type="10" store_as_UUID="true" never_null="true" id="21"/>
 		<primary_key field_name="UUID" field_uuid="6E72F8C970FE4568B1B5F6FB9DB00814"/>
 	</table>
 	<table name="Customer" uuid="96D1CE81460A4F75B3F4275138C8F778" id="114">
