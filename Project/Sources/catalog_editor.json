@@ -430,34 +430,36 @@
 				"height": 463.33203125
 			},
 			"displayable_fields_count": 20,
-			"fields_ordering": 2,
 			"fields": {
 				"lotNumber": {
-					"position": 7
-				},
-				"statusIQA": {
 					"position": 9
 				},
-				"performedBy": {
-					"position": 8
+				"statusIQA": {
+					"position": 11
 				},
-				"jobNumber": {
+				"performedBy": {
 					"position": 10
 				},
-				"date": {
-					"position": 3
-				},
-				"remaining": {
-					"position": 6
-				},
-				"qty": {
+				"moreData": {
 					"position": 5
 				},
-				"type": {
+				"jobNumber": {
+					"position": 12
+				},
+				"date": {
 					"position": 4
 				},
+				"remaining": {
+					"position": 8
+				},
+				"qty": {
+					"position": 7
+				},
+				"type": {
+					"position": 6
+				},
 				"UUID_Inventory": {
-					"position": 2
+					"position": 3
 				},
 				"UUID": {
 					"position": 1
@@ -475,27 +477,108 @@
 				"left": 601.33325195312,
 				"top": 1263.9998779297,
 				"width": 219.052734375,
-				"height": 741.33203125
+				"height": 889.33215332031
 			},
-			"displayable_fields_count": 33,
+			"displayable_fields_count": 40,
 			"fields": {
+				"UUID_Lot": {
+					"position": 34
+				},
+				"UUID_Location": {
+					"position": 33
+				},
+				"moreData": {
+					"position": 32
+				},
+				"docsInServer": {
+					"position": 31
+				},
+				"code": {
+					"position": 30
+				},
+				"comment": {
+					"position": 29
+				},
+				"units": {
+					"position": 28
+				},
+				"location": {
+					"position": 27
+				},
 				"UUID_Staff": {
-					"position": 3
+					"position": 26
 				},
 				"UUID_Customer": {
-					"position": 2
+					"position": 25
+				},
+				"receivedBy": {
+					"position": 24
+				},
+				"division": {
+					"position": 23
+				},
+				"IQA_status": {
+					"position": 22
+				},
+				"IQA_required": {
+					"position": 21
+				},
+				"inventoryID": {
+					"position": 20
+				},
+				"availableQty": {
+					"position": 19
+				},
+				"initialQty": {
+					"position": 18
+				},
+				"totalCost": {
+					"position": 17
+				},
+				"currency": {
+					"position": 16
+				},
+				"actualValue": {
+					"position": 15
+				},
+				"unitCost": {
+					"position": 14
+				},
+				"qtyInStock": {
+					"position": 13
+				},
+				"expirationDate": {
+					"position": 12
 				},
 				"UUID_Job": {
-					"position": 4
+					"position": 11
 				},
-				"partNumber": {
+				"dateIn": {
+					"position": 10
+				},
+				"stockNum": {
+					"position": 9
+				},
+				"partLotNumber": {
+					"position": 8
+				},
+				"classification": {
 					"position": 7
 				},
-				"customerSpecific": {
+				"description": {
 					"position": 6
 				},
-				"customer_provided": {
+				"vendor": {
 					"position": 5
+				},
+				"partNumber": {
+					"position": 4
+				},
+				"customerSpecific": {
+					"position": 3
+				},
+				"customer_provided": {
+					"position": 2
 				},
 				"UUID": {
 					"position": 1
@@ -692,9 +775,155 @@
 				"left": 2438.3334960938,
 				"top": 1050.6667480469,
 				"width": 184.69921875,
-				"height": 1031.3319091797
+				"height": 1091.3319091797
 			},
-			"displayable_fields_count": 47
+			"displayable_fields_count": 49,
+			"fields": {
+				"customerCount": {
+					"position": 48
+				},
+				"number": {
+					"position": 47
+				},
+				"moreData": {
+					"position": 46
+				},
+				"unitCost": {
+					"position": 45
+				},
+				"totalCharge": {
+					"position": 44
+				},
+				"shipRel": {
+					"position": 43
+				},
+				"carrier": {
+					"position": 42
+				},
+				"dateCode": {
+					"position": 41
+				},
+				"packageType": {
+					"position": 40
+				},
+				"altDevNumber": {
+					"position": 39
+				},
+				"cOfCInspector": {
+					"position": 38
+				},
+				"UUID_LotParent": {
+					"position": 37
+				},
+				"cOfCRemarks": {
+					"position": 36
+				},
+				"prQualifier": {
+					"position": 35
+				},
+				"comment": {
+					"position": 34
+				},
+				"status": {
+					"position": 33
+				},
+				"location": {
+					"position": 32
+				},
+				"shippingMemo": {
+					"position": 31
+				},
+				"readyToShipDate": {
+					"position": 30
+				},
+				"trackingNumber": {
+					"position": 29
+				},
+				"releaseNumber": {
+					"position": 28
+				},
+				"OQASimpleSize": {
+					"position": 27
+				},
+				"OQADate": {
+					"position": 26
+				},
+				"OQADone": {
+					"position": 25
+				},
+				"et": {
+					"position": 24
+				},
+				"az": {
+					"position": 23
+				},
+				"totalTested": {
+					"position": 22
+				},
+				"progressive": {
+					"position": 21
+				},
+				"original": {
+					"position": 20
+				},
+				"reCommit": {
+					"position": 19
+				},
+				"commit": {
+					"position": 18
+				},
+				"deviceTableLink": {
+					"position": 17
+				},
+				"customer": {
+					"position": 16
+				},
+				"customerLotNumber": {
+					"position": 15
+				},
+				"poNumber": {
+					"position": 14
+				},
+				"holdTime": {
+					"position": 13
+				},
+				"holdDate": {
+					"position": 12
+				},
+				"onHold": {
+					"position": 11
+				},
+				"currentOrNextArea": {
+					"position": 10
+				},
+				"device": {
+					"position": 9
+				},
+				"ourCount": {
+					"position": 8
+				},
+				"process": {
+					"position": 7
+				},
+				"dateOut": {
+					"position": 6
+				},
+				"lotNumber": {
+					"position": 5
+				},
+				"dateIn": {
+					"position": 4
+				},
+				"code": {
+					"position": 3
+				},
+				"UUID_Job": {
+					"position": 2
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
 		},
 		"Job": {
 			"color": {
@@ -709,7 +938,168 @@
 				"width": 171.73828125,
 				"height": 1174.33203125
 			},
-			"displayable_fields_count": 53
+			"displayable_fields_count": 53,
+			"fields": {
+				"moreData": {
+					"position": 54
+				},
+				"UUID_Customer": {
+					"position": 53
+				},
+				"directCost": {
+					"position": 52
+				},
+				"inventoryCost": {
+					"position": 51
+				},
+				"acNote": {
+					"position": 50
+				},
+				"testerType": {
+					"position": 49
+				},
+				"UUID_SalesTax": {
+					"position": 48
+				},
+				"UUID_PurchaseOrder": {
+					"position": 47
+				},
+				"minimumJobCharge": {
+					"position": 46
+				},
+				"poRel": {
+					"position": 45
+				},
+				"boxStockShipment": {
+					"position": 44
+				},
+				"freight": {
+					"position": 43
+				},
+				"packageType": {
+					"position": 42
+				},
+				"taxable": {
+					"position": 41
+				},
+				"glAcc": {
+					"position": 40
+				},
+				"miscNote": {
+					"position": 39
+				},
+				"miscCharges": {
+					"position": 38
+				},
+				"initials": {
+					"position": 37
+				},
+				"customerShipper": {
+					"position": 36
+				},
+				"altDeviceNumber": {
+					"position": 35
+				},
+				"smtpRecommit": {
+					"position": 34
+				},
+				"currency": {
+					"position": 33
+				},
+				"dropShipCustomer": {
+					"position": 32
+				},
+				"pr_qualifier": {
+					"position": 31
+				},
+				"stmpArchived": {
+					"position": 30
+				},
+				"stmpLastShipped": {
+					"position": 29
+				},
+				"stmpInvoiced": {
+					"position": 28
+				},
+				"stmpExpected": {
+					"position": 27
+				},
+				"archived": {
+					"position": 26
+				},
+				"jobComment": {
+					"position": 25
+				},
+				"shipMemo": {
+					"position": 24
+				},
+				"qtyOnHand": {
+					"position": 23
+				},
+				"qty": {
+					"position": 22
+				},
+				"customerName": {
+					"position": 21
+				},
+				"shippers": {
+					"position": 20
+				},
+				"alternateShipAddress": {
+					"position": 19
+				},
+				"noLots": {
+					"position": 18
+				},
+				"lineItem": {
+					"position": 17
+				},
+				"address": {
+					"position": 16
+				},
+				"parentJobNumber": {
+					"position": 15
+				},
+				"postToPO": {
+					"position": 14
+				},
+				"shipped": {
+					"position": 13
+				},
+				"totalCharge": {
+					"position": 12
+				},
+				"totalTax": {
+					"position": 11
+				},
+				"process": {
+					"position": 10
+				},
+				"deviceNumber": {
+					"position": 8
+				},
+				"stmpCreated": {
+					"position": 7
+				},
+				"UUID_Division": {
+					"position": 6
+				},
+				"poNumber": {
+					"position": 5
+				},
+				"jobNumber": {
+					"position": 4
+				},
+				"code": {
+					"position": 3
+				},
+				"UUID_StepFile": {
+					"position": 2
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
 		},
 		"PurchaseOrderLine": {
 			"color": {
@@ -719,13 +1109,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1749.0001220703,
-				"top": 649.66662597656,
+				"left": 1847.0001220703,
+				"top": 733.66662597656,
 				"width": 189.73828125,
-				"height": 480.33203125
+				"height": 598.33203125
 			},
-			"displayable_fields_count": 20,
-			"fields_ordering": 1
+			"displayable_fields_count": 26
 		},
 		"PurchaseOrder": {
 			"color": {
@@ -735,12 +1124,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1519,
-				"top": 521.33337402344,
+				"left": 1584,
+				"top": 472.33337402344,
 				"width": 157.048828125,
-				"height": 595.33203125
+				"height": 680.33203125
 			},
-			"displayable_fields_count": 26
+			"displayable_fields_count": 30
 		},
 		"Customer": {
 			"color": {
@@ -750,14 +1139,16 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1270,
-				"top": 830,
+				"left": 1273,
+				"top": 870,
 				"width": 188.29302978516,
-				"height": 331.21447753906
+				"height": 501.21447753906
 			},
-			"displayable_fields_count": 13,
-			"fields_ordering": 2,
+			"displayable_fields_count": 21,
 			"fields": {
+				"moreData": {
+					"position": 12
+				},
 				"ftp": {
 					"position": 11
 				},
@@ -804,7 +1195,7 @@
 				"left": 1664,
 				"top": 1684,
 				"width": 217,
-				"height": 483.33203125
+				"height": 502.33203125
 			},
 			"displayable_fields_count": 21
 		},
@@ -821,7 +1212,54 @@
 				"width": 220,
 				"height": 366.33203125
 			},
-			"displayable_fields_count": 15
+			"displayable_fields_count": 15,
+			"fields": {
+				"UUID_Customer": {
+					"position": 16
+				},
+				"UUID_Division": {
+					"position": 15
+				},
+				"PhaseOut": {
+					"position": 14
+				},
+				"Void": {
+					"position": 13
+				},
+				"CreationDateTimeStamp": {
+					"position": 12
+				},
+				"DateTimeStamp": {
+					"position": 11
+				},
+				"ReasonForLastChange": {
+					"position": 10
+				},
+				"RevHistory": {
+					"position": 9
+				},
+				"RevDate": {
+					"position": 8
+				},
+				"Rev": {
+					"position": 7
+				},
+				"CreatedBy": {
+					"position": 6
+				},
+				"Inv_Status_Time": {
+					"position": 5
+				},
+				"Inv_Status_Date": {
+					"position": 4
+				},
+				"Bom_Part_Num": {
+					"position": 2
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
 		},
 		"Bin": {
 			"color": {
@@ -836,7 +1274,21 @@
 				"width": 154.017578125,
 				"height": 147.33203125
 			},
-			"displayable_fields_count": 5
+			"displayable_fields_count": 5,
+			"fields": {
+				"moreData": {
+					"position": 5
+				},
+				"isEmpty": {
+					"position": 4
+				},
+				"binLocationPath": {
+					"position": 2
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
 		},
 		"StepProperty": {
 			"color": {
@@ -1294,7 +1746,41 @@
 				"height": 261.33203125
 			},
 			"displayable_fields_count": 10,
-			"fields_ordering": 1
+			"fields": {
+				"moreData": {
+					"position": 12
+				},
+				"UUID_Job": {
+					"position": 11
+				},
+				"orderItemsCharges": {
+					"position": 10
+				},
+				"invoiceNumber": {
+					"position": 9
+				},
+				"total": {
+					"position": 8
+				},
+				"totalSalesTax": {
+					"position": 7
+				},
+				"travBasedCharges": {
+					"position": 6
+				},
+				"poBasedCharges": {
+					"position": 5
+				},
+				"status": {
+					"position": 4
+				},
+				"invoiceStmp": {
+					"position": 3
+				},
+				"UUID": {
+					"position": 1
+				}
+			}
 		},
 		"AuditEvent": {
 			"color": {
@@ -1361,8 +1847,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1978,
-				"top": 644,
+				"left": 1993,
+				"top": 589,
 				"width": 122.671875,
 				"height": 124.33203125
 			},
@@ -1960,7 +2446,59 @@
 						"green": 255,
 						"blue": 255,
 						"alpha": 0
-					}
+					},
+					"position": 19
+				},
+				"UUID_Job": {
+					"position": 17
+				},
+				"UUID_PurchaseOrder": {
+					"position": 16
+				},
+				"UUID_Quote": {
+					"position": 15
+				},
+				"deal": {
+					"position": 14
+				},
+				"reasonWL": {
+					"position": 13
+				},
+				"moreData": {
+					"position": 12
+				},
+				"probabilityPC": {
+					"position": 11
+				},
+				"currentStageID": {
+					"position": 10
+				},
+				"priorityLevelID": {
+					"position": 9
+				},
+				"stmpClose": {
+					"position": 8
+				},
+				"stmpCreation": {
+					"position": 7
+				},
+				"amount": {
+					"position": 6
+				},
+				"leadCode": {
+					"position": 5
+				},
+				"UUID_ServiceType": {
+					"position": 4
+				},
+				"UUID_Staff": {
+					"position": 3
+				},
+				"UUID_Customer": {
+					"position": 2
+				},
+				"UUID": {
+					"position": 1
 				}
 			}
 		},
@@ -2509,68 +3047,128 @@
 			},
 			"displayable_fields_count": 42,
 			"fields": {
+				"moreData": {
+					"position": 43
+				},
+				"properties": {
+					"position": 42
+				},
+				"serialization": {
+					"position": 41
+				},
+				"beSerialized": {
+					"position": 40
+				},
+				"rejectionBlob": {
+					"position": 39
+				},
+				"isApproved": {
+					"position": 38
+				},
+				"stmpApproval": {
+					"position": 37
+				},
+				"approvedBy": {
+					"position": 36
+				},
+				"areas": {
+					"position": 35
+				},
+				"minYield": {
+					"position": 34
+				},
+				"plannedHours": {
+					"position": 33
+				},
+				"actualHours": {
+					"position": 32
+				},
+				"inOperator": {
+					"position": 31
+				},
+				"outOperator": {
+					"position": 30
+				},
+				"type": {
+					"position": 29
+				},
+				"discard": {
+					"position": 28
+				},
+				"requitedCertifications": {
+					"position": 27
+				},
+				"skills": {
+					"position": 26
+				},
+				"commentFormat2": {
+					"position": 25
+				},
+				"commentFormat1": {
+					"position": 24
+				},
 				"comment2": {
-					"position": 17
+					"position": 23
 				},
 				"comment1": {
-					"position": 16
+					"position": 22
 				},
 				"dataTables": {
-					"position": 23
+					"position": 21
 				},
 				"stepInterruptions": {
 					"position": 20
 				},
 				"parametricMeasurements": {
-					"position": 24
+					"position": 19
 				},
 				"tools": {
-					"position": 22
+					"position": 18
 				},
 				"good": {
-					"position": 15
+					"position": 17
 				},
 				"rejects": {
-					"position": 14
+					"position": 16
 				},
 				"timeIn": {
-					"position": 13
+					"position": 15
 				},
 				"timeOut": {
-					"position": 12
+					"position": 14
 				},
 				"specRevision": {
-					"position": 11
+					"position": 13
 				},
 				"lotSpecs": {
-					"position": 10
+					"position": 12
 				},
 				"bins": {
-					"position": 22
+					"position": 11
 				},
 				"dateOut": {
-					"position": 9
+					"position": 10
 				},
 				"dateIn": {
-					"position": 8
+					"position": 9
 				},
 				"qtyOut": {
-					"position": 7
+					"position": 8
 				},
 				"qtyIn": {
-					"position": 6
+					"position": 7
 				},
 				"alert": {
-					"position": 5
+					"position": 6
 				},
 				"description": {
-					"position": 4
+					"position": 5
 				},
 				"order": {
-					"position": 3
+					"position": 4
 				},
 				"UUID_Lot": {
-					"position": 2
+					"position": 3
 				},
 				"UUID": {
 					"position": 1
@@ -2641,6 +3239,18 @@
 		}
 	},
 	"relations": {
+<<<<<<< HEAD
+		"A4E703A068894C64B83AEB67DAA1ED9B": {
+=======
+		"19CBBAB2CD48489CB8085D279B75B7E6": {
+>>>>>>> 0f36a8ccbd50aea362e049e3c9c027cadbd90b04
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"0190757795B04487B0239E6033600B33": {
 			"color": {
 				"red": 240,

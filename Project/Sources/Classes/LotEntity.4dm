@@ -8,20 +8,38 @@ Function getCurrentStep()->$currentStepOrder : Integer
 	End if 
 	
 local Function loadAfterCreation()
-	// This callback is called after creating the new item but before displaying the panel.
-	If (This:C1470.lotNumber="")
-		This:C1470.lotNumber:=String:C10(String:C10(ds:C1482.Lot.all().extract("lotNumber").map(Formula:C1597(Num:C11($1.value))).filter(Formula:C1597((Num:C11($1.value)#1) && (Num:C11($1.value)#0))).max()+1); "0000000000#")  //
-		
-		//String(Num(ds.Lot.all().max("lotNumber")+1000); "00000#")
-	End if 
-	If (Form:C1466.sfw.entry.ident="receiver")
-		$job:=ds:C1482.Job.new()
-		
-		$job.jobNumber:=ds:C1482.Job.all().max("jobNumber")+1
-		
-		$res:=$job.save()
-		
-		If ($res.success)
-			This:C1470.UUID_Job:=$job.UUID
-		End if 
-	End if 
+	
+	Case of 
+		: (Form:C1466.sfw.entry.ident="customerReceivedMaterial")
+			$job:=ds:C1482.Job.new()
+			$res:=$job.save()
+			
+			If ($res.success)
+				This:C1470.UUID_Job:=$job.UUID
+			End if 
+			
+			If (This:C1470.dateIn=!00-00-00!)
+				This:C1470.dateIn:=Current date:C33
+			End if 
+			
+		Else 
+			// This callback is called after creating the new item but before displaying the panel.
+			If (This:C1470.lotNumber="")
+				This:C1470.lotNumber:=String:C10(String:C10(ds:C1482.Lot.all().extract("lotNumber").map(Formula:C1597(Num:C11($1.value))).filter(Formula:C1597((Num:C11($1.value)#1) && (Num:C11($1.value)#0))).max()+1); "0000000000#")  //
+				
+				//String(Num(ds.Lot.all().max("lotNumber")+1000); "00000#")
+			End if 
+			If (Form:C1466.sfw.entry.ident="receiver")
+				$job:=ds:C1482.Job.new()
+				
+				$job.jobNumber:=ds:C1482.Job.all().max("jobNumber")+1
+				
+				$res:=$job.save()
+				
+				If ($res.success)
+					This:C1470.UUID_Job:=$job.UUID
+				End if 
+			End if 
+	End case 
+	
+	
