@@ -196,7 +196,7 @@ Function loadPoLineItems()
 	Form:C1466.lb_lineItems:=ds:C1482.PurchaseOrderLine.query("UUID_PurchaseOrder = :1"; Form:C1466.current_item.UUID)
 	
 Function loadPoJobs()
-	Form:C1466.lb_jobs:=Form:C1466.current_item.lineItems.job
+	Form:C1466.lb_jobs:=Form:C1466.current_item.jobs
 	
 Function loadLots()
 	Form:C1466.lb_lots:=Form:C1466.current_item.lineItems.job.lots

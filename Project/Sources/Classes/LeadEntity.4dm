@@ -56,6 +56,7 @@ Function calculateCode()->$leadCode : Text
 	$leadCode+=String:C10($test; "00000")
 	
 	
+	
 local Function afterCreation()
 	var $staff : cs:C1710.StaffEntity
 	var $interaction : cs:C1710.InteractionEntity

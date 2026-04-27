@@ -6,6 +6,12 @@ Case of
 			ds:C1482.Bin.cacheLoad()
 		End if 
 		Form:C1466.currentPath:=""
+		If (Form:C1466.inventory_e.UUID_InventoryClassification#"") & (Form:C1466.inventory_e.UUID_InventoryClassification#String:C10("00"*16))
+			$classification:=ds:C1482.InventoryClassification.query("UUID = :1"; Form:C1466.inventory_e.UUID_InventoryClassification).first()
+			If ($classification#Null:C1517)
+				Form:C1466.inventory_e.classification:=$classification.name
+			End if 
+		End if 
 		If (Form:C1466.inventory_e.UUID_Location#"") & (Form:C1466.inventory_e.UUID_Location#String:C10("00"*16))
 			
 			Form:C1466.selectedBins:=Storage:C1525.cache.bins.query("UUID = :1"; Form:C1466.inventory_e.UUID_Location)

@@ -15,14 +15,15 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(1; ""; "Main")
 	$entry.setPanelPage(2; ""; "POs")
 	$entry.setPanelPage(3; ""; "Jobs")
-	$entry.setPanelPage(4; ""; "Planning")
-	$entry.setPanelPage(5; ""; "CFM Receiving")
-	$entry.setPanelPage(6; ""; "Invoices")
-	//$entry.setPanelPage(7; ""; "Timeline")
+	//$entry.setPanelPage(4; ""; "Planning")
+	//$entry.setPanelPage(5; ""; "CFM Receiving")
+	//$entry.setPanelPage(6; ""; "Invoices")
+	//$entry.setPanelPage(7; ""; "Contacts")
 	
 	
-	$entry.setLBItemsColumn("code"; "Code"; "xliff:entry.customer.field.name"; "width:80")
-	$entry.setLBItemsColumn("name"; "Name"; "xliff:entry.customer.field.name"; "width:200")
+	$entry.setLBItemsColumn("code"; "Code"; "xliff:entry.customer.field.name"; "width:80"; "columnName:columnCode")
+	$entry.setLBItemsColumn("name"; "Name"; "xliff:entry.customer.field.name"; "width:200"; "columnName:columnName")
+	$entry.setLBItemsMetaExpression("this.metaColor()")
 	
 	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
 	
@@ -38,6 +39,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.allowMultiSelectionInLB("###,###,##0 ^1;;"; "unit1:customer selected"; "unitN:customers selected"; "nbMinimum:2")
 	
+	$entry.activateEvent("CustomerEvent"; "UUID_Customer")
+	
+	$entry.activateComment()
+	
 	
 	
 	
@@ -46,6 +51,11 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$filter.setDefaultTitle("All status")
 	$filter.setFilterByLinkedEntity("CustomerStatus"; "UUID_CustomerStatus"; ""; "customerStatus")
 	$filter.setDynamicTitle("name"; "## customer status")
+	$entry.addFilter($filter)
+	
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterEnabled")
+	$filter.setDefaultTitle("All customers")
+	$filter.setFilterByBooleanExpression("enabled = :1"; "Enabled"; "Disabled")
 	$entry.addFilter($filter)
 	
 	//Mark: -Views

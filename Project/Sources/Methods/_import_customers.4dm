@@ -6,13 +6,40 @@ var $file : 4D:C1709.File
 var $records : Collection
 var $record : Object
 var $customer : cs:C1710.CustomerEntity
+var $carrier : cs:C1710.CustomerCarrierEntity
 var $result : Object
 var $name : Text
 var $code : Text
 var $created : Integer
 var $updated : Integer
+var $carrierFile : 4D:C1709.File
+var $carrierRecords : Collection
+var $carrierRecord : Object
+var $carrierName : Text
+var $carrierCreated : Integer
+var $carrierExisting : Integer
+var $customerCarrier : cs:C1710.CustomerCarrierEntity
+var $note : Text
+var $eComment : cs:C1710.sfw_CommentEntity
+var $isVoid : Boolean
+var $billingCountryISO : Text
+var $shippingCountryISO : Text
+var $apContact : cs:C1710.ContactEntity
+var $statusContact : cs:C1710.ContactEntity
+var $comm : Object
+var $apEmail : Text
+var $statusTel : Text
+var $statusEmail : Text
+var $statusContactName : Text
+var $isNewCustomer : Boolean
+var $customerCreateEventType : cs:C1710.sfw_EventTypeEntity
+var $customerEvent : cs:C1710.CustomerEventEntity
+var $eventStmp : Integer
+var $eventUserUUID : Text
 
+TRUNCATE TABLE:C1051([Contact:1])
 TRUNCATE TABLE:C1051([Customer:114])
+TRUNCATE TABLE:C1051([CustomerCarrier:7])
 
 $projectFolder:=Folder:C1567(fk database folder:K87:14)
 $importsFolder:=$projectFolder.folder("project/imports")
@@ -25,6 +52,36 @@ Else
 	
 	$created:=0
 	$updated:=0
+	$carrierCreated:=0
+	$carrierExisting:=0
+	$customerCreateEventType:=ds:C1482.sfw_EventType.query("ident = :1"; "createRecord").first()
+	$eventUserUUID:=cs:C1710.sfw_userManager.me.info.UUID
+	If ($eventUserUUID="")
+		$eventUserUUID:="00"*16
+	End if 
+	
+	// Import customer carriers first, so customers can link to them.
+	$carrierFile:=$importsFolder.file("customers_carriers_export.json")
+	If ($carrierFile.exists)
+		$carrierRecords:=JSON Parse:C1218($carrierFile.getText())
+		
+		For each ($carrierRecord; $carrierRecords)
+			$carrierName:=$carrierRecord.name
+			If ($carrierName#"")
+				$carrier:=ds:C1482.CustomerCarrier.query("name = :1"; $carrierName).first()
+				If ($carrier=Null:C1517)
+					$carrier:=ds:C1482.CustomerCarrier.new()
+					$carrier.name:=$carrierName
+					$result:=$carrier.save()
+					If ($result.success)
+						$carrierCreated:=$carrierCreated+1
+					End if 
+				Else 
+					$carrierExisting:=$carrierExisting+1
+				End if 
+			End if 
+		End for each 
+	End if 
 	
 	For each ($record; $records)
 		$name:=String:C10($record.Customer)
@@ -46,18 +103,156 @@ Else
 		If ($customer=Null:C1517)
 			$customer:=ds:C1482.Customer.new()
 			$created:=$created+1
+			$isNewCustomer:=True:C214
 		Else 
 			$updated:=$updated+1
+			$isNewCustomer:=False:C215
 		End if 
 		
 		$customer.name:=$name
 		$customer.code:=$code
+		$customer.accountNumber:=$record.Account_num
+		$customer.resaleLicenseNumber:=$record.ResaleLicenseNumber
+		$customer.ftp:=$customer.ftp || New object:C1471()
+		$customer.ftp.domain:=$record.FTPRepositoryDomain
+		$customer.ftp.user:=$record.FTPRepositoryUser
+		$customer.ftp.password:=$record.FTPRepositoryPass
+		
+		$billingCountryISO:=_toISO2Country($record.BillAddressCountry)
+		$shippingCountryISO:=_toISO2Country($record.ShipAddressCountry)
+		
+		// Import addresses in built-in contactDetails.addresses format.
+		$customer.contactDetails:=$customer.contactDetails || New object:C1471()
+		$customer.contactDetails.addresses:=New collection:C1472()
+		$customer.contactDetails.addresses.push(New object:C1471(\
+			"type"; "billing"; \
+			"detail"; New object:C1471(\
+			"street_1"; $record.Bill_Address1; \
+			"street_2"; $record.Bill_Address2; \
+			"city"; $record.Bill_add_city; \
+			"state"; $record.Bill_addr_ST; \
+			"postcode"; $record.Bill_addr_zip; \
+			"country"; $billingCountryISO\
+			)\
+			))
+		$customer.contactDetails.addresses.push(New object:C1471(\
+			"type"; "shipping"; \
+			"detail"; New object:C1471(\
+			"street_1"; $record.Ship_Address1; \
+			"street_2"; $record.Ship_Address2; \
+			"city"; $record.Ship_addr_city; \
+			"state"; $record.Ship_addr_ST; \
+			"postcode"; $record.Ship_Addr_zip; \
+			"country"; $shippingCountryISO\
+			)\
+			))
+		
+		$isVoid:=$record.void
+		$customer.enabled:=Not:C34($isVoid)
+		
+		$carrierName:=$record.Carrier
+		If ($carrierName#"")
+			$customerCarrier:=ds:C1482.CustomerCarrier.query("name = :1"; $carrierName).first()
+			If ($customerCarrier#Null:C1517)
+				$customer.UUID_CustomerCarrier:=$customerCarrier.UUID
+			End if 
+		End if 
 		
 		$result:=$customer.save()
 		If (Not:C34($result.success))
 			TRACE:C157
+		Else 
+			// Add a creation event for newly imported customers using legacy DateTimeStamp.
+			If ($isNewCustomer) && ($customerCreateEventType#Null:C1517)
+				$customerEvent:=ds:C1482.CustomerEvent.new()
+				$customerEvent.UUID_Customer:=$customer.UUID
+				$customerEvent.UUID_EventType:=$customerCreateEventType.UUID
+				$customerEvent.UUID_User:=$eventUserUUID
+				$eventStmp:=Num:C11(String:C10($record.DateTimeStamp))
+				If ($eventStmp=0)
+					$eventStmp:=cs:C1710.sfw_stmp.me.now()
+				End if 
+				$customerEvent.stmp:=$eventStmp
+				$customerEvent.moreData:=New object:C1471()
+				$result:=$customerEvent.save()
+				If (Not:C34($result.success))
+					TRACE:C157
+				End if 
+			End if 
+			
+			// AP contact (as contact type)
+			$apEmail:=String:C10($record.AP_email)
+			If ($apEmail#"")
+				$apContact:=ds:C1482.Contact.query("UUID_Company = :1 and title = :2"; $customer.UUID; "AP").first()
+				If ($apContact=Null:C1517)
+					$apContact:=ds:C1482.Contact.new()
+					$apContact.UUID_Company:=$customer.UUID
+					$apContact.title:="AP"
+				End if 
+				$apContact.contactDetails:=$apContact.contactDetails || New object:C1471()
+				$apContact.contactDetails.addresses:=$apContact.contactDetails.addresses || New collection:C1472()
+				$apContact.contactDetails.communications:=New collection:C1472()
+				$comm:=New object:C1471(\
+					"type"; "email"; \
+					"contact"; $apEmail; \
+					"comment"; ""\
+					)
+				$apContact.contactDetails.communications.push($comm)
+				$result:=$apContact.save()
+				If (Not:C34($result.success))
+					TRACE:C157
+				End if 
+			End if 
+			
+			// Status contact (as contact type)
+			$statusTel:=String:C10($record.Status_Tel)
+			$statusEmail:=String:C10($record.StatusEmailAddresses)
+			$statusContactName:=String:C10($record.Status_Contact)
+			If ($statusEmail#"")
+				$statusContact:=ds:C1482.Contact.query("UUID_Company = :1 and title = :2"; $customer.UUID; "Status").first()
+				If ($statusContact=Null:C1517)
+					$statusContact:=ds:C1482.Contact.new()
+					$statusContact.UUID_Company:=$customer.UUID
+					$statusContact.title:="Status"
+				End if 
+				$statusContact.firstName:=$statusContactName
+				$statusContact.lastName:=""
+				$statusContact.contactDetails:=$statusContact.contactDetails || New object:C1471()
+				$statusContact.contactDetails.addresses:=$statusContact.contactDetails.addresses || New collection:C1472()
+				$statusContact.contactDetails.communications:=New collection:C1472()
+				If ($statusTel#"")
+					$comm:=New object:C1471(\
+						"type"; "phone"; \
+						"contact"; $statusTel; \
+						"comment"; ""\
+						)
+					$statusContact.contactDetails.communications.push($comm)
+				End if 
+				$comm:=New object:C1471(\
+					"type"; "email"; \
+					"contact"; $statusEmail; \
+					"comment"; ""\
+					)
+				$statusContact.contactDetails.communications.push($comm)
+				$result:=$statusContact.save()
+				If (Not:C34($result.success))
+					TRACE:C157
+				End if 
+			End if 
+			
+			// Import legacy customer notes into the built-in entry notes feature.
+			$note:=$record.Notes
+			If ($note#"")
+				$eComment:=ds:C1482.sfw_Comment.new()
+				$eComment.UUID:=Generate UUID:C1066
+				$eComment.UUID_target:=$customer.UUID
+				$eComment.stmp:=cs:C1710.sfw_stmp.me.now()
+				$eComment.ID_level:=1
+				$eComment.comment:=$note
+				$eComment.save()
+			End if 
 		End if 
 	End for each 
 	
-	ALERT:C41("Import termine - created: "+String:C10($created)+" | updated: "+String:C10($updated))
+	ALERT:C41("Import termine - created: "+String:C10($created)+" | updated: "+String:C10($updated)+" | carriers created: "+String:C10($carrierCreated)+" | carriers existing: "+String:C10($carrierExisting))
 End if 

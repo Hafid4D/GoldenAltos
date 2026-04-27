@@ -138,7 +138,7 @@
 				},
 				"Text2": {
 					"type": "text",
-					"text": "Vendor",
+					"text": "Customer",
 					"top": 78,
 					"left": 7,
 					"width": 102,
@@ -279,8 +279,8 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invoice.purchaseOrder.poNumber",
-					"enterable": false
+					"dataSource": "Form:C1466.inventory_e.partNumber",
+					"enterable": true
 				},
 				"header_bkgd5": {
 					"type": "rectangle",
@@ -310,7 +310,8 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.inventory_e.vendor"
+					"dataSource": "Form:C1466.inventory_e.vendor",
+					"enterable": false
 				},
 				"header_bkgd10": {
 					"type": "rectangle",
@@ -341,7 +342,7 @@
 					"borderStyle": "none",
 					"fill": "transparent",
 					"dataSource": "Form:C1466.inventory_e.description",
-					"enterable": false
+					"enterable": true
 				},
 				"header_bkgd12": {
 					"type": "rectangle",
@@ -402,7 +403,9 @@
 					"borderStyle": "none",
 					"fill": "transparent",
 					"dataSource": "Form:C1466.inventory_e.classification",
-					"dataSourceTypeHint": "date",
+					"events": [
+						"onClick"
+					],
 					"enterable": false,
 					"method": "ObjectMethods/fld_classification.4dm"
 				},
@@ -434,9 +437,9 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.inventory_e.lot_e.lotNumber",
+					"dataSource": "Form:C1466.inventory_e.lot_e.partLotNumber",
 					"dataSourceTypeHint": "number",
-					"enterable": false
+					"enterable": true
 				},
 				"Button": {
 					"type": "button",
@@ -754,7 +757,7 @@
 					"type": "rectangle",
 					"top": 336,
 					"left": 124,
-					"width": 293,
+					"width": 183,
 					"height": 28,
 					"sizingX": "fixed",
 					"fill": "#FFFFFF",
@@ -780,65 +783,6 @@
 					"fill": "transparent",
 					"dataSource": "Form:C1466.inventory_e.unitCost",
 					"dataSourceTypeHint": "number"
-				},
-				"header_bkgd35": {
-					"type": "rectangle",
-					"top": 336,
-					"left": 307,
-					"width": 120,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Text22": {
-					"type": "text",
-					"text": "Currency",
-					"top": 342,
-					"left": 314,
-					"width": 102,
-					"height": 15,
-					"fontWeight": "bold"
-				},
-				"Text23": {
-					"type": "text",
-					"text": ":",
-					"top": 342,
-					"left": 401,
-					"width": 22,
-					"height": 15,
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"header_bkgd36": {
-					"type": "rectangle",
-					"top": 336,
-					"left": 431,
-					"width": 146,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#FFFFFF",
-					"stroke": "transparent"
-				},
-				"header_bkgd37": {
-					"type": "rectangle",
-					"top": 336,
-					"left": 577,
-					"width": 32,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Input11": {
-					"type": "input",
-					"left": 438,
-					"top": 341,
-					"width": 133,
-					"height": 18,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.inventory_e.currency"
 				},
 				"header_bkgd38": {
 					"type": "rectangle",
@@ -990,11 +934,71 @@
 					],
 					"style": "bevel",
 					"method": "ObjectMethods/pup_binLocation.4dm"
+				},
+				"header_bkgd35": {
+					"type": "rectangle",
+					"top": 336,
+					"left": 307,
+					"width": 120,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
+				"Text22": {
+					"type": "text",
+					"text": "Total Cost",
+					"top": 342,
+					"left": 314,
+					"width": 102,
+					"height": 15,
+					"fontWeight": "bold"
+				},
+				"Text23": {
+					"type": "text",
+					"text": ":",
+					"top": 342,
+					"left": 401,
+					"width": 22,
+					"height": 15,
+					"textAlign": "right",
+					"fontWeight": "bold"
+				},
+				"header_bkgd36": {
+					"type": "rectangle",
+					"top": 336,
+					"left": 431,
+					"width": 183,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#FFFFFF",
+					"stroke": "transparent"
+				},
+				"header_bkgd37": {
+					"type": "rectangle",
+					"top": 336,
+					"left": 577,
+					"width": 32,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
+				"Input5": {
+					"type": "input",
+					"left": 438,
+					"top": 341,
+					"width": 140,
+					"height": 18,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.inventory_e.unitCost",
+					"dataSourceTypeHint": "number"
 				}
 			}
 		}
 	],
-	"geometryStamp": 3580,
+	"geometryStamp": 3620,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

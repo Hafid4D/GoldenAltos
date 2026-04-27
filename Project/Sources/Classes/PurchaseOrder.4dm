@@ -23,12 +23,25 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsOrderBy("poNumber")
 	
 	//$entry.setValidationRule("poNumber"; "entryField_poNumber"; "mandatory"; "message:the poNumber is mandatory")
-	$entry.setValidationRule("poNumber"; "entryField_poNumber"; "notZero"; "message:the poNumber is mandatory")
-	$entry.setValidationRule("poNumber"; "entryField_poNumber"; "unique"; "message:the ident is must be unique")
+	//$entry.setValidationRule("poNumber"; "entryField_poNumber"; "notZero"; "message:the poNumber is mandatory")
+	//$entry.setValidationRule("poNumber"; "entryField_poNumber"; "unique"; "message:the ident is must be unique")
 	
 	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
 	
 	$entry.setItemListAction("Search by Scanning"; "_ga_searchByBarcodeScanning")
 	
 	$entry.enableTransaction()
+	
+	// Filter purchase orders by customer name.
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterCustomer")
+	$filter.setDefaultTitle("All customers")
+	$filter.setFilterByLinkedEntity("Customer"; "UUID_Customer"; ""; "customer")
+	$filter.setDynamicTitle("name"; "## customers")
+	$filter.setOrderForItems("name")
+	$entry.addFilter($filter)
+	
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterOpenPO")
+	$filter.setDefaultTitle("All purchase orders")
+	$filter.setFilterByBooleanExpression("openPO = :1"; "Open POs"; "Closed POs")
+	$entry.addFilter($filter)
 	

@@ -16,7 +16,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	
 	$entry.setLBItemsColumn("jobNumber"; "Job #"; "width:100")
-	$entry.setLBItemsColumn("division.name"; "Division"; "width:250")
+	$entry.setLBItemsColumn("purchaseOrder.customer.name"; "Division"; "width:250")
 	$entry.setLBItemsColumn("dateCreated"; "Created"; "width:100")
 	
 	$entry.setLBItemsOrderBy("jobNumber")

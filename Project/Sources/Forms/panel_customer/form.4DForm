@@ -78,13 +78,13 @@
 					"text": "Customer Number",
 					"textAlign": "right"
 				},
-				"Field_codeNumber": {
+				"Field_code": {
 					"type": "input",
 					"top": 37,
 					"left": 118,
 					"width": 200,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.codeNumber",
+					"dataSource": "Form:C1466.current_item.code",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -104,194 +104,22 @@
 					"width": 100,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Status",
+					"text": "Active",
 					"textAlign": "right"
 				},
-				"pup_CustomerStatus": {
-					"type": "button",
-					"top": 61,
+				"cb_active": {
+					"type": "checkbox",
+					"text": "Active",
+					"top": 63,
 					"left": 118,
 					"width": 200,
-					"height": 23,
-					"fontFamily": "System Font",
-					"fontSize": 13,
-					"focusable": false,
-					"text": "Status",
-					"icon": "",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/pup_CustomerStatus.4dm",
-					"events": [
-						"onClick"
-					]
-				},
-				"label_0_7": {
-					"type": "text",
-					"top": 10,
-					"left": 313,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Domain",
-					"textAlign": "right"
-				},
-				"entryField_name2": {
-					"type": "input",
-					"top": 10,
-					"left": 413,
-					"width": 175,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.ftp.domain",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none"
-				},
-				"label_0_8": {
-					"type": "text",
-					"top": 37,
-					"left": 313,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "User",
-					"textAlign": "right"
-				},
-				"entryField_code3": {
-					"type": "input",
-					"top": 37,
-					"left": 413,
-					"width": 175,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.ftp.user",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none"
-				},
-				"label_0_9": {
-					"type": "text",
-					"top": 64,
-					"left": 313,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Password",
-					"textAlign": "right"
-				},
-				"entryField_code4": {
-					"type": "input",
-					"top": 64,
-					"left": 413,
-					"width": 175,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.ftp.password",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"method": "ObjectMethods/entryField_code4.4dm"
-				},
-				"label_0_4": {
-					"type": "text",
-					"top": 10,
-					"left": 593,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Carrier",
-					"textAlign": "right"
-				},
-				"label_0_5": {
-					"type": "text",
-					"top": 37,
-					"left": 593,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Account Number",
-					"right": 683,
-					"textAlign": "right"
-				},
-				"label_0_6": {
-					"type": "text",
-					"top": 64,
-					"left": 593,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Resale License",
-					"textAlign": "right"
-				},
-				"entryField_code1": {
-					"type": "input",
-					"top": 37,
-					"left": 693,
-					"width": 175,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.accountNumber",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none"
-				},
-				"entryField_code2": {
-					"type": "input",
-					"top": 64,
-					"left": 693,
-					"width": 175,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.resaleLicenseNumber",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none"
-				},
-				"pup_customerCarrier": {
-					"type": "button",
-					"top": 7,
-					"left": 691,
-					"width": 175,
-					"height": 23,
-					"fontFamily": "System Font",
-					"fontSize": 13,
-					"focusable": false,
-					"text": "",
-					"icon": "",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/pup_customerCarrier.4dm",
+					"height": 18,
 					"events": [
 						"onClick"
 					],
-					"bottom": 30
+					"dataSource": "Form:C1466.current_item.enabled",
+					"dataSourceTypeHint": "boolean",
+					"stroke": "#808080"
 				}
 			}
 		},
@@ -434,166 +262,212 @@
 					"stroke": "transparent",
 					"right": 435
 				},
-				"Text1": {
+				"ftp_label": {
 					"type": "text",
-					"text": "Contacts",
+					"text": "FTP",
 					"top": 120,
 					"left": 12,
 					"width": 119,
 					"height": 16,
 					"fontWeight": "bold"
 				},
-				"rbApContact": {
-					"type": "radio",
-					"text": "AP Contact",
-					"top": 152,
-					"left": 8,
-					"width": 127,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"style": "bevel",
-					"dataSource": "Form:C1466.apContact",
-					"radioGroup": "contact",
-					"fontSize": 11,
-					"focusable": false,
-					"method": "ObjectMethods/rbApContact.4dm"
+				"label_0_7": {
+					"type": "text",
+					"top": 164,
+					"left": 13,
+					"width": 56,
+					"height": 15,
+					"stroke": "#808080",
+					"text": "Domain",
+					"textAlign": "left"
 				},
-				"rbStatusContact": {
-					"type": "radio",
-					"text": "Status Contact",
-					"top": 152,
-					"left": 135,
-					"width": 127,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"style": "bevel",
-					"dataSource": "Form:C1466.statusContact",
-					"radioGroup": "contact",
-					"fontSize": 11,
+				"entryField_name2": {
+					"type": "input",
+					"top": 164,
+					"left": 100,
+					"width": 175,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.ftp.domain",
 					"focusable": false,
-					"method": "ObjectMethods/rbStatusContact.4dm",
-					"icon": "",
-					"iconFrames": 1,
-					"textPlacement": "right"
-				},
-				"lb_contact": {
-					"type": "listbox",
-					"left": 12,
-					"top": 178,
-					"width": 408,
-					"height": 261,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
 					"events": [
-						"onClick",
-						"onDataChange",
-						"onSelectionChange",
-						"onHeaderClick"
+						"onDataChange"
 					],
-					"listboxType": "collection",
-					"dataSource": "Form:C1466.lb_contact",
-					"selectionMode": "none",
-					"resizingMode": "legacy",
-					"scrollbarHorizontal": "automatic",
-					"scrollbarVertical": "automatic",
-					"fill": "#FFFFFF",
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"label_0_8": {
+					"type": "text",
+					"top": 191,
+					"left": 13,
+					"width": 38,
+					"height": 15,
+					"stroke": "#808080",
+					"text": "User",
+					"textAlign": "left"
+				},
+				"entryField_code3": {
+					"type": "input",
+					"top": 191,
+					"left": 100,
+					"width": 175,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.ftp.user",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"label_0_9": {
+					"type": "text",
+					"top": 218,
+					"left": 13,
+					"width": 67,
+					"height": 15,
+					"stroke": "#808080",
+					"text": "Password",
+					"textAlign": "left"
+				},
+				"entryField_code4": {
+					"type": "input",
+					"top": 218,
+					"left": 100,
+					"width": 175,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.ftp.password",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
 					"borderStyle": "none",
-					"alternateFill": "#E4E4E4",
-					"horizontalLineStroke": "transparent",
-					"verticalLineStroke": "#C0C0C0",
-					"method": "ObjectMethods/lb_contact.4dm",
-					"currentItemSource": "Form:C1466.currrent_contact",
-					"showHeaders": true,
-					"hideExtraBlankRows": false,
-					"singleClickEdit": false,
-					"hideSystemHighlight": false,
-					"hideFocusRing": false,
-					"lockedColumnCount": 0,
-					"focusable": false,
-					"columns": [
-						{
-							"header": {
-								"text": "Type",
-								"name": "Header28",
-								"fontWeight": "bold",
-								"textAlign": "left"
-							},
-							"name": "Column37",
-							"footer": {
-								"name": "Footer37"
-							},
-							"dataSource": "This:C1470.name",
-							"textAlign": "left",
-							"events": [
-								"onClick",
-								"onDataChange"
-							],
-							"width": 70
-						},
-						{
-							"header": {
-								"name": "Header37",
-								"text": "#",
-								"fontWeight": "bold",
-								"textAlign": "left",
-								"stroke": "automatic"
-							},
-							"name": "Column38",
-							"footer": {
-								"name": "Footer38"
-							},
-							"textAlign": "left",
-							"dataSource": "This:C1470.value",
-							"events": [
-								"onClick",
-								"onDataChange"
-							],
-							"enterable": false,
-							"width": 160
-						},
-						{
-							"header": {
-								"name": "hdr_comment1",
-								"text": "Comment",
-								"fontWeight": "bold"
-							},
-							"name": "Column39",
-							"footer": {
-								"name": "Footer39"
-							},
-							"dataSource": "This:C1470.comment",
-							"width": 100
-						}
-					]
+					"method": "ObjectMethods/entryField_code4.4dm"
 				},
-				"bActionContact": {
-					"type": "button",
-					"text": "Actions",
-					"top": 449,
+				"label_0_4": {
+					"type": "text",
+					"top": 304,
 					"left": 12,
-					"width": 80,
-					"height": 21,
+					"width": 55,
+					"height": 15,
+					"stroke": "#808080",
+					"text": "Carrier",
+					"textAlign": "left"
+				},
+				"pup_customerCarrier": {
+					"type": "button",
+					"top": 300,
+					"left": 100,
+					"width": 175,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_customerCarrier.4dm",
 					"events": [
 						"onClick"
 					],
-					"style": "custom",
-					"popupPlacement": "linked",
-					"icon": "/RESOURCES/sfw/image/picto/gear.png",
-					"textPlacement": "right",
-					"method": "ObjectMethods/bActionContact.4dm",
-					"visibility": "visible"
+					"bottom": 323
+				},
+				"shipping_bkgd1": {
+					"type": "rectangle",
+					"top": 254,
+					"left": 0,
+					"width": 435,
+					"height": 30,
+					"sizingX": "grow",
+					"fill": "#A2C6D8",
+					"stroke": "transparent",
+					"right": 435
+				},
+				"carrier_label": {
+					"type": "text",
+					"text": "Carrier",
+					"top": 260,
+					"left": 12,
+					"width": 119,
+					"height": 16,
+					"fontWeight": "bold"
+				},
+				"label_0_10": {
+					"type": "text",
+					"top": 339,
+					"left": 12,
+					"width": 55,
+					"height": 15,
+					"stroke": "#808080",
+					"text": "Account #",
+					"textAlign": "left"
+				},
+				"entryField_code1": {
+					"type": "input",
+					"top": 338,
+					"left": 100,
+					"width": 175,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.accountNumber",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"label_0_6": {
+					"type": "text",
+					"top": 375,
+					"left": 12,
+					"width": 90,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Resale License",
+					"textAlign": "left"
+				},
+				"entryField_code2": {
+					"type": "input",
+					"top": 375,
+					"left": 100,
+					"width": 175,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.resaleLicenseNumber",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
 				}
 			},
 			"entryOrder": [
 				"subFormAddress",
 				"rbBilling1",
 				"rbShipping1",
-				"rbApContact",
-				"rbStatusContact",
-				"lb_contact",
-				"bActionContact"
+				"entryField_name2",
+				"entryField_code3",
+				"entryField_code4",
+				"pup_customerCarrier",
+				"entryField_code1",
+				"entryField_code2"
 			]
 		},
 		{
@@ -1229,9 +1103,105 @@
 				}
 			}
 		},
-		null
+		{
+			"objects": {
+				"lb_Contacts": {
+					"type": "listbox",
+					"left": 132,
+					"top": 114,
+					"width": 800,
+					"height": 700,
+					"events": [
+						"onClick",
+						"onSelectionChange",
+						"onHeaderClick"
+					],
+					"listboxType": "collection",
+					"currentItemPositionSource": "Form:C1466.selectedContactPos",
+					"currentItemSource": "Form:C1466.selectedContact",
+					"dataSource": "Form:C1466.lb_Contacts",
+					"selectionMode": "single",
+					"resizingMode": "rightToLeft",
+					"horizontalLineStroke": "transparent",
+					"alternateFill": "#E6E6E6",
+					"borderStyle": "none",
+					"verticalLineStroke": "transparent",
+					"right": 932,
+					"scrollbarHorizontal": "hidden",
+					"headerHeight": "2em",
+					"columns": [
+						{
+							"header": {
+								"text": "Type",
+								"name": "Header36",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column36",
+							"footer": {
+								"name": "Footer36"
+							},
+							"dataSource": "This:C1470.contactType",
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header37",
+								"text": "Name",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column37",
+							"footer": {
+								"name": "Footer37"
+							},
+							"dataSource": "This:C1470.fullName",
+							"resizable": false
+						},
+						{
+							"header": {
+								"name": "Header38",
+								"text": "Email",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column38",
+							"footer": {
+								"name": "Footer38"
+							},
+							"dataSource": "This:C1470.email",
+							"resizable": false,
+							"width": 200
+						},
+						{
+							"header": {
+								"name": "Header39",
+								"text": "Phone",
+								"fontWeight": "bold",
+								"textAlign": "left"
+							},
+							"name": "Column39",
+							"footer": {
+								"name": "Footer39"
+							},
+							"dataSource": "This:C1470.phone",
+							"resizable": false
+						}
+					]
+				},
+				"Text8": {
+					"type": "text",
+					"text": "Contacts",
+					"top": 124,
+					"left": 12,
+					"width": 112,
+					"height": 15,
+					"fontWeight": "bold"
+				}
+			}
+		}
 	],
-	"geometryStamp": 953,
+	"geometryStamp": 1063,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

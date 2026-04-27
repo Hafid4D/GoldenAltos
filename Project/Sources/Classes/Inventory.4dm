@@ -39,7 +39,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$filter:=cs:C1710.sfw_definitionFilter.new("filterCustomer")
 	$filter.setDefaultTitle("All Customers")
 	$filter.setFilterByLinkedEntity("Customer"; "UUID_Customer"; ""; "customer")
-	$filter.setDynamicTitle("name"; "## customers")
+	$filter.setDynamicTitle("name"; "## classifications")
 	$filter.setOrderForItems("name")
 	$filter.setAttributeLabelForItem("name")
 	$entry.addFilter($filter)
@@ -54,7 +54,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$filter:=cs:C1710.sfw_definitionFilter.new("filterClassification")
 	$filter.setDefaultTitle("All Classifications")
-	$filter.setFilterByLinkedEntity("Customer"; "UUID_Customer"; ""; "customer")
+	$filter.setFilterByLinkedEntity("InventoryClassification"; "UUID_InventoryClassification"; ""; "inventoryClassification")
 	$filter.setDynamicTitle("name"; "## customers")
 	$filter.setOrderForItems("name")
 	$filter.setAttributeLabelForItem("name")

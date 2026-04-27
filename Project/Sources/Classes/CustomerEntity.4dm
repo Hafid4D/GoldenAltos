@@ -64,6 +64,19 @@ local Function rebuildContact()->$contacts : Collection
 local Function get nameInWindowTitle()->$nameInWindowTitle : Text
 	$nameInWindowTitle:=This:C1470.name
 	
+local Function metaColor()->$meta : Object
+	$meta:=New object:C1471()
+	$meta.cell:=New object:C1471()
+	$meta.cell.columnCode:=New object:C1471()
+	$meta.cell.columnName:=New object:C1471()
+	
+	// Disabled customer records are shown in red in the list.
+	$enabled:=Bool:C1537(This:C1470.enabled)
+	If (Not:C34($enabled))
+		$meta.cell.columnCode.stroke:="red"
+		$meta.cell.columnName.stroke:="red"
+	End if 
+	
 	
 	//mark:-Callbacks
 	

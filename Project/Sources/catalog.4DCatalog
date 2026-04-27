@@ -102,9 +102,7 @@
 	</table>
 	<table name="CustomerCarrier" uuid="4EB6C9D117A3DC4B91D031D6BC0C7DA9" id="7">
 		<field name="UUID" uuid="319814755AB5A945864EA37F29F3FDE1" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="levelID" uuid="B16B9E9117F74E4D836B97A7A8CDE8F6" type="3" unique="true" never_null="true" id="2">
-			<field_extra multi_line="false"/>
-		</field>
+		<field name="levelID" uuid="F4C46F08F3AF449E942C0AD7205574B8" type="3" never_null="true" id="2"/>
 		<field name="name" uuid="7350D8E27C53FF449E9F614B54838D45" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="code" uuid="27A23F0653EA584EA54E0669416312A0" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="color" uuid="45DCF92178DEE1488E4DBF89F06125AF" type="10" limiting_length="255" never_null="true" id="5">
@@ -1535,8 +1533,19 @@
 		</field>
 		<field name="CreationDateTimeStamp" uuid="2CE0E48ED73C41D69E16A7D0F5904AFF" type="4" never_null="true" id="19"/>
 		<field name="UUID_Bom" uuid="6E5478EBE33B4F208337C5BEC61EA8C4" type="10" store_as_UUID="true" never_null="true" id="20"/>
-		<field name="UUID_Division" uuid="7D434A94762249A882DD7CB7D49AD7EF" type="10" limiting_length="255" store_as_UUID="true" never_null="true" id="21"/>
+		<field name="UUID_Division" uuid="7D434A94762249A882DD7CB7D49AD7EF" type="10" store_as_UUID="true" never_null="true" id="21"/>
 		<primary_key field_name="UUID" field_uuid="6E72F8C970FE4568B1B5F6FB9DB00814"/>
+	</table>
+	<table name="InventoryClassification" uuid="6D24680FD87643AB8B7A1448D33498F3" id="98">
+		<field name="UUID" uuid="D5AB64A3F5B2472F8E4B9E37B8AF0E11" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="levelID" uuid="C096C55246B8462F8FE24B4313C5D754" type="3" never_null="true" id="2"/>
+		<field name="name" uuid="5FB3D9FB98DD4B25887777757C71B173" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="code" uuid="9E8DAF4BC51742EB83FF7E9382D2541B" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="color" uuid="35A67DECB8C84F299CED3E3A2C9CFA43" type="10" limiting_length="255" never_null="true" id="5">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="moreData" uuid="3F444376089B471B810FE57A3024262D" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
+		<primary_key field_name="UUID" field_uuid="D5AB64A3F5B2472F8E4B9E37B8AF0E11"/>
 	</table>
 	<table name="Customer" uuid="96D1CE81460A4F75B3F4275138C8F778" id="114">
 		<field name="UUID" uuid="37676CD94E8B423595ED98B5C0E9CF89" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
@@ -1555,6 +1564,7 @@
 		<field name="accountNum" uuid="2B66CF6D4B0349D99F372D1F4BAD6F4F" type="10" limiting_length="255" never_null="true" id="10"/>
 		<field name="ftp" uuid="4D0C1F15F7D742BFB42D5259BA6576F6" type="21" blob_switch_size="2147483647" never_null="true" id="11"/>
 		<field name="moreData" uuid="DD18E443B5BE6B4FB18A89D692A3C443" type="21" blob_switch_size="2147483647" never_null="true" id="12"/>
+		<field name="enabled" uuid="43BD8E372C5C4189AEA572F3D40588CC" type="1" never_null="true" id="13"/>
 		<primary_key field_name="UUID" field_uuid="37676CD94E8B423595ED98B5C0E9CF89"/>
 	</table>
 	<table name="PurchaseOrder" uuid="CCC415D8C3C546D09E90E672FE1988CF" id="115">
@@ -1859,6 +1869,7 @@
 		<field name="active" uuid="6DB302D55ABE41848A4DAD8A3E8E0B46" type="1" never_null="true" id="35"/>
 		<field name="stockGroup" uuid="14CF5AE0F78049A68445A746316604BD" type="10" limiting_length="255" never_null="true" id="36"/>
 		<field name="transformed" uuid="EB1C0E8B306A4A3597CAF1178C445D6A" type="1" never_null="true" id="37"/>
+		<field name="UUID_InventoryClassification" uuid="501EB5D493DE4F9BBF17D205D9E5681E" type="10" store_as_UUID="true" never_null="true" id="38"/>
 		<primary_key field_name="UUID" field_uuid="F8D9EC71ECF843689AA0D416563422DC"/>
 	</table>
 	<table name="InventoryPull" uuid="B0A466FC99334B96B5FE810BAE186DC4" id="127">
@@ -1912,13 +1923,19 @@
 	</table>
 	<table name="CustomerStatus" uuid="CF8DC4373C97487884111398B4383812" id="130">
 		<field name="UUID" uuid="9C6030E6F9384C39A4FDB9E6453F235A" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
-		<field name="levelID" uuid="F4CD905FEF414ED89C867A2B79E6A86C" type="3" unique="true" never_null="true" id="2"/>
+		<field name="Copy_of_UUID" uuid="FB0C69FD9CCF4B69A56D6F9DB04439BC" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="2"/>
 		<field name="name" uuid="D70524542D0D493384E1685A954A93FB" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="code" uuid="8DC2C4691C634726B48B6698EC206261" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="color" uuid="BC721D564E5AF843A984382F5E9C0FDB" type="10" limiting_length="255" never_null="true" id="5">
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="moreData" uuid="7A7D1C9F65C4E34EA077A9B408E1B9E1" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
+		<field name="Copy_of_name" uuid="098E0A55C9684ABB8F567F5E339EFD94" type="10" limiting_length="255" never_null="true" id="7"/>
+		<field name="Copy_of_code" uuid="D46A735CCC9A4532BE17524B266E01CB" type="10" limiting_length="255" never_null="true" id="8"/>
+		<field name="Copy_of_color" uuid="0B9E75813FC740CAA8E580042A72BD46" type="10" limiting_length="255" never_null="true" id="9">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="Copy_of_moreData" uuid="02E465D669FA44AAA9AEAB4CB647B399" type="21" blob_switch_size="2147483647" never_null="true" id="10"/>
 		<primary_key field_name="UUID" field_uuid="9C6030E6F9384C39A4FDB9E6453F235A"/>
 	</table>
 	<table name="Role" uuid="894004274A3B4909A39584EC0B879D18" id="132">
@@ -3860,6 +3877,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="6EEA73558C8945FF8AD5C94A8F6E05DD" name_Nto1="inventory" name_1toN="inventoryClassifications" state="1">
+		<related_field kind="source">
+			<field_ref uuid="D5AB64A3F5B2472F8E4B9E37B8AF0E11" name="UUID">
+				<table_ref uuid="6D24680FD87643AB8B7A1448D33498F3" name="InventoryClassification"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="501EB5D493DE4F9BBF17D205D9E5681E" name="UUID_InventoryClassification">
+				<table_ref uuid="CA853413921F4B2A9BC70E6DE5F88235" name="Inventory"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="005E48A922A4464DB92973931B467ACF" type="3">
 		<field_ref uuid="17F71D68FA714CE9A75ED79CA63E3BE2" name="UUID_Lead">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
@@ -4465,6 +4494,11 @@
 			<table_ref uuid="04F7E2A28A5349B4B0C70F6D644922BB" name="LeadEvent"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="6907681D064A40068FA4F87B682947CF" type="1">
+		<field_ref uuid="FB0C69FD9CCF4B69A56D6F9DB04439BC" name="Copy_of_UUID">
+			<table_ref uuid="CF8DC4373C97487884111398B4383812" name="CustomerStatus"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="693CFB03E2474724BB9E72E83A585A9B" type="1">
 		<field_ref uuid="1D7BBD937086184FA34B8CBC13CDDEF8" name="name">
 			<table_ref uuid="A0C8CDC075BBB546914E03F7689B897E" name="Supplier"/>
@@ -4478,11 +4512,6 @@
 	<index kind="regular" unique_keys="true" uuid="6B00CE673CCF6D44B73838EAEE15DA50" type="1">
 		<field_ref uuid="8FD486DDACE0854DA8FB686A58B08089" name="UUID">
 			<table_ref uuid="E209D11E14110249AE69799CB8F51C7C" name="RepairLog"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="6B32C8DEC9CEEB449F96F5750E84D233" type="3">
-		<field_ref uuid="B16B9E9117F74E4D836B97A7A8CDE8F6" name="levelID">
-			<table_ref uuid="4EB6C9D117A3DC4B91D031D6BC0C7DA9" name="CustomerCarrier"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="6B9F071AF0A3F643915ABDB0950D7BF5" type="7">
@@ -4645,11 +4674,6 @@
 			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="88B26D6CFC3F2E4CA5FCF09883CCA88D" type="3">
-		<field_ref uuid="F4CD905FEF414ED89C867A2B79E6A86C" name="levelID">
-			<table_ref uuid="CF8DC4373C97487884111398B4383812" name="CustomerStatus"/>
-		</field_ref>
-	</index>
 	<index kind="regular" unique_keys="true" uuid="88E00F2404F80243A0F7CBEB16DD591D" type="1">
 		<field_ref uuid="DDEAA2AF9B9A44BD99857817933C03AA" name="UUID">
 			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
@@ -4698,6 +4722,11 @@
 	<index kind="regular" unique_keys="true" uuid="8E428F94E18645F5A5B714643B5A007F" type="7">
 		<field_ref uuid="627A32C87CCB4069BFFC9D5D94AE4473" name="UUID">
 			<table_ref uuid="B0A466FC99334B96B5FE810BAE186DC4" name="InventoryPull"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="8E4DC6E16C4E419794986F0F3451B911" type="3">
+		<field_ref uuid="501EB5D493DE4F9BBF17D205D9E5681E" name="UUID_InventoryClassification">
+			<table_ref uuid="CA853413921F4B2A9BC70E6DE5F88235" name="Inventory"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="8E4F268E9E478D4A8E4CD3072040FEBF" type="3">
@@ -5225,6 +5254,11 @@
 			<table_ref uuid="3B9C8B2E8B9769409AD8BB9F66CA3E6E" name="CIDisposition"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="E060AD1A14AD49B0B962B041888BB602" type="1">
+		<field_ref uuid="D5AB64A3F5B2472F8E4B9E37B8AF0E11" name="UUID">
+			<table_ref uuid="6D24680FD87643AB8B7A1448D33498F3" name="InventoryClassification"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="E0865D45B93DBD46981C1DA766D29264" type="3">
 		<field_ref uuid="9FC600F4E2713448A5FACD288EA42999" name="UUID_CAOType">
 			<table_ref uuid="F580775371C0FC479B47D767C6CA2D9F" name="CAO"/>
@@ -5308,6 +5342,11 @@
 	<index kind="regular" uuid="EE70B7EACA4C464DBC64151FE6BB5C3D" type="3">
 		<field_ref uuid="133E79E80DE1455BB0F624778F7BFB44" name="UUID_targetAssigned">
 			<table_ref uuid="5DB5EC5859BC4655B933B6AD8069E3E6" name="sfw_Todo"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="F09BC219BE2D46B6AA5B098DC555A66C" type="7">
+		<field_ref uuid="C096C55246B8462F8FE24B4313C5D754" name="levelID">
+			<table_ref uuid="6D24680FD87643AB8B7A1448D33498F3" name="InventoryClassification"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="F1BBE0A36C76D248B875D6BF4E6D87D7" type="3">

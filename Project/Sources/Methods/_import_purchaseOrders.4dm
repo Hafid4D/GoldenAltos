@@ -11,6 +11,8 @@ var $result : Object
 var $poNumber : Integer
 var $created : Integer
 var $updated : Integer
+var $billingCountryISO : Text
+var $shippingCountryISO : Text
 
 TRUNCATE TABLE:C1051([PurchaseOrder:115])
 
@@ -60,6 +62,9 @@ Else
 		$po.altBillTo:=$record.Alt_bill_to
 		$po.currency:=$record.Currency
 		
+		$billingCountryISO:=_toISO2Country($record.BillAddrCountry)
+		$shippingCountryISO:=_toISO2Country($record.ShipAddrCountry)
+		
 		$po.address:=New object:C1471("addresses"; New collection:C1472())
 		$po.address.addresses.push(New object:C1471(\
 			"type"; "billing"; \
@@ -69,7 +74,7 @@ Else
 			"city"; $record.Bill_City; \
 			"state"; $record.Bill_ST; \
 			"postcode"; $record.Bill_ZIP; \
-			"country"; $record.BillAddrCountry\
+			"country"; $billingCountryISO\
 			)\
 			))
 		$po.address.addresses.push(New object:C1471(\
@@ -80,7 +85,7 @@ Else
 			"city"; $record.Ship_City; \
 			"state"; $record.Ship_ST; \
 			"postcode"; $record.Ship_ZIP; \
-			"country"; $record.ShipAddrCountry\
+			"country"; $shippingCountryISO\
 			)\
 			))
 		

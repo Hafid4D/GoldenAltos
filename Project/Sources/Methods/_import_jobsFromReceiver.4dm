@@ -57,10 +57,16 @@ Else
 			End if 
 			
 			If ($purchaseOrder#Null:C1517)
+				// Establish Job -> PurchaseOrder relation through UUID link.
 				$job.UUID_PurchaseOrder:=$purchaseOrder.UUID
+				$job.poNumber:=Num:C11($purchaseOrder.poNumber)
+				If ($job.UUID_Customer=(16*"00")) || ($job.UUID_Customer="")
+					$job.UUID_Customer:=$purchaseOrder.UUID_Customer
+				End if 
 				$linkedPO:=$linkedPO+1
 			Else 
 				$missingPO:=$missingPO+1
+				$job.poNumber:=Num:C11($purchaseOrderNum)
 			End if 
 			
 			$result:=$job.save()

@@ -22,6 +22,8 @@ local Function loadAfterCreation()
 				This:C1470.dateIn:=Current date:C33
 			End if 
 			
+			This:C1470.number:=Sequence number:C244([Lot:118])
+			
 		Else 
 			// This callback is called after creating the new item but before displaying the panel.
 			If (This:C1470.lotNumber="")

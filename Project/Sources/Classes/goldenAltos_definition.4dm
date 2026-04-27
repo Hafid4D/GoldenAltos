@@ -343,7 +343,9 @@ Function _entries_definition()
 	$entry.setPanelPage(1; ""; "Main")
 	$entry.setPanelPage(2; ""; "Customer Provided Material")
 	
-	$entry.setLBItemsColumn("lotNumber"; "Lot #"; "width:450")
+	$entry.setLBItemsColumn("job.customer.name"; "Customer"; "width:200")
+	$entry.setLBItemsColumn("job.jobNumber"; "Job #"; "width:120")
+	$entry.setLBItemsColumn("number"; "Lot #"; "width:120")
 	
 	$entry.setLBItemsOrderBy("lotNumber")
 	$entry.enableTransaction()

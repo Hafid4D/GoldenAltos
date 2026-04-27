@@ -50,7 +50,7 @@
 					"left": 112,
 					"width": 140,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.poNumber",
+					"dataSource": "Form:C1466.current_item.poNum",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -1080,16 +1080,16 @@
 						},
 						{
 							"header": {
-								"name": "Header3",
-								"text": "Part Number",
+								"name": "Header6",
+								"text": "Qty Ordered",
 								"fontWeight": "bold"
 							},
-							"name": "Column3",
+							"name": "Column6",
 							"footer": {
-								"name": "Footer3"
+								"name": "Footer6"
 							},
-							"width": 90,
-							"dataSource": "This:C1470.partNum",
+							"width": 70,
+							"dataSource": "This:C1470.qtyOrdered",
 							"resizable": false,
 							"enterable": false
 						},
@@ -1126,36 +1126,6 @@
 							"dataSourceTypeHint": "date",
 							"textAlign": "center",
 							"dateFormat": "short",
-							"resizable": false,
-							"enterable": false
-						},
-						{
-							"header": {
-								"name": "Header6",
-								"text": "Qty Ordered",
-								"fontWeight": "bold"
-							},
-							"name": "Column6",
-							"footer": {
-								"name": "Footer6"
-							},
-							"width": 70,
-							"dataSource": "This:C1470.qtyOrdered",
-							"resizable": false,
-							"enterable": false
-						},
-						{
-							"header": {
-								"name": "Header7",
-								"text": "Currency",
-								"fontWeight": "bold"
-							},
-							"name": "Column7",
-							"footer": {
-								"name": "Footer7"
-							},
-							"width": 60,
-							"dataSource": "This:C1470.currency",
 							"resizable": false,
 							"enterable": false
 						},

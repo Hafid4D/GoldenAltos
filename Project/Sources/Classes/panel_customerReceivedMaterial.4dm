@@ -19,13 +19,31 @@ Function formMethod()
 	
 Function redrawAndSetVisible()
 	OBJECT SET VISIBLE:C603(*; "dp_@"; Form:C1466.sfw.checkIsInModification())
+	$isInModification:=Form:C1466.sfw.checkIsInModification()
 	
-	OBJECT SET ENTERABLE:C238(*; "field_lotNumber"; False:C215)
-	OBJECT SET ENTERABLE:C238(*; "field_jobNumber"; False:C215)
-	OBJECT SET ENTERABLE:C238(*; "field_dateIn"; False:C215)
-	OBJECT SET ENTERABLE:C238(*; "field_packageType"; Form:C1466.sfw.checkIsInModification())
-	OBJECT SET ENABLED:C1123(*; "field_packageType"; Form:C1466.sfw.checkIsInModification())
+	// Match standard entryField styling behavior for editable inputs in modification mode.
+	If ($isInModification)
+		OBJECT SET RGB COLORS:C628(*; "entryField_@"; "black"; Background color:K23:2)
+		OBJECT SET BORDER STYLE:C1262(*; "entryField_@"; Border System:K42:33)
+	Else 
+		OBJECT SET RGB COLORS:C628(*; "entryField_@"; 0x00333333; Background color none:K23:10)
+		OBJECT SET BORDER STYLE:C1262(*; "entryField_@"; Border None:K42:27)
+	End if 
+	
+	OBJECT SET ENTERABLE:C238(*; "entryField_lotNumber"; False:C215)
+	OBJECT SET ENTERABLE:C238(*; "entryField_jobNumber"; False:C215)
+	OBJECT SET ENTERABLE:C238(*; "entryField_dateIn"; False:C215)
+	OBJECT SET ENTERABLE:C238(*; "entryField_packageType"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET ENABLED:C1123(*; "entryField_packageType"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET ENTERABLE:C238(*; "pup_customer"; Form:C1466.sfw.checkIsInModification())
+	
+	// Keep read-only fields visually neutral even in modification mode.
+	OBJECT SET RGB COLORS:C628(*; "entryField_lotNumber"; 0x00333333; Background color none:K23:10)
+	OBJECT SET RGB COLORS:C628(*; "entryField_jobNumber"; 0x00333333; Background color none:K23:10)
+	OBJECT SET RGB COLORS:C628(*; "entryField_dateIn"; 0x00333333; Background color none:K23:10)
+	OBJECT SET BORDER STYLE:C1262(*; "entryField_lotNumber"; Border None:K42:27)
+	OBJECT SET BORDER STYLE:C1262(*; "entryField_jobNumber"; Border None:K42:27)
+	OBJECT SET BORDER STYLE:C1262(*; "entryField_dateIn"; Border None:K42:27)
 	
 	Form:C1466.sfw.drawHTab()
 	This:C1470.drawPup_customer()
