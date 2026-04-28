@@ -90,6 +90,14 @@
 		<field name="serialization" uuid="C025334374AD4EE3817470B44450C598" type="21" blob_switch_size="2147483647" never_null="true" id="40"/>
 		<field name="properties" uuid="9C1165AA49804B62B8DA4E3CC31D10A6" type="21" blob_switch_size="2147483647" never_null="true" id="41"/>
 		<field name="moreData" uuid="792F9726D802684281D40DE2FA022E6C" type="21" blob_switch_size="2147483647" never_null="true" id="42"/>
+		<field name="mechanicalRejects" uuid="F70B8202142C45B4A3D43ABD8F845EFE" type="4" never_null="true" id="43"/>
+		<field name="missingOrExcluded" uuid="837188C2347F4AB8883C6E252FE5AF3B" type="4" never_null="true" id="44"/>
+		<field name="yield" uuid="0BEA0F739CDC4AAAA72F118EF3B016F9" type="6" never_null="true" id="45">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="supervisor" uuid="5C71C9216FB949D5B4D3FB2728AF6EBF" type="10" limiting_length="255" never_null="true" id="46">
+			<field_extra multi_line="false"/>
+		</field>
 		<primary_key field_name="UUID" field_uuid="EE9C517A8C59724B8559A5DCB59FE560"/>
 	</table>
 	<table name="Tool" uuid="0FF66E5E37EDD74B8E6E39F15644C85F" id="6">
@@ -4275,11 +4283,6 @@
 			<table_ref uuid="E40AC8BB970EDE4CA51C5AD0F7EBC637" name="LeadPriority"/>
 		</field_ref>
 	</index>
-	<index kind="regular" uuid="47867939D51BD4459938C5C60BC2B9CE" type="1">
-		<field_ref uuid="52A7815268F91841B8A2BD8D7165F3A1" name="poNumber">
-			<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
-		</field_ref>
-	</index>
 	<index kind="regular" uuid="47971DE0F0A34E1B9576023BBCF7F52F" type="3">
 		<field_ref uuid="7F025E2A765243A2BC9E00979FB9D560" name="UUID_Outcome">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
@@ -4463,6 +4466,11 @@
 	<index kind="regular" uuid="675DDEA34102494283E12FCAE91573AD" type="3">
 		<field_ref uuid="74D4489457374B57A51D090D4AC39E94" name="UUID_Lead">
 			<table_ref uuid="04F7E2A28A5349B4B0C70F6D644922BB" name="LeadEvent"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="68C6704138654E1B86C889548F0120FF" type="1">
+		<field_ref uuid="52A7815268F91841B8A2BD8D7165F3A1" name="poNumber">
+			<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="693CFB03E2474724BB9E72E83A585A9B" type="1">
