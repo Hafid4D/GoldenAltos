@@ -4,12 +4,12 @@
 singleton Class constructor
 
 
-Function pickReadOnly($buttonName : Text; $currentPath : Text)->$result : Text
-	$result:=This:C1470._pick($buttonName; $currentPath; False:C215)
+Function pickReadOnly($buttonName : Text; $currentPath : Text; $scopeLotUUID : Text)->$result : Text
+	$result:=This:C1470._pick($buttonName; $currentPath; False:C215; $scopeLotUUID)
 
 
-Function pickWithCreate($buttonName : Text; $currentPath : Text)->$result : Text
-	$result:=This:C1470._pick($buttonName; $currentPath; True:C214)
+Function pickWithCreate($buttonName : Text; $currentPath : Text; $scopeLotUUID : Text)->$result : Text
+	$result:=This:C1470._pick($buttonName; $currentPath; True:C214; $scopeLotUUID)
 
 
 Function draw($buttonName : Text; $path : Text)
@@ -38,12 +38,16 @@ Function _stepBack($path : Text)->$parent : Text
 	End if 
 
 
-Function _buildOpts($currentPath : Text; $allowCreate : Boolean)->$opts : Collection
+Function _buildOpts($currentPath : Text; $allowCreate : Boolean; $scopeLotUUID : Text)->$opts : Collection
 	// Builds the complete options list for the current navigation level
 	var $parts; $options; $partsChoice; $terminalFlags; $occupiedFlags : Collection
 	var $value; $candidate; $param : Text
 	var $depth; $i; $idx : Integer
 	var $isTerm; $isOccupied; $isCurrentPathExisting; $currentBinIsOccupied : Boolean
+	var $occupiedInventories : 4D.EntitySelection
+	var $occupiedMap : Object
+	var $locationUUID : Text
+	var $inventory : 4D.Entity
 	
 	$parts:=New collection:C1472
 	If ($currentPath#"")
@@ -72,6 +76,20 @@ Function _buildOpts($currentPath : Text; $allowCreate : Boolean)->$opts : Collec
 		End if 
 	End for each 
 	
+	// Build occupied locations map from related inventories (live stock), not from Bin.isEmpty.
+	$occupiedMap:=New object:C1471
+	If (($scopeLotUUID#"") & ($scopeLotUUID#String:C10("00"*16)))
+		$occupiedInventories:=ds:C1482.Inventory.query("qtyInStock > :1 and UUID_Lot = :2"; 0; $scopeLotUUID)
+	Else 
+		$occupiedInventories:=ds:C1482.Inventory.query("qtyInStock > :1"; 0)
+	End if 
+	For each ($inventory; $occupiedInventories)
+		$locationUUID:=$inventory.UUID_Location
+		If ($locationUUID#"")
+			$occupiedMap[$locationUUID]:=True:C214
+		End if 
+	End for each 
+	
 	// Determine terminal and occupied flags for each child in one cache pass
 	$terminalFlags:=New collection:C1472
 	$occupiedFlags:=New collection:C1472
@@ -81,7 +99,7 @@ Function _buildOpts($currentPath : Text; $allowCreate : Boolean)->$opts : Collec
 		$isOccupied:=False:C215
 		For each ($bin; Storage:C1525.cache.bins)
 			If ($bin.binLocationPath=$candidate)
-				If ($bin.isEmpty=False:C215)
+				If ($occupiedMap[$bin.UUID]#Null:C1517)
 					$isOccupied:=True:C214
 				End if 
 			End if 
@@ -104,7 +122,7 @@ Function _buildOpts($currentPath : Text; $allowCreate : Boolean)->$opts : Collec
 		For each ($bin; Storage:C1525.cache.bins)
 			If ($bin.binLocationPath=$currentPath)
 				$isCurrentPathExisting:=True:C214
-				$currentBinIsOccupied:=($bin.isEmpty=False:C215)
+				$currentBinIsOccupied:=($occupiedMap[$bin.UUID]#Null:C1517)
 			End if 
 		End for each 
 	End if 
@@ -204,7 +222,7 @@ Function _handleChoice($choice : Text; $currentPath : Text; $allowCreate : Boole
 	End case 
 
 
-Function _pick($buttonName : Text; $currentPath : Text; $allowCreate : Boolean)->$result : Text
+Function _pick($buttonName : Text; $currentPath : Text; $allowCreate : Boolean; $scopeLotUUID : Text)->$result : Text
 	var $left; $top; $right; $bottom; $menuX; $menuY; $winRef : Integer
 	var $stop; $confirmed; $isTerm : Boolean
 	var $state; $params : Object
@@ -240,7 +258,7 @@ Function _pick($buttonName : Text; $currentPath : Text; $allowCreate : Boolean)-
 	$menuY:=$bottom+30
 	
 	Repeat 
-		$opts:=This:C1470._buildOpts($currentPath; $allowCreate)
+		$opts:=This:C1470._buildOpts($currentPath; $allowCreate; $scopeLotUUID)
 		$params:=New object:C1471("options"; $opts; "choice"; ""; "allowCreate"; $allowCreate)
 		$winRef:=Open form window:C675("_popup_binLocation"; Movable form dialog box:K39:8; $menuX; $menuY)
 		SET WINDOW TITLE:C213("Select a Bin Location"; $winRef)

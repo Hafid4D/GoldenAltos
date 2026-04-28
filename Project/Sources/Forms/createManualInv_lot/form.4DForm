@@ -722,7 +722,12 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.inventory_e.units"
+					"dataSource": "Form:C1466.inventory_e.units",
+					"events": [
+						"onClick"
+					],
+					"enterable": false,
+					"method": "ObjectMethods/Input9.4dm"
 				},
 				"header_bkgd32": {
 					"type": "rectangle",

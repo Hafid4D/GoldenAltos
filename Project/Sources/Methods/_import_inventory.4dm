@@ -15,6 +15,9 @@ var $lot : cs:C1710.LotEntity
 var $classificationDataClass : 4D.DataClass
 var $classification : 4D.Entity
 var $classificationValue : Text
+var $unitsDataClass : 4D.DataClass
+var $unit : 4D.Entity
+var $unitValue : Text
 var $created : Integer
 var $updated : Integer
 
@@ -29,6 +32,7 @@ If (Not:C34($file.exists))
 Else 
 	$records:=JSON Parse:C1218($file.getText())
 	$classificationDataClass:=ds["InventoryClassification"]
+	$unitsDataClass:=ds["InventoryUnits"]
 	
 	$created:=0
 	$updated:=0
@@ -89,6 +93,15 @@ Else
 			End if 
 			If ($classification#Null:C1517)
 				$inventory["UUID_InventoryClassification"]:=$classification.UUID
+			End if 
+		End if 
+		
+		// Link to InventoryUnits table when available.
+		$unitValue:=String:C10($record.Units)
+		If ($unitsDataClass#Null:C1517) && ($unitValue#"")
+			$unit:=$unitsDataClass.query("name = :1"; $unitValue).first()
+			If ($unit#Null:C1517)
+				$inventory["UUID_InventoryUnits"]:=$unit.UUID
 			End if 
 		End if 
 		

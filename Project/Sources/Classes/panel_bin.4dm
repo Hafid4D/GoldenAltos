@@ -74,7 +74,7 @@ Function bActionInventory()
 Function pup_binLocationPath()
 	If (Form:C1466.sfw.checkIsInModification())
 		
-		$newPath:=cs:C1710.Util_binLocationPicker.me.pickWithCreate("pup_binLocationPath"; Form:C1466.current_item.binLocationPath)
+		$newPath:=cs:C1710.Util_binLocationPicker.me.pickWithCreate("pup_binLocationPath"; Form:C1466.current_item.binLocationPath; "")
 		If ($newPath#"")
 			Form:C1466.current_item.binLocationPath:=$newPath
 			cs:C1710.panel_bin.me._activate_save_cancel_button()

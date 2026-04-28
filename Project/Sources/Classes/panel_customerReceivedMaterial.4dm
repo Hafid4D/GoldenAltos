@@ -7,6 +7,10 @@ Function _activate_save_cancel_button()
 Function formMethod()
 	// Minimal independent panel lifecycle for SFW pages/tabs.
 	Form:C1466.sfw.panelFormMethod()
+	If (Form:C1466.sfw.updateOfPanelNeeded())
+		// Preload materials on item selection so tab count updates immediately.
+		This:C1470.loadMaterials()
+	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())
 		Case of 
 			: (FORM Get current page:C276(*)=2)
@@ -18,6 +22,12 @@ Function formMethod()
 	End if 
 	
 Function redrawAndSetVisible()
+	Use (Form:C1466.sfw.entry.panel.pages)
+		If (Form:C1466.sfw.entry.panel.pages.length>1)
+			Form:C1466.sfw.entry.panel.pages[1].label:="Customer Provided Material ("+String:C10(Form:C1466.lb_materials.length)+")"
+		End if 
+	End use 
+	
 	OBJECT SET VISIBLE:C603(*; "dp_@"; Form:C1466.sfw.checkIsInModification())
 	$isInModification:=Form:C1466.sfw.checkIsInModification()
 	
@@ -119,9 +129,14 @@ Function bActionCustProvMat()
 	
 	APPEND MENU ITEM:C411($refMenu; "Receive Material")
 	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--receive_material")
+	APPEND MENU ITEM:C411($refMenu; "Edit Material")
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--edit_material")
 	
 	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
 		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	If ((Form:C1466.selectedMaterial=Null:C1517) | Undefined:C82(Form:C1466.selectedMaterial))
+		DISABLE MENU ITEM:C150($refMenu; 2)
 	End if 
 	
 	$choose:=Dynamic pop up menu:C1006($refMenu)
@@ -154,8 +169,40 @@ Function bActionCustProvMat()
 					This:C1470._activate_save_cancel_button()
 				End if 
 			End if 
+		: ($choose="--edit_material")
+			This:C1470.editSelectedMaterial()
 	End case 
 	
 Function loadMaterials()
 	Form:C1466.lb_materials:=ds:C1482.Inventory.query("UUID_Lot = :1"; Form:C1466.current_item.UUID)
+	
+Function editSelectedMaterial()
+	var $selectedMaterial : cs:C1710.InventoryEntity
+	var $form : Object
+	var $winRef : Integer
+	var $readOnly : Boolean
+	var $res : Object
+	
+	$selectedMaterial:=Form:C1466.selectedMaterial
+	
+	If (($selectedMaterial#Null:C1517) & Not:C34(Undefined:C82($selectedMaterial)))
+		$form:=New object:C1471(\
+			"inventory_e"; $selectedMaterial; \
+			"readOnly"; Not:C34(Form:C1466.sfw.checkIsInModification())\
+		)
+		
+		$winRef:=Open form window:C675("createManualInv_lot"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
+		DIALOG:C40("createManualInv_lot"; $form)
+		CLOSE WINDOW:C154($winRef)
+		
+		If ((ok=1) & Not:C34($form.readOnly))
+			$form.inventory_e.initialQty:=($form.inventory_e.initialQty=0) ? $form.inventory_e.qtyInStock : $form.inventory_e.initialQty
+			$form.inventory_e.availableQty:=$form.inventory_e.qtyInStock
+			$res:=$form.inventory_e.save()
+			If ($res.success)
+				This:C1470.loadMaterials()
+				This:C1470._activate_save_cancel_button()
+			End if 
+		End if 
+	End if 
 	

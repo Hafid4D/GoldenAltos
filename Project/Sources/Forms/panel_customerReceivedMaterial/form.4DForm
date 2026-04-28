@@ -385,23 +385,194 @@
 					"height": 446,
 					"events": [
 						"onClick",
+						"onDoubleClick",
 						"onHeaderClick",
 						"onDataChange",
 						"onSelectionChange"
 					],
 					"dataSource": "Form:C1466.lb_materials",
 					"listboxType": "collection",
+					"method": "ObjectMethods/lb_materials.4dm",
+					"currentItemSource": "Form:C1466.selectedMaterial",
+					"currentItemPositionSource": "Form:C1466.selectedMaterialPos",
 					"columns": [
 						{
 							"header": {
-								"text": "Code",
+									"text": "Part #",
 								"name": "Header1"
 							},
-							"name": "code",
+							"name": "partNumber",
 							"footer": {
 								"name": "Footer1"
 							},
-							"dataSource": "This:C1470.code"
+							"dataSource": "This:C1470.partNumber",
+							"width": 120
+						},
+						{
+							"header": {
+								"text": "Vendor",
+								"name": "Header2"
+							},
+							"name": "vendor",
+							"footer": {
+								"name": "Footer2"
+							},
+							"dataSource": "This:C1470.vendor",
+							"width": 140
+						},
+						{
+							"header": {
+								"text": "Description",
+								"name": "Header3"
+							},
+							"name": "description",
+							"footer": {
+								"name": "Footer3"
+							},
+							"dataSource": "This:C1470.description",
+							"width": 180
+						},
+						{
+							"header": {
+								"text": "Classification",
+								"name": "Header4"
+							},
+							"name": "classification",
+							"footer": {
+								"name": "Footer4"
+							},
+							"dataSource": "This:C1470.classification",
+							"width": 140
+						},
+						{
+							"header": {
+								"text": "Lot #",
+								"name": "Header5"
+							},
+							"name": "lotNumber",
+							"footer": {
+								"name": "Footer5"
+							},
+							"dataSource": "This:C1470.lot.partLotNumber",
+							"width": 90
+						},
+						{
+							"header": {
+								"text": "Stock #",
+								"name": "Header6"
+							},
+							"name": "stockNum",
+							"footer": {
+								"name": "Footer6"
+							},
+							"dataSource": "This:C1470.stockNum",
+							"width": 140
+						},
+						{
+							"header": {
+								"text": "Date IN",
+								"name": "Header7"
+							},
+							"name": "dateIn",
+							"footer": {
+								"name": "Footer7"
+							},
+							"dataSource": "(This:C1470.dateIn=0) ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.dateIn)",
+							"dataSourceTypeHint": "date",
+							"dateFormat": "short",
+							"width": 90
+						},
+						{
+							"header": {
+								"text": "Exp. Date",
+								"name": "Header8"
+							},
+							"name": "expirationDate",
+							"footer": {
+								"name": "Footer8"
+							},
+							"dataSource": "(This:C1470.expirationDate=0) ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.expirationDate)",
+							"dataSourceTypeHint": "date",
+							"dateFormat": "short",
+							"width": 90
+						},
+						{
+							"header": {
+								"text": "Qty in Stock",
+								"name": "Header9"
+							},
+							"name": "qtyInStock",
+							"footer": {
+								"name": "Footer9"
+							},
+							"dataSource": "This:C1470.qtyInStock",
+							"dataSourceTypeHint": "number",
+							"textAlign": "right",
+							"width": 90
+						},
+						{
+							"header": {
+								"text": "Units",
+								"name": "Header10"
+							},
+							"name": "units",
+							"footer": {
+								"name": "Footer10"
+							},
+							"dataSource": "This:C1470.units",
+							"width": 80
+						},
+						{
+							"header": {
+								"text": "Unit Cost",
+								"name": "Header11"
+							},
+							"name": "unitCost",
+							"footer": {
+								"name": "Footer11"
+							},
+							"dataSource": "This:C1470.unitCost",
+							"dataSourceTypeHint": "number",
+							"textAlign": "right",
+							"width": 90
+						},
+						{
+							"header": {
+								"text": "Total Cost",
+								"name": "Header12"
+							},
+							"name": "totalCost",
+							"footer": {
+								"name": "Footer12"
+							},
+							"dataSource": "This:C1470.totalCost",
+							"dataSourceTypeHint": "number",
+							"textAlign": "right",
+							"width": 100
+						},
+						{
+							"header": {
+								"text": "Currency",
+								"name": "Header13"
+							},
+							"name": "currency",
+							"footer": {
+								"name": "Footer13"
+							},
+							"dataSource": "This:C1470.currency",
+							"width": 80
+						},
+						{
+							"header": {
+								"text": "Received By",
+								"name": "Header14"
+							},
+							"name": "receivedBy",
+							"footer": {
+								"name": "Footer14"
+							},
+							"dataSource": "This:C1470.receivedBy",
+							"width": 130
 						}
 					]
 				}

@@ -398,13 +398,17 @@ Function pup_binLocation()
 	
 	If (Form:C1466.sfw.checkIsInModification())
 		
-		$result:=cs:C1710.Util_binLocationPicker.me.pickReadOnly("pup_binLocation"; Form:C1466.currentPath)
+		$result:=cs:C1710.Util_binLocationPicker.me.pickReadOnly("pup_binLocation"; Form:C1466.currentPath; "")
 		If ($result#"")
 			Form:C1466.currentPath:=$result
 			Form:C1466.selectedBins:=Storage:C1525.cache.bins.query("binLocationPath = :1"; Form:C1466.currentPath)
 			If (Form:C1466.selectedBins#Null:C1517)
-				Form:C1466.current_item.UUID_Location:=Form:C1466.selectedBins.first().UUID
-				This:C1470._activate_save_cancel_button()
+				If (Form:C1466.selectedBins.length>0)
+					// Link inventory to the selected Bin record.
+					Form:C1466.current_item.UUID_Location:=Form:C1466.selectedBins.first().UUID
+					Form:C1466.current_item.location:=Form:C1466.selectedBins.first().binLocationPath
+					This:C1470._activate_save_cancel_button()
+				End if 
 			End if 
 			This:C1470.drawPup_binLocation()
 			
