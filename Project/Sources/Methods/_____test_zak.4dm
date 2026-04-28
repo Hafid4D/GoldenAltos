@@ -72,30 +72,30 @@
 
 //End for 
 
-C_OBJECT:C1216($bomMap)
+//C_OBJECT($bomMap)
 
-// Step 1: Build map (Bom_Part_Num → UUID)
-ALL RECORDS:C47([BOM:96])
-While (Not:C34(End selection:C36([BOM:96])))
-	OB SET:C1220($bomMap; [BOM:96]Bom_Part_Num:2; [BOM:96]UUID:1)
-	NEXT RECORD:C51([BOM:96])
-End while 
+//// Step 1: Build map (Bom_Part_Num → UUID)
+//ALL RECORDS([BOM])
+//While (Not(End selection([BOM])))
+//OB SET($bomMap; [BOM]Bom_Part_Num; [BOM]UUID)
+//NEXT RECORD([BOM])
+//End while 
 
-// Step 2: Loop BomItem once
-ALL RECORDS:C47([BomItem:97])
-While (Not:C34(End selection:C36([BomItem:97])))
-	
-	$uuid:=OB Get:C1224($bomMap; [BomItem:97]Bom_Part_Num:2)
-	
-	If ($uuid#Null:C1517)
-		[BomItem:97]UUID_Bom:20:=$uuid
-		SAVE RECORD:C53([BomItem:97])  // 🔥 THIS WAS MISSING
-	End if 
-	
-	NEXT RECORD:C51([BomItem:97])
-End while 
+//// Step 2: Loop BomItem once
+//ALL RECORDS([BomItem])
+//While (Not(End selection([BomItem])))
 
-ALERT:C41("Done")
+//$uuid:=OB Get($bomMap; [BomItem]Bom_Part_Num)
+
+//If ($uuid#Null)
+//[BomItem]UUID_Bom:=$uuid
+//SAVE RECORD([BomItem])  // 🔥 THIS WAS MISSING
+//End if 
+
+//NEXT RECORD([BomItem])
+//End while 
+
+//ALERT("Done")
 
 
 

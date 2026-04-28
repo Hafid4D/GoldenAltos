@@ -267,7 +267,7 @@
 					"right": 1082,
 					"bottom": 555
 				},
-				"lb_steps": {
+				"lb_bomItems": {
 					"type": "listbox",
 					"left": 102,
 					"top": 114,
@@ -347,7 +347,7 @@
 					"right": 101,
 					"bottom": 555
 				},
-				"label_stepLine_areas": {
+				"label_item_qty": {
 					"type": "text",
 					"text": "BOM Qty",
 					"top": 242,
@@ -356,7 +356,7 @@
 					"height": 15,
 					"fontWeight": "bold"
 				},
-				"label_stepLine_operationCode": {
+				"label_item_factor": {
 					"type": "text",
 					"text": "Times Factor",
 					"top": 274,
@@ -365,7 +365,7 @@
 					"height": 15,
 					"fontWeight": "bold"
 				},
-				"label_stepLine_description": {
+				"label_item_supplier": {
 					"type": "text",
 					"text": "Supplier",
 					"top": 154,
@@ -374,7 +374,7 @@
 					"height": 15,
 					"fontWeight": "bold"
 				},
-				"entryField_Supplier": {
+				"entryField_item_Supplier": {
 					"type": "input",
 					"left": 708,
 					"top": 154,
@@ -383,13 +383,13 @@
 					"borderStyle": "none",
 					"fill": "transparent",
 					"dataSource": "Form:C1466.selectedItem.Supplier",
-					"method": "ObjectMethods/entryField_Supplier.4dm",
+					"method": "ObjectMethods/entryField_item_Supplier.4dm",
 					"events": [
 						"onDataChange"
 					],
 					"textAlign": "left"
 				},
-				"label_stepLine_specification": {
+				"label_item_partNum": {
 					"type": "text",
 					"text": "Supplier PartNum",
 					"top": 210,
@@ -398,7 +398,7 @@
 					"height": 15,
 					"fontWeight": "bold"
 				},
-				"label_stepLine_alert": {
+				"label_item_division": {
 					"type": "text",
 					"text": "Division",
 					"top": 182,
@@ -417,7 +417,7 @@
 					"fontWeight": "bold",
 					"right": 97
 				},
-				"label_stepLine_operationCode1": {
+				"label_item_internal": {
 					"type": "text",
 					"text": "Inernal PartNum",
 					"top": 334,
@@ -426,7 +426,7 @@
 					"height": 15,
 					"fontWeight": "bold"
 				},
-				"label_stepLine_operationCode2": {
+				"label_item_qtyininventory": {
 					"type": "text",
 					"text": "Qty in inventory",
 					"top": 354,
@@ -435,7 +435,7 @@
 					"height": 15,
 					"fontWeight": "bold"
 				},
-				"label_stepLine_operationCode3": {
+				"label_item_boNum": {
 					"type": "text",
 					"text": "BO Number",
 					"top": 374,
@@ -444,7 +444,7 @@
 					"height": 15,
 					"fontWeight": "bold"
 				},
-				"label_stepLine_operationCode4": {
+				"label_item_price": {
 					"type": "text",
 					"text": "Unit price",
 					"top": 394,
@@ -453,7 +453,7 @@
 					"height": 15,
 					"fontWeight": "bold"
 				},
-				"label_stepLine_operationCode5": {
+				"label_item_desc": {
 					"type": "text",
 					"text": "Part Description",
 					"top": 414,
@@ -462,7 +462,7 @@
 					"height": 15,
 					"fontWeight": "bold"
 				},
-				"label_stepLine_operationCode6": {
+				"label_item_sequenceID": {
 					"type": "text",
 					"text": "SequenceID",
 					"top": 434,
@@ -471,7 +471,7 @@
 					"height": 15,
 					"fontWeight": "bold"
 				},
-				"label_stepLine_operationCode7": {
+				"label_item_units": {
 					"type": "text",
 					"text": "Units",
 					"top": 454,
@@ -480,7 +480,7 @@
 					"height": 15,
 					"fontWeight": "bold"
 				},
-				"entryField_TimesFactor": {
+				"entryField_item_TimesFactor": {
 					"type": "input",
 					"left": 708,
 					"top": 274,
@@ -489,13 +489,13 @@
 					"borderStyle": "none",
 					"fill": "transparent",
 					"dataSource": "Form:C1466.selectedItem.TimesFactor",
-					"method": "ObjectMethods/entryField_TimesFactor.4dm",
+					"method": "ObjectMethods/entryField_item_TimesFactor.4dm",
 					"events": [
 						"onDataChange"
 					],
 					"textAlign": "left"
 				},
-				"entryField_InternalPartNum": {
+				"entryField_item_InternalPartNum": {
 					"type": "input",
 					"left": 708,
 					"top": 334,
@@ -504,13 +504,13 @@
 					"borderStyle": "none",
 					"fill": "transparent",
 					"dataSource": "Form:C1466.selectedItem.InternalPartNum",
-					"method": "ObjectMethods/entryField_InternalPartNum.4dm",
+					"method": "ObjectMethods/entryField_item_InternalPartNum.4dm",
 					"events": [
 						"onDataChange"
 					],
 					"textAlign": "left"
 				},
-				"entryField_QtyInInventory": {
+				"entryField_item_QtyInInventory": {
 					"type": "input",
 					"left": 708,
 					"top": 354,
@@ -519,13 +519,13 @@
 					"borderStyle": "none",
 					"fill": "transparent",
 					"dataSource": "Form:C1466.selectedItem.QtyInInventory",
-					"method": "ObjectMethods/entryField_QtyInInventory.4dm",
+					"method": "ObjectMethods/entryField_item_QtyInInventory.4dm",
 					"events": [
 						"onDataChange"
 					],
 					"textAlign": "left"
 				},
-				"entryField_BOnumber": {
+				"entryField_item_BOnumber": {
 					"type": "input",
 					"left": 708,
 					"top": 374,
@@ -534,13 +534,13 @@
 					"borderStyle": "none",
 					"fill": "transparent",
 					"dataSource": "Form:C1466.selectedItem.BOnumber",
-					"method": "ObjectMethods/entryField_BOnumber.4dm",
+					"method": "ObjectMethods/entryField_item_BOnumber.4dm",
 					"events": [
 						"onDataChange"
 					],
 					"textAlign": "left"
 				},
-				"entryField_UnitPrice": {
+				"entryField_item_UnitPrice": {
 					"type": "input",
 					"left": 708,
 					"top": 394,
@@ -549,13 +549,13 @@
 					"borderStyle": "none",
 					"fill": "transparent",
 					"dataSource": "Form:C1466.selectedItem.UnitPrice",
-					"method": "ObjectMethods/entryField_UnitPrice.4dm",
+					"method": "ObjectMethods/entryField_item_UnitPrice.4dm",
 					"events": [
 						"onDataChange"
 					],
 					"textAlign": "left"
 				},
-				"entryField_PartDescription": {
+				"entryField_item_PartDescription": {
 					"type": "input",
 					"left": 708,
 					"top": 414,
@@ -564,13 +564,13 @@
 					"borderStyle": "none",
 					"fill": "transparent",
 					"dataSource": "Form:C1466.selectedItem.PartDescription",
-					"method": "ObjectMethods/entryField_PartDescription.4dm",
+					"method": "ObjectMethods/entryField_item_PartDescription.4dm",
 					"events": [
 						"onDataChange"
 					],
 					"textAlign": "left"
 				},
-				"entryField_SequenceID": {
+				"entryField_item_SequenceID": {
 					"type": "input",
 					"left": 708,
 					"top": 434,
@@ -579,13 +579,13 @@
 					"borderStyle": "none",
 					"fill": "transparent",
 					"dataSource": "Form:C1466.selectedItem.SequenceID",
-					"method": "ObjectMethods/entryField_SequenceID.4dm",
+					"method": "ObjectMethods/entryField_item_SequenceID.4dm",
 					"events": [
 						"onDataChange"
 					],
 					"textAlign": "left"
 				},
-				"entryField_Units": {
+				"entryField_item_Units": {
 					"type": "input",
 					"left": 708,
 					"top": 454,
@@ -594,13 +594,13 @@
 					"borderStyle": "none",
 					"fill": "transparent",
 					"dataSource": "Form:C1466.selectedItem.Units",
-					"method": "ObjectMethods/entryField_Units.4dm",
+					"method": "ObjectMethods/entryField_item_Units.4dm",
 					"events": [
 						"onDataChange"
 					],
 					"textAlign": "left"
 				},
-				"entryField_BomQty": {
+				"entryField_item_BomQty": {
 					"type": "input",
 					"left": 708,
 					"top": 242,
@@ -609,13 +609,13 @@
 					"borderStyle": "none",
 					"fill": "transparent",
 					"dataSource": "Form:C1466.selectedItem.BomQty",
-					"method": "ObjectMethods/entryField_BomQty.4dm",
+					"method": "ObjectMethods/entryField_item_BomQty.4dm",
 					"events": [
 						"onDataChange"
 					],
 					"textAlign": "left"
 				},
-				"entryField_SupplierPartNum": {
+				"entryField_item_SupplierPartNum": {
 					"type": "input",
 					"left": 708,
 					"top": 210,
@@ -624,31 +624,38 @@
 					"borderStyle": "none",
 					"fill": "transparent",
 					"dataSource": "Form:C1466.selectedItem.SupplierPartNum",
-					"method": "ObjectMethods/entryField_SupplierPartNum.4dm",
+					"method": "ObjectMethods/entryField_item_SupplierPartNum.4dm",
 					"events": [
 						"onDataChange"
 					],
 					"textAlign": "left"
 				},
-				"entryField_division": {
-					"type": "input",
+				"pup_divisionItem": {
+					"type": "button",
+					"top": 178,
 					"left": 708,
-					"top": 182,
-					"width": 263,
-					"height": 15,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.selectedItem.division.name",
-					"method": "ObjectMethods/entryField_division.4dm",
+					"width": 175,
+					"height": 23,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_divisionItem.4dm",
 					"events": [
-						"onDataChange"
+						"onClick"
 					],
-					"textAlign": "left"
+					"bottom": 201,
+					"textAlign": "left",
+					"visibility": "visible"
 				}
 			}
 		}
 	],
-	"geometryStamp": 219,
+	"geometryStamp": 260,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"editor": {
 		"activeView": "View 1",

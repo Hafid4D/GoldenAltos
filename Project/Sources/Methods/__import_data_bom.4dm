@@ -51,7 +51,7 @@ If (True:C214)
 		$bom.BomQty:=$record2.Bom_Qty
 		$bom.QtyInInventory:=$record2.Qty_in_inventory
 		$bom.BOnumber:=$record2.BO_number
-		$bom.BOlineItemNum:=$record2.Void
+		$bom.BOlineItemNum:=$record2.BO_line_item_num
 		$bom.UnitPrice:=$record2.unit_price
 		$bom.PartDescription:=$record2.Part_Description
 		$bom.Units:=$record2.Units
@@ -70,4 +70,28 @@ If (True:C214)
 		
 	End for each 
 End if 
-ALERT:C41("BOMs done importing")
+ALERT:C41("BOMs & BOM items done importing")
+
+C_OBJECT:C1216($bomMap)
+
+ALL RECORDS:C47([BOM:96])
+While (Not:C34(End selection:C36([BOM:96])))
+	OB SET:C1220($bomMap; [BOM:96]Bom_Part_Num:2; [BOM:96]UUID:1)
+	NEXT RECORD:C51([BOM:96])
+End while 
+
+//  Loop BomItem once
+ALL RECORDS:C47([BomItem:97])
+While (Not:C34(End selection:C36([BomItem:97])))
+	
+	$uuid:=OB Get:C1224($bomMap; [BomItem:97]Bom_Part_Num:2)
+	
+	If ($uuid#Null:C1517)
+		[BomItem:97]UUID_Bom:20:=$uuid
+		SAVE RECORD:C53([BomItem:97])
+	End if 
+	
+	NEXT RECORD:C51([BomItem:97])
+End while 
+
+ALERT:C41("Done relating BOM items to BOMs")
