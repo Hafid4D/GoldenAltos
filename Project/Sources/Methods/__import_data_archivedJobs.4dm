@@ -6,7 +6,7 @@ If (True:C214)
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/archived_jobs_export.json")
 	
 	$records:=JSON Parse:C1218($file.getText())
-	$counter:=ds:C1482.JobInvoice.all().extract("invoiceNumber").map(Formula:C1597(Num:C11($1.value))).max()
+	
 	
 	For each ($record; $records)
 		$counter:=$counter+1
@@ -181,7 +181,7 @@ If (True:C214)
 			$lot_e.dateOut:=$lot.dateOut
 			$lot_e.process:=$lot.process
 			$lot_e.device:=$lot.device
-			$lot_e.altLotNumber:=$lot.altLotNumber
+			//$lot_e.altLotNumber:=$lot.altLotNumber
 			$lot_e.deviceTableLink:=$lot.deviceTableLink
 			$lot_e.currentOrNextArea:=$lot.currentOrNextArea
 			$lot_e.onHold:=$lot.onHold
@@ -236,6 +236,8 @@ If (True:C214)
 			Else 
 				
 				For each ($step; $lot.steps)
+					// Purpose: Mirror the active-jobs import: populate LotStep object fields (bins/parametricMeasurements/properties/moreData) from the legacy archived-job JSON, with backward-compatible fallbacks.
+					// modified by 4D/PS [2026-april-27]
 					$lotStep_e:=ds:C1482.LotStep.new()
 					
 					$lotStep_e.order:=$step.order
@@ -245,6 +247,8 @@ If (True:C214)
 					$lotStep_e.alert:=$step.alert
 					$lotStep_e.qtyIn:=$step.qtyIn
 					$lotStep_e.qtyOut:=$step.qtyOut
+					$lotStep_e.rejects:=$step.rejects
+					$lotStep_e.minYield:=$step.minYield
 					$lotStep_e.dateIn:=$step.dateIn
 					$lotStep_e.dateOut:=$step.dateOut
 					$lotStep_e.timeIn:=$step.timeIn
@@ -258,17 +262,61 @@ If (True:C214)
 					$lotStep_e.tools:=New object:C1471()
 					$lotStep_e.tools:=$step.tools
 					$lotStep_e.areas:=$step.areas
+					$lotStep_e.mechanicalRejects:=$step.mechanicalRejects
+					$lotStep_e.missingOrExcluded:=$step.missingOrExcluded
+					$lotStep_e.yield:=$step.yield
+					$lotStep_e.supervisor:=$step.supervisor
 					
-					While ($lotStep_e.tools.items.indexOf("")#-1)
+					While (($lotStep_e.tools#Null:C1517) && ($lotStep_e.tools.items.indexOf("")#-1))
 						
 						$lotStep_e.tools.items:=$lotStep_e.tools.items.remove($lotStep_e.tools.items.indexOf(""))
 						
 					End while 
 					
-					$lotStep_e.parametricMeasurements:=New object:C1471("items"; New collection:C1472())
+					$lotStep_e.parametricMeasurements:=New object:C1471(\
+						"items"; New collection:C1472(); \
+						"in"; New object:C1471("par1"; 0; "par2"; 0; "par3"; 0); \
+						"out"; New object:C1471("par1"; 0; "par2"; 0; "par3"; 0)\
+						)
+					If ($step.parametricMeasurements#Null:C1517)
+						If ($step.parametricMeasurements.in#Null:C1517)
+							$lotStep_e.parametricMeasurements.in:=$step.parametricMeasurements.in
+						End if 
+						If ($step.parametricMeasurements.out#Null:C1517)
+							$lotStep_e.parametricMeasurements.out:=$step.parametricMeasurements.out
+						End if 
+					End if 
+					
 					$lotStep_e.stepInterruptions:=New object:C1471("items"; New collection:C1472())
 					$lotStep_e.dataTables:=New object:C1471("items"; New collection:C1472())
-					$lotStep_e.bins:=New object:C1471("items"; New collection:C1472())
+					
+					$lotStep_e.bins:=New object:C1471(\
+						"items"; New collection:C1472())
+					If ($step.bins#Null:C1517) && ($step.bins.items#Null:C1517)
+						For each ($bin; $step.bins.items)
+							$newBin:=New object:C1471()
+							$newBin.num:=$bin.num
+							$newBin.definition:=($bin.definition=Null:C1517) ? "" : $bin.definition
+							$newBin.type:=($bin.type=Null:C1517) ? "" : $bin.type
+							$newBin.value:=($bin.value=Null:C1517) ? 0 : $bin.value
+							$lotStep_e.bins.items.push($newBin)
+						End for each 
+					End if 
+					
+					$lotStep_e.properties:=New object:C1471(\
+						"pgm"; ""; \
+						"pgmSwitch"; ""; \
+						"hardware1"; ""; \
+						"hardware2"; ""; \
+						"probeCard"; ""; \
+						"count1"; 0; \
+						"count2"; 0; \
+						"count3"; 0\
+						)
+					If ($step.properties#Null:C1517)
+						$lotStep_e.properties:=$step.properties
+					End if 
+					
 					$lotStep_e.skills:=New object:C1471("items"; New collection:C1472())
 					$lotStep_e.requitedCertifications:=New object:C1471("items"; New collection:C1472())
 					
