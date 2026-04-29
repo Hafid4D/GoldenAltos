@@ -1,48 +1,33 @@
 //%attributes = {}
+//%attributes = {}
 
 ARRAY TEXT:C222($items; 0)
 ARRAY LONGINT:C221($refs; 0)
 
 var $records : Collection
-var $record : Object
-var $processes : Collection
 var $i : Integer
 var $listRef : Integer
 var $itemRef : Integer
 var $itemText : Text
-var $resourcesFolder : 4D.Folder
-var $exportsFolder : 4D.Folder
-var $file : 4D.File
+var $resourcesFolder : 4D:C1709.Folder
+var $exportsFolder : 4D:C1709.Folder
+var $file : 4D:C1709.File
 
 $records:=New collection:C1472()
-
-QUERY:C277([Save_lists]; [Save_lists]ListType="OperationsCodesList")
+ALL RECORDS:C47([Save_lists])
+QUERY:C277([Save_lists]; [Save_lists]List_name="OperationsCodesList")
 
 While (Not:C34(End selection:C36([Save_lists])))
-	$record:=New object:C1471(\
-		"listName"; [Save_lists]List_name; \
-		"description"; [Save_lists]Description; \
-		"listType"; [Save_lists]ListType; \
-		"processes"; New collection:C1472()\
-		)
-	
 	$listRef:=BLOB to list:C557([Save_lists]l_blob)
 	
 	For ($i; 1; Count list items:C380($listRef))
 		GET LIST ITEM:C378($listRef; $i; $itemRef; $itemText)
 		
-		If (Trim:C1541($itemText)#"")
-			$record.processes.push(New object:C1471(\
-				"ref"; $itemRef; \
-				"name"; Trim:C1541($itemText)\
-				))
+		If ($itemText#"")
+			$records.push($itemText)
 		End if 
 	End for 
-	
-	If ($record.processes.length>0)
-		$records.push($record)
-	End if 
-	
+
 	NEXT RECORD:C51([Save_lists])
 End while 
 
