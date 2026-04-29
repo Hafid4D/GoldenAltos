@@ -45,6 +45,7 @@ Function redrawAndSetVisible()
 	OBJECT SET ENTERABLE:C238(*; "entryField_dateIn"; False:C215)
 	OBJECT SET ENTERABLE:C238(*; "entryField_packageType"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET ENABLED:C1123(*; "entryField_packageType"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET ENABLED:C1123(*; "pup_job"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET ENTERABLE:C238(*; "pup_customer"; Form:C1466.sfw.checkIsInModification())
 	
 	// Keep read-only fields visually neutral even in modification mode.
@@ -78,6 +79,10 @@ Function redrawAndSetVisible()
 Function selectCustomer()
 	var $job : cs:C1710.JobEntity
 	var $form : Object
+	var $lotsForJob : cs:C1710.LotSelection
+	var $lot : cs:C1710.LotEntity
+	var $confirm : Boolean
+	var $resLot : Object
 	
 	If (Form:C1466.sfw.checkIsInModification())
 		$job:=Form:C1466.current_item.job
@@ -98,15 +103,57 @@ Function selectCustomer()
 			CLOSE WINDOW:C154($winRef)
 			
 			If (OK=1) && ($form.item#Null:C1517)
+				$lotsForJob:=ds:C1482.Lot.query("UUID_Job = :1"; $job.UUID)
+				$confirm:=True:C214
+				If ($lotsForJob.length>1)
+					$confirm:=cs:C1710.sfw_dialog.me.confirm(\
+						"This job is linked to "+String:C10($lotsForJob.length)+" lots.\rChanging the customer will apply to all these lots.\rDo you want to continue?"; \
+						"yes"; \
+						"no"\
+					)
+				End if 
+				
+				If ($confirm)
 				$job.UUID_Customer:=$form.item.UUID
 				$job.customerName:=$form.item.name
 				
 				$res:=$job.save()
 				If ($res.success)
+					For each ($lot; $lotsForJob)
+						$lot.customer:=$form.item.name
+						$resLot:=$lot.save()
+					End for each 
+					
 					This:C1470._activate_save_cancel_button()
 					This:C1470.drawPup_customer()
 				End if 
+				End if 
 			End if 
+		End if 
+	End if 
+	
+Function selectJob()
+	var $form : Object
+	
+	If (Form:C1466.sfw.checkIsInModification())
+		OBJECT GET COORDINATES:C663(*; "pup_job"; $l; $t; $r; $b)
+		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
+		
+		$form:=New object:C1471(\
+			"colName"; "jobNumber"; \
+			"lb_items"; ds:C1482.Job.all().orderBy("jobNumber"); \
+			"allData"; ds:C1482.Job.all().orderBy("jobNumber"); \
+			"dataclass"; "Job"\
+		)
+		
+		$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b+1)
+		DIALOG:C40("selectNto1"; $form)
+		CLOSE WINDOW:C154($winRef)
+		
+		If (OK=1) & ($form.item#Null:C1517)
+			Form:C1466.current_item.UUID_Job:=$form.item.UUID
+			This:C1470.drawPup_customer()
+			This:C1470._activate_save_cancel_button()
 		End if 
 	End if 
 	
@@ -143,32 +190,41 @@ Function bActionCustProvMat()
 	
 	Case of 
 		: ($choose="--receive_material")
-			$form:=New object:C1471(\
-				"inventory_e"; ds:C1482.Inventory.new()\
-				)
-			
-			$form.inventory_e.UUID_Lot:=Form:C1466.current_item.UUID
-			$form.inventory_e.vendor:=Form:C1466.current_item.job.customerName
-			$form.inventory_e.stockNum:="man_"+String:C10(ds:C1482.Inventory.all().length)+String:C10(Milliseconds:C459)
-			$form.inventory_e.inventoryID:=(ds:C1482.Inventory.all().length>0) ? ds:C1482.Inventory.all().max("inventoryID")+1 : 1
-			$form.inventory_e.code:="INV"+String:C10($form.inventory_e.inventoryID; "00000#")
-			
-			$winRef:=Open form window:C675("createManualInv_lot"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
-			DIALOG:C40("createManualInv_lot"; $form)
-			CLOSE WINDOW:C154($winRef)
-			
-			If (ok=1)
-				$form.inventory_e.initialQty:=$form.inventory_e.qtyInStock
-				$form.inventory_e.availableQty:=$form.inventory_e.qtyInStock
+			$continueBatch:=True:C214
+			Repeat 
+				$form:=New object:C1471(\
+					"inventory_e"; ds:C1482.Inventory.new(); \
+					"saveAndNew"; False:C215\
+					)
 				
-				$res:=$form.inventory_e.save()
+				$form.inventory_e.UUID_Lot:=Form:C1466.current_item.UUID
+				$form.inventory_e.vendor:=Form:C1466.current_item.job.customerName
+				$form.inventory_e.stockNum:="man_"+String:C10(ds:C1482.Inventory.all().length)+String:C10(Milliseconds:C459)
+				$form.inventory_e.inventoryID:=(ds:C1482.Inventory.all().length>0) ? ds:C1482.Inventory.all().max("inventoryID")+1 : 1
+				$form.inventory_e.code:="INV"+String:C10($form.inventory_e.inventoryID; "00000#")
 				
-				If ($res.success)
-					This:C1470.loadMaterials()
-					$form.inventory_e.afterCreation()
-					This:C1470._activate_save_cancel_button()
+				$winRef:=Open form window:C675("createManualInv_lot"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
+				DIALOG:C40("createManualInv_lot"; $form)
+				CLOSE WINDOW:C154($winRef)
+				
+				If (ok=1)
+					$form.inventory_e.initialQty:=$form.inventory_e.qtyInStock
+					$form.inventory_e.availableQty:=$form.inventory_e.qtyInStock
+					
+					$res:=$form.inventory_e.save()
+					
+					If ($res.success)
+						This:C1470.loadMaterials()
+						$form.inventory_e.afterCreation()
+						This:C1470._activate_save_cancel_button()
+						$continueBatch:=$form.saveAndNew
+					Else 
+						$continueBatch:=False:C215
+					End if 
+				Else 
+					$continueBatch:=False:C215
 				End if 
-			End if 
+			Until (Not:C34($continueBatch))
 		: ($choose="--edit_material")
 			This:C1470.editSelectedMaterial()
 	End case 

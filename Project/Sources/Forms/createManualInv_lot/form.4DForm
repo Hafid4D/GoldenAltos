@@ -444,7 +444,7 @@
 				"Button": {
 					"type": "button",
 					"top": 441,
-					"left": 445,
+					"left": 365,
 					"width": 70,
 					"height": 20,
 					"sizingX": "move",
@@ -481,6 +481,20 @@
 					"shortcutControl": false,
 					"shortcutShift": false,
 					"shortcutAlt": false
+				},
+				"btnSaveAndNew": {
+					"type": "button",
+					"top": 441,
+					"left": 445,
+					"width": 70,
+					"height": 20,
+					"sizingX": "move",
+					"sizingY": "move",
+					"text": "Save & New",
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/btnSaveAndNew.4dm"
 				},
 				"header_bkgd8": {
 					"type": "rectangle",

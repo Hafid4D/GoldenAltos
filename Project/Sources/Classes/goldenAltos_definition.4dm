@@ -347,6 +347,15 @@ Function _entries_definition()
 	$entry.setLBItemsColumn("job.jobNumber"; "Job #"; "width:120")
 	$entry.setLBItemsColumn("number"; "Lot #"; "width:120")
 	
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterCustomer")
+	$filter.setDefaultTitle("All customers")
+	// Filter lots by linked customer through job relation.
+	$filter.setFilterByLinkedEntity("Customer"; "job.customer.UUID"; "uuidCustomer"; "job.customer")
+	$filter.setDynamicTitle("name"; "## customers")
+	$filter.setOrderForItems("name")
+	$filter.setAttributeLabelForItem("name")
+	$entry.addFilter($filter)
+	
 	$entry.setLBItemsOrderBy("lotNumber")
 	$entry.enableTransaction()
 	

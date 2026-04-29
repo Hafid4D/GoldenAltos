@@ -5,6 +5,9 @@ Case of
 		If (Form:C1466.readOnly=Null:C1517)
 			Form:C1466.readOnly:=False:C215
 		End if 
+		If (Form:C1466.saveAndNew=Null:C1517)
+			Form:C1466.saveAndNew:=False:C215
+		End if 
 		
 		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.bins=Null:C1517)
 			ds:C1482.Bin.cacheLoad()
@@ -49,6 +52,7 @@ Case of
 			OBJECT SET ENABLED:C1123(*; "btnDatePicker_dateIn"; False:C215)
 			OBJECT SET ENABLED:C1123(*; "btnDatePicker_expirationDate"; False:C215)
 			OBJECT SET ENABLED:C1123(*; "Button1"; False:C215)
+			OBJECT SET ENABLED:C1123(*; "btnSaveAndNew"; False:C215)
 		End if 
 		
 End case 
