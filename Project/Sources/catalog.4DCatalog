@@ -4043,6 +4043,11 @@
 			<table_ref uuid="4953D4E1A4DBC44C9A5A17FAE5272A9A" name="Unit"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="1A7E9E78878F41B08257A7359DDB15AE" type="1">
+		<field_ref uuid="52A7815268F91841B8A2BD8D7165F3A1" name="poNumber">
+			<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="1AAB39487A27AF41AFC1D4CBCFA0772A" type="7">
 		<field_ref uuid="ABB5485D67861C4884D7E9EF218BFD1A" name="UUID">
 			<table_ref uuid="12C5C25E6F81654DA0FB31C54E963E00" name="CICategory"/>

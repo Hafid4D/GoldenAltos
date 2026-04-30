@@ -364,6 +364,27 @@
 					"stroke": "#808080",
 					"text": ":",
 					"fontWeight": "normal"
+				},
+				"check": {
+					"type": "button",
+					"text": " ",
+					"top": 68,
+					"left": 874,
+					"width": 17,
+					"height": 17,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/check.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/check.4dm",
+					"visibility": "visible",
+					"iconFrames": 1,
+					"focusable": false,
+					"dataSource": ""
 				}
 			}
 		},
@@ -1484,7 +1505,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 846,
+	"geometryStamp": 852,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
