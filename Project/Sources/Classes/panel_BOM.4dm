@@ -17,6 +17,7 @@ Function formMethod()
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())  //It's time to resize the object or set visible
 		This:C1470.redrawAndSetVisible()
 	End if 
+	OBJECT SET VISIBLE:C603(*; "dp_RevDate"; Form:C1466.sfw.checkIsInModification())
 	
 	
 Function redrawAndSetVisible()

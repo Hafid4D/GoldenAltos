@@ -49,6 +49,7 @@ Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	OBJECT SET VISIBLE:C603(*; "banner_page_1"; (Form:C1466.currentStepOrder=0))
+	OBJECT SET VISIBLE:C603(*; "check"; Form:C1466.current_item.onHold)
 	
 	If (OBJECT Get visible:C1075(*; "banner_lotOnHold_page"+String:C10(FORM Get current page:C276(*))))
 		OBJECT GET COORDINATES:C663(*; "banner_lotOnHold_page"+String:C10(FORM Get current page:C276(*)); $left; $top; $right; $bottom)
@@ -456,3 +457,50 @@ Function loadSerialization()
 		Form:C1466.lb_serialization:=(Form:C1466.currentStep.serialization#Null:C1517) ? Form:C1466.currentStep.serialization.items : New collection:C1472()
 	End if 
 	
+	
+Function bActionCheck()
+	$refMenu:=Create menu:C408
+	
+	APPEND MENU ITEM:C411($refMenu; "Create a step from template")
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--nmn")
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	APPEND MENU ITEM:C411($refMenu; "Delete a Step")
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--isnf")
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	Else 
+		If (Form:C1466.currentPM=Null:C1517)
+			DISABLE MENU ITEM:C150($refMenu; -1)
+		End if 
+	End if 
+	
+	$choose:=Dynamic pop up menu:C1006($refMenu)
+	
+	Case of 
+		: ($choose="--nmn")
+			$form:=New object:C1471(\
+				"step"; ds:C1482.Step.new()\
+				)
+			
+			$form.step.UUID_StepTemplate:=Form:C1466.current_item.UUID
+			
+			$winRef:=Open form window:C675("NMN"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("NMN"; $form)
+			CLOSE WINDOW:C154($winRef)
+			
+			If (ok=1)
+				$step_e:=$form.step
+				
+				$res:=$step_e.save()
+				
+				If ($res.success)
+					This:C1470.loadSteps()
+					This:C1470._activate_save_cancel_button()
+				End if 
+			End if 
+			
+		: ($choose="--isnf")
+	End case 

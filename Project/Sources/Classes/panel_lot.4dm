@@ -255,50 +255,8 @@ Function bActionSteps()
 				
 			: ($choose="--edit")
 			: ($choose="--remove")
-				
 			: ($choose="--Generate_traveller_tag")
-				
-				var $check; $uncheked : Picture
-				var $context_o : Object
-				var $parameters : Object:=New object:C1471
-				$wpDoc:=WP New:C1317()
-				
-				$parameters.data:=Form:C1466.current_item.moreData.barcodeData
-				//$parameters.text:=Form.current_item.lotNumber
-				$barcode:=_ga_generateBarCode($parameters)  //Form.current_item.lotNumber)
-				
-				$context:=New object:C1471(\
-					"travelerNumber"; Form:C1466.current_item.moreData.barcodeData; \
-					"jobNumber"; Form:C1466.current_item.job.jobNumber; \
-					"partNumber"; Form:C1466.current_item.job.deviceNumber; \
-					"lotNumber"; Form:C1466.current_item.lotNumber; \
-					"customerNumber"; Form:C1466.current_item.job.purchaseOrder.customer.name; \
-					"customerPo"; Form:C1466.current_item.job.purchaseOrder.poNumber; \
-					"buildQty"; Form:C1466.current_item.job.qty; \
-					"process"; Form:C1466.current_item.job.process; \
-					"qualifier"; Form:C1466.current_item.job.pr_qualifier; \
-					"dpaRating"; "DX-A1"; \
-					"bin"; "325447"; \
-					"esdClass"; "0"; \
-					"barcode"; $barcode\
-					)
-				
-				$file:=Folder:C1567(fk resources folder:K87:11).file("4DWriteProPrintTemplates/travellerTag.4wp")
-				$wpDoc:=WP Import document:C1318($file.platformPath)
-				
-				WP SET DATA CONTEXT:C1786($wpDoc; $context)
-				
-				SET PRINT PREVIEW:C364(True:C214)
-				
-				$path:=System folder:C487(Desktop:K41:16)+String:C10(Form:C1466.current_item.lotNumber)+".pdf"
-				WP EXPORT DOCUMENT:C1337($wpDoc; $path; wk pdf:K81:315)
-				ALERT:C41("Traveller tag exported successfully.")
-				OPEN URL:C673($path)
-				
-				
-				
-				
-				
+				_ga_generate_traveler_tag
 				
 		End case 
 		
@@ -327,9 +285,15 @@ Function bActionSteps()
 		
 		APPEND MENU ITEM:C411($refMenu; "Generate traveller tag")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--Generate_traveller_tag")
-		DISABLE MENU ITEM:C150($refMenu; -1)
+		//DISABLE MENU ITEM($refMenu; -1)
 		
 		$choose:=Dynamic pop up menu:C1006($refMenu)
+		
+		//Generate traveler tag on view mode
+		If ($choose="--Generate_traveller_tag")
+			_ga_generate_traveler_tag
+		End if 
+		
 	End if 
 	
 Function btnReOrderLots($from : Integer; $to : Integer)

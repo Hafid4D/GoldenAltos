@@ -4020,6 +4020,11 @@
 			<table_ref uuid="4953D4E1A4DBC44C9A5A17FAE5272A9A" name="Unit"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="1A7E9E78878F41B08257A7359DDB15AE" type="1">
+		<field_ref uuid="52A7815268F91841B8A2BD8D7165F3A1" name="poNumber">
+			<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="1AAB39487A27AF41AFC1D4CBCFA0772A" type="7">
 		<field_ref uuid="ABB5485D67861C4884D7E9EF218BFD1A" name="UUID">
 			<table_ref uuid="12C5C25E6F81654DA0FB31C54E963E00" name="CICategory"/>
@@ -4258,11 +4263,6 @@
 	<index kind="regular" unique_keys="true" uuid="46C1AD72EC165A4681C23E85058C56CC" type="7">
 		<field_ref uuid="3973C514AA15664BB316858DE7C5DB34" name="UUID">
 			<table_ref uuid="E40AC8BB970EDE4CA51C5AD0F7EBC637" name="LeadPriority"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="47867939D51BD4459938C5C60BC2B9CE" type="1">
-		<field_ref uuid="52A7815268F91841B8A2BD8D7165F3A1" name="poNumber">
-			<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="47971DE0F0A34E1B9576023BBCF7F52F" type="3">
