@@ -5,13 +5,13 @@
 Case of 
 		
 	: (This:C1470.type="Good")
-		$0:="#66CDAA"
+		$0:="#CDEFE2"
 	: (This:C1470.type="Rejects")
-		$0:="#FA8072"
+		$0:="#FBD6D1"
 	: (This:C1470.type="Mechanical Rejects")
-		$0:="#FA8072"
+		$0:="#FBD6D1"
 	: (This:C1470.type="Missing or Excluded")
-		$0:="#FFA500"
+		$0:="#FFE4BF"
 	Else 
 		$0:="transparent"
 End case 

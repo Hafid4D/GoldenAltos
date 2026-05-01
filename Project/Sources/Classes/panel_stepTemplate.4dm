@@ -19,10 +19,12 @@ Function formMethod()
 				This:C1470.loadTools()
 				This:C1470.loadDataTables()
 				This:C1470.loadPMs()
-				This:C1470.loadBins()
 				
 			: (FORM Get current page:C276(*)=2)
 				//This.loadSteps()
+			: (FORM Get current page:C276(*)=5)
+				This:C1470.loadBins()
+				This:C1470.syncBinDraftFromSelection()
 		End case 
 	End if 
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())  //It's time to resize the object or set visible
@@ -81,7 +83,20 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "lb_stepRules"; $left_lb; $top_lb; $right_lb; $heightSubform-$offset-1)
 			OBJECT SET COORDINATES:C1248(*; "bActionStepRules"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
 			
+		: (FORM Get current page:C276(*)=5)  // bins definition
+			OBJECT GET COORDINATES:C663(*; "rec_bkgd_4"; $left; $top; $right; $bottom)
+			OBJECT GET COORDINATES:C663(*; "bkgd_lb_bins"; $left_bk_lb; $top_bk_lb; $right_bk_lb; $bottom_bk_lb)
+			OBJECT GET COORDINATES:C663(*; "lb_bins"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			
+			$offset:=4
+			
+			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_4"; $left; $top; $right; $heightSubform-$offset)
+			OBJECT SET COORDINATES:C1248(*; "bkgd_lb_bins"; $left_bk_lb; $top_bk_lb; $widthSubform-$offset; $heightSubform-$offset)
+			OBJECT SET COORDINATES:C1248(*; "lb_bins"; $left_lb; $top_lb; $right_lb; $heightSubform-$offset)
+			
 	End case 
+	
+	This:C1470.drawBinInlineEditor()
 	
 	Form:C1466.sfw.drawHTab()
 	
@@ -179,10 +194,10 @@ Function bActionTools()
 			CLOSE WINDOW:C154($winRef)
 			
 			If (OK=1) & ($form.selectedItem#Null:C1517)
-				$stepTemplateTool:=ds:C1482.StepTemplateTool.new()
+				$stepTemplateTool:=ds:C1482.StepTemplateToolType.new()
 				
-				$stepTemplateTool.UUID_Tool:=$form.selectedItem.UUID
-				$stepTemplateTool.UUID_StepTemplate:=Form:C1466.current_item.UUID
+				$stepTemplateTool.UUID_ToolType:=$form.selectedItem.UUID
+				$stepTemplateTool.UUIDStepTemplate:=Form:C1466.current_item.UUID
 				
 				$stepTemplateTool.order:=Form:C1466.lb_tools.length+1
 				
@@ -267,16 +282,16 @@ Function bActionBins()
 	End if 
 	
 	
-	APPEND MENU ITEM:C411($refMenu; "Modify a Bin")
-	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--modify")
-	SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/image/button/edit.png")
-	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
-		DISABLE MENU ITEM:C150($refMenu; -1)
-	Else 
-		If (Form:C1466.currentBin=Null:C1517)
-			DISABLE MENU ITEM:C150($refMenu; -1)
-		End if 
-	End if 
+	// APPEND MENU ITEM($refMenu; "Modify a Bin")
+	// SET MENU ITEM PARAMETER($refMenu; -1; "--modify")
+	// SET MENU ITEM ICON($refMenu; -1; "Path:/RESOURCES/image/button/edit.png")
+	// If (Not(Form.sfw.checkIsInModification()))
+	// 	DISABLE MENU ITEM($refMenu; -1)
+	// Else 
+	// 	If (Form.currentBin=Null)
+	// 		DISABLE MENU ITEM($refMenu; -1)
+	// 	End if 
+	// End if 
 	
 	
 	$choose:=Dynamic pop up menu:C1006($refMenu)
@@ -305,30 +320,27 @@ Function bActionBins()
 		: ($choose="--delete")
 			ALERT:C41("Remove a Bin")
 			
-		: ($choose="--modify")
-			$form:=New object:C1471(\
-				"binDefinition"; New object:C1471("num"; Form:C1466.currentBin.num; "definition"; Form:C1466.currentBin.definition; "type"; Form:C1466.currentBin.type; "action"; "modify"); \
-				"existingBins"; Form:C1466.lb_bins\
-				)
-			
-			$winRef:=Open form window:C675("createBins_st"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
-			DIALOG:C40("createBins_st"; $form)
-			CLOSE WINDOW:C154($winRef)
-			
-			If (ok=1)
-				If (Form:C1466.current_item.bins=Null:C1517)
-					Form:C1466.current_item.bins:=New object:C1471("items"; New collection:C1472())
-				End if 
-				
-				Form:C1466.currentBin.num:=$form.binDefinition.num
-				Form:C1466.currentBin.definition:=$form.binDefinition.definition
-				Form:C1466.currentBin.type:=$form.binDefinition.type
-				
-				//Form.current_item.bins.items.push($form.binDefinition)
-				
-				
-				This:C1470._activate_save_cancel_button()
-			End if 
+			// : ($choose="--modify")
+			// 	$form:=New object(\
+			// 		"binDefinition"; New object("num"; Form.currentBin.num; "definition"; Form.currentBin.definition; "type"; Form.currentBin.type; "action"; "modify"); \
+			// 		"existingBins"; Form.lb_bins\
+			// 		)
+			// 	
+			// 	$winRef:=Open form window("createBins_st"; Controller form window; Horizontally centered; Vertically centered)
+			// 	DIALOG("createBins_st"; $form)
+			// 	CLOSE WINDOW($winRef)
+			// 	
+			// 	If (ok=1)
+			// 		If (Form.current_item.bins=Null)
+			// 			Form.current_item.bins:=New object("items"; New collection())
+			// 		End if 
+			// 		
+			// 		Form.currentBin.num:=$form.binDefinition.num
+			// 		Form.currentBin.definition:=$form.binDefinition.definition
+			// 		Form.currentBin.type:=$form.binDefinition.type
+			// 		
+			// 		This._activate_save_cancel_button()
+			// 	End if 
 			
 	End case 
 	
@@ -387,7 +399,7 @@ Function loadAllTabs()
 	This:C1470.loadStepContainerCodes()
 	
 Function loadTools()
-	Form:C1466.lb_tools:=ds:C1482.StepTemplateTool.query("UUID_StepTemplate = :1"; Form:C1466.current_item.UUID)
+	Form:C1466.lb_tools:=ds:C1482.StepTemplateToolType.query("UUIDStepTemplate = :1"; Form:C1466.current_item.UUID).orderBy("order asc")
 	
 	
 Function loadSkills
@@ -416,6 +428,140 @@ Function loadBins
 	End if 
 	
 	Form:C1466.lb_bins:=Form:C1466.current_item.bins.items
+	This:C1470.syncBinDraftFromSelection()
+	
+Function lb_bins()
+	Case of 
+		: (Form event code:C388=On Selection Change:K2:69)
+			This:C1470.syncBinDraftFromSelection()
+			This:C1470.drawBinInlineEditor()
+		: (Form event code:C388=On Clicked:K2:4)
+			This:C1470.syncBinDraftFromSelection()
+			This:C1470.drawBinInlineEditor()
+	End case 
+	
+Function syncBinDraftFromSelection()
+	$selectedBins:=This:C1470.getSelectedBins()
+	If ($selectedBins.length=0)
+		Form:C1466.currentBinDraft:=Null:C1517
+	Else 
+		If ($selectedBins.length=1)
+			$bin:=$selectedBins[0]
+			$type:=String:C10($bin.type)
+			If ($type="")
+				$type:="Not Used"
+			End if 
+			Form:C1466.currentBinDraft:=New object:C1471(\
+				"num"; $bin.num; \
+				"definition"; $bin.definition; \
+				"type"; $type\
+			)
+		Else 
+			$type:=String:C10($selectedBins[0].type)
+			If ($type="")
+				$type:="Not Used"
+			End if 
+			For each ($bin; $selectedBins)
+				$binType:=String:C10($bin.type)
+				If ($binType="")
+					$binType:="Not Used"
+				End if 
+				If ($binType#$type)
+					$type:=""
+					Break 
+				End if 
+			End for each 
+			Form:C1466.currentBinDraft:=New object:C1471(\
+				"num"; ""; \
+				"definition"; ""; \
+				"type"; $type\
+			)
+		End if 
+	End if 
+	
+Function drawBinInlineEditor()
+	$selectionCount:=This:C1470.getSelectedBinsCount()
+	$isSingleSelection:=($selectionCount=1)
+	$showEditor:=(FORM Get current page:C276(*)=5) & Form:C1466.sfw.checkIsInModification() & ($selectionCount>0)
+	
+	OBJECT SET VISIBLE:C603(*; "rec_binEditor"; $showEditor)
+	OBJECT SET VISIBLE:C603(*; "label_binEditorNum"; $showEditor & $isSingleSelection)
+	OBJECT SET VISIBLE:C603(*; "entryField_binEditorNum"; $showEditor & $isSingleSelection)
+	OBJECT SET VISIBLE:C603(*; "label_binEditorName"; $showEditor & $isSingleSelection)
+	OBJECT SET VISIBLE:C603(*; "entryField_binEditorName"; $showEditor & $isSingleSelection)
+	OBJECT SET VISIBLE:C603(*; "label_binEditorType"; $showEditor)
+	OBJECT SET VISIBLE:C603(*; "pup_binEditorType"; $showEditor)
+	OBJECT SET VISIBLE:C603(*; "btn_binEditorSave"; $showEditor)
+	OBJECT SET VISIBLE:C603(*; "btn_binEditorCancel"; $showEditor)
+	If ($showEditor)
+		This:C1470.drawPup_binEditorType()
+	End if 
+	
+Function pup_binEditorType()
+	If (Form:C1466.sfw.checkIsInModification()) & (Form:C1466.currentBinDraft#Null:C1517)
+		$menu:=Create menu:C408
+		APPEND MENU ITEM:C411($menu; "Not Used")
+		SET MENU ITEM PARAMETER:C1004($menu; -1; "Not Used")
+		If (String:C10(Form:C1466.currentBinDraft.type)="Not Used")
+			SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+		End if 
+		
+		$types:=New collection:C1472("Good"; "Rejects"; "Mechanical Rejects"; "Missing or Excluded")
+		For each ($typeName; $types)
+			APPEND MENU ITEM:C411($menu; $typeName; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $typeName)
+			If ($typeName=Form:C1466.currentBinDraft.type)
+				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+			End if 
+		End for each 
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		If ($choose#"")
+			Form:C1466.currentBinDraft.type:=$choose
+			This:C1470.drawPup_binEditorType()
+		End if 
+	End if 
+	
+Function drawPup_binEditorType()
+	$typeName:=""
+	If (Form:C1466.currentBinDraft#Null:C1517)
+		$typeName:=String:C10(Form:C1466.currentBinDraft.type)
+	End if 
+	Form:C1466.sfw.drawButtonPup("pup_binEditorType"; $typeName; ""; ($typeName=""))
+	
+Function btn_binEditorSave()
+	$selectedBins:=This:C1470.getSelectedBins()
+	$selectionCount:=$selectedBins.length
+	If ($selectionCount>0) & (Form:C1466.currentBinDraft#Null:C1517)
+		If ($selectionCount=1)
+			$selectedBins[0].definition:=Form:C1466.currentBinDraft.definition
+			$selectedBins[0].type:=Form:C1466.currentBinDraft.type
+		Else 
+			For each ($bin; $selectedBins)
+				$bin.type:=Form:C1466.currentBinDraft.type
+			End for each 
+		End if 
+		
+		This:C1470.loadBins()
+		This:C1470._activate_save_cancel_button()
+		This:C1470.drawBinInlineEditor()
+	End if 
+	
+Function btn_binEditorCancel()
+	This:C1470.syncBinDraftFromSelection()
+	This:C1470.drawPup_binEditorType()
+	
+Function getSelectedBins()->$selectedBins : Collection
+	$selectedBins:=New collection:C1472()
+	If (Form:C1466.selectedBins#Null:C1517)
+		$selectedBins:=Form:C1466.selectedBins
+	End if 
+	If ($selectedBins.length=0) & (Form:C1466.currentBin#Null:C1517)
+		$selectedBins.push(Form:C1466.currentBin)
+	End if 
+	
+Function getSelectedBinsCount()->$count : Integer
+	$count:=This:C1470.getSelectedBins().length
 	
 	
 Function loadSteps
@@ -611,7 +757,13 @@ Function drawPup_smallLayout()
 	
 Function pup_smallLayout()
 	//Create pop up menu
-	Form:C1466.current_item.pup("stepTemplateLayouts"; "StepTemplateLayout"; "UUID"; "smallLayout_UUID")
+	If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.stepTemplateLayouts=Null:C1517)
+		ds:C1482.StepTemplateLayout.cacheLoad()
+	End if 
+	Use (Storage:C1525.cache)
+		Storage:C1525.cache.stepTemplateLayoutsSmall:=Storage:C1525.cache.stepTemplateLayouts.query("type = :1"; "small").copy(ck shared:K85:29; Storage:C1525.cache)
+	End use 
+	Form:C1466.current_item.pup("stepTemplateLayoutsSmall"; "StepTemplateLayout"; "UUID"; "smallLayout_UUID")
 	This:C1470.drawPup_smallLayout()
 	
 	
@@ -622,7 +774,13 @@ Function drawPup_largeLayout()
 	
 Function pup_largeLayout()
 	//Create pop up menu
-	Form:C1466.current_item.pup("stepTemplateLayouts"; "StepTemplateLayout"; "UUID"; "largeLayout_UUID")
+	If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.stepTemplateLayouts=Null:C1517)
+		ds:C1482.StepTemplateLayout.cacheLoad()
+	End if 
+	Use (Storage:C1525.cache)
+		Storage:C1525.cache.stepTemplateLayoutsLarge:=Storage:C1525.cache.stepTemplateLayouts.query("type = :1"; "large").copy(ck shared:K85:29; Storage:C1525.cache)
+	End use 
+	Form:C1466.current_item.pup("stepTemplateLayoutsLarge"; "StepTemplateLayout"; "UUID"; "largeLayout_UUID")
 	This:C1470.drawPup_largeLayout()
 	
 Function pup_division()

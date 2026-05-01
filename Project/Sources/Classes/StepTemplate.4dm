@@ -13,6 +13,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(2; ""; "Steps")
 	$entry.setPanelPage(3; ""; "Rules")
 	$entry.setPanelPage(4; ""; "Container Codes")
+	$entry.setPanelPage(5; ""; "Bins Definition"; "disabled:Form.current_item.binning=False")
 	
 	$entry.setLBItemsColumn("templateNumber"; "Step Template ID")
 	$entry.setLBItemsColumn("name"; "Step Template Name"; "width:100")

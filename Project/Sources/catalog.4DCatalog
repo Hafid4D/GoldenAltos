@@ -1552,6 +1552,13 @@
 		<field name="name" uuid="08EA6F5EC1CA4B089F5B4A3041A5E7BB" type="10" limiting_length="255" never_null="true" id="2"/>
 		<primary_key field_name="UUID" field_uuid="72A605BD394544EBBDAECE84A5FD0947"/>
 	</table>
+	<table name="StepTemplateToolType" uuid="9F5BA83712DB4F1E8AD9E52EFEA36330" id="100">
+		<field name="UUID" uuid="F22E706FC5B84431A0AEA0CA4D8B4131" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="UUID_ToolType" uuid="5F9FA8349004495A98092FCF4B90589B" type="10" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="UUIDStepTemplate" uuid="E464262435424EA39E8312B3BE0821FE" type="10" store_as_UUID="true" never_null="true" id="3"/>
+		<field name="order" uuid="8AC7652A20164971A93EA3720D904571" type="3" never_null="true" id="4"/>
+		<primary_key field_name="UUID" field_uuid="F22E706FC5B84431A0AEA0CA4D8B4131"/>
+	</table>
 	<table name="Customer" uuid="96D1CE81460A4F75B3F4275138C8F778" id="114">
 		<field name="UUID" uuid="37676CD94E8B423595ED98B5C0E9CF89" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="name" uuid="6408BE6907C146339726DEB3047C211E" type="10" limiting_length="255" never_null="true" id="2">
@@ -3929,6 +3936,54 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="F00D7B473A72483A96B1DA9E8CD4FB2C" name_Nto1="smallLayout" name_1toN="stepTemplates" state="1">
+		<related_field kind="source">
+			<field_ref uuid="E692454F40F16F4AA982D1B2B2955EC9" name="smallLayout_UUID">
+				<table_ref uuid="6330FD4D08D74130BF3869222CDECBA6" name="StepTemplate"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="2F5E04FFB58D433F939F8C0656F71336" name="UUID">
+				<table_ref uuid="EE0919F4685942B2AADAD0E171EA9BC3" name="StepTemplateLayout"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="ACF19A64D0C14E5E803ECE325DA6FEFE" name_Nto1="largeLayout" name_1toN="stepTemplates" state="1">
+		<related_field kind="source">
+			<field_ref uuid="CD5AA4FB574CBF4CB36F9274DE50375E" name="largeLayout_UUID">
+				<table_ref uuid="6330FD4D08D74130BF3869222CDECBA6" name="StepTemplate"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="2F5E04FFB58D433F939F8C0656F71336" name="UUID">
+				<table_ref uuid="EE0919F4685942B2AADAD0E171EA9BC3" name="StepTemplateLayout"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="16C9709493974922A4FA6FD9E40867CE" name_Nto1="stepTemplate" name_1toN="stepTemplateToolTypes" state="1">
+		<related_field kind="source">
+			<field_ref uuid="E464262435424EA39E8312B3BE0821FE" name="UUIDStepTemplate">
+				<table_ref uuid="9F5BA83712DB4F1E8AD9E52EFEA36330" name="StepTemplateToolType"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="3E46CC22F2F34DC0B68C304E1BC47991" name="UUID">
+				<table_ref uuid="6330FD4D08D74130BF3869222CDECBA6" name="StepTemplate"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="DFCDF1A70A124C88B76E03075CCB3A99" name_Nto1="toolType" name_1toN="stepTemplateToolTypes" state="1">
+		<related_field kind="source">
+			<field_ref uuid="5F9FA8349004495A98092FCF4B90589B" name="UUID_ToolType">
+				<table_ref uuid="9F5BA83712DB4F1E8AD9E52EFEA36330" name="StepTemplateToolType"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="99E586D88F7844DC88C7D6EB4AABFEFE" name="UUID">
+				<table_ref uuid="C0C5EF5A4CD04FF7BB3897793A9DE6ED" name="ToolType"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="005E48A922A4464DB92973931B467ACF" type="3">
 		<field_ref uuid="17F71D68FA714CE9A75ED79CA63E3BE2" name="UUID_Lead">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
@@ -4214,6 +4269,11 @@
 			<table_ref uuid="C426BFF1DD3F4326A89BD125EFA71348" name="TermCondition"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="2C682BE252934E7E9D715F930D3A9725" type="3">
+		<field_ref uuid="E464262435424EA39E8312B3BE0821FE" name="UUIDStepTemplate">
+			<table_ref uuid="9F5BA83712DB4F1E8AD9E52EFEA36330" name="StepTemplateToolType"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="2EACFC53EE47064E9205180ED5400EB3" type="3">
 		<field_ref uuid="3824444FE1B88B4F8F518C3EEC330E92" name="UUID_CIHumanFactor">
 			<table_ref uuid="1BCF3E71728E56429B08B229161AD291" name="ContinuousImprovement"/>
@@ -4427,6 +4487,11 @@
 	<index kind="regular" uuid="4FA46263FA2E426BAF05C717690A91D3" type="3">
 		<field_ref uuid="491D22673649415D96EF83B831F5FB28" name="UUID_PurchaseOrder">
 			<table_ref uuid="2CC1E163267E4DFE808464C271CC4C9F" name="PurchaseOrderLine"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="4FFBAABF20F54471B61FE6FCC08B4868" type="3">
+		<field_ref uuid="5F9FA8349004495A98092FCF4B90589B" name="UUID_ToolType">
+			<table_ref uuid="9F5BA83712DB4F1E8AD9E52EFEA36330" name="StepTemplateToolType"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="502A7290DD6A4F868A49FA0FBC5CB955" type="3">
@@ -5347,6 +5412,11 @@
 	<index kind="regular" unique_keys="true" uuid="E3FE6D69E136D048AE44F2672D4110DE" type="1">
 		<field_ref uuid="AC37D94799FAA74089EE6777FABCEAAF" name="UUID">
 			<table_ref uuid="37B76DEC3444474BA87B456E6A1D1708" name="sfw_DocumentModel"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="E4D5CE72A32D400B9A65589AF6E79FE6" type="7">
+		<field_ref uuid="F22E706FC5B84431A0AEA0CA4D8B4131" name="UUID">
+			<table_ref uuid="9F5BA83712DB4F1E8AD9E52EFEA36330" name="StepTemplateToolType"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="E56A9FD6A4FC504481E5686E911F72DA" type="3">

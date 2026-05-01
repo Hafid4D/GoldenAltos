@@ -15,7 +15,7 @@ Case of
 		
 		
 		Form:C1466.binType:=New object:C1471
-		Form:C1466.binType.values:=New collection:C1472("Good"; "Rejects"; "Mechanical Rejects"; "Missing or Excluded")
+		Form:C1466.binType.values:=New collection:C1472("Not Used"; "Good"; "Rejects"; "Mechanical Rejects"; "Missing or Excluded")
 		
 		If (Form:C1466.binDefinition.action="add")
 			
