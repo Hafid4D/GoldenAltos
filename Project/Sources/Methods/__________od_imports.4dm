@@ -1,0 +1,12 @@
+//%attributes = {}
+_import_customers
+_import_purchaseOrders
+_import_poItems
+_import_receiver
+_import_jobsFromReceiver
+_import_lotinfo
+_import_warehouseBins
+_import_inventoryClassification
+_import_inventoryUnits
+_import_inventory
+_import_operationProcesses

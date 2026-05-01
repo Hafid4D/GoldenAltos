@@ -1200,6 +1200,22 @@
 				}
 			}
 		},
+		"StepTemplateProcess": {
+			"color": {
+				"red": 181,
+				"green": 145,
+				"blue": 209,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 3290,
+				"top": 1066,
+				"width": 188,
+				"height": 94.33203125
+			},
+			"displayable_fields_count": 2,
+			"fields_ordering": 1
+		},
 		"InventoryClassification": {
 			"color": {
 				"red": 255,

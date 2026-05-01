@@ -361,7 +361,6 @@ Function _entries_definition()
 	
 	This:C1470._push_entry($entry)
 	
-	
 Function _profiles_definition()
 	$eQM:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("qm"; "Quality Manager"; "autoCreation")
 	$eDC:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("dc"; "Document Controller"; "autoCreation")
