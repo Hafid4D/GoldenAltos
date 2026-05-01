@@ -59,10 +59,82 @@ Function displayToolLine()
 Function loadTools()
 	//Loads and initializes a list
 	Form:C1466.currentTool:=Null:C1517
-	Form:C1466.lb_tools:=Form:C1466.current_item.tools
+	If (Form:C1466.current_item=Null:C1517)
+		Form:C1466.lb_tools:=New collection:C1472()
+	Else 
+		Form:C1466.lb_tools:=ds:C1482.Tool.query("UUID_ToolType = :1"; Form:C1466.current_item.UUID).orderBy("name")
+	End if 
 	
 Function bActionTools()
 	//Manages actions: add, or remove, using dynamic menus and modification checks
+	
+	$refMenu:=Create menu:C408
+	
+	APPEND MENU ITEM:C411($refMenu; "Add a Tool")
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--add")
+	SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/image/button/add.png")
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	End if 
+	
+	APPEND MENU ITEM:C411($refMenu; "Edit a Tool")
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--edit")
+	SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/image/button/edit.png")
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+		DISABLE MENU ITEM:C150($refMenu; -1)
+	Else 
+		If (Form:C1466.currentTool=Null:C1517)
+			DISABLE MENU ITEM:C150($refMenu; -1)
+		End if 
+	End if 
+	
+	$choose:=Dynamic pop up menu:C1006($refMenu)
+	
+	Case of 
+		: ($choose="--add")
+			$form:=New object:C1471(\
+				"toolDefinition"; New object:C1471("name"; ""; "date"; Current date:C33()); \
+				"action"; "add"\
+			)
+			
+			$winRef:=Open form window:C675("createTool_toolType"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("createTool_toolType"; $form)
+			CLOSE WINDOW:C154($winRef)
+			
+			If (OK=1)
+				$tool_e:=ds:C1482.Tool.new()
+				$tool_e.UUID_ToolType:=Form:C1466.current_item.UUID
+				$tool_e.name:=$form.toolDefinition.name
+				$tool_e.date:=$form.toolDefinition.date
+				
+				$res:=$tool_e.save()
+				If ($res.success)
+					This:C1470.loadTools()
+					This:C1470._activate_save_cancel_button()
+				End if 
+			End if 
+		
+		: ($choose="--edit")
+			$form:=New object:C1471(\
+				"toolDefinition"; New object:C1471("name"; Form:C1466.currentTool.name; "date"; Form:C1466.currentTool.date); \
+				"action"; "edit"\
+			)
+			
+			$winRef:=Open form window:C675("createTool_toolType"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("createTool_toolType"; $form)
+			CLOSE WINDOW:C154($winRef)
+			
+			If (OK=1)
+				Form:C1466.currentTool.name:=$form.toolDefinition.name
+				Form:C1466.currentTool.date:=$form.toolDefinition.date
+				
+				$res:=Form:C1466.currentTool.save()
+				If ($res.success)
+					This:C1470.loadTools()
+					This:C1470._activate_save_cancel_button()
+				End if 
+			End if 
+	End case 
 	
 Function _activate_save_cancel_button()
 	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID

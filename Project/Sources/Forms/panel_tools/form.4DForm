@@ -58,58 +58,6 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none"
-				},
-				"label_type": {
-					"type": "text",
-					"top": 37,
-					"left": 12,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Type"
-				},
-				"entryField_type": {
-					"type": "input",
-					"top": 37,
-					"left": 132,
-					"width": 140,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.type",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none"
-				},
-				"label_date": {
-					"type": "text",
-					"top": 62,
-					"left": 12,
-					"width": 90,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Date"
-				},
-				"entryField_dqte": {
-					"type": "input",
-					"top": 62,
-					"left": 132,
-					"width": 140,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.date",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none"
 				}
 			}
 		},
@@ -185,68 +133,6 @@
 						}
 					]
 				},
-				"label_ToolLine_name": {
-					"type": "text",
-					"top": 172,
-					"left": 529,
-					"width": 68,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Tool Name",
-					"visibility": "hidden"
-				},
-				"entryField_toolLineName": {
-					"type": "input",
-					"top": 172,
-					"left": 627,
-					"width": 273,
-					"height": 17,
-					"dataSource": "Form:C1466.currentTool.name",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"method": "ObjectMethods/entryField_toolLineName.4dm",
-					"dataSourceTypeHint": "number",
-					"textAlign": "left",
-					"visibility": "hidden"
-				},
-				"label_ToolLine_date": {
-					"type": "text",
-					"top": 195,
-					"left": 529,
-					"width": 68,
-					"height": 17,
-					"stroke": "#808080",
-					"text": "Tool Date",
-					"visibility": "hidden"
-				},
-				"entryField_toolLineDate": {
-					"type": "input",
-					"top": 195,
-					"left": 627,
-					"width": 273,
-					"height": 17,
-					"dataSource": "Form:C1466.currentTool.date",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"method": "ObjectMethods/entryField_toolLineDate.4dm",
-					"dataSourceTypeHint": "number",
-					"textAlign": "left",
-					"visibility": "hidden"
-				},
 				"bActionTools": {
 					"type": "button",
 					"text": "Actions",
@@ -277,7 +163,7 @@
 			}
 		}
 	],
-	"geometryStamp": 189,
+	"geometryStamp": 190,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"method": "method.4dm",
 	"editor": {

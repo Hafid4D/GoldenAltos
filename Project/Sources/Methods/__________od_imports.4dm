@@ -13,3 +13,4 @@ _import_inventory
 //Housekeeping
 _import_operationProcesses
 _import_certifications
+_import_toolTypes

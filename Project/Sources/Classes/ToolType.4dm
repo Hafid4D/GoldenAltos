@@ -14,9 +14,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(1; ""; "Main")
 	
 	
-	$entry.setLBItemsColumn("type"; "Tool Type"; "width:100")
 	$entry.setLBItemsColumn("name"; "Name"; "width:250")
-	$entry.setLBItemsColumn("date"; "Date"; "width:100")
 	
 	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
 	
