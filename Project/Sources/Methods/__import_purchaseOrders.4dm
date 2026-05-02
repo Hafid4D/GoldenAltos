@@ -179,6 +179,7 @@ TRUNCATE TABLE:C1051([StepProperty:94])
 
 
 var $stepPropertiesToImport : Collection
+var $stepProcess : 4D:C1709.Entity
 $stepPropertiesToImport:=New collection:C1472(\
 New object:C1471("name"; "HoldPoint"; "description"; "01. Hold Point"; "mask"; 0x0001); \
 New object:C1471("name"; "Reserved2"; "description"; "02. Reserved"; "mask"; 0x0002); \
@@ -227,7 +228,7 @@ For each ($record; $records)
 	If ($template=Null:C1517)
 		$template:=ds:C1482.StepTemplate.new()
 		$template.templateNumber:=$record.Template
-		$template.name:=$record.Process
+		$template.name:="Template "+String:C10($record.Template)
 		$info:=$template.save()
 	End if 
 	
@@ -250,6 +251,11 @@ For each ($record; $records)
 	$step.specification:=$record.StepProperty
 	$step.areas:=$record.Area
 	$step.moreData:=New object:C1471()
+	$step.moreData.Process:=$record.Process
+	$stepProcess:=ds:C1482.StepProcess.query("name = :1"; $record.Process).first()
+	If ($stepProcess#Null:C1517)
+		$step.UUID_StepProcess:=$stepProcess.UUID
+	End if 
 	//$step.moreData:=$record
 	$succ:=$step.save()
 	

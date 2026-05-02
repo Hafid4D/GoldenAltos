@@ -8,10 +8,10 @@ Function formMethod()
 	
 	Form:C1466.sfw.panelFormMethod()
 	If (Form:C1466.sfw.updateOfPanelNeeded())
-		This:C1470.loadStepTemplates()
+		This:C1470.loadSteps()
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())
-		This:C1470.loadStepTemplates()
+		This:C1470.loadSteps()
 	End if 
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())
 		This:C1470.redrawAndSetVisible()
@@ -20,7 +20,7 @@ Function formMethod()
 Function redrawAndSetVisible()
 	Use (Form:C1466.sfw.entry.panel.pages)
 		If (Form:C1466.sfw.entry.panel.pages.length>0)
-			Form:C1466.sfw.entry.panel.pages[0].label:="Step Templates ("+String:C10(Form:C1466.lb_items.length)+")"
+			Form:C1466.sfw.entry.panel.pages[0].label:="Steps ("+Form:C1466.lb_items.length+")"
 		End if 
 	End use 
 	
@@ -35,11 +35,10 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "lb_items"; $left_lb; $top_lb; $widthSubform-$offset_r; $heightSubform-$offset)
 	End case 
 	
-Function loadStepTemplates()
+Function loadSteps()
 	If (Form:C1466.current_item#Null:C1517)
-		Form:C1466.lb_items:=ds:C1482.StepTemplate.query("UUID_StepTemplateProcess = :1"; Form:C1466.current_item.UUID).orderBy("name")
+		Form:C1466.lb_items:=ds:C1482.Step.query("UUID_StepProcess = :1"; Form:C1466.current_item.UUID).orderBy("description")
 	Else 
 		Form:C1466.lb_items:=New collection:C1472()
 	End if 
-	
 	

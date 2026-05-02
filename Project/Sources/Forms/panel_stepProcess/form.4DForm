@@ -76,9 +76,9 @@
 					"right": 101,
 					"bottom": 560
 				},
-				"txt_stepTemplates": {
+				"txt_steps": {
 					"type": "text",
-					"text": "Step Templates",
+					"text": "Steps",
 					"top": 125,
 					"left": 9,
 					"width": 92,
@@ -105,27 +105,27 @@
 					"columns": [
 						{
 							"header": {
-								"text": "Step Template ID",
+								"text": "Step Description",
 								"name": "Header1"
 							},
-							"name": "templateNumber",
+							"name": "description",
 							"footer": {
 								"name": "Footer1"
 							},
-							"dataSource": "This:C1470.templateNumber",
-							"width": 140,
+							"dataSource": "This:C1470.description",
+							"width": 320,
 							"minWidth": 140
 						},
 						{
 							"header": {
-								"text": "Step Template Name",
+								"text": "Template",
 								"name": "Header2"
 							},
 							"name": "name",
 							"footer": {
 								"name": "Footer2"
 							},
-							"dataSource": "This:C1470.name",
+							"dataSource": "This:C1470.stepTemplate.name",
 							"width": 320,
 							"minWidth": 200
 						}

@@ -1,4 +1,6 @@
 Case of 
+	: (FORM Event:C1606.code=On Selection Change:K2:29)
+		cs:C1710.panel_stepFile.me.manageStepDefinitionEditor()
 	: (FORM Event:C1606.code=On Clicked:K2:4)
 		If (Not:C34(Contextual click:C713))
 			cs:C1710.panel_stepFile.me.manageReOrderBtns()

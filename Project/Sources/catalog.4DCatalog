@@ -1548,7 +1548,7 @@
 		<field name="moreData" uuid="3F444376089B471B810FE57A3024262D" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="D5AB64A3F5B2472F8E4B9E37B8AF0E11"/>
 	</table>
-	<table name="StepTemplateProcess" uuid="8EC932017A97431A97A6666F567B1954" id="99">
+	<table name="StepProcess" uuid="8EC932017A97431A97A6666F567B1954" id="99">
 		<field name="UUID" uuid="72A605BD394544EBBDAECE84A5FD0947" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="name" uuid="08EA6F5EC1CA4B089F5B4A3041A5E7BB" type="10" limiting_length="255" never_null="true" id="2"/>
 		<primary_key field_name="UUID" field_uuid="72A605BD394544EBBDAECE84A5FD0947"/>
@@ -1773,6 +1773,7 @@
 		<field name="name" uuid="574BD070F5B047F59D4AC45678554878" type="10" limiting_length="255" never_null="true" id="4"/>
 		<field name="creationDate" uuid="939B0620507643A7B544B48D6F812300" type="8" never_null="true" id="5"/>
 		<field name="status" uuid="4802F3D65DFF4E749446CC169A34D534" type="1" never_null="true" id="6"/>
+		<field name="stepsDefinition" uuid="AA0A5985B68442B5B1B64AEBAD02B0BA" type="21" blob_switch_size="2147483647" never_null="true" id="7"/>
 		<primary_key field_name="UUID" field_uuid="B1C018048ECD473CB25C3F879D15164C"/>
 	</table>
 	<table name="Step" uuid="73EFE2D78C61400397353509CBA87D18" id="120">
@@ -1787,7 +1788,8 @@
 		<field name="operationCode" uuid="30C8C57D94AFE7499EF72CA3A15D8650" type="10" limiting_length="255" never_null="true" id="7"/>
 		<field name="moreData" uuid="07BB854D1999E54DADA7CDCC1B5C232C" type="21" blob_switch_size="2147483647" never_null="true" id="8"/>
 		<field name="stepProperties" uuid="BBB947E5FFD3494F974EB483FA9D7AD6" type="21" blob_switch_size="2147483647" never_null="true" id="9"/>
-		<field name="UUID_StepArea" uuid="5E94CC82CBF7431DBDC364DE8A23CAAB" type="10" autogenerate="true" store_as_UUID="true" never_null="true" id="10"/>
+		<field name="UUID_StepArea" uuid="5E94CC82CBF7431DBDC364DE8A23CAAB" type="10" store_as_UUID="true" never_null="true" id="10"/>
+		<field name="UUID_StepProcess" uuid="C913DCA6B38145A980093ADBA028142C" type="10" store_as_UUID="true" never_null="true" id="11"/>
 		<primary_key field_name="UUID" field_uuid="3C357DD66006453994A5995B3E57D007"/>
 	</table>
 	<table name="StepTemplate" uuid="6330FD4D08D74130BF3869222CDECBA6" id="121">
@@ -3939,7 +3941,7 @@
 		</related_field>
 		<related_field kind="destination">
 			<field_ref uuid="72A605BD394544EBBDAECE84A5FD0947" name="UUID">
-				<table_ref uuid="8EC932017A97431A97A6666F567B1954" name="StepTemplateProcess"/>
+				<table_ref uuid="8EC932017A97431A97A6666F567B1954" name="StepProcess"/>
 			</field_ref>
 		</related_field>
 	</relation>
@@ -4000,6 +4002,18 @@
 		<related_field kind="destination">
 			<field_ref uuid="4FF10AEC68BB481B87FD8E7AE8272DC0" name="UUID">
 				<table_ref uuid="B4E2FDAE07D64DB58A243F790AF23172" name="StepArea"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="21B0175E4CCE4EEA854A0A9C42343D36" name_Nto1="stepProcess" name_1toN="steps" state="1">
+		<related_field kind="source">
+			<field_ref uuid="C913DCA6B38145A980093ADBA028142C" name="UUID_StepProcess">
+				<table_ref uuid="73EFE2D78C61400397353509CBA87D18" name="Step"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="72A605BD394544EBBDAECE84A5FD0947" name="UUID">
+				<table_ref uuid="8EC932017A97431A97A6666F567B1954" name="StepProcess"/>
 			</field_ref>
 		</related_field>
 	</relation>
@@ -4370,7 +4384,7 @@
 	</index>
 	<index kind="regular" unique_keys="true" uuid="405E9DA9C37D453AB39AEDDEEB9DA73F" type="7">
 		<field_ref uuid="72A605BD394544EBBDAECE84A5FD0947" name="UUID">
-			<table_ref uuid="8EC932017A97431A97A6666F567B1954" name="StepTemplateProcess"/>
+			<table_ref uuid="8EC932017A97431A97A6666F567B1954" name="StepProcess"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="40A9EAD691134D62B6DCAA9836F141F0" type="3">
@@ -5286,6 +5300,11 @@
 	<index kind="regular" uuid="CFC7BB0EDAF041A9B72D0FD510EAE492" type="3">
 		<field_ref uuid="7A3926404DA14506951684F2F850EE42" name="UUID_target">
 			<table_ref uuid="477EC72D2995454193887CAC5D6DE686" name="sfw_Subscription"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="CFF0AF49CCC941329D23E888E45C0312" type="3">
+		<field_ref uuid="C913DCA6B38145A980093ADBA028142C" name="UUID_StepProcess">
+			<table_ref uuid="73EFE2D78C61400397353509CBA87D18" name="Step"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="D03573A4B16E7B4E9D7B09F28E28B1A2" type="3">

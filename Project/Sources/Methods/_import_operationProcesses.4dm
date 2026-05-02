@@ -12,10 +12,10 @@ var $created : Integer
 var $failed : Integer
 var $name : Text
 
-$processDataClass:=ds:C1482["StepTemplateProcess"]
+$processDataClass:=ds:C1482["StepProcess"]
 
 If ($processDataClass=Null:C1517)
-	ALERT:C41("DataClass StepTemplateProcess not found. Create the table first.")
+	ALERT:C41("DataClass StepProcess not found. Create the table first.")
 Else 
 	$processDataClass.all().drop()
 	

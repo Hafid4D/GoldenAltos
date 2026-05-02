@@ -14,11 +14,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setPanel("panel_step")
 	
-	$entry.setPanelPage(1; ""; "Main")
-	$entry.setPanelPage(2; ""; "Settings")
+	$entry.setPanelPage(1; ""; "Step Properties")
 	
-	$entry.setLBItemsColumn("description"; "Description"; "width:150")
-	$entry.setLBItemsColumn("stepTemplate.name"; "Template Name"; "width:100")
+	$entry.setLBItemsColumn("moreData.processName"; "Process"; "width:125")
+	$entry.setLBItemsColumn("description"; "Description"; "width:100")
 	$entry.setLBItemsOrderBy("description")
 	
 	$entry.enableTransaction()

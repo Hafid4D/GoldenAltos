@@ -22,7 +22,7 @@ Else
 	$inventories:=$inventoryDataClass.all()
 	
 	For each ($inventory; $inventories)
-		$value:=Trim(String($inventory.Units))
+		$value:=String($inventory.Units)
 		$key:=Uppercase($value)
 		
 		If (($value#"") & ($seen[$key]=Null))

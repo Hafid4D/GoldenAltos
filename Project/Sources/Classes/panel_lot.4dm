@@ -176,24 +176,49 @@ Function bActionSteps()
 				
 				If (ok=1)
 					$length:=Form:C1466.lb_steps.length
-					For each ($step; $form.stepFile.moreData.selectedSteps)
-						$step_o:=ds:C1482.Step.query("UUID = :1"; $step.UUID).first()
-						$step_o:=$step_o.toObject("description, alert")
-						
-						$step_new:=ds:C1482.LotStep.new()
-						
-						$step_new.fromObject($step_o)
-						$step_new.UUID_Lot:=Form:C1466.current_item.UUID
-						
-						If ($form.mode="append")
-							$step_new.order:=$length+1
-							$length:=$length+1
-						Else 
-							$step_new.order:=$step.order
-						End if 
-						
-						$res:=$step_new.save()
-					End for each 
+					If (($form.stepFile.stepsDefinition#Null:C1517) & ($form.stepFile.stepsDefinition.items#Null:C1517) & ($form.stepFile.stepsDefinition.items.length>0))
+						For each ($item; $form.stepFile.stepsDefinition.items)
+							If (cs:C1710.sfw_string.me.isAnEmptyUUID($item.UUID_Step)=False:C215)
+								$step_o:=ds:C1482.Step.query("UUID = :1"; $item.UUID_Step).first()
+								If ($step_o#Null:C1517)
+									$step_o:=$step_o.toObject("description, alert")
+									
+									$step_new:=ds:C1482.LotStep.new()
+									
+									$step_new.fromObject($step_o)
+									$step_new.UUID_Lot:=Form:C1466.current_item.UUID
+									
+									If ($form.mode="append")
+										$step_new.order:=$length+1
+										$length:=$length+1
+									Else 
+										$step_new.order:=$item.order
+									End if 
+									
+									$res:=$step_new.save()
+								End if 
+							End if 
+						End for each 
+					Else 
+						For each ($step; $form.stepFile.moreData.selectedSteps)
+							$step_o:=ds:C1482.Step.query("UUID = :1"; $step.UUID).first()
+							$step_o:=$step_o.toObject("description, alert")
+							
+							$step_new:=ds:C1482.LotStep.new()
+							
+							$step_new.fromObject($step_o)
+							$step_new.UUID_Lot:=Form:C1466.current_item.UUID
+							
+							If ($form.mode="append")
+								$step_new.order:=$length+1
+								$length:=$length+1
+							Else 
+								$step_new.order:=$step.order
+							End if 
+							
+							$res:=$step_new.save()
+						End for each 
+					End if 
 					
 					If ($form.mode="replace")
 						Form:C1466.lb_steps.drop()
