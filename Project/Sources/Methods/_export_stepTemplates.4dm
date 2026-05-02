@@ -101,6 +101,8 @@ While (Not:C34(End selection:C36([Template_definitions])))
 		"operation"; [Template_definitions]Operation; \
 		"suppress"; [Template_definitions]Suppress; \
 		"active"; Not:C34([Template_definitions]Suppress); \
+		"miscellaneousControl"; [Template_definitions]MiscellaneousControl; \
+		"containerCode"; [Template_definitions]ContainerCode; \
 		"binning"; [Template_definitions]IsBinningRequired; \
 		"smallLayoutName"; [Template_definitions]S_layout; \
 		"largeLayoutName"; [Template_definitions]L_layout; \

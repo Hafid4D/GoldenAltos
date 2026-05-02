@@ -22,7 +22,9 @@ Function formMethod()
 				
 			: (FORM Get current page:C276(*)=2)
 				//This.loadSteps()
-			: (FORM Get current page:C276(*)=5)
+			: (FORM Get current page:C276(*)=3)
+				This:C1470.loadStepRules()
+			: (FORM Get current page:C276(*)=4)
 				This:C1470.loadBins()
 				This:C1470.syncBinDraftFromSelection()
 		End case 
@@ -54,6 +56,7 @@ Function redrawAndSetVisible()
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="Steps ("+String:C10(Form:C1466.lb_steps.length)+")"
+		Form:C1466.sfw.entry.panel.pages[2].label:="Rules ("+String:C10((Form:C1466.lb_stepRules#Null:C1517) ? Form:C1466.lb_stepRules.length : 0)+")"
 	End use 
 	
 	This:C1470.drawPup_smallLayout()
@@ -67,8 +70,6 @@ Function redrawAndSetVisible()
 			OBJECT GET COORDINATES:C663(*; "bkgd_lb_steps"; $left_bk_lb; $top_bk_lb; $right_bk_lb; $bottom_bk_lb)
 			OBJECT GET COORDINATES:C663(*; "lb_steps"; $left_lb; $top_lb; $right_lb; $bottom_lb)
 			OBJECT GET COORDINATES:C663(*; "bActionSteps"; $left_bAc; $top_bAc; $right_bAc; $bottom_bAc)
-			OBJECT GET COORDINATES:C663(*; "lb_stepRules"; $left_lb; $top_lb; $right_lb; $bottom_lb)
-			OBJECT GET COORDINATES:C663(*; "bActionStepRules"; $left_bAc; $top_bAc; $right_bAc; $bottom_bAc)
 			
 			$offset:=4
 			$offset_bAc:=10
@@ -80,10 +81,17 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "bkgd_lb_steps"; $left_bk_lb; $top_bk_lb; $widthSubform-$offset; $heightSubform-$offset)
 			OBJECT SET COORDINATES:C1248(*; "lb_steps"; $left_lb; $top_lb; $right_lb; $heightSubform-$offset-1)
 			OBJECT SET COORDINATES:C1248(*; "bActionSteps"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
-			OBJECT SET COORDINATES:C1248(*; "lb_stepRules"; $left_lb; $top_lb; $right_lb; $heightSubform-$offset-1)
-			OBJECT SET COORDINATES:C1248(*; "bActionStepRules"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
 			
-		: (FORM Get current page:C276(*)=5)  // bins definition
+		: (FORM Get current page:C276(*)=3)  // rules
+			OBJECT GET COORDINATES:C663(*; "rec_bkgd_1"; $left; $top; $right; $bottom)
+			OBJECT GET COORDINATES:C663(*; "lb_stepRules"; $left_lb; $top_lb; $right_lb; $bottom_lb)
+			
+			$offset:=4
+			
+			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_1"; $left; $top; $right; $heightSubform-$offset)
+			OBJECT SET COORDINATES:C1248(*; "lb_stepRules"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset)
+			
+		: (FORM Get current page:C276(*)=4)  // bins definition
 			OBJECT GET COORDINATES:C663(*; "rec_bkgd_4"; $left; $top; $right; $bottom)
 			OBJECT GET COORDINATES:C663(*; "bkgd_lb_bins"; $left_bk_lb; $top_bk_lb; $right_bk_lb; $bottom_bk_lb)
 			OBJECT GET COORDINATES:C663(*; "lb_bins"; $left_lb; $top_lb; $right_lb; $bottom_lb)
@@ -97,6 +105,12 @@ Function redrawAndSetVisible()
 	End case 
 	
 	This:C1470.drawBinInlineEditor()
+	
+	If (FORM Get current page:C276(*)=3)
+		OBJECT SET ENTERABLE:C238(*; "lb_stepRules"; Form:C1466.sfw.checkIsInModification())
+	Else 
+		OBJECT SET ENTERABLE:C238(*; "lb_stepRules"; False:C215)
+	End if 
 	
 	Form:C1466.sfw.drawHTab()
 	
@@ -570,11 +584,28 @@ Function loadSteps
 	Form:C1466.lb_steps:=ds:C1482.Step.query("UUID_StepTemplate = :1"; Form:C1466.current_item.UUID)
 	
 Function loadStepRules
-	
-	If (Form:C1466.current_item.rules#Null:C1517)
-		Form:C1466.lb_stepRules:=Form:C1466.current_item.rules.items
-	End if 
-	
+	var $rule : Object
+
+	If (Form:C1466.current_item.rules=Null:C1517)
+		Form:C1466.current_item.rules:=New object:C1471("items"; New collection:C1472())
+	End if
+	If (Form:C1466.current_item.rules.items=Null:C1517)
+		Form:C1466.current_item.rules.items:=New collection:C1472()
+	Else
+		For each ($rule; Form:C1466.current_item.rules.items)
+			If ($rule.enable=Null:C1517)
+				$rule.enable:=False:C215
+			End if
+			If ($rule.id=Null:C1517)
+				$rule.id:=""
+			End if
+			If ($rule.bit=Null:C1517)
+				$rule.bit:=""
+			End if
+		End for each
+	End if
+	Form:C1466.lb_stepRules:=Form:C1466.current_item.rules.items
+
 Function loadStepContainerCodes
 	If (Form:C1466.current_item.containerCodes#Null:C1517)
 		Form:C1466.lb_stepContainerCodes:=Form:C1466.current_item.containerCodes.items
@@ -669,7 +700,13 @@ Function bActionStepRules()
 			DIALOG:C40("_ga_multiSelectListbox"; $form)
 			
 			If (OK=1)
-				$cleanedSelectedData:=$form.dataSelected.toCollection().map(Formula:C1597(New object:C1471("description"; $1.value.description; "name"; $1.value.name)))
+				$cleanedSelectedData:=$form.dataSelected.toCollection().map(Formula:C1597(New object:C1471(\
+					"id"; $1.value.UUID; \
+					"name"; $1.value.name; \
+					"description"; $1.value.description; \
+					"bit"; $1.value.bit; \
+					"enable"; False:C215\
+					)))
 				
 				For each ($rule; $cleanedSelectedData)
 					Form:C1466.current_item.rules.items.push($rule)

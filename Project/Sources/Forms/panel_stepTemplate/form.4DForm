@@ -983,7 +983,7 @@
 					"type": "listbox",
 					"left": 106,
 					"top": 96,
-					"width": 573,
+					"width": 843,
 					"height": 440,
 					"events": [
 						"onClick",
@@ -1005,16 +1005,19 @@
 						{
 							"header": {
 								"name": "Header9",
-								"text": "Name",
+								"text": "",
 								"fontWeight": "bold"
 							},
 							"name": "Column9",
 							"footer": {
 								"name": "Footer9"
 							},
-							"dataSource": "This:C1470.name",
-							"width": 180,
-							"enterable": false,
+							"width": 44,
+							"minWidth": 36,
+							"dataSource": "This:C1470.enable",
+							"dataSourceTypeHint": "boolean",
+							"textAlign": "center",
+							"enterable": true,
 							"resizable": false
 						},
 						{
@@ -1028,7 +1031,7 @@
 								"name": "Footer10"
 							},
 							"dataSource": "This:C1470.description",
-							"width": 376,
+							"width": 500,
 							"enterable": false
 						}
 					]
@@ -1060,7 +1063,7 @@
 					"icon": "/RESOURCES/sfw/image/picto/gear.png",
 					"textPlacement": "right",
 					"method": "ObjectMethods/bActionStepRules.4dm",
-					"visibility": "visible"
+					"visibility": "hidden"
 				},
 				"Text1": {
 					"type": "text",

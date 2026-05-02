@@ -45,6 +45,12 @@ var $isBinPlaceholder : Boolean
 var $suffix : Text
 var $j : Integer
 var $char : Text
+var $stepTemplateRuleDataClass : 4D:C1709.DataClass
+var $ruleMaster : 4D:C1709.Entity
+var $containerCodeMask : Integer
+var $miscellaneousControlMask : Integer
+var $ruleBitMask : Integer
+var $ruleLevelID : Integer
 
 $stepTemplateDataClass:=ds:C1482["StepTemplate"]
 $layoutDataClass:=ds:C1482["StepTemplateLayout"]
@@ -53,9 +59,10 @@ $stepTemplateCertificationDataCl:=ds:C1482["StepTemplateCertification"]
 $operationDataClass:=ds:C1482["Operation"]
 $toolTypeDataClass:=ds:C1482["ToolType"]
 $stepTemplateToolTypeDataClass:=ds:C1482["StepTemplateToolType"]
+$stepTemplateRuleDataClass:=ds:C1482["StepTemplateRule"]
 
-If (($stepTemplateDataClass=Null:C1517) | ($layoutDataClass=Null:C1517) | ($certificationDataClass=Null:C1517) | ($stepTemplateCertificationDataCl=Null:C1517) | ($operationDataClass=Null:C1517) | ($toolTypeDataClass=Null:C1517) | ($stepTemplateToolTypeDataClass=Null:C1517))
-	ALERT:C41("Missing DataClass: StepTemplate, StepTemplateLayout, Certification, StepTemplateCertification, Operation, ToolType or StepTemplateToolType.")
+If (($stepTemplateDataClass=Null:C1517) | ($layoutDataClass=Null:C1517) | ($certificationDataClass=Null:C1517) | ($stepTemplateCertificationDataCl=Null:C1517) | ($operationDataClass=Null:C1517) | ($toolTypeDataClass=Null:C1517) | ($stepTemplateToolTypeDataClass=Null:C1517) | ($stepTemplateRuleDataClass=Null:C1517))
+	ALERT:C41("Missing DataClass: StepTemplate, StepTemplateLayout, Certification, StepTemplateCertification, Operation, ToolType, StepTemplateToolType or StepTemplateRule.")
 Else 
 	// Keep only migrated links/templates.
 	$stepTemplateToolTypeDataClass.all().drop()
@@ -77,6 +84,8 @@ Else
 		
 		For each ($record; $records)
 			$stepTemplateEntity:=$stepTemplateDataClass.new()
+			$containerCodeMask:=Num:C11($record.containerCode)
+			$miscellaneousControlMask:=Num:C11($record.miscellaneousControl)
 			
 			$stepTemplateEntity.name:=String:C10($record.name)
 			$stepTemplateEntity.templateNumber:=Num:C11($record.templateNumber)
@@ -95,6 +104,51 @@ Else
 			$stepTemplateEntity.parametricMeasurements:=New object:C1471("items"; New collection:C1472())
 			$stepTemplateEntity.bins:=New object:C1471("items"; New collection:C1472())
 			$stepTemplateEntity.rules:=New object:C1471("items"; New collection:C1472())
+			For each ($ruleMaster; $stepTemplateRuleDataClass.all().orderBy("levelID"))
+				$ruleBitMask:=Num:C11($ruleMaster.bit)
+				Case of 
+					: ($ruleMaster.bit="0x0001")
+						$ruleBitMask:=0x0001
+					: ($ruleMaster.bit="0x0002")
+						$ruleBitMask:=0x0002
+					: ($ruleMaster.bit="0x0004")
+						$ruleBitMask:=0x0004
+					: ($ruleMaster.bit="0x0008")
+						$ruleBitMask:=0x0008
+					: ($ruleMaster.bit="0x0010")
+						$ruleBitMask:=0x0010
+					: ($ruleMaster.bit="0x0020")
+						$ruleBitMask:=0x0020
+					: ($ruleMaster.bit="0x0040")
+						$ruleBitMask:=0x0040
+					: ($ruleMaster.bit="0x0080")
+						$ruleBitMask:=0x0080
+					: ($ruleMaster.bit="0x0100")
+						$ruleBitMask:=0x0100
+					: ($ruleMaster.bit="0x0800")
+						$ruleBitMask:=0x0800
+					: ($ruleMaster.bit="0x1000")
+						$ruleBitMask:=0x1000
+					: ($ruleMaster.bit="0x00010000")
+						$ruleBitMask:=0x00010000
+					: ($ruleMaster.bit="0x00020000")
+						$ruleBitMask:=0x00020000
+					: ($ruleMaster.bit="0x00100000")
+						$ruleBitMask:=0x00100000
+					: ($ruleMaster.bit="0x00200000")
+						$ruleBitMask:=0x00200000
+					: ($ruleMaster.bit="0x00400000")
+						$ruleBitMask:=0x00400000
+				End case 
+				$ruleLevelID:=Num:C11($ruleMaster.levelID)
+				$stepTemplateEntity.rules.items.push(New object:C1471(\
+					"id"; $ruleMaster.UUID; \
+					"name"; $ruleMaster.name; \
+					"description"; $ruleMaster.description; \
+					"bit"; $ruleMaster.bit; \
+					"enable"; (($ruleLevelID=1) & (($containerCodeMask & $ruleBitMask)=$ruleBitMask)) | (($ruleLevelID=2) & (($miscellaneousControlMask & $ruleBitMask)=$ruleBitMask))\
+					))
+			End for each 
 			$stepTemplateEntity.containerCodes:=New object:C1471("items"; New collection:C1472())
 			
 			If ($operationName#"")
