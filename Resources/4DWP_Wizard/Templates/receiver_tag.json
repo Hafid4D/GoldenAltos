@@ -1,0 +1,35 @@
+{
+    "tableDataSource": "Form.sfw.lb_items",
+    "columns": [{
+            "check": true,
+            "header": "Type",
+            "source": "This.item.assignedID"
+        }, {
+            "check": true,
+            "header": "Lot#",
+            "source": "This.item.location.name"
+        }, {
+            "check": true,
+            "header": "Stated Qty",
+            "source": "This.item.model"
+        }
+        , {
+            "check": true,
+            "header": "Our Count",
+            "source": "This.item.serialNumber"
+        } , {
+            "check": true,
+            "header": "Date In",
+            "source": "This.item.serialNumber"
+        } , {
+            "check": true,
+            "header": "Package Type/Description",
+            "source": "This.item.serialNumber"
+        } , {
+            "check": true,
+            "header": "Loc",
+            "source": "This.item.serialNumber"
+        }
+    ]
+   
+}

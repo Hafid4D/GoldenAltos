@@ -391,6 +391,8 @@
 					],
 					"dataSource": "Form:C1466.lb_materials",
 					"listboxType": "collection",
+					"currentItemSource": "Form:C1466.selectedMaterial",
+					"currentItemPositionSource": "Form:C1466.selectedMaterialPos",
 					"columns": [
 						{
 							"header": {

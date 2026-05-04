@@ -106,6 +106,7 @@ Function bActionCustProvMat()
 		DISABLE MENU ITEM:C150($refMenu; -1)
 	End if 
 	
+	
 	$choose:=Dynamic pop up menu:C1006($refMenu)
 	
 	Case of 
@@ -136,6 +137,8 @@ Function bActionCustProvMat()
 					This:C1470._activate_save_cancel_button()
 				End if 
 			End if 
+			
+			
 	End case 
 	
 Function loadMaterials()
