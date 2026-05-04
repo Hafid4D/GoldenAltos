@@ -9,6 +9,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setIcon("image/entry/customers-white-50x50.png")
 	
 	$entry.setSearchboxField("name")
+	$entry.setValidationRule("name"; "entryField_name"; "mandatory"; "trimSpace"; "unique"; "message:Customer name is mandatory and must be unique")
 	
 	$entry.setPanel("panel_customer")
 	$entry.setPanelPage(1; ""; "Main")
@@ -20,7 +21,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	//$entry.setPanelPage(7; ""; "Timeline")
 	
 	
-	$entry.setLBItemsColumn("codeNumber"; "Code"; "xliff:entry.customer.field.name"; "width:80")
+	$entry.setLBItemsColumn("code"; "Code"; "xliff:entry.customer.field.name"; "width:80")
 	$entry.setLBItemsColumn("name"; "Name"; "xliff:entry.customer.field.name"; "width:200")
 	
 	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")

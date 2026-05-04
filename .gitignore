@@ -5,6 +5,7 @@
 /*.4BK
 /backupHistory.json
 /Project/DerivedData/*
+/.cursor
 
 # System files
 .DS_Store

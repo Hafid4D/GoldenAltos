@@ -249,7 +249,38 @@ If (True:C214)  // export jobs & lot (job <-- lots)
 			ORDER BY:C49([LotSteps]; [LotSteps]Seq_Number; >)
 			
 			While (Not:C34(End selection:C36([LotSteps])))
+				// Purpose: Export LotStep object fields (bins, parametricMeasurements, properties, moreData) so the new GoldenAltos schema receives the legacy data that used to live in scalar [LotSteps] columns (Bin1..Bin32, MechanicalRejects, IN_Par1..3, OUT_Par1..3, Pgm, Pgm_switch, Hardware1/2, Probe_card, Count1..3, Supervisor, Yield).
+				// modified by 4D/PS [2026-april-27]
 				$tools:=New object:C1471("items"; New collection:C1472([LotSteps]Tool1; [LotSteps]Tool2; [LotSteps]Tool3; [LotSteps]Tool4; [LotSteps]Tool5; [LotSteps]Tool6; [LotSteps]Tool7; [LotSteps]Tool8))
+				
+				$binValues:=New collection:C1472([LotSteps]Bin1; [LotSteps]Bin2; [LotSteps]Bin3; [LotSteps]Bin4; [LotSteps]Bin5; [LotSteps]Bin6; [LotSteps]Bin7; [LotSteps]Bin8; [LotSteps]Bin9; [LotSteps]Bin10; [LotSteps]Bin11; [LotSteps]Bin12; [LotSteps]Bin13; [LotSteps]Bin14; [LotSteps]Bin15; [LotSteps]Bin16; [LotSteps]Bin17; [LotSteps]Bin18; [LotSteps]Bin19; [LotSteps]Bin20; [LotSteps]Bin21; [LotSteps]Bin22; [LotSteps]Bin23; [LotSteps]Bin24; [LotSteps]Bin25; [LotSteps]Bin26; [LotSteps]Bin27; [LotSteps]Bin28; [LotSteps]Bin29; [LotSteps]Bin30; [LotSteps]Bin31; [LotSteps]Bin32)
+				$bins:=New object:C1471("items"; New collection:C1472(); "mechanicalRejects"; [LotSteps]MechanicalRejects; "missingOrExcluded"; [LotSteps]MissingOrExcluded)
+				For ($i; 0; 31)
+					$bins.items.push(New object:C1471("num"; $i+1; "definition"; ""; "type"; ""; "value"; $binValues[$i]))
+				End for 
+				
+				$parametricMeasurements:=New object:C1471(\
+					"items"; New collection:C1472(); \
+					"in"; New object:C1471("par1"; [LotSteps]IN_Par1; "par2"; [LotSteps]IN_Par2; "par3"; [LotSteps]IN_Par3); \
+					"out"; New object:C1471("par1"; [LotSteps]OUT_Par1; "par2"; [LotSteps]OUT_Par2; "par3"; [LotSteps]OUT_Par3)\
+					)
+				
+				$properties:=New object:C1471(\
+					"pgm"; [LotSteps]Pgm; \
+					"pgmSwitch"; [LotSteps]Pgm_switch; \
+					"hardware1"; [LotSteps]Hardware1; \
+					"hardware2"; [LotSteps]Hardware2; \
+					"probeCard"; [LotSteps]Probe_card; \
+					"count1"; [LotSteps]Count1; \
+					"count2"; [LotSteps]Count2; \
+					"count3"; [LotSteps]Count3\
+					)
+				
+				$moreData:=New object:C1471(\
+					"supervisor"; [LotSteps]Supervisor; \
+					"yield"; [LotSteps]Yield\
+					)
+				
 				$steps.push(New object:C1471(\
 					"order"; $steps.length+1; \
 					"description"; [LotSteps]StepDesc; \
@@ -272,7 +303,11 @@ If (True:C214)  // export jobs & lot (job <-- lots)
 					"actualHours"; [LotSteps]ActualHours; \
 					"plannedHours"; [LotSteps]Planned_hrs; \
 					"areas"; [LotSteps]Step_Area; \
-					"tools"; $tools\
+					"tools"; $tools; \
+					"bins"; $bins; \
+					"parametricMeasurements"; $parametricMeasurements; \
+					"properties"; $properties; \
+					"moreData"; $moreData\
 					))
 				
 				NEXT RECORD:C51([LotSteps])
@@ -934,7 +969,38 @@ If (True:C214)  // export archived jobs & lot (job <-- lots)
 			ORDER BY:C49([LotSteps]; [LotSteps]Seq_Number; >)
 			
 			While (Not:C34(End selection:C36([LotSteps])))
+				// Purpose: Export LotStep object fields (bins, parametricMeasurements, properties, moreData) for archived jobs so they match the GoldenAltos schema. Same legacy [LotSteps] columns as the active-jobs branch.
+				// modified by 4D/PS [2026-april-27]
 				$tools:=New object:C1471("items"; New collection:C1472([LotSteps]Tool1; [LotSteps]Tool2; [LotSteps]Tool3; [LotSteps]Tool4; [LotSteps]Tool5; [LotSteps]Tool6; [LotSteps]Tool7; [LotSteps]Tool8))
+				
+				$binValues:=New collection:C1472([LotSteps]Bin1; [LotSteps]Bin2; [LotSteps]Bin3; [LotSteps]Bin4; [LotSteps]Bin5; [LotSteps]Bin6; [LotSteps]Bin7; [LotSteps]Bin8; [LotSteps]Bin9; [LotSteps]Bin10; [LotSteps]Bin11; [LotSteps]Bin12; [LotSteps]Bin13; [LotSteps]Bin14; [LotSteps]Bin15; [LotSteps]Bin16; [LotSteps]Bin17; [LotSteps]Bin18; [LotSteps]Bin19; [LotSteps]Bin20; [LotSteps]Bin21; [LotSteps]Bin22; [LotSteps]Bin23; [LotSteps]Bin24; [LotSteps]Bin25; [LotSteps]Bin26; [LotSteps]Bin27; [LotSteps]Bin28; [LotSteps]Bin29; [LotSteps]Bin30; [LotSteps]Bin31; [LotSteps]Bin32)
+				$bins:=New object:C1471("items"; New collection:C1472(); "mechanicalRejects"; [LotSteps]MechanicalRejects; "missingOrExcluded"; [LotSteps]MissingOrExcluded)
+				For ($i; 0; 31)
+					$bins.items.push(New object:C1471("num"; $i+1; "definition"; ""; "type"; ""; "value"; $binValues[$i]))
+				End for 
+				
+				$parametricMeasurements:=New object:C1471(\
+					"items"; New collection:C1472(); \
+					"in"; New object:C1471("par1"; [LotSteps]IN_Par1; "par2"; [LotSteps]IN_Par2; "par3"; [LotSteps]IN_Par3); \
+					"out"; New object:C1471("par1"; [LotSteps]OUT_Par1; "par2"; [LotSteps]OUT_Par2; "par3"; [LotSteps]OUT_Par3)\
+					)
+				
+				$properties:=New object:C1471(\
+					"pgm"; [LotSteps]Pgm; \
+					"pgmSwitch"; [LotSteps]Pgm_switch; \
+					"hardware1"; [LotSteps]Hardware1; \
+					"hardware2"; [LotSteps]Hardware2; \
+					"probeCard"; [LotSteps]Probe_card; \
+					"count1"; [LotSteps]Count1; \
+					"count2"; [LotSteps]Count2; \
+					"count3"; [LotSteps]Count3\
+					)
+				
+				$moreData:=New object:C1471(\
+					"supervisor"; [LotSteps]Supervisor; \
+					"yield"; [LotSteps]Yield\
+					)
+				
 				$steps.push(New object:C1471(\
 					"order"; $steps.length+1; \
 					"description"; [LotSteps]StepDesc; \
@@ -956,7 +1022,11 @@ If (True:C214)  // export archived jobs & lot (job <-- lots)
 					"actualHours"; [LotSteps]ActualHours; \
 					"plannedHours"; [LotSteps]Planned_hrs; \
 					"areas"; [LotSteps]Step_Area; \
-					"tools"; $tools\
+					"tools"; $tools; \
+					"bins"; $bins; \
+					"parametricMeasurements"; $parametricMeasurements; \
+					"properties"; $properties; \
+					"moreData"; $moreData\
 					))
 				
 				NEXT RECORD:C51([LotSteps])

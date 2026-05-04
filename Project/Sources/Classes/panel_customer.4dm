@@ -266,27 +266,28 @@ Function loadAllTabs()
 Function loadPOs()
 	If (Form:C1466.current_item#Null:C1517)
 		
-		Form:C1466.lb_POs:=New collection:C1472()
+		Form:C1466.lb_POs:=Form:C1466.current_item.purchaseOrders
+		//Form.lb_POs:=New collection()
 		
-		$PurchaseOrders:=ds:C1482.PurchaseOrder.query("UUID_Customer = :1"; Form:C1466.current_item.UUID).orderBy("poNumber")
+		//$PurchaseOrders:=ds.PurchaseOrder.query("UUID_Customer = :1"; Form.current_item.UUID).orderBy("poNumber")
 		
-		For ($i; 0; $PurchaseOrders.length-1)
-			
-			$POLines:=$PurchaseOrders[$i].lineItems
-			
-			$PO_item:=New object:C1471()
-			$PO_item.division:=$PurchaseOrders[$i].division
-			$PO_item.PO_date:=$PurchaseOrders[$i].log_date
-			$PO_item.poNumber:=$PurchaseOrders[$i].poNumber
-			$PO_item.identifier:=$PurchaseOrders[$i].identifier
-			$PO_item.poAmount:=$PurchaseOrders[$i].poAmount
-			$PO_item.amountBilled:=$PurchaseOrders[$i].amountBilled
-			$PO_item.invoices:=$PurchaseOrders[$i].invoices.length
-			
-			Form:C1466.lb_POs.push($PO_item)
-			
-			
-		End for 
+		//For ($i; 0; $PurchaseOrders.length-1)
+		
+		//$POLines:=$PurchaseOrders[$i].lineItems
+		
+		//$PO_item:=New object()
+		//$PO_item.division:=$PurchaseOrders[$i].division
+		//$PO_item.PO_date:=$PurchaseOrders[$i].log_date
+		//$PO_item.poNumber:=$PurchaseOrders[$i].poNumber
+		//$PO_item.identifier:=$PurchaseOrders[$i].identifier
+		//$PO_item.poAmount:=$PurchaseOrders[$i].poAmount
+		//$PO_item.amountBilled:=$PurchaseOrders[$i].amountBilled
+		//$PO_item.invoices:=$PurchaseOrders[$i].invoices.length
+		
+		//Form.lb_POs.push($PO_item)
+		
+		
+		//End for 
 		
 	End if 
 	
@@ -295,7 +296,8 @@ Function loadJobs()
 	
 	If (Form:C1466.current_item#Null:C1517)
 		
-		Form:C1466.lb_Jobs:=ds:C1482.Job.query("customerName = :1"; Form:C1466.current_item.name).orderBy("dateCreated")
+		//Form.lb_Jobs:=ds.Job.query("customerName = :1"; Form.current_item.name).orderBy("dateCreated")
+		Form:C1466.lb_Jobs:=Form:C1466.current_item.jobs
 		
 	End if 
 	
