@@ -366,6 +366,22 @@
 					"stroke": "#808080",
 					"text": ":",
 					"fontWeight": "normal"
+				},
+				"Field_enableBins": {
+					"type": "checkbox",
+					"text": "Enable Bins",
+					"top": 37,
+					"left": 384,
+					"width": 120,
+					"height": 22,
+					"events": [
+						"onClick",
+						"onDataChange"
+					],
+					"fontWeight": "normal",
+					"dataSourceTypeHint": "boolean",
+					"dataSource": "Form:C1466.currentStep.enableBins",
+					"enterable": false
 				}
 			}
 		},
@@ -646,13 +662,17 @@
 					"fontSize": 12,
 					"fontWeight": "bold",
 					"visibility": "hidden"
-				},
+				}
+			}
+		},
+		{
+			"objects": {
 				"entryField_subFormBin": {
 					"type": "subform",
-					"left": 454,
+					"left": 1,
 					"top": 114,
 					"width": 467,
-					"height": 272,
+					"height": 418,
 					"scrollbarVertical": "visible",
 					"dataSource": "Form:C1466.subFormBins",
 					"detailForm": "_ga_bins_subform"
@@ -839,7 +859,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 438,
+	"geometryStamp": 455,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

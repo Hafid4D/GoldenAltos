@@ -6,7 +6,7 @@ If (True:C214)
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/archived_jobs_export.json")
 	
 	$records:=JSON Parse:C1218($file.getText())
-	
+	$counter:=ds:C1482.JobInvoice.all().extract("invoiceNumber").map(Formula:C1597(Num:C11($1.value))).max()
 	
 	For each ($record; $records)
 		$counter:=$counter+1
@@ -266,6 +266,7 @@ If (True:C214)
 					$lotStep_e.missingOrExcluded:=$step.missingOrExcluded
 					$lotStep_e.yield:=$step.yield
 					$lotStep_e.supervisor:=$step.supervisor
+					$lotStep_e.enableBins:=$step.enableBins
 					
 					While (($lotStep_e.tools#Null:C1517) && ($lotStep_e.tools.items.indexOf("")#-1))
 						
