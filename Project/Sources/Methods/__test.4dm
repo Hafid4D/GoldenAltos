@@ -2,7 +2,7 @@
 
 
 
-$bins:=ds:C1482.Bin.all().extract("inventories")
+$bins:=ds:C1482.Inventory.all().extract("partNumber")
 
 $position:=-600
 $searchField:="binLocationPath"

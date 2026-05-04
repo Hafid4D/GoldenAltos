@@ -346,6 +346,9 @@ Function _entries_definition()
 	$entry.setLBItemsColumn("lotNumber"; "Lot #"; "width:450")
 	
 	$entry.setLBItemsOrderBy("lotNumber")
+	
+	$entry.setItemListAction("Print Receiving Tag"; "_ga_printReceivingTag")
+	
 	$entry.enableTransaction()
 	
 	This:C1470._push_entry($entry)

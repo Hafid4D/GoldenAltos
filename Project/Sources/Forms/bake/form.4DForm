@@ -37,7 +37,18 @@
 		"paperHeight": "792pt"
 	},
 	"pages": [
-		null,
+		{
+			"objects": {
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 0,
+					"left": 0,
+					"width": 730,
+					"height": 504,
+					"fill": "#E0E0E0"
+				}
+			}
+		},
 		{
 			"objects": {
 				"Rectangle1": {
@@ -45,7 +56,7 @@
 					"top": 0,
 					"left": 1,
 					"width": 725,
-					"height": 77,
+					"height": 82,
 					"fill": "transparent",
 					"stroke": "#AAAAAA"
 				},
@@ -88,8 +99,8 @@
 					"type": "line",
 					"top": 0,
 					"left": 28,
-					"width": 1,
-					"height": 76,
+					"width": 0,
+					"height": 82,
 					"stroke": "#AAAAAA"
 				},
 				"Line4": {
@@ -111,7 +122,7 @@
 					"top": 1,
 					"left": 343,
 					"width": 1,
-					"height": 75,
+					"height": 81,
 					"stroke": "#AAAAAA"
 				},
 				"Text4": {
@@ -206,13 +217,14 @@
 				},
 				"Text10": {
 					"type": "text",
-					"top": 63,
-					"left": 354,
+					"top": 61,
+					"left": 351,
 					"width": 40,
 					"height": 13,
 					"stroke": "#000000",
 					"class": "Print_font",
-					"text": "Tool1: "
+					"text": "Tool1: ",
+					"fill": "#FFFFFF"
 				},
 				"Field1": {
 					"type": "input",
@@ -224,7 +236,7 @@
 					"stroke": "#000000",
 					"class": "Print_font",
 					"focusable": false,
-					"fill": "transparent",
+					"fill": "#FFFFFF",
 					"borderStyle": "none",
 					"enterable": false,
 					"contextMenu": "none",
@@ -251,7 +263,7 @@
 					"stroke": "#000000",
 					"class": "PrintFontSmall",
 					"focusable": false,
-					"fill": "transparent",
+					"fill": "#FFFFFF",
 					"borderStyle": "none",
 					"enterable": false,
 					"contextMenu": "none",
@@ -280,7 +292,7 @@
 					"class": "Print_font",
 					"textAlign": "center",
 					"focusable": false,
-					"fill": "transparent",
+					"fill": "#FFFFFF",
 					"borderStyle": "none",
 					"enterable": false,
 					"contextMenu": "none",
@@ -307,7 +319,7 @@
 					"stroke": "#000000",
 					"class": "Print_font",
 					"focusable": false,
-					"fill": "transparent",
+					"fill": "#FFFFFF",
 					"borderStyle": "none",
 					"enterable": false,
 					"contextMenu": "none",
@@ -336,7 +348,7 @@
 					"class": "Print_font",
 					"textAlign": "center",
 					"focusable": false,
-					"fill": "transparent",
+					"fill": "#FFFFFF",
 					"borderStyle": "none",
 					"enterable": false,
 					"contextMenu": "none",
@@ -365,7 +377,7 @@
 					"class": "Print_font",
 					"textAlign": "center",
 					"focusable": false,
-					"fill": "transparent",
+					"fill": "#FFFFFF",
 					"borderStyle": "none",
 					"enterable": false,
 					"contextMenu": "none",
@@ -392,7 +404,7 @@
 					"stroke": "#000000",
 					"class": "Print_font",
 					"focusable": false,
-					"fill": "transparent",
+					"fill": "#FFFFFF",
 					"borderStyle": "none",
 					"enterable": false,
 					"contextMenu": "none",
@@ -419,7 +431,7 @@
 					"class": "Print_font",
 					"textAlign": "right",
 					"focusable": false,
-					"fill": "transparent",
+					"fill": "#FFFFFF",
 					"borderStyle": "none",
 					"enterable": false,
 					"contextMenu": "none",
@@ -441,12 +453,12 @@
 					"left": 690,
 					"width": 31,
 					"height": 13,
-					"dataSource": "[LotStep:5]moreData.supervisor",
+					"dataSource": "[LotStep:5]moreData:42.supervisor",
 					"stroke": "#000000",
 					"class": "Print_font",
 					"textAlign": "right",
 					"focusable": false,
-					"fill": "transparent",
+					"fill": "#FFFFFF",
 					"borderStyle": "none",
 					"enterable": false,
 					"contextMenu": "none",
@@ -474,7 +486,7 @@
 					"tooltip": {
 						"$ref": "/SOURCES/tips.json#/Reserved1"
 					},
-					"fill": "transparent",
+					"fill": "#FFFFFF",
 					"borderStyle": "none",
 					"contextMenu": "none",
 					"textFormat": "##:##-------##hrs:##mins",
@@ -492,15 +504,15 @@
 				},
 				"Field9": {
 					"type": "input",
-					"top": 63,
-					"left": 396,
+					"top": 61,
+					"left": 393,
 					"width": 158,
 					"height": 12,
-					"dataSource": "[LotStep:5]tools.items[0]",
+					"dataSource": "[LotStep:5]tools:17.items[0]",
 					"stroke": "#000000",
 					"class": "Print_font",
 					"focusable": false,
-					"fill": "transparent",
+					"fill": "#FFFFFF",
 					"borderStyle": "none",
 					"enterable": false,
 					"contextMenu": "none",
@@ -514,6 +526,237 @@
 						"onDisplayDetail",
 						"onDataChange",
 						"onPrintingDetail"
+					]
+				},
+				"Field10": {
+					"type": "input",
+					"top": 61,
+					"left": 563,
+					"width": 158,
+					"height": 12,
+					"dataSource": "[LotStep:5]tools:17.items[1]",
+					"stroke": "#000000",
+					"class": "Print_font",
+					"focusable": false,
+					"fill": "#FFFFFF",
+					"borderStyle": "none",
+					"enterable": false,
+					"contextMenu": "none",
+					"events": [
+						"onLoad",
+						"onValidate",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				}
+			}
+		},
+		{
+			"objects": {
+				"p2_HeaderText": {
+					"type": "text",
+					"top": 4,
+					"left": 6,
+					"width": 620,
+					"height": 14,
+					"stroke": "#000000",
+					"class": "Print_font",
+					"text": "Bake — step row (listbox mirror of page 1)"
+				},
+				"lb_bake_mirror": {
+					"type": "listbox",
+					"top": 22,
+					"left": 6,
+					"width": 716,
+					"height": 259,
+					"sizingY": "move",
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.lb_lotSteps",
+					"selectionMode": "none",
+					"showHeaders": false,
+					"headerHeight": "1.1em",
+					"focusable": false,
+					"borderStyle": "none",
+					"horizontalLineStroke": "#CCCCCC",
+					"verticalLineStroke": "#EEEEEE",
+					"scrollbarHorizontal": "automatic",
+					"scrollbarVertical": "hidden",
+					"hideExtraBlankRows": true,
+					"events": [
+						"onLoad",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onPrintingDetail"
+					],
+					"columns": [
+						{
+							"header": {
+								"text": "#",
+								"name": "h_order",
+								"textAlign": "center"
+							},
+							"name": "c_order",
+							"footer": {
+								"name": "f_order"
+							},
+							"width": 36,
+							"dataSource": "This:C1470.order",
+							"dataSourceTypeHint": "number",
+							"textAlign": "center",
+							"truncateMode": "withEllipsis"
+						},
+						{
+							"header": {
+								"text": "Description",
+								"name": "h_desc"
+							},
+							"name": "c_desc",
+							"footer": {
+								"name": "f_desc"
+							},
+							"width": 132,
+							"dataSource": "This:C1470.description",
+							"dataSourceTypeHint": "text",
+							"truncateMode": "withEllipsis"
+						},
+						{
+							"header": {
+								"text": "qty in",
+								"name": "h_qti",
+								"textAlign": "center"
+							},
+							"name": "c_qti",
+							"footer": {
+								"name": "f_qti"
+							},
+							"width": 42,
+							"dataSource": "This:C1470.qtyIn",
+							"dataSourceTypeHint": "number",
+							"numberFormat": "#####0;;",
+							"textAlign": "center"
+						},
+						{
+							"header": {
+								"text": "date/time on",
+								"name": "h_dti"
+							},
+							"name": "c_dti",
+							"footer": {
+								"name": "f_dti"
+							},
+							"width": 78,
+							"dataSource": "This:C1470.dateIn",
+							"dataSourceTypeHint": "date"
+						},
+						{
+							"header": {
+								"text": "rejects",
+								"name": "h_rej",
+								"textAlign": "center"
+							},
+							"name": "c_rej",
+							"footer": {
+								"name": "f_rej"
+							},
+							"width": 42,
+							"dataSource": "This:C1470.rejects",
+							"dataSourceTypeHint": "number",
+							"numberFormat": "#####0;;",
+							"textAlign": "center"
+						},
+						{
+							"header": {
+								"text": "qty out",
+								"name": "h_qto",
+								"textAlign": "center"
+							},
+							"name": "c_qto",
+							"footer": {
+								"name": "f_qto"
+							},
+							"width": 42,
+							"dataSource": "This:C1470.qtyOut",
+							"dataSourceTypeHint": "number",
+							"numberFormat": "#####0;;",
+							"textAlign": "center"
+						},
+						{
+							"header": {
+								"text": "date/time off",
+								"name": "h_dto"
+							},
+							"name": "c_dto",
+							"footer": {
+								"name": "f_dto"
+							},
+							"width": 78,
+							"dataSource": "This:C1470.dateOut",
+							"dataSourceTypeHint": "date"
+						},
+						{
+							"header": {
+								"text": "oper",
+								"name": "h_op",
+								"textAlign": "center"
+							},
+							"name": "c_op",
+							"footer": {
+								"name": "f_op"
+							},
+							"width": 36,
+							"dataSource": "This:C1470.operator",
+							"dataSourceTypeHint": "text",
+							"textAlign": "center"
+						},
+						{
+							"header": {
+								"text": "Supv",
+								"name": "h_sup",
+								"textAlign": "center"
+							},
+							"name": "c_sup",
+							"footer": {
+								"name": "f_sup"
+							},
+							"width": 36,
+							"dataSource": "This:C1470.supervisor",
+							"dataSourceTypeHint": "text",
+							"textAlign": "center"
+						},
+						{
+							"header": {
+								"text": "Comment/hours",
+								"name": "h_com"
+							},
+							"name": "c_com",
+							"footer": {
+								"name": "f_com"
+							},
+							"width": 84,
+							"dataSource": "This:C1470.comment1",
+							"dataSourceTypeHint": "text",
+							"truncateMode": "withEllipsis"
+						},
+						{
+							"header": {
+								"text": "Tool1",
+								"name": "h_tl"
+							},
+							"name": "c_tl",
+							"footer": {
+								"name": "f_tl"
+							},
+							"width": 72,
+							"dataSource": "This:C1470.tools.items[1]",
+							"dataSourceTypeHint": "text",
+							"truncateMode": "withEllipsis"
+						}
 					]
 				}
 			}
@@ -533,6 +776,10 @@
 			"View 8": {},
 			"View 9": {}
 		}
+	},
+	"geometryStamp": 21,
+	"$4d": {
+		"version": "1",
+		"kind": "form"
 	}
 }
-
