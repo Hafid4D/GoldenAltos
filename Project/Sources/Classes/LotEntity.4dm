@@ -7,6 +7,20 @@ Function getCurrentStep()->$currentStepOrder : Integer
 		$currentStepOrder:=$currentstep_es[0].order
 	End if 
 	
+// Purpose: Drives Punch OUT hTab styling so "Bins" is disabled (grey) when no active punching step or LotStep.enableBins is false. Uses the same LotStep selection rule as cs.panel_punchOut.loadCurrentStep().
+// Parameters: none (invoked as Form.current_item.punchOut_binsTabDisabled() from SFW drawHTab formulas)
+// Returns: Boolean True = Bins tab should be disabled/greyed
+// created by 4D/PS [2026-may-05]
+Function punchOut_binsTabDisabled()-> $disabled : Boolean
+	var $currentstep : cs:C1710.LotStepSelection
+	// Same filter as cs.panel_punchOut.loadCurrentStep() active step candidate
+	$currentstep:=This:C1470.steps.query("qtyIn # :1 AND qtyOut = :1 AND dateIn # :2 AND dateOut = :2"; 0; !00-00-00!).orderBy("order asc")
+	If ($currentstep.length=0)
+		$disabled:=True:C214
+	Else 
+		$disabled:=Not:C34($currentstep[0].enableBins)
+	End if 
+	
 local Function loadAfterCreation()
 	
 	Case of 
