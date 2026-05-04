@@ -461,34 +461,27 @@ Function loadSerialization()
 Function bActionCheck()
 	$refMenu:=Create menu:C408
 	
-	APPEND MENU ITEM:C411($refMenu; "Create a step from template")
+	APPEND MENU ITEM:C411($refMenu; "NON-CONFORMING MATERIAL NOTICE (NMN)")
 	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--nmn")
+	ENABLE MENU ITEM:C149($refMenu; -1)
 	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
 		DISABLE MENU ITEM:C150($refMenu; -1)
 	End if 
 	
-	APPEND MENU ITEM:C411($refMenu; "Delete a Step")
+	APPEND MENU ITEM:C411($refMenu; "INTERNAL START/STOP NOTIFICATION FORM")
 	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--isnf")
+	ENABLE MENU ITEM:C149($refMenu; -1)
 	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
 		DISABLE MENU ITEM:C150($refMenu; -1)
-	Else 
-		If (Form:C1466.currentPM=Null:C1517)
-			DISABLE MENU ITEM:C150($refMenu; -1)
-		End if 
 	End if 
 	
 	$choose:=Dynamic pop up menu:C1006($refMenu)
 	
 	Case of 
 		: ($choose="--nmn")
-			$form:=New object:C1471(\
-				"step"; ds:C1482.Step.new()\
-				)
-			
-			$form.step.UUID_StepTemplate:=Form:C1466.current_item.UUID
 			
 			$winRef:=Open form window:C675("NMN"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
-			DIALOG:C40("NMN"; $form)
+			DIALOG:C40("NMN"; Form:C1466)
 			CLOSE WINDOW:C154($winRef)
 			
 			If (ok=1)
@@ -503,4 +496,7 @@ Function bActionCheck()
 			End if 
 			
 		: ($choose="--isnf")
+			$winRef:=Open form window:C675("ISNF"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
+			DIALOG:C40("ISNF"; $form)
+			CLOSE WINDOW:C154($winRef)
 	End case 
