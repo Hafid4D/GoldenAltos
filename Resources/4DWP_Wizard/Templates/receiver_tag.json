@@ -1,34 +1,34 @@
 {
-    "tableDataSource": "Form.sfw.lb_items",
+    "tableDataSource": "Form.inventoriesCollection",
     "columns": [{
             "check": true,
             "header": "Type",
-            "source": "This.item.assignedID"
+            "source": "This.item.type"
         }, {
             "check": true,
             "header": "Lot#",
-            "source": "This.item.location.name"
+            "source": "This.item.lotNumber"
         }, {
             "check": true,
             "header": "Stated Qty",
-            "source": "This.item.model"
+            "source": "This.item.statedQty"
         }
         , {
             "check": true,
             "header": "Our Count",
-            "source": "This.item.serialNumber"
+            "source": "This.item.ourQty"
         } , {
             "check": true,
             "header": "Date In",
-            "source": "This.item.serialNumber"
+            "source": "This.item.dateIn"
         } , {
             "check": true,
             "header": "Package Type/Description",
-            "source": "This.item.serialNumber"
+            "source": "This.item.packageType"
         } , {
             "check": true,
             "header": "Loc",
-            "source": "This.item.serialNumber"
+            "source": "This.item.location"
         }
     ]
    

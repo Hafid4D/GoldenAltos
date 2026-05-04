@@ -31,15 +31,33 @@ If (Form:C1466.current_item#Null:C1517)
 	For each ($lot; $lots)
 		$object:=New object:C1471(\
 			"type"; "Mgf Lot"; \
-			"lotNumber"; ""; \
-			"statedQty"; ""; \
-			"ourQty"; ""; \
-			"dateIn"; ""; \
-			"packageType"; ""; \
+			"lotNumber"; $lot.lotNumber; \
+			"statedQty"; $lot.original; \
+			"ourQty"; $lot.ourCount; \
+			"dateIn"; $lot.dateIn; \
+			"packageType"; $lot.packageType; \
 			"location"; ""\
 			)
+		Form:C1466.inventoriesCollection.push($object)
 		
 	End for each 
+	
+	$materials:=Form:C1466.subForm.lb_materials
+	For each ($material; $materials)
+		$object:=New object:C1471(\
+			"type"; "Inventory"; \
+			"lotNumber"; $material.partNumber; \
+			"statedQty"; $material.initialQty; \
+			"ourQty"; $material.qtyInStock; \
+			"dateIn"; $material.dateIn_d; \
+			"packageType"; $material.description; \
+			"location"; $material.bin#Null:C1517 ? $material.bin.binLocationPath : ""\
+			)
+		Form:C1466.inventoriesCollection.push($object)
+		
+	End for each 
+	
+	
 	WP SET DATA CONTEXT:C1786($template; $context)
 	
 	PRINT SETTINGS:C106(2)
