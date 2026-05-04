@@ -90,6 +90,8 @@
 		<field name="serialization" uuid="C025334374AD4EE3817470B44450C598" type="21" blob_switch_size="2147483647" never_null="true" id="40"/>
 		<field name="properties" uuid="9C1165AA49804B62B8DA4E3CC31D10A6" type="21" blob_switch_size="2147483647" never_null="true" id="41"/>
 		<field name="moreData" uuid="792F9726D802684281D40DE2FA022E6C" type="21" blob_switch_size="2147483647" never_null="true" id="42"/>
+		<field name="NMN" uuid="D43C4FF25A314D5AB37B054D4791083D" type="21" blob_switch_size="2147483647" never_null="true" id="43"/>
+		<field name="ISNF" uuid="5F5BE2B6BB214B3A9523FC66BA3A6927" type="21" blob_switch_size="2147483647" never_null="true" id="44"/>
 		<primary_key field_name="UUID" field_uuid="EE9C517A8C59724B8559A5DCB59FE560"/>
 	</table>
 	<table name="Tool" uuid="0FF66E5E37EDD74B8E6E39F15644C85F" id="6">
