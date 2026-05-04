@@ -300,7 +300,10 @@ Function _entries_definition()
 	
 	$entry.setPanel("panel_punchOut")
 	$entry.setPanelPage(1; "po-infos-32x32.png"; "Main")
-	//$entry.setPanelPage(2; ""; "Rejection Form")
+	// Purpose: Grey out "Bins" when Lot active step has enableBins=false (or no step), per SFW setPanelPage disabled formula.
+	// modified by 4D/PS [2026-may-05]
+	$entry.setPanelPage(2; ""; "Bins"; "disabled:Form.current_item.punchOut_binsTabDisabled()")
+	//$entry.setPanelPage(3; ""; "Rejection Form")
 	
 	$entry.setLBItemsColumn("lotNumber"; "Lot #"; "width:450")
 	

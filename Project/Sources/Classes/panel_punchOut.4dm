@@ -10,13 +10,18 @@ Function formMethod()
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
-		//This.loadBins()
+		
 		This:C1470.loadCurrentStep()
 		This:C1470.displayBannerLotOnHold()
+		This:C1470.loadBins()
 		
 		Case of 
 			: (FORM Get current page:C276(*)=1)
 				// add load functions
+				
+			: (FORM Get current page:C276(*)=1)
+				// add load functions
+				
 		End case 
 	End if 
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())  //It's time to resize the object or set visible
@@ -92,7 +97,7 @@ Function redrawAndSetVisible()
 	OBJECT SET ENABLED:C1123(*; "entryField_approvalDate"; False:C215)
 	OBJECT SET ENABLED:C1123(*; "entryField_approver"; False:C215)
 	
-	This:C1470.loadBins()
+	
 	
 	
 Function loadCurrentStep()
@@ -103,7 +108,7 @@ Function loadCurrentStep()
 		Form:C1466.currentStep:=$currentstep[0]
 		
 		Form:C1466.currentStepOrder:=Form:C1466.currentStep.order
-		FORM GOTO PAGE:C247(1; *)
+		//FORM GOTO PAGE(1; *)
 	Else 
 		//FORM GOTO PAGE(2; *)
 	End if 

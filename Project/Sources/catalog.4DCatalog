@@ -98,6 +98,7 @@
 		<field name="supervisor" uuid="5C71C9216FB949D5B4D3FB2728AF6EBF" type="10" limiting_length="255" never_null="true" id="46">
 			<field_extra multi_line="false"/>
 		</field>
+		<field name="enableBins" uuid="29CE60F3637C461488A95A69A4F00E3A" type="1" never_null="true" id="47"/>
 		<primary_key field_name="UUID" field_uuid="EE9C517A8C59724B8559A5DCB59FE560"/>
 	</table>
 	<table name="Tool" uuid="0FF66E5E37EDD74B8E6E39F15644C85F" id="6">
@@ -3988,6 +3989,11 @@
 			<table_ref uuid="B187BEFD3CC6B147886F91E311E96B3A" name="Specification"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="11AC4044F434444FA509586341021165" type="1">
+		<field_ref uuid="52A7815268F91841B8A2BD8D7165F3A1" name="poNumber">
+			<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="11C28FE27989C34BA14DF314B664D143" type="1">
 		<field_ref uuid="5E981E007AACAB40827C10DAA4897F56" name="UUID_Division">
 			<table_ref uuid="6BD779120B353443AB63B97FD27C1351" name="DivisionInfo"/>
@@ -4041,11 +4047,6 @@
 	<index kind="regular" unique_keys="true" uuid="17AEAFB62770A046B6DA4E9BFA85B12F" type="7">
 		<field_ref uuid="3FE414F572CC6D4D83E98816E5F8757A" name="UUID">
 			<table_ref uuid="4953D4E1A4DBC44C9A5A17FAE5272A9A" name="Unit"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="1A7E9E78878F41B08257A7359DDB15AE" type="1">
-		<field_ref uuid="52A7815268F91841B8A2BD8D7165F3A1" name="poNumber">
-			<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="1AAB39487A27AF41AFC1D4CBCFA0772A" type="7">
@@ -4471,11 +4472,6 @@
 	<index kind="regular" uuid="675DDEA34102494283E12FCAE91573AD" type="3">
 		<field_ref uuid="74D4489457374B57A51D090D4AC39E94" name="UUID_Lead">
 			<table_ref uuid="04F7E2A28A5349B4B0C70F6D644922BB" name="LeadEvent"/>
-		</field_ref>
-	</index>
-	<index kind="regular" uuid="68C6704138654E1B86C889548F0120FF" type="1">
-		<field_ref uuid="52A7815268F91841B8A2BD8D7165F3A1" name="poNumber">
-			<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="693CFB03E2474724BB9E72E83A585A9B" type="1">

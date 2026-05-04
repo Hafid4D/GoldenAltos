@@ -696,6 +696,7 @@ If (True:C214)
 					$lotStep_e.missingOrExcluded:=$step.missingOrExcluded
 					$lotStep_e.yield:=$step.yield
 					$lotStep_e.supervisor:=$step.supervisor
+					$lotStep_e.enableBins:=$step.enableBins
 					
 					While (($lotStep_e.tools#Null:C1517) && ($lotStep_e.tools.items.indexOf("")#-1))
 						
