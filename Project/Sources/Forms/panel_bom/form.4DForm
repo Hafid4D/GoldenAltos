@@ -104,7 +104,7 @@
 					"top": 10,
 					"left": 413,
 					"width": 175,
-					"height": 17,
+					"height": 16,
 					"dataSource": "Form:C1466.current_item.Rev",
 					"focusable": false,
 					"enterable": false,
@@ -115,7 +115,8 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"textAlign": "left"
+					"textAlign": "left",
+					"right": 588
 				},
 				"label_0_8": {
 					"type": "text",
@@ -127,7 +128,7 @@
 					"text": "Revision Date",
 					"textAlign": "right"
 				},
-				"entryField_code3": {
+				"entryField_revDate": {
 					"type": "input",
 					"top": 37,
 					"left": 413,
@@ -251,6 +252,26 @@
 					"stroke": "#808080",
 					"text": "Division",
 					"textAlign": "right"
+				},
+				"dp_RevDate": {
+					"type": "subform",
+					"top": 37,
+					"left": 568,
+					"width": 19,
+					"height": 16,
+					"dataSource": "Form:C1466.current_item.RevDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dp_RevDate.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true
 				}
 			}
 		},
@@ -655,7 +676,7 @@
 			}
 		}
 	],
-	"geometryStamp": 260,
+	"geometryStamp": 282,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"editor": {
 		"activeView": "View 1",
