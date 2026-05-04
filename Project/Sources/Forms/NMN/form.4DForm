@@ -224,7 +224,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.job",
+					"dataSource": "Form:C1466.current_item.customer",
 					"enterable": false,
 					"contextMenu": "none"
 				},
@@ -246,8 +246,8 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.date",
-					"enterable": false
+					"dataSource": "Form:C1466.current_item.NMN.traceller",
+					"enterable": true
 				},
 				"header_bkgd8": {
 					"type": "rectangle",
@@ -326,8 +326,8 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.currentQty",
-					"enterable": false,
+					"dataSource": "Form:C1466.current_item.NMN.qty",
+					"enterable": true,
 					"contextMenu": "none"
 				},
 				"header_bkgd12": {
@@ -349,8 +349,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.qtyToPull",
-					"method": "ObjectMethods/Input3.4dm",
+					"dataSource": "Form:C1466.current_item.NMN.qtyInpected",
 					"events": [
 						"onDataChange"
 					],
@@ -404,10 +403,9 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.pulledBy",
-					"enterable": false,
+					"dataSource": "Form:C1466.current_item.NMN.qtyAccepted",
+					"enterable": true,
 					"contextMenu": "none",
-					"method": "ObjectMethods/input_pulledBy.4dm",
 					"events": [
 						"onClick",
 						"onMouseMove"
@@ -481,8 +479,8 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.job",
-					"enterable": false,
+					"dataSource": "Form:C1466.current_item.NMN.qtyRejected",
+					"enterable": true,
 					"contextMenu": "none"
 				},
 				"header_bkgd25": {
@@ -503,8 +501,8 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.date",
-					"enterable": false
+					"dataSource": "Form:C1466.current_item.NMN.originator",
+					"enterable": true
 				},
 				"header_bkgd27": {
 					"type": "rectangle",
@@ -583,8 +581,8 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.currentQty",
-					"enterable": false,
+					"dataSource": "Form:C1466.current_item.NMN.date",
+					"enterable": true,
 					"contextMenu": "none"
 				},
 				"header_bkgd31": {
@@ -606,8 +604,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.qtyToPull",
-					"method": "ObjectMethods/Input8.4dm",
+					"dataSource": "Form:C1466.current_item.NMN.time",
 					"events": [
 						"onDataChange"
 					],
@@ -690,10 +687,9 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.pulledBy",
-					"enterable": false,
+					"dataSource": "Form:C1466.current_item.NMN.mc",
+					"enterable": true,
 					"contextMenu": "none",
-					"method": "ObjectMethods/input_pulledBy1.4dm",
 					"events": [
 						"onClick",
 						"onMouseMove"
@@ -718,7 +714,7 @@
 					"height": 98,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.note"
+					"dataSource": "Form:C1466.current_item.NMN.problemDetails"
 				},
 				"Text10": {
 					"type": "text",
@@ -775,7 +771,7 @@
 					"height": 16,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.date",
+					"dataSource": "Form:C1466.current_item.NMN.customerDate",
 					"enterable": false
 				},
 				"header_bkgd39": {
@@ -825,7 +821,7 @@
 					"height": 16,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.date",
+					"dataSource": "Form:C1466.current_item.NMN.engineeringDate",
 					"enterable": false
 				},
 				"header_bkgd42": {
@@ -875,7 +871,7 @@
 					"height": 16,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.date",
+					"dataSource": "Form:C1466.current_item.NMN.qaqcDate",
 					"enterable": false
 				},
 				"header_bkgd45": {
@@ -925,7 +921,7 @@
 					"height": 16,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.date",
+					"dataSource": "Form:C1466.current_item.NMN.productionDate",
 					"enterable": false
 				},
 				"Text25": {
@@ -1137,11 +1133,91 @@
 					"height": 15,
 					"textAlign": "right",
 					"fontWeight": "bold"
+				},
+				"dp_0": {
+					"type": "subform",
+					"top": 621,
+					"left": 515,
+					"width": 19,
+					"height": 16,
+					"dataSource": "Form:C1466.current_item.dateIn",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dp_0.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true
+				},
+				"dp_1": {
+					"type": "subform",
+					"top": 651,
+					"left": 515,
+					"width": 19,
+					"height": 16,
+					"dataSource": "Form:C1466.current_item.NMN.engineeringDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dp_1.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true
+				},
+				"dp_2": {
+					"type": "subform",
+					"top": 681,
+					"left": 515,
+					"width": 19,
+					"height": 16,
+					"dataSource": "Form:C1466.current_item.NMN.qaqcDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dp_2.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true
+				},
+				"dp_3": {
+					"type": "subform",
+					"top": 711,
+					"left": 515,
+					"width": 19,
+					"height": 16,
+					"dataSource": "Form:C1466.current_item.NMN.productionDate",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateButton",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dp_3.4dm",
+					"events": [
+						"onLoad"
+					],
+					"focusable": true
 				}
 			}
 		}
 	],
-	"geometryStamp": 444,
+	"geometryStamp": 467,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
