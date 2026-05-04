@@ -3040,12 +3040,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2704.6667480469,
-				"top": 1061.3332519531,
+				"left": 2708.6667480469,
+				"top": 1107.3332519531,
 				"width": 193.048828125,
-				"height": 1048.33203125
+				"height": 1121.33203125
 			},
-			"displayable_fields_count": 47,
+			"displayable_fields_count": 51,
 			"fields": {
 				"moreData": {
 					"position": 43
