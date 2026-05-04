@@ -99,6 +99,8 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="enableBins" uuid="29CE60F3637C461488A95A69A4F00E3A" type="1" never_null="true" id="47"/>
+		<field name="NMN" uuid="40B39D26D29A4108B5BC6A3D4276C568" type="21" blob_switch_size="2147483647" never_null="true" id="48"/>
+		<field name="ISNF" uuid="283A686FF1F3467F82272115373F5400" type="21" blob_switch_size="2147483647" never_null="true" id="49"/>
 		<primary_key field_name="UUID" field_uuid="EE9C517A8C59724B8559A5DCB59FE560"/>
 	</table>
 	<table name="Tool" uuid="0FF66E5E37EDD74B8E6E39F15644C85F" id="6">
