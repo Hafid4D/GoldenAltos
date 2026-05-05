@@ -14,19 +14,15 @@ Case of
 			If ((Form:C1466.stepFile.stepsDefinition#Null:C1517) & (Form:C1466.stepFile.stepsDefinition.items#Null:C1517) & (Form:C1466.stepFile.stepsDefinition.items.length>0))
 				
 				For each ($item; Form:C1466.stepFile.stepsDefinition.items)
-					
-					If (cs:C1710.sfw_string.me.isAnEmptyUUID($item.UUID_Step)=False:C215)
-						$step_entity:=ds:C1482.Step.query("UUID = :1"; $item.UUID_Step).first()
-					Else 
-						$step_entity:=Null:C1517
-					End if 
-					
 					$obj:=New object:C1471()
 					$obj.order:=$item.order
-					If ($step_entity#Null:C1517)
-						$obj.description:=$step_entity.description
-					Else 
-						$obj.description:=String:C10($item.description)
+					$obj.description:=String:C10($item.description)
+					
+					If (cs:C1710.sfw_string.me.isAnEmptyUUID($item.UUID_Step)=False:C215)
+						$step_es:=ds:C1482.Step.query("UUID = :1"; $item.UUID_Step)
+						If ($step_es.length>0)
+							$obj.description:=$step_es[0].description
+						End if 
 					End if 
 					
 					$stepsCollection.push($obj)
@@ -38,13 +34,13 @@ Case of
 				If ((Form:C1466.stepFile.moreData#Null:C1517) & (Form:C1466.stepFile.moreData.selectedSteps#Null:C1517))
 					For each ($step; Form:C1466.stepFile.moreData.selectedSteps)
 						
-						$step_entity:=ds:C1482.Step.query("UUID = :1"; $step.UUID).first()
+						$step_es:=ds:C1482.Step.query("UUID = :1"; $step.UUID)
 						
-						If ($step_entity#Null:C1517)
+						If ($step_es.length>0)
 							
 							$obj:=New object:C1471()
 							$obj.order:=$step.order
-							$obj.description:=$step_entity.description
+							$obj.description:=$step_es[0].description
 							
 							$stepsCollection.push($obj)
 							

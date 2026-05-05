@@ -4,7 +4,7 @@ Case of
 		If (Form:C1466.sf_customerSearch.selectedItem#Null:C1517)
 			Form:C1466.sf_stepFileSearch:=New object:C1471(\
 				"colName"; "name"; \
-				"lb_values"; Form:C1466.sf_customerSearch.selectedItem.stepFiles\
+				"lb_values"; Form:C1466.sf_customerSearch.selectedItem.stepFiles.query("status = :1"; True:C214)\
 				)
 			
 			OBJECT SET SUBFORM:C1138(*; "sf_stepFileSearch"; "searchOnList")
@@ -13,7 +13,7 @@ Case of
 			If (ds:C1482.Customer.query("name = :1"; Form:C1466.lotInfo.customer.name).first()#Null:C1517)
 				Form:C1466.sf_stepFileSearch:=New object:C1471(\
 					"colName"; "name"; \
-					"lb_values"; ds:C1482.Customer.query("name = :1"; Form:C1466.lotInfo.customer.name).first().stepFiles\
+					"lb_values"; ds:C1482.Customer.query("name = :1"; Form:C1466.lotInfo.customer.name).first().stepFiles.query("status = :1"; True:C214)\
 					)
 				
 				OBJECT SET SUBFORM:C1138(*; "sf_stepFileSearch"; "searchOnList")

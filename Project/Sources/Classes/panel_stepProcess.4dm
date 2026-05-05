@@ -20,7 +20,7 @@ Function formMethod()
 Function redrawAndSetVisible()
 	Use (Form:C1466.sfw.entry.panel.pages)
 		If (Form:C1466.sfw.entry.panel.pages.length>0)
-			Form:C1466.sfw.entry.panel.pages[0].label:="Steps ("+Form:C1466.lb_items.length+")"
+			Form:C1466.sfw.entry.panel.pages[0].label:="Steps ("+String:C10(Form:C1466.lb_items.length)+")"
 		End if 
 	End use 
 	
@@ -41,4 +41,5 @@ Function loadSteps()
 	Else 
 		Form:C1466.lb_items:=New collection:C1472()
 	End if 
+	
 	

@@ -1,4 +1,4 @@
-﻿{
+{
 	"$4d": {
 		"version": "1",
 		"kind": "form"
@@ -73,7 +73,7 @@
 					"type": "checkbox",
 					"text": "Active",
 					"top": 7,
-					"left": 436,
+					"left": 536,
 					"width": 72,
 					"height": 24,
 					"events": [
@@ -86,7 +86,7 @@
 				"label_status": {
 					"type": "text",
 					"top": 12,
-					"left": 352,
+					"left": 452,
 					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
@@ -96,7 +96,7 @@
 					"type": "button",
 					"top": 10,
 					"left": 132,
-					"width": 196,
+					"width": 266,
 					"height": 20,
 					"fontFamily": "System Font",
 					"fontSize": 13,
@@ -115,110 +115,6 @@
 		},
 		{
 			"objects": {
-				"pup_process": {
-					"type": "button",
-					"top": 95,
-					"left": 102,
-					"width": 146,
-					"height": 26,
-					"fontFamily": "System Font",
-					"fontSize": 13,
-					"focusable": false,
-					"text": " ",
-					"icon": "",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/pup_process.4dm",
-					"events": [
-						"onClick"
-					],
-					"textAlign": "center"
-				},
-				"btnMoveTop": {
-					"type": "button",
-					"text": " ",
-					"top": 389,
-					"left": 1093,
-					"width": 26,
-					"height": 26,
-					"events": [
-						"onClick",
-						"onMouseEnter",
-						"onMouseLeave"
-					],
-					"style": "custom",
-					"popupPlacement": "none",
-					"icon": "/RESOURCES/image/element/arrow-top.png",
-					"textPlacement": "center",
-					"method": "ObjectMethods/btnMoveTop.4dm",
-					"visibility": "visible",
-					"iconFrames": 4,
-					"focusable": false
-				},
-				"btnMoveUp": {
-					"type": "button",
-					"text": " ",
-					"top": 422,
-					"left": 1093,
-					"width": 26,
-					"height": 26,
-					"events": [
-						"onClick",
-						"onMouseEnter",
-						"onMouseLeave"
-					],
-					"style": "custom",
-					"popupPlacement": "none",
-					"icon": "/RESOURCES/image/element/arrow-up.png",
-					"textPlacement": "center",
-					"method": "ObjectMethods/btnMoveUp.4dm",
-					"visibility": "visible",
-					"iconFrames": 4,
-					"focusable": false
-				},
-				"btnMoveDown": {
-					"type": "button",
-					"text": " ",
-					"top": 455,
-					"left": 1093,
-					"width": 26,
-					"height": 26,
-					"events": [
-						"onClick",
-						"onMouseEnter",
-						"onMouseLeave"
-					],
-					"style": "custom",
-					"popupPlacement": "none",
-					"icon": "/RESOURCES/image/element/arrow-down.png",
-					"textPlacement": "center",
-					"method": "ObjectMethods/btnMoveDown.4dm",
-					"visibility": "visible",
-					"iconFrames": 4,
-					"focusable": false
-				},
-				"btnMoveBottom": {
-					"type": "button",
-					"text": " ",
-					"top": 488,
-					"left": 1093,
-					"width": 26,
-					"height": 26,
-					"events": [
-						"onClick",
-						"onMouseEnter",
-						"onMouseLeave"
-					],
-					"style": "custom",
-					"popupPlacement": "none",
-					"icon": "/RESOURCES/image/element/arrow-bottom.png",
-					"textPlacement": "center",
-					"method": "ObjectMethods/btnMoveBottom.4dm",
-					"visibility": "visible",
-					"iconFrames": 4,
-					"focusable": false
-				},
 				"lb_selectedSteps": {
 					"type": "listbox",
 					"left": 102,
@@ -261,14 +157,15 @@
 								"text": "#"
 							},
 							"name": "Column13",
-							"width": 32,
+							"width": 36,
 							"resizable": true,
 							"footer": {
 								"name": "Footer13"
 							},
 							"dataSource": "This:C1470.order",
 							"textAlign": "center",
-							"enterable": false
+							"enterable": false,
+							"minWidth": 20
 						},
 						{
 							"header": {
@@ -281,20 +178,36 @@
 								"name": "FooterDesc"
 							},
 							"dataSource": "This:C1470.description",
-							"width": 148,
+							"width": 200,
 							"enterable": false,
-							"minWidth": 84,
+							"minWidth": 100,
 							"resizable": true
 						},
 						{
 							"header": {
+								"name": "HeaderTime",
+								"text": "Time"
+							},
+							"name": "ColumnTime",
+							"dataSource": "This:C1470.time",
+							"width": 52,
+							"minWidth": 40,
+							"footer": {
+								"name": "FooterTime"
+							},
+							"textAlign": "center",
+							"resizable": true,
+							"enterable": false
+						},
+						{
+							"header": {
 								"name": "HeaderTpl",
-								"text": "Tpl #"
+								"text": "Template #"
 							},
 							"name": "ColumnTpl",
 							"dataSource": "This:C1470.step_template",
-							"minWidth": 36,
-							"width": 44,
+							"minWidth": 44,
+							"width": 72,
 							"footer": {
 								"name": "FooterTpl"
 							},
@@ -309,8 +222,8 @@
 							},
 							"name": "ColumnAlert",
 							"dataSource": "This:C1470.alert",
-							"minWidth": 44,
-							"width": 72,
+							"minWidth": 56,
+							"width": 96,
 							"footer": {
 								"name": "FooterAlert"
 							},
@@ -324,10 +237,120 @@
 							},
 							"name": "ColumnArea",
 							"dataSource": "This:C1470.area",
-							"minWidth": 40,
-							"width": 64,
+							"minWidth": 48,
+							"width": 80,
 							"footer": {
 								"name": "FooterArea"
+							},
+							"resizable": true,
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "HeaderYield",
+								"text": "Yield"
+							},
+							"name": "ColumnYield",
+							"dataSource": "This:C1470.yield",
+							"width": 56,
+							"minWidth": 44,
+							"footer": {
+								"name": "FooterYield"
+							},
+							"textAlign": "center",
+							"resizable": true,
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "HeaderTemp",
+								"text": "Temp C"
+							},
+							"name": "ColumnTemp",
+							"dataSource": "This:C1470.temp_c",
+							"width": 56,
+							"minWidth": 44,
+							"footer": {
+								"name": "FooterTemp"
+							},
+							"textAlign": "center",
+							"resizable": true,
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "HeaderTRepeat",
+								"text": "Tpl repeat"
+							},
+							"name": "ColumnTRepeat",
+							"dataSource": "This:C1470.template_repeat",
+							"width": 68,
+							"minWidth": 48,
+							"footer": {
+								"name": "FooterTRepeat"
+							},
+							"textAlign": "center",
+							"resizable": true,
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "HeaderPlanHrs",
+								"text": "Planned hrs"
+							},
+							"name": "ColumnPlanHrs",
+							"dataSource": "This:C1470.planned_hours",
+							"width": 72,
+							"minWidth": 52,
+							"footer": {
+								"name": "FooterPlanHrs"
+							},
+							"textAlign": "center",
+							"resizable": true,
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "HeaderBom",
+								"text": "BOM for step"
+							},
+							"name": "ColumnBom",
+							"dataSource": "This:C1470.bom_for_step",
+							"width": 100,
+							"minWidth": 56,
+							"footer": {
+								"name": "FooterBom"
+							},
+							"resizable": true,
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "HeaderProp",
+								"text": "Step property"
+							},
+							"name": "ColumnProp",
+							"dataSource": "This:C1470.step_property",
+							"width": 88,
+							"minWidth": 52,
+							"footer": {
+								"name": "FooterProp"
+							},
+							"textAlign": "center",
+							"resizable": true,
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "HeaderPropTxt",
+								"text": "Step property (text)"
+							},
+							"name": "ColumnPropTxt",
+							"dataSource": "This:C1470.step_property_in_text",
+							"width": 140,
+							"minWidth": 72,
+							"footer": {
+								"name": "FooterPropTxt"
 							},
 							"resizable": true,
 							"enterable": false
@@ -342,8 +365,8 @@
 							"footer": {
 								"name": "FooterSpec"
 							},
-							"minWidth": 56,
-							"width": 88,
+							"minWidth": 80,
+							"width": 160,
 							"resizable": true,
 							"enterable": false
 						}
@@ -352,55 +375,217 @@
 				"rec_sf_editor": {
 					"type": "rectangle",
 					"top": 322,
-					"left": 728,
+					"left": 1151,
 					"width": 468,
-					"height": 480,
+					"height": 425,
 					"sizingX": "fixed",
 					"sizingY": "grow",
 					"fill": "#F0F4F8",
 					"stroke": "#D8E2EC"
 				},
+				"lb_sf_stepRules": {
+					"type": "listbox",
+					"top": 346,
+					"left": 1287,
+					"width": 324,
+					"height": 393,
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.sf_stepRulesLB",
+					"selectionMode": "single",
+					"scrollbarVertical": "visible",
+					"scrollbarHorizontal": "hidden",
+					"headerHeight": "22px",
+					"alternateFill": "#F7F9FC",
+					"borderStyle": "system",
+					"fill": "#FFFFFF",
+					"hideExtraBlankRows": true,
+					"focusable": true,
+					"enterable": false,
+					"method": "ObjectMethods/lb_sf_stepRules.4dm",
+					"events": [
+						"onClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"columns": [
+						{
+							"header": {
+								"name": "H_en",
+								"text": "On"
+							},
+							"name": "Col_enable",
+							"width": 44,
+							"dataSource": "This:C1470.enable",
+							"dataSourceTypeHint": "boolean",
+							"textAlign": "center",
+							"enterable": true,
+							"footer": {
+								"name": "F_en"
+							},
+							"minWidth": 36
+						},
+						{
+							"header": {
+								"name": "H_desc",
+								"text": "Description",
+								"fontWeight": "bold"
+							},
+							"name": "Col_desc",
+							"width": 380,
+							"dataSource": "This:C1470.description",
+							"enterable": false,
+							"footer": {
+								"name": "F_desc"
+							},
+							"minWidth": 120
+						}
+					]
+				},
+				"pup_process": {
+					"type": "button",
+					"top": 95,
+					"left": 102,
+					"width": 146,
+					"height": 26,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": " ",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_process.4dm",
+					"events": [
+						"onClick"
+					],
+					"textAlign": "center"
+				},
+				"btnMoveTop": {
+					"type": "button",
+					"text": " ",
+					"top": 322,
+					"left": 1099,
+					"width": 26,
+					"height": 26,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/arrow-top.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnMoveTop.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
+				},
+				"btnMoveUp": {
+					"type": "button",
+					"text": " ",
+					"top": 355,
+					"left": 1099,
+					"width": 26,
+					"height": 26,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/arrow-up.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnMoveUp.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
+				},
+				"btnMoveDown": {
+					"type": "button",
+					"text": " ",
+					"top": 388,
+					"left": 1099,
+					"width": 26,
+					"height": 26,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/arrow-down.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnMoveDown.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
+				},
+				"btnMoveBottom": {
+					"type": "button",
+					"text": " ",
+					"top": 421,
+					"left": 1099,
+					"width": 26,
+					"height": 26,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/arrow-bottom.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnMoveBottom.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
+				},
 				"sf_lbl_stepEditor": {
 					"type": "text",
 					"top": 328,
-					"left": 736,
+					"left": 1159,
 					"width": 440,
 					"height": 14,
 					"fontSize": 11,
 					"stroke": "#606060",
 					"text": "Selected step (edit on the right)"
 				},
-				"sf_lab_order": {
+				"sf_lab_stepRules": {
 					"type": "text",
-					"top": 358,
-					"left": 736,
+					"top": 352,
+					"left": 1159,
 					"width": 118,
 					"height": 14,
 					"fontSize": 11,
 					"stroke": "#606060",
 					"textAlign": "right",
-					"text": "Order"
+					"text": "Step rules"
 				},
-				"sf_inp_order": {
-					"type": "input",
-					"top": 354,
-					"left": 864,
+				"sf_pup_stepRules": {
+					"type": "button",
+					"top": 348,
+					"left": 1287,
 					"width": 324,
-					"height": 17,
-					"dataSource": "Form:C1466.step.order",
-					"dataSourceTypeHint": "integer",
-					"focusable": true,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": ["onDataChange"],
-					"fill": "#FFFFFF",
-					"borderStyle": "system"
+					"height": 23,
+					"focusable": false,
+					"text": "0/0",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/sf_pup_stepRules.4dm",
+					"events": [
+						"onClick"
+					]
 				},
 				"sf_lab_description": {
 					"type": "text",
-					"top": 386,
-					"left": 736,
+					"top": 464,
+					"left": 1159,
 					"width": 118,
 					"height": 14,
 					"fontSize": 11,
@@ -410,34 +595,38 @@
 				},
 				"sf_inp_description": {
 					"type": "input",
-					"top": 382,
-					"left": 864,
+					"top": 456,
+					"left": 1287,
 					"width": 324,
-					"height": 17,
+					"height": 54,
 					"dataSource": "Form:C1466.step.description",
+					"dataSourceTypeHint": "text",
+					"multiline": "yes",
 					"focusable": true,
 					"enterable": false,
 					"dragging": "none",
 					"dropping": "custom",
-					"events": ["onDataChange"],
+					"events": [
+						"onDataChange"
+					],
 					"fill": "#FFFFFF",
 					"borderStyle": "system"
 				},
 				"sf_lab_stepTemplate": {
 					"type": "text",
-					"top": 414,
-					"left": 736,
+					"top": 516,
+					"left": 1159,
 					"width": 118,
 					"height": 14,
 					"fontSize": 11,
 					"stroke": "#606060",
 					"textAlign": "right",
-					"text": "Step template"
+					"text": "Template definition"
 				},
 				"sf_pup_stepTemplate": {
 					"type": "button",
-					"top": 410,
-					"left": 864,
+					"top": 512,
+					"left": 1287,
 					"width": 324,
 					"height": 23,
 					"focusable": false,
@@ -446,12 +635,14 @@
 					"textPlacement": "right",
 					"style": "bevel",
 					"method": "ObjectMethods/sf_pup_stepTemplate.4dm",
-					"events": ["onClick"]
+					"events": [
+						"onClick"
+					]
 				},
 				"sf_lab_area": {
 					"type": "text",
-					"top": 442,
-					"left": 736,
+					"top": 539,
+					"left": 1159,
 					"width": 118,
 					"height": 14,
 					"fontSize": 11,
@@ -461,8 +652,8 @@
 				},
 				"sf_pup_area": {
 					"type": "button",
-					"top": 438,
-					"left": 864,
+					"top": 535,
+					"left": 1287,
 					"width": 324,
 					"height": 23,
 					"focusable": false,
@@ -471,12 +662,14 @@
 					"textPlacement": "right",
 					"style": "bevel",
 					"method": "ObjectMethods/sf_pup_area.4dm",
-					"events": ["onClick"]
+					"events": [
+						"onClick"
+					]
 				},
 				"sf_lab_specPick": {
 					"type": "text",
-					"top": 470,
-					"left": 736,
+					"top": 562,
+					"left": 1159,
 					"width": 118,
 					"height": 14,
 					"fontSize": 11,
@@ -486,8 +679,8 @@
 				},
 				"sf_pup_specification": {
 					"type": "button",
-					"top": 466,
-					"left": 864,
+					"top": 558,
+					"left": 1287,
 					"width": 324,
 					"height": 23,
 					"focusable": false,
@@ -496,12 +689,14 @@
 					"textPlacement": "right",
 					"style": "bevel",
 					"method": "ObjectMethods/sf_pup_specification.4dm",
-					"events": ["onClick"]
+					"events": [
+						"onClick"
+					]
 				},
 				"sf_lab_time": {
 					"type": "text",
-					"top": 498,
-					"left": 736,
+					"top": 587,
+					"left": 1159,
 					"width": 118,
 					"height": 14,
 					"fontSize": 11,
@@ -511,8 +706,8 @@
 				},
 				"sf_inp_time": {
 					"type": "input",
-					"top": 494,
-					"left": 864,
+					"top": 583,
+					"left": 1287,
 					"width": 324,
 					"height": 17,
 					"dataSource": "Form:C1466.step.time",
@@ -521,14 +716,16 @@
 					"enterable": false,
 					"dragging": "none",
 					"dropping": "custom",
-					"events": ["onDataChange"],
+					"events": [
+						"onDataChange"
+					],
 					"fill": "#FFFFFF",
 					"borderStyle": "system"
 				},
 				"sf_lab_yield": {
 					"type": "text",
-					"top": 526,
-					"left": 736,
+					"top": 608,
+					"left": 1159,
 					"width": 118,
 					"height": 14,
 					"fontSize": 11,
@@ -538,8 +735,8 @@
 				},
 				"sf_inp_yield": {
 					"type": "input",
-					"top": 522,
-					"left": 864,
+					"top": 604,
+					"left": 1287,
 					"width": 324,
 					"height": 17,
 					"dataSource": "Form:C1466.step.yield",
@@ -548,14 +745,16 @@
 					"enterable": false,
 					"dragging": "none",
 					"dropping": "custom",
-					"events": ["onDataChange"],
+					"events": [
+						"onDataChange"
+					],
 					"fill": "#FFFFFF",
 					"borderStyle": "system"
 				},
 				"sf_lab_tempC": {
 					"type": "text",
-					"top": 554,
-					"left": 736,
+					"top": 629,
+					"left": 1159,
 					"width": 118,
 					"height": 14,
 					"fontSize": 11,
@@ -565,8 +764,8 @@
 				},
 				"sf_inp_temp_c": {
 					"type": "input",
-					"top": 550,
-					"left": 864,
+					"top": 625,
+					"left": 1287,
 					"width": 324,
 					"height": 17,
 					"dataSource": "Form:C1466.step.temp_c",
@@ -575,41 +774,16 @@
 					"enterable": false,
 					"dragging": "none",
 					"dropping": "custom",
-					"events": ["onDataChange"],
-					"fill": "#FFFFFF",
-					"borderStyle": "system"
-				},
-				"sf_lab_tplRepeat": {
-					"type": "text",
-					"top": 582,
-					"left": 736,
-					"width": 118,
-					"height": 14,
-					"fontSize": 11,
-					"stroke": "#606060",
-					"textAlign": "right",
-					"text": "Template repeat"
-				},
-				"sf_inp_template_repeat": {
-					"type": "input",
-					"top": 578,
-					"left": 864,
-					"width": 324,
-					"height": 17,
-					"dataSource": "Form:C1466.step.template_repeat",
-					"dataSourceTypeHint": "integer",
-					"focusable": true,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": ["onDataChange"],
+					"events": [
+						"onDataChange"
+					],
 					"fill": "#FFFFFF",
 					"borderStyle": "system"
 				},
 				"sf_lab_planHrs": {
 					"type": "text",
-					"top": 610,
-					"left": 736,
+					"top": 650,
+					"left": 1159,
 					"width": 118,
 					"height": 14,
 					"fontSize": 11,
@@ -619,8 +793,8 @@
 				},
 				"sf_inp_planned_hours": {
 					"type": "input",
-					"top": 606,
-					"left": 864,
+					"top": 646,
+					"left": 1287,
 					"width": 324,
 					"height": 17,
 					"dataSource": "Form:C1466.step.planned_hours",
@@ -629,39 +803,16 @@
 					"enterable": false,
 					"dragging": "none",
 					"dropping": "custom",
-					"events": ["onDataChange"],
+					"events": [
+						"onDataChange"
+					],
 					"fill": "#FFFFFF",
 					"borderStyle": "system"
 				},
-				"sf_lab_stepProperty": {
-					"type": "text",
-					"top": 638,
-					"left": 736,
-					"width": 118,
-					"height": 14,
-					"fontSize": 11,
-					"stroke": "#606060",
-					"textAlign": "right",
-					"text": "Step property"
-				},
-				"sf_pup_stepProperty": {
-					"type": "button",
-					"top": 634,
-					"left": 864,
-					"width": 324,
-					"height": 23,
-					"focusable": false,
-					"text": "Step property",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/sf_pup_stepProperty.4dm",
-					"events": ["onClick"]
-				},
 				"sf_lab_alert": {
 					"type": "text",
-					"top": 666,
-					"left": 736,
+					"top": 675,
+					"left": 1159,
 					"width": 118,
 					"height": 14,
 					"fontSize": 11,
@@ -671,23 +822,27 @@
 				},
 				"sf_inp_alert": {
 					"type": "input",
-					"top": 662,
-					"left": 864,
+					"top": 667,
+					"left": 1287,
 					"width": 324,
-					"height": 17,
+					"height": 54,
 					"dataSource": "Form:C1466.step.alert",
+					"dataSourceTypeHint": "text",
+					"multiline": "yes",
 					"focusable": true,
 					"enterable": false,
 					"dragging": "none",
 					"dropping": "custom",
-					"events": ["onDataChange"],
+					"events": [
+						"onDataChange"
+					],
 					"fill": "#FFFFFF",
 					"borderStyle": "system"
 				},
 				"sf_lab_bom": {
 					"type": "text",
-					"top": 694,
-					"left": 736,
+					"top": 725,
+					"left": 1159,
 					"width": 118,
 					"height": 14,
 					"fontSize": 11,
@@ -697,8 +852,8 @@
 				},
 				"sf_inp_bom_for_step": {
 					"type": "input",
-					"top": 690,
-					"left": 864,
+					"top": 725,
+					"left": 1287,
 					"width": 324,
 					"height": 17,
 					"dataSource": "Form:C1466.step.bom_for_step",
@@ -706,59 +861,9 @@
 					"enterable": false,
 					"dragging": "none",
 					"dropping": "custom",
-					"events": ["onDataChange"],
-					"fill": "#FFFFFF",
-					"borderStyle": "system"
-				},
-				"sf_lab_propInText": {
-					"type": "text",
-					"top": 722,
-					"left": 736,
-					"width": 118,
-					"height": 14,
-					"fontSize": 11,
-					"stroke": "#606060",
-					"textAlign": "right",
-					"text": "Step property (text)"
-				},
-				"sf_inp_step_property_in_text": {
-					"type": "input",
-					"top": 718,
-					"left": 864,
-					"width": 324,
-					"height": 17,
-					"dataSource": "Form:C1466.step.step_property_in_text",
-					"focusable": true,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": ["onDataChange"],
-					"fill": "#FFFFFF",
-					"borderStyle": "system"
-				},
-				"sf_lab_specText": {
-					"type": "text",
-					"top": 750,
-					"left": 736,
-					"width": 118,
-					"height": 14,
-					"fontSize": 11,
-					"stroke": "#606060",
-					"textAlign": "right",
-					"text": "Specification text"
-				},
-				"sf_inp_specification": {
-					"type": "input",
-					"top": 746,
-					"left": 864,
-					"width": 324,
-					"height": 17,
-					"dataSource": "Form:C1466.step.specification",
-					"focusable": true,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": ["onDataChange"],
+					"events": [
+						"onDataChange"
+					],
 					"fill": "#FFFFFF",
 					"borderStyle": "system"
 				},
@@ -784,22 +889,6 @@
 					"fontWeight": "bold",
 					"right": 97
 				},
-				"bAction_delete": {
-					"type": "button",
-					"text": "Actions",
-					"top": 466,
-					"left": 5,
-					"width": 78,
-					"height": 23,
-					"events": [
-						"onClick"
-					],
-					"style": "custom",
-					"popupPlacement": "linked",
-					"icon": "/RESOURCES/sfw/image/picto/gear.png",
-					"textPlacement": "right",
-					"method": "ObjectMethods/bAction_delete.4dm"
-				},
 				"lb_steps": {
 					"type": "listbox",
 					"left": 102,
@@ -807,8 +896,7 @@
 					"width": 1044,
 					"height": 185,
 					"events": [
-						"onDoubleClick",
-						"onDataChange"
+						"onDoubleClick"
 					],
 					"headerHeight": "24px",
 					"listboxType": "collection",
@@ -817,8 +905,8 @@
 					"alternateFill": "#F7F9FC",
 					"method": "ObjectMethods/lb_steps.4dm",
 					"selectionMode": "single",
-					"dragging": "custom",
-					"dropping": "custom",
+					"dragging": "none",
+					"dropping": "none",
 					"currentItemSource": "Form:C1466.selectedStep",
 					"currentItemPositionSource": "Form:C1466.selectedStepPos",
 					"metaSource": "",
@@ -830,28 +918,13 @@
 					"fill": "#FFFFFF",
 					"focusable": true,
 					"horizontalLineStroke": "transparent",
-					"sizingY": "grow",
+					"sizingY": "fixed",
+					"singleClickEdit": false,
 					"columns": [
 						{
 							"header": {
-								"name": "Header15",
-								"text": "Operation",
-								"fontWeight": "bold"
-							},
-							"name": "Column15",
-							"footer": {
-								"name": "Footer15"
-							},
-							"dataSource": "This:C1470.stepProcess.name",
-							"width": 112,
-							"enterable": false,
-							"minWidth": 90,
-							"resizable": false
-						},
-						{
-							"header": {
 								"name": "Header16",
-								"text": "Published Step",
+								"text": "Description",
 								"fontWeight": "bold"
 							},
 							"name": "Column16",
@@ -859,7 +932,7 @@
 								"name": "Footer16"
 							},
 							"dataSource": "This:C1470.description",
-							"width": 500,
+							"width": 300,
 							"enterable": false,
 							"minWidth": 200,
 							"resizable": true
@@ -867,12 +940,12 @@
 						{
 							"header": {
 								"name": "Header17",
-								"text": "Popup Step Alert"
+								"text": "Alert"
 							},
 							"name": "Column17",
 							"dataSource": "This:C1470.alert",
 							"minWidth": 50,
-							"width": 100,
+							"width": 300,
 							"footer": {
 								"name": "Footer17"
 							},
@@ -883,68 +956,54 @@
 						},
 						{
 							"header": {
-								"name": "Header18",
-								"text": "Type"
+								"name": "Header1",
+								"text": "Area"
 							},
-							"name": "Column18",
-							"dataSource": "This:C1470.moreData.Template",
-							"minWidth": 50,
-							"width": 50,
+							"name": "Column1",
 							"footer": {
-								"name": "Footer18"
+								"name": "Footer1"
 							},
-							"textAlign": "center",
-							"resizable": false
+							"dataSource": "This:C1470.stepArea.name"
 						},
 						{
 							"header": {
-								"name": "Header19",
-								"text": "Area",
-								"dataSource": ""
+								"name": "Header2",
+								"text": "Template"
 							},
-							"name": "Column19",
-							"dataSource": "This:C1470.area",
-							"minWidth": 50,
-							"width": 92,
+							"name": "Column2",
 							"footer": {
-								"name": "Footer19"
+								"name": "Footer2"
 							},
-							"resizable": false
-						},
-						{
-							"header": {
-								"name": "Header20",
-								"text": "Property"
-							},
-							"name": "Column20",
-							"dataSource": "This:C1470.moreData.StepProperty",
-							"width": 100,
-							"minWidth": 50,
-							"footer": {
-								"name": "Footer20"
-							},
-							"resizable": false
-						},
-						{
-							"header": {
-								"name": "Header21",
-								"text": "Specification"
-							},
-							"name": "Column21",
-							"dataSource": "This:C1470.moreData.ControlSpec",
-							"footer": {
-								"name": "Footer21"
-							},
-							"minWidth": 50,
-							"resizable": false
+							"dataSource": "This:C1470.stepTemplate.templateNumber"
 						}
 					]
+				},
+				"btnDeleteRow": {
+					"type": "button",
+					"text": " ",
+					"top": 495,
+					"left": 1099,
+					"width": 26,
+					"height": 26,
+					"events": [
+						"onClick",
+						"onMouseEnter",
+						"onMouseLeave"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/delete-row.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btnDeleteRow.4dm",
+					"visibility": "visible",
+					"iconFrames": 4,
+					"focusable": false
 				}
 			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_2lines",
-	"geometryStamp": 207,
+	"geometryStamp": 424,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

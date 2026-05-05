@@ -74,6 +74,7 @@ Function redrawAndSetVisible()
 			OBJECT GET COORDINATES:C663(*; "btnMoveUp"; $left_mu; $top_mu; $right_mu; $bottom_mu)
 			OBJECT GET COORDINATES:C663(*; "btnMoveDown"; $left_md; $top_md; $right_md; $bottom_md)
 			OBJECT GET COORDINATES:C663(*; "btnMoveBottom"; $left_mb; $top_mb; $right_mb; $bottom_mb)
+			OBJECT GET COORDINATES:C663(*; "btnDeleteRow"; $left_dr; $top_dr; $right_dr; $bottom_dr)
 			
 			$offset:=4
 			$offset_r:=60
@@ -89,6 +90,7 @@ Function redrawAndSetVisible()
 			$width_mu:=$right_mu-$left_mu
 			$width_md:=$right_md-$left_md
 			$width_mb:=$right_mb-$left_mb
+			$width_dr:=$right_dr-$left_dr
 			
 			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_"+String:C10(FORM Get current page:C276(*)); $left; $top; $right; $heightSubform-$offset)
 			OBJECT SET COORDINATES:C1248(*; "lb_steps"; $left_lb; $top_lb; $widthSubform-$offset_r; $heightSubform-$offset-1)
@@ -98,6 +100,7 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "btnMoveUp"; $widthSubform-$offset_btns_r-$width_mu; $top_mu; $widthSubform-$offset_btns_r; $bottom_mu)
 			OBJECT SET COORDINATES:C1248(*; "btnMoveDown"; $widthSubform-$offset_btns_r-$width_md; $top_md; $widthSubform-$offset_btns_r; $bottom_md)
 			OBJECT SET COORDINATES:C1248(*; "btnMoveBottom"; $widthSubform-$offset_btns_r-$width_mb; $top_mb; $widthSubform-$offset_btns_r; $bottom_mb)
+			OBJECT SET COORDINATES:C1248(*; "btnDeleteRow"; $widthSubform-$offset_btns_r-$width_dr; $top_dr; $widthSubform-$offset_btns_r; $bottom_dr)
 			
 		: (FORM Get current page:C276(*)=3)  // Customer Provided Material
 			OBJECT GET COORDINATES:C663(*; "rec_bkgd_"+String:C10(FORM Get current page:C276(*)); $left; $top; $right; $bottom)

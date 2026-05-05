@@ -1141,6 +1141,10 @@ Function _buildMenuAction($refMenus : Collection)->$refMenu : Text
 					If (Form:C1466.current_lb_item_selected.length<2)
 						DISABLE MENU ITEM:C150($refMenu; -1)
 					End if 
+				: ($action.scope="oneOrMoreListItemsSelected")
+					If ((Form:C1466.current_lb_item_selected=Null:C1517) || (Form:C1466.current_lb_item_selected.length<1))
+						DISABLE MENU ITEM:C150($refMenu; -1)
+					End if 
 			End case 
 			Case of 
 				: ($action.preconfigAction="textToolCapitalize") || ($action.preconfigAction="textToolUppercase")

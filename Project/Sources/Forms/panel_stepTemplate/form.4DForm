@@ -641,13 +641,27 @@
 					],
 					"scrollbarVertical": "visible",
 					"scrollbarHorizontal": "hidden",
-					"showHeaders": false,
+					"showHeaders": true,
 					"listboxType": "collection",
 					"alternateFill": "#F7F9FC",
 					"dataSource": "Form:C1466.lb_dataTables",
 					"selectionMode": "single",
 					"currentItemSource": "Form:C1466.currentDataTable",
+					"method": "ObjectMethods/List Box4.4dm",
 					"columns": [
+						{
+							"header": {
+								"text": "Order",
+								"name": "Header_dataTableOrder"
+							},
+							"name": "Column_dataTableOrder",
+							"footer": {
+								"name": "Footer_dataTableOrder"
+							},
+							"width": 56,
+							"enterable": false,
+							"dataSource": "This:C1470.order"
+						},
 						{
 							"header": {
 								"text": "Name",
@@ -657,8 +671,9 @@
 							"footer": {
 								"name": "Footer4"
 							},
-							"width": 426,
-							"dataSource": "This:C1470.key"
+							"width": 370,
+							"enterable": true,
+							"dataSource": "This:C1470.name"
 						}
 					]
 				},
@@ -1393,7 +1408,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1991,
+	"geometryStamp": 1992,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

@@ -248,7 +248,7 @@ For each ($record; $records)
 	
 	$step.description:=$record.Description
 	$step.alert:=$record.Step_Alert
-	$step.specification:=$record.StepProperty
+	$step.UUID_Specification:=16*"00"
 	$step.areas:=$record.Area
 	$step.moreData:=New object:C1471()
 	$step.moreData.Process:=$record.Process

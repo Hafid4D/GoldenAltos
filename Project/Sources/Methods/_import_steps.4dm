@@ -26,7 +26,6 @@ var $propertyBit : Text
 var $propertyBitMask : Integer
 var $stepSpecDataClass : 4D:C1709.DataClass
 var $specificationEntity : 4D:C1709.Entity
-var $stepSpecEntity : 4D:C1709.Entity
 var $controlSpecKey : Text
 
 $stepDataClass:=ds:C1482["Step"]
@@ -75,9 +74,21 @@ Else
 			
 			$stepEntity.description:=$record.Description
 			$stepEntity.alert:=$record.Step_Alert
-			$stepEntity.specification:=$record.ControlSpec
+			$controlSpecKey:=String:C10($record.ControlSpec)
+			$specificationEntity:=Null:C1517
+			If ($controlSpecKey#"")
+				$specificationEntity:=ds:C1482.Specification.query("spec = :1"; $controlSpecKey).first()
+			End if 
+			$stepEntity.UUID_Specification:=16*"00"
+			If ($specificationEntity#Null:C1517)
+				$stepEntity.UUID_Specification:=$specificationEntity.UUID
+				$stepEntity.specification:=$specificationEntity
+			End if 
 			$stepEntity.areas:=$areaName
 			$stepEntity.moreData:=New object:C1471()
+			If (($controlSpecKey#"") & ($specificationEntity=Null:C1517))
+				$stepEntity.moreData.controlSpecText:=$controlSpecKey
+			End if 
 			
 			$processName:=$record.Process
 			$stepEntity.moreData.Process:=$processName
@@ -152,20 +163,6 @@ Else
 			$result:=$stepEntity.save()
 			If ($result.success)
 				$created:=$created+1
-				
-				$controlSpecKey:=$record.ControlSpec
-				If ($controlSpecKey#"")
-					$specificationEntity:=ds:C1482.Specification.query("spec = :1"; $controlSpecKey).first()
-					If ($specificationEntity#Null:C1517)
-						$stepSpecEntity:=$stepSpecDataClass.new()
-						$stepSpecEntity.UUID_Step:=$stepEntity.UUID
-						$stepSpecEntity.UUID_Specification:=$specificationEntity.UUID
-						$result:=$stepSpecEntity.save()
-						If (Not:C34($result.success))
-							TRACE:C157
-						End if 
-					End if 
-				End if 
 			Else 
 				$failed:=$failed+1
 			End if 

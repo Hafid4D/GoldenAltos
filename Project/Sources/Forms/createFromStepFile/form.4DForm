@@ -77,16 +77,6 @@
 		},
 		{
 			"objects": {
-				"header_bkgd9": {
-					"type": "rectangle",
-					"top": 143,
-					"left": 450,
-					"width": 32,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
 				"header_bkgd2": {
 					"type": "rectangle",
 					"top": 79,
@@ -165,35 +155,6 @@
 					"textAlign": "right",
 					"fontWeight": "bold"
 				},
-				"header_bkgd13": {
-					"type": "rectangle",
-					"top": 143,
-					"left": 0,
-					"width": 140,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Text16": {
-					"type": "text",
-					"text": "Status",
-					"top": 149,
-					"left": 7,
-					"width": 102,
-					"height": 15,
-					"fontWeight": "bold"
-				},
-				"Text7": {
-					"type": "text",
-					"text": ":",
-					"top": 150,
-					"left": 114,
-					"width": 22,
-					"height": 15,
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
 				"header_bkgd5": {
 					"type": "rectangle",
 					"top": 111,
@@ -224,26 +185,6 @@
 					"fill": "transparent",
 					"dataSource": "Form:C1466.stepFile.creationDate",
 					"enterable": false
-				},
-				"header_bkgd8": {
-					"type": "rectangle",
-					"top": 143,
-					"left": 144,
-					"width": 306,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#FFFFFF",
-					"stroke": "transparent"
-				},
-				"Input2": {
-					"type": "input",
-					"left": 151,
-					"top": 148,
-					"width": 293,
-					"height": 32,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.stepFile.status"
 				},
 				"Button": {
 					"type": "button",

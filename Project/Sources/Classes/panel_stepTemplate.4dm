@@ -106,6 +106,12 @@ Function redrawAndSetVisible()
 	
 	This:C1470.drawBinInlineEditor()
 	
+	If (FORM Get current page:C276(*)=1)
+		OBJECT SET ENTERABLE:C238(*; "List Box4"; Form:C1466.sfw.checkIsInModification())
+	Else 
+		OBJECT SET ENTERABLE:C238(*; "List Box4"; False:C215)
+	End if 
+	
 	If (FORM Get current page:C276(*)=3)
 		OBJECT SET ENTERABLE:C238(*; "lb_stepRules"; Form:C1466.sfw.checkIsInModification())
 	Else 
@@ -233,14 +239,14 @@ Function bActionDataTables()
 	
 	$refMenu:=Create menu:C408
 	
-	APPEND MENU ITEM:C411($refMenu; "Add a Data Table")
+	APPEND MENU ITEM:C411($refMenu; "Add a column")
 	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--add")
 	SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/image/button/add.png")
 	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
 		DISABLE MENU ITEM:C150($refMenu; -1)
 	End if 
 	
-	APPEND MENU ITEM:C411($refMenu; "Remove a Data Table")
+	APPEND MENU ITEM:C411($refMenu; "Remove a column")
 	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--delete")
 	SET MENU ITEM ICON:C984($refMenu; -1; "Path:/RESOURCES/image/button/delete.png")
 	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
@@ -255,20 +261,50 @@ Function bActionDataTables()
 	
 	Case of 
 		: ($choose="--add")
-			$dataTable:=Request:C163("Enter a Data Table :")
+			$name:=Request:C163("Column name:")
 			
-			If (ok=1)
-				If (Form:C1466.current_item.dataTables=Null:C1517)
-					Form:C1466.current_item.dataTables:=New object:C1471("items"; New collection:C1472())
+			If (OK=1)
+				$name:=cs:C1710.sfw_string.me.trimSpace($name)
+				If ($name#"")
+					If (Form:C1466.current_item.dataTables=Null:C1517)
+						Form:C1466.current_item.dataTables:=New object:C1471("items"; New collection:C1472())
+					End if 
+					If (Form:C1466.current_item.dataTables.items=Null:C1517)
+						Form:C1466.current_item.dataTables.items:=New collection:C1472()
+					End if 
+					
+					$maxOrder:=0
+					For each ($col; Form:C1466.current_item.dataTables.items)
+						If (Num:C11($col.order)>$maxOrder)
+							$maxOrder:=Num:C11($col.order)
+						End if 
+					End for each 
+					
+					Form:C1466.current_item.dataTables.items.push(New object:C1471(\
+						"UUID"; Generate UUID:C1066; \
+						"name"; $name; \
+						"order"; $maxOrder+1; \
+						"key"; $name; \
+						"value"; ""\
+						))
+					
+					This:C1470.loadDataTables()
+					This:C1470._activate_save_cancel_button()
 				End if 
-				
-				Form:C1466.current_item.dataTables.items.push(New object:C1471("UUID"; Generate UUID:C1066; "key"; $dataTable; "value"; ""))
-				
+			End if 
+		: ($choose="--delete")
+			If (Form:C1466.currentDataTable#Null:C1517)
+				Form:C1466.current_item.dataTables.items:=Form:C1466.current_item.dataTables.items.filter(Formula:C1597($1.value.UUID#Form:C1466.currentDataTable.UUID))
+				$sorted:=Form:C1466.current_item.dataTables.items.orderBy("order asc")
+				$k:=1
+				For each ($col; $sorted)
+					$col.order:=$k
+					$k:=$k+1
+				End for each 
+				Form:C1466.current_item.dataTables.items:=$sorted
 				This:C1470.loadDataTables()
 				This:C1470._activate_save_cancel_button()
 			End if 
-		: ($choose="--delete")
-			ALERT:C41("Remove a Data Table")
 	End case 
 	
 	
@@ -424,8 +460,38 @@ Function loadDataTables
 	If (Form:C1466.current_item.dataTables=Null:C1517)
 		Form:C1466.current_item.dataTables:=New object:C1471("items"; New collection:C1472())
 	End if 
+	If (Form:C1466.current_item.dataTables.items=Null:C1517)
+		Form:C1466.current_item.dataTables.items:=New collection:C1472()
+	End if 
 	
-	Form:C1466.lb_dataTables:=Form:C1466.current_item.dataTables.items
+	For each ($col; Form:C1466.current_item.dataTables.items)
+		If ($col.UUID=Null:C1517) | (String:C10($col.UUID)="")
+			$col.UUID:=Generate UUID:C1066
+		End if 
+		$colName:=String:C10($col.name)
+		If ($colName="")
+			$colName:=String:C10($col.key)
+		End if 
+		$col.name:=$colName
+		$col.key:=$colName
+	End for each 
+	$maxOrder:=0
+	For each ($col; Form:C1466.current_item.dataTables.items)
+		If (Not:C34(Undefined:C82($col.order))) & ($col.order#Null:C1517)
+			If (Num:C11($col.order)>$maxOrder)
+				$maxOrder:=Num:C11($col.order)
+			End if 
+		End if 
+	End for each 
+	$nextOrder:=$maxOrder+1
+	For each ($col; Form:C1466.current_item.dataTables.items)
+		If (Undefined:C82($col.order)) | ($col.order=Null:C1517)
+			$col.order:=$nextOrder
+			$nextOrder:=$nextOrder+1
+		End if 
+	End for each 
+	
+	Form:C1466.lb_dataTables:=Form:C1466.current_item.dataTables.items.orderBy("order asc").copy()
 	
 	
 Function loadPMs

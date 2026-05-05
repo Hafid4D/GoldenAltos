@@ -73,30 +73,36 @@ Function drawPup_stepTemplate()
 		$stepTemplateName:=Form:C1466.current_item.stepTemplate.name
 		Form:C1466.sfw.drawButtonPup("pup_stepTemplate"; $stepTemplateName; ""; (Form:C1466.current_item.stepTemplate=Null:C1517))
 	End if 
-
+	
 Function drawPup_specification()
-	var $stepSpec : 4D:C1709.Entity
 	var $specEnt : 4D:C1709.Entity
 	var $label : Text
+	var $emptyLink : Boolean
 	
 	If ((Form:C1466.current_item#Null:C1517) & (FORM Get current page:C276(*)=1))
 		$label:=""
-		$stepSpec:=ds:C1482.StepSpec.query("UUID_Step = :1"; Form:C1466.current_item.UUID).first()
-		If ($stepSpec#Null:C1517)
-			$specEnt:=$stepSpec.specification
+		If (cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_Specification)=False:C215)
+			$specEnt:=ds:C1482.Specification.query("UUID = :1"; Form:C1466.current_item.UUID_Specification).first()
 			If ($specEnt#Null:C1517)
 				$label:=$specEnt.spec
 			End if 
 		End if 
 		If ($label="")
-			$label:=Form:C1466.current_item.specification
+			If (Form:C1466.current_item.specification#Null:C1517)
+				$label:=String:C10(Form:C1466.current_item.specification.spec)
+			Else 
+				If ((Form:C1466.current_item.moreData#Null:C1517) & (Not:C34(Undefined:C82(Form:C1466.current_item.moreData.controlSpecText))))
+					$label:=String:C10(Form:C1466.current_item.moreData.controlSpecText)
+				End if 
+			End if 
 		End if 
 		If ($label="")
 			$label:="—"
 		End if 
-		Form:C1466.sfw.drawButtonPup("pup_specification"; $label; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; False:C215)
+		$emptyLink:=((cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_Specification)=True:C214) & ($label="—"))
+		Form:C1466.sfw.drawButtonPup("pup_specification"; $label; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; $emptyLink)
 	End if 
-
+	
 Function drawPup_process()
 	If ((Form:C1466.current_item#Null:C1517) & (FORM Get current page:C276(*)=1))
 		$processName:=""
@@ -117,7 +123,7 @@ Function drawPup_process()
 		End if 
 		Form:C1466.sfw.drawButtonPup("pup_process"; $processName; ""; ($processName=""))
 	End if 
-
+	
 Function pup_process()
 	If (Form:C1466.sfw.checkIsInModification())
 		$selector:=cs:C1710.sfw_definitionSelector.new("selectorOperationProcess"; "operationProcess")
@@ -160,8 +166,6 @@ Function pup_specification()
 	var $form : Object
 	var $allSpecs : 4D:C1709.EntitySelection
 	var $specEntity : 4D:C1709.Entity
-	var $stepSpec : 4D:C1709.Entity
-	var $res : Object
 	var $winRef : Integer
 	
 	If (Form:C1466.sfw.checkIsInModification())
@@ -182,14 +186,8 @@ Function pup_specification()
 		
 		If ((ok=1) & ($form.item#Null:C1517))
 			$specEntity:=$form.item
-			$stepSpec:=ds:C1482.StepSpec.query("UUID_Step = :1"; Form:C1466.current_item.UUID).first()
-			If ($stepSpec=Null:C1517)
-				$stepSpec:=ds:C1482.StepSpec.new()
-				$stepSpec.UUID_Step:=Form:C1466.current_item.UUID
-			End if 
-			$stepSpec.UUID_Specification:=$specEntity.UUID
-			$res:=$stepSpec.save()
-			Form:C1466.current_item.specification:=$specEntity.spec
+			Form:C1466.current_item.UUID_Specification:=$specEntity.UUID
+			//Form.current_item.specification:=$specEntity
 		End if 
 	End if 
 	

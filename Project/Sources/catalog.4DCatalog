@@ -90,6 +90,7 @@
 		<field name="serialization" uuid="C025334374AD4EE3817470B44450C598" type="21" blob_switch_size="2147483647" never_null="true" id="40"/>
 		<field name="properties" uuid="9C1165AA49804B62B8DA4E3CC31D10A6" type="21" blob_switch_size="2147483647" never_null="true" id="41"/>
 		<field name="moreData" uuid="792F9726D802684281D40DE2FA022E6C" type="21" blob_switch_size="2147483647" never_null="true" id="42"/>
+		<field name="yield" uuid="686E1A644133489FB2D41645CEDE8470" type="6" never_null="true" id="43"/>
 		<primary_key field_name="UUID" field_uuid="EE9C517A8C59724B8559A5DCB59FE560"/>
 	</table>
 	<table name="Tool" uuid="0FF66E5E37EDD74B8E6E39F15644C85F" id="6">
@@ -1764,6 +1765,7 @@
 		<field name="moreData" uuid="DC5D71A96D03344CBABBEABD99B742F4" type="21" blob_switch_size="2147483647" never_null="true" id="46"/>
 		<field name="number" uuid="43A4477F9162418A9CF61163B90EDC83" type="4" unique="true" autosequence="true" never_null="true" id="47"/>
 		<field name="customerCount" uuid="8FFE6C6883E64517A64D840FA3DF4DCB" type="3" never_null="true" id="48"/>
+		<field name="step" uuid="2AFFA43490E54ED9ADE6C202ED122F82" type="21" blob_switch_size="2147483647" never_null="true" id="49"/>
 		<primary_key field_name="UUID" field_uuid="AEF78036FB7D429A96DF35BE53A0E0AF"/>
 	</table>
 	<table name="StepFile" uuid="A6301A2C994D4680A851FC2AE85118BE" id="119">
@@ -1790,6 +1792,7 @@
 		<field name="stepProperties" uuid="BBB947E5FFD3494F974EB483FA9D7AD6" type="21" blob_switch_size="2147483647" never_null="true" id="9"/>
 		<field name="UUID_StepArea" uuid="5E94CC82CBF7431DBDC364DE8A23CAAB" type="10" store_as_UUID="true" never_null="true" id="10"/>
 		<field name="UUID_StepProcess" uuid="C913DCA6B38145A980093ADBA028142C" type="10" store_as_UUID="true" never_null="true" id="11"/>
+		<field name="UUID_Specification" uuid="80F32240FB2B4D21B6C3781C582AAEBE" type="10" store_as_UUID="true" never_null="true" id="12"/>
 		<primary_key field_name="UUID" field_uuid="3C357DD66006453994A5995B3E57D007"/>
 	</table>
 	<table name="StepTemplate" uuid="6330FD4D08D74130BF3869222CDECBA6" id="121">
@@ -4017,6 +4020,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="C99C026C3B1145B3A14053FD9FD5D9DA" name_Nto1="specification" name_1toN="steps" state="1">
+		<related_field kind="source">
+			<field_ref uuid="80F32240FB2B4D21B6C3781C582AAEBE" name="UUID_Specification">
+				<table_ref uuid="73EFE2D78C61400397353509CBA87D18" name="Step"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="2A671DFB01797B4DBB6EC2EB4216DB75" name="UUID">
+				<table_ref uuid="B187BEFD3CC6B147886F91E311E96B3A" name="Specification"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" uuid="005E48A922A4464DB92973931B467ACF" type="3">
 		<field_ref uuid="17F71D68FA714CE9A75ED79CA63E3BE2" name="UUID_Lead">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
@@ -4220,6 +4235,11 @@
 	<index kind="regular" unique_keys="true" uuid="1E065A3FABAA4F9C834D3066ABDCF8E4" type="1">
 		<field_ref uuid="C3D4E0743AF343B1820D56205B8EA6D7" name="login">
 			<table_ref uuid="2C75E07E18FC4733A8C98A0B31D40656" name="sfw_User"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="1E2A67801F6E4E79963899D852603B3A" type="3">
+		<field_ref uuid="80F32240FB2B4D21B6C3781C582AAEBE" name="UUID_Specification">
+			<table_ref uuid="73EFE2D78C61400397353509CBA87D18" name="Step"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="1FEAD11AEFB24168AD1B785362ACF144" type="1">

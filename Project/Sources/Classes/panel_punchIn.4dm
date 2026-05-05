@@ -192,8 +192,34 @@ Function loadStepInterruptions()
 	
 	
 Function loadDataTables()
-	If (Form:C1466.currentStep#Null:C1517) && (Form:C1466.currentStep.dataTables#Null:C1517)
-		Form:C1466.lb_dataTables:=Form:C1466.currentStep.dataTables.items
+	If (Form:C1466.currentStep#Null:C1517) && (Form:C1466.currentStep.dataTables#Null:C1517) && (Form:C1466.currentStep.dataTables.items#Null:C1517)
+		For each ($col; Form:C1466.currentStep.dataTables.items)
+			If ($col.UUID=Null:C1517) | (String:C10($col.UUID)="")
+				$col.UUID:=Generate UUID:C1066
+			End if 
+			$colName:=String:C10($col.name)
+			If ($colName="")
+				$colName:=String:C10($col.key)
+			End if 
+			$col.name:=$colName
+			$col.key:=$colName
+		End for each 
+		$maxOrder:=0
+		For each ($col; Form:C1466.currentStep.dataTables.items)
+			If (Not:C34(Undefined:C82($col.order))) & ($col.order#Null:C1517)
+				If (Num:C11($col.order)>$maxOrder)
+					$maxOrder:=Num:C11($col.order)
+				End if 
+			End if 
+		End for each 
+		$nextOrder:=$maxOrder+1
+		For each ($col; Form:C1466.currentStep.dataTables.items)
+			If (Undefined:C82($col.order)) | ($col.order=Null:C1517)
+				$col.order:=$nextOrder
+				$nextOrder:=$nextOrder+1
+			End if 
+		End for each 
+		Form:C1466.lb_dataTables:=Form:C1466.currentStep.dataTables.items.orderBy("order asc").copy()
 	Else 
 		Form:C1466.lb_dataTables:=New collection:C1472()
 	End if 
@@ -339,7 +365,11 @@ Function bActionDataTables()
 		
 		Case of 
 			: ($choose="--add")
-				$value:=Request:C163("Add a Data Table value to "+Form:C1466.currentDataTable.key+" :")
+				$dtLabel:=String:C10(Form:C1466.currentDataTable.name)
+				If ($dtLabel="")
+					$dtLabel:=String:C10(Form:C1466.currentDataTable.key)
+				End if 
+				$value:=Request:C163("Add a Data Table value to "+$dtLabel+" :")
 				
 				If (ok=1)
 					Form:C1466.currentDataTable.value:=$value

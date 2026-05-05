@@ -169,9 +169,17 @@ Else
 					End if 
 				End for each 
 			End if 
+			$tableOrder:=1
 			For each ($header; $tableHeaders)
 				If ($header#"")
-					$stepTemplateEntity.dataTables.items.push(New object:C1471("UUID"; Generate UUID:C1066; "key"; $header; "value"; ""))
+					$stepTemplateEntity.dataTables.items.push(New object:C1471(\
+						"UUID"; Generate UUID:C1066; \
+						"name"; $header; \
+						"order"; $tableOrder; \
+						"key"; $header; \
+						"value"; ""\
+						))
+					$tableOrder:=$tableOrder+1
 				End if 
 			End for each 
 			

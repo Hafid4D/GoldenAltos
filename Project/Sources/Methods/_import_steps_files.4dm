@@ -21,6 +21,7 @@ var $updated : Integer
 var $failed : Integer
 var $v : Variant
 var $abortCustomer : Boolean
+var $specificationEntity : 4D:C1709.Entity
 
 $projectFolder:=Folder:C1567(fk database folder:K87:14)
 $importsFolder:=$projectFolder.folder("project/imports")
@@ -65,6 +66,7 @@ Else
 			
 			$stepFile.name:=String:C10($record.Name)
 			$stepFile.UUID_Customer:=$customer.UUID
+			$stepFile.status:=True:C214
 			
 			If (Undefined:C82($record.Date_made)=False:C215)
 				$stepFile.creationDate:=$record.Date_made
@@ -190,7 +192,8 @@ Else
 						$v:=$arrays.a_tstype[$i-1]
 					End if 
 				End if 
-				$row.step_template:=Num:C11($v)
+				$stepTemplateNumber:=Num:C11($v)
+				$row.UUID_Step:=16*"00"
 				
 				$v:=Null:C1517
 				If ($arrays.a_tsalert#Null:C1517)
@@ -271,6 +274,53 @@ Else
 					End if 
 				End if 
 				$row.specification:=String:C10($v)
+				$row.UUID_Specification:=16*"00"
+				If ($row.specification#"")
+					$specificationEntity:=ds:C1482.Specification.query("spec = :1"; $row.specification).first()
+					If ($specificationEntity#Null:C1517)
+						$row.UUID_Specification:=$specificationEntity.UUID
+					End if 
+				End if 
+				
+				If ($stepTemplateNumber#0)
+					$stepTemplateEs:=ds:C1482.StepTemplate.query("templateNumber = :1"; $stepTemplateNumber)
+					If ($stepTemplateEs.length>0)
+						$row.step_property_rules:=cs:C1710.panel_stepFile.me.newStepPropertyRulesObjectFromTemplate($stepTemplateEs[0])
+					Else 
+						$row.step_property_rules:=New object:C1471("items"; New collection:C1472())
+					End if 
+				Else 
+					$row.step_property_rules:=New object:C1471("items"; New collection:C1472())
+				End if 
+				
+				// Create one Step record per imported row, then keep its UUID on the definition row.
+				$stepEntity:=ds:C1482.Step.new()
+				$stepEntity.description:=$row.description
+				$stepEntity.alert:=$row.alert
+				$stepEntity.areas:=$row.area
+				$stepEntity.UUID_StepTemplate:=16*"00"
+				If ($stepTemplateNumber#0)
+					$stepTemplateEs:=ds:C1482.StepTemplate.query("templateNumber = :1"; $stepTemplateNumber)
+					If ($stepTemplateEs.length>0)
+						$stepEntity.UUID_StepTemplate:=$stepTemplateEs[0].UUID
+					End if 
+				End if 
+				$stepEntity.UUID_StepArea:=16*"00"
+				If ($row.area#"")
+					$stepAreaEs:=ds:C1482.StepArea.query("name = :1"; $row.area)
+					If ($stepAreaEs.length>0)
+						$stepEntity.UUID_StepArea:=$stepAreaEs[0].UUID
+					End if 
+				End if 
+				$stepEntity.UUID_StepProcess:=16*"00"
+				$stepEntity.UUID_Specification:=$row.UUID_Specification
+				$stepEntity.stepProperties:=New object:C1471("items"; New collection:C1472())
+				$stepEntity.moreData:=New object:C1471()
+				
+				$stepRes:=$stepEntity.save()
+				If ($stepRes.success)
+					$row.UUID_Step:=$stepEntity.UUID
+				End if 
 				
 				$items.push($row)
 				

@@ -113,8 +113,8 @@
 								"name": "Footer1"
 							},
 							"dataSource": "This:C1470.description",
-							"width": 320,
-							"minWidth": 140
+							"width": 500,
+							"minWidth": 500
 						},
 						{
 							"header": {
@@ -126,7 +126,7 @@
 								"name": "Footer2"
 							},
 							"dataSource": "This:C1470.stepTemplate.name",
-							"width": 320,
+							"width": 1000,
 							"minWidth": 200
 						}
 					]

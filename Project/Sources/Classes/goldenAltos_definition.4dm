@@ -332,6 +332,26 @@ Function _entries_definition()
 	
 	This:C1470._push_entry($entry)
 	
+	$entry:=cs:C1710.sfw_definitionEntry.new("planning"; ["customerService"]; "Planning")
+	$entry.setDataclass("Lot")
+	$entry.setDisplayOrder(-390)
+	$entry.setIcon("image/entry/receiver-50x50.png")
+	
+	$entry.setSearchboxField("lotNumber")
+	
+	$entry.setPanel("panel_planning")
+	$entry.setPanelPage(1; ""; "Main")
+	$entry.setPanelPage(2; ""; "Step")
+	
+	$entry.setLBItemsColumn("job.customer.name"; "Customer"; "width:220")
+	$entry.setLBItemsColumn("job.jobNumber"; "Job #"; "width:120")
+	$entry.setLBItemsColumn("lotNumber"; "Lot #"; "width:120")
+	
+	$entry.setLBItemsOrderBy("lotNumber")
+	$entry.enableTransaction()
+	
+	This:C1470._push_entry($entry)
+	
 	$entry:=cs:C1710.sfw_definitionEntry.new("customerReceivedMaterial"; ["receiving"]; "Customer Received Material")
 	$entry.setDataclass("Lot")
 	$entry.setDisplayOrder(-400)
