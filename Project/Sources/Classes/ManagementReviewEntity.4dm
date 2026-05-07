@@ -74,7 +74,7 @@ local Function pup($cacheCollection; $dataClass; $queryField; $queryValue)
 	
 local Function itemLoad()
 	// This callback is called when the item is selected in the itemList
-	This:C1470._initDocument()
+	//This._initDocument()
 	
 Function beforeSaveCreation()
 	This:C1470._initDocument()
@@ -87,7 +87,7 @@ Function beforeSaveCreation()
 	
 	
 local Function afterCreation()
-	This:C1470._initDocument()
+	//This._initDocument()
 	
 local Function _initDocument()
 	

@@ -9,10 +9,11 @@ Function formMethod()
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		
-		Form:C1466.allIssuesClosed:=Num:C11(Form:C1466.current_item.overallStatus=OBJECT Get title:C1068(*; "entryField_rb_allIssuesClosed"))
-		Form:C1466.someOpen:=Num:C11(Form:C1466.current_item.overallStatus=OBJECT Get title:C1068(*; "entryField_rb_someOpen"))
-		Form:C1466.furtherAction:=Num:C11(Form:C1466.current_item.overallStatus=OBJECT Get title:C1068(*; "entryField_rb_furtherAction"))
-		
+		If (Form:C1466.current_item#Null:C1517)
+			Form:C1466.allIssuesClosed:=Num:C11(Form:C1466.current_item.overallStatus=OBJECT Get title:C1068(*; "entryField_rb_allIssuesClosed"))
+			Form:C1466.someOpen:=Num:C11(Form:C1466.current_item.overallStatus=OBJECT Get title:C1068(*; "entryField_rb_someOpen"))
+			Form:C1466.furtherAction:=Num:C11(Form:C1466.current_item.overallStatus=OBJECT Get title:C1068(*; "entryField_rb_furtherAction"))
+		End if 
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
@@ -51,7 +52,7 @@ Function redrawAndSetVisible()
 			
 	End case 
 	
-	Form:C1466.sfw.drawHTab()
+	//Form.sfw.drawHTab()
 	
 	
 Function drawPup_docType()

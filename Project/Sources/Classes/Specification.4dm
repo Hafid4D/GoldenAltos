@@ -140,6 +140,7 @@ local Function setDateInterval($pushUp; $title)
 	$windRef:=Open window:C153($mouseX; $mouseY; $mouseX+270; $mouseY+165; Movable dialog box:K34:7; $title)
 	DIALOG:C40("_ga_setDateInterval"; $form)
 	CLOSE WINDOW:C154($windRef)
+	
 	Use (Storage:C1525.cache)
 		Storage:C1525.cache.startDate:=$form.startDate
 		Storage:C1525.cache.endDate:=$form.endDate
@@ -155,6 +156,11 @@ Function docsLateInReviewing()->$specifications : cs:C1710.SpecificationSelectio
 	
 local Function docsRequiringReviewSoon()->$specifications : cs:C1710.SpecificationSelection
 	$title:="Set date interval"
+	If (Storage:C1525.cache=Null:C1517)
+		Use (Storage:C1525)
+			Storage:C1525.cache:=New shared object:C1526
+		End use 
+	End if 
 	Use (Storage:C1525.cache)
 		Storage:C1525.cache.startDate:=Current date:C33()
 	End use 
@@ -168,11 +174,11 @@ local Function docsRequiringReviewSoon()->$specifications : cs:C1710.Specificati
 	
 	
 Function OnlySpecs()->$specifications : cs:C1710.SpecificationSelection
-	$specifications:=ds:C1482.Specification.query("suppress =:1 & isForm=:2"; False:C215; False:C215)
+	$specifications:=ds:C1482.Specification.query("isForm=:1"; False:C215)
 	
 	
 Function OnlyForms()->$specifications : cs:C1710.SpecificationSelection
-	$specifications:=ds:C1482.Specification.query("suppress =:1 & isForm=:2"; False:C215; True:C214)
+	$specifications:=ds:C1482.Specification.query("isForm=:2"; True:C214)
 	
 	
 Function myQuery($param1 : Boolean; $param2 : Integer;  ...  : Object)->$specifications : cs:C1710.SpecificationSelection
@@ -180,10 +186,10 @@ Function myQuery($param1 : Boolean; $param2 : Integer;  ...  : Object)->$specifi
 	Case of 
 			
 		: ($nbrsOfParameters=3)
-			$specifications:=ds:C1482.Specification.query("suppress =:1 & reviewIntervalInDays > :2 & :3"; $1; $2; $3)
+			$specifications:=ds:C1482.Specification.query("isForm =:1 & reviewIntervalInDays > :2 & :3"; $1; $2; $3)
 			
 		: ($nbrsOfParameters=4)
-			$specifications:=ds:C1482.Specification.query("suppress =:1 & reviewIntervalInDays > :2 & :3 & :4"; $1; $2; $3; $4)
+			$specifications:=ds:C1482.Specification.query("isForm =:1 & reviewIntervalInDays > :2 & :3 & :4"; $1; $2; $3; $4)
 			
 			
 		Else 
