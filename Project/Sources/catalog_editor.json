@@ -1862,12 +1862,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4515,
+				"left": 4528,
 				"top": 0,
 				"width": 211,
-				"height": 211.33203125
+				"height": 269.33203125
 			},
-			"displayable_fields_count": 8
+			"displayable_fields_count": 10
 		},
 		"QuoteEvent": {
 			"color": {

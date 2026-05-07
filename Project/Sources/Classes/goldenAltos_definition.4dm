@@ -231,6 +231,15 @@ Function _visions_definition()
 	//$vision.setAllowedProfiles("qm")
 	This:C1470._push_vision($vision)
 	
+	$vision:=cs:C1710.sfw_definitionVision.new("facilities"; "Facilities")
+	$vision.setToolbarBackgroundColor("SlateBlue")
+	$vision.setFocusRingColor("darkred")
+	$vision.setIcon("image/vision/facility-management-24x24.png")
+	//$vision.setAllowedProfiles("qm")
+	This:C1470._push_vision($vision)
+	
+	
+	
 	$vision:=cs:C1710.sfw_definitionVision.new("salesAndQuotes"; "Sales & Quotes")
 	$vision.setToolbarBackgroundColor("DarkCyan")
 	$vision.setFocusRingColor("darkred")
