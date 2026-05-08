@@ -15,6 +15,10 @@ Function formMethod()
 		This:C1470.LoadContact()
 		This:C1470.LoadAllTabs()
 		
+		If (Undefined:C82(Form:C1466.bufferOfEvents))
+			Form:C1466.bufferOfEvents:=New collection:C1472()
+		End if 
+		
 	End if 
 	
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
@@ -276,6 +280,7 @@ Function bActionDocument()
 			$form:=New object:C1471("details"; OB Copy:C1225(Form:C1466.current_item.attachedDocuments.documents[Form:C1466.selectedDocumentPos-1]))
 			$form.approverProfile:=New collection:C1472("qs"; "qm")  // only QC Team allowed to modify 
 			$form.displayApprovalFields:=False:C215
+			$form.bufferOfEvents:=Form:C1466.bufferOfEvents
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_document"; $form)
@@ -341,7 +346,7 @@ Function bActionRating()
 	$choice:=Dynamic pop up menu:C1006($refMenu)
 	RELEASE MENU:C978($refMenu)
 	Case of 
-		
+			
 		: ($choice="--export")
 			
 			If (Form:C1466.lb_rating.length>0)
@@ -367,8 +372,8 @@ Function bActionRating()
 					New object:C1471("header"; "ISO Certified"; "field"; "ISOCertified"; "footerOperation"; "")\
 					)
 				
-			$supplierName:=Replace string:C233(Form:C1466.current_item.name; " "; "_")
-			$fileName:="SupplierRating_"+$supplierName
+				$supplierName:=Replace string:C233(Form:C1466.current_item.name; " "; "_")
+				$fileName:="SupplierRating_"+$supplierName
 				$destinationFolderPath:=Get 4D folder:C485(Current resources folder:K5:16)+"exportedData"+Folder separator:K24:12+"Suppliers"
 				$destinationFileName:=Split string:C1554(String:C10($fileName+"_"+Replace string:C233(String:C10(Date:C102(Timestamp:C1445)); "/"; "_")); " "; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join("")
 				$sheetName:="Supplier Rating"
