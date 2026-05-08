@@ -99,6 +99,25 @@ local Function _initattachedDocuments()
 	End if 
 	
 	
+local Function beforeSave()
+	If (Form:C1466.subForm.bufferOfEvents#Null:C1517) && (Form:C1466.subForm.bufferOfEvents.length>0)
+		This:C1470._saveBufferOfEvents(Form:C1466.subForm.bufferOfEvents)
+		Form:C1466.subForm.bufferOfEvents:=New collection:C1472
+	End if 
+	
+	
+local Function beforeSaveCreation()
+	
+	This:C1470._saveBufferOfEvents(Form:C1466.subForm.bufferOfEvents)
+	
+	
+Function _saveBufferOfEvents($bufferOfEvents : Collection)
+	For each ($buffer; $bufferOfEvents)
+		$moreData:=New object:C1471
+		$moreData.comment:=$buffer.label
+		cs:C1710.sfw_eventManager.me.addEvent(Form:C1466.sfw.entry; $buffer.event; This:C1470.UUID; $moreData; $buffer.stmp)
+	End for each 
+	
 local Function get nameInWindowTitle()->$nameInWindowTitle : Text
 	$nameInWindowTitle:=String:C10(This:C1470.ourPartNum)
 	
