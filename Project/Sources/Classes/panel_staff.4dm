@@ -368,54 +368,6 @@ Function drawPup_Division()
 		
 	End if 
 	
-/*
-Function pup_division()
-	
-// Create pop up menu
-If (Form.sfw.checkIsInModification())
-	
-$menu:=Create menu
-	
-If (Storage.cache=Null) || (Storage.cache.divisions=Null)
-	
-ds.Division.cacheLoad()
-	
-End if 
-	
-For each ($equipmentDivision; Storage.cache.divisions)
-	
-APPEND MENU ITEM($menu; $equipmentDivision.name; *)
-SET MENU ITEM PARAMETER($menu; -1; $equipmentDivision.UUID)
-	
-If ($equipmentDivision.UUID=Form.current_item.UUID_Division)
-	
-SET MENU ITEM MARK($menu; -1; Char(18))
-	
-If (Is Windows)
-	
-SET MENU ITEM STYLE($menu; -1; Bold)
-	
-End if 
-End if 
-End for each 
-	
-$choose:=Dynamic pop up menu($menu)
-RELEASE MENU($menu)
-	
-Case of 
-	
-//________________________________________
-: (Length($choose)#0)
-	
-$equipmentDivision:=ds.Division.get($choose)
-Form.current_item.UUID_Division:=$equipmentDivision.UUID
-This._activate_save_cancel_button()
-//________________________________________
-End case 
-End if 
-	
-This.drawPup_Division()
-*/
 	
 Function pup_citizenshipStatus()
 	If (Form:C1466.sfw.checkIsInModification())
@@ -524,11 +476,10 @@ Function pup_department()
 		
 		Case of 
 				
-				//________________________________________
 			: (Length:C16($choose)#0)
 				
 				$team:=ds:C1482.Team.get($choose)
-				//START TRANSACTION
+				
 				If (Form:C1466.current_item.memberships.length>0)
 					
 					$memberShip:=ds:C1482.Membership.get(Form:C1466.current_item.memberships[0].UUID)
@@ -542,10 +493,9 @@ Function pup_department()
 					$res:=$memberShip.save()
 					
 				End if 
-				//VALIDATE TRANSACTION
+				
 				This:C1470._activate_save_cancel_button()
 				
-				//________________________________________
 		End case 
 	End if 
 	

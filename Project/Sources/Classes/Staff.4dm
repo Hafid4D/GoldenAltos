@@ -15,7 +15,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanel("panel_staff")
 	$entry.setPanelPage(1; ""; "Main")
 	$entry.setPanelPage(2; ""; "Certifications Assignment"; "")
-	$entry.setPanelPage(3; ""; "Settings"; "allowedProfiles:admin")
+	//$entry.setPanelPage(3; ""; "Settings"; "allowedProfiles:admin")
 	
 	
 	$entry.setLBItemsColumn("code"; "Code"; "width:50"; "center")
