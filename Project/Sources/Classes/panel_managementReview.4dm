@@ -36,9 +36,44 @@ Function pup_XXX()
 	//Create pop up menu
 	
 Function redrawAndSetVisible()
+	
+	var $eAttach : cs:C1710.sfw_DocumentEntity
+	var $caption : Text
+	var $uuidDoc : Text
+	var $normalized : Text
+	var $parts : Collection
+	
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	
 	This:C1470.drawPup_docType()
+	
+	// Purpose: Keep file name label aligned with framework attachment metadata or legacy sourcePath (no embedded blob dependency).
+	// modified by 4D/PS [2026-may-08]
+	If (Form:C1466.current_item#Null:C1517) && (Form:C1466.current_item.document#Null:C1517)
+		$caption:=""
+		$uuidDoc:=String:C10(Form:C1466.current_item.document.UUID_sfwDocument)
+		If ($uuidDoc#"") && (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID($uuidDoc)))
+			$eAttach:=ds:C1482.sfw_Document.get($uuidDoc)
+			If ($eAttach#Null:C1517)
+				$caption:=String:C10($eAttach.name)
+				If (String:C10($eAttach.extension)#"")
+					If (Position:C15("."; $caption)=0)
+						$caption:=$caption+"."+Lowercase:C14(String:C10($eAttach.extension))
+					End if 
+				End if 
+			End if 
+		End if 
+		If ($caption="")
+			$normalized:=Replace string:C233(String:C10(Form:C1466.current_item.document.sourcePath); "\\"; "/")
+			$parts:=Split string:C1554($normalized; "/"; sk trim spaces:K86:2)
+			If ($parts.length>0)
+				$caption:=String:C10($parts[$parts.length-1])
+			Else 
+				$caption:=String:C10(Form:C1466.current_item.document.sourcePath)
+			End if 
+		End if 
+		OBJECT SET TITLE:C194(*; "fileName"; $caption)
+	End if 
 	
 	OBJECT SET VISIBLE:C603(*; "bUploadDocument"; Form:C1466.sfw.checkIsInModification())
 	OBJECT SET VISIBLE:C603(*; "btnDatePicker@"; Form:C1466.sfw.checkIsInModification())
@@ -56,7 +91,10 @@ Function redrawAndSetVisible()
 	
 	
 Function drawPup_docType()
-	If (Form:C1466.current_item#Null:C1517)
+	
+	// Purpose: Avoid dereferencing a missing embedded document object when drawing the category picker.
+	// modified by 4D/PS [2026-may-08]
+	If (Form:C1466.current_item#Null:C1517) && (Form:C1466.current_item.document#Null:C1517)
 		$documentCategory:=ds:C1482.DocumentCategory.query("name =:1"; Form:C1466.current_item.document.code).first() || New object:C1471()
 		
 		$documentCategoryName:=$documentCategory.name
