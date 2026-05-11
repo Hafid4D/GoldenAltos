@@ -1,6 +1,40 @@
 //%attributes = {}
 
 
+$employee_Log:=Folder:C1567(fk data folder:K87:12).file("DataJson/employees.json")
+If ($employee_Log.exists)
+	$employees:=JSON Parse:C1218($employee_Log.getText())
+	
+	
+	$records:=$employees.query(\
+		"Last_Name = :1 & First_Name = :2"; \
+		Replace string:C233("LOSENDO"; " "; ""); \
+		Replace string:C233("REXIE"; " "; ""))
+	
+	$employees:=$employees.map("_normalizeEmployeeForQuery")
+	
+	$records:=$employees.query(\
+		"Last_Name_key = :1 & First_Name_key = :2"; \
+		Replace string:C233("DELA ROSA"; " "; ""); \
+		Replace string:C233("PRISCILA"; " "; ""))
+	
+	
+End if 
+
+
+//$employee_Log:=Folder(fk data folder).file("DataJson/employees.json")
+//If ($employee_Log.exists)
+//$employees:=JSON Parse($employee_Log.getText())
+
+////$formula_1:=Formula((Replace string(This.Last_Name; " "; "")=Replace string("DELA ROSA"; " "; "")) & (Replace string(This.First_Name; " "; "")=Replace string("PRISCILA"; " "; "")))
+
+////$records:=$employees.query($formula_1)
+
+//$records:=$employees.query("Last_Name = :1 & First_Name = :2"; Replace string("DELA ROSA"; " "; ""); Replace string("PRISCILA"; " "; ""))
+//  //$records:=$records#Null ? 
+
+//End if 
+
 
 $bins:=ds:C1482.Certification.all().extract("assignments")
 

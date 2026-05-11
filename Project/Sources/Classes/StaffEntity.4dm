@@ -71,6 +71,10 @@ local Function get email()->$email : Text
 	
 	
 local Function _initCommunication()
+	If (This:C1470.contactDetails=Null:C1517)
+		This:C1470.contactDetails:=New object:C1471()
+	End if 
+	
 	If (This:C1470.contactDetails.communications=Null:C1517)
 		This:C1470.contactDetails.communications:=New collection:C1472
 	End if 
