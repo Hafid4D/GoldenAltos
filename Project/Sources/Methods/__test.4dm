@@ -2,7 +2,7 @@
 
 
 
-$bins:=ds:C1482.Inventory.all().extract("partNumber")
+$bins:=ds:C1482.Certification.all().extract("assignments")
 
 $position:=-600
 $searchField:="binLocationPath"
