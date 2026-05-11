@@ -1746,6 +1746,8 @@
 		<field name="moreData" uuid="DC5D71A96D03344CBABBEABD99B742F4" type="21" blob_switch_size="2147483647" never_null="true" id="46"/>
 		<field name="number" uuid="43A4477F9162418A9CF61163B90EDC83" type="4" unique="true" autosequence="true" never_null="true" id="47"/>
 		<field name="customerCount" uuid="8FFE6C6883E64517A64D840FA3DF4DCB" type="3" never_null="true" id="48"/>
+		<field name="NMN" uuid="62660F2A94B04948BAD60DF407554732" type="21" blob_switch_size="2147483647" never_null="true" id="49"/>
+		<field name="ISNF" uuid="AF6AA98E49CB4C6B9680EEEFA997569E" type="21" blob_switch_size="2147483647" never_null="true" id="50"/>
 		<primary_key field_name="UUID" field_uuid="AEF78036FB7D429A96DF35BE53A0E0AF"/>
 	</table>
 	<table name="StepFile" uuid="A6301A2C994D4680A851FC2AE85118BE" id="119">
