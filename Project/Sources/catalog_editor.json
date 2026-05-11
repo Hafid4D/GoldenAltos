@@ -775,9 +775,9 @@
 				"left": 2438.3334960938,
 				"top": 1050.6667480469,
 				"width": 184.69921875,
-				"height": 1091.3319091797
+				"height": 1123.3319091797
 			},
-			"displayable_fields_count": 49,
+			"displayable_fields_count": 51,
 			"fields": {
 				"customerCount": {
 					"position": 48
