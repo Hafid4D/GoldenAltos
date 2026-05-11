@@ -10,6 +10,11 @@ Function formMethod()
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		
 		This:C1470.LoadAllTabs()
+		
+		If (Undefined:C82(Form:C1466.bufferOfEvents))
+			Form:C1466.bufferOfEvents:=New collection:C1472()
+		End if 
+		
 	End if 
 	
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
@@ -94,25 +99,25 @@ Function loadDocuments()
 Function bActionDocument()
 	
 	$refMenu:=Create menu:C408
-	APPEND MENU ITEM:C411($refMenu; "View report"; *)
+	APPEND MENU ITEM:C411($refMenu; "View document"; *)
 	SET MENU ITEM PARAMETER:C1004($refMenu; 1; "--view")
 	If (Form:C1466.selectedDocument=Null:C1517) | (Undefined:C82(Form:C1466.selectedDocument))
 		DISABLE MENU ITEM:C150($refMenu; 1)
 	End if 
 	
-	APPEND MENU ITEM:C411($refMenu; "add report"; *)
+	APPEND MENU ITEM:C411($refMenu; "Add document"; *)
 	SET MENU ITEM PARAMETER:C1004($refMenu; 2; "--add")
 	If (sfw_checkIsInModification=False:C215)
 		DISABLE MENU ITEM:C150($refMenu; 2)
 	End if 
 	
-	APPEND MENU ITEM:C411($refMenu; "modify report"; *)
+	APPEND MENU ITEM:C411($refMenu; "Modify document"; *)
 	SET MENU ITEM PARAMETER:C1004($refMenu; 3; "--modify")
 	If (sfw_checkIsInModification=False:C215) | (Form:C1466.selectedDocument=Null:C1517) | Undefined:C82(Form:C1466.selectedDocument)
 		DISABLE MENU ITEM:C150($refMenu; 3)
 	End if 
 	
-	APPEND MENU ITEM:C411($refMenu; "delete report"; *)
+	APPEND MENU ITEM:C411($refMenu; "Delete document"; *)
 	SET MENU ITEM PARAMETER:C1004($refMenu; 4; "--delete")
 	If (sfw_checkIsInModification=False:C215) | (Form:C1466.selectedDocument=Null:C1517) | Undefined:C82(Form:C1466.selectedDocument)
 		DISABLE MENU ITEM:C150($refMenu; 4)
@@ -178,6 +183,7 @@ Function bActionDocument()
 			$form.approverProfile:=New collection:C1472("qs"; "qm")  // only QC Team allowed to modify
 			$form.displayApprovalFields:=True:C214
 			$form.documentHasChanged:=False:C215
+			$form.bufferOfEvents:=Form:C1466.bufferOfEvents
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_document"; $form)

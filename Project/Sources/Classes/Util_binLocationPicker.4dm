@@ -2,23 +2,23 @@
 // Usage: cs.Util_binLocationPicker.me.pickReadOnly / pickWithCreate / draw
 
 singleton Class constructor
-
-
+	
+	
 Function pickReadOnly($buttonName : Text; $currentPath : Text)->$result : Text
 	$result:=This:C1470._pick($buttonName; $currentPath; False:C215)
-
-
+	
+	
 Function pickWithCreate($buttonName : Text; $currentPath : Text)->$result : Text
 	$result:=This:C1470._pick($buttonName; $currentPath; True:C214)
-
-
+	
+	
 Function draw($buttonName : Text; $path : Text)
 	If ($path=Null:C1517)
 		$path:=""
 	End if 
 	Form:C1466.sfw.drawButtonPup($buttonName; $path; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; ($path=""))
-
-
+	
+	
 Function _stepBack($path : Text)->$parent : Text
 	// Returns the parent path by removing the last "/" segment
 	var $parts : Collection
@@ -36,8 +36,8 @@ Function _stepBack($path : Text)->$parent : Text
 			End if 
 		End for 
 	End if 
-
-
+	
+	
 Function _buildOpts($currentPath : Text; $allowCreate : Boolean)->$opts : Collection
 	// Builds the complete options list for the current navigation level
 	var $parts; $options; $partsChoice; $terminalFlags; $occupiedFlags : Collection
@@ -142,8 +142,8 @@ Function _buildOpts($currentPath : Text; $allowCreate : Boolean)->$opts : Collec
 		$opts.push(New object:C1471("label"; "← Back"; "value"; "back"))
 		$opts.push(New object:C1471("label"; "⇤ Back to root"; "value"; "backToRoot"))
 	End if 
-
-
+	
+	
 Function _handleChoice($choice : Text; $currentPath : Text; $allowCreate : Boolean)->$state : Object
 	// Processes the popup result and returns the new navigation state {path, stop, confirmed}
 	var $partsChoice : Collection
@@ -179,6 +179,11 @@ Function _handleChoice($choice : Text; $currentPath : Text; $allowCreate : Boole
 					$newBin.isEmpty:=True:C214
 					$saveResult:=$newBin.save()
 					If ($saveResult.success)
+						If (Storage:C1525.cache=Null:C1517)
+							Use (Storage:C1525)
+								Storage:C1525.cache:=New shared object:C1526
+							End use 
+						End if 
 						Use (Storage:C1525.cache)
 							Storage:C1525.cache.bins:=Null:C1517
 						End use 
@@ -202,8 +207,8 @@ Function _handleChoice($choice : Text; $currentPath : Text; $allowCreate : Boole
 				End case 
 			End if 
 	End case 
-
-
+	
+	
 Function _pick($buttonName : Text; $currentPath : Text; $allowCreate : Boolean)->$result : Text
 	var $left; $top; $right; $bottom; $menuX; $menuY; $winRef : Integer
 	var $stop; $confirmed; $isTerm : Boolean
@@ -262,3 +267,4 @@ Function _pick($buttonName : Text; $currentPath : Text; $allowCreate : Boolean)-
 	If ($confirmed) & ($currentPath#"")
 		$result:=$currentPath
 	End if 
+	

@@ -9,6 +9,11 @@ Function formMethod()
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		This:C1470.LoadAllTabs()
+		
+		If (Undefined:C82(Form:C1466.bufferOfEvents))
+			Form:C1466.bufferOfEvents:=New collection:C1472()
+		End if 
+		
 	End if 
 	
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
@@ -340,6 +345,7 @@ Function bActionDocument()
 			$form:=New object:C1471("details"; Form:C1466.current_item.attachedDocuments.documents[Form:C1466.selectedDocumentPos-1])
 			$form.approverProfile:=New collection:C1472("qs"; "qm")  // only QC Team allowed to modify
 			$form.displayApprovalFields:=False:C215
+			$form.bufferOfEvents:=Form:C1466.bufferOfEvents
 			
 			$winRef:=Open form window:C675("_ga_document"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("_ga_document"; $form)
