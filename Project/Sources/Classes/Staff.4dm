@@ -118,10 +118,14 @@ Function checkRetraining($days : Integer)->$retraining : Collection
 	var $staff_es : cs:C1710.StaffSelection
 	var $staff_e : cs:C1710.StaffEntity
 	
-	$start:=cs:C1710.sfw_stmp.me.now()
-	$end:=cs:C1710.sfw_stmp.me.build(Add to date:C393(Current date:C33(); 0; 0; $days))
-	
-	$staff_es:=ds:C1482.Staff.query("assignments.expiredIn >= :1 AND assignments.expiredIn <= :2"; $start; $end)
+	// Purpose: Staff.assignments.expiredIn is a duration (days); retraining window uses computed expiry dates, not relational comparison on raw expiredIn.
+	// modified by 4D/PS [2026-may-12]
+	$staff_es:=ds:C1482.Staff.newSelection()
+	For each ($staff_e; ds:C1482.Staff.all())
+		If ($staff_e.getCertiExpiredIn($days).length>0)
+			$staff_es.add($staff_e)
+		End if 
+	End for each 
 	
 	$retraining:=New collection:C1472()
 	

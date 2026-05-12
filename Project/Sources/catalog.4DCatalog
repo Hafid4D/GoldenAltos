@@ -1956,7 +1956,7 @@
 		<field name="UUID" uuid="5692BDD57E88304092FB8E31BA284F2D" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="UUID_Staff" uuid="EE187104965B1348AA53D2C2A3B28529" type="10" store_as_UUID="true" never_null="true" id="2"/>
 		<field name="UUID_Certification" uuid="76DD5A5DDBC91146A24857EF820BB589" type="10" store_as_UUID="true" never_null="true" id="3"/>
-		<field name="certificationDate" uuid="FEAF37B2E5CD0144B364A0AD7D00A310" type="4" never_null="true" id="4"/>
+		<field name="certificationStmp" uuid="FEAF37B2E5CD0144B364A0AD7D00A310" type="4" never_null="true" id="4"/>
 		<field name="expiredIn" uuid="9D053CBCB6006843B6342AD00FAECD72" type="4" never_null="true" id="5"/>
 		<field name="moreData" uuid="DBA3BD0EFD5BE04D83487485D8AAC463" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="5692BDD57E88304092FB8E31BA284F2D"/>

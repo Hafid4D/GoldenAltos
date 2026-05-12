@@ -8,6 +8,8 @@ If (True:C214)
 	
 Else 
 	
+	var $assign : cs:C1710.CertificationAssignmentEntity
+	
 	QUERY:C277([Staff:135]; [Staff:135]UUID:1=Form:C1466.current_item.UUID)
 	
 	//FORM SET OUTPUT([Staff]; "cert_training")
@@ -30,41 +32,41 @@ Else
 	
 	Print form:C5([Staff:135]; "cert_training"; $form; Form header:K43:3)
 	
-	QUERY:C277([CertificationAssignment:134]; [CertificationAssignment:134]UUID_Staff:2=Form:C1466.current_item.UUID; *)
-	QUERY:C277([CertificationAssignment:134];  & ; [CertificationAssignment:134]expiredIn:5>=cs:C1710.sfw_stmp.me.now())
-	
-	For ($i; 1; Records in selection:C76([CertificationAssignment:134]))
-		QUERY:C277([Certification:124]; [Certification:124]UUID:1=[CertificationAssignment:134]UUID_Certification:3)
-		$form:=New object:C1471()
-		
-		$form.certification:=New object:C1471(\
-			"name"; [Certification:124]name:2; \
-			"date"; cs:C1710.sfw_stmp.me.getDate([CertificationAssignment:134]certificationDate:4)\
-			)
-		Print form:C5([Staff:135]; "cert_training"; $form; Form detail:K43:1)
-		Print form:C5([Staff:135]; "cert_training"; Form break0:K43:14)
-		
-		NEXT RECORD:C51([CertificationAssignment:134])
-	End for 
-	
-	QUERY:C277([CertificationAssignment:134]; [CertificationAssignment:134]UUID_Staff:2=Form:C1466.current_item.UUID; *)
-	QUERY:C277([CertificationAssignment:134];  & ; [CertificationAssignment:134]expiredIn:5<cs:C1710.sfw_stmp.me.now())
+	// Purpose: Valid trainings — expiredIn is duration days; filter uses computed validityActive, not expiredIn versus now().
+	// modified by 4D/PS [2026-may-12]
+	For each ($assign; Form:C1466.current_item.assignments)
+		If ($assign.validityActive)
+			
+			$form:=New object:C1471()
+			
+			$form.certification:=New object:C1471(\
+				"name"; $assign.certification.name; \
+				"date"; $assign.certificationDate\
+				)
+			Print form:C5([Staff:135]; "cert_training"; $form; Form detail:K43:1)
+			Print form:C5([Staff:135]; "cert_training"; Form break0:K43:14)
+			
+		End if 
+	End for each 
 	
 	Print form:C5([Staff:135]; "other_traning"; Form header:K43:3)
 	
-	For ($i; 1; Records in selection:C76([CertificationAssignment:134]))
-		QUERY:C277([Certification:124]; [Certification:124]UUID:1=[CertificationAssignment:134]UUID_Certification:3)
-		$form:=New object:C1471()
-		
-		$form.certification:=New object:C1471(\
-			"name"; [Certification:124]name:2; \
-			"date"; cs:C1710.sfw_stmp.me.getDate([CertificationAssignment:134]certificationDate:4)\
-			)
-		Print form:C5([Staff:135]; "cert_training"; $form; Form detail:K43:1)
-		Print form:C5([Staff:135]; "cert_training"; Form break0:K43:14)
-		
-		NEXT RECORD:C51([CertificationAssignment:134])
-	End for 
+	// Purpose: Expired trainings — finite duration rows whose validity window ended before today.
+	// modified by 4D/PS [2026-may-12]
+	For each ($assign; Form:C1466.current_item.assignments)
+		If (($assign.expiredIn>0) && Not:C34($assign.validityActive))
+			
+			$form:=New object:C1471()
+			
+			$form.certification:=New object:C1471(\
+				"name"; $assign.certification.name; \
+				"date"; $assign.certificationDate\
+				)
+			Print form:C5([Staff:135]; "cert_training"; $form; Form detail:K43:1)
+			Print form:C5([Staff:135]; "cert_training"; Form break0:K43:14)
+			
+		End if 
+	End for each 
 	
 	
 	Print form:C5([Staff:135]; "cert_training"; Form footer:K43:2)
