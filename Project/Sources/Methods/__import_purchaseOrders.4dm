@@ -1250,6 +1250,12 @@ If (True:C214)
 			))
 	End for each 
 	
+	$remaingCertification:=New collection:C1472()
+	
+	$trainingFile:=Folder:C1567(fk data folder:K87:12).file("DataJson/employeeTraining_export.json")
+	
+	$trainings:=JSON Parse:C1218($trainingFile.getText())
+	
 	$employee_Log:=Folder:C1567(fk data folder:K87:12).file("DataJson/staff_export.json")  //.file("DataJson/employees.json")
 	If ($employee_Log.exists)
 		$employees:=JSON Parse:C1218($employee_Log.getText())
@@ -1262,6 +1268,7 @@ If (True:C214)
 		TRUNCATE TABLE:C1051([StaffRole:63])
 		TRUNCATE TABLE:C1051([Staff:135])
 		TRUNCATE TABLE:C1051([sfw_User:16])
+		TRUNCATE TABLE:C1051([CertificationAssignment:134])
 		
 		//SET DATABASE PARAMETER([Staff]; Table sequence number; 2)
 		
@@ -1326,6 +1333,38 @@ If (True:C214)
 			$res:=$staff_e.save()
 			
 			If ($res.success)
+				
+				
+/**
+import certification Assignment
+**/
+				If ($existingStaff.length>0)
+					$employee:=$existingStaff[0]
+					$staffTrainings:=$trainings.query("Employee_Code =:1"; $employee.employeeCode)
+				End if 
+				
+				
+				For each ($training; $staffTrainings)
+					$certificationAssigment_e:=ds:C1482.CertificationAssignment.new()
+					
+					$certificationAssigment_e.certificationStmp:=Date:C102($training.Tdate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($training.Tdate))
+					$certificationAssigment_e.expiredIn:=Num:C11($training.Duration)
+					$certificationAssigment_e.UUID_Staff:=$staff_e.UUID
+					
+					$certififcation:=ds:C1482.Certification.query("name =:1"; Split string:C1554($training.T_Type; "\r"; sk trim spaces:K86:2).join("\r"))
+					If ($certififcation.length>0)
+						$certificationAssigment_e.UUID_Certification:=$certififcation[0].UUID
+					Else 
+						$remaingCertification.push($training.T_Type)
+					End if 
+					
+					
+					$res:=$certificationAssigment_e.save()
+					
+					If (Not:C34($res.success))
+						TRACE:C157
+					End if 
+				End for each 
 				
 				For each ($team; $staff.teams)
 					$teams_es:=ds:C1482.Team.query("name = :1"; $team)
@@ -1392,6 +1431,7 @@ If (True:C214)
 		
 	End if 
 End if 
+
 
 
 /**

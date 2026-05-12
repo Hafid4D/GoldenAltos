@@ -1,12 +1,21 @@
 Class extends Entity
 
-Function hasCertification($uuid_certification : Text; $duration : Integer)->$certified : Boolean
-	//$certified:=(ds.CertificationAssignment.query("UUID_Staff = :1 AND UUID_Certification = :2"; This.UUID; $uuid_certification).length>0)
-	$certified:=(ds:C1482.CertificationAssignment.query("UUID_Staff = :1 AND UUID_Certification = :2 AND expiredIn >= :3"; \
-		This:C1470.UUID; \
-		$uuid_certification; \
-		cs:C1710.sfw_stmp.me.build(Current date:C33())\
-		).length>0)
+Function hasCertification($uuid_certification : Text)->$certified : Boolean
+	
+	var $assignment_es : cs:C1710.CertificationAssignmentSelection
+	var $assignment_e : cs:C1710.CertificationAssignmentEntity
+	
+	// Purpose: CertificationAssignment.expiredIn is a day-count validity period; validity uses certificationDate + expiredIn, not a stored expiry stmp.
+	// modified by 4D/PS [2026-may-12]
+	$certified:=False:C215
+	$assignment_es:=ds:C1482.CertificationAssignment.query("UUID_Staff = :1 AND UUID_Certification = :2"; This:C1470.UUID; $uuid_certification).orderBy("certificationDate desc")
+	
+	For each ($assignment_e; $assignment_es)
+		If ($assignment_e.validityActive)
+			$certified:=True:C214
+			return 
+		End if 
+	End for each 
 	
 Function createCertification($uuid_certification : Text; $duration : Integer)->$certified : Boolean
 	$certificationAssignment:=ds:C1482.CertificationAssignment.new()
@@ -17,9 +26,12 @@ Function createCertification($uuid_certification : Text; $duration : Integer)->$
 	$certificationAssignment.certificationDate:=cs:C1710.sfw_stmp.me.now()
 	//$certificationAssignment.certificationDate:=cs.sfw_stmp.me.build(!2024-06-01!)  // Test Only
 	
+	// Purpose: Persist validity length as a day count (same semantics as legacy import); expiry date is derived when querying or displaying.
+	// modified by 4D/PS [2026-may-12]
 	If ($duration>0)
-		$certificationAssignment.expiredIn:=cs:C1710.sfw_stmp.me.build(Add to date:C393(Current date:C33(); 0; 0; $duration))
-		//$certificationAssignment.expiredIn:=cs.sfw_stmp.me.build(Add to date(!2024-06-01!; 0; 0; $duration))  // Test Only
+		$certificationAssignment.expiredIn:=$duration
+	Else 
+		$certificationAssignment.expiredIn:=0
 	End if 
 	
 	$res:=$certificationAssignment.save()
@@ -41,7 +53,7 @@ Function getCertificationDate($uuid_certification : Text)->$certifiedAt : Date
 		.orderBy("certificationDate desc")
 	
 	If ($assignment_es.length>0)
-		$certifiedAt:=cs:C1710.sfw_stmp.me.getDate($assignment_es[0].certificationDate)
+		$certifiedAt:=$assignment_es[0].certificationDate  //cs.sfw_stmp.me.getDate($assignment_es[0].certificationDate)
 	End if 
 	
 Function getExpiredDate($uuid_certification : Text)->$expiredIn : Date
@@ -50,16 +62,33 @@ Function getExpiredDate($uuid_certification : Text)->$expiredIn : Date
 		.orderBy("certificationDate desc")
 	
 	If ($assignment_es.length>0)
-		$expiredIn:=($assignment_es[0].expiredIn>0) ? cs:C1710.sfw_stmp.me.getDate($assignment_es[0].expiredIn) : !00-00-00!
+		// Purpose: Return calendar lapse date from certification date + duration days (expiredIn).
+		// modified by 4D/PS [2026-may-12]
+		$expiredIn:=$assignment_es[0].expiringDate
 	End if 
 	
 Function getCertiExpiredIn($days : Integer)->$assignment_es : cs:C1710.CertificationAssignmentSelection
-	var $start; $end : Integer
 	
-	$start:=cs:C1710.sfw_stmp.me.now()
-	$end:=cs:C1710.sfw_stmp.me.build(Add to date:C393(Current date:C33(); 0; 0; $days))
+	var $today : Date
+	var $limit : Date
+	var $expiry : Date
+	var $a : cs:C1710.CertificationAssignmentEntity
 	
-	$assignment_es:=This:C1470.assignments.query("expiredIn >= :1 AND expiredIn <= :2"; $start; $end)
+	// Purpose: Assignments whose calendar expiry falls between today and today+$days (expiredIn is duration in days).
+	// modified by 4D/PS [2026-may-12]
+	$today:=Current date:C33()
+	$limit:=Add to date:C393($today; 0; 0; $days)
+	
+	$assignment_es:=ds:C1482.CertificationAssignment.newSelection()
+	
+	For each ($a; This:C1470.assignments)
+		If ($a.expiredIn>0)
+			$expiry:=$a.expiringDate
+			If ($expiry#!00-00-00!) && ($expiry>=$today) && ($expiry<=$limit)
+				$assignment_es.add($a)
+			End if 
+		End if 
+	End for each 
 	
 local Function get email()->$email : Text
 	If (This:C1470.contactDetails#Null:C1517) && (This:C1470.contactDetails.communications#Null:C1517)

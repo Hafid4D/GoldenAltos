@@ -71,6 +71,12 @@ Function loadAllTabs()
 	This:C1470.loadCertifications()
 	
 Function loadCommunications()
+	If (Form:C1466.current_item.contactDetails=Null:C1517)
+		Form:C1466.current_item.contactDetails:=New object:C1471
+	End if 
+	If (Form:C1466.current_item.contactDetails.communications=Null:C1517)
+		Form:C1466.current_item.contactDetails.communications:=New collection:C1472
+	End if 
 	Form:C1466.subFormCommunication:=New object:C1471(\
 		"communications"; Form:C1466.current_item.contactDetails.communications; \
 		"situation"; Form:C1466.situation\
