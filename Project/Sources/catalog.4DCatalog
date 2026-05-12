@@ -1980,6 +1980,7 @@
 		<field name="UUID_Division" uuid="C307EB019AE88F48B0C093CC7A4B60B1" type="10" store_as_UUID="true" never_null="true" id="14"/>
 		<field name="citizenShipStatus" uuid="94BC1376AD162B4A9CB7ACBB60EA56E3" type="10" limiting_length="255" never_null="true" id="15"/>
 		<field name="contactDetails" uuid="DFFE835335868749B15EECAADA389EB4" type="21" blob_switch_size="2147483647" never_null="true" id="16"/>
+		<field name="shift" uuid="66CCEB1C8FD3417E8C185AB1897C03DF" type="10" limiting_length="255" never_null="true" id="17"/>
 		<primary_key field_name="UUID" field_uuid="6941AB4C41898A4A9FBF25D5AC27CA2B"/>
 		<table_extra output_form="print_list"/>
 	</table>
