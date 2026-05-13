@@ -2236,9 +2236,9 @@
 				"left": 466,
 				"top": 711.33203125,
 				"width": 158.373046875,
-				"height": 398.33203125
+				"height": 456.33203125
 			},
-			"displayable_fields_count": 17,
+			"displayable_fields_count": 19,
 			"fields_ordering": 2,
 			"fields": {
 				"customerPo": {
