@@ -42,7 +42,7 @@
 					"stroke": "#808080",
 					"text": "Customer"
 				},
-				"Field_customer": {
+				"entryField_customer": {
 					"type": "input",
 					"top": 62,
 					"left": 82,
@@ -58,7 +58,7 @@
 					],
 					"fill": "transparent",
 					"borderStyle": "none",
-					"method": "ObjectMethods/Field_customer.4dm"
+					"method": "ObjectMethods/entryField_customer.4dm"
 				},
 				"label_poNumber": {
 					"type": "text",
@@ -69,7 +69,7 @@
 					"stroke": "#808080",
 					"text": "PO #"
 				},
-				"Field_lot.poNumber": {
+				"entryField_lot.poNumber": {
 					"type": "input",
 					"top": 37,
 					"left": 82,
@@ -475,8 +475,8 @@
 				},
 				"label_externalParty": {
 					"type": "text",
-					"top": 87,
-					"left": 874,
+					"top": 115,
+					"left": 444,
 					"width": 87,
 					"height": 17,
 					"stroke": "#808080",
@@ -484,8 +484,8 @@
 				},
 				"EntryField_externalParty": {
 					"type": "input",
-					"top": 87,
-					"left": 958,
+					"top": 115,
+					"left": 528,
 					"width": 310,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.externalParty",
@@ -521,7 +521,7 @@
 					"width": 250,
 					"height": 17,
 					"stroke": "#000000",
-					"text": "QCAR Information",
+					"text": "Corrective Action Report",
 					"fontSize": 12,
 					"fontWeight": "bold"
 				},
@@ -968,7 +968,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_4lines",
-	"geometryStamp": 2790,
+	"geometryStamp": 2799,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

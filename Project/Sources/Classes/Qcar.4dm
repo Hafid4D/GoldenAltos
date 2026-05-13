@@ -2,7 +2,9 @@ Class extends DataClass
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
-	$entry:=cs:C1710.sfw_definitionEntry.new("qcar"; ["qualityAssurance"]; "QCARS")
+	// Purpose: Entry labels use CAR / Corrective Action Report wording instead of QCARS (technical dataclass remains Qcar).
+	// modified by 4D/PS [2026-may-12]
+	$entry:=cs:C1710.sfw_definitionEntry.new("qcar"; ["qualityAssurance"]; "CAR")
 	$entry.setDataclass("Qcar")
 	$entry.setDisplayOrder(-400)
 	$entry.setIcon("image/entry/qcar-white-50x50.png")
@@ -25,17 +27,17 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setLBItemsOrderBy("qcarNumber")
 	
-	$view:=cs:C1710.sfw_definitionView.new("openQcars"; "Open QCARS"; "derivedFrom:main"; $entry)
+	$view:=cs:C1710.sfw_definitionView.new("openQcars"; "Open CARs"; "derivedFrom:main"; $entry)
 	$view.setSubset("openQcars")
 	$view.setPictoLabel("/RESOURCES/ga/image/picto/open-qcars-16x16.png")
 	$entry.setView($view)
 	
-	$view:=cs:C1710.sfw_definitionView.new("lateQcars"; "Late QCARS"; "derivedFrom:main"; $entry)
+	$view:=cs:C1710.sfw_definitionView.new("lateQcars"; "Late CARs"; "derivedFrom:main"; $entry)
 	$view.setSubset("lateQcars")
 	$view.setPictoLabel("/RESOURCES/ga/image/picto/late-qcars-16x16.png")
 	$entry.setView($view)
 	
-	$view:=cs:C1710.sfw_definitionView.new("verifiedQcars"; "Verified QCARS"; "derivedFrom:main"; $entry)
+	$view:=cs:C1710.sfw_definitionView.new("verifiedQcars"; "Verified CARs"; "derivedFrom:main"; $entry)
 	$view.setSubset("verifiedQcars")
 	$view.setPictoLabel("/RESOURCES/ga/image/picto/verified-qcars-16x16.png")
 	$entry.setView($view)
@@ -44,8 +46,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.enableTransaction()
 	
-	$entry.setItemAction("Print Report"; "QCARS_print_corrective_report")
-	$entry.setItemAction("Print RMA"; "QCARS_print_rma_report")
+	// Purpose: Action labels reflect CAR wording; method identifiers unchanged for compatibility.
+	// modified by 4D/PS [2026-may-12]
+	$entry.setItemAction("Print corrective action report"; "QCARS_print_corrective_report")
+	$entry.setItemAction("Print RMA report"; "QCARS_print_rma_report")
 	
 	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
 	

@@ -250,6 +250,47 @@
 					],
 					"fontWeight": "normal",
 					"dataSource": ""
+				},
+				"entryField_shiftA": {
+					"type": "radio",
+					"text": "A",
+					"top": 61,
+					"left": 432,
+					"width": 30,
+					"height": 19,
+					"events": [
+						"onClick"
+					],
+					"radioGroup": "shift",
+					"dataSourceTypeHint": "boolean",
+					"dataSource": "Form:C1466.shift",
+					"method": "ObjectMethods/entryField_shiftA.4dm",
+					"style": "regular"
+				},
+				"entryField_shiftB": {
+					"type": "radio",
+					"text": "B",
+					"top": 61,
+					"left": 488,
+					"width": 30,
+					"height": 19,
+					"events": [
+						"onClick"
+					],
+					"radioGroup": "shift",
+					"dataSourceTypeHint": "boolean",
+					"dataSource": "Not:C34(Form:C1466.shift)",
+					"method": "ObjectMethods/entryField_shiftB.4dm"
+				},
+				"label_shift": {
+					"type": "text",
+					"top": 62,
+					"left": 312,
+					"width": 110,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Shift",
+					"textAlign": "right"
 				}
 			}
 		},
@@ -868,7 +909,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 1124,
+	"geometryStamp": 1153,
 	"editor": {
 		"groups": {
 			"Group": [

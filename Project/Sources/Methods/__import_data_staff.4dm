@@ -171,6 +171,7 @@ If (True:C214)
 				$staff_e.stmpTermination:=Date:C102($employee.terminationDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($employee.terminationDate))
 				$staff_e.stmpHire:=Date:C102($employee.hireDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($employee.hireDate))
 				$staff_e.terminated:=$employee.terminated
+				$staff_e.shift:=Num:C11($employee.shift)=1 ? "A" : (Num:C11($employee.shift)=2 ? "B" : $employee.shift)
 				
 				
 			Else 

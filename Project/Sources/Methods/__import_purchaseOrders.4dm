@@ -406,6 +406,7 @@ If (True:C214)
 	
 	$records:=JSON Parse:C1218($file.getText())
 	$counter:=0
+	$lotCollection:=New collection:C1472()
 	
 	For each ($record; $records)
 		$counter:=$counter+1
@@ -587,182 +588,360 @@ If (True:C214)
 		End for each 
 		
 		
-		For each ($lot; $record.lots.orderBy("parentLotNumber asc"))
+		$lotCollection:=$lotCollection.concat($record.lots)
+/*
+For each ($lot; $record.lots.orderBy("parentLotNumber asc"))
+		
+$lot_e:=ds.Lot.new()
+		
+$lot_e.lotNumber:=$lot.lotNum
+$lot_e.dateIn:=$lot.dateIn
+$lot_e.dateOut:=$lot.dateOut
+$lot_e.process:=$lot.process
+$lot_e.device:=$lot.device
+//$lot_e.altLotNumber:=$lot.altLotNumber
+$lot_e.deviceTableLink:=$lot.deviceTableLink
+$lot_e.currentOrNextArea:=$lot.currentOrNextArea
+$lot_e.onHold:=$lot.onHold
+$lot_e.holdDate:=$lot.holdDate
+$lot_e.holdTime:=$lot.holdTime
+		
+$po_s:=ds.PurchaseOrder.query("oldPoNumber =:1"; Split string($record.poNumber; "\r"; sk trim spaces).join("\r"))
+If ($po_s.length>0)
+$lot_e.poNumber:=$po_s[0].poNumber
+//$lot_e.UUID_PurchaseOrder:=$po_s[0].UUID
+		
+Else 
+$lot_e.poNumber:=0
+End if 
+		
+$lot_e.poNumber:=$lot.poNumber
+		
+$lot_e.customer:=$lot.customer
+$lot_e.commit:=$lot.commit
+$lot_e.reCommit:=$lot.reCommit
+$lot_e.original:=$lot.original
+$lot_e.progressive:=$lot.progressive
+$lot_e.ourCount:=$lot.ourCount
+$lot_e.totalTested:=$lot.totalTested
+$lot_e.az:=$lot.az
+$lot_e.et:=$lot.et
+$lot_e.OQADone:=$lot.OQADone
+$lot_e.OQADate:=$lot.OQADate
+$lot_e.OQASimpleSize:=$lot.OQASimpleSize
+$lot_e.releaseNumber:=$lot.releaseNumber
+$lot_e.trackingNumber:=$lot.trackingNumber
+$lot_e.readyToShipDate:=$lot.readyToShipDate
+$lot_e.shippingMemo:=$lot.shippingMemo
+$lot_e.location:=$lot.location
+$lot_e.comment:=$lot.comment
+$lot_e.status:=$lot.status
+$lot_e.altDevNumber:=$lot.altDevNumber
+//$lot_e.altLotNumber:=$lot.altLotNumber
+$lot_e.cOfCInspector:=$lot.cOfCInspector
+$lot_e.packageType:=$lot.packageType
+$lot_e.dateCode:=$lot.dateCode
+$lot_e.carrier:=$lot.carrier
+$lot_e.shipRel:=$lot.shipRel
+$lot_e.totalCharge:=$lot.totalCharge
+$lot_e.unitCost:=$lot.unitCost
+		
+$lot_e.UUID_Job:=$job.UUID
+		
+If ($lot.parentLotNumber#"") & Not(Undefined($lot.parentLotNumber))
+$lots_es:=ds.Lot.query("lotNumber = :1"; $lot.parentLotNumber)
+		
+If ($lots_es.length>0)
+$lot_e.UUID_LotParent:=$lots_es[0].UUID
+Else 
+TRACE
+End if 
+End if 
+		
+$lot_e.moreData:=New object()
+$recodNumber:=ds.sfw_Counter.getNextValue("Lot")
+$lot_e.moreData.barcodeData:=String($recodNumber; "0000000000")
+		
+$res:=$lot_e.save()
+		
+If (Not($res.success))
+TRACE
+Else 
+		
+For each ($step; $lot.steps)
+// Purpose: Populate LotStep object fields (bins/parametricMeasurements/properties/moreData) from the legacy export JSON. Keeps backward compatibility when older JSON files do not provide the new sub-keys.
+// modified by 4D/PS [2026-april-27]
+$lotStep_e:=ds.LotStep.new()
+		
+$lotStep_e.order:=$step.order
+$lotStep_e.description:=$step.description
+$lotStep_e.lotSpecs:=$step.lotSpecs
+$lotStep_e.specRevision:=$step.specRevision
+$lotStep_e.alert:=$step.alert
+$lotStep_e.qtyIn:=$step.qtyIn
+$lotStep_e.qtyOut:=$step.qtyOut
+$lotStep_e.rejects:=$step.rejects
+$lotStep_e.minYield:=$step.minYield
+$lotStep_e.dateIn:=$step.dateIn
+$lotStep_e.dateOut:=$step.dateOut
+$lotStep_e.timeIn:=$step.timeIn
+$lotStep_e.timeOut:=$step.timeOut
+$lotStep_e.discard:=$step.discard
+$lotStep_e.type:=$step.type
+$lotStep_e.outOperator:=$step.outOperator
+$lotStep_e.inOperator:=$step.inOperator
+$lotStep_e.actualHours:=$step.actualHours
+$lotStep_e.plannedHours:=$step.plannedHours
+$lotStep_e.tools:=New object()
+$lotStep_e.tools:=$step.tools
+$lotStep_e.areas:=$step.areas
+$lotStep_e.mechanicalRejects:=$step.mechanicalRejects
+$lotStep_e.missingOrExcluded:=$step.missingOrExcluded
+$lotStep_e.yield:=$step.yield
+$lotStep_e.supervisor:=$step.supervisor
+$lotStep_e.enableBins:=$step.enableBins
+		
+While (($lotStep_e.tools#Null) && ($lotStep_e.tools.items.indexOf("")#-1))
+		
+$lotStep_e.tools.items:=$lotStep_e.tools.items.remove($lotStep_e.tools.items.indexOf(""))
+		
+End while 
+		
+$lotStep_e.parametricMeasurements:=New object(\
+"items"; New collection(); \
+"in"; New object("par1"; 0; "par2"; 0; "par3"; 0); \
+"out"; New object("par1"; 0; "par2"; 0; "par3"; 0)\
+)
+If ($step.parametricMeasurements#Null)
+If ($step.parametricMeasurements.in#Null)
+$lotStep_e.parametricMeasurements.in:=$step.parametricMeasurements.in
+End if 
+If ($step.parametricMeasurements.out#Null)
+$lotStep_e.parametricMeasurements.out:=$step.parametricMeasurements.out
+End if 
+End if 
+		
+$lotStep_e.stepInterruptions:=New object("items"; New collection())
+$lotStep_e.dataTables:=New object("items"; New collection())
+		
+$lotStep_e.bins:=New object(\
+"items"; New collection())
+If ($step.bins#Null) && ($step.bins.items#Null)
+For each ($bin; $step.bins.items)
+$newBin:=New object()
+$newBin.num:=$bin.num
+$newBin.definition:=($bin.definition=Null) ? "" : $bin.definition
+$newBin.type:=($bin.type=Null) ? "" : $bin.type
+$newBin.value:=($bin.value=Null) ? 0 : $bin.value
+$lotStep_e.bins.items.push($newBin)
+End for each 
+End if 
+		
+$lotStep_e.properties:=New object(\
+"pgm"; ""; \
+"pgmSwitch"; ""; \
+"hardware1"; ""; \
+"hardware2"; ""; \
+"probeCard"; ""; \
+"count1"; 0; \
+"count2"; 0; \
+"count3"; 0\
+)
+If ($step.properties#Null)
+$lotStep_e.properties:=$step.properties
+End if 
+		
+$lotStep_e.skills:=New object("items"; New collection())
+$lotStep_e.requitedCertifications:=New object("items"; New collection())
+		
+$lotStep_e.UUID_Lot:=$lot_e.UUID
+		
+$res:=$lotStep_e.save()
+		
+If (Not($res.success))
+TRACE
+End if 
+End for each 
+End if 
+End for each 
+*/
+	End for each 
+	
+	For each ($lot; $lotCollection)  // $record.lots.orderBy("parentLotNumber asc"))
+		
+		$lot_e:=ds:C1482.Lot.new()
+		
+		$lot_e.lotNumber:=$lot.lotNum
+		$lot_e.dateIn:=$lot.dateIn
+		$lot_e.dateOut:=$lot.dateOut
+		$lot_e.process:=$lot.process
+		$lot_e.device:=$lot.device
+		//$lot_e.altLotNumber:=$lot.altLotNumber
+		$lot_e.deviceTableLink:=$lot.deviceTableLink
+		$lot_e.currentOrNextArea:=$lot.currentOrNextArea
+		$lot_e.onHold:=$lot.onHold
+		$lot_e.holdDate:=$lot.holdDate
+		$lot_e.holdTime:=$lot.holdTime
+		
+		$po_s:=ds:C1482.PurchaseOrder.query("oldPoNumber =:1"; Split string:C1554($record.poNumber; "\r"; sk trim spaces:K86:2).join("\r"))
+		If ($po_s.length>0)
+			$lot_e.poNumber:=$po_s[0].poNumber
+			//$lot_e.UUID_PurchaseOrder:=$po_s[0].UUID
 			
-			$lot_e:=ds:C1482.Lot.new()
+		Else 
+			$lot_e.poNumber:=0
+		End if 
+		
+		$lot_e.poNumber:=$lot.poNumber
+		
+		$lot_e.customer:=$lot.customer
+		$lot_e.commit:=$lot.commit
+		$lot_e.reCommit:=$lot.reCommit
+		$lot_e.original:=$lot.original
+		$lot_e.progressive:=$lot.progressive
+		$lot_e.ourCount:=$lot.ourCount
+		$lot_e.totalTested:=$lot.totalTested
+		$lot_e.az:=$lot.az
+		$lot_e.et:=$lot.et
+		$lot_e.OQADone:=$lot.OQADone
+		$lot_e.OQADate:=$lot.OQADate
+		$lot_e.OQASimpleSize:=$lot.OQASimpleSize
+		$lot_e.releaseNumber:=$lot.releaseNumber
+		$lot_e.trackingNumber:=$lot.trackingNumber
+		$lot_e.readyToShipDate:=$lot.readyToShipDate
+		$lot_e.shippingMemo:=$lot.shippingMemo
+		$lot_e.location:=$lot.location
+		$lot_e.comment:=$lot.comment
+		$lot_e.status:=$lot.status
+		$lot_e.altDevNumber:=$lot.altDevNumber
+		//$lot_e.altLotNumber:=$lot.altLotNumber
+		$lot_e.cOfCInspector:=$lot.cOfCInspector
+		$lot_e.packageType:=$lot.packageType
+		$lot_e.dateCode:=$lot.dateCode
+		$lot_e.carrier:=$lot.carrier
+		$lot_e.shipRel:=$lot.shipRel
+		$lot_e.totalCharge:=$lot.totalCharge
+		$lot_e.unitCost:=$lot.unitCost
+		
+		$lot_e.UUID_Job:=$job.UUID
+		
+		If ($lot.parentLotNumber#"") & Not:C34(Undefined:C82($lot.parentLotNumber))
+			$lots_es:=ds:C1482.Lot.query("lotNumber = :1"; $lot.parentLotNumber)
 			
-			$lot_e.lotNumber:=$lot.lotNum
-			$lot_e.dateIn:=$lot.dateIn
-			$lot_e.dateOut:=$lot.dateOut
-			$lot_e.process:=$lot.process
-			$lot_e.device:=$lot.device
-			//$lot_e.altLotNumber:=$lot.altLotNumber
-			$lot_e.deviceTableLink:=$lot.deviceTableLink
-			$lot_e.currentOrNextArea:=$lot.currentOrNextArea
-			$lot_e.onHold:=$lot.onHold
-			$lot_e.holdDate:=$lot.holdDate
-			$lot_e.holdTime:=$lot.holdTime
-			
-			$po_s:=ds:C1482.PurchaseOrder.query("oldPoNumber =:1"; Split string:C1554($record.poNumber; "\r"; sk trim spaces:K86:2).join("\r"))
-			If ($po_s.length>0)
-				$lot_e.poNumber:=$po_s[0].poNumber
-				//$lot_e.UUID_PurchaseOrder:=$po_s[0].UUID
-				
+			If ($lots_es.length>0)
+				$lot_e.UUID_LotParent:=$lots_es[0].UUID
 			Else 
-				$lot_e.poNumber:=0
+				TRACE:C157
 			End if 
+		End if 
+		
+		$lot_e.moreData:=New object:C1471()
+		$recodNumber:=ds:C1482.sfw_Counter.getNextValue("Lot")
+		$lot_e.moreData.barcodeData:=String:C10($recodNumber; "0000000000")
+		
+		$res:=$lot_e.save()
+		
+		If (Not:C34($res.success))
+			TRACE:C157
+		Else 
 			
-			$lot_e.poNumber:=$lot.poNumber
-			
-			$lot_e.customer:=$lot.customer
-			$lot_e.commit:=$lot.commit
-			$lot_e.reCommit:=$lot.reCommit
-			$lot_e.original:=$lot.original
-			$lot_e.progressive:=$lot.progressive
-			$lot_e.ourCount:=$lot.ourCount
-			$lot_e.totalTested:=$lot.totalTested
-			$lot_e.az:=$lot.az
-			$lot_e.et:=$lot.et
-			$lot_e.OQADone:=$lot.OQADone
-			$lot_e.OQADate:=$lot.OQADate
-			$lot_e.OQASimpleSize:=$lot.OQASimpleSize
-			$lot_e.releaseNumber:=$lot.releaseNumber
-			$lot_e.trackingNumber:=$lot.trackingNumber
-			$lot_e.readyToShipDate:=$lot.readyToShipDate
-			$lot_e.shippingMemo:=$lot.shippingMemo
-			$lot_e.location:=$lot.location
-			$lot_e.comment:=$lot.comment
-			$lot_e.status:=$lot.status
-			$lot_e.altDevNumber:=$lot.altDevNumber
-			//$lot_e.altLotNumber:=$lot.altLotNumber
-			$lot_e.cOfCInspector:=$lot.cOfCInspector
-			$lot_e.packageType:=$lot.packageType
-			$lot_e.dateCode:=$lot.dateCode
-			$lot_e.carrier:=$lot.carrier
-			$lot_e.shipRel:=$lot.shipRel
-			$lot_e.totalCharge:=$lot.totalCharge
-			$lot_e.unitCost:=$lot.unitCost
-			
-			$lot_e.UUID_Job:=$job.UUID
-			
-			If ($lot.parentLotNumber#"") & Not:C34(Undefined:C82($lot.parentLotNumber))
-				$lots_es:=ds:C1482.Lot.query("lotNumber = :1"; $lot.parentLotNumber)
+			For each ($step; $lot.steps)
+				// Purpose: Populate LotStep object fields (bins/parametricMeasurements/properties/moreData) from the legacy export JSON. Keeps backward compatibility when older JSON files do not provide the new sub-keys.
+				// modified by 4D/PS [2026-april-27]
+				$lotStep_e:=ds:C1482.LotStep.new()
 				
-				If ($lots_es.length>0)
-					$lot_e.UUID_LotParent:=$lots_es[0].UUID
-				Else 
+				$lotStep_e.order:=$step.order
+				$lotStep_e.description:=$step.description
+				$lotStep_e.lotSpecs:=$step.lotSpecs
+				$lotStep_e.specRevision:=$step.specRevision
+				$lotStep_e.alert:=$step.alert
+				$lotStep_e.qtyIn:=$step.qtyIn
+				$lotStep_e.qtyOut:=$step.qtyOut
+				$lotStep_e.rejects:=$step.rejects
+				$lotStep_e.minYield:=$step.minYield
+				$lotStep_e.dateIn:=$step.dateIn
+				$lotStep_e.dateOut:=$step.dateOut
+				$lotStep_e.timeIn:=$step.timeIn
+				$lotStep_e.timeOut:=$step.timeOut
+				$lotStep_e.discard:=$step.discard
+				$lotStep_e.type:=$step.type
+				$lotStep_e.outOperator:=$step.outOperator
+				$lotStep_e.inOperator:=$step.inOperator
+				$lotStep_e.actualHours:=$step.actualHours
+				$lotStep_e.plannedHours:=$step.plannedHours
+				$lotStep_e.tools:=New object:C1471()
+				$lotStep_e.tools:=$step.tools
+				$lotStep_e.areas:=$step.areas
+				$lotStep_e.mechanicalRejects:=$step.mechanicalRejects
+				$lotStep_e.missingOrExcluded:=$step.missingOrExcluded
+				$lotStep_e.yield:=$step.yield
+				$lotStep_e.supervisor:=$step.supervisor
+				$lotStep_e.enableBins:=$step.enableBins
+				
+				While (($lotStep_e.tools#Null:C1517) && ($lotStep_e.tools.items.indexOf("")#-1))
+					
+					$lotStep_e.tools.items:=$lotStep_e.tools.items.remove($lotStep_e.tools.items.indexOf(""))
+					
+				End while 
+				
+				$lotStep_e.parametricMeasurements:=New object:C1471(\
+					"items"; New collection:C1472(); \
+					"in"; New object:C1471("par1"; 0; "par2"; 0; "par3"; 0); \
+					"out"; New object:C1471("par1"; 0; "par2"; 0; "par3"; 0)\
+					)
+				If ($step.parametricMeasurements#Null:C1517)
+					If ($step.parametricMeasurements.in#Null:C1517)
+						$lotStep_e.parametricMeasurements.in:=$step.parametricMeasurements.in
+					End if 
+					If ($step.parametricMeasurements.out#Null:C1517)
+						$lotStep_e.parametricMeasurements.out:=$step.parametricMeasurements.out
+					End if 
+				End if 
+				
+				$lotStep_e.stepInterruptions:=New object:C1471("items"; New collection:C1472())
+				$lotStep_e.dataTables:=New object:C1471("items"; New collection:C1472())
+				
+				$lotStep_e.bins:=New object:C1471(\
+					"items"; New collection:C1472())
+				If ($step.bins#Null:C1517) && ($step.bins.items#Null:C1517)
+					For each ($bin; $step.bins.items)
+						$newBin:=New object:C1471()
+						$newBin.num:=$bin.num
+						$newBin.definition:=($bin.definition=Null:C1517) ? "" : $bin.definition
+						$newBin.type:=($bin.type=Null:C1517) ? "" : $bin.type
+						$newBin.value:=($bin.value=Null:C1517) ? 0 : $bin.value
+						$lotStep_e.bins.items.push($newBin)
+					End for each 
+				End if 
+				
+				$lotStep_e.properties:=New object:C1471(\
+					"pgm"; ""; \
+					"pgmSwitch"; ""; \
+					"hardware1"; ""; \
+					"hardware2"; ""; \
+					"probeCard"; ""; \
+					"count1"; 0; \
+					"count2"; 0; \
+					"count3"; 0\
+					)
+				If ($step.properties#Null:C1517)
+					$lotStep_e.properties:=$step.properties
+				End if 
+				
+				$lotStep_e.skills:=New object:C1471("items"; New collection:C1472())
+				$lotStep_e.requitedCertifications:=New object:C1471("items"; New collection:C1472())
+				
+				$lotStep_e.UUID_Lot:=$lot_e.UUID
+				
+				$res:=$lotStep_e.save()
+				
+				If (Not:C34($res.success))
 					TRACE:C157
 				End if 
-			End if 
-			
-			$lot_e.moreData:=New object:C1471()
-			$recodNumber:=ds:C1482.sfw_Counter.getNextValue("Lot")
-			$lot_e.moreData.barcodeData:=String:C10($recodNumber; "0000000000")
-			
-			$res:=$lot_e.save()
-			
-			If (Not:C34($res.success))
-				TRACE:C157
-			Else 
-				
-				For each ($step; $lot.steps)
-					// Purpose: Populate LotStep object fields (bins/parametricMeasurements/properties/moreData) from the legacy export JSON. Keeps backward compatibility when older JSON files do not provide the new sub-keys.
-					// modified by 4D/PS [2026-april-27]
-					$lotStep_e:=ds:C1482.LotStep.new()
-					
-					$lotStep_e.order:=$step.order
-					$lotStep_e.description:=$step.description
-					$lotStep_e.lotSpecs:=$step.lotSpecs
-					$lotStep_e.specRevision:=$step.specRevision
-					$lotStep_e.alert:=$step.alert
-					$lotStep_e.qtyIn:=$step.qtyIn
-					$lotStep_e.qtyOut:=$step.qtyOut
-					$lotStep_e.rejects:=$step.rejects
-					$lotStep_e.minYield:=$step.minYield
-					$lotStep_e.dateIn:=$step.dateIn
-					$lotStep_e.dateOut:=$step.dateOut
-					$lotStep_e.timeIn:=$step.timeIn
-					$lotStep_e.timeOut:=$step.timeOut
-					$lotStep_e.discard:=$step.discard
-					$lotStep_e.type:=$step.type
-					$lotStep_e.outOperator:=$step.outOperator
-					$lotStep_e.inOperator:=$step.inOperator
-					$lotStep_e.actualHours:=$step.actualHours
-					$lotStep_e.plannedHours:=$step.plannedHours
-					$lotStep_e.tools:=New object:C1471()
-					$lotStep_e.tools:=$step.tools
-					$lotStep_e.areas:=$step.areas
-					$lotStep_e.mechanicalRejects:=$step.mechanicalRejects
-					$lotStep_e.missingOrExcluded:=$step.missingOrExcluded
-					$lotStep_e.yield:=$step.yield
-					$lotStep_e.supervisor:=$step.supervisor
-					$lotStep_e.enableBins:=$step.enableBins
-					
-					While (($lotStep_e.tools#Null:C1517) && ($lotStep_e.tools.items.indexOf("")#-1))
-						
-						$lotStep_e.tools.items:=$lotStep_e.tools.items.remove($lotStep_e.tools.items.indexOf(""))
-						
-					End while 
-					
-					$lotStep_e.parametricMeasurements:=New object:C1471(\
-						"items"; New collection:C1472(); \
-						"in"; New object:C1471("par1"; 0; "par2"; 0; "par3"; 0); \
-						"out"; New object:C1471("par1"; 0; "par2"; 0; "par3"; 0)\
-						)
-					If ($step.parametricMeasurements#Null:C1517)
-						If ($step.parametricMeasurements.in#Null:C1517)
-							$lotStep_e.parametricMeasurements.in:=$step.parametricMeasurements.in
-						End if 
-						If ($step.parametricMeasurements.out#Null:C1517)
-							$lotStep_e.parametricMeasurements.out:=$step.parametricMeasurements.out
-						End if 
-					End if 
-					
-					$lotStep_e.stepInterruptions:=New object:C1471("items"; New collection:C1472())
-					$lotStep_e.dataTables:=New object:C1471("items"; New collection:C1472())
-					
-					$lotStep_e.bins:=New object:C1471(\
-						"items"; New collection:C1472())
-					If ($step.bins#Null:C1517) && ($step.bins.items#Null:C1517)
-						For each ($bin; $step.bins.items)
-							$newBin:=New object:C1471()
-							$newBin.num:=$bin.num
-							$newBin.definition:=($bin.definition=Null:C1517) ? "" : $bin.definition
-							$newBin.type:=($bin.type=Null:C1517) ? "" : $bin.type
-							$newBin.value:=($bin.value=Null:C1517) ? 0 : $bin.value
-							$lotStep_e.bins.items.push($newBin)
-						End for each 
-					End if 
-					
-					$lotStep_e.properties:=New object:C1471(\
-						"pgm"; ""; \
-						"pgmSwitch"; ""; \
-						"hardware1"; ""; \
-						"hardware2"; ""; \
-						"probeCard"; ""; \
-						"count1"; 0; \
-						"count2"; 0; \
-						"count3"; 0\
-						)
-					If ($step.properties#Null:C1517)
-						$lotStep_e.properties:=$step.properties
-					End if 
-					
-					$lotStep_e.skills:=New object:C1471("items"; New collection:C1472())
-					$lotStep_e.requitedCertifications:=New object:C1471("items"; New collection:C1472())
-					
-					$lotStep_e.UUID_Lot:=$lot_e.UUID
-					
-					$res:=$lotStep_e.save()
-					
-					If (Not:C34($res.success))
-						TRACE:C157
-					End if 
-				End for each 
-			End if 
-		End for each 
-		
+			End for each 
+		End if 
 	End for each 
+	
 	
 /**
 fix lotParent for some lots
@@ -1322,6 +1501,7 @@ If (True:C214)
 				$staff_e.stmpTermination:=Date:C102($employee.terminationDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($employee.terminationDate))
 				$staff_e.stmpHire:=Date:C102($employee.hireDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($employee.hireDate))
 				$staff_e.terminated:=$employee.terminated
+				$staff_e.shift:=Num:C11($employee.shift)=1 ? "A" : (Num:C11($employee.shift)=2 ? "B" : $employee.shift)
 				
 				
 			Else 
@@ -1343,12 +1523,19 @@ import certification Assignment
 					$staffTrainings:=$trainings.query("Employee_Code =:1"; $employee.employeeCode)
 				End if 
 				
-				
 				For each ($training; $staffTrainings)
+					
 					$certificationAssigment_e:=ds:C1482.CertificationAssignment.new()
 					
-					$certificationAssigment_e.certificationStmp:=Date:C102($training.Tdate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($training.Tdate))
+					// Purpose: Store validity length as day count in expiredIn (calendar lapse is computed attribute expiringDate).
+					// modified by 4D/PS [2026-may-12]
+					If (Date:C102($training.Tdate)=!00-00-00!)
+						$certificationAssigment_e.certificationStmp:=0
+					Else 
+						$certificationAssigment_e.certificationStmp:=cs:C1710.sfw_stmp.me.build(Date:C102(Current date:C33))  //$training.Tdate))
+					End if 
 					$certificationAssigment_e.expiredIn:=Num:C11($training.Duration)
+					
 					$certificationAssigment_e.UUID_Staff:=$staff_e.UUID
 					
 					$certififcation:=ds:C1482.Certification.query("name =:1"; Split string:C1554($training.T_Type; "\r"; sk trim spaces:K86:2).join("\r"))
