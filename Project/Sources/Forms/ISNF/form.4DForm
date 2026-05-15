@@ -47,6 +47,50 @@
 					"stroke": "transparent",
 					"right": 545
 				},
+				"header_bkgd1": {
+					"type": "rectangle",
+					"top": 39,
+					"left": 0,
+					"width": 545,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#8DBAB8",
+					"stroke": "transparent",
+					"right": 545
+				},
+				"Text11": {
+					"type": "text",
+					"text": "INTERNAL START/STOP NOTIFICATION FORM",
+					"top": 46,
+					"left": 29,
+					"width": 293,
+					"height": 15,
+					"fontWeight": "bold"
+				},
+				"Button": {
+					"type": "button",
+					"text": "Save",
+					"top": 669,
+					"left": 447,
+					"width": 56,
+					"height": 24,
+					"events": [
+						"onClick"
+					],
+					"action": "accept"
+				},
+				"Button1": {
+					"type": "button",
+					"text": "Cancel",
+					"top": 669,
+					"left": 381,
+					"width": 56,
+					"height": 24,
+					"events": [
+						"onClick"
+					],
+					"action": "cancel"
+				},
 				"header_bkgd6": {
 					"type": "rectangle",
 					"top": 104,
@@ -199,7 +243,7 @@
 				},
 				"Text2": {
 					"type": "text",
-					"text": "Traceller",
+					"text": "Traveller",
 					"top": 141,
 					"left": 7,
 					"width": 102,
@@ -224,7 +268,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.job",
+					"dataSource": "Form:C1466.current_item.customer",
 					"enterable": false,
 					"contextMenu": "none"
 				},
@@ -246,7 +290,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.date",
+					"dataSource": "Form:C1466.current_item.lotNumber",
 					"enterable": false
 				},
 				"header_bkgd8": {
@@ -301,7 +345,7 @@
 				},
 				"Text6": {
 					"type": "text",
-					"text": "Quantity Inpected",
+					"text": "Quantity Inspected",
 					"top": 203,
 					"left": 7,
 					"width": 102,
@@ -326,9 +370,10 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.currentQty",
+					"dataSource": "Form:C1466.current_item.job.qty",
 					"enterable": false,
-					"contextMenu": "none"
+					"contextMenu": "none",
+					"textAlign": "left"
 				},
 				"header_bkgd12": {
 					"type": "rectangle",
@@ -341,7 +386,7 @@
 					"stroke": "transparent",
 					"right": 505
 				},
-				"Input3": {
+				"Input_3": {
 					"type": "input",
 					"left": 151,
 					"top": 202,
@@ -349,8 +394,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.qtyToPull",
-					"method": "ObjectMethods/Input3.4dm",
+					"dataSource": "Form:C1466.current_item.ISNF.qtyInspected",
 					"events": [
 						"onDataChange"
 					],
@@ -396,7 +440,7 @@
 					"textAlign": "right",
 					"fontWeight": "bold"
 				},
-				"input_pulledBy": {
+				"input_": {
 					"type": "input",
 					"left": 151,
 					"top": 233,
@@ -404,25 +448,13 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.pulledBy",
-					"enterable": false,
+					"dataSource": "Form:C1466.current_item.ISNF.qtyAccepted",
+					"enterable": true,
 					"contextMenu": "none",
-					"method": "ObjectMethods/input_pulledBy.4dm",
 					"events": [
 						"onClick",
 						"onMouseMove"
 					]
-				},
-				"header_bkgd1": {
-					"type": "rectangle",
-					"top": 39,
-					"left": 0,
-					"width": 545,
-					"height": 30,
-					"sizingX": "fixed",
-					"fill": "#8DBAB8",
-					"stroke": "transparent",
-					"right": 545
 				},
 				"header_bkgd20": {
 					"type": "rectangle",
@@ -473,7 +505,7 @@
 					"textAlign": "right",
 					"fontWeight": "bold"
 				},
-				"Input4": {
+				"Input_4": {
 					"type": "input",
 					"left": 151,
 					"top": 264,
@@ -481,8 +513,8 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.job",
-					"enterable": false,
+					"dataSource": "Form:C1466.current_item.ISNF.qtyRejected",
+					"enterable": true,
 					"contextMenu": "none"
 				},
 				"header_bkgd25": {
@@ -495,7 +527,7 @@
 					"fill": "#FFFFFF",
 					"stroke": "transparent"
 				},
-				"Input6": {
+				"Input_6": {
 					"type": "input",
 					"left": 151,
 					"top": 341,
@@ -503,8 +535,8 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.date",
-					"enterable": false
+					"dataSource": "Form:C1466.current_item.ISNF.originator",
+					"enterable": true
 				},
 				"header_bkgd27": {
 					"type": "rectangle",
@@ -575,7 +607,7 @@
 					"textAlign": "right",
 					"fontWeight": "bold"
 				},
-				"Input7": {
+				"Input_7": {
 					"type": "input",
 					"left": 151,
 					"top": 372,
@@ -583,8 +615,8 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.currentQty",
-					"enterable": false,
+					"dataSource": "Form:C1466.current_item.ISNF.date",
+					"enterable": true,
 					"contextMenu": "none"
 				},
 				"header_bkgd31": {
@@ -598,7 +630,7 @@
 					"stroke": "transparent",
 					"right": 505
 				},
-				"Input8": {
+				"Input_8": {
 					"type": "input",
 					"left": 151,
 					"top": 403,
@@ -606,12 +638,12 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.qtyToPull",
-					"method": "ObjectMethods/Input8.4dm",
+					"dataSource": "Form:C1466.current_item.ISNF.time",
 					"events": [
 						"onDataChange"
 					],
-					"dataSourceTypeHint": "number"
+					"dataSourceTypeHint": "number",
+					"textAlign": "left"
 				},
 				"header_bkgd33": {
 					"type": "rectangle",
@@ -682,7 +714,7 @@
 					"textAlign": "right",
 					"fontWeight": "bold"
 				},
-				"input_pulledBy1": {
+				"input_1": {
 					"type": "input",
 					"left": 151,
 					"top": 434,
@@ -690,10 +722,9 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.pulledBy",
-					"enterable": false,
+					"dataSource": "Form:C1466.current_item.ISNF.mc",
+					"enterable": true,
 					"contextMenu": "none",
-					"method": "ObjectMethods/input_pulledBy1.4dm",
 					"events": [
 						"onClick",
 						"onMouseMove"
@@ -710,7 +741,7 @@
 					"stroke": "transparent",
 					"right": 505
 				},
-				"Input9": {
+				"Input_9": {
 					"type": "input",
 					"left": 151,
 					"top": 465,
@@ -718,7 +749,7 @@
 					"height": 98,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.note"
+					"dataSource": "Form:C1466.current_item.ISNF.problemDetails"
 				},
 				"Text10": {
 					"type": "text",
@@ -726,15 +757,6 @@
 					"top": 310,
 					"left": 29,
 					"width": 144,
-					"height": 15,
-					"fontWeight": "bold"
-				},
-				"Text11": {
-					"type": "text",
-					"text": "INTERNAL START/STOP NOTIFICATION FORM",
-					"top": 46,
-					"left": 29,
-					"width": 293,
 					"height": 15,
 					"fontWeight": "bold"
 				},
@@ -767,7 +789,7 @@
 					"fill": "#FFFFFF",
 					"stroke": "transparent"
 				},
-				"Input5": {
+				"Input6": {
 					"type": "input",
 					"left": 266,
 					"top": 621,
@@ -775,8 +797,9 @@
 					"height": 16,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.invPull.date",
-					"enterable": false
+					"dataSource": "Form:C1466.current_item.ISNF.customerDate",
+					"enterable": false,
+					"dataSourceTypeHint": "date"
 				},
 				"Text25": {
 					"type": "text",
@@ -787,30 +810,7 @@
 					"height": 15,
 					"fontWeight": "bold"
 				},
-				"Button": {
-					"type": "button",
-					"text": "Save",
-					"top": 669,
-					"left": 447,
-					"width": 56,
-					"height": 24,
-					"events": [
-						"onClick"
-					]
-				},
-				"Button1": {
-					"type": "button",
-					"text": "Cancel",
-					"top": 669,
-					"left": 381,
-					"width": 56,
-					"height": 24,
-					"events": [
-						"onClick"
-					],
-					"action": "cancel"
-				},
-				"bScan1": {
+				"bScan5": {
 					"type": "button",
 					"top": 618,
 					"left": 163,
@@ -843,7 +843,10 @@
 					"height": 16,
 					"events": [
 						"onClick"
-					]
+					],
+					"dataSource": "Form:C1466.current_item.ISNF.customerService",
+					"dataSourceTypeHint": "boolean",
+					"method": "ObjectMethods/Check Box.4dm"
 				},
 				"Text26": {
 					"type": "text",
@@ -886,12 +889,13 @@
 			}
 		}
 	],
-	"geometryStamp": 463,
+	"geometryStamp": 477,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
 		"views": {
 			"View 1": {}
 		}
-	}
+	},
+	"method": "method.4dm"
 }
