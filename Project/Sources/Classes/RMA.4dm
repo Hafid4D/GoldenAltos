@@ -29,11 +29,20 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.enableTransaction()
 	
 	
+	//Mark: - Filters
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterCustomer")
+	$filter.setDefaultTitle("All customers")
+	$filter.setFilterByLinkedEntity("Customer"; "qcar.customer.UUID"; "customerUUID"; "qcar.customer")
+	$filter.setDynamicTitle("name"; "## RMA customers")
+	$entry.addFilter($filter)
 	
-	//Mark: -Views
+	
+	
+	//Mark: - Views
 	$view:=cs:C1710.sfw_definitionView.new("RmaByYear"; "RMA by Year"; "derivedFrom:main"; $entry)
 	$view.setSubset("RmaByYear")
 	$entry.setView($view)
+	
 	
 	
 Function RmaByYear()->$rmas : cs:C1710.RMASelection

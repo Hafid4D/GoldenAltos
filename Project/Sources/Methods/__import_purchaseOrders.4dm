@@ -589,6 +589,27 @@ If (True:C214)
 		
 		
 		$lotCollection:=$lotCollection.concat($record.lots)
+		
+		For each ($lotItem; $record.lots.orderBy("parentLotNumber asc"))
+			
+			$eLot:=ds:C1482.Lot.new()
+			$eLot.lotNumber:=$lotItem.lotNum
+			$po_s:=ds:C1482.PurchaseOrder.query("oldPoNumber =:1"; Split string:C1554($record.poNumber; "\r"; sk trim spaces:K86:2).join("\r"))
+			If ($po_s.length>0)
+				$eLot.poNumber:=$po_s[0].poNumber
+				
+			Else 
+				$eLot.poNumber:=0
+			End if 
+			
+			$res:=$eLot.save()
+			
+			If (Not:C34($res.success))
+				TRACE:C157
+			End if 
+			
+		End for each 
+		
 /*
 For each ($lot; $record.lots.orderBy("parentLotNumber asc"))
 		
@@ -769,9 +790,12 @@ End for each
 	
 	For each ($lot; $lotCollection)  // $record.lots.orderBy("parentLotNumber asc"))
 		
-		$lot_e:=ds:C1482.Lot.new()
+		//$lot_e:=ds.Lot.new()
 		
-		$lot_e.lotNumber:=$lot.lotNum
+		//$lot_e.lotNumber:=$lot.lotNum
+		var $lot_e : cs:C1710.LotEntity
+		$lot_e:=ds:C1482.Lot.query("lotNumber =:1"; Split string:C1554($lot.lotNum; "\r"; sk trim spaces:K86:2).join("\r")).first()
+		
 		$lot_e.dateIn:=$lot.dateIn
 		$lot_e.dateOut:=$lot.dateOut
 		$lot_e.process:=$lot.process
@@ -783,14 +807,14 @@ End for each
 		$lot_e.holdDate:=$lot.holdDate
 		$lot_e.holdTime:=$lot.holdTime
 		
-		$po_s:=ds:C1482.PurchaseOrder.query("oldPoNumber =:1"; Split string:C1554($record.poNumber; "\r"; sk trim spaces:K86:2).join("\r"))
-		If ($po_s.length>0)
-			$lot_e.poNumber:=$po_s[0].poNumber
-			//$lot_e.UUID_PurchaseOrder:=$po_s[0].UUID
-			
-		Else 
-			$lot_e.poNumber:=0
-		End if 
+		//$po_s:=ds.PurchaseOrder.query("oldPoNumber =:1"; Split string($record.poNumber; "\r"; sk trim spaces).join("\r"))
+		//If ($po_s.length>0)
+		//$lot_e.poNumber:=$po_s[0].poNumber
+		////$lot_e.UUID_PurchaseOrder:=$po_s[0].UUID
+		
+		//Else 
+		//$lot_e.poNumber:=0
+		//End if 
 		
 		$lot_e.poNumber:=$lot.poNumber
 		
@@ -870,7 +894,7 @@ End for each
 				$lotStep_e.actualHours:=$step.actualHours
 				$lotStep_e.plannedHours:=$step.plannedHours
 				$lotStep_e.tools:=New object:C1471()
-				$lotStep_e.tools:=$step.tools
+				$lotStep_e.tools:=$step.tools.items.filter(Formula:C1597($1.value#""))  //$step.tools
 				$lotStep_e.areas:=$step.areas
 				$lotStep_e.mechanicalRejects:=$step.mechanicalRejects
 				$lotStep_e.missingOrExcluded:=$step.missingOrExcluded
@@ -878,11 +902,11 @@ End for each
 				$lotStep_e.supervisor:=$step.supervisor
 				$lotStep_e.enableBins:=$step.enableBins
 				
-				While (($lotStep_e.tools#Null:C1517) && ($lotStep_e.tools.items.indexOf("")#-1))
-					
-					$lotStep_e.tools.items:=$lotStep_e.tools.items.remove($lotStep_e.tools.items.indexOf(""))
-					
-				End while 
+				//While (($lotStep_e.tools#Null) && ($lotStep_e.tools.items.indexOf("")#-1))
+				
+				//$lotStep_e.tools.items:=$lotStep_e.tools.items.remove($lotStep_e.tools.items.indexOf(""))
+				
+				//End while 
 				
 				$lotStep_e.parametricMeasurements:=New object:C1471(\
 					"items"; New collection:C1472(); \
@@ -902,17 +926,20 @@ End for each
 				$lotStep_e.dataTables:=New object:C1471("items"; New collection:C1472())
 				
 				$lotStep_e.bins:=New object:C1471(\
-					"items"; New collection:C1472())
-				If ($step.bins#Null:C1517) && ($step.bins.items#Null:C1517)
-					For each ($bin; $step.bins.items)
-						$newBin:=New object:C1471()
-						$newBin.num:=$bin.num
-						$newBin.definition:=($bin.definition=Null:C1517) ? "" : $bin.definition
-						$newBin.type:=($bin.type=Null:C1517) ? "" : $bin.type
-						$newBin.value:=($bin.value=Null:C1517) ? 0 : $bin.value
-						$lotStep_e.bins.items.push($newBin)
-					End for each 
-				End if 
+					"items"; $step.bins.items)
+				
+				//$lotStep_e.bins:=New object(\
+					"items"; New collection())
+				//If ($step.bins#Null) && ($step.bins.items#Null)
+				//For each ($bin; $step.bins.items)
+				//$newBin:=New object()
+				//$newBin.num:=$bin.num
+				//$newBin.definition:=($bin.definition=Null) ? "" : $bin.definition
+				//$newBin.type:=($bin.type=Null) ? "" : $bin.type
+				//$newBin.value:=($bin.value=Null) ? 0 : $bin.value
+				//$lotStep_e.bins.items.push($newBin)
+				//End for each 
+				//End if 
 				
 				$lotStep_e.properties:=New object:C1471(\
 					"pgm"; ""; \
