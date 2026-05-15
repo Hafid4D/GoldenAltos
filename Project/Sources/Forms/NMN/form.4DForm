@@ -47,6 +47,317 @@
 					"stroke": "transparent",
 					"right": 545
 				},
+				"header_bkgd1": {
+					"type": "rectangle",
+					"top": 39,
+					"left": 0,
+					"width": 545,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#8DBAB8",
+					"stroke": "transparent",
+					"right": 545
+				},
+				"Text11": {
+					"type": "text",
+					"text": "NON-CONFORMING MATERIAL NOTICE (NMN)",
+					"top": 46,
+					"left": 29,
+					"width": 293,
+					"height": 15,
+					"fontWeight": "bold"
+				},
+				"header_bkgd39": {
+					"type": "rectangle",
+					"top": 646,
+					"left": 450,
+					"width": 95,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
+				"header_bkgd40": {
+					"type": "rectangle",
+					"top": 646,
+					"left": 199,
+					"width": 63,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
+				"Text22": {
+					"type": "text",
+					"text": "Date",
+					"top": 652,
+					"left": 206,
+					"width": 51,
+					"height": 15,
+					"fontWeight": "bold"
+				},
+				"header_bkgd41": {
+					"type": "rectangle",
+					"top": 646,
+					"left": 261,
+					"width": 244,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#FFFFFF",
+					"stroke": "transparent"
+				},
+				"Input10": {
+					"type": "input",
+					"left": 266,
+					"top": 651,
+					"width": 178,
+					"height": 16,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.current_item.NMN.engineeringDate",
+					"enterable": false,
+					"dataSourceTypeHint": "date"
+				},
+				"header_bkgd42": {
+					"type": "rectangle",
+					"top": 676,
+					"left": 450,
+					"width": 95,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
+				"header_bkgd43": {
+					"type": "rectangle",
+					"top": 676,
+					"left": 199,
+					"width": 63,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
+				"Text23": {
+					"type": "text",
+					"text": "Date",
+					"top": 682,
+					"left": 206,
+					"width": 51,
+					"height": 15,
+					"fontWeight": "bold"
+				},
+				"header_bkgd44": {
+					"type": "rectangle",
+					"top": 676,
+					"left": 261,
+					"width": 244,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#FFFFFF",
+					"stroke": "transparent"
+				},
+				"Input11": {
+					"type": "input",
+					"left": 266,
+					"top": 681,
+					"width": 178,
+					"height": 16,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.current_item.NMN.qaqcDate",
+					"enterable": false,
+					"dataSourceTypeHint": "date"
+				},
+				"header_bkgd45": {
+					"type": "rectangle",
+					"top": 706,
+					"left": 450,
+					"width": 95,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
+				"header_bkgd46": {
+					"type": "rectangle",
+					"top": 706,
+					"left": 199,
+					"width": 63,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#B1CFDE",
+					"stroke": "transparent"
+				},
+				"Text24": {
+					"type": "text",
+					"text": "Date",
+					"top": 712,
+					"left": 206,
+					"width": 51,
+					"height": 15,
+					"fontWeight": "bold"
+				},
+				"header_bkgd47": {
+					"type": "rectangle",
+					"top": 706,
+					"left": 261,
+					"width": 244,
+					"height": 28,
+					"sizingX": "fixed",
+					"fill": "#FFFFFF",
+					"stroke": "transparent"
+				},
+				"Input12": {
+					"type": "input",
+					"left": 266,
+					"top": 711,
+					"width": 178,
+					"height": 16,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.current_item.NMN.productionDate",
+					"enterable": false,
+					"dataSourceTypeHint": "date"
+				},
+				"Button": {
+					"type": "button",
+					"text": "Save",
+					"top": 759,
+					"left": 447,
+					"width": 56,
+					"height": 24,
+					"events": [
+						"onClick"
+					],
+					"action": "accept"
+				},
+				"Button1": {
+					"type": "button",
+					"text": "Cancel",
+					"top": 759,
+					"left": 381,
+					"width": 56,
+					"height": 24,
+					"events": [
+						"onClick"
+					],
+					"action": "cancel"
+				},
+				"bScan2": {
+					"type": "button",
+					"top": 708,
+					"left": 163,
+					"width": 23,
+					"height": 23,
+					"sizingY": "fixed",
+					"focusable": false,
+					"text": "",
+					"icon": "/RESOURCES/image/button/barcode-scan.png",
+					"iconFrames": 1,
+					"textPlacement": "right",
+					"style": "regular",
+					"events": [
+						"onClick"
+					],
+					"action": "",
+					"sizingX": "fixed",
+					"shortcutAccel": false,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": false,
+					"shortcutKey": ""
+				},
+				"bScan3": {
+					"type": "button",
+					"top": 648,
+					"left": 163,
+					"width": 23,
+					"height": 23,
+					"sizingY": "fixed",
+					"focusable": false,
+					"text": "",
+					"icon": "/RESOURCES/image/button/barcode-scan.png",
+					"iconFrames": 1,
+					"textPlacement": "right",
+					"style": "regular",
+					"events": [
+						"onClick"
+					],
+					"action": "",
+					"sizingX": "fixed",
+					"shortcutAccel": false,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": false,
+					"shortcutKey": ""
+				},
+				"bScan4": {
+					"type": "button",
+					"top": 678,
+					"left": 163,
+					"width": 23,
+					"height": 23,
+					"sizingY": "fixed",
+					"focusable": false,
+					"text": "",
+					"icon": "/RESOURCES/image/button/barcode-scan.png",
+					"iconFrames": 1,
+					"textPlacement": "right",
+					"style": "regular",
+					"events": [
+						"onClick"
+					],
+					"action": "",
+					"sizingX": "fixed",
+					"shortcutAccel": false,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": false,
+					"shortcutKey": ""
+				},
+				"Check Box1": {
+					"type": "checkbox",
+					"text": "Engineering",
+					"top": 651,
+					"left": 29,
+					"width": 119,
+					"height": 16,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.current_item.NMN.engineering",
+					"method": "ObjectMethods/Check Box1.4dm",
+					"dataSourceTypeHint": "boolean"
+				},
+				"Check Box2": {
+					"type": "checkbox",
+					"text": "QA/QC",
+					"top": 681,
+					"left": 29,
+					"width": 119,
+					"height": 16,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.current_item.NMN.qaqc",
+					"method": "ObjectMethods/Check Box2.4dm",
+					"dataSourceTypeHint": "boolean"
+				},
+				"Check Box3": {
+					"type": "checkbox",
+					"text": "Production",
+					"top": 711,
+					"left": 29,
+					"width": 119,
+					"height": 16,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.current_item.NMN.production",
+					"method": "ObjectMethods/Check Box3.4dm",
+					"dataSourceTypeHint": "boolean"
+				},
 				"header_bkgd6": {
 					"type": "rectangle",
 					"top": 104,
@@ -199,7 +510,7 @@
 				},
 				"Text2": {
 					"type": "text",
-					"text": "Traceller",
+					"text": "Traveller",
 					"top": 141,
 					"left": 7,
 					"width": 102,
@@ -246,8 +557,8 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.current_item.NMN.traceller",
-					"enterable": true
+					"dataSource": "Form:C1466.current_item.lotNumber",
+					"enterable": false
 				},
 				"header_bkgd8": {
 					"type": "rectangle",
@@ -301,7 +612,7 @@
 				},
 				"Text6": {
 					"type": "text",
-					"text": "Quantity Inpected",
+					"text": "Quantity Inspected",
 					"top": 203,
 					"left": 7,
 					"width": 102,
@@ -326,9 +637,10 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.current_item.NMN.qty",
-					"enterable": true,
-					"contextMenu": "none"
+					"dataSource": "Form:C1466.current_item.job.qty",
+					"enterable": false,
+					"contextMenu": "none",
+					"textAlign": "left"
 				},
 				"header_bkgd12": {
 					"type": "rectangle",
@@ -341,7 +653,7 @@
 					"stroke": "transparent",
 					"right": 505
 				},
-				"Input3": {
+				"Input_3": {
 					"type": "input",
 					"left": 151,
 					"top": 202,
@@ -349,7 +661,7 @@
 					"height": 18,
 					"borderStyle": "none",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.current_item.NMN.qtyInpected",
+					"dataSource": "Form:C1466.current_item.NMN.qtyInspected",
 					"events": [
 						"onDataChange"
 					],
@@ -395,7 +707,7 @@
 					"textAlign": "right",
 					"fontWeight": "bold"
 				},
-				"input_pulledBy": {
+				"input_14": {
 					"type": "input",
 					"left": 151,
 					"top": 233,
@@ -410,17 +722,6 @@
 						"onClick",
 						"onMouseMove"
 					]
-				},
-				"header_bkgd1": {
-					"type": "rectangle",
-					"top": 39,
-					"left": 0,
-					"width": 545,
-					"height": 30,
-					"sizingX": "fixed",
-					"fill": "#8DBAB8",
-					"stroke": "transparent",
-					"right": 545
 				},
 				"header_bkgd20": {
 					"type": "rectangle",
@@ -471,7 +772,7 @@
 					"textAlign": "right",
 					"fontWeight": "bold"
 				},
-				"Input4": {
+				"Input_4": {
 					"type": "input",
 					"left": 151,
 					"top": 264,
@@ -493,7 +794,7 @@
 					"fill": "#FFFFFF",
 					"stroke": "transparent"
 				},
-				"Input6": {
+				"Input_6": {
 					"type": "input",
 					"left": 151,
 					"top": 341,
@@ -573,7 +874,7 @@
 					"textAlign": "right",
 					"fontWeight": "bold"
 				},
-				"Input7": {
+				"Input_7": {
 					"type": "input",
 					"left": 151,
 					"top": 372,
@@ -596,7 +897,7 @@
 					"stroke": "transparent",
 					"right": 505
 				},
-				"Input8": {
+				"Input_8": {
 					"type": "input",
 					"left": 151,
 					"top": 403,
@@ -608,7 +909,8 @@
 					"events": [
 						"onDataChange"
 					],
-					"dataSourceTypeHint": "number"
+					"dataSourceTypeHint": "number",
+					"textAlign": "left"
 				},
 				"header_bkgd33": {
 					"type": "rectangle",
@@ -679,7 +981,7 @@
 					"textAlign": "right",
 					"fontWeight": "bold"
 				},
-				"input_pulledBy1": {
+				"input_13": {
 					"type": "input",
 					"left": 151,
 					"top": 434,
@@ -706,7 +1008,7 @@
 					"stroke": "transparent",
 					"right": 505
 				},
-				"Input9": {
+				"Input_9": {
 					"type": "input",
 					"left": 151,
 					"top": 465,
@@ -722,15 +1024,6 @@
 					"top": 310,
 					"left": 29,
 					"width": 144,
-					"height": 15,
-					"fontWeight": "bold"
-				},
-				"Text11": {
-					"type": "text",
-					"text": "NON-CONFORMING MATERIAL NOTICE (NMN)",
-					"top": 46,
-					"left": 29,
-					"width": 293,
 					"height": 15,
 					"fontWeight": "bold"
 				},
@@ -772,157 +1065,8 @@
 					"borderStyle": "none",
 					"fill": "transparent",
 					"dataSource": "Form:C1466.current_item.NMN.customerDate",
-					"enterable": false
-				},
-				"header_bkgd39": {
-					"type": "rectangle",
-					"top": 646,
-					"left": 450,
-					"width": 95,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"header_bkgd40": {
-					"type": "rectangle",
-					"top": 646,
-					"left": 199,
-					"width": 63,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Text22": {
-					"type": "text",
-					"text": "Date",
-					"top": 652,
-					"left": 206,
-					"width": 51,
-					"height": 15,
-					"fontWeight": "bold"
-				},
-				"header_bkgd41": {
-					"type": "rectangle",
-					"top": 646,
-					"left": 261,
-					"width": 244,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#FFFFFF",
-					"stroke": "transparent"
-				},
-				"Input10": {
-					"type": "input",
-					"left": 266,
-					"top": 651,
-					"width": 178,
-					"height": 16,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.current_item.NMN.engineeringDate",
-					"enterable": false
-				},
-				"header_bkgd42": {
-					"type": "rectangle",
-					"top": 676,
-					"left": 450,
-					"width": 95,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"header_bkgd43": {
-					"type": "rectangle",
-					"top": 676,
-					"left": 199,
-					"width": 63,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Text23": {
-					"type": "text",
-					"text": "Date",
-					"top": 682,
-					"left": 206,
-					"width": 51,
-					"height": 15,
-					"fontWeight": "bold"
-				},
-				"header_bkgd44": {
-					"type": "rectangle",
-					"top": 676,
-					"left": 261,
-					"width": 244,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#FFFFFF",
-					"stroke": "transparent"
-				},
-				"Input11": {
-					"type": "input",
-					"left": 266,
-					"top": 681,
-					"width": 178,
-					"height": 16,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.current_item.NMN.qaqcDate",
-					"enterable": false
-				},
-				"header_bkgd45": {
-					"type": "rectangle",
-					"top": 706,
-					"left": 450,
-					"width": 95,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"header_bkgd46": {
-					"type": "rectangle",
-					"top": 706,
-					"left": 199,
-					"width": 63,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#B1CFDE",
-					"stroke": "transparent"
-				},
-				"Text24": {
-					"type": "text",
-					"text": "Date",
-					"top": 712,
-					"left": 206,
-					"width": 51,
-					"height": 15,
-					"fontWeight": "bold"
-				},
-				"header_bkgd47": {
-					"type": "rectangle",
-					"top": 706,
-					"left": 261,
-					"width": 244,
-					"height": 28,
-					"sizingX": "fixed",
-					"fill": "#FFFFFF",
-					"stroke": "transparent"
-				},
-				"Input12": {
-					"type": "input",
-					"left": 266,
-					"top": 711,
-					"width": 178,
-					"height": 16,
-					"borderStyle": "none",
-					"fill": "transparent",
-					"dataSource": "Form:C1466.current_item.NMN.productionDate",
-					"enterable": false
+					"enterable": false,
+					"dataSourceTypeHint": "date"
 				},
 				"Text25": {
 					"type": "text",
@@ -933,104 +1077,9 @@
 					"height": 15,
 					"fontWeight": "bold"
 				},
-				"Button": {
-					"type": "button",
-					"text": "Save",
-					"top": 759,
-					"left": 447,
-					"width": 56,
-					"height": 24,
-					"events": [
-						"onClick"
-					]
-				},
-				"Button1": {
-					"type": "button",
-					"text": "Cancel",
-					"top": 759,
-					"left": 381,
-					"width": 56,
-					"height": 24,
-					"events": [
-						"onClick"
-					],
-					"action": "cancel"
-				},
 				"bScan1": {
 					"type": "button",
 					"top": 618,
-					"left": 163,
-					"width": 23,
-					"height": 23,
-					"sizingY": "fixed",
-					"focusable": false,
-					"text": "",
-					"icon": "/RESOURCES/image/button/barcode-scan.png",
-					"iconFrames": 1,
-					"textPlacement": "right",
-					"style": "regular",
-					"events": [
-						"onClick"
-					],
-					"action": "",
-					"sizingX": "fixed",
-					"shortcutAccel": false,
-					"shortcutControl": false,
-					"shortcutShift": false,
-					"shortcutAlt": false,
-					"shortcutKey": ""
-				},
-				"bScan2": {
-					"type": "button",
-					"top": 708,
-					"left": 163,
-					"width": 23,
-					"height": 23,
-					"sizingY": "fixed",
-					"focusable": false,
-					"text": "",
-					"icon": "/RESOURCES/image/button/barcode-scan.png",
-					"iconFrames": 1,
-					"textPlacement": "right",
-					"style": "regular",
-					"events": [
-						"onClick"
-					],
-					"action": "",
-					"sizingX": "fixed",
-					"shortcutAccel": false,
-					"shortcutControl": false,
-					"shortcutShift": false,
-					"shortcutAlt": false,
-					"shortcutKey": ""
-				},
-				"bScan3": {
-					"type": "button",
-					"top": 648,
-					"left": 163,
-					"width": 23,
-					"height": 23,
-					"sizingY": "fixed",
-					"focusable": false,
-					"text": "",
-					"icon": "/RESOURCES/image/button/barcode-scan.png",
-					"iconFrames": 1,
-					"textPlacement": "right",
-					"style": "regular",
-					"events": [
-						"onClick"
-					],
-					"action": "",
-					"sizingX": "fixed",
-					"shortcutAccel": false,
-					"shortcutControl": false,
-					"shortcutShift": false,
-					"shortcutAlt": false,
-					"shortcutKey": ""
-				},
-				"bScan4": {
-					"type": "button",
-					"top": 678,
 					"left": 163,
 					"width": 23,
 					"height": 23,
@@ -1061,40 +1110,10 @@
 					"height": 16,
 					"events": [
 						"onClick"
-					]
-				},
-				"Check Box1": {
-					"type": "checkbox",
-					"text": "Engineering",
-					"top": 651,
-					"left": 29,
-					"width": 119,
-					"height": 16,
-					"events": [
-						"onClick"
-					]
-				},
-				"Check Box2": {
-					"type": "checkbox",
-					"text": "QA/QC",
-					"top": 681,
-					"left": 29,
-					"width": 119,
-					"height": 16,
-					"events": [
-						"onClick"
-					]
-				},
-				"Check Box3": {
-					"type": "checkbox",
-					"text": "Production",
-					"top": 711,
-					"left": 29,
-					"width": 119,
-					"height": 16,
-					"events": [
-						"onClick"
-					]
+					],
+					"method": "ObjectMethods/Check Box.4dm",
+					"dataSource": "Form:C1466.current_item.NMN.customerService",
+					"dataSourceTypeHint": "boolean"
 				},
 				"Text26": {
 					"type": "text",
@@ -1133,96 +1152,17 @@
 					"height": 15,
 					"textAlign": "right",
 					"fontWeight": "bold"
-				},
-				"dp_0": {
-					"type": "subform",
-					"top": 621,
-					"left": 515,
-					"width": 19,
-					"height": 16,
-					"dataSource": "Form:C1466.current_item.dateIn",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/dp_0.4dm",
-					"events": [
-						"onLoad"
-					],
-					"focusable": true
-				},
-				"dp_1": {
-					"type": "subform",
-					"top": 651,
-					"left": 515,
-					"width": 19,
-					"height": 16,
-					"dataSource": "Form:C1466.current_item.NMN.engineeringDate",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/dp_1.4dm",
-					"events": [
-						"onLoad"
-					],
-					"focusable": true
-				},
-				"dp_2": {
-					"type": "subform",
-					"top": 681,
-					"left": 515,
-					"width": 19,
-					"height": 16,
-					"dataSource": "Form:C1466.current_item.NMN.qaqcDate",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/dp_2.4dm",
-					"events": [
-						"onLoad"
-					],
-					"focusable": true
-				},
-				"dp_3": {
-					"type": "subform",
-					"top": 711,
-					"left": 515,
-					"width": 19,
-					"height": 16,
-					"dataSource": "Form:C1466.current_item.NMN.productionDate",
-					"dataSourceTypeHint": "date",
-					"detailForm": "DateButton",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/dp_3.4dm",
-					"events": [
-						"onLoad"
-					],
-					"focusable": true
 				}
 			}
 		}
 	],
-	"geometryStamp": 467,
+	"geometryStamp": 509,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
 		"views": {
 			"View 1": {}
 		}
-	}
+	},
+	"method": "method.4dm"
 }

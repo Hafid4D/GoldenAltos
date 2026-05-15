@@ -464,39 +464,114 @@ Function bActionCheck()
 	APPEND MENU ITEM:C411($refMenu; "NON-CONFORMING MATERIAL NOTICE (NMN)")
 	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--nmn")
 	ENABLE MENU ITEM:C149($refMenu; -1)
-	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
-		DISABLE MENU ITEM:C150($refMenu; -1)
-	End if 
+	
 	
 	APPEND MENU ITEM:C411($refMenu; "INTERNAL START/STOP NOTIFICATION FORM")
 	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--isnf")
 	ENABLE MENU ITEM:C149($refMenu; -1)
-	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
-		DISABLE MENU ITEM:C150($refMenu; -1)
-	End if 
+	
 	
 	$choose:=Dynamic pop up menu:C1006($refMenu)
 	
 	Case of 
 		: ($choose="--nmn")
-			
+			If (Form:C1466.current_item.NMN=Null:C1517)
+				Form:C1466.current_item.NMN:=New object:C1471()
+			End if 
 			$winRef:=Open form window:C675("NMN"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
 			DIALOG:C40("NMN"; Form:C1466)
 			CLOSE WINDOW:C154($winRef)
 			
 			If (ok=1)
-				$step_e:=$form.step
 				
-				$res:=$step_e.save()
+				$NMN:=New object:C1471(\
+					"qty"; Form:C1466.current_item.NMN.qty; \
+					"qtyInspected"; Form:C1466.current_item.NMN.qtyInspected; \
+					"qtyAccepted"; Form:C1466.current_item.NMN.qtyAccepted; \
+					"qtyRejected"; Form:C1466.current_item.NMN.qtyRejected; \
+					"originator"; Form:C1466.current_item.NMN.originator; \
+					"date"; Date:C102(Form:C1466.current_item.NMN.date); \
+					"time"; Time:C179(Form:C1466.current_item.NMN.time); \
+					"mc"; Form:C1466.current_item.NMN.mc; \
+					"problemDetails"; Form:C1466.current_item.NMN.problemDetails; \
+					"customerDate"; Date:C102(Form:C1466.current_item.NMN.customerDate); \
+					"engineeringDate"; Date:C102(Form:C1466.current_item.NMN.engineeringDate); \
+					"qaqcDate"; Date:C102(Form:C1466.current_item.NMN.qaqcDate); \
+					"productionDate"; Date:C102(Form:C1466.current_item.NMN.productionDate); \
+					"customerService"; Form:C1466.current_item.NMN.customerService; \
+					"engineering"; Form:C1466.current_item.NMN.engineering; \
+					"qaqc"; Form:C1466.current_item.NMN.qaqc; \
+					"production"; Form:C1466.current_item.NMN.production\
+					)
 				
-				If ($res.success)
-					This:C1470.loadSteps()
-					This:C1470._activate_save_cancel_button()
+				Form:C1466.current_item.NMN:=$NMN
+				
+				If (Form:C1466.current_item#Null:C1517)
+					Form:C1466.current_item.save()
 				End if 
+				
+				This:C1470._activate_save_cancel_button()
+				
 			End if 
 			
+			
 		: ($choose="--isnf")
+			If (Form:C1466.current_item.ISNF=Null:C1517)
+				Form:C1466.current_item.ISNF:=New object:C1471()
+			End if 
+			If (Form:C1466.current_item.ISNF.date=Null:C1517)
+				Form:C1466.current_item.ISNF.date:=Date:C102(0)
+			End if 
 			$winRef:=Open form window:C675("ISNF"; Controller form window:K39:17; Horizontally centered:K39:1; Vertically centered:K39:4)
-			DIALOG:C40("ISNF"; $form)
+			DIALOG:C40("ISNF"; Form:C1466)
 			CLOSE WINDOW:C154($winRef)
+			If (ok=1)
+				
+				$ISNF:=New object:C1471(\
+					"qty"; Form:C1466.current_item.ISNF.qty; \
+					"qtyInspected"; Form:C1466.current_item.ISNF.qtyInspected; \
+					"qtyAccepted"; Form:C1466.current_item.ISNF.qtyAccepted; \
+					"qtyRejected"; Form:C1466.current_item.ISNF.qtyRejected; \
+					"originator"; Form:C1466.current_item.ISNF.originator; \
+					"date"; Date:C102(Form:C1466.current_item.ISNF.date); \
+					"time"; Time:C179(Form:C1466.current_item.ISNF.time); \
+					"mc"; Form:C1466.current_item.ISNF.mc; \
+					"problemDetails"; Form:C1466.current_item.ISNF.problemDetails; \
+					"customerDate"; Date:C102(Form:C1466.current_item.ISNF.customerDate); \
+					"customerService"; Form:C1466.current_item.ISNF.customerService\
+					)
+				
+				Form:C1466.current_item.ISNF:=$ISNF
+				
+				If (Form:C1466.current_item#Null:C1517)
+					Form:C1466.current_item.save()
+				End if 
+				
+				This:C1470._activate_save_cancel_button()
+				
+			End if 
 	End case 
+	
+	
+Function enableModify()
+	OBJECT SET ENTERABLE:C238(*; "input_@"; Form:C1466.sfw.checkIsInModification())
+	
+	OBJECT SET ENABLED:C1123(*; "Check Box@"; Form:C1466.sfw.checkIsInModification())
+	OBJECT SET ENABLED:C1123(*; "bScan@"; Form:C1466.sfw.checkIsInModification())
+	
+	If (Form:C1466.sfw.checkIsInModification())
+		OBJECT SET ENTERABLE:C238(*; "input6"; Form:C1466.current_item.ISNF.customerService)
+		OBJECT SET ENTERABLE:C238(*; "input5"; Form:C1466.current_item.NMN.customerService)
+		OBJECT SET ENTERABLE:C238(*; "input10"; Form:C1466.current_item.NMN.engineering)
+		OBJECT SET ENTERABLE:C238(*; "input11"; Form:C1466.current_item.NMN.qaqc)
+		OBJECT SET ENTERABLE:C238(*; "input12"; Form:C1466.current_item.NMN.production)
+		
+		OBJECT SET ENABLED:C1123(*; "bScan5"; Bool:C1537(Form:C1466.current_item.ISNF.customerService))
+		OBJECT SET ENABLED:C1123(*; "bScan1"; Bool:C1537(Form:C1466.current_item.NMN.customerService))
+		OBJECT SET ENABLED:C1123(*; "bScan3"; Bool:C1537(Form:C1466.current_item.NMN.engineering))
+		OBJECT SET ENABLED:C1123(*; "bScan4"; Bool:C1537(Form:C1466.current_item.NMN.qaqc))
+		OBJECT SET ENABLED:C1123(*; "bScan2"; Bool:C1537(Form:C1466.current_item.NMN.production))
+	End if 
+	
+	
+	
