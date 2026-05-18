@@ -34,12 +34,13 @@ Function get dealType()->$name : Text
 Function get numCode()->$num : Integer
 	$num:=Num:C11(This:C1470.leadCode)
 	
-	
-	
 Function get stage()->$stage : Text
 	var $eLeadStage : cs:C1710.LeadStageEntity
 	$eLeadStage:=ds:C1482.LeadStage.query("stageID = :1"; Num:C11(This:C1470.currentStageID)).first()
 	$stage:=$eLeadStage.name || "-"
+	
+Function get nextAction()->$nextAction : Text
+	$nextAction:=This:C1470.nextStep.name
 	
 	//Mark:-call back functions
 local Function beforeSaveCreation()

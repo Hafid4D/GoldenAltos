@@ -121,7 +121,7 @@
 				"label_1_3": {
 					"type": "text",
 					"top": 62,
-					"left": 313,
+					"left": 688,
 					"width": 85,
 					"height": 15,
 					"stroke": "#808080",
@@ -130,7 +130,7 @@
 				"entryField_1_3": {
 					"type": "input",
 					"top": 62,
-					"left": 406,
+					"left": 781,
 					"width": 72,
 					"height": 15,
 					"dataSource": "Form:C1466.current_item.amount",
@@ -316,6 +316,34 @@
 					"events": [
 						"onClick"
 					]
+				},
+				"label_1_4": {
+					"type": "text",
+					"top": 62,
+					"left": 313,
+					"width": 85,
+					"height": 15,
+					"stroke": "#808080",
+					"text": "Project"
+				},
+				"entryField_1_1": {
+					"type": "input",
+					"top": 62,
+					"left": 406,
+					"width": 72,
+					"height": 15,
+					"dataSource": "Form:C1466.current_item.project",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
 				}
 			}
 		},
@@ -432,20 +460,11 @@
 					"width": 64,
 					"height": 15,
 					"stroke": "#808080",
-					"text": "Next Step"
-				},
-				"label_0_7": {
-					"type": "text",
-					"top": 232,
-					"left": 12,
-					"width": 64,
-					"height": 15,
-					"stroke": "#808080",
-					"text": "Probability"
+					"text": "Next Action"
 				},
 				"label_0_9": {
 					"type": "text",
-					"top": 257,
+					"top": 232,
 					"left": 12,
 					"width": 69,
 					"height": 15,
@@ -488,32 +507,12 @@
 					"dataSourceTypeHint": "date",
 					"entryFilter": "!0&9##/##/####"
 				},
-				"entryField_probabilityPC": {
+				"entryField_reasonWL": {
 					"type": "input",
 					"top": 232,
 					"left": 102,
-					"width": 162,
-					"height": 15,
-					"dataSource": "Form:C1466.current_item.probabilityPC",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"dataSourceTypeHint": "integer",
-					"numberFormat": "##0 %",
-					"method": "ObjectMethods/entryField_probabilityPC.4dm"
-				},
-				"entryField_reasonWL": {
-					"type": "input",
-					"top": 257,
-					"left": 102,
 					"width": 173,
-					"height": 48,
+					"height": 80,
 					"dataSource": "Form:C1466.current_item.reasonWL",
 					"focusable": false,
 					"enterable": false,
@@ -710,24 +709,25 @@
 						}
 					]
 				},
-				"pup_nextStep": {
-					"type": "button",
-					"top": 204,
+				"entryField_nextAction": {
+					"type": "input",
+					"top": 207,
 					"left": 102,
 					"width": 162,
-					"height": 20,
-					"fontFamily": "System Font",
-					"fontSize": 13,
+					"height": 15,
+					"dataSource": "Form:C1466.current_item.nextStep.name",
 					"focusable": false,
-					"text": "Next Step",
-					"icon": "",
-					"popupPlacement": "linked",
-					"textPlacement": "right",
-					"style": "bevel",
-					"method": "ObjectMethods/pup_nextStep.4dm",
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
 					"events": [
-						"onClick"
-					]
+						"onClick",
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"method": "ObjectMethods/entryField_nextAction.4dm"
 				}
 			}
 		},
@@ -762,7 +762,7 @@
 					"type": "listbox",
 					"top": 114,
 					"left": 131,
-					"width": 448,
+					"width": 564,
 					"height": 539,
 					"resizingMode": "legacy",
 					"listboxType": "collection",
@@ -787,34 +787,9 @@
 					"method": "ObjectMethods/lb_interactions.4dm",
 					"columns": [
 						{
-							"name": "Colonne2",
-							"dataSource": "This:C1470.number",
-							"width": 40,
-							"minWidth": 10,
-							"maxWidth": 32000,
-							"events": [
-								"onClick",
-								"onDataChange"
-							],
-							"header": {
-								"name": "ID",
-								"text": "#",
-								"fontTheme": "normal",
-								"textAlign": "left"
-							},
-							"footer": {
-								"name": "Pied2",
-								"timeFormat": "hh_mm_ss",
-								"fontFamily": "System Font Regular",
-								"fontSize": 10
-							},
-							"fontTheme": "normal",
-							"enterable": false
-						},
-						{
 							"name": "Colonne9",
 							"dataSource": "This:C1470.creationDate",
-							"width": 102,
+							"width": 83,
 							"minWidth": 10,
 							"maxWidth": 32000,
 							"events": [
@@ -838,9 +813,21 @@
 							"dataSourceTypeHint": "text"
 						},
 						{
+							"header": {
+								"name": "Header19",
+								"text": "Activity Type"
+							},
+							"name": "Column19",
+							"footer": {
+								"name": "Footer19"
+							},
+							"dataSource": "This:C1470.trigger.name",
+							"width": 104
+						},
+						{
 							"name": "Colonne4",
 							"dataSource": "This:C1470.contact.fullName",
-							"width": 165,
+							"width": 119,
 							"minWidth": 10,
 							"maxWidth": 32000,
 							"events": [
@@ -865,8 +852,19 @@
 						},
 						{
 							"header": {
+								"name": "Header21",
+								"text": "Owner"
+							},
+							"name": "Column21",
+							"footer": {
+								"name": "Footer21"
+							},
+							"dataSource": "This:C1470.staff.fullName"
+						},
+						{
+							"header": {
 								"name": "Header20",
-								"text": "Type"
+								"text": "Status"
 							},
 							"name": "Column20",
 							"footer": {
@@ -880,14 +878,14 @@
 					"type": "text",
 					"text": "Number",
 					"top": 124,
-					"left": 598,
+					"left": 698,
 					"width": 91,
 					"height": 16,
 					"stroke": "#808080"
 				},
 				"Inter_input_number": {
 					"type": "input",
-					"left": 704,
+					"left": 804,
 					"top": 124,
 					"width": 261,
 					"height": 17,
@@ -904,14 +902,14 @@
 					"type": "text",
 					"text": "Creation date",
 					"top": 158,
-					"left": 598,
+					"left": 698,
 					"width": 91,
 					"height": 16,
 					"stroke": "#808080"
 				},
 				"entryField_Inter_input_creationDate": {
 					"type": "input",
-					"left": 704,
+					"left": 804,
 					"top": 158,
 					"width": 261,
 					"height": 17,
@@ -924,7 +922,7 @@
 				"pup_method": {
 					"type": "button",
 					"top": 254,
-					"left": 704,
+					"left": 804,
 					"width": 289,
 					"height": 28,
 					"fontFamily": "System Font",
@@ -944,7 +942,7 @@
 					"type": "text",
 					"text": "Method",
 					"top": 260,
-					"left": 599,
+					"left": 699,
 					"width": 113,
 					"height": 16,
 					"stroke": "#808080"
@@ -953,7 +951,7 @@
 					"type": "button",
 					"text": " ",
 					"top": 157,
-					"left": 975,
+					"left": 1075,
 					"width": 18,
 					"height": 18,
 					"events": [
@@ -973,7 +971,7 @@
 				"pup_outcome": {
 					"type": "button",
 					"top": 289,
-					"left": 704,
+					"left": 804,
 					"width": 289,
 					"height": 28,
 					"fontFamily": "System Font",
@@ -993,7 +991,7 @@
 					"type": "text",
 					"text": "Outcome",
 					"top": 295,
-					"left": 599,
+					"left": 699,
 					"width": 113,
 					"height": 16,
 					"stroke": "#808080"
@@ -1001,7 +999,7 @@
 				"pup_contact": {
 					"type": "button",
 					"top": 360,
-					"left": 704,
+					"left": 804,
 					"width": 289,
 					"height": 27,
 					"fontFamily": "System Font",
@@ -1021,7 +1019,7 @@
 					"type": "text",
 					"text": "Contact",
 					"top": 365,
-					"left": 598,
+					"left": 698,
 					"width": 113,
 					"height": 16,
 					"stroke": "#808080"
@@ -1029,7 +1027,7 @@
 				"pup_trigger": {
 					"type": "button",
 					"top": 395,
-					"left": 704,
+					"left": 804,
 					"width": 289,
 					"height": 27,
 					"fontFamily": "System Font",
@@ -1047,9 +1045,9 @@
 				},
 				"Interaction8": {
 					"type": "text",
-					"text": "Trigger",
+					"text": "Activity Type",
 					"top": 400,
-					"left": 599,
+					"left": 699,
 					"width": 113,
 					"height": 16,
 					"stroke": "#808080"
@@ -1058,7 +1056,7 @@
 					"type": "text",
 					"text": "Notes",
 					"top": 435,
-					"left": 599,
+					"left": 699,
 					"width": 85,
 					"height": 16,
 					"stroke": "#808080"
@@ -1067,14 +1065,14 @@
 					"type": "text",
 					"text": "Follow-up date",
 					"top": 192,
-					"left": 597,
+					"left": 697,
 					"width": 91,
 					"height": 16,
 					"stroke": "#808080"
 				},
 				"entryField_Inter_input_followUPDate": {
 					"type": "input",
-					"left": 704,
+					"left": 804,
 					"top": 192,
 					"width": 261,
 					"height": 17,
@@ -1088,7 +1086,7 @@
 					"type": "button",
 					"text": " ",
 					"top": 191,
-					"left": 975,
+					"left": 1075,
 					"width": 18,
 					"height": 18,
 					"events": [
@@ -1108,7 +1106,7 @@
 				"pup_sales": {
 					"type": "button",
 					"top": 325,
-					"left": 704,
+					"left": 804,
 					"width": 289,
 					"height": 27,
 					"fontFamily": "System Font",
@@ -1128,7 +1126,7 @@
 					"type": "text",
 					"text": "Sales person",
 					"top": 330,
-					"left": 598,
+					"left": 698,
 					"width": 113,
 					"height": 16,
 					"stroke": "#808080"
@@ -1136,7 +1134,7 @@
 				"pup_type": {
 					"type": "button",
 					"top": 220,
-					"left": 704,
+					"left": 804,
 					"width": 289,
 					"height": 28,
 					"fontFamily": "System Font",
@@ -1156,7 +1154,7 @@
 					"type": "text",
 					"text": "Status",
 					"top": 226,
-					"left": 599,
+					"left": 699,
 					"width": 113,
 					"height": 16,
 					"stroke": "#808080"
@@ -1201,7 +1199,7 @@
 				},
 				"entryField_Inter_input_notes1": {
 					"type": "input",
-					"left": 704,
+					"left": 804,
 					"top": 435,
 					"width": 405,
 					"height": 92,
@@ -1214,7 +1212,7 @@
 						"onDataChange"
 					],
 					"bottom": 527,
-					"right": 1109
+					"right": 1209
 				}
 			}
 		},
@@ -1497,7 +1495,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 844,
+	"geometryStamp": 912,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {
