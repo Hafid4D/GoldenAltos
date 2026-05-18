@@ -1195,10 +1195,20 @@
 				"left": 946,
 				"top": 1126,
 				"width": 178,
-				"height": 175.33203125
+				"height": 208.33203125
 			},
-			"displayable_fields_count": 6,
-			"fields_ordering": 1
+			"displayable_fields_count": 7,
+			"fields_ordering": 1,
+			"fields": {
+				"UUID": {
+					"color": {
+						"red": 255,
+						"green": 255,
+						"blue": 255,
+						"alpha": 0
+					}
+				}
+			}
 		},
 		"(Table_1)": {
 			"color": {
