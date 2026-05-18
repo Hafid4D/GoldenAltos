@@ -2006,7 +2006,7 @@
 		<field name="UUID_Customer" uuid="5B16E8241CA3D54E863D41D6955F4153" type="10" store_as_UUID="true" never_null="true" id="4"/>
 		<field name="device" uuid="D96229C031CDB94BA28A1624D7FEE83F" type="10" limiting_length="255" never_null="true" id="5"/>
 		<field name="openDate" uuid="08625AF9123628419AE89CE843C77545" type="8" never_null="true" id="6"/>
-		<field name="targetCloseDate" uuid="FD3BE09646C5DE44A1894D8EEBD13945" type="8" never_null="true" id="7"/>
+		<field name="targetCloseStmp" uuid="FD3BE09646C5DE44A1894D8EEBD13945" type="4" never_null="true" id="7"/>
 		<field name="revisionDate" uuid="7891632079BA28459B431B9F8CEEF120" type="8" never_null="true" id="8"/>
 		<field name="initialResponse" uuid="BDB0BDD27F533246B95F4932EA9FAE2F" type="10" limiting_length="255" never_null="true" id="9"/>
 		<field name="initiator8D" uuid="15257E6F093C3347AE0A93CFCAAD80D2" type="10" limiting_length="255" never_null="true" id="10"/>
@@ -2016,16 +2016,16 @@
 		</field>
 		<field name="void" uuid="C936F2AC2824B44DB3D7EA6A1BD326C8" type="1" never_null="true" id="14"/>
 		<field name="submit" uuid="3DD04D5C50CC8048985037684A78C8E0" type="1" never_null="true" id="15"/>
-		<field name="submitDate" uuid="19183AA58CC5DE4297EA1A81E1D6E652" type="8" never_null="true" id="16"/>
+		<field name="submitStmp" uuid="19183AA58CC5DE4297EA1A81E1D6E652" type="4" never_null="true" id="16"/>
 		<field name="category" uuid="1EFFD250540A5C42ABDA48B40C2B1DC5" type="10" limiting_length="255" never_null="true" id="17"/>
 		<field name="issuedBy" uuid="DA02EB22A8AF3649BBADB5854B94A74A" type="10" limiting_length="255" never_null="true" id="18"/>
 		<field name="issuedTo" uuid="5CFBA75EF365C04A9879CA74CFD4169D" type="10" limiting_length="255" never_null="true" id="19"/>
-		<field name="issuedDate" uuid="9AF8CA702C2C7448806FCD7CB0F76A9B" type="8" never_null="true" id="20"/>
-		<field name="verifiedDate" uuid="0B85C7C16DCE9747A40CD5980B0F4C9E" type="8" never_null="true" id="21"/>
+		<field name="issuedStmp" uuid="9AF8CA702C2C7448806FCD7CB0F76A9B" type="4" never_null="true" id="20"/>
+		<field name="verifiedStmp" uuid="0B85C7C16DCE9747A40CD5980B0F4C9E" type="4" never_null="true" id="21"/>
 		<field name="inLine" uuid="5B4D465362DD5F49B47F51360FE6FC0C" type="1" never_null="true" id="22"/>
 		<field name="internal" uuid="F49902FC522A7C4FB90630EBE787A9D4" type="1" never_null="true" id="23"/>
 		<field name="correctiveActionReport" uuid="1701324EEA8F954597D6F9CC393FB6AA" type="21" blob_switch_size="2147483647" never_null="true" id="24"/>
-		<field name="closedDate" uuid="2395A06581078341A84621D83B30DE97" type="8" never_null="true" id="25"/>
+		<field name="closedStmp" uuid="2395A06581078341A84621D83B30DE97" type="4" never_null="true" id="25"/>
 		<field name="verified" uuid="B5317F2936DAA84688754D5AD27F203A" type="1" never_null="true" id="26"/>
 		<primary_key field_name="UUID" field_uuid="129BD267EFE06D4EBCF1E64FCE762186"/>
 	</table>

@@ -33,3 +33,36 @@ local Function _initCorrectiveActionReport()
 		"othersText"; ""\
 		)
 	
+	
+local Function get closedDate()->$date : Date
+	$date:=This:C1470.closedStmp=0 ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.closedStmp; True:C214)
+	
+local Function set closedDate($date : Date)
+	This:C1470.closedStmp:=$date=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($date)
+	
+local Function get verifiedDate()->$date : Date
+	$date:=This:C1470.verifiedStmp=0 ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.verifiedStmp; True:C214)
+	
+local Function set verifiedDate($date : Date)
+	This:C1470.verifiedStmp:=$date=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($date)
+	
+local Function get issuedDate()->$date : Date
+	$date:=This:C1470.issuedStmp=0 ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.issuedStmp; True:C214)
+	
+local Function set issuedDate($date : Date)
+	This:C1470.issuedStmp:=$date=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($date)
+	
+local Function get submitDate()->$date : Date
+	$date:=This:C1470.submitStmp=0 ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.submitStmp; True:C214)
+	
+local Function set submitDate($date : Date)
+	This:C1470.submitStmp:=$date=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($date)
+	
+local Function get targetCloseDate()->$date : Date
+	$date:=This:C1470.targetCloseStmp=0 ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.targetCloseStmp; True:C214)
+	
+local Function set targetCloseDate($date : Date)
+	This:C1470.targetCloseStmp:=$date=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($date)
+	
+	
+	

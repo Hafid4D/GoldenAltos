@@ -29,6 +29,16 @@ Function btnCar()
 		End if 
 	End if 
 	
+Function btnTraveler()
+	If (Form:C1466.current_item#Null:C1517)
+		var $es : Object
+		$es:=ds:C1482.Lot.query("lotNumber = :1"; Form:C1466.current_item.travelerNumber)
+		
+		If ($es.length>0)
+			Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "lots")
+		End if 
+	End if 
+	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	This:C1470.hideDatePickers()
