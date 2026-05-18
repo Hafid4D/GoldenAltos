@@ -8,7 +8,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setIcon("image/entry/rma-white-50x50.png")
 	
 	$entry.setSearchboxField("rmaNumber")
-	
+	$entry.setSearchField("path:dateReceived"; "tag:receivedYear"; "placeholder:receivedYear"; "date")
 	
 	$entry.setPanel("panel_rma"; 2)
 	$entry.setPanelPage(1; ""; "Main")
@@ -38,42 +38,32 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	
 	
-	//Mark: - Views
-	$view:=cs:C1710.sfw_definitionView.new("RmaByYear"; "RMA by Year"; "derivedFrom:main"; $entry)
-	$view.setSubset("RmaByYear")
-	$entry.setView($view)
+	////Mark: - Views
+	//$view:=cs.sfw_definitionView.new("RmaByYear"; "RMA by Year"; "derivedFrom:main"; $entry)
+	//$view.setSubset("RmaByYear")
+	//$entry.setView($view)
 	
 	
 	
-Function RmaByYear()->$rmas : cs:C1710.RMASelection
+	//Function RmaByYear()->$rmas : cs.RMASelection
 	
 	
-	$form:=New object:C1471
-	$form.lb_data:=New collection:C1472()
-	$data:=ds:C1482.RMA.all().extract("dateReceived").map(Formula:C1597(_ga_yearOfFormula))
-	For each ($value; $data)
-		
-		$form.lb_data.push(New object:C1471("value"; $value))
-	End for each 
-	$form.selectedPos:=0
-	$form.selected:=New object:C1471("value"; "")
-	$form.title:="Select a Year"
+	//$form:=New object
+	//$form.lb_data:=New collection()
+	//$data:=ds.RMA.all().extract("dateReceived").map(Formula(_ga_yearOfFormula))
+	//For each ($value; $data)
 	
-	MOUSE POSITION:C468($mouseX; $mouseY; $mouseButtons)
-	CONVERT COORDINATES:C1365($mouseX; $mouseY; XY Current form:K27:5; XY Main window:K27:8)
-	If ($pushUp)
-		$mouseY:=$mouseY-190
-		$mouseX:=$mouseX-100
-	End if 
+	//$form.lb_data.push(New object("value"; $value))
+	//End for each 
+	//$form.selectedPos:=0
+	//$form.selected:=New object("value"; "")
+	//$form.title:="Select a Year"
 	
-	$windRef:=Open window:C153($mouseX; $mouseY; $mouseX+270; $mouseY+165; Movable dialog box:K34:7; "Set date interval")
+	//$form:=EXECUTE ON CLIENT(_ga_callCustomFilter($form))
+	////If (OK=1)
 	
-	DIALOG:C40("_ga_customFilter"; $form)
-	
-	//If (OK=1)
-	
-	$formula:=Formula:C1597(Num:C11(Year of:C25(This:C1470.dateReceived))=Num:C11($form.selected.value))
-	$rmas:=ds:C1482.RMA.query($formula)
+	//$formula:=Formula(Num(Year of(This.dateReceived))=Num($form.selected.value))
+	//$rmas:=ds.RMA.query($formula)
 	
 	//Else 
 	

@@ -1663,18 +1663,19 @@ If (True:C214)
 		
 		$qcar_e.qcarNumber:=$record.qcarNumber
 		$qcar_e.device:=$record.device
-		$qcar_e.closedDate:=$record.closedDate
-		$qcar_e.targetCloseDate:=$record.targetCloseDate
+		$qcar_e.closedStmp:=Date:C102($record.closedDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.closedDate))
+		$qcar_e.targetCloseStmp:=Date:C102($record.targetCloseDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.targetCloseDate))
 		//$qcar_e.actualCloseDate:=$record.actualCloseDate
 		$qcar_e.verifiedBy:=$record.verifiedBy
-		$qcar_e.verifiedDate:=$record.verifiedDate
+		$qcar_e.verifiedStmp:=Date:C102($record.verifiedDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.verifiedDate))
 		$qcar_e.void:=$record.void
 		$qcar_e.submit:=$record.submit
-		$qcar_e.submitDate:=$record.submitDate
+		$qcar_e.submitStmp:=Date:C102($record.submitDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.submitDate))
 		$qcar_e.category:=$record.category
 		$qcar_e.issuedBy:=$record.issuedBy
 		$qcar_e.issuedTo:=$record.issuedTo
-		$qcar_e.issuedDate:=$record.issuedDate
+		$qcar_e.issuedStmp:=Date:C102($record.issuedDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.issuedDate))
+		
 		
 		$qcar_e._initCorrectiveActionReport()
 		
