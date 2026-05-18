@@ -56,6 +56,11 @@ Function redrawAndSetVisible()
 	
 	OBJECT SET ENTERABLE:C238(*; "pup_job"; Form:C1466.situation.mode="add")
 	
+	OBJECT SET ENABLED:C1123(*; "bScan1"; Form:C1466.situation.mode="add")
+	
+	OBJECT SET ENTERABLE:C238(*; "bScan1"; Form:C1466.situation.mode="add")
+	
+	
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	Use (Form:C1466.sfw.entry.panel.pages)
 		Form:C1466.sfw.entry.panel.pages[1].label:="Lot Steps ("+String:C10(Form:C1466.lb_steps.length)+")"

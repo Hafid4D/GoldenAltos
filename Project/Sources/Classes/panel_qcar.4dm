@@ -41,6 +41,7 @@ Function redrawAndSetVisible()
 	This:C1470.qcarManage()
 	This:C1470.hideDatePickers()
 	This:C1470.manageExternal()
+	This:C1470.drawPup_traveler()
 	
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	
@@ -60,7 +61,7 @@ Function redrawAndSetVisible()
 		$hasAuthorizedProfile:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($approverProfile.indexOf($1.value)#-1)))#Null:C1517
 		
 		OBJECT SET ENABLED:C1123(*; "entryField_issuedTo"; $hasAuthorizedProfile)
-		OBJECT SET ENABLED:C1123(*; "EntryField_issuedBy"; $hasAuthorizedProfile)
+		OBJECT SET ENABLED:C1123(*; "entryField_issuedBy"; $hasAuthorizedProfile)
 		OBJECT SET ENABLED:C1123(*; "entryField_issuedDate"; $hasAuthorizedProfile)
 		OBJECT SET ENABLED:C1123(*; "entryField_verifiedDate"; $hasAuthorizedProfile)
 		OBJECT SET ENABLED:C1123(*; "entryField_verifiedBy"; $hasAuthorizedProfile)
@@ -69,10 +70,17 @@ Function redrawAndSetVisible()
 		OBJECT SET VISIBLE:C603(*; "dp_verifiedDate"; $hasAuthorizedProfile)
 		OBJECT SET VISIBLE:C603(*; "dp_issuedDate"; $hasAuthorizedProfile)
 		
-		
-		
 	End if 
 	
+Function btnTraveler()
+	If (Form:C1466.current_item#Null:C1517)
+		var $es : Object
+		$es:=ds:C1482.Lot.query("lotNumber = :1"; Form:C1466.current_item.lot.lotNumber)
+		
+		If ($es.length>0)
+			Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "lots")
+		End if 
+	End if 
 	
 Function qcarManage()
 	If (Form:C1466.current_item#Null:C1517)
@@ -108,42 +116,51 @@ Function selectCustomer()
 		End case 
 	End if 
 	
-Function selectLot()
-	If (Form:C1466.sfw.checkIsInModification())
-		//Case of 
-		//: (FORM Event.code=On Getting Focus) | (FORM Event.code=On Clicked)
-		OBJECT GET COORDINATES:C663(*; "entryField_lotNumber"; $l; $t; $r; $b)
-		CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Screen:K27:7)
+Function drawPup_traveler()
+	If (Form:C1466.current_item#Null:C1517)
+		OBJECT SET TITLE:C194(*; "pup_traveler"; "")
+		$lot:=ds:C1482.Lot.query("UUID =:1"; Form:C1466.current_item.UUID_Lot)
+		$lotNumber:=$lot.length>0 ? $lot.first().lotNumber : ""
+		Form:C1466.sfw.drawButtonPup("pup_traveler"; $lotNumber; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; ($lot=Null:C1517))
 		
-		$form:=New object:C1471(\
-			"colName"; "lotNumber"; \
-			"lb_items"; ds:C1482.Lot.all()\
-			)
-		
-		$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b-20)
-		DIALOG:C40("selectNto1"; $form)
-		CLOSE WINDOW:C154($winRef)
-		
-		If (ok=1)
-			Form:C1466.current_item.UUID_Lot:=$form.item.UUID
-			cs:C1710.panel_qcar.me._activate_save_cancel_button()
-		End if 
-		//End case 
 	End if 
+	
+Function selectTraveler()
+	If (Form:C1466.sfw.checkIsInModification())
+		Case of 
+			: (FORM Event:C1606.code=On Getting Focus:K2:7) | (FORM Event:C1606.code=On Clicked:K2:4)
+				OBJECT GET COORDINATES:C663(*; "pup_traveler"; $l; $t; $r; $b)
+				CONVERT COORDINATES:C1365($l; $b; XY Current form:K27:5; XY Main window:K27:8)
+				
+				$dataCollection:=New collection:C1472()
+				$dataCollection:=ds:C1482.Lot.all()
+				
+				$form:=New object:C1471(\
+					"colName"; "lotNumber"; \
+					"lb_items"; $dataCollection; \
+					"allData"; $dataCollection; \
+					"dataclass"; "Lot"\
+					)
+				
+				$winRef:=Open form window:C675("selectNto1"; Pop up form window:K39:11; $l; $b-20)
+				DIALOG:C40("selectNto1"; $form)
+				CLOSE WINDOW:C154($winRef)
+				
+				If (ok=1)
+					
+					Form:C1466.current_item.UUID_Lot:=$form.item.UUID
+					cs:C1710.panel_qcar.me._activate_save_cancel_button()
+				End if 
+		End case 
+	End if 
+	This:C1470.drawPup_traveler()
 	
 Function subFormEvent()
 	Form:C1466.current_item.correctiveActionReport:=Form:C1466.subForm_qcar.correctiveActionReport
 	This:C1470._activate_save_cancel_button()
 	
-	
 Function hideDatePickers()
 	OBJECT SET VISIBLE:C603(*; "dp_@"; Form:C1466.sfw.checkIsInModification())
-	
-Function loadXXX()
-	//Loads and initializes a list
-	
-Function bActionXXX()
-	//Manages actions: add, or remove, using dynamic menus and modification checks
 	
 Function verifyQcar()
 	If (Form:C1466.sfw.checkIsInModification())

@@ -1,5 +1,21 @@
 //%attributes = {}
 
+$jobs:=ds:C1482.Job.all()
+
+$eUser:=cs:C1710.sfw_UserEntity
+$approverProfile:=New collection:C1472("qs"; "qm")
+
+$hasAuthorizedProfile:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($approverProfile.indexOf($1.value)#-1)))#Null:C1517
+
+
+$eUser:=ds:C1482.sfw_User.query("login = :1"; Current user:C182).first()
+
+$approverProfile:=New collection:C1472("qs"; "qm")
+If ($eUser#Null:C1517)
+	$hasAuthorizedProfile:=$eUser.userInscriptions.extract("userProfile").query("ident in :1"; $approverProfile).length>0
+End if 
+
+
 
 $employee_Log:=Folder:C1567(fk data folder:K87:12).file("DataJson/employees.json")
 If ($employee_Log.exists)
