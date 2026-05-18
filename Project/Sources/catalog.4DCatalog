@@ -1566,6 +1566,16 @@
 		<field name="moreData" uuid="A8173E57062C43FB9149806A9D641D9F" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="141E89DEE45A4FE8AAA16BCDE52B9128"/>
 	</table>
+	<table name="ObjectiveEvidence" uuid="D67E65CEB716F74BBD8DF218094A657C" id="100">
+		<field name="UUID" uuid="B021D3EFEEB3A949AC3B50689959E5B3" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="UUID_Qcar" uuid="CA98C8677E88FD46B46534AED3C8CA8D" type="10" autogenerate="true" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="name" uuid="7AAC7DC54B771F4C963A9F4E6C7BA79B" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="extension" uuid="CFDE9F74BF9C4B4298335BA44B527970" type="10" limiting_length="255" never_null="true" id="4">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="blob" uuid="9646945C85575C4DA041E95AF26291CB" type="18" never_null="true" id="5"/>
+		<primary_key field_name="UUID" field_uuid="B021D3EFEEB3A949AC3B50689959E5B3"/>
+	</table>
 	<table name="Customer" uuid="96D1CE81460A4F75B3F4275138C8F778" id="114">
 		<field name="UUID" uuid="37676CD94E8B423595ED98B5C0E9CF89" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="name" uuid="6408BE6907C146339726DEB3047C211E" type="10" limiting_length="255" never_null="true" id="2">
@@ -3903,6 +3913,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="B137FF49677B472293FF1708249EBC50" name_Nto1="qcar" name_1toN="objectiveEvidences" state="1">
+		<related_field kind="source">
+			<field_ref uuid="CA98C8677E88FD46B46534AED3C8CA8D" name="UUID_Qcar">
+				<table_ref uuid="D67E65CEB716F74BBD8DF218094A657C" name="ObjectiveEvidence"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="129BD267EFE06D4EBCF1E64FCE762186" name="UUID">
+				<table_ref uuid="446AB1ED27F3664C9C9747DD14114EF2" name="Qcar"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" unique_keys="true" uuid="0039C68FB77F4FFCA91C66C3635462E2" type="1">
 		<field_ref uuid="141E89DEE45A4FE8AAA16BCDE52B9128" name="UUID">
 			<table_ref uuid="8A4489176014439D93B99ECC5449681C" name="EngineeringStatus"/>
@@ -5071,6 +5093,11 @@
 	<index kind="regular" uuid="BAE5E9BF47DB2D4591310EF8BC03A3B9" type="3">
 		<field_ref uuid="C597A4092E2E4812ABE088A99BB5ADF5" name="UUID_CustomerCarrier">
 			<table_ref uuid="96D1CE81460A4F75B3F4275138C8F778" name="Customer"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="BBBE4D3198C14CB5A1CF74640F7F9709" type="1">
+		<field_ref uuid="B021D3EFEEB3A949AC3B50689959E5B3" name="UUID">
+			<table_ref uuid="D67E65CEB716F74BBD8DF218094A657C" name="ObjectiveEvidence"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="BBF91AE719024421B605BF3E85D8B491" type="1">

@@ -24,8 +24,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 467,
-				"top": 286,
+				"left": 463,
+				"top": 519,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -1183,6 +1183,22 @@
 					"position": 1
 				}
 			}
+		},
+		"ObjectiveEvidence": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 443,
+				"top": 245,
+				"width": 162,
+				"height": 240.33203125
+			},
+			"displayable_fields_count": 9,
+			"fields_ordering": 1
 		},
 		"EngineeringStatus": {
 			"color": {
@@ -3280,6 +3296,14 @@
 		}
 	},
 	"relations": {
+		"B137FF49677B472293FF1708249EBC50": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"04AB4F1DDF6B4D1EA4E1BC19A5C106FB": {
 			"color": {
 				"red": 240,
