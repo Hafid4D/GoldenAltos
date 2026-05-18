@@ -129,6 +129,11 @@ Function loadInteractions()
 	
 	If ($queryString="")
 		Form:C1466.lb_interactions:=Form:C1466.current_item.interactions.orderBy("stmpCreation desc").copy()
+		For each ($interaction; Form:C1466.lb_interactions)
+			$interaction.UUID_Staff:=Form:C1466.current_item.UUID_Staff
+			$interaction.save()
+		End for each 
+		
 	Else 
 		$queryString+=" order by stmpCreation desc"
 		Form:C1466.lb_interactions:=Form:C1466.current_item.interactions.query($queryString; $settings).copy()

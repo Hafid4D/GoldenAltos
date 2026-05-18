@@ -211,7 +211,7 @@
 					"fontFamily": "System Font",
 					"fontSize": 13,
 					"focusable": false,
-					"text": "Trigger",
+					"text": "Activity Type",
 					"icon": "",
 					"popupPlacement": "linked",
 					"textPlacement": "right",
@@ -224,7 +224,7 @@
 				},
 				"Text7": {
 					"type": "text",
-					"text": "Trigger",
+					"text": "Activity Type",
 					"top": 80,
 					"left": 23,
 					"width": 113,

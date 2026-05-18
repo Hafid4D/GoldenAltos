@@ -12,7 +12,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setPanel("panel_lead"; 1)
 	$entry.setPanelPage(1; ""; "Main")
-	$entry.setPanelPage(2; ""; "Interactions")
+	$entry.setPanelPage(2; ""; "Activity Log")
 	$entry.setPanelPage(3; ""; "Jobs & Deliveries"; "disabled")
 	
 	$entry.setLBItemsColumn("leadCode"; "ID"; "width:50")
