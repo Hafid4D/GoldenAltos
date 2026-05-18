@@ -72,6 +72,7 @@ Function redrawAndSetVisible()
 		
 	End if 
 	
+	
 Function btnTraveler()
 	If (Form:C1466.current_item#Null:C1517)
 		var $es : Object
@@ -81,6 +82,17 @@ Function btnTraveler()
 			Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "lots")
 		End if 
 	End if 
+	
+Function btnPO()
+	If (Form:C1466.current_item#Null:C1517)
+		var $es : Object
+		$es:=ds:C1482.PurchaseOrder.query("poNumber = :1"; Form:C1466.current_item.lot.poNumber)
+		
+		If ($es.length>0)
+			Form:C1466.sfw.openInANewWindow($es[0]; "customerService"; "purchaseOrders")
+		End if 
+	End if 
+	
 	
 Function qcarManage()
 	If (Form:C1466.current_item#Null:C1517)
@@ -149,6 +161,10 @@ Function selectTraveler()
 				If (ok=1)
 					
 					Form:C1466.current_item.UUID_Lot:=$form.item.UUID
+					$customer:=ds:C1482.Customer.query("name =:1"; Split string:C1554($form.item.customer; "\r"; sk trim spaces:K86:2).join("\r"))
+					If ($customer.length>0)
+						Form:C1466.current_item.UUID_Customer:=$customer[0].UUID
+					End if 
 					cs:C1710.panel_qcar.me._activate_save_cancel_button()
 				End if 
 		End case 
