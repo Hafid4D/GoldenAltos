@@ -1184,6 +1184,38 @@
 				}
 			}
 		},
+		"EngineeringStatus": {
+			"color": {
+				"red": 207,
+				"green": 209,
+				"blue": 165,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 946,
+				"top": 1126,
+				"width": 178,
+				"height": 175.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
+		"(Table_1)": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 900,
+				"top": 1006,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
 		"BomItem": {
 			"color": {
 				"red": 0,
@@ -2417,7 +2449,7 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1626.9034423828,
+				"left": 1616.9034423828,
 				"top": 1167.9948730469,
 				"width": 176.93957519531,
 				"height": 190.07992553711
@@ -3238,6 +3270,14 @@
 		}
 	},
 	"relations": {
+		"04AB4F1DDF6B4D1EA4E1BC19A5C106FB": {
+			"color": {
+				"red": 240,
+				"green": 240,
+				"blue": 240,
+				"alpha": 0
+			}
+		},
 		"ADD3451DE4C0DF41A843F29EF0A9F98F": {
 			"color": {
 				"red": 255,
