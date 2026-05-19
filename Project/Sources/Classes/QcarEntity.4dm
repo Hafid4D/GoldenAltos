@@ -7,6 +7,24 @@ local Function loadAfterCreation()
 	// This callback is called after creating the new item but before displaying the panel.
 	This:C1470.qcarNumber:=ds:C1482.Qcar.all().max("qcarNumber")+1
 	
+	
+// Purpose: Computed attribute used by the listbox column / search-box on the CAR entry.
+// Returns the item name when a sub-level is selected, otherwise the root category name.
+// Returns: Text — display label of the reject-criteria assignment
+// modified by 4D/PS [2026-may-19]
+Function get categoryLabel()->$label : Text
+	
+	If (cs:C1710.sfw_string.me.isAnEmptyUUID(This:C1470.UUID_RejectCriteriaItem)=False:C215)
+		$label:=String:C10(This:C1470.rejectCriteriaItem.name)
+	Else 
+		If (cs:C1710.sfw_string.me.isAnEmptyUUID(This:C1470.UUID_RejectCriteriaCategory)=False:C215)
+			$label:=String:C10(This:C1470.rejectCriteriaCategory.name)
+		Else 
+			$label:=""
+		End if 
+	End if 
+	
+	
 local Function _initCorrectiveActionReport()
 	This:C1470.correctiveActionReport:=New object:C1471(\
 		"teamLearders"; ""; \

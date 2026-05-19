@@ -239,7 +239,7 @@
 					"type": "input",
 					"top": 12,
 					"left": 753,
-					"width": 110,
+					"width": 202,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.initiator8D",
 					"focusable": false,
@@ -265,7 +265,7 @@
 					"type": "input",
 					"top": 37,
 					"left": 753,
-					"width": 110,
+					"width": 202,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.actualCloseDate",
 					"focusable": false,
@@ -369,7 +369,7 @@
 					"type": "radio",
 					"text": "Internal",
 					"top": 87,
-					"left": 653,
+					"left": 758,
 					"width": 60,
 					"height": 17,
 					"events": [
@@ -383,7 +383,7 @@
 					"type": "radio",
 					"text": "External",
 					"top": 87,
-					"left": 803,
+					"left": 895,
 					"width": 60,
 					"height": 17,
 					"events": [
@@ -396,7 +396,7 @@
 				"label_device1": {
 					"type": "text",
 					"top": 87,
-					"left": 748,
+					"left": 843,
 					"width": 20,
 					"height": 17,
 					"stroke": "#808080",
@@ -408,36 +408,37 @@
 					"type": "text",
 					"top": 62,
 					"left": 653,
-					"width": 65,
+					"width": 95,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Category"
+					"text": "Category",
+					"textAlign": "right"
 				},
-				"entryField_category": {
-					"type": "input",
-					"top": 62,
-					"left": 723,
+				"pup_rejectCategory": {
+					"type": "button",
+					"top": 57,
+					"left": 753,
 					"width": 202,
-					"height": 17,
-					"dataSource": "Form:C1466.current_item.category",
+					"height": 22,
+					"fontFamily": "System Font",
+					"fontSize": 13,
 					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
+					"text": "",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_rejectCategory.4dm",
 					"events": [
-						"onDataChange"
+						"onClick"
 					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"right": 925,
-					"choiceList": {
-						"$ref": "/SOURCES/lists.json#/Reject_Criteria"
-					}
+					"textAlign": "left",
+					"right": 955
 				},
 				"dp_actualCloseDate": {
 					"type": "subform",
-					"top": 37,
-					"left": 844,
+					"top": 36,
+					"left": 936,
 					"width": 19,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.actualCloseDate",
@@ -456,8 +457,8 @@
 				},
 				"label_externalParty": {
 					"type": "text",
-					"top": 115,
-					"left": 444,
+					"top": 109,
+					"left": 524,
 					"width": 87,
 					"height": 17,
 					"stroke": "#808080",
@@ -465,9 +466,9 @@
 				},
 				"EntryField_externalParty": {
 					"type": "input",
-					"top": 115,
-					"left": 528,
-					"width": 310,
+					"top": 109,
+					"left": 612,
+					"width": 343,
 					"height": 17,
 					"dataSource": "Form:C1466.current_item.externalParty",
 					"focusable": false,
@@ -478,7 +479,8 @@
 						"onDataChange"
 					],
 					"fill": "transparent",
-					"borderStyle": "none"
+					"borderStyle": "none",
+					"right": 955
 				},
 				"pup_traveler": {
 					"type": "button",
@@ -1010,7 +1012,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_4lines",
-	"geometryStamp": 2810,
+	"geometryStamp": 2832,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

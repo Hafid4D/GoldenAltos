@@ -1799,7 +1799,7 @@ If (True:C214)
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/qcar_export.json")
 	
 	$records:=JSON Parse:C1218($file.getText())
-	
+	$remainingCategories:=New collection:C1472()
 	For each ($record; $records)
 		$qcar_e:=ds:C1482.Qcar.new()
 		
@@ -1813,7 +1813,29 @@ If (True:C214)
 		$qcar_e.void:=$record.void
 		$qcar_e.submit:=$record.submit
 		$qcar_e.submitStmp:=Date:C102($record.submitDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.submitDate))
-		$qcar_e.category:=$record.category
+		
+		// Purpose: Map legacy text `category` from the source JSON onto the new FK pair
+		// (UUID_RejectCriteriaCategory + UUID_RejectCriteriaItem). When an item matches by name,
+		// also stamp the parent category UUID so the QCAR data model is fully consistent
+		// (panel pop-up and computed attribute assume both FKs travel together).
+		// modified by 4D/PS [2026-may-19]
+		$categoryItems:=ds:C1482.RejectCriteriaItem.query("name =:1"; $record.category)
+		If ($categoryItems.length>0)
+			$matchedItem:=$categoryItems[0]
+			$qcar_e.UUID_RejectCriteriaItem:=$matchedItem.UUID
+			$qcar_e.UUID_RejectCriteriaCategory:=$matchedItem.UUID_RejectCriteriaCategory
+		Else 
+			$categories:=ds:C1482.RejectCriteriaCategory.query("name =:1"; $record.category)
+			If ($categories.length>0)
+				$qcar_e.UUID_RejectCriteriaCategory:=$categories[0].UUID
+				$qcar_e.UUID_RejectCriteriaItem:=16*"00"
+			Else 
+				If ($record.category#"")
+					$remainingCategories.push($record.category)
+				End if 
+			End if 
+		End if 
+		
 		$qcar_e.issuedBy:=$record.issuedBy
 		$qcar_e.issuedTo:=$record.issuedTo
 		$qcar_e.issuedStmp:=Date:C102($record.issuedDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($record.issuedDate))
@@ -1845,3 +1867,7 @@ If (True:C214)
 		End if 
 	End for each 
 End if 
+
+SET TEXT TO PASTEBOARD:C523($remainingCategories.distinct().join("\n"))
+
+
