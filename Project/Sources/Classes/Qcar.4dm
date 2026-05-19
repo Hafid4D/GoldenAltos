@@ -14,7 +14,10 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setSearchField("path:issuedDate"; "tag:issuedYear"; "placeholder:issuedYear"; "date")
 	
 	$entry.setSearchboxField("customer.name"; "placeholder:customer")
-	$entry.setSearchboxField("category")
+	// Purpose: Search now targets the linked reject-criteria entities; the legacy `category` text field has been dropped.
+	// modified by 4D/PS [2026-may-19]
+	$entry.setSearchboxField("rejectCriteriaCategory.name"; "placeholder:category")
+	$entry.setSearchboxField("rejectCriteriaItem.name"; "placeholder:item")
 	$entry.setSearchboxField("lot.lotNumber"; "placeholder:lot")
 	$entry.setSearchboxField("lot.poNumber"; "placeholder:po")
 	
@@ -25,7 +28,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setLBItemsColumn("qcarNumber"; "#"; "width:40"; "center")
 	$entry.setLBItemsColumn("customer.name"; "Customer"; "width:200")
-	$entry.setLBItemsColumn("category"; "Category"; "width:140")
+	// Purpose: Display the live reject-criteria label via the computed attribute (with legacy fallback inside the getter).
+	// modified by 4D/PS [2026-may-19]
+	$entry.setLBItemsColumn("categoryLabel"; "Category"; "width:180")
 	$entry.setLBItemsColumn("issuedDate"; "Issued"; "width:70"; "center")
 	
 	$entry.setMainViewLabel("Current Year CARs")

@@ -42,6 +42,7 @@ Function redrawAndSetVisible()
 	This:C1470.hideDatePickers()
 	This:C1470.manageExternal()
 	This:C1470.drawPup_traveler()
+	This:C1470.drawPup_rejectCategory()
 	
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	
@@ -258,3 +259,125 @@ Function bActionManageDocuments()
 				End if 
 			End if 
 	End case 
+	
+	
+	// Purpose: Draws the reject-criteria pop-up button. Label is the item name when a sub-level is selected,
+	// otherwise the root category name. Picto colored from the selected entity's `color` (item first, else category).
+	// modified by 4D/PS [2026-may-19]
+Function drawPup_rejectCategory()
+	If (Form:C1466.current_item#Null:C1517)
+		
+		OBJECT SET TITLE:C194(*; "pup_rejectCategory"; "")
+		$label:=""
+		$colorName:=""
+		
+		If (cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_RejectCriteriaItem)=False:C215)
+			$item:=Form:C1466.current_item.rejectCriteriaItem
+			If ($item#Null:C1517)
+				$label:=String:C10($item.name)
+				$colorName:=cs:C1710.sfw_htmlColor.me.getName($item.color) || ""
+			End if 
+		Else 
+			If (cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_RejectCriteriaCategory)=False:C215)
+				$category:=Form:C1466.current_item.rejectCriteriaCategory
+				If ($category#Null:C1517)
+					$label:=String:C10($category.name)
+					$colorName:=cs:C1710.sfw_htmlColor.me.getName($category.color) || ""
+				End if 
+			End if 
+		End if 
+		
+		If ($colorName#"")
+			$picto:="sfw/colors/"+$colorName+"-circle.png"
+		Else 
+			$picto:="sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		End if 
+		
+		Form:C1466.sfw.drawButtonPup("pup_rejectCategory"; $label; $picto; ($label=""))
+	End if 
+	
+	
+	
+	
+	// Purpose: Opens a hierarchical pop-up listing every RejectCriteriaCategory; categories with sub-items expose them as a sub-menu.
+	// Selecting a category-only entry resets UUID_RejectCriteriaItem; selecting an item sets both UUIDs.
+	// created by 4D/PS [2026-may-19]
+Function pup_rejectCategory()
+	
+	If (Form:C1466.sfw.checkIsInModification())
+		
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.rejectCriteriaCategory=Null:C1517)
+			ds:C1482.RejectCriteriaCategory.cacheLoad()
+		End if 
+		
+		$mainMenu:=Create menu:C408
+		$menusToRelease:=New collection:C1472($mainMenu)
+		
+		$currentCategoryUUID:=Form:C1466.current_item.UUID_RejectCriteriaCategory
+		$currentItemUUID:=Form:C1466.current_item.UUID_RejectCriteriaItem
+		
+		For each ($category; Storage:C1525.cache.rejectCriteriaCategory)
+			$items:=ds:C1482.RejectCriteriaItem.query("UUID_RejectCriteriaCategory = :1"; $category.UUID).orderBy("levelID")
+			
+			Case of 
+				: ($items.length=0)
+					// Category has no sub-items — flat entry that selects the category only.
+					APPEND MENU ITEM:C411($mainMenu; $category.name; *)
+					SET MENU ITEM PARAMETER:C1004($mainMenu; -1; "cat:"+$category.UUID)
+					If ($category.UUID=$currentCategoryUUID) && (cs:C1710.sfw_string.me.isAnEmptyUUID($currentItemUUID))
+						SET MENU ITEM MARK:C208($mainMenu; -1; Char:C90(18))
+					End if 
+					
+				Else 
+					// Category with sub-items — submenu listing items; first entry selects the category alone.
+					$subMenu:=Create menu:C408
+					$menusToRelease.push($subMenu)
+					
+					APPEND MENU ITEM:C411($subMenu; "(any) "+$category.name; *)
+					SET MENU ITEM PARAMETER:C1004($subMenu; -1; "cat:"+$category.UUID)
+					If ($category.UUID=$currentCategoryUUID) && (cs:C1710.sfw_string.me.isAnEmptyUUID($currentItemUUID))
+						SET MENU ITEM MARK:C208($subMenu; -1; Char:C90(18))
+					End if 
+					
+					APPEND MENU ITEM:C411($subMenu; "-")
+					
+					For each ($item; $items)
+						APPEND MENU ITEM:C411($subMenu; $item.name; *)
+						SET MENU ITEM PARAMETER:C1004($subMenu; -1; "item:"+$category.UUID+":"+$item.UUID)
+						If ($item.UUID=$currentItemUUID)
+							SET MENU ITEM MARK:C208($subMenu; -1; Char:C90(18))
+						End if 
+					End for each 
+					
+					APPEND MENU ITEM:C411($mainMenu; $category.name; $subMenu; *)
+			End case 
+		End for each 
+		
+		OBJECT GET COORDINATES:C663(*; "pup_rejectCategory"; $left; $top; $right; $bottom)
+		CONVERT COORDINATES:C1365($left; $bottom; XY Current form:K27:5; XY Current window:K27:6)
+		$choose:=Dynamic pop up menu:C1006($mainMenu; ""; $left; $bottom)
+		
+		For each ($refMenu; $menusToRelease)
+			RELEASE MENU:C978($refMenu)
+		End for each 
+		
+		Case of 
+			: ($choose="")
+				// nothing — user cancelled
+			: (Substring:C12($choose; 1; 4)="cat:")
+				Form:C1466.current_item.UUID_RejectCriteriaCategory:=Substring:C12($choose; 5)
+				Form:C1466.current_item.UUID_RejectCriteriaItem:=16*"00"
+				This:C1470._activate_save_cancel_button()
+			: (Substring:C12($choose; 1; 5)="item:")
+				$parts:=Split string:C1554(Substring:C12($choose; 6); ":")
+				If ($parts.length>=2)
+					Form:C1466.current_item.UUID_RejectCriteriaCategory:=$parts[0]
+					Form:C1466.current_item.UUID_RejectCriteriaItem:=$parts[1]
+					This:C1470._activate_save_cancel_button()
+				End if 
+		End case 
+		
+		This:C1470.drawPup_rejectCategory()
+		
+	End if 
+	
