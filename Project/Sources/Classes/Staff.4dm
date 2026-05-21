@@ -9,6 +9,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setSearchboxField("firstName")
 	$entry.setSearchboxField("lastName")
+	// Purpose: Allow searching staff by shift ("1" or "2") and by certification name.
+	// modified by 4D/PS [2026-may-21]
+	$entry.setSearchboxField("shift"; "placeholder:shift")
 	$entry.setSearchboxField("assignments.certification.name"; "placeholder:certification")
 	
 	
@@ -21,6 +24,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsColumn("code"; "Code"; "width:50"; "center")
 	$entry.setLBItemsColumn("firstName"; "First Name"; "width:190")
 	$entry.setLBItemsColumn("lastName"; "Last Name"; "width:190")
+	// Purpose: Expose Shift ("1"/"2") in the items list for quick scanning by floor managers.
+	// modified by 4D/PS [2026-may-21]
+	$entry.setLBItemsColumn("shift"; "Shift"; "width:50"; "center")
 	
 	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
 	
@@ -47,7 +53,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setPictoLabel("/RESOURCES/ga/image/picto/terminated-user-16x16.png")
 	$entry.setView($view)
 	
-	$entry.setAllowedProfiles("qm")
+	// Purpose: Only Quality profiles (qs, qi, qm) may open and modify Staff records and certifications.
+	// modified by 4D/PS [2026-may-21]
+	$entry.setAllowedProfiles("qs"; "qi"; "qm")
 	
 	$entry.enableTransaction()
 	//$entry.setAllowedProfilesForDeletion("pm")
@@ -114,44 +122,70 @@ Function retrainingStaff()->$staffs : cs:C1710.StaffSelection
 	End for each 
 	
 	
+// Purpose: Notify qs and qm users for each certification assignment expiring within $days (one notification per assignment).
+// Uses CertificationAssignment.moreData.retrainNotified — send once per assignment, reset when it leaves the window or on renewal.
+// Parameters: $days : Integer — lookahead window in days (typically 30)
+// Returns: Collection — one True entry per newly sent notification (drives UI refresh in callers)
+// modified by 4D/PS [2026-may-21]
 Function checkRetraining($days : Integer)->$createdNotificationMarkers : Collection
-	var $staff_es : cs:C1710.StaffSelection
+	
 	var $staff_e : cs:C1710.StaffEntity
+	var $assignment_e : cs:C1710.CertificationAssignmentEntity
+	var $profiles : Collection
+	var $users : Collection
+	var $context : Object
+	var $expiringAssignments : cs:C1710.CertificationAssignmentSelection
+	var $expiringUUIDs : Collection
+	var $res : Object
 	
-	// Purpose: Staff.assignments.expiredIn is a duration (days); retraining window uses computed expiry dates, not relational comparison on raw expiredIn.
-	// modified by 4D/PS [2026-may-12]
-	$staff_es:=ds:C1482.Staff.newSelection()
-	For each ($staff_e; ds:C1482.Staff.all())
-		If ($staff_e.getCertiExpiredIn($days).length>0)
-			$staff_es.add($staff_e)
-		End if 
-	End for each 
+	$profiles:=New collection:C1472("qs"; "qm")
+	$users:=ds:C1482.Staff.query("user.userInscriptions.userProfile.ident in :1"; $profiles).extract("user.UUID").distinct()
 	
-	// Purpose: One placeholder per newly persisted EmployeeRetrainRequired notification this run (length drives UI refresh only).
-	// modified by 4D/PS [2026-may-12]
 	$createdNotificationMarkers:=New collection:C1472()
 	
-	For each ($staff_e; $staff_es)
-		$notif_es:=ds:C1482.sfw_Notification.query("moreData.UUID_Staff = :1 AND moreData.date = :2"; $staff_e.UUID; Current date:C33())
+	For each ($staff_e; ds:C1482.Staff.query("terminated = :1"; False:C215))
+		$expiringAssignments:=$staff_e.getCertiExpiredIn($days)
+		$expiringUUIDs:=$expiringAssignments.extract("UUID")
 		
-		If ($notif_es.length=0)
-			CREATE RECORD:C68([sfw_Notification:69])
-			[sfw_Notification:69]UUID_NotificationType:4:=ds:C1482.sfw_NotificationType.query("ident = :1"; "EmployeeRetrainRequired").first().UUID
-			[sfw_Notification:69]UUID_User:3:=cs:C1710.sfw_userManager.me.info.UUID
-			[sfw_Notification:69]UUID_target:2:=$staff_e.UUID
-			// Purpose: Message text uses $days and getCertiExpiredIn($days) so checkRetraining stays consistent when panel passes a different horizon than 30.
-			// modified by 4D/PS [2026-may-12]
-			[sfw_Notification:69]comment:5:=$staff_e.firstName+" "+$staff_e.lastName+" :"+"Retraining for "+String:C10($staff_e.getCertiExpiredIn($days).length)+" certifications due within "+String:C10($days)+" days."
-			[sfw_Notification:69]moreData:8:=New object:C1471("targetDataclass"; "Staff"; "UUID_Staff"; $staff_e.UUID; "date"; Current date:C33())
-			[sfw_Notification:69]stmp:7:=cs:C1710.sfw_stmp.me.now()
-			SAVE RECORD:C53([sfw_Notification:69])
+		For each ($assignment_e; $expiringAssignments)
+			If ($assignment_e.moreData=Null:C1517)
+				$assignment_e.moreData:=New object:C1471("retrainNotified"; False:C215)
+			Else 
+				If (Not:C34(OB Is defined:C1231($assignment_e.moreData; "retrainNotified")))
+					$assignment_e.moreData.retrainNotified:=False:C215
+				End if 
+			End if 
 			
-			$createdNotificationMarkers.push(True:C214)
-		End if 
+			If (Not:C34($assignment_e.moreData.retrainNotified))
+				$context:=New object:C1471(\
+					"target"; $staff_e.UUID; \
+					"targetDataclass"; "Staff"; \
+					"fullName"; $staff_e.fullName; \
+					"certName"; $assignment_e.certification.name; \
+					"expiringDate"; String:C10($assignment_e.expiringDate; System date short:K17:1); \
+					"days"; $days\
+					)
+				cs:C1710.sfw_notificationManager.me.notify("EmployeeRetrainRequired"; $users; $context)
+				$assignment_e.moreData.retrainNotified:=True:C214
+				$res:=$assignment_e.save()
+				If ($res.success)
+					$createdNotificationMarkers.push(True:C214)
+				End if 
+			End if 
+		End for each 
+		
+		// Purpose: Clear per-assignment flag when expiry is outside the window so a future cycle can notify again.
+		// modified by 4D/PS [2026-may-21]
+		For each ($assignment_e; $staff_e.assignments)
+			If ($expiringUUIDs.indexOf($assignment_e.UUID)=-1)
+				If ($assignment_e.moreData#Null:C1517) && (OB Is defined:C1231($assignment_e.moreData; "retrainNotified")) && ($assignment_e.moreData.retrainNotified=True:C214)
+					$assignment_e.moreData.retrainNotified:=False:C215
+					$res:=$assignment_e.save()
+				End if 
+			End if 
+		End for each 
 	End for each 
 	
-	// Purpose: Refresh toolbar notification count / notification worker UI — calls the framework entry point as declared on cs.sfw_notificationManager.
-	// modified by 4D/PS [2026-may-12]
 	If ($createdNotificationMarkers.length>0)
 		cs:C1710.sfw_notificationManager.me.updateNodifications()
 	End if 

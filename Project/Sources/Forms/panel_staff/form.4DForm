@@ -251,9 +251,9 @@
 					"fontWeight": "normal",
 					"dataSource": ""
 				},
-				"entryField_shiftA": {
+				"entryField_shift1": {
 					"type": "radio",
-					"text": "A",
+					"text": "1",
 					"top": 61,
 					"left": 432,
 					"width": 30,
@@ -263,13 +263,13 @@
 					],
 					"radioGroup": "shift",
 					"dataSourceTypeHint": "boolean",
-					"dataSource": "Form:C1466.shift",
-					"method": "ObjectMethods/entryField_shiftA.4dm",
+					"dataSource": "Form:C1466.shift1",
+					"method": "ObjectMethods/entryField_shift.4dm",
 					"style": "regular"
 				},
-				"entryField_shiftB": {
+				"entryField_shift2": {
 					"type": "radio",
-					"text": "B",
+					"text": "2",
 					"top": 61,
 					"left": 488,
 					"width": 30,
@@ -279,8 +279,8 @@
 					],
 					"radioGroup": "shift",
 					"dataSourceTypeHint": "boolean",
-					"dataSource": "Not:C34(Form:C1466.shift)",
-					"method": "ObjectMethods/entryField_shiftB.4dm"
+					"dataSource": "Not:C34(Form:C1466.shift1)",
+					"method": "ObjectMethods/entryField_shift.4dm"
 				},
 				"label_shift": {
 					"type": "text",

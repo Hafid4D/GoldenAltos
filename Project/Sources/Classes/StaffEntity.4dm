@@ -34,6 +34,10 @@ Function createCertification($uuid_certification : Text; $duration : Integer)->$
 		$certificationAssignment.expiredIn:=0
 	End if 
 	
+	// Purpose: New assignment starts with retrainNotified False so qs/qm are notified when it enters the expiry window.
+	// modified by 4D/PS [2026-may-21]
+	$certificationAssignment.moreData:=New object:C1471("retrainNotified"; False:C215)
+	
 	$res:=$certificationAssignment.save()
 	
 	$certified:=$res.success
@@ -56,7 +60,12 @@ Function getCertificationDate($uuid_certification : Text)->$certifiedAt : Date
 		$certifiedAt:=$assignment_es[0].certificationDate  //cs.sfw_stmp.me.getDate($assignment_es[0].certificationDate)
 	End if 
 	
-Function getExpiredDate($uuid_certification : Text)->$expiredIn : Date
+// Purpose: Renamed from getExpiredDate — returns the calendar expiry date (expiringDate) for the
+// staff member's most recent assignment of the given certification. Parameter is Certification UUID.
+// Parameters: $uuid_certification : Text — UUID of the Certification dataclass record
+// Returns: Date — expiringDate of the latest assignment, or !00-00-00! when none exists
+// modified by 4D/PS [2026-may-21]
+Function getCertiExpiredDate($uuid_certification : Text)->$expiringDate : Date
 	$assignment_es:=ds:C1482.CertificationAssignment\
 		.query("UUID_Staff = :1 AND UUID_Certification = :2"; This:C1470.UUID; $uuid_certification)\
 		.orderBy("certificationDate desc")
@@ -64,7 +73,7 @@ Function getExpiredDate($uuid_certification : Text)->$expiredIn : Date
 	If ($assignment_es.length>0)
 		// Purpose: Return calendar lapse date from certification date + duration days (expiredIn).
 		// modified by 4D/PS [2026-may-12]
-		$expiredIn:=$assignment_es[0].expiringDate
+		$expiringDate:=$assignment_es[0].expiringDate
 	End if 
 	
 Function getCertiExpiredIn($days : Integer)->$assignment_es : cs:C1710.CertificationAssignmentSelection

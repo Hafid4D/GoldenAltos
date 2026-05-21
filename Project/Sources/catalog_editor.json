@@ -260,9 +260,9 @@
 				"left": 2137.4692382812,
 				"top": 549.47967529297,
 				"width": 149.05078125,
-				"height": 393.33203125
+				"height": 448.33203125
 			},
-			"displayable_fields_count": 16,
+			"displayable_fields_count": 19,
 			"fields": {
 				"contactDetails": {
 					"position": 15
@@ -643,9 +643,9 @@
 				"left": 2383.6667480469,
 				"top": 575,
 				"width": 145.2421875,
-				"height": 173.33203125
+				"height": 199.33203125
 			},
-			"displayable_fields_count": 6
+			"displayable_fields_count": 7
 		},
 		"StepTemplateTool": {
 			"color": {

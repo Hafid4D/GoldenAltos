@@ -177,9 +177,11 @@ Function _notification_definition()
 	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("DueEquipmentOutOfPM"; "Due Equipment out of PM"; $definition)
 	
 	$definition:=cs:C1710.sfw_definitionNotificationType.new()
-	$definition.setDescription("Employee ##fullName## retraining due in the next 30 days.Action required")
+	// Purpose: One notification per certification assignment entering the expiry window (##certName## / ##expiringDate##).
+	// modified by 4D/PS [2026-may-21]
+	$definition.setDescription("Employee ##fullName## : certification ##certName## expiring on ##expiringDate## (within ##days## days). Action required.")
 	$definition.setActive()
-	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("EmployeeRetrainRequired"; "Employees requiring retraining in the next 30 days"; $definition)
+	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("EmployeeRetrainRequired"; "Certifications expiring within 30 days"; $definition)
 	
 	$definition:=cs:C1710.sfw_definitionNotificationType.new()
 	$definition.setDescription("Critical supplier ##name## audits pending. Schedule immediately")

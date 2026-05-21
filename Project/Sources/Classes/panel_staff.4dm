@@ -9,7 +9,9 @@ Function formMethod()
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		//OBJECT SET VISIBLE(*; "wr30_@"; (Form.current_item.getCertiExpiredIn(30).length>0))
-		Form:C1466.shift:=Form:C1466.current_item.shift="A" ? True:C214 : False:C215
+		// Purpose: Mirror boolean drives the "Shift 1 / Shift 2" radio group; written back to current_item.shift on click (see ObjectMethods/entryField_shift.4dm).
+		// modified by 4D/PS [2026-may-21]
+		Form:C1466.shift1:=(Form:C1466.current_item.shift="1")
 		This:C1470.loadAllTabs()
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
@@ -84,6 +86,16 @@ Function loadCommunications()
 		)
 	
 	Form:C1466.subFormCommunication:=Form:C1466.subFormCommunication
+
+// Purpose: True when the current user holds a Quality profile allowed to manage staff certifications (qs, qi, qm).
+// Returns: Boolean
+// created by 4D/PS [2026-may-21]
+Function _hasQaProfile()->$allowed : Boolean
+	
+	var $qaProfiles : Collection
+	
+	$qaProfiles:=New collection:C1472("qs"; "qi"; "qm")
+	$allowed:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($qaProfiles.indexOf($1.value)#-1)))#Null:C1517
 	
 Function loadCertifications()
 	GOTO OBJECT:C206(*; "lb_assignments")
@@ -91,22 +103,22 @@ Function loadCertifications()
 	Form:C1466.lb_assignments:=New collection:C1472()
 	
 	For each ($certification; ds:C1482.Certification.all().orderBy("ref asc"))
+		// Purpose: expiredIn column uses getCertiExpiredDate (calendar expiry) — renamed from getExpiredDate.
+		// modified by 4D/PS [2026-may-21]
 		Form:C1466.lb_assignments.push(New object:C1471(\
 			"UUID"; $certification.UUID; \
 			"name"; $certification.name; \
 			"duration"; $certification.duration; \
 			"oneTime"; $certification.oneTime; \
-			"expiredIn"; Form:C1466.current_item.getExpiredDate($certification.UUID); \
+			"expiredIn"; Form:C1466.current_item.getCertiExpiredDate($certification.UUID); \
 			"certifiedAt"; Form:C1466.current_item.getCertificationDate($certification.UUID); \
 			"certified"; Form:C1466.current_item.hasCertification($certification.UUID)\
 			))
 	End for each 
 	
-	$find:=""
-	
-	$find:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($1.value=$2)); "qm")
-	
-	If ($find#"")
+	// Purpose: Show Certified At / Expired In columns only for Quality profiles (qs, qi, qm).
+	// modified by 4D/PS [2026-may-21]
+	If (This:C1470._hasQaProfile())
 		//TRACE
 		$nb_cols:=LISTBOX Get number of columns:C831(*; "lb_assignments")
 		
@@ -140,6 +152,11 @@ Function loadCertifications()
 Function manageCertification()
 	Case of 
 		: (FORM Event:C1606.code=On Data Change:K2:15)
+			// Purpose: Only qs / qi / qm profiles may assign or remove certifications.
+			// modified by 4D/PS [2026-may-21]
+			If (Not:C34(This:C1470._hasQaProfile()))
+				return 
+			End if 
 			If (Form:C1466.selectedCertification.certified)
 				Form:C1466.current_item.createCertification(Form:C1466.selectedCertification.UUID; (Not:C34(Form:C1466.selectedCertification.oneTime)) ? Form:C1466.selectedCertification.duration : 0)
 				This:C1470.loadCertifications()
@@ -151,9 +168,7 @@ Function manageCertification()
 			This:C1470._activate_save_cancel_button()
 			
 		: (FORM Event:C1606.code=On Clicked:K2:4)
-			$find:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($1.value=$2)); "qm")
-			
-			If ($find#"")
+			If (This:C1470._hasQaProfile())
 				
 			End if 
 	End case 
@@ -284,38 +299,46 @@ Function pup_user()
 	
 Function bActionCertifications()
 	//If (Form.sfw.checkIsInModification())
+	$refMenu:=Create menu:C408
+	
+	// Purpose: Full employee training record (all valid + expired certifications) — available
+	// from the Certifications tab Actions menu as requested in client feedback.
+	// modified by 4D/PS [2026-may-21]
+	APPEND MENU ITEM:C411($refMenu; "Print Certification Training")
+	SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--printCertTraining")
+	
 	If (Form:C1466.selectedCertification#Null:C1517)
-		$refMenu:=Create menu:C408
+		APPEND MENU ITEM:C411($refMenu; "-")
 		APPEND MENU ITEM:C411($refMenu; "Print Certificate of Completion")
 		SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--print")
 		If (Not:C34(Form:C1466.current_item.hasCertification(Form:C1466.selectedCertification.UUID)))
 			DISABLE MENU ITEM:C150($refMenu; -1)
 		End if 
-		
-		$choose:=Dynamic pop up menu:C1006($refMenu)
-		
-		Case of 
-			: ($choose="--print")
-				PRINT SETTINGS:C106()
-				
-				OPEN PRINTING JOB:C995
-				
-				SET PRINT OPTION:C733(Orientation option:K47:2; 2)
-				
-				$form:=New object:C1471(\
-					"staffName"; Form:C1466.current_item.fullName; \
-					"certificationName"; Form:C1466.selectedCertification.name; \
-					"issuedBy"; "GOLDEN ALTOS CORPORATION"; \
-					"date"; String:C10(Form:C1466.selectedCertification.expiredIn; System date long:K1:3)\
-					)
-				
-				Print form:C5([Certification:124]; "certification_of_completion"; $form; Form detail:K43:1)
-				
-				CLOSE PRINTING JOB:C996
-		End case 
-	Else 
-		cs:C1710.sfw_dialog.me.alert("No Certification Selected !")
 	End if 
+	
+	$choose:=Dynamic pop up menu:C1006($refMenu)
+	
+	Case of 
+		: ($choose="--printCertTraining")
+			staff_print_cert_training
+		: ($choose="--print")
+			PRINT SETTINGS:C106()
+			
+			OPEN PRINTING JOB:C995
+			
+			SET PRINT OPTION:C733(Orientation option:K47:2; 2)
+			
+			$form:=New object:C1471(\
+				"staffName"; Form:C1466.current_item.fullName; \
+				"certificationName"; Form:C1466.selectedCertification.name; \
+				"issuedBy"; "GOLDEN ALTOS CORPORATION"; \
+				"date"; String:C10(Form:C1466.selectedCertification.expiredIn; System date long:K1:3)\
+				)
+			
+			Print form:C5([Certification:124]; "certification_of_completion"; $form; Form detail:K43:1)
+			
+			CLOSE PRINTING JOB:C996
+	End case 
 	//End if 
 	
 	///*
