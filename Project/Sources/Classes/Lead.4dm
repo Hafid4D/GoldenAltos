@@ -16,8 +16,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(3; ""; "Jobs & Deliveries"; "disabled")
 	
 	$entry.setLBItemsColumn("leadCode"; "ID"; "width:50")
-	$entry.setLBItemsColumn("customerName"; "Customer"; "subject"; "width:300")
-	$entry.setLBItemsColumn("amountText"; "Amount"; "width:80"; "left"; "headerCenter")
+	$entry.setLBItemsColumn("customerName"; "Customer"; "subject"; "width:180")
+	$entry.setLBItemsColumn("project"; "Project"; "width:150")
+	$entry.setLBItemsColumn("amountText"; "Amount"; "width:50"; "left"; "headerCenter")
 	$entry.setLBItemsOrderBy("leadCode")
 	$entry.setLBItemsCounter("###,###,##0 ^1;;"; "unit1:lead"; "unitN:leads")
 	$entry.setValidationRule("UUID_Customer"; ""; "UUIDNotNull"; "message:The customer must be defined")
@@ -79,4 +80,5 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$filter.setFilterByIDInTable("LeadPriority"; "levelID"; "priorityLevelID")
 	$filter.setDynamicTitle("name"; "## priorities")
 	$entry.addFilter($filter)
+	
 	
