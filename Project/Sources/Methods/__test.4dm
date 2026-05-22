@@ -1,6 +1,17 @@
 //%attributes = {}
 
 $jobs:=ds:C1482.Job.all()
+For ($i; 0; $jobs.length-1)
+	If ($jobs[$i].jobNumber=1377)
+		
+	End if 
+	
+	If ($jobs[$i].jobNumber=2728)
+		
+	End if 
+	
+End for 
+
 
 $eUser:=cs:C1710.sfw_UserEntity
 $approverProfile:=New collection:C1472("qs"; "qm")

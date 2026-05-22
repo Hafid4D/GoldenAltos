@@ -1566,6 +1566,16 @@
 		<field name="moreData" uuid="A8173E57062C43FB9149806A9D641D9F" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="141E89DEE45A4FE8AAA16BCDE52B9128"/>
 	</table>
+	<table name="ObjectiveEvidence" uuid="D67E65CEB716F74BBD8DF218094A657C" id="100">
+		<field name="UUID" uuid="B021D3EFEEB3A949AC3B50689959E5B3" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="UUID_Qcar" uuid="CA98C8677E88FD46B46534AED3C8CA8D" type="10" autogenerate="true" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="name" uuid="7AAC7DC54B771F4C963A9F4E6C7BA79B" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="extension" uuid="CFDE9F74BF9C4B4298335BA44B527970" type="10" limiting_length="255" never_null="true" id="4">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="blob" uuid="9646945C85575C4DA041E95AF26291CB" type="18" never_null="true" id="5"/>
+		<primary_key field_name="UUID" field_uuid="B021D3EFEEB3A949AC3B50689959E5B3"/>
+	</table>
 	<table name="Customer" uuid="96D1CE81460A4F75B3F4275138C8F778" id="114">
 		<field name="UUID" uuid="37676CD94E8B423595ED98B5C0E9CF89" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="name" uuid="6408BE6907C146339726DEB3047C211E" type="10" limiting_length="255" never_null="true" id="2">
@@ -2034,7 +2044,6 @@
 		<field name="void" uuid="C936F2AC2824B44DB3D7EA6A1BD326C8" type="1" never_null="true" id="14"/>
 		<field name="submit" uuid="3DD04D5C50CC8048985037684A78C8E0" type="1" never_null="true" id="15"/>
 		<field name="submitStmp" uuid="19183AA58CC5DE4297EA1A81E1D6E652" type="4" never_null="true" id="16"/>
-		<field name="category" uuid="1EFFD250540A5C42ABDA48B40C2B1DC5" type="10" limiting_length="255" never_null="true" id="17"/>
 		<field name="issuedBy" uuid="DA02EB22A8AF3649BBADB5854B94A74A" type="10" limiting_length="255" never_null="true" id="18"/>
 		<field name="issuedTo" uuid="5CFBA75EF365C04A9879CA74CFD4169D" type="10" limiting_length="255" never_null="true" id="19"/>
 		<field name="issuedStmp" uuid="9AF8CA702C2C7448806FCD7CB0F76A9B" type="4" never_null="true" id="20"/>
@@ -2044,6 +2053,8 @@
 		<field name="correctiveActionReport" uuid="1701324EEA8F954597D6F9CC393FB6AA" type="21" blob_switch_size="2147483647" never_null="true" id="24"/>
 		<field name="closedStmp" uuid="2395A06581078341A84621D83B30DE97" type="4" never_null="true" id="25"/>
 		<field name="verified" uuid="B5317F2936DAA84688754D5AD27F203A" type="1" never_null="true" id="26"/>
+		<field name="UUID_RejectCriteriaCategory" uuid="A4C2D3E4F5A64789B0C1D2E3F4A5B6E1" type="10" store_as_UUID="true" never_null="true" id="27"/>
+		<field name="UUID_RejectCriteriaItem" uuid="A5C2D3E4F5A64789B0C1D2E3F4A5B6E2" type="10" store_as_UUID="true" never_null="true" id="28"/>
 		<primary_key field_name="UUID" field_uuid="129BD267EFE06D4EBCF1E64FCE762186"/>
 	</table>
 	<table name="Audit" uuid="25AD36FD239C0D479D63ECB2CFAEAA6D" id="139">
@@ -2139,6 +2150,63 @@
 		<field name="entryIdent" uuid="69E1B1123F574EE6B86E8D247DE9BDAA" type="10" limiting_length="255" never_null="true" id="5"/>
 		<primary_key field_name="UUID" field_uuid="CE4B9515040A48CB8C077237915328AF"/>
 	</table>
+	<table name="RejectCriteriaCategory" uuid="A1C2D3E4F5A64789B0C1D2E3F4A5B6C7" id="146">
+		<field name="UUID" uuid="B1C2D3E4F5A64789B0C1D2E3F4A5B6C8" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="levelID" uuid="C1C2D3E4F5A64789B0C1D2E3F4A5B6C9" type="3" unique="true" never_null="true" id="2"/>
+		<field name="name" uuid="E1C2D3E4F5A64789B0C1D2E3F4A5B6CB" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="color" uuid="D1C2D3E4F5A64789B0C1D2E3F4A5B6CA" type="10" limiting_length="255" never_null="true" id="4">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="moreData" uuid="F1C2D3E4F5A64789B0C1D2E3F4A5B6CC" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
+		<primary_key field_name="UUID" field_uuid="B1C2D3E4F5A64789B0C1D2E3F4A5B6C8"/>
+	</table>
+	<table name="RejectCriteriaItem" uuid="A2C2D3E4F5A64789B0C1D2E3F4A5B6D7" id="147">
+		<field name="UUID" uuid="B2C2D3E4F5A64789B0C1D2E3F4A5B6D8" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="UUID_RejectCriteriaCategory" uuid="C2C2D3E4F5A64789B0C1D2E3F4A5B6D9" type="10" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="levelID" uuid="D2C2D3E4F5A64789B0C1D2E3F4A5B6DA" type="3" unique="true" never_null="true" id="3"/>
+		<field name="name" uuid="F2C2D3E4F5A64789B0C1D2E3F4A5B6DC" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="color" uuid="E2C2D3E4F5A64789B0C1D2E3F4A5B6DB" type="10" limiting_length="255" never_null="true" id="5">
+			<field_extra multi_line="false"/>
+		</field>
+		<field name="moreData" uuid="A3C2D3E4F5A64789B0C1D2E3F4A5B6DD" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
+		<primary_key field_name="UUID" field_uuid="B2C2D3E4F5A64789B0C1D2E3F4A5B6D8"/>
+	</table>
+	<relation uuid="F1C2D3E4F5A64789B0C1D2E3F4A5B6DE" name_Nto1="rejectCriteriaCategory" name_1toN="rejectCriteriaItems" state="1">
+		<related_field kind="source">
+			<field_ref uuid="C2C2D3E4F5A64789B0C1D2E3F4A5B6D9" name="UUID_RejectCriteriaCategory">
+				<table_ref uuid="A2C2D3E4F5A64789B0C1D2E3F4A5B6D7" name="RejectCriteriaItem"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="B1C2D3E4F5A64789B0C1D2E3F4A5B6C8" name="UUID">
+				<table_ref uuid="A1C2D3E4F5A64789B0C1D2E3F4A5B6C7" name="RejectCriteriaCategory"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="F2C2D3E4F5A64789B0C1D2E3F4A5B6E3" name_Nto1="rejectCriteriaCategory" name_1toN="qcars" state="1">
+		<related_field kind="source">
+			<field_ref uuid="A4C2D3E4F5A64789B0C1D2E3F4A5B6E1" name="UUID_RejectCriteriaCategory">
+				<table_ref uuid="446AB1ED27F3664C9C9747DD14114EF2" name="Qcar"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="B1C2D3E4F5A64789B0C1D2E3F4A5B6C8" name="UUID">
+				<table_ref uuid="A1C2D3E4F5A64789B0C1D2E3F4A5B6C7" name="RejectCriteriaCategory"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="F3C2D3E4F5A64789B0C1D2E3F4A5B6E4" name_Nto1="rejectCriteriaItem" name_1toN="qcars" state="1">
+		<related_field kind="source">
+			<field_ref uuid="A5C2D3E4F5A64789B0C1D2E3F4A5B6E2" name="UUID_RejectCriteriaItem">
+				<table_ref uuid="446AB1ED27F3664C9C9747DD14114EF2" name="Qcar"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="B2C2D3E4F5A64789B0C1D2E3F4A5B6D8" name="UUID">
+				<table_ref uuid="A2C2D3E4F5A64789B0C1D2E3F4A5B6D7" name="RejectCriteriaItem"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<relation uuid="C7D48852530842BA9BC07499FAF8A048" name_Nto1="user" name_1toN="EquipmentEvents" state="1">
 		<related_field kind="source">
 			<field_ref uuid="32ED16A2B45746E6B8EFE6EA6FE606A3" name="UUID_User">
@@ -3903,6 +3971,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="B137FF49677B472293FF1708249EBC50" name_Nto1="qcar" name_1toN="objectiveEvidences" state="1">
+		<related_field kind="source">
+			<field_ref uuid="CA98C8677E88FD46B46534AED3C8CA8D" name="UUID_Qcar">
+				<table_ref uuid="D67E65CEB716F74BBD8DF218094A657C" name="ObjectiveEvidence"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="129BD267EFE06D4EBCF1E64FCE762186" name="UUID">
+				<table_ref uuid="446AB1ED27F3664C9C9747DD14114EF2" name="Qcar"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" unique_keys="true" uuid="0039C68FB77F4FFCA91C66C3635462E2" type="1">
 		<field_ref uuid="141E89DEE45A4FE8AAA16BCDE52B9128" name="UUID">
 			<table_ref uuid="8A4489176014439D93B99ECC5449681C" name="EngineeringStatus"/>
@@ -4213,6 +4293,11 @@
 			<table_ref uuid="D3AC71CFD00F4948816121AA74EF8DFE" name="Job"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="3338C0CEB6EC42428255DCC6455FC312" type="1">
+		<field_ref uuid="B2C2D3E4F5A64789B0C1D2E3F4A5B6D8" name="UUID">
+			<table_ref uuid="A2C2D3E4F5A64789B0C1D2E3F4A5B6D7" name="RejectCriteriaItem"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="34F76064C30E2F4C9C144E533921C827" type="3">
 		<field_ref uuid="0CA34F14FEE5FF429B1A694BD2DD1C6B" name="UUID_Staff">
 			<table_ref uuid="89B8693B8BA31D46A5E7CC5F40548E73" name="Membership"/>
@@ -4221,6 +4306,11 @@
 	<index kind="regular" unique_keys="true" uuid="351E2E52EB05BC44801A2AA45D1FCBDA" type="1">
 		<field_ref uuid="E33DA69061AB7744853A3E6B6DF6BB8D" name="UUID">
 			<table_ref uuid="0FF66E5E37EDD74B8E6E39F15644C85F" name="Tool"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="35B7A86D359349D4A776E3703D57DB26" type="1">
+		<field_ref uuid="B1C2D3E4F5A64789B0C1D2E3F4A5B6C8" name="UUID">
+			<table_ref uuid="A1C2D3E4F5A64789B0C1D2E3F4A5B6C7" name="RejectCriteriaCategory"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="3697C4AA5355457E9A9C29AC6FE68153" type="3">
@@ -4863,6 +4953,11 @@
 			<table_ref uuid="21C997F4FF841640B547868BE38C05ED" name="LotStep"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="9E3E95A554904832B85B1DD14459049E" type="3">
+		<field_ref uuid="C2C2D3E4F5A64789B0C1D2E3F4A5B6D9" name="UUID_RejectCriteriaCategory">
+			<table_ref uuid="A2C2D3E4F5A64789B0C1D2E3F4A5B6D7" name="RejectCriteriaItem"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="9F9E4CB4A98949C491BA653ED6A44788" type="1">
 		<field_ref uuid="068764F21FF24E9F8AF8EBBA5BB5EEF1" name="UUID">
 			<table_ref uuid="04F7E2A28A5349B4B0C70F6D644922BB" name="LeadEvent"/>
@@ -5073,6 +5168,11 @@
 			<table_ref uuid="96D1CE81460A4F75B3F4275138C8F778" name="Customer"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="BBBE4D3198C14CB5A1CF74640F7F9709" type="1">
+		<field_ref uuid="B021D3EFEEB3A949AC3B50689959E5B3" name="UUID">
+			<table_ref uuid="D67E65CEB716F74BBD8DF218094A657C" name="ObjectiveEvidence"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="BBF91AE719024421B605BF3E85D8B491" type="1">
 		<field_ref uuid="1220A37BE5DC40168EEC02C61B1D51FC" name="UUID">
 			<table_ref uuid="5E1C3E25225441628E3DBCF58BFAABF4" name="sfw_Document"/>
@@ -5108,9 +5208,19 @@
 			<table_ref uuid="1BCF3E71728E56429B08B229161AD291" name="ContinuousImprovement"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="C1E2F3A4B5C64789D0E1F2A3B4C5D6E7" type="3">
+		<field_ref uuid="C1C2D3E4F5A64789B0C1D2E3F4A5B6C9" name="levelID">
+			<table_ref uuid="A1C2D3E4F5A64789B0C1D2E3F4A5B6C7" name="RejectCriteriaCategory"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="C2362D6A725D0C44A5092A84A90666D0" type="3">
 		<field_ref uuid="9B63E59CE2F1C64DB9F8852D9C114C1C" name="UUID_PurchaseOrder">
 			<table_ref uuid="D3AC71CFD00F4948816121AA74EF8DFE" name="Job"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="C2E2F3A4B5C64789D0E1F2A3B4C5D6E8" type="3">
+		<field_ref uuid="D2C2D3E4F5A64789B0C1D2E3F4A5B6DA" name="levelID">
+			<table_ref uuid="A2C2D3E4F5A64789B0C1D2E3F4A5B6D7" name="RejectCriteriaItem"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="C2FF4C838C8DF24E9EAF2D4973188DE2" type="3">
@@ -5313,6 +5423,11 @@
 			<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="E22D37F08534487CB3AE70EF601B1226" type="3">
+		<field_ref uuid="A5C2D3E4F5A64789B0C1D2E3F4A5B6E2" name="UUID_RejectCriteriaItem">
+			<table_ref uuid="446AB1ED27F3664C9C9747DD14114EF2" name="Qcar"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="E3FE6D69E136D048AE44F2672D4110DE" type="1">
 		<field_ref uuid="AC37D94799FAA74089EE6777FABCEAAF" name="UUID">
 			<table_ref uuid="37B76DEC3444474BA87B456E6A1D1708" name="sfw_DocumentModel"/>
@@ -5396,6 +5511,11 @@
 	<index kind="regular" unique_keys="true" uuid="FBBAD51FDFD2D8439D24316E1C3E823B" type="1">
 		<field_ref uuid="E26B906EA27E6F4C82FC5EC71A3F908E" name="boNumber">
 			<table_ref uuid="34498A1D7FE0BD4783FE5183EE6C5BA2" name="BuyingOrder"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="FD9E44E7759447B5BED793218DFEEFA0" type="3">
+		<field_ref uuid="A4C2D3E4F5A64789B0C1D2E3F4A5B6E1" name="UUID_RejectCriteriaCategory">
+			<table_ref uuid="446AB1ED27F3664C9C9747DD14114EF2" name="Qcar"/>
 		</field_ref>
 	</index>
 	<base_extra data_file_path=":HWMHp.4DD">

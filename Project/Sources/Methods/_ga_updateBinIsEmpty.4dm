@@ -42,4 +42,4 @@ Use (Storage:C1525.cache)
 End use 
 ds:C1482.Bin.cacheLoad()
 
-ALERT:C41("✅ Done — "+String:C10($updated)+" bin(s) updated out of "+String:C10($total)+" total.")
+//ALERT("✅ Done — "+String($updated)+" bin(s) updated out of "+String($total)+" total.")
