@@ -455,7 +455,7 @@
 				},
 				"label_0_6": {
 					"type": "text",
-					"top": 207,
+					"top": 250,
 					"left": 12,
 					"width": 64,
 					"height": 15,
@@ -464,7 +464,7 @@
 				},
 				"label_0_9": {
 					"type": "text",
-					"top": 232,
+					"top": 275,
 					"left": 12,
 					"width": 69,
 					"height": 15,
@@ -509,10 +509,10 @@
 				},
 				"entryField_reasonWL": {
 					"type": "input",
-					"top": 232,
+					"top": 275,
 					"left": 102,
 					"width": 173,
-					"height": 80,
+					"height": 60,
 					"dataSource": "Form:C1466.current_item.reasonWL",
 					"focusable": false,
 					"enterable": false,
@@ -711,7 +711,7 @@
 				},
 				"entryField_nextAction": {
 					"type": "input",
-					"top": 207,
+					"top": 250,
 					"left": 102,
 					"width": 162,
 					"height": 15,
@@ -728,6 +728,34 @@
 					"borderStyle": "none",
 					"dataSourceTypeHint": "text",
 					"method": "ObjectMethods/entryField_nextAction.4dm"
+				},
+				"label_0_7": {
+					"type": "text",
+					"top": 207,
+					"left": 12,
+					"width": 64,
+					"height": 30,
+					"stroke": "#808080",
+					"text": "Engineering Status"
+				},
+				"pup_ES": {
+					"type": "button",
+					"top": 212,
+					"left": 102,
+					"width": 162,
+					"height": 20,
+					"fontFamily": "System Font",
+					"fontSize": 13,
+					"focusable": false,
+					"text": "Select Engineering Status",
+					"icon": "",
+					"popupPlacement": "linked",
+					"textPlacement": "right",
+					"style": "bevel",
+					"method": "ObjectMethods/pup_ES.4dm",
+					"events": [
+						"onClick"
+					]
 				}
 			}
 		},
@@ -1495,7 +1523,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 912,
+	"geometryStamp": 947,
 	"method": "method.4dm",
 	"editor": {
 		"groups": {

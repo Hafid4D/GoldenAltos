@@ -548,6 +548,7 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="UUID_EngineeringStatus" uuid="0B689E84D8EE406A872C9F6C8010CA80" type="10" store_as_UUID="true" never_null="true" id="19"/>
+		<field name="project" uuid="5AF552E88C084321AAD401D3D8870010" type="10" limiting_length="255" never_null="true" id="20"/>
 		<primary_key field_name="UUID" field_uuid="B8409317F330EA438FDD41BD2DFC32A3"/>
 	</table>
 	<table name="ServiceType" uuid="2125F2FDC0CF8B44888965E43127D9B3" id="36">

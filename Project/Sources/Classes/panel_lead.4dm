@@ -4,6 +4,7 @@ singleton Class constructor
 	
 Function formMethod()
 	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
+	
 	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
 		If (Form:C1466.current_item.leadCode="")
 			Form:C1466.current_item.leadCode:=This:C1470.calculateCode()
@@ -38,6 +39,7 @@ Function formMethod()
 		This:C1470.drawPup_job()
 		
 	End if 
+	This:C1470.drawPup_Estatus()
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
 		Case of 
 			: (FORM Get current page:C276(*)=1)
@@ -586,6 +588,54 @@ Function selectPO()
 				
 		End case 
 	End if 
+	
+	
+	//mark:Engineering Status
+Function pup_Estatus()
+	//Create pop up menu
+	If (Form:C1466.sfw.checkIsInModification())
+		$menu:=Create menu:C408
+		If (Storage:C1525.cache=Null:C1517) || (Storage:C1525.cache.engineeringStatus=Null:C1517)
+			ds:C1482.EngineeringStatus.cacheLoad()
+		End if 
+		
+		For each ($engineeringStatus; Storage:C1525.cache.engineeringStatus)
+			APPEND MENU ITEM:C411($menu; $engineeringStatus.name; *)
+			SET MENU ITEM PARAMETER:C1004($menu; -1; $engineeringStatus.UUID)
+			If ($engineeringStatus.UUID=Form:C1466.current_item.UUID_EngineeringStatus)
+				SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+				If (Is Windows:C1573)
+					SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+				End if 
+			End if 
+		End for each 
+		$choose:=Dynamic pop up menu:C1006($menu)
+		RELEASE MENU:C978($menu)
+		
+		Case of 
+			: ($choose#"")
+				$engineeringStatus:=ds:C1482.EngineeringStatus.get($choose)
+				Form:C1466.current_item.UUID_EngineeringStatus:=$engineeringStatus.UUID
+		End case 
+	End if 
+	This:C1470.drawPup_Estatus()
+	$res:=Form:C1466.current_item.save()
+	cs:C1710.panel_lead.me._activate_save_cancel_button()
+	
+	
+Function drawPup_Estatus()
+	
+	If (Form:C1466.current_item#Null:C1517)
+		$EngineeringStatus:=ds:C1482.EngineeringStatus.query("UUID =:1"; Form:C1466.current_item.UUID_EngineeringStatus).first() || New object:C1471()
+		$EngineeringStatusName:=$EngineeringStatus.name
+		If ($EngineeringStatusName=Null:C1517)
+			$EngineeringStatusName:=" "
+		End if 
+		$color:=cs:C1710.sfw_htmlColor.me.getName($EngineeringStatus.color)
+		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"
+		Form:C1466.sfw.drawButtonPup("pup_ES"; $EngineeringStatusName; $pathIcon; ($EngineeringStatus=Null:C1517))
+	End if 
+	
 	
 	
 Function subsetSelectorPurchaseOrders()->$esPO : cs:C1710.PurchaseOrderSelection
