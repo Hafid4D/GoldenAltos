@@ -48,7 +48,10 @@ Function deleteCertification($uuid_certification : Text)->$certified : Boolean
 	If ($certificationAssignment_es.length>0)
 		$res:=$certificationAssignment_es[0].drop()
 		
-		$certified:=Not:C34($res.success)
+		// Purpose: Return True when drop succeeded — aligned with createCertification ($certified := $res.success).
+		// Returns: Boolean — True if the assignment was removed successfully
+		// modified by 4D/PS [2026-may-21]
+		$certified:=$res.success
 	End if 
 	
 Function getCertificationDate($uuid_certification : Text)->$certifiedAt : Date
