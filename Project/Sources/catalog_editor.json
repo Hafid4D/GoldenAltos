@@ -107,9 +107,9 @@
 				"left": 4127,
 				"top": 0,
 				"width": 162.369140625,
-				"height": 659.33203125
+				"height": 701.33203125
 			},
-			"displayable_fields_count": 29,
+			"displayable_fields_count": 31,
 			"fields_ordering": 2,
 			"fields": {
 				"auditReport": {
@@ -241,8 +241,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2658.6665039062,
-				"top": 400.33459472656,
+				"left": 2647.6665039062,
+				"top": 382.33459472656,
 				"width": 120,
 				"height": 175.33203125
 			},
