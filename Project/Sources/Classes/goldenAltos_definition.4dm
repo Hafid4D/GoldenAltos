@@ -371,7 +371,7 @@ Function _entries_definition()
 Function _profiles_definition()
 	$eQM:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("qm"; "Quality Manager"; "autoCreation")
 	$eDC:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("dc"; "Document Controller"; "autoCreation")
-	//$eQI:=ds.sfw_UserProfile.getAndCreateIfNotExist("qi"; "Quality Inspector"; "autoCreation")
+	$eQI:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("qi"; "Quality Inspector"; "autoCreation")  // modified by 4D/PS [2026-may-21]
 	$eQS:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("qs"; "Quality Supervisor"; "autoCreation")
 	$ePM:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("pm"; "Production Manager"; "autoCreation")
 	$ePS:=ds:C1482.sfw_UserProfile.getAndCreateIfNotExist("ps"; "Production Supervisor"; "autoCreation")

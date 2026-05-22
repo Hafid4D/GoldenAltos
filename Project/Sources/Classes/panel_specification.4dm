@@ -67,7 +67,9 @@ Function redrawAndSetVisible()
 	
 	If (Form:C1466.sfw.checkIsInModification())
 		
-		$approverProfile:=New collection:C1472("qs"; "qm")  // only QC Team allowed to modify
+		// Purpose: QA edit gate uses _ga_qaEditProfiles (qs, qi, qm) — aligned with Staff entry.
+		// modified by 4D/PS [2026-may-21]
+		$approverProfile:=_ga_qaEditProfiles
 		
 		$hasAuthorizedProfile:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($approverProfile.indexOf($1.value)#-1)))#Null:C1517
 		
@@ -148,7 +150,7 @@ Function bActionDocument()
 			
 			
 			$form:=New object:C1471("details"; $details)  // Form.selectedDocument)
-			$form.approverProfile:=New collection:C1472("qs"; "qm")  // only QC Team allowed to modify
+			$form.approverProfile:=_ga_qaEditProfiles
 			$form.displayApprovalFields:=True:C214
 			$form.documentHasChanged:=True:C214
 			
@@ -180,7 +182,7 @@ Function bActionDocument()
 			
 			$document:=OB Copy:C1225(Form:C1466.current_item.documents.documentsCollection[Form:C1466.selectedDocumentPos-1])
 			$form:=New object:C1471("details"; OB Copy:C1225(Form:C1466.current_item.documents.documentsCollection[Form:C1466.selectedDocumentPos-1]))
-			$form.approverProfile:=New collection:C1472("qs"; "qm")  // only QC Team allowed to modify
+			$form.approverProfile:=_ga_qaEditProfiles
 			$form.displayApprovalFields:=True:C214
 			$form.documentHasChanged:=False:C215
 			$form.bufferOfEvents:=Form:C1466.bufferOfEvents

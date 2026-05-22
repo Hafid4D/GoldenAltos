@@ -940,25 +940,21 @@
 					"horizontalLineStroke": "#c0c0c0",
 					"verticalLineStroke": "#C0C0C0",
 					"events": [
-						"onClick",
-						"onDataChange"
+						"onClick"
 					],
 					"fill": "automatic",
 					"alternateFill": "#F7F9FC",
-					"method": "ObjectMethods/lb_documents1.4dm",
 					"selectionMode": "single",
 					"singleClickEdit": false,
-					"rowFillSource": "highlightExpiredCertification",
 					"columns": [
 						{
-							"name": "header_certifName",
+							"name": "header_documentName",
 							"dataSource": "This:C1470.name",
 							"width": 330,
 							"minWidth": 200,
 							"maxWidth": 340,
 							"events": [
-								"onClick",
-								"onDataChange"
+								"onClick"
 							],
 							"header": {
 								"name": "Entête3",

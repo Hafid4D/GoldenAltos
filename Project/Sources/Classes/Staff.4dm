@@ -53,7 +53,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setPictoLabel("/RESOURCES/ga/image/picto/terminated-user-16x16.png")
 	$entry.setView($view)
 	
-	// Purpose: Only Quality profiles (qs, qi, qm) may open and modify Staff records and certifications.
+	// Purpose: Only Quality profiles (qs, qi, qm) may open and modify Staff records — same set as _ga_qaEditProfiles.
 	// modified by 4D/PS [2026-may-21]
 	$entry.setAllowedProfiles("qs"; "qi"; "qm")
 	

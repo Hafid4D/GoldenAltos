@@ -94,7 +94,9 @@ Function _hasQaProfile()->$allowed : Boolean
 	
 	var $qaProfiles : Collection
 	
-	$qaProfiles:=New collection:C1472("qs"; "qi"; "qm")
+	// Purpose: _hasQaProfile uses _ga_qaEditProfiles so qi matches Staff entry and other QA panels.
+	// modified by 4D/PS [2026-may-21]
+	$qaProfiles:=_ga_qaEditProfiles
 	$allowed:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($qaProfiles.indexOf($1.value)#-1)))#Null:C1517
 	
 Function loadCertifications()
