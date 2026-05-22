@@ -76,6 +76,8 @@ Function drawPup_division()
 	End if 
 	
 	
+	
+	
 Function pup_divisionItem()
 	//Create pop up menu
 	If (Form:C1466.sfw.checkIsInModification())
