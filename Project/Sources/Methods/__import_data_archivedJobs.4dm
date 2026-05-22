@@ -9,6 +9,21 @@ If (True:C214)
 	$counter:=ds:C1482.JobInvoice.all().extract("invoiceNumber").map(Formula:C1597(Num:C11($1.value))).max()
 	$lotCollection:=New collection:C1472()
 	
+	// Purpose: lotNumber → UUID dictionary built by PASS 1 (single-pass Lot creation).
+	// Used by PASS 2 (parent resolution) and PASS 3 (LotStep creation) to look up entities
+	// in O(1) instead of running `ds.Lot.query("lotNumber = ...").first()` per record.
+	// modified by 4D/PS [2026-may-21]
+	$lotsByNumber:=New object:C1471()
+	
+	// Purpose: Wrap the heavy Lot / LotStep import in a single transaction. Without it,
+	// every ORDA save() flushes to disk independently which dominates the runtime for
+	// thousands of records. The transaction is checkpointed periodically inside the
+	// inner loops (Validate transaction + START TRANSACTION every 500 saves) to keep
+	// the journal manageable.
+	// modified by 4D/PS [2026-may-21]
+	START TRANSACTION:C239
+	$txnCounter:=0
+	
 	For each ($record; $records)
 		$counter:=$counter+1
 		$job:=ds:C1482.Job.new()
@@ -175,27 +190,19 @@ If (True:C214)
 		End for each 
 		
 		
-		$lotCollection:=$lotCollection.concat($record.lots)
-		
-		For each ($lotItem; $record.lots.orderBy("parentLotNumber asc"))
-			
-			$eLot:=ds:C1482.Lot.new()
-			$eLot.lotNumber:=$lotItem.lotNum
-			$po_s:=ds:C1482.PurchaseOrder.query("oldPoNumber =:1"; Split string:C1554($record.poNumber; "\r"; sk trim spaces:K86:2).join("\r"))
-			If ($po_s.length>0)
-				$eLot.poNumber:=$po_s[0].poNumber
-				
-			Else 
-				$eLot.poNumber:=0
-			End if 
-			
-			$res:=$eLot.save()
-			
-			If (Not:C34($res.success))
-				TRACE:C157
-			End if 
-			
+		// Purpose: Tag each lot with its owning job UUID, then aggregate into $lotCollection.
+		// The previous design ran an extra Loop A here that created skeleton lots
+		// (lotNumber + poNumber) only to re-query and overwrite them in the post-records
+		// loop, doubling the number of saves. That Loop A is now removed because the
+		// single-pass Lot creation (PASS 1, below) does everything in one save() per lot.
+		// Also fixes a latent bug where the post-records loop used `$job.UUID` (= the
+		// LAST job processed in the outer loop) for every lot regardless of its actual job.
+		// modified by 4D/PS [2026-may-21]
+		For each ($lotItem; $record.lots)
+			$lotItem._jobUUID:=$job.UUID
 		End for each 
+		
+		$lotCollection:=$lotCollection.concat($record.lots)
 		
 /*
 For each ($lot; $record.lots)
@@ -362,14 +369,17 @@ End for each
 		
 	End for each 
 	
-	For each ($lot; $lotCollection)  // $record.lots.orderBy("parentLotNumber asc"))
+	// PASS 1 — Create every archived lot in a single save() per record (no parent yet,
+	// no steps yet) and build the lotNumber → UUID dictionary used by PASS 2 and PASS 3.
+	// This replaces the old two-pass design (skeleton Loop A + fill Loop B) that re-queried
+	// each lot just after creating it. The orderBy("parentLotNumber asc") is kept for stable
+	// processing order; parent UUIDs are filled in PASS 2 so cross-job parents are handled.
+	// created by 4D/PS [2026-may-21]
+	For each ($lot; $lotCollection.orderBy("parentLotNumber asc"))
 		
-		//$lot_e:=ds.Lot.new()
-		
-		//$lot_e.lotNumber:=$lot.lotNum
 		var $lot_e : cs:C1710.LotEntity
-		$lot_e:=ds:C1482.Lot.query("lotNumber =:1"; Split string:C1554($lot.lotNum; "\r"; sk trim spaces:K86:2).join("\r")).first()
-		
+		$lot_e:=ds:C1482.Lot.new()
+		$lot_e.lotNumber:=$lot.lotNum
 		$lot_e.dateIn:=$lot.dateIn
 		$lot_e.dateOut:=$lot.dateOut
 		$lot_e.process:=$lot.process
@@ -380,18 +390,7 @@ End for each
 		$lot_e.onHold:=$lot.onHold
 		$lot_e.holdDate:=$lot.holdDate
 		$lot_e.holdTime:=$lot.holdTime
-		
-		//$po_s:=ds.PurchaseOrder.query("oldPoNumber =:1"; Split string($record.poNumber; "\r"; sk trim spaces).join("\r"))
-		//If ($po_s.length>0)
-		//$lot_e.poNumber:=$po_s[0].poNumber
-		////$lot_e.UUID_PurchaseOrder:=$po_s[0].UUID
-		
-		//Else 
-		//$lot_e.poNumber:=0
-		//End if 
-		
 		$lot_e.poNumber:=$lot.poNumber
-		
 		$lot_e.customer:=$lot.customer
 		$lot_e.commit:=$lot.commit
 		$lot_e.reCommit:=$lot.reCommit
@@ -412,7 +411,6 @@ End for each
 		$lot_e.comment:=$lot.comment
 		$lot_e.status:=$lot.status
 		$lot_e.altDevNumber:=$lot.altDevNumber
-		//$lot_e.altLotNumber:=$lot.altLotNumber
 		$lot_e.cOfCInspector:=$lot.cOfCInspector
 		$lot_e.packageType:=$lot.packageType
 		$lot_e.dateCode:=$lot.dateCode
@@ -421,127 +419,162 @@ End for each
 		$lot_e.totalCharge:=$lot.totalCharge
 		$lot_e.unitCost:=$lot.unitCost
 		
-		$lot_e.UUID_Job:=$job.UUID
-		
-		If ($lot.parentLotNumber#"") & Not:C34(Undefined:C82($lot.parentLotNumber))
-			$lots_es:=ds:C1482.Lot.query("lotNumber = :1"; $lot.parentLotNumber)
-			
-			If ($lots_es.length>0)
-				$lot_e.UUID_LotParent:=$lots_es[0].UUID
-			Else 
-				TRACE:C157
-			End if 
-		End if 
+		// Purpose: Use the per-lot job UUID tagged inside the records loop instead of
+		// `$job.UUID`, which here would be the LAST job processed.
+		// modified by 4D/PS [2026-may-21]
+		$lot_e.UUID_Job:=$lot._jobUUID
 		
 		$lot_e.moreData:=New object:C1471()
-		$recodNumber:=ds:C1482.sfw_Counter.getNextValue("Lot")
-		$lot_e.moreData.barcodeData:=String:C10($recodNumber; "0000000000")
+		// Purpose: barcode counter disabled for now (consistent with __import_purchaseOrders).
+		// Each call to sfw_Counter.getNextValue is a worker round-trip + signal.wait, which
+		// dwarfs the actual save() and was a major contributor to the slowness.
+		// modified by 4D/PS [2026-may-21]
+		//$recodNumber:=ds:C1482.sfw_Counter.getNextValue("Lot")
+		//$lot_e.moreData.barcodeData:=String:C10($recodNumber; "0000000000")
 		
 		$res:=$lot_e.save()
 		
 		If (Not:C34($res.success))
 			TRACE:C157
 		Else 
-			
-/* TODO : UNCOMMENT
-For each ($step; $lot.steps)
-// Purpose: Populate LotStep object fields (bins/parametricMeasurements/properties/moreData) from the legacy export JSON. Keeps backward compatibility when older JSON files do not provide the new sub-keys.
-// modified by 4D/PS [2026-april-27]
-$lotStep_e:=ds.LotStep.new()
-			
-$lotStep_e.order:=$step.order
-$lotStep_e.description:=$step.description
-$lotStep_e.lotSpecs:=$step.lotSpecs
-$lotStep_e.specRevision:=$step.specRevision
-$lotStep_e.alert:=$step.alert
-$lotStep_e.qtyIn:=$step.qtyIn
-$lotStep_e.qtyOut:=$step.qtyOut
-$lotStep_e.rejects:=$step.rejects
-$lotStep_e.minYield:=$step.minYield
-$lotStep_e.dateIn:=$step.dateIn
-$lotStep_e.dateOut:=$step.dateOut
-$lotStep_e.timeIn:=$step.timeIn
-$lotStep_e.timeOut:=$step.timeOut
-$lotStep_e.discard:=$step.discard
-$lotStep_e.type:=$step.type
-$lotStep_e.outOperator:=$step.outOperator
-$lotStep_e.inOperator:=$step.inOperator
-$lotStep_e.actualHours:=$step.actualHours
-$lotStep_e.plannedHours:=$step.plannedHours
-$lotStep_e.tools:=New object()
-$lotStep_e.tools:=$step.tools
-$lotStep_e.areas:=$step.areas
-$lotStep_e.mechanicalRejects:=$step.mechanicalRejects
-$lotStep_e.missingOrExcluded:=$step.missingOrExcluded
-$lotStep_e.yield:=$step.yield
-$lotStep_e.supervisor:=$step.supervisor
-$lotStep_e.enableBins:=$step.enableBins
-			
-While (($lotStep_e.tools#Null) && ($lotStep_e.tools.items.indexOf("")#-1))
-			
-$lotStep_e.tools.items:=$lotStep_e.tools.items.remove($lotStep_e.tools.items.indexOf(""))
-			
-End while 
-			
-$lotStep_e.parametricMeasurements:=New object(\
-"items"; New collection(); \
-"in"; New object("par1"; 0; "par2"; 0; "par3"; 0); \
-"out"; New object("par1"; 0; "par2"; 0; "par3"; 0)\
-)
-If ($step.parametricMeasurements#Null)
-If ($step.parametricMeasurements.in#Null)
-$lotStep_e.parametricMeasurements.in:=$step.parametricMeasurements.in
-End if 
-If ($step.parametricMeasurements.out#Null)
-$lotStep_e.parametricMeasurements.out:=$step.parametricMeasurements.out
-End if 
-End if 
-			
-$lotStep_e.stepInterruptions:=New object("items"; New collection())
-$lotStep_e.dataTables:=New object("items"; New collection())
-			
-$lotStep_e.bins:=New object(\
-"items"; $step.bins.items)  // New collection())
-//If ($step.bins#Null) && ($step.bins.items#Null)
-//For each ($bin; $step.bins.items)
-//$newBin:=New object()
-//$newBin.num:=$bin.num
-//$newBin.definition:=($bin.definition=Null) ? "" : $bin.definition
-//$newBin.type:=($bin.type=Null) ? "" : $bin.type
-//$newBin.value:=($bin.value=Null) ? 0 : $bin.value
-//$lotStep_e.bins.items.push($newBin)
-//End for each 
-//End if 
-			
-$lotStep_e.properties:=New object(\
-"pgm"; ""; \
-"pgmSwitch"; ""; \
-"hardware1"; ""; \
-"hardware2"; ""; \
-"probeCard"; ""; \
-"count1"; 0; \
-"count2"; 0; \
-"count3"; 0\
-)
-If ($step.properties#Null)
-$lotStep_e.properties:=$step.properties
-End if 
-			
-$lotStep_e.skills:=New object("items"; New collection())
-$lotStep_e.requitedCertifications:=New object("items"; New collection())
-			
-$lotStep_e.UUID_Lot:=$lot_e.UUID
-			
-$res:=$lotStep_e.save()
-			
-If (Not($res.success))
-TRACE
-End if 
-End for each 
-*/
-			
-			
-			
+			$lotsByNumber[$lot.lotNum]:=$lot_e.UUID
+		End if 
+		
+		// Purpose: Checkpoint the transaction every 500 saves to keep the journal small.
+		// modified by 4D/PS [2026-may-21]
+		$txnCounter:=$txnCounter+1
+		If (($txnCounter%500)=0)
+			VALIDATE TRANSACTION:C240
+			START TRANSACTION:C239
+		End if 
+		
+	End for each 
+	
+	// PASS 2 — Resolve UUID_LotParent via the dictionary built in PASS 1. No DB queries:
+	// every lot is already in the dict, so parent lookup is O(1). Cross-job parents are
+	// handled naturally because $lotCollection aggregates lots from every record.
+	// created by 4D/PS [2026-may-21]
+	For each ($lot; $lotCollection)
+		If (($lot.parentLotNumber#"") & Not:C34(Undefined:C82($lot.parentLotNumber)))
+			$parentUUID:=$lotsByNumber[$lot.parentLotNumber]
+			$childUUID:=$lotsByNumber[$lot.lotNum]
+			If (($parentUUID#Null:C1517) & ($childUUID#Null:C1517))
+				$lot_e:=ds:C1482.Lot.get($childUUID)
+				If ($lot_e#Null:C1517)
+					$lot_e.UUID_LotParent:=$parentUUID
+					$res:=$lot_e.save()
+					If (Not:C34($res.success))
+						TRACE:C157
+					End if 
+					$txnCounter:=$txnCounter+1
+					If (($txnCounter%500)=0)
+						VALIDATE TRANSACTION:C240
+						START TRANSACTION:C239
+					End if 
+				End if 
+			Else 
+				If ($parentUUID=Null:C1517)
+					TRACE:C157  // parent lot missing from the import — kept for diagnostic
+				End if 
+			End if 
+		End if 
+	End for each 
+	
+	// PASS 3 — Create LotSteps for every archived lot. UUID_Lot comes from the dictionary,
+	// so no `ds.Lot.query(...)` per step. This block was previously commented out
+	// (`/* TODO : UNCOMMENT */`) because each iteration hit the database without a
+	// transaction; with the transaction wrap and the dictionary lookup it becomes viable.
+	// created by 4D/PS [2026-may-21]
+	For each ($lot; $lotCollection)
+		$lotUUID:=$lotsByNumber[$lot.lotNum]
+		If ($lotUUID#Null:C1517)
+			For each ($step; $lot.steps)
+				$lotStep_e:=ds:C1482.LotStep.new()
+				
+				$lotStep_e.order:=$step.order
+				$lotStep_e.description:=$step.description
+				$lotStep_e.lotSpecs:=$step.lotSpecs
+				$lotStep_e.specRevision:=$step.specRevision
+				$lotStep_e.alert:=$step.alert
+				$lotStep_e.qtyIn:=$step.qtyIn
+				$lotStep_e.qtyOut:=$step.qtyOut
+				$lotStep_e.rejects:=$step.rejects
+				$lotStep_e.minYield:=$step.minYield
+				$lotStep_e.dateIn:=$step.dateIn
+				$lotStep_e.dateOut:=$step.dateOut
+				$lotStep_e.timeIn:=$step.timeIn
+				$lotStep_e.timeOut:=$step.timeOut
+				$lotStep_e.discard:=$step.discard
+				$lotStep_e.type:=$step.type
+				$lotStep_e.outOperator:=$step.outOperator
+				$lotStep_e.inOperator:=$step.inOperator
+				$lotStep_e.actualHours:=$step.actualHours
+				$lotStep_e.plannedHours:=$step.plannedHours
+				$lotStep_e.tools:=New object:C1471()
+				$lotStep_e.tools:=$step.tools
+				$lotStep_e.areas:=$step.areas
+				$lotStep_e.mechanicalRejects:=$step.mechanicalRejects
+				$lotStep_e.missingOrExcluded:=$step.missingOrExcluded
+				$lotStep_e.yield:=$step.yield
+				$lotStep_e.supervisor:=$step.supervisor
+				$lotStep_e.enableBins:=$step.enableBins
+				
+				While (($lotStep_e.tools#Null:C1517) && ($lotStep_e.tools.items.indexOf("")#-1))
+					$lotStep_e.tools.items:=$lotStep_e.tools.items.remove($lotStep_e.tools.items.indexOf(""))
+				End while 
+				
+				$lotStep_e.parametricMeasurements:=New object:C1471(\
+					"items"; New collection:C1472(); \
+					"in"; New object:C1471("par1"; 0; "par2"; 0; "par3"; 0); \
+					"out"; New object:C1471("par1"; 0; "par2"; 0; "par3"; 0)\
+					)
+				If ($step.parametricMeasurements#Null:C1517)
+					If ($step.parametricMeasurements.in#Null:C1517)
+						$lotStep_e.parametricMeasurements.in:=$step.parametricMeasurements.in
+					End if 
+					If ($step.parametricMeasurements.out#Null:C1517)
+						$lotStep_e.parametricMeasurements.out:=$step.parametricMeasurements.out
+					End if 
+				End if 
+				
+				$lotStep_e.stepInterruptions:=New object:C1471("items"; New collection:C1472())
+				$lotStep_e.dataTables:=New object:C1471("items"; New collection:C1472())
+				
+				$lotStep_e.bins:=New object:C1471(\
+					"items"; $step.bins.items)
+				
+				$lotStep_e.properties:=New object:C1471(\
+					"pgm"; ""; \
+					"pgmSwitch"; ""; \
+					"hardware1"; ""; \
+					"hardware2"; ""; \
+					"probeCard"; ""; \
+					"count1"; 0; \
+					"count2"; 0; \
+					"count3"; 0\
+					)
+				If ($step.properties#Null:C1517)
+					$lotStep_e.properties:=$step.properties
+				End if 
+				
+				$lotStep_e.skills:=New object:C1471("items"; New collection:C1472())
+				$lotStep_e.requitedCertifications:=New object:C1471("items"; New collection:C1472())
+				
+				$lotStep_e.UUID_Lot:=$lotUUID
+				
+				$res:=$lotStep_e.save()
+				
+				If (Not:C34($res.success))
+					TRACE:C157
+				End if 
+				
+				$txnCounter:=$txnCounter+1
+				If (($txnCounter%500)=0)
+					VALIDATE TRANSACTION:C240
+					START TRANSACTION:C239
+				End if 
+				
+			End for each 
 		End if 
 	End for each 
 	
@@ -555,18 +588,31 @@ fix lotParent for some lots
 	For each ($lot; $lots_es)
 		$parentLotNumber:=Split string:C1554($lot.lotNumber; "-")[0]
 		
-		$parent_es:=ds:C1482.Lot.query("lotNumber = :1"; $parentLotNumber)
+		// Purpose: Reuse the in-memory dictionary first to avoid a per-row query; fall back
+		// to ds.Lot.query() only when the parent lot isn't in the dict (shouldn't happen
+		// unless its save() failed in PASS 1).
+		// modified by 4D/PS [2026-may-21]
+		$parentUUID:=$lotsByNumber[$parentLotNumber]
+		If ($parentUUID=Null:C1517)
+			$parent_es:=ds:C1482.Lot.query("lotNumber = :1"; $parentLotNumber)
+			If ($parent_es.length>0)
+				$parentUUID:=$parent_es[0].UUID
+			End if 
+		End if 
 		
-		If ($parent_es.length>0)
-			$lot.UUID_LotParent:=$parent_es[0].UUID
-			
+		If ($parentUUID#Null:C1517)
+			$lot.UUID_LotParent:=$parentUUID
 			$res:=$lot.save()
-			
 			If (Not:C34($res.success))
 				TRACE:C157
 			End if 
 		End if 
 	End for each 
+	
+	// Purpose: Commit the bulk-import transaction. Every Job/Lot/LotStep/JobInvoice/
+	// JobLineItem save issued since `START TRANSACTION` above is flushed to disk together.
+	// modified by 4D/PS [2026-may-21]
+	VALIDATE TRANSACTION:C240
 	
 End if 
 

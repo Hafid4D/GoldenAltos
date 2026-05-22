@@ -16,70 +16,70 @@ If (Form:C1466.current_item#Null:C1517)
 		
 		// Purpose: CERT_TRAINING document model — WP SET DATA CONTEXT then WP PRINT (aligned with RECV_TAG implementation).
 		// modified by 4D/PS [2026-may-12]
-		If (True:C214)
-			
-			$context:=New object:C1471()
-			$template:=WP New:C1317()
-			
-			$model:=ds:C1482.sfw_DocumentModel.query("name =:1"; "CERT_TRAINING").first()
-			If ($model#Null:C1517)
-				$template:=$model.area
-			End if 
-			
-			$division:=ds:C1482.Division.query("UUID =:1"; Form:C1466.current_item.UUID_Division)
-			$divisionName:=$division.length>0 ? $division[0].name : ""
-			
-			$memberships:=ds:C1482.Membership.query("UUID_Staff= :1"; Form:C1466.current_item.UUID)  //.first() || New object()
-			If ($memberships.length>0)
-				$department:=$memberships[0].team
-				If ($department#Null:C1517)
-					$departmentName:=$department.name
-				Else 
-					$departmentName:=""
-				End if 
+		
+		$context:=New object:C1471()
+		$template:=WP New:C1317()
+		
+		$model:=ds:C1482.sfw_DocumentModel.query("name =:1"; "CERT_TRAINING").first()
+		If ($model#Null:C1517)
+			$template:=$model.area
+		Else 
+			// Purpose: Fail fast when the WP template is missing instead of printing a blank document.
+			// modified by 4D/PS [2026-may-21]
+			cs:C1710.sfw_dialog.me.alert("Document model ""CERT_TRAINING"" was not found. Import or create it in Administration before printing.")
+			return 
+		End if 
+		
+		$division:=ds:C1482.Division.query("UUID =:1"; Form:C1466.current_item.UUID_Division)
+		$divisionName:=$division.length>0 ? $division[0].name : ""
+		
+		$memberships:=ds:C1482.Membership.query("UUID_Staff= :1"; Form:C1466.current_item.UUID)
+		If ($memberships.length>0)
+			$department:=$memberships[0].team
+			If ($department#Null:C1517)
+				$departmentName:=$department.name
 			Else 
 				$departmentName:=""
 			End if 
-			
-			
-			$context.employee:=New object:C1471(\
-				"lastName"; Form:C1466.current_item.lastName; \
-				"firstName"; Form:C1466.current_item.firstName; \
-				"department"; $departmentName; \
-				"division"; $divisionName; \
-				"code"; Form:C1466.current_item.code; \
-				"shift"; Form:C1466.current_item.shift; \
-				"retrainDate"; Form:C1466.current_item.retrainDate\
-				)
-			
-/*
-$context.validCertifications:=New collection()
-$context.expiredCertifications:=New collection()
-			
-// Purpose: Same filtering as legacy detail bands — validityActive vs finite expired assignments.
-// modified by 4D/PS [2026-may-12]
-For each ($assign; Form.current_item.assignments)
-If ($assign.validityActive)
-$certRow:=New object("name"; $assign.certification.name; "date"; $assign.certificationDate)
-$context.validCertifications.push($certRow)
-End if 
-End for each 
-			
-For each ($assign; Form.current_item.assignments)
-If (($assign.expiredIn>0) && Not($assign.validityActive))
-$certRow:=New object("name"; $assign.certification.name; "date"; $assign.certificationDate)
-$context.expiredCertifications.push($certRow)
-End if 
-End for each 
-*/
-			
-			WP SET DATA CONTEXT:C1786($template; $context)
-			
-			PRINT SETTINGS:C106(2)
-			WP PRINT:C1343($template)
-			
+		Else 
+			$departmentName:=""
 		End if 
 		
+		
+		$context.employee:=New object:C1471(\
+			"lastName"; Form:C1466.current_item.lastName; \
+			"firstName"; Form:C1466.current_item.firstName; \
+			"department"; $departmentName; \
+			"division"; $divisionName; \
+			"code"; Form:C1466.current_item.code; \
+			"shift"; Form:C1466.current_item.shift; \
+			"retrainDate"; Form:C1466.current_item.retrainDate\
+			)
+		
+		// Purpose: Feed the WP repeating sections — valid vs expired certifications mirror the legacy
+		// cert_training / other_traning print-form bands (validityActive vs finite expired assignments).
+		// modified by 4D/PS [2026-may-21]
+		$context.validCertifications:=New collection:C1472()
+		$context.expiredCertifications:=New collection:C1472()
+		
+		For each ($assign; Form:C1466.current_item.assignments)
+			If ($assign.validityActive) && ($assign.certification#Null:C1517)
+				$certRow:=New object:C1471("name"; $assign.certification.name; "date"; $assign.certificationDate)
+				$context.validCertifications.push($certRow)
+			End if 
+		End for each 
+		
+		For each ($assign; Form:C1466.current_item.assignments)
+			If (($assign.expiredIn>0) && Not:C34($assign.validityActive) && ($assign.certification#Null:C1517))
+				$certRow:=New object:C1471("name"; $assign.certification.name; "date"; $assign.certificationDate)
+				$context.expiredCertifications.push($certRow)
+			End if 
+		End for each 
+		
+		WP SET DATA CONTEXT:C1786($template; $context)
+		
+		PRINT SETTINGS:C106(2)
+		WP PRINT:C1343($template)
 		
 	Else 
 		// Legacy: structured print forms [Staff] cert_training / other_traning — disable top branch (If(False)) and set this If(True) to restore.
