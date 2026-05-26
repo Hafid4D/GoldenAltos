@@ -1079,6 +1079,8 @@ Function bActionInteractions()
 					$context.Followupdate:=$followUPDate
 					$context.Contact:=$scheduledInteraction.contact.fullName || ""
 					$context.Trigger:=$scheduledInteraction.trigger.name || ""
+					$context.Project:=$scheduledInteraction.lead.project || ""
+					
 					
 					$staff:=ds:C1482.Staff.query("UUID_User = :1"; cs:C1710.sfw_userManager.me.info.UUID).first()
 					$users:=New collection:C1472($staff.user.UUID)
