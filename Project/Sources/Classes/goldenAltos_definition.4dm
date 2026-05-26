@@ -187,7 +187,8 @@ Function _notification_definition()
 	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("CriticalSuppliersWithOverdueAudits"; "Critical suppliers with overdue audits"; $definition)
 	
 	$definition:=cs:C1710.sfw_definitionNotificationType.new()
-	$definition.setDescription("With ##Contact## On ##Followupdate## Due To ##Trigger##")
+	//$definition.setDescription("With ##Contact## On ##Followupdate## Due To ##Trigger##")
+	$definition.setDescription("##Trigger## activity scheduled for ##Contact## regarding ##Project## On ##Followupdate##.")
 	$definition.setActive()
 	cs:C1710.sfw_notificationManager.me.createTypeIfNotExist("InteractionScheduled"; "Interaction Scheduled"; $definition)
 	
