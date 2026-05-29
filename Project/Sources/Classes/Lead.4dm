@@ -9,6 +9,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setSearchField("attribute:numCode"; "tag:numCode"; "integer")
 	$entry.setSearchField("attribute:leadCode"; "tag:code")
 	$entry.setSearchField("attribute:customerName"; "tag:customer")
+	$entry.setSearchField("attribute:project"; "tag:project")
 	
 	$entry.setPanel("panel_lead"; 1)
 	$entry.setPanelPage(1; ""; "Main")

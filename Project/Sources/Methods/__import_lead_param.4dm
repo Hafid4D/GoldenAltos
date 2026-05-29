@@ -178,6 +178,27 @@ End if
 
 
 
+TRUNCATE TABLE:C1051([EngineeringStatus:99])
+If (True:C214)
+	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/EngineeringStatus_export.json")
+	$records:=JSON Parse:C1218($file.getText())
+	
+	For each ($q; $records)
+		$engineeringStatus:=ds:C1482.EngineeringStatus.new()
+		$engineeringStatus.code:=$q.code
+		$engineeringStatus.name:=$q.name
+		$engineeringStatus.levelID:=$q.levelID
+		$engineeringStatus.color:=$q.color
+		
+		$info:=$engineeringStatus.save()
+		If (Not:C34($info.success))
+			TRACE:C157
+		End if 
+	End for each 
+End if 
+
+
+
 
 
 

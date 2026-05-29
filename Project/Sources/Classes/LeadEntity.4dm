@@ -103,6 +103,8 @@ local Function afterCreation()
 		$context.Followupdate:=$interaction.followUPDate
 		$context.Contact:=$interaction.contact.fullName
 		$context.Trigger:=$interaction.trigger.name
+		$context.Project:=$interaction.lead.project
+		
 		
 		$staff:=ds:C1482.Staff.query("UUID_User = :1"; cs:C1710.sfw_userManager.me.info.UUID).first()
 		If ($staff#Null:C1517)
@@ -164,9 +166,10 @@ local Function beforeSave()
 			$context:=New object:C1471
 			$context.target:=Form:C1466.current_item.UUID
 			$context.targetDataclass:="Lead"
-			$context.Followupdate:=$followUPDate
+			$context.Followupdate:=$interaction.followUPDate
 			$context.Contact:=$interaction.contact.fullName || ""
 			$context.Trigger:=$interaction.trigger.name || ""
+			$context.Project:=$interaction.lead.project || ""
 			
 			$staff:=ds:C1482.Staff.query("UUID_User = :1"; cs:C1710.sfw_userManager.me.info.UUID).first()
 			$users:=New collection:C1472($staff.user.UUID)
