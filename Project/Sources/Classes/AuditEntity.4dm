@@ -120,7 +120,8 @@ local Function _initDocument()
 	
 	If (Form:C1466.situation.mode="add")
 		
-		var $blob : Blob
+		// Purpose: New audits attach files via sfw_Document; embedded blob is not used — UUID_sfwDocument links framework rows after upload (ga_audit_replaceAttachment).
+		// modified by 4D/PS [2026-may-26]
 		$doc:=New object:C1471
 		
 		$doc.code:=""
@@ -131,7 +132,8 @@ local Function _initDocument()
 		$doc.approvalDate:=!00-00-00!
 		$doc.approvedBy:=""
 		$doc.isApproved:=False:C215
-		$doc.blob:=$blob
+		$doc.UUID_sfwDocument:=""
+		$doc.extension:=""
 		
 		This:C1470.document:=$doc
 		
