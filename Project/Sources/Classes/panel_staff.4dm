@@ -86,10 +86,10 @@ Function loadCommunications()
 		)
 	
 	Form:C1466.subFormCommunication:=Form:C1466.subFormCommunication
-
-// Purpose: True when the current user holds a Quality profile allowed to manage staff certifications (qs, qi, qm).
-// Returns: Boolean
-// created by 4D/PS [2026-may-21]
+	
+	// Purpose: True when the current user holds a Quality profile allowed to manage staff certifications (qs, qi, qm).
+	// Returns: Boolean
+	// created by 4D/PS [2026-may-21]
 Function _hasQaProfile()->$allowed : Boolean
 	
 	var $qaProfiles : Collection
@@ -154,11 +154,7 @@ Function loadCertifications()
 Function manageCertification()
 	Case of 
 		: (FORM Event:C1606.code=On Data Change:K2:15)
-			// Purpose: Only qs / qi / qm profiles may assign or remove certifications.
-			// modified by 4D/PS [2026-may-21]
-			If (Not:C34(This:C1470._hasQaProfile()))
-				return 
-			End if 
+			
 			If (Form:C1466.selectedCertification.certified)
 				Form:C1466.current_item.createCertification(Form:C1466.selectedCertification.UUID; (Not:C34(Form:C1466.selectedCertification.oneTime)) ? Form:C1466.selectedCertification.duration : 0)
 				This:C1470.loadCertifications()
@@ -169,10 +165,11 @@ Function manageCertification()
 			
 			This:C1470._activate_save_cancel_button()
 			
+			
+			
 		: (FORM Event:C1606.code=On Clicked:K2:4)
-			If (This:C1470._hasQaProfile())
-				
-			End if 
+			
+			
 	End case 
 	
 	//Function manageDataPicker($objectName : Text)

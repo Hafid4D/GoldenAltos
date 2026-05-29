@@ -26,8 +26,8 @@ If (Form:C1466.current_item#Null:C1517)
 		Else 
 			// Purpose: Fail fast when the WP template is missing instead of printing a blank document.
 			// modified by 4D/PS [2026-may-21]
-			cs:C1710.sfw_dialog.me.alert("Document model ""CERT_TRAINING"" was not found. Import or create it in Administration before printing.")
-			return 
+			cs:C1710.sfw_dialog.me.alert("Document model \"\"CERT_TRAINING\"\" was not found. Import or create it in Administration before printing.")
+			
 		End if 
 		
 		$division:=ds:C1482.Division.query("UUID =:1"; Form:C1466.current_item.UUID_Division)
