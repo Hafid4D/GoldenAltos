@@ -59,7 +59,7 @@ For ($i; 1; $totalTables)  //Loop on all tables
 			// 1. Création de l'élément 'field' sous le nœud table parent ($tableRef)
 			$fieldRef:=DOM Create XML element:C865($tableNode; $vxPath)
 			
-			// 2. Ajout de chaque attribut tel qu'ils apparaissent dans votre extrait
+			// 2. Ajout de chaque attribut 
 			DOM SET XML ATTRIBUTE:C866($fieldRef; "name"; $name)
 			DOM SET XML ATTRIBUTE:C866($fieldRef; "uuid"; $uuid)
 			DOM SET XML ATTRIBUTE:C866($fieldRef; "type"; "21")  // Type Objet

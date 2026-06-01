@@ -422,8 +422,8 @@ If (True:C214)
 	// inner loops (Validate transaction + START TRANSACTION every 500 saves) to keep
 	// the journal manageable.
 	// modified by 4D/PS [2026-may-21]
-	START TRANSACTION:C239
-	$txnCounter:=0
+	//START TRANSACTION
+	//$txnCounter:=0
 	
 	For each ($record; $records)
 		$counter:=$counter+1
@@ -627,7 +627,7 @@ If (True:C214)
 	// each lot just after creating it. The orderBy("parentLotNumber asc") is kept for stable
 	// processing order; parent UUIDs are filled in PASS 2 so cross-job parents are handled.
 	// created by 4D/PS [2026-may-21]
-	For each ($lot; $lotCollection.orderBy("parentLotNumber asc"))
+	For each ($lot; $lotCollection)
 		
 		var $lot_e : cs:C1710.LotEntity
 		$lot_e:=ds:C1482.Lot.new()
@@ -676,7 +676,7 @@ If (True:C214)
 		// modified by 4D/PS [2026-may-21]
 		$lot_e.UUID_Job:=$lot._jobUUID
 		
-		$lot_e.moreData:=New object:C1471()
+		//$lot_e.moreData:=New object()
 		//$recodNumber:=ds.sfw_Counter.getNextValue("Lot")
 		//$lot_e.moreData.barcodeData:=String($recodNumber; "0000000000")
 		
@@ -688,13 +688,6 @@ If (True:C214)
 			$lotsByNumber[$lot.lotNum]:=$lot_e.UUID
 		End if 
 		
-		// Purpose: Checkpoint the transaction every 500 saves to keep the journal small.
-		// modified by 4D/PS [2026-may-21]
-		$txnCounter:=$txnCounter+1
-		If (($txnCounter%500)=0)
-			CANCEL TRANSACTION:C241
-			START TRANSACTION:C239
-		End if 
 		
 	End for each 
 	
@@ -714,11 +707,11 @@ If (True:C214)
 					If (Not:C34($res.success))
 						TRACE:C157
 					End if 
-					$txnCounter:=$txnCounter+1
-					If (($txnCounter%500)=0)
-						CANCEL TRANSACTION:C241
-						START TRANSACTION:C239
-					End if 
+					//$txnCounter:=$txnCounter+1
+					//If (($txnCounter%500)=0)
+					//VALIDATE TRANSACTION
+					//START TRANSACTION
+					//End if 
 				End if 
 			Else 
 				If ($parentUUID=Null:C1517)
@@ -758,8 +751,6 @@ If (True:C214)
 				$lotStep_e.inOperator:=$step.inOperator
 				$lotStep_e.actualHours:=$step.actualHours
 				$lotStep_e.plannedHours:=$step.plannedHours
-				$lotStep_e.tools:=New object:C1471()
-				$lotStep_e.tools:=$step.tools.items.filter(Formula:C1597($1.value#""))  //$step.tools
 				$lotStep_e.areas:=$step.areas
 				$lotStep_e.mechanicalRejects:=$step.mechanicalRejects
 				$lotStep_e.missingOrExcluded:=$step.missingOrExcluded
@@ -767,43 +758,73 @@ If (True:C214)
 				$lotStep_e.supervisor:=$step.supervisor
 				$lotStep_e.enableBins:=$step.enableBins
 				
-				$lotStep_e.parametricMeasurements:=New object:C1471(\
-					"items"; New collection:C1472(); \
-					"in"; New object:C1471("par1"; 0; "par2"; 0; "par3"; 0); \
-					"out"; New object:C1471("par1"; 0; "par2"; 0; "par3"; 0)\
-					)
-				If ($step.parametricMeasurements#Null:C1517)
-					If ($step.parametricMeasurements.in#Null:C1517)
-						$lotStep_e.parametricMeasurements.in:=$step.parametricMeasurements.in
-					End if 
-					If ($step.parametricMeasurements.out#Null:C1517)
-						$lotStep_e.parametricMeasurements.out:=$step.parametricMeasurements.out
-					End if 
+				// Purpose: Direct copy from parsed legacy JSON; LotStepEntity.validateSave normalizes object fields on save().
+				// modified by 4D/PS [2026-june-01]
+				If ($step.tools#Null:C1517)
+					$lotStep_e.tools:=$step.tools
 				End if 
-				
-				$lotStep_e.stepInterruptions:=New object:C1471("items"; New collection:C1472())
-				$lotStep_e.dataTables:=New object:C1471("items"; New collection:C1472())
-				
-				$lotStep_e.bins:=New object:C1471(\
-					"items"; $step.bins.items)
-				
-				$lotStep_e.properties:=New object:C1471(\
-					"pgm"; ""; \
-					"pgmSwitch"; ""; \
-					"hardware1"; ""; \
-					"hardware2"; ""; \
-					"probeCard"; ""; \
-					"count1"; 0; \
-					"count2"; 0; \
-					"count3"; 0\
-					)
+				If ($step.bins#Null:C1517)
+					$lotStep_e.bins:=$step.bins
+				End if 
+				If ($step.parametricMeasurements#Null:C1517)
+					$lotStep_e.parametricMeasurements:=$step.parametricMeasurements
+				End if 
 				If ($step.properties#Null:C1517)
 					$lotStep_e.properties:=$step.properties
 				End if 
 				
+				$lotStep_e.stepInterruptions:=New object:C1471("items"; New collection:C1472())
+				$lotStep_e.dataTables:=New object:C1471("items"; New collection:C1472())
 				$lotStep_e.skills:=New object:C1471("items"; New collection:C1472())
 				$lotStep_e.requitedCertifications:=New object:C1471("items"; New collection:C1472())
 				
+/*
+$lotStep_e.tools:=New object()
+$lotStep_e.tools:=$step.tools.items.filter(Formula($1.value#""))  //$step.tools
+				
+$lotStep_e.parametricMeasurements:=New object(\
+"items"; New collection(); \
+"in"; New object(); \
+"out"; New object()\
+)
+				
+$lotStep_e.parametricMeasurements:=New object(\
+"items"; New collection(); \
+"in"; New object("par1"; 0; "par2"; 0; "par3"; 0); \
+"out"; New object("par1"; 0; "par2"; 0; "par3"; 0)\
+)
+If ($step.parametricMeasurements#Null)
+If ($step.parametricMeasurements.in#Null)
+$lotStep_e.parametricMeasurements.in:=$step.parametricMeasurements.in
+End if 
+If ($step.parametricMeasurements.out#Null)
+$lotStep_e.parametricMeasurements.out:=$step.parametricMeasurements.out
+End if 
+End if 
+				
+$lotStep_e.stepInterruptions:=New object("items"; New collection())
+$lotStep_e.dataTables:=New object("items"; New collection())
+				
+$lotStep_e.bins:=New object(\
+"items"; $step.bins.items)
+				
+$lotStep_e.properties:=New object(\
+"pgm"; ""; \
+"pgmSwitch"; ""; \
+"hardware1"; ""; \
+"hardware2"; ""; \
+"probeCard"; ""; \
+"count1"; 0; \
+"count2"; 0; \
+"count3"; 0\
+)
+If ($step.properties#Null)
+$lotStep_e.properties:=$step.properties
+End if 
+				
+$lotStep_e.skills:=New object("items"; New collection())
+$lotStep_e.requitedCertifications:=New object("items"; New collection())
+*/
 				$lotStep_e.UUID_Lot:=$lotUUID
 				
 				$res:=$lotStep_e.save()
@@ -812,11 +833,6 @@ If (True:C214)
 					TRACE:C157
 				End if 
 				
-				$txnCounter:=$txnCounter+1
-				If (($txnCounter%500)=0)
-					CANCEL TRANSACTION:C241
-					START TRANSACTION:C239
-				End if 
 				
 			End for each 
 		End if 
@@ -856,7 +872,7 @@ fix lotParent for some lots
 	// Purpose: Commit the bulk-import transaction. Every Job/Lot/LotStep/JobInvoice/
 	// JobLineItem save issued since `START TRANSACTION` above is flushed to disk together.
 	// modified by 4D/PS [2026-may-21]
-	CANCEL TRANSACTION:C241
+	//VALIDATE TRANSACTION
 	
 End if 
 
@@ -1237,224 +1253,228 @@ If (True:C214)
 	End for each 
 End if 
 
-
+/*
 /**
 Create user: sfw_User & Staff tables
 **/
-If (True:C214)
-	$file_excel:=Folder:C1567(fk data folder:K87:12).file("DataJson/GA_employee_list.csv")
-	
-	$records_excel:=Split string:C1554($file_excel.getText(); "\r\n")
-	
-	$records_excel.shift()  //remove the header
-	
-	$staffs_excel:=New collection:C1472()
-	
-	For each ($record; $records_excel)
-		$staffs_excel.push(New object:C1471(\
-			"lastName"; Split string:C1554(Split string:C1554($record; ";")[1]; ",")[0]; \
-			"firstName"; Split string:C1554(Split string:C1554($record; ";")[1]; ",")[1]; \
-			"roles"; Split string:C1554(Split string:C1554($record; ";")[2]; ","); \
-			"teams"; Split string:C1554(Split string:C1554($record; ";")[3]; ",")\
-			))
-	End for each 
-	
-	$remaingCertification:=New collection:C1472()
-	
-	$trainingFile:=Folder:C1567(fk data folder:K87:12).file("DataJson/employeeTraining_export.json")
-	
-	$trainings:=JSON Parse:C1218($trainingFile.getText())
-	
-	$employee_Log:=Folder:C1567(fk data folder:K87:12).file("DataJson/staff_export.json")  //.file("DataJson/employees.json")
-	If ($employee_Log.exists)
-		$employees:=JSON Parse:C1218($employee_Log.getText())
-		
-		$employees:=$employees.map("_ga_normalizeEmployeeForQuery")
-		
-		TRUNCATE TABLE:C1051([Team:136])
-		TRUNCATE TABLE:C1051([Membership:137])
-		TRUNCATE TABLE:C1051([Role:132])
-		TRUNCATE TABLE:C1051([StaffRole:63])
-		TRUNCATE TABLE:C1051([Staff:135])
-		TRUNCATE TABLE:C1051([sfw_User:16])
-		TRUNCATE TABLE:C1051([CertificationAssignment:134])
-		
-		//SET DATABASE PARAMETER([Staff]; Table sequence number; 2)
-		
-		For each ($staff; $staffs_excel)
-			
-			
-			$user:=ds:C1482.sfw_User.new()
-			$user.firstName:=$staff.firstName
-			$user.lastName:=$staff.lastName
-			$user.login:=Lowercase:C14($staff.firstName+$staff.lastName)
-			$user.accesses:=JSON Parse:C1218("{\"asDesigner\":true,\"password\":{\"temporary\":true,\"sendTemporaryByMail\":false,\"lastReset\":705253775,\"hash\":\"$2b$10$1KIfSf/DkyivGUKEeHHPDulQ51F9LSOuyFmHy6X9TvAXi1K79E4ri\",\"lastChange\":705253879}}")  //pSzjGX!Ey9P1c~p
-			$user.asDesigner:=True:C214
-			$user.isInactive:=False:C215
-			$user.moreData:=New object:C1471()
-			$recodNumber:=ds:C1482.sfw_Counter.getNextValue("sfw_User")
-			$user.moreData.barcodeData:=String:C10($recodNumber; "0000000000")
-			
-			$res:=$user.save()
-			
-			If (Not:C34($res.success))
-				TRACE:C157
-			End if 
-			
-			$staff_e:=ds:C1482.Staff.new()
-			
-			$staff_e.UUID_User:=$user.UUID
-			$staff_e.code:=String:C10($staff_e.codeID; "00000#")
-			$staff_e.firstName:=$staff.firstName
-			$staff_e.lastName:=$staff.lastName
-			
-			$existingStaff:=$employees.query(\
-				"Last_Name_key = :1 & First_Name_key = :2"; \
-				Replace string:C233($staff.lastName; " "; ""); \
-				Replace string:C233($staff.firstName; " "; ""))
-			$existingStaff:=$existingStaff.length>0 ? $existingStaff : $employees.query("Last_Name_key = :1 & First_Name_key = :2"; Replace string:C233($staff.firstName; " "; ""); Replace string:C233($staff.lastName; " "; ""))
-			
-			If ($existingStaff.length>0)
-				$employee:=$existingStaff[0]
-				$division:=ds:C1482.Division.query("name =:1"; Split string:C1554($employee.division; "\r"; sk trim spaces:K86:2).join("\r"))
-				
-				If ($division.length>0)
-					$staff_e.UUID_Division:=$division[0].UUID
-				Else 
-					$staff_e.UUID_Division:=16*"00"
-				End if 
-				
-				$staff_e.citizenShipStatus:=$employee.citizenShipStatus
-				$staff_e.contactDetails:=$employee.contactDetails
-				$staff_e.stmpRetrain:=Date:C102($employee.retrainDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($employee.retrainDate))
-				$staff_e.stmpCreation:=$employee.creationDate
-				$staff_e.stmpTermination:=Date:C102($employee.terminationDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($employee.terminationDate))
-				$staff_e.stmpHire:=Date:C102($employee.hireDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($employee.hireDate))
-				$staff_e.terminated:=$employee.terminated
-				// Purpose: Store the shift as the original "1" / "2" label (client wording). Empty source value stays empty.
-				// modified by 4D/PS [2026-may-21]
-				$staff_e.shift:=Num:C11($employee.shift)=1 ? "1" : (Num:C11($employee.shift)=2 ? "2" : "")
-				
-				
-			Else 
-				//
-			End if 
-			
-			$staff_e.moreData:=New object:C1471("retrainNotified"; False:C215)
-			
-			$res:=$staff_e.save()
-			
-			If ($res.success)
-				
-				
+If (False)
+$file_excel:=Folder(fk data folder).file("DataJson/GA_employee_list.csv")
+
+$records_excel:=Split string($file_excel.getText(); "\r\n")
+
+$records_excel.shift()  //remove the header
+
+$staffs_excel:=New collection()
+
+For each ($record; $records_excel)
+$staffs_excel.push(New object(\
+"lastName"; Split string(Split string($record; ";")[1]; ",")[0]; \
+"firstName"; Split string(Split string($record; ";")[1]; ",")[1]; \
+"roles"; Split string(Split string($record; ";")[2]; ","); \
+"teams"; Split string(Split string($record; ";")[3]; ",")\
+))
+End for each 
+
+$remaingCertification:=New collection()
+
+$trainingFile:=Folder(fk data folder).file("DataJson/employeeTraining_export.json")
+
+$trainings:=JSON Parse($trainingFile.getText())
+
+$employee_Log:=Folder(fk data folder).file("DataJson/staff_export.json")  //.file("DataJson/employees.json")
+If ($employee_Log.exists)
+$employees:=JSON Parse($employee_Log.getText())
+
+$employees:=$employees.map("_ga_normalizeEmployeeForQuery")
+
+TRUNCATE TABLE([Team])
+TRUNCATE TABLE([Membership])
+TRUNCATE TABLE([Role])
+TRUNCATE TABLE([StaffRole])
+TRUNCATE TABLE([Staff])
+TRUNCATE TABLE([sfw_User])
+TRUNCATE TABLE([CertificationAssignment])
+
+//SET DATABASE PARAMETER([Staff]; Table sequence number; 2)
+
+For each ($staff; $staffs_excel)
+
+
+$user:=ds.sfw_User.new()
+$user.firstName:=$staff.firstName
+$user.lastName:=$staff.lastName
+$user.login:=Lowercase($staff.firstName+$staff.lastName)
+$user.accesses:=JSON Parse("{\"asDesigner\":true,\"password\":{\"temporary\":true,\"sendTemporaryByMail\":false,\"lastReset\":705253775,\"hash\":\"$2b$10$1KIfSf/DkyivGUKEeHHPDulQ51F9LSOuyFmHy6X9TvAXi1K79E4ri\",\"lastChange\":705253879}}")  //pSzjGX!Ey9P1c~p
+$user.asDesigner:=True
+$user.isInactive:=False
+$user.moreData:=New object()
+$recodNumber:=ds.sfw_Counter.getNextValue("sfw_User")
+$user.moreData.barcodeData:=String($recodNumber; "0000000000")
+
+$res:=$user.save()
+
+If (Not($res.success))
+TRACE
+End if 
+
+$staff_e:=ds.Staff.new()
+
+$staff_e.UUID_User:=$user.UUID
+$staff_e.code:=String($staff_e.codeID; "00000#")
+$staff_e.firstName:=$staff.firstName
+$staff_e.lastName:=$staff.lastName
+
+$existingStaff:=$employees.query(\
+"Last_Name_key = :1 & First_Name_key = :2"; \
+Replace string($staff.lastName; " "; ""); \
+Replace string($staff.firstName; " "; ""))
+$existingStaff:=$existingStaff.length>0 ? $existingStaff : $employees.query("Last_Name_key = :1 & First_Name_key = :2"; Replace string($staff.firstName; " "; ""); Replace string($staff.lastName; " "; ""))
+
+If ($existingStaff.length>0)
+$employee:=$existingStaff[0]
+$division:=ds.Division.query("name =:1"; Split string($employee.division; "\r"; sk trim spaces).join("\r"))
+
+If ($division.length>0)
+$staff_e.UUID_Division:=$division[0].UUID
+Else 
+$staff_e.UUID_Division:=16*"00"
+End if 
+
+$staff_e.citizenShipStatus:=$employee.citizenShipStatus
+$staff_e.contactDetails:=$employee.contactDetails
+$staff_e.stmpRetrain:=Date($employee.retrainDate)=!00-00-00! ? 0 : cs.sfw_stmp.me.build(Date($employee.retrainDate))
+$staff_e.stmpCreation:=$employee.creationDate
+$staff_e.stmpTermination:=Date($employee.terminationDate)=!00-00-00! ? 0 : cs.sfw_stmp.me.build(Date($employee.terminationDate))
+$staff_e.stmpHire:=Date($employee.hireDate)=!00-00-00! ? 0 : cs.sfw_stmp.me.build(Date($employee.hireDate))
+$staff_e.terminated:=$employee.terminated
+// Purpose: Store the shift as the original "1" / "2" label (client wording). Empty source value stays empty.
+// modified by 4D/PS [2026-may-21]
+$staff_e.shift:=Num($employee.shift)=1 ? "1" : (Num($employee.shift)=2 ? "2" : "")
+
+
+Else 
+//
+End if 
+
+$staff_e.moreData:=New object("retrainNotified"; False)
+
+$res:=$staff_e.save()
+
+If ($res.success)
+
+
 /**
 import certification Assignment
 **/
-				If ($existingStaff.length>0)
-					$employee:=$existingStaff[0]
-					$staffTrainings:=$trainings.query("Employee_Code =:1"; $employee.employeeCode)
-				End if 
-				
-				For each ($training; $staffTrainings)
-					
-					$certificationAssigment_e:=ds:C1482.CertificationAssignment.new()
-					
-					// Purpose: Store validity length as day count in expiredIn (calendar lapse is computed attribute expiringDate).
-					// modified by 4D/PS [2026-may-12]
-					If (Date:C102($training.Tdate)=!00-00-00!)
-						$certificationAssigment_e.certificationStmp:=0
-					Else 
-						$certificationAssigment_e.certificationStmp:=cs:C1710.sfw_stmp.me.build(Date:C102(Current date:C33))  //$training.Tdate))
-					End if 
-					$certificationAssigment_e.expiredIn:=Num:C11($training.Duration)
-					
-					$certificationAssigment_e.UUID_Staff:=$staff_e.UUID
-					
-					$certififcation:=ds:C1482.Certification.query("name =:1"; Split string:C1554($training.T_Type; "\r"; sk trim spaces:K86:2).join("\r"))
-					If ($certififcation.length>0)
-						$certificationAssigment_e.UUID_Certification:=$certififcation[0].UUID
-					Else 
-						$remaingCertification.push($training.T_Type)
-					End if 
-					
-					
-					$res:=$certificationAssigment_e.save()
-					
-					If (Not:C34($res.success))
-						TRACE:C157
-					End if 
-				End for each 
-				
-				For each ($team; $staff.teams)
-					$teams_es:=ds:C1482.Team.query("name = :1"; $team)
-					
-					If ($teams_es.length>0)
-						$team_e:=$teams_es[0]
-					Else 
-						$team_e:=ds:C1482.Team.new()
-						$team_e.levelID:=ds:C1482.Team.all().length+1
-						$team_e.name:=$team
-						
-						$res:=$team_e.save()
-						
-						If (Not:C34($res.success))
-							TRACE:C157
-						End if 
-					End if 
-					
-					$membership_e:=ds:C1482.Membership.new()
-					
-					$membership_e.UUID_Staff:=$staff_e.UUID
-					$membership_e.UUID_Team:=$team_e.UUID
-					
-					$res:=$membership_e.save()
-					
-					If (Not:C34($res.success))
-						TRACE:C157
-					End if 
-				End for each 
-				
-				For each ($role; $staff.roles)
-					$roles_es:=ds:C1482.Role.query("name = :1"; $role)
-					
-					If ($roles_es.length>0)
-						$role_e:=$roles_es[0]
-					Else 
-						$role_e:=ds:C1482.Role.new()
-						
-						$role_e.name:=$role
-						
-						$res:=$role_e.save()
-						
-						If (Not:C34($res.success))
-							TRACE:C157
-						End if 
-					End if 
-					
-					$staffRole_e:=ds:C1482.StaffRole.new()
-					
-					$staffRole_e.UUID_Staff:=$staff_e.UUID
-					$staffRole_e.UUID_Role:=$role_e.UUID
-					
-					$res:=$staffRole_e.save()
-					
-					If (Not:C34($res.success))
-						TRACE:C157
-					End if 
-				End for each 
-				
-			End if 
-			
-		End for each 
-		
-		
-	End if 
+If ($existingStaff.length>0)
+$employee:=$existingStaff[0]
+$staffTrainings:=$trainings.query("Employee_Code =:1"; $employee.employeeCode)
 End if 
+
+For each ($training; $staffTrainings)
+
+$certificationAssigment_e:=ds.CertificationAssignment.new()
+
+// Purpose: Store validity length as day count in expiredIn (calendar lapse is computed attribute expiringDate).
+// modified by 4D/PS [2026-may-12]
+If (Date($training.Tdate)=!00-00-00!)
+$certificationAssigment_e.certificationStmp:=0
+Else 
+$certificationAssigment_e.certificationStmp:=cs.sfw_stmp.me.build(Date(Current date))  //$training.Tdate))
+End if 
+$certificationAssigment_e.expiredIn:=Num($training.Duration)
+
+$certificationAssigment_e.UUID_Staff:=$staff_e.UUID
+
+$certififcation:=ds.Certification.query("name =:1"; Split string($training.T_Type; "\r"; sk trim spaces).join("\r"))
+If ($certififcation.length>0)
+$certificationAssigment_e.UUID_Certification:=$certififcation[0].UUID
+Else 
+$remaingCertification.push($training.T_Type)
+End if 
+
+
+$res:=$certificationAssigment_e.save()
+
+If (Not($res.success))
+TRACE
+End if 
+End for each 
+
+For each ($team; $staff.teams)
+$teams_es:=ds.Team.query("name = :1"; $team)
+
+If ($teams_es.length>0)
+$team_e:=$teams_es[0]
+Else 
+$team_e:=ds.Team.new()
+$team_e.levelID:=ds.Team.all().length+1
+$team_e.name:=$team
+
+$res:=$team_e.save()
+
+If (Not($res.success))
+TRACE
+End if 
+End if 
+
+$membership_e:=ds.Membership.new()
+
+$membership_e.UUID_Staff:=$staff_e.UUID
+$membership_e.UUID_Team:=$team_e.UUID
+
+$res:=$membership_e.save()
+
+If (Not($res.success))
+TRACE
+End if 
+End for each 
+
+For each ($role; $staff.roles)
+$roles_es:=ds.Role.query("name = :1"; $role)
+
+If ($roles_es.length>0)
+$role_e:=$roles_es[0]
+Else 
+$role_e:=ds.Role.new()
+
+$role_e.name:=$role
+
+$res:=$role_e.save()
+
+If (Not($res.success))
+TRACE
+End if 
+End if 
+
+$staffRole_e:=ds.StaffRole.new()
+
+$staffRole_e.UUID_Staff:=$staff_e.UUID
+$staffRole_e.UUID_Role:=$role_e.UUID
+
+$res:=$staffRole_e.save()
+
+If (Not($res.success))
+TRACE
+End if 
+End for each 
+
+End if 
+
+End for each 
+
+
+End if 
+End if 
+*/
 
 /**
 import staffs
 **/
 If (True:C214)
+	
+	$counter:=ds:C1482.Certification.all().extract("ref").max()
+	
 	$file_excel:=Folder:C1567(fk data folder:K87:12).file("DataJson/GA_employee_list.csv")
 	
 	$records_excel:=Split string:C1554($file_excel.getText(); "\r\n")
@@ -1544,9 +1564,7 @@ If (True:C214)
 				$staff_e.stmpTermination:=Date:C102($employee.terminationDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($employee.terminationDate))
 				$staff_e.stmpHire:=Date:C102($employee.hireDate)=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build(Date:C102($employee.hireDate))
 				$staff_e.terminated:=$employee.terminated
-				// Purpose: Store the shift as the original "1" / "2" label (client wording). Empty source value stays empty.
-				// modified by 4D/PS [2026-may-21]
-				$staff_e.shift:=Num:C11($employee.shift)=1 ? "1" : (Num:C11($employee.shift)=2 ? "2" : "")
+				$staff_e.shift:=Num:C11($employee.shift)=1 ? "A" : (Num:C11($employee.shift)=2 ? "B" : $employee.shift)
 				
 				
 			Else 
@@ -1577,17 +1595,31 @@ import certification Assignment
 					If (Date:C102($training.Tdate)=!00-00-00!)
 						$certificationAssigment_e.certificationStmp:=0
 					Else 
-						$certificationAssigment_e.certificationStmp:=cs:C1710.sfw_stmp.me.build(Date:C102(Current date:C33))  //$training.Tdate))
+						$certificationAssigment_e.certificationStmp:=cs:C1710.sfw_stmp.me.build(Date:C102($training.Tdate))  //$training.Tdate))
 					End if 
 					$certificationAssigment_e.expiredIn:=Num:C11($training.Duration)
 					
 					$certificationAssigment_e.UUID_Staff:=$staff_e.UUID
-					
-					$certififcation:=ds:C1482.Certification.query("name =:1"; Split string:C1554($training.T_Type; "\r"; sk trim spaces:K86:2).join("\r"))
+					$formula:=Formula:C1597(Split string:C1554(This:C1470.name; " "; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join("")=Split string:C1554($training.T_Type; " "; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join(""))
+					$certififcation:=ds:C1482.Certification.query($formula)  //$certififcation:=ds.Certification.query("name =:1"; Split string($training.T_Type; "\r"; sk trim spaces).join("\r"))
 					If ($certififcation.length>0)
 						$certificationAssigment_e.UUID_Certification:=$certififcation[0].UUID
 					Else 
+						$counter:=$counter+1
+						
 						$remaingCertification.push($training.T_Type)
+						
+						$certification_e:=ds:C1482.Certification.new()
+						
+						$certification_e.ref:=$counter
+						$certification_e.name:=$training.T_Type
+						
+						$res:=$certification_e.save()
+						
+						If (Not:C34($res.success))
+							TRACE:C157
+						End if 
+						
 					End if 
 					
 					
@@ -1663,7 +1695,6 @@ import certification Assignment
 		
 	End if 
 End if 
-
 
 
 /**
