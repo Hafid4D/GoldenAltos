@@ -75,7 +75,7 @@
 				},
 				"label_type": {
 					"type": "text",
-					"top": 37,
+					"top": 62,
 					"left": 12,
 					"width": 120,
 					"height": 17,
@@ -86,7 +86,7 @@
 				},
 				"pup_type": {
 					"type": "button",
-					"top": 34,
+					"top": 59,
 					"left": 142,
 					"width": 268,
 					"height": 23,
@@ -102,7 +102,37 @@
 					"events": [
 						"onClick"
 					],
-					"bottom": 57,
+					"bottom": 82,
+					"textAlign": "left"
+				},
+				"label_accountNumer": {
+					"type": "text",
+					"top": 36,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Account Number",
+					"textAlign": "right",
+					"right": 132
+				},
+				"entryField_accountNumber1": {
+					"type": "input",
+					"top": 36,
+					"left": 142,
+					"width": 268,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.accountNumber",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
 					"textAlign": "left"
 				}
 			}
@@ -204,26 +234,6 @@
 					"textAlign": "right",
 					"right": 132
 				},
-				"entryField_name2": {
-					"type": "input",
-					"top": 237,
-					"left": 142,
-					"width": 250,
-					"height": 48,
-					"dataSource": "Form:C1466.current_item.name",
-					"focusable": false,
-					"enterable": false,
-					"dragging": "none",
-					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
-					"fill": "transparent",
-					"borderStyle": "none",
-					"dataSourceTypeHint": "text",
-					"textAlign": "left",
-					"scrollbarVertical": "automatic"
-				},
 				"entryField_isSubAccount": {
 					"type": "checkbox",
 					"text": "Make this a subaccount",
@@ -281,11 +291,31 @@
 					],
 					"dataSourceTypeHint": "boolean",
 					"dataSource": "Form:C1466.current_item.isInacActive"
+				},
+				"entryField_description": {
+					"type": "input",
+					"top": 237,
+					"left": 142,
+					"width": 250,
+					"height": 48,
+					"dataSource": "Form:C1466.current_item.description",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left",
+					"scrollbarVertical": "automatic"
 				}
 			}
 		}
 	],
-	"geometryStamp": 113,
+	"geometryStamp": 124,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"editor": {
 		"activeView": "View 1",

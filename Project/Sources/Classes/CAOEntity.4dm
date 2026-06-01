@@ -30,23 +30,39 @@ local Function pup($cacheCollection; $dataClass; $queryField; $queryValue)
 		End if 
 		
 		For each ($eEntity; Storage:C1525.cache[$cacheCollection])
-			APPEND MENU ITEM:C411($menu; $eEntity.name; *)
-			SET MENU ITEM PARAMETER:C1004($menu; -1; $eEntity.UUID)
-			If ($queryField="UUID")  //# TO BE REMOVED
+			
+			// Purpose: Exclude the current account from the parent-account picker (no self-reference).
+			// modified by 4D/PS [2026-may-19]
+			If (Not:C34(($cacheCollection="parentAccounts") & (Form:C1466.current_item#Null:C1517) & ($eEntity.UUID=Form:C1466.current_item.UUID)))
 				
-				If ($eEntity[$queryField]=Form:C1466.current_item[$queryValue])
-					SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
-					If (Is Windows:C1573)
-						SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+				If ($cacheCollection="parentAccounts")
+					$menuLabel:=$eEntity.accountNumber
+					If ($eEntity.name#"")
+						$menuLabel:=$menuLabel+" - "+$eEntity.name
 					End if 
+				Else 
+					$menuLabel:=$eEntity.name
 				End if 
-			Else 
 				
-				If (Num:C11($eEntity[$queryField])=Form:C1466.current_item[$queryValue])
-					SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
-					If (Is Windows:C1573)
-						SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+				APPEND MENU ITEM:C411($menu; $menuLabel; *)
+				SET MENU ITEM PARAMETER:C1004($menu; -1; $eEntity.UUID)
+				If ($queryField="UUID")  //# TO BE REMOVED
+					
+					If ($eEntity[$queryField]=Form:C1466.current_item[$queryValue])
+						SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+						If (Is Windows:C1573)
+							SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+						End if 
 					End if 
+				Else 
+					
+					If (Num:C11($eEntity[$queryField])=Form:C1466.current_item[$queryValue])
+						SET MENU ITEM MARK:C208($menu; -1; Char:C90(18))
+						If (Is Windows:C1573)
+							SET MENU ITEM STYLE:C425($menu; -1; Bold:K14:2)
+						End if 
+					End if 
+					
 				End if 
 				
 			End if 
