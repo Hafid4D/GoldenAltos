@@ -15,14 +15,6 @@ If (True:C214)
 	// modified by 4D/PS [2026-may-21]
 	$lotsByNumber:=New object:C1471()
 	
-	// Purpose: Wrap the heavy Lot / LotStep import in a single transaction. Without it,
-	// every ORDA save() flushes to disk independently which dominates the runtime for
-	// thousands of records. The transaction is checkpointed periodically inside the
-	// inner loops (Validate transaction + START TRANSACTION every 500 saves) to keep
-	// the journal manageable.
-	// modified by 4D/PS [2026-may-21]
-	START TRANSACTION:C239
-	$txnCounter:=0
 	
 	For each ($record; $records)
 		$counter:=$counter+1
@@ -424,11 +416,7 @@ End for each
 		// modified by 4D/PS [2026-may-21]
 		$lot_e.UUID_Job:=$lot._jobUUID
 		
-		$lot_e.moreData:=New object:C1471()
-		// Purpose: barcode counter disabled for now (consistent with __import_purchaseOrders).
-		// Each call to sfw_Counter.getNextValue is a worker round-trip + signal.wait, which
-		// dwarfs the actual save() and was a major contributor to the slowness.
-		// modified by 4D/PS [2026-may-21]
+		//$lot_e.moreData:=New object()
 		//$recodNumber:=ds:C1482.sfw_Counter.getNextValue("Lot")
 		//$lot_e.moreData.barcodeData:=String:C10($recodNumber; "0000000000")
 		
@@ -440,13 +428,6 @@ End for each
 			$lotsByNumber[$lot.lotNum]:=$lot_e.UUID
 		End if 
 		
-		// Purpose: Checkpoint the transaction every 500 saves to keep the journal small.
-		// modified by 4D/PS [2026-may-21]
-		$txnCounter:=$txnCounter+1
-		If (($txnCounter%500)=0)
-			VALIDATE TRANSACTION:C240
-			START TRANSACTION:C239
-		End if 
 		
 	End for each 
 	
@@ -466,11 +447,7 @@ End for each
 					If (Not:C34($res.success))
 						TRACE:C157
 					End if 
-					$txnCounter:=$txnCounter+1
-					If (($txnCounter%500)=0)
-						VALIDATE TRANSACTION:C240
-						START TRANSACTION:C239
-					End if 
+					
 				End if 
 			Else 
 				If ($parentUUID=Null:C1517)
@@ -481,9 +458,6 @@ End for each
 	End for each 
 	
 	// PASS 3 — Create LotSteps for every archived lot. UUID_Lot comes from the dictionary,
-	// so no `ds.Lot.query(...)` per step. This block was previously commented out
-	// (`/* TODO : UNCOMMENT */`) because each iteration hit the database without a
-	// transaction; with the transaction wrap and the dictionary lookup it becomes viable.
 	// created by 4D/PS [2026-may-21]
 	For each ($lot; $lotCollection)
 		$lotUUID:=$lotsByNumber[$lot.lotNum]
@@ -510,8 +484,6 @@ End for each
 				$lotStep_e.inOperator:=$step.inOperator
 				$lotStep_e.actualHours:=$step.actualHours
 				$lotStep_e.plannedHours:=$step.plannedHours
-				$lotStep_e.tools:=New object:C1471()
-				$lotStep_e.tools:=$step.tools
 				$lotStep_e.areas:=$step.areas
 				$lotStep_e.mechanicalRejects:=$step.mechanicalRejects
 				$lotStep_e.missingOrExcluded:=$step.missingOrExcluded
@@ -519,47 +491,81 @@ End for each
 				$lotStep_e.supervisor:=$step.supervisor
 				$lotStep_e.enableBins:=$step.enableBins
 				
-				While (($lotStep_e.tools#Null:C1517) && ($lotStep_e.tools.items.indexOf("")#-1))
-					$lotStep_e.tools.items:=$lotStep_e.tools.items.remove($lotStep_e.tools.items.indexOf(""))
-				End while 
-				
-				$lotStep_e.parametricMeasurements:=New object:C1471(\
-					"items"; New collection:C1472(); \
-					"in"; New object:C1471("par1"; 0; "par2"; 0; "par3"; 0); \
-					"out"; New object:C1471("par1"; 0; "par2"; 0; "par3"; 0)\
-					)
+				// Plus rapide — copie directe depuis le JSON déjà parsé
+				If ($step.tools#Null:C1517)
+					$lotStep_e.tools:=$step.tools
+				Else 
+					
+				End if 
+				If ($step.bins#Null:C1517)
+					$lotStep_e.bins:=$step.bins
+				Else 
+					
+				End if 
 				If ($step.parametricMeasurements#Null:C1517)
-					If ($step.parametricMeasurements.in#Null:C1517)
-						$lotStep_e.parametricMeasurements.in:=$step.parametricMeasurements.in
-					End if 
-					If ($step.parametricMeasurements.out#Null:C1517)
-						$lotStep_e.parametricMeasurements.out:=$step.parametricMeasurements.out
-					End if 
+					$lotStep_e.parametricMeasurements:=$step.parametricMeasurements
+				Else 
+					
+				End if 
+				If ($step.properties#Null:C1517)
+					$lotStep_e.properties:=$step.properties
+				Else 
+					
 				End if 
 				
 				$lotStep_e.stepInterruptions:=New object:C1471("items"; New collection:C1472())
 				$lotStep_e.dataTables:=New object:C1471("items"; New collection:C1472())
-				
-				$lotStep_e.bins:=New object:C1471(\
-					"items"; $step.bins.items)
-				
-				$lotStep_e.properties:=New object:C1471(\
-					"pgm"; ""; \
-					"pgmSwitch"; ""; \
-					"hardware1"; ""; \
-					"hardware2"; ""; \
-					"probeCard"; ""; \
-					"count1"; 0; \
-					"count2"; 0; \
-					"count3"; 0\
-					)
-				If ($step.properties#Null:C1517)
-					$lotStep_e.properties:=$step.properties
-				End if 
-				
 				$lotStep_e.skills:=New object:C1471("items"; New collection:C1472())
 				$lotStep_e.requitedCertifications:=New object:C1471("items"; New collection:C1472())
 				
+/*
+				
+$lotStep_e.tools:=New object()
+$lotStep_e.tools:=$step.tools.items.filter(Formula($1.value#""))  //$step.tools
+				
+$lotStep_e.parametricMeasurements:=New object(\
+"items"; New collection(); \
+"in"; New object(); \
+"out"; New object()\
+)
+				
+$lotStep_e.parametricMeasurements:=New object(\
+"items"; New collection(); \
+"in"; New object("par1"; 0; "par2"; 0; "par3"; 0); \
+"out"; New object("par1"; 0; "par2"; 0; "par3"; 0)\
+)
+If ($step.parametricMeasurements#Null)
+If ($step.parametricMeasurements.in#Null)
+$lotStep_e.parametricMeasurements.in:=$step.parametricMeasurements.in
+End if 
+If ($step.parametricMeasurements.out#Null)
+$lotStep_e.parametricMeasurements.out:=$step.parametricMeasurements.out
+End if 
+End if 
+				
+$lotStep_e.stepInterruptions:=New object("items"; New collection())
+$lotStep_e.dataTables:=New object("items"; New collection())
+				
+$lotStep_e.bins:=New object(\
+"items"; $step.bins.items)
+				
+$lotStep_e.properties:=New object(\
+"pgm"; ""; \
+"pgmSwitch"; ""; \
+"hardware1"; ""; \
+"hardware2"; ""; \
+"probeCard"; ""; \
+"count1"; 0; \
+"count2"; 0; \
+"count3"; 0\
+)
+If ($step.properties#Null)
+$lotStep_e.properties:=$step.properties
+End if 
+				
+$lotStep_e.skills:=New object("items"; New collection())
+$lotStep_e.requitedCertifications:=New object("items"; New collection())
+*/
 				$lotStep_e.UUID_Lot:=$lotUUID
 				
 				$res:=$lotStep_e.save()
@@ -568,11 +574,6 @@ End for each
 					TRACE:C157
 				End if 
 				
-				$txnCounter:=$txnCounter+1
-				If (($txnCounter%500)=0)
-					VALIDATE TRANSACTION:C240
-					START TRANSACTION:C239
-				End if 
 				
 			End for each 
 		End if 
@@ -609,10 +610,6 @@ fix lotParent for some lots
 		End if 
 	End for each 
 	
-	// Purpose: Commit the bulk-import transaction. Every Job/Lot/LotStep/JobInvoice/
-	// JobLineItem save issued since `START TRANSACTION` above is flushed to disk together.
-	// modified by 4D/PS [2026-may-21]
-	VALIDATE TRANSACTION:C240
 	
 End if 
 
