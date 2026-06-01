@@ -758,7 +758,8 @@ If (True:C214)
 				$lotStep_e.supervisor:=$step.supervisor
 				$lotStep_e.enableBins:=$step.enableBins
 				
-				// Plus rapide — copie directe depuis le JSON déjà parsé
+				// Purpose: Direct copy from parsed legacy JSON; LotStepEntity.validateSave normalizes object fields on save().
+				// modified by 4D/PS [2026-june-01]
 				If ($step.tools#Null:C1517)
 					$lotStep_e.tools:=$step.tools
 				End if 
