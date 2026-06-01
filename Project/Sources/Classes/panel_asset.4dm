@@ -15,6 +15,12 @@ Function formMethod()
 		Case of 
 			: (FORM Get current page:C276(*)=1)
 				
+			: (FORM Get current page:C276(*)=2)
+				// Purpose: Refresh depreciation history text when the Depreciation History tab is shown.
+				// modified by 4D/PS [2026-may-19]
+				If (Form:C1466.current_item#Null:C1517)
+					Form:C1466.current_item.rebuildDeprecationHistory()
+				End if 
 				
 		End case 
 	End if 
