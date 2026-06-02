@@ -3,11 +3,8 @@ singleton Class constructor
 	//It's a singleton class
 	
 Function formMethod()
-	//This function manages the main logic for updating and refreshing the form
 	Form:C1466.sfw.panelFormMethod()
 	If (Form:C1466.sfw.updateOfPanelNeeded())
-		// Purpose: Keep frequency checkboxes in sync when switching certification records.
-		// modified by 4D/PS [2026-june-02]
 		This:C1470.syncFrequencyFormFromEntity()
 	End if 
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())
@@ -38,14 +35,21 @@ Function syncFrequencyFormFromEntity()
 	
 Function redrawAndSetVisible()
 	
+	var $inModification : Boolean
+	
+	$inModification:=Form:C1466.sfw.checkIsInModification()
+	OBJECT SET ENABLED:C1123(*; "entryField_ref"; $inModification)
+	OBJECT SET ENABLED:C1123(*; "entryField_name"; $inModification)
+	// Purpose: Duration auto-updates from selected frequencies (shortest period); not typed manually.
+	// modified by 4D/PS [2026-june-02]
 	OBJECT SET ENABLED:C1123(*; "entryField_duration"; False:C215)
-	OBJECT SET ENABLED:C1123(*; "cb_freqQuarterly"; Form:C1466.sfw.checkIsInModification() && Not:C34(Form:C1466.current_item.oneTime))
+	OBJECT SET ENABLED:C1123(*; "cb_freqQuarterly"; $inModification && Not:C34(Form:C1466.current_item.oneTime))
 	OBJECT SET ENABLED:C1123(*; "cb_freqHalfYear"; $inModification && Not:C34(Form:C1466.current_item.oneTime))
 	OBJECT SET ENABLED:C1123(*; "cb_freqAnnually"; $inModification && Not:C34(Form:C1466.current_item.oneTime))
 	OBJECT SET ENABLED:C1123(*; "entryField_oneTime"; $inModification)
 	
 	
-// Purpose: Toggle one retraining frequency on the certification type (Karla 2.f — multiple allowed).
+// Purpose: Toggle one retraining frequency; duration field refreshes via syncDurationFromFrequencies.
 // Parameters: $ident : Text — quarterly | halfYear | annually
 // modified by 4D/PS [2026-june-02]
 Function cb_retrainFrequency($ident : Text)
@@ -76,6 +80,5 @@ Function cb_oneTime()
 	
 	Form:C1466.current_item.applyOneTimeRule(Form:C1466.current_item.oneTime)
 	This:C1470.syncFrequencyFormFromEntity()
-	This:C1470.redrawAndSetVisible()
 	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
 	

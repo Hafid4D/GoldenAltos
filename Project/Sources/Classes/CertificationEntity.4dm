@@ -57,14 +57,14 @@ Function applyOneTimeRule($oneTime : Boolean)
 	End if 
 	
 	
-// Purpose: Keep legacy duration field aligned with the shortest selected retraining period (days).
+// Purpose: Mirror assignmentValidityDays into legacy duration field (import/ORDA); not a single "frequency" choice.
 // modified by 4D/PS [2026-june-02]
 Function syncDurationFromFrequencies()
 	
 	If (This:C1470.oneTime)
 		This:C1470.duration:=0
 	Else 
-		This:C1470.duration:=This:C1470.expiredInDaysForNewAssignment()
+		This:C1470.duration:=This:C1470.assignmentValidityDays()
 	End if 
 	
 	
@@ -130,4 +130,45 @@ Function retrainMilestoneDayOffsets()->$offsets : Collection
 	If ($offsets.length=0) && (This:C1470.duration>0)
 		$offsets.push(This:C1470.duration)
 	End if 
+	
+	
+// Purpose: Human-readable summary of selected re-training reminder periods (for panel display).
+// Returns: Text — e.g. "Reminders at: 90, 180, 365 days" or empty when one time / none
+// modified by 4D/PS [2026-june-02]
+Function retrainFrequencySummaryLabel()->$label : Text
+	
+	var $parts : Collection
+	var $ident : Text
+	var $map : Object
+	
+	$parts:=New collection:C1472()
+	If (This:C1470.oneTime)
+		$label:="One time — no re-training reminders"
+		return $label
+	End if 
+	
+	$map:=New object:C1471(\
+		"quarterly"; "90"; \
+		"halfYear"; "180"; \
+		"annually"; "365")
+	
+	For each ($ident; This:C1470.getRetrainingFrequencies())
+		If ($map[$ident]#Null:C1517)
+			$parts.push($map[$ident])
+		End if 
+	End for each 
+	
+	If ($parts.length=0)
+		$label:="No re-training frequency selected"
+	Else 
+		$label:="Reminders at: "+$parts.join(", ")+" days (from certification date)"
+	End if 
+	
+	
+// Purpose: Days used when assigning this cert to staff (shortest period — strictest punch-in validity).
+// Returns: Integer — same as expiredInDaysForNewAssignment; 0 when one time
+// modified by 4D/PS [2026-june-02]
+Function assignmentValidityDays()->$days : Integer
+	
+	$days:=This:C1470.expiredInDaysForNewAssignment()
 	

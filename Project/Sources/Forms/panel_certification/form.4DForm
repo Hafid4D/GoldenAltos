@@ -181,9 +181,6 @@
 					"enterable": false,
 					"dragging": "none",
 					"dropping": "custom",
-					"events": [
-						"onDataChange"
-					],
 					"fill": "transparent",
 					"borderStyle": "none",
 					"sizingX": "grow",
@@ -215,7 +212,7 @@
 				},
 				"cb_freqQuarterly": {
 					"type": "checkbox",
-					"text": "Quarterly (90 days)",
+					"text": "Quarterly",
 					"top": 218,
 					"left": 13,
 					"width": 200,
@@ -229,7 +226,7 @@
 				},
 				"cb_freqHalfYear": {
 					"type": "checkbox",
-					"text": "Half Year (180 days)",
+					"text": "Half Year",
 					"top": 241,
 					"left": 13,
 					"width": 200,
@@ -243,7 +240,7 @@
 				},
 				"cb_freqAnnually": {
 					"type": "checkbox",
-					"text": "Annually (365 days)",
+					"text": "Annually",
 					"top": 264,
 					"left": 13,
 					"width": 200,
