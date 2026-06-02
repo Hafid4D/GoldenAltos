@@ -13,7 +13,12 @@ Function hasCertification($uuid_certification : Text)->$certified : Boolean
 	For each ($assignment_e; $assignment_es)
 		If ($assignment_e.validityActive)
 			$certified:=True:C214
-			return 
+			// Purpose: QA override allows punch-in when certification is expired (Karla 2.d).
+			// modified by 4D/PS [2026-june-02]
+		Else 
+			If ($assignment_e.moreData#Null:C1517) && (Bool:C1537($assignment_e.moreData.overrideCertExpired))
+				$certified:=True:C214
+			End if 
 		End if 
 	End for each 
 	
@@ -23,22 +28,57 @@ Function createCertification($uuid_certification : Text; $duration : Integer)->$
 	$certificationAssignment.UUID_Staff:=This:C1470.UUID
 	$certificationAssignment.UUID_Certification:=$uuid_certification
 	
-	$certificationAssignment.certificationDate:=cs:C1710.sfw_stmp.me.now()
+	$certificationAssignment.certificationDate:=cs:C1710.sfw_stmp.me.getDate(cs:C1710.sfw_stmp.me.now(); True:C214)  //cs.sfw_stmp.me.now()
 	//$certificationAssignment.certificationDate:=cs.sfw_stmp.me.build(!2024-06-01!)  // Test Only
 	
-	// Purpose: Persist validity length as a day count (same semantics as legacy import); expiry date is derived when querying or displaying.
-	// modified by 4D/PS [2026-may-12]
+	// Purpose: Use certification type rules (frequencies / one time) when caller passes 0; else keep explicit $duration.
+	// modified by 4D/PS [2026-june-02]
 	If ($duration>0)
 		$certificationAssignment.expiredIn:=$duration
 	Else 
-		$certificationAssignment.expiredIn:=0
+		$certificationAssignment.expiredIn:=_ga_certificationExpiredInDays($uuid_certification)
 	End if 
+	//Else 
+	//$certificationAssignment.expiredIn:=0
+	//End if 
 	
-	// Purpose: New assignment starts with retrainNotified False so qs/qm are notified when it enters the expiry window.
-	// modified by 4D/PS [2026-may-21]
-	$certificationAssignment.moreData:=New object:C1471("retrainNotified"; False:C215)
+	// Purpose: Reset per-milestone notification flags on new assignment (Karla 2.f — multiple frequencies).
+	// modified by 4D/PS [2026-june-02]
+	$certificationAssignment.moreData:=New object:C1471(\
+		"retrainNotified"; False:C215; \
+		"retrainNotifiedMilestones"; New object:C1471; \
+		"overrideCertExpired"; False:C215)
 	
 	$res:=$certificationAssignment.save()
+	
+	
+// Purpose: Grant or revoke punch-in override for an expired certification assignment (qm, qs, dc only at UI).
+// Parameters:
+// $uuid_certification : Text — Certification.UUID
+// $override : Boolean — when True, punch-in allowed despite expired validity
+// Returns: Boolean — True when an assignment was updated and saved
+// modified by 4D/PS [2026-june-02]
+Function setCertificationOverride($uuid_certification : Text; $override : Boolean)->$ok : Boolean
+	
+	var $assignment_e : cs:C1710.CertificationAssignmentEntity
+	var $info : Object
+	
+	$ok:=False:C215
+	$assignment_e:=ds:C1482.CertificationAssignment\
+		.query("UUID_Staff = :1 AND UUID_Certification = :2"; This:C1470.UUID; $uuid_certification)\
+		.orderBy("certificationDate desc").first()
+	
+	If ($assignment_e#Null:C1517)
+		If ($assignment_e.moreData=Null:C1517)
+			$assignment_e.moreData:=New object:C1471
+		End if 
+		$assignment_e.moreData.overrideCertExpired:=$override
+		$assignment_e.moreData.overrideBy:=cs:C1710.sfw_userManager.me.info.login
+		$assignment_e.moreData.overrideStmp:=cs:C1710.sfw_stmp.me.now()
+		$info:=$assignment_e.save()
+		$ok:=$info.success
+	End if 
+	
 	
 	$certified:=$res.success
 	
@@ -63,11 +103,11 @@ Function getCertificationDate($uuid_certification : Text)->$certifiedAt : Date
 		$certifiedAt:=$assignment_es[0].certificationDate  //cs.sfw_stmp.me.getDate($assignment_es[0].certificationDate)
 	End if 
 	
-// Purpose: Renamed from getExpiredDate — returns the calendar expiry date (expiringDate) for the
-// staff member's most recent assignment of the given certification. Parameter is Certification UUID.
-// Parameters: $uuid_certification : Text — UUID of the Certification dataclass record
-// Returns: Date — expiringDate of the latest assignment, or !00-00-00! when none exists
-// modified by 4D/PS [2026-may-21]
+	// Purpose: Renamed from getExpiredDate — returns the calendar expiry date (expiringDate) for the
+	// staff member's most recent assignment of the given certification. Parameter is Certification UUID.
+	// Parameters: $uuid_certification : Text — UUID of the Certification dataclass record
+	// Returns: Date — expiringDate of the latest assignment, or !00-00-00! when none exists
+	// modified by 4D/PS [2026-may-21]
 Function getCertiExpiredDate($uuid_certification : Text)->$expiringDate : Date
 	$assignment_es:=ds:C1482.CertificationAssignment\
 		.query("UUID_Staff = :1 AND UUID_Certification = :2"; This:C1470.UUID; $uuid_certification)\
@@ -101,6 +141,48 @@ Function getCertiExpiredIn($days : Integer)->$assignment_es : cs:C1710.Certifica
 			End if 
 		End if 
 	End for each 
+	
+	
+// Purpose: Retrain reminders due within $days for each certification frequency milestone (Karla 2.f).
+// Parameters: $days : Integer — lookahead window in days
+// Returns: Collection of objects — { assignment; milestoneDays; milestoneDate }
+// modified by 4D/PS [2026-june-02]
+Function getRetrainMilestonesDueIn($days : Integer)->$due : Collection
+	
+	var $today : Date
+	var $limit : Date
+	var $a : cs:C1710.CertificationAssignmentEntity
+	var $certDt : Date
+	var $offsets : Collection
+	var $offset : Integer
+	var $milestoneDate : Date
+	
+	$due:=New collection:C1472()
+	$today:=Current date:C33()
+	$limit:=Add to date:C393($today; 0; 0; $days)
+	
+	For each ($a; This:C1470.assignments)
+		If ($a.certification#Null:C1517) && ($a.certification.oneTime)
+			continue
+		End if 
+		If ($a.certificationStmp=0)
+			continue
+		End if 
+		$certDt:=$a.certificationDate
+		If ($certDt=!00-00-00!)
+			$offsets:=$a.certification.retrainMilestoneDayOffsets()
+			For each ($offset; $offsets)
+				$milestoneDate:=Add to date:C393($certDt; 0; 0; $offset)
+				If ($milestoneDate>=$today) && ($milestoneDate<=$limit)
+					$due.push(New object:C1471(\
+						"assignment"; $a; \
+						"milestoneDays"; $offset; \
+						"milestoneDate"; $milestoneDate))
+				End if 
+			End for each 
+		End if 
+	End for each 
+	
 	
 local Function get email()->$email : Text
 	If (This:C1470.contactDetails#Null:C1517) && (This:C1470.contactDetails.communications#Null:C1517)

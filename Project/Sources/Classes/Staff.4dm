@@ -53,9 +53,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$view.setPictoLabel("/RESOURCES/ga/image/picto/terminated-user-16x16.png")
 	$entry.setView($view)
 	
-	// Purpose: Only Quality profiles (qs, qi, qm) may open and modify Staff records — same set as _ga_qaEditProfiles.
-	// modified by 4D/PS [2026-may-21]
-	$entry.setAllowedProfiles("qs"; "qi"; "qm")
+	// Purpose: Quality profiles plus Document Control (dc) may open and modify Staff records.
+	// modified by 4D/PS [2026-june-02]
+	$entry.setAllowedProfiles("qs"; "qi"; "qm"; "dc")
 	
 	$entry.enableTransaction()
 	//$entry.setAllowedProfilesForDeletion("pm")
@@ -113,20 +113,20 @@ Function terminatedStaff()->$staffs : cs:C1710.StaffSelection
 Function retrainingStaff()->$staffs : cs:C1710.StaffSelection
 	$staffs:=ds:C1482.Staff.newSelection()
 	
+	// Purpose: Include staff with any retrain milestone due in 30 days (supports multiple frequencies per cert type).
+	// modified by 4D/PS [2026-june-02]
 	For each ($staff; ds:C1482.Staff.all())
-		$certs:=$staff.getCertiExpiredIn(30)
-		
-		If ($certs.length>0)
+		If ($staff.getRetrainMilestonesDueIn(30).length>0)
 			$staffs.add($staff)
 		End if 
 	End for each 
 	
 	
-// Purpose: Notify qs and qm users for each certification assignment expiring within $days (one notification per assignment).
-// Uses CertificationAssignment.moreData.retrainNotified — send once per assignment, reset when it leaves the window or on renewal.
+// Purpose: Notify qs, qm, and dc for each retrain milestone due within $days (one notification per milestone).
+// Uses CertificationAssignment.moreData.retrainNotifiedMilestones keys "d90", "d365", etc.
 // Parameters: $days : Integer — lookahead window in days (typically 30)
 // Returns: Collection — one True entry per newly sent notification (drives UI refresh in callers)
-// modified by 4D/PS [2026-may-21]
+// modified by 4D/PS [2026-june-02]
 Function checkRetraining($days : Integer)->$createdNotificationMarkers : Collection
 	
 	var $staff_e : cs:C1710.StaffEntity
@@ -134,39 +134,53 @@ Function checkRetraining($days : Integer)->$createdNotificationMarkers : Collect
 	var $profiles : Collection
 	var $users : Collection
 	var $context : Object
-	var $expiringAssignments : cs:C1710.CertificationAssignmentSelection
-	var $expiringUUIDs : Collection
+	var $dueMilestones : Collection
+	var $due : Object
+	var $milestoneKey : Text
+	var $offsets : Collection
+	var $offset : Integer
+	var $certDt : Date
+	var $milestoneDate : Date
+	var $today : Date
+	var $limit : Date
 	var $res : Object
 	
-	$profiles:=New collection:C1472("qs"; "qm")
+	// Purpose: Include Document Control (dc) per Karla feedback on certification retraining alerts.
+	// modified by 4D/PS [2026-june-02]
+	$profiles:=New collection:C1472("qs"; "qm"; "dc")
 	$users:=ds:C1482.Staff.query("user.userInscriptions.userProfile.ident in :1"; $profiles).extract("user.UUID").distinct()
 	
 	$createdNotificationMarkers:=New collection:C1472()
+	$today:=Current date:C33()
+	$limit:=Add to date:C393($today; 0; 0; $days)
 	
 	For each ($staff_e; ds:C1482.Staff.query("terminated = :1"; False:C215))
-		$expiringAssignments:=$staff_e.getCertiExpiredIn($days)
-		$expiringUUIDs:=$expiringAssignments.extract("UUID")
+		$dueMilestones:=$staff_e.getRetrainMilestonesDueIn($days)
 		
-		For each ($assignment_e; $expiringAssignments)
+		For each ($due; $dueMilestones)
+			$assignment_e:=$due.assignment
+			$milestoneKey:="d"+String:C10($due.milestoneDays)
+			
 			If ($assignment_e.moreData=Null:C1517)
-				$assignment_e.moreData:=New object:C1471("retrainNotified"; False:C215)
+				$assignment_e.moreData:=New object:C1471("retrainNotifiedMilestones"; New object:C1471)
 			Else 
-				If (Not:C34(OB Is defined:C1231($assignment_e.moreData; "retrainNotified")))
-					$assignment_e.moreData.retrainNotified:=False:C215
+				If (Not:C34(OB Is defined:C1231($assignment_e.moreData; "retrainNotifiedMilestones")))
+					$assignment_e.moreData.retrainNotifiedMilestones:=New object:C1471
 				End if 
 			End if 
 			
-			If (Not:C34($assignment_e.moreData.retrainNotified))
+			If (Not:C34(Bool:C1537($assignment_e.moreData.retrainNotifiedMilestones[$milestoneKey])))
 				$context:=New object:C1471(\
 					"target"; $staff_e.UUID; \
 					"targetDataclass"; "Staff"; \
 					"fullName"; $staff_e.fullName; \
 					"certName"; $assignment_e.certification.name; \
-					"expiringDate"; String:C10($assignment_e.expiringDate; System date short:K17:1); \
+					"expiringDate"; String:C10($due.milestoneDate; System date short:K17:1); \
+					"milestoneDays"; $due.milestoneDays; \
 					"days"; $days\
 					)
 				cs:C1710.sfw_notificationManager.me.notify("EmployeeRetrainRequired"; $users; $context)
-				$assignment_e.moreData.retrainNotified:=True:C214
+				$assignment_e.moreData.retrainNotifiedMilestones[$milestoneKey]:=True:C214
 				$res:=$assignment_e.save()
 				If ($res.success)
 					$createdNotificationMarkers.push(True:C214)
@@ -174,13 +188,25 @@ Function checkRetraining($days : Integer)->$createdNotificationMarkers : Collect
 			End if 
 		End for each 
 		
-		// Purpose: Clear per-assignment flag when expiry is outside the window so a future cycle can notify again.
-		// modified by 4D/PS [2026-may-21]
+		// Purpose: Clear milestone flags outside the notification window so a future cycle can notify again.
+		// modified by 4D/PS [2026-june-02]
 		For each ($assignment_e; $staff_e.assignments)
-			If ($expiringUUIDs.indexOf($assignment_e.UUID)=-1)
-				If ($assignment_e.moreData#Null:C1517) && (OB Is defined:C1231($assignment_e.moreData; "retrainNotified")) && ($assignment_e.moreData.retrainNotified=True:C214)
-					$assignment_e.moreData.retrainNotified:=False:C215
-					$res:=$assignment_e.save()
+			If ($assignment_e.moreData#Null:C1517) && (OB Is defined:C1231($assignment_e.moreData; "retrainNotifiedMilestones"))
+				If ($assignment_e.certification#Null:C1517) && ($assignment_e.certificationStmp#0)
+					$certDt:=$assignment_e.certificationDate
+					If ($certDt#!00-00-00!)
+						$offsets:=$assignment_e.certification.retrainMilestoneDayOffsets()
+						For each ($offset; $offsets)
+							$milestoneKey:="d"+String:C10($offset)
+							If (OB Is defined:C1231($assignment_e.moreData.retrainNotifiedMilestones; $milestoneKey)) && (Bool:C1537($assignment_e.moreData.retrainNotifiedMilestones[$milestoneKey]))
+								$milestoneDate:=Add to date:C393($certDt; 0; 0; $offset)
+								If ($milestoneDate<$today) || ($milestoneDate>$limit)
+									$assignment_e.moreData.retrainNotifiedMilestones[$milestoneKey]:=False:C215
+									$res:=$assignment_e.save()
+								End if 
+							End if 
+						End for each 
+					End if 
 				End if 
 			End if 
 		End for each 

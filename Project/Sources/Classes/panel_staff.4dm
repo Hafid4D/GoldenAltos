@@ -87,17 +87,33 @@ Function loadCommunications()
 	
 	Form:C1466.subFormCommunication:=Form:C1466.subFormCommunication
 	
-	// Purpose: True when the current user holds a Quality profile allowed to manage staff certifications (qs, qi, qm).
+	// Purpose: True when the current user may manage staff certifications (qs, qm, dc per Karla 2.d).
 	// Returns: Boolean
-	// created by 4D/PS [2026-may-21]
+	// modified by 4D/PS [2026-june-02]
 Function _hasQaProfile()->$allowed : Boolean
 	
 	var $qaProfiles : Collection
 	
-	// Purpose: _hasQaProfile uses _ga_qaEditProfiles so qi matches Staff entry and other QA panels.
-	// modified by 4D/PS [2026-may-21]
-	$qaProfiles:=_ga_qaEditProfiles
+	$qaProfiles:=_ga_qaCertModifyProfiles
 	$allowed:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($qaProfiles.indexOf($1.value)#-1)))#Null:C1517
+	
+	
+// Purpose: True when the latest assignment has overrideCertExpired (punch-in allowed while expired).
+// Parameters: $uuid_certification : Text — Certification.UUID
+// Returns: Boolean
+// modified by 4D/PS [2026-june-02]
+Function _assignmentOverrideActive($uuid_certification : Text)->$active : Boolean
+	
+	var $assignment_e : cs:C1710.CertificationAssignmentEntity
+	
+	$active:=False:C215
+	$assignment_e:=ds:C1482.CertificationAssignment\
+		.query("UUID_Staff = :1 AND UUID_Certification = :2"; Form:C1466.current_item.UUID; $uuid_certification)\
+		.orderBy("certificationDate desc").first()
+	If ($assignment_e#Null:C1517) && ($assignment_e.moreData#Null:C1517)
+		$active:=Bool:C1537($assignment_e.moreData.overrideCertExpired)
+	End if 
+	
 	
 Function loadCertifications()
 	GOTO OBJECT:C206(*; "lb_assignments")
@@ -105,8 +121,8 @@ Function loadCertifications()
 	Form:C1466.lb_assignments:=New collection:C1472()
 	
 	For each ($certification; ds:C1482.Certification.all().orderBy("ref asc"))
-		// Purpose: expiredIn column uses getCertiExpiredDate (calendar expiry) — renamed from getExpiredDate.
-		// modified by 4D/PS [2026-may-21]
+		// Purpose: expiredIn column uses getCertiExpiredDate; override flag for QA punch-in exception (2.d).
+		// modified by 4D/PS [2026-june-02]
 		Form:C1466.lb_assignments.push(New object:C1471(\
 			"UUID"; $certification.UUID; \
 			"name"; $certification.name; \
@@ -114,12 +130,13 @@ Function loadCertifications()
 			"oneTime"; $certification.oneTime; \
 			"expiredIn"; Form:C1466.current_item.getCertiExpiredDate($certification.UUID); \
 			"certifiedAt"; Form:C1466.current_item.getCertificationDate($certification.UUID); \
-			"certified"; Form:C1466.current_item.hasCertification($certification.UUID)\
+			"certified"; Form:C1466.current_item.hasCertification($certification.UUID); \
+			"overrideExpired"; This:C1470._assignmentOverrideActive($certification.UUID)\
 			))
 	End for each 
 	
-	// Purpose: Show Certified At / Expired In columns only for Quality profiles (qs, qi, qm).
-	// modified by 4D/PS [2026-may-21]
+	// Purpose: Show Certified At / Expired In columns only for cert-modify profiles (qs, qm, dc).
+	// modified by 4D/PS [2026-june-02]
 	If (This:C1470._hasQaProfile())
 		//TRACE
 		$nb_cols:=LISTBOX Get number of columns:C831(*; "lb_assignments")
@@ -155,16 +172,27 @@ Function manageCertification()
 	Case of 
 		: (FORM Event:C1606.code=On Data Change:K2:15)
 			
-			If (Form:C1466.selectedCertification.certified)
-				Form:C1466.current_item.createCertification(Form:C1466.selectedCertification.UUID; (Not:C34(Form:C1466.selectedCertification.oneTime)) ? Form:C1466.selectedCertification.duration : 0)
+			// Purpose: Only qs, qm, dc may assign or remove certifications on staff.
+			// modified by 4D/PS [2026-june-02]
+			If (Not:C34(This:C1470._hasQaProfile()))
+				cs:C1710.sfw_dialog.me.info("Only Quality Manager, Quality Supervisor, or Document Control can modify certifications")
 				This:C1470.loadCertifications()
+				
 			Else 
-				Form:C1466.current_item.deleteCertification(Form:C1466.selectedCertification.UUID)
-				This:C1470.loadCertifications()
+				
+				If (Form:C1466.selectedCertification.certified)
+					// Purpose: expiredIn from certification type frequencies / one time (_ga_certificationExpiredInDays).
+					// modified by 4D/PS [2026-june-02]
+					Form:C1466.current_item.createCertification(Form:C1466.selectedCertification.UUID; 0)
+					This:C1470.loadCertifications()
+				Else 
+					Form:C1466.current_item.deleteCertification(Form:C1466.selectedCertification.UUID)
+					This:C1470.loadCertifications()
+				End if 
+				
+				This:C1470._activate_save_cancel_button()
+				
 			End if 
-			
-			This:C1470._activate_save_cancel_button()
-			
 			
 			
 		: (FORM Event:C1606.code=On Clicked:K2:4)
@@ -297,7 +325,11 @@ Function pup_user()
 	
 	
 Function bActionCertifications()
-	//If (Form.sfw.checkIsInModification())
+	
+	var $refMenu : Integer
+	var $choose : Text
+	var $assignment_e : cs:C1710.CertificationAssignmentEntity
+	
 	$refMenu:=Create menu:C408
 	
 	// Purpose: Full employee training record (all valid + expired certifications) — available
@@ -313,6 +345,24 @@ Function bActionCertifications()
 		If (Not:C34(Form:C1466.current_item.hasCertification(Form:C1466.selectedCertification.UUID)))
 			DISABLE MENU ITEM:C150($refMenu; -1)
 		End if 
+		
+		// Purpose: QA punch-in override for expired certification (Karla 2.d — qs, qm, dc).
+		// modified by 4D/PS [2026-june-02]
+		If (This:C1470._hasQaProfile()) && (Form:C1466.sfw.checkIsInModification())
+			$assignment_e:=ds:C1482.CertificationAssignment\
+				.query("UUID_Staff = :1 AND UUID_Certification = :2"; Form:C1466.current_item.UUID; Form:C1466.selectedCertification.UUID)\
+				.orderBy("certificationDate desc").first()
+			If ($assignment_e#Null:C1517) && (Not:C34($assignment_e.validityActive))
+				APPEND MENU ITEM:C411($refMenu; "-")
+				If (Bool:C1537($assignment_e.moreData.overrideCertExpired))
+					APPEND MENU ITEM:C411($refMenu; "Revoke punch-in override (expired cert)")
+					SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--revokeOverride")
+				Else 
+					APPEND MENU ITEM:C411($refMenu; "Allow punch-in despite expired certification")
+					SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--grantOverride")
+				End if 
+			End if 
+		End if 
 	End if 
 	
 	$choose:=Dynamic pop up menu:C1006($refMenu)
@@ -320,6 +370,16 @@ Function bActionCertifications()
 	Case of 
 		: ($choose="--printCertTraining")
 			staff_print_cert_training
+		: ($choose="--grantOverride")
+			If (Form:C1466.selectedCertification#Null:C1517)
+				Form:C1466.current_item.setCertificationOverride(Form:C1466.selectedCertification.UUID; True:C214)
+				This:C1470.loadCertifications()
+			End if 
+		: ($choose="--revokeOverride")
+			If (Form:C1466.selectedCertification#Null:C1517)
+				Form:C1466.current_item.setCertificationOverride(Form:C1466.selectedCertification.UUID; False:C215)
+				This:C1470.loadCertifications()
+			End if 
 		: ($choose="--print")
 			PRINT SETTINGS:C106()
 			

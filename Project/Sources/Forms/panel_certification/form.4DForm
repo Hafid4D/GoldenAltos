@@ -201,7 +201,59 @@
 					],
 					"dataSourceTypeHint": "boolean",
 					"sizingX": "grow",
-					"dataSource": "Form:C1466.current_item.oneTime"
+					"dataSource": "Form:C1466.current_item.oneTime",
+					"method": "ObjectMethods/entryField_oneTime.4dm"
+				},
+				"label_retrainFreq": {
+					"type": "text",
+					"top": 195,
+					"left": 13,
+					"width": 200,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Re-training frequency"
+				},
+				"cb_freqQuarterly": {
+					"type": "checkbox",
+					"text": "Quarterly (90 days)",
+					"top": 218,
+					"left": 13,
+					"width": 200,
+					"height": 18,
+					"dataSource": "Form:C1466.freqQuarterly",
+					"dataSourceTypeHint": "boolean",
+					"method": "ObjectMethods/cb_freqQuarterly.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"cb_freqHalfYear": {
+					"type": "checkbox",
+					"text": "Half Year (180 days)",
+					"top": 241,
+					"left": 13,
+					"width": 200,
+					"height": 18,
+					"dataSource": "Form:C1466.freqHalfYear",
+					"dataSourceTypeHint": "boolean",
+					"method": "ObjectMethods/cb_freqHalfYear.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"cb_freqAnnually": {
+					"type": "checkbox",
+					"text": "Annually (365 days)",
+					"top": 264,
+					"left": 13,
+					"width": 200,
+					"height": 18,
+					"dataSource": "Form:C1466.freqAnnually",
+					"dataSourceTypeHint": "boolean",
+					"method": "ObjectMethods/cb_freqAnnually.4dm",
+					"events": [
+						"onClick"
+					]
 				}
 			}
 		}

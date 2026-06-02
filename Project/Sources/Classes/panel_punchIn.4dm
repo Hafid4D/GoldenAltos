@@ -99,29 +99,60 @@ Function displaySerialization()
 	
 	
 Function checkForCertifications()->$valid : Boolean
+	// Purpose: Block punch-in when required certifications are missing or expired (uses StaffEntity.hasCertification / validityActive).
+	// Returns: Boolean — True when all required certifications are valid for the current step.
+	// modified by 4D/PS [2026-june-02]
+	
+	var $staff_es : cs:C1710.StaffSelection
+	var $staff_e : cs:C1710.StaffEntity
+	var $certifications : Collection
+	var $certification : Object
+	var $certName : Text
+	var $assignments : cs:C1710.CertificationAssignmentSelection
+	var $blockedLines : Collection
+	var $blockedMessage : Text
+	
+	$valid:=True:C214
+	$blockedLines:=New collection:C1472()
 	
 	If (ds:C1482.sfw_User.query("login = :1"; Current user:C182).length>0)
 		$staff_es:=ds:C1482.sfw_User.query("login = :1"; Current user:C182).first().staffs
 	End if 
 	
-	If ($staff_es.length>0)
-		$staff_e:=$staff_es[0]
+	If (Form:C1466.currentStep#Null:C1517) && (Form:C1466.currentStep.requitedCertifications#Null:C1517) && (Form:C1466.currentStep.requitedCertifications.items.length>0)
 		
-		$missingCertifications:=New collection:C1472()
-		
-		If (Form:C1466.currentStep#Null:C1517) && (Form:C1466.currentStep.requitedCertifications#Null:C1517)
-			$certifications:=Form:C1466.currentStep.requitedCertifications.items
-			
-			For each ($certification; $certifications)
-				$assignments:=$staff_e.assignments.query("UUID_Certification = :1"; $certification.UUID_Certification)
-				
-				If ($assignments.length=0)
-					$missingCertifications.push($certification)
-				End if 
-			End for each 
+		If ($staff_es.length=0)
+			$valid:=False:C215
+			cs:C1710.sfw_dialog.me.info("Punch-in blocked: no staff record linked to your user account")
+			return $valid
 		End if 
 		
-		$valid:=($missingCertifications.length=0)
+		$staff_e:=$staff_es[0]
+		$certifications:=Form:C1466.currentStep.requitedCertifications.items
+		
+		For each ($certification; $certifications)
+				If (Not:C34($staff_e.hasCertification($certification.UUID_Certification)))
+					$certName:=String:C10($certification.name)
+					If ($certName="")
+						$eCert:=ds:C1482.Certification.get($certification.UUID_Certification)
+						If ($eCert#Null:C1517)
+							$certName:=$eCert.name
+						End if 
+					End if 
+					$assignments:=$staff_e.assignments.query("UUID_Certification = :1"; $certification.UUID_Certification)
+					If ($assignments.length=0)
+						$blockedLines.push($certName+" — not assigned")
+					Else 
+						$blockedLines.push($certName+" — expired or invalid")
+					End if 
+				End if 
+		End for each 
+		
+		$valid:=($blockedLines.length=0)
+		If (Not:C34($valid))
+			$blockedMessage:="Punch-in blocked. Required certification(s):\r"+$blockedLines.join("\r")
+			cs:C1710.sfw_dialog.me.info($blockedMessage)
+		End if 
 	End if 
 	
 Function loadCurrentStep()
@@ -158,8 +189,6 @@ Function loadCurrentStep()
 			End if 
 		Else 
 			Form:C1466.currentStepOrder:=0
-			//FORM GOTO PAGE(3; *)
-			//cs.sfw_dialog.me.alert("Some certifications are required for this lotStep !")
 		End if 
 	Else 
 		Form:C1466.currentStepOrder:=0

@@ -2,6 +2,12 @@
 //BackgroundColor lb_assignments
 
 If (This:C1470.certified)
+	// Purpose: Highlight rows where QA granted punch-in override on an expired assignment.
+	// modified by 4D/PS [2026-june-02]
+	If (Bool:C1537(This:C1470.overrideExpired))
+		$0:="#87CEEB"
+		return 
+	End if 
 	$today:=Current date:C33()
 	
 	$date_15j:=Add to date:C393($today; 0; 0; 15)
