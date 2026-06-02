@@ -1,42 +1,84 @@
 
-
 singleton Class constructor
 	//It's a singleton class
 	
 Function formMethod()
-	//This function manages the main logic for updating and refreshing the form
-	Form:C1466.sfw.panelFormMethod()  //The main body of the form method and basic sfw functionalities 
-	If (Form:C1466.sfw.updateOfPanelNeeded())  //The current item is changed or reloaded, so it's necessary ti refresh 
+	Form:C1466.sfw.panelFormMethod()
+	If (Form:C1466.sfw.updateOfPanelNeeded())
+		This:C1470.syncFrequencyFormFromEntity()
 	End if 
-	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())  //a page is displayed so it's time to load the sources of data to display
+	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())
 		Case of 
-			: (FORM Get current page:C276(*)=1)
-				// add load functions
+			: (FORM Get current page:C276(*)=2)
+				This:C1470.syncFrequencyFormFromEntity()
 		End case 
 	End if 
-	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())  //It's time to resize the object or set visible
+	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())
 		This:C1470.redrawAndSetVisible()
 	End if 
 	
 	
-Function drawPup_XXX()
-	//This function updates the dropdown by displaying the name
-	Form:C1466.sfw.drawButtonPup("pup_xxx"; $xxxName; "xxxx.png"; (Form:C1466.current_item.xxxx=Null:C1517))
+// Purpose: Mirror entity retrainingFrequencies / oneTime onto form booleans for page 2 checkboxes.
+// modified by 4D/PS [2026-june-02]
+Function syncFrequencyFormFromEntity()
 	
+	var $freqs : Collection
 	
-Function pup_XXX()
-	//Create pop up menu
-	If (Form:C1466.sfw.checkIsInModification())
+	If (Form:C1466.current_item=Null:C1517)
+		return 
 	End if 
-	This:C1470.drawPup_XXX()
+	$freqs:=Form:C1466.current_item.getRetrainingFrequencies()
+	Form:C1466.freqQuarterly:=($freqs.indexOf("quarterly")#-1)
+	Form:C1466.freqHalfYear:=($freqs.indexOf("halfYear")#-1)
+	Form:C1466.freqAnnually:=($freqs.indexOf("annually")#-1)
 	
 	
 Function redrawAndSetVisible()
-	//Adjusts the layout and visibility of form elements based on the current page and modification state
 	
-Function loadXXX()
-	//Loads and initializes a list
+	var $inModification : Boolean
 	
-Function bActionXXX()
-	//Manages actions: add, or remove, using dynamic menus and modification checks
+	$inModification:=Form:C1466.sfw.checkIsInModification()
+	OBJECT SET ENABLED:C1123(*; "entryField_ref"; $inModification)
+	OBJECT SET ENABLED:C1123(*; "entryField_name"; $inModification)
+	// Purpose: Duration auto-updates from selected frequencies (shortest period); not typed manually.
+	// modified by 4D/PS [2026-june-02]
+	OBJECT SET ENABLED:C1123(*; "entryField_duration"; False:C215)
+	OBJECT SET ENABLED:C1123(*; "cb_freqQuarterly"; $inModification && Not:C34(Form:C1466.current_item.oneTime))
+	OBJECT SET ENABLED:C1123(*; "cb_freqHalfYear"; $inModification && Not:C34(Form:C1466.current_item.oneTime))
+	OBJECT SET ENABLED:C1123(*; "cb_freqAnnually"; $inModification && Not:C34(Form:C1466.current_item.oneTime))
+	OBJECT SET ENABLED:C1123(*; "entryField_oneTime"; $inModification)
+	
+	
+// Purpose: Toggle one retraining frequency; duration field refreshes via syncDurationFromFrequencies.
+// Parameters: $ident : Text — quarterly | halfYear | annually
+// modified by 4D/PS [2026-june-02]
+Function cb_retrainFrequency($ident : Text)
+	
+	If (Not:C34(Form:C1466.sfw.checkIsInModification())) || (Form:C1466.current_item=Null:C1517)
+		return 
+	End if 
+	
+	Case of 
+		: ($ident="quarterly")
+			Form:C1466.current_item.setRetrainingFrequency("quarterly"; Form:C1466.freqQuarterly)
+		: ($ident="halfYear")
+			Form:C1466.current_item.setRetrainingFrequency("halfYear"; Form:C1466.freqHalfYear)
+		: ($ident="annually")
+			Form:C1466.current_item.setRetrainingFrequency("annually"; Form:C1466.freqAnnually)
+	End case 
+	
+	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
+	
+	
+// Purpose: One time clears frequencies; selecting a frequency clears one time (Karla 2.f).
+// modified by 4D/PS [2026-june-02]
+Function cb_oneTime()
+	
+	If (Not:C34(Form:C1466.sfw.checkIsInModification())) || (Form:C1466.current_item=Null:C1517)
+		return 
+	End if 
+	
+	Form:C1466.current_item.applyOneTimeRule(Form:C1466.current_item.oneTime)
+	This:C1470.syncFrequencyFormFromEntity()
+	Form:C1466.current_item.UUID:=Form:C1466.current_item.UUID
 	

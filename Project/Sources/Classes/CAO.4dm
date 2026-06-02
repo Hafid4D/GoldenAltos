@@ -16,9 +16,12 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(1; ""; "Main")
 	
 	//$entry.setLBItemsColumn("dateCreated"; "Created"; "width:100")
-	$entry.setLBItemsColumn("name"; "Name"; "width:150")
+	// Purpose: Show legacy GLAC in the item list.
+	// modified by 4D/PS [2026-may-19]
+	$entry.setLBItemsColumn("accountNumber"; "Account #"; "width:80")
+	//$entry.setLBItemsColumn("name"; "Name"; "width:150")
 	$entry.setLBItemsColumn("type.name"; "Type"; "width:150")
-	$entry.setLBItemsColumn("typeDetail.name"; "Type Detail"; "width:100")
+	//$entry.setLBItemsColumn("typeDetail.name"; "Type Detail"; "width:100")
 	$entry.setLBItemsColumn("balance"; "Balance"; "width:50")
 	
 	$entry.setSubset("activeCAOs")
@@ -69,8 +72,11 @@ local Function cacheLoad()
 	End if 
 	
 	
-Function _loadAsCollection()->$parentAccounts : Collection
-	$parentAccounts:=ds:C1482.CAO.query("UUID #:1"; Form:C1466.current_item.UUID).toCollection("UUID,name,accountNumber,description").orderBy("accountNumber")
+Function _loadAsCollection()->$parentAccounts : cs:C1710.CAOSelection
+	// Purpose: Load all active accounts for the parent-account popup cache.
+	// Returns: Collection of { UUID, name, accountNumber, description } ordered by accountNumber.
+	// modified by 4D/PS [2026-may-19]
+	$parentAccounts:=ds:C1482.CAO.query("isInacActive = :1"; False:C215).orderBy("accountNumber")
 	
 	
 	

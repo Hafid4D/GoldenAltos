@@ -17,18 +17,26 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setSubset("main")
 	
 	$entry.setLBItemsColumn("assetNumber"; "Asset #"; "width:50")
+	$entry.setLBItemsColumn("assetType.name"; "Type"; "width:120")
 	$entry.setLBItemsColumn("description"; "Description"; "width:200")
 	$entry.setLBItemsColumn("originalCost"; "Original Cost"; "width:100")
 	
 	$entry.setLBItemsOrderBy("assetNumber")
 	$entry.setMainViewLabel("All assets")
 	
-	$entry.setItemListAction("View Depreciation History"; "_ga_viewDepreciationHistory")
+	// Purpose: Item actions — operate on the currently open record (Form.current_item).
+	// modified by 4D/PS [2026-june-01]
+	$entry.setItemAction("View Depreciation History"; "_ga_viewDepreciationHistory")
+	$entry.setItemAction("Run Manual Depreciation"; "_ga_runManualDepreciationCurrentItem")
+	$entry.setItemAction("Toggle Automatic Depreciation"; "_ga_activateAutomatiqueDepreciationCurrentItem")
+	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
+	
+	// Purpose: List actions — batch operations on the whole view/list (Form.sfw.lb_items).
+	// modified by 4D/PS [2026-june-01]
+	$entry.setItemListAction("Run Manual Depreciation (Batch)"; "_ga_runManualDepreciation")
+	$entry.setItemListAction("Activate Automatic Depreciation (Batch)"; "_ga_activateAutomatiqueDepreciation")
 	$entry.setItemListAction("Print Asset List"; "_ga_printAssetSelection")
 	$entry.setItemListAction("Export Asset List"; "_ga_exportAssetSelection")
-	$entry.setItemListAction("Activate Automatique Depreciation"; "_ga_activateAutomatiqueDepreciation")
-	
-	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
 	
 	$entry.setItemListAction("Search by Scanning"; "_ga_searchByBarcodeScanning")
 	
@@ -52,13 +60,32 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setView($view)
 	
 Function main()->$assets : cs:C1710.AssetSelection
-	$assets:=ds:C1482.Asset.query("excludeFmDepreciationList =:1"; False:C215)
+	// Purpose: Active assets still depreciating (not scrapped, not fully depreciated).
+	// Returns: cs.AssetSelection
+	// modified by 4D/PS [2026-may-19]
+	$assets:=ds:C1482.Asset.newSelection()
+	For each ($eAsset; ds:C1482.Asset.query("isScrapped = :1"; False:C215))
+		If (Not:C34($eAsset.excludeFmDepreciationList)) & (($eAsset.life=0) | ($eAsset.monthInService<$eAsset.life))
+			$assets:=$assets.add($eAsset)
+		End if 
+	End for each 
 	
 Function fullyDepreciatedAssets()->$assets : cs:C1710.AssetSelection
-	$assets:=ds:C1482.Asset.query("excludeFmDepreciationList =:1"; True:C214)
+	// Purpose: Fully depreciated assets kept on the list until scrapped/archived.
+	// Returns: cs.AssetSelection
+	// modified by 4D/PS [2026-may-19]
+	$assets:=ds:C1482.Asset.newSelection()
+	For each ($eAsset; ds:C1482.Asset.query("isScrapped = :1"; False:C215))
+		If ($eAsset.excludeFmDepreciationList) | (($eAsset.life>0) & ($eAsset.monthInService>=$eAsset.life))
+			$assets:=$assets.add($eAsset)
+		End if 
+	End for each 
 	
 Function archivedorScrappedAssets()->$assets : cs:C1710.AssetSelection
-	$assets:=ds:C1482.Asset.query("excludeFmDepreciationList =:1 & isScrapped =:2"; False:C215; True:C214)
+	// Purpose: Scrapped / archived assets (legacy Scrapped flag).
+	// Returns: cs.AssetSelection
+	// modified by 4D/PS [2026-may-19]
+	$assets:=ds:C1482.Asset.query("isScrapped = :1"; True:C214)
 	
 	
 	

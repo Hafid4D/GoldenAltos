@@ -17,7 +17,10 @@ If (Form:C1466.sfw.lb_items.length>0)
 	
 	$templateFile:=Folder:C1567(fk resources folder:K87:11).file("excelTemplates/excelExportTemplate.xlsx")
 	
+	// Purpose: Add Account # column to CAO export (aligned with item list).
+	// modified by 4D/PS [2026-may-19]
 	$mapping:=New collection:C1472(\
+		New object:C1471("header"; "Account #"; "field"; "accountNumber"; "footerOperation"; ""); \
 		New object:C1471("header"; "Name"; "field"; "name"; "footerOperation"; "TOTAL"); \
 		New object:C1471("header"; "Type"; "field"; "type.name"; "footerOperation"; ""); \
 		New object:C1471("header"; "Type Details"; "field"; "typeDetail.name"; "footerOperation"; ""); \
