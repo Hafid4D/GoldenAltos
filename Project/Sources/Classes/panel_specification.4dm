@@ -107,7 +107,7 @@ Function bActionDocument()
 		DISABLE MENU ITEM:C150($refMenu; 1)
 	End if 
 	
-	APPEND MENU ITEM:C411($refMenu; "Add document"; *)
+	APPEND MENU ITEM:C411($refMenu; "Add Document"; *)
 	SET MENU ITEM PARAMETER:C1004($refMenu; 2; "--add")
 	If (sfw_checkIsInModification=False:C215)
 		DISABLE MENU ITEM:C150($refMenu; 2)

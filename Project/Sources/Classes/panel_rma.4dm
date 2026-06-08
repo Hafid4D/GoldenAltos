@@ -41,12 +41,23 @@ Function btnTraveler()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
+	var $inModification : Boolean
+	
+	$inModification:=Form:C1466.sfw.checkIsInModification()
+	
+	// Purpose: Header widgets use Field_* names (not entryField_*) — enable them explicitly in modification mode.
+	// modified by 4D/PS [2026-june-08]
+	OBJECT SET ENTERABLE:C238(*; "Field@"; $inModification)
+	OBJECT SET ENABLED:C1123(*; "Field@"; $inModification)
+	OBJECT SET ENABLED:C1123(*; "pup_@"; $inModification)
+	OBJECT SET ENABLED:C1123(*; "btnDatePicker@"; $inModification)
+	
 	This:C1470.hideDatePickers()
 	This:C1470.drawPup_car()
 	This:C1470.drawPup_CustomerPO()
 	This:C1470.drawPup_traveler()
 	
-	If (Form:C1466.sfw.checkIsInModification())
+	If ($inModification)
 		
 		// Purpose: QA edit gate uses _ga_qaEditProfiles (qs, qi, qm) — aligned with Staff entry.
 		// modified by 4D/PS [2026-may-21]
@@ -110,8 +121,9 @@ Function selectQcar( ...  : Collection)
 				
 				If (ok=1)
 					Form:C1466.current_item.UUID_Qcar:=$form.item.UUID
-					Form:C1466.current_item.travelerNumber:=$form.item.lot.lotNumber
-					This:C1470._activate_save_cancel_button()
+					If ($form.item.lot#Null:C1517)
+						This:C1470.applyLotSelection($form.item.lot)
+					End if 
 				End if 
 		End case 
 	End if 
@@ -193,31 +205,33 @@ Function selectTraveler()
 				CLOSE WINDOW:C154($winRef)
 				
 				If (ok=1)
-					
-					If ($form.item.qcars.length=1)
-						Form:C1466.current_item.UUID_Qcar:=$form.item.qcars[0].UUID
-						If (Form:C1466.current_item.qcar.customer#Null:C1517)
-							$poData:=Form:C1466.current_item.qcar.customer.purchaseOrders
-							If ($poData.length=1)
-								Form:C1466.current_item.customerPo:=$poData[0].poNumber
-							Else 
-								Form:C1466.current_item.customerPo:=""
-							End if 
-						End if 
-					Else 
-						//Form.current_item.UUID_Qcar:="00"*16
+					This:C1470.applyLotSelection($form.item)
+					If ($form.item.qcars.length>1)
 						This:C1470.selectQcar($form.item.qcars.toCollection())
-						
-					End if 
-					
-					If (Form:C1466.current_item.qcar.lot.lotNumber=$form.item.lotNumber)
-						Form:C1466.current_item.travelerNumber:=$form.item.lotNumber
-						This:C1470._activate_save_cancel_button()
 					End if 
 				End if 
 		End case 
 	End if 
 	This:C1470.drawPup_traveler()
+	
+	
+// Purpose: Fill RMA header from a selected lot — travelerNumber (original traveler), PO, and linked CAR when unambiguous.
+// Parameters: $lot_e : cs.LotEntity — lot chosen from the traveler picker
+// modified by 4D/PS [2026-june-08]
+Function applyLotSelection($lot_e : cs:C1710.LotEntity)
+	
+	If ($lot_e=Null:C1517)
+		return 
+	End if 
+	
+	Form:C1466.current_item.travelerNumber:=$lot_e.lotNumber
+	If ($lot_e.poNumber#"")
+		Form:C1466.current_item.customerPo:=$lot_e.poNumber
+	End if 
+	If ($lot_e.qcars.length=1)
+		Form:C1466.current_item.UUID_Qcar:=$lot_e.qcars[0].UUID
+	End if 
+	This:C1470._activate_save_cancel_button()
 	
 	
 Function btnDatePicker($object; $attribut)

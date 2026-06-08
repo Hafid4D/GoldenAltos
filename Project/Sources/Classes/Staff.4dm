@@ -145,9 +145,9 @@ Function checkRetraining($days : Integer)->$createdNotificationMarkers : Collect
 	var $limit : Date
 	var $res : Object
 	
-	// Purpose: Notify Quality (qs, qm, dc) and Production Manager (pm) per Karla certification alert request.
+	// Purpose: Notify Quality (qs, qm, dc), Production Supervisor (ps), and Production Manager (pm) per Karla request.
 	// modified by 4D/PS [2026-june-08]
-	$profiles:=New collection:C1472("qs"; "qm"; "dc"; "pm")
+	$profiles:=New collection:C1472("qs"; "qm"; "dc"; "ps"; "pm")
 	$users:=ds:C1482.Staff.query("user.userInscriptions.userProfile.ident in :1"; $profiles).extract("user.UUID").distinct()
 	
 	$createdNotificationMarkers:=New collection:C1472()

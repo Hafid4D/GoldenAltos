@@ -650,6 +650,7 @@
 		<field name="customerPo" uuid="02789B7C609CBD46B36B634F4FF021AB" type="10" limiting_length="255" never_null="true" id="17"/>
 		<field name="moreData" uuid="717FC5141867714EA2D2F3EF3A5752D0" type="21" blob_switch_size="2147483647" never_null="true" id="18"/>
 		<field name="travelerNumber" uuid="57244802D9F1BD42AE34BDAE7DB348E1" type="10" limiting_length="255" never_null="true" id="19"/>
+		<field name="rmaTravelerNumber" uuid="C2B3A4D5E6F74890B1C2D3E4F5A6B7C8" type="10" limiting_length="255" never_null="true" id="20"/>
 		<primary_key field_name="UUID" field_uuid="7DE1FE0E75E78443A6CCEA990AC54031"/>
 	</table>
 	<table name="ControllingDepartment" uuid="C1BEBD5DDE0D1A45AEE41760FAE1229A" id="45">
