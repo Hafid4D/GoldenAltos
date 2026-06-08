@@ -206,6 +206,9 @@ Function get fullName()->$fullName : Text
 	$fullName:=[This:C1470.firstName; This:C1470.lastName].join(" ")
 	
 	
+// Purpose: Legacy single employee retrain date (v18 Retrain_Date). Kept for import, export, and print only.
+// Certification alerts use CertificationAssignment.expiringDate and retrain milestones — not stmpRetrain.
+// modified by 4D/PS [2026-june-02]
 local Function get retrainDate()->$date : Date
 	$date:=This:C1470.stmpRetrain=0 ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpRetrain; True:C214)
 	

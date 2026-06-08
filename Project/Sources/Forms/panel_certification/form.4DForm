@@ -165,10 +165,10 @@
 					"type": "text",
 					"top": 159,
 					"left": 13,
-					"width": 70,
+					"width": 90,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "Duration"
+					"text": "Validity (days)"
 				},
 				"entryField_duration": {
 					"type": "input",
@@ -181,10 +181,15 @@
 					"enterable": false,
 					"dragging": "none",
 					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
 					"fill": "transparent",
 					"borderStyle": "none",
 					"sizingX": "grow",
-					"textFormat": "^^^^^^0 Days"
+					"dataSourceTypeHint": "integer",
+					"textFormat": "^^^^^^0 Days",
+					"method": "ObjectMethods/entryField_duration.4dm"
 				},
 				"entryField_oneTime": {
 					"type": "checkbox",
