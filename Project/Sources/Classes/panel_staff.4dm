@@ -121,13 +121,14 @@ Function loadCertifications()
 	Form:C1466.lb_assignments:=New collection:C1472()
 	
 	For each ($certification; ds:C1482.Certification.all().orderBy("ref asc"))
-		// Purpose: expiredIn column uses getCertiExpiredDate; override flag for QA punch-in exception (2.d).
-		// modified by 4D/PS [2026-june-02]
+		// Purpose: expiringDate for row highlight; expiredIn column shows same calendar date; override for punch-in (2.d).
+		// modified by 4D/PS [2026-june-08]
 		Form:C1466.lb_assignments.push(New object:C1471(\
 			"UUID"; $certification.UUID; \
 			"name"; $certification.name; \
 			"duration"; $certification.duration; \
 			"oneTime"; $certification.oneTime; \
+			"expiringDate"; Form:C1466.current_item.getCertiExpiredDate($certification.UUID); \
 			"expiredIn"; Form:C1466.current_item.getCertiExpiredDate($certification.UUID); \
 			"certifiedAt"; Form:C1466.current_item.getCertificationDate($certification.UUID); \
 			"certified"; Form:C1466.current_item.hasCertification($certification.UUID); \

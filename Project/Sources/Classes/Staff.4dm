@@ -113,20 +113,20 @@ Function terminatedStaff()->$staffs : cs:C1710.StaffSelection
 Function retrainingStaff()->$staffs : cs:C1710.StaffSelection
 	$staffs:=ds:C1482.Staff.newSelection()
 	
-	// Purpose: Include staff with any retrain milestone due in 30 days (supports multiple frequencies per cert type).
-	// modified by 4D/PS [2026-june-02]
+	// Purpose: Staff with retrain milestone or calendar validity expiry due within 30 days.
+	// modified by 4D/PS [2026-june-08]
 	For each ($staff; ds:C1482.Staff.all())
-		If ($staff.getRetrainMilestonesDueIn(30).length>0)
+		If ($staff.getRetrainMilestonesDueIn(30).length>0) || ($staff.getCertiExpiredIn(30).length>0)
 			$staffs.add($staff)
 		End if 
 	End for each 
 	
 	
-// Purpose: Notify qs, qm, and dc for each retrain milestone due within $days (one notification per milestone).
-// Uses CertificationAssignment.moreData.retrainNotifiedMilestones keys "d90", "d365", etc.
+// Purpose: Notify qs, qm, dc, and pm for validity expiry and retrain milestones due within $days.
+// Uses moreData.retrainNotifiedMilestones (d90, d365, …) and validityExpiryNotified for calendar expiry.
 // Parameters: $days : Integer — lookahead window in days (typically 30)
 // Returns: Collection — one True entry per newly sent notification (drives UI refresh in callers)
-// modified by 4D/PS [2026-june-02]
+// modified by 4D/PS [2026-june-08]
 Function checkRetraining($days : Integer)->$createdNotificationMarkers : Collection
 	
 	var $staff_e : cs:C1710.StaffEntity
@@ -145,9 +145,9 @@ Function checkRetraining($days : Integer)->$createdNotificationMarkers : Collect
 	var $limit : Date
 	var $res : Object
 	
-	// Purpose: Include Document Control (dc) per Karla feedback on certification retraining alerts.
-	// modified by 4D/PS [2026-june-02]
-	$profiles:=New collection:C1472("qs"; "qm"; "dc")
+	// Purpose: Notify Quality (qs, qm, dc) and Production Manager (pm) per Karla certification alert request.
+	// modified by 4D/PS [2026-june-08]
+	$profiles:=New collection:C1472("qs"; "qm"; "dc"; "pm")
 	$users:=ds:C1482.Staff.query("user.userInscriptions.userProfile.ident in :1"; $profiles).extract("user.UUID").distinct()
 	
 	$createdNotificationMarkers:=New collection:C1472()
@@ -184,6 +184,41 @@ Function checkRetraining($days : Integer)->$createdNotificationMarkers : Collect
 				$res:=$assignment_e.save()
 				If ($res.success)
 					$createdNotificationMarkers.push(True:C214)
+				End if 
+			End if 
+		End for each 
+		
+		// Purpose: Notify when assignment calendar expiry (expiringDate) falls within the window.
+		// modified by 4D/PS [2026-june-08]
+		For each ($assignment_e; $staff_e.getCertiExpiredIn($days))
+			If ($assignment_e.moreData=Null:C1517)
+				$assignment_e.moreData:=New object:C1471
+			End if 
+			If (Not:C34(Bool:C1537($assignment_e.moreData.validityExpiryNotified)))
+				$context:=New object:C1471(\
+					"target"; $staff_e.UUID; \
+					"targetDataclass"; "Staff"; \
+					"fullName"; $staff_e.fullName; \
+					"certName"; $assignment_e.certification.name; \
+					"expiringDate"; String:C10($assignment_e.expiringDate; System date short:K17:1); \
+					"days"; $days\
+					)
+				cs:C1710.sfw_notificationManager.me.notify("EmployeeRetrainRequired"; $users; $context)
+				$assignment_e.moreData.validityExpiryNotified:=True:C214
+				$res:=$assignment_e.save()
+				If ($res.success)
+					$createdNotificationMarkers.push(True:C214)
+				End if 
+			End if 
+		End for each 
+		
+		// Purpose: Clear validity expiry flag when assignment is outside the notification window.
+		// modified by 4D/PS [2026-june-08]
+		For each ($assignment_e; $staff_e.assignments)
+			If ($assignment_e.moreData#Null:C1517) && (OB Is defined:C1231($assignment_e.moreData; "validityExpiryNotified")) && (Bool:C1537($assignment_e.moreData.validityExpiryNotified))
+				If ($assignment_e.expiredIn<=0) || (($assignment_e.expiringDate#!00-00-00!) && (($assignment_e.expiringDate<$today) || ($assignment_e.expiringDate>$limit)))
+					$assignment_e.moreData.validityExpiryNotified:=False:C215
+					$res:=$assignment_e.save()
 				End if 
 			End if 
 		End for each 

@@ -34,10 +34,12 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	// MARK: -Filters
 	
 	
+	// Purpose: Filter by DocumentCategory via UUID_DocumentCategory (replaced broken SpecCategory / categoryID reference).
+	// modified by 4D/PS [2026-june-08]
 	$filter:=cs:C1710.sfw_definitionFilter.new("filterSpecDocumentType")
 	$filter.setDefaultTitle("All Types")
-	$filter.setFilterByIDInTable("SpecCategory"; "categoryID"; "categoryID")
-	$filter.setDynamicTitle("name"; "## document  type")
+	$filter.setFilterByLinkedEntity("DocumentCategory"; "UUID_DocumentCategory"; ""; "")
+	$filter.setDynamicTitle("name"; "## document type")
 	$entry.addFilter($filter)
 	
 	// Apr 22, 2026 4DFix: duplicate filter ident "filterSpecDocumentType" was colliding with the first filter — renamed to "filterSpecDepartment"
