@@ -1,4 +1,4 @@
-// Purpose: Panel controller for Received Transactions (AR sub-ledger entry GA3-T398).
+// Purpose: Panel controller for Sales Transactions (AR sub-ledger entry GA3-T398).
 // created by 4D/PS [2026-june-08]
 singleton Class constructor
 

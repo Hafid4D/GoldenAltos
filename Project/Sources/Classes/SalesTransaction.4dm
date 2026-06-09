@@ -6,7 +6,9 @@ Class extends DataClass
 
 local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
-	$entry:=cs:C1710.sfw_definitionEntry.new("SalesTransaction"; ["accounting"]; "Received Transactions"; "SalesTransaction")
+	// Purpose: Entry label aligned with Zoho GA3-T398 naming (Sales Transactions).
+	// modified by 4D/PS [2026-june-08]
+	$entry:=cs:C1710.sfw_definitionEntry.new("SalesTransaction"; ["accounting"]; "Sales Transactions"; "SalesTransaction")
 	$entry.setDataclass("SalesTransaction")
 	$entry.setDisplayOrder(-400)
 	$entry.setIcon("image/entry/sales-Transaction-50x50.png")
@@ -47,8 +49,135 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setValidationRule("dueDate"; "entryField_dueDate")
 	$entry.setValidationRule("openBalance"; "entryField_openBalance")
 	
+	$entry.setSubset("main")
+	
 	$entry.enableTransaction()
 	$entry.activateFavorite()
+	
+	
+Function main()->$transactions : cs:C1710.SalesTransactionSelection
+	$transactions:=ds:C1482.SalesTransaction.all()
+	
+	
+// Purpose: Rebuild all SalesTransaction rows from Invoice (PO receivables) and JobInvoice sources.
+// Returns: Integer — number of records created (0 when no source data; no design-mockup seeding).
+// modified by 4D/PS [2026-june-08]
+Function rebuildFromSources()->$count : Integer
+	
+	var $eST : cs:C1710.SalesTransactionEntity
+	var $eType : cs:C1710.TransactionTypeEntity
+	var $eInvoice : Object
+	var $eJobInvoice : cs:C1710.JobInvoiceEntity
+	var $typeCode : Text
+	var $num : Integer
+	var $seq : Integer
+	var $amount : Real
+	var $openBalance : Real
+	var $res : Object
+	
+	TRUNCATE TABLE:C1051([SalesTransaction:80])
+	$count:=0
+	$seq:=0
+	
+	For each ($eInvoice; ds:C1482.Invoice.all())
+		$seq:=$seq+1
+		$typeCode:=This:C1470.mapLegacyTypeCode($eInvoice.invoice)
+		$num:=This:C1470.parseLegacyTransactionNumber($eInvoice.invoice)
+		If ($num=0)
+			$num:=$seq
+		End if
+		
+		$amount:=$eInvoice.total
+		$openBalance:=$eInvoice.due
+		If ($typeCode="CM") && ($amount>0)
+			$amount:=-$amount
+		End if
+		If ($typeCode="CM") && ($openBalance>0)
+			$openBalance:=-$openBalance
+		End if
+		If ($typeCode="PAY") && ($amount>0)
+			$amount:=-$amount
+		End if
+		
+		$eST:=ds:C1482.SalesTransaction.new()
+		$eST.transactionNumber:=$num
+		If ($eInvoice.purchaseOrder#Null:C1517)
+			$eST.UUID_Customer:=$eInvoice.purchaseOrder.UUID_Customer
+		Else
+			$eST.UUID_Customer:=16*"00"
+		End if
+		This:C1470._assignTypeAndStatus($eST; $typeCode)
+		$eST.transactionDate:=$eInvoice.date
+		$eST.Amount:=$amount
+		$eST.openBalance:=$openBalance
+		$eST.memo:=""
+		$eST.moreData:=New object:C1471(\
+			"source"; "Invoice"; \
+			"legacyInvoice"; $eInvoice.invoice; \
+			"UUID_Invoice"; $eInvoice.UUID; \
+			"amountPaid"; $eInvoice.amountPaid; \
+			"slip"; $eInvoice.slip; \
+			"readyToDel"; $eInvoice.readyToDel\
+			)
+		If ($eInvoice.readyToDel)
+			$eST.moreData.closed:=True:C214
+		End if
+		$res:=$eST.save()
+		If ($res.success)
+			$count:=$count+1
+		End if
+	End for each
+	
+	For each ($eJobInvoice; ds:C1482.JobInvoice.all())
+		$seq:=$seq+1
+		$num:=Num:C11($eJobInvoice.invoiceNumber)
+		If ($num=0)
+			$num:=$seq+100000
+		End if
+		
+		$eST:=ds:C1482.SalesTransaction.new()
+		$eST.transactionNumber:=$num
+		If ($eJobInvoice.job#Null:C1517) && ($eJobInvoice.job.purchaseOrder#Null:C1517)
+			$eST.UUID_Customer:=$eJobInvoice.job.purchaseOrder.UUID_Customer
+		Else
+			$eST.UUID_Customer:=16*"00"
+		End if
+		This:C1470._assignTypeAndStatus($eST; "INV")
+		$eST.transactionDate:=$eJobInvoice.invoiceDate
+		$eST.Amount:=$eJobInvoice.total
+		$eST.openBalance:=$eJobInvoice.total
+		$eST.memo:="Job invoice "+$eJobInvoice.invoiceNumber
+		$eST.moreData:=New object:C1471(\
+			"source"; "JobInvoice"; \
+			"UUID_JobInvoice"; $eJobInvoice.UUID; \
+			"invoiceNumber"; $eJobInvoice.invoiceNumber\
+			)
+		$res:=$eST.save()
+		If ($res.success)
+			$count:=$count+1
+		End if
+	End for each
+	
+	
+// Purpose: Set required type/status UUIDs before saving an imported AR line.
+// Parameters:
+// $eST : cs.SalesTransactionEntity — target entity
+// $typeCode : Text — TransactionType.code
+// modified by 4D/PS [2026-june-08]
+Function _assignTypeAndStatus($eST : cs:C1710.SalesTransactionEntity; $typeCode : Text)
+	
+	$eType:=ds:C1482.TransactionType.query("code = :1"; $typeCode).first()
+	If ($eType#Null:C1517)
+		$eST.UUID_TransactionType:=$eType.UUID
+	End if
+	$eST.applyTypeAmountSign($typeCode)
+	$eST.refreshStatus()
+	If (cs:C1710.sfw_string.me.isAnEmptyUUID($eST.UUID_TransactionStatus))
+		$eStatus:=ds:C1482.TransactionStatus.query("code = :1"; "OPEN").first()
+		If ($eStatus#Null:C1517)
+			$eST.UUID_TransactionStatus:=$eStatus.UUID
+		End if
+	End if
 	
 	
 // Purpose: Parse legacy receivable invoice label prefix (CM / PY / blank) into a type code.

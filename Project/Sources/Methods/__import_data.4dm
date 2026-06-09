@@ -9,6 +9,7 @@ __import_data_customer
 //__import_data_employees
 __import_teams
 __import_purchaseOrders
+__import_data_salesTransaction
 //__import_data_archivedJobs
 __import_data_equipment
 __import_country
@@ -22,7 +23,6 @@ __import_data_buyingOrders
 __import_data_chartOfAccount
 __import_data_assetList
 __import_data_creditMemo
-__import_data_salesTransaction
 __import_data_deposit
 __import_data_journalEntry
 __import_data_check

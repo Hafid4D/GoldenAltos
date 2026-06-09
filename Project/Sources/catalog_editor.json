@@ -2,14 +2,14 @@
 	"tables": {
 		"FinancialReport": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 240,
-				"top": 2757,
+				"left": 4516,
+				"top": 1577,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -18,14 +18,14 @@
 		},
 		"ExpenseTransaction": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 40,
-				"top": 2757,
+				"left": 4316,
+				"top": 1577,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -34,14 +34,14 @@
 		},
 		"SupplierCredit": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 1040,
-				"top": 2510,
+				"left": 4514,
+				"top": 1314,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -50,14 +50,14 @@
 		},
 		"BillPayment": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 840,
-				"top": 2510,
+				"left": 4314,
+				"top": 1314,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -66,14 +66,14 @@
 		},
 		"Check": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 640,
-				"top": 2510,
+				"left": 4114,
+				"top": 1314,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -82,14 +82,14 @@
 		},
 		"JournalEntry": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 440,
-				"top": 2510,
+				"left": 4716,
+				"top": 1316,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -98,14 +98,14 @@
 		},
 		"DepositItem": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 240,
-				"top": 2510,
+				"left": 5126,
+				"top": 1313,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -114,14 +114,14 @@
 		},
 		"Deposit": {
 			"color": {
-				"red": 255,
-				"green": 255,
-				"blue": 255,
-				"alpha": 0
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
 			},
 			"coordinates": {
-				"left": 40,
-				"top": 2510,
+				"left": 4916,
+				"top": 1312,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -1601,14 +1601,14 @@
 		},
 		"TransactionStatus": {
 			"color": {
-				"red": 196,
-				"green": 193,
-				"blue": 186,
+				"red": 32,
+				"green": 178,
+				"blue": 170,
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 5119,
-				"top": 837,
+				"left": 4957,
+				"top": 850,
 				"width": 133,
 				"height": 168.33203125
 			},
@@ -1616,14 +1616,14 @@
 		},
 		"TransactionType": {
 			"color": {
-				"red": 196,
-				"green": 193,
-				"blue": 186,
+				"red": 32,
+				"green": 178,
+				"blue": 170,
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4581,
-				"top": 835,
+				"left": 4429,
+				"top": 923,
 				"width": 143,
 				"height": 159.33203125
 			},
@@ -1727,14 +1727,14 @@
 		},
 		"SalesTransaction": {
 			"color": {
-				"red": 196,
-				"green": 193,
-				"blue": 186,
+				"red": 32,
+				"green": 178,
+				"blue": 170,
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4840,
-				"top": 828,
+				"left": 4677,
+				"top": 839,
 				"width": 192,
 				"height": 276.33203125
 			},
@@ -1742,9 +1742,9 @@
 		},
 		"CMItem": {
 			"color": {
-				"red": 114,
-				"green": 209,
-				"blue": 221,
+				"red": 32,
+				"green": 178,
+				"blue": 170,
 				"alpha": 255
 			},
 			"coordinates": {
@@ -1757,9 +1757,9 @@
 		},
 		"CreditMemo": {
 			"color": {
-				"red": 114,
-				"green": 209,
-				"blue": 221,
+				"red": 32,
+				"green": 178,
+				"blue": 170,
 				"alpha": 255
 			},
 			"coordinates": {
@@ -1772,9 +1772,9 @@
 		},
 		"AssetType": {
 			"color": {
-				"red": 150,
-				"green": 216,
-				"blue": 175,
+				"red": 32,
+				"green": 178,
+				"blue": 170,
 				"alpha": 255
 			},
 			"coordinates": {
@@ -1787,14 +1787,14 @@
 		},
 		"Asset": {
 			"color": {
-				"red": 150,
-				"green": 216,
-				"blue": 175,
+				"red": 32,
+				"green": 178,
+				"blue": 170,
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4853,
-				"top": 328,
+				"left": 4867,
+				"top": 358,
 				"width": 203,
 				"height": 458.33203125
 			},
@@ -1802,9 +1802,9 @@
 		},
 		"CAOTypeDetail": {
 			"color": {
-				"red": 255,
-				"green": 153,
-				"blue": 63,
+				"red": 32,
+				"green": 178,
+				"blue": 170,
 				"alpha": 255
 			},
 			"coordinates": {
@@ -1817,9 +1817,9 @@
 		},
 		"CAOType": {
 			"color": {
-				"red": 255,
-				"green": 153,
-				"blue": 63,
+				"red": 32,
+				"green": 178,
+				"blue": 170,
 				"alpha": 255
 			},
 			"coordinates": {
@@ -1832,9 +1832,9 @@
 		},
 		"CAO": {
 			"color": {
-				"red": 255,
-				"green": 153,
-				"blue": 63,
+				"red": 32,
+				"green": 178,
+				"blue": 170,
 				"alpha": 255
 			},
 			"coordinates": {

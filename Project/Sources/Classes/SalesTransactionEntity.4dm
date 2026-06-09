@@ -28,8 +28,20 @@ local Function set dueDate($date : Date)
 	This:C1470.moreData.dueDate:=$date
 
 local Function beforeSave()
+	var $typeCode : Text
+	$typeCode:=""
 	If (This:C1470.transactionType#Null:C1517)
-		This:C1470.applyTypeAmountSign(This:C1470.transactionType.code)
+		$typeCode:=This:C1470.transactionType.code
+	Else
+		If (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID(This:C1470.UUID_TransactionType)))
+			$eType:=ds:C1482.TransactionType.get(This:C1470.UUID_TransactionType)
+			If ($eType#Null:C1517)
+				$typeCode:=$eType.code
+			End if
+		End if
+	End if
+	If ($typeCode#"")
+		This:C1470.applyTypeAmountSign($typeCode)
 	End if
 	This:C1470.refreshStatus()
 
