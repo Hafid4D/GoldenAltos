@@ -1,6 +1,7 @@
 //%attributes = {}
 
 // Purpose: Export current Expense Transaction list selection to Excel (skeleton mapping).
+// Note: Method name kept <= 31 chars (4D limit); was _ga_exportExpenseTransactionSelection.
 // created by 4D/PS [2026-june-09]
 
 var $mapping : Collection:=New collection:C1472()

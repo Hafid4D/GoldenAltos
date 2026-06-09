@@ -22,12 +22,15 @@ __import_data_buyingOrders
 __import_data_chartOfAccount
 __import_data_assetList
 __import_data_creditMemo
+__import_data_salesTransaction
 __import_data_deposit
 __import_data_journalEntry
 __import_data_check
 __import_data_billPayment
 __import_data_supplierCredit
-__import_data_expenseTransaction
+// Purpose: Renamed from __import_data_expenseTransaction (32 chars > 4D 31-char method limit).
+// modified by 4D/PS [2026-june-09]
+__import_data_expense
 __import_data_financialReport
 
 _ga_fillBarcodeDataField

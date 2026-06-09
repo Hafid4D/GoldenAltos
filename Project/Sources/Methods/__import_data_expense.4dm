@@ -3,6 +3,7 @@
 // Purpose: Import expense lines from legacy BUY_ITEMS export JSON.
 // Parameters: reads DataJson/expenseTransaction_export.json from the data folder.
 // Returns: nothing (truncates and reloads ExpenseTransaction).
+// Note: Method name kept <= 31 chars (4D limit); was __import_data_expenseTransaction.
 // created by 4D/PS [2026-june-09]
 
 var $records : Collection

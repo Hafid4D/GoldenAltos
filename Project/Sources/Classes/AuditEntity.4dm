@@ -120,7 +120,7 @@ local Function _initDocument()
 	
 	If (Form:C1466.situation.mode="add")
 		
-		// Purpose: New audits attach files via sfw_Document; embedded blob is not used — UUID_sfwDocument links framework rows after upload (ga_audit_replaceAttachment).
+		// Purpose: New audits attach files via sfw_Document; embedded blob is not used — UUID_sfwDocument links framework rows after upload (_ga_audit_replaceAttachment).
 		// modified by 4D/PS [2026-may-26]
 		$doc:=New object:C1471
 		

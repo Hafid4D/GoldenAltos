@@ -18,7 +18,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setLBItemsOrderBy("creditNumber")
 	$entry.setMainViewLabel("All supplier credits")
 	
-	$entry.setItemListAction("Export to Excel"; "_ga_exportSupplierCreditSelection")
+	// Purpose: Use export method name within 4D 31-character method limit.
+	// modified by 4D/PS [2026-june-09]
+	$entry.setItemListAction("Export to Excel"; "_ga_exportSuppCreditSelection")
 	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
 	$entry.setItemListAction("Search by Scanning"; "_ga_searchByBarcodeScanning")
 	

@@ -1736,9 +1736,9 @@
 				"left": 4840,
 				"top": 828,
 				"width": 192,
-				"height": 244.33203125
+				"height": 276.33203125
 			},
-			"displayable_fields_count": 9
+			"displayable_fields_count": 11
 		},
 		"CMItem": {
 			"color": {
@@ -3403,9 +3403,9 @@
 				"left": 1180.6667480469,
 				"top": 509.33331298828,
 				"width": 179.712890625,
-				"height": 337.33203125
+				"height": 379.33203125
 			},
-			"displayable_fields_count": 14
+			"displayable_fields_count": 16
 		},
 		"TermCondition": {
 			"color": {

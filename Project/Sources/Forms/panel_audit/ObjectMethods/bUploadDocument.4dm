@@ -2,7 +2,7 @@ Case of
 		
 	: (Form event code:C388=On Clicked:K2:4)
 		
-		// Purpose: Pick a file, persist bytes via sfw_Document (DocumentData), and refresh UI — keeps blobs off Audit.document (legacy blob field cleared in ga_audit_replaceAttachment).
+		// Purpose: Pick a file, persist bytes via sfw_Document (DocumentData), and refresh UI — keeps blobs off Audit.document (legacy blob field cleared in _ga_audit_replaceAttachment).
 		// modified by 4D/PS [2026-may-26]
 		var $pickLabel : Text
 		var $file : 4D:C1709.File
@@ -14,7 +14,7 @@ Case of
 		If (OK=1)
 			
 			$file:=File:C1566(Document; fk platform path:K87:2)
-			$attachResult:=ga_audit_replaceAttachment(Form:C1466.current_item; $file.platformPath)
+			$attachResult:=_ga_audit_replaceAttachment(Form:C1466.current_item; $file.platformPath)
 			
 			If ($attachResult.success=True:C214)
 				
