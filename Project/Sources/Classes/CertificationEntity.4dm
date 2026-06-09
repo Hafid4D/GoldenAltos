@@ -1,7 +1,7 @@
 Class extends Entity
 
-// Purpose: Retraining frequency helpers on Certification (Karla 2.f — stored in moreData.retrainingFrequencies).
-// Ident values: quarterly (90d), halfYear (180d), annually (365d). One time uses the oneTime field (no expiry).
+// Purpose: Certification type helpers — duration = assignment validity in days; retrainingFrequencies = reminder milestones only (Karla 2.f).
+// Ident values: quarterly (90d), halfYear (180d), annually (365d). One time clears validity duration and frequencies.
 // created by 4D/PS [2026-june-02]
 
 Function getRetrainingFrequencies()->$frequencies : Collection
@@ -38,10 +38,9 @@ Function setRetrainingFrequency($ident : Text; $enabled : Boolean)
 			This:C1470.moreData.retrainingFrequencies.remove($idx)
 		End if 
 	End if 
-	This:C1470.syncDurationFromFrequencies()
 	
 	
-// Purpose: When oneTime is set, clear retraining frequencies and duration (new-hire orientation rule).
+// Purpose: When oneTime is set, clear retraining frequencies and validity duration (no expiry window).
 // modified by 4D/PS [2026-june-02]
 Function applyOneTimeRule($oneTime : Boolean)
 	
@@ -52,24 +51,11 @@ Function applyOneTimeRule($oneTime : Boolean)
 		End if 
 		This:C1470.moreData.retrainingFrequencies:=New collection:C1472
 		This:C1470.duration:=0
-	Else 
-		This:C1470.syncDurationFromFrequencies()
 	End if 
 	
 	
-// Purpose: Mirror assignmentValidityDays into legacy duration field (import/ORDA); not a single "frequency" choice.
-// modified by 4D/PS [2026-june-02]
-Function syncDurationFromFrequencies()
-	
-	If (This:C1470.oneTime)
-		This:C1470.duration:=0
-	Else 
-		This:C1470.duration:=This:C1470.assignmentValidityDays()
-	End if 
-	
-	
-// Purpose: Day count for new CertificationAssignment records (shortest active frequency, or legacy duration).
-// Returns: Integer — 0 when oneTime or no finite period
+// Purpose: Validity length in days for new staff assignments (Certification.duration — not re-training frequencies).
+// Returns: Integer — 0 when oneTime or duration not set; legacy fallback uses shortest frequency when duration is 0
 // modified by 4D/PS [2026-june-02]
 Function expiredInDaysForNewAssignment()->$days : Integer
 	
@@ -82,6 +68,13 @@ Function expiredInDaysForNewAssignment()->$days : Integer
 		return 
 	End if 
 	
+	If (This:C1470.duration>0)
+		$days:=This:C1470.duration
+		return 
+	End if 
+	
+	// Purpose: Legacy records may have duration 0 while frequencies were previously used to fill validity.
+	// modified by 4D/PS [2026-june-02]
 	$map:=New object:C1471(\
 		"quarterly"; 90; \
 		"halfYear"; 180; \
@@ -95,10 +88,6 @@ Function expiredInDaysForNewAssignment()->$days : Integer
 			End if 
 		End if 
 	End for each 
-	
-	If ($days=0) && (This:C1470.duration>0)
-		$days:=This:C1470.duration
-	End if 
 	
 	
 // Purpose: Day offsets from certification date for each retraining reminder (Karla 2.f — multiple frequencies).
@@ -165,7 +154,7 @@ Function retrainFrequencySummaryLabel()->$label : Text
 	End if 
 	
 	
-// Purpose: Days used when assigning this cert to staff (shortest period — strictest punch-in validity).
+// Purpose: Days used when assigning this cert to staff (from Certification.duration).
 // Returns: Integer — same as expiredInDaysForNewAssignment; 0 when one time
 // modified by 4D/PS [2026-june-02]
 Function assignmentValidityDays()->$days : Integer

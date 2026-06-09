@@ -36,7 +36,19 @@ Function pup_XXX()
 	
 Function redrawAndSetVisible()
 	//Adjusts the layout and visibility of form elements based on the current page and modification state
-	OBJECT SET ENABLED:C1123(*; "entryField_rb_@"; Form:C1466.sfw.checkIsInModification())
+	var $inModification : Boolean
+	
+	$inModification:=Form:C1466.sfw.checkIsInModification()
+	OBJECT SET ENABLED:C1123(*; "entryField_rb_@"; $inModification)
+	
+	// Purpose: Main tab uses Field_* / EntryField_* / pup_* widgets — enable them explicitly in modification mode.
+	// modified by 4D/PS [2026-june-08]
+	OBJECT SET ENTERABLE:C238(*; "Field@"; $inModification)
+	OBJECT SET ENABLED:C1123(*; "Field@"; $inModification)
+	OBJECT SET ENTERABLE:C238(*; "EntryField@"; $inModification)
+	OBJECT SET ENABLED:C1123(*; "EntryField@"; $inModification)
+	OBJECT SET ENABLED:C1123(*; "pup_@"; $inModification)
+	OBJECT SET ENABLED:C1123(*; "btnForward@"; $inModification)
 	
 	This:C1470.qcarManage()
 	This:C1470.hideDatePickers()
@@ -99,9 +111,8 @@ Function btnPO()
 	
 Function qcarManage()
 	If (Form:C1466.current_item#Null:C1517)
-		If (Form:C1466.situation.mode="add")
-			Form:C1466.current_item._initCorrectiveActionReport()
-		End if 
+		// Purpose: 8D report is initialized once in QcarEntity.loadAfterCreation — do not reset on every redraw in add mode.
+		// modified by 4D/PS [2026-june-08]
 		
 		Form:C1466.subForm_qcar:=New object:C1471()
 		Form:C1466.subForm_qcar.correctiveActionReport:=Form:C1466.current_item.correctiveActionReport

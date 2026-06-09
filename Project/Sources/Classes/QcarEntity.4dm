@@ -5,7 +5,19 @@ Class extends Entity
 
 local Function loadAfterCreation()
 	// This callback is called after creating the new item but before displaying the panel.
-	This:C1470.qcarNumber:=ds:C1482.Qcar.all().max("qcarNumber")+1
+	var $maxNumber : Integer
+	
+	// Purpose: Safe first CAR number when the table is empty; initialize 8D report and externalParty storage.
+	// modified by 4D/PS [2026-june-08]
+	$maxNumber:=ds:C1482.Qcar.all().max("qcarNumber")
+	This:C1470.qcarNumber:=($maxNumber>0) ? ($maxNumber+1) : 1
+	This:C1470._initCorrectiveActionReport()
+	If (This:C1470.moreData=Null:C1517)
+		This:C1470.moreData:=New object:C1471
+	End if 
+	If (Not:C34(OB Is defined:C1231(This:C1470.moreData; "externalParty")))
+		This:C1470.moreData.externalParty:=""
+	End if 
 	
 	
 // Purpose: Computed attribute used by the listbox column / search-box on the CAR entry.
@@ -23,6 +35,27 @@ Function get categoryLabel()->$label : Text
 			$label:=""
 		End if 
 	End if 
+	
+	
+// Purpose: Expose externalParty stored in moreData for the CAR Main tab EntryField.
+// Returns: Text — external party name when CAR is external
+// modified by 4D/PS [2026-june-08]
+Function get externalParty()->$value : Text
+	
+	If (This:C1470.moreData#Null:C1517) && (OB Is defined:C1231(This:C1470.moreData; "externalParty"))
+		$value:=String:C10(This:C1470.moreData.externalParty)
+	End if 
+	
+	
+// Purpose: Persist externalParty in moreData for the CAR Main tab EntryField.
+// Parameters: $value : Text — external party name
+// modified by 4D/PS [2026-june-08]
+Function set externalParty($value : Text)
+	
+	If (This:C1470.moreData=Null:C1517)
+		This:C1470.moreData:=New object:C1471
+	End if 
+	This:C1470.moreData.externalParty:=$value
 	
 	
 local Function _initCorrectiveActionReport()

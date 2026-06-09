@@ -1,5 +1,23 @@
 //%attributes = {}
 
+
+ARRAY TEXT:C222($clients; 0)
+ARRAY LONGINT:C221($methods; 0)
+GET REGISTERED CLIENTS:C650($clients; $methods)
+
+
+#DECLARE($clientUuid : Text)
+
+var $sess : 4D:C1709.Session
+
+$sess:=Session:C1714
+
+If ($sess#Null:C1517) && ($clientUuid#"")
+	Use ($sess.storage)
+		$sess.info.ID:=$clientUuid
+	End use 
+End if 
+
 $jobs:=ds:C1482.Job.all()
 For ($i; 0; $jobs.length-1)
 	If ($jobs[$i].jobNumber=1377)

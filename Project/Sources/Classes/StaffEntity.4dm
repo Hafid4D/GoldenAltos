@@ -52,12 +52,12 @@ Function createCertification($uuid_certification : Text; $duration : Integer)->$
 	$res:=$certificationAssignment.save()
 	
 	
-// Purpose: Grant or revoke punch-in override for an expired certification assignment (qm, qs, dc only at UI).
-// Parameters:
-// $uuid_certification : Text — Certification.UUID
-// $override : Boolean — when True, punch-in allowed despite expired validity
-// Returns: Boolean — True when an assignment was updated and saved
-// modified by 4D/PS [2026-june-02]
+	// Purpose: Grant or revoke punch-in override for an expired certification assignment (qm, qs, dc only at UI).
+	// Parameters:
+	// $uuid_certification : Text — Certification.UUID
+	// $override : Boolean — when True, punch-in allowed despite expired validity
+	// Returns: Boolean — True when an assignment was updated and saved
+	// modified by 4D/PS [2026-june-02]
 Function setCertificationOverride($uuid_certification : Text; $override : Boolean)->$ok : Boolean
 	
 	var $assignment_e : cs:C1710.CertificationAssignmentEntity
@@ -143,10 +143,10 @@ Function getCertiExpiredIn($days : Integer)->$assignment_es : cs:C1710.Certifica
 	End for each 
 	
 	
-// Purpose: Retrain reminders due within $days for each certification frequency milestone (Karla 2.f).
-// Parameters: $days : Integer — lookahead window in days
-// Returns: Collection of objects — { assignment; milestoneDays; milestoneDate }
-// modified by 4D/PS [2026-june-02]
+	// Purpose: Retrain reminders due within $days for each certification frequency milestone (Karla 2.f).
+	// Parameters: $days : Integer — lookahead window in days
+	// Returns: Collection of objects — { assignment; milestoneDays; milestoneDate }
+	// modified by 4D/PS [2026-june-02]
 Function getRetrainMilestonesDueIn($days : Integer)->$due : Collection
 	
 	var $today : Date
@@ -169,7 +169,9 @@ Function getRetrainMilestonesDueIn($days : Integer)->$due : Collection
 			continue
 		End if 
 		$certDt:=$a.certificationDate
-		If ($certDt=!00-00-00!)
+		// Purpose: Run milestone math only when certification date is set (guard was inverted).
+		// modified by 4D/PS [2026-june-08]
+		If ($certDt#!00-00-00!)
 			$offsets:=$a.certification.retrainMilestoneDayOffsets()
 			For each ($offset; $offsets)
 				$milestoneDate:=Add to date:C393($certDt; 0; 0; $offset)
@@ -206,6 +208,9 @@ Function get fullName()->$fullName : Text
 	$fullName:=[This:C1470.firstName; This:C1470.lastName].join(" ")
 	
 	
+	// Purpose: Legacy single employee retrain date (v18 Retrain_Date). Kept for import, export, and print only.
+	// Certification alerts use CertificationAssignment.expiringDate and retrain milestones — not stmpRetrain.
+	// modified by 4D/PS [2026-june-02]
 local Function get retrainDate()->$date : Date
 	$date:=This:C1470.stmpRetrain=0 ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpRetrain; True:C214)
 	

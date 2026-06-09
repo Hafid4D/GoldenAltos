@@ -98,10 +98,10 @@ Function _hasQaProfile()->$allowed : Boolean
 	$allowed:=cs:C1710.sfw_userManager.me.authorizedProfiles.find(Formula:C1597((Value type:C1509($1.value)=Is text:K8:3) && ($qaProfiles.indexOf($1.value)#-1)))#Null:C1517
 	
 	
-// Purpose: True when the latest assignment has overrideCertExpired (punch-in allowed while expired).
-// Parameters: $uuid_certification : Text — Certification.UUID
-// Returns: Boolean
-// modified by 4D/PS [2026-june-02]
+	// Purpose: True when the latest assignment has overrideCertExpired (punch-in allowed while expired).
+	// Parameters: $uuid_certification : Text — Certification.UUID
+	// Returns: Boolean
+	// modified by 4D/PS [2026-june-02]
 Function _assignmentOverrideActive($uuid_certification : Text)->$active : Boolean
 	
 	var $assignment_e : cs:C1710.CertificationAssignmentEntity
@@ -121,19 +121,23 @@ Function loadCertifications()
 	Form:C1466.lb_assignments:=New collection:C1472()
 	
 	For each ($certification; ds:C1482.Certification.all().orderBy("ref asc"))
-		// Purpose: expiredIn column uses getCertiExpiredDate; override flag for QA punch-in exception (2.d).
-		// modified by 4D/PS [2026-june-02]
+		// Purpose: expiringDate for row highlight; expiredIn column shows same calendar date; override for punch-in (2.d).
+		// modified by 4D/PS [2026-june-08]
 		Form:C1466.lb_assignments.push(New object:C1471(\
 			"UUID"; $certification.UUID; \
 			"name"; $certification.name; \
 			"duration"; $certification.duration; \
 			"oneTime"; $certification.oneTime; \
+			"expiringDate"; Form:C1466.current_item.getCertiExpiredDate($certification.UUID); \
 			"expiredIn"; Form:C1466.current_item.getCertiExpiredDate($certification.UUID); \
 			"certifiedAt"; Form:C1466.current_item.getCertificationDate($certification.UUID); \
 			"certified"; Form:C1466.current_item.hasCertification($certification.UUID); \
 			"overrideExpired"; This:C1470._assignmentOverrideActive($certification.UUID)\
 			))
+		
 	End for each 
+	
+	Form:C1466.lb_assignments:=Form:C1466.lb_assignments.orderBy("certified")
 	
 	// Purpose: Show Certified At / Expired In columns only for cert-modify profiles (qs, qm, dc).
 	// modified by 4D/PS [2026-june-02]
@@ -326,7 +330,7 @@ Function pup_user()
 	
 Function bActionCertifications()
 	
-	var $refMenu : Integer
+	//var $refMenu : Integer
 	var $choose : Text
 	var $assignment_e : cs:C1710.CertificationAssignmentEntity
 	

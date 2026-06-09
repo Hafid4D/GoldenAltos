@@ -13,17 +13,19 @@ If (This:C1470.certified)
 	$date_15j:=Add to date:C393($today; 0; 0; 15)
 	$date_30j:=Add to date:C393($today; 0; 0; 30)
 	
+	// Purpose: Row colors use calendar expiringDate (lb_assignments.expiringDate), not duration days.
+	// modified by 4D/PS [2026-june-08]
 	Case of 
 		: (This:C1470.oneTime)
 			$0:="#7befb2"  //green
 			
-		: ((This:C1470.expiredIn>=$today) & (This:C1470.expiredIn<=$date_15j))
+		: ((This:C1470.expiringDate>=$today) & (This:C1470.expiringDate<=$date_15j))
 			$0:="#ff7979"  //red
 			
-		: ((This:C1470.expiredIn>=$today) & (This:C1470.expiredIn<=$date_30j))
+		: ((This:C1470.expiringDate>=$today) & (This:C1470.expiringDate<=$date_30j))
 			$0:="#f6e58d"  //yellow
 			
-		: (This:C1470.expiredIn>$date_30j)
+		: (This:C1470.expiringDate>$date_30j)
 			$0:="#7befb2"  //green
 			
 		Else 

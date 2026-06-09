@@ -30,6 +30,13 @@ Function cacheLoad()
 			Storage:C1525.cache.interval:="0"
 		End use 
 	End if 
+	// Purpose: Default year picker value when no year has been chosen yet.
+	// modified by 4D/PS [2026-june-08]
+	If (Undefined:C82(Storage:C1525.cache.selectedYear))
+		Use (Storage:C1525.cache)
+			Storage:C1525.cache.selectedYear:=0
+		End use 
+	End if 
 	
 	
 Function setDateInterval($pushUp; $title)
@@ -53,6 +60,47 @@ Function setDateInterval($pushUp; $title)
 		Storage:C1525.cache.startDate:=$form.startDate
 		Storage:C1525.cache.endDate:=$form.endDate
 		Storage:C1525.cache.interval:=$form.interval
+	End use 
+	
+	
+	// Purpose: Show year list picker (_ga_customFilter) at mouse position; store result in Storage.cache.selectedYear.
+	// Same client-side dialog pattern as setDateInterval — safe when called from a local ORDA subset function.
+	// Parameters:
+	// $title : Text — dialog title
+	// $years : Collection — year values extracted from date fields (duplicates removed, newest first)
+	// Returns: nothing — read Storage.cache.selectedYear after call (0 if cancelled)
+	// created by 4D/PS [2026-june-08]
+Function setYearPicker($title : Text; $years : Collection)
+	
+	var $form : Object
+	var $year : Variant
+	var $uniqueYears : Collection
+	
+	This:C1470.cacheLoad()
+	
+	$form:=New object:C1471
+	$form.lb_data:=New collection:C1472()
+	$uniqueYears:=$years.distinct().sort()
+	If ($uniqueYears.length>0)
+		$uniqueYears:=$uniqueYears.reverse()
+	End if 
+	For each ($year; $uniqueYears)
+		$form.lb_data.push(New object:C1471("value"; $year))
+	End for each 
+	$form.selectedPos:=0
+	$form.selected:=New object:C1471("value"; "")
+	$form.title:=$title
+	MOUSE POSITION:C468($mouseX; $mouseY; $mouseButtons)
+	CONVERT COORDINATES:C1365($mouseX; $mouseY; XY Current form:K27:5; XY Main window:K27:8)
+	$windRef:=Open window:C153($mouseX; $mouseY; $mouseX+270; $mouseY+165; Movable dialog box:K34:7; $title)
+	DIALOG:C40("_ga_customFilter"; $form)
+	CLOSE WINDOW:C154($windRef)
+	Use (Storage:C1525.cache)
+		If ($form.selected#Null:C1517) && (String:C10($form.selected.value)#"")
+			Storage:C1525.cache.selectedYear:=Num:C11($form.selected.value)
+		Else 
+			Storage:C1525.cache.selectedYear:=0
+		End if 
 	End use 
 	
 	

@@ -1588,40 +1588,29 @@ import certification Assignment
 				
 				For each ($training; $staffTrainings)
 					
+					var $certImport : Object
+					
 					$certificationAssigment_e:=ds:C1482.CertificationAssignment.new()
 					
-					// Purpose: Store validity length as day count in expiredIn (calendar lapse is computed attribute expiringDate).
-					// modified by 4D/PS [2026-may-12]
+					// Purpose: Certification date from legacy Tdate; validity days from Certification.duration (default 365), not raw training row only.
+					// modified by 4D/PS [2026-june-02]
 					If (Date:C102($training.Tdate)=!00-00-00!)
 						$certificationAssigment_e.certificationStmp:=0
 					Else 
-						$certificationAssigment_e.certificationStmp:=cs:C1710.sfw_stmp.me.build(Date:C102($training.Tdate))  //$training.Tdate))
+						$certificationAssigment_e.certificationStmp:=cs:C1710.sfw_stmp.me.build(Date:C102($training.Tdate))
 					End if 
-					$certificationAssigment_e.expiredIn:=Num:C11($training.Duration)
 					
 					$certificationAssigment_e.UUID_Staff:=$staff_e.UUID
-					$formula:=Formula:C1597(Split string:C1554(This:C1470.name; " "; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join("")=Split string:C1554($training.T_Type; " "; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join(""))
-					$certififcation:=ds:C1482.Certification.query($formula)  //$certififcation:=ds.Certification.query("name =:1"; Split string($training.T_Type; "\r"; sk trim spaces).join("\r"))
-					If ($certififcation.length>0)
-						$certificationAssigment_e.UUID_Certification:=$certififcation[0].UUID
-					Else 
-						$counter:=$counter+1
-						
-						$remaingCertification.push($training.T_Type)
-						
-						$certification_e:=ds:C1482.Certification.new()
-						
-						$certification_e.ref:=$counter
-						$certification_e.name:=$training.T_Type
-						
-						$res:=$certification_e.save()
-						
-						If (Not:C34($res.success))
-							TRACE:C157
-						End if 
-						
-					End if 
 					
+					$certImport:=ds:C1482.Certification.importForLegacyTraining($training.T_Type; Num:C11($training.Duration); $counter)
+					$counter:=$certImport.refCounter
+					
+					If ($certImport.success) && ($certImport.certification#Null:C1517)
+						$certificationAssigment_e.UUID_Certification:=$certImport.certification.UUID
+						$certificationAssigment_e.expiredIn:=$certImport.validityDays
+					Else 
+						$remaingCertification.push($training.T_Type)
+					End if 
 					
 					$res:=$certificationAssigment_e.save()
 					

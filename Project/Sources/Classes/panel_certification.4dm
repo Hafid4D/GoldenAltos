@@ -40,16 +40,16 @@ Function redrawAndSetVisible()
 	$inModification:=Form:C1466.sfw.checkIsInModification()
 	OBJECT SET ENABLED:C1123(*; "entryField_ref"; $inModification)
 	OBJECT SET ENABLED:C1123(*; "entryField_name"; $inModification)
-	// Purpose: Duration auto-updates from selected frequencies (shortest period); not typed manually.
+	// Purpose: Duration is assignment validity in days (editable); independent of re-training frequency checkboxes.
 	// modified by 4D/PS [2026-june-02]
-	OBJECT SET ENABLED:C1123(*; "entryField_duration"; False:C215)
+	OBJECT SET ENABLED:C1123(*; "entryField_duration"; $inModification && Not:C34(Form:C1466.current_item.oneTime))
 	OBJECT SET ENABLED:C1123(*; "cb_freqQuarterly"; $inModification && Not:C34(Form:C1466.current_item.oneTime))
 	OBJECT SET ENABLED:C1123(*; "cb_freqHalfYear"; $inModification && Not:C34(Form:C1466.current_item.oneTime))
 	OBJECT SET ENABLED:C1123(*; "cb_freqAnnually"; $inModification && Not:C34(Form:C1466.current_item.oneTime))
 	OBJECT SET ENABLED:C1123(*; "entryField_oneTime"; $inModification)
 	
 	
-// Purpose: Toggle one retraining frequency; duration field refreshes via syncDurationFromFrequencies.
+// Purpose: Toggle one retraining frequency (reminder milestones only; does not change validity duration).
 // Parameters: $ident : Text — quarterly | halfYear | annually
 // modified by 4D/PS [2026-june-02]
 Function cb_retrainFrequency($ident : Text)
