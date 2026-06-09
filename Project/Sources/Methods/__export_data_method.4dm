@@ -1452,5 +1452,85 @@ If (True:C214)  // export [CM_items]
 	
 End if 
 
+// Purpose: Legacy export blocks for Accounting skeleton entries (run on erp2020v18, copy JSON to GoldenAltos DataJson).
+// created by 4D/PS [2026-june-09]
+
+If (True:C214)  // export [Deposits]
+	ALL RECORDS:C47([Deposits])
+	$jsonString:=Selection to JSON:C1234([Deposits])
+	vhDoc:=Create document:C266($myFolder.platformPath+"deposits_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if
+	SHOW ON DISK:C922($myFolder.platformPath+"deposits_export.json")
+End if
+
+If (True:C214)  // export [Deposit_Items]
+	ALL RECORDS:C47([Deposit_Items])
+	$jsonString:=Selection to JSON:C1234([Deposit_Items])
+	vhDoc:=Create document:C266($myFolder.platformPath+"deposit_items_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if
+	SHOW ON DISK:C922($myFolder.platformPath+"deposit_items_export.json")
+End if
+
+If (True:C214)  // export [AccTransaction]
+	ALL RECORDS:C47([AccTransaction])
+	$jsonString:=Selection to JSON:C1234([AccTransaction])
+	vhDoc:=Create document:C266($myFolder.platformPath+"accTransaction_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if
+	SHOW ON DISK:C922($myFolder.platformPath+"accTransaction_export.json")
+End if
+
+If (True:C214)  // export [Check_Register]
+	ALL RECORDS:C47([Check_Register])
+	$jsonString:=Selection to JSON:C1234([Check_Register])
+	vhDoc:=Create document:C266($myFolder.platformPath+"check_register_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if
+	SHOW ON DISK:C922($myFolder.platformPath+"check_register_export.json")
+End if
+
+If (True:C214)  // export [PartialPays]
+	ALL RECORDS:C47([PartialPays])
+	$jsonString:=Selection to JSON:C1234([PartialPays])
+	vhDoc:=Create document:C266($myFolder.platformPath+"partialPays_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if
+	SHOW ON DISK:C922($myFolder.platformPath+"partialPays_export.json")
+End if
+
+If (True:C214)  // export [BUY_ITEMS] expense lines
+	ALL RECORDS:C47([BUY_ITEMS])
+	$jsonString:=Selection to JSON:C1234([BUY_ITEMS])
+	vhDoc:=Create document:C266($myFolder.platformPath+"expenseTransaction_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if
+	SHOW ON DISK:C922($myFolder.platformPath+"expenseTransaction_export.json")
+End if
+
+If (True:C214)  // export [RM_Reports]
+	ALL RECORDS:C47([RM_Reports])
+	$jsonString:=Selection to JSON:C1234([RM_Reports])
+	vhDoc:=Create document:C266($myFolder.platformPath+"rm_reports_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if
+	SHOW ON DISK:C922($myFolder.platformPath+"rm_reports_export.json")
+End if
+
 
 ALERT:C41("END!")

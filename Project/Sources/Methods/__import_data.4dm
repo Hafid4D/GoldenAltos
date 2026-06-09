@@ -22,6 +22,13 @@ __import_data_buyingOrders
 __import_data_chartOfAccount
 __import_data_assetList
 __import_data_creditMemo
+__import_data_deposit
+__import_data_journalEntry
+__import_data_check
+__import_data_billPayment
+__import_data_supplierCredit
+__import_data_expenseTransaction
+__import_data_financialReport
 
 _ga_fillBarcodeDataField
 
