@@ -239,7 +239,7 @@
 				},
 				"label_openBalance": {
 					"type": "text",
-					"top": 212,
+					"top": 239,
 					"left": 12,
 					"width": 120,
 					"height": 17,
@@ -248,13 +248,13 @@
 					"textAlign": "right",
 					"right": 132
 				},
-				"entryField_accountNumber": {
+				"entryField_openBalance": {
 					"type": "input",
-					"top": 212,
+					"top": 239,
 					"left": 142,
 					"width": 268,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.v",
+					"dataSource": "Form:C1466.current_item.openBalance",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -269,7 +269,7 @@
 				},
 				"label_memo": {
 					"type": "text",
-					"top": 239,
+					"top": 266,
 					"left": 12,
 					"width": 120,
 					"height": 16,
@@ -278,13 +278,13 @@
 					"textAlign": "right",
 					"right": 132
 				},
-				"entryField_name2": {
+				"entryField_memo": {
 					"type": "input",
-					"top": 239,
+					"top": 266,
 					"left": 142,
 					"width": 515,
 					"height": 64,
-					"dataSource": "Form:C1466.current_item.name",
+					"dataSource": "Form:C1466.current_item.memo",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -300,7 +300,7 @@
 				},
 				"label_amount": {
 					"type": "text",
-					"top": 186,
+					"top": 212,
 					"left": 12,
 					"width": 120,
 					"height": 17,
@@ -309,13 +309,43 @@
 					"textAlign": "right",
 					"right": 132
 				},
-				"entryField_amount": {
+				"label_dueDate": {
+					"type": "text",
+					"top": 186,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Due Date",
+					"textAlign": "right",
+					"right": 132
+				},
+				"entryField_dueDate": {
 					"type": "input",
 					"top": 186,
 					"left": 142,
 					"width": 268,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.amount",
+					"dataSource": "Form:C1466.current_item.dueDate",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none",
+					"dataSourceTypeHint": "text",
+					"textAlign": "left"
+				},
+				"entryField_amount": {
+					"type": "input",
+					"top": 212,
+					"left": 142,
+					"width": 268,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.Amount",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
@@ -339,13 +369,13 @@
 					"textAlign": "right",
 					"right": 132
 				},
-				"entryField_accountNumber2": {
+				"entryField_transactionDate": {
 					"type": "input",
 					"top": 164,
 					"left": 142,
 					"width": 268,
 					"height": 17,
-					"dataSource": "Form:C1466.current_item.accountNumber",
+					"dataSource": "Form:C1466.current_item.transactionDate",
 					"focusable": false,
 					"enterable": false,
 					"dragging": "none",
