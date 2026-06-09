@@ -1,1 +1,1 @@
-cs:C1710.panel_cmItem.me.selectInvoice()
+cs:C1710.panel_salesTransaction.me.pup_status()
