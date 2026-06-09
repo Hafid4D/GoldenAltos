@@ -19,6 +19,21 @@ If (Not:C34($myFolder.exists))
 	$myFolder.create()
 End if 
 
+$boTerms:=New collection:C1472("BuyOrderTerms_CriticalService"; "BuyOrderTerms_CriticalMaterials"; "BuyOrderTerms")
+
+
+
+For each ($terms; $boTerms)
+	
+	QUERY:C277([Formats]; [Formats]Name=$terms)
+	[Formats]ContentsWP_:=WP New:C1317([Formats]ContentsBlob_)
+	$WpArea:=$myFolder.platformPath+$terms+".wp"
+	WP EXPORT DOCUMENT:C1337([Formats]ContentsWP_; $WpArea; wk 4wp:K81:4)
+	
+End for each 
+
+
+
 
 If (True:C214)  // export po & po lines (po <-- po_lines)
 	ALL RECORDS:C47([PO_LOG])
@@ -249,12 +264,10 @@ If (True:C214)  // export jobs & lot (job <-- lots)
 			ORDER BY:C49([LotSteps]; [LotSteps]Seq_Number; >)
 			
 			While (Not:C34(End selection:C36([LotSteps])))
-				// Purpose: Export LotStep object fields (bins, parametricMeasurements, properties, moreData) so the new GoldenAltos schema receives the legacy data that used to live in scalar [LotSteps] columns (Bin1..Bin32, MechanicalRejects, IN_Par1..3, OUT_Par1..3, Pgm, Pgm_switch, Hardware1/2, Probe_card, Count1..3, Supervisor, Yield).
-				// modified by 4D/PS [2026-april-27]
 				$tools:=New object:C1471("items"; New collection:C1472([LotSteps]Tool1; [LotSteps]Tool2; [LotSteps]Tool3; [LotSteps]Tool4; [LotSteps]Tool5; [LotSteps]Tool6; [LotSteps]Tool7; [LotSteps]Tool8))
 				
 				$binValues:=New collection:C1472([LotSteps]Bin1; [LotSteps]Bin2; [LotSteps]Bin3; [LotSteps]Bin4; [LotSteps]Bin5; [LotSteps]Bin6; [LotSteps]Bin7; [LotSteps]Bin8; [LotSteps]Bin9; [LotSteps]Bin10; [LotSteps]Bin11; [LotSteps]Bin12; [LotSteps]Bin13; [LotSteps]Bin14; [LotSteps]Bin15; [LotSteps]Bin16; [LotSteps]Bin17; [LotSteps]Bin18; [LotSteps]Bin19; [LotSteps]Bin20; [LotSteps]Bin21; [LotSteps]Bin22; [LotSteps]Bin23; [LotSteps]Bin24; [LotSteps]Bin25; [LotSteps]Bin26; [LotSteps]Bin27; [LotSteps]Bin28; [LotSteps]Bin29; [LotSteps]Bin30; [LotSteps]Bin31; [LotSteps]Bin32)
-				$bins:=New object:C1471("items"; New collection:C1472(); "mechanicalRejects"; [LotSteps]MechanicalRejects; "missingOrExcluded"; [LotSteps]MissingOrExcluded)
+				$bins:=New object:C1471("items"; New collection:C1472())
 				For ($i; 0; 31)
 					$bins.items.push(New object:C1471("num"; $i+1; "definition"; ""; "type"; ""; "value"; $binValues[$i]))
 				End for 
@@ -276,10 +289,7 @@ If (True:C214)  // export jobs & lot (job <-- lots)
 					"count3"; [LotSteps]Count3\
 					)
 				
-				$moreData:=New object:C1471(\
-					"supervisor"; [LotSteps]Supervisor; \
-					"yield"; [LotSteps]Yield\
-					)
+				
 				
 				$steps.push(New object:C1471(\
 					"order"; $steps.length+1; \
@@ -303,12 +313,24 @@ If (True:C214)  // export jobs & lot (job <-- lots)
 					"actualHours"; [LotSteps]ActualHours; \
 					"plannedHours"; [LotSteps]Planned_hrs; \
 					"areas"; [LotSteps]Step_Area; \
-					"tools"; $tools; \
+					"mechanicalRejects"; [LotSteps]MechanicalRejects; \
+					"missingOrExcluded"; [LotSteps]MissingOrExcluded; \
 					"bins"; $bins; \
+					"tools"; $tools; \
 					"parametricMeasurements"; $parametricMeasurements; \
 					"properties"; $properties; \
-					"moreData"; $moreData\
+					"supervisor"; [LotSteps]Supervisor; \
+					"enableBins"; [LotSteps]EnableBins; \
+					"yield"; [LotSteps]Yield\
 					))
+				
+				//"bins"; New object("items"; New collection([LotSteps]Bin1; [LotSteps]Bin2; [LotSteps]Bin3; \
+					[LotSteps]Bin4; [LotSteps]Bin5; [LotSteps]Bin6; [LotSteps]Bin7; [LotSteps]Bin8; [LotSteps]Bin9; \
+					[LotSteps]Bin10; [LotSteps]Bin11; [LotSteps]Bin12; [LotSteps]Bin13; [LotSteps]Bin14; \
+					[LotSteps]Bin15; [LotSteps]Bin16; [LotSteps]Bin17; [LotSteps]Bin18; [LotSteps]Bin19; \
+					[LotSteps]Bin20; [LotSteps]Bin21; [LotSteps]Bin22; [LotSteps]Bin23; [LotSteps]Bin24; \
+					[LotSteps]Bin25; [LotSteps]Bin26; [LotSteps]Bin27; [LotSteps]Bin28; [LotSteps]Bin29; \
+					[LotSteps]Bin30; [LotSteps]Bin31; [LotSteps]Bin32)); 
 				
 				NEXT RECORD:C51([LotSteps])
 			End while 
@@ -470,6 +492,9 @@ If (True:C214)  //export Inventory
 			"division"; [Inventory:126]division:23; \
 			"totalCost"; [Inventory]Current_Actual_Value; \
 			"property"; [Inventory]Property; \
+			"stockGroup"; [Inventory:126]stockGroup:36; \
+			"originalQty"; [Inventory]Original_Qty; \
+			"availableQty"; [Inventory:126]availableQty:19; \
 			"pulls"; New collection:C1472()\
 			)
 		
@@ -518,6 +543,8 @@ If (True:C214)  // export stepTemplates
 	
 	$records:=New collection:C1472()
 	
+	
+	
 	While (Not:C34(End selection:C36([Template_definitions])))
 		$record:=New object:C1471(\
 			"name"; [Template_definitions]Name; \
@@ -532,7 +559,16 @@ If (True:C214)  // export stepTemplates
 			"templateNumber"; [Template_definitions]Template_num; \
 			"settings"; 0; \
 			"areas"; ""; \
-			"steps"; New collection:C1472()\
+			"steps"; New collection:C1472(); \
+			"bins"; New object:C1471("items"; New collection:C1472([Template_definitions]Bin1def; [Template_definitions]Bin2Def; [Template_definitions]Bin3Def; [Template_definitions]Bin4Def; \
+			[Template_definitions]Bin5Def; [Template_definitions]Bin6Def; [Template_definitions]Bin7Def; [Template_definitions]Bin8Def; [Template_definitions]Bin9Def; \
+			[Template_definitions]Bin10Def; [Template_definitions]BIn11Def; [Template_definitions]Bin12Def; [Template_definitions]Bin13Def; [Template_definitions]Bin14Def; \
+			[Template_definitions]Bin15Def; [Template_definitions]Bin16Def; [Template_definitions]Bin17Def; [Template_definitions]Bin18Def; [Template_definitions]Bin19Def; \
+			[Template_definitions]Bin20Def; [Template_definitions]Bin21Def; [Template_definitions]Bin22Def; [Template_definitions]Bin23Def; [Template_definitions]Bin24Def; \
+			[Template_definitions]Bin25Def; [Template_definitions]Bin26Def; [Template_definitions]Bin27Def; [Template_definitions]Bin28Def; [Template_definitions]Bin29Def; \
+			[Template_definitions]Bin30Def; [Template_definitions]Bin31Def; [Template_definitions]Bin32Def)); \
+			"miscellaneousControl"; [Template_definitions]MiscellaneousControl; \
+			"containerCode"; [Template_definitions]ContainerCode\
 			)
 		
 		QUERY:C277([StepTemplates]; [StepTemplates]Template=[Template_definitions]Template_num)
@@ -665,6 +701,8 @@ If (True:C214)  // export employees
 		End if 
 		
 		$record:=New object:C1471(\
+			"employeeCode"; [Employees]Employee_Code; \
+			"shift"; [Employees]Shift; \
 			"firstName"; [Employees]First_Name; \
 			"lastName"; [Employees]Last_Name; \
 			"retrainDate"; [Employees]Retrain_Date; \
@@ -914,7 +952,6 @@ If (True:C214)  // export archived jobs & lot (job <-- lots)
 			"acNote"; [ARCHIVES]AC_note; \
 			"inventoryCost"; [ARCHIVES]Inventory_Cost; \
 			"directCost"; [ARCHIVES]Direct_Cost; \
-			"archived"; False:C215; \
 			"archived"; True:C214; \
 			"address"; New object:C1471(\
 			"addresses"; New collection:C1472(\
@@ -930,6 +967,7 @@ If (True:C214)  // export archived jobs & lot (job <-- lots)
 			)\
 			)); \
 			"poLines"; New collection:C1472(); \
+			"jobLineItems"; New collection:C1472(); \
 			"lots"; New collection:C1472()\
 			)
 		
@@ -969,12 +1007,9 @@ If (True:C214)  // export archived jobs & lot (job <-- lots)
 			ORDER BY:C49([LotSteps]; [LotSteps]Seq_Number; >)
 			
 			While (Not:C34(End selection:C36([LotSteps])))
-				// Purpose: Export LotStep object fields (bins, parametricMeasurements, properties, moreData) for archived jobs so they match the GoldenAltos schema. Same legacy [LotSteps] columns as the active-jobs branch.
-				// modified by 4D/PS [2026-april-27]
 				$tools:=New object:C1471("items"; New collection:C1472([LotSteps]Tool1; [LotSteps]Tool2; [LotSteps]Tool3; [LotSteps]Tool4; [LotSteps]Tool5; [LotSteps]Tool6; [LotSteps]Tool7; [LotSteps]Tool8))
-				
 				$binValues:=New collection:C1472([LotSteps]Bin1; [LotSteps]Bin2; [LotSteps]Bin3; [LotSteps]Bin4; [LotSteps]Bin5; [LotSteps]Bin6; [LotSteps]Bin7; [LotSteps]Bin8; [LotSteps]Bin9; [LotSteps]Bin10; [LotSteps]Bin11; [LotSteps]Bin12; [LotSteps]Bin13; [LotSteps]Bin14; [LotSteps]Bin15; [LotSteps]Bin16; [LotSteps]Bin17; [LotSteps]Bin18; [LotSteps]Bin19; [LotSteps]Bin20; [LotSteps]Bin21; [LotSteps]Bin22; [LotSteps]Bin23; [LotSteps]Bin24; [LotSteps]Bin25; [LotSteps]Bin26; [LotSteps]Bin27; [LotSteps]Bin28; [LotSteps]Bin29; [LotSteps]Bin30; [LotSteps]Bin31; [LotSteps]Bin32)
-				$bins:=New object:C1471("items"; New collection:C1472(); "mechanicalRejects"; [LotSteps]MechanicalRejects; "missingOrExcluded"; [LotSteps]MissingOrExcluded)
+				$bins:=New object:C1471("items"; New collection:C1472())
 				For ($i; 0; 31)
 					$bins.items.push(New object:C1471("num"; $i+1; "definition"; ""; "type"; ""; "value"; $binValues[$i]))
 				End for 
@@ -996,10 +1031,7 @@ If (True:C214)  // export archived jobs & lot (job <-- lots)
 					"count3"; [LotSteps]Count3\
 					)
 				
-				$moreData:=New object:C1471(\
-					"supervisor"; [LotSteps]Supervisor; \
-					"yield"; [LotSteps]Yield\
-					)
+				
 				
 				$steps.push(New object:C1471(\
 					"order"; $steps.length+1; \
@@ -1014,6 +1046,7 @@ If (True:C214)  // export archived jobs & lot (job <-- lots)
 					"timeIn"; [LotSteps]Timein; \
 					"timeOut"; [LotSteps]TimeOut; \
 					"rejects"; [LotSteps]Rejects; \
+					"minYield"; [LotSteps]Step_Accyld; \
 					"good"; [LotSteps]; \
 					"discard"; [LotSteps]Discard; \
 					"type"; [LotSteps]Step_Type; \
@@ -1022,12 +1055,24 @@ If (True:C214)  // export archived jobs & lot (job <-- lots)
 					"actualHours"; [LotSteps]ActualHours; \
 					"plannedHours"; [LotSteps]Planned_hrs; \
 					"areas"; [LotSteps]Step_Area; \
-					"tools"; $tools; \
+					"mechanicalRejects"; [LotSteps]MechanicalRejects; \
+					"missingOrExcluded"; [LotSteps]MissingOrExcluded; \
 					"bins"; $bins; \
+					"tools"; $tools; \
 					"parametricMeasurements"; $parametricMeasurements; \
 					"properties"; $properties; \
-					"moreData"; $moreData\
+					"supervisor"; [LotSteps]Supervisor; \
+					"enableBins"; [LotSteps]EnableBins; \
+					"yield"; [LotSteps]Yield\
 					))
+				
+				//New object("items"; New collection([LotSteps]Bin1; [LotSteps]Bin2; [LotSteps]Bin3; \
+					[LotSteps]Bin4; [LotSteps]Bin5; [LotSteps]Bin6; [LotSteps]Bin7; [LotSteps]Bin8; [LotSteps]Bin9; \
+					[LotSteps]Bin10; [LotSteps]Bin11; [LotSteps]Bin12; [LotSteps]Bin13; [LotSteps]Bin14; \
+					[LotSteps]Bin15; [LotSteps]Bin16; [LotSteps]Bin17; [LotSteps]Bin18; [LotSteps]Bin19; \
+					[LotSteps]Bin20; [LotSteps]Bin21; [LotSteps]Bin22; [LotSteps]Bin23; [LotSteps]Bin24; \
+					[LotSteps]Bin25; [LotSteps]Bin26; [LotSteps]Bin27; [LotSteps]Bin28; [LotSteps]Bin29; \
+					[LotSteps]Bin30; [LotSteps]Bin31; [LotSteps]Bin32)); 
 				
 				NEXT RECORD:C51([LotSteps])
 			End while 
@@ -1087,7 +1132,23 @@ If (True:C214)  // export archived jobs & lot (job <-- lots)
 			NEXT RECORD:C51([Lotinfo])
 		End while 
 		
+		QUERY:C277([Receiver_LotsSubT]; [Receiver_LotsSubT]OneID=[ARCHIVES]UniqueID)
 		
+		While (Not:C34(End selection:C36([Receiver_LotsSubT])))
+			
+			$record.jobLineItems.push(New object:C1471(\
+				"itemNumber"; [Receiver_LotsSubT]Item_num; \
+				"description"; [Receiver_LotsSubT]Charge_Description; \
+				"quantity"; [Receiver_LotsSubT]OUR_Count; \
+				"unitPrice"; [Receiver_LotsSubT]Charge; \
+				"taxable"; [Receiver_LotsSubT]SpecialCharges; \
+				"lineTotal"; [Receiver_LotsSubT]Line_item_total; \
+				"salesTax"; [Receiver_LotsSubT]ItemSalesTax; \
+				"hourCount"; [Receiver_LotsSubT]TBhours\
+				))
+			
+			NEXT RECORD:C51([Receiver_LotsSubT])
+		End while 
 		
 		$records.push($record)
 		NEXT RECORD:C51([ARCHIVES])
@@ -1148,27 +1209,27 @@ If (True:C214)  // export Equipments Documents
 	FIRST RECORD:C50([DocServerIndex])
 	For ($i; 0; Records in selection:C76([DocServerIndex]))
 		
-		If ($i=5587) | ($i=4576) | ($i=3521) | ($i=1478) | ($i=131)
+		//If ($i=5587) | ($i=4576) | ($i=3521) | ($i=1478) | ($i=131)
+		
+		DELAY PROCESS:C323(Current process:C322; 5)
+		
+		$path:=Get external data path:C1133([DocServerIndex]DocBlob)
+		FLUSH CACHE:C297(*)
+		
+		If (String:C10([DocServerIndex]UniqueID+[DocServerIndex]PrimaryKeyValue)#"")
 			
-			DELAY PROCESS:C323(Current process:C322; 5)
+			$file:=File:C1566(Convert path system to POSIX:C1106($myFolder.platformPath+"EquipmentReports/"+String:C10([DocServerIndex]UniqueID+[DocServerIndex]PrimaryKeyValue)))
 			
-			$path:=Get external data path:C1133([DocServerIndex]DocBlob)
-			FLUSH CACHE:C297(*)
-			
-			If (String:C10([DocServerIndex]UniqueID+[DocServerIndex]PrimaryKeyValue)#"")
+			If (Not:C34($file.exists))
 				
-				$file:=File:C1566(Convert path system to POSIX:C1106($myFolder.platformPath+"EquipmentReports/"+String:C10([DocServerIndex]UniqueID+[DocServerIndex]PrimaryKeyValue)))
-				
-				If (Not:C34($file.exists))
-					
-					$file.create()
-				End if 
-				
-				BLOB TO DOCUMENT:C526($file.platformPath; [DocServerIndex]DocBlob)
-				
+				$file.create()
 			End if 
 			
+			BLOB TO DOCUMENT:C526($file.platformPath; [DocServerIndex]DocBlob)
+			
 		End if 
+		
+		//End if 
 		
 		NEXT RECORD:C51([DocServerIndex])
 		
@@ -1190,8 +1251,8 @@ End if
 
 If (True:C214)  // export PartData
 	
-	ALL RECORDS:C47([PartData:58])
-	$jsonString:=Selection to JSON:C1234([PartData:58])
+	ALL RECORDS:C47([Deposit_Items])
+	$jsonString:=Selection to JSON:C1234([Deposit_Items])
 	
 	vhDoc:=Create document:C266($myFolder.platformPath+"partData_export.json")
 	If (OK=1)
@@ -1452,5 +1513,138 @@ If (True:C214)  // export [CM_items]
 	
 End if 
 
+
+If (True:C214)  // export [BUY_ORDERS]
+	
+	ALL RECORDS:C47([BUY_ORDERS])
+	$jsonString:=Selection to JSON:C1234([BUY_ORDERS])
+	
+	vhDoc:=Create document:C266($myFolder.platformPath+"buy_orders_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	
+	SHOW ON DISK:C922($myFolder.platformPath+"buy_orders_export.json")
+	
+End if 
+
+
+If (True:C214)  // export [BUY_ITEMS]
+	
+	ALL RECORDS:C47([BUY_ITEMS])
+	$jsonString:=Selection to JSON:C1234([BUY_ITEMS])
+	
+	vhDoc:=Create document:C266($myFolder.platformPath+"buy_items_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	
+	SHOW ON DISK:C922($myFolder.platformPath+"buy_orders_export.json")
+	
+End if 
+
+
+If (True:C214)  // export [StepTemplates]
+	
+	ALL RECORDS:C47([StepTemplates])
+	$jsonString:=Selection to JSON:C1234([StepTemplates])
+	
+	vhDoc:=Create document:C266($myFolder.platformPath+"stepTemplate_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	
+	SHOW ON DISK:C922($myFolder.platformPath+"stepTemplate_export.json")
+	
+End if 
+
+
+If (True:C214)  // export [Employees_Training]
+	
+	ALL RECORDS:C47([Employees_Training])
+	$jsonString:=Selection to JSON:C1234([Employees_Training])
+	
+	vhDoc:=Create document:C266($myFolder.platformPath+"employeeTraining_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	
+	SHOW ON DISK:C922($myFolder.platformPath+"employeeTraining_export.json")
+	
+End if 
+
+
+// Purpose: Legacy export blocks for Accounting skeleton entries (run on erp2020v18, copy JSON to GoldenAltos DataJson).
+// created by 4D/PS [2026-june-09]
+
+If (True:C214)  // export [Deposits]
+	ALL RECORDS:C47([Deposits])
+	$jsonString:=Selection to JSON:C1234([Deposits])
+	vhDoc:=Create document:C266($myFolder.platformPath+"deposits_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	SHOW ON DISK:C922($myFolder.platformPath+"deposits_export.json")
+End if 
+
+If (True:C214)  // export [Deposit_Items]
+	ALL RECORDS:C47([Deposit_Items])
+	$jsonString:=Selection to JSON:C1234([Deposit_Items])
+	vhDoc:=Create document:C266($myFolder.platformPath+"deposit_items_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	SHOW ON DISK:C922($myFolder.platformPath+"deposit_items_export.json")
+End if 
+
+If (True:C214)  // export [AccTransaction]
+	ALL RECORDS:C47([AccTransaction])
+	$jsonString:=Selection to JSON:C1234([AccTransaction])
+	vhDoc:=Create document:C266($myFolder.platformPath+"accTransaction_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	SHOW ON DISK:C922($myFolder.platformPath+"accTransaction_export.json")
+End if 
+
+If (True:C214)  // export [Check_Register]
+	ALL RECORDS:C47([Check_Register])
+	$jsonString:=Selection to JSON:C1234([Check_Register])
+	vhDoc:=Create document:C266($myFolder.platformPath+"check_register_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	SHOW ON DISK:C922($myFolder.platformPath+"check_register_export.json")
+End if 
+
+If (True:C214)  // export [PartialPays]
+	ALL RECORDS:C47([PartialPays])
+	$jsonString:=Selection to JSON:C1234([PartialPays])
+	vhDoc:=Create document:C266($myFolder.platformPath+"partialPays_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	SHOW ON DISK:C922($myFolder.platformPath+"partialPays_export.json")
+End if 
+
+If (True:C214)  // export [RM_Reports]
+	ALL RECORDS:C47([RM_Reports])
+	$jsonString:=Selection to JSON:C1234([RM_Reports])
+	vhDoc:=Create document:C266($myFolder.platformPath+"rm_reports_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	SHOW ON DISK:C922($myFolder.platformPath+"rm_reports_export.json")
+End if 
 
 ALERT:C41("END!")

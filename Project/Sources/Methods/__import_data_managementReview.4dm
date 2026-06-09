@@ -63,7 +63,7 @@ If ($managementReview_log.exists)
 					$doc.approvalDate:=!00-00-00!
 					$doc.approvedBy:=""
 					$doc.isApproved:=False:C215
-					// Purpose: Binary payload goes through sfw_Document + ga_managementReview_replaceAttachment (same as UI upload), not document.blob.
+					// Purpose: Binary payload goes through sfw_Document + _ga_managementReview_replaceAtt (same as UI upload), not document.blob.
 					// modified by 4D/PS [2026-may-08]
 					$doc.UUID_sfwDocument:=""
 					$doc.extension:=""
@@ -79,7 +79,7 @@ If ($managementReview_log.exists)
 						
 						If ($report.exists)
 							
-							$attachResult:=ga_managementReview_replaceAtta($eManagementReview; $report.platformPath)
+							$attachResult:=_ga_managementReview_replaceAtt($eManagementReview; $report.platformPath)
 							
 							If ($attachResult.success=False:C215)
 								TRACE:C157

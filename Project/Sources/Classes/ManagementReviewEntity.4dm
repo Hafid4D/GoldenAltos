@@ -93,7 +93,7 @@ local Function _initDocument()
 	
 	If (Form:C1466.situation.mode="add")
 		
-		// Purpose: New reviews attach files via sfw_Document; embedded blob is not used — UUID_sfwDocument links framework rows after upload (ga_managementReview_replaceAttachment).
+		// Purpose: New reviews attach files via sfw_Document; embedded blob is not used — UUID_sfwDocument links framework rows after upload (_ga_managementReview_replaceAttchment).
 		// modified by 4D/PS [2026-may-08]
 		$doc:=New object:C1471
 		
