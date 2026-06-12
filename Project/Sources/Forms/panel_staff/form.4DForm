@@ -882,7 +882,7 @@
 					"height": 0,
 					"stroke": "#808080"
 				},
-				"Button": {
+				"bRenewCertification": {
 					"type": "button",
 					"text": "Re-New",
 					"top": 171,
@@ -891,7 +891,8 @@
 					"height": 22,
 					"events": [
 						"onClick"
-					]
+					],
+					"method": "ObjectMethods/bRenewCertification.4dm"
 				},
 				"bActionCertifications": {
 					"type": "button",
