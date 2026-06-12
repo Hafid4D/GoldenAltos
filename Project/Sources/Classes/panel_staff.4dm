@@ -122,44 +122,53 @@ Function loadCertifications()
 	var $uuidCert : Text
 	var $certDt : Date
 	var $expDt : Date
-	var $entry : Object
-	var $existing : Object
+	var $daysUntilExpiry : Integer
+	var $selectedUuid : Text
+	var $row : Object
 	
 	GOTO OBJECT:C206(*; "lb_assignments")
-	Form:C1466.selectedCertification:=Form:C1466.selectedCertification
+	$selectedUuid:=""
+	If (Form:C1466.selectedCertification#Null:C1517)
+		$selectedUuid:=Form:C1466.selectedCertification.UUID
+	End if 
 	Form:C1466.lb_assignments:=New collection:C1472()
 	
-	// Purpose: One query per staff; avoids N ORDA calls and ensures dates match CertificationAssignment rows.
+	// Purpose: Keep latest CertificationAssignment entity per cert UUID (do not store Date values inside a plain Object).
 	// modified by 4D/PS [2026-june-09]
 	$assignmentByCert:=New object:C1471()
 	For each ($assignment_e; ds:C1482.CertificationAssignment.query("UUID_Staff = :1"; Form:C1466.current_item.UUID))
 		$uuidCert:=$assignment_e.UUID_Certification
-		$existing:=$assignmentByCert[$uuidCert]
-		If ($existing=Null:C1517) || ($assignment_e.certificationStmp>Num:C11($existing.stmp))
-			$assignmentByCert[$uuidCert]:=New object:C1471(\
-				"stmp"; $assignment_e.certificationStmp; \
-				"certDt"; $assignment_e.certificationDate; \
-				"expDt"; $assignment_e.expiringDate\
-				)
+		If ($assignmentByCert[$uuidCert]=Null:C1517)
+			$assignmentByCert[$uuidCert]:=$assignment_e
+		Else 
+			If ($assignment_e.certificationStmp>Num:C11($assignmentByCert[$uuidCert].certificationStmp))
+				$assignmentByCert[$uuidCert]:=$assignment_e
+			End if 
 		End if 
 	End for each 
 	
 	For each ($certification; ds:C1482.Certification.all().orderBy("ref asc"))
+		$assignment_e:=$assignmentByCert[$certification.UUID]
 		$certDt:=!00-00-00!
 		$expDt:=!00-00-00!
-		$entry:=$assignmentByCert[$certification.UUID]
-		If ($entry#Null:C1517)
-			$certDt:=$entry.certDt
-			$expDt:=$entry.expDt
+		$daysUntilExpiry:=99999
+		If ($assignment_e#Null:C1517)
+			$certDt:=$assignment_e.certificationDate
+			$expDt:=This:C1470._staffCertExpiringDate($certDt; $certification)
+			// Purpose: Precompute days until lapse for listbox rowFillSource (Date props in collection rows are unreliable there).
+			// modified by 4D/PS [2026-june-08]
+			If (Not:C34($certification.oneTime)) && ($expDt#!00-00-00!)
+				$daysUntilExpiry:=$expDt-Current date:C33()
+			End if 
 		End if 
-		// Purpose: Listbox collection date columns are unreliable — use formatted text for display.
-		// modified by 4D/PS [2026-june-09]
 		Form:C1466.lb_assignments.push(New object:C1471(\
 			"UUID"; $certification.UUID; \
 			"name"; $certification.name; \
 			"duration"; $certification.duration; \
 			"oneTime"; $certification.oneTime; \
+			"hasAssignment"; ($assignment_e#Null:C1517); \
 			"expiringDate"; $expDt; \
+			"daysUntilExpiry"; $daysUntilExpiry; \
 			"certifiedAt"; This:C1470._formatStaffCertDate($certDt); \
 			"expiredIn"; This:C1470._formatStaffCertDate($expDt); \
 			"certified"; Form:C1466.current_item.hasCertification($certification.UUID); \
@@ -168,10 +177,24 @@ Function loadCertifications()
 		
 	End for each 
 	
-	Form:C1466.lb_assignments:=Form:C1466.lb_assignments.orderBy("certified")
+	Form:C1466.lb_assignments:=Form:C1466.lb_assignments.orderBy("certified desc")
+	
+	// Purpose: Re-bind selectedCertification to the new collection so history list and columns stay in sync after reload/save.
+	// modified by 4D/PS [2026-june-09]
+	Form:C1466.selectedCertification:=Null:C1517
+	If ($selectedUuid#"")
+		For each ($row; Form:C1466.lb_assignments)
+			If ($row.UUID=$selectedUuid)
+				Form:C1466.selectedCertification:=$row
+				break
+			End if 
+		End for each 
+	End if 
 	
 	This:C1470._configureCertAssignmentColumns()
 	This:C1470.loadCertificationHistory()
+	
+	REDISPLAY:C113
 	
 	
 Function _formatStaffCertDate($date : Date) -> $text : Text
@@ -183,6 +206,30 @@ Function _formatStaffCertDate($date : Date) -> $text : Text
 	$text:=""
 	If ($date#Null:C1517) && ($date#!00-00-00!)
 		$text:=String:C10($date; System date short:K1:1)
+	End if 
+	
+	
+Function _staffCertExpiringDate($certificationDate : Date; $certification_e : cs:C1710.CertificationEntity) -> $expiringDate : Date
+	// Purpose: Expired In = Certified At + Certification.duration (catalog), not a stale assignment snapshot.
+	// Parameters:
+	// $certificationDate : Date — assignment certification date
+	// $certification_e : cs.CertificationEntity — catalog row (duration / oneTime)
+	// Returns: Date — lapse date, or !00-00-00! when one-time or no duration
+	// created by 4D/PS [2026-june-09]
+	
+	var $validityDays : Integer
+	
+	$expiringDate:=!00-00-00!
+	If ($certificationDate=Null:C1517) || ($certificationDate=!00-00-00!)
+		return $expiringDate
+	End if 
+	If ($certification_e=Null:C1517) || ($certification_e.oneTime)
+		return $expiringDate
+	End if 
+	
+	$validityDays:=$certification_e.expiredInDaysForNewAssignment()
+	If ($validityDays>0)
+		$expiringDate:=Add to date:C393($certificationDate; 0; 0; $validityDays)
 	End if 
 	
 	
@@ -203,6 +250,7 @@ Function loadCertificationHistory()
 	// modified by 4D/PS [2026-june-09]
 	
 	var $assignment_e : cs:C1710.CertificationAssignmentEntity
+	var $cert_e : cs:C1710.CertificationEntity
 	
 	Form:C1466.certifications:=New collection:C1472()
 	
@@ -210,14 +258,18 @@ Function loadCertificationHistory()
 		return 
 	End if 
 	
+	$cert_e:=ds:C1482.Certification.get(Form:C1466.selectedCertification.UUID)
+	
 	For each ($assignment_e; ds:C1482.CertificationAssignment\
 		.query("UUID_Staff = :1 AND UUID_Certification = :2"; Form:C1466.current_item.UUID; Form:C1466.selectedCertification.UUID)\
 		.orderBy("certificationStmp desc"))
 		Form:C1466.certifications.push(New object:C1471(\
 			"certifiedAt"; This:C1470._formatStaffCertDate($assignment_e.certificationDate); \
-			"expiredIn"; This:C1470._formatStaffCertDate($assignment_e.expiringDate)\
+			"expiredIn"; This:C1470._formatStaffCertDate(This:C1470._staffCertExpiringDate($assignment_e.certificationDate; $cert_e))\
 			))
 	End for each 
+	
+	Form:C1466.certifications:=Form:C1466.certifications
 	
 	OBJECT SET HORIZONTAL ALIGNMENT:C706(*; "List Box.Column2"; Align center:K42:3)
 	OBJECT SET HORIZONTAL ALIGNMENT:C706(*; "List Box.Column3"; Align center:K42:3)
