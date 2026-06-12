@@ -94,22 +94,24 @@ If (True:C214)
 			$certification_e:=ds:C1482.Certification.new()
 			$certification_e.ref:=$certCatalogRecord.ref
 			$certification_e.name:=$certCatalogRecord.name
-			// Purpose: Default assignment validity to 365 days when export has no duration (legacy catalog rows).
-			// modified by 4D/PS [2026-june-08]
-			If ($certCatalogRecord.duration#Null:C1517)
-				$certification_e.duration:=Num:C11($certCatalogRecord.duration)
-			Else 
-				$certification_e.duration:=365
-			End if 
 			If ($certCatalogRecord.oneTime#Null:C1517)
 				$certification_e.oneTime:=Bool:C1537($certCatalogRecord.oneTime)
 			End if 
+			// Purpose: Store 365 when export duration is 0 or missing (legacy catalog); one-time stays 0.
+			// modified by 4D/PS [2026-june-08]
+			$certification_e.duration:=_ga_certificationImportDuration(\
+				($certCatalogRecord.duration#Null:C1517) ? Num:C11($certCatalogRecord.duration) : 0; \
+				$certification_e.oneTime)
 			$res:=$certification_e.save()
 			If (Not:C34($res.success))
 				TRACE:C157
 			End if 
 		End for each 
 	End if 
+	
+	// Purpose: Correct catalog rows left with duration 0 from earlier imports (non one-time only).
+	// modified by 4D/PS [2026-june-08]
+	_ga_certFixZeroDuration()
 	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/step_template_export.json")
 	

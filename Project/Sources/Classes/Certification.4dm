@@ -52,7 +52,7 @@ Function importForLegacyTraining($trainingType : Text; $legacyDuration : Integer
 		"refCounter"; $refCounter; \
 		"validityDays"; 0)
 	
-	$validityDays:=$legacyDuration>0 ? $legacyDuration : 365
+	$validityDays:=_ga_certificationImportDuration($legacyDuration; False:C215)
 	
 	$formula:=Formula:C1597(\
 		Split string:C1554(This:C1470.name; " "; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join("")=\
@@ -63,7 +63,7 @@ Function importForLegacyTraining($trainingType : Text; $legacyDuration : Integer
 	If ($certification_es.length>0)
 		$certification_e:=$certification_es[0]
 		If ($certification_e.duration<=0) && (Not:C34($certification_e.oneTime))
-			$certification_e.duration:=$validityDays
+			$certification_e.duration:=_ga_certificationImportDuration($legacyDuration; $certification_e.oneTime)
 			$res:=$certification_e.save()
 			If (Not:C34($res.success))
 				return $result
@@ -74,7 +74,7 @@ Function importForLegacyTraining($trainingType : Text; $legacyDuration : Integer
 		$certification_e:=This:C1470.new()
 		$certification_e.ref:=$refCounter
 		$certification_e.name:=$trainingType
-		$certification_e.duration:=$validityDays
+		$certification_e.duration:=_ga_certificationImportDuration($legacyDuration; False:C215)
 		$res:=$certification_e.save()
 		If (Not:C34($res.success))
 			$result.refCounter:=$refCounter
