@@ -63,6 +63,12 @@ Function createCertification($uuid_certification : Text; $duration : Integer)->$
 	
 	// Purpose: Return save success to callers (createCertification had no return before).
 	// modified by 4D/PS [2026-june-09]
+	If ($res.success)
+		// Purpose: Sync Staff.stmpRetrain after new assignment (retrain milestones, not validity expiry).
+		// modified by 4D/PS [2026-june-12]
+		This:C1470.recomputeRetrainDate()
+	End if 
+	
 	return $res.success
 	
 	
@@ -95,15 +101,29 @@ Function setCertificationOverride($uuid_certification : Text; $override : Boolea
 	
 	
 Function deleteCertification($uuid_certification : Text)->$certified : Boolean
-	$certificationAssignment_es:=ds:C1482.CertificationAssignment.query("UUID_Staff = :1 AND UUID_Certification = :2"; This:C1470.UUID; $uuid_certification)
 	
-	If ($certificationAssignment_es.length>0)
-		$res:=$certificationAssignment_es[0].drop()
+	var $assignment_e : cs:C1710.CertificationAssignmentEntity
+	var $res : Object
+	
+	// Purpose: Remove the latest assignment for this certification type (Re-New history — uncheck drops most recent row only).
+	// modified by 4D/PS [2026-june-12]
+	$certified:=False:C215
+	$assignment_e:=ds:C1482.CertificationAssignment\
+		.query("UUID_Staff = :1 AND UUID_Certification = :2"; This:C1470.UUID; $uuid_certification)\
+		.orderBy("certificationStmp desc").first()
+	
+	If ($assignment_e#Null:C1517)
+		$res:=$assignment_e.drop()
 		
 		// Purpose: Return True when drop succeeded — aligned with createCertification ($certified := $res.success).
 		// Returns: Boolean — True if the assignment was removed successfully
 		// modified by 4D/PS [2026-may-21]
 		$certified:=$res.success
+		If ($certified)
+			// Purpose: Refresh Staff.stmpRetrain when an assignment is removed.
+			// modified by 4D/PS [2026-june-12]
+			This:C1470.recomputeRetrainDate()
+		End if 
 	End if 
 	
 Function getCertificationDate($uuid_certification : Text)->$certifiedAt : Date
@@ -198,6 +218,90 @@ Function getRetrainMilestonesDueIn($days : Integer)->$due : Collection
 	End for each 
 	
 	
+	// Purpose: Recompute Staff.stmpRetrain (retrainDate) from re-training milestone frequencies on the catalog —
+	// earliest upcoming milestone across latest assignment per certification type (not expiringDate / validity).
+	// Legacy fallback when no future milestone: most recent certification date + 365 days (v18 Retrain_Date).
+	// Returns: Boolean — True when save succeeded or stmpRetrain unchanged
+	// modified by 4D/PS [2026-june-12]
+Function recomputeRetrainDate()->$ok : Boolean
+	
+	var $today : Date
+	var $next : Date
+	var $a : cs:C1710.CertificationAssignmentEntity
+	var $cert_e : cs:C1710.CertificationEntity
+	var $certDt : Date
+	var $offsets : Collection
+	var $offset : Integer
+	var $milestoneDate : Date
+	var $seenCert : Object
+	var $latestCertDt : Date
+	var $fallback : Date
+	var $newStmp : Integer
+	var $res : Object
+	
+	$ok:=True:C214
+	$today:=Current date:C33()
+	$next:=!00-00-00!
+	$latestCertDt:=!00-00-00!
+	$seenCert:=New object:C1471
+	
+	For each ($a; ds:C1482.CertificationAssignment\
+		.query("UUID_Staff = :1"; This:C1470.UUID)\
+		.orderBy("certificationStmp desc"))
+		
+		If ($seenCert[$a.UUID_Certification]#Null:C1517)
+			continue
+		End if 
+		$seenCert[$a.UUID_Certification]:=True:C214
+		
+		$cert_e:=$a.certification
+		If ($cert_e=Null:C1517) && ($a.UUID_Certification#"")
+			$cert_e:=ds:C1482.Certification.get($a.UUID_Certification)
+		End if 
+		If ($cert_e#Null:C1517) && ($cert_e.oneTime)
+			continue
+		End if 
+		If ($a.certificationStmp=0)
+			continue
+		End if 
+		$certDt:=$a.certificationDate
+		If ($certDt=!00-00-00!)
+			continue
+		End if 
+		
+		If ($latestCertDt=!00-00-00!) || ($certDt>$latestCertDt)
+			$latestCertDt:=$certDt
+		End if 
+		
+		If ($cert_e#Null:C1517)
+			$offsets:=$cert_e.retrainMilestoneDayOffsets()
+		Else 
+			$offsets:=New collection:C1472(365)
+		End if 
+		
+		For each ($offset; $offsets)
+			$milestoneDate:=Add to date:C393($certDt; 0; 0; $offset)
+			If ($milestoneDate>=$today)
+				If ($next=!00-00-00!) || ($milestoneDate<$next)
+					$next:=$milestoneDate
+				End if 
+			End if 
+		End for each 
+	End for each 
+	
+	If ($next=!00-00-00!) && ($latestCertDt#!00-00-00!)
+		$fallback:=Add to date:C393($latestCertDt; 0; 0; 365)
+		$next:=$fallback
+	End if 
+	
+	$newStmp:=$next=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($next)
+	If (This:C1470.stmpRetrain#$newStmp)
+		This:C1470.stmpRetrain:=$newStmp
+		$res:=This:C1470.save()
+		$ok:=$res.success
+	End if 
+	
+	
 local Function get email()->$email : Text
 	If (This:C1470.contactDetails#Null:C1517) && (This:C1470.contactDetails.communications#Null:C1517)
 		$communication:=This:C1470.contactDetails.communications.query("type = :1"; "mail").first()
@@ -220,9 +324,9 @@ Function get fullName()->$fullName : Text
 	$fullName:=[This:C1470.firstName; This:C1470.lastName].join(" ")
 	
 	
-	// Purpose: Legacy single employee retrain date (v18 Retrain_Date). Kept for import, export, and print only.
-	// Certification alerts use CertificationAssignment.expiringDate and retrain milestones — not stmpRetrain.
-	// modified by 4D/PS [2026-june-02]
+	// Purpose: Employee retrain due date (v18 Retrain_Date). Auto-synced via recomputeRetrainDate() on cert assign/remove/Re-New.
+	// Uses catalog re-training milestone offsets (90/180/365 from certification date), not assignment expiringDate.
+	// modified by 4D/PS [2026-june-12]
 local Function get retrainDate()->$date : Date
 	$date:=This:C1470.stmpRetrain=0 ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpRetrain; True:C214)
 	

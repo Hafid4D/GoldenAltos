@@ -1465,6 +1465,12 @@ TRACE
 End if 
 End for each 
 
+// Purpose: Sync Staff.stmpRetrain from re-training milestones after legacy assignment import.
+// modified by 4D/PS [2026-june-12]
+If (ds.CertificationAssignment.query("UUID_Staff = :1"; $staff_e.UUID).length>0)
+$staff_e.recomputeRetrainDate()
+End if 
+
 For each ($team; $staff.teams)
 $teams_es:=ds.Team.query("name = :1"; $team)
 
@@ -1682,6 +1688,12 @@ import certification Assignment
 						TRACE:C157
 					End if 
 				End for each 
+				
+				// Purpose: Sync Staff.stmpRetrain from re-training milestones after legacy assignment import.
+				// modified by 4D/PS [2026-june-12]
+				If (ds:C1482.CertificationAssignment.query("UUID_Staff = :1"; $staff_e.UUID).length>0)
+					$staff_e.recomputeRetrainDate()
+				End if 
 				
 				For each ($team; $staff.teams)
 					$teams_es:=ds:C1482.Team.query("name = :1"; $team)

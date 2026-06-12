@@ -122,16 +122,15 @@ Function retrainingStaff()->$staffs : cs:C1710.StaffSelection
 	End for each 
 	
 	
-// Purpose: Notify qs, qm, dc, and pm for validity expiry and retrain milestones due within $days.
+// Purpose: Notify the linked sfw_User for each staff member when retrain milestones or validity expiry fall within $days.
 // Uses moreData.retrainNotifiedMilestones (d90, d365, …) and validityExpiryNotified for calendar expiry.
 // Parameters: $days : Integer — lookahead window in days (typically 30)
 // Returns: Collection — one True entry per newly sent notification (drives UI refresh in callers)
-// modified by 4D/PS [2026-june-08]
+// modified by 4D/PS [2026-june-12]
 Function checkRetraining($days : Integer)->$createdNotificationMarkers : Collection
 	
 	var $staff_e : cs:C1710.StaffEntity
 	var $assignment_e : cs:C1710.CertificationAssignmentEntity
-	var $profiles : Collection
 	var $users : Collection
 	var $context : Object
 	var $dueMilestones : Collection
@@ -144,11 +143,6 @@ Function checkRetraining($days : Integer)->$createdNotificationMarkers : Collect
 	var $today : Date
 	var $limit : Date
 	var $res : Object
-	
-	// Purpose: Notify Quality (qs, qm, dc), Production Supervisor (ps), and Production Manager (pm) per Karla request.
-	// modified by 4D/PS [2026-june-08]
-	$profiles:=New collection:C1472("qs"; "qm"; "dc"; "ps"; "pm")
-	$users:=ds:C1482.Staff.query("user.userInscriptions.userProfile.ident in :1"; $profiles).extract("user.UUID").distinct()
 	
 	$createdNotificationMarkers:=New collection:C1472()
 	$today:=Current date:C33()
@@ -170,20 +164,25 @@ Function checkRetraining($days : Integer)->$createdNotificationMarkers : Collect
 			End if 
 			
 			If (Not:C34(Bool:C1537($assignment_e.moreData.retrainNotifiedMilestones[$milestoneKey])))
-				$context:=New object:C1471(\
-					"target"; $staff_e.UUID; \
-					"targetDataclass"; "Staff"; \
-					"fullName"; $staff_e.fullName; \
-					"certName"; $assignment_e.certification.name; \
-					"expiringDate"; String:C10($due.milestoneDate; System date short:K17:1); \
-					"milestoneDays"; $due.milestoneDays; \
-					"days"; $days\
-					)
-				cs:C1710.sfw_notificationManager.me.notify("EmployeeRetrainRequired"; $users; $context)
-				$assignment_e.moreData.retrainNotifiedMilestones[$milestoneKey]:=True:C214
-				$res:=$assignment_e.save()
-				If ($res.success)
-					$createdNotificationMarkers.push(True:C214)
+				// Purpose: Notify only the staff member's linked user account (not qm/qs).
+				// modified by 4D/PS [2026-june-12]
+				If ($staff_e.user#Null:C1517)
+					$users:=New collection:C1472($staff_e.user.UUID)
+					$context:=New object:C1471(\
+						"target"; $staff_e.UUID; \
+						"targetDataclass"; "Staff"; \
+						"fullName"; $staff_e.fullName; \
+						"certName"; $assignment_e.certification.name; \
+						"expiringDate"; String:C10($due.milestoneDate; System date short:K17:1); \
+						"milestoneDays"; $due.milestoneDays; \
+						"days"; $days\
+						)
+					cs:C1710.sfw_notificationManager.me.notify("EmployeeRetrainRequired"; $users; $context)
+					$assignment_e.moreData.retrainNotifiedMilestones[$milestoneKey]:=True:C214
+					$res:=$assignment_e.save()
+					If ($res.success)
+						$createdNotificationMarkers.push(True:C214)
+					End if 
 				End if 
 			End if 
 		End for each 
@@ -195,19 +194,24 @@ Function checkRetraining($days : Integer)->$createdNotificationMarkers : Collect
 				$assignment_e.moreData:=New object:C1471
 			End if 
 			If (Not:C34(Bool:C1537($assignment_e.moreData.validityExpiryNotified)))
-				$context:=New object:C1471(\
-					"target"; $staff_e.UUID; \
-					"targetDataclass"; "Staff"; \
-					"fullName"; $staff_e.fullName; \
-					"certName"; $assignment_e.certification.name; \
-					"expiringDate"; String:C10($assignment_e.expiringDate; System date short:K17:1); \
-					"days"; $days\
-					)
-				cs:C1710.sfw_notificationManager.me.notify("EmployeeRetrainRequired"; $users; $context)
-				$assignment_e.moreData.validityExpiryNotified:=True:C214
-				$res:=$assignment_e.save()
-				If ($res.success)
-					$createdNotificationMarkers.push(True:C214)
+				// Purpose: Notify only the staff member's linked user account (not qm/qs).
+				// modified by 4D/PS [2026-june-12]
+				If ($staff_e.user#Null:C1517)
+					$users:=New collection:C1472($staff_e.user.UUID)
+					$context:=New object:C1471(\
+						"target"; $staff_e.UUID; \
+						"targetDataclass"; "Staff"; \
+						"fullName"; $staff_e.fullName; \
+						"certName"; $assignment_e.certification.name; \
+						"expiringDate"; String:C10($assignment_e.expiringDate; System date short:K17:1); \
+						"days"; $days\
+						)
+					cs:C1710.sfw_notificationManager.me.notify("EmployeeRetrainRequired"; $users; $context)
+					$assignment_e.moreData.validityExpiryNotified:=True:C214
+					$res:=$assignment_e.save()
+					If ($res.success)
+						$createdNotificationMarkers.push(True:C214)
+					End if 
 				End if 
 			End if 
 		End for each 

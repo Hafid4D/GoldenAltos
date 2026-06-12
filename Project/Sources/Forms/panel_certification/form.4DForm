@@ -199,7 +199,7 @@
 					"width": 130,
 					"height": 18,
 					"events": [
-						"onClick"
+						"onDataChange"
 					],
 					"dataSourceTypeHint": "boolean",
 					"sizingX": "grow",
@@ -222,11 +222,11 @@
 					"left": 13,
 					"width": 200,
 					"height": 18,
-					"dataSource": "Form:C1466.freqQuarterly",
+					"dataSource": "Form:C1466.current_item.retrainQuarterly",
 					"dataSourceTypeHint": "boolean",
 					"method": "ObjectMethods/cb_freqQuarterly.4dm",
 					"events": [
-						"onClick"
+						"onDataChange"
 					]
 				},
 				"cb_freqHalfYear": {
@@ -236,11 +236,11 @@
 					"left": 13,
 					"width": 200,
 					"height": 18,
-					"dataSource": "Form:C1466.freqHalfYear",
+					"dataSource": "Form:C1466.current_item.retrainHalfYear",
 					"dataSourceTypeHint": "boolean",
 					"method": "ObjectMethods/cb_freqHalfYear.4dm",
 					"events": [
-						"onClick"
+						"onDataChange"
 					]
 				},
 				"cb_freqAnnually": {
@@ -250,11 +250,11 @@
 					"left": 13,
 					"width": 200,
 					"height": 18,
-					"dataSource": "Form:C1466.freqAnnually",
+					"dataSource": "Form:C1466.current_item.retrainAnnually",
 					"dataSourceTypeHint": "boolean",
 					"method": "ObjectMethods/cb_freqAnnually.4dm",
 					"events": [
-						"onClick"
+						"onDataChange"
 					]
 				}
 			}

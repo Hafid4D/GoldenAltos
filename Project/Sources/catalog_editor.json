@@ -768,12 +768,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2383.6667480469,
-				"top": 575,
-				"width": 145.2421875,
-				"height": 199.33203125
+				"left": 2327.6667480469,
+				"top": 571,
+				"width": 144.2421875,
+				"height": 239.33203125
 			},
-			"displayable_fields_count": 7
+			"displayable_fields_count": 9
 		},
 		"StepTemplateTool": {
 			"color": {
@@ -917,8 +917,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2303,
-				"top": 788,
+				"left": 2309,
+				"top": 842,
 				"width": 161.33203125,
 				"height": 209.33203125
 			},
