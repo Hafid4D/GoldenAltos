@@ -1402,6 +1402,7 @@
 		<field name="name" uuid="05C4939C3ABC450ABD7C054E151F27BF" type="10" limiting_length="255" never_null="true" id="2"/>
 		<field name="color" uuid="E4BBB0F467784E3E98912AF898E3ED4D" type="10" limiting_length="255" never_null="true" id="3"/>
 		<field name="levelID" uuid="8C87C12521604D7C80B71F542885006A" type="3" never_null="true" id="4"/>
+		<field name="moreData" uuid="3F114697220D45318D33F445C02F9C98" type="21" blob_switch_size="2147483647" never_null="true" id="5"/>
 		<primary_key field_name="UUID" field_uuid="BE475DF37410442FB9A218B771A5DFFE"/>
 	</table>
 	<table name="StepTemplateLayout" uuid="EE0919F4685942B2AADAD0E171EA9BC3" id="91">
@@ -1494,6 +1495,7 @@
 		</field>
 		<field name="UUID_Division" uuid="82A67D0769A5481790282EF72EC080EF" type="10" store_as_UUID="true" never_null="true" id="14"/>
 		<field name="UUID_Customer" uuid="BADBA2E2DBB84AE8847CF285FF1427D0" type="10" store_as_UUID="true" never_null="true" id="15"/>
+		<field name="moreData" uuid="2EE7A4DC4709417CA2FE69378899B825" type="21" blob_switch_size="2147483647" never_null="true" id="16"/>
 		<primary_key field_name="UUID" field_uuid="F5B5AFDC41774988B9579BC25C16F6E5"/>
 	</table>
 	<table name="BomItem" uuid="AF8FB5DC864D4AA78E5B5588F33F76AE" id="97">
@@ -1550,10 +1552,12 @@
 		<field name="CreationDateTimeStamp" uuid="2CE0E48ED73C41D69E16A7D0F5904AFF" type="4" never_null="true" id="19"/>
 		<field name="UUID_Bom" uuid="6E5478EBE33B4F208337C5BEC61EA8C4" type="10" store_as_UUID="true" never_null="true" id="20"/>
 		<field name="UUID_Division" uuid="7D434A94762249A882DD7CB7D49AD7EF" type="10" store_as_UUID="true" never_null="true" id="21"/>
+		<field name="moreData" uuid="9ECB5931800F48ADA420319CC7C6440F" type="21" blob_switch_size="2147483647" never_null="true" id="22"/>
 		<primary_key field_name="UUID" field_uuid="6E72F8C970FE4568B1B5F6FB9DB00814"/>
 	</table>
 	<table name="(Table_1)" uuid="B2747B53286D456EBC9A9303C5BCBFB9" id="98" hide_in_REST="true">
 		<field name="UUID" uuid="44610C465AE14A8FB6162490E9F8626E" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="moreData" uuid="28D95AA2247F4ACE9C01E6132F833630" type="21" blob_switch_size="2147483647" never_null="true" id="2"/>
 		<primary_key field_name="UUID" field_uuid="44610C465AE14A8FB6162490E9F8626E"/>
 		<table_extra trashed="true"/>
 	</table>
@@ -1576,6 +1580,7 @@
 			<field_extra multi_line="false"/>
 		</field>
 		<field name="blob" uuid="9646945C85575C4DA041E95AF26291CB" type="18" never_null="true" id="5"/>
+		<field name="moreData" uuid="43B8F11806524A8993773CC5711E6CF5" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
 		<primary_key field_name="UUID" field_uuid="B021D3EFEEB3A949AC3B50689959E5B3"/>
 	</table>
 	<table name="Customer" uuid="96D1CE81460A4F75B3F4275138C8F778" id="114">
@@ -4136,6 +4141,11 @@
 			<table_ref uuid="446AB1ED27F3664C9C9747DD14114EF2" name="Qcar"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="0BCE7CEAEFD243C5BDF487482105CF13" type="1">
+		<field_ref uuid="53314532463341344235433634373839" name="UUID">
+			<table_ref uuid="53314532463341344235433634373839" name="SupplierCredit"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="0C9329E934D048B6B415149F3AB0F822" type="1">
 		<field_ref uuid="A68486088C2C4FB39F4E6F0B02DB3384" name="UUID">
 			<table_ref uuid="639B2F83A3A2442680FA63FD904EBF20" name="sfw_NotificationType"/>
@@ -4456,6 +4466,11 @@
 			<table_ref uuid="0FF66E5E37EDD74B8E6E39F15644C85F" name="Tool"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="422526ED064A454BBDCEB6A13531BA99" type="1">
+		<field_ref uuid="4A314532463341344235433634373839" name="entryNumber">
+			<table_ref uuid="4A314532463341344235433634373839" name="JournalEntry"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="426BB4C267DD4597B22C09001D8142B1" type="1">
 		<field_ref uuid="93FB2C0FDC6B4FF9ACE3B0E9D3D29F40" name="UUID">
 			<table_ref uuid="E7AF2F374A794AB492A6BC469134F948" name="StepProperty"/>
@@ -4576,6 +4591,11 @@
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="53C022AEA6EF4EFEB25DBCF5F30272C5" type="1">
+		<field_ref uuid="4A314532463341344235433634373839" name="UUID">
+			<table_ref uuid="4A314532463341344235433634373839" name="JournalEntry"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="5600B010EB061944931792C5AAEF1513" type="3">
 		<field_ref uuid="23BC7DB129B8C44583BCD2B16ED41753" name="UUID_Job">
 			<table_ref uuid="FD34803EFD49454B9F38092174A0003C" name="JobInvoice"/>
@@ -4669,11 +4689,6 @@
 	<index kind="regular" uuid="62653CBC37B2C04D8FDC32AE64890757" type="3">
 		<field_ref uuid="4463613D81E24EFBA7FEC15654FA732C" name="UUID_User">
 			<table_ref uuid="5E1C3E25225441628E3DBCF58BFAABF4" name="sfw_Document"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="631AF97587EA4E3ABBA41F95D8202DB5" type="1">
-		<field_ref uuid="4A314532463341344235433634373839" name="UUID">
-			<table_ref uuid="4A314532463341344235433634373839" name="JournalEntry"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="675DDEA34102494283E12FCAE91573AD" type="3">
@@ -4904,11 +4919,6 @@
 	<index kind="regular" uuid="8D55D949B63840D6956A5F33050FDFB6" type="1">
 		<field_ref uuid="A276955D955E41BCA8E3E93B8F5D0B9D" name="UUID_target">
 			<table_ref uuid="BBA10D61B3A54D38A2C335D8A5A1BF6E" name="sfw_Favorite"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="8D6F103502C9430F8933F4FC6EB4A77A" type="1">
-		<field_ref uuid="53314532463341344235433634373839" name="creditNumber">
-			<table_ref uuid="53314532463341344235433634373839" name="SupplierCredit"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="8DE884007CA4E54DB22B4ABE8C29C057" type="1">
@@ -5231,11 +5241,6 @@
 			<table_ref uuid="98A20403539048D2B775AEAED975966B" name="Quote"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="B368914924224E34B585E46339594675" type="1">
-		<field_ref uuid="53314532463341344235433634373839" name="UUID">
-			<table_ref uuid="53314532463341344235433634373839" name="SupplierCredit"/>
-		</field_ref>
-	</index>
 	<index kind="regular" unique_keys="true" uuid="B3A0F221142A472A9338F2F2826FF6B1" type="7">
 		<field_ref uuid="643CE8A4FC6E4DF3B9EF602ABF49DA55" name="UUID">
 			<table_ref uuid="3E02BE63C9254086A8942339745654D1" name="TransactionStatus"/>
@@ -5319,6 +5324,11 @@
 	<index kind="regular" uuid="BDEEF82F0196D74BB3D8953B9455389C" type="3">
 		<field_ref uuid="C74A7B778FCB1E4F94C0958003C7FA24" name="UUID_CIDisposition">
 			<table_ref uuid="1BCF3E71728E56429B08B229161AD291" name="ContinuousImprovement"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="BF8971296FCD43248312E01D2E4A7CBB" type="1">
+		<field_ref uuid="53314532463341344235433634373839" name="creditNumber">
+			<table_ref uuid="53314532463341344235433634373839" name="SupplierCredit"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="C1E2F3A4B5C64789D0E1F2A3B4C5D6E7" type="3">
@@ -5599,11 +5609,6 @@
 	<index kind="regular" uuid="EB55C3C1891A4E4291C6C6A851EFEA48" type="3">
 		<field_ref uuid="32ED16A2B45746E6B8EFE6EA6FE606A3" name="UUID_User">
 			<table_ref uuid="FF22DCE3DFF1417CBA5017AE961C87F6" name="EquipmentEvent"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="EDDE20CBDA71477FB2F5C004E285F333" type="1">
-		<field_ref uuid="4A314532463341344235433634373839" name="entryNumber">
-			<table_ref uuid="4A314532463341344235433634373839" name="JournalEntry"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="EE70B7EACA4C464DBC64151FE6BB5C3D" type="3">

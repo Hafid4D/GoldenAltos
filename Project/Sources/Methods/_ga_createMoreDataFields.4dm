@@ -27,7 +27,9 @@ For ($i; 1; $totalTables)  //Loop on all tables
 	$tableNode:=DOM Find XML element:C864($XmlCatalog; $targetedElement)
 	
 	DOM GET XML ATTRIBUTE BY NAME:C728($tableNode; "name"; $tableName)
-	
+	If ($tableName="BOM") | ($tableName="BomItem")
+		
+	End if 
 	If ($tableName#"sfw_@") & ($tableName#"dfd_@")
 		
 		$targetedChildToSearch:="field"
