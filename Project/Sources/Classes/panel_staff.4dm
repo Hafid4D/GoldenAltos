@@ -63,6 +63,7 @@ Function redrawAndSetVisible()
 			OBJECT SET COORDINATES:C1248(*; "rec_bkgd_1"; $left; $top; $right; $heightSubform-$offset)
 			OBJECT SET COORDINATES:C1248(*; "lb_assignments"; $left_lb; $top_lb; $right_lb; $heightSubform-$offset-1)
 			OBJECT SET COORDINATES:C1248(*; "bActionCertifications"; $left_bAc; $heightSubform-$offset_bAc-$height_bAc; $right_bAc; $heightSubform-$offset_bAc)
+			This:C1470._configureCertAssignmentColumns()
 	End case 
 	
 	//Form.sfw.drawHTab()
@@ -239,8 +240,20 @@ Function _staffCertExpiringDate($certificationDate : Date; $certification_e : cs
 	
 Function _configureCertAssignmentColumns()
 	
-	// Purpose: Date columns are read-only text; visible for all users (QA-only rule applies to checkbox edits).
-	// modified by 4D/PS [2026-june-09]
+	var $canEditCerts : Boolean
+	
+	// Purpose: Columns are static in form.4DForm — only toggle enterable (checkbox) and Re-New by profile/mode.
+	// modified by 4D/PS [2026-june-08]
+	If (FORM Get current page:C276(*)#2)
+		return 
+	End if 
+	
+	$canEditCerts:=This:C1470._hasQaProfile() && Form:C1466.sfw.checkIsInModification()
+	
+	OBJECT SET ENTERABLE:C238(*; "col_certified_at"; False:C215)
+	OBJECT SET ENTERABLE:C238(*; "col_expired_in"; False:C215)
+	OBJECT SET ENTERABLE:C238(*; "entryField_hasCertif"; $canEditCerts)
+	
 	OBJECT SET VISIBLE:C603(*; "col_certified_at"; True:C214)
 	OBJECT SET VISIBLE:C603(*; "col_expired_in"; True:C214)
 	OBJECT SET VISIBLE:C603(*; "hd_certifiedAt"; True:C214)
@@ -248,10 +261,39 @@ Function _configureCertAssignmentColumns()
 	OBJECT SET HORIZONTAL ALIGNMENT:C706(*; "col_certified_at"; Align center:K42:3)
 	OBJECT SET HORIZONTAL ALIGNMENT:C706(*; "col_expired_in"; Align center:K42:3)
 	
+	OBJECT SET ENABLED:C1123(*; "bRenewCertification"; $canEditCerts && (Form:C1466.selectedCertification#Null:C1517))
+	
+	
+Function renewCertification()
+	// Purpose: Re-New — append a CertificationAssignment with today's date (legacy renewal, keeps history).
+	// Requires qs/qm/dc profile, modification mode, and a selected certification row.
+	// modified by 4D/PS [2026-june-08]
+	
+	If (Form:C1466.selectedCertification=Null:C1517) || (Form:C1466.current_item=Null:C1517)
+		return 
+	End if 
+	If (Not:C34(This:C1470._hasQaProfile()))
+		cs:C1710.sfw_dialog.me.info("Only Quality Manager, Quality Supervisor, or Document Control can renew certifications")
+		return 
+	End if 
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+		cs:C1710.sfw_dialog.me.info("Open the employee record in modification mode to renew a certification")
+		return 
+	End if 
+	
+	If (Not:C34(Form:C1466.current_item.createCertification(Form:C1466.selectedCertification.UUID; 0)))
+		cs:C1710.sfw_dialog.me.alert("Could not renew this certification")
+		return 
+	End if 
+	
+	This:C1470._activate_save_cancel_button()
+	This:C1470.loadCertifications()
+	
 	
 Function loadCertificationHistory()
-	// Purpose: Fill the assignment history list (Certified at / Expired in) for the selected certification row.
-	// modified by 4D/PS [2026-june-09]
+	// Purpose: Assignment history for the selected certification (all past renewals — row 0 = latest).
+	// Main list shows the same latest dates for every cert; this list is the audit trail when one row is selected.
+	// modified by 4D/PS [2026-june-08]
 	
 	var $assignment_e : cs:C1710.CertificationAssignmentEntity
 	var $cert_e : cs:C1710.CertificationEntity
@@ -275,8 +317,10 @@ Function loadCertificationHistory()
 	
 	Form:C1466.certifications:=Form:C1466.certifications
 	
-	OBJECT SET HORIZONTAL ALIGNMENT:C706(*; "List Box.Column2"; Align center:K42:3)
-	OBJECT SET HORIZONTAL ALIGNMENT:C706(*; "List Box.Column3"; Align center:K42:3)
+	OBJECT SET HORIZONTAL ALIGNMENT:C706(*; "Column2"; Align center:K42:3)
+	OBJECT SET HORIZONTAL ALIGNMENT:C706(*; "Column3"; Align center:K42:3)
+	This:C1470._configureCertAssignmentColumns()
+	
 	
 Function manageCertification()
 	Case of 
