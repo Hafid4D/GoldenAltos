@@ -23,6 +23,11 @@ Function hasCertification($uuid_certification : Text)->$certified : Boolean
 	End for each 
 	
 Function createCertification($uuid_certification : Text; $duration : Integer)->$certified : Boolean
+	
+	var $certificationAssignment : cs:C1710.CertificationAssignmentEntity
+	var $cert_e : cs:C1710.CertificationEntity
+	var $res : Object
+	
 	$certificationAssignment:=ds:C1482.CertificationAssignment.new()
 	
 	$certificationAssignment.UUID_Staff:=This:C1470.UUID
@@ -31,12 +36,17 @@ Function createCertification($uuid_certification : Text; $duration : Integer)->$
 	$certificationAssignment.certificationDate:=cs:C1710.sfw_stmp.me.getDate(cs:C1710.sfw_stmp.me.now(); True:C214)  //cs.sfw_stmp.me.now()
 	//$certificationAssignment.certificationDate:=cs.sfw_stmp.me.build(!2024-06-01!)  // Test Only
 	
-	// Purpose: Use certification type rules (frequencies / one time) when caller passes 0; else keep explicit $duration.
-	// modified by 4D/PS [2026-june-02]
+	// Purpose: Persist catalog Certification.duration on assignment (display/validity also read live from catalog).
+	// modified by 4D/PS [2026-june-09]
+	$cert_e:=ds:C1482.Certification.get($uuid_certification)
 	If ($duration>0)
 		$certificationAssignment.expiredIn:=$duration
 	Else 
-		$certificationAssignment.expiredIn:=_ga_certificationExpiredInDays($uuid_certification)
+		If ($cert_e#Null:C1517)
+			$certificationAssignment.expiredIn:=$cert_e.expiredInDaysForNewAssignment()
+		Else 
+			$certificationAssignment.expiredIn:=_ga_certificationExpiredInDays($uuid_certification)
+		End if 
 	End if 
 	//Else 
 	//$certificationAssignment.expiredIn:=0
@@ -50,6 +60,10 @@ Function createCertification($uuid_certification : Text; $duration : Integer)->$
 		"overrideCertExpired"; False:C215)
 	
 	$res:=$certificationAssignment.save()
+	
+	// Purpose: Return save success to callers (createCertification had no return before).
+	// modified by 4D/PS [2026-june-09]
+	return $res.success
 	
 	
 	// Purpose: Grant or revoke punch-in override for an expired certification assignment (qm, qs, dc only at UI).
@@ -79,8 +93,6 @@ Function setCertificationOverride($uuid_certification : Text; $override : Boolea
 		$ok:=$info.success
 	End if 
 	
-	
-	$certified:=$res.success
 	
 Function deleteCertification($uuid_certification : Text)->$certified : Boolean
 	$certificationAssignment_es:=ds:C1482.CertificationAssignment.query("UUID_Staff = :1 AND UUID_Certification = :2"; This:C1470.UUID; $uuid_certification)
