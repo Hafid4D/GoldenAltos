@@ -541,9 +541,17 @@ End if
 If (True:C214)  // export stepTemplates
 	ALL RECORDS:C47([Template_definitions])
 	
+	// Purpose: Load legacy EmployeeCertDef labels (<>ACL) so Cert_list skill codes resolve to certification names.
+	// modified by 4D/PS [2026-june-09]
+	GetCertificationNames
+	
 	$records:=New collection:C1472()
 	
-	
+	var $certCodes : Collection
+	var $skillCode : Integer
+	var $certLabel : Text
+	var $i : Integer
+	var $maxCert : Integer
 	
 	While (Not:C34(End selection:C36([Template_definitions])))
 		$record:=New object:C1471(\
@@ -568,7 +576,11 @@ If (True:C214)  // export stepTemplates
 			[Template_definitions]Bin25Def; [Template_definitions]Bin26Def; [Template_definitions]Bin27Def; [Template_definitions]Bin28Def; [Template_definitions]Bin29Def; \
 			[Template_definitions]Bin30Def; [Template_definitions]Bin31Def; [Template_definitions]Bin32Def)); \
 			"miscellaneousControl"; [Template_definitions]MiscellaneousControl; \
-			"containerCode"; [Template_definitions]ContainerCode\
+			"containerCode"; [Template_definitions]ContainerCode; \
+			"certList"; [Template_definitions]Cert_list; \
+			"skillCodereqd"; [Template_definitions]SkillCodereqd; \
+			"requiredCertifications"; New collection:C1472(); \
+			"unknownSkillCodes"; New collection:C1472()\
 			)
 		
 		QUERY:C277([StepTemplates]; [StepTemplates]Template=[Template_definitions]Template_num)
@@ -578,10 +590,78 @@ If (True:C214)  // export stepTemplates
 			$record.areas:=[StepTemplates]Area
 		End if 
 		
+		// Purpose: Resolve Cert_list skill codes to catalog labels (legacy <>ACL) for GoldenAltos import.
+		// SkillTypesRequired is display-only (GetSkillsText); check_cert validates Cert_list, not SkillTypesRequired.
+		// When Cert_list is empty, fall back to SkillCodereqd bitmask (same rule as GetSkillsText).
+		// modified by 4D/PS [2026-june-09]
+		If ([Template_definitions]Cert_list#"")
+			$certCodes:=Split string:C1554([Template_definitions]Cert_list; ";"; sk trim spaces:K86:2)
+			For each ($certCodeText; $certCodes)
+				$skillCode:=Num:C11(String:C10($certCodeText))
+				Case of 
+					: ($skillCode<=0)
+						$record.unknownSkillCodes.push(New object:C1471("skillCode"; $skillCode; "rawValue"; String:C10($certCodeText); "reason"; "invalid skill code in Cert_list"))
+					: ($skillCode>Size of array:C274(<>ACL))
+						$record.unknownSkillCodes.push(New object:C1471("skillCode"; $skillCode; "rawValue"; String:C10($certCodeText); "reason"; "skill code out of EmployeeCertDef range"))
+					Else 
+						$certLabel:=<>ACL{$skillCode}
+						If ($certLabel#"")
+							$record.requiredCertifications.push(New object:C1471("skillCode"; $skillCode; "name"; $certLabel))
+						Else 
+							$record.unknownSkillCodes.push(New object:C1471("skillCode"; $skillCode; "rawValue"; String:C10($certCodeText); "reason"; "empty certification label in EmployeeCertDef"))
+						End if 
+				End case 
+			End for each 
+		Else 
+			$maxCert:=35
+			For ($i; 1; $maxCert)
+				If (([Template_definitions]SkillCodereqd & (2^($i-1)))=(2^($i-1)))
+					$skillCode:=$i
+					If ($skillCode>Size of array:C274(<>ACL))
+						$record.unknownSkillCodes.push(New object:C1471("skillCode"; $skillCode; "rawValue"; String:C10($skillCode); "reason"; "skill code out of EmployeeCertDef range (SkillCodereqd bitmask)"))
+					Else 
+						$certLabel:=<>ACL{$skillCode}
+						If ($certLabel#"")
+							$record.requiredCertifications.push(New object:C1471("skillCode"; $skillCode; "name"; $certLabel))
+						Else 
+							$record.unknownSkillCodes.push(New object:C1471("skillCode"; $skillCode; "rawValue"; String:C10($skillCode); "reason"; "empty certification label in EmployeeCertDef (SkillCodereqd bitmask)"))
+						End if 
+					End if 
+				End if 
+			End for 
+		End if 
+		
 		
 		$records.push($record)
 		NEXT RECORD:C51([Template_definitions])
 	End while 
+	
+	// Purpose: Post-export report for template skill codes that could not be resolved in EmployeeCertDef (<>ACL).
+	// modified by 4D/PS [2026-june-09]
+	var $exportCertReport : Collection
+	var $exportRecord : Object
+	var $unknownSkill : Object
+	
+	$exportCertReport:=New collection:C1472()
+	For each ($exportRecord; $records)
+		If ($exportRecord.unknownSkillCodes#Null:C1517) && ($exportRecord.unknownSkillCodes.length>0)
+			For each ($unknownSkill; $exportRecord.unknownSkillCodes)
+				$exportCertReport.push(New object:C1471(\
+					"templateNumber"; $exportRecord.templateNumber; \
+					"templateName"; $exportRecord.name; \
+					"skillCode"; $unknownSkill.skillCode; \
+					"rawValue"; $unknownSkill.rawValue; \
+					"reason"; $unknownSkill.reason\
+					))
+			End for each 
+		End if 
+	End for each 
+	
+	vhDoc:=Create document:C266($myFolder.platformPath+"step_template_cert_export_report.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; JSON Stringify:C1217($exportCertReport))
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
 	
 	//TEXT TO DOCUMENT($myFolder.platformPath+"step_template_export.json"; JSON Stringify($records))
 	vhDoc:=Create document:C266($myFolder.platformPath+"step_template_export.json")
@@ -1646,5 +1726,8 @@ If (True:C214)  // export [RM_Reports]
 	End if 
 	SHOW ON DISK:C922($myFolder.platformPath+"rm_reports_export.json")
 End if 
+
+
+
 
 ALERT:C41("END!")

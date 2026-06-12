@@ -508,8 +508,12 @@ End for each
 				
 				$lotStep_e.stepInterruptions:=New object:C1471("items"; New collection:C1472())
 				$lotStep_e.dataTables:=New object:C1471("items"; New collection:C1472())
-				$lotStep_e.skills:=New object:C1471("items"; New collection:C1472())
-				$lotStep_e.requitedCertifications:=New object:C1471("items"; New collection:C1472())
+				
+				// Purpose: Fill skills + requitedCertifications from StepTemplate (LotStep.type = templateNumber).
+				// modified by 4D/PS [2026-june-09]
+				// Purpose: Renamed helper to fit 4D 31-char project method name limit.
+				// modified by 4D/PS [2026-june-09]
+				__import_stLotStepApplyCerts($lotStep_e)
 				
 /*
 				

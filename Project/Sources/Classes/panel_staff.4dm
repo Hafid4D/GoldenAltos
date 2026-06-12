@@ -109,28 +109,59 @@ Function _assignmentOverrideActive($uuid_certification : Text)->$active : Boolea
 	$active:=False:C215
 	$assignment_e:=ds:C1482.CertificationAssignment\
 		.query("UUID_Staff = :1 AND UUID_Certification = :2"; Form:C1466.current_item.UUID; $uuid_certification)\
-		.orderBy("certificationDate desc").first()
+		.orderBy("certificationStmp desc").first()
 	If ($assignment_e#Null:C1517) && ($assignment_e.moreData#Null:C1517)
 		$active:=Bool:C1537($assignment_e.moreData.overrideCertExpired)
 	End if 
 	
 	
 Function loadCertifications()
+	
+	var $assignmentByCert : Object
+	var $assignment_e : cs:C1710.CertificationAssignmentEntity
+	var $uuidCert : Text
+	var $certDt : Date
+	var $expDt : Date
+	var $entry : Object
+	var $existing : Object
+	
 	GOTO OBJECT:C206(*; "lb_assignments")
 	Form:C1466.selectedCertification:=Form:C1466.selectedCertification
 	Form:C1466.lb_assignments:=New collection:C1472()
 	
+	// Purpose: One query per staff; avoids N ORDA calls and ensures dates match CertificationAssignment rows.
+	// modified by 4D/PS [2026-june-09]
+	$assignmentByCert:=New object:C1471()
+	For each ($assignment_e; ds:C1482.CertificationAssignment.query("UUID_Staff = :1"; Form:C1466.current_item.UUID))
+		$uuidCert:=$assignment_e.UUID_Certification
+		$existing:=$assignmentByCert[$uuidCert]
+		If ($existing=Null:C1517) || ($assignment_e.certificationStmp>Num:C11($existing.stmp))
+			$assignmentByCert[$uuidCert]:=New object:C1471(\
+				"stmp"; $assignment_e.certificationStmp; \
+				"certDt"; $assignment_e.certificationDate; \
+				"expDt"; $assignment_e.expiringDate\
+				)
+		End if 
+	End for each 
+	
 	For each ($certification; ds:C1482.Certification.all().orderBy("ref asc"))
-		// Purpose: expiringDate for row highlight; expiredIn column shows same calendar date; override for punch-in (2.d).
-		// modified by 4D/PS [2026-june-08]
+		$certDt:=!00-00-00!
+		$expDt:=!00-00-00!
+		$entry:=$assignmentByCert[$certification.UUID]
+		If ($entry#Null:C1517)
+			$certDt:=$entry.certDt
+			$expDt:=$entry.expDt
+		End if 
+		// Purpose: Listbox collection date columns are unreliable — use formatted text for display.
+		// modified by 4D/PS [2026-june-09]
 		Form:C1466.lb_assignments.push(New object:C1471(\
 			"UUID"; $certification.UUID; \
 			"name"; $certification.name; \
 			"duration"; $certification.duration; \
 			"oneTime"; $certification.oneTime; \
-			"expiringDate"; Form:C1466.current_item.getCertiExpiredDate($certification.UUID); \
-			"expiredIn"; Form:C1466.current_item.getCertiExpiredDate($certification.UUID); \
-			"certifiedAt"; Form:C1466.current_item.getCertificationDate($certification.UUID); \
+			"expiringDate"; $expDt; \
+			"certifiedAt"; This:C1470._formatStaffCertDate($certDt); \
+			"expiredIn"; This:C1470._formatStaffCertDate($expDt); \
 			"certified"; Form:C1466.current_item.hasCertification($certification.UUID); \
 			"overrideExpired"; This:C1470._assignmentOverrideActive($certification.UUID)\
 			))
@@ -139,38 +170,57 @@ Function loadCertifications()
 	
 	Form:C1466.lb_assignments:=Form:C1466.lb_assignments.orderBy("certified")
 	
-	// Purpose: Show Certified At / Expired In columns only for cert-modify profiles (qs, qm, dc).
-	// modified by 4D/PS [2026-june-02]
-	If (This:C1470._hasQaProfile())
-		//TRACE
-		$nb_cols:=LISTBOX Get number of columns:C831(*; "lb_assignments")
-		
-		If ($nb_cols=2)
-			var $NilPtr : Pointer
-			var $width_new_col : Integer:=70
-			
-			LISTBOX INSERT COLUMN FORMULA:C970(*; "lb_assignments"; 2; "col_expired_in"; "This.expiredIn"; Is date:K8:7; "hd_expiredIn"; $NilPtr)
-			LISTBOX INSERT COLUMN FORMULA:C970(*; "lb_assignments"; 2; "col_certified_at"; "This.certifiedAt"; Is date:K8:7; "hd_certifiedAt"; $NilPtr)
-			
-			$width:=LISTBOX Get column width:C834(*; "header_certifName")
-			
-			$width:=LISTBOX SET COLUMN WIDTH:C833(*; "header_certifName"; $width-($width_new_col*2))
-			$width:=LISTBOX SET COLUMN WIDTH:C833(*; "col_certified_at"; $width_new_col)
-			$width:=LISTBOX SET COLUMN WIDTH:C833(*; "col_expired_in"; $width_new_col)
-			
-			OBJECT SET TITLE:C194(*; "hd_certifiedAt"; "Certified At")
-			OBJECT SET TITLE:C194(*; "hd_expiredIn"; "Expired In")
-			
-			OBJECT SET FONT STYLE:C166(*; "hd_certifiedAt"; Bold:K14:2)
-			OBJECT SET FONT STYLE:C166(*; "hd_expiredIn"; Bold:K14:2)
-			
-			OBJECT SET FORMAT:C236(*; "col_certified_at"; "dd/MM/yyyy blankIfNull")
-			OBJECT SET FORMAT:C236(*; "col_expired_in"; "dd/MM/yyyy blankIfNull")
-			
-			OBJECT SET HORIZONTAL ALIGNMENT:C706(*; "col_certified_at"; Align center:K42:3)
-			OBJECT SET HORIZONTAL ALIGNMENT:C706(*; "col_expired_in"; Align center:K42:3)
-		End if 
+	This:C1470._configureCertAssignmentColumns()
+	This:C1470.loadCertificationHistory()
+	
+	
+Function _formatStaffCertDate($date : Date) -> $text : Text
+	// Purpose: Format certification dates for listbox text columns (Certified At / Expired In).
+	// Parameters: $date : Date — calendar date (!00-00-00! when empty)
+	// Returns: Text — short date string or empty
+	// created by 4D/PS [2026-june-09]
+	
+	$text:=""
+	If ($date#Null:C1517) && ($date#!00-00-00!)
+		$text:=String:C10($date; System date short:K1:1)
 	End if 
+	
+	
+Function _configureCertAssignmentColumns()
+	
+	// Purpose: Date columns are read-only text; visible for all users (QA-only rule applies to checkbox edits).
+	// modified by 4D/PS [2026-june-09]
+	OBJECT SET VISIBLE:C603(*; "col_certified_at"; True:C214)
+	OBJECT SET VISIBLE:C603(*; "col_expired_in"; True:C214)
+	OBJECT SET VISIBLE:C603(*; "hd_certifiedAt"; True:C214)
+	OBJECT SET VISIBLE:C603(*; "hd_expiredIn"; True:C214)
+	OBJECT SET HORIZONTAL ALIGNMENT:C706(*; "col_certified_at"; Align center:K42:3)
+	OBJECT SET HORIZONTAL ALIGNMENT:C706(*; "col_expired_in"; Align center:K42:3)
+	
+	
+Function loadCertificationHistory()
+	// Purpose: Fill the assignment history list (Certified at / Expired in) for the selected certification row.
+	// modified by 4D/PS [2026-june-09]
+	
+	var $assignment_e : cs:C1710.CertificationAssignmentEntity
+	
+	Form:C1466.certifications:=New collection:C1472()
+	
+	If (Form:C1466.selectedCertification=Null:C1517) || (Form:C1466.current_item=Null:C1517)
+		return 
+	End if 
+	
+	For each ($assignment_e; ds:C1482.CertificationAssignment\
+		.query("UUID_Staff = :1 AND UUID_Certification = :2"; Form:C1466.current_item.UUID; Form:C1466.selectedCertification.UUID)\
+		.orderBy("certificationStmp desc"))
+		Form:C1466.certifications.push(New object:C1471(\
+			"certifiedAt"; This:C1470._formatStaffCertDate($assignment_e.certificationDate); \
+			"expiredIn"; This:C1470._formatStaffCertDate($assignment_e.expiringDate)\
+			))
+	End for each 
+	
+	OBJECT SET HORIZONTAL ALIGNMENT:C706(*; "List Box.Column2"; Align center:K42:3)
+	OBJECT SET HORIZONTAL ALIGNMENT:C706(*; "List Box.Column3"; Align center:K42:3)
 	
 Function manageCertification()
 	Case of 
@@ -194,13 +244,13 @@ Function manageCertification()
 					This:C1470.loadCertifications()
 				End if 
 				
+				This:C1470.loadCertificationHistory()
 				This:C1470._activate_save_cancel_button()
 				
 			End if 
 			
-			
-		: (FORM Event:C1606.code=On Clicked:K2:4)
-			
+		: ((FORM Event:C1606.code=On Clicked:K2:4) || (FORM Event:C1606.code=On Selection Change:K2:29))
+			This:C1470.loadCertificationHistory()
 			
 	End case 
 	
@@ -355,7 +405,7 @@ Function bActionCertifications()
 		If (This:C1470._hasQaProfile()) && (Form:C1466.sfw.checkIsInModification())
 			$assignment_e:=ds:C1482.CertificationAssignment\
 				.query("UUID_Staff = :1 AND UUID_Certification = :2"; Form:C1466.current_item.UUID; Form:C1466.selectedCertification.UUID)\
-				.orderBy("certificationDate desc").first()
+				.orderBy("certificationStmp desc").first()
 			If ($assignment_e#Null:C1517) && (Not:C34($assignment_e.validityActive))
 				APPEND MENU ITEM:C411($refMenu; "-")
 				If (Bool:C1537($assignment_e.moreData.overrideCertExpired))

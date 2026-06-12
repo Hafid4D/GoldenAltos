@@ -8,6 +8,7 @@ If (True:C214)
 	TRUNCATE TABLE:C1051([StepTemplate:121])
 	TRUNCATE TABLE:C1051([StepTemplateRule:92])
 	TRUNCATE TABLE:C1051([ContainerCode:93])
+	TRUNCATE TABLE:C1051([StepTemplateCertification:125])
 	
 	var $rulesToImport : Collection
 	$rulesToImport:=New collection:C1472(\
@@ -77,9 +78,43 @@ If (True:C214)
 	End for 
 	
 	
+	// Purpose: Load Certification catalog before StepTemplateCertification links (skill code = Certification.ref).
+	// modified by 4D/PS [2026-june-09]
+	TRUNCATE TABLE:C1051([Certification:124])
+	
+	var $certCatalogFile : 4D:C1709.File
+	var $certCatalogRecords : Collection
+	var $certCatalogRecord : Object
+	var $certification_e : cs:C1710.CertificationEntity
+	
+	$certCatalogFile:=Folder:C1567(fk data folder:K87:12).file("DataJson/certifications_export.json")
+	If ($certCatalogFile.exists)
+		$certCatalogRecords:=JSON Parse:C1218($certCatalogFile.getText())
+		For each ($certCatalogRecord; $certCatalogRecords)
+			$certification_e:=ds:C1482.Certification.new()
+			$certification_e.ref:=$certCatalogRecord.ref
+			$certification_e.name:=$certCatalogRecord.name
+			$res:=$certification_e.save()
+			If (Not:C34($res.success))
+				TRACE:C157
+			End if 
+		End for each 
+	End if 
+	
 	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/step_template_export.json")
 	
 	$records:=JSON Parse:C1218($file.getText())
+	
+	// Purpose: Collect unmapped legacy skill codes for post-import report (same pattern as staff training import).
+	// modified by 4D/PS [2026-june-09]
+	var $stepTemplateCertReport : Collection
+	var $reportFile : 4D:C1709.File
+	var $unknownSkill : Object
+	var $reportLine : Text
+	var $reportLines : Collection
+	var $reportEntry : Object
+	
+	$stepTemplateCertReport:=New collection:C1472()
 	
 	For each ($record; $records)
 		$stepTemplate_e:=ds:C1482.StepTemplate.new()
@@ -168,8 +203,40 @@ If (True:C214)
 		
 		If (Not:C34($res.success))
 			TRACE:C157
+		Else 
+			// Purpose: Map legacy skill codes to Certification catalog (ref) and create StepTemplateCertification links.
+			// modified by 4D/PS [2026-june-09]
+			If ($record.requiredCertifications#Null:C1517) && ($record.requiredCertifications.length>0)
+				__import_stSeedTemplateCerts($stepTemplate_e.UUID; Num:C11($record.templateNumber); String:C10($record.name); $record.requiredCertifications; $stepTemplateCertReport)
+			End if 
+			// Purpose: Surface skill codes flagged at export time (unknown in EmployeeCertDef / <>ACL).
+			// modified by 4D/PS [2026-june-09]
+			If ($record.unknownSkillCodes#Null:C1517) && ($record.unknownSkillCodes.length>0)
+				For each ($unknownSkill; $record.unknownSkillCodes)
+					$stepTemplateCertReport.push(New object:C1471(\
+						"templateNumber"; Num:C11($record.templateNumber); \
+						"templateName"; String:C10($record.name); \
+						"skillCode"; Num:C11($unknownSkill.skillCode); \
+						"certName"; ""; \
+						"reason"; "export: "+String:C10($unknownSkill.reason)\
+						))
+				End for each 
+			End if 
 		End if 
 	End for each 
+	
+	// Purpose: Write post-import report for unmapped template skill codes (review after import).
+	// modified by 4D/PS [2026-june-09]
+	$reportFile:=Folder:C1567(fk data folder:K87:12).file("DataJson/step_template_cert_import_report.json")
+	$reportFile.setText(JSON Stringify:C1217($stepTemplateCertReport))
+	If ($stepTemplateCertReport.length>0)
+		$reportLines:=New collection:C1472()
+		For each ($reportEntry; $stepTemplateCertReport)
+			$reportLine:="Template "+String:C10($reportEntry.templateNumber)+" ("+String:C10($reportEntry.templateName)+"): skill "+String:C10($reportEntry.skillCode)+" — "+String:C10($reportEntry.reason)
+			$reportLines.push($reportLine)
+		End for each 
+		SET TEXT TO PASTEBOARD:C523($reportLines.join("\r"))
+	End if 
 End if 
 
 //MARK:- import StepProperties -> [Step]
@@ -775,8 +842,12 @@ If (True:C214)
 				
 				$lotStep_e.stepInterruptions:=New object:C1471("items"; New collection:C1472())
 				$lotStep_e.dataTables:=New object:C1471("items"; New collection:C1472())
-				$lotStep_e.skills:=New object:C1471("items"; New collection:C1472())
-				$lotStep_e.requitedCertifications:=New object:C1471("items"; New collection:C1472())
+				
+				// Purpose: Fill skills + requitedCertifications from StepTemplate (LotStep.type = templateNumber), not empty collections.
+				// modified by 4D/PS [2026-june-09]
+				// Purpose: Renamed helper to fit 4D 31-char project method name limit.
+				// modified by 4D/PS [2026-june-09]
+				__import_stLotStepApplyCerts($lotStep_e)
 				
 /*
 $lotStep_e.tools:=New object()
@@ -1119,28 +1190,9 @@ If (True:C214)
 End if 
 
 /**
-import cetifications
+import cetifications — catalog loaded before step templates (see step template import block).
 **/
-If (True:C214)
-	TRUNCATE TABLE:C1051([Certification:124])
-	
-	$file:=Folder:C1567(fk data folder:K87:12).file("DataJson/certifications_export.json")
-	
-	$records:=JSON Parse:C1218($file.getText())
-	
-	For each ($record; $records)
-		$certification_e:=ds:C1482.Certification.new()
-		
-		$certification_e.ref:=$record.ref
-		$certification_e.name:=$record.name
-		
-		$res:=$certification_e.save()
-		
-		If (Not:C34($res.success))
-			TRACE:C157
-		End if 
-	End for each 
-End if 
+// Certification catalog import moved to step template section (before StepTemplateCertification links).
 
 /**
 import specifications
