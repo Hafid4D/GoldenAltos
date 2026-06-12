@@ -34,7 +34,6 @@ Else
 		$ePayment.Amount:=-$paymentAmount
 		$ePayment.openBalance:=0
 		$ePayment.memo:="Payment for transaction #"+String:C10($invoice.transactionNumber)
-		$ePayment.moreData:=New object:C1471("appliedTo"; $invoice.UUID)
 		$ePayment.refreshStatus()
 		$ePayment.save()
 		

@@ -4316,11 +4316,6 @@
 			<table_ref uuid="5E1C3E25225441628E3DBCF58BFAABF4" name="sfw_Document"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="274964C8EED2E34B857A4F3E3B7C1210" type="1">
-		<field_ref uuid="4A314532463341344235433634373839" name="entryNumber">
-			<table_ref uuid="4A314532463341344235433634373839" name="JournalEntry"/>
-		</field_ref>
-	</index>
 	<index kind="regular" unique_keys="true" uuid="279FCE3367AEBA4AAF55EF606FA5535B" type="1">
 		<field_ref uuid="0526ECAF73946E4E90574CB0C2FC9FA1" name="UUID">
 			<table_ref uuid="AD9AFF574E6E2745A70D65CE48ABAB7E" name="dfd_Line"/>
@@ -4329,6 +4324,11 @@
 	<index kind="regular" unique_keys="true" uuid="285C76893B33FC499CC89E0F413C3C33" type="1">
 		<field_ref uuid="4040F42F6150451FA3FB8EB06B445ED9" name="UUID">
 			<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="297351597F5348ACAACBAD7852644A40" type="1">
+		<field_ref uuid="4A314532463341344235433634373839" name="UUID">
+			<table_ref uuid="4A314532463341344235433634373839" name="JournalEntry"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="297FAB457B268047BF50C8DE5BF0DB01" type="1">
@@ -4354,6 +4354,11 @@
 	<index kind="regular" unique_keys="true" uuid="2BD6999E814B4F2E97D229C0D7DACB7C" type="1">
 		<field_ref uuid="5ABBAB6EFCCD482ABFEA64F31B89770D" name="UUID">
 			<table_ref uuid="C426BFF1DD3F4326A89BD125EFA71348" name="TermCondition"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="2C456CCDA92E480D91F8E22D3351B86D" type="1">
+		<field_ref uuid="53314532463341344235433634373839" name="UUID">
+			<table_ref uuid="53314532463341344235433634373839" name="SupplierCredit"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="2EACFC53EE47064E9205180ED5400EB3" type="3">
@@ -4471,9 +4476,9 @@
 			<table_ref uuid="71FD451F60934C9995C7A6D899CA2B51" name="Certification"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="44F7AA87C9D7E34DAE482BF9D3F7D8B8" type="1">
-		<field_ref uuid="53314532463341344235433634373839" name="UUID">
-			<table_ref uuid="53314532463341344235433634373839" name="SupplierCredit"/>
+	<index kind="regular" unique_keys="true" uuid="44F3411D2A3C494CA12E14BB4B232016" type="1">
+		<field_ref uuid="4A314532463341344235433634373839" name="entryNumber">
+			<table_ref uuid="4A314532463341344235433634373839" name="JournalEntry"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="458E39DA38094C40AEA5875F614F9F26" type="3">
@@ -4634,6 +4639,11 @@
 	<index kind="regular" unique_keys="true" uuid="5ABD2A7BEF65C844A211BA0EF547DB3E" type="7">
 		<field_ref uuid="6941AB4C41898A4A9FBF25D5AC27CA2B" name="UUID">
 			<table_ref uuid="FD10D10C9E0015458AFF59F988A373BB" name="Staff"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="5C3A3C628AAA4B638DC9DCAE161D3B7E" type="1">
+		<field_ref uuid="53314532463341344235433634373839" name="creditNumber">
+			<table_ref uuid="53314532463341344235433634373839" name="SupplierCredit"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="5CAD417F79D5424BA976B0E749297BC9" type="1">
@@ -5161,11 +5171,6 @@
 			<table_ref uuid="A26EDBD8B62D4DE087E21A5FA8D05B4D" name="SalesTransaction"/>
 		</field_ref>
 	</index>
-	<index kind="regular" unique_keys="true" uuid="AB02D29F597D574B9F46D98D8A249523" type="1">
-		<field_ref uuid="4A314532463341344235433634373839" name="UUID">
-			<table_ref uuid="4A314532463341344235433634373839" name="JournalEntry"/>
-		</field_ref>
-	</index>
 	<index kind="regular" unique_keys="true" uuid="ABAEBB32A2ED443EA9B32FEEA5AD2653" type="7">
 		<field_ref uuid="F5B5AFDC41774988B9579BC25C16F6E5" name="UUID">
 			<table_ref uuid="B323638126AF4BD7A4B7A486B0ACF9DA" name="BOM"/>
@@ -5564,11 +5569,6 @@
 	<index kind="regular" uuid="E686512B3F774546837FDA6CEEE73A0D" type="3">
 		<field_ref uuid="F58794A3833545FF8772A3125EED1C32" name="UUID_target">
 			<table_ref uuid="5DB5EC5859BC4655B933B6AD8069E3E6" name="sfw_Todo"/>
-		</field_ref>
-	</index>
-	<index kind="regular" unique_keys="true" uuid="E6B19E0EA5ECA641A5B83EDA01218740" type="1">
-		<field_ref uuid="53314532463341344235433634373839" name="creditNumber">
-			<table_ref uuid="53314532463341344235433634373839" name="SupplierCredit"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="E79FB17EC084474E9A88FD12B5EBE270" type="1">
