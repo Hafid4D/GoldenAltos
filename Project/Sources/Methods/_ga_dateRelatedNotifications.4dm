@@ -34,9 +34,9 @@ _ga_notifier(->$equipments; "duePM"; "DueEquipmentOutOfPM"; "Equipment"; "assign
 
 
 /*
-Employees requiring retraining in the next 30 days (one notification per certification assignment).
-Purpose: Uses assignment-based expiry (getCertiExpiredIn) and notifies qs/qm via Staff.checkRetraining.
-modified by 4D/PS [2026-may-21]
+Employees requiring retraining or certification expiry within the next 30 days — notify linked user only.
+Purpose: Uses assignment-based expiry (getCertiExpiredIn) and retrain milestones via Staff.checkRetraining.
+modified by 4D/PS [2026-june-12]
 */
 ds:C1482.Staff.checkRetraining(30)
 

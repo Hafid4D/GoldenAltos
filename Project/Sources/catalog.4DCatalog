@@ -1857,6 +1857,9 @@
 		<field name="duration" uuid="2C416E8F43E7FF47873E9F787A42DB2F" type="4" never_null="true" id="4"/>
 		<field name="oneTime" uuid="12EA1AFB18F4154F883825FDFD517862" type="1" never_null="true" id="5"/>
 		<field name="moreData" uuid="9B5E7B4A9314C44692992B295AA83BD9" type="21" blob_switch_size="2147483647" never_null="true" id="6"/>
+		<field name="retrainQuarterly" uuid="42374534433141393238463634334435" type="1" never_null="true" id="7"/>
+		<field name="retrainHalfYear" uuid="42374534433141393238463634334435" type="1" never_null="true" id="8"/>
+		<field name="retrainAnnually" uuid="42374534433141393238463634334435" type="1" never_null="true" id="9"/>
 		<primary_key field_name="UUID" field_uuid="46A023E9F16E49DBA21C7DCCBAA82770"/>
 	</table>
 	<table name="StepTemplateCertification" uuid="7A8F1179566C46A6AB8E4B04DD19B496" id="125">
@@ -4264,6 +4267,11 @@
 	<index kind="regular" uuid="1D4407A77A2445DB9D572AEB674BDE43" type="3">
 		<field_ref uuid="0C8B8BC2547F424CBBC35386810732B1" name="UUID_Staff">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="1D70B87EDB4E407EB9FB2DE93272E0CF" type="7">
+		<field_ref uuid="42374534433141393238463634334435" name="retrainAnnually">
+			<table_ref uuid="71FD451F60934C9995C7A6D899CA2B51" name="Certification"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="1D743111890A41C9A1CF4520DA239E7F" type="7">
