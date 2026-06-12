@@ -8,7 +8,7 @@ Function hasCertification($uuid_certification : Text)->$certified : Boolean
 	// Purpose: CertificationAssignment.expiredIn is a day-count validity period; validity uses certificationDate + expiredIn, not a stored expiry stmp.
 	// modified by 4D/PS [2026-may-12]
 	$certified:=False:C215
-	$assignment_es:=ds:C1482.CertificationAssignment.query("UUID_Staff = :1 AND UUID_Certification = :2"; This:C1470.UUID; $uuid_certification).orderBy("certificationDate desc")
+	$assignment_es:=ds:C1482.CertificationAssignment.query("UUID_Staff = :1 AND UUID_Certification = :2"; This:C1470.UUID; $uuid_certification).orderBy("certificationStmp desc")
 	
 	For each ($assignment_e; $assignment_es)
 		If ($assignment_e.validityActive)
@@ -66,7 +66,7 @@ Function setCertificationOverride($uuid_certification : Text; $override : Boolea
 	$ok:=False:C215
 	$assignment_e:=ds:C1482.CertificationAssignment\
 		.query("UUID_Staff = :1 AND UUID_Certification = :2"; This:C1470.UUID; $uuid_certification)\
-		.orderBy("certificationDate desc").first()
+		.orderBy("certificationStmp desc").first()
 	
 	If ($assignment_e#Null:C1517)
 		If ($assignment_e.moreData=Null:C1517)
@@ -97,7 +97,7 @@ Function deleteCertification($uuid_certification : Text)->$certified : Boolean
 Function getCertificationDate($uuid_certification : Text)->$certifiedAt : Date
 	$assignment_es:=ds:C1482.CertificationAssignment\
 		.query("UUID_Staff = :1 AND UUID_Certification = :2"; This:C1470.UUID; $uuid_certification)\
-		.orderBy("certificationDate desc")
+		.orderBy("certificationStmp desc")
 	
 	If ($assignment_es.length>0)
 		$certifiedAt:=$assignment_es[0].certificationDate  //cs.sfw_stmp.me.getDate($assignment_es[0].certificationDate)
@@ -111,7 +111,7 @@ Function getCertificationDate($uuid_certification : Text)->$certifiedAt : Date
 Function getCertiExpiredDate($uuid_certification : Text)->$expiringDate : Date
 	$assignment_es:=ds:C1482.CertificationAssignment\
 		.query("UUID_Staff = :1 AND UUID_Certification = :2"; This:C1470.UUID; $uuid_certification)\
-		.orderBy("certificationDate desc")
+		.orderBy("certificationStmp desc")
 	
 	If ($assignment_es.length>0)
 		// Purpose: Return calendar lapse date from certification date + duration days (expiredIn).

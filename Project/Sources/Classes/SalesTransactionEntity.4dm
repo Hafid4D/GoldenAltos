@@ -87,8 +87,6 @@ Function refreshStatus()
 	$absBalance:=Abs:C99(This:C1470.openBalance)
 	
 	Case of
-		: (This:C1470.moreData#Null:C1517) && ((This:C1470.moreData.closed=True:C214) | (This:C1470.moreData.readyToDel=True:C214))
-			$statusCode:="CLOSED"
 		: ($absAmount=0)
 			$statusCode:="OPEN"
 		: ($absBalance=0)

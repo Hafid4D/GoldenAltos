@@ -1,16 +1,17 @@
 //%attributes = {"executedOnServer":true}
 
-// Purpose: Production migration — seed TransactionType/Status and build initial SalesTransaction from legacy sources.
+// Purpose: Production migration — seed TransactionType/Status and build SalesTransaction from Invoice + JobInvoice.
 // Called once from __import_data after purchase order import; ongoing AR lines are created by user workflows.
 // Parameters: none.
 // Returns: nothing.
-// modified by 4D/PS [2026-june-08]
+// modified by 4D/PS [2026-june-09]
 
 var $types : Collection
 var $statuses : Collection
 var $i : Integer
 var $eType : cs:C1710.TransactionTypeEntity
 var $eStatus : cs:C1710.TransactionStatusEntity
+
 $types:=New collection:C1472(\
 	New object:C1471("name"; "Invoice"; "code"; "INV"; "levelID"; 1); \
 	New object:C1471("name"; "Credit Note"; "code"; "CM"; "levelID"; 2); \
@@ -25,10 +26,6 @@ $statuses:=New collection:C1472(\
 	New object:C1471("name"; "Applied"; "code"; "APPLIED"; "levelID"; 4); \
 	New object:C1471("name"; "Closed"; "code"; "CLOSED"; "levelID"; 5)\
 )
-
-// Purpose: Clear AR lines before reseeding reference tables (FK-safe order).
-// modified by 4D/PS [2026-june-08]
-TRUNCATE TABLE:C1051([SalesTransaction:80])
 
 TRUNCATE TABLE:C1051([TransactionType:87])
 For ($i; 0; $types.length-1)
@@ -53,4 +50,4 @@ End for
 ds:C1482.TransactionType.cacheClear()
 ds:C1482.TransactionStatus.cacheClear()
 
-ds:C1482.SalesTransaction.rebuildFromSources()
+__import_stBuildFromSources
