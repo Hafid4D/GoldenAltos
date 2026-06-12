@@ -55,8 +55,8 @@ Function applyOneTimeRule($oneTime : Boolean)
 	
 	
 // Purpose: Validity length in days for new staff assignments (Certification.duration — not re-training frequencies).
-// Returns: Integer — 0 when oneTime or duration not set; legacy fallback uses shortest frequency when duration is 0
-// modified by 4D/PS [2026-june-02]
+// Returns: Integer — 0 when oneTime; otherwise duration, shortest retraining frequency, or 365-day legacy default
+// modified by 4D/PS [2026-june-08]
 Function expiredInDaysForNewAssignment()->$days : Integer
 	
 	var $ident : Text
@@ -88,6 +88,12 @@ Function expiredInDaysForNewAssignment()->$days : Integer
 			End if 
 		End if 
 	End for each 
+	
+	// Purpose: Catalog import often leaves duration at 0; align with legacy staff training default (365 days).
+	// modified by 4D/PS [2026-june-08]
+	If ($days=0)
+		$days:=365
+	End if 
 	
 	
 // Purpose: Day offsets from certification date for each retraining reminder (Karla 2.f — multiple frequencies).

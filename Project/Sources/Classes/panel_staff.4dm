@@ -154,7 +154,7 @@ Function loadCertifications()
 		$daysUntilExpiry:=99999
 		If ($assignment_e#Null:C1517)
 			$certDt:=$assignment_e.certificationDate
-			$expDt:=This:C1470._staffCertExpiringDate($certDt; $certification)
+			$expDt:=This:C1470._staffCertExpiringDate($certDt; $certification; $assignment_e)
 			// Purpose: Precompute days until lapse for listbox rowFillSource (Date props in collection rows are unreliable there).
 			// modified by 4D/PS [2026-june-08]
 			If (Not:C34($certification.oneTime)) && ($expDt#!00-00-00!)
@@ -209,13 +209,14 @@ Function _formatStaffCertDate($date : Date) -> $text : Text
 	End if 
 	
 	
-Function _staffCertExpiringDate($certificationDate : Date; $certification_e : cs:C1710.CertificationEntity) -> $expiringDate : Date
-	// Purpose: Expired In = Certified At + Certification.duration (catalog), not a stale assignment snapshot.
+Function _staffCertExpiringDate($certificationDate : Date; $certification_e : cs:C1710.CertificationEntity; $assignment_e : cs:C1710.CertificationAssignmentEntity) -> $expiringDate : Date
+	// Purpose: Expired In = Certified At + catalog duration (or assignment snapshot when catalog has no duration).
 	// Parameters:
 	// $certificationDate : Date — assignment certification date
 	// $certification_e : cs.CertificationEntity — catalog row (duration / oneTime)
-	// Returns: Date — lapse date, or !00-00-00! when one-time or no duration
-	// created by 4D/PS [2026-june-09]
+	// $assignment_e : cs.CertificationAssignmentEntity — optional; expiredIn used when catalog resolves to 0 days
+	// Returns: Date — lapse date, or !00-00-00! when one-time or no validity window
+	// modified by 4D/PS [2026-june-08]
 	
 	var $validityDays : Integer
 	
@@ -228,6 +229,9 @@ Function _staffCertExpiringDate($certificationDate : Date; $certification_e : cs
 	End if 
 	
 	$validityDays:=$certification_e.expiredInDaysForNewAssignment()
+	If ($validityDays<=0) && ($assignment_e#Null:C1517) && ($assignment_e.expiredIn>0)
+		$validityDays:=$assignment_e.expiredIn
+	End if 
 	If ($validityDays>0)
 		$expiringDate:=Add to date:C393($certificationDate; 0; 0; $validityDays)
 	End if 
@@ -265,7 +269,7 @@ Function loadCertificationHistory()
 		.orderBy("certificationStmp desc"))
 		Form:C1466.certifications.push(New object:C1471(\
 			"certifiedAt"; This:C1470._formatStaffCertDate($assignment_e.certificationDate); \
-			"expiredIn"; This:C1470._formatStaffCertDate(This:C1470._staffCertExpiringDate($assignment_e.certificationDate; $cert_e))\
+			"expiredIn"; This:C1470._formatStaffCertDate(This:C1470._staffCertExpiringDate($assignment_e.certificationDate; $cert_e; $assignment_e))\
 			))
 	End for each 
 	
