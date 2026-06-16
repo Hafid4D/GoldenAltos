@@ -10,11 +10,11 @@ Case of
 		
 		$barcodeData:=cs:C1710.Util_ScannerManager.me.communicateWithScanner()  //Old versiono _ga_communicateWithScanner()
 		
-		//$esUsers:=ds.sfw_User.query("moreData.barcodeData = :1"; $barcodeData)//using application user barcode
-		$esUsers:=ds:C1482.Staff.query("moreData.barcodeData = :1"; $barcodeData)  //Using staff badge
+		$esUsers:=ds:C1482.sfw_User.query("moreData.barcodeData = :1"; $barcodeData)  //using application user barcode
+		//$esUsers:=ds.Staff.query("moreData.barcodeData = :1"; $barcodeData)  //Using staff badge
 		If (OK=1)
 			If ($esUsers.length=1)
-				$eUser:=$esUsers.first().user
+				$eUser:=$esUsers.first()  //.user
 				
 				If ($eUser#Null:C1517)
 					

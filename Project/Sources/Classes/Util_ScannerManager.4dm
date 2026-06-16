@@ -14,18 +14,27 @@ Function dropDownListSelection($dataClass; $foreignKey; $fieldRedrawer; $pannelC
 				cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("Error"; "No Records Found for the Barcode Scanned"))
 				
 			: ($eEntities.length=1)
-				$eEntity:=$eEntities.first()
-				//$keys:=Split string($foreignKey; ".")
-				//Case of 
-				//: ($keys.length=1)
-				Form:C1466.current_item[$foreignKey]:=$eEntity.UUID
-				
-				//: ($keys.length=2)  //Repair_Log case where fixer and reporter are saved as attribute of an object name operators
-				//Form.current_item[$keys[0]][$keys[1]]:=$eEntity.UUID
-				
-				//Else 
-				
-				//End case 
+				// Purpose: Barcode lives on sfw_User; RepairLog FK fields store linked Staff UUID.
+				// modified by 4D/PS [2026-june-08]
+				If ($dataClass="sfw_User")
+					Case of 
+						: ($eEntities[0].staffs.length=0)
+							cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("Error"; "No Records Found for the Barcode Scanned"))
+							
+						: ($eEntities[0].staffs.length=1)
+							$eEntity:=$eEntities[0].staffs[0]
+							Form:C1466.current_item[$foreignKey]:=$eEntity.UUID
+							
+						: ($eEntities[0].staffs.length>1)
+							cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("Error"; "Multiples Records Found for the Barcode Scanned"))
+							
+						Else 
+							
+					End case 
+				Else 
+					$eEntity:=$eEntities.first()
+					Form:C1466.current_item[$foreignKey]:=$eEntity.UUID
+				End if 
 				
 			: ($eEntities.length>1)
 				cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("Error"; "Multiples Records Found for the Barcode Scanned"))
@@ -49,67 +58,49 @@ Function scanForInputField()
 	
 Function UserApprovalByScanning($object)  //$type)
 	
+	// Purpose: Restore isApproved to its pre-click value when scan fails or is cancelled.
+	// The checkbox toggles the bound boolean before this handler runs; UI follows the value.
+	// Parameters: $object : Object — record with isApproved, approvedBy, approvalDate
+	// modified by 4D/PS [2026-june-08]
+	$previousIsApproved:=Not:C34($object.isApproved)
+	$scanOk:=False:C215
+	
 	$barcodeData:=This:C1470.communicateWithScanner()
 	
 	If (OK=1)
-		$eEntities:=ds:C1482.Staff.query("moreData.barcodeData = :1"; $barcodeData)
+		// Purpose: Resolve badge on sfw_User, then use linked Staff for approvedBy code.
+		// modified by 4D/PS [2026-june-08]
+		$eEntities:=ds:C1482.sfw_User.query("moreData.barcodeData = :1"; $barcodeData)
 		
 		Case of 
 				
 			: ($eEntities.length=0)
-				cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("No User Found for the Barcode Scanned"))
+				cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("Scan Error"; "No User Found for the Barcode Scanned"))
 				
 			: ($eEntities.length=1)
-				$eEntity:=$eEntities.first()
-				
-				If ($object.isApproved)
-					$object.approvedBy:=$eEntity.code
-					$object.approvalDate:=Current date:C33(*)
-				Else 
-					$object.approvedBy:=""
-					$object.approvalDate:=Date:C102(!00-00-00!)
-				End if 
-				
-/*
-//TODO : IMPROVE
-Case of 
-: ($type="document")
-If (Form.details.isApproved)
-Form.details.approvedBy:=$eEntity.code
-Form.details.approvalDate:=Current date(*)
-Else 
-Form.details.approvedBy:=""
-Form.details.approvalDate:=Date(!00-00-00!)
-End if 
-				
-: ($type="steps")
-				
-If (Form.currentStep.isApproved)
-Form.currentStep.approvedBy:=$eEntity.code
-Form.currentStep.approvalDate:=Current date(*)
-				
-Else 
-Form.currentStep.approvedBy:=""
-Form.currentStep.approvalDate:=Date(!00-00-00!)
-				
-End if 
-				
-				
-: ($type="other")
-				
-If (Form.current_item.isApproved)
-Form.current_item.approvalDate:=Current date(*)
-Form.current_item.approvedBy:=$eEntity.code
-Else 
-Form.current_item.approvalDate:=Date(!00-00-00!)
-Form.current_item.approvedBy:=""
-End if 
-				
-Else 
-				
-End case 
-				
-*/
+				Case of 
+					: ($eEntities[0].staffs.length=0)
+						cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("Scan Error"; "No User Found for the Barcode Scanned"))
+						
+					: ($eEntities[0].staffs.length=1)
+						
+						$eEntity:=$eEntities[0].staffs[0]
+						$scanOk:=True:C214
+						
+						If ($object.isApproved)
+							$object.approvedBy:=$eEntity.code
+							$object.approvalDate:=Current date:C33(*)
+						Else 
+							$object.approvedBy:=""
+							$object.approvalDate:=Date:C102(!00-00-00!)
+						End if 
+						
+					: ($eEntities[0].staffs.length>1)
+						cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("Scan Error"; "Multiples Users Found for the Barcode Scanned"))
+						
+					Else 
+						
+				End case 
 				
 			: ($eEntities.length>1)
 				cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("Multiples Users Found for the Barcode Scanned"))
@@ -118,9 +109,13 @@ End case
 				
 		End case 
 		
+		If (Not:C34($scanOk))
+			$object.isApproved:=$previousIsApproved
+		End if 
+		
 	Else 
 		
-		$object.isApproved:=Form:C1466.details.clone.isApproved
+		$object.isApproved:=$previousIsApproved
 		
 	End if 
 	
@@ -137,4 +132,4 @@ Function communicateWithScanner()->$barcodeData : Text
 	CLOSE WINDOW:C154($winRef)
 	$barcodeData:=(OK=1) ? $form.barcodeData : ""
 	
-	
+
