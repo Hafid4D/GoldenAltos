@@ -1,15 +1,14 @@
 //%attributes = {}
 
-// Purpose: Receive Payment action — reduces invoice open balance and creates a PAY SalesTransaction line.
+// Purpose: Receive Payment action — delegates to SalesTransaction.applyReceivePayment (full open balance on current invoice).
 // Parameters: uses Form.current_item (selected invoice line).
 // Returns: nothing.
-// created by 4D/PS [2026-june-08]
+// modified by 4D/PS [2026-june-17]
 
 var $invoice : cs:C1710.SalesTransactionEntity
 var $paymentAmount : Real
-var $ePayment : cs:C1710.SalesTransactionEntity
-var $eType : cs:C1710.TransactionTypeEntity
-var $maxNum : Integer
+var $applications : Collection
+var $result : Object
 
 $invoice:=Form:C1466.current_item
 
@@ -20,28 +19,13 @@ Else
 		cs:C1710.sfw_dialog.me.alert("Receive Payment is only available for open invoices.")
 	Else
 		$paymentAmount:=Abs:C99($invoice.openBalance)
-		// Purpose: Apply full open balance for now; partial payment UI will follow in a dedicated dialog.
-		// modified by 4D/PS [2026-june-08]
-		$maxNum:=ds:C1482.SalesTransaction.all().extract("transactionNumber").max()
-		$ePayment:=ds:C1482.SalesTransaction.new()
-		$ePayment.transactionNumber:=($maxNum=Null:C1517) ? 1 : $maxNum+1
-		$ePayment.UUID_Customer:=$invoice.UUID_Customer
-		$eType:=ds:C1482.TransactionType.query("code = :1"; "PAY").first()
-		If ($eType#Null:C1517)
-			$ePayment.UUID_TransactionType:=$eType.UUID
+		$applications:=New collection:C1472(New object:C1471("UUID_Invoice"; $invoice.UUID; "appliedAmount"; $paymentAmount))
+		$result:=ds:C1482.SalesTransaction.applyReceivePayment($invoice.UUID_Customer; $paymentAmount; $applications; "Payment for transaction #"+String:C10($invoice.transactionNumber); Current date:C33(*))
+		If ($result.success)
+			Form:C1466.current_item:=ds:C1482.SalesTransaction.get($invoice.UUID)
+			cs:C1710.sfw_dialog.me.alert("Payment of "+String:C10($result.totalApplied; "###,###,##0.00")+" recorded.")
+		Else
+			cs:C1710.sfw_dialog.me.alert($result.error)
 		End if
-		$ePayment.transactionDate:=Current date:C33(*)
-		$ePayment.Amount:=-$paymentAmount
-		$ePayment.openBalance:=0
-		$ePayment.memo:="Payment for transaction #"+String:C10($invoice.transactionNumber)
-		$ePayment.refreshStatus()
-		$ePayment.save()
-		
-		$invoice.openBalance:=0
-		$invoice.refreshStatus()
-		$invoice.save()
-		
-		Form:C1466.current_item:=ds:C1482.SalesTransaction.get($invoice.UUID)
-		cs:C1710.sfw_dialog.me.alert("Payment of "+String:C10($paymentAmount; "|Money")+" recorded.")
 	End if
 End if

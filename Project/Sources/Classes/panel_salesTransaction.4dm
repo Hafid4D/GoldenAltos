@@ -87,7 +87,9 @@ Function pup_type()
 
 Function drawPup_type()
 	If (Form:C1466.current_item#Null:C1517)
-		$eType:=Form:C1466.current_item.transactionType || New object:C1471
+		// Purpose: ORDA relation "type" (catalog), not transactionType.
+		// modified by 4D/PS [2026-june-17]
+		$eType:=Form:C1466.current_item.type || New object:C1471
 		$label:=$eType.name || "Type"
 		$color:=cs:C1710.sfw_htmlColor.me.getName($eType.color)
 		$pathIcon:=($color#"") ? "sfw/colors/"+$color+"-circle.png" : "sfw/image/skin/rainbow/icon/spacer-1x24.png"

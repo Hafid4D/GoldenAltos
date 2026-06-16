@@ -20,7 +20,9 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(1; ""; "Main")
 	
 	$entry.setLBItemsColumn("transactionNumber"; "Num"; "width:60")
-	$entry.setLBItemsColumn("transactionType.name"; "Type"; "width:100")
+	// Purpose: ORDA relation name is "type" (catalog name_Nto1), not transactionType.
+	// modified by 4D/PS [2026-june-17]
+	$entry.setLBItemsColumn("type.name"; "Type"; "width:100")
 	$entry.setLBItemsColumn("transactionDate"; "Date"; "width:80")
 	$entry.setLBItemsColumn("Amount"; "Amount"; "width:100")
 	
@@ -55,5 +57,135 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 Function main()->$transactions : cs:C1710.SalesTransactionSelection
 	$transactions:=ds:C1482.SalesTransaction.all()
+	
+	
+// Purpose: Return the next available transactionNumber for a new AR line.
+// Returns: Integer
+// created by 4D/PS [2026-june-17]
+Function nextTransactionNumber()->$num : Integer
+	var $max : Integer
+	
+	$max:=This:C1470.all().extract("transactionNumber").max()
+	$num:=($max=Null:C1517) ? 1 : $max+1
+	
+	
+// Purpose: Create a PAY line, apply amounts to open invoices, and persist PaymentApplication links.
+// Parameters:
+// $customerUUID : Text — customer UUID
+// $totalAmount : Real — total payment received (positive)
+// $applications : Collection — objects with UUID_Invoice (Text) and appliedAmount (Real)
+// $memo : Text — payment memo
+// $transactionDate : Date — payment date
+// Returns: Object — { success : Boolean, payment : SalesTransactionEntity|null, totalApplied : Real, error : Text }
+// created by 4D/PS [2026-june-17]
+Function applyReceivePayment($customerUUID : Text; $totalAmount : Real; $applications : Collection; $memo : Text; $transactionDate : Date)->$result : Object
+	
+	var $ePayment : cs:C1710.SalesTransactionEntity
+	var $eInv : cs:C1710.SalesTransactionEntity
+	var $eApp : cs:C1710.PaymentApplicationEntity
+	var $eType : cs:C1710.TransactionTypeEntity
+	var $totalApplied : Real
+	var $unapplied : Real
+	var $app : Object
+	var $res : Object
+	
+	$result:=New object:C1471("success"; False:C215; "payment"; Null:C1517; "totalApplied"; 0; "error"; "")
+	
+	If ($totalAmount<=0)
+		$result.error:="Payment amount must be greater than zero."
+		return $result
+	End if
+	
+	If ($applications.length=0)
+		$result.error:="Select at least one invoice to apply the payment."
+		return $result
+	End if
+	
+	$totalApplied:=0
+	For each ($app; $applications)
+		If ($app.appliedAmount#Null:C1517) && ($app.appliedAmount>0)
+			$eInv:=This:C1470.get($app.UUID_Invoice)
+			If ($eInv=Null:C1517)
+				$result.error:="Invoice not found for payment application."
+				return $result
+			End if
+			If ($eInv.UUID_Customer#$customerUUID)
+				$result.error:="All invoices must belong to the same customer."
+				return $result
+			End if
+			If (Not:C34($eInv.canReceivePayment()))
+				$result.error:="Invoice #"+String:C10($eInv.transactionNumber)+" cannot receive a payment."
+				return $result
+			End if
+			If ($app.appliedAmount>Abs:C99($eInv.openBalance))
+				$result.error:="Applied amount exceeds open balance on invoice #"+String:C10($eInv.transactionNumber)+"."
+				return $result
+			End if
+			$totalApplied:=$totalApplied+$app.appliedAmount
+		End if
+	End for each
+	
+	If ($totalApplied<=0)
+		$result.error:="Applied amount must be greater than zero."
+		return $result
+	End if
+	
+	If ($totalApplied>$totalAmount)
+		$result.error:="Applied amount cannot exceed the payment amount."
+		return $result
+	End if
+	
+	$ePayment:=This:C1470.new()
+	$ePayment.transactionNumber:=This:C1470.nextTransactionNumber()
+	$ePayment.UUID_Customer:=$customerUUID
+	$eType:=ds:C1482.TransactionType.query("code = :1"; "PAY").first()
+	If ($eType#Null:C1517)
+		$ePayment.UUID_TransactionType:=$eType.UUID
+	End if
+	$ePayment.transactionDate:=$transactionDate
+	$ePayment.Amount:=-$totalAmount
+	$unapplied:=$totalAmount-$totalApplied
+	$ePayment.openBalance:=($unapplied>0) ? -$unapplied : 0
+	$ePayment.memo:=$memo
+	$ePayment.applyTypeAmountSign("PAY")
+	$ePayment.refreshStatus()
+	
+	START TRANSACTION:C239
+	
+	$res:=$ePayment.save()
+	If (Not:C34($res.success))
+		CANCEL TRANSACTION:C241
+		$result.error:=$res.statusText
+		return $result
+	End if
+	
+	For each ($app; $applications)
+		If ($app.appliedAmount#Null:C1517) && ($app.appliedAmount>0)
+			$eInv:=This:C1470.get($app.UUID_Invoice)
+			$eInv.openBalance:=$eInv.openBalance-$app.appliedAmount
+			$eInv.refreshStatus()
+			$res:=$eInv.save()
+			If (Not:C34($res.success))
+				CANCEL TRANSACTION:C241
+				$result.error:=$res.statusText
+				return $result
+			End if
+			$eApp:=ds:C1482.PaymentApplication.new()
+			$eApp.UUID_Payment:=$ePayment.UUID
+			$eApp.UUID_Invoice:=$eInv.UUID
+			$eApp.appliedAmount:=$app.appliedAmount
+			$res:=$eApp.save()
+			If (Not:C34($res.success))
+				CANCEL TRANSACTION:C241
+				$result.error:=$res.statusText
+				return $result
+			End if
+		End if
+	End for each
+	
+	VALIDATE TRANSACTION:C240
+	$result.success:=True:C214
+	$result.payment:=$ePayment
+	$result.totalApplied:=$totalApplied
 	
 	

@@ -2230,6 +2230,13 @@
 		  <field blob_switch_size="2147483647" id="3" name="moreData" never_null="true" type="21" uuid="F1E2F3A4B5C64789A0B1C2D3E4F5A6BA"/>
 		  <primary_key field_name="UUID" field_uuid="F1E2F3A4B5C64789A0B1C2D3E4F5A6B8"/>
 	</table>
+	<table id="156" name="PaymentApplication" uuid="E8F1A2B3C4D5467890ABCDEF01234567">
+		  <field autogenerate="true" id="1" name="UUID" not_null="true" store_as_UUID="true" type="10" unique="true" uuid="E8F1A2B3C4D5467890ABCDEF01234568"/>
+		  <field id="2" name="UUID_Payment" never_null="true" store_as_UUID="true" type="10" uuid="E8F1A2B3C4D5467890ABCDEF01234569"/>
+		  <field id="3" name="UUID_Invoice" never_null="true" store_as_UUID="true" type="10" uuid="E8F1A2B3C4D5467890ABCDEF0123456A"/>
+		  <field id="4" name="appliedAmount" never_null="true" type="6" uuid="E8F1A2B3C4D5467890ABCDEF0123456B"/>
+		  <primary_key field_name="UUID" field_uuid="E8F1A2B3C4D5467890ABCDEF01234568"/>
+	</table>
 	<relation name_1toN="rejectCriteriaItems" name_Nto1="rejectCriteriaCategory" state="1" uuid="F1C2D3E4F5A64789B0C1D2E3F4A5B6DE">
 		  <related_field kind="source">
 			  <field_ref name="UUID_RejectCriteriaCategory" uuid="C2C2D3E4F5A64789B0C1D2E3F4A5B6D9">
@@ -2251,6 +2258,30 @@
 		  <related_field kind="destination">
 			  <field_ref name="UUID" uuid="D1E2F3A4B5C64789A0B1C2D3E4F5A6B8">
 				    <table_ref name="Deposit" uuid="D1E2F3A4B5C64789A0B1C2D3E4F5A6B7"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation name_1toN="paymentApplications" name_Nto1="payment" state="1" uuid="E8F1A2B3C4D5467890ABCDEF0123456C">
+		  <related_field kind="source">
+			  <field_ref name="UUID_Payment" uuid="E8F1A2B3C4D5467890ABCDEF01234569">
+				    <table_ref name="PaymentApplication" uuid="E8F1A2B3C4D5467890ABCDEF01234567"/>
+			</field_ref>
+		</related_field>
+		  <related_field kind="destination">
+			  <field_ref name="UUID" uuid="66A7606CC88C405AA14D3FA527D8C964">
+				    <table_ref name="SalesTransaction" uuid="A26EDBD8B62D4DE087E21A5FA8D05B4D"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation name_1toN="invoiceApplications" name_Nto1="appliedInvoice" state="1" uuid="E8F1A2B3C4D5467890ABCDEF0123456D">
+		  <related_field kind="source">
+			  <field_ref name="UUID_Invoice" uuid="E8F1A2B3C4D5467890ABCDEF0123456A">
+				    <table_ref name="PaymentApplication" uuid="E8F1A2B3C4D5467890ABCDEF01234567"/>
+			</field_ref>
+		</related_field>
+		  <related_field kind="destination">
+			  <field_ref name="UUID" uuid="66A7606CC88C405AA14D3FA527D8C964">
+				    <table_ref name="SalesTransaction" uuid="A26EDBD8B62D4DE087E21A5FA8D05B4D"/>
 			</field_ref>
 		</related_field>
 	</relation>
@@ -4262,6 +4293,21 @@
 	<index kind="regular" type="1" unique_keys="true" uuid="1CE50025D18149FA9FB1CA8B831ADB57">
 		  <field_ref name="UUID" uuid="D2E2F3A4B5C64789A0B1C2D3E4F5A6B8">
 			  <table_ref name="DepositItem" uuid="D2E2F3A4B5C64789A0B1C2D3E4F5A6B7"/>
+		</field_ref>
+	</index>
+	<index kind="regular" type="1" unique_keys="true" uuid="E8F1A2B3C4D5467890ABCDEF0123456E">
+		  <field_ref name="UUID" uuid="E8F1A2B3C4D5467890ABCDEF01234568">
+			  <table_ref name="PaymentApplication" uuid="E8F1A2B3C4D5467890ABCDEF01234567"/>
+		</field_ref>
+	</index>
+	<index kind="regular" type="3" uuid="E8F1A2B3C4D5467890ABCDEF0123456F">
+		  <field_ref name="UUID_Payment" uuid="E8F1A2B3C4D5467890ABCDEF01234569">
+			  <table_ref name="PaymentApplication" uuid="E8F1A2B3C4D5467890ABCDEF01234567"/>
+		</field_ref>
+	</index>
+	<index kind="regular" type="3" uuid="E8F1A2B3C4D5467890ABCDEF01234570">
+		  <field_ref name="UUID_Invoice" uuid="E8F1A2B3C4D5467890ABCDEF0123456A">
+			  <table_ref name="PaymentApplication" uuid="E8F1A2B3C4D5467890ABCDEF01234567"/>
 		</field_ref>
 	</index>
 	<index kind="regular" type="3" uuid="1D4407A77A2445DB9D572AEB674BDE43">

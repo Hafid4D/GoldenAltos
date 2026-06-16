@@ -29,17 +29,7 @@ local Function set dueDate($date : Date)
 
 local Function beforeSave()
 	var $typeCode : Text
-	$typeCode:=""
-	If (This:C1470.transactionType#Null:C1517)
-		$typeCode:=This:C1470.transactionType.code
-	Else
-		If (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID(This:C1470.UUID_TransactionType)))
-			$eType:=ds:C1482.TransactionType.get(This:C1470.UUID_TransactionType)
-			If ($eType#Null:C1517)
-				$typeCode:=$eType.code
-			End if
-		End if
-	End if
+	$typeCode:=This:C1470.typeCode()
 	If ($typeCode#"")
 		This:C1470.applyTypeAmountSign($typeCode)
 	End if
@@ -75,18 +65,32 @@ local Function _initOnCreation()
 		End if
 	End if
 
-// Purpose: Recompute status from amount and open balance (QuickBooks-style AR state).
-// modified by 4D/PS [2026-june-08]
+// Purpose: Recompute status from amount, open balance, and transaction type (QuickBooks-style AR state).
+// modified by 4D/PS [2026-june-17]
 Function refreshStatus()
 	var $statusCode : Text
 	var $eStatus : cs:C1710.TransactionStatusEntity
 	var $absAmount : Real
 	var $absBalance : Real
+	var $typeCode : Text
 	
+	$typeCode:=This:C1470.typeCode()
 	$absAmount:=Abs:C99(This:C1470.Amount)
 	$absBalance:=Abs:C99(This:C1470.openBalance)
 	
 	Case of
+		: ($typeCode="PAY")
+			If ($absBalance=0)
+				$statusCode:="APPLIED"
+			Else
+				$statusCode:="OPEN"
+			End if
+		: ($typeCode="CM")
+			If ($absBalance=0)
+				$statusCode:="APPLIED"
+			Else
+				$statusCode:="OPEN"
+			End if
 		: ($absAmount=0)
 			$statusCode:="OPEN"
 		: ($absBalance=0)
@@ -100,6 +104,24 @@ Function refreshStatus()
 	$eStatus:=ds:C1482.TransactionStatus.query("code = :1"; $statusCode).first()
 	If ($eStatus#Null:C1517)
 		This:C1470.UUID_TransactionStatus:=$eStatus.UUID
+	End if
+
+// Purpose: Return TransactionType.code from the ORDA "type" relation or UUID fallback.
+// Returns: Text — INV, CM, PAY, DEP, or empty when unknown
+// created by 4D/PS [2026-june-17]
+Function typeCode()->$typeCode : Text
+	var $eType : cs:C1710.TransactionTypeEntity
+	
+	$typeCode:=""
+	If (This:C1470.type#Null:C1517)
+		$typeCode:=This:C1470.type.code
+	Else
+		If (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID(This:C1470.UUID_TransactionType)))
+			$eType:=ds:C1482.TransactionType.get(This:C1470.UUID_TransactionType)
+			If ($eType#Null:C1517)
+				$typeCode:=$eType.code
+			End if
+		End if
 	End if
 
 // Purpose: Apply signed amount rules when the transaction type changes (credit notes are negative).
@@ -126,8 +148,6 @@ Function applyTypeAmountSign($typeCode : Text)
 // created by 4D/PS [2026-june-08]
 Function canReceivePayment()->$can : Boolean
 	var $typeCode : Text
-	$typeCode:=""
-	If (This:C1470.transactionType#Null:C1517)
-		$typeCode:=This:C1470.transactionType.code
-	End if
+	
+	$typeCode:=This:C1470.typeCode()
 	$can:=($typeCode="INV") & (This:C1470.openBalance#0)
