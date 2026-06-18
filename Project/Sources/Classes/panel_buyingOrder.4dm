@@ -122,7 +122,7 @@ Function bActionBuyItems()
 		DISABLE MENU ITEM:C150($refMenu; 1)
 	End if 
 	
-	APPEND MENU ITEM:C411($refMenu; "modify an Itenm"; *)
+	APPEND MENU ITEM:C411($refMenu; "modify an Item"; *)
 	SET MENU ITEM PARAMETER:C1004($refMenu; 2; "--modify")
 	If (sfw_checkIsInModification=False:C215) | (Form:C1466.selectedBoLine=Null:C1517) | Undefined:C82(Form:C1466.selectedBoLine)
 		DISABLE MENU ITEM:C150($refMenu; 2)

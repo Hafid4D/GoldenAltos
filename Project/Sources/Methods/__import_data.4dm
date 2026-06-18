@@ -5,6 +5,8 @@ _ga_createMoreDataFields
 __import_quote_param
 __import_lead_param
 __import_data_lists
+// Purpose: AR import chain — Customer before PO/Invoice; Invoice+JobInvoice before SalesTransaction build.
+// modified by 4D/PS [2026-june-08]
 __import_data_customer
 //__import_data_employees
 __import_teams

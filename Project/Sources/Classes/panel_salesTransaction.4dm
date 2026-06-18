@@ -51,10 +51,17 @@ Function selectCustomer()
 		End case
 	End if
 
+// Purpose: Load customer label from ORDA relation or direct UUID lookup when relation is not hydrated.
+// modified by 4D/PS [2026-june-08]
 Function drawPup_customer()
 	If (Form:C1466.current_item#Null:C1517)
-		$name:=Form:C1466.current_item.customer.name || " "
-		Form:C1466.sfw.drawButtonPup("pup_customer"; $name; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; (Form:C1466.current_item.customer=Null:C1517))
+		var $eCustomer : cs:C1710.CustomerEntity
+		$eCustomer:=Form:C1466.current_item.customer
+		If ($eCustomer=Null:C1517) && (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_Customer)))
+			$eCustomer:=ds:C1482.Customer.get(Form:C1466.current_item.UUID_Customer)
+		End if
+		$name:=($eCustomer#Null:C1517) ? $eCustomer.name : " "
+		Form:C1466.sfw.drawButtonPup("pup_customer"; $name; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; ($eCustomer=Null:C1517))
 	End if
 
 Function pup_type()
@@ -132,11 +139,20 @@ Function drawPup_status()
 		Form:C1466.sfw.drawButtonPup("pup_status"; $label; $pathIcon; ($eStatus=Null:C1517))
 	End if
 
+// Purpose: Open the linked customer in a new window using the same entity resolution as drawPup_customer.
+// modified by 4D/PS [2026-june-08]
 Function btnOpenCustomer()
 	Case of
 		: (FORM Event:C1606.code=On Clicked:K2:4)
-			If (Form:C1466.current_item#Null:C1517) && (Form:C1466.current_item.customer#Null:C1517)
-				cs:C1710.sfw_entry.me.open("Customer"; Form:C1466.current_item.customer)
+			If (Form:C1466.current_item#Null:C1517)
+				var $eCustomer : cs:C1710.CustomerEntity
+				$eCustomer:=Form:C1466.current_item.customer
+				If ($eCustomer=Null:C1517) && (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_Customer)))
+					$eCustomer:=ds:C1482.Customer.get(Form:C1466.current_item.UUID_Customer)
+				End if
+				If ($eCustomer#Null:C1517)
+					Form:C1466.sfw.openInANewWindow($eCustomer; "customerService"; "customer")
+				End if
 			End if
 		: (FORM Event:C1606.code=On Mouse Enter:K2:33)
 			SET CURSOR:C469(Choose:C955(OBJECT Get enabled:C1079(Self:C308->); 9000; 9019))

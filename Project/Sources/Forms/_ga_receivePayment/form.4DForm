@@ -1,0 +1,295 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "fixed",
+	"windowSizingY": "fixed",
+	"windowMinWidth": 520,
+	"windowMinHeight": 460,
+	"windowMaxWidth": 520,
+	"windowMaxHeight": 460,
+	"rightMargin": 16,
+	"bottomMargin": 16,
+	"events": [
+		"onLoad",
+		"onPageChange",
+		"onValidate",
+		"onClick",
+		"onDoubleClick",
+		"onOutsideCall",
+		"onBeginDragOver",
+		"onDragOver",
+		"onDrop",
+		"onAfterKeystroke",
+		"onMenuSelect",
+		"onPluginArea",
+		"onAfterEdit",
+		"onTimer",
+		"onBoundVariableChange"
+	],
+	"windowTitle": "Receive Payment",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {
+				"bkgd_page0": {
+					"type": "rectangle",
+					"top": 0,
+					"left": 0,
+					"width": 520,
+					"height": 460,
+					"fill": "#F5F5F5",
+					"stroke": "transparent"
+				},
+				"header": {
+					"type": "rectangle",
+					"top": 0,
+					"left": 0,
+					"width": 520,
+					"height": 36,
+					"fill": "#69A4C0",
+					"stroke": "transparent"
+				},
+				"lbl_title": {
+					"type": "text",
+					"top": 10,
+					"left": 12,
+					"width": 300,
+					"height": 18,
+					"text": "Receive Payment",
+					"fontSize": 12,
+					"fontWeight": "bold",
+					"fill": "#FFFFFF",
+					"stroke": "transparent"
+				}
+			}
+		},
+		{
+			"objects": {
+				"lbl_customer": {
+					"type": "text",
+					"top": 48,
+					"left": 12,
+					"width": 80,
+					"height": 17,
+					"text": "Customer"
+				},
+				"val_customer": {
+					"type": "text",
+					"top": 48,
+					"left": 100,
+					"width": 400,
+					"height": 17,
+					"dataSource": "Form:C1466.customerName"
+				},
+				"lbl_paymentDate": {
+					"type": "text",
+					"top": 72,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"text": "Payment date"
+				},
+				"entry_transactionDate": {
+					"type": "input",
+					"top": 72,
+					"left": 140,
+					"width": 100,
+					"height": 17,
+					"dataSource": "Form:C1466.transactionDate",
+					"dataSourceTypeHint": "date",
+					"enterable": false
+				},
+				"btn_transactionDate": {
+					"type": "button",
+					"text": " ",
+					"top": 72,
+					"left": 244,
+					"width": 17,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"icon": "/RESOURCES/image/element/calendar_black.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btn_transactionDate.4dm",
+					"focusable": false
+				},
+				"lbl_paymentAmount": {
+					"type": "text",
+					"top": 96,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"text": "Payment amount"
+				},
+				"entry_paymentAmount": {
+					"type": "input",
+					"top": 96,
+					"left": 140,
+					"width": 120,
+					"height": 17,
+					"dataSource": "Form:C1466.paymentAmount",
+					"dataSourceTypeHint": "number",
+					"events": [
+						"onDataChange"
+					],
+					"method": "ObjectMethods/entry_paymentAmount.4dm"
+				},
+				"lbl_memo": {
+					"type": "text",
+					"top": 120,
+					"left": 12,
+					"width": 80,
+					"height": 17,
+					"text": "Memo"
+				},
+				"entry_memo": {
+					"type": "input",
+					"top": 120,
+					"left": 100,
+					"width": 400,
+					"height": 17,
+					"dataSource": "Form:C1466.memo"
+				},
+				"lbl_invoices": {
+					"type": "text",
+					"top": 148,
+					"left": 12,
+					"width": 200,
+					"height": 17,
+					"text": "Apply payment to invoices",
+					"fontWeight": "bold"
+				},
+				"lb_invoices": {
+					"type": "listbox",
+					"top": 172,
+					"left": 12,
+					"width": 496,
+					"height": 220,
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.invoiceLines",
+					"scrollbarHorizontal": "hidden",
+					"scrollbarVertical": "automatic",
+					"events": [
+						"onDataChange"
+					],
+					"method": "ObjectMethods/lb_invoices.4dm",
+					"columns": [
+						{
+							"name": "col_num",
+							"dataSource": "This:C1470.transactionNumber",
+							"width": 60,
+							"header": {
+								"text": "Num"
+							}
+						},
+						{
+							"name": "col_date",
+							"dataSource": "This:C1470.transactionDate",
+							"width": 90,
+							"header": {
+								"text": "Date"
+							}
+						},
+						{
+							"name": "col_balance",
+							"dataSource": "This:C1470.openBalance",
+							"width": 110,
+							"header": {
+								"text": "Open balance"
+							}
+						},
+						{
+							"name": "col_apply",
+							"dataSource": "This:C1470.applyAmount",
+							"width": 110,
+							"enterable": true,
+							"header": {
+								"text": "Apply"
+							},
+							"events": [
+								"onDataChange"
+							]
+						}
+					]
+				},
+				"lbl_totalApplied": {
+					"type": "text",
+					"top": 400,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"text": "Total applied"
+				},
+				"val_totalApplied": {
+					"type": "input",
+					"top": 400,
+					"left": 140,
+					"width": 120,
+					"height": 17,
+					"dataSource": "Form:C1466.totalApplied",
+					"dataSourceTypeHint": "number",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent"
+				},
+				"lbl_unapplied": {
+					"type": "text",
+					"top": 400,
+					"left": 280,
+					"width": 120,
+					"height": 17,
+					"text": "Unapplied"
+				},
+				"val_unapplied": {
+					"type": "input",
+					"top": 400,
+					"left": 388,
+					"width": 120,
+					"height": 17,
+					"dataSource": "Form:C1466.unapplied",
+					"dataSourceTypeHint": "number",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent"
+				},
+				"btn_cancel": {
+					"type": "button",
+					"top": 424,
+					"left": 332,
+					"width": 80,
+					"height": 22,
+					"text": "Cancel",
+					"action": "cancel"
+				},
+				"btn_ok": {
+					"type": "button",
+					"top": 424,
+					"left": 428,
+					"width": 80,
+					"height": 22,
+					"text": "OK",
+					"defaultButton": true,
+					"method": "ObjectMethods/btn_ok.4dm",
+					"events": [
+						"onClick"
+					]
+				}
+			}
+		}
+	],
+	"geometryStamp": 1,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	},
+	"method": "method.4dm"
+}
