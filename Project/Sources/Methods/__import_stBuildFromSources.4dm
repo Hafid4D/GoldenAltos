@@ -17,10 +17,8 @@ var $openBalance : Real
 var $parts : Collection
 var $eType : cs:C1710.TransactionTypeEntity
 var $eStatus : cs:C1710.TransactionStatusEntity
-var $zeroUUID : Text
 var $info : Object
 
-$zeroUUID:="00"*16
 $count:=0
 $seq:=0
 
@@ -31,7 +29,7 @@ For each ($eInvoice; ds:C1482.Invoice.all())
 	$seq:=$seq+1
 	
 	$parts:=Split string:C1554($eInvoice.invoice; " "; sk trim spaces:K86:2)
-	Case of
+	Case of 
 		: ($parts.length=0)
 			$typeCode:="INV"
 		: ($parts[0]="CM")
@@ -40,39 +38,37 @@ For each ($eInvoice; ds:C1482.Invoice.all())
 			$typeCode:="PAY"
 		: ($parts[0]="DEP")
 			$typeCode:="DEP"
-		Else
+		Else 
 			$typeCode:="INV"
-	End case
+	End case 
 	
 	$num:=Num:C11($parts[$parts.length-1])
 	If ($num=0)
 		$num:=$seq
-	End if
+	End if 
 	
 	$amount:=$eInvoice.total
 	$openBalance:=$eInvoice.due
 	If ($typeCode="CM") && ($amount>0)
 		$amount:=-$amount
-	End if
+	End if 
 	If ($typeCode="CM") && ($openBalance>0)
 		$openBalance:=-$openBalance
-	End if
+	End if 
 	If ($typeCode="PAY") && ($amount>0)
 		$amount:=-$amount
-	End if
+	End if 
 	
 	$eST:=ds:C1482.SalesTransaction.new()
 	$eST.transactionNumber:=$num
-	If ($eInvoice.purchaseOrder#Null:C1517)
-		$eST.UUID_Customer:=$eInvoice.purchaseOrder.UUID_Customer
-	Else
-		$eST.UUID_Customer:=$zeroUUID
-	End if
+	// Purpose: Resolve customer via PO link, PO name, or legacy Invoice.customerId fallback.
+	// modified by 4D/PS [2026-june-08]
+	$eST.UUID_Customer:=ds:C1482.SalesTransaction.resolveCustomerUUIDFromInvoice($eInvoice)
 	
 	$eType:=ds:C1482.TransactionType.query("code = :1"; $typeCode).first()
 	If ($eType#Null:C1517)
 		$eST.UUID_TransactionType:=$eType.UUID
-	End if
+	End if 
 	$eST.stmpTransaction:=$eInvoice.date=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($eInvoice.date)
 	$eST.Amount:=$amount
 	$eST.openBalance:=$openBalance
@@ -85,14 +81,14 @@ For each ($eInvoice; ds:C1482.Invoice.all())
 		$eStatus:=ds:C1482.TransactionStatus.query("code = :1"; "CLOSED").first()
 		If ($eStatus#Null:C1517)
 			$eST.UUID_TransactionStatus:=$eStatus.UUID
-		End if
-	End if
+		End if 
+	End if 
 	
 	$info:=$eST.save()
 	If ($info.success)
 		$count:=$count+1
-	End if
-End for each
+	End if 
+End for each 
 
 // MARK: JobInvoice (customer service billing)
 For each ($eJobInvoice; ds:C1482.JobInvoice.all())
@@ -100,23 +96,24 @@ For each ($eJobInvoice; ds:C1482.JobInvoice.all())
 	$num:=Num:C11($eJobInvoice.invoiceNumber)
 	If ($num=0)
 		$num:=$seq+100000
-	End if
+	End if 
 	
 	$eST:=ds:C1482.SalesTransaction.new()
 	$eST.transactionNumber:=$num
-	If ($eJobInvoice.job#Null:C1517) && ($eJobInvoice.job.purchaseOrder#Null:C1517)
-		$eST.UUID_Customer:=$eJobInvoice.job.purchaseOrder.UUID_Customer
-	Else
-		$eST.UUID_Customer:=$zeroUUID
-	End if
+	// Purpose: Resolve customer via job, PO, or customer name fallback.
+	// modified by 4D/PS [2026-june-08]
+	$eST.UUID_Customer:=ds:C1482.SalesTransaction.resolveCustomerUUIDFromJobInvoice($eJobInvoice)
 	
 	$eType:=ds:C1482.TransactionType.query("code = :1"; "INV").first()
 	If ($eType#Null:C1517)
 		$eST.UUID_TransactionType:=$eType.UUID
-	End if
+	End if 
 	$eST.stmpTransaction:=$eJobInvoice.invoiceStmp
-	$eST.Amount:=$eJobInvoice.total
-	$eST.openBalance:=$eJobInvoice.total
+	// Purpose: Use charge components when legacy total field is zero on import.
+	// modified by 4D/PS [2026-june-08]
+	$amount:=ds:C1482.SalesTransaction.resolveJobInvoiceAmount($eJobInvoice)
+	$eST.Amount:=$amount
+	$eST.openBalance:=$amount
 	$eST.memo:="Job invoice "+$eJobInvoice.invoiceNumber
 	$eST.applyTypeAmountSign("INV")
 	$eST.refreshStatus()
@@ -124,7 +121,7 @@ For each ($eJobInvoice; ds:C1482.JobInvoice.all())
 	$info:=$eST.save()
 	If ($info.success)
 		$count:=$count+1
-	End if
-End for each
+	End if 
+End for each 
 
 $0:=$count

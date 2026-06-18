@@ -1,47 +1,69 @@
 //%attributes = {}
 
-// Purpose: Receive Payment action — reduces invoice open balance and creates a PAY SalesTransaction line.
+// Purpose: Open the Receive Payment dialog for the selected invoice (partial / multi-invoice apply).
 // Parameters: uses Form.current_item (selected invoice line).
 // Returns: nothing.
-// created by 4D/PS [2026-june-08]
+// modified by 4D/PS [2026-june-08]
 
 var $invoice : cs:C1710.SalesTransactionEntity
-var $paymentAmount : Real
-var $ePayment : cs:C1710.SalesTransactionEntity
-var $eType : cs:C1710.TransactionTypeEntity
-var $maxNum : Integer
+var $form : Object
+var $winRef : Integer
+var $result : Object
+var $eCustomer : cs:C1710.CustomerEntity
+var $customerName : Text
 
 $invoice:=Form:C1466.current_item
 
 If ($invoice=Null:C1517)
 	cs:C1710.sfw_dialog.me.alert("Select a sales transaction first.")
 Else
+	// Purpose: Re-sync zero-balance job invoice ST rows from JobInvoice charge fields before eligibility check.
+	// modified by 4D/PS [2026-june-08]
+	$invoice:=ds:C1482.SalesTransaction.syncJobInvoiceSTAmount($invoice)
+	
 	If (Not:C34($invoice.canReceivePayment()))
-		cs:C1710.sfw_dialog.me.alert("Receive Payment is only available for open invoices.")
+		Case of
+			: ($invoice.typeCode()#"INV")
+				cs:C1710.sfw_dialog.me.alert("Receive Payment is only available for invoice lines.")
+			: (Abs:C99($invoice.openBalance)=0)
+				cs:C1710.sfw_dialog.me.alert("This invoice has no open balance. Check Amount on the transaction or the linked Job Invoice.")
+			Else
+				cs:C1710.sfw_dialog.me.alert("Receive Payment is only available for open invoices.")
+		End case
 	Else
-		$paymentAmount:=Abs:C99($invoice.openBalance)
-		// Purpose: Apply full open balance for now; partial payment UI will follow in a dedicated dialog.
+		// Purpose: Resolve customer label from ORDA relation or UUID when relation is not hydrated.
 		// modified by 4D/PS [2026-june-08]
-		$maxNum:=ds:C1482.SalesTransaction.all().extract("transactionNumber").max()
-		$ePayment:=ds:C1482.SalesTransaction.new()
-		$ePayment.transactionNumber:=($maxNum=Null:C1517) ? 1 : $maxNum+1
-		$ePayment.UUID_Customer:=$invoice.UUID_Customer
-		$eType:=ds:C1482.TransactionType.query("code = :1"; "PAY").first()
-		If ($eType#Null:C1517)
-			$ePayment.UUID_TransactionType:=$eType.UUID
+		$customerName:=""
+		$eCustomer:=$invoice.customer
+		If ($eCustomer=Null:C1517) && (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID($invoice.UUID_Customer)))
+			$eCustomer:=ds:C1482.Customer.get($invoice.UUID_Customer)
 		End if
-		$ePayment.transactionDate:=Current date:C33(*)
-		$ePayment.Amount:=-$paymentAmount
-		$ePayment.openBalance:=0
-		$ePayment.memo:="Payment for transaction #"+String:C10($invoice.transactionNumber)
-		$ePayment.refreshStatus()
-		$ePayment.save()
+		If ($eCustomer#Null:C1517)
+			$customerName:=$eCustomer.name
+		End if
 		
-		$invoice.openBalance:=0
-		$invoice.refreshStatus()
-		$invoice.save()
+		$form:=New object:C1471(\
+			"seedInvoice"; $invoice; \
+			"customerName"; $customerName; \
+			"customerUUID"; $invoice.UUID_Customer; \
+			"paymentAmount"; Abs:C99($invoice.openBalance); \
+			"transactionDate"; Current date:C33(*); \
+			"memo"; "Payment for transaction #"+String:C10($invoice.transactionNumber); \
+			"invoiceLines"; New collection:C1472(); \
+			"totalApplied"; 0; \
+			"unapplied"; 0)
 		
-		Form:C1466.current_item:=ds:C1482.SalesTransaction.get($invoice.UUID)
-		cs:C1710.sfw_dialog.me.alert("Payment of "+String:C10($paymentAmount; "|Money")+" recorded.")
+		$winRef:=Open form window:C675("_ga_receivePayment"; Plain form window:K39:6; Horizontally centered:K39:3; Vertically centered:K39:4)
+		SET WINDOW TITLE:C213("Receive Payment"; $winRef)
+		DIALOG:C40("_ga_receivePayment"; $form)
+		CLOSE WINDOW:C154($winRef)
+		
+		If (OK=1)
+			$result:=$form.dialogResult
+			Form:C1466.current_item:=ds:C1482.SalesTransaction.get($invoice.UUID)
+			If ($result#Null:C1517)
+				cs:C1710.sfw_dialog.me.alert("Payment of "+String:C10($result.totalApplied; "###,###,##0.00")+" recorded.")
+			End if
+		End if
 	End if
 End if

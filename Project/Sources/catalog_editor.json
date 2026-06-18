@@ -1,5 +1,21 @@
 {
 	"tables": {
+		"PaymentApplication": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 40,
+				"top": 2510,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
 		"FinancialReport": {
 			"color": {
 				"red": 32,
@@ -1579,9 +1595,9 @@
 				"left": 3283,
 				"top": 542,
 				"width": 120,
-				"height": 133.33203125
+				"height": 159.33203125
 			},
-			"displayable_fields_count": 4
+			"displayable_fields_count": 5
 		},
 		"EquipmentEvent": {
 			"color": {
