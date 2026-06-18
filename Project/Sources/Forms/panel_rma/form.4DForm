@@ -460,7 +460,8 @@
 					"method": "ObjectMethods/pup_customerPO.4dm",
 					"events": [
 						"onClick"
-					]
+					],
+					"visibility": "hidden"
 				},
 				"pup_traveler": {
 					"type": "button",
@@ -501,6 +502,23 @@
 					"visibility": "visible",
 					"iconFrames": 4,
 					"focusable": false
+				},
+				"Field_customerPO": {
+					"type": "input",
+					"top": 37,
+					"left": 340,
+					"width": 110,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.customerPo",
+					"focusable": false,
+					"enterable": false,
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent",
+					"borderStyle": "none"
 				}
 			}
 		},
@@ -759,7 +777,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 589,
+	"geometryStamp": 593,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
