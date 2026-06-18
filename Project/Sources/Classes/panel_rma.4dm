@@ -215,9 +215,9 @@ Function selectTraveler()
 	This:C1470.drawPup_traveler()
 	
 	
-// Purpose: Fill RMA header from a selected lot — travelerNumber (original traveler), PO, and linked CAR when unambiguous.
-// Parameters: $lot_e : cs.LotEntity — lot chosen from the traveler picker
-// modified by 4D/PS [2026-june-08]
+	// Purpose: Fill RMA header from a selected lot — travelerNumber (original traveler), PO, and linked CAR when unambiguous.
+	// Parameters: $lot_e : cs.LotEntity — lot chosen from the traveler picker
+	// modified by 4D/PS [2026-june-08]
 Function applyLotSelection($lot_e : cs:C1710.LotEntity)
 	
 	If ($lot_e=Null:C1517)
