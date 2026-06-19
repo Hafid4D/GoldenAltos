@@ -5,30 +5,16 @@
 	},
 	"windowSizingX": "fixed",
 	"windowSizingY": "fixed",
-	"windowMinWidth": 520,
-	"windowMinHeight": 460,
-	"windowMaxWidth": 520,
-	"windowMaxHeight": 460,
+	"windowMinWidth": 560,
+	"windowMinHeight": 480,
+	"windowMaxWidth": 560,
+	"windowMaxHeight": 480,
 	"rightMargin": 16,
 	"bottomMargin": 16,
 	"events": [
-		"onLoad",
-		"onPageChange",
-		"onValidate",
-		"onClick",
-		"onDoubleClick",
-		"onOutsideCall",
-		"onBeginDragOver",
-		"onDragOver",
-		"onDrop",
-		"onAfterKeystroke",
-		"onMenuSelect",
-		"onPluginArea",
-		"onAfterEdit",
-		"onTimer",
-		"onBoundVariableChange"
+		"onLoad"
 	],
-	"windowTitle": "Receive Payment",
+	"windowTitle": "Make Deposit",
 	"destination": "detailScreen",
 	"pages": [
 		{
@@ -37,8 +23,8 @@
 					"type": "rectangle",
 					"top": 0,
 					"left": 0,
-					"width": 520,
-					"height": 460,
+					"width": 560,
+					"height": 480,
 					"fill": "#F5F5F5",
 					"stroke": "transparent"
 				},
@@ -46,7 +32,7 @@
 					"type": "rectangle",
 					"top": 0,
 					"left": 0,
-					"width": 520,
+					"width": 560,
 					"height": 36,
 					"fill": "#69A4C0",
 					"stroke": "transparent"
@@ -57,7 +43,7 @@
 					"left": 12,
 					"width": 300,
 					"height": 18,
-					"text": "Receive Payment",
+					"text": "Make Deposit",
 					"fontSize": 12,
 					"fontWeight": "bold",
 					"fill": "#FFFFFF",
@@ -67,50 +53,62 @@
 		},
 		{
 			"objects": {
-				"lbl_customer": {
+				"lbl_bankAccount": {
 					"type": "text",
 					"top": 48,
 					"left": 12,
-					"width": 80,
+					"width": 100,
 					"height": 17,
-					"text": "Customer"
+					"text": "Bank account"
 				},
-				"val_customer": {
+				"val_bankAccount": {
 					"type": "input",
 					"top": 48,
-					"left": 100,
-					"width": 400,
+					"left": 120,
+					"width": 360,
 					"height": 17,
-					"dataSource": "Form:C1466.customerName",
+					"dataSource": "Form:C1466.bankAccountName",
 					"dataSourceTypeHint": "text",
 					"enterable": false,
 					"focusable": false,
 					"borderStyle": "none",
 					"fill": "transparent"
 				},
-				"lbl_paymentDate": {
+				"btn_bankAccount": {
+					"type": "button",
+					"text": "...",
+					"top": 46,
+					"left": 488,
+					"width": 24,
+					"height": 22,
+					"method": "ObjectMethods/btn_bankAccount.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"lbl_depositDate": {
 					"type": "text",
 					"top": 72,
 					"left": 12,
-					"width": 120,
-					"height": 17,
-					"text": "Payment date"
-				},
-				"entry_transactionDate": {
-					"type": "input",
-					"top": 72,
-					"left": 140,
 					"width": 100,
 					"height": 17,
-					"dataSource": "Form:C1466.transactionDate",
+					"text": "Deposit date"
+				},
+				"entry_depositDate": {
+					"type": "input",
+					"top": 72,
+					"left": 120,
+					"width": 100,
+					"height": 17,
+					"dataSource": "Form:C1466.depositDate",
 					"dataSourceTypeHint": "date",
 					"enterable": false
 				},
-				"btn_transactionDate": {
+				"btn_depositDate": {
 					"type": "button",
 					"text": " ",
 					"top": 72,
-					"left": 244,
+					"left": 224,
 					"width": 17,
 					"height": 17,
 					"events": [
@@ -119,33 +117,12 @@
 					"style": "custom",
 					"icon": "/RESOURCES/image/element/calendar_black.png",
 					"textPlacement": "center",
-					"method": "ObjectMethods/btn_transactionDate.4dm",
+					"method": "ObjectMethods/btn_depositDate.4dm",
 					"focusable": false
-				},
-				"lbl_paymentAmount": {
-					"type": "text",
-					"top": 96,
-					"left": 12,
-					"width": 120,
-					"height": 17,
-					"text": "Payment amount"
-				},
-				"entry_paymentAmount": {
-					"type": "input",
-					"top": 96,
-					"left": 140,
-					"width": 120,
-					"height": 17,
-					"dataSource": "Form:C1466.paymentAmount",
-					"dataSourceTypeHint": "number",
-					"events": [
-						"onDataChange"
-					],
-					"method": "ObjectMethods/entry_paymentAmount.4dm"
 				},
 				"lbl_memo": {
 					"type": "text",
-					"top": 120,
+					"top": 96,
 					"left": 12,
 					"width": 80,
 					"height": 17,
@@ -153,49 +130,49 @@
 				},
 				"entry_memo": {
 					"type": "input",
-					"top": 120,
-					"left": 100,
-					"width": 400,
+					"top": 96,
+					"left": 120,
+					"width": 392,
 					"height": 17,
 					"dataSource": "Form:C1466.memo"
 				},
-				"lbl_invoices": {
+				"lbl_payments": {
 					"type": "text",
-					"top": 148,
+					"top": 124,
 					"left": 12,
-					"width": 200,
+					"width": 240,
 					"height": 17,
-					"text": "Apply payment to invoices",
+					"text": "Undeposited payments",
 					"fontWeight": "bold"
 				},
-				"lb_invoices": {
+				"lb_payments": {
 					"type": "listbox",
-					"top": 172,
+					"top": 148,
 					"left": 12,
-					"width": 496,
-					"height": 220,
+					"width": 536,
+					"height": 260,
 					"listboxType": "collection",
-					"dataSource": "Form:C1466.invoiceLines",
+					"dataSource": "Form:C1466.paymentLines",
 					"scrollbarHorizontal": "hidden",
 					"scrollbarVertical": "automatic",
 					"events": [
 						"onDataChange"
 					],
-					"method": "ObjectMethods/lb_invoices.4dm",
+					"method": "ObjectMethods/lb_payments.4dm",
 					"columns": [
 						{
-							"name": "col_uuid",
-							"dataSource": "This:C1470.UUID_Invoice",
-							"width": 0,
-							"enterable": false,
+							"name": "col_include",
+							"dataSource": "This:C1470.include",
+							"width": 50,
+							"enterable": true,
 							"header": {
-								"text": ""
+								"text": "Inc."
 							}
 						},
 						{
 							"name": "col_num",
 							"dataSource": "This:C1470.transactionNumber",
-							"width": 60,
+							"width": 50,
 							"header": {
 								"text": "Num"
 							}
@@ -209,63 +186,38 @@
 							}
 						},
 						{
-							"name": "col_balance",
-							"dataSource": "This:C1470.openBalance",
-							"width": 110,
+							"name": "col_customer",
+							"dataSource": "This:C1470.customerName",
+							"width": 180,
 							"header": {
-								"text": "Open balance"
+								"text": "Customer"
 							}
 						},
 						{
-							"name": "col_apply",
-							"dataSource": "This:C1470.applyAmount",
-							"width": 110,
-							"enterable": true,
+							"name": "col_amount",
+							"dataSource": "This:C1470.amount",
+							"width": 100,
 							"header": {
-								"text": "Apply"
-							},
-							"events": [
-								"onDataChange"
-							]
+								"text": "Amount"
+							}
 						}
 					]
 				},
-				"lbl_totalApplied": {
+				"lbl_totalSelected": {
 					"type": "text",
-					"top": 400,
+					"top": 416,
 					"left": 12,
 					"width": 120,
 					"height": 17,
-					"text": "Total applied"
+					"text": "Total selected"
 				},
-				"val_totalApplied": {
+				"val_totalSelected": {
 					"type": "input",
-					"top": 400,
+					"top": 416,
 					"left": 140,
 					"width": 120,
 					"height": 17,
-					"dataSource": "Form:C1466.totalApplied",
-					"dataSourceTypeHint": "number",
-					"enterable": false,
-					"focusable": false,
-					"borderStyle": "none",
-					"fill": "transparent"
-				},
-				"lbl_unapplied": {
-					"type": "text",
-					"top": 400,
-					"left": 280,
-					"width": 120,
-					"height": 17,
-					"text": "Unapplied"
-				},
-				"val_unapplied": {
-					"type": "input",
-					"top": 400,
-					"left": 388,
-					"width": 120,
-					"height": 17,
-					"dataSource": "Form:C1466.unapplied",
+					"dataSource": "Form:C1466.totalSelected",
 					"dataSourceTypeHint": "number",
 					"enterable": false,
 					"focusable": false,
@@ -274,8 +226,8 @@
 				},
 				"btn_cancel": {
 					"type": "button",
-					"top": 424,
-					"left": 332,
+					"top": 444,
+					"left": 372,
 					"width": 80,
 					"height": 22,
 					"text": "Cancel",
@@ -283,8 +235,8 @@
 				},
 				"btn_ok": {
 					"type": "button",
-					"top": 424,
-					"left": 428,
+					"top": 444,
+					"left": 468,
 					"width": 80,
 					"height": 22,
 					"text": "OK",

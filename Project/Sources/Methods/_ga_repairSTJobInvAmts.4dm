@@ -13,7 +13,7 @@ $updated:=0
 
 For each ($eST; ds:C1482.SalesTransaction.all())
 	If ($eST.memo#Null:C1517) && (Position:C15("Job invoice "; $eST.memo)=1) && ($eST.openBalance=0) && ($eST.Amount=0)
-		$eRefreshed:=ds:C1482.SalesTransaction.syncJobInvoiceSTAmount($eST)
+		$eRefreshed:=$eST.syncJobInvoiceSTAmount()
 		If (($eRefreshed.openBalance#0) || ($eRefreshed.Amount#0))
 			$updated:=$updated+1
 		End if

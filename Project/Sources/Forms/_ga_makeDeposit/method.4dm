@@ -1,0 +1,6 @@
+// Purpose: Make Deposit dialog — load undeposited payments.
+// created by 4D/PS [2026-june-08]
+Case of 
+	: (Form event:C1606.code=On Load:K2:1)
+		_ga_makeDepositOnLoad()
+End case 

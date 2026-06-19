@@ -6,29 +6,15 @@
 	"windowSizingX": "fixed",
 	"windowSizingY": "fixed",
 	"windowMinWidth": 520,
-	"windowMinHeight": 460,
+	"windowMinHeight": 440,
 	"windowMaxWidth": 520,
-	"windowMaxHeight": 460,
+	"windowMaxHeight": 440,
 	"rightMargin": 16,
 	"bottomMargin": 16,
 	"events": [
-		"onLoad",
-		"onPageChange",
-		"onValidate",
-		"onClick",
-		"onDoubleClick",
-		"onOutsideCall",
-		"onBeginDragOver",
-		"onDragOver",
-		"onDrop",
-		"onAfterKeystroke",
-		"onMenuSelect",
-		"onPluginArea",
-		"onAfterEdit",
-		"onTimer",
-		"onBoundVariableChange"
+		"onLoad"
 	],
-	"windowTitle": "Receive Payment",
+	"windowTitle": "Apply Credit Memo",
 	"destination": "detailScreen",
 	"pages": [
 		{
@@ -38,7 +24,7 @@
 					"top": 0,
 					"left": 0,
 					"width": 520,
-					"height": 460,
+					"height": 440,
 					"fill": "#F5F5F5",
 					"stroke": "transparent"
 				},
@@ -57,7 +43,7 @@
 					"left": 12,
 					"width": 300,
 					"height": 18,
-					"text": "Receive Payment",
+					"text": "Apply Credit Memo",
 					"fontSize": 12,
 					"fontWeight": "bold",
 					"fill": "#FFFFFF",
@@ -71,15 +57,15 @@
 					"type": "text",
 					"top": 48,
 					"left": 12,
-					"width": 80,
+					"width": 100,
 					"height": 17,
 					"text": "Customer"
 				},
 				"val_customer": {
 					"type": "input",
 					"top": 48,
-					"left": 100,
-					"width": 400,
+					"left": 120,
+					"width": 380,
 					"height": 17,
 					"dataSource": "Form:C1466.customerName",
 					"dataSourceTypeHint": "text",
@@ -88,60 +74,47 @@
 					"borderStyle": "none",
 					"fill": "transparent"
 				},
-				"lbl_paymentDate": {
+				"lbl_creditMemo": {
 					"type": "text",
 					"top": 72,
 					"left": 12,
-					"width": 120,
-					"height": 17,
-					"text": "Payment date"
-				},
-				"entry_transactionDate": {
-					"type": "input",
-					"top": 72,
-					"left": 140,
 					"width": 100,
 					"height": 17,
-					"dataSource": "Form:C1466.transactionDate",
-					"dataSourceTypeHint": "date",
-					"enterable": false
+					"text": "Credit memo #"
 				},
-				"btn_transactionDate": {
-					"type": "button",
-					"text": " ",
+				"val_creditMemo": {
+					"type": "input",
 					"top": 72,
-					"left": 244,
-					"width": 17,
+					"left": 120,
+					"width": 80,
 					"height": 17,
-					"events": [
-						"onClick"
-					],
-					"style": "custom",
-					"icon": "/RESOURCES/image/element/calendar_black.png",
-					"textPlacement": "center",
-					"method": "ObjectMethods/btn_transactionDate.4dm",
-					"focusable": false
+					"dataSource": "Form:C1466.creditMemoNumber",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent"
 				},
-				"lbl_paymentAmount": {
+				"lbl_creditAvailable": {
 					"type": "text",
 					"top": 96,
 					"left": 12,
 					"width": 120,
 					"height": 17,
-					"text": "Payment amount"
+					"text": "Credit available"
 				},
-				"entry_paymentAmount": {
+				"val_creditAvailable": {
 					"type": "input",
 					"top": 96,
 					"left": 140,
 					"width": 120,
 					"height": 17,
-					"dataSource": "Form:C1466.paymentAmount",
+					"dataSource": "Form:C1466.creditAvailable",
 					"dataSourceTypeHint": "number",
-					"events": [
-						"onDataChange"
-					],
-					"method": "ObjectMethods/entry_paymentAmount.4dm"
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent"
 				},
 				"lbl_memo": {
 					"type": "text",
@@ -163,9 +136,9 @@
 					"type": "text",
 					"top": 148,
 					"left": 12,
-					"width": 200,
+					"width": 240,
 					"height": 17,
-					"text": "Apply payment to invoices",
+					"text": "Apply credit to invoices",
 					"fontWeight": "bold"
 				},
 				"lb_invoices": {
@@ -173,7 +146,7 @@
 					"top": 172,
 					"left": 12,
 					"width": 496,
-					"height": 220,
+					"height": 200,
 					"listboxType": "collection",
 					"dataSource": "Form:C1466.invoiceLines",
 					"scrollbarHorizontal": "hidden",
@@ -232,7 +205,7 @@
 				},
 				"lbl_totalApplied": {
 					"type": "text",
-					"top": 400,
+					"top": 380,
 					"left": 12,
 					"width": 120,
 					"height": 17,
@@ -240,7 +213,7 @@
 				},
 				"val_totalApplied": {
 					"type": "input",
-					"top": 400,
+					"top": 380,
 					"left": 140,
 					"width": 120,
 					"height": 17,
@@ -251,21 +224,21 @@
 					"borderStyle": "none",
 					"fill": "transparent"
 				},
-				"lbl_unapplied": {
+				"lbl_remainingCredit": {
 					"type": "text",
-					"top": 400,
+					"top": 380,
 					"left": 280,
 					"width": 120,
 					"height": 17,
-					"text": "Unapplied"
+					"text": "Remaining credit"
 				},
-				"val_unapplied": {
+				"val_remainingCredit": {
 					"type": "input",
-					"top": 400,
-					"left": 388,
-					"width": 120,
+					"top": 380,
+					"left": 400,
+					"width": 108,
 					"height": 17,
-					"dataSource": "Form:C1466.unapplied",
+					"dataSource": "Form:C1466.remainingCredit",
 					"dataSourceTypeHint": "number",
 					"enterable": false,
 					"focusable": false,
@@ -274,7 +247,7 @@
 				},
 				"btn_cancel": {
 					"type": "button",
-					"top": 424,
+					"top": 404,
 					"left": 332,
 					"width": 80,
 					"height": 22,
@@ -283,7 +256,7 @@
 				},
 				"btn_ok": {
 					"type": "button",
-					"top": 424,
+					"top": 404,
 					"left": 428,
 					"width": 80,
 					"height": 22,

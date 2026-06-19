@@ -151,3 +151,117 @@ Function canReceivePayment()->$can : Boolean
 	
 	$typeCode:=This:C1470.typeCode()
 	$can:=($typeCode="INV") & (This:C1470.openBalance#0)
+
+// Purpose: Return True when this credit memo line has unapplied credit (open CM balance).
+// Returns: Boolean
+// created by 4D/PS [2026-june-08]
+Function canApplyCreditMemo()->$can : Boolean
+	var $typeCode : Text
+	
+	$typeCode:=This:C1470.typeCode()
+	$can:=($typeCode="CM") & (This:C1470.openBalance#0)
+
+// Purpose: Ensure the moreData blob exists before reading or writing AR extension fields.
+// modified by 4D/PS [2026-june-08]
+Function _ensureMoreData()
+	If (This:C1470.moreData=Null:C1517)
+		This:C1470.moreData:=New object:C1471
+	End if
+
+// Purpose: Return True when a PAY line is still in undeposited funds (not yet bank-deposited).
+// Returns: Boolean
+// created by 4D/PS [2026-june-08]
+Function isUndeposited()->$isUndeposited : Boolean
+	
+	$isUndeposited:=False:C215
+	If (This:C1470.typeCode()#"PAY")
+		return $isUndeposited
+	End if
+	This:C1470._ensureMoreData()
+	If (Bool:C1537(This:C1470.moreData.deposited))
+		return $isUndeposited
+	End if
+	If (This:C1470.moreData.undeposited=Null:C1517) || (Bool:C1537(This:C1470.moreData.undeposited))
+		$isUndeposited:=True:C214
+	End if
+
+// Purpose: Flag a new PAY line as undeposited (Receive Payment default).
+// Parameters: $flag : Boolean — True when payment should appear in Make Deposit
+// modified by 4D/PS [2026-june-08]
+Function setUndeposited($flag : Boolean)
+	This:C1470._ensureMoreData()
+	This:C1470.moreData.undeposited:=$flag
+
+// Purpose: Mark a PAY line as deposited and link it to the DEP SalesTransaction row.
+// Parameters: $depositUUID : Text — DEP line UUID
+// modified by 4D/PS [2026-june-08]
+Function markDeposited($depositUUID : Text)
+	This:C1470._ensureMoreData()
+	This:C1470.moreData.deposited:=True:C214
+	This:C1470.moreData.undeposited:=False:C215
+	This:C1470.moreData.UUID_DepositST:=$depositUUID
+
+// Purpose: Return the cash amount to include when depositing this PAY line.
+// Returns: Real — positive payment amount
+// created by 4D/PS [2026-june-08]
+Function depositAmount()->$amount : Real
+	$amount:=0
+	If (This:C1470.typeCode()="PAY")
+		$amount:=Abs:C99(This:C1470.Amount)
+	End if
+
+// Purpose: Return True when this PAY line can be included in a bank deposit.
+// Returns: Boolean
+// created by 4D/PS [2026-june-08]
+Function canIncludeInDeposit()->$can : Boolean
+	$can:=(This:C1470.typeCode()="PAY") & (This:C1470.isUndeposited()) & (This:C1470.depositAmount()>0)
+
+// Purpose: Refresh Amount/openBalance when import left zero on a Job Invoice ST row (instance method — safe from SFW item actions).
+// Returns: SalesTransactionEntity — reloaded entity when updated, otherwise This
+// created by 4D/PS [2026-june-08]
+Function syncJobInvoiceSTAmount()->$eSTOut : cs:C1710.SalesTransactionEntity
+	
+	var $eJobInvoice : cs:C1710.JobInvoiceEntity
+	var $eJob : cs:C1710.JobEntity
+	var $invNum : Text
+	var $amount : Real
+	var $res : Object
+	var $prefix : Text
+	
+	$eSTOut:=This:C1470
+	$prefix:="Job invoice "
+	If (($eSTOut.openBalance#0) || ($eSTOut.Amount#0))
+		return $eSTOut
+	End if
+	If ($eSTOut.memo=Null:C1517) || (Position:C15($prefix; $eSTOut.memo)#1)
+		return $eSTOut
+	End if
+	
+	$invNum:=Substring:C12($eSTOut.memo; Length:C16($prefix)+1)
+	$eJobInvoice:=ds:C1482.JobInvoice.query("invoiceNumber = :1"; $invNum).first()
+	If ($eJobInvoice=Null:C1517)
+		return $eSTOut
+	End if
+	
+	$amount:=$eJobInvoice.total
+	If ($amount=0)
+		$amount:=$eJobInvoice.poBasedCharges+$eJobInvoice.travBasedCharges+$eJobInvoice.totalSalesTax+$eJobInvoice.orderItemsCharges
+	End if
+	If ($amount=0) && ($eJobInvoice.job#Null:C1517)
+		$eJob:=$eJobInvoice.job
+		If ($eJob.totalCharge#0)
+			$amount:=$eJob.totalCharge
+		End if
+	End if
+	If ($amount=0)
+		return $eSTOut
+	End if
+	
+	$eSTOut.Amount:=$amount
+	$eSTOut.openBalance:=$amount
+	$eSTOut.applyTypeAmountSign("INV")
+	$eSTOut.refreshStatus()
+	$res:=$eSTOut.save()
+	If ($res.success)
+		$eSTOut:=ds:C1482.SalesTransaction.get($eSTOut.UUID)
+	End if

@@ -1,9 +1,9 @@
 //%attributes = {}
 
-// Purpose: Validate dialog input and persist payment via _ga_applyReceivePayment.
-// Parameters: uses Form (customerUUID, paymentAmount, invoiceLines, memo, transactionDate, invoiceUUIDByNumber).
+// Purpose: Validate dialog input and persist credit application via _ga_applyCreditMemoApply.
+// Parameters: uses Form (creditMemoUUID, invoiceLines, memo, invoiceUUIDByNumber, creditAvailable, totalApplied).
 // Returns: nothing — closes dialog with ACCEPT when successful.
-// modified by 4D/PS [2026-june-08]
+// created by 4D/PS [2026-june-08]
 
 var $applications : Collection
 var $line : Object
@@ -13,13 +13,16 @@ var $invoiceUUID : Text
 var $txnKey : Text
 var $eInv : cs:C1710.SalesTransactionEntity
 
-_ga_receivePayment_recalc()
+_ga_applyCreditMemoRecalc()
+
+If (Form:C1466.totalApplied#Null:C1517) && (Form:C1466.creditAvailable#Null:C1517) && (Form:C1466.totalApplied>Form:C1466.creditAvailable)
+	cs:C1710.sfw_dialog.me.alert("Applied amount cannot exceed the available credit.")
+	return 
+End if
 
 $applications:=New collection:C1472()
 For each ($line; Form:C1466.invoiceLines)
 	If ($line.applyAmount#Null:C1517) && ($line.applyAmount>0)
-		// Purpose: Listbox edits may drop unbound properties — resolve invoice UUID from backup map or query.
-		// modified by 4D/PS [2026-june-08]
 		$invoiceUUID:=$line.UUID_Invoice
 		If (cs:C1710.sfw_string.me.isAnEmptyUUID($invoiceUUID))
 			$txnKey:=String:C10($line.transactionNumber)
@@ -44,25 +47,14 @@ If ($memo=Null:C1517)
 	$memo:=""
 End if
 
-If (Form:C1466.transactionDate=Null:C1517) || (Form:C1466.transactionDate=!00-00-00!)
-	Form:C1466.transactionDate:=Current date:C33(*)
-End if
-
-$result:=_ga_applyReceivePayment(\
-	Form:C1466.customerUUID; \
-	Form:C1466.paymentAmount; \
-	$applications; \
-	$memo; \
-	Form:C1466.transactionDate)
+$result:=_ga_applyCreditMemoApply(Form:C1466.creditMemoUUID; $applications; $memo)
 
 If ($result.success)
 	Form:C1466.dialogResult:=$result
-	// Purpose: Use ACCEPT:C269 (project standard); C68 is CREATE RECORD, not ACCEPT.
-	// modified by 4D/PS [2026-june-08]
 	ACCEPT:C269
 Else
 	If ($result.error="")
-		$result.error:="Could not save payment."
+		$result.error:="Could not apply credit memo."
 	End if
 	cs:C1710.sfw_dialog.me.alert($result.error)
 End if
