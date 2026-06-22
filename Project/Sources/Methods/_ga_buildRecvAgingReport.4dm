@@ -29,15 +29,30 @@ var $tot61_90 : Real
 var $tot90plus : Real
 var $rowCount : Integer
 var $referenceDate : Date
+var $customerCol : Object
+var $numCol : Object
+var $bucketCol : Object
+var $headerRow : Object
+var $colIndex : Integer
+var $headerLabels : Collection
+var $cell : Object
 
 $wp:=WP New:C1317()
+_ga_wpSetPortraitReportPage($wp)
 $range:=WP Text range:C1341($wp; wk end text:K81:164; wk end text:K81:164)
 WP SET TEXT:C1574($range; "Receivables Aging Report — "+String:C10(Current date:C33(*)); wk append:K81:179)
 WP SET ATTRIBUTES:C1342($range; wk font bold:K81:68; True:C214; wk font size:K81:66; 14)
 
 $range:=WP Text range:C1341($wp; wk end text:K81:164; wk end text:K81:164)
 $table:=WP Insert table:C1473($range; wk append:K81:179)
-$row:=WP Table append row:C1474($table; "Customer"; "Num"; "Current"; "1-30"; "31-60"; "61-90"; "90+")
+$row:=WP Table append row:C1474($table; ""; ""; ""; ""; ""; ""; "")
+// Purpose: Set header labels with WP SET TEXT — values like "1-30" are parsed as formulas (1-30=-29) when passed to append row.
+// modified by 4D/PS [2026-june-08]
+$headerLabels:=New collection:C1472("Customer"; "Num"; "Current"; "1-30"; "31-60"; "61-90"; "90+")
+For ($colIndex; 1; 7)
+	$cell:=WP Table get cells:C1477($table; $colIndex; 1; 1; 1)
+	WP SET TEXT:C1574($cell; $headerLabels[$colIndex-1]; wk replace:K81:177)
+End for 
 
 $totCurrent:=0
 $tot1_30:=0
@@ -106,3 +121,18 @@ End if
 
 $row:=WP Table append row:C1474($table; "TOTAL"; ""; String:C10($totCurrent; "###,###,##0.00"); String:C10($tot1_30; "###,###,##0.00"); String:C10($tot31_60; "###,###,##0.00"); String:C10($tot61_90; "###,###,##0.00"); String:C10($tot90plus; "###,###,##0.00"))
 WP SET ATTRIBUTES:C1342($row; wk font bold:K81:68; True:C214)
+
+// Purpose: Seven-column aging layout ~16.5 cm total (fits A4 portrait with 1 cm page margins).
+// modified by 4D/PS [2026-june-08]
+$customerCol:=WP Table get columns:C1476($table; 1)
+$numCol:=WP Table get columns:C1476($table; 2)
+WP SET ATTRIBUTES:C1342($customerCol; wk width:K81:45; "5.5cm"; wk text align:K81:49; wk left:K81:95)
+WP SET ATTRIBUTES:C1342($numCol; wk width:K81:45; "1.1cm"; wk text align:K81:49; wk right:K81:96)
+For ($colIndex; 3; 7)
+	$bucketCol:=WP Table get columns:C1476($table; $colIndex)
+	WP SET ATTRIBUTES:C1342($bucketCol; wk width:K81:45; "2.05cm"; wk text align:K81:49; wk right:K81:96)
+End for
+
+WP SET ATTRIBUTES:C1342($table; wk font size:K81:66; 9)
+$headerRow:=WP Table get rows:C1475($table; 1)
+WP SET ATTRIBUTES:C1342($headerRow; wk font bold:K81:68; True:C214)

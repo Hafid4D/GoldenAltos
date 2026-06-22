@@ -37,7 +37,7 @@
 					"height": 420,
 					"borderStyle": "none",
 					"enterable": false,
-					"layoutMode": "embedded",
+					"layoutMode": "page",
 					"dataSource": "WriteProArea",
 					"scrollbarHorizontal": "automatic",
 					"scrollbarVertical": "automatic",

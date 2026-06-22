@@ -1,37 +1,37 @@
 //%attributes = {}
 
-// Purpose: Build a Write Pro receivables report from open invoice lines in the current list.
+// Purpose: Build receivables report using selectionPrintTemplate.4wp and column mapping.
 // Parameters:
-// $items — SalesTransactionEntity selection or collection (Form.sfw.lb_items)
-// Returns: Object — Write Pro area (WP)
+// $items : Object — SalesTransactionEntity selection (Form.sfw.lb_items)
+// Returns: Object — Write Pro document, or Null when build fails
 // modified by 4D/PS [2026-june-08]
 
-#DECLARE($items) -> $wp : Object
+#DECLARE($items : Object) -> $wp : Object
 
 var $eST : cs:C1710.SalesTransactionEntity
 var $eCustomer : cs:C1710.CustomerEntity
-var $range : Object
+var $lines : Collection
+var $line : Object
+var $mapping : Collection
+var $headerText : Text
+var $options : Object
+var $buildResult : Object
+var $wp : Object
 var $table : Object
 var $row : Object
-var $customerName : Text
 var $typeCode : Text
 var $totalOpen : Real
-var $openBalance : Real
 var $rowCount : Integer
+var $customerName : Text
+var $openBalance : Real
 var $txnDateTxt : Text
 var $dueDateTxt : Text
+var $filterLabel : Text
 
-$wp:=WP New:C1317()
-$range:=WP Text range:C1341($wp; wk end text:K81:164; wk end text:K81:164)
-WP SET TEXT:C1574($range; "Receivables Report — "+String:C10(Current date:C33(*)); wk append:K81:179)
-WP SET ATTRIBUTES:C1342($range; wk font bold:K81:68; True:C214; wk font size:K81:66; 14)
-
-$range:=WP Text range:C1341($wp; wk end text:K81:164; wk end text:K81:164)
-$table:=WP Insert table:C1473($range; wk append:K81:179)
-$row:=WP Table append row:C1474($table; "Customer"; "Num"; "Date"; "Due"; "Amount"; "Open Balance")
-
+$lines:=New collection:C1472
 $totalOpen:=0
 $rowCount:=0
+
 For each ($eST; $items)
 	$typeCode:=""
 	If ($eST.type#Null:C1517)
@@ -39,8 +39,10 @@ For each ($eST; $items)
 	Else
 		$typeCode:=$eST.typeCode()
 	End if
-	If ($typeCode="INV") && ($eST.openBalance#0)
-		$openBalance:=Abs:C99($eST.openBalance)
+	// Purpose: Num() avoids "Argument types are incompatible" when openBalance is Null.
+	// modified by 4D/PS [2026-june-08]
+	$openBalance:=Abs:C99(Num:C11($eST.openBalance))
+	If ($typeCode="INV") && ($openBalance#0)
 		$totalOpen:=$totalOpen+$openBalance
 		$rowCount:=$rowCount+1
 		$customerName:=""
@@ -51,17 +53,57 @@ For each ($eST; $items)
 		If ($eCustomer#Null:C1517)
 			$customerName:=$eCustomer.name
 		End if
-		// Purpose: Inline date formatting so report build works without a separate project method.
-		// modified by 4D/PS [2026-june-08]
-		$txnDateTxt:=Choose(($eST.transactionDate=Null:C1517) | ($eST.transactionDate=!00-00-00!); ""; String:C10($eST.transactionDate))
-		$dueDateTxt:=Choose(($eST.dueDate=Null:C1517) | ($eST.dueDate=!00-00-00!); ""; String:C10($eST.dueDate))
-		$row:=WP Table append row:C1474($table; $customerName; String:C10($eST.transactionNumber); $txnDateTxt; $dueDateTxt; String:C10($eST.Amount; "###,###,##0.00"); String:C10($openBalance; "###,###,##0.00"))
+		$txnDateTxt:=Choose:C955($eST.transactionDate=!00-00-00!; ""; String:C10($eST.transactionDate))
+		$dueDateTxt:=Choose:C955($eST.dueDate=!00-00-00!; ""; String:C10($eST.dueDate))
+		$line:=New object:C1471(\
+			"customerName"; $customerName; \
+			"transactionNumber"; String:C10($eST.transactionNumber); \
+			"txnDateTxt"; $txnDateTxt; \
+			"dueDateTxt"; $dueDateTxt; \
+			"amountTxt"; String:C10(Num:C11($eST.Amount); "###,###,##0.00"); \
+			"openBalTxt"; String:C10($openBalance; "###,###,##0.00")\
+			)
+		$lines.push($line)
 	End if
 End for each
 
 If ($rowCount=0)
-	$row:=WP Table append row:C1474($table; "(No open invoices in the current list)"; ""; ""; ""; ""; "")
+	// Purpose: Build placeholder row without multiline New object — avoids type issues on empty literals.
+	// modified by 4D/PS [2026-june-08]
+	$line:=New object:C1471
+	$line.customerName:="(No open invoices in the current list)"
+	$line.transactionNumber:=""
+	$line.txnDateTxt:=""
+	$line.dueDateTxt:=""
+	$line.amountTxt:=""
+	$line.openBalTxt:=""
+	$lines.push($line)
 End if
 
-$row:=WP Table append row:C1474($table; "TOTAL"; ""; ""; ""; ""; String:C10($totalOpen; "###,###,##0.00"))
-WP SET ATTRIBUTES:C1342($row; wk font bold:K81:68; True:C214)
+// Purpose: Column mapping for open-invoice lines (plain text fields on each collection item).
+// modified by 4D/PS [2026-june-08]
+$mapping:=New collection:C1472
+$mapping.push(New object:C1471("header"; "Customer"; "source"; "This.item.customerName"; "width"; "6.5cm"; "align"; "left"))
+$mapping.push(New object:C1471("header"; "Num"; "source"; "This.item.transactionNumber"; "width"; "1.1cm"; "align"; "right"))
+$mapping.push(New object:C1471("header"; "Date"; "source"; "This.item.txnDateTxt"; "width"; "2cm"; "align"; "left"))
+$mapping.push(New object:C1471("header"; "Due"; "source"; "This.item.dueDateTxt"; "width"; "2cm"; "align"; "left"))
+$mapping.push(New object:C1471("header"; "Amount"; "source"; "This.item.amountTxt"; "width"; "2.45cm"; "align"; "right"))
+$mapping.push(New object:C1471("header"; "Open Balance"; "source"; "This.item.openBalTxt"; "width"; "2.45cm"; "align"; "right"))
+
+$headerText:="Receivables Report — "+String:C10(Current date:C33(*))+Char:C90(Carriage return:K15:38)
+$headerText:=$headerText+"Count : "+String:C10($rowCount)+Char:C90(Carriage return:K15:38)
+$filterLabel:=_ga_getListFiltersValues("TransactionType"; "UUID")
+$headerText:=$headerText+"Type : "+$filterLabel+Char:C90(Carriage return:K15:38)
+$filterLabel:=_ga_getListFiltersValues("TransactionStatus"; "UUID")
+$headerText:=$headerText+"Status : "+$filterLabel+Char:C90(Carriage return:K15:38)
+$filterLabel:=_ga_getListFiltersValues("Customer"; "UUID")
+$headerText:=$headerText+"Customer : "+$filterLabel
+$options:=New object:C1471("allowEmpty"; True:C214)
+$buildResult:=_ga_buildListFromMapping("selectionPrintTemplate.4wp"; $mapping; $lines; $headerText; $options)
+
+If ($buildResult#Null:C1517) && ($buildResult.wp#Null:C1517)
+	$wp:=$buildResult.wp
+	$table:=$buildResult.table
+	$row:=WP Table append row:C1474($table; "TOTAL"; ""; ""; ""; ""; String:C10($totalOpen; "###,###,##0.00"))
+	WP SET ATTRIBUTES:C1342($row; wk font bold:K81:68; True:C214)
+End if
