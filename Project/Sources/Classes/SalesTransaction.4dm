@@ -54,6 +54,31 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setValidationRule("dueDate"; "entryField_dueDate")
 	$entry.setValidationRule("openBalance"; "entryField_openBalance")
 	
+	// MARK: - Filters (same pattern as Quote / Inventory linked-entity filters)
+	// Purpose: Toolbar filters for type, status, and customer before A/R report UAT.
+	// modified by 4D/PS [2026-june-19]
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterType")
+	$filter.setDefaultTitle("All types")
+	$filter.setFilterByLinkedEntity("TransactionType"; "UUID_TransactionType"; "uuidTransactionType"; "type"; "displayCount:UUID_TransactionType")
+	$filter.setDynamicTitle("name"; "## types")
+	$filter.setOrderForItems("levelID")
+	$entry.addFilter($filter)
+	
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterStatus")
+	$filter.setDefaultTitle("All statuses")
+	$filter.setFilterByLinkedEntity("TransactionStatus"; "UUID_TransactionStatus"; "uuidTransactionStatus"; "status"; "displayCount:UUID_TransactionStatus")
+	$filter.setDynamicTitle("name"; "## statuses")
+	$filter.setOrderForItems("levelID")
+	$entry.addFilter($filter)
+	
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterCustomer")
+	$filter.setDefaultTitle("All customers")
+	$filter.setFilterByLinkedEntity("Customer"; "UUID_Customer"; "uuidCustomer"; "customer"; "displayCount:UUID_Customer")
+	$filter.setDynamicTitle("name"; "## customers")
+	$filter.setOrderForItems("name")
+	$filter.setAttributeLabelForItem("name")
+	$entry.addFilter($filter)
+	
 	$entry.setSubset("main")
 	
 	$entry.enableTransaction()

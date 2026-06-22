@@ -1,7 +1,8 @@
 //%attributes = {}
 
-// Purpose: Print the current Sales Transaction list using the standard selection Write Pro template.
-// modified by 4D/PS [2026-june-08]
+// Purpose: Print the current Sales Transaction list (wizard data-context path or legacy append-row path).
+// Wizard template: Resources/4DWriteProPrintTemplates/salesTransactionPrint.4wp (from 4DWP_Wizard/Templates/salesTransactionSelection.json).
+// modified by 4D/PS [2026-june-19]
 
 var $context : Object
 var $template : Object
@@ -10,15 +11,15 @@ var $paragraph : Object
 var $range : Object
 var $table : Object
 var $row : Object
-var $rowRange : Object
 var $eST : cs:C1710.SalesTransactionEntity
 var $eCustomer : cs:C1710.CustomerEntity
 var $customerName : Text
 var $typeName : Text
 var $txnDateTxt : Text
-var $rowTxt : Text
+var $amountTxt : Text
+var $openBalTxt : Text
 var $file : 4D:C1709.File
-var $items : Collection
+var $items : cs:C1710.SalesTransactionSelection
 var $itemCount : Integer
 var $customerNames : Object
 var $typeNames : Object
@@ -28,108 +29,158 @@ var $typeRow : Object
 var $progressId : Integer
 var $step : Integer
 var $largePrintThreshold : Integer
+var $numCol : Object
+var $typeCol : Object
+var $dateCol : Object
+var $customerCol : Object
+var $amountCol : Object
+var $openBalCol : Object
 
 $largePrintThreshold:=500
 $items:=Form:C1466.sfw.lb_items
 $itemCount:=$items.length
 
 If ($itemCount>0)
-	// Purpose: Warn on large selections and suggest Excel export; Write Pro is slow beyond a few hundred rows.
-	// modified by 4D/PS [2026-june-08]
 	If ($itemCount>$largePrintThreshold)
 		If (Not:C34(cs:C1710.sfw_dialog.me.confirm("Printing "+String:C10($itemCount)+" lines may take several minutes. For large lists, Export to Excel is faster. Continue printing?"; "Print"; "Cancel")))
 			return 
-		End if
-	End if
+		End if 
+	End if 
 	
-	// Purpose: Preload customer and type labels once to avoid per-row ORDA lookups on large selections.
-	// modified by 4D/PS [2026-june-08]
-	$customerNames:=New object:C1471
-	$uuids:=$items.extract("UUID_Customer").distinct()
-	For each ($uuid; $uuids)
-		If (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID($uuid)))
-			$customerNames[$uuid]:=""
-		End if
-	End for each
-	If (OB Keys:C1719($customerNames).length>0)
-		For each ($eCustomer; ds:C1482.Customer.query("UUID IN :1"; OB Keys:C1719($customerNames)))
-			$customerNames[$eCustomer.UUID]:=$eCustomer.name
-		End for each
-	End if
-	
-	$typeNames:=New object:C1471
-	ds:C1482.TransactionType.cacheLoad()
-	If (Storage:C1525.cache#Null:C1517) && (Storage:C1525.cache.transactionType#Null:C1517)
-		For each ($typeRow; Storage:C1525.cache.transactionType)
-			$typeNames[$typeRow.UUID]:=$typeRow.name
-		End for each
-	End if
-	
-	$context:=New object:C1471("subject"; Form:C1466.sfw.view.label)
-	$file:=Folder:C1567(fk resources folder:K87:11).file("4DWriteProPrintTemplates/selectionPrintTemplate.4wp")
-	$template:=WP Import document:C1318($file.platformPath)
-	
-	$paragraphs:=WP Get elements:C1550($template; wk type paragraph:K81:191)
-	For each ($paragraph; $paragraphs)
-		If (WP Get text:C1575($paragraph)="Tabl@")
-			$range:=WP Paragraph range:C1346($paragraph)
-		End if
-	End for each
-	
-	$table:=WP Insert table:C1473($range; wk replace:K81:177; wk include in range:K81:180)
-	$row:=WP Table append row:C1474($table; "Num"; "Type"; "Date"; "Customer"; "Amount"; "Open Balance")
-	
-	$progressId:=Progress New
-	Progress SET TITLE($progressId; "Printing Sales Transactions")
-	Progress SET MESSAGE($progressId; "Building table (0/"+String:C10($itemCount)+")")
-	
-	// Purpose: Insert all data rows in one call, then fill cells — faster than append row per line.
-	// modified by 4D/PS [2026-june-08]
-	WP Table insert rows:C1691($table; 2; $itemCount)
-	
-	$step:=0
-	For each ($eST; $items)
-		$step:=$step+1
-		If ($step=$itemCount) | (($step\250)*250=$step)
-			Progress SET PROGRESS($progressId; $step/$itemCount)
-			Progress SET MESSAGE($progressId; "Building table ("+String:C10($step)+"/"+String:C10($itemCount)+")")
-		End if
+	// Purpose: Wizard template + WP SET DATA CONTEXT (same pattern as _ga_printCAOSelection / _ga_printSpecList). Set False to use legacy append-row path below.
+	// modified by 4D/PS [2026-june-19]
+	If (True:C214)
+		$startTime:=Current time:C178
+		$file:=Folder:C1567(fk resources folder:K87:11).file("4DWriteProPrintTemplates/salesTransactionPrint.4wp")
+		If (Not:C34($file.exists))
+			cs:C1710.sfw_dialog.me.alert("Print template not found: salesTransactionPrint.4wp. Create it with the Write Pro Wizard using Resources/4DWP_Wizard/Templates/salesTransactionSelection.json.")
+			return 
+		End if 
 		
-		$customerName:=""
-		If ($eST.customer#Null:C1517)
-			$customerName:=$eST.customer.name
-		Else
-			If (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID($eST.UUID_Customer)))
-				$customerName:=$customerNames[$eST.UUID_Customer]
-				If ($customerName=Null:C1517)
-					$customerName:=""
-				End if
-			End if
-		End if
+		$context:=New object:C1471
+		$context.subject:=Form:C1466.sfw.view.label
+		$context.length:=$itemCount
 		
-		$typeName:=""
-		If ($eST.type#Null:C1517)
-			$typeName:=$eST.type.name
-		Else
-			If (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID($eST.UUID_TransactionType)))
-				$typeName:=$typeNames[$eST.UUID_TransactionType]
-				If ($typeName=Null:C1517)
-					$typeName:=""
-				End if
-			End if
-		End if
+		$template:=WP Import document:C1318($file.platformPath)
 		
-		$txnDateTxt:=Choose(($eST.transactionDate=Null:C1517) | ($eST.transactionDate=!00-00-00!); ""; String:C10($eST.transactionDate))
-		$rowTxt:=String:C10($eST.transactionNumber)+Char:C90(Tab:C9:37)+$typeName+Char:C90(Tab:C9:37)+$txnDateTxt+Char:C90(Tab:C9:37)+$customerName+Char:C90(Tab:C9:37)+String:C10($eST.Amount; "###,###,##0.00")+Char:C90(Tab:C9:37)+String:C10($eST.openBalance; "###,###,##0.00")
-		$rowRange:=WP Table get rows:C1475($table; $step+1; 1)
-		WP SET TEXT:C1574($rowRange; $rowTxt)
-	End for each
+		SET PRINT OPTION:C733(Orientation option:K47:2; 1)
+		//WP SET DATA CONTEXT($template; $context)
+		//WP COMPUTE FORMULAS($template)
+		WP FREEZE FORMULAS:C1708($template)
+		PRINT SETTINGS:C106(2)
+		WP PRINT:C1343($template)
+		
+		$endTime:=Current time:C178()
+		$duration:=$endTime-$startTime
+		
+		
+	Else 
+		
+		// Purpose: Legacy path — build table row-by-row in code (kept for fallback / comparison).
+		// modified by 4D/PS [2026-june-08]
+		$customerNames:=New object:C1471
+		$uuids:=$items.extract("UUID_Customer").distinct()
+		For each ($uuid; $uuids)
+			If (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID($uuid)))
+				$customerNames[$uuid]:=""
+			End if 
+		End for each 
+		If (OB Keys:C1719($customerNames).length>0)
+			For each ($eCustomer; ds:C1482.Customer.query("UUID IN :1"; OB Keys:C1719($customerNames)))
+				$customerNames[$eCustomer.UUID]:=$eCustomer.name
+			End for each 
+		End if 
+		
+		$typeNames:=New object:C1471
+		ds:C1482.TransactionType.cacheLoad()
+		If (Storage:C1525.cache#Null:C1517) && (Storage:C1525.cache.transactionType#Null:C1517)
+			For each ($typeRow; Storage:C1525.cache.transactionType)
+				$typeNames[$typeRow.UUID]:=$typeRow.name
+			End for each 
+		End if 
+		
+		$context:=New object:C1471("subject"; Form:C1466.sfw.view.label)
+		$file:=Folder:C1567(fk resources folder:K87:11).file("4DWriteProPrintTemplates/selectionPrintTemplate.4wp")
+		$template:=WP Import document:C1318($file.platformPath)
+		
+		$paragraphs:=WP Get elements:C1550($template; wk type paragraph:K81:191)
+		For each ($paragraph; $paragraphs)
+			If (WP Get text:C1575($paragraph)="Tabl@")
+				$range:=WP Paragraph range:C1346($paragraph)
+			End if 
+		End for each 
+		
+		$table:=WP Insert table:C1473($range; wk replace:K81:177; wk include in range:K81:180)
+		$row:=WP Table append row:C1474($table; "Num"; "Type"; "Date"; "Customer"; "Amount"; "Open Balance")
+		
+		$progressId:=Progress New
+		Progress SET TITLE($progressId; "Printing Sales Transactions")
+		Progress SET MESSAGE($progressId; "Building table (0/"+String:C10($itemCount)+")")
+		
+		$step:=0
+		For each ($eST; $items)
+			$step:=$step+1
+			If ($step=$itemCount) | (($step\250)*250=$step)
+				Progress SET PROGRESS($progressId; $step/$itemCount)
+				Progress SET MESSAGE($progressId; "Building table ("+String:C10($step)+"/"+String:C10($itemCount)+")")
+			End if 
+			
+			$customerName:=""
+			If ($eST.customer#Null:C1517)
+				$customerName:=$eST.customer.name
+			Else 
+				If (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID($eST.UUID_Customer)))
+					$customerName:=$customerNames[$eST.UUID_Customer]
+					If ($customerName=Null:C1517)
+						$customerName:=""
+					End if 
+				End if 
+			End if 
+			
+			$typeName:=""
+			If ($eST.type#Null:C1517)
+				$typeName:=$eST.type.name
+			Else 
+				If (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID($eST.UUID_TransactionType)))
+					$typeName:=$typeNames[$eST.UUID_TransactionType]
+					If ($typeName=Null:C1517)
+						$typeName:=""
+					End if 
+				End if 
+			End if 
+			
+			$txnDateTxt:=Choose:C955(($eST.transactionDate=Null:C1517) | ($eST.transactionDate=!00-00-00!); ""; String:C10($eST.transactionDate))
+			$amountTxt:=String:C10($eST.Amount; "###,###,##0.00")
+			$openBalTxt:=String:C10($eST.openBalance; "###,###,##0.00")
+			$row:=WP Table append row:C1474($table; String:C10($eST.transactionNumber); $typeName; $txnDateTxt; $customerName; $amountTxt; $openBalTxt)
+		End for each 
+		
+		$numCol:=WP Table get columns:C1476($table; 1)
+		$typeCol:=WP Table get columns:C1476($table; 2)
+		$dateCol:=WP Table get columns:C1476($table; 3)
+		$customerCol:=WP Table get columns:C1476($table; 4)
+		$amountCol:=WP Table get columns:C1476($table; 5)
+		$openBalCol:=WP Table get columns:C1476($table; 6)
+		
+		WP SET ATTRIBUTES:C1342($numCol; wk width:K81:45; "1.2cm"; wk text align:K81:49; wk right:K81:96)
+		WP SET ATTRIBUTES:C1342($typeCol; wk width:K81:45; "2cm"; wk text align:K81:49; wk left:K81:95)
+		WP SET ATTRIBUTES:C1342($dateCol; wk width:K81:45; "2.2cm"; wk text align:K81:49; wk left:K81:95)
+		WP SET ATTRIBUTES:C1342($customerCol; wk width:K81:45; "7.8cm"; wk text align:K81:49; wk left:K81:95)
+		WP SET ATTRIBUTES:C1342($amountCol; wk width:K81:45; "2.25cm"; wk text align:K81:49; wk right:K81:96)
+		WP SET ATTRIBUTES:C1342($openBalCol; wk width:K81:45; "2.25cm"; wk text align:K81:49; wk right:K81:96)
+		
+		WP SET ATTRIBUTES:C1342($table; wk font size:K81:66; 9)
+		$row:=WP Table get rows:C1475($table; 1)
+		WP SET ATTRIBUTES:C1342($row; wk font bold:K81:68; True:C214)
+		
+		Progress QUIT($progressId)
+		
+		WP SET DATA CONTEXT:C1786($template; $context)
+		PRINT SETTINGS:C106(2)
+		WP PRINT:C1343($template)
+		
+	End if 
 	
-	Progress QUIT($progressId)
-	
-	WP SET DATA CONTEXT:C1786($template; $context)
-	PRINT SETTINGS:C106(2)
-	WP PRINT:C1343($template)
-Else
+Else 
 	cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("No items in the list to print"; "No items in the list to print"))
-End if
+End if 
