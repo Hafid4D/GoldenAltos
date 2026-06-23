@@ -25,6 +25,9 @@ local Function set nextPMDate($nextPMDate : Date)
 	This:C1470.stmpNextPM:=$nextPMDate=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($nextPMDate)
 	
 local Function loadAfterCreation()
+	// Purpose: Assign a unique barcode in moreData for scanner lookup on new records.
+	// modified by 4D/PS [2026-june-23]
+	This:C1470.moreData.barcodeData:=String:C10(cs:C1710.Util_ScannerManager.me.getBarcodeData(Form:C1466.sfw.entry.dataclass); "0000000000")
 	
 	// This callback is called after creating the new item but before displaying the panel.
 	This:C1470._initReports()

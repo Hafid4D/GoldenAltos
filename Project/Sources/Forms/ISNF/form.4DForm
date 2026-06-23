@@ -832,7 +832,8 @@
 					"shortcutControl": false,
 					"shortcutShift": false,
 					"shortcutAlt": false,
-					"shortcutKey": ""
+					"shortcutKey": "",
+					"method": "ObjectMethods/bScan5.4dm"
 				},
 				"Check Box": {
 					"type": "checkbox",

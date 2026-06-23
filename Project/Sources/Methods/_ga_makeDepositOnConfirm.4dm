@@ -1,7 +1,7 @@
 //%attributes = {}
 
 // Purpose: Validate Make Deposit dialog and persist via _ga_makeDepositApply.
-// created by 4D/PS [2026-june-08]
+// created by 4D/PS [2026-june-22]
 
 var $paymentUUIDs : Collection
 var $line : Object

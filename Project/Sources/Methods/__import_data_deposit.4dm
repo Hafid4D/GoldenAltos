@@ -3,7 +3,7 @@
 // Purpose: Import Deposit headers and lines from legacy JSON (Deposits / Deposit_Items).
 // Parameters: reads DataJson/deposits_export.json and deposit_items_export.json.
 // Returns: nothing (truncates and reloads Deposit + DepositItem).
-// created by 4D/PS [2026-june-09]
+// created by 4D/PS [2026-june-22]
 
 var $headers : Collection
 var $lines : Collection

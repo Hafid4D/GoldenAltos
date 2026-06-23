@@ -1,7 +1,7 @@
 //%attributes = {}
 
 // Purpose: Load undeposited PAY lines and default bank account into the Make Deposit dialog.
-// created by 4D/PS [2026-june-08]
+// created by 4D/PS [2026-june-22]
 
 var $ePay : cs:C1710.SalesTransactionEntity
 var $eCao : cs:C1710.CAOEntity

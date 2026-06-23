@@ -1,7 +1,7 @@
 //%attributes = {}
 
 // Purpose: Recompute selected deposit total on the Make Deposit dialog.
-// created by 4D/PS [2026-june-08]
+// created by 4D/PS [2026-june-22]
 
 var $line : Object
 var $totalSelected : Real

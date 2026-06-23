@@ -1,14 +1,18 @@
 //%attributes = {}
 
-// Purpose: Export current Deposit list selection to Excel (skeleton mapping).
-// created by 4D/PS [2026-june-09]
+// Purpose: Export current Deposit list selection to Excel.
+// modified by 4D/PS [2026-june-22]
 
 var $mapping : Collection:=New collection:C1472()
 
 If (Form:C1466.sfw.lb_items.length>0)
 	$fileName:=Form:C1466.sfw.view.label
 	$templateFile:=Folder:C1567(fk resources folder:K87:11).file("excelTemplates/excelExportTemplate.xlsx")
-	$mapping:=New collection:C1472(New object:C1471("header"; "Deposit #"; "field"; "depositNumber"; "footerOperation"; ""))
+	$mapping:=New collection:C1472(\
+		New object:C1471("header"; "Deposit #"; "field"; "depositNumber"; "footerOperation"; ""); \
+		New object:C1471("header"; "Date"; "field"; "depositDate"; "footerOperation"; ""); \
+		New object:C1471("header"; "Account"; "field"; "accountLabel"; "footerOperation"; ""); \
+		New object:C1471("header"; "Total"; "field"; "totalAmount"; "footerOperation"; ""))
 	If ($fileName="main") | ($fileName="Main view")
 		$title:="All Deposits"
 		$fileName:="AllDeposits"

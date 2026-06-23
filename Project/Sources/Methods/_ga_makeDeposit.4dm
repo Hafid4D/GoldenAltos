@@ -2,7 +2,7 @@
 
 // Purpose: Open the Make Deposit dialog for undeposited PAY lines (list action).
 // Returns: nothing.
-// created by 4D/PS [2026-june-08]
+// created by 4D/PS [2026-june-22]
 
 var $form : Object
 var $winRef : Integer

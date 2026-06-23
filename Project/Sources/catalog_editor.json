@@ -122,10 +122,10 @@
 			"coordinates": {
 				"left": 5126,
 				"top": 1313,
-				"width": 120,
-				"height": 167.33203125
+				"width": 138,
+				"height": 196.33203125
 			},
-			"displayable_fields_count": 6,
+			"displayable_fields_count": 7,
 			"fields_ordering": 1
 		},
 		"Deposit": {
@@ -138,8 +138,8 @@
 			"coordinates": {
 				"left": 4916,
 				"top": 1312,
-				"width": 120,
-				"height": 167.33203125
+				"width": 155,
+				"height": 178.33203125
 			},
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
