@@ -18,6 +18,7 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	
 	$entry.setPanel("panel_salesTransaction"; 1)
 	$entry.setPanelPage(1; ""; "Main")
+	$entry.setPanelPage(2; ""; "Applications")
 	
 	$entry.setLBItemsColumn("transactionNumber"; "Num"; "width:60")
 	// Purpose: ORDA relation name is "type" (catalog name_Nto1), not transactionType.
@@ -39,8 +40,11 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setItemListAction("Print Receivables Report"; "_ga_printReceivablesReport")
 	$entry.setItemListAction("View Receivables Aging Report"; "_ga_viewReceivablesAging")
 	$entry.setItemListAction("Print Receivables Aging Report"; "_ga_printReceivablesAging")
+	$entry.setItemListAction("-"; "-")
+	$entry.setItemListAction("Make Deposit"; "_ga_makeDeposit")
 	
 	$entry.setItemAction("Receive Payement"; "_ga_receivePayement")
+	$entry.setItemAction("Apply Credit Memo"; "_ga_applyCreditMemo")
 	$entry.setItemAction("Generate Barcode"; "_ga_openBarCodeForm")
 	$entry.setItemListAction("Search by Scanning"; "_ga_searchByBarcodeScanning")
 	
@@ -49,6 +53,31 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setValidationRule("transactionDate"; "entryField_transactionDate")
 	$entry.setValidationRule("dueDate"; "entryField_dueDate")
 	$entry.setValidationRule("openBalance"; "entryField_openBalance")
+	
+	// MARK: - Filters (same pattern as Quote / Inventory linked-entity filters)
+	// Purpose: Toolbar filters for type, status, and customer before A/R report UAT.
+	// modified by 4D/PS [2026-june-19]
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterType")
+	$filter.setDefaultTitle("All types")
+	$filter.setFilterByLinkedEntity("TransactionType"; "UUID_TransactionType"; "uuidTransactionType"; "type"; "displayCount:UUID_TransactionType")
+	$filter.setDynamicTitle("name"; "## types")
+	$filter.setOrderForItems("levelID")
+	$entry.addFilter($filter)
+	
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterStatus")
+	$filter.setDefaultTitle("All statuses")
+	$filter.setFilterByLinkedEntity("TransactionStatus"; "UUID_TransactionStatus"; "uuidTransactionStatus"; "status"; "displayCount:UUID_TransactionStatus")
+	$filter.setDynamicTitle("name"; "## statuses")
+	$filter.setOrderForItems("levelID")
+	$entry.addFilter($filter)
+	
+	$filter:=cs:C1710.sfw_definitionFilter.new("filterCustomer")
+	$filter.setDefaultTitle("All customers")
+	$filter.setFilterByLinkedEntity("Customer"; "UUID_Customer"; "uuidCustomer"; "customer"; "displayCount:UUID_Customer")
+	$filter.setDynamicTitle("name"; "## customers")
+	$filter.setOrderForItems("name")
+	$filter.setAttributeLabelForItem("name")
+	$entry.addFilter($filter)
 	
 	$entry.setSubset("main")
 	
@@ -77,127 +106,76 @@ Function nextTransactionNumber()->$num : Integer
 	// $applications : Collection — objects with UUID_Invoice (Text) and appliedAmount (Real)
 	// $memo : Text — payment memo
 	// $transactionDate : Date — payment date
-	// Returns: Object — { success : Boolean, payment : SalesTransactionEntity|null, totalApplied : Real, error : Text }
+	// Returns: Object — { success : Boolean, paymentUUID : Text, totalApplied : Real, error : Text }
 	// created by 4D/PS [2026-june-17]
 Function applyReceivePayment($customerUUID : Text; $totalAmount : Real; $applications : Collection; $memo : Text; $transactionDate : Date)->$result : Object
 	
-	var $ePayment : cs:C1710.SalesTransactionEntity
-	var $eInv : cs:C1710.SalesTransactionEntity
-	var $eApp : cs:C1710.PaymentApplicationEntity
-	var $eType : cs:C1710.TransactionTypeEntity
-	var $totalApplied : Real
-	var $unapplied : Real
-	var $app : Object
-	var $res : Object
-	
-	$result:=New object:C1471("success"; False:C215; "payment"; Null:C1517; "totalApplied"; 0; "error"; "")
-	
-	If ($totalAmount<=0)
-		$result.error:="Payment amount must be greater than zero."
-		return $result
-	End if 
-	
-	If ($applications.length=0)
-		$result.error:="Select at least one invoice to apply the payment."
-		return $result
-	End if 
-	
-	$totalApplied:=0
-	For each ($app; $applications)
-		If ($app.appliedAmount#Null:C1517) && ($app.appliedAmount>0)
-			$eInv:=This:C1470.get($app.UUID_Invoice)
-			If ($eInv=Null:C1517)
-				$result.error:="Invoice not found for payment application."
-				return $result
-			End if 
-			If ($eInv.UUID_Customer#$customerUUID)
-				$result.error:="All invoices must belong to the same customer."
-				return $result
-			End if 
-			If (Not:C34($eInv.canReceivePayment()))
-				$result.error:="Invoice #"+String:C10($eInv.transactionNumber)+" cannot receive a payment."
-				return $result
-			End if 
-			If ($app.appliedAmount>Abs:C99($eInv.openBalance))
-				$result.error:="Applied amount exceeds open balance on invoice #"+String:C10($eInv.transactionNumber)+"."
-				return $result
-			End if 
-			$totalApplied:=$totalApplied+$app.appliedAmount
-		End if 
-	End for each 
-	
-	If ($totalApplied<=0)
-		$result.error:="Applied amount must be greater than zero."
-		return $result
-	End if 
-	
-	If ($totalApplied>$totalAmount)
-		$result.error:="Applied amount cannot exceed the payment amount."
-		return $result
-	End if 
-	
-	$ePayment:=This:C1470.new()
-	$ePayment.transactionNumber:=This:C1470.nextTransactionNumber()
-	$ePayment.UUID_Customer:=$customerUUID
-	$eType:=ds:C1482.TransactionType.query("code = :1"; "PAY").first()
-	If ($eType#Null:C1517)
-		$ePayment.UUID_TransactionType:=$eType.UUID
-	End if 
-	$ePayment.transactionDate:=$transactionDate
-	$ePayment.Amount:=-$totalAmount
-	$unapplied:=$totalAmount-$totalApplied
-	$ePayment.openBalance:=($unapplied>0) ? -$unapplied : 0
-	$ePayment.memo:=$memo
-	$ePayment.applyTypeAmountSign("PAY")
-	$ePayment.refreshStatus()
-	
-	// Purpose: Removed invalid pre-check (C254 theme is Last table number, which takes no argument).
+	// Purpose: Delegate persistence to the project method (same pattern as import/build methods).
 	// modified by 4D/PS [2026-june-08]
-	START TRANSACTION:C239
+	$result:=_ga_applyReceivePayment($customerUUID; $totalAmount; $applications; $memo; $transactionDate)
 	
-	$res:=$ePayment.save()
-	If (Not:C34($res.success))
-		CANCEL TRANSACTION:C241
-		$result.error:=$res.statusText
-		return $result
+	
+	// Purpose: Apply an existing CM line to open invoices and persist PaymentApplication rows.
+	// Parameters:
+	// $creditMemoUUID : Text — SalesTransaction UUID of the credit memo line
+	// $applications : Collection — objects with UUID_Invoice (Text) and appliedAmount (Real)
+	// $memo : Text — optional application memo (stored on CM when provided)
+	// Returns: Object — { success : Boolean, creditMemoUUID : Text, totalApplied : Real, error : Text }
+	// created by 4D/PS [2026-june-08]
+Function applyCreditMemo($creditMemoUUID : Text; $applications : Collection; $memo : Text)->$result : Object
+	
+	$result:=_ga_applyCreditMemoApply($creditMemoUUID; $applications; $memo)
+	
+	
+	// Purpose: Create a DEP line from undeposited PAY lines and mark them deposited.
+	// Parameters:
+	// $paymentUUIDs : Collection — SalesTransaction UUIDs (PAY lines)
+	// $caoUUID : Text — bank CAO account UUID
+	// $memo : Text — deposit memo
+	// $depositDate : Date — deposit date
+	// Returns: Object — { success : Boolean, depositUUID : Text, totalDeposited : Real, error : Text }
+	// created by 4D/PS [2026-june-08]
+Function makeDeposit($paymentUUIDs : Collection; $caoUUID : Text; $memo : Text; $depositDate : Date)->$result : Object
+	
+	$result:=_ga_makeDepositApply($paymentUUIDs; $caoUUID; $memo; $depositDate)
+	
+	
+	// Purpose: Return PAY lines still in undeposited funds.
+	// Returns: SalesTransactionSelection
+	// created by 4D/PS [2026-june-08]
+Function getUndepositedPayments()->$payments : cs:C1710.SalesTransactionSelection
+	
+	var $eType : cs:C1710.TransactionTypeEntity
+	var $ePay : cs:C1710.SalesTransactionEntity
+	
+	$eType:=ds:C1482.TransactionType.query("code = :1"; "PAY").first()
+	$payments:=This:C1470.newSelection()
+	If ($eType=Null:C1517)
+		return $payments
 	End if 
 	
-	For each ($app; $applications)
-		If ($app.appliedAmount#Null:C1517) && ($app.appliedAmount>0)
-			$eInv:=This:C1470.get($app.UUID_Invoice)
-			$eInv.openBalance:=$eInv.openBalance-$app.appliedAmount
-			$eInv.refreshStatus()
-			$res:=$eInv.save()
-			If (Not:C34($res.success))
-				CANCEL TRANSACTION:C241
-				$result.error:=$res.statusText
-				return $result
-			End if 
-			// Purpose: Catch missing PaymentApplication table in the .4dd file and return a clear message.
-			// modified by 4D/PS [2026-june-08]
-			Try
-				$eApp:=ds:C1482.PaymentApplication.new()
-				$eApp.UUID_Payment:=$ePayment.UUID
-				$eApp.UUID_Invoice:=$eInv.UUID
-				$eApp.appliedAmount:=$app.appliedAmount
-				$res:=$eApp.save()
-			Catch
-				CANCEL TRANSACTION:C241
-				$result.error:="PaymentApplication table is missing in the database file. In 4D Designer: Structure > Update database structure, then retry."
-				return $result
-			End try
-			If (Not:C34($res.success))
-				CANCEL TRANSACTION:C241
-				$result.error:=$res.statusText
-				return $result
-			End if 
+	For each ($ePay; This:C1470.query("UUID_TransactionType = :1"; $eType.UUID).orderBy("transactionNumber"))
+		If ($ePay.isUndeposited())
+			$payments:=$payments.or($ePay)
 		End if 
 	End for each 
 	
-	VALIDATE TRANSACTION:C240
-	$result.success:=True:C214
-	$result.payment:=$ePayment
-	$result.totalApplied:=$totalApplied
+	
+	// Purpose: Return open CM lines for a customer (unapplied credit), ordered by transaction number.
+	// Parameters:
+	// $customerUUID : Text — customer UUID
+	// Returns: SalesTransactionSelection — open credit memo lines
+	// created by 4D/PS [2026-june-08]
+Function getOpenCreditsForCustomer($customerUUID : Text)->$credits : cs:C1710.SalesTransactionSelection
+	
+	var $eType : cs:C1710.TransactionTypeEntity
+	
+	$eType:=ds:C1482.TransactionType.query("code = :1"; "CM").first()
+	If ($eType=Null:C1517)
+		$credits:=This:C1470.newSelection()
+	Else 
+		$credits:=This:C1470.query("UUID_Customer = :1 AND UUID_TransactionType = :2 AND openBalance # 0"; $customerUUID; $eType.UUID).orderBy("transactionNumber")
+	End if 
 	
 	
 	// Purpose: Return open INV lines for a customer (openBalance not zero), ordered by transaction number.
@@ -296,42 +274,12 @@ Function resolveJobInvoiceAmount($eJobInvoice : cs:C1710.JobInvoiceEntity)->$amo
 	// created by 4D/PS [2026-june-08]
 Function syncJobInvoiceSTAmount($eST : cs:C1710.SalesTransactionEntity)->$eSTOut : cs:C1710.SalesTransactionEntity
 	
-	var $eJobInvoice : cs:C1710.JobInvoiceEntity
-	var $invNum : Text
-	var $amount : Real
-	var $res : Object
-	var $prefix : Text
-	
-	$eSTOut:=$eST
-	$prefix:="Job invoice "
+	// Purpose: Delegate to entity instance method (DataClass+entity param fails to stream from client SFW actions).
+	// modified by 4D/PS [2026-june-08]
 	If ($eST=Null:C1517)
-		return $eSTOut
-	End if 
-	If (($eST.openBalance#0) || ($eST.Amount#0))
-		return $eSTOut
-	End if 
-	If ($eST.memo=Null:C1517) || (Position:C15($prefix; $eST.memo)#1)
-		return $eSTOut
-	End if 
-	
-	$invNum:=Substring:C12($eST.memo; Length:C16($prefix)+1)
-	$eJobInvoice:=ds:C1482.JobInvoice.query("invoiceNumber = :1"; $invNum).first()
-	If ($eJobInvoice=Null:C1517)
-		return $eSTOut
-	End if 
-	
-	$amount:=This:C1470.resolveJobInvoiceAmount($eJobInvoice)
-	If ($amount=0)
-		return $eSTOut
-	End if 
-	
-	$eST.Amount:=$amount
-	$eST.openBalance:=$amount
-	$eST.applyTypeAmountSign("INV")
-	$eST.refreshStatus()
-	$res:=$eST.save()
-	If ($res.success)
-		$eSTOut:=This:C1470.get($eST.UUID)
+		$eSTOut:=$eST
+	Else 
+		$eSTOut:=$eST.syncJobInvoiceSTAmount()
 	End if 
 	
 	

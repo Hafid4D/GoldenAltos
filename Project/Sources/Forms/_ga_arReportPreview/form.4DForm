@@ -1,0 +1,75 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 800,
+	"windowMinHeight": 500,
+	"rightMargin": 5,
+	"bottomMargin": 5,
+	"events": [
+		"onLoad"
+	],
+	"windowTitle": "Report Preview",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {}
+		},
+		{
+			"objects": {
+				"title": {
+					"type": "text",
+					"text": "title",
+					"top": 8,
+					"left": 8,
+					"width": 780,
+					"height": 20,
+					"fontWeight": "bold"
+				},
+				"WriteProArea": {
+					"type": "write",
+					"left": 8,
+					"top": 32,
+					"width": 780,
+					"height": 420,
+					"borderStyle": "none",
+					"enterable": false,
+					"layoutMode": "page",
+					"dataSource": "WriteProArea",
+					"scrollbarHorizontal": "automatic",
+					"scrollbarVertical": "automatic",
+					"sizingX": "grow",
+					"sizingY": "grow"
+				},
+				"btn_print": {
+					"type": "button",
+					"text": "Print",
+					"top": 460,
+					"left": 688,
+					"width": 100,
+					"height": 22,
+					"method": "ObjectMethods/btn_print.4dm",
+					"events": [
+						"onClick"
+					],
+					"sizingY": "move",
+					"sizingX": "move"
+				},
+				"btn_close": {
+					"type": "button",
+					"text": "Close",
+					"top": 460,
+					"left": 580,
+					"width": 100,
+					"height": 22,
+					"action": "cancel"
+				}
+			}
+		}
+	],
+	"geometryStamp": 1,
+	"method": "method.4dm"
+}

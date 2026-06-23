@@ -389,6 +389,86 @@
 					"textAlign": "left"
 				}
 			}
+		},
+		{
+			"objects": {
+				"header_bkgd_apps": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 0,
+					"width": 677,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"lbl_applications": {
+					"type": "text",
+					"top": 121,
+					"left": 8,
+					"width": 250,
+					"height": 17,
+					"stroke": "#000000",
+					"text": "Payment Applications",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"lb_applications": {
+					"type": "listbox",
+					"top": 148,
+					"left": 12,
+					"width": 660,
+					"height": 400,
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.lb_applications",
+					"scrollbarHorizontal": "hidden",
+					"scrollbarVertical": "automatic",
+					"columns": [
+						{
+							"name": "col_sourceType",
+							"dataSource": "This:C1470.sourceType",
+							"width": 80,
+							"header": {
+								"text": "Source"
+							}
+						},
+						{
+							"name": "col_sourceNum",
+							"dataSource": "This:C1470.sourceNumber",
+							"width": 60,
+							"header": {
+								"text": "Src #"
+							}
+						},
+						{
+							"name": "col_invoiceNum",
+							"dataSource": "This:C1470.invoiceNumber",
+							"width": 60,
+							"header": {
+								"text": "Inv #"
+							}
+						},
+						{
+							"name": "col_date",
+							"dataSource": "This:C1470.applicationDate",
+							"width": 90,
+							"header": {
+								"text": "Date"
+							}
+						},
+						{
+							"name": "col_amount",
+							"dataSource": "This:C1470.appliedAmount",
+							"width": 100,
+							"header": {
+								"text": "Applied"
+							}
+						}
+					]
+				}
+			}
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",

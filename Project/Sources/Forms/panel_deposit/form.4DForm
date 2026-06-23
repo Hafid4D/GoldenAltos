@@ -13,32 +13,667 @@
 	"bottomMargin": 20,
 	"events": [
 		"onLoad",
+		"onPageChange",
 		"onValidate",
 		"onClick",
-		"onOutsideCall",
-		"onActivate",
 		"onDoubleClick",
+		"onOutsideCall",
+		"onBeginDragOver",
+		"onDragOver",
 		"onDrop",
+		"onAfterKeystroke",
 		"onMenuSelect",
 		"onPluginArea",
-		"onDragOver",
+		"onAfterEdit",
 		"onTimer",
-		"onAfterKeystroke",
-		"onBeginDragOver",
-		"onBoundVariableChange",
-		"onPageChange"
+		"onBoundVariableChange"
 	],
 	"windowTitle": "window title",
 	"destination": "detailScreen",
 	"pages": [
 		{
-			"objects": {}
+			"objects": {
+				"label_depositNumber": {
+					"type": "text",
+					"top": 12,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Deposit #",
+					"textAlign": "right"
+				},
+				"entryField_depositNumber": {
+					"type": "input",
+					"top": 12,
+					"left": 142,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.depositNumber",
+					"dataSourceTypeHint": "number",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent"
+				},
+				"label_customer": {
+					"type": "text",
+					"top": 37,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Customer",
+					"textAlign": "right"
+				},
+				"pup_customer": {
+					"type": "button",
+					"top": 34,
+					"left": 142,
+					"width": 280,
+					"height": 23,
+					"focusable": false,
+					"style": "bevel",
+					"method": "ObjectMethods/pup_customer.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"lbl_customerHint": {
+					"type": "text",
+					"top": 59,
+					"left": 142,
+					"width": 560,
+					"height": 17,
+					"stroke": "#CC0000",
+					"text": "Optional, select customer to display related payment, if empty the list below will show all undeposited payments.",
+					"wordWrap": "normal",
+					"fontSize": 9
+				},
+				"label_depositDate": {
+					"type": "text",
+					"top": 12,
+					"left": 400,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Deposit Date",
+					"textAlign": "right"
+				},
+				"entryField_depositDate": {
+					"type": "input",
+					"top": 12,
+					"left": 526,
+					"width": 100,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.depositDate",
+					"dataSourceTypeHint": "date",
+					"enterable": false,
+					"method": "ObjectMethods/entryField_depositDate.4dm",
+					"events": [
+						"onDataChange"
+					]
+				},
+				"btn_depositDate": {
+					"type": "button",
+					"text": " ",
+					"top": 12,
+					"left": 630,
+					"width": 17,
+					"height": 17,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/calendar_black.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btn_depositDate.4dm",
+					"visibility": "visible",
+					"iconFrames": 1,
+					"focusable": false,
+					"dataSource": ""
+				},
+				"label_account": {
+					"type": "text",
+					"top": 79,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Account",
+					"textAlign": "right"
+				},
+				"pup_bank": {
+					"type": "button",
+					"top": 76,
+					"left": 142,
+					"width": 280,
+					"height": 23,
+					"focusable": false,
+					"style": "bevel",
+					"method": "ObjectMethods/pup_bank.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"label_memo": {
+					"type": "text",
+					"top": 104,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Memo",
+					"textAlign": "right",
+					"visibility": "hidden"
+				},
+				"entryField_memo": {
+					"type": "input",
+					"top": 104,
+					"left": 142,
+					"width": 400,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.memo",
+					"visibility": "hidden"
+				},
+				"header_bkgd5": {
+					"type": "rectangle",
+					"top": 132,
+					"left": 0,
+					"width": 1000,
+					"height": 805,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent"
+				}
+			}
 		},
 		{
-			"objects": {}
+			"objects": {
+				"header_bkgd_main": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 0,
+					"width": 1000,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"lbl_mainTab": {
+					"type": "text",
+					"top": 121,
+					"left": 8,
+					"width": 120,
+					"height": 17,
+					"text": "Main",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"lbl_selectPaymentHint": {
+					"type": "text",
+					"top": 148,
+					"left": 8,
+					"width": 600,
+					"height": 17,
+					"stroke": "#CC0000",
+					"text": "This section appears only if there is payment to process.",
+					"wordWrap": "normal",
+					"fontSize": 9
+				},
+				"lbl_noUndeposited": {
+					"type": "text",
+					"top": 148,
+					"left": 8,
+					"width": 600,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "",
+					"visibility": "hidden",
+					"wordWrap": "normal"
+				},
+				"lbl_selectPayment": {
+					"type": "text",
+					"top": 120,
+					"left": 8,
+					"width": 200,
+					"height": 17,
+					"text": "Select Payment",
+					"fontWeight": "bold"
+				},
+				"lb_paymentLines": {
+					"type": "listbox",
+					"top": 148,
+					"left": 8,
+					"width": 900,
+					"height": 160,
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.depositPaymentLines",
+					"scrollbarHorizontal": "hidden",
+					"scrollbarVertical": "automatic",
+					"method": "ObjectMethods/lb_paymentLines.4dm",
+					"events": [
+						"onDataChange"
+					],
+					"columns": [
+						{
+							"name": "col_include",
+							"dataSource": "This:C1470.include",
+							"width": 40,
+							"enterable": true,
+							"header": {
+								"text": "",
+								"name": "Header1"
+							},
+							"footer": {
+								"name": "Footer1"
+							}
+						},
+						{
+							"name": "col_customer",
+							"dataSource": "This:C1470.customerName",
+							"width": 140,
+							"header": {
+								"text": "Customer",
+								"name": "Header2"
+							},
+							"footer": {
+								"name": "Footer2"
+							}
+						},
+						{
+							"name": "col_date",
+							"dataSource": "This:C1470.transactionDate",
+							"width": 80,
+							"header": {
+								"text": "Date",
+								"name": "Header3"
+							},
+							"footer": {
+								"name": "Footer3"
+							}
+						},
+						{
+							"name": "col_type",
+							"dataSource": "This:C1470.typeName",
+							"width": 80,
+							"header": {
+								"text": "Type",
+								"name": "Header4"
+							},
+							"footer": {
+								"name": "Footer4"
+							}
+						},
+						{
+							"name": "col_memo",
+							"dataSource": "This:C1470.memo",
+							"width": 160,
+							"header": {
+								"text": "Memo",
+								"name": "Header5"
+							},
+							"footer": {
+								"name": "Footer5"
+							}
+						},
+						{
+							"name": "col_ref",
+							"dataSource": "This:C1470.refNo",
+							"width": 80,
+							"header": {
+								"text": "REF NO.",
+								"name": "Header6"
+							},
+							"footer": {
+								"name": "Footer6"
+							}
+						},
+						{
+							"name": "col_amount",
+							"dataSource": "This:C1470.amount",
+							"width": 90,
+							"header": {
+								"text": "Amount",
+								"name": "Header7"
+							},
+							"footer": {
+								"name": "Footer7"
+							}
+						}
+					]
+				},
+				"lbl_selectedPaymentsTotal": {
+					"type": "text",
+					"top": 308,
+					"left": 580,
+					"width": 180,
+					"height": 17,
+					"text": "Selected Payments Total",
+					"textAlign": "right"
+				},
+				"val_selectedPaymentsTotal": {
+					"type": "input",
+					"top": 308,
+					"left": 768,
+					"width": 120,
+					"height": 17,
+					"dataSource": "Form:C1466.depositSelectedPaymentsTotal",
+					"dataSourceTypeHint": "number",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"textAlign": "right"
+				},
+				"lbl_addFunds": {
+					"type": "text",
+					"top": 334,
+					"left": 8,
+					"width": 200,
+					"height": 17,
+					"text": "Add funds",
+					"fontWeight": "bold"
+				},
+				"lbl_addFundsHint": {
+					"type": "text",
+					"top": 352,
+					"left": 8,
+					"width": 600,
+					"height": 17,
+					"stroke": "#CC0000",
+					"text": "This section appears by default to make deposit not related to payment.",
+					"wordWrap": "normal",
+					"fontSize": 9
+				},
+				"lb_otherFundLines": {
+					"type": "listbox",
+					"top": 356,
+					"left": 8,
+					"width": 900,
+					"height": 120,
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.depositOtherFundLines",
+					"scrollbarHorizontal": "hidden",
+					"scrollbarVertical": "automatic",
+					"method": "ObjectMethods/lb_otherFundLines.4dm",
+					"events": [
+						"onDataChange"
+					],
+					"columns": [
+						{
+							"name": "col_of_num",
+							"dataSource": "This:C1470.lineNumber",
+							"width": 40,
+							"header": {
+								"text": "#",
+								"name": "Header8"
+							},
+							"footer": {
+								"name": "Footer8"
+							}
+						},
+						{
+							"name": "col_of_customer",
+							"dataSource": "This:C1470.customerName",
+							"width": 120,
+							"enterable": false,
+							"header": {
+								"text": "Customer",
+								"name": "Header9"
+							},
+							"footer": {
+								"name": "Footer9"
+							}
+						},
+						{
+							"name": "col_of_account",
+							"dataSource": "This:C1470.accountName",
+							"width": 140,
+							"enterable": false,
+							"header": {
+								"text": "Account",
+								"name": "Header10"
+							},
+							"footer": {
+								"name": "Footer10"
+							}
+						},
+						{
+							"name": "col_of_desc",
+							"dataSource": "This:C1470.description",
+							"width": 160,
+							"enterable": true,
+							"header": {
+								"text": "Description",
+								"name": "Header11"
+							},
+							"footer": {
+								"name": "Footer11"
+							}
+						},
+						{
+							"name": "col_of_ref",
+							"dataSource": "This:C1470.refNo",
+							"width": 80,
+							"enterable": true,
+							"header": {
+								"text": "REF NO.",
+								"name": "Header12"
+							},
+							"footer": {
+								"name": "Footer12"
+							}
+						},
+						{
+							"name": "col_of_amount",
+							"dataSource": "This:C1470.amount",
+							"width": 90,
+							"enterable": true,
+							"header": {
+								"text": "Amount",
+								"name": "Header13"
+							},
+							"footer": {
+								"name": "Footer13"
+							}
+						}
+					]
+				},
+				"btn_addOtherFund": {
+					"type": "button",
+					"text": "Add line",
+					"top": 482,
+					"left": 8,
+					"width": 80,
+					"height": 22,
+					"method": "ObjectMethods/btn_addOtherFund.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"btn_removeOtherFund": {
+					"type": "button",
+					"text": "Remove",
+					"top": 482,
+					"left": 96,
+					"width": 80,
+					"height": 22,
+					"method": "ObjectMethods/btn_removeOtherFund.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"btn_pickOtherFundAccount": {
+					"type": "button",
+					"text": "Set account",
+					"top": 482,
+					"left": 184,
+					"width": 90,
+					"height": 22,
+					"method": "ObjectMethods/btn_pickOtherFundAccount.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"btn_pickOtherFundCustomer": {
+					"type": "button",
+					"text": "Set customer",
+					"top": 482,
+					"left": 280,
+					"width": 90,
+					"height": 22,
+					"method": "ObjectMethods/btn_pickOtherFundCustomer.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"lbl_otherFundsTotal": {
+					"type": "text",
+					"top": 510,
+					"left": 580,
+					"width": 180,
+					"height": 17,
+					"text": "Other funds Total",
+					"textAlign": "right"
+				},
+				"val_otherFundsTotal": {
+					"type": "input",
+					"top": 510,
+					"left": 768,
+					"width": 120,
+					"height": 17,
+					"dataSource": "Form:C1466.depositOtherFundsTotal",
+					"dataSourceTypeHint": "number",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"textAlign": "right"
+				},
+				"lbl_cashBackAccount": {
+					"type": "text",
+					"top": 540,
+					"left": 8,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Cash back goes to",
+					"textAlign": "right"
+				},
+				"pup_cashBackAccount": {
+					"type": "button",
+					"top": 537,
+					"left": 136,
+					"width": 260,
+					"height": 23,
+					"focusable": false,
+					"style": "bevel",
+					"method": "ObjectMethods/pup_cashBackAccount.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"lbl_cashBackMemo": {
+					"type": "text",
+					"top": 566,
+					"left": 8,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Cash back memo",
+					"textAlign": "right"
+				},
+				"entryField_cashBackMemo": {
+					"type": "input",
+					"top": 566,
+					"left": 136,
+					"width": 400,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.cashBackMemo",
+					"method": "ObjectMethods/entryField_cashBackMemo.4dm",
+					"events": [
+						"onDataChange"
+					]
+				},
+				"lbl_cashBackAmount": {
+					"type": "text",
+					"top": 592,
+					"left": 8,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Cash back amount",
+					"textAlign": "right"
+				},
+				"entryField_cashBackAmount": {
+					"type": "input",
+					"top": 592,
+					"left": 136,
+					"width": 120,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.cashBackAmount",
+					"dataSourceTypeHint": "number",
+					"method": "ObjectMethods/entryField_cashBackAmount.4dm",
+					"events": [
+						"onDataChange"
+					]
+				},
+				"lbl_grandTotal": {
+					"type": "text",
+					"top": 648,
+					"left": 620,
+					"width": 80,
+					"height": 20,
+					"text": "Total:",
+					"fontWeight": "bold",
+					"fontSize": 12,
+					"textAlign": "right"
+				},
+				"val_grandTotal": {
+					"type": "input",
+					"top": 646,
+					"left": 708,
+					"width": 140,
+					"height": 22,
+					"dataSource": "Form:C1466.depositGrandTotal",
+					"dataSourceTypeHint": "number",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "#A2C6D8",
+					"fontWeight": "bold",
+					"textAlign": "right"
+				},
+				"lbl_netToBank": {
+					"type": "text",
+					"top": 674,
+					"left": 580,
+					"width": 120,
+					"height": 17,
+					"text": "Net to bank",
+					"textAlign": "right"
+				},
+				"val_netToBank": {
+					"type": "input",
+					"top": 674,
+					"left": 708,
+					"width": 140,
+					"height": 17,
+					"dataSource": "Form:C1466.depositNetToBank",
+					"dataSourceTypeHint": "number",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"textAlign": "right"
+				}
+			}
 		}
 	],
-	"geometryStamp": 110,
+	"geometryStamp": 201,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"method": "method.4dm",
 	"editor": {

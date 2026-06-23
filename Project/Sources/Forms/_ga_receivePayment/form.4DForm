@@ -76,12 +76,17 @@
 					"text": "Customer"
 				},
 				"val_customer": {
-					"type": "text",
+					"type": "input",
 					"top": 48,
 					"left": 100,
 					"width": 400,
 					"height": 17,
-					"dataSource": "Form:C1466.customerName"
+					"dataSource": "Form:C1466.customerName",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent"
 				},
 				"lbl_paymentDate": {
 					"type": "text",
@@ -178,6 +183,15 @@
 					],
 					"method": "ObjectMethods/lb_invoices.4dm",
 					"columns": [
+						{
+							"name": "col_uuid",
+							"dataSource": "This:C1470.UUID_Invoice",
+							"width": 0,
+							"enterable": false,
+							"header": {
+								"text": ""
+							}
+						},
 						{
 							"name": "col_num",
 							"dataSource": "This:C1470.transactionNumber",

@@ -12,17 +12,43 @@ Function formMethod()
 	If (Form:C1466.sfw.recalculationOfPanelPageNeeded())
 		Case of
 			: (FORM Get current page:C276(*)=1)
+			: (FORM Get current page:C276(*)=2)
+				// Purpose: Refresh Applications tab when the panel page is displayed.
+				// modified by 4D/PS [2026-june-08]
+				_ga_stLoadApplications()
 		End case
 	End if
 	If (Form:C1466.sfw.redrawAndSetVisibleInPanelNeeded())
 		This:C1470.redrawAndSetVisible()
 	End if
 
+// Purpose: Resize Applications listbox when the panel subform grows (page 2).
+// modified by 4D/PS [2026-june-08]
+Function _resizeApplicationsListbox()
+	var $left : Integer
+	var $top : Integer
+	var $right : Integer
+	var $bottom : Integer
+	var $left_lb : Integer
+	var $top_lb : Integer
+	var $offset : Integer
+	
+	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
+	OBJECT GET COORDINATES:C663(*; "header_bkgd_apps"; $left; $top; $right; $bottom)
+	OBJECT GET COORDINATES:C663(*; "lb_applications"; $left_lb; $top_lb; $right; $bottom)
+	$offset:=4
+	OBJECT SET COORDINATES:C1248(*; "header_bkgd_apps"; $left; $top; $right; $heightSubform-$offset)
+	OBJECT SET COORDINATES:C1248(*; "lb_applications"; $left_lb; $top_lb; $widthSubform-$offset; $heightSubform-$offset-1)
+
 Function redrawAndSetVisible()
 	OBJECT GET SUBFORM CONTAINER SIZE:C1148($widthSubform; $heightSubform)
 	This:C1470.drawPup_customer()
 	This:C1470.drawPup_type()
 	This:C1470.drawPup_status()
+	Case of 
+		: (FORM Get current page:C276(*)=2)
+			This:C1470._resizeApplicationsListbox()
+	End case 
 
 Function selectCustomer()
 	If (Form:C1466.sfw.checkIsInModification())

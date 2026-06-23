@@ -17,9 +17,9 @@ $invoice:=Form:C1466.current_item
 If ($invoice=Null:C1517)
 	cs:C1710.sfw_dialog.me.alert("Select a sales transaction first.")
 Else
-	// Purpose: Re-sync zero-balance job invoice ST rows from JobInvoice charge fields before eligibility check.
+	// Purpose: Re-sync zero-balance job invoice ST rows via entity method (DataClass call cannot stream entity from SFW).
 	// modified by 4D/PS [2026-june-08]
-	$invoice:=ds:C1482.SalesTransaction.syncJobInvoiceSTAmount($invoice)
+	$invoice:=$invoice.syncJobInvoiceSTAmount()
 	
 	If (Not:C34($invoice.canReceivePayment()))
 		Case of
