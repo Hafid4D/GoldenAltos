@@ -4,7 +4,6 @@ singleton Class constructor
 Function getBarcodeData($dataClass)->$barCodeData : Integer
 	
 	$barCodeData:=ds:C1482.sfw_Counter.getNextValue($dataClass)
-	//This.moreData.barcodeData:=String($recodNumber; "0000000000")
 	
 Function dropDownListSelection($dataClass; $foreignKey; $fieldRedrawer; $pannelClass)
 	

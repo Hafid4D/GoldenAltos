@@ -4085,6 +4085,18 @@
 			</field_ref>
 		</related_field>
 	</relation>
+	<relation uuid="5CE56728EF1C4035972175477209C173" name_Nto1="lot" name_1toN="inventories" state="1">
+		<related_field kind="source">
+			<field_ref uuid="AD1E00891CC4448E848AB7002C76C01C" name="UUID_Lot">
+				<table_ref uuid="CA853413921F4B2A9BC70E6DE5F88235" name="Inventory"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="AEF78036FB7D429A96DF35BE53A0E0AF" name="UUID">
+				<table_ref uuid="67220A81398C4000A84C1F180E368020" name="Lot"/>
+			</field_ref>
+		</related_field>
+	</relation>
 	<index kind="regular" unique_keys="true" uuid="0039C68FB77F4FFCA91C66C3635462E2" type="1">
 		<field_ref uuid="141E89DEE45A4FE8AAA16BCDE52B9128" name="UUID">
 			<table_ref uuid="8A4489176014439D93B99ECC5449681C" name="EngineeringStatus"/>

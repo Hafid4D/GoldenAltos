@@ -18,35 +18,49 @@ Case of
 		End if 
 		
 		
-		// 1. Calcul de la hauteur nécessaire pour la Listbox
-		var $rowCount; $rowHeight; $headerHeight; $totalLbHeight : Integer
+		// 1. Récupérer les infos de la listbox
+		var $rowCount; $rowHeight; $headerHeight : Integer
+		var $lbLeft; $lbTop; $lbWidth; $lbHeight : Integer
 		
 		$rowCount:=LISTBOX Get number of rows:C915(*; "lb_options")
-		$rowHeight:=LISTBOX Get rows height:C836(*; "lb_options")  // Par défaut en pixels
-		OBJECT GET BEST SIZE:C717(*; "lb_options"; $listBoxWidth; $listBoxHeight)
-		//$headerHeight:=LISTBOX Get headers height(*; "lb_options")
+		$rowHeight:=LISTBOX Get rows height:C836(*; "lb_options")
+		$headerHeight:=LISTBOX Get headers height:C1144(*; "lb_options")
 		
-		// Hauteur totale = (lignes * hauteur) + entête + petite marge de sécurité (2px)
-		$totalLbHeight:=($rowCount*$rowHeight)  //+$headerHeight+2
+		// 2. Position actuelle de la listbox dans le formulaire
+		OBJECT GET COORDINATES:C663(*; "lb_options"; $lbLeft; $lbTop; $lbWidth; $lbHeight)
 		
-		// 2. Redimensionner la Listbox (OBJECT MOVE)
-		// Syntaxe : OBJECT MOVE(*; "nom"; gauche; haut; largeur; hauteur)
-		// On passe -1 pour les coordonnées que l'on ne veut pas changer
-		//OBJECT MOVE(*; "lb_options"; -1; -1; -1; $totalLbHeight)
+		// 3. Hauteur exacte nécessaire pour la listbox
+		var $totalLbHeight : Integer
+		$totalLbHeight:=($rowCount*($rowHeight+2))  //+$headerHeight
 		
-		// 3. Ajuster la fenêtre pour accompagner le changement
-		var $w; $h; $left; $top : Integer
+		// 4. Calculer la marge fixe SOUS la listbox (boutons, padding, etc.)
+		// = hauteur actuelle de la fenêtre - (position top de la listbox + hauteur actuelle de la listbox)
+		var $left; $top; $w; $h : Integer
 		GET WINDOW RECT:C443($left; $top; $w; $h; Current form window:C827)
 		
 		var $currentWinHeight : Integer
 		$currentWinHeight:=$h-$top
 		
-		// On calcule la différence nécessaire pour la fenêtre
-		// (Ajustez de '110' selon la place de vos boutons/marges en bas de formulaire)
-		var $newWinHeight : Integer
-		$newWinHeight:=$totalLbHeight+110
+		var $marginBelow : Integer
+		$marginBelow:=$currentWinHeight-($lbTop+$lbHeight)
 		
-		RESIZE FORM WINDOW:C890(0; $newWinHeight-$currentWinHeight)
+		// 5. Nouvelle hauteur de fenêtre = position listbox + hauteur listbox calculée + marge fixe en bas
+		var $newWinHeight : Integer
+		$newWinHeight:=$lbTop+$totalLbHeight  //+$marginBelow
+		OBJECT SET COORDINATES:C1248(*; "lb_options"; $lbLeft; $lbTop; $lbWidth; $newWinHeight)
+		
+		OBJECT GET COORDINATES:C663(*; "b_accept"; $bLeft; $bTop; $bWidth; $bHeight)
+		$bTop:=$newWinHeight+5
+		$bHeight:=$newWinHeight+37
+		OBJECT SET COORDINATES:C1248(*; "b_accept"; $bLeft; $bTop; $bWidth; $bHeight)
+		
+		OBJECT GET COORDINATES:C663(*; "b_cancel"; $bLeft; $bTop; $bWidth; $bHeight)
+		$bTop:=$newWinHeight+5
+		$bHeight:=$newWinHeight+37
+		OBJECT SET COORDINATES:C1248(*; "b_cancel"; $bLeft; $bTop; $bWidth; $bHeight)
+		
+		// 6. Redimensionner
+		RESIZE FORM WINDOW:C890(0; $newWinHeight-$lbHeight)  //$currentWinHeight)
 		
 		
 	: (Form event code:C388=On Outside Call:K2:11) | (Form event code:C388=On Close Box:K2:21)
