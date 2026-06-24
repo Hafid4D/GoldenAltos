@@ -19,7 +19,9 @@ local Function afterSave()
 	If (This:C1470.UUID_Location#"")
 		$bin:=ds:C1482.Bin.query("UUID = :1"; This:C1470.UUID_Location).first()
 		If ($bin#Null:C1517)
-			$hasStock:=($bin.inventories.query("qtyInStock > :1"; 0).length>0)
+			// Purpose: Bin occupancy follows availableQty (same field shown on the Inventory entry).
+			// modified by 4D/PS [2026-june-24]
+			$hasStock:=($bin.inventories.query("availableQty > :1"; 0).length>0)
 			$newIsEmpty:=Not:C34($hasStock)
 			If ($newIsEmpty#$bin.isEmpty)
 				$bin.isEmpty:=$newIsEmpty

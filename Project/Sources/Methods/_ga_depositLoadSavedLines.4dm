@@ -26,57 +26,59 @@ For each ($eLine; ds:C1482.DepositItem.query("UUID_Deposit = :1"; $eDeposit.UUID
 	End if
 	
 	If ($md.lineType="payment")
-		$line:=New object:C1471(\
-			"include"; 1; \
-			"UUID_Payment"; $md.UUID_Payment; \
-			"transactionNumber"; String:C10($md.transactionNumber); \
-			"transactionDate"; $md.transactionDate; \
-			"typeName"; $md.typeName; \
-			"customerName"; $md.customerName; \
-			"memo"; $md.memo; \
-			"refNo"; $md.refNo; \
-			"amount"; Num:C11($md.amount))
+		// Purpose: Build payment line property-by-property with safe Text coercion on moreData fields.
+		// modified by 4D/PS [2026-june-23]
+		$line:=New object:C1471
+		$line.include:=1
+		$line.UUID_Payment:=$md.UUID_Payment
+		$line.transactionNumber:=_ga_depositPrintAsText($md.transactionNumber)
+		$line.transactionDate:=$md.transactionDate
+		$line.typeName:=_ga_depositPrintAsText($md.typeName)
+		$line.customerName:=_ga_depositPrintAsText($md.customerName)
+		$line.memo:=_ga_depositPrintAsText($md.memo)
+		$line.refNo:=_ga_depositPrintAsText($md.refNo)
+		$line.amount:=Num:C11($md.amount)
 		$paymentLines.push($line)
 	Else
 		If ($md.lineType="otherFund")
-			$line:=New object:C1471(\
-				"lineNumber"; $eLine.lineNumber; \
-				"UUID_Customer"; $md.UUID_Customer; \
-				"customerName"; $md.customerName; \
-				"UUID_CAO"; $md.UUID_CAO; \
-				"accountName"; $md.accountName; \
-				"description"; $md.description; \
-				"refNo"; $md.refNo; \
-				"amount"; Num:C11($md.amount))
+			$line:=New object:C1471
+			$line.lineNumber:=$eLine.lineNumber
+			$line.UUID_Customer:=$md.UUID_Customer
+			$line.customerName:=_ga_depositPrintAsText($md.customerName)
+			$line.UUID_CAO:=$md.UUID_CAO
+			$line.accountName:=_ga_depositPrintAsText($md.accountName)
+			$line.description:=_ga_depositPrintAsText($md.description)
+			$line.refNo:=_ga_depositPrintAsText($md.refNo)
+			$line.amount:=Num:C11($md.amount)
 			$otherFundLines.push($line)
 		Else
-			// Purpose: Support legacy import rows stored as moreData.legacy (Deposits / Deposit_Items v18).
+			// Purpose: Legacy import rows — property-by-property + safe Text coercion on JSON fields.
 			// modified by 4D/PS [2026-june-23]
 			If ($md.legacy#Null:C1517)
 				$legacy:=$md.legacy
 				$invoiceNum:=Num:C11($legacy.Invoice)
 				If ($invoiceNum=-1)
-					$line:=New object:C1471(\
-						"lineNumber"; $eLine.lineNumber; \
-						"UUID_Customer"; ""; \
-						"customerName"; String:C10($legacy.Customer); \
-						"UUID_CAO"; ""; \
-						"accountName"; String:C10($legacy.Account); \
-						"description"; String:C10($legacy.Division); \
-						"refNo"; ""; \
-						"amount"; Num:C11($legacy.Amt))
+					$line:=New object:C1471
+					$line.lineNumber:=$eLine.lineNumber
+					$line.UUID_Customer:=""
+					$line.customerName:=_ga_depositPrintAsText($legacy.Customer)
+					$line.UUID_CAO:=""
+					$line.accountName:=_ga_depositPrintAsText($legacy.Account)
+					$line.description:=_ga_depositPrintAsText($legacy.Division)
+					$line.refNo:=""
+					$line.amount:=Num:C11($legacy.Amt)
 					$otherFundLines.push($line)
 				Else
-					$line:=New object:C1471(\
-						"include"; 1; \
-						"UUID_Payment"; ""; \
-						"transactionNumber"; String:C10($legacy.Invoice); \
-						"transactionDate"; $eDeposit._legacyDateValue($legacy.Deposit_Date); \
-						"typeName"; "Payment"; \
-						"customerName"; String:C10($legacy.Customer); \
-						"memo"; ""; \
-						"refNo"; String:C10($legacy.Invoice); \
-						"amount"; Num:C11($legacy.Amt))
+					$line:=New object:C1471
+					$line.include:=1
+					$line.UUID_Payment:=""
+					$line.transactionNumber:=_ga_depositPrintAsText($legacy.Invoice)
+					$line.transactionDate:=$eDeposit._legacyDateValue($legacy.Deposit_Date)
+					$line.typeName:="Payment"
+					$line.customerName:=_ga_depositPrintAsText($legacy.Customer)
+					$line.memo:=""
+					$line.refNo:=_ga_depositPrintAsText($legacy.Invoice)
+					$line.amount:=Num:C11($legacy.Amt)
 					$paymentLines.push($line)
 				End if
 			End if

@@ -9,8 +9,8 @@
 	"windowMinHeight": 0,
 	"windowMaxWidth": 500,
 	"windowMaxHeight": 1000,
-	"rightMargin": 20,
-	"bottomMargin": 20,
+	"rightMargin": 0,
+	"bottomMargin": 5,
 	"events": [
 		"onLoad",
 		"onPageChange",
@@ -39,10 +39,10 @@
 			"objects": {
 				"lb_options": {
 					"type": "listbox",
-					"left": 4,
-					"top": 4,
-					"width": 332,
-					"height": 412,
+					"left": 0,
+					"top": 0,
+					"width": 336,
+					"height": 572,
 					"events": [
 						"onClick"
 					],
@@ -61,8 +61,8 @@
 					"alternateFill": "#FFFFFF",
 					"borderStyle": "none",
 					"stroke": "#000000",
-					"sizingX": "grow",
-					"sizingY": "grow",
+					"sizingX": "fixed",
+					"sizingY": "fixed",
 					"method": "ObjectMethods/lb_options.4dm",
 					"showHeaders": false,
 					"columns": [
@@ -88,21 +88,10 @@
 						}
 					]
 				},
-				"Line_separator": {
-					"type": "line",
-					"top": 420,
-					"left": 4,
-					"width": 332,
-					"height": 0,
-					"startPoint": "topLeft",
-					"sizingX": "grow",
-					"sizingY": "move",
-					"stroke": "#C8C8C8"
-				},
 				"btn_createSublevel": {
 					"type": "button",
 					"text": "",
-					"top": 428,
+					"top": 576,
 					"left": 4,
 					"width": 32,
 					"height": 32,
@@ -120,7 +109,7 @@
 				},
 				"b_cancel": {
 					"type": "button",
-					"top": 428,
+					"top": 576,
 					"left": 256,
 					"width": 30,
 					"height": 32,
@@ -137,7 +126,7 @@
 				},
 				"b_accept": {
 					"type": "button",
-					"top": 428,
+					"top": 576,
 					"left": 306,
 					"width": 30,
 					"height": 32,
@@ -157,12 +146,13 @@
 			}
 		}
 	],
-	"geometryStamp": 16,
+	"geometryStamp": 48,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
 		"views": {
 			"View 1": {}
 		}
-	}
+	},
+	"formSizeAnchor": "b_accept"
 }

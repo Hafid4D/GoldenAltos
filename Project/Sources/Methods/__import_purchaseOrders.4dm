@@ -1044,7 +1044,7 @@ If (True:C214)
 		$inventory_e.vendor:=$record.vendor
 		$inventory_e.description:=$record.description
 		$inventory_e.classification:=$record.classification
-		//$inventory_e.partLotNumber:=$record.lotNumber
+		$inventory_e.partLotNumber:=$record.lotNumber
 		$inventory_e.stockNum:=$record.stockNum
 		$inventory_e.dateIn:=cs:C1710.sfw_stmp.me.build(Date:C102($record.dateIn))
 		$inventory_e.expirationDate:=$record.expirationDate
@@ -1061,15 +1061,20 @@ If (True:C214)
 			$bin_e:=$bin[0]
 			$inventory_e.UUID_Location:=$bin_e.UUID
 			
-			$bin_e.isEmpty:=False:C215
-			$res:=$bin_e.save()
-			If (Not:C34($res.success))
-				TRACE:C157
-			End if 
+			// Purpose: isEmpty is recalculated from availableQty in InventoryEntity.afterSave on inventory save.
+			// modified by 4D/PS [2026-june-24]
 			
 		Else 
 			$inventory_e.UUID_Location:="00"*16
 		End if 
+		
+		//$lot_es:=ds.Lot.query("lotNumber = :1"; $record.lotNumber)
+		
+		//If ($lot_es.length>0)
+		//$inventory_e.UUID_Lot:=$lot_es[0].UUID
+		//Else 
+		////TRACE
+		//End if 
 		
 		$inventory_e.receivedBy:=$record.recdBy
 		$inventory_e.totalCost:=$record.totalCost

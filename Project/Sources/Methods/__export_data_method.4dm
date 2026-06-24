@@ -1329,10 +1329,11 @@ If (True:C214)  // export Spec_control
 	
 End if 
 
-If (True:C214)  // export PartData
+
+If (True:C214)  // export [PartData]
 	
-	ALL RECORDS:C47([Deposit_Items])
-	$jsonString:=Selection to JSON:C1234([Deposit_Items])
+	ALL RECORDS:C47([PartData:58])
+	$jsonString:=Selection to JSON:C1234([PartData:58])
 	
 	vhDoc:=Create document:C266($myFolder.platformPath+"partData_export.json")
 	If (OK=1)

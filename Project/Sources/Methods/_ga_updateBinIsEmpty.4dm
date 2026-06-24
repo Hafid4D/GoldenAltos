@@ -1,6 +1,7 @@
 //%attributes = {}
-// Recalculates isEmpty on every Bin based on whether any linked Inventory has qtyInStock > 0.
+// Recalculates isEmpty on every Bin based on whether any linked Inventory has availableQty > 0.
 // Run manually from the debugger or from a project method.
+// modified by 4D/PS [2026-june-24]
 
 var $bins : cs:C1710.BinSelection
 var $bin : cs:C1710.BinEntity
@@ -15,7 +16,7 @@ $total:=$bins.length
 
 For each ($bin; $bins)
 	
-	$hasStock:=($bin.inventories.query("qtyInStock > :1"; 0).length>0)
+	$hasStock:=($bin.inventories.query("availableQty > :1"; 0).length>0)
 	$newIsEmpty:=Not:C34($hasStock)
 	
 	If ($newIsEmpty#$bin.isEmpty)

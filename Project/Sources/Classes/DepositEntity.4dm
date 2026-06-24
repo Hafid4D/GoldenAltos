@@ -171,23 +171,26 @@ Function hydrateDisplayFromLegacy()
 	End if
 
 // Purpose: Convert a legacy JSON date value to a 4D Date.
-// Parameters: $value — legacy field (Date, Text ISO, or Null)
+// Parameters: $value : Variant — legacy field (Date, Text ISO, numeric, or Null)
 // Returns: Date — !00-00-00! when conversion fails
-// created by 4D/PS [2026-june-23]
-Function _legacyDateValue($value)->$date : Date
+// modified by 4D/PS [2026-june-23]
+Function _legacyDateValue($value : Variant)->$date : Date
 	$date:=!00-00-00!
-	If ($value=Null:C1517)
+	If ($value=Null:C1517) || (Undefined:C82($value))
 		return $date
 	End if
-	If (Value type:C1119($value)=Is date:K8:7)
-		$date:=$value
-	Else
-		If (Value type:C1119($value)=Is text:K8:3)
+	Case of
+		: (Value type:C1509($value)=Is date:K8:7)
+			$date:=$value
+		: (Value type:C1509($value)=Is text:K8:3)
 			If ($value#"")
 				$date:=Date:C102($value)
 			End if
-		End if
-	End if
+		: ((Value type:C1509($value)=Is real:K8:5) | (Value type:C1509($value)=Is longint:K8:6))
+			If (Num:C11($value)#0)
+				$date:=!00-00-00!+Num:C11($value)
+			End if
+	End case
 
 // Purpose: Return True when this deposit is still being created (not yet persisted with lines).
 // Returns: Boolean

@@ -16,7 +16,37 @@ Function draw($buttonName : Text; $path : Text)
 	If ($path=Null:C1517)
 		$path:=""
 	End if 
+	OBJECT SET TITLE:C194(*; "pup_binLocation"; "")
 	Form:C1466.sfw.drawButtonPup($buttonName; $path; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; ($path=""))
+	
+	
+// Purpose: Returns total availableQty and first partLotNumber for inventories linked to a bin path.
+// Parameters:
+// $binPath : Text — full binLocationPath (e.g. "Warehouse/A1")
+// Returns: Object — { totalQty : Real ; lotNumber : Text }
+// modified by 4D/PS [2026-june-24]
+Function _terminalBinStockInfo($binPath : Text)->$info : Object
+	var $bin : cs:C1710.BinEntity
+	var $inv : cs:C1710.InventoryEntity
+	
+	$info:=New object:C1471("totalQty"; 0; "lotNumber"; "")
+	If ($binPath="")
+		return $info
+	End if 
+	
+	$bin:=ds:C1482.Bin.query("binLocationPath = :1"; $binPath).first()
+	If ($bin#Null:C1517)
+		For each ($inv; $bin.inventories)
+			If ($inv.availableQty>0)
+				$info.totalQty:=$info.totalQty+$inv.availableQty
+				If ($info.lotNumber="")
+					$info.lotNumber:=$inv.partLotNumber
+				End if 
+			End if 
+		End for each 
+	End if 
+	
+	return $info
 	
 	
 Function _stepBack($path : Text)->$parent : Text
@@ -41,9 +71,10 @@ Function _stepBack($path : Text)->$parent : Text
 Function _buildOpts($currentPath : Text; $allowCreate : Boolean)->$opts : Collection
 	// Builds the complete options list for the current navigation level
 	var $parts; $options; $partsChoice; $terminalFlags; $occupiedFlags : Collection
-	var $value; $candidate; $param : Text
+	var $value; $candidate; $param; $label : Text
 	var $depth; $i; $idx : Integer
 	var $isTerm; $isOccupied; $isCurrentPathExisting; $currentBinIsOccupied : Boolean
+	var $stockInfo : Object
 	
 	$parts:=New collection:C1472
 	If ($currentPath#"")
@@ -114,7 +145,12 @@ Function _buildOpts($currentPath : Text; $allowCreate : Boolean)->$opts : Collec
 	For each ($value; $options)
 		If ($terminalFlags[$idx])
 			If ($occupiedFlags[$idx])
-				$opts.push(New object:C1471("label"; "🟡 "+$value; "value"; "occupied|"+$value; "kind"; "yellow"))
+				// Purpose: Append lot and availableQty on occupied terminal bins (Omar point 3).
+				// modified by 4D/PS [2026-june-24]
+				$candidate:=($currentPath="") ? $value : ($currentPath+"/"+$value)
+				$stockInfo:=This:C1470._terminalBinStockInfo($candidate)
+				$label:="🟡 "+$value+" ("+$stockInfo.lotNumber+" - "+String:C10($stockInfo.totalQty)+")"
+				$opts.push(New object:C1471("label"; $label; "value"; "occupied|"+$value; "kind"; "yellow"))
 			Else 
 				$opts.push(New object:C1471("label"; "🟢 "+$value; "value"; "select|"+$value; "kind"; "green"))
 			End if 

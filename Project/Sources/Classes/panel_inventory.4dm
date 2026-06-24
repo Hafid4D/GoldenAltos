@@ -384,7 +384,7 @@ Function btnOpenCustomer()
 	
 Function drawPup_binLocation()
 	If (Form:C1466.current_item#Null:C1517)
-		
+		OBJECT SET TITLE:C194(*; "pup_binLocation"; "")
 		$binLocation:=ds:C1482.Bin.query("UUID= :1"; Form:C1466.current_item.UUID_Location).first() || New object:C1471()
 		$locationName:=$binLocation.binLocationPath
 		If ($locationName=Null:C1517)
