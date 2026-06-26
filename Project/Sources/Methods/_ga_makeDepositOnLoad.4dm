@@ -37,7 +37,8 @@ Else
 	$eCao:=ds:C1482.CAO.activeCAOs().first()
 	If ($eCao#Null:C1517)
 		Form:C1466.bankAccountUUID:=$eCao.UUID
-		Form:C1466.bankAccountName:=$eCao.accountNumber+" — "+$eCao.name
+		// modified by 4D/PS [2026-june-26]
+		Form:C1466.bankAccountName:=$eCao.displayLabel()
 	End if
 	If (Form:C1466.depositDate=Null:C1517) || (Form:C1466.depositDate=!00-00-00!)
 		Form:C1466.depositDate:=Current date:C33(*)

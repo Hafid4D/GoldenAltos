@@ -1,5 +1,14 @@
 Class extends Entity
 
+// Purpose: Build a display label from accountNumber and name for menus and deposit snapshots.
+// Returns: Text — e.g. "1030-0 — Undeposited Funds"
+// created by 4D/PS [2026-june-26]
+Function displayLabel()->$label : Text
+	$label:=String:C10(This:C1470.accountNumber)
+	If (This:C1470.name#"")
+		$label:=$label+" — "+String:C10(This:C1470.name)
+	End if
+
 
 local Function get nameInWindowTitle()->$nameInWindowTitle : Text
 	$nameInWindowTitle:=This:C1470.name

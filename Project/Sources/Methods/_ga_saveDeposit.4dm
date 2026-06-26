@@ -13,7 +13,7 @@
 // $cashBackCaoUUID : Text — petty cash / cash back CAO account UUID
 // $cashBackMemo : Text — cash back description
 // Returns: Object — { success : Boolean, depositUUID : Text, totalDeposited : Real, error : Text }
-// created by 4D/PS [2026-june-22]
+// modified by 4D/PS [2026-june-23]
 
 #DECLARE(\
 $depositUUID : Text; \
@@ -144,25 +144,26 @@ If ($eDeposit=Null:C1517)
 	$eDeposit:=ds:C1482.Deposit.new()
 	$eDeposit.UUID:=$depositUUID
 End if
+// Purpose: Persist deposit header on typed catalog fields instead of moreData blob.
+// modified by 4D/PS [2026-june-26]
 $eDeposit.depositNumber:=$depositNumber
-$eDeposit._ensureMoreData()
-$eDeposit.moreData.depositDate:=$depositDate
-$eDeposit.moreData.memo:=$memo
-$eDeposit.moreData.UUID_CAO_bank:=$caoUUID
-$eDeposit.moreData.bankAccountName:=$eCao.accountNumber+" — "+$eCao.name
-$eDeposit.moreData.cashBackAmount:=$cashBackAmount
-$eDeposit.moreData.cashBackMemo:=$cashBackMemo
-$eDeposit.moreData.UUID_CAO_cashBack:=$cashBackCaoUUID
+$eDeposit.depositDate:=$depositDate
+$eDeposit.memo:=$memo
+$eDeposit.UUID_CAO_bank:=$caoUUID
+$eDeposit.bankAccountLabel:=$eCao.displayLabel()
+$eDeposit.cashBackAmount:=$cashBackAmount
+$eDeposit.cashBackMemo:=$cashBackMemo
+$eDeposit.UUID_CAO_cashBack:=$cashBackCaoUUID
 If ($cashBackAmount>0) && ($eCaoCashBack#Null:C1517)
-	$eDeposit.moreData.cashBackAccountName:=$eCaoCashBack.accountNumber+" — "+$eCaoCashBack.name
+	$eDeposit.cashBackAccountLabel:=$eCaoCashBack.displayLabel()
 Else
-	$eDeposit.moreData.cashBackAccountName:=""
+	$eDeposit.cashBackAccountLabel:=""
 End if
-$eDeposit.moreData.selectedPaymentsTotal:=$paymentsTotal
-$eDeposit.moreData.otherFundsTotal:=$otherFundsTotal
-$eDeposit.moreData.total:=$grossTotal
-$eDeposit.moreData.netToBank:=$netToBank
-$eDeposit.moreData.saved:=True:C214
+$eDeposit.paymentsTotal:=$paymentsTotal
+$eDeposit.otherFundsTotal:=$otherFundsTotal
+$eDeposit.total:=$grossTotal
+$eDeposit.netToBank:=$netToBank
+$eDeposit.isSaved:=True:C214
 
 $res:=$eDeposit.save()
 If (Not:C34($res.success))
@@ -188,16 +189,22 @@ For each ($line; $paymentLines)
 			$eLine:=ds:C1482.DepositItem.new()
 			$eLine.UUID_Deposit:=$eDeposit.UUID
 			$eLine.lineNumber:=$lineNum
-			$eLine.moreData:=New object:C1471(\
-				"lineType"; "payment"; \
-				"UUID_Payment"; $payUUID; \
-				"transactionNumber"; $line.transactionNumber; \
-				"transactionDate"; $line.transactionDate; \
-				"typeName"; $line.typeName; \
-				"customerName"; $line.customerName; \
-				"memo"; $line.memo; \
-				"refNo"; $line.refNo; \
-				"amount"; Num:C11($line.amount))
+			$eLine.lineType:="payment"
+			$eLine.UUID_Payment:=$payUUID
+			$eLine.amount:=Num:C11($line.amount)
+			$eLine.customerName:=""
+			$eLine.refNo:=""
+			$eLine.description:=""
+			$eLine.accountLabel:=""
+			If ($line.customerName#Null:C1517)
+				$eLine.customerName:=String:C10($line.customerName)
+			End if
+			If ($line.refNo#Null:C1517)
+				$eLine.refNo:=String:C10($line.refNo)
+			End if
+			If ($line.memo#Null:C1517)
+				$eLine.description:=String:C10($line.memo)
+			End if
 			$res:=$eLine.save()
 			If (Not:C34($res.success))
 				If ($ownTransaction)
@@ -216,15 +223,27 @@ For each ($line; $otherFundLines)
 		$eLine:=ds:C1482.DepositItem.new()
 		$eLine.UUID_Deposit:=$eDeposit.UUID
 		$eLine.lineNumber:=$lineNum
-		$eLine.moreData:=New object:C1471(\
-			"lineType"; "otherFund"; \
-			"UUID_Customer"; $line.UUID_Customer; \
-			"customerName"; $line.customerName; \
-			"UUID_CAO"; $line.UUID_CAO; \
-			"accountName"; $line.accountName; \
-			"description"; $line.description; \
-			"refNo"; $line.refNo; \
-			"amount"; Num:C11($line.amount))
+		$eLine.lineType:="otherFund"
+		$eLine.UUID_Customer:=$line.UUID_Customer
+		$eLine.UUID_CAO:=$line.UUID_CAO
+		$eLine.amount:=Num:C11($line.amount)
+		$eLine.customerName:=""
+		$eLine.accountLabel:=""
+		$eLine.description:=""
+		$eLine.refNo:=""
+		$eLine.UUID_Payment:=16*"00"
+		If ($line.customerName#Null:C1517)
+			$eLine.customerName:=String:C10($line.customerName)
+		End if
+		If ($line.accountName#Null:C1517)
+			$eLine.accountLabel:=String:C10($line.accountName)
+		End if
+		If ($line.description#Null:C1517)
+			$eLine.description:=String:C10($line.description)
+		End if
+		If ($line.refNo#Null:C1517)
+			$eLine.refNo:=String:C10($line.refNo)
+		End if
 		$res:=$eLine.save()
 		If (Not:C34($res.success))
 			If ($ownTransaction)
@@ -268,7 +287,7 @@ If (Not:C34($res.success))
 	return $result
 End if
 
-$eDeposit.moreData.UUID_SalesTransaction_DEP:=$eDepST.UUID
+$eDeposit.UUID_SalesTransaction_DEP:=$eDepST.UUID
 $res:=$eDeposit.save()
 If (Not:C34($res.success))
 	If ($ownTransaction)

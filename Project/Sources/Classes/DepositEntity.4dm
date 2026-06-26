@@ -1,238 +1,131 @@
-// Purpose: Entity helpers for Deposit (header fields in moreData, list display, creation defaults).
-// created by 4D/PS [2026-june-22]
+// Purpose: Entity helpers for Deposit (typed header fields + barcode in moreData).
+// modified by 4D/PS [2026-june-23]
 Class extends Entity
 
 local Function get nameInWindowTitle()->$nameInWindowTitle : Text
 	$nameInWindowTitle:=String:C10(This:C1470.depositNumber)
 
-// Purpose: Ensure moreData object exists before reading or writing deposit header fields.
-// modified by 4D/PS [2026-june-22]
+// Purpose: Ensure moreData is a valid object (barcode scanner payload only).
+// modified by 4D/PS [2026-june-26]
 Function _ensureMoreData()
-	If (This:C1470.moreData=Null:C1517)
+	If (Value type:C1509(This:C1470.moreData)#Is object:K8:27)
 		This:C1470.moreData:=New object:C1471
 	End if
 
 local Function get depositDate()->$date : Date
-	This:C1470._ensureMoreData()
-	$date:=This:C1470.moreData.depositDate
-	If ($date=Null:C1517)
-		$date:=!00-00-00!
-	End if
+	$date:=This:C1470.stmpDepositDate=0 ? !00-00-00! : cs:C1710.sfw_stmp.me.getDate(This:C1470.stmpDepositDate; True:C214)
 
 local Function set depositDate($date : Date)
-	This:C1470._ensureMoreData()
-	This:C1470.moreData.depositDate:=$date
+	This:C1470.stmpDepositDate:=$date=!00-00-00! ? 0 : cs:C1710.sfw_stmp.me.build($date)
 
-local Function get memo()->$memo : Text
-	This:C1470._ensureMoreData()
-	$memo:=This:C1470.moreData.memo
-	If ($memo=Null:C1517)
-		$memo:=""
-	End if
-
-local Function set memo($memo : Text)
-	This:C1470._ensureMoreData()
-	This:C1470.moreData.memo:=$memo
-
-local Function get UUID_CAO_bank()->$uuid : Text
-	This:C1470._ensureMoreData()
-	$uuid:=This:C1470.moreData.UUID_CAO_bank
-	If ($uuid=Null:C1517)
-		$uuid:=""
-	End if
-
-local Function set UUID_CAO_bank($uuid : Text)
-	This:C1470._ensureMoreData()
-	This:C1470.moreData.UUID_CAO_bank:=$uuid
-
+// Purpose: Panel alias — bank account label shown on the entry list and header popup.
+// modified by 4D/PS [2026-june-26]
 local Function get bankAccountName()->$name : Text
-	This:C1470._ensureMoreData()
-	$name:=This:C1470.moreData.bankAccountName
-	If ($name=Null:C1517)
-		$name:=""
+	var $eCao : cs:C1710.CAOEntity
+	var $bankUUID : Text
+	$name:=String:C10(This:C1470.bankAccountLabel)
+	// Purpose: Coerce catalog UUID to Text before isAnEmptyUUID (Undefined/UUID types are not Text).
+	// modified by 4D/PS [2026-june-23]
+	If (Undefined:C82(This:C1470.UUID_CAO_bank)) || (This:C1470.UUID_CAO_bank=Null:C1517)
+		$bankUUID:=16*"00"
+	Else
+		$bankUUID:=String:C10(This:C1470.UUID_CAO_bank)
+	End if
+	If ($name="") && (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID($bankUUID)))
+		$eCao:=This:C1470.bankAccount
+		If ($eCao=Null:C1517)
+			$eCao:=ds:C1482.CAO.get($bankUUID)
+		End if
+		If ($eCao#Null:C1517)
+			$name:=$eCao.displayLabel()
+		End if
 	End if
 
 local Function set bankAccountName($name : Text)
-	This:C1470._ensureMoreData()
-	This:C1470.moreData.bankAccountName:=$name
+	This:C1470.bankAccountLabel:=$name
 
-local Function get UUID_Customer_filter()->$uuid : Text
-	This:C1470._ensureMoreData()
-	$uuid:=This:C1470.moreData.UUID_Customer_filter
-	If ($uuid=Null:C1517)
-		$uuid:=""
-	End if
-
-local Function set UUID_Customer_filter($uuid : Text)
-	This:C1470._ensureMoreData()
-	This:C1470.moreData.UUID_Customer_filter:=$uuid
-
-local Function get cashBackAmount()->$amount : Real
-	This:C1470._ensureMoreData()
-	$amount:=Num:C11(This:C1470.moreData.cashBackAmount)
-	If ($amount=Null:C1517)
-		$amount:=0
-	End if
-
-local Function set cashBackAmount($amount : Real)
-	This:C1470._ensureMoreData()
-	This:C1470.moreData.cashBackAmount:=$amount
-
-local Function get cashBackMemo()->$memo : Text
-	This:C1470._ensureMoreData()
-	$memo:=This:C1470.moreData.cashBackMemo
-	If ($memo=Null:C1517)
-		$memo:=""
-	End if
-
-local Function set cashBackMemo($memo : Text)
-	This:C1470._ensureMoreData()
-	This:C1470.moreData.cashBackMemo:=$memo
-
-local Function get UUID_CAO_cashBack()->$uuid : Text
-	This:C1470._ensureMoreData()
-	$uuid:=This:C1470.moreData.UUID_CAO_cashBack
-	If ($uuid=Null:C1517)
-		$uuid:=""
-	End if
-
-local Function set UUID_CAO_cashBack($uuid : Text)
-	This:C1470._ensureMoreData()
-	This:C1470.moreData.UUID_CAO_cashBack:=$uuid
-
+// Purpose: Panel alias — cash back account label on the deposit form.
+// modified by 4D/PS [2026-june-26]
 local Function get cashBackAccountName()->$name : Text
-	This:C1470._ensureMoreData()
-	$name:=This:C1470.moreData.cashBackAccountName
-	If ($name=Null:C1517)
-		$name:=""
+	var $eCao : cs:C1710.CAOEntity
+	var $cashBackUUID : Text
+	$name:=String:C10(This:C1470.cashBackAccountLabel)
+	// Purpose: Coerce catalog UUID to Text before isAnEmptyUUID (Undefined/UUID types are not Text).
+	// modified by 4D/PS [2026-june-23]
+	If (Undefined:C82(This:C1470.UUID_CAO_cashBack)) || (This:C1470.UUID_CAO_cashBack=Null:C1517)
+		$cashBackUUID:=16*"00"
+	Else
+		$cashBackUUID:=String:C10(This:C1470.UUID_CAO_cashBack)
+	End if
+	If ($name="") && (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID($cashBackUUID)))
+		$eCao:=This:C1470.cashBackAccount
+		If ($eCao=Null:C1517)
+			$eCao:=ds:C1482.CAO.get($cashBackUUID)
+		End if
+		If ($eCao#Null:C1517)
+			$name:=$eCao.displayLabel()
+		End if
 	End if
 
 local Function set cashBackAccountName($name : Text)
-	This:C1470._ensureMoreData()
-	This:C1470.moreData.cashBackAccountName:=$name
+	This:C1470.cashBackAccountLabel:=$name
 
-// Purpose: List column — bank account label for the deposit header.
-// Returns: Text
-// created by 4D/PS [2026-june-22]
-Function accountLabel()->$label : Text
-	$label:=This:C1470.bankAccountName
-
-// Purpose: List column — gross deposit total (payments + other funds, before cash back).
-// Returns: Real
-// created by 4D/PS [2026-june-22]
-Function totalAmount()->$total : Real
-	This:C1470._ensureMoreData()
-	$total:=Num:C11(This:C1470.moreData.total)
-	If ($total=Null:C1517)
-		$total:=0
-	End if
-
-// Purpose: Map legacy import JSON (moreData.legacy) into header display fields for browse mode.
+// Purpose: Removed unused accountLabel() wrapper — list column uses bankAccountName getter on typed bankAccountLabel.
 // modified by 4D/PS [2026-june-23]
-Function hydrateDisplayFromLegacy()
-	var $legacy : Object
-	var $eCao : cs:C1710.CAOEntity
-	var $firstLine : cs:C1710.DepositItemEntity
-	var $lineMd : Object
-	
-	This:C1470._ensureMoreData()
-	If (This:C1470.moreData.legacy=Null:C1517)
-		return 
-	End if
-	$legacy:=This:C1470.moreData.legacy
-	If (This:C1470.depositDate=!00-00-00!)
-		This:C1470.depositDate:=This:C1470._legacyDateValue($legacy.DepositDate)
-	End if
-	If (This:C1470.bankAccountName="")
-		If ($legacy.Account#Null:C1517)
-			This:C1470.bankAccountName:=String:C10($legacy.Account)
-		End if
-	End if
-	If (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID(This:C1470.UUID_CAO_bank))) && (This:C1470.bankAccountName="")
-		$eCao:=ds:C1482.CAO.get(This:C1470.UUID_CAO_bank)
-		If ($eCao#Null:C1517)
-			This:C1470.bankAccountName:=$eCao.accountNumber+" — "+$eCao.name
-		End if
-	End if
-	If (Num:C11(This:C1470.moreData.total)=0) && ($legacy.TotalReceipt#Null:C1517)
-		This:C1470.moreData.total:=Num:C11($legacy.TotalReceipt)
-	End if
-	If (This:C1470.depositDate=!00-00-00!)
-		$firstLine:=ds:C1482.DepositItem.query("UUID_Deposit = :1"; This:C1470.UUID).orderBy("lineNumber").first()
-		If ($firstLine#Null:C1517) && ($firstLine.moreData#Null:C1517)
-			$lineMd:=$firstLine.moreData
-			If ($lineMd.legacy#Null:C1517)
-				This:C1470.depositDate:=This:C1470._legacyDateValue($lineMd.legacy.Deposit_Date)
-			End if
-		End if
-	End if
-	If (This:C1470.moreData.saved=Null:C1517)
-		This:C1470.moreData.saved:=True:C214
-	End if
-
-// Purpose: Convert a legacy JSON date value to a 4D Date.
-// Parameters: $value : Variant — legacy field (Date, Text ISO, numeric, or Null)
-// Returns: Date — !00-00-00! when conversion fails
-// modified by 4D/PS [2026-june-23]
-Function _legacyDateValue($value : Variant)->$date : Date
-	$date:=!00-00-00!
-	If ($value=Null:C1517) || (Undefined:C82($value))
-		return $date
-	End if
-	Case of
-		: (Value type:C1509($value)=Is date:K8:7)
-			$date:=$value
-		: (Value type:C1509($value)=Is text:K8:3)
-			If ($value#"")
-				$date:=Date:C102($value)
-			End if
-		: ((Value type:C1509($value)=Is real:K8:5) | (Value type:C1509($value)=Is longint:K8:6))
-			If (Num:C11($value)#0)
-				$date:=!00-00-00!+Num:C11($value)
-			End if
-	End case
 
 // Purpose: Return True when this deposit is still being created (not yet persisted with lines).
 // Returns: Boolean
-// created by 4D/PS [2026-june-22]
+// modified by 4D/PS [2026-june-23]
 Function isDraft()->$draft : Boolean
-	This:C1470._ensureMoreData()
-	$draft:=Not:C34(Bool:C1537(This:C1470.moreData.saved))
+	$draft:=Not:C34(Bool:C1537(This:C1470.isSaved))
 
 local Function itemReload()
-	// Purpose: Reload listbox data when the user selects another deposit in the list.
-	// modified by 4D/PS [2026-june-22]
 	cs:C1710.panel_deposit.me.loadPanelData()
 
 local Function loadAfterCreation()
 	If (Form:C1466.situation.mode="add")
 		This:C1470._initOnCreation()
 	End if
-	// Purpose: Assign a unique barcode in moreData for scanner lookup on new records.
-	// modified by 4D/PS [2026-june-23]
+	This:C1470._ensureMoreData()
 	This:C1470.moreData.barcodeData:=String:C10(cs:C1710.Util_ScannerManager.me.getBarcodeData(Form:C1466.sfw.entry.dataclass); "0000000000")
 
 // Purpose: Assign deposit number and default header values for a new deposit in the panel.
-// modified by 4D/PS [2026-june-22]
+// modified by 4D/PS [2026-june-26]
 Function _initOnCreation()
 	var $eCao : cs:C1710.CAOEntity
+	var $emptyUUID : Text
+	
+	$emptyUUID:=16*"00"
 	
 	If (This:C1470.depositNumber=0)
 		This:C1470.depositNumber:=ds:C1482.Deposit.nextDepositNumber()
 	End if
-	This:C1470._ensureMoreData()
-	This:C1470.moreData.saved:=False:C215
+	This:C1470.isSaved:=False:C215
 	If (This:C1470.depositDate=!00-00-00!)
 		This:C1470.depositDate:=Current date:C33(*)
 	End if
-	If (This:C1470.memo="")
+	If (This:C1470.memo=Null:C1517) || (This:C1470.memo="")
 		This:C1470.memo:="Bank deposit"
 	End if
-	If (cs:C1710.sfw_string.me.isAnEmptyUUID(This:C1470.UUID_CAO_bank))
+	// Purpose: Default optional cash-back header fields so getters and validation never see Undefined UUIDs.
+	// modified by 4D/PS [2026-june-23]
+	If (This:C1470.cashBackAmount=Null:C1517)
+		This:C1470.cashBackAmount:=0
+	End if
+	If (This:C1470.cashBackMemo=Null:C1517)
+		This:C1470.cashBackMemo:=""
+	End if
+	If (This:C1470.cashBackAccountLabel=Null:C1517)
+		This:C1470.cashBackAccountLabel:=""
+	End if
+	If (Undefined:C82(This:C1470.UUID_CAO_cashBack)) || (This:C1470.UUID_CAO_cashBack=Null:C1517) || (cs:C1710.sfw_string.me.isAnEmptyUUID(String:C10(This:C1470.UUID_CAO_cashBack)))
+		This:C1470.UUID_CAO_cashBack:=$emptyUUID
+	End if
+	If (Undefined:C82(This:C1470.UUID_CAO_bank)) || (This:C1470.UUID_CAO_bank=Null:C1517) || (cs:C1710.sfw_string.me.isAnEmptyUUID(String:C10(This:C1470.UUID_CAO_bank)))
 		$eCao:=ds:C1482.CAO.activeCAOs().orderBy("accountNumber").first()
 		If ($eCao#Null:C1517)
 			This:C1470.UUID_CAO_bank:=$eCao.UUID
-			This:C1470.bankAccountName:=$eCao.accountNumber+" — "+$eCao.name
+			This:C1470.bankAccountLabel:=$eCao.displayLabel()
 		End if
 	End if
 

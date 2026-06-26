@@ -167,7 +167,9 @@ Function canApplyCreditMemo()->$can : Boolean
 // Purpose: Ensure the moreData blob exists before reading or writing AR extension fields.
 // modified by 4D/PS [2026-june-08]
 Function _ensureMoreData()
-	If (This:C1470.moreData=Null:C1517)
+	// Purpose: Legacy rows may store a non-object in moreData — normalize before property access.
+	// modified by 4D/PS [2026-june-23]
+	If (Value type:C1509(This:C1470.moreData)#Is object:K8:27)
 		This:C1470.moreData:=New object:C1471
 	End if
 

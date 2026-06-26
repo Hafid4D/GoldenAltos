@@ -92,7 +92,7 @@ Function _buildOpts($currentPath : Text; $allowCreate : Boolean)->$opts : Collec
 				If ($partsChoice[$i]#$parts[$i])
 					$param:="noMatch"
 					$i:=$depth
-				End if 
+				End if  
 			End for 
 			If ($param#"noMatch")
 				$value:=$partsChoice[$depth]

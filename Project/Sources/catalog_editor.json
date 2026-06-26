@@ -104,8 +104,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4716,
-				"top": 1316,
+				"left": 4677,
+				"top": 1304,
 				"width": 120,
 				"height": 167.33203125
 			},
@@ -120,12 +120,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 5126,
-				"top": 1313,
-				"width": 138,
-				"height": 196.33203125
+				"left": 5201,
+				"top": 1446,
+				"width": 177,
+				"height": 337.33203125
 			},
-			"displayable_fields_count": 7,
+			"displayable_fields_count": 14,
 			"fields_ordering": 1
 		},
 		"Deposit": {
@@ -136,12 +136,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4916,
-				"top": 1312,
-				"width": 155,
-				"height": 178.33203125
+				"left": 4830,
+				"top": 1326,
+				"width": 261,
+				"height": 448.33203125
 			},
-			"displayable_fields_count": 6,
+			"displayable_fields_count": 19,
 			"fields_ordering": 1
 		},
 		"RejectCriteriaItem": {
@@ -3510,6 +3510,62 @@
 				"green": 255,
 				"blue": 255,
 				"alpha": 0
+			}
+		},
+		"7A4E2B9C3D1F48E6A5B0C9D8E7F6A5B6": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			}
+		},
+		"7A4E2B9C3D1F48E6A5B0C9D8E7F6A5B5": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			}
+		},
+		"7A4E2B9C3D1F48E6A5B0C9D8E7F6A5B4": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			}
+		},
+		"7A4E2B9C3D1F48E6A5B0C9D8E7F6A5B3": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			}
+		},
+		"7A4E2B9C3D1F48E6A5B0C9D8E7F6A5B2": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			}
+		},
+		"7A4E2B9C3D1F48E6A5B0C9D8E7F6A5B1": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			}
+		},
+		"D3E2F3A4B5C64789A0B1C2D3E4F5A6BC": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
 			}
 		}
 	}

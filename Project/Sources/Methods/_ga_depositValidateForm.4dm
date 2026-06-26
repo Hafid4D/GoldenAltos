@@ -54,7 +54,7 @@ If (Not:C34($hasPayment)) && (Not:C34($hasOtherFund))
 	return $result
 End if
 
-If (Form:C1466.current_item.cashBackAmount>0) && (cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_CAO_cashBack))
+If (Form:C1466.current_item.cashBackAmount>0) && (cs:C1710.sfw_string.me.isAnEmptyUUID(String:C10(Form:C1466.current_item.UUID_CAO_cashBack)))
 	$result.valid:=False:C215
 	$result.error:="Select an account for cash back."
 	return $result
