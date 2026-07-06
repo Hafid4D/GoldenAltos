@@ -35,11 +35,32 @@ local Function beforeSave()
 	End if
 	This:C1470.refreshStatus()
 
+// Purpose: Post invoice or credit memo to GL after save (skipped during ST import rebuild).
+// modified by 4D/PS [2026-june-29]
+local Function afterSave()
+	var $res : Object
+	
+	If (_ga_jeSkipGlPosting())
+		return 
+	End if
+	Case of
+		: (This:C1470.typeCode()="INV")
+			$res:=_ga_jePostInvoice(This:C1470)
+		: (This:C1470.typeCode()="CM")
+			$res:=_ga_jePostCreditMemo(This:C1470)
+		Else
+			return 
+	End case
+	If (Not:C34($res.success))
+		// Purpose: Do not block AR save — GL misconfiguration is logged server-side for admin follow-up.
+		// modified by 4D/PS [2026-june-29]
+	End if
+
 local Function afterCreation()
 
 local Function loadAfterCreation()
 	// Purpose: Assign a unique barcode in moreData for scanner lookup on new records.
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	This:C1470.moreData.barcodeData:=String:C10(cs:C1710.Util_ScannerManager.me.getBarcodeData(Form:C1466.sfw.entry.dataclass); "0000000000")
 	This:C1470._initOnCreation()
 
@@ -168,7 +189,7 @@ Function canApplyCreditMemo()->$can : Boolean
 // modified by 4D/PS [2026-june-08]
 Function _ensureMoreData()
 	// Purpose: Legacy rows may store a non-object in moreData — normalize before property access.
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	If (Value type:C1509(This:C1470.moreData)#Is object:K8:27)
 		This:C1470.moreData:=New object:C1471
 	End if

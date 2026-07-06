@@ -230,7 +230,7 @@
 					"width": 600,
 					"height": 17,
 					"stroke": "#808080",
-					"text": "",
+					"text": "No undeposited payments are available. Use Receive Payment on an open invoice first, or clear the customer filter to see all payments.",
 					"visibility": "hidden",
 					"wordWrap": "normal"
 				},

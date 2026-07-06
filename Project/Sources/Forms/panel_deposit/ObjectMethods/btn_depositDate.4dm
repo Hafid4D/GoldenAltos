@@ -1,5 +1,5 @@
 // Purpose: Calendar picker for deposit date on the deposit panel.
-// modified by 4D/PS [2026-june-23]
+// modified by 4D/PS [2026-june-29]
 Case of 
 	: (Form event:C1606.code=On Clicked:K2:4)
 		If (cs:C1710.panel_deposit.me._canEdit())

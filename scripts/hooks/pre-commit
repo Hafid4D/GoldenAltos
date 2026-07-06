@@ -1,0 +1,21 @@
+#!/bin/sh
+# GoldenAltos pre-commit — blocks commits with invalid catalog.4DCatalog
+# Install once: python scripts/install_git_hooks.py  (or .ps1 on Windows)
+
+CATALOG="Project/Sources/catalog.4DCatalog"
+
+# Only run when catalog is staged for commit
+if git diff --cached --name-only | grep -q "^${CATALOG}$"; then
+  echo "Validating catalog.4DCatalog..."
+  if command -v python3 >/dev/null 2>&1; then
+    PYTHON=python3
+  elif command -v python >/dev/null 2>&1; then
+    PYTHON=python
+  else
+    echo "ERROR: Python not found. Cannot validate catalog. Install Python or skip hook."
+    exit 1
+  fi
+  "$PYTHON" scripts/validate_catalog.py || exit 1
+fi
+
+exit 0

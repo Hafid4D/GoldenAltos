@@ -140,6 +140,24 @@ For each ($app; $applications)
 	End if
 End for each
 
+// Purpose: Post receive-payment to GL (Dr undeposited funds / Cr A/R) before commit.
+// modified by 4D/PS [2026-june-26]
+If (Not:C34(_ga_jePostReceivePay($ePayment).success))
+	If ($ownTransaction)
+		ds:C1482.cancelTransaction()
+	End if
+	$result.error:="The payment was saved but could not be posted to the general ledger. Please contact your administrator."
+	return $result
+End if
+$res:=$ePayment.save()
+If (Not:C34($res.success))
+	If ($ownTransaction)
+		ds:C1482.cancelTransaction()
+	End if
+	$result.error:=$res.statusText
+	return $result
+End if
+
 If ($ownTransaction)
 	ds:C1482.validateTransaction()
 End if

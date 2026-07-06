@@ -10,7 +10,7 @@
 // modified by 4D/PS [2026-june-08]
 
 // Purpose: Accept Collection or entity selection as items (strict Object typing rejected Collection).
-// modified by 4D/PS [2026-june-23]
+// modified by 4D/PS [2026-june-29]
 #DECLARE($templateFileName : Text; $mapping : Collection; $items; $headerText : Text) -> $printed : Boolean
 
 var $built : Object

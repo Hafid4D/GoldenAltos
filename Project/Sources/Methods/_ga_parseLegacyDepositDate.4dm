@@ -3,7 +3,7 @@
 // Purpose: Convert a legacy deposit JSON date value to a 4D Date (ISO text, Date, or numeric day offset).
 // Parameters: $value : Variant — legacy DepositDate / Deposit_Date field
 // Returns: Date — !00-00-00! when conversion fails
-// created by 4D/PS [2026-june-23]
+// created by 4D/PS [2026-june-29]
 
 #DECLARE($value : Variant) -> $date : Date
 

@@ -69,7 +69,24 @@ If (True:C214)
 		$buyItems:=JSON Parse:C1218($buyItems_file.getText())
 		TRUNCATE TABLE:C1051([BuyingOrderLine:64])
 		
+		// Purpose: Skip automatic GL posting while bulk-importing legacy bill lines.
+		// modified by 4D/PS [2026-june-29]
+		If (Storage:C1525.cache=Null:C1517)
+			Use (Storage:C1525)
+				Storage:C1525.cache:=New shared object:C1526
+			End use 
+		End if 
+		Use (Storage:C1525.cache)
+			Storage:C1525.cache.skipJePosting:=True:C214
+		End use 
+		
 		For each ($buyItem; $buyItems)
+			
+			// Purpose: Skip Internal BUY_ITEMS — those rows belong in ExpenseTransaction import.
+			// modified by 4D/PS [2026-june-29]
+			If (OB Is defined:C1231($buyItem; "Internal")) && (Bool:C1537($buyItem.Internal))
+				continue
+			End if
 			
 			$eBuyItem:=ds:C1482.BuyingOrderLine.new()
 			
@@ -96,6 +113,21 @@ If (True:C214)
 			$eBuyItem.jobNumber:=$buyItem.Int_jobnum
 			$eBuyItem.assetListNumber:=$buyItem.Assetlist_num
 			$eBuyItem.supPsNumber:=$buyItem.Sup_ps_num
+			// Purpose: Map legacy BUY_ITEMS fields used by AP panels and GL posting into typed catalog columns.
+			// modified by 4D/PS [2026-june-29]
+			If (OB Is defined:C1231($buyItem; "Seq_Number"))
+				$eBuyItem.seqNumber:=Num:C11($buyItem.Seq_Number)
+			End if
+			If (OB Is defined:C1231($buyItem; "Vendor"))
+				$eBuyItem.vendorName:=String:C10($buyItem.Vendor)
+			End if
+			If (OB Is defined:C1231($buyItem; "Freight"))
+				$eBuyItem.freight:=Num:C11($buyItem.Freight)
+			End if
+			If (OB Is defined:C1231($buyItem; "Discount"))
+				$eBuyItem.discount:=Num:C11($buyItem.Discount)
+			End if
+			$eBuyItem.billRecognitionStmp:=_ga_legacyDateToStmp($buyItem.BillRecognitionDate)
 			
 			$res:=$eBuyItem.save()
 			
@@ -105,6 +137,12 @@ If (True:C214)
 			
 			
 		End for each 
+		
+		// Purpose: Re-enable GL posting after bulk bill import.
+		// modified by 4D/PS [2026-june-29]
+		Use (Storage:C1525.cache)
+			Storage:C1525.cache.skipJePosting:=False:C215
+		End use 
 	End if 
 	
 Else 

@@ -54,7 +54,79 @@ Function activeCAOs()->$caos : cs:C1710.CAOSelection
 	
 Function inactiveCAOs()->$caos : cs:C1710.CAOSelection
 	$caos:=ds:C1482.CAO.query("isInacActive =:1 "; True:C214)
+
+// Purpose: Return active CAO rows of type Bank for deposit bank-account pickers (mockup / QuickBooks-style).
+// Returns: cs.CAOSelection — empty when no Bank-type accounts are configured
+// created by 4D/PS [2026-june-29]
+Function getActiveBankAccounts()->$caos : cs:C1710.CAOSelection
+	$caos:=This:C1470.query("type.name = :1 AND isInacActive = :2"; "Bank"; False:C215)
 	
+// Purpose: Resolve a system GL account by legacy DefaultKey (e.g. DefaultA/R).
+// Parameters: $defaultKey : Text — legacy CHART_OF_AC.DefaultKey value
+// Returns: cs.CAOEntity or Null when not found
+// created by 4D/PS [2026-june-26]
+Function getByDefaultKey($defaultKey : Text)->$eCao : cs:C1710.CAOEntity
+	$eCao:=Null:C1517
+	If ($defaultKey#"")
+		$eCao:=This:C1470.query("defaultKey = :1 AND isInacActive = :2"; $defaultKey; False:C215).first()
+	End if
+
+// Purpose: Resolve undeposited funds account (QuickBooks-style receive payment clearing).
+// Returns: cs.CAOEntity or Null
+// created by 4D/PS [2026-june-26]
+Function getUndepositedFunds()->$eCao : cs:C1710.CAOEntity
+	$eCao:=This:C1470.getByDefaultKey("DefaultClearingAccount")
+	If ($eCao=Null:C1517)
+		$eCao:=This:C1470.query("accountNumber = :1 AND isInacActive = :2"; "1030-0"; False:C215).first()
+	End if
+
+// Purpose: Resolve default accounts receivable control account.
+// Returns: cs.CAOEntity or Null
+// created by 4D/PS [2026-june-26]
+Function getDefaultAR()->$eCao : cs:C1710.CAOEntity
+	$eCao:=This:C1470.getByDefaultKey("DefaultA/R")
+
+// Purpose: Resolve default sales income account (legacy DefaultSales).
+// Returns: cs.CAOEntity or Null
+// created by 4D/PS [2026-june-29]
+Function getDefaultSales()->$eCao : cs:C1710.CAOEntity
+	$eCao:=This:C1470.getByDefaultKey("DefaultSales")
+
+// Purpose: Resolve default sales tax payable account (legacy DefaultSalesTaxPayable).
+// Returns: cs.CAOEntity or Null
+// created by 4D/PS [2026-june-29]
+Function getDefaultSalesTax()->$eCao : cs:C1710.CAOEntity
+	$eCao:=This:C1470.getByDefaultKey("DefaultSalesTaxPayable")
+
+// Purpose: Resolve default credit memos account (legacy DefaultCreditMemos).
+// Returns: cs.CAOEntity or Null
+// created by 4D/PS [2026-june-29]
+Function getDefaultCreditMemos()->$eCao : cs:C1710.CAOEntity
+	$eCao:=This:C1470.getByDefaultKey("DefaultCreditMemos")
+
+// Purpose: Resolve default accounts payable control account (legacy DefaultA/P).
+// Returns: cs.CAOEntity or Null
+// created by 4D/PS [2026-june-29]
+Function getDefaultAP()->$eCao : cs:C1710.CAOEntity
+	$eCao:=This:C1470.getByDefaultKey("DefaultA/P")
+
+// Purpose: Resolve default purchase discount income account (legacy DefaultDisountIncome spelling).
+// Returns: cs.CAOEntity or Null
+// created by 4D/PS [2026-june-29]
+Function getDefaultDiscountIncome()->$eCao : cs:C1710.CAOEntity
+	$eCao:=This:C1470.getByDefaultKey("DefaultDisountIncome")
+
+// Purpose: Resolve default purchases expense account when a bill line has no GL account (legacy DefaultPurchases).
+// Returns: cs.CAOEntity or Null
+// created by 4D/PS [2026-june-29]
+Function getDefaultPurchases()->$eCao : cs:C1710.CAOEntity
+	$eCao:=This:C1470.getByDefaultKey("DefaultPurchases")
+
+// Purpose: Resolve default vendor bill credits account (legacy DefaultBillCredits).
+// Returns: cs.CAOEntity or Null
+// created by 4D/PS [2026-june-29]
+Function getDefaultBillCredits()->$eCao : cs:C1710.CAOEntity
+	$eCao:=This:C1470.getByDefaultKey("DefaultBillCredits")
 	
 	
 local Function cacheLoad()

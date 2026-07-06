@@ -1611,9 +1611,10 @@ If (True:C214)  // export [BUY_ORDERS]
 End if 
 
 
-If (True:C214)  // export [BUY_ITEMS]
+If (True:C214)  // export [BUY_ITEMS] vendor bills (Internal=false)
 	
 	ALL RECORDS:C47([BUY_ITEMS])
+	QUERY:C277([BUY_ITEMS]; [BUY_ITEMS]Internal=False:C215)
 	$jsonString:=Selection to JSON:C1234([BUY_ITEMS])
 	
 	vhDoc:=Create document:C266($myFolder.platformPath+"buy_items_export.json")
@@ -1622,7 +1623,25 @@ If (True:C214)  // export [BUY_ITEMS]
 		CLOSE DOCUMENT:C267(vhDoc)
 	End if 
 	
-	SHOW ON DISK:C922($myFolder.platformPath+"buy_orders_export.json")
+	SHOW ON DISK:C922($myFolder.platformPath+"buy_items_export.json")
+	
+End if 
+
+// Purpose: Export internal expense BUY_ITEMS rows for ExpenseTransaction import (Internal=true).
+// modified by 4D/PS [2026-june-29]
+If (True:C214)  // export [BUY_ITEMS] expenses
+	
+	ALL RECORDS:C47([BUY_ITEMS])
+	QUERY:C277([BUY_ITEMS]; [BUY_ITEMS]Internal=True:C214)
+	$jsonString:=Selection to JSON:C1234([BUY_ITEMS])
+	
+	vhDoc:=Create document:C266($myFolder.platformPath+"expenseTransaction_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	
+	SHOW ON DISK:C922($myFolder.platformPath+"expenseTransaction_export.json")
 	
 End if 
 
@@ -1693,6 +1712,17 @@ If (True:C214)  // export [AccTransaction]
 		CLOSE DOCUMENT:C267(vhDoc)
 	End if 
 	SHOW ON DISK:C922($myFolder.platformPath+"accTransaction_export.json")
+End if 
+
+If (True:C214)  // export [Bank]
+	ALL RECORDS:C47([Bank])
+	$jsonString:=Selection to JSON:C1234([Bank])
+	vhDoc:=Create document:C266($myFolder.platformPath+"bank_export.json")
+	If (OK=1)
+		SEND PACKET:C103(vhDoc; $jsonString)
+		CLOSE DOCUMENT:C267(vhDoc)
+	End if 
+	SHOW ON DISK:C922($myFolder.platformPath+"bank_export.json")
 End if 
 
 If (True:C214)  // export [Check_Register]

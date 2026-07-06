@@ -15,6 +15,11 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(1; ""; "Main")
 	
 	$entry.setLBItemsColumn("creditNumber"; "Credit #"; "width:80")
+	// Purpose: Show typed vendor credit columns in the entry list (legacy CM_items fields).
+	// modified by 4D/PS [2026-june-29]
+	$entry.setLBItemsColumn("vendorName"; "Vendor"; "width:180")
+	$entry.setLBItemsColumn("billSeqNumber"; "Bill #"; "width:70")
+	$entry.setLBItemsColumn("amount"; "Amount"; "width:80")
 	$entry.setLBItemsOrderBy("creditNumber")
 	$entry.setMainViewLabel("All supplier credits")
 	

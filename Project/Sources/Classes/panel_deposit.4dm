@@ -22,7 +22,7 @@ Function formMethod()
 	End if
 
 // Purpose: Initialize Form variables and default header values for a new deposit.
-// modified by 4D/PS [2026-june-23]
+// modified by 4D/PS [2026-june-29]
 Function initFormState()
 	If (Form:C1466.depositPaymentLines=Null:C1517)
 		Form:C1466.depositPaymentLines:=New collection:C1472()
@@ -31,7 +31,7 @@ Function initFormState()
 		Form:C1466.depositOtherFundLines:=New collection:C1472()
 	End if
 	// Purpose: Collection listbox selection (4D v20 — no LB Get selected rows on collection listboxes).
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	If (Form:C1466.depositOtherFundLinesSelected=Null:C1517)
 		Form:C1466.depositOtherFundLinesSelected:=New collection:C1472()
 	End if
@@ -48,7 +48,7 @@ Function initFormState()
 		Form:C1466.depositNetToBank:=0
 	End if
 	// Purpose: Panel payment-line filters (same pattern as panel_lead.interactons_filters).
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	If (Form:C1466.situation.mode="add")
 		If (Form:C1466.depositLine_filters=Null:C1517)
 			Form:C1466.depositLine_filters:=New object:C1471
@@ -66,7 +66,7 @@ Function initFormState()
 	End if
 
 // Purpose: Load payment/other-fund listboxes when the panel page is displayed or the item changes.
-// modified by 4D/PS [2026-june-23]
+// modified by 4D/PS [2026-june-29]
 Function loadPanelData()
 	var $data : Object
 	var $filterUUID : Text
@@ -89,7 +89,7 @@ Function loadPanelData()
 			Form:C1466.depositGrandTotal:=Num:C11(Form:C1466.current_item.total)
 			Form:C1466.depositNetToBank:=Num:C11(Form:C1466.current_item.netToBank)
 			// Purpose: Recompute totals from lines when header totals were not stored (older rows).
-			// modified by 4D/PS [2026-june-23]
+			// modified by 4D/PS [2026-june-29]
 			If (Form:C1466.depositGrandTotal=0) && ((Form:C1466.depositPaymentLines.length>0) || (Form:C1466.depositOtherFundLines.length>0))
 				_ga_depositRecalcTotals()
 			End if
@@ -127,7 +127,7 @@ Function redrawAndSetVisible()
 	$editable:=This:C1470._canEdit()
 	
 	// Purpose: Subform container size can be 0 on first draw — use a safe minimum for header layout math.
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	If ($widthSubform<780)
 		$widthSubform:=780
 	End if
@@ -143,7 +143,7 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_cashBackAccount()
 	
 	// Purpose: Header fields stay on page 0 but remain visible on the Main tab — layout on every redraw.
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	This:C1470._layoutHeaderFields($widthSubform)
 	
 	OBJECT SET ENABLED:C1123(*; "entryField_depositDate"; $editable)
@@ -152,11 +152,11 @@ Function redrawAndSetVisible()
 	OBJECT SET ENABLED:C1123(*; "pup_bank"; $editable)
 	
 	// Purpose: Header memo is kept in the data model but hidden to match the deposit mockup layout.
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	OBJECT SET VISIBLE:C603(*; "label_memo"; False:C215)
 	OBJECT SET VISIBLE:C603(*; "entryField_memo"; False:C215)
 	// Purpose: Customer filter is creation-only (mockup); hide in browse mode.
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	OBJECT SET VISIBLE:C603(*; "label_customer"; (Form:C1466.situation.mode="add"))
 	OBJECT SET VISIBLE:C603(*; "pup_customer"; (Form:C1466.situation.mode="add"))
 	OBJECT SET VISIBLE:C603(*; "lbl_customerHint"; (Form:C1466.situation.mode="add"))
@@ -180,7 +180,7 @@ Function redrawAndSetVisible()
 
 // Purpose: Lock listbox column minimum widths so headers stay readable when the panel is resized.
 // Parameters: $editable : Boolean — when False (browse), hide the include checkbox column.
-// modified by 4D/PS [2026-june-23]
+// modified by 4D/PS [2026-june-29]
 Function _applyDepositListboxColumns($editable : Boolean)
 	If ($editable)
 		LISTBOX SET COLUMN WIDTH:C833(*; "col_include"; 40; 36)
@@ -242,7 +242,7 @@ Function _layoutHeaderFields($widthSubform : Integer)
 	OBJECT SET COORDINATES:C1248(*; "lbl_customerHint"; $headerFieldLeft; 59; $headerFieldLeft+$hdrFieldWidth; 76)
 	
 	// Purpose: Place Deposit Date and calendar on the same row as Deposit #, aligned to the right (mockup layout).
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	$dateFieldW:=100
 	$btnSize:=17
 	$dateBlockW:=$labelColW+$dateFieldW+4+$btnSize
@@ -257,7 +257,7 @@ Function _layoutHeaderFields($widthSubform : Integer)
 	OBJECT SET COORDINATES:C1248(*; "btn_depositDate"; $dateFieldLeft+$dateFieldW+4; 12; $dateFieldLeft+$dateFieldW+4+$btnSize; 12+$btnSize)
 	
 	// Purpose: Compact header in browse mode when the customer filter row is hidden.
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	If (Form:C1466.situation.mode#"add")
 		OBJECT SET COORDINATES:C1248(*; "label_account"; 12; 37; 132; 54)
 		OBJECT GET COORDINATES:C663(*; "pup_bank"; $left; $top; $right; $bottom)
@@ -270,7 +270,7 @@ Function _layoutHeaderFields($widthSubform : Integer)
 // $y : Integer — top coordinate
 // $widthSubform / $margin : Integer — container width and right margin
 // $rowH / $labelW / $valW : Integer — row and column widths
-// modified by 4D/PS [2026-june-23]
+// modified by 4D/PS [2026-june-29]
 Function _placeRightTotal($labelObj : Text; $valueObj : Text; $y : Integer; $widthSubform : Integer; $margin : Integer; $rowH : Integer; $labelW : Integer; $valW : Integer)
 	var $right : Integer
 	
@@ -340,11 +340,13 @@ Function _layoutMainPage($widthSubform : Integer; $heightSubform : Integer)
 	End if
 	
 	// Purpose: Keep listboxes at a readable width; horizontal scroll when the panel is narrower.
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	$minListboxWidth:=720
 	$isAddMode:=(Form:C1466.situation.mode="add")
 	$hasPayments:=(Form:C1466.depositPaymentLines#Null:C1517) && (Form:C1466.depositPaymentLines.length>0)
-	$showNoPaymentsMsg:=False:C215
+	// Purpose: Show empty-state hint when creating a deposit with no undeposited PAY lines (Zoho GA3-T403 step 3).
+	// modified by 4D/PS [2026-june-29]
+	$showNoPaymentsMsg:=($isAddMode) && (Not:C34($hasPayments))
 	$showNetToBank:=This:C1470._showNetToBank()
 	$selectHintH:=0
 	$addFundsHintH:=0
@@ -370,9 +372,9 @@ Function _layoutMainPage($widthSubform : Integer; $heightSubform : Integer)
 	OBJECT SET VISIBLE:C603(*; "btn_pickOtherFundCustomer"; $isAddMode)
 	
 	// Purpose: Anchor footer from the bottom; shrink footer when Net to bank is hidden (mockup shows Total only).
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	// Purpose: Reserve space for the SFW bottom toolbar so Total stays visible.
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	$bottomMargin:=44
 	$footerContentH:=132
 	If ($showNetToBank)
@@ -399,6 +401,10 @@ Function _layoutMainPage($widthSubform : Integer; $heightSubform : Integer)
 	OBJECT SET COORDINATES:C1248(*; "header_bkgd_main"; 0; 114; $widthSubform; 144)
 	
 	$y:=148
+	If ($showNoPaymentsMsg)
+		OBJECT SET COORDINATES:C1248(*; "lbl_noUndeposited"; $labelLeft; $y; $widthSubform-$margin; $y+$rowH+4)
+		$y:=$y+$rowH+8
+	End if
 	If ($isAddMode) && ($hasPayments)
 		OBJECT SET COORDINATES:C1248(*; "lbl_selectPaymentHint"; $labelLeft; $y; $widthSubform-$margin; $y+$selectHintH)
 		$y:=$y+$selectHintH+4
@@ -427,7 +433,7 @@ Function _layoutMainPage($widthSubform : Integer; $heightSubform : Integer)
 	$otherLbTop:=$y
 	
 	// Purpose: Clamp other-fund listbox height with precomputed gap (safe on browse / list selection).
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	$otherLbGap:=$otherLbBottom-$otherLbTop
 	If ($otherLbGap<$minOtherLbH)
 		$otherLbTop:=$otherLbBottom-$minOtherLbH
@@ -440,7 +446,7 @@ Function _layoutMainPage($widthSubform : Integer; $heightSubform : Integer)
 	End if
 	
 	// Purpose: In browse mode, shrink empty listboxes instead of filling the whole panel.
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	If (Not:C34($isAddMode))
 		$lineCount:=0
 		If (Form:C1466.depositOtherFundLines#Null:C1517)
@@ -598,7 +604,7 @@ Function removeOtherFundLine()
 	var $idx : Integer
 	If (This:C1470._canEdit())
 		// Purpose: Remove user-selected rows via selectedItemsSource (collection listbox pattern).
-		// modified by 4D/PS [2026-june-23]
+		// modified by 4D/PS [2026-june-29]
 		If (Form:C1466.depositOtherFundLinesSelected#Null:C1517) && (Form:C1466.depositOtherFundLinesSelected.length>0)
 			For each ($line; Form:C1466.depositOtherFundLinesSelected)
 				$idx:=Form:C1466.depositOtherFundLines.indexOf($line)
@@ -661,7 +667,7 @@ Function onOtherFundLinesChange()
 	_ga_depositRecalcTotals()
 
 // Purpose: Keep line numbers sequential after add/remove on other-funds rows.
-// modified by 4D/PS [2026-june-23]
+// modified by 4D/PS [2026-june-29]
 Function _renumberOtherFundLines()
 	var $line : Object
 	var $num : Integer

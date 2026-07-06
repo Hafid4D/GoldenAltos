@@ -13,7 +13,7 @@
 // $cashBackCaoUUID : Text — petty cash / cash back CAO account UUID
 // $cashBackMemo : Text — cash back description
 // Returns: Object — { success : Boolean, depositUUID : Text, totalDeposited : Real, error : Text }
-// modified by 4D/PS [2026-june-23]
+// modified by 4D/PS [2026-june-29]
 
 #DECLARE(\
 $depositUUID : Text; \
@@ -311,6 +311,16 @@ For each ($payUUID; $paymentUUIDs)
 		return $result
 	End if
 End for each
+
+// Purpose: Post deposit lines to GL (Dr bank / Cr undeposited or income) before commit.
+// modified by 4D/PS [2026-june-26]
+If (Not:C34(_ga_jePostDeposit($eDeposit; $caoUUID).success))
+	If ($ownTransaction)
+		ds:C1482.cancelTransaction()
+	End if
+	$result.error:="The deposit was saved but could not be posted to the general ledger. Please contact your administrator."
+	return $result
+End if
 
 If ($ownTransaction)
 	ds:C1482.validateTransaction()

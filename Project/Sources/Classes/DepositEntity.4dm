@@ -1,5 +1,5 @@
 // Purpose: Entity helpers for Deposit (typed header fields + barcode in moreData).
-// modified by 4D/PS [2026-june-23]
+// modified by 4D/PS [2026-june-29]
 Class extends Entity
 
 local Function get nameInWindowTitle()->$nameInWindowTitle : Text
@@ -25,7 +25,7 @@ local Function get bankAccountName()->$name : Text
 	var $bankUUID : Text
 	$name:=String:C10(This:C1470.bankAccountLabel)
 	// Purpose: Coerce catalog UUID to Text before isAnEmptyUUID (Undefined/UUID types are not Text).
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	If (Undefined:C82(This:C1470.UUID_CAO_bank)) || (This:C1470.UUID_CAO_bank=Null:C1517)
 		$bankUUID:=16*"00"
 	Else
@@ -51,7 +51,7 @@ local Function get cashBackAccountName()->$name : Text
 	var $cashBackUUID : Text
 	$name:=String:C10(This:C1470.cashBackAccountLabel)
 	// Purpose: Coerce catalog UUID to Text before isAnEmptyUUID (Undefined/UUID types are not Text).
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	If (Undefined:C82(This:C1470.UUID_CAO_cashBack)) || (This:C1470.UUID_CAO_cashBack=Null:C1517)
 		$cashBackUUID:=16*"00"
 	Else
@@ -71,11 +71,11 @@ local Function set cashBackAccountName($name : Text)
 	This:C1470.cashBackAccountLabel:=$name
 
 // Purpose: Removed unused accountLabel() wrapper — list column uses bankAccountName getter on typed bankAccountLabel.
-// modified by 4D/PS [2026-june-23]
+// modified by 4D/PS [2026-june-29]
 
 // Purpose: Return True when this deposit is still being created (not yet persisted with lines).
 // Returns: Boolean
-// modified by 4D/PS [2026-june-23]
+// modified by 4D/PS [2026-june-29]
 Function isDraft()->$draft : Boolean
 	$draft:=Not:C34(Bool:C1537(This:C1470.isSaved))
 
@@ -108,7 +108,7 @@ Function _initOnCreation()
 		This:C1470.memo:="Bank deposit"
 	End if
 	// Purpose: Default optional cash-back header fields so getters and validation never see Undefined UUIDs.
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	If (This:C1470.cashBackAmount=Null:C1517)
 		This:C1470.cashBackAmount:=0
 	End if
@@ -122,7 +122,9 @@ Function _initOnCreation()
 		This:C1470.UUID_CAO_cashBack:=$emptyUUID
 	End if
 	If (Undefined:C82(This:C1470.UUID_CAO_bank)) || (This:C1470.UUID_CAO_bank=Null:C1517) || (cs:C1710.sfw_string.me.isAnEmptyUUID(String:C10(This:C1470.UUID_CAO_bank)))
-		$eCao:=ds:C1482.CAO.activeCAOs().orderBy("accountNumber").first()
+		// Purpose: Default new deposits to the first active Bank-type CAO (mockup — not any GL account).
+		// modified by 4D/PS [2026-june-29]
+		$eCao:=ds:C1482.CAO.getActiveBankAccounts().orderBy("accountNumber").first()
 		If ($eCao#Null:C1517)
 			This:C1470.UUID_CAO_bank:=$eCao.UUID
 			This:C1470.bankAccountLabel:=$eCao.displayLabel()

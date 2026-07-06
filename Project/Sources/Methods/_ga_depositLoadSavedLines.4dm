@@ -4,7 +4,7 @@
 // Parameters:
 // $eDeposit : cs.DepositEntity — deposit header
 // Returns: Object — { paymentLines : Collection, otherFundLines : Collection }
-// modified by 4D/PS [2026-june-23]
+// modified by 4D/PS [2026-june-29]
 
 #DECLARE($eDeposit : cs:C1710.DepositEntity) -> $data : Object
 
@@ -49,7 +49,7 @@ For each ($eLine; ds:C1482.DepositItem.query("UUID_Deposit = :1"; $eDeposit.UUID
 				End if
 				$ePay._ensureMoreData()
 				// Purpose: Guard refNo read when moreData has no refNo key (imported PAY rows).
-				// modified by 4D/PS [2026-june-23]
+				// modified by 4D/PS [2026-june-29]
 				If (OB Is defined:C1231($ePay.moreData; "refNo")) && ($ePay.moreData.refNo#Null:C1517)
 					$line.refNo:=String:C10($ePay.moreData.refNo)
 				End if

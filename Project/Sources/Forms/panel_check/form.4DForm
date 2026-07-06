@@ -13,20 +13,20 @@
 	"bottomMargin": 20,
 	"events": [
 		"onLoad",
+		"onPageChange",
 		"onValidate",
 		"onClick",
-		"onOutsideCall",
-		"onActivate",
 		"onDoubleClick",
+		"onOutsideCall",
+		"onBeginDragOver",
+		"onDragOver",
 		"onDrop",
+		"onAfterKeystroke",
 		"onMenuSelect",
 		"onPluginArea",
-		"onDragOver",
+		"onAfterEdit",
 		"onTimer",
-		"onAfterKeystroke",
-		"onBeginDragOver",
-		"onBoundVariableChange",
-		"onPageChange"
+		"onBoundVariableChange"
 	],
 	"windowTitle": "window title",
 	"destination": "detailScreen",
@@ -35,7 +35,300 @@
 			"objects": {}
 		},
 		{
-			"objects": {}
+			"objects": {
+				"label_checkNumber": {
+					"type": "text",
+					"top": 12,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Check #",
+					"textAlign": "right"
+				},
+				"entryField_checkNumber": {
+					"type": "input",
+					"top": 12,
+					"left": 142,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.checkNumber",
+					"dataSourceTypeHint": "number",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent"
+				},
+				"label_checkDate": {
+					"type": "text",
+					"top": 12,
+					"left": 400,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Check Date",
+					"textAlign": "right"
+				},
+				"entryField_checkDate": {
+					"type": "input",
+					"top": 12,
+					"left": 526,
+					"width": 100,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.checkDate",
+					"dataSourceTypeHint": "date",
+					"enterable": false,
+					"method": "ObjectMethods/entryField_checkDate.4dm",
+					"events": [
+						"onDataChange"
+					]
+				},
+				"btn_checkDate": {
+					"type": "button",
+					"text": " ",
+					"top": 12,
+					"left": 630,
+					"width": 17,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"icon": "/RESOURCES/image/element/calendar_black.png",
+					"method": "ObjectMethods/btn_checkDate.4dm",
+					"focusable": false
+				},
+				"label_payee": {
+					"type": "text",
+					"top": 37,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Pay To",
+					"textAlign": "right"
+				},
+				"entryField_payee": {
+					"type": "input",
+					"top": 37,
+					"left": 142,
+					"width": 400,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.payee",
+					"enterable": false
+				},
+				"label_amount": {
+					"type": "text",
+					"top": 62,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Amount",
+					"textAlign": "right"
+				},
+				"entryField_amount": {
+					"type": "input",
+					"top": 62,
+					"left": 142,
+					"width": 120,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.amount",
+					"dataSourceTypeHint": "number",
+					"enterable": false
+				},
+				"label_bank": {
+					"type": "text",
+					"top": 87,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Bank Account",
+					"textAlign": "right"
+				},
+				"entryField_bank": {
+					"type": "input",
+					"top": 87,
+					"left": 142,
+					"width": 400,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.bankAccountName",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent"
+				},
+				"label_acNumber": {
+					"type": "text",
+					"top": 87,
+					"left": 560,
+					"width": 80,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "AC #",
+					"textAlign": "right"
+				},
+				"entryField_acNumber": {
+					"type": "input",
+					"top": 87,
+					"left": 646,
+					"width": 100,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.acNumber",
+					"enterable": false
+				},
+				"label_memo": {
+					"type": "text",
+					"top": 112,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Memo",
+					"textAlign": "right"
+				},
+				"entryField_memo": {
+					"type": "input",
+					"top": 112,
+					"left": 142,
+					"width": 604,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.memo",
+					"enterable": false
+				},
+				"lbl_void": {
+					"type": "text",
+					"top": 12,
+					"left": 660,
+					"width": 80,
+					"height": 17,
+					"stroke": "#CC0000",
+					"text": "VOID",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"label_billLines": {
+					"type": "text",
+					"top": 130,
+					"left": 8,
+					"width": 200,
+					"height": 17,
+					"stroke": "#404040",
+					"text": "Bills paid by this check",
+					"fontWeight": "bold"
+				},
+				"lb_billLines": {
+					"type": "listbox",
+					"top": 148,
+					"left": 8,
+					"width": 900,
+					"height": 160,
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.checkBillLines",
+					"enterable": false,
+					"focusable": true,
+					"scrollbarHorizontal": "automatic",
+					"scrollbarVertical": "automatic",
+					"columns": [
+						{
+							"name": "col_billNumber",
+							"dataSource": "This:C1470.billNumber",
+							"width": 80,
+							"header": {
+								"text": "Bill #",
+								"name": "Header1"
+							},
+							"footer": {
+								"name": "Footer1"
+							}
+						},
+						{
+							"name": "col_vendor",
+							"dataSource": "This:C1470.vendorName",
+							"width": 180,
+							"header": {
+								"text": "Vendor",
+								"name": "Header2"
+							},
+							"footer": {
+								"name": "Footer2"
+							}
+						},
+						{
+							"name": "col_billDate",
+							"dataSource": "This:C1470.billDate",
+							"width": 90,
+							"header": {
+								"text": "Date",
+								"name": "Header3"
+							},
+							"footer": {
+								"name": "Footer3"
+							}
+						},
+						{
+							"name": "col_glAccount",
+							"dataSource": "This:C1470.glAccount",
+							"width": 90,
+							"header": {
+								"text": "GL Account",
+								"name": "Header4"
+							},
+							"footer": {
+								"name": "Footer4"
+							}
+						},
+						{
+							"name": "col_description",
+							"dataSource": "This:C1470.description",
+							"width": 220,
+							"header": {
+								"text": "Description",
+								"name": "Header5"
+							},
+							"footer": {
+								"name": "Footer5"
+							}
+						},
+						{
+							"name": "col_amount",
+							"dataSource": "This:C1470.amount",
+							"width": 100,
+							"header": {
+								"text": "Amount",
+								"name": "Header6"
+							},
+							"footer": {
+								"name": "Footer6"
+							}
+						}
+					]
+				},
+				"label_billsTotal": {
+					"type": "text",
+					"top": 316,
+					"left": 8,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Bills total",
+					"textAlign": "right"
+				},
+				"entryField_billsTotal": {
+					"type": "input",
+					"top": 316,
+					"left": 130,
+					"width": 100,
+					"height": 17,
+					"dataSource": "Form:C1466.checkBillsTotal",
+					"dataSourceTypeHint": "number",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent"
+				}
+			}
 		}
 	],
 	"geometryStamp": 110,

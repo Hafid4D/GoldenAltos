@@ -75,7 +75,7 @@ local Function loadAfterCreation()
 	This:C1470._initCommunication()
 	This:C1470.codeNumber:=ds:C1482.Customer.all().max("codeNumber")+1
 	// Purpose: Assign a unique barcode in moreData for scanner lookup on new records.
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	This:C1470.moreData.barcodeData:=String:C10(cs:C1710.Util_ScannerManager.me.getBarcodeData(Form:C1466.sfw.entry.dataclass); "0000000000")
 	
 	

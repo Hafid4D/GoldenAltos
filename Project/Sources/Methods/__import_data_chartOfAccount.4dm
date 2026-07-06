@@ -74,6 +74,14 @@ If (True:C214)
 		$eChartOfAccount.isInacActive:=($record.Remove=True:C214) | ($record.Unused=True:C214)
 		$eChartOfAccount.UUID_ParentAccount:=$zeroUUID
 		
+		// Purpose: Import legacy DefaultKey for system-account resolution (GL posting Phase 2).
+		// modified by 4D/PS [2026-june-26]
+		If (OB Is defined:C1231($record; "DefaultKey"))
+			$eChartOfAccount.defaultKey:=Split string:C1554(String:C10($record.DefaultKey); "\r"; sk trim spaces:K86:2).join("\r")
+		Else
+			$eChartOfAccount.defaultKey:=""
+		End if
+		
 		$info:=$eChartOfAccount.save()
 		If (Not:C34($info.success))
 			TRACE:C157

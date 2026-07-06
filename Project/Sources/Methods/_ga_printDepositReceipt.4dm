@@ -2,7 +2,7 @@
 
 // Purpose: Print a deposit receipt for the current Deposit panel item (header + payment/other-fund lines).
 // Uses selectionPrintTemplate.4wp via _ga_buildListFromMapping (same pattern as receivables report).
-// modified by 4D/PS [2026-june-23]
+// modified by 4D/PS [2026-june-29]
 
 var $eDeposit : cs:C1710.DepositEntity
 var $lineData : Object
@@ -64,7 +64,7 @@ Else
 		$customerName:=_ga_depositPrintAsText($line.customerName)
 		$amountTxt:=_ga_depositFormatMoney($line.amount)
 		// Purpose: Build row property-by-property — multiline New object with "" literals can raise #54.
-		// modified by 4D/PS [2026-june-23]
+		// modified by 4D/PS [2026-june-29]
 		$printRow:=New object:C1471
 		$printRow.typeLabel:=$typeLabel
 		$printRow.lineDateTxt:=$lineDateTxt
@@ -151,7 +151,7 @@ Else
 		End if
 		$headerText:=$headerText+Char:C90(Carriage return:K15:38)
 		// Purpose: Num() before String(format) — same pattern as _ga_buildReceivablesReport.
-		// modified by 4D/PS [2026-june-23]
+		// modified by 4D/PS [2026-june-29]
 		$headerText:=$headerText+"Payments: $"+String:C10(Num:C11($paymentsTotal); "###,###,##0.00")+Char:C90(Carriage return:K15:38)
 		$headerText:=$headerText+"Other funds: $"+String:C10(Num:C11($otherFundsTotal); "###,###,##0.00")+Char:C90(Carriage return:K15:38)
 		$headerText:=$headerText+"Total: $"+String:C10(Num:C11($grandTotal); "###,###,##0.00")
@@ -162,7 +162,7 @@ Else
 		End if
 		
 		// Purpose: Build mapping with .push() — avoids multiline New object type issues.
-		// modified by 4D/PS [2026-june-23]
+		// modified by 4D/PS [2026-june-29]
 		$mapping:=New collection:C1472()
 		$colDef:=New object:C1471("header"; "Type"; "source"; "This.item.typeLabel"; "width"; "2cm"; "align"; "left")
 		$mapping.push($colDef)
@@ -178,7 +178,7 @@ Else
 		$mapping.push($colDef)
 		
 		// Purpose: Call _ga_buildListFromMapping directly (Collection items) — same as receivables report.
-		// modified by 4D/PS [2026-june-23]
+		// modified by 4D/PS [2026-june-29]
 		$options:=New object:C1471("allowEmpty"; False:C215)
 		$built:=_ga_buildListFromMapping("selectionPrintTemplate.4wp"; $mapping; $printLines; $headerText; $options)
 		If ($built#Null:C1517) && ($built.wp#Null:C1517)

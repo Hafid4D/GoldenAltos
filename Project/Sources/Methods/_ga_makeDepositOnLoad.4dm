@@ -34,7 +34,9 @@ If (Form:C1466.paymentLines.length=0)
 	cs:C1710.sfw_dialog.me.alert("No undeposited payments are available for deposit.")
 	CANCEL:C270
 Else
-	$eCao:=ds:C1482.CAO.activeCAOs().first()
+	// Purpose: Default bank to first active Bank-type CAO (mockup — deposits go to a bank account, not any GL).
+	// modified by 4D/PS [2026-june-29]
+	$eCao:=ds:C1482.CAO.getActiveBankAccounts().orderBy("accountNumber").first()
 	If ($eCao#Null:C1517)
 		Form:C1466.bankAccountUUID:=$eCao.UUID
 		// modified by 4D/PS [2026-june-26]

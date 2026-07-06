@@ -15,6 +15,11 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(1; ""; "Main")
 	
 	$entry.setLBItemsColumn("paymentNumber"; "Payment #"; "width:80")
+	// Purpose: Show typed partial payment columns in the entry list (legacy PartialPays fields).
+	// modified by 4D/PS [2026-june-29]
+	$entry.setLBItemsColumn("checkNumber"; "Check #"; "width:70")
+	$entry.setLBItemsColumn("paymentDate"; "Date"; "width:80")
+	$entry.setLBItemsColumn("amount"; "Amount"; "width:80")
 	$entry.setLBItemsOrderBy("paymentNumber")
 	$entry.setMainViewLabel("All bill payments")
 	

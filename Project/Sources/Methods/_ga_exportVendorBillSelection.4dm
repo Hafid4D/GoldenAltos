@@ -1,0 +1,54 @@
+//%attributes = {}
+
+// Purpose: Export current Vendor Bill list selection to Excel using typed catalog fields.
+// modified by 4D/PS [2026-june-29]
+
+var $mapping : Collection
+var $exportRows : Collection
+var $eLine : cs:C1710.BuyingOrderLineEntity
+var $row : Object
+var $destinationFolder : 4D:C1709.Folder
+
+If (Form:C1466.sfw.lb_items.length>0)
+	$fileName:=Form:C1466.sfw.view.label
+	$templateFile:=Folder:C1567(fk resources folder:K87:11).file("excelTemplates/excelExportTemplate.xlsx")
+	$mapping:=New collection:C1472(\
+		New object:C1471("header"; "Bill #"; "field"; "billNumber"; "footerOperation"; ""); \
+		New object:C1471("header"; "Vendor"; "field"; "vendorName"; "footerOperation"; ""); \
+		New object:C1471("header"; "Bill Date"; "field"; "orderDate"; "footerOperation"; ""); \
+		New object:C1471("header"; "GL"; "field"; "glAccount"; "footerOperation"; ""); \
+		New object:C1471("header"; "Amount"; "field"; "netBillAmount"; "footerOperation"; ""); \
+		New object:C1471("header"; "Check #"; "field"; "checkNumber"; "footerOperation"; ""); \
+		New object:C1471("header"; "Paid Date"; "field"; "paidDate"; "footerOperation"; ""); \
+		New object:C1471("header"; "Description"; "field"; "description"; "footerOperation"; ""))
+	$exportRows:=New collection:C1472()
+	For each ($eLine; Form:C1466.sfw.lb_items)
+		$row:=New object:C1471(\
+			"billNumber"; $eLine.billNumber; \
+			"vendorName"; $eLine.vendorName; \
+			"orderDate"; $eLine.orderDate; \
+			"glAccount"; $eLine.glAccount; \
+			"netBillAmount"; $eLine.netBillAmount; \
+			"checkNumber"; $eLine.checkNumber; \
+			"paidDate"; $eLine.paidDate; \
+			"description"; $eLine.description)
+		$exportRows.push($row)
+	End for each
+	If ($fileName="main") | ($fileName="Main view")
+		$title:="All Vendor Bills"
+		$fileName:="AllVendorBills"
+	Else 
+		$title:=$fileName
+		$fileName:=Replace string:C233($fileName; " "; "")
+	End if 
+	$destinationFolder:=Folder:C1567(fk resources folder:K87:11).folder("exportedData").folder("VendorBill")
+	If (Not:C34($destinationFolder.exists))
+		$destinationFolder.create()
+	End if
+	$destinationFolderPath:=$destinationFolder.platformPath
+	$destinationFileName:=Split string:C1554(String:C10($fileName+"_"+Replace string:C233(String:C10(Date:C102(Timestamp:C1445)); "/"; "_")); " "; sk ignore empty strings:K86:1+sk trim spaces:K86:2).join("")
+	$offscreen:=cs:C1710.ExcelDataExporter.new($templateFile.platformPath; $mapping; $exportRows; $destinationFileName; $destinationFolderPath; $title; $fileName; False:C215)
+	VP Run offscreen area($offscreen)
+Else 
+	cs:C1710.sfw_dialog.me.alert(ds:C1482.sfw_readXliff("No items in the list to Export"; "No items in the list to Export"))
+End if
