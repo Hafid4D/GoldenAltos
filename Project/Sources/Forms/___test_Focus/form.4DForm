@@ -3,14 +3,14 @@
 		"version": "1",
 		"kind": "form"
 	},
-	"windowSizingX": "variable",
-	"windowSizingY": "variable",
-	"windowMinWidth": 0,
-	"windowMinHeight": 0,
-	"windowMaxWidth": 32767,
-	"windowMaxHeight": 32767,
-	"rightMargin": 20,
-	"bottomMargin": 20,
+	"windowSizingX": "fixed",
+	"windowSizingY": "fixed",
+	"windowMinWidth": 334,
+	"windowMinHeight": 310,
+	"windowMaxWidth": 334,
+	"windowMaxHeight": 310,
+	"rightMargin": 12,
+	"bottomMargin": 12,
 	"events": [
 		"onLoad",
 		"onPageChange",
@@ -28,7 +28,7 @@
 		"onTimer",
 		"onBoundVariableChange"
 	],
-	"windowTitle": "window title",
+	"windowTitle": "List",
 	"destination": "detailScreen",
 	"pages": [
 		{
@@ -36,60 +36,68 @@
 		},
 		{
 			"objects": {
-				"Input": {
-					"type": "input",
-					"left": 41,
-					"top": 54,
-					"width": 255,
-					"height": 64,
-					"method": "ObjectMethods/Input.4dm",
-					"events": [
-						"onLosingFocus"
-					]
+				"label_itemsInList": {
+					"type": "text",
+					"top": 12,
+					"left": 12,
+					"width": 310,
+					"height": 16,
+					"fontWeight": "bold",
+					"stroke": "#000000",
+					"text": "Items in list",
+					"dataSource": "Form:C1466.headerLabel"
 				},
-				"Input1": {
-					"type": "input",
-					"left": 41,
-					"top": 153,
-					"width": 255,
-					"height": 64,
-					"method": "ObjectMethods/Input1.4dm",
+				"lb_items": {
+					"type": "list",
+					"top": 32,
+					"left": 12,
+					"width": 310,
+					"height": 220,
+					"dataSource": "Form:C1466.lbList",
+					"focusable": true,
 					"events": [
-						"onLosingFocus"
-					]
+						"onClick",
+						"onDoubleClick"
+					],
+					"method": "ObjectMethods/lb_items.4dm"
 				},
-				"Button": {
+				"btn_cancel": {
 					"type": "button",
-					"text": "Button",
-					"top": 270,
-					"left": 167,
-					"width": 129,
-					"height": 53,
+					"top": 268,
+					"left": 170,
+					"width": 75,
+					"height": 22,
+					"text": "Cancel",
+					"action": "cancel",
+					"shortcutKey": "[Esc]",
+					"events": [
+						"onClick"
+					]
+				},
+				"btn_ok": {
+					"type": "button",
+					"top": 268,
+					"left": 252,
+					"width": 70,
+					"height": 22,
+					"text": "OK",
+					"defaultButton": true,
+					"shortcutKey": "[Return]",
 					"events": [
 						"onClick"
 					],
-					"action": "accept"
-				},
-				"Button1": {
-					"type": "button",
-					"text": "Button",
-					"top": 264,
-					"left": 42,
-					"width": 82,
-					"height": 54,
-					"events": [
-						"onClick"
-					]
+					"method": "ObjectMethods/btn_ok.4dm"
 				}
 			}
 		}
 	],
-	"geometryStamp": 9,
+	"geometryStamp": 1,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
 		"views": {
 			"View 1": {}
 		}
-	}
+	},
+	"method": "method.4dm"
 }
