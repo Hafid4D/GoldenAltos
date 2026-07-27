@@ -22,19 +22,34 @@ Function hasCertification($uuid_certification : Text)->$certified : Boolean
 		End if 
 	End for each 
 	
-Function createCertification($uuid_certification : Text; $duration : Integer)->$certified : Boolean
+// Purpose: Optional $certificationDate for backdated assignment (Karla UAT); !00-00-00! → today.
+// Parameters:
+// $uuid_certification : Text — Certification.UUID
+// $duration : Integer — validity days (0 = resolve from catalog)
+// $certificationDate : Date — certification date (!00-00-00! → today; future dates rejected)
+// Returns: Boolean — True when the assignment was saved
+// modified by 4D/PS [2026-july-27]
+Function createCertification($uuid_certification : Text; $duration : Integer; $certificationDate : Date)->$certified : Boolean
 	
 	var $certificationAssignment : cs:C1710.CertificationAssignmentEntity
 	var $cert_e : cs:C1710.CertificationEntity
 	var $res : Object
+	var $today : Date
+	
+	$today:=Current date:C33(*)
+	If ($certificationDate=!00-00-00!)
+		$certificationDate:=cs:C1710.sfw_stmp.me.getDate(cs:C1710.sfw_stmp.me.now(); True:C214)
+	End if 
+	If ($certificationDate>$today)
+		return False:C215
+	End if 
 	
 	$certificationAssignment:=ds:C1482.CertificationAssignment.new()
 	
 	$certificationAssignment.UUID_Staff:=This:C1470.UUID
 	$certificationAssignment.UUID_Certification:=$uuid_certification
 	
-	$certificationAssignment.certificationDate:=cs:C1710.sfw_stmp.me.getDate(cs:C1710.sfw_stmp.me.now(); True:C214)  //cs.sfw_stmp.me.now()
-	//$certificationAssignment.certificationDate:=cs.sfw_stmp.me.build(!2024-06-01!)  // Test Only
+	$certificationAssignment.certificationDate:=$certificationDate
 	
 	// Purpose: Persist catalog Certification.duration on assignment (display/validity also read live from catalog).
 	// modified by 4D/PS [2026-june-09]
@@ -70,6 +85,43 @@ Function createCertification($uuid_certification : Text; $duration : Integer)->$
 	End if 
 	
 	return $res.success
+	
+	
+// Purpose: Update certification date on the latest assignment (correction / backdate without unchecking).
+// Parameters:
+// $uuid_certification : Text — Certification.UUID
+// $certificationDate : Date — new certification date (must not be in the future)
+// Returns: Boolean — True when saved
+// created by 4D/PS [2026-july-27]
+Function updateCertificationDate($uuid_certification : Text; $certificationDate : Date)->$ok : Boolean
+	
+	var $assignment_e : cs:C1710.CertificationAssignmentEntity
+	var $res : Object
+	
+	$ok:=False:C215
+	If ($certificationDate=!00-00-00!) || ($certificationDate>Current date:C33(*))
+		return $ok
+	End if 
+	
+	$assignment_e:=ds:C1482.CertificationAssignment\
+		.query("UUID_Staff = :1 AND UUID_Certification = :2"; This:C1470.UUID; $uuid_certification)\
+		.orderBy("certificationStmp desc").first()
+	
+	If ($assignment_e#Null:C1517)
+		$assignment_e.certificationDate:=$certificationDate
+		If ($assignment_e.moreData=Null:C1517)
+			$assignment_e.moreData:=New object:C1471()
+		End if 
+		// Purpose: Milestone reminders must follow the new certification date.
+		// modified by 4D/PS [2026-july-27]
+		$assignment_e.moreData.retrainNotified:=False:C215
+		$assignment_e.moreData.retrainNotifiedMilestones:=New object:C1471()
+		$res:=$assignment_e.save()
+		$ok:=$res.success
+		If ($ok)
+			This:C1470.recomputeRetrainDate()
+		End if 
+	End if 
 	
 	
 	// Purpose: Grant or revoke punch-in override for an expired certification assignment (qm, qs, dc only at UI).
@@ -323,6 +375,13 @@ local Function _initCommunication()
 Function get fullName()->$fullName : Text
 	$fullName:=[This:C1470.firstName; This:C1470.lastName].join(" ")
 	
+	
+Function get role()->$role : Text
+	
+	$roles:=ds:C1482.StaffRole.query("UUID_Staff = :1"; This:C1470.UUID)
+	If ($roles.length>0)
+		$role:=$roles[0].role.name
+	End if 
 	
 	// Purpose: Employee retrain due date (v18 Retrain_Date). Auto-synced via recomputeRetrainDate() on cert assign/remove/Re-New.
 	// Uses catalog re-training milestone offsets (90/180/365 from certification date), not assignment expiringDate.

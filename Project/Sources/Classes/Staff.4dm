@@ -122,11 +122,11 @@ Function retrainingStaff()->$staffs : cs:C1710.StaffSelection
 	End for each 
 	
 	
-// Purpose: Notify the linked sfw_User for each staff member when retrain milestones or validity expiry fall within $days.
-// Uses moreData.retrainNotifiedMilestones (d90, d365, …) and validityExpiryNotified for calendar expiry.
-// Parameters: $days : Integer — lookahead window in days (typically 30)
-// Returns: Collection — one True entry per newly sent notification (drives UI refresh in callers)
-// modified by 4D/PS [2026-june-12]
+	// Purpose: Notify the linked sfw_User for each staff member when retrain milestones or validity expiry fall within $days.
+	// Uses moreData.retrainNotifiedMilestones (d90, d365, …) and validityExpiryNotified for calendar expiry.
+	// Parameters: $days : Integer — lookahead window in days (typically 30)
+	// Returns: Collection — one True entry per newly sent notification (drives UI refresh in callers)
+	// modified by 4D/PS [2026-june-12]
 Function checkRetraining($days : Integer)->$createdNotificationMarkers : Collection
 	
 	var $staff_e : cs:C1710.StaffEntity
@@ -173,7 +173,7 @@ Function checkRetraining($days : Integer)->$createdNotificationMarkers : Collect
 						"targetDataclass"; "Staff"; \
 						"fullName"; $staff_e.fullName; \
 						"certName"; $assignment_e.certification.name; \
-						"expiringDate"; String:C10($due.milestoneDate; System date short:K17:1); \
+						"expiringDate"; String:C10($due.milestoneDate; Null event:K17:1); \
 						"milestoneDays"; $due.milestoneDays; \
 						"days"; $days\
 						)
@@ -203,7 +203,7 @@ Function checkRetraining($days : Integer)->$createdNotificationMarkers : Collect
 						"targetDataclass"; "Staff"; \
 						"fullName"; $staff_e.fullName; \
 						"certName"; $assignment_e.certification.name; \
-						"expiringDate"; String:C10($assignment_e.expiringDate; System date short:K17:1); \
+						"expiringDate"; String:C10($assignment_e.expiringDate; Null event:K17:1); \
 						"days"; $days\
 						)
 					cs:C1710.sfw_notificationManager.me.notify("EmployeeRetrainRequired"; $users; $context)
@@ -272,7 +272,7 @@ local Function cacheLoad()
 	
 	
 Function _loadAsCollection()->$employees : Collection
-	$employees:=This:C1470.all().toCollection("UUID,firstName,lastName,code").orderBy("code")
+	$employees:=This:C1470.all().toCollection("UUID,firstName,lastName,fullName,code").orderBy("code")
 	
 	
 	

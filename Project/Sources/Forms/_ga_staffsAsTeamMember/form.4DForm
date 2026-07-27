@@ -9,25 +9,24 @@
 	"windowMinHeight": 0,
 	"windowMaxWidth": 32767,
 	"windowMaxHeight": 32767,
-	"rightMargin": 0,
-	"bottomMargin": 0,
+	"rightMargin": 20,
+	"bottomMargin": 20,
 	"events": [
 		"onLoad",
+		"onPageChange",
 		"onValidate",
 		"onClick",
-		"onOutsideCall",
 		"onDoubleClick",
+		"onOutsideCall",
+		"onBeginDragOver",
+		"onDragOver",
 		"onDrop",
+		"onAfterKeystroke",
 		"onMenuSelect",
 		"onPluginArea",
-		"onDragOver",
-		"onCloseBox",
-		"onUnload",
-		"onAfterKeystroke",
 		"onAfterEdit",
-		"onBeginDragOver",
-		"onBoundVariableChange",
-		"onPageChange"
+		"onTimer",
+		"onBoundVariableChange"
 	],
 	"windowTitle": "window title",
 	"destination": "detailScreen",
@@ -37,11 +36,11 @@
 		},
 		{
 			"objects": {
-				"teams": {
+				"lb_items": {
 					"type": "listbox",
-					"left": 2,
-					"top": 0,
-					"width": 292,
+					"left": 3,
+					"top": 45,
+					"width": 512,
 					"height": 492,
 					"events": [
 						"onClick",
@@ -50,29 +49,29 @@
 						"onSelectionChange"
 					],
 					"horizontalLineStroke": "transparent",
-					"dataSource": "Form:C1466.teams",
+					"dataSource": "Form:C1466.lb_items",
 					"resizingMode": "legacy",
 					"listboxType": "collection",
 					"verticalLineStroke": "transparent",
 					"selectionMode": "single",
-					"currentItemSource": "Form:C1466.currentTeam",
-					"currentItemPositionSource": "Form:C1466.currentTeamPos",
-					"selectedItemsSource": "Form:C1466.currentSelectedTeams",
-					"scrollbarHorizontal": "automatic",
+					"currentItemSource": "Form:C1466.currentStaff",
+					"currentItemPositionSource": "Form:C1466.currentStaffPos",
+					"selectedItemsSource": "Form:C1466.currentSelectedStaffs",
+					"scrollbarHorizontal": "hidden",
 					"scrollbarVertical": "automatic",
 					"fill": "transparent",
 					"borderStyle": "none",
 					"stroke": "#000000",
 					"sizingX": "fixed",
 					"sizingY": "grow",
-					"method": "ObjectMethods/teams.4dm",
+					"method": "ObjectMethods/lb_items.4dm",
 					"columns": [
 						{
 							"header": {
 								"text": "",
 								"name": "Header1"
 							},
-							"name": "TeamsCheckBox",
+							"name": "StaffsCheckBox",
 							"footer": {
 								"name": "Footer1"
 							},
@@ -86,103 +85,49 @@
 								"onDataChange"
 							],
 							"enterable": true,
-							"method": "ObjectMethods/TeamsCheckBox.4dm",
+							"method": "ObjectMethods/StaffsCheckBox.4dm",
 							"truncateMode": "none"
 						},
 						{
 							"header": {
 								"name": "Header2",
-								"text": "Teams",
+								"text": "Staff FullName",
 								"fontWeight": "bold"
 							},
 							"name": "Column2",
 							"footer": {
 								"name": "Footer2"
 							},
-							"dataSource": "This:C1470.teamName",
+							"dataSource": "This:C1470.fullName",
 							"textAlign": "left",
 							"stroke": "#000000",
 							"events": [
 								"onClick",
 								"onDataChange"
 							],
-							"enterable": false
-						}
-					]
-				},
-				"teamMembers": {
-					"type": "listbox",
-					"left": 296,
-					"top": 0,
-					"width": 292,
-					"height": 492,
-					"events": [
-						"onClick",
-						"onHeaderClick",
-						"onDataChange",
-						"onSelectionChange"
-					],
-					"horizontalLineStroke": "transparent",
-					"resizingMode": "legacy",
-					"listboxType": "collection",
-					"verticalLineStroke": "transparent",
-					"selectionMode": "single",
-					"currentItemSource": "Form:C1466.currentStaff",
-					"scrollbarHorizontal": "automatic",
-					"scrollbarVertical": "automatic",
-					"fill": "transparent",
-					"borderStyle": "none",
-					"stroke": "#000000",
-					"sizingX": "fixed",
-					"sizingY": "grow",
-					"dataSource": "Form:C1466.currentTeam.members",
-					"selectedItemsSource": "Form:C1466.staffSelection",
-					"columns": [
-						{
-							"header": {
-								"text": "",
-								"name": "Header3"
-							},
-							"name": "membersChecBox",
-							"footer": {
-								"name": "Footer3"
-							},
-							"width": 30,
-							"dataSource": "This:C1470.selected",
-							"dataSourceTypeHint": "boolean",
-							"textAlign": "right",
-							"stroke": "#000000",
-							"events": [
-								"onClick",
-								"onDataChange"
-							],
-							"method": "ObjectMethods/membersChecBox.4dm"
+							"enterable": false,
+							"width": 225,
+							"resizable": false
 						},
 						{
 							"header": {
-								"name": "Header4",
-								"text": "Team Members",
+								"name": "Header3",
+								"text": "Title",
 								"fontWeight": "bold"
 							},
-							"name": "Column4",
+							"name": "Column1",
 							"footer": {
-								"name": "Footer4"
+								"name": "Footer3"
 							},
-							"dataSource": "This:C1470.staffName",
-							"textAlign": "left",
-							"stroke": "#000000",
-							"enterable": false,
-							"events": [
-								"onClick",
-								"onDataChange"
-							]
+							"dataSource": "This:C1470.role",
+							"enterable": false
 						}
 					]
 				},
 				"bOk": {
 					"type": "button",
-					"top": 501,
-					"left": 550,
+					"top": 573,
+					"left": 485,
 					"width": 30,
 					"height": 32,
 					"sizingY": "move",
@@ -195,18 +140,19 @@
 					"events": [
 						"onClick"
 					],
-					"action": "accept",
+					"action": "",
 					"shortcutAccel": false,
 					"shortcutControl": false,
 					"shortcutShift": false,
 					"shortcutAlt": false,
 					"shortcutKey": "[Return]",
-					"sizingX": "move"
+					"sizingX": "move",
+					"method": "ObjectMethods/bOk.4dm"
 				},
 				"bCancel": {
 					"type": "button",
-					"top": 501,
-					"left": 504,
+					"top": 573,
+					"left": 439,
 					"width": 32,
 					"height": 32,
 					"sizingY": "move",
@@ -223,21 +169,37 @@
 					"method": "ObjectMethods/bCancel.4dm",
 					"sizingX": "move"
 				},
-				"Line": {
-					"type": "line",
-					"top": 0,
-					"left": 294,
-					"width": 0,
-					"height": 501,
-					"startPoint": "bottomLeft",
-					"sizingY": "grow",
-					"sizingX": "fixed"
+				"searchbox_icon": {
+					"type": "picture",
+					"top": 11,
+					"left": 3,
+					"width": 23,
+					"height": 23,
+					"sizingX": "move",
+					"pictureFormat": "scaled",
+					"picture": "/RESOURCES/image/logo/loupe.png"
+				},
+				"word": {
+					"type": "input",
+					"left": 36,
+					"top": 11,
+					"width": 479,
+					"height": 23,
+					"dataSource": "Form:C1466.words",
+					"hideFocusRing": true,
+					"method": "ObjectMethods/word.4dm",
+					"events": [
+						"onDataChange",
+						"onAfterKeystroke",
+						"onAfterEdit"
+					],
+					"placeholder": "search ...",
+					"borderStyle": "none"
 				}
 			}
 		}
 	],
-	"geometryStamp": 80,
-	"method": "method.4dm",
+	"geometryStamp": 19,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
@@ -245,5 +207,5 @@
 			"View 1": {}
 		}
 	},
-	"shared": false
+	"method": "method.4dm"
 }

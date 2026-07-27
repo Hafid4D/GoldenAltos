@@ -17,12 +17,9 @@
 		"onClick",
 		"onOutsideCall",
 		"onDoubleClick",
-		"onLosingFocus",
-		"onGettingFocus",
 		"onDrop",
 		"onMenuSelect",
 		"onPluginArea",
-		"onDataChange",
 		"onDragOver",
 		"onTimer",
 		"onAfterKeystroke",
@@ -949,7 +946,7 @@
 		}
 	],
 	"inheritedForm": "sfw_bkgd_header_3lines",
-	"geometryStamp": 1155,
+	"geometryStamp": 1159,
 	"editor": {
 		"groups": {
 			"Group": [

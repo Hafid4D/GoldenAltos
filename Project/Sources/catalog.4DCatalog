@@ -3776,7 +3776,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="CF558440884CD84E9F39268E6E74624F" name_Nto1="supplier" name_1toN="audits" state="1">
+	<relation uuid="CF558440884CD84E9F39268E6E74624F" name_Nto1="staff" name_1toN="staffRoles" state="1">
 		<related_field kind="source">
 			<field_ref uuid="925B000C01112B4294F0F04F09516F32" name="UUID_Staff">
 				<table_ref uuid="3FCFA1819BB8A549A967817552E5B346" name="StaffRole"/>

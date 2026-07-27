@@ -264,10 +264,39 @@ Function _configureCertAssignmentColumns()
 	OBJECT SET ENABLED:C1123(*; "bRenewCertification"; $canEditCerts && (Form:C1466.selectedCertification#Null:C1517))
 	
 	
+// Purpose: Open _ga_calendar centered for Staff certification listbox actions (GET MOUSE coords fail on this page).
+// Parameters:
+// $defaultDate : Date — initial selection (!00-00-00! → today)
+// Returns: Date — selected date, or !00-00-00! when cancelled
+// created by 4D/PS [2026-july-27]
+Function _pickCertificationDate($defaultDate : Date)->$date : Date
+	
+	var $form : Object
+	var $winRef : Integer
+	
+	If ($defaultDate=!00-00-00!)
+		$defaultDate:=Current date:C33(*)
+	End if 
+	
+	$form:=New object:C1471()
+	$form.date:=$defaultDate
+	
+	$winRef:=Open form window:C675("_ga_calendar"; Movable dialog box:K34:7; Horizontally centered:K39:1; Vertically centered:K39:4)
+	DIALOG:C40("_ga_calendar"; $form)
+	
+	If (OK=1)
+		$date:=$form.calendar.display.date
+	Else 
+		$date:=!00-00-00!
+	End if 
+	
+	
 Function renewCertification()
-	// Purpose: Re-New — append a CertificationAssignment with today's date (legacy renewal, keeps history).
+	// Purpose: Re-New — append a CertificationAssignment with a chosen date (keeps history).
 	// Requires qs/qm/dc profile, modification mode, and a selected certification row.
-	// modified by 4D/PS [2026-june-08]
+	// modified by 4D/PS [2026-july-27]
+	
+	var $certDate : Date
 	
 	If (Form:C1466.selectedCertification=Null:C1517) || (Form:C1466.current_item=Null:C1517)
 		return 
@@ -281,13 +310,76 @@ Function renewCertification()
 		return 
 	End if 
 	
-	If (Not:C34(Form:C1466.current_item.createCertification(Form:C1466.selectedCertification.UUID; 0)))
+	$certDate:=This:C1470._pickCertificationDate(Current date:C33(*))
+	If ($certDate=!00-00-00!)
+		return 
+	End if 
+	If ($certDate>Current date:C33(*))
+		cs:C1710.sfw_dialog.me.info("Certification date cannot be in the future.")
+		return 
+	End if 
+	
+	If (Not:C34(Form:C1466.current_item.createCertification(Form:C1466.selectedCertification.UUID; 0; $certDate)))
 		cs:C1710.sfw_dialog.me.alert("Could not renew this certification")
 		return 
 	End if 
 	
 	This:C1470._activate_save_cancel_button()
 	This:C1470.loadCertifications()
+	This:C1470.loadCertificationHistory()
+	
+	
+// Purpose: Assign or update certification date via Actions menu (backdate / correction — Karla UAT).
+// modified by 4D/PS [2026-july-27]
+Function setCertificationDateFromPicker()
+	
+	var $uuidCert : Text
+	var $defaultDate : Date
+	var $certDate : Date
+	var $saved : Boolean
+	
+	If (Form:C1466.selectedCertification=Null:C1517) || (Form:C1466.current_item=Null:C1517)
+		return 
+	End if 
+	If (Not:C34(This:C1470._hasQaProfile()))
+		cs:C1710.sfw_dialog.me.info("Only Quality Manager, Quality Supervisor, or Document Control can modify certifications")
+		return 
+	End if 
+	If (Not:C34(Form:C1466.sfw.checkIsInModification()))
+		cs:C1710.sfw_dialog.me.info("Open the employee record in modification mode to set a certification date")
+		return 
+	End if 
+	
+	$uuidCert:=Form:C1466.selectedCertification.UUID
+	If (Form:C1466.current_item.hasCertification($uuidCert))
+		$defaultDate:=Form:C1466.current_item.getCertificationDate($uuidCert)
+	Else 
+		$defaultDate:=Current date:C33(*)
+	End if 
+	
+	$certDate:=This:C1470._pickCertificationDate($defaultDate)
+	If ($certDate=!00-00-00!)
+		return 
+	End if 
+	If ($certDate>Current date:C33(*))
+		cs:C1710.sfw_dialog.me.info("Certification date cannot be in the future.")
+		return 
+	End if 
+	
+	If (Form:C1466.current_item.hasCertification($uuidCert))
+		$saved:=Form:C1466.current_item.updateCertificationDate($uuidCert; $certDate)
+	Else 
+		$saved:=Form:C1466.current_item.createCertification($uuidCert; 0; $certDate)
+	End if 
+	
+	If (Not:C34($saved))
+		cs:C1710.sfw_dialog.me.alert("Could not save the certification date")
+		return 
+	End if 
+	
+	This:C1470._activate_save_cancel_button()
+	This:C1470.loadCertifications()
+	This:C1470.loadCertificationHistory()
 	
 	
 Function loadCertificationHistory()
@@ -500,6 +592,14 @@ Function bActionCertifications()
 			DISABLE MENU ITEM:C150($refMenu; -1)
 		End if 
 		
+		// Purpose: Backdate or correct certification date (Karla UAT — checkbox still uses today).
+		// modified by 4D/PS [2026-july-27]
+		If (This:C1470._hasQaProfile()) && (Form:C1466.sfw.checkIsInModification())
+			APPEND MENU ITEM:C411($refMenu; "-")
+			APPEND MENU ITEM:C411($refMenu; "Set certification date...")
+			SET MENU ITEM PARAMETER:C1004($refMenu; -1; "--setCertDate")
+		End if 
+		
 		// Purpose: QA punch-in override for expired certification (Karla 2.d — qs, qm, dc).
 		// modified by 4D/PS [2026-june-02]
 		If (This:C1470._hasQaProfile()) && (Form:C1466.sfw.checkIsInModification())
@@ -524,6 +624,8 @@ Function bActionCertifications()
 	Case of 
 		: ($choose="--printCertTraining")
 			staff_print_cert_training
+		: ($choose="--setCertDate")
+			This:C1470.setCertificationDateFromPicker()
 		: ($choose="--grantOverride")
 			If (Form:C1466.selectedCertification#Null:C1517)
 				Form:C1466.current_item.setCertificationOverride(Form:C1466.selectedCertification.UUID; True:C214)
