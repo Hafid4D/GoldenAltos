@@ -4,7 +4,7 @@
 // Parameters: none
 // Returns: nothing (populates tables; traces on save failure)
 // created by 4D/PS [2026-may-19]
-
+TRACE:C157
 var $listsFile : 4D:C1709.File
 var $listDef; $rejectList : Object
 var $rootItem; $childItem : Object
@@ -39,18 +39,20 @@ End if
 // Items first (FK), then categories
 var $allItems : cs:C1710.RejectCriteriaItemSelection:=ds:C1482.RejectCriteriaItem.all()
 If ($allItems.length>0)
-	$info:=$allItems.drop()
-	If (Not:C34($info.success))
-		TRACE:C157
-	End if 
+	TRUNCATE TABLE:C1051([RejectCriteriaItem:147])
+	//$info:=$allItems.drop()
+	//If (Not($info.success))
+	//TRACE
+	//End if 
 End if 
 
 var $allCategories : cs:C1710.RejectCriteriaCategorySelection:=ds:C1482.RejectCriteriaCategory.all()
 If ($allCategories.length>0)
-	$info:=$allCategories.drop()
-	If (Not:C34($info.success))
-		TRACE:C157
-	End if 
+	TRUNCATE TABLE:C1051([RejectCriteriaCategory:146])
+	//$info:=$allCategories.drop()
+	//If (Not($info.success))
+	//TRACE
+	//End if 
 End if 
 
 $categoryLevelID:=1
@@ -106,5 +108,5 @@ For each ($rootItem; $rootItems)
 	End if 
 	
 End for each 
-
+TRACE:C157
 //ALERT("Reject criteria import done: "+String($categoryCount)+" categories, "+String($itemCount)+" items.")
