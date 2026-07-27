@@ -10,7 +10,7 @@ Case of
 		For each ($staff; $allStaffs)
 			$object:=New object:C1471(\
 				"selected"; $lb_teamMembers.indexOf($staff.fullName)#-1; \
-				"role"; $staff.staffRoles[0].role.name; \
+				"role"; $staff.staffRoles.length>0 ? $staff.staffRoles[0].role.name : ""; \
 				"fullName"; $staff.fullName\
 				)
 			$col.push($object)
