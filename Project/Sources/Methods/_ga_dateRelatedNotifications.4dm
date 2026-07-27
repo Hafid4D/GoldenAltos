@@ -50,7 +50,7 @@ _ga_notifier(->$suppliers; "criticalOverdueAudit"; "CriticalSuppliersWithOverdue
 
 
 /*
-Specs Control Approval
+Documents Control Approval
 */
 var $specification : cs:C1710.SpecificationSelection
 $formula_1:=Formula:C1597((This:C1470.reviewDate+This:C1470.reviewIntervalInDays)<Current date:C33(*))

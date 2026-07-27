@@ -38,7 +38,9 @@ For each ($payUUID; $paymentUUIDs)
 		End if
 		$refNo:=""
 		$ePay._ensureMoreData()
-		If ($ePay.moreData.refNo#Null:C1517)
+		// Purpose: Guard refNo read when moreData has no refNo key (imported PAY rows).
+		// modified by 4D/PS [2026-june-29]
+		If (OB Is defined:C1231($ePay.moreData; "refNo")) && ($ePay.moreData.refNo#Null:C1517)
 			$refNo:=String:C10($ePay.moreData.refNo)
 		End if
 		$typeName:="Payment"

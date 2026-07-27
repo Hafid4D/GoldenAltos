@@ -22,6 +22,17 @@ var $info : Object
 $count:=0
 $seq:=0
 
+// Purpose: Skip automatic GL posting while rebuilding SalesTransaction from legacy sources.
+// modified by 4D/PS [2026-june-29]
+If (Storage:C1525.cache=Null:C1517)
+	Use (Storage:C1525)
+		Storage:C1525.cache:=New shared object:C1526
+	End use
+End if
+Use (Storage:C1525.cache)
+	Storage:C1525.cache.skipJePosting:=True:C214
+End use
+
 TRUNCATE TABLE:C1051([SalesTransaction:80])
 
 // MARK: Invoice (legacy PO receivables)
@@ -123,5 +134,9 @@ For each ($eJobInvoice; ds:C1482.JobInvoice.all())
 		$count:=$count+1
 	End if 
 End for each 
+
+Use (Storage:C1525.cache)
+	Storage:C1525.cache.skipJePosting:=False:C215
+End use
 
 $0:=$count

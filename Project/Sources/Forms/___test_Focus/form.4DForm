@@ -1,0 +1,103 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "fixed",
+	"windowSizingY": "fixed",
+	"windowMinWidth": 334,
+	"windowMinHeight": 310,
+	"windowMaxWidth": 334,
+	"windowMaxHeight": 310,
+	"rightMargin": 12,
+	"bottomMargin": 12,
+	"events": [
+		"onLoad",
+		"onPageChange",
+		"onValidate",
+		"onClick",
+		"onDoubleClick",
+		"onOutsideCall",
+		"onBeginDragOver",
+		"onDragOver",
+		"onDrop",
+		"onAfterKeystroke",
+		"onMenuSelect",
+		"onPluginArea",
+		"onAfterEdit",
+		"onTimer",
+		"onBoundVariableChange"
+	],
+	"windowTitle": "List",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {}
+		},
+		{
+			"objects": {
+				"label_itemsInList": {
+					"type": "text",
+					"top": 12,
+					"left": 12,
+					"width": 310,
+					"height": 16,
+					"fontWeight": "bold",
+					"stroke": "#000000",
+					"text": "Items in list",
+					"dataSource": "Form:C1466.headerLabel"
+				},
+				"lb_items": {
+					"type": "list",
+					"top": 32,
+					"left": 12,
+					"width": 310,
+					"height": 220,
+					"dataSource": "Form:C1466.lbList",
+					"focusable": true,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"method": "ObjectMethods/lb_items.4dm"
+				},
+				"btn_cancel": {
+					"type": "button",
+					"top": 268,
+					"left": 170,
+					"width": 75,
+					"height": 22,
+					"text": "Cancel",
+					"action": "cancel",
+					"shortcutKey": "[Esc]",
+					"events": [
+						"onClick"
+					]
+				},
+				"btn_ok": {
+					"type": "button",
+					"top": 268,
+					"left": 252,
+					"width": 70,
+					"height": 22,
+					"text": "OK",
+					"defaultButton": true,
+					"shortcutKey": "[Return]",
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/btn_ok.4dm"
+				}
+			}
+		}
+	],
+	"geometryStamp": 1,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	},
+	"method": "method.4dm"
+}

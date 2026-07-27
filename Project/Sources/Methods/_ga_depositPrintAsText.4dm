@@ -1,9 +1,10 @@
 //%attributes = {}
 
-// Purpose: Coerce a legacy or moreData field value to Text for deposit print/export output.
+// Purpose: Coerce a typed catalog field value to Text for deposit print/export output.
 // Parameters: $value : Variant — raw field value (Text, Number, Date, Null, …)
 // Returns: Text — empty string when null/undefined
-// created by 4D/PS [2026-june-23]
+// modified by 4D/PS [2026-june-29]
+// created by 4D/PS [2026-june-29]
 
 #DECLARE($value : Variant) -> $text : Text
 
@@ -28,7 +29,7 @@ Case of
 		$text:=""
 	Else
 		// Purpose: Return empty for unsupported types instead of String() which may raise #54.
-		// modified by 4D/PS [2026-june-23]
+		// modified by 4D/PS [2026-june-29]
 		$text:=""
 End case
 

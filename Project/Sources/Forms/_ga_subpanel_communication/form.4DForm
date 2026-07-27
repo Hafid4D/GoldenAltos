@@ -38,8 +38,8 @@
 			"objects": {
 				"lb_communications": {
 					"type": "listbox",
-					"left": 0,
-					"top": 29,
+					"left": 11,
+					"top": 46,
 					"width": 450,
 					"height": 306,
 					"events": [
@@ -175,7 +175,7 @@
 			}
 		}
 	],
-	"geometryStamp": 68,
+	"geometryStamp": 71,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

@@ -1,6 +1,6 @@
 {
 	"tables": {
-		"PaymentApplication": {
+		"Bank": {
 			"color": {
 				"red": 255,
 				"green": 255,
@@ -16,6 +16,38 @@
 			"displayable_fields_count": 6,
 			"fields_ordering": 1
 		},
+		"JournalEntryLine": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 4464,
+				"top": 1163,
+				"width": 164,
+				"height": 182.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 1
+		},
+		"PaymentApplication": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 5136,
+				"top": 847,
+				"width": 143,
+				"height": 150.33203125
+			},
+			"displayable_fields_count": 5,
+			"fields_ordering": 1
+		},
 		"FinancialReport": {
 			"color": {
 				"red": 32,
@@ -24,12 +56,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4516,
-				"top": 1577,
-				"width": 120,
-				"height": 167.33203125
+				"left": 4304,
+				"top": 1677,
+				"width": 147,
+				"height": 139.33203125
 			},
-			"displayable_fields_count": 6,
+			"displayable_fields_count": 4,
 			"fields_ordering": 1
 		},
 		"ExpenseTransaction": {
@@ -40,12 +72,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4316,
-				"top": 1577,
-				"width": 120,
-				"height": 167.33203125
+				"left": 4092,
+				"top": 1663,
+				"width": 174,
+				"height": 352.33203125
 			},
-			"displayable_fields_count": 6,
+			"displayable_fields_count": 14,
 			"fields_ordering": 1
 		},
 		"SupplierCredit": {
@@ -56,12 +88,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4514,
-				"top": 1314,
-				"width": 120,
-				"height": 167.33203125
+				"left": 4361,
+				"top": 1370,
+				"width": 191,
+				"height": 237.33203125
 			},
-			"displayable_fields_count": 6,
+			"displayable_fields_count": 9,
 			"fields_ordering": 1
 		},
 		"BillPayment": {
@@ -72,12 +104,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4314,
-				"top": 1314,
-				"width": 120,
-				"height": 167.33203125
+				"left": 4078,
+				"top": 1293,
+				"width": 172,
+				"height": 260.33203125
 			},
-			"displayable_fields_count": 6,
+			"displayable_fields_count": 10,
 			"fields_ordering": 1
 		},
 		"Check": {
@@ -88,12 +120,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4114,
-				"top": 1314,
-				"width": 120,
-				"height": 167.33203125
+				"left": 3874,
+				"top": 1292,
+				"width": 180,
+				"height": 311.33203125
 			},
-			"displayable_fields_count": 6,
+			"displayable_fields_count": 12,
 			"fields_ordering": 1
 		},
 		"JournalEntry": {
@@ -104,12 +136,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4716,
-				"top": 1316,
-				"width": 120,
-				"height": 167.33203125
+				"left": 4715,
+				"top": 1327,
+				"width": 163,
+				"height": 356.33203125
 			},
-			"displayable_fields_count": 6,
+			"displayable_fields_count": 15,
 			"fields_ordering": 1
 		},
 		"DepositItem": {
@@ -120,12 +152,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 5126,
-				"top": 1313,
-				"width": 138,
-				"height": 196.33203125
+				"left": 5281,
+				"top": 1428,
+				"width": 177,
+				"height": 337.33203125
 			},
-			"displayable_fields_count": 7,
+			"displayable_fields_count": 14,
 			"fields_ordering": 1
 		},
 		"Deposit": {
@@ -136,12 +168,12 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4916,
-				"top": 1312,
-				"width": 155,
-				"height": 178.33203125
+				"left": 4950,
+				"top": 1314,
+				"width": 233,
+				"height": 435.33203125
 			},
-			"displayable_fields_count": 6,
+			"displayable_fields_count": 18,
 			"fields_ordering": 1
 		},
 		"RejectCriteriaItem": {
@@ -401,8 +433,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 2137.4692382812,
-				"top": 549.47967529297,
+				"left": 2022.4692382812,
+				"top": 555.47967529297,
 				"width": 149.05078125,
 				"height": 448.33203125
 			},
@@ -463,8 +495,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1917.3334960938,
-				"top": 640.66674804688,
+				"left": 1771.3334960938,
+				"top": 597.66674804688,
 				"width": 194,
 				"height": 222.33203125
 			},
@@ -478,8 +510,8 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1888.4149169922,
-				"top": 395.59408569336,
+				"left": 1889.4149169922,
+				"top": 381.59408569336,
 				"width": 167.68237304688,
 				"height": 176.99865722656
 			},
@@ -784,8 +816,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 2327.6667480469,
-				"top": 571,
+				"left": 2393.6667480469,
+				"top": 604,
 				"width": 144.2421875,
 				"height": 239.33203125
 			},
@@ -1626,7 +1658,7 @@
 				"left": 4957,
 				"top": 850,
 				"width": 133,
-				"height": 168.33203125
+				"height": 171.33203125
 			},
 			"displayable_fields_count": 6
 		},
@@ -1749,8 +1781,8 @@
 				"alpha": 255
 			},
 			"coordinates": {
-				"left": 4677,
-				"top": 839,
+				"left": 4707,
+				"top": 912,
 				"width": 192,
 				"height": 276.33203125
 			},
@@ -2081,12 +2113,12 @@
 				"alpha": 0
 			},
 			"coordinates": {
-				"left": 1753,
-				"top": 559,
-				"width": 122.671875,
-				"height": 124.33203125
+				"left": 2227,
+				"top": 569,
+				"width": 168.671875,
+				"height": 178.33203125
 			},
-			"displayable_fields_count": 3
+			"displayable_fields_count": 6
 		},
 		"ManagementReview": {
 			"color": {
@@ -3472,6 +3504,14 @@
 		}
 	},
 	"relations": {
+		"C3F3A4C5D64789A0B1C2D3E4F5000200": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			}
+		},
 		"5CE56728EF1C4035972175477209C173": {
 			"color": {
 				"red": 240,
@@ -3496,6 +3536,38 @@
 				"alpha": 0
 			}
 		},
+		"EF2F0BDA062744EAA9F189FBD02C739C": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			}
+		},
+		"F89075FC9E0E459B877454870E600049": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			}
+		},
+		"83C998D7DBA343C8B5B10AC8FBECE8E3": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			}
+		},
+		"CF558440884CD84E9F39268E6E74624F": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
+		},
 		"ADD3451DE4C0DF41A843F29EF0A9F98F": {
 			"color": {
 				"red": 255,
@@ -3510,6 +3582,102 @@
 				"green": 255,
 				"blue": 255,
 				"alpha": 0
+			}
+		},
+		"E8F1A2B3C4D5467890ABCDEF0123456D": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			}
+		},
+		"E8F1A2B3C4D5467890ABCDEF0123456C": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			}
+		},
+		"7A4E2B9C3D1F48E6A5B0C9D8E7F6A5B6": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			}
+		},
+		"7A4E2B9C3D1F48E6A5B0C9D8E7F6A5B5": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			}
+		},
+		"7A4E2B9C3D1F48E6A5B0C9D8E7F6A5B4": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			}
+		},
+		"7A4E2B9C3D1F48E6A5B0C9D8E7F6A5B3": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			}
+		},
+		"7A4E2B9C3D1F48E6A5B0C9D8E7F6A5B2": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			}
+		},
+		"7A4E2B9C3D1F48E6A5B0C9D8E7F6A5B1": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			}
+		},
+		"A3E2F3A4B5C64789A0B1C2D3E4F5A6BE": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			}
+		},
+		"A3E2F3A4B5C64789A0B1C2D3E4F5A6BD": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			}
+		},
+		"A3E2F3A4B5C64789A0B1C2D3E4F5A6BC": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
+			}
+		},
+		"D3E2F3A4B5C64789A0B1C2D3E4F5A6BC": {
+			"color": {
+				"red": 32,
+				"green": 178,
+				"blue": 170,
+				"alpha": 255
 			}
 		}
 	}

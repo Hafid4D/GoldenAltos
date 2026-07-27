@@ -1038,6 +1038,11 @@
 		<field name="actualDeliveryStmp" uuid="2D0DE62C09FB40ACBF32CA0769853C32" type="4" never_null="true" id="20"/>
 		<field name="expectedDeliveryStmp" uuid="B15E9BE6A8D14EAF9AE82881B85C0E1F" type="4" never_null="true" id="21"/>
 		<field name="qtyFunctional" uuid="F17239258B234099B0424E1A4A3EC57B" type="4" never_null="true" id="22"/>
+		<field name="seqNumber" uuid="A7B1C2D3E4F5061728394A5B6C7D8E01" type="4" never_null="true" id="23"/>
+		<field name="vendorName" uuid="A7B1C2D3E4F5061728394A5B6C7D8E02" type="10" limiting_length="255" never_null="true" id="24"/>
+		<field name="freight" uuid="A7B1C2D3E4F5061728394A5B6C7D8E03" type="6" never_null="true" id="25"/>
+		<field name="discount" uuid="A7B1C2D3E4F5061728394A5B6C7D8E04" type="6" never_null="true" id="26"/>
+		<field name="billRecognitionStmp" uuid="A7B1C2D3E4F5061728394A5B6C7D8E05" type="4" never_null="true" id="27"/>
 		<primary_key field_name="UUID" field_uuid="DD082E45822D34438F391901E3773042"/>
 	</table>
 	<table name="JobLineItem" uuid="C34CD032C4F6EB4C8F51682914D18AB0" id="65">
@@ -1174,6 +1179,7 @@
 		<field name="isSubaccount" uuid="83EB32DE8F19C64F9C3807E5F726A634" type="1" never_null="true" id="11"/>
 		<field name="UUID_ParentAccount" uuid="59F59B14BA3D334E950CA0E04F61C6CD" type="10" store_as_UUID="true" never_null="true" id="12"/>
 		<field name="moreData" uuid="0A8F5FDDF0CB7C43A72C777DC119505C" type="21" blob_switch_size="2147483647" never_null="true" id="13"/>
+		<field name="defaultKey" uuid="E8A1B2C3D4E5F64789A0B1C2D3E4F501" type="10" limiting_length="64" never_null="true" id="14"/>
 		<primary_key field_name="UUID" field_uuid="65FB781A111BBA4A9C7EAE76C9C35795"/>
 	</table>
 	<table name="CAOType" uuid="9BE9AE3D0CAD0E468514C2CB9ADAD6F0" id="74">
@@ -2185,6 +2191,20 @@
 		<field name="UUID" uuid="D1E2F3A4B5C64789A0B1C2D3E4F5A6B8" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="depositNumber" uuid="D1E2F3A4B5C64789A0B1C2D3E4F5A6B9" type="4" unique="true" never_null="true" id="2"/>
 		<field name="moreData" uuid="D1E2F3A4B5C64789A0B1C2D3E4F5A6BA" type="21" blob_switch_size="2147483647" never_null="true" id="3"/>
+		<field name="stmpDepositDate" uuid="E1F2A3B4C5D64789A0B1C2D3E4F5A011" type="4" never_null="true" id="4"/>
+		<field name="memo" uuid="E1F2A3B4C5D64789A0B1C2D3E4F5A012" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="UUID_CAO_bank" uuid="E1F2A3B4C5D64789A0B1C2D3E4F5A013" type="10" store_as_UUID="true" never_null="true" id="6"/>
+		<field name="bankAccountLabel" uuid="E1F2A3B4C5D64789A0B1C2D3E4F5A014" type="10" limiting_length="255" never_null="true" id="7"/>
+		<field name="cashBackAmount" uuid="E1F2A3B4C5D64789A0B1C2D3E4F5A015" type="6" never_null="true" id="8"/>
+		<field name="UUID_CAO_cashBack" uuid="E1F2A3B4C5D64789A0B1C2D3E4F5A016" type="10" store_as_UUID="true" never_null="true" id="9"/>
+		<field name="cashBackMemo" uuid="E1F2A3B4C5D64789A0B1C2D3E4F5A017" type="10" limiting_length="255" never_null="true" id="10"/>
+		<field name="cashBackAccountLabel" uuid="E1F2A3B4C5D64789A0B1C2D3E4F5A018" type="10" limiting_length="255" never_null="true" id="11"/>
+		<field name="paymentsTotal" uuid="E1F2A3B4C5D64789A0B1C2D3E4F5A019" type="6" never_null="true" id="12"/>
+		<field name="otherFundsTotal" uuid="E1F2A3B4C5D64789A0B1C2D3E4F5A01A" type="6" never_null="true" id="13"/>
+		<field name="total" uuid="E1F2A3B4C5D64789A0B1C2D3E4F5A01B" type="6" never_null="true" id="14"/>
+		<field name="netToBank" uuid="E1F2A3B4C5D64789A0B1C2D3E4F5A01C" type="6" never_null="true" id="15"/>
+		<field name="UUID_SalesTransaction_DEP" uuid="E1F2A3B4C5D64789A0B1C2D3E4F5A01D" type="10" store_as_UUID="true" never_null="true" id="16"/>
+		<field name="isSaved" uuid="E1F2A3B4C5D64789A0B1C2D3E4F5A01E" type="1" never_null="true" id="17"/>
 		<primary_key field_name="UUID" field_uuid="D1E2F3A4B5C64789A0B1C2D3E4F5A6B8"/>
 	</table>
 	<table name="DepositItem" uuid="D2E2F3A4B5C64789A0B1C2D3E4F5A6B7" id="149">
@@ -2192,36 +2212,88 @@
 		<field name="UUID_Deposit" uuid="D2E2F3A4B5C64789A0B1C2D3E4F5A6B9" type="10" store_as_UUID="true" never_null="true" id="2"/>
 		<field name="lineNumber" uuid="D2E2F3A4B5C64789A0B1C2D3E4F5A6BA" type="4" never_null="true" id="3"/>
 		<field name="moreData" uuid="D2E2F3A4B5C64789A0B1C2D3E4F5A6BB" type="21" blob_switch_size="2147483647" never_null="true" id="4"/>
+		<field name="lineType" uuid="F2E3A4B5C6D75890A1B2C3D4E5F6A001" type="10" limiting_length="32" never_null="true" id="5"/>
+		<field name="UUID_Payment" uuid="F2E3A4B5C6D75890A1B2C3D4E5F6A002" type="10" store_as_UUID="true" never_null="true" id="6"/>
+		<field name="UUID_CAO" uuid="F2E3A4B5C6D75890A1B2C3D4E5F6A003" type="10" store_as_UUID="true" never_null="true" id="7"/>
+		<field name="UUID_Customer" uuid="F2E3A4B5C6D75890A1B2C3D4E5F6A004" type="10" store_as_UUID="true" never_null="true" id="8"/>
+		<field name="amount" uuid="F2E3A4B5C6D75890A1B2C3D4E5F6A005" type="6" never_null="true" id="9"/>
+		<field name="description" uuid="F2E3A4B5C6D75890A1B2C3D4E5F6A006" type="10" limiting_length="255" never_null="true" id="10"/>
+		<field name="refNo" uuid="F2E3A4B5C6D75890A1B2C3D4E5F6A007" type="10" limiting_length="64" never_null="true" id="11"/>
+		<field name="customerName" uuid="F2E3A4B5C6D75890A1B2C3D4E5F6A008" type="10" limiting_length="255" never_null="true" id="12"/>
+		<field name="accountLabel" uuid="F2E3A4B5C6D75890A1B2C3D4E5F6A009" type="10" limiting_length="255" never_null="true" id="13"/>
 		<primary_key field_name="UUID" field_uuid="D2E2F3A4B5C64789A0B1C2D3E4F5A6B8"/>
 	</table>
 	<table name="JournalEntry" uuid="A1E2F3A4B5C64789A0B1C2D3E4F5A6C7" id="150">
 		<field name="UUID" uuid="A1E2F3A4B5C64789A0B1C2D3E4F5A6C8" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="entryNumber" uuid="A1E2F3A4B5C64789A0B1C2D3E4F5A6C9" type="4" unique="true" never_null="true" id="2"/>
 		<field name="moreData" uuid="A1E2F3A4B5C64789A0B1C2D3E4F5A6CA" type="21" blob_switch_size="2147483647" never_null="true" id="3"/>
+		<field name="stmpJournalDate" uuid="A1F2A3B4C5D64789A0B1C2D3E4F5A020" type="4" never_null="true" id="4"/>
+		<field name="transactionType" uuid="A1F2A3B4C5D64789A0B1C2D3E4F5A021" type="10" limiting_length="64" never_null="true" id="5"/>
+		<field name="transactionNum" uuid="A1F2A3B4C5D64789A0B1C2D3E4F5A022" type="10" limiting_length="64" never_null="true" id="6"/>
+		<field name="adjustingEntry" uuid="A1F2A3B4C5D64789A0B1C2D3E4F5A023" type="1" never_null="true" id="7"/>
+		<field name="isSaved" uuid="A1F2A3B4C5D64789A0B1C2D3E4F5A024" type="1" never_null="true" id="8"/>
+		<field name="memo" uuid="A1F2A3B4C5D64789A0B1C2D3E4F5A025" type="10" limiting_length="255" never_null="true" id="9"/>
+		<field name="totalDebit" uuid="A1F2A3B4C5D64789A0B1C2D3E4F5A026" type="6" never_null="true" id="10"/>
+		<field name="totalCredit" uuid="A1F2A3B4C5D64789A0B1C2D3E4F5A027" type="6" never_null="true" id="11"/>
+		<field name="legacyGroupID" uuid="A1F2A3B4C5D64789A0B1C2D3E4F5A028" type="10" limiting_length="64" never_null="true" id="12"/>
+		<field name="sourceTableNumber" uuid="A1F2A3B4C5D64789A0B1C2D3E4F5A029" type="4" never_null="true" id="13"/>
+		<field name="sourceRecordID" uuid="A1F2A3B4C5D64789A0B1C2D3E4F5A02A" type="10" limiting_length="64" never_null="true" id="14"/>
 		<primary_key field_name="UUID" field_uuid="A1E2F3A4B5C64789A0B1C2D3E4F5A6C8"/>
 	</table>
 	<table name="Check" uuid="C1E2F3A4B5C64789A0B1C2D3E4F5A6B7" id="151">
 		<field name="UUID" uuid="C1E2F3A4B5C64789A0B1C2D3E4F5A6B8" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="checkNumber" uuid="C1E2F3A4B5C64789A0B1C2D3E4F5A6B9" type="4" unique="true" never_null="true" id="2"/>
 		<field name="moreData" uuid="C1E2F3A4B5C64789A0B1C2D3E4F5A6BA" type="21" blob_switch_size="2147483647" never_null="true" id="3"/>
+		<field name="checkDateStmp" uuid="C2E2F3A4B5C64789A0B1C2D3E4F50001" type="4" never_null="true" id="4"/>
+		<field name="payee" uuid="C2E2F3A4B5C64789A0B1C2D3E4F50002" type="10" limiting_length="255" never_null="true" id="5"/>
+		<field name="amount" uuid="C2E2F3A4B5C64789A0B1C2D3E4F50003" type="6" never_null="true" id="6"/>
+		<field name="memo" uuid="C2E2F3A4B5C64789A0B1C2D3E4F50004" type="10" limiting_length="255" never_null="true" id="7"/>
+		<field name="currency" uuid="C2E2F3A4B5C64789A0B1C2D3E4F50005" type="10" limiting_length="20" never_null="true" id="8"/>
+		<field name="acNumber" uuid="C2E2F3A4B5C64789A0B1C2D3E4F50006" type="10" limiting_length="40" never_null="true" id="9"/>
+		<field name="bankGlAccount" uuid="C2E2F3A4B5C64789A0B1C2D3E4F50007" type="10" limiting_length="12" never_null="true" id="10"/>
+		<field name="UUID_CAO_bank" uuid="C2E2F3A4B5C64789A0B1C2D3E4F50008" type="10" store_as_UUID="true" never_null="true" id="11"/>
+		<field name="bankAccountLabel" uuid="C2E2F3A4B5C64789A0B1C2D3E4F50009" type="10" limiting_length="255" never_null="true" id="12"/>
 		<primary_key field_name="UUID" field_uuid="C1E2F3A4B5C64789A0B1C2D3E4F5A6B8"/>
 	</table>
 	<table name="BillPayment" uuid="B1E2F3A4B5C64789A0B1C2D3E4F5A6B7" id="152">
 		<field name="UUID" uuid="B1E2F3A4B5C64789A0B1C2D3E4F5A6B8" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="paymentNumber" uuid="B1E2F3A4B5C64789A0B1C2D3E4F5A6B9" type="4" unique="true" never_null="true" id="2"/>
 		<field name="moreData" uuid="B1E2F3A4B5C64789A0B1C2D3E4F5A6BA" type="21" blob_switch_size="2147483647" never_null="true" id="3"/>
+		<field name="paymentDateStmp" uuid="B2F3A4C5D64789A0B1C2D3E4F5000101" type="4" never_null="true" id="4"/>
+		<field name="amount" uuid="B2F3A4C5D64789A0B1C2D3E4F5000102" type="6" never_null="true" id="5"/>
+		<field name="checkNumber" uuid="B2F3A4C5D64789A0B1C2D3E4F5000103" type="4" never_null="true" id="6"/>
+		<field name="invoiceNumber" uuid="B2F3A4C5D64789A0B1C2D3E4F5000104" type="4" never_null="true" id="7"/>
+		<field name="invoiceDateStmp" uuid="B2F3A4C5D64789A0B1C2D3E4F5000105" type="4" never_null="true" id="8"/>
+		<field name="debitMemoNumber" uuid="B2F3A4C5D64789A0B1C2D3E4F5000106" type="4" never_null="true" id="9"/>
+		<field name="buyItemSeqNumber" uuid="B2F3A4C5D64789A0B1C2D3E4F5000107" type="4" never_null="true" id="10"/>
 		<primary_key field_name="UUID" field_uuid="B1E2F3A4B5C64789A0B1C2D3E4F5A6B8"/>
 	</table>
 	<table name="SupplierCredit" uuid="B3C1F3A4B5C64789A0B1C2D3E4F5A6D7" id="153">
 		<field name="UUID" uuid="B3C1F3A4B5C64789A0B1C2D3E4F5A6D8" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="creditNumber" uuid="B3C1F3A4B5C64789A0B1C2D3E4F5A6D9" type="4" unique="true" never_null="true" id="2"/>
 		<field name="moreData" uuid="B3C1F3A4B5C64789A0B1C2D3E4F5A6DA" type="21" blob_switch_size="2147483647" never_null="true" id="3"/>
+		<field name="amount" uuid="C3F3A4C5D64789A0B1C2D3E4F5000101" type="6" never_null="true" id="4"/>
+		<field name="billSeqNumber" uuid="C3F3A4C5D64789A0B1C2D3E4F5000102" type="4" never_null="true" id="5"/>
+		<field name="creditDateStmp" uuid="C3F3A4C5D64789A0B1C2D3E4F5000103" type="4" never_null="true" id="6"/>
+		<field name="vendorName" uuid="C3F3A4C5D64789A0B1C2D3E4F5000104" type="10" limiting_length="255" never_null="true" id="7"/>
+		<field name="UUID_BuyingOrderLine" uuid="C3F3A4C5D64789A0B1C2D3E4F5000105" type="10" store_as_UUID="true" never_null="true" id="8"/>
 		<primary_key field_name="UUID" field_uuid="B3C1F3A4B5C64789A0B1C2D3E4F5A6D8"/>
 	</table>
 	<table name="ExpenseTransaction" uuid="E1E2F3A4B5C64789A0B1C2D3E4F5A6B7" id="154">
 		<field name="UUID" uuid="E1E2F3A4B5C64789A0B1C2D3E4F5A6B8" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
 		<field name="expenseNumber" uuid="E1E2F3A4B5C64789A0B1C2D3E4F5A6B9" type="4" unique="true" never_null="true" id="2"/>
 		<field name="moreData" uuid="E1E2F3A4B5C64789A0B1C2D3E4F5A6BA" type="21" blob_switch_size="2147483647" never_null="true" id="3"/>
+		<field name="description" uuid="E2E2F3A4B5C64789A0B1C2D3E4F50001" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="qty" uuid="E2E2F3A4B5C64789A0B1C2D3E4F50002" type="4" never_null="true" id="5"/>
+		<field name="unitPrice" uuid="E2E2F3A4B5C64789A0B1C2D3E4F50003" type="6" never_null="true" id="6"/>
+		<field name="lineTotal" uuid="E2E2F3A4B5C64789A0B1C2D3E4F50004" type="6" never_null="true" id="7"/>
+		<field name="freight" uuid="E2E2F3A4B5C64789A0B1C2D3E4F50005" type="6" never_null="true" id="8"/>
+		<field name="discount" uuid="E2E2F3A4B5C64789A0B1C2D3E4F50006" type="6" never_null="true" id="9"/>
+		<field name="glAccount" uuid="E2E2F3A4B5C64789A0B1C2D3E4F50007" type="10" limiting_length="12" never_null="true" id="10"/>
+		<field name="checkNumber" uuid="E2E2F3A4B5C64789A0B1C2D3E4F50008" type="4" never_null="true" id="11"/>
+		<field name="vendorName" uuid="E2E2F3A4B5C64789A0B1C2D3E4F50009" type="10" limiting_length="255" never_null="true" id="12"/>
+		<field name="orderStmp" uuid="E2E2F3A4B5C64789A0B1C2D3E4F5000A" type="4" never_null="true" id="13"/>
+		<field name="paidStmp" uuid="E2E2F3A4B5C64789A0B1C2D3E4F5000B" type="4" never_null="true" id="14"/>
 		<primary_key field_name="UUID" field_uuid="E1E2F3A4B5C64789A0B1C2D3E4F5A6B8"/>
 	</table>
 	<table name="FinancialReport" uuid="F1E2F3A4B5C64789A0B1C2D3E4F5A6B7" id="155">
@@ -2236,6 +2308,33 @@
 		<field name="UUID_Invoice" uuid="E8F1A2B3C4D5467890ABCDEF0123456A" type="10" store_as_UUID="true" never_null="true" id="3"/>
 		<field name="appliedAmount" uuid="E8F1A2B3C4D5467890ABCDEF0123456B" type="6" never_null="true" id="4"/>
 		<primary_key field_name="UUID" field_uuid="E8F1A2B3C4D5467890ABCDEF01234568"/>
+	</table>
+	<table name="JournalEntryLine" uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6D7" id="157">
+		<field name="UUID" uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6D8" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="UUID_JournalEntry" uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6D9" type="10" store_as_UUID="true" never_null="true" id="2"/>
+		<field name="lineNumber" uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6DA" type="4" never_null="true" id="3"/>
+		<field name="moreData" uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6DB" type="21" blob_switch_size="2147483647" never_null="true" id="4"/>
+		<field name="UUID_CAO_debit" uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6DC" type="10" store_as_UUID="true" never_null="true" id="5"/>
+		<field name="UUID_CAO_credit" uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6DD" type="10" store_as_UUID="true" never_null="true" id="6"/>
+		<field name="debitAccountLabel" uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6DE" type="10" limiting_length="255" never_null="true" id="7"/>
+		<field name="creditAccountLabel" uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6DF" type="10" limiting_length="255" never_null="true" id="8"/>
+		<field name="debitAmount" uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6E0" type="6" never_null="true" id="9"/>
+		<field name="creditAmount" uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6E1" type="6" never_null="true" id="10"/>
+		<field name="entityName" uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6E2" type="10" limiting_length="255" never_null="true" id="11"/>
+		<field name="description" uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6E3" type="10" limiting_length="255" never_null="true" id="12"/>
+		<field name="legacyUniqueID" uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6E4" type="10" limiting_length="64" never_null="true" id="13"/>
+		<primary_key field_name="UUID" field_uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6D8"/>
+	</table>
+	<table name="Bank" uuid="B2E2F3A4B5C64789A0B1C2D3E4F5A6B1" id="158">
+		<field name="UUID" uuid="B2E2F3A4B5C64789A0B1C2D3E4F5A6B2" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="acNumber" uuid="B2E2F3A4B5C64789A0B1C2D3E4F5A6B3" type="10" limiting_length="40" unique="true" never_null="true" id="2"/>
+		<field name="bankName" uuid="B2E2F3A4B5C64789A0B1C2D3E4F5A6B4" type="10" limiting_length="40" never_null="true" id="3"/>
+		<field name="glAccount" uuid="B2E2F3A4B5C64789A0B1C2D3E4F5A6B5" type="10" limiting_length="12" never_null="true" id="4"/>
+		<field name="division" uuid="B2E2F3A4B5C64789A0B1C2D3E4F5A6B6" type="10" limiting_length="20" never_null="true" id="5"/>
+		<field name="currency" uuid="B2E2F3A4B5C64789A0B1C2D3E4F5A6B7" type="10" limiting_length="20" never_null="true" id="6"/>
+		<field name="UUID_CAO" uuid="B2E2F3A4B5C64789A0B1C2D3E4F5A6B8" type="10" store_as_UUID="true" never_null="true" id="7"/>
+		<field name="moreData" uuid="B2E2F3A4B5C64789A0B1C2D3E4F5A6B9" type="21" blob_switch_size="2147483647" never_null="true" id="8"/>
+		<primary_key field_name="UUID" field_uuid="B2E2F3A4B5C64789A0B1C2D3E4F5A6B2"/>
 	</table>
 	<relation uuid="F1C2D3E4F5A64789B0C1D2E3F4A5B6DE" name_Nto1="rejectCriteriaCategory" name_1toN="rejectCriteriaItems" state="1">
 		<related_field kind="source">
@@ -2258,6 +2357,126 @@
 		<related_field kind="destination">
 			<field_ref uuid="D1E2F3A4B5C64789A0B1C2D3E4F5A6B8" name="UUID">
 				<table_ref uuid="D1E2F3A4B5C64789A0B1C2D3E4F5A6B7" name="Deposit"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="A3E2F3A4B5C64789A0B1C2D3E4F5A6BC" name_Nto1="journalEntry" name_1toN="journalEntryLines" state="1">
+		<related_field kind="source">
+			<field_ref uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6D9" name="UUID_JournalEntry">
+				<table_ref uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6D7" name="JournalEntryLine"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="A1E2F3A4B5C64789A0B1C2D3E4F5A6C8" name="UUID">
+				<table_ref uuid="A1E2F3A4B5C64789A0B1C2D3E4F5A6C7" name="JournalEntry"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="A3E2F3A4B5C64789A0B1C2D3E4F5A6BD" name_Nto1="debitAccount" name_1toN="journalEntryDebitLines" state="1">
+		<related_field kind="source">
+			<field_ref uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6DC" name="UUID_CAO_debit">
+				<table_ref uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6D7" name="JournalEntryLine"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="65FB781A111BBA4A9C7EAE76C9C35795" name="UUID">
+				<table_ref uuid="F580775371C0FC479B47D767C6CA2D9F" name="CAO"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="A3E2F3A4B5C64789A0B1C2D3E4F5A6BE" name_Nto1="creditAccount" name_1toN="journalEntryCreditLines" state="1">
+		<related_field kind="source">
+			<field_ref uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6DD" name="UUID_CAO_credit">
+				<table_ref uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6D7" name="JournalEntryLine"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="65FB781A111BBA4A9C7EAE76C9C35795" name="UUID">
+				<table_ref uuid="F580775371C0FC479B47D767C6CA2D9F" name="CAO"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="B7A4E2B9C3D1F48E6A5B0C9D8E7F6A5C" name_Nto1="glCaoAccount" name_1toN="legacyBankAccounts" state="1">
+		<related_field kind="source">
+			<field_ref uuid="B2E2F3A4B5C64789A0B1C2D3E4F5A6B8" name="UUID_CAO">
+				<table_ref uuid="B2E2F3A4B5C64789A0B1C2D3E4F5A6B1" name="Bank"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="65FB781A111BBA4A9C7EAE76C9C35795" name="UUID">
+				<table_ref uuid="F580775371C0FC479B47D767C6CA2D9F" name="CAO"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="7A4E2B9C3D1F48E6A5B0C9D8E7F6A5B1" name_Nto1="bankAccount" name_1toN="depositsToBank" state="1">
+		<related_field kind="source">
+			<field_ref uuid="E1F2A3B4C5D64789A0B1C2D3E4F5A013" name="UUID_CAO_bank">
+				<table_ref uuid="D1E2F3A4B5C64789A0B1C2D3E4F5A6B7" name="Deposit"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="65FB781A111BBA4A9C7EAE76C9C35795" name="UUID">
+				<table_ref uuid="F580775371C0FC479B47D767C6CA2D9F" name="CAO"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="7A4E2B9C3D1F48E6A5B0C9D8E7F6A5B2" name_Nto1="cashBackAccount" name_1toN="depositsWithCashBack" state="1">
+		<related_field kind="source">
+			<field_ref uuid="E1F2A3B4C5D64789A0B1C2D3E4F5A016" name="UUID_CAO_cashBack">
+				<table_ref uuid="D1E2F3A4B5C64789A0B1C2D3E4F5A6B7" name="Deposit"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="65FB781A111BBA4A9C7EAE76C9C35795" name="UUID">
+				<table_ref uuid="F580775371C0FC479B47D767C6CA2D9F" name="CAO"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="7A4E2B9C3D1F48E6A5B0C9D8E7F6A5B3" name_Nto1="depTransaction" name_1toN="depositsLinked" state="1">
+		<related_field kind="source">
+			<field_ref uuid="E1F2A3B4C5D64789A0B1C2D3E4F5A01D" name="UUID_SalesTransaction_DEP">
+				<table_ref uuid="D1E2F3A4B5C64789A0B1C2D3E4F5A6B7" name="Deposit"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="66A7606CC88C405AA14D3FA527D8C964" name="UUID">
+				<table_ref uuid="A26EDBD8B62D4DE087E21A5FA8D05B4D" name="SalesTransaction"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="7A4E2B9C3D1F48E6A5B0C9D8E7F6A5B4" name_Nto1="customer" name_1toN="customerDepositItems" state="1">
+		<related_field kind="source">
+			<field_ref uuid="F2E3A4B5C6D75890A1B2C3D4E5F6A004" name="UUID_Customer">
+				<table_ref uuid="D2E2F3A4B5C64789A0B1C2D3E4F5A6B7" name="DepositItem"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="37676CD94E8B423595ED98B5C0E9CF89" name="UUID">
+				<table_ref uuid="96D1CE81460A4F75B3F4275138C8F778" name="Customer"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="7A4E2B9C3D1F48E6A5B0C9D8E7F6A5B5" name_Nto1="caoAccount" name_1toN="depositItemLines" state="1">
+		<related_field kind="source">
+			<field_ref uuid="F2E3A4B5C6D75890A1B2C3D4E5F6A003" name="UUID_CAO">
+				<table_ref uuid="D2E2F3A4B5C64789A0B1C2D3E4F5A6B7" name="DepositItem"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="65FB781A111BBA4A9C7EAE76C9C35795" name="UUID">
+				<table_ref uuid="F580775371C0FC479B47D767C6CA2D9F" name="CAO"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="7A4E2B9C3D1F48E6A5B0C9D8E7F6A5B6" name_Nto1="includedPayment" name_1toN="depositItemsIncluding" state="1">
+		<related_field kind="source">
+			<field_ref uuid="F2E3A4B5C6D75890A1B2C3D4E5F6A002" name="UUID_Payment">
+				<table_ref uuid="D2E2F3A4B5C64789A0B1C2D3E4F5A6B7" name="DepositItem"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="66A7606CC88C405AA14D3FA527D8C964" name="UUID">
+				<table_ref uuid="A26EDBD8B62D4DE087E21A5FA8D05B4D" name="SalesTransaction"/>
 			</field_ref>
 		</related_field>
 	</relation>
@@ -3557,7 +3776,7 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="CF558440884CD84E9F39268E6E74624F" name_Nto1="supplier" name_1toN="audits" state="1">
+	<relation uuid="CF558440884CD84E9F39268E6E74624F" name_Nto1="staff" name_1toN="staffRoles" state="1">
 		<related_field kind="source">
 			<field_ref uuid="925B000C01112B4294F0F04F09516F32" name="UUID_Staff">
 				<table_ref uuid="3FCFA1819BB8A549A967817552E5B346" name="StaffRole"/>
@@ -3941,18 +4160,6 @@
 			</field_ref>
 		</related_field>
 	</relation>
-	<relation uuid="C7D48852530842BA9BC07499FAF8A048" name_Nto1="user" name_1toN="EquipmentEvents" state="1">
-		<related_field kind="source">
-			<field_ref uuid="32ED16A2B45746E6B8EFE6EA6FE606A3" name="UUID_User">
-				<table_ref uuid="FF22DCE3DFF1417CBA5017AE961C87F6" name="EquipmentEvent"/>
-			</field_ref>
-		</related_field>
-		<related_field kind="destination">
-			<field_ref uuid="34E9F9D48BE14DCD95127852F83BF1FB" name="UUID">
-				<table_ref uuid="2C75E07E18FC4733A8C98A0B31D40656" name="sfw_User"/>
-			</field_ref>
-		</related_field>
-	</relation>
 	<relation uuid="6E09B9A28820464A9EB68DB09524503F" name_Nto1="Link_136" name_1toN="Link_136_return" state="1">
 		<related_field kind="source">
 			<field_ref uuid="32ED16A2B45746E6B8EFE6EA6FE606A3" name="UUID_User">
@@ -4094,6 +4301,18 @@
 		<related_field kind="destination">
 			<field_ref uuid="AEF78036FB7D429A96DF35BE53A0E0AF" name="UUID">
 				<table_ref uuid="67220A81398C4000A84C1F180E368020" name="Lot"/>
+			</field_ref>
+		</related_field>
+	</relation>
+	<relation uuid="C3F3A4C5D64789A0B1C2D3E4F5000200" name_Nto1="buyingOrderLine" name_1toN="supplierCredits" state="1">
+		<related_field kind="source">
+			<field_ref uuid="C3F3A4C5D64789A0B1C2D3E4F5000105" name="UUID_BuyingOrderLine">
+				<table_ref uuid="B3C1F3A4B5C64789A0B1C2D3E4F5A6D7" name="SupplierCredit"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="DD082E45822D34438F391901E3773042" name="UUID">
+				<table_ref uuid="E53D02B236D68C44A666FF404D6BE05B" name="BuyingOrderLine"/>
 			</field_ref>
 		</related_field>
 	</relation>
@@ -4382,6 +4601,11 @@
 			<table_ref uuid="AD9AFF574E6E2745A70D65CE48ABAB7E" name="dfd_Line"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="285C292D2F9C489A83A9734BBF1C347C" type="3">
+		<field_ref uuid="C3F3A4C5D64789A0B1C2D3E4F5000105" name="UUID_BuyingOrderLine">
+			<table_ref uuid="B3C1F3A4B5C64789A0B1C2D3E4F5A6D7" name="SupplierCredit"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="285C76893B33FC499CC89E0F413C3C33" type="1">
 		<field_ref uuid="4040F42F6150451FA3FB8EB06B445ED9" name="UUID">
 			<table_ref uuid="12C47689CD7449C5B91DA7E216FC5FC3" name="StepTemplateTool"/>
@@ -4475,6 +4699,11 @@
 	<index kind="regular" uuid="3AA763F9E150A24191C0D1CCE2C7A774" type="7">
 		<field_ref uuid="B1F81EC2F5F12749BB2EF9BFABD9EAF7" name="total">
 			<table_ref uuid="FD34803EFD49454B9F38092174A0003C" name="JobInvoice"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="3BC9D867E8E74243962C55CBE5F4DA14" type="1">
+		<field_ref uuid="B2E2F3A4B5C64789A0B1C2D3E4F5A6B2" name="UUID">
+			<table_ref uuid="B2E2F3A4B5C64789A0B1C2D3E4F5A6B1" name="Bank"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="3CA9FF147FB3B64B9AA3C70C1E2C72FF" type="1">
@@ -4642,6 +4871,11 @@
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="53FE8A9A68DA41E6A1F8517B94241B2B" type="1">
+		<field_ref uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6D8" name="UUID">
+			<table_ref uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6D7" name="JournalEntryLine"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="5600B010EB061944931792C5AAEF1513" type="3">
 		<field_ref uuid="23BC7DB129B8C44583BCD2B16ED41753" name="UUID_Job">
 			<table_ref uuid="FD34803EFD49454B9F38092174A0003C" name="JobInvoice"/>
@@ -4655,6 +4889,11 @@
 	<index kind="regular" unique_keys="true" uuid="5614BF571B904860B9EE28190A011124" type="1">
 		<field_ref uuid="B3C1F3A4B5C64789A0B1C2D3E4F5A6D8" name="UUID">
 			<table_ref uuid="B3C1F3A4B5C64789A0B1C2D3E4F5A6D7" name="SupplierCredit"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="5707CDCFB03447D08A02A72B115FD8E8" type="3">
+		<field_ref uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6D9" name="UUID_JournalEntry">
+			<table_ref uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6D7" name="JournalEntryLine"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="572519A25A044E0E892BB859302B07C5" type="1">
@@ -4880,6 +5119,41 @@
 	<index kind="regular" unique_keys="true" uuid="7CD150698AE85D47B2CC4F0A746BE2BB" type="1">
 		<field_ref uuid="DA219A966C5E0346B979B7BD4A2E6591" name="codeID">
 			<table_ref uuid="FD10D10C9E0015458AFF59F988A373BB" name="Staff"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="7D4E5F6A8B9C4D3E2F1A0B9C8D7E6F5A" type="3">
+		<field_ref uuid="E1F2A3B4C5D64789A0B1C2D3E4F5A013" name="UUID_CAO_bank">
+			<table_ref uuid="D1E2F3A4B5C64789A0B1C2D3E4F5A6B7" name="Deposit"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="7D4E5F6A8B9C4D3E2F1A0B9C8D7E6F5B" type="3">
+		<field_ref uuid="E1F2A3B4C5D64789A0B1C2D3E4F5A016" name="UUID_CAO_cashBack">
+			<table_ref uuid="D1E2F3A4B5C64789A0B1C2D3E4F5A6B7" name="Deposit"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="7D4E5F6A8B9C4D3E2F1A0B9C8D7E6F5C" type="3">
+		<field_ref uuid="E1F2A3B4C5D64789A0B1C2D3E4F5A01D" name="UUID_SalesTransaction_DEP">
+			<table_ref uuid="D1E2F3A4B5C64789A0B1C2D3E4F5A6B7" name="Deposit"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="7D4E5F6A8B9C4D3E2F1A0B9C8D7E6F5D" type="3">
+		<field_ref uuid="D2E2F3A4B5C64789A0B1C2D3E4F5A6B9" name="UUID_Deposit">
+			<table_ref uuid="D2E2F3A4B5C64789A0B1C2D3E4F5A6B7" name="DepositItem"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="7D4E5F6A8B9C4D3E2F1A0B9C8D7E6F5E" type="3">
+		<field_ref uuid="F2E3A4B5C6D75890A1B2C3D4E5F6A002" name="UUID_Payment">
+			<table_ref uuid="D2E2F3A4B5C64789A0B1C2D3E4F5A6B7" name="DepositItem"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="7D4E5F6A8B9C4D3E2F1A0B9C8D7E6F5F" type="3">
+		<field_ref uuid="F2E3A4B5C6D75890A1B2C3D4E5F6A003" name="UUID_CAO">
+			<table_ref uuid="D2E2F3A4B5C64789A0B1C2D3E4F5A6B7" name="DepositItem"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="7D4E5F6A8B9C4D3E2F1A0B9C8D7E6F60" type="3">
+		<field_ref uuid="F2E3A4B5C6D75890A1B2C3D4E5F6A004" name="UUID_Customer">
+			<table_ref uuid="D2E2F3A4B5C64789A0B1C2D3E4F5A6B7" name="DepositItem"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="7E197F46BD838349B434193A2013A37B" type="7">
@@ -5197,6 +5471,16 @@
 			<table_ref uuid="CCC415D8C3C546D09E90E672FE1988CF" name="PurchaseOrder"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="A7B1C2D3E4F5061728394A5B6C7D8E10" type="3">
+		<field_ref uuid="A7B1C2D3E4F5061728394A5B6C7D8E01" name="seqNumber">
+			<table_ref uuid="E53D02B236D68C44A666FF404D6BE05B" name="BuyingOrderLine"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="A7B1C2D3E4F5061728394A5B6C7D8E11" type="3">
+		<field_ref uuid="13991D9F271F3247BCF7832C65529EA6" name="checkNumber">
+			<table_ref uuid="E53D02B236D68C44A666FF404D6BE05B" name="BuyingOrderLine"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="A90F65BE848BB84D827F3D9B3B5A26BA" type="3">
 		<field_ref uuid="BACD5C581C2B8644BF8526784365D436" name="UUID_DocumentModel">
 			<table_ref uuid="5E1C3E25225441628E3DBCF58BFAABF4" name="sfw_Document"/>
@@ -5317,6 +5601,11 @@
 			<table_ref uuid="96D1CE81460A4F75B3F4275138C8F778" name="Customer"/>
 		</field_ref>
 	</index>
+	<index kind="regular" uuid="B7A4E2B9C3D1F48E6A5B0C9D8E7F6A5D" type="3">
+		<field_ref uuid="B2E2F3A4B5C64789A0B1C2D3E4F5A6B8" name="UUID_CAO">
+			<table_ref uuid="B2E2F3A4B5C64789A0B1C2D3E4F5A6B1" name="Bank"/>
+		</field_ref>
+	</index>
 	<index kind="regular" uuid="B826AA2D2FD846E5B288DDC3DDF8694E" type="3">
 		<field_ref uuid="A69FB5F5AE4D4A06A4FD2CDB38846CDF" name="UUID_Type">
 			<table_ref uuid="4CA431297F2C42BE99FD232A56928CE7" name="Interaction"/>
@@ -5325,6 +5614,11 @@
 	<index kind="regular" uuid="B88A88C7EC7A2F459063291567B77872" type="3">
 		<field_ref uuid="121A17456A36054D965ACFF2075F8217" name="UUID_Division">
 			<table_ref uuid="BBADA9B28C42FC4AA02504E477DEF5BB" name="AML"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="B95BB5BC85254C0A94A0590D318298E9" type="3">
+		<field_ref uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6DC" name="UUID_CAO_debit">
+			<table_ref uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6D7" name="JournalEntryLine"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="BA61E5A44B4743199497EDF66CBF697E" type="3">
@@ -5405,6 +5699,11 @@
 	<index kind="regular" uuid="C2FF4C838C8DF24E9EAF2D4973188DE2" type="3">
 		<field_ref uuid="51E9BC9408544D40A527B62C43DBA725" name="UUID_Step">
 			<table_ref uuid="74CB192F1AF3134C9082ABA4683C0838" name="StepSpec"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="C3F3A4C5D64789A0B1C2D3E4F5000201" type="3">
+		<field_ref uuid="C3F3A4C5D64789A0B1C2D3E4F5000102" name="billSeqNumber">
+			<table_ref uuid="B3C1F3A4B5C64789A0B1C2D3E4F5A6D7" name="SupplierCredit"/>
 		</field_ref>
 	</index>
 	<index kind="regular" unique_keys="true" uuid="C4B21DC93AECE742AAF07D041BE7F747" type="7">
@@ -5557,6 +5856,11 @@
 			<table_ref uuid="D3AC71CFD00F4948816121AA74EF8DFE" name="Job"/>
 		</field_ref>
 	</index>
+	<index kind="regular" unique_keys="true" uuid="DCB438453C9441C3ACDB2FA54F7BAAEB" type="1">
+		<field_ref uuid="B2E2F3A4B5C64789A0B1C2D3E4F5A6B3" name="acNumber">
+			<table_ref uuid="B2E2F3A4B5C64789A0B1C2D3E4F5A6B1" name="Bank"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="DD147E408EF248D69FB08922B01E48D8" type="7">
 		<field_ref uuid="BA314E8B13754390B2700B893AD65AB1" name="UUID">
 			<table_ref uuid="A718BF77C87A4DB4AB861A00287FBC68" name="sfw_DocumentFolder"/>
@@ -5690,6 +5994,11 @@
 	<index kind="regular" uuid="EE70B7EACA4C464DBC64151FE6BB5C3D" type="3">
 		<field_ref uuid="133E79E80DE1455BB0F624778F7BFB44" name="UUID_targetAssigned">
 			<table_ref uuid="5DB5EC5859BC4655B933B6AD8069E3E6" name="sfw_Todo"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="F02FB1E5E8BA4030B2CB4DA35B4CA3DD" type="3">
+		<field_ref uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6DD" name="UUID_CAO_credit">
+			<table_ref uuid="A2E2F3A4B5C64789A0B1C2D3E4F5A6D7" name="JournalEntryLine"/>
 		</field_ref>
 	</index>
 	<index kind="regular" uuid="F1BBE0A36C76D248B875D6BF4E6D87D7" type="3">

@@ -15,6 +15,11 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(1; ""; "Main")
 	
 	$entry.setLBItemsColumn("expenseNumber"; "Expense #"; "width:80")
+	// Purpose: Show typed expense columns in the entry list (legacy Internal BUY_ITEMS fields).
+	// modified by 4D/PS [2026-june-29]
+	$entry.setLBItemsColumn("vendorName"; "Vendor"; "width:180")
+	$entry.setLBItemsColumn("checkNumber"; "Check #"; "width:70")
+	$entry.setLBItemsColumn("netAmount"; "Amount"; "width:80")
 	$entry.setLBItemsOrderBy("expenseNumber")
 	$entry.setMainViewLabel("All expense transactions")
 	

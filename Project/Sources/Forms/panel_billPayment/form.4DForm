@@ -13,20 +13,20 @@
 	"bottomMargin": 20,
 	"events": [
 		"onLoad",
+		"onPageChange",
 		"onValidate",
 		"onClick",
-		"onOutsideCall",
-		"onActivate",
 		"onDoubleClick",
+		"onOutsideCall",
+		"onBeginDragOver",
+		"onDragOver",
 		"onDrop",
+		"onAfterKeystroke",
 		"onMenuSelect",
 		"onPluginArea",
-		"onDragOver",
+		"onAfterEdit",
 		"onTimer",
-		"onAfterKeystroke",
-		"onBeginDragOver",
-		"onBoundVariableChange",
-		"onPageChange"
+		"onBoundVariableChange"
 	],
 	"windowTitle": "window title",
 	"destination": "detailScreen",
@@ -35,7 +35,171 @@
 			"objects": {}
 		},
 		{
-			"objects": {}
+			"objects": {
+				"label_paymentNumber": {
+					"type": "text",
+					"top": 12,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Payment #",
+					"textAlign": "right"
+				},
+				"entryField_paymentNumber": {
+					"type": "input",
+					"top": 12,
+					"left": 142,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.paymentNumber",
+					"dataSourceTypeHint": "number",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent"
+				},
+				"label_paymentDate": {
+					"type": "text",
+					"top": 12,
+					"left": 400,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Payment Date",
+					"textAlign": "right"
+				},
+				"entryField_paymentDate": {
+					"type": "input",
+					"top": 12,
+					"left": 526,
+					"width": 100,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.paymentDate",
+					"dataSourceTypeHint": "date",
+					"enterable": false
+				},
+				"label_checkNumber": {
+					"type": "text",
+					"top": 37,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Check #",
+					"textAlign": "right"
+				},
+				"entryField_checkNumber": {
+					"type": "input",
+					"top": 37,
+					"left": 142,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.checkNumber",
+					"dataSourceTypeHint": "number",
+					"enterable": false
+				},
+				"label_amount": {
+					"type": "text",
+					"top": 37,
+					"left": 240,
+					"width": 80,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Amount",
+					"textAlign": "right"
+				},
+				"entryField_amount": {
+					"type": "input",
+					"top": 37,
+					"left": 326,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.amount",
+					"dataSourceTypeHint": "number",
+					"enterable": false
+				},
+				"label_invoiceNumber": {
+					"type": "text",
+					"top": 62,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Invoice #",
+					"textAlign": "right"
+				},
+				"entryField_invoiceNumber": {
+					"type": "input",
+					"top": 62,
+					"left": 142,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.invoiceNumber",
+					"dataSourceTypeHint": "number",
+					"enterable": false
+				},
+				"label_invoiceDate": {
+					"type": "text",
+					"top": 62,
+					"left": 240,
+					"width": 80,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Invoice Date",
+					"textAlign": "right"
+				},
+				"entryField_invoiceDate": {
+					"type": "input",
+					"top": 62,
+					"left": 326,
+					"width": 100,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.invoiceDate",
+					"dataSourceTypeHint": "date",
+					"enterable": false
+				},
+				"label_buyItemSeqNumber": {
+					"type": "text",
+					"top": 87,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Bill Line #",
+					"textAlign": "right"
+				},
+				"entryField_buyItemSeqNumber": {
+					"type": "input",
+					"top": 87,
+					"left": 142,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.buyItemSeqNumber",
+					"dataSourceTypeHint": "number",
+					"enterable": false
+				},
+				"label_debitMemoNumber": {
+					"type": "text",
+					"top": 87,
+					"left": 240,
+					"width": 100,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Debit Memo #",
+					"textAlign": "right"
+				},
+				"entryField_debitMemoNumber": {
+					"type": "input",
+					"top": 87,
+					"left": 346,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.debitMemoNumber",
+					"dataSourceTypeHint": "number",
+					"enterable": false
+				}
+			}
 		}
 	],
 	"geometryStamp": 110,

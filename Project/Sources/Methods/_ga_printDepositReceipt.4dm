@@ -2,7 +2,7 @@
 
 // Purpose: Print a deposit receipt for the current Deposit panel item (header + payment/other-fund lines).
 // Uses selectionPrintTemplate.4wp via _ga_buildListFromMapping (same pattern as receivables report).
-// modified by 4D/PS [2026-june-23]
+// modified by 4D/PS [2026-june-29]
 
 var $eDeposit : cs:C1710.DepositEntity
 var $lineData : Object
@@ -11,8 +11,6 @@ var $line : Object
 var $printRow : Object
 var $mapping : Collection
 var $headerText : Text
-var $md : Object
-var $legacy : Object
 var $paymentsTotal : Real
 var $otherFundsTotal : Real
 var $grandTotal : Real
@@ -37,13 +35,6 @@ If (Form:C1466.current_item=Null:C1517)
 	cs:C1710.sfw_dialog.me.alert("Select a deposit to print.")
 Else
 	$eDeposit:=Form:C1466.current_item
-	$eDeposit.hydrateDisplayFromLegacy()
-	$eDeposit._ensureMoreData()
-	$md:=$eDeposit.moreData
-	$legacy:=Null:C1517
-	If ($md#Null:C1517) && ($md.legacy#Null:C1517)
-		$legacy:=$md.legacy
-	End if
 	
 	$lineData:=_ga_depositLoadSavedLines($eDeposit)
 	$printLines:=New collection:C1472()
@@ -73,7 +64,7 @@ Else
 		$customerName:=_ga_depositPrintAsText($line.customerName)
 		$amountTxt:=_ga_depositFormatMoney($line.amount)
 		// Purpose: Build row property-by-property — multiline New object with "" literals can raise #54.
-		// modified by 4D/PS [2026-june-23]
+		// modified by 4D/PS [2026-june-29]
 		$printRow:=New object:C1471
 		$printRow.typeLabel:=$typeLabel
 		$printRow.lineDateTxt:=$lineDateTxt
@@ -114,8 +105,8 @@ Else
 	If ($printLines.length=0)
 		cs:C1710.sfw_dialog.me.alert("This deposit has no lines to print.")
 	Else
-		$paymentsTotal:=Num:C11($md.selectedPaymentsTotal)
-		$otherFundsTotal:=Num:C11($md.otherFundsTotal)
+		$paymentsTotal:=Num:C11($eDeposit.paymentsTotal)
+		$otherFundsTotal:=Num:C11($eDeposit.otherFundsTotal)
 		If ($paymentsTotal=0)
 			For each ($line; $lineData.paymentLines)
 				$paymentsTotal:=$paymentsTotal+Num:C11($line.amount)
@@ -127,13 +118,13 @@ Else
 			End for each
 		End if
 		
-		$grandTotal:=Num:C11($md.total)
+		$grandTotal:=Num:C11($eDeposit.total)
 		If ($grandTotal=0)
 			$grandTotal:=$paymentsTotal+$otherFundsTotal
 		End if
 		
 		$cashBack:=Num:C11($eDeposit.cashBackAmount)
-		$netToBank:=Num:C11($md.netToBank)
+		$netToBank:=Num:C11($eDeposit.netToBank)
 		If ($netToBank=0)
 			$netToBank:=$grandTotal-$cashBack
 		End if
@@ -143,22 +134,10 @@ Else
 			$dateTxt:=String:C10($eDeposit.depositDate)
 		End if
 		
-		// Purpose: Read memo/account from moreData/legacy without entity getters (legacy JSON types may not be Text).
-		// modified by 4D/PS [2026-june-23]
-		$memo:=""
-		If ($md#Null:C1517) && (OB Is defined:C1231($md; "memo"))
-			$memo:=_ga_depositPrintAsText($md.memo)
-		End if
-		If ($memo="") && ($legacy#Null:C1517) && (OB Is defined:C1231($legacy; "Memo"))
-			$memo:=_ga_depositPrintAsText($legacy.Memo)
-		End if
-		
-		$accountLabel:=""
-		If ($md#Null:C1517) && (OB Is defined:C1231($md; "bankAccountName"))
-			$accountLabel:=_ga_depositPrintAsText($md.bankAccountName)
-		End if
-		If ($accountLabel="") && ($legacy#Null:C1517) && (OB Is defined:C1231($legacy; "Account"))
-			$accountLabel:=_ga_depositPrintAsText($legacy.Account)
+		$memo:=$eDeposit.memo
+		$accountLabel:=$eDeposit.bankAccountLabel
+		If ($accountLabel="")
+			$accountLabel:=$eDeposit.bankAccountName
 		End if
 		
 		$headerText:="Deposit Receipt"+Char:C90(Carriage return:K15:38)
@@ -172,7 +151,7 @@ Else
 		End if
 		$headerText:=$headerText+Char:C90(Carriage return:K15:38)
 		// Purpose: Num() before String(format) — same pattern as _ga_buildReceivablesReport.
-		// modified by 4D/PS [2026-june-23]
+		// modified by 4D/PS [2026-june-29]
 		$headerText:=$headerText+"Payments: $"+String:C10(Num:C11($paymentsTotal); "###,###,##0.00")+Char:C90(Carriage return:K15:38)
 		$headerText:=$headerText+"Other funds: $"+String:C10(Num:C11($otherFundsTotal); "###,###,##0.00")+Char:C90(Carriage return:K15:38)
 		$headerText:=$headerText+"Total: $"+String:C10(Num:C11($grandTotal); "###,###,##0.00")
@@ -183,7 +162,7 @@ Else
 		End if
 		
 		// Purpose: Build mapping with .push() — avoids multiline New object type issues.
-		// modified by 4D/PS [2026-june-23]
+		// modified by 4D/PS [2026-june-29]
 		$mapping:=New collection:C1472()
 		$colDef:=New object:C1471("header"; "Type"; "source"; "This.item.typeLabel"; "width"; "2cm"; "align"; "left")
 		$mapping.push($colDef)
@@ -199,7 +178,7 @@ Else
 		$mapping.push($colDef)
 		
 		// Purpose: Call _ga_buildListFromMapping directly (Collection items) — same as receivables report.
-		// modified by 4D/PS [2026-june-23]
+		// modified by 4D/PS [2026-june-29]
 		$options:=New object:C1471("allowEmpty"; False:C215)
 		$built:=_ga_buildListFromMapping("selectionPrintTemplate.4wp"; $mapping; $printLines; $headerText; $options)
 		If ($built#Null:C1517) && ($built.wp#Null:C1517)

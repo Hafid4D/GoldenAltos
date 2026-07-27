@@ -15,9 +15,11 @@ local Function entryDefinition()->$entry : cs:C1710.sfw_definitionEntry
 	$entry.setPanelPage(1; ""; "Main")
 	
 	$entry.setLBItemsColumn("depositNumber"; "Deposit #"; "width:60")
+	// Purpose: List columns bind to typed catalog fields (not moreData helpers).
+	// modified by 4D/PS [2026-june-29]
 	$entry.setLBItemsColumn("depositDate"; "Date"; "width:80")
-	$entry.setLBItemsColumn("accountLabel"; "Account"; "width:120")
-	$entry.setLBItemsColumn("totalAmount"; "Total"; "width:80")
+	$entry.setLBItemsColumn("bankAccountName"; "Account"; "width:120")
+	$entry.setLBItemsColumn("total"; "Total"; "width:80")
 	$entry.setLBItemsOrderBy("depositNumber")
 	$entry.setMainViewLabel("All deposits")
 	

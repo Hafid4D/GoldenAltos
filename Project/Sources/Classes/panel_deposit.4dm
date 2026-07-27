@@ -22,13 +22,18 @@ Function formMethod()
 	End if
 
 // Purpose: Initialize Form variables and default header values for a new deposit.
-// modified by 4D/PS [2026-june-23]
+// modified by 4D/PS [2026-june-29]
 Function initFormState()
 	If (Form:C1466.depositPaymentLines=Null:C1517)
 		Form:C1466.depositPaymentLines:=New collection:C1472()
 	End if
 	If (Form:C1466.depositOtherFundLines=Null:C1517)
 		Form:C1466.depositOtherFundLines:=New collection:C1472()
+	End if
+	// Purpose: Collection listbox selection (4D v20 — no LB Get selected rows on collection listboxes).
+	// modified by 4D/PS [2026-june-29]
+	If (Form:C1466.depositOtherFundLinesSelected=Null:C1517)
+		Form:C1466.depositOtherFundLinesSelected:=New collection:C1472()
 	End if
 	If (Form:C1466.depositSelectedPaymentsTotal=Null:C1517)
 		Form:C1466.depositSelectedPaymentsTotal:=0
@@ -42,6 +47,16 @@ Function initFormState()
 	If (Form:C1466.depositNetToBank=Null:C1517)
 		Form:C1466.depositNetToBank:=0
 	End if
+	// Purpose: Panel payment-line filters (same pattern as panel_lead.interactons_filters).
+	// modified by 4D/PS [2026-june-29]
+	If (Form:C1466.situation.mode="add")
+		If (Form:C1466.depositLine_filters=Null:C1517)
+			Form:C1466.depositLine_filters:=New object:C1471
+		End if
+		If (Form:C1466.depositLine_filters.customer=Null:C1517)
+			Form:C1466.depositLine_filters.customer:=New collection:C1472()
+		End if
+	End if
 	If (Form:C1466.current_item#Null:C1517) && (Form:C1466.situation.mode="add")
 		Form:C1466.current_item._initOnCreation()
 		If (Form:C1466.current_item.depositDate=Null:C1517) || (Form:C1466.current_item.depositDate=!00-00-00!)
@@ -51,39 +66,32 @@ Function initFormState()
 	End if
 
 // Purpose: Load payment/other-fund listboxes when the panel page is displayed or the item changes.
-// modified by 4D/PS [2026-june-23]
+// modified by 4D/PS [2026-june-29]
 Function loadPanelData()
 	var $data : Object
 	var $filterUUID : Text
-	var $md : Object
 	
 	This:C1470.initFormState()
 	
 	If (Form:C1466.situation.mode="add")
-		$filterUUID:=Form:C1466.current_item.UUID_Customer_filter
+		$filterUUID:=This:C1470._paymentCustomerFilterUUID()
 		If (cs:C1710.sfw_string.me.isAnEmptyUUID($filterUUID))
 			$filterUUID:=""
 		End if
 		Form:C1466.depositPaymentLines:=_ga_depositBuildPaymentLines($filterUUID)
 	Else
 		If (Form:C1466.current_item#Null:C1517)
-			Form:C1466.current_item.hydrateDisplayFromLegacy()
 			$data:=_ga_depositLoadSavedLines(Form:C1466.current_item)
 			Form:C1466.depositPaymentLines:=$data.paymentLines
 			Form:C1466.depositOtherFundLines:=$data.otherFundLines
-			Form:C1466.current_item._ensureMoreData()
-			$md:=Form:C1466.current_item.moreData
-			If ($md.selectedPaymentsTotal#Null:C1517)
-				Form:C1466.depositSelectedPaymentsTotal:=Num:C11($md.selectedPaymentsTotal)
-			End if
-			If ($md.otherFundsTotal#Null:C1517)
-				Form:C1466.depositOtherFundsTotal:=Num:C11($md.otherFundsTotal)
-			End if
-			If ($md.total#Null:C1517)
-				Form:C1466.depositGrandTotal:=Num:C11($md.total)
-			End if
-			If ($md.netToBank#Null:C1517)
-				Form:C1466.depositNetToBank:=Num:C11($md.netToBank)
+			Form:C1466.depositSelectedPaymentsTotal:=Num:C11(Form:C1466.current_item.paymentsTotal)
+			Form:C1466.depositOtherFundsTotal:=Num:C11(Form:C1466.current_item.otherFundsTotal)
+			Form:C1466.depositGrandTotal:=Num:C11(Form:C1466.current_item.total)
+			Form:C1466.depositNetToBank:=Num:C11(Form:C1466.current_item.netToBank)
+			// Purpose: Recompute totals from lines when header totals were not stored (older rows).
+			// modified by 4D/PS [2026-june-29]
+			If (Form:C1466.depositGrandTotal=0) && ((Form:C1466.depositPaymentLines.length>0) || (Form:C1466.depositOtherFundLines.length>0))
+				_ga_depositRecalcTotals()
 			End if
 			Form:C1466.panelDepositWorkDate:=Form:C1466.current_item.depositDate
 		End if
@@ -96,6 +104,15 @@ Function loadPanelData()
 		End if
 	End if
 	_ga_depositTouchCollections()
+
+// Purpose: Return the optional customer UUID used to filter undeposited PAY lines (empty = all).
+// Returns: Text
+// modified by 4D/PS [2026-june-26]
+Function _paymentCustomerFilterUUID()->$uuid : Text
+	$uuid:=""
+	If (Form:C1466.depositLine_filters#Null:C1517) && (Form:C1466.depositLine_filters.customer#Null:C1517) && (Form:C1466.depositLine_filters.customer.length>0)
+		$uuid:=Form:C1466.depositLine_filters.customer[0]
+	End if
 
 Function redrawAndSetVisible()
 	var $editable : Boolean
@@ -110,9 +127,9 @@ Function redrawAndSetVisible()
 	$editable:=This:C1470._canEdit()
 	
 	// Purpose: Subform container size can be 0 on first draw — use a safe minimum for header layout math.
-	// modified by 4D/PS [2026-june-23]
-	If ($widthSubform<600)
-		$widthSubform:=600
+	// modified by 4D/PS [2026-june-29]
+	If ($widthSubform<780)
+		$widthSubform:=780
 	End if
 	If ($heightSubform<400)
 		$heightSubform:=400
@@ -126,7 +143,7 @@ Function redrawAndSetVisible()
 	This:C1470.drawPup_cashBackAccount()
 	
 	// Purpose: Header fields stay on page 0 but remain visible on the Main tab — layout on every redraw.
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	This:C1470._layoutHeaderFields($widthSubform)
 	
 	OBJECT SET ENABLED:C1123(*; "entryField_depositDate"; $editable)
@@ -135,11 +152,11 @@ Function redrawAndSetVisible()
 	OBJECT SET ENABLED:C1123(*; "pup_bank"; $editable)
 	
 	// Purpose: Header memo is kept in the data model but hidden to match the deposit mockup layout.
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	OBJECT SET VISIBLE:C603(*; "label_memo"; False:C215)
 	OBJECT SET VISIBLE:C603(*; "entryField_memo"; False:C215)
 	// Purpose: Customer filter is creation-only (mockup); hide in browse mode.
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	OBJECT SET VISIBLE:C603(*; "label_customer"; (Form:C1466.situation.mode="add"))
 	OBJECT SET VISIBLE:C603(*; "pup_customer"; (Form:C1466.situation.mode="add"))
 	OBJECT SET VISIBLE:C603(*; "lbl_customerHint"; (Form:C1466.situation.mode="add"))
@@ -154,10 +171,34 @@ Function redrawAndSetVisible()
 	OBJECT SET ENABLED:C1123(*; "entryField_cashBackMemo"; $editable)
 	OBJECT SET ENABLED:C1123(*; "pup_cashBackAccount"; $editable)
 	
+	This:C1470._applyDepositListboxColumns($editable)
+	
 	Case of
 		: (FORM Get current page:C276(*)=1)
 			This:C1470._layoutMainPage($widthSubform; $heightSubform)
 	End case
+
+// Purpose: Lock listbox column minimum widths so headers stay readable when the panel is resized.
+// Parameters: $editable : Boolean — when False (browse), hide the include checkbox column.
+// modified by 4D/PS [2026-june-29]
+Function _applyDepositListboxColumns($editable : Boolean)
+	If ($editable)
+		LISTBOX SET COLUMN WIDTH:C833(*; "col_include"; 40; 36)
+	Else
+		LISTBOX SET COLUMN WIDTH:C833(*; "col_include"; 0; 0)
+	End if
+	LISTBOX SET COLUMN WIDTH:C833(*; "col_customer"; 140; 100)
+	LISTBOX SET COLUMN WIDTH:C833(*; "col_date"; 80; 72)
+	LISTBOX SET COLUMN WIDTH:C833(*; "col_type"; 80; 64)
+	LISTBOX SET COLUMN WIDTH:C833(*; "col_memo"; 160; 96)
+	LISTBOX SET COLUMN WIDTH:C833(*; "col_ref"; 80; 64)
+	LISTBOX SET COLUMN WIDTH:C833(*; "col_amount"; 90; 72)
+	LISTBOX SET COLUMN WIDTH:C833(*; "col_of_num"; 40; 36)
+	LISTBOX SET COLUMN WIDTH:C833(*; "col_of_customer"; 120; 96)
+	LISTBOX SET COLUMN WIDTH:C833(*; "col_of_account"; 140; 100)
+	LISTBOX SET COLUMN WIDTH:C833(*; "col_of_desc"; 160; 96)
+	LISTBOX SET COLUMN WIDTH:C833(*; "col_of_ref"; 80; 64)
+	LISTBOX SET COLUMN WIDTH:C833(*; "col_of_amount"; 90; 72)
 
 // Purpose: Return True when the deposit panel accepts user edits (new deposit only).
 // Returns: Boolean
@@ -186,8 +227,8 @@ Function _layoutHeaderFields($widthSubform : Integer)
 	$labelColW:=120
 	$headerFieldLeft:=142
 	$subformWidth:=$widthSubform
-	If ($subformWidth<600)
-		$subformWidth:=600
+	If ($subformWidth<780)
+		$subformWidth:=780
 	End if
 	$hdrFieldWidth:=$subformWidth-$headerFieldLeft-$margin
 	If ($hdrFieldWidth<200)
@@ -201,7 +242,7 @@ Function _layoutHeaderFields($widthSubform : Integer)
 	OBJECT SET COORDINATES:C1248(*; "lbl_customerHint"; $headerFieldLeft; 59; $headerFieldLeft+$hdrFieldWidth; 76)
 	
 	// Purpose: Place Deposit Date and calendar on the same row as Deposit #, aligned to the right (mockup layout).
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	$dateFieldW:=100
 	$btnSize:=17
 	$dateBlockW:=$labelColW+$dateFieldW+4+$btnSize
@@ -216,7 +257,7 @@ Function _layoutHeaderFields($widthSubform : Integer)
 	OBJECT SET COORDINATES:C1248(*; "btn_depositDate"; $dateFieldLeft+$dateFieldW+4; 12; $dateFieldLeft+$dateFieldW+4+$btnSize; 12+$btnSize)
 	
 	// Purpose: Compact header in browse mode when the customer filter row is hidden.
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	If (Form:C1466.situation.mode#"add")
 		OBJECT SET COORDINATES:C1248(*; "label_account"; 12; 37; 132; 54)
 		OBJECT GET COORDINATES:C663(*; "pup_bank"; $left; $top; $right; $bottom)
@@ -229,7 +270,7 @@ Function _layoutHeaderFields($widthSubform : Integer)
 // $y : Integer — top coordinate
 // $widthSubform / $margin : Integer — container width and right margin
 // $rowH / $labelW / $valW : Integer — row and column widths
-// modified by 4D/PS [2026-june-23]
+// modified by 4D/PS [2026-june-29]
 Function _placeRightTotal($labelObj : Text; $valueObj : Text; $y : Integer; $widthSubform : Integer; $margin : Integer; $rowH : Integer; $labelW : Integer; $valW : Integer)
 	var $right : Integer
 	
@@ -294,13 +335,18 @@ Function _layoutMainPage($widthSubform : Integer; $heightSubform : Integer)
 	$totalLabelW:=180
 	$totalValW:=120
 	$fieldWidth:=$widthSubform-$fieldLeft-$margin
-	If ($fieldWidth<200)
-		$fieldWidth:=200
+	If ($fieldWidth<240)
+		$fieldWidth:=240
 	End if
 	
+	// Purpose: Keep listboxes at a readable width; horizontal scroll when the panel is narrower.
+	// modified by 4D/PS [2026-june-29]
+	$minListboxWidth:=720
 	$isAddMode:=(Form:C1466.situation.mode="add")
 	$hasPayments:=(Form:C1466.depositPaymentLines#Null:C1517) && (Form:C1466.depositPaymentLines.length>0)
-	$showNoPaymentsMsg:=False:C215
+	// Purpose: Show empty-state hint when creating a deposit with no undeposited PAY lines (Zoho GA3-T403 step 3).
+	// modified by 4D/PS [2026-june-29]
+	$showNoPaymentsMsg:=($isAddMode) && (Not:C34($hasPayments))
 	$showNetToBank:=This:C1470._showNetToBank()
 	$selectHintH:=0
 	$addFundsHintH:=0
@@ -326,9 +372,9 @@ Function _layoutMainPage($widthSubform : Integer; $heightSubform : Integer)
 	OBJECT SET VISIBLE:C603(*; "btn_pickOtherFundCustomer"; $isAddMode)
 	
 	// Purpose: Anchor footer from the bottom; shrink footer when Net to bank is hidden (mockup shows Total only).
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	// Purpose: Reserve space for the SFW bottom toolbar so Total stays visible.
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	$bottomMargin:=44
 	$footerContentH:=132
 	If ($showNetToBank)
@@ -355,6 +401,10 @@ Function _layoutMainPage($widthSubform : Integer; $heightSubform : Integer)
 	OBJECT SET COORDINATES:C1248(*; "header_bkgd_main"; 0; 114; $widthSubform; 144)
 	
 	$y:=148
+	If ($showNoPaymentsMsg)
+		OBJECT SET COORDINATES:C1248(*; "lbl_noUndeposited"; $labelLeft; $y; $widthSubform-$margin; $y+$rowH+4)
+		$y:=$y+$rowH+8
+	End if
 	If ($isAddMode) && ($hasPayments)
 		OBJECT SET COORDINATES:C1248(*; "lbl_selectPaymentHint"; $labelLeft; $y; $widthSubform-$margin; $y+$selectHintH)
 		$y:=$y+$selectHintH+4
@@ -368,7 +418,7 @@ Function _layoutMainPage($widthSubform : Integer; $heightSubform : Integer)
 		If ($payLbH<72)
 			$payLbH:=72
 		End if
-		OBJECT SET COORDINATES:C1248(*; "lb_paymentLines"; $margin; $payLbTop; $widthSubform-$margin; $payLbTop+$payLbH)
+		OBJECT SET COORDINATES:C1248(*; "lb_paymentLines"; $margin; $payLbTop; $margin+$minListboxWidth; $payLbTop+$payLbH)
 		$y:=$payLbTop+$payLbH+4
 		This:C1470._placeRightTotal("lbl_selectedPaymentsTotal"; "val_selectedPaymentsTotal"; $y; $widthSubform; $margin; $rowH; $totalLabelW; $totalValW)
 		$y:=$y+$rowH+8
@@ -383,7 +433,7 @@ Function _layoutMainPage($widthSubform : Integer; $heightSubform : Integer)
 	$otherLbTop:=$y
 	
 	// Purpose: Clamp other-fund listbox height with precomputed gap (safe on browse / list selection).
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	$otherLbGap:=$otherLbBottom-$otherLbTop
 	If ($otherLbGap<$minOtherLbH)
 		$otherLbTop:=$otherLbBottom-$minOtherLbH
@@ -396,7 +446,7 @@ Function _layoutMainPage($widthSubform : Integer; $heightSubform : Integer)
 	End if
 	
 	// Purpose: In browse mode, shrink empty listboxes instead of filling the whole panel.
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	If (Not:C34($isAddMode))
 		$lineCount:=0
 		If (Form:C1466.depositOtherFundLines#Null:C1517)
@@ -414,7 +464,7 @@ Function _layoutMainPage($widthSubform : Integer; $heightSubform : Integer)
 			$otherLbBottom:=$desiredLbBottom
 		End if
 	End if
-	OBJECT SET COORDINATES:C1248(*; "lb_otherFundLines"; $margin; $otherLbTop; $widthSubform-$margin; $otherLbBottom)
+	OBJECT SET COORDINATES:C1248(*; "lb_otherFundLines"; $margin; $otherLbTop; $margin+$minListboxWidth; $otherLbBottom)
 	
 	If ($isAddMode)
 		OBJECT SET COORDINATES:C1248(*; "btn_addOtherFund"; $margin; $btnTop; $margin+80; $btnTop+22)
@@ -444,24 +494,30 @@ Function _layoutMainPage($widthSubform : Integer; $heightSubform : Integer)
 Function selectCustomer()
 	var $selector : cs:C1710.sfw_definitionSelector
 	var $itemSeleted : Object
+	var $eCustomer : cs:C1710.CustomerEntity
 	If (This:C1470._canEdit())
 		$selector:=cs:C1710.sfw_definitionSelector.new("selectorCustomers"; "customer")
 		$selector.setTitle("Filter payments by customer")
 		$selector.setOptions("noCutLink")
-		If (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_Customer_filter)))
-			$selector.setCurrentItem(ds:C1482.Customer.get(Form:C1466.current_item.UUID_Customer_filter))
+		$eCustomer:=Null:C1517
+		If (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID(This:C1470._paymentCustomerFilterUUID())))
+			$eCustomer:=ds:C1482.Customer.get(This:C1470._paymentCustomerFilterUUID())
 		End if
+		$selector.setCurrentItem($eCustomer)
 		$selector.openSelector()
 		Case of
 			: ($selector.isSelected())
 				$itemSeleted:=$selector.getCurrentItem()
-				If ($itemSeleted#Null:C1517) && (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID($itemSeleted.UUID)))
-					Form:C1466.current_item.UUID_Customer_filter:=$itemSeleted.UUID
-				End if
+				Case of
+					: ($itemSeleted=Null:C1517)
+					: (cs:C1710.sfw_string.me.isAnEmptyUUID($itemSeleted.UUID)=False:C215)
+						Form:C1466.depositLine_filters.customer:=New collection:C1472($itemSeleted.UUID)
+				End case
+				This:C1470.drawPup_customer()
 			: ($selector.asCutTheLink())
-				Form:C1466.current_item.UUID_Customer_filter:=""
+				Form:C1466.depositLine_filters.customer:=New collection:C1472()
+				This:C1470.drawPup_customer()
 		End case
-		This:C1470.drawPup_customer()
 		This:C1470.reloadPaymentLines()
 	End if
 
@@ -470,11 +526,12 @@ Function drawPup_customer()
 	var $eCustomer : cs:C1710.CustomerEntity
 	If (Form:C1466.current_item#Null:C1517)
 		$name:="All customers"
-		If (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_Customer_filter)))
-			$eCustomer:=ds:C1482.Customer.get(Form:C1466.current_item.UUID_Customer_filter)
-			If ($eCustomer#Null:C1517)
-				$name:=$eCustomer.name
-			End if
+		$eCustomer:=Null:C1517
+		If (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID(This:C1470._paymentCustomerFilterUUID())))
+			$eCustomer:=ds:C1482.Customer.get(This:C1470._paymentCustomerFilterUUID())
+		End if
+		If ($eCustomer#Null:C1517)
+			$name:=$eCustomer.name
 		End if
 		Form:C1466.sfw.drawButtonPup("pup_customer"; $name; "sfw/image/skin/rainbow/icon/spacer-1x24.png"; False:C215)
 	End if
@@ -514,7 +571,7 @@ Function drawPup_cashBackAccount()
 Function reloadPaymentLines()
 	var $filterUUID : Text
 	If (Form:C1466.situation.mode="add")
-		$filterUUID:=Form:C1466.current_item.UUID_Customer_filter
+		$filterUUID:=This:C1470._paymentCustomerFilterUUID()
 		If (cs:C1710.sfw_string.me.isAnEmptyUUID($filterUUID))
 			$filterUUID:=""
 		End if
@@ -543,29 +600,33 @@ Function addOtherFundLine()
 	End if
 
 Function removeOtherFundLine()
-	var $rows : Collection
+	var $line : Object
 	var $idx : Integer
 	If (This:C1470._canEdit())
-		$rows:=LB Get selected rows:C1098(*; "lb_otherFundLines")
-		If ($rows.length>0)
-			$idx:=$rows[0]-1
-			If ($idx>=0) && ($idx<Form:C1466.depositOtherFundLines.length)
-				Form:C1466.depositOtherFundLines.remove($idx)
-				This:C1470._renumberOtherFundLines()
-				_ga_depositRecalcTotals()
-				_ga_depositTouchCollections()
-			End if
+		// Purpose: Remove user-selected rows via selectedItemsSource (collection listbox pattern).
+		// modified by 4D/PS [2026-june-29]
+		If (Form:C1466.depositOtherFundLinesSelected#Null:C1517) && (Form:C1466.depositOtherFundLinesSelected.length>0)
+			For each ($line; Form:C1466.depositOtherFundLinesSelected)
+				$idx:=Form:C1466.depositOtherFundLines.indexOf($line)
+				If ($idx>=0)
+					Form:C1466.depositOtherFundLines.remove($idx)
+				End if
+			End for each
+			Form:C1466.depositOtherFundLinesSelected:=New collection:C1472()
+			This:C1470._renumberOtherFundLines()
+			_ga_depositRecalcTotals()
+			_ga_depositTouchCollections()
 		End if
 	End if
 
 Function pickOtherFundAccount()
-	var $rows : Collection
+	var $line : Object
 	var $idx : Integer
 	If (This:C1470._canEdit())
-		$rows:=LB Get selected rows:C1098(*; "lb_otherFundLines")
-		If ($rows.length>0)
-			$idx:=$rows[0]-1
-			If ($idx>=0) && ($idx<Form:C1466.depositOtherFundLines.length)
+		If (Form:C1466.depositOtherFundLinesSelected#Null:C1517) && (Form:C1466.depositOtherFundLinesSelected.length>0)
+			$line:=Form:C1466.depositOtherFundLinesSelected[0]
+			$idx:=Form:C1466.depositOtherFundLines.indexOf($line)
+			If ($idx>=0)
 				Form:C1466.depositOtherFundLineIndex:=$idx
 				_ga_depositPickBankAccount("otherFund")
 				_ga_depositRecalcTotals()
@@ -578,13 +639,13 @@ Function pickOtherFundAccount()
 	End if
 
 Function pickOtherFundCustomer()
-	var $rows : Collection
+	var $line : Object
 	var $idx : Integer
 	If (This:C1470._canEdit())
-		$rows:=LB Get selected rows:C1098(*; "lb_otherFundLines")
-		If ($rows.length>0)
-			$idx:=$rows[0]-1
-			If ($idx>=0) && ($idx<Form:C1466.depositOtherFundLines.length)
+		If (Form:C1466.depositOtherFundLinesSelected#Null:C1517) && (Form:C1466.depositOtherFundLinesSelected.length>0)
+			$line:=Form:C1466.depositOtherFundLinesSelected[0]
+			$idx:=Form:C1466.depositOtherFundLines.indexOf($line)
+			If ($idx>=0)
 				Form:C1466.depositOtherFundLineIndex:=$idx
 				_ga_depositPickCustomerForOtherFund()
 			Else
@@ -606,7 +667,7 @@ Function onOtherFundLinesChange()
 	_ga_depositRecalcTotals()
 
 // Purpose: Keep line numbers sequential after add/remove on other-funds rows.
-// modified by 4D/PS [2026-june-23]
+// modified by 4D/PS [2026-june-29]
 Function _renumberOtherFundLines()
 	var $line : Object
 	var $num : Integer

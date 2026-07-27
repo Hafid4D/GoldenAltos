@@ -15,18 +15,17 @@ If (Form:C1466.sfw.lb_items.length>0)
 	$mapping:=New collection:C1472(\
 		New object:C1471("header"; "Deposit #"; "field"; "depositNumber"; "footerOperation"; ""); \
 		New object:C1471("header"; "Date"; "field"; "depositDate"; "footerOperation"; ""); \
-		New object:C1471("header"; "Account"; "field"; "accountLabel"; "footerOperation"; ""); \
-		New object:C1471("header"; "Total"; "field"; "totalAmount"; "footerOperation"; ""))
-	// Purpose: Flatten entity rows — ExcelDataExporter reads storage fields via ["field"]; entity helpers (accountLabel, totalAmount) need explicit values.
-	// modified by 4D/PS [2026-june-23]
+		New object:C1471("header"; "Account"; "field"; "bankAccountLabel"; "footerOperation"; ""); \
+		New object:C1471("header"; "Total"; "field"; "total"; "footerOperation"; ""))
+	// Purpose: Flatten entity rows for Excel export using typed catalog fields.
+	// modified by 4D/PS [2026-june-29]
 	$exportRows:=New collection:C1472()
 	For each ($eDeposit; Form:C1466.sfw.lb_items)
-		$eDeposit.hydrateDisplayFromLegacy()
 		$row:=New object:C1471(\
 			"depositNumber"; $eDeposit.depositNumber; \
 			"depositDate"; $eDeposit.depositDate; \
-			"accountLabel"; $eDeposit.accountLabel(); \
-			"totalAmount"; $eDeposit.totalAmount())
+			"bankAccountLabel"; $eDeposit.bankAccountLabel; \
+			"total"; $eDeposit.total)
 		$exportRows.push($row)
 	End for each
 	If ($fileName="main") | ($fileName="Main view")
@@ -37,7 +36,7 @@ If (Form:C1466.sfw.lb_items.length>0)
 		$fileName:=Replace string:C233($fileName; " "; "")
 	End if 
 	// Purpose: Build export folder via 4D.Folder API (Get 4D folder text is not a valid POSIX path for Folder()).
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	$destinationFolder:=Folder:C1567(fk resources folder:K87:11).folder("exportedData").folder("Deposit")
 	If (Not:C34($destinationFolder.exists))
 		$destinationFolder.create()

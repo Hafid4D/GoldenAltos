@@ -13,32 +13,412 @@
 	"bottomMargin": 20,
 	"events": [
 		"onLoad",
+		"onPageChange",
 		"onValidate",
 		"onClick",
-		"onOutsideCall",
-		"onActivate",
 		"onDoubleClick",
+		"onOutsideCall",
+		"onBeginDragOver",
+		"onDragOver",
 		"onDrop",
+		"onAfterKeystroke",
 		"onMenuSelect",
 		"onPluginArea",
-		"onDragOver",
+		"onAfterEdit",
 		"onTimer",
-		"onAfterKeystroke",
-		"onBeginDragOver",
-		"onBoundVariableChange",
-		"onPageChange"
+		"onBoundVariableChange"
 	],
 	"windowTitle": "window title",
 	"destination": "detailScreen",
 	"pages": [
 		{
-			"objects": {}
+			"objects": {
+				"label_entryNumber": {
+					"type": "text",
+					"top": 12,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Journal #",
+					"textAlign": "right"
+				},
+				"entryField_entryNumber": {
+					"type": "input",
+					"top": 12,
+					"left": 142,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.entryNumber",
+					"dataSourceTypeHint": "number",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent"
+				},
+				"label_journalDate": {
+					"type": "text",
+					"top": 12,
+					"left": 400,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Journal Date",
+					"textAlign": "right"
+				},
+				"entryField_journalDate": {
+					"type": "input",
+					"top": 12,
+					"left": 526,
+					"width": 100,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.journalDate",
+					"dataSourceTypeHint": "date",
+					"enterable": false,
+					"method": "ObjectMethods/entryField_journalDate.4dm",
+					"events": [
+						"onDataChange"
+					]
+				},
+				"btn_journalDate": {
+					"type": "button",
+					"text": " ",
+					"top": 12,
+					"left": 630,
+					"width": 17,
+					"height": 17,
+					"events": [
+						"onClick",
+						"onDoubleClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"icon": "/RESOURCES/image/element/calendar_black.png",
+					"textPlacement": "center",
+					"method": "ObjectMethods/btn_journalDate.4dm",
+					"visibility": "visible",
+					"iconFrames": 1,
+					"focusable": false,
+					"dataSource": ""
+				},
+				"label_transactionType": {
+					"type": "text",
+					"top": 37,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Trans Type",
+					"textAlign": "right"
+				},
+				"entryField_transactionType": {
+					"type": "input",
+					"top": 37,
+					"left": 142,
+					"width": 180,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.transactionType",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent"
+				},
+				"label_transactionNum": {
+					"type": "text",
+					"top": 37,
+					"left": 400,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Trans Num",
+					"textAlign": "right"
+				},
+				"entryField_transactionNum": {
+					"type": "input",
+					"top": 37,
+					"left": 526,
+					"width": 100,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.transactionNum",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent"
+				},
+				"label_memo": {
+					"type": "text",
+					"top": 62,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Memo",
+					"textAlign": "right"
+				},
+				"entryField_memo": {
+					"type": "input",
+					"top": 62,
+					"left": 142,
+					"width": 504,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.memo",
+					"events": [
+						"onDataChange"
+					]
+				},
+				"header_bkgd5": {
+					"type": "rectangle",
+					"top": 132,
+					"left": 0,
+					"width": 1000,
+					"height": 805,
+					"sizingX": "fixed",
+					"fill": "#E4E4E4",
+					"stroke": "transparent"
+				}
+			}
 		},
 		{
-			"objects": {}
+			"objects": {
+				"header_bkgd_main": {
+					"type": "rectangle",
+					"top": 114,
+					"left": 0,
+					"width": 1000,
+					"height": 30,
+					"sizingX": "fixed",
+					"fill": "#A2C6D8",
+					"stroke": "transparent"
+				},
+				"lbl_mainTab": {
+					"type": "text",
+					"top": 121,
+					"left": 8,
+					"width": 120,
+					"height": 17,
+					"text": "Main",
+					"fontSize": 12,
+					"fontWeight": "bold"
+				},
+				"lbl_journalLines": {
+					"type": "text",
+					"top": 148,
+					"left": 8,
+					"width": 200,
+					"height": 17,
+					"text": "Journal lines",
+					"fontWeight": "bold"
+				},
+				"lb_journalLines": {
+					"type": "listbox",
+					"top": 172,
+					"left": 8,
+					"width": 900,
+					"height": 280,
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.journalEntryLines",
+					"selectedItemsSource": "Form:C1466.journalEntryLinesSelected",
+					"scrollbarHorizontal": "automatic",
+					"scrollbarVertical": "automatic",
+					"method": "ObjectMethods/lb_journalLines.4dm",
+					"events": [
+						"onDataChange"
+					],
+					"columns": [
+						{
+							"name": "col_je_num",
+							"dataSource": "This:C1470.lineNumber",
+							"width": 40,
+							"header": {
+								"text": "#",
+								"name": "Header1"
+							},
+							"footer": {
+								"name": "Footer1"
+							}
+						},
+						{
+							"name": "col_je_debitAcc",
+							"dataSource": "This:C1470.debitAccountName",
+							"width": 140,
+							"enterable": false,
+							"header": {
+								"text": "Debit Acc",
+								"name": "Header2"
+							},
+							"footer": {
+								"name": "Footer2"
+							}
+						},
+						{
+							"name": "col_je_creditAcc",
+							"dataSource": "This:C1470.creditAccountName",
+							"width": 140,
+							"enterable": false,
+							"header": {
+								"text": "Credit Acc",
+								"name": "Header3"
+							},
+							"footer": {
+								"name": "Footer3"
+							}
+						},
+						{
+							"name": "col_je_debit",
+							"dataSource": "This:C1470.debitAmount",
+							"width": 80,
+							"enterable": true,
+							"dataSourceTypeHint": "number",
+							"header": {
+								"text": "Debit",
+								"name": "Header4"
+							},
+							"footer": {
+								"name": "Footer4"
+							}
+						},
+						{
+							"name": "col_je_credit",
+							"dataSource": "This:C1470.creditAmount",
+							"width": 80,
+							"enterable": true,
+							"dataSourceTypeHint": "number",
+							"header": {
+								"text": "Credit",
+								"name": "Header5"
+							},
+							"footer": {
+								"name": "Footer5"
+							}
+						},
+						{
+							"name": "col_je_name",
+							"dataSource": "This:C1470.entityName",
+							"width": 120,
+							"enterable": true,
+							"header": {
+								"text": "Name",
+								"name": "Header6"
+							},
+							"footer": {
+								"name": "Footer6"
+							}
+						},
+						{
+							"name": "col_je_desc",
+							"dataSource": "This:C1470.description",
+							"width": 200,
+							"enterable": true,
+							"header": {
+								"text": "Description",
+								"name": "Header7"
+							},
+							"footer": {
+								"name": "Footer7"
+							}
+						}
+					]
+				},
+				"btn_addLine": {
+					"type": "button",
+					"top": 356,
+					"left": 8,
+					"width": 80,
+					"height": 20,
+					"text": "Add line",
+					"method": "ObjectMethods/btn_addLine.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"btn_removeLine": {
+					"type": "button",
+					"top": 356,
+					"left": 96,
+					"width": 80,
+					"height": 20,
+					"text": "Remove",
+					"method": "ObjectMethods/btn_removeLine.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"btn_pickDebit": {
+					"type": "button",
+					"top": 356,
+					"left": 200,
+					"width": 100,
+					"height": 20,
+					"text": "Set debit acc",
+					"method": "ObjectMethods/btn_pickDebit.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"btn_pickCredit": {
+					"type": "button",
+					"top": 356,
+					"left": 308,
+					"width": 100,
+					"height": 20,
+					"text": "Set credit acc",
+					"method": "ObjectMethods/btn_pickCredit.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"lbl_totalDebit": {
+					"type": "text",
+					"top": 390,
+					"left": 580,
+					"width": 120,
+					"height": 17,
+					"text": "Total Debit",
+					"textAlign": "right",
+					"fontWeight": "bold"
+				},
+				"val_totalDebit": {
+					"type": "input",
+					"top": 388,
+					"left": 708,
+					"width": 120,
+					"height": 20,
+					"dataSource": "Form:C1466.journalTotalDebit",
+					"dataSourceTypeHint": "number",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "#A2C6D8",
+					"textAlign": "right"
+				},
+				"lbl_totalCredit": {
+					"type": "text",
+					"top": 414,
+					"left": 580,
+					"width": 120,
+					"height": 17,
+					"text": "Total Credit",
+					"textAlign": "right",
+					"fontWeight": "bold"
+				},
+				"val_totalCredit": {
+					"type": "input",
+					"top": 412,
+					"left": 708,
+					"width": 120,
+					"height": 20,
+					"dataSource": "Form:C1466.journalTotalCredit",
+					"dataSourceTypeHint": "number",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "#A2C6D8",
+					"textAlign": "right"
+				}
+			}
 		}
 	],
-	"geometryStamp": 110,
+	"geometryStamp": 112,
 	"inheritedForm": "sfw_bkgd_header_3lines",
 	"method": "method.4dm",
 	"editor": {

@@ -1,87 +1,85 @@
 //%attributes = {}
 
-// Purpose: Load saved DepositItem rows into panel listbox collections for view mode.
+// Purpose: Load saved DepositItem rows into panel listbox collections for view mode (typed catalog fields).
 // Parameters:
 // $eDeposit : cs.DepositEntity — deposit header
 // Returns: Object — { paymentLines : Collection, otherFundLines : Collection }
-// modified by 4D/PS [2026-june-23]
+// modified by 4D/PS [2026-june-29]
 
 #DECLARE($eDeposit : cs:C1710.DepositEntity) -> $data : Object
 
 var $eLine : cs:C1710.DepositItemEntity
+var $ePay : cs:C1710.SalesTransactionEntity
+var $eCustomer : cs:C1710.CustomerEntity
+var $eCao : cs:C1710.CAOEntity
 var $paymentLines : Collection
 var $otherFundLines : Collection
 var $line : Object
-var $md : Object
-var $legacy : Object
-var $invoiceNum : Integer
+var $refNo : Text
+var $typeName : Text
 
 $paymentLines:=New collection:C1472()
 $otherFundLines:=New collection:C1472()
 
 For each ($eLine; ds:C1482.DepositItem.query("UUID_Deposit = :1"; $eDeposit.UUID).orderBy("lineNumber"))
-	$md:=$eLine.moreData
-	If ($md=Null:C1517)
-		continue
-	End if
-	
-	If ($md.lineType="payment")
-		// Purpose: Build payment line property-by-property with safe Text coercion on moreData fields.
-		// modified by 4D/PS [2026-june-23]
+	If ($eLine.lineType="payment")
 		$line:=New object:C1471
 		$line.include:=1
-		$line.UUID_Payment:=$md.UUID_Payment
-		$line.transactionNumber:=_ga_depositPrintAsText($md.transactionNumber)
-		$line.transactionDate:=$md.transactionDate
-		$line.typeName:=_ga_depositPrintAsText($md.typeName)
-		$line.customerName:=_ga_depositPrintAsText($md.customerName)
-		$line.memo:=_ga_depositPrintAsText($md.memo)
-		$line.refNo:=_ga_depositPrintAsText($md.refNo)
-		$line.amount:=Num:C11($md.amount)
+		$line.UUID_Payment:=$eLine.UUID_Payment
+		$line.transactionNumber:=""
+		$line.transactionDate:=$eDeposit.depositDate
+		$line.typeName:="Payment"
+		$line.customerName:=$eLine.customerName
+		$line.memo:=$eLine.description
+		$line.refNo:=$eLine.refNo
+		$line.amount:=$eLine.amount
+		If (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID($eLine.UUID_Payment)))
+			$ePay:=ds:C1482.SalesTransaction.get($eLine.UUID_Payment)
+			If ($ePay#Null:C1517)
+				$line.UUID_Payment:=$ePay.UUID
+				$line.transactionNumber:=String:C10($ePay.transactionNumber)
+				$line.transactionDate:=$ePay.transactionDate
+				If ($ePay.type#Null:C1517)
+					$line.typeName:=$ePay.type.name
+				End if
+				$line.memo:=$ePay.memo
+				$eCustomer:=$ePay.customer
+				If ($eCustomer#Null:C1517)
+					$line.customerName:=$eCustomer.name
+				End if
+				$ePay._ensureMoreData()
+				// Purpose: Guard refNo read when moreData has no refNo key (imported PAY rows).
+				// modified by 4D/PS [2026-june-29]
+				If (OB Is defined:C1231($ePay.moreData; "refNo")) && ($ePay.moreData.refNo#Null:C1517)
+					$line.refNo:=String:C10($ePay.moreData.refNo)
+				End if
+				$line.amount:=$ePay.depositAmount()
+			End if
+		Else
+			If ($line.transactionNumber="") && ($line.refNo#"")
+				$line.transactionNumber:=$line.refNo
+			End if
+		End if
 		$paymentLines.push($line)
 	Else
-		If ($md.lineType="otherFund")
+		If ($eLine.lineType="otherFund")
 			$line:=New object:C1471
 			$line.lineNumber:=$eLine.lineNumber
-			$line.UUID_Customer:=$md.UUID_Customer
-			$line.customerName:=_ga_depositPrintAsText($md.customerName)
-			$line.UUID_CAO:=$md.UUID_CAO
-			$line.accountName:=_ga_depositPrintAsText($md.accountName)
-			$line.description:=_ga_depositPrintAsText($md.description)
-			$line.refNo:=_ga_depositPrintAsText($md.refNo)
-			$line.amount:=Num:C11($md.amount)
-			$otherFundLines.push($line)
-		Else
-			// Purpose: Legacy import rows — property-by-property + safe Text coercion on JSON fields.
-			// modified by 4D/PS [2026-june-23]
-			If ($md.legacy#Null:C1517)
-				$legacy:=$md.legacy
-				$invoiceNum:=Num:C11($legacy.Invoice)
-				If ($invoiceNum=-1)
-					$line:=New object:C1471
-					$line.lineNumber:=$eLine.lineNumber
-					$line.UUID_Customer:=""
-					$line.customerName:=_ga_depositPrintAsText($legacy.Customer)
-					$line.UUID_CAO:=""
-					$line.accountName:=_ga_depositPrintAsText($legacy.Account)
-					$line.description:=_ga_depositPrintAsText($legacy.Division)
-					$line.refNo:=""
-					$line.amount:=Num:C11($legacy.Amt)
-					$otherFundLines.push($line)
-				Else
-					$line:=New object:C1471
-					$line.include:=1
-					$line.UUID_Payment:=""
-					$line.transactionNumber:=_ga_depositPrintAsText($legacy.Invoice)
-					$line.transactionDate:=$eDeposit._legacyDateValue($legacy.Deposit_Date)
-					$line.typeName:="Payment"
-					$line.customerName:=_ga_depositPrintAsText($legacy.Customer)
-					$line.memo:=""
-					$line.refNo:=_ga_depositPrintAsText($legacy.Invoice)
-					$line.amount:=Num:C11($legacy.Amt)
-					$paymentLines.push($line)
+			$line.UUID_Customer:=$eLine.UUID_Customer
+			$line.customerName:=$eLine.customerName
+			$line.UUID_CAO:=$eLine.UUID_CAO
+			$line.accountName:=$eLine.accountLabel
+			If ($line.accountName="") && (Not:C34(cs:C1710.sfw_string.me.isAnEmptyUUID($eLine.UUID_CAO)))
+				$eCao:=ds:C1482.CAO.get($eLine.UUID_CAO)
+				If ($eCao#Null:C1517)
+					// modified by 4D/PS [2026-june-26]
+					$line.accountName:=$eCao.displayLabel()
 				End if
 			End if
+			$line.description:=$eLine.description
+			$line.refNo:=$eLine.refNo
+			$line.amount:=$eLine.amount
+			$otherFundLines.push($line)
 		End if
 	End if
 End for each

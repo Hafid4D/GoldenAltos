@@ -13,20 +13,20 @@
 	"bottomMargin": 20,
 	"events": [
 		"onLoad",
+		"onPageChange",
 		"onValidate",
 		"onClick",
-		"onOutsideCall",
-		"onActivate",
 		"onDoubleClick",
+		"onOutsideCall",
+		"onBeginDragOver",
+		"onDragOver",
 		"onDrop",
+		"onAfterKeystroke",
 		"onMenuSelect",
 		"onPluginArea",
-		"onDragOver",
+		"onAfterEdit",
 		"onTimer",
-		"onAfterKeystroke",
-		"onBeginDragOver",
-		"onBoundVariableChange",
-		"onPageChange"
+		"onBoundVariableChange"
 	],
 	"windowTitle": "window title",
 	"destination": "detailScreen",
@@ -35,7 +35,132 @@
 			"objects": {}
 		},
 		{
-			"objects": {}
+			"objects": {
+				"label_creditNumber": {
+					"type": "text",
+					"top": 12,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Credit #",
+					"textAlign": "right"
+				},
+				"entryField_creditNumber": {
+					"type": "input",
+					"top": 12,
+					"left": 142,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.creditNumber",
+					"dataSourceTypeHint": "number",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent"
+				},
+				"label_creditDate": {
+					"type": "text",
+					"top": 12,
+					"left": 400,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Credit Date",
+					"textAlign": "right"
+				},
+				"entryField_creditDate": {
+					"type": "input",
+					"top": 12,
+					"left": 526,
+					"width": 100,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.creditDate",
+					"dataSourceTypeHint": "date",
+					"enterable": false
+				},
+				"label_vendorName": {
+					"type": "text",
+					"top": 37,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Vendor",
+					"textAlign": "right"
+				},
+				"entryField_vendorName": {
+					"type": "input",
+					"top": 37,
+					"left": 142,
+					"width": 400,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.vendorName",
+					"enterable": false
+				},
+				"label_amount": {
+					"type": "text",
+					"top": 37,
+					"left": 560,
+					"width": 80,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Amount",
+					"textAlign": "right"
+				},
+				"entryField_amount": {
+					"type": "input",
+					"top": 37,
+					"left": 646,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.amount",
+					"dataSourceTypeHint": "number",
+					"enterable": false
+				},
+				"label_billSeqNumber": {
+					"type": "text",
+					"top": 62,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Bill #",
+					"textAlign": "right"
+				},
+				"entryField_billSeqNumber": {
+					"type": "input",
+					"top": 62,
+					"left": 142,
+					"width": 80,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.billSeqNumber",
+					"dataSourceTypeHint": "number",
+					"enterable": false
+				},
+				"label_linkedBill": {
+					"type": "text",
+					"top": 87,
+					"left": 12,
+					"width": 120,
+					"height": 17,
+					"stroke": "#808080",
+					"text": "Linked Bill",
+					"textAlign": "right"
+				},
+				"entryField_linkedBill": {
+					"type": "input",
+					"top": 87,
+					"left": 142,
+					"width": 584,
+					"height": 17,
+					"dataSource": "Form:C1466.current_item.linkedBillLabel",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent"
+				}
+			}
 		}
 	],
 	"geometryStamp": 110,

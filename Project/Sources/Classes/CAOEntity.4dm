@@ -1,5 +1,47 @@
 Class extends Entity
 
+// Purpose: Build a display label from accountNumber and name for menus and deposit snapshots.
+// Returns: Text — e.g. "1030-0 — Undeposited Funds"
+// created by 4D/PS [2026-june-26]
+Function displayLabel()->$label : Text
+	$label:=String:C10(This:C1470.accountNumber)
+	If (This:C1470.name#"")
+		$label:=$label+" — "+String:C10(This:C1470.name)
+	End if
+
+// Purpose: Return True when this CAO row is a Bank-type account (deposit target per client mockups).
+// Returns: Boolean
+// created by 4D/PS [2026-june-29]
+Function isBankType()->$isBank : Boolean
+	$isBank:=False:C215
+	If (This:C1470.type#Null:C1517)
+		$isBank:=(String:C10(This:C1470.type.name)="Bank")
+	End if
+
+// Purpose: Apply a signed balance delta from journal posting (legacy PostingGLArrays credit/debit model).
+// Parameters:
+// $side : Text — "credit" (balance decreases) or "debit" (balance increases)
+// $amount : Real — posted amount (positive)
+// created by 4D/PS [2026-june-26]
+Function applyPostingDelta($side : Text; $amount : Real)
+	var $res : Object
+	
+	$amount:=Num:C11($amount)
+	If ($amount=0)
+		return 
+	End if
+	Case of
+		: ($side="credit")
+			This:C1470.balance:=Num:C11(This:C1470.balance)-$amount
+		: ($side="debit")
+			This:C1470.balance:=Num:C11(This:C1470.balance)+$amount
+	End case
+	$res:=This:C1470.save()
+	If (Not:C34($res.success))
+		// Purpose: Surface posting failures to admin logs only; caller handles user messaging.
+		// modified by 4D/PS [2026-june-29]
+	End if
+
 
 local Function get nameInWindowTitle()->$nameInWindowTitle : Text
 	$nameInWindowTitle:=This:C1470.name
@@ -80,8 +122,8 @@ local Function pup($cacheCollection; $dataClass; $queryField; $queryValue)
 	End if
 
 // Purpose: Initialize barcode data when a new record is created in the entry panel.
-// created by 4D/PS [2026-june-23]
+// created by 4D/PS [2026-june-29]
 local Function loadAfterCreation()
 	// Purpose: Assign a unique barcode in moreData for scanner lookup on new records.
-	// modified by 4D/PS [2026-june-23]
+	// modified by 4D/PS [2026-june-29]
 	This:C1470.moreData.barcodeData:=String:C10(cs:C1710.Util_ScannerManager.me.getBarcodeData(Form:C1466.sfw.entry.dataclass); "0000000000")

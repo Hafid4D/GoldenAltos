@@ -30,6 +30,14 @@ If (cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_CAO_bank))
 	return $result
 End if
 
+// Purpose: Reject non-Bank CAO accounts on the deposit header (mockup — bank accounts live in CAO type Bank).
+// modified by 4D/PS [2026-june-29]
+If (Not:C34(ds:C1482.CAO.get(String:C10(Form:C1466.current_item.UUID_CAO_bank)).isBankType()))
+	$result.valid:=False:C215
+	$result.error:="The selected account is not a bank account. Choose a CAO account of type Bank."
+	return $result
+End if
+
 $hasPayment:=False:C215
 If (Form:C1466.depositPaymentLines#Null:C1517)
 	For each ($line; Form:C1466.depositPaymentLines)
@@ -54,7 +62,7 @@ If (Not:C34($hasPayment)) && (Not:C34($hasOtherFund))
 	return $result
 End if
 
-If (Form:C1466.current_item.cashBackAmount>0) && (cs:C1710.sfw_string.me.isAnEmptyUUID(Form:C1466.current_item.UUID_CAO_cashBack))
+If (Form:C1466.current_item.cashBackAmount>0) && (cs:C1710.sfw_string.me.isAnEmptyUUID(String:C10(Form:C1466.current_item.UUID_CAO_cashBack)))
 	$result.valid:=False:C215
 	$result.error:="Select an account for cash back."
 	return $result
